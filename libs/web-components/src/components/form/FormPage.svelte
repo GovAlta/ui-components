@@ -169,7 +169,7 @@
   )}
 >
   <div bind:this={_rootEl}>
-    {#if !_editting}
+    {#if _editting !== id}
       {#if backUrl}
         <goa-link action="back" leadingicon="chevron-back" mb="2xl">
           {#if backUrl === "#"}
