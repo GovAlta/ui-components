@@ -17,9 +17,7 @@ describe("Link", () => {
         testid: "link-test",
         leadingicon: "home",
       });
-      const icon = await baseElement.container.querySelector(
-        "goa-icon.leading-icon",
-      );
+      const icon = await baseElement.getByTestId("leading-icon");
       expect(icon).toBeTruthy();
     });
 
