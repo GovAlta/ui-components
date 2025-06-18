@@ -195,13 +195,21 @@
    */
   function addRevealSlotEventListeners() {
     _revealSlotEl.addEventListener("_click", (e: Event) => {
-      // Stop custom event propagation
+      // when we click a button/accordion.. inside the reveal slot, it will uncheck the parent checkbox. stopPropagation (_click) will fix it
       e.stopPropagation();
     });
 
     _revealSlotEl.addEventListener("_change", (e: Event) => {
-      // Stop custom event propagation
+      const customEvent = e as CustomEvent;
+      const eventDetail = customEvent.detail;
+      // when we check/change a checkbox/input... inside the reveal slot, it will uncheck the parent checkbox whenever _change is fired. stopPropagation (_change) will fix it
       e.stopPropagation();
+
+      // If this is a form field value change (public form)
+      // relay it so the Fieldset initialize the reveal slot form field to public form state
+      if (eventDetail && eventDetail.name && typeof eventDetail.value !== 'undefined') {
+        dispatch(_rootEl, "_revealChange", eventDetail, { bubbles: true });
+      }
     });
   }
 </script>
