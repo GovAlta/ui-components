@@ -748,6 +748,32 @@ describe("GoADropdown", () => {
         expect(dropdown?.getAttribute("style")).toContain("--width: 11ch"); // // 8 + 1 (letter count) + 2 (icon width)
       });
     });
+
+    it("rem width", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items: ["1", "2", "3"],
+        width: "20rem",
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 20rem");
+      });
+    });
+
+    it("em width", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items: ["1", "2", "3"],
+        width: "20em",
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 20em");
+      });
+    });
   });
 
   describe("maxheight", () => {

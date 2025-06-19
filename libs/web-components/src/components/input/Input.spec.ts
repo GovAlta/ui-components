@@ -514,6 +514,71 @@ describe("GoAInput Component", () => {
       expect(input.style.cssText).toContain("text-align: right");
       expect((input as HTMLInputElement).value).toBe("12345.67");
     });
+  });
+
+  // Add this new describe block to the Input test file
+
+  describe("Width", () => {
+    it("rem width", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "20rem",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 20rem");
+      });
+    });
+
+    it("em width", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "15em",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 15em");
+      });
+    });
+
+    it("px width", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "300px",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 300px");
+      });
+    });
+
+    it("percentage width", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "50%",
+      });
+
+      await waitFor(() => {
+        const container = el.container.querySelector(".container");
+        expect(container?.getAttribute("style")).toContain("width: 50%");
+      });
+    });
+
+
+    it("ch width", async () => {
+      const el = render(GoAInput, {
+        testid: "input-test",
+        width: "25ch",
+      });
+
+      await waitFor(() => {
+        const input = el.getByTestId("input-test");
+        expect(input.style.width).toBe("26ch"); // 25 + 1 for regular inputs
+      });
+    });
 
   });
 });

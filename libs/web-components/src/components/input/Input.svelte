@@ -150,7 +150,7 @@
     checkSlots();
     sendMountedMessage();
 
-    if (width.includes("%") || width.includes("px")) {
+    if (width.includes("%") || width.includes("px") || width.includes("rem") || width.includes("em")) {
       _containerStyle = `width: ${width}; `;
       _inputWidth = "";
     } else if (type === "number" && width.includes("ch")) {
