@@ -29,7 +29,7 @@ export interface GoabFileUploadCardProps {
   size: number;
   type?: string;
   progress?: number;
-  testId: string;
+  testId?: string;
   error?: string;
   onDelete?: (detail: GoabFileUploadOnDeleteDetail) => void;
   onCancel?: (detail: GoabFileUploadOnCancelDetail) => void;
