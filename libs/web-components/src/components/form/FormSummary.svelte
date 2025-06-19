@@ -22,6 +22,7 @@
 
   onMount(() => {
     addRelayListener();
+    addChangeClickHandler();
 
     relay<FormSummaryBindRelayDetail>(
       _rootEl,
@@ -31,8 +32,15 @@
     );
   });
 
+  function addChangeClickHandler() {
+    _rootEl.addEventListener("change", (e: Event) => {
+      const page = (e as CustomEvent).detail;
+      changePage(e, page)
+    })
+  }
+
   function addRelayListener() {
-    receive(_rootEl, (action, data) => {
+    receive(_rootEl, (action, data, e) => {
       switch (action) {
         case FormDispatchStateMsg:
           onFormDispatch(data as FormDispatchStateRelayDetail);
@@ -150,7 +158,9 @@
               {/if}
             </div>
             <div class="action">
-              <goa-link leadingicon="pencil" on:click={(e) => changePage(e, page)}>Change</goa-link>
+              <goa-link leadingicon="pencil" action="change" action-arg={page}>
+                <a href="#" tabindex="0">Change</a>
+              </goa-link>
             </div>
           </div>
         </goa-container>
@@ -160,9 +170,14 @@
 </div>
 
 <style>
-
   .data .empty {
     color: var(--goa-color-greyscale-500);
+  }
+
+  .action a:focus-visible {
+    outline: none;
+    border-radius: var(--goa-button-border-radius);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 
   /* TODO: fix the layouts: mobile doesn't meet specs; table makes it difficult */
