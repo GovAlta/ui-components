@@ -58,7 +58,7 @@ export interface IgnoreMe {
       [attr.mr]="mr"
       [attr.mb]="mb"
       [attr.ml]="ml"
-      [attr.handletrailingiconclick]="!!_onTrailingIconClick"
+      [attr.handletrailingiconclick]="handleTrailingIconClick"
       [attr.textalign]="textAlign"
       (_trailingIconClick)="_onTrailingIconClick($event)"
       (_change)="_onChange($event)"
@@ -108,7 +108,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Output() onKeyPress = new EventEmitter<GoabInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
-  private handleTrailingIconClick = false;
+  handleTrailingIconClick = false;
 
   ngOnInit() {
     this.handleTrailingIconClick = this.onTrailingIconClick.observed;
