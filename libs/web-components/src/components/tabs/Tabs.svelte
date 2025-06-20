@@ -26,10 +26,12 @@
     ensureSlotExists(_rootEl);
     addChildMountListener();
     addKeyboardEventListeners();
+    addHashChangeListener();
   });
 
   onDestroy(() => {
     removeKeyboardEventListeners();
+    removeHashChangeListener();
   });
 
   // =========
@@ -146,6 +148,21 @@
     _rootEl.removeEventListener("focus", handleKeydownEvents, true);
   }
 
+  function handleHashChange() {
+    const tabIndexFromHash = getTabIndexFromHash();
+    if (tabIndexFromHash !== null && tabIndexFromHash !== _currentTab) {
+      setCurrentTab(tabIndexFromHash);
+    }
+  }
+
+  function addHashChangeListener() {
+    window.addEventListener("hashchange", handleHashChange);
+  }
+
+  function removeHashChangeListener() {
+    window.removeEventListener("hashchange", handleHashChange);
+  }
+
   function setCurrentTab(tab: number) {
     if (!_tabsEl) return;
 
@@ -194,10 +211,9 @@
     if (currentLocation) {
       const url = new URL(currentLocation);
       // to make sure we preserve multiple #, for example /#tab-1#example
-      const currentHash = url.hash.substring(1);
       const allHashes = window.location.href.split('#').slice(1);
       const otherHashes = allHashes.filter(hash => !hash.startsWith('tab-')); // #example
-      const newHash = [currentHash, ...otherHashes].filter(Boolean).join('#');
+      const newHash = [url.hash.substring(1), ...otherHashes].filter(Boolean).join('#');
 
       history.replaceState({}, "", url.pathname + url.search + (newHash ? '#' + newHash : ''));
 
