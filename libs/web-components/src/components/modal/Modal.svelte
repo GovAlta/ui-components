@@ -12,7 +12,6 @@
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
-  type Role = (typeof Role)[number];
 
   // ******
   // Public
@@ -28,8 +27,6 @@
 
   // @deprecated: use maxwidth
   export let width: string = "";
-  // accessibility
-  export let role: Role = "dialog";
 
   // *******
   // Private
@@ -56,11 +53,6 @@
     "fast",
     "slow",
     "none",
-  ]);
-
-  const [Role, validateRole] = typeValidator("Modal Role", [
-    "dialog",
-    "alertdialog",
   ]);
 
   // ********
@@ -110,7 +102,6 @@
     await tick();
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
-    validateRole(role);
 
     // event listeners
     window.addEventListener("keydown", onInputKeyDown);
@@ -212,10 +203,10 @@
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
         tabindex="-1"
-        {role}
+        role="dialog"
         aria-modal="true"
         aria-labelledby="goa-modal-heading"
-        data-first-focus={role === "dialog" ? "true" : undefined}
+        data-first-focus="true"
       >
         {#if calloutvariant !== null}
           <div class="callout-bar {calloutvariant}">
@@ -235,11 +226,7 @@
               data-testid="modal-title"
               class="modal-title"
               id="goa-modal-heading"
-              aria-label={_headingExists
-                ? undefined
-                : role === "alertdialog"
-                  ? "Alert"
-                  : "Modal"}
+              aria-label={_headingExists ? undefined : "Modal"}
             >
               {#if heading}
                 {heading}
