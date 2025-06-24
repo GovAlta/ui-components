@@ -49,6 +49,10 @@ export class GoabModal {
   @Input() closable = false;
   @Input() transition?: GoabModalTransition;
   @Input() testId?: string;
+  /**
+   * @deprecated The role property is deprecated and will be removed in a future version.
+   * The modal will always use role="dialog".
+   */
   @Input() role?: string;
   @Input() heading!: string | TemplateRef<any>;
   @Input() actions!: TemplateRef<any>;

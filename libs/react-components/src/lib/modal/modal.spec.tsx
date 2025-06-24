@@ -36,7 +36,8 @@ describe("Modal Tests", () => {
     const modal = baseElement.querySelector("goa-modal");
     const actionContent = modal?.querySelector("[slot='actions']");
     const heading = modal?.querySelector("[slot='heading']");
-    expect(modal?.getAttribute("role")).toBe("alertdialog");
+    // Role attribute is no longer passed to the web component (deprecated)
+    expect(modal?.getAttribute("role")).toBeNull();
 
     expect(heading?.textContent).toContain("Modal Heading");
     expect(modal?.getAttribute("open")).toBe("true");

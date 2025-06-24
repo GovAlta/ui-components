@@ -11,6 +11,10 @@ interface WCProps {
   open?: string;
   maxwidth?: string;
   closable: string;
+  /**
+   * @deprecated The role property is deprecated and will be removed in a future version.
+   * The modal will always use role="dialog".
+   */
   role?: GoabModalRole;
   transition?: GoabModalTransition;
   calloutvariant?: GoabModalCalloutVariant;
@@ -36,6 +40,10 @@ export interface GoabModalProps {
   open?: boolean;
   calloutVariant?: GoabModalCalloutVariant;
   testId?: string;
+  /**
+   * @deprecated The role property is deprecated and will be removed in a future version.
+   * The modal will always use role="dialog".
+   */
   role?: GoabModalRole;
 }
 
@@ -49,7 +57,6 @@ export function GoabModal({
   calloutVariant,
   onClose,
   testId,
-  role,
 }: GoabModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
@@ -77,7 +84,6 @@ export function GoabModal({
       transition={transition}
       calloutvariant={calloutVariant}
       testid={testId}
-      role={role}
     >
       {heading && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}

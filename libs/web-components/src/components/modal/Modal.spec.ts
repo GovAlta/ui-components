@@ -224,13 +224,13 @@ describe("Modal Component", () => {
     });
   });
 
-  it("should set role to alertdialog and not set focus to it by default", async () => {
+  it("should always set role to dialog regardless of prop value", async () => {
     const el = render(GoAModal, { open: "true", role: "alertdialog"});
 
     await waitFor(() => {
-      const modal = el.queryByRole("alertdialog");
+      const modal = el.queryByRole("dialog");
       expect(modal?.getAttribute("aria-modal")).toBe("true");
-      expect(modal?.getAttribute("data-first-focus")).toBeNull();
+      expect(modal?.getAttribute("data-first-focus")).toBe("true");
     });
   });
 });
