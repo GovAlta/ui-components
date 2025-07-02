@@ -26,6 +26,7 @@
     StateChangeEvent, StateChangeRelayDetail, SubFormBindMsg, SubFormBindRelayDetail,
     SubFormIndexContinueToParentMsg,
     SubFormIndexContinueToSubFormMsg,
+    FieldsetCompleteMsg
   } from "../../types/relay-types";
 
   // Subform props
@@ -56,6 +57,7 @@
   // Index to the current item being created or editted. This allows access to the current
   // item's history to allow handling of "Back" clicks.
   let _itemIndex: number = 0;
+
 
   onMount(() => {
     addRelayListener();
@@ -132,6 +134,10 @@
         // bind the list item to the child form
         case ExternalAlterDataMsg:
           alterItem(data as ExternalAlterDataRelayDetail);
+          break;
+
+        case FieldsetCompleteMsg:
+          onChildFormComplete(e);
           break;
       }
     });

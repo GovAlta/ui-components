@@ -2,7 +2,7 @@ import { FieldsetItemState, FieldValidator } from "./validators";
 import {
   GoabFieldsetItemValue, GoabFormDispatchOn,
 } from "./common";
-import { relay } from "./messaging/messaging";
+import { relay, dispatch } from "./messaging/messaging";
 
 export type FormStatus = "not-started" | "incomplete" | "complete";
 
@@ -28,6 +28,7 @@ export class PublicFormController<T> {
   state?: AppState<T> | AppState<T>[];
   _formData?: Record<string, string> = undefined;
   _formRef?: HTMLElement = undefined;
+  private _isCompleting = false;
 
   constructor(private type: "details" | "list") {}
 
@@ -269,6 +270,85 @@ export class PublicFormController<T> {
       index,
       operation: "remove",
     });
+  }
+
+  /**
+   * Completes the form and triggers the onComplete callback.
+   * This method should be used when you want to complete a form without navigating to a summary page.
+   *
+   * @important Developers must validate the form before calling this method.
+   *
+   * @example
+   * // Validate first, then complete
+   * const [isValid] = this.validate(e, "firstName", [
+   *   requiredValidator("First name is required.")
+   * ]);
+   * if (isValid) {
+   *   this.complete();
+   * }
+   * @returns void
+   */
+  complete() {
+    if (!this._formRef) {
+      console.error("complete: form ref is not set");
+      return;
+    }
+
+    if (this._isCompleting) {
+      console.warn("complete: completion already in progress");
+      return;
+    }
+
+    this._isCompleting = true;
+    relay(this._formRef, "fieldset::submit", null, { bubbles: true });
+    this._isCompleting = false;
+  }
+
+  /**
+   * Completes a subform and returns control to the parent form.
+   * This method should be used when working with subforms that need to complete without a summary page.
+   *
+   * @important Developers must validate the subform before calling this method.
+   *
+   * @example
+   * // Validate first, then complete the subform
+   * const [isValid] = this._childFormController.validate(e, "fullName", [
+   *   requiredValidator("Please enter the dependent's full name.")
+   * ]);
+   * if (isValid) {
+   *   this._childFormController.completeSubform();
+   * }
+   * @returns void
+   */
+  completeSubform() {
+    if (!this._formRef) {
+      console.error("completeSubform: form ref is not set");
+      return;
+    }
+
+    if (this._isCompleting) {
+      console.warn("completeSubform: completion already in progress");
+      return;
+    }
+    // Capture form reference to avoid TypeScript undefined error in closures
+    const formRef = this._formRef;
+
+    // Set flag to prevent multiple calls
+    this._isCompleting = true;
+
+    const stateChangeHandler = (e: Event) => {
+      formRef.removeEventListener('_stateChange', stateChangeHandler);
+
+      // Now we know state is updated, safe to complete
+      // The _formRef points to the inner form within the SubForm
+      // We need to trigger the form's completion which will be caught by SubForm's onChildFormComplete
+      dispatch(formRef, "_complete", {}, { bubbles: true });
+      this._isCompleting = false;
+    };
+
+    formRef.addEventListener('_stateChange', stateChangeHandler);
+
+    dispatch(formRef, "_continue", null, { bubbles: true });
   }
 
   // Private method to dispatch the error message to the form element

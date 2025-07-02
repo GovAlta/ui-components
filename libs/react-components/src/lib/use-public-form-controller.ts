@@ -81,6 +81,14 @@ function usePublicFormController<T>(type: "details" | "list" = "details") {
     return controllerRef.current.getStateList();
   }, []);
 
+  const complete = useCallback(() => {
+    controllerRef.current.complete();
+  }, []);
+
+  const completeSubform = useCallback(() => {
+    controllerRef.current.completeSubform();
+  }, []);
+
   return {
     state,
     init,
@@ -90,6 +98,8 @@ function usePublicFormController<T>(type: "details" | "list" = "details") {
     validate,
     getStateValue,
     getStateList,
+    complete,
+    completeSubform,
     controller: controllerRef.current
   };
 }
