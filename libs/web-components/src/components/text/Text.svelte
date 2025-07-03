@@ -33,6 +33,7 @@
   export let ml: Spacing = null;
 
   let _marginBottom: Spacing = null;
+  let _marginTop: Spacing = null;
 
   /**
    * Returns a bottom margin value based on the `size` prop
@@ -43,33 +44,57 @@
       return mb;
     }
 
-    // div and spans should not have any bottom margin
     switch (size) {
       case "heading-xl":
-        return "3xl";
-      case "heading-l":
-        return "2xl";
-      case "heading-m":
-        return "xl";
-      case "heading-s":
         return "l";
+      case "heading-l":
+        return "l";
+      case "heading-m":
+        return "m";
+      case "heading-s":
+        return "s";
       case "heading-xs":
+        return "xs";
       case "body-l":
       case "body-m":
-        return "m";
       case "body-s":
       case "body-xs":
-        return "3xs";
+        return "l";
       default:
-        return "3xs";
+        return "l";
     }
   }
 
-  onMount(async() => {
+  function getTopMargin(): Spacing {
+    // override takes precedence
+    if (mt) {
+      return mt;
+    }
+
+    switch (size) {
+      case "heading-xl":
+      case "heading-l":
+      case "heading-m":
+        return "2xl";
+      case "heading-s":
+      case "heading-xs":
+        return "xl";
+      case "body-l":
+        return "2xl";
+      case "body-m":
+      case "body-s":
+        return "l";
+      case "body-xs":
+        return "s";
+      default:
+        return "s";
+    }
+  }
+
+  onMount(async () => {
     await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
-    console.log("onMount size ", size);
-    console.log("after onMount size ", size);
     _marginBottom = getBottomMargin();
+    _marginTop = getTopMargin();
   });
 </script>
 
@@ -84,7 +109,7 @@
         : "var(--goa-color-text-secondary)",
     ),
     maxWidth === "none" ? "" : `max-width: ${maxWidth}`,
-    calculateMargin(mt, mr, _marginBottom, ml),
+    calculateMargin(_marginTop, mr, _marginBottom, ml),
   )}
 >
   <slot />
