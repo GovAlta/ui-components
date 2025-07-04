@@ -83,7 +83,13 @@ goa-table thead th {
 }
 
 goa-table thead th:has(goa-table-sort-header) {
-  padding-bottom: 0rem;
+	padding-bottom: 1px;
+	padding-top: 0;
+}
+
+goa-table thead th:has(goa-table-sort-header):hover {
+	background-color: var(--goa-color-greyscale-100);
+	color: var(--goa-color-interactive-hover);
 }
 
 goa-table tfoot td {

@@ -54,9 +54,10 @@
     font-size: inherit;
     font-weight: inherit;
     color: inherit;
+		line-height: inherit;
+		height: inherit;
     width: 100%;
-    height: var(--goa-space-2xl);
-    padding: var(--goa-space-s) var(--goa-space-m);
+    padding: var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs);
     justify-content: var(--header-text-align, flex-start);
     gap: var(--goa-space-2xs);
     align-items: flex-end;
