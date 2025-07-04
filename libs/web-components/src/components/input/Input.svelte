@@ -419,6 +419,7 @@
     display: inline-flex;
     vertical-align: top;
     max-width: 100%;
+		z-index: 0;
   }
 
   .leading-content-slot :global(::slotted(div)),
