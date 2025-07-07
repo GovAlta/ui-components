@@ -60,13 +60,13 @@
     if (typeof value === "string") {
       try {
         parsedDate = parseISO(value);
-        return format(parsedDate, "MMMM d, yyyy");
+        return format(parsedDate, "PPP");
       } catch (e) {
         return value;  
       }
     }
     if (isDate(value)) {
-      return format(value, "MMMM d, yyyy");
+      return format(value, "PPP");
     }
     return value;      
   }

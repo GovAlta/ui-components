@@ -140,9 +140,9 @@
     if (!d) return "";
 
     if (typeof d === "string") {
-      return format(new Date(d), "MMMM d, yyyy");
+      return format(new Date(d), "PPP");
     }
-    return format(d, "MMMM d, yyyy");
+    return format(d, "PPP");
   }
 
   function hideCalendar() {
