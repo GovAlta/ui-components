@@ -1020,14 +1020,6 @@ export type GoabFieldsetSchema = {
   data?: GoabFieldsetData;
 };
 
-export interface GoabFieldsetOnChangeDetail {
-  id: string;
-  state: {
-    data: Record<string, GoabFieldsetItemState>;
-  };
-  dispatchOn: GoabFormDispatchOn;
-}
-
 export interface GoabFieldsetOnContinueDetail {
   el: HTMLElement;
   state: Record<string, GoabFieldsetItemState>;
@@ -1039,21 +1031,6 @@ export type GoabPublicFormStatus = "initializing" | "complete";
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
 
-// Public form page
-
-export type GoabPublicFormPageOnFieldsetChangeDetail = {
-  id: string;
-  state: {
-    heading?: string;
-    data: Record<string, GoabFieldsetItemState>;
-  };
-  dispatchOn: GoabFormDispatchOn;
-};
-export type GoabPublicFormPageOnCompleteDetail = {
-  el: HTMLElement;
-  state: Record<string, GoabFieldsetItemState>;
-  cancelled: boolean;
-};
 
 // Public form Task
 export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabFieldset } from "./fieldset";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { GoabFieldsetOnChangeDetail, GoabFieldsetOnContinueDetail } from "@abgov/ui-components-common";
+import { GoabFieldsetOnContinueDetail } from "@abgov/ui-components-common";
 
 @Component({
   template: `
@@ -10,7 +10,6 @@ import { GoabFieldsetOnChangeDetail, GoabFieldsetOnContinueDetail } from "@abgov
       [sectionTitle]="sectionTitle"
       [dispatchOn]="dispatchOn"
       [id]="id"
-      (onChange)="handleChange($event)"
       (onContinue)="handleContinue($event)"
     >
       <div data-testid="content">Test content</div>
@@ -22,7 +21,6 @@ class TestFieldsetComponent {
   dispatchOn: "change" | "continue" = "continue";
   id?: string;
 
-  handleChange(event: GoabFieldsetOnChangeDetail): void {/** do nothing **/}
   handleContinue(event: GoabFieldsetOnContinueDetail): void {/** do nothing **/}
 }
 
@@ -56,17 +54,6 @@ describe("GoabFieldSet", () => {
 
     // Content is rendered
     expect(el?.querySelector("[data-testid='content']")).toBeTruthy();
-  });
-
-  it("should emit onChange event", () => {
-    fixture.detectChanges();
-    const spy = jest.spyOn(component, "handleChange");
-
-    const el = fixture.debugElement.query(By.css("goa-fieldset")).nativeElement;
-    const detail = { value: "test" };
-
-    el.dispatchEvent(new CustomEvent("_change", { detail }));
-    expect(spy).toHaveBeenCalledWith(detail);
   });
 
   it("should emit onContinue event", () => {

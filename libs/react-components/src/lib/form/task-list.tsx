@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Margins } from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
-  heading: string;
+  heading?: string;
 }
 
 declare module "react" {
@@ -14,17 +14,29 @@ declare module "react" {
   }
 }
 
-type GoabPublicFormTaskListProps = {
-  heading: string;
+interface GoabPublicFormTaskListProps extends Margins {
+  heading?: string;
   children: ReactNode;
-};
+}
 
 export function GoabPublicFormTaskList({
-  heading,
+  heading = "",
   children,
+  mt,
+  mr,
+  mb,
+  ml,
 }: GoabPublicFormTaskListProps) {
   return (
-    <goa-public-form-task-list heading={heading}>{children}</goa-public-form-task-list>
+    <goa-public-form-task-list 
+      heading={heading}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    >
+      {children}
+    </goa-public-form-task-list>
   );
 }
 

@@ -5,8 +5,6 @@ import { By } from "@angular/platform-browser";
 import {
   GoabPublicFormPageStep,
   GoabPublicFormPageButtonVisibility,
-  GoabPublicFormPageOnCompleteDetail,
-  GoabPublicFormPageOnFieldsetChangeDetail,
   Spacing,
 } from "@abgov/ui-components-common";
 
@@ -22,16 +20,11 @@ import {
       [type]="type"
       [buttonText]="buttonText"
       [buttonVisibility]="buttonVisibility"
-      [first]="first"
-      [last]="last"
       [mt]="mt"
       [mr]="mr"
       [mb]="mb"
       [ml]="ml"
       (onContinue)="handleContinue($event)"
-      (onBack)="handleBack()"
-      (onFieldsetChange)="handleFieldsetChange($event)"
-      (onComplete)="handleComplete($event)"
     >
       <div data-testid="content">Test content</div>
     </goab-public-form-page>
@@ -47,17 +40,12 @@ class TestPublicFormPageComponent {
   type: GoabPublicFormPageStep = "step";
   buttonText = "Continue";
   buttonVisibility: GoabPublicFormPageButtonVisibility = "visible";
-  first = false;
-  last = false;
   mt = "s" as Spacing;
   mr = "m" as Spacing;
   mb = "l" as Spacing;
   ml = "xl" as Spacing;
 
   handleContinue(event: Event): void {/** do nothing **/}
-  handleBack(): void {/** do nothing **/}
-  handleFieldsetChange(event: GoabPublicFormPageOnFieldsetChangeDetail): void {/** do nothing **/}
-  handleComplete(event: GoabPublicFormPageOnCompleteDetail): void {/** do nothing **/}
 }
 
 describe("GoabPublicFormPage", () => {
@@ -88,8 +76,6 @@ describe("GoabPublicFormPage", () => {
     expect(el?.getAttribute("type")).toBe(component.type);
     expect(el?.getAttribute("button-text")).toBe(component.buttonText);
     expect(el?.getAttribute("button-visibility")).toBe(component.buttonVisibility);
-    expect(el?.getAttribute("first")).toBe(component.first.toString());
-    expect(el?.getAttribute("last")).toBe(component.last.toString());
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("mb")).toBe(component.mb);
@@ -121,62 +107,6 @@ describe("GoabPublicFormPage", () => {
     expect(spy).toHaveBeenCalledWith(expect.any(CustomEvent));
   });
 
-  it("should emit onBack event", () => {
-    fixture.detectChanges();
-    const spy = jest.spyOn(component, "handleBack");
-
-    const el = fixture.debugElement.query(By.css("goa-public-form-page")).nativeElement;
-    el.dispatchEvent(new CustomEvent("_back"));
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it("should emit onFieldsetChange event", () => {
-    fixture.detectChanges();
-    const spy = jest.spyOn(component, "handleFieldsetChange");
-
-    const el = fixture.debugElement.query(By.css("goa-public-form-page")).nativeElement;
-    const detail: GoabPublicFormPageOnFieldsetChangeDetail = {
-      id: "test-fieldset",
-      state: {
-        heading: "Test Fieldset",
-        data: {
-          "field1": {
-            name: "field1",
-            label: "Field 1",
-            value: "test",
-            order: 1
-          }
-        }
-      },
-      dispatchOn: "continue"
-    };
-
-    el.dispatchEvent(new CustomEvent("_fieldsetChange", { detail }));
-    expect(spy).toHaveBeenCalledWith(detail);
-  });
-
-  it("should emit onComplete event", () => {
-    fixture.detectChanges();
-    const spy = jest.spyOn(component, "handleComplete");
-
-    const el = fixture.debugElement.query(By.css("goa-public-form-page")).nativeElement;
-    const detail: GoabPublicFormPageOnCompleteDetail = {
-      el: document.createElement("form"),
-      state: {
-        "field1": {
-          name: "field1",
-          label: "Field 1",
-          value: "test",
-          order: 1
-        }
-      },
-      cancelled: false
-    };
-
-    el.dispatchEvent(new CustomEvent("_complete", { detail }));
-    expect(spy).toHaveBeenCalledWith(detail);
-  });
-
   it("should have default values", () => {
     const page = new GoabPublicFormPage();
     expect(page.id).toBe("");
@@ -188,7 +118,5 @@ describe("GoabPublicFormPage", () => {
     expect(page.type).toBe("step");
     expect(page.buttonText).toBe("");
     expect(page.buttonVisibility).toBe("visible");
-    expect(page.first).toBe(false);
-    expect(page.last).toBe(false);
   });
 });
