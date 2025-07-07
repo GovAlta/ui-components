@@ -76,6 +76,11 @@ goa-table thead th {
   padding-bottom: 0.5rem;
 }
 
+goa-table thead th:has(goa-table-sort-header) {
+	padding-bottom: 0rem;
+	padding-top: 0;
+}
+
 goa-table tfoot td {
   background-color: var(--goa-color-greyscale-100);
 }
