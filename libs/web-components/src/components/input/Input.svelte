@@ -375,6 +375,7 @@
     position: relative;
     width: 100%;
     display: inline-block;
+		z-index: 0;
   }
 
   @media not (--mobile) {
