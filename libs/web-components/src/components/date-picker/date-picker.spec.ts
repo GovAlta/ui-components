@@ -29,7 +29,7 @@ it("renders with props", async () => {
   const input = container.querySelector("goa-input");
 
   expect(popover?.getAttribute("relative")).toBe("true");
-  expect(input?.getAttribute("value")).toBe(format(value, "PPP"));
+  expect(input?.getAttribute("value")).toBe(format(value, "MMMM d, yyyy"));
 });
 
 it("shows an error state", async () => {
