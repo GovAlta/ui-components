@@ -16,7 +16,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { getSlottedChildren } from "../../common/utils";
+  import { ensureSlotExists, getSlottedChildren } from "../../common/utils";
 
   // ======
   // Public
@@ -31,11 +31,21 @@
 
   let _rootEl: HTMLElement;
   let _headingSlotEl: HTMLElement;
+  let _contentEl: HTMLElement;
+
+  // ========
+  // Hooks
+  // ========
 
   onMount(() => {
+    ensureSlotExists(_contentEl);
     dispatchInit();
     addSetOpenEventListener();
-  })
+  });
+
+  // =========
+  // Functions
+  // =========
 
   function dispatchInit() {
     setTimeout(() => {
@@ -71,9 +81,13 @@
     <slot name="heading" />
     {heading}
   </div>
-  {#if open}
-    <div role="tabpanel">
-      <slot />
-    </div>
-  {/if}
+  <div bind:this={_contentEl} role="tabpanel" class:hidden={!open}>
+    <slot />
+  </div>
 </section>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
