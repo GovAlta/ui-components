@@ -1,12 +1,10 @@
 import { ReactNode, useEffect, useRef } from "react";
 import {
-  GoabFieldsetOnChangeDetail,
   GoabFieldsetOnContinueDetail,
   GoabFormDispatchOn,
-  Margins,
 } from "@abgov/ui-components-common";
 
-interface WCProps extends Margins {
+interface WCProps {
   ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   "section-title"?: string;
@@ -22,12 +20,11 @@ declare module "react" {
   }
 }
 
-interface GoabFieldsetProps extends Margins {
+interface GoabFieldsetProps {
   id?: string;
   sectionTitle?: string;
   dispatchOn?: GoabFormDispatchOn;
   onContinue?: (event: GoabFieldsetOnContinueDetail) => void;
-  onChange?: (event: GoabFieldsetOnChangeDetail) => void;
   children: ReactNode;
 }
 
@@ -36,7 +33,6 @@ export function GoabFieldset({
   sectionTitle,
   dispatchOn,
   onContinue,
-  onChange,
   children,
 
 }: GoabFieldsetProps) {
@@ -46,10 +42,6 @@ export function GoabFieldset({
     if (!ref.current) return;
     const current = ref.current;
 
-    const changeListener = (e: unknown) => {
-      const detail = (e as CustomEvent<GoabFieldsetOnChangeDetail>).detail;
-      onChange?.(detail);
-    }
     const continueListener = (e: Event) => {
       const event = (e as CustomEvent<GoabFieldsetOnContinueDetail>).detail;
       return onContinue?.(event);
@@ -58,16 +50,10 @@ export function GoabFieldset({
     if (onContinue) {
       current.addEventListener("_continue", continueListener);
     }
-    if (onChange) {
-      current.addEventListener("_change", changeListener);
-    }
 
     return () => {
       if (onContinue) {
         current.removeEventListener("_continue", continueListener);
-      }
-      if (onChange) {
-        current.removeEventListener("_change", changeListener);
       }
     };
   }, [ref, onContinue]);

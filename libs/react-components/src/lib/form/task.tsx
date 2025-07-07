@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { Margins, GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
+import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
 
-interface WCProps extends Margins {
-  status: GoabPublicFormTaskStatus;
+interface WCProps {
+  status?: GoabPublicFormTaskStatus;
 }
 
 declare module "react" {
@@ -15,11 +15,11 @@ declare module "react" {
 }
 
 type GoabPublicFormTaskProps = {
-  status: GoabPublicFormTaskStatus;
+  status?: GoabPublicFormTaskStatus;
   children: ReactNode;
 };
 
-export function GoabPublicFormTask({ status, children }: GoabPublicFormTaskProps) {
+export function GoabPublicFormTask({ status = "cannot-start", children }: GoabPublicFormTaskProps) {
   return <goa-public-form-task status={status}>{children}</goa-public-form-task>;
 }
 

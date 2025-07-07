@@ -1,8 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
 import {
   GoabPublicFormPageButtonVisibility,
-  GoabPublicFormPageOnFieldsetChangeDetail,
-  GoabPublicFormPageOnCompleteDetail,
   GoabPublicFormPageStep,
   Margins,
 } from "@abgov/ui-components-common";
@@ -17,8 +15,6 @@ interface WCProps extends Margins {
   type?: string;
   "button-text"?: string;
   "button-visibility"?: string;
-  first?: boolean;
-  last?: boolean;
   "summary-heading"?: string;
 }
 
@@ -41,28 +37,11 @@ interface GoabPublicFormPageProps extends Margins {
   type?: GoabPublicFormPageStep;
   buttonText?: string;
   buttonVisibility?: GoabPublicFormPageButtonVisibility;
-  first?: boolean;
-  last?: boolean;
   /**
    * Triggered when the form page continues to the next step
    * @param event - The continue event details
    */
   onContinue?: (event: Event) => void;
-  /**
-   * Triggered when the user clicks the back link
-   * @param event: The back event details
-   */
-  onBack?: (event: Event) => void;
-  /**
-   * Triggered when the form fieldset content changes
-   * @param event - The fieldset change event details
-   */
-  onFieldsetChange?: (event: GoabPublicFormPageOnFieldsetChangeDetail) => void;
-  /**
-   * Triggered when the form is completed
-   * @param event - The complete event details
-   */
-  onComplete?: (event: GoabPublicFormPageOnCompleteDetail) => void;
   children: ReactNode;
 }
 
@@ -76,12 +55,7 @@ export function GoabPublicFormPage({
   type = "step",
   buttonText = "",
   buttonVisibility = "visible",
-  first = false,
-  last = false,
   onContinue,
-  onBack,
-  onFieldsetChange,
-  onComplete,
   children,
   mt,
   mr,
@@ -98,48 +72,16 @@ export function GoabPublicFormPage({
       onContinue?.(e);
     };
 
-    const backListener = (e: Event) => {
-      onBack?.(e);
-    };
-
-    const fieldsetChangeListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoabPublicFormPageOnFieldsetChangeDetail>).detail;
-      onFieldsetChange?.(detail);
-    };
-
-    const completeListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoabPublicFormPageOnCompleteDetail>).detail;
-      onComplete?.(detail);
-    };
-
     if (onContinue) {
       current.addEventListener("_continue", continueListener);
-    }
-    if (onBack) {
-      current.addEventListener("_back", backListener);
-    }
-    if (onFieldsetChange) {
-      current.addEventListener("_fieldsetChange", fieldsetChangeListener);
-    }
-    if (onComplete) {
-      current.addEventListener("_complete", completeListener);
     }
 
     return () => {
       if (onContinue) {
         current.removeEventListener("_continue", continueListener);
       }
-      if (onBack) {
-        current.removeEventListener("_back", backListener);
-      }
-      if (onFieldsetChange) {
-        current.removeEventListener("_fieldsetChange", fieldsetChangeListener);
-      }
-      if (onComplete) {
-        current.removeEventListener("_complete", completeListener);
-      }
     };
-  }, [ref, onContinue, onBack, onFieldsetChange, onComplete]);
+  }, [ref, onContinue]);
 
   return (
     <goa-public-form-page
@@ -152,8 +94,6 @@ export function GoabPublicFormPage({
       type={type}
       button-text={buttonText}
       button-visibility={buttonVisibility}
-      first={first}
-      last={last}
       summary-heading={summaryHeading}
       mt={mt}
       mr={mr}

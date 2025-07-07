@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, Output, EventEmitter } from "@angular/core";
-import { GoabFormDispatchOn, GoabFieldsetOnChangeDetail, GoabFieldsetOnContinueDetail } from "@abgov/ui-components-common";
+import { GoabFormDispatchOn, GoabFieldsetOnContinueDetail } from "@abgov/ui-components-common";
 
 @Component({
   selector: 'goab-fieldset',
@@ -8,7 +8,6 @@ import { GoabFormDispatchOn, GoabFieldsetOnChangeDetail, GoabFieldsetOnContinueD
       [attr.section-title]="sectionTitle"
       [attr.dispatch-on]="dispatchOn"
       [attr.id]="id"
-      (_change)="_onChange($event)"
       (_continue)="_onContinue($event)"
     >
       <ng-content></ng-content>
@@ -21,13 +20,7 @@ export class GoabFieldset {
   @Input() sectionTitle?: string;
   @Input() dispatchOn: GoabFormDispatchOn = "continue";
 
-  @Output() onChange = new EventEmitter<GoabFieldsetOnChangeDetail>();
   @Output() onContinue = new EventEmitter<GoabFieldsetOnContinueDetail>();
-
-  _onChange(event: Event) {
-    const detail = (event as CustomEvent).detail;
-    this.onChange.emit(detail);
-  }
 
   _onContinue(event: Event) {
     const detail = (event as CustomEvent).detail;
