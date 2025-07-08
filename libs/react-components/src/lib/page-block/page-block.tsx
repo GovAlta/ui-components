@@ -1,7 +1,8 @@
+import { GoabPageBlockSize } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
 
 interface WCProps {
-  width: "full" | string;
+  width?: GoabPageBlockSize;
   testid?: string;
 }
 
@@ -15,7 +16,7 @@ declare module "react" {
 }
 
 export interface GoabPageBlockProps {
-  width: "full" | string;
+  width?: GoabPageBlockSize;
   testId?: string;
   children?: ReactNode;
 }

@@ -2,7 +2,7 @@
 
 <!-- Script -->
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { isValidDimension } from "../../common/validators";
 
   type Size = "full" | string;
@@ -10,10 +10,8 @@
     full: "100%",
   };
 
-  // Required
-  export let width: Size;
-
   // Optional
+  export let width: Size = "full";
   export let testid: string = "";
 
   // Private
@@ -26,11 +24,12 @@
     return false;
   }
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();
+
     if (!isValidSize(width)) {
       console.error("Invalid PageBlock width");
     }
-
     _width = Sizes[width] || width;
   });
 </script>
