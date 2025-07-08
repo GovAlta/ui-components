@@ -98,7 +98,6 @@
     font-family: var(--goa-font-family-sans);
   }
 
-  :host:focus,
   :host:focus-within,
   :host:focus-visible {
     outline: none !important;
@@ -167,7 +166,7 @@
   }
 
   .color:hover,
-  .color:focus {
+  .color:focus-visible {
     color: var(--goa-icon-button-default-hover-color);
     fill: var(--goa-icon-button-default-hover-color);
     background-color: var(--goa-icon-button-default-hover-color-bg);
@@ -185,7 +184,7 @@
   }
 
   .dark:hover,
-  .dark:focus,
+  .dark:focus-visible,
   .dark:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
@@ -202,7 +201,7 @@
   }
 
   .nocolor:hover,
-  .nocolor:focus,
+  .nocolor:focus-visible,
   .nocolor:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
@@ -214,7 +213,7 @@
   }
 
   .destructive:hover,
-  .destructive:focus,
+  .destructive:focus-visible,
   .destructive:active {
     background-color: var(--goa-icon-button-destructive-hover-color-bg);
   }
@@ -231,7 +230,7 @@
   }
 
   .light:hover,
-  .light:focus,
+  .light:focus-visible,
   .light:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
   }
@@ -248,7 +247,7 @@
   }
 
   .inverted:hover,
-  .inverted:focus,
+  .inverted:focus-visible,
   .inverted:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
   }
