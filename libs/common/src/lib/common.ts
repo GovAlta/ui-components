@@ -954,6 +954,8 @@ export interface Margins {
 export type GoabBlockDirection = "row" | "column";
 export type GoabBlockAlignment = "center" | "start" | "end";
 
+export type GoabPageBlockSize = "full" | string;
+
 export type GoabLinkButtonType = "start" | "primary" | "secondary" | "tertiary";
 
 export type GoabTextMaxWidth = string | "none";

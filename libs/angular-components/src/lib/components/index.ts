@@ -51,6 +51,7 @@ export * from "./link/link";
 export * from "./microsite-header/microsite-header";
 export * from "./modal/modal";
 export * from "./notification/notification";
+export * from "./page-block/page-block";
 export * from "./pages/pages";
 export * from "./pagination/pagination";
 export * from "./popover/popover";
