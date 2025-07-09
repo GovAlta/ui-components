@@ -89,7 +89,27 @@ export type GoabBadgeType =
   | "emergency"
   | "dark"
   | "midtone"
-  | "light";
+  | "light"
+  | "archived"
+  | "aqua"
+  | "black"
+  | "blue"
+  | "green"
+  | "orange"
+  | "pink"
+  | "red"
+  | "violet"
+  | "white"
+  | "yellow"
+  | "aqua-light"
+  | "black-light"
+  | "blue-light"
+  | "green-light"
+  | "orange-light"
+  | "pink-light"
+  | "red-light"
+  | "violet-light"
+  | "yellow-light";
 
 export type GoabPaginationVariant = "all" | "links-only";
 
