@@ -1,4 +1,4 @@
-import { GoabBadgeType, Margins } from "@abgov/ui-components-common";
+import { GoabBadgeType, Margins, GoabIconType } from "@abgov/ui-components-common";
 import type { JSX } from "react";
 
 interface WCProps extends Margins {
@@ -7,6 +7,7 @@ interface WCProps extends Margins {
   content?: string;
   arialabel?: string;
   testid?: string;
+  icontype?: GoabIconType;
 }
 
 declare module "react" {
@@ -24,6 +25,25 @@ export interface GoabBadgeProps extends Margins {
   content?: string;
   testId?: string;
   ariaLabel?: string;
+  iconType?: GoabIconType;
+}
+
+/**
+ * Determines the icon display logic for the badge component.
+ * Priority order:
+ * 1. icon={true} - always show icon, starting with default
+ * 2. icon={false} - always hide icon (overrides iconType)
+ * 3. iconType provided - show custom icon
+ * 4. default/no icon or iconType set - hide icon
+ */
+function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false" {
+  // Explicit icon prop takes precedence
+  if (icon !== undefined) {
+    return icon ? "true" : "false";
+  }
+
+  // Show custom icon if iconType is provided
+  return iconType ? "true" : "false";
 }
 
 export function GoabBadge({
@@ -36,14 +56,17 @@ export function GoabBadge({
   mb,
   ml,
   ariaLabel,
+  iconType,
 }: GoabBadgeProps): JSX.Element {
   return (
     <goa-badge
       type={type}
       content={content}
-      icon={icon ? "true" : undefined}
+      // Handle icon display priority: explicit icon prop takes precedence over iconType
+      icon={getIconValue(icon, iconType)}
       testid={testId}
       arialabel={ariaLabel}
+      icontype={iconType}
       mt={mt}
       mr={mr}
       mb={mb}
