@@ -29,6 +29,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.mb]="mb"
     [attr.ml]="ml"
     [attr.mr]="mr"
+    [attr.width]="width"
     (_change)="_onChange($event)"
   >
   </goa-date-picker>`,
@@ -52,6 +53,7 @@ export class GoabDatePicker extends GoabControlValueAccessor {
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
+  @Input() width?: string;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
