@@ -1,4 +1,4 @@
-import { GoabBadgeType } from "@abgov/ui-components-common";
+import { GoabBadgeType, GoabIconType } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -14,6 +14,7 @@ import { GoabBaseComponent } from "../base.component";
     <goa-badge
       [attr.type]="type"
       [attr.icon]="icon"
+      [attr.icontype]="iconType"
       [attr.arialabel]="ariaLabel"
       [attr.content]="content"
       [attr.testid]="testId"
@@ -37,5 +38,6 @@ export class GoabBadge extends GoabBaseComponent {
   @Input() type?: GoabBadgeType;
   @Input() content?: string;
   @Input({ transform: booleanAttribute }) icon?: boolean;
+  @Input() iconType?: GoabIconType;
   @Input() ariaLabel?: string;
 }

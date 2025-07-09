@@ -35,4 +35,46 @@ describe("GoabBadge", () => {
     expect(el?.getAttribute("ml")).toBe("xl");
     expect(el?.getAttribute("arialabel")).toBe("text");
   });
+
+  it("should render custom icon type when icontype is provided", () => {
+    const { container } = render(
+      <GoabBadge
+        type="information"
+        content="Custom Icon"
+        iconType="home"
+      />,
+    );
+    const el = container.querySelector("goa-badge");
+
+    expect(el?.getAttribute("icontype")).toBe("home");
+  });
+
+  it("should not render icontype when not provided", () => {
+    const { container } = render(
+      <GoabBadge
+        type="success"
+        content="Default Icon"
+        icon
+      />,
+    );
+    const el = container.querySelector("goa-badge");
+
+    expect(el?.getAttribute("icontype")).toBeNull();
+    expect(el?.getAttribute("icon")).toBe("true");
+  });
+
+  it("should pass icon=false correctly to web component", () => {
+    const { container } = render(
+      <GoabBadge
+        type="success"
+        content="No Icon"
+        icon={false}
+        iconType="star"
+      />,
+    );
+    const el = container.querySelector("goa-badge");
+
+    expect(el?.getAttribute("icon")).toBe("false");
+    expect(el?.getAttribute("icontype")).toBe("star");
+  });
 });
