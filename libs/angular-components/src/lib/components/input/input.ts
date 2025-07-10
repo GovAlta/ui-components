@@ -17,9 +17,11 @@ import {
   OnInit,
   booleanAttribute,
   numberAttribute,
+  TemplateRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
+import { NgIf, NgTemplateOutlet } from "@angular/common";
 
 export interface IgnoreMe {
   ignore: string;
@@ -28,6 +30,7 @@ export interface IgnoreMe {
 @Component({
   standalone: true,
   selector: "goab-input",
+  imports: [NgIf, NgTemplateOutlet],
   template: `
     <goa-input
       [attr.type]="type"
@@ -68,7 +71,29 @@ export interface IgnoreMe {
       (_keyPress)="_onKeyPress($event)"
       [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
+      <div slot="leadingContent">
+        <ng-container *ngIf="leadingContent">
+          <ng-container *ngIf="getLeadingContentAsTemplate(); else stringLeading">
+            <ng-container
+              [ngTemplateOutlet]="getLeadingContentAsTemplate()"
+            ></ng-container>
+          </ng-container>
+          <ng-template #stringLeading>{{ getLeadingContentAsString() }}</ng-template>
+        </ng-container>
+      </div>
+
       <ng-content />
+
+      <div slot="trailingContent">
+        <ng-container *ngIf="trailingContent">
+          <ng-container *ngIf="getTrailingContentAsTemplate(); else stringTrailing">
+            <ng-container
+              [ngTemplateOutlet]="getTrailingContentAsTemplate()"
+            ></ng-container>
+          </ng-container>
+          <ng-template #stringTrailing>{{ getTrailingContentAsString() }}</ng-template>
+        </ng-container>
+      </div>
     </goa-input>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -103,6 +128,8 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() ariaLabelledBy?: string;
   @Input() trailingIconAriaLabel?: string;
   @Input() textAlign?: "left" | "right" = "left";
+  @Input() leadingContent!: string | TemplateRef<any>;
+  @Input() trailingContent!: string | TemplateRef<any>;
 
   @Output() onTrailingIconClick = new EventEmitter();
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
@@ -150,5 +177,23 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   _onBlur(e: Event) {
     const detail = (e as CustomEvent<GoabInputOnBlurDetail>).detail;
     this.onBlur.emit(detail);
+  }
+
+  getLeadingContentAsString(): string {
+    return this.leadingContent instanceof TemplateRef ? "" : this.leadingContent;
+  }
+
+  getLeadingContentAsTemplate(): TemplateRef<any> | null {
+    if (!this.leadingContent) return null;
+    return this.leadingContent instanceof TemplateRef ? this.leadingContent : null;
+  }
+
+  getTrailingContentAsString(): string {
+    return this.trailingContent instanceof TemplateRef ? "" : this.trailingContent;
+  }
+
+  getTrailingContentAsTemplate(): TemplateRef<any> | null {
+    if (!this.trailingContent) return null;
+    return this.trailingContent instanceof TemplateRef ? this.trailingContent : null;
   }
 }
