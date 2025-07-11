@@ -217,24 +217,24 @@ describe("Temporary Notification Controller", () => {
     };
 
     const result = render(<Component />);
-    const notification = result.getByTestId("cancel-notification");
-    const actionButton = result.getByRole("button");
-
+    
     await vi.waitFor(async () => {
       sendCancellableNotificationWithoutNotificationResponse("Notification with cancel action", "cancel-notification");
-
-      // Verify the notification is displayed
+      
+      const notification = result.getByTestId("cancel-notification");
       expect(notification.elements().length).toBe(1);
+    }, { timeout: 5000 });
 
-      // Click the cancel button
-      expect(actionButton.elements().length).toBe(1);
-      await actionButton.click();
+    // Get the action button and click it
+    const actionButton = result.getByRole("button");
+    expect(actionButton.elements().length).toBe(1);
+    await actionButton.click();
 
-      // Verify the notification is removed
-      await vi.waitFor(() => {
-        expect(notification.elements().length).toBe(0);
-      });
-    });
+    // Verify the notification is removed
+    await vi.waitFor(() => {
+      const notification = result.getByTestId("cancel-notification");
+      expect(notification.elements().length).toBe(0);
+    }, { timeout: 5000 });
   })
 
   it.skip("should handle progress updates", async function () {
