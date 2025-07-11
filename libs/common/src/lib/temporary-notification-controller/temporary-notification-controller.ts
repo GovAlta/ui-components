@@ -22,9 +22,8 @@ const TypesRequiringDuration: GoabTemporaryNotificationType[] = ["basic", "succe
 function show(message: string, opts?: Partial<GoabNotificationOptions>): string {
   const uuid = crypto.randomUUID();
   opts = { uuid, type: "basic", ...(opts || {}) };
-
   // set default duration for certain notification types
-  if (!opts.duration && opts.type && TypesRequiringDuration.includes(opts.type)) {
+  if (opts.duration === undefined && opts.type && TypesRequiringDuration.includes(opts.type)) {
     opts.duration = "short";
   }
 
