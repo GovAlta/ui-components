@@ -79,16 +79,19 @@ export function GoabDatePicker({
     };
   }, [onChange]);
 
+  const isValidDate = (value: Date | undefined) =>
+    value && value instanceof Date && !isNaN(value.getTime());
+
   return (
     <goa-date-picker
       ref={ref}
       name={name}
-      value={value?.toISOString() || ""}
+      value={isValidDate(value) ? value?.toISOString() : undefined}
       type={type}
       error={error ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
-      min={min?.toISOString()}
-      max={max?.toISOString()}
+      min={isValidDate(min) ? min?.toISOString() : undefined}
+      max={isValidDate(max) ? max?.toISOString() : undefined}
       testid={testId}
       mt={mt}
       mr={mr}
