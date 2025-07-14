@@ -5,8 +5,15 @@ import {
   render,
   waitFor,
 } from "@testing-library/svelte";
+import userEvent, { UserEvent } from "@testing-library/user-event";
 import { addDays, format, addMonths, addYears } from "date-fns";
 import { it, expect, vi } from "vitest";
+
+let user: UserEvent;
+
+beforeEach(() => {
+  user = userEvent.setup();
+});
 
 it("it renders", async () => {
   const { container } = render(DatePicker);
@@ -65,6 +72,105 @@ it("dispatches a value on date selection", async () => {
   await waitFor(() => {
     expect(handler).toBeCalled();
   });
+});
+
+describe("input type date picker", () => {
+	it("validates invalid input type datepicker value (partially filled)", async () => {
+		const { container } = render(DatePicker, {
+			name: "datePickerInputType",
+			type: "input",
+			value: "2025-02", // Partially filled, invalid date
+		});
+
+		const datePickerDay = container.querySelector("goa-input[name='day']");
+		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+		const datePickerYear = container.querySelector("goa-input[name='year']");
+
+		expect(datePickerDay?.getAttribute("value")).toBe("");
+		expect(datePickerMonth?.getAttribute("value")).toBe("");
+		expect(datePickerYear?.getAttribute("value")).toBe("");
+	});
+
+	it("validates invalid input type datepicker value (not in YYYY-MM-DD format)", async () => {
+		const { container } = render(DatePicker, {
+			name: "datePickerInputType",
+			type: "input",
+			value: "Mon Jul 07 2025 07:25:44 GMT-0600 (Mountain Daylight Time)", // not in YYYY-MM-DD format
+		});
+
+		const datePickerDay = container.querySelector("goa-input[name='day']");
+		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+		const datePickerYear = container.querySelector("goa-input[name='year']");
+
+		expect(datePickerDay?.getAttribute("value")).toBe("");
+		expect(datePickerMonth?.getAttribute("value")).toBe("");
+		expect(datePickerYear?.getAttribute("value")).toBe("");
+	});
+
+	it("validates invalid input type datepicker value (not in YYYY-MM-DD format)", async () => {
+		const { container } = render(DatePicker, {
+			name: "datePickerInputType",
+			type: "input",
+			value: "2025-12345", // not in YYYY-MM-DD format
+		});
+
+		const datePickerDay = container.querySelector("goa-input[name='day']");
+		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+		const datePickerYear = container.querySelector("goa-input[name='year']");
+
+		expect(datePickerDay?.getAttribute("value")).toBe("");
+		expect(datePickerMonth?.getAttribute("value")).toBe("");
+		expect(datePickerYear?.getAttribute("value")).toBe("");
+	});
+
+	// NOTE: Date picker input type Feb 31st converts to March 3rd in react but, not in angular
+	it("validates invalid input type datepicker value (February 31st does not exist)", async () => {
+		const { container } = render(DatePicker, {
+			name: "datePickerInputType",
+			type: "input",
+			value: "2025-02-31", // Invalid because February 31st does not exist
+		});
+
+		const datePickerDay = container.querySelector("goa-input[name='day']");
+		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+		const datePickerYear = container.querySelector("goa-input[name='year']");
+
+		expect(datePickerDay?.getAttribute("value")).toBe("");
+		expect(datePickerMonth?.getAttribute("value")).toBe("");
+		expect(datePickerYear?.getAttribute("value")).toBe("");
+	});
+
+	it("validates valid date in YYYY-MM-DD format provided as input type datepicker value", async () => {
+		const { container } = render(DatePicker, {
+			name: "datePickerInputType",
+			type: "input",
+			value: "2025-02-28", // Valid date
+		});
+
+		const datePickerDay = container.querySelector("goa-input[name='day']");
+		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+		const datePickerYear = container.querySelector("goa-input[name='year']");
+
+		expect(datePickerDay?.getAttribute("value")).toBe("28");
+		expect(datePickerMonth?.getAttribute("value")).toBe("1");
+		expect(datePickerYear?.getAttribute("value")).toBe("2025");
+	});
+
+	it("validates valid javascript Date in ISO format provided as input type datepicker value", async () => {
+		const { container } = render(DatePicker, {
+			name: "datePickerInputType",
+			type: "input",
+			value: new Date("2025-02-28").toISOString(), // Valid date
+		});
+
+		const datePickerDay = container.querySelector("goa-input[name='day']");
+		const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+		const datePickerYear = container.querySelector("goa-input[name='year']");
+
+		expect(datePickerDay?.getAttribute("value")).toBe("28");
+		expect(datePickerMonth?.getAttribute("value")).toBe("1");
+		expect(datePickerYear?.getAttribute("value")).toBe("2025");
+	});
 });
 
 describe("DatePicker Keyboard Navigation", () => {
