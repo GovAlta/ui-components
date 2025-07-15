@@ -66,17 +66,21 @@ export function relay<T>(
   }
 
   const dispatch = () => {
-    el?.dispatchEvent(
-      new CustomEvent<{ action: string; data?: T }>("msg", {
-        composed: true,
-        bubbles: opts?.bubbles,
-        cancelable: opts?.cancelable,
-        detail: {
-          action: eventName,
-          data,
-        },
-      }),
-    );
+    try {
+      el?.dispatchEvent?.(
+        new CustomEvent<{ action: string; data?: T }>("msg", {
+          composed: true,
+          bubbles: opts?.bubbles,
+          cancelable: opts?.cancelable,
+          detail: {
+            action: eventName,
+            data,
+          },
+        }),
+      );
+    } catch (e) {
+      console.error("relay() error:", e);
+    }
   };
 
   if (opts?.timeout) {
@@ -93,14 +97,18 @@ export function dispatch<T>(
   opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   const dispatch = () => {
-    el?.dispatchEvent(
-      new CustomEvent<T>(eventName, {
-        composed: true,
-        bubbles: opts?.bubbles,
-        cancelable: opts?.cancelable,
-        detail,
-      }),
-    );
+    try {
+      el?.dispatchEvent?.(
+        new CustomEvent<T>(eventName, {
+          composed: true,
+          bubbles: opts?.bubbles,
+          cancelable: opts?.cancelable,
+          detail,
+        }),
+      );
+    } catch (e) {
+      console.error("dispatch() error:", e);
+    }
   };
 
   if (opts?.timeout) {
