@@ -44,7 +44,7 @@ jobs:
         run: |
           if [ -d "./dist" ]; then
             npx playwright install --with-deps
-            npm run test:headless
+            npm run test:pr
           fi
 
       - name: Update Web components documentation
