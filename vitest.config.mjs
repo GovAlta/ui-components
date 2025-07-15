@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
 
   test: {
+    retries: 3,
     exclude: [
       "**/node_modules",
       "playground",

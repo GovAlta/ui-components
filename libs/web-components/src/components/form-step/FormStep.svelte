@@ -15,7 +15,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { toBoolean } from "../../common/utils";
+  import { dispatch, toBoolean } from "../../common/utils";
 
   // ======
   // Public
@@ -96,18 +96,11 @@
   });
 
   function dispatchInit(el: HTMLElement) {
-    setTimeout(() => {
-      el.dispatchEvent(
-        new CustomEvent("formstep:mounted", {
-          detail: {
-            el: _rootEl,
-            status,
-          },
-          composed: true,
-          bubbles: true,
-        }),
-      );
-    }, 10);
+    dispatch(el, "formstep:mounted",
+      { el: _rootEl, status },
+      { bubbles: true, timeout: 10 },
+    );
+
   }
 
   function onClick(e: Event) {
@@ -329,7 +322,7 @@
       [data-status="incomplete"],
       [aria-current="step"]
     )
-    .status {
+  .status {
     border-color: var(--goa-step-color-border);
   }
 
