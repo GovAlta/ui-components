@@ -177,12 +177,12 @@
       const chValue = parseInt(width);
       if (type === "number") {
         return {
-          containerStyle: `width: ${width}; `,
+          containerStyle: "",
           inputWidth: `${chValue + 2}ch`,
         };
       } else {
         return {
-          containerStyle: `width: ${width}; `,
+          containerStyle: "",
           inputWidth: `${chValue + 1}ch`,
         };
       }
@@ -190,7 +190,7 @@
 
     // Handle all other supported units (px, %, rem, em)
     return {
-      containerStyle: `width: ${width}; `,
+      containerStyle: `--width: ${width};`,
       inputWidth: "",
     };
   }
@@ -444,7 +444,7 @@
     display: inline-flex;
     vertical-align: top;
     z-index: 0;
-    width: var(--width, 100%);
+    width: var(--width, auto);
   }
 
   .leading-content-slot :global(::slotted(div)),
