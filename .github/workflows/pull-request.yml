@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: "22"
+          node-version: "24"
       - uses: actions/cache@v4
         with:
           path: ~/.npm
@@ -36,5 +36,5 @@ jobs:
         run: |
           if [ -d "./dist" ]; then
             npx playwright install --with-deps
-            npm run test:headless
+            npm run test:pr
           fi

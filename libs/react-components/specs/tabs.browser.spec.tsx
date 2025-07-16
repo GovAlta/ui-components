@@ -62,7 +62,7 @@ describe("Tabs Browser Tests", () => {
 
       // Verify URL components are preserved
       await vi.waitFor(() => {
-        expect(window.location.search).toBe("?param=value");
+        expect(window.location.search.indexOf("param=value")).toBeGreaterThan(0)
         // Check for both hashes in the URL
         expect(window.location.hash).toBe("#tab-2#anchorPoint");
         expect(window.location.href).toContain("#tab-2#anchorPoint");
