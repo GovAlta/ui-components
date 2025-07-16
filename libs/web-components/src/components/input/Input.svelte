@@ -445,6 +445,7 @@
     vertical-align: top;
     z-index: 0;
     width: var(--width, auto);
+    max-width: 100%;
   }
 
   .leading-content-slot :global(::slotted(div)),
