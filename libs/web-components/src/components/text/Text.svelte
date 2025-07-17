@@ -26,6 +26,7 @@
   export let maxWidth: string | "none" = "65ch";
   export let size: Size | undefined = undefined;
   export let color: "primary" | "secondary" = "primary";
+  export let id: string = "";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -100,6 +101,7 @@
 
 <svelte:element
   this={as}
+  id={id || undefined}
   class={size}
   style={styles(
     style(

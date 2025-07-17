@@ -16,6 +16,7 @@ import {
       [attr.size]="size"
       [attr.maxwidth]="maxWidth"
       [attr.color]="color"
+      [attr.id]="id"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -30,6 +31,7 @@ export class GoabText {
   @Input() size?: GoabTextSize;
   @Input() maxWidth?: GoabTextMaxWidth;
   @Input() color?: GoabTextColor;
+  @Input() id?: string;
   @Input() mt?: Spacing;
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;

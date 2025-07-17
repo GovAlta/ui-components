@@ -72,4 +72,41 @@ describe('GoabText', () => {
       expect(element?.getAttribute('as')).toBe(tag);
     });
   });
+
+  it('should pass id property to the goa-text element', () => {
+    const testId = 'test-text-id';
+    const { container } = render(<GoabText id={testId}>Text with ID</GoabText>);
+    const element = container.querySelector('goa-text');
+
+    expect(element?.getAttribute('id')).toBe(testId);
+  });
+
+  it('should not set id attribute when id prop is not provided', () => {
+    const { container } = render(<GoabText>Text without ID</GoabText>);
+    const element = container.querySelector('goa-text');
+
+    expect(element?.hasAttribute('id')).toBe(false);
+  });
+
+  it('should handle id property with other properties', () => {
+    const testId = 'combined-test-id';
+    const { container } = render(
+      <GoabText
+        id={testId}
+        tag="h2"
+        size="heading-m"
+        color="secondary"
+        maxWidth="600px"
+      >
+        Text with ID and other props
+      </GoabText>
+    );
+
+    const element = container.querySelector('goa-text');
+    expect(element?.getAttribute('id')).toBe(testId);
+    expect(element?.getAttribute('as')).toBe('h2');
+    expect(element?.getAttribute('size')).toBe('heading-m');
+    expect(element?.getAttribute('color')).toBe('secondary');
+    expect(element?.getAttribute('maxwidth')).toBe('600px');
+  });
 });

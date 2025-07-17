@@ -60,9 +60,34 @@ describe('GoabText', () => {
     expect(element.getAttribute('maxwidth')).toBeNull();
     expect(element.getAttribute('size')).toBeNull();
     expect(element.getAttribute('color')).toBeNull();
+    expect(element.getAttribute('id')).toBeNull();
     expect(element.getAttribute('mt')).toBeNull();
     expect(element.getAttribute('mr')).toBeNull();
     expect(element.getAttribute('mb')).toBeNull();
     expect(element.getAttribute('ml')).toBeNull();
+  });
+
+  it('should apply id property correctly', () => {
+    const testId = 'test-angular-id';
+    component.id = testId;
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector('goa-text');
+    expect(element.getAttribute('id')).toBe(testId);
+  });
+
+  it('should handle id with other properties', () => {
+    const testId = 'combined-angular-id';
+    component.id = testId;
+    component.tag = 'h2';
+    component.size = 'heading-m';
+    component.color = 'primary';
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement.querySelector('goa-text');
+    expect(element.getAttribute('id')).toBe(testId);
+    expect(element.getAttribute('as')).toBe('h2');
+    expect(element.getAttribute('size')).toBe('heading-m');
+    expect(element.getAttribute('color')).toBe('primary');
   });
 });
