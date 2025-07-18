@@ -25,7 +25,7 @@
   });
 </script>
 
-<div
+<footer
   bind:clientWidth={_clientWidth}
   class="app-footer"
   bind:this={rootEl}
@@ -72,7 +72,7 @@
       </div>
     </div>
   </div>
-</div>
+</footer>
 
 <style>
   * {

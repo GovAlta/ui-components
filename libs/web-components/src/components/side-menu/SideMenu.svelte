@@ -101,9 +101,9 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu" data-testid={testid}>
+<nav bind:this={_rootEl} class="side-menu" data-testid={testid} aria-label="Side navigation">
   <slot />
-</div>
+</nav>
 
 <style>
   :global(::slotted(a)),

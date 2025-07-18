@@ -177,7 +177,7 @@
 <svelte:window bind:innerWidth={_windowWidth} />
 
 <!-- HTML -->
-<div
+<header
   class="container"
   bind:this={_rootEl}
   data-testid={testid}
@@ -288,7 +288,7 @@
       </div>
     {/if}
   </div>
-</div>
+</header>
 
 <!-- Style -->
 
