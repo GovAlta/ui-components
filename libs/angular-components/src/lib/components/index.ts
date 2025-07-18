@@ -65,7 +65,6 @@ export * from "./tab/tab";
 export * from "./table/table";
 export * from "./table-sort-header/table-sort-header";
 export * from "./tabs/tabs";
-export * from "./temporary-notification/temporary-notification";
 export * from "./temporary-notification-ctrl/temporary-notification-ctrl";
 export * from "./text/text";
 export * from "./textarea/textarea";

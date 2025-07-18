@@ -61,7 +61,6 @@ export * from "./lib/table/table";
 export * from "./lib/table/table-sort-header";
 export * from "./lib/tabs/tabs";
 export * from "./lib/tab/tab";
-export * from "./lib/temporary-notification/temporary-notification";
 export * from "./lib/temporary-notification-ctrl/temporary-notification-ctrl";
 export * from "./lib/text/text";
 export { GoabTextArea, GoabTextArea as GoabTextarea } from "./lib/textarea/textarea";
