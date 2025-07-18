@@ -8,7 +8,6 @@ describe("Modal Tests", () => {
       heading: "Modal Heading",
       open: true,
       maxWidth: "500px",
-      role: "alertdialog",
       actions: <GoAButton onClick={() => { /* do nothing */ }}>Close</GoAButton>,
       onClose: () => { /* do nothing */ },
     };
@@ -19,7 +18,6 @@ describe("Modal Tests", () => {
     const modal = baseElement.querySelector("goa-modal");
     const actionContent = modal?.querySelector("[slot='actions']");
     const heading = modal?.querySelector("[slot='heading']");
-    expect(modal?.getAttribute("role")).toBe("alertdialog");
 
     expect(heading?.textContent).toContain("Modal Heading");
     expect(modal?.getAttribute("open")).toBe("true");

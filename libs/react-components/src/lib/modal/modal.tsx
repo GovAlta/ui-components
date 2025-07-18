@@ -21,6 +21,10 @@ interface WCProps {
   closable?: boolean;
   transition?: GoAModalTransition;
   calloutvariant?: GoAModalCalloutVariant;
+  /**
+   * @deprecated The role property is deprecated and will be removed in a future version.
+   * The modal will always use role="dialog".
+   */
   role?: GoAModalRole;
   testid?: string;
 }
@@ -44,6 +48,10 @@ export interface GoAModalProps {
   open?: boolean;
   calloutVariant?: GoAModalCalloutVariant;
   testId?: string;
+  /**
+   * @deprecated The role property is deprecated and will be removed in a future version.
+   * The modal will always use role="dialog".
+   */
   role?: GoAModalRole;
   // @deprecated: use maxWidth
   width?: string;
@@ -62,7 +70,6 @@ export function GoAModal({
   calloutVariant,
   onClose,
   testId,
-  role,
   width,
 }: GoAModalProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
@@ -104,7 +111,6 @@ export function GoAModal({
       transition={transition}
       calloutvariant={calloutVariant}
       testid={testId}
-      role={role}
     >
       {heading && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}
