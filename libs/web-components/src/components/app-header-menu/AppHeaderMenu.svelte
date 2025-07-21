@@ -304,6 +304,17 @@
     color: var(--goa-app-header-nav-color-text-link-item-focus) !important;
     background-color: var(--goa-app-header-color-bg-nav-item-focus);
   }
+  
+  /* Menu items in collapsed menu --Interactive--Current */
+  :global(::slotted(a.interactive.current)) {
+    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current);
+  }
+  /* Menu items in collapsed menu --Interactive--Current--Hover */
+  :global(::slotted(a.interactive.current:hover)) {
+    color: var(--goa-app-header-color-text-nav-item-in-menu-current-hover) !important;
+    background-color: var(--goa-app-header-color-bg-nav-item-in-menu-current-hover);
+  }
 
   /* Secondary Menu items (in popover on menu item) --Tablet */
   .not-desktop :global(::slotted(a)) {
