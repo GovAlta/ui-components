@@ -67,6 +67,8 @@
   // border radius of popover window
   export let borderradius = "var(--goa-border-radius-m)";
 
+  export let filterablecontext: string = "false";
+
   // Private
 
   let _rootEl: HTMLElement;
@@ -81,6 +83,7 @@
   $: _padded = toBoolean(padded);
   $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
+  $: _filterableContext = toBoolean(filterablecontext);
 
   $: (async () => _open && (await setPopoverPosition()))();
   $: (async () => _sectionHeight && (await setPopoverPosition()))();
@@ -134,6 +137,9 @@
   function onTargetEvent(e: KeyboardEvent) {
     switch (e.key) {
       case " ":
+        if (_filterableContext) {
+          break;
+        }
       case "Enter":
         openPopover();
         break;
