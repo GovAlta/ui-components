@@ -26,6 +26,8 @@
     StateChangeEvent, StateChangeRelayDetail, SubFormBindMsg, SubFormBindRelayDetail,
     SubFormIndexContinueToParentMsg,
     SubFormIndexContinueToSubFormMsg,
+    SubFormNewItemMsg,
+    SubFormNewItemRelayDetail,
   } from "../../types/relay-types";
 
   // Subform props
@@ -181,6 +183,19 @@
 
   function onSubFormIndexContinueToSubForm() {
     _mode = "form";
+
+    // Check if this is a mounted form item but not registered on state (2+ sub-form item)
+    const currentItem = _state[_itemIndex];
+    const notOnStateItem = !currentItem || !currentItem.form || Object.keys(currentItem.form).length === 0;
+
+    if (notOnStateItem) {
+      // Send SubFormNewItemMsg for Form -> Fieldset to re-register
+      if (_formEl) {
+        relay<SubFormNewItemRelayDetail>(_formEl, SubFormNewItemMsg, {
+          itemIndex: _itemIndex
+        });
+      }
+    }
   }
 
   function onSubFormIndexContinueToParent() {

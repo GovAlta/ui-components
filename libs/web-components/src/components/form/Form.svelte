@@ -40,6 +40,8 @@
     FieldsetBindRelayDetail,
     FieldsetBindMsg,
     FormPageBackMsg, FormStatus,
+    SubFormNewItemMsg,
+    SubFormNewItemRelayDetail,
   } from "../../types/relay-types";
 
   // ========
@@ -173,6 +175,9 @@
           break;
         case FormResetFormMsg:
           resetState();
+          break;
+        case SubFormNewItemMsg:
+          onReRegisterSubFormItem(data as SubFormNewItemRelayDetail);
           break;
       }
     });
@@ -399,6 +404,13 @@
     // reset the active fieldset
     const [id] = Object.entries(_formPages)[0];
     sendToggleActiveStateMsg(id);
+  }
+
+  function onReRegisterSubFormItem(detail: SubFormNewItemRelayDetail) {
+    // Relay to all fieldsets to re-initialize for new subform item
+    for (const { el } of Object.values(_fieldsets)) {
+      relay<SubFormNewItemRelayDetail>(el, SubFormNewItemMsg, detail);
+    }
   }
 
   // *********

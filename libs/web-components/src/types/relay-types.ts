@@ -84,6 +84,12 @@ export const SubFormIndexContinueToParentMsg = "subform::indexContinueToParent";
 export const SubFormIndexContinueToSubFormMsg =
   "subform::indexContinueToSubForm";
 
+// New message for initializing new subform items
+export const SubFormNewItemMsg = "subform::newItem";
+export type SubFormNewItemRelayDetail = {
+  itemIndex: number;
+};
+
 // ========
 // Fieldset
 // ========

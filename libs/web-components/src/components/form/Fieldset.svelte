@@ -38,6 +38,8 @@
     FormToggleActiveRelayDetail,
     FormPageContinueMsg,
     FormPageContinueRelayDetail,
+    SubFormNewItemMsg,
+    SubFormNewItemRelayDetail,
   } from "../../types/relay-types";
 
   // ======
@@ -117,6 +119,10 @@
           resetFields(event);
           event.stopPropagation();
           break;
+        case SubFormNewItemMsg:
+          onReRegisterSubFormNewItem(data as SubFormNewItemRelayDetail);
+          event.stopPropagation();
+          break;
       }
     });
   }
@@ -150,6 +156,34 @@
 
     for (const { el } of Object.values(_formFields)) {
       relay(el, FieldsetResetFieldsMsg);
+    }
+  }
+
+  function onReRegisterSubFormNewItem(detail: SubFormNewItemRelayDetail) {
+    _state = {};
+    _errors = {};
+
+    // Re-trigger onFormItemMount for all form items to rebuild state and visually clear fields
+    for (const [id, { label, el }] of Object.entries(_formItems)) {
+      const defaultOrderIndex = Object.keys(_formItems).length;
+      onFormItemMount({
+        id,
+        label,
+        el,
+        order: defaultOrderIndex
+      });
+
+      // visually clear the corresponding form field
+      if (_formFields[id]) {
+        relay<FieldsetSetValueRelayDetail>(
+          _formFields[id],
+          FieldsetSetValueMsg,
+          {
+            name: id,
+            value: "",
+          },
+        );
+      }
     }
   }
 
