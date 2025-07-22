@@ -1041,3 +1041,7 @@ export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-sta
 export type GoabDrawerPosition = "bottom" | "left" | "right" | undefined;
 export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw";
 export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
+
+// Work side menu
+export type GoabWorkSideMenuItemVariation = "normal" | "submenu";
+export type GoabWorkSideMenuItemType = "normal" | "emergency" | "success";
