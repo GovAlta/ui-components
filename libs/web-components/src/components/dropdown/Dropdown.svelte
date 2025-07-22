@@ -763,6 +763,7 @@
       open={_isMenuVisible}
       padded="false"
       tabindex="-1"
+      filterablecontext={fromBoolean(_filterable)}
       on:_open={showMenu}
       on:_close={hideMenu}
     >
