@@ -60,4 +60,43 @@ describe("Callout", () => {
       expect(el?.getAttribute("arialive")).toBe(expected);
     });
   });
+
+  test("Callout shall render with different emphasis levels", async () => {
+    const testCases = [
+      { emphasis: "high", expected: "high" },
+      { emphasis: "medium", expected: "medium" },
+      { emphasis: "low", expected: "low" },
+      { emphasis: undefined, expected: "medium" }, // default
+    ];
+
+    testCases.forEach(({ emphasis, expected }) => {
+      const result = render(
+        <GoabCallout
+          type="information"
+          emphasis={emphasis as "high" | "medium" | "low" | undefined}
+        >
+          Test content
+        </GoabCallout>,
+      );
+
+      const el = result.container.querySelector("goa-callout");
+      expect(el?.getAttribute("emphasis")).toBe(expected);
+    });
+  });
+
+  test("Callout shall maintain backward compatibility with size prop", async () => {
+    const result = render(
+      <GoabCallout
+        type="information"
+        size="medium"
+        emphasis="high"
+      >
+        Test content
+      </GoabCallout>,
+    );
+
+    const el = result.container.querySelector("goa-callout");
+    expect(el?.getAttribute("size")).toBe("medium");
+    expect(el?.getAttribute("emphasis")).toBe("high");
+  });
 });

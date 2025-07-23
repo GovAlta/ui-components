@@ -1,7 +1,7 @@
 import { render, waitFor } from "@testing-library/svelte";
 import GoACallout from "./Callout.svelte";
 import GoACalloutWrapper from "./CalloutWrapper.test.svelte";
-import { it, describe } from "vitest";
+import { it, describe, vi } from "vitest";
 
 describe("GoACalloutComponent", () => {
   it("should render - emergency", async () => {
@@ -211,6 +211,113 @@ describe("GoACalloutComponent", () => {
       const callout = await baseElement.findByTestId("callout-test");
 
       expect(callout).toHaveAttribute("aria-live", "");
+    });
+  });
+
+  describe("emphasis levels", () => {
+    it("should have default emphasis of medium", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "information",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).toHaveClass("emphasis-medium");
+    });
+
+    it("should render with high emphasis", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "emergency",
+        emphasis: "high",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).toHaveClass("emphasis-high");
+      expect(callout).toHaveClass("emergency");
+    });
+
+    it("should render with medium emphasis", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "important",
+        emphasis: "medium",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).toHaveClass("emphasis-medium");
+      expect(callout).toHaveClass("important");
+    });
+
+    it("should render with low emphasis", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "success",
+        emphasis: "low",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).toHaveClass("emphasis-low");
+      expect(callout).toHaveClass("success");
+    });
+
+    it("should add no-heading class when heading is not provided", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "information",
+        emphasis: "low",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).toHaveClass("no-heading");
+    });
+
+    it("should not add no-heading class when heading is provided", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "information",
+        emphasis: "low",
+        heading: "Test Heading",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+
+      expect(callout).not.toHaveClass("no-heading");
+    });
+
+    it("should apply emphasis classes to icon and content", async () => {
+      const baseElement = render(GoACallout, {
+        testid: "callout-test",
+        type: "important", 
+        emphasis: "high",
+        heading: "Test",
+      });
+      const callout = await baseElement.findByTestId("callout-test");
+      const icon = callout.querySelector(".icon");
+      const content = callout.querySelector(".content");
+      const heading = content.querySelector("h3");
+
+      expect(icon).toHaveClass("emphasis-high");
+      expect(content).toHaveClass("emphasis-high");
+      expect(heading).toHaveClass("emphasis-high");
+    });
+  });
+
+  describe("deprecation warnings", () => {
+    it("should warn when event type is used", async () => {
+      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      
+      render(GoACallout, {
+        testid: "callout-test",
+        type: "event",
+      });
+
+      await waitFor(() => {
+        expect(consoleSpy).toHaveBeenCalledWith(
+          "Callout type 'event' is deprecated and will be removed in a future version. Please use a different type."
+        );
+      });
+
+      consoleSpy.mockRestore();
     });
   });
 });

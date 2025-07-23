@@ -19,6 +19,11 @@
     "medium",
     "large",
   ]);
+  const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator("Callout emphasis", [
+    "high",
+    "medium", 
+    "low",
+  ]);
   const [AriaLive, validateAriaLive] = typeValidator("Aria live", [
     "off",
     "assertive",
@@ -28,6 +33,7 @@
   // Types
   type CalloutType = (typeof Types)[number];
   type CalloutSize = (typeof CalloutSizes)[number];
+  type CalloutEmphasisType = (typeof CalloutEmphasis)[number];
   type AriaLiveType = (typeof AriaLive)[number];
 
   // margin
@@ -38,6 +44,7 @@
 
   export let size: CalloutSize = "large";
   export let type: CalloutType;
+  export let emphasis: CalloutEmphasisType = "medium";
   export let heading: string = "";
   export let maxwidth: string = "none";
   export let testid: string = "";
@@ -68,10 +75,14 @@
 
   onMount(() => {
     validateCalloutSize(size);
+    validateCalloutEmphasis(emphasis);
     validateAriaLive(arialive);
 
     setTimeout(() => {
       validateType(type);
+      if (type === "event") {
+        console.warn("Callout type 'event' is deprecated and will be removed in a future version. Please use a different type.");
+      }
       iconSize = isMediumCallout ? "small" : "medium";
     });
   });
@@ -85,21 +96,22 @@
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
   `}
-  class="notification {type}"
+  class="notification {type} emphasis-{emphasis}"
   class:medium={isMediumCallout}
+  class:no-heading={!heading}
   data-testid={testid}
   aria-live={arialive}
 >
-  <span class="icon {type}">
+  <span class="icon {type} emphasis-{emphasis}">
     <goa-icon
       type={iconType}
       size={iconSize}
       theme={icontheme}
     />
   </span>
-  <span class="content {type}">
+  <span class="content {type} emphasis-{emphasis}">
     {#if heading}
-      <h3 class:medium={isMediumCallout}>{heading}</h3>
+      <h3 class:medium={isMediumCallout} class="emphasis-{emphasis}">{heading}</h3>
     {/if}
     <slot />
   </span>
@@ -205,6 +217,74 @@
   .notification.emergency {
     border-color: var(--goa-callout-emergency-border-color);
   }
+  
+  /* Emphasis level styles */
+  .notification.emphasis-high {
+    border-width: var(--goa-callout-high-border-width, var(--goa-callout-l-border-width));
+    font: var(--goa-callout-high-text-size, var(--goa-callout-l-text-size));
+  }
+  
+  .notification.emphasis-medium {
+    border-width: var(--goa-callout-medium-border-width, var(--goa-callout-l-border-width));
+    font: var(--goa-callout-medium-text-size, var(--goa-callout-l-text-size));
+  }
+  
+  .notification.emphasis-low {
+    border-width: var(--goa-callout-low-border-width, var(--goa-callout-l-border-width));
+    font: var(--goa-callout-low-text-size, var(--goa-callout-l-text-size));
+  }
+  
+  /* High emphasis styles */
+  .notification.emphasis-high .icon {
+    padding: var(--goa-callout-high-statusbar-padding, var(--goa-callout-l-statusbar-padding));
+  }
+  
+  .notification.emphasis-high .content {
+    padding: var(--goa-callout-high-content-padding, var(--goa-callout-l-content-padding));
+  }
+  
+  .notification.emphasis-high h3 {
+    font: var(--goa-callout-high-heading-size, var(--goa-callout-l-heading-size));
+    margin-bottom: var(--goa-callout-high-content-gap, var(--goa-callout-l-content-gap));
+  }
+  
+  /* Medium emphasis styles */
+  .notification.emphasis-medium .icon {
+    padding: var(--goa-callout-medium-statusbar-padding, var(--goa-callout-l-statusbar-padding));
+  }
+  
+  .notification.emphasis-medium .content {
+    padding: var(--goa-callout-medium-content-padding, var(--goa-callout-l-content-padding));
+  }
+  
+  .notification.emphasis-medium h3 {
+    font: var(--goa-callout-medium-heading-size, var(--goa-callout-l-heading-size));
+    margin-bottom: var(--goa-callout-medium-content-gap, var(--goa-callout-l-content-gap));
+  }
+  
+  /* Low emphasis styles */
+  .notification.emphasis-low .icon {
+    padding: var(--goa-callout-low-statusbar-padding, var(--goa-callout-l-statusbar-padding));
+  }
+  
+  .notification.emphasis-low .content {
+    padding: var(--goa-callout-low-content-padding, var(--goa-callout-l-content-padding));
+  }
+  
+  .notification.emphasis-low h3 {
+    font: var(--goa-callout-low-heading-size, var(--goa-callout-l-heading-size));
+    margin-bottom: var(--goa-callout-low-content-gap, var(--goa-callout-l-content-gap));
+  }
+  
+  /* Low emphasis without heading adjustment */
+  .notification.emphasis-low.no-heading .content {
+    padding: var(--goa-callout-low-content-padding-no-heading, var(--goa-callout-low-content-padding, var(--goa-callout-l-content-padding)));
+  }
+  
+  .notification.emphasis-low.no-heading .icon {
+    padding: var(--goa-callout-low-statusbar-padding-no-heading, var(--goa-callout-low-statusbar-padding, var(--goa-callout-l-statusbar-padding)));
+  }
+  
   /*Medium callout style*/
   .notification.medium {
     font: var(--goa-callout-m-text-size);
