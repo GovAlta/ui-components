@@ -63,8 +63,8 @@ describe("RadioItem", () => {
       value: "radio-item-1",
       error: true,
     });
-    const label = result.getByTestId("radio-option-radio-item-1");
-    expect(label.getAttribute("class")).toContain("error");
+    const label = result.container.querySelector("label");
+    expect(label?.getAttribute("class")).toContain("error");
   });
 
   it(`should render with margins`, async () => {
@@ -93,9 +93,9 @@ describe("RadioItem", () => {
   });
 
   it("should handle the change event and emit _radioItemChange event with value and label", async () => {
-    const result = render(GoARadioItem, { 
-      value: "foobar", 
-      label: "Test Radio Label" 
+    const result = render(GoARadioItem, {
+      value: "foobar",
+      label: "Test Radio Label",
     });
     const rootEl = result.queryByTestId("root");
     const mockOnChange = vi.fn();
@@ -106,18 +106,18 @@ describe("RadioItem", () => {
     await fireEvent.click(input);
 
     expect(mockOnChange).toBeCalledTimes(1);
-    
+
     // Check that the event was called with the correct detail containing both value and label
     const calledEvent = mockOnChange.mock.calls[0][0];
     expect(calledEvent.detail).toEqual({
       value: "foobar",
-      label: "Test Radio Label"
+      label: "Test Radio Label",
     });
   });
 
   it("should handle the change event with empty label", async () => {
-    const result = render(GoARadioItem, { 
-      value: "test-value"
+    const result = render(GoARadioItem, {
+      value: "test-value",
       // No label provided
     });
     const rootEl = result.queryByTestId("root");
@@ -129,12 +129,12 @@ describe("RadioItem", () => {
     await fireEvent.click(input);
 
     expect(mockOnChange).toBeCalledTimes(1);
-    
+
     // Check that the event was called with the correct detail containing value and empty label
     const calledEvent = mockOnChange.mock.calls[0][0];
     expect(calledEvent.detail).toEqual({
       value: "test-value",
-      label: ""
+      label: "",
     });
   });
 
@@ -164,40 +164,42 @@ describe("RadioItem", () => {
   describe("Reveal slot", () => {
     it("should stop propagation but relay form field changes as _revealChange", async () => {
       const result = render(GoARadioItem, { value: "test-radio" });
-      const revealSlot = document.createElement('div');
-      revealSlot.setAttribute('slot', 'reveal');
-      revealSlot.textContent = 'Reveal content';
+      const revealSlot = document.createElement("div");
+      revealSlot.setAttribute("slot", "reveal");
+      revealSlot.textContent = "Reveal content";
 
-      const radioItem = result.container.querySelector('goa-radio-item');
+      const radioItem = result.container.querySelector("goa-radio-item");
       radioItem?.appendChild(revealSlot);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // _click event propagation (should be stopped)
       const clickSpy = vi.fn();
-      radioItem?.addEventListener('_click', clickSpy);
-      const clickEvent = new CustomEvent('_click', { bubbles: true });
+      radioItem?.addEventListener("_click", clickSpy);
+      const clickEvent = new CustomEvent("_click", { bubbles: true });
       revealSlot.dispatchEvent(clickEvent);
       expect(clickSpy).not.toHaveBeenCalled();
 
       // _change event propagation (should be stopped)
       const changeSpy = vi.fn();
-      radioItem?.addEventListener('_change', changeSpy);
+      radioItem?.addEventListener("_change", changeSpy);
 
       // _radioItemChange event propagation (should be stopped)
       const radioChangeSpy = vi.fn();
-      radioItem?.addEventListener('_radioItemChange', radioChangeSpy);
-      const radioChangeEvent = new CustomEvent('_radioItemChange', { bubbles: true });
+      radioItem?.addEventListener("_radioItemChange", radioChangeSpy);
+      const radioChangeEvent = new CustomEvent("_radioItemChange", {
+        bubbles: true,
+      });
       revealSlot.dispatchEvent(radioChangeEvent);
       expect(radioChangeSpy).not.toHaveBeenCalled();
 
       //  _revealChange event (should be dispatched for form fields)
       const revealChangeSpy = vi.fn();
-      radioItem?.addEventListener('_revealChange', revealChangeSpy);
+      radioItem?.addEventListener("_revealChange", revealChangeSpy);
 
       // Dispatch a _change event with form field details (name and value)
-      const changeEvent = new CustomEvent('_change', {
+      const changeEvent = new CustomEvent("_change", {
         bubbles: true,
-        detail: { name: 'reveal-input', value: 'new-value' }
+        detail: { name: "reveal-input", value: "new-value" },
       });
       revealSlot.dispatchEvent(changeEvent);
 
@@ -206,36 +208,36 @@ describe("RadioItem", () => {
         expect(revealChangeSpy).toHaveBeenCalledTimes(1);
 
         const relayedEvent = revealChangeSpy.mock.calls[0][0] as CustomEvent;
-        expect(relayedEvent.detail.name).toBe('reveal-input');
-        expect(relayedEvent.detail.value).toBe('new-value');
+        expect(relayedEvent.detail.name).toBe("reveal-input");
+        expect(relayedEvent.detail.value).toBe("new-value");
       }, 1000);
     });
 
     it("should not dispatch _revealChange for non-form field events", async () => {
       const result = render(GoARadioItem, { value: "test-radio" });
-      const revealSlot = document.createElement('div');
-      revealSlot.setAttribute('slot', 'reveal');
-      revealSlot.textContent = 'Reveal content';
+      const revealSlot = document.createElement("div");
+      revealSlot.setAttribute("slot", "reveal");
+      revealSlot.textContent = "Reveal content";
 
-      const radioItem = result.container.querySelector('goa-radio-item');
+      const radioItem = result.container.querySelector("goa-radio-item");
       radioItem?.appendChild(revealSlot);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const revealChangeSpy = vi.fn();
-      radioItem?.addEventListener('_revealChange', revealChangeSpy);
+      radioItem?.addEventListener("_revealChange", revealChangeSpy);
 
       // Test accordion change event
-      const accordionChangeEvent = new CustomEvent('_change', {
+      const accordionChangeEvent = new CustomEvent("_change", {
         bubbles: true,
-        detail: { open: true }
+        detail: { open: true },
       });
       revealSlot.dispatchEvent(accordionChangeEvent);
       expect(revealChangeSpy).not.toHaveBeenCalled();
 
       // Test event without name property
-      const invalidEvent = new CustomEvent('_change', {
+      const invalidEvent = new CustomEvent("_change", {
         bubbles: true,
-        detail: { value: 'some-value' }
+        detail: { value: "some-value" },
       });
       revealSlot.dispatchEvent(invalidEvent);
       expect(revealChangeSpy).not.toHaveBeenCalled();

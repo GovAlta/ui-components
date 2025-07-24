@@ -27,7 +27,7 @@ describe("Radio", () => {
           <GoabButton
             testId="toggle-button"
             onClick={() => {
-              setIsDisabled(!isDisabled);
+              setIsDisabled((value) => !value);
             }}
           >
             {isDisabled ? "Enable" : "Disable"}
@@ -39,79 +39,63 @@ describe("Radio", () => {
     };
 
     const result = render(<Component />);
+    const radioItems = result.getByTestId(/^radio-option-.*/);
 
     // Check that radio inputs are actually disabled
     await vi.waitFor(async () => {
-      // Get the goa-radio-item elements
-      const radioItems = result.container.querySelectorAll("goa-radio-item");
-      expect(radioItems.length).toBe(2);
+      expect(radioItems.elements().length).toBe(2);
+    });
 
-      // Access the shadow root of each radio item to find the elements with data-testid
-      const appleRadio = radioItems[0];
-      const bananaRadio = radioItems[1];
+    for (const item of radioItems.elements()) {
+      expect((item as HTMLInputElement).disabled).toBeTruthy();
+    }
 
-      const appleShadow = appleRadio.shadowRoot;
-      const bananaShadow = bananaRadio.shadowRoot;
+    // Try to click a radio item - it should not work when disabled
+    for (const item of radioItems.elements()) {
+      (item as HTMLInputElement).click();
+    }
 
-      expect(appleShadow).toBeTruthy();
-      expect(bananaShadow).toBeTruthy();
+    // check that no value was selected
+    await vi.waitFor(() => {
+      const selectedValue = result.getByTestId("selected-value");
+      expect(selectedValue.element().textContent).toBe("");
+    });
 
-      // Verify the radio inputs are disabled
-      const appleInput = appleShadow?.querySelector(
-        "input[type='radio']",
-      ) as HTMLInputElement;
-      const bananaInput = bananaShadow?.querySelector(
-        "input[type='radio']",
-      ) as HTMLInputElement;
+    // Click the toggle button to enable the radio group
+    const toggleButton = result.getByTestId("toggle-button");
+    await toggleButton.click();
 
-      expect(appleInput?.hasAttribute("disabled")).toBe(true);
-      expect(bananaInput?.hasAttribute("disabled")).toBe(true);
+    // Check that radio inputs are now enabled
+    for (const item of radioItems.elements()) {
+      expect((item as HTMLInputElement).disabled).toBeFalsy();
+    }
 
-      // Try to click a radio item - it should not work when disabled
-      await appleInput?.click();
+    // Now try to click a radio item - it should work when enabled
+    const appleRadioItem = radioItems.elements()[0];
+    (appleRadioItem as HTMLInputElement).click();
 
-      // Wait a moment and check that no value was selected
-      await vi.waitFor(() => {
-        const selectedValue = result.getByTestId("selected-value");
-        expect(selectedValue.element().textContent).toBe("");
-      });
+    // Check that the value was selected
+    await vi.waitFor(() => {
+      const selectedValue = result.getByTestId("selected-value");
+      expect(selectedValue.element().textContent).toBe("apple");
+    });
 
-      // Click the toggle button to enable the radio group
-      const toggleButton = result.getByTestId("toggle-button");
-      await toggleButton.click();
+    // Click the toggle button again to disable the radio group
+    await toggleButton.click();
 
-      // Check that radio inputs are now enabled
-      await vi.waitFor(() => {
-        expect(appleInput?.hasAttribute("disabled")).toBe(false);
-        expect(bananaInput?.hasAttribute("disabled")).toBe(false);
-      });
+    // Check that radio inputs are disabled again
+    for (const item of radioItems.elements()) {
+      expect((item as HTMLInputElement).disabled).toBeTruthy();
+    }
 
-      // Now try to click a radio item - it should work when enabled
-      await appleInput?.click();
+    // Try to click a different radio item - it should not work when disabled
+    const bananaRadioItem = radioItems.elements()[0];
+    (bananaRadioItem as HTMLInputElement).click();
 
-      // Check that the value was selected
-      await vi.waitFor(() => {
-        const selectedValue = result.getByTestId("selected-value");
-        expect(selectedValue.element().textContent).toBe("apple");
-      });
-
-      // Click the toggle button again to disable the radio group
-      await toggleButton.click();
-
-      // Check that radio inputs are disabled again
-      await vi.waitFor(() => {
-        expect(appleInput?.hasAttribute("disabled")).toBe(true);
-        expect(bananaInput?.hasAttribute("disabled")).toBe(true);
-      });
-
-      // Try to click a different radio item - it should not work when disabled
-      await bananaInput?.click();
-
-      // Check that the value didn't change (should still be apple)
-      await vi.waitFor(() => {
-        const selectedValue = result.getByTestId("selected-value");
-        expect(selectedValue.element().textContent).toBe("apple");
-      });
+    // Check that the value didn't change (should still be apple)
+    await vi.waitFor(() => {
+      const selectedValue = result.getByTestId("selected-value");
+      expect(selectedValue.element().textContent).toBe("apple");
     });
   });
 });

@@ -1,14 +1,16 @@
-<svelte:options customElement={{
-  tag: "goa-radio-item",
-  props: {
-    value: { reflect: true },
-    description: { reflect: true },
-    checked: { reflect: true },
-    arialabel: { reflect: true },
-    error: { reflect: true },
-    revealarialabel: { reflect: true },
-  }
-}}/>
+<svelte:options
+  customElement={{
+    tag: "goa-radio-item",
+    props: {
+      value: { reflect: true },
+      description: { reflect: true },
+      checked: { reflect: true },
+      arialabel: { reflect: true },
+      error: { reflect: true },
+      revealarialabel: { reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts" context="module">
   export type GoARadioItemProps = {
@@ -32,10 +34,21 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { dispatch, fromBoolean, receive, relay, toBoolean, announceToScreenReader } from "../../common/utils";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+    announceToScreenReader,
+  } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
-  import { FieldsetResetFieldsMsg, FormFieldMountMsg, FormFieldMountRelayDetail } from "../../types/relay-types";
+  import {
+    FieldsetResetFieldsMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+  } from "../../types/relay-types";
 
   export let value: string;
   export let name: string = "";
@@ -124,7 +137,11 @@
 
     // If this is a form field value change (public form)
     // relay it so the Fieldset initialize the reveal slot form field to public form state
-    if (eventDetail && eventDetail.name && typeof eventDetail.value !== 'undefined') {
+    if (
+      eventDetail &&
+      eventDetail.name &&
+      typeof eventDetail.value !== "undefined"
+    ) {
       dispatch(_radioItemEl, "_revealChange", eventDetail, { bubbles: true });
     }
   }
@@ -159,7 +176,7 @@
             checked: isChecked,
             ariaLabel: arialabel,
             maxWidth: maxwidth,
-            revealAriaLabel: revealarialabel
+            revealAriaLabel: revealarialabel,
           },
         }),
       );
@@ -188,10 +205,20 @@
     if (isDisabled) return;
     // if (isChecked) return;  FIXME: does having this uncommented break something?
 
-    dispatch(_radioItemEl, "_radioItemChange", { value, label }, { bubbles: true })
+    dispatch(
+      _radioItemEl,
+      "_radioItemChange",
+      { value, label },
+      { bubbles: true },
+    );
 
     // Announce the reveal content change to screen readers if radio is checked and reveal content exists
-    if ($$slots.reveal && isChecked && revealarialabel && revealarialabel !== "") {
+    if (
+      $$slots.reveal &&
+      isChecked &&
+      revealarialabel &&
+      revealarialabel !== ""
+    ) {
       announceToScreenReader(revealarialabel);
     }
 
@@ -218,7 +245,6 @@
   class="container"
 >
   <label
-    data-testid="radio-option-{value}"
     class="radio"
     class:radio--disabled={isDisabled}
     class:radio--error={isError}
@@ -227,6 +253,7 @@
       type="radio"
       {name}
       {value}
+      data-testid="radio-option-{value}"
       disabled={isDisabled}
       checked={isChecked}
       aria-label={arialabel}
@@ -247,11 +274,13 @@
       {description}
     </div>
   {/if}
-  <div class="reveal"
-       class:visible={$$slots.reveal && isChecked}
-       class:has-content={revealSlotHasContent}
-       bind:this={_revealSlotEl}
-       bind:clientHeight={_revealSlotHeight}>
+  <div
+    class="reveal"
+    class:visible={$$slots.reveal && isChecked}
+    class:has-content={revealSlotHasContent}
+    bind:this={_revealSlotEl}
+    bind:clientHeight={_revealSlotHeight}
+  >
     <slot name="reveal" />
   </div>
 </div>
@@ -337,7 +366,7 @@
 
   /* States --------------------------------------------- */
 
-/* Unchecked */
+  /* Unchecked */
   input[type="radio"]:not(:checked) ~ .icon {
     border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
     margin-top: 3px;
@@ -391,7 +420,7 @@
     outline: var(--goa-radio-border-focus);
     border: var(--goa-radio-border-error);
   }
-  .radio--error input[type="radio"]:checked ~ .icon{
+  .radio--error input[type="radio"]:checked ~ .icon {
     border: var(--goa-radio-border-checked-error);
   }
   .radio--error input[type="radio"]:checked:hover ~ .icon {
@@ -399,7 +428,7 @@
   }
   .radio--error input[type="radio"]:checked:hover:focus-visible ~ .icon {
     outline: var(--goa-radio-border-focus);
-     border: var(--goa-radio-border-checked-error);
+    border: var(--goa-radio-border-checked-error);
   }
   .radio--error input[type="radio"]:disabled ~ .icon {
     border: var(--goa-radio-border-error-disabled);
