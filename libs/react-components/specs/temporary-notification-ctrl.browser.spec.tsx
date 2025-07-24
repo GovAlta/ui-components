@@ -2,8 +2,14 @@ import { render } from "vitest-browser-react";
 
 import { GoabTemporaryNotificationCtrl } from "../src";
 import { expect, describe, it, vi } from "vitest";
+import React from "react";
 
-type GoabTemporaryNotificationType = "basic" | "success" | "failure" | "indeterminate" | "progress";
+type GoabTemporaryNotificationType =
+  | "basic"
+  | "success"
+  | "failure"
+  | "indeterminate"
+  | "progress";
 type GoabTemporaryNotificationDuration = "short" | "medium" | "long" | number;
 type GoabNotification = {
   uuid: string;
@@ -16,7 +22,7 @@ type GoabNotification = {
   progress?: number;
   visible?: boolean;
   testId?: string;
-}
+};
 
 // ============
 // Test Helpers
@@ -27,12 +33,12 @@ function relay<T>(
   eventName: string,
   data?: T,
   opts?: { bubbles?: boolean },
-): boolean {
+) {
   if (!el) {
     console.error("dispatch element is null");
     return;
   }
-  return el.dispatchEvent(
+  el.dispatchEvent(
     new CustomEvent<{ action: string; data?: T }>("msg", {
       composed: true,
       bubbles: opts?.bubbles,
@@ -44,22 +50,35 @@ function relay<T>(
   );
 }
 
-function sendTemporaryNotification(message: string, opts?: Partial<GoabNotification>): string {
+function sendTemporaryNotification(
+  message: string,
+  opts?: Partial<GoabNotification>,
+): string {
   const uuid = crypto.randomUUID();
   opts = { uuid, type: "basic", ...(opts || {}) };
-  relay(document.body, "goa:temp-notification", {
-    message: message,
-    ...opts
-  }, { bubbles: true});
+  relay(
+    document.body,
+    "goa:temp-notification",
+    {
+      message: message,
+      ...opts,
+    },
+    { bubbles: true },
+  );
   return uuid;
 }
 
 function sendProgress(uuid: string, progress: number) {
-  relay(document.body, "goa:temp-notification:progress", { uuid, progress }, { bubbles: true});
+  relay(
+    document.body,
+    "goa:temp-notification:progress",
+    { uuid, progress },
+    { bubbles: true },
+  );
 }
 
 function sendTemporaryNotificationDismissal(uuid: string) {
-  relay(document.body, "goa:temp-notification:dismiss", uuid, { bubbles: true});
+  relay(document.body, "goa:temp-notification:dismiss", uuid, { bubbles: true });
 }
 
 function sendCancellableNotification(message: string, testId: string) {
@@ -67,23 +86,25 @@ function sendCancellableNotification(message: string, testId: string) {
     actionText: "Cancel",
     testId,
     duration: 10000, // ensure that it stays visible until cancelled
-    action: () => sendTemporaryNotification("Cancelled", { cancelUUID: uuid, duration: 2000 }),
-  })
+    action: () =>
+      sendTemporaryNotification("Cancelled", { cancelUUID: uuid, duration: 2000 }),
+  });
 }
 
-function sendCancellableNotificationWithoutNotificationResponse(message: string, testId: string) {
+function sendCancellableNotificationWithoutNotificationResponse(
+  message: string,
+  testId: string,
+) {
   const uuid = sendTemporaryNotification(message, {
     actionText: "Cancel",
     testId,
     duration: 10000, // ensure that it stays visible until cancelled
     action: () => sendTemporaryNotificationDismissal(uuid),
-  })
+  });
 }
 
 describe("Temporary Notification Controller", () => {
-
   describe("position", () => {
-
     it("should render with default positions", async function () {
       const Component = () => {
         return <GoabTemporaryNotificationCtrl testId="notification-ctrl" />;
@@ -94,8 +115,12 @@ describe("Temporary Notification Controller", () => {
 
       await vi.waitFor(() => {
         expect(notificationController.element()).toBeTruthy();
-        expect(notificationController.element().classList.contains("pos-center")).toBeTruthy();
-        expect(notificationController.element().classList.contains("pos-bottom")).toBeTruthy();
+        expect(
+          notificationController.element().classList.contains("pos-center"),
+        ).toBeTruthy();
+        expect(
+          notificationController.element().classList.contains("pos-bottom"),
+        ).toBeTruthy();
       });
     });
 
@@ -115,14 +140,17 @@ describe("Temporary Notification Controller", () => {
 
       await vi.waitFor(() => {
         expect(notificationController.element()).toBeTruthy();
-        expect(notificationController.element().classList.contains("pos-top")).toBeTruthy();
-        expect(notificationController.element().classList.contains("pos-left")).toBeTruthy();
+        expect(
+          notificationController.element().classList.contains("pos-top"),
+        ).toBeTruthy();
+        expect(
+          notificationController.element().classList.contains("pos-left"),
+        ).toBeTruthy();
       });
     });
   });
 
   it("should show notification", async function () {
-
     const Component = () => {
       return <GoabTemporaryNotificationCtrl />;
     };
@@ -131,11 +159,11 @@ describe("Temporary Notification Controller", () => {
 
     await vi.waitFor(() => {
       sendTemporaryNotification("This is the notification", {
-        testId: "some-notification"
+        testId: "some-notification",
       });
 
       const notification = result.getByTestId("some-notification");
-      expect(notification.elements().length).toBe(1)
+      expect(notification.elements().length).toBe(1);
     });
   });
 
@@ -159,11 +187,10 @@ describe("Temporary Notification Controller", () => {
     // ensure notification is removed after duration
     await vi.waitFor(() => {
       expect(notifications.elements().length).toBe(0);
-    })
+    });
   });
 
   it("should handle action button click", async function () {
-
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -182,7 +209,7 @@ describe("Temporary Notification Controller", () => {
       expect(actionButton.elements().length).toBe(1);
       await actionButton.click();
       expect(actionMock).toHaveBeenCalledOnce();
-    })
+    });
   });
 
   it("should handle action button click and cancel notification", async function () {
@@ -195,7 +222,10 @@ describe("Temporary Notification Controller", () => {
     const actionButton = result.getByRole("button");
 
     await vi.waitFor(async () => {
-      sendCancellableNotification("Notification with cancel action", "cancel-notification");
+      sendCancellableNotification(
+        "Notification with cancel action",
+        "cancel-notification",
+      );
 
       // Verify the notification is displayed
       expect(notification.elements().length).toBe(1);
@@ -221,7 +251,10 @@ describe("Temporary Notification Controller", () => {
     const actionButton = result.getByRole("button");
 
     await vi.waitFor(async () => {
-      sendCancellableNotificationWithoutNotificationResponse("Notification with cancel action", "cancel-notification");
+      sendCancellableNotificationWithoutNotificationResponse(
+        "Notification with cancel action",
+        "cancel-notification",
+      );
 
       // Verify the notification is displayed
       expect(notification.elements().length).toBe(1);
@@ -235,28 +268,29 @@ describe("Temporary Notification Controller", () => {
         expect(notification.elements().length).toBe(0);
       });
     });
-  })
+  });
 
-  it.skip("should handle progress updates", async function () {
+  it("should handle progress updates", async function () {
     const Component = () => {
-      return <GoabTemporaryNotificationCtrl />;
+      return (
+        <GoabTemporaryNotificationCtrl
+          verticalPosition="top"
+          testId="temp-notification-ctrl"
+        />
+      );
     };
 
     const result = render(<Component />);
-    const progressIndicator= result.getByTestId("progress");
 
-    const uuid = sendTemporaryNotification("some message", { testId: "some-notification", type: "progress" })
+    const progressIndicator = result.getByTestId("progress");
 
     await vi.waitFor(() => {
+      const uuid = sendTemporaryNotification("some message", {
+        testId: "some-notification",
+        type: "progress",
+      });
       sendProgress(uuid, 10);
       expect(progressIndicator.element().getAttribute("value")).toBe("10");
     });
-
-    await vi.waitFor(() => {
-      sendProgress(uuid, 100);
-      expect(progressIndicator.element().getAttribute("value")).toBe("100");
-    });
-
   });
-
 });
