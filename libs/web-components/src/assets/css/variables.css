@@ -8,4 +8,108 @@
 	--shadow-3: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
 	--shadow-4: 0 15px 25px rgba(0, 0, 0, 0.15), 0 5px 10px rgba(0, 0, 0, 0.05);
 	--shadow-5: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+	/* TEMPORARY: New callout design tokens for testing - these will come from @abgov/design-tokens after release */
+
+	/* Emphasis level padding tokens */
+	--goa-callout-h-content-padding: 16px 20px 20px 20px;
+	--goa-callout-h-content-padding-mobile: 12px 16px 16px 16px;
+	--goa-callout-h-statusbar-padding: 12px 12px 12px 18px;
+	--goa-callout-h-statusbar-padding-mobile: 12px 16px;
+
+	--goa-callout-m-content-padding: 16px 20px 20px 20px;
+	--goa-callout-m-content-padding-mobile: 12px 16px 16px 16px;
+	--goa-callout-m-statusbar-padding: 12px 12px 12px 18px;
+	--goa-callout-m-statusbar-padding-mobile: 12px 16px;
+
+	--goa-callout-l-content-padding: 4px 20px 20px 20px !important;
+	--goa-callout-l-content-padding-mobile: 0px 16px 16px 16px;
+	--goa-callout-l-statusbar-padding: 12px 12px 12px 18px;
+	--goa-callout-l-statusbar-padding-mobile: 12px 16px;
+
+	--goa-callout-l-no-heading-padding: 16px 20px 16px 20px;
+	--goa-callout-l-no-heading-padding-mobile: 16px;
+
+	/* Border colors by type and emphasis */
+	--goa-callout-info-border-color-h: #98D4EE;
+	--goa-callout-info-border-color-m: #E1DEDD;
+	--goa-callout-info-border-color-l: #98D4EE;
+
+	--goa-callout-important-border-color-h: #FDE3A1;
+	--goa-callout-important-border-color-m: #E1DEDD;
+	--goa-callout-important-border-color-l: #FDE3A1;
+
+	--goa-callout-success-border-color-h: #CCEAE1;
+	--goa-callout-success-border-color-m: #E1DEDD;
+	--goa-callout-success-border-color-l: #CCEAE1;
+
+	--goa-callout-emergency-border-color-h: #F4C8C5;
+	--goa-callout-emergency-border-color-m: #E1DEDD;
+	--goa-callout-emergency-border-color-l: #F4C8C5;
+
+	/* Statusbar background colors */
+	--goa-callout-info-color-bg-statusbar-h: #0077AD;
+	--goa-callout-info-color-bg-statusbar-m: #CBEAF7;
+	--goa-callout-info-color-bg-statusbar-l: #EBF8FF;
+
+	--goa-callout-important-color-bg-statusbar-h: #FFB800;
+	--goa-callout-important-color-bg-statusbar-m: #FFF1CC;
+	--goa-callout-important-color-bg-statusbar-l: #FFF6E5;
+
+	--goa-callout-success-color-bg-statusbar-h: #006F4C;
+	--goa-callout-success-color-bg-statusbar-m: #D8F7E6;
+	--goa-callout-success-color-bg-statusbar-l: #EDFCF0;
+
+	--goa-callout-emergency-color-bg-statusbar-h: #DA291C;
+	--goa-callout-emergency-color-bg-statusbar-m: #FDDED9;
+	--goa-callout-emergency-color-bg-statusbar-l: #FFF6F6;
+
+	/* Content background colors */
+	--goa-callout-info-color-bg-content-h: #EBF8FF;
+	--goa-callout-info-color-bg-content-m: #ffffff;
+	--goa-callout-info-color-bg-content-l: #EBF8FF;
+
+	--goa-callout-important-color-bg-content-h: #FFF6E5;
+	--goa-callout-important-color-bg-content-m: #ffffff;
+	--goa-callout-important-color-bg-content-l: #FFF6E5;
+
+	--goa-callout-success-color-bg-content-h: #EDFCF0;
+	--goa-callout-success-color-bg-content-m: #ffffff;
+	--goa-callout-success-color-bg-content-l: #EDFCF0;
+
+	--goa-callout-emergency-color-bg-content-h: #FFF6F6;
+	--goa-callout-emergency-color-bg-content-m: #ffffff;
+	--goa-callout-emergency-color-bg-content-l: #FFF6F6;
+
+	/* Icon colors by type and emphasis */
+	--goa-callout-info-icon-color-h: #ffffff;
+	--goa-callout-info-icon-color-m: #0077AD;
+	--goa-callout-info-icon-color-l: #0077AD;
+
+	--goa-callout-important-icon-color-h: #333333;
+	--goa-callout-important-icon-color-m: #CC9300;
+	--goa-callout-important-icon-color-l: #CC9300;
+
+	--goa-callout-success-icon-color-h: #ffffff;
+	--goa-callout-success-icon-color-m: #006F4C;
+	--goa-callout-success-icon-color-l: #006F4C;
+
+	--goa-callout-emergency-icon-color-h: #ffffff;
+	--goa-callout-emergency-icon-color-m: #DA291C;
+	--goa-callout-emergency-icon-color-l: #DA291C;
+
+	/* Typography tokens - with stronger overrides */
+	--goa-callout-heading-typography: var(--goa-typography-heading-s) !important;
+	--goa-callout-content-typography: var(--goa-typography-body-m) !important;
+
+	/* Text colors for headings - high emphasis uses light text on dark backgrounds */
+	--goa-color-text-light: #ffffff;
+
+	/* Border radius - override the existing none value */
+	--goa-callout-border-radius: 12px !important;
+	
+	/* Medium size compatibility tokens (deprecated size prop) */
+	--goa-callout-m-text-size: var(--goa-typography-body-s);
+	--goa-callout-m-border-width: var(--goa-border-width-s);
+	--goa-callout-m-heading-size: var(--goa-typography-heading-xs);
 }

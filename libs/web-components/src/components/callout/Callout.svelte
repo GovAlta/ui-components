@@ -21,7 +21,7 @@
   ]);
   const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator("Callout emphasis", [
     "high",
-    "medium", 
+    "medium",
     "low",
   ]);
   const [AriaLive, validateAriaLive] = typeValidator("Aria live", [
@@ -73,6 +73,10 @@
               ? "calendar"
               : "";
 
+  $: actualIconTheme = emphasis === "high" ? icontheme : "filled";
+
+  $: iconSize = isMediumCallout ? "small" : "medium";
+
   onMount(() => {
     validateCalloutSize(size);
     validateCalloutEmphasis(emphasis);
@@ -83,7 +87,6 @@
       if (type === "event") {
         console.warn("Callout type 'event' is deprecated and will be removed in a future version. Please use a different type.");
       }
-      iconSize = isMediumCallout ? "small" : "medium";
     });
   });
 </script>
@@ -102,19 +105,49 @@
   data-testid={testid}
   aria-live={arialive}
 >
-  <span class="icon {type} emphasis-{emphasis}">
-    <goa-icon
-      type={iconType}
-      size={iconSize}
-      theme={icontheme}
-    />
-  </span>
-  <span class="content {type} emphasis-{emphasis}">
-    {#if heading}
-      <h3 class:medium={isMediumCallout} class="emphasis-{emphasis}">{heading}</h3>
-    {/if}
-    <slot />
-  </span>
+  {#if emphasis === "high" || emphasis === "medium"}
+    <!-- High/Medium: Full-width statusbar on top with icon + heading -->
+    <div class="statusbar {type} emphasis-{emphasis}">
+      <goa-icon
+        type={iconType}
+        size={iconSize}
+        theme={actualIconTheme}
+      />
+      {#if heading}
+        <h3 class="heading emphasis-{emphasis}">{heading}</h3>
+      {/if}
+    </div>
+    <div class="content {type} emphasis-{emphasis}">
+      <slot />
+    </div>
+  {:else if emphasis === "low" && !heading}
+    <!-- Low emphasis without heading: Icon + content in flex-row -->
+    <div class="low-no-heading-container">
+      <goa-icon
+        type={iconType}
+        size={iconSize}
+        theme={actualIconTheme}
+      />
+      <div class="content {type} emphasis-{emphasis}">
+        <slot />
+      </div>
+    </div>
+  {:else}
+    <!-- Low emphasis with heading: Same structure as high/medium -->
+    <div class="statusbar {type} emphasis-{emphasis}">
+      <goa-icon
+        type={iconType}
+        size={iconSize}
+        theme={actualIconTheme}
+      />
+      {#if heading}
+        <h3 class="heading emphasis-{emphasis}">{heading}</h3>
+      {/if}
+    </div>
+    <div class="content {type} emphasis-{emphasis}">
+      <slot />
+    </div>
+  {/if}
 </div>
 
 <!-- Style -->
@@ -123,182 +156,348 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
   .notification {
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
     overflow: hidden;
-    font: var(--goa-callout-l-text-size);
-    border: var(--goa-callout-l-border-width) solid;
+    border: var(--goa-border-width-s) solid;
     border-radius: var(--goa-callout-border-radius);
   }
 
-  h3 {
-    font: var(--goa-callout-l-heading-size);
-    margin-top: var(--goa-space-none);
-    margin-bottom: var(--goa-callout-l-content-gap);
-  }
-
-  .icon.information {
-    background-color: var(--goa-callout-info-color-bg-statusbar);
-  }
-
-  .icon.information > * {
-    fill: var(--fill-color, var(--goa-callout-info-icon-color));
-    color: var(--fill-color, var(--goa-callout-info-icon-color));
-  }
-  .icon.important > * {
-    fill: var(--fill-color, var(--goa-callout-warning-icon-color));
-    color: var(--fill-color, var(--goa-callout-warning-icon-color));
-  }
-  .icon.success > * {
-    fill: var(--fill-color, var(--goa-callout-success-icon-color));
-    color: var(--fill-color, var(--goa-callout-success-icon-color));
-  }
-  .icon.emergency > * {
-    fill: var(--fill-color, var(--goa-callout-emergency-icon-color));
-    color: var(--fill-color, var(--goa-callout-emergency-icon-color));
-  }
-  .icon.event > * {
-    fill: var(--fill-color, var(--goa-callout-event-icon-color));
-    color: var(--fill-color, var(--goa-callout-event-icon-color));
-  }
-
-  .icon.emergency {
-    background-color: var(--goa-color-emergency-default);
-  }
-  .icon.important {
-    background-color: var(--goa-callout-warning-color-bg-statusbar);
-  }
-  .icon.information {
-    background-color: var(--goa-color-info-default);
-  }
-  .icon.event {
-    background-color: var(--goa-color-info-default);
-  }
-  .icon.success {
-    background-color: var(--goa-callout-success-color-bg-statusbar);
-  }
-  .icon.emergency {
-    background-color: var(--goa-callout-emergency-color-bg-statusbar);
-  }
-
-  .icon {
-    text-align: center;
-    padding: var(--goa-callout-l-statusbar-padding);
-  }
-
-  .content.information {
-    background-color: var(--goa-callout-info-color-bg-content);
-  }
-  .content.important {
-    background-color: var(--goa-callout-warning-color-bg-content);
-  }
-  .content.success {
-    background-color: var(--goa-callout-success-color-bg-content);
-  }
-  .content.emergency {
-    background-color: var(--goa-callout-emergency-color-bg-content);
-  }
-  .content {
-    flex: 1 1 auto;
-    background-color: var(--goa-color-greyscale-100);
-    padding: var(--goa-callout-l-content-padding);
-  }
-
-  .notification.information {
-    border-color: var(--goa-callout-info-border-color);
-  }
-  .notification.important {
-    border-color: var(--goa-callout-warning-border-color);
-  }
-  .notification.success {
-    border-color: var(--goa-callout-success-border-color);
-  }
-  .notification.emergency {
-    border-color: var(--goa-callout-emergency-border-color);
-  }
-  
-  /* Emphasis level styles */
-  .notification.emphasis-high {
-    border-width: var(--goa-callout-high-border-width, var(--goa-callout-l-border-width));
-    font: var(--goa-callout-high-text-size, var(--goa-callout-l-text-size));
-  }
-  
-  .notification.emphasis-medium {
-    border-width: var(--goa-callout-medium-border-width, var(--goa-callout-l-border-width));
-    font: var(--goa-callout-medium-text-size, var(--goa-callout-l-text-size));
-  }
-  
+  /* High, Medium, and Low emphasis: Full-width statusbar on top */
+  .notification.emphasis-high,
+  .notification.emphasis-medium,
   .notification.emphasis-low {
-    border-width: var(--goa-callout-low-border-width, var(--goa-callout-l-border-width));
-    font: var(--goa-callout-low-text-size, var(--goa-callout-l-text-size));
+    display: flex;
+    flex-direction: column;
   }
-  
-  /* High emphasis styles */
-  .notification.emphasis-high .icon {
-    padding: var(--goa-callout-high-statusbar-padding, var(--goa-callout-l-statusbar-padding));
+
+  .statusbar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--goa-space-xs);
+    padding: var(--goa-callout-h-statusbar-padding); /* Default to high emphasis padding */
   }
-  
-  .notification.emphasis-high .content {
-    padding: var(--goa-callout-high-content-padding, var(--goa-callout-l-content-padding));
+
+  /* Adjust text alignment to match icon baseline */
+  .statusbar .heading {
+    margin-top: -3px;
   }
-  
-  .notification.emphasis-high h3 {
-    font: var(--goa-callout-high-heading-size, var(--goa-callout-l-heading-size));
-    margin-bottom: var(--goa-callout-high-content-gap, var(--goa-callout-l-content-gap));
+
+  .heading {
+    font: var(--goa-callout-heading-typography);
+    margin: 0;
   }
-  
-  /* Medium emphasis styles */
-  .notification.emphasis-medium .icon {
-    padding: var(--goa-callout-medium-statusbar-padding, var(--goa-callout-l-statusbar-padding));
+
+  .content {
+    padding: var(--goa-callout-h-content-padding); /* Default to high emphasis padding */
   }
-  
-  .notification.emphasis-medium .content {
-    padding: var(--goa-callout-medium-content-padding, var(--goa-callout-l-content-padding));
-  }
-  
-  .notification.emphasis-medium h3 {
-    font: var(--goa-callout-medium-heading-size, var(--goa-callout-l-heading-size));
-    margin-bottom: var(--goa-callout-medium-content-gap, var(--goa-callout-l-content-gap));
-  }
-  
-  /* Low emphasis styles */
-  .notification.emphasis-low .icon {
-    padding: var(--goa-callout-low-statusbar-padding, var(--goa-callout-l-statusbar-padding));
-  }
-  
+
+  /* Low emphasis content: Reduced top padding */
   .notification.emphasis-low .content {
-    padding: var(--goa-callout-low-content-padding, var(--goa-callout-l-content-padding));
+    padding: var(--goa-callout-l-content-padding) !important;
   }
-  
-  .notification.emphasis-low h3 {
-    font: var(--goa-callout-low-heading-size, var(--goa-callout-l-heading-size));
-    margin-bottom: var(--goa-callout-low-content-gap, var(--goa-callout-l-content-gap));
+
+  /* Background colors for entire low emphasis callouts */
+  .notification.information.emphasis-low {
+    background-color: var(--goa-callout-info-color-bg-content-l);
   }
-  
-  /* Low emphasis without heading adjustment */
-  .notification.emphasis-low.no-heading .content {
-    padding: var(--goa-callout-low-content-padding-no-heading, var(--goa-callout-low-content-padding, var(--goa-callout-l-content-padding)));
+
+  .notification.important.emphasis-low {
+    background-color: var(--goa-callout-important-color-bg-content-l);
   }
-  
-  .notification.emphasis-low.no-heading .icon {
-    padding: var(--goa-callout-low-statusbar-padding-no-heading, var(--goa-callout-low-statusbar-padding, var(--goa-callout-l-statusbar-padding)));
+
+  .notification.success.emphasis-low {
+    background-color: var(--goa-callout-success-color-bg-content-l);
   }
-  
-  /*Medium callout style*/
+
+  .notification.emergency.emphasis-low {
+    background-color: var(--goa-callout-emergency-color-bg-content-l);
+  }
+
+  .notification.event.emphasis-low {
+    background-color: var(--goa-callout-info-color-bg-content-l);
+  }
+
+
+  /* Low emphasis without heading: Horizontal layout */
+  .low-no-heading-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    padding: var(--goa-callout-l-no-heading-padding);
+  }
+
+  /* Adjust content text alignment in no-heading layout */
+  .low-no-heading-container .content {
+    margin-top: -3px;
+  }
+
+  /* Remove padding from content inside no-heading container */
+  .notification.emphasis-low.no-heading .low-no-heading-container .content {
+    padding: 0 !important;
+  }
+
+  /* Background colors for low emphasis no-heading containers */
+  .notification.information.emphasis-low.no-heading .low-no-heading-container {
+    background-color: var(--goa-callout-info-color-bg-content-l);
+  }
+
+  .notification.important.emphasis-low.no-heading .low-no-heading-container {
+    background-color: var(--goa-callout-important-color-bg-content-l);
+  }
+
+  .notification.success.emphasis-low.no-heading .low-no-heading-container {
+    background-color: var(--goa-callout-success-color-bg-content-l);
+  }
+
+  .notification.emergency.emphasis-low.no-heading .low-no-heading-container {
+    background-color: var(--goa-callout-emergency-color-bg-content-l);
+  }
+
+  .notification.event.emphasis-low.no-heading .low-no-heading-container {
+    background-color: var(--goa-callout-info-color-bg-content-l);
+  }
+
+  /* Border colors by type and emphasis */
+  .notification.information.emphasis-high { border-color: var(--goa-callout-info-border-color-h); }
+  .notification.information.emphasis-medium { border-color: var(--goa-callout-info-border-color-m); }
+  .notification.information.emphasis-low { border-color: var(--goa-callout-info-border-color-l); }
+
+  .notification.important.emphasis-high { border-color: var(--goa-callout-important-border-color-h); }
+  .notification.important.emphasis-medium { border-color: var(--goa-callout-important-border-color-m); }
+  .notification.important.emphasis-low { border-color: var(--goa-callout-important-border-color-l); }
+
+  .notification.success.emphasis-high { border-color: var(--goa-callout-success-border-color-h); }
+  .notification.success.emphasis-medium { border-color: var(--goa-callout-success-border-color-m); }
+  .notification.success.emphasis-low { border-color: var(--goa-callout-success-border-color-l); }
+
+  .notification.emergency.emphasis-high { border-color: var(--goa-callout-emergency-border-color-h); }
+  .notification.emergency.emphasis-medium { border-color: var(--goa-callout-emergency-border-color-m); }
+  .notification.emergency.emphasis-low { border-color: var(--goa-callout-emergency-border-color-l); }
+
+  /* Statusbar background colors */
+  .statusbar.information.emphasis-high { background-color: var(--goa-callout-info-color-bg-statusbar-h); }
+  .statusbar.information.emphasis-medium { background-color: var(--goa-callout-info-color-bg-statusbar-m); }
+  .statusbar.information.emphasis-low { background-color: var(--goa-callout-info-color-bg-statusbar-l); }
+
+  .statusbar.important.emphasis-high { background-color: var(--goa-callout-important-color-bg-statusbar-h); }
+  .statusbar.important.emphasis-medium { background-color: var(--goa-callout-important-color-bg-statusbar-m); }
+  .statusbar.important.emphasis-low { background-color: var(--goa-callout-important-color-bg-statusbar-l); }
+
+  .statusbar.success.emphasis-high { background-color: var(--goa-callout-success-color-bg-statusbar-h); }
+  .statusbar.success.emphasis-medium { background-color: var(--goa-callout-success-color-bg-statusbar-m); }
+  .statusbar.success.emphasis-low { background-color: var(--goa-callout-success-color-bg-statusbar-l); }
+
+  .statusbar.emergency.emphasis-high { background-color: var(--goa-callout-emergency-color-bg-statusbar-h); }
+  .statusbar.emergency.emphasis-medium { background-color: var(--goa-callout-emergency-color-bg-statusbar-m); }
+  .statusbar.emergency.emphasis-low { background-color: var(--goa-callout-emergency-color-bg-statusbar-l); }
+
+  /* Content background colors */
+  .content.information.emphasis-high { background-color: var(--goa-callout-info-color-bg-content-h); }
+  .content.information.emphasis-medium { background-color: var(--goa-callout-info-color-bg-content-m); }
+  .content.information.emphasis-low { background-color: var(--goa-callout-info-color-bg-content-l); }
+
+  .content.important.emphasis-high { background-color: var(--goa-callout-important-color-bg-content-h); }
+  .content.important.emphasis-medium { background-color: var(--goa-callout-important-color-bg-content-m); }
+  .content.important.emphasis-low { background-color: var(--goa-callout-important-color-bg-content-l); }
+
+  .content.success.emphasis-high { background-color: var(--goa-callout-success-color-bg-content-h); }
+  .content.success.emphasis-medium { background-color: var(--goa-callout-success-color-bg-content-m); }
+  .content.success.emphasis-low { background-color: var(--goa-callout-success-color-bg-content-l); }
+
+  .content.emergency.emphasis-high { background-color: var(--goa-callout-emergency-color-bg-content-h); }
+  .content.emergency.emphasis-medium { background-color: var(--goa-callout-emergency-color-bg-content-m); }
+  .content.emergency.emphasis-low { background-color: var(--goa-callout-emergency-color-bg-content-l); }
+
+  /* Icon colors using proper design tokens */
+  .statusbar.information.emphasis-high > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-h);
+    color: var(--goa-callout-info-icon-color-h);
+  }
+
+  .statusbar.success.emphasis-high > goa-icon {
+    --fill-color: var(--goa-callout-success-icon-color-h);
+    color: var(--goa-callout-success-icon-color-h);
+  }
+
+  .statusbar.emergency.emphasis-high > goa-icon {
+    --fill-color: var(--goa-callout-emergency-icon-color-h);
+    color: var(--goa-callout-emergency-icon-color-h);
+  }
+
+  .statusbar.important.emphasis-high > goa-icon {
+    --fill-color: var(--goa-callout-important-icon-color-h);
+    color: var(--goa-callout-important-icon-color-h);
+  }
+
+  /* Heading text colors for high emphasis */
+  .statusbar.information.emphasis-high .heading,
+  .statusbar.success.emphasis-high .heading,
+  .statusbar.emergency.emphasis-high .heading,
+  .statusbar.event.emphasis-high .heading {
+    color: var(--goa-color-text-light);
+  }
+
+  /* Medium and low emphasis icons use proper design tokens */
+  .statusbar.information.emphasis-medium > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-m);
+    color: var(--goa-callout-info-icon-color-m);
+  }
+
+  .statusbar.information.emphasis-low > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-l);
+    color: var(--goa-callout-info-icon-color-l);
+  }
+
+  .statusbar.important.emphasis-medium > goa-icon {
+    --fill-color: var(--goa-callout-important-icon-color-m);
+    color: var(--goa-callout-important-icon-color-m);
+  }
+
+  .statusbar.important.emphasis-low > goa-icon {
+    --fill-color: var(--goa-callout-important-icon-color-l);
+    color: var(--goa-callout-important-icon-color-l);
+  }
+
+  .statusbar.success.emphasis-medium > goa-icon {
+    --fill-color: var(--goa-callout-success-icon-color-m);
+    color: var(--goa-callout-success-icon-color-m);
+  }
+
+  .statusbar.success.emphasis-low > goa-icon {
+    --fill-color: var(--goa-callout-success-icon-color-l);
+    color: var(--goa-callout-success-icon-color-l);
+  }
+
+  .statusbar.emergency.emphasis-medium > goa-icon {
+    --fill-color: var(--goa-callout-emergency-icon-color-m);
+    color: var(--goa-callout-emergency-icon-color-m);
+  }
+
+  .statusbar.emergency.emphasis-low > goa-icon {
+    --fill-color: var(--goa-callout-emergency-icon-color-l);
+    color: var(--goa-callout-emergency-icon-color-l);
+  }
+
+  /* Low emphasis no-heading icon styling - use proper design tokens */
+  .notification.information.emphasis-low.no-heading .low-no-heading-container > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-l);
+    color: var(--goa-callout-info-icon-color-l);
+  }
+
+  .notification.important.emphasis-low.no-heading .low-no-heading-container > goa-icon {
+    --fill-color: var(--goa-callout-important-icon-color-l);
+    color: var(--goa-callout-important-icon-color-l);
+  }
+
+  .notification.success.emphasis-low.no-heading .low-no-heading-container > goa-icon {
+    --fill-color: var(--goa-callout-success-icon-color-l);
+    color: var(--goa-callout-success-icon-color-l);
+  }
+
+  .notification.emergency.emphasis-low.no-heading .low-no-heading-container > goa-icon {
+    --fill-color: var(--goa-callout-emergency-icon-color-l);
+    color: var(--goa-callout-emergency-icon-color-l);
+  }
+
+  /* Event type (deprecated) - use same colors as information type */
+  .notification.event.emphasis-high { border-color: var(--goa-callout-info-border-color-h); }
+  .notification.event.emphasis-medium { border-color: var(--goa-callout-info-border-color-m); }
+  .notification.event.emphasis-low { border-color: var(--goa-callout-info-border-color-l); }
+
+  .statusbar.event.emphasis-high { background-color: var(--goa-callout-info-color-bg-statusbar-h); }
+  .statusbar.event.emphasis-medium { background-color: var(--goa-callout-info-color-bg-statusbar-m); }
+  .statusbar.event.emphasis-low { background-color: var(--goa-callout-info-color-bg-statusbar-l); }
+
+  .content.event.emphasis-high { background-color: var(--goa-callout-info-color-bg-content-h); }
+  .content.event.emphasis-medium { background-color: var(--goa-callout-info-color-bg-content-m); }
+  .content.event.emphasis-low { background-color: var(--goa-callout-info-color-bg-content-l); }
+
+  /* Event type icon colors - same as information type */
+  .statusbar.event.emphasis-high > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-h);
+    color: var(--goa-callout-info-icon-color-h);
+  }
+  .statusbar.event.emphasis-medium > goa-icon,
+  .statusbar.event.emphasis-low > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-m);
+    color: var(--goa-callout-info-icon-color-m);
+  }
+
+  /* Event type no-heading icon styling */
+  .notification.event.emphasis-low.no-heading .low-no-heading-container > goa-icon {
+    --fill-color: var(--goa-callout-info-icon-color-l);
+    color: var(--goa-callout-info-icon-color-l);
+  }
+
+  /*Medium size callout compatibility (deprecated size prop)*/
   .notification.medium {
     font: var(--goa-callout-m-text-size);
     border-width: var(--goa-callout-m-border-width);
   }
-  h3.medium {
-    font: var(--goa-callout-m-heading-size);
-    margin-bottom: var(--goa-callout-m-content-gap);
-  }
   .notification.medium .content {
     padding: var(--goa-callout-m-content-padding);
-    margin-top: calc(-1 * var(--goa-space-3xs));
   }
-  .notification.medium .icon {
+  .notification.medium .statusbar {
     padding: var(--goa-callout-m-statusbar-padding);
+  }
+  .notification.medium .heading {
+    font: var(--goa-callout-m-heading-size);
+  }
+
+  /* Mobile viewport specific adjustments (max-width: 623px) */
+  @media (max-width: 623px) {
+    /* Borders should show on mobile - same as large viewport */
+    .notification {
+      border: var(--goa-border-width-s) solid !important;
+    }
+
+    /* Border colors for mobile - use proper design tokens */
+    .notification.information.emphasis-high { border-color: var(--goa-callout-info-border-color-h) !important; }
+    .notification.information.emphasis-medium { border-color: var(--goa-callout-info-border-color-m) !important; }
+    .notification.information.emphasis-low { border-color: var(--goa-callout-info-border-color-l) !important; }
+
+    .notification.important.emphasis-high { border-color: var(--goa-callout-important-border-color-h) !important; }
+    .notification.important.emphasis-medium { border-color: var(--goa-callout-important-border-color-m) !important; }
+    .notification.important.emphasis-low { border-color: var(--goa-callout-important-border-color-l) !important; }
+
+    .notification.success.emphasis-high { border-color: var(--goa-callout-success-border-color-h) !important; }
+    .notification.success.emphasis-medium { border-color: var(--goa-callout-success-border-color-m) !important; }
+    .notification.success.emphasis-low { border-color: var(--goa-callout-success-border-color-l) !important; }
+
+    .notification.emergency.emphasis-high { border-color: var(--goa-callout-emergency-border-color-h) !important; }
+    .notification.emergency.emphasis-medium { border-color: var(--goa-callout-emergency-border-color-m) !important; }
+    .notification.emergency.emphasis-low { border-color: var(--goa-callout-emergency-border-color-l) !important; }
+
+    .notification.event.emphasis-high { border-color: var(--goa-callout-info-border-color-h) !important; }
+    .notification.event.emphasis-medium { border-color: var(--goa-callout-info-border-color-m) !important; }
+    .notification.event.emphasis-low { border-color: var(--goa-callout-info-border-color-l) !important; }
+
+    /* Use mobile-specific design tokens for padding */
+    .statusbar {
+      padding: var(--goa-callout-h-statusbar-padding-mobile) !important;
+    }
+
+    /* Content padding using mobile-specific tokens */
+    .notification.emphasis-high .content {
+      padding: var(--goa-callout-h-content-padding-mobile) !important;
+    }
+
+    .notification.emphasis-medium .content {
+      padding: var(--goa-callout-m-content-padding-mobile) !important;
+    }
+
+    .notification.emphasis-low .content {
+      padding: var(--goa-callout-l-content-padding-mobile) !important;
+    }
+
+    /* Mobile no-heading layout adjustments */
+    .notification.emphasis-low.no-heading .low-no-heading-container {
+      padding: var(--goa-callout-l-no-heading-padding-mobile) !important;
+    }
   }
 </style>
