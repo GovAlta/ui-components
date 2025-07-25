@@ -7,6 +7,29 @@ export type GoabRadioGroupOnChangeDetail = {
   value: string;
 };
 
+export interface GoabCheckboxListOnChangeDetail {
+  name: string;
+  value: string;
+  values: string[];
+}
+
+export type GoabCheckboxListOrientation = "vertical" | "horizontal";
+
+export const CheckboxListItemMountedMsg = "checkbox-list-item:mounted";
+export const CheckboxListItemDestroyMsg = "checkbox-list-item:destroy";
+
+export interface CheckboxListItemMountedRelayDetail {
+  value: string;
+  text: string;
+  disabled: boolean;
+  el: HTMLElement;
+  mountType: "append" | "prepend" | "reset";
+}
+
+export interface CheckboxListItemDestroyRelayDetail {
+  value: string;
+}
+
 export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
@@ -1032,7 +1055,6 @@ export interface GoabFieldsetOnContinueDetail {
 export type GoabPublicFormStatus = "initializing" | "complete";
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
-
 
 // Public form Task
 export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";

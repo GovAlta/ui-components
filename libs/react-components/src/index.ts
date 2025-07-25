@@ -9,6 +9,8 @@ export * from "./lib/button-group/button-group";
 export * from "./lib/calendar/calendar";
 export * from "./lib/callout/callout";
 export * from "./lib/checkbox/checkbox";
+export * from "./lib/checkbox-list/checkbox-list";
+export * from "./lib/checkbox-list/checkbox-list-item";
 export * from "./lib/chip/chip";
 export * from "./lib/circular-progress/circular-progress";
 export * from "./lib/container/container";

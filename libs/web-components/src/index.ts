@@ -15,6 +15,8 @@ export { default as Card } from "./components/card/Card.svelte";
 export { default as CardGroup } from "./components/card-group/CardGroup.svelte";
 export { default as CardImage } from "./components/card-image/CardImage.svelte";
 export { default as Checkbox } from "./components/checkbox/Checkbox.svelte";
+export { default as CheckboxList } from "./components/checkbox-list/CheckboxList.svelte";
+export { default as CheckboxListItem } from "./components/checkbox-list/CheckboxListItem.svelte";
 export { default as Chip } from "./components/chip/Chip.svelte";
 export { default as CircularProgress } from "./components/circular-progress/CircularProgress.svelte";
 export { default as Container } from "./components/container/Container.svelte";
