@@ -37,6 +37,7 @@
 
   let _rootEl: HTMLElement;
   let _isMobile: boolean;
+  let _isLoading: boolean = true;
   let _userInitiatedChange = false;
 
   // ========
@@ -51,6 +52,7 @@
     _rootEl.addEventListener("form-stepper:resized", (e: Event) => {
       const { mobile } = (e as CustomEvent).detail;
       _isMobile = mobile;
+      _isLoading = false; // Mark as loaded after receiving resize info
     });
 
     // receive parent el information
@@ -174,6 +176,7 @@
   class="step-container"
   class:mobile={_isMobile}
   class:desktop={!_isMobile}
+  class:loading={_isLoading}
   class:last={_isLast}
   role="listitem"
   data-status={status}
@@ -234,6 +237,10 @@
     height: 100%;
     width: 100%;
     padding: var(--goa-step-padding);
+  }
+
+  .step-container.loading {
+    display: none;
   }
 
   .step-container:focus-within:not([aria-current="step"]) {
