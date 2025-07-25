@@ -20,6 +20,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.name]="name"
     [checked]="checked"
     [disabled]="disabled"
+    [attr.indeterminate]="indeterminate ? 'true' : undefined"
     [attr.error]="error"
     [attr.text]="text"
     [value]="value"
@@ -56,6 +57,7 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabCheckbox extends GoabControlValueAccessor {
   @Input() name?: string;
   @Input({ transform: booleanAttribute }) checked?: boolean;
+  @Input({ transform: booleanAttribute }) indeterminate?: boolean;
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: string | number | boolean;

@@ -236,4 +236,54 @@ describe('GoACheckbox Component', () => {
       expect(checkbox).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
+
+
+  describe("indeterminate", () => {
+    it("defaults to false", async () => {
+      const el = await createElement();
+      const input = el.container.querySelector("input") as HTMLInputElement;
+
+      // native property should be false
+      expect(input.indeterminate).toBeFalsy();
+      // aria should reflect a determinate unchecked state by default
+      expect(input.getAttribute("aria-checked")).toBe("false");
+      // dash icon should not exist
+      const dash = el.queryByTestId("dashmark");
+      expect(dash).toBeNull();
+    });
+
+    it("renders dash and sets aria to mixed when true", async () => {
+      const el = await createElement({ indeterminate: "true" });
+      const input = el.container.querySelector("input") as HTMLInputElement;
+      const container = el.container.querySelector(".container");
+
+      // dash icon should be present
+      const dash = await el.findByTestId("dashmark");
+      expect(dash).toBeTruthy();
+      // native property should be true
+      expect(input.indeterminate).toBeTruthy();
+      // aria should be mixed
+      expect(input.getAttribute("aria-checked")).toBe("mixed");
+      // container should appear selected for styling
+      expect(container?.classList.contains("selected")).toBeTruthy();
+    });
+
+    it("can be toggled dynamically", async () => {
+      const el = await createElement({ indeterminate: "false" });
+      const input = el.container.querySelector("input") as HTMLInputElement;
+
+      // Initially not indeterminate
+      expect(input.indeterminate).toBeFalsy();
+      expect(input.getAttribute("aria-checked")).toBe("false");
+
+      // Update component props to make it indeterminate
+      await el.component.$set({ indeterminate: "true" });
+
+      expect(input.indeterminate).toBeTruthy();
+      expect(input.getAttribute("aria-checked")).toBe("mixed");
+      const dash = await el.findByTestId("dashmark");
+      expect(dash).toBeTruthy();
+    });
+
+    });
 });

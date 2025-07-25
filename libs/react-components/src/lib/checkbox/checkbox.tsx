@@ -15,6 +15,7 @@ interface WCProps extends Margins {
   id?: string;
   name: string;
   checked?: string;
+  indeterminate?: string;
   disabled?: string;
   error?: string;
   text?: string;
@@ -32,6 +33,7 @@ export interface GoabCheckboxProps extends Margins {
   id?: string;
   name: string;
   checked?: boolean;
+  indeterminate?: boolean;
   disabled?: boolean;
   error?: boolean;
   text?: string;
@@ -56,6 +58,7 @@ export function GoabCheckbox({
   error,
   disabled,
   checked,
+  indeterminate,
   value,
   text,
   description,
@@ -96,6 +99,7 @@ export function GoabCheckbox({
       name={name}
       error={error ? "true" : undefined}
       checked={checked ? "true" : undefined}
+      indeterminate={indeterminate ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       text={text}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}

@@ -184,7 +184,7 @@
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { name, value: value, optionLabel: newLabel },
+        detail: { name, value: value, label: newLabel },
       }),
     );
 

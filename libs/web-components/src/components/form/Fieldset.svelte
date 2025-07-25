@@ -286,7 +286,7 @@
   }
 
   function handleFieldChange(e: Event) {
-    const { name, value, optionLabel } = (e as CustomEvent).detail;
+    const { name, value, label, labels } = (e as CustomEvent).detail;
 
     // if no name is registered, they are not bound to the public-form
     if (!_formItems[name]) {
@@ -295,8 +295,12 @@
 
     _state[name].value = value;
 
-    if (optionLabel) {
-      _state[name].valueLabel = optionLabel;
+    if (label) {
+      _state[name].valueLabel = label;
+    }
+
+    if (labels) {
+      _state[name].labels = labels;
     }
 
     if (dispatchOn === "change") {

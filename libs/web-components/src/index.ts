@@ -15,6 +15,7 @@ export * from "./components/card/Card.svelte";
 export * from "./components/card-group/CardGroup.svelte";
 export * from "./components/card-image/CardImage.svelte";
 export * from "./components/checkbox/Checkbox.svelte";
+export * from "./components/checkbox-list/CheckboxList.svelte";
 export * from "./components/chip/Chip.svelte";
 export * from "./components/circular-progress/CircularProgress.svelte";
 export * from "./components/container/Container.svelte";
