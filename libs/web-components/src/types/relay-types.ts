@@ -1,4 +1,10 @@
-export type FormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
+export type FormStatus =
+  | "not-started"
+  | "cannot-start-yet"
+  | "in-progress"
+  | "submitted"
+  | "update-needed"
+  | "complete";
 
 export type FormState = {
   uuid: string;
@@ -224,4 +230,22 @@ export type FormSummaryBindRelayDetail = {
 export const FormSummaryEditPageMsg = "form-summary::edit:page";
 export type FormSummaryEditPageRelayDetail = {
   id: string;
+};
+
+// ===============
+// CheckboxListItem
+// ===============
+
+export const CheckboxListItemMountedMsg = "checkbox-list-item:mounted";
+export type CheckboxListItemMountedRelayDetail = {
+  value: string;
+  text: string;
+  disabled: boolean;
+  el: HTMLElement;
+  mountType: "append" | "prepend" | "reset";
+};
+
+export const CheckboxListItemDestroyMsg = "checkbox-list-item:destroy";
+export type CheckboxListItemDestroyRelayDetail = {
+  value: string;
 };

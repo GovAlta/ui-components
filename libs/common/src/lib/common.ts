@@ -7,6 +7,30 @@ export type GoabRadioGroupOnChangeDetail = {
   value: string;
 };
 
+export interface GoabCheckboxListOnChangeDetail {
+  name: string;
+  value: string; // JSON string array of selected values
+  values: string[]; // Array of selected values
+}
+
+export type GoabCheckboxListOrientation = "vertical" | "horizontal";
+
+// Add these to your existing types file
+export const CheckboxListItemMountedMsg = "checkbox-list-item:mounted";
+export const CheckboxListItemDestroyMsg = "checkbox-list-item:destroy";
+
+export interface CheckboxListItemMountedRelayDetail {
+  value: string;
+  text: string;
+  disabled: boolean;
+  el: HTMLElement;
+  mountType: "append" | "prepend" | "reset";
+}
+
+export interface CheckboxListItemDestroyRelayDetail {
+  value: string;
+}
+
 export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
