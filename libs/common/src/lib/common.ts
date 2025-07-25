@@ -7,6 +7,11 @@ export type GoabRadioGroupOnChangeDetail = {
   value: string | number | boolean;
 };
 
+export type GoabCheckboxListOnChangeDetail = {
+  name: string;
+  value: string[];
+};
+
 export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;

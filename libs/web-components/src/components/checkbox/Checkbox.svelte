@@ -22,6 +22,7 @@
 
   // Optional values
   export let checked: string = "false";
+  export let indeterminate: string = "false";
   export let text: string = "";
   export let value: string = "";
   export let disabled: string = "false";
@@ -64,7 +65,12 @@
     }
   }
   $: isChecked = toBoolean(checked);
-  $: isIndeterminate = false; // Design review. To be built with TreeView Later
+  $: isIndeterminate = toBoolean(indeterminate);
+  $: if (_checkboxRef) {
+    // Set the indeterminate state on the checkbox element....used for "mixed" states e.g.
+    // for "Select All" type checkboxes when some (but not all) items are selected.
+    (_checkboxRef as HTMLInputElement).indeterminate = isIndeterminate;
+  }
   $: revealSlotHasContent = _revealSlotHeight > 0;
 
   onMount(() => {
@@ -149,12 +155,15 @@
   function sendMountedMessage() {
     if (!name) return;
 
-    relay<FormFieldMountRelayDetail>(
-      _rootEl,
-      FormFieldMountMsg,
-      { name, el: _rootEl },
-      { bubbles: true, timeout: 10 },
-    );
+    const checkboxEl = (_rootEl.getRootNode() as ShadowRoot)?.host as HTMLElement;
+    const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
+
+      relay<FormFieldMountRelayDetail>(
+        _rootEl,
+        FormFieldMountMsg,
+        { name, el: _rootEl },
+        { bubbles: !fromCheckboxList, timeout: 10 },
+      );
   }
 
   function onChange(e: Event) {
@@ -230,7 +239,7 @@
     class:disabled={isDisabled}
     class:error={_error}
   >
-    <div class="container" class:selected={isChecked}>
+    <div class="container" class:selected={isChecked || isIndeterminate}>
       <input
         bind:this={_checkboxRef}
         id={name}
@@ -240,6 +249,7 @@
         type="checkbox"
         value={`${value}`}
         aria-label={arialabel || text || name}
+        aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
         aria-describedby={$$slots.description || description !== "" ? _descriptionId : null}
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
@@ -267,7 +277,7 @@
     </div>
     <div class="text" data-testid="text">
       <slot></slot>
-        {text}
+      {text}
     </div>
   </label>
   {#if $$slots.description || description}
@@ -494,5 +504,4 @@
   .disabled.error .container svg {
     fill: #F58185;
   }
-
 </style>

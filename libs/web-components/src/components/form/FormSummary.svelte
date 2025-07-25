@@ -35,8 +35,8 @@
   function addChangeClickHandler() {
     _rootEl.addEventListener("change", (e: Event) => {
       const page = (e as CustomEvent).detail;
-      changePage(e, page)
-    })
+      changePage(e, page);
+    });
   }
 
   function addRelayListener() {
@@ -58,7 +58,12 @@
   }
 
   function changePage(e: Event, pageId: string) {
-    relay<FormSummaryEditPageRelayDetail>(_rootEl, FormSummaryEditPageMsg, { id: pageId }, { bubbles: true })
+    relay<FormSummaryEditPageRelayDetail>(
+      _rootEl,
+      FormSummaryEditPageMsg,
+      { id: pageId },
+      { bubbles: true },
+    );
     e.preventDefault();
   }
 
@@ -66,21 +71,26 @@
     return _state.form?.[page]?.heading || "";
   }
 
-  function getData(state: FormState, page: string): Record<string, FieldsetItemState> {
+  function getData(
+    state: FormState,
+    page: string,
+  ): Record<string, FieldsetItemState> {
     if (state.form[page]?.data?.type !== "details") {
       return;
     }
 
-    return Object
-      .entries(state.form[page].data.fieldsets || {})
-      .sort((itemsA, itemsB) => itemsA[1].order > itemsB[1].order ? 1 : -1)
+    return Object.entries(state.form[page].data.fieldsets || {})
+      .sort((itemsA, itemsB) => (itemsA[1].order > itemsB[1].order ? 1 : -1))
       .reduce((acc, [name, fieldsetState]) => {
         acc[name] = fieldsetState;
         return acc;
       }, {});
   }
 
-  function getDataList(state: FormState, page: string): Record<string, FieldsetItemState>[] {
+  function getDataList(
+    state: FormState,
+    page: string,
+  ): Record<string, FieldsetItemState>[] {
     const pageData = state.form[page]?.data;
     if (pageData?.type !== "list") {
       return;
@@ -88,40 +98,74 @@
 
     return pageData.items.reduce((acc, formState) => {
       const data = formState.history.reduce((acc, fieldsetId) => {
-        acc = {...acc, ...getData(formState, fieldsetId)};
+        acc = { ...acc, ...getData(formState, fieldsetId) };
         return acc;
-      }, {})
+      }, {});
       acc.push(data);
       return acc;
     }, []);
   }
 
-  function isBlank(val: string): boolean {
-    if (val.length === 0) return true;
-    if (val === "0000-01-00") return true;
+  function isBlank(val: string | number | Date | string[]): boolean {
+    if (Array.isArray(val)) {
+      return val.length === 0;
+    }
+    const strVal = String(val);
+    if (strVal.length === 0) return true;
+    if (strVal === "0000-01-00") return true;
     return false;
   }
 
   const dateMatchRegex = /^\d{4}-\d{2}-\d{2}$/;
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  function formatValue(value: string, valueLabel?: string): string {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  function formatValue(
+    value: string | number | Date | string[],
+    valueLabel?: string,
+    labels?: string[],
+  ): string | string[] {
     if (isBlank(value)) {
       return "— Not provided —";
     }
+
+    // Check for valueLabels first (array of labels)
+    if (labels && labels.length > 0) {
+      return labels;
+    }
+
+    // Then check for valueLabel (single label)
     if (valueLabel) {
       return valueLabel;
     }
-    if (value.match(dateMatchRegex)) {
-      const [year, month, day] = value.split("-");
+
+    const strValue = String(value);
+    if (strValue.match(dateMatchRegex)) {
+      const [year, month, day] = strValue.split("-");
       return `${months[parseInt(month) - 1]} ${parseInt(day)}, ${year}`;
     }
-    return value;
+
+    return strValue;
   }
 </script>
 
 <div bind:this={_rootEl}>
   {#if heading}
-    <goa-text as="h3" size="heading-m" color="secondary" mb="l">{heading}</goa-text>
+    <goa-text as="h3" size="heading-m" color="secondary" mb="l"
+      >{heading}</goa-text
+    >
   {/if}
   {#if _state}
     {#each _state.history as page}
@@ -129,7 +173,9 @@
         <goa-container>
           <div class="summary" class:summary-with-header={!!getHeading(page)}>
             {#if getHeading(page)}
-              <goa-text class="heading" color="secondary">{getHeading(page)}</goa-text>
+              <goa-text class="heading" color="secondary"
+                >{getHeading(page)}</goa-text
+              >
             {/if}
 
             <div class="data">
@@ -139,7 +185,15 @@
                     {#each Object.entries(getData(_state, page)) as [_, data]}
                       <tr>
                         <td class="label">{data.label}</td>
-                        <td class="value" class:empty={isBlank(data.value)}>{formatValue(data.value, data.valueLabel)}</td>
+                        <td class="value" class:empty={isBlank(data.value)}>
+                          {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
+                            {#each formatValue(data.value, data.valueLabel, data.labels) as label}
+                              <div>{label}</div>
+                            {/each}
+                          {:else}
+                            {formatValue(data.value, data.valueLabel, data.labels)}
+                          {/if}
+                        </td>
                       </tr>
                     {/each}
                   </table>
@@ -149,7 +203,15 @@
                       {#each Object.entries(item) as [_, data]}
                         <tr>
                           <td class="label">{data.label}</td>
-                          <td class="value" class:empty={isBlank(data.value)}>{formatValue(data.value)}</td>
+                          <td class="value" class:empty={isBlank(data.value)}>
+                            {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
+                              {#each formatValue(data.value, data.valueLabel, data.labels) as label}
+                                <div>{label}</div>
+                              {/each}
+                            {:else}
+                              {formatValue(data.value, data.valueLabel, data.labels)}
+                            {/if}
+                          </td>
                         </tr>
                       {/each}
                     </table>
@@ -180,7 +242,8 @@
   .action a:focus-visible {
     outline: none;
     border-radius: var(--goa-button-border-radius);
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
   }
 
   /* TODO: fix the layouts: mobile doesn't meet specs; table makes it difficult */
@@ -189,8 +252,7 @@
       display: block;
       grid-template-rows: min-content auto;
       grid-template-columns: auto;
-      grid-template-areas:
-        "top top top"
+      grid-template-areas: "top top top";
     }
 
     .data tr:last-of-type {
@@ -213,8 +275,7 @@
       display: grid;
       grid-auto-rows: 1fr;
       grid-template-columns: 1fr min-content;
-      grid-template-areas:
-        "data action"
+      grid-template-areas: "data action";
     }
 
     .summary-with-header {
@@ -225,7 +286,7 @@
       grid-template-columns: 1fr min-content;
       grid-template-areas:
         "heading action"
-        "data ."
+        "data .";
     }
 
     .heading {

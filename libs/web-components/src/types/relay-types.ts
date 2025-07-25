@@ -142,6 +142,7 @@ export type FieldsetItemState = {
   value: string | number | Date;
   order: number;
   valueLabel?: string; // for radio/checkbox label to be able to display on summary page
+  labels? : string[]
 };
 
 export type FieldsetValidationRelayDetail = {
@@ -156,7 +157,7 @@ export const FieldsetSetValueMsg = "fieldset::set:value";
 //       need for the FieldsetResetFieldMsg/Detail
 export type FieldsetSetValueRelayDetail = {
   name: string;
-  value: string | number | Date;
+  value: string | number | Date | string[];
 };
 
 // ========
