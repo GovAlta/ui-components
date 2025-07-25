@@ -40,6 +40,7 @@
   :host {
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+    container: grid / inline-size;
   }
 
   .goa-grid {
@@ -48,7 +49,7 @@
     gap: var(--gap);
   }
 
-  @media (--not-mobile) {
+  @container grid (--not-mobile) {
     .goa-grid {
       display: grid;
       grid-template-columns: repeat(

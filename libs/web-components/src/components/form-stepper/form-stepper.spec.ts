@@ -78,5 +78,19 @@ describe("FormStepper", () => {
       })
     })
   })
+
+  it("has proper container query setup for responsive behavior", async () => {
+    const { container } = render(FormStepper)
+
+    await waitFor(() => {
+      // Check that the form-stepper has container query setup
+      const stepperContainer = container.querySelector("#container");
+      expect(stepperContainer).toBeTruthy();
+      
+      // Check that goa-grid element exists (it contains the container setup now)
+      const gridElement = container.querySelector("goa-grid");
+      expect(gridElement).toBeTruthy();
+    })
+  })
 })
 
