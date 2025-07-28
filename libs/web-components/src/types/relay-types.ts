@@ -141,6 +141,7 @@ export type FieldsetItemState = {
   label: string;
   value: string | number | Date;
   order: number;
+  valueLabel?: string; // for radio/checkbox label to be able to display on summary page
 };
 
 export type FieldsetValidationRelayDetail = {

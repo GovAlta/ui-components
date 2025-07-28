@@ -143,12 +143,18 @@
     }
   }
 
+  function resetStateValues() {
+    for (const key of Object.keys(_state)) {
+      _state[key].value = "";
+    }
+  }
+
   function resetFields(event: Event) {
-    _state = {};
+    resetStateValues();
     // prevent subform resets from resetting the parent
     event.stopPropagation();
 
-    for (const { el } of Object.values(_formFields)) {
+    for (const el of Object.values(_formFields)) {
       relay(el, FieldsetResetFieldsMsg);
     }
   }
