@@ -158,6 +158,24 @@ describe("Modal Component", () => {
     });
   });
 
+  it("should apply empty-actions class when actions slot is empty", async () => {
+    const el = render(GoAModalWrapper, { content: "Test content", actionContent: "" });
+
+    await waitFor(() => {
+      const actionsEl = el.queryByTestId("modal-actions");
+      expect(actionsEl?.classList.contains("empty-actions")).toBe(true);
+    });
+  });
+
+  it("should not apply empty-actions class when actions slot has content", async () => {
+    const el = render(GoAModalWrapper, { content: "Test content", actionContent: "Save" });
+
+    await waitFor(() => {
+      const actionsEl = el.queryByTestId("modal-actions");
+      expect(actionsEl?.classList.contains("empty-actions")).toBe(false);
+    });
+  });
+
   ["emergency", "important", "information", "success", "event"].forEach(
     (calloutVariant) => {
       it(`renders the ${calloutVariant} callout modal`, async () => {
