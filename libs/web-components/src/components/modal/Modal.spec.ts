@@ -176,6 +176,15 @@ describe("Modal Component", () => {
     });
   });
 
+  it("should apply empty-actions class when no actions slot is provided", async () => {
+    const el = render(GoAModal, { open: "true", heading: "Test" });
+
+    await waitFor(() => {
+      const actionsEl = el.queryByTestId("modal-actions");
+      expect(actionsEl?.classList.contains("empty-actions")).toBe(true);
+    });
+  });
+
   ["emergency", "important", "information", "success", "event"].forEach(
     (calloutVariant) => {
       it(`renders the ${calloutVariant} callout modal`, async () => {

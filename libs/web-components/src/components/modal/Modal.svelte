@@ -138,9 +138,17 @@
     const el = _rootEl?.querySelector(selector);
     const children = el && getSlottedChildren(el);
 
-    return children?.length === 1 // there should only be one child element
+    // If there are no children at all, the slot is empty
+    if (!children || children.length === 0) {
+      return true;
+    }
+
+    // If there's exactly one child that is an Angular empty slot div, the slot is empty
+    return children.length === 1 // there should only be one child element
       && children[0].tagName === "DIV" // angular renders a <div>
       && children[0].getAttribute("slot") === slotName // the div is a slot
+      && children[0].children.length === 0 // the div has no children
+      && (children[0].textContent?.trim() || "") === ""; // the div has no text content
   }
 
   function close(e: Event) {
