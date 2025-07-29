@@ -1,4 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, booleanAttribute, } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  TemplateRef,
+  booleanAttribute,
+} from "@angular/core";
 import { NgIf, NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
@@ -27,10 +33,7 @@ import { GoabBaseComponent } from "../base.component";
         <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
       </div>
       <div slot="reveal">
-        <ng-container
-          *ngIf="this.reveal"
-          [ngTemplateOutlet]="reveal"
-        ></ng-container>
+        <ng-container *ngIf="this.reveal" [ngTemplateOutlet]="reveal"></ng-container>
       </div>
     </goa-radio-item>
   `,
@@ -38,7 +41,7 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabRadioItem extends GoabBaseComponent {
-  @Input() value?: string;
+  @Input() value?: string | number | boolean;
   @Input() label?: string;
   @Input() name?: string;
   @Input() description!: string | TemplateRef<any>;
