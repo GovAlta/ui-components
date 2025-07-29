@@ -3,7 +3,7 @@ import { GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
-describe("Dropdown", () => {
+describe("Dropdown Component", () => {
   const noop = () => {
     // noop
   };
@@ -381,4 +381,115 @@ describe("Dropdown", () => {
       });
     })
   })
+
+  describe("Number Values", () => {
+    it("should render with number values", async () => {
+      // Setup
+      const Component = () => {
+        return (
+          <GoabDropdown name="options" testId="dropdown" onChange={noop}>
+            <GoabDropdownItem label="Option 1" value={1} />
+            <GoabDropdownItem label="Option 2" value={2} />
+            <GoabDropdownItem label="Option 3" value={3} />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const dropdown = result.getByTestId("dropdown");
+
+      // Actions
+      await dropdown.click();
+
+      // Result
+      await vi.waitFor(() => {
+        ["1", "2", "3"].forEach((num) => {
+          const item = result.getByText(`Option ${num}`);
+          expect(item.element().getAttribute("data-value")).toBe(num);
+        })
+      });
+    });
+
+    it("should handle selection of number values", async () => {
+      // Setup
+      const onChange = vi.fn();
+      const Component = () => {
+        return (
+          <GoabDropdown name="options" testId="dropdown" onChange={onChange}>
+            <GoabDropdownItem label="Option 1" value={1} />
+            <GoabDropdownItem label="Option 2" value={2} />
+            <GoabDropdownItem label="Option 3" value={3} />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const dropdown = result.getByTestId("dropdown");
+      const option2 = result.getByText("Option 2");
+
+      // Actions
+      await dropdown.click();
+
+      await vi.waitFor(async () => {
+        await option2.click();
+      });
+
+      // Result
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({
+        name: "options",
+        value: 2
+      }));
+    });
+
+    it("should initialize with a number value", async () => {
+      // Setup
+      const Component = () => {
+        return (
+          <GoabDropdown name="options" testId="dropdown" value={2} onChange={noop}>
+            <GoabDropdownItem label="Option 1" value={1} />
+            <GoabDropdownItem label="Option 2" value={2} />
+            <GoabDropdownItem label="Option 3" value={3} />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const input = result.getByRole("combobox");
+
+      // Result
+      await vi.waitFor(() => {
+        const el = input.element() as HTMLInputElement;
+        expect(el.value).toBe("Option 2");
+      });
+    });
+
+    it("should filter options with number values", async () => {
+      // Setup
+      const Component = () => {
+        return (
+          <GoabDropdown name="options" testId="dropdown" filterable={true} onChange={noop}>
+            <GoabDropdownItem label="Option 1" value={1} />
+            <GoabDropdownItem label="Option 2" value={2} />
+            <GoabDropdownItem label="Option 3" value={3} />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const filter = result.getByRole("combobox");
+
+      // Actions
+      await filter.fill("2");
+      await filter.click();
+
+      // Result
+      await vi.waitFor(() => {
+        const visibleOptions = result.getByRole("option");
+        expect(visibleOptions.elements().length).toBe(1);
+        const el = visibleOptions.elements()[0] as HTMLElement;
+        expect(el.getAttribute("data-value")).toBe("2");
+      });
+    });
+  });
 });

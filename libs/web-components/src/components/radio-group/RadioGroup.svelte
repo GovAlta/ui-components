@@ -86,16 +86,17 @@
   // Hooks
 
   onMount(async () => {
-    validateOrientation(orientation);
-    await tick(); // for angular to register public form name
-    addRelayListener();
-    sendMountedMessage();
-    getChildren();
-
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       const detail = (e as CustomEvent).detail;
       onChange(detail.value, detail.label);
     });
+
+    await tick(); // for angular to register public form name
+    validateOrientation(orientation);
+    addRelayListener();
+    sendMountedMessage();
+    getChildren();
+
   });
 
   // Functions

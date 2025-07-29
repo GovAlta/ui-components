@@ -10,7 +10,7 @@ export * from "./radio";
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
   name: string;
-  value?: string;
+  value?: string | number | boolean;
   id?: string;
   orientation?: GoabRadioGroupOrientation;
   disabled?: string;
@@ -30,7 +30,7 @@ declare module "react" {
 
 export interface GoabRadioGroupProps extends Margins {
   name: string;
-  value?: string;
+  value?: string | number | boolean;
   id?: string;
   disabled?: boolean;
   orientation?: GoabRadioGroupOrientation;
