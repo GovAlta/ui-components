@@ -393,11 +393,11 @@
 
   .popover-target {
     cursor: pointer;
-    display: block;
     height: 100%;
     outline: none;
     border: none;
     padding: 0;
+    width: 100%;
   }
 
   .popover-target:has(:focus-visible) {

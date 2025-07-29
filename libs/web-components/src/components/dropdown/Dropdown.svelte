@@ -127,35 +127,24 @@
   $: {
     // Calculate the base width
     if (width) {
-      const unitPattern = /(px|%|ch|rem|em)$/; // Regex to detect valid units
+      const unitPattern = /^\d+$/; // Regex to detect no units
       if (unitPattern.test(width)) {
-        _width = width; // Use the provided width with a valid unit
-      } else {
         _width = `${width}px`; // Default to px if no unit is provided
+      } else {
+        _width = width; // Use the provided width with a valid unit
       }
     } else {
       _width = getLongestChildWidth(_options); // Calculate based on the longest option
     }
 
-    // avoid double apply for % widths
     if (_inputEl) {
-      // for % widths use the % value instead
-      if (width?.includes("%")) {
-        _dropdownWidth = width;
-      } else {
-        _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
-      }
+      _dropdownWidth = _width.includes("%") ? _width : `${_inputEl.offsetWidth}px`; // Match input width dynamically
     }
 
-    // Set popover max width
-    if (width?.includes("%")) {
-      _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
-    } else {
-      _popoverMaxWidth = `min(${_width}, 100%)`;
-    }
+    _popoverMaxWidth = _width.includes("%") ? "100%" : `min(${_width}, 100%)`;
   }
 
-  // TODO: Syed can you add a comment here describing what this does?
+  // dispatch error if a new error is created
   $: {
     _error = toBoolean(error);
     if (_error !== _prevError) {
@@ -777,7 +766,7 @@
       data-testid="option-list"
       open={_isMenuVisible ? "true" : "false"}
       close-on-click="yes"
-      width={`${_popoverMaxWidth || 0}`}
+      width={`${_popoverMaxWidth || "100%"}`}
       minwidth={_dropdownWidth}
       maxwidth={_dropdownWidth}
       padded="false"
