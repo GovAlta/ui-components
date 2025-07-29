@@ -158,6 +158,40 @@ describe("Modal Component", () => {
     });
   });
 
+  it("should apply empty-actions class when actions slot is empty", async () => {
+    const el = render(GoAModal, { open: "true", heading: "Test" });
+
+    await waitFor(() => {
+      const actionsEl = el.queryByTestId("modal-actions");
+      expect(actionsEl?.classList.contains("empty-actions")).toBe(true);
+    });
+  });
+
+  it("should not apply empty-actions class when actions slot has content", async () => {
+    const actionContent = "This is the actionContent";
+    const el = render(GoAModalWrapper, { actionContent });
+
+    await waitFor(() => {
+      const actionsEl = el.queryByTestId("modal-actions");
+      expect(actionsEl?.classList.contains("empty-actions")).toBe(false);
+    });
+  });
+
+  it("should handle modal with no actions slot at all", async () => {
+    const el = render(GoAModal, { open: "true", heading: "Test Modal" });
+
+    await waitFor(() => {
+      const actionsEl = el.queryByTestId("modal-actions");
+      expect(actionsEl?.classList.contains("empty-actions")).toBe(true);
+      
+      // Check that the actions element has no height when empty
+      const styles = window.getComputedStyle(actionsEl!);
+      const paddingTop = parseInt(styles.paddingTop || '0');
+      const paddingBottom = parseInt(styles.paddingBottom || '0');
+      expect(paddingTop + paddingBottom).toBe(0);
+    });
+  });
+
   ["emergency", "important", "information", "success", "event"].forEach(
     (calloutVariant) => {
       it(`renders the ${calloutVariant} callout modal`, async () => {

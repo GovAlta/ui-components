@@ -138,9 +138,16 @@
     const el = _rootEl?.querySelector(selector);
     const children = el && getSlottedChildren(el);
 
+    // If no children at all, it's empty
+    if (!children || children.length === 0) {
+      return true;
+    }
+
+    // Angular specific case: single empty div with slot attribute
     return children?.length === 1 // there should only be one child element
       && children[0].tagName === "DIV" // angular renders a <div>
       && children[0].getAttribute("slot") === slotName // the div is a slot
+      && children[0].textContent?.trim() === ""; // and the div is empty
   }
 
   function close(e: Event) {
@@ -445,7 +452,7 @@
   }
 
   .modal-actions.empty-actions {
-    padding: 0 0 var(--goa-modal-padding) 0;
+    padding: 0;
   }
 
   .modal.top .modal-content {
