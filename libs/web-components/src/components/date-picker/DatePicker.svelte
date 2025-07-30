@@ -1,3 +1,4 @@
+
 <svelte:options customElement="goa-date-picker" />
 
 <script lang="ts">
@@ -132,29 +133,19 @@
   }
 
   function setDate(value: string) {
-    if (type === "calendar") {
-      // invalid date
-      if (!value || !new Date(value).getDate()) {
-        _date = null;
-      } else {
-        _date = startOfDay(new Date(value));
-      }
+    // invalid date
+    if (!value || !new Date(value).getDate()) {
+      _date = null;
+      _inputDate = { day: "", month: "", year: "" };
       return;
     }
 
-    // else type === "input"
-    const [year = "", month = "", day = ""] = value.split("T")[0].split("-");
-
-    // save without padded zeroes
-    _inputDate = { year: `${+year}`, month: `${+month - 1}`, day: `${+day}` };
-
-    if (!isInputDateValid()) {
-      resetInputDate();
+    if (type === "input") {
+      const [year, month, day] = value.split("-");
+      _inputDate = { year: year, month: `${+month - 1}`, day: day };
+    } else if (type === "calendar") {
+      _date = startOfDay(new Date(value));
     }
-  }
-
-  function resetInputDate() {
-    _inputDate = { day: "", month: "", year: "" };
   }
 
   function onCalendarChange(e: CustomEvent) {
@@ -262,32 +253,6 @@
     e.stopPropagation();
   }
 
-  function getInputDateWithPaddedZeroes(): string {
-    return `${padLeft(_inputDate.year, 4, 0)}-${padLeft(_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
-  }
-
-  function isInputDateValid(): boolean {
-    if (
-      _inputDate.year === "" ||
-      _inputDate.month === "" ||
-      _inputDate.day === ""
-    ) {
-      return false;
-    }
-
-    const date = getInputDateWithPaddedZeroes();
-    if (!new Date(date)?.getTime() || isNaN(new Date(date).getTime())) {
-      return false;
-    }
-
-    if (date !== new Date(date).toISOString().split("T")[0]) {
-      // E.g. "2025-02-31" would be invalid because the date does not exist
-      return false;
-    }
-
-    return true;
-  }
-
   // _change event handler for the text/dropdown inputs for the `input` date format
   function onInputChange(e: Event) {
     e.stopPropagation();
@@ -296,9 +261,13 @@
       e as CustomEvent<{ name: string; value: string }>
     ).detail;
 
-    _inputDate = { ..._inputDate, [elName]: value };
+    _inputDate = { ..._inputDate, [elName]: +value };
 
-    const date = isInputDateValid() ? getInputDateWithPaddedZeroes() : null;
+    if (!new Date(+_inputDate.year, +_inputDate.month, +_inputDate.day)) {
+      return;
+    }
+
+    const date = `${padLeft(_inputDate.year, 4, 0)}-${padLeft(+_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
 
     dispatch(
       _rootEl,
@@ -377,8 +346,7 @@
           value={_inputDate.day}
           min="1"
           max="31"
-          {error}
-          testid="day-input"
+          {_error}
         />
       </goa-form-item>
       <goa-form-item helptext="Year (YYYY)">
@@ -391,7 +359,6 @@
           min="1800"
           max="2200"
           {error}
-          testid="year-input"
         />
       </goa-form-item>
     </goa-block>
