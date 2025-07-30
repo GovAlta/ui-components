@@ -11,6 +11,7 @@
   // ******
 
   export let title: string;
+  export let subtitle: string;
   export let url: string;
   export let username: string;
   export let useremail: string;
@@ -305,12 +306,18 @@
       {#if url}
         <a href={url} class="header" role="menuitem" data-testid="url">
           <img alt="GoA Logo" class="image-mobile" src={_logo} />
-          <h1 class="title">{title}</h1>
+          <goa-text class="title">{title}</goa-text>
+          {#if subtitle}
+            <goa-text class="subtitle">{subtitle}</goa-text>
+          {/if}
         </a>
       {:else}
         <div class="header">
           <img alt="GoA Logo" class="image-mobile" src={_logo} />
-          <h1 class="title">{title}</h1>
+          <goa-text class="title">{title}</goa-text>
+                    {#if subtitle}
+            <goa-text class="subtitle">{subtitle}</goa-text>
+          {/if}
         </div>
       {/if}
     </header>
@@ -501,8 +508,8 @@
 
   .header {
     container: heading / inline-size;
-    display: flex;
-    height: 60px;
+    /* display: flex; */
+    /* height: 60px; */
     padding: var(--goa-space-m) calc(var(--goa-space-l) - 4px)
       var(--goa-space-s);
     gap: var(--goa-space-s);
