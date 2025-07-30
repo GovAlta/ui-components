@@ -343,10 +343,10 @@
           type="number"
           on:_change={onInputChange}
           width="4ch"
-          value={_inputDate.day}
+          value={_inputDate.day || ""}
           min="1"
           max="31"
-          {_error}
+          {error}
         />
       </goa-form-item>
       <goa-form-item helptext="Year (YYYY)">
@@ -355,7 +355,7 @@
           type="number"
           on:_change={onInputChange}
           width="6ch"
-          value={_inputDate.year}
+          value={_inputDate.year || ""}
           min="1800"
           max="2200"
           {error}
