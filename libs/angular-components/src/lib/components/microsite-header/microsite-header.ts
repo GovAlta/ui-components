@@ -1,5 +1,12 @@
 import { GoabLinkTarget, GoabServiceLevel } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, EventEmitter, Output } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  TemplateRef,
+  EventEmitter,
+  Output,
+} from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
@@ -14,7 +21,7 @@ import { NgTemplateOutlet } from "@angular/common";
       [attr.feedbackurltarget]="feedbackUrlTarget"
       [attr.headerurltarget]="headerUrlTarget"
       [attr.testid]="testId"
-      [attr.hasfeedbackhandler]="!!onFeedbackClick"
+      [attr.hasfeedbackhandler]="onFeedbackClick.observed"
       (_feedbackClick)="_onFeedbackClick()"
     >
       <div slot="version">
@@ -23,7 +30,7 @@ import { NgTemplateOutlet } from "@angular/common";
     </goa-microsite-header>
   `,
   imports: [NgTemplateOutlet],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabMicrositeHeader {
   @Input({ required: true }) type!: GoabServiceLevel;
