@@ -151,12 +151,15 @@
 <style>
   /* TO DO: Move component tokens into style dictionary */
   :host {
-    --goa-work-side-menu-item-border-radius: 8px;
-    --goa-work-side-menu-item-padding: var(--goa-space-xs);
-    --goa-work-side-menu-item-text-color: var(--goa-color-text-default);
-    --goa-work-side-menu-item-color-bg-hover: var(--goa-color-greyscale-100);
-    --goa-work-side-menu-item-color-bg-focus: var(--goa-color-greyscale-100);
-    --goa-work-side-menu-item-color-bg-current: var(--goa-color-greyscale-100);
+    --goa-work-side-menu-item-border-radius: 0 8px 8px 0;
+    --goa-work-side-menu-item-padding: var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-l);
+    --goa-work-side-menu-item-text-color: #676363;
+    --goa-work-side-menu-item-text-size: var(--goa-typography-body-s);
+    --goa-work-side-menu-item-color-bg-hover: #DBD2D2;
+    --goa-work-side-menu-item-color-bg-focus: #DBD2D2;
+    --goa-work-side-menu-item-color-bg-current: #DBD2D2;
+    --goa-work-side-menu-item-badge-text-size: 15px;
+    --goa-work-side-menu-item-badge-background-color: #29845E;
   }
 
   :host * {
@@ -172,10 +175,10 @@
   .menu-item {
     position: relative;
     display: flex;
-    gap: var(--goa-space-xs);
+    gap: var(--goa-space-s);
     border-radius: var(--goa-work-side-menu-item-border-radius);
     text-decoration: none;
-    align-items: flex-start;
+    align-items: center;
     padding: var(--goa-work-side-menu-item-padding);
     color: var(--goa-work-side-menu-item-text-color);
   }
@@ -209,12 +212,13 @@
   /* Menu item label */
   .menu-item-label {
     flex-grow: 1;
-    font: var(--goa-typography-body-xs);
+    font: var(--goa-work-side-menu-item-text-size);
   }
 
   /* Current item */
   .current {
     background: var(--goa-work-side-menu-item-color-bg-current);
+    font-weight: 600;
     border-radius: 8px;
   }
 
@@ -234,23 +238,22 @@
   /* Badge */
   .badge {
     color: var(--goa-color-text-light);
-    height: 20px;
-    min-width: 20px;
-    line-height: 1.5;
+    height: 32px;
+    min-width: 32px;
+    line-height: 2;
     text-align: center;
-    font-size: var(--goa-font-size-1);
-    font-weight: 400;
-    background-color: var(--goa-color-info-default);
+    font-size: var(--goa-work-side-menu-item-badge-text-size);
+    font-weight: 600;
+    background-color: var(--goa-work-side-menu-item-badge-background-color);
     border-radius: 32px;
     padding: 0 6px;
   }
 
   .badge.success {
-    background-color: var(--goa-color-success-default);
+
   }
 
   .badge.emergency {
-    background-color: var(--goa-color-emergency-default);
   }
 
   /* Icon-only items when menu is closed */
