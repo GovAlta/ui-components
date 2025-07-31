@@ -50,17 +50,19 @@
   data-testid={testid}
   style="max-width: {maxWidth};"
 >
-  {#if type === "success"}
-    <goa-icon type="checkmark-circle" />
-  {/if}
+  <div class="content">
+    {#if type === "success"}
+      <goa-icon type="checkmark-circle" />
+    {/if}
 
-  {#if type === "failure"}
-    <goa-icon type="close-circle" />
-  {/if}
+    {#if type === "failure"}
+      <goa-icon type="close-circle" />
+    {/if}
 
-  <span class="message">
-    {message}
-  </span>
+    <span class="message">
+      {message}
+    </span>
+  </div>
 
   {#if actionText}
     <div class="action">
@@ -91,6 +93,15 @@
     color: var(--goa-color-text-light);
     transition: transform 0.3s ease, opacity 0.3s ease;
     overflow: hidden;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--goa-space-m);
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   @media (--not-mobile) {

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actual TemporaryNotification Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .char-count {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="./dist/libs/web-components/index.css">
+    <script type="module" src="./dist/libs/web-components/index.js"></script>
+</head>
+<body>
+    <h1>Actual TemporaryNotification Component Test</h1>
+    
+    <div class="test-container">
+        <div class="test-title">Test 1: 90-character message with success icon</div>
+        <div class="char-count">Message length: 90 characters</div>
+        <goa-temp-notification 
+            message="This is a test message that is exactly ninety characters long to validate text wrapping!!!" 
+            type="success" 
+            visible="true"
+            testid="test1">
+        </goa-temp-notification>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">Test 2: 90-character message with failure icon</div>
+        <div class="char-count">Message length: 90 characters</div>
+        <goa-temp-notification 
+            message="This is a test message that is exactly ninety characters long to validate text wrapping!!!" 
+            type="failure" 
+            visible="true"
+            testid="test2">
+        </goa-temp-notification>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">Test 3: 90-character message with success icon and action</div>
+        <div class="char-count">Message length: 90 characters</div>
+        <goa-temp-notification 
+            message="This is a test message that is exactly ninety characters long to validate text wrapping!!!" 
+            type="success" 
+            visible="true"
+            action-text="Undo"
+            testid="test3">
+        </goa-temp-notification>
+    </div>
+
+    <div class="test-container">
+        <div class="test-title">Test 4: Custom maxWidth (300px) with 90-character message</div>
+        <div class="char-count">Message length: 90 characters</div>
+        <goa-temp-notification 
+            message="This is a test message that is exactly ninety characters long to validate text wrapping!!!" 
+            type="success" 
+            visible="true"
+            max-width="300px"
+            testid="test4">
+        </goa-temp-notification>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('=== Actual Component Test ===');
+            
+            // Wait for components to load
+            setTimeout(() => {
+                const notifications = document.querySelectorAll('goa-temp-notification');
+                console.log('Found', notifications.length, 'notifications');
+                
+                notifications.forEach((notification, index) => {
+                    console.log(`\nTest ${index + 1}:`);
+                    console.log('- Component element:', notification.tagName);
+                    console.log('- Message:', notification.getAttribute('message'));
+                    console.log('- Type:', notification.getAttribute('type'));
+                    console.log('- Max Width:', notification.getAttribute('max-width') || 'default (640px)');
+                    
+                    // Check component dimensions
+                    const rect = notification.getBoundingClientRect();
+                    console.log('- Component size:', { width: rect.width, height: rect.height });
+                    
+                    // Check if shadow DOM is accessible
+                    if (notification.shadowRoot) {
+                        console.log('- Shadow DOM accessible');
+                        const snackbar = notification.shadowRoot.querySelector('.snackbar');
+                        console.log('- Snackbar element found:', !!snackbar);
+                        if (snackbar) {
+                            const icon = snackbar.querySelector('goa-icon');
+                            const message = snackbar.querySelector('.message');
+                            const action = snackbar.querySelector('.action');
+                            console.log('- Icon found:', !!icon);
+                            console.log('- Message element found:', !!message);
+                            console.log('- Action element found:', !!action);
+                            
+                            if (icon && message) {
+                                const iconRect = icon.getBoundingClientRect();
+                                const messageRect = message.getBoundingClientRect();
+                                console.log('- Icon position:', { left: iconRect.left, top: iconRect.top, width: iconRect.width, height: iconRect.height });
+                                console.log('- Message position:', { left: messageRect.left, top: messageRect.top, width: messageRect.width, height: messageRect.height });
+                                console.log('- Icon is to the left of message:', iconRect.left < messageRect.left);
+                                console.log('- Icon and message are on same line:', Math.abs(iconRect.top - messageRect.top) < 10);
+                                
+                                if (action) {
+                                    const actionRect = action.getBoundingClientRect();
+                                    console.log('- Action position:', { left: actionRect.left, top: actionRect.top, width: actionRect.width, height: actionRect.height });
+                                }
+                            }
+                        }
+                    } else {
+                        console.log('- Shadow DOM not accessible');
+                    }
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
