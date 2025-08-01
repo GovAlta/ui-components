@@ -528,22 +528,23 @@
 
   .title, .subtitle {
     display: block;
-    font-size: var(--goa-font-size-2);
     visibility: visible;
     opacity: 1;
     animation: delayText 100ms;
   }
 
   .title {
-    line-height: 1;
-    font-weight: 600;
-    color: var(--goa-color-greyscale-900, #474747);
+    font-size: var(--goa-font-size-2, 14px);
+    line-height: 1.4;
+    font-weight: var(--goa-font-weight-medium, 600);
+    color: var(--goa-color-text-default, #000000);
   }
 
   .subtitle {
-    line-height: 1;
-    font-weight: 400;
-    color: var(--goa-color-greyscale-900, #474747);
+    font-size: var(--goa-font-size-1, 12px);
+    line-height: 1.5;
+    font-weight: var(--goa-font-weight-regular, 400);
+    color: var(--goa-color-text-default, #000000);
   }
 
   .closed .header {
@@ -655,7 +656,7 @@
     overflow: hidden;
     align-items: center;
     flex-shrink: 0;
-    border: var(--goa-border-width-s) solid #948F8F;
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700, #948F8F);
     background-color: var(--goa-color-greyscale-white);
     margin-top: var(--goa-space-xs);
     padding: var(--goa-space-xs);
@@ -697,11 +698,11 @@
   }
 
   .profile-name {
-    font-size: var(--goa-font-size-2);
+    font-size: var(--goa-font-size-3, 16px);
     margin-bottom: var(--goa-space-2xs);
-    line-height: 1.2;
+    line-height: 1.4;
     text-align: left;
-    color: #676363;
+    color: var(--goa-color-text-secondary, #676363);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -709,9 +710,9 @@
   }
 
   .profile-email {
-    font-size: var(--goa-font-size-1);
-    line-height: 1;
-    color: #676363;
+    font-size: var(--goa-font-size-2, 14px);
+    line-height: 1.4;
+    color: var(--goa-color-text-secondary, #676363);
     text-align: left;
     white-space: nowrap;
     overflow: hidden;

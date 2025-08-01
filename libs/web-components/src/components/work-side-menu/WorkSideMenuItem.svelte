@@ -153,13 +153,14 @@
   :host {
     --goa-work-side-menu-item-border-radius: 0 8px 8px 0;
     --goa-work-side-menu-item-padding: var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-l);
-    --goa-work-side-menu-item-text-color: #676363;
-    --goa-work-side-menu-item-text-size: var(--goa-typography-body-s);
-    --goa-work-side-menu-item-color-bg-hover: #DBD2D2;
-    --goa-work-side-menu-item-color-bg-focus: #DBD2D2;
-    --goa-work-side-menu-item-color-bg-current: #DBD2D2;
-    --goa-work-side-menu-item-badge-text-size: 15px;
-    --goa-work-side-menu-item-badge-background-color: #29845E;
+    --goa-work-side-menu-item-text-color: var(--goa-color-text-secondary, #676363);
+    --goa-work-side-menu-item-text-color-current: var(--goa-color-text-default, #000000);
+    --goa-work-side-menu-item-text-size: var(--goa-typography-body-m, 16px);
+    --goa-work-side-menu-item-color-bg-hover: var(--goa-color-greyscale-200, #DBD2D2);
+    --goa-work-side-menu-item-color-bg-focus: var(--goa-color-greyscale-200, #DBD2D2);
+    --goa-work-side-menu-item-color-bg-current: var(--goa-color-greyscale-200, #DBD2D2);
+    --goa-work-side-menu-item-badge-text-size: var(--goa-font-size-2, 15px);
+    --goa-work-side-menu-item-badge-background-color: var(--goa-color-success-default, #29845E);
   }
 
   :host * {
@@ -218,12 +219,13 @@
   /* Current item */
   .current {
     background: var(--goa-work-side-menu-item-color-bg-current);
-    font-weight: 600;
-    border-radius: 8px;
+    color: var(--goa-work-side-menu-item-text-color-current);
+    font-weight: var(--goa-font-weight-medium, 600);
+    border-radius: var(--goa-border-radius-xl, 8px);
   }
 
   .current .menu-item-label {
-    font-weight: bold;
+    font-weight: var(--goa-font-weight-medium, 600);
   }
 
   .current + .sub-menu {
