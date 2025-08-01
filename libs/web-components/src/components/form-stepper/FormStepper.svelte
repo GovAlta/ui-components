@@ -125,6 +125,8 @@
       }
 
       _bindTimeoutId = setTimeout(() => {
+        const width = _gridEl?.offsetWidth ?? 0;
+        dispatchStepResize(width);
         bindChildren();
         calcStepDimensions();
         addClickListener();
@@ -181,19 +183,7 @@
       calcStepDimensions();
 
       const width = entries[0].contentRect.width;
-
-      for (const step of _steps) {
-        step.el.dispatchEvent(
-          new CustomEvent("form-stepper:resized", {
-            bubbles: true,
-            composed: true,
-            detail: {
-              testid,
-              mobile: width < MOBILE_BP,
-            },
-          }),
-        );
-      }
+      dispatchStepResize(width);
     });
   }
 
@@ -251,6 +241,23 @@
       }),
     );
   }
+
+  function dispatchStepResize(width: number) {
+    if (!_steps.length) return;
+
+    for (const step of _steps) {
+      step.el.dispatchEvent(
+        new CustomEvent("form-stepper:resized", {
+          bubbles: true,
+          composed: true,
+          detail: {
+            testid,
+            mobile: width < MOBILE_BP,
+          },
+        }),
+      );
+    }
+  }
 </script>
 
 <div id="container">
@@ -272,9 +279,7 @@
       <progress class="vertical" value={_progress} max="100"></progress>
     {/if}
     <div class="slots" bind:this={_gridEl}>
-      <goa-grid minchildwidth="10ch">
         <slot />
-      </goa-grid>
     </div>
   </div>
 </div>
@@ -321,8 +326,13 @@
     .form-stepper {
       position: relative;
     }
-  }
 
+    .slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+      gap: var(--goa-space-m);
+    }
+  }
 
   /* 1.25rem = 20px = 40px / 2, half the height of the 40px stepper */
   progress.vertical {
@@ -343,6 +353,12 @@
     }
     .form-stepper {
       display: block;
+    }
+
+    .slots {
+      display: flex;
+      flex-direction: column;
+      gap: var(--goa-space-m);
     }
   }
 
