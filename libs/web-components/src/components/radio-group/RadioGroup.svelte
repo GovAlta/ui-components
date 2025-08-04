@@ -25,20 +25,26 @@
     FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
-  // Validator
+  // Validators
   const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
     "vertical",
     "horizontal",
   ]);
+  const [Sizes, validateSize] = typeValidator("Radio group size", [
+    "normal",
+    "compact",
+  ]);
 
-  // Type
+  // Types
   type Orientation = (typeof Orientations)[number];
+  type Size = (typeof Sizes)[number];
 
   // Public
 
   export let name: string;
   export let value: string;
   export let orientation: Orientation = "vertical";
+  export let size: Size = "normal";
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
@@ -87,6 +93,7 @@
 
   onMount(async () => {
     validateOrientation(orientation);
+    validateSize(size);
     await tick(); // for angular to register public form name
     addRelayListener();
     sendMountedMessage();
@@ -165,6 +172,7 @@
             name,
             checked: props.value === value,
             revealAriaLabel: props.revealAriaLabel,
+            size,
           },
         }),
       );
@@ -213,7 +221,7 @@
 <div
   bind:this={_rootEl}
   style={calculateMargin(mt, mr, mb, ml)}
-  class={`goa-radio-group--${orientation}`}
+  class={`goa-radio-group--${orientation} goa-radio-group--${size}`}
   data-testid={testid}
   role="radiogroup"
   aria-label={arialabel}
@@ -227,19 +235,34 @@
 
 :host {
     font-family: var(--goa-font-family-sans);
+    
+    /* TEMP: Issue #2936 design token overrides - remove when tokens published to npm */
+    --goa-radio-group-gap-horizontal: var(--goa-space-xl); /* Updated: 24px → 32px */
+    --goa-radio-group-gap-vertical: var(--goa-space-m); /* Keep existing: 16px */
+    --goa-radio-group-gap-horizontal-compact: var(--goa-space-l); /* New compact: 24px */
+    --goa-radio-group-gap-vertical-compact: var(--goa-space-s); /* New compact: 12px */
   }
 
   .goa-radio-group--horizontal {
     display: flex;
     flex-direction: row;
-    gap: var(--goa-radio-group-gap-horizontal);
+    gap: var(--goa-radio-group-gap-horizontal, 32px);
   }
 
   .goa-radio-group--vertical {
     display: flex;
     flex-direction: column;  /* Vertical stacking */
-    gap: var(--goa-radio-group-gap-vertical);  /* Adds spacing */
+    gap: var(--goa-radio-group-gap-vertical, 16px);  /* Adds spacing */
     width: 100%;
+  }
+
+  /* Compact size variant */
+  .goa-radio-group--horizontal.goa-radio-group--compact {
+    gap: var(--goa-radio-group-gap-horizontal-compact, 24px);
+  }
+
+  .goa-radio-group--vertical.goa-radio-group--compact {
+    gap: var(--goa-radio-group-gap-vertical-compact, 12px);
   }
 
   /* Focus styles */

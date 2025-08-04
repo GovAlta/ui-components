@@ -2,6 +2,7 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
+  GoabRadioGroupSize,
   Margins,
 } from "@abgov/ui-components-common";
 
@@ -13,6 +14,7 @@ interface WCProps extends Margins {
   value?: string;
   id?: string;
   orientation?: GoabRadioGroupOrientation;
+  size?: GoabRadioGroupSize;
   disabled?: string;
   error?: string;
   arialabel?: string;
@@ -34,6 +36,7 @@ export interface GoabRadioGroupProps extends Margins {
   id?: string;
   disabled?: boolean;
   orientation?: GoabRadioGroupOrientation;
+  size?: GoabRadioGroupSize;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
@@ -46,6 +49,7 @@ export function GoabRadioGroup({
   value,
   children,
   orientation,
+  size,
   disabled,
   error,
   id,
@@ -87,6 +91,7 @@ export function GoabRadioGroup({
       name={name}
       value={value}
       orientation={orientation}
+      size={size}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
       arialabel={ariaLabel}
