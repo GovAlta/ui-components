@@ -892,6 +892,18 @@ export type GoabIconType =
   | "logo-yen"
   | "logo-youtube";
 
+export type GoabIconOverridesType =
+	| "goa-file"
+	| "goa-text"
+	| "goa-pdf"
+	| "goa-doc"
+	| "goa-ppt"
+	| "goa-xls"
+	| "goa-zip"
+	| "goa-video"
+	| "goa-audio"
+	| "goa-image";
+
 export type GoabIconSize =
   | "1"
   | "2"

@@ -1,4 +1,4 @@
-import { GoabIconSize, GoabIconTheme, GoabIconType } from "@abgov/ui-components-common";
+import { GoabIconOverridesType, GoabIconSize, GoabIconTheme, GoabIconType } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -29,12 +29,13 @@ import { GoabBaseComponent } from "../base.component";
     >
     </goa-icon>
   `,
+  styles: [":host { display: inline-flex; align-items: center; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabIcon extends GoabBaseComponent {
-  @Input({ required: true }) type!: GoabIconType;
-  @Input() size?: GoabIconSize = "medium";
-  @Input() theme?: GoabIconTheme = "outline";
+  @Input({ required: true }) type!: GoabIconType | GoabIconOverridesType;
+  @Input() size?: GoabIconSize;
+  @Input() theme?: GoabIconTheme;
   @Input({ transform: booleanAttribute }) inverted?: boolean;
   @Input() fillColor?: string;
   @Input({ transform: numberAttribute }) opacity?: number;
