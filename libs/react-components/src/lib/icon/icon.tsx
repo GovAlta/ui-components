@@ -1,5 +1,6 @@
 import {
   GoabIconFilledType,
+  GoabIconOverridesType,
   GoabIconSize,
   GoabIconTheme,
   GoabIconType,
@@ -34,7 +35,7 @@ declare module "react" {
 }
 
 export interface GoabIconProps extends Margins {
-  type: GoabIconType;
+  type: GoabIconType | GoabIconOverridesType;
   size?: GoabIconSize;
   theme?: GoabIconTheme;
   inverted?: string | boolean; // TODO: Change type to only boolean
@@ -46,7 +47,7 @@ export interface GoabIconProps extends Margins {
 }
 
 interface WCProps extends Margins {
-  type: GoabIconType;
+  type: GoabIconType | GoabIconOverridesType;
   theme?: GoabIconTheme;
   size?: GoabIconSize;
   inverted?: string;
