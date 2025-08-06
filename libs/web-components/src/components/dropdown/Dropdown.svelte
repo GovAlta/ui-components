@@ -1065,9 +1065,7 @@
     background-color: transparent;
     color: var(--goa-dropdown-color-text);
     appearance: none;
-    padding: calc(var(--goa-space-xs) + 1px);
-    padding-left: var(--goa-space-s);
-    padding-right: 3rem;
+    padding: var(--goa-dropdown-padding);
     outline: none;
     width: 100%;
   }
