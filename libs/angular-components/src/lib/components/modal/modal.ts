@@ -11,12 +11,12 @@ import {
   TemplateRef,
   booleanAttribute,
 } from "@angular/core";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-modal",
-  imports: [NgIf, NgTemplateOutlet],
+  imports: [NgTemplateOutlet],
   template: `
     <goa-modal
       [attr.calloutvariant]="calloutVariant"
@@ -28,18 +28,22 @@ import { NgIf, NgTemplateOutlet } from "@angular/common";
       [attr.transition]="transition"
       [attr.heading]="getHeadingAsString()"
       (_close)="_onClose()"
-    >
+      >
       <div slot="heading">
-        <ng-container *ngIf="this.heading !== '' && getHeadingAsTemplate() !== null" [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+        @if (this.heading !== '' && getHeadingAsTemplate() !== null) {
+          <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+        }
       </div>
-
+    
       <ng-content></ng-content>
-
+    
       <div slot="actions">
-        <ng-container *ngIf="this.actions" [ngTemplateOutlet]="actions"></ng-container>
+        @if (this.actions) {
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        }
       </div>
     </goa-modal>
-  `,
+    `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabModal {
