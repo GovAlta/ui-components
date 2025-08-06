@@ -21,7 +21,7 @@ declare module "react" {
 }
 
 export interface GoabDropdownItemProps {
-  value: string;
+  value: string | number;
   label?: string;
   filter?: string;
   testId?: string;

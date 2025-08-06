@@ -26,7 +26,7 @@ declare module "react" {
 }
 
 export interface GoabRadioItemProps extends Margins {
-  value?: string;
+  value?: string | number | boolean;
   label?: string;
   name?: string;
   description?: string | React.ReactNode;

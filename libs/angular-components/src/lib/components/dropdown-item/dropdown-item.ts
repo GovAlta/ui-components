@@ -17,7 +17,7 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDropdownItem {
-  @Input() value?: string | number | boolean;
+  @Input() value?: string | number;
   @Input() filter?: string;
   @Input() label?: string;
   @Input() name?: string;

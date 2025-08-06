@@ -4,7 +4,7 @@ export type GoabSpinnerSize = "small" | "medium" | "large" | "xlarge";
 
 export type GoabRadioGroupOnChangeDetail = {
   name: string;
-  value: string;
+  value: string | number | boolean;
 };
 
 export type GoabInputOnChangeDetail<T = string> = {
@@ -55,8 +55,8 @@ export type GoabDropdownItemMountType = "append" | "prepend" | "reset";
 
 export type GoabDropdownOnChangeDetail = {
   name?: string;
-  value?: string;
-  values?: string[];
+  value?: string | number;
+  values?: (string | number)[];
 };
 
 export type GoabDatePickerOnChangeDetail = {
@@ -72,7 +72,7 @@ export type GoabFilterChipTheme = "outline" | "filled";
 
 export type GoabCheckboxOnChangeDetail = {
   name?: string;
-  value?: string;
+  value?: string | number | boolean;
   checked: boolean;
   binding: "value" | "check";
 };
@@ -1032,7 +1032,6 @@ export interface GoabFieldsetOnContinueDetail {
 export type GoabPublicFormStatus = "initializing" | "complete";
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
-
 
 // Public form Task
 export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";
