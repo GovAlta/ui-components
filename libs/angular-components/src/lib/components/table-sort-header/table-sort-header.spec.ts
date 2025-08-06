@@ -1,8 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTableSortHeader } from "../table-sort-header/table-sort-header";
 
 @Component({
+  standalone: true,
+  imports: [GoabTableSortHeader],
   template: `
     <th>
       <goab-table-sort-header name="firstName" direction="asc">
@@ -18,16 +20,17 @@ class TestTableSortHeaderComponent {
 describe("GoABTableSortHeader", () => {
   let fixture: ComponentFixture<TestTableSortHeaderComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTableSortHeaderComponent],
-      imports: [GoabTableSortHeader],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabTableSortHeader, TestTableSortHeaderComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTableSortHeaderComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-table-sort-header");

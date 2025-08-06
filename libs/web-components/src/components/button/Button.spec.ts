@@ -1,6 +1,6 @@
 import { render, fireEvent, waitFor } from "@testing-library/svelte";
 import GoAButton from "./Button.svelte";
-import { it, describe, vi } from "vitest";
+import { it, describe, vi, expect } from "vitest";
 
 describe("GoAButtonComponent", () => {
   it("should render", async () => {
@@ -122,10 +122,13 @@ describe("GoAButtonComponent", () => {
       const button = await baseElement.findByTestId("button-test");
 
       expect(button).toBeTruthy();
-      expect(button).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(button).toHaveStyle("margin-right:var(--goa-space-m)");
-      expect(button).toHaveStyle("margin-bottom:var(--goa-space-l)");
-      expect(button).toHaveStyle("margin-left:var(--goa-space-xl)");
+      await waitFor(() => {
+        const style = button.getAttribute("style");
+        expect(style).toContain("margin-top:var(--goa-space-s)");
+        expect(style).toContain("margin-right:var(--goa-space-m)");
+        expect(style).toContain("margin-bottom:var(--goa-space-l)");
+        expect(style).toContain("margin-left:var(--goa-space-xl)");
+      });
     });
   });
 });

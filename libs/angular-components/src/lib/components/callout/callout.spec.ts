@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabCallout } from "./callout";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabCalloutSize, GoabCalloutType } from "@abgov/ui-components-common";
+import { GoabCalloutSize, GoabCalloutType, Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabCallout],
   template: `
     <goab-callout
       [type]="type"
@@ -26,20 +28,19 @@ class TestCalloutComponent {
   heading?: string;
   size?: GoabCalloutSize;
   testId?: string;
-  mt?: string;
-  mb?: string;
-  ml?: string;
-  mr?: string;
+  mt?: Spacing;
+  mb?: Spacing;
+  ml?: Spacing;
+  mr?: Spacing;
 }
 
 describe("GoABCallout", () => {
   let fixture: ComponentFixture<TestCalloutComponent>;
   let component: TestCalloutComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabCallout],
-      declarations: [TestCalloutComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabCallout, TestCalloutComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -55,7 +56,9 @@ describe("GoABCallout", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const el = fixture.nativeElement.querySelector("goa-callout");

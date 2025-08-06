@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabPagination } from "./pagination";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabPaginationOnChangeDetail, GoabPaginationVariant, Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabPagination],
   template: `
   <goab-pagination [itemCount]="itemCount"
                     [pageNumber]="pageNumber"
@@ -34,17 +36,18 @@ describe("GoABPagination", () => {
   let fixture: ComponentFixture<TestPaginationComponent>;
   let component: TestPaginationComponent;
 
-  beforeEach(async() => {
-    await TestBed.configureTestingModule({
-      declarations: [TestPaginationComponent],
-      imports: [GoabPagination],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabPagination, TestPaginationComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestPaginationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render successfully", () => {
     const el = fixture.nativeElement.querySelector("goa-pagination");

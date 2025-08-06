@@ -4,7 +4,10 @@ import {
   Component,
   Input,
   booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -12,6 +15,7 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-badge",
   template: `
     <goa-badge
+      *ngIf="isReady"
       [attr.type]="type"
       [attr.icon]="icon"
       [attr.icontype]="iconType"
@@ -26,6 +30,7 @@ import { GoabBaseComponent } from "../base.component";
     </goa-badge>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [CommonModule],
   styles: [
     `
       :host {
@@ -34,10 +39,25 @@ import { GoabBaseComponent } from "../base.component";
     `,
   ],
 })
-export class GoabBadge extends GoabBaseComponent {
+export class GoabBadge extends GoabBaseComponent implements OnInit {
   @Input() type?: GoabBadgeType;
   @Input() content?: string;
   @Input({ transform: booleanAttribute }) icon?: boolean;
   @Input() iconType?: GoabIconType;
   @Input() ariaLabel?: string;
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 }

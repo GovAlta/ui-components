@@ -8,7 +8,7 @@ import {
   GoabInputType,
   Spacing,
 } from "@abgov/ui-components-common";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import { NgIf, NgTemplateOutlet, CommonModule } from "@angular/common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -20,15 +20,17 @@ import {
   booleanAttribute,
   numberAttribute,
   TemplateRef,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   standalone: true,
   selector: "goab-input-number",
-  imports: [NgIf, NgTemplateOutlet],
+  imports: [NgIf, NgTemplateOutlet, CommonModule],
   template: `
     <goa-input
+      *ngIf="isReady"
       [attr.type]="type"
       [attr.name]="name"
       [attr.focused]="focused"
@@ -102,6 +104,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class GoabInputNumber implements ControlValueAccessor, OnInit {
+  isReady = false;
   @Input() type: GoabInputType = "number";
   @Input() name?: string;
   @Input() id?: string;
@@ -144,8 +147,14 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
 
   handleTrailingIconClick = false;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
     this.handleTrailingIconClick = this.onTrailingIconClick.observed;
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
   }
 
   _onTrailingIconClick(_: Event) {

@@ -2,7 +2,7 @@ import { render, fireEvent, waitFor, cleanup } from "@testing-library/svelte";
 import GoAInput from "./Input.svelte";
 import GoAInputWrapper from "./Input.test.svelte";
 import GoAInputFormItemWrapper from "./InputFormItemWrapper.test.svelte";
-import { it, describe } from "vitest";
+import { it, describe, expect, afterEach, vi } from "vitest";
 
 afterEach(cleanup);
 
@@ -178,7 +178,9 @@ describe("GoAInput Component", () => {
     const click = vi.fn();
     icon.addEventListener("_trailingIconClick", click);
     await fireEvent.click(icon);
-    expect(click).toBeCalled();
+    await waitFor(() => {
+      expect(click).toBeCalled();
+    });
   });
 
   it("allows the input to be focused", async () => {
@@ -255,7 +257,9 @@ describe("GoAInput Component", () => {
     iconButton.addEventListener("_trailingIconClick", onClick);
 
     await fireEvent.click(iconButton);
-    expect(onClick).toBeCalledTimes(1);
+    await waitFor(() => {
+      expect(onClick).toBeCalledTimes(1);
+    });
   });
 
   describe("type=number", () => {
@@ -381,12 +385,17 @@ describe("GoAInput Component", () => {
         ml: "xl",
       });
       const input = await baseElement.findByTestId("input-test");
+      const containerElement = baseElement.container.querySelector(".container");
 
       expect(input).toBeTruthy();
-      expect(input).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(input).toHaveStyle("margin-right:var(--goa-space-m)");
-      expect(input).toHaveStyle("margin-bottom:var(--goa-space-l)");
-      expect(input).toHaveStyle("margin-left:var(--goa-space-xl)");
+      expect(containerElement).toBeTruthy();
+      await waitFor(() => {
+        const style = containerElement?.getAttribute("style");
+        expect(style).toContain("margin-top:var(--goa-space-s)");
+        expect(style).toContain("margin-right:var(--goa-space-m)");
+        expect(style).toContain("margin-bottom:var(--goa-space-l)");
+        expect(style).toContain("margin-left:var(--goa-space-xl)");
+      });
     });
   });
 

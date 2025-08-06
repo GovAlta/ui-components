@@ -97,19 +97,16 @@
   }[type];
 
   onMount(() => {
-    setTimeout(() => validateType(type), 1);
+    validateType(type);
 
-    //wait for property initialization
-    setTimeout(() => {
-      if (!showIcon && !content) {
-        console.warn(
-          "GoabBadge must have either the content or icon property set",
-        );
-      }
-      if (showIconOnly && !arialabel) {
-        console.warn("GoabBadge with icon only requires an arialabel");
-      }
-    }, 0);
+    if (!showIcon && !content) {
+      console.warn(
+        "GoabBadge must have either the content or icon property set",
+      );
+    }
+    if (showIconOnly && !arialabel) {
+      console.warn("GoabBadge with icon only requires an arialabel");
+    }
   });
 </script>
 

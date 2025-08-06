@@ -98,12 +98,10 @@
   // Hooks
 
   onMount(() => {
-    setTimeout(() => {
-      validatePosition(position);
-      validateAlignment(halign);
-      validator(position, halign);
-      maxwidth = validateMaxWidth(maxwidth);
-    }, 1);
+    validatePosition(position);
+    validateAlignment(halign);
+    validator(position, halign);
+    maxwidth = validateMaxWidth(maxwidth);
 
     _initialPosition = position;
     _tooltipInstanceId = Math.random().toString(36);

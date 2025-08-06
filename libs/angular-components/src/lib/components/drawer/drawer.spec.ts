@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDrawer } from "./drawer";
 import { Component } from "@angular/core";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabDrawer],
   template: `
     <goab-drawer
       [open]="open"
@@ -23,8 +25,6 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
       </ng-template>
     </goab-drawer>
   `,
-  standalone: true,
-  imports: [GoabDrawer],
 })
 class TestDrawerComponent {
   open = false;
@@ -43,17 +43,19 @@ describe("GoabDrawer", () => {
   let component: TestDrawerComponent;
   let fixture: ComponentFixture<TestDrawerComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
       imports: [TestDrawerComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestDrawerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
-  it("renders with string heading", async () => {
+  it("renders with string heading", fakeAsync(() => {
     const drawerElement = fixture.nativeElement.querySelector("goa-drawer");
     expect(drawerElement).toBeTruthy();
 
@@ -65,5 +67,5 @@ describe("GoabDrawer", () => {
     expect(drawerElement.textContent).toContain("Test Content");
     const actionsContent = drawerElement.querySelector("[slot='actions']");
     expect(actionsContent?.textContent).toContain("Close");
-  });
+  }));
 });

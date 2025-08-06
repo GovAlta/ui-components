@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 import {
   booleanAttribute,
   Component,
@@ -7,15 +7,18 @@ import {
   Input,
   Output,
   TemplateRef,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "goab-drawer",
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   template: `
     <goa-drawer
+      *ngIf="isReady"
       [open]="open"
       [attr.position]="position"
       [attr.heading]="getHeadingAsString()"
@@ -34,7 +37,7 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabDrawer {
+export class GoabDrawer implements OnInit {
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;
   @Input({ required: true }) position!: GoabDrawerPosition;
   @Input() heading!: string | TemplateRef<any>;
@@ -42,6 +45,19 @@ export class GoabDrawer {
   @Input() testId?: string;
   @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onClose() {
     this.onClose.emit();

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDropdown } from "./dropdown";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabIconType, Spacing } from "@abgov/ui-components-common";
@@ -8,13 +8,15 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabDropdown, GoabDropdownItem, ReactiveFormsModule],
   template: `
     <goab-dropdown
       [leadingIcon]="leadingIcon"
       [name]="name"
       [value]="value"
       [maxHeight]="maxHeight"
-      [placeHolder]="placeholder"
+      [placeholder]="placeholder"
       [filterable]="filterable"
       [disabled]="disabled"
       [error]="error"
@@ -73,10 +75,9 @@ describe("GoABDropdown", () => {
   let fixture: ComponentFixture<TestDropdownComponent>;
   let component: TestDropdownComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestDropdownComponent],
-      imports: [GoabDropdown, GoabDropdownItem, ReactiveFormsModule],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabDropdown, GoabDropdownItem, ReactiveFormsModule, TestDropdownComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -104,7 +105,9 @@ describe("GoABDropdown", () => {
     component.ariaLabelledBy = "foo-dropdown-label";
     component.autoComplete = "off";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should bind all web-components attribute", () => {
     const el = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
@@ -133,7 +136,7 @@ describe("GoABDropdown", () => {
     });
   });
 
-  it("should allow for a single selection", async () => {
+  it("should allow for a single selection", fakeAsync(() => {
     const onChangeMock = jest.spyOn(component, "onChange");
     component.native = true;
     fixture.detectChanges();
@@ -148,5 +151,5 @@ describe("GoABDropdown", () => {
       }),
     );
     expect(onChangeMock).toHaveBeenCalled();
-  });
+  }));
 });

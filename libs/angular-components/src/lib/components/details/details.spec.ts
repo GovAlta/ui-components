@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDetails } from "./details";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabDetails],
   template: `
     <goab-details
       [heading]="heading"
@@ -21,7 +23,7 @@ import { By } from "@angular/platform-browser";
   `,
 })
 class TestDetailsComponent {
-  heading?: string;
+  heading = "";
   testId?: string;
   open?: boolean;
   mt?: Spacing;
@@ -34,10 +36,9 @@ describe("GoABDetails", () => {
   let fixture: ComponentFixture<TestDetailsComponent>;
   let component: TestDetailsComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabDetails],
-      declarations: [TestDetailsComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabDetails, TestDetailsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -54,7 +55,9 @@ describe("GoABDetails", () => {
     component.ml = "2xl";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-details")).nativeElement;

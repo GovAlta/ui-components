@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabChipTheme, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -6,6 +6,8 @@ import { fireEvent } from "@testing-library/dom";
 import { GoabFilterChip } from "./filter-chip";
 
 @Component({
+  standalone: true,
+  imports: [GoabFilterChip],
   template: `
     <goab-filter-chip
       [error]="error"
@@ -39,10 +41,9 @@ class TestFilterChipComponent {
 describe("GoabFilterChip", () => {
   let fixture: ComponentFixture<TestFilterChipComponent>;
   let component: TestFilterChipComponent;
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabFilterChip],
-      declarations: [TestFilterChipComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFilterChip, TestFilterChipComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -58,7 +59,9 @@ describe("GoabFilterChip", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const chipElement = fixture.debugElement.query(By.css("goa-filter-chip")).nativeElement;
@@ -72,11 +75,11 @@ describe("GoabFilterChip", () => {
     expect(chipElement.getAttribute("ml")).toBe(component.ml);
   });
 
-  it("should allow to handle delete event", async () => {
+  it("should allow to handle delete event", fakeAsync(() => {
     const onClick = jest.spyOn(component, "onClick");
     const chipElement = fixture.debugElement.query(By.css("goa-filter-chip")).nativeElement;
     fireEvent(chipElement, new CustomEvent("_click"));
 
     expect(onClick).toHaveBeenCalled();
-  });
+  }));
 });

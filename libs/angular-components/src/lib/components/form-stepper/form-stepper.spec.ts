@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabFormStepper } from "./form-stepper";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
@@ -6,6 +6,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabFormStepper],
   template: `
     <goab-form-stepper
       [testId]="testId"
@@ -37,10 +39,9 @@ describe("GoABFormStepper", () => {
   let fixture: ComponentFixture<TestFormStepperComponent>;
   let component: TestFormStepperComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestFormStepperComponent],
-      imports: [GoabFormStepper],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFormStepper, TestFormStepperComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -54,7 +55,9 @@ describe("GoABFormStepper", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-form-stepper")).nativeElement;

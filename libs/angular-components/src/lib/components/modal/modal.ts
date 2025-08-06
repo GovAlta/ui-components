@@ -10,15 +10,18 @@ import {
   Output,
   TemplateRef,
   booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-modal",
-  imports: [NgIf, NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   template: `
     <goa-modal
+      *ngIf="isReady"
       [attr.calloutvariant]="calloutVariant"
       [attr.open]="open"
       [attr.maxwidth]="maxWidth"
@@ -28,7 +31,7 @@ import { NgIf, NgTemplateOutlet } from "@angular/common";
       [attr.transition]="transition"
       [attr.heading]="getHeadingAsString()"
       (_close)="_onClose()"
-    >
+      >
       <div slot="heading">
         <ng-container *ngIf="this.heading !== '' && getHeadingAsTemplate() !== null" [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
       </div>
@@ -39,10 +42,23 @@ import { NgIf, NgTemplateOutlet } from "@angular/common";
         <ng-container *ngIf="this.actions" [ngTemplateOutlet]="actions"></ng-container>
       </div>
     </goa-modal>
-  `,
+    `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabModal {
+export class GoabModal implements OnInit {
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
+
   @Input() calloutVariant?: GoabModalCalloutVariant;
   @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() maxWidth?: string;

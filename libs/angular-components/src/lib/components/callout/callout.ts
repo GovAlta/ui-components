@@ -4,14 +4,23 @@ import {
   GoabCalloutType,
   GoabCalloutIconTheme,
 } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-callout",
+  imports: [CommonModule],
   template: `
     <goa-callout
+      *ngIf="isReady"
       [attr.type]="type"
       [attr.heading]="heading"
       [attr.size]="size"
@@ -29,7 +38,22 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabCallout extends GoabBaseComponent {
+export class GoabCallout extends GoabBaseComponent implements OnInit {
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
+
   @Input() type?: GoabCalloutType = "information";
   @Input() heading?: string = "";
   @Input() size?: GoabCalloutSize = "large";

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabFileUploadInput } from "./file-upload-input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabFileUploadInputVariant, Spacing } from "@abgov/ui-components-common";
@@ -6,6 +6,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabFileUploadInput],
   template: `
     <goab-file-upload-input
       (onSelectFile)="onSelectFile()"
@@ -39,10 +41,9 @@ describe("GoABFileUploadInput", () => {
   let fixture: ComponentFixture<TestFileUploadInputComponent>;
   let component: TestFileUploadInputComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestFileUploadInputComponent],
-      imports: [GoabFileUploadInput],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFileUploadInput, TestFileUploadInputComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -59,7 +60,9 @@ describe("GoABFileUploadInput", () => {
     component.ml = "l";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render successfully", () => {
     const el = fixture.debugElement.query(By.css("goa-file-upload-input")).nativeElement;

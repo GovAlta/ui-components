@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTextArea } from "./textarea";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabTextArea],
   template: `
     <goab-textarea
       [testId]="testId"
@@ -57,10 +59,9 @@ describe("GoABTextArea", () => {
   let fixture: ComponentFixture<TestTextareaComponent>;
   let component: TestTextareaComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTextareaComponent],
-      imports: [GoabTextArea],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestTextareaComponent, GoabTextArea],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestTextareaComponent);
@@ -78,7 +79,9 @@ describe("GoABTextArea", () => {
     component.mb = "l" as Spacing;
     component.ml = "xl" as Spacing;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-textarea");

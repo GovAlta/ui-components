@@ -10,7 +10,10 @@ import {
   Input,
   Output,
   booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -18,6 +21,7 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-icon-button",
   template: `
     <goa-icon-button
+      *ngIf="isReady"
       [attr.icon]="icon"
       [disabled]="disabled"
       [attr.size]="size"
@@ -37,9 +41,12 @@ import { GoabBaseComponent } from "../base.component";
       <ng-content></ng-content>
     </goa-icon-button>
   `,
+  imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabIconButton extends GoabBaseComponent {
+export class GoabIconButton extends GoabBaseComponent implements OnInit {
+  isReady = false;
+  protected readonly JSON = JSON;
   @Input({ required: true }) icon!: GoabIconType;
   @Input() size?: GoabIconSize = "medium";
   @Input() variant?: GoabIconButtonVariant;
@@ -49,12 +56,22 @@ export class GoabIconButton extends GoabBaseComponent {
   @Input() action?: string;
   @Input() actionArg?: string;
   @Input() actionArgs?: Record<string, unknown>;
-
   @Output() onClick = new EventEmitter();
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   _onClick() {
     this.onClick.emit();
   }
 
-  protected readonly JSON = JSON;
+
 }

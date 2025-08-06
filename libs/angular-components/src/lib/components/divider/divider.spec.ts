@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDivider } from "./divider";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabDivider],
   template: `
     <goab-divider
       [testId]="testId"
@@ -27,11 +29,10 @@ describe("GoABDivider", () => {
   let fixture: ComponentFixture<TestDividerComponent>;
   let component: TestDividerComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabDivider],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabDivider, TestDividerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestDividerComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestDividerComponent);
@@ -45,7 +46,9 @@ describe("GoABDivider", () => {
     component.testId = "divider-testid";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-divider")).nativeElement;

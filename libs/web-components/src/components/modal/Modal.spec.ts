@@ -1,7 +1,7 @@
 import { render, fireEvent, cleanup, waitFor } from "@testing-library/svelte";
 import GoAModal from "./Modal.svelte";
 import GoAModalWrapper from "./ModalWrapper.test.svelte";
-import { it, describe } from "vitest";
+import { it, describe, expect, vi, afterEach } from "vitest";
 
 afterEach(cleanup);
 
@@ -23,8 +23,8 @@ describe("Modal Component", () => {
 
     await waitFor(() => {
       const modalEl = el.queryByTestId("modal");
-      // @ts-expect-error: setting deprecated prop
-      expect(modalEl.style["_values"]["--maxwidth"]).toBe("500px");
+      const style = modalEl?.getAttribute("style");
+      expect(style).toContain("--maxwidth: 500px");
     });
   });
 
@@ -33,7 +33,8 @@ describe("Modal Component", () => {
 
     await waitFor(() => {
       const modalEl = el.queryByTestId("modal");
-      expect(modalEl?.style["_values"]["--maxwidth"]).toBe("500px");
+      const style = modalEl?.getAttribute("style");
+      expect(style).toContain("--maxwidth: 500px");
     });
   });
 

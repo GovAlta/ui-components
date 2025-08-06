@@ -1,5 +1,6 @@
 import { Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, numberAttribute } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, numberAttribute, OnInit, ChangeDetectorRef } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -7,6 +8,7 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-pages",
   template: `
     <goa-pages
+      *ngIf="isReady"
       [attr.current]="current"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -16,8 +18,21 @@ import { GoabBaseComponent } from "../base.component";
       <ng-content />
     </goa-pages>
   `,
+  imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabPages extends GoabBaseComponent {
+export class GoabPages extends GoabBaseComponent implements OnInit {
+  isReady = false;
   @Input({ transform: numberAttribute }) current?: number;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 }

@@ -823,8 +823,8 @@ describe("GoADropdown", () => {
 
       expect(dropdown).toBeTruthy();
       expect(dropdown).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-m)");
-      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-m)");
       expect(dropdown).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });

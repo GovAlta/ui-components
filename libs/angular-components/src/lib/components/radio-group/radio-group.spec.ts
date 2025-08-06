@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabRadioGroup } from "./radio-group";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -8,6 +8,7 @@ import {
 } from "@abgov/ui-components-common";
 import { GoabRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
+import { CommonModule } from "@angular/common";
 
 interface RadioOption {
   text: string;
@@ -17,6 +18,8 @@ interface RadioOption {
 }
 
 @Component({
+  standalone: true,
+  imports: [GoabRadioGroup, GoabRadioItem, CommonModule],
   template: `
     <goab-radio-group
       [name]="name"
@@ -73,10 +76,9 @@ describe("GoABRadioGroup", () => {
   let fixture: ComponentFixture<TestRadioGroupComponent>;
   let component: TestRadioGroupComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabRadioGroup, GoabRadioItem],
-      declarations: [TestRadioGroupComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabRadioGroup, GoabRadioItem, TestRadioGroupComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -104,7 +106,9 @@ describe("GoABRadioGroup", () => {
     ];
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-radio-group");
@@ -132,11 +136,13 @@ describe("GoABRadioGroup", () => {
     });
   });
 
-  it("should render description", () => {
+  it("should render description", fakeAsync(() => {
     component.options.forEach((option, index) => {
       component.options[index].description = `Description for ${component.options[index].text}`;
     });
     component.options[0].isDescriptionSlot = true;
+    fixture.detectChanges();
+    tick();
     fixture.detectChanges();
 
     const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
@@ -151,16 +157,16 @@ describe("GoABRadioGroup", () => {
     // attribute description
     expect(radioItems[1].getAttribute("description")).toBe(`Description for ${component.options[1].text}`);
     expect(radioItems[2].getAttribute("description")).toBe(`Description for ${component.options[2].text}`);
-  });
+  }));
 
   it("should dispatch onChange", () => {
     const onChange = jest.spyOn(component, "onChange");
 
     const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
     fireEvent(radioGroup, new CustomEvent("_change", {
-      detail: {"name": component.name, value: component.options[0].value}
+      detail: { "name": component.name, value: component.options[0].value }
     }));
 
-    expect(onChange).toBeCalledWith({name: component.name, value: component.options[0].value});
+    expect(onChange).toBeCalledWith({ name: component.name, value: component.options[0].value });
   })
 });

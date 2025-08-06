@@ -5,6 +5,8 @@ import { By } from "@angular/platform-browser";
 import { Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabPublicSubform],
   template: `
     <goab-public-subform
       [id]="id"
@@ -52,8 +54,7 @@ describe("GoabPublicSubform", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestPublicSubformComponent],
-      imports: [GoabPublicSubform],
+      imports: [GoabPublicSubform, TestPublicSubformComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

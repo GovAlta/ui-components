@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabNotification } from "./notification";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
 import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabNotification],
   template: `
     <goab-notification
       [type]="type"
@@ -31,17 +33,18 @@ describe("GoABNotification", () => {
   let fixture: ComponentFixture<TestNotificationComponent>;
   let component: TestNotificationComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestNotificationComponent],
-      imports: [GoabNotification],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestNotificationComponent, GoabNotification],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render notification banner", () => {
     const el = fixture.nativeElement.querySelector("goa-notification");

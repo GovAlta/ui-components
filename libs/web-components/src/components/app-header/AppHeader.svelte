@@ -5,7 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
-  import { getSlottedChildren, styles, toBoolean } from "../../common/utils";
+  import { getSlottedChildren, toBoolean } from "../../common/utils";
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import type { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
 

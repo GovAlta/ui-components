@@ -23,7 +23,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -147,9 +147,7 @@
   // Hooks
   // =====
 
-  onMount(async () => {
-    await tick();
-
+  onMount(() => {
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     validateTextAlign(textalign);
@@ -236,12 +234,14 @@
 
   // Relay message up the chain to allow any parent element to have a reference to the input element
   function sendMountedMessage() {
-    relay<FormFieldMountRelayDetail>(
-      _rootEl,
-      FormFieldMountMsg,
-      { name, el: _inputEl },
-      { bubbles: true, timeout: 10 },
-    );
+    if (name) {
+      relay<FormFieldMountRelayDetail>(
+        _rootEl,
+        FormFieldMountMsg,
+        { name, el: _inputEl },
+        { bubbles: true, timeout: 10 },
+      );
+    }
   }
 
   function onKeyUp(e: Event) {
@@ -305,6 +305,8 @@
   }
 
   function checkSlots() {
+    if (!_rootEl) return; // for unit test if it isn't rendered fast enough
+
     const leadingContentSlot = _rootEl.querySelector(
       "slot[name=leadingContent]",
     ) as HTMLSlotElement;

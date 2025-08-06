@@ -8,7 +8,7 @@
 />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import { addDays, addMonths, addYears, format, startOfDay } from "date-fns";
   import type { Spacing } from "../../common/styling";
   import { padLeft, toBoolean } from "../../common/utils";
@@ -70,8 +70,7 @@
   // re-init the data when the value changes
   $: setDate(value);
 
-  onMount(async () => {
-    await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
+  onMount(() => {
     setDate(value);
     addRelayListener();
     sendMountedMessage();

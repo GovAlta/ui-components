@@ -1,12 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
-import { NgTemplateOutlet } from "@angular/common";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, OnInit, ChangeDetectorRef } from "@angular/core";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-hero-banner",
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   template: `
     <goa-hero-banner
+      *ngIf="isReady"
       [attr.heading]="heading"
       [attr.backgroundurl]="backgroundUrl"
       [attr.minheight]="minHeight"
@@ -23,7 +24,8 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabHeroBanner {
+export class GoabHeroBanner implements OnInit {
+  isReady = false;
   @Input() heading?: string;
   @Input() backgroundUrl?: string;
   @Input() minHeight?: string;
@@ -31,6 +33,14 @@ export class GoabHeroBanner {
   @Input() maxContentWidth?: string;
   @Input() backgroundColor?: string;
   @Input() textColor?: string;
-
   @Input() actions!: TemplateRef<any>;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 }

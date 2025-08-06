@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { GoabText } from './text';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -6,8 +6,8 @@ describe('GoabText', () => {
   let component: GoabText;
   let fixture: ComponentFixture<GoabText>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
       imports: [GoabText],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
@@ -15,22 +15,26 @@ describe('GoabText', () => {
     fixture = TestBed.createComponent(GoabText);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render text content', () => {
+  it('should render text content', fakeAsync(() => {
     const testText = 'Test Content';
     const compiled = fixture.nativeElement as HTMLElement;
     compiled.innerHTML = testText;
     fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
     expect(compiled.textContent).toContain(testText);
-  });
+  }));
 
-  it('should render with all properties', () => {
+  it('should render with all properties', fakeAsync(() => {
     component.tag = 'h1';
     component.maxWidth = '100px';
     component.size = 'heading-xl';
@@ -39,6 +43,8 @@ describe('GoabText', () => {
     component.mr = 'm';
     component.mb = 'l';
     component.ml = 'xl';
+    fixture.detectChanges();
+    tick();
     fixture.detectChanges();
 
     const element = fixture.nativeElement.querySelector('goa-text');
@@ -50,9 +56,11 @@ describe('GoabText', () => {
     expect(element.getAttribute('mr')).toBe('m');
     expect(element.getAttribute('mb')).toBe('l');
     expect(element.getAttribute('ml')).toBe('xl');
-  });
+  }));
 
-  it('should handle undefined properties', () => {
+  it('should handle undefined properties', fakeAsync(() => {
+    fixture.detectChanges();
+    tick();
     fixture.detectChanges();
     const element = fixture.nativeElement.querySelector('goa-text');
 
@@ -64,5 +72,5 @@ describe('GoabText', () => {
     expect(element.getAttribute('mr')).toBeNull();
     expect(element.getAttribute('mb')).toBeNull();
     expect(element.getAttribute('ml')).toBeNull();
-  });
+  }));
 });

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabFileUploadCard } from "./file-upload-card";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
@@ -6,6 +6,9 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabFileUploadCard],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <goab-file-upload-card
       [filename]="filename"
@@ -48,32 +51,38 @@ describe("GoABFileUploadCard", () => {
   let fixture: ComponentFixture<TestGoABFileUploadComponent>;
   let component: TestGoABFileUploadComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestGoABFileUploadComponent],
-      imports: [GoabFileUploadCard],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFileUploadCard, TestGoABFileUploadComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestGoABFileUploadComponent);
     component = fixture.componentInstance;
-  });
-  it("should render with base params", () => {
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+  it("should render with base params", fakeAsync(() => {
     component.filename = "foo.png";
     component.size = 1e3;
+    fixture.detectChanges();
+    tick();
     fixture.detectChanges();
 
     const el = fixture.debugElement.query(By.css("goa-file-upload-card")).nativeElement;
     expect(el?.getAttribute("filename")).toBe(component.filename);
     expect(el?.getAttribute("size")).toBe("1000");
-  });
-  it("should render with additional params", () => {
+  }));
+  it("should render with additional params", fakeAsync(() => {
     component.filename = "foo.png";
     component.size = 1e3;
     component.type = "image/png";
     component.progress = 23;
     component.error = "true";
     component.testId = "foo";
+    fixture.detectChanges();
+    tick();
     fixture.detectChanges();
 
     const el = fixture.debugElement.query(By.css("goa-file-upload-card")).nativeElement;
@@ -83,30 +92,36 @@ describe("GoABFileUploadCard", () => {
     expect(el?.getAttribute("progress")).toBe("23");
     expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("testid")).toBe("foo");
-  });
+  }));
 
-  it("should dispatch an even when delete is clicked and upload is complete", () => {
+  it("should dispatch an even when delete is clicked and upload is complete", fakeAsync(() => {
     const onCancel = jest.spyOn(component, "onCancel");
     component.filename = "foo.png";
     component.size = 1e3;
     component.progress = 23;
 
     fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
     const el = fixture.debugElement.query(By.css("goa-file-upload-card")).nativeElement;
     fireEvent(el, new CustomEvent("_cancel"));
 
     expect(onCancel).toHaveBeenCalledTimes(1);
-  });
-  it("should dispatch an event when an error occurs", () => {
+  }));
+  it("should dispatch an event when an error occurs", fakeAsync(() => {
     const onDelete = jest.spyOn(component, "onDelete");
     component.filename = "foo.png";
     component.size = 1e3;
     component.error = "fail";
 
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
     const el = fixture.debugElement.query(By.css("goa-file-upload-card")).nativeElement;
     fireEvent(el, new CustomEvent("_delete"));
 
     expect(onDelete).toHaveBeenCalledTimes(1);
-  });
+  }));
 });

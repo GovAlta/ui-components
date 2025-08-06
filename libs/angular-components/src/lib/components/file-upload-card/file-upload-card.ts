@@ -9,12 +9,16 @@ import {
   Input,
   Output,
   numberAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-file-upload-card",
   template: `<goa-file-upload-card
+    *ngIf="isReady"
     [attr.filename]="filename"
     [attr.size]="size"
     [attr.type]="type"
@@ -26,8 +30,9 @@ import {
   >
   </goa-file-upload-card>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [CommonModule],
 })
-export class GoabFileUploadCard {
+export class GoabFileUploadCard implements OnInit {
   @Input({ required: true }) filename!: string;
   @Input({ transform: numberAttribute }) size?: number;
   @Input() type?: string;
@@ -37,6 +42,19 @@ export class GoabFileUploadCard {
 
   @Output() onCancel = new EventEmitter<GoabFileUploadOnCancelDetail>();
   @Output() onDelete = new EventEmitter<GoabFileUploadOnDeleteDetail>();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onCancel() {
     this.onCancel.emit({ filename: this.filename });

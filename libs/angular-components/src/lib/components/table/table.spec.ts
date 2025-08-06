@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTable } from "./table";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -9,6 +9,8 @@ import {
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabTable],
   template: `
     <goab-table
       [width]="width"
@@ -51,10 +53,9 @@ describe("GoabTable", () => {
   let fixture: ComponentFixture<TestTableComponent>;
   let component: TestTableComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTableComponent],
-      imports: [GoabTable],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabTable, TestTableComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -70,7 +71,9 @@ describe("GoabTable", () => {
     component.mr = "2xl" as Spacing;
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-table");

@@ -7,16 +7,21 @@ import {
   Output,
   booleanAttribute,
   forwardRef,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 // "disabled", "value", "id" is an exposed property of HTMLInputElement, no need to bind with attr
 @Component({
   standalone: true,
   selector: "goab-dropdown",
+  imports: [CommonModule],
   template: `
     <goa-dropdown
+      *ngIf="isReady"
       [attr.name]="name"
       [value]="value"
       [attr.arialabel]="ariaLabel"
@@ -53,7 +58,7 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-export class GoabDropdown extends GoabControlValueAccessor {
+export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Input() name?: string;
   @Input() ariaLabel?: string;
   @Input() ariaLabelledBy?: string;
@@ -70,8 +75,22 @@ export class GoabDropdown extends GoabControlValueAccessor {
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
-
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;

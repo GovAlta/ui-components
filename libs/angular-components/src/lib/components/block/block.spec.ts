@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabBlock } from "./block";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -9,6 +9,8 @@ import {
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabBlock],
   template: `
     <goab-block
       [gap]="gap"
@@ -39,11 +41,10 @@ describe("GoABBlock", () => {
   let fixture: ComponentFixture<TestBlockComponent>;
   let component: TestBlockComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabBlock],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabBlock, TestBlockComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestBlockComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestBlockComponent);
@@ -57,7 +58,9 @@ describe("GoABBlock", () => {
     component.ml = "l" as Spacing;
     component.mr = "xl" as Spacing;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const blockElement = fixture.debugElement.query(By.css("goa-block")).nativeElement;

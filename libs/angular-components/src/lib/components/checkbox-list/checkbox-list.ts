@@ -6,14 +6,18 @@ import {
   Input,
   Output,
   forwardRef,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-checkbox-list",
   template: ` <goa-checkbox-list
+    *ngIf="isReady"
     [attr.name]="name"
     [value]="value"
     [disabled]="disabled"
@@ -30,6 +34,7 @@ import { GoabControlValueAccessor } from "../base.component";
     <ng-content />
   </goa-checkbox-list>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [CommonModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -38,12 +43,24 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-export class GoabCheckboxList extends GoabControlValueAccessor {
+export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit {
+  isReady = false;
   @Input() name!: string;
   @Input() maxWidth?: string;
 
   // Override value to handle string arrays consistently
   @Input() override value?: string[];
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
 

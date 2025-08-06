@@ -9,6 +9,8 @@ import {
 } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabPublicFormPage],
   template: `
     <goab-public-form-page
       [id]="id"
@@ -54,8 +56,7 @@ describe("GoabPublicFormPage", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestPublicFormPageComponent],
-      imports: [GoabPublicFormPage],
+      imports: [GoabPublicFormPage, TestPublicFormPageComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

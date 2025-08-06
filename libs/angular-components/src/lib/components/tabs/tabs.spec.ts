@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTabs } from "./tabs";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabTab } from "../tab/tab";
@@ -6,6 +6,8 @@ import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabTabs, GoabTab],
   template: `
     <goab-tabs [initialTab]="1" testId="foo" (onChange)="onChange($event)">
       <goab-tab heading="Profile">Tab content </goab-tab>
@@ -23,17 +25,18 @@ describe("GoABTabs", () => {
   let fixture: ComponentFixture<TestTabsComponent>;
   let component: TestTabsComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTabsComponent],
-      imports: [GoabTabs, GoabTab],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabTabs, GoabTab, TestTabsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTabsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-tabs");
@@ -50,7 +53,7 @@ describe("GoABTabs", () => {
     fireEvent(
       el,
       new CustomEvent("_change", {
-        detail: { tab: 2}
+        detail: { tab: 2 }
       })
     );
 

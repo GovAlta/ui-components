@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabAppFooterMetaSection } from "./footer-meta-section";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabAppFooterMetaSection],
   template: `
     <goab-app-footer-meta-section testId="foo" slot="meta">
       <a href="#">Home</a>
@@ -18,17 +20,18 @@ describe("GoABFooterMetaSection", () => {
   let fixture: ComponentFixture<TestFooterMetaSectionComponent>;
   let component: TestFooterMetaSectionComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestFooterMetaSectionComponent],
-      imports: [GoabAppFooterMetaSection],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAppFooterMetaSection, TestFooterMetaSectionComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestFooterMetaSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(

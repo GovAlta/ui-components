@@ -1,14 +1,16 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabFormItem } from "./form-item";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabFormItemRequirement, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { GoabFormItemSlot } from "./form-item-slot";
+import { CommonModule } from "@angular/common";
 
 @Component({
+  standalone: true,
+  imports: [GoabFormItem, GoabFormItemSlot, CommonModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    standalone: true,
-    imports: [GoABFormItemSlot],
     <goab-form-item
       [label]="label"
       [requirement]="requirement"
@@ -47,10 +49,9 @@ describe("GoABFormItem", () => {
   let fixture: ComponentFixture<TestFormItemComponent>;
   let component: TestFormItemComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestFormItemComponent],
-      imports: [GoabFormItem],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFormItem, TestFormItemComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -65,7 +66,9 @@ describe("GoABFormItem", () => {
     component.mb = "l";
     component.ml = "xl";
     component.mr = "m";
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render with properties", () => {
     component.error = "This is an error";

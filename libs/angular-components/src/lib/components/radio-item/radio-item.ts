@@ -1,5 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, booleanAttribute, } from "@angular/core";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  TemplateRef,
+  booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -7,6 +15,7 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-radio-item",
   template: `
     <goa-radio-item
+      *ngIf="isReady"
       [attr.name]="name"
       [attr.value]="value"
       [attr.label]="label"
@@ -33,8 +42,8 @@ import { GoabBaseComponent } from "../base.component";
         ></ng-container>
       </div>
     </goa-radio-item>
-  `,
-  imports: [NgTemplateOutlet, NgIf],
+    `,
+  imports: [NgTemplateOutlet, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabRadioItem extends GoabBaseComponent {
@@ -49,6 +58,21 @@ export class GoabRadioItem extends GoabBaseComponent {
   @Input({ transform: booleanAttribute }) checked?: boolean;
   @Input({ transform: booleanAttribute }) error?: boolean;
   @Input() maxWidth?: string;
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   getDescriptionAsString(): string {
     return !this.description || this.description instanceof TemplateRef
