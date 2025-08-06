@@ -18,10 +18,11 @@ import {
   booleanAttribute,
   numberAttribute,
   TemplateRef,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import { NgIf, NgTemplateOutlet, CommonModule } from "@angular/common";
 
 export interface IgnoreMe {
   ignore: string;
@@ -30,9 +31,10 @@ export interface IgnoreMe {
 @Component({
   standalone: true,
   selector: "goab-input",
-  imports: [NgIf, NgTemplateOutlet],
+  imports: [NgIf, NgTemplateOutlet, CommonModule],
   template: `
     <goa-input
+      *ngIf="isReady"
       [attr.type]="type"
       [attr.name]="name"
       [attr.focused]="focused"
@@ -137,9 +139,20 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Output() onKeyPress = new EventEmitter<GoabInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
+  isReady = false;
   handleTrailingIconClick = false;
 
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
   ngOnInit() {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+
     this.handleTrailingIconClick = this.onTrailingIconClick.observed;
     if (typeof this.value === "number") {
       console.warn("For numeric values use goab-input-number.");

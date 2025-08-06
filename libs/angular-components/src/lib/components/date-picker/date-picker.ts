@@ -8,14 +8,19 @@ import {
   forwardRef,
   ElementRef,
   HostListener,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-date-picker",
+  imports: [CommonModule],
   template: ` <goa-date-picker
+    *ngIf="isReady"
     [attr.name]="name"
     [attr.value]="formatValue(value)"
     [attr.min]="min"
@@ -41,7 +46,8 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-export class GoabDatePicker extends GoabControlValueAccessor {
+export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
+  isReady = false;
   @Input() name?: string;
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: Date | string | null | undefined;
@@ -72,8 +78,17 @@ export class GoabDatePicker extends GoabControlValueAccessor {
     this.fcChange?.(detail.value);
   }
 
-  constructor(protected elementRef: ElementRef) {
+  constructor(protected elementRef: ElementRef, private cdr: ChangeDetectorRef) {
     super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
   }
 
   override setDisabledState(isDisabled: boolean) {

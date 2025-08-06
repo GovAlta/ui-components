@@ -4,6 +4,8 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabPublicFormSummary],
   template: `
     <goab-public-form-summary
       [heading]="heading"
@@ -22,8 +24,7 @@ describe("GoabPublicFormSummary", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestPublicFormSummaryComponent],
-      imports: [GoabPublicFormSummary],
+      imports: [GoabPublicFormSummary, TestPublicFormSummaryComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

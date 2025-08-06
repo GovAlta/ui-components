@@ -13,12 +13,7 @@
 
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import {
-    typeValidator,
-    toBoolean,
-    dispatch,
-    relay,
-  } from "../../common/utils";
+  import { typeValidator, toBoolean, dispatch } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
   // Validators

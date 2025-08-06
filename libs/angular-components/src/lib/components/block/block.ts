@@ -3,14 +3,23 @@ import {
   GoabBlockDirection,
   Spacing,
 } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-block",
+  imports: [CommonModule],
   template: `
     <goa-block
+      *ngIf="isReady"
       [attr.gap]="gap"
       [attr.direction]="direction"
       [attr.alignment]="alignment"
@@ -25,8 +34,23 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabBlock extends GoabBaseComponent {
+export class GoabBlock extends GoabBaseComponent implements OnInit {
   @Input() gap?: Spacing;
   @Input() direction?: GoabBlockDirection;
   @Input() alignment?: GoabBlockAlignment;
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 }

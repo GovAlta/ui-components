@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabSideMenuHeading } from "./side-menu-heading";
-import { Component } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabBadge } from "../badge/badge";
 
 @Component({
+  standalone: true,
+  imports: [GoabSideMenuHeading, GoabBadge],
   template: `
   <goab-side-menu-heading icon="home" testId="foo" [meta]="meta">Heading
     <ng-template #meta><goab-badge type="dark" content="details"></goab-badge></ng-template>
@@ -16,15 +18,17 @@ class TestSideMenuHeadingComponent {
 
 describe("GoABSideMenuHeading", () => {
   let fixture: ComponentFixture<TestSideMenuHeadingComponent>;
-  beforeEach(async() => {
-    await TestBed.configureTestingModule({
-      declarations: [TestSideMenuHeadingComponent],
-      imports: [GoabSideMenuHeading, GoabBadge]
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabSideMenuHeading, GoabBadge, TestSideMenuHeadingComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuHeadingComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-side-menu-heading");

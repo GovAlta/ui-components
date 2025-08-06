@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTab } from "./tab";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
+  standalone: true,
+  imports: [GoabTab],
   template: `
     <goab-tab heading="Profile">
       <p>
@@ -19,16 +21,17 @@ class TestTabComponent {
 describe("GoABTab", () => {
   let fixture: ComponentFixture<TestTabComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTabComponent],
-      imports: [GoabTab],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabTab, TestTabComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTabComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-tab");

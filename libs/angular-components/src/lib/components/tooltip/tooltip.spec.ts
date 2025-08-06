@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTooltip } from "./tooltip";
 import { Component } from "@angular/core";
 import { GoabIcon } from "../icon/icon";
 
 @Component({
+  standalone: true,
+  imports: [GoabTooltip, GoabIcon],
   template: `
     <goab-tooltip content="This is a tooltip" position="top" hAlign="right" testId="foo">
       <goab-icon type="information-circle"></goab-icon>
@@ -20,15 +22,16 @@ class TestTooltipComponent {
 describe("GoABTooltip", () => {
   let fixture: ComponentFixture<TestTooltipComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTooltipComponent],
-      imports: [GoabTooltip, GoabIcon],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabTooltip, GoabIcon, TestTooltipComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestTooltipComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector('goa-tooltip[testid="foo"]');

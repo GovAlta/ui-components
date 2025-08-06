@@ -1,5 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabModal } from "./modal";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -10,6 +9,8 @@ import {
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabModal],
   template: `
     <goab-modal
       [open]="open"
@@ -54,17 +55,18 @@ describe("GoABModal", () => {
   let fixture: ComponentFixture<TestModalComponent>;
   let component: TestModalComponent;
 
-  beforeEach(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TestModalComponent],
-      imports: [GoabModal],
+      imports: [TestModalComponent, GoabModal],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const modal = fixture.debugElement.query(By.css("goa-modal")).nativeElement;

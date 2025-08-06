@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabHeroBanner } from "./hero-banner";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabHeroBanner],
   template: `
     <goab-hero-banner
       [heading]="heading"
@@ -36,10 +38,9 @@ describe("GoABHeroBanner", () => {
   let fixture: ComponentFixture<TestHeroBannerComponent>;
   let component: TestHeroBannerComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestHeroBannerComponent],
-      imports: [GoabHeroBanner],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabHeroBanner, TestHeroBannerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestHeroBannerComponent);
@@ -54,7 +55,9 @@ describe("GoABHeroBanner", () => {
     component.testId = "foo";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-hero-banner")).nativeElement;

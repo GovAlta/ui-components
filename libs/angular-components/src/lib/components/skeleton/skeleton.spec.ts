@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabSkeleton } from "./skeleton";
-import { Component } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabSkeletonType, Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabSkeleton],
   template: `
   <goab-skeleton [type]="type"
                  [maxWidth]="maxWidth"
@@ -32,16 +34,18 @@ describe("GoABSkeleton", () => {
   let fixture: ComponentFixture<TestSkeletonComponent>;
   let component: TestSkeletonComponent;
 
-  beforeEach(async() => {
-    await TestBed.configureTestingModule({
-      declarations: [TestSkeletonComponent],
-      imports: [GoabSkeleton]
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabSkeleton, TestSkeletonComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSkeletonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  })
+    tick();
+    fixture.detectChanges();
+  }))
 
   it("should render successfully", () => {
     const el = fixture.nativeElement.querySelector("goa-skeleton");

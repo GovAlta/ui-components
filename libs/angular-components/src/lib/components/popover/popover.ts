@@ -1,14 +1,15 @@
 import { GoabPopoverPosition } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef } from "@angular/core";
-import { NgTemplateOutlet } from "@angular/common";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, OnInit, ChangeDetectorRef } from "@angular/core";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-popover",
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   template: `
     <goa-popover
+      *ngIf="isReady"
       [attr.maxwidth]="maxWidth"
       [attr.minwidth]="minWidth"
       [attr.padded]="padded"
@@ -28,7 +29,8 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabPopover extends GoabBaseComponent {
+export class GoabPopover extends GoabBaseComponent implements OnInit {
+  isReady = false;
   @Input() maxWidth = "320px";
   @Input() minWidth?: string;
   @Input() padded = true;
@@ -38,4 +40,15 @@ export class GoabPopover extends GoabBaseComponent {
    */
   @Input() relative?: boolean;
   @Input({ required: true }) target!: TemplateRef<any>;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 }

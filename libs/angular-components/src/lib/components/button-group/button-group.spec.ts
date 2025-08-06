@@ -1,14 +1,16 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabButtonGroup } from "./button-group";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   GoabButtonGroupAlignment,
-  GoabButtonGroupGap,
+  GoabButtonGroupGap, Spacing,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { GoabButton } from "../button/button";
 
 @Component({
+  standalone: true,
+  imports: [GoabButtonGroup, GoabButton],
   template: `
     <goab-button-group
       [alignment]="alignment"
@@ -30,20 +32,19 @@ class TestButtonGroupComponent {
   alignment?: GoabButtonGroupAlignment;
   gap?: GoabButtonGroupGap;
   testId?: string;
-  mt?: string;
-  mb?: string;
-  ml?: string;
-  mr?: string;
+  mt?: Spacing;
+  mb?: Spacing;
+  ml?: Spacing;
+  mr?: Spacing;
 }
 
 describe("GoABButtonGroup", () => {
   let fixture: ComponentFixture<TestButtonGroupComponent>;
   let component: TestButtonGroupComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabButtonGroup, GoabButton],
-      declarations: [TestButtonGroupComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabButtonGroup, GoabButton, TestButtonGroupComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -57,7 +58,9 @@ describe("GoABButtonGroup", () => {
     component.ml = "s";
     component.mr = "l";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const buttonGroupElement = fixture.debugElement.query(

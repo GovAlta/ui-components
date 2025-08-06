@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabCircularProgress } from "./circular-progress";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -8,6 +8,8 @@ import {
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabCircularProgress],
   template: `
     <goab-circular-progress
       [variant]="variant"
@@ -32,11 +34,10 @@ describe("GoABCircularProgress", () => {
   let fixture: ComponentFixture<TestCircularProgressComponent>;
   let component: TestCircularProgressComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabCircularProgress],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabCircularProgress, TestCircularProgressComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestCircularProgressComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestCircularProgressComponent);
@@ -49,10 +50,12 @@ describe("GoABCircularProgress", () => {
     component.testId = "foo";
 
     fixture.detectChanges();
-  });
+    tick(); // Wait for component initialization
+    fixture.detectChanges();
+  }));
 
   it("should not render anything when not visible", () => {
-    const el = fixture.debugElement.query(By.css("goa-circular-progress")).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-circular-progress"))?.nativeElement;
     expect(el?.innerHTML).toBeFalsy();
   });
 
@@ -66,7 +69,9 @@ describe("GoABCircularProgress", () => {
 
       const el = fixture.debugElement.query(
         By.css("goa-circular-progress"),
-      ).nativeElement;
+      )?.nativeElement;
+
+      expect(el).toBeTruthy();
       expect(el?.getAttribute("progress")).toBe(`${progress}`);
       expect(el?.getAttribute("message")).toBe(component.message);
       expect(el?.getAttribute("testid")).toBe(component.testId);

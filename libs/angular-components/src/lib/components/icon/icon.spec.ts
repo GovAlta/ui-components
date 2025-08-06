@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -11,6 +11,8 @@ import { GoabIcon } from "../icon/icon";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabIcon],
   template: `
     <goab-icon
       [type]="type"
@@ -49,10 +51,9 @@ describe("GoABIcon", () => {
   let fixture: ComponentFixture<TestIconComponent>;
   let component: TestIconComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestIconComponent],
-      imports: [GoabIcon],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabIcon, TestIconComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -72,7 +73,9 @@ describe("GoABIcon", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-icon")).nativeElement;

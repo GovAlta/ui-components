@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabInput } from "./input";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
 import {
@@ -12,6 +12,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabInput],
   template: `
     <goab-input
       [type]="type"
@@ -120,10 +122,9 @@ describe("GoABInput", () => {
   let fixture: ComponentFixture<TestInputComponent>;
   let component: TestInputComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestInputComponent],
-      imports: [GoabInput],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestInputComponent, GoabInput],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -159,7 +160,9 @@ describe("GoABInput", () => {
     component.max = 100;
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const input = fixture.debugElement.query(By.css("goa-input")).nativeElement;
@@ -190,11 +193,13 @@ describe("GoABInput", () => {
   });
 
   describe("Text Alignment", () => {
-    it("passes textAlign prop through to web component", () => {
+    it("passes textAlign prop through to web component", fakeAsync(() => {
       const testFixture = TestBed.createComponent(TestInputComponent);
       const testComponent = testFixture.componentInstance;
       testComponent.name = "test";
       testComponent.textAlign = "right";
+      testFixture.detectChanges();
+      tick();
       testFixture.detectChanges();
 
       const input = testFixture.debugElement.query(By.css("goa-input")).nativeElement;
@@ -204,7 +209,7 @@ describe("GoABInput", () => {
       testFixture.detectChanges();
 
       expect(input?.getAttribute("textalign")).toBe("left");
-    });
+    }));
   });
 
   it("should handle onChange event", () => {
@@ -264,6 +269,8 @@ describe("GoABInput", () => {
 });
 
 @Component({
+  standalone: true,
+  imports: [GoabInput],
   template: `
     <goab-input
       [leadingContent]="leadingContent"
@@ -279,16 +286,17 @@ class TestStringContentComponent {
 describe("GoabInput with string content", () => {
   let fixture: ComponentFixture<TestStringContentComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestStringContentComponent],
-      imports: [GoabInput],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestStringContentComponent, GoabInput],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestStringContentComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render string leadingContent and trailingContent", () => {
     const input = fixture.debugElement.query(By.css("goa-input"));

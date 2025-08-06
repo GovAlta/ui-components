@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabPages } from "./pages";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabPages],
   template: `
     <goab-pages [current]="current" [mt]="mt" [mb]="mb" [ml]="ml" [mr]="mr">
       <div>Children content</div>
@@ -22,10 +24,9 @@ describe("GoABPages", () => {
   let fixture: ComponentFixture<TestPagesComponent>;
   let component: TestPagesComponent;
 
-  beforeEach(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TestPagesComponent],
-      imports: [GoabPages],
+      imports: [GoabPages, TestPagesComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -39,7 +40,9 @@ describe("GoABPages", () => {
     component.mb = "xl";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-pages");

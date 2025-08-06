@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDatePicker } from "./date-picker";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
@@ -8,6 +8,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabDatePicker],
   template: `
     <goab-date-picker
       [name]="name"
@@ -44,10 +46,9 @@ describe("GoABDatePicker", () => {
   let fixture: ComponentFixture<TestDatePickerComponent>;
   let component: TestDatePickerComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabDatePicker, ReactiveFormsModule],
-      declarations: [TestDatePickerComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabDatePicker, ReactiveFormsModule, TestDatePickerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -65,7 +66,9 @@ describe("GoABDatePicker", () => {
     component.ml = "s";
     component.mr = "xs";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render successfully", () => {
     const el = fixture.debugElement.query(By.css("goa-date-picker")).nativeElement;
@@ -83,7 +86,7 @@ describe("GoABDatePicker", () => {
     expect(el?.getAttribute("type")).toBe("input");
   });
 
-  it("should handle event", async () => {
+  it("should handle event", fakeAsync(() => {
     const onChange = jest.spyOn(component, "onChange");
     const el = fixture.debugElement.query(By.css("goa-date-picker")).nativeElement;
 
@@ -95,5 +98,5 @@ describe("GoABDatePicker", () => {
     );
 
     expect(onChange).toHaveBeenCalled();
-  });
+  }));
 });

@@ -5,7 +5,10 @@ import {
   EventEmitter,
   Input,
   Output,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -13,6 +16,7 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-table",
   template: `
     <goa-table
+      *ngIf="isReady"
       [attr.width]="width"
       [attr.variant]="variant"
       [attr.testid]="testId"
@@ -27,11 +31,24 @@ import { GoabBaseComponent } from "../base.component";
       </table>
     </goa-table>
   `,
+  imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabTable extends GoabBaseComponent {
+export class GoabTable extends GoabBaseComponent implements OnInit {
+  isReady = false;
   @Input() width?: string;
   @Input() variant?: GoabTableVariant;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   @Output() onSort = new EventEmitter<GoabTableOnSortDetail>();
 

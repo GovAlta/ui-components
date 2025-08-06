@@ -109,13 +109,12 @@
   // Hooks
   // *****
 
-  onMount(async () => {
+  onMount(() => {
     _calendarDate = _selectedDate = value
       ? startOfDay(new Date(value))
       : startOfDay(new Date());
 
     initKeybindings();
-    await tick();
     renderCalendar({ type: "date", value: _selectedDate });
   });
 

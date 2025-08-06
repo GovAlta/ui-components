@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabMicrositeHeader } from "./microsite-header";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
+  standalone: true,
+  imports: [GoabMicrositeHeader],
   template: `
     <goab-microsite-header
       [type]="type"
@@ -29,16 +31,17 @@ class TestMicrositeHeaderComponent {
 describe("GoABMicrositeHeader", () => {
   let fixture: ComponentFixture<TestMicrositeHeaderComponent>;
   let component: TestMicrositeHeaderComponent;
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestMicrositeHeaderComponent],
-      imports: [GoabMicrositeHeader],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabMicrositeHeader, TestMicrositeHeaderComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestMicrositeHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
   it("should render properties", () => {
     const el = document.querySelector("goa-microsite-header");
     expect(el?.getAttribute("type")).toEqual("alpha");

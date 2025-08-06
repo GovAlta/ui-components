@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabLink } from "./link";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabIconType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabLink],
   template: `
     <goab-link
       [leadingIcon]="leadingIcon"
@@ -33,10 +35,9 @@ describe("GoABLink", () => {
   let fixture: ComponentFixture<TestLinkComponent>;
   let component: TestLinkComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabLink],
-      declarations: [TestLinkComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabLink, TestLinkComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -51,7 +52,9 @@ describe("GoABLink", () => {
     component.mr = "xl" as Spacing;
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render and set the props correctly", () => {
     const linkElement = fixture.debugElement.query(By.css("goa-link")).nativeElement;

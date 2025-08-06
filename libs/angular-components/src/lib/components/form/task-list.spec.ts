@@ -4,6 +4,8 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabPublicFormTaskList],
   template: `
     <goab-public-form-task-list
       [heading]="heading"
@@ -23,8 +25,7 @@ describe("GoabPublicFormTaskList", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestPublicFormTaskListComponent],
-      imports: [GoabPublicFormTaskList],
+      imports: [TestPublicFormTaskListComponent, GoabPublicFormTaskList],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

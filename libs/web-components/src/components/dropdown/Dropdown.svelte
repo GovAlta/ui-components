@@ -12,7 +12,7 @@
 />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -150,7 +150,7 @@
   // Hooks
   //
 
-  onMount(async () => {
+  onMount(() => {
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
@@ -159,8 +159,6 @@
     if (disableGlobalClosePopover) {
       _popoverEl.setAttribute("disable-global-close-popover", "yes");
     }
-
-    await tick();
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);

@@ -13,15 +13,20 @@ import {
   booleanAttribute,
   forwardRef,
   numberAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-textarea",
+  imports: [CommonModule],
   template: `
     <goa-textarea
+      *ngIf="isReady"
       [attr.name]="name"
       [attr.value]="value"
       [attr.placeholder]="placeholder"
@@ -55,7 +60,7 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-export class GoabTextArea extends GoabControlValueAccessor {
+export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Input() name?: string;
   @Input() placeholder?: string;
   @Input({ transform: numberAttribute }) rows?: number;
@@ -70,6 +75,21 @@ export class GoabTextArea extends GoabControlValueAccessor {
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
   @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;

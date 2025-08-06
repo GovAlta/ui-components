@@ -5,6 +5,8 @@ import { By } from "@angular/platform-browser";
 import { GoabFieldsetOnContinueDetail } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabFieldset],
   template: `
     <goab-fieldset
       [sectionTitle]="sectionTitle"
@@ -30,8 +32,7 @@ describe("GoabFieldSet", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestFieldsetComponent],
-      imports: [GoabFieldset],
+      imports: [GoabFieldset, TestFieldsetComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

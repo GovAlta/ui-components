@@ -14,7 +14,7 @@
     injectCss,
     type Spacing,
   } from "../../common/styling";
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -78,8 +78,7 @@
 
   // Hooks
 
-  onMount(async () => {
-    await tick(); // for angular to register public form name
+  onMount(() => {
     addRelayListener();
     sendMountedMessage();
     const finalWidth = width.includes("%") ? width : `min(${width}, 100%)`;

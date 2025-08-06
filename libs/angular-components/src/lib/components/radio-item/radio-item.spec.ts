@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabRadioItem } from "./radio-item";
 
 @Component({
+  standalone: true,
+  imports: [GoabRadioItem],
   template: `
     <goab-radio-item
       name="test"
@@ -17,23 +19,22 @@ import { GoabRadioItem } from "./radio-item";
     </goab-radio-item>
   `,
 })
-class TestRadioItemWithRevealSlotComponent {}
+class TestRadioItemWithRevealSlotComponent { }
 
 describe("Radio item with reveal slot", () => {
   let fixture: ComponentFixture<TestRadioItemWithRevealSlotComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabRadioItem],
-      declarations: [TestRadioItemWithRevealSlotComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabRadioItem, TestRadioItemWithRevealSlotComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestRadioItemWithRevealSlotComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render with slot reveal", () => {
     const radioItemElement = fixture.debugElement.nativeElement.querySelector("goa-radio-item");
