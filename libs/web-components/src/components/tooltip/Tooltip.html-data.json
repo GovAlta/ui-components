@@ -1,9 +1,10 @@
 {
+  "version": 1.1,
   "name": "goa-tooltip",
   "attributes": [
     {
       "name": "content",
-      "description": "Sets the tooltip text content",
+      "description": "Simple string content. For multiline / rich content, use <slot name=\"content\">.",
       "type": "string"
     },
     {
@@ -69,6 +70,16 @@
       "name": "ml",
       "description": "Left margin",
       "valueSet": "spacing"
+    }
+  ],
+  "slots": [
+    {
+      "name": "content",
+      "description": "Rich / multiline tooltip body. Overrides the 'content' attribute when provided."
+    },
+    {
+      "name": "default",
+      "description": "The target element that triggers the tooltip."
     }
   ],
   "references": [

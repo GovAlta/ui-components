@@ -26,4 +26,17 @@ describe("Tooltip", () => {
     expect(el?.getAttribute("halign")).toBe("right");
     expect(el?.getAttribute("testid")).toBe("foo");
   });
+
+  it("should render rich tooltip content via content prop", () => {
+    const { baseElement } = render(
+      <GoabTooltip content={<div><p>Line 1</p><p>Line 2</p></div>}>
+        Hover me
+      </GoabTooltip>,
+    );
+    const el = baseElement.querySelector("goa-tooltip");
+    expect(el?.getAttribute("content")).toBeNull();
+    // slotted content rendered inside shadow host is not directly visible here, but slot element should exist
+    const slotContent = baseElement.querySelector('[slot="content"]');
+    expect(slotContent?.innerHTML).toContain("Line 1");
+  });
 });

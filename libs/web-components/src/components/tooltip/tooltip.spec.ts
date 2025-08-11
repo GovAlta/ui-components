@@ -2,6 +2,7 @@ import Tooltip from "./Tooltip.svelte";
 import { tick } from "svelte";
 import { render, fireEvent, waitFor } from "@testing-library/svelte";
 import { it, expect, vi } from "vitest";
+import TooltipSlottedTest from "./TooltipSlottedTest.svelte";
 
 it("should render tooltip with provided properties", () => {
   const { container } = render(Tooltip, {
@@ -144,4 +145,11 @@ it("cursor style remains same on hover", async () => {
     },
     { timeout: 500 },
   );
+});
+
+it("renders slotted multiline content when no content attribute provided", async () => {
+  const { container } = render(TooltipSlottedTest);
+  const tooltipEl = container.querySelector(".tooltip-text") as HTMLElement;
+  expect(tooltipEl.innerHTML).toContain("Line 1");
+  expect(tooltipEl.innerHTML).toContain("Line 2");
 });
