@@ -25,6 +25,7 @@
     ariaLabel: string;
     maxWidth: string;
     revealAriaLabel?: string;
+    size?: string;
   };
 
   export type RadioItemSelectProps = {
@@ -73,6 +74,7 @@
   let _revealSlotEl: HTMLElement;
   let _formFields: HTMLElement[] = [];
   let _revealSlotHeight: number = 0;
+  let _size: string = "normal";
 
   // Reactive
 
@@ -192,6 +194,7 @@
       description = data.description;
       name = data.name;
       revealarialabel = data.revealAriaLabel;
+      _size = data.size || "normal";
     });
   }
 
@@ -242,7 +245,7 @@
     max-width: ${maxwidth};
   `}
   data-testid="root"
-  class="container"
+  class="container container--{_size}"
 >
   <label
     class="radio"
@@ -286,6 +289,42 @@
 </div>
 
 <style>
+  /* TEMP: Issue #2936 design token overrides - remove when tokens published to npm */
+  :host {
+    /* Border widths: 1px → 1.5px default, 3px → 2px focus */
+    --goa-radio-border: 1.5px solid #797676; /* Updated: 1px → 1.5px, color updated */
+    --goa-radio-border-focus: 2px solid #006dcc; /* Updated: 3px → 2px, focus color updated */
+    --goa-radio-focus-offset: 2px; /* New: 2px gap between border and focus ring */
+    
+    /* Label spacing: 8px → 12px normal, 8px compact */
+    --goa-radio-gap: var(--goa-space-s); /* New: 12px label padding */
+    --goa-radio-gap-compact: var(--goa-space-xs); /* New: 8px compact label padding */
+    
+    /* Updated color palette - Normal states */
+    --goa-radio-border-hover: 1.5px solid #000000; /* Updated hover color, consistent 1.5px border */
+    --goa-radio-border-checked: 1.5px solid #006dcc; /* Updated: thin blue border when checked */
+    --goa-radio-border-checked-hover: 1.5px solid #045092; /* Updated: thin blue border when checked+hover */
+    --goa-radio-border-checked-focus: 2px solid #006dcc; /* New: checked+focus outline */
+    --goa-radio-label-color-disabled: #bab7b7; /* Updated disabled text color */
+    
+    /* Error states - all combinations */
+    --goa-radio-border-error: 1.5px solid #da291c; /* Updated error color, consistent 1.5px border */
+    --goa-radio-border-error-hover: 1.5px solid #a91a10; /* Updated error+hover color, consistent 1.5px border */
+    --goa-radio-border-checked-error: 1.5px solid #da291c; /* Updated: thin red border when checked+error */
+    --goa-radio-border-checked-error-hover: 1.5px solid #a91a10; /* Updated: thin red border when checked+error+hover */
+    --goa-radio-border-error-disabled: 1.5px solid #f58185; /* Error+disabled, consistent 1.5px border */
+    --goa-radio-border-checked-error-disabled: 1.5px solid #f58185; /* Checked+error+disabled, consistent 1.5px border */
+    --goa-radio-color-bg-error: #FDDED9; /* New: error state background color */
+    --goa-radio-color-bg-error-hover: #F4C8C5; /* New: error state background color on hover */
+    
+    /* Disabled states */
+    --goa-radio-border-disabled: 1.5px solid #BAB7B7; /* Updated: disabled border color */
+    --goa-radio-border-checked-disabled: 1.5px solid #BAB7B7; /* Updated: disabled checked border color */
+    --goa-radio-color-bg-disabled: #F2F0F0; /* New: disabled background color */
+    --goa-radio-reveal-border: 1px solid #E1DEDD; /* New: reveal left border color and width */
+    --goa-radio-reveal-padding: var(--goa-space-m) var(--goa-space-m) var(--goa-space-m) 25px; /* New: reveal padding with 25px left spacing */
+  }
+
   .radio {
     display: inline-flex;
   }
@@ -318,8 +357,13 @@
   }
 
   .label {
-    padding: 0 var(--goa-space-xs);
+    padding: 0 var(--goa-radio-gap, 12px);
     font: var(--goa-radio-label);
+  }
+
+  /* Compact size variant */
+  .container--compact .label {
+    padding: 0 var(--goa-radio-gap-compact, 8px);
   }
 
   .description {
@@ -338,13 +382,14 @@
     display: block;
   }
   .reveal.visible.has-content {
-    padding: var(--goa-space-m);
-    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
-    border-left: 4px solid var(--goa-color-greyscale-200);
+    padding: var(--goa-radio-reveal-padding, var(--goa-space-m) var(--goa-space-m) var(--goa-space-m) 25px);
+    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 1px);
+    border-left: var(--goa-radio-reveal-border, 1px solid #E1DEDD);
   }
 
   .icon {
     display: inline-block;
+    position: relative; /* TEMP: Added for new checked state inner circle */
     height: var(--goa-radio-size);
     width: var(--goa-radio-size);
     border-radius: var(--goa-radio-border-radius);
@@ -368,67 +413,114 @@
 
   /* Unchecked */
   input[type="radio"]:not(:checked) ~ .icon {
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    border: var(--goa-radio-border, 1.5px solid var(--goa-color-greyscale-700));
     margin-top: 3px;
   }
   /* Unchecked:hover */
   input[type="radio"]:hover ~ .icon {
-    border: var(--goa-radio-border-hover);
+    border: var(--goa-radio-border-hover, 2px solid var(--goa-color-interactive-hover));
   }
   /* Unchecked:focus */
   input[type="radio"]:focus-visible ~ .icon,
   input[type="radio"]:hover:focus-visible ~ .icon {
-    outline: var(--goa-radio-border-focus);
+    outline: var(--goa-radio-border-focus, 2px solid var(--goa-color-interactive-focus));
+    outline-offset: var(--goa-radio-focus-offset, 2px);
   }
   /* Unchecked:hover+focus */
   input[type="radio"]:hover:focus-visible ~ .icon {
-    border: var(--goa-radio-border);
+    border: var(--goa-radio-border, 1.5px solid var(--goa-color-greyscale-700));
   }
 
   /* Checked */
   input[type="radio"]:checked ~ .icon {
-    border: var(--goa-radio-border-checked);
+    border: var(--goa-radio-border-checked, 7px solid var(--goa-color-interactive-default));
     margin-top: 3px;
   }
   /* Checked:hover */
   input[type="radio"]:checked:hover ~ .icon {
-    border: var(--goa-radio-border-checked-hover);
+    border: var(--goa-radio-border-checked-hover, 7px solid var(--goa-color-interactive-hover));
+  }
+  /* Checked:focus */
+  input[type="radio"]:checked:focus-visible ~ .icon {
+    outline: var(--goa-radio-border-focus, 2px solid var(--goa-color-interactive-focus));
+    outline-offset: var(--goa-radio-focus-offset, 2px);
   }
   /* Checked:hover+focus */
   input[type="radio"]:checked:hover:focus-visible ~ .icon {
     border: var(--goa-radio-border-checked);
+    outline: var(--goa-radio-border-focus, 2px solid var(--goa-color-interactive-focus));
+    outline-offset: var(--goa-radio-focus-offset, 2px);
+  }
+
+  /* Inner blue circle for checked state - NEW DESIGN */
+  input[type="radio"]:checked ~ .icon::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #006dcc;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Inner circle hover state */
+  input[type="radio"]:checked:hover ~ .icon::after {
+    background-color: #045092;
+  }
+
+  /* Inner circle error states */
+  .radio--error input[type="radio"]:checked ~ .icon::after {
+    background-color: #da291c;
+  }
+  
+  .radio--error input[type="radio"]:checked:hover ~ .icon::after {
+    background-color: #a91a10;
+  }
+
+  /* Inner circle disabled state */
+  input[type="radio"]:disabled:checked ~ .icon::after {
+    background-color: #BAB7B7;
   }
 
   /* Disabled */
   input[type="radio"]:disabled ~ .icon,
   input[type="radio"]:disabled:focus-visible ~ .icon {
     border: var(--goa-radio-border-disabled);
+    background-color: var(--goa-radio-color-bg-disabled, #F2F0F0);
   }
   input[type="radio"]:disabled:checked ~ .icon,
   input[type="radio"]:disabled:checked:focus-visible ~ .icon {
     border: var(--goa-radio-border-checked-disabled);
+    background-color: var(--goa-radio-color-bg-disabled, #F2F0F0);
   }
 
   /* Error */
   .radio--error input[type="radio"] ~ .icon {
     border: var(--goa-radio-border-error);
+    background-color: var(--goa-radio-color-bg-error, #FDDED9);
   }
   .radio--error input[type="radio"]:hover ~ .icon {
     border: var(--goa-radio-border-error-hover);
+    background-color: var(--goa-radio-color-bg-error-hover, #F4C8C5);
   }
   .radio--error input[type="radio"]:hover:focus-visible ~ .icon {
     outline: var(--goa-radio-border-focus);
     border: var(--goa-radio-border-error);
+    background-color: var(--goa-radio-color-bg-error-hover, #F4C8C5);
   }
   .radio--error input[type="radio"]:checked ~ .icon {
     border: var(--goa-radio-border-checked-error);
   }
   .radio--error input[type="radio"]:checked:hover ~ .icon {
     border: var(--goa-radio-border-checked-error-hover);
+    background-color: var(--goa-radio-color-bg-error-hover, #F4C8C5);
   }
   .radio--error input[type="radio"]:checked:hover:focus-visible ~ .icon {
     outline: var(--goa-radio-border-focus);
     border: var(--goa-radio-border-checked-error);
+    background-color: var(--goa-radio-color-bg-error-hover, #F4C8C5);
   }
   .radio--error input[type="radio"]:disabled ~ .icon {
     border: var(--goa-radio-border-error-disabled);
