@@ -260,8 +260,6 @@
 
     // updating form state with the fieldset specific data
     _state.form[id] = { heading: state.heading, data: { type: "details", fieldsets: state.data } };
-
-    dispatchStateChange();
   }
 
   /**

@@ -292,9 +292,6 @@
     if (!_formItems[name]) {
       return;
     }
-    if (!_formFields[name]) {
-      return;
-    }
 
     _state[name].value = value;
 
