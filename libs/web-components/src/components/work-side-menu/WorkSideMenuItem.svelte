@@ -1,0 +1,307 @@
+<svelte:options customElement="goa-work-side-menu-item" />
+
+<script lang="ts">
+  import { onMount, onDestroy, tick } from "svelte";
+  import { dispatch, getSlottedChildren } from "../../common/utils";
+
+  type WorkSideMenuItemVariation = "normal" | "submenu";
+  type WorkSideMenuItemType = "normal" | "emergency" | "success";
+
+  // ******
+  // Public
+  // ******
+
+  export let label: string;
+  export let url: string;
+
+  // optional
+  export let badge: string = undefined;
+  export let current: boolean = false;
+  export let divider: boolean = false;
+  export let icon: string = undefined;
+  export let testid: string = "";
+  export let type: WorkSideMenuItemType = "normal";
+  export let variation: WorkSideMenuItemVariation = "normal";
+
+  // *******
+  // Private
+  // *******
+
+  let _rootEl: HTMLElement;
+  let _linkEl: HTMLAnchorElement;
+  let _subMenuEl: HTMLElement;
+  let _submenuLinks: HTMLAnchorElement[];
+
+  // ========
+  // Reactive
+  // ========
+
+  $: _alwaysVisible =
+    !isNaN(parseInt(badge)) && parseInt(badge) > 0 && parseInt(badge) < 10;
+
+  // *****
+  // Hooks
+  // *****
+
+  onMount(async () => {
+    await tick();
+    getChildren();
+    addEventListeners();
+    dispatch(_rootEl, "work-side-menu-item:mount", {}, { bubbles: true });
+  });
+
+  onDestroy(() => {
+    removeEventListeners();
+  });
+
+  // *********
+  // Functions
+  // *********
+
+  function getChildren() {
+    if (!_subMenuEl) return;
+
+    const slotChildren = getSlottedChildren(_subMenuEl);
+    if (slotChildren.length === 0) return;
+
+    _submenuLinks = slotChildren
+      .filter((el) => el.tagName === "GOA-WORK-SIDE-MENU-ITEM")
+      .map((el) => {
+        return el.shadowRoot.querySelector("a");
+      });
+  }
+
+  function handleClick() {
+    if (_submenuLinks) {
+      setTimeout(() => {
+        _submenuLinks[0].click(); // select first submenu item
+      });
+    }
+    dispatch(_rootEl, "work-side-menu:update", {}, { bubbles: true });
+  }
+
+  function handleUpdateItem(e: CustomEvent) {
+    let currentLink = e.detail.current;
+    current = _linkEl === currentLink || _submenuLinks?.includes(currentLink);
+  }
+
+  function handleMouseEnter() {
+    dispatch(
+      _rootEl,
+      "work-side-menu-item:hover",
+      { el: _linkEl, label: label },
+      { bubbles: true },
+    );
+  }
+
+  function addEventListeners() {
+    _linkEl.addEventListener("work-side-menu-item:update", handleUpdateItem);
+  }
+
+  function removeEventListeners() {
+    _linkEl.removeEventListener("work-side-menu-item:update", handleUpdateItem);
+  }
+</script>
+
+<div
+  class="root"
+  class:divider
+  role="none"
+  data-testid={testid}
+  on:mouseenter={handleMouseEnter}
+  bind:this={_rootEl}
+>
+  <a
+    class="menu-item"
+    class:current
+    class:sub-menu-item={variation == "submenu"}
+    role="menuitem"
+    href={url}
+    bind:this={_linkEl}
+    on:click={handleClick}
+  >
+    {#if variation == "normal"}
+      <goa-icon
+        size="small"
+        theme={current ? "filled" : "outline"}
+        type={icon}
+      />
+    {/if}
+    <div class="menu-item-label">
+      {label}
+    </div>
+    {#if badge}
+      <div
+        class="badge"
+        class:emergency={type == "emergency"}
+        class:success={type == "success"}
+        class:alwaysvisible={_alwaysVisible}
+      >
+        {badge}
+      </div>
+    {/if}
+  </a>
+  {#if $$slots.default}
+    <div class="sub-menu" bind:this={_subMenuEl}>
+      <slot />
+    </div>
+  {/if}
+</div>
+
+<style>
+  /* TO DO: Move component tokens into style dictionary */
+  :host {
+    --goa-work-side-menu-item-border-radius: 0 8px 8px 0;
+    --goa-work-side-menu-item-padding: var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-l);
+    --goa-work-side-menu-item-text-color: var(--goa-color-text-secondary, #676363);
+    --goa-work-side-menu-item-text-color-current: var(--goa-color-text-default, #000000);
+    --goa-work-side-menu-item-text-size: var(--goa-typography-body-m, 16px);
+    --goa-work-side-menu-item-color-bg-hover: var(--goa-color-greyscale-200, #DBD2D2);
+    --goa-work-side-menu-item-color-bg-focus: var(--goa-color-greyscale-200, #DBD2D2);
+    --goa-work-side-menu-item-color-bg-current: var(--goa-color-greyscale-200, #DBD2D2);
+    --goa-work-side-menu-item-badge-text-size: var(--goa-font-size-2, 15px);
+    --goa-work-side-menu-item-badge-background-color: var(--goa-color-success-default, #29845E);
+  }
+
+  :host * {
+    box-sizing: border-box;
+  }
+
+  .root {
+    container-type: inline-size;
+    position: relative;
+  }
+
+  /* Menu item */
+  .menu-item {
+    position: relative;
+    display: flex;
+    gap: var(--goa-space-s);
+    border-radius: var(--goa-work-side-menu-item-border-radius);
+    text-decoration: none;
+    align-items: center;
+    padding: var(--goa-work-side-menu-item-padding);
+    color: var(--goa-work-side-menu-item-text-color);
+  }
+
+  .sub-menu-item {
+    padding: var(--goa-space-3xs) var(--goa-space-xs);
+  }
+
+  .menu-item:hover {
+    background: var(--goa-work-side-menu-item-color-bg-hover);
+  }
+
+  .menu-item:focus-visible {
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    background: var(--goa-work-side-menu-item-color-bg-focus);
+  }
+
+  /* Divider */
+  .divider {
+    padding-bottom: var(--goa-space-s);
+    margin-bottom: var(--goa-space-xs);
+    border-bottom: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
+  }
+
+  /* Sub-menu */
+  .sub-menu {
+    display: none;
+  }
+
+  /* Menu item label */
+  .menu-item-label {
+    flex-grow: 1;
+    font: var(--goa-work-side-menu-item-text-size);
+  }
+
+  /* Current item */
+  .current {
+    background: var(--goa-work-side-menu-item-color-bg-current);
+    color: var(--goa-work-side-menu-item-text-color-current);
+    font-weight: var(--goa-font-weight-medium, 600);
+    border-radius: var(--goa-border-radius-xl, 8px);
+  }
+
+  .current .menu-item-label {
+    font-weight: var(--goa-font-weight-medium, 600);
+  }
+
+  .current + .sub-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-3xs);
+    border-left: var(--goa-space-2xs) solid var(--goa-color-greyscale-100);
+    margin: var(--goa-space-xs) 0 0 var(--goa-space-m);
+    padding: 0 0 0 var(--goa-space-s);
+  }
+
+  /* Badge */
+  .badge {
+    color: var(--goa-color-text-light);
+    height: 32px;
+    min-width: 32px;
+    line-height: 2;
+    text-align: center;
+    font-size: var(--goa-work-side-menu-item-badge-text-size);
+    font-weight: 600;
+    background-color: var(--goa-work-side-menu-item-badge-background-color);
+    border-radius: 32px;
+    padding: 0 6px;
+  }
+
+  .badge.success {
+
+  }
+
+  .badge.emergency {
+  }
+
+  /* Icon-only items when menu is closed */
+  @container (max-width: 160px) {
+    .menu-item {
+      margin: 0 var(--goa-space-3xs);
+      height: 36px;
+      padding: 0 0 0 var(--goa-space-xs);
+      align-items: center;
+    }
+
+    .menu-item-label {
+      display: none;
+    }
+    .badge {
+      position: absolute;
+      height: var(--goa-space-m);
+      width: var(--goa-space-m);
+      min-width: auto;
+      padding: 0;
+      top: var(--goa-space-3xs);
+      right: var(--goa-space-3xs);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .badge:not(.alwaysvisible) {
+      font-size: 0;
+      color: transparent;
+    }
+
+    .current + .sub-menu {
+      display: none;
+      visibility: hidden;
+    }
+
+    @keyframes delayVisibility {
+      0% {
+        visibility: hidden;
+      }
+      99% {
+        visibility: hidden;
+      }
+      100% {
+        visibility: visible;
+      }
+    }
+  }
+</style>
