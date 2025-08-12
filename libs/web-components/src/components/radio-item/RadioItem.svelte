@@ -20,6 +20,7 @@
     description: string;
     disabled: boolean;
     error: boolean;
+    compact: boolean;
     name: string;
     checked: boolean;
     ariaLabel: string;
@@ -57,6 +58,7 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let checked: string = "false";
+  export let compact: string = "false";
   export let arialabel: string = "";
   export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
   export let maxwidth: string = "none";
@@ -79,6 +81,7 @@
   $: isDisabled = toBoolean(disabled);
   $: isError = toBoolean(error);
   $: isChecked = toBoolean(checked);
+  $: isCompact = toBoolean(compact);
   $: revealSlotHasContent = _revealSlotHeight > 0;
 
   // Hooks
@@ -173,6 +176,7 @@
             description,
             disabled: isDisabled,
             error: isError,
+            compact: isCompact,
             checked: isChecked,
             ariaLabel: arialabel,
             maxWidth: maxwidth,
@@ -189,6 +193,7 @@
       isDisabled = data.disabled;
       error = fromBoolean(data.error);
       checked = fromBoolean(data.checked);
+      compact = fromBoolean(data.compact);
       description = data.description;
       name = data.name;
       revealarialabel = data.revealAriaLabel;
@@ -248,6 +253,7 @@
     class="radio"
     class:radio--disabled={isDisabled}
     class:radio--error={isError}
+    class:radio--compact={isCompact}
   >
     <input
       type="radio"
@@ -286,6 +292,26 @@
 </div>
 
 <style>
+  
+  /* Custom properties override for 2.0 design tokens */
+  :host {
+    /* Updated spacing tokens */
+    --goa-radio-gap: var(--goa-space-s); /* Updated: 8px → 12px for default */
+    --goa-radio-gap-compact: var(--goa-space-xs); /* New: 8px for compact variant */
+    
+    /* Updated border tokens */
+    --goa-radio-border: 1.5px solid #797676; /* Updated: 1px → 1.5px, color updated */
+    --goa-radio-border-focus: 2px solid #006dcc; /* Updated: 3px → 2px, color updated, use outline */
+    --goa-radio-border-hover: 1.5px solid #000000; /* Updated color */
+    --goa-radio-border-checked: 7px solid #006dcc; /* Updated color */
+    --goa-radio-border-checked-hover: 7px solid #045092; /* Updated color */
+    --goa-radio-border-error: 1.5px solid #da291c; /* Updated color */
+    --goa-radio-border-error-hover: 1.5px solid #a91a10; /* Updated color */
+    
+    /* Updated label color for disabled state */
+    --goa-radio-label-color-disabled: #bab7b7; /* Updated color */
+  }
+
   .radio {
     display: inline-flex;
   }
@@ -318,8 +344,13 @@
   }
 
   .label {
-    padding: 0 var(--goa-space-xs);
+    padding: 0 var(--goa-radio-gap);
     font: var(--goa-radio-label);
+  }
+
+  /* Compact variant - smaller gap between radio circle and label */
+  .radio--compact .label {
+    padding: 0 var(--goa-radio-gap-compact);
   }
 
   .description {
@@ -327,6 +358,11 @@
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs);
     color: var(--goa-color-text-default);
+  }
+
+  /* Compact variant - adjust description margin */
+  .radio--compact ~ .description {
+    margin-left: calc(var(--goa-space-l) + var(--goa-radio-gap-compact));
   }
 
   .reveal {
@@ -368,14 +404,14 @@
 
   /* Unchecked */
   input[type="radio"]:not(:checked) ~ .icon {
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    border: var(--goa-radio-border);
     margin-top: 3px;
   }
   /* Unchecked:hover */
   input[type="radio"]:hover ~ .icon {
     border: var(--goa-radio-border-hover);
   }
-  /* Unchecked:focus */
+  /* Unchecked:focus - Use outline instead of border */
   input[type="radio"]:focus-visible ~ .icon,
   input[type="radio"]:hover:focus-visible ~ .icon {
     outline: var(--goa-radio-border-focus);

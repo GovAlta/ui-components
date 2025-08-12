@@ -39,6 +39,7 @@
   export let name: string;
   export let value: string;
   export let orientation: Orientation = "vertical";
+  export let compact: string = "false";
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
@@ -55,8 +56,10 @@
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
+  $: isCompact = toBoolean(compact);
   $: {
     isDisabled;
+    isCompact;
     bindOptions();
   }
 
@@ -74,6 +77,7 @@
       );
       _prevError = _error;
     }
+    isCompact;
     bindOptions();
   }
 
@@ -161,6 +165,7 @@
           detail: {
             disabled: isDisabled,
             error: _error,
+            compact: isCompact,
             description: props.description,
             name,
             checked: props.value === value,
@@ -214,6 +219,7 @@
   bind:this={_rootEl}
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
+  class:goa-radio-group--compact={isCompact}
   data-testid={testid}
   role="radiogroup"
   aria-label={arialabel}
@@ -242,9 +248,26 @@
     width: 100%;
   }
 
+  /* Compact variant styles */
+  .goa-radio-group--horizontal.goa-radio-group--compact {
+    gap: var(--goa-radio-group-gap-horizontal-compact);
+  }
+
+  .goa-radio-group--vertical.goa-radio-group--compact {
+    gap: var(--goa-radio-group-gap-vertical-compact);
+  }
+
   /* Focus styles */
   .goa-radio-group--horizontal:focus,
   .goa-radio-group--vertical:focus {
     outline: none;
+  }
+
+  /* Custom properties override for 2.0 design tokens */
+  :host {
+    --goa-radio-group-gap-horizontal: var(--goa-space-xl); /* Updated: 24px → 32px */
+    --goa-radio-group-gap-vertical: var(--goa-space-m); /* Unchanged: 16px */
+    --goa-radio-group-gap-horizontal-compact: var(--goa-space-l); /* Unchanged: 24px */
+    --goa-radio-group-gap-vertical-compact: var(--goa-space-s); /* Unchanged: 12px */
   }
 </style>
