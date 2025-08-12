@@ -4,13 +4,7 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import {
-    dispatch,
-    receive,
-    relay,
-    toBoolean,
-    typeValidator,
-  } from "../../common/utils";
+  import { dispatch, receive, relay, toBoolean } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -20,37 +14,19 @@
     FormFieldMountMsg,
     FieldsetResetFieldsMsg,
     FieldsetErrorRelayDetail,
-    CheckboxListItemMountedRelayDetail,
-    CheckboxListItemDestroyRelayDetail,
-    CheckboxListItemMountedMsg,
-    CheckboxListItemDestroyMsg,
-    CheckboxListItemSetValueMsg,
-    CheckboxListItemSetErrorMsg,
-    CheckboxListItemResetErrorsMsg,
-    CheckboxListItemResetFieldsMsg,
-    CheckboxListItemSetValueRelayDetail,
-    CheckboxListItemSetErrorRelayDetail,
   } from "../../types/relay-types";
-
-  // Validators
-  const [ORIENTATIONS, validateOrientation] = typeValidator(
-    "Orientation",
-    ["vertical", "horizontal"],
-    false,
-  );
-
-  type Orientation = (typeof ORIENTATIONS)[number];
 
   // Required
   export let name: string;
 
   // Optional values
-  export let value: string = "[]";
+  export let value: string = ""; // comma-separated values
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
   export let arialabel: string = "";
-  export let orientation: Orientation = "vertical";
+  export let description: string = "";
+  export let orientation: string = "vertical"; // "vertical" | "horizontal"
   export let maxwidth: string = "none";
 
   // margin
@@ -61,21 +37,11 @@
 
   // Private
   let _rootEl: HTMLElement;
-  let _checkboxGroupRef: HTMLElement;
+  let _slotEl: HTMLElement;
+  let _selectedValues: string[] = [];
   let _error: boolean;
   let _prevError: boolean;
-  let _selectedValues: string[] = [];
-
-  // Option interface
-  interface CheckboxOption {
-    value: string;
-    text: string;
-    disabled: boolean;
-    el: HTMLElement;
-  }
-
-  let _options: CheckboxOption[] = [];
-  let _bindTimeoutId: any;
+  let _childCheckboxes: HTMLElement[] = [];
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -89,20 +55,26 @@
         { bubbles: true },
       );
       _prevError = _error;
+
+      // Propagate error state to child checkboxes
+      updateChildCheckboxesError();
     }
   }
+  $: isHorizontal = orientation === "horizontal";
+
+  // Parse value into array
   $: {
-    try {
-      _selectedValues = JSON.parse(value || "[]");
-    } catch (e) {
-      _selectedValues = [];
-    }
+    _selectedValues = value ? value.split(",").map(v => v.trim()).filter(Boolean) : [];
   }
 
   onMount(() => {
-    validateOrientation(orientation);
     addRelayListener();
+    addSlotEventListeners();
     sendMountedMessage();
+
+    // Initial scan for existing checkboxes
+    scanForChildCheckboxes();
+    updateChildCheckboxesState();
   });
 
   function addRelayListener() {
@@ -116,22 +88,12 @@
           break;
         case FieldsetResetErrorsMsg:
           error = "false";
-          _options.forEach((option) => {
-            relay<CheckboxListItemSetErrorRelayDetail>(
-              option.el,
-              CheckboxListItemResetErrorsMsg,
-              null,
-            );
-          });
           break;
         case FieldsetResetFieldsMsg:
-          onResetFields();
+          onSetValue({ name, value: "" });
           break;
-        case CheckboxListItemMountedMsg:
-          onChildMounted(data as CheckboxListItemMountedRelayDetail);
-          break;
-        case CheckboxListItemDestroyMsg:
-          onChildDestroyed(data as CheckboxListItemDestroyRelayDetail);
+        case FormFieldMountMsg:
+          onChildCheckboxMount(data as FormFieldMountRelayDetail);
           break;
       }
     });
@@ -139,62 +101,16 @@
 
   function setError(detail: FieldsetErrorRelayDetail) {
     error = detail.error ? "true" : "false";
-
-    _options.forEach((option) => {
-      relay<CheckboxListItemSetErrorRelayDetail>(
-        option.el,
-        CheckboxListItemSetErrorMsg,
-        {
-          error: detail.error,
-        },
-      );
-    });
   }
 
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
-    // @ts-expect-error
-    value = detail.value;
-
-    let newSelectedValues: string[] = [];
-    try {
-      newSelectedValues = JSON.parse(value || "[]");
-    } catch (e) {
-      newSelectedValues = [];
-    }
-
-    _selectedValues = newSelectedValues;
-
-    _options.forEach((option) => {
-      const isChecked = newSelectedValues.includes(option.value);
-      relay<CheckboxListItemSetValueRelayDetail>(
-        option.el,
-        CheckboxListItemSetValueMsg,
-        {
-          value: option.value,
-          checked: isChecked,
-        },
-      );
-    });
-
-    dispatchChange();
-  }
-
-  function onResetFields() {
-    value = "[]";
-    _selectedValues = [];
-
-    _options.forEach((option) => {
-      relay<CheckboxListItemSetValueRelayDetail>(
-        option.el,
-        CheckboxListItemSetValueMsg,
-        {
-          value: option.value,
-          checked: false,
-        },
-      );
-    });
-
-    dispatchChange();
+    value = detail.value || "";
+    updateChildCheckboxesState();
+    dispatch(_rootEl, "_change", {
+      name,
+      value,
+      selectedValues: _selectedValues
+    }, { bubbles: true });
   }
 
   function sendMountedMessage() {
@@ -208,58 +124,115 @@
     );
   }
 
-  function onChildMounted(detail: CheckboxListItemMountedRelayDetail) {
-    switch (detail.mountType) {
-      case "append":
-        _options = [..._options, detail];
-        break;
-      case "prepend":
-        _options = [detail, ..._options];
-        break;
-      case "reset":
-        _options = [..._options, detail];
-        break;
+  function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
+    // Only handle direct child checkboxes (not nested ones)
+    if (detail.el.parentElement === _slotEl || detail.el.closest('goa-checkboxlist') === _rootEl) {
+      if (!_childCheckboxes.includes(detail.el)) {
+        _childCheckboxes = [..._childCheckboxes, detail.el];
+        updateChildCheckboxState(detail.el);
+      }
     }
-
-    relay(detail.el, "checkbox-list:bind", { el: _rootEl });
-
-    if (_bindTimeoutId) {
-      clearTimeout(_bindTimeoutId);
-    }
-    _bindTimeoutId = setTimeout(() => {
-      _options = _options;
-    }, 1);
   }
 
-  function onChildDestroyed(detail: CheckboxListItemDestroyRelayDetail) {
-    _options = _options.filter((option) => option.value !== detail.value);
+  function addSlotEventListeners() {
+    if (!_slotEl) return;
+
+    // Listen for checkbox changes from child components
+    _slotEl.addEventListener("_change", (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const detail = customEvent.detail;
+
+      // Stop propagation to prevent bubbling to parent
+      e.stopPropagation();
+
+      if (detail && detail.value !== undefined) {
+        handleChildCheckboxChange(detail);
+      }
+    });
+
+    // Use MutationObserver to detect new checkboxes added dynamically
+    const observer = new MutationObserver(() => {
+      scanForChildCheckboxes();
+      updateChildCheckboxesState();
+    });
+
+    observer.observe(_slotEl, {
+      childList: true,
+      subtree: true
+    });
   }
 
-  function onCheckboxChange(optionValue: string, checked: boolean) {
+  function scanForChildCheckboxes() {
+    if (!_slotEl) return;
+
+    const checkboxes = _slotEl.querySelectorAll('goa-checkbox');
+    _childCheckboxes = Array.from(checkboxes) as HTMLElement[];
+  }
+
+  function handleChildCheckboxChange(detail: any) {
+    const isChecked = detail.checked;
+    const checkboxName = detail.name;
+
+    // For checkbox list, we should use the name as the value identifier
+    // since the checkbox component has issues with value handling
+    const checkboxValue = checkboxName;
+
+    console.log("Child checkbox change:", { detail, checkboxValue, isChecked, checkboxName });
+
     let newSelectedValues = [..._selectedValues];
 
-    if (checked) {
-      if (!newSelectedValues.includes(optionValue)) {
-        newSelectedValues.push(optionValue);
+    if (isChecked) {
+      if (!newSelectedValues.includes(checkboxValue)) {
+        newSelectedValues.push(checkboxValue);
       }
     } else {
-      newSelectedValues = newSelectedValues.filter(
-        (val) => val !== optionValue,
-      );
+      newSelectedValues = newSelectedValues.filter(v => v !== checkboxValue);
     }
 
+    const newValue = newSelectedValues.join(",");
+    value = newValue;
     _selectedValues = newSelectedValues;
-    value = JSON.stringify(newSelectedValues);
-    dispatchChange();
+
+    dispatch(_rootEl, "_change", {
+      name,
+      value: newValue,
+      selectedValues: newSelectedValues
+    }, { bubbles: true });
   }
 
-  function dispatchChange() {
-    dispatch(
-      _rootEl,
-      "_change",
-      { name, value, values: _selectedValues },
-      { bubbles: true },
-    );
+  function updateChildCheckboxesState() {
+    _childCheckboxes.forEach(checkbox => {
+      updateChildCheckboxState(checkbox);
+    });
+  }
+
+  function updateChildCheckboxState(checkbox: HTMLElement) {
+    // Use the name attribute as the identifier for checkbox list items
+    const checkboxValue = checkbox.getAttribute('name') || checkbox.getAttribute('value') || '';
+    console.log("Updating checkbox state:", {
+      element: checkbox,
+      name: checkbox.getAttribute('name'),
+      value: checkbox.getAttribute('value'),
+      checkboxValue
+    });
+
+    if (checkboxValue) {
+      const shouldBeChecked = _selectedValues.includes(checkboxValue);
+      checkbox.setAttribute('checked', shouldBeChecked ? 'true' : 'false');
+    }
+
+    // Apply disabled state
+    if (isDisabled) {
+      checkbox.setAttribute('disabled', 'true');
+    } else {
+      checkbox.removeAttribute('disabled');
+    }
+  }
+
+  function updateChildCheckboxesError() {
+    _childCheckboxes.forEach(checkbox => {
+      checkbox.setAttribute('error', _error ? 'true' : 'false');
+    });
   }
 
   function onFocus() {
@@ -267,73 +240,38 @@
   }
 </script>
 
+<!-- View -->
 <div
   bind:this={_rootEl}
   class="root"
+  class:horizontal={isHorizontal}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
     max-width: ${maxwidth};
   `}
+  role="group"
+  aria-label={arialabel || name}
+  aria-describedby={description ? `${name}_description` : null}
+  data-testid={testid}
+  on:focus={onFocus}
 >
-  <div
-    bind:this={_checkboxGroupRef}
-    class="checkbox-list"
-    class:orientation-horizontal={orientation === "horizontal"}
-    class:orientation-vertical={orientation === "vertical"}
-    class:disabled={isDisabled}
-    class:error={_error}
-    role="group"
-    aria-label={arialabel || name}
-    aria-invalid={_error ? "true" : "false"}
-    data-testid={testid}
-    on:focus={onFocus}
-  >
-    <!-- Render checkboxes for each option -->
-    {#each _options as option (option.value)}
-      <label
-        class="checkbox-item"
-        class:disabled={isDisabled || option.disabled}
-        class:error={_error}
-      >
-        <div
-          class="container"
-          class:selected={_selectedValues.includes(option.value)}
-        >
-          <input
-            type="checkbox"
-            name={`${name}_${option.value}`}
-            value={option.value}
-            checked={_selectedValues.includes(option.value)}
-            disabled={isDisabled || option.disabled}
-            aria-invalid={_error ? "true" : "false"}
-            on:change={(e) =>
-              onCheckboxChange(option.value, e.currentTarget.checked)}
-            on:focus={onFocus}
-          />
-          {#if _selectedValues.includes(option.value)}
-            <svg
-              class="checkmark"
-              data-testid="checkmark"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 12.18"
-            >
-              <path
-                d="M5.09,9.64,1.27,5.82,0,7.09l5.09,5.09L16,1.27,14.73,0Z"
-              />
-            </svg>
-          {/if}
-        </div>
-        <div class="text" data-testid="text">
-          {option.text}
-        </div>
-      </label>
-    {/each}
+  {#if $$slots.description || description}
+    <div class="description" id={`${name}_description`} data-testid="description">
+      <slot name="description" />
+      {description}
+    </div>
+  {/if}
 
-    <!-- Slot for checkbox list items -->
+  <div
+    bind:this={_slotEl}
+    class="checkbox-container"
+    class:horizontal={isHorizontal}
+  >
     <slot />
   </div>
 </div>
 
+<!-- Styles -->
 <style>
   :host {
     box-sizing: border-box;
@@ -343,215 +281,46 @@
 
   .root {
     display: block;
-    height: auto;
-    min-height: 0;
-    padding: 0;
+    width: 100%;
   }
 
-  .checkbox-list {
-    display: flex;
-  }
-
-  /* Vertical orientation - default */
-  .checkbox-list.orientation-vertical {
-    flex-direction: column;
-    gap: var(--goa-space-s);
-  }
-
-  /* Horizontal orientation - for 2 or fewer options */
-  .checkbox-list.orientation-horizontal {
-    flex-direction: row;
-    gap: var(--goa-space-l);
-    flex-wrap: wrap;
-  }
-
-  .checkbox-item {
-    display: flex;
-    cursor: pointer;
-    align-items: flex-start;
-  }
-
-  .checkbox-item.disabled {
-    cursor: default;
-  }
-
-  input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    transform: scale(0);
-    margin: 0;
-    cursor: pointer;
-  }
-
-  input[type="checkbox"][disabled]:hover {
-    cursor: default;
-  }
-
-  .checkbox-item:hover .container {
-    border: var(--goa-checkbox-border-hover);
-  }
-
-  .checkbox-item:hover .container.selected {
-    background-color: var(--goa-checkbox-color-bg-checked-hover);
-    border: none;
-  }
-
-  .text {
-    padding-left: var(--goa-checkbox-gap);
-    user-select: none;
-    font: var(--goa-checkbox-label-font-size);
+  .description {
+    font: var(--goa-checkbox-description-font-size);
+    margin-bottom: var(--goa-space-s);
     color: var(--goa-checkbox-color-label);
   }
 
-  /* Container */
-  .container {
-    box-sizing: border-box;
-    border: var(--goa-checkbox-border);
-    border-radius: var(--goa-checkbox-border-radius);
-    background-color: var(--goa-checkbox-color-bg);
-    height: var(--goa-checkbox-size);
-    width: var(--goa-checkbox-size);
-    margin-top: 3px;
+  .checkbox-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .container:hover {
-    border: var(--goa-checkbox-border-hover);
+  .checkbox-container.horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--goa-space-m);
   }
 
-  .container.selected {
-    background-color: var(--goa-checkbox-color-bg-checked);
-    border: none;
+  /* Ensure child checkboxes have proper spacing in vertical layout */
+  .checkbox-container:not(.horizontal) :global(goa-checkbox:not(:last-child)) {
+    margin-bottom: var(--goa-space-xs);
   }
 
-  .container.selected:hover {
-    background-color: var(--goa-checkbox-color-bg-checked-hover);
+  /* Remove bottom margin from last checkbox in horizontal layout */
+  .checkbox-container.horizontal :global(goa-checkbox) {
+    margin-bottom: 0;
   }
 
-  .container svg {
-    fill: var(--goa-checkbox-color-bg);
-    margin: 3px;
-  }
+  /* Responsive behavior for horizontal layout */
+  @media (max-width: 768px) {
+    .checkbox-container.horizontal {
+      flex-direction: column;
+      gap: 0;
+    }
 
-  /* Error Container */
-  .error .container,
-  .error .container:hover {
-    border: var(--goa-checkbox-border-error);
-    background-color: var(--goa-checkbox-color-bg);
-    box-shadow: none;
-  }
-
-  .error .container.selected,
-  .error .container.selected:hover {
-    border: var(--goa-checkbox-border-error);
-    background-color: var(--goa-checkbox-color-bg);
-  }
-
-  .checkbox-item:hover.error .container {
-    border: var(--goa-checkbox-border-error);
-  }
-
-  .checkbox-item:hover.error .container.selected {
-    border: var(--goa-checkbox-border-error);
-    background-color: var(--goa-checkbox-color-bg);
-  }
-
-  .error .container svg {
-    fill: var(--goa-checkbox-color-bg-checked-error);
-    margin: 1px;
-  }
-
-  /* Focus + Error Container */
-  .error .container:has(:focus-visible) {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
-  }
-
-  .error .container:has(:focus-visible):hover {
-    outline: none;
-    border: var(--goa-checkbox-border-error);
-  }
-
-  .error .container.selected:has(:focus-visible):hover {
-    outline: none;
-    border: none;
-    background-color: var(--goa-checkbox-color-bg);
-  }
-
-  .checkbox-item:hover.error .container.selected:has(:focus-visible) {
-    outline: none;
-    border: var(--goa-checkbox-border-error);
-    background-color: var(--goa-checkbox-color-bg);
-  }
-
-  .checkbox-item:hover.error .container:has(:focus-visible) {
-    outline: none;
-    border: var(--goa-checkbox-border-error);
-  }
-
-  /* Focus Container */
-  .container:has(:focus-visible) {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
-  }
-
-  .container:has(:focus-visible):hover {
-    outline: none;
-    border: var(--goa-checkbox-border);
-  }
-
-  .container.selected:has(:focus-visible):hover {
-    outline: none;
-    border: none;
-    background-color: var(--goa-checkbox-color-bg-checked);
-  }
-
-  .checkbox-item:hover .container.selected:has(:focus-visible) {
-    outline: none;
-    border: none;
-    background-color: var(--goa-checkbox-color-bg-checked);
-  }
-
-  .checkbox-item:hover .container:has(:focus-visible) {
-    outline: none;
-    border: var(--goa-checkbox-border);
-  }
-
-  /* Disabled */
-  .disabled {
-    cursor: default;
-  }
-
-  .disabled .text {
-    color: var(--goa-checkbox-color-label-disabled);
-  }
-
-  .disabled:not(.error) .container {
-    border: var(--goa-checkbox-border-disabled);
-    box-shadow: none;
-  }
-
-  .disabled:not(.error) .container.selected {
-    border: none;
-    background-color: var(--goa-checkbox-color-bg-checked-disabled);
-  }
-
-  .disabled.error .container.selected {
-    border: var(--goa-checkbox-border-disabled-error);
-  }
-
-  .disabled.error .container {
-    border: var(--goa-checkbox-border-disabled-error);
-  }
-
-  .checkbox-item:hover.disabled.error .container {
-    border: var(--goa-checkbox-border-disabled-error);
-  }
-
-  .disabled.error .container svg {
-    fill: #f58185;
+    .checkbox-container.horizontal :global(goa-checkbox:not(:last-child)) {
+      margin-bottom: var(--goa-space-xs);
+    }
   }
 </style>
