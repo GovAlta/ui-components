@@ -19,15 +19,21 @@
     "medium",
     "large",
   ]);
+  const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator("Callout emphasis", [
+    "high",
+    "medium", 
+    "low",
+  ]);
   const [AriaLive, validateAriaLive] = typeValidator("Aria live", [
     "off",
     "assertive",
     "polite",
-  ]);
+  ] as const);
 
   // Types
   type CalloutType = (typeof Types)[number];
   type CalloutSize = (typeof CalloutSizes)[number];
+  type CalloutEmphasisType = (typeof CalloutEmphasis)[number];
   type AriaLiveType = (typeof AriaLive)[number];
 
   // margin
@@ -38,6 +44,7 @@
 
   export let size: CalloutSize = "large";
   export let type: CalloutType;
+  export let emphasis: CalloutEmphasisType = "medium";
   export let heading: string = "";
   export let maxwidth: string = "none";
   export let testid: string = "";
@@ -68,10 +75,14 @@
 
   onMount(() => {
     validateCalloutSize(size);
+    validateCalloutEmphasis(emphasis);
     validateAriaLive(arialive);
 
     setTimeout(() => {
       validateType(type);
+      if (type === "event") {
+        console.warn("Callout type 'event' is deprecated and will be removed in a future version. Please use a different type.");
+      }
       iconSize = isMediumCallout ? "small" : "medium";
     });
   });
@@ -85,24 +96,40 @@
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
   `}
-  class="notification {type}"
+  class="notification {type} emphasis-{emphasis}"
   class:medium={isMediumCallout}
+  class:no-heading={!heading}
   data-testid={testid}
   aria-live={arialive}
 >
-  <span class="icon {type}">
-    <goa-icon
-      type={iconType}
-      size={iconSize}
-      theme={icontheme}
-    />
-  </span>
-  <span class="content {type}">
-    {#if heading}
-      <h3 class:medium={isMediumCallout}>{heading}</h3>
-    {/if}
-    <slot />
-  </span>
+  {#if emphasis === "low" && !heading}
+    <!-- Low emphasis without heading uses inline layout -->
+    <span class="icon {type} emphasis-{emphasis}">
+      <goa-icon
+        type={iconType}
+        size={iconSize}
+        theme={icontheme}
+      />
+    </span>
+    <span class="content {type} emphasis-{emphasis}">
+      <slot />
+    </span>
+  {:else}
+    <!-- Standard layout with header section and content section -->
+    <div class="icon {type} emphasis-{emphasis}">
+      <goa-icon
+        type={iconType}
+        size={iconSize}
+        theme={icontheme}
+      />
+      {#if heading}
+        <h3 class:medium={isMediumCallout} class="emphasis-{emphasis}">{heading}</h3>
+      {/if}
+    </div>
+    <div class="content {type} emphasis-{emphasis}">
+      <slot />
+    </div>
+  {/if}
 </div>
 
 <!-- Style -->
@@ -111,114 +138,289 @@
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
   }
+
   .notification {
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
     overflow: hidden;
-    font: var(--goa-callout-l-text-size);
-    border: var(--goa-callout-l-border-width) solid;
-    border-radius: var(--goa-callout-border-radius);
+    border-radius: 12px;
+    border: 1px solid;
+    background-color: #ffffff;
+    position: relative;
   }
 
-  h3 {
-    font: var(--goa-callout-l-heading-size);
-    margin-top: var(--goa-space-none);
-    margin-bottom: var(--goa-callout-l-content-gap);
+  /* Base font styles */
+  .notification {
+    font-family: 'Acumin Variable Concept', sans-serif;
+    font-size: 16px;
+    line-height: 23px;
+    color: #353535;
   }
 
-  .icon.information {
-    background-color: var(--goa-callout-info-color-bg-statusbar);
-  }
-
-  .icon.information > * {
-    fill: var(--fill-color, var(--goa-callout-info-icon-color));
-    color: var(--fill-color, var(--goa-callout-info-icon-color));
-  }
-  .icon.important > * {
-    fill: var(--fill-color, var(--goa-callout-warning-icon-color));
-    color: var(--fill-color, var(--goa-callout-warning-icon-color));
-  }
-  .icon.success > * {
-    fill: var(--fill-color, var(--goa-callout-success-icon-color));
-    color: var(--fill-color, var(--goa-callout-success-icon-color));
-  }
-  .icon.emergency > * {
-    fill: var(--fill-color, var(--goa-callout-emergency-icon-color));
-    color: var(--fill-color, var(--goa-callout-emergency-icon-color));
-  }
-  .icon.event > * {
-    fill: var(--fill-color, var(--goa-callout-event-icon-color));
-    color: var(--fill-color, var(--goa-callout-event-icon-color));
-  }
-
-  .icon.emergency {
-    background-color: var(--goa-color-emergency-default);
-  }
-  .icon.important {
-    background-color: var(--goa-callout-warning-color-bg-statusbar);
-  }
-  .icon.information {
-    background-color: var(--goa-color-info-default);
-  }
-  .icon.event {
-    background-color: var(--goa-color-info-default);
-  }
-  .icon.success {
-    background-color: var(--goa-callout-success-color-bg-statusbar);
-  }
-  .icon.emergency {
-    background-color: var(--goa-callout-emergency-color-bg-statusbar);
-  }
-
+  /* Header section with icon and optional heading */
   .icon {
-    text-align: center;
-    padding: var(--goa-callout-l-statusbar-padding);
+    display: flex;
+    align-items: center;
+    padding: 12px 12px 12px 18px;
+    gap: 8px;
   }
 
-  .content.information {
-    background-color: var(--goa-callout-info-color-bg-content);
+  .icon goa-icon {
+    width: 24px;
+    height: 24px;
   }
-  .content.important {
-    background-color: var(--goa-callout-warning-color-bg-content);
-  }
-  .content.success {
-    background-color: var(--goa-callout-success-color-bg-content);
-  }
-  .content.emergency {
-    background-color: var(--goa-callout-emergency-color-bg-content);
-  }
+
+  /* Content section */
   .content {
-    flex: 1 1 auto;
-    background-color: var(--goa-color-greyscale-100);
-    padding: var(--goa-callout-l-content-padding);
+    padding: 20px;
   }
 
+  /* Heading styles */
+  h3 {
+    font-family: 'Acumin Variable Concept', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.1px;
+    color: #000000;
+    margin: 0 0 24px 0;
+    flex: 1;
+    padding: 6px 40px 6px 0;
+  }
+
+  /* Type-specific styles for Information */
   .notification.information {
-    border-color: var(--goa-callout-info-border-color);
+    border-color: #98d4ee;
   }
+
+  .notification.information.emphasis-high {
+    background-color: #ebf8ff;
+  }
+
+  .notification.information.emphasis-high .icon {
+    background-color: #0077ad;
+  }
+
+  .notification.information.emphasis-high .icon goa-icon,
+  .notification.information.emphasis-high h3 {
+    color: #ffffff;
+    fill: #ffffff;
+  }
+
+  .notification.information.emphasis-medium {
+    background-color: #ffffff;
+  }
+
+  .notification.information.emphasis-medium .icon {
+    background-color: #cbeaf7;
+  }
+
+  .notification.information.emphasis-medium .icon goa-icon {
+    color: #0077ad;
+    fill: #0077ad;
+  }
+
+  .notification.information.emphasis-low {
+    background-color: #ebf8ff;
+  }
+
+  .notification.information.emphasis-low .icon {
+    background-color: transparent;
+  }
+
+  .notification.information.emphasis-low .icon goa-icon {
+    color: #0077ad;
+    fill: #0077ad;
+  }
+
+  /* Type-specific styles for Important */
   .notification.important {
-    border-color: var(--goa-callout-warning-border-color);
+    border-color: #fde3a1;
   }
-  .notification.success {
-    border-color: var(--goa-callout-success-border-color);
+
+  .notification.important.emphasis-high {
+    background-color: #fff6e5;
   }
+
+  .notification.important.emphasis-high .icon {
+    background-color: #ffb800;
+  }
+
+  .notification.important.emphasis-high .icon goa-icon,
+  .notification.important.emphasis-high h3 {
+    color: #000000;
+    fill: #000000;
+  }
+
+  .notification.important.emphasis-medium {
+    background-color: #ffffff;
+    border-color: #e1dedd;
+  }
+
+  .notification.important.emphasis-medium .icon {
+    background-color: #fff1cc;
+  }
+
+  .notification.important.emphasis-medium .icon goa-icon {
+    color: #ffb800;
+    fill: #ffb800;
+  }
+
+  .notification.important.emphasis-low {
+    background-color: #fff6e5;
+  }
+
+  .notification.important.emphasis-low .icon {
+    background-color: transparent;
+  }
+
+  .notification.important.emphasis-low .icon goa-icon {
+    color: #ffb800;
+    fill: #ffb800;
+  }
+
+  /* Type-specific styles for Emergency */
   .notification.emergency {
-    border-color: var(--goa-callout-emergency-border-color);
+    border-color: #f4c8c5;
   }
-  /*Medium callout style*/
-  .notification.medium {
-    font: var(--goa-callout-m-text-size);
-    border-width: var(--goa-callout-m-border-width);
+
+  .notification.emergency.emphasis-high {
+    background-color: #fff6f6;
   }
-  h3.medium {
-    font: var(--goa-callout-m-heading-size);
-    margin-bottom: var(--goa-callout-m-content-gap);
+
+  .notification.emergency.emphasis-high .icon {
+    background-color: #da291c;
   }
+
+  .notification.emergency.emphasis-high .icon goa-icon,
+  .notification.emergency.emphasis-high h3 {
+    color: #ffffff;
+    fill: #ffffff;
+  }
+
+  .notification.emergency.emphasis-medium {
+    background-color: #ffffff;
+    border-color: #e1dedd;
+  }
+
+  .notification.emergency.emphasis-medium .icon {
+    background-color: #fdded9;
+  }
+
+  .notification.emergency.emphasis-medium .icon goa-icon {
+    color: #da291c;
+    fill: #da291c;
+  }
+
+  .notification.emergency.emphasis-low {
+    background-color: #fff6f6;
+  }
+
+  .notification.emergency.emphasis-low .icon {
+    background-color: transparent;
+  }
+
+  .notification.emergency.emphasis-low .icon goa-icon {
+    color: #da291c;
+    fill: #da291c;
+  }
+
+  /* Type-specific styles for Success */
+  .notification.success {
+    border-color: #cceae1;
+  }
+
+  .notification.success.emphasis-high {
+    background-color: #edfcf0;
+  }
+
+  .notification.success.emphasis-high .icon {
+    background-color: #006f4c;
+  }
+
+  .notification.success.emphasis-high .icon goa-icon,
+  .notification.success.emphasis-high h3 {
+    color: #ffffff;
+    fill: #ffffff;
+  }
+
+  .notification.success.emphasis-medium {
+    background-color: #ffffff;
+    border-color: #e1dedd;
+  }
+
+  .notification.success.emphasis-medium .icon {
+    background-color: #d8f7e6;
+  }
+
+  .notification.success.emphasis-medium .icon goa-icon {
+    color: #006f4c;
+    fill: #006f4c;
+  }
+
+  .notification.success.emphasis-low {
+    background-color: #edfcf0;
+  }
+
+  .notification.success.emphasis-low .icon {
+    background-color: transparent;
+  }
+
+  .notification.success.emphasis-low .icon goa-icon {
+    color: #006f4c;
+    fill: #006f4c;
+  }
+
+  /* Deprecated event type (same as information) */
+  .notification.event {
+    border-color: #98d4ee;
+    background-color: #ebf8ff;
+  }
+
+  .notification.event .icon {
+    background-color: #cbeaf7;
+  }
+
+  .notification.event .icon goa-icon {
+    color: #0077ad;
+    fill: #0077ad;
+  }
+
+  /* Low emphasis without heading - inline layout */
+  .notification.emphasis-low.no-heading {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .notification.emphasis-low.no-heading .icon {
+    padding: 16px 12px 16px 20px;
+    flex-shrink: 0;
+  }
+
+  .notification.emphasis-low.no-heading .content {
+    padding: 22px 12px 16px 0;
+    flex: 1;
+  }
+
+  /* Medium callout adjustments (mobile/small size) */
   .notification.medium .content {
-    padding: var(--goa-callout-m-content-padding);
-    margin-top: calc(-1 * var(--goa-space-3xs));
+    padding: 16px;
   }
+
   .notification.medium .icon {
-    padding: var(--goa-callout-m-statusbar-padding);
+    padding: 12px;
+  }
+
+  .notification.medium h3 {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  /* Links within content */
+  .content :global(a) {
+    color: #0070c4;
+    text-decoration: underline;
+    text-underline-position: from-font;
   }
 </style>

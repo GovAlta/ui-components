@@ -2,6 +2,7 @@ import {
   GoabCalloutAriaLive,
   GoabCalloutSize,
   GoabCalloutType,
+  GoabCalloutEmphasis,
   GoabCalloutIconTheme,
   Margins,
 } from "@abgov/ui-components-common";
@@ -10,6 +11,7 @@ interface WCProps extends Margins {
   heading?: string;
   type?: GoabCalloutType;
   size?: GoabCalloutSize;
+  emphasis?: GoabCalloutEmphasis;
   arialive?: GoabCalloutAriaLive;
   maxwidth?: string;
   icontheme?: GoabCalloutIconTheme;
@@ -29,6 +31,7 @@ export interface GoabCalloutProps extends Margins {
   heading?: string;
   type?: GoabCalloutType;
   size?: GoabCalloutSize;
+  emphasis?: GoabCalloutEmphasis;
   iconTheme?: GoabCalloutIconTheme;
   maxWidth?: string;
   testId?: string;
@@ -41,6 +44,7 @@ export const GoabCallout = ({
   type = "information",
   iconTheme = "outline",
   size = "large",
+  emphasis = "medium",
   maxWidth,
   testId,
   ariaLive = "off",
@@ -55,6 +59,7 @@ export const GoabCallout = ({
       heading={heading}
       type={type}
       size={size}
+      emphasis={emphasis}
       maxwidth={maxWidth}
       arialive={ariaLive}
       icontheme={iconTheme}
