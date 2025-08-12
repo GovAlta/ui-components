@@ -127,6 +127,7 @@ export type GoabCalloutType =
   | "emergency"
   | "event";
 export type GoabCalloutSize = "medium" | "large";
+export type GoabCalloutEmphasis = "high" | "medium" | "low";
 export type GoabCalloutAriaLive = "off" | "polite" | "assertive";
 export type GoabCalloutIconTheme = "outline" | "filled";
 
