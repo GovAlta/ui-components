@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-input" />
+<svelte:options customElement={{
+  tag: "goa-input",
+  props: {
+    value: { attribute: "value", type: "String", reflect: true },
+  }
+}} />
 
 <script lang="ts" context="module">
   export type GoAInputVariant = "goa" | "bare";

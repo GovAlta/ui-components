@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+
 import { GoabModal } from "./modal";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
