@@ -9,6 +9,7 @@
       actionText: { type: "String", attribute: "action-text" },
       visible: { type: "Boolean", attribute: "visible" },
       animationDirection: { type: "String", attribute: "animation-direction" },
+      maxWidth: { type: "String", attribute: "max-width" },
     },
   }}
 />
@@ -32,6 +33,7 @@
   export let actionText: string = "";
   export let visible: boolean = true;
   export let animationDirection: TemporaryNotificationAnimationDirection = "down";
+  export let maxWidth: string = "640px";
 </script>
 
 <div
@@ -46,18 +48,21 @@
   class:animate-up={animationDirection === "up"}
   class:animate-down={animationDirection === "down"}
   data-testid={testid}
+  style="max-width: {maxWidth};"
 >
-  {#if type === "success"}
-    <goa-icon type="checkmark-circle" />
-  {/if}
+  <div class="content">
+    {#if type === "success"}
+      <goa-icon type="checkmark-circle" />
+    {/if}
 
-  {#if type === "failure"}
-    <goa-icon type="close-circle" />
-  {/if}
+    {#if type === "failure"}
+      <goa-icon type="close-circle" />
+    {/if}
 
-  <span class="message">
-    {message}
-  </span>
+    <span class="message">
+      {message}
+    </span>
+  </div>
 
   {#if actionText}
     <div class="action">
@@ -85,10 +90,18 @@
     border-radius: var(--goa-border-radius-m);
     gap: var(--goa-space-m);
     padding: var(--goa-space-m) var(--goa-space-l);
-    max-width: 640px;
     color: var(--goa-color-text-light);
     transition: transform 0.3s ease, opacity 0.3s ease;
     overflow: hidden;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--goa-space-m);
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   @media (--not-mobile) {
@@ -160,6 +173,9 @@
 
   .message {
     flex: 1 1 auto;
+    min-width: 0;
     font: var(--goa-typography-body-m);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 </style>
