@@ -1,5 +1,6 @@
 import { GoabCheckboxListOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { CheckboxContext } from "../checkbox/CheckboxContext";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -18,8 +19,11 @@ interface WCProps extends Margins {
   error?: string;
   testid?: string;
   arialabel?: string;
+  description?: string;
   orientation?: "vertical" | "horizontal";
   maxwidth?: string;
+  showselectall?: string;
+  selectalltext?: string;
 }
 
 export interface GoabCheckboxListProps extends Margins {
@@ -29,28 +33,31 @@ export interface GoabCheckboxListProps extends Margins {
   error?: boolean;
   testId?: string;
   ariaLabel?: string;
+  description?: string | React.ReactNode;
   orientation?: "vertical" | "horizontal";
   maxWidth?: string;
+  showSelectAll?: boolean;
+  selectAllText?: string;
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
 }
 
-function stringify(value: string[] | undefined): string {
-  if (typeof value === "undefined") {
-    return "[]";
-  }
-  return JSON.stringify(value);
+function getValueAsString(value?: string[]): string {
+  return value?.join(",") || "";
 }
 
 export function GoabCheckboxList({
   name,
-  value,
+  value = [],
   disabled,
   error,
   testId,
   ariaLabel,
+  description,
   orientation = "vertical",
   maxWidth,
+  showSelectAll,
+  selectAllText = "Select All",
   children,
   onChange,
   mt,
@@ -61,40 +68,57 @@ export function GoabCheckboxList({
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!el.current) {
-      return;
-    }
+    if (!el.current) return;
+
     const current = el.current;
     const listener = (e: Event) => {
-      const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
+      const customEvent = e as CustomEvent;
+      if (!customEvent.detail) {
+        console.error("CheckboxList change event missing detail");
+        return;
+      }
+
+      const detail: GoabCheckboxListOnChangeDetail = {
+        name: customEvent.detail.name || name,
+        value: customEvent.detail.value || "",
+        selectedValues: Array.isArray(customEvent.detail.selectedValues)
+          ? customEvent.detail.selectedValues
+          : [],
+      };
+
       onChange?.(detail);
     };
 
     current.addEventListener("_change", listener);
-
-    return () => {
-      current.removeEventListener("_change", listener);
-    };
-  }, [onChange]);
+    return () => current.removeEventListener("_change", listener);
+  }, [name, onChange]);
 
   return (
-    <goa-checkbox-list
-      ref={el}
-      name={name}
-      value={stringify(value)}
-      disabled={disabled ? "true" : undefined}
-      error={error ? "true" : undefined}
-      testid={testId}
-      arialabel={ariaLabel}
-      orientation={orientation}
-      maxwidth={maxWidth}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    >
-      {children}
-    </goa-checkbox-list>
+    <CheckboxContext.Provider value={{ inCheckboxList: true }}>
+      <goa-checkbox-list
+        ref={el}
+        name={name}
+        value={getValueAsString(value)}
+        disabled={disabled ? "true" : undefined}
+        error={error ? "true" : undefined}
+        testid={testId}
+        arialabel={ariaLabel}
+        description={typeof description === "string" ? description : undefined}
+        orientation={orientation}
+        maxwidth={maxWidth}
+        showselectall={showSelectAll ? "true" : undefined}
+        selectalltext={selectAllText}
+        mt={mt}
+        mr={mr}
+        mb={mb}
+        ml={ml}
+      >
+        {children}
+        {typeof description !== "string" && description && (
+          <div slot="description">{description}</div>
+        )}
+      </goa-checkbox-list>
+    </CheckboxContext.Provider>
   );
 }
 

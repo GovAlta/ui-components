@@ -1,5 +1,6 @@
 import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
-import { useEffect, useRef, type JSX } from "react";
+import React, { useEffect, useRef, useContext, type JSX } from "react";
+import { CheckboxContext } from "./CheckboxContext";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -71,6 +72,8 @@ export function GoabCheckbox({
   ml,
 }: GoabCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+  const { inCheckboxList } = useContext(CheckboxContext);
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -95,7 +98,7 @@ export function GoabCheckbox({
       id={id}
       name={name}
       error={error ? "true" : undefined}
-      checked={checked ? "true" : undefined}
+      checked={inCheckboxList ? undefined : checked ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       text={text}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
