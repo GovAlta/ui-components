@@ -35,6 +35,8 @@ import { GoabCheckbox } from "../checkbox/checkbox";
     [attr.mb]="mb"
     [attr.ml]="ml"
     [attr.mr]="mr"
+    [attr.showselectall]="showSelectAll ? 'true' : 'false'"
+    [attr.selectalltext]="selectAllText"
     (_change)="_onChange($event)"
   >
     <ng-content />
@@ -61,6 +63,8 @@ export class GoabCheckboxList
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<any>;
   @Input() maxWidth?: string;
+  @Input() showSelectAll?: boolean;
+  @Input() selectAllText?: string = "Select All";
 
   // Override value to handle string arrays
   @Input() override value?: string[] | string;
@@ -140,6 +144,10 @@ export class GoabCheckboxList
     const selectedValues = detail.selectedValues || [];
     this.value = selectedValues;
     this.fcChange?.(selectedValues);
+
+    // Ensure projected child checkboxes reflect the latest selection (e.g., Select All)
+    // Defer to the next macrotask to avoid ExpressionChanged errors and align with other wrappers
+    setTimeout(() => this.updateChildCheckboxes(), 0);
   }
 
   // Override writeValue to handle both array and string inputs

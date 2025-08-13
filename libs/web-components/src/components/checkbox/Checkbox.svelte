@@ -5,7 +5,14 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
-  import { dispatch, fromBoolean, receive, relay, toBoolean, announceToScreenReader } from "../../common/utils";
+  import {
+    dispatch,
+    fromBoolean,
+    receive,
+    relay,
+    toBoolean,
+    announceToScreenReader,
+  } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -22,6 +29,7 @@
 
   // Optional values
   export let checked: string = "false";
+  export let indeterminate: string = "false";
   export let text: string = "";
   export let value: string = "";
   export let disabled: string = "false";
@@ -64,7 +72,12 @@
     }
   }
   $: isChecked = toBoolean(checked);
-  $: isIndeterminate = false; // Design review. To be built with TreeView Later
+  $: isIndeterminate = toBoolean(indeterminate);
+  $: if (_checkboxRef) {
+    // Ensure the native input reflects the indeterminate state for a11y and UA behavior
+    // @ts-expect-error - HTMLInputElement has indeterminate prop at runtime
+    _checkboxRef.indeterminate = isIndeterminate;
+  }
   $: revealSlotHasContent = _revealSlotHeight > 0;
 
   onMount(() => {
@@ -181,7 +194,12 @@
     }
 
     // Announce the reveal content change to screen readers if checkbox is checked and reveal content exists
-    if ($$slots.reveal && newCheckStatus && _revealSlotEl && revealarialabel !== "") {
+    if (
+      $$slots.reveal &&
+      newCheckStatus &&
+      _revealSlotEl &&
+      revealarialabel !== ""
+    ) {
       announceToScreenReader(revealarialabel);
     }
   }
@@ -207,7 +225,11 @@
 
       // If this is a form field value change (public form)
       // relay it so the Fieldset initialize the reveal slot form field to public form state
-      if (eventDetail && eventDetail.name && typeof eventDetail.value !== 'undefined') {
+      if (
+        eventDetail &&
+        eventDetail.name &&
+        typeof eventDetail.value !== "undefined"
+      ) {
         dispatch(_rootEl, "_revealChange", eventDetail, { bubbles: true });
       }
     });
@@ -230,7 +252,7 @@
     class:disabled={isDisabled}
     class:error={_error}
   >
-    <div class="container" class:selected={isChecked}>
+    <div class="container" class:selected={isChecked || isIndeterminate}>
       <input
         bind:this={_checkboxRef}
         id={name}
@@ -240,7 +262,10 @@
         type="checkbox"
         value={`${value}`}
         aria-label={arialabel || text || name}
-        aria-describedby={$$slots.description || description !== "" ? _descriptionId : null}
+        aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
+        aria-describedby={$$slots.description || description !== ""
+          ? _descriptionId
+          : null}
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
         on:focus={onFocus}
@@ -267,7 +292,7 @@
     </div>
     <div class="text" data-testid="text">
       <slot></slot>
-        {text}
+      {text}
     </div>
   </label>
   {#if $$slots.description || description}
@@ -296,7 +321,6 @@
     font-family: var(--goa-font-family-sans);
     display: block;
   }
-
 
   .root {
     display: block;
@@ -492,7 +516,6 @@
     border: var(--goa-checkbox-border-disabled-error);
   }
   .disabled.error .container svg {
-    fill: #F58185;
+    fill: #f58185;
   }
-
 </style>
