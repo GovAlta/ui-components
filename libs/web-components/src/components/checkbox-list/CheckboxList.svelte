@@ -44,10 +44,24 @@
   let _selectedValues: string[] = [];
   let _error: boolean;
   let _prevError: boolean;
-  let _childCheckboxes: HTMLElement[] = [];
+  type ChildRecord = { el: HTMLElement; name: string };
+  let _childRecords: ChildRecord[] = [];
   let _allCheckboxValues: string[] = [];
   let _allSelected = false;
   let _someSelected = false;
+  let _suppressChildChange = false;
+
+  function getHostCheckboxes(): HTMLElement[] {
+    if (!_slotEl) return [];
+    const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
+    const assigned = (slotEl?.assignedElements() || []) as Element[];
+    return assigned
+      .map((el) => el.querySelector("goa-checkbox") as HTMLElement | null)
+      .filter(
+        (el): el is HTMLElement =>
+          !!el && (!_selectAllEl || el !== _selectAllEl),
+      );
+  }
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -94,9 +108,8 @@
     addSlotEventListeners();
     sendMountedMessage();
 
-    // Initial scan for existing checkboxes
+    // Initial sync for any already-mounted children
     setTimeout(() => {
-      scanForChildCheckboxes();
       updateChildCheckboxesState();
     }, 0);
   });
@@ -157,25 +170,27 @@
   }
 
   function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
-    // Only handle direct child checkboxes (not nested ones)
-    if (
-      detail.el.parentElement === _slotEl ||
-      detail.el.closest("goa-checkbox-list") === _rootEl
-    ) {
-      if (!_childCheckboxes.includes(detail.el)) {
-        _childCheckboxes = [..._childCheckboxes, detail.el];
+    // detail.el is the child's internal root node (message endpoint)
+    const host = (detail.el.getRootNode() as any)?.host as
+      | HTMLElement
+      | undefined;
+    if (!host) return;
+    // Only children within this list's subtree
+    const inThisList = host.closest("goa-checkbox-list") === _rootEl;
+    if (!inThisList) return;
+    // Exclude the Select All checkbox host
+    if (_selectAllEl && host === _selectAllEl) return;
 
-        // Keep the list of all values up to date (value attr first, name as fallback)
-        const mountedValue =
-          detail.el.getAttribute("value") ||
-          detail.el.getAttribute("name") ||
-          "";
-        if (mountedValue && !_allCheckboxValues.includes(mountedValue)) {
-          _allCheckboxValues = [..._allCheckboxValues, mountedValue];
-        }
-
-        updateChildCheckboxState(detail.el);
-      }
+    const existing = _childRecords.find(
+      (r) => r.el === detail.el || r.name === detail.name,
+    );
+    if (!existing) {
+      _childRecords = [..._childRecords, { el: detail.el, name: detail.name }];
+      // de-duplicate and refresh values
+      _allCheckboxValues = Array.from(
+        new Set(_childRecords.map((r) => r.name)),
+      );
+      updateChildCheckboxState(detail.el, detail.name);
     }
   }
 
@@ -190,55 +205,43 @@
       // Stop propagation to prevent bubbling to parent
       e.stopPropagation();
 
+      // Ignore events from the Select All checkbox; it has its own handler
+      if (_selectAllEl) {
+        const path = (customEvent as any).composedPath?.() || [];
+        if (path.includes(_selectAllEl)) {
+          return;
+        }
+        if (detail?.name && detail.name === _selectAllEl.getAttribute("name")) {
+          return;
+        }
+      }
+
+      // Ignore programmatic updates during batch operations
+      if (_suppressChildChange) return;
+
       if (detail && detail.value !== undefined) {
         handleChildCheckboxChange(detail);
       }
     });
 
-    // Use MutationObserver to detect new checkboxes added dynamically
-    const observer = new MutationObserver(() => {
-      scanForChildCheckboxes();
-      updateChildCheckboxesState();
-    });
-
-    observer.observe(_slotEl, {
-      childList: true,
-      subtree: true,
-    });
-  }
-
-  function scanForChildCheckboxes() {
-    if (!_slotEl) return;
-
-    // Get slotted elements then find their internal goa-checkbox children
-    const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
-    const assigned = (slotEl?.assignedElements() || []) as Element[];
-    const checkboxes = assigned
-      .map((el) => el.querySelector("goa-checkbox"))
-      .filter((el): el is HTMLElement => !!el);
-
-    _childCheckboxes = checkboxes.filter((cb) => cb !== _selectAllEl);
-
-    // Update all checkbox values - use value attribute first, then name as fallback
-    _allCheckboxValues = _childCheckboxes
-      .map((cb) => cb.getAttribute("value") || cb.getAttribute("name") || "")
-      .filter(Boolean);
+    // Children report themselves via FormFieldMount; no DOM observer needed
   }
 
   function handleChildCheckboxChange(detail: any) {
-    const isChecked = detail.checked;
     const checkboxName = detail.name;
+    // Ignore select-all events defensively
+    if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name")) {
+      return;
+    }
+    // Support both user interaction (checked boolean) and programmatic relay (value string)
+    const isChecked =
+      typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
 
     // For checkbox list, we should use the name as the value identifier
     // since the checkbox component has issues with value handling
     const checkboxValue = checkboxName;
 
-    console.log("Child checkbox change:", {
-      detail,
-      checkboxValue,
-      isChecked,
-      checkboxName,
-    });
+    // console.debug("Child checkbox change:", { detail, checkboxValue, isChecked, checkboxName });
 
     let newSelectedValues = [..._selectedValues];
 
@@ -267,37 +270,88 @@
   }
 
   function updateChildCheckboxesState() {
-    _childCheckboxes.forEach((checkbox) => {
-      updateChildCheckboxState(checkbox);
+    _suppressChildChange = true;
+    // Always update mounted children via relay
+    if (_childRecords.length > 0) {
+      for (const rec of _childRecords) {
+        updateChildCheckboxState(rec.el, rec.name);
+      }
+    }
+
+    // Also update host attributes (shim) so UI is immediately in sync
+    updateHostCheckboxesState();
+    _suppressChildChange = false;
+  }
+
+  // Shim: ensure host elements reflect the current selection/disabled state
+  function updateHostCheckboxesState() {
+    const hosts = getHostCheckboxes();
+    hosts.forEach((host) => {
+      const name = host.getAttribute("name") || "";
+      const shouldBeChecked = _selectedValues.includes(name);
+      host.setAttribute("checked", shouldBeChecked ? "true" : "false");
+      if (isDisabled) {
+        host.setAttribute("disabled", "true");
+      } else {
+        host.removeAttribute("disabled");
+      }
     });
   }
 
-  function updateChildCheckboxState(checkbox: HTMLElement) {
-    // Use value attribute first, then name as fallback
-    const checkboxValue =
-      checkbox.getAttribute("value") || checkbox.getAttribute("name") || "";
-
-    if (checkboxValue) {
-      const shouldBeChecked = _selectedValues.includes(checkboxValue);
-      checkbox.setAttribute("checked", shouldBeChecked ? "true" : "false");
+  function updateChildCheckboxState(childEl: HTMLElement, childName?: string) {
+    const name =
+      childName || _childRecords.find((r) => r.el === childEl)?.name || "";
+    if (name) {
+      const shouldBeChecked = _selectedValues.includes(name);
+      // Programmatic update via relay to the child's internal endpoint
+      relay<FieldsetSetValueRelayDetail>(childEl, FieldsetSetValueMsg, {
+        name,
+        value: shouldBeChecked ? "checked" : "",
+      });
     }
 
-    // Apply disabled state
-    if (isDisabled) {
-      checkbox.setAttribute("disabled", "true");
-    } else {
-      checkbox.removeAttribute("disabled");
+    // Apply disabled state on the host custom element
+    const host = (childEl.getRootNode() as any)?.host as
+      | HTMLElement
+      | undefined;
+    if (host) {
+      if (isDisabled) {
+        host.setAttribute("disabled", "true");
+      } else {
+        host.removeAttribute("disabled");
+      }
     }
   }
 
   function updateChildCheckboxesError() {
-    _childCheckboxes.forEach((checkbox) => {
-      checkbox.setAttribute("error", _error ? "true" : "false");
-    });
+    for (const rec of _childRecords) {
+      if (_error) {
+        relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
+      } else {
+        relay(rec.el, FieldsetResetErrorsMsg);
+      }
+    }
   }
 
   function handleSelectAllChange(e: CustomEvent) {
     const isChecked = e.detail.checked;
+
+    // Ensure we have a current list of item names
+    if (_allCheckboxValues.length === 0 && _slotEl) {
+      const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
+      const assigned = (slotEl?.assignedElements() || []) as Element[];
+      const hosts = assigned
+        .map((el) => el.querySelector("goa-checkbox"))
+        .filter(
+          (h): h is HTMLElement => !!h && (!_selectAllEl || h !== _selectAllEl),
+        );
+      const names = hosts
+        .map((h) => h.getAttribute("name") || "")
+        .filter(Boolean);
+      if (names.length) {
+        _allCheckboxValues = Array.from(new Set(names));
+      }
+    }
 
     if (isChecked) {
       // Select all checkboxes
@@ -310,13 +364,8 @@
     const newValue = _selectedValues.join(",");
     value = newValue;
 
-    // Update all child checkboxes
+    // Update all child checkboxes (suppressed to avoid event echo)
     updateChildCheckboxesState();
-
-    // Reset indeterminate after explicit toggle
-    if (_selectAllEl) {
-      _selectAllEl.removeAttribute("indeterminate");
-    }
 
     // Dispatch change event
     dispatch(
