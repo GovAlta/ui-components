@@ -63,6 +63,25 @@
       );
   }
 
+  // Function to ensure _allCheckboxValues is populated
+  function ensureAllCheckboxValues() {
+    if (_allCheckboxValues.length === 0 && _slotEl) {
+      const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
+      const assigned = (slotEl?.assignedElements() || []) as Element[];
+      const hosts = assigned
+        .map((el) => el.querySelector("goa-checkbox"))
+        .filter(
+          (h): h is HTMLElement => !!h && (!_selectAllEl || h !== _selectAllEl),
+        );
+      const names = hosts
+        .map((h) => h.getAttribute("name") || "")
+        .filter(Boolean);
+      if (names.length) {
+        _allCheckboxValues = Array.from(new Set(names));
+      }
+    }
+  }
+
   // Binding
   $: isDisabled = toBoolean(disabled);
   $: showSelectAllCheckbox = toBoolean(showSelectAll);
@@ -93,8 +112,9 @@
       : [];
   }
 
-  // Select All state
+  // Select All state - ensure we have values before calculating
   $: {
+    ensureAllCheckboxValues();
     const total = _allCheckboxValues.length;
     const selectedCount = _selectedValues.filter((v) =>
       _allCheckboxValues.includes(v),
@@ -110,6 +130,7 @@
 
     // Initial sync for any already-mounted children
     setTimeout(() => {
+      ensureAllCheckboxValues();
       updateChildCheckboxesState();
     }, 0);
   });
@@ -233,6 +254,10 @@
     if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name")) {
       return;
     }
+
+    // Ensure we have the current list of values before processing
+    ensureAllCheckboxValues();
+
     // Support both user interaction (checked boolean) and programmatic relay (value string)
     const isChecked =
       typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
@@ -337,21 +362,7 @@
     const isChecked = e.detail.checked;
 
     // Ensure we have a current list of item names
-    if (_allCheckboxValues.length === 0 && _slotEl) {
-      const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
-      const assigned = (slotEl?.assignedElements() || []) as Element[];
-      const hosts = assigned
-        .map((el) => el.querySelector("goa-checkbox"))
-        .filter(
-          (h): h is HTMLElement => !!h && (!_selectAllEl || h !== _selectAllEl),
-        );
-      const names = hosts
-        .map((h) => h.getAttribute("name") || "")
-        .filter(Boolean);
-      if (names.length) {
-        _allCheckboxValues = Array.from(new Set(names));
-      }
-    }
+    ensureAllCheckboxValues();
 
     if (isChecked) {
       // Select all checkboxes
