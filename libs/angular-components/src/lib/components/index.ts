@@ -10,7 +10,6 @@ export * from "./card-actions/card-actions";
 export * from "./card-image/card-image";
 export * from "./checkbox/checkbox";
 export * from "./checkbox-list/checkbox-list";
-export * from "./checkbox-list-item/checkbox-list-item";
 export * from "./chip/chip";
 export * from "./circular-progress/circular-progress";
 export * from "./column-layout/column-layout";

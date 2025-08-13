@@ -231,36 +231,3 @@ export const FormSummaryEditPageMsg = "form-summary::edit:page";
 export type FormSummaryEditPageRelayDetail = {
   id: string;
 };
-
-// ===============
-// CheckboxListItem
-// ===============
-
-export const CheckboxListItemMountedMsg = "checkbox-list-item:mounted";
-export type CheckboxListItemMountedRelayDetail = {
-  value: string;
-  text: string;
-  disabled: boolean;
-  el: HTMLElement;
-  mountType: "append" | "prepend" | "reset";
-};
-
-export const CheckboxListItemDestroyMsg = "checkbox-list-item:destroy";
-export type CheckboxListItemDestroyRelayDetail = {
-  value: string;
-};
-
-// Messages for individual checkbox list item control
-export const CheckboxListItemSetValueMsg = "checkbox-list-item::set:value";
-export type CheckboxListItemSetValueRelayDetail = {
-  value: string;
-  checked: boolean;
-};
-
-export const CheckboxListItemSetErrorMsg = "checkbox-list-item::set:error";
-export type CheckboxListItemSetErrorRelayDetail = {
-  error: string;
-};
-
-export const CheckboxListItemResetErrorsMsg = "checkbox-list-item::reset:errors";
-export const CheckboxListItemResetFieldsMsg = "checkbox-list-item::reset:fields";
