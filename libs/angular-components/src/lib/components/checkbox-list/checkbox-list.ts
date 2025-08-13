@@ -7,15 +7,11 @@ import {
   Output,
   forwardRef,
   TemplateRef,
-  AfterContentInit,
-  QueryList,
-  ContentChildren,
-  ElementRef,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgIf, NgTemplateOutlet } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
-import { GoabCheckbox } from "../checkbox/checkbox";
+// no direct child control syncing; wrapper is a thin bridge
 
 @Component({
   standalone: true,
@@ -54,14 +50,11 @@ import { GoabCheckbox } from "../checkbox/checkbox";
   ],
   imports: [NgTemplateOutlet, NgIf],
 })
-export class GoabCheckboxList
-  extends GoabControlValueAccessor
-  implements AfterContentInit
-{
+export class GoabCheckboxList extends GoabControlValueAccessor {
   @Input() name?: string;
   @Input() orientation: "vertical" | "horizontal" = "vertical";
   @Input() ariaLabel?: string;
-  @Input() description!: string | TemplateRef<any>;
+  @Input() description!: string | TemplateRef<unknown>;
   @Input() maxWidth?: string;
   @Input() showSelectAll?: boolean;
   @Input() selectAllText?: string = "Select All";
@@ -70,41 +63,6 @@ export class GoabCheckboxList
   @Input() override value?: string[] | string;
 
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
-
-  // Get reference to child checkboxes
-  @ContentChildren(GoabCheckbox) childCheckboxes!: QueryList<GoabCheckbox>;
-
-  constructor(private elementRef: ElementRef) {
-    super();
-  }
-
-  ngAfterContentInit() {
-    // Update child checkboxes when they change
-    this.childCheckboxes.changes.subscribe(() => {
-      this.updateChildCheckboxes();
-    });
-
-    // Initial update
-    setTimeout(() => this.updateChildCheckboxes(), 0);
-  }
-
-  private updateChildCheckboxes() {
-    const selectedValues = this.getSelectedValuesArray();
-
-    this.childCheckboxes.forEach((checkbox) => {
-      // Update checked state based on current value
-      const checkboxValue = checkbox.value?.toString() || checkbox.name || "";
-      checkbox.checked = selectedValues.includes(checkboxValue);
-
-      // Propagate disabled and error states
-      if (this.disabled !== undefined) {
-        checkbox.disabled = this.disabled;
-      }
-      if (this.error !== undefined) {
-        checkbox.error = this.error;
-      }
-    });
-  }
 
   private getSelectedValuesArray(): string[] {
     if (Array.isArray(this.value)) {
@@ -128,7 +86,7 @@ export class GoabCheckboxList
     return typeof this.description === "string" ? this.description : "";
   }
 
-  getDescriptionAsTemplate(): TemplateRef<any> | null {
+  getDescriptionAsTemplate(): TemplateRef<unknown> | null {
     if (this.description) {
       return typeof this.description === "string" ? null : this.description;
     }
@@ -144,10 +102,6 @@ export class GoabCheckboxList
     const selectedValues = detail.selectedValues || [];
     this.value = selectedValues;
     this.fcChange?.(selectedValues);
-
-    // Ensure projected child checkboxes reflect the latest selection (e.g., Select All)
-    // Defer to the next macrotask to avoid ExpressionChanged errors and align with other wrappers
-    setTimeout(() => this.updateChildCheckboxes(), 0);
   }
 
   // Override writeValue to handle both array and string inputs
@@ -162,8 +116,5 @@ export class GoabCheckboxList
     } else {
       this.value = [];
     }
-
-    // Update child checkboxes after value change
-    setTimeout(() => this.updateChildCheckboxes(), 0);
   }
 }
