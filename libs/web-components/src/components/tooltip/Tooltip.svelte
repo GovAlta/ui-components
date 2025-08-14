@@ -8,6 +8,8 @@
 
   // Public
 
+  // Backward compatibility: string content attribute still supported.
+  // New: multiline / rich content can be provided via <slot name="content">.
   export let content = "";
   export let testid: string = "";
   export let position: Position = "top";
@@ -72,9 +74,9 @@
     }
   }
 
-  // call checkAndAdjustPosition function when content changes
+  // call checkAndAdjustPosition function when content changes (attribute variant)
   $: {
-    content && checkAndAdjustPosition();
+    if (content) checkAndAdjustPosition();
   }
 
   // Hooks
@@ -217,8 +219,15 @@
     id="{_tooltipInstanceId}-tooltip"
     class="tooltip-text {position} align-{halign}"
     bind:this={_tooltipEl}
-    style="visibility: {_tooltipVisible ? 'visible' : 'hidden'}">{content}</span
+    style="visibility: {_tooltipVisible ? 'visible' : 'hidden'}"
   >
+    {#if content}
+      {content}
+    {:else}
+      <!-- Rich / multiline content slot -->
+      <slot name="content" />
+    {/if}
+  </span>
 </div>
 
 <style>
@@ -256,6 +265,11 @@
     white-space: nowrap;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Allow multiline content for slotted content */
+  .tooltip-text ::slotted(*) {
+    white-space: normal;
   }
 
   .tooltip-target {
