@@ -31,13 +31,13 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.mb]="mb"
     [attr.ml]="ml"
     [attr.mr]="mr"
-    [attr.showselectall]="showSelectAll ? 'true' : 'false'"
+    [attr.showselectall]="showSelectAll ? 'true' : undefined"
     [attr.selectalltext]="selectAllText"
     (_change)="_onChange($event)"
   >
     <ng-content />
     <div slot="description">
-      <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
+      <ng-container [ngTemplateOutlet]="descriptionTemplate"></ng-container>
     </div>
   </goa-checkbox-list>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -59,20 +59,14 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
   @Input() showSelectAll?: boolean;
   @Input() selectAllText?: string = "Select All";
 
-  // Override value to handle string arrays
-  @Input() override value?: string[] | string;
+  // Override value to handle string arrays consistently
+  @Input() override value?: string[];
 
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
 
   private getSelectedValuesArray(): string[] {
     if (Array.isArray(this.value)) {
       return this.value;
-    }
-    if (typeof this.value === "string" && this.value) {
-      return this.value
-        .split(",")
-        .map((v) => v.trim())
-        .filter(Boolean);
     }
     return [];
   }
@@ -86,34 +80,44 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
     return typeof this.description === "string" ? this.description : "";
   }
 
-  getDescriptionAsTemplate(): TemplateRef<unknown> | null {
-    if (this.description) {
-      return typeof this.description === "string" ? null : this.description;
+  get descriptionTemplate(): TemplateRef<unknown> | null {
+    if (this.description && typeof this.description !== "string") {
+      return this.description;
     }
     return null;
   }
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
-    this.onChange.emit(detail);
-    this.markAsTouched();
+    try {
+      const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
+      this.onChange.emit(detail);
+      this.markAsTouched();
 
-    // Update the form control with the selected values
-    const selectedValues = detail.selectedValues || [];
-    this.value = selectedValues;
-    this.fcChange?.(selectedValues);
+      // Update the form control with the selected values
+      const selectedValues = detail.selectedValues || [];
+      this.value = selectedValues;
+      this.fcChange?.(selectedValues);
+    } catch (error) {
+      console.error("Error handling checkbox list change:", error);
+    }
   }
 
-  // Override writeValue to handle both array and string inputs
+  // Override writeValue to handle array inputs consistently
   override writeValue(value: string[] | string | null): void {
-    if (Array.isArray(value)) {
-      this.value = value;
-    } else if (typeof value === "string") {
-      this.value = value
-        .split(",")
-        .map((v) => v.trim())
-        .filter(Boolean);
-    } else {
+    try {
+      if (Array.isArray(value)) {
+        this.value = value;
+      } else if (typeof value === "string" && value) {
+        // Support legacy string format for backward compatibility
+        this.value = value
+          .split(",")
+          .map((v) => v.trim())
+          .filter(Boolean);
+      } else {
+        this.value = [];
+      }
+    } catch (error) {
+      console.error("Error setting checkbox list value:", error);
       this.value = [];
     }
   }

@@ -71,16 +71,28 @@ export function GoabCheckboxList({
 
     const current = el.current;
     const listener = (e: Event) => {
-      const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
-      onChange?.(detail);
+      try {
+        const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
+        onChange?.(detail);
+      } catch (error) {
+        console.error("Error handling checkbox list change:", error);
+      }
     };
 
-    current.addEventListener("_change", listener);
+    try {
+      current.addEventListener("_change", listener);
+    } catch (error) {
+      console.error("Failed to attach checkbox list listener:", error);
+    }
 
     return () => {
-      current.removeEventListener("_change", listener);
+      try {
+        current.removeEventListener("_change", listener);
+      } catch (error) {
+        console.error("Failed to remove checkbox list listener:", error);
+      }
     };
-  }, [name, onChange]);
+  }, [onChange]);
 
   return (
     <goa-checkbox-list
@@ -94,7 +106,7 @@ export function GoabCheckboxList({
       description={typeof description === "string" ? description : undefined}
       orientation={orientation}
       maxwidth={maxWidth}
-      showselectall={showSelectAll ? "true" : "false"}
+      showselectall={showSelectAll ? "true" : undefined}
       selectalltext={selectAllText}
       mt={mt}
       mr={mr}

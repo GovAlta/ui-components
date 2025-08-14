@@ -51,6 +51,7 @@
   let _someSelected = false;
   let _suppressChildChange = false;
   let _observer: MutationObserver | null = null;
+  let _isInitialized = false;
 
   function getHostCheckboxes(): HTMLElement[] {
     if (!_slotEl) return [];
@@ -73,40 +74,52 @@
   }
 
   function getHostIdentifier(host: HTMLElement): string {
-    let id = host.getAttribute("name") || (host as any).name || "";
-    if (!id) id = host.getAttribute("value") || (host as any).value || "";
-    if (!id) id = host.getAttribute("text") || (host as any).text || "";
-    return id || "";
+    try {
+      let id = host.getAttribute("name") || (host as any).name || "";
+      if (!id) id = host.getAttribute("value") || (host as any).value || "";
+      if (!id) id = host.getAttribute("text") || (host as any).text || "";
+      return id || "";
+    } catch (error) {
+      console.error("Error getting host identifier:", error);
+      return "";
+    }
   }
 
-  let _rescanAttempts = 0;
-  const _MAX_RESCAN = 5;
-
   function syncAllCheckboxValues() {
-    // Use child record list if populated
-    if (_childRecords.length > 0) {
-      const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
-      if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
-        _allCheckboxValues = newValues;
+    try {
+      // Use child record list if populated (more reliable)
+      if (_childRecords.length > 0) {
+        const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
+        if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
+          _allCheckboxValues = newValues;
+        }
+        return;
       }
-      return;
-    }
-    const hosts = getHostCheckboxes();
-    let identifiers = hosts.map((h) => getHostIdentifier(h)).filter(Boolean);
-    if (!identifiers.length) {
-      identifiers = hosts
-        .map((h) => h.getAttribute("value") || (h as any).value || "")
-        .filter(Boolean);
-    }
-    if (identifiers.length) {
-      const newValues = Array.from(new Set(identifiers));
-      if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
-        _allCheckboxValues = newValues;
+
+      // Fallback to DOM scanning
+      const hosts = getHostCheckboxes();
+      let identifiers = hosts.map((h) => getHostIdentifier(h)).filter(Boolean);
+
+      if (!identifiers.length) {
+        identifiers = hosts
+          .map((h) => {
+            try {
+              return h.getAttribute("value") || (h as any).value || "";
+            } catch {
+              return "";
+            }
+          })
+          .filter(Boolean);
       }
-      _rescanAttempts = 0;
-    } else if (hosts.length > 0 && _rescanAttempts < _MAX_RESCAN) {
-      _rescanAttempts++;
-      setTimeout(() => syncAllCheckboxValues(), 0);
+
+      if (identifiers.length) {
+        const newValues = Array.from(new Set(identifiers));
+        if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
+          _allCheckboxValues = newValues;
+        }
+      }
+    } catch (error) {
+      console.error("Error syncing checkbox values:", error);
     }
   }
 
@@ -116,66 +129,100 @@
   $: {
     _error = toBoolean(error);
     if (_error !== _prevError) {
-      dispatch(
-        _rootEl,
-        "error::change",
-        { isError: _error },
-        { bubbles: true },
-      );
-      _prevError = _error;
-      updateChildCheckboxesError();
+      try {
+        dispatch(
+          _rootEl,
+          "error::change",
+          { isError: _error },
+          { bubbles: true },
+        );
+        _prevError = _error;
+        updateChildCheckboxesError();
+      } catch (error) {
+        console.error("Error dispatching error change:", error);
+      }
     }
   }
   $: isHorizontal = orientation === "horizontal";
   $: {
-    _selectedValues = value
-      ? value
-          .split(",")
-          .map((v) => v.trim())
-          .filter(Boolean)
-      : [];
+    try {
+      _selectedValues = value
+        ? value
+            .split(",")
+            .map((v) => v.trim())
+            .filter(Boolean)
+        : [];
+    } catch (error) {
+      console.error("Error parsing selected values:", error);
+      _selectedValues = [];
+    }
   }
   $: {
-    syncAllCheckboxValues();
-    const total = _allCheckboxValues.length;
-    const selectedCount = _selectedValues.filter((v) =>
-      _allCheckboxValues.includes(v),
-    ).length;
-    _allSelected = total > 0 && selectedCount === total;
-    _someSelected = selectedCount > 0 && selectedCount < total;
-    if (_selectAllEl) {
-      _selectAllEl.setAttribute("checked", _allSelected ? "true" : "false");
-      _selectAllEl.setAttribute(
-        "indeterminate",
-        _someSelected ? "true" : "false",
-      );
+    if (_isInitialized) {
+      syncAllCheckboxValues();
+      const total = _allCheckboxValues.length;
+      const selectedCount = _selectedValues.filter((v) =>
+        _allCheckboxValues.includes(v),
+      ).length;
+      _allSelected = total > 0 && selectedCount === total;
+      _someSelected = selectedCount > 0 && selectedCount < total;
+
+      if (_selectAllEl) {
+        try {
+          _selectAllEl.setAttribute("checked", _allSelected ? "true" : "false");
+          _selectAllEl.setAttribute(
+            "indeterminate",
+            _someSelected ? "true" : "false",
+          );
+        } catch (error) {
+          console.error("Error updating select all checkbox:", error);
+        }
+      }
     }
   }
 
   onMount(() => {
-    addRelayListener();
-    addSlotEventListeners();
-    sendMountedMessage();
-    _observer = new MutationObserver(() => {
-      syncAllCheckboxValues();
-      updateChildCheckboxesState();
-    });
-    if (_slotEl) {
-      _observer.observe(_slotEl, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ["name", "value"],
+    try {
+      addRelayListener();
+      addSlotEventListeners();
+      sendMountedMessage();
+
+      _observer = new MutationObserver(() => {
+        try {
+          syncAllCheckboxValues();
+          updateChildCheckboxesState();
+        } catch (error) {
+          console.error("Error in mutation observer:", error);
+        }
       });
+
+      if (_slotEl) {
+        _observer.observe(_slotEl, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ["name", "value"],
+        });
+      }
+
+      // Initialize after a tick to ensure DOM is ready
+      setTimeout(() => {
+        _isInitialized = true;
+        syncAllCheckboxValues();
+        updateChildCheckboxesState();
+      }, 0);
+    } catch (error) {
+      console.error("Error during checkbox list mount:", error);
     }
-    setTimeout(() => {
-      syncAllCheckboxValues();
-      updateChildCheckboxesState();
-    }, 0);
+
     return () => {
-      if (_observer) {
-        _observer.disconnect();
-        _observer = null;
+      try {
+        if (_observer) {
+          _observer.disconnect();
+          _observer = null;
+        }
+      } catch (error) {
+        console.error("Error during checkbox list cleanup:", error);
       }
     };
   });
@@ -250,43 +297,63 @@
 
   function addSlotEventListeners() {
     if (!_slotEl) return;
-    _slotEl.addEventListener("_change", (e: Event) => {
-      const customEvent = e as CustomEvent;
-      const detail = customEvent.detail;
-      e.stopPropagation();
-      if (_selectAllEl) {
-        const path = (customEvent as any).composedPath?.() || [];
-        if (path.includes(_selectAllEl)) return;
-        if (detail?.name === _selectAllEl.getAttribute("name")) return;
-      }
-      if (_suppressChildChange) return;
-      if (detail && detail.value !== undefined) {
-        handleChildCheckboxChange(detail);
-      }
-    });
+    try {
+      _slotEl.addEventListener("_change", (e: Event) => {
+        try {
+          const customEvent = e as CustomEvent;
+          const detail = customEvent.detail;
+          e.stopPropagation();
+
+          // Skip select all checkbox events
+          if (_selectAllEl) {
+            const path = (customEvent as any).composedPath?.() || [];
+            if (path.includes(_selectAllEl)) return;
+            if (detail?.name === _selectAllEl.getAttribute("name")) return;
+          }
+
+          if (_suppressChildChange) return;
+
+          if (detail && detail.value !== undefined) {
+            handleChildCheckboxChange(detail);
+          }
+        } catch (error) {
+          console.error("Error handling child checkbox change:", error);
+        }
+      });
+    } catch (error) {
+      console.error("Error adding slot event listeners:", error);
+    }
   }
 
   function handleChildCheckboxChange(detail: any) {
-    const checkboxName = detail.name;
-    if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name"))
-      return;
-    const isChecked =
-      typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
-    let newSelectedValues = [..._selectedValues];
-    if (isChecked) {
-      if (!newSelectedValues.includes(checkboxName))
-        newSelectedValues.push(checkboxName);
-    } else {
-      newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
+    try {
+      const checkboxName = detail.name;
+      if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name"))
+        return;
+
+      const isChecked =
+        typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
+      let newSelectedValues = [..._selectedValues];
+
+      if (isChecked) {
+        if (!newSelectedValues.includes(checkboxName))
+          newSelectedValues.push(checkboxName);
+      } else {
+        newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
+      }
+
+      value = newSelectedValues.join(",");
+      _selectedValues = newSelectedValues;
+
+      dispatch(
+        _rootEl,
+        "_change",
+        { name, value, selectedValues: newSelectedValues },
+        { bubbles: true },
+      );
+    } catch (error) {
+      console.error("Error handling child checkbox change:", error);
     }
-    value = newSelectedValues.join(",");
-    _selectedValues = newSelectedValues;
-    dispatch(
-      _rootEl,
-      "_change",
-      { name, value, selectedValues: newSelectedValues },
-      { bubbles: true },
-    );
   }
 
   function updateChildCheckboxesState() {
