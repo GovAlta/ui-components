@@ -144,7 +144,9 @@
     }
   }
   $: isHorizontal = orientation === "horizontal";
+  // Consolidated reactive block: parse selected values and compute aggregate selection state
   $: {
+    let parseError = false;
     try {
       _selectedValues = value
         ? value
@@ -153,13 +155,19 @@
             .filter(Boolean)
         : [];
     } catch (error) {
+      parseError = true;
       console.error("Error parsing selected values:", error);
       _selectedValues = [];
     }
-  }
-  $: {
+
     if (_isInitialized) {
-      syncAllCheckboxValues();
+      // Keep checkbox value inventory current before computing aggregate state
+      try {
+        syncAllCheckboxValues();
+      } catch (error) {
+        if (!parseError) console.error("Error syncing checkbox values:", error);
+      }
+
       const total = _allCheckboxValues.length;
       const selectedCount = _selectedValues.filter((v) =>
         _allCheckboxValues.includes(v),
