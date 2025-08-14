@@ -8,6 +8,7 @@ import {
   GoabInputType,
   Spacing,
 } from "@abgov/ui-components-common";
+import { NgIf, NgTemplateOutlet } from "@angular/common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -18,12 +19,14 @@ import {
   OnInit,
   booleanAttribute,
   numberAttribute,
+  TemplateRef,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   standalone: true,
   selector: "goab-input-number",
+  imports: [NgIf, NgTemplateOutlet],
   template: `
     <goa-input
       [attr.type]="type"
@@ -63,7 +66,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
       (_keypress)="_onKeyPress($event)"
       [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
+      <div slot="leadingContent">
+        <ng-container *ngIf="leadingContent">
+          <ng-container *ngIf="getLeadingContentAsTemplate(); else stringLeading">
+            <ng-container
+              [ngTemplateOutlet]="getLeadingContentAsTemplate()"
+            ></ng-container>
+          </ng-container>
+          <ng-template #stringLeading>{{ getLeadingContentAsString() }}</ng-template>
+        </ng-container>
+      </div>
+
       <ng-content />
+
+      <div slot="trailingContent">
+        <ng-container *ngIf="trailingContent">
+          <ng-container *ngIf="getTrailingContentAsTemplate(); else stringTrailing">
+            <ng-container
+              [ngTemplateOutlet]="getTrailingContentAsTemplate()"
+            ></ng-container>
+          </ng-container>
+          <ng-template #stringTrailing>{{ getTrailingContentAsString() }}</ng-template>
+        </ng-container>
+      </div>
     </goa-input>
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -108,6 +133,8 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Input() textAlign?: "left" | "right" = "right"; // Default to right for numbers
 
   @Input() value: number | null = null;
+  @Input() leadingContent!: string | TemplateRef<any>;
+  @Input() trailingContent!: string | TemplateRef<any>;
 
   @Output() onTrailingIconClick = new EventEmitter<void>(); // Keep void type
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
@@ -191,5 +218,23 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
 
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  getLeadingContentAsString(): string {
+    return this.leadingContent instanceof TemplateRef ? "" : this.leadingContent;
+  }
+
+  getLeadingContentAsTemplate(): TemplateRef<any> | null {
+    if (!this.leadingContent) return null;
+    return this.leadingContent instanceof TemplateRef ? this.leadingContent : null;
+  }
+
+  getTrailingContentAsString(): string {
+    return this.trailingContent instanceof TemplateRef ? "" : this.trailingContent;
+  }
+
+  getTrailingContentAsTemplate(): TemplateRef<any> | null {
+    if (!this.trailingContent) return null;
+    return this.trailingContent instanceof TemplateRef ? this.trailingContent : null;
   }
 }

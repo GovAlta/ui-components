@@ -303,7 +303,10 @@
       "slot[name=leadingContent]",
     ) as HTMLSlotElement;
 
-    if (leadingContentSlot && leadingContentSlot.assignedNodes().length > 0) {
+    if (
+      leadingContentSlot?.assignedNodes().length > 0 &&
+      leadingContentSlot.assignedNodes()[0]?.textContent?.trim() !== ""
+    ) {
       _leadingContentSlot = true;
     }
 
@@ -311,7 +314,10 @@
       "slot[name=trailingContent]",
     ) as HTMLSlotElement;
 
-    if (trailingContentSlot && trailingContentSlot.assignedNodes().length > 0) {
+    if (
+      trailingContentSlot?.assignedNodes().length > 0 &&
+      trailingContentSlot.assignedNodes()[0]?.textContent?.trim() !== ""
+    ) {
       _trailingContentSlot = true;
     }
   }
@@ -331,6 +337,8 @@
   class="container"
   style={`${_containerStyle}${calculateMargin(mt, mr, mb, ml)}`}
   bind:this={_rootEl}
+  class:leading-content={_leadingContentSlot}
+  class:trailing-content={_trailingContentSlot}
 >
   {#if $$slots.leadingContent}
     <div class="leading-content-slot">
@@ -341,8 +349,6 @@
   <div
     class="goa-input variant--{variant} type--{type}"
     class:input--disabled={isDisabled}
-    class:leading-content={_leadingContentSlot}
-    class:trailing-content={_trailingContentSlot}
     class:error={_error}
     class:has-icon={leadingicon || trailingicon}
   >
@@ -448,8 +454,8 @@
     max-width: 100%;
   }
 
-  .leading-content-slot :global(::slotted(div)),
-  .trailing-content-slot :global(::slotted(div)),
+  .leading-content .leading-content-slot :global(::slotted(div)),
+  .trailing-content .trailing-content-slot :global(::slotted(div)),
   .goa-input,
   .goa-input * {
     line-height: normal;
@@ -583,8 +589,8 @@
 
   .prefix,
   .suffix,
-  .leading-content-slot :global(::slotted(div)),
-  .trailing-content-slot :global(::slotted(div)) {
+  .leading-content .leading-content-slot :global(::slotted(div)),
+  .trailing-content .trailing-content-slot :global(::slotted(div)) {
     background-color: var(--goa-text-input-lt-content-color-bg);
     box-shadow: var(--goa-text-input-border);
     display: flex;
@@ -593,13 +599,13 @@
     height: 42px;
   }
 
-  .leading-content-slot :global(::slotted(div)),
-  .trailing-content-slot :global(::slotted(div)) {
+  .leading-content .leading-content-slot :global(::slotted(div)),
+  .trailing-content .trailing-content-slot :global(::slotted(div)) {
     padding: var(--goa-text-input-padding);
   }
 
   .prefix,
-  .leading-content-slot :global(::slotted(div)) {
+  .leading-content .leading-content-slot :global(::slotted(div)) {
     margin-right: calc(var(--goa-border-width-s) * -1);
     /* background-clip doesn't want to work */
     border-top-left-radius: var(--goa-text-input-border-radius);
@@ -607,7 +613,7 @@
   }
 
   .suffix,
-  .trailing-content-slot :global(::slotted(div)) {
+  .trailing-content .trailing-content-slot :global(::slotted(div)) {
     margin-left: calc(var(--goa-border-width-s) * -1);
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--goa-text-input-border-radius);
@@ -631,21 +637,21 @@
   }
 
   .goa-input:not(.input--disabled):has(.prefix) input,
-  .leading-content:not(.input--disabled) input {
+  .leading-content .goa-input:not(.input--disabled) input {
     margin-left: var(--goa-border-width-s);
   }
 
   .goa-input:not(.input--disabled):has(.suffix) input,
-  .trailing-content:not(.input--disabled) input {
+  .trailing-content .goa-input:not(.input--disabled) input {
     margin-right: var(--goa-border-width-s);
   }
 
-  .leading-content {
+  .leading-content .goa-input {
     border-top-left-radius: var(--goa-border-radius-none);
     border-bottom-left-radius: var(--goa-border-radius-none);
   }
 
-  .trailing-content {
+  .trailing-content .goa-input {
     border-top-right-radius: var(--goa-border-radius-none);
     border-bottom-right-radius: var(--goa-border-radius-none);
   }

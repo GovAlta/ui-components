@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabInput } from "./input";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
 import {
   GoabIconType,
   GoabInputAutoCapitalize,
@@ -49,7 +49,15 @@ import { fireEvent } from "@testing-library/dom";
       (onBlur)="onBlur()"
       (onFocus)="onFocus()"
       (onKeyPress)="onKeyPress()"
+      [leadingContent]="leadingContent"
+      [trailingContent]="trailingContent"
     >
+      <ng-template #leadingContent>
+        <div>Leading Content</div>
+      </ng-template>
+      <ng-template #trailingContent>
+        <div>Trailing Content</div>
+      </ng-template>
     </goab-input>
   `,
 })
@@ -84,6 +92,8 @@ class TestInputComponent {
   mr?: Spacing;
   mb?: Spacing;
   ml?: Spacing;
+  leadingContent!: string | TemplateRef<any>;
+  trailingContent!: string | TemplateRef<any>;
 
   onTrailingIconClick() {
     /** do nothing **/
@@ -238,5 +248,57 @@ describe("GoABInput", () => {
     fireEvent(input, new CustomEvent("_keyPress"));
 
     expect(validateOnKeyPress).toBeCalled();
+  });
+
+  it("should render leading and trailing content", () => {
+    const input = fixture.debugElement.query(By.css("goa-input"));
+    const leadingContent = input.nativeElement.querySelector("[slot='leadingContent']");
+    const trailingContent = input.nativeElement.querySelector("[slot='trailingContent']");
+
+    expect(leadingContent).toBeTruthy();
+    expect(leadingContent.textContent).toContain("Leading Content");
+
+    expect(trailingContent).toBeTruthy();
+    expect(trailingContent.textContent).toContain("Trailing Content");
+  });
+});
+
+@Component({
+  template: `
+    <goab-input
+      [leadingContent]="leadingContent"
+      [trailingContent]="trailingContent"
+    ></goab-input>
+  `,
+})
+class TestStringContentComponent {
+  leadingContent = "String Leading Content";
+  trailingContent = "String Trailing Content";
+}
+
+describe("GoabInput with string content", () => {
+  let fixture: ComponentFixture<TestStringContentComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TestStringContentComponent],
+      imports: [GoabInput],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestStringContentComponent);
+    fixture.detectChanges();
+  });
+
+  it("should render string leadingContent and trailingContent", () => {
+    const input = fixture.debugElement.query(By.css("goa-input"));
+    const leadingContent = input.nativeElement.querySelector("[slot='leadingContent']");
+    const trailingContent = input.nativeElement.querySelector("[slot='trailingContent']");
+
+    expect(leadingContent).toBeTruthy();
+    expect(leadingContent.textContent).toContain("String Leading Content");
+
+    expect(trailingContent).toBeTruthy();
+    expect(trailingContent.textContent).toContain("String Trailing Content");
   });
 });
