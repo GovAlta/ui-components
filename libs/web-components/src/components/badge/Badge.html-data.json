@@ -27,6 +27,66 @@
         },
         {
           "name": "light"
+        },
+        {
+          "name": "archived"
+        },
+        {
+          "name": "aqua"
+        },
+        {
+          "name": "black"
+        },
+        {
+          "name": "blue"
+        },
+        {
+          "name": "green"
+        },
+        {
+          "name": "orange"
+        },
+        {
+          "name": "pink"
+        },
+        {
+          "name": "red"
+        },
+        {
+          "name": "violet"
+        },
+        {
+          "name": "white"
+        },
+        {
+          "name": "yellow"
+        },
+        {
+          "name": "aqua-light"
+        },
+        {
+          "name": "black-light"
+        },
+        {
+          "name": "blue-light"
+        },
+        {
+          "name": "green-light"
+        },
+        {
+          "name": "orange-light"
+        },
+        {
+          "name": "pink-light"
+        },
+        {
+          "name": "red-light"
+        },
+        {
+          "name": "violet-light"
+        },
+        {
+          "name": "yellow-light"
         }
       ]
     },
@@ -36,6 +96,11 @@
       "description": "Include an icon in the badge",
       "default": "false",
       "valueSet": "boolean"
+    },
+    {
+      "name": "icontype",
+      "description": "Custom icon type to override the default icon for the badge type",
+      "type": "string"
     },
     {
       "name": "content",
