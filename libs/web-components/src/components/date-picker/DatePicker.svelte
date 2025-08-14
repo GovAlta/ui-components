@@ -132,24 +132,24 @@
   }
 
   function setDate(value: string) {
-    if (type === "calendar") {
-      // invalid date
-      if (!value || !new Date(value).getDate()) {
-        _date = null;
-      } else {
-        _date = startOfDay(new Date(value));
-      }
+    // invalid date
+    if (!value || !new Date(value).getDate()) {
+      _date = null;
+      _inputDate = { day: "", month: "", year: "" };
       return;
     }
 
-    // else type === "input"
-    const [year = "", month = "", day = ""] = value.split("T")[0].split("-");
+    if (type === "calendar") {
+      _date = startOfDay(new Date(value));
+    } else if (type === "input") {
+      const [year = "", month = "", day = ""] = value.split("T")[0].split("-");
 
-    // save without padded zeroes
-    _inputDate = { year: `${+year}`, month: `${+month - 1}`, day: `${+day}` };
+      // save without padded zeroes
+      _inputDate = { year: `${+year}`, month: `${+month - 1}`, day: `${+day}` };
 
-    if (!isInputDateValid()) {
-      resetInputDate();
+      if (!isInputDateValid()) {
+        resetInputDate();
+      }
     }
   }
 
