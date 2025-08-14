@@ -62,11 +62,11 @@
   $: isDisabled = toBoolean(disabled);
 
   // re-init the data when the value changes
-  $: setDateOrInputDate(value);
+  $: setDate(value);
 
   onMount(async () => {
     await tick(); // needed to ensure Angular's delay, when rendering within a route, doesn't break things
-    setDateOrInputDate(value);
+    setDate(value);
     addRelayListener();
     sendMountedMessage();
     showDeprecationWarnings();
@@ -131,21 +131,30 @@
     );
   }
 
-  function setDateOrInputDate(value: string) {
+  function setDate(value: string) {
     if (type === "calendar") {
-      setDate(value);
-    } else if (type === "input") {
-      setInputDate(value);
+      // invalid date
+      if (!value || !new Date(value).getDate()) {
+        _date = null;
+      } else {
+        _date = startOfDay(new Date(value));
+      }
+      return;
+    }
+
+    // else type === "input"
+    const [year = "", month = "", day = ""] = value.split("T")[0].split("-");
+
+    // save without padded zeroes
+    _inputDate = { year: `${+year}`, month: `${+month - 1}`, day: `${+day}` };
+
+    if (!isInputDateValid()) {
+      resetInputDate();
     }
   }
 
-  function setDate(value: string) {
-    // invalid date
-    if (!value || !new Date(value).getDate()) {
-      _date = null;
-    } else {
-      _date = startOfDay(new Date(value));
-    }
+  function resetInputDate() {
+    _inputDate = { day: "", month: "", year: "" };
   }
 
   function onCalendarChange(e: CustomEvent) {
@@ -253,37 +262,8 @@
     e.stopPropagation();
   }
 
-  // INPUT TYPE DATE PICKER
-
-  function setInputDate(value: string) {
-    const [year = "", month = "", day = ""] = value.split("T")[0].split("-");
-
-    // save without padded zeroes
-    _inputDate = { year: `${+year}`, month: `${+month - 1}`, day: `${+day}` };
-
-    if (!isInputDateValid()) {
-      resetInputDate();
-    }
-  }
-
-  // _change event handler for the text/dropdown inputs for the `input` date format
-  function onInputChange(e: Event) {
-    e.stopPropagation();
-
-    const { name: elName, value } = (
-      e as CustomEvent<{ name: string; value: string }>
-    ).detail;
-
-    _inputDate = { ..._inputDate, [elName]: value };
-
-    const date = isInputDateValid() ? getInputDateWithPaddedZeroes() : null;
-
-    dispatch(
-      _rootEl,
-      "_change",
-      { name, type: "string", value: date },
-      { bubbles: true },
-    );
+  function getInputDateWithPaddedZeroes(): string {
+    return `${padLeft(_inputDate.year, 4, 0)}-${padLeft(+_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
   }
 
   function isInputDateValid(): boolean {
@@ -308,12 +288,24 @@
     return true;
   }
 
-  function getInputDateWithPaddedZeroes(): string {
-    return `${padLeft(_inputDate.year, 4, 0)}-${padLeft(+_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
-  }
+  // _change event handler for the text/dropdown inputs for the `input` date format
+  function onInputChange(e: Event) {
+    e.stopPropagation();
 
-  function resetInputDate() {
-    _inputDate = { day: "", month: "", year: "" };
+    const { name: elName, value } = (
+      e as CustomEvent<{ name: string; value: string }>
+    ).detail;
+
+    _inputDate = { ..._inputDate, [elName]: value };
+
+    const date = isInputDateValid() ? getInputDateWithPaddedZeroes() : null;
+
+    dispatch(
+      _rootEl,
+      "_change",
+      { name, type: "string", value: date },
+      { bubbles: true },
+    );
   }
 </script>
 
