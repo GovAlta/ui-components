@@ -37,7 +37,7 @@
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
 
-  // Private
+  // Private state
   let _rootEl: HTMLElement;
   let _slotEl: HTMLElement;
   let _selectAllEl: HTMLElement;
@@ -57,40 +57,60 @@
     const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
     const assigned = (slotEl?.assignedElements() || []) as Element[];
     return assigned
-      .map((el) => el.querySelector("goa-checkbox") as HTMLElement | null)
+      .map((el) => {
+        if (
+          el instanceof HTMLElement &&
+          el.tagName.toLowerCase() === "goa-checkbox"
+        ) {
+          return el as HTMLElement;
+        }
+        return el.querySelector("goa-checkbox") as HTMLElement | null;
+      })
       .filter(
         (el): el is HTMLElement =>
           !!el && (!_selectAllEl || el !== _selectAllEl),
       );
   }
 
-  // Improved synchronization function
+  function getHostIdentifier(host: HTMLElement): string {
+    let id = host.getAttribute("name") || (host as any).name || "";
+    if (!id) id = host.getAttribute("value") || (host as any).value || "";
+    if (!id) id = host.getAttribute("text") || (host as any).text || "";
+    return id || "";
+  }
+
+  let _rescanAttempts = 0;
+  const _MAX_RESCAN = 5;
+
   function syncAllCheckboxValues() {
-    // Method 1: Use child records if available
+    // Use child record list if populated
     if (_childRecords.length > 0) {
       const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
-      // Only update if values actually changed
       if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
         _allCheckboxValues = newValues;
       }
       return;
     }
-
-    // Method 2: Fallback to DOM scanning
     const hosts = getHostCheckboxes();
-    const names = hosts
-      .map((h) => h.getAttribute("name") || "")
-      .filter(Boolean);
-
-    if (names.length) {
-      const newValues = Array.from(new Set(names));
+    let identifiers = hosts.map((h) => getHostIdentifier(h)).filter(Boolean);
+    if (!identifiers.length) {
+      identifiers = hosts
+        .map((h) => h.getAttribute("value") || (h as any).value || "")
+        .filter(Boolean);
+    }
+    if (identifiers.length) {
+      const newValues = Array.from(new Set(identifiers));
       if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
         _allCheckboxValues = newValues;
       }
+      _rescanAttempts = 0;
+    } else if (hosts.length > 0 && _rescanAttempts < _MAX_RESCAN) {
+      _rescanAttempts++;
+      setTimeout(() => syncAllCheckboxValues(), 0);
     }
   }
 
-  // Binding
+  // Reactive bindings
   $: isDisabled = toBoolean(disabled);
   $: showSelectAllCheckbox = toBoolean(showSelectAll);
   $: {
@@ -107,8 +127,6 @@
     }
   }
   $: isHorizontal = orientation === "horizontal";
-
-  // Parse value into array
   $: {
     _selectedValues = value
       ? value
@@ -117,20 +135,14 @@
           .filter(Boolean)
       : [];
   }
-
-  // Select All state - with explicit synchronization
   $: {
     syncAllCheckboxValues();
-
     const total = _allCheckboxValues.length;
     const selectedCount = _selectedValues.filter((v) =>
       _allCheckboxValues.includes(v),
     ).length;
-
     _allSelected = total > 0 && selectedCount === total;
     _someSelected = selectedCount > 0 && selectedCount < total;
-
-    // Critical fix: Explicitly update Select All element
     if (_selectAllEl) {
       _selectAllEl.setAttribute("checked", _allSelected ? "true" : "false");
       _selectAllEl.setAttribute(
@@ -144,13 +156,10 @@
     addRelayListener();
     addSlotEventListeners();
     sendMountedMessage();
-
-    // Add MutationObserver for dynamic content
     _observer = new MutationObserver(() => {
       syncAllCheckboxValues();
       updateChildCheckboxesState();
     });
-
     if (_slotEl) {
       _observer.observe(_slotEl, {
         childList: true,
@@ -159,14 +168,10 @@
         attributeFilter: ["name", "value"],
       });
     }
-
-    // Initial sync
     setTimeout(() => {
       syncAllCheckboxValues();
       updateChildCheckboxesState();
     }, 0);
-
-    // Cleanup observer on destroy
     return () => {
       if (_observer) {
         _observer.disconnect();
@@ -210,18 +215,13 @@
     dispatch(
       _rootEl,
       "_change",
-      {
-        name,
-        value,
-        selectedValues: _selectedValues,
-      },
+      { name, value, selectedValues: _selectedValues },
       { bubbles: true },
     );
   }
 
   function sendMountedMessage() {
     if (!name) return;
-
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
@@ -235,16 +235,12 @@
       | HTMLElement
       | undefined;
     if (!host) return;
-
     const inThisList = host.closest("goa-checkbox-list") === _rootEl;
     if (!inThisList) return;
-
     if (_selectAllEl && host === _selectAllEl) return;
-
     const existing = _childRecords.find(
       (r) => r.el === detail.el || r.name === detail.name,
     );
-
     if (!existing) {
       _childRecords = [..._childRecords, { el: detail.el, name: detail.name }];
       syncAllCheckboxValues();
@@ -254,20 +250,16 @@
 
   function addSlotEventListeners() {
     if (!_slotEl) return;
-
     _slotEl.addEventListener("_change", (e: Event) => {
       const customEvent = e as CustomEvent;
       const detail = customEvent.detail;
       e.stopPropagation();
-
       if (_selectAllEl) {
         const path = (customEvent as any).composedPath?.() || [];
         if (path.includes(_selectAllEl)) return;
         if (detail?.name === _selectAllEl.getAttribute("name")) return;
       }
-
       if (_suppressChildChange) return;
-
       if (detail && detail.value !== undefined) {
         handleChildCheckboxChange(detail);
       }
@@ -276,47 +268,33 @@
 
   function handleChildCheckboxChange(detail: any) {
     const checkboxName = detail.name;
-    if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name")) {
+    if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name"))
       return;
-    }
-
     const isChecked =
       typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
-
     let newSelectedValues = [..._selectedValues];
-
     if (isChecked) {
-      if (!newSelectedValues.includes(checkboxName)) {
+      if (!newSelectedValues.includes(checkboxName))
         newSelectedValues.push(checkboxName);
-      }
     } else {
       newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
     }
-
     value = newSelectedValues.join(",");
     _selectedValues = newSelectedValues;
-
     dispatch(
       _rootEl,
       "_change",
-      {
-        name,
-        value: value,
-        selectedValues: newSelectedValues,
-      },
+      { name, value, selectedValues: newSelectedValues },
       { bubbles: true },
     );
   }
 
   function updateChildCheckboxesState() {
     _suppressChildChange = true;
-
     if (_childRecords.length > 0) {
-      for (const rec of _childRecords) {
+      for (const rec of _childRecords)
         updateChildCheckboxState(rec.el, rec.name);
-      }
     }
-
     updateHostCheckboxesState();
     _suppressChildChange = false;
   }
@@ -324,14 +302,11 @@
   function updateHostCheckboxesState() {
     const hosts = getHostCheckboxes();
     hosts.forEach((host) => {
-      const name = host.getAttribute("name") || "";
+      const name = getHostIdentifier(host);
       const shouldBeChecked = _selectedValues.includes(name);
       host.setAttribute("checked", shouldBeChecked ? "true" : "false");
-      if (isDisabled) {
-        host.setAttribute("disabled", "true");
-      } else {
-        host.removeAttribute("disabled");
-      }
+      if (isDisabled) host.setAttribute("disabled", "true");
+      else host.removeAttribute("disabled");
     });
   }
 
@@ -345,47 +320,45 @@
         value: shouldBeChecked ? "checked" : "",
       });
     }
-
     const host = (childEl.getRootNode() as any)?.host as
       | HTMLElement
       | undefined;
     if (host) {
-      if (isDisabled) {
-        host.setAttribute("disabled", "true");
-      } else {
-        host.removeAttribute("disabled");
-      }
+      if (isDisabled) host.setAttribute("disabled", "true");
+      else host.removeAttribute("disabled");
     }
   }
 
   function updateChildCheckboxesError() {
     for (const rec of _childRecords) {
-      if (_error) {
-        relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
-      } else {
-        relay(rec.el, FieldsetResetErrorsMsg);
-      }
+      if (_error) relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
+      else relay(rec.el, FieldsetResetErrorsMsg);
     }
   }
 
   function handleSelectAllChange(e: CustomEvent) {
     const isChecked = e.detail.checked;
     syncAllCheckboxValues();
-
+    if (_allCheckboxValues.length === 0 && _slotEl) {
+      const direct = Array.from(
+        _slotEl.querySelectorAll("goa-checkbox[name], goa-checkbox[value]"),
+      ) as HTMLElement[];
+      const alt = Array.from(
+        new Set(
+          direct
+            .map((h) => h.getAttribute("name") || h.getAttribute("value") || "")
+            .filter(Boolean),
+        ),
+      );
+      if (alt.length) _allCheckboxValues = alt;
+    }
     _selectedValues = isChecked ? [..._allCheckboxValues] : [];
     value = _selectedValues.join(",");
-
     updateChildCheckboxesState();
-
-    // Dispatch change event
     dispatch(
       _rootEl,
       "_change",
-      {
-        name,
-        value,
-        selectedValues: _selectedValues,
-      },
+      { name, value, selectedValues: _selectedValues },
       { bubbles: true },
     );
   }

@@ -1,6 +1,5 @@
 import { GoabCheckboxListOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
-import { CheckboxContext } from "../checkbox/CheckboxContext";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -72,53 +71,41 @@ export function GoabCheckboxList({
 
     const current = el.current;
     const listener = (e: Event) => {
-      const customEvent = e as CustomEvent;
-      if (!customEvent.detail) {
-        console.error("CheckboxList change event missing detail");
-        return;
-      }
-
-      const detail: GoabCheckboxListOnChangeDetail = {
-        name: customEvent.detail.name || name,
-        value: customEvent.detail.value || "",
-        selectedValues: Array.isArray(customEvent.detail.selectedValues)
-          ? customEvent.detail.selectedValues
-          : [],
-      };
-
+      const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
       onChange?.(detail);
     };
 
     current.addEventListener("_change", listener);
-    return () => current.removeEventListener("_change", listener);
+
+    return () => {
+      current.removeEventListener("_change", listener);
+    };
   }, [name, onChange]);
 
   return (
-    <CheckboxContext.Provider value={{ inCheckboxList: true }}>
-      <goa-checkbox-list
-        ref={el}
-        name={name}
-        value={getValueAsString(value)}
-        disabled={disabled ? "true" : undefined}
-        error={error ? "true" : undefined}
-        testid={testId}
-        arialabel={ariaLabel}
-        description={typeof description === "string" ? description : undefined}
-        orientation={orientation}
-        maxwidth={maxWidth}
-        showselectall={showSelectAll ? "true" : undefined}
-        selectalltext={selectAllText}
-        mt={mt}
-        mr={mr}
-        mb={mb}
-        ml={ml}
-      >
-        {children}
-        {typeof description !== "string" && description && (
-          <div slot="description">{description}</div>
-        )}
-      </goa-checkbox-list>
-    </CheckboxContext.Provider>
+    <goa-checkbox-list
+      ref={el}
+      name={name}
+      value={getValueAsString(value)}
+      disabled={disabled ? "true" : undefined}
+      error={error ? "true" : undefined}
+      testid={testId}
+      arialabel={ariaLabel}
+      description={typeof description === "string" ? description : undefined}
+      orientation={orientation}
+      maxwidth={maxWidth}
+      showselectall={showSelectAll ? "true" : "false"}
+      selectalltext={selectAllText}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+    >
+      {children}
+      {typeof description !== "string" && description && (
+        <div slot="description">{description}</div>
+      )}
+    </goa-checkbox-list>
   );
 }
 
