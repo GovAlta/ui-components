@@ -28,7 +28,7 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
+  import { onDestroy, onMount, afterUpdate } from "svelte";
   import { receive, relay } from "../../common/utils";
 
   // Props
@@ -41,16 +41,20 @@
   let _rootEl: HTMLElement;
   let _parentEl: HTMLElement;
 
-  onMount(async() => {
-    await tick();
-    relay<DropdownItemMountedRelayDetail>(
-      _rootEl,
-      DropdownItemMountedMsg,
-      { el: _rootEl, filter, value, label, mountType: mount },
-      { bubbles: true, timeout: 10 },
-    );
-
+  onMount(() => {
     addMessageListener();
+  })
+
+  afterUpdate(() => {
+    // for angular 20, there is a delay that a case when value is not binding fast enough can happen
+    if (value) {
+          relay<DropdownItemMountedRelayDetail>(
+            _rootEl,
+            DropdownItemMountedMsg,
+            { el: _rootEl, filter, value, label, mountType: mount },
+            { bubbles: true, timeout: 10 },
+          );
+        }
   });
 
   function addMessageListener() {

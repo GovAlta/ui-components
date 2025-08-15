@@ -17,7 +17,7 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoabDropdownItem {
-  @Input() value?: string;
+  @Input({ required: true }) value!: string;
   @Input() filter?: string;
   @Input() label?: string;
   @Input() name?: string;

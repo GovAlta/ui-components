@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, booleanAttribute, } from "@angular/core";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -21,20 +21,21 @@ import { GoabBaseComponent } from "../base.component";
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.mr]="mr"
-    >
+      >
       <ng-content />
       <div slot="description">
         <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
       </div>
       <div slot="reveal">
-        <ng-container
-          *ngIf="this.reveal"
-          [ngTemplateOutlet]="reveal"
-        ></ng-container>
+        @if (this.reveal) {
+          <ng-container
+            [ngTemplateOutlet]="reveal"
+          ></ng-container>
+        }
       </div>
     </goa-radio-item>
-  `,
-  imports: [NgTemplateOutlet, NgIf],
+    `,
+  imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabRadioItem extends GoabBaseComponent {

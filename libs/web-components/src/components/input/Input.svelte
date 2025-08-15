@@ -16,7 +16,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { onMount, tick } from "svelte";
+  import { afterUpdate } from "svelte";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -141,9 +141,7 @@
   // Hooks
   // =====
 
-  onMount(async () => {
-    await tick();
-
+  afterUpdate(() => {
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     validateTextAlign(textalign);
@@ -230,12 +228,16 @@
 
   // Relay message up the chain to allow any parent element to have a reference to the input element
   function sendMountedMessage() {
-    relay<FormFieldMountRelayDetail>(
-      _rootEl,
-      FormFieldMountMsg,
-      { name, el: _inputEl },
-      { bubbles: true, timeout: 10 },
-    );
+    // angular 20 can have a small delay when binding property with angular wrapper
+    if (name) {
+      relay<FormFieldMountRelayDetail>(
+        _rootEl,
+        FormFieldMountMsg,
+        { name, el: _inputEl },
+        { bubbles: true, timeout: 10 },
+      );
+    }
+
   }
 
   function onKeyUp(e: Event) {

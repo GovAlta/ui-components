@@ -3,7 +3,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 // @deprecated: Use the new <goab-input .. /> component
 @Directive({
-  selector: "[goaValue]", providers: [{
+  standalone: true,
+  selector: "[goaValue]", 
+  providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ValueDirective),
     multi: true,
@@ -58,6 +60,7 @@ export class ValueDirective implements ControlValueAccessor {
 }
 
 @Directive({
+  standalone: true,
   selector: "[goaValueList]",
   providers: [{
     provide: NG_VALUE_ACCESSOR,
