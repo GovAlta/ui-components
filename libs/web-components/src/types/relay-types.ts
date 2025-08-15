@@ -1,10 +1,4 @@
-export type FormStatus =
-  | "not-started"
-  | "cannot-start-yet"
-  | "in-progress"
-  | "submitted"
-  | "update-needed"
-  | "complete";
+export type FormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
 
 export type FormState = {
   uuid: string;
