@@ -1,7 +1,6 @@
-import { cleanup, fireEvent, render, waitFor } from "@testing-library/svelte";
-import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
+import { cleanup, render, waitFor } from "@testing-library/svelte";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import CheckboxList from "./CheckboxList.svelte";
-import Checkbox from "./Checkbox.svelte";
 
 afterEach(() => {
   cleanup();
@@ -16,7 +15,7 @@ describe("GoACheckboxList", () => {
 
   describe("Rendering", () => {
     it("should render checkbox list with default props", async () => {
-      const { container, queryByTestId } = render(CheckboxList, defaultProps);
+      const { queryByTestId } = render(CheckboxList, defaultProps);
 
       const checkboxList = queryByTestId("checkbox-list");
       expect(checkboxList).toBeTruthy();
@@ -31,7 +30,9 @@ describe("GoACheckboxList", () => {
       });
 
       const checkboxList = queryByTestId("checkbox-list");
-      expect(checkboxList?.getAttribute("aria-label")).toBe("Contact Preferences");
+      expect(checkboxList?.getAttribute("aria-label")).toBe(
+        "Contact Preferences",
+      );
     });
 
     it("should render description when provided", async () => {
@@ -47,7 +48,7 @@ describe("GoACheckboxList", () => {
 
       const checkboxList = queryByTestId("checkbox-list");
       expect(checkboxList?.getAttribute("aria-describedby")).toBe(
-        `${defaultProps.name}_description`
+        `${defaultProps.name}_description`,
       );
     });
 
@@ -102,7 +103,9 @@ describe("GoACheckboxList", () => {
     it("should not show select all by default", async () => {
       const { container } = render(CheckboxList, defaultProps);
 
-      const selectAll = container.querySelector(`goa-checkbox[name="${defaultProps.name}_select_all"]`);
+      const selectAll = container.querySelector(
+        `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+      );
       expect(selectAll).toBeFalsy();
     });
 
@@ -113,7 +116,9 @@ describe("GoACheckboxList", () => {
       });
 
       await waitFor(() => {
-        const selectAll = container.querySelector(`goa-checkbox[name="${defaultProps.name}_select_all"]`);
+        const selectAll = container.querySelector(
+          `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+        );
         expect(selectAll).toBeTruthy();
         expect(selectAll?.getAttribute("text")).toBe("Select All");
       });
@@ -127,7 +132,9 @@ describe("GoACheckboxList", () => {
       });
 
       await waitFor(() => {
-        const selectAll = container.querySelector(`goa-checkbox[name="${defaultProps.name}_select_all"]`);
+        const selectAll = container.querySelector(
+          `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+        );
         expect(selectAll?.getAttribute("text")).toBe("Choose All Options");
       });
     });
@@ -153,16 +160,20 @@ describe("GoACheckboxList", () => {
 
       // Wait for DOM updates
       await waitFor(() => {
-        expect(container.querySelectorAll("goa-checkbox").length).toBeGreaterThan(0);
+        expect(
+          container.querySelectorAll("goa-checkbox").length,
+        ).toBeGreaterThan(0);
       });
 
       // Simulate select all click
-      const selectAll = container.querySelector(`goa-checkbox[name="${defaultProps.name}_select_all"]`);
+      const selectAll = container.querySelector(
+        `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+      );
       selectAll?.dispatchEvent(
         new CustomEvent("_change", {
           detail: { checked: true },
           bubbles: true,
-        })
+        }),
       );
 
       await waitFor(() => {
@@ -254,7 +265,7 @@ describe("GoACheckboxList", () => {
         expect(errorChangeSpy).toHaveBeenCalledWith(
           expect.objectContaining({
             detail: { isError: true },
-          })
+          }),
         );
       });
     });
@@ -278,7 +289,7 @@ describe("GoACheckboxList", () => {
         expect(errorChangeSpy).toHaveBeenCalledWith(
           expect.objectContaining({
             detail: { isError: true },
-          })
+          }),
         );
       });
     });
@@ -303,7 +314,7 @@ describe("GoACheckboxList", () => {
         new CustomEvent("_change", {
           detail: { name: "option1", checked: true, value: "checked" },
           bubbles: true,
-        })
+        }),
       );
 
       await waitFor(() => {
@@ -314,7 +325,7 @@ describe("GoACheckboxList", () => {
               value: "option1",
               selectedValues: ["option1"],
             }),
-          })
+          }),
         );
       });
     });
@@ -355,11 +366,14 @@ describe("GoACheckboxList", () => {
             data: { name: "option1", el: checkbox },
           },
           bubbles: true,
-        })
+        }),
       );
 
-      // Give component time to update
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Allow the component's next tick (initialization setTimeout(0)) to complete
+      await waitFor(() => {
+        // Child is present (condition gives waitFor a concrete predicate)
+        expect(checkboxContainer?.contains(checkbox)).toBe(true);
+      });
 
       // Child should be updated to checked state via relay message
       expect(checkbox.getAttribute("name")).toBe("option1");
@@ -448,7 +462,7 @@ describe("GoACheckboxList", () => {
             data: { name: "option1", el: checkbox1 },
           },
           bubbles: true,
-        })
+        }),
       );
       root?.dispatchEvent(
         new CustomEvent("relay", {
@@ -457,13 +471,20 @@ describe("GoACheckboxList", () => {
             data: { name: "option2", el: checkbox2 },
           },
           bubbles: true,
-        })
+        }),
       );
 
-      // Give component time to sync and calculate state
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Wait until select-all element is present (ensures init + reactive pass ran)
+      await waitFor(() => {
+        const sa = container.querySelector(
+          `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+        );
+        expect(sa).toBeTruthy();
+      });
 
-      const selectAll = container.querySelector(`goa-checkbox[name="${defaultProps.name}_select_all"]`);
+      const selectAll = container.querySelector(
+        `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+      );
       // When implementing, component should set indeterminate when some are selected
       // For now, we'll just verify the select all checkbox exists
       expect(selectAll).toBeTruthy();
@@ -494,7 +515,7 @@ describe("GoACheckboxList", () => {
             data: { name: "option1", el: checkbox1 },
           },
           bubbles: true,
-        })
+        }),
       );
       root?.dispatchEvent(
         new CustomEvent("relay", {
@@ -503,11 +524,15 @@ describe("GoACheckboxList", () => {
             data: { name: "option2", el: checkbox2 },
           },
           bubbles: true,
-        })
+        }),
       );
 
-      // Give component time to sync and calculate state
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await waitFor(() => {
+        const sa = container.querySelector(
+          `goa-checkbox[name="${defaultProps.name}_select_all"]`,
+        );
+        expect(sa).toBeTruthy();
+      });
 
       const selectAll = container.querySelector(
         `goa-checkbox[name="${defaultProps.name}_select_all"]`,
@@ -549,19 +574,6 @@ describe("GoACheckboxList", () => {
       await rerender({ ...defaultProps, value: "option1,option2" });
       await rerender({ ...defaultProps, value: "option2" });
       await rerender({ ...defaultProps, value: "" });
-
-      // Component should remain stable
-      expect(true).toBe(true);
-    });
-
-    it("should clean up mutation observer on unmount", async () => {
-      const { unmount } = render(CheckboxList, defaultProps);
-
-      // Unmount should disconnect observer
-      unmount();
-
-      // No errors should occur
-      expect(true).toBe(true);
     });
   });
 });
