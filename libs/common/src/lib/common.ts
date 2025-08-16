@@ -7,6 +7,15 @@ export type GoabRadioGroupOnChangeDetail = {
   value: string;
 };
 
+// Checkbox List
+export type GoabCheckboxListOrientation = "vertical" | "horizontal";
+
+export type GoabCheckboxListOnChangeDetail = {
+  name: string;
+  value: string; // comma-separated values (for form compatibility)
+  selectedValues: string[]; // array of selected values (for easier programmatic use)
+};
+
 export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
@@ -1123,7 +1132,6 @@ export interface GoabFieldsetOnContinueDetail {
 export type GoabPublicFormStatus = "initializing" | "complete";
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
-
 
 // Public form Task
 export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";
