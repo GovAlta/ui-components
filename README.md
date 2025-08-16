@@ -15,7 +15,7 @@ if [ ! -f .env ]; then cp ./.env.example ./.env; fi
 Run the `playground-setup.sh` file.
 
 ```bash
-./playground-setup.sh
+./scripts/playground-setup.sh
 ```
 
 You can then test the playground apps at `localhost:4200` by running one of the following:
