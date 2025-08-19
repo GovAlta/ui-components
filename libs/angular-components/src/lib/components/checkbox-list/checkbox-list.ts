@@ -31,6 +31,10 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.mb]="mb"
     [attr.ml]="ml"
     [attr.mr]="mr"
+    [attr.mlchild]="mlChild"
+    [attr.mrchild]="mrChild"
+    [attr.mbchild]="mbChild"
+    [attr.mtchild]="mtChild"
     [attr.showselectall]="showSelectAll ? 'true' : undefined"
     [attr.selectalltext]="selectAllText"
     (_change)="_onChange($event)"
@@ -58,6 +62,11 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
   @Input() maxWidth?: string;
   @Input() showSelectAll?: boolean;
   @Input() selectAllText?: string = "Select All";
+  // Child margins applied to slotted checkboxes (if not explicitly set on individual child)
+  @Input() mlChild?: string; // left
+  @Input() mrChild?: string; // right
+  @Input() mtChild?: string; // top
+  @Input() mbChild?: string; // bottom
 
   // Override value to handle string arrays consistently
   @Input() override value?: string[];

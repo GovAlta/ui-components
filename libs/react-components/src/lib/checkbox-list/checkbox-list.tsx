@@ -1,4 +1,4 @@
-import { GoabCheckboxListOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { GoabCheckboxListOnChangeDetail, Margins, Spacing } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 
 declare module "react" {
@@ -23,6 +23,11 @@ interface WCProps extends Margins {
   maxwidth?: string;
   showselectall?: string;
   selectalltext?: string;
+  // child margins (applied to child checkboxes if they don't already declare that side)
+  mlchild?: Spacing | string | null;
+  mrchild?: Spacing | string | null;
+  mtchild?: Spacing | string | null;
+  mbchild?: Spacing | string | null;
 }
 
 export interface GoabCheckboxListProps extends Margins {
@@ -39,6 +44,11 @@ export interface GoabCheckboxListProps extends Margins {
   selectAllText?: string;
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
+  // child margins
+  mlChild?: Spacing | null;
+  mrChild?: Spacing | null;
+  mtChild?: Spacing | null;
+  mbChild?: Spacing | null;
 }
 
 function getValueAsString(value?: string[]): string {
@@ -63,6 +73,11 @@ export function GoabCheckboxList({
   mr,
   mb,
   ml,
+  // child margins
+  mlChild,
+  mrChild,
+  mtChild,
+  mbChild,
 }: GoabCheckboxListProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
@@ -112,6 +127,10 @@ export function GoabCheckboxList({
       mr={mr}
       mb={mb}
       ml={ml}
+      mlchild={mlChild as string | undefined}
+      mrchild={mrChild as string | undefined}
+      mtchild={mtChild as string | undefined}
+      mbchild={mbChild as string | undefined}
     >
       {children}
       {typeof description !== "string" && description && (

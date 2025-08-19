@@ -36,6 +36,11 @@
   export let mr: Spacing = null;
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
+  // child checkbox margin overrides (applied programmatically to slotted child checkboxes when present)
+  export let mlchild: Spacing = null;
+  export let mrchild: Spacing = null;
+  export let mtchild: Spacing = null;
+  export let mbchild: Spacing = null;
 
   // Private state
   let _rootEl: HTMLElement;
@@ -144,6 +149,10 @@
     }
   }
   $: isHorizontal = orientation === "horizontal";
+  // Apply child margins via setting margin attributes on each child checkbox (works with slotted Angular wrappers)
+  $: if ((mlchild || mrchild || mtchild || mbchild) && !isHorizontal) {
+    applyChildMargins();
+  }
   // Consolidated reactive block: parse selected values and compute aggregate selection state
   $: {
     let parseError = false;
@@ -411,6 +420,21 @@
     }
   }
 
+  function applyChildMargins() {
+    try {
+      const hosts = getHostCheckboxes();
+      hosts.forEach((host) => {
+        if (_selectAllEl && host === _selectAllEl) return; // skip select-all
+        if (mlchild && !host.hasAttribute("ml")) host.setAttribute("ml", mlchild as string);
+        if (mrchild && !host.hasAttribute("mr")) host.setAttribute("mr", mrchild as string);
+        if (mtchild && !host.hasAttribute("mt")) host.setAttribute("mt", mtchild as string);
+        if (mbchild && !host.hasAttribute("mb")) host.setAttribute("mb", mbchild as string);
+      });
+    } catch (error) {
+      console.error("Error applying child margins:", error);
+    }
+  }
+
   function handleSelectAllChange(e: CustomEvent) {
     const isChecked = e.detail.checked;
     syncAllCheckboxValues();
@@ -471,8 +495,7 @@
 
   <div
     bind:this={_slotEl}
-    class="checkbox-container"
-    class:horizontal={isHorizontal}
+    class={`checkbox-container ${isHorizontal ? "horizontal" : ""}`.trim()}
   >
     {#if showSelectAllCheckbox}
       <goa-checkbox
@@ -520,9 +543,9 @@
   }
 
   /* Ensure child checkboxes have proper spacing in vertical layout */
-  .checkbox-container:not(.horizontal) :global(goa-checkbox:not(:last-child)) {
+  /* .checkbox-container:not(.horizontal) :global(goa-checkbox:not(:last-child)) {
     margin-bottom: var(--goa-space-xs);
-  }
+  } */
 
   /* Remove bottom margin from last checkbox in horizontal layout */
   .checkbox-container.horizontal :global(goa-checkbox) {
