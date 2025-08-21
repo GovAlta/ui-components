@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { dispatch, receive, relay, toBoolean } from "../../common/utils";
+  import { receive, relay, toBoolean } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
@@ -135,11 +135,12 @@
     _error = toBoolean(error);
     if (_error !== _prevError) {
       try {
-        dispatch(
-          _rootEl,
-          "error::change",
-          { isError: _error },
-          { bubbles: true },
+        _rootEl?.dispatchEvent(
+          new CustomEvent("error::change", {
+            detail: { isError: _error },
+            bubbles: true,
+            composed: true,
+          }),
         );
         _prevError = _error;
         updateChildCheckboxesError();
@@ -276,11 +277,12 @@
         ? String(detail.value)
         : "";
     updateChildCheckboxesState();
-    dispatch(
-      _rootEl,
-      "_change",
-      { name, value, selectedValues: _selectedValues },
-      { bubbles: true },
+    _rootEl?.dispatchEvent(
+      new CustomEvent("_change", {
+        detail: { name, value, selectedValues: _selectedValues },
+        bubbles: true,
+        composed: true,
+      }),
     );
   }
 
@@ -362,11 +364,12 @@
       value = newSelectedValues.join(",");
       _selectedValues = newSelectedValues;
 
-      dispatch(
-        _rootEl,
-        "_change",
-        { name, value, selectedValues: newSelectedValues },
-        { bubbles: true },
+      _rootEl?.dispatchEvent(
+        new CustomEvent("_change", {
+          detail: { name, value, selectedValues: newSelectedValues },
+          bubbles: true,
+          composed: true,
+        }),
       );
     } catch (error) {
       console.error("Error handling child checkbox change:", error);
@@ -425,10 +428,14 @@
       const hosts = getHostCheckboxes();
       hosts.forEach((host) => {
         if (_selectAllEl && host === _selectAllEl) return; // skip select-all
-        if (mlchild && !host.hasAttribute("ml")) host.setAttribute("ml", mlchild as string);
-        if (mrchild && !host.hasAttribute("mr")) host.setAttribute("mr", mrchild as string);
-        if (mtchild && !host.hasAttribute("mt")) host.setAttribute("mt", mtchild as string);
-        if (mbchild && !host.hasAttribute("mb")) host.setAttribute("mb", mbchild as string);
+        if (mlchild && !host.hasAttribute("ml"))
+          host.setAttribute("ml", mlchild as string);
+        if (mrchild && !host.hasAttribute("mr"))
+          host.setAttribute("mr", mrchild as string);
+        if (mtchild && !host.hasAttribute("mt"))
+          host.setAttribute("mt", mtchild as string);
+        if (mbchild && !host.hasAttribute("mb"))
+          host.setAttribute("mb", mbchild as string);
       });
     } catch (error) {
       console.error("Error applying child margins:", error);
@@ -454,16 +461,22 @@
     _selectedValues = isChecked ? [..._allCheckboxValues] : [];
     value = _selectedValues.join(",");
     updateChildCheckboxesState();
-    dispatch(
-      _rootEl,
-      "_change",
-      { name, value, selectedValues: _selectedValues },
-      { bubbles: true },
+    _rootEl?.dispatchEvent(
+      new CustomEvent("_change", {
+        detail: { name, value, selectedValues: _selectedValues },
+        bubbles: true,
+        composed: true,
+      }),
     );
   }
 
   function onFocus() {
-    dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
+    _rootEl?.dispatchEvent(
+      new CustomEvent("help-text::announce", {
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 </script>
 
