@@ -257,6 +257,8 @@
     .value {
       width: 50%;
       padding-left: 1rem;
+      /* Allow multiline value labels (newline -> line break) */
+      white-space: pre-line;
     }
   }
 </style>
