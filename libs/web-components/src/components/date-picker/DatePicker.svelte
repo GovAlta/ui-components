@@ -353,6 +353,7 @@
           on:_change={onInputChange}
           {error}
           value={_inputDate.month + ""}
+          disabled={isDisabled}
         >
           <goa-dropdown-item value="0" label="January" />
           <goa-dropdown-item value="1" label="February" />
@@ -379,6 +380,7 @@
           max="31"
           {error}
           testid="day-input"
+          disabled={isDisabled}
         />
       </goa-form-item>
       <goa-form-item helptext="Year (YYYY)">
@@ -392,6 +394,7 @@
           max="2200"
           {error}
           testid="year-input"
+          disabled={isDisabled}
         />
       </goa-form-item>
     </goa-block>
