@@ -1,5 +1,9 @@
 import { useEffect, useRef, type JSX } from "react";
-import { GoabDatePickerInputType, GoabDatePickerOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import {
+  GoabDatePickerInputType,
+  GoabDatePickerOnChangeDetail,
+  Margins,
+} from "@abgov/ui-components-common";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -25,7 +29,7 @@ declare module "react" {
 
 export interface GoabDatePickerProps extends Margins {
   name?: string;
-  value?: Date;
+  value?: Date | string | undefined;
   error?: boolean;
   min?: Date;
   max?: Date;
