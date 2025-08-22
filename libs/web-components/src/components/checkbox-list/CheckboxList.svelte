@@ -20,7 +20,7 @@
   export let name: string;
 
   // Optional values
-  export let value: string = ""; // comma-separated values
+  export let value: string[] = []; // selected checkbox names
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
@@ -37,7 +37,6 @@
   // Private state
   let _rootEl: HTMLElement;
   let _slotEl: HTMLElement;
-  let _selectedValues: string[] = [];
   let _error: boolean;
   let _prevError: boolean;
   type ChildRecord = { el: HTMLElement; name: string };
@@ -67,20 +66,10 @@
     }
   });
 
-  function updateState(newValue: string, newError: string) {
-    // Parse selected values
-    let parseError = false;
-    try {
-      _selectedValues = newValue
-        ? newValue
-            .split(",")
-            .map((v) => v.trim())
-            .filter(Boolean)
-        : [];
-    } catch (error) {
-      parseError = true;
-      console.error("Error parsing selected values:", error);
-      _selectedValues = [];
+  function updateState(newValue: string[], newError: string) {
+    // Ensure value is always an array
+    if (!Array.isArray(newValue)) {
+      value = [];
     }
 
     // Handle error state changes
@@ -107,7 +96,7 @@
       try {
         syncAllCheckboxValues();
       } catch (error) {
-        if (!parseError) console.error("Error syncing checkbox values:", error);
+        console.error("Error syncing checkbox values:", error);
       }
     }
   }
@@ -126,10 +115,7 @@
         }
         return el.querySelector("goa-checkbox") as HTMLElement | null;
       })
-      .filter(
-        (el): el is HTMLElement =>
-          !!el,
-      );
+      .filter((el): el is HTMLElement => !!el);
   }
 
   function getHostIdentifier(host: HTMLElement): string {
@@ -195,7 +181,7 @@
           error = "false";
           break;
         case FieldsetResetFieldsMsg:
-          onSetValue({ name, value: "" });
+          onSetValue({ name, value: [] });
           break;
         case FormFieldMountMsg:
           onChildCheckboxMount(data as FormFieldMountRelayDetail);
@@ -209,14 +195,11 @@
   }
 
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
-    value =
-      detail.value !== undefined && detail.value !== null
-        ? String(detail.value)
-        : "";
+    value = Array.isArray(detail.value) ? detail.value : [];
     updateChildCheckboxesState();
     _rootEl?.dispatchEvent(
       new CustomEvent("_change", {
-        detail: { name, value, selectedValues: _selectedValues },
+        detail: { name, value },
         bubbles: true,
         composed: true,
       }),
@@ -279,7 +262,7 @@
 
       const isChecked =
         typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
-      let newSelectedValues = [..._selectedValues];
+      let newSelectedValues = [...value];
 
       if (isChecked) {
         if (!newSelectedValues.includes(checkboxName))
@@ -288,12 +271,11 @@
         newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
       }
 
-      value = newSelectedValues.join(",");
-      _selectedValues = newSelectedValues;
+      value = newSelectedValues;
 
       _rootEl?.dispatchEvent(
         new CustomEvent("_change", {
-          detail: { name, value, selectedValues: newSelectedValues },
+          detail: { name, value: newSelectedValues },
           bubbles: true,
           composed: true,
         }),
@@ -317,7 +299,7 @@
     const hosts = getHostCheckboxes();
     hosts.forEach((host) => {
       const name = getHostIdentifier(host);
-      const shouldBeChecked = _selectedValues.includes(name);
+      const shouldBeChecked = value.includes(name);
       host.setAttribute("checked", shouldBeChecked ? "true" : "false");
       if (isDisabled) host.setAttribute("disabled", "true");
       else host.removeAttribute("disabled");
@@ -328,7 +310,7 @@
     const name =
       childName || _childRecords.find((r) => r.el === childEl)?.name || "";
     if (name) {
-      const shouldBeChecked = _selectedValues.includes(name);
+      const shouldBeChecked = value.includes(name);
       relay<FieldsetSetValueRelayDetail>(childEl, FieldsetSetValueMsg, {
         name,
         value: shouldBeChecked ? "checked" : "",
@@ -385,10 +367,7 @@
     </div>
   {/if}
 
-  <div
-    bind:this={_slotEl}
-    class="checkbox-container"
-  >
+  <div bind:this={_slotEl} class="checkbox-container">
     <slot />
   </div>
 </div>

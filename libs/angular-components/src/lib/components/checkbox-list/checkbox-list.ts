@@ -11,17 +11,15 @@ import {
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgIf, NgTemplateOutlet } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
-// no direct child control syncing; wrapper is a thin bridge
 
 @Component({
   standalone: true,
   selector: "goab-checkbox-list",
   template: ` <goa-checkbox-list
     [attr.name]="name"
-    [attr.value]="getValueAsString()"
+    [value]="value"
     [disabled]="disabled"
     [attr.error]="error"
-    [attr.orientation]="orientation"
     [attr.testid]="testId"
     [attr.arialabel]="ariaLabel"
     [attr.description]="getDescriptionAsString()"
@@ -31,12 +29,6 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.mb]="mb"
     [attr.ml]="ml"
     [attr.mr]="mr"
-    [attr.mlchild]="mlChild"
-    [attr.mrchild]="mrChild"
-    [attr.mbchild]="mbChild"
-    [attr.mtchild]="mtChild"
-    [attr.showselectall]="showSelectAll ? 'true' : undefined"
-    [attr.selectalltext]="selectAllText"
     (_change)="_onChange($event)"
   >
     <ng-content />
@@ -56,34 +48,14 @@ import { GoabControlValueAccessor } from "../base.component";
 })
 export class GoabCheckboxList extends GoabControlValueAccessor {
   @Input() name?: string;
-  @Input() orientation: "vertical" | "horizontal" = "vertical";
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<unknown>;
   @Input() maxWidth?: string;
-  @Input() showSelectAll?: boolean;
-  @Input() selectAllText?: string = "Select All";
-  // Child margins applied to slotted checkboxes (if not explicitly set on individual child)
-  @Input() mlChild?: string; // left
-  @Input() mrChild?: string; // right
-  @Input() mtChild?: string; // top
-  @Input() mbChild?: string; // bottom
 
   // Override value to handle string arrays consistently
   @Input() override value?: string[];
 
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
-
-  private getSelectedValuesArray(): string[] {
-    if (Array.isArray(this.value)) {
-      return this.value;
-    }
-    return [];
-  }
-
-  getValueAsString(): string {
-    const selectedValues = this.getSelectedValuesArray();
-    return selectedValues.join(",");
-  }
 
   getDescriptionAsString(): string {
     return typeof this.description === "string" ? this.description : "";
@@ -103,7 +75,7 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
       this.markAsTouched();
 
       // Update the form control with the selected values
-      const selectedValues = detail.selectedValues || [];
+      const selectedValues = detail.value || [];
       this.value = selectedValues;
       this.fcChange?.(selectedValues);
     } catch (error) {
@@ -111,20 +83,10 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
     }
   }
 
-  // Override writeValue to handle array inputs consistently
-  override writeValue(value: string[] | string | null): void {
+  // Simplified writeValue - expects array input directly
+  override writeValue(value: string[] | null): void {
     try {
-      if (Array.isArray(value)) {
-        this.value = value;
-      } else if (typeof value === "string" && value) {
-        // Support legacy string format for backward compatibility
-        this.value = value
-          .split(",")
-          .map((v) => v.trim())
-          .filter(Boolean);
-      } else {
-        this.value = [];
-      }
+      this.value = Array.isArray(value) ? value : [];
     } catch (error) {
       console.error("Error setting checkbox list value:", error);
       this.value = [];
