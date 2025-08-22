@@ -74,17 +74,16 @@
     // Handle error state changes
     const currentError = toBoolean(newError);
     if (currentError !== _prevError) {
-
-        _rootEl?.dispatchEvent(
-          new CustomEvent("error::change", {
-            detail: { isError: currentError },
-            bubbles: true,
-            composed: true,
-          }),
-        );
-        _prevError = currentError;
-        _error = currentError;
-        updateChildCheckboxesError();
+      _rootEl?.dispatchEvent(
+        new CustomEvent("error::change", {
+          detail: { isError: currentError },
+          bubbles: true,
+          composed: true,
+        }),
+      );
+      _prevError = currentError;
+      _error = currentError;
+      updateChildCheckboxesError();
     }
 
     // Sync checkbox values if initialized
@@ -115,21 +114,21 @@
   }
 
   function getCheckboxIdentifier(el: HTMLElement): string {
-      let id = el.getAttribute("name") || (el as any).name || "";
-      if (!id) id = el.getAttribute("value") || (el as any).value || "";
-      if (!id) id = el.getAttribute("text") || (el as any).text || "";
-      return id || "";
+    let id = el.getAttribute("name") || (el as any).name || "";
+    if (!id) id = el.getAttribute("value") || (el as any).value || "";
+    if (!id) id = el.getAttribute("text") || (el as any).text || "";
+    return id || "";
   }
 
   function syncAllCheckboxValues() {
-      // Use child record list (reliable method)
-      if (_childRecords.length > 0) {
-        const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
-        if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
-          _allCheckboxValues = newValues;
-        }
+    // Use child record list (reliable method)
+    if (_childRecords.length > 0) {
+      const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
+      if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
+        _allCheckboxValues = newValues;
       }
-      // No fallback needed - child records are the authoritative source
+    }
+    // No fallback needed - child records are the authoritative source
   }
 
   function addRelayListener() {
@@ -181,11 +180,11 @@
   }
 
   function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
-    const host = (detail.el.getRootNode() as any)?.host as
+    const checkboxElement = (detail.el.getRootNode() as any)?.host as
       | HTMLElement
       | undefined;
-    if (!host) return;
-    const inThisList = host.closest("goa-checkbox-list") === _rootEl;
+    if (!checkboxElement) return;
+    const inThisList = checkboxElement.closest("goa-checkbox-list") === _rootEl;
     if (!inThisList) return;
     const existing = _childRecords.find(
       (r) => r.el === detail.el || r.name === detail.name,
@@ -221,28 +220,28 @@
   }
 
   function handleChildCheckboxChange(detail: any) {
-      const checkboxName = detail.name;
+    const checkboxName = detail.name;
 
-      const isChecked =
-        typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
-      let newSelectedValues = [...value];
+    const isChecked =
+      typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
+    let newSelectedValues = [...value];
 
-      if (isChecked) {
-        if (!newSelectedValues.includes(checkboxName))
-          newSelectedValues.push(checkboxName);
-      } else {
-        newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
-      }
+    if (isChecked) {
+      if (!newSelectedValues.includes(checkboxName))
+        newSelectedValues.push(checkboxName);
+    } else {
+      newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
+    }
 
-      value = newSelectedValues;
+    value = newSelectedValues;
 
-      _rootEl?.dispatchEvent(
-        new CustomEvent("_change", {
-          detail: { name, value: newSelectedValues },
-          bubbles: true,
-          composed: true,
-        }),
-      );
+    _rootEl?.dispatchEvent(
+      new CustomEvent("_change", {
+        detail: { name, value: newSelectedValues },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   function updateChildCheckboxesState() {
