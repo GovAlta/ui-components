@@ -31,8 +31,8 @@ export interface GoabDatePickerProps extends Margins {
   name?: string;
   value?: Date | string | undefined;
   error?: boolean;
-  min?: Date;
-  max?: Date;
+  min?: Date | string;
+  max?: Date | string;
   type?: GoabDatePickerInputType;
   testId?: string;
   /***
@@ -83,19 +83,26 @@ export function GoabDatePicker({
     };
   }, [onChange]);
 
-  const isValidDate = (value: Date | undefined) =>
-    value && value instanceof Date && !isNaN(value.getTime());
+  const formatValue = (value: Date | string | undefined) => {
+    if (!value) return "";
+
+    if (value instanceof Date) {
+      return value.toISOString();
+    }
+
+    return value;
+  };
 
   return (
     <goa-date-picker
       ref={ref}
       name={name}
-      value={isValidDate(value) ? value?.toISOString() : undefined}
+      value={formatValue(value)}
       type={type}
       error={error ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
-      min={isValidDate(min) ? min?.toISOString() : undefined}
-      max={isValidDate(max) ? max?.toISOString() : undefined}
+      min={formatValue(min)}
+      max={formatValue(max)}
       testid={testId}
       mt={mt}
       mr={mr}
