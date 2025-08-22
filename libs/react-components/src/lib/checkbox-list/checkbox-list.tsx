@@ -1,4 +1,8 @@
-import { GoabCheckboxListOnChangeDetail, Margins, Spacing } from "@abgov/ui-components-common";
+import {
+  GoabCheckboxListOnChangeDetail,
+  Margins,
+  Spacing,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 
 declare module "react" {
@@ -13,7 +17,7 @@ declare module "react" {
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
   name: string;
-  value?: string;
+  selectedvalues?: string[];
   disabled?: string;
   error?: string;
   testid?: string;
@@ -49,10 +53,6 @@ export interface GoabCheckboxListProps extends Margins {
   mrChild?: Spacing | null;
   mtChild?: Spacing | null;
   mbChild?: Spacing | null;
-}
-
-function getValueAsString(value?: string[]): string {
-  return value?.join(",") || "";
 }
 
 export function GoabCheckboxList({
@@ -113,7 +113,7 @@ export function GoabCheckboxList({
     <goa-checkbox-list
       ref={el}
       name={name}
-      value={getValueAsString(value)}
+      selectedvalues={value}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
       testid={testId}
