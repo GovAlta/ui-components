@@ -45,7 +45,7 @@
   let _childRecords: ChildRecord[] = [];
   let _allCheckboxValues: string[] = [];
   let _suppressChildChange = false;
-  let _observer: MutationObserver | null = null;
+
   let _isInitialized = false;
 
   function getHostCheckboxes(): HTMLElement[] {
@@ -168,24 +168,6 @@
       addSlotEventListeners();
       sendMountedMessage();
 
-      _observer = new MutationObserver(() => {
-        try {
-          syncAllCheckboxValues();
-          updateChildCheckboxesState();
-        } catch (error) {
-          console.error("Error in mutation observer:", error);
-        }
-      });
-
-      if (_slotEl) {
-        _observer.observe(_slotEl, {
-          childList: true,
-          subtree: true,
-          attributes: true,
-          attributeFilter: ["name", "value"],
-        });
-      }
-
       // Initialize after a tick to ensure DOM is ready
       setTimeout(() => {
         _isInitialized = true;
@@ -195,17 +177,6 @@
     } catch (error) {
       console.error("Error during checkbox list mount:", error);
     }
-
-    return () => {
-      try {
-        if (_observer) {
-          _observer.disconnect();
-          _observer = null;
-        }
-      } catch (error) {
-        console.error("Error during checkbox list cleanup:", error);
-      }
-    };
   });
 
   function addRelayListener() {
