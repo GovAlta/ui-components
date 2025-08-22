@@ -50,20 +50,19 @@
   $: updateState(value, error);
 
   onMount(() => {
-    try {
-      addRelayListener();
-      addSlotEventListeners();
-      sendMountedMessage();
+    addRelayListener();
+    addSlotEventListeners();
+    sendMountedMessage();
 
-      // Initialize after a tick to ensure DOM is ready
-      setTimeout(() => {
-        _isInitialized = true;
+    // Initialize after a tick to ensure DOM is ready
+    setTimeout(() => {
+      _isInitialized = true;
+      // Only sync if we actually have child records, otherwise wait for them to mount
+      if (_childRecords.length > 0) {
         syncAllCheckboxValues();
-        updateChildCheckboxesState();
-      }, 0);
-    } catch (error) {
-      console.error("Error during checkbox list mount:", error);
-    }
+      }
+      updateChildCheckboxesState();
+    }, 0);
   });
 
   function updateState(newValue: string[], newError: string) {
@@ -75,7 +74,7 @@
     // Handle error state changes
     const currentError = toBoolean(newError);
     if (currentError !== _prevError) {
-      try {
+
         _rootEl?.dispatchEvent(
           new CustomEvent("error::change", {
             detail: { isError: currentError },
@@ -86,9 +85,6 @@
         _prevError = currentError;
         _error = currentError;
         updateChildCheckboxesError();
-      } catch (error) {
-        console.error("Error dispatching error change:", error);
-      }
     }
 
     // Sync checkbox values if initialized
@@ -101,7 +97,7 @@
     }
   }
 
-  function getHostCheckboxes(): HTMLElement[] {
+  function getSlottedCheckboxes(): HTMLElement[] {
     if (!_slotEl) return [];
     const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
     const assigned = (slotEl?.assignedElements() || []) as Element[];
@@ -118,54 +114,22 @@
       .filter((el): el is HTMLElement => !!el);
   }
 
-  function getHostIdentifier(host: HTMLElement): string {
-    try {
-      let id = host.getAttribute("name") || (host as any).name || "";
-      if (!id) id = host.getAttribute("value") || (host as any).value || "";
-      if (!id) id = host.getAttribute("text") || (host as any).text || "";
+  function getCheckboxIdentifier(el: HTMLElement): string {
+      let id = el.getAttribute("name") || (el as any).name || "";
+      if (!id) id = el.getAttribute("value") || (el as any).value || "";
+      if (!id) id = el.getAttribute("text") || (el as any).text || "";
       return id || "";
-    } catch (error) {
-      console.error("Error getting host identifier:", error);
-      return "";
-    }
   }
 
   function syncAllCheckboxValues() {
-    try {
-      // Use child record list if populated (more reliable)
+      // Use child record list (reliable method)
       if (_childRecords.length > 0) {
         const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
         if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
           _allCheckboxValues = newValues;
         }
-        return;
       }
-
-      // Fallback to DOM scanning
-      const hosts = getHostCheckboxes();
-      let identifiers = hosts.map((h) => getHostIdentifier(h)).filter(Boolean);
-
-      if (!identifiers.length) {
-        identifiers = hosts
-          .map((h) => {
-            try {
-              return h.getAttribute("value") || (h as any).value || "";
-            } catch {
-              return "";
-            }
-          })
-          .filter(Boolean);
-      }
-
-      if (identifiers.length) {
-        const newValues = Array.from(new Set(identifiers));
-        if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
-          _allCheckboxValues = newValues;
-        }
-      }
-    } catch (error) {
-      console.error("Error syncing checkbox values:", error);
-    }
+      // No fallback needed - child records are the authoritative source
   }
 
   function addRelayListener() {
@@ -257,7 +221,6 @@
   }
 
   function handleChildCheckboxChange(detail: any) {
-    try {
       const checkboxName = detail.name;
 
       const isChecked =
@@ -280,9 +243,6 @@
           composed: true,
         }),
       );
-    } catch (error) {
-      console.error("Error handling child checkbox change:", error);
-    }
   }
 
   function updateChildCheckboxesState() {
@@ -296,13 +256,13 @@
   }
 
   function updateHostCheckboxesState() {
-    const hosts = getHostCheckboxes();
-    hosts.forEach((host) => {
-      const name = getHostIdentifier(host);
+    const checkboxElements = getSlottedCheckboxes();
+    checkboxElements.forEach((element) => {
+      const name = getCheckboxIdentifier(element);
       const shouldBeChecked = value.includes(name);
-      host.setAttribute("checked", shouldBeChecked ? "true" : "false");
-      if (isDisabled) host.setAttribute("disabled", "true");
-      else host.removeAttribute("disabled");
+      element.setAttribute("checked", shouldBeChecked ? "true" : "false");
+      if (isDisabled) element.setAttribute("disabled", "true");
+      else element.removeAttribute("disabled");
     });
   }
 
@@ -316,12 +276,12 @@
         value: shouldBeChecked ? "checked" : "",
       });
     }
-    const host = (childEl.getRootNode() as any)?.host as
+    const containerElement = (childEl.getRootNode() as any)?.host as
       | HTMLElement
       | undefined;
-    if (host) {
-      if (isDisabled) host.setAttribute("disabled", "true");
-      else host.removeAttribute("disabled");
+    if (containerElement) {
+      if (isDisabled) containerElement.setAttribute("disabled", "true");
+      else containerElement.removeAttribute("disabled");
     }
   }
 
