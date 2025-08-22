@@ -20,27 +20,27 @@
   export let name: string;
 
   // Optional values
+  export let value: string = ""; // comma-separated values
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
+  export let orientation: string = "vertical"; // "vertical" | "horizontal"
   export let maxwidth: string = "none";
-  // New lowercase attributes (preferred)
-  export let showselectall: string | undefined = undefined;
-  export let selectalltext: string | undefined = undefined;
-  // New selection prop (preferred) - accepts stringified JSON array or array via property
-  export let selectedvalues: string | string[] | undefined = undefined;
-
-  // export let showSelectAll: string | undefined = undefined;
-  // export let selectAllText: string | undefined = undefined;
-  // export let selectedValues: string[] | undefined = undefined;
+  export let showSelectAll: string = "false";
+  export let selectAllText: string = "Select All";
 
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
+  // child checkbox margin overrides (applied programmatically to slotted child checkboxes when present)
+  export let mlchild: Spacing = null;
+  export let mrchild: Spacing = null;
+  export let mtchild: Spacing = null;
+  export let mbchild: Spacing = null;
 
   // Private state
   let _rootEl: HTMLElement;
@@ -58,12 +58,70 @@
   let _observer: MutationObserver | null = null;
   let _isInitialized = false;
 
+  function getHostCheckboxes(): HTMLElement[] {
+    if (!_slotEl) return [];
+    const slotEl = _slotEl.querySelector("slot") as HTMLSlotElement | null;
+    const assigned = (slotEl?.assignedElements() || []) as Element[];
+    return assigned
+      .map((el) => {
+        if (
+          el instanceof HTMLElement &&
+          el.tagName.toLowerCase() === "goa-checkbox"
+        ) {
+          return el as HTMLElement;
+        }
+        return el.querySelector("goa-checkbox") as HTMLElement | null;
+      })
+      .filter(
+        (el): el is HTMLElement =>
+          !!el && (!_selectAllEl || el !== _selectAllEl),
+      );
+  }
+
+  function getHostIdentifier(host: HTMLElement): string {
+    try {
+      let id = host.getAttribute("name") || (host as any).name || "";
+      if (!id) id = host.getAttribute("value") || (host as any).value || "";
+      if (!id) id = host.getAttribute("text") || (host as any).text || "";
+      return id || "";
+    } catch (error) {
+      console.error("Error getting host identifier:", error);
+      return "";
+    }
+  }
+
   function syncAllCheckboxValues() {
     try {
-      // Only use child record list - no DOM scanning fallback
-      const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
-      if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
-        _allCheckboxValues = newValues;
+      // Use child record list if populated (more reliable)
+      if (_childRecords.length > 0) {
+        const newValues = Array.from(new Set(_childRecords.map((r) => r.name)));
+        if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
+          _allCheckboxValues = newValues;
+        }
+        return;
+      }
+
+      // Fallback to DOM scanning
+      const hosts = getHostCheckboxes();
+      let identifiers = hosts.map((h) => getHostIdentifier(h)).filter(Boolean);
+
+      if (!identifiers.length) {
+        identifiers = hosts
+          .map((h) => {
+            try {
+              return h.getAttribute("value") || (h as any).value || "";
+            } catch {
+              return "";
+            }
+          })
+          .filter(Boolean);
+      }
+
+      if (identifiers.length) {
+        const newValues = Array.from(new Set(identifiers));
+        if (JSON.stringify(_allCheckboxValues) !== JSON.stringify(newValues)) {
+          _allCheckboxValues = newValues;
+        }
       }
     } catch (error) {
       console.error("Error syncing checkbox values:", error);
@@ -72,10 +130,7 @@
 
   // Reactive bindings
   $: isDisabled = toBoolean(disabled);
-  // Canonicalized props: prefer lowercase attributes, fallback to deprecated ones, then defaults
-  $: _showSelectAll = showselectall ?? "false";
-  $: _selectAllText = selectalltext ?? "Select All";
-  $: showSelectAllCheckbox = toBoolean(_showSelectAll);
+  $: showSelectAllCheckbox = toBoolean(showSelectAll);
   $: {
     _error = toBoolean(error);
     if (_error !== _prevError) {
@@ -94,46 +149,24 @@
       }
     }
   }
-
-  // When the disabled state changes on the list, sync it to all child checkboxes
-  $: if (_isInitialized && (isDisabled || !isDisabled)) {
-    // reference isDisabled in the condition to make this block reactive on its changes
-    updateChildCheckboxesState();
+  $: isHorizontal = orientation === "horizontal";
+  // Apply child margins via setting margin attributes on each child checkbox (works with slotted Angular wrappers)
+  $: if ((mlchild || mrchild || mtchild || mbchild) && !isHorizontal) {
+    applyChildMargins();
   }
-
-  // Helper to coerce incoming selection to an array
-  function coerceSelectedValues(input: unknown): string[] {
-    try {
-      if (Array.isArray(input))
-        return input.filter((v) => typeof v === "string") as string[];
-      if (typeof input === "string") {
-        const s = input.trim();
-        if (!s) return [];
-        // Expect JSON array string; ignore legacy comma-separated strings
-        try {
-          const parsed = JSON.parse(s);
-          return Array.isArray(parsed)
-            ? (parsed as string[]).filter((v) => typeof v === "string")
-            : [];
-        } catch (_) {
-          return [];
-        }
-      }
-    } catch (error) {
-      console.error("Error coercing selected values:", error);
-    }
-    return [];
-  }
-
   // Consolidated reactive block: parse selected values and compute aggregate selection state
   $: {
     let parseError = false;
     try {
-      const source = selectedvalues;
-      _selectedValues = coerceSelectedValues(source);
+      _selectedValues = value
+        ? value
+            .split(",")
+            .map((v) => v.trim())
+            .filter(Boolean)
+        : [];
     } catch (error) {
       parseError = true;
-      console.error("Error parsing initial selected values:", error);
+      console.error("Error parsing selected values:", error);
       _selectedValues = [];
     }
 
@@ -167,9 +200,6 @@
   }
 
   onMount(() => {
-    console.log('>>> disbaled', disabled);
-    console.log('>>> showselectall', showselectall);
-    
     try {
       addRelayListener();
       addSlotEventListeners();
@@ -242,14 +272,14 @@
   }
 
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
-    // Accept array (preferred) or stringified JSON array; ignore legacy comma-separated strings
-    _selectedValues = coerceSelectedValues(
-      detail.value as unknown as string[] | string,
-    );
+    value =
+      detail.value !== undefined && detail.value !== null
+        ? String(detail.value)
+        : "";
     updateChildCheckboxesState();
     _rootEl?.dispatchEvent(
       new CustomEvent("_change", {
-        detail: { name, selectedValues: _selectedValues },
+        detail: { name, value, selectedValues: _selectedValues },
         bubbles: true,
         composed: true,
       }),
@@ -285,29 +315,33 @@
   }
 
   function addSlotEventListeners() {
-    if (!_slotEl) {
-      console.warn("no slot found");
-      return;
+    if (!_slotEl) return;
+    try {
+      _slotEl.addEventListener("_change", (e: Event) => {
+        try {
+          const customEvent = e as CustomEvent;
+          const detail = customEvent.detail;
+          e.stopPropagation();
+
+          // Skip select all checkbox events
+          if (_selectAllEl) {
+            const path = (customEvent as any).composedPath?.() || [];
+            if (path.includes(_selectAllEl)) return;
+            if (detail?.name === _selectAllEl.getAttribute("name")) return;
+          }
+
+          if (_suppressChildChange) return;
+
+          if (detail && detail.value !== undefined) {
+            handleChildCheckboxChange(detail);
+          }
+        } catch (error) {
+          console.error("Error handling child checkbox change:", error);
+        }
+      });
+    } catch (error) {
+      console.error("Error adding slot event listeners:", error);
     }
-
-    _slotEl.addEventListener("_change", (e: Event) => {
-      const customEvent = e as CustomEvent;
-      const detail = customEvent.detail;
-      e.stopPropagation();
-
-      if (_suppressChildChange) return;
-
-      // Skip select all checkbox events
-      if (_selectAllEl) {
-        const path = (customEvent as any).composedPath?.() || [];
-        if (path.includes(_selectAllEl)) return;
-        if (detail?.name === _selectAllEl.getAttribute("name")) return;
-      }
-
-      if (detail && detail.value !== undefined) {
-        handleChildCheckboxChange(detail);
-      }
-    });
   }
 
   function handleChildCheckboxChange(detail: any) {
@@ -316,8 +350,8 @@
       if (_selectAllEl && checkboxName === _selectAllEl.getAttribute("name"))
         return;
 
-      //const isChecked = typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
-      const isChecked = detail.checked;
+      const isChecked =
+        typeof detail.checked === "boolean" ? detail.checked : !!detail.value;
       let newSelectedValues = [..._selectedValues];
 
       if (isChecked) {
@@ -327,11 +361,12 @@
         newSelectedValues = newSelectedValues.filter((v) => v !== checkboxName);
       }
 
+      value = newSelectedValues.join(",");
       _selectedValues = newSelectedValues;
 
       _rootEl?.dispatchEvent(
         new CustomEvent("_change", {
-          detail: { name, selectedValues: newSelectedValues },
+          detail: { name, value, selectedValues: newSelectedValues },
           bubbles: true,
           composed: true,
         }),
@@ -343,11 +378,23 @@
 
   function updateChildCheckboxesState() {
     _suppressChildChange = true;
-    // Only update child records - no host checkbox scanning
-    for (const rec of _childRecords) {
-      updateChildCheckboxState(rec.el, rec.name);
+    if (_childRecords.length > 0) {
+      for (const rec of _childRecords)
+        updateChildCheckboxState(rec.el, rec.name);
     }
+    updateHostCheckboxesState();
     _suppressChildChange = false;
+  }
+
+  function updateHostCheckboxesState() {
+    const hosts = getHostCheckboxes();
+    hosts.forEach((host) => {
+      const name = getHostIdentifier(host);
+      const shouldBeChecked = _selectedValues.includes(name);
+      host.setAttribute("checked", shouldBeChecked ? "true" : "false");
+      if (isDisabled) host.setAttribute("disabled", "true");
+      else host.removeAttribute("disabled");
+    });
   }
 
   function updateChildCheckboxState(childEl: HTMLElement, childName?: string) {
@@ -376,15 +423,47 @@
     }
   }
 
+  function applyChildMargins() {
+    try {
+      const hosts = getHostCheckboxes();
+      hosts.forEach((host) => {
+        if (_selectAllEl && host === _selectAllEl) return; // skip select-all
+        if (mlchild && !host.hasAttribute("ml"))
+          host.setAttribute("ml", mlchild as string);
+        if (mrchild && !host.hasAttribute("mr"))
+          host.setAttribute("mr", mrchild as string);
+        if (mtchild && !host.hasAttribute("mt"))
+          host.setAttribute("mt", mtchild as string);
+        if (mbchild && !host.hasAttribute("mb"))
+          host.setAttribute("mb", mbchild as string);
+      });
+    } catch (error) {
+      console.error("Error applying child margins:", error);
+    }
+  }
+
   function handleSelectAllChange(e: CustomEvent) {
     const isChecked = e.detail.checked;
     syncAllCheckboxValues();
-    // Removed DOM scanning fallback - relies purely on child records
+    if (_allCheckboxValues.length === 0 && _slotEl) {
+      const direct = Array.from(
+        _slotEl.querySelectorAll("goa-checkbox[name], goa-checkbox[value]"),
+      ) as HTMLElement[];
+      const alt = Array.from(
+        new Set(
+          direct
+            .map((h) => h.getAttribute("name") || h.getAttribute("value") || "")
+            .filter(Boolean),
+        ),
+      );
+      if (alt.length) _allCheckboxValues = alt;
+    }
     _selectedValues = isChecked ? [..._allCheckboxValues] : [];
+    value = _selectedValues.join(",");
     updateChildCheckboxesState();
     _rootEl?.dispatchEvent(
       new CustomEvent("_change", {
-        detail: { name, selectedValues: _selectedValues },
+        detail: { name, value, selectedValues: _selectedValues },
         bubbles: true,
         composed: true,
       }),
@@ -405,6 +484,7 @@
 <div
   bind:this={_rootEl}
   class="root"
+  class:horizontal={isHorizontal}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
     max-width: ${maxwidth};
@@ -426,12 +506,15 @@
     </div>
   {/if}
 
-  <div bind:this={_slotEl} class="checkbox-container">
+  <div
+    bind:this={_slotEl}
+    class={`checkbox-container ${isHorizontal ? "horizontal" : ""}`.trim()}
+  >
     {#if showSelectAllCheckbox}
       <goa-checkbox
         bind:this={_selectAllEl}
         name={`${name}_select_all`}
-        text={_selectAllText}
+        text={selectAllText}
         checked={_allSelected ? "true" : "false"}
         indeterminate={_someSelected ? "true" : "false"}
         on:_change={handleSelectAllChange}
@@ -464,5 +547,33 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+  }
+
+  .checkbox-container.horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--goa-space-m);
+  }
+
+  /* Ensure child checkboxes have proper spacing in vertical layout */
+  /* .checkbox-container:not(.horizontal) :global(goa-checkbox:not(:last-child)) {
+    margin-bottom: var(--goa-space-xs);
+  } */
+
+  /* Remove bottom margin from last checkbox in horizontal layout */
+  .checkbox-container.horizontal :global(goa-checkbox) {
+    margin-bottom: 0;
+  }
+
+  /* Responsive behavior for horizontal layout */
+  @media (max-width: 768px) {
+    .checkbox-container.horizontal {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .checkbox-container.horizontal :global(goa-checkbox:not(:last-child)) {
+      margin-bottom: var(--goa-space-xs);
+    }
   }
 </style>
