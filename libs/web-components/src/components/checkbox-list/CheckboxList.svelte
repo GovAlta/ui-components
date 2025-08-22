@@ -26,7 +26,6 @@
   export let testid: string = "";
   export let arialabel: string = "";
   export let description: string = "";
-
   export let maxwidth: string = "none";
 
   // margin
@@ -45,8 +44,73 @@
   let _childRecords: ChildRecord[] = [];
   let _allCheckboxValues: string[] = [];
   let _suppressChildChange = false;
-
   let _isInitialized = false;
+
+  // Reactive bindings
+  $: isDisabled = toBoolean(disabled);
+  $: updateState(value, error);
+
+  onMount(() => {
+    try {
+      addRelayListener();
+      addSlotEventListeners();
+      sendMountedMessage();
+
+      // Initialize after a tick to ensure DOM is ready
+      setTimeout(() => {
+        _isInitialized = true;
+        syncAllCheckboxValues();
+        updateChildCheckboxesState();
+      }, 0);
+    } catch (error) {
+      console.error("Error during checkbox list mount:", error);
+    }
+  });
+
+  function updateState(newValue: string, newError: string) {
+    // Parse selected values
+    let parseError = false;
+    try {
+      _selectedValues = newValue
+        ? newValue
+            .split(",")
+            .map((v) => v.trim())
+            .filter(Boolean)
+        : [];
+    } catch (error) {
+      parseError = true;
+      console.error("Error parsing selected values:", error);
+      _selectedValues = [];
+    }
+
+    // Handle error state changes
+    const currentError = toBoolean(newError);
+    if (currentError !== _prevError) {
+      try {
+        _rootEl?.dispatchEvent(
+          new CustomEvent("error::change", {
+            detail: { isError: currentError },
+            bubbles: true,
+            composed: true,
+          }),
+        );
+        _prevError = currentError;
+        _error = currentError;
+        updateChildCheckboxesError();
+      } catch (error) {
+        console.error("Error dispatching error change:", error);
+      }
+    }
+
+    // Sync checkbox values if initialized
+    if (_isInitialized) {
+      try {
+        syncAllCheckboxValues();
+      } catch (error) {
+        if (!parseError) console.error("Error syncing checkbox values:", error);
+      }
+    }
+  }
 
   function getHostCheckboxes(): HTMLElement[] {
     if (!_slotEl) return [];
@@ -62,7 +126,10 @@
         }
         return el.querySelector("goa-checkbox") as HTMLElement | null;
       })
-      .filter((el): el is HTMLElement => !!el);
+      .filter(
+        (el): el is HTMLElement =>
+          !!el,
+      );
   }
 
   function getHostIdentifier(host: HTMLElement): string {
@@ -114,70 +181,6 @@
       console.error("Error syncing checkbox values:", error);
     }
   }
-
-  // Reactive bindings
-  $: isDisabled = toBoolean(disabled);
-  $: {
-    _error = toBoolean(error);
-    if (_error !== _prevError) {
-      try {
-        _rootEl?.dispatchEvent(
-          new CustomEvent("error::change", {
-            detail: { isError: _error },
-            bubbles: true,
-            composed: true,
-          }),
-        );
-        _prevError = _error;
-        updateChildCheckboxesError();
-      } catch (error) {
-        console.error("Error dispatching error change:", error);
-      }
-    }
-  }
-
-  // Consolidated reactive block: parse selected values and compute aggregate selection state
-  $: {
-    let parseError = false;
-    try {
-      _selectedValues = value
-        ? value
-            .split(",")
-            .map((v) => v.trim())
-            .filter(Boolean)
-        : [];
-    } catch (error) {
-      parseError = true;
-      console.error("Error parsing selected values:", error);
-      _selectedValues = [];
-    }
-
-    if (_isInitialized) {
-      // Keep checkbox value inventory current before computing aggregate state
-      try {
-        syncAllCheckboxValues();
-      } catch (error) {
-        if (!parseError) console.error("Error syncing checkbox values:", error);
-      }
-    }
-  }
-
-  onMount(() => {
-    try {
-      addRelayListener();
-      addSlotEventListeners();
-      sendMountedMessage();
-
-      // Initialize after a tick to ensure DOM is ready
-      setTimeout(() => {
-        _isInitialized = true;
-        syncAllCheckboxValues();
-        updateChildCheckboxesState();
-      }, 0);
-    } catch (error) {
-      console.error("Error during checkbox list mount:", error);
-    }
-  });
 
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
@@ -382,7 +385,10 @@
     </div>
   {/if}
 
-  <div bind:this={_slotEl} class="checkbox-container">
+  <div
+    bind:this={_slotEl}
+    class="checkbox-container"
+  >
     <slot />
   </div>
 </div>
