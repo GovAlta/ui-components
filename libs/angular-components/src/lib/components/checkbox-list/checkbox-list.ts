@@ -18,8 +18,7 @@ import { GoabControlValueAccessor } from "../base.component";
   selector: "goab-checkbox-list",
   template: ` <goa-checkbox-list
     [attr.name]="name"
-    [attr.value]="getValueAsString()"
-    [disabled]="disabled"
+  [disabled]="disabled"
     [attr.error]="error"
     [attr.orientation]="orientation"
     [attr.testid]="testId"
@@ -37,6 +36,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.mtchild]="mtChild"
     [attr.showselectall]="showSelectAll ? 'true' : undefined"
     [attr.selectalltext]="selectAllText"
+    [selectedvalues]="value"
     (_change)="_onChange($event)"
   >
     <ng-content />
@@ -74,15 +74,8 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
 
   private getSelectedValuesArray(): string[] {
-    if (Array.isArray(this.value)) {
-      return this.value;
-    }
+    if (Array.isArray(this.value)) return this.value;
     return [];
-  }
-
-  getValueAsString(): string {
-    const selectedValues = this.getSelectedValuesArray();
-    return selectedValues.join(",");
   }
 
   getDescriptionAsString(): string {
@@ -114,17 +107,9 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
   // Override writeValue to handle array inputs consistently
   override writeValue(value: string[] | string | null): void {
     try {
-      if (Array.isArray(value)) {
-        this.value = value;
-      } else if (typeof value === "string" && value) {
-        // Support legacy string format for backward compatibility
-        this.value = value
-          .split(",")
-          .map((v) => v.trim())
-          .filter(Boolean);
-      } else {
-        this.value = [];
-      }
+      if (Array.isArray(value)) this.value = value;
+      else if (typeof value === "string" && value) this.value = [];
+      else this.value = [];
     } catch (error) {
       console.error("Error setting checkbox list value:", error);
       this.value = [];
