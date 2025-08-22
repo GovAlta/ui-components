@@ -17,21 +17,13 @@ declare module "react" {
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
   name: string;
-  selectedvalues?: string[];
+  value?: string[];
   disabled?: string;
   error?: string;
   testid?: string;
   arialabel?: string;
   description?: string;
-  orientation?: "vertical" | "horizontal";
   maxwidth?: string;
-  showselectall?: string;
-  selectalltext?: string;
-  // child margins (applied to child checkboxes if they don't already declare that side)
-  mlchild?: Spacing | string | null;
-  mrchild?: Spacing | string | null;
-  mtchild?: Spacing | string | null;
-  mbchild?: Spacing | string | null;
 }
 
 export interface GoabCheckboxListProps extends Margins {
@@ -42,17 +34,9 @@ export interface GoabCheckboxListProps extends Margins {
   testId?: string;
   ariaLabel?: string;
   description?: string | React.ReactNode;
-  orientation?: "vertical" | "horizontal";
   maxWidth?: string;
-  showSelectAll?: boolean;
-  selectAllText?: string;
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
-  // child margins
-  mlChild?: Spacing | null;
-  mrChild?: Spacing | null;
-  mtChild?: Spacing | null;
-  mbChild?: Spacing | null;
 }
 
 export function GoabCheckboxList({
@@ -63,21 +47,13 @@ export function GoabCheckboxList({
   testId,
   ariaLabel,
   description,
-  orientation = "vertical",
   maxWidth,
-  showSelectAll,
-  selectAllText = "Select All",
   children,
   onChange,
   mt,
   mr,
   mb,
   ml,
-  // child margins
-  mlChild,
-  mrChild,
-  mtChild,
-  mbChild,
 }: GoabCheckboxListProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
@@ -113,24 +89,17 @@ export function GoabCheckboxList({
     <goa-checkbox-list
       ref={el}
       name={name}
-      selectedvalues={value}
+      value={value}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
       testid={testId}
       arialabel={ariaLabel}
       description={typeof description === "string" ? description : undefined}
-      orientation={orientation}
       maxwidth={maxWidth}
-      showselectall={showSelectAll ? "true" : undefined}
-      selectalltext={selectAllText}
       mt={mt}
       mr={mr}
       mb={mb}
       ml={ml}
-      mlchild={mlChild as string | undefined}
-      mrchild={mrChild as string | undefined}
-      mtchild={mtChild as string | undefined}
-      mbchild={mbChild as string | undefined}
     >
       {children}
       {typeof description !== "string" && description && (
