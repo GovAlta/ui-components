@@ -32,11 +32,9 @@
   // New selection prop (preferred) - accepts stringified JSON array or array via property
   export let selectedvalues: string | string[] | undefined = undefined;
 
-  // Deprecated camelCase attributes (kept for backward compatibility)
-  export let showSelectAll: string | undefined = undefined;
-  export let selectAllText: string | undefined = undefined;
-  // Deprecated selection camelCase prop (property only)
-  export let selectedValues: string[] | undefined = undefined;
+  // export let showSelectAll: string | undefined = undefined;
+  // export let selectAllText: string | undefined = undefined;
+  // export let selectedValues: string[] | undefined = undefined;
 
   // margin
   export let mt: Spacing = null;
@@ -75,8 +73,8 @@
   // Reactive bindings
   $: isDisabled = toBoolean(disabled);
   // Canonicalized props: prefer lowercase attributes, fallback to deprecated ones, then defaults
-  $: _showSelectAll = showselectall ?? showSelectAll ?? "false";
-  $: _selectAllText = selectalltext ?? selectAllText ?? "Select All";
+  $: _showSelectAll = showselectall ?? "false";
+  $: _selectAllText = selectalltext ?? "Select All";
   $: showSelectAllCheckbox = toBoolean(_showSelectAll);
   $: {
     _error = toBoolean(error);
@@ -131,7 +129,7 @@
   $: {
     let parseError = false;
     try {
-      const source = selectedvalues ?? selectedValues;
+      const source = selectedvalues;
       _selectedValues = coerceSelectedValues(source);
     } catch (error) {
       parseError = true;
@@ -169,6 +167,9 @@
   }
 
   onMount(() => {
+    console.log('>>> disbaled', disabled);
+    console.log('>>> showselectall', showselectall);
+    
     try {
       addRelayListener();
       addSlotEventListeners();

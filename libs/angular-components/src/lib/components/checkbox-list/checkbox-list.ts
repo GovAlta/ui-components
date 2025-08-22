@@ -18,7 +18,7 @@ import { GoabControlValueAccessor } from "../base.component";
   selector: "goab-checkbox-list",
   template: ` <goa-checkbox-list
     [attr.name]="name"
-  [disabled]="disabled"
+    [disabled]="disabled"
     [attr.error]="error"
     [attr.orientation]="orientation"
     [attr.testid]="testId"
