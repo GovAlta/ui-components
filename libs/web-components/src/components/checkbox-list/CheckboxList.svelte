@@ -1,6 +1,16 @@
 <svelte:options customElement="goa-checkbox-list" />
 
 <script lang="ts">
+  /**
+   * - Manages a selected values array and synchronizes state down to child checkboxes.
+   * - Relays form-related events (mount, set value, set/reset error, reset fields) to and from children.
+   *
+   * Approach
+   * - Children register themselves via a FormFieldMount event; we track them in _childRecords.
+   * - All value and error changes flow through a small relay bus (receive/relay helpers).
+   * - Suppress feedback loops using _suppressChildChange while pushing state to children.
+   * - Support both slotted goa-checkbox elements and direct child component instances.
+   */
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
@@ -16,11 +26,9 @@
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
-  // Required
   export let name: string;
 
-  // Optional values
-  export let value: string[] = []; // selected checkbox names
+  export let value: string[] = [];
   export let disabled: string = "false";
   export let error: string = "false";
   export let testid: string = "";
@@ -28,13 +36,12 @@
   export let description: string = "";
   export let maxwidth: string = "none";
 
-  // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
 
-  // margin left for child checkboxes
+  // Optional left margin to apply to each child checkbox
   export let childml: Spacing = null;
 
   // Private state
@@ -45,6 +52,7 @@
   type ChildRecord = { el: HTMLElement; name: string };
   let _childRecords: ChildRecord[] = [];
   let _allCheckboxValues: string[] = [];
+  // Guard to prevent child change events from bouncing back while parent is pushing state.
   let _suppressChildChange = false;
   let _isInitialized = false;
 
@@ -68,6 +76,11 @@
     }, 0);
   });
 
+  /**
+   * Synchronize component when external props change.
+   * - Emits error change events and propagates to children
+   * - Syncs checkbox values after initialization
+   */
   function updateState(newValue: string[], newError: string) {
     // Ensure value is always an array
     if (!Array.isArray(newValue)) {
@@ -116,6 +129,10 @@
       .filter((el): el is HTMLElement => !!el);
   }
 
+  /**
+   * Determines a child's identifier by trying expected attributes.
+   * Priority: name -> value -> text
+   */
   function getCheckboxIdentifier(el: HTMLElement): string {
     let id = el.getAttribute("name") || (el as any).name || "";
     if (!id) id = el.getAttribute("value") || (el as any).value || "";
@@ -134,6 +151,10 @@
     // No fallback needed - child records are the authoritative source
   }
 
+  /**
+   * Listen for relay-bus actions and route to handlers.
+   * This wires the component into the fieldset/form
+   */
   function addRelayListener() {
     receive(_rootEl, (action, data) => {
       switch (action) {
@@ -160,6 +181,10 @@
     error = detail.error ? "true" : "false";
   }
 
+  /**
+   * Handle an external request to set this list's value.
+   * Pushes state to children and emits a local _change for upstream listeners.
+   */
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     value = Array.isArray(detail.value) ? detail.value : [];
     updateChildCheckboxesState();
@@ -182,16 +207,25 @@
     );
   }
 
+  /**
+   * Register a newly mounted child checkbox that belongs to this list.
+   * Also synchronizes its state and applies child-level styles.
+   */
   function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
     const checkboxElement = (detail.el.getRootNode() as any)?.host as
       | HTMLElement
       | undefined;
+
     if (!checkboxElement) return;
+
     const inThisList = checkboxElement.closest("goa-checkbox-list") === _rootEl;
+
     if (!inThisList) return;
+
     const existing = _childRecords.find(
       (r) => r.el === detail.el || r.name === detail.name,
     );
+
     if (!existing) {
       _childRecords = [..._childRecords, { el: detail.el, name: detail.name }];
       syncAllCheckboxValues();
@@ -215,29 +249,27 @@
     }
   }
 
+  /**
+   * Listen for _change events from slotted children and update the selected values array.
+   * Stops propagation to keep changes local and relays a consolidated _change from the group.
+   */
   function addSlotEventListeners() {
     if (!_slotEl) return;
-    try {
-      _slotEl.addEventListener("_change", (e: Event) => {
-        try {
-          const customEvent = e as CustomEvent;
-          const detail = customEvent.detail;
-          e.stopPropagation();
 
-          if (_suppressChildChange) return;
+    _slotEl.addEventListener("_change", (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const detail = customEvent.detail;
+      e.stopPropagation();
 
-          if (detail && detail.value !== undefined) {
-            handleChildCheckboxChange(detail);
-          }
-        } catch (error) {
-          console.error("Error handling child checkbox change:", error);
-        }
-      });
-    } catch (error) {
-      console.error("Error adding slot event listeners:", error);
-    }
+      if (_suppressChildChange) return;
+
+      if (detail && detail.value !== undefined) {
+        handleChildCheckboxChange(detail);
+      }
+    });
   }
 
+  // Update the selected values array when an individual child changes.
   function handleChildCheckboxChange(detail: any) {
     const checkboxName = detail.name;
 
@@ -263,6 +295,10 @@
     );
   }
 
+  /**
+   * Push the current selected values and disabled state to all known children.
+   * Uses a suppression flag to avoid feedback loops while syncing.
+   */
   function updateChildCheckboxesState() {
     _suppressChildChange = true;
     if (_childRecords.length > 0) {
@@ -273,6 +309,10 @@
     _suppressChildChange = false;
   }
 
+  /**
+   * As a fallback, also sync any direct slotted checkbox we can access.
+   * This handles cases where children are plain elements rather than relayed components.
+   */
   function updateSlottedCheckboxesState() {
     const checkboxElements = getSlottedCheckboxes();
     checkboxElements.forEach((element) => {
@@ -286,9 +326,11 @@
     });
   }
 
+  /** Sync a single child checkbox with the parent state and disabled flag. */
   function updateChildCheckboxState(childEl: HTMLElement, childName?: string) {
     const name =
       childName || _childRecords.find((r) => r.el === childEl)?.name || "";
+
     if (name) {
       const shouldBeChecked = value.includes(name);
       relay<FieldsetSetValueRelayDetail>(childEl, FieldsetSetValueMsg, {
@@ -296,24 +338,34 @@
         value: shouldBeChecked ? "checked" : "",
       });
     }
+
     const containerElement = (childEl.getRootNode() as any)?.host as
       | HTMLElement
       | undefined;
+
     if (containerElement) {
-      if (isDisabled) containerElement.setAttribute("disabled", "true");
-      else containerElement.removeAttribute("disabled");
+      if (isDisabled) {
+        containerElement.setAttribute("disabled", "true");
+      } else {
+        containerElement.removeAttribute("disabled");
+      }
       // Apply childml margin to the container element
       applyChildMargin(containerElement);
     }
   }
 
+  /** Propagate error state to all children via the relay bus. */
   function updateChildCheckboxesError() {
     for (const rec of _childRecords) {
-      if (_error) relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
-      else relay(rec.el, FieldsetResetErrorsMsg);
+      if (_error) {
+        relay(rec.el, FieldsetSetErrorMsg, { error: "true" });
+      } else {
+        relay(rec.el, FieldsetResetErrorsMsg);
+      }
     }
   }
 
+  // Announce help text for screen readers when the group receives focus.
   function onFocus() {
     _rootEl?.dispatchEvent(
       new CustomEvent("help-text::announce", {
