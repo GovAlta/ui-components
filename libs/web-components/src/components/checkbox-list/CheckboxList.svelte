@@ -131,13 +131,13 @@
 
   /**
    * Determines a child's identifier by trying expected attributes.
-   * Priority: name -> value -> text
+   * Priority: name -> value
    */
   function getCheckboxIdentifier(el: HTMLElement): string {
+    //return (el as any).name || (el as any).value || "";
     let id = el.getAttribute("name") || (el as any).name || "";
     if (!id) id = el.getAttribute("value") || (el as any).value || "";
-    if (!id) id = el.getAttribute("text") || (el as any).text || "";
-    return id || "";
+    return id;
   }
 
   function syncAllCheckboxValues() {
@@ -148,7 +148,6 @@
         _allCheckboxValues = newValues;
       }
     }
-    // No fallback needed - child records are the authoritative source
   }
 
   /**
