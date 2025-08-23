@@ -12,7 +12,7 @@ export type GoabCheckboxListOrientation = "vertical" | "horizontal";
 
 export type GoabCheckboxListOnChangeDetail = {
   name: string;
-  value: string[]; // Changed from 'selectedValues: string[]'
+  value: string[];
 };
 
 export type GoabInputOnChangeDetail<T = string> = {
