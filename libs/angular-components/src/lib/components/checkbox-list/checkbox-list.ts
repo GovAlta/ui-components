@@ -1,4 +1,4 @@
-import { GoabCheckboxListOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabCheckboxListOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -29,6 +29,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.mb]="mb"
     [attr.ml]="ml"
     [attr.mr]="mr"
+    [attr.childml]="childml"
     (_change)="_onChange($event)"
   >
     <ng-content />
@@ -51,6 +52,7 @@ export class GoabCheckboxList extends GoabControlValueAccessor {
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<unknown>;
   @Input() maxWidth?: string;
+  @Input() childml?: Spacing;
 
   // Override value to handle string arrays consistently
   @Input() override value?: string[];

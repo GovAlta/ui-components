@@ -24,6 +24,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   description?: string;
   maxwidth?: string;
+  childml?: Spacing;
 }
 
 export interface GoabCheckboxListProps extends Margins {
@@ -35,6 +36,7 @@ export interface GoabCheckboxListProps extends Margins {
   ariaLabel?: string;
   description?: string | React.ReactNode;
   maxWidth?: string;
+  childMl?: Spacing;
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
 }
@@ -48,6 +50,7 @@ export function GoabCheckboxList({
   ariaLabel,
   description,
   maxWidth,
+  childMl,
   children,
   onChange,
   mt,
@@ -96,6 +99,7 @@ export function GoabCheckboxList({
       arialabel={ariaLabel}
       description={typeof description === "string" ? description : undefined}
       maxwidth={maxWidth}
+      childml={childMl}
       mt={mt}
       mr={mr}
       mb={mb}

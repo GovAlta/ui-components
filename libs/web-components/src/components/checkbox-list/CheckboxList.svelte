@@ -34,6 +34,9 @@
   export let mb: Spacing = "m";
   export let ml: Spacing = null;
 
+  // margin left for child checkboxes
+  export let childml: Spacing = null;
+
   // Private state
   let _rootEl: HTMLElement;
   let _slotEl: HTMLElement;
@@ -193,6 +196,22 @@
       _childRecords = [..._childRecords, { el: detail.el, name: detail.name }];
       syncAllCheckboxValues();
       updateChildCheckboxState(detail.el, detail.name);
+      // Apply childml margin to the checkbox container
+      applyChildMargin(checkboxElement);
+    }
+  }
+
+  function applyChildMargin(checkboxElement: HTMLElement) {
+    if (childml) {
+      // Apply the margin-left style to the checkbox element
+      const marginStyle = calculateMargin(null, null, null, childml);
+      if (marginStyle) {
+        const existingStyle = checkboxElement.getAttribute("style") || "";
+        checkboxElement.setAttribute(
+          "style",
+          existingStyle + " " + marginStyle,
+        );
+      }
     }
   }
 
@@ -250,11 +269,11 @@
       for (const rec of _childRecords)
         updateChildCheckboxState(rec.el, rec.name);
     }
-    updateHostCheckboxesState();
+    updateSlottedCheckboxesState();
     _suppressChildChange = false;
   }
 
-  function updateHostCheckboxesState() {
+  function updateSlottedCheckboxesState() {
     const checkboxElements = getSlottedCheckboxes();
     checkboxElements.forEach((element) => {
       const name = getCheckboxIdentifier(element);
@@ -262,6 +281,8 @@
       element.setAttribute("checked", shouldBeChecked ? "true" : "false");
       if (isDisabled) element.setAttribute("disabled", "true");
       else element.removeAttribute("disabled");
+      // Apply childml margin to host checkboxes as well
+      applyChildMargin(element);
     });
   }
 
@@ -281,6 +302,8 @@
     if (containerElement) {
       if (isDisabled) containerElement.setAttribute("disabled", "true");
       else containerElement.removeAttribute("disabled");
+      // Apply childml margin to the container element
+      applyChildMargin(containerElement);
     }
   }
 
