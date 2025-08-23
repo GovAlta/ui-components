@@ -155,7 +155,7 @@ export const FieldsetSetValueMsg = "fieldset::set:value";
 //       need for the FieldsetResetFieldMsg/Detail
 export type FieldsetSetValueRelayDetail = {
   name: string;
-  value: string | number | Date;
+  value: string | number | Date | string[];
 };
 
 // ========
