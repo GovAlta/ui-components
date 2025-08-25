@@ -217,8 +217,14 @@
     id="{_tooltipInstanceId}-tooltip"
     class="tooltip-text {position} align-{halign}"
     bind:this={_tooltipEl}
-    style="visibility: {_tooltipVisible ? 'visible' : 'hidden'}">{content}</span
+    style="visibility: {_tooltipVisible ? 'visible' : 'hidden'}"
   >
+    {#if $$slots.content}
+      <slot name="content" />
+    {:else}
+      {content}
+    {/if}
+  </span>
 </div>
 
 <style>

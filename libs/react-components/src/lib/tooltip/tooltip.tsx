@@ -25,17 +25,19 @@ declare module "react" {
 /* eslint-disable-next-line */
 export interface GoabTooltipProps extends Margins {
   position?: GoabTooltipPosition;
-  content?: string;
+  content?: string | ReactNode;
   hAlign?: GoabTooltipHorizontalAlignment;
   testId?: string;
   children?: ReactNode;
 }
 
 export function GoabTooltip(props: GoabTooltipProps): JSX.Element {
+  const isStringContent = typeof props.content === "string";
+
   return (
     <goa-tooltip
       position={props.position}
-      content={props.content}
+      content={isStringContent ? (props.content as string) : undefined}
       halign={props.hAlign}
       testid={props.testId}
       mt={props.mt}
@@ -43,6 +45,7 @@ export function GoabTooltip(props: GoabTooltipProps): JSX.Element {
       mb={props.mb}
       ml={props.ml}
     >
+      {!isStringContent && props.content && <div slot="content">{props.content}</div>}
       {props.children}
     </goa-tooltip>
   );
