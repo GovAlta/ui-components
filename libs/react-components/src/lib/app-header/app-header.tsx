@@ -1,4 +1,5 @@
 import { useEffect, useRef, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps {
   heading?: string;
@@ -19,7 +20,7 @@ declare module "react" {
   }
 }
 
-export interface GoabAppHeaderProps {
+export interface GoabAppHeaderProps extends DataGridProps {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
@@ -29,16 +30,17 @@ export interface GoabAppHeaderProps {
   testId?: string;
 }
 
-export function GoabAppHeader({
-  heading,
-  url,
-  maxContentWidth,
-  fullMenuBreakpoint,
-  testId,
-  children,
-  onMenuClick,
-}: GoabAppHeaderProps): JSX.Element {
+export function GoabAppHeader(props: GoabAppHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+  const [dataGridProps, {
+    heading,
+    url,
+    maxContentWidth,
+    fullMenuBreakpoint,
+    testId,
+    children,
+    onMenuClick
+  }] = useDataGridProps(props);
 
   useEffect(() => {
     if (!el.current) {
@@ -66,6 +68,7 @@ export function GoabAppHeader({
       maxcontentwidth={maxContentWidth}
       testid={testId}
       hasmenuclickhandler={onMenuClick ? "true" : "false"}
+      {...dataGridProps}
     >
       {children}
     </goa-app-header>

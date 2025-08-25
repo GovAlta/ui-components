@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
+import { useDataGridProps } from "../common/data-props";
 
 interface WCProps {
   status?: GoabPublicFormTaskStatus;
@@ -17,10 +18,13 @@ declare module "react" {
 type GoabPublicFormTaskProps = {
   status?: GoabPublicFormTaskStatus;
   children: ReactNode;
+  [key: `data-grid${string}`]: string | boolean | undefined;
 };
 
-export function GoabPublicFormTask({ status = "cannot-start", children }: GoabPublicFormTaskProps) {
-  return <goa-public-form-task status={status}>{children}</goa-public-form-task>;
+export function GoabPublicFormTask(props: GoabPublicFormTaskProps) {
+  const [dataGridProps, { status = "cannot-start", children}] = useDataGridProps(props);
+
+  return <goa-public-form-task status={status}  {...dataGridProps}>{children}</goa-public-form-task>;
 }
 
 export default GoabPublicFormTask;

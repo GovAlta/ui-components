@@ -22,4 +22,16 @@ describe("GoabAppHeader", () => {
     header?.dispatchEvent(new Event("_menuClick"));
     expect(onMobileMenuClick).toHaveBeenCalled();
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabAppHeader
+        heading="Test heading"
+        url="test"
+        data-grid="row"
+      />,
+    );
+    const el = baseElement.querySelector("goa-app-header");
+    expect(el?.getAttribute("data-grid")).toBe("row");
+  });
 });

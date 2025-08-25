@@ -169,4 +169,17 @@ describe("GoabPublicSubformIndex", () => {
     expect(baseElement.querySelector("[data-testid='task-item-2']")).toBeTruthy();
     expect(baseElement.querySelectorAll("button")).toHaveLength(2);
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPublicSubformIndex
+        heading="Test Index"
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabPublicSubformIndex>
+    );
+    const el = baseElement.querySelector("goa-public-subform-index");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

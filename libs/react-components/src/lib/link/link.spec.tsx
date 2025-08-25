@@ -1,6 +1,5 @@
 import { configure, render } from "@testing-library/react";
 import { GoabLink } from "./link";
-import { screen } from "@testing-library/dom";
 
 configure({
   testIdAttribute: "testId",
@@ -35,5 +34,15 @@ describe("GoabLink", () => {
 
     expect(link).toBeTruthy();
     expect(link?.getAttribute("href")).toBe("https://example.com");
+  });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabLink data-grid="cell">
+        <a href="https://example.com">Test link</a>
+      </GoabLink>
+    );
+    const el = container.querySelector("goa-link");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
   });
 });

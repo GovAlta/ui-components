@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { GoabIconType, Margins } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   leadingicon?: GoabIconType;
@@ -19,7 +20,7 @@ declare module "react" {
   }
 }
 
-interface GoabLinkProps extends Margins {
+interface GoabLinkProps extends Margins, DataGridProps {
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
   action?: string;
@@ -30,20 +31,23 @@ interface GoabLinkProps extends Margins {
 }
 
 export function GoabLink(props: GoabLinkProps) {
+  const [dataGridProps, { leadingIcon, trailingIcon, action, actionArg, actionArgs, testId, mt, mb, ml, mr, children}] = useDataGridProps(props);
+
   return (
     <goa-link
-      leadingicon={props.leadingIcon}
-      trailingicon={props.trailingIcon}
-      action={props.action}
-      action-arg={props.actionArg}
-      action-args={JSON.stringify(props.actionArgs)}
-      testid={props.testId}
-      mt={props.mt}
-      mb={props.mb}
-      ml={props.ml}
-      mr={props.mr}
+      leadingicon={leadingIcon}
+      trailingicon={trailingIcon}
+      action={action}
+      action-arg={actionArg}
+      action-args={JSON.stringify(actionArgs)}
+      testid={testId}
+      mt={mt}
+      mb={mb}
+      ml={ml}
+      mr={mr}
+      {...dataGridProps}
     >
-      {props.children}
+      {children}
     </goa-link>
   );
 }

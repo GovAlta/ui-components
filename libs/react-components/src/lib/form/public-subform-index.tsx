@@ -1,5 +1,6 @@
 import { ReactNode, useRef } from "react";
 import { Margins } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref?: React.RefObject<HTMLElement | null>;
@@ -18,7 +19,7 @@ declare module "react" {
   }
 }
 
-interface GoabPublicSubformIndexProps extends Margins {
+interface GoabPublicSubformIndexProps extends Margins, DataGridProps {
   heading?: string;
   sectionTitle?: string;
   actionButtonText?: string;
@@ -26,19 +27,20 @@ interface GoabPublicSubformIndexProps extends Margins {
   children: ReactNode;
 }
 
-export function GoabPublicSubformIndex({
-  heading = "",
-  sectionTitle = "",
-  actionButtonText = "",
-  buttonVisibility = "hidden",
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabPublicSubformIndexProps) {
+export function GoabPublicSubformIndex(props: GoabPublicSubformIndexProps) {
+  const [dataGridProps, {
+    heading = "",
+    sectionTitle = "",
+    actionButtonText = "",
+    buttonVisibility = "hidden",
+    children,
+    mt,
+    mr,
+    mb,
+    ml,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLElement>(null);
-
+  
   return (
     <goa-public-subform-index
       ref={ref}
@@ -51,6 +53,7 @@ export function GoabPublicSubformIndex({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {children}
     </goa-public-subform-index>

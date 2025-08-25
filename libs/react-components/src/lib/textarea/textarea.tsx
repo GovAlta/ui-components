@@ -6,6 +6,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.Ref<HTMLTextAreaElement>;
@@ -34,7 +35,7 @@ declare module "react" {
   }
 }
 
-export interface GoabTextAreaProps extends Margins {
+export interface GoabTextAreaProps extends Margins, DataGridProps {
   name: string;
   value?: string;
   id?: string;
@@ -56,29 +57,31 @@ export interface GoabTextAreaProps extends Margins {
   onBlur?: (event: GoabTextAreaOnBlurDetail) => void;
 }
 
-export function GoabTextArea({
-  name,
-  value,
-  placeholder,
-  rows,
-  readOnly,
-  disabled,
-  countBy,
-  maxCount,
-  width,
-  maxWidth,
-  testId,
-  error,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  autoComplete,
-  onChange,
-  onKeyPress,
-  onBlur,
-}: GoabTextAreaProps): JSX.Element {
+export function GoabTextArea(props: GoabTextAreaProps): JSX.Element {
+  const [dataGridProps, {
+    name,
+    value,
+    placeholder,
+    rows,
+    readOnly,
+    disabled,
+    countBy,
+    maxCount,
+    width,
+    maxWidth,
+    testId,
+    error,
+    ariaLabel,
+    mt,
+    mr,
+    mb,
+    ml,
+    autoComplete,
+    onChange,
+    onKeyPress,
+    onBlur,
+  }] = useDataGridProps(props);
+
   const el = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -134,6 +137,7 @@ export function GoabTextArea({
       mb={mb}
       ml={ml}
       autocomplete={autoComplete}
+      {...dataGridProps}
     ></goa-textarea>
   );
 }
