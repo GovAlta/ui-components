@@ -1,4 +1,6 @@
 import type { JSX } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps {
   src: string;
   height: string;
@@ -13,13 +15,15 @@ declare module "react" {
   }
 }
 
-export interface GoabCardImageProps {
+export interface GoabCardImageProps extends DataAttributes {
   src: string;
   height: string;
 }
 
-export function GoabCardImage({ src, height }: GoabCardImageProps): JSX.Element {
-  return <goa-card-image src={src} height={height} />;
+export function GoabCardImage(props: GoabCardImageProps): JSX.Element {
+  const _props = transformProps<WCProps>(props, lowercase);
+
+  return <goa-card-image {..._props} />;
 }
 
 export default GoabCardImage;

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { GoabIconType, Margins } from "@abgov/ui-components-common";
+import { GoabIconType, Margins, DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   leadingicon?: GoabIconType;
@@ -19,7 +20,7 @@ declare module "react" {
   }
 }
 
-interface GoabLinkProps extends Margins {
+interface GoabLinkProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
   action?: string;
@@ -29,21 +30,21 @@ interface GoabLinkProps extends Margins {
   children: ReactNode;
 }
 
-export function GoabLink(props: GoabLinkProps) {
+export function GoabLink({
+  actionArgs,
+  actionArg,
+  children,
+  ...rest
+}: GoabLinkProps) {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
     <goa-link
-      leadingicon={props.leadingIcon}
-      trailingicon={props.trailingIcon}
-      action={props.action}
-      action-arg={props.actionArg}
-      action-args={JSON.stringify(props.actionArgs)}
-      testid={props.testId}
-      mt={props.mt}
-      mb={props.mb}
-      ml={props.ml}
-      mr={props.mr}
+      action-arg={actionArg}
+      action-args={JSON.stringify(actionArgs)}
+      {..._props}
     >
-      {props.children}
+      {children}
     </goa-link>
   );
 }

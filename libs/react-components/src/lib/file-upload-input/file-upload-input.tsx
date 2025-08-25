@@ -1,11 +1,12 @@
 import {
+  DataAttributes,
   GoabFileUploadInputOnSelectFileDetail,
   GoabFileUploadInputVariant,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement | null>;
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
@@ -16,13 +17,15 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
 /* eslint-disable-next-line */
-export interface GoabFileUploadInputProps {
+export interface GoabFileUploadInputProps extends DataAttributes {
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
@@ -31,13 +34,12 @@ export interface GoabFileUploadInputProps {
 }
 
 export function GoabFileUploadInput({
-  variant,
-  accept,
-  maxFileSize,
-  testId,
   onSelectFile,
+  ...rest
 }: GoabFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     if (!el.current) return;
@@ -54,13 +56,7 @@ export function GoabFileUploadInput({
   }, [el, onSelectFile]);
 
   return (
-    <goa-file-upload-input
-      ref={el}
-      variant={variant}
-      accept={accept}
-      maxfilesize={maxFileSize}
-      testid={testId}
-    />
+    <goa-file-upload-input ref={el} {..._props} />
   );
 }
 

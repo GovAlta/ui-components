@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "@abgov/ui-components-common";
+import { Margins, DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, kebab } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   name?: string;
   "continue-msg"?: string;
@@ -12,12 +12,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-subform": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-subform": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabPublicSubformProps extends Margins {
+interface GoabPublicSubformProps extends Margins, DataAttributes {
   id?: string;
   name?: string;
   continueMsg?: string;
@@ -33,12 +35,14 @@ export function GoabPublicSubform({
   onInit,
   onStateChange,
   children,
-  mt,
-  mr,
-  mb,
-  ml,
+  ...rest
 }: GoabPublicSubformProps) {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(
+    { id, name, "continue-msg": continueMsg, ...rest },
+    kebab
+  );
 
   useEffect(() => {
     if (!ref.current) return;
@@ -70,16 +74,7 @@ export function GoabPublicSubform({
   }, [ref, onInit, onStateChange]);
 
   return (
-    <goa-public-subform
-      ref={ref}
-      id={id}
-      name={name}
-      continue-msg={continueMsg}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    >
+    <goa-public-subform ref={ref} {..._props}>
       {children}
     </goa-public-subform>
   );

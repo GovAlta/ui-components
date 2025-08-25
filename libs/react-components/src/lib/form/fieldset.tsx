@@ -1,11 +1,12 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 import {
+  DataAttributes,
   GoabFieldsetOnContinueDetail,
   GoabFormDispatchOn,
 } from "@abgov/ui-components-common";
+import { transformProps, kebab } from "../common/extract-props";
 
 interface WCProps {
-  ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   "section-title"?: string;
   "dispatch-on"?: string;
@@ -15,12 +16,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-fieldset": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-fieldset": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabFieldsetProps {
+interface GoabFieldsetProps extends DataAttributes {
   id?: string;
   sectionTitle?: string;
   dispatchOn?: GoabFormDispatchOn;
@@ -29,14 +32,13 @@ interface GoabFieldsetProps {
 }
 
 export function GoabFieldset({
-  id,
-  sectionTitle,
-  dispatchOn,
   onContinue,
   children,
-
-}: GoabFieldsetProps) {
+  ...rest
+}: GoabFieldsetProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, kebab);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -59,12 +61,7 @@ export function GoabFieldset({
   }, [ref, onContinue]);
 
   return (
-    <goa-fieldset
-      ref={ref}
-      id={id}
-      section-title={sectionTitle}
-      dispatch-on={dispatchOn}
-    >
+    <goa-fieldset ref={ref} {..._props}>
       {children}
     </goa-fieldset>
   );

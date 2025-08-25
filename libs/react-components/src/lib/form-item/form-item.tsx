@@ -1,10 +1,11 @@
 import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   label?: string;
@@ -28,7 +29,7 @@ declare module "react" {
   }
 }
 
-export interface GoabFormItemProps extends Margins {
+export interface GoabFormItemProps extends Margins, DataAttributes {
   label?: string;
   labelSize?: GoabFormItemLabelSize;
   requirement?: GoabFormItemRequirement;
@@ -49,38 +50,20 @@ export interface GoabFormItemProps extends Margins {
 }
 
 export function GoabFormItem({
-  children,
-  helpText,
   error,
-  requirement,
-  label,
-  labelSize,
-  maxWidth,
+  helpText,
   publicFormSummaryOrder,
-  name,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
-  id,
+  children,
+  ...rest
 }: GoabFormItemProps): JSX.Element {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
     <goa-form-item
-      label={label}
-      labelsize={labelSize}
       error={typeof error === "string" ? error : undefined}
-      requirement={requirement}
       helptext={typeof helpText === "string" ? helpText : undefined}
-      maxwidth={maxWidth}
       public-form-summary-order={publicFormSummaryOrder}
-      name={name}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-      id={id}
+      {..._props}
     >
       {error && typeof error !== "string" && <div slot="error">{error}</div>}
       {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}

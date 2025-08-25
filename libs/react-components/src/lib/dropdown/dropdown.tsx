@@ -1,12 +1,12 @@
 import {
   GoabDropdownOnChangeDetail,
   GoabIconType,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   arialabel?: string;
   arialabelledby?: string;
   disabled?: string;
@@ -32,12 +32,14 @@ declare module "react" {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabDropdownProps extends Margins {
+export interface GoabDropdownProps extends Margins, DataAttributes {
   name?: string;
   value?: string[] | string;
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
@@ -75,8 +77,22 @@ function stringify(value: string | string[] | undefined): string {
   return JSON.stringify(value);
 }
 
-export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
+export function GoabDropdown({
+  value,
+  onChange,
+  disabled,
+  error,
+  filterable,
+  multiselect,
+  native,
+  relative,
+  children,
+  ...rest
+}: GoabDropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -84,45 +100,31 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-      props.onChange?.(detail);
+      onChange?.(detail);
     };
-    if (props.onChange) {
+    if (onChange) {
       current.addEventListener("_change", handler);
     }
     return () => {
-      if (props.onChange) {
+      if (onChange) {
         current.removeEventListener("_change", handler);
       }
     };
-  }, [el, props]);
+  }, [el, onChange]);
 
   return (
     <goa-dropdown
       ref={el}
-      name={props.name}
-      value={stringify(props.value)}
-      arialabel={props.ariaLabel}
-      arialabelledby={props.ariaLabelledBy}
-      disabled={props.disabled ? "true" : undefined}
-      error={props.error ? "true" : undefined}
-      filterable={props.filterable ? "true" : undefined}
-      leadingicon={props.leadingIcon}
-      maxheight={props.maxHeight}
-      mb={props.mb}
-      ml={props.ml}
-      mr={props.mr}
-      mt={props.mt}
-      multiselect={props.multiselect ? "true" : undefined}
-      native={props.native ? "true" : undefined}
-      placeholder={props.placeholder}
-      testid={props.testId}
-      width={props.width}
-      maxwidth={props.maxWidth}
-      relative={props.relative ? "true" : undefined}
-      autocomplete={props.autoComplete}
-      id={props.id}
+      value={stringify(value)}
+      disabled={disabled ? "true" : undefined}
+      error={error ? "true" : undefined}
+      filterable={filterable ? "true" : undefined}
+      multiselect={multiselect ? "true" : undefined}
+      native={native ? "true" : undefined}
+      relative={relative ? "true" : undefined}
+      {..._props}
     >
-      {props.children}
+      {children}
     </goa-dropdown>
   );
 }

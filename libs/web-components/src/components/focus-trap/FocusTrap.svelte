@@ -12,6 +12,7 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
+  import { findFirstFocusableNode } from "../../common/utils";
 
   // Public
   // allow for outside control of whether focus trap should re-focus the first element is open/closed (see Drawer)
@@ -57,58 +58,18 @@
 
   // Functions
 
-  function isFocusable(node: Node): Node | null | "ignore-focus" {
-    const element = node as HTMLElement;
-
-    if (isFirstFocus && element.getAttribute?.("data-first-focus")) return node;
-    if (isFirstFocus && element.getAttribute?.("data-ignore-focus"))
-      return "ignore-focus";
-
-    const isTabbable =
-      element.tabIndex > 0 ||
-      (element.tabIndex === 0 && element.getAttribute("tabIndex") !== null);
-
-    // 1 = element_node (div, span, input, a, ...)
-    if (element.nodeType !== 1) return null;
-
-    if (isTabbable) return node;
-
-    if (element?.getAttribute("disabled")) return null;
-
-    if (element.tabIndex < 0 || element.getAttribute?.("tabindex") === "-1")
-      return null;
-
-    let focusableNode = null;
-    switch (element.nodeName) {
-      case "A": {
-        const el = element as HTMLLinkElement;
-        if (!!el.href && el.rel !== "ignore") {
-          focusableNode = node;
-        }
-        break;
-      }
-      case "INPUT": {
-        const el = element as HTMLInputElement;
-        if (el.type !== "hidden" && el.type !== "file") {
-          focusableNode = node;
-        }
-        break;
-      }
-      case "BUTTON":
-      case "SELECT":
-      case "TEXTAREA":
-        focusableNode = node;
-        break;
-    }
-
-    return focusableNode;
-  }
-
   function findFirstFocusableEl() {
     const sibling = rootEl?.querySelector("slot");
     if (!sibling) return;
 
-    const el = findFirstNode([sibling], false) as HTMLElement;
+    // for Modal/Drawer containers with tabindex="-1"
+    const firstFocusEl = sibling.querySelector('[data-first-focus="true"]') as HTMLElement;
+    if (firstFocusEl) {
+      firstFocusEl.focus();
+      return;
+    }
+
+    const el = findFirstFocusableNode([sibling]) as HTMLElement;
     if (el) {
       el.focus();
     }
@@ -134,7 +95,7 @@
       }
       if (!sibling) return;
 
-      const next = findFirstNode([sibling], false) as HTMLElement;
+      const next = findFirstFocusableNode([sibling]) as HTMLElement;
       next?.focus();
       return;
     }
@@ -151,7 +112,7 @@
       }
       if (!sibling) return;
 
-      const next = findFirstNode([sibling], true) as HTMLElement;
+      const next = findFirstFocusableNode([sibling], true) as HTMLElement;
       next?.focus();
       return;
     }
@@ -168,60 +129,14 @@
     }
   }
 
-  function findFirstNode(
-    nodes: NodeList | Node[],
-    reversed: boolean = false,
-  ): Node | null {
-    let focusableNode = null;
-
-    const nodeList = reversed ? [...nodes].reverse() : nodes;
-    for (const node of nodeList) {
-      const result = isFocusable(node);
-      // skip nodes that are ignore-focus
-      if (result === "ignore-focus") continue;
-
-      if (result) {
-        focusableNode = result;
-        break;
-      }
-
-      if (node.hasChildNodes()) {
-        focusableNode = findFirstNode(Array.from(node.childNodes), reversed);
-        if (focusableNode) break;
-      }
-
-      focusableNode = findFirstNodeOfSlot(node, reversed);
-      if (focusableNode) break;
-
-      if (node instanceof HTMLElement && node.shadowRoot) {
-        focusableNode = findFirstNodeOfShadowDOM(node, reversed);
-        if (focusableNode) break;
-      }
-    }
-
-    return focusableNode;
-  }
-
-  function findFirstNodeOfSlot(node: Node, reversed: boolean): Node | null {
-    if (!(node instanceof HTMLSlotElement)) return null;
-    return findFirstNode([...node.assignedNodes()], reversed);
-  }
-
-  function findFirstNodeOfShadowDOM(
-    node: Node,
-    reversed: boolean,
-  ): Node | null {
-    if (!(node instanceof HTMLElement)) return null;
-    return findFirstNode([...(node.shadowRoot?.childNodes || [])], reversed);
-  }
 </script>
 
 <div bind:this={rootEl}>
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <span data-tab-boundry="start" tabindex="0"></span>
+  <span data-tab-boundry="start" data-ignore-focus-datagrid tabindex="0"></span>
   <slot />
   <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-  <span data-tab-boundry="end" tabindex="0"></span>
+  <span data-tab-boundry="end" data-ignore-focus-datagrid tabindex="0"></span>
 </div>
 
 <style>

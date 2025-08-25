@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { GoabIconType } from "@abgov/ui-components-common";
+import { DataAttributes, GoabIconType } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   heading: string;
@@ -8,7 +9,7 @@ interface WCProps {
 }
 
 /* eslint-disable-next-line */
-export interface GoabAppHeaderMenuProps {
+export interface GoabAppHeaderMenuProps extends DataAttributes {
   heading: string;
   leadingIcon?: GoabIconType;
   testId?: string;
@@ -24,14 +25,15 @@ declare module "react" {
   }
 }
 
-export function GoabAppHeaderMenu(props: GoabAppHeaderMenuProps) {
+export function GoabAppHeaderMenu({
+  children,
+  ...rest
+}: GoabAppHeaderMenuProps) {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
-    <goa-app-header-menu
-      heading={props.heading}
-      leadingicon={props.leadingIcon}
-      testid={props.testId}
-    >
-      {props.children}
+    <goa-app-header-menu {..._props}>
+      {children}
     </goa-app-header-menu>
   );
 }

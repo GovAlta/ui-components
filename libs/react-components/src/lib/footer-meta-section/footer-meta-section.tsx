@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   testid?: string;
@@ -14,17 +16,19 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabAppFooterMetaSectionProps {
+export interface GoabAppFooterMetaSectionProps extends DataAttributes {
   testId?: string;
   children?: ReactNode;
 }
 
 export function GoabAppFooterMetaSection({
-  testId,
   children,
+  ...rest
 }: GoabAppFooterMetaSectionProps) {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
-    <goa-app-footer-meta-section testid={testId} slot="meta">
+    <goa-app-footer-meta-section slot="meta" {..._props}>
       {children}
     </goa-app-footer-meta-section>
   );

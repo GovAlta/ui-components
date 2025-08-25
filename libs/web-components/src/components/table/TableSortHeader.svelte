@@ -69,6 +69,15 @@
     color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
   }
 
+  button:focus {
+    outline: none;
+  }
+
+  button:focus-visible {
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+    var(--goa-color-interactive-focus);
+  }
+
   button goa-icon {
     color: var(--goa-color-interactive-default);
   }

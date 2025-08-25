@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   maxcolumncount?: number;
@@ -16,7 +18,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabFooterNavSectionProps {
+export interface GoabFooterNavSectionProps extends DataAttributes {
   maxColumnCount?: number;
   heading?: string;
   testId?: string;
@@ -24,18 +26,13 @@ export interface GoabFooterNavSectionProps {
 }
 
 export function GoabAppFooterNavSection({
-  heading,
-  maxColumnCount = 1,
-  testId,
   children,
+  ...rest
 }: GoabFooterNavSectionProps) {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
-    <goa-app-footer-nav-section
-      slot="nav"
-      heading={heading}
-      maxcolumncount={maxColumnCount}
-      testid={testId}
-    >
+    <goa-app-footer-nav-section slot="nav" {..._props}>
       {children}
     </goa-app-footer-nav-section>
   );

@@ -145,4 +145,15 @@ describe("GoabCheckbox", () => {
       );
     expect(onChangeStub).toBeCalled();
   });
+
+  it("should pass data-grid attributes", () => {
+    render(
+      <GoabCheckbox
+        name="test"
+        data-grid="cell"
+      />
+    );
+    const checkbox = document.querySelector("goa-checkbox");
+    expect(checkbox?.getAttribute("data-grid")).toBe("cell");
+  });
 });

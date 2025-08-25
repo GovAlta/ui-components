@@ -15,6 +15,7 @@ export * from "./chip/chip";
 export * from "./circular-progress/circular-progress";
 export * from "./column-layout/column-layout";
 export * from "./container/container";
+export * from "./data-grid/data-grid";
 export * from "./date-picker/date-picker";
 export * from "./details/details";
 export * from "./divider/divider";

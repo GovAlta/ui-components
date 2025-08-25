@@ -1073,6 +1073,10 @@ export type TShirtSpacing =
 
 export type Spacing = NumericSpacing | TShirtSpacing | null;
 
+export type DataAttributes = {
+  [K in `data-${string}`]?: string | boolean;
+};
+
 export interface Margins {
   mt?: Spacing;
   mr?: Spacing;

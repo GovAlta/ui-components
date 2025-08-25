@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
+import { DataAttributes, GoabFilterChipTheme, Margins } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   icontheme: GoabFilterChipTheme;
   error?: string;
   content: string;
@@ -13,12 +13,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabFilterChipProps extends Margins {
+export interface GoabFilterChipProps extends Margins, DataAttributes {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;
   error?: boolean;
@@ -29,15 +31,16 @@ export interface GoabFilterChipProps extends Margins {
 export const GoabFilterChip = ({
   iconTheme = "outline",
   error,
-  content,
   onClick,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
+  ...rest
 }: GoabFilterChipProps) => {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(
+    { icontheme: iconTheme, ...rest },
+    lowercase
+  );
+
   useEffect(() => {
     if (!el.current) return;
     if (!onClick) return;
@@ -46,21 +49,15 @@ export const GoabFilterChip = ({
 
     current.addEventListener("_click", onClick);
     return () => {
-      current.removeEventListener("_click", onClick);
+      current.removeEventListener("_click", onClick!);
     };
   }, [el, onClick]);
 
   return (
     <goa-filter-chip
       ref={el}
-      icontheme={iconTheme}
       error={error ? "true" : undefined}
-      content={content}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
+      {..._props}
     />
   );
 };

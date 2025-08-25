@@ -80,4 +80,16 @@ describe("GoabFieldset", () => {
 
     expect(handleContinue).not.toHaveBeenCalled();
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabFieldset
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabFieldset>
+    );
+    const el = baseElement.querySelector("goa-fieldset");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

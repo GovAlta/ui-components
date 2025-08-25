@@ -192,4 +192,16 @@ describe("Input", () => {
       expect(input?.getAttribute("textalign")).toBe("right");
     });
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabInputText
+        name="test"
+        onChange={noop}
+        data-grid="cell"
+      />
+    );
+    const el = container.querySelector("goa-input");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

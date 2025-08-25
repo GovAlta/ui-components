@@ -49,4 +49,15 @@ describe("GoabIconButton", () => {
       },
     );
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabIconButton
+        icon="information"
+        data-grid="cell"
+      />
+    );
+    const el = container.querySelector("goa-icon-button");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

@@ -2,11 +2,11 @@ import { ReactNode, useEffect, useRef } from "react";
 import {
   GoabPublicFormPageButtonVisibility,
   GoabPublicFormPageStep,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
+import { transformProps, kebab } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   heading?: string;
   "sub-heading"?: string;
@@ -22,12 +22,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabPublicFormPageProps extends Margins {
+interface GoabPublicFormPageProps extends Margins, DataAttributes {
   id?: string;
   heading?: string;
   subHeading?: string;
@@ -46,23 +48,13 @@ interface GoabPublicFormPageProps extends Margins {
 }
 
 export function GoabPublicFormPage({
-  id = "",
-  heading = "",
-  subHeading = "",
-  summaryHeading = "",
-  sectionTitle = "",
-  backUrl = "",
-  type = "step",
-  buttonText = "",
-  buttonVisibility = "visible",
   onContinue,
   children,
-  mt,
-  mr,
-  mb,
-  ml,
+  ...rest
 }: GoabPublicFormPageProps) {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, kebab);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -84,22 +76,7 @@ export function GoabPublicFormPage({
   }, [ref, onContinue]);
 
   return (
-    <goa-public-form-page
-      ref={ref}
-      id={id}
-      heading={heading}
-      sub-heading={subHeading}
-      section-title={sectionTitle}
-      back-url={backUrl}
-      type={type}
-      button-text={buttonText}
-      button-visibility={buttonVisibility}
-      summary-heading={summaryHeading}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    >
+    <goa-public-form-page ref={ref} {..._props}>
       {children}
     </goa-public-form-page>
   );

@@ -1,5 +1,6 @@
-import { GoabIconType } from "@abgov/ui-components-common";
+import { DataAttributes, GoabIconType } from "@abgov/ui-components-common";
 import type { JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   text: string;
@@ -17,16 +18,18 @@ declare module "react" {
   }
 }
 
-export interface GoabMenuActionProps {
+export interface GoabMenuActionProps extends DataAttributes {
   text: string;
   action: string;
   icon?: GoabIconType;
   testId?: string;
 }
 
-export function GoabMenuAction({ text, icon, action, testId }: GoabMenuActionProps): JSX.Element {
+export function GoabMenuAction(props: GoabMenuActionProps): JSX.Element {
+  const _props = transformProps<WCProps>(props, lowercase);
+
   return (
-    <goa-menu-action text={text} action={action} icon={icon} testid={testId}></goa-menu-action>
+    <goa-menu-action {..._props}></goa-menu-action>
   );
 }
 

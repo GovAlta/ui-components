@@ -2,11 +2,11 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   name?: string;
   value?: string;
   error?: string;
@@ -23,12 +23,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-date-picker": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-date-picker": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabDatePickerProps extends Margins {
+export interface GoabDatePickerProps extends Margins, DataAttributes {
   name?: string;
   value?: Date | string | undefined;
   error?: boolean;
@@ -46,23 +48,18 @@ export interface GoabDatePickerProps extends Margins {
 }
 
 export function GoabDatePicker({
-  name,
   value,
   error,
   min,
   max,
-  testId,
   disabled,
-  type,
-  mt,
-  mr,
-  mb,
-  ml,
   relative,
-  width,
   onChange,
+  ...rest
 }: GoabDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     if (value && typeof value !== "string") {
@@ -92,33 +89,26 @@ export function GoabDatePicker({
     };
   }, [onChange]);
 
-  const formatValue = (value: Date | string | undefined) => {
-    if (!value) return "";
+  const formatValue = (val: Date | string | undefined) => {
+    if (!val) return "";
 
-    if (value instanceof Date) {
-      return value.toISOString();
+    if (val instanceof Date) {
+      return val.toISOString();
     }
 
-    return value;
+    return val;
   };
 
   return (
     <goa-date-picker
       ref={ref}
-      name={name}
       value={formatValue(value) || undefined}
-      type={type}
       error={error ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       min={formatValue(min) || undefined}
       max={formatValue(max) || undefined}
-      testid={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
       relative={relative ? "true" : undefined}
-      width={width}
+      {..._props}
     />
   );
 }

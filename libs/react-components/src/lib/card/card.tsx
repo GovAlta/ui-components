@@ -1,6 +1,7 @@
-import { Margins } from "@abgov/ui-components-common";
+import { DataAttributes, Margins } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   elevation?: number;
@@ -18,7 +19,7 @@ declare module "react" {
   }
 }
 
-export interface GoabCardProps extends Margins {
+export interface GoabCardProps extends Margins, DataAttributes {
   elevation?: number;
   width?: string;
   testId?: string;
@@ -26,25 +27,13 @@ export interface GoabCardProps extends Margins {
 }
 
 export function GoabCard({
-  elevation,
-  width,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
   children,
+  ...rest
 }: GoabCardProps): JSX.Element {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
-    <goa-card
-      width={width}
-      elevation={elevation}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-    >
+    <goa-card {..._props}>
       {children}
     </goa-card>
   );

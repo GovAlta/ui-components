@@ -1,12 +1,13 @@
 import { ReactNode, useRef, useLayoutEffect } from "react";
 
 import {
+  DataAttributes,
   GoabFormState,
   GoabPublicFormStatus,
 } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
-  ref?: React.RefObject<HTMLElement | null>;
   status?: string;
   name?: string;
 }
@@ -15,12 +16,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-form": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabPublicFormProps {
+interface GoabPublicFormProps extends DataAttributes {
   status?: GoabPublicFormStatus;
   name?: string;
   onInit?: (event: Event) => void;
@@ -30,15 +33,16 @@ interface GoabPublicFormProps {
 }
 
 export function GoabPublicForm({
-  status = "complete",
-  name,
   onInit,
   onComplete,
   onStateChange,
   children,
+  ...rest
 }: GoabPublicFormProps) {
   const ref = useRef<HTMLElement>(null);
   const initialized = useRef(false);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   // Use useLayoutEffect to set up listeners before the component mounts
   useLayoutEffect(() => {
@@ -86,11 +90,7 @@ export function GoabPublicForm({
   }, [onInit, onComplete, onStateChange]);
 
   return (
-    <goa-public-form
-      ref={ref}
-      status={status}
-      name={name}
-    >
+    <goa-public-form ref={ref} {..._props}>
       {children}
     </goa-public-form>
   );
