@@ -1,34 +1,41 @@
-<svelte:options customElement={{
-  tag: "goa-button",
-  props: {
-    actionArg: { type: "String", attribute: "action-arg"},
-    actionArgs: { type: "Object", attribute: "action-args"},
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-button",
+    props: {
+      actionArg: { type: "String", attribute: "action-arg" },
+      actionArgs: { type: "Object", attribute: "action-args" },
+    },
+  }}
+/>
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
 
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean, dispatch, relay } from "../../common/utils";
+  import {
+    typeValidator,
+    toBoolean,
+    dispatch,
+    relay,
+  } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
   // Validators
   const [Types, validateType] = typeValidator(
     "Button type",
     ["primary", "submit", "secondary", "tertiary", "start"],
-    true,
+    { required: true, deprecated: ["submit"] },
   );
   const [Sizes, validateSize] = typeValidator(
     "Button size",
     ["normal", "compact"],
-    true,
+    { required: true },
   );
   const [Variants, validateVariant] = typeValidator(
     "Button variant",
     ["normal", "destructive", "inverse"],
-    true,
+    { required: true },
   );
 
   // Types
@@ -66,7 +73,9 @@
   // Hooks
   // =====
 
-  onMount(() => {
+  onMount(async () => {
+    await tick();
+
     validateType(type);
     validateSize(size);
     validateVariant(variant);
@@ -84,7 +93,9 @@
       dispatch(e.target as Element, "_click", null, { bubbles: true });
     }
     if (action) {
-      dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
+      dispatch(e.target as Element, action, actionArg || actionArgs, {
+        bubbles: true,
+      });
     }
   }
 </script>

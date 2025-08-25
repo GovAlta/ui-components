@@ -174,9 +174,12 @@ export function validateRequired(
 export function typeValidator(
   message: string,
   values: string[],
-  required = false,
+  opts: boolean | { required?: boolean; deprecated?: string[] } = {},
 ): [string[], (value: string | null) => void] {
   const validator = (value: string | null): void => {
+    const required = typeof opts === "boolean" ? opts : opts?.required;
+    const deprecated = typeof opts === "object" ? opts?.deprecated : null;
+
     if (!required && !value) {
       return;
     }
@@ -186,6 +189,9 @@ export function typeValidator(
     }
     if (!values.includes(value || "")) {
       console.error(`[${value}] is an invalid ${message.toLowerCase()}`);
+    }
+    if (deprecated?.includes(value as string)) {
+      console.warn(`[${value}] is deprecated`);
     }
   };
   return [values, validator];
