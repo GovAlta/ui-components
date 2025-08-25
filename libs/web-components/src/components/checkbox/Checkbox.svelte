@@ -438,49 +438,59 @@ max-width: ${maxwidth};
   }
 
   /* Focus + Error Container */
-  .error .container:has(:focus-visible) {
+  .error .container:has(:focus-visible),
+  .error .container:has(:focus) {
     outline: none;
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
-  .error .container:has(:focus-visible):hover {
+  .error .container:has(:focus-visible):hover,
+  .error .container:has(:focus):hover {
     outline: none;
     border: var(--goa-checkbox-border-error);
   }
-  .error .container.selected:has(:focus-visible):hover {
+  .error .container.selected:has(:focus-visible):hover,
+  .error .container.selected:has(:focus):hover {
     outline: none;
     border: none;
     background-color: var(--goa-checkbox-color-bg);
   }
-  label:hover.error .container.selected:has(:focus-visible) {
+  label:hover.error .container.selected:has(:focus-visible),
+  label:hover.error .container.selected:has(:focus) {
     outline: none;
     border: var(--goa-checkbox-border-error);
     background-color: var(--goa-checkbox-color-bg);
   }
-  label:hover.error .container:has(:focus-visible) {
+  label:hover.error .container:has(:focus-visible),
+  label:hover.error .container:has(:focus) {
     outline: none;
     border: var(--goa-checkbox-border-error);
   }
 
   /* Focus Container */
-  .container:has(:focus-visible) {
+  .container:has(:focus-visible),
+  .container:has(:focus) {
     outline: none;
     box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
   }
-  .container:has(:focus-visible):hover {
+  .container:has(:focus-visible):hover,
+  .container:has(:focus):hover {
     outline: none;
     border: var(--goa-checkbox-border);
   }
-  .container.selected:has(:focus-visible):hover {
+  .container.selected:has(:focus-visible):hover,
+  .container.selected:has(:focus):hover {
     outline: none;
     border: none;
     background-color: var(--goa-checkbox-color-bg-checked);
   }
-  label:hover .container.selected:has(:focus-visible) {
+  label:hover .container.selected:has(:focus-visible),
+  label:hover .container.selected:has(:focus) {
     outline: none;
     border: none;
     background-color: var(--goa-checkbox-color-bg-checked);
   }
-  label:hover .container:has(:focus-visible) {
+  label:hover .container:has(:focus-visible),
+  label:hover .container:has(:focus) {
     outline: none;
     border: var(--goa-checkbox-border);
   }

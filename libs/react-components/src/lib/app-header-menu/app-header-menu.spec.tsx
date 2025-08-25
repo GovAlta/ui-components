@@ -35,4 +35,17 @@ describe("AppHeaderMenu", () => {
     expect(el?.getAttribute("leadingIcon")).toBe("search");
     expect(el?.getAttribute("testid")).toBe("foo");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabAppHeaderMenu
+        heading="Test heading"
+        data-grid="row"
+      >
+        Content
+      </GoabAppHeaderMenu>,
+    );
+    const el = baseElement.querySelector("goa-app-header-menu");
+    expect(el?.getAttribute("data-grid")).toBe("row");
+  });
 });

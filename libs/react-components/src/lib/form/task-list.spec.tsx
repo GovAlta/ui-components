@@ -210,4 +210,17 @@ describe("GoabPublicFormTaskList", () => {
     expect(baseElement.querySelectorAll("h4")).toHaveLength(3);
     expect(baseElement.querySelectorAll("[data-testid^='task-']")).toHaveLength(6);
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPublicFormTaskList
+        heading="Test Tasks"
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabPublicFormTaskList>
+    );
+    const el = baseElement.querySelector("goa-public-form-task-list");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

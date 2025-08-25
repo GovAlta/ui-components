@@ -4,6 +4,7 @@ import {
   GoabFormState,
   GoabPublicFormStatus,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps {
   ref?: React.RefObject<HTMLElement | null>;
@@ -20,7 +21,7 @@ declare module "react" {
   }
 }
 
-interface GoabPublicFormProps {
+interface GoabPublicFormProps extends DataGridProps {
   status?: GoabPublicFormStatus;
   name?: string;
   onInit?: (event: Event) => void;
@@ -29,14 +30,15 @@ interface GoabPublicFormProps {
   children: ReactNode;
 }
 
-export function GoabPublicForm({
-  status = "complete",
-  name,
-  onInit,
-  onComplete,
-  onStateChange,
-  children,
-}: GoabPublicFormProps) {
+export function GoabPublicForm(props: GoabPublicFormProps) {
+  const [dataGridProps, {
+    status = "complete",
+    name,
+    onInit,
+    onComplete,
+    onStateChange,
+    children
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLElement>(null);
   const initialized = useRef(false);
 
@@ -90,6 +92,7 @@ export function GoabPublicForm({
       ref={ref}
       status={status}
       name={name}
+      {...dataGridProps}
     >
       {children}
     </goa-public-form>

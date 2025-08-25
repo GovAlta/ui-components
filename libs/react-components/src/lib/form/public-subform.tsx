@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
 import { Margins } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref?: React.RefObject<HTMLElement | null>;
@@ -17,7 +18,7 @@ declare module "react" {
   }
 }
 
-interface GoabPublicSubformProps extends Margins {
+interface GoabPublicSubformProps extends Margins, DataGridProps {
   id?: string;
   name?: string;
   continueMsg?: string;
@@ -26,18 +27,19 @@ interface GoabPublicSubformProps extends Margins {
   children: ReactNode;
 }
 
-export function GoabPublicSubform({
-  id = "",
-  name = "",
-  continueMsg = "",
-  onInit,
-  onStateChange,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabPublicSubformProps) {
+export function GoabPublicSubform(props: GoabPublicSubformProps) {
+  const [dataGridProps, {
+    id = "",
+    name = "",
+    continueMsg = "",
+    onInit,
+    onStateChange,
+    children,
+    mt,
+    mr,
+    mb,
+    ml,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -79,6 +81,7 @@ export function GoabPublicSubform({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {children}
     </goa-public-subform>

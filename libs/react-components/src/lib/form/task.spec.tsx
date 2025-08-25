@@ -221,4 +221,17 @@ describe("GoabPublicFormTask", () => {
     expect(el?.getAttribute("status")).toBe("completed");
     expect(el?.textContent).toBe("");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPublicFormTask
+        status="completed"
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabPublicFormTask>
+    );
+    const el = baseElement.querySelector("goa-public-form-task");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

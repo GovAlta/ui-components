@@ -1,5 +1,6 @@
 import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -29,7 +30,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoabCheckboxProps extends Margins {
+export interface GoabCheckboxProps extends Margins, DataGridProps {
   id?: string;
   name: string;
   checked?: boolean;
@@ -51,29 +52,31 @@ export interface GoabCheckboxProps extends Margins {
 // legacy
 export type Props = GoabCheckboxProps;
 
-export function GoabCheckbox({
-  id,
-  name,
-  testId,
-  error,
-  disabled,
-  checked,
-  indeterminate,
-  value,
-  text,
-  description,
-  reveal,
-  revealAriaLabel,
-  maxWidth,
-  children,
-  onChange,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabCheckboxProps): JSX.Element {
+export function GoabCheckbox(props: GoabCheckboxProps): JSX.Element {
+  const [dataGridProps, {
+    id,
+    name,
+    testId,
+    error,
+    disabled,
+    checked,
+    indeterminate,
+    value,
+    text,
+    description,
+    reveal,
+    revealAriaLabel,
+    maxWidth,
+    children,
+    onChange,
+    ariaLabel,
+    mt,
+    mr,
+    mb,
+    ml
+  }] = useDataGridProps(props);
   const el = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -111,6 +114,7 @@ export function GoabCheckbox({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {children}
       {typeof description !== "string" && description && (

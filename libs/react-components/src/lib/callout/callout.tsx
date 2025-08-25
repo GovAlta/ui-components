@@ -5,6 +5,7 @@ import {
   GoabCalloutIconTheme,
   Margins,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   heading?: string;
@@ -25,7 +26,7 @@ declare module "react" {
   }
 }
 
-export interface GoabCalloutProps extends Margins {
+export interface GoabCalloutProps extends Margins, DataGridProps {
   heading?: string;
   type?: GoabCalloutType;
   size?: GoabCalloutSize;
@@ -36,20 +37,22 @@ export interface GoabCalloutProps extends Margins {
   children?: React.ReactNode;
 }
 
-export const GoabCallout = ({
-  heading,
-  type = "information",
-  iconTheme = "outline",
-  size = "large",
-  maxWidth,
-  testId,
-  ariaLive = "off",
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabCalloutProps) => {
+export const GoabCallout = (props: GoabCalloutProps) => {
+  const [dataGridProps, {
+    heading,
+    type = "information",
+    iconTheme = "outline",
+    size = "large",
+    maxWidth,
+    testId,
+    ariaLive = "off",
+    children,
+    mt,
+    mr,
+    mb,
+    ml,
+  }] = useDataGridProps(props);
+
   return (
     <goa-callout
       heading={heading}
@@ -63,6 +66,7 @@ export const GoabCallout = ({
       mb={mb}
       ml={ml}
       testid={testId}
+      {...dataGridProps}
     >
       {children}
     </goa-callout>

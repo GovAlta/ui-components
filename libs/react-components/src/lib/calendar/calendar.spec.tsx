@@ -48,4 +48,15 @@ describe("Calendar", () => {
     expect(el?.getAttribute("max")).toBe(max.toISOString());
     expect(el?.getAttribute("testid")).toBe("foo");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <Calendar
+        onChange={noop}
+        data-grid="cell"
+      />
+    );
+    const el = baseElement.querySelector("goa-calendar");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });
