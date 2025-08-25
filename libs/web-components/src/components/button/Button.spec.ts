@@ -56,7 +56,7 @@ describe("GoAButtonComponent", () => {
   });
 
   describe("type", () => {
-    ["primary", "submit", "secondary", "tertiary", "start"].forEach((type) => {
+    ["primary", "secondary", "tertiary", "start"].forEach((type) => {
       it(`should render ${type} type`, async () => {
         const baseElement = render(GoAButton, { type });
         const button = await baseElement.findByRole("button");

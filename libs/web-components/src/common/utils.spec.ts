@@ -1,5 +1,5 @@
 import { waitFor } from "@testing-library/svelte";
-import { getTimestamp, performOnce, announceToScreenReader } from "./utils";
+import { getTimestamp, performOnce, announceToScreenReader, typeValidator } from "./utils";
 import { it, describe, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe("getTimestamp", () => {
@@ -131,5 +131,183 @@ describe("announceToScreenReader", () => {
     expect(announcer.style.overflow).toBe("hidden");
     expect(announcer.style.clipPath).toBe("inset(50%)");
     expect(announcer.style.opacity).toBe("0");
+  });
+});
+
+describe("typeValidator", () => {
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+  let consoleWarnSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    consoleWarnSpy = vi
+      .spyOn(console, "warn")
+      .mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    consoleErrorSpy.mockRestore();
+    consoleWarnSpy.mockRestore();
+  });
+
+  it("returns values array and validator function", () => {
+    const [values, validator] = typeValidator(
+      "Color",
+      ["red", "blue", "green"],
+      true,
+    );
+
+    expect(values).toEqual(["red", "blue", "green"]);
+    expect(typeof validator).toBe("function");
+  });
+
+  describe("boolean opts parameter (backward compatibility)", () => {
+    it("allows null/empty values when required=false", () => {
+      const [, validator] = typeValidator(
+        "Color",
+        ["red", "blue", "green"],
+        false,
+      );
+
+      validator(null);
+      validator("");
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    it("logs error for null value when required=true", () => {
+      const [, validator] = typeValidator(
+        "Color",
+        ["red", "blue", "green"],
+        true,
+      );
+
+      validator(null);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "[null] is an invalid color",
+      );
+    });
+
+    it("logs error for invalid values", () => {
+      const [, validator] = typeValidator(
+        "Color",
+        ["red", "blue", "green"],
+        false,
+      );
+
+      validator("yellow");
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "[yellow] is an invalid color",
+      );
+    });
+  });
+
+  describe("object opts parameter", () => {
+    it("validates with required option as object property", () => {
+      const [, validator] = typeValidator(
+        "Size",
+        ["small", "medium", "large"],
+        { required: true },
+      );
+
+      validator(null);
+      expect(consoleErrorSpy).toHaveBeenCalledWith("[null] is an invalid size");
+    });
+
+    it("handles deprecated values with warnings", () => {
+      const [, validator] = typeValidator("Theme", ["light", "dark", "auto"], {
+        required: false,
+        deprecated: ["auto"],
+      });
+
+      validator("auto");
+      expect(consoleWarnSpy).toHaveBeenCalledWith("[auto] is deprecated");
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+    });
+
+    it("handles multiple deprecated values", () => {
+      const [, validator] = typeValidator(
+        "Theme",
+        ["light", "dark", "auto", "legacy"],
+        {
+          required: false,
+          deprecated: ["auto", "legacy"],
+        },
+      );
+
+      validator("auto");
+      expect(consoleWarnSpy).toHaveBeenCalledWith("[auto] is deprecated");
+
+      validator("legacy");
+      expect(consoleWarnSpy).toHaveBeenCalledWith("[legacy] is deprecated");
+    });
+
+    it("logs error for invalid values even with deprecated list", () => {
+      const [, validator] = typeValidator("Theme", ["light", "dark", "auto"], {
+        required: false,
+        deprecated: ["auto"],
+      });
+
+      validator("invalid");
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "[invalid] is an invalid theme",
+      );
+      expect(consoleWarnSpy).not.toHaveBeenCalled();
+    });
+
+    it("combines required validation with deprecated warnings", () => {
+      const [, validator] = typeValidator(
+        "Status",
+        ["active", "inactive", "pending"],
+        {
+          required: true,
+          deprecated: ["pending"],
+        },
+      );
+
+      validator("pending");
+      expect(consoleWarnSpy).toHaveBeenCalledWith("[pending] is deprecated");
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+
+      validator(null);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "[null] is an invalid status",
+      );
+    });
+
+    it("allows deprecated parameter without required property", () => {
+      const [, validator] = typeValidator("Layout", ["flex", "grid", "table"], {
+        deprecated: ["table"],
+      });
+
+      validator(null);
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+
+      validator("table");
+      expect(consoleWarnSpy).toHaveBeenCalledWith("[table] is deprecated");
+      expect(consoleErrorSpy).not.toHaveBeenCalled();
+
+      validator("invalid");
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "[invalid] is an invalid layout",
+      );
+    });
+  });
+
+  it("behaves like required=false when no options provided", () => {
+    const [, validator] = typeValidator(
+      "Color",
+      ["red", "blue", "green"],
+      {},
+    );
+
+    validator(null);
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+
+    validator("yellow");
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      "[yellow] is an invalid color",
+    );
   });
 });
