@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps {
   maxcolumncount?: number;
@@ -16,25 +17,28 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabFooterNavSectionProps {
+export interface GoabFooterNavSectionProps extends DataGridProps {
   maxColumnCount?: number;
   heading?: string;
   testId?: string;
   children?: ReactNode;
 }
 
-export function GoabAppFooterNavSection({
-  heading,
-  maxColumnCount = 1,
-  testId,
-  children,
-}: GoabFooterNavSectionProps) {
+export function GoabAppFooterNavSection(props: GoabFooterNavSectionProps) {
+  const [dataGridProps, {
+    heading,
+    maxColumnCount = 1,
+    testId,
+    children,
+  }] = useDataGridProps(props);
+
   return (
     <goa-app-footer-nav-section
       slot="nav"
       heading={heading}
       maxcolumncount={maxColumnCount}
       testid={testId}
+      {...dataGridProps}
     >
       {children}
     </goa-app-footer-nav-section>

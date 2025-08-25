@@ -1,5 +1,6 @@
 import { useEffect, useRef, type JSX } from "react";
 import { GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -18,7 +19,7 @@ declare module "react" {
     }
   }
 }
-export interface GoabCalendarProps extends Margins {
+export interface GoabCalendarProps extends Margins, DataGridProps {
   name?: string;
   value?: Date;
   min?: Date;
@@ -27,19 +28,21 @@ export interface GoabCalendarProps extends Margins {
   onChange: (details: GoabCalendarOnChangeDetail) => void;
 }
 
-export function GoabCalendar({
-  name,
-  value,
-  min,
-  max,
-  testId,
-  mt,
-  mr,
-  mb,
-  ml,
-  onChange,
-}: GoabCalendarProps): JSX.Element {
+export function GoabCalendar(props: GoabCalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+  const [dataGridProps, {
+    name,
+    value,
+    min,
+    max,
+    testId,
+    mt,
+    mr,
+    mb,
+    ml,
+    onChange
+  }] = useDataGridProps(props);
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -65,6 +68,7 @@ export function GoabCalendar({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     />
   );
 }

@@ -165,7 +165,8 @@
     transform: translateY(2px);
   }
 
-  button:focus-visible {
+  button:focus-visible,
+  button:focus {
     box-shadow: 0 0 0 var(--goa-border-width-l)
       var(--goa-color-interactive-focus);
   }
@@ -233,6 +234,7 @@
     background-color: var(--goa-button-primary-hover-color-bg);
   }
   button:focus-visible,
+  button:focus,
   button:active {
     border-color: var(--goa-button-primary-hover-border);
     background-color: var(--goa-button-primary-focus-color-bg);
@@ -251,6 +253,7 @@
     background-color: var(--goa-button-secondary-hover-color-bg);
   }
   button.secondary:focus-visible,
+  button.secondary:focus,
   button.secondary:active {
     border: var(--goa-button-secondary-focus-border);
     background-color: var(--goa-button-secondary-focus-color-bg);
@@ -270,6 +273,7 @@
     color: var(--goa-button-tertiary-hover-color-text);
   }
   button.tertiary:focus-visible,
+  button.tertiary:focus,
   button.tertiary:active {
     background-color: var(--goa-button-tertiary-focus-color-bg);
     color: var(--goa-button-tertiary-focus-color-text);
@@ -287,7 +291,9 @@
   }
   .submit.destructive:focus-visible,
   .submit.destructive:active,
+  .submit.destructive:focus,
   .primary.destructive:focus-visible,
+  .primary.destructive:focus,
   .primary.destructive:active {
     background-color: var(--goa-button-primary-destructive-focus-color-bg);
   }
@@ -302,6 +308,7 @@
     border: var(--goa-button-secondary-destructive-hover-border);
   }
   .secondary.destructive:focus-visible,
+  .secondary.destructive:focus,
   .secondary.destructive:active {
     color: var(--goa-button-secondary-destructive-focus-color-text);
     border: var(--goa-button-secondary-destructive-focus-border);
@@ -315,6 +322,7 @@
     color: var(--goa-button-tertiary-destructive-hover-color-text);
   }
   .tertiary.destructive:focus-visible,
+  .tertiary.destructive:focus,
   .tertiary.destructive:active {
     color: var(--goa-button-tertiary-destructive-focus-color-text);
   }
@@ -331,8 +339,10 @@
     color: var(--goa-button-primary-inverse-hover-color-text);
   }
   .submit.inverse:focus-visible,
+  .submit.inverse:focus,
   .submit.inverse:active,
   .primary.inverse:focus-visible,
+  .primary.inverse:focus,
   .primary.inverse:active {
     background-color: var(--goa-button-primary-inverse-focus-color-bg);
   }
@@ -348,6 +358,7 @@
     border: var(--goa-button-secondary-inverse-hover-border);
   }
   .secondary.inverse:focus-visible,
+  .secondary.inverse:focus,
   .secondary.inverse:active {
     color: var(--goa-button-secondary-inverse-focus-color-text);
     border: var(--goa-button-secondary-inverse-focus-border);
@@ -361,6 +372,7 @@
     color: var(--goa-button-tertiary-inverse-hover-color-text);
   }
   .tertiary.inverse:focus-visible,
+  .tertiary.inverse:focus,
   .tertiary.inverse:active {
     color: var(--goa-button-tertiary-inverse-focus-color-text);
   }

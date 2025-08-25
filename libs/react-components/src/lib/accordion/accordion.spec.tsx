@@ -34,4 +34,17 @@ describe("Accordion", () => {
     expect(badge?.getAttribute("content")).toBe("test-badge");
     expect(el?.getAttribute("maxwidth")).toBe("480px");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabAccordion
+        heading="Test heading"
+        data-grid="row"
+      >
+        Content
+      </GoabAccordion>,
+    );
+    const el = baseElement.querySelector("goa-accordion");
+    expect(el?.getAttribute("data-grid")).toBe("row");
+  });
 });

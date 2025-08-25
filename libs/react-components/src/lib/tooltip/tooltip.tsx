@@ -4,6 +4,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 /* eslint-disable-next-line */
 interface WCProps extends Margins {
@@ -24,7 +25,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabTooltipProps extends Margins {
+export interface GoabTooltipProps extends Margins, DataGridProps {
   position?: GoabTooltipPosition;
   content?: string | ReactNode;
   hAlign?: GoabTooltipHorizontalAlignment;
@@ -34,22 +35,24 @@ export interface GoabTooltipProps extends Margins {
 }
 
 export function GoabTooltip(props: GoabTooltipProps): JSX.Element {
-  const isStringContent = typeof props.content === "string";
+  const [dataGridProps,{ position, content, hAlign, testId, maxWidth, mt, mr, mb, ml, children}] = useDataGridProps(props);
+  const isStringContent = typeof content === "string";
 
   return (
     <goa-tooltip
-      position={props.position}
-      content={isStringContent ? (props.content as string) : undefined}
-      halign={props.hAlign}
-      testid={props.testId}
-      maxwidth={props.maxWidth}
-      mt={props.mt}
-      mr={props.mr}
-      mb={props.mb}
-      ml={props.ml}
+      position={position}
+      content={isStringContent ? (content as string) : undefined}
+      halign={hAlign}
+      testid={testId}
+      maxwidth={maxWidth}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+      {...dataGridProps}
     >
-      {!isStringContent && props.content && <div slot="content">{props.content}</div>}
-      {props.children}
+      {!isStringContent && content && <div slot="content">{content}</div>}
+      {children}
     </goa-tooltip>
   );
 }

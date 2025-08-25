@@ -1,5 +1,6 @@
 import { Margins } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   heading: string;
@@ -18,7 +19,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabDetailsProps extends Margins {
+export interface GoabDetailsProps extends Margins, DataGridProps {
   heading: string;
   open?: boolean;
   maxWidth?: string;
@@ -27,18 +28,20 @@ export interface GoabDetailsProps extends Margins {
 }
 
 export function GoabDetails(props: GoabDetailsProps) {
+  const [dataGridProps, { heading, open, maxWidth, testId, mt, mr, mb, ml, children }] = useDataGridProps(props);
   return (
     <goa-details
-      heading={props.heading}
-      open={props.open ? "true" : undefined}
-      maxwidth={props.maxWidth}
-      testid={props.testId}
-      mt={props.mt}
-      mr={props.mr}
-      mb={props.mb}
-      ml={props.ml}
+      heading={heading}
+      open={open ? "true" : undefined}
+      maxwidth={maxWidth}
+      testid={testId}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+      {...dataGridProps}
     >
-      {props.children}
+      {children}
     </goa-details>
   );
 }

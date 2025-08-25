@@ -1,5 +1,6 @@
 import { waitFor } from "@testing-library/svelte";
 import { getTimestamp, performOnce, announceToScreenReader, typeValidator, getLocalDateValues } from "./utils";
+import { getTimestamp, performOnce, announceToScreenReader, typeValidator, shouldFocus, findFirstFocusableNode } from "./utils";
 import { it, describe, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe("getTimestamp", () => {
@@ -347,5 +348,535 @@ describe("getLocalDateValues", () => {
   it("returns null for a non-handled date string format", () => {
     const result = getLocalDateValues("01-01-2023");
     expect(result).toBeNull();
+  });
+});
+
+describe("shouldFocus", () => {
+  describe("non-element nodes", () => {
+    it("returns null for text nodes", () => {
+      const textNode = document.createTextNode("test");
+      expect(shouldFocus(textNode)).toBeNull();
+    });
+
+    it("returns null for comment nodes", () => {
+      const commentNode = document.createComment("test comment");
+      expect(shouldFocus(commentNode)).toBeNull();
+    });
+
+    it("returns null for document fragment", () => {
+      const fragment = document.createDocumentFragment();
+      expect(shouldFocus(fragment)).toBeNull();
+    });
+  });
+
+  describe("tabindex handling", () => {
+    it("returns element for positive tabindex", () => {
+      const div = document.createElement("div");
+      div.tabIndex = 1;
+      expect(shouldFocus(div)).toBe(div);
+    });
+
+    it("returns element for tabindex=0 with explicit tabIndex attribute", () => {
+      const div = document.createElement("div");
+      div.setAttribute("tabindex", "0");
+      expect(shouldFocus(div)).toBe(div);
+    });
+
+    it("returns null for negative tabindex", () => {
+      const div = document.createElement("div");
+      div.tabIndex = -1;
+      expect(shouldFocus(div)).toBeNull();
+    });
+
+    it("returns null for tabindex='-1' attribute", () => {
+      const div = document.createElement("div");
+      div.setAttribute("tabindex", "-1");
+      expect(shouldFocus(div)).toBeNull();
+    });
+  });
+
+  describe("disabled elements", () => {
+    it("returns null for disabled input via property", () => {
+      const input = document.createElement("input");
+      input.disabled = true;
+      expect(shouldFocus(input)).toBeNull();
+    });
+
+    it("returns null for disabled input via attribute", () => {
+      const input = document.createElement("input");
+      input.setAttribute("disabled", "");
+      expect(shouldFocus(input)).toBeNull();
+    });
+
+    it("returns null for disabled button via property", () => {
+      const button = document.createElement("button");
+      button.disabled = true;
+      expect(shouldFocus(button)).toBeNull();
+    });
+
+    it("returns null for disabled button via attribute", () => {
+      const button = document.createElement("button");
+      button.setAttribute("disabled", "disabled");
+      expect(shouldFocus(button)).toBeNull();
+    });
+
+    it("returns null for disabled select", () => {
+      const select = document.createElement("select");
+      select.disabled = true;
+      expect(shouldFocus(select)).toBeNull();
+    });
+
+    it("returns null for disabled textarea", () => {
+      const textarea = document.createElement("textarea");
+      textarea.setAttribute("disabled", "");
+      expect(shouldFocus(textarea)).toBeNull();
+    });
+
+    it("returns null for elements with disabled attribute (generic elements)", () => {
+      const div = document.createElement("div");
+      div.setAttribute("disabled", "true");
+      expect(shouldFocus(div)).toBeNull();
+    });
+  });
+
+  describe("anchor elements", () => {
+    it("returns anchor with href", () => {
+      const anchor = document.createElement("a");
+      anchor.href = "https://example.com";
+      expect(shouldFocus(anchor)).toBe(anchor);
+    });
+
+    it("returns null for anchor without href", () => {
+      const anchor = document.createElement("a");
+      expect(shouldFocus(anchor)).toBeNull();
+    });
+
+    it("returns anchor with empty href (resolves to current page)", () => {
+      const anchor = document.createElement("a");
+      anchor.href = "";
+      // Empty href gets resolved to current page URL, so it's actually focusable
+      expect(shouldFocus(anchor)).toBe(anchor);
+    });
+
+    it("returns null for anchor with rel='ignore'", () => {
+      const anchor = document.createElement("a");
+      anchor.href = "https://example.com";
+      anchor.rel = "ignore";
+      expect(shouldFocus(anchor)).toBeNull();
+    });
+
+    it("returns anchor with href and other rel values", () => {
+      const anchor = document.createElement("a");
+      anchor.href = "https://example.com";
+      anchor.rel = "noopener";
+      expect(shouldFocus(anchor)).toBe(anchor);
+    });
+  });
+
+  describe("input elements", () => {
+    it("returns text input", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      expect(shouldFocus(input)).toBe(input);
+    });
+
+    it("returns email input", () => {
+      const input = document.createElement("input");
+      input.type = "email";
+      expect(shouldFocus(input)).toBe(input);
+    });
+
+    it("returns number input", () => {
+      const input = document.createElement("input");
+      input.type = "number";
+      expect(shouldFocus(input)).toBe(input);
+    });
+
+    it("returns checkbox input", () => {
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      expect(shouldFocus(input)).toBe(input);
+    });
+
+    it("returns radio input", () => {
+      const input = document.createElement("input");
+      input.type = "radio";
+      expect(shouldFocus(input)).toBe(input);
+    });
+
+    it("returns null for hidden input", () => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      expect(shouldFocus(input)).toBeNull();
+    });
+
+    it("returns null for file input", () => {
+      const input = document.createElement("input");
+      input.type = "file";
+      expect(shouldFocus(input)).toBeNull();
+    });
+
+    it("returns null for disabled input", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.disabled = false;
+      input.setAttribute("disabled", "");
+      expect(shouldFocus(input)).toBeNull();
+    });
+  });
+
+  describe("form elements", () => {
+    it("returns button element", () => {
+      const button = document.createElement("button");
+      expect(shouldFocus(button)).toBe(button);
+    });
+
+    it("returns select element", () => {
+      const select = document.createElement("select");
+      expect(shouldFocus(select)).toBe(select);
+    });
+
+    it("returns textarea element", () => {
+      const textarea = document.createElement("textarea");
+      expect(shouldFocus(textarea)).toBe(textarea);
+    });
+  });
+
+  describe("non-focusable elements", () => {
+    it("returns null for div without tabindex", () => {
+      const div = document.createElement("div");
+      expect(shouldFocus(div)).toBeNull();
+    });
+
+    it("returns null for span without tabindex", () => {
+      const span = document.createElement("span");
+      expect(shouldFocus(span)).toBeNull();
+    });
+
+    it("returns null for p without tabindex", () => {
+      const p = document.createElement("p");
+      expect(shouldFocus(p)).toBeNull();
+    });
+
+    it("returns null for img without tabindex", () => {
+      const img = document.createElement("img");
+      expect(shouldFocus(img)).toBeNull();
+    });
+  });
+});
+
+describe("findFirstFocusableNode", () => {
+  let container: HTMLElement;
+
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(container);
+  });
+
+  describe("basic functionality", () => {
+    it("returns null for empty NodeList", () => {
+      const emptyNodeList = document.querySelectorAll("nonexistent");
+      expect(findFirstFocusableNode(emptyNodeList)).toBeNull();
+    });
+
+    it("returns null for empty array", () => {
+      expect(findFirstFocusableNode([])).toBeNull();
+    });
+
+    it("returns null when no focusable elements exist", () => {
+      const div = document.createElement("div");
+      const span = document.createElement("span");
+      div.appendChild(span);
+
+      expect(findFirstFocusableNode([div])).toBeNull();
+    });
+
+    it("finds first focusable element", () => {
+      const button = document.createElement("button");
+      button.textContent = "Click me";
+
+      expect(findFirstFocusableNode([button])).toBe(button);
+    });
+  });
+
+  describe("element types", () => {
+    it("finds focusable button", () => {
+      const button = document.createElement("button");
+      expect(findFirstFocusableNode([button])).toBe(button);
+    });
+
+    it("finds focusable input", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      expect(findFirstFocusableNode([input])).toBe(input);
+    });
+
+    it("finds focusable select", () => {
+      const select = document.createElement("select");
+      expect(findFirstFocusableNode([select])).toBe(select);
+    });
+
+    it("finds focusable textarea", () => {
+      const textarea = document.createElement("textarea");
+      expect(findFirstFocusableNode([textarea])).toBe(textarea);
+    });
+
+    it("finds focusable anchor with href", () => {
+      const anchor = document.createElement("a");
+      anchor.href = "https://example.com";
+      expect(findFirstFocusableNode([anchor])).toBe(anchor);
+    });
+
+    it("finds element with positive tabindex", () => {
+      const div = document.createElement("div");
+      div.tabIndex = 1;
+      expect(findFirstFocusableNode([div])).toBe(div);
+    });
+
+    it("finds element with tabindex=0", () => {
+      const div = document.createElement("div");
+      div.setAttribute("tabindex", "0");
+      expect(findFirstFocusableNode([div])).toBe(div);
+    });
+  });
+
+  describe("skips non-focusable elements", () => {
+    it("skips disabled elements", () => {
+      const button1 = document.createElement("button");
+      button1.disabled = true;
+
+      const button2 = document.createElement("button");
+      button2.textContent = "Focusable";
+
+      expect(findFirstFocusableNode([button1, button2])).toBe(button2);
+    });
+
+    it("skips hidden inputs", () => {
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden";
+
+      const textInput = document.createElement("input");
+      textInput.type = "text";
+
+      expect(findFirstFocusableNode([hiddenInput, textInput])).toBe(textInput);
+    });
+
+    it("skips file inputs", () => {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+
+      const textInput = document.createElement("input");
+      textInput.type = "text";
+
+      expect(findFirstFocusableNode([fileInput, textInput])).toBe(textInput);
+    });
+
+    it("skips anchors without href", () => {
+      const anchorNoHref = document.createElement("a");
+
+      const button = document.createElement("button");
+
+      expect(findFirstFocusableNode([anchorNoHref, button])).toBe(button);
+    });
+
+    it("skips elements with negative tabindex", () => {
+      const div = document.createElement("div");
+      div.tabIndex = -1;
+
+      const button = document.createElement("button");
+
+      expect(findFirstFocusableNode([div, button])).toBe(button);
+    });
+
+    it("skips elements with data-ignore-focus attribute", () => {
+      const button1 = document.createElement("button");
+      button1.setAttribute("data-ignore-focus", "true");
+
+      const button2 = document.createElement("button");
+
+      expect(findFirstFocusableNode([button1, button2])).toBe(button2);
+    });
+  });
+
+  describe("child node traversal", () => {
+    it("finds focusable element in child nodes", () => {
+      const container = document.createElement("div");
+      const button = document.createElement("button");
+      container.appendChild(button);
+
+      expect(findFirstFocusableNode([container])).toBe(button);
+    });
+
+    it("finds first focusable element in deeply nested structure", () => {
+      const container = document.createElement("div");
+      const section = document.createElement("section");
+      const article = document.createElement("article");
+      const button = document.createElement("button");
+
+      container.appendChild(section);
+      section.appendChild(article);
+      article.appendChild(button);
+
+      expect(findFirstFocusableNode([container])).toBe(button);
+    });
+
+    it("finds first focusable element among multiple nested elements", () => {
+      const container = document.createElement("div");
+
+      // First nested structure
+      const div1 = document.createElement("div");
+      const span1 = document.createElement("span"); // not focusable
+      div1.appendChild(span1);
+
+      // Second nested structure
+      const div2 = document.createElement("div");
+      const button = document.createElement("button"); // first focusable
+      const input = document.createElement("input"); // also focusable but comes after
+      div2.appendChild(button);
+      div2.appendChild(input);
+
+      container.appendChild(div1);
+      container.appendChild(div2);
+
+      expect(findFirstFocusableNode([container])).toBe(button);
+    });
+  });
+
+  describe("shadow DOM support", () => {
+    it("finds focusable element in shadow DOM", () => {
+      // Skip if Shadow DOM is not supported
+      if (!HTMLElement.prototype.attachShadow) {
+        return;
+      }
+
+      const host = document.createElement("div");
+      const shadowRoot = host.attachShadow({ mode: "open" });
+      const button = document.createElement("button");
+      shadowRoot.appendChild(button);
+
+      expect(findFirstFocusableNode([host])).toBe(button);
+    });
+  });
+
+  describe("slot support", () => {
+    it("finds focusable element in slot assigned nodes", () => {
+      const slot = document.createElement("slot");
+      const button = document.createElement("button");
+
+      // Mock assignedNodes for testing
+      vi.spyOn(slot, 'assignedNodes').mockReturnValue([button]);
+
+      expect(findFirstFocusableNode([slot])).toBe(button);
+    });
+
+    it("handles empty slot", () => {
+      const slot = document.createElement("slot");
+
+      // Mock assignedNodes returning empty array
+      vi.spyOn(slot, 'assignedNodes').mockReturnValue([]);
+
+      expect(findFirstFocusableNode([slot])).toBeNull();
+    });
+  });
+
+  describe("reversed parameter", () => {
+    it("searches in reverse order when reversed=true", () => {
+      const button1 = document.createElement("button");
+      button1.id = "first";
+
+      const button2 = document.createElement("button");
+      button2.id = "second";
+
+      const button3 = document.createElement("button");
+      button3.id = "third";
+
+      // Normal order should find first button
+      expect(findFirstFocusableNode([button1, button2, button3], false)).toBe(button1);
+
+      // Reversed order should find last button
+      expect(findFirstFocusableNode([button1, button2, button3], true)).toBe(button3);
+    });
+
+    it("finds last focusable element in nested structure when reversed", () => {
+      const container1 = document.createElement("div");
+      const button1 = document.createElement("button");
+      button1.id = "first";
+      container1.appendChild(button1);
+
+      const container2 = document.createElement("div");
+      const button2 = document.createElement("button");
+      button2.id = "second";
+      container2.appendChild(button2);
+
+      // Reversed should find the last focusable element
+      expect(findFirstFocusableNode([container1, container2], true)).toBe(button2);
+    });
+  });
+
+  describe("complex scenarios", () => {
+    it("handles mixed focusable and non-focusable elements", () => {
+      const span = document.createElement("span"); // not focusable
+      const div = document.createElement("div"); // not focusable
+      const disabledButton = document.createElement("button");
+      disabledButton.disabled = true; // not focusable
+      const enabledButton = document.createElement("button"); // focusable!
+      const hiddenInput = document.createElement("input");
+      hiddenInput.type = "hidden"; // not focusable
+
+      expect(findFirstFocusableNode([span, div, disabledButton, enabledButton, hiddenInput])).toBe(enabledButton);
+    });
+
+    it("handles deeply nested structure with mixed content", () => {
+      const root = document.createElement("div");
+
+      // Level 1
+      const section1 = document.createElement("section");
+      const disabledInput = document.createElement("input");
+      disabledInput.disabled = true;
+      section1.appendChild(disabledInput);
+
+      // Level 2
+      const section2 = document.createElement("section");
+      const article = document.createElement("article");
+      const focusableButton = document.createElement("button");
+      article.appendChild(focusableButton);
+      section2.appendChild(article);
+
+      root.appendChild(section1);
+      root.appendChild(section2);
+
+      expect(findFirstFocusableNode([root])).toBe(focusableButton);
+    });
+  });
+
+  describe("edge cases", () => {
+    it("handles single text node", () => {
+      const textNode = document.createTextNode("text");
+      expect(findFirstFocusableNode([textNode])).toBeNull();
+    });
+
+    it("handles mixed node types", () => {
+      const textNode = document.createTextNode("text");
+      const commentNode = document.createComment("comment");
+      const button = document.createElement("button");
+
+      expect(findFirstFocusableNode([textNode, commentNode, button])).toBe(button);
+    });
+
+    it("handles elements with conflicting attributes", () => {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.disabled = false; // property says enabled
+      input.setAttribute("disabled", ""); // attribute says disabled
+
+      // Based on shouldFocus logic, this should be non-focusable due to attribute
+      const button = document.createElement("button");
+
+      expect(findFirstFocusableNode([input, button])).toBe(button);
+    });
   });
 });

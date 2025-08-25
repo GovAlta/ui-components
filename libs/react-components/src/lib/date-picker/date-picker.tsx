@@ -4,6 +4,7 @@ import {
   GoabDatePickerOnChangeDetail,
   Margins,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -27,7 +28,7 @@ declare module "react" {
   }
 }
 
-export interface GoabDatePickerProps extends Margins {
+export interface GoabDatePickerProps extends Margins, DataGridProps {
   name?: string;
   value?: Date | string | undefined;
   error?: boolean;
@@ -43,22 +44,23 @@ export interface GoabDatePickerProps extends Margins {
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
-export function GoabDatePicker({
-  name,
-  value,
-  error,
-  min,
-  max,
-  testId,
-  disabled,
-  type,
-  mt,
-  mr,
-  mb,
-  ml,
-  relative,
-  onChange,
-}: GoabDatePickerProps): JSX.Element {
+export function GoabDatePicker(props: GoabDatePickerProps): JSX.Element {
+  const [dataGridProps, {
+    name,
+    value,
+    error,
+    min,
+    max,
+    testId,
+    disabled,
+    type,
+    mt,
+    mr,
+    mb,
+    ml,
+    relative,
+    onChange,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -108,6 +110,7 @@ export function GoabDatePicker({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
       relative={relative ? "true" : undefined}
     />
   );
