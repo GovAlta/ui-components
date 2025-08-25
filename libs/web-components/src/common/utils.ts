@@ -386,3 +386,110 @@ export function getLocalDateValues(input: string | Date): {
 
   return null;
 }
+
+/**
+ * Check if a node is focusable
+ * @param node
+ * @return boolean
+ */
+export function isFocusable(node: Node): boolean {
+  const element = node as HTMLElement;
+
+  // 1 = element_node (div, span, input, a, ...)
+  if (element.nodeType !== 1) return false;
+
+  // Skip elements with data-ignore-focus attribute
+  if (element.getAttribute?.("data-ignore-focus")) return false;
+
+  const isTabbable =
+    element.tabIndex > 0 ||
+    (element.tabIndex === 0 && element.getAttribute("tabindex") !== null);
+  if (isTabbable) return true;
+
+  if (("disabled" in element && element.disabled) || element?.getAttribute("disabled")) return false;
+
+  // Allow elements with data-should-focus to be focusable even with tabindex=-1
+  if (element.getAttribute?.("data-should-focus")) return true;
+
+  if (element.tabIndex < 0 || element.getAttribute?.("tabindex") === "-1")
+    return false;
+
+  switch (element.nodeName) {
+    case "A": {
+      const el = element as HTMLLinkElement;
+      if (el.href && el.rel !== "ignore") {
+        return true;
+      }
+      break;
+    }
+    case "INPUT": {
+      const el = element as HTMLInputElement;
+      if (el.type !== "hidden" && el.type !== "file") {
+        return true;
+      }
+      break;
+    }
+    case "BUTTON":
+    case "SELECT":
+    case "TEXTAREA":
+      return true;
+  }
+
+  return false;
+}
+
+/**
+ * return the first focusable element of nodes list (including each node's shadow/slot)
+ * @param nodes
+ * @param reversed
+ */
+export function findFirstFocusableNode(
+  nodes: NodeList | Node[],
+  reversed = false,
+): Node | null {
+  let focusableNode = null;
+
+  const nodeList = reversed ? [...nodes].reverse() : nodes;
+  for (const node of nodeList) {
+    // Check shadow DOM first before considering the host element focusable
+    if (node instanceof HTMLElement && node.shadowRoot) {
+      focusableNode = findFirstNodeOfShadowDOM(node, reversed);
+      if (focusableNode) break;
+    }
+
+    if (node.hasChildNodes()) {
+      focusableNode = findFirstFocusableNode(Array.from(node.childNodes), reversed);
+      if (focusableNode) break;
+    }
+
+    // Check slot content
+    focusableNode = findFirstNodeOfSlot(node, reversed);
+    if (focusableNode) break;
+
+    // Finally, check if the node itself is focusable (but only if no focusable content was found inside)
+    if (isFocusable(node)) {
+      focusableNode = node;
+      break;
+    }
+  }
+
+  return focusableNode;
+}
+
+function findFirstNodeOfSlot(
+  node: Node,
+  reversed: boolean,
+): Node | null {
+  if (!(node instanceof HTMLSlotElement)) return null;
+  return findFirstFocusableNode([...node.assignedNodes()], reversed);
+}
+
+function findFirstNodeOfShadowDOM(
+  node: Node,
+  reversed: boolean,
+): Node | null {
+  if (!(node instanceof HTMLElement)) return null;
+  return findFirstFocusableNode([...(node.shadowRoot?.childNodes || [])], reversed);
+}
+
+

@@ -4,10 +4,11 @@ import {
   GoabIconSize,
   GoabIconTheme,
   GoabIconType,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
@@ -34,7 +35,7 @@ declare module "react" {
   }
 }
 
-export interface GoabIconProps extends Margins {
+export interface GoabIconProps extends Margins, DataAttributes {
   type: GoabIconType | GoabIconOverridesType;
   size?: GoabIconSize;
   theme?: GoabIconTheme;
@@ -59,37 +60,17 @@ interface WCProps extends Margins {
 }
 
 export function GoabIcon({
-  type,
-  theme,
-  size,
-  inverted, // TODO: change to boolean only
-  fillColor,
-  opacity,
-  title,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
+  inverted,
+  ...rest
 }: GoabIconProps): JSX.Element {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
     <goa-icon
-      type={type}
-      theme={theme}
-      size={size}
       inverted={
         typeof inverted === "boolean" ? (inverted ? "true" : undefined) : inverted
       }
-      fillcolor={fillColor}
-      opacity={opacity}
-      title={title}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
+      {..._props}
     />
   );
 }

@@ -6,8 +6,9 @@
  * It also includes TypeScript interfaces for improved type checking and development experience.
  */
 
-import { GoabButtonType, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import { DataAttributes, GoabButtonType, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
+import { transformProps, kebab } from "../common/extract-props";
 
 /**
  * Props definition for the `goab-menu-button` Web Component.
@@ -53,7 +54,7 @@ declare module "react" {
  * @property {Function} [onAction] - Callback function invoked when an action event is emitted by the component.
  * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
  */
-export interface GoabMenuButtonProps {
+export interface GoabMenuButtonProps extends DataAttributes {
   text: string;
   type?: GoabButtonType;
   maxWidth?: string;
@@ -87,15 +88,18 @@ export interface GoabMenuButtonProps {
  * ```
  */
 export function GoabMenuButton({
-  text,
   type = "primary",
-  leadingIcon,
-  maxWidth,
   testId,
   onAction,
   children,
+  ...rest
 }: GoabMenuButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(
+    { type, testid: testId, ...rest },
+    kebab
+  );
 
   useEffect(() => {
     if (!el.current) {
@@ -109,7 +113,7 @@ export function GoabMenuButton({
     // Event listener for the "_action" event emitted by the Web Component.
     const listener = (e: Event) => {
       const detail = (e as CustomEvent).detail as GoabMenuButtonOnActionDetail;
-      onAction(detail);
+      onAction?.(detail);
     };
 
     current.addEventListener("_action", listener);
@@ -119,7 +123,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon} max-width={maxWidth}>
+    <goa-menu-button {..._props} ref={el}>
       {children}
     </goa-menu-button>
   );

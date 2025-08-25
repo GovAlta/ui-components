@@ -3,11 +3,11 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 import type {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   open?: string;
   headingsize?: GoabAccordionHeadingSize;
   heading: string;
@@ -22,12 +22,15 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-accordion": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-accordion": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
-export interface GoabAccordionProps extends Margins {
+export interface GoabAccordionProps extends Margins, DataAttributes {
   open?: boolean;
   headingSize?: GoabAccordionHeadingSize;
   secondaryText?: string;
@@ -42,28 +45,21 @@ export interface GoabAccordionProps extends Margins {
 
 export function GoabAccordion({
   open,
-  heading,
-  headingSize,
-  secondaryText,
-  headingContent,
-  iconPosition,
-  maxWidth,
-  testId,
   onChange,
+  headingContent,
   children,
-  mt,
-  mr,
-  mb,
-  ml,
+  ...rest
 }: GoabAccordionProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     const element = ref.current;
     if (element && onChange) {
       const handler = (event: Event) => {
         const customEvent = event as CustomEvent;
-        onChange(customEvent.detail.open);
+        onChange?.(customEvent.detail.open);
       };
       element.addEventListener("_change", handler);
       return () => {
@@ -71,20 +67,12 @@ export function GoabAccordion({
       };
     }
   }, [onChange]);
+
   return (
     <goa-accordion
       ref={ref}
       open={open ? "true" : undefined}
-      headingsize={headingSize}
-      heading={heading}
-      secondarytext={secondaryText}
-      iconposition={iconPosition}
-      maxwidth={maxWidth}
-      testid={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      {..._props}
     >
       {headingContent && <div slot="headingcontent">{headingContent}</div>}
       {children}

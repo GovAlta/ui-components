@@ -1,5 +1,6 @@
-import { Margins } from "@abgov/ui-components-common";
+import { Margins, DataAttributes } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   heading: string;
@@ -18,7 +19,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabDetailsProps extends Margins {
+export interface GoabDetailsProps extends Margins, DataAttributes {
   heading: string;
   open?: boolean;
   maxWidth?: string;
@@ -26,19 +27,19 @@ export interface GoabDetailsProps extends Margins {
   children: ReactNode;
 }
 
-export function GoabDetails(props: GoabDetailsProps) {
+export function GoabDetails({
+  open,
+  children,
+  ...rest
+}: GoabDetailsProps) {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
     <goa-details
-      heading={props.heading}
-      open={props.open ? "true" : undefined}
-      maxwidth={props.maxWidth}
-      testid={props.testId}
-      mt={props.mt}
-      mr={props.mr}
-      mb={props.mb}
-      ml={props.ml}
+      open={open ? "true" : undefined}
+      {..._props}
     >
-      {props.children}
+      {children}
     </goa-details>
   );
 }

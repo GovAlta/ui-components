@@ -19,6 +19,7 @@ export * from "./components/checkbox-list/CheckboxList.svelte";
 export * from "./components/chip/Chip.svelte";
 export * from "./components/circular-progress/CircularProgress.svelte";
 export * from "./components/container/Container.svelte";
+export * from "./components/data-grid/DataGrid.svelte";
 export * from "./components/date-picker/DatePicker.svelte";
 export * from "./components/details/Details.svelte";
 export * from "./components/divider/Divider.svelte";

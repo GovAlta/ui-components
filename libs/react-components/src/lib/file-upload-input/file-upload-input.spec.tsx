@@ -32,4 +32,15 @@ describe("FileUploadInput", () => {
 
     expect(onSelect).toBeCalled();
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <FileUploadInput
+        onSelectFile={noop}
+        data-grid="cell"
+      />
+    );
+    const el = baseElement.querySelector("goa-file-upload-input");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

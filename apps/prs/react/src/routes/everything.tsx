@@ -19,6 +19,7 @@ import {
   GoabCircularProgress,
   GoabOneColumnLayout,
   GoabContainer,
+  GoabDataGrid,
   GoabDatePicker,
   GoabDetails,
   GoabDivider,
@@ -1516,6 +1517,44 @@ export function EverythingRoute(): JSX.Element {
             Page: {paginationState.page} /{" "}
             {Math.ceil(paginationState.total / paginationState.perPage)}
           </GoabText>
+        </GoabContainer>
+        <GoabContainer type="interactive" padding="relaxed">
+          <GoabText tag="h3" size="heading-s">
+            Data Grid (Keyboard Navigation)
+          </GoabText>
+          <GoabText tag="p" size="body-s" mb="m">
+            The data grid wraps a table to enable keyboard navigation. Use arrow keys to move between cells.
+          </GoabText>
+          <GoabDataGrid keyboardNav="table">
+            <GoabTable width="100%">
+              <table>
+                <thead>
+                  <tr data-grid="row">
+                    <th data-grid="cell">Name</th>
+                    <th data-grid="cell">Created</th>
+                    <th data-grid="cell">Status</th>
+                    <th data-grid="cell">Progress</th>
+                    <th data-grid="cell">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {TABLE_DATA.map((row) => (
+                    <tr key={row.name} data-grid="row">
+                      <td data-grid="cell">{row.name}</td>
+                      <td data-grid="cell">{row.created}</td>
+                      <td data-grid="cell">
+                        <GoabBadge type={row.status === "Active" ? "success" : "important"} content={row.status} />
+                      </td>
+                      <td data-grid="cell">{row.progress}%</td>
+                      <td data-grid="cell">
+                        <GoabButton type="tertiary" size="compact">View</GoabButton>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </GoabTable>
+          </GoabDataGrid>
         </GoabContainer>
         <GoabContainer type="interactive" padding="relaxed">
           <GoabText tag="h3" size="heading-s">

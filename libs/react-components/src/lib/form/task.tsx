@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
+import { DataAttributes, GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   status?: GoabPublicFormTaskStatus;
@@ -14,13 +15,22 @@ declare module "react" {
   }
 }
 
-type GoabPublicFormTaskProps = {
+interface GoabPublicFormTaskProps extends DataAttributes {
   status?: GoabPublicFormTaskStatus;
   children: ReactNode;
-};
+}
 
-export function GoabPublicFormTask({ status = "cannot-start", children }: GoabPublicFormTaskProps) {
-  return <goa-public-form-task status={status}>{children}</goa-public-form-task>;
+export function GoabPublicFormTask({
+  status = "cannot-start",
+  children,
+  ...rest
+}: GoabPublicFormTaskProps) {
+  const _props = transformProps<WCProps>(
+    { status, ...rest },
+    lowercase
+  );
+
+  return <goa-public-form-task {..._props}>{children}</goa-public-form-task>;
 }
 
 export default GoabPublicFormTask;

@@ -3,12 +3,12 @@ import {
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
   GoabTextAreaOnBlurDetail,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.Ref<HTMLTextAreaElement>;
   name: string;
   value?: string;
   placeholder?: string;
@@ -29,12 +29,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-textarea": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-textarea": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.Ref<HTMLTextAreaElement>;
+      };
     }
   }
 }
 
-export interface GoabTextAreaProps extends Margins {
+export interface GoabTextAreaProps extends Margins, DataAttributes {
   name: string;
   value?: string;
   id?: string;
@@ -57,29 +59,17 @@ export interface GoabTextAreaProps extends Margins {
 }
 
 export function GoabTextArea({
-  name,
-  value,
-  placeholder,
-  rows,
   readOnly,
   disabled,
-  countBy,
-  maxCount,
-  width,
-  maxWidth,
-  testId,
   error,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  autoComplete,
   onChange,
   onKeyPress,
   onBlur,
+  ...rest
 }: GoabTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     if (!el.current) {
@@ -116,24 +106,10 @@ export function GoabTextArea({
   return (
     <goa-textarea
       ref={el}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      rows={rows}
       readOnly={readOnly ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
-      countby={countBy}
-      maxcount={maxCount}
-      width={width}
-      maxwidth={maxWidth}
       error={error ? "true" : undefined}
-      testid={testId}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      autocomplete={autoComplete}
+      {..._props}
     ></goa-textarea>
   );
 }

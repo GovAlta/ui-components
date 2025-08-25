@@ -9,15 +9,15 @@ import {
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
   GoabInputType,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 export interface IgnoreMe {
   ignore: string;
 }
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLInputElement | null>;
   type?: GoabInputType;
   name: string;
   value?: string;
@@ -54,12 +54,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement>;
+      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
+        ref?: React.RefObject<HTMLInputElement | null>;
+      };
     }
   }
 }
 
-interface BaseProps extends Margins {
+interface BaseProps extends Margins, DataAttributes {
   // required
   name: string;
 
@@ -128,45 +130,25 @@ interface GoabDateInputProps extends BaseProps {
 }
 
 export function GoabInput({
-  id,
-  debounce,
-  name,
-  type,
-  autoCapitalize,
-  autoComplete,
-  leadingIcon,
-  trailingIcon,
   variant = "goa",
+  textAlign = "left",
   focused,
   disabled,
   readonly,
-  value,
-  placeholder,
   error,
-  width,
-  testId,
-  min,
-  max,
-  step,
-  prefix,
-  suffix,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
   leadingContent,
   trailingContent,
-  maxLength,
-  trailingIconAriaLabel,
-  textAlign = "left",
   onTrailingIconClick,
   onChange,
   onFocus,
   onBlur,
   onKeyPress,
+  ...rest
 }: GoabInputProps & { type?: GoabInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
+  const _props = transformProps<WCProps>({ variant, textalign: textAlign, ...rest }, lowercase);
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -213,37 +195,12 @@ export function GoabInput({
   return (
     <goa-input
       ref={ref}
-      debounce={debounce}
+      {..._props}
       focused={focused ? "true" : undefined}
-      type={type}
-      name={name}
-      autocapitalize={autoCapitalize}
-      autocomplete={autoComplete}
-      id={id}
-      leadingicon={leadingIcon}
-      trailingicon={trailingIcon}
-      variant={variant}
       disabled={disabled ? "true" : undefined}
       readonly={readonly ? "true" : undefined}
-      placeholder={placeholder}
       error={error ? "true" : undefined}
-      testid={testId}
-      value={value}
-      width={width}
-      min={min}
-      max={max}
-      step={step}
-      maxlength={maxLength}
-      prefix={prefix}
-      suffix={suffix}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
-      trailingiconarialabel={trailingIconAriaLabel}
-      textalign={textAlign}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}

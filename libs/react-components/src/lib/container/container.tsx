@@ -3,9 +3,10 @@ import {
   GoabContainerPadding,
   GoabContainerType,
   GoabContainerWidth,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type?: GoabContainerType;
@@ -27,7 +28,7 @@ declare module "react" {
   }
 }
 
-export interface GoabContainerProps extends Margins {
+export interface GoabContainerProps extends Margins, DataAttributes {
   accent?: GoabContainerAccent;
   type?: GoabContainerType;
   heading?: ReactNode;
@@ -43,39 +44,18 @@ export interface GoabContainerProps extends Margins {
 }
 
 export function GoabContainer({
-  accent,
   heading,
   title,
-  padding,
-  children,
   actions,
-  type,
-  width,
-  maxWidth,
-  minHeight,
-  maxHeight,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
+  children,
+  ...rest
 }: GoabContainerProps): JSX.Element {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   const headingContent = heading || title;
+
   return (
-    <goa-container
-      type={type}
-      padding={padding}
-      accent={accent}
-      width={width}
-      maxwidth={maxWidth}
-      minheight={minHeight}
-      maxheight={maxHeight}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-    >
+    <goa-container {..._props}>
       {headingContent && <div slot="title">{headingContent}</div>}
       {children}
       {actions && <div slot="actions">{actions}</div>}

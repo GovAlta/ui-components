@@ -1,5 +1,6 @@
-import { GoabBadgeType, Margins, GoabIconType } from "@abgov/ui-components-common";
+import { DataAttributes, GoabBadgeType, GoabIconType, Margins } from "@abgov/ui-components-common";
 import type { JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type: GoabBadgeType;
@@ -19,7 +20,7 @@ declare module "react" {
   }
 }
 
-export interface GoabBadgeProps extends Margins {
+export interface GoabBadgeProps extends Margins, DataAttributes {
   type: GoabBadgeType;
   icon?: boolean;
   content?: string;
@@ -47,30 +48,18 @@ function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false"
 }
 
 export function GoabBadge({
-  type,
-  content,
   icon,
-  testId,
-  mt,
-  mr,
-  mb,
-  ml,
-  ariaLabel,
   iconType,
+  ...rest
 }: GoabBadgeProps): JSX.Element {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
     <goa-badge
-      type={type}
-      content={content}
       // Handle icon display priority: explicit icon prop takes precedence over iconType
       icon={getIconValue(icon, iconType)}
-      testid={testId}
-      arialabel={ariaLabel}
       icontype={iconType}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      {..._props}
     />
   );
 }

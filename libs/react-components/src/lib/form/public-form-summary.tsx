@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
-  ref?: React.RefObject<HTMLElement | null>;
   heading?: string;
 }
 
@@ -14,21 +14,21 @@ declare module "react" {
   }
 }
 
-interface GoabPublicFormSummaryProps {
+interface GoabPublicFormSummaryProps extends DataAttributes {
   heading?: string;
 }
 
 export function GoabPublicFormSummary({
   heading = "",
+  ...rest
 }: GoabPublicFormSummaryProps) {
-  const ref = useRef<HTMLElement>(null);
+  const _props = transformProps<WCProps>(
+    { heading, ...rest },
+    lowercase
+  );
 
   return (
-    <goa-public-form-summary
-      ref={ref}
-      heading={heading}
-    >
-    </goa-public-form-summary>
+    <goa-public-form-summary {..._props} />
   );
 }
 

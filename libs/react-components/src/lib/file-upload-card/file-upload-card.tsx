@@ -1,11 +1,12 @@
 import {
+  DataAttributes,
   GoabFileUploadOnCancelDetail,
   GoabFileUploadOnDeleteDetail,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement | null>;
   filename: string;
   size: number;
   type?: string;
@@ -18,13 +19,15 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-card": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-file-upload-card": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
 /* eslint-disable-next-line */
-export interface GoabFileUploadCardProps {
+export interface GoabFileUploadCardProps extends DataAttributes {
   filename: string;
   size: number;
   type?: string;
@@ -36,16 +39,14 @@ export interface GoabFileUploadCardProps {
 }
 
 export function GoabFileUploadCard({
-  filename,
-  size,
-  type,
-  progress,
-  error,
-  testId,
   onDelete,
   onCancel,
+  filename,
+  ...rest
 }: GoabFileUploadCardProps) {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>({ filename, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) return;
@@ -59,18 +60,10 @@ export function GoabFileUploadCard({
       current.removeEventListener("_delete", deleteHandler);
       current.removeEventListener("_cancel", cancelHandler);
     };
-  }, [el, onDelete, onCancel]);
+  }, [el, onDelete, onCancel, filename]);
 
   return (
-    <goa-file-upload-card
-      ref={el}
-      filename={filename}
-      size={size}
-      type={type}
-      progress={progress}
-      error={error}
-      testid={testId}
-    />
+    <goa-file-upload-card ref={el} {..._props} />
   );
 }
 

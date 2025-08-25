@@ -4,8 +4,9 @@ import {
   GoabButtonType,
   GoabButtonVariant,
   GoabIconType,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type?: GoabButtonType;
@@ -19,19 +20,20 @@ interface WCProps extends Margins {
   action?: string;
   actionArgs?: string;
   actionArg?: string;
-  ref: React.RefObject<HTMLElement | null>;
 }
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-button": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-button": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabButtonProps extends Margins {
+export interface GoabButtonProps extends Margins, DataAttributes {
   type?: GoabButtonType;
   size?: GoabButtonSize;
   variant?: GoabButtonVariant;
@@ -49,24 +51,15 @@ export interface GoabButtonProps extends Margins {
 
 export function GoabButton({
   disabled,
-  type,
-  size,
-  variant,
-  leadingIcon,
-  trailingIcon,
-  width,
-  testId,
-  children,
   onClick,
-  mt,
-  mr,
-  mb,
-  ml,
-  action,
   actionArgs,
   actionArg,
+  children,
+  ...rest
 }: GoabButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     if (!el.current) {
@@ -77,7 +70,7 @@ export function GoabButton({
     }
     const current = el.current;
     const listener = () => {
-      onClick();
+      onClick?.();
     };
 
     current.addEventListener("_click", listener);
@@ -89,21 +82,10 @@ export function GoabButton({
   return (
     <goa-button
       ref={el}
-      type={type}
-      size={size}
-      variant={variant}
       disabled={disabled ? "true" : undefined}
-      leadingicon={leadingIcon}
-      trailingicon={trailingIcon}
-      width={width}
-      testid={testId}
-      action={action}
       action-arg={actionArg}
       action-args={JSON.stringify(actionArgs)}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      {..._props}
     >
       {children}
     </goa-button>

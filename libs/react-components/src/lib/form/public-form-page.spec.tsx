@@ -108,4 +108,16 @@ describe("GoabPublicFormPage", () => {
 
     expect(handleContinue).not.toHaveBeenCalled();
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPublicFormPage
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabPublicFormPage>
+    );
+    const el = baseElement.querySelector("goa-public-form-page");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

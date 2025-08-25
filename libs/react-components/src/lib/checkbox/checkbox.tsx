@@ -1,17 +1,19 @@
-import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { DataAttributes, GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   id?: string;
   name: string;
   checked?: string;
@@ -29,7 +31,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoabCheckboxProps extends Margins {
+export interface GoabCheckboxProps extends Margins, DataAttributes {
   id?: string;
   name: string;
   checked?: boolean;
@@ -52,28 +54,22 @@ export interface GoabCheckboxProps extends Margins {
 export type Props = GoabCheckboxProps;
 
 export function GoabCheckbox({
-  id,
-  name,
-  testId,
   error,
-  disabled,
   checked,
   indeterminate,
+  disabled,
   value,
-  text,
   description,
   reveal,
-  revealAriaLabel,
-  maxWidth,
-  children,
   onChange,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
+  name,
+  children,
+  ...rest
 }: GoabCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -93,24 +89,15 @@ export function GoabCheckbox({
 
   return (
     <goa-checkbox
-      testid={testId}
       ref={el}
-      id={id}
+      {..._props}
       name={name}
       error={error ? "true" : undefined}
       checked={checked ? "true" : undefined}
       indeterminate={indeterminate ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
-      text={text}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
-      arialabel={ariaLabel}
-      revealarialabel={revealAriaLabel}
       description={typeof description === "string" ? description : undefined}
-      maxwidth={maxWidth}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
     >
       {children}
       {typeof description !== "string" && description && (

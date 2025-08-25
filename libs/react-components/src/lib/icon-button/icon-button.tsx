@@ -2,12 +2,12 @@ import {
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconType,
-  Margins,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX, ReactNode } from "react";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   icon: GoabIconType;
   size?: GoabIconSize;
   variant?: GoabIconButtonVariant;
@@ -24,12 +24,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-icon-button": WCProps & React.HTMLAttributes<HTMLButtonElement>;
+      "goa-icon-button": WCProps & React.HTMLAttributes<HTMLButtonElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabIconButtonProps extends Margins {
+export interface GoabIconButtonProps extends Margins, DataAttributes {
   icon: GoabIconType;
   size?: GoabIconSize;
   variant?: GoabIconButtonVariant;
@@ -45,24 +47,22 @@ export interface GoabIconButtonProps extends Margins {
 }
 
 export function GoabIconButton({
-  icon,
-  disabled,
   variant = "color",
-  onClick,
   size = "medium",
-  title,
-  ariaLabel,
-  testId,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-  action,
+  disabled,
+  onClick,
   actionArgs,
   actionArg,
+  children,
+  ...rest
 }: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(
+    { variant, size, ...rest },
+    lowercase
+  );
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -72,7 +72,7 @@ export function GoabIconButton({
     }
     const current = ref.current;
     const listener = () => {
-      onClick();
+      onClick?.();
     };
 
     current.addEventListener("_click", listener);
@@ -84,20 +84,10 @@ export function GoabIconButton({
   return (
     <goa-icon-button
       ref={ref}
-      icon={icon}
       disabled={disabled ? "true" : undefined}
-      variant={variant}
-      size={size}
-      title={title}
-      arialabel={ariaLabel}
-      action={action}
       action-arg={actionArg}
       action-args={JSON.stringify(actionArgs)}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
+      {..._props}
     >
       {children}
     </goa-icon-button>

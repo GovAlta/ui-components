@@ -1,4 +1,6 @@
 import { useEffect, useRef, type JSX } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   heading?: string;
@@ -6,7 +8,6 @@ interface WCProps {
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
   hasmenuclickhandler?: string;
-  ref: React.RefObject<HTMLElement | null>;
   testid?: string;
 }
 
@@ -14,12 +15,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-app-header": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-app-header": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabAppHeaderProps {
+export interface GoabAppHeaderProps extends DataAttributes {
   heading?: string;
   url?: string;
   maxContentWidth?: string;
@@ -30,15 +33,13 @@ export interface GoabAppHeaderProps {
 }
 
 export function GoabAppHeader({
-  heading,
-  url,
-  maxContentWidth,
-  fullMenuBreakpoint,
-  testId,
-  children,
   onMenuClick,
+  children,
+  ...rest
 }: GoabAppHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     if (!el.current) {
@@ -49,7 +50,7 @@ export function GoabAppHeader({
     }
     const current = el.current;
     const listener = () => {
-      onMenuClick();
+      onMenuClick?.();
     };
     current.addEventListener("_menuClick", listener);
     return () => {
@@ -60,12 +61,8 @@ export function GoabAppHeader({
   return (
     <goa-app-header
       ref={el}
-      heading={heading}
-      url={url}
-      fullmenubreakpoint={fullMenuBreakpoint}
-      maxcontentwidth={maxContentWidth}
-      testid={testId}
       hasmenuclickhandler={onMenuClick ? "true" : "false"}
+      {..._props}
     >
       {children}
     </goa-app-header>

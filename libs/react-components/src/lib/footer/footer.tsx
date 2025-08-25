@@ -1,4 +1,6 @@
 import { ReactNode, type JSX } from "react";
+import { DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   maxcontentwidth?: string;
@@ -16,7 +18,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabAppFooterProps {
+export interface GoabAppFooterProps extends DataAttributes {
   maxContentWidth?: string;
   children?: ReactNode;
   testId?: string;
@@ -27,13 +29,13 @@ export interface GoabAppFooterProps {
 export type FooterProps = GoabAppFooterProps;
 
 export function GoabAppFooter({
-  maxContentWidth,
   children,
-  testId,
-  url,
+  ...rest
 }: GoabAppFooterProps): JSX.Element {
+  const _props = transformProps<WCProps>(rest, lowercase);
+
   return (
-    <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId} url={url}>
+    <goa-app-footer {..._props}>
       {children}
     </goa-app-footer>
   );

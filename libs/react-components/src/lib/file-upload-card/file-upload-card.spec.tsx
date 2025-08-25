@@ -105,4 +105,16 @@ describe("FileUploadCard", () => {
     expect(el?.getAttribute("testid")).toBeNull();
   });
 
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <FileUploadCard
+        filename="test.pdf"
+        size={1000}
+        data-grid="cell"
+      />
+    );
+    const el = container.querySelector("goa-file-upload-card");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
+
 });

@@ -1,8 +1,8 @@
 import { useEffect, useRef, type JSX } from "react";
-import { GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { DataAttributes, GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   name?: string;
   value?: string;
   min?: string;
@@ -14,11 +14,13 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-calendar": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-calendar": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
-export interface GoabCalendarProps extends Margins {
+export interface GoabCalendarProps extends Margins, DataAttributes {
   name?: string;
   value?: string;
   min?: string;
@@ -28,18 +30,15 @@ export interface GoabCalendarProps extends Margins {
 }
 
 export function GoabCalendar({
-  name,
-  value,
   min,
   max,
-  testId,
-  mt,
-  mr,
-  mb,
-  ml,
   onChange,
+  name,
+  ...rest
 }: GoabCalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
+  const _props = transformProps<WCProps>(rest, lowercase);
 
   useEffect(() => {
     if (!ref.current) {
@@ -63,14 +62,9 @@ export function GoabCalendar({
     <goa-calendar
       ref={ref}
       name={name}
-      value={value}
       min={min || undefined}
       max={max || undefined}
-      testid={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      {..._props}
     />
   );
 }
