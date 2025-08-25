@@ -5,6 +5,7 @@ import type {
   GoabAccordionIconPosition,
   Margins,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -27,7 +28,7 @@ declare module "react" {
   }
 }
 
-export interface GoabAccordionProps extends Margins {
+export interface GoabAccordionProps extends Margins, DataGridProps {
   open?: boolean;
   headingSize?: GoabAccordionHeadingSize;
   secondaryText?: string;
@@ -40,23 +41,23 @@ export interface GoabAccordionProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoabAccordion({
-  open,
-  heading,
-  headingSize,
-  secondaryText,
-  headingContent,
-  iconPosition,
-  maxWidth,
-  testId,
-  onChange,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabAccordionProps): JSX.Element {
+export function GoabAccordion(props: GoabAccordionProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
+  const [dataGridProps, {
+    open,
+    heading,
+    headingSize,
+    secondaryText,
+    headingContent,
+    iconPosition,
+    maxWidth,
+    testId,
+    onChange,
+    children,
+    mt,
+    mr,
+    mb,
+    ml}] = useDataGridProps(props);
 
   useEffect(() => {
     const element = ref.current;
@@ -85,6 +86,7 @@ export function GoabAccordion({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {headingContent && <div slot="headingcontent">{headingContent}</div>}
       {children}

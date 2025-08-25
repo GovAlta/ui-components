@@ -11,6 +11,7 @@ import {
   GoabInputType,
   Margins,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 export interface IgnoreMe {
   ignore: string;
@@ -59,7 +60,7 @@ declare module "react" {
   }
 }
 
-interface BaseProps extends Margins {
+interface BaseProps extends Margins, DataGridProps {
   // required
   name: string;
 
@@ -127,46 +128,48 @@ interface GoabDateInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<GoabDate>;
 }
 
-export function GoabInput({
-  id,
-  debounce,
-  name,
-  type,
-  autoCapitalize,
-  autoComplete,
-  leadingIcon,
-  trailingIcon,
-  variant = "goa",
-  focused,
-  disabled,
-  readonly,
-  value,
-  placeholder,
-  error,
-  width,
-  testId,
-  min,
-  max,
-  step,
-  prefix,
-  suffix,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  leadingContent,
-  trailingContent,
-  maxLength,
-  trailingIconAriaLabel,
-  textAlign = "left",
-  onTrailingIconClick,
-  onChange,
-  onFocus,
-  onBlur,
-  onKeyPress,
-}: GoabInputProps & { type?: GoabInputType }): JSX.Element {
+export function GoabInput(props: GoabInputProps & { type?: GoabInputType }): JSX.Element {
+  const [dataGridProps, {
+    id,
+    debounce,
+    name,
+    type,
+    autoCapitalize,
+    autoComplete,
+    leadingIcon,
+    trailingIcon,
+    variant = "goa",
+    focused,
+    disabled,
+    readonly,
+    value,
+    placeholder,
+    error,
+    width,
+    testId,
+    min,
+    max,
+    step,
+    prefix,
+    suffix,
+    ariaLabel,
+    mt,
+    mr,
+    mb,
+    ml,
+    leadingContent,
+    trailingContent,
+    maxLength,
+    trailingIconAriaLabel,
+    textAlign = "left",
+    onTrailingIconClick,
+    onChange,
+    onFocus,
+    onBlur,
+    onKeyPress,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -244,6 +247,7 @@ export function GoabInput({
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
       trailingiconarialabel={trailingIconAriaLabel}
       textalign={textAlign}
+      {...dataGridProps}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}

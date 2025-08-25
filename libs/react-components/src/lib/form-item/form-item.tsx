@@ -5,6 +5,7 @@ import {
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   label?: string;
@@ -28,7 +29,7 @@ declare module "react" {
   }
 }
 
-export interface GoabFormItemProps extends Margins {
+export interface GoabFormItemProps extends Margins, DataGridProps {
   label?: string;
   labelSize?: GoabFormItemLabelSize;
   requirement?: GoabFormItemRequirement;
@@ -48,23 +49,25 @@ export interface GoabFormItemProps extends Margins {
   id?: string;
 }
 
-export function GoabFormItem({
-  children,
-  helpText,
-  error,
-  requirement,
-  label,
-  labelSize,
-  maxWidth,
-  publicFormSummaryOrder,
-  name,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
-  id,
-}: GoabFormItemProps): JSX.Element {
+export function GoabFormItem(props: GoabFormItemProps): JSX.Element {
+  const [dataGridProps, {
+    children,
+    helpText,
+    error,
+    requirement,
+    label,
+    labelSize,
+    maxWidth,
+    publicFormSummaryOrder,
+    name,
+    mt,
+    mr,
+    mb,
+    ml,
+    testId,
+    id,
+  }] = useDataGridProps(props);
+
   return (
     <goa-form-item
       label={label}
@@ -81,6 +84,7 @@ export function GoabFormItem({
       ml={ml}
       testid={testId}
       id={id}
+      {...dataGridProps}
     >
       {error && typeof error !== "string" && <div slot="error">{error}</div>}
       {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}

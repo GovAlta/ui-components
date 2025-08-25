@@ -212,4 +212,17 @@ describe("GoabPublicSubform", () => {
     expect(baseElement.querySelectorAll("input")).toHaveLength(1);
     expect(baseElement.querySelectorAll("textarea")).toHaveLength(1);
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPublicSubform
+        name="test-subform"
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabPublicSubform>
+    );
+    const el = baseElement.querySelector("goa-public-subform");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

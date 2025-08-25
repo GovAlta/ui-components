@@ -5,6 +5,7 @@ import {
   Spacing,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 export interface WCProps extends Margins {
   gap?: Spacing;
@@ -23,7 +24,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabBlockProps extends Margins {
+export interface GoabBlockProps extends Margins, DataGridProps {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
@@ -32,18 +33,21 @@ export interface GoabBlockProps extends Margins {
 }
 
 export function GoabBlock(props: GoabBlockProps) {
+  const [dataGridProps, { gap, direction, alignment, mt, mr, mb, ml, testId, children}] = useDataGridProps(props);
+
   return (
     <goa-block
-      gap={props.gap}
-      direction={props.direction}
-      alignment={props.alignment}
-      mt={props.mt}
-      mr={props.mr}
-      mb={props.mb}
-      ml={props.ml}
-      testid={props.testId}
+      gap={gap}
+      direction={direction}
+      alignment={alignment}
+      mt={mt}
+      mr={mr}
+      mb={mb}
+      ml={ml}
+      testid={testId}
+      {...dataGridProps}
     >
-      {props.children}
+      {children}
     </goa-block>
   );
 }

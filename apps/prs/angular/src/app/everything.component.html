@@ -1007,6 +1007,40 @@
         </goab-text>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Data Grid (Keyboard Navigation)</goab-text>
+        <goab-text tag="p" size="body-s" mb="m">
+          The data grid wraps a table to enable keyboard navigation. Use arrow keys to move between cells.
+        </goab-text>
+        <goab-data-grid keyboardNav="table">
+          <goab-table width="100%">
+            <thead>
+              <tr data-grid="row">
+                <th data-grid="cell">Name</th>
+                <th data-grid="cell-1">Created</th>
+                <th data-grid="cell-2">Status</th>
+                <th data-grid="cell-3">Progress</th>
+                <th data-grid="cell-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of pageData; track row.name) {
+                <tr data-grid="row">
+                  <td data-grid="cell">{{ row.name }}</td>
+                  <td data-grid="cell-1">{{ row.created }}</td>
+                  <td data-grid="cell-2">
+                    <goab-badge [type]="row.status === 'Active' ? 'success' : 'important'" [content]="row.status"></goab-badge>
+                  </td>
+                  <td data-grid="cell-3">{{ row.progress }}%</td>
+                  <td data-grid="cell-4">
+                    <goab-button type="tertiary" size="compact">View</goab-button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </goab-table>
+        </goab-data-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Site chrome</goab-text>
         <goab-column-layout>
           <goab-microsite-header type="alpha" version="UAT" />

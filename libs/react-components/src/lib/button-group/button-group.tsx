@@ -5,6 +5,7 @@ import {
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   alignment: GoabButtonGroupAlignment;
@@ -21,23 +22,25 @@ declare module "react" {
   }
 }
 
-export interface GoabButtonGroupProps extends Margins {
+export interface GoabButtonGroupProps extends Margins, DataGridProps {
   alignment: GoabButtonGroupAlignment;
   gap?: GoabButtonGroupGap;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function GoabButtonGroup({
-  alignment,
-  gap,
-  testId,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabButtonGroupProps): JSX.Element {
+export function GoabButtonGroup(props: GoabButtonGroupProps): JSX.Element {
+  const [dataGridProps, {
+    alignment,
+    gap,
+    testId,
+    children,
+    mt,
+    mr,
+    mb,
+    ml
+  }] = useDataGridProps(props);
+
   return (
     <goa-button-group
       alignment={alignment}
@@ -47,6 +50,7 @@ export function GoabButtonGroup({
       mb={mb}
       ml={ml}
       testid={testId}
+      {...dataGridProps}
     >
       {children}
     </goa-button-group>

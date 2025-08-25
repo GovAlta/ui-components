@@ -4,6 +4,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -37,7 +38,7 @@ declare module "react" {
   }
 }
 
-export interface GoabDropdownProps extends Margins {
+export interface GoabDropdownProps extends Margins, DataGridProps {
   name?: string;
   value?: string[] | string;
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
@@ -76,6 +77,36 @@ function stringify(value: string | string[] | undefined): string {
 }
 
 export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
+  const [
+    dataGridProps,
+    {
+      name,
+      value,
+      onChange,
+      ariaLabel,
+      ariaLabelledBy,
+      id,
+      children,
+      disabled,
+      error,
+      filterable,
+      leadingIcon,
+      maxHeight,
+      multiselect,
+      native,
+      placeholder,
+      testId,
+      width,
+      maxWidth,
+      autoComplete,
+      relative,
+      mb,
+      ml,
+      mr,
+      mt,
+    },
+  ] = useDataGridProps(props);
+
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current) {
@@ -84,45 +115,46 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-      props.onChange?.(detail);
+      onChange?.(detail);
     };
-    if (props.onChange) {
+    if (onChange) {
       current.addEventListener("_change", handler);
     }
     return () => {
-      if (props.onChange) {
+      if (onChange) {
         current.removeEventListener("_change", handler);
       }
     };
-  }, [el, props]);
+  }, [el, onChange]);
 
   return (
     <goa-dropdown
       ref={el}
-      name={props.name}
-      value={stringify(props.value)}
-      arialabel={props.ariaLabel}
-      arialabelledby={props.ariaLabelledBy}
-      disabled={props.disabled ? "true" : undefined}
-      error={props.error ? "true" : undefined}
-      filterable={props.filterable ? "true" : undefined}
-      leadingicon={props.leadingIcon}
-      maxheight={props.maxHeight}
-      mb={props.mb}
-      ml={props.ml}
-      mr={props.mr}
-      mt={props.mt}
-      multiselect={props.multiselect ? "true" : undefined}
-      native={props.native ? "true" : undefined}
-      placeholder={props.placeholder}
-      testid={props.testId}
-      width={props.width}
-      maxwidth={props.maxWidth}
-      relative={props.relative ? "true" : undefined}
-      autocomplete={props.autoComplete}
-      id={props.id}
+      name={name}
+      value={stringify(value)}
+      arialabel={ariaLabel}
+      arialabelledby={ariaLabelledBy}
+      disabled={disabled ? "true" : undefined}
+      error={error ? "true" : undefined}
+      filterable={filterable ? "true" : undefined}
+      leadingicon={leadingIcon}
+      maxheight={maxHeight}
+      mb={mb}
+      ml={ml}
+      mr={mr}
+      mt={mt}
+      multiselect={multiselect ? "true" : undefined}
+      native={native ? "true" : undefined}
+      placeholder={placeholder}
+      testid={testId}
+      width={width}
+      maxwidth={maxWidth}
+      relative={relative ? "true" : undefined}
+      autocomplete={autoComplete}
+      id={id}
+      {...dataGridProps}
     >
-      {props.children}
+      {children}
     </goa-dropdown>
   );
 }

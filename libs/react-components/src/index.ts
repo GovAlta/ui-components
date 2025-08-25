@@ -13,6 +13,7 @@ export * from "./lib/checkbox-list/checkbox-list";
 export * from "./lib/chip/chip";
 export * from "./lib/circular-progress/circular-progress";
 export * from "./lib/container/container";
+export * from "./lib/data-grid/data-grid";
 export * from "./lib/date-picker/date-picker";
 export * from "./lib/details/details";
 export * from "./lib/divider/divider";

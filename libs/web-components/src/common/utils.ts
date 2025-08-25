@@ -386,3 +386,114 @@ export function getLocalDateValues(input: string | Date): {
 
   return null;
 }
+
+/**
+ * Check if a specific HTML Element is focusable
+ * @param node
+ */
+export function shouldFocus(
+  node: Node
+): Node | null {
+  const element = node as HTMLElement;
+
+  // 1 = element_node (div, span, input, a, ...)
+  if (element.nodeType !== 1) return null;
+
+  // Skip elements with data-ignore-focus attribute
+  if (element.getAttribute?.("data-ignore-focus")) return null;
+
+  const isTabbable =
+    element.tabIndex > 0 ||
+    (element.tabIndex === 0 && element.getAttribute("tabindex") !== null);
+  if (isTabbable) return node;
+
+  if (("disabled" in element && element.disabled) || element?.getAttribute("disabled")) return null;
+
+  if (element.tabIndex < 0 || element.getAttribute?.("tabindex") === "-1")
+    return null;
+
+  let focusableNode = null;
+  switch (element.nodeName) {
+    case "A": {
+      const el = element as HTMLLinkElement;
+      if (el.href && el.rel !== "ignore") {
+        focusableNode = node;
+      }
+      break;
+    }
+    case "INPUT": {
+      const el = element as HTMLInputElement;
+      if (el.type !== "hidden" && el.type !== "file") {
+        focusableNode = node;
+      }
+      break;
+    }
+    case "BUTTON":
+    case "SELECT":
+    case "TEXTAREA":
+      focusableNode = node;
+      break;
+  }
+
+  return focusableNode;
+}
+
+/**
+ * return the first focusable element of nodes list (including each node's shadow/slot)
+ * @param nodes
+ * @param reversed: false as default, search from first to last, true: search from last to first
+ * @param isFocusable: a function to return if a node should be focused, if null passed, we will use shouldFocus() above
+ */
+export function findFirstFocusableNode(
+  nodes: NodeList | Node[],
+  reversed = false,
+  isFocusable: ((node: Node) => Node | null | "ignore-focus") | null = null,
+): Node | null {
+  let focusableNode = null;
+
+  const nodeList = reversed ? [...nodes].reverse() : nodes;
+  for (const node of nodeList) {
+    // Check shadow DOM first before considering the host element focusable
+    if (node instanceof HTMLElement && node.shadowRoot) {
+      focusableNode = findFirstNodeOfShadowDOM(node, reversed);
+      if (focusableNode) break;
+    }
+
+    if (node.hasChildNodes()) {
+      focusableNode = findFirstFocusableNode(Array.from(node.childNodes), reversed);
+      if (focusableNode) break;
+    }
+
+    // Check slot content
+    focusableNode = findFirstNodeOfSlot(node, reversed);
+    if (focusableNode) break;
+
+    // Finally, check if the node itself is focusable (but only if no focusable content was found inside)
+    const result = isFocusable ? isFocusable(node) : shouldFocus(node);
+    if (result === "ignore-focus") continue;
+    if (result) {
+      focusableNode = result;
+      break;
+    }
+  }
+
+  return focusableNode;
+}
+
+function findFirstNodeOfSlot(
+  node: Node,
+  reversed: boolean,
+): Node | null {
+  if (!(node instanceof HTMLSlotElement)) return null;
+  return findFirstFocusableNode([...node.assignedNodes()], reversed);
+}
+
+function findFirstNodeOfShadowDOM(
+  node: Node,
+  reversed: boolean,
+): Node | null {
+  if (!(node instanceof HTMLElement)) return null;
+  return findFirstFocusableNode([...(node.shadowRoot?.childNodes || [])], reversed);
+}
+
+

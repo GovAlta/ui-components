@@ -269,4 +269,18 @@ describe("RadioGroup", () => {
       expect(onChange).toBeCalled();
     });
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabRadioGroup
+        name="fruits"
+        onChange={noop}
+        data-grid="cell"
+      >
+        <GoabRadioItem name="fruits" value="apples">Apples</GoabRadioItem>
+      </GoabRadioGroup>
+    );
+    const el = baseElement.querySelector("goa-radio-group");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });
