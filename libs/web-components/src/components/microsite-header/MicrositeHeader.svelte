@@ -141,7 +141,6 @@
 }
 
   #container {
-    container: self / inline-size;
     background-color: var(--goa-microsite-header-color-bg);
   }
 
@@ -185,13 +184,13 @@
     margin: 0 auto;
   }
 
-  @container self (--not-mobile) {
+  @media (min-width: 624px) {
     .content-container {
       padding: var(--goa-microsite-header-padding-medium-screen);
     }
   }
 
-  @container self (--desktop) {
+  @media (min-width: 1024px) {
     .content-container {
       padding: var(--goa-microsite-header-padding-large-screen);
     }

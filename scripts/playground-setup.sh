@@ -5,11 +5,11 @@ if [ -d playground ]; then
   exit 1
 fi
 
-mkdir playground
+mkdir ./playground
 
 cp -r ./_templates/angular ./playground
-cp -r ./_templates/react ./playground
 cp -r ./_templates/web ./playground
+cp -r ./_templates/react ./playground
 
 mv ./playground/angular/project.json.template ./playground/angular/project.json
 mv ./playground/react/project.json.template ./playground/react/project.json
