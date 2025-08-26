@@ -4,7 +4,7 @@ import type { JSX } from "react";
 
 interface WCProps extends Margins {
   name?: string;
-  value?: string;
+  value?: string | number | boolean;
   description?: string | React.ReactNode;
   reveal?: React.ReactNode;
   revealarialabel?: string;

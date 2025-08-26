@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
 interface WCProps {
-  value: string;
+  value: string | number;
   label?: string;
   filter?: string;
   mount?: GoabDropdownItemMountType;
