@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/svelte';
 import GoACheckbox from './Checkbox.svelte'
-import { it, describe } from "vitest";
+import { vi, it, describe } from "vitest";
 
 const testid = "checkbox-test";
 

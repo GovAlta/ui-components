@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabCheckbox } from "./checkbox";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-import { fireEvent } from "@testing-library/dom";
+import { fireEvent, waitFor } from "@testing-library/dom";
 import { By } from "@angular/platform-browser";
 import { Spacing } from "@abgov/ui-components-common";
 
@@ -91,20 +91,16 @@ describe("GoabCheckbox", () => {
   });
 
   it("should handle onChange event", async () => {
+    const checkboxComponent = fixture.debugElement.query(By.directive(GoabCheckbox)).componentInstance;
+
     const onChange = jest.spyOn(component, "onChange");
+    const emitSpy = jest.spyOn(checkboxComponent.onChange, "emit");
 
-    const checkboxElement = fixture.debugElement.query(
-      By.css("goa-checkbox"),
-    ).nativeElement;
+    const mockEvent = new CustomEvent("_change", { detail: { name: "foo", value: "bar", checked: true } });
+    checkboxComponent._onChange(mockEvent);
 
-    fireEvent(
-      checkboxElement,
-      new CustomEvent("_change", {
-        detail: { name: "foo", value: "bar", checked: true },
-      }),
-    );
-
-    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith();
+    expect(emitSpy).toHaveBeenCalledWith({ name: "foo", value: "bar", checked: true });
   });
 });
 

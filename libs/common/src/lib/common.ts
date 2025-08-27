@@ -74,7 +74,6 @@ export type GoabCheckboxOnChangeDetail = {
   name?: string;
   value?: string | number | boolean;
   checked: boolean;
-  binding: "value" | "check";
 };
 
 export type GoabCalendarOnChangeDetail = {

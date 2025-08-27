@@ -143,7 +143,12 @@
     // @ts-expect-error
     value = detail.value;
     checked = detail.value ? "true" : "false";
-    dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
+    dispatch(
+      _checkboxRef,
+      "_change",
+      { name, checked, value: getValue(checked === "true") },
+      { bubbles: true },
+    );
   }
 
   function sendMountedMessage() {
@@ -160,10 +165,7 @@
   function onChange(e: Event) {
     // Manually set the focus back to the checkbox after the state change
     _checkboxRef.focus();
-    // An empty string is required as setting the second value to `null` caused the data to get
-    // out of sync with the events.
     const newCheckStatus = !isChecked;
-    const newValue = newCheckStatus ? `${_value || "checked"}` : "";
 
     // set the local state
     checked = fromBoolean(newCheckStatus);
@@ -171,7 +173,11 @@
     e.target?.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
-        detail: { name, checked: newCheckStatus, value: newValue },
+        detail: {
+          name,
+          checked: newCheckStatus,
+          value: getValue(newCheckStatus),
+        },
         bubbles: true,
       }),
     );
@@ -184,6 +190,12 @@
     if ($$slots.reveal && newCheckStatus && _revealSlotEl && revealarialabel !== "") {
       announceToScreenReader(revealarialabel);
     }
+  }
+
+  function getValue(checked: boolean): string {
+    // An empty string is required as setting the second value to `null` caused the data to get
+    // out of sync with the events.
+    return checked ? (value ? value : "checked") : "";
   }
 
   function onFocus() {
