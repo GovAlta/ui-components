@@ -80,12 +80,13 @@ export function GoabModal({
       ref={el}
       open={open ? "true" : undefined}
       closable={onClose ? "true" : "false"}
+      heading={typeof heading === "string" ? heading : undefined}
       maxwidth={maxWidth}
       transition={transition}
       calloutvariant={calloutVariant}
       testid={testId}
     >
-      {heading && <div slot="heading">{heading}</div>}
+      {heading && typeof heading !== "string" && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}
       {children}
     </goa-modal>
