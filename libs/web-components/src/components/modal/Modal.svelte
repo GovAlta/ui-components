@@ -138,9 +138,20 @@
     const el = _rootEl?.querySelector(selector);
     const children = el && getSlottedChildren(el);
 
+    // If no children at all, it's empty
+    if (!children || children.length === 0) {
+      return true;
+    }
+
+    // If the only child is an iframe, it's empty
+    if (children?.length === 1 && children[0].tagName === "IFRAME") {
+      return true;
+    }
+
     return children?.length === 1 // there should only be one child element
       && children[0].tagName === "DIV" // angular renders a <div>
       && children[0].getAttribute("slot") === slotName // the div is a slot
+      && children[0]?.textContent?.trim() === "" // the div is empty
   }
 
   function close(e: Event) {
