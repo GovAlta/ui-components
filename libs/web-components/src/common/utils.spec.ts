@@ -1,5 +1,5 @@
 import { waitFor } from "@testing-library/svelte";
-import { getTimestamp, performOnce, announceToScreenReader, typeValidator } from "./utils";
+import { getTimestamp, performOnce, announceToScreenReader, typeValidator, getLocalDateValues } from "./utils";
 import { it, describe, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe("getTimestamp", () => {
@@ -309,5 +309,43 @@ describe("typeValidator", () => {
     expect(consoleErrorSpy).toHaveBeenCalledWith(
       "[yellow] is an invalid color",
     );
+  });
+});
+
+describe("getLocalDateValues", () => {
+  it("extracts year, month, and day from a valid 'YYYY-MM-DD' string format", () => {
+    const result = getLocalDateValues("2023-08-29");
+    expect(result).toEqual({ year: 2023, month: 8, day: 29 });
+  });
+
+  it("extracts year, month, and day from a valid ISO 8601 date string", () => {
+    const result = getLocalDateValues("2023-08-29T15:20:30Z");
+    expect(result).toEqual({ year: 2023, month: 8, day: 29 });
+  });
+
+  it("extracts year, month, and day from a JS toISOString string value", () => {
+    const result = getLocalDateValues("2023-08-29T15:20:30.123Z");
+    expect(result).toEqual({ year: 2023, month: 8, day: 29 });
+  });
+
+  it("extracts year, month, and day from a Date object", () => {
+    const date = new Date(2023, 7, 29); // Months are 0-based in JS Date
+    const result = getLocalDateValues(date);
+    expect(result).toEqual({ year: 2023, month: 8, day: 29 });
+  });
+
+  it("returns null for an invalid string input", () => {
+    const result = getLocalDateValues("invalid-date");
+    expect(result).toBeNull();
+  });
+
+  it("returns null for a non-string, non-Date input", () => {
+    const result = getLocalDateValues(12345 as any);
+    expect(result).toBeNull();
+  });
+
+  it("returns null for a non-handled date string format", () => {
+    const result = getLocalDateValues("01-01-2023");
+    expect(result).toBeNull();
   });
 });
