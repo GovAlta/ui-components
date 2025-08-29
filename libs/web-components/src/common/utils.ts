@@ -333,3 +333,37 @@ export function announceToScreenReader(text: string, duration = 3000): void {
     document.body.removeChild(announcer);
   }, duration);
 }
+
+/**
+ * Helper function primarily for use within the datepicker component that extracts
+ * the year, month and day values from a date-formatted string or JS Date object.
+ */
+const YMDDateMatcher = /^(\d{4})-(\d{2})-(\d{2})/;
+export function getLocalDateValues(input: string | Date): {
+  year: number;
+  month: number;
+  day: number;
+} | null {
+  let matches: RegExpMatchArray | null;
+
+  if (typeof input === "string") {
+    matches = YMDDateMatcher.exec(input);
+    if (matches) {
+      return {
+        year: +matches[1],
+        month: +matches[2],
+        day: +matches[3],
+      }
+    }
+  }
+
+  if (typeof input === "object") {
+    return {
+      year: input.getFullYear(),
+      month: input.getMonth() + 1,
+      day: input.getDate(),
+    }
+  }
+
+  return null;
+}
