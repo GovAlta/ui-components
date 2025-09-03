@@ -85,3 +85,5 @@ export * from "./layouts/two-column-layout/TwoColumnLayout.svelte";
 export * from "./components/table/Table.svelte";
 export * from "./experimental/ExperimentalFormStepper.svelte";
 export * from "./experimental/ExperimentalFormStep.svelte";
+export * from "./components/work-side-menu/WorkSideMenu.svelte";
+export * from "./components/work-side-menu/WorkSideMenuItem.svelte";
