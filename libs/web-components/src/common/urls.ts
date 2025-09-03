@@ -61,3 +61,24 @@ export function getMatchedLink(links: Element[], windowUrl: URL | Location) {
 
   return null;
 }
+
+export function watchPathChanges(
+  observer: MutationObserver | null,
+  action: () => void,
+) {
+  let currentLocation = document.location.href;
+  observer = new MutationObserver((_mutationList) => {
+    if (isUrlMatch(document.location, currentLocation)) {
+      currentLocation = document.location.href;
+      action();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+export function stopWatchingPathChanges(observer: MutationObserver | null) {
+  if (observer) {
+    observer.disconnect();
+    observer = null;
+  }
+}
