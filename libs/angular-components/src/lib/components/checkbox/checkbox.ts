@@ -60,8 +60,8 @@ export class GoabCheckbox extends GoabControlValueAccessor {
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: string | number | boolean;
   @Input() ariaLabel?: string;
-  @Input() description!: string | TemplateRef<any>;
-  @Input() reveal?: TemplateRef<any>;
+  @Input() description!: string | TemplateRef<unknown>;
+  @Input() reveal?: TemplateRef<unknown>;
   @Input() revealArialLabel?: string;
   @Input() maxWidth?: string;
 
@@ -71,7 +71,7 @@ export class GoabCheckbox extends GoabControlValueAccessor {
     return typeof this.description === "string" ? this.description : "";
   }
 
-  getDescriptionAsTemplate(): TemplateRef<any> | null {
+  getDescriptionAsTemplate(): TemplateRef<unknown> | null {
     if (this.description) {
       return typeof this.description === "string" ? null : this.description;
     }
