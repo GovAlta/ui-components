@@ -3,6 +3,7 @@
 # Custom
 .nx
 playground
+.playgrounds
 NOTES.md
 /test-results
 __screenshots__

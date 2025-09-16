@@ -1,8 +1,12 @@
 # About
 
-This project contains the Government of Alberta UI components. This web component project supports multiple frontend frameworks, React and Angular. The project is designed to be used to help bring consistency to all Government of Alberta websites and web applications. It's also being designed to help ease the burden on designers and developers alike throughout the development process.
+This project contains the Government of Alberta UI components. This web component
+project supports multiple frontend frameworks, React and Angular. The project
+is designed to be used to help bring consistency to all Government of Alberta
+websites and web applications. It's also being designed to help ease the burden
+on designers and developers alike throughout the development process.
 
-## Development Environment
+## Development environment
 
 Create .env file from .env.example
 
@@ -10,51 +14,82 @@ Create .env file from .env.example
 if [ ! -f .env ]; then cp ./.env.example ./.env; fi
 ```
 
-### Playground Setup
+### Playground setup
 
-Run the `playground-setup.sh` file.
+Run the `pg-setup` file.
 
 ```bash
-./scripts/playground-setup.sh
+npm run pg:setup
 ```
 
-You can then test the playground apps at `localhost:4200` by running one of the following:
+You can then test the playground apps at `localhost:4200` by running:
 
+```bash
+# build the web components
+npm run dev:watch
+
+# add one of the following
+npm run serve:angular
+npm run serve:react
+npm run serve:web
 ```
-npm run dev:angular
-npm run dev:react
-npm run dev:web
+
+### Multiple playgrounds
+
+Since the playground is not included in the CVS it is common to have playground
+code that is out of sync with library code. To prevent having to continually
+comment/uncomment code the `script/pg-switch` script can automate this by switching
+between playgrounds that are specific to the branch.
+
+To switch between branches run the following
+
+```bash
+npm run pg:switch [branch-name]
 ```
+
+---
 
 ## Contribution Guidelines
 
-The design system team is using “Discussions” in the UI-components GitHub repository for managing the creation and assessment of new ideas for platform components, services, and capabilities.
+The design system team is using “Discussions” in the UI-components GitHub
+repository for managing the creation and assessment of new ideas for platform
+components, services, and capabilities.
 
 ### Ideas for enhancements, additions, or improvements
 
-Before creating a new discussion topic, check the discussion board for any existing ideas that may match yours. If there is a good match, please add your examples and comments to the existing discussion instead of creating a new one. If a related discussion topic already exists please join in the discussion!
+Before creating a new discussion topic, check the discussion board for any
+existing ideas that may match yours. If there is a good match, please add your
+examples and comments to the existing discussion instead of creating a new one.
+If a related discussion topic already exists please join in the discussion!
 
-Provide a high-level description, relevant links and examples of the idea to the discussion topic.
+Provide a high-level description, relevant links and examples of the idea to
+the discussion topic.
 
-Socialize your discussion topic with your colleague's to help refine and drive out contexts and use cases. If possible have those team members join the “discussion”.
+Socialize your discussion topic with your colleague's to help refine and drive
+out contexts and use cases. If possible have those team members join the “discussion”.
 
 “Vote” on the topics that you think are the highest priority.
 
 ### What happens to these "discussions?"
 
-Discussion topics that have the most votes and/or input from a number of different team members will be evaluated every two-week cycle by the Design System team. Those items that have the most number of votes and/or input will be evaluated
+Discussion topics that have the most votes and/or input from a number of different
+team members will be evaluated every two-week cycle by the Design System team.
+Those items that have the most number of votes and/or input will be evaluated.
 
 Opportunities are assessed against WiP limits.
 
-After an assessment, selected “discussions” will be transitioned to “issues” and assigned and prioritized in the different “project” views (Figma, Angular, React, etc.)
+After an assessment, selected “discussions” will be transitioned to “issues” and
+assigned and prioritized in the different “project” views
+(Figma, Angular, React, etc.)
 
 ## Documentation
 
-You can view the documentation [here](https://design.alberta.ca). This has all the info on how to implement our components, as well as how to get setup to contribute.
+You can view the [documentation](https://design.alberta.ca). This has all
+the info on how to implement our components, as well as how to get setup to contribute.
 
 ## How to Contribute
 
-You can view how you can contribute [here](contributing.md).
+You can view how you can [contribute](contributing.md).
 
 ### Library and Applications
 

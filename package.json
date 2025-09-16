@@ -17,7 +17,9 @@
     "test:headless:watch": "vitest --project=*-headless",
     "test:angular": "nx test angular-components",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
-    "validate": "npm run build && npm run lint && vitest --run"
+    "validate": "npm run build && npm run lint && vitest --run",
+    "pg:setup": "./scripts/pg-setup",
+    "pg:switch": "./scripts/pg-switch"
   },
   "private": true,
   "devDependencies": {
