@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+if [ -d playground ]; then
+  echo "Playground folder already exists!"
+  exit 1
+fi
+
+mkdir ./playground
+cp -r ./_templates/* ./playground
