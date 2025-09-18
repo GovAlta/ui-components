@@ -19,16 +19,27 @@
     "medium",
     "large",
   ]);
+  const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator("Callout emphasis", [
+    "high",
+    "medium",
+    "low",
+  ]);
   const [AriaLive, validateAriaLive] = typeValidator("Aria live", [
     "off",
     "assertive",
     "polite",
   ]);
+  const [Version, validateVersion] = typeValidator("Version", [
+    "1",
+    "2",
+  ]);
 
   // Types
   type CalloutType = (typeof Types)[number];
   type CalloutSize = (typeof CalloutSizes)[number];
+  type CalloutEmphasisType = (typeof CalloutEmphasis)[number];
   type AriaLiveType = (typeof AriaLive)[number];
+  type VersionType = (typeof Version)[number];
 
   // margin
   export let mt: Spacing = null;
@@ -38,11 +49,13 @@
 
   export let size: CalloutSize = "large";
   export let type: CalloutType;
+  export let emphasis: CalloutEmphasisType = "medium";
   export let heading: string = "";
   export let maxwidth: string = "none";
   export let testid: string = "";
   export let arialive: AriaLiveType = "off";
   export let icontheme: IconTheme = "outline";
+  export let version: VersionType = "1";
 
   // Private
 
@@ -68,7 +81,9 @@
 
   onMount(() => {
     validateCalloutSize(size);
+    validateCalloutEmphasis(emphasis);
     validateAriaLive(arialive);
+    validateVersion(version);
 
     setTimeout(() => {
       validateType(type);
@@ -85,23 +100,37 @@
     ${calculateMargin(mt, mr, mb, ml)};
     max-width: ${maxwidth};
   `}
-  class="notification {type}"
+  class="notification {type} emphasis-{emphasis}"
   class:medium={isMediumCallout}
+  class:v2={version === "2"}
   data-testid={testid}
   aria-live={arialive}
 >
-  <span class="icon {type}">
-    <goa-icon
-      type={iconType}
-      size={iconSize}
-      theme={icontheme}
-    />
-  </span>
+  {#if version === "1"}
+    <span class="icon {type}">
+      <goa-icon
+        type={iconType}
+        size={iconSize}
+        theme={icontheme}
+      />
+    </span>
+  {/if}
   <span class="content {type}">
-    {#if heading}
-      <h3 class:medium={isMediumCallout}>{heading}</h3>
-    {/if}
-    <slot />
+    <section class="heading">
+      {#if version === "2"}
+        <goa-icon
+          type={iconType}
+          size={iconSize}
+          theme={emphasis === "high" ? "outline" : "filled"}
+        />
+      {/if}
+      {#if heading}
+        <h3 class:medium={isMediumCallout}>{heading}</h3>
+      {/if}
+    </section>
+    <section class="body">
+      <slot />
+    </section>
   </span>
 </div>
 
@@ -221,4 +250,57 @@
   .notification.medium .icon {
     padding: var(--goa-callout-m-statusbar-padding);
   }
+
+
+
+
+  /* Version two */
+
+  .v2 .heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--goa-space-s);
+    gap: var(--goa-space-s);
+    background-color: var(--goa-callout-info-color-bg-heading);
+  }
+
+  .v2 .body {
+    padding: var(--goa-space-s);
+  }
+
+  .v2 .heading h3 {
+    margin-bottom: 0;
+    font-size: var(--goa-font-size-heading-s);
+  }
+
+  .v2.emphasis-low .content {
+    display: flex;
+  }
+
+  .v2.emphasis-low h3 {
+    display: none;
+  }
+
+  .v2.emphasis-low .body {
+    flex-grow: 1;
+  }
+
+  .v2.information.emphasis-low .heading {
+    background-color: var(--goa-callout-info-color-bg-heading-l);
+  }
+
+  .v2.information.emphasis-low .body {
+    background-color: var(--goa-callout-info-color-bg-content-l);
+  }
+
+  .v2.information.emphasis-high .heading {
+    background-color: var(--goa-callout-info-color-bg-heading-h);
+    color: var(--goa-color-text-light)
+  }
+
+  .v2.information.emphasis-high .body {
+    background-color: var(--goa-callout-info-color-bg-content-h);
+  }
+
 </style>
