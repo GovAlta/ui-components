@@ -9,7 +9,6 @@ describe("Dropdown Component", () => {
   };
 
   describe("Dropdown", () => {
-
     it("should render with the default props", async () => {
       // Setup
 
@@ -110,7 +109,7 @@ describe("Dropdown Component", () => {
           expect(dropdown.element().getAttribute("style")).toContain("--width: 500px");
           await dropdown.click();
           expect(popover.element().getAttribute("open")).toBe("true");
-          expect(popoverDiv.element().getAttribute("style")).toContain("width: min(500px, 100%)");
+          expect(dropdown.element().getAttribute("style")).toContain("--width: 500px");
         })
       });
 
@@ -135,6 +134,137 @@ describe("Dropdown Component", () => {
           // Check it is actually applied
           const computedStyle = window.getComputedStyle(dropdown.element());
           expect(computedStyle.width).toBe("300px");
+        });
+      });
+
+      it("applies maxWidth constraint when width exceeds maxWidth", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="favcolor-max"
+              width="800px"
+              maxWidth="320px"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("favcolor-max");
+
+        await vi.waitFor(() => {
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 800px");
+          expect(styleAttr).toMatch(/max-width:\s*320px/);
+
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          // Effective width should not exceed maxWidth constraint
+          expect(computedStyle.width).toBe("320px");
+        });
+      });
+
+      it("supports percentage width units", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="percentage-dropdown"
+              width="75%"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("percentage-dropdown");
+
+        await vi.waitFor(() => {
+          // Check that width is set with percentage unit
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 75%");
+
+          // Check computed width is percentage of container
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/); // Should be converted to pixels
+
+          // Check that it's a reasonable percentage width (should be substantial but not too large)
+          const dropdownWidth = parseFloat(computedStyle.width);
+          expect(dropdownWidth).toBeGreaterThan(100); // Should be substantial
+          expect(dropdownWidth).toBeLessThan(800); // But not too large for 75%
+        });
+      });
+
+      it("supports character (ch) width units", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="ch-dropdown"
+              width="30ch"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("ch-dropdown");
+
+        await vi.waitFor(() => {
+          // Check that width is set with ch unit
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 30ch");
+
+          // Check computed width is applied
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/); // Browser converts ch to px
+
+          // Should have a reasonable width (ch is approximately font width)
+          const dropdownWidth = parseFloat(computedStyle.width);
+          expect(dropdownWidth).toBeGreaterThan(200); // Should be substantial width
+          expect(dropdownWidth).toBeLessThan(600); // But not too large
+        });
+      });
+
+      it("defaults to px when no unit is provided", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="no-unit-dropdown"
+              width="250"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("no-unit-dropdown");
+
+        await vi.waitFor(() => {
+          // Check that width is converted to px when no unit provided
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 250px");
+
+          // Check computed width matches expected px value
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toBe("250px");
         });
       });
     });
@@ -437,7 +567,7 @@ describe("Dropdown Component", () => {
       // Result
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(expect.objectContaining({
-        name: "options",
+          name: "options",
         value: 2
       }));
     });

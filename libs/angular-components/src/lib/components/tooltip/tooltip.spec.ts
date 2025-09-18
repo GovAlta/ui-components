@@ -14,6 +14,17 @@ class TestTooltipComponent {
   /** do nothing **/
 }
 
+@Component({
+  template: `
+    <goab-tooltip content="This is a tooltip" maxWidth="300px" testId="foo-maxwidth">
+      <goab-icon type="information-circle"></goab-icon>
+    </goab-tooltip>
+  `,
+})
+class TestTooltipMaxWidthComponent {
+  /** do nothing **/
+}
+
 describe("GoABTooltip", () => {
   let fixture: ComponentFixture<TestTooltipComponent>;
 
@@ -36,5 +47,25 @@ describe("GoABTooltip", () => {
 
     const goaIcon = el?.querySelector("goa-icon");
     expect(goaIcon?.getAttribute("type")).toBe("information-circle");
+  });
+});
+
+describe("GoABTooltip with maxWidth", () => {
+  let fixture: ComponentFixture<TestTooltipMaxWidthComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [TestTooltipMaxWidthComponent],
+      imports: [GoabTooltip, GoabIcon],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestTooltipMaxWidthComponent);
+    fixture.detectChanges();
+  });
+
+  it("should render with maxWidth property", () => {
+    const el = fixture.nativeElement.querySelector("goa-tooltip");
+    expect(el?.getAttribute("maxwidth")).toBe("300px");
+    expect(el?.getAttribute("testid")).toBe("foo-maxwidth");
   });
 });

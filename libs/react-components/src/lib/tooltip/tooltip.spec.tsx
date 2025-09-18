@@ -26,4 +26,16 @@ describe("Tooltip", () => {
     expect(el?.getAttribute("halign")).toBe("right");
     expect(el?.getAttribute("testid")).toBe("foo");
   });
+
+  it("should bind maxWidth attribute", () => {
+    const { baseElement } = render(
+      <GoabTooltip content="This is a tooltip" maxWidth="300px">
+        Hover me
+      </GoabTooltip>,
+    );
+
+    const el = baseElement.querySelector("goa-tooltip");
+
+    expect(el?.getAttribute("maxwidth")).toBe("300px");
+  });
 });

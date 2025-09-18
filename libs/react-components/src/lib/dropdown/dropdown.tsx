@@ -20,6 +20,7 @@ interface WCProps extends Margins {
   placeholder?: string;
   value?: string;
   width?: string;
+  maxwidth?: string;
   relative?: string;
   id?: string;
   autocomplete?: string;
@@ -56,6 +57,7 @@ export interface GoabDropdownProps extends Margins {
   placeholder?: string;
   testId?: string;
   width?: string;
+  maxWidth?: string;
   autoComplete?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
@@ -118,6 +120,7 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       placeholder={props.placeholder}
       testid={props.testId}
       width={props.width}
+      maxwidth={props.maxWidth}
       relative={props.relative ? "true" : undefined}
       autocomplete={props.autoComplete}
       id={props.id}

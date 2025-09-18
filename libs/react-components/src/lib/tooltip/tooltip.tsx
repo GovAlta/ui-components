@@ -11,6 +11,7 @@ interface WCProps extends Margins {
   content?: string;
   testid?: string;
   halign?: GoabTooltipHorizontalAlignment;
+  maxwidth?: string;
 }
 
 declare module "react" {
@@ -28,6 +29,7 @@ export interface GoabTooltipProps extends Margins {
   content?: string | ReactNode;
   hAlign?: GoabTooltipHorizontalAlignment;
   testId?: string;
+  maxWidth?: string;
   children?: ReactNode;
 }
 
@@ -40,6 +42,7 @@ export function GoabTooltip(props: GoabTooltipProps): JSX.Element {
       content={isStringContent ? (props.content as string) : undefined}
       halign={props.hAlign}
       testid={props.testId}
+      maxwidth={props.maxWidth}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}

@@ -12,6 +12,7 @@
   export let testid: string = "";
   export let position: Position = "top";
   export let halign: Alignment = "center";
+  export let maxwidth: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -35,6 +36,25 @@
     ["left", "right", "center"],
     false,
   );
+
+  const validateMaxWidth = (maxwidth: string): string => {
+    if (!maxwidth) return "";
+
+    // Check for 'px' unit
+    if (!maxwidth.endsWith('px')) {
+      //console.warn(`[${maxwidth}] is not a valid px value for maxwidth. Using default value.`);
+      return "";
+    }
+
+    // Check for valid value
+    const numericValue = parseFloat(maxwidth);
+    if (isNaN(numericValue) || numericValue <= 0) {
+      //console.warn(`[${maxwidth}] is not a valid positive px value for maxwidth. Using default value.`);
+      return "";
+    }
+
+    return maxwidth;
+  };
 
   const validator = (position: Position, align: Alignment) => {
     if (position === "left" || position === "right") {
@@ -84,6 +104,7 @@
       validatePosition(position);
       validateAlignment(halign);
       validator(position, halign);
+      maxwidth = validateMaxWidth(maxwidth);
     }, 1);
 
     _initialPosition = position;
@@ -134,9 +155,10 @@
     const spaceLeft = rootRect.left;
     const spaceRight = window.innerWidth - rootRect.right;
 
+    const calculatedMaxWidth = maxwidth && maxwidth.endsWith('px') ? parseFloat(maxwidth) : 400;
     const newWidth = Math.min(
       _screenSize * 0.8,
-      400,
+      calculatedMaxWidth,
       tooltipRect.width,
       Math.max(spaceLeft, spaceRight) - 10,
     );

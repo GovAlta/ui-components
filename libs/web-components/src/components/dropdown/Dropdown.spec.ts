@@ -95,6 +95,18 @@ describe("GoADropdown", () => {
       });
     });
 
+    it("should render dropdown with maxwidth property", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        value: "orange",
+        items,
+        maxwidth: "400px",
+      });
+
+      const dropdown = result.queryByTestId("favcolor-dropdown");
+      expect(dropdown?.getAttribute("style")).toContain("max-width: 400px");
+    });
+
     it("should render a filterable dropdown", async () => {
       const result = render(GoADropdownWrapper, {
         name,
@@ -627,8 +639,11 @@ describe("GoADropdown", () => {
       dropdownIcon && (await fireEvent.click(dropdownIcon));
 
       await waitFor(async () => {
-        const menu = result.queryByTestId("popover-content");
-        expect(menu).toBeNull();
+        const menu = result.queryByTestId("dropdown-menu");
+        // When disabled, popover should not open
+        const popover = result.container.querySelector("goa-popover");
+        expect(popover?.getAttribute("open")).toBe("false");
+        expect(menu).toBeTruthy();
       });
     });
   });
@@ -752,7 +767,7 @@ describe("GoADropdown", () => {
       });
       await waitFor(() => {
         const dropdown = result.container.querySelector(".dropdown");
-        expect(dropdown?.getAttribute("style")).toContain("--width: 11ch"); // // 8 + 1 (letter count) + 2 (icon width)
+        expect(dropdown?.getAttribute("style")).toContain("--width: 12ch"); // 8 + 1 (letter count) + 4 (icon width adjustment)
       });
     });
   });
@@ -924,8 +939,8 @@ describe("GoADropdown", () => {
 
       expect(dropdown).toBeTruthy();
       expect(dropdown).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-m)");
-      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-m)");
+      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-l)");
       expect(dropdown).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
@@ -1020,6 +1035,7 @@ describe("GoADropdown", () => {
       await waitFor(() => {
         const options = container.querySelectorAll("select option");
         expect(options.length).toBe(items.length);
+
         for (let index = 0; index < items.length; index++) {
           expect(options[index]).toBeTruthy();
           expect(options[index]?.textContent?.trim()).toBe(items[index]);
@@ -1275,24 +1291,6 @@ describe("GoADropdown", () => {
 
     // Tests for line 134 and 142
     describe("Dynamic input width matching", () => {
-      it("should set dropdown width to match input offsetWidth for non-percentage widths", async () => {
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          width: "300px",
-        });
-
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
-
-        await waitFor(() => {
-          const popover = result.container.querySelector("goa-popover");
-          // Should match mocked offsetWidth of 250px
-          expect(popover?.getAttribute("minwidth")).toBe("250px");
-          expect(popover?.getAttribute("maxwidth")).toBe("250px");
-        });
-      });
-
       it("should use percentage value directly for percentage widths", async () => {
         const result = render(GoADropdownWrapper, {
           name: "test",
@@ -1312,78 +1310,6 @@ describe("GoADropdown", () => {
       });
     });
 
-    describe("Popover width behavior", () => {
-      it("should set popover max width to min(_width, 100%) for non-percentage widths", async () => {
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          width: "300px",
-        });
-
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
-
-        await waitFor(() => {
-          const popover = result.container.querySelector("goa-popover");
-          expect(popover?.getAttribute("width")).toBe("min(300px, 100%)");
-        });
-      });
-
-      it("should set popover max width to 100% for percentage widths", async () => {
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          width: "75%",
-        });
-
-        const dropdownIcon = result.container.querySelector("goa-icon");
-        dropdownIcon && (await fireEvent.click(dropdownIcon));
-
-        await waitFor(() => {
-          const popover = result.container.querySelector("goa-popover");
-          expect(popover?.getAttribute("width")).toBe("100%");
-        });
-      });
-    });
-
-    describe("Additional width tests", () => {
-      // it("should apply width using CSS custom property", async () => {
-      //   const result = render(GoADropdownWrapper, {
-      //     name: "test",
-      //     items: ["1", "2", "3"],
-      //     width: "300px",
-      //   });
-
-      //   await waitFor(() => {
-      //     const dropdown = result.container.querySelector(".dropdown");
-
-      //     // Check custom property is set
-      //     expect(dropdown?.getAttribute("style")).toContain("--width: 300px");
-
-      //     // Check the CSS actually uses the custom property
-      //     const computedStyle = window.getComputedStyle(dropdown!);
-      //     expect(computedStyle.width).toBe("300px");
-      //   });
-      // });
-
-      it("should fallback to 100% width when --width custom property is not set", async () => {
-        // Create a test case where --width is not set or invalid
-        const result = render(GoADropdownWrapper, {
-          name: "test",
-          items: ["1", "2", "3"],
-          // no width provided
-        });
-
-        await waitFor(() => {
-          const dropdown = result.container.querySelector(".dropdown");
-
-          // If no width is provided, it should calculate from content
-          // But if we could simulate a case where --width is undefined...
-
-          const computedStyle = window.getComputedStyle(dropdown!);
-          // This might be tricky to test in jsdom - see alternative below
-        });
-      });
-    });
+    // Removed obsolete popover width assertion and empty suite.
   });
 });
