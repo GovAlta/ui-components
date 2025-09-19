@@ -37,11 +37,17 @@ npm run serve:web
 ### Multiple playgrounds
 
 Since the playground is not included in the CVS it is common to have playground
+comment/uncomment code the `npm run pg:switch` script can automate this by switching
 code that is out of sync with library code. To prevent having to continually
-comment/uncomment code the `script/pg-switch` script can automate this by switching
 between playgrounds that are specific to the branch.
 
-To switch between branches run the following
+To switch to a branch that doesn't yet exist, run the following
+
+```bash
+npm run pg:switch new [branch-name]
+```
+
+To switch to an existing branch run the following
 
 ```bash
 npm run pg:switch [branch-name]
