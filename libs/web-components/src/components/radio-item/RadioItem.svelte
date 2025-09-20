@@ -153,10 +153,8 @@
   }
 
   function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
-    setTimeout(() => {
-      // @ts-expect-error
-      checked = !checked && !!detail.el.value;
-    }, 1000);
+    // @ts-expect-error
+    checked = !checked && !!detail.el.value;
   }
 
   function dispatchInit() {
