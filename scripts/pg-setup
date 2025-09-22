@@ -1,9 +1,28 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-if [ -d playground ]; then
-  echo "Playground folder already exists!"
-  exit 1
+if [ ! -f .env ]; then
+  echo "VITE_DEV="true"" >.env
 fi
 
-mkdir ./playground
-cp -r ./_templates/* ./playground
+if [ ! -d playground ]; then
+  mkdir ./playground
+  cp -r ./.templates/* ./playground
+fi
+
+while true; do
+  read -p "Do you want to automate playground swapping? (yes/no) " yn
+  case $yn in
+  [Yy]*) break ;;
+  [Nn]*)
+    echo "Done!"
+    exit
+    ;;
+  *) echo "Invalid input. Please answer yes or no." ;;
+  esac
+done
+
+if [ ! -e ".git/hooks/post-checkout" ]; then
+  cp "./scripts/post-checkout" ".git/hooks"
+  chmod +x ".git/hooks/post-checkout"
+  echo "[post-checkout] file has been added to .git/hooks"
+fi

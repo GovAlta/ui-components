@@ -8,15 +8,7 @@ on designers and developers alike throughout the development process.
 
 ## Development environment
 
-Create .env file from .env.example
-
-```bash
-if [ ! -f .env ]; then cp ./.env.example ./.env; fi
-```
-
-### Playground setup
-
-Run the `pg-setup` file.
+Run the `pg-setup` script.
 
 ```bash
 npm run pg:setup
@@ -28,29 +20,10 @@ You can then test the playground apps at `localhost:4200` by running:
 # build the web components
 npm run dev:watch
 
-# add one of the following
+# and one of the following
 npm run serve:angular
 npm run serve:react
 npm run serve:web
-```
-
-### Multiple playgrounds
-
-Since the playground is not included in the CVS it is common to have playground
-comment/uncomment code the `npm run pg:switch` script can automate this by switching
-code that is out of sync with library code. To prevent having to continually
-between playgrounds that are specific to the branch.
-
-To switch to a branch that doesn't yet exist, run the following
-
-```bash
-npm run pg:switch new [branch-name]
-```
-
-To switch to an existing branch run the following
-
-```bash
-npm run pg:switch [branch-name]
 ```
 
 ---

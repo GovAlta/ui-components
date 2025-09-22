@@ -1,0 +1,34 @@
+#!/bin/bash
+
+prev_branch=$(git rev-parse --symbolic-full-name --abbrev-ref=loose @{-1})
+current_branch=$(git branch --show-current)
+
+if [ ! -n "$prev_branch" ]; then
+  echo "No previous branch exists to swap"
+  exit 0
+fi
+
+# Move the existing playground to the .playgrounds dir
+if [ -d "./playground" ]; then
+  rm -rf .playgrounds/"$prev_branch"
+  mv playground .playgrounds/"$prev_branch"
+fi
+
+src_dir=".playgrounds/$current_branch"
+
+# Init a playground if it is a new branch
+if [ ! -d "$src_dir" ]; then
+  mkdir -p "$src_dir"
+  cp -r .templates/* "$src_dir"
+fi
+
+# ensure the playground dir exists
+if [ ! -d "./playground" ]; then
+  mkdir "./playground"
+fi
+
+# move by copying the new test playground
+# mv is used as it is less destructive in the event something happens
+cp -r "$src_dir"/* playground
+
+echo "Switched playgrounds => ["$current_branch"]"
