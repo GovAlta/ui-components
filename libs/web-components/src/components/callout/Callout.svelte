@@ -19,20 +19,16 @@
     "medium",
     "large",
   ]);
-  const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator("Callout emphasis", [
-    "high",
-    "medium",
-    "low",
-  ]);
+  const [CalloutEmphasis, validateCalloutEmphasis] = typeValidator(
+    "Callout emphasis",
+    ["high", "medium", "low"],
+  );
   const [AriaLive, validateAriaLive] = typeValidator("Aria live", [
     "off",
     "assertive",
     "polite",
   ]);
-  const [Version, validateVersion] = typeValidator("Version", [
-    "1",
-    "2",
-  ]);
+  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
 
   // Types
   type CalloutType = (typeof Types)[number];
@@ -108,11 +104,7 @@
 >
   {#if version === "1"}
     <span class="icon {type}">
-      <goa-icon
-        type={iconType}
-        size={iconSize}
-        theme={icontheme}
-      />
+      <goa-icon type={iconType} size={iconSize} theme={icontheme} />
     </span>
   {/if}
   <span class="content {type}">
@@ -251,9 +243,6 @@
     padding: var(--goa-callout-m-statusbar-padding);
   }
 
-
-
-
   /* Version two */
 
   .v2 .heading {
@@ -296,11 +285,10 @@
 
   .v2.information.emphasis-high .heading {
     background-color: var(--goa-callout-info-color-bg-heading-h);
-    color: var(--goa-color-text-light)
+    color: var(--goa-color-text-light);
   }
 
   .v2.information.emphasis-high .body {
     background-color: var(--goa-callout-info-color-bg-content-h);
   }
-
 </style>
