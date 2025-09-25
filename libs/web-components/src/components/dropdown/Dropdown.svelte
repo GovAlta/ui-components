@@ -50,6 +50,7 @@
   export let maxheight: string = "276px";
   export let placeholder: string = "";
   export let width: string = "";
+  export let maxwidth: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
   export let multiselect: string = "false";
@@ -122,24 +123,36 @@
         _width = `${width}px`; // Default to px if no unit is provided
       }
     } else {
-      _width = getLongestChildWidth(_options); // Calculate based on the longest option
+      // If no width but maxwidth is specified, use maxwidth as the actual width
+      if (maxwidth) {
+        _width = maxwidth;
+      } else {
+        _width = getLongestChildWidth(_options); // Calculate based on the longest option
+      }
     }
 
     // avoid double apply for % widths
     if (_inputEl) {
       // for % widths use the % value instead
-      if (width?.includes("%")) {
-        _dropdownWidth = width;
+      const isPercentageWidth = width?.includes("%") || _width?.includes("%");
+      if (isPercentageWidth) {
+        _dropdownWidth = maxwidth && !width ? maxwidth : _width;
       } else {
-        _dropdownWidth = `${_inputEl.offsetWidth}px`; // Match input width dynamically
+        // For non-percentage widths, use the intended width (_width), not computed offsetWidth, to ensures popover matches the intended dropdown width
+        _dropdownWidth = _width;
       }
     }
 
-    // Set popover max width
-    if (width?.includes("%")) {
-      _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
+    // Set popover max width - respect maxwidth if provided
+    const isPercentageWidth = width?.includes("%") || _width?.includes("%");
+    if (isPercentageWidth) {
+      _popoverMaxWidth = _dropdownWidth || _width;
     } else {
-      _popoverMaxWidth = `min(${_width}, 100%)`;
+      const widthConstraints = [_width, "100%"];
+      if (maxwidth) {
+        widthConstraints.push(maxwidth);
+      }
+      _popoverMaxWidth = `min(${widthConstraints.join(", ")})`;
     }
   }
 
@@ -729,6 +742,7 @@
   style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${_width};
+      ${maxwidth ? `max-width: ${maxwidth};` : ''}
     `}
   bind:clientWidth={_popoverMaxWidth}
 >
@@ -757,7 +771,7 @@
     <goa-popover
       {disabled}
       data-testid="option-list"
-      width={`${_popoverMaxWidth || 0}`}
+      width={_popoverMaxWidth?.includes('%') ? '' : `${_popoverMaxWidth || "0"}`}
       minwidth={_dropdownWidth}
       maxwidth={_dropdownWidth}
       open={_isMenuVisible}

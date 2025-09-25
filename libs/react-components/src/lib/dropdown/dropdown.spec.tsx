@@ -54,6 +54,7 @@ describe("GoabDropdown", () => {
         testId="foo"
         id="foo-dropdown"
         width="200px"
+        maxWidth="400px"
         mt="s"
         mr="m"
         mb="l"
@@ -84,6 +85,7 @@ describe("GoabDropdown", () => {
     expect(el?.getAttribute("arialabel")).toBe("label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el?.getAttribute("autocomplete")).toBe("off");
+    expect(el?.getAttribute("maxwidth")).toBe("400px");
   });
 
   it("should allow for a single selection", async () => {

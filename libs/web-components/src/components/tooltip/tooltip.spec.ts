@@ -15,6 +15,17 @@ it("should render tooltip with provided properties", () => {
   expect(tooltipEl?.classList).toContain("top");
 });
 
+it("should render tooltip with maxwidth property", () => {
+  const { container } = render(Tooltip, {
+    content: "Hello, Tooltip!",
+    maxwidth: "300",
+  });
+  const tooltipEl = container.querySelector(".tooltip-text");
+
+  expect(tooltipEl).toBeTruthy();
+  expect(tooltipEl?.innerHTML).toContain("Hello, Tooltip!");
+});
+
 it("shows and hides tooltip on mouseenter/mouseleave", async () => {
   const { container } = render(Tooltip, { content: "Hello, Tooltip!" });
   const tooltipContainer = container.querySelector(".tooltip");

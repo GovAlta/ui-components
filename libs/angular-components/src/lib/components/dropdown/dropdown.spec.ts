@@ -21,6 +21,7 @@ import { fireEvent } from "@testing-library/dom";
       [testId]="testId"
       [id]="id"
       [width]="width"
+      [maxWidth]="maxWidth"
       [mt]="mt"
       [mr]="mr"
       [mb]="mb"
@@ -56,6 +57,7 @@ class TestDropdownComponent {
   placeholder?: string;
   testId?: string;
   width?: string;
+  maxWidth?: string;
   mt?: Spacing;
   mb?: Spacing;
   ml?: Spacing;
@@ -93,6 +95,7 @@ describe("GoABDropdown", () => {
     component.testId = "foo";
     component.id = "foo-dropdown";
     component.width = "200px";
+    component.maxWidth = "400px";
     component.mt = "s";
     component.mr = "m";
     component.mb = "l";
@@ -115,6 +118,7 @@ describe("GoABDropdown", () => {
     expect(el?.getAttribute("arialabel")).toBe("Label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el?.getAttribute("autocomplete")).toBe("off");
+    expect(el?.getAttribute("maxwidth")).toBe("400px");
 
     // Check options
     const dropdownItems = el.querySelectorAll("goa-dropdown-item");

@@ -26,6 +26,17 @@ describe("GoATextArea", () => {
     expect(el).toHaveAttribute("autocomplete", "off");
   });
 
+  it("should render with maxwidth property", async () => {
+    const result = render(GoATextArea, {
+      name: "name",
+      maxwidth: "500px",
+      testid: "test-id",
+    });
+
+    const el = result.queryByTestId("test-id") as HTMLTextAreaElement;
+    expect(el).toHaveAttribute("name", "name");
+  });
+
   it("handles the change event", async () => {
     const onChange = vi.fn();
     const result = render(GoATextArea, {

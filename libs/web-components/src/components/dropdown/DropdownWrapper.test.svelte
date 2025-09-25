@@ -16,6 +16,7 @@
   export let disabled: string = "false";
   export let error: string = "false";
   export let width: string = "";
+  export let maxwidth: string = "";
   export let native: string = "false";
   export let items: string[];
   export let filterable: string = "false";
@@ -47,6 +48,7 @@
   {placeholder}
   {disabled}
   {width}
+  {maxwidth}
   {filterable}
   {autocomplete}
   {testid}
