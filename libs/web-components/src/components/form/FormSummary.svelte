@@ -163,7 +163,7 @@
 
 <div bind:this={_rootEl}>
   {#if heading}
-    <goa-text as="h3" size="heading-m" color="secondary" mb="l"
+    <goa-text as="h3" size="heading-m" color="secondary" mt="none" mb="s"
       >{heading}</goa-text
     >
   {/if}
@@ -173,7 +173,7 @@
         <goa-container>
           <div class="summary" class:summary-with-header={!!getHeading(page)}>
             {#if getHeading(page)}
-              <goa-text class="heading" color="secondary"
+              <goa-text class="heading" color="secondary" mt="none" mb="s"
                 >{getHeading(page)}</goa-text
               >
             {/if}

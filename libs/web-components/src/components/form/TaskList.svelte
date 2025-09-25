@@ -19,7 +19,7 @@
     style={calculateMargin(mt, mr, mb, ml)}
   >
     {#if heading}
-      <goa-text as="h2" size="heading-l">{heading}</goa-text>
+      <goa-text as="h2" size="heading-l" mt="none" mb="none">{heading}</goa-text>
     {/if}
 
     <slot />

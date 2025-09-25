@@ -198,7 +198,7 @@
       <div class="header" bind:clientHeight={_headerHeight}>
         {#if heading || $$slots.heading}
           {#if heading}
-            <goa-text size="heading-m" as="h3" mb="none">{heading}</goa-text>
+            <goa-text size="heading-m" as="h3" mt="none" mb="none">{heading}</goa-text>
           {:else}
             <slot name="heading" />
           {/if}
