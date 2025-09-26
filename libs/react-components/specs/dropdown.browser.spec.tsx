@@ -12,6 +12,7 @@ describe("Dropdown Component", () => {
   describe("Dropdown", () => {
 
     it("should render with the default props", async () => {
+
       // Setup
 
       const Component = () => {
@@ -294,7 +295,6 @@ describe("Dropdown Component", () => {
 
       const result = render(<Component />);
       const filter = result.getByTestId("input");
-      const itemLocator = result.getByTestId(/^dropdown-item/);
 
       // Actions
 
@@ -469,7 +469,8 @@ describe("Dropdown Component", () => {
       };
 
       const result = render(<Component />);
-      const filter = result.getByRole("combobox");
+      const filter = result.getByTestId("input");
+      const filteredOptions = result.getByRole("option");
 
       // Actions
       await filter.fill("2");
@@ -477,11 +478,11 @@ describe("Dropdown Component", () => {
 
       // Result
       await vi.waitFor(() => {
-        const visibleOptions = result.getByRole("option");
-        expect(visibleOptions.elements().length).toBe(1);
-        const el = visibleOptions.elements()[0] as HTMLElement;
+        expect(filteredOptions.elements().length).toBe(1);
+
+        const el = filteredOptions.elements()[0] as HTMLElement;
         expect(el.getAttribute("data-value")).toBe("2");
-      });
+      }, 2000);
     });
   });
 });
