@@ -2,6 +2,7 @@ import {
   GoabTextAreaCountBy,
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
+  GoabTextAreaOnBlurDetail,
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
@@ -52,6 +53,7 @@ export interface GoabTextAreaProps extends Margins {
 
   onChange?: (event: GoabTextAreaOnChangeDetail) => void;
   onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
+  onBlur?: (event: GoabTextAreaOnBlurDetail) => void;
 }
 
 export function GoabTextArea({
@@ -75,6 +77,7 @@ export function GoabTextArea({
   autoComplete,
   onChange,
   onKeyPress,
+  onBlur,
 }: GoabTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
 
@@ -83,36 +86,32 @@ export function GoabTextArea({
       return;
     }
     const current = el.current;
-    const listener: EventListener = (e: Event) => {
-      const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
 
+    const changeListener: EventListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
       onChange?.(detail);
     };
-    if (onChange) {
-      current.addEventListener("_change", listener);
-    }
-    return () => {
-      if (onChange) {
-        current.removeEventListener("_change", listener);
-      }
-    };
-  }, [el, onChange]);
 
-  useEffect(() => {
-    if (!el.current) {
-      return;
-    }
-    const current = el.current;
     const keypressListener = (e: unknown) => {
       const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
       onKeyPress?.(detail);
     };
 
-    current.addEventListener("_keyPress", keypressListener);
-    return () => {
-      current.removeEventListener("_keyPress", keypressListener);
+    const blurListener = (e: unknown) => {
+      const detail = (e as CustomEvent<GoabTextAreaOnBlurDetail>).detail;
+      onBlur?.(detail);
     };
-  }, [el, onKeyPress]);
+
+    current.addEventListener("_change", changeListener);
+    current.addEventListener("_keyPress", keypressListener);
+    current.addEventListener("_blur", blurListener);
+
+    return () => {
+      current.removeEventListener("_change", changeListener);
+      current.removeEventListener("_keyPress", keypressListener);
+      current.removeEventListener("_blur", blurListener);
+    };
+  }, [el, onChange, onKeyPress, onBlur]);
 
   return (
     <goa-textarea

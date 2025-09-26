@@ -193,6 +193,11 @@ export type GoabTextAreaOnKeyPressDetail = {
   key: string;
 };
 
+export type GoabTextAreaOnBlurDetail = {
+  name: string;
+  value: string;
+};
+
 // Tabs
 
 export interface GoabTabsProps {

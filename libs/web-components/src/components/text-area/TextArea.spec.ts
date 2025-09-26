@@ -78,6 +78,28 @@ describe("GoATextArea", () => {
     });
   });
 
+  it("handles the blur event", async () => {
+    const onBlur = vi.fn();
+    const result = render(GoATextArea, {
+      name: "name",
+      value: "test value",
+      testid: "blur-test",
+    });
+
+    const textarea = result.queryByTestId("blur-test");
+    textarea.addEventListener("_blur", (e: CustomEvent) => {
+      expect(e.detail.name).toBe("name");
+      expect(e.detail.value).toBe("test value");
+      onBlur();
+    });
+
+    await fireEvent.blur(textarea);
+
+    await waitFor(() => {
+      expect(onBlur).toBeCalledTimes(1);
+    });
+  });
+
   it("can be readonly", async () => {
     const result = render(GoATextArea, {
       name: "name",
