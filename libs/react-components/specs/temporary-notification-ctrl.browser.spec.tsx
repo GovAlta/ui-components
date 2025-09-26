@@ -109,7 +109,7 @@ function sendCancellableNotificationWithoutNotificationResponse(
 
 describe("Temporary Notification Controller", () => {
   describe("position", () => {
-    it("should render with default positions", async function () {
+    it("should render with default positions", async function() {
       const Component = () => {
         return <GoabTemporaryNotificationCtrl testId="notification-ctrl" />;
       };
@@ -128,7 +128,7 @@ describe("Temporary Notification Controller", () => {
       });
     });
 
-    it("should render with custom positions", async function () {
+    it("should render with custom positions", async function() {
       const Component = () => {
         return (
           <GoabTemporaryNotificationCtrl
@@ -154,24 +154,26 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should show notification", async function () {
+  it("should show notification", async function() {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl />;
     };
 
     const result = render(<Component />);
 
-    await vi.waitFor(() => {
+    setTimeout(() => {
       sendTemporaryNotification("This is the notification", {
         testId: "some-notification",
       });
+    }, 0)
 
+    await vi.waitFor(() => {
       const notification = result.getByTestId("some-notification");
       expect(notification.elements().length).toBe(1);
     });
   });
 
-  it("should hide notification after specified duration", async function () {
+  it("should hide notification after specified duration", async function() {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl />;
     };
@@ -179,12 +181,15 @@ describe("Temporary Notification Controller", () => {
     const result = render(<Component />);
     const notifications = result.getByTestId("short-notification");
 
-    // ensure notification is visible
-    await vi.waitFor(async () => {
+    setTimeout(() => {
       sendTemporaryNotification("This is a short notification", {
         testId: "short-notification",
         duration: 100,
       });
+    }, 0);
+
+    // ensure notification is visible
+    await vi.waitFor(() => {
       expect(notifications.elements().length).toBe(1);
     });
 
@@ -194,7 +199,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should handle action button click", async function () {
+  it("should handle action button click", async function() {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -203,20 +208,22 @@ describe("Temporary Notification Controller", () => {
     const actionButton = result.getByRole("button");
     const actionMock = vi.fn();
 
-    await vi.waitFor(async () => {
+    setTimeout(() => {
       sendTemporaryNotification("Notification with action", {
         testId: "action-notification",
         actionText: "Undo",
         action: actionMock,
       });
+    }, 0);
 
+    await vi.waitFor(async () => {
       expect(actionButton.elements().length).toBe(1);
       await actionButton.click();
       expect(actionMock).toHaveBeenCalledOnce();
     });
   });
 
-  it("should handle action button click and cancel notification", async function () {
+  it("should handle action button click and cancel notification", async function() {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -225,27 +232,29 @@ describe("Temporary Notification Controller", () => {
     const notification = result.getByTestId("cancel-notification");
     const actionButton = result.getByRole("button");
 
-    await vi.waitFor(async () => {
+    setTimeout(() => {
       sendCancellableNotification(
         "Notification with cancel action",
         "cancel-notification",
       );
+    }, 0);
 
+    await vi.waitFor(() => {
       // Verify the notification is displayed
       expect(notification.elements().length).toBe(1);
+    });
 
-      // Click the cancel button
-      expect(actionButton.elements().length).toBe(1);
-      await actionButton.click();
+    // Click the cancel button
+    expect(actionButton.elements().length).toBe(1);
+    await actionButton.click();
 
-      // Verify the notification is removed
-      await vi.waitFor(() => {
-        expect(notification.elements().length).toBe(0);
-      });
+    // Verify the notification is removed
+    await vi.waitFor(() => {
+      expect(notification.elements().length).toBe(0);
     });
   });
 
-  it("should allow for dismissing of the notification without a second notification from appearing", async function () {
+  it("should allow for dismissing of the notification without a second notification from appearing", async function() {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -254,27 +263,29 @@ describe("Temporary Notification Controller", () => {
     const notification = result.getByTestId("cancel-notification");
     const actionButton = result.getByRole("button");
 
-    await vi.waitFor(async () => {
+    setTimeout(() => {
       sendCancellableNotificationWithoutNotificationResponse(
         "Notification with cancel action",
         "cancel-notification",
       );
+    }, 0);
 
+    await vi.waitFor(() => {
       // Verify the notification is displayed
       expect(notification.elements().length).toBe(1);
+    });
 
-      // Click the cancel button
-      expect(actionButton.elements().length).toBe(1);
-      await actionButton.click();
+    // Click the cancel button
+    expect(actionButton.elements().length).toBe(1);
+    await actionButton.click();
 
-      // Verify the notification is removed
-      await vi.waitFor(() => {
-        expect(notification.elements().length).toBe(0);
-      });
+    // Verify the notification is removed
+    await vi.waitFor(() => {
+      expect(notification.elements().length).toBe(0);
     });
   });
 
-  it("should handle progress updates", async function () {
+  it("should handle progress updates", async function() {
     const Component = () => {
       return (
         <GoabTemporaryNotificationCtrl
@@ -285,15 +296,17 @@ describe("Temporary Notification Controller", () => {
     };
 
     const result = render(<Component />);
-
     const progressIndicator = result.getByTestId("progress");
 
-    await vi.waitFor(() => {
+    setTimeout(() => {
       const uuid = sendTemporaryNotification("some message", {
         testId: "some-notification",
         type: "progress",
       });
       sendProgress(uuid, 10);
+    }, 0)
+
+    await vi.waitFor(() => {
       expect(progressIndicator.element().getAttribute("value")).toBe("10");
     });
   });
