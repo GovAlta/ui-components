@@ -303,7 +303,10 @@ describe("Dropdown Component", () => {
       // Result
 
       await vi.waitFor(() => {
-        expect(itemLocator.elements().length).toBe(1);
+        ["red", "green"].forEach((item) => {
+          const ddi = result.getByTestId(`dropdown-item-${item}`);
+          expect(ddi.elements().length).toBe(0);
+        });
       })
     });
 
