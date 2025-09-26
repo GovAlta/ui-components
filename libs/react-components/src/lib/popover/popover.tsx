@@ -8,7 +8,6 @@ interface WCProps extends Margins {
   position?: GoabPopoverPosition;
   relative?: string;
   testid?: string;
-  tabindex?: number;
 }
 
 declare module "react" {
@@ -28,7 +27,6 @@ export interface GoabPopoverProps extends Margins {
   padded?: boolean;
   position?: GoabPopoverPosition;
   children: ReactNode;
-  tabIndex?: number;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
@@ -44,7 +42,6 @@ export function GoabPopover({
   position,
   relative,
   children,
-  tabIndex = -1,
   mt,
   mr,
   mb,
@@ -58,7 +55,6 @@ export function GoabPopover({
       padded={typeof padded === "undefined" ? undefined : padded ? "true" : "false"}
       position={position}
       relative={relative ? "true" : undefined}
-      tabindex={tabIndex}
       mt={mt}
       mr={mr}
       mb={mb}
