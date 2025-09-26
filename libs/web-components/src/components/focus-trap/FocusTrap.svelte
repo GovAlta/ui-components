@@ -1,4 +1,14 @@
-<svelte:options customElement="goa-focus-trap" />
+<svelte:options
+  customElement={{
+    tag: "goa-focus-trap",
+    props: {
+      preventScrollIntoView: {
+        attribute: "prevent-scroll-into-view",
+        type: "Boolean",
+      },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
@@ -6,6 +16,8 @@
   // Public
   // allow for outside control of whether focus trap should re-focus the first element is open/closed (see Drawer)
   export let open: boolean = false;
+
+  export let preventScrollIntoView: boolean = false;
 
   // Private
 
@@ -150,7 +162,11 @@
     // If the focus element is at the bottom, we want to automatically scroll down to the focused element (when user uses keyboard)
     const focusedElement = e?.target;
 
-    if (focusedElement && focusedElement instanceof HTMLElement) {
+    if (
+      !preventScrollIntoView &&
+      focusedElement &&
+      focusedElement instanceof HTMLElement
+    ) {
       focusedElement.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }

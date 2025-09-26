@@ -8,6 +8,10 @@
         type: "Boolean",
         attribute: "disable-global-close-popover",
       },
+      preventScrollIntoView: {
+        attribute: "prevent-scroll-into-view",
+        type: "Boolean",
+      },
     },
   }}
 />
@@ -34,6 +38,9 @@
   export let minwidth: string = "";
   export let width: string = "";
   export let height: "full" | "wrap-content" = "wrap-content";
+
+  // flag passed to the FocusTrap that will prevent unwanted scrolling
+  export let preventScrollIntoView: boolean = false;
 
   // allows to override the default padding when content needs to be flush with boundries
   export let padded: string = "true";
@@ -401,7 +408,7 @@
         style("padding", _padded ? "var(--goa-space-m)" : "0"),
       )}
     >
-      <goa-focus-trap open="true">
+      <goa-focus-trap open="true" prevent-scroll-into-view={preventScrollIntoView || undefined}>
         <div bind:this={_focusTrapEl}>
           <slot />
         </div>

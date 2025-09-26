@@ -131,6 +131,7 @@
   on:_open={open}
   padded="false"
   tabindex="-1"
+  prevent-scroll-into-view={true}
 >
   <goa-button
     bind:this={_targetEl}
