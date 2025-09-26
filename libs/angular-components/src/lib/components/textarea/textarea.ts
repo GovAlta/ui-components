@@ -2,6 +2,7 @@ import {
   GoabTextAreaCountBy,
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
+  GoabTextAreaOnBlurDetail,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -41,6 +42,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.mr]="mr"
       (_change)="_onChange($event)"
       (_keyPress)="_onKeyPress($event)"
+      (_blur)="_onBlur($event)"
     >
     </goa-textarea>
   `,
@@ -67,6 +69,7 @@ export class GoabTextArea extends GoabControlValueAccessor {
 
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
+  @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
@@ -79,5 +82,11 @@ export class GoabTextArea extends GoabControlValueAccessor {
     const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
     this.markAsTouched();
     this.onKeyPress.emit(detail);
+  }
+
+  _onBlur(e: Event) {
+    const detail = (e as CustomEvent<GoabTextAreaOnBlurDetail>).detail;
+    this.markAsTouched();
+    this.onBlur.emit(detail);
   }
 }

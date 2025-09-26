@@ -152,6 +152,15 @@
   function onFocus(_e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
+
+  function onBlur(_e: Event) {
+    dispatch(
+      _textareaEl,
+      "_blur",
+      { name, value: _textareaEl.value },
+      { bubbles: true },
+    );
+  }
 </script>
 
 <!-- HTML -->
@@ -183,6 +192,7 @@
       on:keyup={onKeyPress}
       on:change={onChange}
       on:focus={onFocus}
+      on:blur={onBlur}
     />
 
     {#if maxcount > 0 && !isDisabled}
