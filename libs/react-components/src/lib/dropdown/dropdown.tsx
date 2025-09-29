@@ -38,7 +38,7 @@ declare module "react" {
 
 export interface GoabDropdownProps extends Margins {
   name?: string;
-  value?: string[] | string | number;
+  value?: string[] | string;
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
@@ -63,15 +63,12 @@ export interface GoabDropdownProps extends Margins {
   relative?: boolean;
 }
 
-function stringify(value: string | string[] | number | undefined): string {
+function stringify(value: string | string[] | undefined): string {
   if (typeof value === "undefined") {
     return "";
   }
   if (typeof value === "string") {
     return value;
-  }
-  if (typeof value === "number") {
-    return ""+value;
   }
   return JSON.stringify(value);
 }
