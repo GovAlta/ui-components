@@ -14,12 +14,14 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
     >
     </goa-dropdown-item>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GoabDropdownItem {
-  @Input() value?: string | number;
+  @Input() value?: string;
   @Input() filter?: string;
   @Input() label?: string;
   @Input() name?: string;
   @Input() mountType?: GoabDropdownItemMountType;
 }
+
+
