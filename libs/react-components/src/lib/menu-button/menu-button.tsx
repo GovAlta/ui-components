@@ -6,7 +6,7 @@
  * It also includes TypeScript interfaces for improved type checking and development experience.
  */
 
-import { GoabButtonType } from "@abgov/ui-components-common";
+import { GoabButtonType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
 
 /**
@@ -53,7 +53,7 @@ export interface GoabMenuButtonProps {
   text: string;
   type?: GoabButtonType;
   testId?: string;
-  onAction?: (action: string) => void;
+  onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;
 }
 
@@ -100,8 +100,8 @@ export function GoabMenuButton({
 
     // Event listener for the "_action" event emitted by the Web Component.
     const listener = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      onAction(detail.action);
+      const detail = (e as CustomEvent).detail as GoabMenuButtonOnActionDetail;
+      onAction(detail);
     };
 
     current.addEventListener("_action", listener);
