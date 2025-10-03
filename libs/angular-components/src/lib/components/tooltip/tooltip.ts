@@ -15,6 +15,7 @@ import { GoabBaseComponent } from "../base.component";
       [attr.content]="getContentAsString()"
       [attr.halign]="hAlign"
       [attr.testid]="testId"
+      [attr.maxwidth]="maxWidth"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -37,6 +38,7 @@ export class GoabTooltip extends GoabBaseComponent {
   @Input() position?: GoabTooltipPosition;
   @Input() content?: string | TemplateRef<unknown>;
   @Input() hAlign?: GoabTooltipHorizontalAlignment;
+  @Input() maxWidth?: string;
 
   getContentAsString(): string {
     return this.content instanceof TemplateRef ? "" : this.content || "";
