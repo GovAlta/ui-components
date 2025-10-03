@@ -8,6 +8,9 @@ import { GoabIcon } from "../icon/icon";
     <goab-tooltip content="This is a tooltip" position="top" hAlign="right" testId="foo">
       <goab-icon type="information-circle"></goab-icon>
     </goab-tooltip>
+    <goab-tooltip content="This is a tooltip" maxWidth="300px" testId="foo-maxwidth">
+      <goab-icon type="information-circle"></goab-icon>
+    </goab-tooltip>
   `,
 })
 class TestTooltipComponent {
@@ -28,7 +31,7 @@ describe("GoABTooltip", () => {
   });
 
   it("should render", () => {
-    const el = fixture.nativeElement.querySelector("goa-tooltip");
+    const el = fixture.nativeElement.querySelector('goa-tooltip[testid="foo"]');
     expect(el?.getAttribute("content")).toBe("This is a tooltip");
     expect(el?.getAttribute("position")).toBe("top");
     expect(el?.getAttribute("halign")).toBe("right");
@@ -36,5 +39,11 @@ describe("GoABTooltip", () => {
 
     const goaIcon = el?.querySelector("goa-icon");
     expect(goaIcon?.getAttribute("type")).toBe("information-circle");
+  });
+
+  it("should render with maxWidth property", () => {
+    const el = fixture.nativeElement.querySelector('goa-tooltip[testid="foo-maxwidth"]');
+    expect(el?.getAttribute("maxwidth")).toBe("300px");
+    expect(el?.getAttribute("testid")).toBe("foo-maxwidth");
   });
 });

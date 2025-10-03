@@ -145,3 +145,33 @@ it("cursor style remains same on hover", async () => {
     { timeout: 500 },
   );
 });
+
+it("should render tooltip with maxwidth property", async () => {
+  const { container } = render(Tooltip, {
+    content: "Hello, Tooltip!",
+    maxwidth: "300px",
+  });
+  const tooltipEl = container.querySelector(".tooltip-text") as HTMLElement;
+
+  expect(tooltipEl).toBeTruthy();
+
+  // Mock getBoundingClientRect to simulate a tooltip that would exceed maxwidth
+  tooltipEl.getBoundingClientRect = () => ({
+    width: 500,
+    height: 100,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    x: 0,
+    y: 0,
+    toJSON: () => ({}),
+  });
+
+  // Trigger resize to apply maxwidth calculation
+  global.dispatchEvent(new Event("resize"));
+  await tick();
+
+  // The width should be constrained by maxwidth (300px - 32px padding = 268px)
+  expect(parseInt(tooltipEl.style.width, 10)).toBeLessThanOrEqual(268);
+});

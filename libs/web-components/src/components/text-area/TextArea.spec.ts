@@ -291,4 +291,19 @@ describe("GoATextArea", () => {
       expect(el).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
+
+  it("should render with maxwidth property", async () => {
+    const baseElement = render(GoATextArea, {
+      name: "test",
+      maxwidth: "500px",
+    });
+
+    const rootEl = await baseElement.findByTestId("root");
+    expect(rootEl).toBeTruthy();
+
+    // Check if the injected style contains the max-width property
+    const styleTag = rootEl.querySelector("style");
+    expect(styleTag).toBeTruthy();
+    expect(styleTag?.innerHTML).toContain("max-width: 500px");
+  });
 });

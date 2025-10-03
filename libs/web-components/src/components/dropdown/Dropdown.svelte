@@ -61,6 +61,7 @@
   export let maxheight: string = "276px";
   export let placeholder: string = "";
   export let width: string = "";
+  export let maxwidth: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
   export let multiselect: string = "false";
@@ -186,12 +187,14 @@
         );
         _width = `${width}px`; // Default to px if no unit is provided
       }
+    } else if (maxwidth) {
+      _width = maxwidth;
     } else {
       _width = getLongestChildWidth(options); // Calculate based on the longest option
     }
 
     // Set popover max width
-    if (width?.includes("%")) {
+    if (width?.includes("%") || maxwidth?.includes("%")) {
       _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
     } else {
       _popoverMaxWidth = `min(${_width}, 100%)`;

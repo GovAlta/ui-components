@@ -1246,4 +1246,34 @@ describe("GoADropdown", () => {
       });
     });
   });
+
+  describe("maxwidth", () => {
+    it("should use maxwidth when no width is provided", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        maxwidth: "500px",
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 500px");
+      });
+    });
+
+    it("should use width over maxwidth when both are provided", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        width: "300px",
+        maxwidth: "500px",
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 300px");
+        expect(dropdown?.getAttribute("style")).not.toContain("--width: 500px");
+      });
+    });
+  });
 });
