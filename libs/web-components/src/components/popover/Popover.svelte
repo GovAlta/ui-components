@@ -437,6 +437,7 @@
     outline: none;
     border: none;
     padding: 0;
+    background-color: transparent;
     width: inherit;
   }
 
