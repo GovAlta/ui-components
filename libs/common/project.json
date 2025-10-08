@@ -8,27 +8,13 @@
       "executor": "@nx/eslint:lint"
     },
     "build": {
-      "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "defaultConfiguration": "production",
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/common"
-      },
-      "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "mode": "production"
-        }
-      }
-    },
-    "release": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npx semantic-release -e ./libs/common/.releaserc.json"
+        "outputPath": "dist/libs/common",
+        "main": "libs/common/src/index.ts",
+        "tsConfig": "libs/common/tsconfig.lib.json",
+        "assets": ["libs/common/package.json"]
       }
     }
   },
