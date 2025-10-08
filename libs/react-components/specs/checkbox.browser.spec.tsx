@@ -84,4 +84,52 @@ describe("Checkbox", () => {
       expect(childValue.element().textContent).toBe("false");
     });
   });
+
+  it("should have a 44px x 44px touch target area", async () => {
+    const result = render(
+      <GoabCheckbox testId="test-checkbox" name="test" text="Test Checkbox" />
+    );
+
+    const checkbox = result.getByTestId("test-checkbox");
+    await vi.waitFor(() => {
+      expect(checkbox.element()).toBeTruthy();
+    });
+
+    const container = checkbox.element().querySelector(".container") as HTMLElement;
+    expect(container).toBeTruthy();
+
+    // Get computed styles for the ::before pseudo-element (touch target)
+    const beforeStyles = window.getComputedStyle(container, "::before");
+
+    // Verify the touch target dimensions
+    expect(beforeStyles.width).toBe("44px");
+    expect(beforeStyles.height).toBe("44px");
+    expect(beforeStyles.position).toBe("absolute");
+
+    // Verify the container itself has position: relative for proper positioning context
+    const containerStyles = window.getComputedStyle(container);
+    expect(containerStyles.position).toBe("relative");
+
+    // Verify the actual visual size of the container (24px) vs touch target (44px)
+    const containerRect = container.getBoundingClientRect();
+    expect(containerRect.width).toBe(24); // Visual checkbox is 24px
+    expect(containerRect.height).toBe(24); // Visual checkbox is 24px
+
+    // Verify the transform is applied correctly for centering
+    // CSS: transform: translate(-50%, -50%) converts to matrix(a, b, c, d, tx, ty)
+    // a,b,c,d: 2x2 transformation identity matrix
+    expect(beforeStyles.transform).toBe("matrix(1, 0, 0, 1, -22, -22)");
+
+    // Final verification: Check that all styles are applied and rendered
+    // After the page is fully loaded and all CSS is computed
+    await vi.waitFor(() => {
+      const finalContainerStyles = window.getComputedStyle(container);
+      const finalBeforeStyles = window.getComputedStyle(container, "::before");
+
+      // Verify final computed styles match expectations
+      expect(finalContainerStyles.position).toBe("relative");
+      expect(finalBeforeStyles.width).toBe("44px");
+      expect(finalBeforeStyles.height).toBe("44px");
+    });
+  });
 });
