@@ -342,6 +342,7 @@
   }
 
   .icon {
+    position: relative;
     display: inline-block;
     height: var(--goa-radio-size);
     width: var(--goa-radio-size);
@@ -352,6 +353,16 @@
     /* prevent squishing of radio button */
     flex: 0 0 auto;
     margin-top: var(--font-valign-fix);
+  }
+
+  .icon::before {
+    content: '';
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .radio--disabled .label,
