@@ -178,6 +178,7 @@
 <svelte:window bind:innerWidth={_windowWidth} />
 
 <!-- HTML -->
+<header>
 <div
   class="container"
   bind:this={_rootEl}
@@ -287,6 +288,7 @@
     {/if}
   </div>
 </div>
+</header>
 
 <!-- Style -->
 

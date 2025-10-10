@@ -25,6 +25,7 @@
   });
 </script>
 
+<footer>
 <div
   bind:clientWidth={_clientWidth}
   class="app-footer"
@@ -73,6 +74,7 @@
     </div>
   </div>
 </div>
+</footer>
 
 <style>
   * {
