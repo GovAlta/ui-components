@@ -26,6 +26,8 @@
   let _buttonIndex = 0;
 
   let _targetEl: HTMLElement;
+
+  // width of the menu button which is the min-width of the popover menu
   let _menuWidth: number = 0;
 
   // Reactive
@@ -131,6 +133,7 @@
   on:_open={open}
   padded="false"
   tabindex="-1"
+  maxwidth=""
   prevent-scroll-into-view={true}
 >
   <goa-button
