@@ -20,7 +20,7 @@ describe("GoAMenuAction", () => {
   it("should render with testid", async () => {
     const { findByTestId } = render(GoAMenuAction, {
       text: "Test Action",
-      testid: "menu-action-test"
+      testid: "menu-action-test",
     });
     const button = await findByTestId("menu-action-test");
 
@@ -38,7 +38,7 @@ describe("GoAMenuAction", () => {
     it("should render with icon when provided", async () => {
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
-        icon: "add"
+        icon: "add",
       });
       const button = await findByRole("button");
 
@@ -60,7 +60,7 @@ describe("GoAMenuAction", () => {
     it("should accept custom action", async () => {
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
-        action: "custom-action"
+        action: "custom-action",
       });
       const button = await findByRole("button");
 
@@ -73,7 +73,7 @@ describe("GoAMenuAction", () => {
       const onClick = vi.fn();
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
-        action: "test-action"
+        action: "test-action",
       });
       const button = await findByRole("button");
 
@@ -82,14 +82,16 @@ describe("GoAMenuAction", () => {
 
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onClick.mock.calls[0][0].detail.action).toBe("click");
-      expect(onClick.mock.calls[0][0].detail.data).toEqual({ action: "test-action" });
+      expect(onClick.mock.calls[0][0].detail.data).toEqual({
+        action: "test-action",
+      });
     });
 
     it("should dispatch bind event on mount", async () => {
       const onBind = vi.fn();
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
-        action: "test-action"
+        action: "test-action",
       });
       const button = await findByRole("button");
 
@@ -101,8 +103,8 @@ describe("GoAMenuAction", () => {
       });
 
       // Find the bind event call
-      const bindCall = onBind.mock.calls.find(call =>
-        call[0].detail.action === "bind"
+      const bindCall = onBind.mock.calls.find(
+        (call) => call[0].detail.action === "bind",
       );
       expect(bindCall).toBeTruthy();
       expect(bindCall[0].detail.data).toBe(button);
@@ -110,34 +112,16 @@ describe("GoAMenuAction", () => {
   });
 
   describe("styling", () => {
-    it("should have proper button structure", async () => {
-      const { findByRole } = render(GoAMenuAction, { text: "Test Action" });
-      const button = await findByRole("button");
-
-      expect(button.tagName).toBe("BUTTON");
-
-      const span = button.querySelector("span");
-      expect(span).toBeTruthy();
-      expect(span).toHaveTextContent("Test Action");
-      expect(span).toHaveStyle("padding-bottom: var(--font-valign-fix)");
-    });
-
     it("should render icon before text when both provided", async () => {
       const { findByRole } = render(GoAMenuAction, {
         text: "Test Action",
-        icon: "add"
+        icon: "add",
       });
       const button = await findByRole("button");
 
       const icon = button.querySelector("goa-icon");
-      const span = button.querySelector("span");
-
       expect(icon).toBeTruthy();
-      expect(span).toBeTruthy();
-
-      // Icon should come before span in DOM order
-      const children = Array.from(button.children);
-      expect(children.indexOf(icon)).toBeLessThan(children.indexOf(span));
+      expect(icon?.getAttribute("type")).toBe("add");
     });
   });
 

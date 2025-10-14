@@ -9,6 +9,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
     <goa-menu-button
       [attr.text]="text"
       [attr.type]="type"
+      [attr.max-width]="maxWidth"
+      [attr.leading-icon]="leadingIcon"
       [attr.testid]="testId"
       (_action)="_onAction($event)"
     >
@@ -20,6 +22,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
 export class GoabMenuButton {
   @Input() text?: string;
   @Input() type?: GoabButtonType;
+  @Input() maxWidth?: string;
+  @Input() leadingIcon?: GoabIconType;
   @Input() testId?: string;
   @Output() onAction = new EventEmitter<GoabMenuButtonOnActionDetail>();
 

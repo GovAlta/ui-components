@@ -22,6 +22,7 @@ export function App() {
       <div style={{ display: "flex" }}>
         <section style={{ flex: "0 0 250px" }} role="nav">
           <GoabSideMenu>
+            <Link to="/everything">Everything</Link>
             <GoabSideMenuGroup heading="Bugs">
               <Link to="/bugs/2152">2152</Link>
               <Link to="/bugs/2331">2331</Link>
@@ -50,14 +51,14 @@ export function App() {
               <Link to="/bugs/2922">2922</Link>
               <Link to="/bugs/2943">2943</Link>
               <Link to="/bugs/2948">2948</Link>
+              <Link to="/bugs/3118">3118</Link>
             </GoabSideMenuGroup>
-            <Link to="/everything">Everything</Link>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1547">1547</Link>
               <Link to="/features/1813">1813</Link>
-              <Link to="/features/2361">2361</Link>
               <Link to="/features/2054">2054</Link>
               <Link to="/features/2267">2267</Link>
+              <Link to="/features/2361">2361</Link>
               <Link to="/features/2440">2440</Link>
               <Link to="/features/2492">2492</Link>
               <Link to="/features/2682">2682</Link>

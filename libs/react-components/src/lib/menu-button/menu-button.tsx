@@ -21,6 +21,8 @@ import { ReactNode, type JSX, useRef, useEffect } from "react";
 interface WCProps {
   text: string;
   type: GoabButtonType;
+  "max-width"?: string,
+  "leading-icon"?: GoabIconType;
   testid?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
@@ -52,6 +54,8 @@ declare module "react" {
 export interface GoabMenuButtonProps {
   text: string;
   type?: GoabButtonType;
+  maxWidth?: string;
+  leadingIcon?: GoabIconType;
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;
@@ -83,6 +87,8 @@ export interface GoabMenuButtonProps {
 export function GoabMenuButton({
   text,
   type = "primary",
+  leadingIcon,
+  maxWidth,
   testId,
   onAction,
   children,
@@ -111,7 +117,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button ref={el} text={text} type={type} testid={testId}>
+    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon} max-width={maxWidth}>
       {children}
     </goa-menu-button>
   );
