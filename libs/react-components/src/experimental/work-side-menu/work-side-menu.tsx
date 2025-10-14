@@ -1,16 +1,16 @@
 import { ReactNode, useEffect, useRef, type JSX } from "react";
 
 interface WCProps {
+  ref: RefObject<HTMLElement | null>;
   heading: string;
   url: string;
   "user-name": string;
   "user-secondary-text": string;
   testid?: string;
+  open?: string;
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
-  open?: boolean;
-  ref: React.RefObject<HTMLElement | null>;
 }
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
