@@ -8,6 +8,7 @@
       arialabel: { reflect: true },
       error: { reflect: true },
       revealarialabel: { reflect: true },
+      disabled: { reflect: true },
     },
   }}
 />
@@ -22,6 +23,8 @@
     error: boolean;
     name: string;
     checked: boolean;
+    version?: string;
+    compact?: boolean;
     ariaLabel: string;
     maxWidth: string;
     revealAriaLabel?: string;
@@ -73,6 +76,8 @@
   let _revealSlotEl: HTMLElement;
   let _formFields: HTMLElement[] = [];
   let _revealSlotHeight: number = 0;
+  let _version: string = "1";
+  let _compact: boolean = false;
 
   // Reactive
 
@@ -184,12 +189,15 @@
   function addInitListener() {
     _radioItemEl.addEventListener("radio-group:init", (e: Event) => {
       const data = (e as CustomEvent<GoARadioItemProps>).detail;
-      isDisabled = data.disabled;
+      // Item is disabled if EITHER the group is disabled OR the item itself is disabled
+      isDisabled = data.disabled || toBoolean(disabled);
       error = fromBoolean(data.error);
       checked = fromBoolean(data.checked);
       description = data.description;
       name = data.name;
       revealarialabel = data.revealAriaLabel;
+      _version = data.version || "1";
+      _compact = data.compact || false;
     });
   }
 
@@ -246,6 +254,8 @@
     class="radio"
     class:radio--disabled={isDisabled}
     class:radio--error={isError}
+    class:v2={_version === "2"}
+    class:compact={_compact}
   >
     <input
       type="radio"
@@ -261,7 +271,18 @@
       aria-checked={isChecked}
       on:click={onChange}
     />
-    <div class="icon" />
+    {#if _version === "2"}
+      <!-- V2: Wrapper needed for inner dot positioning -->
+      <div class="icon-wrapper">
+        <div class="icon" />
+        {#if isChecked}
+          <div class="icon-inner" />
+        {/if}
+      </div>
+    {:else}
+      <!-- V1: Original structure (no wrapper) -->
+      <div class="icon" />
+    {/if}
     <span class="label">
       {label || value}
     </span>
@@ -286,6 +307,18 @@
 <style>
   .radio {
     display: inline-flex;
+    align-items: flex-start;
+    gap: var(--goa-space-xs);
+  }
+
+  /* V2 default: Use larger gap between icon and label */
+  .radio.v2 {
+    gap: var(--goa-radio-gap-label);
+  }
+
+  /* V2 compact: Use smaller gap */
+  .radio.v2.compact {
+    gap: var(--goa-space-xs);
   }
 
   label.radio {
@@ -309,6 +342,7 @@
   }
 
   .radio input[type="radio"] {
+    position: absolute;
     width: 0;
     min-height: 28px;
     margin: 0;
@@ -316,15 +350,30 @@
   }
 
   .label {
-    padding: 0 var(--goa-space-xs);
     font: var(--goa-radio-label);
+    margin-top: -3px; /* V1: Optical centering - move text up */
+  }
+
+  /* V2: Adjust for different line-height */
+  .radio.v2 .label {
+    margin-top: 1px; /* V2: Optical centering - slight downward adjustment */
+  }
+
+  /* Compact mode - V2 only */
+  .radio.compact .label {
+    font: var(--goa-radio-label-compact);
   }
 
   .description {
     font: var(--goa-radio-description);
     margin-left: var(--goa-space-xl);
     margin-top: var(--goa-space-2xs);
-    color: var(--goa-color-text-default);
+    color: var(--goa-input-color-text-helper, var(--goa-color-text-default));
+  }
+
+  /* V2 default: Description aligns with label (icon width + gap) */
+  .radio.v2:not(.compact) ~ .description {
+    margin-left: calc(var(--goa-radio-size) + var(--goa-radio-gap-label));
   }
 
   .reveal {
@@ -341,17 +390,34 @@
     border-left: 4px solid var(--goa-color-greyscale-200);
   }
 
+  /* Icon wrapper for positioning */
+  .icon-wrapper {
+    position: relative;
+    display: inline-block;
+    height: var(--goa-radio-size);
+    width: var(--goa-radio-size);
+    flex: 0 0 auto;
+  }
+
   .icon {
     display: inline-block;
     height: var(--goa-radio-size);
     width: var(--goa-radio-size);
-    border-radius: var(--goa-radio-border-radius);
+    border-radius: var(--goa-radio-borderRadius);
     background-color: var(--goa-radio-color-bg);
-    transition: box-shadow 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+  }
 
-    /* prevent squishing of radio button */
-    flex: 0 0 auto;
-    margin-top: var(--font-valign-fix);
+  /* V2: Inner dot for checked state */
+  .icon-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--goa-radio-inner-size);
+    height: var(--goa-radio-inner-size);
+    border-radius: 50%;
+    transition: background-color 100ms ease-in-out;
   }
 
   .radio--disabled .label,
@@ -364,74 +430,183 @@
 
   /* States --------------------------------------------- */
 
-  /* Unchecked */
-  input[type="radio"]:not(:checked) ~ .icon {
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
-    margin-top: 3px;
-  }
-  /* Unchecked:hover */
-  input[type="radio"]:hover ~ .icon {
-    border: var(--goa-radio-border-hover);
-  }
-  /* Unchecked:focus */
-  input[type="radio"]:focus-visible ~ .icon,
-  input[type="radio"]:hover:focus-visible ~ .icon {
-    outline: var(--goa-radio-border-focus);
-  }
-  /* Unchecked:hover+focus */
-  input[type="radio"]:hover:focus-visible ~ .icon {
+  /* Unchecked - Default */
+  .radio:not(.v2) input[type="radio"]:not(:checked) ~ .icon,
+  .radio.v2 input[type="radio"]:not(:checked) ~ .icon-wrapper .icon {
     border: var(--goa-radio-border);
   }
 
-  /* Checked */
-  input[type="radio"]:checked ~ .icon {
-    border: var(--goa-radio-border-checked);
-    margin-top: 3px;
-  }
-  /* Checked:hover */
-  input[type="radio"]:checked:hover ~ .icon {
-    border: var(--goa-radio-border-checked-hover);
-  }
-  /* Checked:hover+focus */
-  input[type="radio"]:checked:hover:focus-visible ~ .icon {
-    border: var(--goa-radio-border-checked);
+  /* Unchecked - Hover */
+  .radio:not(.v2) input[type="radio"]:not(:checked):hover ~ .icon,
+  .radio.v2 input[type="radio"]:not(:checked):hover ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-hover);
   }
 
-  /* Disabled */
-  input[type="radio"]:disabled ~ .icon,
-  input[type="radio"]:disabled:focus-visible ~ .icon {
+  /* Unchecked - Focus */
+  .radio:not(.v2) input[type="radio"]:not(:checked):focus-visible ~ .icon,
+  .radio.v2 input[type="radio"]:not(:checked):focus-visible ~ .icon-wrapper .icon {
+    outline: var(--goa-radio-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Unchecked - Hover+Focus */
+  .radio:not(.v2) input[type="radio"]:not(:checked):hover:focus-visible ~ .icon,
+  .radio.v2 input[type="radio"]:not(:checked):hover:focus-visible ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border);
+    outline: var(--goa-radio-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Unchecked - Disabled */
+  .radio:not(.v2) input[type="radio"]:not(:checked):disabled ~ .icon,
+  .radio.v2 input[type="radio"]:not(:checked):disabled ~ .icon-wrapper .icon {
     border: var(--goa-radio-border-disabled);
   }
-  input[type="radio"]:disabled:checked ~ .icon,
-  input[type="radio"]:disabled:checked:focus-visible ~ .icon {
-    border: var(--goa-radio-border-checked-disabled);
+
+  /* V2: Unchecked - Disabled background */
+  .radio.v2 input[type="radio"]:not(:checked):disabled ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-disabled);
   }
 
-  /* Error */
-  .radio--error input[type="radio"] ~ .icon {
+  /* Checked - Default */
+  .radio:not(.v2) input[type="radio"]:checked ~ .icon,
+  .radio.v2 input[type="radio"]:checked ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-checked);
+  }
+  /* V2 only: Inner dot */
+  .radio.v2 input[type="radio"]:checked ~ .icon-wrapper .icon-inner {
+    background-color: var(--goa-radio-inner-color);
+  }
+
+  /* Checked - Hover */
+  .radio:not(.v2) input[type="radio"]:checked:hover ~ .icon,
+  .radio.v2 input[type="radio"]:checked:hover ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-checked-hover);
+  }
+  /* V2 only: Inner dot hover */
+  .radio.v2 input[type="radio"]:checked:hover ~ .icon-wrapper .icon-inner {
+    background-color: var(--goa-radio-inner-color-hover);
+  }
+
+  /* Checked - Focus */
+  .radio:not(.v2) input[type="radio"]:checked:focus-visible ~ .icon,
+  .radio.v2 input[type="radio"]:checked:focus-visible ~ .icon-wrapper .icon {
+    outline: var(--goa-radio-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Checked - Hover+Focus */
+  .radio:not(.v2) input[type="radio"]:checked:hover:focus-visible ~ .icon,
+  .radio.v2 input[type="radio"]:checked:hover:focus-visible ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-checked);
+    outline: var(--goa-radio-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Checked - Disabled */
+  .radio:not(.v2) input[type="radio"]:checked:disabled ~ .icon,
+  .radio.v2 input[type="radio"]:checked:disabled ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-checked-disabled);
+  }
+  /* V2 only: Inner dot disabled */
+  .radio.v2 input[type="radio"]:checked:disabled ~ .icon-wrapper .icon-inner {
+    background-color: var(--goa-radio-inner-color-disabled);
+  }
+
+  /* V2: Checked - Disabled background */
+  .radio.v2 input[type="radio"]:checked:disabled ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-disabled);
+  }
+
+  /* Unchecked - Error */
+  .radio--error:not(.v2) input[type="radio"]:not(:checked) ~ .icon,
+  .radio--error.v2 input[type="radio"]:not(:checked) ~ .icon-wrapper .icon {
     border: var(--goa-radio-border-error);
   }
-  .radio--error input[type="radio"]:hover ~ .icon {
+
+  /* V2: Unchecked - Error background */
+  .radio.v2.radio--error input[type="radio"]:not(:checked) ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-error);
+  }
+
+  /* Unchecked - Error+Hover */
+  .radio--error:not(.v2) input[type="radio"]:not(:checked):hover ~ .icon,
+  .radio--error.v2 input[type="radio"]:not(:checked):hover ~ .icon-wrapper .icon {
     border: var(--goa-radio-border-error-hover);
   }
-  .radio--error input[type="radio"]:hover:focus-visible ~ .icon {
+
+  /* V2: Unchecked - Error+Hover background */
+  .radio.v2.radio--error input[type="radio"]:not(:checked):hover ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-error-hover);
+  }
+
+  /* Unchecked - Error+Focus */
+  .radio--error:not(.v2) input[type="radio"]:not(:checked):focus-visible ~ .icon,
+  .radio--error.v2 input[type="radio"]:not(:checked):focus-visible ~ .icon-wrapper .icon {
     outline: var(--goa-radio-border-focus);
-    border: var(--goa-radio-border-error);
+    outline-offset: 2px;
   }
-  .radio--error input[type="radio"]:checked ~ .icon {
-    border: var(--goa-radio-border-checked-error);
-  }
-  .radio--error input[type="radio"]:checked:hover ~ .icon {
-    border: var(--goa-radio-border-checked-error-hover);
-  }
-  .radio--error input[type="radio"]:checked:hover:focus-visible ~ .icon {
-    outline: var(--goa-radio-border-focus);
-    border: var(--goa-radio-border-checked-error);
-  }
-  .radio--error input[type="radio"]:disabled ~ .icon {
+
+  /* Unchecked - Error+Disabled */
+  .radio--error:not(.v2) input[type="radio"]:not(:checked):disabled ~ .icon,
+  .radio--error.v2 input[type="radio"]:not(:checked):disabled ~ .icon-wrapper .icon {
     border: var(--goa-radio-border-error-disabled);
   }
-  .radio--error input[type="radio"]:disabled:checked ~ .icon {
+
+  /* V2: Unchecked - Error+Disabled background */
+  .radio.v2.radio--error input[type="radio"]:not(:checked):disabled ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-disabled);
+  }
+
+  /* Checked - Error */
+  .radio--error:not(.v2) input[type="radio"]:checked ~ .icon,
+  .radio--error.v2 input[type="radio"]:checked ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-checked-error);
+  }
+  /* V2 only: Inner dot error */
+  .radio--error.v2 input[type="radio"]:checked ~ .icon-wrapper .icon-inner {
+    background-color: var(--goa-radio-inner-color-error);
+  }
+
+  /* V2: Checked - Error background */
+  .radio.v2.radio--error input[type="radio"]:checked ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-error);
+  }
+
+  /* Checked - Error+Hover */
+  .radio--error:not(.v2) input[type="radio"]:checked:hover ~ .icon,
+  .radio--error.v2 input[type="radio"]:checked:hover ~ .icon-wrapper .icon {
+    border: var(--goa-radio-border-checked-error-hover);
+  }
+  /* V2 only: Inner dot error hover */
+  .radio--error.v2 input[type="radio"]:checked:hover ~ .icon-wrapper .icon-inner {
+    background-color: var(--goa-radio-inner-color-error-hover);
+  }
+
+  /* V2: Checked - Error+Hover background */
+  .radio.v2.radio--error input[type="radio"]:checked:hover ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-error-hover);
+  }
+
+  /* Checked - Error+Focus */
+  .radio--error:not(.v2) input[type="radio"]:checked:focus-visible ~ .icon,
+  .radio--error.v2 input[type="radio"]:checked:focus-visible ~ .icon-wrapper .icon {
+    outline: var(--goa-radio-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Checked - Error+Disabled */
+  .radio--error:not(.v2) input[type="radio"]:checked:disabled ~ .icon,
+  .radio--error.v2 input[type="radio"]:checked:disabled ~ .icon-wrapper .icon {
     border: var(--goa-radio-border-checked-error-disabled);
+  }
+  /* V2 only: Inner dot error disabled */
+  .radio--error.v2 input[type="radio"]:checked:disabled ~ .icon-wrapper .icon-inner {
+    background-color: var(--goa-radio-inner-color-disabled);
+  }
+
+  /* V2: Checked - Error+Disabled background */
+  .radio.v2.radio--error input[type="radio"]:checked:disabled ~ .icon-wrapper .icon {
+    background-color: var(--goa-radio-color-bg-disabled);
   }
 </style>
