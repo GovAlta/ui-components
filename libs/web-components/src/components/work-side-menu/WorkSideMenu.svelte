@@ -8,13 +8,14 @@
         attribute: "user-secondary-text",
         reflect: true,
       },
+      open: { type: "String", attribute: "open", reflect: false },
     },
   }}
 />
 
 <script lang="ts">
   import { MOBILE_BP } from "../../common/breakpoints";
-  import { dispatch, performOnce } from "../../common/utils";
+  import { dispatch, performOnce, toBoolean } from "../../common/utils";
   import {
     getMatchedLink,
     watchPathChanges,
@@ -30,7 +31,7 @@
   export let url: string;
   export let userName: string;
   export let userSecondaryText: string;
-  export let open = true;
+  export let open: string = "true";
 
   // optional
   export let testid: string = "";
@@ -39,6 +40,7 @@
   // Private
   // *******
 
+  let _isOpen = true;
   let _isScrolling = false;
   let _showAccountMenu = false;
   let _showTooltip = false;
@@ -66,6 +68,8 @@
   // ========
 
   $: _mobile = _windowWidth < MOBILE_BP;
+  $: _isOpen = toBoolean(open);
+  $: console.log("[Svelte WorkSideMenu] open prop (string):", open, "type:", typeof open, "_isOpen (boolean):", _isOpen, "type:", typeof _isOpen);
 
   // *****
   // Hooks
@@ -94,6 +98,7 @@
 
   function toggleMenu() {
     open = !open;
+    console.log("toggleMenu is called and new open is ", open);
     _showTooltip = false;
   }
 
@@ -122,7 +127,7 @@
     label: string,
     el: HTMLElement,
   ) {
-    if (!open && menuType !== "account") {
+    if (!_isOpen && menuType !== "account") {
       updateTooltip(label, el);
       showTooltip();
     } else {
@@ -278,7 +283,7 @@
 
 <div
   class="root"
-  class:closed={!open}
+  class:closed={!_isOpen}
   class:scrolling={_isScrolling}
   class:mobile={_mobile}
   data-testid={testid}
@@ -363,10 +368,10 @@
             <goa-icon
               size="small"
               theme="outline"
-              type={open ? "arrow-start" : "arrow-end" }
+              type={_isOpen ? "arrow-start" : "arrow-end" }
             />
             <span class="toggle-button-label"
-              >{open ? "Collapse menu" : "Expand menu" }</span
+              >{_isOpen ? "Collapse menu" : "Expand menu" }</span
             >
           </button>
         </div>

@@ -1,16 +1,16 @@
 import { ReactNode, useEffect, useRef, type JSX } from "react";
 
 interface WCProps {
-  ref: RefObject<HTMLElement | null>;
   heading: string;
   url: string;
   "user-name": string;
   "user-secondary-text": string;
   testid?: string;
-  open?: string;
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
+  open?: string;
+  ref: React.RefObject<HTMLElement | null>;
 }
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -48,6 +48,7 @@ export function GoaxWorkSideMenu({
   onToggle,
 }: GoabWorkSideMenuProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+  console.log("[React wrapper] open prop is:", open, "type:", typeof open);
 
   useEffect(() => {
     if (!el?.current || !onToggle) {
@@ -65,7 +66,7 @@ export function GoaxWorkSideMenu({
       url={url}
       user-name={userName}
       user-secondary-text={userSecondaryText}
-      open={open ? true : false}
+      open={open ? "true" : "false"}
       testid={testId}
     >
       {primaryContent && <div slot="primary">{primaryContent}</div>}
