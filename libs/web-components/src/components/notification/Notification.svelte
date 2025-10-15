@@ -38,6 +38,13 @@
 
   let show = true;
 
+
+  // Default emphasis to "High" for V2 when not specified
+  $: effectiveEmphasis = version === "2" && !emphasis ? "High" : emphasis;
+
+  // Soft deprecation: map "event" to "information" in V2
+  $: effectiveType = version === "2" && type === "event" ? "information" : type;
+
   $: iconType =
     type === "emergency"
       ? "warning"
@@ -56,6 +63,9 @@
     validateAriaLiveType(arialive);
     validateEmphasis(emphasis);
     setTimeout(() => validateType(type), 1);
+    if (version === "2" && emphasis) {
+      setTimeout(() => validateEmphasis(emphasis), 1);
+    }
   });
 
   function close(e: Event) {
@@ -99,7 +109,7 @@
           <button class={type} on:click={close}>
             <goa-icon
               type="close"
-              inverted={iconInverted}
+              inverted={type === "important" ? "false" : "true"}
               theme="filled"
             />
           </button>
