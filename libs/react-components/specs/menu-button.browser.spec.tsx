@@ -123,4 +123,26 @@ describe("MenuButton", () => {
     expect(onAction.mock.calls[0][0].action).toBe("first");
     expect(onAction.mock.calls[1][0].action).toBe("second");
   });
+
+
+  it("should render with leadingIcon", async () => {
+    const onAction = vi.fn();
+
+    const Component = () => {
+      return (
+        <GoabMenuButton text="Dual icons" testId="menu-button" leadingIcon="calendar" onAction={onAction}>
+          <GoabMenuAction text="Add item" action="add" testId="menu-action-add" icon="add" />
+          <GoabMenuAction text="Delete item" action="delete" testId="menu-action-delete" icon="trash" />
+        </GoabMenuButton>
+      );
+    };
+
+    const result = render(<Component />);
+
+    // Verify leading icon on button
+    await vi.waitFor(async () => {
+      const leadingIcon = result.getByTestId("icon-calendar");
+      expect(leadingIcon).toBeDefined();
+    });
+  });
 });

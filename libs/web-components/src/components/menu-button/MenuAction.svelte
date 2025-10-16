@@ -55,6 +55,7 @@
     padding: 0 var(--goa-button-padding-lr);
     gap: var(--goa-button-gap);
     align-items: center; /* for leading and trailing icon vertical alignment */
+    white-space: nowrap;
 
     width: 100%;
     background: none;
