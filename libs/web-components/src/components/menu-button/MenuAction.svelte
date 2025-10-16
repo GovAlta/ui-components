@@ -42,11 +42,7 @@
   data-testid={testid}
   on:click={onClick}
   tabindex="0"
-  style={
-    styles(
-      style("width", "100%"),
-    )
-  }
+  style={styles(style("width", "100%"))}
 >
   {#if icon}
     <goa-icon data-testid={`icon-${icon}`} size="3" type={icon} />
@@ -80,8 +76,7 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 
   .text {

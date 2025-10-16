@@ -1,5 +1,15 @@
-import { GoabButtonType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  GoabButtonType,
+  GoabIconType,
+  GoabMenuButtonOnActionDetail,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 
 @Component({
   standalone: true,

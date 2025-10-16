@@ -1,5 +1,4 @@
-<svelte:options
-  customElement={{
+<svelte:options customElement={{
     tag: "goa-menu-button",
     props: {
       leadingIcon: { attribute: "leading-icon", type: "String" },
@@ -147,6 +146,7 @@
     bind:this={_targetEl}
     data-testid={testid}
     slot="target"
+    leadingicon={leadingIcon}
     {type}
     trailingicon={_icon}
   >
