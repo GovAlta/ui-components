@@ -1,6 +1,8 @@
-<svelte:options
-  customElement={{
+<svelte:options customElement={{
     tag: "goa-menu-button",
+    props: {
+      leadingIcon: { attribute: "leading-icon", type: "String" },
+    }
   }}
 />
 
@@ -15,6 +17,7 @@
   export let text: string;
   export let type: "primary" | "secondary" | "tertiary" = "primary";
   export let testid: string = "";
+  export let leadingIcon: GoAIconType | undefined = undefined;
 
   // Private props
 
@@ -133,13 +136,14 @@
   on:_open={open}
   padded="false"
   tabindex="-1"
-  maxwidth=""
+  maxwidth="none"
   prevent-scroll-into-view={true}
 >
   <goa-button
     bind:this={_targetEl}
     data-testid={testid}
     slot="target"
+    leadingicon={leadingIcon}
     {type}
     trailingicon={_icon}
   >
