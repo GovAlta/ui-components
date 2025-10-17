@@ -303,6 +303,7 @@
    */
   function onChildDestroyed(detail: DropdownItemDestroyRelayDetail) {
     _options = _options.filter((option) => option.value !== detail.value);
+    syncFilteredOptions();
   }
 
   function setSelected() {
