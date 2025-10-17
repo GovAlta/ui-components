@@ -3,6 +3,7 @@ import { Route } from "@angular/router";
 import { EverythingComponent } from "./everything.component";
 import { Bug2152Component } from "../routes/bugs/2152/bug2152.component";
 import { Bug2331Component } from "../routes/bugs/2331/bug2331.component";
+import { Bug2333Component } from "../routes/bugs/2333/bug2333.component";
 import { Bug2393Component } from "../routes/bugs/2393/bug2393.component";
 import { Bug2404Component } from "../routes/bugs/2404/bug2404.component";
 import { Bug2408Component } from "../routes/bugs/2408/bug2408.component";
@@ -48,6 +49,7 @@ import { Feat3102Component } from "../routes/features/feat3102/feat3102.componen
 export const appRoutes: Route[] = [
   { path: "bugs/2152", component: Bug2152Component },
   { path: "bugs/2331", component: Bug2331Component },
+  { path: "bugs/2333", component: Bug2333Component },
   { path: "bugs/2393", component: Bug2393Component },
   { path: "bugs/2404", component: Bug2404Component },
   { path: "bugs/2408", component: Bug2408Component },
