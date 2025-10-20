@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "serve:web": "nx run web:serve:development",
-    "serve:react": "nx run react:serve:development",
-    "serve:angular": "nx run angular:serve:development",
+    "serve:dev:web": "nx run web-dev:serve:development",
+    "serve:dev:react": "nx run react-dev:serve:development",
+    "serve:dev:angular": "nx run angular-dev:serve:development",
+    "serve:prs:web": "nx run web-prs:serve:development",
+    "serve:prs:react": "nx run react-prs:serve:development",
+    "serve:prs:angular": "nx run angular-prs:serve:development",
     "dev:watch": "vite build --watch libs/web-components",
-    "build": "nx affected --base=dev -t build --exclude=apps/* --exclude=playground/*",
-    "build:prod": "nx run-many -t build --all --prod --exclude=apps/* --exclude=playground/*",
+    "build": "nx affected --base=dev -t build --exclude=apps/*",
+    "build:prod": "nx run-many -t build --all --prod --exclude=apps/*",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest:pr": "npx nx run common:build && npx nx run web-components:build && npx nx run react-components:build",
     "test:pr": "vitest --run --project=*-unit && vitest --run --project=*-headless && nx test angular-components",
@@ -18,8 +21,7 @@
     "test:angular": "nx test angular-components",
     "lint": "nx run-many --target=lint --exclude=angular --exclude=react --exclude=web",
     "validate": "npm run build && npm run lint && vitest --run",
-    "pg:setup": "./scripts/pg-setup",
-    "pg:switch": "./scripts/pg-switch"
+    "dev:setup": "bash ./scripts/dev-setup"
   },
   "private": true,
   "devDependencies": {
@@ -121,6 +123,7 @@
     "react-dom": "19.0.0",
     "react-router-dom": "6.11.2",
     "rxjs": "~7.8.0",
+    "svelte-routing": "^2.13.0",
     "tslib": "^2.3.0",
     "zone.js": "0.15.1"
   },
