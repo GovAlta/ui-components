@@ -1,6 +1,7 @@
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
+  GoabRadioGroupSize,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -22,6 +23,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.value]="value"
       [disabled]="disabled"
       [attr.orientation]="orientation"
+      [attr.size]="size"
       [attr.error]="error"
       [attr.arialabel]="ariaLabel"
       [id]="id"
@@ -47,6 +49,7 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabRadioGroup extends GoabControlValueAccessor {
   @Input() name?: string;
   @Input() orientation?: GoabRadioGroupOrientation;
+  @Input() size?: GoabRadioGroupSize;
   @Input() ariaLabel?: string;
 
   @Output() onChange = new EventEmitter<GoabRadioGroupOnChangeDetail>();
