@@ -6,17 +6,17 @@ import { AngularComponentsModule } from "@abgov/angular-components";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
-import { ComponentWrapperPageComponent } from "./component-wrapper";
+import { PlaygroundComponent } from "./playground";
+import { AppRoutingModule } from "./app-routing.module";
 import "@abgov/web-components";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     AngularComponentsModule,
-    ComponentWrapperPageComponent,
+    PlaygroundComponent,
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     NgForOf,
     NgIf,
@@ -27,4 +27,4 @@ import "@abgov/web-components";
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
