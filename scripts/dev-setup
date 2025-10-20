@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+if [ ! -f .env ]; then cp ./.env.example ./.env; fi
+
+if [ -d "./apps/dev" ]; then
+  echo "./apps/dev already exists. To re-create manually delete the current folder"
+  exit 0
+fi
+
+mkdir ./apps/dev
+cp -r ./.templates/* ./apps/dev
+
+echo "Dev env created!"
