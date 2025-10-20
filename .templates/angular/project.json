@@ -1,25 +1,25 @@
 {
-  "name": "angular",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "angular-dev",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "abgov",
-  "sourceRoot": "playground/angular/src",
+  "sourceRoot": "apps/dev/angular/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/playground/angular",
-        "index": "playground/angular/src/index.html",
-        "browser": "playground/angular/src/main.ts",
+        "outputPath": "dist/apps/dev/angular",
+        "index": "apps/dev/angular/src/index.html",
+        "browser": "apps/dev/angular/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "playground/angular/tsconfig.app.json",
+        "tsConfig": "apps/dev/angular/tsconfig.app.json",
         "assets": [
-          "playground/angular/src/favicon.ico",
-          "playground/angular/src/assets"
+          "apps/dev/angular/src/favicon.ico",
+          "apps/dev/angular/src/assets"
         ],
-        "styles": ["playground/angular/src/styles.css"],
+        "styles": ["apps/dev/angular/src/styles.css"],
         "scripts": []
       },
       "configurations": {
@@ -50,10 +50,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "angular:build:production"
+          "buildTarget": "angular-dev:build:production"
         },
         "development": {
-          "buildTarget": "angular:build:development"
+          "buildTarget": "angular-dev:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -61,7 +61,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "angular:build"
+        "buildTarget": "angular-dev:build"
       }
     },
     "lint": {

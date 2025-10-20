@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@abgov/web-components";
 import App from "./app/app";
 import AllComponents from "./app/all";
-import { TestContent } from "./app/TestContent";
+import Playground from "./app/Playground";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -18,7 +18,7 @@ root.render(
         <Route path="/" element={<App />}>
 
           <Route path="/all" element={<AllComponents />} />
-          <Route path="/test" element={<TestContent />} />
+          <Route path="/playground" element={<Playground />} />
 
         </Route>
       </Routes>
