@@ -1,6 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
-
-import { TestContent } from "./TestContent";
+import { Outlet } from "react-router-dom";
 
 import {
   GoabAppFooter,
@@ -18,7 +16,7 @@ export function App() {
         <GoabMicrositeHeader type="alpha" version="UAT" />
         <GoabAppHeader url="/" heading="Design System">
           <a href="/all">View All</a>
-          <a href="/test">Test</a>
+          <a href="/playground">Playground</a>
         </GoabAppHeader>
       </section>
       <div style={{ display: "flex", margin: "auto", width: "1024px" }}>
