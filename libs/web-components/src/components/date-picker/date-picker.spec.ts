@@ -199,3 +199,43 @@ it("prevents interaction when disabled", async () => {
     expect(handler).not.toBeCalled();
   });
 });
+
+describe("width property", () => {
+  it("applies custom width to calendar type datepicker", async () => {
+    const { container } = render(DatePicker, {
+      type: "calendar",
+      width: "20ch"
+    });
+    const input = container.querySelector("goa-input");
+
+    expect(input?.getAttribute("width")).toBe("20ch");
+  });
+
+  it("uses default width when not specified for calendar type", async () => {
+    const { container } = render(DatePicker, {
+      type: "calendar"
+    });
+    const input = container.querySelector("goa-input");
+
+    expect(input?.getAttribute("width")).toBe("16ch");
+  });
+
+  it("applies custom width to input type datepicker", async () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+      width: "400px"
+    });
+    const formItem = container.querySelector("goa-form-item");
+
+    expect(formItem?.getAttribute("style")).toContain("width: 400px");
+  });
+
+  it("does not apply width style when not specified for input type", async () => {
+    const { container } = render(DatePicker, {
+      type: "input"
+    });
+    const formItem = container.querySelector("goa-form-item");
+
+    expect(formItem?.getAttribute("style")).toBe("");
+  });
+});
