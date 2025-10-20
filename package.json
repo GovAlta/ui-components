@@ -84,7 +84,7 @@
     "jsonc-eslint-parser": "^2.1.0",
     "ng-packagr": "18.1.0",
     "nx": "21.1.2",
-    "playwright": "^1.50.1",
+    "playwright": "^1.56.1",
     "postcss": "^8.4.5",
     "postcss-import": "~14.1.0",
     "postcss-preset-env": "~7.5.0",
