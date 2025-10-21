@@ -165,12 +165,12 @@
     const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)?.host as HTMLElement;
     const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
 
-      relay<FormFieldMountRelayDetail>(
-        _rootEl,
-        FormFieldMountMsg,
-        { name, el: _rootEl },
-        { bubbles: !fromCheckboxList, timeout: 10 },
-      );
+    relay<FormFieldMountRelayDetail>(
+      _rootEl,
+      FormFieldMountMsg,
+      { name, el: _rootEl },
+      { bubbles: !fromCheckboxList, timeout: 10 },
+    );
   }
 
   function onChange(e: Event) {
@@ -387,6 +387,7 @@ max-width: ${maxwidth};
 
   /* Container */
   .container {
+    position: relative;
     box-sizing: border-box;
     border: var(--goa-checkbox-border);
     border-radius: var(--goa-checkbox-border-radius);
@@ -398,6 +399,17 @@ max-width: ${maxwidth};
     justify-content: center;
     flex: 0 0 auto; /* prevent squishing of checkbox */
   }
+
+  .container::before {
+    content: '';
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .container:hover {
     border: var(--goa-checkbox-border-hover);
   }
