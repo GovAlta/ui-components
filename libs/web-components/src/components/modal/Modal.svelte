@@ -12,6 +12,7 @@
 
   type CalloutVariant = (typeof CALLOUT_VARIANT)[number];
   type Transition = (typeof Transitions)[number];
+  type VersionType = (typeof Version)[number];
 
   // ******
   // Public
@@ -24,6 +25,7 @@
   export let calloutvariant: CalloutVariant | null = null;
   export let maxwidth: string = "60ch";
   export let testid: string = "modal";
+  export let version: VersionType = "1";
 
   // @deprecated: use maxwidth
   export let width: string = "";
@@ -54,6 +56,8 @@
     "slow",
     "none",
   ]);
+
+  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
 
   // ********
   // Reactive
@@ -102,6 +106,7 @@
     await tick();
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
+    validateVersion(version);
 
     // event listeners
     window.addEventListener("keydown", onInputKeyDown);
@@ -213,13 +218,14 @@
         in:fly={{ duration: _transitionTime, y: 200 }}
         out:fly={{ delay: _transitionTime, duration: _transitionTime, y: -100 }}
         class="modal-pane"
+        class:v2={version === "2"}
         tabindex="-1"
         role="dialog"
         aria-modal="true"
         aria-labelledby="goa-modal-heading"
         data-first-focus="true"
       >
-        {#if calloutvariant !== null}
+        {#if calloutvariant !== null && version !== "2"}
           <div class="callout-bar {calloutvariant}">
             <goa-icon
               type={_iconType}
@@ -231,19 +237,30 @@
           <header
             bind:this={_headerEl}
             class:has-content={_headerHasContent}
+            class:callout={calloutvariant !== null}
+            class={version === "2" && calloutvariant ? calloutvariant : ""}
             bind:clientHeight={_headerHeight}
           >
-            <div
-              data-testid="modal-title"
-              class="modal-title"
-              id="goa-modal-heading"
-              aria-label={_headingExists ? undefined : "Modal"}
-            >
-              {#if heading}
-                {heading}
-              {:else if $$slots.heading}
-                <slot name="heading" />
+            <div class="modal-heading-content">
+              {#if version === "2" && _iconType}
+                <goa-icon
+                  type={_iconType}
+                  size="medium"
+                  theme="filled"
+                />
               {/if}
+              <div
+                data-testid="modal-title"
+                class="modal-title"
+                id="goa-modal-heading"
+                aria-label={_headingExists ? undefined : "Modal"}
+              >
+                {#if heading}
+                  {heading}
+                {:else if $$slots.heading}
+                  <slot name="heading" />
+                {/if}
+              </div>
             </div>
             {#if _isClosable}
               <div class="modal-close">
@@ -360,21 +377,28 @@
   .content {
     flex: 1 1 auto;
     width: 100%;
-    padding: var(--goa-modal-padding) var(--goa-modal-padding) 0 var(--goa-modal-padding);
+    padding: var(--goa-modal-content-wrapper-padding, var(--goa-modal-padding) var(--goa-modal-padding) 0 var(--goa-modal-padding));
   }
 
   .content header {
     display: flex;
     justify-content: space-between;
+    align-items: start;
+    padding: var(--goa-modal-heading-padding, 0);
+    border-bottom: var(--goa-modal-heading-border-bottom, none);
   }
 
   .content header.has-content {
     margin-bottom: var(--goa-modal-content-gap); /* space under heading */
   }
 
+  .content header .modal-heading-content {
+    margin-top: var(--goa-space-2xs);
+  }
+
   @media (--mobile) {
     .content {
-      padding: var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen);
+      padding: var(--goa-modal-content-wrapper-padding, var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen));
     }
 
     .content header.has-content {
@@ -401,12 +425,30 @@
     }
 
     .modal-content {
-      margin: 0 -1.5rem;
+      margin: var(--goa-modal-content-margin-mobile, 0 -1.5rem);
+      padding: var(--goa-modal-content-padding, 0);
       box-shadow: none;
     }
 
     :host {
-      --scrollable-padding: var(--goa-scrollable-padding-mobile);
+      --scrollable-padding: var(--goa-modal-scrollable-padding-mobile, var(--goa-scrollable-padding-mobile));
+    }
+
+    /* V2 Mobile Overrides */
+    .v2 .content header {
+      padding: var(--goa-modal-heading-padding-mobile, var(--goa-space-m));
+    }
+
+    .v2 .content header.callout {
+      padding: var(--goa-modal-callout-heading-padding-mobile, var(--goa-space-m));
+    }
+
+    .v2 .modal-content {
+      padding: var(--goa-modal-content-padding-mobile, var(--goa-space-l) var(--goa-space-m) var(--goa-space-xl) var(--goa-space-m));
+    }
+
+    .v2 .modal-actions {
+      padding: var(--goa-modal-actions-padding-mobile, 0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m));
     }
 
   }
@@ -417,20 +459,22 @@
     }
 
     .modal-content {
-      margin: 0 -2rem;
+      margin: var(--goa-modal-content-margin, 0 -2rem);
+      padding: var(--goa-modal-content-padding, 0);
       box-shadow: none;
     }
 
     :host {
-      --scrollable-padding: var(--goa-scrollable-padding-desktop);
+      --scrollable-padding: var(--goa-modal-scrollable-padding-desktop, var(--goa-scrollable-padding-desktop));
     }
 
   }
 
   .modal-pane {
-    background-color: #fff;
+    background-color: var(--goa-modal-color-bg, #fff);
+    border: var(--goa-modal-border, none);
     z-index: 2;
-    width: 90%;
+    width: var(--goa-modal-pane-width, 90%);
     display: flex;
     box-shadow: var(--goa-shadow-modal);
     border-radius: var(--goa-modal-border-radius);
@@ -438,6 +482,11 @@
 
   .modal-content :global(::slotted(:last-child)) {
     margin-bottom: var(--goa-space-m) !important;
+  }
+
+  /* V2: Remove margins from slotted content to prevent spacing issues */
+  .v2 .modal-content :global(::slotted(*)) {
+    margin: 0 !important;
   }
 
   .modal-title {
@@ -450,13 +499,18 @@
 
   .modal-actions {
     width: 100%;
-    padding: var(--goa-space-m) 0 var(--goa-modal-padding) 0;
+    padding: var(--goa-modal-actions-padding, var(--goa-space-m) 0 var(--goa-modal-padding) 0);
     margin: auto 0 0 0;
     text-align: right;
   }
 
   .modal-actions.empty-actions {
     padding: 0 0 var(--goa-modal-padding) 0;
+  }
+
+  /* V2: Empty actions should take no space */
+  .v2 .modal-actions.empty-actions {
+    padding: 0;
   }
 
   .modal.top .modal-content {
@@ -470,5 +524,66 @@
   .modal.middle .modal-content {
     box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
     inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* V2 Callout Styles */
+  .v2 .modal-heading-content {
+    display: flex;
+    align-items: start;
+    gap: var(--goa-space-xs);
+  }
+
+  .v2 .content header.callout {
+    padding: var(--goa-modal-callout-heading-padding);
+    border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius) 0 0;
+  }
+
+  .v2 header.callout goa-icon {
+    margin-top: 1px;
+  }
+
+  .v2 header.information {
+    background-color: var(--goa-modal-callout-information-bg);
+    border-bottom-color: var(--goa-modal-callout-information-border);
+  }
+
+  .v2 header.information goa-icon {
+    color: var(--goa-modal-callout-information-icon);
+  }
+
+  .v2 header.success {
+    background-color: var(--goa-modal-callout-success-bg);
+    border-bottom-color: var(--goa-modal-callout-success-border);
+  }
+
+  .v2 header.success goa-icon {
+    color: var(--goa-modal-callout-success-icon);
+  }
+
+  .v2 header.important {
+    background-color: var(--goa-modal-callout-important-bg);
+    border-bottom-color: var(--goa-modal-callout-important-border);
+  }
+
+  .v2 header.important goa-icon {
+    color: var(--goa-modal-callout-important-icon);
+  }
+
+  .v2 header.emergency {
+    background-color: var(--goa-modal-callout-emergency-bg);
+    border-bottom-color: var(--goa-modal-callout-emergency-border);
+  }
+
+  .v2 header.emergency goa-icon {
+    color: var(--goa-modal-callout-emergency-icon);
+  }
+
+  .v2 header.event {
+    background-color: var(--goa-modal-callout-event-bg);
+    border-bottom-color: var(--goa-modal-callout-event-border);
+  }
+
+  .v2 header.event goa-icon {
+    color: var(--goa-modal-callout-event-icon);
   }
 </style>
