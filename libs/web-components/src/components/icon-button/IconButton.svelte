@@ -104,7 +104,7 @@
   }
 
   .goa-icon-button--small {
-    padding: var(--goa-icon-button-medium-padding);
+    padding: var(--goa-icon-button-small-padding, var(--goa-icon-button-medium-padding));
   }
 
   .goa-icon-button--medium {
@@ -112,10 +112,6 @@
   }
 
   .goa-icon-button--large {
-    padding: var(--goa-icon-button-large-padding);
-  }
-
-  .goa-icon-button--xlarge {
     padding: var(--goa-icon-button-large-padding);
   }
 
@@ -127,9 +123,7 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    border-radius: var(--goa-icon-button-medium-border-radius);
-    padding: var(--padding);
-    cursor: pointer;
+    border-radius: var(--goa-icon-button-border-radius, var(--goa-icon-button-medium-border-radius));
     transition: background-color 0.2s ease-in-out,
     color 0.2s ease-in-out,
     transform 0.1s ease-in-out;
@@ -144,7 +138,7 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px) var(--goa-icon-button-focus-border-color, var(--goa-color-interactive-focus));
     outline: none;
   }
 
@@ -190,8 +184,8 @@
   }
 
   .dark:disabled {
-    color: var(--goa-icon-button-dark-disabled-color-bg);
-    fill: var(--goa-icon-button-dark-disabled-color-bg);
+    color: var(--goa-icon-button-dark-disabled-color);
+    fill: var(--goa-icon-button-dark-disabled-color);
   }
 
   /*  Type: nocolor (same as dark, not documented) */
