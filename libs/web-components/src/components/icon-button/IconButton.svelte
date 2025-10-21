@@ -104,7 +104,7 @@
   }
 
   .goa-icon-button--small {
-    padding: var(--goa-icon-button-medium-padding);
+    padding: var(--goa-icon-button-small-padding, var(--goa-icon-button-medium-padding));
   }
 
   .goa-icon-button--medium {
@@ -112,10 +112,6 @@
   }
 
   .goa-icon-button--large {
-    padding: var(--goa-icon-button-large-padding);
-  }
-
-  .goa-icon-button--xlarge {
     padding: var(--goa-icon-button-large-padding);
   }
 
@@ -127,9 +123,7 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    border-radius: var(--goa-icon-button-medium-border-radius);
-    padding: var(--padding);
-    cursor: pointer;
+    border-radius: var(--goa-icon-button-border-radius, var(--goa-icon-button-medium-border-radius));
     transition: background-color 0.2s ease-in-out,
     color 0.2s ease-in-out,
     transform 0.1s ease-in-out;
@@ -144,7 +138,7 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px) var(--goa-icon-button-focus-border-color, var(--goa-color-interactive-focus));
     outline: none;
   }
 
@@ -165,8 +159,7 @@
     fill: var(--goa-icon-button-default-color);
   }
 
-  .color:hover,
-  .color:focus-visible {
+  .color:hover:not(:focus-visible) {
     color: var(--goa-icon-button-default-hover-color);
     fill: var(--goa-icon-button-default-hover-color);
     background-color: var(--goa-icon-button-default-hover-color-bg);
@@ -183,15 +176,14 @@
     fill: var(--goa-icon-button-dark-color);
   }
 
-  .dark:hover,
-  .dark:focus-visible,
+  .dark:hover:not(:focus-visible),
   .dark:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
 
   .dark:disabled {
-    color: var(--goa-icon-button-dark-disabled-color-bg);
-    fill: var(--goa-icon-button-dark-disabled-color-bg);
+    color: var(--goa-icon-button-dark-disabled-color, var(--goa-icon-button-dark-disabled-color-bg));
+    fill: var(--goa-icon-button-dark-disabled-color, var(--goa-icon-button-dark-disabled-color-bg));
   }
 
   /*  Type: nocolor (same as dark, not documented) */
@@ -200,8 +192,7 @@
     fill: var(--goa-icon-button-dark-color);
   }
 
-  .nocolor:hover,
-  .nocolor:focus-visible,
+  .nocolor:hover:not(:focus-visible),
   .nocolor:active {
     background-color: var(--goa-icon-button-dark-hover-color-bg);
   }
@@ -212,9 +203,10 @@
     fill: var(--goa-icon-button-destructive-color);
   }
 
-  .destructive:hover,
-  .destructive:focus-visible,
+  .destructive:hover:not(:focus-visible),
   .destructive:active {
+    color: var(--goa-icon-button-destructive-hover-color);
+    fill: var(--goa-icon-button-destructive-hover-color);
     background-color: var(--goa-icon-button-destructive-hover-color-bg);
   }
 
@@ -229,8 +221,7 @@
     fill: var(--goa-icon-button-light-color);
   }
 
-  .light:hover,
-  .light:focus-visible,
+  .light:hover:not(:focus-visible),
   .light:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
   }
@@ -246,8 +237,7 @@
     fill: var(--goa-icon-button-light-color);
   }
 
-  .inverted:hover,
-  .inverted:focus-visible,
+  .inverted:hover:not(:focus-visible),
   .inverted:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
   }
