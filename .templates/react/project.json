@@ -1,7 +1,7 @@
 {
-  "name": "react",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "playground/react/src",
+  "name": "react-dev",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dev/react/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/playground/react"
+        "outputPath": "dist/apps/dev/react"
       },
       "configurations": {
         "development": {
@@ -24,15 +24,15 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "react:build"
+        "buildTarget": "react-dev:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "react:build:development",
+          "buildTarget": "react-dev:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "react:build:production",
+          "buildTarget": "react-dev:build:production",
           "hmr": false
         }
       }
@@ -41,14 +41,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "react:build"
+        "buildTarget": "react-dev:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "react:build:development"
+          "buildTarget": "react-dev:build:development"
         },
         "production": {
-          "buildTarget": "react:build:production"
+          "buildTarget": "react-dev:build:production"
         }
       }
     },

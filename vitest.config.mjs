@@ -7,7 +7,7 @@ export default defineConfig({
     retries: 3,
     exclude: [
       "**/node_modules",
-      "playground",
+      "apps",
       "libs/angular-components",  // run angular via nx
     ],
   },

@@ -6,20 +6,12 @@ is designed to be used to help bring consistency to all Government of Alberta
 websites and web applications. It's also being designed to help ease the burden
 on designers and developers alike throughout the development process.
 
-## Development environment
-
-Create .env file from .env.example
-
-```bash
-if [ ! -f .env ]; then cp ./.env.example ./.env; fi
-```
-
 ### Playground setup
 
-Run the `pg-setup` file.
+Run the `dev-setup` file.
 
 ```bash
-npm run pg:setup
+npm run dev:setup
 ```
 
 You can then test the playground apps at `localhost:4200` by running:
@@ -29,28 +21,9 @@ You can then test the playground apps at `localhost:4200` by running:
 npm run dev:watch
 
 # add one of the following
-npm run serve:angular
-npm run serve:react
-npm run serve:web
-```
-
-### Multiple playgrounds
-
-Since the playground is not included in the CVS it is common to have playground
-comment/uncomment code the `npm run pg:switch` script can automate this by switching
-code that is out of sync with library code. To prevent having to continually
-between playgrounds that are specific to the branch.
-
-To switch to a branch that doesn't yet exist, run the following
-
-```bash
-npm run pg:switch new [branch-name]
-```
-
-To switch to an existing branch run the following
-
-```bash
-npm run pg:switch [branch-name]
+npm run serve:dev:angular
+npm run serve:dev:react
+npm run serve:dev:web
 ```
 
 ---

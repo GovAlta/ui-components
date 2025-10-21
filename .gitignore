@@ -2,8 +2,9 @@
 
 # Custom
 .nx
-playground
-.playgrounds
+apps/dev/angular
+apps/dev/react
+apps/dev/web
 NOTES.md
 /test-results
 __screenshots__
