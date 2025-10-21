@@ -67,7 +67,7 @@
     })
   }
 
-  onDestroy(async () => {
+  onDestroy(() => {
     relay<DropdownItemDestroyRelayDetail>(
       _parentEl,
       DropdownItemDestroyMsg,

@@ -585,4 +585,48 @@ describe("Dropdown", () => {
       });
     })
   })
+
+  describe("Dropdown reset", () => {
+    it("should reduce the number of element displayed within the dropdown", async () => {
+      let values: string[] = ["red", "blue", "green"]
+
+      const Component = () => {
+        return (
+          <GoabDropdown name="favcolor" onChange={noop}>
+            {values.map((item) =>
+              <GoabDropdownItem label={item} value={item} key={item} />
+            )}
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const input = result.getByRole("combobox");
+      const items = result.getByRole("option");
+
+      // Initial state
+
+      await vi.waitFor(async () => {
+        const inputEl = input.element() as HTMLInputElement
+        inputEl.click();
+        expect(items.elements().length).toBe(values.length);
+        items.elements().forEach((el, index) => {
+          expect(el.innerHTML.trim()).toBe(values[index]);
+        })
+      });
+
+      // Reduce to 1 item
+
+      values = ["blue"]; // the previous failure happened with this item, was one of the previous items
+      result.rerender(<Component />)
+
+      await vi.waitFor(async () => {
+        const inputEl = input.element() as HTMLInputElement
+        inputEl.click();
+        const items = result.getByRole("option");
+        expect(items.elements().length).toBe(1);
+        expect(items.element().innerHTML.trim()).toBe("blue");
+      });
+    })
+  })
 });
