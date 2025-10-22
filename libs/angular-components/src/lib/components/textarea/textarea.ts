@@ -15,6 +15,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -26,6 +27,7 @@ import { GoabControlValueAccessor } from "../base.component";
   imports: [CommonModule],
   template: `
     <goa-textarea
+      #goaComponentRef
       *ngIf="isReady"
       [attr.name]="name"
       [attr.value]="value"
@@ -78,8 +80,11 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
 
   isReady = false;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
 
   ngOnInit(): void {
