@@ -1,4 +1,7 @@
-import { GoabDatePickerInputType, GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  GoabDatePickerInputType,
+  GoabDatePickerOnChangeDetail,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -10,6 +13,7 @@ import {
   HostListener,
   OnInit,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -20,6 +24,7 @@ import { GoabControlValueAccessor } from "../base.component";
   selector: "goab-date-picker",
   imports: [CommonModule],
   template: ` <goa-date-picker
+    #goaComponentRef
     *ngIf="isReady"
     [attr.name]="name"
     [attr.value]="formatValue(value)"
@@ -78,8 +83,12 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
     this.fcChange?.(detail.value);
   }
 
-  constructor(protected elementRef: ElementRef, private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    protected elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
 
   ngOnInit(): void {
@@ -104,16 +113,12 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   override writeValue(value: Date | null): void {
     this.value = value;
 
-    const datePickerEl = this.elementRef?.nativeElement?.querySelector("goa-date-picker");
-
+    const datePickerEl = this.goaComponentRef?.nativeElement as HTMLElement | undefined;
     if (datePickerEl) {
       if (!value) {
-        datePickerEl.setAttribute("value", "");
+        this.renderer.setAttribute(datePickerEl, "value", "");
       } else {
-        datePickerEl.setAttribute(
-          "value",
-          value instanceof Date ? value.toISOString() : value,
-        );
+        this.renderer.setAttribute(datePickerEl, "value", value instanceof Date ? value.toISOString() : value);
       }
     }
   }
