@@ -10,6 +10,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgTemplateOutlet, CommonModule } from "@angular/common";
@@ -19,34 +20,35 @@ import { GoabControlValueAccessor } from "../base.component";
   standalone: true,
   selector: "goab-checkbox",
   template: ` <goa-checkbox
-      *ngIf="isReady"
-      [attr.name]="name"
-      [checked]="checked"
-      [disabled]="disabled"
-      [attr.indeterminate]="indeterminate ? 'true' : undefined"
-      [attr.error]="error"
-      [attr.text]="text"
-      [value]="value"
-      [attr.testid]="testId"
-      [attr.arialabel]="ariaLabel"
-      [attr.description]="getDescriptionAsString()"
-      [attr.revealarialabel]="revealArialLabel"
-      [id]="id"
-      [attr.maxwidth]="maxWidth"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_change)="_onChange($event)"
-      >
-      <ng-content />
-      <div slot="description">
-        <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
-      </div>
-      <div slot="reveal">
-        <ng-container *ngIf="reveal" [ngTemplateOutlet]="reveal"></ng-container>
-      </div>
-    </goa-checkbox>`,
+    #goaComponentRef
+    *ngIf="isReady"
+    [attr.name]="name"
+    [checked]="checked"
+    [disabled]="disabled"
+    [attr.indeterminate]="indeterminate ? 'true' : undefined"
+    [attr.error]="error"
+    [attr.text]="text"
+    [value]="value"
+    [attr.testid]="testId"
+    [attr.arialabel]="ariaLabel"
+    [attr.description]="getDescriptionAsString()"
+    [attr.revealarialabel]="revealArialLabel"
+    [id]="id"
+    [attr.maxwidth]="maxWidth"
+    [attr.mt]="mt"
+    [attr.mb]="mb"
+    [attr.ml]="ml"
+    [attr.mr]="mr"
+    (_change)="_onChange($event)"
+  >
+    <ng-content />
+    <div slot="description">
+      <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
+    </div>
+    <div slot="reveal">
+      <ng-container *ngIf="reveal" [ngTemplateOutlet]="reveal"></ng-container>
+    </div>
+  </goa-checkbox>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
@@ -60,8 +62,11 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   isReady = false;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
 
   ngOnInit(): void {
@@ -78,7 +83,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   @Input({ transform: booleanAttribute }) indeterminate?: boolean;
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
-  @Input() override value?: string | number | boolean;
+  @Input() override value?: string | number | boolean | null;
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<any>;
   @Input() reveal?: TemplateRef<any>;
@@ -103,5 +108,16 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.binding === "check" ? detail.checked : detail.value || "");
+  }
+
+  // Checkbox is a special case: it uses `checked` instead of `value`.
+  override writeValue(value: string | number | boolean | null): void {
+    this.value = value;
+    this.checked = !!value;
+
+    const el = this.goaComponentRef?.nativeElement as HTMLElement | undefined;
+    if (el) {
+      this.renderer.setAttribute(el, "checked", this.checked ? "true" : "false");
+    }
   }
 }

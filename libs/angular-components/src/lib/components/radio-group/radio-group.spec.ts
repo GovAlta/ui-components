@@ -8,6 +8,7 @@ import {
 } from "@abgov/ui-components-common";
 import { GoabRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
+import { By } from "@angular/platform-browser";
 import { CommonModule } from "@angular/common";
 
 interface RadioOption {
@@ -78,7 +79,7 @@ describe("GoABRadioGroup", () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [GoabRadioGroup, GoabRadioItem, TestRadioGroupComponent],
+      imports: [TestRadioGroupComponent, GoabRadioGroup, GoabRadioItem],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -136,13 +137,11 @@ describe("GoABRadioGroup", () => {
     });
   });
 
-  it("should render description", fakeAsync(() => {
+  it("should render description", () => {
     component.options.forEach((option, index) => {
       component.options[index].description = `Description for ${component.options[index].text}`;
     });
     component.options[0].isDescriptionSlot = true;
-    fixture.detectChanges();
-    tick();
     fixture.detectChanges();
 
     const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
@@ -157,16 +156,62 @@ describe("GoABRadioGroup", () => {
     // attribute description
     expect(radioItems[1].getAttribute("description")).toBe(`Description for ${component.options[1].text}`);
     expect(radioItems[2].getAttribute("description")).toBe(`Description for ${component.options[2].text}`);
-  }));
+  });
 
   it("should dispatch onChange", () => {
     const onChange = jest.spyOn(component, "onChange");
 
     const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
     fireEvent(radioGroup, new CustomEvent("_change", {
-      detail: { "name": component.name, value: component.options[0].value }
+      detail: {"name": component.name, value: component.options[0].value}
     }));
 
-    expect(onChange).toBeCalledWith({ name: component.name, value: component.options[0].value });
-  })
+    expect(onChange).toBeCalledWith({name: component.name, value: component.options[0].value});
+  });
+
+  describe("writeValue", () => {
+    it("should set value attribute when writeValue is called", () => {
+      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupElement = fixture.nativeElement.querySelector("goa-radio-group");
+
+      radioGroupComponent.writeValue("apples");
+      expect(radioGroupElement.getAttribute("value")).toBe("apples");
+
+      radioGroupComponent.writeValue("oranges");
+      expect(radioGroupElement.getAttribute("value")).toBe("oranges");
+    });
+
+    it("should set value attribute to empty string when writeValue is called with null or empty", () => {
+      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupElement = fixture.nativeElement.querySelector("goa-radio-group");
+
+      // First set a value
+      radioGroupComponent.writeValue("bananas");
+      expect(radioGroupElement.getAttribute("value")).toBe("bananas");
+
+      // Then clear it with null
+      radioGroupComponent.writeValue(null);
+      expect(radioGroupElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with undefined
+      radioGroupComponent.writeValue("apples");
+      radioGroupComponent.writeValue(undefined);
+      expect(radioGroupElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with empty string
+      radioGroupComponent.writeValue("oranges");
+      radioGroupComponent.writeValue("");
+      expect(radioGroupElement.getAttribute("value")).toBe("");
+    });
+
+    it("should update component value property", () => {
+      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+
+      radioGroupComponent.writeValue("apples");
+      expect(radioGroupComponent.value).toBe("apples");
+
+      radioGroupComponent.writeValue(null);
+      expect(radioGroupComponent.value).toBe(null);
+    });
+  });
 });
