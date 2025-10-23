@@ -17,6 +17,7 @@
   export let content: string;
   export let testid: string = "";
   export let ariaLabel: string = "";
+  export let version: "1" | "2" = "1";
 
   // Private variables
   let el: HTMLElement;
@@ -71,10 +72,10 @@
     class="delete-icon"
     size="medium"
     theme={_error ? "filled" : _hovering || _focused ? "filled" : "outline"}
-    type="close-circle"
+    type={version === "2" ? "close" : "close-circle"}
     fillcolor={_error
-      ? "var(--goa-color-emergency-default)"
-      : "var(--goa-color-greyscale-700)"}
+      ? "var(--goa-filter-chip-icon-color-error, var(--goa-color-emergency-default))"
+      : "var(--goa-filter-chip-icon-color-default, var(--goa-color-greyscale-700))"}
     opacity={_error ? (_hovering || _focused ? 1 : 0.5) : 1}
   />
 </div>
@@ -84,28 +85,56 @@
   .chip {
     display: inline-flex;
     align-items: center;
-    background-color: var(--goa-color-greyscale-white);
-    border-radius: 1rem;
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-700);
+    background-color: var(--goa-filter-color-bg, var(--goa-color-greyscale-white));
+    border-radius: var(--goa-filter-chip-border-radius, 1rem);
+    border: var(
+      --goa-filter-chip-border,
+      var(--goa-border-width-s) solid var(--goa-color-greyscale-700)
+    );
     box-sizing: border-box;
-    color: var(--goa-color-text-default);
-    font: var(--goa-typography-body-s);
-    gap: 0.5rem;
-    min-height: 2rem;
-    padding: 3px 8px 3px 12px;
-    min-width: 56px;
+    color: var(--goa-filter-chip-text-color, var(--goa-color-text-default));
+    font: var(--goa-filter-chip-typography, var(--goa-typography-body-s));
+    gap: var(--goa-filter-chip-gap, 0.5rem);
+    min-height: var(--goa-filter-chip-min-height, 2rem);
+    padding-top: var(--goa-filter-chip-padding-vertical, 3px);
+    padding-right: var(--goa-filter-chip-padding-horizontal-right, 8px);
+    padding-bottom: var(--goa-filter-chip-padding-vertical, 3px);
+    padding-left: var(--goa-filter-chip-padding-horizontal-left, 12px);
+    min-width: var(--goa-filter-chip-min-width, 56px);
     cursor: pointer;
     touch-action: manipulation;
   }
 
   .chip.focused {
-    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline: var(
+        --goa-filter-chip-border-focus-width,
+        var(--goa-border-width-l)
+      )
+      solid
+      var(
+        --goa-filter-chip-border-focus-color,
+        var(--goa-color-interactive-focus)
+      );
+    outline-offset: var(--goa-filter-chip-border-focus-offset, 0);
+  }
+
+  .chip:hover {
+    background-color: var(
+      --goa-filter-chip-color-bg-hover,
+      var(--goa-color-greyscale-white)
+    );
   }
 
   .chip.error {
-    background-color: var(--goa-color-emergency-light);
-    border-color: var(--goa-color-emergency-default);
-    color: var(--goa-color-emergency-default);
+    background-color: var(
+      --goa-filter-chip-color-bg-error,
+      var(--goa-color-emergency-light)
+    );
+    border-color: var(
+      --goa-filter-chip-border-color-error,
+      var(--goa-color-emergency-default)
+    );
+    color: var(--goa-filter-chip-text-color-error, var(goa-color-emergency-default));
   }
 
   .delete-icon {
@@ -115,7 +144,10 @@
   }
 
   .text {
-    line-height: var(--goa-line-height-2); /* 24px */
+    line-height: var(
+      --goa-filter-chip-line-height,
+      var(--goa-line-height-2)
+    ); /* 24px */
     padding-top: 0;
     display: flex;
     align-items: center;
@@ -128,6 +160,9 @@
   }
 
   .error:hover {
-    background-color: var(--goa-color-emergency-light);
+    background-color: var(
+      --goa-filter-chip-color-bg-error-hover,
+      var(--goa-color-emergency-light)
+    );
   }
 </style>
