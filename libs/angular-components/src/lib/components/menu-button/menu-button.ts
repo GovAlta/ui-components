@@ -1,5 +1,15 @@
-import { GoabButtonType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  GoabButtonType,
+  GoabIconType,
+  GoabMenuButtonOnActionDetail,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 
 @Component({
   standalone: true,
@@ -9,6 +19,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
     <goa-menu-button
       [attr.text]="text"
       [attr.type]="type"
+      [attr.leading-icon]="leadingIcon"
       [attr.testid]="testId"
       (_action)="_onAction($event)"
     >
@@ -20,6 +31,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, Output, EventEmitter } from "
 export class GoabMenuButton {
   @Input() text?: string;
   @Input() type?: GoabButtonType;
+  @Input() leadingIcon?: GoabIconType;
   @Input() testId?: string;
   @Output() onAction = new EventEmitter<GoabMenuButtonOnActionDetail>();
 

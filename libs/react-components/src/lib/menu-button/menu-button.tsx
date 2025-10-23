@@ -6,7 +6,7 @@
  * It also includes TypeScript interfaces for improved type checking and development experience.
  */
 
-import { GoabButtonType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import { GoabButtonType, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
 
 /**
@@ -15,12 +15,14 @@ import { ReactNode, type JSX, useRef, useEffect } from "react";
  *
  * @property {string} text - The text label to be displayed on the button.
  * @property {GoabButtonType} type - The button type, e.g., "primary", "secondary", etc.
+ * @property {GoaIconType} leadingIcon - Optional leading icon appearing within the button.
  * @property {string} [testid] - A test identifier for automated testing purposes.
  * @property {React.RefObject<HTMLElement | null>} ref - A reference object pointing to the Web Component's DOM element.
  */
 interface WCProps {
   text: string;
   type: GoabButtonType;
+  "leading-icon"?: GoabIconType;
   testid?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
@@ -45,6 +47,7 @@ declare module "react" {
  *
  * @property {string} text - The text label to display on the button.
  * @property {GoabButtonType} [type="primary"] - The button type, e.g., "primary", "secondary". Defaults to "primary".
+ * @property {GoaIconType} leadingIcon - Optional leading icon appearing within the button.
  * @property {string} [testId] - A test identifier for automated testing purposes.
  * @property {Function} [onAction] - Callback function invoked when an action event is emitted by the component.
  * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
@@ -52,6 +55,7 @@ declare module "react" {
 export interface GoabMenuButtonProps {
   text: string;
   type?: GoabButtonType;
+  leadingIcon?: GoabIconType;
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;
@@ -83,6 +87,7 @@ export interface GoabMenuButtonProps {
 export function GoabMenuButton({
   text,
   type = "primary",
+  leadingIcon,
   testId,
   onAction,
   children,
@@ -111,7 +116,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button ref={el} text={text} type={type} testid={testId}>
+    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon}>
       {children}
     </goa-menu-button>
   );
