@@ -7,25 +7,22 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabMenuButton, GoabMenuAction],
   template: `
     <goab-menu-button
       [text]="text"
       [type]="type"
       [leadingIcon]="leadingIcon"
       [testId]="testId"
-      (onAction)="onAction($event)">
-      <goab-menu-action
-        text="Action 1"
-        action="action1"
-        icon="person-circle">
+      (onAction)="onAction($event)"
+    >
+      <goab-menu-action text="Action 1" action="action1" icon="person-circle">
       </goab-menu-action>
-      <goab-menu-action
-        text="Action 2"
-        action="action2"
-        icon="notifications">
+      <goab-menu-action text="Action 2" action="action2" icon="notifications">
       </goab-menu-action>
     </goab-menu-button>
-  `
+  `,
 })
 class TestMenuButtonComponent {
   text?: string;
@@ -44,9 +41,8 @@ describe("GoabMenuButton", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GoabMenuButton, GoabMenuAction],
+      imports: [GoabMenuButton, GoabMenuAction, TestMenuButtonComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestMenuButtonComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestMenuButtonComponent);
@@ -59,7 +55,9 @@ describe("GoabMenuButton", () => {
   });
 
   it("should render the properties", () => {
-    const menuButtonElement = fixture.debugElement.query(By.css("goa-menu-button")).nativeElement;
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
     expect(menuButtonElement.getAttribute("text")).toBe("Menu actions");
     expect(menuButtonElement.getAttribute("type")).toBe("primary");
     expect(menuButtonElement.getAttribute("leading-icon")).toBe("alarm");
@@ -67,7 +65,9 @@ describe("GoabMenuButton", () => {
   });
 
   it("should render with leading icon", () => {
-    const menuButtonElement = fixture.debugElement.query(By.css("goa-menu-button")).nativeElement;
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
     expect(menuButtonElement.getAttribute("leading-icon")).toBe("alarm");
   });
 
@@ -75,13 +75,17 @@ describe("GoabMenuButton", () => {
     component.leadingIcon = undefined;
     fixture.detectChanges();
 
-    const menuButtonElement = fixture.debugElement.query(By.css("goa-menu-button")).nativeElement;
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
     expect(menuButtonElement.getAttribute("leading-icon")).toBeNull();
   });
 
   it("should respond to action event", () => {
     const onAction = jest.spyOn(component, "onAction");
-    const menuButtonElement = fixture.debugElement.query(By.css("goa-menu-button")).nativeElement;
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
 
     const mockDetail = { action: "action1", text: "Action 1" };
     fireEvent(menuButtonElement, new CustomEvent("_action", { detail: mockDetail }));
