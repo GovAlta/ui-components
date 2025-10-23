@@ -1172,3 +1172,6 @@ export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
 
 // Work side menu
 export type GoabWorkSideMenuItemType = "normal" | "emergency" | "success";
+
+// Work side menu notification
+export type GoabWorkSideNotificationItemVariant = "default" | "success" | "critical" | "warning" | "info" | "event";
