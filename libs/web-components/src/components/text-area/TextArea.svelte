@@ -8,13 +8,14 @@
     receive,
     relay,
     toBoolean,
+    typeValidator,
   } from "../../common/utils";
   import {
     calculateMargin,
     injectCss,
     type Spacing,
   } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -40,6 +41,16 @@
   export let countby: "character" | "word" | "" = "";
   export let maxcount: number = -1;
   export let autocomplete: string = "";
+
+  // version
+  type VersionType = "1" | "2";
+  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
+  export let version: VersionType = "1";
+
+  // size
+  type SizeType = "default" | "compact";
+  const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
+  export let size: SizeType = "default";
 
   // margin
   export let mt: Spacing = null;
@@ -81,6 +92,8 @@
   onMount(() => {
     addRelayListener();
     sendMountedMessage();
+    validateVersion(version);
+    validateSize(size);
     const finalWidth = width.includes("%") ? width : `min(${width}, 100%)`;
     const cssProps: Record<string, string> = { width: finalWidth };
 
@@ -175,6 +188,9 @@
     class="root"
     class:error={_error || (maxcount > 0 && count > maxcount)}
     class:disabled={isDisabled}
+    class:readonly={isReadonly}
+    class:compact={size === "compact"}
+    class:v2={version === "2"}
     style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
@@ -274,6 +290,28 @@
   textarea:disabled {
     resize: none;
     color: var(--goa-text-area-color-text-disabled);
+  }
+
+  /* Read-only state */
+  .readonly,
+  .readonly:hover {
+    background-color: var(--goa-text-area-color-bg-readonly, var(--goa-color-greyscale-100));
+  }
+
+  /* V2 focus state - single blue border only (no layered borders) */
+  .v2.root:focus-within {
+    box-shadow: var(--goa-text-area-border-focus);
+  }
+  .v2.error:focus,
+  .v2.error:focus-within,
+  .v2.error:focus-within:hover {
+    box-shadow: var(--goa-text-area-border-focus);
+  }
+
+  /* V2 compact size variant */
+  .v2.compact textarea {
+    padding: var(--goa-text-area-padding-compact);
+    font: var(--goa-text-area-typography-compact);
   }
 
   textarea[readonly] {
