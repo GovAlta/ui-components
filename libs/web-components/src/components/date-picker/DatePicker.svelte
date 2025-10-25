@@ -28,7 +28,8 @@
   type DateValue = {
     type: "date";
     name: string;
-    value: Date | null;
+    value: Date | undefined;
+    valueStr: string | undefined;
   };
 
   type InputDate = {
@@ -57,7 +58,6 @@
   export let ml: Spacing = null;
 
   let _error: boolean = toBoolean(error);
-  let _oldValue: Date | null;
   let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
   let _date: Date | null;
@@ -179,10 +179,8 @@
 
   function dispatchValue(date: Date | null) {
     if (!date) {
-      _oldValue = null;
       value = "";
     } else {
-      _oldValue = date;
       value = date.toISOString();
     }
 
