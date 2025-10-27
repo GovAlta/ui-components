@@ -1,8 +1,16 @@
-<svelte:options customElement="goa-work-side-menu-item" />
+<svelte:options
+  customElement={{
+    tag: "goa-work-side-menu-item",
+    props: {
+      triggerPopover: { type: "String", attribute: "trigger-popover", reflect: false }
+    },
+  }}
+/>
+
 
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
-  import { dispatch, getSlottedChildren } from "../../common/utils";
+  import { dispatch, getSlottedChildren, toBoolean } from "../../common/utils";
 
   type WorkSideMenuItemType = "normal" | "emergency" | "success";
 
@@ -20,6 +28,7 @@
   export let icon: string = "";
   export let testid: string = "";
   export let type: WorkSideMenuItemType = "normal";
+  export let triggerPopover: string = "false";
 
   // *******
   // Private
@@ -34,6 +43,7 @@
 
   $: _alwaysVisible =
     !isNaN(parseInt(badge)) && parseInt(badge) > 0 && parseInt(badge) < 10;
+  $: _triggerPopover = toBoolean(triggerPopover);
 
   // *****
   // Hooks
@@ -53,8 +63,15 @@
   // Functions
   // *********
 
-  function handleClick() {
-    dispatch(_rootEl, "work-side-menu:update", {}, { bubbles: true });
+  function handleClick(e: Event) {
+    if (_triggerPopover) {
+      e.preventDefault();
+      dispatch(_rootEl, "work-side-menu:trigger-popover", {
+        triggerEl: _linkEl
+      }, {bubbles: true});
+    } else {
+      dispatch(_rootEl, "work-side-menu:update", {}, { bubbles: true });
+    }
   }
 
   function handleUpdateItem(e: CustomEvent) {
@@ -98,7 +115,7 @@
     class="menu-item"
     class:current
     role="menuitem"
-    href={url}
+    href={url !== "none" ? url : undefined}
     bind:this={_linkEl}
     on:click={handleClick}
     tabindex="0"

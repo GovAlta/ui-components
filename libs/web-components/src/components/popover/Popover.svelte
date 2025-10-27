@@ -38,7 +38,6 @@
   export let minwidth: string = "";
   export let width: string = "";
   export let height: "full" | "wrap-content" = "wrap-content";
-
   // flag passed to the FocusTrap that will prevent unwanted scrolling
   export let preventScrollIntoView: boolean = false;
 
@@ -87,6 +86,8 @@
 
   export let filterablecontext: string = "false";
 
+  export let externalTarget: HTMLElement | null = null;
+
   // Private
 
   let _rootEl: HTMLElement;
@@ -104,6 +105,7 @@
 
   $: (async () => _open && (await setPopoverPosition()))();
   $: (async () => _sectionHeight && (await setPopoverPosition()))();
+  $: (async() => externalTarget && _open && (await setPopoverPosition()))();
   $: {
     if (_open) {
       window.addEventListener("popstate", handleUrlChange, true);
@@ -329,8 +331,12 @@
   async function setPopoverPosition() {
     await tick();
 
+    const targetEl = externalTarget || _targetEl;
+    if (!targetEl) return;
+
+
     // Get target and content rectangles
-    const targetRect = getBoundingClientRectWithMargins(_targetEl);
+    const targetRect = getBoundingClientRectWithMargins(targetEl);
     const popoverRect = getBoundingClientRectWithMargins(_popoverEl);
 
     // exit if the popover hasn't yet been filled
@@ -348,19 +354,77 @@
           spaceAbove > spaceBelow
         : position === "above";
 
-    if (displayOnTop) {
-      _popoverEl.style.bottom = `${targetRect.height}px`;
+    if (externalTarget) {
+      // Position absolutely in the viewport when using external target
+      _popoverEl.style.position = "fixed";
+      _popoverEl.style.left = `${targetRect.right}px`;
+
+
+      const targetCenter = targetRect.top + (targetRect.height / 2);
+      const popoverCenter = popoverRect.height / 2;
+      const verticalOffset = voffset ? parseInt(voffset, 10): 0;
+
+      let topPosition = targetCenter - popoverCenter + verticalOffset;
+
+      const minTop = 20;
+      const maxBottom = window.innerHeight - 20;
+
+      if (topPosition < minTop) {
+        topPosition = minTop;
+      }
+
+      const bottomPosition = topPosition + popoverRect.height;
+
+      if (bottomPosition > maxBottom) {
+        topPosition = maxBottom - popoverRect.height;
+
+        if (topPosition < minTop) {
+          topPosition = minTop;
+          _popoverEl.style.maxHeight = `${maxBottom - minTop}px`;
+          _popoverEl.style.overflowY = "auto";
+        }
+      }
+
+      _popoverEl.style.top = `${topPosition}px`;
+      _popoverEl.style.bottom = "auto";
+
+      // const availableHeight = window.innerHeight - topPosition - 20;
+      // _popoverEl.style.maxHeight = `${availableHeight}px`;
+      // _popoverEl.style.overflowY = "auto";
+
+      // const minTop = 20;
+      // const maxTop = window.innerHeight - popoverRect.height - minTop;
+      // if (topPosition < minTop) {
+      //   topPosition = minTop;
+      // } else if (topPosition > maxTop) {
+      // }
+
+
+
+      // Adjust left position if it goes off screen
+      const wouldOverflowRight = targetRect.right + popoverRect.width > window.innerWidth;
+      if (wouldOverflowRight) {
+        _popoverEl.style.left = `${targetRect.left - popoverRect.width}px`;
+      }
     } else {
-      _popoverEl.style.bottom = "auto"; // In case this is triggered by _sectionHeight is changed
-    }
+      // Original positioning for slotted targets
+      _popoverEl.style.position = "absolute";
+      if (displayOnTop) {
+        _popoverEl.style.bottom = `${targetRect.height}px`;
+        _popoverEl.style.top = "auto";
+      } else {
+        _popoverEl.style.bottom = "auto";
+        _popoverEl.style.top = "auto";
+      }
 
-    // Move the popover to the left if it is too far to the right and only if there is space to the left
-    const rightAligned =
-      document.body.clientWidth - targetRect.left < popoverRect.width &&
-      targetRect.left > popoverRect.width;
+      // Move the popover to the left if it is too far to the right
+      const rightAligned =
+        document.body.clientWidth - targetRect.left < popoverRect.width &&
+        targetRect.left > popoverRect.width;
 
-    if (rightAligned) {
-      _popoverEl.style.left = `${targetRect.x - (popoverRect.width - targetRect.width)}px`;
+      if (rightAligned) {
+        _popoverEl.style.left = `${targetRect.x - (popoverRect.width - targetRect.width)}px`;
+      }
     }
   }
 </script>

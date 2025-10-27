@@ -6,6 +6,7 @@ interface WCProps {
   timestamp?: string;
   title?: string;
   description?: string;
+  maxwidth?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 declare module "react" {
@@ -22,8 +23,7 @@ export type WorkSideNotificationType =
   | "success"
   | "critical"
   | "warning"
-  | "info"
-  | "event";
+  | "info";
 
 /* eslint-disable-next-line */
 export interface GoabWorkSideNotificationCardProps {
@@ -32,6 +32,7 @@ export interface GoabWorkSideNotificationCardProps {
   timestamp?: string | Date;
   title?: string;
   description?: string;
+  maxWidth?: string;
   onClick?: (id: string) => void;
   badge?: ReactNode;
 }
@@ -44,6 +45,7 @@ export function GoaxWorkSideNotificationCard({
   description,
   onClick,
   badge,
+  maxWidth,
 }: GoabWorkSideNotificationCardProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   const timestampString = timestamp instanceof Date ? timestamp.toISOString() : timestamp;
@@ -70,6 +72,7 @@ export function GoaxWorkSideNotificationCard({
       timestamp={timestampString}
       title={title}
       description={description}
+      maxwidth={maxWidth}
     >
       {badge && <div slot="badge">{badge}</div>}
     </goa-work-side-notification-card>
