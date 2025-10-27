@@ -9,7 +9,7 @@
   // Validator
   const [Types, validateType] = typeValidator(
     "WorkSide Notification type",
-    ["default", "success", "critical", "warning", "info", "event"] as const,
+    ["default", "success", "critical", "warning", "info"] as const,
     true
   );
   // Type
@@ -20,6 +20,7 @@
   export let title: string = "";
   export let description: string = "";
   export let id: string = ""; // to identify which notification is clicked
+  export let maxwidth: string = "";
 
   let _rootEl: HTMLElement;
   let _transformTime: string = "";
@@ -68,12 +69,15 @@
 <div class="card type-{type}"
      role="button"
      tabindex="0"
-      on:click={handleClick}
+     style={maxwidth ? `max-width: ${maxwidth}` : ''}
+     on:click={handleClick}
      on:keydown={handleKeyDown}
     bind:this={_rootEl}>
 <div class="content">
   <div class="header-row">
-    <span class="title">{title}</span>
+    <goa-text as="h4" size="heading-xs" mt="none">
+      {title}
+    </goa-text>
 
     {#if $$slots.badge}
       <span class="badge-container">
@@ -83,14 +87,16 @@
   </div>
 
   <div class="description">
-    {description}
+    <goa-text as="span" size="body-s">
+      {description}
+    </goa-text>
   </div>
 </div>
 <div class="timestamp-container">
   {#if _transformTime.includes("Now") || _transformTime.includes("min ago") || _transformTime.includes("h ago")}
     <span class="time-dot"></span>
   {/if}
-  <span class="timestamp">{_transformTime}</span>
+  <goa-text as="span" size="body-xs">{_transformTime}</goa-text>
 </div>
 
 </div>
@@ -98,18 +104,21 @@
 <!-- Style -->
 <style>
   :host {
+    display: block;
     box-sizing: border-box;
+    width: 100%;
   }
   .card {
     display: flex;
     gap: var(--goa-space-s);
     align-items: flex-start;
-    padding: var(--goa-space-s) var(--goa-space-m);
+    padding: var(--goa-space-m) var(--goa-space-m);
     cursor: pointer;
     border: none;
     border-bottom: 1px solid var(--goa-color-greyscale-200);
     background: white;
     width: 100%;
+    box-sizing: border-box;
     text-align: left;
     transition: background-color 0.2s ease;
   }
@@ -124,18 +133,17 @@
   .card.type-default {
     background: white;
   }
-  .card.type-warning,
   .card.type-critical {
-    background: var(--goa-color-warning-default);
+    background: var(--goa-color-emergency-background);
+  }
+  .card.type-warning {
+    background: var(--goa-color-warning-background);
   }
   .card.type-success {
-    background: var(--goa-color-success-default);
+    background: var(--goa-color-success-background);
   }
   .card.type-info {
-    background: #E6F4FF; /* Light blue */
-  }
-  .card.type-event {
-    background: #F3E6FF; /* Light purple */
+    background: var(--goa-color-info-background);
   }
 
   /* Hover states for colored backgrounds */
@@ -226,7 +234,7 @@
   /* Mobile responsive */
   @media (max-width: 624px) {
     .card {
-      padding: var(--goa-space-xs) var(--goa-space-s);
+      padding: var(--goa-space-s) var(--goa-space-m);
     }
 
     .timestamp-container {

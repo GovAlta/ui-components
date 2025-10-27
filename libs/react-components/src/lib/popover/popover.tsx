@@ -9,6 +9,8 @@ interface WCProps extends Margins {
   position?: GoabPopoverPosition;
   relative?: string;
   testid?: string;
+  voffset?: string;
+  hoffset?: string;
 }
 
 declare module "react" {
@@ -27,6 +29,8 @@ export interface GoabPopoverProps extends Margins, DataGridProps {
   minWidth?: string;
   padded?: boolean;
   position?: GoabPopoverPosition;
+  vOffset?: string;
+  hOffset?: string;
   children: ReactNode;
   /***
    * @deprecated This property has no effect and will be removed in a future version
@@ -43,6 +47,8 @@ export function GoabPopover(props: GoabPopoverProps): JSX.Element {
     padded,
     position,
     relative,
+    vOffset,
+    hOffset,
     children,
     mt,
     mr,
@@ -58,6 +64,8 @@ export function GoabPopover(props: GoabPopoverProps): JSX.Element {
       padded={typeof padded === "undefined" ? undefined : padded ? "true" : "false"}
       position={position}
       relative={relative ? "true" : undefined}
+      voffset={vOffset}
+      hoffset={hOffset}
       mt={mt}
       mr={mr}
       mb={mb}

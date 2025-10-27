@@ -9,6 +9,7 @@ interface WCProps {
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
+  popoverContent?: ReactNode;
   open?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
@@ -31,6 +32,7 @@ export interface GoabWorkSideMenuProps {
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
+  popoverContent?: ReactNode;
   open?: boolean;
   onToggle?: () => void;
 }
@@ -44,11 +46,11 @@ export function GoaxWorkSideMenu({
   primaryContent,
   secondaryContent,
   accountContent,
+  popoverContent,
   open,
   onToggle,
 }: GoabWorkSideMenuProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
-  console.log("[React wrapper] open prop is:", open, "type:", typeof open);
 
   useEffect(() => {
     if (!el?.current || !onToggle) {
@@ -72,6 +74,7 @@ export function GoaxWorkSideMenu({
       {primaryContent && <div slot="primary">{primaryContent}</div>}
       {secondaryContent && <div slot="secondary">{secondaryContent}</div>}
       {accountContent && <div slot="account">{accountContent}</div>}
+      {popoverContent && <div slot="popoverContent">{popoverContent}</div>}
     </goa-work-side-menu>
   );
 }
