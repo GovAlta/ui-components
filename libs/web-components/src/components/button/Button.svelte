@@ -37,11 +37,17 @@
     ["normal", "destructive", "inverse"],
     { required: true },
   );
+  const [Versions, validateVersion] = typeValidator(
+    "Button version",
+    ["1", "2"],
+    { required: true },
+  );
 
   // Types
   type ButtonType = (typeof Types)[number];
   type Size = (typeof Sizes)[number];
   type Variant = (typeof Variants)[number];
+  type Version = (typeof Versions)[number];
 
   // optional
   export let type: ButtonType = "primary";
@@ -52,6 +58,7 @@
   export let trailingicon: GoAIconType | null = null;
   export let testid: string = "";
   export let width: string = "";
+  export let version: Version = "1";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -79,6 +86,7 @@
     validateType(type);
     validateSize(size);
     validateVariant(variant);
+    validateVersion(version);
   });
 
   // =========
@@ -102,6 +110,7 @@
 
 <button
   class="{type} {size} {variant}"
+  class:v2={version === "2"}
   style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
@@ -268,7 +277,7 @@
     border: var(--goa-button-tertiary-border);
     background-color: var(--goa-button-tertiary-color-bg);
     color: var(--goa-button-tertiary-color-text);
-    text-decoration: underline;
+    text-decoration: var(--goa-button-tertiary-text-decoration, underline);
   }
   button.tertiary:hover {
     background-color: var(--goa-button-tertiary-hover-color-bg);
@@ -374,5 +383,12 @@
   button:disabled {
     pointer-events: none;
     opacity: 0.5;
+  }
+
+  /* Version 2 */
+  button.v2:focus-visible {
+    box-shadow: none;
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: 3px;
   }
 </style>
