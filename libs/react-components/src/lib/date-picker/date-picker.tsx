@@ -65,6 +65,12 @@ export function GoabDatePicker({
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (value && typeof value !== "string") {
+      console.warn("Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`")
+    }
+  }, []);
+
+  useEffect(() => {
     if (!ref.current) {
       return;
     }
@@ -100,12 +106,12 @@ export function GoabDatePicker({
     <goa-date-picker
       ref={ref}
       name={name}
-      value={formatValue(value)}
+      value={formatValue(value) || undefined}
       type={type}
       error={error ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
-      min={formatValue(min)}
-      max={formatValue(max)}
+      min={formatValue(min) || undefined}
+      max={formatValue(max) || undefined}
       testid={testId}
       mt={mt}
       mr={mr}

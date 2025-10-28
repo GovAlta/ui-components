@@ -28,7 +28,7 @@ export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
 
 export type GoabMenuButtonOnActionDetail = {
   action: string;
-}
+};
 
 export type GoabInputAutoCapitalize =
   | "on"
@@ -70,7 +70,11 @@ export type GoabDropdownOnChangeDetail = {
 
 export type GoabDatePickerOnChangeDetail = {
   name?: string;
-  value: string | Date | undefined;
+  valueStr: string;
+  /**
+   * @deprecated Use `valueStr` instead
+   */
+  value: Date;
 };
 export type GoabDatePickerInputType = "calendar" | "input";
 
@@ -1157,7 +1161,6 @@ export interface GoabFieldsetOnContinueDetail {
 export type GoabPublicFormStatus = "initializing" | "complete";
 export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
 export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
-
 
 // Public form Task
 export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";

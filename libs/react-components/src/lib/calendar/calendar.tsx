@@ -20,9 +20,9 @@ declare module "react" {
 }
 export interface GoabCalendarProps extends Margins {
   name?: string;
-  value?: Date;
-  min?: Date;
-  max?: Date;
+  value?: string;
+  min?: string;
+  max?: string;
   testId?: string;
   onChange: (details: GoabCalendarOnChangeDetail) => void;
 }
@@ -40,26 +40,32 @@ export function GoabCalendar({
   onChange,
 }: GoabCalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (!ref.current) {
       return;
     }
     const current = ref.current;
-    current.addEventListener("_change", (e: Event) => {
+    const listener = (e: Event) => {
       onChange({
         name: name || "",
         value: (e as CustomEvent).detail.value,
       });
-    });
-  });
+    }
+    current.addEventListener("_change", listener);
+
+    return () => {
+      current.removeEventListener("_change", listener);
+    }
+  }, []);
 
   return (
     <goa-calendar
       ref={ref}
       name={name}
-      value={value?.toISOString()}
-      min={min?.toISOString()}
-      max={max?.toISOString()}
+      value={value}
+      min={min || undefined}
+      max={max || undefined}
       testid={testId}
       mt={mt}
       mr={mr}
