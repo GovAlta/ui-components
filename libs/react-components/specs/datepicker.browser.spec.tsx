@@ -162,12 +162,9 @@ describe("Date Picker input type", () => {
 
     const result = render(<Component />);
     const datePickerMonth = result.getByTestId("input-month");
+    const datePickerMonthMarch = result.getByTestId("dropdown-item-3");
     const datePickerDay = result.getByTestId("input-day");
     const datePickerYear = result.getByTestId("input-year");
-
-    expect(datePickerMonth).toBeTruthy();
-    expect(datePickerDay).toBeTruthy();
-    expect(datePickerYear).toBeTruthy();
 
     const rootElChangeHandler = vi.fn();
     result.container.addEventListener("_change", (e: Event) => {
@@ -176,11 +173,9 @@ describe("Date Picker input type", () => {
     });
 
     // Select month
-    if (datePickerMonth) {
-      await datePickerMonth.click();
-      await userEvent.keyboard("{ArrowDown}");
-      await userEvent.keyboard("{Enter}");
-    }
+    await datePickerMonth.click();
+    await userEvent.keyboard("{ArrowDown}");
+    await userEvent.keyboard("{Enter}");
 
     // should be null because date is invalid
     await vi.waitFor(() => {
@@ -189,10 +184,12 @@ describe("Date Picker input type", () => {
     rootElChangeHandler.mockClear();
 
     // Input day
-    if (datePickerDay) {
-      await datePickerDay.click();
-      await userEvent.type(datePickerDay, "1");
-    }
+    await datePickerDay.click();
+    await userEvent.type(datePickerDay, "1");
+
+    // Select month
+    await userEvent.click(datePickerMonth);
+    await userEvent.click(datePickerMonthMarch);
 
     // should be null because date is still invalid
     await vi.waitFor(() => {
@@ -201,23 +198,19 @@ describe("Date Picker input type", () => {
     rootElChangeHandler.mockClear();
 
     // Input year
-    if (datePickerYear) {
-      await datePickerYear.click();
-      await userEvent.type(datePickerYear, "1999");
-    }
+    await datePickerYear.click();
+    await userEvent.type(datePickerYear, "1999");
 
     // should not be null because date became valid
     await vi.waitFor(() => {
-      expect(rootElChangeHandler).toHaveBeenCalledWith("1999-01-01");
+      expect(rootElChangeHandler).toHaveBeenCalledWith("1999-03-01");
     });
     rootElChangeHandler.mockClear();
 
     // Clear day input
-    if (datePickerDay) {
-      await datePickerDay.click();
-      await userEvent.keyboard("{ArrowRight}");
-      await userEvent.keyboard("{Backspace}");
-    }
+    await datePickerDay.click();
+    await userEvent.keyboard("{ArrowRight}");
+    await userEvent.keyboard("{Backspace}");
 
     // should be null because date became invalid
     await vi.waitFor(() => {
