@@ -55,7 +55,6 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   isReady = false;
   @Input() name?: string;
-  // ** NOTE: can we just use the base component for this?
   @Input() override value?: Date | string | null | undefined;
   @Input() min?: Date | string;
   @Input() max?: Date | string;
@@ -100,6 +99,12 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
       this.isReady = true;
       this.cdr.detectChanges();
     }, 0);
+
+    if (this.value && typeof this.value !== "string") {
+      console.warn(
+        "Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`",
+      );
+    }
   }
 
   override setDisabledState(isDisabled: boolean) {
@@ -120,7 +125,11 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
       if (!value) {
         this.renderer.setAttribute(datePickerEl, "value", "");
       } else {
-        this.renderer.setAttribute(datePickerEl, "value", value instanceof Date ? value.toISOString() : value);
+        this.renderer.setAttribute(
+          datePickerEl,
+          "value",
+          value instanceof Date ? value.toISOString() : value,
+        );
       }
     }
   }
