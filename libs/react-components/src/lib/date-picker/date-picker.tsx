@@ -97,12 +97,12 @@ export function GoabDatePicker({
     <goa-date-picker
       ref={ref}
       name={name}
-      value={formatValue(value)}
+      value={formatValue(value) || undefined}
       type={type}
       error={error ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
-      min={formatValue(min)}
-      max={formatValue(max)}
+      min={formatValue(min) || undefined}
+      max={formatValue(max) || undefined}
       testid={testId}
       mt={mt}
       mr={mr}

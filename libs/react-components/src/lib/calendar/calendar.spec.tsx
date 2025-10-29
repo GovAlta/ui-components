@@ -27,9 +27,9 @@ describe("Calendar", () => {
   });
 
   it("should set the props correctly", () => {
-    const value = new Date();
-    const min = addMonths(value, -1);
-    const max = addMonths(value, 1);
+    const value = "2025-02-03";
+    const min = "2024-01-01"
+    const max = "2025-01-01"
 
     const { baseElement } = render(
       <Calendar
@@ -43,9 +43,9 @@ describe("Calendar", () => {
     );
     const el = baseElement.querySelector("goa-calendar");
     expect(baseElement).toBeTruthy();
-    expect(el?.getAttribute("value")).toBe(value.toISOString());
-    expect(el?.getAttribute("min")).toBe(min.toISOString());
-    expect(el?.getAttribute("max")).toBe(max.toISOString());
+    expect(el?.getAttribute("value")).toBe(value);
+    expect(el?.getAttribute("min")).toBe(min);
+    expect(el?.getAttribute("max")).toBe(max);
     expect(el?.getAttribute("testid")).toBe("foo");
   });
 });
