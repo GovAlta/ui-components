@@ -8,6 +8,7 @@ import {
   forwardRef,
   OnInit,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -51,8 +52,11 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
   // Override value to handle string arrays consistently
   @Input() override value?: string[];
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
 
   ngOnInit(): void {

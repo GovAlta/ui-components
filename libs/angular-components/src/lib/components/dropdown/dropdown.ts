@@ -9,6 +9,7 @@ import {
   forwardRef,
   OnInit,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -21,6 +22,7 @@ import { GoabControlValueAccessor } from "../base.component";
   imports: [CommonModule],
   template: `
     <goa-dropdown
+      #goaComponentRef
       *ngIf="isReady"
       [attr.name]="name"
       [value]="value"
@@ -79,8 +81,11 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
 
   isReady = false;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
 
   ngOnInit(): void {
@@ -94,6 +99,8 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
+    // Keep local value in sync with emitted detail
+    this.value = detail.value || null;
     this.onChange.emit(detail);
 
     this.markAsTouched();

@@ -266,6 +266,52 @@ describe("GoABInput", () => {
     expect(trailingContent).toBeTruthy();
     expect(trailingContent.textContent).toContain("Trailing Content");
   });
+
+  describe("writeValue", () => {
+    it("should set value attribute when writeValue is called", () => {
+      const inputComponent = fixture.debugElement.query(By.css("goab-input")).componentInstance;
+      const inputElement = fixture.debugElement.query(By.css("goa-input")).nativeElement;
+
+      inputComponent.writeValue("new value");
+      expect(inputElement.getAttribute("value")).toBe("new value");
+
+      inputComponent.writeValue("another value");
+      expect(inputElement.getAttribute("value")).toBe("another value");
+    });
+
+    it("should set value attribute to empty string when writeValue is called with null or empty", () => {
+      const inputComponent = fixture.debugElement.query(By.css("goab-input")).componentInstance;
+      const inputElement = fixture.debugElement.query(By.css("goa-input")).nativeElement;
+
+      // First set a value
+      inputComponent.writeValue("some value");
+      expect(inputElement.getAttribute("value")).toBe("some value");
+
+      // Then clear it with null
+      inputComponent.writeValue(null);
+      expect(inputElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with undefined
+      inputComponent.writeValue("test");
+      inputComponent.writeValue(undefined);
+      expect(inputElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with empty string
+      inputComponent.writeValue("test2");
+      inputComponent.writeValue("");
+      expect(inputElement.getAttribute("value")).toBe("");
+    });
+
+    it("should update component value property", () => {
+      const inputComponent = fixture.debugElement.query(By.css("goab-input")).componentInstance;
+
+      inputComponent.writeValue("updated");
+      expect(inputComponent.value).toBe("updated");
+
+      inputComponent.writeValue(null);
+      expect(inputComponent.value).toBe(null);
+    });
+  });
 });
 
 @Component({

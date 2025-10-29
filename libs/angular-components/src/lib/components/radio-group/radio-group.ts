@@ -11,6 +11,7 @@ import {
   forwardRef,
   OnInit,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -21,6 +22,7 @@ import { GoabControlValueAccessor } from "../base.component";
   selector: "goab-radio-group",
   template: `
     <goa-radio-group
+      #goaComponentRef
       *ngIf="isReady"
       [attr.name]="name"
       [attr.value]="value"
@@ -55,8 +57,11 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   @Input() orientation?: GoabRadioGroupOrientation;
   @Input() ariaLabel?: string;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
 
   ngOnInit(): void {

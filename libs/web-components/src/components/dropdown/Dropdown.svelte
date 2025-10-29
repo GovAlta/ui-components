@@ -291,6 +291,10 @@
       syncFilteredOptions();
       if (!_native) {
         setSelected();
+        // Update the displayed value after options are loaded and selected option is set
+        if (_inputEl && _selectedOption) {
+          setDisplayedValue();
+        }
       }
     }, 1);
   }
@@ -460,7 +464,8 @@
 
   // update the value show to the user in the <input> element
   function setDisplayedValue() {
-    _inputEl.value = _selectedOption?.label || _selectedOption?.value || "";
+    const newValue = _selectedOption?.label || _selectedOption?.value || "";
+    _inputEl.value = newValue;
   }
 
   function dispatchValue(newValue?: string) {
@@ -636,6 +641,11 @@
     }
 
     onKeyUp(_: KeyboardEvent) {
+      // Clear selection and highlight if input becomes empty
+      if (this.input.value === "" && _selectedOption) {
+        _selectedOption = undefined;
+        _highlightedIndex = -1;
+      }
       showMenu();
     }
 
