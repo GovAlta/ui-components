@@ -14,10 +14,8 @@
     if (_rootEl) {
       // Add styling if an ancestor has a class to style number columns,
       const hostEl = _rootEl.getRootNode().host;
-      const parentThead = hostEl?.closest("th");
-      parentThead?.style.setProperty("--goa-table-header-padding", "0");
 
-      const ancestor = hostEl?.closest("th.goa-table-number-header");
+      const ancestor = hostEl?.closest("th.goa-table-number-header, th.goa-table-cell--numeric");
       if (ancestor) {
         _rootEl.style.setProperty("--header-text-align", "flex-end");
         _rootEl.style.setProperty("--header-align", "right");
@@ -57,18 +55,18 @@
 		line-height: inherit;
 		height: inherit;
     width: 100%;
-    padding: var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs);
+    padding: var(--goa-table-padding-heading, var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs));
     justify-content: var(--header-text-align, flex-start);
-    gap: var(--goa-space-2xs);
+    gap: var(--goa-table-sort-header-gap, var(--goa-space-2xs));
     align-items: flex-end;
     text-align: var(--header-align, left);
   }
 
   /* User set classes */
   button:hover {
-    background-color: var(--goa-color-greyscale-100);
+    background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-100));
     cursor: pointer;
-    color: var(--goa-color-interactive-hover);
+    color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
   }
 
   button:focus {
