@@ -67,6 +67,11 @@ a:hover {
   color: var(--goa-color-interactive-hover);
 }
 
+a:focus-visible, a:focus-within, a:focus {
+  outline: 3px solid var(--goa-color-interactive-focus);
+  outline-offset: 1px;
+}
+
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #999;

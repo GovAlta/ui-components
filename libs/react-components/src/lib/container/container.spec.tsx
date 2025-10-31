@@ -48,4 +48,16 @@ describe("Container", () => {
       el?.querySelector("*[slot=actions]")?.querySelector("goa-button"),
     ).not.toBeFalsy();
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabContainer
+        data-grid="cell"
+      >
+        Container content
+      </GoabContainer>,
+    );
+    const el = container.querySelector("goa-container");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

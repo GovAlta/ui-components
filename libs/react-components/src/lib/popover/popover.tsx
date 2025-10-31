@@ -1,5 +1,6 @@
 import { GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   maxwidth?: string;
@@ -19,7 +20,7 @@ declare module "react" {
   }
 }
 
-export interface GoabPopoverProps extends Margins {
+export interface GoabPopoverProps extends Margins, DataGridProps {
   target?: ReactNode;
   testId?: string;
   maxWidth?: string;
@@ -33,20 +34,22 @@ export interface GoabPopoverProps extends Margins {
   relative?: boolean;
 }
 
-export function GoabPopover({
-  target,
-  testId,
-  maxWidth,
-  minWidth,
-  padded,
-  position,
-  relative,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabPopoverProps): JSX.Element {
+export function GoabPopover(props: GoabPopoverProps): JSX.Element {
+  const [dataGridProps, {
+    target,
+    testId,
+    maxWidth,
+    minWidth,
+    padded,
+    position,
+    relative,
+    children,
+    mt,
+    mr,
+    mb,
+    ml,
+  }] = useDataGridProps(props);
+
   return (
     <goa-popover
       testid={testId}
@@ -59,6 +62,7 @@ export function GoabPopover({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {children}
       {target && <div slot="target">{target}</div>}

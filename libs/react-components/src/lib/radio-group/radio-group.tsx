@@ -4,6 +4,7 @@ import {
   GoabRadioGroupOrientation,
   Margins,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 export * from "./radio";
 
@@ -28,7 +29,7 @@ declare module "react" {
   }
 }
 
-export interface GoabRadioGroupProps extends Margins {
+export interface GoabRadioGroupProps extends Margins, DataGridProps {
   name: string;
   value?: string;
   id?: string;
@@ -41,22 +42,23 @@ export interface GoabRadioGroupProps extends Margins {
   onChange?: (detail: GoabRadioGroupOnChangeDetail) => void;
 }
 
-export function GoabRadioGroup({
-  name,
-  value,
-  children,
-  orientation,
-  disabled,
-  error,
-  id,
-  testId,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  onChange,
-}: GoabRadioGroupProps): JSX.Element {
+export function GoabRadioGroup(props: GoabRadioGroupProps): JSX.Element {
+  const [dataGridProps, {
+    name,
+    value,
+    children,
+    orientation,
+    disabled,
+    error,
+    id,
+    testId,
+    ariaLabel,
+    mt,
+    mr,
+    mb,
+    ml,
+    onChange,
+  }] = useDataGridProps(props);
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -94,6 +96,7 @@ export function GoabRadioGroup({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {children}
     </goa-radio-group>

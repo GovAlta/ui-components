@@ -31,4 +31,17 @@ describe("Popover", () => {
     expect(el?.getAttribute("minwidth")).toBe("100px");
     expect(el?.getAttribute("padded")).toBe("true");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPopover
+        target="Click Action"
+        data-grid="cell"
+      >
+        <div>Test content</div>
+      </GoabPopover>
+    );
+    const el = baseElement.querySelector("goa-popover");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

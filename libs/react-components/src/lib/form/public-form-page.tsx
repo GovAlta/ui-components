@@ -4,6 +4,7 @@ import {
   GoabPublicFormPageStep,
   Margins,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref?: React.RefObject<HTMLElement | null>;
@@ -27,7 +28,7 @@ declare module "react" {
   }
 }
 
-interface GoabPublicFormPageProps extends Margins {
+interface GoabPublicFormPageProps extends Margins, DataGridProps {
   id?: string;
   heading?: string;
   subHeading?: string;
@@ -45,23 +46,24 @@ interface GoabPublicFormPageProps extends Margins {
   children: ReactNode;
 }
 
-export function GoabPublicFormPage({
-  id = "",
-  heading = "",
-  subHeading = "",
-  summaryHeading = "",
-  sectionTitle = "",
-  backUrl = "",
-  type = "step",
-  buttonText = "",
-  buttonVisibility = "visible",
-  onContinue,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabPublicFormPageProps) {
+export function GoabPublicFormPage(props: GoabPublicFormPageProps) {
+  const [dataGridProps, {
+    id = "",
+    heading = "",
+    subHeading = "",
+    summaryHeading = "",
+    sectionTitle = "",
+    backUrl = "",
+    type = "step",
+    buttonText = "",
+    buttonVisibility = "visible",
+    onContinue,
+    children,
+    mt,
+    mr,
+    mb,
+    ml,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -99,6 +101,7 @@ export function GoabPublicFormPage({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     >
       {children}
     </goa-public-form-page>

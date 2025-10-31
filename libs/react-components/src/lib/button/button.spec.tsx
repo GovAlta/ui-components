@@ -105,6 +105,18 @@ describe("GoabButton", () => {
     button && fireEvent(button, new CustomEvent("_click"));
     expect(onClick).toBeCalled();
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabButton
+        data-grid="cell"
+      >
+        Button Text
+      </GoabButton>,
+    );
+    const el = container.querySelector("goa-button");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });
 
 describe("GoabButton disabled attribute", () => {

@@ -3,6 +3,7 @@ import {
   GoabFieldsetOnContinueDetail,
   GoabFormDispatchOn,
 } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps {
   ref?: React.RefObject<HTMLElement | null>;
@@ -20,7 +21,7 @@ declare module "react" {
   }
 }
 
-interface GoabFieldsetProps {
+interface GoabFieldsetProps extends DataGridProps {
   id?: string;
   sectionTitle?: string;
   dispatchOn?: GoabFormDispatchOn;
@@ -28,14 +29,14 @@ interface GoabFieldsetProps {
   children: ReactNode;
 }
 
-export function GoabFieldset({
-  id,
-  sectionTitle,
-  dispatchOn,
-  onContinue,
-  children,
-
-}: GoabFieldsetProps) {
+export function GoabFieldset(props: GoabFieldsetProps) {
+  const [dataGridProps, {
+    id,
+    sectionTitle,
+    dispatchOn,
+    onContinue,
+    children,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -64,6 +65,7 @@ export function GoabFieldset({
       id={id}
       section-title={sectionTitle}
       dispatch-on={dispatchOn}
+      {...dataGridProps}
     >
       {children}
     </goa-fieldset>

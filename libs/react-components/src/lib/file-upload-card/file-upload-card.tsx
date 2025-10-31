@@ -3,6 +3,7 @@ import {
   GoabFileUploadOnDeleteDetail,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps {
   ref: React.RefObject<HTMLElement | null>;
@@ -24,7 +25,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabFileUploadCardProps {
+export interface GoabFileUploadCardProps extends DataGridProps {
   filename: string;
   size: number;
   type?: string;
@@ -35,16 +36,17 @@ export interface GoabFileUploadCardProps {
   onCancel?: (detail: GoabFileUploadOnCancelDetail) => void;
 }
 
-export function GoabFileUploadCard({
-  filename,
-  size,
-  type,
-  progress,
-  error,
-  testId,
-  onDelete,
-  onCancel,
-}: GoabFileUploadCardProps) {
+export function GoabFileUploadCard(props: GoabFileUploadCardProps) {
+  const [dataGridProps, {
+    filename,
+    size,
+    type,
+    progress,
+    error,
+    testId,
+    onDelete,
+    onCancel
+  }] = useDataGridProps(props);
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -70,6 +72,7 @@ export function GoabFileUploadCard({
       progress={progress}
       error={error}
       testid={testId}
+      {...dataGridProps}
     />
   );
 }

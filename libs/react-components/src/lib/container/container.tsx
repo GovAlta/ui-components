@@ -6,6 +6,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   type?: GoabContainerType;
@@ -25,7 +26,7 @@ declare module "react" {
   }
 }
 
-export interface GoabContainerProps extends Margins {
+export interface GoabContainerProps extends Margins, DataGridProps {
   accent?: GoabContainerAccent;
   type?: GoabContainerType;
   heading?: ReactNode;
@@ -38,23 +39,25 @@ export interface GoabContainerProps extends Margins {
   testId?: string;
 }
 
-export function GoabContainer({
-  accent,
-  heading,
-  title,
-  padding,
-  children,
-  actions,
-  type,
-  width,
-  maxWidth,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
-}: GoabContainerProps): JSX.Element {
+export function GoabContainer(props: GoabContainerProps): JSX.Element {
+  const [dataGridProps, {
+    accent,
+    heading,
+    title,
+    padding,
+    children,
+    actions,
+    type,
+    width,
+    maxWidth,
+    mt,
+    mr,
+    mb,
+    ml,
+    testId,
+  }] = useDataGridProps(props);
   const headingContent = heading || title;
+
   return (
     <goa-container
       type={type}
@@ -67,6 +70,7 @@ export function GoabContainer({
       mb={mb}
       ml={ml}
       testid={testId}
+      {...dataGridProps}
     >
       {headingContent && <div slot="title">{headingContent}</div>}
       {children}

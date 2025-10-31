@@ -72,4 +72,14 @@ describe('GoabText', () => {
       expect(element?.getAttribute('as')).toBe(tag);
     });
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabText data-grid="cell">
+        Test content
+      </GoabText>
+    );
+    const el = container.querySelector("goa-text");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

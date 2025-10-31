@@ -1,5 +1,6 @@
 import { GoabBadgeType, Margins, GoabIconType } from "@abgov/ui-components-common";
 import type { JSX } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   type: GoabBadgeType;
@@ -19,7 +20,7 @@ declare module "react" {
   }
 }
 
-export interface GoabBadgeProps extends Margins {
+export interface GoabBadgeProps extends Margins, DataGridProps {
   type: GoabBadgeType;
   icon?: boolean;
   content?: string;
@@ -46,18 +47,20 @@ function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false"
   return iconType ? "true" : "false";
 }
 
-export function GoabBadge({
-  type,
-  content,
-  icon,
-  testId,
-  mt,
-  mr,
-  mb,
-  ml,
-  ariaLabel,
-  iconType,
-}: GoabBadgeProps): JSX.Element {
+export function GoabBadge(props: GoabBadgeProps): JSX.Element {
+  const [dataGridProps, {
+    type,
+    content,
+    icon,
+    testId,
+    mt,
+    mr,
+    mb,
+    ml,
+    ariaLabel,
+    iconType,
+  }] = useDataGridProps(props);
+
   return (
     <goa-badge
       type={type}
@@ -71,6 +74,7 @@ export function GoabBadge({
       mr={mr}
       mb={mb}
       ml={ml}
+      {...dataGridProps}
     />
   );
 }

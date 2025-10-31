@@ -5,6 +5,7 @@ import {
   Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX, ReactNode } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -29,7 +30,7 @@ declare module "react" {
   }
 }
 
-export interface GoabIconButtonProps extends Margins {
+export interface GoabIconButtonProps extends Margins, DataGridProps {
   icon: GoabIconType;
   size?: GoabIconSize;
   variant?: GoabIconButtonVariant;
@@ -44,25 +45,27 @@ export interface GoabIconButtonProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoabIconButton({
-  icon,
-  disabled,
-  variant = "color",
-  onClick,
-  size = "medium",
-  title,
-  ariaLabel,
-  testId,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-  action,
-  actionArgs,
-  actionArg,
-}: GoabIconButtonProps): JSX.Element {
+export function GoabIconButton(props: GoabIconButtonProps): JSX.Element {
+  const [dataGridProps, {
+    icon,
+    disabled,
+    variant = "color",
+    onClick,
+    size = "medium",
+    title,
+    ariaLabel,
+    testId,
+    children,
+    mt,
+    mr,
+    mb,
+    ml,
+    action,
+    actionArgs,
+    actionArg,
+  }] = useDataGridProps(props);
   const ref = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -98,6 +101,7 @@ export function GoabIconButton({
       mb={mb}
       ml={ml}
       testid={testId}
+      {...dataGridProps}
     >
       {children}
     </goa-icon-button>

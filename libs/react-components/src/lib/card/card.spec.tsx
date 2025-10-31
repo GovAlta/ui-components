@@ -16,4 +16,16 @@ describe("GoabCard", () => {
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabCard
+        data-grid="cell"
+      >
+        Card content
+      </GoabCard>,
+    );
+    const el = container.querySelector("goa-card");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

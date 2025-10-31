@@ -36,6 +36,18 @@ describe("GoabBadge", () => {
     expect(el?.getAttribute("arialabel")).toBe("text");
   });
 
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabBadge
+        type="information"
+        content="Text Content"
+        data-grid="cell"
+      />,
+    );
+    const el = container.querySelector("goa-badge");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
+
   it("should render custom icon type when icontype is provided", () => {
     const { container } = render(
       <GoabBadge

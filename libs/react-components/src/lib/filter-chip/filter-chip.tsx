@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
   ref: React.RefObject<HTMLElement | null>;
@@ -18,7 +19,7 @@ declare module "react" {
   }
 }
 
-export interface GoabFilterChipProps extends Margins {
+export interface GoabFilterChipProps extends Margins, DataGridProps {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;
   error?: boolean;
@@ -26,18 +27,20 @@ export interface GoabFilterChipProps extends Margins {
   testId?: string;
 }
 
-export const GoabFilterChip = ({
-  iconTheme = "outline",
-  error,
-  content,
-  onClick,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
-}: GoabFilterChipProps) => {
+export const GoabFilterChip = (props: GoabFilterChipProps) => {
+  const [dataGridProps, {
+    iconTheme = "outline",
+    error,
+    content,
+    onClick,
+    mt,
+    mr,
+    mb,
+    ml,
+    testId,
+  }] = useDataGridProps(props);
   const el = useRef<HTMLElement>(null);
+
   useEffect(() => {
     if (!el.current) return;
     if (!onClick) return;
@@ -61,6 +64,7 @@ export const GoabFilterChip = ({
       mb={mb}
       ml={ml}
       testid={testId}
+      {...dataGridProps}
     />
   );
 };
