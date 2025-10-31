@@ -42,9 +42,6 @@ jobs:
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
 
-      - name: Remove types file for now
-        run: rm dist/libs/web-components/index.d.ts
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
