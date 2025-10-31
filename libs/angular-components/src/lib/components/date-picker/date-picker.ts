@@ -30,6 +30,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.relative]="relative"
     [attr.type]="type"
     [attr.testid]="testId"
+    [attr.width]="width"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.ml]="ml"
@@ -58,6 +59,7 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
+  @Input() width?: string;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 

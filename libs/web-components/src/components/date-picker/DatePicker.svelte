@@ -8,7 +8,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { addDays, addMonths, addYears, format, startOfDay } from "date-fns";
   import type { Spacing } from "../../common/styling";
   import { padLeft, toBoolean } from "../../common/utils";
@@ -49,6 +49,7 @@
   export let relative: string = "";
   export let disabled: string = "false";
   export let testid: string = "";
+  export let width: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -70,7 +71,8 @@
   // re-init the data when the value changes
   $: setDate(value);
 
-  onMount(() => {
+  onMount(async () => {
+    await tick(); // for Angular's delay
     setDate(value);
     addRelayListener();
     sendMountedMessage();
@@ -301,41 +303,81 @@
 
 <div bind:this={_senderEl}></div>
 {#if type === "calendar"}
-  <goa-popover
-    bind:this={_rootEl}
-    tabindex="-1"
-    data-testid="calendar-popover"
-    {testid}
-    {mt}
-    {mb}
-    {ml}
-    {mr}
-    disabled={isDisabled}
-    on:_close={() => dispatchValue(_date)}
-  >
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <goa-input
-      slot="target"
-      testid="calendar-input"
-      width="16ch"
-      readonly="true"
-      trailingicon="calendar"
-      value={formatDate(_date)}
-      {error}
-      on:keydown={handleKeyDown}
+  {#if width && width.includes('%')}
+    <div style="display: block; width: {width};">
+      <goa-popover
+        bind:this={_rootEl}
+        tabindex="-1"
+        data-testid="calendar-popover"
+        data-content-fits-width="true"
+        {testid}
+        {mt}
+        {mb}
+        {ml}
+        {mr}
+        width="100%"
+        disabled={isDisabled}
+        on:_close={() => dispatchValue(_date)}
+      >
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <goa-input
+          slot="target"
+          testid="calendar-input"
+          width="100%"
+          readonly="true"
+          trailingicon="calendar"
+          value={formatDate(_date)}
+          {error}
+          on:keydown={handleKeyDown}
+          disabled={isDisabled}
+        />
+        <goa-calendar
+          {name}
+          {value}
+          {min}
+          {max}
+          bordered="false"
+          on:_change={onCalendarChange}
+        />
+      </goa-popover>
+    </div>
+  {:else}
+    <goa-popover
+      bind:this={_rootEl}
+      tabindex="-1"
+      data-testid="calendar-popover"
+      {testid}
+      {mt}
+      {mb}
+      {ml}
+      {mr}
       disabled={isDisabled}
-    />
-    <goa-calendar
-      {name}
-      {value}
-      {min}
-      {max}
-      bordered="false"
-      on:_change={onCalendarChange}
-    />
-  </goa-popover>
+      on:_close={() => dispatchValue(_date)}
+    >
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <goa-input
+        slot="target"
+        testid="calendar-input"
+        width={width || "16ch"}
+        readonly="true"
+        trailingicon="calendar"
+        value={formatDate(_date)}
+        {error}
+        on:keydown={handleKeyDown}
+        disabled={isDisabled}
+      />
+      <goa-calendar
+        {name}
+        {value}
+        {min}
+        {max}
+        bordered="false"
+        on:_change={onCalendarChange}
+      />
+    </goa-popover>
+  {/if}
 {:else if type === "input"}
-  <goa-form-item error={_error && error} bind:this={_rootEl}>
+  <goa-form-item error={_error && error} bind:this={_rootEl} style={width ? `width: ${width};` : ""}>
     <goa-block direction="row">
       <goa-form-item helptext="Month">
         <goa-dropdown
