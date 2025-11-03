@@ -2,6 +2,7 @@ import {
   GoabCalloutAriaLive,
   GoabCalloutSize,
   GoabCalloutType,
+  GoabCalloutEmphasis,
   GoabCalloutIconTheme,
 } from "@abgov/ui-components-common";
 import {
@@ -24,6 +25,7 @@ import { GoabBaseComponent } from "../base.component";
       [attr.type]="type"
       [attr.heading]="heading"
       [attr.size]="size"
+      [attr.emphasis]="emphasis"
       [attr.maxwidth]="maxWidth"
       [attr.arialive]="ariaLive"
       [attr.icontheme]="iconTheme"
@@ -57,6 +59,7 @@ export class GoabCallout extends GoabBaseComponent implements OnInit {
   @Input() type?: GoabCalloutType = "information";
   @Input() heading?: string = "";
   @Input() size?: GoabCalloutSize = "large";
+  @Input() emphasis?: GoabCalloutEmphasis = "medium";
   @Input() maxWidth?: string;
   @Input() ariaLive?: GoabCalloutAriaLive = "off";
   @Input() iconTheme?: GoabCalloutIconTheme = "outline";
