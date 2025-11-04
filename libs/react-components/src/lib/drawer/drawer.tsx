@@ -7,6 +7,7 @@ interface WCProps {
   heading?: string;
   maxsize?: GoabDrawerSize;
   testid?: string;
+  version?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 
@@ -54,6 +55,7 @@ export function GoabDrawer({
 
   return (
     <goa-drawer
+      version={"2"}
       ref={el}
       position={position}
       open={open ? true : undefined}

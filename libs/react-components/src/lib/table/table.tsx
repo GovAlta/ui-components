@@ -11,6 +11,7 @@ interface WCProps extends Margins {
   stickyheader?: string;
   variant?: GoabTableVariant;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -56,6 +57,7 @@ export function GoabTable({ onSort, ...props }: GoabTableProps) {
   return (
     <goa-table
       ref={ref}
+      version={"2"}
       width={props.width}
       // TODO: Enable this later if needed
       // stickyheader={props.stickyHeader ? "true" : undefined}

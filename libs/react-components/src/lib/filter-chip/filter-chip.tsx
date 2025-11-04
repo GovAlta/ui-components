@@ -8,6 +8,7 @@ interface WCProps extends Margins {
   error?: string;
   content: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -65,6 +66,7 @@ export const GoabFilterChip = (props: GoabFilterChipProps) => {
       ml={ml}
       testid={testId}
       {...dataGridProps}
+      version={"2"}
     />
   );
 };

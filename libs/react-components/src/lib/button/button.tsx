@@ -21,6 +21,7 @@ interface WCProps extends Margins {
   actionArgs?: string;
   actionArg?: string;
   ref: React.RefObject<HTMLElement | null>;
+  version?: string;
 }
 
 declare module "react" {
@@ -108,6 +109,7 @@ export function GoabButton(props: GoabButtonProps): JSX.Element {
       mb={mb}
       ml={ml}
       {...dataGridProps}
+      version={"2"}
     >
       {children}
     </goa-button>

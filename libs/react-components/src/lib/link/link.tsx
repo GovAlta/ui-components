@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   actionArgs?: string;
   actionArg?: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -45,6 +46,7 @@ export function GoabLink(props: GoabLinkProps) {
       mb={mb}
       ml={ml}
       mr={mr}
+      version={"2"}
       {...dataGridProps}
     >
       {children}

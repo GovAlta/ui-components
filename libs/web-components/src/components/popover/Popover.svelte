@@ -29,7 +29,6 @@
     isPointInRectangle,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
-
   // Public
 
   export let testid: string = "popover";

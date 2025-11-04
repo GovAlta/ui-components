@@ -19,6 +19,7 @@ interface WCProps extends Margins {
   actionArgs?: string;
   actionArg?: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -102,6 +103,7 @@ export function GoabIconButton(props: GoabIconButtonProps): JSX.Element {
       ml={ml}
       testid={testId}
       {...dataGridProps}
+      version={"2"}
     >
       {children}
     </goa-icon-button>

@@ -19,6 +19,7 @@ interface WCProps {
   transition?: GoabModalTransition;
   calloutvariant?: GoabModalCalloutVariant;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -85,6 +86,7 @@ export function GoabModal({
       transition={transition}
       calloutvariant={calloutVariant}
       testid={testId}
+      version={"2"}
     >
       {heading && typeof heading !== "string" && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}

@@ -7,6 +7,7 @@ interface WCProps {
   maxcontentwidth?: string;
   arialive?: GoabAriaLiveType;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -59,6 +60,7 @@ export const GoabNotification = ({
       testid={testId}
       maxcontentwidth={maxContentWidth}
       arialive={ariaLive}
+      version={"2"}
     >
       {children}
     </goa-notification>

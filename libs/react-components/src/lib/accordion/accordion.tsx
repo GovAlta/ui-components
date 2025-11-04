@@ -17,6 +17,7 @@ interface WCProps extends Margins {
   maxwidth?: string;
   testid?: string;
   iconposition?: GoabAccordionIconPosition;
+  version?: string;
 }
 
 declare module "react" {
@@ -86,6 +87,7 @@ export function GoabAccordion(props: GoabAccordionProps): JSX.Element {
       mr={mr}
       mb={mb}
       ml={ml}
+      version={"2"}
       {...dataGridProps}
     >
       {headingContent && <div slot="headingcontent">{headingContent}</div>}

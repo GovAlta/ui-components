@@ -18,6 +18,7 @@ interface WCProps extends Margins {
   name?: string;
   id?: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -70,6 +71,7 @@ export function GoabFormItem(props: GoabFormItemProps): JSX.Element {
 
   return (
     <goa-form-item
+      version={"2"}
       label={label}
       labelsize={labelSize}
       error={typeof error === "string" ? error : undefined}

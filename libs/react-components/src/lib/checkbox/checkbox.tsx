@@ -27,6 +27,7 @@ interface WCProps extends Margins {
   revealarialabel?: string;
   maxwidth?: string;
   testid?: string;
+  version?: string;
 }
 
 /* eslint-disable-next-line */
@@ -114,6 +115,7 @@ export function GoabCheckbox(props: GoabCheckboxProps): JSX.Element {
       mr={mr}
       mb={mb}
       ml={ml}
+      version={"2"}
       {...dataGridProps}
     >
       {children}
