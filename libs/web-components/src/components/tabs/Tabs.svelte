@@ -7,7 +7,7 @@
 
   export let initialtab: number = -1; // 1-based
   export let testid: string = "";
-  export let version: "1" | "2" = "1";
+  export let version: "1" | "2" = "2";
 
   // Private
 

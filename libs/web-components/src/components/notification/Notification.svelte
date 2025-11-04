@@ -32,7 +32,7 @@
   export let maxcontentwidth = "100%";
   export let arialive: AriaLiveType = "polite";
   export let testid: string = "";
-  export let version: "1" | "2" = "1";
+  export let version: "1" | "2" = "2";
   export let emphasis: EmphasisType | undefined = undefined;
   export let compact: boolean = false;
 

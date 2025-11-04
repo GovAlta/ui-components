@@ -53,7 +53,7 @@
   export let trailingicon: GoAIconType | null = null;
   export let testid: string = "";
   export let width: string = "";
-  export let version: Version = "1";
+  export let version: Version = "2";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;

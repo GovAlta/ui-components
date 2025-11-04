@@ -39,7 +39,7 @@
   export let description: string = "";
   export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
   export let maxwidth: string = "none";
-  export let version: "1" | "2" = "1";
+  export let version: "1" | "2" = "2";
 
   // margin
   export let mt: Spacing = null;
