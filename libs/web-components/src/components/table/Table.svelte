@@ -31,7 +31,7 @@
   export let stickyheader: string = "false";
   export let striped: string = "false";
   export let variant: Variant = "normal";
-  export let version: VersionType = "1";
+  export let version: VersionType = "2";
   export let testid: string = "";
 
   export let mt: Spacing = null;

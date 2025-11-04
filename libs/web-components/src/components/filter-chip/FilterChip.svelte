@@ -17,7 +17,7 @@
   export let content: string;
   export let testid: string = "";
   export let ariaLabel: string = "";
-  export let version: "1" | "2" = "1";
+  export let version: "1" | "2" = "2";
 
   // Private variables
   let el: HTMLElement;

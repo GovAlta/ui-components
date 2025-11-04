@@ -45,7 +45,7 @@
   // version
   type VersionType = "1" | "2";
   const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  export let version: VersionType = "1";
+  export let version: VersionType = "2";
 
   // size
   type SizeType = "default" | "compact";
