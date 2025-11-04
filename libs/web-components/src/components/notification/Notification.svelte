@@ -17,31 +17,59 @@
     ["assertive", "off", "polite"] as const,
     true,
   );
+  const [EmphasisTypes, validateEmphasis] = typeValidator(
+    "Notification emphasis",
+    ["High", "Low"] as const,
+    false,
+  );
 
   // Type
   type NotificationType = (typeof Types)[number];
   type AriaLiveType = (typeof AriaLiveTypes)[number];
+  type EmphasisType = (typeof EmphasisTypes)[number];
 
   export let type: NotificationType = "";
   export let maxcontentwidth = "100%";
   export let arialive: AriaLiveType = "polite";
   export let testid: string = "";
+  export let version: "1" | "2" = "1";
+  export let emphasis: EmphasisType | undefined = undefined;
+  export let compact: boolean = false;
 
   let show = true;
+
+  // Default emphasis to "High" for V2 when not specified
+  $: effectiveEmphasis = version === "2" && !emphasis ? "High" : emphasis;
+
+  // Soft deprecation: map "event" to "information" in V2
+  $: effectiveType = version === "2" && type === "event" ? "information" : type;
+
   $: iconType =
-    type === "emergency"
+    effectiveType === "emergency"
       ? "warning"
-      : type === "important"
+      : effectiveType === "important"
         ? "alert-circle"
-        : type === "information"
+        : effectiveType === "information"
           ? "information-circle"
-          : type === "event"
+          : effectiveType === "event"
             ? "calendar"
             : "";
+
+  // Icon inversion logic based on version and emphasis
+  $: iconInverted =
+    version === "2" && effectiveEmphasis
+      ? (effectiveType === "important" ? "false" : effectiveEmphasis === "High" ? "true" : "false")
+      : (effectiveType === "important" ? "false" : "true"); // V1 logic: all inverted except important
+
+  // Icon theme: filled for V2 low emphasis
+  $: iconTheme = version === "2" && effectiveEmphasis === "Low" ? "filled" : undefined;
 
   onMount(() => {
     validateAriaLiveType(arialive);
     setTimeout(() => validateType(type), 1);
+    if (version === "2" && emphasis) {
+      setTimeout(() => validateEmphasis(emphasis), 1);
+    }
   });
 
   function close(e: Event) {
@@ -53,10 +81,17 @@
 
 <!-- HTML -->
 {#if show}
-  <div id="container" data-testid={testid}>
+  <div
+    id="container"
+    data-testid={testid}
+    class:v2={version === "2"}
+    class:compact={version === "2" && compact}
+  >
     <div
       transition:fade
-      class="notification {type}"
+      class="notification {effectiveType}"
+      class:high={version === "2" && effectiveEmphasis === "High"}
+      class:low={version === "2" && effectiveEmphasis === "Low"}
       style={`--max-content-width: ${maxcontentwidth}`}
     >
       <div
@@ -68,7 +103,8 @@
         <div class="icon">
           <goa-icon
             type={iconType}
-            inverted={type === "important" ? "false" : "true"}
+            inverted={iconInverted}
+            theme={iconTheme}
           />
         </div>
         <div class="content">
@@ -76,10 +112,10 @@
         </div>
         <div class="close">
           <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <button class={type} on:click={close}>
+          <button class={effectiveType} on:click={close}>
             <goa-icon
               type="close"
-              inverted={type === "important" ? "false" : "true"}
+              inverted={iconInverted}
               theme="filled"
             />
           </button>
@@ -160,6 +196,11 @@
     font: var(--goa-notification-banner-text-size);
   }
 
+  /* V2: Improved vertical alignment with icon */
+  #container.v2 .content {
+    margin-top: 4px;
+  }
+
   :global(::slotted(a)) {
     color: unset !important;
     outline: unset !important;
@@ -227,5 +268,173 @@
   }
   .close button.emergency:focus-visible {
     box-shadow: 0 0 0 3px var(--goa-color-greyscale-white);
+  }
+
+  /* V2 Styling */
+
+  /* Compact mode spacing */
+  #container.v2.compact .notification {
+    padding-top: var(--goa-notification-banner-padding-tb-compact);
+    padding-bottom: var(--goa-notification-banner-padding-tb-compact);
+  }
+
+  #container.v2.compact .content-container {
+    gap: var(--goa-notification-banner-gap-compact);
+  }
+
+  @container self (--not-mobile) {
+    #container.v2.compact .notification {
+      padding-left: var(--goa-notification-banner-padding-lr-medium-screen-compact);
+      padding-right: var(--goa-notification-banner-padding-lr-medium-screen-compact);
+    }
+  }
+
+  @container self (--desktop) {
+    #container.v2.compact .notification {
+      padding-left: var(--goa-notification-banner-padding-lr-large-screen-compact);
+      padding-right: var(--goa-notification-banner-padding-lr-large-screen-compact);
+    }
+  }
+
+  /* V2 emphasis-based colors - Information */
+  #container.v2 .notification.information.high {
+    background-color: var(--goa-notification-banner-information-high-color-bg);
+    color: var(--goa-notification-banner-information-high-color-text);
+  }
+
+  #container.v2 .notification.information.low {
+    background-color: var(--goa-notification-banner-information-low-color-bg);
+    color: var(--goa-notification-banner-information-low-color-text);
+    border: var(--goa-border-width-s) solid var(--goa-notification-banner-information-low-color-border);
+  }
+
+  /* V2 emphasis-based colors - Important */
+  #container.v2 .notification.important.high {
+    background-color: var(--goa-notification-banner-important-high-color-bg);
+    color: var(--goa-notification-banner-important-high-color-text);
+  }
+
+  #container.v2 .notification.important.low {
+    background-color: var(--goa-notification-banner-important-low-color-bg);
+    color: var(--goa-notification-banner-important-low-color-text);
+    border: var(--goa-border-width-s) solid var(--goa-notification-banner-important-low-color-border);
+  }
+
+  /* V2 emphasis-based colors - Emergency */
+  #container.v2 .notification.emergency.high {
+    background-color: var(--goa-notification-banner-emergency-high-color-bg);
+    color: var(--goa-notification-banner-emergency-high-color-text);
+  }
+
+  #container.v2 .notification.emergency.low {
+    background-color: var(--goa-notification-banner-emergency-low-color-bg);
+    color: var(--goa-notification-banner-emergency-low-color-text);
+    border: var(--goa-border-width-s) solid var(--goa-notification-banner-emergency-low-color-border);
+  }
+
+  /* V2 close button icon colors match text */
+  #container.v2 .notification.information.high .close button goa-icon {
+    color: var(--goa-notification-banner-information-high-color-text);
+  }
+
+  #container.v2 .notification.information.low .close button goa-icon {
+    color: var(--goa-notification-banner-information-low-color-text);
+  }
+
+  #container.v2 .notification.important.high .close button goa-icon {
+    color: var(--goa-notification-banner-important-high-color-text);
+  }
+
+  #container.v2 .notification.important.low .close button goa-icon {
+    color: var(--goa-notification-banner-important-low-color-text);
+  }
+
+  #container.v2 .notification.emergency.high .close button goa-icon {
+    color: var(--goa-notification-banner-emergency-high-color-text);
+  }
+
+  #container.v2 .notification.emergency.low .close button goa-icon {
+    color: var(--goa-notification-banner-emergency-low-color-text);
+  }
+
+  /* V2 close button hover and focus background colors */
+  #container.v2 .notification.information.high .close button:hover,
+  #container.v2 .notification.information.high .close button:focus-visible {
+    background-color: var(--goa-notification-banner-information-high-close-bg-hover);
+  }
+
+  #container.v2 .notification.information.low .close button:hover,
+  #container.v2 .notification.information.low .close button:focus-visible {
+    background-color: var(--goa-notification-banner-information-low-close-bg-hover);
+  }
+
+  #container.v2 .notification.important.high .close button:hover,
+  #container.v2 .notification.important.high .close button:focus-visible {
+    background-color: var(--goa-notification-banner-important-high-close-bg-hover);
+  }
+
+  #container.v2 .notification.important.low .close button:hover,
+  #container.v2 .notification.important.low .close button:focus-visible {
+    background-color: var(--goa-notification-banner-important-low-close-bg-hover);
+  }
+
+  #container.v2 .notification.emergency.high .close button:hover,
+  #container.v2 .notification.emergency.high .close button:focus-visible {
+    background-color: var(--goa-notification-banner-emergency-high-close-bg-hover);
+  }
+
+  #container.v2 .notification.emergency.low .close button:hover,
+  #container.v2 .notification.emergency.low .close button:focus-visible {
+    background-color: var(--goa-notification-banner-emergency-low-close-bg-hover);
+  }
+
+  /* V2 contrast-based focus borders */
+  #container.v2 .notification.information.high .close button:focus-visible {
+    box-shadow: var(--goa-notification-banner-information-high-focus-border);
+  }
+
+  #container.v2 .notification.information.low .close button:focus-visible {
+    box-shadow: var(--goa-notification-banner-information-low-focus-border);
+  }
+
+  #container.v2 .notification.important.high .close button:focus-visible {
+    box-shadow: var(--goa-notification-banner-important-high-focus-border);
+  }
+
+  #container.v2 .notification.important.low .close button:focus-visible {
+    box-shadow: var(--goa-notification-banner-important-low-focus-border);
+  }
+
+  #container.v2 .notification.emergency.high .close button:focus-visible {
+    box-shadow: var(--goa-notification-banner-emergency-high-focus-border);
+  }
+
+  #container.v2 .notification.emergency.low .close button:focus-visible {
+    box-shadow: var(--goa-notification-banner-emergency-low-focus-border);
+  }
+
+  /* V2 link focus states */
+  #container.v2 .notification.important.high :global(::slotted(a:focus)) {
+    box-shadow: var(--goa-notification-banner-important-high-focus-border);
+  }
+
+  #container.v2 .notification.important.low :global(::slotted(a:focus)) {
+    box-shadow: var(--goa-notification-banner-important-low-focus-border);
+  }
+
+  #container.v2 .notification.information.high :global(::slotted(a:focus)) {
+    box-shadow: var(--goa-notification-banner-information-high-focus-border);
+  }
+
+  #container.v2 .notification.information.low :global(::slotted(a:focus)) {
+    box-shadow: var(--goa-notification-banner-information-low-focus-border);
+  }
+
+  #container.v2 .notification.emergency.high :global(::slotted(a:focus)) {
+    box-shadow: var(--goa-notification-banner-emergency-high-focus-border);
+  }
+
+  #container.v2 .notification.emergency.low :global(::slotted(a:focus)) {
+    box-shadow: var(--goa-notification-banner-emergency-low-focus-border);
   }
 </style>
