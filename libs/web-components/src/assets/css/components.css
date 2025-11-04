@@ -46,27 +46,39 @@ goa-table.sticky thead {
 
 goa-table td {
   font: var(--goa-typography-body-m);
-  padding: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs);
-  border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  padding: var(--goa-table-padding-data, var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs));
+  background-color: var(--goa-table-color-bg-data, var(--goa-color-greyscale-white));
+  border-bottom: var(--goa-table-data-border, 1px solid var(--goa-color-greyscale-200));
   vertical-align: top;
   box-sizing: border-box;
-  height: var(--goa-space-2xl);
+  min-height: var(--goa-table-height-data, var(--goa-space-2xl));
 }
 
+/* V2: Remove bottom border from last row to prevent doubling with table border */
+goa-table[version="2"] tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* V2: Zebra striping for readability */
+goa-table[version="2"][striped="true"] tbody tr:nth-child(even) td {
+  background-color: var(--goa-color-greyscale-50);
+}
+
+/* Relaxed variant - larger spacing and height for data cells only */
 goa-table[variant="relaxed"] td {
-  padding: var(--goa-space-m);
+  padding: var(--goa-table-padding-data-relaxed, var(--goa-space-m));
+  min-height: var(--goa-table-height-data-relaxed, 64px);
 }
 
 goa-table thead th {
-  background-color: var(--goa-color-greyscale-white);
-  color: var(--goa-table-color-heading);
-  padding:
-  var(--goa-space-s)
-  var(--goa-table-header-padding, var(--goa-space-m))
-  var(--goa-space-xs) var(--goa-table-header-padding, var(--goa-space-m));
+  background-color: var(--goa-table-color-bg-heading, var(--goa-color-greyscale-white));
+  color: var(--goa-table-color-heading, var(--goa-color-greyscale-600));
+  font: var(--goa-table-typography-heading, var(--goa-typography-heading-s));
+  padding: var(--goa-table-padding-heading, var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs));
   text-align: left;
-  border-bottom: var(--goa-border-width-m) solid var(--goa-table-color-border-heading);
+  border-bottom: var(--goa-table-heading-border, 2px solid var(--goa-color-greyscale-600));
   vertical-align: bottom;
+  min-height: var(--goa-table-height-heading, 56px);
   }
 
 .goa-table-number-column {
@@ -78,22 +90,145 @@ goa-table thead th {
   text-align: right;
 }
 
-.goa-table-number-header:not(:has(goa-table-sort-header)) {
-  padding-bottom: var(--goa-space-xs);
-}
-
 goa-table thead th:has(goa-table-sort-header) {
-	padding-bottom: 1px;
-	padding-top: 0;
+	padding: 0;
 }
 
 goa-table thead th:has(goa-table-sort-header):hover {
-	background-color: var(--goa-color-greyscale-100);
-	color: var(--goa-color-interactive-hover);
+	background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-100));
+	color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
 }
 
 goa-table tfoot td {
   background-color: var(--goa-color-greyscale-100);
+}
+
+/* V2: Outer edge padding - larger padding on first and last columns */
+
+/* Headers without TableSortHeader - apply padding to th */
+goa-table[version="2"] thead th:first-child:not(:has(goa-table-sort-header)) {
+  padding-left: var(--goa-space-l, 24px);
+}
+
+goa-table[version="2"] thead th:last-child:not(:has(goa-table-sort-header)) {
+  padding-right: var(--goa-space-l, 24px);
+}
+
+/* Headers with TableSortHeader - override token padding for button inside (all variants) */
+goa-table[version="2"] thead th:first-child:has(goa-table-sort-header):not(:last-child) {
+  --goa-table-padding-heading: 18px var(--goa-space-m) var(--goa-space-m) var(--goa-space-l);
+}
+
+goa-table[version="2"] thead th:last-child:has(goa-table-sort-header):not(:first-child) {
+  --goa-table-padding-heading: 18px var(--goa-space-l) var(--goa-space-m) var(--goa-space-m);
+}
+
+goa-table[version="2"] thead th:first-child:last-child:has(goa-table-sort-header) {
+  --goa-table-padding-heading: 18px var(--goa-space-l) var(--goa-space-m) var(--goa-space-l);
+}
+
+/* Data and footer cells */
+goa-table[version="2"] tbody td:first-child,
+goa-table[version="2"] tfoot td:first-child {
+  padding-left: var(--goa-space-l, 24px);
+}
+
+goa-table[version="2"] tbody td:last-child,
+goa-table[version="2"] tfoot td:last-child {
+  padding-right: var(--goa-space-l, 24px);
+}
+
+
+/* Normal Variant Cell Types */
+
+goa-table td.goa-table-cell--text {
+  padding-top: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+  padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+}
+
+goa-table td.goa-table-cell--checkbox {
+  padding-top: var(--goa-table-padding-cell-checkbox, 2px) !important;
+  padding-bottom: var(--goa-table-padding-cell-checkbox, 2px) !important;
+  text-align: center;
+}
+
+goa-table td.goa-table-cell--form-field {
+  padding-top: var(--goa-table-padding-cell-form-field, 3px) !important;
+  padding-bottom: var(--goa-table-padding-cell-form-field, 3px) !important;
+}
+
+goa-table td.goa-table-cell--badge {
+  padding-top: var(--goa-table-padding-cell-badge, var(--goa-space-s)) !important;
+  padding-bottom: var(--goa-table-padding-cell-badge, var(--goa-space-s)) !important;
+}
+
+/* Alignment helper classes */
+
+goa-table td.goa-table-cell--numeric,
+goa-table th.goa-table-cell--numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+goa-table th.goa-table-cell--numeric goa-table-sort-header {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+goa-table td.goa-table-cell--numeric {
+  padding-top: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+  padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+}
+
+goa-table td.goa-table-cell--actions {
+  padding-top: var(--goa-table-padding-cell-actions, 7px) !important;
+  padding-bottom: var(--goa-table-padding-cell-actions, 7px) !important;
+  text-align: right;
+  white-space: nowrap;
+}
+
+goa-table td.goa-table-cell--text-supporting {
+  padding-top: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+  padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
+}
+
+/* Relaxed variant overrides for alignment/layout classes */
+
+goa-table[variant="relaxed"] td.goa-table-cell--numeric {
+  padding-top: var(--goa-table-padding-cell-text-relaxed, 20px) !important;
+  padding-bottom: var(--goa-table-padding-cell-text-relaxed, 20px) !important;
+}
+
+goa-table[variant="relaxed"] td.goa-table-cell--actions {
+  padding-top: var(--goa-table-padding-cell-actions-relaxed, 14px) !important;
+  padding-bottom: var(--goa-table-padding-cell-actions-relaxed, 14px) !important;
+}
+
+goa-table[variant="relaxed"] td.goa-table-cell--text-supporting {
+  padding-top: var(--goa-table-padding-cell-text-supporting-relaxed, 8px) !important;
+  padding-bottom: var(--goa-table-padding-cell-text-supporting-relaxed, 8px) !important;
+}
+
+/* Relaxed Variant Cell Types */
+
+goa-table[variant="relaxed"] td.goa-table-cell--text {
+  padding-top: var(--goa-table-padding-cell-text-relaxed, 20px) !important;
+  padding-bottom: var(--goa-table-padding-cell-text-relaxed, 20px) !important;
+}
+
+goa-table[variant="relaxed"] td.goa-table-cell--checkbox {
+  padding-top: var(--goa-table-padding-cell-checkbox-relaxed, 10px) !important;
+  padding-bottom: var(--goa-table-padding-cell-checkbox-relaxed, 10px) !important;
+}
+
+goa-table[variant="relaxed"] td.goa-table-cell--form-field {
+  padding-top: var(--goa-table-padding-cell-form-field-relaxed, 11px) !important;
+  padding-bottom: var(--goa-table-padding-cell-form-field-relaxed, 11px) !important;
+}
+
+goa-table[variant="relaxed"] td.goa-table-cell--badge {
+  padding-top: var(--goa-table-padding-cell-badge-relaxed, 20px) !important;
+  padding-bottom: var(--goa-table-padding-cell-badge-relaxed, 20px) !important;
 }
 
 goa-table tfoot tr:first-child td {
