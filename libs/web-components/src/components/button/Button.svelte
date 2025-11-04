@@ -32,11 +32,17 @@
     ["normal", "destructive", "inverse"],
     { required: true },
   );
+  const [Versions, validateVersion] = typeValidator(
+    "Button version",
+    ["1", "2"],
+    { required: true },
+  );
 
   // Types
   type ButtonType = (typeof Types)[number];
   type Size = (typeof Sizes)[number];
   type Variant = (typeof Variants)[number];
+  type Version = (typeof Versions)[number];
 
   // optional
   export let type: ButtonType = "primary";
@@ -47,6 +53,7 @@
   export let trailingicon: GoAIconType | null = null;
   export let testid: string = "";
   export let width: string = "";
+  export let version: Version = "1";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -74,6 +81,7 @@
     validateType(type);
     validateSize(size);
     validateVariant(variant);
+    validateVersion(version);
   });
 
   // =========
@@ -97,6 +105,7 @@
 
 <button
   class="{type} {size} {variant}"
+  class:v2={version === "2"}
   style={`
       ${calculateMargin(mt, mr, mb, ml)};
       --width: ${width};
@@ -120,7 +129,7 @@
     {#if leadingicon}
       <goa-icon
         id="leading-icon"
-        size="3"
+        size={ version === "2" && size === "normal" ? "4" : "3" }
         type={leadingicon}
         inverted={isButtonDark}
       />
@@ -131,7 +140,7 @@
     {#if trailingicon}
       <goa-icon
         id="trailing-icon"
-        size="3"
+        size={ version === "2" && size === "normal" ? "4" : "3" }
         type={trailingicon}
         inverted={isButtonDark}
       />
@@ -148,7 +157,7 @@
     font: var(--goa-button-text);
     height: var(--goa-button-height);
     letter-spacing: var(--goa-button-letter-spacing);
-    padding: 0 var(--goa-button-padding-lr);
+    padding: var(--goa-button-padding, 0 var(--goa-button-padding-lr));
     white-space: nowrap;
     gap: var(--goa-button-gap);
     align-items: center; /* for leading and trailing icon vertical alignment */
@@ -193,17 +202,6 @@
     }
   }
 
-  .icon {
-    /* Default icon size */
-    width: var(--goa-button-icon-size);
-    height: var(--goa-button-icon-size);
-  }
-  .icon.compact {
-    /* Compact icon size */
-    width: var(--goa-button-compact-icon-size);
-    height: var(--goa-button-compact-icon-size);
-  }
-
   .text {
     padding-bottom: 0.2rem; /* acumin font requires this to allow for vertical alignment  */
   }
@@ -211,7 +209,7 @@
   button.compact {
     height: var(--goa-button-height-compact);
     font: var(--goa-button-text-compact);
-    padding: var(--goa-button-padding-lr-compact);
+    padding: var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));
     gap: var(--goa-button-compact-gap);
   }
 
@@ -266,7 +264,7 @@
     border: var(--goa-button-tertiary-border);
     background-color: var(--goa-button-tertiary-color-bg);
     color: var(--goa-button-tertiary-color-text);
-    text-decoration: underline;
+    text-decoration: var(--goa-button-tertiary-text-decoration, underline);
   }
   button.tertiary:hover {
     background-color: var(--goa-button-tertiary-hover-color-bg);
@@ -381,5 +379,59 @@
   button:disabled {
     pointer-events: none;
     opacity: 0.5;
+  }
+
+  /* Version 2 */
+  button.v2:focus-visible {
+    box-shadow: none;
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: 3px;
+  }
+
+  button.v2:disabled {
+    opacity: 1;
+  }
+
+  button.v2.primary:disabled {
+    background-color: var(--goa-button-primary-disabled-color-bg)
+  }
+
+  button.v2.secondary.destructive {
+    background-color: var(--goa-button-secondary-destructive-color-bg);
+  }
+
+  button.v2.secondary.destructive:hover {
+    background-color: var(--goa-button-secondary-destructive-hover-color-bg);
+  }
+
+  button.v2.secondary:disabled {
+    color: var(--goa-button-secondary-disabled-color-text);
+    background-color: var(--goa-button-secondary-disabled-color-bg);
+  }
+
+  button.v2.tertiary:hover {
+    border: var(--goa-button-tertiary-hover-border);
+  }
+
+  button.v2.tertiary.inverse {
+    border: var(--goa-button-tertiary-inverse-border);
+  }
+
+
+  button.v2.tertiary.inverse:hover {
+    border: var(--goa-button-tertiary-inverse-hover-border);
+  }
+
+  button.v2.tertiary.destructive {
+    border-color: var(--goa-button-tertiary-destructive-color-border);
+  }
+
+  button.v2.tertiary.destructive:hover {
+    border: var(--goa-button-tertiary-destructive-hover-border)
+  }
+
+  button.v2.tertiary:disabled {
+    color: var(--goa-button-tertiary-disabled-color-text);
+    border-color: var(--goa-button-tertiary-disabled-color-border);
   }
 </style>
