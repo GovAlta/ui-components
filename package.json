@@ -7,7 +7,7 @@
     "serve:react": "nx run react:serve:development",
     "serve:angular": "nx run angular:serve:development",
     "dev:watch": "vite build --watch libs/web-components",
-    "build": "nx affected --base=alpha -t build --exclude=apps/* --exclude=playground/*",
+    "build": "nx affected --base=dev -t build --exclude=apps/* --exclude=playground/*",
     "build:prod": "nx run-many -t build --all --prod --exclude=apps/* --exclude=playground/*",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest:pr": "npx nx run common:build && npx nx run web-components:build && npx nx run react-components:build",

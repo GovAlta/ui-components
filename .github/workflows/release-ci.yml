@@ -1,9 +1,11 @@
-name: LTS Release CI (v5 react, v3 angular)
+name: Release CI
 
 on:
   push:
     branches:
-      - lts
+      - main
+      - next
+      - dev
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,8 +28,14 @@ jobs:
 
       - run: npm ci
 
+      - name: Get last successful commit
+        uses: nrwl/nx-set-shas@v3
+        id: last_successful_commit
+        with:
+          main-branch-name: ${{ github.ref_name }}
+
       - name: Lint
-        run: npx nx run-many --target=lint --all
+        run: npm run lint
 
       - name: Build
         run: npm run build:prod
@@ -39,17 +47,11 @@ jobs:
             npm run test:pr
           fi
 
-      - name: Update VsCode documentation
-        run: npm run build:vscode-doc
-
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
-
-      - name: Remove types file for now
-        run: rm dist/libs/web-components/index.d.ts
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx nx run-many --target release --all --parallel=false
+        run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}
