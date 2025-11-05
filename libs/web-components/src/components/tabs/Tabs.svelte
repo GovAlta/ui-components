@@ -1,14 +1,21 @@
-<svelte:options customElement="goa-tabs" />
-
+<svelte:options customElement="goa-tabs"/>
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
-  import { clamp, ensureSlotExists, fromBoolean } from "../../common/utils";
+  import { clamp, ensureSlotExists, fromBoolean, toBoolean } from "../../common/utils";
+  import type { Spacing } from "../../common/styling";
+  import { calculateMargin } from "../../common/styling";
   import { GoATabProps } from "../tab/Tab.svelte";
 
   export let initialtab: number = -1; // 1-based
   export let testid: string = "";
   export let version: "1" | "2" = "2";
+  export let updateurl: string = "true"; // when click a tab, it will append #tab-id to URL if this flag is true
 
+  // margins for tab header
+  export let mt: Spacing = null;
+  export let mr: Spacing = null;
+  export let mb: Spacing = null;
+  export let ml: Spacing = null;
   // Private
 
   let _rootEl: HTMLElement;
@@ -18,6 +25,8 @@
   let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
   let _initialLoad: boolean = true;
+
+  $: _updateUrl = toBoolean(updateurl);
 
   // ========
   // Hooks
@@ -76,7 +85,7 @@
 
         // Check URL hash on initial load
         if (_initialLoad) {
-          const tabIndexFromHash = getTabIndexFromHash();
+          const tabIndexFromHash = _updateUrl ? getTabIndexFromHash() : null;
           // We don't override the URL if user doesn't set initialTab or using href
           // It will help prevent scrolling to tabs if it is located in the bottom of the page
           if (tabIndexFromHash == null && initialtab === -1) return;
@@ -132,8 +141,13 @@
       link.setAttribute("id", `tab-${index + 1}`);
       link.setAttribute("data-testid", `tab-${index + 1}`);
       link.setAttribute("role", "tab");
-      link.setAttribute("href", `${path}${search}#${tabSlug}`);
-      link.addEventListener("click", () => setCurrentTab(index + 1));
+      link.setAttribute("href", _updateUrl ? `${path}${search}#${tabSlug}`: "#");
+      link.addEventListener("click", (e: Event) => {
+        if (!_updateUrl) {
+          e.preventDefault();
+        }
+        setCurrentTab(index + 1)
+      });
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
       link.appendChild(headingEl);
 
@@ -150,6 +164,7 @@
   }
 
   function handleHashChange() {
+    if (!_updateUrl) return;
     const tabIndexFromHash = getTabIndexFromHash();
     if (tabIndexFromHash !== null && tabIndexFromHash !== _currentTab) {
       setCurrentTab(tabIndexFromHash);
@@ -209,7 +224,7 @@
     _slotEl.setAttribute("id", `tabpanel-${_currentTab}`);
 
     // update the browswers url with the new hash
-    if (currentLocation) {
+    if (_updateUrl && currentLocation) {
       const url = new URL(currentLocation);
       // to make sure we preserve multiple #, for example /#tab-1#example
       const allHashes = window.location.href.split('#').slice(1);
@@ -285,7 +300,7 @@
 <!--HTML-->
 
 <div role="tablist" bind:this={_rootEl} class:v2={version === "2"} data-testid={testid}>
-  <div class="tabs" bind:this={_tabsEl}></div>
+  <div class="tabs" bind:this={_tabsEl} style={calculateMargin(mt, mr, mb, ml)}></div>
   <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
     <slot />
   </div>
