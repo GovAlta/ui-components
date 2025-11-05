@@ -4,7 +4,8 @@ on:
   pull_request:
     branches:
       - main
-      - alpha
+      - next
+      - dev
 
 jobs:
   build:
