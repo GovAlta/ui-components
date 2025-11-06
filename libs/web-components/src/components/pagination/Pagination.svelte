@@ -62,7 +62,7 @@
         new CustomEvent("_change", {
           composed: true,
           bubbles: true,
-          detail: { page: newPage },
+          detail: { page: newPage, event: e },
         }),
       );
     }
@@ -85,7 +85,7 @@
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { page },
+        detail: { page, event: e },
       }),
     );
   }

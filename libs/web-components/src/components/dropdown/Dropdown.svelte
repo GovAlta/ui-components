@@ -468,10 +468,10 @@
     _inputEl.value = newValue;
   }
 
-  function dispatchValue(newValue?: string) {
+  function dispatchValue(newValue?: string, event?: Event) {
     const detail = _multiselect
-      ? { name, values: [newValue, ..._values] }
-      : { name, value: newValue };
+      ? { name, values: [newValue, ..._values], event }
+      : { name, value: newValue, event };
 
     if (!_isDirty) {
       return;
@@ -485,7 +485,7 @@
   // Event handlers
   //
 
-  function onSelect(option: Option) {
+  function onSelect(option: Option, event?: Event) {
     if (_disabled) return;
 
     _isDirty = option.value !== _selectedOption?.value;
@@ -497,12 +497,12 @@
       setHighlightedToSelected();
       hideMenu();
     }
-    dispatchValue(option.value);
+    dispatchValue(option.value, event);
   }
 
-  function onFilteredOptionClick(option: Option) {
+  function onFilteredOptionClick(option: Option, event?: Event) {
     _isDirty = true;
-    onSelect(option);
+    onSelect(option, event);
   }
 
   // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
@@ -528,7 +528,7 @@
 
     if (!_selectedOption) {
       if (matchedOption) {
-        onFilteredOptionClick(matchedOption);
+        onFilteredOptionClick(matchedOption, e);
       } else {
         reset();
       }
@@ -569,7 +569,7 @@
     const target = e.currentTarget as HTMLSelectElement;
     const option = _options[target.selectedIndex];
     _isDirty = true;
-    onSelect(option);
+    onSelect(option, e);
   }
 
   function reset() {
@@ -697,7 +697,7 @@
       if (_isMenuVisible) {
         const option = _filteredOptions[_highlightedIndex];
         if (option) {
-          onSelect(option);
+          onSelect(option, e);
         }
         hideMenu();
       } else {
@@ -893,7 +893,7 @@
             role="option"
             style="display: block"
             on:click={(e) => {
-              onFilteredOptionClick(option);
+              onFilteredOptionClick(option, e);
               _inputEl?.focus();
             }}
           >

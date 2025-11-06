@@ -121,7 +121,7 @@
     dispatch(
       _rootEl,
       "_change",
-      { name, value: detail.value },
+      { name, value: detail.value, event: undefined },
       { bubbles: true },
     );
   }
@@ -171,13 +171,13 @@
     }
 
     hideCalendar();
-    dispatchValue(_date);
+    dispatchValue(_date, e);
 
     e.stopPropagation();
     e.preventDefault();
   }
 
-  function dispatchValue(date: Date | null) {
+  function dispatchValue(date: Date | null, event?: Event) {
     if (!date) {
       _oldValue = null;
       value = "";
@@ -190,6 +190,7 @@
       name,
       type: "date",
       value: date,
+      event,
     });
   }
 
@@ -246,7 +247,7 @@
         return;
     }
 
-    dispatchValue(_date);
+    dispatchValue(_date, e);
 
     e.preventDefault();
     e.stopPropagation();
@@ -293,7 +294,7 @@
     dispatch(
       _rootEl,
       "_change",
-      { name, type: "string", value: date },
+      { name, type: "string", value: date, event: e },
       { bubbles: true },
     );
   }
