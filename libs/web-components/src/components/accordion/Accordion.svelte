@@ -76,14 +76,14 @@
     return [];
   }
 
-  function dispatchClickEvent(open?: boolean) {
+  function dispatchClickEvent(open?: boolean, event?: Event) {
     if (!_rootEl) return;
 
     _rootEl.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { open: open },
+        detail: { open: open, event },
       }),
     );
   }
@@ -100,7 +100,7 @@
   bind:this={_rootEl}
   data-testid={testid}
 >
-<details open={isOpen} on:toggle={({ target }) => { open = `${target?.open}`; dispatchClickEvent(target?.open); }}>
+<details open={isOpen} on:toggle={(e) => { open = `${e.target?.open}`; dispatchClickEvent(e.target?.open, e); }}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
