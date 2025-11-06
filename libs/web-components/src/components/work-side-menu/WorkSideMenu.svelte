@@ -50,8 +50,6 @@
   let _rootEl: HTMLElement;
   let _scrollEl: HTMLElement;
   let _tooltipEl: HTMLElement;
-  let _popoverEl: HTMLElement;
-  let _currentPopoverTrigger: HTMLElement|null = null;
   let _tooltipLabel: string = "";
 
   let _bindTimeoutId: any;
@@ -59,7 +57,6 @@
   let _mouseLeaveTimeoutId: any;
 
   let _windowWidth = window.innerWidth;
-  let _menuWidth: number = 0;
 
   let observer: MutationObserver | null = null;
 
@@ -87,10 +84,6 @@
   onDestroy(() => {
     removeEventListeners();
     stopWatchingPathChanges(observer);
-    // Clean up popover click listener if it exists
-    if (_currentPopoverTrigger) {
-      document.removeEventListener("click", closePopoverOnClickOutside);
-    }
   });
 
   // *********
@@ -171,31 +164,6 @@
     }
   }
 
-  // Popover click outside handler
-  function closePopoverOnClickOutside(e: MouseEvent) {
-    if (!_currentPopoverTrigger) return;
-
-    // Get the event path to check all elements in the event chain
-    const path = e.composedPath();
-
-    // Check if any element in the path is the trigger or the popover
-    for (const element of path) {
-      // Check if it's the trigger element
-      if (element === _currentPopoverTrigger) {
-        return;
-      }
-
-      // Check if it's the popover element
-      if (element === _popoverEl) {
-        return;
-      }
-    }
-
-    // If we get here, the click was outside both trigger and popover
-    _currentPopoverTrigger = null;
-    document.removeEventListener("click", closePopoverOnClickOutside);
-  }
-
   // Keyboard navigation
   function focusNextMenuItem() {
     const activeLink = document.activeElement?.shadowRoot?.querySelector("a");
@@ -264,10 +232,6 @@
           _showAccountMenu = false;
           window.removeEventListener("click", closeAccountMenu);
         }
-        if (_currentPopoverTrigger) {
-          _currentPopoverTrigger = null;
-          document.removeEventListener("click", closePopoverOnClickOutside);
-        }
         break;
     }
   }
@@ -297,7 +261,6 @@
       handleHover as EventListener,
     );
     _rootEl.addEventListener("work-side-menu:toggle", toggleMenu);
-    _rootEl.addEventListener("work-side-menu:trigger-popover", togglePopover);
     window.addEventListener("popstate", setCurrentUrl); // watch for hash & browser history changes
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", handleWindowResize);
@@ -311,29 +274,9 @@
       handleHover as EventListener,
     );
     _rootEl.removeEventListener("work-side-menu:toggle", toggleMenu);
-    _rootEl.removeEventListener("work-side-menu:trigger-popover", togglePopover as EventListener);
     window.removeEventListener("popstate", setCurrentUrl);
     window.removeEventListener("keydown", handleKeyDown);
     window.removeEventListener("resize", handleWindowResize);
-  }
-
-  function togglePopover(e: CustomEvent) {
-    const {triggerEl} = e.detail;
-    if (_currentPopoverTrigger !== triggerEl) {
-      // Close previous popover
-      if (_currentPopoverTrigger) {
-        document.removeEventListener("click", closePopoverOnClickOutside);
-      }
-      _currentPopoverTrigger = triggerEl;
-      // Add click outside listener after a small delay to prevent immediate closing
-      setTimeout(() => {
-        document.addEventListener("click", closePopoverOnClickOutside);
-      }, 10);
-    } else {
-      _currentPopoverTrigger = null;
-      document.removeEventListener("click", closePopoverOnClickOutside);
-    }
-    console.log("toggle popover", _currentPopoverTrigger);
   }
 </script>
 
@@ -352,7 +295,7 @@
     data-testid="work-side-menu-background"
     on:click={handleToggleClick}
   />
-  <div class="container" bind:clientWidth={_menuWidth}>
+  <div class="container">
     <header>
       {#if url}
         <a href={url} class="header" role="menuitem" data-testid="url">
@@ -440,22 +383,7 @@
   </div>
 </div>
 
-<goa-popover
-  bind:this={_popoverEl}
-  externalTarget={_currentPopoverTrigger}
-  open={_currentPopoverTrigger !== null}
-  maxwidth="500px"
-  minwidth="500px"
-  maxheight="calc(100vh - 40px)"
-  padded="false"
-  hoffset={"40px"}
-  voffset="0px"
-  on:_close={() => {
-    _currentPopoverTrigger = null;
-    document.removeEventListener("click", closePopoverOnClickOutside);
-  }}>
-  <slot name="popoverContent"/>
-</goa-popover>
+
 
 
 <style>

@@ -292,7 +292,7 @@ export type GoabCircularProgressSize = "small" | "large";
 
 // Popover
 
-export type GoabPopoverPosition = "above" | "below" | "auto";
+export type GoabPopoverPosition = "above" | "below" | "right" | "auto";
 
 export interface GoabPopoverProps extends Margins {
   testId?: string;

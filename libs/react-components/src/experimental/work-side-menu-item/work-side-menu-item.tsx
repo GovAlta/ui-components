@@ -9,7 +9,7 @@ interface WCProps {
   icon?: string;
   testid?: string;
   type?: GoabWorkSideMenuItemType;
-  "trigger-popover"?: string;
+  popoverContent?: React.ReactNode;
   ref: React.RefObject<HTMLElement | null>;
 }
 
@@ -32,8 +32,8 @@ export interface GoabWorkSideMenuItemProps {
   icon?: string;
   testId?: string;
   type?: GoabWorkSideMenuItemType;
-  triggerPopover?: boolean;
   children?: React.ReactNode;
+  popoverContent?: React.ReactNode;
   onClick?: () => void;
 }
 
@@ -63,9 +63,9 @@ export function GoaxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Elem
       icon={props.icon}
       testid={props.testId}
       type={props.type}
-      trigger-popover={props.triggerPopover ? "true" : undefined}
     >
       {props.children}
+      {props.popoverContent && <div slot="popoverContent">{props.popoverContent}</div>}
     </goa-work-side-menu-item>
   );
 }

@@ -1,11 +1,4 @@
-<svelte:options
-  customElement={{
-    tag: "goa-work-side-menu-item",
-    props: {
-      triggerPopover: { type: "String", attribute: "trigger-popover", reflect: false }
-    },
-  }}
-/>
+<svelte:options customElement="goa-work-side-menu-item" />
 
 
 <script lang="ts">
@@ -28,7 +21,6 @@
   export let icon: string = "";
   export let testid: string = "";
   export let type: WorkSideMenuItemType = "normal";
-  export let triggerPopover: string = "false";
 
   // *******
   // Private
@@ -43,7 +35,6 @@
 
   $: _alwaysVisible =
     !isNaN(parseInt(badge)) && parseInt(badge) > 0 && parseInt(badge) < 10;
-  $: _triggerPopover = toBoolean(triggerPopover);
 
   // *****
   // Hooks
@@ -64,14 +55,7 @@
   // *********
 
   function handleClick(e: Event) {
-    if (_triggerPopover) {
-      e.preventDefault();
-      dispatch(_rootEl, "work-side-menu:trigger-popover", {
-        triggerEl: _linkEl
-      }, {bubbles: true});
-    } else {
-      dispatch(_rootEl, "work-side-menu:update", {}, { bubbles: true });
-    }
+    dispatch(_rootEl, "work-side-menu:update", {}, { bubbles: true });
   }
 
   function handleUpdateItem(e: CustomEvent) {
@@ -111,30 +95,78 @@
   on:mouseenter={handleMouseEnter}
   bind:this={_rootEl}
 >
-  <a
-    class="menu-item"
-    class:current
-    role="menuitem"
-    href={url !== "none" ? url : undefined}
-    bind:this={_linkEl}
-    on:click={handleClick}
-    tabindex="0"
-  >
-    <goa-icon size="small" theme={current ? "filled" : "outline"} type={icon} />
-    <div class="menu-item-label">
-      {label}
+  {#if $$slots.popoverContent}
+    <div class="popover-wrapper">
+      <goa-popover
+        position="right"
+        maxwidth="500px"
+        minwidth="500px"
+        maxheight="calc(100vh - 40px)"
+        padded="false"
+        hoffset="40px"
+        voffset="0px">
+        <a
+          slot="target"
+          class="menu-item"
+          class:current
+          role="menuitem"
+          href={url !== "none" ? url : undefined}
+          bind:this={_linkEl}
+          on:click={handleClick}
+          on:keydown={(e) => {
+      if (e.key === "Enter") {
+        handleClick(e);
+    }}}
+          tabindex="0"
+        >
+          <goa-icon size="small" theme={current ? "filled" : "outline"} type={icon} />
+          <div class="menu-item-label">
+            {label}
+          </div>
+          {#if badge}
+            <div
+              class="badge"
+              class:emergency={type == "emergency"}
+              class:success={type == "success"}
+              class:alwaysvisible={_alwaysVisible}
+            >
+              {badge}
+            </div>
+          {/if}
+        </a>
+        <slot name="popoverContent"></slot>
+      </goa-popover>
     </div>
-    {#if badge}
-      <div
-        class="badge"
-        class:emergency={type == "emergency"}
-        class:success={type == "success"}
-        class:alwaysvisible={_alwaysVisible}
-      >
-        {badge}
+  {:else}
+    <a
+      class="menu-item"
+      class:current
+      role="menuitem"
+      href={url !== "none" ? url : undefined}
+      bind:this={_linkEl}
+      on:click={handleClick}
+      on:keydown={(e) => {
+      if (e.key === "Enter") {
+        handleClick(e);
+    }}}
+      tabindex="0"
+    >
+      <goa-icon size="small" theme={current ? "filled" : "outline"} type={icon} />
+      <div class="menu-item-label">
+        {label}
       </div>
-    {/if}
-  </a>
+      {#if badge}
+        <div
+          class="badge"
+          class:emergency={type == "emergency"}
+          class:success={type == "success"}
+          class:alwaysvisible={_alwaysVisible}
+        >
+          {badge}
+        </div>
+      {/if}
+    </a>
+  {/if}
 </div>
 
 <style>

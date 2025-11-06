@@ -33,11 +33,12 @@
   // Public
 
   export let testid: string = "popover";
-  export let position: "above" | "below" | "auto" = "auto";
+  export let position: "above" | "below" | "right" | "auto" = "auto";
   export let maxwidth: string = "320px";
   export let minwidth: string = "";
   export let width: string = "";
   export let height: "full" | "wrap-content" = "wrap-content";
+
   // flag passed to the FocusTrap that will prevent unwanted scrolling
   export let preventScrollIntoView: boolean = false;
 
@@ -95,6 +96,7 @@
   let _popoverEl: HTMLElement;
   let _focusTrapEl: HTMLElement;
   let _sectionHeight: number;
+  let _previousOpen = false;
 
   // Reactive
 
@@ -105,6 +107,18 @@
 
   $: (async () => _open && (await setPopoverPosition()))();
   $: (async () => _sectionHeight && (await setPopoverPosition()))();
+  $: (async() => {
+    console.log("reactive triggered vs _open ", _open, " and externalTarget ", externalTarget);
+    if (_open && !_previousOpen && externalTarget) {
+      await tick();
+      setTimeout(() => {
+        const firstFocusableEl = getFirstFocusableEl(_focusTrapEl);
+        console.log("firstFocusableEl", firstFocusableEl);
+        firstFocusableEl?.focus();
+      }, 100);
+    }
+    _previousOpen = _open;
+  })();
   $: (async() => externalTarget && _open && (await setPopoverPosition()))();
   $: {
     if (_open) {
@@ -127,6 +141,7 @@
       closePopover();
       e.stopPropagation();
     });
+    console.log("Reach onMount vs externalTarget ", externalTarget, " and slot", $$slots);
 
     showDeprecationWarnings();
     addGlobalCloseListener();
@@ -236,6 +251,7 @@
    * or null if no focusable element is found.
    */
   function getFirstFocusableEl(el: HTMLElement): HTMLElement | null {
+    console.log("getFirstFocusableEl", el);
     if (el.tabIndex >= 0) {
       return el;
     }
@@ -354,7 +370,7 @@
           spaceAbove > spaceBelow
         : position === "above";
 
-    if (externalTarget) {
+    if (position === "right") {
       // Position absolutely in the viewport when using external target
       _popoverEl.style.position = "fixed";
       _popoverEl.style.left = `${targetRect.right}px`;
@@ -387,25 +403,12 @@
 
       _popoverEl.style.top = `${topPosition}px`;
       _popoverEl.style.bottom = "auto";
-
-      // const availableHeight = window.innerHeight - topPosition - 20;
-      // _popoverEl.style.maxHeight = `${availableHeight}px`;
-      // _popoverEl.style.overflowY = "auto";
-
-      // const minTop = 20;
-      // const maxTop = window.innerHeight - popoverRect.height - minTop;
-      // if (topPosition < minTop) {
-      //   topPosition = minTop;
-      // } else if (topPosition > maxTop) {
-      // }
-
-
-
       // Adjust left position if it goes off screen
       const wouldOverflowRight = targetRect.right + popoverRect.width > window.innerWidth;
       if (wouldOverflowRight) {
         _popoverEl.style.left = `${targetRect.left - popoverRect.width}px`;
       }
+      return;
     } else {
       // Original positioning for slotted targets
       _popoverEl.style.position = "absolute";
@@ -502,7 +505,9 @@
     border: none;
     padding: 0;
     background-color: transparent;
-    width: inherit;
+    /*FIX the below*/
+    width: 100%;
+    text-align: left
   }
 
   .popover-target:has(:focus-visible) {
