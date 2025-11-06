@@ -331,7 +331,7 @@
         on:_change={setMonth}
       >
         {#each _months as month, i}
-          <goa-dropdown-item value={i} label={month} />
+          <goa-dropdown-item value={i+""} label={month} />
         {/each}
       </goa-dropdown>
     </goa-form-item>
