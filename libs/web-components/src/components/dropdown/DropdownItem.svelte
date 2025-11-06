@@ -44,17 +44,12 @@
   onMount(() => {
     addMessageListener();
 
-    // Use setTimeout to handle Angular 20 timing delays - await tick() does not work
-    setTimeout(() => {
-      if (value) {
-        relay<DropdownItemMountedRelayDetail>(
-          _rootEl,
-          DropdownItemMountedMsg,
-          { el: _rootEl, filter, value, label, mountType: mount },
-          { bubbles: true, timeout: 10 },
-        );
-      }
-    }, 1);
+    relay<DropdownItemMountedRelayDetail>(
+      _rootEl,
+      DropdownItemMountedMsg,
+      { el: _rootEl, filter, value, label, mountType: mount },
+      { bubbles: true, timeout: 10 },
+      );
   });
 
   function addMessageListener() {
