@@ -195,7 +195,7 @@
     if (width?.includes("%") || maxwidth?.includes("%")) {
       _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
     } else {
-      _popoverMaxWidth = `min(${_width}, 100%)`;
+      _popoverMaxWidth = _width;
     }
   }
 
