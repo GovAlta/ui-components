@@ -84,6 +84,7 @@ describe("Dropdown", () => {
       expect(handleChange).toBeCalledWith({
         name: "favcolor",
         value: "red",
+        event: expect.any(Event),
       })
     });
 

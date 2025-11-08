@@ -306,4 +306,76 @@ describe("GoATextArea", () => {
     expect(styleTag).toBeTruthy();
     expect(styleTag?.innerHTML).toContain("max-width: 500px");
   });
+
+  describe("Event property in _change event (Issue #2977)", () => {
+    it("should include event object in _change event detail", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-textarea",
+        testid: "textarea-test",
+      });
+
+      const textarea = container.querySelector("textarea");
+      let eventDetail: any;
+
+      container.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        eventDetail = ce.detail;
+      });
+
+      textarea && (await fireEvent.keyUp(textarea, { target: { value: "test content" } }));
+
+      await waitFor(() => {
+        expect(eventDetail).toBeDefined();
+        expect(eventDetail.name).toBe("test-textarea");
+        expect(eventDetail.event).toBeDefined();
+        expect(eventDetail.event).toBeInstanceOf(Event);
+      });
+    });
+
+    it("should include event object in _keyPress event detail", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-textarea",
+      });
+
+      const textarea = container.querySelector("textarea");
+      let keypressDetail: any;
+
+      textarea?.addEventListener("_keyPress", (e: Event) => {
+        const ce = e as CustomEvent;
+        keypressDetail = ce.detail;
+      });
+
+      textarea && (await fireEvent.keyUp(textarea, { key: "a" }));
+
+      await waitFor(() => {
+        expect(keypressDetail).toBeDefined();
+        expect(keypressDetail.event).toBeDefined();
+        expect(keypressDetail.event).toBeInstanceOf(Event);
+        expect(keypressDetail.key).toBe("a");
+      });
+    });
+
+    it("should include event object in _blur event detail", async () => {
+      const { container } = render(GoATextArea, {
+        name: "test-textarea",
+        value: "initial value",
+      });
+
+      const textarea = container.querySelector("textarea");
+      let blurDetail: any;
+
+      container.addEventListener("_blur", (e: Event) => {
+        const ce = e as CustomEvent;
+        blurDetail = ce.detail;
+      });
+
+      textarea && (await fireEvent.blur(textarea));
+
+      await waitFor(() => {
+        expect(blurDetail).toBeDefined();
+        expect(blurDetail.event).toBeDefined();
+        expect(blurDetail.event).toBeInstanceOf(Event);
+      });
+    });
+  });
 });

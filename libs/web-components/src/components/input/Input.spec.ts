@@ -699,4 +699,129 @@ describe("GoAInput Component", () => {
       }
     });
   });
+
+  describe("Event property in _change event (Issue #2977)", () => {
+    it("should include event object in _change event detail", async () => {
+      const { findByTestId } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+      });
+      const input = await findByTestId("input-test");
+      let eventDetail: any;
+
+      input.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        eventDetail = ce.detail;
+      });
+
+      await fireEvent.keyUp(input, { target: { value: "test" } });
+
+      await waitFor(() => {
+        expect(eventDetail).toBeDefined();
+        expect(eventDetail.name).toBe("test-name");
+        expect(eventDetail.value).toBe("test");
+        expect(eventDetail.event).toBeDefined();
+        expect(eventDetail.event).toBeInstanceOf(Event);
+      });
+    });
+
+    it("should include event object in _keyPress event detail", async () => {
+      const { findByTestId } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+      });
+      const input = await findByTestId("input-test");
+      let keypressDetail: any;
+
+      input.addEventListener("_keyPress", (e: Event) => {
+        const ce = e as CustomEvent;
+        keypressDetail = ce.detail;
+      });
+
+      await fireEvent.keyUp(input, { target: { value: "abc" }, key: "c" });
+
+      await waitFor(() => {
+        expect(keypressDetail).toBeDefined();
+        expect(keypressDetail.event).toBeDefined();
+        expect(keypressDetail.event).toBeInstanceOf(Event);
+        expect(keypressDetail.key).toBe("c");
+      });
+    });
+
+    it("should include event object in _focus event detail", async () => {
+      const { findByTestId } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+      });
+      const input = await findByTestId("input-test");
+      let focusDetail: any;
+
+      input.addEventListener("_focus", (e: Event) => {
+        const ce = e as CustomEvent;
+        focusDetail = ce.detail;
+      });
+
+      await fireEvent.focus(input);
+
+      await waitFor(() => {
+        expect(focusDetail).toBeDefined();
+        expect(focusDetail.event).toBeDefined();
+        expect(focusDetail.event).toBeInstanceOf(Event);
+      });
+    });
+
+    it("should include event object in _blur event detail", async () => {
+      const { findByTestId } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+        value: "test-value",
+      });
+      const input = await findByTestId("input-test");
+      let blurDetail: any;
+
+      input.addEventListener("_blur", (e: Event) => {
+        const ce = e as CustomEvent;
+        blurDetail = ce.detail;
+      });
+
+      await fireEvent.blur(input);
+
+      await waitFor(() => {
+        expect(blurDetail).toBeDefined();
+        expect(blurDetail.event).toBeDefined();
+        expect(blurDetail.event).toBeInstanceOf(Event);
+      });
+    });
+
+    it("should allow stopPropagation on the event", async () => {
+      const { findByTestId, container } = render(GoAInput, {
+        name: "test-name",
+        testid: "input-test",
+      });
+      const input = await findByTestId("input-test");
+      const parentListener = vi.fn();
+      const childListener = vi.fn();
+
+      // Add listener on parent
+      container.addEventListener("_change", parentListener);
+
+      // Add listener on input that stops propagation
+      input.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        childListener();
+        if (ce.detail.event) {
+          ce.detail.event.stopPropagation();
+        }
+        e.stopPropagation();
+      });
+
+      await fireEvent.keyUp(input, { target: { value: "test" } });
+
+      await waitFor(() => {
+        expect(childListener).toHaveBeenCalled();
+        // Parent listener should not be called because propagation was stopped
+        expect(parentListener).not.toHaveBeenCalled();
+      });
+    });
+  });
 });

@@ -44,7 +44,9 @@ describe("GoARadioGroup Component", () => {
     });
 
     const radioGroupDiv = result.container.querySelector("[role='radiogroup']");
-    expect(radioGroupDiv?.getAttribute("aria-label")).toBe("please choose a color");
+    expect(radioGroupDiv?.getAttribute("aria-label")).toBe(
+      "please choose a color",
+    );
 
     const goaRadioItems = result.container.querySelectorAll("goa-radio-item");
     expect(goaRadioItems.length).toBe(3);
@@ -53,7 +55,9 @@ describe("GoARadioGroup Component", () => {
         const el = goaRadioItems[index];
 
         expect(el.getAttribute("value")).toBe(item);
-        expect(el.getAttribute("arialabel")).toBe("you are choosing color " + item);
+        expect(el.getAttribute("arialabel")).toBe(
+          "you are choosing color " + item,
+        );
         if (index === 2) {
           expect(el.getAttribute("checked")).toBe("true");
         } else {
@@ -82,6 +86,46 @@ describe("GoARadioGroup Component", () => {
       expect(goaRadioItems[0].getAttribute("checked")).toBe("false");
       expect(goaRadioItems[1].getAttribute("checked")).toBe("false");
       expect(goaRadioItems[2].getAttribute("checked")).toBe("true");
+    });
+  });
+
+  it("includes the original event in _change detail when selection changes", async () => {
+    const name = "favcolor";
+    const items = ["red", "blue", "orange"];
+    const result = render(GoARadioGroupWrapper, {
+      name,
+      value: "orange",
+      testid: "test-id",
+      items,
+    });
+
+    const radioGroup = result.container.querySelector("[role='radiogroup']");
+    const changeEvents: CustomEvent[] = [];
+
+    radioGroup?.addEventListener("_change", (e: Event) => {
+      changeEvents.push(e as CustomEvent);
+    });
+
+    await waitFor(() => {
+      const radioItems = result.container.querySelectorAll("goa-radio-item");
+      expect(radioItems.length).toBe(items.length);
+    });
+
+    const radioEvent = new CustomEvent("_radioItemChange", {
+      bubbles: true,
+      composed: true,
+      detail: { value: "red", label: "red" },
+    });
+
+    radioGroup?.dispatchEvent(radioEvent);
+
+    await waitFor(() => {
+      expect(changeEvents.length).toBe(1);
+      const detail = changeEvents.at(-1)?.detail as
+        | { value?: string; event?: Event }
+        | undefined;
+      expect(detail?.value).toBe("red");
+      expect(detail?.event).toBe(radioEvent);
     });
   });
 

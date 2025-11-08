@@ -88,6 +88,7 @@ describe("TextArea Browser Tests", () => {
       expect(onBlurSpy).toHaveBeenCalledWith({
         name: "test-textarea",
         value: "Test content for blur",
+        event: expect.any(Event),
       });
     });
   });

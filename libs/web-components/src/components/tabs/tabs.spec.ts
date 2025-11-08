@@ -219,4 +219,63 @@ describe("Tabs", () => {
       writable: true
     });
   });
+
+  describe("Event property in _change event (Issue #2977)", () => {
+    it("should include event object in tab _change event detail when clicking a tab", async () => {
+      const { container } = render(Tabs);
+
+      await waitFor(() => {
+        const tab1Link = container.querySelector("a#tab-1");
+        const tab2Link = container.querySelector("a#tab-2");
+        expect(tab1Link).toBeTruthy();
+        expect(tab2Link).toBeTruthy();
+      });
+
+      const tabsComponent = container.querySelector('div[role="tablist"]');
+      expect(tabsComponent).toBeTruthy();
+
+      let eventDetail: any;
+      tabsComponent?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        eventDetail = ce.detail;
+      });
+
+      const tab2Link = container.querySelector("a#tab-2") as HTMLElement;
+      await fireEvent.click(tab2Link);
+
+      await waitFor(() => {
+        expect(eventDetail).toBeDefined();
+        expect(eventDetail.tab).toBe(2);
+        expect(eventDetail.event).toBeDefined();
+        expect(eventDetail.event).toBeInstanceOf(Event);
+      });
+    });
+
+    it("should include event object when navigating tabs with keyboard", async () => {
+      const { container } = render(Tabs);
+
+      await waitFor(() => {
+        const tab1Link = container.querySelector("a#tab-1");
+        expect(tab1Link).toBeTruthy();
+      });
+
+      const tabsComponent = container.querySelector('div[role="tablist"]');
+      let eventDetail: any;
+
+      tabsComponent?.addEventListener("_change", (e: Event) => {
+        const ce = e as CustomEvent;
+        eventDetail = ce.detail;
+      });
+
+      const tab1Link = container.querySelector("a#tab-1") as HTMLElement;
+      await fireEvent.focus(tab1Link);
+      await fireEvent.keyDown(tab1Link, { key: "ArrowRight" });
+
+      await waitFor(() => {
+        expect(eventDetail).toBeDefined();
+        expect(eventDetail.event).toBeDefined();
+        expect(eventDetail.event).toBeInstanceOf(Event);
+      });
+    });
+  });
 });

@@ -156,7 +156,7 @@
     // @ts-expect-error
     value = detail.value;
     checked = detail.value ? "true" : "false";
-    dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
+    dispatch(_checkboxRef, "_change", { name, value, event: undefined }, { bubbles: true });
   }
 
   function sendMountedMessage() {
@@ -187,7 +187,7 @@
     e.target?.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
-        detail: { name, checked: newCheckStatus, value: newValue },
+        detail: { name, checked: newCheckStatus, value: newValue, event: e },
         bubbles: true,
       }),
     );

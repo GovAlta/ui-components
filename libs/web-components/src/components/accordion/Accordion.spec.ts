@@ -31,7 +31,7 @@ describe("Accordion", () => {
     const { container } = render(Accordion, {
       heading: "Title",
       maxwidth: "480px",
-      testid: "accordion"
+      testid: "accordion",
     });
     const elm = container.querySelector("[data-testid=accordion]");
     expect(elm?.getAttribute("style")).toContain("max-width: 480px;");
@@ -77,7 +77,9 @@ describe("Accordion", () => {
     const summary = container.querySelector("summary");
     expect(summary?.getAttribute("aria-expanded")).toBe("false");
     expect(summary?.getAttribute("aria-controls")).length.greaterThan(0);
-    const accordionId = summary?.getAttribute("aria-controls")?.split("-content")[0]; // generate random id
+    const accordionId = summary
+      ?.getAttribute("aria-controls")
+      ?.split("-content")[0]; // generate random id
     expect(summary?.getAttribute("aria-controls")).toBe(
       `${accordionId}-content`,
     );
@@ -91,5 +93,30 @@ describe("Accordion", () => {
     );
     const title = container.querySelector("summary .title");
     expect(title?.getAttribute("id")).toBe(`${accordionId}-heading`);
+  });
+
+  it("emits the original event on _change detail when toggled", async () => {
+    const { container } = render(Accordion, {
+      heading: "Toggle heading",
+      testid: "accordion",
+    });
+
+    const accordionRoot = container.querySelector(".goa-accordion");
+    const summary = container.querySelector("summary");
+    const changeEvents: CustomEvent[] = [];
+
+    accordionRoot?.addEventListener("_change", (e: Event) => {
+      changeEvents.push(e as CustomEvent);
+    });
+
+    summary && (await fireEvent.click(summary));
+
+    await waitFor(() => {
+      expect(changeEvents.length).toBeGreaterThan(0);
+      const detail = changeEvents.at(-1)?.detail as
+        | { event?: Event }
+        | undefined;
+      expect(detail?.event).toBeInstanceOf(Event);
+    });
   });
 });

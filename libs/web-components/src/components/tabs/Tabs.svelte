@@ -132,7 +132,7 @@
       link.setAttribute("data-testid", `tab-${index + 1}`);
       link.setAttribute("role", "tab");
       link.setAttribute("href", `${path}${search}#${tabSlug}`);
-      link.addEventListener("click", () => setCurrentTab(index + 1));
+      link.addEventListener("click", (e) => setCurrentTab(index + 1, e));
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
       link.appendChild(headingEl);
 
@@ -163,7 +163,7 @@
     window.removeEventListener("hashchange", handleHashChange);
   }
 
-  function setCurrentTab(tab: number) {
+  function setCurrentTab(tab: number, event?: Event) {
     if (!_tabsEl) return;
 
     const previousTab = _currentTab;
@@ -176,7 +176,7 @@
         new CustomEvent("_change", {
           composed: true,
           bubbles: true,
-          detail: { tab: _currentTab },
+          detail: { tab: _currentTab, event },
         }),
       );
     }
@@ -247,27 +247,27 @@
       case "ArrowUp":
       case "ArrowLeft":
         if (_currentTab === 1) {
-          setCurrentTab(_tabProps.length);
+          setCurrentTab(_tabProps.length, e);
         } else {
-          setCurrentTab(_currentTab - 1);
+          setCurrentTab(_currentTab - 1, e);
         }
         isHandled = true;
         break;
       case "ArrowDown":
       case "ArrowRight":
         if (_currentTab === _tabProps.length) {
-          setCurrentTab(1);
+          setCurrentTab(1, e);
         } else {
-          setCurrentTab(_currentTab + 1);
+          setCurrentTab(_currentTab + 1, e);
         }
         isHandled = true;
         break;
       case "Home":
-        setCurrentTab(1);
+        setCurrentTab(1, e);
         isHandled = true;
         break;
       case "End":
-        setCurrentTab(_tabProps.length);
+        setCurrentTab(_tabProps.length, e);
         isHandled = true;
         break;
       default:

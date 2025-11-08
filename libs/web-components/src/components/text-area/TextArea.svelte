@@ -132,24 +132,24 @@
 
   function onChange(e: Event) {
     if (isDisabled) return;
-    dispatchChange(_textareaEl.value);
+    dispatchChange(_textareaEl.value, e);
   }
 
   function onKeyPress(e: KeyboardEvent) {
     if (isDisabled) return;
     dispatchKeyPress(e);
-    dispatchChange(_textareaEl.value);
+    dispatchChange(_textareaEl.value, e);
   }
 
-  function dispatchChange(value: string) {
-    dispatch(_textareaEl, "_change", { name, value }, { bubbles: true });
+  function dispatchChange(value: string, event?: Event) {
+    dispatch(_textareaEl, "_change", { name, value, event }, { bubbles: true });
   }
 
   function dispatchKeyPress(e: KeyboardEvent) {
     _textareaEl.dispatchEvent(
       new CustomEvent("_keyPress", {
         composed: true,
-        detail: { name, value, key: e.key },
+        detail: { name, value, key: e.key, event: e },
       }),
     );
   }
@@ -162,7 +162,7 @@
     dispatch(
       _textareaEl,
       "_blur",
-      { name, value: _textareaEl.value },
+      { name, value: _textareaEl.value, event: _e },
       { bubbles: true },
     );
   }
