@@ -66,6 +66,7 @@
   export let error: string = "false";
   export let multiselect: string = "false";
   export let native: string = "false";
+  export let size: "regular" | "compact" = "regular";
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
@@ -754,6 +755,7 @@
   data-testid={testid || `${name}-dropdown`}
   class="dropdown"
   class:dropdown-native={_native}
+  class:compact={size === "compact"}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
@@ -1015,9 +1017,9 @@
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(--goa-dropdown-border-radius);
+    border-radius: var(--goa-dropdown-menu-border-radius, var(--goa-dropdown-border-radius));
     padding: 0;
-    margin: 0;
+    margin: var(--goa-dropdown-menu-margin, 0);
   }
 
   /* dropdown items */
@@ -1031,7 +1033,9 @@
     white-space: normal; /* Allows text to wrap */
     word-break: break-word; /* Ensures long words break onto the next line */
     overflow-wrap: break-word; /* Alternative for word wrapping */
+    border-radius: var(--goa-dropdown-item-border-radius, 0);
   }
+
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {
@@ -1108,5 +1112,16 @@
   ::placeholder {
     color: var(--goa-dropdown-color-text-placeholder);
     opacity: 1;
+  }
+
+  /* Compact Size */
+  .compact input {
+    padding: var(--goa-dropdown-compact-padding);
+    height: var(--goa-dropdown-compact-height);
+    font: var(--goa-dropdown-compact-typography);
+  }
+
+  .compact .dropdown-item {
+    font: var(--goa-dropdown-compact-item-typography);
   }
 </style>
