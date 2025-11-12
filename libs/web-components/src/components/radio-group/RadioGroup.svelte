@@ -25,14 +25,18 @@
     FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
-  // Validator
+  // Validators
   const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
     "vertical",
     "horizontal",
   ]);
+  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
+  const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
 
-  // Type
+  // Types
   type Orientation = (typeof Orientations)[number];
+  type VersionType = (typeof Version)[number];
+  type SizeType = (typeof Size)[number];
 
   // Public
 
@@ -41,6 +45,8 @@
   export let orientation: Orientation = "vertical";
   export let disabled: string = "false";
   export let error: string = "false";
+  export let version: VersionType = "1";
+  export let size: SizeType = "default";
   export let testid: string = "";
   export let arialabel: string = "";
   export let mt: Spacing = null;
@@ -55,8 +61,11 @@
   // Reactive
 
   $: isDisabled = toBoolean(disabled);
+  $: isCompact = size === "compact";
   $: {
     isDisabled;
+    version;
+    isCompact;
     bindOptions();
   }
 
@@ -86,6 +95,8 @@
   // Hooks
   onMount(() => {
     validateOrientation(orientation);
+    validateVersion(version);
+    validateSize(size);
     addRelayListener();
     sendMountedMessage();
     getChildren();
@@ -163,6 +174,8 @@
             name,
             checked: props.value === value,
             revealAriaLabel: props.revealAriaLabel,
+            version: version,
+            compact: version === "2" && isCompact,
           },
         }),
       );
@@ -212,6 +225,8 @@
   bind:this={_rootEl}
   style={calculateMargin(mt, mr, mb, ml)}
   class={`goa-radio-group--${orientation}`}
+  class:v2={version === "2"}
+  class:compact={isCompact}
   data-testid={testid}
   role="radiogroup"
   aria-label={arialabel}
@@ -233,11 +248,21 @@
     gap: var(--goa-radio-group-gap-horizontal);
   }
 
+  /* V2 compact size variant - V2-only feature */
+  .goa-radio-group--horizontal.v2.compact {
+    gap: var(--goa-radio-group-gap-horizontal-compact);
+  }
+
   .goa-radio-group--vertical {
     display: flex;
     flex-direction: column;  /* Vertical stacking */
     gap: var(--goa-radio-group-gap-vertical);  /* Adds spacing */
     width: 100%;
+  }
+
+  /* V2 compact size variant - V2-only feature */
+  .goa-radio-group--vertical.v2.compact {
+    gap: var(--goa-radio-group-gap-vertical-compact);
   }
 
   /* Focus styles */
