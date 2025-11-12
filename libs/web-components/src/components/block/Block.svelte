@@ -49,7 +49,6 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
-  class="block"
   style={
     styles(
       "display: flex",
