@@ -98,6 +98,8 @@
   export let ml: Spacing = null;
   export let trailingiconarialabel: string = "";
   export let textalign: TextAlign = "left";
+  export let size: "default" | "compact" = "default";
+  export let version: "1" | "2" = "1";
 
   let _leadingContentSlot = false;
   let _trailingContentSlot = false;
@@ -347,6 +349,8 @@
   bind:this={_rootEl}
   class:leading-content={_leadingContentSlot}
   class:trailing-content={_trailingContentSlot}
+  class:compact={size === "compact"}
+  class:v2={version === "2"}
 >
   {#if $$slots.leadingContent}
     <div class="leading-content-slot">
@@ -476,7 +480,7 @@
     display: inline-flex;
     align-items: stretch;
     width: 100%;
-    height: 42px;
+    height: var(--goa-text-input-height, 42px);
     z-index: 1;
     background-color: var(--goa-text-input-color-bg);
     /* default border */
@@ -487,12 +491,21 @@
     min-width: 0;
   }
 
-  .goa-input:not(.error):hover:not(:has(input:focus-visible)) {
+  /* V2 Compact size */
+  .container.v2.compact {
+    --goa-text-input-height: var(--goa-text-input-height-compact);
+    --goa-text-input-padding: var(--goa-text-input-padding-compact);
+    --goa-text-input-padding-lr: var(--goa-text-input-padding-compact-lr);
+    --goa-text-input-typography: var(--goa-text-input-typography-compact);
+    --goa-text-input-space-btw-icon-text: var(--goa-text-input-space-btw-icon-text-compact);
+  }
+
+  .goa-input:not(.error):not(.input--disabled):not(:has(input:read-only)):hover:not(:has(input:focus-visible)) {
     /* hover border */
     box-shadow: var(--goa-text-input-border-hover);
   }
 
-  .goa-input:not(.error):has(input:focus-visible) {
+  .goa-input:not(.error):not(:has(input:read-only)):has(input:focus-visible) {
     /* focus border(s) */
     box-shadow:
       var(--goa-text-input-border), var(--goa-text-input-border-focus);
@@ -504,10 +517,15 @@
   }
 
   /* Focus state (including when in error state) */
-  .goa-input:has(input:focus-visible),
-  .goa-input.error:has(input:focus-visible) {
+  .goa-input:not(:has(input:read-only)):has(input:focus-visible),
+  .goa-input.error:not(:has(input:read-only)):has(input:focus-visible) {
     box-shadow:
       var(--goa-text-input-border), var(--goa-text-input-border-focus);
+  }
+
+  /* V2: Focus state shows only blue focus border (no default border) */
+  .container.v2 .goa-input:not(:has(input:read-only)):has(input:focus-visible) {
+    box-shadow: var(--goa-text-input-border-focus);
   }
 
   /* type=range does not have an outline/box-shadow */
@@ -553,8 +571,8 @@
     border: none;
   }
 
-  input[readonly] {
-    cursor: pointer;
+  input:read-only {
+    cursor: default;
   }
 
   input[type="number"] {
@@ -581,7 +599,7 @@
   .goa-input.input--disabled input:hover,
   .goa-input.input--disabled input:active,
   .goa-input.input--disabled input:focus {
-    color: var(--goa-color-text-secondary);
+    color: var(--goa-text-input-color-text-disabled);
   }
 
   .goa-input.input--disabled input:hover {
@@ -604,12 +622,13 @@
     display: flex;
     align-items: center;
     white-space: normal;
-    height: 42px;
+    height: var(--goa-text-input-height, 42px);
   }
 
   .leading-content .leading-content-slot :global(::slotted(div)),
   .trailing-content .trailing-content-slot :global(::slotted(div)) {
     padding: var(--goa-text-input-padding);
+    font: var(--goa-text-input-typography);
   }
 
   .prefix,
@@ -626,6 +645,27 @@
     /* background-clip doesn't want to work */
     border-top-right-radius: var(--goa-text-input-border-radius);
     border-bottom-right-radius: var(--goa-text-input-border-radius);
+  }
+
+  /* V2: Read-only input field styling (exclude disabled inputs) */
+  .container.v2 .goa-input:has(input:read-only:not(:disabled)) {
+    background-color: var(--goa-text-input-color-bg-readonly);
+    box-shadow: var(--goa-text-input-border-readonly);
+  }
+
+  /* V2: Read-only leading/trailing content - background, border, and text color */
+  .container.v2.leading-content:has(input:read-only:not(:disabled)) .leading-content-slot :global(::slotted(div)),
+  .container.v2.trailing-content:has(input:read-only:not(:disabled)) .trailing-content-slot :global(::slotted(div)) {
+    background-color: var(--goa-text-input-lt-content-color-bg-readonly);
+    box-shadow: var(--goa-text-input-border-readonly);
+    color: var(--goa-text-input-color-text);
+  }
+
+  /* V2: Disabled leading/trailing content - text color and border (must come after all default slot styles) */
+  .container.v2.leading-content:has(.input--disabled) .leading-content-slot :global(::slotted(div)),
+  .container.v2.trailing-content:has(.input--disabled) .trailing-content-slot :global(::slotted(div)) {
+    color: var(--goa-text-input-color-text-disabled);
+    box-shadow: var(--goa-text-input-border-disabled);
   }
 
   .goa-input:has(.prefix) .leading-icon,
@@ -704,8 +744,9 @@
     opacity: 1;
   }
 
-  /* TODO add styling for autofill
-  input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px #E0F0FC inset !important;
-  } */
+  /* Autofill styling - override browser defaults */
+  input:autofill {
+    background-color: var(--goa-text-input-color-bg) !important;
+    -webkit-text-fill-color: var(--goa-text-input-color-text) !important;
+  }
 </style>
