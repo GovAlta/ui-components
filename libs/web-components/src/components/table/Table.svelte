@@ -1,7 +1,9 @@
 <svelte:options customElement={{
   tag: "goa-table",
   props: {
-    variant: { reflect: true }
+    variant: { reflect: true },
+    version: { reflect: true },
+    striped: { reflect: true }
   }
 }} />
 
@@ -20,11 +22,16 @@
   );
   type Variant = (typeof Variants)[number];
 
+  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
+  type VersionType = (typeof Version)[number];
+
   // Public
 
   export let width: string = "";
   export let stickyheader: string = "false";
+  export let striped: string = "false";
   export let variant: Variant = "normal";
+  export let version: VersionType = "1";
   export let testid: string = "";
 
   export let mt: Spacing = null;
@@ -40,11 +47,13 @@
   // Reactive
 
   $: _stickyHeader = toBoolean(stickyheader);
+  $: _striped = toBoolean(striped);
 
   // Hooks
 
   onMount(() => {
     validateVariant(variant);
+    validateVersion(version);
 
     // without setTimeout it won't properly sort in Safari
     setTimeout(attachSortEventHandling, 0);
@@ -122,7 +131,9 @@
 <div
   bind:this={_rootEl}
   class={`goatable ${variant}`}
+  class:v2={version === "2"}
   class:sticky={_stickyHeader}
+  class:striped={_striped}
   style={`
     ${`width: ${width || "100%"};`}
     ${calculateMargin(mt, mr, mb, ml)}
@@ -146,5 +157,14 @@
 
   table {
     border-collapse: collapse;
+  }
+
+  /* V2 Border and Border-Radius */
+  .v2 table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: var(--goa-table-container-border, 1px solid #e7e7e7);
+    border-radius: var(--goa-table-border-radius-container, 16px);
+    overflow: hidden;
   }
 </style>
