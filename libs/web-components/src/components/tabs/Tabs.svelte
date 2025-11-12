@@ -7,6 +7,7 @@
 
   export let initialtab: number = -1; // 1-based
   export let testid: string = "";
+  export let version: "1" | "2" = "1";
 
   // Private
 
@@ -283,7 +284,7 @@
 
 <!--HTML-->
 
-<div role="tablist" bind:this={_rootEl} data-testid={testid}>
+<div role="tablist" bind:this={_rootEl} class:v2={version === "2"} data-testid={testid}>
   <div class="tabs" bind:this={_tabsEl}></div>
   <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
     <slot />
@@ -303,6 +304,10 @@
     gap: var(--goa-space-xs);
   }
 
+  /* ========================================
+     Base Styles (Token-driven, works for V1 and V2)
+     ======================================== */
+
   :global([role="tab"]) {
     display: flex;
     background: none;
@@ -311,12 +316,13 @@
     cursor: pointer;
     border: none;
     font: var(--goa-tab-typography);
-    color: var(--goa-tab-text-color);
+    color: var(--goa-tab-color-text-not-selected, var(--goa-tab-text-color));
     text-decoration: none;
   }
 
   :global([role="tab"][aria-selected="true"]) {
     font: var(--goa-tab-typography-selected);
+    color: var(--goa-tab-color-text-selected, var(--goa-tab-text-color));
   }
 
   :global([role="tab"]:focus-visible) {
@@ -324,19 +330,15 @@
   }
 
   :global([role="tab"]:hover:not([aria-selected="true"])) {
-    border-bottom: var(--goa-tab-border-hover);
+    color: var(--goa-tab-color-text-hover, var(--goa-tab-text-color));
   }
 
   :global([role="tabpanel"]:focus-visible) {
     outline: var(--goa-tab-border-focus);
-    outline-offset: 4px; /* Adjust as needed */
+    outline-offset: 4px;
   }
 
-
   @media (--not-mobile) {
-    :global([role="tablist"]) {
-
-    }
     .tabs {
       border-bottom: var(--goa-tabs-bottom-border);
       display: flex;
@@ -348,40 +350,100 @@
       border-bottom: var(--goa-tab-border-not-selected);
       text-overflow: ellipsis;
       min-width: var(--goa-space-2xl);
-      justify-content: center; /* Horizontally center content */
+      justify-content: center;
     }
     :global([role="tab"][aria-selected="true"]) {
       border-bottom: var(--goa-tab-border-selected);
     }
+    :global([role="tab"]:hover:not([aria-selected="true"])) {
+      border-bottom: var(--goa-tab-border-hover);
+    }
   }
 
   @media (--mobile) {
-
     .tabs {
       border-left: var(--goa-tabs-bottom-border);
       border-bottom: var(--goa-tabs-bottom-border);
       display: flex;
       flex-direction: column;
       gap: var(--goa-tabs-gap-small-screen);
-      padding-bottom: var(--goa-space-m);
-      margin-bottom: 2rem;
+      padding-bottom: var(--goa-tabs-padding-bottom-small-screen, var(--goa-space-m));
     }
-
     :global([role="tab"]) {
       padding: var(--goa-tab-padding-mobile);
       border-left: var(--goa-tab-border-not-selected);
       text-overflow: wrap;
-      white-space: normal; /* Allows text to wrap */
-      word-break: break-word; /* Ensures long words break onto the next line */
-      overflow-wrap: break-word; /* Alternative for word wrapping */
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     :global([role="tab"][aria-selected="true"]) {
       border-left: var(--goa-tab-border-selected);
       background: var(--goa-tab-color-bg-selected-small-screen);
     }
     :global([role="tab"]:hover:not([aria-selected="true"])) {
-    border-left: var(--goa-tab-border-hover);
-    border-bottom: none;
+      border-left: var(--goa-tab-border-hover);
+      background: var(--goa-tab-color-bg-hover-small-screen, transparent);
+    }
+  }
+
+  .v2 :global([role="tab"]) {
+    position: relative; /* Required for ::after positioning */
+  }
+
+  .v2 :global([role="tab"]:focus-visible) {
+    border-radius: var(--goa-border-radius-xs);
+  }
+
+  .v2 :global([role="tab"]:hover:not([aria-selected="true"])) {
+    border-bottom: none; /* Remove V1 border on hover */
+  }
+
+  @media (--not-mobile) {
+    .v2 :global([role="tab"]) {
+      border-bottom: none; /* Remove V1 border, replaced with ::after */
+    }
+
+    /* V2 uses ::after pseudo-element for rounded corner indicators */
+    .v2 :global([role="tab"]::after) {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--goa-tab-indicator-width, 3px);
+      background: transparent;
+      border-radius: var(--goa-tab-indicator-border-radius-desktop, 6px 6px 0 0);
+    }
+    .v2 :global([role="tab"][aria-selected="true"]::after) {
+      background: var(--goa-tab-indicator-color-active, #0070C4);
+    }
+    .v2 :global([role="tab"]:hover:not([aria-selected="true"])::after) {
+      background: var(--goa-tab-indicator-color-hover, #DCDCDC);
+    }
+  }
+
+  @media (--mobile) {
+    .v2 :global([role="tab"]) {
+      border-left: none; /* Remove V1 border, replaced with ::after */
+    }
+
+    /* V2 uses ::after pseudo-element for rounded corner indicators */
+    .v2 :global([role="tab"]::after) {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--goa-tab-indicator-width, 3px);
+      background: transparent;
+      border-radius: var(--goa-tab-indicator-border-radius-small-screen, 0 6px 6px 0);
+    }
+    .v2 :global([role="tab"][aria-selected="true"]::after) {
+      background: var(--goa-tab-indicator-color-active, #0070C4);
+    }
+    .v2 :global([role="tab"]:hover:not([aria-selected="true"])::after) {
+      background: var(--goa-tab-indicator-color-hover, #DCDCDC);
     }
   }
 </style>
