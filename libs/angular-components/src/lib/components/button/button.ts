@@ -11,14 +11,19 @@ import {
   Input,
   Output,
   booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-button",
+  imports: [CommonModule],
   template: `
     <goa-button
+      *ngIf="isReady"
       [attr.type]="type"
       [attr.size]="size"
       [attr.variant]="variant"
@@ -41,7 +46,7 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabButton extends GoabBaseComponent {
+export class GoabButton extends GoabBaseComponent implements OnInit {
   @Input() type?: GoabButtonType = "primary";
   @Input() size?: GoabButtonSize;
   @Input() variant?: GoabButtonVariant;
@@ -54,6 +59,21 @@ export class GoabButton extends GoabBaseComponent {
   @Input() actionArgs?: Record<string, unknown>;
 
   @Output() onClick = new EventEmitter();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onClick() {
     this.onClick.emit();

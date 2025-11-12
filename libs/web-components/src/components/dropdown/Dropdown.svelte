@@ -12,7 +12,7 @@
 />
 
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
 
   import type { GoAIconType } from "../icon/Icon.svelte";
   import type { Spacing } from "../../common/styling";
@@ -61,6 +61,7 @@
   export let maxheight: string = "276px";
   export let placeholder: string = "";
   export let width: string = "";
+  export let maxwidth: string = "";
   export let disabled: string = "false";
   export let error: string = "false";
   export let multiselect: string = "false";
@@ -149,7 +150,7 @@
   // Hooks
   //
 
-  onMount(async () => {
+  onMount(() => {
     ensureSlotExists(_rootEl);
     addRelayListener();
     sendMountedMessage();
@@ -158,8 +159,6 @@
     if (disableGlobalClosePopover) {
       _popoverEl.setAttribute("disable-global-close-popover", "yes");
     }
-
-    await tick();
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
@@ -186,12 +185,14 @@
         );
         _width = `${width}px`; // Default to px if no unit is provided
       }
+    } else if (maxwidth) {
+      _width = maxwidth;
     } else {
       _width = getLongestChildWidth(options); // Calculate based on the longest option
     }
 
     // Set popover max width
-    if (width?.includes("%")) {
+    if (width?.includes("%") || maxwidth?.includes("%")) {
       _popoverMaxWidth = "100%"; // let the parent's % width constraint handle it
     } else {
       _popoverMaxWidth = `min(${_width}, 100%)`;
@@ -290,6 +291,10 @@
       syncFilteredOptions();
       if (!_native) {
         setSelected();
+        // Update the displayed value after options are loaded and selected option is set
+        if (_inputEl && _selectedOption) {
+          setDisplayedValue();
+        }
       }
     }, 1);
   }
@@ -459,7 +464,8 @@
 
   // update the value show to the user in the <input> element
   function setDisplayedValue() {
-    _inputEl.value = _selectedOption?.label || _selectedOption?.value || "";
+    const newValue = _selectedOption?.label || _selectedOption?.value || "";
+    _inputEl.value = newValue;
   }
 
   function dispatchValue(newValue?: string) {
@@ -635,6 +641,11 @@
     }
 
     onKeyUp(_: KeyboardEvent) {
+      // Clear selection and highlight if input becomes empty
+      if (this.input.value === "" && _selectedOption) {
+        _selectedOption = undefined;
+        _highlightedIndex = -1;
+      }
       showMenu();
     }
 

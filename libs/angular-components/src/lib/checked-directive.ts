@@ -12,6 +12,7 @@ import {
 
 // @deprecated: Use the new <goab-checkbox .. /> component
 @Directive({
+  standalone: true,
   selector: "[goaChecked]",
   providers: [
     {

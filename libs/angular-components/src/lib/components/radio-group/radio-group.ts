@@ -9,8 +9,12 @@ import {
   Input,
   Output,
   forwardRef,
+  OnInit,
+  ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
@@ -18,6 +22,8 @@ import { GoabControlValueAccessor } from "../base.component";
   selector: "goab-radio-group",
   template: `
     <goa-radio-group
+      #goaComponentRef
+      *ngIf="isReady"
       [attr.name]="name"
       [attr.value]="value"
       [disabled]="disabled"
@@ -35,6 +41,7 @@ import { GoabControlValueAccessor } from "../base.component";
       <ng-content />
     </goa-radio-group>
   `,
+  imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
@@ -44,10 +51,25 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-export class GoabRadioGroup extends GoabControlValueAccessor {
+export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
+  isReady = false;
   @Input() name?: string;
   @Input() orientation?: GoabRadioGroupOrientation;
   @Input() ariaLabel?: string;
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   @Output() onChange = new EventEmitter<GoabRadioGroupOnChangeDetail>();
 

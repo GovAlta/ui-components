@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
@@ -8,6 +8,8 @@ import { GoabCheckboxList } from "./checkbox-list";
 import { GoabCheckbox } from "../checkbox/checkbox";
 
 @Component({
+  standalone: true,
+  imports: [GoabCheckboxList, GoabCheckbox],
   template: `
     <goab-checkbox-list
       [name]="name"
@@ -30,7 +32,7 @@ import { GoabCheckbox } from "../checkbox/checkbox";
   `,
 })
 class TestCheckboxListHostComponent {
-  name?: string;
+  name = "";
   value?: string[];
   disabled?: boolean;
   error?: boolean;
@@ -52,10 +54,9 @@ describe("GoabCheckboxList", () => {
   let fixture: ComponentFixture<TestCheckboxListHostComponent>;
   let host: TestCheckboxListHostComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestCheckboxListHostComponent],
-      imports: [GoabCheckboxList, GoabCheckbox, ReactiveFormsModule],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestCheckboxListHostComponent, GoabCheckboxList, GoabCheckbox, ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -75,7 +76,9 @@ describe("GoabCheckboxList", () => {
     host.ml = "xl";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render and bind attributes", () => {
     const el: HTMLElement = fixture.debugElement.query(

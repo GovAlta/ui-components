@@ -5,6 +5,8 @@ import { By } from "@angular/platform-browser";
 import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabPublicFormTask],
   template: `
     <goab-public-form-task
       [status]="status"
@@ -23,8 +25,7 @@ describe("GoabPublicFormTask", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestPublicFormTaskComponent],
-      imports: [GoabPublicFormTask],
+      imports: [TestPublicFormTaskComponent, GoabPublicFormTask],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

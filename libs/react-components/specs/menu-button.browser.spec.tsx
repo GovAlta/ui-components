@@ -46,7 +46,9 @@ describe("MenuButton", () => {
         await menuAction.click();
 
         // Verify the correct action was triggered
-        expect(onAction).toHaveBeenCalledWith(`action${i}`);
+        expect(onAction).toHaveBeenCalledWith({
+          action: `action${i}`
+        });
       });
     }
   });
@@ -99,7 +101,9 @@ describe("MenuButton", () => {
 
       const firstAction = result.getByTestId("first-action");
       await firstAction.click();
-      expect(onAction).toHaveBeenCalledWith("first");
+      expect(onAction).toHaveBeenCalledWith({
+        action: "first"
+      });
     });
 
     // Click second action
@@ -109,12 +113,14 @@ describe("MenuButton", () => {
 
       const secondAction = result.getByTestId("second-action");
       await secondAction.click();
-      expect(onAction).toHaveBeenCalledWith("second");
+      expect(onAction).toHaveBeenCalledWith({
+        action: "second"
+      });
     });
 
     // Verify the correct number of calls and order
     expect(onAction).toHaveBeenCalledTimes(2);
-    expect(onAction.mock.calls[0][0]).toBe("first");
-    expect(onAction.mock.calls[1][0]).toBe("second");
+    expect(onAction.mock.calls[0][0].action).toBe("first");
+    expect(onAction.mock.calls[1][0].action).toBe("second");
   });
 });

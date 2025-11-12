@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabBadge } from "./badge";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabBadgeType, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabBadge],
   template: `
     <goab-badge
       [type]="type"
@@ -35,10 +37,9 @@ describe("GoABBadge", () => {
   let fixture: ComponentFixture<TestBadgeComponent>;
   let component: TestBadgeComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabBadge],
-      declarations: [TestBadgeComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabBadge, TestBadgeComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -55,7 +56,9 @@ describe("GoABBadge", () => {
     component.mr = "xl" as Spacing;
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render and set the props correctly", () => {
     const badgeElement = fixture.debugElement.query(By.css("goa-badge")).nativeElement;

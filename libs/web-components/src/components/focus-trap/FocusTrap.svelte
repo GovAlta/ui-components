@@ -30,7 +30,7 @@
   // ========
   // Reactive
   // ========
-  $: if (open) findFirstFocusableEl();
+  $: if (open) setTimeout(() => findFirstFocusableEl(), 0); // add a small delay so rootEl is rendered - for modal
 
   // *****
   // Hooks
@@ -110,10 +110,7 @@
 
     const el = findFirstNode([sibling], false) as HTMLElement;
     if (el) {
-      // for angular with router, it needs a small delay
-      setTimeout(() => {
-        el.focus();
-      }, 10);
+      el.focus();
     }
   }
 

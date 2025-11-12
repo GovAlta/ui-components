@@ -8,15 +8,20 @@ import {
   forwardRef,
   TemplateRef,
   booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { NgIf, NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-checkbox",
   template: ` <goa-checkbox
+    #goaComponentRef
+    *ngIf="isReady"
     [attr.name]="name"
     [checked]="checked"
     [disabled]="disabled"
@@ -52,15 +57,33 @@ import { GoabControlValueAccessor } from "../base.component";
       useExisting: forwardRef(() => GoabCheckbox),
     },
   ],
-  imports: [NgTemplateOutlet, NgIf],
+  imports: [NgTemplateOutlet, CommonModule],
 })
-export class GoabCheckbox extends GoabControlValueAccessor {
+export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
+  isReady = false;
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
+
   @Input() name?: string;
   @Input({ transform: booleanAttribute }) checked?: boolean;
   @Input({ transform: booleanAttribute }) indeterminate?: boolean;
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
-  @Input() override value?: string | number | boolean;
+  @Input() override value?: string | number | boolean | null;
   @Input() ariaLabel?: string;
   @Input() description!: string | TemplateRef<any>;
   @Input() reveal?: TemplateRef<any>;
@@ -85,5 +108,16 @@ export class GoabCheckbox extends GoabControlValueAccessor {
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.binding === "check" ? detail.checked : detail.value || "");
+  }
+
+  // Checkbox is a special case: it uses `checked` instead of `value`.
+  override writeValue(value: string | number | boolean | null): void {
+    this.value = value;
+    this.checked = !!value;
+
+    const el = this.goaComponentRef?.nativeElement as HTMLElement | undefined;
+    if (el) {
+      this.renderer.setAttribute(el, "checked", this.checked ? "true" : "false");
+    }
   }
 }

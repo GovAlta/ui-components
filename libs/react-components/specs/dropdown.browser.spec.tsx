@@ -4,7 +4,7 @@ import { GoabDropdown, GoabDropdownItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
-describe("Dropdown Component", () => {
+describe("Dropdown", () => {
   const noop = () => {
     // noop
   };
@@ -134,6 +134,218 @@ describe("Dropdown Component", () => {
           // Check it is actually applied
           const computedStyle = window.getComputedStyle(dropdown.element());
           expect(computedStyle.width).toBe("300px");
+        });
+      });
+
+      it("uses maxWidth value as width when width prop not supplied", async () => {
+        const Component = () => (
+          <GoabDropdown
+            name="favcolor"
+            testId="favcolor-maxonly"
+            maxWidth="320px"
+            onChange={noop}
+          >
+            <GoabDropdownItem label="Red" value="red" />
+            <GoabDropdownItem label="Blue" value="blue" />
+            <GoabDropdownItem label="Green" value="green" />
+          </GoabDropdown>
+        );
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("favcolor-maxonly");
+
+        await vi.waitFor(() => {
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          // internal logic sets --width to maxWidth when width not provided
+          expect(styleAttr).toContain("--width: 320px");
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toBe("320px");
+        });
+      });
+
+      it("ignores maxwidth when width prop is provided", async () => {
+        const Component = () => (
+          <GoabDropdown
+            name="favcolor"
+            testId="favcolor-width-wins"
+            width="800px"
+            maxWidth="320px"
+            onChange={noop}
+          >
+            <GoabDropdownItem label="Red" value="red" />
+            <GoabDropdownItem label="Blue" value="blue" />
+            <GoabDropdownItem label="Green" value="green" />
+          </GoabDropdown>
+        );
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("favcolor-width-wins");
+        await vi.waitFor(() => {
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 800px");
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(parseFloat(computedStyle.width)).toBeGreaterThan(320);
+        });
+      });
+
+      it("caps natural width with percentage maxWidth (container-controlled)", async () => {
+        const Component = () => (
+          <div style={{ width: "600px" }} data-testid="container-600">
+            <GoabDropdown
+              name="favcolor"
+              testId="percentage-maxwidth-dropdown"
+              maxWidth="50%"
+              onChange={noop}
+            >
+              <GoabDropdownItem
+                label="Extremely Long Option Label To Grow Width"
+                value="long"
+              />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          </div>
+        );
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("percentage-maxwidth-dropdown");
+        const container = result.getByTestId("container-600");
+
+        await vi.waitFor(() => {
+          const containerWidth = parseFloat(
+            window.getComputedStyle(container.element()).width,
+          );
+          const computedWidth = parseFloat(
+            window.getComputedStyle(dropdown.element()).width,
+          );
+          // Target ~300px (50% of 600) within tolerance
+          expect(computedWidth).toBeGreaterThan(250);
+          expect(computedWidth).toBeLessThan(310);
+          expect(Math.abs(computedWidth - containerWidth * 0.5)).toBeLessThanOrEqual(15);
+        });
+      });
+
+      it("caps natural width with character (ch) maxWidth", async () => {
+        const Component = () => (
+          <GoabDropdown
+            name="favcolor"
+            testId="ch-maxwidth-dropdown"
+            maxWidth="25ch"
+            onChange={noop}
+          >
+            <GoabDropdownItem label="Red" value="red" />
+            <GoabDropdownItem label="Blue" value="blue" />
+            <GoabDropdownItem label="Green" value="green" />
+          </GoabDropdown>
+        );
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("ch-maxwidth-dropdown");
+
+        await vi.waitFor(() => {
+          const pxWidth = parseFloat(window.getComputedStyle(dropdown.element()).width);
+          expect(pxWidth).toBeGreaterThan(50);
+          expect(pxWidth).toBeLessThan(600);
+        });
+      });
+
+      it("supports percentage width units", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="percentage-dropdown"
+              width="75%"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("percentage-dropdown");
+
+        await vi.waitFor(() => {
+          // Check that width is set with percentage unit
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 75%");
+
+          // Check computed width is percentage of container
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/); // Should be converted to pixels
+
+          // Check that it's a reasonable percentage width (should be substantial but not too large)
+          const dropdownWidth = parseFloat(computedStyle.width);
+          expect(dropdownWidth).toBeGreaterThan(100); // Should be substantial
+          expect(dropdownWidth).toBeLessThan(800); // But not too large for 75%
+        });
+      });
+
+      it("supports character (ch) width units", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="ch-dropdown"
+              width="30ch"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("ch-dropdown");
+
+        await vi.waitFor(() => {
+          // Check that width is set with ch unit
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 30ch");
+
+          // Check computed width is applied
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/); // Browser converts ch to px
+
+          // Should have a reasonable width (ch is approximately font width)
+          const dropdownWidth = parseFloat(computedStyle.width);
+          expect(dropdownWidth).toBeGreaterThan(200); // Should be substantial width
+          expect(dropdownWidth).toBeLessThan(600); // But not too large
+        });
+      });
+
+      it("defaults to px when no unit is provided", async () => {
+        const Component = () => {
+          return (
+            <GoabDropdown
+              name="favcolor"
+              testId="no-unit-dropdown"
+              width="250"
+              onChange={noop}
+            >
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          );
+        };
+
+        const result = render(<Component />);
+        const dropdown = result.getByTestId("no-unit-dropdown");
+
+        await vi.waitFor(() => {
+          // Check that width is converted to px when no unit provided
+          const styleAttr = dropdown.element().getAttribute("style") || "";
+          expect(styleAttr).toContain("--width: 250px");
+
+          // Check computed width matches expected px value
+          const computedStyle = window.getComputedStyle(dropdown.element());
+          expect(computedStyle.width).toBe("250px");
         });
       });
     });
@@ -373,116 +585,4 @@ describe("Dropdown Component", () => {
       });
     })
   })
-
-  describe("Number Values", () => {
-    it("should render with number values", async () => {
-      // Setup
-      const Component = () => {
-        return (
-          <GoabDropdown name="options" testId="dropdown" onChange={noop}>
-            <GoabDropdownItem label="Option 1" value={1} />
-            <GoabDropdownItem label="Option 2" value={2} />
-            <GoabDropdownItem label="Option 3" value={3} />
-          </GoabDropdown>
-        );
-      };
-
-      const result = render(<Component />);
-      const dropdown = result.getByTestId("dropdown");
-
-      // Actions
-      await dropdown.click();
-
-      // Result
-      await vi.waitFor(() => {
-        ["1", "2", "3"].forEach((num) => {
-          const item = result.getByText(`Option ${num}`);
-          expect(item.element().getAttribute("data-value")).toBe(num);
-        })
-      });
-    });
-
-    it("should handle selection of number values", async () => {
-      // Setup
-      const onChange = vi.fn();
-      const Component = () => {
-        return (
-          <GoabDropdown name="options" testId="dropdown" onChange={onChange}>
-            <GoabDropdownItem label="Option 1" value={1} />
-            <GoabDropdownItem label="Option 2" value={2} />
-            <GoabDropdownItem label="Option 3" value={3} />
-          </GoabDropdown>
-        );
-      };
-
-      const result = render(<Component />);
-      const dropdown = result.getByTestId("dropdown");
-      const option2 = result.getByText("Option 2");
-
-      // Actions
-      await dropdown.click();
-
-      await vi.waitFor(async () => {
-        await option2.click();
-      });
-
-      // Result
-      expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({
-        name: "options",
-        value: 2
-      }));
-    });
-
-    it("should initialize with a number value", async () => {
-      // Setup
-      const Component = () => {
-        return (
-          <GoabDropdown name="options" testId="dropdown" value={2} onChange={noop}>
-            <GoabDropdownItem label="Option 1" value={1} />
-            <GoabDropdownItem label="Option 2" value={2} />
-            <GoabDropdownItem label="Option 3" value={3} />
-          </GoabDropdown>
-        );
-      };
-
-      const result = render(<Component />);
-      const input = result.getByRole("combobox");
-
-      // Result
-      await vi.waitFor(() => {
-        const el = input.element() as HTMLInputElement;
-        expect(el.value).toBe("Option 2");
-      });
-    });
-
-    it("should filter options with number values", async () => {
-      // Setup
-      const Component = () => {
-        return (
-          <GoabDropdown name="options" testId="dropdown" filterable={true} onChange={noop}>
-            <GoabDropdownItem label="Option 1" value={1} />
-            <GoabDropdownItem label="Option 2" value={2} />
-            <GoabDropdownItem label="Option 3" value={3} />
-          </GoabDropdown>
-        );
-      };
-
-      const result = render(<Component />);
-      const filter = result.getByTestId("input");
-      const filteredOptions = result.getByRole("option");
-
-      // Actions
-      await filter.fill("2");
-      await filter.click();
-
-      // Result
-      await vi.waitFor(() => {
-        expect(filteredOptions.elements().length).toBe(1);
-
-        const el = filteredOptions.elements()[0] as HTMLElement;
-        expect(el.getAttribute("data-value")).toBe("2");
-      }, 2000);
-    });
-  });
 });

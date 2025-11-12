@@ -1,9 +1,11 @@
-name: Prod Release CI
+name: Release CI
 
 on:
   push:
     branches:
       - main
+      - next
+      - dev
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,16 +19,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: "24"
 
-      - uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm 11
+        run: npm install -g npm@11
 
       - run: npm ci
+
+      - name: Get last successful commit
+        uses: nrwl/nx-set-shas@v3
+        id: last_successful_commit
+        with:
+          main-branch-name: ${{ github.ref_name }}
 
       - name: Lint
         run: npm run lint
@@ -44,11 +50,8 @@ jobs:
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
 
-      - name: Remove types file for now
-        run: rm dist/libs/web-components/index.d.ts
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx nx run-many --target release --all --parallel=false
+        run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}

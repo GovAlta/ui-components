@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabSideMenuGroup } from "./side-menu-group";
 import { Component } from "@angular/core";
 
 @Component({
+  standalone: true,
+  imports: [GoabSideMenuGroup],
   template: `
     <goab-side-menu-group [heading]="heading" [testId]="testId">
       <a href="#">Link</a>
@@ -18,16 +20,17 @@ describe("GoABSideMenuGroup", () => {
   let fixture: ComponentFixture<TestSideMenuGroupComponent>;
   let component: TestSideMenuGroupComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestSideMenuGroupComponent],
-      imports: [GoabSideMenuGroup],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabSideMenuGroup, TestSideMenuGroupComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-side-menu-group");

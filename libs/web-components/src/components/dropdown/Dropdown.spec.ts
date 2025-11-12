@@ -823,8 +823,8 @@ describe("GoADropdown", () => {
 
       expect(dropdown).toBeTruthy();
       expect(dropdown).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-m)");
-      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-bottom:var(--goa-space-l)");
+      expect(dropdown).toHaveStyle("margin-right:var(--goa-space-m)");
       expect(dropdown).toHaveStyle("margin-left:var(--goa-space-xl)");
     });
   });
@@ -1243,6 +1243,36 @@ describe("GoADropdown", () => {
           const computedStyle = window.getComputedStyle(dropdown!);
           // This might be tricky to test in jsdom - see alternative below
         });
+      });
+    });
+  });
+
+  describe("maxwidth", () => {
+    it("should use maxwidth when no width is provided", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        maxwidth: "500px",
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 500px");
+      });
+    });
+
+    it("should use width over maxwidth when both are provided", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        width: "300px",
+        maxwidth: "500px",
+      });
+
+      await waitFor(() => {
+        const dropdown = result.container.querySelector(".dropdown");
+        expect(dropdown?.getAttribute("style")).toContain("--width: 300px");
+        expect(dropdown?.getAttribute("style")).not.toContain("--width: 500px");
       });
     });
   });

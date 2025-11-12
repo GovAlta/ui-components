@@ -109,13 +109,12 @@
   // Hooks
   // *****
 
-  onMount(async () => {
+  onMount(() => {
     _calendarDate = _selectedDate = value
       ? startOfDay(new Date(value))
       : startOfDay(new Date());
 
     initKeybindings();
-    await tick();
     renderCalendar({ type: "date", value: _selectedDate });
   });
 
@@ -332,7 +331,7 @@
         on:_change={setMonth}
       >
         {#each _months as month, i}
-          <goa-dropdown-item value={i} label={month} />
+          <goa-dropdown-item value={i+""} label={month} />
         {/each}
       </goa-dropdown>
     </goa-form-item>

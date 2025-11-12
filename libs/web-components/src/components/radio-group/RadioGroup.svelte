@@ -10,7 +10,7 @@
     relay,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import { onMount, tick } from "svelte";
+  import { onMount } from "svelte";
   import {
     GoARadioItemProps,
     RadioItemSelectProps,
@@ -84,19 +84,16 @@
   let _bindTimeoutId: any;
 
   // Hooks
-
-  onMount(async () => {
-    _rootEl.addEventListener("_radioItemChange", (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      onChange(detail.value, detail.label);
-    });
-
-    await tick(); // for angular to register public form name
+  onMount(() => {
     validateOrientation(orientation);
     addRelayListener();
     sendMountedMessage();
     getChildren();
 
+    _rootEl.addEventListener("_radioItemChange", (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      onChange(detail.value, detail.label);
+    });
   });
 
   // Functions

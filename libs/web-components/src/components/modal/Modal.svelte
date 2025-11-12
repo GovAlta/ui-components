@@ -98,8 +98,7 @@
   // Hooks
   // *****
 
-  onMount(async () => {
-    await tick();
+  onMount(() => {
     validateCalloutVariant(calloutvariant);
     validateTransition(transition);
 

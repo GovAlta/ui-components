@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabSpinner } from "./spinner";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabSpinnerSize, GoabSpinnerType } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabSpinner],
   template: `
     <goab-spinner
       [type]="type"
@@ -26,17 +28,18 @@ describe("GoABSpinner", () => {
   let fixture: ComponentFixture<TestSpinnerComponent>;
   let component: TestSpinnerComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestSpinnerComponent],
-      imports: [GoabSpinner],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabSpinner, TestSpinnerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSpinnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-spinner");

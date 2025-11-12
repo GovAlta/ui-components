@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabAppHeader } from "./header";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabAppHeader],
   template: `
     <goab-app-header
       [heading]="heading"
@@ -28,10 +30,9 @@ describe("GoABAppHeader", () => {
   let fixture: ComponentFixture<TestAppHeaderComponent>;
   let component: TestAppHeaderComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestAppHeaderComponent],
-      imports: [GoabAppHeader],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAppHeader, TestAppHeaderComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -45,7 +46,9 @@ describe("GoABAppHeader", () => {
     component.testId = "foo";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render successfully", () => {
     const el = fixture.debugElement.query(By.css("goa-app-header")).nativeElement;

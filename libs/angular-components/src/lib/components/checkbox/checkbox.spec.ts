@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabCheckbox } from "./checkbox";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -7,6 +7,8 @@ import { By } from "@angular/platform-browser";
 import { Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabCheckbox],
   template: `
     <goab-checkbox
       [name]="name"
@@ -51,10 +53,9 @@ describe("GoabCheckbox", () => {
   let fixture: ComponentFixture<TestCheckboxComponent>;
   let component: TestCheckboxComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabCheckbox, ReactiveFormsModule],
-      declarations: [TestCheckboxComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestCheckboxComponent, GoabCheckbox, ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -73,7 +74,9 @@ describe("GoabCheckbox", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const checkboxElement = fixture.debugElement.query(
@@ -106,9 +109,54 @@ describe("GoabCheckbox", () => {
 
     expect(onChange).toHaveBeenCalled();
   });
+
+  describe("writeValue", () => {
+    it("should set checked attribute to true when value is truthy", () => {
+      const checkboxComponent = fixture.debugElement.query(By.css("goab-checkbox")).componentInstance;
+      const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
+
+      checkboxComponent.writeValue(true);
+      expect(checkboxElement.getAttribute("checked")).toBe("true");
+
+      checkboxComponent.writeValue("some value");
+      expect(checkboxElement.getAttribute("checked")).toBe("true");
+
+      checkboxComponent.writeValue(1);
+      expect(checkboxElement.getAttribute("checked")).toBe("true");
+    });
+
+    it("should set checked attribute to false when value is falsy", () => {
+      const checkboxComponent = fixture.debugElement.query(By.css("goab-checkbox")).componentInstance;
+      const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
+
+      checkboxComponent.writeValue(false);
+      expect(checkboxElement.getAttribute("checked")).toBe("false");
+
+      checkboxComponent.writeValue(null);
+      expect(checkboxElement.getAttribute("checked")).toBe("false");
+
+      checkboxComponent.writeValue(undefined);
+      expect(checkboxElement.getAttribute("checked")).toBe("false");
+
+      checkboxComponent.writeValue("");
+      expect(checkboxElement.getAttribute("checked")).toBe("false");
+    });
+
+    it("should update component value property", () => {
+      const checkboxComponent = fixture.debugElement.query(By.css("goab-checkbox")).componentInstance;
+
+      checkboxComponent.writeValue(true);
+      expect(checkboxComponent.value).toBe(true);
+
+      checkboxComponent.writeValue(null);
+      expect(checkboxComponent.value).toBe(null);
+    });
+  });
 });
 
 @Component({
+  standalone: true,
+  imports: [GoabCheckbox],
   template: `
     <goab-checkbox
       name="test"
@@ -129,25 +177,28 @@ class TestCheckboxWithDescriptionSlotComponent {
 describe("Checkbox with description slot", () => {
   let fixture: ComponentFixture<TestCheckboxWithDescriptionSlotComponent>;
 
-  it("should render with slot description", async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabCheckbox, ReactiveFormsModule],
-      declarations: [TestCheckboxWithDescriptionSlotComponent],
+  it("should render with slot description", fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestCheckboxWithDescriptionSlotComponent, GoabCheckbox, ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestCheckboxWithDescriptionSlotComponent);
 
     fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
     const checkboxElement = fixture.debugElement.query(
       By.css("goa-checkbox"),
     ).nativeElement;
     const slotDescription = checkboxElement.querySelector("[slot='description']");
     expect(slotDescription.textContent).toContain("A description slot");
-  });
+  }));
 });
 
 @Component({
+  standalone: true,
+  imports: [GoabCheckbox],
   template: `
     <goab-checkbox
       name="test"
@@ -167,16 +218,17 @@ class TestCheckboxWithRevealSlotComponent {}
 describe("Checkbox with reveal slot", () => {
   let fixture: ComponentFixture<TestCheckboxWithRevealSlotComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabCheckbox, ReactiveFormsModule],
-      declarations: [TestCheckboxWithRevealSlotComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestCheckboxWithRevealSlotComponent, GoabCheckbox, ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestCheckboxWithRevealSlotComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render with slot reveal", () => {
     const checkboxElement = fixture.debugElement.query(

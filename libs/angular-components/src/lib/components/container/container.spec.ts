@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabContainer } from "./container";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -11,6 +11,8 @@ import { GoabButton } from "../button/button";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabContainer, GoabButton],
   template: `
   <goab-container [type]="type"
                   [accent]="accent"
@@ -55,10 +57,9 @@ describe("GoABContainer", () => {
   let fixture: ComponentFixture<TestContainerComponent>;
   let component: TestContainerComponent;
 
-  beforeEach(async() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [GoabButton, GoabContainer],
-      declarations: [TestContainerComponent],
+      imports: [GoabButton, GoabContainer, TestContainerComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
@@ -76,7 +77,9 @@ describe("GoABContainer", () => {
     component.width = "content";
 
     fixture.detectChanges();
-  })
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-container")).nativeElement;

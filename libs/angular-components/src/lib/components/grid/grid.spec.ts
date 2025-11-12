@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabGrid } from "./grid";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabGrid],
   template: `
     <goab-grid
       [gap]="gap"
@@ -33,10 +35,9 @@ describe("GoABGrid", () => {
   let fixture: ComponentFixture<TestGridComponent>;
   let component: TestGridComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestGridComponent],
-      imports: [GoabGrid],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabGrid, TestGridComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -51,7 +52,9 @@ describe("GoABGrid", () => {
     component.testId = "foo";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render successfully", () => {
     const el = fixture.debugElement.query(By.css("goa-grid")).nativeElement;

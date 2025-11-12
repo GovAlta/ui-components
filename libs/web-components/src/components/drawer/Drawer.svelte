@@ -192,13 +192,17 @@
       class:drawer-open-right={position === "right" && open}
       class:drawer-open-left={position === "left" && open}
       bind:this={_contentEl}
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
       data-first-focus="true"
+      aria-labelledby="goa-drawer-heading"
     >
       <!-- Header -->
-      <div class="header" bind:clientHeight={_headerHeight}>
+      <div class="header" bind:clientHeight={_headerHeight} id="goa-drawer-heading">
         {#if heading || $$slots.heading}
           {#if heading}
-            <goa-text size="heading-m" as="h3" mb="none">{heading}</goa-text>
+            <goa-text size="heading-m" as="h3" mt="none" mb="none">{heading}</goa-text>
           {:else}
             <slot name="heading" />
           {/if}

@@ -16,6 +16,7 @@ interface WCProps extends Margins {
   relative?: string;
   disabled?: string;
   testid?: string;
+  width?: string;
 }
 
 declare module "react" {
@@ -40,6 +41,7 @@ export interface GoabDatePickerProps extends Margins {
    */
   relative?: boolean;
   disabled?: boolean;
+  width?: string;
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
@@ -57,6 +59,7 @@ export function GoabDatePicker({
   mb,
   ml,
   relative,
+  width,
   onChange,
 }: GoabDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
@@ -109,6 +112,7 @@ export function GoabDatePicker({
       mb={mb}
       ml={ml}
       relative={relative ? "true" : undefined}
+      width={width}
     />
   );
 }

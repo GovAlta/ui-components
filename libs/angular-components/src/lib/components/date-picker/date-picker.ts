@@ -1,4 +1,7 @@
-import { GoabDatePickerInputType, GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  GoabDatePickerInputType,
+  GoabDatePickerOnChangeDetail,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -8,14 +11,21 @@ import {
   forwardRef,
   ElementRef,
   HostListener,
+  OnInit,
+  ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-date-picker",
+  imports: [CommonModule],
   template: ` <goa-date-picker
+    #goaComponentRef
+    *ngIf="isReady"
     [attr.name]="name"
     [attr.value]="formatValue(value)"
     [attr.min]="min"
@@ -25,6 +35,7 @@ import { GoabControlValueAccessor } from "../base.component";
     [attr.relative]="relative"
     [attr.type]="type"
     [attr.testid]="testId"
+    [attr.width]="width"
     [attr.mt]="mt"
     [attr.mb]="mb"
     [attr.ml]="ml"
@@ -41,7 +52,8 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-export class GoabDatePicker extends GoabControlValueAccessor {
+export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
+  isReady = false;
   @Input() name?: string;
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: Date | string | null | undefined;
@@ -52,6 +64,7 @@ export class GoabDatePicker extends GoabControlValueAccessor {
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
+  @Input() width?: string;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
@@ -72,8 +85,21 @@ export class GoabDatePicker extends GoabControlValueAccessor {
     this.fcChange?.(detail.value);
   }
 
-  constructor(protected elementRef: ElementRef) {
-    super();
+  constructor(
+    protected elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
   }
 
   override setDisabledState(isDisabled: boolean) {
@@ -89,16 +115,12 @@ export class GoabDatePicker extends GoabControlValueAccessor {
   override writeValue(value: Date | null): void {
     this.value = value;
 
-    const datePickerEl = this.elementRef?.nativeElement?.querySelector("goa-date-picker");
-
+    const datePickerEl = this.goaComponentRef?.nativeElement as HTMLElement | undefined;
     if (datePickerEl) {
       if (!value) {
-        datePickerEl.setAttribute("value", "");
+        this.renderer.setAttribute(datePickerEl, "value", "");
       } else {
-        datePickerEl.setAttribute(
-          "value",
-          value instanceof Date ? value.toISOString() : value,
-        );
+        this.renderer.setAttribute(datePickerEl, "value", value instanceof Date ? value.toISOString() : value);
       }
     }
   }

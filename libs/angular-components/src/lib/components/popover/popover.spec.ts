@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabPopover } from "./popover";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabPopoverPosition, Spacing } from "@abgov/ui-components-common";
 import { GoabButton } from "../button/button";
 
 @Component({
+  standalone: true,
+  imports: [GoabPopover, GoabButton],
   template: `
     <goab-popover
       [testId]="testId"
@@ -39,10 +41,9 @@ describe("GoABPopover", () => {
   let fixture: ComponentFixture<TestPopoverComponent>;
   let component: TestPopoverComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestPopoverComponent],
-      imports: [GoabPopover, GoabButton],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestPopoverComponent, GoabPopover, GoabButton],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -58,7 +59,9 @@ describe("GoABPopover", () => {
     component.ml = "xs" as Spacing;
     component.mr = "m" as Spacing;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-popover");

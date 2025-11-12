@@ -1,11 +1,13 @@
 import { GoabIconType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-link",
   template: `
     <goa-link
+      *ngIf="isReady"
       [attr.leadingicon]="leadingIcon"
       [attr.trailingicon]="trailingIcon"
       [attr.testid]="testId"
@@ -20,9 +22,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
       <ng-content />
     </goa-link>
   `,
+  imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabLink {
+export class GoabLink implements OnInit {
+  isReady = false;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
   @Input() testId?: string;
@@ -33,6 +37,15 @@ export class GoabLink {
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   protected readonly JSON = JSON;
 }

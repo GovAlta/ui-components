@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabAppFooterNavSection } from "./footer-nav-section";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabAppFooterNavSection],
   template: `
     <goab-app-footer-nav-section
       [testId]="testId"
@@ -25,10 +27,9 @@ describe("GoABAppFooterNavSection", () => {
   let fixture: ComponentFixture<TestFooterNavSectionComponent>;
   let component: TestFooterNavSectionComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestFooterNavSectionComponent],
-      imports: [GoabAppFooterNavSection],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAppFooterNavSection, TestFooterNavSectionComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -40,7 +41,9 @@ describe("GoABAppFooterNavSection", () => {
     component.maxColumnCount = 3;
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const el = fixture.debugElement.query(

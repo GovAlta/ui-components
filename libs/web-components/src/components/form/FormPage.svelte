@@ -192,10 +192,10 @@
     {/if}
 
     {#if sectionTitle}
-      <goa-text size="body-l" mb="xs" color="secondary">{sectionTitle}</goa-text>
+      <goa-text size="body-l" mt="none" mb="xs" color="secondary">{sectionTitle}</goa-text>
     {/if}
     {#if heading}
-      <goa-text as="h2" size="heading-l" mb={subHeading ? "none" : "m"}>{heading}</goa-text>
+      <goa-text as="h2" size="heading-l" mt="none" mb={subHeading ? "none" : "m"}>{heading}</goa-text>
     {/if}
     {#if subHeading}
       <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{subHeading}</goa-text>

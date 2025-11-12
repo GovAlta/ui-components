@@ -32,7 +32,8 @@
   export let placeholder: string = "";
   export let rows: number = 3;
   export let testid: string = "";
-  export let width: string = "60ch";
+  export let width: string = "100%"; // 100% is default, the lower value of width and maxwidth wins
+  export let maxwidth: string = "60ch"; // 60ch is default, the lower value wins b/w width and maxwidth
   export let error: string = "false";
   export let readonly: string = "false";
   export let disabled: string = "false";
@@ -94,9 +95,14 @@
     validateSize(size);
     addRelayListener();
     sendMountedMessage();
-    injectCss(_rootEl, ":host", {
-      width: width.includes("%") ? width : `min(${width}, 100%)`,
-    });
+    const finalWidth = width.includes("%") ? width : `min(${width}, 100%)`;
+    const cssProps: Record<string, string> = { width: finalWidth };
+
+    if (maxwidth) {
+      cssProps["max-width"] = maxwidth;
+    }
+
+    injectCss(_rootEl, ":host", cssProps);
   });
 
   // functions
@@ -165,6 +171,15 @@
   function onFocus(_e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
+
+  function onBlur(_e: Event) {
+    dispatch(
+      _textareaEl,
+      "_blur",
+      { name, value: _textareaEl.value },
+      { bubbles: true },
+    );
+  }
 </script>
 
 <!-- HTML -->
@@ -199,6 +214,7 @@
       on:keyup={onKeyPress}
       on:change={onChange}
       on:focus={onFocus}
+      on:blur={onBlur}
     />
 
     {#if maxcount > 0 && !isDisabled}

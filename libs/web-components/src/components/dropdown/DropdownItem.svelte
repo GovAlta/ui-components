@@ -28,7 +28,7 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { receive, relay } from "../../common/utils";
 
   // Props
@@ -41,16 +41,15 @@
   let _rootEl: HTMLElement;
   let _parentEl: HTMLElement;
 
-  onMount(async() => {
-    await tick();
+  onMount(() => {
+    addMessageListener();
+
     relay<DropdownItemMountedRelayDetail>(
       _rootEl,
       DropdownItemMountedMsg,
       { el: _rootEl, filter, value, label, mountType: mount },
       { bubbles: true, timeout: 10 },
-    );
-
-    addMessageListener();
+      );
   });
 
   function addMessageListener() {

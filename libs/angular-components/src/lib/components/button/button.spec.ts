@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabButton } from "./button";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabButtonSize, GoabButtonVariant, GoabIconType, Spacing, GoabButtonType } from "@abgov/ui-components-common";
@@ -6,6 +6,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabButton],
   template: `
     <goab-button
       [type]="type"
@@ -48,11 +50,10 @@ describe("GoABButton", () => {
   let fixture: ComponentFixture<TestButtonComponent>;
   let component: TestButtonComponent;
 
-  beforeEach(async() => {
-    await TestBed.configureTestingModule({
-      imports: [GoabButton],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabButton, TestButtonComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestButtonComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestButtonComponent);
@@ -68,7 +69,9 @@ describe("GoABButton", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render the properties", () => {
     const buttonElement = fixture.debugElement.query(By.css("goa-button")).nativeElement;
@@ -85,11 +88,11 @@ describe("GoABButton", () => {
     expect(buttonElement.textContent).toContain("Click me");
   });
 
-  it("should respond to click event", async() => {
+  it("should respond to click event", fakeAsync(() => {
     const onClick = jest.spyOn(component, "onClick");
     const buttonElement = fixture.debugElement.query(By.css("goa-button")).nativeElement;
 
     fireEvent(buttonElement, new CustomEvent("_click"));
     expect(onClick).toHaveBeenCalled();
-  })
+  }))
 })

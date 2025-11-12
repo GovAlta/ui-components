@@ -10,16 +10,19 @@ import {
   Output,
   EventEmitter,
   booleanAttribute,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-accordion",
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   template: `
     <goa-accordion
+      *ngIf="isReady"
       [attr.heading]="heading"
       [attr.secondarytext]="secondaryText"
       [attr.open]="open"
@@ -41,7 +44,7 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabAccordion extends GoabBaseComponent {
+export class GoabAccordion extends GoabBaseComponent implements OnInit {
   @Input() heading?: string;
   @Input() secondaryText?: string;
   @Input({ transform: booleanAttribute }) open?: boolean;
@@ -51,6 +54,21 @@ export class GoabAccordion extends GoabBaseComponent {
   @Input() iconPosition?: GoabAccordionIconPosition;
 
   @Output() onChange = new EventEmitter<boolean>();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onChange(e: Event) {
     const detail = (e as CustomEvent).detail;

@@ -4,7 +4,7 @@ import type { JSX } from "react";
 
 interface WCProps extends Margins {
   name?: string;
-  value?: string | number | boolean;
+  value?: string;
   description?: string | React.ReactNode;
   reveal?: React.ReactNode;
   revealarialabel?: string;
@@ -26,7 +26,7 @@ declare module "react" {
 }
 
 export interface GoabRadioItemProps extends Margins {
-  value?: string | number | boolean;
+  value?: string;
   label?: string;
   name?: string;
   description?: string | React.ReactNode;

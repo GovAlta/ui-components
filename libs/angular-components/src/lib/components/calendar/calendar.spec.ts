@@ -1,9 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabCalendar } from "./calendar";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
+import { GoabCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabCalendar],
   template: `
     <goab-calendar
       [name]="name"
@@ -26,12 +29,12 @@ class TestCalendarComponent {
   min?: Date;
   max?: Date;
   testId?: string;
-  mt?: string;
-  mb?: string;
-  ml?: string;
-  mr?: string;
+  mt?: Spacing;
+  mb?: Spacing;
+  ml?: Spacing;
+  mr?: Spacing;
 
-  onChange() {
+  onChange(event: GoabCalendarOnChangeDetail) {
     /* do nothing */
   }
 }
@@ -39,10 +42,9 @@ class TestCalendarComponent {
 describe("GoABCalendar", () => {
   let fixture: ComponentFixture<TestCalendarComponent>;
   let component: TestCalendarComponent;
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabCalendar],
-      declarations: [TestCalendarComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabCalendar, TestCalendarComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -59,7 +61,9 @@ describe("GoABCalendar", () => {
     component.ml = "s";
     component.mr = "l";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const calendar = fixture.nativeElement.querySelector("goa-calendar");

@@ -3,6 +3,7 @@ export * from "./badge/badge";
 export * from "./block/block";
 export * from "./button/button";
 export * from "./button-group/button-group";
+export * from "./calendar/calendar";
 export * from "./callout/callout";
 export * from "./card/card";
 export * from "./card-content/card-content";

@@ -6,14 +6,17 @@ import {
   TemplateRef,
   EventEmitter,
   Output,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet, CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-microsite-header",
   template: `
     <goa-microsite-header
+      *ngIf="isReady"
       [attr.type]="type"
       [attr.version]="getVersionAsString()"
       [attr.feedbackurl]="feedbackUrl"
@@ -29,10 +32,11 @@ import { NgTemplateOutlet } from "@angular/common";
       </div>
     </goa-microsite-header>
   `,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabMicrositeHeader {
+export class GoabMicrositeHeader implements OnInit {
+  isReady = false;
   @Input({ required: true }) type!: GoabServiceLevel;
   @Input() version!: string | TemplateRef<any>;
   @Input() feedbackUrl?: string;
@@ -40,6 +44,15 @@ export class GoabMicrositeHeader {
   @Input() maxContentWidth?: string;
   @Input() feedbackUrlTarget?: GoabLinkTarget;
   @Input() headerUrlTarget?: GoabLinkTarget;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 
   @Output() onFeedbackClick = new EventEmitter();
 

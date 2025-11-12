@@ -1,5 +1,6 @@
 import { GoabSkeletonSize, GoabSkeletonType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, numberAttribute } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, numberAttribute, OnInit, ChangeDetectorRef } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -7,6 +8,7 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-skeleton",
   template: `
     <goa-skeleton
+      *ngIf="isReady"
       [attr.maxwidth]="maxWidth"
       [attr.size]="size"
       [attr.linecount]="lineCount"
@@ -19,11 +21,24 @@ import { GoabBaseComponent } from "../base.component";
     >
     </goa-skeleton>
   `,
+  imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabSkeleton extends GoabBaseComponent {
+export class GoabSkeleton extends GoabBaseComponent implements OnInit {
+  isReady = false;
   @Input({ required: true }) type!: GoabSkeletonType;
   @Input() maxWidth = "300px";
   @Input() size?: GoabSkeletonSize;
   @Input({ transform: numberAttribute }) lineCount?: number;
+
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
 }

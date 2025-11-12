@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 
 import { GoabInputNumber } from "./input-number";
 import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
@@ -13,6 +13,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabInputNumber],
   template: `
     <goab-input-number
       [type]="type"
@@ -94,6 +96,7 @@ class TestInputNumberComponent {
   ml?: Spacing;
   leadingContent!: string | TemplateRef<any>;
   trailingContent!: string | TemplateRef<any>;
+  trailingIconAriaLabel?: string;
 
   onTrailingIconClick() {
     /** do nothing **/
@@ -116,10 +119,9 @@ describe("GoabInputNumber", () => {
   let fixture: ComponentFixture<TestInputNumberComponent>;
   let component: TestInputNumberComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestInputNumberComponent],
-      imports: [GoabInputNumber],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestInputNumberComponent, GoabInputNumber],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -153,7 +155,9 @@ describe("GoabInputNumber", () => {
     component.error = true;
     component.width = "50ch";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render attributes correctly on the underlying goa-input", () => {
     const inputNumber = fixture.debugElement.query(By.css("goa-input")).nativeElement;
@@ -182,7 +186,7 @@ describe("GoabInputNumber", () => {
     expect(inputNumber?.getAttribute("max")).toBe(`${component.max}`);
   });
 
-  it("should handle onChange event", () => {
+  it("should handle onChange event", fakeAsync(() => {
     const inputNumber = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
     const validateOnChange = jest.spyOn(component, "onChange");
@@ -201,12 +205,14 @@ describe("GoabInputNumber", () => {
       }),
     );
     fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
     expect(validateOnChange).toHaveBeenCalledTimes(1);
     expect(validateOnChange).toHaveBeenCalledWith(expectedDetail);
-  });
+  }));
 
-  it("should handle onFocus event", () => {
+  it("should handle onFocus event", fakeAsync(() => {
     const inputNumber = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
     const validateOnFocus = jest.spyOn(component, "onFocus");
@@ -217,11 +223,13 @@ describe("GoabInputNumber", () => {
       new CustomEvent("_focus", { bubbles: true, composed: true, detail }),
     );
     fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
     expect(validateOnFocus).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it("should handle onBlur event", () => {
+  it("should handle onBlur event", fakeAsync(() => {
     const inputNumber = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
     const validateOnBlur = jest.spyOn(component, "onBlur");
@@ -232,9 +240,11 @@ describe("GoabInputNumber", () => {
       new CustomEvent("_blur", { bubbles: true, composed: true, detail }),
     );
     fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
     expect(validateOnBlur).toHaveBeenCalledTimes(1);
-  });
+  }));
 
   it("should handle onKeyPress event", () => {
     const inputNumber = fixture.debugElement.query(By.css("goa-input")).nativeElement;
@@ -244,12 +254,14 @@ describe("GoabInputNumber", () => {
   });
 
   describe("Text Alignment", () => {
-    it("passes textAlign prop through to web component", () => {
+    it("passes textAlign prop through to web component", fakeAsync(() => {
       const testFixture = TestBed.createComponent(TestInputNumberComponent);
       const testComponent = testFixture.componentInstance;
       testComponent.name = "test-number";
       testComponent.value = 123;
       testComponent.textAlign = "left"; // Override default
+      testFixture.detectChanges();
+      tick();
       testFixture.detectChanges();
 
       const input = testFixture.debugElement.query(By.css("goa-input")).nativeElement;
@@ -260,7 +272,7 @@ describe("GoabInputNumber", () => {
       testFixture.detectChanges();
 
       expect(input?.getAttribute("textalign")).toBe("right");
-    });
+    }));
   });
 
   it("should render leading and trailing content", () => {
@@ -281,6 +293,8 @@ describe("GoabInputNumber", () => {
 });
 
 @Component({
+  standalone: true,
+  imports: [GoabInputNumber],
   template: `
     <goab-input-number
       [leadingContent]="leadingContent"
@@ -296,16 +310,17 @@ class TestStringContentComponent {
 describe("GoabInputNumber with string content", () => {
   let fixture: ComponentFixture<TestStringContentComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestStringContentComponent],
-      imports: [GoabInputNumber],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestStringContentComponent, GoabInputNumber],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestStringContentComponent);
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render string leadingContent and trailingContent", () => {
     const input = fixture.debugElement.query(By.css("goa-input"));

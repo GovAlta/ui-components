@@ -1,10 +1,12 @@
 import { GoabAccordion } from "./accordion";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { GoabAccordionHeadingSize, GoabAccordionIconPosition } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabAccordion],
   template: `
     <goab-accordion
     [heading]="heading"
@@ -31,11 +33,10 @@ describe("GoabAccordion", () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
   let component: TestAccordionComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabAccordion],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAccordion, TestAccordionComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [TestAccordionComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestAccordionComponent);
@@ -47,7 +48,9 @@ describe("GoabAccordion", () => {
     component.iconPosition = "right" as GoabAccordionIconPosition;
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render and set the props correctly", () => {
     const accordionElement = fixture.debugElement.query(

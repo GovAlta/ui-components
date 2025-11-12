@@ -22,10 +22,5 @@
     "type": "git",
     "url": "https://github.com/GovAlta/ui-components.git",
     "directory": "libs/web-components"
-  },
-  "peerDependencies": {
-    "glob": "10.x",
-    "svelte": "4.x",
-    "@sveltejs/vite-plugin-svelte": "3.x"
   }
 }

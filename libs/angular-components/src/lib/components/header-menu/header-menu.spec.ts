@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabAppHeaderMenu } from "./header-menu";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabIconType } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabAppHeaderMenu],
   template: `
     <goab-app-header-menu
       [heading]="heading"
@@ -25,10 +27,9 @@ describe("GoABAppHeaderMenu", () => {
   let fixture: ComponentFixture<TestAppHeaderMenuComponent>;
   let component: TestAppHeaderMenuComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestAppHeaderMenuComponent],
-      imports: [GoabAppHeaderMenu],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAppHeaderMenu, TestAppHeaderMenuComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -39,7 +40,9 @@ describe("GoABAppHeaderMenu", () => {
     component.testId = "foo";
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.debugElement.query(By.css("goa-app-header-menu")).nativeElement;

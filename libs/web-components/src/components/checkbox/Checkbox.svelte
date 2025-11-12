@@ -162,7 +162,7 @@
   function sendMountedMessage() {
     if (!name) return;
 
-    const checkboxEl = (_rootEl.getRootNode() as ShadowRoot)?.host as HTMLElement;
+    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)?.host as HTMLElement;
     const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
 
       relay<FormFieldMountRelayDetail>(

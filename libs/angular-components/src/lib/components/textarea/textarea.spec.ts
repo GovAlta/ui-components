@@ -1,10 +1,13 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTextArea } from "./textarea";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabTextAreaCountBy, Spacing } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
+import { By } from "@angular/platform-browser";
 
 @Component({
+  standalone: true,
+  imports: [GoabTextArea],
   template: `
     <goab-textarea
       [testId]="testId"
@@ -22,6 +25,7 @@ import { fireEvent } from "@testing-library/dom";
       [mb]="mb"
       [ml]="ml"
       (onChange)="onChange()"
+      (onBlur)="onBlur()"
     ></goab-textarea>
   `,
 })
@@ -46,16 +50,19 @@ class TestTextareaComponent {
   onChange() {
     /** do nothing **/
   }
+
+  onBlur() {
+    /** do nothing **/
+  }
 }
 
 describe("GoABTextArea", () => {
   let fixture: ComponentFixture<TestTextareaComponent>;
   let component: TestTextareaComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestTextareaComponent],
-      imports: [GoabTextArea],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestTextareaComponent, GoabTextArea],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TestTextareaComponent);
@@ -73,7 +80,9 @@ describe("GoABTextArea", () => {
     component.mb = "l" as Spacing;
     component.ml = "xl" as Spacing;
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-textarea");
@@ -103,5 +112,65 @@ describe("GoABTextArea", () => {
     );
 
     expect(onChange).toBeCalledTimes(1);
+  });
+
+  it("should dispatch onBlur", () => {
+    const onBlur = jest.spyOn(component, "onBlur");
+
+    const el = fixture.nativeElement.querySelector("goa-textarea");
+    fireEvent(
+      el,
+      new CustomEvent("_blur", {
+        detail: { name: "textarea-name", value: "test value" },
+      }),
+    );
+
+    expect(onBlur).toBeCalledTimes(1);
+  });
+
+  describe("writeValue", () => {
+    it("should set value attribute when writeValue is called", () => {
+      const textareaComponent = fixture.debugElement.query(By.css("goab-textarea")).componentInstance;
+      const textareaElement = fixture.nativeElement.querySelector("goa-textarea");
+
+      textareaComponent.writeValue("new content");
+      expect(textareaElement.getAttribute("value")).toBe("new content");
+
+      textareaComponent.writeValue("updated content");
+      expect(textareaElement.getAttribute("value")).toBe("updated content");
+    });
+
+    it("should set value attribute to empty string when writeValue is called with null or empty", () => {
+      const textareaComponent = fixture.debugElement.query(By.css("goab-textarea")).componentInstance;
+      const textareaElement = fixture.nativeElement.querySelector("goa-textarea");
+
+      // First set a value
+      textareaComponent.writeValue("some content");
+      expect(textareaElement.getAttribute("value")).toBe("some content");
+
+      // Then clear it with null
+      textareaComponent.writeValue(null);
+      expect(textareaElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with undefined
+      textareaComponent.writeValue("test content");
+      textareaComponent.writeValue(undefined);
+      expect(textareaElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with empty string
+      textareaComponent.writeValue("more content");
+      textareaComponent.writeValue("");
+      expect(textareaElement.getAttribute("value")).toBe("");
+    });
+
+    it("should update component value property", () => {
+      const textareaComponent = fixture.debugElement.query(By.css("goab-textarea")).componentInstance;
+
+      textareaComponent.writeValue("updated value");
+      expect(textareaComponent.value).toBe("updated value");
+
+      textareaComponent.writeValue(null);
+      expect(textareaComponent.value).toBe(null);
+    });
   });
 });

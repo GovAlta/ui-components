@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabRadioGroup } from "./radio-group";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
@@ -8,6 +8,8 @@ import {
 } from "@abgov/ui-components-common";
 import { GoabRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
+import { By } from "@angular/platform-browser";
+import { CommonModule } from "@angular/common";
 
 interface RadioOption {
   text: string;
@@ -17,6 +19,8 @@ interface RadioOption {
 }
 
 @Component({
+  standalone: true,
+  imports: [GoabRadioGroup, GoabRadioItem, CommonModule],
   template: `
     <goab-radio-group
       [name]="name"
@@ -73,10 +77,9 @@ describe("GoABRadioGroup", () => {
   let fixture: ComponentFixture<TestRadioGroupComponent>;
   let component: TestRadioGroupComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabRadioGroup, GoabRadioItem],
-      declarations: [TestRadioGroupComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestRadioGroupComponent, GoabRadioGroup, GoabRadioItem],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -104,7 +107,9 @@ describe("GoABRadioGroup", () => {
     ];
 
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-radio-group");
@@ -162,5 +167,51 @@ describe("GoABRadioGroup", () => {
     }));
 
     expect(onChange).toBeCalledWith({name: component.name, value: component.options[0].value});
-  })
+  });
+
+  describe("writeValue", () => {
+    it("should set value attribute when writeValue is called", () => {
+      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupElement = fixture.nativeElement.querySelector("goa-radio-group");
+
+      radioGroupComponent.writeValue("apples");
+      expect(radioGroupElement.getAttribute("value")).toBe("apples");
+
+      radioGroupComponent.writeValue("oranges");
+      expect(radioGroupElement.getAttribute("value")).toBe("oranges");
+    });
+
+    it("should set value attribute to empty string when writeValue is called with null or empty", () => {
+      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupElement = fixture.nativeElement.querySelector("goa-radio-group");
+
+      // First set a value
+      radioGroupComponent.writeValue("bananas");
+      expect(radioGroupElement.getAttribute("value")).toBe("bananas");
+
+      // Then clear it with null
+      radioGroupComponent.writeValue(null);
+      expect(radioGroupElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with undefined
+      radioGroupComponent.writeValue("apples");
+      radioGroupComponent.writeValue(undefined);
+      expect(radioGroupElement.getAttribute("value")).toBe("");
+
+      // Set again and clear with empty string
+      radioGroupComponent.writeValue("oranges");
+      radioGroupComponent.writeValue("");
+      expect(radioGroupElement.getAttribute("value")).toBe("");
+    });
+
+    it("should update component value property", () => {
+      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+
+      radioGroupComponent.writeValue("apples");
+      expect(radioGroupComponent.value).toBe("apples");
+
+      radioGroupComponent.writeValue(null);
+      expect(radioGroupComponent.value).toBe(null);
+    });
+  });
 });

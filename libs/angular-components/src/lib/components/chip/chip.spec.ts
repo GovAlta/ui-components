@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabChip } from "./chip";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabChipTheme, GoabChipVariant, GoabIconType, Spacing } from "@abgov/ui-components-common";
@@ -6,6 +6,8 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabChip],
   template: `
     <goab-chip
       [leadingIcon]="leadingIcon"
@@ -45,10 +47,9 @@ class TestChipComponent {
 describe("GoABChip", () => {
   let fixture: ComponentFixture<TestChipComponent>;
   let component: TestChipComponent;
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GoabChip],
-      declarations: [TestChipComponent],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabChip, TestChipComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -67,7 +68,9 @@ describe("GoABChip", () => {
     component.mb = "l";
     component.ml = "xl";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render properties", () => {
     const chipElement = fixture.debugElement.query(By.css("goa-chip")).nativeElement;
@@ -84,11 +87,11 @@ describe("GoABChip", () => {
     expect(chipElement.getAttribute("ml")).toBe(component.ml);
   });
 
-  it("should allow to handle delete event", async () => {
+  it("should allow to handle delete event", fakeAsync(() => {
     const onClick = jest.spyOn(component, "onClick");
     const chipElement = fixture.debugElement.query(By.css("goa-chip")).nativeElement;
     fireEvent(chipElement, new CustomEvent("_click"));
 
     expect(onClick).toHaveBeenCalled();
-  });
+  }));
 });

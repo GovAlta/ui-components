@@ -1,6 +1,6 @@
-import { render, fireEvent } from '@testing-library/svelte';
+import { render, fireEvent, waitFor } from '@testing-library/svelte';
 import GoACheckbox from './Checkbox.svelte'
-import { it, describe } from "vitest";
+import { it, describe, expect, vi } from "vitest";
 
 const testid = "checkbox-test";
 
@@ -84,7 +84,9 @@ describe('GoACheckbox Component', () => {
       it("should have aria-describedby when description has content", async () => {
         const el = await createElement({ description: "test description" });
         const checkbox = el.container.querySelector("input");
-        expect(checkbox?.getAttribute("aria-describedby")).toBe("description_checkbox-test-name");
+        await waitFor(() => {
+          expect(checkbox?.getAttribute("aria-describedby")).toBe("description_checkbox-test-name");
+        })
       });
     });
   });
@@ -103,8 +105,13 @@ describe('GoACheckbox Component', () => {
         change();
       })
 
+      // Wait for the setTimeout in onMount to complete (sets _value = value)
+      await new Promise(resolve => setTimeout(resolve, 1));
+
       checkbox && await fireEvent.click(checkbox);
-      expect(change).toBeCalledTimes(1);
+      await waitFor(() => {
+        expect(change).toBeCalledTimes(1);
+      });
     });
 
     it("handles change event that results in checked state with value not initialized", async () => {
@@ -228,12 +235,17 @@ describe('GoACheckbox Component', () => {
         ml: "xl",
       });
       const checkbox = await baseElement.findByTestId("checkbox-test");
+      const rootElement = baseElement.container.querySelector(".root");
 
       expect(checkbox).toBeTruthy();
-      expect(checkbox).toHaveStyle("margin-top:var(--goa-space-s)");
-      expect(checkbox).toHaveStyle("margin-right:var(--goa-space-m)");
-      expect(checkbox).toHaveStyle("margin-bottom:var(--goa-space-l)");
-      expect(checkbox).toHaveStyle("margin-left:var(--goa-space-xl)");
+      expect(rootElement).toBeTruthy();
+      await waitFor(() => {
+        const style = rootElement?.getAttribute("style");
+        expect(style).toContain("margin-top:var(--goa-space-s)");
+        expect(style).toContain("margin-right:var(--goa-space-m)");
+        expect(style).toContain("margin-bottom:var(--goa-space-l)");
+        expect(style).toContain("margin-left:var(--goa-space-xl)");
+      });
     });
   });
 

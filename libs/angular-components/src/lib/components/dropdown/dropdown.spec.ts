@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabDropdown } from "./dropdown";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabIconType, Spacing } from "@abgov/ui-components-common";
@@ -8,19 +8,23 @@ import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
 @Component({
+  standalone: true,
+  imports: [GoabDropdown, GoabDropdownItem],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <goab-dropdown
       [leadingIcon]="leadingIcon"
       [name]="name"
       [value]="value"
       [maxHeight]="maxHeight"
-      [placeHolder]="placeholder"
+      [placeholder]="placeholder"
       [filterable]="filterable"
       [disabled]="disabled"
       [error]="error"
       [testId]="testId"
       [id]="id"
       [width]="width"
+      [maxWidth]="maxWidth"
       [mt]="mt"
       [mr]="mr"
       [mb]="mb"
@@ -56,6 +60,7 @@ class TestDropdownComponent {
   placeholder?: string;
   testId?: string;
   width?: string;
+  maxWidth?: string;
   mt?: Spacing;
   mb?: Spacing;
   ml?: Spacing;
@@ -71,10 +76,9 @@ describe("GoABDropdown", () => {
   let fixture: ComponentFixture<TestDropdownComponent>;
   let component: TestDropdownComponent;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TestDropdownComponent],
-      imports: [GoabDropdown, GoabDropdownItem, ReactiveFormsModule],
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestDropdownComponent, GoabDropdown, GoabDropdownItem, ReactiveFormsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -93,6 +97,7 @@ describe("GoABDropdown", () => {
     component.testId = "foo";
     component.id = "foo-dropdown";
     component.width = "200px";
+    component.maxWidth = "400px";
     component.mt = "s";
     component.mr = "m";
     component.mb = "l";
@@ -101,7 +106,9 @@ describe("GoABDropdown", () => {
     component.ariaLabelledBy = "foo-dropdown-label";
     component.autoComplete = "off";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should bind all web-components attribute", () => {
     const el = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
@@ -115,6 +122,7 @@ describe("GoABDropdown", () => {
     expect(el?.getAttribute("arialabel")).toBe("Label");
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el?.getAttribute("autocomplete")).toBe("off");
+    expect(el?.getAttribute("maxwidth")).toBe("400px");
 
     // Check options
     const dropdownItems = el.querySelectorAll("goa-dropdown-item");
@@ -129,9 +137,11 @@ describe("GoABDropdown", () => {
     });
   });
 
-  it("should allow for a single selection", async () => {
+  it("should allow for a single selection", fakeAsync(() => {
     const onChangeMock = jest.spyOn(component, "onChange");
     component.native = true;
+    fixture.detectChanges();
+    tick();
     fixture.detectChanges();
 
     const el = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
@@ -144,5 +154,80 @@ describe("GoABDropdown", () => {
       }),
     );
     expect(onChangeMock).toHaveBeenCalled();
+  }));
+
+  describe("writeValue", () => {
+    it("should set value attribute when writeValue is called with a value", () => {
+      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
+      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+
+      dropdownComponent.writeValue("red");
+      expect(dropdownElement.getAttribute("value")).toBe("red");
+
+      dropdownComponent.writeValue("blue");
+      expect(dropdownElement.getAttribute("value")).toBe("blue");
+    });
+
+    it("should set value attribute to empty string when writeValue is called with null", () => {
+      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
+      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+
+      // First set a value
+      dropdownComponent.writeValue("red");
+      expect(dropdownElement.getAttribute("value")).toBe("red");
+
+      // Then clear it
+      dropdownComponent.writeValue(null);
+      expect(dropdownElement.getAttribute("value")).toBe("");
+    });
+
+    it("should update component value property", () => {
+      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
+
+      dropdownComponent.writeValue("yellow");
+      expect(dropdownComponent.value).toBe("yellow");
+
+      dropdownComponent.writeValue(null);
+      expect(dropdownComponent.value).toBe(null);
+    });
+  });
+
+  describe("_onChange", () => {
+    it("should update component value when user selects an option", () => {
+      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
+      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+
+      fireEvent(
+        dropdownElement,
+        new CustomEvent("_change", {
+          detail: { name: component.name, value: "yellow" },
+        }),
+      );
+
+      expect(dropdownComponent.value).toBe("yellow");
+    });
+
+    it("should update value to null when cleared", () => {
+      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
+      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+
+      // Set initial value
+      fireEvent(
+        dropdownElement,
+        new CustomEvent("_change", {
+          detail: { name: component.name, value: "red" },
+        }),
+      );
+      expect(dropdownComponent.value).toBe("red");
+
+      // Clear value
+      fireEvent(
+        dropdownElement,
+        new CustomEvent("_change", {
+          detail: { name: component.name, value: "" },
+        }),
+      );
+      expect(dropdownComponent.value).toBe(null);
+    });
   });
 });

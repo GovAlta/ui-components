@@ -20,6 +20,7 @@ interface WCProps extends Margins {
   placeholder?: string;
   value?: string;
   width?: string;
+  maxwidth?: string;
   relative?: string;
   id?: string;
   autocomplete?: string;
@@ -38,7 +39,7 @@ declare module "react" {
 
 export interface GoabDropdownProps extends Margins {
   name?: string;
-  value?: string[] | string | number;
+  value?: string[] | string;
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
@@ -56,6 +57,7 @@ export interface GoabDropdownProps extends Margins {
   placeholder?: string;
   testId?: string;
   width?: string;
+  maxWidth?: string;
   autoComplete?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
@@ -63,15 +65,12 @@ export interface GoabDropdownProps extends Margins {
   relative?: boolean;
 }
 
-function stringify(value: string | string[] | number | undefined): string {
+function stringify(value: string | string[] | undefined): string {
   if (typeof value === "undefined") {
     return "";
   }
   if (typeof value === "string") {
     return value;
-  }
-  if (typeof value === "number") {
-    return ""+value;
   }
   return JSON.stringify(value);
 }
@@ -118,6 +117,7 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       placeholder={props.placeholder}
       testid={props.testId}
       width={props.width}
+      maxwidth={props.maxWidth}
       relative={props.relative ? "true" : undefined}
       autocomplete={props.autoComplete}
       id={props.id}

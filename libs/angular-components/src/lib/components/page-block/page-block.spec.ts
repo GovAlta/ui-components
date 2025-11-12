@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabPageBlock } from "./page-block";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabPageBlockSize } from "@abgov/ui-components-common";
 
 @Component({
+  standalone: true,
+  imports: [GoabPageBlock],
   template: `
     <goab-page-block [width]="width" [testId]="testId">
       <div>Inner content</div>
@@ -19,10 +21,9 @@ describe("GoabPageBlock", () => {
   let fixture: ComponentFixture<TestPageBlockComponent>;
   let component: TestPageBlockComponent;
 
-  beforeEach(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TestPageBlockComponent],
-      imports: [GoabPageBlock],
+      imports: [TestPageBlockComponent, GoabPageBlock],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -32,7 +33,9 @@ describe("GoabPageBlock", () => {
     component.testId = "testId";
     component.width = "full";
     fixture.detectChanges();
-  });
+    tick();
+    fixture.detectChanges();
+  }));
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-page-block");
