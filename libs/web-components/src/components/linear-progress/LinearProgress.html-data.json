@@ -1,0 +1,22 @@
+{
+  "name": "goa-linear-progress",
+  "attributes": [
+    {
+      "name": "progress",
+      "type": "number",
+      "description": "Set the progress value. Setting this value will change the type from infinite to progress",
+      "values": [
+        {
+          "name": "-1"
+        }
+      ],
+      "default": "-1"
+    }
+  ],
+  "references": [
+    {
+      "name": "GoA Linear progress",
+      "url": "{{siteUrl}}/?path=/docs/components-linear-progress--basic"
+    }
+  ]
+}

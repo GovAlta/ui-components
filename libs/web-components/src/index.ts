@@ -49,6 +49,7 @@ export * from "./components/hero-banner/HeroBanner.svelte";
 export * from "./components/icon-button/IconButton.svelte";
 export * from "./components/icon/Icon.svelte";
 export * from "./components/input/Input.svelte";
+export * from "./components/linear-progress/LinearProgress.svelte";
 export * from "./components/link/Link.svelte";
 export * from "./components/link-button/LinkButton.svelte";
 export * from "./components/menu-button/MenuAction.svelte";
