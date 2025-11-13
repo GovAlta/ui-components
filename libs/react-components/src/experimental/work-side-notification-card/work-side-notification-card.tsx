@@ -7,6 +7,7 @@ interface WCProps {
   title?: string;
   description?: string;
   maxwidth?: string;
+  unread?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 declare module "react" {
@@ -33,6 +34,7 @@ export interface GoabWorkSideNotificationCardProps {
   title?: string;
   description?: string;
   maxWidth?: string;
+  unread?: boolean;
   onClick?: (id: string) => void;
   badge?: ReactNode;
 }
@@ -46,6 +48,7 @@ export function GoaxWorkSideNotificationCard({
   onClick,
   badge,
   maxWidth,
+  unread,
 }: GoabWorkSideNotificationCardProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   const timestampString = timestamp instanceof Date ? timestamp.toISOString() : timestamp;
@@ -69,6 +72,7 @@ export function GoaxWorkSideNotificationCard({
       ref={el}
       id={id}
       type={type}
+      unread={unread ? "true" : "false"}
       timestamp={timestampString}
       title={title}
       description={description}

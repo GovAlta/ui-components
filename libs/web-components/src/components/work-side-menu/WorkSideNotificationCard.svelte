@@ -4,7 +4,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
-  import { dispatch } from "../../common/utils";
+  import { dispatch, toBoolean } from "../../common/utils";
 
   // Validator
   const [Types, validateType] = typeValidator(
@@ -21,11 +21,15 @@
   export let description: string = "";
   export let id: string = ""; // to identify which notification is clicked
   export let maxwidth: string = "";
+  export let unread: string = "true";
 
   let _rootEl: HTMLElement;
   let _transformTime: string = "";
+  let _fullDate: string = "";
 
   $: _transformTime = formatTimestamp(timestamp ? new Date(timestamp) : null);
+  $: _unread = toBoolean(unread);
+  $: _fullDate = formatFullDate(timestamp ? new Date(timestamp) : null);
 
   onMount(() => {
     validateType(type);
@@ -63,6 +67,33 @@
       hour12: true
     });
   }
+
+  function formatFullDate(date: Date | null): string {
+    if (!date || !date.getTime()) return "";
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    const dateOnly = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const fullDateString = date.toLocaleString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    })
+    if (dateOnly.getTime() === today.getTime()) {
+      return `Today, ${fullDateString.split(", ").slice(1).join(", ")}`;
+    }
+    if (dateOnly.getTime() === yesterday.getTime()) {
+      return `Yesterday, ${fullDateString.split(", ").slice(1).join(", ")}`;
+    }
+    return fullDateString;
+  }
 </script>
 
 <!-- HTML -->
@@ -92,13 +123,14 @@
     </goa-text>
   </div>
 </div>
-<div class="timestamp-container">
-  {#if _transformTime.includes("Now") || _transformTime.includes("min ago") || _transformTime.includes("h ago")}
-    <span class="time-dot"></span>
-  {/if}
-  <goa-text as="span" size="body-xs">{_transformTime}</goa-text>
-</div>
-
+<goa-tooltip content={_fullDate} position="left">
+  <div class="timestamp-container" aria-label={_fullDate}>
+    {#if _unread}
+      <span class="unread-dot"></span>
+    {/if}
+    <goa-text as="span" size="body-xs">{_transformTime}</goa-text>
+  </div>
+</goa-tooltip>
 </div>
 
 <!-- Style -->
@@ -123,12 +155,11 @@
     transition: background-color 0.2s ease;
   }
   .card:hover {
-    background: var(--goa-color-greyscale-100);
+    background: var(--goa-color-text-default);
   }
   .card:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: -2px;
-    background: var(--goa-color-greyscale-100);
   }
   .card.type-default {
     background: white;
@@ -145,25 +176,12 @@
   .card.type-info {
     background: var(--goa-color-info-background);
   }
-
-  /* Hover states for colored backgrounds */
-  .card.type-warning:hover,
-  .card.type-critical:hover {
-    background: #FFF3CC;
+  .card.type-default:hover, .card.type-critical:hover, .card.type-warning:hover, .card.type-success:hover, .card.type-info:hover {
+    background: var(--goa-color-greyscale-200);
   }
-
-  .card.type-success:hover {
-    background: #E0FFE8;
+  .card.type-default:focus-visible, .card.type-critical:focus-visible, .card.type-warning:focus-visible, .card.type-success:focus-visible, .card.type-info:focus-visible {
+    background: var(--goa-color-greyscale-100);
   }
-
-  .card.type-info:hover {
-    background: #CCE7FF;
-  }
-
-  .card.type-event:hover {
-    background: #E6CCFF;
-  }
-
   /* Content area (left side) */
   .content {
     flex: 1;
@@ -213,8 +231,8 @@
     margin-top: 2px; /* Align with title baseline */
   }
 
-  /* Green dot for recent notifications */
-  .time-dot {
+  /* Green dot for unread notifications */
+  .unread-dot {
     display: inline-block;
     width: 8px;
     height: 8px;
