@@ -2,7 +2,6 @@ import { cleanup, fireEvent, render, waitFor } from "@testing-library/svelte";
 import GoADropdown from "./Dropdown.svelte";
 import GoADropdownWrapper from "./DropdownWrapper.test.svelte";
 import { describe, it } from "vitest";
-import { tick } from "svelte";
 import userEvent from "@testing-library/user-event";
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 
@@ -1185,7 +1184,7 @@ describe("GoADropdown", () => {
 
         await waitFor(() => {
           const popover = result.container.querySelector("goa-popover");
-          expect(popover?.getAttribute("width")).toBe("min(300px, 100%)");
+          expect(popover?.getAttribute("width")).toBe("300px");
         });
       });
 
