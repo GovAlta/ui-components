@@ -25,5 +25,22 @@
   .linear-progress {
     width: 100%;
     height: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--goa-space-xs);
+    border-radius: 4px;
+  }
+  .linear-progress progress {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-xs);
+  }
+
+  .linear-progress span {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-xs);
+    flex-shrink: 0;
   }
 </style>
