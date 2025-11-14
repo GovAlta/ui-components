@@ -14,9 +14,12 @@
 </script>
 
 <div class="linear-progress">
-  <progress max="100" value={progress >= 0 && progress <= 100 ? progress : null}
+  <progress
+    class="progress-bar"
+    max="100"
+    value={progress >= 0 && progress <= 100 ? progress : null}
   ></progress>
-  <span>
+  <span class="percentage">
     {Math.max(0, progress)}%
   </span>
 </div>
@@ -37,7 +40,7 @@
     gap: var(--goa-space-xs);
   }
 
-  .linear-progress span {
+  .linear-progress span.percentage {
     display: flex;
     align-items: center;
     gap: var(--goa-space-xs);
