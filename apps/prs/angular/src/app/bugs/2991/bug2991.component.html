@@ -1,0 +1,75 @@
+<div class="bug2991">
+  <header class="bug2991__intro">
+    <h1>Bug 2991 &mdash; Form item and input coverage</h1>
+    <p>
+      This manual page lists the combinations requested for bug 2991 so each scenario can
+      be exercised across Angular and React implementations.
+    </p>
+  </header>
+
+  <form>
+    <section class="bug2991__group">
+      <h2>Form item requirement states</h2>
+      <goab-form-item label="Required field" requirement="required">
+        <goab-input name="required-example"></goab-input>
+      </goab-form-item>
+      <goab-form-item label="Optional field" requirement="optional">
+        <goab-input name="optional-example"></goab-input>
+      </goab-form-item>
+    </section>
+
+    <section class="bug2991__group">
+      <h2>Help text usage</h2>
+      <goab-form-item
+        label="Field with guidance"
+        helpText="Add the two-letter province or state code."
+      >
+        <goab-input name="helptext-example"></goab-input>
+      </goab-form-item>
+    </section>
+
+    <section class="bug2991__group">
+      <h2>Error set via onChange</h2>
+      <goab-form-item label="Three digit code" [error]="validationError">
+        <goab-input
+          name="validation-example"
+          (onChange)="onValidatedChange($event)"
+        ></goab-input>
+      </goab-form-item>
+    </section>
+
+    <section class="bug2991__group bug2991__group--standalone">
+      <h2>Inputs without form item</h2>
+
+      <article>
+        <h3>ariaLabel property</h3>
+        <goab-input
+          name="aria-label-example"
+          [ariaLabel]="'Search keywords'"
+        ></goab-input>
+      </article>
+
+      <article>
+        <h3>ariaLabelledBy property</h3>
+        <label id="aria-labelledby-example" class="sr-only">Reference number</label>
+        <goab-input
+          name="aria-labelledby-example"
+          [ariaLabelledBy]="'aria-labelledby-example'"
+        ></goab-input>
+      </article>
+
+      <article>
+        <h3>Placeholder only</h3>
+        <goab-input
+          name="placeholder-only-example"
+          placeholder="Standalone input with placeholder"
+        ></goab-input>
+      </article>
+
+      <article>
+        <h3>No label or placeholder</h3>
+        <goab-input name="bare-input-example"></goab-input>
+      </article>
+    </section>
+  </form>
+</div>

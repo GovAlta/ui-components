@@ -1,0 +1,84 @@
+<goab-block direction="column" gap="l">
+  <goab-block direction="column" gap="s">
+    <goab-text tag="h1">Feature 2054 - maxWidth comparison showcase</goab-text>
+    <goab-text tag="p">
+      Each example keeps content identical and only varies the <code>maxWidth</code> value
+      so you can compare how dropdowns, text areas, and tooltips respond at three distinct
+      sizes.
+    </goab-text>
+  </goab-block>
+
+  <ng-template #tooltipContentTpl>
+    <goab-text tag="span" slot="content">{{ tooltipContent }}</goab-text>
+  </ng-template>
+
+  <goab-block direction="column" gap="m">
+    <goab-text tag="h2">Dropdown examples</goab-text>
+    <goab-block direction="column" gap="m">
+      <goab-block
+        *ngFor="let example of examples"
+        direction="column"
+        gap="s"
+        class="demo-card"
+      >
+        <goab-text tag="h3">{{ example.label }}</goab-text>
+        <goab-text tag="p">
+          maxWidth set to {{ example.maxWidth }} while width remains at 800px. Item labels
+          share the same text to highlight truncation and wrapping.
+        </goab-text>
+        <goab-dropdown
+          name="dropdown-{{ example.maxWidth }}"
+          placeholder="Select an option"
+          width="800px"
+          [maxWidth]="example.maxWidth"
+        >
+          <goab-dropdown-item
+            *ngFor="let item of dropdownItems"
+            [label]="item.label"
+            [value]="item.value"
+          ></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-block>
+    </goab-block>
+  </goab-block>
+
+  <goab-block direction="column" gap="m">
+    <goab-text tag="h2">Textarea examples</goab-text>
+    <goab-block direction="column" gap="m">
+      <goab-block
+        *ngFor="let example of examples"
+        direction="column"
+        gap="s"
+        class="demo-card"
+      >
+        <goab-text tag="h3">{{ example.label }}</goab-text>
+        <goab-text tag="p">
+          The textarea width is fixed at 800px to match the dropdowns, allowing the
+          maxWidth value alone to dictate the rendered width.
+        </goab-text>
+        <goab-textarea
+          [name]="'textarea-' + example.maxWidth"
+          width="800px"
+          [maxWidth]="example.maxWidth"
+          [value]="textareaValue"
+          rows="4"
+        ></goab-textarea>
+      </goab-block>
+    </goab-block>
+  </goab-block>
+
+  <goab-text tag="h2">Tooltip examples</goab-text>
+  <div *ngFor="let example of examples" direction="column" gap="s">
+    <goab-text tag="h3">{{ example.label }}</goab-text>
+    <goab-text tag="p">
+      Tooltip content mirrors the textarea copy so the surface width shifts solely from
+      the maxWidth setting.
+    </goab-text>
+    <goab-tooltip [content]="tooltipContentTemplate" [maxWidth]="example.maxWidth">
+      <goab-text tag="span"> Hover to compare maxWidth behaviour </goab-text>
+      <ng-template #tooltipContentTemplate>
+        {{ tooltipContent }}
+      </ng-template>
+    </goab-tooltip>
+  </div>
+</goab-block>

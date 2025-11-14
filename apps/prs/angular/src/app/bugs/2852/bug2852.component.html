@@ -1,0 +1,40 @@
+<goab-block direction="column" gap="l">
+  <h2>Bug #2852: FormItem with Filterable Dropdown Test</h2>
+
+  <goab-form-item label="Select US State Capital">
+    <goab-dropdown
+      name="us-capitals"
+      [value]="selectedCapital"
+      (onChange)="onChange($event)"
+      [filterable]="true"
+      placeholder="Search for a state capital..."
+    >
+      <goab-dropdown-item
+        *ngFor="let capital of usCapitals"
+        [value]="capital.value"
+        [label]="capital.label"
+      ></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+
+  <div>Selected Capital: {{ getSelectedCapitalLabel() }}</div>
+
+  <goab-form-item label="Control Input">
+    <goab-input name="control-input" placeholder="This is a control input"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Dropdown without Filterable">
+    <goab-dropdown
+      name="us-capitals"
+      [value]="selectedCapital"
+      (onChange)="onChange($event)"
+      [filterable]="false"
+      placeholder="Search for a state capital..."
+    >
+      <goab-dropdown-item
+        *ngFor="let capital of usCapitals"
+        [value]="capital.value"
+        [label]="capital.label"
+      ></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</goab-block>

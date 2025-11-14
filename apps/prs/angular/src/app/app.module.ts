@@ -1,27 +1,36 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-
 import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
+import { appRoutes } from "./app.routes";
 import { AngularComponentsModule } from "@abgov/angular-components";
-import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgForOf, NgIf } from "@angular/common";
-import { AbgovAppComponent } from "./abgov-app";
-import { AppRoutingModule } from "./app-routing.module";
+
 import "@abgov/web-components";
 
+import {
+  GoabAppHeader,
+  GoabAppFooter,
+  GoabMicrositeHeader,
+  GoabAppHeaderMenu,
+  GoabSideMenu,
+  GoabSideMenuGroup,
+} from "@abgov/angular-components";
+
 @NgModule({
-  declarations: [],
+  declarations: [AppComponent],
   imports: [
-    AppComponent,
-    AngularComponentsModule,
-    AbgovAppComponent,
+    GoabAppHeader,
+    GoabAppFooter,
+    GoabMicrositeHeader,
+    GoabAppHeaderMenu,
+    GoabSideMenu,
+    GoabSideMenuGroup,
     BrowserModule,
-    AppRoutingModule,
+    RouterModule.forRoot(appRoutes),
+    AngularComponentsModule,
     FormsModule,
-    NgForOf,
-    NgIf,
-    NoopAnimationsModule,
     ReactiveFormsModule,
   ],
   providers: [],

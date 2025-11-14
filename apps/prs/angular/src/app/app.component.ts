@@ -1,14 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "abgov-root",
-  template: "<router-outlet></router-outlet>",
-  standalone: true,
-  imports: [RouterOutlet],
+  templateUrl: "./app.component.html",
+  styles: ``,
+  standalone: false,
 })
-export class AppComponent implements OnInit {
-  ngOnInit() {
-    console.log("Hello from Angular");
-  }
-}
+export class AppComponent {}

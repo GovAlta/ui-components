@@ -1,1 +1,7 @@
 /* Your styles goes here. */
+.header-dropdown {
+  display: flex;
+  font-size: var(--goa-font-size-2);
+  text-decoration: underline;
+  color: var(--goa-color-interactive-default);
+}

@@ -1,0 +1,24 @@
+.scenario-wrapper {
+  min-width: 0;
+}
+
+goab-block.scenario-card {
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  min-width: 0;
+}
+
+goab-block.scenario-card goab-form-item {
+  margin-top: 8px;
+}
+
+.measurement {
+  color: #505050;
+}
+
+.scenario-emphasis {
+  font-weight: 600;
+}

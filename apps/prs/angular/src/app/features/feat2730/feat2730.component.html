@@ -1,0 +1,206 @@
+<!--
+<h1>Temporary Notification Feature Test (Issue #2730)</h1>
+<p>Testing the new temporary notification component and controller functionality</p>
+
+<!-- Controller Setup -->
+<goab-temporary-notification-ctrl
+  [verticalPosition]="verticalPosition"
+  [horizontalPosition]="horizontalPosition"
+  testId="notification-controller"
+/>
+
+<goab-block gap="l" direction="column">
+  <!-- Controller Positioning -->
+  <h2>Controller Positioning</h2>
+  <p>Configure where notifications appear on the screen</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-form-item label="Vertical Position">
+      <goab-dropdown
+        name="vertical-position"
+        [value]="verticalPosition"
+        (onChange)="onVerticalPositionChange($event)"
+        testId="vertical-position-dropdown"
+      >
+        <goab-dropdown-item value="top">Top</goab-dropdown-item>
+        <goab-dropdown-item value="bottom">Bottom</goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+
+    <goab-form-item label="Horizontal Position">
+      <goab-dropdown
+        name="horizontal-position"
+        [value]="horizontalPosition"
+        (onChange)="onHorizontalPositionChange($event)"
+        testId="horizontal-position-dropdown"
+      >
+        <goab-dropdown-item value="left">Left</goab-dropdown-item>
+        <goab-dropdown-item value="center">Center</goab-dropdown-item>
+        <goab-dropdown-item value="right">Right</goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Notification Configuration -->
+  <h2>Notification Configuration</h2>
+  <p>Customize notification settings</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-form-item label="Message">
+      <goab-input
+        name="message"
+        [value]="message"
+        (onChange)="changeMessage($event)"
+        testId="message-input"
+        placeholder="Enter notification message..."
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Duration (ms)">
+      <goab-input
+        name="duration"
+        [value]="duration.toString()"
+        (onChange)="changeDuration($event)"
+        testId="duration-input"
+        type="number"
+        placeholder="4000"
+      >
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <goab-block gap="m" direction="row">
+    <goab-form-item label="Action Text (optional)">
+      <goab-input
+        name="action-text"
+        [value]="actionText"
+        (onChange)="changeActionText($event)"
+        testId="action-text-input"
+        placeholder="e.g., Undo, Retry, etc."
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Duration Presets">
+      <goab-block gap="xs" direction="row">
+        <goab-button testId="duration-short" (onClick)="setDurationShort()"
+          >Short (2s)</goab-button
+        >
+        <goab-button testId="duration-medium" (onClick)="setDurationMedium()"
+          >Medium (4s)</goab-button
+        >
+        <goab-button testId="duration-long" (onClick)="setDurationLong()"
+          >Long (6s)</goab-button
+        >
+        <goab-button testId="duration-custom" (onClick)="setDurationCustom()"
+          >Custom (8s)</goab-button
+        >
+      </goab-block>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Basic Notification Tests -->
+  <h2>Basic Notification Tests</h2>
+  <p>Test different notification types and behaviors</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-button testId="basic-notification" (onClick)="showBasicNotification()">
+      Show Basic Notification
+    </goab-button>
+    <goab-button testId="success-notification" (onClick)="showSuccessNotification()">
+      Show Success Notification
+    </goab-button>
+    <goab-button testId="failure-notification" (onClick)="showFailureNotification()">
+      Show Failure Notification
+    </goab-button>
+  </goab-block>
+
+  <goab-block gap="m" direction="row">
+    <goab-button
+      testId="indeterminate-notification"
+      (onClick)="showIndeterminateNotification()"
+    >
+      Show Indeterminate Notification
+    </goab-button>
+    <goab-button testId="action-notification" (onClick)="showNotificationWithAction()">
+      Show Notification with Action
+    </goab-button>
+  </goab-block>
+
+  <!-- Progress Notification Tests -->
+  <h2>Progress Notification Tests</h2>
+  <p>Test determinate and indeterminate progress indicators</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-button testId="start-progress" (onClick)="startProgressNotification()">
+      Start Progress Notification
+    </goab-button>
+    <goab-button testId="stop-progress" (onClick)="stopProgressNotification()">
+      Stop Progress
+    </goab-button>
+  </goab-block>
+
+  <goab-block gap="s" direction="column" *ngIf="currentProgressUuid">
+    <goab-text tag="p"><strong>Current Progress:</strong> {{ progressValue }}%</goab-text>
+    <goab-text tag="p"
+      ><strong>Progress UUID:</strong> {{ currentProgressUuid }}</goab-text
+    >
+  </goab-block>
+
+  <!-- Queue Testing -->
+  <h2>Queue Testing</h2>
+  <p>Test multiple notifications in queue (FIFO order)</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-button testId="multiple-notifications" (onClick)="showMultipleNotifications()">
+      Show 5 Notifications in Queue
+    </goab-button>
+  </goab-block>
+
+  <!-- Cancel/Replace Testing -->
+  <h2>Cancel/Replace Testing</h2>
+  <p>Test cancelling and replacing notifications</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-button
+      testId="cancellable-notification"
+      (onClick)="showCancellableNotification()"
+    >
+      Show Cancellable Notification
+    </goab-button>
+    <goab-button testId="cancel-notification" (onClick)="cancelLastNotification()">
+      Cancel Last Notification
+    </goab-button>
+  </goab-block>
+
+  <!-- Test Results -->
+  <h2>Test Results</h2>
+  <p>Track notification history and UUIDs</p>
+
+  <goab-block gap="m" direction="row">
+    <goab-text tag="p"
+      ><strong>Last Notification UUID:</strong>
+      {{ lastNotificationUuid || "None" }}</goab-text
+    >
+    <goab-button testId="clear-history" (onClick)="clearHistory()">
+      Clear History
+    </goab-button>
+  </goab-block>
+
+  <h3>Notification History (Last 10)</h3>
+  <goab-block gap="s" direction="column">
+    <div *ngFor="let notification of notificationHistory" class="history-item">
+      <goab-text tag="p">
+        <strong>{{ notification.timestamp.toLocaleTimeString() }}</strong> -
+        <strong>{{ notification.type }}</strong
+        >: {{ notification.message }}
+      </goab-text>
+      <goab-text tag="span">UUID: {{ notification.uuid }}</goab-text>
+    </div>
+    <goab-text tag="p" *ngIf="notificationHistory.length === 0">
+      No notifications yet. Try clicking some buttons above!
+    </goab-text>
+  </goab-block>
+</goab-block>
+-->

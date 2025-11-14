@@ -1,0 +1,74 @@
+<h1>Feature 1328 Form Demo</h1>
+
+<form class="demo-form" (submit)="handleSubmit($event)" style="margin-bottom: 30px">
+  <goab-form-item label="Sample Input" mb="xl">
+    <goab-input
+      id="feature-input"
+      name="featureInput"
+      placeholder="Enter some text"
+      [value]="inputValue"
+      (onChange)="handleInputChange($event)"
+      (onBlur)="handleInputBlur($event)"
+    />
+  </goab-form-item>
+
+  <goab-form-item label="Sample Dropdown" mb="xl">
+    <goab-dropdown
+      id="feature-dropdown"
+      name="featureDropdown"
+      [value]="dropdownValue"
+      (onChange)="handleDropdownChange($event)"
+      width="50%"
+    >
+      <goab-dropdown-item value="red" label="Red"></goab-dropdown-item>
+      <goab-dropdown-item value="green" label="Green"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item
+        value="long"
+        label="An extra long label to test the width of the Dropdown"
+      ></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+
+  <goab-form-item label="Sample Filterable Dropdown" mb="xl">
+    <goab-dropdown
+      id="filterable-dropdown"
+      name="filterableDropdown"
+      [value]="dropdownValue"
+      (onChange)="handleDropdownChange($event)"
+      [filterable]="true"
+    >
+      <goab-dropdown-item value="red" label="Red"></goab-dropdown-item>
+      <goab-dropdown-item value="green" label="Green"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item
+        value="long"
+        label="An extra long label to test the width of the Dropdown"
+      ></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+
+  <goab-popover [target]="popoverTrigger" mb="xl" maxWidth="500px">
+    <ng-template #popoverTrigger>
+      <goab-button type="secondary">Show Popover</goab-button>
+    </ng-template>
+    <p>This popover just displays a simple message.</p>
+  </goab-popover>
+
+  <goab-date-picker (onChange)="handleDateChange($event)" />
+</form>
+
+<div style="margin-left: 500px; height: 1200px">
+  <goab-menu-button text="Menu actions" (onAction)="handleAction($event)">
+    <goab-menu-action text="View profile" action="profile" icon="person-circle" />
+    <goab-menu-action text="Notifications" action="notifications" icon="notifications" />
+    <goab-menu-action text="Log out" action="logout" icon="log-out" />
+  </goab-menu-button>
+  <goab-text size="body-s" mt="xs">
+    {{
+      selectedAction
+        ? "Last action: " + selectedAction
+        : "Select a menu option to emit an action event."
+    }}
+  </goab-text>
+</div>

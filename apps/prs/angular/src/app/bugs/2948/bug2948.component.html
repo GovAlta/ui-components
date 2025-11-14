@@ -1,0 +1,98 @@
+<h1>Bug 2948 - Modal Testing</h1>
+<p>
+  Testing different GoabModal configurations with various heading and action patterns.
+</p>
+
+<goab-block gap="m" direction="column">
+  <h2>Modal 1: String Heading</h2>
+  <p>
+    This modal uses a simple string heading and can be closed with the close button or
+    backdrop.
+  </p>
+  <goab-button type="primary" (onClick)="openModal1()"> Open Modal 1 </goab-button>
+
+  <h2>Modal 2: ng-template Heading and Content</h2>
+  <p>
+    This modal uses ng-template for both heading and content, allowing for rich HTML
+    content.
+  </p>
+  <goab-button type="primary" (onClick)="openModal2()"> Open Modal 2 </goab-button>
+
+  <h2>Modal 3: Empty Heading and Actions</h2>
+  <p>This modal has no heading and no actions, demonstrating minimal configuration.</p>
+  <goab-button type="primary" (onClick)="openModal3()"> Open Modal 3 </goab-button>
+
+  <h2>Modal 4: ng-template Heading with ButtonGroup Actions</h2>
+  <p>
+    This modal uses ng-template for heading and contains a ButtonGroup with two buttons in
+    the actions slot.
+  </p>
+  <goab-button type="primary" (onClick)="openModal4()"> Open Modal 4 </goab-button>
+</goab-block>
+
+<!-- Modal 1: String heading -->
+<goab-modal
+  [open]="modal1Open"
+  heading="Simple String Heading"
+  (onClose)="closeModal1()"
+  [closable]="true"
+>
+  <p>
+    This is modal 1 with a simple string heading. It can be closed by clicking the close
+    button or clicking outside the modal.
+  </p>
+  <p>The heading is set using the <code>heading</code> property with a string value.</p>
+</goab-modal>
+
+<!-- Modal 2: ng-template heading and content -->
+<goab-modal
+  [open]="modal2Open"
+  (onClose)="closeModal2()"
+  [closable]="true"
+  [heading]="heading"
+>
+  <ng-template #heading>
+    <div style="display: flex; align-items: center; gap: 8px">
+      <span style="font-weight: bold">Rich Content Modal</span>
+    </div>
+  </ng-template>
+
+  <div>
+    <h3>Welcome to Modal 2!</h3>
+    <p>
+      This modal demonstrates using <code>ng-template</code> for both the heading and
+      content.
+    </p>
+    <ul>
+      <li>The heading can contain <strong>rich HTML content</strong></li>
+      <li>You can include <em>icons, formatting, and complex layouts</em></li>
+      <li>The content area supports <code>any HTML structure</code></li>
+    </ul>
+    <p>This provides maximum flexibility for custom modal designs.</p>
+  </div>
+</goab-modal>
+
+<!-- Modal 3: Empty heading and actions -->
+<goab-modal [open]="modal3Open" heading="" (onClose)="closeModal3()" [closable]="true">
+  <p>This is modal 3 with an empty heading and no actions.</p>
+  <p>It demonstrates the minimal modal configuration possible.</p>
+  <p>The modal can only be closed using the close button or backdrop click.</p>
+</goab-modal>
+
+<!-- Modal 4: ng-template heading with ButtonGroup actions -->
+<goab-modal [open]="modal4Open" (onClose)="closeModal4()">
+  <div>
+    <p>This is modal 4 with a custom heading and action buttons.</p>
+    <p>
+      The actions are implemented using a <code>GoabButtonGroup</code> with two buttons.
+    </p>
+    <p>This pattern is commonly used for confirmation dialogs and form submissions.</p>
+  </div>
+
+  <div slot="actions">
+    <goab-button-group alignment="end">
+      <goab-button type="tertiary" (onClick)="closeModal4()"> Cancel </goab-button>
+      <goab-button type="primary" (onClick)="closeModal4()"> Confirm </goab-button>
+    </goab-button-group>
+  </div>
+</goab-modal>

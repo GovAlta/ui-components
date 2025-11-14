@@ -1,0 +1,101 @@
+<main>
+  <goab-text tag="h1">Bug 2821: Table Header Sorting Issue</goab-text>
+  <goab-text tag="p">
+    Testing the table sorting bug where the first two clicks stay ascending before
+    toggling to descending.
+  </goab-text>
+
+  <goab-block gap="l" direction="column">
+    <section>
+      <goab-text tag="h2">Test Instructions</goab-text>
+      <goab-text tag="p">
+        Click on any column header multiple times to test the sorting behavior:
+      </goab-text>
+      <ol>
+        <li>Click on "Name" header - should show ascending (first click)</li>
+        <li>Click on "Name" header again - should show descending (second click)</li>
+        <li>Click on "Name" header again - should show ascending (third click)</li>
+        <li><strong>Bug:</strong> Currently the first two clicks both show ascending</li>
+      </ol>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Test Table</goab-text>
+      <goab-table (onSort)="handleSort($event)">
+        <thead>
+          <tr>
+            <th>
+              <goab-table-sort-header name="id">ID</goab-table-sort-header>
+            </th>
+            <th>
+              <goab-table-sort-header name="name">Name</goab-table-sort-header>
+            </th>
+            <th>
+              <goab-table-sort-header name="age">Age</goab-table-sort-header>
+            </th>
+            <th>
+              <goab-table-sort-header name="department"
+                >Department</goab-table-sort-header
+              >
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of sampleData">
+            <td>{{ row.id }}</td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.age }}</td>
+            <td>{{ row.department }}</td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Sort Event Log</goab-text>
+      <goab-block gap="s" direction="row">
+        <goab-button type="secondary" size="compact" (click)="resetTest()">
+          Reset Test
+        </goab-button>
+        <goab-text tag="span">Click Count: {{ clickCount }}</goab-text>
+      </goab-block>
+
+      <div
+        *ngIf="sortLog.length > 0; else noLogs"
+        style="
+          border: 1px solid #ccc;
+          padding: 1rem;
+          background-color: #f9f9f9;
+          max-height: 300px;
+          overflow-y: auto;
+        "
+      >
+        <div
+          *ngFor="let log of sortLog; trackBy: trackByIndex"
+          style="margin-bottom: 0.5rem; font-family: monospace"
+        >
+          {{ log }}
+        </div>
+      </div>
+
+      <ng-template #noLogs>
+        <div style="font-style: italic; color: #666">
+          <goab-text tag="p">
+            No sort events yet. Click on a column header to start testing.
+          </goab-text>
+        </div>
+      </ng-template>
+    </section>
+
+    <section>
+      <goab-text tag="h3">Expected Behavior:</goab-text>
+      <ul>
+        <li>Click 1: ascending (↑)</li>
+        <li>Click 2: descending (↓)</li>
+        <li>Click 3: ascending (↑)</li>
+        <li>Click 4: descending (↓)</li>
+        <li>And so on...</li>
+      </ul>
+    </section>
+  </goab-block>
+</main>

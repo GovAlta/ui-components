@@ -1,0 +1,56 @@
+<goab-table width="100%" mb="xl" (onSort)="handleSort($event)">
+  <thead>
+    <tr>
+      <th>
+        <goab-table-sort-header name="claimId" direction="asc">
+          Claim ID
+        </goab-table-sort-header>
+      </th>
+      <th>
+        <goab-table-sort-header name="programId" direction="asc">
+          Program ID
+        </goab-table-sort-header>
+      </th>
+      <th>
+        <goab-table-sort-header name="programName" direction="asc">
+          Program Name
+        </goab-table-sort-header>
+      </th>
+      <th>
+        <goab-table-sort-header name="claimPeriod" direction="asc">
+          Claim Period
+        </goab-table-sort-header>
+      </th>
+      <th>
+        <goab-table-sort-header name="claimStatus" direction="asc">
+          Claim Status
+        </goab-table-sort-header>
+      </th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>000001</td>
+      <td>80000225</td>
+      <td>MI CASA MONTESSORI LTD.</td>
+      <td>July 2025</td>
+      <td>
+        <goab-badge type="midtone" content="In Review" />
+      </td>
+      <td>
+        <goab-popover [target]="target">
+          <goab-button size="compact" type="tertiary" (onClick)="handleClick($event)">
+            Claim submission report
+          </goab-button>
+          <goab-button size="compact" type="tertiary" (onClick)="handleClick($event)">
+            Educators' submission report
+          </goab-button>
+          <ng-template #target>
+            <goab-button type="secondary" size="compact">Click me</goab-button>
+          </ng-template>
+        </goab-popover>
+      </td>
+    </tr>
+  </tbody>
+</goab-table>
