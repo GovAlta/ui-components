@@ -1,0 +1,17 @@
+<goab-form-item label="Upload a file" mb="xl">
+  <goab-file-upload-input
+    variant="dragdrop"
+    (onSelectFile)="uploadFile($event)"
+    maxFileSize="100MB"
+  />
+  <goab-file-upload-card
+    *ngFor="let upload of uploads; index as i"
+    [type]="upload.file.type"
+    [size]="upload.file.size"
+    [filename]="upload.file.name"
+    [progress]="progressList[upload.file.name]"
+    (onDelete)="deleteFile(upload)"
+    (onCancel)="deleteFile(upload)"
+  >
+  </goab-file-upload-card>
+</goab-form-item>

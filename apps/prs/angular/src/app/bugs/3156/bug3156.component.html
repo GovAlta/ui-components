@@ -1,0 +1,95 @@
+<goab-block class="bug3156" direction="column" gap="xl">
+  <goab-text size="heading-l">Bug 3156 &mdash; January disappears in Angular dropdowns</goab-text>
+
+  <goab-text size="body-m">
+    The Calendar hotfix relies on every <code>goa-dropdown-item</code> emitting its
+    <code>dropdown-item:mounted</code> relay with the fully bound label and value.
+    Removing the defer in <code>DropdownItem</code> causes Angular to emit with empty
+    strings, so the dropdown never receives January.
+  </goab-text>
+
+  <section>
+    <goab-text size="heading-m" mb="s">Reproduction checklist</goab-text>
+    <ol class="bug3156__steps">
+      <li>Open the dropdown below &mdash; with the regression the first entry renders blank.</li>
+      <li>Attempt to pick January &mdash; there is nothing to select.</li>
+      <li>Inspect the diagnostics table &mdash; the first mount event carries empty data.</li>
+    </ol>
+  </section>
+
+  <goab-form-item
+    label="Angular month dropdown"
+    helpText="Open the menu to populate the diagnostics table."
+  >
+    <div #dropdownHost>
+      <goab-dropdown name="calendar-month" (onChange)="onDropdownChange($event)">
+        <goab-dropdown-item
+          *ngFor="let month of months; trackBy: trackByValue"
+          [label]="month.label"
+          [value]="month.value"
+        >
+        </goab-dropdown-item>
+      </goab-dropdown>
+    </div>
+  </goab-form-item>
+
+  <goab-text size="body-s">
+    Selected month: {{ selectedMonthLabel }} (value: {{ selectedValue || "None" }})
+  </goab-text>
+
+  <section>
+    <goab-text size="heading-m" mb="s">Calendar DatePicker verification</goab-text>
+    <goab-text size="body-m" mb="m">
+      The original bug removed January from the DatePicker&apos;s month dropdown. Open the
+      control below and confirm that January now appears and can be selected. With the
+      regression active, the month list starts at February.
+    </goab-text>
+
+    <goab-form-item
+      label="DatePicker &mdash; type=&quot;calendar&quot;"
+      helpText="Open the month selector to ensure January is present."
+    >
+      <goab-date-picker
+        name="calendar-date-picker"
+        type="calendar"
+        (onChange)="onCalendarChange($event)"
+      ></goab-date-picker>
+    </goab-form-item>
+
+    <goab-text size="body-s">
+      Last picked date value: {{ calendarValueLabel }}
+    </goab-text>
+  </section>
+
+  <section class="bug3156__diagnostics">
+    <goab-text size="heading-m" mb="s">Captured dropdown-item:mounted events</goab-text>
+
+    <p *ngIf="mountedItems.length === 0" class="bug3156__empty">
+      Open the dropdown above to log the mount events.
+    </p>
+
+    <table *ngIf="mountedItems.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Label</th>
+          <th scope="col">Value</th>
+          <th scope="col">Mount type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mountedItems; index as index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ item.label }}</td>
+          <td>{{ item.value }}</td>
+          <td>{{ item.mountType }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <goab-text size="body-s" mt="s">
+      Expected: January appears as row 1 with value "0". Regression: the row reads "(empty)",
+      so the dropdown never registers January and the Calendar regression remains.
+    </goab-text>
+  </section>
+</goab-block>

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import {
   GoabAppFooter,
-  GoabAppHeader,
   GoabMicrositeHeader,
   GoabOneColumnLayout,
   GoabSideMenu,
@@ -39,17 +38,13 @@ import {
   GoabAppFooterMetaSection,
   GoabAppFooterNavSection,
   GoabFileUploadInput,
-  GoabFileUploadCard,
   GoabSideMenuHeading,
-  GoabAccordion,
   GoabSkeleton,
   GoabCheckbox,
   GoabFormStep,
   GoabFormStepper,
   GoabPages,
-  GoabCallout,
   GoabPopover,
-  GoabAppHeaderMenu,
   GoabTable,
   GoabTableSortHeader,
   GoabGrid,
@@ -115,19 +110,6 @@ export function AllComponents() {
   }
 
   const [users, setUsers] = useState<User[]>([]);
-  const [open, setOpen] = useState(false);
-  const [openNoActions, setOpenNoActions] = useState(false);
-  const [position, setPosition] = useState("left");
-  const [dateTaken, setDateTaken] = useState("today");
-  const [hasActionsSlot, setActionsSlot] = useState("y");
-
-  function openDrawer() {
-    if (hasActionsSlot === "n") {
-      setOpenNoActions(true);
-    } else {
-      setOpen(true);
-    }
-  }
 
   const _users: User[] = [
     {
@@ -151,6 +133,7 @@ export function AllComponents() {
       age: 31,
     },
   ];
+
   React.useEffect(() => {
     setUsers(_users);
   }, []);
@@ -3940,186 +3923,186 @@ export function AllComponents() {
               <GoabBlock gap="2xl" mb="xl" direction="column">
                 <GoabTable width="100%">
                   <thead>
-                  <tr>
-                    <th>Status</th>
-                    <th>Text</th>
-                    <th className="Goab-table-number-header">Number</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr>
+                      <th>Status</th>
+                      <th>Text</th>
+                      <th className="Goab-table-number-header">Number</th>
+                      <th>Action</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
                   </tbody>
                 </GoabTable>
 
                 <GoabTable width="100%" variant="relaxed">
                   <thead>
-                  <tr>
-                    <th>Status</th>
-                    <th>Text</th>
-                    <th className="Goab-table-number-header">Number</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr>
+                      <th>Status</th>
+                      <th>Text</th>
+                      <th className="Goab-table-number-header">Number</th>
+                      <th>Action</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
                   </tbody>
                 </GoabTable>
 
                 <GoabTable onSort={(e) => sortData(e.sortBy, e.sortDir)}>
                   <thead>
-                  <tr>
-                    <th>
-                      <GoabTableSortHeader name="firstName">
-                        First name
-                      </GoabTableSortHeader>
-                    </th>
-                    <th>
-                      <GoabTableSortHeader name="lastName">
-                        Last name
-                      </GoabTableSortHeader>
-                    </th>
-                    <th>
-                      <GoabTableSortHeader name="age" direction="asc">
-                        Age
-                      </GoabTableSortHeader>
-                    </th>
-                  </tr>
+                    <tr>
+                      <th>
+                        <GoabTableSortHeader name="firstName">
+                          First name
+                        </GoabTableSortHeader>
+                      </th>
+                      <th>
+                        <GoabTableSortHeader name="lastName">
+                          Last name
+                        </GoabTableSortHeader>
+                      </th>
+                      <th>
+                        <GoabTableSortHeader name="age" direction="asc">
+                          Age
+                        </GoabTableSortHeader>
+                      </th>
+                    </tr>
                   </thead>
                   <tbody>
-                  {users.map((user) => (
-                    <tr key={user.firstName}>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.age}</td>
-                    </tr>
-                  ))}
+                    {users.map((user) => (
+                      <tr key={user.firstName}>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
+                        <td>{user.age}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </GoabTable>
               </GoabBlock>
@@ -4449,194 +4432,194 @@ export function AllComponents() {
               <GoabBlock gap="xl" mb="xl" direction="column">
                 <GoabTable width="100%">
                   <thead>
-                  <tr>
-                    <th>Status</th>
-                    <th>Text</th>
-                    <th className="Goab-table-number-header">Number</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr>
+                      <th>Status</th>
+                      <th>Text</th>
+                      <th className="Goab-table-number-header">Number</th>
+                      <th>Action</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>
-                      Text that runs really really really really really really really
-                      really really really really really really really really really
-                      really really really really really really really really really
-                      really really really really really really really really really
-                      really really long{" "}
-                    </td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>
+                        Text that runs really really really really really really really
+                        really really really really really really really really really
+                        really really really really really really really really really
+                        really really really really really really really really really
+                        really really long{" "}
+                      </td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
                   </tbody>
                 </GoabTable>
 
                 <GoabTable width="100%" variant="relaxed">
                   <thead>
-                  <tr>
-                    <th>Status</th>
-                    <th>Text</th>
-                    <th className="Goab-table-number-header">Number</th>
-                    <th>Action</th>
-                  </tr>
+                    <tr>
+                      <th>Status</th>
+                      <th>Text</th>
+                      <th className="Goab-table-number-header">Number</th>
+                      <th>Action</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>
-                      Text that runs really really really really really really really
-                      really really really really really really really really really
-                      really really really really really really really really really
-                      really really really really really really really really really
-                      really really long
-                    </td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <GoabBadge
-                        type="information"
-                        content="Badge text"
-                        mt="2xs"
-                      ></GoabBadge>
-                    </td>
-                    <td>Lorem ipsum</td>
-                    <td className="Goab-table-number-column">1234567890</td>
-                    <td>
-                      <GoabButton type="tertiary" size="compact">
-                        Action
-                      </GoabButton>
-                    </td>
-                  </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>
+                        Text that runs really really really really really really really
+                        really really really really really really really really really
+                        really really really really really really really really really
+                        really really really really really really really really really
+                        really really long
+                      </td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <GoabBadge
+                          type="information"
+                          content="Badge text"
+                          mt="2xs"
+                        ></GoabBadge>
+                      </td>
+                      <td>Lorem ipsum</td>
+                      <td className="Goab-table-number-column">1234567890</td>
+                      <td>
+                        <GoabButton type="tertiary" size="compact">
+                          Action
+                        </GoabButton>
+                      </td>
+                    </tr>
                   </tbody>
                 </GoabTable>
 
                 <GoabTable onSort={(e) => sortData(e.sortBy, e.sortDir)}>
                   <thead>
-                  <tr>
-                    <th>First name</th>
-                    <th>
-                      <GoabTableSortHeader name="lastName">
-                        Last name
-                      </GoabTableSortHeader>
-                    </th>
-                    <th>
-                      <GoabTableSortHeader name="age" direction="asc">
-                        Age
-                      </GoabTableSortHeader>
-                    </th>
-                  </tr>
+                    <tr>
+                      <th>First name</th>
+                      <th>
+                        <GoabTableSortHeader name="lastName">
+                          Last name
+                        </GoabTableSortHeader>
+                      </th>
+                      <th>
+                        <GoabTableSortHeader name="age" direction="asc">
+                          Age
+                        </GoabTableSortHeader>
+                      </th>
+                    </tr>
                   </thead>
                   <tbody>
-                  {users.map((user) => (
-                    <tr key={user.firstName}>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.age}</td>
-                    </tr>
-                  ))}
+                    {users.map((user) => (
+                      <tr key={user.firstName}>
+                        <td>{user.firstName}</td>
+                        <td>{user.lastName}</td>
+                        <td>{user.age}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </GoabTable>
               </GoabBlock>

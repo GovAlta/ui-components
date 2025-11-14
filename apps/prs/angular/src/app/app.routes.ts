@@ -1,0 +1,91 @@
+import { Route } from "@angular/router";
+
+import { Bug2152Component } from "./bugs/2152/bug2152.component";
+import { Bug2331Component } from "./bugs/2331/bug2331.component";
+import { Bug2393Component } from "./bugs/2393/bug2393.component";
+import { Bug2404Component } from "./bugs/2404/bug2404.component";
+import { Bug2408Component } from "./bugs/2408/bug2408.component";
+import { Bug2459Component } from "./bugs/2459/bug2459.component";
+import { Bug2473Component } from "./bugs/2473/bug2473.component";
+import { Bug2502Component } from "./bugs/2502/bug2502.component";
+import { Bug2529Component } from "./bugs/2529/bug2529.component";
+import { Bug2547Component } from "./bugs/2547/bug2547.component";
+import { Bug2655Component } from "./bugs/2655/bug2655.component";
+import { Bug2720Component } from "./bugs/2720/bug2720.component";
+import { Bug2721Component } from "./bugs/2721/bug2721.component";
+import { Bug2750Component } from "./bugs/2750/bug2750.component";
+import { Bug2768Component } from "./bugs/2768/bug2768.component";
+import { Bug2782Component } from "./bugs/2782/bug2782.component";
+import { Bug2789Component } from "./bugs/2789/bug2789.component";
+import { Bug2821Component } from "./bugs/2821/bug2821.component";
+import { Bug2837Component } from "./bugs/2837/bug2837.component";
+import { Bug2839Component } from "./bugs/2839/bug2839.component";
+import { Bug2849Component } from "./bugs/2849/bug2849.component";
+import { Bug2852Component } from "./bugs/2852/bug2852.component";
+import { Bug2878Component } from "./bugs/2878/bug2878.component";
+import { Bug2892Component } from "./bugs/2892/bug2892.component";
+import { Bug2922Component } from "./bugs/2922/bug2922.component";
+import { Bug2943Component } from "./bugs/2943/bug2943.component";
+import { Bug2948Component } from "./bugs/2948/bug2948.component";
+import { Bug2991Component } from "./bugs/2991/bug2991.component";
+import { Bug3072Component } from "./bugs/3072/bug3072.component";
+import { Bug3156Component } from "./bugs/3156/bug3156.component";
+import { EverythingComponent } from "./everything.component";
+import { Feat1328Component } from "./features/feat1328/feat1328.component";
+import { Feat1547Component } from "./features/feat1547/feat1547.component";
+import { Feat1813Component } from "./features/feat1813/feat1813.component";
+import { Feat2361Component } from "./features/feat2361/feat2361.component";
+import { Feat2054Component } from "./features/feat2054/feat2054.component";
+import { Feat2267Component } from "./features/feat2267/feat2267.component";
+import { Feat2492Component } from "./features/feat2492/feat2492.component";
+import { Feat2682Component } from "./features/feat2682/feat2682.component";
+import { Feat2722Component } from "./features/feat2722/feat2722.component";
+import { Feat2730Component } from "./features/feat2730/feat2730.component";
+import { Feat2829Component } from "./features/feat2829/feat2829.component";
+import { Feat3102Component } from "./features/feat3102/feat3102.component";
+
+export const appRoutes: Route[] = [
+  { path: "bugs/bug2152", component: Bug2152Component },
+  { path: "bugs/bug2331", component: Bug2331Component },
+  { path: "bugs/bug2393", component: Bug2393Component },
+  { path: "bugs/bug2404", component: Bug2404Component },
+  { path: "bugs/bug2408", component: Bug2408Component },
+  { path: "bugs/bug2459", component: Bug2459Component },
+  { path: "bugs/bug2473", component: Bug2473Component },
+  { path: "bugs/bug2502", component: Bug2502Component },
+  { path: "bugs/bug2529", component: Bug2529Component },
+  { path: "bugs/bug2547", component: Bug2547Component },
+  { path: "bugs/bug2655", component: Bug2655Component },
+  { path: "bugs/bug2720", component: Bug2720Component },
+  { path: "bugs/bug2721", component: Bug2721Component },
+  { path: "bugs/bug2750", component: Bug2750Component },
+  { path: "bugs/bug2768", component: Bug2768Component },
+  { path: "bugs/bug2782", component: Bug2782Component },
+  { path: "bugs/bug2789", component: Bug2789Component },
+  { path: "bugs/bug2821", component: Bug2821Component },
+  { path: "bugs/bug2837", component: Bug2837Component },
+  { path: "bugs/bug2839", component: Bug2839Component },
+  { path: "bugs/bug2849", component: Bug2849Component },
+  { path: "bugs/bug2852", component: Bug2852Component },
+  { path: "bugs/bug2878", component: Bug2878Component },
+  { path: "bugs/bug2892", component: Bug2892Component },
+  { path: "bugs/bug2922", component: Bug2922Component },
+  { path: "bugs/bug2943", component: Bug2943Component },
+  { path: "bugs/bug2948", component: Bug2948Component },
+  { path: "bugs/bug2991", component: Bug2991Component },
+  { path: "bugs/bug3072", component: Bug3072Component },
+  { path: "bugs/bug3156", component: Bug3156Component },
+  { path: "everything", component: EverythingComponent },
+  { path: "features/feat1328", component: Feat1328Component },
+  { path: "features/feat1547", component: Feat1547Component },
+  { path: "features/feat1813", component: Feat1813Component },
+  { path: "features/feat2361", component: Feat2361Component },
+  { path: "features/feat2054", component: Feat2054Component },
+  { path: "features/feat2267", component: Feat2267Component },
+  { path: "features/feat2492", component: Feat2492Component },
+  { path: "features/feat2682", component: Feat2682Component },
+  { path: "features/feat2722", component: Feat2722Component },
+  { path: "features/feat2730", component: Feat2730Component },
+  { path: "features/feat2829", component: Feat2829Component },
+  { path: "features/feat3102", component: Feat3102Component },
+];

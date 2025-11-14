@@ -1,0 +1,224 @@
+<div style="width: 1024px; margin: 0 auto">
+  <goab-text size="heading-l" mb="xl"> Bug #2892: Width Measurements Test </goab-text>
+
+  <goab-text size="body-m" mb="2xl">
+    This test demonstrates various width measurements (ch, px, rem, %) on GoabInput
+    components. All inputs have onChange handlers that log to console. The bug affects
+    character width calculations.
+  </goab-text>
+
+  <!-- Character (ch) Width Tests -->
+  <goab-text size="heading-m" mb="l">Character (ch) Width Tests</goab-text>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Low ch width (2ch)">
+      <goab-input
+        name="input-ch-low"
+        placeholder="2ch width"
+        width="2ch"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Low ch width with icons (2ch)">
+      <goab-input
+        name="input-ch-low-icons"
+        placeholder="2ch width with icons"
+        width="2ch"
+        leadingIcon="search"
+        trailingIcon="close"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal ch width (40ch)">
+      <goab-input
+        name="input-ch-normal"
+        placeholder="40ch width"
+        width="40ch"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal ch width with icons (40ch)">
+      <goab-input
+        name="input-ch-normal-icons"
+        placeholder="40ch width with icons"
+        width="40ch"
+        leadingIcon="mail"
+        trailingIcon="checkmark"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Pixel (px) Width Tests -->
+  <goab-text size="heading-m" mb="l" mt="2xl">Pixel (px) Width Tests</goab-text>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Low px width (50px)">
+      <goab-input
+        name="input-px-low"
+        placeholder="50px width"
+        width="50px"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Low px width with icons (50px)">
+      <goab-input
+        name="input-px-low-icons"
+        placeholder="50px width with icons"
+        width="50px"
+        leadingIcon="person"
+        trailingIcon="eye"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal px width (300px)">
+      <goab-input
+        name="input-px-normal"
+        placeholder="300px width"
+        width="300px"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal px width with icons (300px)">
+      <goab-input
+        name="input-px-normal-icons"
+        placeholder="300px width with icons"
+        width="300px"
+        leadingIcon="location"
+        trailingIcon="information"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Rem Width Tests -->
+  <goab-text size="heading-m" mb="l" mt="2xl">Rem Width Tests</goab-text>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Low rem width (2rem)">
+      <goab-input
+        name="input-rem-low"
+        placeholder="2rem width"
+        width="2rem"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Low rem width with icons (2rem)">
+      <goab-input
+        name="input-rem-low-icons"
+        placeholder="2rem width with icons"
+        width="2rem"
+        leadingIcon="calendar"
+        trailingIcon="time"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal rem width (20rem)">
+      <goab-input
+        name="input-rem-normal"
+        placeholder="20rem width"
+        width="20rem"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal rem width with icons (20rem)">
+      <goab-input
+        name="input-rem-normal-icons"
+        placeholder="20rem width with icons"
+        width="20rem"
+        leadingIcon="home"
+        trailingIcon="settings"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Percentage (%) Width Tests -->
+  <goab-text size="heading-m" mb="l" mt="2xl">Percentage (%) Width Tests</goab-text>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Low percentage width (20%)">
+      <goab-input
+        name="input-percent-low"
+        placeholder="20% width"
+        width="20%"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Low percentage width with icons (20%)">
+      <goab-input
+        name="input-percent-low-icons"
+        placeholder="20% width with icons"
+        width="20%"
+        leadingIcon="call"
+        trailingIcon="checkmark"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal percentage width (60%)">
+      <goab-input
+        name="input-percent-normal"
+        placeholder="60% width"
+        width="60%"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+
+    <goab-form-item label="Normal percentage width with icons (60%)">
+      <goab-input
+        name="input-percent-normal-icons"
+        placeholder="60% width with icons"
+        width="60%"
+        leadingIcon="globe"
+        trailingIcon="link"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Default Width Test (no width specified) -->
+  <goab-text size="heading-m" mb="l" mt="2xl">Default Width Test</goab-text>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Default width (no width specified)">
+      <goab-input
+        name="input-default"
+        placeholder="Default width"
+        (onChange)="handleInputChange($event)"
+      >
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <goab-text size="body-s" mt="2xl" style="color: #666">
+    Check the browser console to see the onChange events when you type in the inputs.
+    Notice how character (ch) width inputs behave differently from other units.
+  </goab-text>
+</div>

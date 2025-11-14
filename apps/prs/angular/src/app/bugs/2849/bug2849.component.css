@@ -1,0 +1,7 @@
+/* Bug 2849 Test Component Styles */
+.test-container {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+}

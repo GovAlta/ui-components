@@ -1,0 +1,59 @@
+<div style="width: 1024px; margin: 0 auto">
+  <goab-text size="heading-l" mb="xl"> Bug #2769: Enable/Disable Test </goab-text>
+
+  <goab-text size="body-m" mb="2xl">
+    This test demonstrates the enable/disable functionality of various form components.
+    All components start disabled. Click the buttons to enable each component.
+  </goab-text>
+
+  <!-- Checkbox Test -->
+  <goab-form-item label="GoabCheckbox" mb="xl">
+    <goab-checkbox [disabled]="checkboxDisabled"></goab-checkbox>
+  </goab-form-item>
+  <goab-button type="secondary" (click)="toggleCheckbox()" mb="2xl">
+    {{ checkboxDisabled ? "Enable Checkbox" : "Disable Checkbox" }}
+  </goab-button>
+
+  <!-- DatePicker Test -->
+  <goab-form-item label="GoabDatePicker" mb="xl">
+    <goab-date-picker [disabled]="datePickerDisabled"></goab-date-picker>
+  </goab-form-item>
+  <goab-button type="secondary" (click)="toggleDatePicker()" mb="2xl">
+    {{ datePickerDisabled ? "Enable DatePicker" : "Disable DatePicker" }}
+  </goab-button>
+
+  <!-- Dropdown Test -->
+  <goab-form-item label="GoabDropdown" mb="xl">
+    <goab-dropdown [disabled]="dropdownDisabled"></goab-dropdown>
+  </goab-form-item>
+  <goab-button type="secondary" (click)="toggleDropdown()" mb="2xl">
+    {{ dropdownDisabled ? "Enable Dropdown" : "Disable Dropdown" }}
+  </goab-button>
+
+  <!-- Input Test -->
+  <goab-form-item label="GoabInput" mb="xl">
+    <goab-input [disabled]="inputDisabled"></goab-input>
+  </goab-form-item>
+  <goab-button type="secondary" (click)="toggleInput()" mb="2xl">
+    {{ inputDisabled ? "Enable Input" : "Disable Input" }}
+  </goab-button>
+
+  <!-- Radio Test -->
+  <goab-form-item label="GoabRadio" mb="xl">
+    <goab-radio-group [disabled]="radioDisabled">
+      <goab-radio-item value="option1" label="Option 1"></goab-radio-item>
+      <goab-radio-item value="option2" label="Option 2"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+  <goab-button type="secondary" (click)="toggleRadio()" mb="2xl">
+    {{ radioDisabled ? "Enable Radio" : "Disable Radio" }}
+  </goab-button>
+
+  <!-- TextArea Test -->
+  <goab-form-item label="GoabTextArea" mb="xl">
+    <goab-textarea [disabled]="textAreaDisabled"></goab-textarea>
+  </goab-form-item>
+  <goab-button type="secondary" (click)="toggleTextArea()" mb="2xl">
+    {{ textAreaDisabled ? "Enable TextArea" : "Disable TextArea" }}
+  </goab-button>
+</div>

@@ -1,0 +1,88 @@
+<goab-block direction="column" gap="l" class="feat3102">
+  <goab-block direction="column" gap="s">
+    <goab-text tag="h1" size="heading-l">Feature 3102 - Menu button icon and sizing checks</goab-text>
+    <goab-text tag="p" size="body-m">
+      Use these scenarios to confirm the menu button supports an optional leading icon, keeps the trailing chevron
+      behaviour, and sizes its popover to the widest menu action.
+    </goab-text>
+  </goab-block>
+
+  <goab-grid minChildWidth="320px" gap="l">
+    <goab-block direction="column" gap="s" class="feat3102__panel">
+      <goab-text tag="h2" size="heading-m">Scenario A – Baseline behaviour</goab-text>
+      <goab-text tag="p" size="body-s">
+        Open and close the menu to verify the trailing chevron flips between down and up. Trigger each option to
+        populate the action log below.
+      </goab-text>
+      <goab-menu-button text="Baseline actions" (onAction)="handleAction($event)">
+        <goab-menu-action
+          *ngFor="let action of baselineActions"
+          [text]="action.text"
+          [action]="action.action"
+          [icon]="action.icon"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block direction="column" gap="s" class="feat3102__panel">
+      <goab-text tag="h2" size="heading-m">Scenario B – Leading icon toggle</goab-text>
+      <goab-text tag="p" size="body-s">
+        Use the toggle to remove and restore the leading icon. The button should resize smoothly while the trailing
+        chevron remains aligned at the end of the label.
+      </goab-text>
+      <goab-button type="secondary" (onClick)="toggleLeadingIcon()">
+        {{ leadingIconEnabled ? "Remove leading icon" : "Restore leading icon" }}
+      </goab-button>
+      <goab-menu-button text="Team tools" [leadingIcon]="currentLeadingIcon" (onAction)="handleAction($event)">
+        <goab-menu-action
+          *ngFor="let action of teamActions"
+          [text]="action.text"
+          [action]="action.action"
+          [icon]="action.icon"
+        ></goab-menu-action>
+      </goab-menu-button>
+      <goab-text tag="p" size="body-s">Current leading icon: {{ currentLeadingIcon || "none" }}</goab-text>
+    </goab-block>
+
+    <goab-block direction="column" gap="s" class="feat3102__panel">
+      <goab-text tag="h2" size="heading-m">Scenario C – Long labels drive menu width</goab-text>
+      <goab-text tag="p" size="body-s">
+        Open the menu and confirm the popover width stretches to fit the longest label without clipping. Close and
+        reopen to ensure the width persists for subsequent openings.
+      </goab-text>
+      <goab-menu-button text="Lengthy actions" [leadingIcon]="currentLeadingIcon" (onAction)="handleAction($event)">
+        <goab-menu-action
+          *ngFor="let action of longLabelActions"
+          [text]="action.text"
+          [action]="action.action"
+          [icon]="action.icon"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-grid>
+
+  <goab-block direction="column" gap="s" class="feat3102__panel">
+    <goab-text tag="h2" size="heading-m">Scenario D – Right aligned trigger</goab-text>
+    <goab-text tag="p" size="body-s">
+      Shrink the viewport and open the menu. The popover should align to the trigger and stay fully visible when the
+      button sits against the right edge.
+    </goab-text>
+    <div class="feat3102__right-aligned">
+      <goab-menu-button text="Right edge menu" [leadingIcon]="currentLeadingIcon" (onAction)="handleAction($event)">
+        <goab-menu-action
+          *ngFor="let action of teamActions"
+          [text]="action.text"
+          [action]="action.action"
+          [icon]="action.icon"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </div>
+  </goab-block>
+
+  <goab-block direction="row" gap="s" alignment="center" class="feat3102__log">
+    <goab-text tag="p" size="body-s">
+      Last action: {{ lastActionDetail ? lastActionDetail.action : "none captured yet" }}
+    </goab-text>
+    <goab-button type="tertiary" (onClick)="clearLog()">Clear log</goab-button>
+  </goab-block>
+</goab-block>

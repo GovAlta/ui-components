@@ -1,0 +1,113 @@
+<h1>Disabled Inputs Visibility Bug Test (Issue #2782)</h1>
+
+<goab-block gap="l" direction="column">
+  <!-- Issue Description -->
+  <goab-block gap="m" direction="column">
+    <h2>Issue Description</h2>
+    <p>
+      According to
+      <a href="https://github.com/GovAlta/ui-components/issues/2782" target="_blank"
+        >GitHub issue #2782</a
+      >, disabled inputs are not visible and get hidden by container backgrounds:
+    </p>
+    <ul>
+      <li>
+        <strong>Problem:</strong> Disabled inputs are not visible regardless of background
+        color
+      </li>
+      <li>
+        <strong>Expected:</strong> Disabled inputs should appear no matter the background
+        colour
+      </li>
+      <li>
+        <strong>Fix:</strong> Added z-index: 0 to input container styling in web
+        components
+      </li>
+    </ul>
+  </goab-block>
+
+  <!-- Test Instructions -->
+  <goab-block gap="m" direction="column">
+    <h2>Test Instructions</h2>
+    <p>
+      Below are three containers with different background colors, each containing a
+      disabled GoabTextArea. All disabled textareas should be visible regardless of the
+      background color.
+    </p>
+  </goab-block>
+
+  <!-- Test 1: Default Background -->
+  <goab-block gap="m" direction="column">
+    <h2>Test 1: Default Background</h2>
+    <p>This container uses the default background color:</p>
+
+    <goab-form-item label="Default Background Input">
+      <goab-input
+        name="test-input-1"
+        testId="bug2782-input-default"
+        [disabled]="true"
+        placeholder="This input should be visible"
+      ></goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <!-- Test 2: Dark Grey Background -->
+  <div style="background-color: #666666; padding: 20px; border-radius: 8px">
+    <goab-block gap="m" direction="column">
+      <h2 style="color: white">Test 2: Dark Grey Background</h2>
+      <p style="color: white">This container uses a dark grey background color:</p>
+
+      <goab-form-item label="Dark Background Input">
+        <goab-input
+          name="test-input-2"
+          testId="bug2782-input-dark"
+          [disabled]="true"
+          placeholder="This input should be visible on dark background"
+        ></goab-input>
+      </goab-form-item>
+    </goab-block>
+  </div>
+
+  <!-- Test 3: Red Background -->
+  <div style="background-color: #ff0000; padding: 20px; border-radius: 8px">
+    <goab-block gap="m" direction="column">
+      <h2 style="color: white">Test 3: Red Background</h2>
+      <p style="color: white">
+        This container uses a red background color (as mentioned in the original issue):
+      </p>
+
+      <goab-form-item label="Red Background Input">
+        <goab-input
+          name="test-input-3"
+          testId="bug2782-input-red"
+          [disabled]="true"
+          placeholder="This input should be visible on red background"
+        ></goab-input>
+      </goab-form-item>
+    </goab-block>
+  </div>
+
+  <!-- Expected vs Actual Behavior -->
+  <goab-block gap="m" direction="column">
+    <h2>Expected vs Actual Behavior</h2>
+    <goab-block gap="s" direction="column">
+      <h3>Expected Behavior (After Fix)</h3>
+      <ul>
+        <li>All disabled textareas should be visible regardless of background color</li>
+        <li>Disabled textareas should maintain proper contrast and readability</li>
+        <li>No textareas should be hidden behind container backgrounds</li>
+      </ul>
+    </goab-block>
+
+    <goab-block gap="s" direction="column">
+      <h3>Actual Behavior (Before Fix)</h3>
+      <ul>
+        <li>Disabled textareas were not visible against different background colors</li>
+        <li>
+          Same issue occurred with red background as mentioned in the original report
+        </li>
+        <li>Textareas appeared to be hidden by container backgrounds</li>
+      </ul>
+    </goab-block>
+  </goab-block>
+</goab-block>

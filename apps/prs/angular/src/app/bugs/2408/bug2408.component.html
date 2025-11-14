@@ -1,0 +1,88 @@
+<goab-text tag="h1">Bug 2408: Form Stepper "Incomplete" Status Fix</goab-text>
+<goab-text tag="p">
+  Testing the fix for Form Stepper where "incomplete" status was being rendered as
+  "Partially complete" instead of "Incomplete".
+</goab-text>
+
+<goab-block gap="l" direction="column">
+  <section>
+    <goab-text tag="h2">Form Stepper with Different Status Types</goab-text>
+    <goab-text tag="p">
+      This demonstrates the corrected status display for each step status type.
+    </goab-text>
+
+    <goab-form-stepper [step]="currentStep" (onChange)="handleStepChange($event)">
+      <goab-form-step text="Personal Information" status="complete"></goab-form-step>
+      <goab-form-step text="Employment History" status="incomplete"></goab-form-step>
+      <goab-form-step text="Education Details" status="not-started"></goab-form-step>
+      <goab-form-step text="Review & Submit" status="not-started"></goab-form-step>
+    </goab-form-stepper>
+  </section>
+
+  <section>
+    <goab-text tag="h2">Status Test Controls</goab-text>
+    <goab-text tag="p">Use these buttons to test different step combinations:</goab-text>
+
+    <goab-block gap="s" direction="row">
+      <goab-button type="secondary" size="compact" (onClick)="setStep(1)">
+        Step 1 (Complete)
+      </goab-button>
+      <goab-button type="secondary" size="compact" (onClick)="setStep(2)">
+        Step 2 (Incomplete)
+      </goab-button>
+      <goab-button type="secondary" size="compact" (onClick)="setStep(3)">
+        Step 3 (Not Started)
+      </goab-button>
+      <goab-button type="secondary" size="compact" (onClick)="setStep(4)">
+        Step 4 (Not Started)
+      </goab-button>
+    </goab-block>
+  </section>
+
+  <section>
+    <goab-text tag="h2">Test Results</goab-text>
+    <goab-block gap="s" direction="column">
+      <goab-text tag="p"><strong>Current Step:</strong> {{ currentStep }}</goab-text>
+      <goab-text tag="p"><strong>Expected Status Display:</strong></goab-text>
+      <ul>
+        <li>Step 1: <strong>Complete</strong> (green checkmark)</li>
+        <li>
+          Step 2: <strong>Incomplete</strong> (red X - was previously showing "Partially
+          complete")
+        </li>
+        <li>Step 3: <strong>Not Started</strong> (gray circle - new status type)</li>
+        <li>Step 4: <strong>Not Started</strong> (gray circle - new status type)</li>
+      </ul>
+    </goab-block>
+  </section>
+
+  <section>
+    <goab-text tag="h2">Bug Description</goab-text>
+    <goab-block gap="s" direction="column">
+      <goab-text tag="p">
+        <strong>Issue:</strong> The "incomplete" status was being incorrectly rendered as
+        "Partially complete" in the Form Stepper component.
+      </goab-text>
+      <goab-text tag="p">
+        <strong>Fix:</strong> Updated the status display logic to properly show
+        "Incomplete" for the "incomplete" status.
+      </goab-text>
+      <goab-text tag="p">
+        <strong>Additional:</strong> Added new "not-started" status option to replace
+        "unstarted" for better clarity.
+      </goab-text>
+    </goab-block>
+  </section>
+
+  <section>
+    <goab-text tag="h2">Accessibility Testing</goab-text>
+    <goab-text tag="p">
+      Screen readers should announce steps in the format: "Step X of Y, Step name: [Name],
+      Status: [Status]"
+    </goab-text>
+    <goab-text tag="p">
+      When clicking step navigation buttons, the screen reader should announce the step
+      change immediately.
+    </goab-text>
+  </section>
+</goab-block>

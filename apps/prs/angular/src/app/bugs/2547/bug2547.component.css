@@ -1,0 +1,8 @@
+a.styled {
+  display: block;
+  font: var(--goa-typography-body-s);
+  padding: var(--goa-space-s) var(--goa-space-s) var(--goa-space-s) var(--goa-space-s);
+  text-decoration: none;
+  color: var(--goa-color-text-default)!important;
+  white-space: nowrap;
+}

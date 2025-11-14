@@ -1,0 +1,27 @@
+<h1>Bug #2922: Form Stepper Test</h1>
+
+<p>
+  This test demonstrates GoabFormStepper components with 5 GoabFormStep components each.
+</p>
+
+<!-- Constrained width stepper (500px) -->
+<div style="width: 500px; margin-bottom: 2rem; border: 1px solid #000">
+  <h2>Constrained Width Stepper (500px)</h2>
+  <goab-form-stepper [step]="currentStep" (onChange)="handleStepperChange($event)">
+    <goab-form-step text="Step 1"></goab-form-step>
+    <goab-form-step text="Step 2"></goab-form-step>
+    <goab-form-step text="Step 3"></goab-form-step>
+    <goab-form-step text="Step 4"></goab-form-step>
+    <goab-form-step text="Step 5"></goab-form-step>
+  </goab-form-stepper>
+</div>
+
+<!-- Full width stepper -->
+<h2>Full Width Stepper</h2>
+<goab-form-stepper [step]="currentStep" (onChange)="handleStepperChange($event)">
+  <goab-form-step text="Step 1"></goab-form-step>
+  <goab-form-step text="Step 2"></goab-form-step>
+  <goab-form-step text="Step 3"></goab-form-step>
+  <goab-form-step text="Step 4"></goab-form-step>
+  <goab-form-step text="Step 5"></goab-form-step>
+</goab-form-stepper>
