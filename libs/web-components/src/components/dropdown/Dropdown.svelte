@@ -105,8 +105,6 @@
 
   let _bindTimeoutId: any;
 
-  let _mountStatus: "active" | "ready" = "ready";
-  let _mountTimeoutId: any = undefined;
   let _error = toBoolean(error);
   let _prevError = _error;
 
@@ -305,6 +303,7 @@
    */
   function onChildDestroyed(detail: DropdownItemDestroyRelayDetail) {
     _options = _options.filter((option) => option.value !== detail.value);
+    syncFilteredOptions();
   }
 
   function setSelected() {
