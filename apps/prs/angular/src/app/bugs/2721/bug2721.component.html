@@ -1,0 +1,87 @@
+<h1>GoabText Margin Bug Test (Issue #2721)</h1>
+<p>Testing that changing the "tag" property on GoabText should not change the margin</p>
+
+<goab-block gap="l" direction="column">
+  <!-- Issue Description -->
+  <goab-block gap="m" direction="column">
+    <h2>Issue Description</h2>
+    <p>
+      According to
+      <a href="https://github.com/GovAlta/ui-components/issues/2721" target="_blank"
+        >GitHub issue #2721</a
+      >, changing the <code>tag</code> property on GoabText should not change the margin.
+      The margin should be determined by the <code>variant</code> property only.
+    </p>
+  </goab-block>
+
+  <goab-block gap="m" direction="column">
+    <goab-block gap="m" direction="column">
+      <h3>Margin Reference Test</h3>
+      <p>Compare margins across different variants with the same tag:</p>
+
+      <div class="test-container">
+        <goab-text tag="p" size="heading-xl"
+          >Heading XL (should have L bottom margin, 2XL top margin)</goab-text
+        >
+        <goab-text tag="p" size="heading-l"
+          >Heading L (should have L bottom margin, 2XL top margin)</goab-text
+        >
+        <goab-text tag="p" size="heading-m"
+          >Heading M (should have M bottom margin, 2XL top margin)</goab-text
+        >
+        <goab-text tag="p" size="heading-s"
+          >Heading S (should have S bottom margin, XL top margin)</goab-text
+        >
+        <goab-text tag="p" size="heading-xs"
+          >Heading XS (should have XS bottom margin, XL top margin)</goab-text
+        >
+        <goab-text tag="p" size="body-l"
+          >Body L (should have L bottom margin, 2XL top margin)</goab-text
+        >
+        <goab-text tag="p" size="body-m"
+          >Body M (should have L bottom margin, L top margin)</goab-text
+        >
+        <goab-text tag="p" size="body-s"
+          >Body S (should have L bottom margin, L top margin)</goab-text
+        >
+        <goab-text tag="p" size="body-xs"
+          >Body XS (should have L bottom margin, S top margin)</goab-text
+        >
+      </div>
+    </goab-block>
+
+    <!-- Tag Consistency Test -->
+    <goab-block gap="m" direction="column">
+      <h3>Tag Consistency Test</h3>
+      <p>All of these should have identical margins (body-m variant):</p>
+
+      <div class="test-container">
+        <goab-text tag="h1" size="body-m">H1 tag with body-m size</goab-text>
+        <goab-text tag="h2" size="body-m">H2 tag with body-m size</goab-text>
+        <goab-text tag="h3" size="body-m">H3 tag with body-m size</goab-text>
+        <goab-text tag="p" size="body-m">P tag with body-m size</goab-text>
+        <goab-text tag="span" size="body-m">Span tag with body-m size</goab-text>
+        <goab-text tag="div" size="body-m">Div tag with body-m size</goab-text>
+      </div>
+    </goab-block>
+
+    <!-- Expected vs Actual Test -->
+    <goab-block gap="m" direction="column">
+      <h3>Expected vs Actual Behavior</h3>
+      <p>If the bug is fixed, changing the tag should not affect margins:</p>
+
+      <div class="test-container">
+        <h4>Expected: Same margins regardless of tag</h4>
+        <goab-text tag="h1" size="heading-m"
+          >H1 with heading-m (should match below)</goab-text
+        >
+        <goab-text tag="p" size="heading-m"
+          >P with heading-m (should match above)</goab-text
+        >
+        <goab-text tag="span" size="heading-m"
+          >Span with heading-m (should match above)</goab-text
+        >
+      </div>
+    </goab-block>
+  </goab-block>
+</goab-block>

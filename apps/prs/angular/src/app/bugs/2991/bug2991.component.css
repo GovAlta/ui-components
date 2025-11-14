@@ -1,0 +1,41 @@
+.bug2991 {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 720px;
+}
+
+.bug2991__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bug2991__group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bug2991__group--standalone article {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bug2991__note {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #4a4a4a;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

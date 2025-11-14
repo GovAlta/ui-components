@@ -1,0 +1,171 @@
+<main>
+  <goab-text tag="h1">Bug 2720: Tabs Not Switching via URL Changes</goab-text>
+  <goab-text tag="p">
+    Testing the tabs component bug where changing the URL hash doesn't switch the active
+    tab. This should be fixed by PR #2830.
+  </goab-text>
+
+  <goab-block gap="l" direction="column">
+    <section>
+      <goab-text tag="h2">Test Instructions</goab-text>
+      <goab-text tag="p">
+        Test the following scenarios to verify the tabs component responds to URL changes:
+      </goab-text>
+      <ol>
+        <li>
+          <strong>Direct URL Hash:</strong> Click the buttons below to change URL hash
+        </li>
+        <li>
+          <strong>Link Navigation:</strong> Click the links inside the tabs to navigate to
+          other tabs
+        </li>
+        <li>
+          <strong>Programmatic Change:</strong> Use the "Simulate Search" button to test
+          programmatic tab switching
+        </li>
+        <li>
+          <strong>Manual URL:</strong> Manually change the URL hash in the browser address
+          bar
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Test Controls</goab-text>
+      <goab-block gap="s" direction="row">
+        <goab-button type="secondary" size="compact" (onClick)="changeToTab(0)">
+          Switch to Profile Tab
+        </goab-button>
+        <goab-button type="secondary" size="compact" (onClick)="changeToTab(1)">
+          Switch to Settings Tab
+        </goab-button>
+        <goab-button type="secondary" size="compact" (onClick)="changeToTab(2)">
+          Switch to Help Tab
+        </goab-button>
+        <goab-button type="primary" size="compact" (onClick)="simulateSearch()">
+          Simulate Search (Switch to Settings)
+        </goab-button>
+        <goab-button type="secondary" size="compact" (onClick)="resetTest()">
+          Reset Log
+        </goab-button>
+      </goab-block>
+
+      <goab-text tag="p">
+        <strong>Current Tab:</strong> {{ currentTab }} ({{ getTabName(currentTab) }})
+      </goab-text>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Tabs Component Test</goab-text>
+      <goab-tabs (onChange)="handleTabChange($event)">
+        <goab-tab>
+          <div slot="heading">
+            <div class="hello">Unread</div>
+            <div>
+              <goab-badge type="important" content="17" />
+            </div>
+          </div>
+          <goab-block gap="m" direction="column">
+            <goab-text tag="h3">Profile Tab Content</goab-text>
+            <goab-text tag="p">
+              This is the Profile tab. You can navigate to other tabs using the links
+              below:
+            </goab-text>
+            <goab-block gap="s" direction="row">
+              <goab-link href="#tab-1">Go to Settings Tab</goab-link>
+              <goab-link href="#tab-2">Go to Help Tab</goab-link>
+            </goab-block>
+            <goab-text tag="p">
+              <strong>Expected Behavior:</strong> Clicking these links should change the
+              URL and switch the active tab.
+            </goab-text>
+          </goab-block>
+        </goab-tab>
+
+        <goab-tab heading="Settings">
+          <goab-block gap="m" direction="column">
+            <goab-text tag="h3">Settings Tab Content</goab-text>
+            <goab-text tag="p">
+              This is the Settings tab. You can navigate to other tabs using the links
+              below:
+            </goab-text>
+            <goab-block gap="s" direction="row">
+              <goab-link href="#tab-0">Go to Profile Tab</goab-link>
+              <goab-link href="#tab-2">Go to Help Tab</goab-link>
+            </goab-block>
+            <goab-text tag="p">
+              <strong>Expected Behavior:</strong> Clicking these links should change the
+              URL and switch the active tab.
+            </goab-text>
+          </goab-block>
+        </goab-tab>
+
+        <goab-tab heading="Help">
+          <goab-block gap="m" direction="column">
+            <goab-text tag="h3">Help Tab Content</goab-text>
+            <goab-text tag="p">
+              This is the Help tab. You can navigate to other tabs using the links below:
+            </goab-text>
+            <goab-block gap="s" direction="row">
+              <goab-link href="#tab-0">Go to Profile Tab</goab-link>
+              <goab-link href="#tab-1">Go to Settings Tab</goab-link>
+            </goab-block>
+            <goab-text tag="p">
+              <strong>Expected Behavior:</strong> Clicking these links should change the
+              URL and switch the active tab.
+            </goab-text>
+          </goab-block>
+        </goab-tab>
+      </goab-tabs>
+    </section>
+
+    <section>
+      <goab-text tag="h2">Tab Change Event Log</goab-text>
+      <div
+        *ngIf="tabChangeLog.length > 0; else noLogs"
+        style="
+          border: 1px solid #ccc;
+          padding: 1rem;
+          background-color: #f9f9f9;
+          max-height: 300px;
+          overflow-y: auto;
+        "
+      >
+        <div
+          *ngFor="let log of tabChangeLog; trackBy: trackByIndex"
+          style="margin-bottom: 0.5rem; font-family: monospace"
+        >
+          {{ log }}
+        </div>
+      </div>
+
+      <ng-template #noLogs>
+        <div style="font-style: italic; color: #666">
+          <goab-text tag="p">
+            No tab change events yet. Try changing tabs or using the test controls above.
+          </goab-text>
+        </div>
+      </ng-template>
+    </section>
+
+    <section>
+      <goab-text tag="h3">Expected Behavior (After Fix):</goab-text>
+      <ul>
+        <li>URL hash changes should automatically switch the active tab</li>
+        <li>Links within tabs should navigate to other tabs</li>
+        <li>Programmatic URL changes should trigger tab switches</li>
+        <li>Manual URL hash changes should work</li>
+        <li>All tab change events should be logged</li>
+      </ul>
+    </section>
+
+    <section>
+      <goab-text tag="h3">Bug Description:</goab-text>
+      <goab-text tag="p">
+        Before the fix, changing the URL hash (via links, programmatic changes, or manual
+        entry) would update the URL but not switch the active tab. The tabs component
+        wasn't listening for hash change events.
+      </goab-text>
+    </section>
+  </goab-block>
+</main>

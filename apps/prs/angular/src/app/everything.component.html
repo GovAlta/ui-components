@@ -1,0 +1,1062 @@
+<goab-block gap="xl" direction="column">
+  <goab-text tag="h1" size="heading-l"
+    >Feature 2802 – Angular Component Showcase</goab-text
+  >
+  <goab-text tag="p" size="body-m">
+    This page renders every Angular wrapper component with representative variations and
+    hooks each event into the consolidated log for regression testing against Angular 20.
+  </goab-text>
+  <goab-details maxWidth="100%" heading="Event Log">
+    <goab-block gap="s" direction="column">
+      <goab-text tag="h3" size="heading-s">Recent events</goab-text>
+      <goab-block gap="2xs" direction="column">
+        <goab-text tag="p" size="body-s" *ngIf="eventLog().length === 0"
+          >Interact with the components to populate the log.</goab-text
+        >
+        <goab-container
+          type="interactive"
+          padding="relaxed"
+          *ngFor="let entry of eventLog()"
+          mb="xs"
+        >
+          <goab-block gap="xs" direction="column">
+            <goab-text tag="p" size="body-s">
+              <strong>{{ entry.timestamp }}</strong>
+              ??" {{ entry.name }}
+            </goab-text>
+            <pre style="font-size: 12px; white-space: pre-wrap; margin: 0">
+              {{ entry.detail | json }}
+            </pre>
+          </goab-block>
+        </goab-container>
+      </goab-block>
+    </goab-block>
+  </goab-details>
+  <goab-details maxWidth="100%" heading="Layout & Typography" open="true">
+    <goab-block gap="l" direction="column">
+      <goab-grid minChildWidth="220px" gap="m">
+        <goab-container type="interactive" padding="relaxed">
+          <goab-text tag="h3" size="heading-s">Text sizes</goab-text>
+          <goab-block gap="xs" direction="column">
+            <goab-text
+              *ngFor="let size of textSizes"
+              [tag]="size.startsWith('heading') ? 'h4' : 'p'"
+              [size]="size"
+            >
+              {{ size }}
+            </goab-text>
+          </goab-block>
+        </goab-container>
+        <goab-container type="interactive" padding="relaxed">
+          <goab-text tag="h3" size="heading-s">Text colors</goab-text>
+          <goab-block gap="xs" direction="column">
+            <goab-text
+              *ngFor="let colour of textColors"
+              tag="p"
+              size="body-m"
+              [color]="colour"
+            >
+              {{ colour | titlecase }} text
+            </goab-text>
+          </goab-block>
+        </goab-container>
+        <goab-container type="interactive" padding="relaxed">
+          <goab-text tag="h3" size="heading-s">Block variations</goab-text>
+          <goab-block gap="xs" direction="column">
+            <goab-block gap="m" direction="row">
+              <goab-badge type="information" content="Row layout" />
+              <goab-badge type="success" content="Gap m" />
+            </goab-block>
+            <goab-block gap="xs" direction="column" alignment="center">
+              <goab-badge type="important" content="Column layout" />
+              <goab-badge type="success" content="Centered" />
+            </goab-block>
+          </goab-block>
+        </goab-container>
+      </goab-grid>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Containers</goab-text>
+        <goab-grid minChildWidth="240px" gap="m">
+          <goab-container
+            *ngFor="let type of containerTypes; let idx = index"
+            [type]="type"
+            [accent]="containerAccents[idx % containerAccents.length]"
+            [padding]="containerPaddings[idx % containerPaddings.length]"
+            [width]="containerWidths[idx % containerWidths.length]"
+          >
+            <goab-text tag="p" size="body-m">
+              Type: {{ type }}<br />
+              Accent: {{ containerAccents[idx % containerAccents.length] || "none" }}
+            </goab-text>
+          </goab-container>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Grid & Column layout</goab-text>
+        <goab-column-layout>
+          <goab-grid minChildWidth="180px" gap="s" mt="s">
+            <goab-page-block width="content">
+              <goab-text tag="h4" size="heading-xs">Responsive grid cards</goab-text>
+              <goab-text tag="p" size="body-m">
+                The `goab-grid` wrapper uses `minChildWidth="180px"` to automatically wrap
+                items.
+              </goab-text>
+            </goab-page-block>
+            <goab-container type="info">
+              <goab-text tag="p" size="body-m">
+                Column layout automatically constrains the inner content to a readable
+                column width.
+              </goab-text>
+            </goab-container>
+            <goab-container type="important" accent="filled">
+              <goab-text tag="p" size="body-m"
+                >Use padding tokens to illustrate spacing.</goab-text
+              >
+            </goab-container>
+          </goab-grid>
+        </goab-column-layout>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <img
+          src="https://picsum.photos/600/200?random=1"
+          alt="Decorative illustration"
+          style="width: 100%; height: 200px; object-fit: cover"
+        />
+        <goab-text tag="h3" size="heading-s">Card image & actions</goab-text>
+        <goab-text tag="p" size="body-m">
+          Cards support image and actions slots via dedicated wrapper components.
+        </goab-text>
+        <goab-divider mb="s"></goab-divider>
+        <goab-block gap="m" direction="row" alignment="start">
+          <goab-button type="secondary" (onClick)="onButtonClick('secondary')">
+            Preview
+          </goab-button>
+          <goab-button type="primary" (onClick)="onButtonClick('primary')">
+            Approve
+          </goab-button>
+        </goab-block>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Spacers & Pages</goab-text>
+        <goab-block gap="m" direction="row">
+          <goab-block gap="xs" direction="column">
+            <goab-text tag="h4" size="heading-xs">Spacer samples</goab-text>
+            <goab-block direction="row" gap="none" alignment="center">
+              <goab-text tag="span" size="body-s">Left</goab-text>
+              <goab-spacer horizontal="fill" />
+              <goab-text tag="span" size="body-s">Right</goab-text>
+            </goab-block>
+            <goab-block direction="column" gap="3xs">
+              <goab-text tag="span" size="body-s">Vertical spacer:</goab-text>
+              <goab-spacer vertical="l" />
+              <goab-badge type="success" content="Space applied" />
+            </goab-block>
+          </goab-block>
+          <goab-block gap="xs" direction="column">
+            <goab-text tag="h4" size="heading-xs">Pages control</goab-text>
+            <goab-pages [current]="2">
+              <a href="#">Overview</a>
+              <a href="#">Details</a>
+              <a href="#">History</a>
+            </goab-pages>
+          </goab-block>
+        </goab-block>
+      </goab-container>
+    </goab-block>
+  </goab-details>
+  <goab-details maxWidth="100%" heading="Buttons & Actions" open="true">
+    <goab-block gap="l" direction="column">
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Buttons by type</goab-text>
+        <goab-grid minChildWidth="160px" gap="m">
+          <goab-button
+            *ngFor="let type of buttonTypes"
+            [type]="type"
+            (onClick)="onButtonClick(type)"
+          >
+            {{ type | titlecase }} button
+          </goab-button>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Variants & sizes</goab-text>
+        <goab-block gap="m" direction="column">
+          <goab-block
+            *ngFor="let variant of buttonVariants"
+            gap="s"
+            direction="row"
+            alignment="center"
+          >
+            <goab-text tag="span" size="body-m" mb="none">
+              {{ variant | titlecase }}
+            </goab-text>
+            <goab-button
+              *ngFor="let size of buttonSizes"
+              [type]="'primary'"
+              [variant]="variant"
+              [size]="size"
+              (onClick)="onButtonClick('primary', variant, size)"
+            >
+              {{ size }} / {{ variant }}
+            </goab-button>
+          </goab-block>
+        </goab-block>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Button group & link buttons</goab-text>
+        <goab-block gap="m" direction="row" alignment="center">
+          <goab-button-group alignment="center" gap="relaxed">
+            <goab-button type="primary" (onClick)="onButtonClick('primary')"
+              >Primary</goab-button
+            >
+            <goab-button type="secondary" (onClick)="onButtonClick('secondary')"
+              >Secondary</goab-button
+            >
+            <goab-button type="tertiary" (onClick)="onButtonClick('tertiary')"
+              >Tertiary</goab-button
+            >
+          </goab-button-group>
+          <goab-block gap="xs" direction="column">
+            <goab-link *ngFor="let linkType of linkButtonTypes" [action]="linkType">
+              {{ linkType | titlecase }} link (action logged)
+            </goab-link>
+          </goab-block>
+        </goab-block>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Icon buttons & icons</goab-text>
+        <goab-grid minChildWidth="160px" gap="m">
+          <goab-icon-button
+            *ngFor="let variant of iconButtonVariants; let idx = index"
+            [variant]="variant"
+            [icon]="iconTypes[idx % iconTypes.length]"
+            title="{{ variant }} icon button"
+            (onClick)="onIconButtonClick(variant)"
+          />
+        </goab-grid>
+        <goab-text tag="p" size="body-s">
+          Click counts: {{ iconButtonClickCount | json }}
+        </goab-text>
+        <goab-grid minChildWidth="120px" gap="s" mt="s">
+          <goab-icon
+            *ngFor="let icon of iconTypes; let idx = index"
+            [type]="icon"
+            [size]="getIconSize(idx)"
+            [theme]="idx % 2 === 0 ? 'outline' : 'filled'"
+          ></goab-icon>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Menu button</goab-text>
+        <goab-menu-button text="Download" (onAction)="onMenuAction($event)">
+          <goab-menu-action text="CSV (Filtered)" action="csv-filtered" />
+          <goab-menu-action text="CSV (All)" action="csv-all" />
+          <goab-menu-action text="JSON (Filtered)" action="json-filtered" />
+          <goab-menu-action text="JSON (All)" action="json-all" />
+        </goab-menu-button>
+        <goab-text tag="p" size="body-s" mt="s">
+          Latest menu action:
+          <strong *ngIf="menuAction; else noMenuAction">{{ menuAction }}</strong>
+          <ng-template #noMenuAction>pending</ng-template>
+        </goab-text>
+      </goab-container>
+    </goab-block>
+  </goab-details>
+  <goab-details maxWidth="100%" heading="Indicators & Chips" open="true">
+    <goab-block gap="l" direction="column">
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Badge palette</goab-text>
+        <goab-grid minChildWidth="140px" gap="s">
+          <goab-badge
+            *ngFor="let badgeType of badgeTypes"
+            [type]="badgeType"
+            [content]="badgeType"
+          />
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Chips</goab-text>
+        <goab-block gap="m" direction="row" alignment="center">
+          <goab-chip
+            content="Default chip"
+            (onClick)="onChipClick('default chip')"
+          ></goab-chip>
+          <goab-chip
+            content="Leading icon"
+            leadingIcon="information-circle"
+            iconTheme="filled"
+            (onClick)="onChipClick('leading icon')"
+          ></goab-chip>
+          <goab-chip
+            content="Deletable error"
+            deletable="true"
+            error="true"
+            (onClick)="onChipClick('deletable')"
+          ></goab-chip>
+        </goab-block>
+        <goab-text tag="p" size="body-s">Clicks tracked: {{ chipClicks }}</goab-text>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Filter chips</goab-text>
+        <goab-block gap="m" direction="row">
+          <goab-filter-chip
+            *ngFor="let theme of filterChipThemes"
+            [content]="theme + ' theme'"
+            [iconTheme]="theme"
+            (onClick)="onFilterChipClick(theme)"
+          ></goab-filter-chip>
+        </goab-block>
+        <goab-text tag="p" size="body-s"
+          >Filter chip clicks: {{ filterChipClicks }}</goab-text
+        >
+      </goab-container>
+    </goab-block>
+  </goab-details>
+  <goab-details maxWidth="100%" heading="Form Controls" open="true">
+    <goab-block gap="l" direction="column">
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Inputs</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item
+            label="Standard input"
+            helpText="Tracks focus, blur, change, key press, and trailing icon click."
+            [requirement]="formItemRequirements[1]"
+          >
+            <goab-input
+              name="standard-input"
+              placeholder="Type here…"
+              [value]="textInputValue"
+              leadingIcon="search"
+              trailingIcon="close"
+              trailingIconAriaLabel="clear input"
+              (onChange)="onInputChange($event)"
+              (onFocus)="onInputFocus($event)"
+              (onBlur)="onInputBlur($event)"
+              (onKeyPress)="onInputKeyPress($event)"
+              (onTrailingIconClick)="onInputTrailingIconClick()"
+            ></goab-input>
+            <goab-form-item-slot slot="helptext">
+              Value: {{ textInputValue }}
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item
+            *ngFor="let size of formItemLabelSizes"
+            [label]="'Label ' + size"
+            [labelSize]="size"
+            [requirement]="formItemRequirements[0]"
+          >
+            <goab-input
+              name="input-{{ size }}"
+              [placeholder]="'Label size: ' + size"
+              (onChange)="onInputChange($event)"
+            ></goab-input>
+          </goab-form-item>
+        </goab-grid>
+        <goab-text tag="p" size="body-s" mt="s">
+          Trailing icon clicks: {{ inputTrailingClicks }}
+        </goab-text>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Number input & textarea</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item
+            label="Number input"
+            helpText="Supports increment controls and events."
+          >
+            <goab-input-number
+              name="numeric"
+              [value]="numberInputValue"
+              leadingContent="$"
+              trailingContent="CAD"
+              trailingIcon="calculator"
+              (onChange)="onInputNumberChange($event)"
+              (onTrailingIconClick)="onInputNumberTrailingIconClick()"
+            ></goab-input-number>
+            <goab-form-item-slot slot="helptext">
+              Current: {{ numberInputValue }} (trailing icon clicks:
+              {{ numberInputTrailingClicks }})
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item
+            label="Textarea"
+            helpText="Character, word, and unlimited counting."
+          >
+            <goab-textarea
+              name="notes"
+              [value]="textareaValue"
+              placeholder="Enter notes"
+              rows="4"
+              [countBy]="textareaCountByOptions[1]"
+              (onChange)="onTextareaChange($event)"
+              (onKeyPress)="onTextareaKeyPress($event)"
+              (onBlur)="onTextareaBlur($event)"
+            ></goab-textarea>
+            <goab-form-item-slot slot="helptext">
+              Length: {{ textareaValue.length }} chars
+            </goab-form-item-slot>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Checkboxes & radio</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item label="Single checkbox" helpText="Toggles boolean state.">
+            <goab-checkbox
+              name="single-checkbox"
+              value="agree"
+              text="I agree"
+              [checked]="checkboxValue"
+              (onChange)="onCheckboxChange($event)"
+            ></goab-checkbox>
+            <goab-form-item-slot slot="helptext">
+              Checked: {{ checkboxValue }}
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item label="Checkbox list" helpText="Select multiple options.">
+            <goab-checkbox-list
+              name="fruits"
+              [value]="checkboxListSelection"
+              (onChange)="onCheckboxListChange($event)"
+            >
+              <goab-checkbox name="apples" value="apples" text="Apples"></goab-checkbox>
+              <goab-checkbox
+                name="bananas"
+                value="bananas"
+                text="Bananas"
+              ></goab-checkbox>
+              <goab-checkbox name="pears" value="pears" text="Pears"></goab-checkbox>
+            </goab-checkbox-list>
+            <goab-form-item-slot slot="helptext">
+              Selected: {{ checkboxListSelection.join(", ") || "None" }}
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item label="Radio group" helpText="Orientation horizontal.">
+            <goab-radio-group
+              name="delivery"
+              [value]="selectedRadio"
+              orientation="horizontal"
+              (onChange)="onRadioChange($event)"
+            >
+              <goab-radio-item value="option-1" label="Pickup"></goab-radio-item>
+              <goab-radio-item value="option-2" label="Delivery"></goab-radio-item>
+              <goab-radio-item
+                value="option-3"
+                label="Courier"
+                disabled="true"
+              ></goab-radio-item>
+            </goab-radio-group>
+            <goab-form-item-slot slot="helptext">
+              Selected: {{ selectedRadio }}
+            </goab-form-item-slot>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Dropdowns</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item
+            label="Single select dropdown"
+            helpText="Filterable with action logging."
+          >
+            <goab-dropdown
+              name="counties"
+              placeholder="Select ..."
+              filterable="true"
+              (onChange)="onDropdownChange($event)"
+            >
+              <goab-dropdown-item value="ca" label="Canada" />
+              <goab-dropdown-item value="us" label="United States" />
+              <goab-dropdown-item value="mx" label="Mexico" />
+            </goab-dropdown>
+            <goab-form-item-slot slot="helptext">
+              Selected: {{ dropdownSelection || "None" }}
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item label="Multi select dropdown" helpText="Mount types demo.">
+            <goab-dropdown
+              name="mounts"
+              placeholder="Select mounts"
+              (onChange)="onDropdownChange($event)"
+            >
+              <goab-dropdown-item
+                *ngFor="let mount of dropdownMountTypes; let idx = index"
+                [value]="mount"
+                [label]="mount | titlecase"
+                [mountType]="mount"
+              />
+            </goab-dropdown>
+            <goab-form-item-slot slot="helptext">
+              Selected: {{ dropdownMultiSelection || "None" }}
+            </goab-form-item-slot>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Linked dropdowns</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item label="Group selector" helpText="Controls the options below.">
+            <goab-dropdown
+              name="linked-size-category"
+              placeholder="Choose size"
+              [value]="linkedDropdownCategory"
+              (onChange)="onLinkedDropdownCategoryChange($event)"
+            >
+              <goab-dropdown-item
+                *ngFor="let option of linkedDropdownCategories"
+                [value]="option.value"
+                [label]="option.label"
+              />
+            </goab-dropdown>
+            <goab-form-item-slot slot="helptext">
+              Selected: {{ linkedDropdownCategory | titlecase }}
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item
+            label="Item selector"
+            helpText="Populates based on the group above."
+          >
+            <goab-dropdown
+              name="linked-size-item"
+              placeholder="Choose item"
+              [value]="linkedDropdownItem"
+              (onChange)="onLinkedDropdownItemChange($event)"
+            >
+              <goab-dropdown-item
+                *ngFor="let option of dependentDropdownItems"
+                [value]="option.value"
+                [label]="option.label"
+              />
+            </goab-dropdown>
+            <goab-form-item-slot slot="helptext">
+              Selected:
+              {{ linkedDropdownItem ? (linkedDropdownItem | titlecase) : "None" }}
+            </goab-form-item-slot>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Date controls</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item label="Date picker (calendar)">
+            <goab-date-picker
+              name="reviewDate"
+              [value]="datePickerValue"
+              [type]="datePickerInputs[0]"
+              (onChange)="onDatePickerChange($event)"
+            ></goab-date-picker>
+          </goab-form-item>
+          <goab-form-item label="Date picker (input)">
+            <goab-date-picker
+              name="nextDate"
+              [value]="datePickerInputValue"
+              [type]="datePickerInputs[1]"
+              (onChange)="onDateInputChange($event)"
+            ></goab-date-picker>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Reactive form</goab-text>
+        <goab-block [formGroup]="reactiveDemoForm" gap="m" direction="column">
+          <goab-grid minChildWidth="320px" gap="l">
+            <goab-form-item
+              label="Delivery method"
+              helpText="GoabRadio reactive binding."
+            >
+            <goab-radio-group
+              name="reactive-delivery"
+              orientation="horizontal"
+              [value]="reactiveDemoForm.get('radio')?.value || undefined"
+              formControlName="radio"
+            >
+                <goab-radio-item
+                  *ngFor="let option of reactiveRadioOptions"
+                  [value]="option.value"
+                  [label]="option.label"
+                ></goab-radio-item>
+              </goab-radio-group>
+            </goab-form-item>
+            <goab-form-item
+              label="Subscription"
+              helpText="GoabCheckbox reactive binding."
+            >
+              <goab-checkbox
+                name="reactive-checkbox"
+                value="updates"
+                text="Send me product updates"
+                [value]="reactiveDemoForm.get('checkbox')?.value ?? false"
+                formControlName="checkbox"
+              ></goab-checkbox>
+            </goab-form-item>
+            <goab-form-item label="Full name" helpText="GoabInput reactive binding.">
+              <goab-input
+                name="reactive-input"
+                placeholder="Enter your name"
+                [value]="reactiveDemoForm.get('input')?.value ?? ''"
+                formControlName="input"
+              ></goab-input>
+            </goab-form-item>
+            <goab-form-item
+              label="Preferred item"
+              helpText="GoabDropdown reactive binding."
+            >
+              <goab-dropdown
+                name="reactive-dropdown"
+                placeholder="Select an item"
+                [value]="reactiveDemoForm.get('dropdown')?.value || ''"
+                formControlName="dropdown"
+              >
+                <goab-dropdown-item
+                  *ngFor="let option of reactiveDropdownOptions"
+                  [value]="option.value"
+                  [label]="option.label"
+                />
+              </goab-dropdown>
+            </goab-form-item>
+            <goab-form-item
+              label="Meeting date"
+              helpText="GoabDatePicker reactive binding."
+            >
+              <goab-date-picker
+                name="reactive-date"
+                [value]="reactiveDemoForm.get('date')?.value || undefined"
+                formControlName="date"
+              ></goab-date-picker>
+            </goab-form-item>
+            <goab-form-item
+              label="Interests"
+              helpText="GoabCheckboxList reactive binding."
+            >
+              <goab-checkbox-list
+                name="reactive-checkbox-list"
+                [value]="reactiveDemoForm.get('checkboxList')?.value || []"
+                formControlName="checkboxList"
+              >
+                <goab-checkbox
+                  *ngFor="let option of reactiveCheckboxListOptions"
+                  [name]="'interest-' + option.value"
+                  [value]="option.value"
+                  [text]="option.label"
+                ></goab-checkbox>
+              </goab-checkbox-list>
+            </goab-form-item>
+            <goab-form-item
+              label="Additional details"
+              helpText="GoabTextArea reactive binding."
+            >
+              <goab-textarea
+                name="reactive-textarea"
+                placeholder="Share more details"
+                rows="4"
+                [value]="reactiveDemoForm.get('textarea')?.value ?? ''"
+                formControlName="textarea"
+              ></goab-textarea>
+            </goab-form-item>
+          </goab-grid>
+          <goab-button type="secondary" (onClick)="resetReactiveDemoForm()">
+            Reset form
+          </goab-button>
+        </goab-block>
+        <goab-text tag="h4" size="heading-xs" mt="m">Live values</goab-text>
+        <goab-block gap="2xs" direction="column">
+          <goab-text tag="p" size="body-s">
+            GoabRadio: {{ reactiveDemoForm.get("radio")?.value || "None" }}
+          </goab-text>
+          <goab-text tag="p" size="body-s">
+            GoabCheckbox: {{ reactiveDemoForm.get("checkbox")?.value ? "true" : "false" }}
+          </goab-text>
+          <goab-text tag="p" size="body-s">
+            GoabInput: {{ reactiveDemoForm.get("input")?.value || "None" }}
+          </goab-text>
+          <goab-text tag="p" size="body-s">
+            GoabDropdown: {{ reactiveDemoForm.get("dropdown")?.value || "None" }}
+          </goab-text>
+          <goab-text tag="p" size="body-s">
+            GoabDatePicker: {{ reactiveDemoForm.get("date")?.value || "None" }}
+          </goab-text>
+          <goab-text tag="p" size="body-s">
+            GoabCheckboxList:
+            {{ (reactiveDemoForm.get("checkboxList")?.value || []).join(", ") || "None" }}
+          </goab-text>
+          <goab-text tag="p" size="body-s">
+            GoabTextArea: {{ reactiveDemoForm.get("textarea")?.value || "None" }}
+          </goab-text>
+        </goab-block>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Input width options</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item label='GoabInput width="75%"'>
+            <goab-input
+              name="width-75"
+              placeholder="Input at seventy five percent width"
+              width="75%"
+            ></goab-input>
+            <goab-form-item-slot slot="helptext">width="75%"</goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item label='GoabInput width="100ch"'>
+            <goab-input
+              name="width-100ch"
+              placeholder="Input at one hundred characters width"
+              width="100ch"
+            ></goab-input>
+            <goab-form-item-slot slot="helptext">width="100ch"</goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item label='GoabInput width="400px"'>
+            <goab-input
+              name="width-400px"
+              placeholder="Input at four hundred pixels width"
+              width="400px"
+            ></goab-input>
+            <goab-form-item-slot slot="helptext">width="400px"</goab-form-item-slot>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">File upload</goab-text>
+        <goab-grid minChildWidth="320px" gap="l">
+          <goab-form-item label="File upload input">
+            <goab-file-upload-input
+              variant="dragdrop"
+              name="documents"
+              accept=".pdf,.docx"
+              (onSelectFile)="onFileUploadInputSelect($event)"
+            ></goab-file-upload-input>
+            <goab-form-item-slot slot="helptext">
+              Files: {{ fileUploadInputFiles.join(", ") || "None" }}
+            </goab-form-item-slot>
+          </goab-form-item>
+          <goab-form-item label="Upload card" helpText="Cancel and delete emit events.">
+            <goab-file-upload-card
+              filename="budget.xlsx"
+              filesize="1.2 MB"
+              (onCancel)="onFileUploadCardCancel($event)"
+              (onDelete)="onFileUploadCardDelete($event)"
+            ></goab-file-upload-card>
+            <goab-form-item-slot slot="helptext">
+              {{ fileUploadCardEvents[0] || "No actions yet" }}
+            </goab-form-item-slot>
+          </goab-form-item>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Form stepper</goab-text>
+        <goab-form-stepper
+          [step]="formStepperState.step"
+          (onChange)="onFormStepperChange($event)"
+        >
+          <goab-form-step
+            *ngFor="let status of formStepStatuses; let idx = index"
+            [text]="'Step ' + (idx + 1)"
+            [status]="status"
+          ></goab-form-step>
+        </goab-form-stepper>
+        <goab-text tag="p" size="body-s" mt="s">
+          Active step: {{ formStepperState.step }}
+        </goab-text>
+      </goab-container>
+    </goab-block>
+  </goab-details>
+  <ng-template #drawerActions>
+    <goab-button type="secondary" (onClick)="toggleDrawer(drawerState.position)"
+      >Close</goab-button
+    >
+  </ng-template>
+  <ng-template #modalActions>
+    <goab-button-group alignment="end" mt="xl">
+      <goab-button type="secondary" (onClick)="closeModal('standard')"
+        >Cancel</goab-button
+      >
+      <goab-button type="primary" (onClick)="closeModal('standard')">Confirm</goab-button>
+    </goab-button-group>
+  </ng-template>
+  <ng-template #alertActions>
+    <goab-button type="primary" (onClick)="closeModal('alert')">Acknowledge</goab-button>
+  </ng-template>
+  <ng-template #popoverTarget>
+    <goab-button type="tertiary">Popover target</goab-button>
+  </ng-template>
+  <ng-template #tooltipContent> Tooltip content rendered via template. </ng-template>
+  <ng-template #heroActions>
+    <goab-button type="primary">Get started</goab-button>
+    <goab-button type="secondary">Secondary CTA</goab-button>
+  </ng-template>
+  <ng-template #accordionHeadingExtra>
+    <goab-badge type="information" content="Slot content"></goab-badge>
+  </ng-template>
+  <goab-details maxWidth="100%" heading="Feedback & Overlays" open="true">
+    <goab-block gap="l" direction="column">
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Callouts</goab-text>
+        <goab-grid minChildWidth="260px" gap="m">
+          <goab-callout
+            *ngFor="let type of calloutTypes; let idx = index"
+            [type]="type"
+            heading="{{ type | titlecase }}"
+            [iconTheme]="calloutIconThemes[idx % calloutIconThemes.length]"
+          >
+            <goab-text tag="p" size="body-m">
+              This is a {{ type }} callout using the
+              {{ calloutIconThemes[idx % calloutIconThemes.length] }}
+              icon theme.
+            </goab-text>
+          </goab-callout>
+        </goab-grid>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Notification</goab-text>
+        @for (type of notificationTypes; track type) {
+          <goab-notification
+            [type]="type"
+            maxContentWidth="100%"
+            (onDismiss)="onNotificationDismiss()"
+          >
+            {{ type | titlecase }} notification. Dismiss to trigger logging.
+          </goab-notification>
+        }
+        <goab-text tag="p" size="body-s" mt="s">
+          Dismissed: {{ notificationDismissed }}
+        </goab-text>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Modal & Drawer</goab-text>
+        <goab-block gap="m" direction="row">
+          <goab-button type="primary" (onClick)="openModal('standard')"
+            >Open Modal</goab-button
+          >
+          <goab-button type="secondary" (onClick)="openModal('alert')"
+            >Open Alert Modal</goab-button
+          >
+          <goab-button type="tertiary" (onClick)="toggleDrawer('right')">
+            Toggle Drawer ({{ drawerState.position }})
+          </goab-button>
+        </goab-block>
+        <goab-modal
+          [open]="modalState.standard"
+          heading="Standard modal"
+          [closable]="true"
+          [actions]="modalActions"
+          (onClose)="onModalClose('standard')"
+        >
+          <goab-text tag="p" size="body-m">
+            Standard modal content with template driven actions.
+          </goab-text>
+        </goab-modal>
+        <goab-modal
+          [open]="modalState.alert"
+          [heading]="tooltipContent"
+          [calloutVariant]="modalCalloutVariants[1]"
+          [actions]="alertActions"
+          (onClose)="onModalClose('alert')"
+        >
+          <goab-text tag="p" size="body-m">
+            Alert modals demonstrate template headings by reusing tooltip content
+            template.
+          </goab-text>
+        </goab-modal>
+        <goab-drawer
+          [open]="drawerState.open"
+          [position]="drawerState.position"
+          heading="Account drawer"
+          [actions]="drawerActions"
+          (onClose)="onDrawerClose()"
+        >
+          <goab-text tag="p" size="body-m">Drawer body content.</goab-text>
+        </goab-drawer>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Tooltip & Popover</goab-text>
+        <goab-block gap="l" direction="row">
+          @for (pos of tooltipPositions; track pos) {
+            <goab-tooltip [position]="pos" [content]="tooltipContent" hAlign="center">
+              <goab-button type="secondary">Tooltip {{ pos }}</goab-button>
+            </goab-tooltip>
+          }
+          <goab-popover [target]="popoverTarget" [position]="popoverPositions[1]">
+            <goab-text tag="p" size="body-m">
+              Popover content aligned {{ popoverPositions[1] }} relative to the button.
+            </goab-text>
+          </goab-popover>
+        </goab-block>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Progress & Skeletons</goab-text>
+        <goab-grid minChildWidth="200px" gap="m">
+          <goab-block direction="column" gap="xs">
+            <goab-text tag="span" size="body-m">Circular progress</goab-text>
+            <goab-circular-progress
+              *ngFor="let variant of circularProgressVariants; let idx = index"
+              [variant]="variant"
+              [size]="circularProgressSizes[idx % circularProgressSizes.length]"
+            ></goab-circular-progress>
+          </goab-block>
+          <goab-block direction="column" gap="xs">
+            <goab-text tag="span" size="body-m">Spinner types</goab-text>
+          </goab-block>
+          <goab-block direction="column" gap="xs">
+            <goab-text tag="span" size="body-m">Skeletons</goab-text>
+            <goab-skeleton
+              *ngFor="let skeleton of skeletonTypes; let idx = index"
+              [type]="skeleton"
+              [size]="skeletonSizes[idx % skeletonSizes.length]"
+              [lineCount]="idx + 1"
+            ></goab-skeleton>
+          </goab-block>
+        </goab-grid>
+        <goab-block direction="row" gap="m" mt="m">
+          <goab-button type="primary" (onClick)="toggleFullScreenProgress()">
+            {{
+              showFullScreenProgress
+                ? "Hide Full Screen Loader"
+                : "Show Full Screen Loader"
+            }}
+          </goab-button>
+        </goab-block>
+        <goab-circular-progress
+          variant="fullscreen"
+          message="Loading data..."
+          [visible]="showFullScreenProgress"
+        ></goab-circular-progress>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Temporary notification controller</goab-text>
+        <goab-temporary-notification-ctrl
+          verticalPosition="top"
+          horizontalPosition="right"
+        ></goab-temporary-notification-ctrl>
+        <goab-button (onClick)="showTempNotification()">Show Notification</goab-button>
+        <goab-text tag="p" size="body-s" mt="s">
+          Controller is positioned top-right to ensure attributes are respected.
+        </goab-text>
+      </goab-container>
+    </goab-block>
+  </goab-details>
+  <goab-details maxWidth="100%" heading="Navigation & Data" open="true">
+    <goab-block gap="l" direction="column">
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Accordion & Tabs</goab-text>
+        <goab-grid minChildWidth="320px" gap="m">
+          <goab-accordion
+            *ngFor="let headingSize of accordionHeadingSizes; let idx = index"
+            [heading]="'Accordion ' + (idx + 1)"
+            [headingSize]="headingSize"
+            [iconPosition]="accordionIconPositions[idx % accordionIconPositions.length]"
+            [headingContent]="accordionHeadingExtra"
+            [open]="idx === 0"
+            (onChange)="onAccordionChange('Accordion ' + (idx + 1), $event)"
+          >
+            <goab-text tag="p" size="body-m">
+              Accordion content for {{ headingSize }} heading. Toggle to emit change
+              events.
+            </goab-text>
+          </goab-accordion>
+        </goab-grid>
+        <goab-text tag="p" size="body-s" mt="s">
+          Last toggle: {{ accordionLastToggle?.heading || "None" }} →
+          {{ accordionLastToggle?.open }}
+        </goab-text>
+        <goab-tabs [initialTab]="tabsState.selected" (onChange)="onTabsChange($event)">
+          @for (tab of tabItems; track tab.heading) {
+            <goab-tab [heading]="tab.heading"> Content for {{ tab.heading }}. </goab-tab>
+          }
+        </goab-tabs>
+        <goab-text tag="p" size="body-s" mt="s">
+          Selected tab index: {{ tabsState.selected }}
+        </goab-text>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Table & Pagination</goab-text>
+        <goab-table variant="normal" (onSort)="onTableSort($event)">
+          <thead>
+            <tr>
+              <th>
+                <goab-table-sort-header name="name"> Name </goab-table-sort-header>
+              </th>
+              <th>
+                <goab-table-sort-header name="created" direction="asc">
+                  Created
+                </goab-table-sort-header>
+              </th>
+              <th>Status</th>
+              <th class="goa-table-number-header">Progress</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of pageData; track row.name) {
+              <tr>
+                <td>{{ row.name }}</td>
+                <td>{{ row.created }}</td>
+                <td>{{ row.status }}</td>
+                <td class="goa-table-number-column">{{ row.progress }}%</td>
+              </tr>
+            }
+          </tbody>
+        </goab-table>
+        <goab-text tag="p" size="body-s" mt="s">
+          Last sort: {{ tableSortState.sortBy }} ({{ tableSortState.sortDir }})
+        </goab-text>
+        <goab-pagination
+          [itemCount]="paginationState.total"
+          [perPageCount]="paginationState.perPage"
+          [pageNumber]="paginationState.page"
+          (onChange)="onPaginationChange($event)"
+        ></goab-pagination>
+        <goab-text tag="p" size="body-s" mt="s">
+          Page: {{ paginationState.page }} /
+          {{ paginationState.total / paginationState.perPage | number: "1.0-0" }}
+        </goab-text>
+      </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Site chrome</goab-text>
+        <goab-column-layout>
+          <goab-microsite-header type="alpha" version="UAT" />
+          <goab-app-header heading="Sample App" (onMenuClick)="onHeaderMenuClick()">
+            <a href="#">Home</a>
+            <goab-app-header-menu heading="Menu">
+              <a href="#">Item 1</a>
+              <a href="#">Item 2</a>
+            </goab-app-header-menu>
+          </goab-app-header>
+          <goab-hero-banner
+            heading="Hero banner"
+            backgroundUrl="https://picsum.photos/1200/400?random=3"
+            [actions]="heroActions"
+          >
+            <goab-text tag="p" size="body-l">
+              Hero banner demonstrates background imagery and projected actions.
+            </goab-text>
+          </goab-hero-banner>
+          <goab-block direction="row" gap="l" mt="m">
+            <goab-side-menu>
+              <goab-side-menu-heading>Menu heading</goab-side-menu-heading>
+              <goab-side-menu-group heading="Group one">
+                <a href="#">Link A</a>
+                <a href="#">Link B</a>
+              </goab-side-menu-group>
+              <a href="#">Loose link</a>
+            </goab-side-menu>
+            <goab-page-block width="full">
+              <goab-text tag="p" size="body-m">
+                Content area with side menu demonstrates layout wrappers.
+              </goab-text>
+            </goab-page-block>
+          </goab-block>
+          <goab-app-footer maxContentWidth="100%">
+            <goab-app-footer-nav-section slot="nav" heading="Resources">
+              <a href="#">Documentation</a>
+              <a href="#">Support</a>
+            </goab-app-footer-nav-section>
+            <goab-app-footer-meta-section slot="meta">
+              <goab-text tag="p" size="body-s"
+                >Copyright 2025 Government of Alberta</goab-text
+              >
+            </goab-app-footer-meta-section>
+          </goab-app-footer>
+        </goab-column-layout>
+        <goab-text tag="p" size="body-s" mt="s">
+          Header menu clicked: {{ headerMenuActivated }}
+        </goab-text>
+      </goab-container>
+    </goab-block>
+  </goab-details>
+</goab-block>
