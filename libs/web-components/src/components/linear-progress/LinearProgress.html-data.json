@@ -4,7 +4,7 @@
     {
       "name": "progress",
       "type": "number",
-      "description": "Set the progress value. Setting this value will change the type from infinite to progress",
+      "description": "Set the progress value. Should be between 0 and 100.",
       "values": [
         {
           "name": "-1"
@@ -16,7 +16,7 @@
   "references": [
     {
       "name": "GoA Linear progress",
-      "url": "{{siteUrl}}/?path=/docs/components-linear-progress--basic"
+      "url": "{{siteUrl}}/?path=/docs/components-linear-progress"
     }
   ]
 }
