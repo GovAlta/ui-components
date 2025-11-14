@@ -11,17 +11,17 @@
       <goab-grid minChildWidth="156px" gap="2xl">
         <div name="search-criteria">
           <goab-form-item label="Meridan">
-            <goab-input [error]="true" (change)="onMeridanChange($event)"></goab-input>
+            <goab-input [error]="true" (onChange)="onMeridanChange($event)"></goab-input>
           </goab-form-item>
         </div>
         <div name="search-criteria">
           <goab-form-item label="Range">
-            <goab-input (change)="onRangeChange($event)"></goab-input>
+            <goab-input (onChange)="onRangeChange($event)"></goab-input>
           </goab-form-item>
         </div>
         <div name="search-criteria">
           <goab-form-item label="Township">
-            <goab-input (change)="onTownshipChange($event)"></goab-input>
+            <goab-input (onChange)="onTownshipChange($event)"></goab-input>
           </goab-form-item>
         </div>
       </goab-grid>
@@ -37,18 +37,18 @@
             <goab-input
               width="100%"
               [error]="true"
-              (change)="onMeridanChange($event)"
+              (onChange)="onMeridanChange($event)"
             ></goab-input>
           </goab-form-item>
         </div>
         <div name="search-criteria" style="flex: 1; min-width: 156px">
           <goab-form-item label="Range">
-            <goab-input width="100%" (change)="onRangeChange($event)"></goab-input>
+            <goab-input width="100%" (onChange)="onRangeChange($event)"></goab-input>
           </goab-form-item>
         </div>
         <div name="search-criteria" style="flex: 1; min-width: 156px">
           <goab-form-item label="Township">
-            <goab-input width="100%" (change)="onTownshipChange($event)"></goab-input>
+            <goab-input width="100%" (onChange)="onTownshipChange($event)"></goab-input>
           </goab-form-item>
         </div>
       </div>

@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { GoabFormItem, GoabInput, GoabGrid } from "@abgov/angular-components";
+import {
+  GoabFormItem,
+  GoabInput,
+  GoabGrid,
+  GoabInputOnChangeDetail,
+} from "@abgov/angular-components";
 
 @Component({
   selector: "abgov-bug2529",
@@ -13,15 +18,15 @@ export class Bug2529Component {
   rangeValue = "";
   townshipValue = "";
 
-  onMeridanChange(event: any) {
-    this.meridanValue = event.target.value;
+  onMeridanChange(detail: GoabInputOnChangeDetail) {
+    this.meridanValue = detail.value;
   }
 
-  onRangeChange(event: any) {
-    this.rangeValue = event.target.value;
+  onRangeChange(detail: GoabInputOnChangeDetail) {
+    this.rangeValue = detail.value;
   }
 
-  onTownshipChange(event: any) {
-    this.townshipValue = event.target.value;
+  onTownshipChange(detail: GoabInputOnChangeDetail) {
+    this.townshipValue = detail.value;
   }
 }

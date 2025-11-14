@@ -22,6 +22,7 @@ export const Bug2547Route = () => {
                   <a
                     className="version-language-switcher__heading"
                     id="language-switcher"
+                    href="/#"
                   >
                     <GoabIcon type="chevron-down" size="small"></GoabIcon>Angular
                   </a>
@@ -41,6 +42,7 @@ export const Bug2547Route = () => {
                         color: "var(--goa-color-text-default)!important",
                         whiteSpace: "nowrap",
                       }}
+                      href="/#"
                     >
                       {lang}
                     </a>

@@ -1,7 +1,9 @@
 import { GoabInput } from "@abgov/react-components";
 
 export const Bug2404Route = () => {
-  function noop() {}
+  function noop() {
+    /* This function intentionally does nothing */
+  }
   function trailingIconClick() {
     console.log("Trailing Icon Clicked");
   }

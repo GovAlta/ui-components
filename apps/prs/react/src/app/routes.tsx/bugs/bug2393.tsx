@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  GoabPagination,
   GoabTable,
   GoabBadge,
   GoabPopover,
@@ -15,10 +14,6 @@ import {
 export function Bug2393Route() {
   function handleClick() {
     console.log("Click event");
-  }
-
-  function handlePageChange(event: GoabPaginationOnChangeDetail) {
-    console.log("Page changed: ", event);
   }
 
   function handleSort(event: GoabTableOnSortDetail) {

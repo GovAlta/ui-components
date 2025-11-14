@@ -16,17 +16,25 @@ interface Upload {
   uploader: Uploader;
 }
 class MockUploader implements Uploader {
-  public onprogress: (percent: number) => void = (_: number) => {};
-  public onabort: () => void = () => {};
-  public onfail: (err: string) => void = (_: string) => {};
-  public oncomplete: () => void = () => {};
+  public onprogress: (percent: number) => void = (_: number) => {
+    /* This function intentionally does nothing */
+  };
+  public onabort: () => void = () => {
+    /* This function intentionally does nothing */
+  };
+  public onfail: (err: string) => void = (_: string) => {
+    /* This function intentionally does nothing */
+  };
+  public oncomplete: () => void = () => {
+    /* This function intentionally does nothing */
+  };
 
   upload(_url: string | ArrayBuffer) {
-    // implement your logic to upload files
+    /* This function intentionally does nothing */
   }
 
   abort() {
-    // implement your logic to abort file upload
+    /* This function intentionally does nothing */
   }
 }
 

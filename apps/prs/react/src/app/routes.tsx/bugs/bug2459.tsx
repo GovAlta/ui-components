@@ -21,10 +21,18 @@ export const Bug2459Route = () => {
   }
   class MockUploader implements Uploader {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public onprogress: (percent: number) => void = (_: number) => {};
-    public onabort: () => void = () => {};
-    public onfail: (err: string) => void = (_: string) => {};
-    public oncomplete: () => void = () => {};
+    public onprogress: (percent: number) => void = (_: number) => {
+      /* This function intentionally does nothing */
+    };
+    public onabort: () => void = () => {
+      /* This function intentionally does nothing */
+    };
+    public onfail: (err: string) => void = (_: string) => {
+      /* This function intentionally does nothing */
+    };
+    public oncomplete: () => void = () => {
+      /* This function intentionally does nothing */
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     upload(_url: string | ArrayBuffer) {
