@@ -87,9 +87,6 @@
 
   export let filterablecontext: string = "false";
 
-  // Version control for V1/V2 styling
-  export let version: "1" | "2" = "1";
-
   // Private
 
   let _rootEl: HTMLElement;
@@ -404,7 +401,6 @@
       bind:this={_popoverEl}
       data-testid="popover-content"
       class="popover-content"
-      class:v2={version === "2"}
       style={styles(
         style("width", width),
         style("min-width", minwidth),
@@ -458,18 +454,13 @@
     border-radius: var(--goa-popover-border-radius);
     outline: none;
     overflow: visible;
-    filter: var(--goa-popover-shadow);
+    box-shadow: var(--goa-popover-box-shadow, none);
+    filter: var(--goa-popover-shadow, none);
+    border: var(--goa-popover-border, none);
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);
     margin-left: var(--offset-left, 0);
     margin-right: var(--offset-right, 0);
-  }
-
-  /* V2 Styling */
-  .popover-content.v2 {
-    border: var(--goa-popover-border);
-    box-shadow: var(--goa-popover-box-shadow);
-    filter: none;
   }
 
   :global(::slotted(ul)) {
