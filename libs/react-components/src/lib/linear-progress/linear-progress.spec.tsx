@@ -4,7 +4,7 @@ import { GoabLinearProgress } from "./linear-progress";
 
 describe("LinearProgress", () => {
   it("renders a goa-linear-progress", async () => {
-    const { container } = render(<GoabLinearProgress />);
+    const { container } = render(<GoabLinearProgress progress={50} />);
     const el = container.querySelector("goa-linear-progress");
     await waitFor(() => {
       expect(el).toBeTruthy();
