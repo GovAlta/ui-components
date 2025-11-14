@@ -1,0 +1,132 @@
+<h1>Input Text Alignment Feature Test</h1>
+<p>Testing the textAlign property functionality for input components</p>
+
+<h2>Text Input Alignment</h2>
+<p>Testing left vs right alignment for text inputs</p>
+
+<goab-block gap="m" direction="column">
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Left Aligned Text (Default)">
+      <goab-input
+        name="text-left"
+        [value]="textValue"
+        textAlign="left"
+        testId="text-left-input"
+        (onChange)="onTextChange($event)"
+        placeholder="Enter text here..."
+      />
+    </goab-form-item>
+
+    <goab-form-item label="Right Aligned Text">
+      <goab-input
+        name="text-right"
+        [value]="textValue"
+        textAlign="right"
+        testId="text-right-input"
+        (onChange)="onTextChange($event)"
+        placeholder="Enter text here..."
+      />
+    </goab-form-item>
+  </goab-block>
+
+  <h2>Number Input Alignment</h2>
+  <p>Number inputs default to right alignment for better readability</p>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Number Input (Default Right Aligned)">
+      <goab-input-number
+        name="number-default"
+        [value]="numberValue"
+        testId="number-default-input"
+        (onChange)="onNumberChange($event)"
+        placeholder="0.00"
+      />
+    </goab-form-item>
+
+    <goab-form-item label="Number Input (Explicit Left Aligned)">
+      <goab-input-number
+        name="number-left"
+        [value]="numberValue"
+        textAlign="left"
+        testId="number-left-input"
+        (onChange)="onNumberChange($event)"
+        placeholder="0.00"
+      />
+    </goab-form-item>
+
+    <goab-form-item label="Number Input (Explicit Right Aligned)">
+      <goab-input-number
+        name="number-right"
+        [value]="numberValue"
+        textAlign="right"
+        testId="number-right-input"
+        (onChange)="onNumberChange($event)"
+        placeholder="0.00"
+      />
+    </goab-form-item>
+  </goab-block>
+
+  <h2>Currency and Percentage Examples</h2>
+  <p>Demonstrating right alignment for financial and percentage data</p>
+
+  <goab-block gap="l" direction="column">
+    <goab-form-item label="Currency Amount (Right Aligned)">
+      <goab-input-number
+        name="currency"
+        [value]="currencyValue"
+        textAlign="right"
+        testId="currency-input"
+        (onChange)="onCurrencyChange($event)"
+        placeholder="0.00"
+        trailingContent="$"
+      />
+    </goab-form-item>
+
+    <goab-form-item label="Percentage (Right Aligned)">
+      <goab-input-number
+        name="percentage"
+        [value]="percentageValue"
+        textAlign="right"
+        testId="percentage-input"
+        (onChange)="onPercentageChange($event)"
+        placeholder="0.0"
+        trailingContent="%"
+      />
+    </goab-form-item>
+  </goab-block>
+
+  <h2>Test Results</h2>
+
+  <goab-block gap="s" direction="column">
+    <goab-text tag="p"><strong>Text Value:</strong> {{ textValue || "None" }}</goab-text>
+    <goab-text tag="p"
+      ><strong>Number Value:</strong> {{ numberValue || "None" }}</goab-text
+    >
+    <goab-text tag="p"
+      ><strong>Currency Value:</strong> ${{ currencyValue || "None" }}</goab-text
+    >
+    <goab-text tag="p"
+      ><strong>Percentage Value:</strong> {{ percentageValue || "None" }}%</goab-text
+    >
+  </goab-block>
+
+  <h2>Feature Summary</h2>
+
+  <goab-block gap="s" direction="column">
+    <goab-text tag="p">
+      ✅ <strong>textAlign="left"</strong> - Text is left-aligned (default for text
+      inputs)
+    </goab-text>
+    <goab-text tag="p">
+      ✅ <strong>textAlign="right"</strong> - Text is right-aligned (default for number
+      inputs)
+    </goab-text>
+    <goab-text tag="p">
+      ✅ <strong>Number inputs</strong> default to right alignment for better numeric
+      readability
+    </goab-text>
+    <goab-text tag="p">
+      ✅ <strong>Currency and percentage</strong> inputs benefit from right alignment
+    </goab-text>
+  </goab-block>
+</goab-block>

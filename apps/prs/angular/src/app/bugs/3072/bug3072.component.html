@@ -1,0 +1,105 @@
+<div class="bug3072">
+  <goab-block direction="column" gap="xl">
+    <goab-text tag="h1" size="heading-l"
+      >Bug 3072 – Angular form reset scenario</goab-text
+    >
+    <goab-text tag="p" size="body-m">
+      Recreates the reactive form described in issue 3072. Populate the fields, reset the
+      form multiple times, and verify that each GoA input reflects the cleared state.
+    </goab-text>
+
+    <form class="bug3072__form" novalidate [formGroup]="bugForm">
+      <goab-grid gap="l" minChildWidth="320px">
+        <goab-form-item label="Last name" requirement="required">
+          <goab-input
+            name="lastName"
+            placeholder="Enter a last name"
+            formControlName="lastName"
+            [trailingContent]="currencySuffix"
+          >
+            <ng-template #currencySuffix> $ </ng-template>
+          </goab-input>
+        </goab-form-item>
+
+        <goab-form-item label="First name">
+          <goab-input
+            name="firstName"
+            placeholder="Enter a first name"
+            formControlName="firstName"
+          ></goab-input>
+        </goab-form-item>
+
+        <goab-form-item label="Member ID">
+          <goab-input-number
+            name="memberId"
+            placeholder="Enter a numeric ID"
+            formControlName="memberId"
+          ></goab-input-number>
+        </goab-form-item>
+
+        <goab-form-item label="Gender">
+          <goab-dropdown
+            name="genderId"
+            placeholder="Select a gender"
+            formControlName="genderId"
+          >
+            <goab-dropdown-item
+              *ngFor="let gender of genders"
+              [value]="gender.value"
+              [label]="gender.label"
+            ></goab-dropdown-item>
+          </goab-dropdown>
+        </goab-form-item>
+
+        <goab-form-item label="Birth date">
+          <goab-date-picker
+            name="birthDate"
+            placeholder="YYYY-MM-DD"
+            formControlName="birthDate"
+          ></goab-date-picker>
+        </goab-form-item>
+
+        <goab-form-item label="Email subscription">
+          <goab-checkbox
+            name="subscribe"
+            text="Subscribe to updates"
+            formControlName="subscribe"
+          ></goab-checkbox>
+        </goab-form-item>
+
+        <goab-form-item label="Program interests" helpText="Pick zero or more options.">
+          <goab-checkbox-list name="interests" formControlName="interests">
+            <goab-checkbox
+              *ngFor="let interest of interests"
+              [name]="interest.value"
+              [text]="interest.label"
+            ></goab-checkbox>
+          </goab-checkbox-list>
+        </goab-form-item>
+
+        <goab-form-item label="Additional notes">
+          <goab-textarea
+            name="notes"
+            rows="4"
+            placeholder="Add optional notes"
+            formControlName="notes"
+          ></goab-textarea>
+        </goab-form-item>
+      </goab-grid>
+
+      <goab-block class="bug3072__actions" direction="row" gap="m">
+        <goab-button type="primary" (onClick)="populateSampleData()"
+          >Populate sample data</goab-button
+        >
+        <goab-button type="secondary" (onClick)="resetForm()">Reset form</goab-button>
+      </goab-block>
+    </form>
+
+    <section class="bug3072__values">
+      <goab-text tag="h2" size="heading-m" mb="xs">Form value snapshot</goab-text>
+      <pre class="bug3072__json">{{ bugForm.value | json }}</pre>
+      <goab-text tag="h2" size="heading-m" mb="xs">valueChanges stream</goab-text>
+      <pre class="bug3072__json">{{ valueChanges$ | async | json }}</pre>
+    </section>
+  </goab-block>
+</div>

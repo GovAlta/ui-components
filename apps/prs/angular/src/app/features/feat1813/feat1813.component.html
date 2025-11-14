@@ -1,0 +1,102 @@
+<goab-block direction="column" gap="xl">
+  <goab-text tag="h1" size="heading-l">Date Picker width verification</goab-text>
+  <goab-text tag="p" size="body-m">
+    Demonstrates the new <code>width</code> input and confirms the minimum readable size
+    matches our other text-based controls.
+  </goab-text>
+
+  <goab-block direction="column" gap="l">
+    <div
+      *ngFor="let scenario of scenarios; trackBy: trackByScenarioId"
+      class="scenario-wrapper"
+      [attr.data-scenario]="scenario.id"
+      [ngStyle]="scenario.containerWidth ? { width: scenario.containerWidth } : null"
+    >
+      <goab-block class="scenario-card" direction="column" gap="s">
+        <goab-text tag="h3" size="heading-s">{{ scenario.label }}</goab-text>
+        <goab-text tag="p" size="body-s">{{ scenario.description }}</goab-text>
+        <goab-text
+          *ngIf="scenario.emphasis"
+          tag="p"
+          size="body-s"
+          class="scenario-emphasis"
+        >
+          {{ scenario.emphasis }}
+        </goab-text>
+
+        <goab-form-item [label]="scenario.label">
+          <goab-date-picker
+            [name]="scenario.id"
+            [type]="scenario.type"
+            [width]="scenario.width"
+            (onChange)="onDateChange($event)"
+          ></goab-date-picker>
+        </goab-form-item>
+
+        <goab-text tag="p" size="body-s" class="measurement">
+          Host width:
+          {{
+            measurements[scenario.id].hostWidth !== undefined
+              ? measurements[scenario.id].hostWidth + "px"
+              : "–"
+          }}
+          · Input width:
+          {{
+            measurements[scenario.id].inputWidth !== undefined
+              ? measurements[scenario.id].inputWidth + "px"
+              : "–"
+          }}
+        </goab-text>
+        <goab-text tag="p" size="body-s" class="measurement">
+          Input width attribute:
+          {{
+            measurements[scenario.id].widthAttr !== undefined
+              ? measurements[scenario.id].widthAttr || "none"
+              : "–"
+          }}
+        </goab-text>
+      </goab-block>
+    </div>
+  </goab-block>
+
+  <goab-block direction="column" gap="m">
+    <goab-text tag="h2" size="heading-m">Popover sanity check</goab-text>
+    <goab-popover [target]="target">
+      <ng-template #target>
+        <goab-button type="secondary" size="compact">Open popover</goab-button>
+      </ng-template>
+      <p>Popover content should size itself to the calendar content.</p>
+    </goab-popover>
+  </goab-block>
+
+  <form [formGroup]="dropdownGroup">
+    <goab-form-item label="Filterable dropdown comparison">
+      <goab-dropdown
+        name="feature-1813-dropdown"
+        formControlName="dropdownCtrl"
+        width="420px"
+        filterable="true"
+        [value]="dropdownGroup.controls['dropdownCtrl'].value"
+      >
+        <goab-dropdown-item value="red" label="Red" />
+        <goab-dropdown-item value="green" label="Green" />
+        <goab-dropdown-item value="blue" label="Blue" />
+        <goab-dropdown-item value="black" label="Black" />
+        <goab-dropdown-item value="white" label="White" />
+        <goab-dropdown-item value="yellow" label="Yellow" />
+        <goab-dropdown-item value="magenta" label="Magenta" />
+        <goab-dropdown-item value="purple" label="Purple" />
+      </goab-dropdown>
+    </goab-form-item>
+  </form>
+
+  <goab-block direction="column" gap="2xs">
+    <goab-text tag="h2" size="heading-m">Latest interactions</goab-text>
+    <goab-text tag="p" size="body-s">
+      Last selected date: {{ lastSelectedDate || "None selected" }}
+    </goab-text>
+    <goab-text tag="p" size="body-s">
+      Last selected dropdown: {{ lastSelectedDropdown || "None selected" }}
+    </goab-text>
+  </goab-block>
+</goab-block>

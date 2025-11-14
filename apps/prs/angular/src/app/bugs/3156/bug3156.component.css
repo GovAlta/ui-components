@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+.bug3156 {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.bug3156__steps {
+  margin: 0;
+  padding-left: 1.5rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.bug3156__diagnostics table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bug3156__diagnostics th,
+.bug3156__diagnostics td {
+  border: 1px solid #d0d5dd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.bug3156__diagnostics th {
+  background-color: #f2f4f7;
+}
+
+.bug3156__empty {
+  margin: 0;
+  font-style: italic;
+}

@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  padding: 24px;
+}
+
+.demo-card {
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.drawer-content {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding: 16px;
+  }
+}

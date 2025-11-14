@@ -1,0 +1,95 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1" size="heading-l"
+    >Feature 2682 - DatePicker Manual Testing</goab-text
+  >
+
+  <goab-text tag="p" size="body-m">
+    This test demonstrates various DatePicker configurations with FormItem wrappers. Check
+    the browser console for onChange events.
+  </goab-text>
+
+  <!-- Test 1: Default DatePicker -->
+  <goab-form-item label="Test 1: Default DatePicker (no special properties)">
+    <goab-date-picker
+      name="default-datepicker"
+      value="2025-10-15"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 2: Disabled DatePicker -->
+  <goab-form-item label="Test 2: Disabled DatePicker">
+    <goab-date-picker
+      name="disabled-datepicker"
+      [disabled]="true"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 3: Input type DatePicker -->
+  <goab-form-item label="Test 3: Input type DatePicker">
+    <goab-date-picker
+      name="input-type-datepicker"
+      type="input"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 4: Input type and disabled DatePicker -->
+  <goab-form-item label="Test 4: Input type and disabled DatePicker">
+    <goab-date-picker
+      name="input-disabled-datepicker"
+      type="input"
+      [disabled]="true"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 5: DatePicker with min and max dates -->
+  <goab-form-item label="Test 5: DatePicker with min/max dates (one month range)">
+    <goab-date-picker
+      name="min-max-datepicker"
+      [min]="minDate"
+      [max]="maxDate"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 6: Input type DatePicker with min and max dates -->
+  <goab-form-item label="Test 6: Input type DatePicker with min/max dates">
+    <goab-date-picker
+      name="input-min-max-datepicker"
+      type="input"
+      [min]="minDate"
+      [max]="maxDate"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 7: DatePicker with error=false -->
+  <goab-form-item label="Test 7: DatePicker with error=true">
+    <goab-date-picker
+      name="error-false-datepicker"
+      [error]="true"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+
+  <!-- Test 8: Input type DatePicker with error=false -->
+  <goab-form-item label="Test 8: Input type DatePicker with error=true">
+    <goab-date-picker
+      name="input-error-false-datepicker"
+      type="input"
+      [error]="true"
+      (onChange)="handleDateChange($event)"
+    >
+    </goab-date-picker>
+  </goab-form-item>
+</goab-block>

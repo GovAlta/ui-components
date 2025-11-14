@@ -1,0 +1,105 @@
+<div class="feat2361">
+  <goab-block direction="column" gap="l">
+    <goab-text tag="h1" size="heading-l">Feature 2361 - Selection control toggles</goab-text>
+    <goab-text tag="p" size="body-m">
+      Manual scenarios to verify the expanded clickable area on radio and checkbox controls while sharing error and disabled toggles.
+    </goab-text>
+
+    <div class="feat2361__actions">
+      <goab-button type="secondary" (onClick)="toggleError()">
+        {{ errorActive ? "Clear error state" : "Enable error state" }}
+      </goab-button>
+      <goab-button type="secondary" (onClick)="toggleDisabled()">
+        {{ disabledActive ? "Enable controls" : "Disable controls" }}
+      </goab-button>
+    </div>
+
+    <goab-text tag="p" size="body-s">
+      Error state: {{ errorActive ? "on" : "off" }} | Disabled: {{ disabledActive ? "on" : "off" }}
+    </goab-text>
+
+    <goab-grid minChildWidth="320px" gap="l">
+      <goab-form-item
+        label="Horizontal orientation"
+        [error]="errorActive ? errorMessage : undefined"
+        requirement="optional"
+      >
+        <goab-radio-group
+          name="feat2361-horizontal"
+          orientation="horizontal"
+          [disabled]="disabledActive"
+          [error]="errorActive"
+        >
+          <goab-radio-item
+            *ngFor="let option of horizontalOptions"
+            [value]="option.value"
+            [label]="option.label"
+            name="feat2361-horizontal"
+            [disabled]="disabledActive"
+            [error]="errorActive"
+          ></goab-radio-item>
+        </goab-radio-group>
+      </goab-form-item>
+
+      <goab-form-item
+        label="Vertical orientation"
+        [error]="errorActive ? errorMessage : undefined"
+        requirement="optional"
+      >
+        <goab-radio-group
+          name="feat2361-vertical"
+          orientation="vertical"
+          [disabled]="disabledActive"
+          [error]="errorActive"
+        >
+          <goab-radio-item
+            *ngFor="let option of verticalOptions"
+            [value]="option.value"
+            [label]="option.label"
+            name="feat2361-vertical"
+            [disabled]="disabledActive"
+            [error]="errorActive"
+          ></goab-radio-item>
+        </goab-radio-group>
+      </goab-form-item>
+
+      <goab-form-item
+        label="Checkbox list"
+        [error]="errorActive ? errorMessage : undefined"
+        requirement="optional"
+      >
+        <goab-checkbox-list
+          name="feat2361-checkbox-list"
+          [disabled]="disabledActive"
+          [error]="errorActive"
+        >
+          <goab-checkbox
+            *ngFor="let option of checkboxListOptions"
+            [name]="option.value"
+            [value]="option.value"
+            [text]="option.label"
+            [disabled]="disabledActive"
+            [error]="errorActive"
+          ></goab-checkbox>
+        </goab-checkbox-list>
+      </goab-form-item>
+
+      <goab-form-item
+        label="Standalone checkboxes"
+        [error]="errorActive ? errorMessage : undefined"
+        requirement="optional"
+      >
+        <div class="feat2361__checkboxes">
+          <goab-checkbox
+            *ngFor="let option of checkboxOptions"
+            [name]="option.value"
+            [text]="option.label"
+            [value]="option.value"
+            [disabled]="disabledActive"
+            [error]="errorActive"
+          ></goab-checkbox>
+        </div>
+      </goab-form-item>
+    </goab-grid>
+  </goab-block>
+</div>

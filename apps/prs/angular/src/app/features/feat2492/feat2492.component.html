@@ -1,0 +1,65 @@
+<goab-block direction="column" gap="l">
+  <goab-block direction="column" gap="s">
+    <goab-text tag="h1">Feature 2492 - textarea blur preview</goab-text>
+    <goab-text tag="p">
+      Enter text, move focus away, and confirm the onBlur event emits the textarea value for display below.
+    </goab-text>
+  </goab-block>
+
+  <goab-grid minChildWidth="320px" gap="l">
+    <goab-block direction="column" gap="m">
+      <goab-text tag="h2">Interactive example</goab-text>
+      <goab-form-item label="Observation notes" helpText="Blur the textarea to surface the captured value.">
+        <goab-textarea
+          name="feat2492-textarea"
+          placeholder="Type your observations about the textarea blur behaviour"
+          [value]="textareaValue"
+          (onChange)="handleChange($event)"
+          (onKeyPress)="handleKeyPress($event)"
+          (onBlur)="handleBlur($event)"
+        ></goab-textarea>
+      </goab-form-item>
+
+      <goab-form-item label="Companion input">
+        <goab-input
+          name="feat2492-input"
+          placeholder="Standalone GoabInput for layout"
+        ></goab-input>
+      </goab-form-item>
+
+      <goab-block direction="column" gap="xs" class="result-panel">
+        <goab-text tag="h3">Captured blur details</goab-text>
+        <ng-container *ngIf="blurCount > 0; else waitingCopy">
+          <goab-text tag="p">Blur count: {{ blurCount }}</goab-text>
+          <goab-text tag="p">Last value: {{ lastBlurValue || '(empty text)' }}</goab-text>
+        </ng-container>
+        <ng-template #waitingCopy>
+          <goab-text tag="p">Blur the textarea to capture and render its value.</goab-text>
+        </ng-template>
+      </goab-block>
+
+      <goab-block direction="column" gap="xs" class="event-log">
+        <goab-text tag="h3">Event log</goab-text>
+        <goab-text tag="p" class="event-log__heading">Change events</goab-text>
+        <ng-container *ngIf="changeLog.length; else noChanges">
+          <goab-text tag="p" *ngFor="let entry of changeLog; index as index">
+            Change {{ index + 1 }}: {{ entry.value || '(empty text)' }}
+          </goab-text>
+        </ng-container>
+        <ng-template #noChanges>
+          <goab-text tag="p">No onChange events captured yet.</goab-text>
+        </ng-template>
+
+        <goab-text tag="p" class="event-log__heading">Key press events</goab-text>
+        <ng-container *ngIf="keyPressLog.length; else noKeys">
+          <goab-text tag="p" *ngFor="let entry of keyPressLog; index as index">
+            Key {{ index + 1 }}: {{ entry.key }} — value: {{ entry.value || '(empty text)' }}
+          </goab-text>
+        </ng-container>
+        <ng-template #noKeys>
+          <goab-text tag="p">No onKeyPress events captured yet.</goab-text>
+        </ng-template>
+      </goab-block>
+    </goab-block>
+  </goab-grid>
+</goab-block>

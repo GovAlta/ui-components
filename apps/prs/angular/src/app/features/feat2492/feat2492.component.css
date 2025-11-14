@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  padding: 24px;
+}
+
+.result-panel {
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  padding: 16px;
+  background: #f8f8f8;
+}
+
+.event-log {
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+.event-log__heading {
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding: 16px;
+  }
+}
