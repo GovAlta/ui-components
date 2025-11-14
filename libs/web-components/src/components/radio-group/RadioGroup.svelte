@@ -92,7 +92,7 @@
 
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      onChange(detail.value, detail.label);
+      onChange(detail.value, detail.label, e);
     });
   });
 
@@ -124,7 +124,7 @@
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
+    dispatch(_rootEl, "_change", { name, value, event: undefined }, { bubbles: true });
   }
 
   function sendMountedMessage() {
@@ -173,8 +173,9 @@
    * Handles changing of the radio items
    * @param newValue Selected value
    * @param newLabel Selected label
+   * @param event Optional browser event
    */
-  function onChange(newValue: string, newLabel: string) {
+  function onChange(newValue: string, newLabel: string, event?: Event) {
     if (newValue === value) return;
 
     value = newValue;
@@ -182,7 +183,7 @@
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { name, value: value, label: newLabel },
+        detail: { name, value: value, label: newLabel, event },
       }),
     );
 

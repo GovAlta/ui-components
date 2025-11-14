@@ -5,15 +5,8 @@ import {
   render,
   waitFor,
 } from "@testing-library/svelte";
-import userEvent, { UserEvent } from "@testing-library/user-event";
-import { addDays, format, addMonths, addYears } from "date-fns";
+import { addDays, format } from "date-fns";
 import { it, expect, vi, describe } from "vitest";
-
-let user: UserEvent;
-
-beforeEach(() => {
-  user = userEvent.setup();
-});
 
 it("it renders", async () => {
   const { container } = render(DatePicker);
@@ -74,6 +67,70 @@ it("dispatches a value on date selection", async () => {
   });
 });
 
+describe("event detail", () => {
+  it("includes the originating event when selecting via calendar", async () => {
+    const selectedDate = new Date("2025-02-02T00:00:00Z");
+    const { container } = render(DatePicker, { name: "calendar-picker" });
+
+    const popover = container.querySelector("goa-popover");
+    const calendar = container.querySelector("goa-calendar");
+    let capturedEvent: CustomEvent | undefined;
+
+    popover?.addEventListener("_change", (e: Event) => {
+      capturedEvent = e as CustomEvent;
+    });
+
+    const calendarEvent = new CustomEvent("_change", {
+      bubbles: true,
+      composed: true,
+      detail: { value: selectedDate },
+    });
+
+    calendar?.dispatchEvent(calendarEvent);
+
+    await waitFor(() => {
+      expect(capturedEvent).toBeDefined();
+      const detail = capturedEvent?.detail as
+        | { value?: unknown; event?: Event }
+        | undefined;
+      expect(detail?.value).toEqual(selectedDate);
+      expect(detail?.event).toBe(calendarEvent);
+    });
+  });
+
+  it("includes the originating event when updating an input segment", async () => {
+    const { container } = render(DatePicker, {
+      name: "input-picker",
+      type: "input",
+    });
+
+    const formItem = container.querySelector("goa-form-item");
+    const monthDropdown = container.querySelector("goa-dropdown[name='month']");
+    let capturedEvent: CustomEvent | undefined;
+
+    formItem?.addEventListener("_change", (e: Event) => {
+      capturedEvent = e as CustomEvent;
+    });
+
+    const dropdownEvent = new CustomEvent("_change", {
+      bubbles: true,
+      composed: true,
+      detail: { name: "month", value: "1" },
+    });
+
+    monthDropdown?.dispatchEvent(dropdownEvent);
+
+    await waitFor(() => {
+      expect(capturedEvent).toBeDefined();
+      const detail = capturedEvent?.detail as
+        | { name?: string; event?: Event }
+        | undefined;
+      expect(detail?.name).toBe("input-picker");
+      expect(detail?.event).toBe(dropdownEvent);
+    });
+  });
+});
+
 describe("input type date picker", () => {
   it("validates invalid input type datepicker value (partially filled)", async () => {
     const { container } = render(DatePicker, {
@@ -83,7 +140,9 @@ describe("input type date picker", () => {
     });
 
     const datePickerDay = container.querySelector("goa-input[name='day']");
-    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerMonth = container.querySelector(
+      "goa-dropdown[name='month']",
+    );
     const datePickerYear = container.querySelector("goa-input[name='year']");
 
     expect(datePickerDay?.getAttribute("value")).toBe("");
@@ -99,7 +158,9 @@ describe("input type date picker", () => {
     });
 
     const datePickerDay = container.querySelector("goa-input[name='day']");
-    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerMonth = container.querySelector(
+      "goa-dropdown[name='month']",
+    );
     const datePickerYear = container.querySelector("goa-input[name='year']");
 
     expect(datePickerDay?.getAttribute("value")).toBe("");
@@ -115,7 +176,9 @@ describe("input type date picker", () => {
     });
 
     const datePickerDay = container.querySelector("goa-input[name='day']");
-    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerMonth = container.querySelector(
+      "goa-dropdown[name='month']",
+    );
     const datePickerYear = container.querySelector("goa-input[name='year']");
 
     expect(datePickerDay?.getAttribute("value")).toBe("");
@@ -132,7 +195,9 @@ describe("input type date picker", () => {
     });
 
     const datePickerDay = container.querySelector("goa-input[name='day']");
-    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerMonth = container.querySelector(
+      "goa-dropdown[name='month']",
+    );
     const datePickerYear = container.querySelector("goa-input[name='year']");
 
     expect(datePickerDay?.getAttribute("value")).toBe("");
@@ -148,7 +213,9 @@ describe("input type date picker", () => {
     });
 
     const datePickerDay = container.querySelector("goa-input[name='day']");
-    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerMonth = container.querySelector(
+      "goa-dropdown[name='month']",
+    );
     const datePickerYear = container.querySelector("goa-input[name='year']");
 
     expect(datePickerDay?.getAttribute("value")).toBe("28");
@@ -164,7 +231,9 @@ describe("input type date picker", () => {
     });
 
     const datePickerDay = container.querySelector("goa-input[name='day']");
-    const datePickerMonth = container.querySelector("goa-dropdown[name='month']");
+    const datePickerMonth = container.querySelector(
+      "goa-dropdown[name='month']",
+    );
     const datePickerYear = container.querySelector("goa-input[name='year']");
 
     expect(datePickerDay?.getAttribute("value")).toBe("28");
@@ -204,7 +273,7 @@ describe("width property", () => {
   it("applies custom width to calendar type datepicker", async () => {
     const { container } = render(DatePicker, {
       type: "calendar",
-      width: "20ch"
+      width: "20ch",
     });
     const input = container.querySelector("goa-input");
 
@@ -213,7 +282,7 @@ describe("width property", () => {
 
   it("uses default width when not specified for calendar type", async () => {
     const { container } = render(DatePicker, {
-      type: "calendar"
+      type: "calendar",
     });
     const input = container.querySelector("goa-input");
 
@@ -223,7 +292,7 @@ describe("width property", () => {
   it("applies custom width to input type datepicker", async () => {
     const { container } = render(DatePicker, {
       type: "input",
-      width: "400px"
+      width: "400px",
     });
     const formItem = container.querySelector("goa-form-item");
 
@@ -232,7 +301,7 @@ describe("width property", () => {
 
   it("does not apply width style when not specified for input type", async () => {
     const { container } = render(DatePicker, {
-      type: "input"
+      type: "input",
     });
     const formItem = container.querySelector("goa-form-item");
 

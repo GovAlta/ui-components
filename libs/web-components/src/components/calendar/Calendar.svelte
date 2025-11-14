@@ -247,7 +247,7 @@
           break;
         case "Enter":
           _selectedDate = _calendarDate;
-          dispatchValue();
+          dispatchValue(e);
           e.stopPropagation();
           e.preventDefault();
           break;
@@ -255,7 +255,7 @@
     });
   }
 
-  function dispatchValue() {
+  function dispatchValue(event?: Event) {
     if (!_selectedDate) return;
     if (!isValidDate(_selectedDate)) return;
 
@@ -267,6 +267,7 @@
           type: "date",
           name: name,
           value: _selectedDate,
+          event,
         },
       }),
     );
@@ -308,7 +309,7 @@
     }
 
     _selectedDate = _calendarDate = newDate;
-    dispatchValue();
+    dispatchValue(e);
   }
 </script>
 

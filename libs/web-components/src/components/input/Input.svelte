@@ -228,8 +228,8 @@
     dispatchOnChange(value);
   }
 
-  function dispatchOnChange(value: string) {
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
+  function dispatchOnChange(value: string, event?: Event) {
+    dispatch(_rootEl, "_change", { name, value, event }, { bubbles: true });
   }
 
   // Relay message up the chain to allow any parent element to have a reference to the input element
@@ -260,7 +260,7 @@
           composed: true,
           bubbles: true,
           cancelable: true,
-          detail: { name, value: input.value },
+          detail: { name, value: input.value, event: e },
         }),
       );
     }, debounce);
@@ -268,7 +268,7 @@
     input.dispatchEvent(
       new CustomEvent("_keyPress", {
         composed: true,
-        detail: { name, value: input.value, key: (e as KeyboardEvent).key },
+        detail: { name, value: input.value, key: (e as KeyboardEvent).key, event: e },
       }),
     );
     value = input.value;
@@ -280,7 +280,7 @@
     input.dispatchEvent(
       new CustomEvent("_focus", {
         composed: true,
-        detail: { name, value: input.value },
+        detail: { name, value: input.value, event: e },
       }),
     );
 
@@ -293,7 +293,7 @@
     input.dispatchEvent(
       new CustomEvent("_blur", {
         composed: true,
-        detail: { name, value: input.value },
+        detail: { name, value: input.value, event: e },
       }),
     );
   }

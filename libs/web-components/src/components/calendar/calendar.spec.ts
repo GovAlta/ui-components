@@ -144,7 +144,12 @@ it("emits an event when a date is selected", async () => {
   await fireEvent.click(todayEl);
   await waitFor(() => {
     expect(onChange).toBeCalled();
-    expect(onChange).toBeCalledWith({ type: "date", value: today, name });
+    expect(onChange).toBeCalledWith({
+      type: "date",
+      value: today,
+      name,
+      event: expect.any(Event),
+    });
   });
 });
 
