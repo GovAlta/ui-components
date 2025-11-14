@@ -5,12 +5,7 @@
 />
 
 <script lang="ts">
-  // Optional
   export let progress: number = -1;
-  // export let testid: string = "";
-  /*
-
-  */
 </script>
 
 <div class="linear-progress">
