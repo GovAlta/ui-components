@@ -29,6 +29,7 @@
     name: string;
     value: Date | string | null;
     valueStr: string;
+    event: Event;
   };
 
   export let type: "calendar" | "input" = "calendar";
@@ -111,10 +112,11 @@
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
+    const syntheticEvent = new Event("goa-date-picker:set-value");
     dispatch(
       _rootEl,
       "_change",
-      { name, value: detail.value },
+      { name, value: detail.value, event: syntheticEvent },
       { bubbles: true },
     );
   }
@@ -146,19 +148,21 @@
     _date = new CalendarDate(e.detail.value); // yyyy-MM-dd
 
     hideCalendar();
-    dispatchValue();
+    const sourceEvent = (e.detail?.event as Event | undefined) ?? e;
+    dispatchValue(sourceEvent);
 
     e.stopPropagation();
     e.preventDefault();
   }
 
-  function dispatchValue() {
+  function dispatchValue(event: Event) {
     value = _date.toString();
 
     dispatch<OnChangeDetail>(_rootEl, "_change", {
       name,
       value: _date.date,
       valueStr: value,
+      event,
     });
   }
 
@@ -210,7 +214,7 @@
         return;
     }
 
-    dispatchValue();
+    dispatchValue(e);
 
     e.preventDefault();
     e.stopPropagation();
@@ -220,9 +224,12 @@
   function onInputChange(e: Event) {
     e.stopPropagation();
 
-    const { name: elName, value } = (
-      e as CustomEvent<{ name: string; value: string }>
+    const detail = (
+      e as CustomEvent<{ name: string; value: string; event: Event }>
     ).detail;
+
+    const { name: elName, value } = detail;
+    const sourceEvent = detail.event;
 
     if (elName === "day") {
       _date.setDay(+value);
@@ -238,7 +245,7 @@
     dispatch<OnChangeDetail>(
       _rootEl,
       "_change",
-      { name, value: output, valueStr: output },
+      { name, value: output, valueStr: output, event: sourceEvent },
       { bubbles: true },
     );
   }
@@ -318,10 +325,7 @@
     </goa-popover>
   {/if}
 {:else if type === "input"}
-  <goa-form-item
-    error={_error && error}
-    bind:this={_rootEl}
-  >
+  <goa-form-item error={_error && error} bind:this={_rootEl}>
     <goa-block direction="row">
       <goa-form-item helptext="Month">
         <goa-dropdown

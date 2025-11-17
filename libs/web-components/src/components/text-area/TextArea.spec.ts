@@ -37,6 +37,7 @@ describe("GoATextArea", () => {
     el.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
       expect(e.detail.value).toBe("b");
+      expect(e.detail.event).toBeInstanceOf(Event);
       onChange();
     });
 
@@ -61,12 +62,14 @@ describe("GoATextArea", () => {
       expect(e.detail.name).toBe("name");
       expect(e.detail.value).toBe("foo");
       expect(e.detail.key).toBe("o");
+      expect(e.detail.event).toBeInstanceOf(Event);
       onKeyPress();
     });
 
     textarea.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
       expect(e.detail.value).toBe("foo");
+      expect(e.detail.event).toBeInstanceOf(Event);
       onChange();
     });
 
@@ -90,6 +93,7 @@ describe("GoATextArea", () => {
     textarea.addEventListener("_blur", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
       expect(e.detail.value).toBe("test value");
+      expect(e.detail.event).toBeInstanceOf(Event);
       onBlur();
     });
 

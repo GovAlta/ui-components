@@ -62,7 +62,7 @@
         new CustomEvent("_change", {
           composed: true,
           bubbles: true,
-          detail: { page: newPage },
+          detail: { page: newPage, event: e },
         }),
       );
     }
@@ -80,12 +80,13 @@
     }
 
     const page = Number.parseInt(pageValue);
+    const sourceEvent = ce.detail.event instanceof Event ? ce.detail.event : e;
     e.stopPropagation();
     hiddenEl.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { page },
+        detail: { page, event: sourceEvent },
       }),
     );
   }

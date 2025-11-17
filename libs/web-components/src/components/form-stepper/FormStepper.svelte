@@ -170,7 +170,7 @@
     // handle click events from progress items
     _rootEl?.addEventListener("_click", (e: Event) => {
       const nextStep = (e as CustomEvent).detail.step;
-      changeStep(nextStep);
+      changeStep(nextStep, e);
     });
   }
 
@@ -188,7 +188,7 @@
   }
 
   // change current step state and update children
-  function changeStep(nextStep: number) {
+  function changeStep(nextStep: number, sourceEvent?: Event) {
     if (_steps.length === 0 || nextStep > _steps.length) return;
 
     // deactivate current step (currentStep is initially undefined)
@@ -211,7 +211,7 @@
 
     _currentStep = nextStep;
     calculateProgress();
-    dispatchCurrentStep();
+    dispatchCurrentStep(sourceEvent);
   }
 
   // handles the 1-based step value and the number of line segments is one less
@@ -232,12 +232,13 @@
   }
 
   // notify outside app of step change
-  function dispatchCurrentStep() {
+  function dispatchCurrentStep(sourceEvent?: Event) {
+    const event = sourceEvent || new Event("goa-form-stepper:change");
     _rootEl?.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { step: +_currentStep, stepIndex: +_currentStep - 1 },
+        detail: { step: +_currentStep, stepIndex: +_currentStep - 1, event },
       }),
     );
   }

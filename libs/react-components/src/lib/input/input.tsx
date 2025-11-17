@@ -252,31 +252,31 @@ export function GoabInput({
 }
 
 const onDateChangeHandler = (onChange?: OnChange<GoabDate>) => {
-  return ({ name, value }: GoabInputOnChangeDetail<string | Date>) => {
+  return ({ name, value, event }: GoabInputOnChangeDetail<string | Date>) => {
     if (!value) {
-      onChange?.({ name, value: "" });
+      onChange?.({ name, value: "", event });
       return;
     }
     // valid string date
     if (typeof value === "string" && isValid(new Date(value))) {
-      onChange?.({ name, value: parseISO(value) });
+      onChange?.({ name, value: parseISO(value), event });
       return;
     }
     // valid date
     if (isValid(value)) {
-      onChange?.({ name, value });
+      onChange?.({ name, value, event });
       return;
     }
   };
 };
 
 const onTimeChangeHandler = (onChange?: OnChange) => {
-  return ({ name, value }: GoabInputOnChangeDetail) => {
+  return ({ name, value, event }: GoabInputOnChangeDetail) => {
     if (!value) {
-      onChange?.({ name, value: "" });
+      onChange?.({ name, value: "", event });
       return;
     }
-    onChange?.({ name, value });
+    onChange?.({ name, value, event });
   };
 };
 
@@ -373,7 +373,13 @@ export function GoabInputFile(props: GoabInputProps): JSX.Element {
       id={props.id}
       name={props.name}
       type="file"
-      onChange={(e) => props.onChange?.({ name: e.target.name, value: e.target.value })}
+      onChange={(e) =>
+        props.onChange?.({
+          name: e.target.name,
+          value: e.target.value,
+          event: e.nativeEvent,
+        })
+      }
       style={{ backgroundColor: "revert" }}
     />
   );
@@ -390,17 +396,27 @@ export function GoabInputNumber({
   textAlign = "right",
   ...props
 }: GoabNumberInputProps): JSX.Element {
-  const onNumberChange = ({ name, value }: GoabInputOnChangeDetail) => {
-    props.onChange?.({ name, value: parseFloat(value) });
+  const onNumberChange = ({ name, value, event }: GoabInputOnChangeDetail) => {
+    props.onChange?.({ name, value: parseFloat(value), event });
   };
-  const onFocus = ({ name, value }: GoabInputOnFocusDetail) => {
-    props.onFocus?.({ name, value: parseFloat(value) });
+  const onFocus = ({ name, value, event }: GoabInputOnFocusDetail) => {
+    props.onFocus?.({ name, value: parseFloat(value), event });
   };
-  const onBlur = ({ name, value }: GoabInputOnBlurDetail) => {
-    props.onBlur?.({ name, value: parseFloat(value) });
+  const onBlur = ({ name, value, event }: GoabInputOnBlurDetail) => {
+    props.onBlur?.({ name, value: parseFloat(value), event });
   };
-  const onKeyPress = ({ name, value, key }: GoabInputOnKeyPressDetail) => {
-    props.onKeyPress?.({ name, value: parseFloat(value), key: parseInt(key) });
+  const onKeyPress = ({
+    name,
+    value,
+    key,
+    event,
+  }: GoabInputOnKeyPressDetail) => {
+    props.onKeyPress?.({
+      name,
+      value: parseFloat(value),
+      key: parseInt(key),
+      event,
+    });
   };
   return (
     <GoabInput

@@ -249,7 +249,13 @@
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
+    const syntheticEvent = new Event("goa-dropdown:set-value");
+    dispatch(
+      _rootEl,
+      "_change",
+      { name, value, event: syntheticEvent },
+      { bubbles: true },
+    );
   }
 
   function sendMountedMessage() {
@@ -468,14 +474,14 @@
     _inputEl.value = newValue;
   }
 
-  function dispatchValue(newValue?: string) {
-    const detail = _multiselect
-      ? { name, values: [newValue, ..._values] }
-      : { name, value: newValue };
-
+  function dispatchValue(newValue: string | undefined, event: Event) {
     if (!_isDirty) {
       return;
     }
+
+    const detail = _multiselect
+      ? { name, values: [newValue, ..._values], event }
+      : { name, value: newValue, event };
 
     dispatch(_rootEl, "_change", detail, { bubbles: true });
     _isDirty = false;
@@ -485,7 +491,7 @@
   // Event handlers
   //
 
-  function onSelect(option: Option) {
+  function onSelect(option: Option, event: Event) {
     if (_disabled) return;
 
     _isDirty = option.value !== _selectedOption?.value;
@@ -497,12 +503,12 @@
       setHighlightedToSelected();
       hideMenu();
     }
-    dispatchValue(option.value);
+    dispatchValue(option.value, event);
   }
 
-  function onFilteredOptionClick(option: Option) {
+  function onFilteredOptionClick(option: Option, event: Event) {
     _isDirty = true;
-    onSelect(option);
+    onSelect(option, event);
   }
 
   // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
@@ -528,7 +534,7 @@
 
     if (!_selectedOption) {
       if (matchedOption) {
-        onFilteredOptionClick(matchedOption);
+        onFilteredOptionClick(matchedOption, e);
       } else {
         reset();
       }
@@ -569,7 +575,7 @@
     const target = e.currentTarget as HTMLSelectElement;
     const option = _options[target.selectedIndex];
     _isDirty = true;
-    onSelect(option);
+    onSelect(option, e);
   }
 
   function reset() {
@@ -581,7 +587,7 @@
     _isDirty = true;
 
     syncFilteredOptions();
-    dispatchValue("");
+    dispatchValue("", new Event("goa-dropdown:reset"));
     setDisplayedValue();
   }
 
@@ -608,7 +614,7 @@
       const option = _filteredOptions[_highlightedIndex];
       if (option) {
         _isDirty = option.value !== _selectedOption?.value;
-        onSelect(option);
+        onSelect(option, e);
       }
 
       if (_selectedOption) {
@@ -627,14 +633,14 @@
       e.stopPropagation();
     }
 
-    onTab(_: KeyboardEvent) {
+    onTab(e: KeyboardEvent) {
       const matchedOption = _filteredOptions.find(
         (option) =>
           option.label?.toLowerCase() === this.input.value.toLowerCase(),
       );
 
       if (matchedOption) {
-        onSelect(matchedOption);
+        onSelect(matchedOption, e);
       }
 
       hideMenu();
@@ -697,7 +703,7 @@
       if (_isMenuVisible) {
         const option = _filteredOptions[_highlightedIndex];
         if (option) {
-          onSelect(option);
+          onSelect(option, e);
         }
         hideMenu();
       } else {
@@ -893,7 +899,7 @@
             role="option"
             style="display: block"
             on:click={(e) => {
-              onFilteredOptionClick(option);
+              onFilteredOptionClick(option, e);
               _inputEl?.focus();
             }}
           >

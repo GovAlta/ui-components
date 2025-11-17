@@ -47,9 +47,11 @@ export function GoabCalendar({
     }
     const current = ref.current;
     const listener = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
       onChange({
         name: name || "",
-        value: (e as CustomEvent).detail.value,
+        value: detail.value,
+        event: detail.event,
       });
     }
     current.addEventListener("_change", listener);

@@ -1041,6 +1041,7 @@ describe("GoADropdown", () => {
 
       dropdown?.addEventListener("_change", (e: Event) => {
         const ce = e as CustomEvent;
+        expect(ce.detail.event).toBeInstanceOf(Event);
         onClick(ce.detail.name, ce.detail.value);
       });
 
@@ -1081,6 +1082,7 @@ describe("GoADropdown", () => {
 
       dropdown?.addEventListener("_change", (e: Event) => {
         const ce = e as CustomEvent;
+        expect(ce.detail.event).toBeInstanceOf(Event);
         onClick(ce.detail.name, ce.detail.value);
       });
 

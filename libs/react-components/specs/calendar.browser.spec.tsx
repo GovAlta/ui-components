@@ -57,10 +57,13 @@ describe("Calendar", () => {
     await dateButton.click();
 
     await vi.waitFor(() => {
-      expect(handleChange).toHaveBeenCalledWith({
-        name: "birthdate",
-        value: expect.any(String),
-      });
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: "birthdate",
+          value: expect.any(String),
+          event: expect.any(Event),
+        })
+      );
     });
   });
 
@@ -205,10 +208,13 @@ describe("Calendar", () => {
 
       const prevDate = format(addDays(startDate, -1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(prevDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(prevDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -236,10 +242,13 @@ describe("Calendar", () => {
 
       const nextDate = format(addDays(startDate, 1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(nextDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(nextDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -267,10 +276,13 @@ describe("Calendar", () => {
 
       const prevWeekDate = format(addDays(startDate, -7), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(prevWeekDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(prevWeekDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -298,10 +310,13 @@ describe("Calendar", () => {
 
       const nextWeekDate = format(addDays(startDate, 7), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(nextWeekDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(nextWeekDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -329,10 +344,13 @@ describe("Calendar", () => {
 
       const firstDay = format(new Date(2024, 2, 1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(firstDay),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(firstDay),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -360,10 +378,13 @@ describe("Calendar", () => {
 
       const lastDay = format(new Date(2024, 2, 31), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(lastDay),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(lastDay),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -391,10 +412,13 @@ describe("Calendar", () => {
 
       const prevMonthDate = format(addMonths(startDate, -1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(prevMonthDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(prevMonthDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -422,10 +446,13 @@ describe("Calendar", () => {
 
       const nextMonthDate = format(addMonths(startDate, 1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(nextMonthDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(nextMonthDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -453,10 +480,13 @@ describe("Calendar", () => {
 
       const prevYearDate = format(addYears(startDate, -1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(prevYearDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(prevYearDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -484,10 +514,13 @@ describe("Calendar", () => {
 
       const nextYearDate = format(addYears(startDate, 1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(nextYearDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(nextYearDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -515,10 +548,13 @@ describe("Calendar", () => {
 
       const expectedDate = format(addDays(startDate, 1), "yyyy-MM-dd");
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(expectedDate),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(expectedDate),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -549,10 +585,13 @@ describe("Calendar", () => {
 
       // Should still select March 11 (start date), not March 10
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(startDateStr),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(startDateStr),
+            event: expect.any(Event),
+          })
+        );
       });
     });
 
@@ -583,10 +622,13 @@ describe("Calendar", () => {
 
       // Should still select March 19 (start date), not March 20
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: expect.stringContaining(startDateStr),
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: expect.stringContaining(startDateStr),
+            event: expect.any(Event),
+          })
+        );
       });
     });
   });
@@ -685,10 +727,13 @@ describe("Calendar", () => {
       await febDay.click();
 
       await vi.waitFor(() => {
-        expect(handleChange).toHaveBeenCalledWith({
-          name: "",
-          value: "2024-02-29",
-        });
+        expect(handleChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: "",
+            value: "2024-02-29",
+            event: expect.any(Event),
+          })
+        );
       });
     });
   });

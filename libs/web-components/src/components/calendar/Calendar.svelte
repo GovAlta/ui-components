@@ -88,7 +88,10 @@
     }
 
     // Re-render with updated values
-    renderCalendar({ type: "date", value: _calendarDate || new CalendarDate() });
+    renderCalendar({
+      type: "date",
+      value: _calendarDate || new CalendarDate(),
+    });
   }
 
   // *****
@@ -137,8 +140,12 @@
     _monthDays = [];
     for (let i = 0; i < dayCount; i++) {
       _monthDays.push(
-          new CalendarDate({year: _calendarDate.year, month: _calendarDate.month, day: i+1})
-      )
+        new CalendarDate({
+          year: _calendarDate.year,
+          month: _calendarDate.month,
+          day: i + 1,
+        }),
+      );
     }
 
     // previous month days to fill the start of the calendar
@@ -153,7 +160,8 @@
 
     // next month days to fill the end of the calendar
     _nextMonthDays = [];
-    _nextMonthDayCount = 7 - ((_previousMonthDays.length + _monthDays.length) % 7);
+    _nextMonthDayCount =
+      7 - ((_previousMonthDays.length + _monthDays.length) % 7);
 
     // ensure a full week is not appended to the end
     if (_nextMonthDayCount < 7) {
@@ -170,7 +178,7 @@
       e.preventDefault();
 
       // prevent selection outsite min/max boundies
-      if ( newDate.isBefore(_min) || newDate.isAfter(_max) ) {
+      if (newDate.isBefore(_min) || newDate.isAfter(_max)) {
         return;
       }
 
@@ -231,7 +239,7 @@
           break;
         case "Enter":
           _selectedDate = _calendarDate;
-          dispatchValue();
+          dispatchValue(e);
           e.stopPropagation();
           e.preventDefault();
           break;
@@ -239,7 +247,7 @@
     });
   }
 
-  function dispatchValue() {
+  function dispatchValue(event: Event) {
     if (!_selectedDate) return;
     if (!_selectedDate.isValid()) return;
 
@@ -251,6 +259,7 @@
           type: "string",
           name: name,
           value: _selectedDate.toString(),
+          event,
         },
       }),
     );
@@ -272,7 +281,7 @@
     e.stopPropagation();
   }
 
-  function onDateClick(_d: string) {
+  function onDateClick(event: Event, _d: string) {
     const d = new CalendarDate(_d);
     if (!d) return;
 
@@ -286,7 +295,7 @@
     }
 
     _selectedDate = _calendarDate = d;
-    dispatchValue();
+    dispatchValue(event);
   }
 </script>
 
@@ -309,7 +318,7 @@
         on:_change={setMonth}
       >
         {#each _months as month, i}
-          <goa-dropdown-item value={i+1+""} label={month} />
+          <goa-dropdown-item value={i + 1 + ""} label={month} />
         {/each}
       </goa-dropdown>
     </goa-form-item>
@@ -342,7 +351,7 @@
     <h5>Sat</h5>
     {#each _previousMonthDays as d}
       <button
-        on:click={() => onDateClick(d.toString())}
+        on:click={(event) => onDateClick(event, d.toString())}
         data-testid={d.format("yyyy-MM-dd")}
         data-date={d.format("yyyy-MM-dd")}
         aria-label={d.format("PPPP")}
@@ -356,7 +365,7 @@
     {/each}
     {#each _monthDays as d}
       <button
-        on:click={() => onDateClick(d.toString())}
+        on:click={(event) => onDateClick(event, d.toString())}
         data-testid={d.format("yyyy-MM-dd")}
         data-date={d.format("yyyy-MM-dd")}
         aria-label={d.format("PPPP")}
@@ -372,7 +381,7 @@
     {/each}
     {#each _nextMonthDays as d}
       <button
-        on:click={() => onDateClick(d.toString())}
+        on:click={(event) => onDateClick(event, d.toString())}
         data-testid={d.format("yyyy-MM-dd")}
         data-date={d.format("yyyy-MM-dd")}
         aria-label={d.format("PPPP")}

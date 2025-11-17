@@ -88,7 +88,10 @@ describe("Tabs", () => {
     expect(tabsComponent).toBeTruthy();
 
     const onChangeSpy = vi.fn();
-    tabsComponent?.addEventListener("_change", onChangeSpy);
+    tabsComponent?.addEventListener("_change", (e: CustomEvent) => {
+      expect(e.detail.event).toBeInstanceOf(Event);
+      onChangeSpy();
+    });
 
     const tab2Link = container.querySelector("a#tab-2") as HTMLElement;
     await fireEvent.click(tab2Link);
@@ -151,7 +154,7 @@ describe("Tabs", () => {
       expect(tabs.length).toBeGreaterThan(0);
 
       // Check that no tab is selected
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         expect(tab.getAttribute("aria-selected")).toBe(null); // Nothing should be pre-selected
       });
     });
@@ -161,9 +164,9 @@ describe("Tabs", () => {
     // Mock window.location
     const originalLocation = window.location;
     const mockLocation = new URL("http://localhost/test#tab-1#anchorPoint");
-    Object.defineProperty(window, 'location', {
+    Object.defineProperty(window, "location", {
       value: mockLocation,
-      writable: true
+      writable: true,
     });
 
     const { container } = render(Tabs);
@@ -174,16 +177,16 @@ describe("Tabs", () => {
     });
 
     // Restore original location
-    Object.defineProperty(window, 'location', {
+    Object.defineProperty(window, "location", {
       value: originalLocation,
-      writable: true
+      writable: true,
     });
   });
 
   it("should scroll to anchor element when present", async () => {
     // Create an anchor element
-    const anchorElement = document.createElement('div');
-    anchorElement.id = 'anchorPoint';
+    const anchorElement = document.createElement("div");
+    anchorElement.id = "anchorPoint";
     document.body.appendChild(anchorElement);
 
     // Mock scrollIntoView
@@ -193,9 +196,9 @@ describe("Tabs", () => {
     // Mock window.location with hash
     const originalLocation = window.location;
     const mockLocation = new URL("http://localhost/test#anchorPoint");
-    Object.defineProperty(window, 'location', {
+    Object.defineProperty(window, "location", {
       value: mockLocation,
-      writable: true
+      writable: true,
     });
 
     const { container } = render(Tabs);
@@ -206,17 +209,20 @@ describe("Tabs", () => {
     });
 
     // Give time for the anchor scroll to be triggered
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
-    await waitFor(() => {
-      expect(scrollIntoViewMock).toHaveBeenCalledWith({ behavior: 'smooth' });
-    }, { timeout: 2000 });
+    await waitFor(
+      () => {
+        expect(scrollIntoViewMock).toHaveBeenCalledWith({ behavior: "smooth" });
+      },
+      { timeout: 2000 },
+    );
 
     // Cleanup
     document.body.removeChild(anchorElement);
-    Object.defineProperty(window, 'location', {
+    Object.defineProperty(window, "location", {
       value: originalLocation,
-      writable: true
+      writable: true,
     });
   });
 });

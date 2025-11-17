@@ -58,7 +58,7 @@
     validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
     ensureSlotExists(_slotEl);
-    
+
     _headingSlotChildren = getHeadingChildren();
     _accordionId = `accordion-${generateRandomId()}`;
   });
@@ -76,16 +76,27 @@
     return [];
   }
 
-  function dispatchClickEvent(open?: boolean) {
+  function dispatchClickEvent(event: Event, open?: boolean) {
     if (!_rootEl) return;
+    const detail: { event: Event; open?: boolean } = { event };
+    if (typeof open === "boolean") {
+      detail.open = open;
+    }
 
     _rootEl.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { open: open },
+        detail,
       }),
     );
+  }
+
+  function onToggle(e: Event) {
+    const details = e.currentTarget as HTMLDetailsElement | null;
+    const isOpen = details?.open;
+    open = `${isOpen}`;
+    dispatchClickEvent(e, isOpen);
   }
 </script>
 
@@ -100,7 +111,7 @@
   bind:this={_rootEl}
   data-testid={testid}
 >
-<details open={isOpen} on:toggle={({ target }) => { open = `${target?.open}`; dispatchClickEvent(target?.open); }}>
+  <details open={isOpen} on:toggle={onToggle}>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
@@ -112,13 +123,12 @@
       aria-expanded={open === "true"}
       class:iconRight={iconposition === "right"}
     >
-
       {#if iconposition === "left"}
         <goa-icon
           type="chevron-forward"
           fillcolor={_hovering
-      ? "var(--goa-color-interactive-hover)"
-      : "var(--goa-color-interactive-default)"}
+            ? "var(--goa-color-interactive-hover)"
+            : "var(--goa-color-interactive-default)"}
         ></goa-icon>
       {/if}
 
@@ -142,8 +152,8 @@
         <goa-icon
           type="chevron-down"
           fillcolor={_hovering
-      ? "var(--goa-color-interactive-hover)"
-      : "var(--goa-color-interactive-default)"}
+            ? "var(--goa-color-interactive-hover)"
+            : "var(--goa-color-interactive-default)"}
         ></goa-icon>
       {/if}
     </summary>

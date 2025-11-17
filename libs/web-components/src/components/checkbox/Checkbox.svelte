@@ -156,21 +156,28 @@
     // @ts-expect-error
     value = detail.value;
     checked = detail.value ? "true" : "false";
-    dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
+    const syntheticEvent = new Event("goa-checkbox:set-value");
+    dispatch(
+      _checkboxRef,
+      "_change",
+      { name, value, event: syntheticEvent },
+      { bubbles: true },
+    );
   }
 
   function sendMountedMessage() {
     if (!name) return;
 
-    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)?.host as HTMLElement;
+    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)
+      ?.host as HTMLElement;
     const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
 
-      relay<FormFieldMountRelayDetail>(
-        _rootEl,
-        FormFieldMountMsg,
-        { name, el: _rootEl },
-        { bubbles: !fromCheckboxList, timeout: 10 },
-      );
+    relay<FormFieldMountRelayDetail>(
+      _rootEl,
+      FormFieldMountMsg,
+      { name, el: _rootEl },
+      { bubbles: !fromCheckboxList, timeout: 10 },
+    );
   }
 
   function onChange(e: Event) {
@@ -187,7 +194,7 @@
     e.target?.dispatchEvent(
       new CustomEvent("_change", {
         composed: true,
-        detail: { name, checked: newCheckStatus, value: newValue },
+        detail: { name, checked: newCheckStatus, value: newValue, event: e },
         bubbles: true,
       }),
     );
@@ -266,7 +273,9 @@ max-width: ${maxwidth};
         value={`${value}`}
         aria-label={arialabel || text || name}
         aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
-        aria-describedby={$$slots.description || description !== "" ? _descriptionId : null}
+        aria-describedby={$$slots.description || description !== ""
+          ? _descriptionId
+          : null}
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
         on:focus={onFocus}

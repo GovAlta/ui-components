@@ -206,6 +206,7 @@ describe("GoAInput Component", () => {
       const ce = e as CustomEvent;
       expect(ce.detail.name).toBe("test-name");
       expect(ce.detail.value).toBe("foobar");
+      expect(ce.detail.event).toBeInstanceOf(Event);
       change();
     });
 
@@ -214,6 +215,7 @@ describe("GoAInput Component", () => {
       expect(ce.detail.name).toBe("test-name");
       expect(ce.detail.value).toBe("foobar");
       expect(ce.detail.key).toBe("r");
+      expect(ce.detail.event).toBeInstanceOf(Event);
       keypress();
     });
 
@@ -385,7 +387,8 @@ describe("GoAInput Component", () => {
         ml: "xl",
       });
       const input = await baseElement.findByTestId("input-test");
-      const containerElement = baseElement.container.querySelector(".container");
+      const containerElement =
+        baseElement.container.querySelector(".container");
 
       expect(input).toBeTruthy();
       expect(containerElement).toBeTruthy();

@@ -199,14 +199,14 @@
     });
   }
 
-  function onChange() {
+  function onChange(e: Event) {
     if (isDisabled) return;
     // if (isChecked) return;  FIXME: does having this uncommented break something?
 
     dispatch(
       _radioItemEl,
       "_radioItemChange",
-      { value, label },
+      { value, label, event: e },
       { bubbles: true },
     );
 

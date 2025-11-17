@@ -127,6 +127,7 @@ describe("GoabCheckboxList", () => {
     const detail: GoabCheckboxListOnChangeDetail = {
       name: "fruits",
       value: ["apple", "banana"],
+      event: new Event("test"),
     };
 
     fireEvent(
@@ -208,6 +209,7 @@ describe("GoabCheckboxList", () => {
     const detail1: GoabCheckboxListOnChangeDetail = {
       name: "fruits",
       value: ["apple"],
+      event: new Event("test"),
     };
 
     fireEvent(el, new CustomEvent("_change", { detail: detail1 }));
@@ -217,6 +219,7 @@ describe("GoabCheckboxList", () => {
     const detail2: GoabCheckboxListOnChangeDetail = {
       name: "fruits",
       value: ["apple", "banana"],
+      event: new Event("test"),
     };
 
     fireEvent(el, new CustomEvent("_change", { detail: detail2 }));

@@ -109,10 +109,13 @@ describe("RadioItem", () => {
 
     // Check that the event was called with the correct detail containing both value and label
     const calledEvent = mockOnChange.mock.calls[0][0];
-    expect(calledEvent.detail).toEqual({
-      value: "foobar",
-      label: "Test Radio Label",
-    });
+    expect(calledEvent.detail).toEqual(
+      expect.objectContaining({
+        value: "foobar",
+        label: "Test Radio Label",
+        event: expect.any(Event),
+      })
+    );
   });
 
   it("should handle the change event with empty label", async () => {
@@ -132,10 +135,13 @@ describe("RadioItem", () => {
 
     // Check that the event was called with the correct detail containing value and empty label
     const calledEvent = mockOnChange.mock.calls[0][0];
-    expect(calledEvent.detail).toEqual({
-      value: "test-value",
-      label: "",
-    });
+    expect(calledEvent.detail).toEqual(
+      expect.objectContaining({
+        value: "test-value",
+        label: "",
+        event: expect.any(Event),
+      })
+    );
   });
 
   it("should not emit _click event when radio item is disabled", async () => {

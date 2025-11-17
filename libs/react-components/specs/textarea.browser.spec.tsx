@@ -85,10 +85,13 @@ describe("TextArea Browser Tests", () => {
     // Verify onBlur was called with correct values
     await vi.waitFor(() => {
       expect(onBlurSpy).toHaveBeenCalledTimes(1);
-      expect(onBlurSpy).toHaveBeenCalledWith({
-        name: "test-textarea",
-        value: "Test content for blur",
-      });
+      expect(onBlurSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: "test-textarea",
+          value: "Test content for blur",
+          event: expect.any(Event),
+        })
+      );
     });
   });
 

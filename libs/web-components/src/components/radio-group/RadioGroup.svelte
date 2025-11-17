@@ -92,7 +92,8 @@
 
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      onChange(detail.value, detail.label);
+      const sourceEvent = detail.event instanceof Event ? detail.event : e;
+      onChange(detail.value, detail.label, sourceEvent);
     });
   });
 
@@ -124,7 +125,13 @@
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
+    const syntheticEvent = new Event("goa-radio-group:set-value");
+    dispatch(
+      _rootEl,
+      "_change",
+      { name, value, event: syntheticEvent },
+      { bubbles: true },
+    );
   }
 
   function sendMountedMessage() {
@@ -173,8 +180,9 @@
    * Handles changing of the radio items
    * @param newValue Selected value
    * @param newLabel Selected label
+   * @param event Source event
    */
-  function onChange(newValue: string, newLabel: string) {
+  function onChange(newValue: string, newLabel: string, event: Event) {
     if (newValue === value) return;
 
     value = newValue;
@@ -182,7 +190,7 @@
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { name, value: value, label: newLabel },
+        detail: { name, value: value, label: newLabel, event },
       }),
     );
 

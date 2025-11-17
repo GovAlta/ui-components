@@ -238,9 +238,15 @@
     updateChildCheckboxesState();
     // dispatch _change .... including labels so Fieldset can store valueLabel
     // and the Form Summary can render text.
+    const syntheticEvent = new Event("goa-checkbox-list:set-value");
     _rootEl?.dispatchEvent(
       new CustomEvent("_change", {
-        detail: { name, value, labels: getSelectedLabels(value) },
+        detail: {
+          name,
+          value,
+          labels: getSelectedLabels(value),
+          event: syntheticEvent,
+        },
         bubbles: true,
         composed: true,
       }),
@@ -263,7 +269,10 @@
    */
   function onChildCheckboxMount(detail: FormFieldMountRelayDetail) {
     const checkboxElement = (detail.el.getRootNode() as any)?.host;
-    if (!checkboxElement || checkboxElement.tagName.toLowerCase() !== "goa-checkbox") {
+    if (
+      !checkboxElement ||
+      checkboxElement.tagName.toLowerCase() !== "goa-checkbox"
+    ) {
       return;
     }
 
@@ -309,12 +318,18 @@
     const newSelectedValues = Array.from(_selectedValues);
     value = newSelectedValues;
 
+    const changeEvent =
+      detail.event instanceof Event
+        ? detail.event
+        : new Event("goa-checkbox-list:item-change");
+
     _rootEl?.dispatchEvent(
       new CustomEvent("_change", {
         detail: {
           name,
           value: newSelectedValues,
           labels: getSelectedLabels(newSelectedValues),
+          event: changeEvent,
         },
         bubbles: true,
         composed: true,
