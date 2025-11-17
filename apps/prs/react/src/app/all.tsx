@@ -30,6 +30,7 @@ import {
   GoabDivider,
   GoabIconButton,
   GoabCircularProgress,
+  GoabLinearProgress,
   GoabContainer,
   GoabDetails,
   GoabHeroBanner,
@@ -3505,10 +3506,13 @@ export function AllComponents() {
 
               {/* Component ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */}
 
-              <GoabText size="heading-m" mt="4xl" mb="xl">
-                Progress indicator
+              <GoabText size="heading-m" mt="4xl" mb="m">
+                Progress indicators
               </GoabText>
 
+              <GoabText size="heading-m" mt="4xl" mb="s">
+                Circular Progress indicator
+              </GoabText>
               <GoabBlock>
                 <GoabCircularProgress
                   variant="inline"
@@ -3522,6 +3526,13 @@ export function AllComponents() {
                   message="Loading message..."
                   visible={true}
                 ></GoabCircularProgress>
+              </GoabBlock>
+
+              <GoabText size="heading-m" mt="4xl" mb="s">
+                Linear Progress indicator
+              </GoabText>
+              <GoabBlock>
+                <GoabLinearProgress progress={25}></GoabLinearProgress>
               </GoabBlock>
 
               {/* Component ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */}

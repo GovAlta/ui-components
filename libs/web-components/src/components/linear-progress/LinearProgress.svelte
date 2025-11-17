@@ -6,6 +6,7 @@
 
 <script lang="ts">
   export let progress: number = -1;
+  export let testid: string = "";
 </script>
 
 <div class="linear-progress">
@@ -13,6 +14,7 @@
     class="progress-bar"
     max="100"
     value={progress >= 0 && progress <= 100 ? progress : null}
+    data-testid={testid}
   ></progress>
   <span class="percentage">
     {Math.max(0, progress)}%
