@@ -26,6 +26,8 @@
   export let leadingicon: GoAIconType;
   /** The menu style variant. Primary uses bold text, secondary uses regular weight. */
   export let type: "primary" | "secondary" = "primary";
+  /** The header version this menu is used with. */
+  export let version: "1" | "2" = "1";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "rootEl";
 
@@ -44,9 +46,13 @@
   let _hasCurrentLink = false;
   // open state
   let _open = false;
+  // Track if this menu is in V2 navigation context
+  let _isV2Navigation = false;
 
   // Reactive
-  $: _desktop = _innerWidth >= TABLET_BP;
+  // V2 navigation menus stay in desktop mode at all sizes (they're in the navigation slot with full width)
+  // V1 menus collapse to mobile mode below TABLET_BP (they're inside the collapsed menu)
+  $: _desktop = _isV2Navigation ? true : _innerWidth >= TABLET_BP;
 
   // call the method when window changes to desktop size
   $: _desktop && bindToPopoverCloseEvent();
@@ -55,6 +61,20 @@
 
   onMount(() => {
     validateRequired("GoaAppHeaderMenu", { heading });
+    const hostElement = (_rootEl?.getRootNode() as ShadowRoot)?.host as HTMLElement;
+    const inNavigationSlot = hostElement?.getAttribute('slot') === 'navigation';
+
+    // Auto-detect version from parent AppHeader if not explicitly set
+    // Uses property access because Svelte props aren't reflected as HTML attributes
+    let effectiveVersion = version;
+    if (version === "1" && inNavigationSlot) {
+      const parentAppHeader = hostElement?.closest("goa-app-header") as HTMLElement & { version?: string };
+      if (parentAppHeader?.version === "2") {
+        effectiveVersion = "2";
+      }
+    }
+
+    _isV2Navigation = effectiveVersion === "2" && inNavigationSlot;
     dispatchInit();
     addAppHeaderCurrentChangeListener();
   });
@@ -166,42 +186,46 @@
       class="app-header-menu-popover"
       context="menu"
       focusborderwidth="0"
-      borderradius="0"
+      borderradius={_isV2Navigation ? "8" : "0"}
       padded="false"
       tabindex="-1"
       maxwidth="16rem"
       minwidth="8rem"
       position="below"
       open={_open}
+      style={_isV2Navigation ? "--goa-popover-shadow: var(--goa-app-header-nav-menu-dropdown-shadow); --goa-popover-border: var(--goa-app-header-nav-menu-dropdown-border, 0.5px solid var(--goa-color-greyscale-200, #e0e0e0)); margin-top: var(--goa-app-header-nav-menu-dropdown-gap, 3px);" : ""}
     >
       <button
         slot="target"
         class={type}
         class:open={_open}
         class:current={_hasCurrentLink}
+        class:v2-nav={_isV2Navigation}
       >
         {#if leadingicon}
           <goa-icon type={leadingicon} mt="1" />
         {/if}
         {heading}
-        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" />
+        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" size={_isV2Navigation ? "xsmall" : undefined} />
       </button>
 
-      <div class="desktop" bind:this={_slotParentEl}>
+      <div class="desktop" class:v2-nav-menu={_isV2Navigation} bind:this={_slotParentEl}>
         <slot />
       </div>
     </goa-popover>
   {:else}
-    <button class:open={_open} on:click={toggleMenu} class={type}>
+    <button class:open={_open} on:click={toggleMenu} class={type} class:v2-nav={_isV2Navigation}>
       {#if leadingicon}
         <goa-icon type={leadingicon} mt="1" />
       {/if}
       <span class="heading">{heading}</span>
-      <goa-spacer hspacing="fill" />
-      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" />
+      {#if !_isV2Navigation}
+        <goa-spacer hspacing="fill" />
+      {/if}
+      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" size={_isV2Navigation ? "xsmall" : undefined} />
     </button>
     {#if _open}
-      <div class="not-desktop" bind:this={_slotParentEl}>
+      <div class="not-desktop" class:v2-nav-menu={_isV2Navigation} bind:this={_slotParentEl}>
         <slot />
       </div>
     {/if}
@@ -217,7 +241,7 @@
     position: inherit;
   }
 
-  /* Menu item with children */
+  /* Menu item with children - V1 styles */
   button {
     padding: var(--goa-app-header-padding-nav-item-with-children);
     border: none;
@@ -226,7 +250,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: none;
+    background: var(--goa-color-greyscale-white, #ffffff);
     border-top: var(--goa-app-header-border-nav-item-default);
     border-bottom: var(--goa-app-header-border-nav-item-default);
   }
@@ -330,6 +354,33 @@
     );
   }
 
+  /* Menu headers (non-clickable group labels in More menu) */
+  /* Need high specificity to override .desktop.v2-nav-menu styles */
+  .desktop.v2-nav-menu :global(::slotted(a.menu-header)),
+  .desktop.v2-nav-menu :global(::slotted(a.menu-header:visited)),
+  .desktop.v2-nav-menu :global(::slotted(a.menu-header:hover)),
+  .desktop.v2-nav-menu :global(::slotted(a.menu-header:focus)),
+  .desktop.v2-nav-menu :global(::slotted(a.menu-header:active)) {
+    font-size: 14px !important;
+    font-weight: var(--goa-font-weight-regular) !important;
+    color: var(--goa-color-greyscale-600) !important;
+    padding: 6px 8px !important;
+    cursor: default !important;
+    background: transparent !important;
+    text-decoration: none !important;
+    pointer-events: none !important;
+  }
+
+  /* Indented menu items (children under a header in More menu) */
+  /* Need high specificity to override .desktop.v2-nav-menu padding */
+  .desktop.v2-nav-menu :global(::slotted(a.indented)),
+  .desktop.v2-nav-menu :global(::slotted(a.indented:visited)),
+  .desktop.v2-nav-menu :global(::slotted(a.indented:hover)),
+  .desktop.v2-nav-menu :global(::slotted(a.indented:focus)) {
+    padding-left: 24px !important;
+    padding-right: 8px !important;
+  }
+
   /* Secondary Menu items (in popover on menu item) --Tablet */
   .not-desktop :global(::slotted(a)) {
     padding: var(
@@ -347,6 +398,7 @@
       border-bottom: none;
       display: flex;
       align-items: center;
+      background: var(--goa-color-greyscale-white, #ffffff);
     }
     /* Menu item with children on mobile --Hover, --Active */
     button:active,
@@ -409,5 +461,141 @@
       color: var(--goa-app-header-color-menu-button-focus);
       border-bottom: var(--goa-app-header-border-nav-item-focus);
     }
+  }
+
+  /* V2 Navigation Button Styling - Using class-based approach with design tokens */
+  /* This works because the button is in the same shadow DOM as these styles */
+  button.v2-nav {
+    /* Typography - use design tokens */
+    font-weight: var(--goa-font-weight-medium) !important;
+    font-size: var(--goa-font-size-3) !important;
+    line-height: var(--goa-line-height-2) !important;
+    color: var(--goa-app-header-nav-text-color) !important;
+
+    /* Background - use design token */
+    background: var(--goa-app-header-nav-bar-bg) !important;
+
+    /* Padding - use design token */
+    padding: var(--goa-app-header-padding-nav-item) !important;
+
+    /* Border - use design token */
+    border: none !important;
+    border-bottom: var(--goa-app-header-border-nav-item-default) !important;
+    border-radius: 0;
+
+    /* Layout */
+    height: var(--goa-app-header-height-nav-item);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--goa-space-2xs);
+    box-sizing: border-box;
+    white-space: nowrap;
+    cursor: pointer;
+
+    /* Transition */
+    transition: border-bottom-color 0.2s ease;
+  }
+
+  button.v2-nav goa-icon {
+    --goa-icon-size: var(--goa-icon-size-2);
+  }
+
+  button.v2-nav:hover {
+    background: var(--goa-app-header-nav-bar-bg) !important;
+    border-bottom-color: var(--goa-app-header-nav-hover-indicator-color) !important;
+  }
+
+  button.v2-nav:active {
+    background: transparent !important;
+  }
+
+  button.v2-nav.open {
+    background: var(--goa-app-header-nav-bar-bg) !important;
+    border-bottom-color: var(--goa-app-header-nav-hover-indicator-color) !important;
+  }
+
+  button.v2-nav.current {
+    font-weight: var(--goa-font-weight-semi-bold) !important;
+    border-bottom-color: var(--goa-app-header-nav-active-indicator-color) !important;
+  }
+
+  button.v2-nav:focus-visible {
+    outline: var(--goa-app-header-border-focus);
+    outline-offset: -3px;
+    z-index: 1;
+  }
+
+  /* V2 Mobile/Tablet dropdown - position it like a popover (V2 only) */
+  @media not (--desktop) {
+    /* Root container needs relative positioning for absolute dropdown - V2 only */
+    :has(.v2-nav-menu) div[data-testid] {
+      position: relative;
+    }
+
+    .not-desktop.v2-nav-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 8rem;
+      max-width: 16rem;
+      width: max-content;
+      background: var(--goa-color-greyscale-white, #ffffff);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+      margin-top: 0;
+    }
+  }
+
+  /* V2 Dropdown Menu Container - Add padding around items */
+  .desktop.v2-nav-menu {
+    padding: var(--goa-app-header-padding-nav-item-in-menu);
+  }
+
+  /* V2 Dropdown Menu Items - Target the v2-nav-menu class on desktop div */
+  .desktop.v2-nav-menu :global(::slotted(a)),
+  .desktop.v2-nav-menu :global(::slotted(a:visited)) {
+    /* Typography - use design tokens */
+    font-size: var(--goa-font-size-4) !important;
+    font-weight: var(--goa-font-weight-medium) !important;
+    line-height: var(--goa-line-height-3) !important;
+    color: var(--goa-color-text-default) !important;
+
+    /* Remove border separator */
+    box-shadow: none !important;
+    border: none !important;
+
+    /* Spacing */
+    padding: var(--goa-space-s) var(--goa-space-xs) !important;
+
+    /* Border radius */
+    border-radius: var(--goa-border-radius-s) !important;
+
+    /* Display */
+    display: block;
+    text-decoration: none;
+    background: transparent;
+  }
+
+  .desktop.v2-nav-menu :global(::slotted(a:hover)) {
+    background: var(--goa-app-header-color-bg-nav-item-child-hover) !important;
+    color: var(--goa-color-text-default) !important;
+  }
+
+  .desktop.v2-nav-menu :global(::slotted(a:focus-visible)) {
+    outline: 3px solid var(--goa-color-interactive-focus) !important;
+    outline-offset: -3px !important;
+    background: var(--goa-app-header-color-bg-nav-item-child-hover) !important;
+    color: var(--goa-color-text-default) !important;
+  }
+
+  .desktop.v2-nav-menu :global(::slotted(a.current)) {
+    background: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
+    color: var(--goa-color-text-light) !important;
+    font-weight: var(--goa-font-weight-medium) !important;
+  }
+
+  .desktop.v2-nav-menu :global(::slotted(a.current:hover)) {
+    background: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
+    color: var(--goa-color-text-light) !important;
   }
 </style>
