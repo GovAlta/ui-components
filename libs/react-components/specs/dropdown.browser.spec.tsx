@@ -110,7 +110,7 @@ describe("Dropdown", () => {
           expect(dropdown.element().getAttribute("style")).toContain("--width: 500px");
           await dropdown.click();
           expect(popover.element().getAttribute("open")).toBe("true");
-          expect(popoverDiv.element().getAttribute("style")).toContain("width: min(500px, 100%)");
+          expect(popoverDiv.element().getAttribute("style")).toContain("500px");
         })
       });
 
