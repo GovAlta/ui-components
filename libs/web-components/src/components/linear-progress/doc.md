@@ -13,3 +13,9 @@ By default the percentage is shown, but you can hide it by adding `showpercentag
 ```html
 <goa-linear-progress progress="25" showpercentage="false"> </goa-linear-progress>
 ```
+
+You can change the progress bar to a "ping pong" effect by setting the progress to null.
+
+```html
+<goa-linear-progress progress="null" showpercentage="false"> </goa-linear-progress>
+```
