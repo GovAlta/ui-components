@@ -7,22 +7,20 @@
 <script lang="ts">
   export let progress: number | null = -1;
   export let testid: string = "";
-  export let showpercentage: boolean = true;
-  export let showpingpong: boolean = true;
+  export let showpercentage: string = "true";
 </script>
 
-<div class="linear-progress">
+<div class="linear-progress" data-testid={testid}>
   {#if !!progress || progress === 0}
     <progress
       class="progress-bar"
       max="100"
       value={progress >= 0 && progress <= 100 ? progress : null}
-      data-testid={testid}
     ></progress>
   {:else}
-    <progress class="progress-bar" data-testid={testid}></progress>
+    <progress class="progress-bar"></progress>
   {/if}
-  {#if showpercentage}
+  {#if showpercentage !== "false"}
     <span class="percentage">
       {Math.max(0, Math.min(progress || 0, 100))}%
     </span>
@@ -43,6 +41,7 @@
     display: flex;
     align-items: center;
     gap: var(--goa-space-xs);
+    accent-color: var(--goa-color-interactive-default);
   }
 
   .linear-progress span.percentage {

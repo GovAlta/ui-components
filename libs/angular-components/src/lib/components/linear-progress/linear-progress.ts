@@ -15,6 +15,7 @@ import { CommonModule } from "@angular/common";
     <goa-linear-progress
       *ngIf="isReady"
       [attr.progress]="progress"
+      [attr.showpercentage]="true"
       [attr.testid]="testId"
     >
     </goa-linear-progress>

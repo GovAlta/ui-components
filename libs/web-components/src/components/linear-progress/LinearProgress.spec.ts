@@ -27,10 +27,21 @@ describe("GoALinearProgress", () => {
     });
   });
 
+  it("shows the percentage when showpercentage is true", async () => {
+    const { container } = render(GoALinearProgress, {
+      progress: 50,
+      showpercentage: "true",
+    });
+
+    await waitFor(() => {
+      expect(container.querySelector(".percentage")).not.toBeNull();
+    });
+  });
+
   it("hides the percentage when showpercentage is false", async () => {
     const { container } = render(GoALinearProgress, {
       progress: 50,
-      showpercentage: false,
+      showpercentage: "false",
     });
 
     await waitFor(() => {

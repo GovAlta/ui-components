@@ -17,7 +17,7 @@ describe("LinearProgress", () => {
     const { container } = render(
       <GoabLinearProgress progress={progress} showPercentage={true} testId={testId} />,
     );
-    const el = container.querySelector(`goa-linear-progress[testid="${testId}"]`);
+    const el = container.querySelector("goa-linear-progress");
     await waitFor(() => {
       expect(el?.getAttribute("testid")).toBe(testId);
       expect(el?.getAttribute("progress")).toBe(progress.toString());

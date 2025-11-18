@@ -3544,6 +3544,7 @@ export function AllComponents() {
               </GoabBlock>
               <GoabBlock direction="column">
                 <GoabText size="heading-s">Bouncing Progress</GoabText>
+                <GoabText size="body-m">Set progress to null</GoabText>
                 <GoabLinearProgress progress={null}></GoabLinearProgress>
               </GoabBlock>
               {/* Component ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */}
