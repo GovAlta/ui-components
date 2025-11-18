@@ -464,7 +464,9 @@
     border-radius: var(--goa-popover-border-radius);
     outline: none;
     overflow: visible;
-    filter: var(--goa-popover-shadow);
+    box-shadow: var(--goa-popover-box-shadow, none);
+    filter: var(--goa-popover-shadow, none);
+    border: var(--goa-popover-border, none);
     margin-top: var(--offset-top, 3px);
     margin-bottom: var(--offset-bottom, 3px);
     margin-left: var(--offset-left, 0);
