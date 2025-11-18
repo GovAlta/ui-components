@@ -5,20 +5,28 @@
 />
 
 <script lang="ts">
-  export let progress: number = -1;
+  export let progress: number | null = -1;
   export let testid: string = "";
+  export let showpercentage: boolean = true;
+  export let showpingpong: boolean = true;
 </script>
 
 <div class="linear-progress">
-  <progress
-    class="progress-bar"
-    max="100"
-    value={progress >= 0 && progress <= 100 ? progress : null}
-    data-testid={testid}
-  ></progress>
-  <span class="percentage">
-    {Math.max(0, progress)}%
-  </span>
+  {#if !!progress || progress === 0}
+    <progress
+      class="progress-bar"
+      max="100"
+      value={progress >= 0 && progress <= 100 ? progress : null}
+      data-testid={testid}
+    ></progress>
+  {:else}
+    <progress class="progress-bar" data-testid={testid}></progress>
+  {/if}
+  {#if showpercentage}
+    <span class="percentage">
+      {Math.max(0, Math.min(progress || 0, 100))}%
+    </span>
+  {/if}
 </div>
 
 <style>

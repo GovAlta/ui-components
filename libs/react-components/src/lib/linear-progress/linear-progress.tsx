@@ -1,5 +1,6 @@
 interface WCProps {
   progress?: number;
+  showpercentage?: boolean;
   testid?: string;
 }
 
@@ -14,11 +15,22 @@ declare module "react" {
 
 export interface GoabLinearProgressProps {
   progress?: number;
+  showPercentage?: boolean;
   testId?: string;
 }
 
-export const GoabLinearProgress = ({ progress, testId }: GoabLinearProgressProps) => {
-  return <goa-linear-progress progress={progress} testid={testId}></goa-linear-progress>;
+export const GoabLinearProgress = ({
+  progress,
+  showPercentage = true,
+  testId,
+}: GoabLinearProgressProps) => {
+  return (
+    <goa-linear-progress
+      progress={progress}
+      showpercentage={showPercentage}
+      testid={testId}
+    ></goa-linear-progress>
+  );
 };
 
 export default GoabLinearProgress;

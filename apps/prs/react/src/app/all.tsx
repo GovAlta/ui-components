@@ -3531,10 +3531,21 @@ export function AllComponents() {
               <GoabText size="heading-m" mt="4xl" mb="s">
                 Linear Progress indicator
               </GoabText>
-              <GoabBlock>
+              <GoabBlock direction="column">
+                <GoabText size="heading-s">Defaults at 25%</GoabText>
                 <GoabLinearProgress progress={25}></GoabLinearProgress>
               </GoabBlock>
-
+              <GoabBlock direction="column">
+                <GoabText size="heading-s">No percentage shown</GoabText>
+                <GoabLinearProgress
+                  progress={25}
+                  showPercentage={false}
+                ></GoabLinearProgress>
+              </GoabBlock>
+              <GoabBlock direction="column">
+                <GoabText size="heading-s">Bouncing Progress</GoabText>
+                <GoabLinearProgress progress={null}></GoabLinearProgress>
+              </GoabBlock>
               {/* Component ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */}
 
               <GoabText size="heading-m" mt="3xl" mb="2xl">

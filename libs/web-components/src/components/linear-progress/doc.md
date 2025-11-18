@@ -7,3 +7,9 @@ Use it like this:
 ```html
 <goa-linear-progress progress="100"> </goa-linear-progress>
 ```
+
+By default the percentage is shown, but you can hide it by adding `showpercentage`.
+
+```html
+<goa-linear-progress progress="25" showpercentage="false"> </goa-linear-progress>
+```

@@ -11,9 +11,30 @@ describe("GoALinearProgress", () => {
 
       await waitFor(() => {
         expect(container.querySelector(".percentage")?.innerHTML).toContain(
-          `${Math.max(0, progress)}%`,
+          `${Math.max(0, Math.min(progress, 100))}%`,
         );
       });
+    });
+  });
+
+  it("shows the percentage when showpercentage is not set", async () => {
+    const { container } = render(GoALinearProgress, {
+      progress: 50,
+    });
+
+    await waitFor(() => {
+      expect(container.querySelector(".percentage")).not.toBeNull();
+    });
+  });
+
+  it("hides the percentage when showpercentage is false", async () => {
+    const { container } = render(GoALinearProgress, {
+      progress: 50,
+      showpercentage: false,
+    });
+
+    await waitFor(() => {
+      expect(container.querySelector(".percentage")).toBeNull();
     });
   });
 });
