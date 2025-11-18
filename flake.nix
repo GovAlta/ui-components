@@ -18,11 +18,13 @@
       {
         devShells = {
           default = pkgs.mkShell {
+            buildInputs = [ pkgs.bashInteractive ];
             packages = [
               pkgs.nodejs_24
               pkgs.playwright-test
             ];
             shellHook = ''
+              export SHELL=/run/current-system/sw/bin/bash
               export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
               export PLAYWRIGHT_BROWSERS_PATH="${pkgs.playwright-driver.browsers}"
             '';
