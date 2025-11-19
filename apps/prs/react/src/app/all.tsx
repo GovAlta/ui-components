@@ -3531,22 +3531,51 @@ export function AllComponents() {
               <GoabText size="heading-m" mt="4xl" mb="s">
                 Linear Progress indicator
               </GoabText>
-              <GoabBlock direction="column">
-                <GoabText size="heading-s">Defaults at 25%</GoabText>
-                <GoabLinearProgress progress={25}></GoabLinearProgress>
-              </GoabBlock>
-              <GoabBlock direction="column">
-                <GoabText size="heading-s">No percentage shown</GoabText>
-                <GoabLinearProgress
-                  progress={25}
-                  showPercentage={false}
-                ></GoabLinearProgress>
-              </GoabBlock>
-              <GoabBlock direction="column">
-                <GoabText size="heading-s">Bouncing Progress</GoabText>
-                <GoabText size="body-m">Set progress to null</GoabText>
-                <GoabLinearProgress progress={null}></GoabLinearProgress>
-              </GoabBlock>
+              <div style={{ width: "600px", border: "1px solid black" }}>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s">Default progressbar at 0%</GoabText>
+                  <GoabLinearProgress progress={0}></GoabLinearProgress>
+                </GoabBlock>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s">Default progressbar at 25%</GoabText>
+                  <GoabLinearProgress progress={25}></GoabLinearProgress>
+                </GoabBlock>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s">Default progressbar at 49.49%</GoabText>
+                  <GoabLinearProgress progress={49.49}></GoabLinearProgress>
+                </GoabBlock>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s">Default progressbar at 50.9%</GoabText>
+                  <GoabLinearProgress progress={50.9}></GoabLinearProgress>
+                </GoabBlock>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s">Default progressbar at 100%</GoabText>
+                  <GoabLinearProgress progress={100}></GoabLinearProgress>
+                </GoabBlock>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s">No percentage shown</GoabText>
+                  <GoabLinearProgress
+                    progress={25}
+                    showPercentage={false}
+                  ></GoabLinearProgress>
+                </GoabBlock>
+                <GoabBlock direction="column">
+                  <GoabText size="heading-s" mb="0" mt="0">
+                    Bouncing Progress
+                  </GoabText>
+                  <GoabText size="body-m" mb="0" mt="0">
+                    Set progress to null
+                  </GoabText>
+                  <GoabLinearProgress
+                    progress={null}
+                    showPercentage={false}
+                  ></GoabLinearProgress>
+                  <GoabLinearProgress
+                    progress={null}
+                    showPercentage={true}
+                  ></GoabLinearProgress>{" "}
+                </GoabBlock>
+              </div>
               {/* Component ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */}
 
               <GoabText size="heading-m" mt="3xl" mb="2xl">

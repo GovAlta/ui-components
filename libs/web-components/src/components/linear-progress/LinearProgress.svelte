@@ -8,21 +8,37 @@
   export let progress: number | null = -1;
   export let testid: string = "";
   export let showpercentage: string = "true";
+  export let arialabel: string = "progress";
+  export let arialabelledby: string = "";
+
+  // Round the progress to the nearest integer for display and prevent odd
+  // label lengths
+  const percentRounded = Math.round(Math.max(0, Math.min(progress || 0, 100)));
+
+  // Calculate one string because Svelte could output it as two separate text nodes
+  // causing a screen reader to read them separately (instead of "99 percent" it will say "99").
+  export const percentageText = `${percentRounded}%`;
 </script>
 
 <div class="linear-progress" data-testid={testid}>
   {#if !!progress || progress === 0}
     <progress
       class="progress-bar"
+      aria-label={arialabel}
+      aria-labelledby={arialabelledby}
       max="100"
       value={progress >= 0 && progress <= 100 ? progress : null}
     ></progress>
   {:else}
-    <progress class="progress-bar"></progress>
+    <progress
+      class="progress-bar"
+      aria-label={arialabel}
+      aria-labelledby={arialabelledby}
+    ></progress>
   {/if}
   {#if showpercentage !== "false"}
     <span class="percentage">
-      {Math.max(0, Math.min(progress || 0, 100))}%
+      {percentageText}
     </span>
   {/if}
 </div>
@@ -37,11 +53,14 @@
     gap: var(--goa-space-xs);
     border-radius: 4px;
   }
+
   .linear-progress progress {
     display: flex;
     align-items: center;
     gap: var(--goa-space-xs);
     accent-color: var(--goa-color-interactive-default);
+    flex-shrink: 1;
+    width: 100%;
   }
 
   .linear-progress span.percentage {
@@ -49,5 +68,6 @@
     align-items: center;
     gap: var(--goa-space-xs);
     flex-shrink: 0;
+    width: 4ch;
   }
 </style>

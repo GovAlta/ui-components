@@ -14,14 +14,24 @@ describe("LinearProgress", () => {
   it("passes the prop attribute values correctly", async () => {
     const testId = "linear-progress-test-id";
     const progress = 75;
+    const ariaLabel = "label area";
+    const ariaLabelledBy = "by area labelled";
     const { container } = render(
-      <GoabLinearProgress progress={progress} showPercentage={true} testId={testId} />,
+      <GoabLinearProgress
+        progress={progress}
+        showPercentage={true}
+        ariaLabel={ariaLabel}
+        ariaLabelledBy={ariaLabelledBy}
+        testId={testId}
+      />,
     );
     const el = container.querySelector("goa-linear-progress");
     await waitFor(() => {
       expect(el?.getAttribute("testid")).toBe(testId);
       expect(el?.getAttribute("progress")).toBe(progress.toString());
       expect(el?.getAttribute("showpercentage")).toBe("true");
+      expect(el?.getAttribute("arialabel")).toBe(ariaLabel);
+      expect(el?.getAttribute("arialabelledby")).toBe(ariaLabelledBy);
     });
   });
 });

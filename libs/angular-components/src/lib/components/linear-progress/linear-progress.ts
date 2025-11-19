@@ -15,7 +15,9 @@ import { CommonModule } from "@angular/common";
     <goa-linear-progress
       *ngIf="isReady"
       [attr.progress]="progress"
-      [attr.showpercentage]="true"
+      [attr.showpercentage]="showPercentage.toString()"
+      [attr.arialabel]="ariaLabel"
+      [attr.arialabelledby]="ariaLabelledBy"
       [attr.testid]="testId"
     >
     </goa-linear-progress>
@@ -25,6 +27,9 @@ import { CommonModule } from "@angular/common";
 })
 export class GoabLinearProgress implements OnInit {
   @Input({ transform: numberAttribute }) progress?: number;
+  @Input() showPercentage = true;
+  @Input() ariaLabel?: string;
+  @Input() ariaLabelledBy?: string;
   @Input() testId?: string;
 
   isReady = false;
