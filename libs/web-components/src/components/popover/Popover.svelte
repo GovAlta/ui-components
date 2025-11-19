@@ -379,6 +379,7 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={styles(
+    "display: inline-block",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
