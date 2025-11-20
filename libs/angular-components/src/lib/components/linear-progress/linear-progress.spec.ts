@@ -7,12 +7,12 @@ import { By } from "@angular/platform-browser";
   standalone: true,
   imports: [GoabLinearProgress],
   template: `
-    <goab-linear-progress [progress]="progress" [testId]="testId"></goab-linear-progress>
+    <goab-linear-progress [progress]="progress" [testid]="testid"></goab-linear-progress>
   `,
 })
 class TestLinearProgressComponent {
   progress?: number;
-  testId?: string;
+  testid?: string;
 }
 
 describe("GoABLinearProgress", () => {
@@ -28,7 +28,7 @@ describe("GoABLinearProgress", () => {
     fixture = TestBed.createComponent(TestLinearProgressComponent);
     component = fixture.componentInstance;
 
-    component.testId = "foo";
+    component.testid = "foo";
 
     fixture.detectChanges();
     tick(); // Wait for component initialization
@@ -40,17 +40,15 @@ describe("GoABLinearProgress", () => {
     expect(el?.innerHTML).toBeFalsy();
   });
 
-  describe.each(["fullscreen", "inline"])("Testing variant %s", (variant) => {
-    test.each([-1, 50])("Testing progress %s", (progress: number) => {
-      component.progress = progress;
+  test.each([-1, 50])("Testing progress %s", (progress: number) => {
+    component.progress = progress;
 
-      fixture.detectChanges();
+    fixture.detectChanges();
 
-      const el = fixture.debugElement.query(By.css("goa-linear-progress"))?.nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-linear-progress"))?.nativeElement;
 
-      expect(el).toBeTruthy();
-      expect(el?.getAttribute("progress")).toBe(`${progress}`);
-      expect(el?.getAttribute("testid")).toBe(component.testId);
-    });
+    expect(el).toBeTruthy();
+    expect(el?.getAttribute("progress")).toBe(`${progress}`);
+    expect(el?.getAttribute("testid")).toBe(component.testid);
   });
 });

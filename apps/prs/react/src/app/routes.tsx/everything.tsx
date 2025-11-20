@@ -937,7 +937,7 @@ export function EverythingRoute(): JSX.Element {
           <GoabText tag="h3" size="heading-s">
             Progress indicator
           </GoabText>
-          <GoabText id="progress-indicator-label" tag="p" size="body-s" mt="s">
+          <GoabText tag="p" size="body-s" mt="s">
             Current progress: 25%
           </GoabText>
           <GoabLinearProgress
@@ -945,14 +945,12 @@ export function EverythingRoute(): JSX.Element {
             progress={25}
             showPercentage={true}
             ariaLabel="Demo progress indicator at 25%"
-            ariaLabelledBy="progress-indicator-label"
           ></GoabLinearProgress>
           <GoabLinearProgress
             testId="progress-indeterminate"
             progress={null}
             showPercentage={false}
             ariaLabel="Indeterminate progress indicator"
-            ariaLabelledBy="progress-indicator-label"
           ></GoabLinearProgress>
         </GoabContainer>
       </GoabBlock>
