@@ -318,9 +318,12 @@
           ariaLabel="Demo progress indicator"
           ariaLabelledBy="progress-indicator-label"
         ></goab-linear-progress>
-        <goab-text id="progress-indicator-label" tag="p" size="body-s" mt="s">
-          Current progress: 25%
-        </goab-text>
+        <goab-linear-progress
+          [progress]="null"
+          [showPercentage]="false"
+          ariaLabel="Indeterminate progress indicator"
+          ariaLabelledBy="progress-indicator-label"
+        ></goab-linear-progress>
       </goab-container>
     </goab-block>
   </goab-details>

@@ -72,6 +72,7 @@ import {
   GoabText,
   GoabTextarea,
   GoabTooltip,
+  GoabLinearProgress,
 } from "@abgov/react-components";
 import {
   GoabAccordionHeadingSize,
@@ -931,6 +932,28 @@ export function EverythingRoute(): JSX.Element {
           <GoabText tag="p" size="body-s">
             Filter chip clicks: {filterChipClicks}
           </GoabText>
+        </GoabContainer>
+        <GoabContainer type="interactive" padding="relaxed">
+          <GoabText tag="h3" size="heading-s">
+            Progress indicator
+          </GoabText>
+          <GoabText id="progress-indicator-label" tag="p" size="body-s" mt="s">
+            Current progress: 25%
+          </GoabText>
+          <GoabLinearProgress
+            testId="progress-25"
+            progress={25}
+            showPercentage={true}
+            ariaLabel="Demo progress indicator at 25%"
+            ariaLabelledBy="progress-indicator-label"
+          ></GoabLinearProgress>
+          <GoabLinearProgress
+            testId="progress-indeterminate"
+            progress={null}
+            showPercentage={false}
+            ariaLabel="Indeterminate progress indicator"
+            ariaLabelledBy="progress-indicator-label"
+          ></GoabLinearProgress>
         </GoabContainer>
       </GoabBlock>
     </GoabDetails>

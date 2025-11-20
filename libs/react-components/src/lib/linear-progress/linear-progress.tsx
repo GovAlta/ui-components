@@ -25,7 +25,7 @@ export interface GoabLinearProgressProps {
 
 export const GoabLinearProgress = ({
   progress,
-  showPercentage = true,
+  showPercentage,
   ariaLabel,
   ariaLabelledBy,
   testId,
@@ -33,7 +33,7 @@ export const GoabLinearProgress = ({
   return (
     <goa-linear-progress
       progress={progress}
-      showpercentage={showPercentage.toString()}
+      showpercentage={showPercentage?.toString()}
       arialabel={ariaLabel}
       arialabelledby={ariaLabelledBy}
       testid={testId}

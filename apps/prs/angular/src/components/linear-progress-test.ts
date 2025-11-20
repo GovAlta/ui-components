@@ -15,6 +15,14 @@ import { GoabButton, GoabLinearProgress } from "@abgov/angular-components";
       </section>
 
       <section>
+        <h3>Indeterminate Progress - no percentage</h3>
+        <goab-linear-progress
+          testid="indeterminate-progress-no-percentage"
+          [showPercentage]="false"
+        />
+      </section>
+
+      <section>
         <h3>Determinate Progress - 0%</h3>
         <goab-linear-progress testid="determinate-progress-0" [progress]="0" />
       </section>
