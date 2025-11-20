@@ -1800,6 +1800,7 @@ export function AllComponents() {
                       name="item"
                       value={new Date(2024, 11, 4)}
                       onChange={noop}
+                      width="300ch"
                     ></GoabDatePicker>
                   </GoabFormItem>
 

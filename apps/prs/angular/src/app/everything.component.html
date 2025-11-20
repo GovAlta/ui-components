@@ -310,6 +310,18 @@
           >Filter chip clicks: {{ filterChipClicks }}</goab-text
         >
       </goab-container>
+      <goab-container type="interactive" padding="relaxed">
+        <goab-text tag="h3" size="heading-s">Progress indicator</goab-text>
+        <goab-linear-progress
+          [progress]="25"
+          [showPercentage]="true"
+          ariaLabel="Demo progress indicator"
+          ariaLabelledBy="progress-indicator-label"
+        ></goab-linear-progress>
+        <goab-text id="progress-indicator-label" tag="p" size="body-s" mt="s">
+          Current progress: 25%
+        </goab-text>
+      </goab-container>
     </goab-block>
   </goab-details>
   <goab-details maxWidth="100%" heading="Form Controls" open="true">
@@ -563,12 +575,12 @@
               label="Delivery method"
               helpText="GoabRadio reactive binding."
             >
-            <goab-radio-group
-              name="reactive-delivery"
-              orientation="horizontal"
-              [value]="reactiveDemoForm.get('radio')?.value || undefined"
-              formControlName="radio"
-            >
+              <goab-radio-group
+                name="reactive-delivery"
+                orientation="horizontal"
+                [value]="reactiveDemoForm.get('radio')?.value || undefined"
+                formControlName="radio"
+              >
                 <goab-radio-item
                   *ngFor="let option of reactiveRadioOptions"
                   [value]="option.value"

@@ -10,14 +10,6 @@
   export let showpercentage: string = "true";
   export let arialabel: string = "progress";
   export let arialabelledby: string = "";
-
-  // Round the progress to the nearest integer for display and prevent odd
-  // label lengths
-  const percentRounded = Math.round(Math.max(0, Math.min(progress || 0, 100)));
-
-  // Calculate one string because Svelte could output it as two separate text nodes
-  // causing a screen reader to read them separately (instead of "99 percent" it will say "99").
-  export const percentageText = `${percentRounded}%`;
 </script>
 
 <div class="linear-progress" data-testid={testid}>
@@ -38,7 +30,7 @@
   {/if}
   {#if showpercentage !== "false"}
     <span class="percentage">
-      {percentageText}
+      {`${Math.round(Math.max(0, Math.min(progress || 0, 100)))}%`}
     </span>
   {/if}
 </div>

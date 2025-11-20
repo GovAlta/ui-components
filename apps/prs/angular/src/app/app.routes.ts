@@ -43,6 +43,7 @@ import { Feat2722Component } from "./features/feat2722/feat2722.component";
 import { Feat2730Component } from "./features/feat2730/feat2730.component";
 import { Feat2829Component } from "./features/feat2829/feat2829.component";
 import { Feat3102Component } from "./features/feat3102/feat3102.component";
+import { LinearProgressTestComponent } from "../components/linear-progress-test";
 
 export const appRoutes: Route[] = [
   { path: "bugs/bug2152", component: Bug2152Component },
@@ -88,4 +89,5 @@ export const appRoutes: Route[] = [
   { path: "features/feat2730", component: Feat2730Component },
   { path: "features/feat2829", component: Feat2829Component },
   { path: "features/feat3102", component: Feat3102Component },
+  { path: "components/linear-progress", component: LinearProgressTestComponent },
 ];

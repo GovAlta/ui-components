@@ -63,6 +63,7 @@ import {
   GoabText,
   GoabTextArea,
   GoabTooltip,
+  GoabLinearProgress,
 } from "@abgov/angular-components";
 import {
   GoabAccordionHeadingSize,
@@ -201,6 +202,7 @@ interface DemoFormValue {
     GoabIconButton,
     GoabInput,
     GoabInputNumber,
+    GoabLinearProgress,
     GoabLink,
     GoabMenuAction,
     GoabMenuButton,
@@ -655,7 +657,9 @@ export class EverythingComponent {
     const nextCategory = (detail.value as SizeCategory) || "all";
     this.linkedDropdownCategory = nextCategory;
     this.dependentDropdownItems = [...this.linkedDropdownItems[nextCategory]];
-    if (!this.dependentDropdownItems.some((item) => item.value === this.linkedDropdownItem)) {
+    if (
+      !this.dependentDropdownItems.some((item) => item.value === this.linkedDropdownItem)
+    ) {
       this.linkedDropdownItem = "";
     }
     this.logEvent("linkedDropdown.categoryChange", detail);
