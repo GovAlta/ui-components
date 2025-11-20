@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { GoabButton, GoabLinearProgress } from "@abgov/angular-components";
 
 @Component({
-  selector: "app-linear-progress-test",
+  selector: "abgov-app-linear-progress-test",
   standalone: true,
   imports: [GoabLinearProgress, GoabButton],
   template: `
