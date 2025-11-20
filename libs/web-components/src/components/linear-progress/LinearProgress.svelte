@@ -5,7 +5,7 @@
 />
 
 <script lang="ts">
-  export let progress: number | null = -1;
+  export let progress: number | null | undefined = undefined;
   export let testid: string = "";
   export let showpercentage: string = "true";
   export let arialabel: string = "progress";

@@ -2,7 +2,6 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   Input,
-  numberAttribute,
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
@@ -18,7 +17,7 @@ import { CommonModule } from "@angular/common";
       [attr.showpercentage]="showPercentage.toString()"
       [attr.arialabel]="ariaLabel"
       [attr.arialabelledby]="ariaLabelledBy"
-      [attr.testid]="testId"
+      [attr.testid]="testid"
     >
     </goa-linear-progress>
   `,
@@ -26,11 +25,11 @@ import { CommonModule } from "@angular/common";
   imports: [CommonModule],
 })
 export class GoabLinearProgress implements OnInit {
-  @Input({ transform: numberAttribute }) progress?: number;
+  @Input() progress?: number | null | undefined;
   @Input() showPercentage = true;
   @Input() ariaLabel?: string;
   @Input() ariaLabelledBy?: string;
-  @Input() testId?: string;
+  @Input() testid?: string;
 
   isReady = false;
 

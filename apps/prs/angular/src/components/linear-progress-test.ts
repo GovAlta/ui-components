@@ -1,30 +1,28 @@
-import { Component } from "@angular/core";
-import { GoabLinearProgress } from "@abgov/angular-components";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { GoabButton, GoabLinearProgress } from "@abgov/angular-components";
 
 @Component({
   selector: "app-linear-progress-test",
   standalone: true,
-  imports: [GoabLinearProgress],
+  imports: [GoabLinearProgress, GoabButton],
   template: `
     <div class="linear-progress-examples">
       <h2>Linear Progress Examples</h2>
 
       <section>
         <h3>Indeterminate Progress</h3>
-        <goab-linear-progress />
+        <goab-linear-progress testid="indeterminate-progress" />
       </section>
 
       <section>
         <h3>Determinate Progress - 0%</h3>
-        <goab-linear-progress [progress]="0" />
+        <goab-linear-progress testid="determinate-progress-0" [progress]="0" />
       </section>
-      <section>
-        <h3>Indeterminate Progress - 0%</h3>
-        <goab-linear-progress [progress]="null" />
-      </section>
+
       <section>
         <h3>Determinate Progress - 25%</h3>
         <goab-linear-progress
+          testid="determinate-progress-25"
           [progress]="25"
           [showPercentage]="true"
           ariaLabel="Demo progress indicator"
@@ -34,27 +32,33 @@ import { GoabLinearProgress } from "@abgov/angular-components";
 
       <section>
         <h3>Determinate Progress - 50%</h3>
-        <goab-linear-progress [progress]="50" />
+        <goab-linear-progress testid="determinate-progress-50" [progress]="50" />
       </section>
 
       <section>
         <h3>Determinate Progress - 75%</h3>
-        <goab-linear-progress [progress]="75" />
+        <goab-linear-progress testid="determinate-progress-75" [progress]="75" />
       </section>
 
       <section>
         <h3>Determinate Progress - 100%</h3>
-        <goab-linear-progress [progress]="100" />
+        <goab-linear-progress testid="determinate-progress-100" [progress]="100" />
       </section>
 
       <section>
         <h3>Dynamic Progress</h3>
-        <goab-linear-progress [progress]="progress" />
+        <goab-linear-progress testid="dynamic-progress" [progress]="dynamicProgress" />
         <div class="controls">
-          <button (click)="decreaseProgress()">-10%</button>
-          <button (click)="increaseProgress()">+10%</button>
-          <button (click)="resetProgress()">Reset</button>
+          <goab-button (onClick)="decreaseProgress()">-10%</goab-button>
+          <goab-button (onClick)="increaseProgress()">+10%</goab-button>
+          <goab-button (onClick)="resetProgress()">Zero</goab-button>
+          <goab-button (onClick)="nullProgress()">Indeterminate</goab-button>
         </div>
+      </section>
+
+      <section>
+        <h3>Updating Determinate Progress - 0% ➡️ 100%</h3>
+        <goab-linear-progress testid="auto-progress" [progress]="autoProgress" />
       </section>
     </div>
   `,
@@ -86,18 +90,50 @@ import { GoabLinearProgress } from "@abgov/angular-components";
     `,
   ],
 })
-export class LinearProgressTestComponent {
-  progress = 0;
+export class LinearProgressTestComponent implements OnInit, OnDestroy {
+  dynamicProgress: number | null = null;
+  autoProgress = 0;
+  nullProgressValue: number | null = null;
+  private intervalId: any;
 
   increaseProgress(): void {
-    this.progress = Math.min(100, this.progress + 10);
+    if (this.dynamicProgress === null) {
+      this.dynamicProgress = 0;
+      return;
+    }
+
+    this.dynamicProgress = Math.min(100, this.dynamicProgress + 10);
   }
 
   decreaseProgress(): void {
-    this.progress = Math.max(0, this.progress - 10);
+    if (this.dynamicProgress === null) {
+      this.dynamicProgress = 100;
+      return;
+    }
+
+    this.dynamicProgress = Math.max(0, this.dynamicProgress - 10);
   }
 
   resetProgress(): void {
-    this.progress = 0;
+    this.dynamicProgress = 0;
+  }
+
+  nullProgress(): void {
+    this.dynamicProgress = null;
+  }
+
+  ngOnInit() {
+    this.intervalId = setInterval(() => {
+      this.autoProgress += 0.25;
+      if (this.autoProgress > 100) {
+        this.autoProgress = 0;
+      }
+    }, 100);
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
