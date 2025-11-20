@@ -276,14 +276,13 @@
       setFocusedIndexToElement(_profileButtonEl);
     }
 
-    if(newItem === _profileButtonEl && offset < 0 && _showAccountMenu) {
+    if (newItem === _profileButtonEl && offset < 0 && _showAccountMenu) {
       _showAccountMenu = false;
     }
 
-    if(newItem === _toggleButtonEl && offset > 0 && _showAccountMenu) {
+    if (newItem === _toggleButtonEl && offset > 0 && _showAccountMenu) {
       _showAccountMenu = false;
     }
-
 
     tick().then(() => {
       focusOnMenuItem(newItem);
@@ -291,7 +290,8 @@
   }
 
   function setFocusedIndexToElement(el: HTMLElement) {
-    _focusedIndex = _focusItems.indexOf(el) || -1;
+    const index = _focusItems.indexOf(el);
+    _focusedIndex = index !== -1 ? index : -1;
     focusOnMenuItem(el);
   }
 
@@ -498,7 +498,6 @@
   .closed .tooltip::before {
     content: "";
     position: absolute;
-    border-style: solid;
     top: 50%;
     left: -10px;
     transform: translateY(-50%);
