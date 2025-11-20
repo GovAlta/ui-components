@@ -71,6 +71,9 @@ export function App() {
               <Link to="/features/feat2730">2730</Link>
               <Link to="/features/feat2829">2829</Link>
             </GoabSideMenuGroup>
+            <GoabSideMenuGroup heading="Components">
+              <Link to="/components/linear-progress">Linear Progress</Link>
+            </GoabSideMenuGroup>
           </GoabSideMenu>
         </section>
         <section style={{ padding: "30px", width: "100%" }} role="main">

@@ -44,6 +44,7 @@ import { Feat2682Route } from "./app/routes.tsx/features/feat2682";
 import { Feat2722Route } from "./app/routes.tsx/features/feat2722";
 import { Feat2730Route } from "./app/routes.tsx/features/feat2730";
 import { Feat2829Route } from "./app/routes.tsx/features/feat2829";
+import { LinearProgressTest } from "./app/routes.tsx/components/linear-progress-test";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -90,6 +91,7 @@ root.render(
           <Route path="features/feat2722" element={<Feat2722Route />} />
           <Route path="features/feat2730" element={<Feat2730Route />} />
           <Route path="features/feat2829" element={<Feat2829Route />} />
+          <Route path="components/linear-progress" element={<LinearProgressTest />} />
         </Route>
       </Routes>
     </BrowserRouter>
