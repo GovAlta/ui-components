@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 
 import * as ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "@abgov/web-components";
 import App from "./app/app";
-import AllComponents from "./app/all";
+import { EverythingBRoute } from "./app/routes.tsx/personal-playgrounds/everything-b";
 
 import { Bug2152Route } from "./app/routes.tsx/bugs/bug2152";
 import { Bug2331Route } from "./app/routes.tsx/bugs/bug2331";
@@ -44,6 +44,7 @@ import { Feat2682Route } from "./app/routes.tsx/features/feat2682";
 import { Feat2722Route } from "./app/routes.tsx/features/feat2722";
 import { Feat2730Route } from "./app/routes.tsx/features/feat2730";
 import { Feat2829Route } from "./app/routes.tsx/features/feat2829";
+import { Feat2877Route } from "./app/routes.tsx/features/feat2877";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -51,6 +52,7 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
+        <Route path="/everything/b" element={<EverythingBRoute />} />
         <Route path="/" element={<App />}>
           <Route path="bugs/bug2152" element={<Bug2152Route />} />
           <Route path="bugs/bug2331" element={<Bug2331Route />} />
@@ -79,7 +81,8 @@ root.render(
           <Route path="bugs/bug2922" element={<Bug2922Route />} />
           <Route path="bugs/bug2943" element={<Bug2943Route />} />
           <Route path="bugs/bug2948" element={<Bug2948Route />} />
-          <Route path="everything" element={<EverythingRoute />} />
+          <Route path="everything" element={<Navigate to="/everything/a" replace />} />
+          <Route path="everything/a" element={<EverythingRoute />} />
           <Route path="features/feat1547" element={<Feat1547Route />} />
           <Route path="features/feat1813" element={<Feat1813Route />} />
           <Route path="features/feat2361" element={<Feat2361Route />} />
@@ -90,6 +93,7 @@ root.render(
           <Route path="features/feat2722" element={<Feat2722Route />} />
           <Route path="features/feat2730" element={<Feat2730Route />} />
           <Route path="features/feat2829" element={<Feat2829Route />} />
+          <Route path="features/feat2877" element={<Feat2877Route />} />
         </Route>
       </Routes>
     </BrowserRouter>
