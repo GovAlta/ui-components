@@ -102,7 +102,7 @@
 
   onDestroy(() => {
     window.removeEventListener("orientationchange", calcStepDimensions);
-    resizeObserver.unobserve(_rootEl);
+    resizeObserver?.unobserve(_rootEl);
   });
 
   // ====
