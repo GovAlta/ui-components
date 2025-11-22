@@ -68,13 +68,12 @@ it("should have no date selected if one not provided", async () => {
 });
 
 it("sets the preset date value", async () => {
-  const date = new Date().toISOString();
+  const date = "2025-03-01";
   const { container } = render(Calendar, { value: date });
   await tick();
 
-  const timestamp = toDayStart(new Date(date));
   const dayEl = container
-    .querySelector(`.selected[data-date="${getDateStamp(timestamp)}"]`)
+    .querySelector(`.selected[data-date="${date}"]`)
     ?.querySelector("[data-testid=date]");
   expect(dayEl).toBeTruthy();
 });
