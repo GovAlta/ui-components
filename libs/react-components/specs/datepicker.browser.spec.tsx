@@ -70,27 +70,20 @@ describe("DatePicker", () => {
 
   describe("DatePicker Keyboard Navigation", () => {
     [
-      { desc: "previous day", key: "{ArrowLeft}", diff: { fn: addDays, value: -1 } },
-      { desc: "next day", key: "{ArrowRight}", diff: { fn: addDays, value: 1 } },
-      { desc: "previous week", key: "{ArrowUp}", diff: { fn: addDays, value: -7 } },
-      { desc: "next week", key: "{ArrowDown}", diff: { fn: addDays, value: 7 } },
-      { desc: "previous month", key: "{PageUp}", diff: { fn: addMonths, value: -1 } },
-      { desc: "next month", key: "{PageDown}", diff: { fn: addMonths, value: 1 } },
-      { desc: "previous year", key: "{Shift>}{PageUp}", diff: { fn: addYears, value: -1 } },
-      { desc: "next year", key: "{Shift>}{PageDown}", diff: { fn: addYears, value: 1 } },
-    ].forEach(({ desc, key, diff }) => {
+      { value: "2025-03-01", expected: "2025-02-28", formatted: "February 28, 2025", desc: "previous day", key: "{ArrowLeft}" },
+      { value: "2025-03-01", expected: "2025-03-02", formatted: "March 2, 2025", desc: "next day", key: "{ArrowRight}" },
+      { value: "2025-03-01", expected: "2025-02-22", formatted: "February 22, 2025", desc: "previous week", key: "{ArrowUp}" },
+      { value: "2025-03-01", expected: "2025-03-08", formatted: "March 8, 2025", desc: "next week", key: "{ArrowDown}" },
+      { value: "2025-03-01", expected: "2025-02-01", formatted: "February 1, 2025", desc: "previous month", key: "{PageUp}" },
+      { value: "2025-03-01", expected: "2025-04-01", formatted: "April 1, 2025", desc: "next month", key: "{PageDown}" },
+      { value: "2025-03-01", expected: "2024-03-01", formatted: "March 1, 2024", desc: "previous year", key: "{Shift>}{PageUp}" },
+      { value: "2025-03-01", expected: "2026-03-01", formatted: "March 1, 2026", desc: "next year", key: "{Shift>}{PageDown}" },
+    ].forEach(({ value, expected, formatted, desc, key }) => {
       it(`navigates to the ${desc} when ${key} is pressed`, async () => {
-        const inputDate = new Date();
-        const currentDate = new Date(
-          inputDate.getFullYear(),
-          inputDate.getMonth(),
-          inputDate.getDate()
-        );
-
         const handleChange = vi.fn();
         const Component = () => {
-          return <GoabDatePicker testId="date-picker" value={inputDate} onChange={(detail) => {
-            handleChange(detail.value)
+          return <GoabDatePicker testId="date-picker" value={value} onChange={(detail) => {
+            handleChange(detail.valueStr)
           }} />;
         };
 
@@ -99,12 +92,10 @@ describe("DatePicker", () => {
 
         await userEvent.type(input, key);
 
-        const expectedDate = diff.fn(currentDate, diff.value);
         await vi.waitFor(() => {
           const inputEl = input.element() as HTMLInputElement;
-          const newValue = format(expectedDate, "MMMM d, yyyy");
-          expect(inputEl.value).toBe(newValue);
-          expect(handleChange).toBeCalledWith(expectedDate)
+          expect(inputEl.value).toBe(formatted);
+          expect(handleChange).toBeCalledWith(expected)
         });
       })
     })
