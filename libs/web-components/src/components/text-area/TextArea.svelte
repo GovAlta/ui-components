@@ -15,7 +15,7 @@
     injectCss,
     type Spacing,
   } from "../../common/styling";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {
     FieldsetErrorRelayDetail,
     FieldsetResetErrorsMsg,
@@ -45,7 +45,7 @@
   // version
   type VersionType = "1" | "2";
   const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  export let version: VersionType = "2";
+  export let version: VersionType = "1";
 
   // size
   type SizeType = "default" | "compact";
