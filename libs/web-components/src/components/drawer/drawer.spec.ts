@@ -120,7 +120,7 @@ describe("Drawer", () => {
     const drawerEl = await el.findByTestId("drawer");
     await waitFor(() => {
       const drawer = drawerEl.querySelector(".drawer") as HTMLElement;
-      expect(drawer?.style.maxWidth).toBe(maxsize);
+      expect(drawer?.style.maxWidth).toBe(`min(${maxsize}, 100vw)`);
     });
   });
 

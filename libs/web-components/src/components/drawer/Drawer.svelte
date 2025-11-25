@@ -9,7 +9,7 @@
   import { fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
-  import { dispatch, style, styles } from "../../common/utils";
+  import { dispatch, style, styles, typeValidator } from "../../common/utils";
   import { DrawerPosition, DrawerSize } from "../../common/types";
 
   // ******
@@ -21,6 +21,12 @@
   export let heading: string = "";
   export let maxsize: DrawerSize = undefined; // is set based on the anchor value
   export let testid: string = "drawer";
+
+  // version
+  type VersionType = "1" | "2";
+  const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
+  export let version: VersionType = "1";
+
   // *******
   // Private
   // *******
@@ -75,6 +81,7 @@
 
   onMount(async () => {
     await tick();
+    validateVersion(version);
 
     if (position === "bottom") {
       _drawerSize = _contentEl?.getBoundingClientRect().height ?? 0;
@@ -163,7 +170,8 @@
 
 <goa-focus-trap open={open}>
   <div
-    class={`root ${_scrollPos ?? ""}`}
+    class={`root ${_scrollPos ?? "top"}`}
+    class:v2={version === "2"}
     style={style("visibility", open ? "visible" : "hidden")}
     data-testid={testid}
   >
@@ -384,4 +392,72 @@
   .drawer-open-left {
     left: 0;
   }
+
+  /* Version 2 styles */
+
+  .v2 .drawer {
+    border-radius: var(--goa-drawer-border-radius);
+    box-shadow: var(--goa-drawer-shadow);
+    height: auto;
+    overflow: hidden;
+  }
+
+  .v2.root .drawer-content {
+    box-shadow: none;
+    margin-top: -3px;
+    overflow: hidden;
+  }
+
+  .v2.top .header {
+    border-bottom-color: transparent;
+  }
+
+  .v2:not(.top) .header {
+    border-bottom-color: var(--goa-color-greyscale-200);
+  }
+
+  .v2 .scroll-content {
+    padding: var(--goa-drawer-content-padding-vertical, var(--goa-space-l)) var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl));
+  }
+
+  .v2 .drawer-bottom {
+    left: var(--goa-drawer-offset);
+    right: var(--goa-drawer-offset);
+    width: auto !important;
+    transform: translateY(100%); /* Start off-screen at bottom */
+    transition: transform 0.2s ease-out;
+  }
+  .v2 .drawer-bottom.open,
+  .v2 .drawer-bottom.drawer-open-bottom {
+    bottom: var(--goa-drawer-offset, 0);
+    transform: translateY(0); /* Slide in */
+  }
+
+  .v2 .drawer-right,
+  .v2 .drawer-left {
+    top: var(--goa-drawer-offset);
+    min-height: 0; /* Override V1 min-height */
+    max-height: calc(100vh - 2 * var(--goa-drawer-offset, 0));
+    box-shadow: var(--goa-drawer-shadow);
+    transition: bottom 0.15s ease-out, transform 0.2s ease-out;
+  }
+
+  .v2 .drawer-right {
+    transform: translateX(100%);
+  }
+
+  .v2 .drawer-open-right {
+    right: var(--goa-drawer-offset);
+    transform: translateX(0); /* Slide in */
+  }
+
+  .v2 .drawer-left {
+    transform: translateX(-100%); /* Start off-screen to the left */
+  }
+
+  .v2 .drawer-open-left {
+    left: var(--goa-drawer-offset);
+    transform: translateX(0); /* Slide in */
+  }
+
 </style>
