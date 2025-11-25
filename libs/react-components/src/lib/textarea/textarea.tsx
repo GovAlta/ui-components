@@ -24,6 +24,7 @@ interface WCProps extends Margins {
   maxcount?: number;
   autocomplete?: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -138,6 +139,7 @@ export function GoabTextArea(props: GoabTextAreaProps): JSX.Element {
       ml={ml}
       autocomplete={autoComplete}
       {...dataGridProps}
+      version={"2"}
     ></goa-textarea>
   );
 }
