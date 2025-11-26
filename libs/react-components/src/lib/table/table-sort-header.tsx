@@ -29,7 +29,7 @@ export function GoabTableSortHeader(props: GoabTableSortProps): JSX.Element {
   const [dataGridProps, { name, direction = "none", children }] = useDataGridProps(props);
 
   return (
-    <goa-table-sort-header version={"2"} name={name} direction={direction} {...dataGridProps}>
+    <goa-table-sort-header name={name} direction={direction} {...dataGridProps}>
       {children}
     </goa-table-sort-header>
   );

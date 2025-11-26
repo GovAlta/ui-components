@@ -55,7 +55,7 @@ export function GoabTabs({
   }, [onChange]);
 
   return (
-    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} updateurl={updateUrl ? "true": "false"} mt={mt} mr={mr} mb={mb} ml={ml} version={"2"}>
+    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} updateurl={updateUrl ? "true": "false"} mt={mt} mr={mr} mb={mb} ml={ml}>
       {children}
     </goa-tabs>
   );

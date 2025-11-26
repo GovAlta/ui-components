@@ -75,7 +75,6 @@ export function GoabBadge(props: GoabBadgeProps): JSX.Element {
       mr={mr}
       mb={mb}
       ml={ml}
-      version={"2"}
       {...dataGridProps}
     />
   );

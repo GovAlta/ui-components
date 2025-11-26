@@ -182,8 +182,8 @@
   }
 
   .dark:disabled {
-    color: var(--goa-icon-button-dark-disabled-color, var(--goa-icon-button-dark-disabled-color-bg));
-    fill: var(--goa-icon-button-dark-disabled-color, var(--goa-icon-button-dark-disabled-color-bg));
+    color: var(--goa-icon-button-dark-disabled-color);
+    fill: var(--goa-icon-button-dark-disabled-color);
   }
 
   /*  Type: nocolor (same as dark, not documented) */

@@ -46,7 +46,6 @@ export function GoabBlock(props: GoabBlockProps) {
       mb={mb}
       ml={ml}
       testid={testId}
-      version={"2"}
       {...dataGridProps}
     >
       {children}

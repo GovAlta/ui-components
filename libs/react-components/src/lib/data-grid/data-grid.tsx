@@ -3,7 +3,6 @@ import React from "react";
 interface WCProps {
   "keyboard-icon"?: string;
   "keyboard-nav"?: "layout" | "table";
-  version?: string;
 }
 
 declare module "react" {
@@ -26,7 +25,6 @@ export function GoabDataGrid({ keyboardIcon = true, keyboardNav, children }: Goa
     <goa-data-grid
       keyboard-icon={keyboardIcon ? "true" : undefined}
       keyboard-nav={keyboardNav}
-      version={"2"}
     >
       {children}
     </goa-data-grid>

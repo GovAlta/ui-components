@@ -45,7 +45,7 @@
   // version
   type VersionType = "1" | "2";
   const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
-  export let version: VersionType = "1";
+  export let version: VersionType = "2";
 
   // size
   type SizeType = "default" | "compact";
@@ -90,10 +90,10 @@
   // Hooks
 
   onMount(() => {
-    validateVersion(version);
-    validateSize(size);
     addRelayListener();
     sendMountedMessage();
+    validateVersion(version);
+    validateSize(size);
     const finalWidth = width.includes("%") ? width : `min(${width}, 100%)`;
     const cssProps: Record<string, string> = { width: finalWidth };
 

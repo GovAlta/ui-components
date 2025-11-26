@@ -165,7 +165,6 @@ export function GoabInput(props: GoabInputProps & { type?: GoabInputType }): JSX
     maxLength,
     trailingIconAriaLabel,
     textAlign = "left",
-    size,
     onTrailingIconClick,
     onChange,
     onFocus,
@@ -251,8 +250,6 @@ export function GoabInput(props: GoabInputProps & { type?: GoabInputType }): JSX
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
       trailingiconarialabel={trailingIconAriaLabel}
       textalign={textAlign}
-      size={size}
-      version={"2"}
       {...dataGridProps}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}

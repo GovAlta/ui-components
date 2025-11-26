@@ -61,7 +61,6 @@ export function GoabDatePicker(props: GoabDatePickerProps): JSX.Element {
     mb,
     ml,
     relative,
-    width,
     onChange,
   }] = useDataGridProps(props);
   const ref = useRef<HTMLInputElement>(null);

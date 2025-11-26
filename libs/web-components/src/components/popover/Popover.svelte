@@ -95,7 +95,6 @@
   let _popoverEl: HTMLElement;
   let _focusTrapEl: HTMLElement;
   let _sectionHeight: number;
-  let _contentFitsWidth: boolean = false;
   let _previousOpen = false;
 
   // Reactive

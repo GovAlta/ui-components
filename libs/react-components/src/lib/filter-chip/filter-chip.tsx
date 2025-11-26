@@ -66,7 +66,6 @@ export const GoabFilterChip = (props: GoabFilterChipProps) => {
       ml={ml}
       testid={testId}
       {...dataGridProps}
-      version={"2"}
     />
   );
 };

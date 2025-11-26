@@ -139,7 +139,6 @@ export function GoabTextArea(props: GoabTextAreaProps): JSX.Element {
       ml={ml}
       autocomplete={autoComplete}
       {...dataGridProps}
-      version={"2"}
     ></goa-textarea>
   );
 }

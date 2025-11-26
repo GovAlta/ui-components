@@ -103,7 +103,6 @@ export function GoabIconButton(props: GoabIconButtonProps): JSX.Element {
       ml={ml}
       testid={testId}
       {...dataGridProps}
-      version={"2"}
     >
       {children}
     </goa-icon-button>

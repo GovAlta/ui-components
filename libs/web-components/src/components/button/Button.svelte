@@ -385,7 +385,7 @@
   button.v2:focus-visible {
     box-shadow: none;
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    outline-offset: var(--goa-button-outline-offset);
+    outline-offset: 3px;
   }
 
   button.v2:disabled {
@@ -433,9 +433,5 @@
   button.v2.tertiary:disabled {
     color: var(--goa-button-tertiary-disabled-color-text);
     border-color: var(--goa-button-tertiary-disabled-color-border);
-  }
-
-  button.v2 .text {
-    padding-bottom: 0;
   }
 </style>

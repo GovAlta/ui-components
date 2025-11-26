@@ -109,7 +109,6 @@ export function GoabButton(props: GoabButtonProps): JSX.Element {
       mb={mb}
       ml={ml}
       {...dataGridProps}
-      version={"2"}
     >
       {children}
     </goa-button>

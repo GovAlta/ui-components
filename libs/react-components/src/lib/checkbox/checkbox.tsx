@@ -115,7 +115,6 @@ export function GoabCheckbox(props: GoabCheckboxProps): JSX.Element {
       mr={mr}
       mb={mb}
       ml={ml}
-      version={"2"}
       {...dataGridProps}
     >
       {children}

@@ -46,7 +46,6 @@ export function GoabLink(props: GoabLinkProps) {
       mb={mb}
       ml={ml}
       mr={mr}
-      version={"2"}
       {...dataGridProps}
     >
       {children}
