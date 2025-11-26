@@ -223,7 +223,7 @@
     }
 
     const focusableElements = [
-      "WORK-SIDE-MENU-ITEM",
+      "WORK-SIDE-MENU",
       "A",
       "BUTTON",
       "INPUT",
@@ -305,7 +305,7 @@
   }
 
   function focusOnMenuItem(el: HTMLElement) {
-    if (el.tagName.includes("WORK-SIDE-MENU-ITEM")) {
+    if (el.tagName.includes("WORK-SIDE-MENU")) {
       let link = getShadowLinkEl(el);
       link?.focus();
     } else {
@@ -352,6 +352,9 @@
     _rootEl.addEventListener("_mountItem", addMenuLink);
     _rootEl.addEventListener("_hoverItem", handleHover as EventListener);
     _rootEl.addEventListener("_toggle", toggleMenu);
+    _rootEl.addEventListener("_groupOpen", () => {
+      open = true;
+    });
     window.addEventListener("popstate", setCurrentUrl); // watch for hash & browser history changes
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", handleWindowResize);
