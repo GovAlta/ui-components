@@ -38,6 +38,7 @@ import { Feat1813Route } from "./routes/features/feat1813";
 import { Feat2361Route } from "./routes/features/feat2361";
 import { Feat2054Route } from "./routes/features/feat2054";
 import { Feat2267Route } from "./routes/features/feat2267";
+import { Feat2440Route } from "./routes/features/feat2440";
 import { Feat2492Route } from "./routes/features/feat2492";
 import { Feat2682Route } from "./routes/features/feat2682";
 import { Feat2722Route } from "./routes/features/feat2722";
@@ -84,6 +85,7 @@ root.render(
           <Route path="features/2361" element={<Feat2361Route />} />
           <Route path="features/2054" element={<Feat2054Route />} />
           <Route path="features/2267" element={<Feat2267Route />} />
+          <Route path="features/2440" element={<Feat2440Route />} />
           <Route path="features/2492" element={<Feat2492Route />} />
           <Route path="features/2682" element={<Feat2682Route />} />
           <Route path="features/2722" element={<Feat2722Route />} />
