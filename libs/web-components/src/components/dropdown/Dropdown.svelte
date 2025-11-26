@@ -66,6 +66,9 @@
   export let error: string = "false";
   export let multiselect: string = "false";
   export let native: string = "false";
+  export let size: "default" | "compact" = "default";
+  export let version: "1" | "2" = "1";
+
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
@@ -754,6 +757,8 @@
   data-testid={testid || `${name}-dropdown`}
   class="dropdown"
   class:dropdown-native={_native}
+  class:compact={size === "compact"}
+  class:v2={version === "2"}
   style={`
     ${calculateMargin(mt, mr, mb, ml)};
     --width: ${_width};
@@ -801,6 +806,7 @@
           <goa-icon
             class="dropdown-input--leading-icon"
             data-testid="leading-icon"
+              size={size === "compact" ? "small" : "medium"}
             type={leadingicon}
           />
         {/if}
@@ -827,7 +833,7 @@
           aria-haspopup="listbox"
           disabled={_disabled}
           readonly={!_filterable}
-          {placeholder}
+          placeholder={placeholder || (version === "2" ? "—Select—" : "")}
           {name}
           on:keydown={onInputKeyDown}
           on:keyup={onInputKeyUp}
@@ -845,7 +851,8 @@
             on:keydown={onClearIconKeyDown}
             class="dropdown-icon--clear"
             class:disabled={_disabled}
-            size="medium"
+            disabled={_disabled ? "true" : "false"}
+            size={size === "compact" ? "xsmall" : "medium"}
             theme="filled"
             variant="dark"
             icon="close"
@@ -856,7 +863,7 @@
             testid="chevron"
             id={name}
             class="dropdown-icon--arrow"
-            size="medium"
+            size={size === "compact" ? "small" : "medium"}
             type={_isMenuVisible ? "chevron-up" : "chevron-down"}
           />
         {/if}
@@ -936,20 +943,28 @@
     cursor: pointer;
     width: 100%;
   }
+
   .dropdown-input-group:hover {
     box-shadow: var(--goa-dropdown-border-hover);
     border: none;
   }
-  .dropdown-input-group:has(input:focus-visible) {
+
+  .dropdown-input-group:has(input:focus-visible),
+  .dropdown-input-group.error:has(:focus-visible) {
     box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
+
+  /* V2: Focus state has a single border */
+  .v2 .dropdown-input-group:has(input:focus-visible),
+  .v2 .dropdown-input-group.error:has(:focus-visible) {
+    box-shadow: var(--goa-dropdown-border-focus);
+  }
+
   .dropdown-input-group.error,
   .dropdown-input-group.error:hover {
     box-shadow: var(--goa-dropdown-border-error);
   }
-  .dropdown-input-group.error:has(:focus-visible) {
-    box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
-  }
+
   @container not (--mobile) {
     .dropdown-input-group {
       width: var(--width, 100%);
@@ -1015,9 +1030,9 @@
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(--goa-dropdown-border-radius);
+    border-radius: var(--goa-dropdown-menu-border-radius, var(--goa-dropdown-border-radius));
     padding: 0;
-    margin: 0;
+    margin: var(--goa-dropdown-menu-margin, 0);
   }
 
   /* dropdown items */
@@ -1031,7 +1046,9 @@
     white-space: normal; /* Allows text to wrap */
     word-break: break-word; /* Ensures long words break onto the next line */
     overflow-wrap: break-word; /* Alternative for word wrapping */
+    border-radius: var(--goa-dropdown-item-border-radius, 0);
   }
+
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {
@@ -1088,8 +1105,9 @@
   .dropdown-native::after {
     content: "";
     position: absolute;
-    right: 0.6rem;
-    top: 0.6rem;
+    right: var(--goa-dropdown-space-icon-text);
+    top: 50%;
+    transform: translateY(-50%);
     pointer-events: none;
     width: 1.5rem;
     height: 1.5rem;
@@ -1108,5 +1126,21 @@
   ::placeholder {
     color: var(--goa-dropdown-color-text-placeholder);
     opacity: 1;
+  }
+
+  input:disabled::placeholder {
+    color: var(--goa-dropdown-color-text-disabled);
+  }
+
+  /* Compact Size */
+  .compact input,
+  .compact select {
+    padding: var(--goa-dropdown-compact-padding);
+    height: var(--goa-dropdown-compact-height);
+    font: var(--goa-dropdown-compact-typography);
+  }
+
+  .compact .dropdown-item {
+    font: var(--goa-dropdown-compact-item-typography);
   }
 </style>

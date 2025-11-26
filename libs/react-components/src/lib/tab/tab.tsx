@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 interface WCProps {
   heading?: React.ReactNode;
+  version?: string;
 }
 
 declare module "react" {
@@ -19,7 +20,7 @@ export interface GoabTabItemProps {
 
 export function GoabTab({ heading, children }: GoabTabItemProps): JSX.Element {
   return (
-    <goa-tab>
+    <goa-tab version={"2"}>
       {heading && <span slot="heading">{heading}</span>}
       {children}
     </goa-tab>

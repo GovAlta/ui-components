@@ -14,6 +14,7 @@ interface WCProps extends Margins {
   size?: GoabTextSize;
   maxwidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
+  version?: string;
 }
 
 declare module "react" {
@@ -48,6 +49,7 @@ export function GoabText(props: GoATextProps): JSX.Element {
       mb={mb}
       ml={ml}
       mr={mr}
+      version={"2"}
       {...dataGridProps}
     >
       {children}

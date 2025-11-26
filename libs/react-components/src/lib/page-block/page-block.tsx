@@ -4,6 +4,7 @@ import { ReactNode, type JSX } from "react";
 interface WCProps {
   width?: GoabPageBlockSize;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -26,7 +27,7 @@ export type PageBlockProps = GoabPageBlockProps;
 
 export function GoabPageBlock(props: PageBlockProps): JSX.Element {
   return (
-    <goa-page-block width={props.width} testid={props.testId}>
+    <goa-page-block width={props.width} testid={props.testId} version={"2"}>
       {props.children}
     </goa-page-block>
   );

@@ -9,6 +9,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   testid?: string;
   icontype?: GoabIconType;
+  version?: string;
 }
 
 declare module "react" {
@@ -74,6 +75,7 @@ export function GoabBadge(props: GoabBadgeProps): JSX.Element {
       mr={mr}
       mb={mb}
       ml={ml}
+      version={"2"}
       {...dataGridProps}
     />
   );

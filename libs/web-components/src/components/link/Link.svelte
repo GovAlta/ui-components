@@ -31,6 +31,13 @@
 
   let _rootEl: HTMLElement;
 
+  $: _iconSize = {
+    xsmall: "2xsmall", // 12px
+    small: "xsmall", // 16px
+    medium: "small", // 18px
+    large: "medium", // 20px
+  }[size];
+
   onMount(() => {
     if (action) {
       _rootEl.addEventListener("click", handleClick);
@@ -66,16 +73,12 @@
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
 >
-  {#if leadingicon}<goa-icon data-testid="leading-icon" type={leadingicon} size={getIconSize(size)} />{/if}
+  {#if leadingicon}<goa-icon data-testid="leading-icon" type={leadingicon} size={_iconSize} />{/if}
   <slot />
-  {#if trailingicon}<goa-icon data-testid="trailing-icon" type={trailingicon} size={getIconSize(size)} />{/if}
+  {#if trailingicon}<goa-icon data-testid="trailing-icon" type={trailingicon} size={_iconSize} />{/if}
 </div>
 
 <style>
-  :global(::slotted(a)) {
-    color: var(--goa-link-color-interactive-default, var(--goa-color-interactive-default));
-  }
-
   /* Base link styles */
   .link {
     display: inline-flex;
@@ -116,12 +119,20 @@
     color: var(--goa-link-color-interactive-default, var(--goa-color-interactive-default));
   }
 
+  .link.interactive :global(::slotted(a)) {
+    color: var(--goa-link-color-interactive-default, var(--goa-color-interactive-default)) !important;
+  }
+
   .link.interactive:hover {
     color: var(--goa-link-color-interactive-hover, var(--goa-color-interactive-hover));
   }
 
-  .link.interactive :global(::slotted(a:visited)) {
-    color: var(--goa-link-color-interactive-visited, var(--goa-color-interactive-visited));
+  .link.interactive:hover :global(::slotted(a)) {
+    color: var(--goa-link-color-interactive-hover, var(--goa-color-interactive-hover)) !important;
+  }
+
+  .link.interactive :global(a:visited) {
+    color: var(--goa-link-color-interactive-visited, var(--goa-color-interactive-visited)) !important;
   }
 
   /* Color variant: Dark (Black) */
@@ -129,12 +140,20 @@
     color: var(--goa-link-color-dark-default, var(--goa-color-greyscale-black));
   }
 
+  .link.dark :global(::slotted(a)) {
+    color: var(--goa-link-color-dark-default, var(--goa-color-greyscale-black)) !important;
+  }
+
   .link.dark:hover {
     color: var(--goa-link-color-dark-hover, var(--goa-color-greyscale-700));
   }
 
-  .link.dark :global(::slotted(a:visited)) {
-    color: var(--goa-link-color-dark-visited, var(--goa-color-interactive-visited));
+  .link.dark:hover :global(::slotted(a)) {
+    color: var(--goa-link-color-dark-hover, var(--goa-color-greyscale-700)) !important;
+  }
+
+  .link.dark :global(a:visited) {
+    color: var(--goa-link-color-dark-visited, var(--goa-color-interactive-visited)) !important;
   }
 
   /* Color variant: Light (White) */
@@ -142,11 +161,30 @@
     color: var(--goa-link-color-light-default, var(--goa-color-text-light));
   }
 
-  .link.light:hover {
-    color: var(--goa-link-color-light-hover, var(--goa-color-greyscale-100));
+  .link.light :global(::slotted(a)) {
+    color: var(--goa-link-color-light-default, var(--goa-color-text-light)) !important;
   }
 
-  .link.light :global(::slotted(a:visited)) {
-    color: var(--goa-link-color-light-visited, var(--goa-color-greyscale-300));
+  .link.light:hover {
+    color: var(--goa-link-color-light-hover, var(--goa-color-greyscale-200));
+  }
+
+  .link.light:hover :global(::slotted(a)) {
+    color: var(--goa-link-color-light-hover, var(--goa-color-greyscale-200)) !important;
+  }
+
+  .link.light :global(a:visited) {
+    color: var(--goa-link-color-light-visited, #9D8EBB) !important;
+  }
+
+  /* Focus */
+  .link:focus-within {
+    border-radius: var(--goa-link-border-radius-focus, var(--goa-border-radius-s));
+    outline: var(--goa-link-border-focus, var(--goa-border-width-l) solid var(--goa-color-interactive-focus));
+    outline-offset: var(--goa-link-focus-offset, var(--goa-space-3xs));
+  }
+
+  .link :global(::slotted(a:focus-visible)) {
+    outline: none;
   }
 </style>

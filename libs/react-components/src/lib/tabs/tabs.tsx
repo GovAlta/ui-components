@@ -7,6 +7,7 @@ interface WCProps extends Margins {
   updateurl?: string;
   onChange?: (tab: number) => void;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -54,7 +55,7 @@ export function GoabTabs({
   }, [onChange]);
 
   return (
-    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} updateurl={updateUrl ? "true": "false"} mt={mt} mr={mr} mb={mb} ml={ml}>
+    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} updateurl={updateUrl ? "true": "false"} mt={mt} mr={mr} mb={mb} ml={ml} version={"2"}>
       {children}
     </goa-tabs>
   );

@@ -18,6 +18,7 @@ interface WCProps extends Margins {
   error?: string;
   arialabel?: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -96,6 +97,7 @@ export function GoabRadioGroup(props: GoabRadioGroupProps): JSX.Element {
       mr={mr}
       mb={mb}
       ml={ml}
+      version={"2"}
       {...dataGridProps}
     >
       {children}

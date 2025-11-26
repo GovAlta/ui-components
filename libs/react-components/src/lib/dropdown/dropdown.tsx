@@ -26,6 +26,7 @@ interface WCProps extends Margins {
   id?: string;
   autocomplete?: string;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -152,6 +153,7 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       relative={relative ? "true" : undefined}
       autocomplete={autoComplete}
       id={id}
+      version={"2"}
       {...dataGridProps}
     >
       {children}

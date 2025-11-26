@@ -41,6 +41,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   testid?: string;
   textalign?: string;
+  size?: string;
 
   // type=number
   min?: string | number;
@@ -49,6 +50,7 @@ interface WCProps extends Margins {
   maxlength?: number;
 
   trailingiconarialabel?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -88,6 +90,7 @@ interface BaseProps extends Margins, DataGridProps {
   maxLength?: number;
   trailingIconAriaLabel?: string;
   textAlign?: "left" | "right";
+  size?: "compact";
 }
 
 type OnChange<T = string> = (detail: GoabInputOnChangeDetail<T>) => void;
@@ -162,6 +165,7 @@ export function GoabInput(props: GoabInputProps & { type?: GoabInputType }): JSX
     maxLength,
     trailingIconAriaLabel,
     textAlign = "left",
+    size,
     onTrailingIconClick,
     onChange,
     onFocus,
@@ -247,6 +251,8 @@ export function GoabInput(props: GoabInputProps & { type?: GoabInputType }): JSX
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
       trailingiconarialabel={trailingIconAriaLabel}
       textalign={textAlign}
+      size={size}
+      version={"2"}
       {...dataGridProps}
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}

@@ -11,6 +11,7 @@ interface WCProps extends Margins {
   alignment: GoabButtonGroupAlignment;
   gap?: GoabButtonGroupGap;
   testid?: string;
+  version?: string;
 }
 
 declare module "react" {
@@ -50,6 +51,7 @@ export function GoabButtonGroup(props: GoabButtonGroupProps): JSX.Element {
       mb={mb}
       ml={ml}
       testid={testId}
+      version={"2"}
       {...dataGridProps}
     >
       {children}

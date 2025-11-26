@@ -25,7 +25,7 @@
   export let calloutvariant: CalloutVariant | null = null;
   export let maxwidth: string = "60ch";
   export let testid: string = "modal";
-  export let version: VersionType = "2";
+  export let version: VersionType = "1";
 
   // @deprecated: use maxwidth
   export let width: string = "";

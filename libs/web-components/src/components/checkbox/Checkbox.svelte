@@ -39,12 +39,13 @@
   export let description: string = "";
   export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
   export let maxwidth: string = "none";
-  export let version: "1" | "2" = "2";
+  export let size: "default" | "compact" = "default";
+  export let version: "1" | "2" = "1";
 
   // margin
   export let mt: Spacing = null;
   export let mr: Spacing = null;
-  export let mb: Spacing = "m";
+  export let mb: Spacing = null;
   export let ml: Spacing = null;
 
   // Private
@@ -85,6 +86,7 @@
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
+    mb ??= size === "compact" ? "s" : "m";
 
     addRelayListener();
     addRevealSlotListener();
@@ -246,6 +248,7 @@
   bind:this={_rootEl}
   class="root"
   class:v2={version === "2"}
+  class:compact={size === "compact"}
   style={`
 ${calculateMargin(mt, mr, mb, ml)}
 max-width: ${maxwidth};
@@ -594,7 +597,7 @@ max-width: ${maxwidth};
     outline-offset: var(--goa-space-3xs);
     box-shadow: none;
   }
-  .v2 .disabled:not(.error) .container {
+  .v2 .disabled:not(.error) .container:not(.selected) {
     background: var(--goa-input-color-background-disabled);
     box-shadow: none;
   }
@@ -609,9 +612,22 @@ max-width: ${maxwidth};
   .v2 label:hover.error:not(.disabled) .container,
   .v2 label:hover.error:not(.disabled) .container.selected {
     background: var(--goa-input-color-background-error-hover);
+    border: var(--goa-checkbox-border-error-hover);
+  }
+
+  .v2 .error:not(.disabled) .container:hover svg,
+  .v2 .error:not(.disabled) .container.selected:hover svg,
+  .v2 label:hover.error:not(.disabled) .container svg,
+  .v2 label:hover.error:not(.disabled) .container.selected svg {
+    fill: var(--goa-checkbox-color-bg-checked-error-hover);
   }
 
   .v2 .error .container svg {
     margin-top: 5px;
+  }
+
+  .v2.compact .text {
+    padding-left: var(--goa-checkbox-gap-compact);
+    font: var(--goa-checkbox-label-font-size-compact);
   }
 </style>
