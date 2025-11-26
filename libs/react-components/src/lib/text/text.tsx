@@ -13,6 +13,7 @@ interface WCProps extends Margins {
   size?: GoabTextSize;
   maxwidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
+  id?: string;
 }
 
 declare module "react" {
@@ -31,6 +32,7 @@ interface GoATextProps extends Margins {
   size?: GoabTextSize;
   maxWidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
+  id?: string;
   children: ReactNode;
 }
 
@@ -41,6 +43,7 @@ export function GoabText(props: GoATextProps): JSX.Element {
       size={props.size}
       maxwidth={props.maxWidth}
       color={props.color}
+      id={props.id}
       mt={props.mt}
       mb={props.mb}
       ml={props.ml}

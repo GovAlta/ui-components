@@ -72,4 +72,11 @@ describe('GoabText', () => {
       expect(element?.getAttribute('as')).toBe(tag);
     });
   });
+
+  it('should apply id to the web component host', () => {
+    const { container } = render(<GoabText id="react-text-id">Content</GoabText>);
+    const element = container.querySelector('goa-text');
+
+    expect(element?.getAttribute('id')).toBe('react-text-id');
+  });
 });
