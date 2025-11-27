@@ -9,22 +9,19 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/docs"],
       "options": {
-        "command": "astro build",
-        "cwd": "docs"
+        "command": "astro build --root docs"
       }
     },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "astro dev --port 4203 --host 0.0.0.0",
-        "cwd": "docs"
+        "command": "astro dev --root docs --port 4203 --host 0.0.0.0"
       }
     },
     "preview": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "astro preview --port 4303 --host 0.0.0.0",
-        "cwd": "docs"
+        "command": "astro preview --root docs --port 4304 --host 0.0.0.0"
       }
     }
   }
