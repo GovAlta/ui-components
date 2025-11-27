@@ -45,6 +45,7 @@ import { Feat2722Component } from "../routes/features/feat2722/feat2722.componen
 import { Feat2730Component } from "../routes/features/feat2730/feat2730.component";
 import { Feat2829Component } from "../routes/features/feat2829/feat2829.component";
 import { Feat3102Component } from "../routes/features/feat3102/feat3102.component";
+import { Bug2685Component } from "../routes/bugs/2685/bug2685.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -80,6 +81,7 @@ export const appRoutes: Route[] = [
   { path: "bugs/3072", component: Bug3072Component },
   { path: "bugs/3118", component: Bug3118Component },
   { path: "bugs/3156", component: Bug3156Component },
+  { path: "bugs/2685", component: Bug2685Component },
 
   { path: "features/1328", component: Feat1328Component },
   { path: "features/1547", component: Feat1547Component },
