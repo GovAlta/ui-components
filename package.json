@@ -48,6 +48,7 @@
     "@nx/vite": "^22.0.4",
     "@nx/web": "21.1.2",
     "@nx/workspace": "21.1.2",
+    "@nxtensions/astro": "^19.0.1",
     "@schematics/angular": "20.1.5",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@swc-node/register": "1.9.2",
