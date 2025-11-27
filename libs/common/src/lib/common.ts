@@ -5,16 +5,19 @@ export type GoabSpinnerSize = "small" | "medium" | "large" | "xlarge";
 export type GoabRadioGroupOnChangeDetail = {
   name: string;
   value: string;
+  event?: Event;
 };
 
 export type GoabCheckboxListOnChangeDetail = {
   name: string;
   value: string[];
+  event?: Event;
 };
 
 export type GoabInputOnChangeDetail<T = string> = {
   name: string;
   value: T;
+  event?: Event;
 };
 
 // @deprecated GoaInputOnBlurDetail has been deprecated. Use GoabInputOnBlurDetail instead.
@@ -22,6 +25,7 @@ export type GoaInputOnBlurDetail = GoabInputOnBlurDetail;
 export type GoabInputOnBlurDetail<T = string> = {
   name: string;
   value: T;
+  event?: Event;
 };
 
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
@@ -42,6 +46,7 @@ export type GoabInputOnKeyPressDetail<T = string> = {
   name: string;
   value: T;
   key: T;
+  event?: Event;
 };
 
 export type GoabFormStepperOnChangeDetail = {
@@ -50,14 +55,17 @@ export type GoabFormStepperOnChangeDetail = {
 
 export type GoabFileUploadInputOnSelectFileDetail = {
   file: File;
+  event?: Event;
 };
 
 export type GoabFileUploadOnCancelDetail = {
   filename: string;
+  event?: Event;
 };
 
 export type GoabFileUploadOnDeleteDetail = {
   filename: string;
+  event?: Event;
 };
 
 export type GoabDropdownItemMountType = "append" | "prepend" | "reset";
@@ -66,6 +74,7 @@ export type GoabDropdownOnChangeDetail = {
   name?: string;
   value?: string;
   values?: string[];
+  event?: Event;
 };
 
 export type GoabDatePickerOnChangeDetail = {
@@ -75,6 +84,7 @@ export type GoabDatePickerOnChangeDetail = {
    * @deprecated Use `valueStr` instead
    */
   value: Date;
+  event?: Event;
 };
 export type GoabDatePickerInputType = "calendar" | "input";
 
@@ -88,6 +98,7 @@ export type GoabCheckboxOnChangeDetail = {
   value?: string;
   checked: boolean;
   binding: "value" | "check";
+  event?: Event;
 };
 
 export type GoabCalendarOnChangeDetail = {
@@ -189,17 +200,20 @@ export type GoabTextAreaCountBy = "character" | "word" | "";
 export type GoabTextAreaOnChangeDetail = {
   name: string;
   value: string;
+  event?: Event;
 };
 
 export type GoabTextAreaOnKeyPressDetail = {
   name: string;
   value: string;
   key: string;
+  event?: Event;
 };
 
 export type GoabTextAreaOnBlurDetail = {
   name: string;
   value: string;
+  event?: Event;
 };
 
 // Tabs
@@ -356,10 +370,15 @@ export type GoabAutoCapitalize =
   | "words"
   | "characters";
 
-export type OnChange<T = string> = (name: string, value: T) => void;
-export type OnFocus<T = string> = (name: string, value: T) => void;
-export type OnBlur<T = string> = (name: string, value: T) => void;
-export type OnKeyPress<T = string> = (name: string, value: T, key: string) => void;
+export type OnChange<T = string> = (name: string, value: T, event?: Event) => void;
+export type OnFocus<T = string> = (name: string, value: T, event?: Event) => void;
+export type OnBlur<T = string> = (name: string, value: T, event?: Event) => void;
+export type OnKeyPress<T = string> = (
+  name: string,
+  value: T,
+  key: string,
+  event?: Event,
+) => void;
 
 export interface GoabInputProps extends BaseProps {
   onChange: OnChange<string>;

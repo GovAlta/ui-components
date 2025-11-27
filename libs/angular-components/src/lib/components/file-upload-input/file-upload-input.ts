@@ -58,7 +58,7 @@ export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
   }
 
   _onSelectFile(e: Event) {
-    const detail = (e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail;
+    const detail = { ...(e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail, event: e };
     this.onSelectFile.emit(detail);
   }
 }

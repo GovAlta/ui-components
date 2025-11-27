@@ -89,17 +89,17 @@ export function GoabTextArea({
 
     const changeListener: EventListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
-      onChange?.(detail);
+      onChange?.({ ...detail, event: e });
     };
 
     const keypressListener = (e: unknown) => {
       const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
-      onKeyPress?.(detail);
+      onKeyPress?.({ ...detail, event: e as Event });
     };
 
     const blurListener = (e: unknown) => {
       const detail = (e as CustomEvent<GoabTextAreaOnBlurDetail>).detail;
-      onBlur?.(detail);
+      onBlur?.({ ...detail, event: e as Event });
     };
 
     current.addEventListener("_change", changeListener);
