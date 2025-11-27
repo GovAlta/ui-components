@@ -1,0 +1,37 @@
+<div class="content">
+  <section class="side-menu">
+    <slot name="nav" />
+  </section>
+
+  <main class="main">
+    <slot />
+  </main>
+
+  <aside>
+    <slot name="aside" />
+  </aside>
+</div>
+
+<style>
+  .content {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .side-menu {
+    min-width: 250px;
+    width: 250px;
+    border-right: 1px solid var(--goa-color-greyscale-200);
+    padding-bottom: var(--goa-space-l);
+  }
+
+  .main {
+    flex: 1 1 auto;
+    margin: 0 var(--goa-space-2xl) var(--goa-space-4xl) var(--goa-space-3xl);
+    line-height: var(--goa-line-height-3);
+    font-size: var(--goa-font-size-4);
+  }
+</style>

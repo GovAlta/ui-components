@@ -1,0 +1,61 @@
+.toc {
+  position: sticky;
+  top: 0;
+  padding: 3.75rem 0 var(--goa-space-l) 0;
+  overscroll-behavior: contain;
+  width: 12rem;
+  height: fit-content;
+  @media screen and (max-width: 1230px) {
+    display: none;
+  }
+}
+
+a.toc-item-h2,
+a.toc-item-h3 {
+  border-left: 1px solid var(--goa-color-greyscale-200);
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-text-secondary);
+  padding-bottom: var(--goa-space-xs);
+  display: block;
+  text-decoration: none;
+}
+
+.toc-item-h2 {
+  padding-left: var(--goa-space-m);
+}
+
+.toc-item-h3 {
+  padding-left: var(--goa-space-xl);
+}
+
+a.toc-item-h2:hover,
+a.toc-item-h3:hover {
+  color: var(--goa-color-interactive-hover);
+}
+
+a[href^="#"].toc-item-h2::before,
+a[href^="#"].toc-item-h3::before {
+  background: none;
+  margin: 0;
+  width: 0;
+}
+
+.toc-item-h2:focus-visible,
+.toc-item-h3:focus-visible {
+  outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+}
+
+.active.toc-item-h2,
+.active.toc-item-h3 {
+  font: var(--goa-typography-heading-xs);
+  color: var(--goa-color-text-default);
+  border-left: 4px solid var(--goa-color-interactive-default);
+}
+
+.active.toc-item-h2 {
+  padding-left: calc(var(--goa-space-m) - 4px);
+}
+
+.active.toc-item-h3 {
+  padding-left: calc(var(--goa-space-xl) - 4px);
+}

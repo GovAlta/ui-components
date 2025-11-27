@@ -1,0 +1,17 @@
+---
+import { GoabText, GoabLink } from "@abgov/react-components";
+
+const { href, heading, description, linkDisplay } = Astro.props;
+---
+
+<a href={href} class="card-lite">
+  <div>
+    <GoabText size="heading-m" mt="none" mb="m">
+      <b class="card-heading">{heading}</b>
+    </GoabText>
+    <GoabText size="body-m" mt="none" mb="xs">
+      <div class="card-description">{description}</div>
+    </GoabText>
+    <GoabLink>{linkDisplay}</GoabLink>
+  </div>
+</a>
