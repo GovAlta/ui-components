@@ -450,9 +450,10 @@
   }
 
   .root {
-    position: relative;
     z-index: 2;
     height: 100vh;
+    position: sticky;
+    top: 0;
   }
 
   .background {
