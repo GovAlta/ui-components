@@ -15,6 +15,7 @@
   export let min: string = "";
   export let max: string = "";
   export let testid: string = "";
+  export let version: "1" | "2" = "1";
 
   // margin
   export let mt: Spacing = null;
@@ -296,8 +297,8 @@
   data-testid={testid}
   tabindex="-1"
 >
-  <goa-block mb="m">
-    <goa-form-item label="Month" mt="0">
+   <goa-block gap="s" mb="s">
+    <goa-form-item label="Month" mt="0" {version} labelsize={version === "2" ? "compact" : "regular"}>
       <goa-dropdown
         name="month"
         disable-global-close-popover="yes"
@@ -307,6 +308,8 @@
         maxheight="240px"
         value={_calendarDate?.month}
         on:_change={setMonth}
+        {version}
+        size={version === "2" ? "compact" : "default"}
       >
         {#each _months as month, i}
           <goa-dropdown-item value={i+1+""} label={month} />
@@ -314,7 +317,7 @@
       </goa-dropdown>
     </goa-form-item>
 
-    <goa-form-item label="Year" mt="0">
+    <goa-form-item label="Year" mt="0" {version} labelsize={version === "2" ? "compact" : "regular"}>
       <goa-dropdown
         name="year"
         disable-global-close-popover="yes"
@@ -324,6 +327,8 @@
         maxheight="240px"
         value={_calendarDate?.year}
         on:_change={setYear}
+        {version}
+        size={version === "2" ? "compact" : "default"}
       >
         {#each _years as year}
           <goa-dropdown-item value={year} />
@@ -390,7 +395,7 @@
 <style>
   .bordered {
     display: inline-block;
-    border: 1px solid var(--goa-color-greyscale-700);
+    border: var(--goa-date-input-calendar-border, 1px solid var(--goa-color-greyscale-700));
     border-radius: var(--goa-date-input-calendar-border-radius);
     padding: 1rem;
   }
@@ -453,6 +458,10 @@
   }
   .day.selected:focus-within:hover {
     background-color: var(--goa-date-input-day-color-bg-selected);
+  }
+
+  .day.selected:focus-within {
+    outline-offset: var(--goa-date-input-day-today-outline-offset, 0);
   }
   .day.today.selected:hover {
     background-color: var(--goa-date-input-day-color-bg-selected-hover);
