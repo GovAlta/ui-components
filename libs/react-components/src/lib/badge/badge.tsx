@@ -10,6 +10,7 @@ interface WCProps extends Margins {
   testid?: string;
   icontype?: GoabIconType;
   version?: string;
+  emphasis?: string;
 }
 
 declare module "react" {
@@ -28,6 +29,7 @@ export interface GoabBadgeProps extends Margins, DataGridProps {
   testId?: string;
   ariaLabel?: string;
   iconType?: GoabIconType;
+  emphasis?: "subtle" | "strong";
 }
 
 /**
@@ -60,6 +62,7 @@ export function GoabBadge(props: GoabBadgeProps): JSX.Element {
     ml,
     ariaLabel,
     iconType,
+    emphasis,
   }] = useDataGridProps(props);
 
   return (
@@ -76,6 +79,7 @@ export function GoabBadge(props: GoabBadgeProps): JSX.Element {
       mb={mb}
       ml={ml}
       version={"2"}
+      emphasis={emphasis}
       {...dataGridProps}
     />
   );

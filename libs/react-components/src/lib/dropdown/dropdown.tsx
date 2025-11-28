@@ -27,6 +27,7 @@ interface WCProps extends Margins {
   autocomplete?: string;
   testid?: string;
   version?: string;
+  size?: string;
 }
 
 declare module "react" {
@@ -38,6 +39,8 @@ declare module "react" {
     }
   }
 }
+
+export type GoabDropdownSize = "default" | "compact";
 
 export interface GoabDropdownProps extends Margins, DataGridProps {
   name?: string;
@@ -57,6 +60,7 @@ export interface GoabDropdownProps extends Margins, DataGridProps {
   multiselect?: boolean;
   native?: boolean;
   placeholder?: string;
+  size?: GoabDropdownSize;
   testId?: string;
   width?: string;
   maxWidth?: string;
@@ -96,6 +100,7 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       multiselect,
       native,
       placeholder,
+      size,
       testId,
       width,
       maxWidth,
@@ -147,6 +152,7 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
       multiselect={multiselect ? "true" : undefined}
       native={native ? "true" : undefined}
       placeholder={placeholder}
+      size={size}
       testid={testId}
       width={width}
       maxwidth={maxWidth}

@@ -24,7 +24,7 @@ export interface GoabDataGridProps {
 export function GoabDataGrid({ keyboardIcon = true, keyboardNav, children }: GoabDataGridProps) {
   return (
     <goa-data-grid
-      keyboard-icon={keyboardIcon ? "true" : undefined}
+      keyboard-icon={keyboardIcon ? "true" : "false"}
       keyboard-nav={keyboardNav}
       version={"2"}
     >

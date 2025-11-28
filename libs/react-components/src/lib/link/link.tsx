@@ -10,6 +10,8 @@ interface WCProps extends Margins {
   actionArg?: string;
   testid?: string;
   version?: string;
+  size?: string;
+  color?: string;
 }
 
 declare module "react" {
@@ -28,11 +30,13 @@ interface GoabLinkProps extends Margins, DataGridProps {
   actionArgs?: Record<string, unknown>;
   actionArg?: string;
   testId?: string;
+  size?: "xsmall" | "small" | "medium" | "large";
+  color?: "interactive" | "dark" | "light";
   children: ReactNode;
 }
 
 export function GoabLink(props: GoabLinkProps) {
-  const [dataGridProps, { leadingIcon, trailingIcon, action, actionArg, actionArgs, testId, mt, mb, ml, mr, children}] = useDataGridProps(props);
+  const [dataGridProps, { leadingIcon, trailingIcon, action, actionArg, actionArgs, testId, size, color, mt, mb, ml, mr, children}] = useDataGridProps(props);
 
   return (
     <goa-link
@@ -42,6 +46,8 @@ export function GoabLink(props: GoabLinkProps) {
       action-arg={actionArg}
       action-args={JSON.stringify(actionArgs)}
       testid={testId}
+      size={size}
+      color={color}
       mt={mt}
       mb={mb}
       ml={ml}

@@ -12,6 +12,7 @@ interface WCProps extends Margins {
   variant?: GoabTableVariant;
   testid?: string;
   version?: string;
+  striped?: string;
 }
 
 declare module "react" {
@@ -29,6 +30,7 @@ export interface GoabTableProps extends Margins {
   onSort?: (detail: GoabTableOnSortDetail) => void;
   // stickyHeader?: boolean; TODO: enable this later
   variant?: GoabTableVariant;
+  striped?: boolean;
   testId?: string;
   children?: ReactNode;
 }
@@ -62,6 +64,7 @@ export function GoabTable({ onSort, ...props }: GoabTableProps) {
       // TODO: Enable this later if needed
       // stickyheader={props.stickyHeader ? "true" : undefined}
       variant={props.variant}
+      striped={props.striped ? "true" : undefined}
       testid={props.testId}
       mt={props.mt}
       mb={props.mb}
