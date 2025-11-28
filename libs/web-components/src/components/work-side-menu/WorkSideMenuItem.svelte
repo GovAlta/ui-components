@@ -1,9 +1,8 @@
 <svelte:options customElement="goa-work-side-menu-item" />
 
-
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
-  import { dispatch, getSlottedChildren, toBoolean } from "../../common/utils";
+  import { dispatch } from "../../common/utils";
 
   type WorkSideMenuItemType = "normal" | "emergency" | "success";
 
@@ -43,7 +42,7 @@
   onMount(async () => {
     await tick();
     addEventListeners();
-    dispatch(_rootEl, "work-side-menu-item:mount", {}, { bubbles: true });
+    dispatch(_rootEl, "_mountItem", {}, { bubbles: true });
   });
 
   onDestroy(() => {
@@ -54,8 +53,8 @@
   // Functions
   // *********
 
-  function handleClick(e: Event) {
-    dispatch(_rootEl, "work-side-menu:update", {}, { bubbles: true });
+  function handleClick() {
+    dispatch(_rootEl, "_update", {}, { bubbles: true });
   }
 
   function handleUpdateItem(e: CustomEvent) {
@@ -66,7 +65,7 @@
   function handleMouseEnter() {
     dispatch(
       _rootEl,
-      "work-side-menu-item:hover",
+      "_hoverItem",
       { el: _linkEl, label: label },
       { bubbles: true },
     );
@@ -74,14 +73,14 @@
 
   function addEventListeners() {
     _linkEl.addEventListener(
-      "work-side-menu-item:update",
+      "_update",
       handleUpdateItem as EventListener,
     );
   }
 
   function removeEventListeners() {
     _linkEl.removeEventListener(
-      "work-side-menu-item:update",
+      "_update",
       handleUpdateItem as EventListener,
     );
   }
@@ -90,83 +89,41 @@
 <div
   class="root"
   class:divider
-  role="none"
+  role="presentation"
   data-testid={testid}
   on:mouseenter={handleMouseEnter}
   bind:this={_rootEl}
 >
-  {#if $$slots.popoverContent}
-    <div class="popover-wrapper">
-      <goa-popover
-        position="right"
-        maxwidth="500px"
-        minwidth="500px"
-        maxheight="calc(100vh - 40px)"
-        padded="false"
-        hoffset="40px"
-        voffset="0px">
-        <a
-          slot="target"
-          class="menu-item"
-          class:current
-          role="menuitem"
-          href={url !== "none" ? url : undefined}
-          bind:this={_linkEl}
-          on:click={handleClick}
-          on:keydown={(e) => {
-      if (e.key === "Enter") {
-        handleClick(e);
-    }}}
-          tabindex="0"
-        >
-          <goa-icon size="small" theme={current ? "filled" : "outline"} type={icon} />
-          <div class="menu-item-label">
-            {label}
-          </div>
-          {#if badge}
-            <div
-              class="badge"
-              class:emergency={type == "emergency"}
-              class:success={type == "success"}
-              class:alwaysvisible={_alwaysVisible}
-            >
-              {badge}
-            </div>
-          {/if}
-        </a>
-        <slot name="popoverContent"></slot>
-      </goa-popover>
+  <a
+    class="menu-item"
+    class:current
+    aria-current={current ? "page" : undefined}
+    role="menuitem"
+    href={url}
+    bind:this={_linkEl}
+    on:click={handleClick}
+    tabindex="0"
+  >
+    <goa-icon
+      size="small"
+      theme={current ? "filled" : "outline"}
+      type={icon}
+      arialabel={label}
+    />
+    <div class="menu-item-label">
+      {label}
     </div>
-  {:else}
-    <a
-      class="menu-item"
-      class:current
-      role="menuitem"
-      href={url !== "none" ? url : undefined}
-      bind:this={_linkEl}
-      on:click={handleClick}
-      on:keydown={(e) => {
-      if (e.key === "Enter") {
-        handleClick(e);
-    }}}
-      tabindex="0"
-    >
-      <goa-icon size="small" theme={current ? "filled" : "outline"} type={icon} />
-      <div class="menu-item-label">
-        {label}
+    {#if badge}
+      <div
+        class="badge"
+        class:emergency={type == "emergency"}
+        class:success={type == "success"}
+        class:alwaysvisible={_alwaysVisible}
+      >
+        {badge}
       </div>
-      {#if badge}
-        <div
-          class="badge"
-          class:emergency={type == "emergency"}
-          class:success={type == "success"}
-          class:alwaysvisible={_alwaysVisible}
-        >
-          {badge}
-        </div>
-      {/if}
-    </a>
-  {/if}
+    {/if}
+  </a>
 </div>
 
 <style>
@@ -216,15 +173,7 @@
 
   .menu-item:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
-    background: var(
-      --goa-work-side-menu-item-color-bg-focus,
-      var(--goa-color-greyscale-100)
-    );
-    color: var(
-      --goa-work-side-menu-item-text-color-hover,
-      var(--goa-color-text-default)
-    );
-    outline-offset: 0;
+    outline-offset: 2px;
   }
 
   /* Divider */

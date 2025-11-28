@@ -73,6 +73,13 @@ describe('GoabText', () => {
     });
   });
 
+  it('should apply id to the web component host', () => {
+    const { container } = render(<GoabText id="react-text-id">Content</GoabText>);
+    const element = container.querySelector('goa-text');
+
+    expect(element?.getAttribute('id')).toBe('react-text-id');
+  });
+
   it("should pass data-grid attributes", () => {
     const { container } = render(
       <GoabText data-grid="cell">

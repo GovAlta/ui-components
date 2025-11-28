@@ -1,3 +1,4 @@
+import { type JSX } from "react";
 import { type JSX, useEffect, useRef } from "react";
 import { GoabWorkSideMenuItemType } from "@abgov/ui-components-common";
 interface WCProps {
@@ -9,8 +10,6 @@ interface WCProps {
   icon?: string;
   testid?: string;
   type?: GoabWorkSideMenuItemType;
-  popoverContent?: React.ReactNode;
-  ref: React.RefObject<HTMLElement | null>;
 }
 
 declare module "react" {
@@ -22,7 +21,6 @@ declare module "react" {
   }
 }
 
-/* eslint-disable-next-line */
 export interface GoabWorkSideMenuItemProps {
   label: string;
   url?: string;
@@ -70,4 +68,4 @@ export function GoaxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Elem
   );
 }
 
-export default GoaxWorkSideMenuItem;
+export default GoabxWorkSideMenuItem;

@@ -6,15 +6,18 @@ import {
   Output,
   TemplateRef,
   EventEmitter,
+  OnInit,
+  ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet } from "@angular/common";
+import { CommonModule, NgTemplateOutlet } from "@angular/common";
 @Component({
   standalone: true,
-  selector: "goax-work-side-menu", // eslint-disable-line
-  imports: [NgTemplateOutlet],
+  selector: "goabx-work-side-menu", // eslint-disable-line
+  imports: [NgTemplateOutlet, CommonModule],
   template: `
     <goa-work-side-menu
-      [open]="open"
+      *ngIf="isReady"
+      [open]="open ?? false"
       [attr.heading]="heading"
       [attr.url]="url"
       [attr.user-name]="userName"
@@ -35,17 +38,30 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoaxWorkSideMenu {
-  @Input({ required: true, transform: booleanAttribute }) open!: boolean;
-  @Input() heading?: string;
+export class GoabxWorkSideMenu implements OnInit {
+  @Input({ required: true }) heading!: string;
   @Input() url?: string;
   @Input() userName?: string;
   @Input() userSecondaryText?: string;
+  @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() testId?: string;
   @Input() primaryContent!: TemplateRef<any>;
   @Input() secondaryContent!: TemplateRef<any>;
   @Input() accountContent!: TemplateRef<any>;
   @Output() onToggle = new EventEmitter();
+
+  isReady = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    // For Angular 20, we need to delay rendering the web component
+    // to ensure all attributes are properly bound before the component initializes
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    }, 0);
+  }
 
   _onToggle() {
     this.onToggle.emit();

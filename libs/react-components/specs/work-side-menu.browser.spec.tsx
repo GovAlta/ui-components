@@ -7,95 +7,130 @@ import { page } from "@vitest/browser/context";
 
 describe("WorkSideMenu", () => {
   describe("Desktop viewport", () => {
-    it("should close and open the menu when pressing the toggle button", async () => {
+    it("renders with slots", async () => {
       await page.viewport(1024, 768);
       const Component = () => {
         return (
-          <GoaxWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            userName="John Doe"
-            userSecondaryText="test@example.com"
-            testId="work-side-menu"
-            primaryContent={<GoaxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoaxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoaxWorkSideMenuItem url="#item3" label="Item 3" />}
-            open={true}
-          />
-        );
-      };
-      const result = render(<Component />);
-
-      // Wait for component to be fully rendered
-      await vi.waitFor(() => {
-        expect(result.getByTestId("work-side-menu")).toBeTruthy();
-      });
-
-      const menu = result.getByTestId("work-side-menu");
-      const toggle = result.getByTestId("toggle-menu");
-
-      await toggle.click();
-      await vi.waitFor(() => {
-        expect(menu.element().classList.contains("closed")).toBeTruthy();
-      });
-
-      await toggle.click();
-      await vi.waitFor(() => {
-        expect(menu.element().classList.contains("closed")).toBeFalsy();
-      });
-    });
-
-    it("menu item fires a mount event when rendered", async () => {
-      const handler = vi.fn();
-      window.addEventListener("work-side-menu-item:mount", handler);
-
-      const Component = () => {
-        return (
-          <GoaxWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            userName="John Doe"
-            userSecondaryText="test@example.com"
-            testId="work-side-menu"
-            primaryContent={<GoaxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoaxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoaxWorkSideMenuItem url="#item3" label="Item 3" />}
-          />
-        );
-      };
-      const result = render(<Component />);
-
-      await vi.waitFor(() => {
-        expect(result.getByTestId("work-side-menu")).toBeTruthy();
-        expect(handler).toBeCalled();
-      });
-    });
-
-    it("selecting a menu item navigates to a new location", async () => {
-      const handler = vi.fn();
-      window.addEventListener("work-side-menu:update", handler);
-
-      const Component = () => {
-        return (
-          <GoaxWorkSideMenu
+          <GoabxWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
             primaryContent={
-              <GoaxWorkSideMenuItem url="#item1" label="Item 1" testId="menu-item-1" />
+              <GoabxWorkSideMenuItem
+                url="#item1"
+                label="Item 1"
+                testId="primary-menu-item"
+              />
             }
-            secondaryContent={<GoaxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoaxWorkSideMenuItem url="#item3" label="Item 3" />}
+            secondaryContent={
+              <GoabxWorkSideMenuItem
+                url="#item2"
+                label="Item 2"
+                testId="secondary-menu-item"
+              />
+            }
+            accountContent={
+              <GoabxWorkSideMenuItem
+                url="#item3"
+                label="Item 3"
+                testId="account-menu-item"
+              />
+            }
+            open={true}
           />
         );
       };
       const result = render(<Component />);
-      // Wait for component to be fully rendered
+
       await vi.waitFor(() => {
-        expect(result.getByTestId("work-side-menu")).toBeTruthy();
+        const menu = result.getByTestId("work-side-menu");
+        expect(menu).toBeTruthy();
+
+        const primarySlot = result.baseElement.querySelector("[slot='primary']");
+        const primaryMenuItem = result.getByTestId("primary-menu-item");
+        const primaryLink = primaryMenuItem.element().querySelector("a");
+
+        expect(primarySlot).toBeTruthy();
+        expect(primaryLink?.getAttribute("href")).toBe("#item1");
+        expect(primaryLink?.textContent).toContain("Item 1");
+        expect(primaryLink?.role).toBe("menuitem");
+
+        const secondarySlot = result.baseElement.querySelector("[slot='secondary']");
+        const secondaryMenuItem = result.getByTestId("secondary-menu-item");
+        const secondaryLink = secondaryMenuItem.element().querySelector("a");
+
+        expect(secondarySlot).toBeTruthy();
+        expect(secondaryLink?.getAttribute("href")).toBe("#item2");
+        expect(secondaryLink?.textContent).toContain("Item 2");
+        expect(secondaryLink?.role).toBe("menuitem");
+
+        const accountSlot = result.baseElement.querySelector("[slot='account']");
+        const accountMenuItem = result.getByTestId("account-menu-item");
+        const accountLink = accountMenuItem.element().querySelector("a");
+
+        expect(accountSlot).toBeTruthy();
+        expect(accountLink?.getAttribute("href")).toBe("#item3");
+        expect(accountLink?.textContent).toContain("Item 3");
+        expect(accountLink?.role).toBe("menuitem");
       });
+    });
+
+    it("should close and open the menu when pressing the toggle button", async () => {
+      const Component = () => {
+        return (
+          <GoabxWorkSideMenu
+            heading="Test Heading"
+            url="https://example.com/"
+            userName="John Doe"
+            userSecondaryText="test@example.com"
+            testId="work-side-menu"
+            primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
+            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            open={true}
+          />
+        );
+      };
+      const result = render(<Component />);
+
+      expect(result.getByTestId("work-side-menu")).toBeTruthy();
+
+      const menu = result.getByTestId("work-side-menu");
+      const toggle = result.getByTestId("toggle-menu");
+
+      await toggle.click();
+
+      expect(menu.element().classList.contains("closed")).toBeTruthy();
+
+      await toggle.click();
+      expect(menu.element().classList.contains("closed")).toBeFalsy();
+    });
+
+    it("selecting a menu item navigates to a new location", async () => {
+      const handler = vi.fn();
+      window.addEventListener("_update", handler);
+
+      const Component = () => {
+        return (
+          <GoabxWorkSideMenu
+            heading="Test Heading"
+            url="https://example.com/"
+            userName="John Doe"
+            userSecondaryText="test@example.com"
+            testId="work-side-menu"
+            primaryContent={
+              <GoabxWorkSideMenuItem url="#item1" label="Item 1" testId="menu-item-1" />
+            }
+            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            open={true}
+          />
+        );
+      };
+      const result = render(<Component />);
+      expect(result.getByTestId("work-side-menu")).toBeTruthy();
 
       const item1 = result.getByTestId("menu-item-1");
 
@@ -111,35 +146,33 @@ describe("WorkSideMenu", () => {
       await page.viewport(390, 844);
       const Component = () => {
         return (
-          <GoaxWorkSideMenu
+          <GoabxWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
-            primaryContent={<GoaxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoaxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoaxWorkSideMenuItem url="#item3" label="Item 3" />}
+            primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
+            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            open={true}
           />
         );
       };
       const result = render(<Component />);
 
-      // Wait for component to be fully rendered
-      await vi.waitFor(() => {
-        expect(result.getByTestId("work-side-menu")).toBeTruthy();
-      });
+      expect(result.getByTestId("work-side-menu")).toBeTruthy();
 
       const menu = result.getByTestId("work-side-menu");
       const background = result.getByTestId("work-side-menu-background");
 
-      await background.click({ force: true });
+      await background.click({ position: { x: 380, y: 10 } });
       await vi.waitFor(() => {
         expect(menu.element().classList.contains("closed")).toBeTruthy();
       });
     });
 
-    it("should open the menu when pressing a button", async () => {
+    it("should open the menu when clicking an external button", async () => {
       const Component = () => {
         const [open, setOpen] = useState(false);
         function onClick() {
@@ -150,29 +183,26 @@ describe("WorkSideMenu", () => {
           setOpen(!open);
         }
         return (
-          <div style={{ display: "flex" }}>
-            <GoaxWorkSideMenu
+          <>
+            <GoabxWorkSideMenu
               heading="Test Heading"
               url="https://example.com/"
               userName="John Doe"
               userSecondaryText="test@example.com"
               testId="work-side-menu"
-              primaryContent={<GoaxWorkSideMenuItem url="#item1" label="Item 1" />}
-              secondaryContent={<GoaxWorkSideMenuItem url="#item2" label="Item 2" />}
-              accountContent={<GoaxWorkSideMenuItem url="#item3" label="Item 3" />}
+              primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
+              secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
+              accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
               open={open}
               onToggle={menuOnToggle}
             />
             <GoabButton onClick={onClick}>Toggle menu</GoabButton>
-          </div>
+          </>
         );
       };
       const result = render(<Component />);
 
-      // Wait for component to be fully rendered
-      await vi.waitFor(() => {
-        expect(result.getByTestId("work-side-menu")).toBeTruthy();
-      });
+      expect(result.getByTestId("work-side-menu")).toBeTruthy();
 
       const menu = result.getByTestId("work-side-menu");
       const button = result.getByText("Toggle menu");

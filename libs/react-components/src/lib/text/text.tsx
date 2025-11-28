@@ -14,6 +14,7 @@ interface WCProps extends Margins {
   size?: GoabTextSize;
   maxwidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
+  id?: string;
   version?: string;
 }
 
@@ -33,11 +34,12 @@ interface GoATextProps extends Margins, DataGridProps {
   size?: GoabTextSize;
   maxWidth?: GoabTextMaxWidth;
   color?: GoabTextColor;
+  id?: string;
   children: ReactNode;
 }
 
 export function GoabText(props: GoATextProps): JSX.Element {
-  const [dataGridProps,{ as, tag, size, maxWidth, color, mt, mb, ml, mr, children }] = useDataGridProps(props);
+  const [dataGridProps,{ as, tag, size, maxWidth, color, id, mt, mb, ml, mr, children }] = useDataGridProps(props);
 
   return (
     <goa-text
@@ -49,6 +51,7 @@ export function GoabText(props: GoATextProps): JSX.Element {
       mb={mb}
       ml={ml}
       mr={mr}
+      id={id}
       version={"2"}
       {...dataGridProps}
     >

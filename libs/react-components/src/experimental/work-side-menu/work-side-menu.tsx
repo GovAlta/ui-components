@@ -3,14 +3,13 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 interface WCProps {
   heading: string;
   url: string;
-  "user-name": string;
-  "user-secondary-text": string;
+  "user-name"?: string;
+  "user-secondary-text"?: string;
   testid?: string;
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
-  popoverContent?: ReactNode;
-  open?: string;
+  open?: boolean;
   ref: React.RefObject<HTMLElement | null>;
 }
 declare module "react" {
@@ -26,18 +25,17 @@ declare module "react" {
 export interface GoabWorkSideMenuProps {
   heading: string;
   url: string;
-  userName: string;
-  userSecondaryText: string;
+  userName?: string;
+  userSecondaryText?: string;
   testId?: string;
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
-  popoverContent?: ReactNode;
   open?: boolean;
   onToggle?: () => void;
 }
 
-export function GoaxWorkSideMenu({
+export function GoabxWorkSideMenu({
   heading,
   url,
   userName,
@@ -46,7 +44,6 @@ export function GoaxWorkSideMenu({
   primaryContent,
   secondaryContent,
   accountContent,
-  popoverContent,
   open,
   onToggle,
 }: GoabWorkSideMenuProps): JSX.Element {
@@ -56,9 +53,9 @@ export function GoaxWorkSideMenu({
     if (!el?.current || !onToggle) {
       return;
     }
-    el.current?.addEventListener("work-side-menu:toggle", onToggle);
+    el.current?.addEventListener("_toggle", onToggle);
     return () => {
-      el.current?.removeEventListener("work-side-menu:toggle", onToggle);
+      el.current?.removeEventListener("_toggle", onToggle);
     };
   }, [el, onToggle]);
   return (
@@ -68,15 +65,14 @@ export function GoaxWorkSideMenu({
       url={url}
       user-name={userName}
       user-secondary-text={userSecondaryText}
-      open={open ? "true" : "false"}
+      open={open ? true : false}
       testid={testId}
     >
       {primaryContent && <div slot="primary">{primaryContent}</div>}
       {secondaryContent && <div slot="secondary">{secondaryContent}</div>}
       {accountContent && <div slot="account">{accountContent}</div>}
-      {popoverContent && <div slot="popoverContent">{popoverContent}</div>}
     </goa-work-side-menu>
   );
 }
 
-export default GoaxWorkSideMenu;
+export default GoabxWorkSideMenu;
