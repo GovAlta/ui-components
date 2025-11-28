@@ -4,8 +4,9 @@ import {
   GoabButtonType,
   GoabButtonVariant,
   GoabIconType,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type?: GoabButtonType;
@@ -19,19 +20,20 @@ interface WCProps extends Margins {
   action?: string;
   actionArgs?: string;
   actionArg?: string;
-  ref: React.RefObject<HTMLElement | null>;
 }
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-button": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-button": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabButtonProps extends Margins {
+export interface GoabButtonProps extends Margins, DataGridProps {
   type?: GoabButtonType;
   size?: GoabButtonSize;
   variant?: GoabButtonVariant;
@@ -47,65 +49,41 @@ export interface GoabButtonProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoabButton({
-  disabled,
-  type,
-  size,
-  variant,
-  leadingIcon,
-  trailingIcon,
-  width,
-  testId,
-  children,
-  onClick,
-  mt,
-  mr,
-  mb,
-  ml,
-  action,
-  actionArgs,
-  actionArg,
-}: GoabButtonProps): JSX.Element {
+export function GoabButton(props: GoabButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["disabled", "onClick", "actionArgs", "actionArg"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!el.current) {
       return;
     }
-    if (!onClick) {
+    if (!props.onClick) {
       return;
     }
     const current = el.current;
     const listener = () => {
-      onClick();
+      props.onClick?.();
     };
 
     current.addEventListener("_click", listener);
     return () => {
       current.removeEventListener("_click", listener);
     };
-  }, [el, onClick]);
+  }, [el, props.onClick]);
 
   return (
     <goa-button
       ref={el}
-      type={type}
-      size={size}
-      variant={variant}
-      disabled={disabled ? "true" : undefined}
-      leadingicon={leadingIcon}
-      trailingicon={trailingIcon}
-      width={width}
-      testid={testId}
-      action={action}
-      action-arg={actionArg}
-      action-args={JSON.stringify(actionArgs)}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      disabled={props.disabled ? "true" : undefined}
+      action-arg={props.actionArg}
+      action-args={JSON.stringify(props.actionArgs)}
+      {..._props}
     >
-      {children}
+      {props.children}
     </goa-button>
   );
 }

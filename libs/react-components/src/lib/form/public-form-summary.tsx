@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
-  ref?: React.RefObject<HTMLElement | null>;
   heading?: string;
 }
 
@@ -14,21 +14,23 @@ declare module "react" {
   }
 }
 
-interface GoabPublicFormSummaryProps {
+interface GoabPublicFormSummaryProps extends DataGridProps {
   heading?: string;
 }
 
 export function GoabPublicFormSummary({
   heading = "",
+  ...props
 }: GoabPublicFormSummaryProps) {
-  const ref = useRef<HTMLElement>(null);
+  const _props = extractProps<WCProps>(
+    { heading, ...props },
+    {
+      attributeMapping: "lowercase",
+    }
+  );
 
   return (
-    <goa-public-form-summary
-      ref={ref}
-      heading={heading}
-    >
-    </goa-public-form-summary>
+    <goa-public-form-summary {..._props} />
   );
 }
 

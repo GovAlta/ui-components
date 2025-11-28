@@ -1,11 +1,12 @@
 import {
+  DataGridProps,
   GoabFileUploadOnCancelDetail,
   GoabFileUploadOnDeleteDetail,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement | null>;
   filename: string;
   size: number;
   type?: string;
@@ -18,13 +19,15 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-card": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-file-upload-card": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
 /* eslint-disable-next-line */
-export interface GoabFileUploadCardProps {
+export interface GoabFileUploadCardProps extends DataGridProps {
   filename: string;
   size: number;
   type?: string;
@@ -35,42 +38,30 @@ export interface GoabFileUploadCardProps {
   onCancel?: (detail: GoabFileUploadOnCancelDetail) => void;
 }
 
-export function GoabFileUploadCard({
-  filename,
-  size,
-  type,
-  progress,
-  error,
-  testId,
-  onDelete,
-  onCancel,
-}: GoabFileUploadCardProps) {
+export function GoabFileUploadCard(props: GoabFileUploadCardProps) {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["onDelete", "onCancel"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!el.current) return;
 
     const current = el.current;
-    const deleteHandler = () => onDelete?.({ filename });
-    const cancelHandler = () => onCancel?.({ filename });
+    const deleteHandler = () => props.onDelete?.({ filename: props.filename });
+    const cancelHandler = () => props.onCancel?.({ filename: props.filename });
     current.addEventListener("_delete", deleteHandler);
     current.addEventListener("_cancel", cancelHandler);
     return () => {
       current.removeEventListener("_delete", deleteHandler);
       current.removeEventListener("_cancel", cancelHandler);
     };
-  }, [el, onDelete, onCancel]);
+  }, [el, props.onDelete, props.onCancel, props.filename]);
 
   return (
-    <goa-file-upload-card
-      ref={el}
-      filename={filename}
-      size={size}
-      type={type}
-      progress={progress}
-      error={error}
-      testid={testId}
-    />
+    <goa-file-upload-card ref={el} {..._props} />
   );
 }
 

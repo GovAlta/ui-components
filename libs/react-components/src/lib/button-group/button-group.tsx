@@ -1,10 +1,11 @@
 import {
   GoabButtonGroupAlignment,
   GoabButtonGroupGap,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   alignment: GoabButtonGroupAlignment;
@@ -21,34 +22,21 @@ declare module "react" {
   }
 }
 
-export interface GoabButtonGroupProps extends Margins {
+export interface GoabButtonGroupProps extends Margins, DataGridProps {
   alignment: GoabButtonGroupAlignment;
   gap?: GoabButtonGroupGap;
   testId?: string;
   children?: React.ReactNode;
 }
 
-export function GoabButtonGroup({
-  alignment,
-  gap,
-  testId,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabButtonGroupProps): JSX.Element {
+export function GoabButtonGroup(props: GoabButtonGroupProps): JSX.Element {
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-button-group
-      alignment={alignment}
-      gap={gap}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-    >
-      {children}
+    <goa-button-group {..._props}>
+      {props.children}
     </goa-button-group>
   );
 }

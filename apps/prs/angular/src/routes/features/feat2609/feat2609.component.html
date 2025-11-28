@@ -1,0 +1,177 @@
+<h2>Feature #2609: Data Grid Component</h2>
+<p>This feature adds a keyboard-navigable grid wrapper component that provides ARIA-compliant accessibility for tables and grid layouts.</p>
+
+<h3>Table with Dynamic Row Addition (Testing Dropdown Focus Issue)</h3>
+
+<div style="margin-bottom: 1rem;">
+  <goab-button type="primary" (onClick)="addNewRows()" style="margin-right: 1rem;">
+    Add 3 New Rows (Simulate Pagination)
+  </goab-button>
+  <goab-button type="secondary" (onClick)="removeLastRows()">
+    Remove Last 3 Rows
+  </goab-button>
+  <span style="margin-left: 1rem;">Total rows: {{ users.length }}</span>
+</div>
+
+<p style="color: #FF6B6B; margin-bottom: 1rem;">
+  <strong>Test Instructions:</strong>
+  1. Navigate to a cell with a dropdown (Approver column) using arrow keys.
+  2. Click "Add 3 New Rows" button.
+  3. Navigate to a cell with a dropdown again.
+  4. Try to navigate away with arrow keys - it should take only 1 press, not 3.
+</p>
+
+<goab-data-grid keyboardNav="table">
+  <goab-table width="100%" mb="xl" (onSort)="handleSort($event)">
+    <thead>
+    <tr data-grid="row">
+      <th style="padding-bottom:0" data-grid="cell"><goab-checkbox mt="2" (onChange)="selectAll($event)" [checked]="isSelectedAll"></goab-checkbox></th>
+      <th data-grid="cell-1"><goab-table-sort-header name="idNumber">ID</goab-table-sort-header></th>
+      <th data-grid="cell-2"><goab-table-sort-header name="nameOfChild">Name</goab-table-sort-header></th>
+      <th data-grid="cell-3"><goab-table-sort-header name="status">Status</goab-table-sort-header></th>
+      <th data-grid="cell-4">Approver (Dropdown)</th>
+      <th data-grid="cell-5">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (user of users; track user.idNumber) {
+      <tr data-grid="row">
+        <td data-grid="cell"><goab-checkbox [checked]="isSelected(user.idNumber)" (onChange)="toggleSelection(user.idNumber, $event)"></goab-checkbox></td>
+        <td data-grid="cell-1">{{ user.idNumber }}</td>
+        <td data-grid="cell-2">{{ user.nameOfChild }}</td>
+        <td data-grid="cell-3"><goab-badge [type]="getStatusBadgeType(user.status)" [content]="user.status"></goab-badge></td>
+        <td data-grid="cell-4">
+          <goab-dropdown [value]="user.approver" (onChange)="onApproverChange(user.idNumber, $event)">
+            <goab-dropdown-item value="Sarah Ellis">Sarah Ellis</goab-dropdown-item>
+            <goab-dropdown-item value="John Doe">John Doe</goab-dropdown-item>
+            <goab-dropdown-item value="Jane Smith">Jane Smith</goab-dropdown-item>
+          </goab-dropdown>
+        </td>
+        <td data-grid="cell-5">
+          <goab-button type="tertiary" (onClick)="onOpen(user.idNumber)">
+            Open
+          </goab-button>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </goab-table>
+</goab-data-grid>
+
+<h3>Containers (Layout Mode)</h3>
+<p>Layout mode allows arrow keys to wrap between rows when reaching the edge.</p>
+<goab-data-grid keyboardNav="layout">
+  @for (user of users; track user.idNumber) {
+    <goab-container mt="l" data-grid="row">
+      <goab-block direction="row" gap="m" alignment="start">
+        <goab-checkbox data-grid="cell-0" [checked]="isSelected(user.idNumber)" (onChange)="toggleSelection(user.idNumber, $event)"></goab-checkbox>
+
+        <goab-block direction="column" gap="s" alignment="start" style="flex: 1;">
+          <goab-block direction="row" gap="s" alignment="center">
+            <strong data-grid="cell-1">{{ user.nameOfChild }}</strong>
+            <goab-block data-grid="cell-2">
+              <goab-badge [type]="getStatusBadgeType(user.status)" [content]="user.status"></goab-badge>
+            </goab-block>
+          </goab-block>
+
+          <goab-block direction="row" gap="xl" alignment="start">
+            <goab-block direction="column" gap="s" alignment="start">
+              <goab-block direction="column" gap="xs" data-grid="cell-4">
+                <strong>Updated</strong>
+                <span>{{ user.updated }}</span>
+              </goab-block>
+              <goab-block direction="column" gap="xs" data-grid="cell-7">
+                <strong>Program ID</strong>
+                <span>{{ user.programId }}</span>
+              </goab-block>
+            </goab-block>
+
+            <goab-block direction="column" gap="s" alignment="start">
+              <goab-block direction="column" gap="xs" data-grid="cell-5">
+                <strong>Email</strong>
+                <span>{{ user.email }}</span>
+              </goab-block>
+              <goab-block direction="column" gap="xs" data-grid="cell-8">
+                <strong>Service access</strong>
+                <span>{{ user.serviceAccess }}</span>
+              </goab-block>
+            </goab-block>
+
+            <goab-block direction="column" gap="s" alignment="start">
+              <goab-block direction="column" gap="xs" data-grid="cell-6">
+                <strong>Program</strong>
+                <span>{{ user.program }}</span>
+              </goab-block>
+              <goab-block direction="column" gap="xs" data-grid="cell-9">
+                <strong>Approver</strong>
+                <goab-dropdown [value]="user.approver" (onChange)="onApproverChange(user.idNumber, $event)">
+                  <goab-dropdown-item value="Sarah Ellis">Sarah Ellis</goab-dropdown-item>
+                  <goab-dropdown-item value="John Doe">John Doe</goab-dropdown-item>
+                  <goab-dropdown-item value="Jane Smith">Jane Smith</goab-dropdown-item>
+                </goab-dropdown>
+              </goab-block>
+            </goab-block>
+          </goab-block>
+        </goab-block>
+
+        <goab-button type="tertiary" data-grid="cell-3" (onClick)="onOpen(user.idNumber)">
+          Open
+        </goab-button>
+      </goab-block>
+    </goab-container>
+  }
+</goab-data-grid>
+
+<h3>Table with Colspan and Different Column Counts</h3>
+<p>This table tests navigation with varying column counts and colspan attributes. Use arrow keys to navigate and observe focus behavior.</p>
+<goab-data-grid keyboardNav="table">
+  <goab-table width="100%" mb="xl">
+    <thead>
+    <tr data-grid="row">
+      <th data-grid="cell">Column 1</th>
+      <th data-grid="cell-1">Column 2</th>
+      <th data-grid="cell-2">Column 3</th>
+      <th data-grid="cell-3">Column 4</th>
+      <th data-grid="cell-4">Column 5</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-grid="row">
+      <td data-grid="cell">Row 1, Cell 1</td>
+      <td data-grid="cell-1">Row 1, Cell 2</td>
+      <td data-grid="cell-2">Row 1, Cell 3</td>
+      <td data-grid="cell-3">Row 1, Cell 4</td>
+      <td data-grid="cell-4">Row 1, Cell 5</td>
+    </tr>
+    <tr data-grid="row">
+      <td data-grid="cell">Row 2, Cell 1</td>
+      <td data-grid="cell-1" colspan="2">Row 2, Cell 2 (spans 2 cols)</td>
+      <td data-grid="cell-2" colspan="2">Row 2, Cell 3 (spans 2 cols)</td>
+    </tr>
+    <tr data-grid="row">
+      <td data-grid="cell" colspan="3">Row 3, Cell 1 (spans 3 cols)</td>
+      <td data-grid="cell-1" colspan="2">Row 3, Cell 2 (spans 2 cols)</td>
+    </tr>
+    <tr data-grid="row">
+      <td data-grid="cell">Row 4, Cell 1</td>
+      <td data-grid="cell-1">Row 4, Cell 2</td>
+      <td data-grid="cell-2">Row 4, Cell 3</td>
+      <td data-grid="cell-3">Row 4, Cell 4</td>
+      <td data-grid="cell-4">Row 4, Cell 5</td>
+    </tr>
+    <tr data-grid="row">
+      <td data-grid="cell" colspan="5">Row 5, Single Cell (spans all 5 cols)</td>
+    </tr>
+    </tbody>
+  </goab-table>
+</goab-data-grid>
+
+<h3>Related Documents (Links with Hidden Keyboard Icon)</h3>
+<goab-data-grid keyboardNav="layout" [keyboardIcon]="false">
+<goab-block data-grid="row">
+  <goab-link data-grid="cell"><a href="https://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1 Specification</a></goab-link>
+  <goab-link data-grid="cell-1"><a href="https://www.w3.org/TR/core-aam-1.1/">Core Accessibility API Mappings 1.1</a></goab-link>
+  <goab-link data-grid="cell-2"><a href="https://www.w3.org/WAI/intro/aria.php">WAI-ARIA Overview</a></goab-link>
+  <goab-link data-grid="cell-3"><a href="https://www.w3.org/WAI/intro/wcag">WCAG Overview</a></goab-link>
+</goab-block>
+</goab-data-grid>

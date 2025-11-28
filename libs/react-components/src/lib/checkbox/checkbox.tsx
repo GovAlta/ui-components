@@ -1,17 +1,19 @@
-import { GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { DataGridProps, GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   id?: string;
   name: string;
   checked?: string;
@@ -29,7 +31,7 @@ interface WCProps extends Margins {
 }
 
 /* eslint-disable-next-line */
-export interface GoabCheckboxProps extends Margins {
+export interface GoabCheckboxProps extends Margins, DataGridProps {
   id?: string;
   name: string;
   checked?: boolean;
@@ -51,29 +53,14 @@ export interface GoabCheckboxProps extends Margins {
 // legacy
 export type Props = GoabCheckboxProps;
 
-export function GoabCheckbox({
-  id,
-  name,
-  testId,
-  error,
-  disabled,
-  checked,
-  indeterminate,
-  value,
-  text,
-  description,
-  reveal,
-  revealAriaLabel,
-  maxWidth,
-  children,
-  onChange,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabCheckboxProps): JSX.Element {
+export function GoabCheckbox(props: GoabCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["error", "checked", "indeterminate", "disabled", "value", "description", "reveal", "onChange"],
+    attributeMapping: "lowercase",
+  });
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -81,7 +68,7 @@ export function GoabCheckbox({
     const current = el.current;
     const listener = (e: Event) => {
       const detail = (e as CustomEvent<GoabCheckboxOnChangeDetail>).detail;
-      onChange?.(detail);
+      props.onChange?.(detail);
     };
 
     current.addEventListener("_change", listener);
@@ -89,34 +76,24 @@ export function GoabCheckbox({
     return () => {
       current.removeEventListener("_change", listener);
     };
-  }, [name, onChange]);
+  }, [props.name, props.onChange]);
 
   return (
     <goa-checkbox
-      testid={testId}
       ref={el}
-      id={id}
-      name={name}
-      error={error ? "true" : undefined}
-      checked={checked ? "true" : undefined}
-      indeterminate={indeterminate ? "true" : undefined}
-      disabled={disabled ? "true" : undefined}
-      text={text}
-      value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
-      arialabel={ariaLabel}
-      revealarialabel={revealAriaLabel}
-      description={typeof description === "string" ? description : undefined}
-      maxwidth={maxWidth}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      error={props.error ? "true" : undefined}
+      checked={props.checked ? "true" : undefined}
+      indeterminate={props.indeterminate ? "true" : undefined}
+      disabled={props.disabled ? "true" : undefined}
+      value={typeof props.value === "boolean" ? (props.value ? "true" : undefined) : props.value}
+      description={typeof props.description === "string" ? props.description : undefined}
+      {..._props}
     >
-      {children}
-      {typeof description !== "string" && description && (
-        <div slot="description">{description}</div>
+      {props.children}
+      {typeof props.description !== "string" && props.description && (
+        <div slot="description">{props.description}</div>
       )}
-      {reveal && <div slot="reveal">{reveal}</div>}
+      {props.reveal && <div slot="reveal">{props.reveal}</div>}
     </goa-checkbox>
   );
 }

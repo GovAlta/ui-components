@@ -3,8 +3,9 @@ import {
   GoabCalloutSize,
   GoabCalloutType,
   GoabCalloutIconTheme,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   heading?: string;
@@ -25,7 +26,7 @@ declare module "react" {
   }
 }
 
-export interface GoabCalloutProps extends Margins {
+export interface GoabCalloutProps extends Margins, DataGridProps {
   heading?: string;
   type?: GoabCalloutType;
   size?: GoabCalloutSize;
@@ -37,34 +38,22 @@ export interface GoabCalloutProps extends Margins {
 }
 
 export const GoabCallout = ({
-  heading,
   type = "information",
   iconTheme = "outline",
   size = "large",
-  maxWidth,
-  testId,
   ariaLive = "off",
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
+  ...props
 }: GoabCalloutProps) => {
+  const _props = extractProps<WCProps>(
+    { type, iconTheme, size, ariaLive, ...props },
+    {
+      attributeMapping: "lowercase",
+    }
+  );
+
   return (
-    <goa-callout
-      heading={heading}
-      type={type}
-      size={size}
-      maxwidth={maxWidth}
-      arialive={ariaLive}
-      icontheme={iconTheme}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-    >
-      {children}
+    <goa-callout {..._props}>
+      {props.children}
     </goa-callout>
   );
 };

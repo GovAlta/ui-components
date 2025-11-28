@@ -1,4 +1,6 @@
 import type { JSX } from "react";
+import { DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -8,12 +10,16 @@ declare module "react" {
   }
 }
 
-export interface GoabCardContentProps {
+export interface GoabCardContentProps extends DataGridProps {
   children?: React.ReactNode;
 }
 
-export function GoabCardContent({ children }: GoabCardContentProps): JSX.Element {
-  return <goa-card-content>{children}</goa-card-content>;
+export function GoabCardContent(props: GoabCardContentProps): JSX.Element {
+  const _props = extractProps(props, {
+    attributeMapping: "lowercase",
+  });
+
+  return <goa-card-content {..._props}>{props.children}</goa-card-content>;
 }
 
 export default GoabCardContent;

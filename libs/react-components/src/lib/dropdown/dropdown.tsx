@@ -1,12 +1,12 @@
 import {
   GoabDropdownOnChangeDetail,
   GoabIconType,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   arialabel?: string;
   arialabelledby?: string;
   disabled?: string;
@@ -32,12 +32,14 @@ declare module "react" {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabDropdownProps extends Margins {
+export interface GoabDropdownProps extends Margins, DataGridProps {
   name?: string;
   value?: string[] | string;
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
@@ -77,6 +79,12 @@ function stringify(value: string | string[] | undefined): string {
 
 export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["value", "onChange", "disabled", "error", "filterable", "multiselect", "native", "relative"],
+    attributeMapping: "lowercase",
+  });
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -94,33 +102,19 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
         current.removeEventListener("_change", handler);
       }
     };
-  }, [el, props]);
+  }, [el, props.onChange]);
 
   return (
     <goa-dropdown
       ref={el}
-      name={props.name}
       value={stringify(props.value)}
-      arialabel={props.ariaLabel}
-      arialabelledby={props.ariaLabelledBy}
       disabled={props.disabled ? "true" : undefined}
       error={props.error ? "true" : undefined}
       filterable={props.filterable ? "true" : undefined}
-      leadingicon={props.leadingIcon}
-      maxheight={props.maxHeight}
-      mb={props.mb}
-      ml={props.ml}
-      mr={props.mr}
-      mt={props.mt}
       multiselect={props.multiselect ? "true" : undefined}
       native={props.native ? "true" : undefined}
-      placeholder={props.placeholder}
-      testid={props.testId}
-      width={props.width}
-      maxwidth={props.maxWidth}
       relative={props.relative ? "true" : undefined}
-      autocomplete={props.autoComplete}
-      id={props.id}
+      {..._props}
     >
       {props.children}
     </goa-dropdown>

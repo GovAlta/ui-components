@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { GoabIconType } from "@abgov/ui-components-common";
+import { DataGridProps, GoabIconType } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   heading: string;
@@ -8,7 +9,7 @@ interface WCProps {
 }
 
 /* eslint-disable-next-line */
-export interface GoabAppHeaderMenuProps {
+export interface GoabAppHeaderMenuProps extends DataGridProps {
   heading: string;
   leadingIcon?: GoabIconType;
   testId?: string;
@@ -25,12 +26,12 @@ declare module "react" {
 }
 
 export function GoabAppHeaderMenu(props: GoabAppHeaderMenuProps) {
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-app-header-menu
-      heading={props.heading}
-      leadingicon={props.leadingIcon}
-      testid={props.testId}
-    >
+    <goa-app-header-menu {..._props}>
       {props.children}
     </goa-app-header-menu>
   );

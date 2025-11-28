@@ -1073,6 +1073,10 @@ export type TShirtSpacing =
 
 export type Spacing = NumericSpacing | TShirtSpacing | null;
 
+export interface DataGridProps {
+  [key: `data-grid${string}`]: string | boolean | undefined;
+}
+
 export interface Margins {
   mt?: Spacing;
   mr?: Spacing;

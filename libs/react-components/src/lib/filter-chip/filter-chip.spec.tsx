@@ -67,4 +67,15 @@ describe("GoA FilterChip", () => {
     fireEvent.mouseOver(chip!);
     expect(chip).not.toHaveStyle("background-color: var(--goa-color-greyscale-200)");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabFilterChip
+        content="test chip"
+        data-grid="cell"
+      />
+    );
+    const el = container.querySelector("goa-filter-chip");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

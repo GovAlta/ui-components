@@ -1,12 +1,13 @@
 import { ReactNode, useRef, useLayoutEffect } from "react";
 
 import {
+  DataGridProps,
   GoabFormState,
   GoabPublicFormStatus,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
-  ref?: React.RefObject<HTMLElement | null>;
   status?: string;
   name?: string;
 }
@@ -15,12 +16,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-form": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabPublicFormProps {
+interface GoabPublicFormProps extends DataGridProps {
   status?: GoabPublicFormStatus;
   name?: string;
   onInit?: (event: Event) => void;
@@ -29,16 +32,14 @@ interface GoabPublicFormProps {
   children: ReactNode;
 }
 
-export function GoabPublicForm({
-  status = "complete",
-  name,
-  onInit,
-  onComplete,
-  onStateChange,
-  children,
-}: GoabPublicFormProps) {
+export function GoabPublicForm(props: GoabPublicFormProps) {
   const ref = useRef<HTMLElement>(null);
   const initialized = useRef(false);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["onInit", "onComplete", "onStateChange"],
+    attributeMapping: "lowercase",
+  });
 
   // Use useLayoutEffect to set up listeners before the component mounts
   useLayoutEffect(() => {
@@ -46,52 +47,48 @@ export function GoabPublicForm({
     const current = ref.current;
 
     const initListener = (e: Event) => {
-      onInit?.(e);
+      props.onInit?.(e);
     };
 
     //  First time initialization, add init listener immediately
-    if (onInit && !initialized.current) {
+    if (props.onInit && !initialized.current) {
       current.addEventListener("_init", initListener);
     }
 
     const completeListener = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      onComplete?.(detail);
+      props.onComplete?.(detail);
     };
 
     const stateChangeListener = (e: Event) => {
       const detail = (e as CustomEvent).detail;
-      onStateChange?.(detail.data);
+      props.onStateChange?.(detail.data);
     };
 
-    if (onComplete) {
+    if (props.onComplete) {
       current.addEventListener("_complete", completeListener);
     }
 
-    if (onStateChange) {
+    if (props.onStateChange) {
       current.addEventListener("_stateChange", stateChangeListener);
     }
 
     return () => {
-      if (onInit) {
+      if (props.onInit) {
         current.removeEventListener("_init", initListener);
       }
-      if (onComplete) {
+      if (props.onComplete) {
         current.removeEventListener("_complete", completeListener);
       }
-      if (onStateChange) {
+      if (props.onStateChange) {
         current.removeEventListener("_stateChange", stateChangeListener);
       }
     };
-  }, [onInit, onComplete, onStateChange]);
+  }, [props.onInit, props.onComplete, props.onStateChange]);
 
   return (
-    <goa-public-form
-      ref={ref}
-      status={status}
-      name={name}
-    >
-      {children}
+    <goa-public-form ref={ref} {..._props}>
+      {props.children}
     </goa-public-form>
   );
 }

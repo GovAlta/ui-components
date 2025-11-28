@@ -1,8 +1,8 @@
-import { GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
+import { DataGridProps, GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   leadingicon?: string;
   icontheme?: GoabChipTheme;
   error?: string;
@@ -16,12 +16,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-chip": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabChipProps extends Margins {
+export interface GoabChipProps extends Margins, DataGridProps {
   onClick?: () => void;
   deletable?: boolean;
   leadingIcon?: string;
@@ -32,50 +34,35 @@ export interface GoabChipProps extends Margins {
   testId?: string;
 }
 
-export const GoabChip = ({
-  leadingIcon,
-  iconTheme,
-  deletable,
-  error,
-  variant,
-  content,
-  onClick,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
-}: GoabChipProps) => {
+export const GoabChip = (props: GoabChipProps) => {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["error", "deletable", "onClick"],
+    attributeMapping: "lowercase",
+  });
+
   useEffect(() => {
     if (!el.current) return;
-    if (!onClick) return;
+    if (!props.onClick) return;
 
     const current = el.current;
     const listener = () => {
-      onClick();
+      props.onClick?.();
     };
 
     current.addEventListener("_click", listener);
     return () => {
       current.removeEventListener("_click", listener);
     };
-  }, [el, onClick]);
+  }, [el, props.onClick]);
 
   return (
     <goa-chip
       ref={el}
-      leadingicon={leadingIcon}
-      icontheme={iconTheme}
-      error={error ? "true" : undefined}
-      deletable={deletable ? "true" : undefined}
-      content={content}
-      variant={variant}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
+      error={props.error ? "true" : undefined}
+      deletable={props.deletable ? "true" : undefined}
+      {..._props}
     />
   );
 };

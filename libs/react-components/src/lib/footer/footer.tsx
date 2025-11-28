@@ -1,4 +1,6 @@
 import { ReactNode, type JSX } from "react";
+import { DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   maxcontentwidth?: string;
@@ -16,7 +18,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabAppFooterProps {
+export interface GoabAppFooterProps extends DataGridProps {
   maxContentWidth?: string;
   children?: ReactNode;
   testId?: string;
@@ -26,15 +28,14 @@ export interface GoabAppFooterProps {
 // legacy name
 export type FooterProps = GoabAppFooterProps;
 
-export function GoabAppFooter({
-  maxContentWidth,
-  children,
-  testId,
-  url,
-}: GoabAppFooterProps): JSX.Element {
+export function GoabAppFooter(props: GoabAppFooterProps): JSX.Element {
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId} url={url}>
-      {children}
+    <goa-app-footer {..._props}>
+      {props.children}
     </goa-app-footer>
   );
 }

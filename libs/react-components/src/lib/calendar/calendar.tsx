@@ -1,8 +1,8 @@
 import { useEffect, useRef, type JSX } from "react";
-import { GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { DataGridProps, GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   name?: string;
   value?: string;
   min?: string;
@@ -14,11 +14,13 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-calendar": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-calendar": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
-export interface GoabCalendarProps extends Margins {
+export interface GoabCalendarProps extends Margins, DataGridProps {
   name?: string;
   value?: string;
   min?: string;
@@ -27,19 +29,13 @@ export interface GoabCalendarProps extends Margins {
   onChange: (details: GoabCalendarOnChangeDetail) => void;
 }
 
-export function GoabCalendar({
-  name,
-  value,
-  min,
-  max,
-  testId,
-  mt,
-  mr,
-  mb,
-  ml,
-  onChange,
-}: GoabCalendarProps): JSX.Element {
+export function GoabCalendar(props: GoabCalendarProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["min", "max", "onChange"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!ref.current) {
@@ -47,8 +43,8 @@ export function GoabCalendar({
     }
     const current = ref.current;
     const listener = (e: Event) => {
-      onChange({
-        name: name || "",
+      props.onChange({
+        name: props.name || "",
         value: (e as CustomEvent).detail.value,
       });
     }
@@ -62,15 +58,9 @@ export function GoabCalendar({
   return (
     <goa-calendar
       ref={ref}
-      name={name}
-      value={value}
-      min={min || undefined}
-      max={max || undefined}
-      testid={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      min={props.min || undefined}
+      max={props.max || undefined}
+      {..._props}
     />
   );
 }

@@ -9,15 +9,15 @@ import {
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
   GoabInputType,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 export interface IgnoreMe {
   ignore: string;
 }
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLInputElement | null>;
   type?: GoabInputType;
   name: string;
   value?: string;
@@ -54,12 +54,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement>;
+      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
+        ref?: React.RefObject<HTMLInputElement | null>;
+      };
     }
   }
 }
 
-interface BaseProps extends Margins {
+interface BaseProps extends Margins, DataGridProps {
   // required
   name: string;
 
@@ -128,45 +130,20 @@ interface GoabDateInputProps extends BaseProps {
 }
 
 export function GoabInput({
-  id,
-  debounce,
-  name,
-  type,
-  autoCapitalize,
-  autoComplete,
-  leadingIcon,
-  trailingIcon,
   variant = "goa",
-  focused,
-  disabled,
-  readonly,
-  value,
-  placeholder,
-  error,
-  width,
-  testId,
-  min,
-  max,
-  step,
-  prefix,
-  suffix,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  leadingContent,
-  trailingContent,
-  maxLength,
-  trailingIconAriaLabel,
   textAlign = "left",
-  onTrailingIconClick,
-  onChange,
-  onFocus,
-  onBlur,
-  onKeyPress,
+  ...props
 }: GoabInputProps & { type?: GoabInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
+
+  const _props = extractProps<WCProps>(
+    { variant, textAlign, ...props },
+    {
+      exclude: ["focused", "disabled", "readonly", "error", "leadingContent", "trailingContent", "onTrailingIconClick", "onChange", "onFocus", "onBlur", "onKeyPress"],
+      attributeMapping: "lowercase",
+    }
+  );
+
   useEffect(() => {
     if (!ref.current) {
       return;
@@ -174,25 +151,25 @@ export function GoabInput({
     const current = ref.current;
     const changeListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
-      onChange?.(detail);
+      props.onChange?.(detail);
     };
     const clickListener = () => {
-      onTrailingIconClick?.();
+      props.onTrailingIconClick?.();
     };
 
     const focusListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail;
-      onFocus?.(detail);
+      props.onFocus?.(detail);
     };
 
     const blurListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnBlurDetail>).detail;
-      onBlur?.(detail);
+      props.onBlur?.(detail);
     };
 
     const keypressListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail;
-      onKeyPress?.(detail);
+      props.onKeyPress?.(detail);
     };
 
     current.addEventListener("_change", changeListener);
@@ -208,45 +185,20 @@ export function GoabInput({
       current.removeEventListener("_blur", blurListener);
       current.removeEventListener("_keyPress", keypressListener);
     };
-  }, [ref, onChange, onTrailingIconClick, onFocus, onBlur, onKeyPress]);
+  }, [ref, props.onChange, props.onTrailingIconClick, props.onFocus, props.onBlur, props.onKeyPress]);
 
   return (
     <goa-input
       ref={ref}
-      debounce={debounce}
-      focused={focused ? "true" : undefined}
-      type={type}
-      name={name}
-      autocapitalize={autoCapitalize}
-      autocomplete={autoComplete}
-      id={id}
-      leadingicon={leadingIcon}
-      trailingicon={trailingIcon}
-      variant={variant}
-      disabled={disabled ? "true" : undefined}
-      readonly={readonly ? "true" : undefined}
-      placeholder={placeholder}
-      error={error ? "true" : undefined}
-      testid={testId}
-      value={value}
-      width={width}
-      min={min}
-      max={max}
-      step={step}
-      maxlength={maxLength}
-      prefix={prefix}
-      suffix={suffix}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
-      trailingiconarialabel={trailingIconAriaLabel}
-      textalign={textAlign}
+      {..._props}
+      focused={props.focused ? "true" : undefined}
+      disabled={props.disabled ? "true" : undefined}
+      readonly={props.readonly ? "true" : undefined}
+      error={props.error ? "true" : undefined}
+      handletrailingiconclick={props.onTrailingIconClick ? "true" : "false"}
     >
-      {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
-      {trailingContent && <div slot="trailingContent">{trailingContent}</div>}
+      {props.leadingContent && <div slot="leadingContent">{props.leadingContent}</div>}
+      {props.trailingContent && <div slot="trailingContent">{props.trailingContent}</div>}
     </goa-input>
   );
 }

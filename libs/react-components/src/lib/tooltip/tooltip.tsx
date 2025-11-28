@@ -1,9 +1,10 @@
 import {
   GoabTooltipHorizontalAlignment,
   GoabTooltipPosition,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 /* eslint-disable-next-line */
 interface WCProps extends Margins {
@@ -24,7 +25,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabTooltipProps extends Margins {
+export interface GoabTooltipProps extends Margins, DataGridProps {
   position?: GoabTooltipPosition;
   content?: string | ReactNode;
   hAlign?: GoabTooltipHorizontalAlignment;
@@ -34,19 +35,17 @@ export interface GoabTooltipProps extends Margins {
 }
 
 export function GoabTooltip(props: GoabTooltipProps): JSX.Element {
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["content"],
+    attributeMapping: "lowercase",
+  });
+
   const isStringContent = typeof props.content === "string";
 
   return (
     <goa-tooltip
-      position={props.position}
       content={isStringContent ? (props.content as string) : undefined}
-      halign={props.hAlign}
-      testid={props.testId}
-      maxwidth={props.maxWidth}
-      mt={props.mt}
-      mr={props.mr}
-      mb={props.mb}
-      ml={props.ml}
+      {..._props}
     >
       {!isStringContent && props.content && <div slot="content">{props.content}</div>}
       {props.children}

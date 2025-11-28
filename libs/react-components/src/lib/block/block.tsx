@@ -1,10 +1,11 @@
 import {
   GoabBlockAlignment,
   GoabBlockDirection,
-  Margins,
+  Margins, DataGridProps,
   Spacing,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
+import { extractProps } from "../common/extract-props";
 
 export interface WCProps extends Margins {
   gap?: Spacing;
@@ -23,7 +24,7 @@ declare module "react" {
 }
 
 /* eslint-disable-next-line */
-export interface GoabBlockProps extends Margins {
+export interface GoabBlockProps extends Margins, DataGridProps {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
@@ -32,17 +33,12 @@ export interface GoabBlockProps extends Margins {
 }
 
 export function GoabBlock(props: GoabBlockProps) {
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-block
-      gap={props.gap}
-      direction={props.direction}
-      alignment={props.alignment}
-      mt={props.mt}
-      mr={props.mr}
-      mb={props.mb}
-      ml={props.ml}
-      testid={props.testId}
-    >
+    <goa-block {..._props}>
       {props.children}
     </goa-block>
   );

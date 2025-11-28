@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { Margins } from "@abgov/ui-components-common";
+import { Margins, DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   heading?: string;
@@ -14,28 +15,19 @@ declare module "react" {
   }
 }
 
-interface GoabPublicFormTaskListProps extends Margins {
+interface GoabPublicFormTaskListProps extends Margins, DataGridProps {
   heading?: string;
   children: ReactNode;
 }
 
-export function GoabPublicFormTaskList({
-  heading = "",
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabPublicFormTaskListProps) {
+export function GoabPublicFormTaskList(props: GoabPublicFormTaskListProps) {
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-public-form-task-list 
-      heading={heading}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    >
-      {children}
+    <goa-public-form-task-list {..._props}>
+      {props.children}
     </goa-public-form-task-list>
   );
 }

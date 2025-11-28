@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
+import { DataGridProps, GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   status?: GoabPublicFormTaskStatus;
@@ -14,13 +15,23 @@ declare module "react" {
   }
 }
 
-type GoabPublicFormTaskProps = {
+interface GoabPublicFormTaskProps extends DataGridProps {
   status?: GoabPublicFormTaskStatus;
   children: ReactNode;
-};
+}
 
-export function GoabPublicFormTask({ status = "cannot-start", children }: GoabPublicFormTaskProps) {
-  return <goa-public-form-task status={status}>{children}</goa-public-form-task>;
+export function GoabPublicFormTask({
+  status = "cannot-start",
+  ...props
+}: GoabPublicFormTaskProps) {
+  const _props = extractProps<WCProps>(
+    { status, ...props },
+    {
+      attributeMapping: "lowercase",
+    }
+  );
+
+  return <goa-public-form-task {..._props}>{props.children}</goa-public-form-task>;
 }
 
 export default GoabPublicFormTask;

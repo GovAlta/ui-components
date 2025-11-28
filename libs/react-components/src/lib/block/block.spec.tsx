@@ -30,4 +30,16 @@ describe("Block", () => {
     expect(el?.getAttribute("mb")).toBe("l");
     expect(el?.getAttribute("ml")).toBe("xl");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { container } = render(
+      <GoabBlock
+        data-grid="cell"
+      >
+        Content
+      </GoabBlock>,
+    );
+    const el = container.querySelector("goa-block");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

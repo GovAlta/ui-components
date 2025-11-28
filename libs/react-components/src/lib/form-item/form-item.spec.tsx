@@ -55,4 +55,17 @@ describe("GoaFormItem", () => {
     expect(el?.getAttribute("name")).toEqual("first_name");
     expect(el?.getAttribute("public-form-summary-order")).toEqual("2");
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabFormItem
+        label="Test Label"
+        data-grid="cell"
+      >
+        Form content
+      </GoabFormItem>
+    );
+    const el = baseElement.querySelector("goa-form-item");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

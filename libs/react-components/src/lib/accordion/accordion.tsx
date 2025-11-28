@@ -3,11 +3,11 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 import type {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   open?: string;
   headingsize?: GoabAccordionHeadingSize;
   heading: string;
@@ -22,12 +22,15 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-accordion": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-accordion": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
-export interface GoabAccordionProps extends Margins {
+export interface GoabAccordionProps extends Margins, DataGridProps {
   open?: boolean;
   headingSize?: GoabAccordionHeadingSize;
   secondaryText?: string;
@@ -40,54 +43,36 @@ export interface GoabAccordionProps extends Margins {
   children?: ReactNode;
 }
 
-export function GoabAccordion({
-  open,
-  heading,
-  headingSize,
-  secondaryText,
-  headingContent,
-  iconPosition,
-  maxWidth,
-  testId,
-  onChange,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabAccordionProps): JSX.Element {
+export function GoabAccordion(props: GoabAccordionProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["open", "onChange", "headingContent"],
+    attributeMapping: "lowercase"
+  });
 
   useEffect(() => {
     const element = ref.current;
-    if (element && onChange) {
+    if (element && props.onChange) {
       const handler = (event: Event) => {
         const customEvent = event as CustomEvent;
-        onChange(customEvent.detail.open);
+        props.onChange?.(customEvent.detail.open);
       };
       element.addEventListener("_change", handler);
       return () => {
         element.removeEventListener("_change", handler);
       };
     }
-  }, [onChange]);
+  }, [props.onChange]);
+
   return (
     <goa-accordion
       ref={ref}
-      open={open ? "true" : undefined}
-      headingsize={headingSize}
-      heading={heading}
-      secondarytext={secondaryText}
-      iconposition={iconPosition}
-      maxwidth={maxWidth}
-      testid={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      open={props.open ? "true" : undefined}
+      {..._props}
     >
-      {headingContent && <div slot="headingcontent">{headingContent}</div>}
-      {children}
+      {props.headingContent && <div slot="headingcontent">{props.headingContent}</div>}
+      {props.children}
     </goa-accordion>
   );
 }

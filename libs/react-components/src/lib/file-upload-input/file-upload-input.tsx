@@ -1,11 +1,12 @@
 import {
+  DataGridProps,
   GoabFileUploadInputOnSelectFileDetail,
   GoabFileUploadInputVariant,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement | null>;
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
@@ -16,13 +17,15 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
 /* eslint-disable-next-line */
-export interface GoabFileUploadInputProps {
+export interface GoabFileUploadInputProps extends DataGridProps {
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxFileSize?: string;
@@ -30,14 +33,13 @@ export interface GoabFileUploadInputProps {
   onSelectFile: (detail: GoabFileUploadInputOnSelectFileDetail) => void;
 }
 
-export function GoabFileUploadInput({
-  variant,
-  accept,
-  maxFileSize,
-  testId,
-  onSelectFile,
-}: GoabFileUploadInputProps) {
+export function GoabFileUploadInput(props: GoabFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["onSelectFile"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!el.current) return;
@@ -45,22 +47,16 @@ export function GoabFileUploadInput({
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail;
-      onSelectFile(detail);
+      props.onSelectFile(detail);
     };
     current.addEventListener("_selectFile", handler);
     return () => {
       current.removeEventListener("_selectFile", handler);
     };
-  }, [el, onSelectFile]);
+  }, [el, props.onSelectFile]);
 
   return (
-    <goa-file-upload-input
-      ref={el}
-      variant={variant}
-      accept={accept}
-      maxfilesize={maxFileSize}
-      testid={testId}
-    />
+    <goa-file-upload-input ref={el} {..._props} />
   );
 }
 

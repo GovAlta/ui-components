@@ -1,8 +1,8 @@
-import { ReactNode, useRef } from "react";
-import { Margins } from "@abgov/ui-components-common";
+import { ReactNode } from "react";
+import { Margins, DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | null>;
   heading?: string;
   "section-title"?: string;
   "action-button-text"?: string;
@@ -18,7 +18,7 @@ declare module "react" {
   }
 }
 
-interface GoabPublicSubformIndexProps extends Margins {
+interface GoabPublicSubformIndexProps extends Margins, DataGridProps {
   heading?: string;
   sectionTitle?: string;
   actionButtonText?: string;
@@ -31,28 +31,18 @@ export function GoabPublicSubformIndex({
   sectionTitle = "",
   actionButtonText = "",
   buttonVisibility = "hidden",
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
+  ...props
 }: GoabPublicSubformIndexProps) {
-  const ref = useRef<HTMLElement>(null);
+  const _props = extractProps<WCProps>(
+    { heading, sectionTitle, actionButtonText, buttonVisibility, ...props },
+    {
+      attributeMapping: "kebab",
+    }
+  );
 
   return (
-    <goa-public-subform-index
-      ref={ref}
-      heading={heading}
-      section-title={sectionTitle}
-      action-button-text={actionButtonText}
-      button-visibility={buttonVisibility}
-      slot="subform-index"
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    >
-      {children}
+    <goa-public-subform-index slot="subform-index" {..._props}>
+      {props.children}
     </goa-public-subform-index>
   );
 }

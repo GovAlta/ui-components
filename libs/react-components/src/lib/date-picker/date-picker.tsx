@@ -2,11 +2,11 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   name?: string;
   value?: string;
   error?: string;
@@ -23,12 +23,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-date-picker": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-date-picker": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabDatePickerProps extends Margins {
+export interface GoabDatePickerProps extends Margins, DataGridProps {
   name?: string;
   value?: Date | string | undefined;
   error?: boolean;
@@ -45,27 +47,16 @@ export interface GoabDatePickerProps extends Margins {
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
-export function GoabDatePicker({
-  name,
-  value,
-  error,
-  min,
-  max,
-  testId,
-  disabled,
-  type,
-  mt,
-  mr,
-  mb,
-  ml,
-  relative,
-  width,
-  onChange,
-}: GoabDatePickerProps): JSX.Element {
+export function GoabDatePicker(props: GoabDatePickerProps): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["value", "error", "min", "max", "disabled", "relative", "onChange"],
+    attributeMapping: "lowercase",
+  });
+
   useEffect(() => {
-    if (value && typeof value !== "string") {
+    if (props.value && typeof props.value !== "string") {
       console.warn("Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`")
     }
   }, []);
@@ -78,19 +69,19 @@ export function GoabDatePicker({
 
     const handleChange = (e: Event) => {
       const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
-      onChange?.(detail);
+      props.onChange?.(detail);
     };
 
-    if (onChange) {
+    if (props.onChange) {
       current.addEventListener("_change", handleChange);
     }
 
     return () => {
-      if (onChange) {
+      if (props.onChange) {
         current.removeEventListener("_change", handleChange);
       }
     };
-  }, [onChange]);
+  }, [props.onChange]);
 
   const formatValue = (value: Date | string | undefined) => {
     if (!value) return "";
@@ -105,20 +96,13 @@ export function GoabDatePicker({
   return (
     <goa-date-picker
       ref={ref}
-      name={name}
-      value={formatValue(value) || undefined}
-      type={type}
-      error={error ? "true" : undefined}
-      disabled={disabled ? "true" : undefined}
-      min={formatValue(min) || undefined}
-      max={formatValue(max) || undefined}
-      testid={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      relative={relative ? "true" : undefined}
-      width={width}
+      value={formatValue(props.value) || undefined}
+      error={props.error ? "true" : undefined}
+      disabled={props.disabled ? "true" : undefined}
+      min={formatValue(props.min) || undefined}
+      max={formatValue(props.max) || undefined}
+      relative={props.relative ? "true" : undefined}
+      {..._props}
     />
   );
 }

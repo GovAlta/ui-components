@@ -4,10 +4,11 @@ import {
   GoabIconSize,
   GoabIconTheme,
   GoabIconType,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
@@ -34,7 +35,7 @@ declare module "react" {
   }
 }
 
-export interface GoabIconProps extends Margins {
+export interface GoabIconProps extends Margins, DataGridProps {
   type: GoabIconType | GoabIconOverridesType;
   size?: GoabIconSize;
   theme?: GoabIconTheme;
@@ -58,38 +59,18 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-export function GoabIcon({
-  type,
-  theme,
-  size,
-  inverted, // TODO: change to boolean only
-  fillColor,
-  opacity,
-  title,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
-}: GoabIconProps): JSX.Element {
+export function GoabIcon(props: GoabIconProps): JSX.Element {
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["inverted"],
+    attributeMapping: "lowercase",
+  });
+
   return (
     <goa-icon
-      type={type}
-      theme={theme}
-      size={size}
       inverted={
-        typeof inverted === "boolean" ? (inverted ? "true" : undefined) : inverted
+        typeof props.inverted === "boolean" ? (props.inverted ? "true" : undefined) : props.inverted
       }
-      fillcolor={fillColor}
-      opacity={opacity}
-      title={title}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
+      {..._props}
     />
   );
 }

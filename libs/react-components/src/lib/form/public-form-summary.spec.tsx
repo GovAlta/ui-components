@@ -23,4 +23,15 @@ describe("GoabPublicFormSummary", () => {
     expect(el).toBeTruthy();
     expect(el?.getAttribute("heading")).toBe(heading);
   });
+
+  it("should pass data-grid attributes", () => {
+    const { baseElement } = render(
+      <GoabPublicFormSummary
+        heading="Test Summary"
+        data-grid="cell"
+      />
+    );
+    const el = baseElement.querySelector("goa-public-form-summary");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

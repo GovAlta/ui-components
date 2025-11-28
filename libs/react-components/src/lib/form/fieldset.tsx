@@ -1,11 +1,12 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 import {
+  DataGridProps,
   GoabFieldsetOnContinueDetail,
   GoabFormDispatchOn,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
-  ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   "section-title"?: string;
   "dispatch-on"?: string;
@@ -15,12 +16,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-fieldset": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-fieldset": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabFieldsetProps {
+interface GoabFieldsetProps extends DataGridProps {
   id?: string;
   sectionTitle?: string;
   dispatchOn?: GoabFormDispatchOn;
@@ -28,15 +31,13 @@ interface GoabFieldsetProps {
   children: ReactNode;
 }
 
-export function GoabFieldset({
-  id,
-  sectionTitle,
-  dispatchOn,
-  onContinue,
-  children,
-
-}: GoabFieldsetProps) {
+export function GoabFieldset(props: GoabFieldsetProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["onContinue"],
+    attributeMapping: "kebab",
+  });
 
   useEffect(() => {
     if (!ref.current) return;
@@ -44,28 +45,23 @@ export function GoabFieldset({
 
     const continueListener = (e: Event) => {
       const event = (e as CustomEvent<GoabFieldsetOnContinueDetail>).detail;
-      return onContinue?.(event);
+      return props.onContinue?.(event);
     };
 
-    if (onContinue) {
+    if (props.onContinue) {
       current.addEventListener("_continue", continueListener);
     }
 
     return () => {
-      if (onContinue) {
+      if (props.onContinue) {
         current.removeEventListener("_continue", continueListener);
       }
     };
-  }, [ref, onContinue]);
+  }, [ref, props.onContinue]);
 
   return (
-    <goa-fieldset
-      ref={ref}
-      id={id}
-      section-title={sectionTitle}
-      dispatch-on={dispatchOn}
-    >
-      {children}
+    <goa-fieldset ref={ref} {..._props}>
+      {props.children}
     </goa-fieldset>
   );
 }

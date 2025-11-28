@@ -3,12 +3,12 @@ import {
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
   GoabTextAreaOnBlurDetail,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.Ref<HTMLTextAreaElement>;
   name: string;
   value?: string;
   placeholder?: string;
@@ -29,12 +29,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-textarea": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-textarea": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.Ref<HTMLTextAreaElement>;
+      };
     }
   }
 }
 
-export interface GoabTextAreaProps extends Margins {
+export interface GoabTextAreaProps extends Margins, DataGridProps {
   name: string;
   value?: string;
   id?: string;
@@ -56,30 +58,13 @@ export interface GoabTextAreaProps extends Margins {
   onBlur?: (event: GoabTextAreaOnBlurDetail) => void;
 }
 
-export function GoabTextArea({
-  name,
-  value,
-  placeholder,
-  rows,
-  readOnly,
-  disabled,
-  countBy,
-  maxCount,
-  width,
-  maxWidth,
-  testId,
-  error,
-  ariaLabel,
-  mt,
-  mr,
-  mb,
-  ml,
-  autoComplete,
-  onChange,
-  onKeyPress,
-  onBlur,
-}: GoabTextAreaProps): JSX.Element {
+export function GoabTextArea(props: GoabTextAreaProps): JSX.Element {
   const el = useRef<HTMLTextAreaElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["readOnly", "disabled", "error", "onChange", "onKeyPress", "onBlur"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!el.current) {
@@ -89,17 +74,17 @@ export function GoabTextArea({
 
     const changeListener: EventListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabTextAreaOnChangeDetail>).detail;
-      onChange?.(detail);
+      props.onChange?.(detail);
     };
 
     const keypressListener = (e: unknown) => {
       const detail = (e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail;
-      onKeyPress?.(detail);
+      props.onKeyPress?.(detail);
     };
 
     const blurListener = (e: unknown) => {
       const detail = (e as CustomEvent<GoabTextAreaOnBlurDetail>).detail;
-      onBlur?.(detail);
+      props.onBlur?.(detail);
     };
 
     current.addEventListener("_change", changeListener);
@@ -111,29 +96,15 @@ export function GoabTextArea({
       current.removeEventListener("_keyPress", keypressListener);
       current.removeEventListener("_blur", blurListener);
     };
-  }, [el, onChange, onKeyPress, onBlur]);
+  }, [el, props.onChange, props.onKeyPress, props.onBlur]);
 
   return (
     <goa-textarea
       ref={el}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      rows={rows}
-      readOnly={readOnly ? "true" : undefined}
-      disabled={disabled ? "true" : undefined}
-      countby={countBy}
-      maxcount={maxCount}
-      width={width}
-      maxwidth={maxWidth}
-      error={error ? "true" : undefined}
-      testid={testId}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      autocomplete={autoComplete}
+      readOnly={props.readOnly ? "true" : undefined}
+      disabled={props.disabled ? "true" : undefined}
+      error={props.error ? "true" : undefined}
+      {..._props}
     ></goa-textarea>
   );
 }

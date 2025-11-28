@@ -60,4 +60,18 @@ describe("Callout", () => {
       expect(el?.getAttribute("arialive")).toBe(expected);
     });
   });
+
+  test("should pass data-grid attributes", () => {
+    const result = render(
+      <GoabCallout
+        type="information"
+        heading="Callout Title"
+        data-grid="cell"
+      >
+        Test content
+      </GoabCallout>,
+    );
+    const el = result.container.querySelector("goa-callout");
+    expect(el?.getAttribute("data-grid")).toBe("cell");
+  });
 });

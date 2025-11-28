@@ -2,11 +2,11 @@ import { ReactNode, useEffect, useRef } from "react";
 import {
   GoabPublicFormPageButtonVisibility,
   GoabPublicFormPageStep,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   heading?: string;
   "sub-heading"?: string;
@@ -22,12 +22,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-interface GoabPublicFormPageProps extends Margins {
+interface GoabPublicFormPageProps extends Margins, DataGridProps {
   id?: string;
   heading?: string;
   subHeading?: string;
@@ -45,62 +47,36 @@ interface GoabPublicFormPageProps extends Margins {
   children: ReactNode;
 }
 
-export function GoabPublicFormPage({
-  id = "",
-  heading = "",
-  subHeading = "",
-  summaryHeading = "",
-  sectionTitle = "",
-  backUrl = "",
-  type = "step",
-  buttonText = "",
-  buttonVisibility = "visible",
-  onContinue,
-  children,
-  mt,
-  mr,
-  mb,
-  ml,
-}: GoabPublicFormPageProps) {
+export function GoabPublicFormPage(props: GoabPublicFormPageProps) {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["onContinue"],
+    attributeMapping: "kebab",
+  });
 
   useEffect(() => {
     if (!ref.current) return;
     const current = ref.current;
 
     const continueListener = (e: Event) => {
-      onContinue?.(e);
+      props.onContinue?.(e);
     };
 
-    if (onContinue) {
+    if (props.onContinue) {
       current.addEventListener("_continue", continueListener);
     }
 
     return () => {
-      if (onContinue) {
+      if (props.onContinue) {
         current.removeEventListener("_continue", continueListener);
       }
     };
-  }, [ref, onContinue]);
+  }, [ref, props.onContinue]);
 
   return (
-    <goa-public-form-page
-      ref={ref}
-      id={id}
-      heading={heading}
-      sub-heading={subHeading}
-      section-title={sectionTitle}
-      back-url={backUrl}
-      type={type}
-      button-text={buttonText}
-      button-visibility={buttonVisibility}
-      summary-heading={summaryHeading}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    >
-      {children}
+    <goa-public-form-page ref={ref} {..._props}>
+      {props.children}
     </goa-public-form-page>
   );
 }

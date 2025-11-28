@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
+import { DataGridProps, GoabFilterChipTheme, Margins } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   icontheme: GoabFilterChipTheme;
   error?: string;
   content: string;
@@ -13,12 +13,14 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
 
-export interface GoabFilterChipProps extends Margins {
+export interface GoabFilterChipProps extends Margins, DataGridProps {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;
   error?: boolean;
@@ -28,39 +30,35 @@ export interface GoabFilterChipProps extends Margins {
 
 export const GoabFilterChip = ({
   iconTheme = "outline",
-  error,
-  content,
-  onClick,
-  mt,
-  mr,
-  mb,
-  ml,
-  testId,
+  ...props
 }: GoabFilterChipProps) => {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(
+    { iconTheme, ...props },
+    {
+      exclude: ["error", "onClick"],
+      attributeMapping: "lowercase",
+    }
+  );
+
   useEffect(() => {
     if (!el.current) return;
-    if (!onClick) return;
+    if (!props.onClick) return;
 
     const current = el.current;
 
-    current.addEventListener("_click", onClick);
+    current.addEventListener("_click", props.onClick);
     return () => {
-      current.removeEventListener("_click", onClick);
+      current.removeEventListener("_click", props.onClick!);
     };
-  }, [el, onClick]);
+  }, [el, props.onClick]);
 
   return (
     <goa-filter-chip
       ref={el}
-      icontheme={iconTheme}
-      error={error ? "true" : undefined}
-      content={content}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
+      error={props.error ? "true" : undefined}
+      {..._props}
     />
   );
 };
