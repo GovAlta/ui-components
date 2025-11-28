@@ -33,16 +33,28 @@ class TestBadgeComponent {
   mr?: Spacing;
 }
 
+@Component({
+  standalone: true,
+  imports: [GoabBadge],
+  template: ` <goab-badge [type]="type" [content]="content"></goab-badge> `,
+})
+class TestBadgeNoIconComponent {
+  type?: GoabBadgeType;
+  content?: string;
+}
+
 describe("GoABBadge", () => {
   let fixture: ComponentFixture<TestBadgeComponent>;
   let component: TestBadgeComponent;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [GoabBadge, TestBadgeComponent],
+      imports: [GoabBadge, TestBadgeComponent, TestBadgeNoIconComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
+  }));
 
+  it("should render and set the props correctly", fakeAsync(() => {
     fixture = TestBed.createComponent(TestBadgeComponent);
     component = fixture.componentInstance;
     component.type = "information";
@@ -58,9 +70,6 @@ describe("GoABBadge", () => {
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
-  }));
-
-  it("should render and set the props correctly", () => {
     const badgeElement = fixture.debugElement.query(By.css("goa-badge")).nativeElement;
     expect(badgeElement.getAttribute("type")).toBe("information");
     expect(badgeElement.getAttribute("content")).toBe("Information");
@@ -71,5 +80,32 @@ describe("GoABBadge", () => {
     expect(badgeElement.getAttribute("mb")).toBe(component.mb);
     expect(badgeElement.getAttribute("ml")).toBe(component.ml);
     expect(badgeElement.getAttribute("mr")).toBe(component.mr);
-  });
+  }));
+
+  it("should not set icon attribute by default (icon undefined)", fakeAsync(() => {
+    const noIconFixture = TestBed.createComponent(TestBadgeNoIconComponent);
+    const noIconComponent = noIconFixture.componentInstance;
+    noIconComponent.type = "information";
+    noIconComponent.content = "Information";
+    noIconFixture.detectChanges();
+    tick();
+    noIconFixture.detectChanges();
+    const badgeElement = noIconFixture.debugElement.query(
+      By.css("goa-badge"),
+    ).nativeElement;
+    expect(badgeElement.getAttribute("icon")).toBe("false");
+  }));
+
+  it("should not render icon when icon is false", fakeAsync(() => {
+    fixture = TestBed.createComponent(TestBadgeComponent);
+    component = fixture.componentInstance;
+    component.type = "information";
+    component.content = "Information";
+    component.icon = false;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+    const badgeElement = fixture.debugElement.query(By.css("goa-badge")).nativeElement;
+    expect(badgeElement.getAttribute("icon")).toBe("false");
+  }));
 });

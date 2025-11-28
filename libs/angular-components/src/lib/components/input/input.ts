@@ -19,6 +19,7 @@ import {
   numberAttribute,
   TemplateRef,
   ChangeDetectorRef,
+  Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -34,6 +35,7 @@ export interface IgnoreMe {
   imports: [NgIf, NgTemplateOutlet, CommonModule],
   template: `
     <goa-input
+      #goaComponentRef
       *ngIf="isReady"
       [attr.type]="type"
       [attr.name]="name"
@@ -142,8 +144,11 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   isReady = false;
   handleTrailingIconClick = false;
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
+  constructor(
+    private cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
+    super(renderer);
   }
   ngOnInit() {
     // For Angular 20, we need to delay rendering the web component

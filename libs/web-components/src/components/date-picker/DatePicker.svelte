@@ -8,10 +8,9 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { addDays, addMonths, addYears, format, startOfDay } from "date-fns";
+  import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
-  import { padLeft, toBoolean } from "../../common/utils";
+  import { toBoolean } from "../../common/utils";
   import { receive, dispatch, relay } from "../../common/utils";
   import {
     FieldsetSetValueMsg,
@@ -24,17 +23,12 @@
     FieldsetResetFieldsMsg,
     FormItemMountMsg,
   } from "../../types/relay-types";
+  import { CalendarDate } from "../../common/calendar-date";
 
-  type DateValue = {
-    type: "date";
+  type OnChangeDetail = {
     name: string;
-    value: Date | null;
-  };
-
-  type InputDate = {
-    day: string;
-    month: string;
-    year: string;
+    value: Date | string | null;
+    valueStr: string;
   };
 
   export let type: "calendar" | "input" = "calendar";
@@ -49,6 +43,7 @@
   export let relative: string = "";
   export let disabled: string = "false";
   export let testid: string = "";
+  export let width: string = "";
 
   // margin
   export let mt: Spacing = null;
@@ -57,20 +52,18 @@
   export let ml: Spacing = null;
 
   let _error: boolean = toBoolean(error);
-  let _oldValue: Date | null;
   let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
-  let _date: Date | null;
 
-  // used only for the `type=input`
-  let _inputDate: InputDate = { day: "", month: "", year: "" };
+  let _date: CalendarDate = CalendarDate.init();
 
   $: isDisabled = toBoolean(disabled);
 
   // re-init the data when the value changes
   $: setDate(value);
 
-  onMount(() => {
+  onMount(async () => {
+    await tick(); // for Angular's delay
     setDate(value);
     addRelayListener();
     sendMountedMessage();
@@ -137,69 +130,36 @@
   }
 
   function setDate(value: string) {
-    // invalid date
-    if (!value || !new Date(value).getDate()) {
-      _date = null;
-      _inputDate = { day: "", month: "", year: "" };
-      return;
-    }
-
     if (type === "calendar") {
-      _date = startOfDay(new Date(value));
-    } else if (type === "input") {
-      const [year = "", month = "", day = ""] = value.split("T")[0].split("-");
-
-      // save without padded zeroes
-      _inputDate = { year: `${+year}`, month: `${+month - 1}`, day: `${+day}` };
-
-      if (!isInputDateValid()) {
-        resetInputDate();
+      if (value) {
+        _date = new CalendarDate(value);
+        if (!_date.isValid) {
+          _date = new CalendarDate(0);
+        }
+      } else {
+        _date = new CalendarDate(0);
       }
     }
   }
 
-  function resetInputDate() {
-    _inputDate = { day: "", month: "", year: "" };
-  }
-
   function onCalendarChange(e: CustomEvent) {
-    _date = e.detail.value;
-    if (_date) {
-      value = _date.toISOString();
-    } else {
-      value = "";
-    }
+    _date = new CalendarDate(e.detail.value); // yyyy-MM-dd
 
     hideCalendar();
-    dispatchValue(_date);
+    dispatchValue();
 
     e.stopPropagation();
     e.preventDefault();
   }
 
-  function dispatchValue(date: Date | null) {
-    if (!date) {
-      _oldValue = null;
-      value = "";
-    } else {
-      _oldValue = date;
-      value = date.toISOString();
-    }
+  function dispatchValue() {
+    value = _date.toString();
 
-    dispatch<DateValue>(_rootEl, "_change", {
+    dispatch<OnChangeDetail>(_rootEl, "_change", {
       name,
-      type: "date",
-      value: date,
+      value: _date.date,
+      valueStr: value,
     });
-  }
-
-  function formatDate(d: Date | string | null): string {
-    if (!d) return "";
-    if (typeof d === "string") {
-      return format(new Date(d), "MMMM d, yyyy");
-    }
-
-    return format(d, "MMMM d, yyyy");
   }
 
   function hideCalendar() {
@@ -215,67 +175,45 @@
 
     switch (e.key) {
       case "ArrowLeft":
-        _date ||= addDays(new Date(), 1);
-        _date = addDays(_date, -1);
+        _date ||= new CalendarDate().nextDay;
+        _date.addDays(-1);
         break;
       case "ArrowRight":
-        _date ||= addDays(new Date(), -1);
-        _date = addDays(_date, 1);
+        _date ||= new CalendarDate().previousDay;
+        _date.addDays(1);
         break;
       case "ArrowDown":
-        _date ||= addDays(new Date(), -7);
-        _date = addDays(_date, 7);
+        _date ||= new CalendarDate().previousWeek;
+        _date.addDays(7);
         break;
       case "ArrowUp":
-        _date ||= addDays(new Date(), 7);
-        _date = addDays(_date, -7);
+        _date ||= new CalendarDate().nextWeek;
+        _date.addDays(-7);
         break;
       case "PageUp":
         _date ||= e.shiftKey
-          ? addYears(new Date(), 1)
-          : addMonths(new Date(), 1);
-        _date = e.shiftKey ? addYears(_date, -1) : addMonths(_date, -1);
+          ? new CalendarDate(_date).addYears(1)
+          : new CalendarDate(_date).addMonths(1);
+        _date = e.shiftKey
+          ? new CalendarDate(_date).addYears(-1)
+          : new CalendarDate(_date).addMonths(-1);
         break;
       case "PageDown":
         _date ||= e.shiftKey
-          ? addYears(new Date(), -1)
-          : addMonths(new Date(), -1);
-        _date = e.shiftKey ? addYears(_date, 1) : addMonths(_date, 1);
+          ? new CalendarDate(_date).addYears(-1)
+          : new CalendarDate(_date).addMonths(-1);
+        _date = e.shiftKey
+          ? new CalendarDate(_date).addYears(1)
+          : new CalendarDate(_date).addMonths(1);
         break;
       default:
         return;
     }
 
-    dispatchValue(_date);
+    dispatchValue();
 
     e.preventDefault();
     e.stopPropagation();
-  }
-
-  function getInputDateWithPaddedZeroes(): string {
-    return `${padLeft(_inputDate.year, 4, 0)}-${padLeft(+_inputDate.month + 1, 2, 0)}-${padLeft(_inputDate.day, 2, 0)}`;
-  }
-
-  function isInputDateValid(): boolean {
-    if (
-      _inputDate.year === "" ||
-      _inputDate.month === "" ||
-      _inputDate.day === ""
-    ) {
-      return false;
-    }
-
-    const date = getInputDateWithPaddedZeroes();
-    if (!new Date(date)?.getTime() || isNaN(new Date(date).getTime())) {
-      return false;
-    }
-
-    if (date !== new Date(date).toISOString().split("T")[0]) {
-      // E.g. "2025-02-31" would be invalid because the date does not exist
-      return false;
-    }
-
-    return true;
   }
 
   // _change event handler for the text/dropdown inputs for the `input` date format
@@ -286,14 +224,21 @@
       e as CustomEvent<{ name: string; value: string }>
     ).detail;
 
-    _inputDate = { ..._inputDate, [elName]: value };
+    if (elName === "day") {
+      _date.setDay(+value);
+    } else if (elName === "month") {
+      _date.setMonth(+value);
+    } else if (elName === "year") {
+      _date.setYear(+value);
+    }
 
-    const date = isInputDateValid() ? getInputDateWithPaddedZeroes() : null;
+    // invalid dates need to emitted too
+    const output = _date.isValid() ? _date.toString() : "";
 
-    dispatch(
+    dispatch<OnChangeDetail>(
       _rootEl,
       "_change",
-      { name, type: "string", value: date },
+      { name, value: output, valueStr: output },
       { bubbles: true },
     );
   }
@@ -301,41 +246,82 @@
 
 <div bind:this={_senderEl}></div>
 {#if type === "calendar"}
-  <goa-popover
-    bind:this={_rootEl}
-    tabindex="-1"
-    data-testid="calendar-popover"
-    {testid}
-    {mt}
-    {mb}
-    {ml}
-    {mr}
-    disabled={isDisabled}
-    on:_close={() => dispatchValue(_date)}
-  >
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <goa-input
-      slot="target"
-      testid="calendar-input"
-      width="16ch"
-      readonly="true"
-      trailingicon="calendar"
-      value={formatDate(_date)}
-      {error}
-      on:keydown={handleKeyDown}
+  {#if width && width.includes("%")}
+    <div style="display: block; width: {width};">
+      <goa-popover
+        bind:this={_rootEl}
+        tabindex="-1"
+        data-testid="calendar-popover"
+        data-content-fits-width="true"
+        {testid}
+        {mt}
+        {mb}
+        {ml}
+        {mr}
+        width="100%"
+        disabled={isDisabled}
+      >
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <goa-input
+          slot="target"
+          testid="calendar-input"
+          width="100%"
+          readonly="true"
+          trailingicon="calendar"
+          value={_date.format("MMMM d, yyyy")}
+          {error}
+          on:keydown={handleKeyDown}
+          disabled={isDisabled}
+        />
+        <goa-calendar
+          {name}
+          {value}
+          {min}
+          {max}
+          bordered="false"
+          on:_change={onCalendarChange}
+        />
+      </goa-popover>
+    </div>
+  {:else}
+    <goa-popover
+      bind:this={_rootEl}
+      tabindex="-1"
+      data-testid="calendar-popover"
+      {testid}
+      {mt}
+      {mb}
+      {ml}
+      {mr}
       disabled={isDisabled}
-    />
-    <goa-calendar
-      {name}
-      {value}
-      {min}
-      {max}
-      bordered="false"
-      on:_change={onCalendarChange}
-    />
-  </goa-popover>
+    >
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <goa-input
+        slot="target"
+        testid="calendar-input"
+        width={width || "16ch"}
+        readonly="true"
+        trailingicon="calendar"
+        value={_date.format("MMMM d, yyyy")}
+        {error}
+        on:keydown={handleKeyDown}
+        disabled={isDisabled}
+      />
+      <goa-calendar
+        {name}
+        {value}
+        {min}
+        {max}
+        bordered="false"
+        on:_change={onCalendarChange}
+      />
+    </goa-popover>
+  {/if}
 {:else if type === "input"}
-  <goa-form-item error={_error && error} bind:this={_rootEl}>
+  <goa-form-item
+    error={_error && error}
+    bind:this={_rootEl}
+  >
     <goa-block direction="row">
       <goa-form-item helptext="Month">
         <goa-dropdown
@@ -343,21 +329,21 @@
           testid="input-month"
           on:_change={onInputChange}
           {error}
-          value={_inputDate.month + ""}
+          value={_date.month + ""}
           disabled={isDisabled}
         >
-          <goa-dropdown-item value="0" label="January" />
-          <goa-dropdown-item value="1" label="February" />
-          <goa-dropdown-item value="2" label="March" />
-          <goa-dropdown-item value="3" label="April" />
-          <goa-dropdown-item value="4" label="May" />
-          <goa-dropdown-item value="5" label="June" />
-          <goa-dropdown-item value="6" label="July" />
-          <goa-dropdown-item value="7" label="August" />
-          <goa-dropdown-item value="8" label="September" />
-          <goa-dropdown-item value="9" label="October" />
-          <goa-dropdown-item value="10" label="November" />
-          <goa-dropdown-item value="11" label="December" />
+          <goa-dropdown-item value="1" label="January" />
+          <goa-dropdown-item value="2" label="February" />
+          <goa-dropdown-item value="3" label="March" />
+          <goa-dropdown-item value="4" label="April" />
+          <goa-dropdown-item value="5" label="May" />
+          <goa-dropdown-item value="6" label="June" />
+          <goa-dropdown-item value="7" label="July" />
+          <goa-dropdown-item value="8" label="August" />
+          <goa-dropdown-item value="9" label="September" />
+          <goa-dropdown-item value="10" label="October" />
+          <goa-dropdown-item value="11" label="November" />
+          <goa-dropdown-item value="12" label="December" />
         </goa-dropdown>
       </goa-form-item>
       <goa-form-item helptext="Day (DD)">
@@ -367,7 +353,7 @@
           testid="input-day"
           on:_change={onInputChange}
           width="4ch"
-          value={_inputDate.day}
+          value={_date.day || ""}
           min="1"
           max="31"
           {error}
@@ -381,7 +367,7 @@
           testid="input-year"
           on:_change={onInputChange}
           width="6ch"
-          value={_inputDate.year}
+          value={_date.year || ""}
           min="1800"
           max="2200"
           {error}

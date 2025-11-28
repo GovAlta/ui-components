@@ -144,6 +144,114 @@ describe("DatePicker", () => {
       expect(inputEl.disabled).toBe(true);
     })
   });
+
+  describe("Width property", () => {
+    it("applies custom width with px units", async () => {
+      const Component = () => {
+        return <GoabDatePicker testId="date-picker" width="400px" />;
+      };
+
+      const result = render(<Component />);
+      const input = result.getByTestId("calendar-input");
+
+      await vi.waitFor(() => {
+        // Check the input element's computed style
+        const computedStyle = window.getComputedStyle(input.element());
+        const inputWidth = parseFloat(computedStyle.width);
+
+        // The width should be close to 400px (the underlying goa-input component handles the width)
+        expect(inputWidth).toBeGreaterThan(300);
+        expect(inputWidth).toBeLessThan(450);
+      });
+    });
+
+    it("applies custom width with ch units", async () => {
+      const Component = () => {
+        return <GoabDatePicker testId="date-picker" width="25ch" />;
+      };
+
+      const result = render(<Component />);
+      const input = result.getByTestId("calendar-input");
+
+      await vi.waitFor(() => {
+        // Check computed width is applied (browser converts ch to px)
+        const computedStyle = window.getComputedStyle(input.element());
+        expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/);
+
+        // Should have a reasonable width for 25ch
+        const inputWidth = parseFloat(computedStyle.width);
+        expect(inputWidth).toBeGreaterThan(200);
+        expect(inputWidth).toBeLessThan(600);
+      });
+    });
+
+    it("uses default width when not specified", async () => {
+      const Component = () => {
+        return <GoabDatePicker testId="date-picker" />;
+      };
+
+      const result = render(<Component />);
+      const input = result.getByTestId("calendar-input");
+
+      await vi.waitFor(() => {
+        // Default width should be 16ch - check computed width
+        const computedStyle = window.getComputedStyle(input.element());
+        const inputWidth = parseFloat(computedStyle.width);
+
+        // 16ch should be around 150-300px depending on font
+        expect(inputWidth).toBeGreaterThan(100);
+        expect(inputWidth).toBeLessThan(400);
+      });
+    });
+
+    it("supports percentage width units", async () => {
+      const Component = () => {
+        return (
+          <div style={{ width: "800px" }} data-testid="container">
+            <GoabDatePicker testId="date-picker" width="80%" />
+          </div>
+        );
+      };
+
+      const result = render(<Component />);
+      const input = result.getByTestId("calendar-input");
+
+      await vi.waitFor(() => {
+        // Check computed width
+        const computedStyle = window.getComputedStyle(input.element());
+        expect(computedStyle.width).toMatch(/^\d+(\.\d+)?px$/);
+
+        // Should be a reasonable percentage of container
+        const inputWidth = parseFloat(computedStyle.width);
+        expect(inputWidth).toBeGreaterThan(50);
+        expect(inputWidth).toBeLessThan(800);
+      });
+    });
+
+    it("maintains minimum width to ensure date display", async () => {
+      const Component = () => {
+        return <GoabDatePicker testId="date-picker" width="20ch" value={new Date()} />;
+      };
+
+      const result = render(<Component />);
+      const input = result.getByTestId("calendar-input");
+
+      await vi.waitFor(() => {
+        const inputEl = input.element() as HTMLInputElement;
+
+        // Check that date value is displayed
+        expect(inputEl.value).toBeTruthy();
+        expect(inputEl.value.length).toBeGreaterThan(0);
+
+        // Check width is applied
+        const computedStyle = window.getComputedStyle(inputEl);
+        const inputWidth = parseFloat(computedStyle.width);
+
+        // Should be wide enough to display date (20ch should be enough)
+        expect(inputWidth).toBeGreaterThan(150);
+      });
+    });
+  });
 });
 
 describe("Date Picker input type", () => {
@@ -162,66 +270,59 @@ describe("Date Picker input type", () => {
 
     const result = render(<Component />);
     const datePickerMonth = result.getByTestId("input-month");
+    const datePickerMonthMarch = result.getByTestId("dropdown-item-3");
     const datePickerDay = result.getByTestId("input-day");
     const datePickerYear = result.getByTestId("input-year");
-
-    expect(datePickerMonth).toBeTruthy();
-    expect(datePickerDay).toBeTruthy();
-    expect(datePickerYear).toBeTruthy();
 
     const rootElChangeHandler = vi.fn();
     result.container.addEventListener("_change", (e: Event) => {
       const ce = e as CustomEvent;
-      rootElChangeHandler(ce.detail.value);
+      rootElChangeHandler(ce.detail.valueStr);
     });
 
     // Select month
-    if (datePickerMonth) {
-      await datePickerMonth.click();
-      await userEvent.keyboard("{ArrowDown}");
-      await userEvent.keyboard("{Enter}");
-    }
+    await datePickerMonth.click();
+    await userEvent.keyboard("{ArrowDown}");
+    await userEvent.keyboard("{Enter}");
 
     // should be null because date is invalid
     await vi.waitFor(() => {
-      expect(rootElChangeHandler).toHaveBeenCalledWith(null);
+      expect(rootElChangeHandler).toHaveBeenCalledWith("");
     });
     rootElChangeHandler.mockClear();
 
     // Input day
-    if (datePickerDay) {
-      await datePickerDay.click();
-      await userEvent.type(datePickerDay, "1");
-    }
+    await datePickerDay.click();
+    await userEvent.type(datePickerDay, "1");
+
+    // Select month
+    await userEvent.click(datePickerMonth);
+    await userEvent.click(datePickerMonthMarch);
 
     // should be null because date is still invalid
     await vi.waitFor(() => {
-      expect(rootElChangeHandler).toHaveBeenCalledWith(null);
+      expect(rootElChangeHandler).toHaveBeenCalledWith("");
     });
     rootElChangeHandler.mockClear();
 
     // Input year
-    if (datePickerYear) {
-      await datePickerYear.click();
-      await userEvent.type(datePickerYear, "1999");
-    }
+    await datePickerYear.click();
+    await userEvent.type(datePickerYear, "1999");
 
     // should not be null because date became valid
     await vi.waitFor(() => {
-      expect(rootElChangeHandler).toHaveBeenCalledWith("1999-01-01");
+      expect(rootElChangeHandler).toHaveBeenCalledWith("1999-03-01");
     });
     rootElChangeHandler.mockClear();
 
     // Clear day input
-    if (datePickerDay) {
-      await datePickerDay.click();
-      await userEvent.keyboard("{ArrowRight}");
-      await userEvent.keyboard("{Backspace}");
-    }
+    await datePickerDay.click();
+    await userEvent.keyboard("{ArrowRight}");
+    await userEvent.keyboard("{Backspace}");
 
     // should be null because date became invalid
     await vi.waitFor(() => {
-      expect(rootElChangeHandler).toHaveBeenCalledWith(null);
+      expect(rootElChangeHandler).toHaveBeenCalledWith("");
     });
     rootElChangeHandler.mockClear();
   });

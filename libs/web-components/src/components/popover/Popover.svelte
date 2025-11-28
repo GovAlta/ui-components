@@ -94,6 +94,7 @@
   let _popoverEl: HTMLElement;
   let _focusTrapEl: HTMLElement;
   let _sectionHeight: number;
+  let _contentFitsWidth: boolean = false;
 
   // Reactive
 
@@ -116,6 +117,11 @@
 
   onMount(async () => {
     await tick();
+
+    // to make the popover content fit its contents instead of the target width
+    const hostElement = _rootEl?.getRootNode() as ShadowRoot;
+    _contentFitsWidth =
+      hostElement?.host?.getAttribute("data-content-fits-width") === "true";
 
     // add keybinding to open the popover
     _targetEl.addEventListener("keydown", onTargetEvent);
@@ -248,6 +254,7 @@
         return firstFocusable;
       }
     }
+    return null;
   }
 
   function handleClick(e: MouseEvent) {
@@ -402,9 +409,11 @@
       data-testid="popover-content"
       class="popover-content"
       style={styles(
-        style("width", width),
+        // For certain contexts (e.g., DatePicker) when the internal data-content-fits-width
+        // attribute is set, the content width is set to fit-content instead of inheriting the target width.
+        style("width", _contentFitsWidth ? "fit-content" : width),
         style("min-width", minwidth),
-        style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
+        style("max-width", _contentFitsWidth ? maxwidth : width ? `max(${width}, ${maxwidth})` : maxwidth),
         style("padding", _padded ? "var(--goa-space-m)" : "0"),
       )}
     >

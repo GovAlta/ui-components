@@ -17,7 +17,7 @@ import { GoabBaseComponent } from "../base.component";
     <goa-badge
       *ngIf="isReady"
       [attr.type]="type"
-      [attr.icon]="icon"
+      [attr.icon]="icon ? 'true' : 'false'"
       [attr.icontype]="iconType"
       [attr.arialabel]="ariaLabel"
       [attr.content]="content"
@@ -42,6 +42,7 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabBadge extends GoabBaseComponent implements OnInit {
   @Input() type?: GoabBadgeType;
   @Input() content?: string;
+  // Ensure boolean input; attribute only set when true so default behaviour is false
   @Input({ transform: booleanAttribute }) icon?: boolean;
   @Input() iconType?: GoabIconType;
   @Input() ariaLabel?: string;

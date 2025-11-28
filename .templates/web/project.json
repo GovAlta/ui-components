@@ -1,8 +1,8 @@
 {
-  "name": "web",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "web-dev",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "playground/web/src",
+  "sourceRoot": "apps/dev/web/src",
   "tags": [],
   "implicitDependencies": [
     "web-components"
@@ -15,7 +15,7 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/playground/web"
+        "outputPath": "dist/apps/dev/web"
       },
       "configurations": {
         "development": {
@@ -30,15 +30,15 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "web:build"
+        "buildTarget": "web-dev:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "web:build:development",
+          "buildTarget": "web-dev:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "web:build:production",
+          "buildTarget": "web-dev:build:production",
           "hmr": false
         }
       }
@@ -47,14 +47,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "web:build"
+        "buildTarget": "web-dev:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "web:build:development"
+          "buildTarget": "web-dev:build:development"
         },
         "production": {
-          "buildTarget": "web:build:production"
+          "buildTarget": "web-dev:build:production"
         }
       }
     },
