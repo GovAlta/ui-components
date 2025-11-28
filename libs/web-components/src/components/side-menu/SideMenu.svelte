@@ -6,6 +6,7 @@
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import { SideMenuGroupProps } from "../side-menu-group/SideMenuGroup.svelte";
 
+  export let version: "1" | "2" = "1";
   export let testid: string = "";
 
   let _rootEl: HTMLElement;
@@ -18,7 +19,20 @@
     getChildren();
     setCurrentUrl();
     addEventListeners();
+    cascadeVersion();
   });
+
+  function cascadeVersion() {
+    if (version !== "2" || !_rootEl) return;
+
+    // Cascade version to any goa-side-menu-group and goa-side-menu-heading components in slots
+    const slottedChildren = getSlottedChildren(_rootEl);
+    slottedChildren.forEach((child) => {
+      if (child.tagName === "GOA-SIDE-MENU-GROUP" || child.tagName === "GOA-SIDE-MENU-HEADING") {
+        child.setAttribute("version", "2");
+      }
+    });
+  }
 
   onDestroy(() => {
     removeEventListeners();
@@ -46,6 +60,11 @@
     const sideMenuGroupProps = (e as CustomEvent<SideMenuGroupProps>).detail;
     _sideMenuGroupItems = [..._sideMenuGroupItems, sideMenuGroupProps];
     setCurrentUrl();
+
+    // Cascade version to child components
+    if (version === "2") {
+      sideMenuGroupProps.el.setAttribute("version", "2");
+    }
   }
 
   function setCurrentUrl() {
@@ -101,7 +120,7 @@
   }
 </script>
 
-<div bind:this={_rootEl} class="side-menu" data-testid={testid}>
+<div bind:this={_rootEl} class="side-menu" class:v2={version === "2"} data-testid={testid}>
   <slot />
 </div>
 
@@ -109,7 +128,7 @@
   :global(::slotted(a)),
   :global(::slotted(a:visited)) {
     /* required to override base styles */
-    color: var(--goa-side-menu-text-color, var(--goa-color-text-default)) !important;
+    color: var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;
     display: block;
     font: var(--goa-side-menu-typography-item);
     padding: var(--goa-side-menu-padding-item);
@@ -118,6 +137,7 @@
 
   :global(::slotted(a.current)) {
     font: var(--goa-side-menu-typography-item-current);
+    color: var(--goa-side-menu-color-item-current, var(--goa-color-text-default)) !important;
     background: var(--goa-side-menu-color-bg-menu-item-hover);
   }
 
@@ -127,7 +147,7 @@
 
   :global(::slotted(a:focus-visible)) {
     outline: var(--goa-side-menu-item-focus-border);
-    outline-offset: -3px;
+    outline-offset: var(--goa-side-menu-item-focus-outline-offset, -3px);
   }
 
   .side-menu {
@@ -135,5 +155,21 @@
     height: 100%;
     flex-direction: column;
     gap: var(--goa-side-menu-items-gap);
+    background-color: var(--goa-side-menu-color-bg);
+    border-right: var(--goa-side-menu-border-right);
+  }
+
+  /* V2 Styles */
+  .side-menu.v2 {
+    padding: var(--goa-side-menu-padding);
+  }
+
+  .side-menu.v2 :global(::slotted(a)) {
+    border-radius: var(--goa-side-menu-item-border-radius, 0);
+    padding: var(--goa-space-xs) var(--goa-space-s);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--goa-space-xs);
+    color: var(--goa-color-text-secondary) !important;
   }
 </style>
