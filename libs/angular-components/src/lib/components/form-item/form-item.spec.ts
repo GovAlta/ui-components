@@ -66,6 +66,7 @@ describe("GoABFormItem", () => {
     component.mb = "l";
     component.ml = "xl";
     component.mr = "m";
+    fixture.detectChanges();
     tick();
     fixture.detectChanges();
   }));

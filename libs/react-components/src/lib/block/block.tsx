@@ -10,6 +10,9 @@ export interface WCProps extends Margins {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
+  "min-width"?: string;
+  "max-width"?: string;
+  width?: string;
   testid?: string;
 }
 
@@ -27,6 +30,9 @@ export interface GoabBlockProps extends Margins {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
+  minWidth?: string;
+  maxWidth?: string;
+  width?: string;
   testId?: string;
   children?: ReactNode;
 }
@@ -37,6 +43,9 @@ export function GoabBlock(props: GoabBlockProps) {
       gap={props.gap}
       direction={props.direction}
       alignment={props.alignment}
+      width={props.width}
+      min-width={props.minWidth}
+      max-width={props.maxWidth}
       mt={props.mt}
       mr={props.mr}
       mb={props.mb}

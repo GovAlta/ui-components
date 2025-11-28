@@ -1,153 +1,34 @@
-<goab-block direction="column" gap="l" class="feat3102">
+<goab-block direction="column" gap="l">
   <goab-block direction="column" gap="s">
-    <goab-text tag="h1" size="heading-l"
-      >Feature 3102 - Menu button icon and sizing checks</goab-text
-    >
-    <goab-text tag="p" size="body-m">
-      Use these scenarios to confirm the menu button supports an optional leading icon,
-      keeps the trailing chevron behaviour, and sizes its popover to the widest menu
-      action.
+    <goab-text tag="h1" mb="0" mt="0">
+      <a href="https://github.com/GovAlta/ui-components/issues/3102" target="_blank"
+        >3102</a
+      >
+      - Allow icon to be set on MenuButton
+    </goab-text>
+    <goab-text tag="p" mt="0">
+      All the MenuButton to have a leading icon set
     </goab-text>
   </goab-block>
 
-  <goab-grid minChildWidth="320px" gap="l">
-    <goab-block direction="column" gap="s" class="feat3102__panel">
-      <goab-text tag="h2" size="heading-m"
-        >Scenario A &ndash; Baseline behaviour</goab-text
-      >
-      <goab-text tag="p" size="body-s">
-        Open and close the menu to verify the trailing chevron flips between down and up.
-        Trigger each option to populate the action log below.
-      </goab-text>
-      <goab-menu-button text="Baseline actions" (onAction)="handleAction($event)">
-        <goab-menu-action
-          *ngFor="let action of baselineActions"
-          [text]="action.text"
-          [action]="action.action"
-          [icon]="action.icon"
-        ></goab-menu-action>
-      </goab-menu-button>
-    </goab-block>
+  <goab-divider mt="xl" mb="xl"></goab-divider>
 
-    <goab-block direction="column" gap="s" class="feat3102__panel">
-      <goab-text tag="h2" size="heading-m"
-        >Scenario B &ndash; Leading icon toggle</goab-text
-      >
-      <goab-text tag="p" size="body-s">
-        Use the toggle to remove and restore the leading icon. The button should resize
-        smoothly while the trailing chevron remains aligned at the end of the label.
-      </goab-text>
-      <goab-button type="secondary" (onClick)="toggleLeadingIcon()">
-        {{ leadingIconEnabled ? "Remove leading icon" : "Restore leading icon" }}
-      </goab-button>
-      <goab-menu-button text="Team tools" (onAction)="handleAction($event)">
-        <goab-menu-action
-          *ngFor="let action of teamActions"
-          [text]="action.text"
-          [action]="action.action"
-          [icon]="action.icon"
-        ></goab-menu-action>
-      </goab-menu-button>
-      <goab-text tag="p" size="body-s"
-        >Current leading icon: {{ currentLeadingIcon || "none" }}</goab-text
-      >
-    </goab-block>
+  <goab-menu-button text="Download" leadingIcon="download" (onAction)="onAction($event)">
+    <goab-menu-action
+      key="1"
+      text="CSV"
+      action="csv"
+    ></goab-menu-action>
+    <goab-menu-action
+      key="2"
+      text="JSON"
+      action="json"
+    ></goab-menu-action>
+    <goab-menu-action
+      key="3"
+      text="XML"
+      action="xml"
+    ></goab-menu-action>
+  </goab-menu-button>
 
-    <goab-block direction="column" gap="s" class="feat3102__panel">
-      <goab-text tag="h2" size="heading-m"
-        >Scenario C &ndash; Long labels drive menu width</goab-text
-      >
-      <goab-text tag="p" size="body-s">
-        Open the menu and confirm the popover width stretches to fit the longest label
-        without clipping. Close and reopen to ensure the width persists for subsequent
-        openings.
-      </goab-text>
-      <goab-menu-button text="Lengthy actions" (onAction)="handleAction($event)">
-        <goab-menu-action
-          *ngFor="let action of longLabelActions"
-          [text]="action.text"
-          [action]="action.action"
-          [icon]="action.icon"
-        ></goab-menu-action>
-      </goab-menu-button>
-    </goab-block>
-  </goab-grid>
-
-  <goab-block direction="column" gap="s" class="feat3102__panel">
-    <goab-text tag="h2" size="heading-m"
-      >Scenario D &ndash; Right aligned trigger</goab-text
-    >
-    <goab-text tag="p" size="body-s">
-      Shrink the viewport and open the menu. The popover should align to the trigger and
-      stay fully visible when the button sits against the right edge.
-    </goab-text>
-    <div class="feat3102__right-aligned">
-      <goab-menu-button text="Right edge menu" (onAction)="handleAction($event)">
-        <goab-menu-action
-          *ngFor="let action of teamActions"
-          [text]="action.text"
-          [action]="action.action"
-          [icon]="action.icon"
-        ></goab-menu-action>
-      </goab-menu-button>
-    </div>
-  </goab-block>
-
-  <goab-block direction="column" gap="s" class="feat3102__panel">
-    <goab-text tag="h2" size="heading-m"
-      >Scenario E &ndash; Dropdown popover width regression</goab-text
-    >
-    <goab-text tag="p" size="body-s">
-      The first dropdown sets its width to {{ dropdownWidth }}. Open it and confirm the
-      popover currently clamps near 320px instead of matching the trigger width. The
-      second dropdown applies <code>maxWidth="none"</code> as a control so you can compare
-      the expected layout.
-    </goab-text>
-    <goab-form-item
-      label="Impacted: dropdown width is forced narrower than trigger"
-      helpText="Open the menu and observe the options panel. It should stay aligned with the 420px trigger."
-    >
-      <goab-dropdown
-        [width]="dropdownWidth"
-        placeholder="Select an analytics report"
-        testId="feat3102-dropdown-regression"
-        (onChange)="onDropdownChange($event)"
-      >
-        <goab-dropdown-item
-          *ngFor="let option of dropdownOptions"
-          [value]="option.action"
-          [label]="option.text"
-        ></goab-dropdown-item>
-      </goab-dropdown>
-    </goab-form-item>
-
-    <goab-form-item
-      label="Control: explicit maxWidth to achieve expected behaviour"
-      helpText='With maxWidth set to "none", the popover should match the trigger width for reference.'
-    >
-      <goab-dropdown
-        [width]="dropdownWidth"
-        maxWidth="none"
-        placeholder="Compare against regression"
-        testId="feat3102-dropdown-control"
-      >
-        <goab-dropdown-item
-          *ngFor="let option of dropdownOptions"
-          [value]="option.action"
-          [label]="option.text"
-        ></goab-dropdown-item>
-      </goab-dropdown>
-    </goab-form-item>
-
-    <goab-text tag="p" size="body-s">
-      Last dropdown selection: {{ dropdownSelection || "none captured yet" }}
-    </goab-text>
-  </goab-block>
-
-  <goab-block direction="row" gap="s" alignment="center" class="feat3102__log">
-    <goab-text tag="p" size="body-s">
-      Last action: {{ lastActionDetail ? lastActionDetail.action : "none captured yet" }}
-    </goab-text>
-    <goab-button type="tertiary" (onClick)="clearLog()">Clear log</goab-button>
-  </goab-block>
 </goab-block>

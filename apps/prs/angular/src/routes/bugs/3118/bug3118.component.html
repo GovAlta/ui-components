@@ -1,0 +1,196 @@
+<goab-block direction="column" gap="l">
+  <goab-block direction="column" gap="s">
+    <goab-text tag="h1" mb="0" mt="0">
+      <a href="https://github.com/GovAlta/ui-components/issues/3118" target="_blank"
+        >3118</a
+      >
+      - MenuButton's width is not setting the correct width on wider elements
+    </goab-text>
+    <goab-text tag="p" mt="0">
+      Use these scenarios to confirm the React wrapper exposes the leading icon property
+      and that the menu width matches the longest action label.
+    </goab-text>
+  </goab-block>
+
+  <goab-divider mt="xl" mb="xl"></goab-divider>
+
+  <!-- Critical Test Cases for the Fix -->
+  <goab-text tag="h2">
+    Long Elements aren't forced to wrap
+  </goab-text>
+
+  <goab-menu-button text="Baseline actions" (onAction)="onAction($event)">
+    <goab-menu-action
+      key="1"
+      text="Action 1"
+      action="action-1"
+      icon="search"
+    ></goab-menu-action>
+    <goab-menu-action
+      key="2"
+      text="Very very very very very very very very very very very very long action"
+      action="action-2"
+      icon="search"
+    ></goab-menu-action>
+    <goab-menu-action
+      key="3"
+      text="Action 3"
+      action="action-2"
+      icon="search"
+    ></goab-menu-action>
+  </goab-menu-button>
+
+  <!-- Critical Test Cases for the Fix -->
+  <goab-text tag="h2">
+    Max width can be set forcing long elements to wrap
+  </goab-text>
+
+  <goab-menu-button
+    maxWidth="500px"
+    text="Baseline actions"
+    (onAction)="onAction($event)"
+  >
+    <goab-menu-action
+      key="1"
+      text="Action 1"
+      action="action-1"
+      icon="search"
+    ></goab-menu-action>
+    <goab-menu-action
+      key="2"
+      text="Very very very very very very very very very very very very long action"
+      action="action-2"
+      icon="search"
+    ></goab-menu-action>
+    <goab-menu-action
+      key="3"
+      text="Action 3"
+      action="action-2"
+      icon="search"
+    ></goab-menu-action>
+  </goab-menu-button>
+
+
+  <goab-divider mt="xl" mb="xl"></goab-divider>
+
+
+  <!-- Critical Test Cases for the Fix -->
+  <goab-text tag="h2">
+    Components on the right side of the screen will right align the menu options
+  </goab-text>
+  <goab-text tag="p">
+    You may may have to resize the browser to test this
+  </goab-text>
+
+  <goab-block direction="row" gap="l" width="100%">
+    <div style="width: 100%"></div>
+    <goab-menu-button text="Baseline actions" (onAction)="onAction($event)">
+      <goab-menu-action
+        key="1"
+        text="Action 1"
+        action="action-1"
+        icon="search"
+      ></goab-menu-action>
+      <goab-menu-action
+        key="2"
+        text="Very very very very very very very very very very very very long action"
+        action="action-2"
+        icon="search"
+      ></goab-menu-action>
+      <goab-menu-action
+        key="3"
+        text="Action 3"
+        action="action-2"
+        icon="search"
+      ></goab-menu-action>
+    </goab-menu-button>
+  </goab-block>
+
+
+  <goab-divider mt="xl" mb="xl"></goab-divider>
+
+
+  <goab-text tag="h2"> Regression tests </goab-text>
+
+  <goab-grid minChildWidth="320px" gap="l">
+    <goab-block direction="column" gap="l" maxWidth="320px">
+      <goab-text tag="p">Some text</goab-text>
+      <goab-menu-button text="Baseline actions" (onAction)="onAction($event)">
+        <goab-menu-action
+          key="1"
+          text="Action 1"
+          action="action-1"
+          icon="search"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="2"
+          text="Very very very very very very very very very very very very long action"
+          action="action-2"
+          icon="search"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="3"
+          text="Action 3"
+          action="action-2"
+          icon="search"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block direction="column" gap="l" maxWidth="320px">
+      <goab-text tag="p">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta earum ipsa ullam
+        beatae at atque non voluptas fugiat sapiente praesentium quisquam possimus
+        repellat, illo voluptates nisi obcaecati quos. Mollitia, recusandae.
+      </goab-text>
+      <goab-menu-button text="Baseline actions" (onAction)="onAction($event)">
+        <goab-menu-action
+          key="1"
+          text="Action 1"
+          action="action-1"
+          icon="search"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="2"
+          text="Very very very very very very very very very very very very long action"
+          action="action-2"
+          icon="search"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="3"
+          text="Action 3"
+          action="action-2"
+          icon="search"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+
+    <goab-block direction="column" gap="l" maxWidth="320px">
+      <goab-text tag="p">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta earum ipsa ullam
+        beatae at atque non voluptas fugiat sapiente praesentium quisquam possimus
+        repellat, illo voluptates nisi obcaecati quos. Mollitia, recusandae.
+      </goab-text>
+      <goab-menu-button text="Baseline actions" (onAction)="onAction($event)">
+        <goab-menu-action
+          key="1"
+          text="Action 1"
+          action="action-1"
+          icon="search"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="2"
+          text="Very very very very very very very very very very very very long action"
+          action="action-2"
+          icon="search"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="3"
+          text="Action 3"
+          action="action-2"
+          icon="search"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </goab-block>
+  </goab-grid>
+</goab-block>
