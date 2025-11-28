@@ -2,14 +2,13 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 export * from "./radio";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   name: string;
   value?: string;
   id?: string;
@@ -24,7 +23,9 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-radio-group": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-radio-group": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
@@ -43,62 +44,41 @@ export interface GoabRadioGroupProps extends Margins, DataGridProps {
 }
 
 export function GoabRadioGroup(props: GoabRadioGroupProps): JSX.Element {
-  const [dataGridProps, {
-    name,
-    value,
-    children,
-    orientation,
-    disabled,
-    error,
-    id,
-    testId,
-    ariaLabel,
-    mt,
-    mr,
-    mb,
-    ml,
-    onChange,
-  }] = useDataGridProps(props);
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["disabled", "error", "onChange"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!el.current) return;
 
     const listener = (e: Event) => {
       const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
-      onChange?.(detail);
+      props.onChange?.(detail);
     };
 
     const currentEl = el.current;
-    if (onChange) {
+    if (props.onChange) {
       currentEl.addEventListener("_change", listener);
     }
 
     return () => {
-      if (onChange) {
+      if (props.onChange) {
         currentEl.removeEventListener("_change", listener);
       }
     };
-  }, [name, onChange]);
+  }, [props.name, props.onChange]);
 
   return (
     <goa-radio-group
-      testid={testId}
       ref={el}
-      id={id}
-      name={name}
-      value={value}
-      orientation={orientation}
-      disabled={disabled ? "true" : undefined}
-      error={error ? "true" : undefined}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      {...dataGridProps}
+      disabled={props.disabled ? "true" : undefined}
+      error={props.error ? "true" : undefined}
+      {..._props}
     >
-      {children}
+      {props.children}
     </goa-radio-group>
   );
 }

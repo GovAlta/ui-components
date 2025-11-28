@@ -1,13 +1,12 @@
 import {
   GoabDropdownOnChangeDetail,
   GoabIconType,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
   arialabel?: string;
   arialabelledby?: string;
   disabled?: string;
@@ -33,7 +32,9 @@ declare module "react" {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
@@ -77,37 +78,13 @@ function stringify(value: string | string[] | undefined): string {
 }
 
 export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
-  const [
-    dataGridProps,
-    {
-      name,
-      value,
-      onChange,
-      ariaLabel,
-      ariaLabelledBy,
-      id,
-      children,
-      disabled,
-      error,
-      filterable,
-      leadingIcon,
-      maxHeight,
-      multiselect,
-      native,
-      placeholder,
-      testId,
-      width,
-      maxWidth,
-      autoComplete,
-      relative,
-      mb,
-      ml,
-      mr,
-      mt,
-    },
-  ] = useDataGridProps(props);
-
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["value", "onChange", "disabled", "error", "filterable", "multiselect", "native", "relative"],
+    attributeMapping: "lowercase",
+  });
+
   useEffect(() => {
     if (!el.current) {
       return;
@@ -115,46 +92,31 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-      onChange?.(detail);
+      props.onChange?.(detail);
     };
-    if (onChange) {
+    if (props.onChange) {
       current.addEventListener("_change", handler);
     }
     return () => {
-      if (onChange) {
+      if (props.onChange) {
         current.removeEventListener("_change", handler);
       }
     };
-  }, [el, onChange]);
+  }, [el, props.onChange]);
 
   return (
     <goa-dropdown
       ref={el}
-      name={name}
-      value={stringify(value)}
-      arialabel={ariaLabel}
-      arialabelledby={ariaLabelledBy}
-      disabled={disabled ? "true" : undefined}
-      error={error ? "true" : undefined}
-      filterable={filterable ? "true" : undefined}
-      leadingicon={leadingIcon}
-      maxheight={maxHeight}
-      mb={mb}
-      ml={ml}
-      mr={mr}
-      mt={mt}
-      multiselect={multiselect ? "true" : undefined}
-      native={native ? "true" : undefined}
-      placeholder={placeholder}
-      testid={testId}
-      width={width}
-      maxwidth={maxWidth}
-      relative={relative ? "true" : undefined}
-      autocomplete={autoComplete}
-      id={id}
-      {...dataGridProps}
+      value={stringify(props.value)}
+      disabled={props.disabled ? "true" : undefined}
+      error={props.error ? "true" : undefined}
+      filterable={props.filterable ? "true" : undefined}
+      multiselect={props.multiselect ? "true" : undefined}
+      native={props.native ? "true" : undefined}
+      relative={props.relative ? "true" : undefined}
+      {..._props}
     >
-      {children}
+      {props.children}
     </goa-dropdown>
   );
 }

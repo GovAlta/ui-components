@@ -1,7 +1,7 @@
-import { GoabTableSortDirection } from "@abgov/ui-components-common";
+import { DataGridProps, GoabTableSortDirection } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   name?: string;
@@ -25,11 +25,13 @@ export interface GoabTableSortProps extends DataGridProps {
 }
 
 export function GoabTableSortHeader(props: GoabTableSortProps): JSX.Element {
-  const [dataGridProps, { name, direction = "none", children }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
 
   return (
-    <goa-table-sort-header name={name} direction={direction} {...dataGridProps}>
-      {children}
+    <goa-table-sort-header {..._props}>
+      {props.children}
     </goa-table-sort-header>
   );
 }

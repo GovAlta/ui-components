@@ -1,9 +1,8 @@
 import { ReactNode, useEffect, useRef } from "react";
-import { Margins } from "@abgov/ui-components-common";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { Margins, DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | null>;
   id?: string;
   name?: string;
   "continue-msg"?: string;
@@ -13,7 +12,9 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-subform": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-subform": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
@@ -27,63 +28,54 @@ interface GoabPublicSubformProps extends Margins, DataGridProps {
   children: ReactNode;
 }
 
-export function GoabPublicSubform(props: GoabPublicSubformProps) {
-  const [dataGridProps, {
-    id = "",
-    name = "",
-    continueMsg = "",
-    onInit,
-    onStateChange,
-    children,
-    mt,
-    mr,
-    mb,
-    ml,
-  }] = useDataGridProps(props);
+export function GoabPublicSubform({
+  id = "",
+  name = "",
+  continueMsg = "",
+  ...props
+}: GoabPublicSubformProps) {
   const ref = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(
+    { id, name, continueMsg, ...props },
+    {
+      exclude: ["onInit", "onStateChange"],
+      attributeMapping: "kebab",
+    }
+  );
 
   useEffect(() => {
     if (!ref.current) return;
     const current = ref.current;
 
     const initListener = (e: Event) => {
-      onInit?.(e);
+      props.onInit?.(e);
     };
 
     const stateChangeListener = (e: Event) => {
-      onStateChange?.(e);
+      props.onStateChange?.(e);
     };
 
-    if (onInit) {
+    if (props.onInit) {
       current.addEventListener("_init", initListener);
     }
-    if (onStateChange) {
+    if (props.onStateChange) {
       current.addEventListener("_stateChange", stateChangeListener);
     }
 
     return () => {
-      if (onInit) {
+      if (props.onInit) {
         current.removeEventListener("_init", initListener);
       }
-      if (onStateChange) {
+      if (props.onStateChange) {
         current.removeEventListener("_stateChange", stateChangeListener);
       }
     };
-  }, [ref, onInit, onStateChange]);
+  }, [ref, props.onInit, props.onStateChange]);
 
   return (
-    <goa-public-subform
-      ref={ref}
-      id={id}
-      name={name}
-      continue-msg={continueMsg}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      {...dataGridProps}
-    >
-      {children}
+    <goa-public-subform ref={ref} {..._props}>
+      {props.children}
     </goa-public-subform>
   );
 }

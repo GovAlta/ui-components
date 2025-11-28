@@ -1,7 +1,7 @@
-import { Margins } from "@abgov/ui-components-common";
+import { DataGridProps, Margins } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   elevation?: number;
@@ -27,29 +27,13 @@ export interface GoabCardProps extends Margins, DataGridProps {
 }
 
 export function GoabCard(props: GoabCardProps): JSX.Element {
-  const [dataGridProps, {
-    elevation,
-    width,
-    mt,
-    mr,
-    mb,
-    ml,
-    testId,
-    children
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
 
   return (
-    <goa-card
-      width={width}
-      elevation={elevation}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-      {...dataGridProps}
-    >
-      {children}
+    <goa-card {..._props}>
+      {props.children}
     </goa-card>
   );
 }

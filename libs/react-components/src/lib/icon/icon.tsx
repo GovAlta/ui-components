@@ -4,11 +4,11 @@ import {
   GoabIconSize,
   GoabIconTheme,
   GoabIconType,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface IonIconProps {
   name: GoabIconType | GoabIconFilledType;
@@ -60,40 +60,17 @@ interface WCProps extends Margins {
 }
 
 export function GoabIcon(props: GoabIconProps): JSX.Element {
-  const [dataGridProps, {
-    type,
-    theme,
-    size,
-    inverted, // TODO: change to boolean only
-    fillColor,
-    opacity,
-    title,
-    ariaLabel,
-    mt,
-    mr,
-    mb,
-    ml,
-    testId,
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["inverted"],
+    attributeMapping: "lowercase",
+  });
 
   return (
     <goa-icon
-      type={type}
-      theme={theme}
-      size={size}
       inverted={
-        typeof inverted === "boolean" ? (inverted ? "true" : undefined) : inverted
+        typeof props.inverted === "boolean" ? (props.inverted ? "true" : undefined) : props.inverted
       }
-      fillcolor={fillColor}
-      opacity={opacity}
-      title={title}
-      arialabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-      {...dataGridProps}
+      {..._props}
     />
   );
 }

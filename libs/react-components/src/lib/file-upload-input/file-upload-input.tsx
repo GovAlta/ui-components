@@ -1,12 +1,12 @@
 import {
+  DataGridProps,
   GoabFileUploadInputOnSelectFileDetail,
   GoabFileUploadInputVariant,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
-  ref: React.RefObject<HTMLElement | null>;
   variant?: GoabFileUploadInputVariant;
   accept?: string;
   maxfilesize?: string;
@@ -17,7 +17,9 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
@@ -32,14 +34,12 @@ export interface GoabFileUploadInputProps extends DataGridProps {
 }
 
 export function GoabFileUploadInput(props: GoabFileUploadInputProps) {
-  const [dataGridProps, {
-    variant,
-    accept,
-    maxFileSize,
-    testId,
-    onSelectFile,
-  }] = useDataGridProps(props);
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["onSelectFile"],
+    attributeMapping: "lowercase",
+  });
 
   useEffect(() => {
     if (!el.current) return;
@@ -47,23 +47,16 @@ export function GoabFileUploadInput(props: GoabFileUploadInputProps) {
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail;
-      onSelectFile(detail);
+      props.onSelectFile(detail);
     };
     current.addEventListener("_selectFile", handler);
     return () => {
       current.removeEventListener("_selectFile", handler);
     };
-  }, [el, onSelectFile]);
+  }, [el, props.onSelectFile]);
 
   return (
-    <goa-file-upload-input
-      ref={el}
-      variant={variant}
-      accept={accept}
-      maxfilesize={maxFileSize}
-      testid={testId}
-      {...dataGridProps}
-    />
+    <goa-file-upload-input ref={el} {..._props} />
   );
 }
 

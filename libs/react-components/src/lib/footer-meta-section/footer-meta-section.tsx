@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   testid?: string;
@@ -21,11 +22,13 @@ export interface GoabAppFooterMetaSectionProps extends DataGridProps {
 }
 
 export function GoabAppFooterMetaSection(props: GoabAppFooterMetaSectionProps) {
-  const [dataGridProps, { testId, children }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
 
   return (
-    <goa-app-footer-meta-section testid={testId} slot="meta" {...dataGridProps}>
-      {children}
+    <goa-app-footer-meta-section slot="meta" {..._props}>
+      {props.children}
     </goa-app-footer-meta-section>
   );
 }

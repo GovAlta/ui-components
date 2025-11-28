@@ -1,11 +1,11 @@
 import {
   GoabButtonGroupAlignment,
   GoabButtonGroupGap,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   alignment: GoabButtonGroupAlignment;
@@ -30,29 +30,13 @@ export interface GoabButtonGroupProps extends Margins, DataGridProps {
 }
 
 export function GoabButtonGroup(props: GoabButtonGroupProps): JSX.Element {
-  const [dataGridProps, {
-    alignment,
-    gap,
-    testId,
-    children,
-    mt,
-    mr,
-    mb,
-    ml
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
 
   return (
-    <goa-button-group
-      alignment={alignment}
-      gap={gap}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-      {...dataGridProps}
-    >
-      {children}
+    <goa-button-group {..._props}>
+      {props.children}
     </goa-button-group>
   );
 }

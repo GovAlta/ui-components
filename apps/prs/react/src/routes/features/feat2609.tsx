@@ -248,7 +248,8 @@ export function Feat2609Route() {
                 onChange={() => toggleSelection(user.idNumber)}
               />
 
-              <GoabBlock direction="column" gap="s" alignment="start" style={{ flex: 1 }}>
+              <div style={{ flex: 1 }}>
+              <GoabBlock direction="column" gap="s" alignment="start">
                 <GoabBlock direction="row" gap="s" alignment="center">
                   <strong data-grid="cell-1">{user.nameOfChild}</strong>
                   <GoabBlock data-grid="cell-2">
@@ -298,6 +299,7 @@ export function Feat2609Route() {
                   </GoabBlock>
                 </GoabBlock>
               </GoabBlock>
+              </div>
 
               <GoabButton type="tertiary" data-grid="cell-3" onClick={() => onOpen(user.idNumber)}>
                 Open

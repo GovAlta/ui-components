@@ -5,9 +5,9 @@ import {
   GoabTextTextElement,
   GoabTextSize,
   GoabTextColor,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   as?: GoabTextTextElement | GoabTextHeadingElement;
@@ -38,22 +38,16 @@ interface GoATextProps extends Margins, DataGridProps {
 }
 
 export function GoabText(props: GoATextProps): JSX.Element {
-  const [dataGridProps,{ as, tag, size, maxWidth, color, id, mt, mb, ml, mr, children }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["as", "tag"],
+  });
 
   return (
     <goa-text
-      as={tag || as}
-      size={size}
-      maxwidth={maxWidth}
-      color={color}
-      id={id}
-      mt={mt}
-      mb={mb}
-      ml={ml}
-      mr={mr}
-      {...dataGridProps}
+      as={props.tag || props.as}
+      {..._props}
     >
-      {children}
+      {props.children}
     </goa-text>
   );
 }

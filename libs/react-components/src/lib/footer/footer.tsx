@@ -1,5 +1,6 @@
 import { ReactNode, type JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   maxcontentwidth?: string;
@@ -28,15 +29,13 @@ export interface GoabAppFooterProps extends DataGridProps {
 export type FooterProps = GoabAppFooterProps;
 
 export function GoabAppFooter(props: GoabAppFooterProps): JSX.Element {
-  const [dataGridProps, {
-    maxContentWidth,
-    children,
-    testId,
-    url,
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-app-footer maxcontentwidth={maxContentWidth} testid={testId} url={url} {...dataGridProps}>
-      {children}
+    <goa-app-footer {..._props}>
+      {props.children}
     </goa-app-footer>
   );
 }

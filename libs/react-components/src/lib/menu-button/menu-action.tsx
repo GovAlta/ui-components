@@ -1,5 +1,6 @@
-import { GoabIconType } from "@abgov/ui-components-common";
+import { DataGridProps, GoabIconType } from "@abgov/ui-components-common";
 import type { JSX } from "react";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps {
   text: string;
@@ -17,16 +18,20 @@ declare module "react" {
   }
 }
 
-export interface GoabMenuActionProps {
+export interface GoabMenuActionProps extends DataGridProps {
   text: string;
   action: string;
   icon?: GoabIconType;
   testId?: string;
 }
 
-export function GoabMenuAction({ text, icon, action, testId }: GoabMenuActionProps): JSX.Element {
+export function GoabMenuAction(props: GoabMenuActionProps): JSX.Element {
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
   return (
-    <goa-menu-action text={text} action={action} icon={icon} testid={testId}></goa-menu-action>
+    <goa-menu-action {..._props}></goa-menu-action>
   );
 }
 

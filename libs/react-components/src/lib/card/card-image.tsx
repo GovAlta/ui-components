@@ -1,5 +1,6 @@
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { DataGridProps } from "@abgov/ui-components-common";
+import { extractProps } from "../common/extract-props";
 interface WCProps {
   src: string;
   height: string;
@@ -20,8 +21,11 @@ export interface GoabCardImageProps extends DataGridProps {
 }
 
 export function GoabCardImage(props: GoabCardImageProps): JSX.Element {
-  const [dataGridProps, { src, height}] = useDataGridProps(props);
-  return <goa-card-image src={src} height={height}  {...dataGridProps} />;
+  const _props = extractProps<WCProps>(props, {
+    attributeMapping: "lowercase",
+  });
+
+  return <goa-card-image {..._props} />;
 }
 
 export default GoabCardImage;

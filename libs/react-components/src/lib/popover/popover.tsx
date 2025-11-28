@@ -1,6 +1,6 @@
-import { GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
+import { DataGridProps, GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   maxwidth?: string;
@@ -35,37 +35,19 @@ export interface GoabPopoverProps extends Margins, DataGridProps {
 }
 
 export function GoabPopover(props: GoabPopoverProps): JSX.Element {
-  const [dataGridProps, {
-    target,
-    testId,
-    maxWidth,
-    minWidth,
-    padded,
-    position,
-    relative,
-    children,
-    mt,
-    mr,
-    mb,
-    ml,
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["target", "padded", "relative"],
+    attributeMapping: "lowercase",
+  });
 
   return (
     <goa-popover
-      testid={testId}
-      maxwidth={maxWidth}
-      minwidth={minWidth}
-      padded={typeof padded === "undefined" ? undefined : padded ? "true" : "false"}
-      position={position}
-      relative={relative ? "true" : undefined}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      {...dataGridProps}
+      padded={typeof props.padded === "undefined" ? undefined : props.padded ? "true" : "false"}
+      relative={props.relative ? "true" : undefined}
+      {..._props}
     >
-      {children}
-      {target && <div slot="target">{target}</div>}
+      {props.children}
+      {props.target && <div slot="target">{props.target}</div>}
     </goa-popover>
   );
 }

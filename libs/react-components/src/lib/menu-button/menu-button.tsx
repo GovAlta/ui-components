@@ -6,8 +6,9 @@
  * It also includes TypeScript interfaces for improved type checking and development experience.
  */
 
-import { GoabButtonType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import { DataGridProps, GoabButtonType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
+import { extractProps } from "../common/extract-props";
 
 /**
  * Props definition for the `goab-menu-button` Web Component.
@@ -49,7 +50,7 @@ declare module "react" {
  * @property {Function} [onAction] - Callback function invoked when an action event is emitted by the component.
  * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
  */
-export interface GoabMenuButtonProps {
+export interface GoabMenuButtonProps extends DataGridProps {
   text: string;
   type?: GoabButtonType;
   testId?: string;
@@ -81,13 +82,19 @@ export interface GoabMenuButtonProps {
  * ```
  */
 export function GoabMenuButton({
-  text,
   type = "primary",
-  testId,
   onAction,
   children,
+  ...props
 }: GoabMenuButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
+
+  const _props = extractProps<WCProps>(
+    { type, ...props },
+    {
+      attributeMapping: "lowercase",
+    }
+  );
 
   useEffect(() => {
     if (!el.current) {
@@ -111,7 +118,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button ref={el} text={text} type={type} testid={testId}>
+    <goa-menu-button {..._props} ref={el}>
       {children}
     </goa-menu-button>
   );

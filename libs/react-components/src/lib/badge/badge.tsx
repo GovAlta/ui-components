@@ -1,6 +1,6 @@
-import { GoabBadgeType, Margins, GoabIconType } from "@abgov/ui-components-common";
+import { DataGridProps, GoabBadgeType, GoabIconType, Margins } from "@abgov/ui-components-common";
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   type: GoabBadgeType;
@@ -48,33 +48,16 @@ function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false"
 }
 
 export function GoabBadge(props: GoabBadgeProps): JSX.Element {
-  const [dataGridProps, {
-    type,
-    content,
-    icon,
-    testId,
-    mt,
-    mr,
-    mb,
-    ml,
-    ariaLabel,
-    iconType,
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["icon"],
+    attributeMapping: "lowercase",
+  });
 
   return (
     <goa-badge
-      type={type}
-      content={content}
       // Handle icon display priority: explicit icon prop takes precedence over iconType
-      icon={getIconValue(icon, iconType)}
-      testid={testId}
-      arialabel={ariaLabel}
-      icontype={iconType}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      {...dataGridProps}
+      icon={getIconValue(props.icon, props.iconType)}
+      {..._props}
     />
   );
 }

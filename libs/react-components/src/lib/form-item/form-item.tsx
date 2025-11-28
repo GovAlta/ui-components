@@ -1,11 +1,11 @@
 import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
-  Margins,
+  Margins, DataGridProps,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { DataGridProps, useDataGridProps } from "../common/data-props";
+import { extractProps } from "../common/extract-props";
 
 interface WCProps extends Margins {
   label?: string;
@@ -50,45 +50,21 @@ export interface GoabFormItemProps extends Margins, DataGridProps {
 }
 
 export function GoabFormItem(props: GoabFormItemProps): JSX.Element {
-  const [dataGridProps, {
-    children,
-    helpText,
-    error,
-    requirement,
-    label,
-    labelSize,
-    maxWidth,
-    publicFormSummaryOrder,
-    name,
-    mt,
-    mr,
-    mb,
-    ml,
-    testId,
-    id,
-  }] = useDataGridProps(props);
+  const _props = extractProps<WCProps>(props, {
+    exclude: ["error", "helpText", "publicFormSummaryOrder"],
+    attributeMapping: "lowercase",
+  });
 
   return (
     <goa-form-item
-      label={label}
-      labelsize={labelSize}
-      error={typeof error === "string" ? error : undefined}
-      requirement={requirement}
-      helptext={typeof helpText === "string" ? helpText : undefined}
-      maxwidth={maxWidth}
-      public-form-summary-order={publicFormSummaryOrder}
-      name={name}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-      testid={testId}
-      id={id}
-      {...dataGridProps}
+      error={typeof props.error === "string" ? props.error : undefined}
+      helptext={typeof props.helpText === "string" ? props.helpText : undefined}
+      public-form-summary-order={props.publicFormSummaryOrder}
+      {..._props}
     >
-      {error && typeof error !== "string" && <div slot="error">{error}</div>}
-      {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}
-      {children}
+      {props.error && typeof props.error !== "string" && <div slot="error">{props.error}</div>}
+      {props.helpText && typeof props.helpText !== "string" && <div slot="helptext">{props.helpText}</div>}
+      {props.children}
     </goa-form-item>
   );
 }
