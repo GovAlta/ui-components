@@ -25,6 +25,7 @@ export function App() {
             <GoabSideMenuGroup heading="Bugs">
               <Link to="/bugs/2152">2152</Link>
               <Link to="/bugs/2331">2331</Link>
+              <Link to="/bugs/2333">2333</Link>
               <Link to="/bugs/2393">2393</Link>
               <Link to="/bugs/2404">2404</Link>
               <Link to="/bugs/2408">2408</Link>

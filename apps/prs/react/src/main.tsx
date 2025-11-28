@@ -7,6 +7,7 @@ import App from "./app/app";
 
 import { Bug2152Route } from "./routes/bugs/bug2152";
 import { Bug2331Route } from "./routes/bugs/bug2331";
+import { Bug2333Route } from "./routes/bugs/bug2333";
 import { Bug2393Route } from "./routes/bugs/bug2393";
 import { Bug2404Route } from "./routes/bugs/bug2404";
 import { Bug2408Route } from "./routes/bugs/bug2408";
@@ -54,6 +55,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="bugs/2152" element={<Bug2152Route />} />
           <Route path="bugs/2331" element={<Bug2331Route />} />
+          <Route path="bugs/2333" element={<Bug2333Route />} />
           <Route path="bugs/2393" element={<Bug2393Route />} />
           <Route path="bugs/2404" element={<Bug2404Route />} />
           <Route path="bugs/2408" element={<Bug2408Route />} />
