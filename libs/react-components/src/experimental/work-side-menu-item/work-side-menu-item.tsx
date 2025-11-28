@@ -1,7 +1,8 @@
-import { type JSX } from "react";
 import { type JSX, useEffect, useRef } from "react";
 import { GoabWorkSideMenuItemType } from "@abgov/ui-components-common";
+
 interface WCProps {
+  ref: React.RefObject<HTMLElement | null>;
   label: string;
   url?: string;
   badge?: string;
@@ -10,6 +11,7 @@ interface WCProps {
   icon?: string;
   testid?: string;
   type?: GoabWorkSideMenuItemType;
+  hasonclickhandler?: string;
 }
 
 declare module "react" {
@@ -35,7 +37,7 @@ export interface GoabWorkSideMenuItemProps {
   onClick?: () => void;
 }
 
-export function GoaxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Element {
+export function GoabxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
   useEffect(() => {
     if (!el.current || !props.onClick) {
@@ -44,9 +46,9 @@ export function GoaxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Elem
     const handleClick = () => {
       props.onClick?.();
     }
-    el.current?.addEventListener("work-side-menu:update", handleClick);
+    el.current?.addEventListener("_click", handleClick);
     return () => {
-      el.current?.removeEventListener("work-side-menu:update",  handleClick);
+      el.current?.removeEventListener("_click", handleClick);
     };
   }, [el, props.onClick]);
 
@@ -61,6 +63,7 @@ export function GoaxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Elem
       icon={props.icon}
       testid={props.testId}
       type={props.type}
+      hasonclickhandler={props.onClick ? "true" : "false"}
     >
       {props.children}
       {props.popoverContent && <div slot="popoverContent">{props.popoverContent}</div>}

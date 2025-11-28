@@ -348,7 +348,7 @@
   }
 
   function addEventListeners() {
-    _rootEl.addEventListener("_update", setCurrentUrl);
+    _rootEl.addEventListener("_click", setCurrentUrl);
     _rootEl.addEventListener("_mountItem", addMenuLink);
     _rootEl.addEventListener("_hoverItem", handleHover as EventListener);
     _rootEl.addEventListener("_toggle", toggleMenu);
@@ -358,7 +358,7 @@
   }
 
   function removeEventListeners() {
-    _rootEl.removeEventListener("_update", setCurrentUrl);
+    _rootEl.removeEventListener("_click", setCurrentUrl);
     _rootEl.removeEventListener("_mountItem", addMenuLink);
     _rootEl.removeEventListener("_hoverItem", handleHover as EventListener);
     _rootEl.removeEventListener("_toggle", toggleMenu);
