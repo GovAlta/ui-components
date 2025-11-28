@@ -64,7 +64,7 @@ export function GoabRadioGroup({
 
     const listener = (e: Event) => {
       const detail = (e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail;
-      onChange?.(detail);
+      onChange?.({ ...detail, event: e });
     };
 
     const currentEl = el.current;

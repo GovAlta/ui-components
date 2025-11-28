@@ -84,7 +84,7 @@ export function GoabDropdown(props: GoabDropdownProps): JSX.Element {
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-      props.onChange?.(detail);
+      props.onChange?.({ ...detail, event: e });
     };
     if (props.onChange) {
       current.addEventListener("_change", handler);

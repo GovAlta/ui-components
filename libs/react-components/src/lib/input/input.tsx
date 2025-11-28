@@ -174,7 +174,7 @@ export function GoabInput({
     const current = ref.current;
     const changeListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
-      onChange?.(detail);
+      onChange?.({ ...detail, event: e });
     };
     const clickListener = () => {
       onTrailingIconClick?.();
@@ -182,17 +182,17 @@ export function GoabInput({
 
     const focusListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail;
-      onFocus?.(detail);
+      onFocus?.({ ...detail, event: e });
     };
 
     const blurListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnBlurDetail>).detail;
-      onBlur?.(detail);
+      onBlur?.({ ...detail, event: e });
     };
 
     const keypressListener = (e: Event) => {
       const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail;
-      onKeyPress?.(detail);
+      onKeyPress?.({ ...detail, event: e });
     };
 
     current.addEventListener("_change", changeListener);

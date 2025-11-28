@@ -45,7 +45,7 @@ export function GoabFileUploadInput({
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail;
-      onSelectFile(detail);
+      onSelectFile({ ...detail, event: e });
     };
     current.addEventListener("_selectFile", handler);
     return () => {
