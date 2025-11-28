@@ -49,6 +49,7 @@ export * from "./icon/icon";
 export * from "./icon-button/icon-button";
 export * from "./input/input";
 export * from "./input-number/input-number";
+export * from "./linear-progress/linear-progress";
 export * from "./link/link";
 export * from "./microsite-header/microsite-header";
 export * from "./modal/modal";

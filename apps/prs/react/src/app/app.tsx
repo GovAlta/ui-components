@@ -64,6 +64,7 @@ export function App() {
               <Link to="/features/2722">2722</Link>
               <Link to="/features/2730">2730</Link>
               <Link to="/features/2829">2829</Link>
+              <Link to="/features/1908">1908</Link>
             </GoabSideMenuGroup>
           </GoabSideMenu>
         </section>
