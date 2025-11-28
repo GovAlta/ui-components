@@ -31,7 +31,7 @@
   export let stickyheader: string = "false";
   export let striped: string = "false";
   export let variant: Variant = "normal";
-  export let version: VersionType = "2";
+  export let version: VersionType = "1";
   export let testid: string = "";
 
   export let mt: Spacing = null;
@@ -159,8 +159,17 @@
     border-collapse: collapse;
   }
 
-  /* V2 Border and Border-Radius */
+  /* V2 Border and Border-Radius - for non-React (table created internally) */
   .v2 table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: var(--goa-table-container-border, 1px solid #e7e7e7);
+    border-radius: var(--goa-table-border-radius-container, 16px);
+    overflow: hidden;
+  }
+
+  /* V2 Border and Border-Radius - for React which passes table via slot */
+  .v2 :global(::slotted(table)) {
     border-collapse: separate;
     border-spacing: 0;
     border: var(--goa-table-container-border, 1px solid #e7e7e7);

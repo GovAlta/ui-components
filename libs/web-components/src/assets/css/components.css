@@ -39,6 +39,15 @@ goa-table table {
   border-collapse: collapse;
 }
 
+/* V2: Border and border-radius on the table */
+goa-table[version="2"] table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: var(--goa-table-container-border, 1px solid #e7e7e7);
+  border-radius: var(--goa-table-border-radius-container, 16px);
+  overflow: hidden;
+}
+
 goa-table.sticky thead {
   position: sticky;
   top: 0;
@@ -150,6 +159,15 @@ goa-table td.goa-table-cell--checkbox {
   padding-top: var(--goa-table-padding-cell-checkbox, 2px) !important;
   padding-bottom: var(--goa-table-padding-cell-checkbox, 2px) !important;
   text-align: center;
+}
+
+/* V2: Checkbox cells in first column need 24px left padding */
+goa-table[version="2"] tbody td.goa-table-cell--checkbox:first-child {
+  padding-left: var(--goa-space-l, 24px) !important;
+}
+
+goa-table[version="2"] thead th.goa-table-cell--checkbox:first-child {
+  padding-left: var(--goa-space-l, 24px) !important;
 }
 
 goa-table td.goa-table-cell--form-field {

@@ -777,8 +777,8 @@
       inset: 0;
       z-index: 999;
       border: none;
-      background-color: var(--goa-color-greyscale-400);
-      opacity: 0.3;
+      background-color: var(--goa-modal-overlay-color);
+      opacity: var(--goa-modal-overlay-opacity);
     }
 
     .container {
