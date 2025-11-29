@@ -421,10 +421,8 @@
       _popoverEl.style.position = "absolute";
       if (displayOnTop) {
         _popoverEl.style.bottom = `${targetRect.height}px`;
-        _popoverEl.style.top = "auto";
       } else {
         _popoverEl.style.bottom = "auto";
-        _popoverEl.style.top = "auto";
       }
 
       // Move the popover to the left if it is too far to the right
@@ -435,6 +433,7 @@
     if (rightAligned) {
       _popoverEl.style.right = "0";
       _popoverEl.style.left = "";
+    }
     }
   }
 </script>

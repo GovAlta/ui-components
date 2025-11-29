@@ -20,7 +20,7 @@ import { ReactNode, type JSX, useRef, useEffect } from "react";
  * @property {React.RefObject<HTMLElement | null>} ref - A reference object pointing to the Web Component's DOM element.
  */
 interface WCProps {
-  text: string;
+  text?: string;
   type: GoabButtonType;
   "max-width"?: string,
   "leading-icon"?: GoabIconType;
@@ -54,7 +54,7 @@ declare module "react" {
  * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
  */
 export interface GoabMenuButtonProps {
-  text: string;
+  text?: string;
   type?: GoabButtonType;
   maxWidth?: string;
   leadingIcon?: GoabIconType;

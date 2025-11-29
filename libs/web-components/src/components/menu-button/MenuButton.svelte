@@ -16,7 +16,7 @@
 
   // Public props
 
-  export let text: string;
+  export let text: string | undefined = undefined;
   export let type: "primary" | "secondary" | "tertiary" = "primary";
   export let testid: string = "";
   export let leadingIcon: GoAIconType | undefined = undefined;
@@ -137,21 +137,30 @@
   bind:this={_rootEl}
   on:_close={onClose}
   on:_open={open}
-  padded="false"
   tabindex="-1"
   maxwidth={maxWidth || "none"}
   prevent-scroll-into-view={true}
 >
-  <goa-button
-    bind:this={_targetEl}
-    data-testid={testid}
-    slot="target"
-    leadingicon={leadingIcon}
-    {type}
-    trailingicon={_icon}
-  >
-    {text}
-  </goa-button>
+  {#if text}
+    <goa-button
+      bind:this={_targetEl}
+      data-testid={testid}
+      slot="target"
+      leadingicon={leadingIcon}
+      {type}
+      trailingicon={_icon}
+    >
+      {text}
+    </goa-button>
+  {:else}
+    <goa-icon-button
+      bind:this={_targetEl}
+      data-testid={testid}
+      slot="target"
+      icon={leadingIcon || _icon}
+      variant="dark"
+    />
+  {/if}
   <goa-block
     bind:this={_blockEl}
     direction="column"
