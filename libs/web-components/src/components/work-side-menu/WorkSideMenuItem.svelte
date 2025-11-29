@@ -60,6 +60,14 @@
   function handleUpdateItem(e: CustomEvent) {
     let currentLink = e.detail.current;
     current = _linkEl === currentLink;
+    if (current) {
+      dispatch(
+        _rootEl,
+        "_itemCurrent",
+        { el: _linkEl, label: label },
+        { bubbles: true },
+      );
+    }
   }
 
   function handleMouseEnter() {
@@ -72,17 +80,11 @@
   }
 
   function addEventListeners() {
-    _linkEl.addEventListener(
-      "_update",
-      handleUpdateItem as EventListener,
-    );
+    _linkEl.addEventListener("_update", handleUpdateItem as EventListener);
   }
 
   function removeEventListeners() {
-    _linkEl.removeEventListener(
-      "_update",
-      handleUpdateItem as EventListener,
-    );
+    _linkEl.removeEventListener("_update", handleUpdateItem as EventListener);
   }
 </script>
 
@@ -113,6 +115,11 @@
     <div class="menu-item-label">
       {label}
     </div>
+    {#if $$slots.trailingContent}
+      <div class="trailing-content-slot">
+        <slot name="trailingContent" />
+      </div>
+    {/if}
     {#if badge}
       <div
         class="badge"
@@ -156,7 +163,7 @@
       --goa-work-side-menu-item-text-color,
       var(--goa-color-greyscale-600)
     );
-    min-height: 40px;
+    min-height: var(--goa-work-side-menu-item-min-height, 40px);
   }
 
   .menu-item:hover {
@@ -176,6 +183,10 @@
     outline-offset: 2px;
   }
 
+  goa-icon {
+    display: var(--goa-work-side-menu-item-icon-display, block);
+  }
+
   /* Divider */
   .divider {
     padding-bottom: var(--goa-space-s);
@@ -192,6 +203,10 @@
       var(--goa-typography-body-s)
     );
     animation: delayText 100ms;
+  }
+
+  .trailing-content-slot {
+    display: flex;
   }
 
   /* Current item */
@@ -256,7 +271,8 @@
       padding-left: calc(var(--goa-space-xs) + 2px);
     }
 
-    .menu-item-label {
+    .menu-item-label,
+    .trailing-content-slot {
       display: none;
     }
     .badge {
