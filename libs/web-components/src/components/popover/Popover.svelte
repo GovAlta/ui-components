@@ -29,11 +29,12 @@
     isPointInRectangle,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
+
   // Public
 
   export let testid: string = "popover";
   export let position: "above" | "below" | "right" | "auto" = "auto";
-  export let maxwidth: string = "320px";
+  export let maxwidth: string | "none" = "320px";
   export let minwidth: string = "";
   export let width: string = "";
   export let height: "full" | "wrap-content" = "wrap-content";
@@ -431,9 +432,9 @@
         document.body.clientWidth - targetRect.left < popoverRect.width &&
         targetRect.left > popoverRect.width;
 
-      if (rightAligned) {
-        _popoverEl.style.left = `${targetRect.x - (popoverRect.width - targetRect.width)}px`;
-      }
+    if (rightAligned) {
+      _popoverEl.style.right = "0";
+      _popoverEl.style.left = "";
     }
   }
 </script>
@@ -444,6 +445,7 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={styles(
+    "display: inline-block",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
@@ -468,7 +470,12 @@
     <slot name="target" />
   </button>
 
-  <div style={style("display", _open ? "block" : "none")}>
+  <div
+    style={styles(
+      style("display", _open ? "block" : "none"),
+      style("position", "relative"),
+    )}
+  >
     <section
       bind:clientHeight={_sectionHeight}
       bind:this={_popoverEl}
@@ -502,7 +509,6 @@
     display: inline;
     align-items: center;
     height: 100%;
-    position: relative;
   }
 
   .popover-target {

@@ -11,6 +11,9 @@ export interface WCProps extends Margins {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
+  "min-width"?: string;
+  "max-width"?: string;
+  width?: string;
   testid?: string;
   version?: string;
 }
@@ -29,18 +32,23 @@ export interface GoabBlockProps extends Margins, DataGridProps {
   gap?: Spacing;
   direction?: GoabBlockDirection;
   alignment?: GoabBlockAlignment;
+  minWidth?: string;
+  maxWidth?: string;
+  width?: string;
   testId?: string;
   children?: ReactNode;
 }
 
 export function GoabBlock(props: GoabBlockProps) {
-  const [dataGridProps, { gap, direction, alignment, mt, mr, mb, ml, testId, children}] = useDataGridProps(props);
+  const [dataGridProps, { gap, direction, alignment, mt, mr, mb, ml, testId, minWidth, maxWidth, children}] = useDataGridProps(props);
 
   return (
     <goa-block
       gap={gap}
       direction={direction}
       alignment={alignment}
+      min-width={minWidth}
+      max-width={maxWidth}
       mt={mt}
       mr={mr}
       mb={mb}
