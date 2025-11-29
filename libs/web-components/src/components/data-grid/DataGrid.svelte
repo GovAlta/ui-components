@@ -2,6 +2,7 @@
   tag: "goa-data-grid",
   props: {
     keyboardIcon: { type: "Boolean", reflect: true, attribute: "keyboard-icon" },
+    keyboardIconPosition: { type: "String", reflect: true, attribute: "keyboard-icon-position" },
     keyboardNav: { type: "String", attribute: "keyboard-nav" }
   }
 }} />
@@ -15,6 +16,7 @@
   // ******
 
   export let keyboardIcon = true;
+  export let keyboardIconPosition: "left" | "right" = "left";
   export let keyboardNav: "layout" | "table" = "table";
 
   // *******
@@ -613,7 +615,6 @@
   .keyboard-indicator {
     position: fixed;
     bottom: 12px;
-    left: 12px;
     width: 78px;
     height: 54px;
     z-index: 1000;
@@ -623,6 +624,14 @@
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     pointer-events: none;
+  }
+
+  .keyboard-indicator.left {
+    left: 12px;
+  }
+
+  .keyboard-indicator.right {
+    right: 12px;
   }
 
   .keyboard-indicator.show {
@@ -638,7 +647,7 @@
 <div bind:this={_rootEl} role="grid">
   <slot />
   {#if keyboardIcon && _showKeyboardIcon}
-    <div class="keyboard-indicator show" aria-hidden="true">
+    <div class="keyboard-indicator show {keyboardIconPosition}" aria-hidden="true">
       <svg width="78" height="54" viewBox="0 0 78 54" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="28" y="4" width="22" height="22" rx="3" fill="#333333"/>
         <path d="M39 12.8076C39.0718 12.8077 39.1428 12.8235 39.208 12.8535C39.2732 12.8835 39.3312 12.927 39.3779 12.9814L42.2812 16.3691C42.559 16.6925 42.329 17.1924 41.9033 17.1924H36.0967C35.6711 17.1922 35.4418 16.6924 35.7188 16.3691L38.6211 12.9814C38.6678 12.927 38.7259 12.8835 38.791 12.8535C38.8563 12.8235 38.9281 12.8076 39 12.8076Z" fill="white"/>

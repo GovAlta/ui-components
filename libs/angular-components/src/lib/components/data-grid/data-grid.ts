@@ -9,6 +9,7 @@ import { CommonModule } from "@angular/common";
     <goa-data-grid
       *ngIf="isReady"
       [attr.keyboard-icon]="keyboardIcon ? '' : null"
+      [attr.keyboard-icon-position]="keyboardIconPosition"
       [attr.keyboard-nav]="keyboardNav"
     >
       <ng-content></ng-content>
@@ -18,6 +19,7 @@ import { CommonModule } from "@angular/common";
 })
 export class GoabDataGrid implements OnInit {
   @Input({ transform: booleanAttribute }) keyboardIcon = true;
+  @Input() keyboardIconPosition: "left" | "right" = "left";
   @Input({ required: true }) keyboardNav!: "layout" | "table";
 
   isReady = false;
