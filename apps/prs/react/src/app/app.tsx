@@ -53,6 +53,7 @@ export function App() {
               <Link to="/bugs/3118">3118 Text Component ID</Link>
               <Link to="/bugs/3201">3201 Input Component Events</Link>
               <Link to="/bugs/3215">3215 Drawer Initial Height</Link>
+              <Link to="/bugs/3232">3232 GoabText Tag Size</Link>
               <Link to="/bugs/3248">3248 Dropdown Dynamic Children Sync</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
             </GoabSideMenuGroup>
