@@ -1,11 +1,4 @@
-<svelte:options
-  customElement={{
-    tag: "goa-text",
-    props: {
-      id: { attribute: "id", type: "String", reflect: true },
-    },
-  }}
-/>
+<svelte:options customElement="goa-text" />
 
 <script lang="ts" context="module">
   export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5";
@@ -43,7 +36,30 @@
   let _marginTop: Spacing = null;
 
   /**
-   * Returns a bottom margin value based on the `size` prop
+   * Returns a default size based on the heading tag when size is not explicitly set
+   */
+  function getDefaultSizeForTag(tag: TextElement | HeadingElement): Size | undefined {
+    switch (tag) {
+      case "h1":
+        return "heading-xl";
+      case "h2":
+        return "heading-l";
+      case "h3":
+        return "heading-m";
+      case "h4":
+        return "heading-s";
+      case "h5":
+        return "heading-xs";
+      default:
+        return undefined;
+    }
+  }
+
+  // Derive effective size from explicit size prop or from tag
+  $: effectiveSize = size ?? getDefaultSizeForTag(as);
+
+  /**
+   * Returns a bottom margin value based on the effective size
    */
   function getBottomMargin(): Spacing {
     // override takes precedence
@@ -51,7 +67,7 @@
       return mb;
     }
 
-    switch (size) {
+    switch (effectiveSize) {
       case "heading-xl":
         return "l";
       case "heading-l":
@@ -78,7 +94,7 @@
       return mt;
     }
 
-    switch (size) {
+    switch (effectiveSize) {
       case "heading-xl":
       case "heading-l":
       case "heading-m":
@@ -107,7 +123,7 @@
 
 <svelte:element
   this={as}
-  class={size}
+  class={effectiveSize}
   style={styles(
     style(
       "color",
