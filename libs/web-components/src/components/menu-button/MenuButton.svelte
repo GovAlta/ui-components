@@ -1,13 +1,17 @@
-<svelte:options
-  customElement={{
+<svelte:options customElement={{
     tag: "goa-menu-button",
+    props: {
+      leadingIcon: { attribute: "leading-icon", type: "String" },
+      maxWidth: { type: "String", attribute: "max-width", reflect: true },
+    }
   }}
 />
 
 <script lang="ts">
-  import { GoAIconType } from "../icon/Icon.svelte";
   import { onMount } from "svelte";
-  import { dispatch, receive } from "../../common/utils";
+
+  import { GoAIconType } from "../icon/Icon.svelte";
+  import { dispatch, receive, relay } from "../../common/utils";
   import { MenuAction } from "./MenuAction.svelte";
 
   // Public props
@@ -15,6 +19,8 @@
   export let text: string;
   export let type: "primary" | "secondary" | "tertiary" = "primary";
   export let testid: string = "";
+  export let leadingIcon: GoAIconType | undefined = undefined;
+  export let maxWidth: string;
 
   // Private props
 
@@ -26,6 +32,8 @@
   let _buttonIndex = 0;
 
   let _targetEl: HTMLElement;
+
+  // width of the menu button which is the min-width of the popover menu
   let _menuWidth: number = 0;
 
   // Reactive
@@ -131,12 +139,14 @@
   on:_open={open}
   padded="false"
   tabindex="-1"
+  maxwidth={maxWidth || "none"}
   prevent-scroll-into-view={true}
 >
   <goa-button
     bind:this={_targetEl}
     data-testid={testid}
     slot="target"
+    leadingicon={leadingIcon}
     {type}
     trailingicon={_icon}
   >
@@ -147,6 +157,7 @@
     direction="column"
     gap="none"
     min-width={`${_menuWidth}px`}
+    max-width={maxWidth}
   >
     <slot />
   </goa-block>

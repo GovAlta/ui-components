@@ -1,9 +1,12 @@
-<svelte:options customElement={{
-  tag: "goa-block",
-  props: {
-    minWidth: { type: "String", attribute: "min-width"},
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-block",
+    props: {
+      minWidth: { type: "String", attribute: "min-width" },
+      maxWidth: { type: "String", attribute: "max-width" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -17,6 +20,8 @@
   export let alignment: "center" | "start" | "end" | "normal" = "normal";
   export let testid: string = "";
   export let minWidth: string = "";
+  export let maxWidth: string = "";
+  export let width: string = "";
 
   $: _alignment =
     alignment === "start"
@@ -49,17 +54,16 @@
 <div
   bind:this={_rootEl}
   data-testid={testid}
-  class="block"
-  style={
-    styles(
-      "display: flex",
-      `gap: var(--goa-space-${gap})`,
-      calculateMargin(mt, mr, mb, ml),
-      style("min-width", minWidth),
-      style("align-items", _alignment),
-      style("flex-direction", direction),
-    )
-  }
+  style={styles(
+    "display: flex",
+    `gap: var(--goa-space-${gap})`,
+    calculateMargin(mt, mr, mb, ml),
+    style("min-width", minWidth),
+    style("max-width", maxWidth),
+    style("width", width || "max-content"),
+    style("align-items", _alignment),
+    style("flex-direction", direction),
+  )}
 >
   <slot />
 </div>

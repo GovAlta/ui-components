@@ -30,6 +30,7 @@ import { Bug2943Component } from "../routes/bugs/2943/bug2943.component";
 import { Bug2948Component } from "../routes/bugs/2948/bug2948.component";
 import { Bug2991Component } from "../routes/bugs/2991/bug2991.component";
 import { Bug3072Component } from "../routes/bugs/3072/bug3072.component";
+import { Bug3118Component } from "../routes/bugs/3118/bug3118.component";
 import { Bug3156Component } from "../routes/bugs/3156/bug3156.component";
 import { Feat1328Component } from "../routes/features/feat1328/feat1328.component";
 import { Feat1547Component } from "../routes/features/feat1547/feat1547.component";
@@ -46,6 +47,8 @@ import { Feat2829Component } from "../routes/features/feat2829/feat2829.componen
 import { Feat3102Component } from "../routes/features/feat3102/feat3102.component";
 
 export const appRoutes: Route[] = [
+  { path: "everything", component: EverythingComponent },
+
   { path: "bugs/2152", component: Bug2152Component },
   { path: "bugs/2331", component: Bug2331Component },
   { path: "bugs/2393", component: Bug2393Component },
@@ -75,8 +78,9 @@ export const appRoutes: Route[] = [
   { path: "bugs/2948", component: Bug2948Component },
   { path: "bugs/2991", component: Bug2991Component },
   { path: "bugs/3072", component: Bug3072Component },
+  { path: "bugs/3118", component: Bug3118Component },
   { path: "bugs/3156", component: Bug3156Component },
-  { path: "everything", component: EverythingComponent },
+
   { path: "features/1328", component: Feat1328Component },
   { path: "features/1547", component: Feat1547Component },
   { path: "features/1813", component: Feat1813Component },

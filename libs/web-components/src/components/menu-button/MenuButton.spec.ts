@@ -13,7 +13,7 @@ describe("GoAMenuButton", () => {
   it("should render with testid", async () => {
     const { container } = render(GoAMenuButton, {
       text: "Menu Button",
-      testid: "menu-button-test"
+      testid: "menu-button-test",
     });
 
     expect(container.innerHTML).toContain('data-testid="menu-button-test"');
@@ -24,7 +24,7 @@ describe("GoAMenuButton", () => {
       it(`should render ${type} type`, async () => {
         const { container } = render(GoAMenuButton, {
           text: "Menu Button",
-          type: type as "primary" | "secondary" | "tertiary"
+          type: type as "primary" | "secondary" | "tertiary",
         });
 
         expect(container.innerHTML).toContain(`type="${type}"`);
@@ -86,6 +86,29 @@ describe("GoAMenuButton", () => {
       const { container } = render(GoAMenuButton, { text: "Menu Button" });
 
       expect(container.innerHTML).toContain('slot="target"');
+    });
+  });
+
+  describe("leading icon", () => {
+    it("should render without leadingIcon by default", async () => {
+      const { container } = render(GoAMenuButton, {
+        text: "Menu Button",
+      });
+
+      const button = container.querySelector("goa-button");
+      expect(button).toBeTruthy();
+      expect(button?.getAttribute("leadingicon")).toBeNull();
+    });
+
+    it("should render with leadingIcon when provided", async () => {
+      const { container } = render(GoAMenuButton, {
+        text: "Menu Button",
+        leadingIcon: "add",
+      });
+
+      const button = container.querySelector("goa-button");
+      expect(button).toBeTruthy();
+      expect(button?.getAttribute("leadingicon")).toBe("add");
     });
   });
 });
