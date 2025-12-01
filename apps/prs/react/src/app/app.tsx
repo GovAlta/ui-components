@@ -48,7 +48,7 @@ export function App() {
               <Link to="/bugs/2922">2922 Form Stepper Vertical</Link>
               <Link to="/bugs/2943">2943 Drawer Text Components</Link>
               <Link to="/bugs/2948">2948 Modal Heading Spacing</Link>
-              <Link to="/bugs/3118">3118</Link>
+              <Link to="/bugs/3118">3118 Text Component ID</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1547">1547 Tooltip Multiline</Link>
@@ -56,14 +56,14 @@ export function App() {
               <Link to="/features/2054">2054 MaxWidth Support</Link>
               <Link to="/features/2267">2267 Checkbox List</Link>
               <Link to="/features/2361">2361 Radio/Checkbox Clickable Area</Link>
-              <Link to="/features/2440">2440</Link>
+              <Link to="/features/2440">2440 MenuButton Icon</Link>
               <Link to="/features/2492">2492 TextArea onBlur</Link>
               <Link to="/features/2682">2682 DatePicker Issues</Link>
               <Link to="/features/2722">2722 Input Text-Align</Link>
               <Link to="/features/2730">2730 Temporary Notification Controller</Link>
               <Link to="/features/2829">2829 Modal ARIA Live Region</Link>
               <Link to="/features/2877">2877 Badge Types and Custom Icon</Link>
-              <Link to="/features/3102">3102</Link>
+              <Link to="/features/3102">3102 MenuButton Width</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>
