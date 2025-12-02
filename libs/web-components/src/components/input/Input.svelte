@@ -500,12 +500,12 @@
     --goa-text-input-space-btw-icon-text: var(--goa-text-input-space-btw-icon-text-compact);
   }
 
-  .goa-input:not(.error):not(.input--disabled):not(:has(input:read-only)):hover:not(:has(input:focus-visible)) {
+  .goa-input:not(.error):not(.input--disabled):hover:not(:has(input:focus-visible)) {
     /* hover border */
     box-shadow: var(--goa-text-input-border-hover);
   }
 
-  .goa-input:not(.error):not(:has(input:read-only)):has(input:focus-visible) {
+  .goa-input:not(.error):has(input:focus-visible) {
     /* focus border(s) */
     box-shadow:
       var(--goa-text-input-border), var(--goa-text-input-border-focus);
@@ -517,14 +517,14 @@
   }
 
   /* Focus state (including when in error state) */
-  .goa-input:not(:has(input:read-only)):has(input:focus-visible),
-  .goa-input.error:not(:has(input:read-only)):has(input:focus-visible) {
+  .goa-input:has(input:focus-visible),
+  .goa-input.error:has(input:focus-visible) {
     box-shadow:
       var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
   /* V2: Focus state shows only blue focus border (no default border) */
-  .container.v2 .goa-input:not(:has(input:read-only)):has(input:focus-visible) {
+  .container.v2 .goa-input:has(input:focus-visible) {
     box-shadow: var(--goa-text-input-border-focus);
   }
 
@@ -572,7 +572,7 @@
   }
 
   input:read-only {
-    cursor: default;
+    cursor: var(--goa-text-input-cursor-readonly, default);
   }
 
   input[type="number"] {
@@ -650,6 +650,10 @@
   /* V2: Read-only input field styling (exclude disabled inputs) */
   .container.v2 .goa-input:has(input:read-only:not(:disabled)) {
     background-color: var(--goa-text-input-color-bg-readonly);
+  }
+
+  /* V2: Read-only input field styling (exclude disabled inputs) */
+  .container.v2.goa-input:not(.error)::has(input:read-only:not(:disabled):not(:focus-visible):not(:hover)) {
     box-shadow: var(--goa-text-input-border-readonly);
   }
 
