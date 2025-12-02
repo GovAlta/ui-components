@@ -103,6 +103,7 @@
     <div class="popover-wrapper">
       <goa-popover
         position="right"
+        width="100%"
         maxwidth="500px"
         minwidth="500px"
         maxheight="calc(100vh - 40px)"
@@ -181,6 +182,16 @@
   .root {
     container-type: inline-size;
     position: relative;
+  }
+
+  .popover-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .popover-wrapper goa-popover {
+    display: block;
+    width: 100%;
   }
 
   /* Menu item */
