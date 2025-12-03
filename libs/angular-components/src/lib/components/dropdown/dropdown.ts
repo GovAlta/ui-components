@@ -98,7 +98,7 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   }
 
   _onChange(e: Event) {
-    const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
+    const detail = { ...(e as CustomEvent<GoabDropdownOnChangeDetail>).detail, event: e };
     // Keep local value in sync with emitted detail
     this.value = detail.value || null;
     this.onChange.emit(detail);

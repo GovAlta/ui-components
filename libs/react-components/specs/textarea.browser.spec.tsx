@@ -1,8 +1,8 @@
 import { render } from "vitest-browser-react";
-
 import { GoabInput, GoabTextArea } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { useState } from "react";
+import { userEvent } from "@vitest/browser/context";
 
 describe("TextArea Browser Tests", () => {
   const noop = () => {
@@ -35,61 +35,6 @@ describe("TextArea Browser Tests", () => {
       },
       { timeout: 3000 },
     );
-  });
-
-  it("should trigger onBlur event when focus leaves the textarea", async () => {
-    const onBlurSpy = vi.fn();
-
-    const Component = () => {
-      const [value, setValue] = useState("");
-
-      return (
-        <div data-testid="container">
-          <GoabTextArea
-            testId="test-textarea"
-            name="test-textarea"
-            value={value}
-            onChange={(detail) => setValue(detail.value)}
-            onBlur={onBlurSpy}
-          />
-          <GoabInput
-            type="text"
-            testId="focus-target"
-            name="focus-input"
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
-            onChange={() => {}}
-          />
-        </div>
-      );
-    };
-
-    const result = render(<Component />);
-    const textareaEl = result.getByTestId("test-textarea");
-    const inputEl = result.getByTestId("focus-target");
-    const container = result.getByTestId("container");
-
-    await vi.waitFor(async () => {
-      const textarea = textareaEl.element() as HTMLTextAreaElement;
-      expect(textarea).toBeTruthy();
-      textarea.focus();
-      textarea.value = "Test content for blur";
-    });
-
-    // Trigger blur by focusing on the input element
-    await vi.waitFor(() => {
-      const input = inputEl.element() as HTMLInputElement;
-      expect(input).toBeTruthy();
-      input.focus();
-    });
-
-    // Verify onBlur was called with correct values
-    await vi.waitFor(() => {
-      expect(onBlurSpy).toHaveBeenCalledTimes(1);
-      expect(onBlurSpy).toHaveBeenCalledWith({
-        name: "test-textarea",
-        value: "Test content for blur",
-      });
-    });
   });
 
   it("should apply maxWidth", async () => {
@@ -201,5 +146,74 @@ describe("TextArea Browser Tests", () => {
       },
       { timeout: 3000 },
     );
+  });
+
+  it("passes the browser event on change, keypress, and blur details", async () => {
+    const onChange = vi.fn();
+    const onKeyPress = vi.fn();
+    const onBlur = vi.fn();
+
+    const Component = () => {
+      return (
+        <div>
+          <GoabTextArea
+            name="test-textarea"
+            testId="test-textarea"
+            onChange={onChange}
+            onKeyPress={onKeyPress}
+            onBlur={onBlur}
+          />
+          <GoabInput
+            name="test-input"
+            testId="test-input"
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onChange={() => {}}
+          />
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const textarea = result.getByTestId("test-textarea");
+    const input = result.getByTestId("test-input");
+
+    await vi.waitFor(async () => {
+      const textareaEL = textarea.element() as HTMLTextAreaElement;
+      expect(textarea).toBeTruthy();
+      textareaEL.focus();
+
+      await userEvent.type(textareaEL, "s");
+    });
+
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const changeDetail = onChange.mock.calls[0][0];
+      expect(changeDetail.name).toBe("test-textarea");
+      expect(changeDetail.value).toBe("s");
+      expect(changeDetail.event).toBeInstanceOf(Event);
+
+      expect(onKeyPress).toHaveBeenCalledTimes(1);
+      const keyPressDetail = onKeyPress.mock.calls[0][0];
+      expect(keyPressDetail.name).toBe("test-textarea");
+      expect(keyPressDetail.value).toBe("s");
+      expect(keyPressDetail.key).toBe("s");
+      expect(keyPressDetail.event).toBeInstanceOf(Event);
+    });
+
+    // Trigger blur by focusing on the input element
+    await vi.waitFor(() => {
+      const inputEL = input.element() as HTMLInputElement;
+      expect(inputEL).toBeTruthy();
+      inputEL.focus();
+    });
+
+    // Verify onBlur was called with correct values
+    await vi.waitFor(() => {
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      const blurDetail = onBlur.mock.calls[0][0];
+      expect(blurDetail.name).toBe("test-textarea");
+      expect(blurDetail.value).toBe("s");
+      expect(blurDetail.event).toBeInstanceOf(Event);
+    });
   });
 });

@@ -70,7 +70,7 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
 
   _onChange(e: Event) {
     try {
-      const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
+      const detail = { ...(e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail, event: e };
       this.onChange.emit(detail);
       this.markAsTouched();
 

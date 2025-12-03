@@ -81,7 +81,7 @@ export function GoabCheckbox({
     const current = el.current;
     const listener = (e: Event) => {
       const detail = (e as CustomEvent<GoabCheckboxOnChangeDetail>).detail;
-      onChange?.(detail);
+      onChange?.({ ...detail, event: e });
     };
 
     current.addEventListener("_change", listener);

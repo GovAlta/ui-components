@@ -2,6 +2,7 @@ import { render } from "vitest-browser-react";
 import { GoabCheckboxList, GoabCheckbox } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { useState } from "react";
+import { userEvent } from "@vitest/browser/context";
 
 describe("CheckboxList", () => {
   it("should render a checkbox list with basic properties", async () => {
@@ -239,42 +240,34 @@ describe("CheckboxList", () => {
     expect(result.getByTestId("checkbox-list")).toBeTruthy();
   });
 
-  it("should handle onChange callback with correct event details", async () => {
-    const onChangeSpy = vi.fn();
+  it("passes the browser event in change detail", async () => {
+    const onChange = vi.fn();
 
-    const Component = () => {
-      return (
-        <div data-testid="container">
-          <GoabCheckboxList
-            name="test-list"
-            testId="checkbox-list"
-            onChange={onChangeSpy}
-          >
-            <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-            <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-          </GoabCheckboxList>
-        </div>
-      );
-    };
+    const Component = () => (
+      <GoabCheckboxList
+        name="event-list"
+        testId="event-checkbox-list"
+        onChange={onChange}
+      >
+        <GoabCheckbox name="event-option1" text="Option 1" testId="event-checkbox-1" />
+      </GoabCheckboxList>
+    );
 
     const result = render(<Component />);
+    const checkbox = result.getByTestId("event-checkbox-1");
 
-    await new Promise((resolve) => setTimeout(resolve, 200));
-
-    const checkbox1 = result.getByTestId("checkbox-1");
-
-    // Click checkbox
-    await checkbox1.click();
-
-    await vi.waitFor(() => {
-      expect(onChangeSpy).toHaveBeenCalled();
+    await vi.waitFor(async () => {
+      const checkboxEl = checkbox.element() as HTMLElement;
+      expect(checkboxEl).toBeTruthy();
+      await userEvent.click(checkboxEl);
     });
 
-    // Verify the callback was called with correct structure
-    const lastCall = onChangeSpy.mock.calls[onChangeSpy.mock.calls.length - 1];
-    expect(lastCall).toBeDefined();
-    expect(lastCall[0]).toHaveProperty("name", "test-list");
-    expect(lastCall[0]).toHaveProperty("value");
-    expect(Array.isArray(lastCall[0].value)).toBe(true);
+    await vi.waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const detail = onChange.mock.calls[0][0];
+      expect(detail.name).toBe("event-list");
+      expect(detail.value).toEqual(["event-option1"]);
+      expect(detail.event).toBeInstanceOf(Event);
+    });
   });
 });

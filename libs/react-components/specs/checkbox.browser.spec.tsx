@@ -2,6 +2,7 @@ import { render } from "vitest-browser-react";
 import { GoabCheckbox } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { useState } from "react";
+import { userEvent } from "@vitest/browser/context";
 
 describe("Checkbox", () => {
   it("should handle _change fired inside reveal slot without affecting parent checkbox value", async () => {
@@ -130,6 +131,36 @@ describe("Checkbox", () => {
       expect(finalContainerStyles.position).toBe("relative");
       expect(finalBeforeStyles.width).toBe("44px");
       expect(finalBeforeStyles.height).toBe("44px");
+    });
+  });
+
+  it("passes the browser event in change detail", async () => {
+    const handleChange = vi.fn();
+    const result = render(
+      <GoabCheckbox
+        testId="event-checkbox"
+        name="event"
+        value="event-checkbox"
+        text="Event checkbox"
+        onChange={handleChange}
+      />,
+    );
+
+    const checkbox = result.getByTestId("event-checkbox");
+
+    await vi.waitFor(async () => {
+      const checkboxEl = checkbox.element() as HTMLElement;
+      expect(checkboxEl).toBeTruthy();
+      await userEvent.click(checkboxEl);
+    });
+
+    await vi.waitFor(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1);
+      const detail = handleChange.mock.calls[0][0];
+      expect(detail.name).toBe("event");
+      expect(detail.value).toBe("event-checkbox");
+      expect(detail.checked).toBe(true);
+      expect(detail.event).toBeInstanceOf(Event);
     });
   });
 });

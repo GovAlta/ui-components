@@ -90,21 +90,25 @@ describe("GoabCheckboxList (React)", () => {
     const el = document.querySelector("goa-checkbox-list");
     expect(el).toBeTruthy();
 
-    const detail: GoabCheckboxListOnChangeDetail = {
-      name: "foo",
-      value: ["x", "y"],
-    };
-
     el &&
       fireEvent(
         el,
         new CustomEvent("_change", {
-          detail,
+          detail: {
+            name: "foo",
+            value: ["x", "y"],
+          },
         }),
       );
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(detail);
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: "foo",
+        value: ["x", "y"],
+        event: expect.any(Event),
+      }),
+    );
   });
 
   it("should update onChange handler when prop changes", () => {

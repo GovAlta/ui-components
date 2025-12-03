@@ -108,7 +108,13 @@ describe("GoabDropdown", () => {
         new CustomEvent("_change", { detail: { name: "favColor", value: "blue" } }),
       );
     await waitFor(() => {
-      expect(fn).toBeCalledWith({ name: "favColor", value: "blue" });
+      expect(fn).toBeCalledWith(
+        expect.objectContaining({
+          name: "favColor",
+          value: "blue",
+          event: expect.any(Event),
+        }),
+      );
     });
   });
 });
