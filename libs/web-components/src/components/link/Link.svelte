@@ -177,11 +177,14 @@
     color: var(--goa-link-color-light-visited, #9D8EBB) !important;
   }
 
-  /* Focus */
+  /* Focus - uses box-shadow instead of outline to avoid clipping in tables with overflow:hidden */
+  /* Stacked box-shadows: inner creates gap (2px white), outer is focus ring (2px blue at 4px total) */
   .link:focus-within {
     border-radius: var(--goa-link-border-radius-focus, var(--goa-border-radius-s));
-    outline: var(--goa-link-border-focus, var(--goa-border-width-l) solid var(--goa-color-interactive-focus));
-    outline-offset: var(--goa-link-focus-offset, var(--goa-space-3xs));
+    outline: none;
+    box-shadow:
+      0 0 0 var(--goa-space-3xs, 2px) var(--goa-color-greyscale-white, #fff),
+      0 0 0 calc(var(--goa-space-3xs, 2px) + var(--goa-link-focus-border-width, 2px)) var(--goa-color-interactive-focus);
   }
 
   .link :global(::slotted(a:focus-visible)) {
