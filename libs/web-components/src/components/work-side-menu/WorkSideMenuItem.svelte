@@ -36,6 +36,7 @@
   $: _alwaysVisible =
     !isNaN(parseInt(badge)) && parseInt(badge) > 0 && parseInt(badge) < 10;
   $: _hasOnClickHandler = toBoolean(hasonclickhandler);
+  $: _hasPopoverContent = $$slots.popoverContent;
 
   // *****
   // Hooks
@@ -56,7 +57,7 @@
   // *********
 
   function handleClick(e: Event) {
-    if (_hasOnClickHandler) {
+    if (_hasOnClickHandler || _hasPopoverContent) {
       e.preventDefault();
     }
     dispatch(_rootEl, "_click", {}, { bubbles: true });
