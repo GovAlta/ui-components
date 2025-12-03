@@ -109,6 +109,7 @@
         minwidth="500px"
         maxheight="calc(100vh - 40px)"
         padded="false"
+        prevent-scroll-into-view={true}
         hoffset="40px"
         voffset="20px">
         <a
@@ -121,7 +122,8 @@
           on:click={handleClick}
           on:keydown={(e) => {
       if (e.key === "Enter") {
-        handleClick(e);
+        e.preventDefault();
+        setTimeout(() => _linkEl.click(), 0);
     }}}
           tabindex="0"
         >
