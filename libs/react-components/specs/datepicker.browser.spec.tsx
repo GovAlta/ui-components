@@ -48,43 +48,117 @@ describe("DatePicker", () => {
     });
   });
 
-  it("dispatches a value on date selection", async () => {
+  it("passes the browser event in change detail", async () => {
     const handleChange = vi.fn();
     const selectedDate = new Date();
+    const formattedDate = format(selectedDate, "yyyy-MM-dd");
 
     const Component = () => {
-      return <GoabDatePicker testId="date-picker" onChange={handleChange} />;
+      return (
+        <GoabDatePicker
+          name="event-date"
+          testId="event-date-picker"
+          onChange={handleChange}
+        />
+      );
     };
 
     const result = render(<Component />);
     const input = result.getByTestId("calendar-input");
-    const dateToSelect = result.getByTestId(format(selectedDate, "yyyy-MM-dd"));
+    const dateToSelect = result.getByTestId(formattedDate);
 
-    await input.click();
-    await dateToSelect.click();
+    await vi.waitFor(async () => {
+      const inputEl = input.element() as HTMLElement;
+      expect(inputEl).toBeTruthy();
+      await userEvent.click(inputEl);
+    });
+
+    await vi.waitFor(async () => {
+      const dateEl = dateToSelect.element() as HTMLElement;
+      expect(dateEl).toBeTruthy();
+      await userEvent.click(dateEl);
+    });
 
     await vi.waitFor(() => {
-      expect(handleChange).toHaveBeenCalled();
+      expect(handleChange).toHaveBeenCalledTimes(1);
+      const detail = handleChange.mock.calls[0][0];
+      expect(detail.name).toBe("event-date");
+      expect(detail.valueStr).toBe(formattedDate);
+      expect(detail.event).toBeInstanceOf(Event);
     });
   });
 
   describe("DatePicker Keyboard Navigation", () => {
     [
-      { value: "2025-03-01", expected: "2025-02-28", formatted: "February 28, 2025", desc: "previous day", key: "{ArrowLeft}" },
-      { value: "2025-03-01", expected: "2025-03-02", formatted: "March 2, 2025", desc: "next day", key: "{ArrowRight}" },
-      { value: "2025-03-01", expected: "2025-02-22", formatted: "February 22, 2025", desc: "previous week", key: "{ArrowUp}" },
-      { value: "2025-03-01", expected: "2025-03-08", formatted: "March 8, 2025", desc: "next week", key: "{ArrowDown}" },
-      { value: "2025-03-01", expected: "2025-02-01", formatted: "February 1, 2025", desc: "previous month", key: "{PageUp}" },
-      { value: "2025-03-01", expected: "2025-04-01", formatted: "April 1, 2025", desc: "next month", key: "{PageDown}" },
-      { value: "2025-03-01", expected: "2024-03-01", formatted: "March 1, 2024", desc: "previous year", key: "{Shift>}{PageUp}" },
-      { value: "2025-03-01", expected: "2026-03-01", formatted: "March 1, 2026", desc: "next year", key: "{Shift>}{PageDown}" },
+      {
+        value: "2025-03-01",
+        expected: "2025-02-28",
+        formatted: "February 28, 2025",
+        desc: "previous day",
+        key: "{ArrowLeft}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2025-03-02",
+        formatted: "March 2, 2025",
+        desc: "next day",
+        key: "{ArrowRight}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2025-02-22",
+        formatted: "February 22, 2025",
+        desc: "previous week",
+        key: "{ArrowUp}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2025-03-08",
+        formatted: "March 8, 2025",
+        desc: "next week",
+        key: "{ArrowDown}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2025-02-01",
+        formatted: "February 1, 2025",
+        desc: "previous month",
+        key: "{PageUp}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2025-04-01",
+        formatted: "April 1, 2025",
+        desc: "next month",
+        key: "{PageDown}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2024-03-01",
+        formatted: "March 1, 2024",
+        desc: "previous year",
+        key: "{Shift>}{PageUp}",
+      },
+      {
+        value: "2025-03-01",
+        expected: "2026-03-01",
+        formatted: "March 1, 2026",
+        desc: "next year",
+        key: "{Shift>}{PageDown}",
+      },
     ].forEach(({ value, expected, formatted, desc, key }) => {
       it(`navigates to the ${desc} when ${key} is pressed`, async () => {
         const handleChange = vi.fn();
         const Component = () => {
-          return <GoabDatePicker testId="date-picker" value={value} onChange={(detail) => {
-            handleChange(detail.valueStr)
-          }} />;
+          return (
+            <GoabDatePicker
+              testId="date-picker"
+              value={value}
+              onChange={(detail) => {
+                handleChange(detail.valueStr);
+              }}
+            />
+          );
         };
 
         const result = render(<Component />);
@@ -95,10 +169,10 @@ describe("DatePicker", () => {
         await vi.waitFor(() => {
           const inputEl = input.element() as HTMLInputElement;
           expect(inputEl.value).toBe(formatted);
-          expect(handleChange).toBeCalledWith(expected)
+          expect(handleChange).toBeCalledWith(expected);
         });
-      })
-    })
+      });
+    });
   });
 
   it("renders with disabled prop", async () => {
@@ -123,7 +197,9 @@ describe("DatePicker", () => {
     const handleChange = vi.fn();
 
     const Component = () => {
-      return <GoabDatePicker testId="date-picker" disabled={true} onChange={handleChange} />;
+      return (
+        <GoabDatePicker testId="date-picker" disabled={true} onChange={handleChange} />
+      );
     };
 
     const result = render(<Component />);
@@ -131,9 +207,9 @@ describe("DatePicker", () => {
 
     // verify input is disabled
     await vi.waitFor(() => {
-      const inputEl = (input.element()) as HTMLInputElement;
+      const inputEl = input.element() as HTMLInputElement;
       expect(inputEl.disabled).toBe(true);
-    })
+    });
   });
 
   describe("Width property", () => {

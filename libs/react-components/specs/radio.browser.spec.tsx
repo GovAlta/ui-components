@@ -3,6 +3,7 @@ import { GoabButton, GoabRadioGroup, GoabRadioItem } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { useState } from "react";
 import React from "react";
+import { userEvent } from "@vitest/browser/context";
 
 describe("Radio", () => {
   it("should enable and disable radio group programmatically", async () => {
@@ -103,7 +104,7 @@ describe("Radio", () => {
     const result = render(
       <GoabRadioGroup name="test" value="">
         <GoabRadioItem name="test" value="option1" label="Option 1" />
-      </GoabRadioGroup>
+      </GoabRadioGroup>,
     );
 
     const radioInput = result.getByTestId("radio-option-option1");
@@ -155,6 +156,36 @@ describe("Radio", () => {
       expect(finalIconStyles.position).toBe("relative");
       expect(finalBeforeStyles.width).toBe("44px");
       expect(finalBeforeStyles.height).toBe("44px");
+    });
+  });
+
+  it("passes the browser event in change detail", async () => {
+    const handleChange = vi.fn();
+    const result = render(
+      <GoabRadioGroup name="test" value="" onChange={handleChange}>
+        <GoabRadioItem name="test" value="option1" label="Option 1" />
+      </GoabRadioGroup>,
+    );
+
+    const radioInput = result.getByTestId("radio-option-option1");
+    await vi.waitFor(() => {
+      expect(radioInput.element()).toBeTruthy();
+    });
+
+    const radioEl = radioInput.element() as HTMLInputElement;
+    // This sets up the label to be clicked instead of the element
+    // I don't understand why this is necessary, but it works when the actual element doesn't
+    const radioLabel = radioEl.closest("label") as HTMLElement;
+    expect(radioLabel).toBeTruthy();
+
+    await userEvent.click(radioLabel);
+
+    await vi.waitFor(() => {
+      expect(handleChange).toHaveBeenCalledTimes(1);
+      const detail = handleChange.mock.calls[0][0];
+      expect(detail.name).toBe("test");
+      expect(detail.value).toBe("option1");
+      expect(detail.event).toBeInstanceOf(Event);
     });
   });
 });
