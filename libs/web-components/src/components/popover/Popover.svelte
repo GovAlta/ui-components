@@ -243,9 +243,9 @@
     setTimeout(() => {
       const firstFocusableEl = getFirstFocusableEl(_focusTrapEl);
       firstFocusableEl?.focus();
+      // Delay adding click listener to prevent the current click from immediately closing
+      document.body.addEventListener("click", handleClick);
     }, 0);
-
-    document.body.addEventListener("click", handleClick);
   }
 
   /**
@@ -483,9 +483,10 @@
       style={styles(
         // For certain contexts (e.g., DatePicker) when the internal data-content-fits-width
         // attribute is set, the content width is set to fit-content instead of inheriting the target width.
-        style("width", _contentFitsWidth ? "fit-content" : width),
+        // Note: Don't inherit width="100%" from parent - popover content should use minwidth/maxwidth
+        style("width", _contentFitsWidth ? "fit-content" : (width && width !== "100%") ? width : undefined),
         style("min-width", minwidth),
-        style("max-width", _contentFitsWidth ? maxwidth : width ? `max(${width}, ${maxwidth})` : maxwidth),
+        style("max-width", _contentFitsWidth ? maxwidth : (width && width !== "100%") ? `max(${width}, ${maxwidth})` : maxwidth),
         style("padding", _padded ? "var(--goa-space-m)" : "0"),
       )}
     >

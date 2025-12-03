@@ -109,7 +109,7 @@
         maxheight="calc(100vh - 40px)"
         padded="false"
         hoffset="40px"
-        voffset="0px">
+        voffset="20px">
         <a
           slot="target"
           class="menu-item"
