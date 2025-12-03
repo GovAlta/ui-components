@@ -222,7 +222,9 @@ describe("GoABInput", () => {
       new CustomEvent("_change", { detail: { name: "foo", value: "new value" } }),
     );
 
-    expect(validateOnChange).toBeCalledWith({ name: "foo", value: "new value" });
+    expect(validateOnChange).toBeCalledWith(
+      expect.objectContaining({ name: "foo", value: "new value", event: expect.any(Event) }),
+    );
   });
 
   it("should handle onFocus event", () => {

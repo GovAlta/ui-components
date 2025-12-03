@@ -129,12 +129,11 @@ describe("GoabCheckboxList", () => {
       value: ["apple", "banana"],
     };
 
-    fireEvent(
-      el,
-      new CustomEvent("_change", {
-        detail,
-      }) as Event,
-    );
+    const changeEvent = new CustomEvent("_change", {
+      detail,
+    }) as Event;
+
+    fireEvent(el, changeEvent);
 
     expect(fcChangeSpy).toHaveBeenCalledWith(["apple", "banana"]);
     expect(fcTouchedSpy).toHaveBeenCalledTimes(1);
@@ -211,7 +210,9 @@ describe("GoabCheckboxList", () => {
     };
 
     fireEvent(el, new CustomEvent("_change", { detail: detail1 }));
-    expect(onChangeSpy).toHaveBeenCalledWith(detail1);
+    expect(onChangeSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ ...detail1, event: expect.any(Event) }),
+    );
 
     // Second change
     const detail2: GoabCheckboxListOnChangeDetail = {
@@ -220,7 +221,9 @@ describe("GoabCheckboxList", () => {
     };
 
     fireEvent(el, new CustomEvent("_change", { detail: detail2 }));
-    expect(onChangeSpy).toHaveBeenCalledWith(detail2);
+    expect(onChangeSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ ...detail2, event: expect.any(Event) }),
+    );
     expect(onChangeSpy).toHaveBeenCalledTimes(2);
   });
 });
