@@ -43,7 +43,9 @@ describe("FilterChip", () => {
     });
     const chip = container.querySelector(".chip");
 
-    expect(chip).toHaveStyle("min-width: 56px");
+    expect(chip).toHaveStyle(
+      "min-width: var(--goa-filter-chip-min-width, 56px)",
+    );
   });
 
   it("should have an unfilled close icon by default for deletable chips", async () => {

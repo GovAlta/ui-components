@@ -33,17 +33,20 @@ import { Bug2922Route } from "./routes/bugs/bug2922";
 import { Bug2943Route } from "./routes/bugs/bug2943";
 import { Bug2948Route } from "./routes/bugs/bug2948";
 import { Bug2977Route } from "./routes/bugs/bug2977";
+import { Bug3118Route } from "./routes/bugs/bug3118";
 import { EverythingRoute } from "./routes/everything";
 import { Feat1547Route } from "./routes/features/feat1547";
 import { Feat1813Route } from "./routes/features/feat1813";
 import { Feat2361Route } from "./routes/features/feat2361";
 import { Feat2054Route } from "./routes/features/feat2054";
 import { Feat2267Route } from "./routes/features/feat2267";
+import { Feat2440Route } from "./routes/features/feat2440";
 import { Feat2492Route } from "./routes/features/feat2492";
 import { Feat2682Route } from "./routes/features/feat2682";
 import { Feat2722Route } from "./routes/features/feat2722";
 import { Feat2730Route } from "./routes/features/feat2730";
 import { Feat2829Route } from "./routes/features/feat2829";
+import Feat3102Route from "./routes/features/feat3102";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -52,6 +55,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route path="everything" element={<EverythingRoute />} />
           <Route path="bugs/2152" element={<Bug2152Route />} />
           <Route path="bugs/2331" element={<Bug2331Route />} />
           <Route path="bugs/2393" element={<Bug2393Route />} />
@@ -80,17 +84,19 @@ root.render(
           <Route path="bugs/2943" element={<Bug2943Route />} />
           <Route path="bugs/2948" element={<Bug2948Route />} />
           <Route path="bugs/2977" element={<Bug2977Route />} />
-          <Route path="everything" element={<EverythingRoute />} />
+          <Route path="bugs/3118" element={<Bug3118Route />} />
           <Route path="features/1547" element={<Feat1547Route />} />
           <Route path="features/1813" element={<Feat1813Route />} />
           <Route path="features/2361" element={<Feat2361Route />} />
           <Route path="features/2054" element={<Feat2054Route />} />
           <Route path="features/2267" element={<Feat2267Route />} />
+          <Route path="features/2440" element={<Feat2440Route />} />
           <Route path="features/2492" element={<Feat2492Route />} />
           <Route path="features/2682" element={<Feat2682Route />} />
           <Route path="features/2722" element={<Feat2722Route />} />
           <Route path="features/2730" element={<Feat2730Route />} />
           <Route path="features/2829" element={<Feat2829Route />} />
+          <Route path="features/3102" element={<Feat3102Route />} />
         </Route>
       </Routes>
     </BrowserRouter>

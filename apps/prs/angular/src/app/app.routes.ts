@@ -31,6 +31,7 @@ import { Bug2948Component } from "../routes/bugs/2948/bug2948.component";
 import { Bug2977Component } from "../routes/bugs/2977/bug2977.component";
 import { Bug2991Component } from "../routes/bugs/2991/bug2991.component";
 import { Bug3072Component } from "../routes/bugs/3072/bug3072.component";
+import { Bug3118Component } from "../routes/bugs/3118/bug3118.component";
 import { Bug3156Component } from "../routes/bugs/3156/bug3156.component";
 import { Feat1328Component } from "../routes/features/feat1328/feat1328.component";
 import { Feat1547Component } from "../routes/features/feat1547/feat1547.component";
@@ -38,6 +39,7 @@ import { Feat1813Component } from "../routes/features/feat1813/feat1813.componen
 import { Feat2361Component } from "../routes/features/feat2361/feat2361.component";
 import { Feat2054Component } from "../routes/features/feat2054/feat2054.component";
 import { Feat2267Component } from "../routes/features/feat2267/feat2267.component";
+import { Feat2440Component } from "../routes/features/feat2440/feat2440.component";
 import { Feat2492Component } from "../routes/features/feat2492/feat2492.component";
 import { Feat2682Component } from "../routes/features/feat2682/feat2682.component";
 import { Feat2722Component } from "../routes/features/feat2722/feat2722.component";
@@ -46,6 +48,8 @@ import { Feat2829Component } from "../routes/features/feat2829/feat2829.componen
 import { Feat3102Component } from "../routes/features/feat3102/feat3102.component";
 
 export const appRoutes: Route[] = [
+  { path: "everything", component: EverythingComponent },
+
   { path: "bugs/2152", component: Bug2152Component },
   { path: "bugs/2331", component: Bug2331Component },
   { path: "bugs/2393", component: Bug2393Component },
@@ -76,14 +80,16 @@ export const appRoutes: Route[] = [
   { path: "bugs/2977", component: Bug2977Component },
   { path: "bugs/2991", component: Bug2991Component },
   { path: "bugs/3072", component: Bug3072Component },
+  { path: "bugs/3118", component: Bug3118Component },
   { path: "bugs/3156", component: Bug3156Component },
-  { path: "everything", component: EverythingComponent },
+
   { path: "features/1328", component: Feat1328Component },
   { path: "features/1547", component: Feat1547Component },
   { path: "features/1813", component: Feat1813Component },
   { path: "features/2361", component: Feat2361Component },
   { path: "features/2054", component: Feat2054Component },
   { path: "features/2267", component: Feat2267Component },
+  { path: "features/2440", component: Feat2440Component },
   { path: "features/2492", component: Feat2492Component },
   { path: "features/2682", component: Feat2682Component },
   { path: "features/2722", component: Feat2722Component },

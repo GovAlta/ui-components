@@ -19,7 +19,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { relay } from "../../common/utils";
+  import { receive, relay, style, styles } from "../../common/utils";
 
   export let text: string = "";
   export let action: string = "default";
@@ -37,11 +37,17 @@
   }
 </script>
 
-<button bind:this={_el} data-testid={testid} on:click={onClick} tabindex="0">
+<button
+  bind:this={_el}
+  data-testid={testid}
+  on:click={onClick}
+  tabindex="0"
+  style={styles(style("width", "100%"))}
+>
   {#if icon}
     <goa-icon data-testid={`icon-${icon}`} size="3" type={icon} />
   {/if}
-  <span style="padding-bottom: var(--font-valign-fix)">{text}</span>
+  <div class="text">{text}</div>
 </button>
 
 <style>
@@ -50,9 +56,9 @@
     box-sizing: border-box;
     cursor: pointer;
     font: var(--goa-button-text);
-    height: var(--goa-button-height);
+    min-height: var(--goa-button-height);
     letter-spacing: var(--goa-button-letter-spacing);
-    padding: 0 var(--goa-button-padding-lr);
+    padding: 4px var(--goa-button-padding-lr);
     gap: var(--goa-button-gap);
     align-items: center; /* for leading and trailing icon vertical alignment */
 
@@ -70,7 +76,11 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+
+  .text {
+    padding-bottom: var(--font-valign-fix);
+    width: 100%;
   }
 </style>

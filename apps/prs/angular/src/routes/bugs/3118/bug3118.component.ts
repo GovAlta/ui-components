@@ -6,23 +6,26 @@ import {
   GoabMenuAction,
   GoabMenuButton,
   GoabText,
+  GoabGrid,
 } from "@abgov/angular-components";
+import { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
-  selector: "abgov-feat3102",
-  templateUrl: "./feat3102.component.html",
+  selector: "abgov-bug3118",
+  templateUrl: "./bug3118.component.html",
   imports: [
     CommonModule,
     GoabBlock,
+    GoabDivider,
     GoabMenuAction,
     GoabMenuButton,
     GoabText,
-    GoabDivider,
+    GoabGrid,
   ],
 })
-export class Feat3102Component {
-  onAction(e: unknown) {
-    console.log(e);
+export class Bug3118Component {
+  protected onAction(detail: GoabMenuButtonOnActionDetail): void {
+    console.log(detail);
   }
 }

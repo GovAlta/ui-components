@@ -23,6 +23,9 @@ import { GoabBaseComponent } from "../base.component";
       [attr.gap]="gap"
       [attr.direction]="direction"
       [attr.alignment]="alignment"
+      [attr.width]="width"
+      [attr.min-width]="minWidth"
+      [attr.max-width]="maxWidth"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -38,6 +41,9 @@ export class GoabBlock extends GoabBaseComponent implements OnInit {
   @Input() gap?: Spacing;
   @Input() direction?: GoabBlockDirection;
   @Input() alignment?: GoabBlockAlignment;
+  @Input() width?: string;
+  @Input() minWidth?: string;
+  @Input() maxWidth?: string;
 
   isReady = false;
 
