@@ -278,8 +278,9 @@
     color: var(--goa-color-text-light);
     height: 1.25rem;
     min-width: 1.25rem;
-    line-height: 1.3;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: var(
       --goa-work-side-menu-item-badge-text-size,
       var(--goa-font-size-2)
