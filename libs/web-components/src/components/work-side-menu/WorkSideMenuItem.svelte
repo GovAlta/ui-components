@@ -28,6 +28,7 @@
 
   let _rootEl: HTMLElement;
   let _linkEl: HTMLAnchorElement;
+  let _popoverEl: HTMLElement;
 
   // ========
   // Reactive
@@ -45,6 +46,7 @@
   onMount(async () => {
     await tick();
     addEventListeners();
+    addPopoverListeners();
     dispatch(_rootEl, "_mountItem", {}, { bubbles: true });
   });
 
@@ -90,6 +92,21 @@
       handleUpdateItem as EventListener,
     );
   }
+
+  function addPopoverListeners() {
+    if (_popoverEl) {
+      _popoverEl.addEventListener('_open', handlePopoverOpen);
+      _popoverEl.addEventListener('_close', handlePopoverClose);
+    }
+  }
+
+  function handlePopoverOpen() {
+    dispatch(_rootEl, "_popoverOpen", {}, { bubbles: true });
+  }
+  
+  function handlePopoverClose() {
+    dispatch(_rootEl, "_popoverClose", {}, { bubbles: true });
+  }
 </script>
 
 <div
@@ -103,6 +120,7 @@
   {#if $$slots.popoverContent}
     <div class="popover-wrapper">
       <goa-popover
+        bind:this={_popoverEl}
         position="right"
         width="100%"
         maxwidth="500px"

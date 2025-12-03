@@ -40,6 +40,7 @@
   let _isScrolling = false;
   let _showAccountMenu = false;
   let _showTooltip = false;
+  let _popoverOpen = false;
 
   let _focusedIndex: number = -1;
   let _focusItems: HTMLElement[] = [];
@@ -128,7 +129,7 @@
     label: string,
     el: HTMLElement,
   ) {
-    if (!open && menuType !== "account") {
+    if (!open && menuType !== "account" && !_popoverOpen) {
       updateTooltip(label, el);
       showTooltip();
     } else {
@@ -192,6 +193,15 @@
 
   function handleMouseLeave() {
     hideTooltip();
+  }
+
+  function handlePopoverOpen() {
+    _popoverOpen = true;
+    hideTooltip();
+  }
+
+  function handlePopoverClose() {
+    _popoverOpen = false;
   }
 
   function handleKeyDown(e: KeyboardEvent) {
@@ -358,6 +368,8 @@
     _rootEl.addEventListener("_mountItem", addMenuLink);
     _rootEl.addEventListener("_hoverItem", handleHover as EventListener);
     _rootEl.addEventListener("_toggle", toggleMenu);
+    _rootEl.addEventListener("_popoverOpen", handlePopoverOpen);
+    _rootEl.addEventListener("_popoverClose", handlePopoverClose);
     window.addEventListener("popstate", setCurrentUrl); // watch for hash & browser history changes
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", handleWindowResize);
@@ -368,6 +380,8 @@
     _rootEl.removeEventListener("_mountItem", addMenuLink);
     _rootEl.removeEventListener("_hoverItem", handleHover as EventListener);
     _rootEl.removeEventListener("_toggle", toggleMenu);
+    _rootEl.removeEventListener("_popoverOpen", handlePopoverOpen);
+    _rootEl.removeEventListener("_popoverClose", handlePopoverClose);
     window.removeEventListener("popstate", setCurrentUrl);
     window.removeEventListener("keydown", handleKeyDown);
     window.removeEventListener("resize", handleWindowResize);
