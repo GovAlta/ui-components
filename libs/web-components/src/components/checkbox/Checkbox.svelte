@@ -86,7 +86,8 @@
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
-    mb ??= size === "compact" ? "s" : "m";
+    // V2: Removed default bottom margin - checkbox-list now handles spacing via gap
+    // Previously: mb ??= size === "compact" ? "s" : "m";
 
     addRelayListener();
     addRevealSlotListener();
@@ -589,10 +590,15 @@ max-width: ${maxwidth};
   }
 
   .v2 .container:has(:focus-visible),
+  .v2 .container:has(:focus),
   .v2 .container:has(:focus-visible):hover,
+  .v2 .container:has(:focus):hover,
   .v2 .container.selected:has(:focus-visible):hover,
+  .v2 .container.selected:has(:focus):hover,
   .v2 label:hover .container.selected:has(:focus-visible),
-  .v2 label:hover .container:has(:focus-visible) {
+  .v2 label:hover .container.selected:has(:focus),
+  .v2 label:hover .container:has(:focus-visible),
+  .v2 label:hover .container:has(:focus) {
     outline: var(--goa-checkbox-border-focus);
     outline-offset: var(--goa-space-3xs);
     box-shadow: none;
