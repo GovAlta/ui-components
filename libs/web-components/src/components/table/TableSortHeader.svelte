@@ -6,7 +6,10 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { GoAVersion } from "../../common/types";
+
   export let direction: GoATableSortDirection = "none";
+  export let version: GoAVersion = "1";
 
   // Private
   let _rootEl: HTMLElement;
@@ -24,18 +27,15 @@
   });
 </script>
 
-<button bind:this={_rootEl}>
+<button bind:this={_rootEl} class:sorted={direction !== "none"} class:v2={version === "2"}>
   <slot />
-  {#if direction === "desc"}
-    <goa-icon type="caret-down" size="small" />
-  {:else if direction === "asc"}
-    <goa-icon type="caret-up" size="small" />
-  {:else}
-    <div class="direction--none">
-      <goa-icon type="caret-up" size="small" />
-      <goa-icon type="caret-down" size="small" />
-    </div>
-  {/if}
+  <span class="icon-wrapper" class:direction--none={direction === "none"}>
+    {#if direction === "desc"}
+      <goa-icon type="arrow-down" size="3" />
+    {:else}
+      <goa-icon type="arrow-up" size="3" />
+    {/if}
+  </span>
 </button>
 
 <style>
@@ -64,7 +64,7 @@
 
   /* User set classes */
   button:hover {
-    background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-100));
+    background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-150));
     cursor: pointer;
     color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
   }
@@ -73,35 +73,62 @@
     outline: none;
   }
 
+  /* V1: Focus ring on whole button */
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-border-width-l)
-    var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
   }
 
-  button goa-icon {
+  /* V2: No focus ring on button, focus ring goes on icon instead */
+  button.v2:focus-visible {
+    box-shadow: none;
+  }
+
+  /* Icon wrapper - contains the sort icon */
+  .icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--goa-border-radius-m);
+  }
+
+  /* V2: Focus ring on icon when button is focused - matches icon-button V2 focus styling */
+  button.v2:focus-visible .icon-wrapper {
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 2px) var(--goa-icon-button-focus-border-color, var(--goa-color-interactive-focus));
+  }
+
+  /* Active sort icon */
+  button.sorted goa-icon {
     color: var(--goa-color-interactive-default);
   }
-  button:hover goa-icon {
+  button.sorted:hover goa-icon {
     color: var(--goa-color-interactive-hover);
   }
-  button .direction--none goa-icon {
+
+  /* Unsorted - hidden by default, show on hover */
+  .direction--none {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  button:hover .direction--none {
+    opacity: 1;
+  }
+
+  /* V2: Also show icon on focus (not just hover) */
+  button.v2:focus-visible .direction--none {
+    opacity: 1;
+  }
+
+  .direction--none goa-icon {
     color: var(--goa-color-greyscale-400);
   }
+
   button:hover .direction--none goa-icon {
     color: var(--goa-color-interactive-hover);
   }
 
-  goa-icon {
-    scale: 0.8;
-  }
-
-  .direction--none goa-icon {
-    height: 0.625rem;
-  }
-
-  .direction--none {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
+  /* V2: Icon color on focus */
+  button.v2:focus-visible .direction--none goa-icon {
+    color: var(--goa-color-interactive-hover);
   }
 </style>

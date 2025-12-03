@@ -72,6 +72,11 @@ a:focus-visible, a:focus-within, a:focus {
   outline-offset: 1px;
 }
 
+/* Suppress focus on anchors inside goa-link - the Link component handles its own focus styling */
+goa-link a:focus-visible, goa-link a:focus-within, goa-link a:focus {
+  outline: none;
+}
+
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #999;

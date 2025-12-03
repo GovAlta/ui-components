@@ -195,12 +195,18 @@
   }
 
   function handleKeyDown(e: KeyboardEvent) {
+    // Only handle arrow keys if focus is inside the side menu
+    // This prevents stealing focus from other components (like DataGrid) that handle their own navigation
+    const activeElement = document.activeElement;
+    const focusInMenu = _rootEl?.contains(activeElement) ||
+                        activeElement?.closest('goa-work-side-menu') !== null;
+
     switch (e?.key) {
       case "ArrowDown":
-        onArrow("down");
+        if (focusInMenu) onArrow("down");
         break;
       case "ArrowUp":
-        onArrow("up");
+        if (focusInMenu) onArrow("up");
         break;
       case "[":
         if (e?.ctrlKey) dispatch(_rootEl, "_toggle", {}, {});

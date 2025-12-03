@@ -156,8 +156,14 @@ goa-table td.goa-table-cell--text {
 }
 
 goa-table td.goa-table-cell--checkbox {
-  padding-top: var(--goa-table-padding-cell-checkbox, 2px) !important;
-  padding-bottom: var(--goa-table-padding-cell-checkbox, 2px) !important;
+  padding-top: var(--goa-table-padding-cell-checkbox, 9px) !important;
+  padding-bottom: var(--goa-table-padding-cell-checkbox, 9px) !important;
+  text-align: center;
+}
+
+goa-table th.goa-table-cell--checkbox {
+  padding-top: var(--goa-table-padding-cell-checkbox, 9px) !important;
+  padding-bottom: 15px !important;
   text-align: center;
 }
 
@@ -235,8 +241,13 @@ goa-table[variant="relaxed"] td.goa-table-cell--text {
 }
 
 goa-table[variant="relaxed"] td.goa-table-cell--checkbox {
-  padding-top: var(--goa-table-padding-cell-checkbox-relaxed, 10px) !important;
-  padding-bottom: var(--goa-table-padding-cell-checkbox-relaxed, 10px) !important;
+  padding-top: var(--goa-table-padding-cell-checkbox-relaxed, 17px) !important;
+  padding-bottom: var(--goa-table-padding-cell-checkbox-relaxed, 17px) !important;
+}
+
+goa-table[variant="relaxed"] th.goa-table-cell--checkbox {
+  padding-top: var(--goa-table-padding-cell-checkbox-relaxed, 17px) !important;
+  padding-bottom: 15px !important;
 }
 
 goa-table[variant="relaxed"] td.goa-table-cell--form-field {

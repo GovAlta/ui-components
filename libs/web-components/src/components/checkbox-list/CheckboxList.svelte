@@ -437,6 +437,6 @@
   .checkbox-container {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: var(--goa-space-m);
   }
 </style>

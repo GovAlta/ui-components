@@ -373,7 +373,9 @@
 
   function setFocusedStyle(el: HTMLElement) {
     if (!el) return;
-    el.style.outline = '3px solid var(--goa-color-interactive-focus)';
+    el.style.outline = '2px solid var(--goa-color-interactive-focus)';
+    // Use negative offset to draw outline inside the cell, preventing clipping on table headers
+    el.style.outlineOffset = '-2px';
   }
 
   function removeFocusedStyle(el: HTMLElement) {
