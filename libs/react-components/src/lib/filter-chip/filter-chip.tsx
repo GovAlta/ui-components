@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Margins, GoabFilterChipTheme } from "@abgov/ui-components-common";
+import { Margins, GoabFilterChipTheme, GoabIconType } from "@abgov/ui-components-common";
 import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 interface WCProps extends Margins {
@@ -7,6 +7,9 @@ interface WCProps extends Margins {
   icontheme: GoabFilterChipTheme;
   error?: string;
   content: string;
+  secondarytext?: string;
+  leadingicon?: string;
+  arialabel?: string;
   testid?: string;
   version?: string;
 }
@@ -25,6 +28,9 @@ export interface GoabFilterChipProps extends Margins, DataGridProps {
   iconTheme?: GoabFilterChipTheme;
   error?: boolean;
   content: string;
+  secondaryText?: string;
+  leadingIcon?: GoabIconType;
+  ariaLabel?: string;
   testId?: string;
 }
 
@@ -33,6 +39,9 @@ export const GoabFilterChip = (props: GoabFilterChipProps) => {
     iconTheme = "outline",
     error,
     content,
+    secondaryText,
+    leadingIcon,
+    ariaLabel,
     onClick,
     mt,
     mr,
@@ -60,6 +69,9 @@ export const GoabFilterChip = (props: GoabFilterChipProps) => {
       icontheme={iconTheme}
       error={error ? "true" : undefined}
       content={content}
+      secondarytext={secondaryText}
+      leadingicon={leadingIcon}
+      arialabel={ariaLabel}
       mt={mt}
       mr={mr}
       mb={mb}
