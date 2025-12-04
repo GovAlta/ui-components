@@ -360,7 +360,7 @@
       border-bottom: var(--goa-tabs-bottom-border);
       display: flex;
       gap: var(--goa-tabs-gap);
-      margin-bottom: 2rem;
+      margin-bottom: var(--goa-tabs-margin-bottom, 2rem);
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding);
@@ -408,7 +408,7 @@
       flex-direction: row;
       gap: var(--goa-tabs-gap);
       padding-bottom: 0;
-      margin-bottom: 2rem;
+      margin-bottom: var(--goa-tabs-margin-bottom, 2rem);
     }
     .no-stack :global([role="tab"]) {
       padding: var(--goa-tab-padding);
