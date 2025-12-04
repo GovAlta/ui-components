@@ -40,7 +40,7 @@ export interface GoabBlockProps extends Margins, DataGridProps {
 }
 
 export function GoabBlock(props: GoabBlockProps) {
-  const [dataGridProps, { gap, direction, alignment, mt, mr, mb, ml, testId, minWidth, maxWidth, children}] = useDataGridProps(props);
+  const [dataGridProps, { gap, direction, alignment, mt, mr, mb, ml, testId, width, minWidth, maxWidth, children}] = useDataGridProps(props);
 
   return (
     <goa-block
@@ -54,6 +54,7 @@ export function GoabBlock(props: GoabBlockProps) {
       mb={mb}
       ml={ml}
       testid={testId}
+      width={width}
       version={"2"}
       {...dataGridProps}
     >
