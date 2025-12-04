@@ -749,4 +749,9 @@
     background-color: var(--goa-text-input-color-bg) !important;
     -webkit-text-fill-color: var(--goa-text-input-color-text) !important;
   }
+
+  /* Leading icon color */
+  .leading-icon {
+    color: var(--goa-text-input-color-icon, inherit);
+  }
 </style>
