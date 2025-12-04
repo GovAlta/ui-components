@@ -60,8 +60,8 @@
       mr="2"
       type="chevron-forward"
       fillcolor={_isMouseOver
-        ? "var(--goa-color-interactive-hover)"
-        : "var(--goa-color-interactive-default)"}
+        ? "var(--goa-details-icon-color-hover, var(--goa-color-interactive-hover))"
+        : "var(--goa-details-icon-color, var(--goa-color-interactive-default))"}
     />
     <span id={`${_detailsId}-heading`}>{heading}</span>
   </summary>
@@ -84,7 +84,7 @@
     position: relative;
   }
   details :global(::slotted(*)) {
-    font: var(--goa-typography-body-m);
+    font: var(--goa-details-content-typography, var(--goa-typography-body-m));
   }
   details[open] goa-icon {
     transform: translateX(-1px) translateY(-0px) rotate(90deg);
@@ -106,6 +106,7 @@
     display: flex;
     align-items: flex-start;
     border-radius: var(--goa-details-border-radius); /* 4px */
+    width: var(--goa-details-heading-width, auto);
   }
   summary:focus-visible {
     outline: var(--goa-details-focus-border);
