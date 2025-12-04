@@ -10,6 +10,7 @@
   export let testid: string = "";
   export let version: "1" | "2" = "2";
   export let updateurl: string = "true"; // when click a tab, it will append #tab-id to URL if this flag is true
+  export let stackonmobile: string = "true"; // when false, tabs stay horizontal on mobile
 
   // margins for tab header
   export let mt: Spacing = null;
@@ -27,6 +28,7 @@
   let _initialLoad: boolean = true;
 
   $: _updateUrl = toBoolean(updateurl);
+  $: _stackOnMobile = toBoolean(stackonmobile);
 
   // ========
   // Hooks
@@ -299,7 +301,7 @@
 
 <!--HTML-->
 
-<div role="tablist" bind:this={_rootEl} class:v2={version === "2"} data-testid={testid}>
+<div role="tablist" bind:this={_rootEl} class:v2={version === "2"} class:no-stack={!_stackOnMobile} data-testid={testid}>
   <div class="tabs" bind:this={_tabsEl} style={calculateMargin(mt, mr, mb, ml)}></div>
   <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
     <slot />
@@ -400,6 +402,30 @@
       border-left: var(--goa-tab-border-hover);
       background: var(--goa-tab-color-bg-hover-small-screen, transparent);
     }
+    /* no-stack: override mobile styles to use desktop layout */
+    .no-stack .tabs {
+      border-left: none;
+      flex-direction: row;
+      gap: var(--goa-tabs-gap);
+      padding-bottom: 0;
+      margin-bottom: 2rem;
+    }
+    .no-stack :global([role="tab"]) {
+      padding: var(--goa-tab-padding);
+      border-left: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: var(--goa-space-2xl);
+      justify-content: center;
+    }
+    .no-stack :global([role="tab"][aria-selected="true"]) {
+      border-left: none;
+      background: transparent;
+    }
+    .no-stack :global([role="tab"]:hover:not([aria-selected="true"])) {
+      border-left: none;
+      background: transparent;
+    }
   }
 
   .v2 :global([role="tab"]) {
@@ -459,6 +485,16 @@
     }
     .v2 :global([role="tab"]:hover:not([aria-selected="true"])::after) {
       background: var(--goa-tab-indicator-color-hover, #DCDCDC);
+    }
+    /* no-stack V2: use desktop ::after positioning */
+    .v2.no-stack :global([role="tab"]::after) {
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: auto;
+      height: var(--goa-tab-indicator-width, 3px);
+      border-radius: var(--goa-tab-indicator-border-radius-desktop, 6px 6px 0 0);
     }
   }
 </style>

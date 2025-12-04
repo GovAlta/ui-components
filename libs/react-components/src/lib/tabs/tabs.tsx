@@ -5,6 +5,7 @@ interface WCProps extends Margins {
   initialtab?: number;
   ref: React.RefObject<HTMLElement | null>;
   updateurl?: string;
+  stackonmobile?: string;
   onChange?: (tab: number) => void;
   testid?: string;
   version?: string;
@@ -24,6 +25,7 @@ export interface GoabTabsProps extends Margins {
   children?: React.ReactNode;
   testId?: string;
   updateUrl?: boolean;
+  stackOnMobile?: boolean;
   onChange?: (detail: GoabTabsOnChangeDetail) => void;
 }
 
@@ -32,6 +34,7 @@ export function GoabTabs({
   children,
   testId,
   updateUrl = true,
+  stackOnMobile = true,
   onChange,
   mt,
   ml,
@@ -55,7 +58,7 @@ export function GoabTabs({
   }, [onChange]);
 
   return (
-    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} updateurl={updateUrl ? "true": "false"} mt={mt} mr={mr} mb={mb} ml={ml} version={"2"}>
+    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} updateurl={updateUrl ? "true": "false"} stackonmobile={stackOnMobile ? "true" : "false"} mt={mt} mr={mr} mb={mb} ml={ml} version={"2"}>
       {children}
     </goa-tabs>
   );
