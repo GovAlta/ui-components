@@ -3,6 +3,7 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { dispatch, toBoolean } from "../../common/utils";
+  import { MOBILE_BP } from "../../common/breakpoints";
 
   type WorkSideMenuItemType = "normal" | "emergency" | "success";
 
@@ -29,6 +30,11 @@
   let _rootEl: HTMLElement;
   let _linkEl: HTMLAnchorElement;
   let _popoverEl: HTMLElement;
+  let _drawerEl: HTMLElement | null = null;
+  let _slotContainerEl: HTMLElement;
+  let _slotContent: Element[] = [];
+  let _isMobile: boolean = typeof window !== 'undefined' && window.innerWidth < MOBILE_BP;
+  let _drawerOpen: boolean = false;
 
   // ========
   // Reactive
@@ -47,11 +53,18 @@
     await tick();
     addEventListeners();
     addPopoverListeners();
+    window.addEventListener("resize", handleResize);
     dispatch(_rootEl, "_mountItem", {}, { bubbles: true });
   });
 
   onDestroy(() => {
     removeEventListeners();
+    window.removeEventListener("resize", handleResize);
+    document.removeEventListener('_close', handleDocumentDrawerClose);
+    // Clean up drawer from document.body
+    if (_drawerEl && _drawerEl.parentNode) {
+      _drawerEl.parentNode.removeChild(_drawerEl);
+    }
   });
 
   // *********
@@ -103,9 +116,77 @@
   function handlePopoverOpen() {
     dispatch(_rootEl, "_popoverOpen", {}, { bubbles: true });
   }
-  
+
   function handlePopoverClose() {
     dispatch(_rootEl, "_popoverClose", {}, { bubbles: true });
+  }
+
+  function handleResize() {
+    _isMobile = window.innerWidth < MOBILE_BP;
+    // Close drawer if switching from mobile to desktop
+    if (!_isMobile && _drawerOpen) {
+      _drawerOpen = false;
+    }
+  }
+
+  function handleMobileMenuClick(e: Event) {
+    e.preventDefault();
+    openMobileDrawer();
+    dispatch(_rootEl, "_mobileDrawerOpen", {}, { bubbles: true });
+    dispatch(_rootEl, "_click", {}, { bubbles: true });
+  }
+
+  function openMobileDrawer() {
+    // Create drawer on document.body if it doesn't exist
+    if (!_drawerEl) {
+      _drawerEl = document.createElement('goa-drawer');
+      _drawerEl.setAttribute('position', 'bottom');
+      _drawerEl.setAttribute('heading', label);
+      _drawerEl.setAttribute('maxsize', '80vh');
+
+      document.body.appendChild(_drawerEl);
+
+      // Move slot content into the drawer (only once)
+      if (_slotContainerEl) {
+        const slotEl = _slotContainerEl.querySelector('slot') as HTMLSlotElement;
+        if (slotEl) {
+          _slotContent = Array.from(slotEl.assignedElements());
+          _slotContent.forEach(el => {
+            // Remove the slot attribute so it goes into the drawer's default slot
+            el.removeAttribute('slot');
+            _drawerEl!.appendChild(el);
+          });
+        }
+      }
+
+      // Listen for _close event on document (it bubbles up with composed: true)
+      document.addEventListener('_close', handleDocumentDrawerClose);
+    }
+
+    // Open the drawer
+    _drawerEl.setAttribute('open', 'true');
+    _drawerOpen = true;
+  }
+
+  function handleDocumentDrawerClose(e: Event) {
+    // Check if the event came from our drawer using composedPath
+    const path = e.composedPath();
+    if (_drawerEl && path.includes(_drawerEl)) {
+      handleDrawerClose();
+    }
+  }
+
+  function handleDrawerClose() {
+    _drawerOpen = false;
+
+    // Don't move content back - keep it in the drawer for next open
+    // Just close the drawer - remove attribute for boolean false
+    if (_drawerEl) {
+      _drawerEl.removeAttribute('open');
+    }
+
+    // Close the side menu when drawer closes on mobile
+    dispatch(_rootEl, "_mobileDrawerClose", {}, { bubbles: true });
   }
 </script>
 
@@ -117,7 +198,8 @@
   on:mouseenter={handleMouseEnter}
   bind:this={_rootEl}
 >
-  {#if $$slots.popoverContent}
+  {#if $$slots.popoverContent && !_isMobile}
+    <!-- Desktop: Use popover -->
     <div class="popover-wrapper">
       <goa-popover
         bind:this={_popoverEl}
@@ -162,6 +244,41 @@
         </a>
         <slot name="popoverContent"></slot>
       </goa-popover>
+    </div>
+  {:else if $$slots.popoverContent && _isMobile}
+    <!-- Mobile: Use drawer (appended to document.body) -->
+    <a
+      class="menu-item"
+      class:current
+      role="menuitem"
+      href={url !== "none" ? url : undefined}
+      bind:this={_linkEl}
+      on:click={handleMobileMenuClick}
+      on:keydown={(e) => {
+        if (e.key === "Enter") {
+          handleMobileMenuClick(e);
+        }
+      }}
+      tabindex="0"
+    >
+      <goa-icon size="small" theme={current ? "filled" : "outline"} type={icon} />
+      <div class="menu-item-label">
+        {label}
+      </div>
+      {#if badge}
+        <div
+          class="badge"
+          class:emergency={type == "emergency"}
+          class:success={type == "success"}
+          class:alwaysvisible={_alwaysVisible}
+        >
+          {badge}
+        </div>
+      {/if}
+    </a>
+    <!-- Hidden container to hold slot content; moved to drawer on document.body when opened -->
+    <div class="slot-container" bind:this={_slotContainerEl}>
+      <slot name="popoverContent"></slot>
     </div>
   {:else}
     <a
@@ -213,6 +330,10 @@
   .popover-wrapper goa-popover {
     display: block;
     width: 100%;
+  }
+
+  .slot-container {
+    display: none;
   }
 
   /* Menu item */

@@ -41,6 +41,7 @@
   let _showAccountMenu = false;
   let _showTooltip = false;
   let _popoverOpen = false;
+  let _mobileDrawerOpen = false;
 
   let _focusedIndex: number = -1;
   let _focusItems: HTMLElement[] = [];
@@ -363,6 +364,18 @@
     return observer;
   }
 
+  function handleMobileDrawerOpen() {
+    _mobileDrawerOpen = true;
+  }
+
+  function handleMobileDrawerClose() {
+    // Close the side menu first, then remove drawer-open class
+    // This prevents the menu from briefly appearing
+    open = false;
+    dispatch(_rootEl, "_toggle", {}, { bubbles: true });
+    _mobileDrawerOpen = false;
+  }
+
   function addEventListeners() {
     _rootEl.addEventListener("_click", setCurrentUrl);
     _rootEl.addEventListener("_mountItem", addMenuLink);
@@ -370,6 +383,8 @@
     _rootEl.addEventListener("_toggle", toggleMenu);
     _rootEl.addEventListener("_popoverOpen", handlePopoverOpen);
     _rootEl.addEventListener("_popoverClose", handlePopoverClose);
+    _rootEl.addEventListener("_mobileDrawerOpen", handleMobileDrawerOpen);
+    _rootEl.addEventListener("_mobileDrawerClose", handleMobileDrawerClose);
     window.addEventListener("popstate", setCurrentUrl); // watch for hash & browser history changes
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("resize", handleWindowResize);
@@ -382,6 +397,8 @@
     _rootEl.removeEventListener("_toggle", toggleMenu);
     _rootEl.removeEventListener("_popoverOpen", handlePopoverOpen);
     _rootEl.removeEventListener("_popoverClose", handlePopoverClose);
+    _rootEl.removeEventListener("_mobileDrawerOpen", handleMobileDrawerOpen);
+    _rootEl.removeEventListener("_mobileDrawerClose", handleMobileDrawerClose);
     window.removeEventListener("popstate", setCurrentUrl);
     window.removeEventListener("keydown", handleKeyDown);
     window.removeEventListener("resize", handleWindowResize);
@@ -392,6 +409,7 @@
   class="root"
   class:closed={!open}
   class:scrolling={_isScrolling}
+  class:drawer-open={_mobileDrawerOpen}
   data-testid={testid}
   role="presentation"
   bind:this={_rootEl}
@@ -899,6 +917,12 @@
         --goa-work-side-menu-mobile-bg,
         var(--goa-color-greyscale-50)
       );
+    }
+
+    /* Hide menu when drawer is open on mobile (drawer is portaled to document.body) */
+    .root.drawer-open {
+      visibility: hidden;
+      opacity: 0;
     }
   }
 
