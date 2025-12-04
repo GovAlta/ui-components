@@ -14,6 +14,7 @@ interface WCProps extends Margins {
   arialive?: GoabCalloutAriaLive;
   maxwidth?: string;
   icontheme?: GoabCalloutIconTheme;
+  version?: string;
   testid?: string;
 }
 
@@ -65,6 +66,7 @@ export const GoabCallout = (props: GoabCalloutProps) => {
       mr={mr}
       mb={mb}
       ml={ml}
+      version={"2"}
       testid={testId}
       {...dataGridProps}
     >
