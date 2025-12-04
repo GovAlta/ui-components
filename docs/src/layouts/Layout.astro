@@ -1,0 +1,103 @@
+---
+import { GoabAppHeader, GoabAppFooter, GoabAppFooterMetaSection, GoabAppFooterNavSection, GoabOneColumnLayout, GoabMicrositeHeader } from "@abgov/react-components";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+const MAX_CONTENT_WIDTH = "1440px";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Design system {title && `: ${title}`}</title>
+		<link rel="stylesheet" href="/web-components/index.css" />
+		<script is:inline type="module" src="/web-components/index.js"></script>
+	</head>
+
+	<body>
+    <GoabOneColumnLayout>
+      <GoabMicrositeHeader
+        slot="header"
+        type={"live"}
+        feedbackUrl="https://forms.microsoft.com/r/8Zp7zSJS6W"
+        maxContentWidth={"1440px"} />
+      <GoabAppHeader
+        heading="Design system"
+        maxContentWidth={MAX_CONTENT_WIDTH} url={"/"}
+        fullMenuBreakpoint={996}
+      >
+        <a href="/get-started">Get started</a>
+        <a href="/foundations">Foundations</a>
+        <a href="/examples">Examples</a>
+        <a href="/components">Components</a>
+        <a href="/design-tokens">Tokens</a>
+        <a href="/get-started/support" class="interactive">Get support</a>
+      </GoabAppHeader>
+
+      <div class="content">
+        <slot />
+      </div>
+
+      <GoabAppFooter
+        url="/"
+        maxContentWidth={MAX_CONTENT_WIDTH}
+        slot="footer"
+      >
+        <GoabAppFooterNavSection heading="Resources" maxColumnCount={2}>
+          <a href="/get-started">Get started</a>
+          <a href="/foundations">Foundations</a>
+          <a href="/examples">Examples</a>
+          <a href="/components">Components</a>
+          <a href="/design-tokens">Design tokens</a>
+        </GoabAppFooterNavSection>
+        <GoabAppFooterNavSection heading="Get support">
+          <a href="/get-started/support/report-bug" target="_blank">Submit an issue</a>
+          <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9">#design-system-support</a>
+        </GoabAppFooterNavSection>
+        <GoabAppFooterMetaSection>
+          <a href="get-started/contribute">Contribute to the design system</a>
+          <a href="/get-started/roadmap">Roadmap</a>
+          <a href="https://github.com/GovAlta/ui-components/releases">Release notes</a>
+        </GoabAppFooterMetaSection>
+      </GoabAppFooter>
+    </GoabOneColumnLayout>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+	  /* global tokens
+		--some-val: 136, 58, 234;
+		*/
+	}
+
+	a {
+	  text-decoration: none;
+	}
+
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+
+	.content {
+	  max-width: 1440px;
+		width: 100%;
+		margin: 0 auto;
+	}
+</style>

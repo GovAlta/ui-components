@@ -1,0 +1,43 @@
+---
+
+import Layout from "@/layouts/Layout.astro";
+import { GoabSideMenu, GoabSideMenuGroup, GoabSpacer } from "@abgov/react-components";
+import SupportInfo from "@/components/SupportInfo.astro";
+import PageContent from "@/components/PageContent.astro";
+import TableOfContents from "@/components/table-of-contents/toc.tsx";
+
+const { title } = Astro.props;
+
+---
+
+<Layout title={title}>
+  <PageContent>
+    <GoabSideMenu slot="nav">
+      <GoabSpacer vSpacing="m"></GoabSpacer>
+      <a href="/">Start with the design system</a>
+      <GoabSideMenuGroup heading="Designers">
+        <a href="/designers">Overview</a>
+        <a href="/user-experience-guidelines">User experience guidelines</a>
+      </GoabSideMenuGroup>
+      <GoabSideMenuGroup heading="Developers">
+        <a href="/developers">Overview</a>
+        <a href="/developers/setup">Setup</a>
+        <a href="/developers/bug">Verify a bug</a>
+        <a href="/developers/vscode">VS Code</a>
+        <a href="/developers/technologies">Technologies </a>
+        <a href="/developers/browsers">Supported Browsers</a>
+        <a href="/developers/update">Version update guide</a>
+      </GoabSideMenuGroup>
+      <a href="/qa-testing">QA testing</a>
+      <a href="/component-lifecycle">Component lifecycle</a>
+      <a href="/contribute">Contribute</a>
+      <a href="/roadmap">Roadmap</a>
+      <a href="/lts-policy">Long Term Support (LTS)</a>
+      <a href="/support">Get support</a>
+    </GoabSideMenu>
+
+    <slot />
+
+    <TableOfContents client:load slot="aside" cssQuery=":is(h2[id], h3[id])" />
+  </PageContent>
+</Layout>

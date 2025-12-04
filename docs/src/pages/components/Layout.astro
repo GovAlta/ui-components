@@ -1,0 +1,75 @@
+---
+
+import Layout from "@/layouts/Layout.astro";
+import { GoabSideMenu, GoabSideMenuGroup, GoabSpacer } from "@abgov/react-components";
+import PageContent from "@/components/PageContent.astro";
+import TableOfContents from "@/components/table-of-contents/toc.tsx";
+
+const { title } = Astro.props;
+
+---
+
+<Layout title={title}>
+  <PageContent>
+    <GoabSideMenu slot="nav">
+      <GoabSpacer vSpacing="m"></GoabSpacer>
+      <a href="">All</a>
+      <GoabSideMenuGroup heading="Content layout">
+        <a href="components/accordion">Accordion</a>
+        <a href="components/callout">Callout</a>
+        <a href="components/container">Container</a>
+        <a href="components/details">Details</a>
+        <a href="components/hero-banner">Hero banner</a>
+        <a href="components/list">List</a>
+        <a href="components/popover">Popover</a>
+        <a href="components/table">Table</a>
+        <a href="components/text">Text</a>
+      </GoabSideMenuGroup>
+      <GoabSideMenuGroup heading="Feedback and alerts">
+        <a href="components/badge">Badge</a>
+        <a href="components/filter-chip">Filter chip</a>
+        <a href="components/modal">Modal</a>
+        <a href="components/notification-banner">Notification banner</a>
+        <a href="components/progress-indicator">Progress indicator</a>
+        <a href="components/skeleton-loader">Skeleton loader</a>
+        <a href="components/temporary-notification">Temporary notification</a>
+        <a href="components/tooltip">Tooltip</a>
+      </GoabSideMenuGroup>
+      <GoabSideMenuGroup heading="Inputs and actions">
+        <a href="components/button">Button</a>
+        <a href="components/button-group">Button group</a>
+        <a href="components/checkbox">Checkbox</a>
+        <a href="components/date-picker">Date picker</a>
+        <a href="components/dropdown">Dropdown</a>
+        <a href="components/file-uploader">File uploader</a>
+        <a href="components/icon-button">Icon button</a>
+        <a href="components/input">Input</a>
+        <a href="components/radio">Radio</a>
+        <a href="components/text-area">Text area</a>
+      </GoabSideMenuGroup>
+      <GoabSideMenuGroup heading="Structure and navigation">
+        <a href="components/drawer">Drawer</a>
+        <a href="components/footer">Footer</a>
+        <a href="components/form-stepper">Form stepper</a>
+        <a href="components/header">Header</a>
+        <a href="components/microsite-header">Microsite header</a>
+        <a href="components/pagination">Pagination</a>
+        <a href="components/side-menu">Side menu</a>
+        <a href="components/tabs">Tabs</a>
+      </GoabSideMenuGroup>
+      <GoabSideMenuGroup heading="Utilities">
+        <a href="components/block">Block</a>
+        <a href="components/divider">Divider</a>
+        <a href="components/form-item">Form item</a>
+        <a href="components/grid">Grid</a>
+        <a href="components/icons">Icons</a>
+        <a href="components/link">Link</a>
+        <a href="components/spacer">Spacer</a>
+      </GoabSideMenuGroup>
+    </GoabSideMenu>
+
+    <slot />
+
+    <TableOfContents client:load slot="aside" cssQuery="goa-tab[open=true] :is(h2[id], h3[id])" />
+  </PageContent>
+</Layout>

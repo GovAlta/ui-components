@@ -1,0 +1,36 @@
+---
+import Layout from "./Layout.astro";
+import { GoabTabs, GoabTab, GoabAccordion, GoabText} from "@abgov/react-components";
+---
+
+
+<Layout title="Accordion">
+  <GoabTabs initialTab={1}>
+    <GoabTab heading="Code playground">
+      <h2 id="component" style={{ display: "none" }}>
+        Playground
+      </h2>
+      <GoabAccordion heading="Example accordion">
+        This is the content in an accordion item. This content can be anything that you want including rich
+        text, components, and more.
+      </GoabAccordion>
+    </GoabTab>
+    <GoabTab
+      heading="Examples">
+
+      <h2 id="example-1">Example 1</h2>
+      Examples are needed here
+
+      <h2 id="example-2">Example 2</h2>
+      Examples are needed here
+    </GoabTab>
+    <GoabTab heading="Design">
+      Design stuff
+      <input />
+    </GoabTab>
+    <GoabTab heading="Accessibility">
+      Accessibility stuff
+    </GoabTab>
+
+  </GoabTabs>
+</Layout>

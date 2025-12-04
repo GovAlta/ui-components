@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@abgov/docs": ["./docs/*"],
       "@abgov/angular-components": ["libs/angular-components/src/index.ts"],
       "@abgov/react-components": ["libs/react-components/src/index.ts"],
       "@abgov/react-components/experimental": [
