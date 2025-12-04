@@ -12,9 +12,11 @@
     "links-only",
   ]);
   type Variant = (typeof Variants)[number];
+  type Version = "1" | "2";
 
   // public
 
+  export let version: Version = "1";
   export let pagenumber: number;
   export let itemcount: number;
   export let perpagecount: number = 10;
@@ -99,6 +101,8 @@
         <input bind:this={hiddenEl} type="hidden" />
         {#if itemcount <= 0}
           <goa-dropdown
+            {version}
+            size={version === "2" ? "compact" : "default"}
             bind:this={pageDropdownEl}
             value="1"
             on:_change={handlePageChange}
@@ -108,6 +112,8 @@
         {:else}
           {#key _pageCount}
             <goa-dropdown
+              {version}
+              size={version === "2" ? "compact" : "default"}
               bind:this={pageDropdownEl}
               value={pagenumber}
               on:_change={handlePageChange}
@@ -125,15 +131,19 @@
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
+        {version}
         on:click={(e) => goto(e, -1)}
         type="tertiary"
+        size={version === "2" ? "compact" : "normal"}
         leadingicon="arrow-back"
         disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}>Previous</goa-button>
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
+        {version}
         on:click={(e) => goto(e, 1)}
         type="tertiary"
+        size={version === "2" ? "compact" : "normal"}
         trailingicon="arrow-forward"
         disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}>Next</goa-button>
     </goa-block>
@@ -143,11 +153,13 @@
 <style>
   span {
     white-space: nowrap;
+    font: var(--goa-pagination-text-size);
+    color: var(--goa-pagination-text-color);
   }
 
   .controls {
     display: flex;
-    gap: 1rem;
+    gap: var(--goa-pagination-gap, 1rem);
     flex-direction: column;
     align-items: center;
     width: 100%;
