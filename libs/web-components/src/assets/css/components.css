@@ -73,6 +73,29 @@ goa-table[version="2"][striped="true"] tbody tr:nth-child(even) td {
   background-color: var(--goa-color-greyscale-50);
 }
 
+/* V2: Row hover state - needs striped selector for specificity */
+goa-table[version="2"] tbody tr:hover td,
+goa-table[version="2"][striped="true"] tbody tr:hover td {
+  background-color: var(--goa-table-color-bg-row-hover, var(--goa-color-greyscale-100));
+}
+
+/* V2: Row selected state (using aria-selected for accessibility) */
+goa-table[version="2"] tbody tr[aria-selected="true"] td,
+goa-table[version="2"][striped="true"] tbody tr[aria-selected="true"] td {
+  background-color: var(--goa-table-color-bg-row-selected, var(--goa-color-interactive-secondary));
+}
+
+/* V2: Selected row left border indicator on first cell */
+goa-table[version="2"] tbody tr[aria-selected="true"] td:first-child {
+  box-shadow: inset 3px 0 0 0 var(--goa-table-color-row-selected-indicator, var(--goa-color-interactive-default));
+}
+
+/* V2: Selected row hover - slightly darker */
+goa-table[version="2"] tbody tr[aria-selected="true"]:hover td,
+goa-table[version="2"][striped="true"] tbody tr[aria-selected="true"]:hover td {
+  background-color: var(--goa-table-color-bg-row-selected-hover, var(--goa-color-interactive-secondary-hover));
+}
+
 /* Relaxed variant - larger spacing and height for data cells only */
 goa-table[variant="relaxed"] td {
   padding: var(--goa-table-padding-data-relaxed, var(--goa-space-m));
