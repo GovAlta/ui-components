@@ -91,7 +91,7 @@
   }
 </script>
 
-<goa-block id="root" {ml} {mr} {mb} {mt}>
+<goa-block id="root" {ml} {mr} {mb} {mt} width="100%">
   <div class="controls" data-testid={testid}>
     {#if variant === "all"}
       <goa-block data-testid="page-selector" alignment="center" gap="s">
@@ -128,14 +128,18 @@
         on:click={(e) => goto(e, -1)}
         type="tertiary"
         leadingicon="arrow-back"
-        disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}>Previous</goa-button>
+        disabled={itemcount <= 0 || pagenumber <= 1 ? "true" : "false"}
+        >Previous</goa-button
+      >
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <goa-button
         on:click={(e) => goto(e, 1)}
         type="tertiary"
         trailingicon="arrow-forward"
-        disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}>Next</goa-button>
+        disabled={itemcount <= 0 || pagenumber >= _pageCount ? "true" : "false"}
+        >Next</goa-button
+      >
     </goa-block>
   </div>
 </goa-block>
