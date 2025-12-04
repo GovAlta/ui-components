@@ -188,16 +188,17 @@
       width: 100%;
       display: flex;
     }
-    button.tertiary {
+    /* V1 only: tertiary buttons get grey background on mobile */
+    button.tertiary:not(.v2) {
       background-color: var(--goa-button-tertiary-color-bg-mobile) !important;
     }
-    button.tertiary:hover {
+    button.tertiary:not(.v2):hover {
       background-color: var(--goa-color-greyscale-200) !important;
     }
-    button.tertiary.inverse {
+    button.tertiary.inverse:not(.v2) {
       background-color: var(--goa-button-tertiary-color-bg) !important;
     }
-    button.tertiary.inverse:hover {
+    button.tertiary.inverse:not(.v2):hover {
       background-color: var(--goa-color-greyscale-200) !important;
     }
   }
