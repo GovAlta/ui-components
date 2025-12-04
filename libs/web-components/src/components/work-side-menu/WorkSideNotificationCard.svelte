@@ -22,6 +22,7 @@
   export let id: string = ""; // to identify which notification is clicked
   export let maxwidth: string = "";
   export let unread: string = "true";
+  export let urgent: string = "false";
 
   let _rootEl: HTMLElement;
   let _transformTime: string = "";
@@ -29,6 +30,7 @@
 
   $: _transformTime = formatTimestamp(timestamp ? new Date(timestamp) : null);
   $: _unread = toBoolean(unread);
+  $: _urgent = toBoolean(urgent);
   $: _fullDate = formatFullDate(timestamp ? new Date(timestamp) : null);
 
   onMount(() => {
@@ -97,40 +99,55 @@
 </script>
 
 <!-- HTML -->
-<div class="card type-{type}"
+<div class="card"
+     class:read={!_unread}
+     class:urgent={_urgent}
      role="button"
      tabindex="0"
      style={maxwidth ? `max-width: ${maxwidth}` : ''}
      on:click={handleClick}
      on:keydown={handleKeyDown}
     bind:this={_rootEl}>
-<div class="content">
+<div class="top-row">
   <div class="header-row">
-    <goa-text as="h4" size="heading-xs" mt="none">
+    <h4 class="notification-title">
       {title}
-    </goa-text>
+    </h4>
 
     {#if $$slots.badge}
       <span class="badge-container">
         <slot name="badge" />
       </span>
+    {:else if type === "info"}
+      <span class="badge-container">
+        <goa-badge type="information" content="Info" emphasis="subtle" version="2" />
+      </span>
+    {:else if type === "warning"}
+      <span class="badge-container">
+        <goa-badge type="important" content="Important" emphasis="subtle" version="2" />
+      </span>
+    {:else if type === "success"}
+      <span class="badge-container">
+        <goa-badge type="success" content="Success" emphasis="subtle" version="2" />
+      </span>
+    {:else if type === "critical"}
+      <span class="badge-container">
+        <goa-badge type="emergency" content="Critical" emphasis="subtle" version="2" />
+      </span>
     {/if}
   </div>
-
-  <div class="description">
-    <goa-text as="span" size="body-s">
-      {description}
-    </goa-text>
-  </div>
+  <goa-tooltip content={_fullDate} position="left">
+    <div class="timestamp-container" aria-label={_fullDate}>
+      <span class="unread-dot" class:hidden={!_unread}></span>
+      <p class="timestamp">{_transformTime}</p>
+    </div>
+  </goa-tooltip>
 </div>
-<goa-tooltip content={_fullDate} position="left">
-  <div class="timestamp-container" aria-label={_fullDate}>
-    {#if _unread}
-      <span class="unread-dot"></span>
-    {/if}
-    <goa-text as="span" size="body-xs">{_transformTime}</goa-text>
-  </div>
-</goa-tooltip>
+<div class="description">
+  <goa-text as="span" size="body-s" color={_unread ? "primary" : "secondary"}>
+    {description}
+  </goa-text>
+</div>
 </div>
 
 <!-- Style -->
@@ -142,53 +159,50 @@
   }
   .card {
     display: flex;
-    gap: var(--goa-space-s);
-    align-items: flex-start;
-    padding: var(--goa-space-m) var(--goa-space-m);
+    flex-direction: column;
+    gap: var(--goa-space-xs);
+    padding: var(--goa-space-m) var(--goa-space-l);
     cursor: pointer;
     border: none;
-    border-bottom: 1px solid var(--goa-color-greyscale-200);
+    border-bottom: 1px solid var(--goa-color-greyscale-100);
     background: white;
     width: 100%;
     box-sizing: border-box;
     text-align: left;
     transition: background-color 0.2s ease;
   }
-  .card:hover {
-    background: var(--goa-color-text-default);
-  }
   .card:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: -2px;
   }
-  .card.type-default {
-    background: white;
+  .card.read {
+    background: var(--goa-color-greyscale-50);
   }
-  .card.type-critical {
-    background: var(--goa-color-emergency-background);
+  .card.read .notification-title {
+    color: var(--goa-color-greyscale-700);
   }
-  .card.type-warning {
+  .card.urgent {
     background: var(--goa-color-warning-background);
   }
-  .card.type-success {
-    background: var(--goa-color-success-background);
+  .card.urgent.read {
+    background: var(--goa-color-greyscale-50);
   }
-  .card.type-info {
-    background: var(--goa-color-info-background);
-  }
-  .card.type-default:hover, .card.type-critical:hover, .card.type-warning:hover, .card.type-success:hover, .card.type-info:hover {
-    background: var(--goa-color-greyscale-200);
-  }
-  .card.type-default:focus-visible, .card.type-critical:focus-visible, .card.type-warning:focus-visible, .card.type-success:focus-visible, .card.type-info:focus-visible {
+  .card:hover {
     background: var(--goa-color-greyscale-100);
   }
-  /* Content area (left side) */
-  .content {
-    flex: 1;
+  .card.urgent:hover {
+    background: #F5ECDB;
+  }
+  .card.urgent.read:hover {
+    background: var(--goa-color-greyscale-100);
+  }
+  /* Top row (header + timestamp) */
+  .top-row {
     display: flex;
-    flex-direction: column;
-    gap: var(--goa-space-3xs);
-    min-width: 0; /* Allow text truncation */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--goa-space-s);
+    width: 100%;
   }
 
   /* Header row (title + badge) */
@@ -197,14 +211,15 @@
     align-items: center;
     gap: var(--goa-space-xs);
     flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
   }
 
-  /* Title (bold label) */
-  .title {
-    font-weight: var(--goa-font-weight-bold);
-    font-size: var(--goa-font-size-3);
+  /* Title (notification heading) */
+  .notification-title {
+    font: var(--goa-typography-heading-2xs);
     color: var(--goa-color-text-default);
-    line-height: 1.5;
+    margin: 0;
   }
 
   /* Badge container (slot content) */
@@ -234,25 +249,35 @@
   /* Green dot for unread notifications */
   .unread-dot {
     display: inline-block;
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: var(--goa-color-success-default);
     flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+  .unread-dot.hidden {
+    visibility: hidden;
+  }
+
+  /* Timestamp tooltip */
+  goa-tooltip {
+    --goa-tooltip-gap: 0;
   }
 
   /* Timestamp text */
   .timestamp {
-    font-size: var(--goa-font-size-2);
-    color: var(--goa-color-greyscale-700);
+    font: var(--goa-typography-body-xs);
+    color: var(--goa-color-greyscale-600);
     white-space: nowrap;
-    line-height: 1.5;
+    margin: 0;
   }
 
   /* Mobile responsive */
   @media (max-width: 624px) {
     .card {
-      padding: var(--goa-space-s) var(--goa-space-m);
+      padding: var(--goa-space-s) var(--goa-space-l);
     }
 
     .timestamp-container {
