@@ -111,6 +111,8 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
+    box-shadow: var(--goa-container-shadow, none);
+    border-radius: var(--goa-container-border-radius, 0);
   }
 
   .goa-container * {
