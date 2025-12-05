@@ -37,7 +37,6 @@ export * from "./form/public-subform";
 export * from "./form/public-subform-index";
 export * from "./form/task";
 export * from "./form/task-list";
-export * from "./form/fieldset";
 export * from "./form-item/form-item";
 export * from "./form-item/form-item-slot";
 export * from "./form-step/form-step";

@@ -3,40 +3,62 @@ export function dispatch<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
   detail?: T,
-  opts?: { bubbles?: boolean },
+  opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
-  if (!el) {
-    console.error("dispatch element is null");
-    return;
+  const dispatch = () => {
+    try {
+      el?.dispatchEvent?.(
+        new CustomEvent<T>(eventName, {
+          composed: true,
+          bubbles: opts?.bubbles,
+          cancelable: opts?.cancelable,
+          detail,
+        }),
+      );
+    } catch (e) {
+      console.error("dispatch() error:", e);
+    }
+  };
+
+  if (opts?.timeout) {
+    setTimeout(dispatch, opts.timeout);
+  } else {
+    dispatch();
   }
-  el.dispatchEvent(
-    new CustomEvent<T>(eventName, {
-      composed: true,
-      bubbles: opts?.bubbles,
-      detail: detail,
-    }),
-  );
 }
 
-// Public helper function to relay messages
 export function relay<T>(
   el: HTMLElement | Element | null | undefined,
   eventName: string,
   data?: T,
-  opts?: { bubbles?: boolean },
+  opts?: { bubbles?: boolean; cancelable?: boolean; timeout?: number },
 ) {
   if (!el) {
-    console.error("dispatch element is null");
+    console.warn("relay() el is null | undefined");
     return;
   }
-  el.dispatchEvent(
-    new CustomEvent<{ action: string; data?: T }>("msg", {
-      composed: true,
-      bubbles: opts?.bubbles,
-      detail: {
-        action: eventName,
-        data,
-      },
-    }),
-  );
+
+  const dispatch = () => {
+    try {
+      el?.dispatchEvent?.(
+        new CustomEvent<{ action: string; data?: T }>("msg", {
+          composed: true,
+          bubbles: opts?.bubbles,
+          cancelable: opts?.cancelable,
+          detail: {
+            action: eventName,
+            data,
+          },
+        }),
+      );
+    } catch (e) {
+      console.error("relay() error:", e);
+    }
+  };
+
+  if (opts?.timeout) {
+    setTimeout(dispatch, opts.timeout);
+  } else {
+    dispatch();
+  }
 }

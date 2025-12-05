@@ -26,7 +26,6 @@ import {
   GoabDrawer,
   GoabDropdown,
   GoabDropdownItem,
-  GoabFieldset,
   GoabFileUploadCard,
   GoabFileUploadInput,
   GoabFilterChip,
@@ -50,13 +49,6 @@ import {
   GoabPages,
   GoabPagination,
   GoabPopover,
-  GoabPublicForm,
-  GoabPublicFormPage,
-  GoabPublicFormSummary,
-  GoabPublicFormTask,
-  GoabPublicFormTaskList,
-  GoabPublicSubform,
-  GoabPublicSubformIndex,
   GoabRadioGroup,
   GoabRadioItem,
   GoabSideMenu,
@@ -103,7 +95,6 @@ import {
   GoabFileUploadInputOnSelectFileDetail,
   GoabFileUploadOnCancelDetail,
   GoabFileUploadOnDeleteDetail,
-  GoabFormState,
   GoabFormStepStatus,
   GoabFormStepperOnChangeDetail,
   GoabIconButtonVariant,
@@ -351,11 +342,6 @@ export function EverythingRoute(): JSX.Element {
   const [inputTrailingClicks, setInputTrailingClicks] = useState(0);
   const [numberInputTrailingClicks, setNumberInputTrailingClicks] = useState(0);
   const [menuAction, setMenuAction] = useState<string | undefined>();
-  const [publicFormEvents, setPublicFormEvents] = useState<string[]>([]);
-  const [fieldsetContinueEvents, setFieldsetContinueEvents] = useState<
-    GoabFieldsetOnContinueDetail[]
-  >([]);
-  const [publicSubformEvents, setPublicSubformEvents] = useState<string[]>([]);
   const logEvent = (name: string, detail: unknown) => {
     console.log(`[everything][react] ${name}`, detail);
     const entry: EventLogEntry = { name, detail, timestamp: new Date().toISOString() };

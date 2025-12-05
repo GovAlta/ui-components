@@ -15,8 +15,6 @@
   import {
     typeValidator,
     toBoolean,
-    relay,
-    receive,
     dispatch,
     styles,
   } from "../../common/utils";
@@ -24,16 +22,7 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
-  import {
-    FieldsetErrorRelayDetail,
-    FieldsetResetErrorsMsg,
-    FieldsetResetFieldsMsg,
-    FieldsetSetErrorMsg,
-    FormFieldMountMsg,
-    FormFieldMountRelayDetail,
-    FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
-  } from "../../types/relay-types";
+
   // Validators
   const [Types, validateType] = typeValidator("Input type", [
     "text",
@@ -187,15 +176,28 @@
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     validateTextAlign(textalign);
-    addRelayListener();
     showDeprecationWarnings();
     checkSlots();
-    sendMountedMessage();
 
     const { containerStyle, inputWidth } = handleWidth(width, type);
     _containerStyle = containerStyle;
     _inputWidth = inputWidth;
+
+    bindReset(_rootEl);
   });
+
+  function bindReset(el: HTMLElement) {
+    el.addEventListener("goa:reset", (e) => {
+      // TODO: ensure all other rese events stop the events
+      e.stopPropagation();
+      if (value) {
+        value = "";
+        dispatch(el, "_change", { name, value }, { bubbles: true })  ;
+      }
+    });
+
+    dispatch(el, "goa:bind", el, { bubbles: true });
+  }
 
   // =========
   // Functions

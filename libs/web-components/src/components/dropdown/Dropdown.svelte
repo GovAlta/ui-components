@@ -7,6 +7,7 @@
         reflect: true,
         attribute: "disable-global-close-popover",
       },
+      value: { reflect: true },
     },
   }}
 />
@@ -34,16 +35,6 @@
     toBoolean,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
-  import {
-    FieldsetErrorRelayDetail,
-    FieldsetResetErrorsMsg,
-    FieldsetSetErrorMsg,
-    FormFieldMountMsg,
-    FormFieldMountRelayDetail,
-    FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
-    FieldsetResetFieldsMsg,
-  } from "../../types/relay-types";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -173,7 +164,6 @@
   onMount(() => {
     ensureSlotExists(_rootEl);
     addRelayListener();
-    sendMountedMessage();
     setupPopoverListeners();
 
     if (disableGlobalClosePopover) {
@@ -183,7 +173,19 @@
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
     showDeprecationWarnings();
+
+     bindReset(_rootEl);
   });
+
+  function bindReset(el: HTMLElement) {
+    el.addEventListener("goa:reset", () => {
+      if (value) {
+        value = "";
+        dispatch(el, "_change", { name, value }, { bubbles: true })  ;
+      }
+    });
+    dispatch(el, "goa:bind", el, { bubbles: true });
+  }
 
   //
   // Functions
@@ -220,11 +222,11 @@
   }
 
   function setupPopoverListeners() {
-    _popoverEl?.addEventListener("_open", (e) => {
+    _popoverEl?.addEventListener("_open", (_e) => {
       _isMenuVisible = true;
     });
 
-    _popoverEl?.addEventListener("_close", (e) => {
+    _popoverEl?.addEventListener("_close", (_e) => {
       _isMenuVisible = false;
     });
   }
@@ -238,20 +240,8 @@
   }
 
   function addRelayListener() {
-    receive(_rootEl, (action, data, event) => {
+    receive(_rootEl, (action, data, _event) => {
       switch (action) {
-        case FieldsetSetValueMsg:
-          onSetValue(data as FieldsetSetValueRelayDetail);
-          break;
-        case FieldsetSetErrorMsg:
-          setError(data as FieldsetErrorRelayDetail);
-          break;
-        case FieldsetResetErrorsMsg:
-          error = "false";
-          break;
-        case FieldsetResetFieldsMsg:
-          onSetValue({ name, value: "" });
-          break;
         case DropdownItemMountedMsg:
           onChildMounted(data as DropdownItemMountedRelayDetail);
           break;
@@ -260,25 +250,6 @@
           break;
       }
     });
-  }
-
-  function setError(detail: FieldsetErrorRelayDetail) {
-    error = detail.error ? "true" : "false";
-  }
-
-  function onSetValue(detail: FieldsetSetValueRelayDetail) {
-    // @ts-expect-error
-    value = detail.value;
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
-  }
-
-  function sendMountedMessage() {
-    relay<FormFieldMountRelayDetail>(
-      _rootEl,
-      FormFieldMountMsg,
-      { name, el: _rootEl },
-      { bubbles: true, timeout: 10 },
-    );
   }
 
   /**
@@ -527,7 +498,7 @@
   }
 
   // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
-  function onInputChange(e: Event) {
+  function onInputChange(_e: Event) {
     if (_disabled || !_filterable) return;
 
     const isAutofilled =
@@ -606,7 +577,7 @@
     setDisplayedValue();
   }
 
-  function onFocus(e: Event) {
+  function onFocus(_e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
 
@@ -917,7 +888,7 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={(e) => {
+            on:click={(_e) => {
               onFilteredOptionClick(option);
               _inputEl?.focus();
             }}

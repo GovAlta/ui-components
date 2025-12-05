@@ -2,162 +2,110 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import {
-    FieldsetItemState,
-    FormDispatchStateMsg,
-    FormDispatchStateRelayDetail,
-    FormState,
-    FormSummaryBindMsg,
-    FormSummaryBindRelayDetail,
-    FormSummaryEditPageMsg,
-    FormSummaryEditPageRelayDetail,
-  } from "../../types/relay-types";
 
-  import { receive, relay } from "../../common/utils";
+  import { relay } from "../../common/utils";
+  import { PFField, PFSummary, PFOutlineItem, PFPage } from "@abgov/ui-components-common";
 
   export let heading: string = "";
 
   let _rootEl: HTMLElement;
-  let _state: FormState;
+  let _state: PFSummary;
 
   onMount(() => {
-    addRelayListener();
-    addChangeClickHandler();
-
-    relay<FormSummaryBindRelayDetail>(
-      _rootEl,
-      FormSummaryBindMsg,
-      { el: _rootEl },
-      { bubbles: true, timeout: 100 },
-    );
+    bindWithForm();
+    addChangeListener();
   });
 
-  function addChangeClickHandler() {
-    _rootEl.addEventListener("change", (e: Event) => {
-      const page = (e as CustomEvent).detail;
-      changePage(e, page);
+  function bindWithForm() {
+    // listen for message from parent
+    _rootEl.addEventListener("form:summary-sync", (e) => {
+      _state = (e as CustomEvent).detail as PFSummary;
     });
+
+    // send el to parent form
+    relay(_rootEl, "form-summary:bind", _rootEl, { bubbles: true });
   }
 
-  function addRelayListener() {
-    receive(_rootEl, (action, data, e) => {
-      switch (action) {
-        case FormDispatchStateMsg:
-          onFormDispatch(data as FormDispatchStateRelayDetail);
-          break;
-      }
-    });
+  // Listen for events when clicking the `Change` link
+  function addChangeListener() {
+    _rootEl.addEventListener("change", (e) => {
+      const id = (e as CustomEvent).detail
+      relay(_rootEl, "form-summary:change", id, { bubbles: true });
+    })
   }
 
-  /**
-   * Receive state updates from the form
-   * @param detail
-   */
-  function onFormDispatch(detail: FormDispatchStateRelayDetail) {
-    _state = detail;
-  }
-
-  function changePage(e: Event, pageId: string) {
-    relay<FormSummaryEditPageRelayDetail>(
-      _rootEl,
-      FormSummaryEditPageMsg,
-      { id: pageId },
-      { bubbles: true },
-    );
-    e.preventDefault();
-  }
-
-  function getHeading(page: string): string {
-    return _state.form?.[page]?.heading || "";
-  }
-
-  function getData(
-    state: FormState,
-    page: string,
-  ): Record<string, FieldsetItemState> {
-    if (state.form[page]?.data?.type !== "details") {
-      return;
-    }
-
-    return Object.entries(state.form[page].data.fieldsets || {})
-      .sort((itemsA, itemsB) => (itemsA[1].order > itemsB[1].order ? 1 : -1))
-      .reduce((acc, [name, fieldsetState]) => {
-        acc[name] = fieldsetState;
-        return acc;
-      }, {});
-  }
-
-  function getDataList(
-    state: FormState,
-    page: string,
-  ): Record<string, FieldsetItemState>[] {
-    const pageData = state.form[page]?.data;
-    if (pageData?.type !== "list") {
-      return;
-    }
-
-    return pageData.items.reduce((acc, formState) => {
-      const data = formState.history.reduce((acc, fieldsetId) => {
-        acc = { ...acc, ...getData(formState, fieldsetId) };
-        return acc;
-      }, {});
-      acc.push(data);
-      return acc;
-    }, []);
-  }
+  // ====
+  // Formatting
+  // ====
 
   function isBlank(val: string | number | Date | string[]): boolean {
     if (Array.isArray(val)) {
       return val.length === 0;
     }
+
     const strVal = String(val);
+
     if (strVal.length === 0) return true;
     if (strVal === "0000-01-00") return true;
+
     return false;
   }
 
-  const dateMatchRegex = /^\d{4}-\d{2}-\d{2}$/;
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  function formatValue(
-    value: string | number | Date | string[],
-    valueLabel?: string,
-    labels?: string[],
+  function format(
+    value: string,
+    formatter?: (input: string) => string
   ): string | string[] {
-    if (isBlank(value)) {
+    if (formatter && value) {
+      return formatter(value);
+    }
+
+    if (!value) {
       return "— Not provided —";
     }
 
-    // Check for valueLabels first (array of labels)
-    if (labels && labels.length > 0) {
-      return labels;
-    }
+    return value;
+  }
 
-    // Then check for valueLabel (single label)
-    if (valueLabel) {
-      return valueLabel;
-    }
+  // show if the page contains data => is either an array or object
+  function showInSummary(pageId: string) {
+    let page = _state.data[pageId];
+    return page && Array.isArray(page) || Object.keys(page).length > 0;
+  }
 
-    const strValue = String(value);
-    if (strValue.match(dateMatchRegex)) {
-      const [year, month, day] = strValue.split("-");
-      return `${months[parseInt(month) - 1]} ${parseInt(day)}, ${year}`;
-    }
+  function getOutlineItem(pageId: string): PFOutlineItem {
+    return _state.outline[pageId];
+  }
 
-    return strValue;
+  function getDataItem(pageId: string): PFPage {
+    return _state.data[pageId] as PFPage;
+  }
+
+  function getDataItems(pageId: string): PFPage[] {
+    return _state.data[pageId] as PFPage[];
+  }
+
+  function getHeading(pageId: string): string {
+    return getOutlineItem(pageId).props["heading"] ?? "";
+  }
+
+  function getLabel(pageId: string, name: string): string {
+    return getOutlineItem(pageId).fields[name]?.label ?? name;
+  }
+
+  function getField(pageId: string, name: string): PFField {
+    return getOutlineItem(pageId).fields[name] ?? {};
+  }
+
+  function getSummary(pageId: string): Record<string, string> {
+    const data = _state.data[pageId] as PFPage;
+    if (!data) {
+      throw new Error("getSummary(): no data found");
+    }
+    return _state.outline[pageId].summarize?.(data) || {};
+  }
+
+  function isSubform(pageId: string): boolean {
+    return _state.outline[pageId].subform;
   }
 </script>
 
@@ -167,64 +115,87 @@
       >{heading}</goa-text
     >
   {/if}
-  {#if _state}
-    {#each _state.history as page}
-      {#if _state.form[page]}
+  {#if Object.keys(_state || {}).length > 0}
+    {#each _state?.history as page}
+      {#if showInSummary(page)}
         <goa-container>
           <div class="summary" class:summary-with-header={!!getHeading(page)}>
             {#if getHeading(page)}
-              <goa-text class="heading" color="secondary" mt="none" mb="s"
-                >{getHeading(page)}</goa-text
-              >
+              <goa-text class="heading" color="secondary" mt="none" mb="s">
+                {getHeading(page)}
+              </goa-text>
             {/if}
-
-            <div class="data">
-              {#if _state.form[page]?.data?.type}
-                {#if _state.form[page]?.data?.type === "details"}
+            {#if isSubform(page)}
+              <div class="data">
+                {#each getDataItems(page) as item, index}
                   <table>
-                    {#each Object.entries(getData(_state, page)) as [_, data]}
-                      <tr>
-                        <td class="label">{data.label}</td>
-                        <td class="value" class:empty={isBlank(data.value)}>
-                          {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
-                            {#each formatValue(data.value, data.valueLabel, data.labels) as label}
-                              <div>{label}</div>
-                            {/each}
-                          {:else}
-                            {formatValue(data.value, data.valueLabel, data.labels)}
-                          {/if}
-                        </td>
-                      </tr>
-                    {/each}
-                  </table>
-                {:else}
-                  {#each getDataList(_state, page) as item, index}
-                    <table>
-                      {#each Object.entries(item) as [_, data]}
+                    <!-- show custom summary if summarize function is defined -->
+                    {#if getOutlineItem(page).summarize}
+                      {#each Object.entries(getSummary(page)) as [key, value]}
                         <tr>
-                          <td class="label">{data.label}</td>
-                          <td class="value" class:empty={isBlank(data.value)}>
-                            {#if Array.isArray(formatValue(data.value, data.valueLabel, data.labels))}
-                              {#each formatValue(data.value, data.valueLabel, data.labels) as label}
-                                <div>{label}</div>
-                              {/each}
-                            {:else}
-                              {formatValue(data.value, data.valueLabel, data.labels)}
-                            {/if}
+                          <td class="label">{getLabel(page, key)}</td>
+                          <td class="value" class:empty={isBlank(value)}>
+                            {format(value)}
                           </td>
                         </tr>
                       {/each}
-                    </table>
-                    {#if index < getDataList(_state, page).length - 1}
-                      <goa-divider mt="m" mb="m" />
+                    <!-- show each data field -->
+                    {:else}
+                      {#each Object.entries(item) as [key, value]}
+                        {#if
+                          getField(page, key).hideInSummary !== "always"
+                          && !(getField(page, key).hideInSummary === "ifBlank" && value === "")
+                          && key !== "_id"
+                        }
+                          <tr>
+                            <td class="label">{getLabel(page, key)}</td>
+                            <td class="value" class:empty={isBlank(value)}>
+                              {format(value, getField(page, key).formatter)}
+                            </td>
+                          </tr>
+                        {/if}
+                      {/each}
                     {/if}
-                  {/each}
-                {/if}
-              {/if}
-            </div>
+                  </table>
+                  {#if getDataItems(page).length-1 !== index}
+                    <goa-divider mt="l" mb="l" />
+                  {/if}
+                {/each}
+              </div>
+            {:else}
+              <div class="data">
+                <table>
+                  <!-- show custom summary if summarize function is defined -->
+                  {#if getOutlineItem(page).summarize}
+                    {#each Object.entries(getSummary(page)) as [key, value]}
+                      <tr>
+                        <td class="label">{getLabel(page, key)}</td>
+                        <td class="value" class:empty={isBlank(value)}>
+                          {format(value)}
+                        </td>
+                      </tr>
+                    {/each}
+                  <!-- show each data field -->
+                  {:else}
+                    {#each Object.entries(getDataItem(page)) as [key, value]}
+                      {#if getField(page, key).hideInSummary !== "always"
+                        && !(getField(page, key).hideInSummary === "ifBlank" && value === "")
+                      }
+                        <tr>
+                          <td class="label">{getLabel(page, key)}</td>
+                          <td class="value" class:empty={isBlank(value)}>
+                            {format(value, getField(page, key).formatter)}
+                          </td>
+                        </tr>
+                      {/if}
+                    {/each}
+                  {/if}
+                </table>
+              </div>
+            {/if}
             <div class="action">
               <goa-link leadingicon="pencil" action="change" action-arg={page}>
-                <a href="#" tabindex="0">Change</a>
+                <a href="#">Change</a>
               </goa-link>
             </div>
           </div>
