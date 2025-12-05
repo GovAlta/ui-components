@@ -78,14 +78,14 @@ export function Feat1908Route() {
         <GoabLinearProgress
           testId="hide-percentage"
           progress={50}
-          showPercentage={false}
+          percentVisibility="hidden"
           ariaLabel="File upload progress"
         />
       </GoabBlock>
       <GoabBlock direction="column" gap="s">
         <GoabText tag="h2">Linear Progress with Ping Pong</GoabText>
         <GoabLinearProgress
-          showPercentage={false}
+          percentVisibility="hidden"
           ariaLabel="Linear Progress with Ping Pong"
         />
       </GoabBlock>
@@ -95,7 +95,7 @@ export function Feat1908Route() {
         <GoabLinearProgress
           testId="dynamic-progress"
           progress={dynamicProgress}
-          showPercentage={showProgressPercentage}
+          percentVisibility={showProgressPercentage ? "visible" : "hidden"}
         />
         <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
           <GoabButton onClick={decreaseProgress}>-10%</GoabButton>

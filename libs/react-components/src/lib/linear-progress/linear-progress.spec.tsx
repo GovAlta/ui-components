@@ -15,22 +15,24 @@ describe("LinearProgress", () => {
     const progress = 75;
     const ariaLabel = "label area";
     const ariaLabelledBy = "by area labelled";
-    const { container } = render(
-      <GoabLinearProgress
-        progress={progress}
-        showPercentage={true}
-        ariaLabel={ariaLabel}
-        ariaLabelledBy={ariaLabelledBy}
-        testId={testId}
-      />,
-    );
-    const el = container.querySelector("goa-linear-progress");
-    await waitFor(() => {
-      expect(el?.getAttribute("testid")).toBe(testId);
-      expect(el?.getAttribute("progress")).toBe(progress.toString());
-      expect(el?.getAttribute("show-percentage")).toBe("true");
-      expect(el?.getAttribute("aria-label")).toBe(ariaLabel);
-      expect(el?.getAttribute("aria-labelledby")).toBe(ariaLabelledBy);
+    (["visible", "hidden", undefined] as const).forEach(async (percentVisibility) => {
+      const { container } = render(
+        <GoabLinearProgress
+          progress={progress}
+          percentVisibility={percentVisibility}
+          ariaLabel={ariaLabel}
+          ariaLabelledBy={ariaLabelledBy}
+          testId={testId}
+        />,
+      );
+      const el = container.querySelector("goa-linear-progress");
+      await waitFor(() => {
+        expect(el?.getAttribute("testid")).toBe(testId);
+        expect(el?.getAttribute("progress")).toBe(progress.toString());
+        expect(el?.getAttribute("percent-visibility")).toBe(percentVisibility);
+        expect(el?.getAttribute("aria-label")).toBe(ariaLabel);
+        expect(el?.getAttribute("aria-labelledby")).toBe(ariaLabelledBy);
+      });
     });
   });
 });

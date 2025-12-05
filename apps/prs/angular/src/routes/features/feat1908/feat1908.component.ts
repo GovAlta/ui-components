@@ -21,7 +21,7 @@ import {
         <h3>Indeterminate Progress - no percentage</h3>
         <goab-linear-progress
           testid="indeterminate-progress-no-percentage"
-          [showPercentage]="false"
+          [percentVisibility]="'hidden'"
         />
       </section>
       <section>
@@ -33,7 +33,7 @@ import {
         <goab-linear-progress
           testid="determinate-progress-25"
           [progress]="25"
-          [showPercentage]="true"
+          [percentVisibility]="'visible'"
           ariaLabel="Demo progress indicator"
           ariaLabelledBy="progress-indicator-label"
         ></goab-linear-progress>
@@ -55,7 +55,7 @@ import {
         <goab-linear-progress
           testid="dynamic-progress"
           [progress]="dynamicProgress"
-          [showPercentage]="showPercentage"
+          [percentVisibility]="showPercentage ? 'visible' : 'hidden'"
         />
         <div class="controls">
           <goab-button (onClick)="decreaseProgress()">-10%</goab-button>
@@ -105,6 +105,8 @@ export class Feat1908Component implements OnInit, OnDestroy {
   autoProgress = 0;
   nullProgressValue: number | null | undefined = undefined;
   showPercentage = true;
+  percentVisibility: "visible" | "hidden" | undefined = "visible";
+
   private intervalId: any;
 
   increaseProgress(): void {
@@ -144,6 +146,7 @@ export class Feat1908Component implements OnInit, OnDestroy {
   onShowPercentageChange(event: GoabCheckboxOnChangeDetail): void {
     if (event.checked !== undefined) {
       this.showPercentage = event.checked;
+      this.percentVisibility = this.showPercentage ? "visible" : "hidden";
     }
   }
 

@@ -1379,7 +1379,7 @@ export function EverythingRoute(): JSX.Element {
                 testId="linear"
                 progress={undefined}
                 ariaLabel="Indeterminate Linear Progress example"
-                showPercentage={false}
+                percentVisibility="hidden"
               />
             </GoabBlock>
             <GoabBlock direction="column" gap="xs">

@@ -4,9 +4,7 @@
     props: {
       testid: { type: "String", attribute: "testid", reflect: true },
       progress: { type: "Number", attribute: "progress" },
-      // showPercentage is left as a string because we want it to be truthy by default (even for undefined or null), but
-      // React and Angular will ignore attributes that are left falsey.
-      showPercentage: { type: "String", attribute: "show-percentage" },
+      percentVisibility: { type: "String", attribute: "percent-visibility" },
       ariaLabel: { type: "String", attribute: "aria-label" },
       ariaLabelledby: { type: "String", attribute: "aria-labelledby" },
     },
@@ -14,17 +12,19 @@
 />
 
 <script lang="ts">
-  import { toBoolean } from "../../common/utils";
+  function isLabelVisible(visibility: string | undefined): boolean {
+    return visibility === undefined || visibility.toLowerCase() === "visible";
+  }
 
   export let testid: string | undefined = undefined;
   export let progress: number | undefined = undefined;
-  export let showPercentage: string | undefined = undefined;
+  export let percentVisibility: "visible" | "hidden" | undefined = undefined;
   export let ariaLabel: string | undefined = undefined;
   export let ariaLabelledby: string | undefined = undefined;
 
   $: isDeterminate = progress !== undefined && progress !== null;
   $: determinateValue = Math.round(Math.max(0, Math.min(progress ?? 0, 100)));
-  $: isPercentageVisible = toBoolean(showPercentage ?? "true");
+  $: isPercentageLabelVisible = isLabelVisible(percentVisibility);
 </script>
 
 <div class="progressbar-wrapper" data-testid={testid}>
@@ -53,7 +53,7 @@
       ></span>
     {/if}
   </div>
-  {#if isPercentageVisible}
+  {#if isPercentageLabelVisible}
     <span data-testid="{testid}-percentage" class="percentage"
       >{`${determinateValue}%`}</span
     >

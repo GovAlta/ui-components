@@ -10,7 +10,7 @@ import { By } from "@angular/platform-browser";
     <goab-linear-progress
       [progress]="progress"
       [testid]="testid"
-      [showPercentage]="showPercentage"
+      [percentVisibility]="percentVisibility"
       [ariaLabel]="ariaLabel"
       [ariaLabelledBy]="ariaLabelledBy"
     ></goab-linear-progress>
@@ -19,7 +19,7 @@ import { By } from "@angular/platform-browser";
 class TestLinearProgressComponent {
   progress?: number;
   testid?: string;
-  showPercentage?: boolean | undefined;
+  percentVisibility?: "visible" | "hidden" | undefined;
   ariaLabel?: string;
   ariaLabelledBy?: string;
 }
@@ -27,7 +27,7 @@ class TestLinearProgressComponent {
 describe("GoABLinearProgress", () => {
   let fixture: ComponentFixture<TestLinearProgressComponent>;
   let component: TestLinearProgressComponent;
-  const showPercentage: boolean | undefined = true;
+  const percentVisibility: "visible" | "hidden" | undefined = "visible";
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -39,7 +39,7 @@ describe("GoABLinearProgress", () => {
     component = fixture.componentInstance;
 
     component.testid = "foo";
-    component.showPercentage = showPercentage;
+    component.percentVisibility = percentVisibility;
     component.ariaLabel = "ariaLabel";
     component.ariaLabelledBy = "ariaLabelledBy";
 
@@ -57,14 +57,14 @@ describe("GoABLinearProgress", () => {
     const el = fixture.debugElement.query(By.css("goa-linear-progress"))?.nativeElement;
 
     expect(el?.getAttribute("testid")).toBe("foo");
-    expect(el?.getAttribute("show-percentage")).toBe(showPercentage?.toString());
+    expect(el?.getAttribute("percent-visibility")).toBe(percentVisibility);
     expect(el?.getAttribute("aria-label")).toBe("ariaLabel");
     expect(el?.getAttribute("aria-labelledby")).toBe("ariaLabelledBy");
   });
 
   test.each([-1, 0, 10, 25, 50, 100])("Testing progress %s", (progress: number) => {
     component.progress = progress;
-    component.showPercentage = true;
+    component.percentVisibility = "visible";
 
     fixture.detectChanges();
 

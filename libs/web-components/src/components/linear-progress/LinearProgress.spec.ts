@@ -72,7 +72,7 @@ describe("GoALinearProgress", () => {
     });
   });
 
-  it("shows the percentage when showPercentage is not set", async () => {
+  it("shows the percentage when percentVisibility is not set", async () => {
     const { queryByTestId } = render(GoALinearProgress, {
       testid,
       progress: 50,
@@ -83,11 +83,11 @@ describe("GoALinearProgress", () => {
     });
   });
 
-  it("shows the percentage when showPercentage is true", async () => {
+  it("shows the percentage when percentVisibility is true", async () => {
     const { queryByTestId } = render(GoALinearProgress, {
       testid,
       progress: 50,
-      showPercentage: "true",
+      percentVisibility: "visible",
     });
 
     await waitFor(() => {
@@ -95,11 +95,11 @@ describe("GoALinearProgress", () => {
     });
   });
 
-  it("hides the percentage when showPercentage is false", async () => {
+  it("hides the percentage when percentVisibility is false", async () => {
     const { queryByTestId } = render(GoALinearProgress, {
       testid,
       progress: 50,
-      showPercentage: "false",
+      percentVisibility: "hidden",
     });
 
     await waitFor(() => {

@@ -895,13 +895,13 @@
             <goab-text tag="h3" size="heading-s">Progress indicator</goab-text>
             <goab-linear-progress
               [progress]="25"
-              [showPercentage]="true"
+              [percentVisibility]="'visible'"
               ariaLabel="Demo progress indicator"
               ariaLabelledBy="progress-indicator-label"
             ></goab-linear-progress>
             <goab-linear-progress
               [progress]="null"
-              [showPercentage]="false"
+              [percentVisibility]="'hidden'"
               ariaLabel="Indeterminate progress indicator"
               ariaLabelledBy="progress-indicator-label"
             ></goab-linear-progress>

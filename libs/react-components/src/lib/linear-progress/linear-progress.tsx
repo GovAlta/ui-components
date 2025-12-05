@@ -1,9 +1,9 @@
 interface WCProps {
   testid?: string;
   progress?: number | null;
-  showpercentage?: string;
-  arialabel?: string;
-  arialabelledby?: string;
+  percentVisibility?: "visible" | "hidden" | undefined;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
 }
 
 declare module "react" {
@@ -17,7 +17,7 @@ declare module "react" {
 
 export interface GoabLinearProgressProps {
   progress?: number | null;
-  showPercentage?: boolean;
+  percentVisibility?: "visible" | "hidden" | undefined;
   ariaLabel?: string;
   ariaLabelledBy?: string;
   testId?: string;
@@ -25,7 +25,7 @@ export interface GoabLinearProgressProps {
 
 export const GoabLinearProgress = ({
   progress,
-  showPercentage,
+  percentVisibility,
   ariaLabel,
   ariaLabelledBy,
   testId,
@@ -33,7 +33,7 @@ export const GoabLinearProgress = ({
   return (
     <goa-linear-progress
       progress={progress}
-      show-percentage={showPercentage?.toString()}
+      percent-visibility={percentVisibility}
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       testid={testId}
