@@ -72,6 +72,7 @@ import {
   GoabText,
   GoabTextarea,
   GoabTooltip,
+  GoabLinearProgress,
 } from "@abgov/react-components";
 import {
   GoabAccordionHeadingSize,
@@ -1355,7 +1356,7 @@ export function EverythingRoute(): JSX.Element {
           </GoabText>
           <GoabGrid minChildWidth="200px" gap="m">
             <GoabBlock direction="column" gap="xs">
-              <GoabText tag="span" size="body-m">
+              <GoabText tag="div" size="body-m">
                 Circular progress
               </GoabText>
               {CIRCULAR_PROGRESS_VARIANTS.map((variant, index) => (
@@ -1366,6 +1367,20 @@ export function EverythingRoute(): JSX.Element {
                   progress={spinnerProgress}
                 />
               ))}
+              <GoabText tag="div" size="body-s" mt="xs">
+                Linear Progress
+              </GoabText>
+              <GoabLinearProgress
+                testId="linear"
+                progress={75}
+                ariaLabel="Determinate Linear Progress example"
+              />
+              <GoabLinearProgress
+                testId="linear"
+                progress={undefined}
+                ariaLabel="Indeterminate Linear Progress example"
+                percentVisibility="hidden"
+              />
             </GoabBlock>
             <GoabBlock direction="column" gap="xs">
               <GoabText tag="span" size="body-m">
