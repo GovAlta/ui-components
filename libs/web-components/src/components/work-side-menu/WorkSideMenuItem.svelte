@@ -122,10 +122,42 @@
   }
 
   function handleResize() {
+    const wasMobile = _isMobile;
     _isMobile = window.innerWidth < MOBILE_BP;
-    // Close drawer if switching from mobile to desktop
-    if (!_isMobile && _drawerOpen) {
-      _drawerOpen = false;
+
+    // Switching from mobile to desktop
+    if (wasMobile && !_isMobile) {
+      // Close drawer if it was open
+      if (_drawerOpen) {
+        if (_drawerEl) {
+          _drawerEl.removeAttribute('open');
+        }
+        _drawerOpen = false;
+        // Notify parent menu that drawer closed
+        dispatch(_rootEl, "_mobileDrawerClose", {}, { bubbles: true });
+      }
+
+      // Clean up drawer and move content back for popover to work
+      if (_drawerEl) {
+        // Get the host element (the custom element itself)
+        const hostEl = (_rootEl.getRootNode() as ShadowRoot).host;
+
+        // Move content back to the host element so it can be re-slotted
+        if (hostEl && _slotContent.length > 0) {
+          _slotContent.forEach(el => {
+            el.setAttribute('slot', 'popoverContent');
+            hostEl.appendChild(el);
+          });
+        }
+
+        // Remove drawer from DOM
+        if (_drawerEl.parentNode) {
+          _drawerEl.parentNode.removeChild(_drawerEl);
+        }
+        document.removeEventListener('_close', handleDocumentDrawerClose);
+        _drawerEl = null;
+        _slotContent = [];
+      }
     }
   }
 
