@@ -1,0 +1,15 @@
+<h1>Feature 3137: Work Side Menu Group</h1>
+
+<p>
+  This demonstrates a working Work Side Menu Group component with some child items. You should be able to toggle the menu.
+</p>
+
+<goabx-work-side-menu heading="Menu heading" url="#" [primaryContent]="primaryTemplate" [open]="true">
+</goabx-work-side-menu>
+<ng-template #primaryTemplate>
+  <goabx-work-side-menu-group heading="Side menu group" icon="star">
+    <goabx-work-side-menu-item label="Menu item 1" icon="star" url="/item-1" />
+    <goabx-work-side-menu-item label="Menu item 2" icon="star" url="/item-2" />
+    <goabx-work-side-menu-item label="Menu item 3" icon="star" url="/item-3" />
+  </goabx-work-side-menu-group>
+</ng-template>
