@@ -15,7 +15,6 @@
   import {
     typeValidator,
     toBoolean,
-    relay,
     receive,
     dispatch,
     styles,
@@ -29,11 +28,10 @@
     FieldsetResetErrorsMsg,
     FieldsetResetFieldsMsg,
     FieldsetSetErrorMsg,
-    FormFieldMountMsg,
-    FormFieldMountRelayDetail,
     FieldsetSetValueMsg,
     FieldsetSetValueRelayDetail,
   } from "../../types/relay-types";
+
   // Validators
   const [Types, validateType] = typeValidator("Input type", [
     "text",
@@ -156,7 +154,6 @@
     addRelayListener();
     showDeprecationWarnings();
     checkSlots();
-    sendMountedMessage();
 
     const { containerStyle, inputWidth } = handleWidth(width, type);
     _containerStyle = containerStyle;
@@ -232,18 +229,6 @@
 
   function dispatchOnChange(value: string) {
     dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
-  }
-
-  // Relay message up the chain to allow any parent element to have a reference to the input element
-  function sendMountedMessage() {
-    if (name) {
-      relay<FormFieldMountRelayDetail>(
-        _rootEl,
-        FormFieldMountMsg,
-        { name, el: _inputEl },
-        { bubbles: true, timeout: 10 },
-      );
-    }
   }
 
   function onKeyUp(e: Event) {

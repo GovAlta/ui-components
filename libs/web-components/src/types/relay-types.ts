@@ -1,11 +1,14 @@
-export type FormStatus = "not-started" | "cannot-start-yet" | "in-progress" | "submitted" | "update-needed" | "complete";
+export type FormStatus =
+  | "not-started"
+  | "cannot-start-yet"
+  | "in-progress"
+  | "submitted"
+  | "update-needed"
+  | "complete";
 
 export type FormState = {
-  uuid: string;
   form: Record<string, Fieldset>;
   history: string[];
-  editting: string;
-  lastModified?: Date;
   status: FormStatus;
 };
 
@@ -142,7 +145,7 @@ export type FieldsetItemState = {
   value: string | number | Date;
   order: number;
   valueLabel?: string; // for radio/checkbox label to be able to display on summary page
-  labels? : string[]
+  labels?: string[];
 };
 
 export type FieldsetValidationRelayDetail = {
