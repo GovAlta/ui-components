@@ -16,6 +16,7 @@
   export let accept: string = "*";
   export let maxfilesize: string = "5MB";
   export let testid: string = "";
+  export let version: "1" | "2" = "1";
 
   // Private
 
@@ -223,7 +224,7 @@
 
 {#if variant === "button"}
   <div class="button" bind:this={_el}>
-    <goa-button on:click={openFilePicker} type="secondary">
+    <goa-button on:click={openFilePicker} type="secondary" {version}>
       Choose file
     </goa-button>
 
