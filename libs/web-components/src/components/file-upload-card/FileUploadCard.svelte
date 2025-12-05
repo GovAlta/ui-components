@@ -11,6 +11,7 @@
   export let progress: number = -1;
   export let error: string = "";
   export let testid: string = "";
+  export let version: "1" | "2" = "1";
 
   // Private
 
@@ -135,12 +136,14 @@
         <goa-button
           type="tertiary"
           size="compact"
+          {version}
           on:click={() => dispatch("_cancel")}>Cancel</goa-button
         >
       {:else if _status === "uploaded"}
         <goa-button
           type="tertiary"
           size="compact"
+          {version}
           on:click={() => dispatch("_delete")}
           leadingicon="trash">Remove</goa-button
         >
@@ -148,6 +151,7 @@
         <goa-button
           type="tertiary"
           size="compact"
+          {version}
           on:click={() => dispatch("_delete")}
           variant="destructive">Cancel</goa-button
         >
