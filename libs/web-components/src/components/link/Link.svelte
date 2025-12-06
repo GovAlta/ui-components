@@ -45,12 +45,13 @@
   })
 
   function handleClick(e: Event) {
+    dispatch(_rootEl, action, actionArg || actionArgs, { bubbles: true });
     e.preventDefault();
-    dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
   }
 </script>
 
 <div
+  bind:this={_rootEl}
   class="link"
   class:interactive={color === "interactive"}
   class:dark={color === "dark"}
@@ -59,7 +60,6 @@
   class:small={size === "small"}
   class:medium={size === "medium"}
   class:large={size === "large"}
-  bind:this={_rootEl}
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
 >
