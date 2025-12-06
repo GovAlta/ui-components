@@ -6,6 +6,15 @@
 
 <script lang="ts" context="module">
   import { PFOutline, PFState } from "@abgov/ui-components-common";
+
+  /**
+  TODOS:
+    - [x] jump back to summary on edits that don't affect the history
+    - [/] update history when an edit does change the path
+      - Need to test this
+  **/
+
+
 </script>
 
 <script lang="ts">
@@ -21,7 +30,7 @@
 
   // Fieldset binding details
   let _formPages: Record<string, HTMLElement> = {};
-  let _formFields: Record<string, HTMLElement> = {};
+  let _formFields: Record<string, HTMLElement> = {};  // key = [formPageId]:[formFieldName]
   let _formOutline: PFOutline;
 
   // Form state
@@ -91,6 +100,7 @@
     // get all fieldsets
     const pages = document.querySelectorAll("goa-public-form-page");
     const currentPage = _state.history[_state.history.length - 1] || 0;
+
     pages.forEach((page, index) => {
       // @ts-ignore
       const id = page.getAttribute("id") || page.id;
@@ -102,26 +112,43 @@
       if (id) {
         _formPages[id] = page as HTMLElement;
       }
+
+      // get all form items
+      const formItems = page.querySelectorAll("[data-pf-item]");
+      formItems.forEach((fi) => {
+        // @ts-ignore
+        const name = fi.getAttribute("name") || fi.name;
+        if (name) {
+          _formFields[`${id}:${name}`] = fi as HTMLElement;
+        }
+      });
     });
 
-    // get all form items
-    const formItems = document.querySelectorAll("[data-pf-item]");
-    formItems.forEach((fi) => {
-      // @ts-ignore
-      const name = fi.getAttribute("name") || fi.name;
-      if (name) {
-        _formFields[name] = fi as HTMLElement;
+    bindFormFieldValues();
+  }
+
+  // allows pages to be set/reset on initial form load and when cancelling an edit
+  function bindFormFieldValues() {
+    for (const [id, page] of Object.entries(_state.data)) {
+      for (const [name, data] of Object.entries(page)) {
+        const key = `${id}:${name}`;
+        _formFields[key].setAttribute("value", data);
       }
-    });
+    }
   }
 
   // Event listeners
 
   function onFormChangeCancel(e: Event, id: string) {
-    const lastPage = _state.history[_state.history.length - 1];
+    e.stopPropagation();
+
     _state.dataBuffer = {};
     _formPages[id].removeAttribute("data-pf-editting")
+
+    const lastPage = _state.history[_state.history.length - 1];
     setPageVisibility(lastPage);
+
+    bindFormFieldValues()
   }
 
   function onContinue(e: Event, id: string) {
@@ -138,6 +165,7 @@
       return;
     }
 
+    // perform error checks for each form item
     for (const [name, validators] of Object.entries(section.validators || {})) {
       const val = _state.dataBuffer[name];
 
@@ -145,29 +173,45 @@
         const err = validator(val);
         if (err) {
           errors[name] = err;
-          break; // one show one error per field
+          break; // only show one error per field
         }
       }
     }
 
     // set errors on fields
     for (const [name, error] of Object.entries(errors)) {
-      _formFields[name].setAttribute("error", "");
-      _formFields[name].closest("goa-form-item")?.setAttribute("error", error);
+      const key = `${id}:${name}`
+      _formFields[key].setAttribute("error", "");
+      _formFields[key].closest("goa-form-item")?.setAttribute("error", error);
     }
 
     if (Object.keys(errors).length === 0) {
       try {
+        // the `next` section is either a string or a function that returns a string
         let next =
           typeof section.next === "string"
             ? section.next
             : section.next(_state);
 
-        _state.history.push(next);
+        // when editting the `next` field has to be checked to determine whether to jump back
+        // to the summary or trim the history since a new path will be taken
+        const currentHistoryIndex = _state.history.findIndex((value) => value === id)
+        const nextId = _state.history[currentHistoryIndex + 1];
+
         _state.data = { ..._state.data, [id]: { ..._state.dataBuffer } };
         _state.dataBuffer = {};
 
-        setPageVisibility(next);
+        if (next === nextId) {
+          // jump to summary
+          const last = _state.history[_state.history.length - 1];
+          setPageVisibility(last);
+        } else {
+          // goto next page
+          _state.history.push(next);
+          setPageVisibility(next);
+        }
+
+        // send message to application
         dispatch(_rootEl, "_next", _state, { bubbles: true });
 
         // TODO: the form summary data needs more data

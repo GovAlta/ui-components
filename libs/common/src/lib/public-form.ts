@@ -1,8 +1,8 @@
 import { FieldValidator } from "./validators";
 
 export type PFState = {
-  data: Record<string, unknown>;
-  dataBuffer: Record<string, unknown>;
+  data: Record<string, Record<string, string>>;
+  dataBuffer: Record<string, string>;
   history: string[];
 };
 
