@@ -373,8 +373,29 @@
 
   function setFocusedStyle(el: HTMLElement) {
     if (!el) return;
+
+    // For corner cells in first row, use inset box-shadow with border-radius to avoid clipping
+    // Table uses 16px border-radius (--goa-table-border-radius-container)
+    if (_focusingRowIndex === 0) {
+      const rowLength = _grid[0]?.length || 0;
+      const tableRadius = '14px'; // Slightly less than table's 16px to account for 2px focus ring
+      if (_focusingColIndex === 0) {
+        // Top-left corner
+        el.style.outline = 'none';
+        el.style.boxShadow = 'inset 0 0 0 2px var(--goa-color-interactive-focus)';
+        el.style.borderTopLeftRadius = tableRadius;
+        return;
+      } else if (_focusingColIndex === rowLength - 1) {
+        // Top-right corner
+        el.style.outline = 'none';
+        el.style.boxShadow = 'inset 0 0 0 2px var(--goa-color-interactive-focus)';
+        el.style.borderTopRightRadius = tableRadius;
+        return;
+      }
+    }
+
+    // Default: use outline with negative offset
     el.style.outline = '2px solid var(--goa-color-interactive-focus)';
-    // Use negative offset to draw outline inside the cell, preventing clipping on table headers
     el.style.outlineOffset = '-2px';
   }
 
@@ -383,6 +404,8 @@
     el.style.outline = '';
     el.style.outlineOffset = '';
     el.style.boxShadow = '';
+    el.style.borderTopLeftRadius = '';
+    el.style.borderTopRightRadius = '';
   }
 
   function moveUp() {
