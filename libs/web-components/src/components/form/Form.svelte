@@ -196,18 +196,25 @@
         // when editting the `next` field has to be checked to determine whether to jump back
         // to the summary or trim the history since a new path will be taken
         const currentHistoryIndex = _state.history.findIndex((value) => value === id)
-        const nextId = _state.history[currentHistoryIndex + 1];
+        const nextIdInPreviousPath = _state.history[currentHistoryIndex + 1];
 
         _state.data = { ..._state.data, [id]: { ..._state.dataBuffer } };
         _state.dataBuffer = {};
 
-        if (next === nextId) {
+        if (id === nextIdInPreviousPath) {
           // jump to summary
           const last = _state.history[_state.history.length - 1];
           setPageVisibility(last);
         } else {
-          // goto next page
+          // When progressing to the next page there should never be any history that lies after it.
+          // In the case that the user is progressing in a linear fashion there will already be
+          // no history item that lies after the current. However, in the case that the user editted
+          // a field that resulted in a path change the history after the current needs to be removed.
+          _state.history = _state.history.slice(0, currentHistoryIndex + 1);
+
+          // now the next history item can be pushed
           _state.history.push(next);
+
           setPageVisibility(next);
         }
 
