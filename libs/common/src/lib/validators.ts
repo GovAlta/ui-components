@@ -35,10 +35,10 @@ export class FormValidator {
   }
 }
 
-export function birthDayValidator(): FieldValidator[] {
+export function BirthDayValidator(): FieldValidator[] {
   return [
-    requiredValidator("Day is required"),
-    numericValidator({
+    RequiredValidator("Day is required"),
+    NumericValidator({
       min: 1,
       max: 31,
       minMsg: "Day must be between 1 and 31",
@@ -47,10 +47,10 @@ export function birthDayValidator(): FieldValidator[] {
   ];
 }
 
-export function birthMonthValidator(): FieldValidator[] {
+export function BirthMonthValidator(): FieldValidator[] {
   return [
-    requiredValidator("Month is required"),
-    numericValidator({
+    RequiredValidator("Month is required"),
+    NumericValidator({
       min: 0,
       max: 11,
       minMsg: "Month must be between Jan and Dec",
@@ -59,11 +59,11 @@ export function birthMonthValidator(): FieldValidator[] {
   ];
 }
 
-export function birthYearValidator(): FieldValidator[] {
+export function BirthYearValidator(): FieldValidator[] {
   const maxYear = new Date().getFullYear();
   return [
-    requiredValidator("Year is required"),
-    numericValidator({
+    RequiredValidator("Year is required"),
+    NumericValidator({
       min: 1900,
       max: maxYear,
       minMsg: "Year must be greater than 1900",
@@ -72,7 +72,7 @@ export function birthYearValidator(): FieldValidator[] {
   ];
 }
 
-export function requiredValidator(msg?: string): FieldValidator {
+export function RequiredValidator(msg?: string): FieldValidator {
   return (value: unknown) => {
     msg = msg || "Required";
 
@@ -86,17 +86,17 @@ export function requiredValidator(msg?: string): FieldValidator {
   };
 }
 
-export function phoneNumberValidator(msg?: string): FieldValidator {
+export function PhoneNumberValidator(msg?: string): FieldValidator {
   const regex = new RegExp(/^\+?[\d-() ]{10,18}$/);
-  return regexValidator(regex, msg || "Invalid phone number");
+  return RegexValidator(regex, msg || "Invalid phone number");
 }
 
-export function emailValidator(msg?: string): FieldValidator {
+export function EmailValidator(msg?: string): FieldValidator {
   // emailregex.com
   const regex = new RegExp(
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   );
-  return regexValidator(regex, msg || "Invalid email address");
+  return RegexValidator(regex, msg || "Invalid email address");
 }
 
 // SIN# Generator: https://singen.ca
@@ -132,14 +132,14 @@ export function SINValidator(): FieldValidator {
   };
 }
 
-export function postalCodeValidator(): FieldValidator {
-  return regexValidator(
+export function PostalCodeValidator(): FieldValidator {
+  return RegexValidator(
     /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i,
     "Invalid postal code",
   );
 }
 
-export function regexValidator(regex: RegExp, msg: string): FieldValidator {
+export function RegexValidator(regex: RegExp, msg: string): FieldValidator {
   return (value: unknown) => {
     if (!value) {
       return "";
@@ -160,7 +160,7 @@ interface DateValidatorOptions {
   max?: Date;
 }
 
-export function dateValidator({
+export function DateValidator({
   invalidMsg,
   minMsg,
   maxMsg,
@@ -207,7 +207,7 @@ interface NumericValidatorOptions {
   max?: number;
 }
 
-export function numericValidator({
+export function NumericValidator({
   invalidTypeMsg,
   minMsg,
   maxMsg,
@@ -251,7 +251,7 @@ interface LengthValidatorOptions {
   min?: number;
 }
 
-export function lengthValidator({
+export function LengthValidator({
   invalidTypeMsg,
   minMsg,
   maxMsg,

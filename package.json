@@ -10,7 +10,7 @@
     "serve:prs:react": "nx run react-prs:serve:development",
     "serve:prs:angular": "nx run angular-prs:serve:development",
     "dev:watch": "vite build --watch libs/web-components",
-    "build": "nx affected --base=dev -t build --exclude=apps/dev/**/*",
+    "build": "nx affected --base=upstream/dev -t build --exclude=apps/dev/**/*",
     "build:prod": "nx run-many -t build --all --prod --exclude=apps/dev/**/*",
     "build:vscode-doc": "node libs/web-components/custom-element-manifest-analyze.js",
     "pretest:pr": "npx nx run common:build && npx nx run web-components:build && npx nx run react-components:build",

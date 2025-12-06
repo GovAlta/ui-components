@@ -3,6 +3,7 @@
     tag: "goa-public-form-page",
     props: {
       id: { type: "String", reflect: true },
+      error: { type: "String", reflect: true },
       buttonText: { type: "String", attribute: "button-text" },
       buttonVisibility: { type: "String", attribute: "button-visibility" },
       subHeading: { type: "String", attribute: "sub-heading" },
@@ -22,6 +23,7 @@
 
   // common with fieldset
   export let id: string = "";
+  export let error: string = "";
   export let heading: string = "";
   export let summaryHeading: string = "";
   export let subHeading: string = "";
@@ -72,6 +74,10 @@
     {/if}
     {#if subHeading}
       <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{subHeading}</goa-text>
+    {/if}
+
+    {#if error}
+      <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{error}</goa-text>
     {/if}
 
     <slot />
