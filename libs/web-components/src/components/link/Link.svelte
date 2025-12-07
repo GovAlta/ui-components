@@ -4,6 +4,7 @@
     action: { type: "String", attribute: "action", reflect: true},
     actionArg: { type: "String", attribute: "action-arg", reflect: true},
     actionArgs: { type: "Object", attribute: "action-args", reflect: true},
+    version: { type: "String", attribute: "version", reflect: true },
   }
 }}/>
 
@@ -23,6 +24,7 @@
   export let actionArgs: Record<string, unknown> = {};
 
   export let testid: string = "";
+  export let version: "1" | "2" = "1";
 
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -69,6 +71,7 @@
   class:small={size === "small"}
   class:medium={size === "medium"}
   class:large={size === "large"}
+  class:v2={version === "2"}
   bind:this={_rootEl}
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
@@ -91,6 +94,23 @@
     /* V1: Default gap fallback (4px) */
     gap: var(--goa-link-gap, 0.25rem);
     /* V2: Size-specific gaps override below */
+  }
+
+  /* V2: No underline by default, underline on hover */
+  .link.v2 {
+    text-decoration: none;
+  }
+
+  .link.v2 :global(::slotted(a)) {
+    text-decoration: none !important;
+  }
+
+  .link.v2:hover {
+    text-decoration: underline;
+  }
+
+  .link.v2:hover :global(::slotted(a)) {
+    text-decoration: underline !important;
   }
 
   /* Size variants - Typography and Gap */
