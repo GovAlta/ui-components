@@ -257,7 +257,6 @@
    * or null if no focusable element is found.
    */
   function getFirstFocusableEl(el: HTMLElement): HTMLElement | null {
-    console.log("getFirstFocusableEl", el);
     if (el.tabIndex >= 0) {
       return el;
     }

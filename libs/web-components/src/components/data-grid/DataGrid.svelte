@@ -131,7 +131,6 @@
       if (gridRow.length > 0) {
         _grid.push(gridRow);
       }
-      console.log("Initialize grid ", _grid);
     });
   }
 
