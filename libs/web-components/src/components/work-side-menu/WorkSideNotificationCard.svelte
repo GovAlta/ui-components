@@ -136,7 +136,7 @@
       </span>
     {/if}
   </div>
-  <goa-tooltip content={_fullDate} position="left">
+  <goa-tooltip content={_fullDate} position="left" data-ignore-focus="true">
     <div class="timestamp-container" aria-label={_fullDate}>
       <span class="unread-dot" class:hidden={!_unread}></span>
       <p class="timestamp">{_transformTime}</p>

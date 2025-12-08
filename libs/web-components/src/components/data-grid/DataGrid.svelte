@@ -280,22 +280,27 @@
     switch (event.key) {
       case 'ArrowUp':
         event.preventDefault();
+        event.stopPropagation();
         moveUp();
         break;
       case 'ArrowDown':
         event.preventDefault();
+        event.stopPropagation();
         moveDown();
         break;
       case 'ArrowLeft':
         event.preventDefault();
+        event.stopPropagation();
         moveLeft();
         break;
       case 'ArrowRight':
         event.preventDefault();
+        event.stopPropagation();
         moveRight();
         break;
       case 'Home':
         event.preventDefault();
+        event.stopPropagation();
         if (event.ctrlKey) {
           moveToGridStart();
         } else {
@@ -304,6 +309,7 @@
         break;
       case 'End':
         event.preventDefault();
+        event.stopPropagation();
         if (event.ctrlKey) {
           moveToGridEnd();
         } else {
@@ -604,8 +610,11 @@
     // recursive function helper
     function findAllFocusableNodes(nodes: NodeList | Node[]): void {
       for (const node of nodes) {
+        // Skip shadow DOM children if parent has data-ignore-focus
         if (node instanceof HTMLElement && node.shadowRoot) {
-          findAllFocusableNodes([...(node.shadowRoot?.childNodes || [])]);
+          if (!node.hasAttribute("data-ignore-focus")) {
+            findAllFocusableNodes([...(node.shadowRoot?.childNodes || [])]);
+          }
         }
         if (node.hasChildNodes()) {
           findAllFocusableNodes(Array.from(node.childNodes));
