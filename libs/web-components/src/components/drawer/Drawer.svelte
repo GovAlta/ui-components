@@ -100,6 +100,12 @@
 
     // event listeners
     window.addEventListener("keydown", onInputKeyDown);
+
+    // listener for `close` events emitted from child components
+    _contentEl?.addEventListener("close", (e) => {
+      close(e);
+      e.stopPropagation();
+    });
   });
 
   onDestroy(() => {
