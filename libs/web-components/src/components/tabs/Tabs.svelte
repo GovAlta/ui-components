@@ -261,9 +261,24 @@
       return;
     }
 
+    // Check if tabs are stacked (vertical) - only on mobile AND stackOnMobile is true
+    const isMobile = window.matchMedia("(max-width: 623px)").matches;
+    const isStacked = isMobile && _stackOnMobile;
+
     switch (e.key) {
       case "ArrowUp":
+        // Only handle ArrowUp when tabs are stacked (vertical)
+        if (!isStacked) break;
+        if (_currentTab === 1) {
+          setCurrentTab(_tabProps.length);
+        } else {
+          setCurrentTab(_currentTab - 1);
+        }
+        isHandled = true;
+        break;
       case "ArrowLeft":
+        // ArrowLeft works for horizontal tabs
+        if (isStacked) break;
         if (_currentTab === 1) {
           setCurrentTab(_tabProps.length);
         } else {
@@ -272,7 +287,18 @@
         isHandled = true;
         break;
       case "ArrowDown":
+        // Only handle ArrowDown when tabs are stacked (vertical)
+        if (!isStacked) break;
+        if (_currentTab === _tabProps.length) {
+          setCurrentTab(1);
+        } else {
+          setCurrentTab(_currentTab + 1);
+        }
+        isHandled = true;
+        break;
       case "ArrowRight":
+        // ArrowRight works for horizontal tabs
+        if (isStacked) break;
         if (_currentTab === _tabProps.length) {
           setCurrentTab(1);
         } else {
