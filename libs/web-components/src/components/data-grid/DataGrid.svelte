@@ -1,7 +1,7 @@
 <svelte:options customElement={{
   tag: "goa-data-grid",
   props: {
-    keyboardIcon: { type: "Boolean", reflect: true, attribute: "keyboard-icon" },
+    keyboardIcon: { type: "String", reflect: true, attribute: "keyboard-icon" },
     keyboardIconPosition: { type: "String", reflect: true, attribute: "keyboard-icon-position" },
     keyboardNav: { type: "String", attribute: "keyboard-nav" }
   }
@@ -9,15 +9,17 @@
 
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import { shouldFocus } from "../../common/utils";
+  import { shouldFocus, toBoolean } from "../../common/utils";
 
   // ******
   // Public
   // ******
 
-  export let keyboardIcon = true;
+  export let keyboardIcon: string | boolean = "true";
   export let keyboardIconPosition: "left" | "right" = "left";
   export let keyboardNav: "layout" | "table" = "table";
+
+  $: _keyboardIcon = toBoolean(keyboardIcon);
 
   // *******
   // Private
@@ -129,6 +131,7 @@
       if (gridRow.length > 0) {
         _grid.push(gridRow);
       }
+      console.log("Initialize grid ", _grid);
     });
   }
 
@@ -346,10 +349,7 @@
 
   function focusCell(row: number, col: number) {
     if (!shouldFocusCell(row, col)) {
-      // Reset all indices when trying to focus an invalid cell
-      _focusingRowIndex = 0;
-      _focusingColIndex = 0;
-      _focusingElementIndex = -1;
+      // Invalid cell - don't change focus, stay on current cell
       return;
     }
 
@@ -680,7 +680,7 @@
 
 <div bind:this={_rootEl} role="grid">
   <slot />
-  {#if keyboardIcon && _showKeyboardIcon}
+  {#if _keyboardIcon && _showKeyboardIcon}
     <div class="keyboard-indicator show {keyboardIconPosition}" aria-hidden="true">
       <svg width="78" height="54" viewBox="0 0 78 54" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="28" y="4" width="22" height="22" rx="3" fill="#333333"/>
