@@ -7,6 +7,7 @@
       icon: { type: "String", attribute: "icon" },
       testid: { type: "String", attribute: "testid" },
       size: { type: "String", attribute: "size" },
+      variant: { type: "String", attribute: "variant" },
     },
   }}
 />
@@ -17,6 +18,7 @@
     action?: string;
   };
   export type MenuActionSize = "normal" | "compact";
+  export type MenuActionVariant = "normal" | "destructive";
   export type MenuActionProps = {
     el: HTMLElement;
   };
@@ -31,6 +33,7 @@
   export let testid: string = "";
   export let icon: GoAIconType | undefined = undefined;
   export let size: MenuActionSize = "normal";
+  export let variant: MenuActionVariant = "normal";
 
   let _buttonEl: HTMLElement;
 
@@ -70,6 +73,7 @@
 <button
   bind:this={_buttonEl}
   class:compact={size === "compact"}
+  class:destructive={variant === "destructive"}
   data-testid={testid}
   on:click={onClick}
   tabindex="0"
@@ -122,6 +126,16 @@
 
   button:focus-visible {
     box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+  }
+
+  button.destructive {
+    color: var(--goa-color-emergency-default);
+  }
+
+  button.destructive:hover,
+  button.destructive:focus-visible {
+    background-color: var(--goa-color-emergency-background);
+    color: var(--goa-color-emergency-default);
   }
 
   .text {

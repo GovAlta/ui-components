@@ -2,6 +2,7 @@
     tag: "goa-menu-button",
     props: {
       leadingIcon: { attribute: "leading-icon", type: "String" },
+      leadingIconTheme: { attribute: "leading-icon-theme", type: "String" },
       maxWidth: { type: "String", attribute: "max-width", reflect: true },
       size: { type: "String", attribute: "size" },
     }
@@ -11,7 +12,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { GoAIconType } from "../icon/Icon.svelte";
+  import { GoAIconType, IconTheme } from "../icon/Icon.svelte";
   import { dispatch, receive, relay } from "../../common/utils";
   import { MenuAction, MenuActionSize, MenuActionProps } from "./MenuAction.svelte";
 
@@ -21,6 +22,7 @@
   export let type: "primary" | "secondary" | "tertiary" = "primary";
   export let testid: string = "";
   export let leadingIcon: GoAIconType | undefined = undefined;
+  export let leadingIconTheme: IconTheme = "outline";
   export let maxWidth: string;
   export let size: MenuActionSize = "normal";
 
@@ -182,6 +184,7 @@
       data-testid={testid}
       slot="target"
       icon={leadingIcon || _icon}
+      theme={leadingIconTheme}
       variant="dark"
     />
   {/if}
