@@ -61,6 +61,7 @@ export * from "./page-block/page-block";
 export * from "./pages/pages";
 export * from "./pagination/pagination";
 export * from "./popover/popover";
+export * from "./push-drawer/push-drawer";
 export * from "./radio-group/radio-group";
 export * from "./radio-item/radio-item";
 export * from "./side-menu/side-menu";

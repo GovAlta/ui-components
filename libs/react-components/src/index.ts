@@ -55,6 +55,7 @@ export * from "./lib/page-block/page-block";
 export * from "./lib/pages/pages";
 export * from "./lib/pagination/pagination";
 export * from "./lib/popover/popover";
+export * from "./lib/push-drawer/push-drawer";
 export * from "./lib/radio-group/radio-group";
 export * from "./lib/side-menu-group/side-menu-group";
 export * from "./lib/side-menu-heading/side-menu-heading";
