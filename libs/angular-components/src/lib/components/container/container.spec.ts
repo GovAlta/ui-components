@@ -19,7 +19,9 @@ import { By } from "@angular/platform-browser";
                   [padding]="padding"
                   [width]="width"
                   [testId]="testId"
-                  maxWidth="480px"
+                  [maxWidth]="maxWidth"
+                  [minHeight]="minHeight"
+                  [maxHeight]="maxHeight"
                   [mt]="mt"
                   [mr]="mr"
                   [mb]="mb"
@@ -47,6 +49,9 @@ class TestContainerComponent {
   mb?: Spacing;
   ml?: Spacing;
   mr?: Spacing;
+  maxWidth?: string;
+  minHeight?: string;
+  maxHeight?: string;
 
   onClick() {
     /* do nothing */
@@ -75,6 +80,9 @@ describe("GoABContainer", () => {
     component.mb = "l";
     component.ml = "xl";
     component.width = "content";
+    component.maxWidth = "480px";
+    component.minHeight = "120px";
+    component.maxHeight = "240px";
 
     fixture.detectChanges();
     tick();
@@ -93,7 +101,9 @@ describe("GoABContainer", () => {
    expect(el?.getAttribute("mb")).toBe(component.mb);
    expect(el?.getAttribute("ml")).toBe(component.ml);
    expect(el?.getAttribute("width")).toBe(component.width);
-   expect(el?.getAttribute("maxwidth")).toBe("480px");
+   expect(el?.getAttribute("maxwidth")).toBe(component.maxWidth);
+   expect(el?.getAttribute("minheight")).toBe(component.minHeight);
+   expect(el?.getAttribute("maxheight")).toBe(component.maxHeight);
 
    expect(el?.querySelector("[slot='title']")?.innerHTML).toContain("This is a title");
    expect(el?.querySelector("[slot='actions']")?.querySelector("goa-button")).not.toBeFalsy();

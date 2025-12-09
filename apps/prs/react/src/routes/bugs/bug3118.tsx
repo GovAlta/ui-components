@@ -8,7 +8,7 @@ import {
 } from "@abgov/react-components";
 import type { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 
-export default function TestComponent() {
+export function Bug3118Route() {
   const onAction = (detail: GoabMenuButtonOnActionDetail) => {
     console.log(detail);
   };
@@ -35,9 +35,7 @@ export default function TestComponent() {
       <GoabDivider mt="xl" mb="xl" />
 
       {/* Critical Test Cases for the Fix */}
-      <GoabText tag="h2">
-        Long Elements aren't forced to wrap
-      </GoabText>
+      <GoabText tag="h2">Long Elements aren't forced to wrap</GoabText>
 
       <GoabMenuButton text="Baseline actions" onAction={onAction}>
         <GoabMenuAction key="1" text="Action 1" action="action-1" icon="search" />
@@ -51,9 +49,7 @@ export default function TestComponent() {
       </GoabMenuButton>
 
       {/* Critical Test Cases for the Fix */}
-      <GoabText tag="h2">
-        Max width can be set forcing long elements to wrap
-      </GoabText>
+      <GoabText tag="h2">Max width can be set forcing long elements to wrap</GoabText>
 
       <GoabMenuButton maxWidth="500px" text="Baseline actions" onAction={onAction}>
         <GoabMenuAction key="1" text="Action 1" action="action-1" icon="search" />
@@ -75,9 +71,7 @@ export default function TestComponent() {
       <GoabText tag="h2">
         Components on the right side of the screen will right align the menu options
       </GoabText>
-      <GoabText tag="p">
-        You may may have to resize the browser to test this
-      </GoabText>
+      <GoabText tag="p">You may may have to resize the browser to test this</GoabText>
 
       <GoabBlock direction="row" gap="l" width="100%">
         <div style={{ width: "100%" }}></div>
@@ -93,14 +87,10 @@ export default function TestComponent() {
         </GoabMenuButton>
       </GoabBlock>
 
-
       <GoabDivider mt="xl" mb="xl" />
 
-
       {/*  */}
-      <GoabText tag="h2">
-        Regression tests
-      </GoabText>
+      <GoabText tag="h2">Regression tests</GoabText>
 
       <GoabGrid minChildWidth="320px" gap="l">
         <GoabBlock direction="column" gap="l" maxWidth="320px">

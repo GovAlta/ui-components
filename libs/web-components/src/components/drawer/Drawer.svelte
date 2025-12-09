@@ -31,10 +31,7 @@
 
   // computes the required absolute position offset to hide the drawer when not shown
   let _drawerSize: number;
-  let _actionsHeight: number = 0;
-  let _headerHeight: number = 0;
   let _actionsSlotHasContent: boolean = false;
-  let _scrollableHeight: string = "";
   let _scrollPos: "top" | "middle" | "bottom" | null = "top"; // to add the box-shadow to the drawer content
 
   // ========
@@ -54,11 +51,6 @@
       const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
       _scrollPos = hasScroll ? "top" : null;
     }
-  }
-
-  // Add reactive statement for height calculations
-  $: if (open && _contentEl) {
-    updateHeights();
   }
 
   $: {
@@ -94,21 +86,9 @@
   // Functions
   // *********
 
-  // to set the scrollable height
-  function updateHeights() {
-    const headerEl = _contentEl?.querySelector(".header");
-    const actionsEl = _contentEl?.querySelector(".drawer-actions");
-
-    _headerHeight = headerEl?.clientHeight ?? 0;
-    _actionsHeight = actionsEl?.clientHeight ?? 0;
-    _scrollableHeight = scrollableHeight();
-  }
-
   async function checkActionsSlotContent() {
     await tick();
     _actionsSlotHasContent = !!$$slots.actions;
-    // Trigger height recalculation after checking slot content
-    updateHeights();
   }
 
   function close(e: Event) {
@@ -126,19 +106,6 @@
         break;
     }
   };
-
-  function scrollableHeight() {
-    const edgeMargin = 16; // box shadow top and bottom
-
-    if (position === "bottom") {
-      return maxsize; // maxsize will be the height when drawer is in the bottom position
-    }
-    // Calculate available height by subtracting:
-    // - header height
-    // - actions height (if actions exist)
-    // - edge margins
-    return `calc(100vh - ${_headerHeight}px - ${_actionsSlotHasContent ? _actionsHeight : 0}px - ${edgeMargin}px)`;
-  }
 
   // handle scroll event to set the scroll position in order to add the box-shadow to the drawer content depending on the scroll position
   function handleScroll(e: CustomEvent) {
@@ -179,8 +146,8 @@
       use:noscroll={{ enable: open }}
       style={styles(
         style("--drawer-offset", `-${_drawerSize}px`),
-        style("height", position === "bottom" ? "unset" : "100vh"),
-        style("max-width", position === "bottom" ? "unset" : maxsize),
+        style("max-height", position === "bottom" ? maxsize : "100vh"),
+        style("max-width", position === "bottom" ? "100%" : maxsize),
         style("width", position === "bottom" ? "100%" : maxsize),
       )}
       in:fly={_flyParams}
@@ -199,7 +166,7 @@
       aria-labelledby="goa-drawer-heading"
     >
       <!-- Header -->
-      <div class="header" bind:clientHeight={_headerHeight} id="goa-drawer-heading">
+      <div class="header" id="goa-drawer-heading">
         {#if heading || $$slots.heading}
           {#if heading}
             <goa-text size="heading-m" as="h3" mt="none" mb="none">{heading}</goa-text>
@@ -224,7 +191,7 @@
       <div data-testid="drawer-content" class="drawer-content">
         <goa-scrollable
           direction="vertical"
-          maxheight={_scrollableHeight}
+          maxheight="100%"
           on:_scroll={handleScroll}
           bind:this={_scrollEl}
         >
@@ -240,7 +207,6 @@
           class="drawer-actions"
           data-testid="drawer-actions"
           class:empty-actions={!_actionsSlotHasContent}
-          bind:clientHeight={_actionsHeight}
         >
           <slot name="actions" />
         </section>
@@ -323,6 +289,12 @@
   /* Content styles */
   .drawer-content {
     box-shadow: none;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .drawer-content goa-scrollable {
+    height: 100%;
   }
 
   .scroll-content {
@@ -351,12 +323,17 @@
   .drawer-bottom {
     bottom: var(--drawer-offset);
     width: 100%;
-    height: 300px;
+    min-height: 300px;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     transform: translateY(100%);
     box-shadow: var(--goa-drawer-bottom-shadow);
   }
+
+  .drawer-bottom .drawer-content {
+    overflow-y: auto;
+  }
+
   .drawer-open-bottom {
     bottom: 0;
   }

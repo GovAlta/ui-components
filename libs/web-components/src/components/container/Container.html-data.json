@@ -35,6 +35,16 @@
       "type": "string"
     },
     {
+      "name": "minheight",
+      "description": "Sets the minimum height of the container.",
+      "type": "string"
+    },
+    {
+      "name": "maxheight",
+      "description": "Sets the maximum height of the container.",
+      "type": "string"
+    },
+    {
       "name": "mt",
       "description": "Top margin",
       "valueSet": "spacing"
