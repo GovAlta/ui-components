@@ -6,6 +6,7 @@
       action: { type: "String", attribute: "action" },
       icon: { type: "String", attribute: "icon" },
       testid: { type: "String", attribute: "testid" },
+      size: { type: "String", attribute: "size" },
     },
   }}
 />
@@ -14,6 +15,10 @@
   import { GoAIconType } from "../icon/Icon.svelte";
   export type MenuAction = {
     action?: string;
+  };
+  export type MenuActionSize = "normal" | "compact";
+  export type MenuActionProps = {
+    el: HTMLElement;
   };
 </script>
 
@@ -25,20 +30,46 @@
   export let action: string = "default";
   export let testid: string = "";
   export let icon: GoAIconType | undefined = undefined;
+  export let size: MenuActionSize = "normal";
 
-  let _el: HTMLElement;
+  let _buttonEl: HTMLElement;
+
+  // Hooks
 
   onMount(() => {
-    relay(_el, "bind", _el, { bubbles: true, timeout: 1 });
+    addInitListener();
+    dispatchMounted();
   });
 
+  // Functions
+
+  function dispatchMounted() {
+    _buttonEl.dispatchEvent(
+      new CustomEvent<MenuActionProps>("menu-action:mounted", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          el: _buttonEl,
+        },
+      })
+    );
+  }
+
+  function addInitListener() {
+    _buttonEl.addEventListener("menu-button:init", (e: Event) => {
+      const detail = (e as CustomEvent<{ size: MenuActionSize }>).detail;
+      size = detail.size;
+    });
+  }
+
   function onClick() {
-    relay(_el, "click", { action }, { bubbles: true });
+    relay(_buttonEl, "click", { action }, { bubbles: true });
   }
 </script>
 
 <button
-  bind:this={_el}
+  bind:this={_buttonEl}
+  class:compact={size === "compact"}
   data-testid={testid}
   on:click={onClick}
   tabindex="0"
@@ -69,10 +100,24 @@
     outline: none;
   }
 
+  button.compact {
+    font: var(--goa-typography-body-m);
+    min-height: auto;
+    padding: var(--goa-space-s) var(--goa-space-m);
+    gap: var(--goa-space-s);
+    border-radius: var(--goa-border-radius-m);
+  }
+
   button:focus-visible,
   button:hover {
     background-color: var(--goa-button-tertiary-hover-color-bg);
     color: var(--goa-button-tertiary-hover-color-text);
+  }
+
+  button.compact:focus-visible,
+  button.compact:hover {
+    background-color: var(--goa-dropdown-item-color-bg-hover);
+    color: var(--goa-dropdown-item-color-text-hover);
   }
 
   button:focus-visible {

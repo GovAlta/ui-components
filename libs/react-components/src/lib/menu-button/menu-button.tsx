@@ -6,7 +6,7 @@
  * It also includes TypeScript interfaces for improved type checking and development experience.
  */
 
-import { GoabButtonType, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import { GoabButtonType, GoabIconType, GoabMenuActionSize, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
 
 /**
@@ -24,6 +24,7 @@ interface WCProps {
   type: GoabButtonType;
   "max-width"?: string,
   "leading-icon"?: GoabIconType;
+  size?: GoabMenuActionSize;
   testid?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
@@ -58,6 +59,7 @@ export interface GoabMenuButtonProps {
   type?: GoabButtonType;
   maxWidth?: string;
   leadingIcon?: GoabIconType;
+  size?: GoabMenuActionSize;
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;
@@ -91,6 +93,7 @@ export function GoabMenuButton({
   type = "primary",
   leadingIcon,
   maxWidth,
+  size,
   testId,
   onAction,
   children,
@@ -119,7 +122,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon} max-width={maxWidth}>
+    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon} max-width={maxWidth} size={size}>
       {children}
     </goa-menu-button>
   );

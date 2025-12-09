@@ -30,6 +30,8 @@ export type GoabMenuButtonOnActionDetail = {
   action: string;
 };
 
+export type GoabMenuActionSize = "normal" | "compact";
+
 export type GoabInputAutoCapitalize =
   | "on"
   | "off"

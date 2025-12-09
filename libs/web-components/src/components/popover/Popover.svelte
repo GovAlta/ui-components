@@ -109,12 +109,10 @@
   $: (async () => _open && (await setPopoverPosition()))();
   $: (async () => _sectionHeight && (await setPopoverPosition()))();
   $: (async() => {
-    console.log("reactive triggered vs _open ", _open, " and externalTarget ", externalTarget);
     if (_open && !_previousOpen && externalTarget) {
       await tick();
       setTimeout(() => {
         const firstFocusableEl = getFirstFocusableEl(_focusTrapEl);
-        console.log("firstFocusableEl", firstFocusableEl);
         firstFocusableEl?.focus();
       }, 100);
     }
@@ -147,7 +145,6 @@
       closePopover();
       e.stopPropagation();
     });
-    console.log("Reach onMount vs externalTarget ", externalTarget, " and slot", $$slots);
 
     showDeprecationWarnings();
     addGlobalCloseListener();

@@ -3,6 +3,7 @@
     props: {
       leadingIcon: { attribute: "leading-icon", type: "String" },
       maxWidth: { type: "String", attribute: "max-width", reflect: true },
+      size: { type: "String", attribute: "size" },
     }
   }}
 />
@@ -12,7 +13,7 @@
 
   import { GoAIconType } from "../icon/Icon.svelte";
   import { dispatch, receive, relay } from "../../common/utils";
-  import { MenuAction } from "./MenuAction.svelte";
+  import { MenuAction, MenuActionSize, MenuActionProps } from "./MenuAction.svelte";
 
   // Public props
 
@@ -21,6 +22,7 @@
   export let testid: string = "";
   export let leadingIcon: GoAIconType | undefined = undefined;
   export let maxWidth: string;
+  export let size: MenuActionSize = "normal";
 
   // Private props
 
@@ -28,8 +30,9 @@
   let _icon: GoAIconType = "chevron-down";
 
   let _blockEl: HTMLElement;
-  let _buttons: HTMLElement[] = [];
+  let _menuActions: MenuActionProps[] = [];
   let _buttonIndex = 0;
+  let _bindTimeoutId: ReturnType<typeof setTimeout>;
 
   let _targetEl: HTMLElement;
 
@@ -39,6 +42,10 @@
   // Reactive
 
   $: getMenuWidth(_targetEl);
+  $: {
+    size;
+    bindOptions();
+  }
 
   // Functions
 
@@ -51,8 +58,30 @@
     dispatch(document.body, "goa:closePopover", { target: _rootEl });
   }
 
-  function onBind(button: HTMLElement) {
-    _buttons = [..._buttons, button];
+  function getChildren() {
+    _rootEl.addEventListener("menu-action:mounted", (e: Event) => {
+      const props = (e as CustomEvent<MenuActionProps>).detail;
+      _menuActions = [..._menuActions, props];
+
+      // call bindOptions once all children are attained
+      if (_bindTimeoutId) {
+        clearTimeout(_bindTimeoutId);
+      }
+      _bindTimeoutId = setTimeout(() => {
+        bindOptions();
+      }, 1);
+    });
+  }
+
+  function bindOptions() {
+    _menuActions.forEach((props) => {
+      props.el.dispatchEvent(
+        new CustomEvent("menu-button:init", {
+          composed: true,
+          detail: { size },
+        })
+      );
+    });
   }
 
   // To obtain the menu width a delay is required
@@ -86,15 +115,10 @@
           onAction(data as MenuAction);
           event.stopPropagation();
           break;
-        case "bind":
-          onBind(data as HTMLElement);
-          event.stopPropagation();
-          break;
-        default:
-          console.warn(`Unknown action "${action}" received in MenuButton`);
-          break;
       }
     });
+
+    getChildren();
 
     _blockEl.addEventListener("keydown", (e) => {
       let handled = false;
@@ -106,11 +130,11 @@
         case "ArrowUp":
           handled = true;
           _buttonIndex =
-            _buttonIndex - 1 < 0 ? _buttons.length - 1 : _buttonIndex - 1;
+            _buttonIndex - 1 < 0 ? _menuActions.length - 1 : _buttonIndex - 1;
           break;
         case "ArrowDown":
           handled = true;
-          _buttonIndex = (_buttonIndex + 1) % _buttons.length;
+          _buttonIndex = (_buttonIndex + 1) % _menuActions.length;
           break;
         case "Home":
         case "PageUp":
@@ -120,12 +144,12 @@
         case "End":
         case "PageDown":
           handled = true;
-          _buttonIndex = _buttons.length - 1;
+          _buttonIndex = _menuActions.length - 1;
           break;
       }
 
       if (handled) {
-        _buttons[_buttonIndex]?.focus();
+        _menuActions[_buttonIndex]?.el?.focus();
         e.stopPropagation();
         e.preventDefault();
       }
