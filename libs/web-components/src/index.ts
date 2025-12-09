@@ -63,6 +63,7 @@ export * from "./components/page-block/PageBlock.svelte";
 export * from "./components/pages/Pages.svelte";
 export * from "./components/pagination/Pagination.svelte";
 export * from "./components/popover/Popover.svelte";
+export * from "./components/push-drawer/PushDrawer.svelte";
 export * from "./components/radio-group/RadioGroup.svelte";
 export * from "./components/radio-item/RadioItem.svelte";
 export * from "./components/scrollable/Scrollable.svelte";

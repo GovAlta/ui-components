@@ -76,6 +76,7 @@ export function App() {
               <Link to="/features/2328">2328 Container Height Property</Link>
               <Link to="/features/2361">2361 Radio/Checkbox Clickable Area</Link>
               <Link to="/features/2440">2440 MenuButton Icon</Link>
+              <Link to="/features/2469">2469 Push Drawer</Link>
               <Link to="/features/2492">2492 TextArea onBlur</Link>
               <Link to="/features/2609">2609 Data Table Base Component</Link>
               <Link to="/features/2611">2611 Segmented Tab</Link>
