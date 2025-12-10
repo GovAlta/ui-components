@@ -600,6 +600,26 @@
   }
 
   /**
+   * Check if an element is visible (not hidden by CSS)
+   * @param element
+   */
+  function isElementVisible(element: Element): boolean {
+    if (!(element instanceof HTMLElement)) return false;
+
+    // Check if element has zero dimensions (hidden elements typically have 0x0 size)
+    const rect = element.getBoundingClientRect();
+    if (rect.width === 0 && rect.height === 0) return false;
+
+    // Check computed styles for visibility
+    const style = getComputedStyle(element);
+    if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
    * Return focusable elements within a cell, excluding the cell itself
    * @param cell
    */
@@ -624,8 +644,8 @@
 
         // Check the node to break recursive (final point)
         const focusableNode = shouldFocus(node);
-        // Add to set only if it's focusable AND not the cell itself
-        if (focusableNode && node !== cell) {
+        // Add to set only if it's focusable AND not the cell itself AND visible
+        if (focusableNode && node !== cell && isElementVisible(node as Element)) {
           elementsSet.add(node as Element);
         }
       }

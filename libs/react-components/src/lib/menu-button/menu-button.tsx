@@ -8,6 +8,7 @@
 
 import { GoabButtonType, GoabIconTheme, GoabIconType, GoabMenuActionSize, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
+import { DataGridProps, useDataGridProps } from "../common/data-props";
 
 /**
  * Props definition for the `goab-menu-button` Web Component.
@@ -55,7 +56,7 @@ declare module "react" {
  * @property {Function} [onAction] - Callback function invoked when an action event is emitted by the component.
  * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
  */
-export interface GoabMenuButtonProps {
+export interface GoabMenuButtonProps extends DataGridProps {
   text?: string;
   type?: GoabButtonType;
   maxWidth?: string;
@@ -90,17 +91,19 @@ export interface GoabMenuButtonProps {
  * </GoabMenuButton>
  * ```
  */
-export function GoabMenuButton({
-  text,
-  type = "primary",
-  leadingIcon,
-  leadingIconTheme,
-  maxWidth,
-  size,
-  testId,
-  onAction,
-  children,
-}: GoabMenuButtonProps): JSX.Element {
+export function GoabMenuButton(props: GoabMenuButtonProps): JSX.Element {
+  const [dataGridProps, {
+    text,
+    type = "primary",
+    leadingIcon,
+    leadingIconTheme,
+    maxWidth,
+    size,
+    testId,
+    onAction,
+    children,
+  }] = useDataGridProps(props);
+
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -125,7 +128,7 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon} leading-icon-theme={leadingIconTheme} max-width={maxWidth} size={size}>
+    <goa-menu-button ref={el} text={text} type={type} testid={testId} leading-icon={leadingIcon} leading-icon-theme={leadingIconTheme} max-width={maxWidth} size={size} {...dataGridProps}>
       {children}
     </goa-menu-button>
   );
