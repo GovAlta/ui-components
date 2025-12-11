@@ -41,6 +41,7 @@ export * from "./lib/hero-banner/hero-banner-actions";
 export * from "./lib/icon-button/icon-button";
 export * from "./lib/icon/icon";
 export * from "./lib/input/input";
+export * from "./lib/linear-progress/linear-progress";
 export * from "./lib/link/link";
 export * from "./lib/link-button/link-button";
 export * from "./lib/menu-button/menu-button";
