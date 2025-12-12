@@ -1,35 +1,36 @@
 import { render } from "vitest-browser-react";
-import { GoabInput } from "../src";
+import { GoabInput, GoabTabs } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { userEvent } from "@vitest/browser/context";
 import React from "react";
 
 describe("Input Browser Tests", () => {
   it("passes the browser event on change, keypress, focus, and blur details", async () => {
-    const onChange = vi.fn();
-    const onKeyPress = vi.fn();
-    const onFocus = vi.fn();
-    const onBlur = vi.fn();
+    const onChange = vi.fn((detail) => detail.event.stopPropagation());
+    const onKeyPress = vi.fn((detail) => detail.event.stopPropagation());
+    const onFocus = vi.fn((detail) => detail.event.stopPropagation());
+    const onBlur = vi.fn((detail) => detail.event.stopPropagation());
+    const tabsOnChange = vi.fn();
 
     const result = render(
-      <div>
-        <GoabInput
-          name="event-input"
-          testId="event-input"
-          onChange={onChange}
-          onKeyPress={onKeyPress}
-          onFocus={onFocus}
-          onBlur={onBlur}
-        />
-        ,
-        <GoabInput
-          name="blur-target"
-          testId="blur-target"
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          onChange={() => {}}
-        />
-        ,
-      </div>,
+      <GoabTabs onChange={tabsOnChange}>
+        <div>
+          <GoabInput
+            name="event-input"
+            testId="event-input"
+            onChange={onChange}
+            onKeyPress={onKeyPress}
+            onFocus={onFocus}
+            onBlur={onBlur}
+          />
+          <GoabInput
+            name="blur-target"
+            testId="blur-target"
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            onChange={() => {}}
+          />
+        </div>
+      </GoabTabs>,
     );
 
     const input = result.getByTestId("event-input");
@@ -76,6 +77,10 @@ describe("Input Browser Tests", () => {
       expect(blurDetail.name).toBe("event-input");
       expect(blurDetail.value).toBe("a");
       expect(blurDetail.event).toBeInstanceOf(Event);
+    });
+
+    await vi.waitFor(() => {
+      expect(tabsOnChange).not.toHaveBeenCalled();
     });
   });
 });
