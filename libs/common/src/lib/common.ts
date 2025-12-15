@@ -599,6 +599,7 @@ export type GoabIconType =
   | "filenames.ps1"
   | "film"
   | "filter-circle"
+  | "filter-lines"
   | "filter"
   | "finger-print"
   | "fish"
