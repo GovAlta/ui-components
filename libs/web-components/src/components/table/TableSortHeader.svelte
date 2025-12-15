@@ -10,6 +10,7 @@
 
   export let direction: GoATableSortDirection = "none";
   export let version: GoAVersion = "1";
+  export let sortorder: string = "";  // "1", "2", or empty
 
   // Private
   let _rootEl: HTMLElement;
@@ -29,11 +30,16 @@
 
 <button bind:this={_rootEl} class:sorted={direction !== "none"} class:v2={version === "2"}>
   <slot />
-  <span class="icon-wrapper" class:direction--none={direction === "none"}>
+  <span class="icon-wrapper">
+    {#if sortorder && direction !== "none"}
+      <span class="sort-order">{sortorder}</span>
+    {/if}
     {#if direction === "desc"}
       <goa-icon type="arrow-down" size="3" />
-    {:else}
+    {:else if direction === "asc"}
       <goa-icon type="arrow-up" size="3" />
+    {:else}
+      <goa-icon type="chevron-expand" size="3" />
     {/if}
   </span>
 </button>
@@ -42,6 +48,7 @@
   :host {
     display: flex;
     align-items: flex-end;
+    cursor: pointer;
   }
 
   button {
@@ -60,12 +67,11 @@
     gap: var(--goa-table-sort-header-gap, var(--goa-space-2xs));
     align-items: flex-end;
     text-align: var(--header-align, left);
+    cursor: pointer;
   }
 
-  /* User set classes */
+  /* Hover state - no background change, only text color */
   button:hover {
-    background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-150));
-    cursor: pointer;
     color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
   }
 
@@ -104,31 +110,29 @@
     color: var(--goa-color-interactive-hover);
   }
 
-  /* Unsorted - hidden by default, show on hover */
-  .direction--none {
-    opacity: 0;
-    transition: opacity 0.15s ease;
+  /* Unsorted state - icon always visible */
+  button:not(.sorted) goa-icon {
+    color: var(--goa-color-greyscale-500);
   }
 
-  button:hover .direction--none {
-    opacity: 1;
-  }
-
-  /* V2: Also show icon on focus (not just hover) */
-  button.v2:focus-visible .direction--none {
-    opacity: 1;
-  }
-
-  .direction--none goa-icon {
-    color: var(--goa-color-greyscale-400);
-  }
-
-  button:hover .direction--none goa-icon {
+  button:not(.sorted):hover goa-icon {
     color: var(--goa-color-interactive-hover);
   }
 
-  /* V2: Icon color on focus */
-  button.v2:focus-visible .direction--none goa-icon {
+  /* V2: Icon color on focus for unsorted state */
+  button.v2:not(.sorted):focus-visible goa-icon {
+    color: var(--goa-color-interactive-hover);
+  }
+
+  /* Sort order number badge */
+  .sort-order {
+    font-size: var(--goa-font-size-1);
+    font-weight: var(--goa-font-weight-bold);
+    color: var(--goa-color-interactive-default);
+    line-height: 1;
+  }
+
+  button:hover .sort-order {
     color: var(--goa-color-interactive-hover);
   }
 </style>

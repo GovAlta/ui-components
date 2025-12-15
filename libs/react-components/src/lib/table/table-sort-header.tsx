@@ -7,6 +7,7 @@ interface WCProps {
   name?: string;
   direction?: GoabTableSortDirection;
   version?: string;
+  sortorder?: string;
 }
 
 declare module "react" {
@@ -22,14 +23,15 @@ declare module "react" {
 export interface GoabTableSortProps extends DataGridProps {
   name?: string;
   direction?: GoabTableSortDirection;
+  sortOrder?: string;
   children?: React.ReactNode;
 }
 
 export function GoabTableSortHeader(props: GoabTableSortProps): JSX.Element {
-  const [dataGridProps, { name, direction = "none", children }] = useDataGridProps(props);
+  const [dataGridProps, { name, direction = "none", sortOrder, children }] = useDataGridProps(props);
 
   return (
-    <goa-table-sort-header version={"2"} name={name} direction={direction} {...dataGridProps}>
+    <goa-table-sort-header version={"2"} name={name} direction={direction} sortorder={sortOrder} {...dataGridProps}>
       {children}
     </goa-table-sort-header>
   );
