@@ -41,6 +41,8 @@
   let _showKeyboardIcon = false;
   let _bindTimeoutId: any = null; // Track pending grid rebuilds to prevent race conditions
   let _isRebuilding = false; // Flag to prevent navigation during grid rebuild
+  let _lastInteractionWasKeyboard = false; // Track if last interaction was keyboard (for focus-visible behavior)
+  let _hasUserInteracted = false; // Track if user has interacted with grid (to skip focus on initial data load)
 
   onMount(() => {
     (async () => {
@@ -255,6 +257,11 @@
   }
 
   function restoreFocusAfterRebuild(row: number, col: number, elementIndex: number) {
+    // Don't restore focus if user hasn't interacted with the grid yet (initial data load)
+    if (!_hasUserInteracted) {
+      return;
+    }
+
     if (!isValidCell(row, col)) {
       _focusingElementIndex = -1;
       moveToGridStart();
@@ -268,6 +275,10 @@
   }
 
   function handleKeyDown(event: KeyboardEvent) {
+    // Mark that last interaction was keyboard
+    _lastInteractionWasKeyboard = true;
+    _hasUserInteracted = true;
+
     if (event.key === 'Tab') {
       // setTimeout to allow the Tab focus change to complete first
       setTimeout(() => {
@@ -379,9 +390,17 @@
   function setFocusedStyle(el: HTMLElement) {
     if (!el) return;
 
-    // For corner cells in first row, use inset box-shadow with border-radius to avoid clipping
+    // Only show visible focus ring for keyboard interactions (focus-visible behavior)
+    if (!_lastInteractionWasKeyboard) {
+      // Still need to hide browser's default focus outline for mouse interactions
+      el.style.outline = 'none';
+      return;
+    }
+
+    // For corner cells in first row of TABLE mode, use inset box-shadow with border-radius to avoid clipping
     // Table uses 16px border-radius (--goa-table-border-radius-container)
-    if (_focusingRowIndex === 0) {
+    // Skip this for layout mode (cards) where each row has its own container
+    if (keyboardNav === "table" && _focusingRowIndex === 0) {
       const rowLength = _grid[0]?.length || 0;
       const tableRadius = '14px'; // Slightly less than table's 16px to account for 2px focus ring
       if (_focusingColIndex === 0) {
@@ -513,6 +532,9 @@
 
   function handleCellClick(event: Event) {
     _clickInsideGrid = true;
+    // Mark that last interaction was mouse (not keyboard)
+    _lastInteractionWasKeyboard = false;
+    _hasUserInteracted = true;
 
     // Prevent cell focus changes during grid rebuild to avoid race conditions
     if (_isRebuilding) return;
