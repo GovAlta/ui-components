@@ -77,6 +77,7 @@ export function App() {
               <Link to="/features/2877">2877 Badge Types and Custom Icon</Link>
               <Link to="/features/3102">3102 MenuButton Width</Link>
               <Link to="/features/v2-icons">v2 header icons</Link>
+              <Link to="/features/3137">3137 Work Side Menu Group</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>
