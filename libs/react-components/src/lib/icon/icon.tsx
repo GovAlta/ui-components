@@ -1,5 +1,4 @@
 import {
-  GoabIconFilledType,
   GoabIconOverridesType,
   GoabIconSize,
   GoabIconTheme,
@@ -10,21 +9,8 @@ import {
 import type { JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
-interface IonIconProps {
-  name: GoabIconType | GoabIconFilledType;
-}
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IonIconElement extends HTMLElement {}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "ion-icon": IonIconProps & React.HTMLAttributes<IonIconElement>;
-    }
-  }
-}
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace

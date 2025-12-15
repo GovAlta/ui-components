@@ -1,0 +1,164 @@
+<main>
+  <goab-text tag="h1">1383: Button: Filled Icons</goab-text>
+
+  <goab-grid minChildWidth="400px" gap="l">
+    @for (scenario of scenarios; track scenario.id) {
+      <goab-block direction="column" gap="s">
+        <goab-text tag="h2" size="heading-m">
+          {{ scenario.title }}
+        </goab-text>
+        <goab-text tag="p" size="body-s">
+          {{ scenario.description }}
+        </goab-text>
+
+        <goab-block direction="row" gap="m">
+          <goab-icon size="large" [type]="scenario.type" [theme]="scenario.theme" />
+          <goab-block direction="column" gap="xs">
+            <goab-text tag="p" size="body-s"> type: {{ scenario.type }} </goab-text>
+            <goab-text tag="p" size="body-s">
+              theme property: {{ scenario.theme ? scenario.theme : "(none)" }}
+            </goab-text>
+          </goab-block>
+        </goab-block>
+      </goab-block>
+    }
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m"> Default icons (outline theme) </goab-text>
+  <goab-grid minChildWidth="200px" gap="m">
+    @for (icon of iconTypes; track icon.id) {
+      <goab-block direction="column" gap="xs" alignment="center">
+        <goab-icon size="large" [type]="icon.icon" />
+        <goab-text tag="p" size="body-s">
+          {{ icon.icon }}
+        </goab-text>
+      </goab-block>
+    }
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m"> Filled via theme attribute </goab-text>
+  <goab-grid minChildWidth="200px" gap="m">
+    @for (icon of iconTypes; track icon.id) {
+      <goab-block direction="column" gap="xs" alignment="center">
+        <goab-icon size="large" [type]="icon.icon" theme="filled" />
+        <goab-text tag="p" size="body-s"> {{ icon.icon }} (theme=filled) </goab-text>
+      </goab-block>
+    }
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m"> Filled via type suffix </goab-text>
+  <goab-grid minChildWidth="200px" gap="m">
+    @for (icon of iconTypes; track icon.id) {
+      <goab-block direction="column" gap="xs" alignment="center">
+        <goab-icon size="large" [type]="filled(icon)" />
+        <goab-text tag="p" size="body-s"> {{ icon.icon }}:filled </goab-text>
+      </goab-block>
+    }
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m"> GoabBadge iconType property </goab-text>
+  <goab-grid minChildWidth="260px" gap="m">
+    <goab-block direction="column" gap="xs" alignment="center">
+      <goab-badge
+        type="information"
+        icon="true"
+        iconType="accessibility"
+        content="accessibility"
+      >
+        Badge
+      </goab-badge>
+    </goab-block>
+    <goab-block direction="column" gap="xs" alignment="center">
+      <goab-badge
+        type="information"
+        icon="true"
+        iconType="accessibility:filled"
+        content="accessibility:filled"
+      >
+        Badge
+      </goab-badge>
+    </goab-block>
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m">
+    GoabButton leading/trailing icons properties
+  </goab-text>
+  <goab-grid minChildWidth="260px" gap="m">
+    <goab-block direction="column" gap="xs" alignment="center">
+      <goab-button
+        type="primary"
+        leadingIcon="accessibility"
+        trailingIcon="accessibility"
+      >
+        accessibility
+      </goab-button>
+    </goab-block>
+    <goab-block direction="column" gap="xs" alignment="center">
+      <goab-button
+        type="primary"
+        leadingIcon="accessibility:filled"
+        trailingIcon="accessibility:filled"
+      >
+        accessibility:filled
+      </goab-button>
+    </goab-block>
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m"> GoabIconButton icon property </goab-text>
+  <goab-grid minChildWidth="200px" gap="m">
+    <goab-block direction="column" gap="xs" alignment="center">
+      <goab-icon-button
+        icon="accessibility"
+        ariaLabel="icon button"
+        size="large"
+        title="accessibility"
+      />
+    </goab-block>
+    <goab-block direction="column" gap="xs" alignment="center">
+      <goab-icon-button
+        icon="accessibility:filled"
+        ariaLabel="icon button"
+        size="large"
+        title="accessibility:filled"
+      />
+    </goab-block>
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m">
+    GoabInput leading/trailing icon properties
+  </goab-text>
+  <goab-grid minChildWidth="320px" gap="m">
+    <goab-block direction="column" gap="xs">
+      <goab-input
+        placeholder="accessibility"
+        leadingIcon="accessibility"
+        trailingIcon="accessibility"
+      />
+    </goab-block>
+    <goab-block direction="column" gap="xs">
+      <goab-input
+        placeholder="accessibility:filled"
+        leadingIcon="accessibility:filled"
+        trailingIcon="accessibility:filled"
+      />
+    </goab-block>
+  </goab-grid>
+
+  <goab-text tag="h2" size="heading-m"> GoabMenuButton icon property </goab-text>
+  <goab-grid minChildWidth="320px" gap="m">
+    <goab-block direction="column" gap="xs">
+      <goab-menu-button text="accessibility">
+        <goab-menu-action text="accessibility" action="action" icon="accessibility" />
+      </goab-menu-button>
+    </goab-block>
+    <goab-block direction="column" gap="xs">
+      <goab-menu-button text="accessibility:filled">
+        <goab-menu-action
+          text="accessibility:filled"
+          action="action"
+          icon="accessibility:filled"
+        />
+      </goab-menu-button>
+    </goab-block>
+  </goab-grid>
+</main>
