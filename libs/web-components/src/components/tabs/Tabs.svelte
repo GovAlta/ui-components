@@ -9,6 +9,7 @@
   export let initialtab: number = -1; // 1-based
   export let testid: string = "";
   export let version: "1" | "2" = "2";
+  export let variant: "default" | "segmented" = "default"; // segmented = pill/button style tabs
   export let updateurl: string = "true"; // when click a tab, it will append #tab-id to URL if this flag is true
   export let stackonmobile: string = "true"; // when false, tabs stay horizontal on mobile
 
@@ -22,10 +23,17 @@
   let _rootEl: HTMLElement;
   let _tabsEl: HTMLElement;
   let _slotEl: HTMLElement;
+  let _pillEl: HTMLElement;
   let _currentTab: number = 1;
   let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
   let _initialLoad: boolean = true;
+
+  // Pill animation state for segmented variant
+  let _pillLeft: number = 0;
+  let _pillWidth: number = 0;
+  let _pillHeight: number = 30;
+  let _pillReady: boolean = false;
 
   $: _updateUrl = toBoolean(updateurl);
   $: _stackOnMobile = toBoolean(stackonmobile);
@@ -92,7 +100,8 @@
           // It will help prevent scrolling to tabs if it is located in the bottom of the page
           if (tabIndexFromHash == null && initialtab === -1) return;
 
-          setCurrentTab(tabIndexFromHash ?? (initialtab || 1));
+          // Skip focus on initial load to avoid visible focus ring on page load
+          setCurrentTab(tabIndexFromHash ?? (initialtab || 1), true);
           _initialLoad = false;
         }
       }, 1);
@@ -155,6 +164,13 @@
 
       _tabsEl?.appendChild(link);
     });
+
+    // Update pill position after tabs are created (for segmented variant)
+    if (variant === "segmented") {
+      requestAnimationFrame(() => {
+        updatePillPosition();
+      });
+    }
   }
 
   function addKeyboardEventListeners() {
@@ -181,7 +197,7 @@
     window.removeEventListener("hashchange", handleHashChange);
   }
 
-  function setCurrentTab(tab: number) {
+  function setCurrentTab(tab: number, skipFocus: boolean = false) {
     if (!_tabsEl) return;
 
     const previousTab = _currentTab;
@@ -207,7 +223,10 @@
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
-        el.focus();
+        // Only focus if not skipping focus (initial load should skip to avoid visible focus on page load)
+        if (!skipFocus) {
+          el.focus();
+        }
       }
     });
 
@@ -245,6 +264,36 @@
             }
           });
         }
+      }
+    }
+
+    // Update pill position for segmented variant
+    if (variant === "segmented") {
+      updatePillPosition();
+    }
+  }
+
+  function updatePillPosition() {
+    if (!_tabsEl || variant !== "segmented") return;
+
+    const tabs = _tabsEl.querySelectorAll('[role="tab"]');
+    const selectedTab = tabs[_currentTab - 1] as HTMLElement;
+
+    if (selectedTab) {
+      // Use getBoundingClientRect for accurate dimensions
+      const tabsRect = _tabsEl.getBoundingClientRect();
+      const selectedRect = selectedTab.getBoundingClientRect();
+
+      // Calculate position relative to container, accounting for container's border
+      _pillLeft = selectedRect.left - tabsRect.left - 1; // -1 for container border
+      _pillWidth = selectedRect.width;
+      _pillHeight = selectedRect.height;
+
+      // Enable transitions after first render
+      if (!_pillReady) {
+        requestAnimationFrame(() => {
+          _pillReady = true;
+        });
       }
     }
   }
@@ -327,8 +376,17 @@
 
 <!--HTML-->
 
-<div role="tablist" bind:this={_rootEl} class:v2={version === "2"} class:no-stack={!_stackOnMobile} data-testid={testid}>
-  <div class="tabs" bind:this={_tabsEl} style={calculateMargin(mt, mr, mb, ml)}></div>
+<div role="tablist" bind:this={_rootEl} class:v2={version === "2"} class:no-stack={!_stackOnMobile} class:segmented={variant === "segmented"} data-testid={testid}>
+  <div class="tabs" bind:this={_tabsEl} style={calculateMargin(mt, mr, mb, ml)}>
+    {#if variant === "segmented" && _pillWidth > 0}
+      <div
+        class="pill"
+        class:pill--ready={_pillReady}
+        bind:this={_pillEl}
+        style="left: {_pillLeft}px; width: {_pillWidth}px; height: {_pillHeight}px;"
+      ></div>
+    {/if}
+  </div>
   <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
     <slot />
   </div>
@@ -521,6 +579,108 @@
       width: auto;
       height: var(--goa-tab-indicator-width, 3px);
       border-radius: var(--goa-tab-indicator-border-radius-desktop, 6px 6px 0 0);
+    }
+  }
+
+  /* ========================================
+     Segmented Variant (Pill/Button style tabs)
+     ======================================== */
+
+  /* Container - gray background with rounded corners */
+  .segmented .tabs {
+    position: relative;
+    background: var(--goa-color-greyscale-50, #f8f8f8);
+    border: 1px solid var(--goa-color-greyscale-150, #dcdcdc);
+    border-radius: var(--goa-border-radius-m, 10px);
+    padding: 3px;
+    gap: 2px;
+    margin-bottom: var(--goa-tabs-margin-bottom, 2rem);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: fit-content;
+  }
+
+  /* Animated pill background for selected tab */
+  .segmented .pill {
+    position: absolute;
+    top: 3px;
+    background: var(--goa-color-greyscale-white, #ffffff);
+    border: 1px solid var(--goa-color-greyscale-150, #dcdcdc);
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 0;
+    box-sizing: border-box;
+  }
+
+  /* Enable transition after initial position is set */
+  .segmented .pill--ready {
+    transition: left 0.2s ease-out, width 0.2s ease-out;
+  }
+
+  /* Individual tabs - pill style */
+  .segmented :global([role="tab"]) {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: 1px solid transparent !important;
+    border-radius: 8px;
+    height: 30px;
+    padding: 0 var(--goa-space-s, 12px);
+    /* Typography */
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-greyscale-600, #666666);
+    /* Ensure proper alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: auto;
+    transition: color 0.15s ease;
+  }
+
+  /* Hide the ::after indicator for segmented variant */
+  .segmented :global([role="tab"]::after) {
+    display: none;
+  }
+
+  /* Selected tab - text styling only (pill handles background) */
+  .segmented :global([role="tab"][aria-selected="true"]) {
+    background: transparent;
+    border: 1px solid transparent !important;
+    color: var(--goa-color-text-secondary, #666666);
+    font: var(--goa-typography-heading-2xs);
+  }
+
+  /* Hover state for unselected tabs */
+  .segmented :global([role="tab"]:hover:not([aria-selected="true"])) {
+    background: var(--goa-color-greyscale-150, #dcdcdc);
+    border: 1px solid transparent !important;
+    color: var(--goa-color-text-default, #353535);
+  }
+
+  /* Focus state */
+  .segmented :global([role="tab"]:focus-visible) {
+    outline: var(--goa-border-width-l, 3px) solid var(--goa-color-interactive-focus);
+    outline-offset: 1px;
+    border-radius: var(--goa-border-radius-s, 8px);
+  }
+
+  /* Mobile - segmented tabs stay horizontal */
+  @media (--mobile) {
+    .segmented .tabs {
+      flex-direction: row;
+      border-left: none;
+      padding-bottom: var(--goa-space-2xs, 4px);
+    }
+
+    .segmented :global([role="tab"]) {
+      border-left: none;
+      white-space: nowrap;
+    }
+
+    .segmented :global([role="tab"][aria-selected="true"]) {
+      border-left: none;
+      background: var(--goa-color-greyscale-white, #ffffff);
     }
   }
 </style>
