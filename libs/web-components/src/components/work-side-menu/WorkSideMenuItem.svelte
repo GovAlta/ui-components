@@ -60,6 +60,14 @@
   function handleUpdateItem(e: CustomEvent) {
     let currentLink = e.detail.current;
     current = _linkEl === currentLink;
+    if (current) {
+      dispatch(
+        _rootEl,
+        "_itemCurrent",
+        { el: _linkEl, label: label },
+        { bubbles: true },
+      );
+    }
   }
 
   function handleMouseEnter() {
@@ -72,17 +80,11 @@
   }
 
   function addEventListeners() {
-    _linkEl.addEventListener(
-      "_update",
-      handleUpdateItem as EventListener,
-    );
+    _linkEl.addEventListener("_update", handleUpdateItem as EventListener);
   }
 
   function removeEventListeners() {
-    _linkEl.removeEventListener(
-      "_update",
-      handleUpdateItem as EventListener,
-    );
+    _linkEl.removeEventListener("_update", handleUpdateItem as EventListener);
   }
 </script>
 
@@ -113,6 +115,11 @@
     <div class="menu-item-label">
       {label}
     </div>
+    {#if $$slots.trailingContent}
+      <div class="trailing-content-slot">
+        <slot name="trailingContent" />
+      </div>
+    {/if}
     {#if badge}
       <div
         class="badge"
@@ -146,7 +153,7 @@
       var(--goa-border-radius-m)
     );
     text-decoration: none;
-    align-items: center;
+    align-items: flex-start;
     padding: var(
       --goa-work-side-menu-item-padding,
       var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs)
@@ -156,7 +163,7 @@
       --goa-work-side-menu-item-text-color,
       var(--goa-color-greyscale-600)
     );
-    min-height: 40px;
+    min-height: var(--goa-work-side-menu-item-min-height, 40px);
   }
 
   .menu-item:hover {
@@ -174,6 +181,11 @@
   .menu-item:focus-visible {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: 2px;
+  }
+
+  goa-icon {
+    display: var(--goa-work-side-menu-item-icon-display, flex);
+    margin-top: var(--goa-space-3xs);
   }
 
   /* Divider */
@@ -194,6 +206,10 @@
     animation: delayText 100ms;
   }
 
+  .trailing-content-slot {
+    display: flex;
+  }
+
   /* Current item */
   .current {
     background: var(
@@ -203,10 +219,6 @@
     color: var(
       --goa-work-side-menu-item-text-color-current,
       var(--goa-color-text-default)
-    );
-    border-radius: var(
-      --goa-work-side-menu-item-border-radius,
-      var(--goa-border-radius-m)
     );
   }
 
@@ -252,11 +264,10 @@
     .menu-item {
       height: 36px;
       margin: 0;
-      align-items: center;
       padding-left: calc(var(--goa-space-xs) + 2px);
     }
-
-    .menu-item-label {
+    .menu-item-label,
+    .trailing-content-slot {
       display: none;
     }
     .badge {
