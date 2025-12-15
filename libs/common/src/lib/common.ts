@@ -422,8 +422,7 @@ interface BaseProps extends Margins {
 
 // Icon
 
-export type GoabIconFilledType = `${GoabIconType}-${GoabIconTheme}`;
-export type GoabIconType =
+export type GoabIconBaseType =
   | "accessibility"
   | "add-circle"
   | "add"
@@ -1020,6 +1019,8 @@ export type GoabIconOverridesType =
   | "trash"
   | "warning-filled"
   | "warning";
+
+export type GoabIconType = GoabIconBaseType | `${GoabIconBaseType}:${GoabIconTheme}`;
 
 export type GoabIconSize =
   | "1"

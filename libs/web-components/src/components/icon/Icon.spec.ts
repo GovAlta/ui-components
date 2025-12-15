@@ -51,6 +51,31 @@ describe("Icon", () => {
   });
 });
 
+describe("Icon Theme", () => {
+  it("should render the filled variant when provided in the type", async () => {
+    const filled = render(GoAIcon, {
+      testid: "icon-filled",
+      type: "ellipse:filled",
+    });
+
+    const filledIcon = await filled.findByTestId("icon-filled");
+    const filledIonIcon = filledIcon.querySelector("ion-icon");
+
+    expect(filledIcon.getAttribute("data-type")).toBe("ellipse");
+    expect(filledIonIcon?.getAttribute("name")).toBe("ellipse"); // filled variant has no "-outline"
+
+    const outline = render(GoAIcon, {
+      testid: "icon-outline",
+      type: "ellipse",
+    });
+
+    const outlineIcon = await outline.findByTestId("icon-outline");
+    const outlineIonIcon = outlineIcon.querySelector("ion-icon");
+
+    expect(outlineIonIcon?.getAttribute("name")).toBe("ellipse-outline"); // default outline theme
+  });
+});
+
 describe("Icon Sizes", () => {
   const sizes = [
     {
@@ -107,6 +132,7 @@ describe("Icon Sizes", () => {
     it(`should render the correct width and height for size "${size}"`, async () => {
       const baseElement = render(GoAIcon, {
         testid: "icon-test",
+        type: "ellipse",
         size,
       });
       const icon = await baseElement.findByTestId("icon-test");

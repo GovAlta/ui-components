@@ -549,6 +549,10 @@
   import { style, toBoolean } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
 
+  type GoAIconTypeWithTheme =
+    | `${GoAIconType}:${IconTheme}`
+    | `${GoAIconOverridesType}:${IconTheme}`;
+
   export let mt: Spacing = null;
   export let mr: Spacing = null;
   export let mb: Spacing = null;
@@ -556,7 +560,7 @@
 
   // Required
 
-  export let type: GoAIconType & GoAIconOverridesType;
+  export let type: GoAIconType | GoAIconOverridesType | GoAIconTypeWithTheme;
 
   // Optional
 
@@ -572,15 +576,20 @@
   export let ariaexpanded: string = "";
   export let role: string = "img";
 
+  let _iconType: GoAIconType | GoAIconOverridesType;
+  let _iconTheme: IconTheme;
   // Reactive
 
   $: _isInverted = toBoolean(inverted);
   $: _ariaExpanded = toBoolean(ariaexpanded);
-  $: _iconName = iconName(type, theme);
+  $: ({ iconType: _iconType, iconTheme: _iconTheme, name: _iconName } = parseProperties(
+    type,
+    theme
+  ));
   // Private
 
   const _iconOverrides: Record<
-    GoAIconOverridesType & GoAIconOverridesTypeWithTheme,
+    GoAIconOverridesType | GoAIconOverridesTypeWithTheme,
     string
   > = {
     "goa-file": `<svg style="width: 100%; height: 100%;" width="39" height="48" viewBox="0 0 39 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_1357_108691)"> <path stroke-width="0.5" vector-effect="non-scaling-stroke" stroke="currentcolor" d="M38.741 14C38.541 13.07 38.081 12.22 37.401 11.54L36.861 11L27.861 2L27.321 1.46C26.641 0.78 25.781 0.32 24.861 0.12C24.511 0.04 24.151 0 23.791 0H5.86096C3.10096 0 0.860962 2.24 0.860962 5V43C0.860962 45.76 3.10096 48 5.86096 48H33.861C36.621 48 38.861 45.76 38.861 43V15.07C38.861 14.71 38.811 14.35 38.741 14ZM35.041 12H29.871C28.221 12 26.871 10.65 26.871 9V3.83L35.041 12ZM36.871 43C36.871 44.65 35.521 46 33.871 46H5.87097C4.22097 46 2.87097 44.65 2.87097 43V5C2.87097 3.35 4.22097 2 5.87097 2H23.801C24.171 2 24.531 2.07 24.871 2.2V9C24.871 11.76 27.111 14 29.871 14H36.671C36.801 14.34 36.871 14.7 36.871 15.07V43Z" fill="currentcolor"/> </g> <defs> <clipPath id="clip0_1357_108691"><rect width="38" height="48" fill="white" transform="translate(0.861328)"/></clipPath></defs></svg>`,
@@ -674,15 +683,25 @@
     warning: `<svg style="width: 100%; height: 100%;" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M19.9867 22.4045H4.01173C3.64142 22.4045 3.2711 22.3107 2.94767 22.1373C2.41798 21.8514 2.0336 21.3779 1.86017 20.8014C1.68673 20.2248 1.74767 19.6154 2.0336 19.0904L10.0164 4.25449C10.4102 3.52324 11.1695 3.07324 11.9992 3.07324C12.8289 3.07324 13.5883 3.52793 13.982 4.25449L21.9695 19.0904C22.1477 19.4186 22.2367 19.7842 22.2367 20.1592C22.2367 20.7592 22.0024 21.3264 21.5758 21.7482C21.1539 22.1748 20.5914 22.4045 19.9867 22.4045ZM4.01173 20.9045H19.9914C20.193 20.9045 20.3805 20.8248 20.5211 20.6842C20.6617 20.5436 20.7414 20.3561 20.7414 20.1545C20.7414 20.0326 20.7086 19.9061 20.6524 19.7982L12.6602 4.96699C12.468 4.61074 12.1352 4.57324 11.9992 4.57324C11.8633 4.57324 11.5305 4.61074 11.3383 4.96699L3.35079 19.8029C3.25704 19.9811 3.2336 20.1826 3.29454 20.3748C3.35079 20.567 3.48204 20.7264 3.65548 20.8201C3.76329 20.8764 3.88517 20.9045 4.01173 20.9045Z" fill="currentcolor"/><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M11.9992 16.3668C11.6008 16.3668 11.268 16.0527 11.2492 15.6543L10.982 9.93556C10.982 9.93087 10.982 9.92618 10.982 9.92149V9.89806C10.9774 9.33556 11.4274 8.87618 11.9899 8.87149C12.0086 8.87149 12.0274 8.87149 12.0461 8.87149C12.6086 8.89493 13.0446 9.37306 13.0164 9.93556L12.7492 15.6543C12.7305 16.0527 12.3977 16.3668 11.9992 16.3668Z" fill="currentcolor"/><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M11.9992 19.3573C11.4836 19.3573 11.0617 18.9354 11.0617 18.4198C11.0617 17.9041 11.4836 17.4823 11.9992 17.4823C12.5148 17.4823 12.9367 17.9041 12.9367 18.4198C12.9367 18.9354 12.5148 19.3573 11.9992 19.3573Z" fill="currentcolor"/></svg>`,
   };
 
-  function iconName(type: GoAIconType, theme: IconTheme): string {
-    if (type) {
-      const name =
-        theme === "filled" || (type as string).indexOf("logo") === 0
-          ? type
-          : `${type}-${theme}`;
-      return name;
-    }
-    return "";
+  function parseProperties(
+    type: GoAIconType | GoAIconOverridesType | GoAIconTypeWithTheme,
+    fallbackTheme: IconTheme
+  ) {
+    const [iconType, maybeTheme] = type.split(":");
+    const iconTheme =
+      maybeTheme === "filled" || maybeTheme === "outline"
+        ? (maybeTheme as IconTheme)
+        : fallbackTheme;
+    const name =
+      iconTheme === "filled" || (type as string).indexOf("logo") === 0
+        ? iconType
+        : `${iconType}-${iconTheme}`;
+
+    return {
+      iconType: iconType as GoAIconType | GoAIconOverridesType,
+      iconTheme,
+      name
+    };
   }
 </script>
 
@@ -694,7 +713,7 @@
   class={`goa-icon goa-icon--${size}`}
   class:inverted={_isInverted}
   data-testid={testid}
-  data-type={type}
+  data-type={_iconType || type}
   title={title}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
@@ -702,10 +721,12 @@
     ${style("--opacity", opacity)};
   `}
 >
-  {#if type}
-    {#if type in _iconOverrides}
+  {#if _iconType}
+    {#if _iconType in _iconOverrides}
       <div class="icon-override">
-        {@html _iconOverrides[`${type}-${theme}`] || _iconOverrides[type]}
+        {@html
+          _iconOverrides[`${_iconType}-${_iconTheme}`] ||
+            _iconOverrides[_iconType]}
       </div>
     {:else}
       <ion-icon name={_iconName} />
