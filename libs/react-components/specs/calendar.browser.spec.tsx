@@ -66,12 +66,20 @@ describe("Calendar", () => {
 
   it("respects min date constraint", async () => {
     const handleChange = vi.fn();
-    const today = new Date();
+    const value = "2025-11-15";
+    const today = new Date(value);
     const minDate = format(today, "yyyy-MM-dd");
     const pastDate = format(addDays(today, -5), "yyyy-MM-dd");
 
     const Component = () => {
-      return <GoabCalendar testId="calendar" min={minDate} onChange={handleChange} />;
+      return (
+        <GoabCalendar
+          testId="calendar"
+          min={minDate}
+          value={value}
+          onChange={handleChange}
+        />
+      );
     };
 
     const result = render(<Component />);
