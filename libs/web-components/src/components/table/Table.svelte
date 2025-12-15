@@ -81,24 +81,11 @@
     headings?.forEach((heading) => {
       heading.addEventListener("click", () => {
         const sortBy = heading.getAttribute("name");
-        let sortDir: number = 0;
 
-        // relay state to all children
-        headings.forEach((child) => {
-          if (child.getAttribute("name") === sortBy) {
-            const direction = child["direction"] as GoATableSortDirection;
-            // starting direction is asc
-            const newDirection = direction === "asc" ? "desc" : "asc";
-
-            sortDir = newDirection === "asc" ? 1 : -1;
-            child.setAttribute("direction", newDirection);
-          } else {
-            child.setAttribute("direction", "none");
-          }
-        });
-
-        if (sortBy && sortDir !== 0) {
-          dispatch(heading, { sortBy, sortDir });
+        // Just dispatch the event with the column name - let the parent handle sort state
+        // This supports both single and multi-column sorting
+        if (sortBy) {
+          dispatch(heading, { sortBy, sortDir: 0 });
         }
       });
 
