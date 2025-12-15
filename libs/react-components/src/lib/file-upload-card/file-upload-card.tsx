@@ -51,8 +51,8 @@ export function GoabFileUploadCard({
     if (!el.current) return;
 
     const current = el.current;
-    const deleteHandler = () => onDelete?.({ filename });
-    const cancelHandler = () => onCancel?.({ filename });
+    const deleteHandler = (event: Event) => onDelete?.({ filename, event });
+    const cancelHandler = (event: Event) => onCancel?.({ filename, event });
     current.addEventListener("_delete", deleteHandler);
     current.addEventListener("_cancel", cancelHandler);
     return () => {

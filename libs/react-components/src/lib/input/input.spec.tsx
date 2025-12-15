@@ -152,6 +152,7 @@ describe("Input", () => {
     expect(mockOnChangeHandler).toBeCalledWith({
       name: "dateInput",
       value: new Date(newDate),
+      event: expect.any(Event),
     });
   });
 
@@ -174,6 +175,7 @@ describe("Input", () => {
     expect(mockOnChangeHandler).toBeCalledWith({
       name: "numberInput",
       value: decimalValue,
+      event: expect.any(Event),
     });
   });
 
