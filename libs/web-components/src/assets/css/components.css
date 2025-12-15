@@ -124,10 +124,10 @@ goa-table thead th {
 
 goa-table thead th:has(goa-table-sort-header) {
 	padding: 0;
+	cursor: pointer;
 }
 
 goa-table thead th:has(goa-table-sort-header):hover {
-	background-color: var(--goa-table-color-bg-heading-hover, var(--goa-color-greyscale-100));
 	color: var(--goa-table-color-heading-hover, var(--goa-color-interactive-hover));
 }
 
@@ -228,8 +228,8 @@ goa-table td.goa-table-cell--numeric {
 }
 
 goa-table td.goa-table-cell--actions {
-  padding-top: var(--goa-table-padding-cell-actions, 7px) !important;
-  padding-bottom: var(--goa-table-padding-cell-actions, 7px) !important;
+  padding-top: var(--goa-table-padding-cell-actions, 3px) !important;
+  padding-bottom: var(--goa-table-padding-cell-actions, 3px) !important;
   text-align: right;
   white-space: nowrap;
 }
