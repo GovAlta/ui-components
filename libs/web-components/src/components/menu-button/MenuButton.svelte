@@ -174,6 +174,7 @@
       slot="target"
       leadingicon={leadingIcon}
       {type}
+      {size}
       trailingicon={_icon}
     >
       {text}
