@@ -669,7 +669,6 @@
   @media (--mobile) {
     .segmented .tabs {
       flex-direction: row;
-      border-left: none;
       padding-bottom: var(--goa-space-2xs, 4px);
     }
 
