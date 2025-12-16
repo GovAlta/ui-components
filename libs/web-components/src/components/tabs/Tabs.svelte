@@ -28,6 +28,8 @@
   let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
   let _initialLoad: boolean = true;
+  let _mutationObserver: MutationObserver | null = null;
+  let _resizeObserver: ResizeObserver | null = null;
 
   // Pill animation state for segmented variant
   let _pillLeft: number = 0;
@@ -52,6 +54,7 @@
   onDestroy(() => {
     removeKeyboardEventListeners();
     removeHashChangeListener();
+    removeTabContentObservers();
   });
 
   // =========
@@ -169,6 +172,7 @@
     if (variant === "segmented") {
       requestAnimationFrame(() => {
         updatePillPosition();
+        setupTabContentObservers();
       });
     }
   }
@@ -195,6 +199,48 @@
 
   function removeHashChangeListener() {
     window.removeEventListener("hashchange", handleHashChange);
+  }
+
+  // Observers to detect tab content changes (for segmented variant pill resizing)
+  function setupTabContentObservers() {
+    if (variant !== "segmented" || !_tabsEl) return;
+
+    // MutationObserver to detect DOM changes in tab headings
+    _mutationObserver = new MutationObserver(() => {
+      requestAnimationFrame(() => {
+        updatePillPosition();
+      });
+    });
+
+    _mutationObserver.observe(_tabsEl, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    // ResizeObserver to detect size changes in tabs
+    _resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(() => {
+        updatePillPosition();
+      });
+    });
+
+    // Observe each tab for size changes
+    const tabs = _tabsEl.querySelectorAll('[role="tab"]');
+    tabs.forEach(tab => {
+      _resizeObserver?.observe(tab);
+    });
+  }
+
+  function removeTabContentObservers() {
+    if (_mutationObserver) {
+      _mutationObserver.disconnect();
+      _mutationObserver = null;
+    }
+    if (_resizeObserver) {
+      _resizeObserver.disconnect();
+      _resizeObserver = null;
+    }
   }
 
   function setCurrentTab(tab: number, skipFocus: boolean = false) {
