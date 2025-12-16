@@ -563,12 +563,12 @@
               label="Delivery method"
               helpText="GoabRadio reactive binding."
             >
-            <goab-radio-group
-              name="reactive-delivery"
-              orientation="horizontal"
-              [value]="reactiveDemoForm.get('radio')?.value || undefined"
-              formControlName="radio"
-            >
+              <goab-radio-group
+                name="reactive-delivery"
+                orientation="horizontal"
+                [value]="reactiveDemoForm.get('radio')?.value || undefined"
+                formControlName="radio"
+              >
                 <goab-radio-item
                   *ngFor="let option of reactiveRadioOptions"
                   [value]="option.value"
@@ -889,6 +889,22 @@
               [variant]="variant"
               [size]="circularProgressSizes[idx % circularProgressSizes.length]"
             ></goab-circular-progress>
+          </goab-block>
+          <goab-block direction="column" gap="xs">
+            <goab-text tag="span" size="body-m">Linear progress</goab-text>
+            <goab-text tag="h3" size="heading-s">Progress indicator</goab-text>
+            <goab-linear-progress
+              [progress]="25"
+              [percentVisibility]="'visible'"
+              ariaLabel="Demo progress indicator"
+              ariaLabelledBy="progress-indicator-label"
+            ></goab-linear-progress>
+            <goab-linear-progress
+              [progress]="null"
+              [percentVisibility]="'hidden'"
+              ariaLabel="Indeterminate progress indicator"
+              ariaLabelledBy="progress-indicator-label"
+            ></goab-linear-progress>
           </goab-block>
           <goab-block direction="column" gap="xs">
             <goab-text tag="span" size="body-m">Spinner types</goab-text>
