@@ -25,8 +25,8 @@ import { CommonModule } from "@angular/common";
     [attr.progress]="progress"
     [attr.error]="error"
     [attr.testid]="testId"
-    (_cancel)="_onCancel()"
-    (_delete)="_onDelete()"
+    (_cancel)="_onCancel($event)"
+    (_delete)="_onDelete($event)"
   >
   </goa-file-upload-card>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -56,11 +56,11 @@ export class GoabFileUploadCard implements OnInit {
     }, 0);
   }
 
-  _onCancel() {
-    this.onCancel.emit({ filename: this.filename });
+  _onCancel(event: Event) {
+    this.onCancel.emit({ filename: this.filename, event });
   }
 
-  _onDelete() {
-    this.onDelete.emit({ filename: this.filename });
+  _onDelete(event: Event) {
+    this.onDelete.emit({ filename: this.filename, event });
   }
 }

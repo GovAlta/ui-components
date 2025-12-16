@@ -33,8 +33,6 @@ import {
 } from "@abgov/ui-components-common";
 
 export function Bug2977Route() {
-
-
   const logEvent = (label: string, detail: unknown) => {
     console.log(label, detail);
   };
@@ -42,7 +40,7 @@ export function Bug2977Route() {
   const handleInputChange = (detail: GoabInputOnChangeDetail) => {
     logEvent("input change", detail);
     detail.event?.stopPropagation();
-  }
+  };
 
   const handleInputFocus = (detail: GoabInputOnFocusDetail) =>
     logEvent("input focus", detail);
@@ -51,7 +49,7 @@ export function Bug2977Route() {
   const handleInputKeyPress = (detail: GoabInputOnKeyPressDetail) => {
     logEvent("input keypress", detail);
     detail.event?.stopPropagation();
-  }
+  };
 
   const handleCheckboxChange = (detail: GoabCheckboxOnChangeDetail) =>
     logEvent("checkbox change", detail);
@@ -92,8 +90,8 @@ export function Bug2977Route() {
   const handleTabInputThree = (detail: GoabInputOnChangeDetail) =>
     logEvent("tab 3 input change", detail);
 
-  function shouldNotMakeItHere(e) {
-    alert("should not make it here")
+  function shouldNotMakeItHere() {
+    alert("should not make it here");
   }
 
   return (
@@ -127,7 +125,11 @@ export function Bug2977Route() {
         </GoabFormItem>
 
         <GoabFormItem label="Date Picker (test onChange)">
-          <GoabDatePicker name="demo-date" width="20ch" onChange={handleDatePickerChange} />
+          <GoabDatePicker
+            name="demo-date"
+            width="20ch"
+            onChange={handleDatePickerChange}
+          />
         </GoabFormItem>
 
         <GoabFormItem label="Dropdown (test onChange)" mb="l">
