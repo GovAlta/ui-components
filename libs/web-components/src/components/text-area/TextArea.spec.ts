@@ -26,8 +26,8 @@ describe("GoATextArea", () => {
     expect(el).toHaveAttribute("autocomplete", "off");
   });
 
-  it("handles the change event", async () => {
-    const onChange = vi.fn();
+  it("handles the input event", async () => {
+    const onInput = vi.fn();
     const result = render(GoATextArea, {
       name: "name",
       testid: "test-id",
@@ -37,19 +37,19 @@ describe("GoATextArea", () => {
     el.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
       expect(e.detail.value).toBe("b");
-      onChange();
+      onInput();
     });
 
-    await fireEvent.change(el, { target: { value: "b" } });
+    await fireEvent.input(el, { target: { value: "b" } });
 
     await waitFor(() => {
-      expect(onChange).toBeCalledTimes(1);
+      expect(onInput).toBeCalledTimes(1);
     });
   });
 
   it("handles the keypress event", async () => {
     const onKeyPress = vi.fn();
-    const onChange = vi.fn();
+    const onInput = vi.fn();
     const result = render(GoATextArea, {
       name: "name",
       value: "foo",
@@ -59,22 +59,23 @@ describe("GoATextArea", () => {
     const textarea = result.queryByTestId("keypress");
     textarea.addEventListener("_keyPress", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
-      expect(e.detail.value).toBe("foo");
+      expect(e.detail.value).toBe("fooo");
       expect(e.detail.key).toBe("o");
       onKeyPress();
     });
 
     textarea.addEventListener("_change", (e: CustomEvent) => {
       expect(e.detail.name).toBe("name");
-      expect(e.detail.value).toBe("foo");
-      onChange();
+      expect(e.detail.value).toBe("fooo");
+      onInput();
     });
 
-    await fireEvent.keyUp(textarea, { target: { value: "foo" }, key: "o" });
+    await fireEvent.input(textarea, { target: { value: "fooo" } });
+    await fireEvent.keyUp(textarea, { target: { value: "fooo" }, key: "o" });
 
     await waitFor(() => {
       expect(onKeyPress).toBeCalledTimes(1);
-      expect(onChange).toBeCalledTimes(1);
+      expect(onInput).toBeCalledTimes(1);
     });
   });
 
