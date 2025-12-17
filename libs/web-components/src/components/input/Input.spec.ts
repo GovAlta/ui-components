@@ -217,6 +217,7 @@ describe("GoAInput Component", () => {
       keypress();
     });
 
+    await fireEvent.input(input, { target: { value: "foobar" } });
     await fireEvent.keyUp(input, { target: { value: "foobar" }, key: "r" });
     await waitFor(() => {
       expect(change).toBeCalledTimes(1);
@@ -231,6 +232,7 @@ describe("GoAInput Component", () => {
       name: "test-name",
       testid: "input-test",
       type: "date",
+      value: "2024-01-01",
     });
     const input = await findByTestId("input-test");
     const change = vi.fn();
@@ -239,7 +241,7 @@ describe("GoAInput Component", () => {
       change();
     });
 
-    await fireEvent.change(input);
+    await fireEvent.input(input, { target: { value: "2024-01-02" } });
     await waitFor(() => {
       expect(change).toBeCalledTimes(1);
     });
@@ -305,6 +307,7 @@ describe("GoAInput Component", () => {
         name: "test-name",
         testid: "input-test",
         type: "search",
+        value: "foo",
       });
       const input = await findByTestId("input-test");
       const search = vi.fn();
@@ -313,7 +316,7 @@ describe("GoAInput Component", () => {
         search();
       });
 
-      await fireEvent(input, new Event("search"));
+      await fireEvent.input(input, { target: { value: "" } });
       await waitFor(() => {
         expect(search).toBeCalledTimes(1);
       });
@@ -385,7 +388,8 @@ describe("GoAInput Component", () => {
         ml: "xl",
       });
       const input = await baseElement.findByTestId("input-test");
-      const containerElement = baseElement.container.querySelector(".container");
+      const containerElement =
+        baseElement.container.querySelector(".container");
 
       expect(input).toBeTruthy();
       expect(containerElement).toBeTruthy();
@@ -440,7 +444,7 @@ describe("GoAInput Component", () => {
       fn();
     });
 
-    await fireEvent.keyUp(input, { target: { value: "foobar" } });
+    await fireEvent.input(input, { target: { value: "foobar" } });
     await waitFor(
       () => {
         expect(fn).not.toBeCalled();

@@ -130,7 +130,7 @@
     );
   }
 
-  function onChange(e: Event) {
+  function onInput(_e: Event) {
     if (isDisabled) return;
     dispatchChange(_textareaEl.value);
   }
@@ -138,7 +138,6 @@
   function onKeyPress(e: KeyboardEvent) {
     if (isDisabled) return;
     dispatchKeyPress(e);
-    dispatchChange(_textareaEl.value);
   }
 
   function dispatchChange(value: string) {
@@ -194,8 +193,8 @@
       data-testid={testid}
       {autocomplete}
       bind:value
+      on:input={onInput}
       on:keyup={onKeyPress}
-      on:change={onChange}
       on:focus={onFocus}
       on:blur={onBlur}
     />
