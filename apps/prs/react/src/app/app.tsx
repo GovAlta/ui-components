@@ -72,6 +72,9 @@ export function App() {
               <Link to="/features/2829">2829</Link>
               <Link to="/features/3102">3102</Link>
             </GoabSideMenuGroup>
+            <GoabSideMenuGroup heading="Spikes">
+              <Link to="/spikes/3285">3285</Link>
+            </GoabSideMenuGroup>
           </GoabSideMenu>
         </section>
         <section style={{ padding: "30px", width: "100%" }} role="main">

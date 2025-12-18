@@ -1,0 +1,51 @@
+<goab-block direction="column" gap="l">
+  <goab-block direction="column" gap="s">
+    <goab-text tag="h1" mb="0" mt="0">
+      <a href="https://github.com/GovAlta/ui-components/issues/3285" target="_blank">3285</a>
+      - Experimental Angular Button wrapper
+    </goab-text>
+    <goab-text tag="p" mt="0">
+      This demonstrates an experimental wrapper that renders a v2 Svelte component with experimental design tokens.
+      These components can be used alongside current ones.
+    </goab-text>
+  </goab-block>
+
+  <goab-text tag="h2" mt="0" mb="0">Experimental (GoabxButton)</goab-text>
+
+  <goab-block gap="m">
+    <goabx-button type="primary" (onClick)="onExperimentalClick()">Primary</goabx-button>
+    <goabx-button type="secondary" (onClick)="onExperimentalClick()">Secondary</goabx-button>
+    <goabx-button type="tertiary" (onClick)="onExperimentalClick()">Tertiary</goabx-button>
+  </goab-block>
+
+  <goab-block gap="m" mb="xl">
+    <goabx-button type="primary" leadingIcon="add" (onClick)="onExperimentalClick()">
+      Leading icon
+    </goabx-button>
+    <goabx-button type="primary" trailingIcon="arrow-forward" (onClick)="onExperimentalClick()">
+      Trailing icon
+    </goabx-button>
+    <goabx-button type="secondary" disabled="true">Disabled</goabx-button>
+  </goab-block>
+
+
+  <goab-block direction="column" gap="m">
+    <goab-text tag="h2" mt="0" mb="0">Non-experimental (GoabButton)</goab-text>
+
+    <goab-block gap="m">
+      <goab-button type="primary" (onClick)="onExperimentalClick()">Primary</goab-button>
+      <goab-button type="secondary" (onClick)="onExperimentalClick()">Secondary</goab-button>
+      <goab-button type="tertiary" (onClick)="onExperimentalClick()">Tertiary</goab-button>
+    </goab-block>
+
+    <goab-block gap="m">
+      <goab-button type="primary" leadingIcon="add" (onClick)="onExperimentalClick()">
+        Leading icon
+      </goab-button>
+      <goab-button type="primary" trailingIcon="arrow-forward" (onClick)="onExperimentalClick()">
+        Trailing icon
+      </goab-button>
+      <goab-button type="secondary" disabled="true">Disabled</goab-button>
+    </goab-block>
+  </goab-block>
+</goab-block>
