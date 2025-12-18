@@ -58,8 +58,10 @@ export function App() {
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1547">1547</Link>
               <Link to="/features/1813">1813</Link>
+              <Link to="/features/1908">1908</Link>
               <Link to="/features/2054">2054</Link>
               <Link to="/features/2267">2267</Link>
+              <Link to="/features/2328">2328</Link>
               <Link to="/features/2361">2361</Link>
               <Link to="/features/2440">2440</Link>
               <Link to="/features/2492">2492</Link>
@@ -68,7 +70,6 @@ export function App() {
               <Link to="/features/2730">2730</Link>
               <Link to="/features/2829">2829</Link>
               <Link to="/features/3102">3102</Link>
-              <Link to="/features/1908">1908</Link>
             </GoabSideMenuGroup>
           </GoabSideMenu>
         </section>

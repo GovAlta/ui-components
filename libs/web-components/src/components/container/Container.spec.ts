@@ -1,10 +1,9 @@
 import { render } from "@testing-library/svelte";
-import GoAContainerWrapper from "./ContainerWrapper.test.svelte"
+import GoAContainerWrapper from "./ContainerWrapper.test.svelte";
 import GoAContainer from "./Container.svelte";
 import { it, describe } from "vitest";
 
 describe("GoA Container", () => {
-
   it("should render", async () => {
     render(GoAContainerWrapper, {
       title: "Test Title",
@@ -31,17 +30,33 @@ describe("GoA Container", () => {
       const container = await baseElement.findByTestId("container-test");
 
       expect(container).toBeTruthy();
-      expect(container?.classList).toContain('width--content');
-
+      expect(container?.classList).toContain("width--content");
     });
 
-    it('should set a max width', async () => {
+    it("should set a max width", async () => {
       const baseElement = render(GoAContainer, {
         testid: "container-test",
-        maxwidth: "480px",
+        maxWidth: "480px",
       });
       const container = await baseElement.findByTestId("container-test");
-      expect(container?.getAttribute("style")).toContain("max-width: 480px;")
+      expect(container?.getAttribute("style")).toContain("max-width: 480px;");
+    });
+  });
+
+  describe("Heights", () => {
+    it("should set min and max heights when provided", async () => {
+      const baseElement = render(GoAContainer, {
+        testid: "container-test",
+        minHeight: "120px",
+        maxHeight: "360px",
+      });
+      const container = await baseElement.findByTestId("container-test");
+      const computedStyle = window.getComputedStyle(container);
+      expect(container?.getAttribute("style")).toContain("min-height: 120px;");
+      expect(container?.getAttribute("style")).toContain("max-height: 360px;");
+      expect(computedStyle.alignSelf).toBe("flex-start");
+      const content = container?.querySelector(".content");
+      expect(content).not.toBeNull();
     });
   });
 
