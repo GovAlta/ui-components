@@ -5,7 +5,8 @@ import {
   GoabContainerAccent,
   GoabContainerPadding,
   GoabContainerType,
-  GoabContainerWidth, Spacing,
+  GoabContainerWidth,
+  Spacing,
 } from "@abgov/ui-components-common";
 import { GoabButton } from "../button/button";
 import { By } from "@angular/platform-browser";
@@ -14,28 +15,32 @@ import { By } from "@angular/platform-browser";
   standalone: true,
   imports: [GoabContainer, GoabButton],
   template: `
-  <goab-container [type]="type"
-                  [accent]="accent"
-                  [padding]="padding"
-                  [width]="width"
-                  [testId]="testId"
-                  maxWidth="480px"
-                  [mt]="mt"
-                  [mr]="mr"
-                  [mb]="mb"
-                  [ml]="ml"
-                  [actions]="actions"
-                  [title]="title">
-    <ng-template #actions>
-      <goab-button (onClick)="onClick()">Save</goab-button>
-    </ng-template>
-    <ng-template #title>
-      <div>This is a title</div>
-    </ng-template>
+    <goab-container
+      [type]="type"
+      [accent]="accent"
+      [padding]="padding"
+      [width]="width"
+      [testId]="testId"
+      [maxWidth]="maxWidth"
+      [minHeight]="minHeight"
+      [maxHeight]="maxHeight"
+      [mt]="mt"
+      [mr]="mr"
+      [mb]="mb"
+      [ml]="ml"
+      [actions]="actions"
+      [title]="title"
+    >
+      <ng-template #actions>
+        <goab-button (onClick)="onClick()">Save</goab-button>
+      </ng-template>
+      <ng-template #title>
+        <div>This is a title</div>
+      </ng-template>
 
-    Container content
-  </goab-container>
-  `
+      Container content
+    </goab-container>
+  `,
 })
 class TestContainerComponent {
   type?: GoabContainerType = "interactive";
@@ -47,6 +52,9 @@ class TestContainerComponent {
   mb?: Spacing;
   ml?: Spacing;
   mr?: Spacing;
+  maxWidth?: string;
+  minHeight?: string;
+  maxHeight?: string;
 
   onClick() {
     /* do nothing */
@@ -60,7 +68,7 @@ describe("GoABContainer", () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [GoabButton, GoabContainer, TestContainerComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestContainerComponent);
@@ -75,6 +83,9 @@ describe("GoABContainer", () => {
     component.mb = "l";
     component.ml = "xl";
     component.width = "content";
+    component.maxWidth = "480px";
+    component.minHeight = "120px";
+    component.maxHeight = "240px";
 
     fixture.detectChanges();
     tick();
@@ -85,19 +96,23 @@ describe("GoABContainer", () => {
     const el = fixture.debugElement.query(By.css("goa-container")).nativeElement;
     expect(el).toBeTruthy();
 
-   expect(el?.getAttribute("type")).toBe(component.type);
-   expect(el?.getAttribute("accent")).toBe(component.accent);
-   expect(el?.getAttribute("padding")).toBe(component.padding);
-   expect(el?.getAttribute("mt")).toBe(component.mt);
-   expect(el?.getAttribute("mr")).toBe(component.mr);
-   expect(el?.getAttribute("mb")).toBe(component.mb);
-   expect(el?.getAttribute("ml")).toBe(component.ml);
-   expect(el?.getAttribute("width")).toBe(component.width);
-   expect(el?.getAttribute("maxwidth")).toBe("480px");
+    expect(el?.getAttribute("type")).toBe(component.type);
+    expect(el?.getAttribute("accent")).toBe(component.accent);
+    expect(el?.getAttribute("padding")).toBe(component.padding);
+    expect(el?.getAttribute("mt")).toBe(component.mt);
+    expect(el?.getAttribute("mr")).toBe(component.mr);
+    expect(el?.getAttribute("mb")).toBe(component.mb);
+    expect(el?.getAttribute("ml")).toBe(component.ml);
+    expect(el?.getAttribute("width")).toBe(component.width);
+    expect(el?.getAttribute("maxwidth")).toBe(component.maxWidth);
+    expect(el?.getAttribute("minheight")).toBe(component.minHeight);
+    expect(el?.getAttribute("maxheight")).toBe(component.maxHeight);
 
-   expect(el?.querySelector("[slot='title']")?.innerHTML).toContain("This is a title");
-   expect(el?.querySelector("[slot='actions']")?.querySelector("goa-button")).not.toBeFalsy();
+    expect(el?.querySelector("[slot='title']")?.innerHTML).toContain("This is a title");
+    expect(
+      el?.querySelector("[slot='actions']")?.querySelector("goa-button"),
+    ).not.toBeFalsy();
 
-   expect(el?.innerHTML).toContain("Container content");
-  })
-})
+    expect(el?.innerHTML).toContain("Container content");
+  });
+});

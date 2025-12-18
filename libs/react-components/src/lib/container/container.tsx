@@ -13,6 +13,8 @@ interface WCProps extends Margins {
   padding?: GoabContainerPadding;
   width?: GoabContainerWidth;
   maxwidth?: string;
+  minheight?: string;
+  maxheight?: string;
   testid?: string;
 }
 
@@ -35,6 +37,8 @@ export interface GoabContainerProps extends Margins {
   children?: ReactNode;
   width?: GoabContainerWidth;
   maxWidth?: string;
+  minHeight?: string;
+  maxHeight?: string;
   testId?: string;
 }
 
@@ -48,6 +52,8 @@ export function GoabContainer({
   type,
   width,
   maxWidth,
+  minHeight,
+  maxHeight,
   mt,
   mr,
   mb,
@@ -62,6 +68,8 @@ export function GoabContainer({
       accent={accent}
       width={width}
       maxwidth={maxWidth}
+      minheight={minHeight}
+      maxheight={maxHeight}
       mt={mt}
       mr={mr}
       mb={mb}

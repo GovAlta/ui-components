@@ -26,6 +26,8 @@ import { GoabBaseComponent } from "../base.component";
     [attr.padding]="padding"
     [attr.width]="width"
     [attr.maxwidth]="maxWidth"
+    [attr.minheight]="minHeight"
+    [attr.maxheight]="maxHeight"
     [attr.testid]="testId"
     [attr.mt]="mt"
     [attr.mb]="mb"
@@ -48,6 +50,8 @@ export class GoabContainer extends GoabBaseComponent implements OnInit {
   @Input() padding?: GoabContainerPadding = "relaxed";
   @Input() width?: GoabContainerWidth = "full";
   @Input() maxWidth?: string;
+  @Input() minHeight?: string;
+  @Input() maxHeight?: string;
   @Input() title!: TemplateRef<any>;
   @Input() actions!: TemplateRef<any>;
 

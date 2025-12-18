@@ -1,4 +1,13 @@
-<svelte:options customElement="goa-container" />
+<svelte:options
+  customElement={{
+    tag: "goa-container",
+    props: {
+      maxWidth: { type: "String", attribute: "maxwidth" },
+      minHeight: { type: "String", attribute: "minheight" },
+      maxHeight: { type: "String", attribute: "maxheight" },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts">
@@ -42,7 +51,9 @@
   export let accent: Accent = "filled";
   export let padding: Padding = "relaxed";
   export let width: Width = "full";
-  export let maxwidth: string = "none";
+  export let maxWidth: string = "none";
+  export let minHeight = "";
+  export let maxHeight = "";
   export let testid: string = "";
   export let mt: Spacing = null;
   export let mr: Spacing = null;
@@ -71,7 +82,9 @@
   data-testid={testid}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
-    max-width: ${maxwidth};
+    max-width: ${maxWidth};
+    ${minHeight ? `min-height: ${minHeight};` : ""}
+    ${maxHeight ? `max-height: ${maxHeight};` : ""}
   `}
   class={`
     goa-container
@@ -113,6 +126,7 @@
     flex-direction: column;
     box-shadow: var(--goa-container-shadow, none);
     border-radius: var(--goa-container-border-radius, 0);
+    align-self: flex-start;
   }
 
   .goa-container * {
@@ -139,6 +153,8 @@
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .content :global(::slotted(*:last-child)) {

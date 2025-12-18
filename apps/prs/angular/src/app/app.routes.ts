@@ -38,9 +38,11 @@ import { Bug3248Component } from "../routes/bugs/3248/bug3248.component";
 import { Feat1328Component } from "../routes/features/feat1328/feat1328.component";
 import { Feat1547Component } from "../routes/features/feat1547/feat1547.component";
 import { Feat1813Component } from "../routes/features/feat1813/feat1813.component";
-import { Feat2361Component } from "../routes/features/feat2361/feat2361.component";
+import { Feat1908Component } from "../routes/features/feat1908/feat1908.component";
 import { Feat2054Component } from "../routes/features/feat2054/feat2054.component";
 import { Feat2267Component } from "../routes/features/feat2267/feat2267.component";
+import { Feat2328Component } from "../routes/features/feat2328/feat2328.component";
+import { Feat2361Component } from "../routes/features/feat2361/feat2361.component";
 import { Feat2440Component } from "../routes/features/feat2440/feat2440.component";
 import { Feat2492Component } from "../routes/features/feat2492/feat2492.component";
 import { Feat2682Component } from "../routes/features/feat2682/feat2682.component";
@@ -48,7 +50,6 @@ import { Feat2722Component } from "../routes/features/feat2722/feat2722.componen
 import { Feat2730Component } from "../routes/features/feat2730/feat2730.component";
 import { Feat2829Component } from "../routes/features/feat2829/feat2829.component";
 import { Feat3102Component } from "../routes/features/feat3102/feat3102.component";
-import { Feat1908Component } from "../routes/features/feat1908/feat1908.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -90,9 +91,11 @@ export const appRoutes: Route[] = [
   { path: "features/1328", component: Feat1328Component },
   { path: "features/1547", component: Feat1547Component },
   { path: "features/1813", component: Feat1813Component },
-  { path: "features/2361", component: Feat2361Component },
+  { path: "features/1908", component: Feat1908Component },
   { path: "features/2054", component: Feat2054Component },
   { path: "features/2267", component: Feat2267Component },
+  { path: "features/2328", component: Feat2328Component },
+  { path: "features/2361", component: Feat2361Component },
   { path: "features/2440", component: Feat2440Component },
   { path: "features/2492", component: Feat2492Component },
   { path: "features/2682", component: Feat2682Component },
@@ -100,5 +103,4 @@ export const appRoutes: Route[] = [
   { path: "features/2730", component: Feat2730Component },
   { path: "features/2829", component: Feat2829Component },
   { path: "features/3102", component: Feat3102Component },
-  { path: "features/1908", component: Feat1908Component },
 ];
