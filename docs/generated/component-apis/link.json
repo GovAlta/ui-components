@@ -1,0 +1,105 @@
+{
+  "componentSlug": "link",
+  "extractedFrom": "libs/web-components/src/components/link/Link.svelte",
+  "extractedAt": "2026-01-05T23:10:27.450Z",
+  "props": [
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed before the link text."
+    },
+    {
+      "name": "trailingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed after the link text."
+    },
+    {
+      "name": "color",
+      "type": "\"interactive\" | \"dark\" | \"light\"",
+      "values": [
+        "interactive",
+        "dark",
+        "light"
+      ],
+      "required": false,
+      "default": "interactive",
+      "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
+    },
+    {
+      "name": "size",
+      "type": "\"xsmall\" | \"small\" | \"medium\" | \"large\"",
+      "values": [
+        "xsmall",
+        "small",
+        "medium",
+        "large"
+      ],
+      "required": false,
+      "default": "medium",
+      "description": "Sets the text size and corresponding icon size."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes. V2 shows underline on hover only."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

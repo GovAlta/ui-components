@@ -1,0 +1,63 @@
+<goa-button type="tertiary" size="compact" mb="m" id="toggle-all-btn">
+  Show all sections
+</goa-button>
+
+<goa-accordion
+  id="accordion-1"
+  heading="How do I create an account?"
+  heading-size="medium">
+  To create an account you will need to contact your office admin.
+</goa-accordion>
+
+<goa-accordion
+  id="accordion-2"
+  heading="What verification is needed to sign documents digitally?"
+  heading-size="medium">
+  You will need to verify your identity through our two factor authentication in addition to the digital signature.
+</goa-accordion>
+
+<goa-accordion
+  id="accordion-3"
+  heading="Can I track the status of my service requests online?"
+  heading-size="medium">
+  Yes, you can see the status of your application on the main service dashboard when you login. You will receive updates and notifications in your email as your request progresses.
+</goa-accordion>
+
+<goa-accordion
+  id="accordion-4"
+  heading="Are there accessibility features for people with disabilities?"
+  heading-size="medium">
+  Yes, our digital service is designed with accessibility in mind. <a href="#">More information on accessibility.</a>
+</goa-accordion>
+
+<script>
+  const expandedList = [false, false, false, false];
+  const toggleBtn = document.getElementById("toggle-all-btn");
+  const accordions = [
+    document.getElementById("accordion-1"),
+    document.getElementById("accordion-2"),
+    document.getElementById("accordion-3"),
+    document.getElementById("accordion-4"),
+  ];
+
+  function updateButtonText() {
+    const allExpanded = expandedList.every((isOpen) => isOpen);
+    toggleBtn.textContent = allExpanded ? "Hide all sections" : "Show all sections";
+  }
+
+  accordions.forEach((accordion, index) => {
+    accordion.addEventListener("_change", (e) => {
+      expandedList[index] = e.detail.open;
+      updateButtonText();
+    });
+  });
+
+  toggleBtn.addEventListener("_click", () => {
+    const isExpanding = expandedList.some((isOpen) => !isOpen);
+    expandedList.fill(isExpanding);
+    accordions.forEach((accordion) => {
+      accordion.setAttribute("open", isExpanding);
+    });
+    updateButtonText();
+  });
+</script>

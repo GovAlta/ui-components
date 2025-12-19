@@ -1,0 +1,39 @@
+---
+id: show-number-of-results-per-page
+title: Show number of results per page
+categories:
+  - content-layout
+scale: task
+userType: both
+tags:
+  - pagination
+  - table
+  - dropdown
+  - results
+  - per-page
+components:
+  - pagination
+  - dropdown
+  - dropdown-item
+  - table
+  - block
+  - spacer
+status: published
+---
+
+Combine pagination with a dropdown selector to let users control how many results appear per page, improving data browsing for different use cases.
+
+## When to use
+
+Use this pattern when:
+- Displaying paginated data in tables
+- Users may want to see more or fewer items
+- Different tasks benefit from different page sizes
+- The total result count should be visible
+
+## Considerations
+
+- Show "of X" to indicate total results
+- Reset to page 1 when changing page size
+- Use reasonable default (10 is common)
+- Provide sensible options (10, 20, 30, etc.)

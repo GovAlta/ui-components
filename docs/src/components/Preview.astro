@@ -1,0 +1,27 @@
+---
+/**
+ * Preview.astro
+ *
+ * Marks content to appear in the preview area of a do/don't card.
+ * Content outside <Preview> goes in the expandable details section.
+ *
+ * Usage in guidance MDX:
+ * ```mdx
+ * <Preview>
+ *   <goa-button type="primary">Submit</goa-button>
+ * </Preview>
+ *
+ * Use Button when you need users to take a specific action...
+ * ```
+ */
+---
+
+<div class="guidance-preview" data-guidance-preview>
+  <slot />
+</div>
+
+<style>
+  .guidance-preview {
+    /* Content will be styled by parent DoDont component */
+  }
+</style>

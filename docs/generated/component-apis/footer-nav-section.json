@@ -1,0 +1,35 @@
+{
+  "componentSlug": "footer-nav-section",
+  "extractedFrom": "libs/web-components/src/components/footer-nav-section/FooterNavSection.svelte",
+  "extractedAt": "2026-01-05T23:10:27.442Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The section heading displayed above the navigation links."
+    },
+    {
+      "name": "maxcolumncount",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Maximum number of columns to display links in on larger screens."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

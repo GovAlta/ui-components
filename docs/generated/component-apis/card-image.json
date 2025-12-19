@@ -1,0 +1,23 @@
+{
+  "componentSlug": "card-image",
+  "extractedFrom": "libs/web-components/src/components/card-image/CardImage.svelte",
+  "extractedAt": "2026-01-05T23:10:27.426Z",
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The URL of the image to display."
+    },
+    {
+      "name": "height",
+      "type": "string",
+      "required": false,
+      "default": "100%",
+      "description": "Height of the image container. Accepts CSS values like \"200px\" or \"100%\"."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

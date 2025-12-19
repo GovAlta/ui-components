@@ -1,0 +1,335 @@
+---
+/**
+ * DoDont.astro
+ *
+ * Shows visual do/don't examples for design documentation.
+ *
+ * Structure:
+ * - Preview content (marked with <Preview>) shows in card
+ * - Everything else shows in expandable "More details" section
+ * - If no preview, card is hidden (just shows indicator + description)
+ */
+
+interface Props {
+  type: 'do' | 'dont' | 'tip' | 'warning' | 'info';
+  description?: string;
+}
+
+const { type, description } = Astro.props;
+
+// Configuration for each type
+const typeConfig = {
+  do: {
+    icon: 'checkmark-circle',
+    label: 'Do',
+    showIndicator: true,
+    showCard: true,
+  },
+  dont: {
+    icon: 'close-circle',
+    label: "Don't",
+    showIndicator: true,
+    showCard: true,
+  },
+  tip: {
+    icon: 'information-circle',
+    label: 'Tip',
+    showIndicator: true,
+    showCard: true,
+  },
+  warning: {
+    icon: 'warning',
+    label: 'Warning',
+    showIndicator: true,
+    showCard: true,
+  },
+  info: {
+    icon: '',
+    label: '',
+    showIndicator: false,
+    showCard: false,
+  },
+};
+
+const config = typeConfig[type];
+---
+
+{config.showCard ? (
+  <div class="do-dont-wrapper" data-dodont>
+    <!-- Card wrapper -->
+    <div class="card-wrapper" data-type={type}>
+      <div class="do-container">
+        <slot />
+      </div>
+      {config.showIndicator && (
+        <div class="do-indicator" data-type={type}></div>
+      )}
+    </div>
+
+    <!-- Type indicator (Do/Don't/Tip/Warning) -->
+    {config.showIndicator && (
+      <div class="do-content" data-type={type}>
+        <goa-icon
+          version="2"
+          type={config.icon}
+          size="medium"
+        ></goa-icon>
+        <div class="content-label">{config.label}</div>
+      </div>
+    )}
+
+    <!-- Description -->
+    {description && (
+      <div class="description">{description}</div>
+    )}
+
+    <!-- Expandable details (populated by script) -->
+    <goa-details version="2" heading="More details" mt="s" class="guidance-details">
+      <div class="details-content"></div>
+    </goa-details>
+  </div>
+) : (
+  <!-- Info type: raw content, no wrapper -->
+  <div class="info-content">
+    <slot />
+  </div>
+)}
+
+<script>
+  // Process all DoDont wrappers to separate preview from details
+  function processDoDontWrappers() {
+    document.querySelectorAll('[data-dodont]').forEach(wrapper => {
+      const container = wrapper.querySelector('.do-container');
+      const detailsContent = wrapper.querySelector('.details-content');
+      const detailsElement = wrapper.querySelector('.guidance-details');
+
+      if (!container || !detailsContent) return;
+
+      // Find the guidance-content wrapper (from GuidanceGrid)
+      const guidanceContent = container.querySelector('.guidance-content');
+      if (!guidanceContent) return;
+
+      const preview = guidanceContent.querySelector('[data-guidance-preview]');
+
+      // Move non-preview children from guidance-content to details
+      const childrenToMove: Element[] = [];
+      Array.from(guidanceContent.children).forEach(child => {
+        if (!child.matches('[data-guidance-preview]')) {
+          childrenToMove.push(child);
+        }
+      });
+
+      childrenToMove.forEach(child => {
+        detailsContent.appendChild(child);
+      });
+
+      // Hide details if no meaningful content (check for actual text, not just empty wrappers)
+      const hasContent = detailsContent.textContent?.trim().length > 0;
+      if (!hasContent) {
+        detailsElement?.setAttribute('style', 'display: none');
+      }
+
+      // Hide the container if no preview content
+      if (!preview) {
+        container.setAttribute('style', 'display: none');
+      }
+    });
+  }
+
+  // Handle modals in guidance previews - add trigger buttons and close handlers
+  function processGuidanceModals() {
+    document.querySelectorAll('[data-guidance-preview] goa-modal').forEach((modal, index) => {
+      // Skip if already processed
+      if (modal.hasAttribute('data-guidance-processed')) return;
+      modal.setAttribute('data-guidance-processed', 'true');
+
+      // Remove open attribute so modal doesn't auto-open
+      modal.removeAttribute('open');
+
+      // Create unique IDs
+      const modalId = `guidance-modal-${index}`;
+      const buttonId = `guidance-modal-btn-${index}`;
+      modal.id = modalId;
+
+      // Create trigger button
+      const triggerBtn = document.createElement('goa-button');
+      triggerBtn.id = buttonId;
+      triggerBtn.textContent = 'Open modal';
+      modal.parentNode?.insertBefore(triggerBtn, modal);
+
+      // Open modal on button click
+      triggerBtn.addEventListener('_click', () => {
+        modal.setAttribute('open', 'true');
+      });
+
+      // Close modal on _close event (X button)
+      modal.addEventListener('_close', () => {
+        modal.removeAttribute('open');
+      });
+
+      // Close modal when any button inside is clicked
+      modal.querySelectorAll('goa-button').forEach(btn => {
+        btn.addEventListener('_click', () => {
+          modal.removeAttribute('open');
+        });
+      });
+    });
+  }
+
+  // Run on page load
+  processDoDontWrappers();
+  processGuidanceModals();
+
+  // Re-run after Astro page transitions
+  document.addEventListener('astro:page-load', () => {
+    processDoDontWrappers();
+    processGuidanceModals();
+  });
+</script>
+
+<style>
+  .do-dont-wrapper {
+    margin-bottom: var(--goa-space-l);
+  }
+
+  /* Info type: minimal wrapper for raw content */
+  .info-content {
+    color: var(--goa-color-info-text);
+    margin-bottom: var(--goa-space-l);
+  }
+
+  .info-content :global(p) {
+    margin: 0 0 var(--goa-space-m);
+  }
+
+  .info-content :global(ul),
+  .info-content :global(ol) {
+    margin: 0 0 var(--goa-space-m);
+    padding-left: var(--goa-space-l);
+  }
+
+  .card-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .do-container {
+    font-size: var(--goa-font-size-5);
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 3rem;
+    min-height: 2rem;
+  }
+
+  .do-container:empty {
+    display: none;
+  }
+
+  /* Images inside the container should fill the space */
+  .do-container :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Colored indicator bar */
+  .do-indicator {
+    height: 1.25rem;
+    background-color: var(--goa-color-success-default);
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* When container is visible, indicator doesn't need top radius */
+  .do-container:not([style*="display: none"]) + .do-indicator {
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* When container is hidden, indicator needs full radius */
+  .do-container[style*="display: none"] + .do-indicator {
+    border-radius: 8px;
+  }
+
+  .do-indicator[data-type="do"] {
+    background-color: var(--goa-color-success-default);
+  }
+
+  .do-indicator[data-type="dont"] {
+    background-color: var(--goa-color-emergency-dark);
+  }
+
+  .do-indicator[data-type="tip"] {
+    background-color: var(--goa-color-info-default);
+  }
+
+  .do-indicator[data-type="warning"] {
+    background-color: var(--goa-color-important-dark);
+  }
+
+  /* Type indicator (Do/Don't label) */
+  .do-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+    margin-bottom: var(--goa-space-xs);
+  }
+
+  .content-label {
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* Type-specific text/icon colors */
+  [data-type="do"].do-content {
+    color: var(--goa-color-success-text);
+  }
+
+  [data-type="dont"].do-content {
+    color: var(--goa-color-emergency-text);
+  }
+
+  [data-type="tip"].do-content {
+    color: var(--goa-color-info-text);
+  }
+
+  [data-type="warning"].do-content {
+    color: var(--goa-color-important-text);
+  }
+
+  /* Description */
+  .description {
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-greyscale-800);
+  }
+
+  .details-content {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-default);
+  }
+
+  .details-content :global(p) {
+    margin: 0 0 var(--goa-space-s);
+  }
+
+  .details-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .details-content :global(ul),
+  .details-content :global(ol) {
+    margin: 0 0 var(--goa-space-s);
+    padding-left: var(--goa-space-l);
+  }
+
+  .details-content :global(li) {
+    margin-bottom: var(--goa-space-xs);
+  }
+
+  .details-content :global(code) {
+    background: rgba(0, 0, 0, 0.06);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+</style>

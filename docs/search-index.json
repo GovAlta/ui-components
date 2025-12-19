@@ -1,0 +1,29 @@
+[
+  {
+    "id": "badge",
+    "title": "Badge",
+    "description": " Small labels which hold small amounts of information, system feedback, or states. ",
+    "content": "# Badge\n\nSmall labels which hold small amounts of information, system feedback, or states.\n",
+    "component": "badge",
+    "filePath": "docs/src/pages/components/badge/badge.mdx",
+    "urlPath": "components/badge",
+    "tags": [
+      "filter chip",
+      "icons",
+      "table"
+    ]
+  },
+  {
+    "id": "accordion",
+    "title": "Accordion",
+    "description": "Some additional description for the component",
+    "content": "# Accordion\nAccordion containers enable multiple content sections to be displayed in a limited space and collapsed or expanded by the user. You can create hierarchy of information by hiding secondary content inside collapsed expand containers.\n\n## Examples\n\n<GoabAccordion heading=\"Contact information\">\n  <dl>\n    <dt>Name</dt>\n    <dd>Joan Smith</dd>\n    <dt>Contact preference</dt>\n    <dd>Text message</dd>\n  </dl>\n</GoabAccordion>\n\n### Close all\n\nconst AccordionCloseAllExample => () {\n  const [expandedAll, setExpandedAll] = useState<boolean>(false);\n  const [expandedList, setExpandedList] = useState<number[]>([]);\n  useEffect(() => {\n    setExpandedAll(expandedList.length === 4);\n  }, [expandedList.length]);\n\n  const expandOrCollapseAll = () => {\n      setExpandedAll((prev) => {\n      const newState = !prev;\n      setExpandedList(newState ? [1, 2, 3, 4] : []);\n      return newState;\n    });\n  };\n\n  const updateAccordion = (order: number, isOpen: boolean) => {\n    setExpandedList((prev) => {\n    if (isOpen) {\n      return prev.includes(order) ? prev: [...prev, order];\n    }\n    return prev.filter((item) => item !== order);\n  });\n\n  return (\n    <GoabButton type=\"tertiary\" mb=\"m\" onClick={() => expandOrCollapseAll()}>\n       {expandedAll ? \"Hide all sections\" : \"Show all sections\"}\n    </GoabButton>\n\n    <GoabAccordion open={expandedList.includes(1)} heading=\"How do I create an account?\" headingSize=\"medium\" onChange={(open) => updateAccordion(1, open)}>\n       To create an account you will need to contact your office admin.\n    </GoabAccordion>\n\n    <GoabAccordion open={expandedList.includes(2)} heading=\"What verification is needed to sign documents digitally?\" headingSize=\"medium\" onChange={(open) => updateAccordion(2, open)}>\n       You will need to verify your identity through our two factor authentication in addition to the digital signature.\n    </GoabAccordion>\n\n    <GoabAccordion open={expandedList.includes(3)} heading=\"Can I track the status of my service requests online?\" headingSize=\"medium\" onChange={(open) => updateAccordion(3, open)}>\n       Yes, you can see the status of your application on the main service dashboard when you login. You will receive updates and notifications in your email as your request progresses.\n    </GoabAccordion>\n\n    <GoabAccordion open={expandedList.includes(4)} heading=\"Are there accessibility features for people with disabilities?\" headingSize=\"medium\" onChange={(open) => updateAccordion(4, open)}>\n       Yes, our digital service is designed with accessibility in mind. <a href=\"\">More information on accessibility.</a>\n    </GoabAccordion>\n  )\n}\n\n<AccordionCloseAllExample />\n",
+    "component": "accordion",
+    "filePath": "docs/src/pages/components/accordion/accordion.mdx",
+    "urlPath": "components/accordion",
+    "tags": [
+      "details",
+      "tabs"
+    ]
+  }
+]

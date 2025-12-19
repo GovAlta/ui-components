@@ -1,0 +1,40 @@
+---
+/**
+ * InfoCard.astro
+ *
+ * A card container for use within `info` type guidance atoms.
+ * Provides the bordered card styling without the do/don't indicator.
+ *
+ * Usage in MDX:
+ * ```mdx
+ * import InfoCard from '../../components/InfoCard.astro';
+ *
+ * <InfoCard>
+ *   <goa-button>Primary</goa-button>
+ *   <goa-button type="secondary">Secondary</goa-button>
+ * </InfoCard>
+ *
+ * There are 6 types of buttons:
+ * 1. **Primary** - Main action
+ * ```
+ */
+---
+
+<div class="info-card">
+  <slot />
+</div>
+
+<style>
+  .info-card {
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-radius: 8px;
+    padding: 3rem;
+    margin-bottom: var(--goa-space-l);
+  }
+
+  .info-card :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>

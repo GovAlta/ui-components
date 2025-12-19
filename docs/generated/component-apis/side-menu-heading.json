@@ -1,0 +1,33 @@
+{
+  "componentSlug": "side-menu-heading",
+  "extractedFrom": "libs/web-components/src/components/side-menu-heading/SideMenuHeading.svelte",
+  "extractedAt": "2026-01-05T23:10:27.459Z",
+  "props": [
+    {
+      "name": "icon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed before the heading text."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "section-heading",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "meta",
+      "description": ""
+    }
+  ]
+}

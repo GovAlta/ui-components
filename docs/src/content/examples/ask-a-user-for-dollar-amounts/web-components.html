@@ -1,0 +1,25 @@
+<form>
+  <goa-form-item label="Tuition">
+    <goa-input name="tuition" id="tuition-input">
+      <div slot="leadingContent">$</div>
+    </goa-input>
+  </goa-form-item>
+  <goa-form-item label="Books/Supplies/Instruments" mt="l">
+    <goa-input name="book" id="supplies-input">
+      <div slot="leadingContent">$</div>
+    </goa-input>
+  </goa-form-item>
+  <goa-form-item label="Other costs" mt="l">
+    <goa-input name="others" id="others-input">
+      <div slot="leadingContent">$</div>
+    </goa-input>
+  </goa-form-item>
+</form>
+
+<script>
+  ["tuition-input", "supplies-input", "others-input"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("_change", (e) => {
+      console.log(`${id}:`, e.detail.value);
+    });
+  });
+</script>

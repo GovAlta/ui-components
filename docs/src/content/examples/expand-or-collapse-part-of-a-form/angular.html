@@ -1,0 +1,26 @@
+<goab-text as="h3" mt="none" mb="m">Review your application</goab-text>
+
+<goab-accordion heading="Referral details" [headingContent]="importantBadge">
+  <ng-template #importantBadge>
+    <goab-badge type="important" content="Updated"></goab-badge>
+  </ng-template>
+  <dl class="accordion-example">
+    <dt>Date of referral</dt>
+    <dd>January 27, 2021</dd>
+    <dt>Work safety concerns</dt>
+    <dd>None</dd>
+    <dt>Type of referral</dt>
+    <dd>Word of mouth, internet search</dd>
+    <dt>Intake received from another site</dt>
+    <dd>Yes</dd>
+  </dl>
+</goab-accordion>
+
+<goab-accordion heading="Contact information">
+  <dl class="accordion-example">
+    <dt>Name</dt>
+    <dd>Joan Smith</dd>
+    <dt>Contact preference</dt>
+    <dd>Text message</dd>
+  </dl>
+</goab-accordion>

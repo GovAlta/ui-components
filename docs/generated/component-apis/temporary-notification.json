@@ -1,0 +1,58 @@
+{
+  "componentSlug": "temporary-notification",
+  "extractedFrom": "libs/web-components/src/components/temporary-notification/TemporaryNotification.svelte",
+  "extractedAt": "2026-01-05T23:10:27.462Z",
+  "props": [
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The notification message text to display."
+    },
+    {
+      "name": "type",
+      "type": "TemporaryNotificationType",
+      "required": false,
+      "default": "basic",
+      "description": "The notification type which determines the visual style and icon."
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "required": false,
+      "default": "-1",
+      "description": "Progress value from 0-100. Use -1 to hide the progress bar. Only applies when type is \"progress\"."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "actionText",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Text for the optional action button. When provided, displays a clickable link button."
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Controls whether the notification is visible."
+    },
+    {
+      "name": "animationDirection",
+      "type": "TemporaryNotificationAnimationDirection",
+      "required": false,
+      "default": "down",
+      "description": "Direction the notification animates from when appearing or disappearing."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

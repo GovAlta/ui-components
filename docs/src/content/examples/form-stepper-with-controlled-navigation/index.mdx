@@ -1,0 +1,41 @@
+---
+id: form-stepper-with-controlled-navigation
+title: Form stepper with controlled navigation
+categories:
+  - forms
+scale: task
+userType: both
+tags:
+  - stepper
+  - form
+  - wizard
+  - multi-step
+  - navigation
+  - pages
+components:
+  - form-stepper
+  - form-step
+  - pages
+  - button
+  - skeleton
+  - spacer
+status: published
+---
+
+Create a multi-step form with controlled navigation using Previous/Next buttons.
+
+## When to use
+
+Use this pattern when:
+- A form is too long to display on a single page
+- You want to guide users through a sequential process
+- Steps must be completed in order before proceeding
+- Users should not be able to skip ahead to incomplete steps
+
+## Considerations
+
+- Set an initial `step` value >= 1 to enable controlled mode
+- Steps that are "Not started" will not be clickable
+- Use Previous/Next buttons to control navigation programmatically
+- Validate step completion before allowing navigation forward
+- Consider showing skeleton content while loading step data

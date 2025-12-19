@@ -1,0 +1,8 @@
+<goab-form-item label="First name" [formGroup]="form">
+  <goab-input name="item" formControlName="item" [error]="true"></goab-input>
+  <goab-form-item-slot slot="error">
+    <span>This is </span>
+    <i>slotted </i>
+    <b>error text.</b>
+  </goab-form-item-slot>
+</goab-form-item>

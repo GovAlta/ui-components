@@ -1,0 +1,69 @@
+---
+/**
+ * CardLite.astro
+ *
+ * A lightweight card component for homepage grids.
+ * Displays an image, title, and description with a link.
+ */
+interface Props {
+  title: string;
+  description: string;
+  imageUrl: string;
+  linkTo: string;
+}
+
+const { title, description, imageUrl, linkTo } = Astro.props;
+---
+
+<a href={linkTo} class="card-lite">
+  <div class="card-image">
+    <img src={imageUrl} alt="" loading="lazy" />
+  </div>
+  <goa-text version="2" size="heading-m" mt="l" mb="m">
+    <u>{title}</u>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="xs">
+    <span class="card-description">{description}</span>
+  </goa-text>
+</a>
+
+<style>
+  .card-lite {
+    text-decoration: none;
+    width: 100%;
+    display: block;
+  }
+
+  .card-image {
+    overflow: hidden;
+    border-radius: var(--goa-border-radius-xl);
+  }
+
+  .card-image,
+  .card-image img {
+    width: 100%;
+    display: block;
+  }
+
+  .card-description {
+    color: var(--goa-color-greyscale-black);
+    display: block;
+  }
+
+  .card-lite:hover u {
+    color: var(--goa-color-interactive-hover);
+  }
+
+  .card-lite:focus {
+    outline: 3px solid var(--goa-color-interactive-focus);
+    outline-offset: var(--goa-space-2xs);
+    border-radius: var(--goa-border-radius-m);
+  }
+
+  /* Smaller title on mobile */
+  @media screen and (max-width: 768px) {
+    .card-lite goa-text[size="heading-m"] {
+      --goa-text-size: var(--goa-typography-heading-s);
+    }
+  }
+</style>

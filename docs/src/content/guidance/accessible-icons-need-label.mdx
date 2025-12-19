@@ -1,0 +1,40 @@
+---
+id: accessible-icons-need-label
+type: dont
+description: Don't use icon-only elements without an accessible label
+topic: screen-readers
+tags:
+  - accessibility
+  - icons
+  - wcag
+appliesTo:
+  components:
+    - icon-button
+    - badge
+    - icon
+status: published
+---
+
+Icon-only interactive elements must have an accessible label so screen reader users understand their purpose.
+
+**For IconButton:** The `ariaLabel` prop is required.
+
+```jsx
+// Good - describes the action
+<GoabIconButton icon="trash" ariaLabel="Delete item" />
+
+// Bad - no label for screen readers
+<GoabIconButton icon="trash" />
+```
+
+**For Badge with icon only:** Provide `ariaLabel` when there's no visible text.
+
+```jsx
+<GoabBadge icon="warning" ariaLabel="Warning" type="important" />
+```
+
+**For Icon:** Use `ariaLabel` when the icon conveys meaning, not just decoration.
+
+The label should describe:
+- What action happens (for buttons): "Delete", "Edit", "Close"
+- What the icon represents (for informational icons): "Warning", "Success"

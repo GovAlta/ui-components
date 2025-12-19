@@ -1,0 +1,54 @@
+<goa-button id="open-modal-btn">Save and continue</goa-button>
+
+<goa-modal id="change-modal" heading="Address has changed">
+  <goa-container type="non-interactive" accent="filled" padding="compact" width="full">
+    <goa-text as="h4" mt="none" mb="s">Before</goa-text>
+    <goa-text mt="none">123456 78 Ave NW, Edmonton, Alberta</goa-text>
+    <goa-text as="h4" mt="none" mb="s">After</goa-text>
+    <goa-text mt="none" mb="none">881 12 Ave NW, Edmonton, Alberta</goa-text>
+  </goa-container>
+  <goa-form-item label="Effective date" mt="l">
+    <goa-date-picker id="effective-date" name="effectiveDate"></goa-date-picker>
+  </goa-form-item>
+  <div slot="actions">
+    <goa-button-group alignment="end">
+      <goa-button type="secondary" size="compact" id="undo-btn">
+        Undo address change
+      </goa-button>
+      <goa-button type="primary" size="compact" id="confirm-btn">
+        Confirm
+      </goa-button>
+    </goa-button-group>
+  </div>
+</goa-modal>
+
+<script>
+  const modal = document.getElementById('change-modal');
+  const openBtn = document.getElementById('open-modal-btn');
+  const undoBtn = document.getElementById('undo-btn');
+  const confirmBtn = document.getElementById('confirm-btn');
+  const datePicker = document.getElementById('effective-date');
+
+  let effectiveDate = new Date();
+  datePicker.setAttribute('value', effectiveDate.toISOString());
+
+  openBtn.addEventListener('_click', () => {
+    modal.setAttribute('open', 'true');
+  });
+
+  undoBtn.addEventListener('_click', () => {
+    modal.removeAttribute('open');
+  });
+
+  confirmBtn.addEventListener('_click', () => {
+    modal.removeAttribute('open');
+  });
+
+  modal.addEventListener('_close', () => {
+    modal.removeAttribute('open');
+  });
+
+  datePicker.addEventListener('_change', (e) => {
+    effectiveDate = e.detail.value;
+  });
+</script>

@@ -1,0 +1,44 @@
+<goa-link leadingicon="arrow-back" size="small" mb="none">
+  Back
+</goa-link>
+
+<goa-text as="h2" mt="xl" mb="m">Submit a question about your benefits</goa-text>
+<goa-text mt="none" mb="xl">
+  If you need clarification about your benefit eligibility, payment schedule, or application status, submit your
+  question here.
+</goa-text>
+
+<form>
+  <goa-form-item
+    label="Provide details about your situation"
+    helptext="Include specific details to help us answer your question quickly.">
+    <goa-textarea
+      id="program-textarea"
+      name="program"
+      maxcount="400"
+      countby="character">
+    </goa-textarea>
+  </goa-form-item>
+</form>
+
+<goa-details mt="m" heading="What kind of information is useful?">
+  <p>
+    Include your benefit program name, mention any recent correspondence you received and/or provide any
+    relevant case or reference numbers.
+  </p>
+</goa-details>
+
+<goa-button-group alignment="start" mt="2xl">
+  <goa-button id="continue-btn" type="primary">
+    Continue
+  </goa-button>
+</goa-button-group>
+
+<script>
+  const textarea = document.getElementById('program-textarea');
+  const continueBtn = document.getElementById('continue-btn');
+
+  continueBtn.addEventListener('_click', () => {
+    console.log('Submitted:', textarea.value);
+  });
+</script>

@@ -1,0 +1,132 @@
+{
+  "componentSlug": "accordion",
+  "extractedFrom": "libs/web-components/src/components/accordion/Accordion.svelte",
+  "extractedAt": "2026-01-05T23:10:27.416Z",
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets the state of the accordion container open or closed."
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "description": "Sets the heading text."
+    },
+    {
+      "name": "secondarytext",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets secondary text."
+    },
+    {
+      "name": "headingSize",
+      "type": "\"small\" | \"medium\"",
+      "typeLabel": "GoabAccordionHeadingSize",
+      "values": [
+        "small",
+        "medium"
+      ],
+      "required": false,
+      "default": "small",
+      "description": "Sets the heading size of the accordion container heading."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Unique identifier for the accordion. Auto-generated if not provided."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Sets the maximum width of the accordion."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "xs",
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "iconposition",
+      "type": "\"left\" | \"right\"",
+      "values": [
+        "left",
+        "right"
+      ],
+      "required": false,
+      "default": "left",
+      "description": "Sets the position of the expand/collapse icon."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "headingcontent",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<div id="filter-container"></div>
+<goa-button mt="l" id="add-filter-btn">Add Random Filter</goa-button>
+
+<script>
+  const activeFilters = [];
+  const container = document.getElementById("filter-container");
+  const addBtn = document.getElementById("add-filter-btn");
+
+  function renderFilters() {
+    container.innerHTML = "";
+    activeFilters.forEach((filter) => {
+      const chip = document.createElement("goa-filter-chip");
+      chip.setAttribute("content", filter);
+      chip.setAttribute("mr", "s");
+      chip.setAttribute("mb", "s");
+      chip.setAttribute("mt", "s");
+      chip.addEventListener("_click", () => removeFilter(filter));
+      container.appendChild(chip);
+    });
+  }
+
+  function addFilter() {
+    const randomFilter = "Filter " + Math.floor(Math.random() * 100);
+    if (!activeFilters.includes(randomFilter)) {
+      activeFilters.push(randomFilter);
+      renderFilters();
+    }
+  }
+
+  function removeFilter(filter) {
+    const index = activeFilters.indexOf(filter);
+    if (index > -1) {
+      activeFilters.splice(index, 1);
+      renderFilters();
+    }
+  }
+
+  addBtn.addEventListener("_click", addFilter);
+</script>

@@ -1,0 +1,58 @@
+---
+name: Input
+description: A single-line field where users can input and edit text.
+status: stable
+category: inputs-and-actions
+tags:
+  - inputs and actions
+  - text field
+  - text box
+  - search
+  - text input
+relatedComponents:
+  - form-item
+  - textarea
+  - dropdown
+figmaUrl: https://www.figma.com/design/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Component-library-%7C-DDD?node-id=27301-303447
+githubUrl: https://github.com/GovAlta/ui-components/labels/Input
+webComponentTag: goa-input
+reactClassName: GoabInput
+angularSelector: goab-input
+---
+
+Capture text input from users in forms.
+
+## When to use
+
+Use Input when you need users to enter:
+- Short text answers (names, email addresses)
+- Numbers (phone numbers, quantities)
+- Dates and times
+- Search queries
+
+## When not to use
+
+Don't use Input when:
+- Users need to enter multiple lines of text (use Textarea)
+- Users need to select from predefined options (use Dropdown or Radio)
+- The input requires complex formatting (consider specialized components)
+
+## Types
+
+Input supports multiple HTML input types:
+
+- **text** - General text entry (default)
+- **email** - Email addresses with validation
+- **password** - Masked password entry
+- **number** - Numeric values with stepper
+- **date** - Date picker
+- **tel** - Phone numbers
+- **search** - Search with clear button
+
+## States
+
+- **Default** - Normal interactive state
+- **Focused** - When the input has keyboard focus
+- **Error** - When validation fails
+- **Disabled** - When input is not available
+- **Read-only** - When showing value without editing

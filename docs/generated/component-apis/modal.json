@@ -1,0 +1,121 @@
+{
+  "componentSlug": "modal",
+  "extractedFrom": "libs/web-components/src/components/modal/Modal.svelte",
+  "extractedAt": "2026-01-05T23:10:27.452Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The heading text displayed at the top of the modal."
+    },
+    {
+      "name": "closable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Show close icon and allow clicking the background to close the modal."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Controls if modal is visible or not."
+    },
+    {
+      "name": "transition",
+      "type": "\"fast\" | \"slow\" | \"none\"",
+      "typeLabel": "GoabModalTransition",
+      "values": [
+        "fast",
+        "slow",
+        "none"
+      ],
+      "required": false,
+      "default": "none",
+      "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
+    },
+    {
+      "name": "calloutVariant",
+      "type": "CalloutVariant | null",
+      "values": [
+        "CalloutVariant",
+        "null"
+      ],
+      "required": false,
+      "default": null,
+      "description": "Define the context and colour of the callout modal. It is required when type is set to callout."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "60ch",
+      "description": "Set the max allowed width of the modal."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "modal",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "typeLabel": "GoabModalVersionType",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated Use maxwidth instead."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClose",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_close",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "heading",
+      "description": ""
+    },
+    {
+      "name": "content",
+      "description": ""
+    },
+    {
+      "name": "actions",
+      "description": ""
+    }
+  ]
+}

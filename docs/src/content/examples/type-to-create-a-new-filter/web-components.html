@@ -1,0 +1,55 @@
+<goa-form-item label="Type to create a chip" mb="m">
+  <goa-block gap="xs" direction="row">
+    <div style="flex: 1">
+      <goa-input id="chip-input" width="100%"></goa-input>
+    </div>
+    <goa-button id="add-btn" type="secondary">Add</goa-button>
+  </goa-block>
+</goa-form-item>
+<div id="chips-container"></div>
+
+<script>
+  const typedChips = [];
+  const input = document.getElementById("chip-input");
+  const addBtn = document.getElementById("add-btn");
+  const container = document.getElementById("chips-container");
+  let currentValue = "";
+
+  function renderChips() {
+    container.innerHTML = "";
+    typedChips.forEach((chip) => {
+      const chipEl = document.createElement("goa-filter-chip");
+      chipEl.setAttribute("version", "2");
+      chipEl.setAttribute("content", chip);
+      chipEl.setAttribute("mb", "xs");
+      chipEl.setAttribute("mr", "xs");
+      chipEl.addEventListener("_click", () => removeChip(chip));
+      container.appendChild(chipEl);
+    });
+  }
+
+  function addChip() {
+    if (currentValue.trim()) {
+      typedChips.push(currentValue.trim());
+      currentValue = "";
+      input.setAttribute("value", "");
+      renderChips();
+    }
+  }
+
+  function removeChip(chip) {
+    const index = typedChips.indexOf(chip);
+    if (index > -1) {
+      typedChips.splice(index, 1);
+      renderChips();
+    }
+  }
+
+  input.addEventListener("_change", (e) => {
+    currentValue = e.detail.value || "";
+  });
+
+  addBtn.addEventListener("_click", () => {
+    addChip();
+  });
+</script>

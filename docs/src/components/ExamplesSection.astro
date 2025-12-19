@@ -1,0 +1,111 @@
+---
+/**
+ * ExamplesSection - Displays code examples using GoA components
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  examples: CollectionEntry<'examples'>[];
+}
+
+const { examples } = Astro.props;
+
+// Scale to badge type mapping
+const scaleToBadge: Record<string, string> = {
+  interaction: 'information',
+  task: 'important',
+  page: 'success',
+  flow: 'midtone',
+  service: 'dark'
+};
+---
+
+{examples.length > 0 ? (
+  <goa-block direction="column" gap="l">
+    {examples.map(async (example) => {
+      const { Content } = await example.render();
+      const badgeType = scaleToBadge[example.data.scale] || 'midtone';
+
+      return (
+        <goa-container type="non-interactive" accent="filled" padding="relaxed">
+          <goa-block direction="column" gap="m">
+            <!-- Header -->
+            <goa-block alignment="center" gap="s">
+              <goa-badge type={badgeType} content={example.data.scale}></goa-badge>
+              <goa-badge type="midtone" content={example.data.category.replace(/-/g, ' ')}></goa-badge>
+              {example.data.userType !== 'both' && (
+                <goa-badge
+                  type={example.data.userType === 'citizen' ? 'information' : 'important'}
+                  content={example.data.userType}
+                ></goa-badge>
+              )}
+            </goa-block>
+
+            <!-- Title -->
+            <goa-text as="h3" size="heading-s">{example.data.title}</goa-text>
+
+            <!-- Content -->
+            <div class="example-content">
+              <Content />
+            </div>
+
+            <!-- Components Used -->
+            <goa-block alignment="center" gap="s">
+              <goa-text as="span" size="body-s" color="secondary">
+                <strong>Components:</strong>
+              </goa-text>
+              {example.data.components.map((comp, i) => (
+                <>
+                  <a href={`/components/${comp}`} class="component-link">{comp}</a>
+                  {i < example.data.components.length - 1 && <span>,</span>}
+                </>
+              ))}
+            </goa-block>
+
+            <!-- Accessibility Notes -->
+            {example.data.accessibilityNotes && (
+              <goa-details heading="Accessibility notes">
+                <goa-block direction="column" gap="s">
+                  <goa-icon type="accessibility" size="small"></goa-icon>
+                  <goa-text as="p" size="body-s" color="secondary">
+                    {example.data.accessibilityNotes}
+                  </goa-text>
+                </goa-block>
+              </goa-details>
+            )}
+          </goa-block>
+        </goa-container>
+      );
+    })}
+  </goa-block>
+) : (
+  <goa-callout type="information">
+    No examples available for this component yet.
+  </goa-callout>
+)}
+
+<style>
+  .example-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--goa-color-text-secondary);
+  }
+
+  .example-content :global(p) {
+    margin: 0 0 var(--goa-space-s);
+  }
+
+  .example-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .component-link {
+    color: var(--goa-color-interactive-default);
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+
+  .component-link:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,117 @@
+{
+  "componentSlug": "container",
+  "extractedFrom": "libs/web-components/src/components/container/Container.svelte",
+  "extractedAt": "2026-01-05T23:10:27.432Z",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"interactive\" | \"info\" | \"error\" | \"success\" | \"important\" | \"non-interactive\"",
+      "typeLabel": "GoabContainerType",
+      "values": [
+        "interactive",
+        "info",
+        "error",
+        "success",
+        "important",
+        "non-interactive"
+      ],
+      "required": false,
+      "default": "interactive",
+      "description": "Sets the container and accent bar styling."
+    },
+    {
+      "name": "accent",
+      "type": "\"thick\" | \"thin\" | \"filled\"",
+      "typeLabel": "GoabContainerAccent",
+      "values": [
+        "thick",
+        "thin",
+        "filled"
+      ],
+      "required": false,
+      "default": "filled",
+      "description": "Sets the style of accent on the container."
+    },
+    {
+      "name": "padding",
+      "type": "\"relaxed\" | \"compact\"",
+      "typeLabel": "GoabContainerPadding",
+      "values": [
+        "relaxed",
+        "compact"
+      ],
+      "required": false,
+      "default": "relaxed",
+      "description": "Sets the amount of white space in the container."
+    },
+    {
+      "name": "width",
+      "type": "\"full\" | \"content\"",
+      "typeLabel": "GoabContainerWidth",
+      "values": [
+        "full",
+        "content"
+      ],
+      "required": false,
+      "default": "full",
+      "description": "Sets the width of the container."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Sets the maximum width of the container."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "m",
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "title",
+      "description": ""
+    },
+    {
+      "name": "actions",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "componentSlug": "button",
+  "extractedFrom": "libs/web-components/src/components/button/Button.svelte",
+  "extractedAt": "2026-01-05T23:10:27.422Z",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"primary\" | \"submit\" | \"secondary\" | \"tertiary\" | \"start\"",
+      "typeLabel": "GoabButtonType",
+      "values": [
+        "primary",
+        "submit",
+        "secondary",
+        "tertiary",
+        "start"
+      ],
+      "required": false,
+      "default": "primary",
+      "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, and \"start\" for prominent call-to-action buttons."
+    },
+    {
+      "name": "size",
+      "type": "\"normal\" | \"compact\"",
+      "typeLabel": "GoabButtonSize",
+      "values": [
+        "normal",
+        "compact"
+      ],
+      "required": false,
+      "default": "normal",
+      "description": "Controls the size of the button. Use \"compact\" for inline actions or space-constrained layouts."
+    },
+    {
+      "name": "variant",
+      "type": "\"normal\" | \"destructive\" | \"inverse\"",
+      "typeLabel": "GoabButtonVariant",
+      "values": [
+        "normal",
+        "destructive",
+        "inverse"
+      ],
+      "required": false,
+      "default": "normal",
+      "description": "Sets the color variant for semantic meaning. Use \"destructive\" for delete or irreversible actions, \"inverse\" for dark backgrounds."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, prevents user interaction and applies disabled styling."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed before the button text."
+    },
+    {
+      "name": "trailingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed after the button text."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a custom width for the button (e.g., \"200px\" or \"100%\")."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "typeLabel": "GoabButtonVersion",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "2",
+      "description": "Design system version. Version 2 includes updated styling and accessibility improvements."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Sets the top margin using design system spacing tokens."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Sets the right margin using design system spacing tokens."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Sets the bottom margin using design system spacing tokens."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Sets the left margin using design system spacing tokens."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_click",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

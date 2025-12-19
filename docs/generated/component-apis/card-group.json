@@ -1,0 +1,13 @@
+{
+  "componentSlug": "card-group",
+  "extractedFrom": "libs/web-components/src/components/card-group/CardGroup.svelte",
+  "extractedAt": "2026-01-05T23:10:27.426Z",
+  "props": [],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

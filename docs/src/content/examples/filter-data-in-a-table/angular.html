@@ -1,0 +1,57 @@
+<goab-form-item id="filterChipInput" [error]="inputError" mb="m">
+    <goab-block gap="xs" direction="row" alignment="start" width="100%">
+      <div style="flex: 1;">
+        <goab-input
+          name="filterChipInput"
+          aria-labelledby="filterChipInput"
+          [value]="inputValue"
+          leadingIcon="search"
+          width="100%"
+          (onChange)="handleInputChange($event)"
+          (onKeyPress)="handleInputKeyPress($event)">
+        </goab-input>
+      </div>
+      <goab-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
+        Filter
+      </goab-button>
+    </goab-block>
+  </goab-form-item>
+
+  <ng-container *ngIf="typedChips.length > 0">
+    <goab-text tag="span" color="secondary" mb="xs" mr="xs">
+      Filter:
+    </goab-text>
+    <goab-filter-chip
+      *ngFor="let typedChip of typedChips; let index = index"
+      [content]="typedChip"
+      mb="xs"
+      mr="xs"
+      (onClick)="removeTypedChip(typedChip)">
+    </goab-filter-chip>
+    <goab-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
+      Clear all
+    </goab-button>
+  </ng-container>
+
+  <goab-table width="full">
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Name</th>
+        <th class="goa-table-number-header">ID Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataFiltered">
+        <td>
+          <goab-badge [type]="item.status.type" [content]="item.status.text" [icon]="false"></goab-badge>
+        </td>
+        <td>{{ item.name }}</td>
+        <td class="goa-table-number-column">{{ item.id }}</td>
+      </tr>
+    </tbody>
+  </goab-table>
+
+<goab-block mt="l" mb="l" *ngIf="dataFiltered.length === 0 && data.length > 0">
+  No results found
+</goab-block>

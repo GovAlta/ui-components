@@ -1,0 +1,78 @@
+{
+  "componentSlug": "card",
+  "extractedFrom": "libs/web-components/src/components/card/Card.svelte",
+  "extractedAt": "2026-01-05T23:10:27.425Z",
+  "props": [
+    {
+      "name": "elevation",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Adds a shadow to the card. 0 shows a border, 1-3 increase shadow intensity."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "100%",
+      "description": "Sets the width of the card."
+    },
+    {
+      "name": "height",
+      "type": "\"auto\" | \"max\"",
+      "values": [
+        "auto",
+        "max"
+      ],
+      "required": false,
+      "default": "auto",
+      "description": "Sets the height behavior. 'auto' fits content, 'max' fills available height."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

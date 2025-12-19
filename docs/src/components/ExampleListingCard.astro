@@ -1,0 +1,191 @@
+---
+/**
+ * ExampleListingCard - Card for examples grid view
+ *
+ * Displays example thumbnail, title, description, and category badges.
+ * Only image and title are clickable links.
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  example: CollectionEntry<'examples'>;
+}
+
+const { example } = Astro.props;
+const { data, slug } = example;
+
+const href = `/examples/${slug}`;
+
+// Format category for display
+function formatCategory(category: string): string {
+  return category
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+// Format scale for badge
+function formatScale(scale: string): string {
+  return scale.charAt(0).toUpperCase() + scale.slice(1);
+}
+
+// Get badge type for scale
+function getScaleBadgeType(scale: string): string {
+  if (scale === 'interaction') return 'lilac';
+  if (scale === 'task') return 'dawn';
+  return 'default';
+}
+
+// Get badge type for category
+function getCategoryBadgeType(category: string): string {
+  switch (category) {
+    case 'content-layout': return 'sky';
+    case 'feedback-and-alerts': return 'prairie';
+    case 'structure-and-navigation':
+    case 'structure-navigation': return 'lilac';
+    case 'inputs-and-actions': return 'dawn';
+    case 'forms':
+    case 'form-pattern': return 'pasture';
+    case 'technical':
+    case 'utilities':
+    case 'component-usage': return 'default';
+    default: return 'default';
+  }
+}
+
+// Get user goal from title (ask/help)
+function getUserGoal(title: string): string | null {
+  const lower = title.toLowerCase();
+  if (lower.startsWith('ask a user')) return 'Ask a user to...';
+  if (lower.startsWith('help a user')) return 'Help a user to...';
+  return null;
+}
+
+const userGoal = getUserGoal(data.title);
+---
+
+<div
+  class="listing-card"
+  data-category={data.category}
+  data-user-type={data.userType}
+  data-scale={data.scale}
+  data-title={data.title.toLowerCase()}
+  data-tags={data.tags?.join(' ').toLowerCase() || ''}
+>
+  <!-- Image area (clickable) -->
+  <a href={href} class="card-image-link">
+    <div class="card-image">
+      {data.previewImage ? (
+        <img src={data.previewImage} alt="" loading="lazy" />
+      ) : (
+        <div class="image-placeholder"></div>
+      )}
+    </div>
+  </a>
+
+  <!-- Content area -->
+  <div class="card-content">
+    <h3 class="card-title">
+      <a href={href}>{data.title}</a>
+    </h3>
+
+    <p class="card-description">
+      <slot />
+    </p>
+
+    <div class="card-badges">
+      <goa-badge version="2" type={getScaleBadgeType(data.scale)} emphasis="subtle" icon="false" content={formatScale(data.scale)}></goa-badge>
+      <goa-badge version="2" type={getCategoryBadgeType(data.category)} emphasis="subtle" icon="false" content={formatCategory(data.category)}></goa-badge>
+      {userGoal && (
+        <goa-badge version="2" type="sky" emphasis="subtle" icon="false" content={userGoal}></goa-badge>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .listing-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Image link */
+  .card-image-link {
+    display: block;
+    text-decoration: none;
+    border-radius: 12px;
+    margin-bottom: var(--goa-space-l, 24px);
+  }
+
+  .card-image-link:focus {
+    outline: 3px solid var(--goa-color-interactive-focus, #feba35);
+    outline-offset: 2px;
+  }
+
+  /* Image area */
+  .card-image {
+    aspect-ratio: 4/3;
+    background: var(--goa-color-greyscale-200, #e5e5e5);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .card-image-link:hover .card-image {
+    opacity: 0.9;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--goa-color-greyscale-200, #e5e5e5);
+  }
+
+  /* Content area */
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-xs, 0.25rem);
+  }
+
+  .card-title {
+    font: var(--goa-typography-heading-s);
+    margin: 0;
+  }
+
+  .card-title a {
+    color: var(--goa-color-text-default, #333);
+    text-decoration: underline;
+  }
+
+  .card-title a:hover {
+    color: var(--goa-color-interactive-default, #0070c4);
+  }
+
+  .card-title a:focus {
+    outline: 3px solid var(--goa-color-interactive-focus, #feba35);
+    outline-offset: 2px;
+  }
+
+  .card-description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-default, #333);
+    margin: var(--goa-space-xs, 0.25rem) 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--goa-space-xs, 0.25rem);
+    margin-top: var(--goa-space-xs, 0.25rem);
+  }
+</style>

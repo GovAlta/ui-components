@@ -1,0 +1,28 @@
+<goa-form-item label="Date Picker">
+  <goa-date-picker id="date-picker" name="item"></goa-date-picker>
+</goa-form-item>
+
+<goa-button-group alignment="start" mt="xs">
+  <goa-button id="set-value-btn">Set Value</goa-button>
+  <goa-button id="clear-value-btn">Clear Value</goa-button>
+</goa-button-group>
+
+<script>
+  const datePicker = document.getElementById("date-picker");
+  const setValueBtn = document.getElementById("set-value-btn");
+  const clearValueBtn = document.getElementById("clear-value-btn");
+
+  datePicker.addEventListener("_change", (e) => {
+    console.log("Date changed:", e.detail.value);
+  });
+
+  setValueBtn.addEventListener("_click", () => {
+    const d = new Date();
+    d.setDate(d.getDate() - 7);
+    datePicker.setAttribute("value", d.toISOString());
+  });
+
+  clearValueBtn.addEventListener("_click", () => {
+    datePicker.removeAttribute("value");
+  });
+</script>
