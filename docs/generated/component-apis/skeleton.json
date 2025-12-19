@@ -1,0 +1,98 @@
+{
+  "componentSlug": "skeleton",
+  "extractedFrom": "libs/web-components/src/components/skeleton/Skeleton.svelte",
+  "extractedAt": "2026-01-05T23:10:27.459Z",
+  "props": [
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "300px",
+      "description": "Set component maximum width. Currently only used in card skeleton type"
+    },
+    {
+      "name": "size",
+      "type": "\"1\" | \"2\" | \"3\" | \"4\"",
+      "typeLabel": "GoabSkeletonSize",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "Size can affect either the height, width or both for different skeleton types."
+    },
+    {
+      "name": "linecount",
+      "type": "number",
+      "required": false,
+      "default": "3",
+      "description": "Used within components that contain multiple lines. Currently only used in card skeleton type"
+    },
+    {
+      "name": "type",
+      "type": "\"image\" | \"text\" | \"title\" | \"text-small\" | \"avatar\" | \"header\" | \"paragraph\" | \"thumbnail\" | \"card\" | \"lines\" | \"profile\" | \"article\"",
+      "typeLabel": "GoabSkeletonType",
+      "values": [
+        "image",
+        "text",
+        "title",
+        "text-small",
+        "avatar",
+        "header",
+        "paragraph",
+        "thumbnail",
+        "card",
+        "lines",
+        "profile",
+        "article"
+      ],
+      "required": true,
+      "default": null,
+      "description": "Reset skeleton shapes to represent your content."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

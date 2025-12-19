@@ -1,0 +1,39 @@
+{
+  "componentSlug": "footer",
+  "extractedFrom": "libs/web-components/src/components/footer/Footer.svelte",
+  "extractedAt": "2026-01-05T23:10:27.441Z",
+  "props": [
+    {
+      "name": "maxcontentwidth",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The maximum width of the main content area"
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "required": false,
+      "default": "https://alberta.ca",
+      "description": "URL for the Government of Alberta logo link. Set to empty string to disable the link."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "nav",
+      "description": ""
+    },
+    {
+      "name": "meta",
+      "description": ""
+    }
+  ]
+}

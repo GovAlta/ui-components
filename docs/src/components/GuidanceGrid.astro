@@ -1,0 +1,147 @@
+---
+/**
+ * GuidanceGrid - Displays a grid of guidance items grouped by topic
+ *
+ * Takes guidance entries and renders them with appropriate do/don't styling.
+ * Uses the DoDont component (ported from ui-components-docs).
+ */
+import type { CollectionEntry } from 'astro:content';
+import DoDont from './DoDont.astro';
+import Preview from './Preview.astro';
+import InfoCard from './InfoCard.astro';
+import { formatTopicName } from '../lib/content-queries';
+
+interface Props {
+  guidance: Record<string, CollectionEntry<'guidance'>[]>;
+  emptyMessage?: string;
+}
+
+const { guidance, emptyMessage = 'No guidelines defined.' } = Astro.props;
+
+const hasGuidance = Object.keys(guidance).length > 0;
+
+// Components available in guidance MDX files
+const mdxComponents = { Preview, InfoCard };
+---
+
+{hasGuidance ? (
+  <div class="guidance-grid-wrapper">
+    {Object.entries(guidance).map(([topic, items]) => {
+      // Separate info items from do/dont/tip/warning items
+      const infoItems = items.filter(item => item.data.type === 'info');
+      const otherItems = items.filter(item => item.data.type !== 'info');
+
+      return (
+        <section class="guidance-section">
+          <h3 id={`topic-${topic}`} class="topic-heading">{formatTopicName(topic)}</h3>
+
+          {/* Info items first, full width */}
+          {infoItems.length > 0 && (
+            <div class="guidance-info-items">
+              {infoItems.map(async (item) => {
+                const { Content } = await item.render();
+                return (
+                  <DoDont
+                    type={item.data.type}
+                    description={item.data.description}
+                  >
+                    <div class="guidance-content">
+                      <Content components={mdxComponents} />
+                    </div>
+                  </DoDont>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Do/dont/tip/warning items in grid */}
+          {otherItems.length > 0 && (
+            <div class="guidance-grid">
+              {otherItems.map(async (item) => {
+                const { Content } = await item.render();
+                return (
+                  <DoDont
+                    type={item.data.type}
+                    description={item.data.description}
+                  >
+                    <div class="guidance-content">
+                      <Content components={mdxComponents} />
+                    </div>
+                  </DoDont>
+                );
+              })}
+            </div>
+          )}
+        </section>
+      );
+    })}
+  </div>
+) : (
+  <p class="empty-message">{emptyMessage}</p>
+)}
+
+<style>
+  .guidance-grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-xl);
+  }
+
+  .guidance-section {
+    /* Section styling */
+  }
+
+  .topic-heading {
+    font: var(--goa-typography-heading-m);
+    color: var(--goa-color-text-default);
+    margin-bottom: var(--goa-space-l);
+  }
+
+  /* Info items: full width, stacked vertically */
+  .guidance-info-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-xl);
+    margin-bottom: var(--goa-space-l);
+  }
+
+  /* Do/dont/tip/warning items: 2-column grid */
+  .guidance-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .guidance-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+  }
+
+  .empty-message {
+    color: var(--goa-color-text-secondary);
+    font-style: italic;
+    padding: var(--goa-space-l);
+    text-align: center;
+    background: var(--goa-color-background-light);
+    border-radius: var(--goa-radius-m);
+  }
+
+  .guidance-content {
+    font: var(--goa-typography-body-s);
+  }
+
+  .guidance-content :global(p) {
+    margin: 0 0 var(--goa-space-xs);
+  }
+
+  .guidance-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .guidance-content :global(code) {
+    background: rgba(0, 0, 0, 0.06);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+</style>

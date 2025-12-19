@@ -1,0 +1,61 @@
+{
+  "componentSlug": "circular-progress",
+  "extractedFrom": "libs/web-components/src/components/circular-progress/CircularProgress.svelte",
+  "extractedAt": "2026-01-05T23:10:27.432Z",
+  "props": [
+    {
+      "name": "variant",
+      "type": "\"fullscreen\" | \"inline\"",
+      "typeLabel": "GoabCircularProgressVariant",
+      "values": [
+        "fullscreen",
+        "inline"
+      ],
+      "required": false,
+      "default": "inline",
+      "description": "Stretch across the full screen or use it inline"
+    },
+    {
+      "name": "size",
+      "type": "\"small\" | \"large\"",
+      "typeLabel": "GoabCircularProgressSize",
+      "values": [
+        "small",
+        "large"
+      ],
+      "required": false,
+      "default": "large",
+      "description": "Size of the progress indicator"
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Loading message displayed under the progress indicator"
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "required": false,
+      "default": "-1",
+      "description": "Set the progress value. Setting this value will change the type from infinite to progress"
+    },
+    {
+      "name": "visible",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Show/hide the page loader. This allows for fade transition to be applied in each transition."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

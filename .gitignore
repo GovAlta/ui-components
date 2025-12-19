@@ -8,6 +8,7 @@ apps/dev/web
 NOTES.md
 /test-results
 __screenshots__
+docs/.astro
 
 # environment
 .env

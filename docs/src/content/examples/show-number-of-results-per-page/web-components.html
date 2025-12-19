@@ -1,0 +1,88 @@
+<goa-table width="100%" mb="xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <!-- Rows populated by JavaScript -->
+    </tbody>
+  </table>
+</goa-table>
+
+<goa-block alignment="center" width="100%">
+  <goa-block mb="m" alignment="center">
+    Show
+    <goa-dropdown id="per-page-dropdown" value="10" width="9ch">
+      <goa-dropdown-item value="10" label="10"></goa-dropdown-item>
+      <goa-dropdown-item value="20" label="20"></goa-dropdown-item>
+      <goa-dropdown-item value="30" label="30"></goa-dropdown-item>
+    </goa-dropdown>
+    <span style="width: 75px">per page</span>
+  </goa-block>
+
+  <goa-spacer hspacing="fill"></goa-spacer>
+
+  <goa-pagination
+    id="pagination"
+    itemcount="100"
+    perpagecount="10"
+    pagenumber="1">
+  </goa-pagination>
+</goa-block>
+
+<script>
+  const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver", "Mia", "Benjamin", "Charlotte", "Elijah", "Amelia", "Lucas", "Harper", "Mason", "Evelyn", "Logan"];
+  const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Wilson", "Anderson", "Taylor", "Thomas", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White"];
+  const users = [];
+  for (let i = 1; i <= 100; i++) {
+    users.push({
+      id: "user-" + i,
+      firstName: firstNames[(i - 1) % firstNames.length],
+      lastName: lastNames[(i - 1) % lastNames.length],
+      age: 20 + (i % 40),
+    });
+  }
+
+  let page = 1;
+  let perPage = 10;
+
+  const tableBody = document.getElementById("table-body");
+  const pagination = document.getElementById("pagination");
+  const dropdown = document.getElementById("per-page-dropdown");
+
+  function renderTable() {
+    const offset = (page - 1) * perPage;
+    const pageUsers = users.slice(offset, offset + perPage);
+
+    tableBody.innerHTML = pageUsers
+      .map(
+        (u) => `
+        <tr>
+          <td>${u.firstName}</td>
+          <td>${u.lastName}</td>
+          <td>${u.age}</td>
+        </tr>
+      `
+      )
+      .join("");
+  }
+
+  pagination.addEventListener("_change", (e) => {
+    page = e.detail.page;
+    renderTable();
+  });
+
+  dropdown.addEventListener("_change", (e) => {
+    perPage = parseInt(e.detail.value);
+    page = 1;
+    pagination.setAttribute("perpagecount", perPage);
+    pagination.setAttribute("pagenumber", "1");
+    renderTable();
+  });
+
+  renderTable();
+</script>

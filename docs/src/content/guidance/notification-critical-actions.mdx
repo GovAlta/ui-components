@@ -1,0 +1,21 @@
+---
+id: notification-critical-actions
+type: dont
+description: Don't put critical actions for the user in a temporary notification as they automatically dismiss.
+topic: feedback
+tags:
+  - notification
+  - temporary-notification
+  - actions
+  - accessibility
+appliesTo:
+  components:
+    - notification
+status: published
+---
+
+<Preview>
+  <goa-notification type="information">
+    Submit your application <goa-button slot="actions" type="tertiary" size="compact">Submit</goa-button>
+  </goa-notification>
+</Preview>

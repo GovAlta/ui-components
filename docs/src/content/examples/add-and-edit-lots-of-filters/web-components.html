@@ -1,0 +1,59 @@
+<goa-button id="open-filters-btn">Filters</goa-button>
+<goa-drawer id="filters-drawer" heading="Filters" position="right">
+  <goa-form-item label="Entry status">
+    <goa-checkbox-list name="entryStatus">
+      <goa-checkbox name="draft" text="Draft" value="draft"></goa-checkbox>
+      <goa-checkbox name="published" text="Published" value="published"></goa-checkbox>
+    </goa-checkbox-list>
+  </goa-form-item>
+  <goa-form-item label="Assigned to - Region" mt="l">
+    <goa-checkbox-list name="region">
+      <goa-checkbox name="calgary" text="Calgary" value="calgary"></goa-checkbox>
+      <goa-checkbox name="central" text="Central" value="central"></goa-checkbox>
+      <goa-checkbox name="edmonton" text="Edmonton" value="edmonton"></goa-checkbox>
+      <goa-checkbox name="north" text="North" value="north"></goa-checkbox>
+      <goa-checkbox name="south" text="South" value="south"></goa-checkbox>
+    </goa-checkbox-list>
+  </goa-form-item>
+  <goa-form-item label="Assigned to" mt="l">
+    <goa-dropdown name="assignedTo">
+      <goa-dropdown-item value="1" label="Person 1"></goa-dropdown-item>
+      <goa-dropdown-item value="2" label="Person 2"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+  <goa-form-item label="Date taken" mt="l">
+    <goa-radio-group name="dateTaken">
+      <goa-radio-item value="24" label="Last 24 hours"></goa-radio-item>
+      <goa-radio-item value="72" label="Last 72 hours"></goa-radio-item>
+    </goa-radio-group>
+  </goa-form-item>
+  <div slot="actions">
+    <goa-button-group>
+      <goa-button id="apply-filters-btn" type="primary" size="compact">Apply filters</goa-button>
+      <goa-button id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
+    </goa-button-group>
+  </div>
+</goa-drawer>
+
+<script>
+  const drawer = document.getElementById("filters-drawer");
+  const openBtn = document.getElementById("open-filters-btn");
+  const applyBtn = document.getElementById("apply-filters-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+
+  openBtn.addEventListener("_click", () => {
+    drawer.setAttribute("open", "true");
+  });
+
+  drawer.addEventListener("_close", () => {
+    drawer.removeAttribute("open");
+  });
+
+  applyBtn.addEventListener("_click", () => {
+    drawer.removeAttribute("open");
+  });
+
+  cancelBtn.addEventListener("_click", () => {
+    drawer.removeAttribute("open");
+  });
+</script>

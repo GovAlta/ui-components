@@ -1,0 +1,57 @@
+<goa-text as="h1" size="heading-l" mt="none" mb="m">Direct deposit information</goa-text>
+<goa-text as="p" mb="xl">
+  Find this information on your bank's website or on your personal cheques.
+  Contact your bank if you can't find this information.
+</goa-text>
+<form>
+  <goa-form-item
+    label="Bank or Institution number"
+    helptext="3-4 digits in length">
+    <goa-input
+      maxlength="4"
+      name="bankNumber"
+      id="bank-number-input"
+      aria-label="bankNumber"
+      width="88px">
+    </goa-input>
+  </goa-form-item>
+  <goa-form-item
+    label="Branch or Transit number"
+    helptext="5 digits in length"
+    mt="l">
+    <goa-input
+      maxlength="5"
+      name="transitNumber"
+      id="transit-number-input"
+      aria-label="transitNumber"
+      width="143px">
+    </goa-input>
+  </goa-form-item>
+  <goa-form-item
+    label="Account number"
+    helptext="3-12 digits in length"
+    mt="l">
+    <goa-input
+      maxlength="12"
+      name="accountNumber"
+      id="account-number-input"
+      aria-label="accountNumber">
+    </goa-input>
+  </goa-form-item>
+</form>
+<goa-details heading="Where can I find this information on a personal cheque?" mt="l">
+  <goa-text as="p" mb="m">Below is an example of where you can find the required bank information on a personal cheque.</goa-text>
+  <img src="https://design.alberta.ca/images/details-demo.jpg" alt="Cheque example" />
+</goa-details>
+
+<goa-button id="submit-btn" type="submit" mt="2xl">
+  Save and continue
+</goa-button>
+
+<script>
+  ["bank-number-input", "transit-number-input", "account-number-input"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("_change", (e) => {
+      console.log(`${id}:`, e.detail.value);
+    });
+  });
+</script>

@@ -1,0 +1,11 @@
+<div>
+  <goab-filter-chip
+    *ngFor="let filter of activeFilters"
+    [content]="filter"
+    (onClick)="removeFilter(filter)"
+    mr="s"
+    mb="s"
+    mt="s">
+  </goab-filter-chip>
+</div>
+<goab-button mt="l" (onClick)="addFilter()">Add Random Filter</goab-button>

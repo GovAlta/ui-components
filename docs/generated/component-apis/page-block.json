@@ -1,0 +1,28 @@
+{
+  "componentSlug": "page-block",
+  "extractedFrom": "libs/web-components/src/components/page-block/PageBlock.svelte",
+  "extractedAt": "2026-01-05T23:10:27.455Z",
+  "props": [
+    {
+      "name": "width",
+      "type": "Size",
+      "required": false,
+      "default": "full",
+      "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

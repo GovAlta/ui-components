@@ -1,0 +1,23 @@
+---
+id: modal-dont-actions-and-close
+type: dont
+description: Don't provide both action buttons and a close button on the same modal.
+topic: interaction
+tags:
+  - modal
+  - buttons
+appliesTo:
+  components:
+    - modal
+status: published
+---
+
+<Preview bad>
+  <goa-modal heading="Dialog title" closable="true" open="true">
+    Submitting the assessment will inform the proponent.
+    <goa-button-group alignment="end" slot="actions">
+      <goa-button type="secondary">Secondary</goa-button>
+      <goa-button type="primary">Primary</goa-button>
+    </goa-button-group>
+  </goa-modal>
+</Preview>

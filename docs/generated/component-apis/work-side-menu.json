@@ -1,0 +1,97 @@
+{
+  "componentSlug": "work-side-menu",
+  "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideMenu.svelte",
+  "extractedAt": "2026-01-05T23:10:27.464Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The application name displayed in the header."
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "URL for the header link. Clicking the logo/heading navigates to this URL."
+    },
+    {
+      "name": "open",
+      "type": "any",
+      "required": false,
+      "default": "false",
+      "description": "Controls whether the side menu is expanded or collapsed."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "userName",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "User's name displayed in the profile section."
+    },
+    {
+      "name": "userSecondaryText",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Secondary text displayed below the user's name, such as role or email."
+    }
+  ],
+  "events": [
+    {
+      "name": "onUpdate",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_update",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onToggle",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_toggle",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "primary",
+      "description": ""
+    },
+    {
+      "name": "secondary",
+      "description": ""
+    },
+    {
+      "name": "account",
+      "description": ""
+    }
+  ]
+}

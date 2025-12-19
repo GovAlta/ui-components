@@ -1,0 +1,34 @@
+<form id="required-field-form">
+  <goa-form-item label="Name" requirement="required">
+    <goa-input id="name-input" name="input" type="text" width="100%"></goa-input>
+  </goa-form-item>
+
+  <goa-button-group alignment="start" mt="xl">
+    <goa-button id="confirm-btn" disabled="true">Confirm</goa-button>
+    <goa-button id="cancel-btn" type="secondary">Cancel</goa-button>
+  </goa-button-group>
+</form>
+
+<script>
+  const nameInput = document.getElementById('name-input');
+  const confirmBtn = document.getElementById('confirm-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
+
+  nameInput.addEventListener('_change', (e) => {
+    const value = e.detail.value.trim();
+    if (value === '') {
+      confirmBtn.setAttribute('disabled', 'true');
+    } else {
+      confirmBtn.removeAttribute('disabled');
+    }
+  });
+
+  confirmBtn.addEventListener('_click', () => {
+    console.log('Form submitted with:', nameInput.value);
+  });
+
+  cancelBtn.addEventListener('_click', () => {
+    nameInput.value = '';
+    confirmBtn.setAttribute('disabled', 'true');
+  });
+</script>

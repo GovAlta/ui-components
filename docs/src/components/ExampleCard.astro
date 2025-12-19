@@ -1,0 +1,250 @@
+---
+/**
+ * ExampleCard - Displays a code example with metadata and optional preview
+ *
+ * Shows example title, category, components used, and accessibility notes.
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  example: CollectionEntry<'examples'>;
+  showPreview?: boolean;
+}
+
+const { example, showPreview = false } = Astro.props;
+const { data, body } = example;
+
+// Get the rendered content
+const { Content } = await example.render();
+
+// Scale badge colors
+const scaleColors: Record<string, { bg: string; color: string }> = {
+  interaction: { bg: '#e3f2fd', color: '#1565c0' },
+  task: { bg: '#f3e5f5', color: '#7b1fa2' },
+  page: { bg: '#e8f5e9', color: '#2e7d32' },
+  flow: { bg: '#fff3e0', color: '#e65100' },
+  service: { bg: '#fce4ec', color: '#c2185b' }
+};
+
+const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
+---
+
+<article class="example-card">
+  <header class="example-header">
+    <div class="example-badges">
+      <span class="scale-badge" style={`background: ${scaleStyle.bg}; color: ${scaleStyle.color};`}>
+        {data.scale}
+      </span>
+      <span class="category-badge">{data.category}</span>
+      {data.userType !== 'both' && (
+        <span class={`user-type-badge user-type-${data.userType}`}>
+          {data.userType}
+        </span>
+      )}
+    </div>
+    <h3 id={`example-${example.slug}`} class="example-title">{data.title}</h3>
+  </header>
+
+  {showPreview && (
+    <div class="example-preview">
+      {data.previewImage ? (
+        <img src={data.previewImage} alt={`Preview of ${data.title}`} />
+      ) : (
+        <div class="preview-placeholder">
+          <span>Preview not available</span>
+        </div>
+      )}
+    </div>
+  )}
+
+  <div class="example-content">
+    <Content />
+  </div>
+
+  <footer class="example-footer">
+    <div class="components-used">
+      <strong>Components:</strong>
+      {data.components.map((comp, i) => (
+        <>
+          <a href={`/components/${comp}`} class="component-link">{comp}</a>
+          {i < data.components.length - 1 && ', '}
+        </>
+      ))}
+    </div>
+
+    {data.accessibilityNotes && (
+      <details class="a11y-notes">
+        <summary>
+          <span class="a11y-icon" aria-hidden="true">♿</span>
+          Accessibility notes
+        </summary>
+        <p>{data.accessibilityNotes}</p>
+      </details>
+    )}
+
+    {data.relatedExamples && data.relatedExamples.length > 0 && (
+      <div class="related-examples">
+        <strong>Related:</strong>
+        {data.relatedExamples.map((rel, i) => (
+          <>
+            <a href={`/examples/${rel}`}>{rel}</a>
+            {i < data.relatedExamples!.length - 1 && ', '}
+          </>
+        ))}
+      </div>
+    )}
+  </footer>
+</article>
+
+<style>
+  .example-card {
+    background: white;
+    border: 1px solid var(--goa-color-border);
+    border-radius: var(--goa-radius-m);
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+
+  .example-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .example-header {
+    padding: var(--goa-space-m);
+    border-bottom: 1px solid var(--goa-color-border);
+    background: var(--goa-color-background-light);
+  }
+
+  .example-badges {
+    display: flex;
+    gap: var(--goa-space-xs);
+    flex-wrap: wrap;
+    margin-bottom: var(--goa-space-xs);
+  }
+
+  .scale-badge,
+  .category-badge,
+  .user-type-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.2em 0.5em;
+    border-radius: var(--goa-radius-s);
+  }
+
+  .category-badge {
+    background: #f5f5f5;
+    color: #666;
+  }
+
+  .user-type-citizen {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+
+  .user-type-worker {
+    background: #fce4ec;
+    color: #c2185b;
+  }
+
+  .example-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--goa-color-text);
+  }
+
+  .example-preview {
+    border-bottom: 1px solid var(--goa-color-border);
+    background: #fafafa;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .example-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .preview-placeholder {
+    color: var(--goa-color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .example-content {
+    padding: var(--goa-space-m);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--goa-color-text-secondary);
+  }
+
+  .example-content :global(p) {
+    margin: 0 0 var(--goa-space-s);
+  }
+
+  .example-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .example-footer {
+    padding: var(--goa-space-m);
+    background: var(--goa-color-background-light);
+    border-top: 1px solid var(--goa-color-border);
+    font-size: 0.85rem;
+  }
+
+  .components-used {
+    color: var(--goa-color-text-secondary);
+    margin-bottom: var(--goa-space-s);
+  }
+
+  .component-link {
+    color: var(--goa-color-brand);
+    text-decoration: none;
+  }
+
+  .component-link:hover {
+    text-decoration: underline;
+  }
+
+  .a11y-notes {
+    margin: var(--goa-space-s) 0;
+    padding: var(--goa-space-s);
+    background: white;
+    border-radius: var(--goa-radius-s);
+    border: 1px solid #e0e0e0;
+  }
+
+  .a11y-notes summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--goa-color-text);
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-xs);
+  }
+
+  .a11y-icon {
+    font-size: 0.9rem;
+  }
+
+  .a11y-notes p {
+    margin: var(--goa-space-s) 0 0;
+    color: var(--goa-color-text-secondary);
+    white-space: pre-wrap;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .related-examples {
+    color: var(--goa-color-text-secondary);
+    margin-top: var(--goa-space-s);
+  }
+
+  .related-examples a {
+    color: var(--goa-color-brand);
+  }
+</style>

@@ -1,0 +1,70 @@
+<goab-tabs>
+  <goab-tab heading="All">
+    <goab-table width="100%">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Text</th>
+          <th class="goa-table-number-header">Number</th>
+          <th style="width: 1%; white-space: nowrap">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of reviewItems">
+          <td><goab-badge type="important" content="Review pending"></goab-badge></td>
+          <td>Lorem ipsum</td>
+          <td class="goa-table-number-column">1234567890</td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
+        </tr>
+        <tr *ngFor="let i of completeItems">
+          <td><goab-badge type="information" content="Complete"></goab-badge></td>
+          <td>Lorem Ipsum</td>
+          <td class="goa-table-number-column">1234567890</td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
+        </tr>
+      </tbody>
+    </goab-table>
+  </goab-tab>
+  <goab-tab [heading]="reviewPending">
+    <ng-template #reviewPending>Review pending<goab-badge type="important" content="4" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Text</th>
+          <th class="goa-table-number-header">Number</th>
+          <th style="width: 1%; white-space: nowrap">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of reviewItems">
+          <td><goab-badge type="important" content="Review pending"></goab-badge></td>
+          <td>Lorem ipsum</td>
+          <td class="goa-table-number-column">1234567890</td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
+        </tr>
+      </tbody>
+    </goab-table>
+  </goab-tab>
+  <goab-tab [heading]="completeTab">
+    <ng-template #completeTab>Complete<goab-badge type="information" content="338" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Text</th>
+          <th class="goa-table-number-header">Number</th>
+          <th style="width: 1%; white-space: nowrap">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of completeItems">
+          <td><goab-badge type="information" content="Complete"></goab-badge></td>
+          <td>Lorem Ipsum</td>
+          <td class="goa-table-number-column">1234567890</td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
+        </tr>
+      </tbody>
+    </goab-table>
+  </goab-tab>
+</goab-tabs>

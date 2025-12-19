@@ -1,0 +1,105 @@
+{
+  "componentSlug": "pagination",
+  "extractedFrom": "libs/web-components/src/components/pagination/Pagination.svelte",
+  "extractedAt": "2026-01-05T23:10:27.456Z",
+  "props": [
+    {
+      "name": "version",
+      "type": "Version",
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    },
+    {
+      "name": "pagenumber",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "The current page being viewed (non-zero based)."
+    },
+    {
+      "name": "itemcount",
+      "type": "number",
+      "required": true,
+      "default": null,
+      "description": "Total number of data items within all pages."
+    },
+    {
+      "name": "perpagecount",
+      "type": "number",
+      "required": false,
+      "default": "10",
+      "description": "Number of data items shown per page."
+    },
+    {
+      "name": "variant",
+      "type": "\"all\" | \"links-only\"",
+      "typeLabel": "GoabPaginationVariant",
+      "values": [
+        "all",
+        "links-only"
+      ],
+      "required": false,
+      "default": "all",
+      "description": "Controls which nav controls are visible."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "none",
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "none",
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "m",
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "none",
+      "description": "Left margin."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": []
+}

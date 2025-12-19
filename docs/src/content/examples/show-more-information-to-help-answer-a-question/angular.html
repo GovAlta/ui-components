@@ -1,0 +1,23 @@
+<goab-link leadingIcon="arrow-back" size="small" mb="none">
+  Back
+</goab-link>
+
+<goab-form-item
+  mt="xl"
+  label="Do you pay for child care?"
+  labelSize="large"
+  helpText="Examples of child care are daycares, day homes and baby-sisters.">
+  <goab-radio-group
+    name="child-care"
+    ariaLabel="Do you pay for child care?"
+    (onChange)="onRadioChange($event)">
+    <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+    <goab-radio-item value="no" label="No"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<goab-details heading="Why are we asking this question?" mt="l">
+  <p>We ask this question to determine if you are eligible for child care benefits.</p>
+</goab-details>
+
+<goab-button type="submit" mt="2xl">Save and continue</goab-button>

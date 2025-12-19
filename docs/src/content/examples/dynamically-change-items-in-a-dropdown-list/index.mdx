@@ -1,0 +1,35 @@
+---
+id: dynamically-change-items-in-a-dropdown-list
+title: Dynamically change items in a dropdown list
+categories:
+  - inputs-and-actions
+scale: interaction
+userType: both
+tags:
+  - dropdown
+  - dynamic
+  - cascading
+  - dependent
+  - form
+components:
+  - dropdown
+  - dropdown-item
+  - form-item
+status: published
+---
+
+Update dropdown options based on the selection in another dropdown (cascading/dependent dropdowns).
+
+## When to use
+
+Use this pattern when:
+- Options in one dropdown depend on the selection in another
+- You need to filter available choices based on a category
+- Building hierarchical selection interfaces (e.g., country/state/city)
+
+## Considerations
+
+- Use `mountType="reset"` to clear and repopulate dropdown items
+- Generate unique keys for items to ensure proper re-rendering
+- Provide placeholder text to guide users when no selection is made
+- Consider loading states if data fetching is required

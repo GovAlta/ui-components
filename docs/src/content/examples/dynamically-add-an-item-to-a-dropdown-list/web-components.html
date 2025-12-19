@@ -1,0 +1,85 @@
+<goa-form-item
+  id="item-form-item"
+  requirement="required"
+  label="Name of item"
+  helptext="Add an item to the dropdown list below">
+  <goa-input id="item-input" name="item"></goa-input>
+</goa-form-item>
+
+<goa-form-item mt="l" label="Add to">
+  <goa-radio-group id="mount-type" name="mountType" value="append" orientation="horizontal">
+    <goa-radio-item value="prepend" label="Start"></goa-radio-item>
+    <goa-radio-item value="append" label="End"></goa-radio-item>
+  </goa-radio-group>
+</goa-form-item>
+
+<goa-button-group alignment="start" gap="relaxed" mt="l">
+  <goa-button id="add-btn" type="primary">Add new item</goa-button>
+  <goa-button id="reset-btn" type="tertiary">Reset list</goa-button>
+</goa-button-group>
+
+<goa-divider mt="l"></goa-divider>
+
+<goa-form-item mt="l" label="All items">
+  <goa-dropdown id="task-dropdown" name="selectedTask">
+    <goa-dropdown-item value="finish-report" label="Finish Report"></goa-dropdown-item>
+    <goa-dropdown-item value="attend-meeting" label="Attend Meeting"></goa-dropdown-item>
+    <goa-dropdown-item value="reply-emails" label="Reply Emails"></goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>
+
+<script>
+  const itemInput = document.getElementById('item-input');
+  const itemFormItem = document.getElementById('item-form-item');
+  const mountTypeGroup = document.getElementById('mount-type');
+  const addBtn = document.getElementById('add-btn');
+  const resetBtn = document.getElementById('reset-btn');
+  const dropdown = document.getElementById('task-dropdown');
+
+  let mountType = 'append';
+  let newTask = '';
+
+  const defaultItems = [
+    { value: 'finish-report', label: 'Finish Report' },
+    { value: 'attend-meeting', label: 'Attend Meeting' },
+    { value: 'reply-emails', label: 'Reply Emails' }
+  ];
+
+  mountTypeGroup.addEventListener('_change', (e) => {
+    mountType = e.detail.value;
+  });
+
+  itemInput.addEventListener('_change', (e) => {
+    newTask = e.detail.value;
+    itemFormItem.removeAttribute('error');
+  });
+
+  addBtn.addEventListener('_click', () => {
+    if (newTask === '') {
+      itemFormItem.setAttribute('error', 'Please enter item name');
+      return;
+    }
+
+    const newItem = document.createElement('goa-dropdown-item');
+    newItem.setAttribute('value', newTask.toLowerCase().replace(' ', '-'));
+    newItem.setAttribute('label', newTask);
+    newItem.setAttribute('mount', mountType);
+    dropdown.appendChild(newItem);
+
+    itemInput.value = '';
+    newTask = '';
+  });
+
+  resetBtn.addEventListener('_click', () => {
+    dropdown.innerHTML = '';
+    defaultItems.forEach(item => {
+      const dropdownItem = document.createElement('goa-dropdown-item');
+      dropdownItem.setAttribute('value', item.value);
+      dropdownItem.setAttribute('label', item.label);
+      dropdown.appendChild(dropdownItem);
+    });
+    itemInput.value = '';
+    newTask = '';
+    itemFormItem.removeAttribute('error');
+  });
+</script>

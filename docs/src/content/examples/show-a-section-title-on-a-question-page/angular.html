@@ -1,0 +1,19 @@
+<goab-link leadingIcon="arrow-back" size="small" mb="none">
+  Back
+</goab-link>
+
+<goab-text as="h3" size="body-m" mt="xl" mb="m" color="secondary">Personal information</goab-text>
+
+<goab-form-item label="Do you currently live in Canada?" labelSize="large">
+  <goab-radio-group
+    name="canada"
+    ariaLabel="Do you currently live in Canada?"
+    (onChange)="onRadioChange($event)">
+    <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+    <goab-radio-item value="no" label="No"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<goab-button type="submit" mt="2xl">
+  Save and continue
+</goab-button>

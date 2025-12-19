@@ -1,0 +1,81 @@
+<goa-table width="100%" mb="xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>
+          <goa-table-sort-header name="firstName">First name</goa-table-sort-header>
+        </th>
+        <th>
+          <goa-table-sort-header name="lastName">Last name</goa-table-sort-header>
+        </th>
+        <th>
+          <goa-table-sort-header name="age" direction="asc">Age</goa-table-sort-header>
+        </th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</goa-table>
+
+<script>
+  let users = [
+    { firstName: "Christian", lastName: "Batz", age: 18 },
+    { firstName: "Brain", lastName: "Wisozk", age: 19 },
+    { firstName: "Neha", lastName: "Jones", age: 23 },
+    { firstName: "Tristin", lastName: "Buckridge", age: 31 },
+  ];
+
+  const tbody = document.getElementById("table-body");
+  let sortColumn = "age";
+  let sortDirection = 1; // 1 = asc, -1 = desc
+
+  function renderTable() {
+    tbody.innerHTML = "";
+    users.forEach((user) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${user.firstName}</td>
+        <td>${user.lastName}</td>
+        <td>${user.age}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  function sortTable(column) {
+    // Toggle direction if same column, otherwise start ascending
+    if (column === sortColumn) {
+      sortDirection = sortDirection * -1;
+    } else {
+      sortColumn = column;
+      sortDirection = 1;
+    }
+
+    // Update header visual states
+    document.querySelectorAll("goa-table-sort-header").forEach((header) => {
+      const name = header.getAttribute("name");
+      if (name === sortColumn) {
+        header.setAttribute("direction", sortDirection === 1 ? "asc" : "desc");
+      } else {
+        header.setAttribute("direction", "none");
+      }
+    });
+
+    // Sort the data
+    users.sort((a, b) => (a[sortColumn] > b[sortColumn] ? 1 : -1) * sortDirection);
+    renderTable();
+  }
+
+  // Attach click handlers directly to sort headers
+  // (Table's built-in slot-based wiring doesn't work with innerHTML)
+  document.querySelectorAll("goa-table-sort-header").forEach((header) => {
+    header.addEventListener("click", () => {
+      const column = header.getAttribute("name");
+      sortTable(column);
+    });
+  });
+
+  // Initial sort by age ascending
+  users.sort((a, b) => (a.age > b.age ? 1 : -1));
+  renderTable();
+</script>

@@ -1,0 +1,67 @@
+{
+  "componentSlug": "hero-banner",
+  "extractedFrom": "libs/web-components/src/components/hero-banner/HeroBanner.svelte",
+  "extractedAt": "2026-01-05T23:10:27.447Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Main heading text"
+    },
+    {
+      "name": "backgroundurl",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Background image url"
+    },
+    {
+      "name": "minheight",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Minimum height of the hero banner. Defaults to 600px when a background image is provided."
+    },
+    {
+      "name": "maxcontentwidth",
+      "type": "any",
+      "required": false,
+      "default": "100%",
+      "description": "Maximum width of the content area"
+    },
+    {
+      "name": "backgroundcolor",
+      "type": "string",
+      "required": false,
+      "default": "#f8f8f8",
+      "description": "Hero Banner background color when no background image is provided"
+    },
+    {
+      "name": "textcolor",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Text color within the hero banner"
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "background",
+      "description": "Test ID for the component"
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "actions",
+      "description": ""
+    }
+  ]
+}

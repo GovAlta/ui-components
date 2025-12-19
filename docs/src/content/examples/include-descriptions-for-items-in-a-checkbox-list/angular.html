@@ -1,0 +1,20 @@
+<goab-form-item label="How do you want to sign in?" [formGroup]="form">
+  <goab-radio-group name="selectOne" formControlName="selectOne">
+    <goab-radio-item
+      value="1"
+      label="Sign in as a business"
+      [description]="optionOneDescription">
+      <ng-template #optionOneDescription>
+        Use the account associated with the business
+      </ng-template>
+    </goab-radio-item>
+    <goab-radio-item
+      value="2"
+      label="Sign in as an individual"
+      [description]="optionTwoDescription">
+      <ng-template #optionTwoDescription>
+        If you don't have a Alberta.ca login, you can create one
+      </ng-template>
+    </goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>

@@ -1,0 +1,20 @@
+---
+id: textarea-char-count-predictable
+type: dont
+description: Don't use the character counter for input fields where user entries typically have standard or predictable lengths.
+topic: forms
+tags:
+  - textarea
+  - character-count
+appliesTo:
+  components:
+    - textarea
+    - form-item
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Input label">
+    <goa-textarea name="number" value="780" countby="character" maxcharcount="14"></goa-textarea>
+  </goa-form-item>
+</Preview>

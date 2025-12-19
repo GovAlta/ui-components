@@ -1,0 +1,62 @@
+<goa-form-stepper id="form-stepper" ml="s" mr="s" step="1">
+  <goa-form-step text="Personal details"></goa-form-step>
+  <goa-form-step text="Employment history"></goa-form-step>
+  <goa-form-step text="References"></goa-form-step>
+  <goa-form-step text="Review"></goa-form-step>
+</goa-form-stepper>
+
+<goa-pages id="form-pages" current="1" mb="3xl" mt="xl" mr="xl" ml="xl">
+  <div>
+    <goa-skeleton type="article"></goa-skeleton>
+  </div>
+  <div>
+    <goa-skeleton type="header" size="2"></goa-skeleton>
+    <goa-skeleton type="text"></goa-skeleton>
+    <goa-skeleton type="header" size="2"></goa-skeleton>
+    <goa-skeleton type="text"></goa-skeleton>
+  </div>
+  <div>
+    <goa-skeleton type="text"></goa-skeleton>
+    <goa-spacer vspacing="m"></goa-spacer>
+    <goa-skeleton type="text"></goa-skeleton>
+  </div>
+  <div>
+    <goa-skeleton type="header" size="2"></goa-skeleton>
+    <goa-skeleton type="text"></goa-skeleton>
+    <goa-spacer vspacing="m"></goa-spacer>
+    <goa-skeleton type="text"></goa-skeleton>
+  </div>
+</goa-pages>
+
+<div style="display: flex; justify-content: space-between">
+  <goa-button id="prev-btn" type="secondary">Previous</goa-button>
+  <goa-button id="next-btn" type="primary">Next</goa-button>
+</div>
+
+<script>
+  const formStepper = document.getElementById('form-stepper');
+  const formPages = document.getElementById('form-pages');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  let currentStep = 1;
+
+  function updateStep(step) {
+    if (step < 1 || step > 4) return;
+    currentStep = step;
+    formStepper.setAttribute('step', currentStep);
+    formPages.setAttribute('current', currentStep);
+  }
+
+  formStepper.addEventListener('_change', (e) => {
+    updateStep(e.detail.step);
+  });
+
+  prevBtn.addEventListener('_click', () => {
+    updateStep(currentStep - 1);
+  });
+
+  nextBtn.addEventListener('_click', () => {
+    updateStep(currentStep + 1);
+  });
+</script>

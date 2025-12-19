@@ -1,0 +1,27 @@
+---
+id: tooltip-force-scroll
+type: dont
+description: Don't position a tooltip in a way that forces the user to scroll to view the tooltip content.
+topic: feedback
+tags:
+  - tooltip
+  - positioning
+  - usability
+appliesTo:
+  components:
+    - tooltip
+status: published
+---
+
+<Preview>
+  <div style="height: 80px; overflow: hidden; position: relative;">
+    <div style="position: absolute; bottom: 8px;">
+      <goa-form-item label="Email">
+        <goa-input name="email" value="user@example.com" />
+      </goa-form-item>
+    </div>
+    <div style="position: absolute; bottom: -40px; left: 100px; background: var(--goa-color-greyscale-700); color: white; padding: 8px 16px; border-radius: 4px; font-size: 14px;">
+      We will send important updates to this email address.
+    </div>
+  </div>
+</Preview>

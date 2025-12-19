@@ -1,0 +1,23 @@
+<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
+
+<goa-button id="save-btn" type="secondary">Save</goa-button>
+
+<script>
+  document.getElementById('save-btn').addEventListener('_click', () => {
+    // await api.save();
+
+    document.body.dispatchEvent(new CustomEvent("msg", {
+      composed: true,
+      bubbles: true,
+      detail: {
+        action: "goa:temp-notification",
+        data: {
+          message: "Your application has been saved.",
+          type: "success",
+          uuid: crypto.randomUUID(),
+          duration: "short"
+        }
+      }
+    }));
+  });
+</script>

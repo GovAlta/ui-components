@@ -1,0 +1,31 @@
+<goa-radio-group name="device" value="5000" id="device-radio-group">
+  <goa-radio-item value="600" label="Desktop"></goa-radio-item>
+  <goa-radio-item value="5000" label="Mobile"></goa-radio-item>
+</goa-radio-group>
+
+<goa-app-header
+  id="app-header"
+  url="https://example.com"
+  heading="Design System"
+  fullmenubreakpoint="5000">
+  <goa-app-header-menu heading="Search" leadingicon="search">
+    <a href="#">Cases</a>
+    <a href="#">Payments</a>
+    <a href="#">Outstanding</a>
+  </goa-app-header-menu>
+  <a href="#">Support</a>
+  <a href="#" class="interactive">Sign in</a>
+</goa-app-header>
+
+<script>
+  const radioGroup = document.getElementById("device-radio-group");
+  const appHeader = document.getElementById("app-header");
+
+  radioGroup.addEventListener("_change", (e) => {
+    appHeader.setAttribute("full-menu-breakpoint", e.detail.value);
+  });
+
+  appHeader.addEventListener("_menuClick", () => {
+    alert("Menu not being displayed and you can do anything");
+  });
+</script>

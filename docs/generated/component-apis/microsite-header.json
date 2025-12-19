@@ -1,0 +1,103 @@
+{
+  "componentSlug": "microsite-header",
+  "extractedFrom": "libs/web-components/src/components/microsite-header/MicrositeHeader.svelte",
+  "extractedAt": "2026-01-05T23:10:27.452Z",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"live\" | \"alpha\" | \"beta\"",
+      "typeLabel": "GoabMicrositeHeaderType",
+      "values": [
+        "live",
+        "alpha",
+        "beta"
+      ],
+      "required": true,
+      "default": null,
+      "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
+    },
+    {
+      "name": "version",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Version number or identifier displayed in the header."
+    },
+    {
+      "name": "feedbackurl",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Url to feedback page that will be displayed when provided."
+    },
+    {
+      "name": "maxcontentwidth",
+      "type": "any",
+      "required": false,
+      "default": "100%",
+      "description": "Maximum width of the content area"
+    },
+    {
+      "name": "headerurltarget",
+      "type": "\"self\" | \"blank\"",
+      "typeLabel": "GoabMicrositeHeaderUrlTargetType",
+      "values": [
+        "self",
+        "blank"
+      ],
+      "required": false,
+      "default": "blank",
+      "description": "For internal header urls sets target="
+    },
+    {
+      "name": "feedbackurltarget",
+      "type": "\"self\" | \"blank\"",
+      "typeLabel": "GoabMicrositeHeaderUrlTargetType",
+      "values": [
+        "self",
+        "blank"
+      ],
+      "required": false,
+      "default": "blank",
+      "description": "For internal feedback urls sets target="
+    },
+    {
+      "name": "hasfeedbackhandler",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, enables a custom feedback click handler via the _feedbackClick event instead of navigating to feedbackurl."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [
+    {
+      "name": "onFeedbackClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_feedbackClick",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "version",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<goab-link leadingIcon="arrow-back" size="small" mb="none">
+  Back
+</goab-link>
+
+<goab-text as="h2" mt="xl" mb="m">Current school status</goab-text>
+<goab-text mt="none" mb="s">
+  School can encompass foundational programs that help individuals gain basic skills for
+  further learning and living, such as literacy and numeracy courses. It also includes
+  skills and employment training programs, designed to equip you with specific skills for
+  the job market.
+</goab-text>
+<goab-text mt="none" mb="s">
+  Post-secondary education, such as Bachelor's, Master's, or Doctoral degrees, and
+  continuing education courses for professional or personal development, are also
+  categorized under 'school'.
+</goab-text>
+<goab-text mt="none" mb="xl">
+  Contact your provider if you're concerned about your school status.
+</goab-text>
+
+<goab-form-item label="Are you currently in school?">
+  <goab-radio-group
+    name="school"
+    ariaLabel="are you currently in school?"
+    (onChange)="onChange($event)">
+    <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+    <goab-radio-item value="no" label="No"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<goab-button type="submit" mt="2xl" (onClick)="onSubmit()">
+  Save and continue
+</goab-button>

@@ -1,0 +1,22 @@
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th class="goa-table-number-header">File number</th>
+      <th style="width: 1%; white-space: nowrap"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let badge of badgeValues">
+      <td>
+        <goab-badge [type]="badge.type" [content]="badge.content" [icon]="false"></goab-badge>
+      </td>
+      <td>Lorem ipsum dolor sit amet consectetur.</td>
+      <td class="goa-table-number-column">1234567890</td>
+      <td>
+        <goab-button size="compact" type="tertiary" (onClick)="onClick()">Assign</goab-button>
+      </td>
+    </tr>
+  </tbody>
+</goab-table>
