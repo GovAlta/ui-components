@@ -1,0 +1,52 @@
+import { GoabAccordion, GoabButton } from "@abgov/react-components";
+import { useEffect, useState } from "react";
+
+export function AccordionCloseAllExample() {
+  const [expandedAll, setExpandedAll] = useState<boolean>(false);
+  const [expandedList, setExpandedList] = useState<number[]>([]);
+
+  useEffect(() => {
+    setExpandedAll(expandedList.length === 4);
+  }, [expandedList.length]);
+
+  const expandOrCollapseAll = () => {
+      setExpandedAll((prev) => {
+      const newState = !prev;
+      setExpandedList(newState ? [1, 2, 3, 4] : []);
+      return newState;
+    });
+  };
+
+  const updateAccordion = (order: number, isOpen: boolean) => {
+    setExpandedList((prev) => {
+      if (isOpen) {
+        return prev.includes(order) ? prev: [...prev, order];
+      }
+      return prev.filter((item) => item !== order);
+    });
+  }
+
+  return (
+    <>
+      <GoabButton type="tertiary" mb="m" onClick={() => expandOrCollapseAll()}>
+         {expandedAll ? "Hide all sections" : "Show all sections"}
+      </GoabButton>
+
+      <GoabAccordion open={expandedList.includes(1)} heading="How do I create an account?" headingSize="medium" onChange={(open) => updateAccordion(1, open)}>
+         To create an account you will need to contact your office admin.
+      </GoabAccordion>
+
+      <GoabAccordion open={expandedList.includes(2)} heading="What verification is needed to sign documents digitally?" headingSize="medium" onChange={(open) => updateAccordion(2, open)}>
+         You will need to verify your identity through our two factor authentication in addition to the digital signature.
+      </GoabAccordion>
+
+      <GoabAccordion open={expandedList.includes(3)} heading="Can I track the status of my service requests online?" headingSize="medium" onChange={(open) => updateAccordion(3, open)}>
+         Yes, you can see the status of your application on the main service dashboard when you login. You will receive updates and notifications in your email as your request progresses.
+      </GoabAccordion>
+
+      <GoabAccordion open={expandedList.includes(4)} heading="Are there accessibility features for people with disabilities?" headingSize="medium" onChange={(open) => updateAccordion(4, open)}>
+         Yes, our digital service is designed with accessibility in mind. <a href="">More information on accessibility.</a>
+      </GoabAccordion>
+    </>
+  )
+}

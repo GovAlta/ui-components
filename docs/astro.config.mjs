@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = path.resolve(__dirname, '..');
@@ -39,5 +40,5 @@ export default defineConfig({
     }
   },
 
-  integrations: [react()]
+  integrations: [react(), mdx()]
 });

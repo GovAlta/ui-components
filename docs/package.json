@@ -12,6 +12,7 @@
   "dependencies": {
     "@abgov/react-components": "*",
     "@abgov/ui-components-common": "*",
-    "@abgov/web-components": "*"
+    "@abgov/web-components": "*",
+    "@astrojs/mdx": "^4.3.13"
   }
 }

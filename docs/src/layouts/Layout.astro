@@ -8,6 +8,7 @@ const { title } = Astro.props;
 
 <script>
   import("@abgov/web-components");
+  import("@abgov/style");
 </script>
 
 <!doctype html>
@@ -26,21 +27,7 @@ const { title } = Astro.props;
 </html>
 
 <style is:global>
-  html {
-    font-family: system-ui, sans-serif;
-  }
   body {
     margin: 0;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
   }
 </style>
