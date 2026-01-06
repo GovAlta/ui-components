@@ -12,7 +12,9 @@ const workspaceRoot = path.resolve(__dirname, '..');
 export default defineConfig({
   root: '.',
   outDir: '../dist/docs',
-
+  build: {
+    chunkSizeWarningLimit: 1000
+  },
   server: {
     port: 4203,
     host: '0.0.0.0',

@@ -120,7 +120,7 @@ export default function Search({ placeholder = "Search components..." }: SearchP
   return (
     <div>
       <GoabPopover
-        position="bottom"
+        position="below"
         minWidth="60ch"
         target={<>
           <GoabInput
