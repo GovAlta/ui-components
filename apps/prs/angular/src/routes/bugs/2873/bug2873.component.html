@@ -1,0 +1,109 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h2">Bug 2873 - Drawer scroll and interactive content</goab-text>
+  <goab-text tag="p">
+    Use the buttons below to open the right and bottom drawers. Each drawer shares the
+    same long content so scrolling, focus, and interactive elements can be tested
+    consistently.
+  </goab-text>
+  <goab-text tag="p">
+    Expected: When scrolling, keep the Details component and Accordion component near the
+    bottom or the top. Attempt to click them, they should focus and activate. The bug is
+    currently that it auto scrolls to them but doesn't activate them.
+  </goab-text>
+  <goab-text tag="p">
+    Expected: When using tab navigation, tabbing to the next interactive element in the
+    Drawer should move the scrolling to that element.
+  </goab-text>
+
+  <goab-button-group alignment="start" gap="relaxed">
+    <goab-button type="primary" (onClick)="openRightDrawer()">
+      Open Drawer (Right)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="openBottomDrawer()">
+      Open Drawer (Bottom)
+    </goab-button>
+  </goab-button-group>
+</goab-block>
+
+<ng-template #drawerContent>
+  <goab-input name="first-input" placeholder="First Input" />
+  <goab-text tag="h3" maxWidth="400px">Review notes and long-form content</goab-text>
+  <goab-text tag="p" maxWidth="400px">
+    This drawer includes extended content to force scrolling beyond two screen heights,
+    with interactive elements placed throughout for testing.
+  </goab-text>
+
+  <goab-text tag="p" maxWidth="400px">
+    Paragraph 1: Review the drawer scroll behavior while reading this extended narrative
+    that stretches across multiple lines and keeps the content dense enough to require
+    more scrolling.
+  </goab-text>
+  <goab-text tag="p" maxWidth="400px">
+    Paragraph 2: Confirm focus handling and keyboard navigation as you move through long
+    text blocks in the drawer.
+  </goab-text>
+  <goab-text tag="p" maxWidth="400px">
+    Paragraph 3: Continue scanning through the content to ensure the drawer retains scroll
+    position and keeps focus within the panel.
+  </goab-text>
+  <goab-text tag="p" maxWidth="400px">
+    Paragraph 4: Validate that the drawer content continues to flow naturally while
+    maintaining readable spacing and consistent focus order.
+  </goab-text>
+
+  <goab-details heading="Supporting context" [open]="true">
+    <goab-block direction="column" gap="s">
+      <goab-text tag="p" maxWidth="400px">
+        Use this details panel to verify expandable content within a long drawer.
+      </goab-text>
+      <goab-text tag="p" maxWidth="400px">
+        The panel remains interactive while scrolling, and can be toggled while other
+        content remains visible.
+      </goab-text>
+    </goab-block>
+  </goab-details>
+
+  <goab-text tag="p" maxWidth="400px">
+    Paragraph 5: Final confirmation text to keep the drawer scrolling beyond two full
+    screens, ensuring the bottom content is reachable and usable.
+  </goab-text>
+
+  <goab-accordion heading="Verification checklist" [open]="true">
+    <goab-block direction="column" gap="s">
+      <goab-text tag="p" maxWidth="400px">
+        Expand and collapse this accordion to confirm that layout changes do not jump the
+        scroll position unexpectedly.
+      </goab-text>
+      <goab-text tag="p" maxWidth="400px">
+        Keep the content long enough to require scrolling before and after the accordion
+        section.
+      </goab-text>
+    </goab-block>
+  </goab-accordion>
+
+  <goab-text tag="h4" maxWidth="400px">Follow-up inputs</goab-text>
+  <goab-input name="drawer-first-name" placeholder="First name" mr="l" />
+  <goab-input name="drawer-last-name" placeholder="Last name" />
+
+  <goab-text tag="h4" maxWidth="400px">Additional notes</goab-text>
+  <goab-textarea name="drawer-notes" rows="6" placeholder="Add any extra details here" />
+</ng-template>
+
+<goab-drawer
+  [open]="rightDrawerOpen"
+  position="right"
+  heading="Bug 2873 - Right Drawer"
+  maxSize="500px"
+  (onClose)="closeRightDrawer()"
+>
+  <ng-container *ngTemplateOutlet="drawerContent"></ng-container>
+</goab-drawer>
+
+<goab-drawer
+  [open]="bottomDrawerOpen"
+  position="bottom"
+  heading="Bug 2873 - Bottom Drawer"
+  (onClose)="closeBottomDrawer()"
+>
+  <ng-container *ngTemplateOutlet="drawerContent"></ng-container>
+</goab-drawer>

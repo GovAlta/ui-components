@@ -46,6 +46,7 @@ export function App() {
               <Link to="/bugs/2839">2839</Link>
               <Link to="/bugs/2849">2849</Link>
               <Link to="/bugs/2852">2852</Link>
+              <Link to="/bugs/2873">2873</Link>
               <Link to="/bugs/2878">2878</Link>
               <Link to="/bugs/2892">2892</Link>
               <Link to="/bugs/2922">2922</Link>

@@ -128,7 +128,7 @@
   }
 </script>
 
-<goa-focus-trap open={open}>
+<goa-focus-trap open={open} prevent-scroll-into-view={true}>
   <div
     class={`root ${_scrollPos ?? ""}`}
     style={style("visibility", open ? "visible" : "hidden")}
