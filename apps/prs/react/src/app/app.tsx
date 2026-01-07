@@ -67,6 +67,7 @@ export function App() {
               <Link to="/features/2440">2440 MenuButton Icon</Link>
               <Link to="/features/2492">2492 TextArea onBlur</Link>
               <Link to="/features/2609">2609 Data Table Base Component</Link>
+              <Link to="/features/2611-tabs-disabled">2611-tabs-disabled</Link>
               <Link to="/features/2682">2682 DatePicker Issues</Link>
               <Link to="/features/2722">2722 Input Text-Align</Link>
               <Link to="/features/2730">2730 Temporary Notification Controller</Link>

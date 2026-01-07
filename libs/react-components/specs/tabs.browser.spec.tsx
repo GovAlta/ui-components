@@ -426,4 +426,131 @@ describe("Tabs Browser Tests", () => {
       });
     });
   });
+  describe("disabled", () => {
+    it("should not show the disabled tab even initial tab is that tab", async () => {
+      // GIVEN - Tab 1 is disabled but initialTab is set to 1
+      const Component = () => {
+        return (
+          <GoabTabs initialTab={1} testId="test-tabs">
+            <GoabTab heading="Tab 1 (disabled)" disabled>
+              <p>Content 1 - This should NOT be visible</p>
+            </GoabTab>
+            <GoabTab heading="Tab 2">
+              <p>Content 2 - This SHOULD be visible on load</p>
+            </GoabTab>
+            <GoabTab heading="Tab 3">
+              <p>Content 3</p>
+            </GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByTestId, getByText } = render(<Component />);
+
+      // Wait for component to fully render
+      await vi.waitFor(() => {
+        expect(getByTestId("test-tabs")).toBeTruthy();
+      });
+
+      // THEN - Tab 1 should be disabled with correct attributes
+      await vi.waitFor(() => {
+        const tab1 = getByTestId("tab-1");
+        expect(tab1.element().getAttribute("aria-disabled")).toBe("true");
+        expect(tab1.element().getAttribute("aria-selected")).toBe("false");
+        expect(tab1.element().getAttribute("tabindex")).toBe("-1");
+      });
+
+      // THEN - Tab 2 should be active (since Tab 1 is disabled)
+      await vi.waitFor(() => {
+        const tab2 = getByTestId("tab-2");
+        expect(tab2.element().getAttribute("aria-selected")).toBe("true");
+        expect(tab2.element().getAttribute("tabindex")).toBe("0");
+        // Content 2 should be visible
+        expect(getByText("Content 2 - This SHOULD be visible on load")).toBeTruthy();
+      });
+
+      // WHEN - Press arrow right to move to Tab 3
+      const tab2 = getByTestId("tab-2");
+      tab2.element().focus();
+      await tab2.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+
+      // THEN - Tab 3 should be active
+      await vi.waitFor(() => {
+        const tab3 = getByTestId("tab-3");
+        expect(tab3.element().getAttribute("aria-selected")).toBe("true");
+        expect(tab3.element().getAttribute("tabindex")).toBe("0");
+        // Content 3 should be visible
+        expect(getByText("Content 3")).toBeTruthy();
+      });
+
+      // WHEN - Press arrow right again (should skip Tab 1 and go to Tab 2)
+      const tab3 = getByTestId("tab-3");
+      await tab3.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+
+      // THEN - Tab 2 should be active (Tab 1 is skipped because it's disabled)
+      await vi.waitFor(() => {
+        const tab2After = getByTestId("tab-2");
+        expect(tab2After.element().getAttribute("aria-selected")).toBe("true");
+        expect(tab2After.element().getAttribute("tabindex")).toBe("0");
+        // Content 2 should be visible again
+        expect(getByText("Content 2 - This SHOULD be visible on load")).toBeTruthy();
+      });
+    });
+
+    it("should skip disabled tab when navigating with arrow left", async () => {
+      // GIVEN - Tab 2 is disabled
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="Tab 1">
+              <p>Content 1</p>
+            </GoabTab>
+            <GoabTab heading="Tab 2 (disabled)" disabled>
+              <p>Content 2 - This should NOT be visible</p>
+            </GoabTab>
+            <GoabTab heading="Tab 3">
+              <p>Content 3</p>
+            </GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByTestId, getByText } = render(<Component />);
+
+      // Wait for component to fully render
+      await vi.waitFor(() => {
+        expect(getByTestId("test-tabs")).toBeTruthy();
+      });
+
+      // THEN - Tab 1 should be active initially
+      await vi.waitFor(() => {
+        const tab1 = getByTestId("tab-1");
+        expect(tab1.element().getAttribute("aria-selected")).toBe("true");
+      });
+
+      // Navigate to Tab 3 first (skip Tab 2 which is disabled)
+      const tab1 = getByTestId("tab-1");
+      tab1.element().focus();
+      await tab1.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+
+      // THEN - Tab 3 should be active (Tab 2 is skipped)
+      await vi.waitFor(() => {
+        const tab3 = getByTestId("tab-3");
+        expect(tab3.element().getAttribute("aria-selected")).toBe("true");
+        expect(getByText("Content 3")).toBeTruthy();
+      });
+
+      // WHEN - Press arrow left (should skip Tab 2 and go to Tab 1)
+      const tab3 = getByTestId("tab-3");
+      await tab3.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+
+      // THEN - Tab 1 should be active (Tab 2 is skipped)
+      await vi.waitFor(() => {
+        const tab1After = getByTestId("tab-1");
+        expect(tab1After.element().getAttribute("aria-selected")).toBe("true");
+        expect(getByText("Content 1")).toBeTruthy();
+      });
+    });
+  });
 });
+

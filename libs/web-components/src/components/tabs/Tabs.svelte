@@ -39,6 +39,37 @@
   // Functions
   // =========
 
+  function getFirstEnabledTab(): number {
+    for (let i = 0; i < _tabProps.length; i++) {
+      if (!_tabProps[i].disabled) {
+        return i + 1;
+      }
+    }
+    return 1;
+  }
+
+  function isTabDisabled(tabIndex: number): boolean {
+    const index = tabIndex - 1;
+    return index >= 0 && index < _tabProps.length && _tabProps[index].disabled;
+  }
+
+  function findNextEnabledTab(currentIndex: number, direction: "left" | "right"): number {
+    const totalTabs = _tabProps.length;
+    let nextIndex = currentIndex;
+
+    for (let i = 0; i < totalTabs; i++) {
+      nextIndex += direction === "right" ? 1 : -1;
+
+      if (nextIndex > totalTabs) nextIndex = 1;
+      if (nextIndex < 1) nextIndex = totalTabs;
+
+      if (!isTabDisabled(nextIndex)) {
+        return nextIndex;
+      }
+    }
+    return currentIndex;
+  }
+
   function getTabIndexFromHash() {
     // We need to see the full hash in order to open the correct tab and scroll down to the anchor if there is
     const fullHash = window.location.href.split("#").slice(1).join("#"); // Ex: tab-1#example1
@@ -81,7 +112,14 @@
           // It will help prevent scrolling to tabs if it is located in the bottom of the page
           if (tabIndexFromHash == null && initialtab === -1) return;
 
-          setCurrentTab(tabIndexFromHash ?? (initialtab || 1));
+          let targetTab = tabIndexFromHash ?? (initialtab || 1);
+
+          // If target tab is disabled, find first enabled tab
+          if (isTabDisabled(targetTab)) {
+            targetTab = getFirstEnabledTab();
+          }
+
+          setCurrentTab(targetTab);
           _initialLoad = false;
         }
       }, 1);
@@ -133,8 +171,19 @@
       link.setAttribute("data-testid", `tab-${index + 1}`);
       link.setAttribute("role", "tab");
       link.setAttribute("href", `${path}${search}#${tabSlug}`);
-      link.addEventListener("click", () => setCurrentTab(index + 1));
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
+
+      // Handle disabled state
+      if (tabProps.disabled) {
+        link.setAttribute("aria-disabled", "true");
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+      } else {
+        link.addEventListener("click", () => setCurrentTab(index + 1));
+      }
+
       link.appendChild(headingEl);
 
       _tabsEl?.appendChild(link);
@@ -152,7 +201,9 @@
   function handleHashChange() {
     const tabIndexFromHash = getTabIndexFromHash();
     if (tabIndexFromHash !== null && tabIndexFromHash !== _currentTab) {
-      setCurrentTab(tabIndexFromHash);
+      if (!isTabDisabled(tabIndexFromHash)) {
+        setCurrentTab(tabIndexFromHash);
+      }
     }
   }
 
@@ -247,28 +298,26 @@
     switch (e.key) {
       case "ArrowUp":
       case "ArrowLeft":
-        if (_currentTab === 1) {
-          setCurrentTab(_tabProps.length);
-        } else {
-          setCurrentTab(_currentTab - 1);
-        }
+        setCurrentTab(findNextEnabledTab(_currentTab, "left"));
         isHandled = true;
         break;
       case "ArrowDown":
       case "ArrowRight":
-        if (_currentTab === _tabProps.length) {
-          setCurrentTab(1);
-        } else {
-          setCurrentTab(_currentTab + 1);
-        }
+        setCurrentTab(findNextEnabledTab(_currentTab, "right"));
         isHandled = true;
         break;
       case "Home":
-        setCurrentTab(1);
+        setCurrentTab(getFirstEnabledTab());
         isHandled = true;
         break;
       case "End":
-        setCurrentTab(_tabProps.length);
+        // Find last enabled tab
+        for (let i = _tabProps.length; i >= 1; i--) {
+          if (!isTabDisabled(i)) {
+            setCurrentTab(i);
+            break;
+          }
+        }
         isHandled = true;
         break;
       default:
@@ -329,8 +378,15 @@
     outline: var(--goa-tab-border-focus);
   }
 
-  :global([role="tab"]:hover:not([aria-selected="true"])) {
+  :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
     color: var(--goa-tab-color-text-hover, var(--goa-tab-text-color));
+  }
+
+  /* Disabled tab styles */
+  :global([role="tab"][aria-disabled="true"]) {
+    color: var(--goa-color-greyscale-400, #949494);
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   :global([role="tabpanel"]:focus-visible) {
@@ -355,8 +411,12 @@
     :global([role="tab"][aria-selected="true"]) {
       border-bottom: var(--goa-tab-border-selected);
     }
-    :global([role="tab"]:hover:not([aria-selected="true"])) {
+    :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
       border-bottom: var(--goa-tab-border-hover);
+    }
+
+    :global([role="tab"][aria-disabled="true"]) {
+      border-bottom: var(--goa-tab-border-not-selected);
     }
   }
 
@@ -381,9 +441,13 @@
       border-left: var(--goa-tab-border-selected);
       background: var(--goa-tab-color-bg-selected-small-screen);
     }
-    :global([role="tab"]:hover:not([aria-selected="true"])) {
+    :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
       border-left: var(--goa-tab-border-hover);
       background: var(--goa-tab-color-bg-hover-small-screen, transparent);
+    }
+
+    :global([role="tab"][aria-disabled="true"]) {
+      border-left: var(--goa-tab-border-not-selected);
     }
   }
 
@@ -395,7 +459,7 @@
     border-radius: var(--goa-border-radius-xs);
   }
 
-  .v2 :global([role="tab"]:hover:not([aria-selected="true"])) {
+  .v2 :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
     border-bottom: none; /* Remove V1 border on hover */
   }
 
@@ -418,7 +482,7 @@
     .v2 :global([role="tab"][aria-selected="true"]::after) {
       background: var(--goa-tab-indicator-color-active, #0070C4);
     }
-    .v2 :global([role="tab"]:hover:not([aria-selected="true"])::after) {
+    .v2 :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])::after) {
       background: var(--goa-tab-indicator-color-hover, #DCDCDC);
     }
   }
@@ -442,7 +506,7 @@
     .v2 :global([role="tab"][aria-selected="true"]::after) {
       background: var(--goa-tab-indicator-color-active, #0070C4);
     }
-    .v2 :global([role="tab"]:hover:not([aria-selected="true"])::after) {
+    .v2 :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])::after) {
       background: var(--goa-tab-indicator-color-hover, #DCDCDC);
     }
   }

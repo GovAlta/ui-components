@@ -1,11 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, OnInit, ChangeDetectorRef } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, TemplateRef, OnInit, ChangeDetectorRef, booleanAttribute } from "@angular/core";
 import { NgTemplateOutlet, CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-tab",
   template: `
-    <goa-tab *ngIf="isReady">
+    <goa-tab *ngIf="isReady" [attr.disabled]="disabled || null">
       <ng-content />
       <div slot="heading">
         <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
@@ -19,6 +19,7 @@ import { NgTemplateOutlet, CommonModule } from "@angular/common";
 export class GoabTab implements OnInit {
   isReady = false;
   @Input() heading!: string | TemplateRef<any>;
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
