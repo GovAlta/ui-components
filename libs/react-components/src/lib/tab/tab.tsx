@@ -1,6 +1,7 @@
 import type { JSX } from "react";
 interface WCProps {
   heading?: React.ReactNode;
+  disabled?: string;
 }
 
 declare module "react" {
@@ -14,12 +15,13 @@ declare module "react" {
 
 export interface GoabTabItemProps {
   heading?: React.ReactNode;
+  disabled?: boolean;
   children?: React.ReactNode;
 }
 
-export function GoabTab({ heading, children }: GoabTabItemProps): JSX.Element {
+export function GoabTab({ heading, disabled, children }: GoabTabItemProps): JSX.Element {
   return (
-    <goa-tab>
+    <goa-tab disabled={disabled ? "true" : undefined}>
       {heading && <span slot="heading">{heading}</span>}
       {children}
     </goa-tab>

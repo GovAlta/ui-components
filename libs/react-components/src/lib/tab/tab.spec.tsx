@@ -17,4 +17,37 @@ describe("GoabTab", () => {
     const content = container.querySelector("p");
     expect(content?.innerHTML).toContain("Lorem ipsum dolor sit amet");
   });
+
+  it("should render with disabled attribute when disabled is true", () => {
+    const { container } = render(
+      <GoabTab heading="Disabled Tab" disabled>
+        <p>Disabled content</p>
+      </GoabTab>,
+    );
+    const tab = container.querySelector("goa-tab");
+    expect(tab).toBeTruthy();
+    expect(tab?.getAttribute("disabled")).toBe("true");
+  });
+
+  it("should not have disabled attribute when disabled is false", () => {
+    const { container } = render(
+      <GoabTab heading="Enabled Tab" disabled={false}>
+        <p>Enabled content</p>
+      </GoabTab>,
+    );
+    const tab = container.querySelector("goa-tab");
+    expect(tab).toBeTruthy();
+    expect(tab?.getAttribute("disabled")).toBeNull();
+  });
+
+  it("should not have disabled attribute when disabled is not provided", () => {
+    const { container } = render(
+      <GoabTab heading="Default Tab">
+        <p>Default content</p>
+      </GoabTab>,
+    );
+    const tab = container.querySelector("goa-tab");
+    expect(tab).toBeTruthy();
+    expect(tab?.getAttribute("disabled")).toBeNull();
+  });
 });
