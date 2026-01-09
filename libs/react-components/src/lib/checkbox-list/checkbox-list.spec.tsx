@@ -90,9 +90,11 @@ describe("GoabCheckboxList (React)", () => {
     const el = document.querySelector("goa-checkbox-list");
     expect(el).toBeTruthy();
 
+    const changeEvent = new Event("change");
     const detail: GoabCheckboxListOnChangeDetail = {
       name: "foo",
       value: ["x", "y"],
+      event: changeEvent,
     };
 
     el &&
@@ -104,7 +106,9 @@ describe("GoabCheckboxList (React)", () => {
       );
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(detail);
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({ ...detail, event: expect.any(Event) }),
+    );
   });
 
   it("should update onChange handler when prop changes", () => {

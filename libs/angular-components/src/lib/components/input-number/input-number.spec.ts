@@ -191,9 +191,11 @@ describe("GoabInputNumber", () => {
 
     const validateOnChange = jest.spyOn(component, "onChange");
     const testValue = "99.9";
+    const changeEvent = new Event("input");
     const expectedDetail: GoabInputOnChangeDetail = {
       name: component.name,
       value: testValue,
+      event: changeEvent,
     };
 
     fireEvent(

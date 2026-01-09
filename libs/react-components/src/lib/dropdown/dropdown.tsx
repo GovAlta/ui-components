@@ -100,7 +100,7 @@ export function GoabDropdown({
     const current = el.current;
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<GoabDropdownOnChangeDetail>).detail;
-      onChange?.(detail);
+      onChange?.({ ...detail, event: e });
     };
     if (onChange) {
       current.addEventListener("_change", handler);

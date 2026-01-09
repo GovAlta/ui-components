@@ -124,9 +124,11 @@ describe("GoabCheckboxList", () => {
       By.css("goa-checkbox-list"),
     ).nativeElement;
 
+    const changeEvent = new Event("change");
     const detail: GoabCheckboxListOnChangeDetail = {
       name: "fruits",
       value: ["apple", "banana"],
+      event: changeEvent,
     };
 
     fireEvent(
@@ -205,22 +207,30 @@ describe("GoabCheckboxList", () => {
     ).nativeElement;
 
     // First change
+    const changeEvent1 = new Event("change");
     const detail1: GoabCheckboxListOnChangeDetail = {
       name: "fruits",
       value: ["apple"],
+      event: changeEvent1,
     };
 
     fireEvent(el, new CustomEvent("_change", { detail: detail1 }));
-    expect(onChangeSpy).toHaveBeenCalledWith(detail1);
+    expect(onChangeSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ ...detail1, event: expect.any(Event) }),
+    );
 
     // Second change
+    const changeEvent2 = new Event("change");
     const detail2: GoabCheckboxListOnChangeDetail = {
       name: "fruits",
       value: ["apple", "banana"],
+      event: changeEvent2,
     };
 
     fireEvent(el, new CustomEvent("_change", { detail: detail2 }));
-    expect(onChangeSpy).toHaveBeenCalledWith(detail2);
+    expect(onChangeSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ ...detail2, event: expect.any(Event) }),
+    );
     expect(onChangeSpy).toHaveBeenCalledTimes(2);
   });
 });

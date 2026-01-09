@@ -1,0 +1,106 @@
+<goab-form-item label="Input (test onChange, onFocus, onBlur, onKeyPress)" mb="l">
+  <goab-input
+    name="demo-input"
+    placeholder="Type here"
+    (onChange)="handleInputChange($event)"
+    (onFocus)="handleInputFocus($event)"
+    (onBlur)="handleInputBlur($event)"
+    (onKeyPress)="handleInputKeyPress($event)"
+  />
+</goab-form-item>
+
+<goab-form-item label="Checkbox (test onChange)" mb="l">
+  <goab-checkbox
+    name="demo-checkbox"
+    text="Accept terms"
+    (onChange)="handleCheckboxChange($event)"
+  />
+</goab-form-item>
+
+<goab-form-item label="Checkbox List (test onChange)" mb="l">
+  <goab-checkbox-list
+    name="demo-checkbox-list"
+    (onChange)="handleCheckboxListChange($event)"
+  >
+    <goab-checkbox name="demo-checkbox-list-1" text="Option 1" value="option1" />
+    <goab-checkbox name="demo-checkbox-list-2" text="Option 2" value="option2" />
+    <goab-checkbox name="demo-checkbox-list-3" text="Option 3" value="option3" />
+  </goab-checkbox-list>
+</goab-form-item>
+
+<goab-form-item label="Date Picker (test onChange)">
+  <goab-date-picker
+    name="demo-date"
+    width="20ch"
+    (onChange)="handleDatePickerChange($event)"
+  />
+</goab-form-item>
+
+<goab-form-item label="Dropdown (test onChange)" mb="l">
+  <goab-dropdown
+    name="demo-dropdown"
+    placeholder="Select an option"
+    (onChange)="handleDropdownChange($event)"
+  >
+    <goab-dropdown-item value="one" label="Option One"></goab-dropdown-item>
+    <goab-dropdown-item value="two" label="Option Two"></goab-dropdown-item>
+    <goab-dropdown-item value="three" label="Option Three"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+
+<goab-form-item label="File Upload (test onSelectFile)" mb="l">
+  <goab-file-upload-input
+    variant="button"
+    accept=".txt"
+    (onSelectFile)="handleFileSelect($event)"
+  />
+</goab-form-item>
+
+<goab-form-item label="Radio (test onChange)" mb="l">
+  <goab-radio-group name="demo-radio" (onChange)="handleRadioGroupChange($event)">
+    <goab-radio-item name="demo-radio" value="a" label="Option A"></goab-radio-item>
+    <goab-radio-item name="demo-radio" value="b" label="Option B"></goab-radio-item>
+    <goab-radio-item name="demo-radio" value="c" label="Option C"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<goab-form-item label="Text Area (test onChange, onKeyPress, onBlur)" mb="l">
+  <goab-textarea
+    name="demo-textarea"
+    placeholder="Enter multi-line text"
+    (onChange)="handleTextareaChange($event)"
+    (onKeyPress)="handleTextareaKeyPress($event)"
+    (onBlur)="handleTextareaBlur($event)"
+  />
+</goab-form-item>
+
+<goab-text tag="h1">Testing #2977 Issue</goab-text>
+<goab-text tag="p">
+  Tab 1 input should not fire the Tab onChange. Tab 2 and 3 will fire the Tab onChange.
+</goab-text>
+<goab-tabs (onChange)="handleTabsChange($event)">
+  <goab-tab heading="Tab 1 - stopPropagation">
+    <goab-text tag="p">Type here to confirm onChange can stop bubbling.</goab-text>
+    <goab-input
+      name="tab1-input"
+      placeholder="Tab 1 input"
+      (onChange)="handleTabInputOne($event)"
+    />
+  </goab-tab>
+  <goab-tab heading="Tab 2 - normal bubbling">
+    <goab-text tag="p">Type here to see bubbling continue.</goab-text>
+    <goab-input
+      name="tab2-input"
+      placeholder="Tab 2 input"
+      (onChange)="handleTabInputTwo($event)"
+    />
+  </goab-tab>
+  <goab-tab heading="Tab 3 - normal bubbling">
+    <goab-text tag="p">Type here to see bubbling continue.</goab-text>
+    <goab-input
+      name="tab3-input"
+      placeholder="Tab 3 input"
+      (onChange)="handleTabInputThree($event)"
+    />
+  </goab-tab>
+</goab-tabs>

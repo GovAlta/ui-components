@@ -75,7 +75,7 @@ export function GoabDatePicker({
 
     const handleChange = (e: Event) => {
       const detail = (e as CustomEvent<GoabDatePickerOnChangeDetail>).detail;
-      onChange?.(detail);
+      onChange?.({ ...detail, event: e });
     };
 
     if (onChange) {
