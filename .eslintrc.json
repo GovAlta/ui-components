@@ -10,7 +10,7 @@
           "error",
           {
             "enforceBuildableLibDependency": false,
-            "allow": [],
+            "allow": ["^@abgov/web-components$", "^@abgov/style$"],
             "depConstraints": [
               {
                 "sourceTag": "*",
