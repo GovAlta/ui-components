@@ -172,7 +172,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
 
   _onChange(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoabInputOnChangeDetail>).detail;
+    const detail = { ...(e as CustomEvent<GoabInputOnChangeDetail>).detail, event: e };
     this.onChange.emit(detail);
 
     this.fcChange?.(detail.value);
@@ -180,7 +180,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
 
   _onKeyPress(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoabInputOnKeyPressDetail>).detail;
+    const detail = { ...(e as CustomEvent<GoabInputOnKeyPressDetail>).detail, event: e };
     this.onKeyPress.emit(detail);
 
     this.fcTouched?.();
@@ -188,12 +188,12 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
 
   _onFocus(e: Event) {
     this.markAsTouched();
-    const detail = (e as CustomEvent<GoabInputOnFocusDetail>).detail;
+    const detail = { ...(e as CustomEvent<GoabInputOnFocusDetail>).detail, event: e };
     this.onFocus.emit(detail);
   }
 
   _onBlur(e: Event) {
-    const detail = (e as CustomEvent<GoabInputOnBlurDetail>).detail;
+    const detail = { ...(e as CustomEvent<GoabInputOnBlurDetail>).detail, event: e };
     this.onBlur.emit(detail);
   }
 

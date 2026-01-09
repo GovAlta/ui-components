@@ -55,6 +55,7 @@ describe("DatePicker", () => {
   it("should handle event", async () => {
     const name = "foo";
     const value = new Date();
+    const changeEvent = new Event("change");
 
     const onChange = vi.fn();
     const { baseElement } = render(
@@ -67,21 +68,22 @@ describe("DatePicker", () => {
       new CustomEvent("_change", {
         composed: true,
         bubbles: true,
-        detail: { type: "date", name, value },
+        detail: { type: "date", name, value, event: changeEvent },
       }),
     );
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toBeCalledWith({ name, value, type: "date" });
+    expect(onChange).toBeCalledWith({
+      name,
+      value,
+      type: "date",
+      event: expect.any(Event),
+    });
   });
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <DatePicker
-        name="test"
-        onChange={noop}
-        data-grid="cell"
-      />
+      <DatePicker name="test" onChange={noop} data-grid="cell" />,
     );
     const el = baseElement.querySelector("goa-date-picker");
     expect(el?.getAttribute("data-grid")).toBe("cell");

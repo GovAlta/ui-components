@@ -57,7 +57,7 @@ export function GoabCheckboxList({
     const listener = (e: Event) => {
       try {
         const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
-        onChange?.(detail);
+        onChange?.({ ...detail, event: e });
       } catch (error) {
         console.error("Error handling checkbox list change:", error);
       }

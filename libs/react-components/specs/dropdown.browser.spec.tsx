@@ -81,10 +81,13 @@ describe("Dropdown", () => {
 
       // Result
 
-      expect(handleChange).toBeCalledWith({
-        name: "favcolor",
-        value: "red",
-      })
+      await vi.waitFor(() => {
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        const detail = handleChange.mock.calls[0][0];
+        expect(detail.name).toEqual("favcolor");
+        expect(detail.value).toEqual("red");
+        expect(detail.event).toBeInstanceOf(Event);
+      });
     });
 
     describe("Width", () => {

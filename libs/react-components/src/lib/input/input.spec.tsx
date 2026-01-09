@@ -149,10 +149,13 @@ describe("Input", () => {
         inputElement,
         new CustomEvent("_change", { detail: { name: "dateInput", value: newDate } }),
       );
-    expect(mockOnChangeHandler).toBeCalledWith({
-      name: "dateInput",
-      value: new Date(newDate),
-    });
+    expect(mockOnChangeHandler).toBeCalledWith(
+      expect.objectContaining({
+        name: "dateInput",
+        value: new Date(newDate),
+        event: expect.any(Event),
+      }),
+    );
   });
 
   it("should handle decimal number for GoabInputNumber", () => {
@@ -171,10 +174,13 @@ describe("Input", () => {
           detail: { name: "numberInput", value: decimalValue },
         }),
       );
-    expect(mockOnChangeHandler).toBeCalledWith({
-      name: "numberInput",
-      value: decimalValue,
-    });
+    expect(mockOnChangeHandler).toBeCalledWith(
+      expect.objectContaining({
+        name: "numberInput",
+        value: decimalValue,
+        event: expect.any(Event),
+      }),
+    );
   });
 
   describe("Text Alignment", () => {

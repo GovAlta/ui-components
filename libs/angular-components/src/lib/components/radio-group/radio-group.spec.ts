@@ -160,13 +160,16 @@ describe("GoABRadioGroup", () => {
 
   it("should dispatch onChange", () => {
     const onChange = jest.spyOn(component, "onChange");
+    const changeEvent = new Event("change");
 
     const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
     fireEvent(radioGroup, new CustomEvent("_change", {
-      detail: {"name": component.name, value: component.options[0].value}
+      detail: { name: component.name, value: component.options[0].value, event: changeEvent }
     }));
 
-    expect(onChange).toBeCalledWith({name: component.name, value: component.options[0].value});
+    expect(onChange).toBeCalledWith(
+      expect.objectContaining({ name: component.name, value: component.options[0].value, event: expect.any(Event) }),
+    );
   });
 
   describe("writeValue", () => {
