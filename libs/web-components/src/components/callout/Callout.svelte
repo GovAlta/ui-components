@@ -136,7 +136,7 @@
   .notification {
     display: flex;
     align-items: stretch;
-    overflow: hidden;
+    overflow: visible;
     font: var(--goa-callout-l-text-size);
     border: var(--goa-callout-l-border-width) solid;
     border-radius: var(--goa-callout-border-radius);

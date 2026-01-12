@@ -36,6 +36,7 @@ import { Bug3118Route } from "./routes/bugs/bug3118";
 import { Bug3201Route } from "./routes/bugs/bug3201";
 import { Bug3215Route } from "./routes/bugs/bug3215";
 import { Bug3248Route } from "./routes/bugs/bug3248";
+import { Bug3323Route } from "./routes/bugs/bug3323";
 
 import { EverythingRoute } from "./routes/everything";
 import Feat1383Route from "./routes/features/feat1383";
@@ -95,6 +96,7 @@ root.render(
           <Route path="bugs/3201" element={<Bug3201Route />} />
           <Route path="bugs/3215" element={<Bug3215Route />} />
           <Route path="bugs/3248" element={<Bug3248Route />} />
+          <Route path="bugs/3323" element={<Bug3323Route />} />
 
           <Route path="features/1383" element={<Feat1383Route />} />
           <Route path="features/1547" element={<Feat1547Route />} />
