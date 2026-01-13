@@ -1,0 +1,90 @@
+{
+  "componentSlug": "link-button",
+  "extractedFrom": "libs/web-components/src/components/link-button/LinkButton.svelte",
+  "extractedAt": "2026-01-05T23:10:27.451Z",
+  "props": [
+    {
+      "name": "color",
+      "type": "\"interactive\" | \"light\"",
+      "values": [
+        "interactive",
+        "light"
+      ],
+      "required": false,
+      "default": "interactive",
+      "description": "Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": true,
+      "default": null,
+      "description": "Icon displayed before the button text."
+    },
+    {
+      "name": "trailingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": true,
+      "default": null,
+      "description": "Icon displayed after the button text."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_click",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

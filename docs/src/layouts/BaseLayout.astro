@@ -1,0 +1,232 @@
+---
+// Import v2 design tokens and web component styles
+import '@abgov/web-components/index.css';
+import '@design-tokens/tokens.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Sidebar width init - runs before body to prevent layout shift -->
+  <script is:inline>
+    (function() {
+      var MOBILE = 624, EXPANDED = 280, COLLAPSED = 72;
+      var w;
+      if (window.innerWidth < MOBILE) {
+        w = 0;
+      } else {
+        var saved = localStorage.getItem('goa-ds-menu-open');
+        var isOpen = saved === null ? true : saved === 'true';
+        w = isOpen ? EXPANDED : COLLAPSED;
+      }
+      document.documentElement.style.setProperty('--sidebar-width', w + 'px');
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} - GoA Design System</title>
+  {description && <meta name="description" content={description} />}
+
+  <!-- GoA Web Components JavaScript (registers custom elements) -->
+  <script>
+    import '@abgov/web-components';
+  </script>
+
+  <!-- Ionicons CDN (required for GoabIcon) -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Mobile bridge: bridges React menu state to page-level CSS -->
+  <script>
+    import '../scripts/mobile-bridge.ts';
+  </script>
+
+  <style is:global>
+    /* GoA Design System CSS Custom Properties */
+    :root {
+      --goa-color-brand: #0070c4;
+      --goa-color-brand-dark: #004f8a;
+      --goa-color-text: #333;
+      --goa-color-text-secondary: #666;
+      --goa-color-border: #ddd;
+      --goa-color-background-light: #f5f5f5;
+      --goa-color-success: #2e7d32;
+      --goa-color-error: #d32f2f;
+      --goa-color-warning: #ed6c02;
+      --goa-color-info: #0288d1;
+
+      /* Spacing tokens */
+      --goa-space-3xs: 0.125rem;
+      --goa-space-2xs: 0.25rem;
+      --goa-space-xs: 0.5rem;
+      --goa-space-s: 0.75rem;
+      --goa-space-m: 1rem;
+      --goa-space-l: 1.5rem;
+      --goa-space-xl: 2rem;
+      --goa-space-2xl: 3rem;
+      --goa-space-3xl: 4rem;
+
+      /* Border radius */
+      --goa-radius-s: 4px;
+      --goa-radius-m: 8px;
+      --goa-radius-l: 12px;
+
+      /* Typography */
+      --goa-font-family: 'acumin-pro-semi-condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --goa-font-family-mono: 'SF Mono', Monaco, 'Courier New', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Reset margin but NOT padding - padding resets break component internals and slots */
+    *:where(:not([slot])) {
+      margin: 0;
+    }
+
+    html {
+      color-scheme: light;
+    }
+
+    body {
+      font-family: var(--goa-font-family);
+      line-height: 1.6;
+      color: var(--goa-color-text);
+      background: #fff;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    code {
+      background: var(--goa-color-background-light);
+      padding: 0.2em 0.4em;
+      border-radius: var(--goa-radius-s);
+      font-family: var(--goa-font-family-mono);
+      font-size: 0.9em;
+    }
+
+    pre code {
+      display: block;
+      padding: var(--goa-space-m);
+      overflow-x: auto;
+    }
+
+    a {
+      color: var(--goa-color-brand);
+    }
+
+    a:hover {
+      color: var(--goa-color-brand-dark);
+    }
+
+    /* Focus styles for accessibility */
+    :focus-visible {
+      outline: 2px solid var(--goa-color-brand);
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       Mobile Bridge: Base styles for responsive behavior
+       Uses body attributes set by mobile-bridge.ts script
+       ========================================================================== */
+
+    /* Mobile header - hidden by default, shown on mobile */
+    .mobile-header-container {
+      display: none;
+    }
+
+    /* Mobile viewport (< 624px) - matches GoA component breakpoint */
+    body[data-mobile="true"] .mobile-header-container {
+      display: block;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 50;
+      padding: var(--goa-space-m) var(--goa-space-m); /* 16px vertical, 16px horizontal */
+      border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
+      /* Smooth transition for hide/show */
+      transform: translateY(0);
+      transition: transform 0.25s ease-out;
+    }
+
+    /* Header hidden on scroll down */
+    body[data-mobile="true"][data-header-hidden="true"] .mobile-header-container {
+      transform: translateY(-100%);
+    }
+
+    /* Mobile header content layout */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-header__left {
+      display: flex;
+      align-items: center;
+      gap: var(--goa-space-2xs);
+    }
+
+    .mobile-header__right {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Pull icons slightly toward edges for better visual alignment */
+    .mobile-header__left > goa-icon-button:first-child {
+      margin-left: -8px;
+    }
+
+    .mobile-header__right > goa-icon-button:last-child {
+      margin-right: -8px;
+    }
+
+    /* Brand link with logo and title */
+    .mobile-header__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--goa-space-xs);
+      text-decoration: none;
+    }
+
+    .mobile-header__brand:hover {
+      text-decoration: none;
+    }
+
+    .mobile-header__logo {
+      flex-shrink: 0;
+    }
+
+    .mobile-header__title {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--goa-color-text-default, #333);
+    }
+
+    /* Menu overlay backdrop when sidebar is open on mobile */
+    body[data-mobile="true"][data-menu-open="true"]::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 90;
+    }
+  </style>
+</head>
+<body>
+  <slot />
+</body>
+</html>

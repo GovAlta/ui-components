@@ -13,6 +13,12 @@
     "@abgov/react-components": "*",
     "@abgov/ui-components-common": "*",
     "@abgov/web-components": "*",
-    "@astrojs/mdx": "^4.3.13"
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/react": "^4.4.2",
+    "astro": "^5.16.6",
+    "flexsearch": "^0.7.43",
+    "highlight.js": "^11.11.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   }
 }

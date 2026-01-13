@@ -1,0 +1,37 @@
+{
+  "componentSlug": "spinner",
+  "extractedFrom": "libs/web-components/src/components/spinner/Spinner.svelte",
+  "extractedAt": "2026-01-05T23:10:27.460Z",
+  "props": [
+    {
+      "name": "size",
+      "type": "SpinnerSize",
+      "required": true,
+      "default": null,
+      "description": "Sets the size of the spinner."
+    },
+    {
+      "name": "invert",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, inverts colors for use on dark backgrounds."
+    },
+    {
+      "name": "progress",
+      "type": "number",
+      "required": false,
+      "default": "-1",
+      "description": "Progress value (0-100). When >= 0, shows a progress spinner instead of infinite."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

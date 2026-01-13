@@ -1,0 +1,51 @@
+<goa-form-item label="How would you like to be contacted?" helptext="Select one option">
+  <goa-radio-group name="contactMethod" id="radio-contact">
+    <goa-radio-item value="email" label="Email">
+      <div slot="reveal">
+        <goa-form-item label="Email address">
+          <goa-input name="email"></goa-input>
+        </goa-form-item>
+      </div>
+    </goa-radio-item>
+    <goa-radio-item value="phone" label="Phone">
+      <div slot="reveal">
+        <goa-form-item label="Phone number">
+          <goa-input name="phone"></goa-input>
+        </goa-form-item>
+      </div>
+    </goa-radio-item>
+    <goa-radio-item value="text" label="Text message">
+      <div slot="reveal">
+        <goa-form-item label="Mobile phone number">
+          <goa-input name="mobile"></goa-input>
+        </goa-form-item>
+      </div>
+    </goa-radio-item>
+  </goa-radio-group>
+</goa-form-item>
+
+<goa-form-item label="How would you like to be contacted?" mt="xl">
+  <goa-checkbox-list name="contactMethods">
+    <goa-checkbox name="emailContact" text="Email">
+      <div slot="reveal">
+        <goa-form-item label="Email address">
+          <goa-input name="emailInput"></goa-input>
+        </goa-form-item>
+      </div>
+    </goa-checkbox>
+    <goa-checkbox name="phoneContact" text="Phone">
+      <div slot="reveal">
+        <goa-form-item label="Phone number">
+          <goa-input name="phoneInput"></goa-input>
+        </goa-form-item>
+      </div>
+    </goa-checkbox>
+    <goa-checkbox name="textContact" text="Text message">
+      <div slot="reveal">
+        <goa-form-item label="Mobile phone number">
+          <goa-input name="mobileInput"></goa-input>
+        </goa-form-item>
+      </div>
+    </goa-checkbox>
+  </goa-checkbox-list>
+</goa-form-item>

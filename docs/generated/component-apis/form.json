@@ -1,0 +1,49 @@
+{
+  "componentSlug": "form",
+  "extractedFrom": "libs/web-components/src/components/form/Form.svelte",
+  "extractedAt": "2026-01-05T23:10:27.444Z",
+  "props": [
+    {
+      "name": "status",
+      "type": "\"initializing\" | \"complete\"",
+      "values": [
+        "initializing",
+        "complete"
+      ],
+      "required": false,
+      "default": "complete",
+      "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "[name] not set",
+      "description": "A name identifier for the form. Useful for debugging complex forms with multiple nested forms."
+    }
+  ],
+  "events": [
+    {
+      "name": "onInit",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_init",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

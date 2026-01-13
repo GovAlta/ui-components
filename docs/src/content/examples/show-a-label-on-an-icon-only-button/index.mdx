@@ -1,0 +1,36 @@
+---
+id: show-a-label-on-an-icon-only-button
+title: Show a label on an icon only button
+categories:
+  - inputs-and-actions
+scale: interaction
+userType: both
+tags:
+  - buttons
+  - icons
+  - accessibility
+  - tooltip
+components:
+  - icon-button
+  - tooltip
+  - button-group
+status: published
+---
+
+Show a label on an icon-only button using a tooltip to improve discoverability.
+
+## When to use
+
+Use this pattern when:
+- Using icon buttons without visible text labels
+- Users might not recognize what an icon means
+- You want to provide context for icon-only actions
+- Building toolbars or action bars with multiple icon buttons
+
+## Considerations
+
+- Always include an `ariaLabel` on icon buttons for screen reader accessibility
+- Tooltips provide visual context but should not be the only way to understand the action
+- Keep tooltip content short and descriptive
+- Group related icon buttons together using a button group
+- Consider using text labels instead of tooltips for critical actions

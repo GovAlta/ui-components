@@ -1,0 +1,153 @@
+{
+  "componentSlug": "radio-item",
+  "extractedFrom": "libs/web-components/src/components/radio-item/RadioItem.svelte",
+  "extractedAt": "2026-01-05T23:10:27.457Z",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The value of this radio option. Will be emitted when selected."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The name of the radio group. Inherited from the parent RadioGroup if not set."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The display label for this radio option. Falls back to value if not provided."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Additional description text displayed below the label."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disables this radio option."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Shows an error state on this radio option."
+    },
+    {
+      "name": "checked",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets this radio option as checked/selected."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Defines how this option will be announced by screen readers."
+    },
+    {
+      "name": "revealarialabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Text announced by screen readers when the reveal slot content is displayed."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Sets the maximum width of this radio item."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [
+    {
+      "name": "onRevealChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_revealChange",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onRadioItemChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_radioItemChange",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "description",
+      "description": ""
+    },
+    {
+      "name": "reveal",
+      "description": ""
+    }
+  ]
+}

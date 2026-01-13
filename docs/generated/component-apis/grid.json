@@ -1,0 +1,68 @@
+{
+  "componentSlug": "grid",
+  "extractedFrom": "libs/web-components/src/components/grid/Grid.svelte",
+  "extractedAt": "2026-01-05T23:10:27.447Z",
+  "props": [
+    {
+      "name": "gap",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "m",
+      "description": "Gap between child items"
+    },
+    {
+      "name": "minchildwidth",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "description": "Minimum width of the child elements"
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+---
+id: show-a-notification
+title: Show a notification
+categories:
+  - feedback-and-alerts
+scale: interaction
+userType: both
+tags:
+  - notification
+  - feedback
+  - success
+  - toast
+components:
+  - temporary-notification
+  - button
+status: published
+---
+
+Show a temporary notification to confirm an action was completed successfully.
+
+## When to use
+
+Use this pattern when:
+- Confirming that a save operation completed successfully
+- Providing immediate feedback after a user action
+- The notification should automatically dismiss after a few seconds
+- Users need non-intrusive confirmation of their action
+
+## Considerations
+
+- Use the `type` option to indicate the nature of the notification (success, information, etc.)
+- Import `TemporaryNotification` from `@abgov/ui-components-common`
+- Include a `<GoabTemporaryNotificationCtrl />` component in your app to render notifications
+- Keep notification messages concise and action-oriented
+- Notifications auto-dismiss after a default duration

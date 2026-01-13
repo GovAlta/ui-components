@@ -1,30 +1,346 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { GoabText } from "@abgov/react-components";
-import Search from '../components/Search';
+/**
+ * Home Page
+ *
+ * Landing page for the GoA Design System documentation site.
+ * Ported from ds-evo-website reference repo.
+ */
+import HomeLayout from '../layouts/HomeLayout.astro';
+import CardLite from '../components/CardLite.astro';
 ---
 
-<Layout title="GoA UI Components Documentation">
-  <main>
-    <h1>GoA UI Components Documentation</h1>
-    <GoabText tag="p">Welcome to the documentation for the Government of Alberta UI Components library.</GoabText>
-    <Search client:only />
-  </main>
-</Layout>
+<HomeLayout title="GoA Design System" description="Government of Alberta Design System documentation">
+  <!-- Hero Banner (gradient background) -->
+  <div class="ds-hero-banner">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img src="/images/home/hero-banner-graphic.svg" alt="" />
+      </div>
+      <div class="hero-text">
+        <h1>Introducing the New Design System</h1>
+        <p class="hero-description">
+          Build on the research and experience of other service teams by using the DDD components and templates.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (white background) -->
+  <section class="ds-main-content">
+    <div class="content-container">
+      <!-- CTA Section -->
+      <div class="cta-section">
+      <div class="cta-text">
+        <h2>Build your service using the design system</h2>
+        <p>
+          Our accessible, brand-compliant components and templates help you launch faster while staying aligned with the current standard.
+        </p>
+        <a href="/get-started" class="cta-link">
+          Start using the design system
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </a>
+      </div>
+      <div class="cta-image">
+        <img src="/images/home/splash-reel.png" alt="" />
+      </div>
+    </div>
+
+    <!-- Service Patterns -->
+    <h2 class="section-heading">Select your service pattern</h2>
+    <div class="card-grid two-col">
+      <CardLite
+        imageUrl="/images/home/public-form-thumb.png"
+        title="Public form"
+        description="A pattern optimized for clarity and error prevention for public-facing applications. It includes templates for page types: Start, Task list, Question, Review, and Result."
+        linkTo="/examples"
+      />
+      <CardLite
+        imageUrl="/images/home/workspace-thumb.png"
+        title="Workspace"
+        description="A pattern optimized for efficiently managing cases, records, and tasks. It includes layout, multiple data views, detail views, drawers, modals and notifications."
+        linkTo="/examples"
+      />
+    </div>
+
+    <!-- Research Tools -->
+    <h2 class="section-heading">Research tools</h2>
+    <p class="section-description">
+      Conduct research with your users to validate your design decisions. Test your assumptions, gather insights, and ensure your service meets real user needs.
+    </p>
+    <div class="card-grid three-col">
+      <CardLite
+        imageUrl="/images/home/primary-users-thumb.png"
+        title="Card sort"
+        description="Understand how users naturally group and label information in your service. Does your team share a mental model with your users?"
+        linkTo="/guidance"
+      />
+      <CardLite
+        imageUrl="/images/home/storyboard-thumb.png"
+        title="Test form content"
+        description="Turn your form designs into coded prototypes and test them with users rapidly. Are you asking the right questions to collect the information you need?"
+        linkTo="/guidance"
+      />
+      <CardLite
+        imageUrl="/images/home/main-pages-thumb.png"
+        title="Time on task"
+        description="Measure how long it takes users to complete key tasks in your service. Are your users working efficiently or struggling?"
+        linkTo="/guidance"
+      />
+    </div>
+
+    <!-- Understand Your Service -->
+    <h2 class="section-heading">Understand your service</h2>
+    <p class="section-description">
+      Complete activities to better understand the service you are designing for. Identify common users, pages, and service types within your digital service.
+    </p>
+    <div class="card-grid three-col">
+      <CardLite
+        imageUrl="/images/home/primary-users-thumb.png"
+        title="Identify the primary users and their main tasks"
+        description="Share the primary users and their main tasks in your digital service. Do you know your users?"
+        linkTo="/guidance"
+      />
+      <CardLite
+        imageUrl="/images/home/storyboard-thumb.png"
+        title="Identify the main pages"
+        description="Share the most used pages from your digital service. What page or pages define your service?"
+        linkTo="/guidance"
+      />
+      <CardLite
+        imageUrl="/images/home/main-pages-thumb.png"
+        title="Create a short storyboard"
+        description="You can only use 3 pages from your product to make a storyboard of your digital service, what do you show?"
+        linkTo="/guidance"
+      />
+    </div>
+    </div>
+  </section>
+</HomeLayout>
 
 <style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 1440px;
-    font-size: 20px;
-    line-height: 1.6;
+  /* Hero Banner - Gradient background */
+  .ds-hero-banner {
+    width: 100%;
+    min-height: 700px;
+    border-radius: 24px 24px 0 0;
+    display: grid;
+    align-items: center;
+    background: transparent url('data:image/svg+xml,<svg width="1648" height="781" viewBox="0 0 1648 781" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_1517_286086)"><rect x="1648" y="845" width="1879" height="945" transform="rotate(-180 1648 845)" fill="%23C2C6FF"/><g opacity="0.5" filter="url(%23filter0_f_1517_286086)"><path fill-rule="evenodd" clip-rule="evenodd" d="M1196.45 365.558C1188.21 312.168 1202.23 254.749 1235.75 212.43C1268.61 170.928 1321.94 153.384 1373.56 141.92C1421.12 131.357 1468.32 139.67 1515.89 150.211C1568.93 161.964 1627.14 167.044 1664.64 206.422C1704.39 248.161 1727.18 308.194 1720.99 365.558C1715.05 420.645 1668.92 459.557 1632.8 501.515C1599.99 539.646 1569.64 583.827 1521.3 597.589C1473.73 611.134 1423.59 594.294 1378.51 573.92C1337.36 555.326 1307.98 521.774 1278.24 487.745C1245.2 449.921 1204.12 415.242 1196.45 365.558Z" fill="%230B538F"/></g><g opacity="0.7" filter="url(%23filter1_f_1517_286086)"><path fill-rule="evenodd" clip-rule="evenodd" d="M917.914 620.256C913.377 551.745 895.818 473.376 939.582 420.487C983.1 367.894 1063.8 375.681 1130.84 362.933C1188.3 352.007 1247.63 329.19 1301.64 351.642C1354.15 373.466 1370.86 436.662 1409.22 478.646C1454.78 528.501 1543.24 552.817 1547.1 620.256C1550.92 687.047 1475.47 729.013 1426.12 774.148C1386.34 810.521 1338.2 829.568 1290.59 854.823C1230.06 886.926 1177.57 952.88 1109.97 941.85C1041.93 930.752 1000.18 860.881 964.823 801.679C931.996 746.711 922.144 684.148 917.914 620.256Z" fill="%2395C1ED"/></g><g opacity="0.5" filter="url(%23filter2_f_1517_286086)"><path fill-rule="evenodd" clip-rule="evenodd" d="M429.444 471.928C416.094 539.278 412.771 619.522 356.81 659.282C301.162 698.82 225.233 670.412 157.174 665.374C98.8424 661.056 35.6302 667.739 -10.7327 632.073C-55.8007 597.402 -55.5851 532.035 -81.7755 481.552C-112.876 421.605 -192.032 375.222 -178.301 309.083C-164.703 243.579 -80.97 222.569 -21.6132 191.747C26.2215 166.908 77.6573 160.971 130.181 148.899C196.949 133.554 264.721 83.4331 327.17 111.585C390.012 139.913 412.262 218.211 431.089 284.546C448.57 346.137 441.894 409.118 429.444 471.928Z" fill="%23D2EBFE"/></g><g opacity="0.5" filter="url(%23filter3_f_1517_286086)"><path fill-rule="evenodd" clip-rule="evenodd" d="M989.245 128.067C984.708 59.556 967.149 -18.8139 1010.91 -71.7029C1054.43 -124.296 1135.13 -116.509 1202.17 -129.257C1259.63 -140.183 1318.96 -162.999 1372.97 -140.547C1425.48 -118.723 1442.19 -55.5271 1480.55 -13.5434C1526.11 36.3119 1614.57 60.6273 1618.43 128.067C1622.25 194.858 1546.81 236.824 1497.45 281.958C1457.67 318.331 1409.53 337.379 1361.92 362.633C1301.4 394.737 1248.91 460.69 1181.3 449.661C1113.27 438.562 1071.51 368.691 1036.15 309.489C1003.33 254.521 993.475 191.959 989.245 128.067Z" fill="%23747BD6"/></g><g filter="url(%23filter4_f_1517_286086)"><path fill-rule="evenodd" clip-rule="evenodd" d="M340.602 443.738C334.744 497.443 306.338 549.276 263.014 581.479C220.526 613.061 164.478 616.205 111.65 613.918C62.9735 611.811 19.5296 591.564 -23.69 569.071C-71.8802 543.99 -126.787 524.019 -152.822 476.276C-180.418 425.67 -186.892 361.784 -166.068 307.977C-146.069 256.305 -91.4348 230.66 -45.6946 199.477C-4.12737 171.139 36.626 136.32 86.875 135.536C136.331 134.765 180.403 164.008 218.676 195.356C253.606 223.966 273.308 263.981 293.22 304.545C315.353 349.634 346.053 393.763 340.602 443.738Z" fill="%2395C1ED"/></g><rect y="-54" width="1648" height="887" fill="white" fill-opacity="0.33"/></g><defs><filter id="filter0_f_1517_286086" x="994.146" y="-62.9692" width="927.855" height="865.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1517_286086"/></filter><filter id="filter1_f_1517_286086" x="710.602" y="142.11" width="1036.64" height="1000.97" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1517_286086"/></filter><filter id="filter2_f_1517_286086" x="-379.886" y="-96.8433" width="1021.59" height="976.802" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1517_286086"/></filter><filter id="filter3_f_1517_286086" x="781.933" y="-350.08" width="1036.64" height="1000.97" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1517_286086"/></filter><filter id="filter4_f_1517_286086" x="-378.349" y="-64.4788" width="919.588" height="878.983" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_1517_286086"/></filter><clipPath id="clip0_1517_286086"><rect width="1648" height="781" fill="white"/></clipPath></defs></svg>') center center no-repeat;
+    background-size: cover;
+    padding: var(--goa-space-2xl) var(--goa-space-2xl);
   }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
+
+  .hero-content {
+    display: flex;
+    gap: var(--goa-space-2xl);
+    align-items: center;
+    max-width: 1216px;
+    margin: 0 auto;
+  }
+
+  .hero-image {
+    flex: 1;
+    max-width: 300px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    display: block;
+  }
+
+  .hero-text {
+    flex: 2;
+  }
+
+  .ds-hero-banner h1 {
+    font-size: 4.25rem;
+    line-height: 4.75rem;
+    margin: 0;
+    color: var(--goa-color-text-default);
+  }
+
+  .hero-description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-secondary);
+    margin: var(--goa-space-xl) 0 0 0;
+    max-width: 550px;
+  }
+
+  /* Main Content - White background */
+  .ds-main-content {
+    background: white;
+    padding: var(--goa-space-4xl) var(--goa-space-m);
+  }
+
+  /* Content container - centered with max-width */
+  .content-container {
+    max-width: 1216px;
+    margin: 0 auto;
+    padding: 0 var(--goa-space-l);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    display: flex;
+    gap: var(--goa-space-2xl);
+    align-items: center;
+    margin-bottom: var(--goa-space-4xl);
+  }
+
+  .cta-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cta-text h2 {
+    font: var(--goa-typography-heading-xl);
+    margin: 0 0 var(--goa-space-m);
+    color: var(--goa-color-text-default);
+  }
+
+  .cta-text p {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-secondary);
+    margin: 0 0 var(--goa-space-m);
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--goa-space-2xs);
+    color: var(--goa-color-interactive-default);
+    font: var(--goa-typography-body-m);
+    text-decoration: none;
+  }
+
+  .cta-link:hover {
+    text-decoration: underline;
+  }
+
+  .cta-image {
+    flex: 2;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--goa-border-radius-m);
+  }
+
+  .cta-image img {
+    width: 100%;
+    display: block;
+  }
+
+  /* Section headings */
+  .section-heading {
+    font: var(--goa-typography-heading-xl);
+    margin: 0 0 var(--goa-space-l);
+    color: var(--goa-color-text-default);
+  }
+
+  .section-description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-secondary);
+    margin: 0 0 var(--goa-space-l);
+    max-width: 600px;
+  }
+
+  /* Card grids */
+  .card-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin-bottom: var(--goa-space-4xl);
+  }
+
+  .card-grid.two-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-grid.three-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Tablet breakpoint - 1199px */
+  @media screen and (max-width: 1199px) {
+    .ds-hero-banner {
+      min-height: 780px;
+    }
+
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+
+    .hero-image {
+      max-width: 280px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-description {
+      max-width: 100%;
+    }
+
+    .ds-main-content {
+      padding: var(--goa-space-3xl) var(--goa-space-m);
+    }
+
+    .content-container {
+      padding: 0 var(--goa-space-xl);
+    }
+
+    .cta-section {
+      flex-direction: column;
+    }
+  }
+
+  /* Mobile breakpoint - 767px */
+  @media screen and (max-width: 767px) {
+    .ds-hero-banner h1 {
+      font: var(--goa-typography-heading-xl);
+    }
+
+    .cta-text h2,
+    .section-heading {
+      font: var(--goa-typography-heading-l);
+    }
+  }
+
+  /* Small mobile breakpoint - 623px */
+  @media screen and (max-width: 623px) {
+    .ds-hero-banner {
+      min-height: 515px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0;
+      padding: 0 var(--goa-space-xs);
+    }
+
+    .hero-content {
+      margin: auto 0;
+      padding: 0 var(--goa-space-m);
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .hero-image {
+      max-width: 200px;
+    }
+
+    .ds-main-content {
+      padding: var(--goa-space-2xl) var(--goa-space-xs);
+    }
+
+    .content-container {
+      padding: 0 var(--goa-space-m);
+    }
+
+    .card-grid.two-col,
+    .card-grid.three-col {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

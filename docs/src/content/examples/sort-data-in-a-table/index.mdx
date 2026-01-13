@@ -1,0 +1,33 @@
+---
+id: sort-data-in-a-table
+title: Sort data in a table
+categories:
+  - content-layout
+scale: task
+userType: worker
+tags:
+  - table
+  - sorting
+  - data
+components:
+  - table
+  - table-sort-header
+status: published
+---
+
+Enable column sorting in tables using sort headers, allowing workers to organize data by clicking column headers to toggle ascending/descending order.
+
+## When to use
+
+Use this pattern when:
+- Workers need to organize tabular data by different columns
+- Data sets are large enough that sorting improves usability
+- Multiple columns could reasonably be used as sort criteria
+
+## Considerations
+
+- Indicate the current sort direction with visual cues
+- Set a sensible default sort order when the table loads
+- Consider which columns should be sortable based on data type
+- Numeric columns typically sort numerically, text columns alphabetically
+- Maintain sort state when data updates if appropriate

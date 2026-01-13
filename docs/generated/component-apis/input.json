@@ -1,0 +1,385 @@
+{
+  "componentSlug": "input",
+  "extractedFrom": "libs/web-components/src/components/input/Input.svelte",
+  "extractedAt": "2026-01-05T23:10:27.449Z",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"text\" | \"number\" | \"password\" | \"email\" | \"date\" | \"datetime-local\" | \"month\" | \"range\" | \"search\" | \"tel\" | \"time\" | \"url\" | \"week\"",
+      "typeLabel": "GoabInputType",
+      "values": [
+        "text",
+        "number",
+        "password",
+        "email",
+        "date",
+        "datetime-local",
+        "month",
+        "range",
+        "search",
+        "tel",
+        "time",
+        "url",
+        "week"
+      ],
+      "required": false,
+      "default": "text",
+      "description": "Sets the type of the input field."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": "",
+      "description": "Name of input value that is received in the onChange event."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Bound to value."
+    },
+    {
+      "name": "autoCapitalize",
+      "type": "\"on\" | \"off\" | \"none\" | \"sentences\" | \"words\" | \"characters\"",
+      "typeLabel": "GoabInputAutoCapitalize",
+      "values": [
+        "on",
+        "off",
+        "none",
+        "sentences",
+        "words",
+        "characters"
+      ],
+      "required": false,
+      "default": "off",
+      "description": "Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices."
+    },
+    {
+      "name": "autoComplete",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies the autocomplete attribute for the input field."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Text displayed within the input when no value is set."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon shown to the left of the text."
+    },
+    {
+      "name": "trailingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon shown to the right of the text."
+    },
+    {
+      "name": "variant",
+      "type": "GoAInputVariant",
+      "required": false,
+      "default": "goa",
+      "description": "Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]."
+    },
+    {
+      "name": "handleTrailingIconClick",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Flag that will result in an icon button component being rendered instead of an icon."
+    },
+    {
+      "name": "focused",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets the cursor focus to the input."
+    },
+    {
+      "name": "readOnly",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Makes the input readonly."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets the input to an error state."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "30ch",
+      "description": "Sets the width of the text input area."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Defines how the input will be translated for the screen reader. If not specified it will fall back to the name."
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The aria-labelledby attribute identifies the element (or elements) that labels the input."
+    },
+    {
+      "name": "min",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "A string value that supports any number, or an ISO 8601 format if using the date or datetime type."
+    },
+    {
+      "name": "max",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "A string value that supports any number, or an ISO 8601 format if using the date or datetime type."
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "How much a number or date should changed by."
+    },
+    {
+      "name": "prefix",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated Use leadingContent slot instead."
+    },
+    {
+      "name": "suffix",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated Use trailingContent slot instead."
+    },
+    {
+      "name": "debounce",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Debounce delay in milliseconds before firing the change event. 0 means no debounce."
+    },
+    {
+      "name": "maxLength",
+      "type": "number | null",
+      "values": [
+        "number",
+        "null"
+      ],
+      "required": false,
+      "default": null,
+      "description": "Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input."
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Unique identifier for the input element. Used for label associations and accessibility."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Apply margin to the top of the component."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Apply margin to the right of the component."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Apply margin to the bottom of the component."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Apply margin to the left of the component."
+    },
+    {
+      "name": "trailingIconAriaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Aria label for the trailing icon. Use only when the trailing icon is interactive."
+    },
+    {
+      "name": "textAlign",
+      "type": "\"left\" | \"right\"",
+      "typeLabel": "GoabInputTextAlign",
+      "values": [
+        "left",
+        "right"
+      ],
+      "required": false,
+      "default": "left",
+      "description": "Sets the text alignment within the input field."
+    },
+    {
+      "name": "size",
+      "type": "\"default\" | \"compact\"",
+      "values": [
+        "default",
+        "compact"
+      ],
+      "required": false,
+      "default": "default",
+      "description": "Sets the size of the input. 'compact' reduces height for dense layouts."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onKeyPress",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_keyPress",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onFocus",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_focus",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onBlur",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_blur",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onTrailingIconClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_trailingIconClick",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "leadingContent",
+      "description": ""
+    },
+    {
+      "name": "trailingContent",
+      "description": ""
+    }
+  ]
+}

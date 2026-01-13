@@ -1,0 +1,33 @@
+---
+id: display-numbers-in-a-table-so-they-can-be-scanned-easily
+title: Display numbers in a table so they can be scanned easily
+categories:
+  - content-layout
+scale: task
+userType: worker
+tags:
+  - table
+  - numbers
+  - data
+  - alignment
+  - scanning
+components:
+  - table
+status: published
+---
+
+Right-align numeric columns in tables to make them easier to scan and compare.
+
+## When to use
+
+Use this pattern when:
+- Displaying numeric data in table columns (IDs, amounts, counts)
+- Users need to quickly scan and compare values
+- The table contains a mix of text and numeric data
+
+## Considerations
+
+- Use the `goa-table-number-header` class on `<th>` elements for numeric column headers
+- Use the `goa-table-number-column` class on `<td>` elements for numeric data cells
+- Right-alignment helps users visually compare magnitudes of numbers
+- Consider consistent decimal formatting for financial data

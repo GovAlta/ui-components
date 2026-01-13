@@ -1,0 +1,97 @@
+{
+  "componentSlug": "text",
+  "extractedFrom": "libs/web-components/src/components/text/Text.svelte",
+  "extractedAt": "2026-01-05T23:10:27.462Z",
+  "props": [
+    {
+      "name": "as",
+      "type": "TextElement | HeadingElement",
+      "values": [
+        "TextElement",
+        "HeadingElement"
+      ],
+      "required": false,
+      "default": "div",
+      "description": "The HTML element to render. Use semantic elements like 'h1'-'h6' for headings."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string | \"none\"",
+      "values": [
+        "string",
+        "none"
+      ],
+      "required": false,
+      "default": "65ch",
+      "description": "Sets the max width."
+    },
+    {
+      "name": "size",
+      "type": "Size",
+      "values": [
+        "heading-xl",
+        "heading-l",
+        "heading-m",
+        "heading-s",
+        "heading-xs",
+        "body-l",
+        "body-m",
+        "body-s",
+        "body-xs"
+      ],
+      "required": false,
+      "default": null,
+      "description": "Overrides the text size."
+    },
+    {
+      "name": "color",
+      "type": "\"primary\" | \"secondary\"",
+      "values": [
+        "primary",
+        "secondary"
+      ],
+      "required": false,
+      "default": "primary",
+      "description": "Sets the text colour."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "componentSlug": "dropdown",
+  "extractedFrom": "libs/web-components/src/components/dropdown/Dropdown.svelte",
+  "extractedAt": "2026-01-05T23:10:27.438Z",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Identifier for the dropdown. Should be unique."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name."
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label."
+    },
+    {
+      "name": "value",
+      "type": "string | undefined",
+      "values": [
+        "string",
+        "undefined"
+      ],
+      "required": false,
+      "default": "",
+      "description": "Stores the value of the item selected from the dropdown."
+    },
+    {
+      "name": "filterable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true the dropdown will have the ability to filter options by typing into the input field."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Show an icon to the left of the dropdown option."
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "required": false,
+      "default": "276px",
+      "description": "Maximum height of the dropdown menu items popover. Non-native only."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The text displayed for the dropdown before a selection is made. Non-native only."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Overrides the autosized menu width. Non-native only."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em)."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disable this control."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Show an error state."
+    },
+    {
+      "name": "multiselect",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, allows multiple items to be selected."
+    },
+    {
+      "name": "native",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true will render the native select HTML element."
+    },
+    {
+      "name": "size",
+      "type": "\"default\" | \"compact\"",
+      "values": [
+        "default",
+        "compact"
+      ],
+      "required": false,
+      "default": "default",
+      "description": "Sets the size of the dropdown. Compact reduces height for dense layouts."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    },
+    {
+      "name": "relative",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated This property has no effect and will be removed in a future version."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "autoComplete",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Specifies the autocomplete attribute for the dropdown input. Native only."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "disableGlobalClosePopover",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Prevents the popover from closing when clicking outside. Used for nested dropdowns or complex interactions."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+---
+/**
+ * DocumentationPageLayout.astro
+ *
+ * Layout for text-heavy documentation pages (Get Started, Foundations, etc.)
+ * Two-column layout with optional right-side table of contents.
+ *
+ * Structure:
+ * - Left: WorkSideMenu navigation (280px)
+ * - Center: Main content area with prose typography
+ * - Right (optional): Table of contents (200px)
+ *
+ * Mobile behavior (< 624px):
+ * - Sidebar hidden, triggered by hamburger
+ * - Content card chrome removed
+ * - TOC hidden (too narrow for side-by-side)
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import { SiteNav } from '../components/SiteNav';
+import { MobileHeader } from '../components/MobileHeader';
+import { TableOfContents } from '../components/TableOfContents';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Section to highlight in menu: 'get-started' | 'foundations' */
+  section: 'get-started' | 'foundations';
+  /** Show table of contents on right side (default: true) */
+  showToc?: boolean;
+  /** CSS selector for TOC headings (default: 'h2[id], h3[id]') */
+  tocQuery?: string;
+}
+
+const {
+  title,
+  description,
+  section,
+  showToc = true,
+  tocQuery = 'h2[id], h3[id]'
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="layout-wrapper">
+    <div class="layout-container">
+      <!-- Left Sidebar: WorkSideMenu -->
+      <aside class="sidebar-left">
+        <SiteNav
+          client:only="react"
+          initialSection={section}
+        />
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Mobile Header -->
+        <div class="mobile-header-container">
+          <MobileHeader client:only="react" />
+        </div>
+
+        <div class="content-card">
+          <div class:list={["content-grid", { "with-toc": showToc }]}>
+            <!-- Documentation Content -->
+            <article class="prose-content">
+              <slot />
+            </article>
+
+            <!-- Optional Table of Contents -->
+            {showToc && (
+              <aside class="toc-sidebar">
+                <div class="toc-sticky">
+                  <TableOfContents client:only="react" cssQuery={tocQuery} />
+                </div>
+              </aside>
+            )}
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full-width grey background */
+  .layout-wrapper {
+    background: var(--goa-color-greyscale-50);
+    min-height: 100vh;
+  }
+
+  .layout-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width, 280px) 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar-left {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--goa-color-greyscale-50);
+    z-index: 5;
+  }
+
+  .main-content {
+    padding: var(--goa-space-l);
+    padding-left: 0;
+    min-height: 100vh;
+    min-width: 0;
+  }
+
+  .content-card {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid var(--goa-color-greyscale-150);
+    padding: var(--goa-space-xl) var(--goa-space-2xl);
+    min-height: calc(100vh - var(--goa-space-l) * 2);
+  }
+
+  /* Content grid: prose + optional TOC */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--goa-space-2xl);
+  }
+
+  .content-grid.with-toc {
+    grid-template-columns: 1fr 200px;
+  }
+
+  /* Prose typography */
+  .prose-content {
+    max-width: 70ch;
+  }
+
+  /* Page title */
+  .prose-content :global(h1) {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--goa-space-m);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.2;
+  }
+
+  /* Intro/lead paragraph - direct child p after h1 */
+  .prose-content :global(.lead),
+  .prose-content :global(h1 + p) {
+    font: var(--goa-typography-body-l);
+    color: var(--goa-color-text-secondary, #666);
+    margin: 0 0 var(--goa-space-2xl);
+    max-width: 65ch;
+  }
+
+  /* Section headings */
+  .prose-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: var(--goa-space-2xl) 0 var(--goa-space-m);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.3;
+  }
+
+  .prose-content :global(h2:first-of-type) {
+    margin-top: 0;
+  }
+
+  .prose-content :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: var(--goa-space-xl) 0 var(--goa-space-m);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.3;
+  }
+
+  .prose-content :global(h4) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: var(--goa-space-l) 0 var(--goa-space-s);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  /* Body paragraphs */
+  .prose-content :global(p) {
+    font: var(--goa-typography-body-m);
+    margin: 0 0 var(--goa-space-m);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.6;
+    max-width: 65ch;
+  }
+
+  /* Lists */
+  .prose-content :global(ul),
+  .prose-content :global(ol) {
+    margin: 0 0 var(--goa-space-l);
+    padding-left: var(--goa-space-xl);
+    max-width: 65ch;
+  }
+
+  .prose-content :global(li) {
+    font: var(--goa-typography-body-m);
+    margin-bottom: var(--goa-space-xs);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.6;
+  }
+
+  .prose-content :global(li strong) {
+    font-weight: 600;
+  }
+
+  /* Nested lists */
+  .prose-content :global(li ul),
+  .prose-content :global(li ol) {
+    margin-top: var(--goa-space-xs);
+    margin-bottom: var(--goa-space-xs);
+  }
+
+  /* Links */
+  .prose-content :global(a) {
+    color: var(--goa-color-interactive-default);
+    text-decoration: underline;
+  }
+
+  .prose-content :global(a:hover) {
+    color: var(--goa-color-interactive-hover);
+  }
+
+  /* Inline code */
+  .prose-content :global(code) {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875em;
+    background: var(--goa-color-greyscale-100, #f5f5f5);
+    padding: 0.125em 0.375em;
+    border-radius: 4px;
+    color: var(--goa-color-text-default, #333);
+  }
+
+  /* Code blocks */
+  .prose-content :global(pre) {
+    background: var(--goa-color-greyscale-100, #f5f5f5);
+    padding: var(--goa-space-m);
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0 0 var(--goa-space-l);
+  }
+
+  .prose-content :global(pre code) {
+    background: none;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  /* GoA Divider spacing */
+  .prose-content :global(goa-divider) {
+    margin: var(--goa-space-xl) 0;
+  }
+
+  /* GoA Callout spacing */
+  .prose-content :global(goa-callout) {
+    margin: var(--goa-space-l) 0;
+    max-width: 650px;
+  }
+
+  /* GoA Container spacing */
+  .prose-content :global(goa-container) {
+    margin: var(--goa-space-l) 0;
+    max-width: 650px;
+  }
+
+  /* Table of contents sidebar */
+  .toc-sidebar {
+    position: relative;
+  }
+
+  .toc-sticky {
+    position: sticky;
+    top: var(--goa-space-l);
+  }
+
+  /* Tablet: Reduce padding, hide TOC */
+  @media (max-width: 1024px) {
+    .content-card {
+      padding: var(--goa-space-l) var(--goa-space-xl);
+    }
+
+    .content-grid.with-toc {
+      grid-template-columns: 1fr;
+    }
+
+    .toc-sidebar {
+      display: none;
+    }
+  }
+
+  /* Mobile: 624px breakpoint */
+  @media (max-width: 623px) {
+    .layout-wrapper {
+      background: white;
+    }
+
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar-left {
+      position: fixed;
+      left: -280px;
+      z-index: 100;
+      transition: left 0.3s ease;
+    }
+
+    .main-content {
+      padding: 0;
+    }
+
+    .content-card {
+      border-radius: 0;
+      border: none;
+      padding: var(--goa-space-m);
+      min-height: auto;
+    }
+
+    .prose-content :global(h1) {
+      font-size: 2rem;
+    }
+
+    .prose-content :global(h2) {
+      font-size: 1.375rem;
+    }
+  }
+
+  /* Sidebar open state */
+  :global(body[data-menu-open="true"]) .sidebar-left {
+    left: 0;
+  }
+</style>

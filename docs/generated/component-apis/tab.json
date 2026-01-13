@@ -1,0 +1,32 @@
+{
+  "componentSlug": "tab",
+  "extractedFrom": "libs/web-components/src/components/tab/Tab.svelte",
+  "extractedAt": "2026-01-05T23:10:27.460Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The text label for this tab. Can also use the heading slot for custom content."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Whether this tab is currently selected/active."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "heading",
+      "description": ""
+    }
+  ]
+}

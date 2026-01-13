@@ -1,0 +1,140 @@
+---
+/**
+ * ComponentPageLayout.astro
+ *
+ * Two-column layout for component documentation pages:
+ * - Left: WorkSideMenu navigation (280px)
+ * - Center: Main content area (flexible)
+ *
+ * Mobile behavior (< 624px):
+ * - Sidebar hidden, triggered by hamburger in MobileHeader
+ * - Content card chrome removed (white background, no borders)
+ *
+ * TOC is handled within the page, positioned alongside tabs only.
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import { SiteNav } from '../components/SiteNav';
+import { MobileHeader } from '../components/MobileHeader';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentSlug?: string;
+  category?: string;
+}
+
+const { title, description, currentSlug, category } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- Full-width grey background wrapper -->
+  <div class="layout-wrapper">
+    <div class="layout-container">
+      <!-- Left Sidebar: WorkSideMenu -->
+      <!-- Using client:only to avoid SSR hydration mismatches with web component attributes -->
+      <aside class="sidebar-left">
+        <SiteNav
+          client:only="react"
+          currentSlug={currentSlug}
+          currentCategory={category}
+          initialSection="components"
+        />
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Mobile Header: hamburger + brand + search (hidden on desktop via CSS) -->
+        <div class="mobile-header-container">
+          <MobileHeader client:only="react" />
+        </div>
+
+        <div class="content-card">
+          <slot />
+        </div>
+      </main>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full-width grey background that extends to edges */
+  .layout-wrapper {
+    background: var(--goa-color-greyscale-50);
+    min-height: 100vh;
+  }
+
+  .layout-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width, 280px) 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar-left {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--goa-color-greyscale-50);
+    z-index: 5;
+  }
+
+  .main-content {
+    padding: var(--goa-space-l);
+    padding-left: 0;
+    min-height: 100vh;
+    min-width: 0; /* Prevent grid blowout from wide content */
+  }
+
+  .content-card {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid var(--goa-color-greyscale-150);
+    padding: var(--goa-space-xl) var(--goa-space-2xl);
+    min-height: calc(100vh - var(--goa-space-l) * 2);
+    overflow-x: clip; /* Allows sticky toolbar to break out visually */
+    /* Full-width card, page content centers itself within */
+  }
+
+  /* Tablet: Reduce card padding */
+  @media (max-width: 1024px) {
+    .content-card {
+      padding: var(--goa-space-l) var(--goa-space-xl);
+    }
+  }
+
+  /* Mobile: 624px breakpoint matches GoA components */
+  @media (max-width: 623px) {
+    .layout-wrapper {
+      background: white;
+    }
+
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+
+    /* Sidebar: hidden off-screen, slides in when menu open */
+    .sidebar-left {
+      position: fixed;
+      left: -280px;
+      z-index: 100;
+      transition: left 0.3s ease;
+    }
+
+    /* Content: full viewport, no card chrome */
+    .main-content {
+      padding: 0;
+    }
+
+    .content-card {
+      border-radius: 0;
+      border: none;
+      padding: var(--goa-space-m);
+      min-height: auto;
+    }
+  }
+
+  /* Sidebar open state - controlled by body attribute from mobile-bridge.ts */
+  :global(body[data-menu-open="true"]) .sidebar-left {
+    left: 0;
+  }
+</style>

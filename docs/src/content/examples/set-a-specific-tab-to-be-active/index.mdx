@@ -1,0 +1,36 @@
+---
+id: set-a-specific-tab-to-be-active
+title: Set a specific tab to be active
+categories:
+  - inputs-and-actions
+scale: interaction
+userType: both
+tags:
+  - tabs
+  - navigation
+  - tables
+components:
+  - tabs
+  - tab
+  - table
+  - badge
+  - button
+status: published
+---
+
+Set a specific tab to be active on page load using the initialTab property.
+
+## When to use
+
+Use this pattern when:
+- You want to load a specific tab as the default active tab
+- Users should start viewing a particular tab based on context
+- Deep linking to specific tab content is required
+- Showing priority content like items requiring attention
+
+## Considerations
+
+- The `initialTab` property uses zero-based indexing (0 = first tab, 1 = second tab, etc.)
+- Consider which tab provides the most relevant content for users on initial load
+- Badge counts in tab headings help users understand the volume of items in each tab
+- Ensure tab content is accessible and keyboard navigable

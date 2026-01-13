@@ -1,0 +1,35 @@
+---
+id: confirm-before-navigating-away
+title: Confirm before navigating away
+categories:
+  - feedback-and-alerts
+scale: task
+userType: worker
+tags:
+  - modal
+  - navigation
+  - confirmation
+  - routing
+components:
+  - modal
+  - button
+  - button-group
+status: published
+---
+
+Prompt the user in a modal before navigating to a new route to preserve context.
+
+## When to use
+
+Use this pattern when:
+- The user has unsaved changes that would be lost
+- Navigation would interrupt an important workflow
+- You need to confirm the user's intent to leave the page
+- Context or data would be lost on navigation
+
+## Considerations
+
+- Allow users to cancel and stay on the current page
+- Use setTimeout for route changes after modal closes for smooth transitions
+- The secondary button should cancel the navigation
+- The primary button confirms the route change

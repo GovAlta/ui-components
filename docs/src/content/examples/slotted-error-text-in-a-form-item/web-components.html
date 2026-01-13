@@ -1,0 +1,15 @@
+<goa-form-item label="First name">
+  <goa-input name="item" error="true"></goa-input>
+  <div slot="error">
+    <span>This is </span>
+    <i>slotted </i>
+    <b>error text.</b>
+  </div>
+</goa-form-item>
+
+<script>
+  const input = document.querySelector('goa-input[name="item"]');
+  input.addEventListener("_change", (e) => {
+    console.log("Value changed:", e.detail.value);
+  });
+</script>

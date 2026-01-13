@@ -1,0 +1,27 @@
+<form>
+  <goa-form-item>
+    <goa-block gap="xs" direction="row">
+      <goa-input
+        id="search-input"
+        type="search"
+        name="search"
+        leadingicon="search">
+      </goa-input>
+      <goa-button id="search-btn" type="primary">Search</goa-button>
+    </goa-block>
+  </goa-form-item>
+</form>
+
+<script>
+  const searchInput = document.getElementById("search-input");
+  const searchBtn = document.getElementById("search-btn");
+  let searchValue = "";
+
+  searchInput.addEventListener("_change", (e) => {
+    searchValue = e.detail.value;
+  });
+
+  searchBtn.addEventListener("_click", () => {
+    console.log("search:", searchValue);
+  });
+</script>

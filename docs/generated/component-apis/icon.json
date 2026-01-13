@@ -1,0 +1,126 @@
+{
+  "componentSlug": "icon",
+  "extractedFrom": "libs/web-components/src/components/icon/Icon.svelte",
+  "extractedAt": "2026-01-05T23:10:27.448Z",
+  "props": [
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "type",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": true,
+      "default": null,
+      "description": "The icon type to display. See GoAIconType for available icons."
+    },
+    {
+      "name": "size",
+      "type": "IconSize",
+      "required": false,
+      "default": "medium",
+      "description": "Sets the size of the icon. Accepts numeric (1-6) or named sizes."
+    },
+    {
+      "name": "theme",
+      "type": "IconTheme",
+      "required": false,
+      "default": "outline",
+      "description": "Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons."
+    },
+    {
+      "name": "inverted",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, inverts the icon colors for use on dark backgrounds."
+    },
+    {
+      "name": "fillcolor",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a custom fill color for the icon. Accepts any valid CSS color value."
+    },
+    {
+      "name": "opacity",
+      "type": "number",
+      "required": false,
+      "default": "1",
+      "description": "Sets the opacity of the icon from 0 (transparent) to 1 (opaque)."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Adds an accessible title to the icon SVG. Used by screen readers."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Defines how the icon will be announced by screen readers."
+    },
+    {
+      "name": "ariacontrols",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Identifies the element(s) whose contents or presence are controlled by this icon."
+    },
+    {
+      "name": "ariaexpanded",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Indicates whether the element controlled by this icon is expanded or collapsed."
+    },
+    {
+      "name": "role",
+      "type": "string",
+      "required": false,
+      "default": "img",
+      "description": "Sets the ARIA role for the icon. Defaults to 'img'. Use 'presentation' for decorative icons."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

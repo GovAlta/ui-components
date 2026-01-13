@@ -1,0 +1,26 @@
+---
+id: radio-dont-nest-revealed-content
+type: dont
+description: Don't nest multiple layers of conditionally revealed questions.
+topic: interaction
+tags:
+  - radio
+  - forms
+  - accessibility
+appliesTo:
+  components:
+    - radio
+status: published
+---
+
+<Preview bad>
+  <goa-radio-group name="contact">
+    <goa-radio-item value="email" label="Email"></goa-radio-item>
+    <goa-radio-item value="phone" label="Phone">
+      <goa-radio-group name="phone-type" slot="content">
+        <goa-radio-item value="call" label="Phone call"></goa-radio-item>
+        <goa-radio-item value="text" label="Text message"></goa-radio-item>
+      </goa-radio-group>
+    </goa-radio-item>
+  </goa-radio-group>
+</Preview>

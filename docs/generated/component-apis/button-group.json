@@ -1,0 +1,78 @@
+{
+  "componentSlug": "button-group",
+  "extractedFrom": "libs/web-components/src/components/button-group/ButtonGroup.svelte",
+  "extractedAt": "2026-01-05T23:10:27.423Z",
+  "props": [
+    {
+      "name": "alignment",
+      "type": "\"start\" | \"end\" | \"center\"",
+      "typeLabel": "GoabButtonGroupButtonAlignment",
+      "values": [
+        "start",
+        "end",
+        "center"
+      ],
+      "required": true,
+      "default": "start",
+      "description": "Positions the button group in the page layout."
+    },
+    {
+      "name": "gap",
+      "type": "\"relaxed\" | \"compact\"",
+      "typeLabel": "GoabButtonGroupGap",
+      "values": [
+        "relaxed",
+        "compact"
+      ],
+      "required": false,
+      "default": "relaxed",
+      "description": "Sets the spacing between buttons in the button group."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

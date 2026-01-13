@@ -1,0 +1,8 @@
+<div>
+  <goab-filter-chip
+    *ngFor="let chip of chips"
+    [content]="chip"
+    (onClick)="deleteChip(chip)"
+    mr="s">
+  </goab-filter-chip>
+</div>

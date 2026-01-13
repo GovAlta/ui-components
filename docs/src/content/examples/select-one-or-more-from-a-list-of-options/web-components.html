@@ -1,0 +1,19 @@
+<goa-form-item
+  label="How would you like to be contacted?"
+  helptext="Choose all that apply">
+  <goa-checkbox-list name="contactPreferences">
+    <goa-checkbox name="email" text="Email" value="email"></goa-checkbox>
+    <goa-checkbox name="phone" text="Phone" value="phone"></goa-checkbox>
+    <goa-checkbox name="text" text="Text message" value="text"></goa-checkbox>
+  </goa-checkbox-list>
+</goa-form-item>
+
+<script>
+  const checkboxList = document.querySelector("goa-checkbox-list");
+  let selectedOptions = [];
+
+  checkboxList.addEventListener("_change", (e) => {
+    selectedOptions = e.detail.value;
+    console.log("Selected options:", selectedOptions);
+  });
+</script>

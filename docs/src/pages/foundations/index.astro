@@ -1,0 +1,142 @@
+---
+/**
+ * Foundations - Landing Page
+ *
+ * Placeholder demonstrating the DocumentationPageLayout template.
+ * Content will be migrated from existing documentation in Brief 30.
+ */
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Foundations"
+  description="Core design principles and guidelines for the Government of Alberta Design System"
+  section="foundations"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Foundations</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    The foundations of the design system define the core visual language and principles that
+    ensure consistency across all Government of Alberta digital services.
+  </goa-text>
+
+  <goa-callout version="2" type="information" heading="Documentation placeholder">
+    This page demonstrates the documentation template. Detailed foundations content will be
+    migrated from the current design system website in a future update.
+    <br /><br />
+    <a href="https://design.alberta.ca/design-tokens" target="_blank">View current Foundations documentation</a>
+  </goa-callout>
+
+  <h2 id="design-principles">Design principles</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Our design principles guide every decision we make when building government services.
+    They help teams create experiences that are consistent, accessible, and user-centered.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li>
+        <strong>Start with user needs:</strong> Design services that meet the needs of Albertans,
+        not the needs of government processes.
+      </li>
+      <li>
+        <strong>Be inclusive:</strong> Create services that work for everyone, regardless of
+        ability, device, or connectivity.
+      </li>
+      <li>
+        <strong>Keep it simple:</strong> Remove complexity and help users accomplish their tasks
+        with minimal effort.
+      </li>
+      <li>
+        <strong>Be consistent:</strong> Use familiar patterns so users can transfer their knowledge
+        between services.
+      </li>
+    </ul>
+  </goa-text>
+
+  <h2 id="typography">Typography</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Typography creates hierarchy and rhythm in our interfaces. We use the Acumin Pro font family
+    for headings and body text across all services.
+  </goa-text>
+
+  <h3 id="type-scale">Type scale</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Our type scale is based on a modular scale that ensures consistent proportions between
+    heading levels and body text. Use these sizes through design tokens:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li><code>--goa-typography-heading-xl</code> - Page titles</li>
+      <li><code>--goa-typography-heading-l</code> - Section headings</li>
+      <li><code>--goa-typography-heading-m</code> - Subsection headings</li>
+      <li><code>--goa-typography-body-l</code> - Lead paragraphs</li>
+      <li><code>--goa-typography-body-m</code> - Body text</li>
+      <li><code>--goa-typography-body-s</code> - Captions and labels</li>
+    </ul>
+  </goa-text>
+
+  <h2 id="color">Color</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Our color palette is designed to meet WCAG 2.1 AA contrast requirements while maintaining
+    the Government of Alberta's visual identity.
+  </goa-text>
+
+  <h3 id="color-categories">Color categories</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li>
+        <strong>Brand colors:</strong> The primary blue represents the Government of Alberta brand.
+      </li>
+      <li>
+        <strong>Interactive colors:</strong> Used for links, buttons, and focusable elements.
+      </li>
+      <li>
+        <strong>Status colors:</strong> Communicate success, warning, error, and information states.
+      </li>
+      <li>
+        <strong>Greyscale:</strong> Used for text, borders, and backgrounds.
+      </li>
+    </ul>
+  </goa-text>
+
+  <goa-container version="2" type="interactive">
+    <goa-text version="2" size="heading-s" mt="none" mb="m">Color accessibility</goa-text>
+    <goa-text version="2" size="body-m" mt="none" mb="none">
+      All color combinations in the design system have been tested to ensure they meet or exceed
+      WCAG 2.1 AA contrast ratios. Interactive elements maintain a minimum 4.5:1 contrast ratio
+      with their backgrounds.
+    </goa-text>
+  </goa-container>
+
+  <h2 id="spacing">Spacing</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Consistent spacing creates visual rhythm and helps users scan content. Our spacing scale
+    uses an 8-pixel base unit.
+  </goa-text>
+
+  <h3 id="spacing-tokens">Spacing tokens</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Use these tokens instead of hard-coded pixel values:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li><code>--goa-space-2xs</code> - 4px (0.25rem)</li>
+      <li><code>--goa-space-xs</code> - 8px (0.5rem)</li>
+      <li><code>--goa-space-s</code> - 12px (0.75rem)</li>
+      <li><code>--goa-space-m</code> - 16px (1rem)</li>
+      <li><code>--goa-space-l</code> - 24px (1.5rem)</li>
+      <li><code>--goa-space-xl</code> - 32px (2rem)</li>
+      <li><code>--goa-space-2xl</code> - 48px (3rem)</li>
+      <li><code>--goa-space-3xl</code> - 64px (4rem)</li>
+    </ul>
+  </goa-text>
+
+  <h2 id="accessibility">Accessibility</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    All Government of Alberta digital services must meet WCAG 2.1 Level AA requirements.
+    The design system is built with accessibility as a core requirement, not an afterthought.
+  </goa-text>
+  <goa-callout version="2" type="information" heading="WCAG 2.2 compliance">
+    We are actively updating components to meet WCAG 2.2 requirements as they become the
+    standard for government digital services.
+  </goa-callout>
+</DocumentationPageLayout>

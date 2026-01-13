@@ -1,0 +1,15 @@
+<goab-form-item label="How would you like to be contacted?">
+  <goab-checkbox-list name="contact-options">
+    <goab-checkbox
+      name="email"
+      text="Email"
+      value="email"
+      [description]="descriptionTemplate">
+      <ng-template #descriptionTemplate>
+        <span>Help text with a <a href="#">link</a>.</span>
+      </ng-template>
+    </goab-checkbox>
+    <goab-checkbox name="phone" text="Phone" value="phone"></goab-checkbox>
+    <goab-checkbox name="text" text="Text message" value="text"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>

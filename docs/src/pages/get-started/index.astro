@@ -1,0 +1,121 @@
+---
+/**
+ * Get Started - Landing Page
+ *
+ * Placeholder demonstrating the DocumentationPageLayout template.
+ * Content will be migrated from existing documentation in Brief 30.
+ */
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Get started"
+  description="Start building with the Government of Alberta Design System"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Get started with the design system</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Start with the design system to build on the research and experience of other service teams
+    and avoid repeating work that's already been done.
+  </goa-text>
+
+  <goa-callout version="2" type="information" heading="Documentation placeholder">
+    This page demonstrates the documentation template. Actual content from the current
+    design system website will be migrated here in a future update.
+    <br /><br />
+    <a href="https://design.alberta.ca/get-started" target="_blank">View current Get Started documentation</a>
+  </goa-callout>
+
+  <h2 id="why-design-system">Why use the design system?</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    The design system can save you time and effort getting to a better service, allowing you to
+    focus on other high-value work. By starting with the design system, you can:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li>
+        <strong>Streamline collaboration:</strong> Your developers can use the corresponding coded
+        design system components.
+      </li>
+      <li>
+        <strong>Ensure better accessibility:</strong> Accessibility is built into the components
+        from both design and code.
+      </li>
+      <li>
+        <strong>Save time on testing:</strong> Components have been rigorously tested across
+        various devices, browsers, and service contexts.
+      </li>
+      <li>
+        <strong>Maintain consistency:</strong> Components are coordinated with the rest of the
+        system for a cohesive experience.
+      </li>
+    </ul>
+  </goa-text>
+
+  <h3 id="time-for-high-value">More time for high-value work</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Leveraging what exists in the design system saves you time, enabling you to spend more time
+    on other high-value tasks such as:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li>Usability testing</li>
+      <li>User research</li>
+      <li>Content design</li>
+      <li>Accessibility auditing</li>
+      <li>Design integrity of the product</li>
+      <li>Low fidelity design and testing</li>
+    </ul>
+  </goa-text>
+
+  <h2 id="how-to-use">How do I use the design system?</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Start by using the design system <a href="/components">components</a> and
+    <a href="/examples">patterns</a>. You should expect that this will cover about 80% of your
+    needs in a service. When usability testing shows that a new solution is needed, design a
+    better solution.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ol>
+      <li>Use the design system as the default first solution in design and development</li>
+      <li>Identify any needs that don't exist in the design system through user testing</li>
+      <li>Talk to the design system team to see what's available and what other teams have done</li>
+      <li>Test a better solution with users</li>
+      <li>Share learnings from design and development back to the design system</li>
+    </ol>
+  </goa-text>
+
+  <h3 id="for-designers">For designers</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Get started by connecting to the GoA Figma libraries. The component library contains all
+    design system components with their variants and states. Use these components in your designs
+    to maintain consistency and enable smooth developer handoff.
+  </goa-text>
+  <goa-container version="2" type="interactive">
+    <goa-text version="2" size="heading-s" mt="none" mb="m">Figma resources</goa-text>
+    <goa-text version="2" size="body-m" mt="none" mb="none">
+      Connect to the GoA Styles Library and Component Library in Figma to access all design
+      system assets.
+    </goa-text>
+  </goa-container>
+
+  <h3 id="for-developers">For developers</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Install the design system packages for your framework. The design system supports React,
+    Angular, and Web Components.
+  </goa-text>
+  <pre><code>npm install @abgov/react-components @abgov/design-tokens</code></pre>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    Import the design tokens CSS and start using components. All components follow the naming
+    convention <code>Goab*</code> for React and <code>goa-*</code> for Web Components.
+  </goa-text>
+
+  <h2 id="governance">Governance process</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    When you need something that doesn't exist in the design system, follow the governance
+    process to either request an addition or document your custom solution.
+  </goa-text>
+  <goa-callout version="2" type="information" heading="Remember">
+    Avoid custom solutions without a genuine user need to prevent unnecessary work and save time.
+  </goa-callout>
+</DocumentationPageLayout>

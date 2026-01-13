@@ -1,0 +1,112 @@
+{
+  "componentSlug": "filter-chip",
+  "extractedFrom": "libs/web-components/src/components/filter-chip/FilterChip.svelte",
+  "extractedAt": "2026-01-05T23:10:27.440Z",
+  "props": [
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Shows an error state."
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Text label of the chip."
+    },
+    {
+      "name": "secondarytext",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Secondary text displayed in a smaller size before the main content."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed at the start of the chip."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Accessible label for the filter chip. Defaults to content with 'removable' suffix."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_click",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": []
+}

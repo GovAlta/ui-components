@@ -1,0 +1,63 @@
+<goa-button id="open-drawer-btn" leadingicon="add">Add Record</goa-button>
+<goa-drawer id="record-drawer" max-size="492px" heading="Add Record" position="right">
+  <goa-form-item label="Level of education">
+    <goa-dropdown name="education" value="university">
+      <goa-dropdown-item value="high-school" label="High School Diploma"></goa-dropdown-item>
+      <goa-dropdown-item value="college" label="College Diploma"></goa-dropdown-item>
+      <goa-dropdown-item value="university" label="University Degree"></goa-dropdown-item>
+      <goa-dropdown-item value="masters" label="Master's Degree"></goa-dropdown-item>
+      <goa-dropdown-item value="doctorate" label="Doctorate"></goa-dropdown-item>
+    </goa-dropdown>
+  </goa-form-item>
+  <goa-form-item label="Educational institution" mt="l">
+    <goa-input name="education" type="text"></goa-input>
+  </goa-form-item>
+  <goa-form-item label="Field of study" requirement="optional" mt="l">
+    <goa-input name="fieldOfStudy" type="text"></goa-input>
+  </goa-form-item>
+  <goa-form-item label="Is the person currently attending?" mt="l">
+    <goa-radio-group name="attendTraining" orientation="horizontal">
+      <goa-radio-item value="yes" label="Yes"></goa-radio-item>
+      <goa-radio-item value="no" label="No"></goa-radio-item>
+    </goa-radio-group>
+  </goa-form-item>
+  <goa-form-item label="Start date" mt="l">
+    <goa-date-picker></goa-date-picker>
+    <goa-checkbox name="startDateApproximate" text="Approximate date" value="y" mt="s"></goa-checkbox>
+  </goa-form-item>
+  <goa-form-item label="Credential received?" mt="l">
+    <goa-radio-group name="credentialReceived" orientation="horizontal">
+      <goa-radio-item value="yes" label="Yes"></goa-radio-item>
+      <goa-radio-item value="no" label="No"></goa-radio-item>
+    </goa-radio-group>
+  </goa-form-item>
+  <div slot="actions">
+    <goa-button-group>
+      <goa-button id="add-record-btn" type="primary" size="compact">Add record</goa-button>
+      <goa-button id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
+    </goa-button-group>
+  </div>
+</goa-drawer>
+
+<script>
+  const drawer = document.getElementById("record-drawer");
+  const openBtn = document.getElementById("open-drawer-btn");
+  const addBtn = document.getElementById("add-record-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+
+  openBtn.addEventListener("_click", () => {
+    drawer.setAttribute("open", "true");
+  });
+
+  drawer.addEventListener("_close", () => {
+    drawer.removeAttribute("open");
+  });
+
+  addBtn.addEventListener("_click", () => {
+    drawer.removeAttribute("open");
+  });
+
+  cancelBtn.addEventListener("_click", () => {
+    drawer.removeAttribute("open");
+  });
+</script>

@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+  <goab-form-item>
+    <goab-block gap="xs" direction="row">
+      <goab-input
+        type="search"
+        name="search"
+        formControlName="search"
+        leadingIcon="search">
+      </goab-input>
+      <goab-button type="primary" (onClick)="onClick()">Search</goab-button>
+    </goab-block>
+  </goab-form-item>
+</form>

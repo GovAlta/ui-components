@@ -1,0 +1,35 @@
+---
+id: confirm-a-destructive-action
+title: Confirm a destructive action
+categories:
+  - feedback-and-alerts
+scale: task
+userType: both
+tags:
+  - modal
+  - confirmation
+  - delete
+  - destructive
+components:
+  - modal
+  - button
+  - button-group
+status: published
+---
+
+Confirm a destructive action like deletion to prevent accidental data loss.
+
+## When to use
+
+Use this pattern when:
+- A user is about to delete data permanently
+- The action cannot be undone
+- You need to prevent accidental destructive actions
+- Data loss would have significant impact
+
+## Considerations
+
+- Use the destructive button variant to emphasize the danger
+- Clearly state that the action cannot be undone
+- Provide a cancel option that's easy to access
+- Use a tertiary button with a trash icon for the initial action

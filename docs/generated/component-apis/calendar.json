@@ -1,0 +1,100 @@
+{
+  "componentSlug": "calendar",
+  "extractedFrom": "libs/web-components/src/components/calendar/Calendar.svelte",
+  "extractedAt": "2026-01-05T23:10:27.423Z",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Name identifier for the calendar, used in form submission and change events."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The currently selected date value in YYYY-MM-DD format."
+    },
+    {
+      "name": "min",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past."
+    },
+    {
+      "name": "max",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "bordered",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Shows a border around the calendar. Set to false when embedding within another component."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": []
+}

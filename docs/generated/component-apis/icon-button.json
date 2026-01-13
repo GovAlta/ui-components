@@ -1,0 +1,130 @@
+{
+  "componentSlug": "icon-button",
+  "extractedFrom": "libs/web-components/src/components/icon-button/IconButton.svelte",
+  "extractedAt": "2026-01-05T23:10:27.448Z",
+  "props": [
+    {
+      "name": "icon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": true,
+      "default": null,
+      "description": "Sets the icon."
+    },
+    {
+      "name": "size",
+      "type": "IconSize",
+      "required": false,
+      "default": "medium",
+      "description": "Sets the size of button."
+    },
+    {
+      "name": "theme",
+      "type": "IconTheme",
+      "required": false,
+      "default": "outline",
+      "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
+    },
+    {
+      "name": "variant",
+      "type": "\"color\" | \"nocolor\" | \"light\" | \"dark\" | \"destructive\"",
+      "typeLabel": "GoabIconButtonVariant",
+      "values": [
+        "color",
+        "nocolor",
+        "light",
+        "dark",
+        "destructive"
+      ],
+      "required": false,
+      "default": "color",
+      "description": "Styles the button to show color, light, dark or destructive action."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the title of the button."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disables the button."
+    },
+    {
+      "name": "inverted",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, inverts the icon colors for use on dark backgrounds."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the aria-label of the button."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_click",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": []
+}

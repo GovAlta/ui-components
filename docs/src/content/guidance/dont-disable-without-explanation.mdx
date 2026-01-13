@@ -1,0 +1,35 @@
+---
+id: dont-disable-without-explanation
+type: dont
+description: Don't disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can't interact with an element.
+topic: states
+tags:
+  - accessibility
+  - usability
+  - disabled
+appliesTo:
+  components:
+    - button
+    - input
+    - text-area
+    - dropdown
+    - date-picker
+    - checkbox
+    - radio-group
+    - icon-button
+status: published
+---
+
+<Preview>
+  <goa-block direction="column" gap="m">
+    <goa-form-item label="Email address">
+      <goa-input name="email" disabled="true"></goa-input>
+    </goa-form-item>
+    <goa-button type="primary" disabled="true">Submit</goa-button>
+  </goa-block>
+</Preview>
+
+When you must disable a button or input:
+- Provide nearby text explaining what needs to happen first
+- Consider showing the element enabled with validation on submit instead
+- Use aria-describedby to link the disabled element to explanatory text

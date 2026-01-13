@@ -27,13 +27,20 @@ export default defineConfig({
 
   vite: {
     resolve: {
-      alias: {
-        '@abgov/web-components': path.resolve(workspaceRoot, 'dist/libs/web-components/'),
-        '@abgov/ui-components-common': path.resolve(workspaceRoot, 'libs/common/src/index.ts'),
-        '@abgov/react-components': path.resolve(workspaceRoot, 'libs/react-components/src/index.ts'),
-        '@abgov/react-components/experimental': path.resolve(workspaceRoot, 'libs/react-components/src/experimental/index.ts'),
-        '@abgov/style': path.resolve(workspaceRoot, "dist/libs/web-components/index.css"),
-      }
+      alias: [
+        // More specific aliases must come first
+        { find: '@abgov/react-components/experimental', replacement: path.resolve(workspaceRoot, 'libs/react-components/src/experimental/index.ts') },
+        { find: '@abgov/react-components', replacement: path.resolve(workspaceRoot, 'libs/react-components/src/index.ts') },
+        { find: '@abgov/web-components', replacement: path.resolve(workspaceRoot, 'dist/libs/web-components/') },
+        { find: '@abgov/ui-components-common', replacement: path.resolve(workspaceRoot, 'libs/common/src/index.ts') },
+        { find: '@abgov/style', replacement: path.resolve(workspaceRoot, 'dist/libs/web-components/index.css') },
+        { find: '@design-tokens', replacement: path.resolve(workspaceRoot, '../design-tokens/dist') },
+      ],
+      dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom'],
+      force: true,
     },
     server: {
       fs: {
