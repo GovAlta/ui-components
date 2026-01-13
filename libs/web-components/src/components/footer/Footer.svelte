@@ -7,6 +7,7 @@
   export let maxcontentwidth: string = "";
   export let testid: string = "";
   export let url: string = "https://alberta.ca";
+  export let version: "1" | "2" = "1";
 
   let rootEl: HTMLElement;
   let navLinks: Element[];
@@ -53,13 +54,23 @@
         class="abgov"
         class:with-meta-links={metaLinks && metaLinks.length > 0}
       >
-        <!-- Logo with optional link -->
-        {#if url && url !== ""}
-          <a href={url}>
-            <img src={_footerLogo} alt="Government of Alberta Logo" class="logo" />
-          </a>
-        {:else}
-          <img src={_footerLogo} alt="Government of Alberta Logo" class="logo" />
+        {#if version === "1"}
+          <!-- Logo with optional link -->
+          {#if url && url !== ""}
+            <a href={url}>
+              <img
+                src={_footerLogo}
+                alt="Government of Alberta Logo"
+                class="logo"
+              />
+            </a>
+          {:else}
+            <img
+              src={_footerLogo}
+              alt="Government of Alberta Logo"
+              class="logo"
+            />
+          {/if}
         {/if}
 
         <a
@@ -97,7 +108,7 @@
       font-size: var(--goa-footer-typography-small-screen);
     }
     .logo {
-    width: var(--goa-footer-size-logo-mobile);
+      width: var(--goa-footer-size-logo-mobile);
     }
   }
 
@@ -106,7 +117,7 @@
       padding: var(--goa-footer-padding-medium-screen);
     }
     .logo {
-    width: var(--goa-footer-size-logo-tablet);
+      width: var(--goa-footer-size-logo-tablet);
     }
   }
 
@@ -115,7 +126,7 @@
       padding: var(--goa-footer-padding-large-screen);
     }
     .logo {
-    width: var(--goa-footer-size-logo-desktop);
+      width: var(--goa-footer-size-logo-desktop);
     }
   }
 
@@ -126,7 +137,7 @@
   }
 
   .meta-section.with-meta-links {
-  /* gap between meta links and goa log when stacked vertically on small screen  */
+    /* gap between meta links and goa log when stacked vertically on small screen  */
     justify-content: space-between;
   }
 
@@ -142,7 +153,6 @@
     flex-direction: column;
     gap: var(--goa-space-xl); /* space between different columns/rows of nav links on mobile */
   }
-
 
   .abgov {
     display: flex;
@@ -196,6 +206,6 @@
 
   a:focus-visible {
     outline: var(--goa-footer-link-focus);
-    border-radius: 2px;
+    border-radius: var(--goa-footer-link-focus-border-radius);
   }
 </style>
