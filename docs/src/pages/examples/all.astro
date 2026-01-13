@@ -1,0 +1,120 @@
+---
+/**
+ * All Examples Page (Testing)
+ *
+ * Shows all examples with full previews on a single page for quick testing.
+ */
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExampleDisplay from '../../components/ExampleDisplay.astro';
+
+// Get all examples
+const allExamples = await getCollection('examples');
+
+// Sort by title
+const sortedExamples = allExamples.sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout title="All Examples (Testing)">
+  <div class="all-examples-page">
+    <header class="page-header">
+      <h1>All Examples ({sortedExamples.length})</h1>
+      <p>Testing page - all examples rendered on one page</p>
+    </header>
+
+    <div class="examples-list">
+      {sortedExamples.map((example) => (
+        <section class="example-section" id={example.data.id}>
+          <ExampleDisplay example={example} />
+          {example.data.components && example.data.components.length > 0 && (
+            <div class="component-pages">
+              <span class="component-pages-label">Shows on:</span>
+              {example.data.components.map((comp: string, i: number) => (
+                <>
+                  <a href={`/components/${comp}`}>{comp}</a>
+                  {i < example.data.components.length - 1 && <span>, </span>}
+                </>
+              ))}
+            </div>
+          )}
+          {(!example.data.components || example.data.components.length === 0) && (
+            <div class="component-pages none">
+              <span class="component-pages-label">Shows on:</span> <em>no component pages</em>
+            </div>
+          )}
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .all-examples-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--goa-space-xl);
+  }
+
+  .page-header {
+    margin-bottom: var(--goa-space-2xl);
+  }
+
+  .page-header h1 {
+    font: var(--goa-typography-heading-xl);
+    margin: 0 0 var(--goa-space-s);
+  }
+
+  .page-header p {
+    color: var(--goa-color-text-secondary);
+    margin: 0;
+  }
+
+  .examples-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-3xl);
+  }
+
+  .example-section {
+    padding-bottom: var(--goa-space-2xl);
+    border-bottom: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .example-section:last-child {
+    border-bottom: none;
+  }
+
+  .component-pages {
+    margin-top: var(--goa-space-xs);
+    font-size: 0.875rem;
+    border-top: none;
+  }
+
+  .example-section :global(.example-display) {
+    border-bottom: none;
+  }
+
+  .component-pages-label {
+    color: var(--goa-color-text-secondary);
+    margin-right: var(--goa-space-xs);
+  }
+
+  .component-pages a {
+    color: var(--goa-color-interactive-default);
+    text-decoration: none;
+  }
+
+  .component-pages a:hover {
+    text-decoration: underline;
+  }
+
+  .component-pages.none {
+    color: var(--goa-color-text-secondary);
+  }
+
+  .component-pages.none em {
+    font-style: italic;
+  }
+</style>

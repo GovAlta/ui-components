@@ -1,0 +1,25 @@
+---
+id: no-essential-info-in-tooltips
+type: dont
+description: Don't use tooltips to communicate essential information such as required field indicators, error messages, critical instructions, or information needed to complete a task.
+topic: other
+tags:
+  - tooltip
+  - accessibility
+  - usability
+appliesTo:
+  components:
+    - tooltip
+status: published
+---
+
+<Preview>
+  <goa-form-item label="Password">
+    <goa-block alignment="center" gap="xs">
+      <goa-input name="password" type="password" width="200px"></goa-input>
+      <goa-tooltip content="Must be at least 8 characters with one number">
+        <goa-icon type="information-circle"></goa-icon>
+      </goa-tooltip>
+    </goa-block>
+  </goa-form-item>
+</Preview>

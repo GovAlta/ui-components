@@ -1,0 +1,80 @@
+<goa-link leadingicon="arrow-back" size="small" mb="none">
+  Back
+</goa-link>
+
+<goa-text as="h2" mt="xl" mb="m">Your address</goa-text>
+<goa-text mt="none" mb="xl">This is the home address of the person applying</goa-text>
+
+<goa-form-item label="Address line 1">
+  <goa-input
+    id="address-line-1"
+    name="address-line-1"
+    aria-label="Address line 1"
+    width="100%">
+  </goa-input>
+</goa-form-item>
+
+<goa-form-item label="Address line 2" mt="l">
+  <goa-input
+    id="address-line-2"
+    name="address-line-2"
+    aria-label="Address line 2"
+    width="100%">
+  </goa-input>
+</goa-form-item>
+
+<goa-form-item label="Town or city" mt="l">
+  <goa-input
+    id="town-city"
+    name="town-city"
+    aria-label="Town or city name"
+    width="460px">
+  </goa-input>
+</goa-form-item>
+
+<goa-form-item label="Province or territory" mt="l" id="provinceLabel">
+  <goa-dropdown
+    id="province-territory"
+    name="province-territory"
+    aria-labelledby="provinceLabel">
+    <goa-dropdown-item value="AB" label="Alberta"></goa-dropdown-item>
+    <goa-dropdown-item value="BC" label="British Columbia"></goa-dropdown-item>
+    <goa-dropdown-item value="MB" label="Manitoba"></goa-dropdown-item>
+    <goa-dropdown-item value="NB" label="New Brunswick"></goa-dropdown-item>
+    <goa-dropdown-item value="NL" label="Newfoundland and Labrador"></goa-dropdown-item>
+    <goa-dropdown-item value="NS" label="Nova Scotia"></goa-dropdown-item>
+    <goa-dropdown-item value="ON" label="Ontario"></goa-dropdown-item>
+    <goa-dropdown-item value="PE" label="Prince Edward Island"></goa-dropdown-item>
+    <goa-dropdown-item value="QC" label="Quebec"></goa-dropdown-item>
+    <goa-dropdown-item value="SK" label="Saskatchewan"></goa-dropdown-item>
+    <goa-dropdown-item value="NT" label="Northwest Territories"></goa-dropdown-item>
+    <goa-dropdown-item value="NU" label="Nunavut"></goa-dropdown-item>
+    <goa-dropdown-item value="YT" label="Yukon"></goa-dropdown-item>
+  </goa-dropdown>
+</goa-form-item>
+
+<goa-form-item label="Postal code" mt="l">
+  <goa-input
+    id="postal-code"
+    name="postal-code"
+    width="105px">
+  </goa-input>
+</goa-form-item>
+
+<goa-button type="submit" mt="2xl" id="submit-btn">
+  Save and continue
+</goa-button>
+
+<script>
+  document.getElementById("address-line-1").addEventListener("_change", (e) => {
+    console.log("Address line 1:", e.detail.value);
+  });
+
+  document.getElementById("province-territory").addEventListener("_change", (e) => {
+    console.log("Province:", e.detail.value);
+  });
+
+  document.getElementById("submit-btn").addEventListener("_click", () => {
+    console.log("Form submitted");
+  });
+</script>

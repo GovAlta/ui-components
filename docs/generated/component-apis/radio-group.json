@@ -1,0 +1,141 @@
+{
+  "componentSlug": "radio-group",
+  "extractedFrom": "libs/web-components/src/components/radio-group/RadioGroup.svelte",
+  "extractedAt": "2026-01-05T23:10:27.457Z",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The name for the radio group. Used for form submission and accessibility."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The currently selected value in the radio group."
+    },
+    {
+      "name": "orientation",
+      "type": "\"vertical\" | \"horizontal\"",
+      "typeLabel": "GoabRadioGroupOrientation",
+      "values": [
+        "vertical",
+        "horizontal"
+      ],
+      "required": false,
+      "default": "vertical",
+      "description": "Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disables all radio items in the group."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Shows an error state on all radio items in the group."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "typeLabel": "GoabRadioGroupVersionType",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    },
+    {
+      "name": "size",
+      "type": "\"default\" | \"compact\"",
+      "typeLabel": "GoabRadioGroupSizeType",
+      "values": [
+        "default",
+        "compact"
+      ],
+      "required": false,
+      "default": "default",
+      "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only)."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Defines how the radio group will be announced by screen readers."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

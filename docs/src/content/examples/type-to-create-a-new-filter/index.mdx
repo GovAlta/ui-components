@@ -1,0 +1,36 @@
+---
+id: type-to-create-a-new-filter
+title: Type to create a new filter
+categories:
+  - inputs-and-actions
+scale: interaction
+userType: both
+tags:
+  - filter-chip
+  - input
+  - dynamic
+  - keyboard
+components:
+  - filter-chip
+  - input
+  - form-item
+  - container
+status: published
+---
+
+Allow users to type custom filter values and create filter chips by pressing Enter, with the ability to remove chips using Backspace or by clicking them.
+
+## When to use
+
+Use this pattern when:
+- Users need to create custom filter values not from a predefined list
+- Free-form text filtering is appropriate for the data
+- Users may want to quickly add multiple related filters
+
+## Considerations
+
+- Clear the input after a chip is created
+- Allow Backspace to delete the last chip when the input is empty
+- Provide visual feedback as chips are added
+- Consider input validation before creating chips
+- Show chips inline with the input for clear association

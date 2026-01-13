@@ -1,0 +1,37 @@
+---
+id: dynamically-add-an-item-to-a-dropdown-list
+title: Dynamically add an item to a dropdown list
+categories:
+  - inputs-and-actions
+scale: interaction
+userType: both
+tags:
+  - dropdown
+  - dynamic
+  - form
+  - input
+  - radio
+components:
+  - dropdown
+  - dropdown-item
+  - form-item
+  - input
+  - button
+status: published
+---
+
+Allow users to add new items to a dropdown list dynamically.
+
+## When to use
+
+Use this pattern when:
+- Users need to add custom options to a predefined list
+- The list of options can grow based on user input
+- You want to provide flexibility while maintaining structure
+
+## Considerations
+
+- Use the `mountType` prop to control where new items appear (prepend or append)
+- Validate input before adding to prevent empty or duplicate entries
+- Provide a reset option to restore the original list
+- Show clear feedback when items are added successfully

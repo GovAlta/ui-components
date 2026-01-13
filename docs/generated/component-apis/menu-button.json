@@ -1,0 +1,90 @@
+{
+  "componentSlug": "menu-button",
+  "extractedFrom": "libs/web-components/src/components/menu-button/MenuButton.svelte",
+  "extractedAt": "2026-01-05T23:10:27.451Z",
+  "props": [
+    {
+      "name": "text",
+      "type": "string | undefined",
+      "values": [
+        "string",
+        "undefined"
+      ],
+      "required": false,
+      "default": null,
+      "description": "The button label text. When provided, displays as a text button with a dropdown icon."
+    },
+    {
+      "name": "type",
+      "type": "\"primary\" | \"secondary\" | \"tertiary\"",
+      "values": [
+        "primary",
+        "secondary",
+        "tertiary"
+      ],
+      "required": false,
+      "default": "primary",
+      "description": "The button style variant."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed before the button text. When no text is provided, displays as an icon button."
+    },
+    {
+      "name": "leadingIconTheme",
+      "type": "IconTheme",
+      "required": false,
+      "default": "outline",
+      "description": "Theme for the leading icon."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Maximum width of the dropdown menu."
+    },
+    {
+      "name": "size",
+      "type": "MenuActionSize",
+      "required": false,
+      "default": "normal",
+      "description": "Size of the button and menu items."
+    }
+  ],
+  "events": [
+    {
+      "name": "onAction",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_action",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

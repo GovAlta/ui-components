@@ -1,0 +1,108 @@
+{
+  "componentSlug": "chip",
+  "extractedFrom": "libs/web-components/src/components/chip/Chip.svelte",
+  "extractedAt": "2026-01-05T23:10:27.431Z",
+  "props": [
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "@deprecated Use GoAFilterChip instead. Icon displayed at the start of the chip."
+    },
+    {
+      "name": "icontheme",
+      "type": "IconTheme",
+      "required": false,
+      "default": "outline",
+      "description": "@deprecated Use GoAFilterChip instead. The icon theme - outline or filled."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "@deprecated Use GoAFilterChip instead. Shows an error state on the chip."
+    },
+    {
+      "name": "deletable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "@deprecated Use GoAFilterChip instead. When true, shows a delete icon and makes chip clickable."
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "@deprecated Use GoAFilterChip instead. The text content displayed in the chip."
+    },
+    {
+      "name": "variant",
+      "type": "ChipVariant",
+      "required": true,
+      "default": null,
+      "description": "@deprecated Use GoAFilterChip instead. The chip variant style."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated Use GoAFilterChip instead. Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_click",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": []
+}

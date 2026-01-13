@@ -1,0 +1,62 @@
+---
+/**
+ * /tokens - Design Tokens Page
+ *
+ * Displays all GoA design tokens in a searchable, filterable, groupable grid.
+ */
+
+import TokensLayout from '../../layouts/TokensLayout.astro';
+import { TokensGrid } from '../../components/TokensGrid';
+import { getAllTokens, getFilterGroups } from '../../lib/tokens';
+
+// Get all tokens at build time
+const tokens = getAllTokens();
+const filterGroups = getFilterGroups();
+
+// Page metadata
+const title = 'Design Tokens';
+const description = 'Browse all GoA design tokens including colors, spacing, typography, and more.';
+---
+
+<TokensLayout title={title} description={description}>
+  <div class="tokens-page">
+    <header class="page-header">
+      <h1>Design Tokens</h1>
+      <p class="page-description">
+        Design tokens are the foundational values that define the visual design of the GoA Design System.
+        Use these tokens in your CSS to ensure consistency across applications.
+      </p>
+    </header>
+
+    <TokensGrid
+      client:load
+      tokens={tokens}
+      filterGroups={filterGroups}
+    />
+  </div>
+</TokensLayout>
+
+<style>
+  .tokens-page {
+    max-width: 1408px;
+    margin: 0 auto;
+  }
+
+  /* Page header styling - matches examples/index.astro */
+  .page-header {
+    margin-bottom: var(--goa-space-xs, 0.5rem);
+  }
+
+  .page-header h1 {
+    font: var(--goa-typography-heading-xl);
+    margin: 0 0 var(--goa-space-m, 1rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .page-description {
+    font: var(--goa-typography-body-l);
+    color: var(--goa-color-text-default, #333);
+    margin: 0;
+    max-width: 70ch;
+  }
+</style>

@@ -1,0 +1,18 @@
+<goab-button type="secondary" (onClick)="toggleModal()">Save for later</goab-button>
+<goab-modal
+  [open]="open"
+  calloutVariant="important"
+  (onClose)="toggleModal()"
+  heading="Complete submission prior to 1PM"
+  [actions]="actions">
+  <p>
+    You've selected to adjourn a matter that is required to appear today. This Calgary court
+    location does not accept adjournment requests past 1PM MST. Please submit your adjournment
+    request as soon as possible.
+  </p>
+  <ng-template #actions>
+    <goab-button-group alignment="end">
+      <goab-button type="primary" (onClick)="toggleModal()">I understand</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>

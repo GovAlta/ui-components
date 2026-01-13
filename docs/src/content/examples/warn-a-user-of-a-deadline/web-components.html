@@ -1,0 +1,32 @@
+<goa-button type="secondary" id="open-modal-btn">Save for later</goa-button>
+<goa-modal
+  id="deadline-modal"
+  calloutvariant="important"
+  heading="Complete submission prior to 1PM">
+  You've selected to adjourn a matter that is required to appear today. This Calgary court
+  location does not accept adjournment requests past 1PM MST. Please submit your adjournment
+  request as soon as possible.
+  <div slot="actions">
+    <goa-button-group alignment="end">
+      <goa-button type="primary" size="compact" id="understand-btn">I understand</goa-button>
+    </goa-button-group>
+  </div>
+</goa-modal>
+
+<script>
+  const modal = document.getElementById("deadline-modal");
+  const openBtn = document.getElementById("open-modal-btn");
+  const understandBtn = document.getElementById("understand-btn");
+
+  openBtn.addEventListener("_click", () => {
+    modal.setAttribute("open", "true");
+  });
+
+  understandBtn.addEventListener("_click", () => {
+    modal.removeAttribute("open");
+  });
+
+  modal.addEventListener("_close", () => {
+    modal.removeAttribute("open");
+  });
+</script>

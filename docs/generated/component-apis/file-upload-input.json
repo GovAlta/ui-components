@@ -1,0 +1,54 @@
+{
+  "componentSlug": "file-upload-input",
+  "extractedFrom": "libs/web-components/src/components/file-upload-input/FileUploadInput.svelte",
+  "extractedAt": "2026-01-05T23:10:27.440Z",
+  "props": [
+    {
+      "name": "variant",
+      "type": "Variant",
+      "required": false,
+      "default": "dragdrop",
+      "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
+    },
+    {
+      "name": "accept",
+      "type": "string",
+      "required": false,
+      "default": "*",
+      "description": "Accepted file types as a comma-separated list of MIME types or file extensions (e.g., \"image/*,.pdf\")."
+    },
+    {
+      "name": "maxfilesize",
+      "type": "string",
+      "required": false,
+      "default": "5MB",
+      "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Files exceeding this will be rejected."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [
+    {
+      "name": "onSelectFile",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_selectFile",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": []
+}

@@ -1,0 +1,13 @@
+{
+  "componentSlug": "card-actions",
+  "extractedFrom": "libs/web-components/src/components/card-actions/CardActions.svelte",
+  "extractedAt": "2026-01-05T23:10:27.425Z",
+  "props": [],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

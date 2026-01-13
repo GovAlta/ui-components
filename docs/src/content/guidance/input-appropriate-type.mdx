@@ -1,0 +1,30 @@
+---
+id: input-appropriate-type
+type: do
+description: Use the appropriate input type for your context to give a better experience.
+topic: types
+tags:
+  - input
+  - accessibility
+  - mobile
+appliesTo:
+  components:
+    - input
+relatedProps:
+  - type
+status: published
+---
+
+<Preview>
+  <goa-block direction="column" gap="m">
+    <goa-form-item label="Email address">
+      <goa-input name="email" type="email" width="100%"></goa-input>
+    </goa-form-item>
+    <goa-form-item label="Phone number">
+      <goa-input name="phone" type="tel" width="100%"></goa-input>
+    </goa-form-item>
+    <goa-form-item label="Password">
+      <goa-input name="password" type="password" width="100%"></goa-input>
+    </goa-form-item>
+  </goa-block>
+</Preview>

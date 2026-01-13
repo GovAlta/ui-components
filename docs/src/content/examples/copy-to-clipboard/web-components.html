@@ -1,0 +1,33 @@
+<style>
+  .token-block {
+    background-color: var(--goa-color-interactive-default);
+    height: 22px;
+    width: 24px;
+    border-radius: var(--goa-border-radius-s);
+  }
+</style>
+
+<goa-block alignment="center">
+  <div class="token-block"></div>
+  <span>$goa-color-interactive-default</span>
+  <goa-tooltip id="copy-tooltip" content="Copy?" position="top">
+    <goa-icon-button id="copy-btn" icon="copy" mt="2xs"></goa-icon-button>
+  </goa-tooltip>
+</goa-block>
+
+<script>
+  const copyBtn = document.getElementById('copy-btn');
+  const tooltip = document.getElementById('copy-tooltip');
+
+  function copyCode() {
+    const codeToCopy = "$goa-color-interactive-default";
+    navigator.clipboard.writeText(codeToCopy).then(() => {
+      tooltip.setAttribute('content', 'Copied');
+      setTimeout(() => {
+        tooltip.setAttribute('content', 'Copy?');
+      }, 1000);
+    });
+  }
+
+  copyBtn.addEventListener('_click', copyCode);
+</script>

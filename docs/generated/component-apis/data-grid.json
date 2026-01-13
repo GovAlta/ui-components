@@ -1,0 +1,47 @@
+{
+  "componentSlug": "data-grid",
+  "extractedFrom": "libs/web-components/src/components/data-grid/DataGrid.svelte",
+  "extractedAt": "2026-01-05T23:10:27.433Z",
+  "props": [
+    {
+      "name": "keyboardIcon",
+      "type": "string | boolean",
+      "values": [
+        "string",
+        "boolean"
+      ],
+      "required": false,
+      "default": "true",
+      "description": "Whether to show the keyboard navigation indicator icon when navigating with arrow keys."
+    },
+    {
+      "name": "keyboardIconPosition",
+      "type": "\"left\" | \"right\"",
+      "values": [
+        "left",
+        "right"
+      ],
+      "required": false,
+      "default": "left",
+      "description": "Position of the keyboard navigation indicator icon."
+    },
+    {
+      "name": "keyboardNav",
+      "type": "\"layout\" | \"table\"",
+      "values": [
+        "layout",
+        "table"
+      ],
+      "required": false,
+      "default": "table",
+      "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

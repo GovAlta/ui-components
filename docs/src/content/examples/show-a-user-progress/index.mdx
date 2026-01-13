@@ -1,0 +1,34 @@
+---
+id: show-a-user-progress
+title: Show a user progress
+categories:
+  - feedback-and-alerts
+scale: task
+userType: both
+tags:
+  - progress
+  - notification
+  - download
+  - feedback
+components:
+  - temporary-notification
+  - button
+status: published
+---
+
+Display progress feedback during long-running operations like downloads, showing percentage completion with the ability to cancel and receive success confirmation.
+
+## When to use
+
+Use this pattern when:
+- An operation takes more than a few seconds
+- Progress can be measured as a percentage (0-100%)
+- Users need the ability to cancel the operation
+- Success or failure confirmation is needed
+
+## Considerations
+
+- Always provide a cancel option for long operations
+- Show a success notification when complete
+- Use `type="progress"` for operations with known duration
+- Handle errors gracefully with failure notifications

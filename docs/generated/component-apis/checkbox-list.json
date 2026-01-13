@@ -1,0 +1,105 @@
+{
+  "componentSlug": "checkbox-list",
+  "extractedFrom": "libs/web-components/src/components/checkbox-list/CheckboxList.svelte",
+  "extractedAt": "2026-01-05T23:10:27.431Z",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "- Manages a selected values array and synchronizes state down to child checkboxes. - Relays form-related events (mount, set value, set/reset error, reset fields) to and from children. Approach - Children register themselves via a FormFieldMount event; we track them in _childRecords. - All value and error changes flow through a small relay bus (receive/relay helpers). - Support both slotted goa-checkbox elements and direct child component instances. / import { onMount, tick } from \"svelte\"; import type { Spacing } from \"../../common/styling\"; import { calculateMargin } from \"../../common/styling\"; import { receive, relay, toBoolean } from \"../../common/utils\"; import { FieldsetSetValueMsg, FieldsetSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg, FieldsetResetFieldsMsg, FieldsetErrorRelayDetail, } from \"../../types/relay-types\"; /** The name for the checkbox list group. Used for form submission."
+    },
+    {
+      "name": "value",
+      "type": "string[]",
+      "required": false,
+      "default": "[]",
+      "description": "Array of currently selected checkbox values."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disables all checkboxes in the list."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Shows an error state on all checkboxes in the list."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Sets the maximum width of the checkbox list container."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "componentSlug": "drawer",
+  "extractedFrom": "libs/web-components/src/components/drawer/Drawer.svelte",
+  "extractedAt": "2026-01-05T23:10:27.435Z",
+  "props": [
+    {
+      "name": "open",
+      "type": "any",
+      "required": true,
+      "default": "false",
+      "description": "Whether the drawer is open."
+    },
+    {
+      "name": "position",
+      "type": "DrawerPosition",
+      "required": true,
+      "default": null,
+      "description": "The position of the drawer."
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The heading text displayed at the top of the drawer."
+    },
+    {
+      "name": "maxsize",
+      "type": "DrawerSize",
+      "required": false,
+      "default": null,
+      "description": "Sets max height on bottom position, sets width on left and right position."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "drawer",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "version",
+      "type": "VersionType",
+      "required": false,
+      "default": "2",
+      "description": "The design system version for styling purposes."
+    }
+  ],
+  "events": [
+    {
+      "name": "onClose",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_close",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "heading",
+      "description": ""
+    },
+    {
+      "name": "actions",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "componentSlug": "footer-meta-section",
+  "extractedFrom": "libs/web-components/src/components/footer-meta-section/FooterMetaSection.svelte",
+  "extractedAt": "2026-01-05T23:10:27.442Z",
+  "props": [
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

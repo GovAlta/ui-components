@@ -1,0 +1,69 @@
+<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
+
+<goa-button id="search-btn" type="secondary" leadingicon="search">
+  Search case history
+</goa-button>
+
+<script>
+  const searchBtn = document.getElementById("search-btn");
+  let currentUuid = null;
+
+  function showNotification(message, opts = {}) {
+    const uuid = crypto.randomUUID();
+    document.body.dispatchEvent(new CustomEvent("msg", {
+      composed: true,
+      bubbles: true,
+      detail: {
+        action: "goa:temp-notification",
+        data: { message, uuid, type: "basic", ...opts }
+      }
+    }));
+    return uuid;
+  }
+
+  function dismissNotification(uuid) {
+    document.body.dispatchEvent(new CustomEvent("msg", {
+      composed: true,
+      bubbles: true,
+      detail: {
+        action: "goa:temp-notification:dismiss",
+        data: uuid
+      }
+    }));
+  }
+
+  async function searchCMS() {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+  }
+
+  async function search() {
+    currentUuid = showNotification("Searching case management system...", {
+      type: "indeterminate",
+      actionText: "Cancel",
+      action: () => {
+        dismissNotification(currentUuid);
+      },
+    });
+
+    try {
+      await searchCMS();
+      showNotification("Search complete - 47 records found", {
+        type: "success",
+        duration: "medium",
+        actionText: "View",
+        action: () => {
+          console.log("View search results clicked!");
+        },
+        cancelUUID: currentUuid,
+      });
+    } catch (err) {
+      showNotification("Could not connect to case history", {
+        type: "failure",
+        duration: "medium",
+        cancelUUID: currentUuid,
+      });
+    }
+  }
+
+  searchBtn.addEventListener("_click", search);
+</script>

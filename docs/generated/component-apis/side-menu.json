@@ -1,0 +1,21 @@
+{
+  "componentSlug": "side-menu",
+  "extractedFrom": "libs/web-components/src/components/side-menu/SideMenu.svelte",
+  "extractedAt": "2026-01-05T23:10:27.458Z",
+  "props": [
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

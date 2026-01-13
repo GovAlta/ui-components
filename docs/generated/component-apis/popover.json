@@ -1,0 +1,241 @@
+{
+  "componentSlug": "popover",
+  "extractedFrom": "libs/web-components/src/components/popover/Popover.svelte",
+  "extractedAt": "2026-01-05T23:10:27.456Z",
+  "props": [
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "popover",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "position",
+      "type": "\"above\" | \"below\" | \"right\" | \"auto\"",
+      "values": [
+        "above",
+        "below",
+        "right",
+        "auto"
+      ],
+      "required": false,
+      "default": "auto",
+      "description": "Provides control to where the popover content is positioned."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string | \"none\"",
+      "values": [
+        "string",
+        "none"
+      ],
+      "required": false,
+      "default": "320px",
+      "description": "Sets the maximum width of the popover container."
+    },
+    {
+      "name": "minwidth",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the minimum width of the popover container."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a fixed width for the popover container."
+    },
+    {
+      "name": "height",
+      "type": "\"full\" | \"wrap-content\"",
+      "values": [
+        "full",
+        "wrap-content"
+      ],
+      "required": false,
+      "default": "wrap-content",
+      "description": "Controls the height behavior. 'full' stretches to parent height, 'wrap-content' fits content."
+    },
+    {
+      "name": "preventScrollIntoView",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Prevents scrolling into view when focus trap is activated. Passed to FocusTrap."
+    },
+    {
+      "name": "padded",
+      "type": "boolean",
+      "required": false,
+      "default": "true",
+      "description": "Sets if the popover has padding. Use false when content needs to be flush with boundaries."
+    },
+    {
+      "name": "tabIndex",
+      "type": "number",
+      "required": false,
+      "default": "0",
+      "description": "Sets the tabindex. Use -1 to skip tabbing when a parent handles keyboard events."
+    },
+    {
+      "name": "relative",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated This property has no effect and will be removed in a future version."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "disableGlobalClosePopover",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Prevents the popover from closing when other popovers open. Used for nested interactions."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Controls whether the popover is open or closed. Used by parent components like AppHeaderMenu."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Disables the popover interaction. Used by parent components like Dropdown."
+    },
+    {
+      "name": "voffset",
+      "type": "any",
+      "required": false,
+      "default": "",
+      "description": "Additional vertical offset added to the popover's position."
+    },
+    {
+      "name": "hoffset",
+      "type": "any",
+      "required": false,
+      "default": "",
+      "description": "Additional horizontal offset added to the popover's position."
+    },
+    {
+      "name": "focusborderwidth",
+      "type": "any",
+      "required": false,
+      "default": "var(--goa-border-width-l)",
+      "description": "Width of the focus outline border."
+    },
+    {
+      "name": "borderradius",
+      "type": "any",
+      "required": false,
+      "default": "var(--goa-border-radius-m)",
+      "description": "Border radius of the popover window."
+    },
+    {
+      "name": "closeOnClickWithinBounds",
+      "type": "any",
+      "required": false,
+      "default": "false",
+      "description": "When true, clicking inside the popover will close it."
+    },
+    {
+      "name": "filterablecontext",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Indicates the popover is used within a filterable context like a combobox."
+    },
+    {
+      "name": "externalTarget",
+      "type": "HTMLElement | null",
+      "values": [
+        "HTMLElement",
+        "null"
+      ],
+      "required": false,
+      "default": null,
+      "description": "An external element to use as the popover target instead of the slotted target."
+    }
+  ],
+  "events": [
+    {
+      "name": "onOpen",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_open",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    },
+    {
+      "name": "onClose",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_close",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "target",
+      "description": ""
+    }
+  ]
+}

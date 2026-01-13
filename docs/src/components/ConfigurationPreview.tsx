@@ -1,0 +1,233 @@
+/**
+ * ConfigurationPreview Component
+ *
+ * Interactive component that shows:
+ * 1. Dropdown to select a configuration
+ * 2. Live preview area (renders web components)
+ * 3. Code snippet (shows framework-specific code)
+ *
+ * The preview uses web components directly (no React hydration needed).
+ * Code snippet changes based on selected framework preference.
+ */
+
+import { useState, useEffect, useRef } from 'react';
+import { GoabDropdown, GoabDropdownItem } from '@abgov/react-components';
+import { CodeSnippet } from './CodeSnippet';
+import { useGitHubIssueCount } from '../hooks/useGitHubIssueCount';
+import type { ComponentConfigurations } from '../data/configurations/types';
+
+interface ConfigurationPreviewProps {
+  configurations: ComponentConfigurations;
+  figmaUrl?: string;
+  githubUrl?: string;
+  componentName?: string;
+}
+
+export function ConfigurationPreview({
+  configurations,
+  figmaUrl,
+  githubUrl,
+  componentName,
+}: ConfigurationPreviewProps) {
+  const [selectedConfigId, setSelectedConfigId] = useState(
+    configurations.defaultConfigurationId
+  );
+  const previewRef = useRef<HTMLDivElement>(null);
+  const issueCount = useGitHubIssueCount(componentName);
+
+  // Get the currently selected configuration
+  const selectedConfig = configurations.configurations.find(
+    (c) => c.id === selectedConfigId
+  );
+
+  // Update preview when configuration changes
+  useEffect(() => {
+    if (previewRef.current && selectedConfig) {
+      const code = selectedConfig.code.webComponents;
+
+      // Extract script content before stripping
+      const scriptMatch = code.match(/<script>([\s\S]*?)<\/script>/i);
+      const scriptContent = scriptMatch ? scriptMatch[1] : null;
+
+      // Extract HTML (strip scripts) and add version="2" to all goa- components
+      const html = code
+        .replace(/<script[\s\S]*?<\/script>/gi, '')
+        .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
+        .trim();
+
+      previewRef.current.innerHTML = html;
+
+      // Execute script content after HTML is rendered
+      if (scriptContent) {
+        try {
+          const container = previewRef.current;
+          const scopedScript = scriptContent
+            .replace(/document\.getElementById\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, id) => `container.querySelector("#${id}")`
+            )
+            .replace(/document\.querySelector\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, selector) => `container.querySelector("${selector}")`
+            );
+
+          const fn = new Function('container', scopedScript);
+          fn(container);
+        } catch (err) {
+          console.error('Error executing configuration script:', err);
+        }
+      }
+    }
+  }, [selectedConfig]);
+
+  // Handle configuration dropdown change
+  const handleConfigChange = (detail: { name: string; value: string | string[] }) => {
+    const newValue = Array.isArray(detail.value) ? detail.value[0] : detail.value;
+    setSelectedConfigId(newValue);
+  };
+
+  if (!selectedConfig) {
+    return <div>No configuration found</div>;
+  }
+
+  return (
+    <div className="configuration-preview">
+      {/* Control Bar */}
+      <div className="control-bar">
+        <div className="config-dropdown">
+          <GoabDropdown
+            name="configuration"
+            value={selectedConfigId}
+            onChange={handleConfigChange}
+            size="compact"
+          >
+            {configurations.configurations.map((config) => (
+              <GoabDropdownItem
+                key={config.id}
+                value={config.id}
+                label={config.name}
+              />
+            ))}
+          </GoabDropdown>
+        </div>
+
+        <div className="external-links">
+          {figmaUrl && (
+            <a
+              href={figmaUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="external-link"
+              aria-label="View in Figma"
+              title="View in Figma"
+            >
+              <goa-icon version="2" type="logo-figma" size="medium"></goa-icon>
+            </a>
+          )}
+          {githubUrl && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="external-link github-link"
+              aria-label="View GitHub issues"
+              title="View GitHub issues"
+            >
+              <goa-icon version="2" type="logo-github" size="medium"></goa-icon>
+              {issueCount !== null && (
+                <span className="issue-count">({issueCount})</span>
+              )}
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Preview Area */}
+      <div className="preview-area">
+        <div className="preview-container" ref={previewRef}>
+          {/* Web components rendered here via innerHTML */}
+        </div>
+      </div>
+
+      {/* Code Snippet with Framework Switcher */}
+      <div className="code-area">
+        <CodeSnippet
+          frameworkCode={{
+            react: selectedConfig.code.react,
+            angular: selectedConfig.code.angular,
+            webComponents: selectedConfig.code.webComponents,
+          }}
+          maxHeight={200}
+          showCopy={true}
+        />
+      </div>
+
+      <style>{`
+        .configuration-preview {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .control-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: var(--goa-space-m, 1rem);
+          margin-bottom: var(--goa-space-m, 1rem);
+          position: relative;
+          z-index: 2;
+        }
+
+        .config-dropdown {
+          min-width: 200px;
+        }
+
+        .external-links {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-s, 0.5rem);
+        }
+
+        .external-link {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-2xs, 0.25rem);
+          color: var(--goa-color-text-secondary, #666);
+          text-decoration: none;
+          transition: color 0.15s ease;
+        }
+
+        .external-link:hover {
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .github-link {
+          font-size: 0.875rem;
+        }
+
+        .issue-count {
+          color: var(--goa-color-text-secondary, #666);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 120px;
+          margin-bottom: var(--goa-space-m, 1rem);
+          position: relative;
+          z-index: 1;
+          isolation: isolate;
+        }
+
+        .configuration-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+        }
+
+        .code-area {
+          /* CodeSnippet component handles its own styling */
+        }
+      `}</style>
+    </div>
+  );
+}
+
+export default ConfigurationPreview;

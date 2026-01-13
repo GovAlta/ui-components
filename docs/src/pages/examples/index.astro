@@ -1,0 +1,76 @@
+---
+/**
+ * Examples Listing Page
+ *
+ * Shows all examples with:
+ * - Search input
+ * - Filter drawer (category, scale, userType)
+ * - Table/List/Card view toggle
+ * - Grouping options
+ * - Two-level sorting
+ */
+import { getCollection } from 'astro:content';
+import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
+import { ExamplesGrid } from '../../components/ExamplesGrid';
+
+// Get all examples
+const allExamples = await getCollection('examples');
+
+// Sort by title (default)
+const sortedExamples = allExamples.sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+
+// Transform to the shape ExamplesGrid expects
+const examples = sortedExamples.map(example => ({
+  slug: example.slug,
+  data: example.data,
+  body: example.body,
+}));
+---
+
+<ExamplesPageLayout
+  title="Examples"
+  description="Code examples showing GoA Design System components in context"
+>
+  <div class="examples-page">
+    <!-- Header -->
+    <header class="page-header">
+      <h1>Examples</h1>
+      <p class="page-description">
+        Common patterns, pages, tasks, component configurations, flows, and more to use as a starting point when creating government digital services.
+      </p>
+    </header>
+
+    <!-- Examples Grid (React component) -->
+    <ExamplesGrid
+      client:load
+      examples={examples}
+    />
+  </div>
+</ExamplesPageLayout>
+
+<style>
+  .examples-page {
+    max-width: 1408px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .page-header {
+    margin-bottom: var(--goa-space-xs, 0.5rem);
+  }
+
+  .page-header h1 {
+    font: var(--goa-typography-heading-xl);
+    margin: 0 0 var(--goa-space-m, 1rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .page-description {
+    font: var(--goa-typography-body-l);
+    color: var(--goa-color-text-default, #333);
+    margin: 0;
+    max-width: 70ch;
+  }
+</style>

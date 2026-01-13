@@ -1,0 +1,47 @@
+{
+  "componentSlug": "app-header-menu",
+  "extractedFrom": "libs/web-components/src/components/app-header-menu/AppHeaderMenu.svelte",
+  "extractedAt": "2026-01-05T23:10:27.420Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The menu heading text displayed as the dropdown trigger."
+    },
+    {
+      "name": "leadingIcon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": true,
+      "default": null,
+      "description": "Icon displayed before the heading text."
+    },
+    {
+      "name": "type",
+      "type": "\"primary\" | \"secondary\"",
+      "values": [
+        "primary",
+        "secondary"
+      ],
+      "required": false,
+      "default": "primary",
+      "description": "The menu style variant. Primary uses bold text, secondary uses regular weight."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "rootEl",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

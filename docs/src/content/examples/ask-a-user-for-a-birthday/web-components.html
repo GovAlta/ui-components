@@ -1,0 +1,10 @@
+<goa-form-item label="What is your date of birth?">
+  <goa-date-picker name="birthdate" type="input" id="birthdate"></goa-date-picker>
+</goa-form-item>
+
+<script>
+  const datePicker = document.getElementById("birthdate");
+  datePicker.addEventListener("_change", (e) => {
+    console.log("Selected date:", e.detail.value);
+  });
+</script>

@@ -1,0 +1,106 @@
+{
+  "componentSlug": "block",
+  "extractedFrom": "libs/web-components/src/components/block/Block.svelte",
+  "extractedAt": "2026-01-05T23:10:27.421Z",
+  "props": [
+    {
+      "name": "gap",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "m",
+      "description": "Spacing between items. Uses design system spacing tokens."
+    },
+    {
+      "name": "direction",
+      "type": "\"row\" | \"column\"",
+      "values": [
+        "row",
+        "column"
+      ],
+      "required": false,
+      "default": "row",
+      "description": "Stacking direction of child components."
+    },
+    {
+      "name": "alignment",
+      "type": "\"center\" | \"start\" | \"end\" | \"normal\"",
+      "values": [
+        "center",
+        "start",
+        "end",
+        "normal"
+      ],
+      "required": false,
+      "default": "normal",
+      "description": "Primary axis alignment of child components."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "minWidth",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the minimum width of the block container."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the maximum width of the block container."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the width of the block container. Defaults to max-content."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

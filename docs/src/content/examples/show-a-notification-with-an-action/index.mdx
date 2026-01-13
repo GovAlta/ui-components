@@ -1,0 +1,35 @@
+---
+id: show-a-notification-with-an-action
+title: Show a notification with an action
+categories:
+  - feedback-and-alerts
+scale: interaction
+userType: both
+tags:
+  - notification
+  - feedback
+  - action
+  - toast
+components:
+  - temporary-notification
+  - button
+status: published
+---
+
+Show a temporary notification with an action button for user interaction.
+
+## When to use
+
+Use this pattern when:
+- Users need to take action in response to a notification
+- Providing a quick way to navigate to related content
+- Showing activity notifications that users may want to respond to
+- The action should dismiss the notification when clicked
+
+## Considerations
+
+- Use `actionText` to set the button label in the notification
+- The `action` callback receives the notification UUID for dismissal
+- Use `TemporaryNotification.dismiss(uuid)` to close the notification programmatically
+- Keep action text short and clear (e.g., "View", "Undo", "Open")
+- Consider what happens if the user doesn't click the action before auto-dismiss

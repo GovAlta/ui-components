@@ -1,0 +1,36 @@
+<goa-button id="open-btn">Open</goa-button>
+<goa-modal id="route-modal" heading="Are you sure you want to change route?">
+  <div slot="actions">
+    <goa-button-group alignment="end">
+      <goa-button type="secondary" size="compact" id="cancel-btn">Cancel</goa-button>
+      <goa-button type="primary" size="compact" id="change-route-btn">Change route</goa-button>
+    </goa-button-group>
+  </div>
+</goa-modal>
+
+<script>
+  const modal = document.getElementById('route-modal');
+  const openBtn = document.getElementById('open-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
+  const changeRouteBtn = document.getElementById('change-route-btn');
+
+  openBtn.addEventListener('_click', () => {
+    modal.setAttribute('open', 'true');
+  });
+
+  cancelBtn.addEventListener('_click', () => {
+    modal.removeAttribute('open');
+  });
+
+  changeRouteBtn.addEventListener('_click', () => {
+    modal.removeAttribute('open');
+    // setTimeout will allow any modal transitions to be run
+    setTimeout(() => {
+      window.location.href = '/components';
+    }, 300);
+  });
+
+  modal.addEventListener('_close', () => {
+    modal.removeAttribute('open');
+  });
+</script>

@@ -1,0 +1,67 @@
+---
+/**
+ * TabContentWrapper.astro
+ *
+ * Wrapper for tab content that includes a TOC sidebar.
+ * Each tab gets its own TOC - when the tab is hidden, its TOC is hidden too.
+ * This mirrors the ds-evo-website prototype pattern.
+ */
+
+import { TableOfContents } from "./TableOfContents";
+
+interface Props {
+  /** CSS selector for headings to include in TOC */
+  tocQuery?: string;
+}
+
+const { tocQuery = "h2[id], h3[id]" } = Astro.props;
+---
+
+<div class="tab-content-wrapper">
+  <div class="tab-main-content">
+    <slot />
+  </div>
+  <aside class="tab-toc">
+    <!-- Using client:only to avoid SSR hook issues -->
+    <TableOfContents client:only="react" cssQuery={tocQuery} />
+  </aside>
+</div>
+
+<style>
+  .tab-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: var(--goa-space-xl, 2rem);
+    padding-bottom: var(--goa-space-l, 1.5rem);
+  }
+
+  .tab-main-content {
+    min-width: 0;
+  }
+
+  .tab-toc {
+    position: sticky;
+    top: var(--goa-space-l, 1.5rem);
+    height: fit-content;
+    max-height: calc(100vh - var(--goa-space-2xl, 3rem));
+    overflow-y: auto;
+  }
+
+  /* Hide TOC on smaller screens */
+  @media (max-width: 1000px) {
+    .tab-content-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .tab-toc {
+      display: none;
+    }
+  }
+
+  /* Mobile: Add space above content (below vertical tab list) */
+  @media (max-width: 623px) {
+    .tab-content-wrapper {
+      padding-top: var(--goa-space-l);
+    }
+  }
+</style>

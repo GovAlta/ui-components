@@ -1,0 +1,139 @@
+{
+  "componentSlug": "callout",
+  "extractedFrom": "libs/web-components/src/components/callout/Callout.svelte",
+  "extractedAt": "2026-01-05T23:10:27.425Z",
+  "props": [
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "l",
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "size",
+      "type": "\"medium\" | \"large\"",
+      "typeLabel": "GoabCalloutSize",
+      "values": [
+        "medium",
+        "large"
+      ],
+      "required": false,
+      "default": "large",
+      "description": "The medium callout has reduced padding and type size to adjust for a compact area and smaller viewport width when a smaller size is required."
+    },
+    {
+      "name": "type",
+      "type": "\"emergency\" | \"important\" | \"information\" | \"event\" | \"success\"",
+      "typeLabel": "GoabCalloutType",
+      "values": [
+        "emergency",
+        "important",
+        "information",
+        "event",
+        "success"
+      ],
+      "required": true,
+      "default": null,
+      "description": "Define the context and colour of the callout."
+    },
+    {
+      "name": "emphasis",
+      "type": "\"high\" | \"medium\" | \"low\"",
+      "typeLabel": "GoabCalloutEmphasisType",
+      "values": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "required": false,
+      "default": "medium",
+      "description": "Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal."
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Callout heading text."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "none",
+      "description": "Sets the maximum width of the callout."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "arialive",
+      "type": "\"off\" | \"assertive\" | \"polite\"",
+      "typeLabel": "GoabCalloutAriaLiveType",
+      "values": [
+        "off",
+        "assertive",
+        "polite"
+      ],
+      "required": false,
+      "default": "off",
+      "description": "Indicates how assistive technology should handle updates to the live region."
+    },
+    {
+      "name": "icontheme",
+      "type": "IconTheme",
+      "required": false,
+      "default": "outline",
+      "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "typeLabel": "GoabCalloutVersionType",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "componentSlug": "app-header",
+  "extractedFrom": "libs/web-components/src/components/app-header/AppHeader.svelte",
+  "extractedAt": "2026-01-05T23:10:27.419Z",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Set the service name to display in the app header."
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Set the URL to link from the alberta.ca logo. A full url is required."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "maxcontentwidth",
+      "type": "any",
+      "required": false,
+      "default": "",
+      "description": "Maximum width of the content area."
+    },
+    {
+      "name": "fullmenubreakpoint",
+      "type": "number",
+      "required": false,
+      "default": "TABLET_BP",
+      "description": "Sets the breakpoint in px for the full menu to display."
+    },
+    {
+      "name": "hasmenuclickhandler",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling."
+    }
+  ],
+  "events": [
+    {
+      "name": "onMenuClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_menuClick",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

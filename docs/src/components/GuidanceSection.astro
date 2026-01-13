@@ -1,0 +1,89 @@
+---
+/**
+ * GuidanceSection - Displays guidance items grouped by topic using GoA components
+ */
+import type { CollectionEntry } from 'astro:content';
+import { formatTopicName } from '../lib/content-queries';
+
+interface Props {
+  guidance: Record<string, CollectionEntry<'guidance'>[]>;
+  emptyMessage?: string;
+}
+
+const { guidance, emptyMessage = 'No guidelines defined.' } = Astro.props;
+
+const hasGuidance = Object.keys(guidance).length > 0;
+
+// Map guidance type to container type and icon
+const typeConfig: Record<string, { containerType: string; icon: string; label: string }> = {
+  do: { containerType: 'success', icon: 'checkmark-circle', label: 'Do' },
+  dont: { containerType: 'error', icon: 'close-circle', label: "Don't" },
+  'best-practice': { containerType: 'info', icon: 'star', label: 'Best Practice' },
+  tip: { containerType: 'important', icon: 'bulb', label: 'Tip' },
+  warning: { containerType: 'important', icon: 'warning', label: 'Warning' }
+};
+---
+
+{hasGuidance ? (
+  <goa-block direction="column" gap="xl">
+    {Object.entries(guidance).map(([topic, items]) => (
+      <section>
+        <goa-text as="h3" size="heading-s" mb="m" color="secondary">
+          {formatTopicName(topic)}
+        </goa-text>
+        <goa-block direction="column" gap="m">
+          {items.map(async (item) => {
+            const config = typeConfig[item.data.type] || { containerType: 'non-interactive', icon: 'information-circle', label: item.data.type };
+            const { Content } = await item.render();
+            return (
+              <goa-container type={config.containerType} accent="thin" padding="relaxed">
+                <goa-block direction="column" gap="s">
+                  <goa-block alignment="center" gap="s">
+                    <goa-icon type={config.icon} size="medium"></goa-icon>
+                    <goa-badge type={config.containerType === 'error' ? 'emergency' : config.containerType === 'success' ? 'success' : 'information'} content={config.label}></goa-badge>
+                  </goa-block>
+                  <goa-text as="h4" size="body-m"><strong>{item.data.title}</strong></goa-text>
+                  <div class="guidance-content">
+                    <Content />
+                  </div>
+                </goa-block>
+              </goa-container>
+            );
+          })}
+        </goa-block>
+      </section>
+    ))}
+  </goa-block>
+) : (
+  <goa-callout type="information">
+    {emptyMessage}
+  </goa-callout>
+)}
+
+<style>
+  .guidance-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--goa-color-text-secondary);
+  }
+
+  .guidance-content :global(p) {
+    margin: 0 0 var(--goa-space-s);
+  }
+
+  .guidance-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .guidance-content :global(ul) {
+    margin: 0 0 var(--goa-space-s);
+    padding-left: var(--goa-space-l);
+  }
+
+  .guidance-content :global(code) {
+    background: var(--goa-color-greyscale-100);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+</style>

@@ -1,0 +1,32 @@
+{
+  "componentSlug": "spacer",
+  "extractedFrom": "libs/web-components/src/components/spacer/Spacer.svelte",
+  "extractedAt": "2026-01-05T23:10:27.460Z",
+  "props": [
+    {
+      "name": "hspacing",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "none",
+      "description": "Horizontal spacing"
+    },
+    {
+      "name": "vspacing",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": "none",
+      "description": "Vertical spacing"
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

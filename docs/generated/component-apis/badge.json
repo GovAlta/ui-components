@@ -1,0 +1,152 @@
+{
+  "componentSlug": "badge",
+  "extractedFrom": "libs/web-components/src/components/badge/Badge.svelte",
+  "extractedAt": "2026-01-05T23:10:27.421Z",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"information\" | \"important\" | \"emergency\" | \"success\" | \"dark\" | \"midtone\" | \"light\" | \"archived\" | \"aqua\" | \"black\" | \"blue\" | \"green\" | \"orange\" | \"pink\" | \"red\" | \"violet\" | \"white\" | \"yellow\" | \"aqua-light\" | \"black-light\" | \"blue-light\" | \"green-light\" | \"orange-light\" | \"pink-light\" | \"red-light\" | \"violet-light\" | \"yellow-light\" | \"sky\" | \"prairie\" | \"lilac\" | \"pasture\" | \"sunset\" | \"dawn\" | \"default\"",
+      "typeLabel": "GoabBadgeType",
+      "values": [
+        "information",
+        "important",
+        "emergency",
+        "success",
+        "dark",
+        "midtone",
+        "light",
+        "archived",
+        "aqua",
+        "black",
+        "blue",
+        "green",
+        "orange",
+        "pink",
+        "red",
+        "violet",
+        "white",
+        "yellow",
+        "aqua-light",
+        "black-light",
+        "blue-light",
+        "green-light",
+        "orange-light",
+        "pink-light",
+        "red-light",
+        "violet-light",
+        "yellow-light",
+        "sky",
+        "prairie",
+        "lilac",
+        "pasture",
+        "sunset",
+        "dawn",
+        "default"
+      ],
+      "required": true,
+      "default": null,
+      "description": "Defines the context and colour of the badge."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+    },
+    {
+      "name": "content",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Text label of the badge."
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated Use icontype instead. Includes an icon in the badge."
+    },
+    {
+      "name": "icontype",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon type to display in the badge."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Accessible label for screen readers."
+    },
+    {
+      "name": "size",
+      "type": "\"medium\" | \"large\"",
+      "typeLabel": "GoabBadgeSize",
+      "values": [
+        "medium",
+        "large"
+      ],
+      "required": false,
+      "default": "medium",
+      "description": "Sets the size of the badge."
+    },
+    {
+      "name": "emphasis",
+      "type": "",
+      "required": false,
+      "default": "strong",
+      "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "typeLabel": "GoabBadgeVersion",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The design system version for styling purposes."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

@@ -1,0 +1,37 @@
+---
+id: set-the-status-of-step-on-a-form-stepper
+title: Set the status of step on a form stepper
+categories:
+  - inputs-and-actions
+scale: task
+userType: both
+tags:
+  - forms
+  - stepper
+  - multi-step
+  - navigation
+components:
+  - form-stepper
+  - form-step
+  - pages
+  - button
+status: published
+---
+
+Set the status of each step on a form stepper to indicate completion progress.
+
+## When to use
+
+Use this pattern when:
+- Building multi-step forms that need visual progress indication
+- Users need to see which steps are complete, incomplete, or not started
+- You want to provide clear navigation through a complex form process
+- Form completion status needs to be tracked and displayed
+
+## Considerations
+
+- The status property accepts "complete", "incomplete", or "not-started" values
+- Status is controlled by the application based on form completion
+- Consider updating step status as users complete each section
+- Provide clear Previous/Next navigation to move between steps
+- The form stepper can be clicked to navigate directly to completed steps

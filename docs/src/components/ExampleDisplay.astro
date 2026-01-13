@@ -1,0 +1,67 @@
+---
+/**
+ * ExampleDisplay - Full example with live preview and code tabs
+ *
+ * Reads code files at build time, passes to ExamplePreview for client-side rendering.
+ * Use this on component pages and example pages.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { ExamplePreview } from './ExamplePreview';
+import { getExampleCode } from '../lib/example-code';
+
+interface Props {
+  example: CollectionEntry<'examples'>;
+  /** Title size - 'large' for standalone pages, 'small' for embedded */
+  titleSize?: 'large' | 'small';
+}
+
+const { example, titleSize = 'small' } = Astro.props;
+const { data } = example;
+
+// Read code files at build time
+const code = await getExampleCode(example.slug);
+---
+
+<div class="example-display">
+  <ExamplePreview
+    client:load
+    title={data.title}
+    slug={example.slug}
+    code={code}
+    figmaUrl={data.figmaUrl}
+    fullWidth={data.fullWidth}
+    titleSize={titleSize}
+  />
+
+  {/* Accessibility notes */}
+  {data.accessibilityNotes && (
+    <div class="example-meta">
+      <goa-details version="2" heading="Accessibility">
+        <p>{data.accessibilityNotes}</p>
+      </goa-details>
+    </div>
+  )}
+</div>
+
+<style>
+  .example-display {
+    margin-bottom: var(--goa-space-2xl, 2.5rem);
+    padding-bottom: var(--goa-space-xl, 2rem);
+    border-bottom: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-display:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .example-meta {
+    margin-top: var(--goa-space-xs, 0.25rem);
+  }
+
+  .example-meta p {
+    margin: 0;
+    color: var(--goa-color-text-secondary, #666);
+    line-height: 1.5;
+  }
+</style>

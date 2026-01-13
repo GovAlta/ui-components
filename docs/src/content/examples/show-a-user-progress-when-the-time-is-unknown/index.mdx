@@ -1,0 +1,35 @@
+---
+id: show-a-user-progress-when-the-time-is-unknown
+title: Show a user progress when the time is unknown
+categories:
+  - feedback-and-alerts
+scale: task
+userType: both
+tags:
+  - progress
+  - notification
+  - indeterminate
+  - search
+  - feedback
+components:
+  - temporary-notification
+  - button
+status: published
+---
+
+Display indeterminate progress for operations where completion time cannot be estimated, such as complex searches or external system queries.
+
+## When to use
+
+Use this pattern when:
+- The operation duration cannot be predicted
+- You're querying external systems with variable response times
+- Searching across multiple data sources
+- Users need to know something is happening but not a specific percentage
+
+## Considerations
+
+- Use `type="indeterminate"` for unknown duration operations
+- Always provide a cancel option
+- Show success or failure notification when complete
+- Include meaningful context in the notification message

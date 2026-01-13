@@ -1,0 +1,24 @@
+<div id="chip-container"></div>
+
+<script>
+  let chips = ["Chip 1", "Chip 2", "Chip 3"];
+  const container = document.getElementById("chip-container");
+
+  function renderChips() {
+    container.innerHTML = "";
+    chips.forEach((chip) => {
+      const chipEl = document.createElement("goa-filter-chip");
+      chipEl.setAttribute("content", chip);
+      chipEl.setAttribute("mr", "s");
+      chipEl.addEventListener("_click", () => deleteChip(chip));
+      container.appendChild(chipEl);
+    });
+  }
+
+  function deleteChip(chip) {
+    chips = chips.filter((c) => c !== chip);
+    renderChips();
+  }
+
+  renderChips();
+</script>
