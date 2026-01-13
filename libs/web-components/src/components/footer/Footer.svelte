@@ -7,6 +7,7 @@
   export let maxcontentwidth: string = "";
   export let testid: string = "";
   export let url: string = "https://alberta.ca";
+  export let version: "1" | "2" = "1";
 
   let rootEl: HTMLElement;
   let navLinks: Element[];
@@ -28,6 +29,7 @@
 <div
   bind:clientWidth={_clientWidth}
   class="app-footer"
+  class:v2={version === "2"}
   bind:this={rootEl}
   style={`--max-content-width: ${maxcontentwidth || "100%"}`}
   data-testid={testid}
@@ -38,7 +40,7 @@
     </div>
 
     {#if navLinks?.length > 0}
-      <goa-divider mt="l" mb="l"/>
+      <goa-divider mt="l" mb="l" />
     {/if}
 
     <div
@@ -53,22 +55,35 @@
         class="abgov"
         class:with-meta-links={metaLinks && metaLinks.length > 0}
       >
-        <!-- Logo with optional link -->
-        {#if url && url !== ""}
-          <a href={url}>
-            <img src={_footerLogo} alt="Government of Alberta Logo" class="logo" />
-          </a>
-        {:else}
-          <img src={_footerLogo} alt="Government of Alberta Logo" class="logo" />
-        {/if}
+        {#if version === "1"}
+          <!-- Logo with optional link -->
+          {#if url && url !== ""}
+            <a href={url}>
+              <img
+                src={_footerLogo}
+                alt="Government of Alberta Logo"
+                class="logo"
+              />
+            </a>
+          {:else}
+            <img
+              src={_footerLogo}
+              alt="Government of Alberta Logo"
+              class="logo"
+            />
+          {/if}
 
-        <a
-          tabindex={metaLinks?.length > 0 || _clientWidth < MOBILE_BP ? 0 : 1}
-          href="https://alberta.ca"
-          class="goa-copyright"
-        >
-          © {year} Government of Alberta
-        </a>
+          <a
+            tabindex={metaLinks?.length > 0 || _clientWidth < MOBILE_BP ? 0 : 1}
+            href="https://alberta.ca"
+            class="goa-copyright"
+          >
+            © {year} Government of Alberta
+          </a>
+        {:else if version === "2"}
+          <span>This is a Government of Alberta Digital Service</span>
+          <span class="goa-copyright">© {year} GoA</span>
+        {/if}
       </div>
     </div>
   </div>
@@ -97,7 +112,7 @@
       font-size: var(--goa-footer-typography-small-screen);
     }
     .logo {
-    width: var(--goa-footer-size-logo-mobile);
+      width: var(--goa-footer-size-logo-mobile);
     }
   }
 
@@ -106,7 +121,7 @@
       padding: var(--goa-footer-padding-medium-screen);
     }
     .logo {
-    width: var(--goa-footer-size-logo-tablet);
+      width: var(--goa-footer-size-logo-tablet);
     }
   }
 
@@ -115,7 +130,7 @@
       padding: var(--goa-footer-padding-large-screen);
     }
     .logo {
-    width: var(--goa-footer-size-logo-desktop);
+      width: var(--goa-footer-size-logo-desktop);
     }
   }
 
@@ -126,7 +141,7 @@
   }
 
   .meta-section.with-meta-links {
-  /* gap between meta links and goa log when stacked vertically on small screen  */
+    /* gap between meta links and goa log when stacked vertically on small screen  */
     justify-content: space-between;
   }
 
@@ -143,13 +158,16 @@
     gap: var(--goa-space-xl); /* space between different columns/rows of nav links on mobile */
   }
 
-
   .abgov {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    gap: var(--goa-space-m);   /* gap between copyright and goa log when stacked vertically on small screen  */
+    gap: var(--goa-space-m); /* gap between copyright and goa log when stacked vertically on small screen  */
+  }
+
+  .v2 .abgov {
+    justify-content: flex-end;
   }
 
   @container self (--not-mobile) {
@@ -172,6 +190,15 @@
     .abgov.with-meta-links {
       align-items: flex-end;
     }
+
+    .v2 .abgov {
+      flex-direction: row;
+    }
+
+    .v2 .abgov.with-meta-links {
+      flex-direction: row;
+    }
+
   }
 
   .abgov.with-meta-links {
@@ -196,6 +223,6 @@
 
   a:focus-visible {
     outline: var(--goa-footer-link-focus);
-    border-radius: 2px;
+    border-radius: var(--goa-footer-link-focus-border-radius);
   }
 </style>
