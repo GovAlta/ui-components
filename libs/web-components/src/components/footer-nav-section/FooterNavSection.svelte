@@ -81,7 +81,10 @@
     list-style-type: none;
     padding-left: 0;
     margin: 0;
-    gap: 12px; /* spacing between links on mobile */
+  }
+
+  li:not(:last-child) {
+    margin-bottom: var(--goa-space-s);
   }
 
   @media not (--mobile) {
