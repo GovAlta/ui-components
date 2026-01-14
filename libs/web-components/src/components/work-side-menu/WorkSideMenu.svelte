@@ -24,9 +24,9 @@
   // Public
   // ******
 
-  /** @required The application name displayed in the header. */
+  /** The application name displayed in the header. */
   export let heading: string;
-  /** @required URL for the header link. Clicking the logo/heading navigates to this URL. */
+  /** URL for the header link. Clicking the logo/heading navigates to this URL. */
   export let url: string;
 
   // optional

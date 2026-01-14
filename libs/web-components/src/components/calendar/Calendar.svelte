@@ -10,7 +10,7 @@
   // Public
   // ******
 
-  /** Name identifier for the calendar, used in form submission and change events. */
+  /** Name identifier for the calendar, included in change events. */
   export let name: string = "";
   /** The currently selected date value in YYYY-MM-DD format. */
   export let value: string = "";

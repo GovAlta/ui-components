@@ -69,7 +69,7 @@
   /** Sets the type of the input field. */
   export let type: Type = "text";
 
-  /** @required Name of input value that is received in the onChange event. */
+  /** Name of input value that is received in the onChange event. */
   export let name: string = "";
 
   /** Bound to value. */

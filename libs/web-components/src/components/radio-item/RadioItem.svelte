@@ -53,7 +53,7 @@
     FormFieldMountRelayDetail,
   } from "../../types/relay-types";
 
-  /** @required The value of this radio option. Will be emitted when selected. */
+  /** The value of this radio option. Will be emitted when selected. */
   export let value: string;
   /** The name of the radio group. Inherited from the parent RadioGroup if not set. */
   export let name: string = "";

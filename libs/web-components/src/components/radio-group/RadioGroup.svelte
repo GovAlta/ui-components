@@ -40,7 +40,7 @@
 
   // Public
 
-  /** @required The name for the radio group. Used for form submission and accessibility. */
+  /** The name for the radio group. Used for accessibility and change events. */
   export let name: string;
   /** The currently selected value in the radio group. */
   export let value: string;
