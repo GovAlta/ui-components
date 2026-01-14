@@ -12,12 +12,19 @@
   import { dispatch } from "../../common/utils";
   import { GoAIconType } from "../icon/Icon.svelte";
 
+  /** Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds. */
   export let color: "interactive" | "light" = "interactive";
+  /** Icon displayed before the button text. */
   export let leadingicon: GoAIconType;
+  /** Icon displayed after the button text. */
   export let trailingicon: GoAIconType;
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   export let action: string = "";

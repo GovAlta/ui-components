@@ -21,8 +21,11 @@
   // Public
   // ======
 
+  /** @required The step label text displayed to users. */
   export let text: string;
+  /** The completion status of the step. Affects visual styling and icons. */
   export let status: FormStepStatus | undefined = undefined;
+  /** Whether this is the last step in the form stepper. Affects styling when complete. */
   export let last: string = "false";
 
   // Set by FormStepper parent component

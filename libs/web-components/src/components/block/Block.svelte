@@ -15,12 +15,19 @@
   import { ensureSlotExists } from "../../common/utils";
   import { style, styles } from "../../common/utils";
 
+  /** Spacing between items. Uses design system spacing tokens. */
   export let gap: Spacing = "m";
+  /** Stacking direction of child components. */
   export let direction: "row" | "column" = "row";
+  /** Primary axis alignment of child components. */
   export let alignment: "center" | "start" | "end" | "normal" = "normal";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Sets the minimum width of the block container. */
   export let minWidth: string = "";
+  /** Sets the maximum width of the block container. */
   export let maxWidth: string = "";
+  /** Sets the width of the block container. Defaults to max-content. */
   export let width: string = "";
 
   $: _alignment =
@@ -32,10 +39,13 @@
           ? "center"
           : "normal";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Private

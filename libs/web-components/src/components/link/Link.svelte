@@ -13,20 +13,32 @@
   import { GoAIconType } from "../icon/Icon.svelte";
   import { onMount } from "svelte";
 
+  /** Icon displayed before the link text. */
   export let leadingicon: GoAIconType | null = null;
+  /** Icon displayed after the link text. */
   export let trailingicon: GoAIconType | null = null;
+  /** Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text. */
   export let color: "interactive" | "dark" | "light" = "interactive";
+  /** Sets the text size and corresponding icon size. */
   export let size: "xsmall" | "small" | "medium" | "large" = "medium";
 
+  /** Custom action event name to dispatch when the link is clicked. */
   export let action: string = "";
+  /** Single argument to pass with the action event (deprecated, use actionArgs). */
   export let actionArg: string = "";
+  /** Object of arguments to pass with the action event. */
   export let actionArgs: Record<string, unknown> = {};
 
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   let _rootEl: HTMLElement;

@@ -37,20 +37,32 @@
   type AriaLiveType = (typeof AriaLive)[number];
   type VersionType = (typeof Version)[number];
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = "l";
+  /** Left margin. */
   export let ml: Spacing = null;
 
+  /** The medium callout has reduced padding and type size to adjust for a compact area and smaller viewport width when a smaller size is required. */
   export let size: CalloutSize = "large";
+  /** @required Define the context and colour of the callout. */
   export let type: CalloutType;
+  /** Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. */
   export let emphasis: CalloutEmphasisType = "medium";
+  /** Callout heading text. */
   export let heading: string = "";
+  /** Sets the maximum width of the callout. */
   export let maxwidth: string = "none";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Indicates how assistive technology should handle updates to the live region. */
   export let arialive: AriaLiveType = "off";
+  /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. */
   export let icontheme: IconTheme = "outline";
+  /** The design system version for styling purposes. */
   export let version: VersionType = "1";
 
   // Private

@@ -553,27 +553,43 @@
     | `${GoAIconType}:${IconTheme}`
     | `${GoAIconOverridesType}:${IconTheme}`;
 
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Required
 
+  /** @required The icon type to display. See GoAIconType for available icons. */
   export let type: GoAIconType | GoAIconOverridesType | GoAIconTypeWithTheme;
 
   // Optional
 
+  /** Sets the size of the icon. Accepts numeric (1-6) or named sizes. */
   export let size: IconSize = "medium";
+  /** Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. */
   export let theme: IconTheme = "outline";
+  /** When true, inverts the icon colors for use on dark backgrounds. */
   export let inverted: string = "false";
+  /** Sets a custom fill color for the icon. Accepts any valid CSS color value. */
   export let fillcolor: string = "";
+  /** Sets the opacity of the icon from 0 (transparent) to 1 (opaque). */
   export let opacity: number = 1;
+  /** Adds an accessible title to the icon SVG. Used by screen readers. */
   export let title: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Defines how the icon will be announced by screen readers. */
   export let arialabel: string = "";
+  /** Identifies the element(s) whose contents or presence are controlled by this icon. */
   export let ariacontrols: string = "";
+  /** Indicates whether the element controlled by this icon is expanded or collapsed. */
   export let ariaexpanded: string = "";
+  /** Sets the ARIA role for the icon. Defaults to 'img'. Use 'presentation' for decorative icons. */
   export let role: string = "img";
 
   let _iconType: GoAIconType | GoAIconOverridesType;

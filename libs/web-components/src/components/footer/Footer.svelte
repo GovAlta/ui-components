@@ -4,8 +4,11 @@
   import { onMount, tick } from "svelte";
   import { MOBILE_BP } from "../../common/breakpoints";
 
+  /** The maximum width of the main content area */
   export let maxcontentwidth: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** URL for the Government of Alberta logo link. Set to empty string to disable the link. */
   export let url: string = "https://alberta.ca";
 
   let rootEl: HTMLElement;

@@ -10,13 +10,22 @@
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
+  /** @required The title heading */
+
   export let heading: string;
+  /** Sets the maximum width of the details. */
   export let maxwidth: string = "75ch";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
+  /** Controls if details is expanded or not. */
   export let open: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let _isMouseOver: boolean = false;

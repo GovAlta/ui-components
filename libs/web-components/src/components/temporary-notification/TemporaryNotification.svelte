@@ -25,12 +25,20 @@
     | "progress";
 
   // Props
+
+  /** The notification message text to display. */
   export let message: string = "";
+  /** The notification type which determines the visual style and icon. */
   export let type: TemporaryNotificationType = "basic";
+  /** Progress value from 0-100. Use -1 to hide the progress bar. Only applies when type is "progress". */
   export let progress: number = -1; // -1 = hidden, 0-100 = show
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Text for the optional action button. When provided, displays a clickable link button. */
   export let actionText: string = "";
+  /** Controls whether the notification is visible. */
   export let visible: boolean = true;
+  /** Direction the notification animates from when appearing or disappearing. */
   export let animationDirection: TemporaryNotificationAnimationDirection = "down";
 
   // Icon size for success/failure icons

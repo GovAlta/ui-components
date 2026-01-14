@@ -28,12 +28,19 @@
   type AriaLiveType = (typeof AriaLiveTypes)[number];
   type EmphasisType = (typeof EmphasisTypes)[number];
 
+  /** Define the context and colour of the notification. */
   export let type: NotificationType = "";
+  /** Maximum width of the content area. */
   export let maxcontentwidth = "100%";
+  /** Indicates how assistive technology should handle updates to the live region. */
   export let arialive: AriaLiveType = "polite";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
+  /** Sets the visual prominence. 'high' for full background, 'filled' for medium. */
   export let emphasis: EmphasisType = "high";
+  /** When true, reduces padding for a more compact notification. */
   export let compact: boolean = false;
 
   let show = true;

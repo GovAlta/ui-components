@@ -46,13 +46,14 @@
   // Required
   // ========
 
+  /** The initialization status of the form. Set to "initializing" while loading external state, then "complete" when ready. */
   export let status: "initializing" | "complete" = "complete";
 
   // ========
   // Optional
   // ========
 
-  // Helps when debugging complex forms
+  /** A name identifier for the form. Useful for debugging complex forms with multiple nested forms. */
   export let name: string = "[name] not set";
 
   // =======

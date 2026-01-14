@@ -3,8 +3,11 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
+  /** The section heading displayed above the navigation links. */
   export let heading: string = "";
+  /** Maximum number of columns to display links in on larger screens. */
   export let maxcolumncount: number = 1;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let rootEl: HTMLElement;

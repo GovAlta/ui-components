@@ -31,26 +31,36 @@
     valueStr: string;
   };
 
+  /** Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. */
   export let type: "calendar" | "input" = "calendar";
+  /** Name of the date field. */
   export let name: string = "";
+  /** Value of the calendar date. */
   export let value: string = "";
+  /** Sets the input to an error state. */
   export let error: string = "false";
+  /** Minimum date value allowed. */
   export let min: string = "";
+  /** Maximum date value allowed. */
   export let max: string = "";
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
+  /** Disables the date picker. */
   export let disabled: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Sets the width of the date picker input. */
   export let width: string = "";
   export let size: "default" | "compact" = "default";
   export let version: "1" | "2" = "1";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   let _error: boolean = toBoolean(error);

@@ -5,11 +5,17 @@
 
   // Public
 
+  /** @required The name of the uploaded file to display. */
   export let filename: string;
+  /** @required The file size in bytes. Displayed in a human-readable format (KB, MB). */
   export let size: number;
+  /** The MIME type of the file. Used to determine the file type icon. */
   export let type: string = "";
+  /** Upload progress percentage from 0-100. Use -1 to indicate upload is complete. */
   export let progress: number = -1;
+  /** Error message to display. When set, the card shows an error state with a cancel button. */
   export let error: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   // Private

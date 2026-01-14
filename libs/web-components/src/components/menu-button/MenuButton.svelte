@@ -16,10 +16,15 @@
 
   // Public props
 
+  /** The button label text. When provided, displays as a text button with a dropdown icon. */
   export let text: string;
+  /** The button style variant. */
   export let type: "primary" | "secondary" | "tertiary" = "primary";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   export let leadingIcon: GoAIconType | undefined = undefined;
+  /** Maximum width of the dropdown menu. */
   export let maxWidth: string;
 
   // Private props

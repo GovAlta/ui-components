@@ -14,13 +14,21 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
 
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
+  /** @required The heading text for the menu group. */
   export let heading: string;
+  /** Icon displayed alongside the heading. */
   export let icon: GoAIconType | null = null;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   let _open = false;

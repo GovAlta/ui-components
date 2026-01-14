@@ -44,20 +44,43 @@
   type Variant = (typeof Variants)[number];
   type Version = (typeof Versions)[number];
 
-  // optional
+  /** Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, and "start" for prominent call-to-action buttons. */
   export let type: ButtonType = "primary";
+
+  /** Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. */
   export let size: Size = "normal";
+
+  /** Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for dark backgrounds. */
   export let variant: Variant = "normal";
+
+  /** When true, prevents user interaction and applies disabled styling. */
   export let disabled: string = "false";
+
+  /** Icon displayed before the button text. */
   export let leadingicon: GoAIconType | null = null;
+
+  /** Icon displayed after the button text. */
   export let trailingicon: GoAIconType | null = null;
+
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+
+  /** Sets a custom width for the button (e.g., "200px" or "100%"). */
   export let width: string = "";
+
+  /** Design system version. Version 2 includes updated styling and accessibility improvements. */
   export let version: Version = "1";
 
+  /** Sets the top margin using design system spacing tokens. */
   export let mt: Spacing = null;
+
+  /** Sets the right margin using design system spacing tokens. */
   export let mr: Spacing = null;
+
+  /** Sets the bottom margin using design system spacing tokens. */
   export let mb: Spacing = null;
+
+  /** Sets the left margin using design system spacing tokens. */
   export let ml: Spacing = null;
 
   export let action: string = "";

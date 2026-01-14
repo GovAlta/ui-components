@@ -2,12 +2,19 @@
 
 <!-- Script -->
 <script lang="ts">
+  /** Main heading text */
   export let heading: string;
+  /** Background image url */
   export let backgroundurl: string;
+  /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */
   export let minheight: string;
+  /** Maximum width of the content area */
   export let maxcontentwidth = "100%";
+  /** Hero Banner background color when no background image is provided */
   export let backgroundcolor: string = "#f8f8f8";
+  /** Text color within the hero banner */
   export let textcolor: string = "";
+  /** Test ID for the component */
   export let testid: string = "background";
 
   /* Set minheight to support old default value of 600px */

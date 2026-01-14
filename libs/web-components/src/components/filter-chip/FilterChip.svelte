@@ -7,19 +7,29 @@
   import { calculateMargin } from "../../common/styling";
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Props
+  /** Shows an error state. */
   export let error: string = "false";
+  /** @required Text label of the chip. */
   export let content: string;
+  /** Secondary text displayed in a smaller size before the main content. */
   export let secondarytext: string = "";
+  /** Icon displayed at the start of the chip. */
   export let leadingicon: GoAIconType | null = null;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Accessible label for the filter chip. Defaults to content with 'removable' suffix. */
   export let ariaLabel: string = "";
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
 
   // Private variables

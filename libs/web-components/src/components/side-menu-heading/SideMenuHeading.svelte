@@ -3,8 +3,11 @@
 <script lang="ts">
   import type { GoAIconType } from "../icon/Icon.svelte";
 
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
+  /** Icon displayed before the heading text. */
   export let icon: GoAIconType | null = null;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "section-heading";
 </script>
 

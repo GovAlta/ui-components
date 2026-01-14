@@ -16,15 +16,25 @@
 
   // public
 
+  /** The design system version for styling purposes. */
   export let version: Version = "1";
+  /** @required The current page being viewed (non-zero based). */
   export let pagenumber: number;
+  /** @required Total number of data items within all pages. */
   export let itemcount: number;
+  /** Number of data items shown per page. */
   export let perpagecount: number = 10;
+  /** Controls which nav controls are visible. */
   export let variant: Variant = "all";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Top margin. */
   export let mt: Spacing = "none";
+  /** Right margin. */
   export let mr: Spacing = "none";
+  /** Bottom margin. */
   export let mb: Spacing = "m";
+  /** Left margin. */
   export let ml: Spacing = "none";
 
   // reactive

@@ -15,13 +15,21 @@
   // Type
   type Type = (typeof Types)[number];
 
+  /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   export let type: Type;
+  /** Version number or identifier displayed in the header. */
   export let version: string = "";
+  /** Url to feedback page that will be displayed when provided. */
   export let feedbackurl: string = "";
+  /** Maximum width of the content area */
   export let maxcontentwidth = "100%";
+  /** For internal header urls sets target= */
   export let headerurltarget: UrlTargetType = "blank";
+  /** For internal feedback urls sets target= */
   export let feedbackurltarget: UrlTargetType = "blank";
+  /** When true, enables a custom feedback click handler via the _feedbackClick event instead of navigating to feedbackurl. */
   export let hasfeedbackhandler: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   // Validator

@@ -4,6 +4,7 @@
   import { onMount, tick } from "svelte";
   import { getSlottedChildren } from "../../common/utils";
 
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let rootEl: HTMLElement;

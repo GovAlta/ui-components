@@ -6,7 +6,9 @@
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import { SideMenuGroupProps } from "../side-menu-group/SideMenuGroup.svelte";
 
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let _rootEl: HTMLElement;

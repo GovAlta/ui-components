@@ -12,10 +12,15 @@
 />
 
 <script lang="ts">
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string | undefined = undefined;
+  /** Progress value (0-100). When undefined, shows an indeterminate loading animation. */
   export let progress: number | undefined = undefined;
+  /** Controls visibility of the percentage text. */
   export let percentVisibility: "visible" | "hidden" = "visible";
+  /** Accessible label for the progress bar. */
   export let ariaLabel: string | undefined = undefined;
+  /** ID of the element that labels this progress bar. */
   export let ariaLabelledby: string | undefined = undefined;
 
   $: isDeterminate = progress !== undefined && progress !== null;

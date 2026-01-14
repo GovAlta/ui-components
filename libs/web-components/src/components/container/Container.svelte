@@ -47,17 +47,30 @@
 
   // Props
 
+  /** Sets the container and accent bar styling. */
+
   export let type: Type = "interactive";
+  /** Sets the style of accent on the container. */
   export let accent: Accent = "filled";
+  /** Sets the amount of white space in the container. */
   export let padding: Padding = "relaxed";
+  /** Sets the width of the container. */
   export let width: Width = "full";
+  /** Sets the maximum width of the container. */
   export let maxWidth: string = "none";
+  /** Sets the minimum height of the container. */
   export let minHeight = "";
+  /** Sets the maximum height of the container. */
   export let maxHeight = "";
+  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
   export let testid: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = "m";
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Private

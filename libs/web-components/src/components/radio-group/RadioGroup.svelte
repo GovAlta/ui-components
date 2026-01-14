@@ -40,18 +40,31 @@
 
   // Public
 
+  /** @required The name for the radio group. Used for form submission and accessibility. */
   export let name: string;
+  /** The currently selected value in the radio group. */
   export let value: string;
+  /** Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. */
   export let orientation: Orientation = "vertical";
+  /** Disables all radio items in the group. */
   export let disabled: string = "false";
+  /** Shows an error state on all radio items in the group. */
   export let error: string = "false";
+  /** The design system version for styling purposes. */
   export let version: VersionType = "1";
+  /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). */
   export let size: SizeType = "default";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Defines how the radio group will be announced by screen readers. */
   export let arialabel: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Private

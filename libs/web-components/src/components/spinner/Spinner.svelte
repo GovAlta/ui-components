@@ -10,12 +10,14 @@
   import { tweened } from "svelte/motion";
   import { quartOut } from "svelte/easing";
 
-  // required
+  /** @required Sets the size of the spinner. */
   export let size: SpinnerSize;
 
-  // optional
+  /** When true, inverts colors for use on dark backgrounds. */
   export let invert: boolean = false;
+  /** Progress value (0-100). When >= 0, shows a progress spinner instead of infinite. */
   export let progress: number = -1;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let type: SpinnerType = "infinite";

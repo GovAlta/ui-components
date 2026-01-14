@@ -5,17 +5,23 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
 
+  /** Adds a shadow to the card. 0 shows a border, 1-3 increase shadow intensity. */
   export let elevation: number = 0;
+  /** Sets the width of the card. */
   export let width: string = "100%";
+  /** Sets the height behavior. 'auto' fits content, 'max' fills available height. */
   export let height: "auto" | "max" = "auto";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
-  //optional
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 </script>
 

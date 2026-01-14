@@ -27,16 +27,26 @@
 
   // Public
 
+  /** Width of the table. By default it will fit the enclosed content. */
   export let width: string = "";
+  /** When true, the table header sticks to the top when scrolling. */
   export let stickyheader: string = "false";
+  /** When true, alternates row background colors for improved readability. */
   export let striped: string = "false";
+  /** A relaxed variant of the table with more vertical padding for the cells. */
   export let variant: Variant = "normal";
+  /** The design system version for styling purposes. */
   export let version: VersionType = "1";
+  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
   export let testid: string = "";
 
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Private

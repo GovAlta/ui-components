@@ -16,10 +16,15 @@
   // Public
   // ******
 
+  /** @required Whether the drawer is open. */
   export let open = false;
+  /** @required The position of the drawer. */
   export let position: DrawerPosition = undefined;
+  /** The heading text displayed at the top of the drawer. */
   export let heading: string = "";
-  export let maxsize: DrawerSize = undefined; // is set based on the anchor value
+  /** Sets max height on bottom position, sets width on left and right position. */
+  export let maxsize: DrawerSize = undefined;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "drawer";
   // *******
   // Private

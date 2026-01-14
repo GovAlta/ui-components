@@ -37,16 +37,25 @@
   type SkeletonType = (typeof Types)[number];
   type SkeletonSize = (typeof Sizes)[number];
 
+  /** Set component maximum width. Currently only used in card skeleton type */
+
   export let maxwidth: string = "300px";
+  /** Size can affect either the height, width or both for different skeleton types. */
   export let size: SkeletonSize = "1";
+  /** Used within components that contain multiple lines. Currently only used in card skeleton type */
   export let linecount: number = 3;
+  /** @required Reset skeleton shapes to represent your content. */
   export let type: SkeletonType;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   onMount(() => {

@@ -15,8 +15,11 @@
   // Public
   // ******
 
+  /** Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide. */
   export let keyboardIconVisibility: "visible" | "hidden" = "visible";
+  /** Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. */
   export let keyboardNav: "layout" | "table" = "table";
+  /** Position of the keyboard navigation indicator icon. */
   export let keyboardIconPosition: "left" | "right" = "left";
 
   // Reactive

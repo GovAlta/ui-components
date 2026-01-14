@@ -22,11 +22,17 @@
   type Variant = (typeof Variants)[number];
 
   // Optional
+  /** Stretch across the full screen or use it inline */
   export let variant: Variant = "inline";
+  /** Size of the progress indicator */
   export let size: Size = "large";
+  /** Loading message displayed under the progress indicator */
   export let message: string = "";
+  /** Set the progress value. Setting this value will change the type from infinite to progress */
   export let progress: number = -1;
+  /** Show/hide the page loader. This allows for fade transition to be applied in each transition. */
   export let visible: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   $: isVisible = toBoolean(visible);
