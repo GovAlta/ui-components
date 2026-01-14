@@ -44,7 +44,7 @@
   export let size: SkeletonSize = "1";
   /** Used within components that contain multiple lines. Currently only used in card skeleton type */
   export let linecount: number = 3;
-  /** @required Reset skeleton shapes to represent your content. */
+  /** Sets the skeleton shape to represent your content. */
   export let type: SkeletonType;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";

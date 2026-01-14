@@ -10,9 +10,9 @@
   // Public
   // ******
 
-  /** @required The text label displayed for the menu item. */
+  /** The text label displayed for the menu item. */
   export let label: string;
-  /** @required The URL the menu item links to. */
+  /** The URL the menu item links to. */
   export let url: string;
 
   // optional

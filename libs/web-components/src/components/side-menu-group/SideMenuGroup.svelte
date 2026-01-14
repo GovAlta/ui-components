@@ -16,7 +16,7 @@
 
   /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
-  /** @required The heading text for the menu group. */
+  /** The heading text for the menu group. */
   export let heading: string;
   /** Icon displayed alongside the heading. */
   export let icon: GoAIconType | null = null;

@@ -25,7 +25,7 @@
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
-  /** @required The name for the checkbox list group. Used for form submission. */
+  /** The name for the checkbox list group. Used as group identifier in change events. */
   export let name: string;
 
   /** Array of currently selected checkbox values. */

@@ -16,9 +16,9 @@
   // Public
   // ******
 
-  /** @required Whether the drawer is open. */
+  /** Whether the drawer is open. */
   export let open = false;
-  /** @required The position of the drawer. */
+  /** The position of the drawer. */
   export let position: DrawerPosition = undefined;
   /** The heading text displayed at the top of the drawer. */
   export let heading: string = "";

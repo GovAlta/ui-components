@@ -7,8 +7,7 @@
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
 
-  /** @required Positions the button group in the page layout. */
-
+  /** Positions the button group in the page layout. */
   export let alignment: ButtonAlignment = "start";
   /** Sets the spacing between buttons in the button group. */
   export let gap: Gap = "relaxed";

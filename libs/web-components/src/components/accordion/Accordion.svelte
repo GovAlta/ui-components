@@ -34,7 +34,7 @@
   export let secondarytext: string = "";
   /** Sets the heading size of the accordion container heading. */
   export let headingsize: HeadingSize = "small";
-  /** Unique identifier for the accordion. Auto-generated if not provided. */
+  /** Unique identifier for the accordion. */
   export let id: string = "";
   /** Sets the maximum width of the accordion. */
   export let maxwidth: string = "none";

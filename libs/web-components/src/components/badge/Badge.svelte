@@ -71,7 +71,7 @@
   type BadgeSize = (typeof badgeSizes)[number];
   type BadgeVersion = (typeof versions)[number];
 
-  /** @required Defines the context and colour of the badge. */
+  /** Defines the context and colour of the badge. */
   export let type: BadgeType;
 
   // Optional
