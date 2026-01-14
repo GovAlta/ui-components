@@ -53,21 +53,34 @@
     FormFieldMountRelayDetail,
   } from "../../types/relay-types";
 
+  /** @required The value of this radio option. Will be emitted when selected. */
   export let value: string;
+  /** The name of the radio group. Inherited from the parent RadioGroup if not set. */
   export let name: string = "";
+  /** The display label for this radio option. Falls back to value if not provided. */
   export let label: string = "";
+  /** Additional description text displayed below the label. */
   export let description: string = "";
+  /** Disables this radio option. */
   export let disabled: string = "false";
+  /** Shows an error state on this radio option. */
   export let error: string = "false";
+  /** Sets this radio option as checked/selected. */
   export let checked: string = "false";
+  /** Defines how this option will be announced by screen readers. */
   export let arialabel: string = "";
-  export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
+  /** Text announced by screen readers when the reveal slot content is displayed. */
+  export let revealarialabel: string = "";
+  /** Sets the maximum width of this radio item. */
   export let maxwidth: string = "none";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // private

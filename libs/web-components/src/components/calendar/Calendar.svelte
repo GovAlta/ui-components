@@ -10,23 +10,32 @@
   // Public
   // ******
 
+  /** Name identifier for the calendar, used in form submission and change events. */
   export let name: string = "";
+  /** The currently selected date value in YYYY-MM-DD format. */
   export let value: string = "";
+  /** The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past. */
   export let min: string = "";
+  /** The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future. */
   export let max: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   export let version: "1" | "2" = "1";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // ****************
   // Exposed Privates
   // ****************
 
+  /** Shows a border around the calendar. Set to false when embedding within another component. */
   export let bordered: string = "true";
 
   // ********

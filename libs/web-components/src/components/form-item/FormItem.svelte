@@ -59,26 +59,39 @@
   type VersionType = (typeof Version)[number];
   type InputType = (typeof INPUT_TYPES)[number];
 
-  // margin
+  // Margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Optional
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Creates a label for the form item. */
   export let label: string = "";
+  /** Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis. */
   export let labelsize: LabelSizeType = "regular";
+  /** Help text displayed under the form field to provide additional explanation. */
   export let helptext: string = "";
+  /** Error text displayed under the form field. Leave blank to indicate a valid field. */
   export let error: string = "";
+  /** Marks the field with an optional or required label indicator. */
   export let requirement: RequirementType = "";
+  /** Sets the maximum width of the form item. */
   export let maxwidth: string = "none";
+  /** The design system version for styling purposes. */
   export let version: VersionType = "1";
+  /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   export let type: InputType = "";
 
-  // **For the public-form only**
-  // Overrides the label value within the form-summary to provide a shorter description of the value
+  /** Overrides the label value within the form-summary. For public-form use only. */
   export let name: string = "blank";
+  /** Sets the display order within the form summary. For public-form use only. */
   export let publicFormSummaryOrder: number = 0;
 
   let _rootEl: HTMLElement;

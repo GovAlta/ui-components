@@ -16,11 +16,17 @@
   import { TABLET_BP } from "../../common/breakpoints";
 
   // Required
+
+  /** @required The menu heading text displayed as the dropdown trigger. */
   export let heading: string;
 
   // Optional
+
+  /** Icon displayed before the heading text. */
   export let leadingicon: GoAIconType;
+  /** The menu style variant. Primary uses bold text, secondary uses regular weight. */
   export let type: "primary" | "secondary" = "primary";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "rootEl";
 
   // Private

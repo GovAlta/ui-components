@@ -7,14 +7,21 @@
   import { onMount } from "svelte";
   import { typeValidator } from "../../common/utils";
 
+  /** @required Positions the button group in the page layout. */
+
   export let alignment: ButtonAlignment = "start";
+  /** Sets the spacing between buttons in the button group. */
   export let gap: Gap = "relaxed";
+  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
   export let testid: string = "";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   const [BUTTON_ALIGNMENTS, validateAlignment] = typeValidator("alignment", [

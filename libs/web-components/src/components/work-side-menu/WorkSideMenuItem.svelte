@@ -10,15 +10,23 @@
   // Public
   // ******
 
+  /** @required The text label displayed for the menu item. */
   export let label: string;
+  /** @required The URL the menu item links to. */
   export let url: string;
 
   // optional
+  /** Badge text displayed alongside the menu item (e.g., notification count). */
   export let badge: string = "";
+  /** When true, indicates this is the currently active menu item. */
   export let current: boolean = false;
+  /** When true, displays a divider line above this menu item. */
   export let divider: boolean = false;
+  /** Icon displayed before the menu item label. */
   export let icon: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. */
   export let type: WorkSideMenuItemType = "normal";
 
   // *******

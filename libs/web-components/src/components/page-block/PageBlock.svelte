@@ -11,7 +11,10 @@
   };
 
   // Optional
+
+  /** Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". */
   export let width: Size = "full";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   // Private

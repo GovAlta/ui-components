@@ -12,12 +12,17 @@
   // Public
   // ======
 
-  // this is a 1-based index, -1 is the unset value
+  /** The current step state value (1-based index). Leaving it blank (-1) will allow any step to be accessed. */
   export let step: number = -1;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // =======

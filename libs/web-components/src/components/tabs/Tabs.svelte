@@ -5,8 +5,11 @@
   import { clamp, ensureSlotExists, fromBoolean } from "../../common/utils";
   import { GoATabProps } from "../tab/Tab.svelte";
 
-  export let initialtab: number = -1; // 1-based
+  /** The initially active tab (1-based index). If not set, the first tab is active. */
+  export let initialtab: number = -1;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
   export let variant: "default" | "segmented" = "default";
 

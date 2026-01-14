@@ -25,27 +25,44 @@
   } from "../../types/relay-types";
 
   // Required
+  /** Unique name to identify the checkbox. */
   export let name: string;
 
   // Optional values
+  /** Marks the checkbox item as selected. */
   export let checked: string = "false";
+  /** Shows a mixed/partial selection state. Used for 'Select All' checkboxes when some items are selected. */
   export let indeterminate: string = "false";
+  /** Label shown beside the checkbox. */
   export let text: string = "";
+  /** The value binding. */
   export let value: string = "";
+  /** Disable this control. It will not receive focus or events. */
   export let disabled: string = "false";
+  /** Shows an error on the checkbox item. */
   export let error: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   export let arialabel: string = "";
+  /** Additional description text displayed below the checkbox label. */
   export let description: string = "";
-  export let revealarialabel: string = ""; // screen reader will announce this when reveal slot is displayed
+  /** Text announced by screen readers when the reveal slot content is displayed. */
+  export let revealarialabel: string = "";
+  /** Sets the maximum width of the checkbox. */
   export let maxwidth: string = "none";
+  /** Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. */
   export let size: "default" | "compact" = "default";
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Private

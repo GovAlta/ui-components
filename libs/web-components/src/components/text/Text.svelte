@@ -22,14 +22,22 @@
   import { calculateMargin, Spacing } from "../../common/styling";
   import { style, styles } from "../../common/utils";
 
+  /** The HTML element to render. Use semantic elements like 'h1'-'h6' for headings. */
   export let as: TextElement | HeadingElement = "div";
+  /** Sets the max width. */
   export let maxWidth: string | "none" = "65ch";
+  /** Overrides the text size. */
   export let size: Size | undefined = undefined;
+  /** Sets the text colour. */
   export let color: "primary" | "secondary" = "primary";
 
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   let _marginBottom: Spacing = null;

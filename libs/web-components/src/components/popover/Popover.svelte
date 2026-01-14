@@ -32,59 +32,67 @@
 
   // Public
 
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "popover";
+  /** Provides control to where the popover content is positioned. */
   export let position: "above" | "below" | "auto" = "auto";
+  /** Sets the maximum width of the popover container. */
   export let maxwidth: string | "none" = "320px";
+  /** Sets the minimum width of the popover container. */
   export let minwidth: string = "";
+  /** Sets a fixed width for the popover container. */
   export let width: string = "";
+  /** Controls the height behavior. 'full' stretches to parent height, 'wrap-content' fits content. */
   export let height: "full" | "wrap-content" = "wrap-content";
 
-  // flag passed to the FocusTrap that will prevent unwanted scrolling
+  /** Prevents scrolling into view when focus trap is activated. Passed to FocusTrap. */
   export let preventScrollIntoView: boolean = false;
 
-  // allows to override the default padding when content needs to be flush with boundries
+  /** Sets if the popover has padding. Use false when content needs to be flush with boundaries. */
   export let padded: string = "true";
 
-  // allows tabindex to be set to -1 to skip tabbing if a parent is handling events
+  /** Sets the tabindex. Use -1 to skip tabbing when a parent handles keyboard events. */
   export let tabindex: number = 0;
 
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
 
-  // margins
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
-  // Exposed privates
-  // **Required only to allow popover position to be customized when used within
-  // other components. These props should _not_ be documented.**
+  // Exposed privates - used internally by other components
 
+  /** Prevents the popover from closing when other popovers open. Used for nested interactions. */
   export let disableGlobalClosePopover: boolean = false;
 
-  // allow for outside control of whether popover is open/closed (see AppHeaderMenu)
+  /** Controls whether the popover is open or closed. Used by parent components like AppHeaderMenu. */
   export let open: string = "false";
 
-  // allows outside control of the `open` property ex. when used within dropdown
+  /** Disables the popover interaction. Used by parent components like Dropdown. */
   export let disabled: string = "false";
 
-  // additional vertical offset that is added to popover's position
+  /** Additional vertical offset added to the popover's position. */
   export let voffset = "";
 
-  // additional horizontal offset that is added to popover's position
+  /** Additional horizontal offset added to the popover's position. */
   export let hoffset = "";
 
-  // width of outline seen when focused
+  /** Width of the focus outline border. */
   export let focusborderwidth = "var(--goa-border-width-l)";
 
-  // border radius of popover window
+  /** Border radius of the popover window. */
   export let borderradius = "var(--goa-border-radius-m)";
 
+  /** When true, clicking inside the popover will close it. */
   export let closeOnClickWithinBounds = false;
 
+  /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
 
   // Private

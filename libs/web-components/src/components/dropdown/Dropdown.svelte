@@ -52,38 +52,57 @@
 
   // Props
 
+  /** @required Identifier for the dropdown. Should be unique. */
   export let name: string;
+  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
   export let arialabel: string = "";
+  /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */
   export let arialabelledby: string = "";
+  /** Stores the value of the item selected from the dropdown. */
   export let value: string | undefined = "";
+  /** When true the dropdown will have the ability to filter options by typing into the input field. */
   export let filterable: string = "false";
+  /** Show an icon to the left of the dropdown option. */
   export let leadingicon: GoAIconType | null = null;
+  /** Maximum height of the dropdown menu items popover. Non-native only. */
   export let maxheight: string = "276px";
+  /** The text displayed for the dropdown before a selection is made. Non-native only. */
   export let placeholder: string = "";
+  /** Overrides the autosized menu width. Non-native only. */
   export let width: string = "";
+  /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
   export let maxwidth: string = "";
+  /** Disable this control. */
   export let disabled: string = "false";
+  /** Show an error state. */
   export let error: string = "false";
+  /** When true, allows multiple items to be selected. */
   export let multiselect: string = "false";
+  /** When true will render the native select HTML element. */
   export let native: string = "false";
+  /** Sets the size of the dropdown. Compact reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
+  /** The design system version for styling purposes. */
   export let version: "1" | "2" = "1";
 
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
+  /** Specifies the autocomplete attribute for the dropdown input. Native only. */
   export let autocomplete: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
-  /**
-   * Exposed Privates
-   **/
+  // Exposed Privates
 
+  /** Prevents the popover from closing when clicking outside. Used for nested dropdowns or complex interactions. */
   export let disableGlobalClosePopover: boolean = false;
 
   //

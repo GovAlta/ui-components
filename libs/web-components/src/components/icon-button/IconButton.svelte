@@ -24,22 +24,34 @@
   type Variant = (typeof Variants)[number];
 
   // required
+  /** @required Sets the icon. */
   export let icon: GoAIconType;
 
   // optional
+  /** Sets the size of button. */
   export let size: IconSize = "medium";
+  /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. */
   export let theme: IconTheme = "outline";
+  /** Styles the button to show color, light, dark or destructive action. */
   export let variant: Variant = "color";
+  /** Sets the title of the button. */
   export let title: string = "";
+  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
   export let testid: string = "";
+  /** Disables the button. */
   export let disabled: string = "false";
+  /** When true, inverts the icon colors for use on dark backgrounds. */
   export let inverted: string = "false";
+  /** Sets the aria-label of the button. */
   export let arialabel: string = "";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   export let action: string = "";

@@ -18,16 +18,24 @@
   // Public
   // ******
 
+  /** The heading text displayed at the top of the modal. */
   export let heading: string = "";
+  /** Show close icon and allow clicking the background to close the modal. */
   export let closable: string = "false";
+  /** Controls if modal is visible or not. */
   export let open: string = "false";
+  /** Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. */
   export let transition: Transition = "none";
+  /** Define the context and colour of the callout modal. It is required when type is set to callout. */
   export let calloutvariant: CalloutVariant | null = null;
+  /** Set the max allowed width of the modal. */
   export let maxwidth: string = "60ch";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "modal";
+  /** The design system version for styling purposes. */
   export let version: VersionType = "1";
 
-  // @deprecated: use maxwidth
+  /** @deprecated Use maxwidth instead. */
   export let width: string = "";
 
   // *******

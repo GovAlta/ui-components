@@ -8,14 +8,23 @@
 
   // Public
 
+  /** The content of the tooltip. */
   export let content = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Position with respect to the child element. */
   export let position: Position = "top";
+  /** Horizontal alignment to the child element. */
   export let halign: Alignment = "center";
+  /** Sets the maximum width of the tooltip. Must use 'px' unit. */
   export let maxwidth: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Types

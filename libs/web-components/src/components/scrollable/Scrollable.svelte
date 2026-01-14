@@ -4,11 +4,18 @@
   import { onMount, tick } from "svelte";
 
   // Public
+
+  /** The scroll direction. */
   export let direction: "vertical" | "horizontal" = "vertical";
+  /** Horizontal padding applied to the scrollable content. */
   export let hpadding: string = "";
+  /** Vertical padding applied to the scrollable content. */
   export let vpadding: string = "";
+  /** Maximum height of the scrollable container. Defaults to 50vh if not specified. */
   export let maxheight: string = "";
+  /** The visible height of the scrollable area. Read-only, set by the component. */
   export let offsetHeight: number;
+  /** The total scrollable height including overflow. Read-only, set by the component. */
   export let scrollHeight: number;
 
   // Private

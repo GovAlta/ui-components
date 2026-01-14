@@ -24,7 +24,9 @@
   // Public
   // ======
 
+  /** The text label for this tab. Can also use the heading slot for custom content. */
   export let heading: string = "";
+  /** Whether this tab is currently selected/active. */
   export let open: boolean = false;
   export let disabled: boolean = false;
   export let slug: string = "";

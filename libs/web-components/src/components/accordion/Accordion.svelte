@@ -26,17 +26,29 @@
 
   // Props
 
+  /** Sets the state of the accordion container open or closed. */
   export let open: string = "false";
+  /** @required Sets the heading text. */
   export let heading: string = "";
+  /** Sets secondary text. */
   export let secondarytext: string = "";
+  /** Sets the heading size of the accordion container heading. */
   export let headingsize: HeadingSize = "small";
+  /** Unique identifier for the accordion. Auto-generated if not provided. */
   export let id: string = "";
+  /** Sets the maximum width of the accordion. */
   export let maxwidth: string = "none";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = "xs";
+  /** Left margin. */
   export let ml: Spacing = null;
+  /** Sets the position of the expand/collapse icon. */
   export let iconposition: "left" | "right" = "left";
 
   // Private

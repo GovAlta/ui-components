@@ -6,11 +6,15 @@
   import type { Spacing } from "../../common/styling";
   import { getSlottedChildren } from "../../common/utils";
 
-  // Public
-  export let current: number = 1; // 1-based
+  /** The currently visible page (1-based index). */
+  export let current: number = 1;
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // Private

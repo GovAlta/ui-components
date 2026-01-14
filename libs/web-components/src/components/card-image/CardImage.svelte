@@ -2,7 +2,9 @@
 
 <!-- Script -->
 <script lang="ts">
+  /** @required The URL of the image to display. */
   export let src: string;
+  /** Height of the image container. Accepts CSS values like "200px" or "100%". */
   export let height: string = "100%";
 </script>
 

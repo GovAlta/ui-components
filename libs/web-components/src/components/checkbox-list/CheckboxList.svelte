@@ -25,17 +25,27 @@
     FieldsetErrorRelayDetail,
   } from "../../types/relay-types";
 
+  /** @required The name for the checkbox list group. Used for form submission. */
   export let name: string;
 
+  /** Array of currently selected checkbox values. */
   export let value: string[] = [];
+  /** Disables all checkboxes in the list. */
   export let disabled: string = "false";
+  /** Shows an error state on all checkboxes in the list. */
   export let error: string = "false";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Sets the maximum width of the checkbox list container. */
   export let maxwidth: string = "none";
 
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   type ChildRecord = { el: HTMLElement; name: string; label?: string };

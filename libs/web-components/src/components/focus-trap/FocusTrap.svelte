@@ -15,9 +15,10 @@
   import { findFirstFocusableNode } from "../../common/utils";
 
   // Public
-  // allow for outside control of whether focus trap should re-focus the first element is open/closed (see Drawer)
-  export let open: boolean = false;
 
+  /** Controls whether the focus trap is active. When true, focuses the first focusable element. */
+  export let open: boolean = false;
+  /** When true, prevents automatically scrolling focused elements into view. */
   export let preventScrollIntoView: boolean = false;
 
   // Private

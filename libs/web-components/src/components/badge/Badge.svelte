@@ -71,22 +71,34 @@
   type BadgeSize = (typeof badgeSizes)[number];
   type BadgeVersion = (typeof versions)[number];
 
+  /** @required Defines the context and colour of the badge. */
   export let type: BadgeType;
 
-  // optional
+  // Optional
+  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
   export let testid: string = "";
+  /** Text label of the badge. */
   export let content: string = "";
+  /** @deprecated Use icontype instead. Includes an icon in the badge. */
   export let icon: string = "";
+  /** Icon type to display in the badge. */
   export let icontype: GoAIconType | null = null;
+  /** Accessible label for screen readers. */
   export let arialabel: string = "";
+  /** Sets the size of the badge. */
   export let size: BadgeSize = "medium";
+  /** Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. */
   export let emphasis: (typeof emphasisLevels)[number] = "strong";
+  /** The design system version for styling purposes. */
   export let version: BadgeVersion = "1";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   // private

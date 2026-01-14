@@ -10,11 +10,17 @@
   import type { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
 
   // optional
+  /** Set the service name to display in the app header. */
   export let heading: string = "";
+  /** Set the URL to link from the alberta.ca logo. A full url is required. */
   export let url: string = "";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Maximum width of the content area. */
   export let maxcontentwidth = "";
+  /** Sets the breakpoint in px for the full menu to display. */
   export let fullmenubreakpoint: number = TABLET_BP; // minimum window width to show all menu links
+  /** When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling. */
   export let hasmenuclickhandler: string = "false"; // If this is yes, we will not expand menu when clicking a toggle button
 
   // Private

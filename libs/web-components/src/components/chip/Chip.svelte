@@ -10,18 +10,28 @@
 
   type ChipVariant = "filter";
 
-  // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
+  /** @deprecated Use GoAFilterChip instead. Icon displayed at the start of the chip. */
   export let leadingicon: GoAIconType | null = null;
+  /** @deprecated Use GoAFilterChip instead. The icon theme - outline or filled. */
   export let icontheme: IconTheme = "outline";
+  /** @deprecated Use GoAFilterChip instead. Shows an error state on the chip. */
   export let error: string = "false";
+  /** @deprecated Use GoAFilterChip instead. When true, shows a delete icon and makes chip clickable. */
   export let deletable: string = "false";
+  /** @deprecated Use GoAFilterChip instead. The text content displayed in the chip. */
   export let content: string;
+  /** @deprecated Use GoAFilterChip instead. The chip variant style. */
   export let variant: ChipVariant;
+  /** @deprecated Use GoAFilterChip instead. Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let el: HTMLElement;

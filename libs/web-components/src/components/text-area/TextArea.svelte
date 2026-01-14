@@ -27,19 +27,34 @@
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
+  /** Name of the input value that is received in the _change event */
+
   export let name: string;
+  /** Bound to value */
   export let value: string = "";
+  /** Text displayed within the input when no value is set. */
   export let placeholder: string = "";
+  /** Set the number of rows. */
   export let rows: number = 3;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Width of the text area. */
   export let width: string = "100%"; // 100% is default, the lower value of width and maxwidth wins
+  /** Maximum width of the text area */
   export let maxwidth: string = "60ch"; // 60ch is default, the lower value wins b/w width and maxwidth
+  /** Sets the input to an error state */
   export let error: string = "false";
+  /** Sets the input to a read only state. */
   export let readonly: string = "false";
+  /** Sets the input to a disabled state. Use [attr.disabled] with [formControl] */
   export let disabled: string = "false";
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   export let arialabel: string = "";
+  /** Counting interval for characters or words, specifying whether to count every character or word. */
   export let countby: "character" | "word" | "" = "";
+  /** Maximum number of characters or words allowed */
   export let maxcount: number = -1;
+  /** Specifies the autocomplete attribute for the textarea input. */
   export let autocomplete: string = "";
 
   // version
@@ -53,9 +68,13 @@
   export let size: SizeType = "default";
 
   // margin
+  /** Top margin. */
   export let mt: Spacing = null;
+  /** Right margin. */
   export let mr: Spacing = null;
+  /** Bottom margin. */
   export let mb: Spacing = null;
+  /** Left margin. */
   export let ml: Spacing = null;
 
   let _error = false;
