@@ -548,9 +548,7 @@
   /* Header nav item with children (app header menu) --Hover */
   .desktop :global(::slotted(goa-app-header-menu:hover)) {
     background: var(--goa-app-header-color-bg-nav-item-hover);
-    cursor: pointer;
-    color: var(--goa-app-header-color-text-nav-item-hover) !important;
-    overflow: hidden !important;
+    color: var(--goa-app-header-color-text-nav-item-hover);
   }
 
   /* Link item styling */
