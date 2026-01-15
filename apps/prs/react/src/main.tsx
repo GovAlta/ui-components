@@ -61,6 +61,7 @@ import { Feat2829Route } from "./routes/features/feat2829";
 import { Feat2877Route } from "./routes/features/feat2877";
 import Feat3102Route from "./routes/features/feat3102";
 import { Feat2611Route } from "./routes/features/feat2611";
+import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -126,6 +127,7 @@ root.render(
           <Route path="features/2829" element={<Feat2829Route />} />
           <Route path="features/2877" element={<Feat2877Route />} />
           <Route path="features/3102" element={<Feat3102Route />} />
+          <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
         </Route>
       </Routes>
     </BrowserRouter>
