@@ -1,34 +1,57 @@
 import {
   GoabCheckboxListOnChangeDetail,
-  Margins
+  Margins,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 
-export interface GoabCheckboxListProps extends Margins {
+interface WCProps extends Margins {
+  ref: React.RefObject<HTMLElement | null>;
+  name: string;
+  value?: string[];
+  disabled?: string;
+  error?: string;
+  testid?: string;
+  maxwidth?: string;
+  version?: string;
+  size?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-checkbox-list": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
+export interface GoabxCheckboxListProps extends Margins {
   name: string;
   value?: string[];
   disabled?: boolean;
   error?: boolean;
   testId?: string;
   maxWidth?: string;
+  size?: "default" | "compact";
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
 }
 
-export function GoabCheckboxList({
+export function GoabxCheckboxList({
   name,
   value = [],
   disabled,
   error,
   testId,
   maxWidth,
+  size = "default",
   children,
   onChange,
   mt,
   mr,
   mb,
   ml,
-}: GoabCheckboxListProps): JSX.Element {
+}: GoabxCheckboxListProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -36,26 +59,14 @@ export function GoabCheckboxList({
 
     const current = el.current;
     const listener = (e: Event) => {
-      try {
-        const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
-        onChange?.({ ...detail, event: e });
-      } catch (error) {
-        console.error("Error handling checkbox list change:", error);
-      }
+      const detail = (e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail;
+      onChange?.({ ...detail, event: e });
     };
 
-    try {
-      current.addEventListener("_change", listener);
-    } catch (error) {
-      console.error("Failed to attach checkbox list listener:", error);
-    }
+    current.addEventListener("_change", listener);
 
     return () => {
-      try {
-        current.removeEventListener("_change", listener);
-      } catch (error) {
-        console.error("Failed to remove checkbox list listener:", error);
-      }
+      current.removeEventListener("_change", listener);
     };
   }, [onChange]);
 
@@ -68,6 +79,8 @@ export function GoabCheckboxList({
       error={error ? "true" : undefined}
       testid={testId}
       maxwidth={maxWidth}
+      version="2"
+      size={size}
       mt={mt}
       mr={mr}
       mb={mb}
@@ -78,4 +91,4 @@ export function GoabCheckboxList({
   );
 }
 
-export default GoabCheckboxList;
+export default GoabxCheckboxList;

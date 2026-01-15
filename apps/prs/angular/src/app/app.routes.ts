@@ -73,6 +73,7 @@ import { Feat3407SkipOnFocusTabComponent } from "../routes/features/feat3407Skip
 import { Feat3407StackOnMobileComponent } from "../routes/features/feat3407StackOnMobile/feat3407-stack-on-mobile.component";
 import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-icons.component";
 import { Feat3396Component } from "../routes/features/feat3396/feat3396.component";
+import { FeatV2CheckboxComponent } from "../routes/features/featV2Checkbox/featV2Checkbox.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -149,4 +150,5 @@ export const appRoutes: Route[] = [
   { path: "features/3396", component: Feat3396Component },
   { path: "features/3407-skip-on-focus-tab", component: Feat3407SkipOnFocusTabComponent },
   { path: "features/3407-stack-on-mobile", component: Feat3407StackOnMobileComponent },
+  { path: "features/v2-checkbox", component: FeatV2CheckboxComponent },
 ];
