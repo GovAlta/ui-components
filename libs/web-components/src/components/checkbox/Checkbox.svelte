@@ -103,7 +103,10 @@
     // hold on to the initial value to prevent losing it on check changes
     _value = value;
     _descriptionId = `description_${name}`;
-    mb ??= size === "compact" ? "s" : "m";
+
+    // V1: preserve backwards-compatible auto-margin
+    // V2: parent controls spacing, no auto-margin
+    if (version === "1") mb ??= size === "compact" ? "s" : "m";
 
     addRelayListener();
     addRevealSlotListener();
@@ -420,7 +423,7 @@ max-width: ${maxwidth};
 
   .description {
     font: var(--goa-checkbox-description-font-size);
-    margin-left: var(--goa-space-xl);
+    margin-left: calc(var(--goa-checkbox-size) + var(--goa-checkbox-gap));
     margin-top: var(--goa-space-2xs); /* Space between text and description */
   }
 
@@ -646,5 +649,9 @@ max-width: ${maxwidth};
   .v2.compact .text {
     padding-left: var(--goa-checkbox-gap-compact);
     font: var(--goa-checkbox-label-font-size-compact);
+  }
+
+  .compact .description {
+    margin-left: calc(var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact));
   }
 </style>

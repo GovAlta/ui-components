@@ -1,0 +1,184 @@
+<div style="padding: 20px">
+  <goab-text tag="h1" size="heading-l" mb="m">V2 Checkbox Fixes</goab-text>
+
+  <goab-text size="body-m" mb="m">
+    This page demonstrates fixes for checkbox spacing issues:
+  </goab-text>
+  <goab-block direction="column" gap="s" mb="m">
+    <goab-text size="body-s">
+      1. <strong>Checkbox auto-margin removed</strong> - Checkboxes no longer have
+      default bottom margin, fixing alignment in tables
+    </goab-text>
+    <goab-text size="body-s">
+      2. <strong>CheckboxList gap</strong> - CheckboxList now controls its own spacing
+      between items using gap: var(--goa-space-m)
+    </goab-text>
+  </goab-block>
+
+  <goab-divider></goab-divider>
+
+  <!-- Test Case 1: Checkbox in Table -->
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Test 1: Checkbox in Table
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    Previously, checkboxes in tables had unwanted bottom margin causing misalignment.
+    Now they align properly with the row content.
+  </goab-text>
+
+  <goab-table width="100%">
+    <thead>
+      <tr>
+        <th>
+          <goabx-checkbox
+            name="select-all"
+            [checked]="allSelected"
+            [indeterminate]="someSelected"
+            (onChange)="toggleSelectAll($event)"
+            ariaLabel="Select all rows"
+          ></goabx-checkbox>
+        </th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData">
+        <td>
+          <goabx-checkbox
+            [name]="'select-' + row.id"
+            [checked]="isRowSelected(row.id)"
+            (onChange)="toggleRow(row.id, $event)"
+            [ariaLabel]="'Select ' + row.name"
+          ></goabx-checkbox>
+        </td>
+        <td>{{ row.name }}</td>
+        <td>{{ row.email }}</td>
+        <td>{{ row.status }}</td>
+      </tr>
+    </tbody>
+  </goab-table>
+
+  <goab-text size="body-xs" mt="m">
+    Selected: {{ selectedRows.size }} of {{ tableData.length }} rows
+  </goab-text>
+
+  <goab-divider mt="xl"></goab-divider>
+
+  <!-- Test Case 2: CheckboxList Spacing -->
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Test 2: CheckboxList Spacing
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    CheckboxList now uses gap: var(--goa-space-m) for consistent spacing between items.
+    Previously relied on individual checkbox margins.
+  </goab-text>
+
+  <goabx-checkbox-list
+    name="preferences"
+    [value]="checkboxListValue"
+    (onChange)="onCheckboxListChange($event)"
+  >
+    <goabx-checkbox name="option1" text="Option 1: Email notifications"></goabx-checkbox>
+    <goabx-checkbox name="option2" text="Option 2: SMS notifications"></goabx-checkbox>
+    <goabx-checkbox name="option3" text="Option 3: Push notifications"></goabx-checkbox>
+  </goabx-checkbox-list>
+
+  <goab-text size="body-xs" mt="m">
+    Selected: {{ checkboxListValue.length > 0 ? checkboxListValue.join(', ') : 'none' }}
+  </goab-text>
+
+  <goab-divider mt="xl"></goab-divider>
+
+  <!-- Test Case 3: V2 Compact CheckboxList -->
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Test 3: V2 Compact CheckboxList
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    Compact checkbox list uses smaller gap (var(--goa-space-s)) between items.
+  </goab-text>
+
+  <goabx-checkbox-list
+    name="compact-prefs"
+    size="compact"
+    [value]="compactListValue"
+    (onChange)="onCompactListChange($event)"
+  >
+    <goabx-checkbox name="compact1" size="compact" text="Compact option 1"></goabx-checkbox>
+    <goabx-checkbox name="compact2" size="compact" text="Compact option 2"></goabx-checkbox>
+    <goabx-checkbox name="compact3" size="compact" text="Compact option 3"></goabx-checkbox>
+  </goabx-checkbox-list>
+
+  <goab-text size="body-xs" mt="m">
+    Selected: {{ compactListValue.length > 0 ? compactListValue.join(', ') : 'none' }}
+  </goab-text>
+
+  <goab-divider mt="xl"></goab-divider>
+
+  <!-- Test Case 4: V2 Standalone Checkbox -->
+  <goab-text tag="h2" size="heading-m" mt="xl" mb="m">
+    Test 4: V2 Standalone Checkbox (No Auto-Margin)
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    V2 checkboxes no longer have default bottom margin.
+    Spacing should be controlled by the parent layout.
+  </goab-text>
+
+  <goab-block direction="row" gap="xl" alignment="center">
+    <goabx-checkbox name="standalone1" text="Checkbox A"></goabx-checkbox>
+    <goabx-checkbox name="standalone2" text="Checkbox B"></goabx-checkbox>
+    <goabx-checkbox name="standalone3" text="Checkbox C"></goabx-checkbox>
+  </goab-block>
+
+  <goab-text size="body-xs" mt="m">
+    Notice: No extra margin between checkboxes - spacing controlled by goab-block gap.
+  </goab-text>
+
+  <goab-divider mt="xl"></goab-divider>
+
+  <!-- V1 Regression Tests -->
+  <goab-text tag="h2" size="heading-l" mt="xl" mb="m">
+    V1 Regression Tests
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    These tests verify V1 checkboxes still behave correctly after the V2 spacing changes.
+  </goab-text>
+
+  <!-- Test Case 5: V1 Standalone Checkboxes -->
+  <goab-text tag="h3" size="heading-m" mt="l" mb="m">
+    Test 5: V1 Standalone Checkboxes (Auto-Margin)
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    V1 checkboxes should still have their default bottom margin (space-m).
+  </goab-text>
+
+  <div style="border: 1px dashed #ccc; padding: 1rem">
+    <goab-checkbox name="v1-standalone1" text="V1 Default - should have margin-bottom: space-m"></goab-checkbox>
+    <goab-checkbox name="v1-standalone2" text="V1 Default - should have margin-bottom: space-m"></goab-checkbox>
+  </div>
+
+  <goab-divider mt="xl"></goab-divider>
+
+  <!-- Test Case 6: V1 CheckboxList -->
+  <goab-text tag="h3" size="heading-m" mt="l" mb="m">
+    Test 6: V1 CheckboxList (No Gap Change)
+  </goab-text>
+  <goab-text size="body-s" mb="m">
+    V1 checkbox lists should look the same as before - individual checkbox margins control spacing, list gap is 0.
+  </goab-text>
+
+  <goab-checkbox-list
+    name="v1-list"
+    [value]="v1ListValue"
+    (onChange)="onV1ListChange($event)"
+  >
+    <goab-checkbox name="v1opt1" text="V1 list option 1"></goab-checkbox>
+    <goab-checkbox name="v1opt2" text="V1 list option 2"></goab-checkbox>
+    <goab-checkbox name="v1opt3" text="V1 list option 3"></goab-checkbox>
+  </goab-checkbox-list>
+
+  <goab-text size="body-xs" mt="m">
+    Selected: {{ v1ListValue.length > 0 ? v1ListValue.join(', ') : 'none' }}
+  </goab-text>
+</div>
