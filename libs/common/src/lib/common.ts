@@ -218,8 +218,11 @@ export type GoabTextAreaOnBlurDetail = {
 
 // Tabs
 
+export type GoabTabsVariant = "default" | "segmented";
+
 export interface GoabTabsProps {
   initialTab?: number;
+  variant?: GoabTabsVariant;
 }
 
 export type GoabTabsOnChangeDetail = {

@@ -48,6 +48,7 @@ import { Feat2328Component } from "../routes/features/feat2328/feat2328.componen
 import { Feat2361Component } from "../routes/features/feat2361/feat2361.component";
 import { Feat2440Component } from "../routes/features/feat2440/feat2440.component";
 import { Feat2492Component } from "../routes/features/feat2492/feat2492.component";
+import { Feat2611Component } from "../routes/features/feat2611/feat2611.component";
 import { Feat2611TabsDisabledComponent } from "../routes/features/feat2611-tabs-disabled/feat2611-tabs-disabled.component";
 import { Feat2682Component } from "../routes/features/feat2682/feat2682.component";
 import { Feat2722Component } from "../routes/features/feat2722/feat2722.component";
@@ -108,6 +109,7 @@ export const appRoutes: Route[] = [
   { path: "features/2361", component: Feat2361Component },
   { path: "features/2440", component: Feat2440Component },
   { path: "features/2492", component: Feat2492Component },
+  { path: "features/2611", component: Feat2611Component },
   { path: "features/2611-tabs-disabled", component: Feat2611TabsDisabledComponent },
   { path: "features/2682", component: Feat2682Component },
   { path: "features/2722", component: Feat2722Component },
