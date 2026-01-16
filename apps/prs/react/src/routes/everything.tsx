@@ -1457,17 +1457,79 @@ export function EverythingRoute(): JSX.Element {
             {accordionLastToggle?.open?.toString() ?? "n/a"}
           </GoabText>
           <GoabTabs initialTab={tabsState} onChange={handleTabsChange}>
-            {TAB_ITEMS.map((tab) => (
-              <GoabTab key={tab.id} heading={tab.heading}>
-                <GoabText tag="p" size="body-m">
-                  Content for {tab.heading}.
-                </GoabText>
-              </GoabTab>
-            ))}
+            <GoabTab heading="Unassigned">
+              <GoabText tag="p" size="body-m">
+                Unassigned cases content.
+              </GoabText>
+            </GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Assigned to me <GoabBadge type="information" content="8" />
+                </>
+              }
+            >
+              <GoabText tag="p" size="body-m">
+                Cases assigned to me content.
+              </GoabText>
+            </GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  In progress <GoabBadge type="information" content="7" />
+                </>
+              }
+            >
+              <GoabText tag="p" size="body-m">
+                Cases in progress content.
+              </GoabText>
+            </GoabTab>
+            <GoabTab heading="Complete">
+              <GoabText tag="p" size="body-m">
+                Completed cases content.
+              </GoabText>
+            </GoabTab>
           </GoabTabs>
           <GoabText tag="p" size="body-s" mt="s">
             Selected tab index: {tabsState}
           </GoabText>
+          <GoabText tag="h4" size="heading-xs" mt="m">
+            Segmented Tabs Variant
+          </GoabText>
+          <GoabTabs variant="segmented" onChange={handleTabsChange}>
+            <GoabTab heading="Unassigned">
+              <GoabText tag="p" size="body-m">
+                Unassigned cases content.
+              </GoabText>
+            </GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Assigned to me <GoabBadge type="information" content="8" />
+                </>
+              }
+            >
+              <GoabText tag="p" size="body-m">
+                Cases assigned to me content.
+              </GoabText>
+            </GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  In progress <GoabBadge type="information" content="7" />
+                </>
+              }
+            >
+              <GoabText tag="p" size="body-m">
+                Cases in progress content.
+              </GoabText>
+            </GoabTab>
+            <GoabTab heading="Complete">
+              <GoabText tag="p" size="body-m">
+                Completed cases content.
+              </GoabText>
+            </GoabTab>
+          </GoabTabs>
         </GoabContainer>
         <GoabContainer type="interactive" padding="relaxed">
           <GoabText tag="h3" size="heading-s">

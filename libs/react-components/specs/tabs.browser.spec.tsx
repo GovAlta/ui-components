@@ -62,7 +62,7 @@ describe("Tabs Browser Tests", () => {
 
       // Verify URL components are preserved
       await vi.waitFor(() => {
-        expect(window.location.search.indexOf("param=value")).toBeGreaterThan(0)
+        expect(window.location.search.indexOf("param=value")).toBeGreaterThan(0);
         // Check for both hashes in the URL
         expect(window.location.hash).toBe("#tab-2#anchorPoint");
         expect(window.location.href).toContain("#tab-2#anchorPoint");
@@ -472,7 +472,11 @@ describe("Tabs Browser Tests", () => {
       // WHEN - Press arrow right to move to Tab 3
       const tab2 = getByTestId("tab-2");
       tab2.element().focus();
-      await tab2.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+      await tab2
+        .element()
+        .dispatchEvent(
+          new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
+        );
 
       // THEN - Tab 3 should be active
       await vi.waitFor(() => {
@@ -485,7 +489,11 @@ describe("Tabs Browser Tests", () => {
 
       // WHEN - Press arrow right again (should skip Tab 1 and go to Tab 2)
       const tab3 = getByTestId("tab-3");
-      await tab3.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+      await tab3
+        .element()
+        .dispatchEvent(
+          new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
+        );
 
       // THEN - Tab 2 should be active (Tab 1 is skipped because it's disabled)
       await vi.waitFor(() => {
@@ -531,7 +539,11 @@ describe("Tabs Browser Tests", () => {
       // Navigate to Tab 3 first (skip Tab 2 which is disabled)
       const tab1 = getByTestId("tab-1");
       tab1.element().focus();
-      await tab1.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+      await tab1
+        .element()
+        .dispatchEvent(
+          new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
+        );
 
       // THEN - Tab 3 should be active (Tab 2 is skipped)
       await vi.waitFor(() => {
@@ -542,7 +554,9 @@ describe("Tabs Browser Tests", () => {
 
       // WHEN - Press arrow left (should skip Tab 2 and go to Tab 1)
       const tab3 = getByTestId("tab-3");
-      await tab3.element().dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+      await tab3
+        .element()
+        .dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
 
       // THEN - Tab 1 should be active (Tab 2 is skipped)
       await vi.waitFor(() => {
@@ -552,5 +566,37 @@ describe("Tabs Browser Tests", () => {
       });
     });
   });
-});
+  describe("variant segmented", () => {
+    it("should render segmented tabs", async () => {
+      // GIVEN - Tabs with variant="segmented"
+      const Component = () => {
+        return (
+          <GoabTabs variant="segmented" testId="segment-tabs">
+            <GoabTab heading="Overview">
+              <p>Overview content</p>
+            </GoabTab>
+            <GoabTab heading="Details">
+              <p>Details content</p>
+            </GoabTab>
+            <GoabTab heading="Settings">
+              <p>Settings content</p>
+            </GoabTab>
+          </GoabTabs>
+        );
+      };
 
+      const { getByTestId } = render(<Component />);
+
+      // Wait for component to fully render
+      await vi.waitFor(() => {
+        expect(getByTestId("segment-tabs")).toBeTruthy();
+      });
+
+      // THEN - The tablist container should have the "segmented" class
+      await vi.waitFor(() => {
+        const tabsContainer = getByTestId("segment-tabs");
+        expect(tabsContainer.element().classList.contains("segmented")).toBe(true);
+      });
+    });
+  });
+});

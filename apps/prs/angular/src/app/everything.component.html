@@ -971,14 +971,34 @@
           Last toggle: {{ accordionLastToggle?.heading || "None" }} →
           {{ accordionLastToggle?.open }}
         </goab-text>
+        <ng-template #defaultAssigned
+          >Assigned to me <goab-badge type="information" content="8"
+        /></ng-template>
+        <ng-template #defaultInProgress
+          >In progress <goab-badge type="information" content="7"
+        /></ng-template>
         <goab-tabs [initialTab]="tabsState.selected" (onChange)="onTabsChange($event)">
-          @for (tab of tabItems; track tab.heading) {
-            <goab-tab [heading]="tab.heading"> Content for {{ tab.heading }}. </goab-tab>
-          }
+          <goab-tab heading="Unassigned">Unassigned cases content.</goab-tab>
+          <goab-tab [heading]="defaultAssigned">Cases assigned to me content.</goab-tab>
+          <goab-tab [heading]="defaultInProgress">Cases in progress content.</goab-tab>
+          <goab-tab heading="Complete">Completed cases content.</goab-tab>
         </goab-tabs>
         <goab-text tag="p" size="body-s" mt="s">
           Selected tab index: {{ tabsState.selected }}
         </goab-text>
+        <goab-text tag="h4" size="heading-xs" mt="m">Segmented Tabs Variant</goab-text>
+        <ng-template #segmentedAssigned
+          >Assigned to me <goab-badge type="information" content="8"
+        /></ng-template>
+        <ng-template #segmentedInProgress
+          >In progress <goab-badge type="information" content="7"
+        /></ng-template>
+        <goab-tabs variant="segmented" (onChange)="onTabsChange($event)">
+          <goab-tab heading="Unassigned">Unassigned cases content.</goab-tab>
+          <goab-tab [heading]="segmentedAssigned">Cases assigned to me content.</goab-tab>
+          <goab-tab [heading]="segmentedInProgress">Cases in progress content.</goab-tab>
+          <goab-tab heading="Complete">Completed cases content.</goab-tab>
+        </goab-tabs>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Table & Pagination</goab-text>

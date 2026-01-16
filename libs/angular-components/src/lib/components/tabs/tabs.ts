@@ -9,7 +9,7 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -19,6 +19,7 @@ import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
       *ngIf="isReady"
       [attr.initialtab]="initialTab"
       [attr.testid]="testId"
+      [attr.variant]="variant"
       (_change)="_onChange($event)"
     >
       <ng-content />
@@ -31,6 +32,7 @@ export class GoabTabs implements OnInit {
   isReady = false;
   @Input({ transform: numberAttribute }) initialTab?: number;
   @Input() testId?: string;
+  @Input() variant?: GoabTabsVariant;
 
   constructor(private cdr: ChangeDetectorRef) {}
 

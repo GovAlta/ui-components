@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, type JSX } from "react";
-import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
 
 interface WCProps {
   initialtab?: number;
   ref: React.RefObject<HTMLElement | null>;
   onChange?: (tab: number) => void;
   testid?: string;
+  variant?: GoabTabsVariant;
 }
 
 declare module "react" {
@@ -21,6 +22,7 @@ export interface GoabTabsProps {
   initialTab?: number;
   children?: React.ReactNode;
   testId?: string;
+  variant?: GoabTabsVariant;
   onChange?: (detail: GoabTabsOnChangeDetail) => void;
 }
 
@@ -28,6 +30,7 @@ export function GoabTabs({
   initialTab,
   children,
   testId,
+  variant,
   onChange,
 }: GoabTabsProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
@@ -47,7 +50,7 @@ export function GoabTabs({
   }, [onChange]);
 
   return (
-    <goa-tabs ref={ref} initialtab={initialTab} testid={testId}>
+    <goa-tabs ref={ref} initialtab={initialTab} testid={testId} variant={variant}>
       {children}
     </goa-tabs>
   );

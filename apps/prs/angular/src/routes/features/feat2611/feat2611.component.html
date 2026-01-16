@@ -1,0 +1,194 @@
+<h1>Segmented Tabs Variant (#2611)</h1>
+<p>
+  This feature adds a new "segmented" variant to the Tabs component, featuring a
+  pill/button style with animated sliding background.
+</p>
+
+<goab-block gap="xl" direction="column">
+  <!-- Segmented Variant -->
+  <section>
+    <h2>Segmented Variant</h2>
+
+    <ng-template #overviewHeading
+      >Overview <goab-badge type="information" content="3"
+    /></ng-template>
+    <ng-template #detailsHeading
+      >Details <goab-badge type="success" content="New"
+    /></ng-template>
+    <ng-template #settingsHeading
+      >Settings <goab-badge type="important" content="5"
+    /></ng-template>
+
+    <goab-tabs initialTab="1" variant="segmented" (onChange)="onTabChange($event)">
+      <goab-tab [heading]="overviewHeading">
+        <goab-text>
+          This is the Overview tab content. The segmented variant displays tabs as
+          pill-shaped buttons with a sliding background indicator.
+        </goab-text>
+      </goab-tab>
+      <goab-tab [heading]="detailsHeading">
+        <goab-text>
+          This is the Details tab content. Notice how the pill smoothly animates between
+          tabs.
+        </goab-text>
+      </goab-tab>
+      <goab-tab [heading]="settingsHeading">
+        <goab-text>
+          This is the Settings tab content. The segmented style is ideal for compact
+          navigation within a section.
+        </goab-text>
+      </goab-tab>
+    </goab-tabs>
+  </section>
+
+  <!-- Segmented Variant - Dynamic Heading Updates -->
+  <section>
+    <h2>Segmented Variant - Dynamic Heading Updates</h2>
+    <p>
+      Use the controls to change heading content; the pill should resize and stay aligned
+      after each update.
+    </p>
+
+    <goab-button-group mb="l">
+      <goab-button (onClick)="toggleDynamicLabel()">Toggle label length</goab-button>
+      <goab-button (onClick)="toggleDynamicBadge()">Toggle badge content</goab-button>
+    </goab-button-group>
+
+    <ng-template #dynamicHeading>
+      {{ dynamicLabel }} <goab-badge type="information" [content]="dynamicBadge" />
+    </ng-template>
+
+    <goab-tabs variant="segmented" (onChange)="onTabChange($event)">
+      <goab-tab [heading]="dynamicHeading">
+        <goab-text>
+          This tab heading changes length and badge content for resize testing.
+        </goab-text>
+      </goab-tab>
+      <goab-tab heading="Static">
+        <goab-text>Static label for comparison.</goab-text>
+      </goab-tab>
+      <goab-tab heading="Another">
+        <goab-text>Another static label.</goab-text>
+      </goab-tab>
+    </goab-tabs>
+  </section>
+
+  <!-- Default Variant -->
+  <section>
+    <h2>Default Variant (for comparison)</h2>
+    <p>Standard tabs with underline indicator.</p>
+
+    <ng-template #overviewHeading2
+      >{{ dynamicLabel }} <goab-badge type="information" [content]="dynamicBadge"
+    /></ng-template>
+    <ng-template #detailsHeading2
+      >Details <goab-badge type="success" content="New"
+    /></ng-template>
+    <ng-template #settingsHeading2
+      >Settings <goab-badge type="important" content="5"
+    /></ng-template>
+
+    <goab-tabs (onChange)="onTabChange($event)">
+      <goab-tab [heading]="overviewHeading2">
+        <goab-text>
+          This is the Overview tab with the default variant styling.
+        </goab-text>
+      </goab-tab>
+      <goab-tab [heading]="detailsHeading2">
+        <goab-text> This is the Details tab with the default variant styling. </goab-text>
+      </goab-tab>
+      <goab-tab [heading]="settingsHeading2">
+        <goab-text>
+          This is the Settings tab with the default variant styling.
+        </goab-text>
+      </goab-tab>
+    </goab-tabs>
+  </section>
+
+  <!-- Long Labels - Segmented -->
+  <section>
+    <h2>Long Labels - Segmented Variant</h2>
+    <p>Demonstrates how long tab labels are handled in the segmented variant.</p>
+
+    <ng-template #longBadgeHeading
+      >Long with Badge <goab-badge type="important" content="99+"
+    /></ng-template>
+
+    <goab-tabs variant="segmented" (onChange)="onTabChange($event)">
+      <goab-tab heading="Short">
+        <goab-text>Short label tab content.</goab-text>
+      </goab-tab>
+      <goab-tab heading="Medium Length Label">
+        <goab-text>Medium length label tab content.</goab-text>
+      </goab-tab>
+      <goab-tab heading="This is a very long tab label that might need special handling">
+        <goab-text>Very long label tab content.</goab-text>
+      </goab-tab>
+      <goab-tab [heading]="longBadgeHeading">
+        <goab-text>Long label with badge tab content.</goab-text>
+      </goab-tab>
+    </goab-tabs>
+  </section>
+
+  <!-- Disabled Tabs - Segmented -->
+  <section>
+    <h2>Disabled Tabs - Segmented Variant</h2>
+    <p>Demonstrates disabled tabs that cannot be clicked or navigated to.</p>
+
+    <ng-template #disabledBadgeHeading
+      >Disabled with Badge <goab-badge type="important" content="!"
+    /></ng-template>
+
+    <goab-tabs variant="segmented" (onChange)="onTabChange($event)">
+      <goab-tab heading="Enabled">
+        <goab-text>This tab is enabled and can be selected.</goab-text>
+      </goab-tab>
+      <goab-tab heading="Disabled Tab" [disabled]="true">
+        <goab-text>This content should not be visible (tab is disabled).</goab-text>
+      </goab-tab>
+      <goab-tab heading="Also Enabled">
+        <goab-text
+          >This tab is also enabled. Keyboard navigation skips the disabled
+          tab.</goab-text
+        >
+      </goab-tab>
+      <goab-tab [heading]="disabledBadgeHeading" [disabled]="true">
+        <goab-text>Disabled tab with badge - not accessible.</goab-text>
+      </goab-tab>
+    </goab-tabs>
+  </section>
+
+  <!-- Disabled Tabs - Default -->
+  <section>
+    <h2>Disabled Tabs - Default Variant</h2>
+    <p>Demonstrates disabled tabs in the default variant.</p>
+
+    <ng-template #disabledBadgeHeading2
+      >Disabled with Badge <goab-badge type="important" content="!"
+    /></ng-template>
+
+    <goab-tabs (onChange)="onTabChange($event)">
+      <goab-tab heading="Enabled">
+        <goab-text>This tab is enabled and can be selected.</goab-text>
+      </goab-tab>
+      <goab-tab heading="Disabled Tab" [disabled]="true">
+        <goab-text>This content should not be visible (tab is disabled).</goab-text>
+      </goab-tab>
+      <goab-tab heading="Also Enabled">
+        <goab-text
+          >This tab is also enabled. Keyboard navigation skips the disabled
+          tab.</goab-text
+        >
+      </goab-tab>
+      <goab-tab [heading]="disabledBadgeHeading2" [disabled]="true">
+        <goab-text>Disabled tab with badge - not accessible.</goab-text>
+      </goab-tab>
+    </goab-tabs>
+  </section>
+
+  <!-- Active Tab State -->
+  <section>
+    <h2>Active Tab State</h2>
+    <goab-text> <strong>Current active tab:</strong> {{ activeTab }} </goab-text>
+  </section>
+</goab-block>

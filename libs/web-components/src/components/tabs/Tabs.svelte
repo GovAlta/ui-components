@@ -8,9 +8,9 @@
   export let initialtab: number = -1; // 1-based
   export let testid: string = "";
   export let version: "1" | "2" = "1";
+  export let variant: "default" | "segmented" = "default";
 
-  // Private
-
+ // Private
   let _rootEl: HTMLElement;
   let _tabsEl: HTMLElement;
   let _slotEl: HTMLElement;
@@ -18,6 +18,16 @@
   let _tabProps: (GoATabProps & { bound: boolean })[] = [];
   let _bindTimeoutId: any;
   let _initialLoad: boolean = true;
+
+  let _segmentedIndicatorLeft: number = 0;
+  let _segmentedIndicatorWidth: number = 0;
+  let _segmentedIndicatorHeight: number = 30; // 30px is a default height, real value will be calculated later
+  let _segmentedTransitionDuration: number = 0;
+  let _previousTabIndex: number = 1;
+
+  const MIN_TRANSITION_DURATION = 200;
+  const DURATION_PER_PIXEL = 0.2;
+  const MAX_TRANSITION_DURATION = 400;
 
   // ========
   // Hooks
@@ -53,7 +63,10 @@
     return index >= 0 && index < _tabProps.length && _tabProps[index].disabled;
   }
 
-  function findNextEnabledTab(currentIndex: number, direction: "left" | "right"): number {
+  function findNextEnabledTab(
+    currentIndex: number,
+    direction: "left" | "right",
+  ): number {
     const totalTabs = _tabProps.length;
     let nextIndex = currentIndex;
 
@@ -114,7 +127,6 @@
 
           let targetTab = tabIndexFromHash ?? (initialtab || 1);
 
-          // If target tab is disabled, find first enabled tab
           if (isTabDisabled(targetTab)) {
             targetTab = getFirstEnabledTab();
           }
@@ -173,7 +185,14 @@
       link.setAttribute("href", `${path}${search}#${tabSlug}`);
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
 
-      // Handle disabled state
+      // Store text content for CSS pseudo-element (prevents layout shift when font-weight changes)
+      if (variant === "segmented") {
+        const textContent = headingEl.textContent?.trim() || "";
+        if (textContent) {
+          link.setAttribute("data-text", textContent);
+        }
+      }
+
       if (tabProps.disabled) {
         link.setAttribute("aria-disabled", "true");
         link.addEventListener("click", (e) => {
@@ -188,6 +207,13 @@
 
       _tabsEl?.appendChild(link);
     });
+
+    if (variant === "segmented") {
+      // wait for DOM to finish render before calculating position
+      requestAnimationFrame(() => {
+        updateSegmentedIndicatorPosition({ withAnimation: false });
+      });
+    }
   }
 
   function addKeyboardEventListeners() {
@@ -213,6 +239,41 @@
 
   function removeHashChangeListener() {
     window.removeEventListener("hashchange", handleHashChange);
+  }
+
+  /**
+   * Updates the segmented indicator position with velocity-based animation.
+   * @param withAnimation - Whether to animate the transition (false on first load, true on tab change)
+   */
+  function updateSegmentedIndicatorPosition({ withAnimation }: { withAnimation: boolean }) {
+    if (!_tabsEl || variant !== "segmented") return;
+
+    const tabs = _tabsEl.querySelectorAll('[role="tab"]');
+    const selectedTab = tabs[_currentTab - 1] as HTMLElement;
+
+    if (!selectedTab) return;
+
+    const tabsRect = _tabsEl.getBoundingClientRect();
+    const selectedRect = selectedTab.getBoundingClientRect();
+
+    if (withAnimation) {
+      const previousTab = tabs[_previousTabIndex - 1] as HTMLElement;
+      if (previousTab) {
+        const tabDistance = Math.abs(selectedRect.left - previousTab.getBoundingClientRect().left);
+        const calculatedDuration = MIN_TRANSITION_DURATION + DURATION_PER_PIXEL * tabDistance;
+        _segmentedTransitionDuration = Math.min(calculatedDuration, MAX_TRANSITION_DURATION) / 1000;
+      } else {
+        _segmentedTransitionDuration = 0;
+      }
+    } else {
+      _segmentedTransitionDuration = 0;
+    }
+
+    _segmentedIndicatorLeft = selectedRect.left - tabsRect.left - 1;
+    _segmentedIndicatorWidth = selectedRect.width;
+    _segmentedIndicatorHeight = selectedRect.height;
+
+    _previousTabIndex = _currentTab;
   }
 
   function setCurrentTab(tab: number) {
@@ -281,6 +342,10 @@
         }
       }
     }
+
+    if (variant === "segmented") {
+      updateSegmentedIndicatorPosition({ withAnimation: true });
+    }
   }
 
   function handleKeydownEvents() {
@@ -333,8 +398,22 @@
 
 <!--HTML-->
 
-<div role="tablist" bind:this={_rootEl} class:v2={version === "2"} data-testid={testid}>
-  <div class="tabs" bind:this={_tabsEl}></div>
+<div
+  role="tablist"
+  bind:this={_rootEl}
+  class:v2={version === "2"}
+  class:segmented={variant === "segmented"}
+  data-testid={testid}
+>
+  <div
+    class="tabs"
+    bind:this={_tabsEl}
+    style="--segmented-indicator-left: {_segmentedIndicatorLeft}px; --segmented-indicator-width: {_segmentedIndicatorWidth}px; --segmented-indicator-height: {_segmentedIndicatorHeight}px; --segmented-transition-duration: {_segmentedTransitionDuration}s;"
+  >
+    {#if variant === "segmented" && _segmentedIndicatorWidth > 0}
+      <div class="segmented-indicator"></div>
+    {/if}
+  </div>
   <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
     <slot />
   </div>
@@ -378,7 +457,9 @@
     outline: var(--goa-tab-border-focus);
   }
 
-  :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
+  :global(
+    [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
+  ) {
     color: var(--goa-tab-color-text-hover, var(--goa-tab-text-color));
   }
 
@@ -411,7 +492,9 @@
     :global([role="tab"][aria-selected="true"]) {
       border-bottom: var(--goa-tab-border-selected);
     }
-    :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
+    :global(
+      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
+    ) {
       border-bottom: var(--goa-tab-border-hover);
     }
 
@@ -441,7 +524,9 @@
       border-left: var(--goa-tab-border-selected);
       background: var(--goa-tab-color-bg-selected-small-screen);
     }
-    :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
+    :global(
+      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
+    ) {
       border-left: var(--goa-tab-border-hover);
       background: var(--goa-tab-color-bg-hover-small-screen, transparent);
     }
@@ -459,7 +544,10 @@
     border-radius: var(--goa-border-radius-xs);
   }
 
-  .v2 :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])) {
+  .v2
+    :global(
+      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
+    ) {
     border-bottom: none; /* Remove V1 border on hover */
   }
 
@@ -482,8 +570,13 @@
     .v2 :global([role="tab"][aria-selected="true"]::after) {
       background: var(--goa-tab-indicator-color-active, #0070C4);
     }
-    .v2 :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])::after) {
-      background: var(--goa-tab-indicator-color-hover, #DCDCDC);
+    .v2
+      :global(
+        [role="tab"]:hover:not([aria-selected="true"]):not(
+            [aria-disabled="true"]
+          )::after
+      ) {
+      background: var(--goa-tab-indicator-color-hover, #dcdcdc);
     }
   }
 
@@ -506,8 +599,141 @@
     .v2 :global([role="tab"][aria-selected="true"]::after) {
       background: var(--goa-tab-indicator-color-active, #0070C4);
     }
-    .v2 :global([role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])::after) {
-      background: var(--goa-tab-indicator-color-hover, #DCDCDC);
+    .v2
+      :global(
+        [role="tab"]:hover:not([aria-selected="true"]):not(
+            [aria-disabled="true"]
+          )::after
+      ) {
+      background: var(--goa-tab-indicator-color-hover, #dcdcdc);
+    }
+  }
+
+  /* ========================================
+     Segmented Variant (Pill/Button style tabs)
+     ======================================== */
+
+  /* Container - gray background with rounded corners */
+  .segmented .tabs {
+    position: relative;
+    background: var(--goa-color-greyscale-50, #f8f8f8);
+    border: 1px solid var(--goa-color-greyscale-150, #dcdcdc);
+    border-bottom: 1px solid var(--goa-color-greyscale-150, #dcdcdc); /* Override base border-bottom */
+    border-radius: var(--goa-border-radius-m, 10px);
+    padding: 3px;
+    gap: var(--goa-space-3xs);
+    margin-bottom: var(--goa-tabs-margin-bottom, 2rem);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: fit-content;
+  }
+
+  /* Animated background indicator for selected tab */
+  .segmented .segmented-indicator {
+    position: absolute;
+    top: 3px;
+    left: var(--segmented-indicator-left, 0);
+    width: var(--segmented-indicator-width, 0);
+    height: var(--segmented-indicator-height, 30px);
+    background: var(--goa-color-greyscale-white, #ffffff);
+    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-150, #dcdcdc);
+    border-radius: var(--goa-border-radius-xl);
+    pointer-events: none;
+    z-index: 0;
+    box-sizing: border-box;
+
+    transition:
+      left var(--segmented-transition-duration, 0s) ease-out,
+      width var(--segmented-transition-duration, 0s) ease-out;
+  }
+
+  /* Individual tabs - segmented style */
+  .segmented :global([role="tab"]) {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    /* Override base border-bottom and border-left (mobile) */
+    border: var(--goa-border-width-s) solid transparent;
+    border-radius: var(--goa-border-radius-xl);
+    min-height: 30px;
+    padding: 0 var(--goa-space-s, 12px);
+    /* Typography */
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-greyscale-600, #666666);
+    /* Ensure proper alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    min-width: auto;
+    /* Smooth transition for color changes */
+    transition: color 0.15s ease;
+  }
+
+  /* Hide the ::after indicator for segmented variant */
+  .segmented :global([role="tab"]::after) {
+    display: none;
+  }
+
+  /* Prevent layout shift when font-weight changes */
+  .segmented :global([role="tab"][data-text]) {
+    flex-direction: column;
+  }
+
+  .segmented :global([role="tab"][data-text]::before) {
+    content: attr(data-text);
+    font: var(--goa-typography-body-s);
+    font-weight: 600;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  .segmented :global([role="tab"][aria-selected="true"]) {
+    background: transparent;
+    border: var(--goa-border-width-s) solid transparent;
+    color: var(--goa-color-text-secondary, #666666);
+    font: var(--goa-typography-body-s);
+    font-weight: 600;
+  }
+
+  .segmented
+    :global(
+      [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
+    ) {
+    background: var(--goa-color-greyscale-150, #dcdcdc);
+    border: var(--goa-border-width-s) solid transparent;
+    color: var(--goa-color-text-default, #353535);
+  }
+
+  .segmented :global([role="tab"][aria-disabled="true"]) {
+    color: var(--goa-color-greyscale-400, #949494);
+    cursor: not-allowed;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  .segmented :global([role="tab"]:focus-visible) {
+    outline: var(--goa-border-width-l, 3px) solid
+      var(--goa-color-interactive-focus);
+    outline-offset: 1px;
+    border-radius: var(--goa-border-radius-s, 8px);
+  }
+
+  /* Mobile - segmented tabs stay horizontal */
+  @media (--mobile) {
+    .segmented .tabs {
+      flex-direction: row;
+      padding-bottom: var(--goa-space-2xs, 4px);
+    }
+
+    .segmented :global([role="tab"]) {
+      border-left: none;
+    }
+
+    .segmented :global([role="tab"][aria-selected="true"]) {
+      border-left: none;
     }
   }
 </style>
