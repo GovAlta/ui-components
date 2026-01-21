@@ -34,13 +34,17 @@ import { GoabBaseComponent } from "../base.component";
     [attr.ml]="ml"
     [attr.mr]="mr"
   >
-    <div slot="title">
-      <ng-container [ngTemplateOutlet]="title"></ng-container>
-    </div>
+    @if (title) {
+      <div slot="title">
+        <ng-container [ngTemplateOutlet]="title"></ng-container>
+      </div>
+    }
     <ng-content />
-    <div slot="actions">
-      <ng-container [ngTemplateOutlet]="actions"></ng-container>
-    </div>
+    @if (actions) {
+      <div slot="actions">
+        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+      </div>
+    }
   </goa-container>`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

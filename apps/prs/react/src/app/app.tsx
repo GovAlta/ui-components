@@ -63,6 +63,7 @@ export function App() {
               <Link to="/bugs/3248">3248 Dropdown Dynamic Children Sync</Link>
               <Link to="/bugs/3275">3275 Can't unset month</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
+              <Link to="/bugs/3281">3281 GoabText p tag margin issues</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>
