@@ -301,14 +301,22 @@ export function extractWebComponentsCode(html: string): ExtractedWebComponentsCo
   const styleMatch = html.match(/<style\b[^>]*>([\s\S]*?)<\/style>/i);
   if (styleMatch) {
     css = cleanIndentation(styleMatch[1]);
-    markup = markup.replace(/<style\b[^>]*>[\s\S]*?<\/style>\s*/gi, '');
+    let previousMarkup: string;
+    do {
+      previousMarkup = markup;
+      markup = markup.replace(/<style\b[^>]*>[\s\S]*?<\/style>\s*/gi, '');
+    } while (markup !== previousMarkup);
   }
 
   // Extract <script> block
   const scriptMatch = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/i);
   if (scriptMatch) {
     javascript = cleanIndentation(scriptMatch[1]);
-    markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, '');
+    let previousMarkup: string;
+    do {
+      previousMarkup = markup;
+      markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, '');
+    } while (markup !== previousMarkup);
   }
 
   markup = cleanIndentation(markup.trim());
