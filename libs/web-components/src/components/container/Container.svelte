@@ -118,8 +118,7 @@
       </div>
     {/if}
   </header>
-  <div bind:this={_contentEl} class="content">
-  </div>
+  <div bind:this={_contentEl} class="content"></div>
 </div>
 
 <!-- Style -->
