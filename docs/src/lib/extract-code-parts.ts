@@ -298,17 +298,17 @@ export function extractWebComponentsCode(html: string): ExtractedWebComponentsCo
   let markup = html;
 
   // Extract <style> block
-  const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/);
+  const styleMatch = html.match(/<style\b[^>]*>([\s\S]*?)<\/style>/i);
   if (styleMatch) {
     css = cleanIndentation(styleMatch[1]);
-    markup = markup.replace(/<style>[\s\S]*?<\/style>\s*/g, '');
+    markup = markup.replace(/<style\b[^>]*>[\s\S]*?<\/style>\s*/gi, '');
   }
 
   // Extract <script> block
-  const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
+  const scriptMatch = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/i);
   if (scriptMatch) {
     javascript = cleanIndentation(scriptMatch[1]);
-    markup = markup.replace(/<script>[\s\S]*?<\/script>\s*/g, '');
+    markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, '');
   }
 
   markup = cleanIndentation(markup.trim());
