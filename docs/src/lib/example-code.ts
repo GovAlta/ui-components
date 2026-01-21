@@ -60,11 +60,20 @@ export async function getExampleCode(exampleSlug: string): Promise<ExampleCode> 
  */
 export function extractHtmlForPreview(webComponentsCode: string): string {
   // Remove script tags for preview (we'll handle events differently)
-  return webComponentsCode
+  let sanitized = webComponentsCode
     .replace(/<script[\s\S]*?<\/script>/gi, '')
     // Ensure no residual <script openings remain (e.g., from malformed or nested tags)
-    .replace(/<script\b[^>]*>/gi, '')
-    .trim();
+    .replace(/<script\b[^>]*>/gi, '');
+
+  // As a final safeguard, repeatedly remove any remaining "<script" substrings
+  // to avoid incomplete multi-character sanitization issues.
+  let previous: string;
+  do {
+    previous = sanitized;
+    sanitized = sanitized.replace(/<script/gi, '');
+  } while (sanitized !== previous);
+
+  return sanitized.trim();
 }
 
 /**
