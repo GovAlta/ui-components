@@ -62,6 +62,8 @@ export function extractHtmlForPreview(webComponentsCode: string): string {
   // Remove script tags for preview (we'll handle events differently)
   return webComponentsCode
     .replace(/<script[\s\S]*?<\/script>/gi, '')
+    // Ensure no residual <script openings remain (e.g., from malformed or nested tags)
+    .replace(/<script\b[^>]*>/gi, '')
     .trim();
 }
 
