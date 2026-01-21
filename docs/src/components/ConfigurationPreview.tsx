@@ -15,6 +15,7 @@ import { GoabDropdown, GoabDropdownItem } from '@abgov/react-components';
 import { CodeSnippet } from './CodeSnippet';
 import { useGitHubIssueCount } from '../hooks/useGitHubIssueCount';
 import type { ComponentConfigurations } from '../data/configurations/types';
+import DOMPurify from 'dompurify';
 
 interface ConfigurationPreviewProps {
   configurations: ComponentConfigurations;
@@ -43,15 +44,15 @@ export function ConfigurationPreview({
   // Update preview when configuration changes
   useEffect(() => {
     if (previewRef.current && selectedConfig) {
-      const code = selectedConfig.code.webComponents;
+      const rawCode = selectedConfig.code.webComponents;
 
-      // Extract script content before stripping
-      const scriptMatch = code.match(/<script>([\s\S]*?)<\/script>/i);
+      // Extract script content before sanitization
+      const scriptMatch = rawCode.match(/<script>([\s\S]*?)<\/script>/i);
       const scriptContent = scriptMatch ? scriptMatch[1] : null;
 
-      // Extract HTML (strip scripts) and add version="2" to all goa- components
-      const html = code
-        .replace(/<script[\s\S]*?<\/script>/gi, '')
+      // Sanitize HTML and add version="2" to all goa- components
+      const sanitizedHtml = DOMPurify.sanitize(rawCode, { USE_PROFILES: { html: true } });
+      const html = sanitizedHtml
         .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
         .trim();
 
