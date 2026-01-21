@@ -12,6 +12,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { CodeSnippet } from './CodeSnippet';
 import type { ExampleCode } from '../lib/example-code';
+import DOMPurify from 'dompurify';
 
 interface ExamplePreviewProps {
   /** Example title */
@@ -55,7 +56,8 @@ export function ExamplePreview({
         .replace(/<script[\s\S]*?<\/script>/gi, '')
         .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
         .trim();
-      previewRef.current.innerHTML = html;
+      const safeHtml = DOMPurify.sanitize(html);
+      previewRef.current.innerHTML = safeHtml;
 
       // Execute script content after HTML is rendered
       if (scriptContent) {
