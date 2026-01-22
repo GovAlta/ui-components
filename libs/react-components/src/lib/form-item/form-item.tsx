@@ -20,15 +20,6 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-form-item": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 export interface GoabFormItemProps extends Margins, DataAttributes {
   label?: string;
   labelSize?: GoabFormItemLabelSize;

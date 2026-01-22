@@ -1,24 +1,6 @@
 import { ReactNode, useEffect, useRef, type JSX } from "react";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
-interface WCProps {
-  position: GoabDrawerPosition;
-  open?: boolean;
-  heading?: string;
-  maxsize?: GoabDrawerSize;
-  testid?: string;
-  ref: React.RefObject<HTMLElement | null>;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-drawer": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 export interface GoabDrawerProps {
   position: GoabDrawerPosition;
   open?: boolean;

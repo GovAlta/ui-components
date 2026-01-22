@@ -1,23 +1,6 @@
 import React, { useEffect, useRef, type JSX } from "react";
 import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
 
-interface WCProps {
-  initialtab?: number;
-  ref: React.RefObject<HTMLElement | null>;
-  onChange?: (tab: number) => void;
-  testid?: string;
-  variant?: GoabTabsVariant;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-tabs": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 export interface GoabTabsProps {
   initialTab?: number;
   children?: React.ReactNode;

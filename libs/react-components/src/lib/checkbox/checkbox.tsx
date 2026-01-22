@@ -2,17 +2,6 @@ import { DataAttributes, GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-c
 import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
-
 interface WCProps extends Margins {
   id?: string;
   name: string;

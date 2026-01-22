@@ -1,0 +1,41 @@
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { GoabxSideMenuGroup } from "./side-menu-group";
+import { Component } from "@angular/core";
+
+@Component({
+  standalone: true,
+  imports: [GoabxSideMenuGroup],
+  template: `
+    <goabx-side-menu-group [heading]="heading" [testId]="testId">
+      <a href="#">Link</a>
+    </goabx-side-menu-group>
+  `,
+})
+class TestSideMenuGroupComponent {
+  heading = "some header";
+  testId = "foo";
+}
+
+describe("GoABSideMenuGroup", () => {
+  let fixture: ComponentFixture<TestSideMenuGroupComponent>;
+  let component: TestSideMenuGroupComponent;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabxSideMenuGroup, TestSideMenuGroupComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestSideMenuGroupComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+
+  it("should render", () => {
+    const el = fixture.nativeElement.querySelector("goa-side-menu-group");
+    expect(el?.getAttribute("heading")).toBe(component.heading);
+    expect(el?.getAttribute("testid")).toBe(component.testId);
+    expect(el?.querySelector("a")?.textContent).toContain("Link");
+  });
+});

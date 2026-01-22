@@ -55,14 +55,15 @@ import { Feat2267Route } from "./routes/features/feat2267";
 import { Feat2440Route } from "./routes/features/feat2440";
 import { Feat2492Route } from "./routes/features/feat2492";
 import { Feat2609Route } from "./routes/features/feat2609";
+import { Feat2611Route } from "./routes/features/feat2611";
 import Feat2611TabsDisabledRoute from "./routes/features/feat2611-tabs-disabled";
 import { Feat2682Route } from "./routes/features/feat2682";
 import { Feat2722Route } from "./routes/features/feat2722";
 import { Feat2730Route } from "./routes/features/feat2730";
 import { Feat2829Route } from "./routes/features/feat2829";
 import { Feat2877Route } from "./routes/features/feat2877";
-import Feat3102Route from "./routes/features/feat3102";
-import { Feat2611Route } from "./routes/features/feat2611";
+import { Feat3102Route } from "./routes/features/feat3102";
+import { Feat3241Route } from "./routes/features/feat3241";
 import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
 import { Feat3137Route } from "./routes/features/feat3137";
 import Feat3306Route from "./routes/features/feat3306";
@@ -136,6 +137,7 @@ root.render(
           <Route path="features/2829" element={<Feat2829Route />} />
           <Route path="features/2877" element={<Feat2877Route />} />
           <Route path="features/3102" element={<Feat3102Route />} />
+          <Route path="features/3241" element={<Feat3241Route />} />
           <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
           <Route path="features/3137" element={<Feat3137Route />} />
           <Route path="features/1908" element={<Feat1908Route />} />

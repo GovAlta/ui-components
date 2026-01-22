@@ -1,0 +1,63 @@
+import {
+  GoabAriaLiveType,
+  GoabNotificationEmphasis,
+  GoabNotificationType,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ChangeDetectorRef,
+  booleanAttribute,
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
+
+@Component({
+  standalone: true,
+  selector: "goabx-notification",
+  template: `
+    <goa-notification
+      *ngIf="isReady"
+      [attr.version]="version"
+      [attr.type]="type"
+      [attr.arialive]="ariaLive"
+      [attr.maxcontentwidth]="maxContentWidth"
+      [attr.emphasis]="emphasis"
+      [attr.compact]="compact"
+      [attr.testid]="testId"
+      (_dismiss)="_onDismiss()"
+    >
+      <ng-content />
+    </goa-notification>
+  `,
+  imports: [CommonModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class GoabxNotification implements OnInit {
+  isReady = false;
+  version = "2";
+  @Input() type?: GoabNotificationType = "information";
+  @Input() ariaLive?: GoabAriaLiveType;
+  @Input() maxContentWidth?: string;
+  @Input() emphasis?: GoabNotificationEmphasis = "high";
+  @Input({ transform: booleanAttribute }) compact?: boolean;
+  @Input() testId?: string;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      this.cdr.detectChanges();
+    });
+  }
+
+  @Output() onDismiss = new EventEmitter();
+
+  _onDismiss() {
+    this.onDismiss.emit();
+  }
+}

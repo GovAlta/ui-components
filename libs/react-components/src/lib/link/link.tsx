@@ -11,15 +11,6 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-link": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 interface GoabLinkProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;

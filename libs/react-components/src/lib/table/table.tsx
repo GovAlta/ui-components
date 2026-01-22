@@ -5,23 +5,6 @@ import {
 } from "@abgov/ui-components-common";
 import { ReactNode, useEffect, useRef } from "react";
 
-interface WCProps extends Margins {
-  ref?: React.RefObject<HTMLElement | null>;
-  width?: string;
-  stickyheader?: string;
-  variant?: GoabTableVariant;
-  testid?: string;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-table": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 /* eslint-disable-next-line */
 export interface GoabTableProps extends Margins {
   width?: string;

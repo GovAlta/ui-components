@@ -50,17 +50,6 @@ interface WCProps extends Margins {
   trailingiconarialabel?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
-        ref?: React.RefObject<HTMLInputElement | null>;
-      };
-    }
-  }
-}
-
 interface BaseProps extends Margins, DataAttributes {
   // required
   name: string;

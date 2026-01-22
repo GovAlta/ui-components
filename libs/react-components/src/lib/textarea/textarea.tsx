@@ -25,17 +25,6 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-textarea": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.Ref<HTMLTextAreaElement>;
-      };
-    }
-  }
-}
-
 export interface GoabTextAreaProps extends Margins, DataAttributes {
   name: string;
   value?: string;

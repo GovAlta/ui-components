@@ -9,17 +9,6 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
-
 export interface GoabFilterChipProps extends Margins, DataAttributes {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;

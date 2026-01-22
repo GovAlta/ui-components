@@ -2,29 +2,6 @@ import { Margins } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
 
-interface WCProps extends Margins {
-  name?: string;
-  value?: string;
-  description?: string | React.ReactNode;
-  reveal?: React.ReactNode;
-  revealarialabel?: string;
-  label?: string;
-  maxwidth?: string;
-  disabled?: string;
-  checked?: string;
-  error?: string;
-  arialabel?: string;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-radio-item": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 export interface GoabRadioItemProps extends Margins {
   value?: string;
   label?: string;

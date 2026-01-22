@@ -8,15 +8,6 @@ interface WCProps {
   direction?: GoabTableSortDirection;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-table-sort-header": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 /* eslint-disable-next-line */
 export interface GoabTableSortProps extends DataAttributes {
   name?: string;

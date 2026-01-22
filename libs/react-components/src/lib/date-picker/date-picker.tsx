@@ -19,17 +19,6 @@ interface WCProps extends Margins {
   width?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-date-picker": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
-
 export interface GoabDatePickerProps extends Margins, DataAttributes {
   name?: string;
   value?: Date | string | undefined;

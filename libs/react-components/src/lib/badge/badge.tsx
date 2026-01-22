@@ -1,4 +1,9 @@
-import { DataAttributes, GoabBadgeType, GoabIconType, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabBadgeType,
+  GoabIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 import type { JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -9,15 +14,6 @@ interface WCProps extends Margins {
   arialabel?: string;
   testid?: string;
   icontype?: GoabIconType;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-badge": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
 }
 
 export interface GoabBadgeProps extends Margins, DataAttributes {
@@ -47,11 +43,7 @@ function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false"
   return iconType ? "true" : "false";
 }
 
-export function GoabBadge({
-  icon,
-  iconType,
-  ...rest
-}: GoabBadgeProps): JSX.Element {
+export function GoabBadge({ icon, iconType, ...rest }: GoabBadgeProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (

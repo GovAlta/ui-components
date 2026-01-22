@@ -1,20 +1,6 @@
 import { GoabIconType } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
 
-interface WCProps {
-  testid?: string;
-  icon?: GoabIconType;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-side-menu-heading": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 /* eslint-disable-next-line */
 export interface GoabSideMenuHeadingProps {
   meta?: ReactNode;
