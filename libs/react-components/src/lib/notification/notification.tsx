@@ -1,23 +1,6 @@
 import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
-interface WCProps {
-  ref: React.RefObject<HTMLElement | null>;
-  type: GoabNotificationType;
-  maxcontentwidth?: string;
-  arialive?: GoabAriaLiveType;
-  testid?: string;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-notification": WCProps & React.HTMLAttributes<HTMLButtonElement>;
-    }
-  }
-}
-
 export interface GoabNotificationProps {
   type?: GoabNotificationType;
   ariaLive?: GoabAriaLiveType;

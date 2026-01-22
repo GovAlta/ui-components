@@ -10,16 +10,6 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-calendar": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
 export interface GoabCalendarProps extends Margins, DataAttributes {
   name?: string;
   value?: string;

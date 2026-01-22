@@ -6,15 +6,6 @@ interface WCProps {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-app-footer-meta-section": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 /* eslint-disable-next-line */
 export interface GoabAppFooterMetaSectionProps extends DataAttributes {
   testId?: string;

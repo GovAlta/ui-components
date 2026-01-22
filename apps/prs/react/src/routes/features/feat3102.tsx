@@ -7,7 +7,7 @@ import {
 } from "@abgov/react-components";
 import type { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 
-export default function TestComponent() {
+export function Feat3102Route() {
   const onAction = (detail: GoabMenuButtonOnActionDetail) => {
     console.log(detail);
   };
@@ -25,23 +25,16 @@ export default function TestComponent() {
           </a>{" "}
           - Allow icon to be set on MenuButton
         </GoabText>
-        <GoabText tag="p">
-          All the MenuButton to have a leading icon set
-        </GoabText>
+        <GoabText tag="p">All the MenuButton to have a leading icon set</GoabText>
       </GoabBlock>
 
       <GoabDivider mt="xl" mb="xl" />
 
       <GoabMenuButton leadingIcon="download" text="Download" onAction={onAction}>
         <GoabMenuAction key="1" text="CSV" action="csc" />
-        <GoabMenuAction
-          key="2"
-          text="JSON"
-          action="json"
-        />
+        <GoabMenuAction key="2" text="JSON" action="json" />
         <GoabMenuAction key="3" text="XML" action="xml" />
       </GoabMenuButton>
-
     </GoabBlock>
   );
 }

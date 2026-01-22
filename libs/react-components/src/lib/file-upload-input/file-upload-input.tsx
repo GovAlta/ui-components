@@ -13,17 +13,6 @@ interface WCProps {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
-
 /* eslint-disable-next-line */
 export interface GoabFileUploadInputProps extends DataAttributes {
   variant?: GoabFileUploadInputVariant;

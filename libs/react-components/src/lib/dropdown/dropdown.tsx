@@ -27,18 +27,6 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface IntrinsicElements {
-      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
-
 export interface GoabDropdownProps extends Margins, DataAttributes {
   name?: string;
   value?: string[] | string;

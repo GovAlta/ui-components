@@ -5,31 +5,6 @@ import {
 } from "@abgov/ui-components-common";
 import { ReactElement, ReactNode, RefObject, useEffect, useRef, type JSX } from "react";
 
-interface WCProps {
-  ref: RefObject<HTMLElement | null>;
-  heading?: ReactNode;
-  open?: string;
-  maxwidth?: string;
-  closable: string;
-  /**
-   * @deprecated The role property is deprecated and will be removed in a future version.
-   * The modal will always use role="dialog".
-   */
-  role?: GoabModalRole;
-  transition?: GoabModalTransition;
-  calloutvariant?: GoabModalCalloutVariant;
-  testid?: string;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-modal": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 export interface GoabModalProps {
   heading?: ReactNode;
   maxWidth?: string;

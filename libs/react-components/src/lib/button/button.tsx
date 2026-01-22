@@ -22,17 +22,6 @@ interface WCProps extends Margins {
   actionArg?: string;
 }
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-button": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
-    }
-  }
-}
-
 export interface GoabButtonProps extends Margins, DataAttributes {
   type?: GoabButtonType;
   size?: GoabButtonSize;

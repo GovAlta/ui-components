@@ -1,21 +1,6 @@
 import { ReactNode, type JSX } from "react";
 import { GoabIconType, Margins } from "@abgov/ui-components-common";
 
-interface WCProps extends Margins {
-  heading: string;
-  icon?: GoabIconType;
-  testid?: string;
-}
-
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-side-menu-group": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 /* eslint-disable-next-line */
 export interface GoabSideMenuGroupProps extends Margins {
   heading: string;
