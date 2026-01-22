@@ -12,9 +12,9 @@
   export let maxcontentwidth = "100%";
   /** Hero Banner background color when no background image is provided */
   export let backgroundcolor: string = "#f8f8f8";
-  /** Text color within the hero banner */
+  /** Text color within the hero banner. */
   export let textcolor: string = "";
-  /** Test ID for the component */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "background";
 
   /* Set minheight to support old default value of 600px */

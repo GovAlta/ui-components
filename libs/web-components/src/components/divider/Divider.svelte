@@ -4,8 +4,7 @@
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
 
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
-
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   /** Top margin. */

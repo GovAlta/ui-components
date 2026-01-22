@@ -16,7 +16,7 @@
   export let variant: Variant = "dragdrop";
   /** Accepted file types as a comma-separated list of MIME types or file extensions (e.g., "image/*,.pdf"). */
   export let accept: string = "*";
-  /** Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Files exceeding this will be rejected. */
+  /** Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Defaults to 5MB. Files exceeding this will be rejected. */
   export let maxfilesize: string = "5MB";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";

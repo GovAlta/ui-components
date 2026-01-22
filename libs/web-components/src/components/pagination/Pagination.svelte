@@ -16,7 +16,7 @@
 
   // public
 
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: Version = "1";
   /** @required The current page being viewed (non-zero based). */
   export let pagenumber: number;

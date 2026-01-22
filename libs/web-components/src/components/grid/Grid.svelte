@@ -7,12 +7,11 @@
   import { validateRequired } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
-  /** Gap between child items */
-
+  /** Gap between child items. */
   export let gap: Spacing = "m";
   /** @required Minimum width of the child elements */
   export let minchildwidth: string = "";
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   /** Top margin. */

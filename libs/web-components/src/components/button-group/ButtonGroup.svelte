@@ -11,7 +11,7 @@
   export let alignment: ButtonAlignment = "start";
   /** Sets the spacing between buttons in the button group. */
   export let gap: Gap = "relaxed";
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   /** Top margin. */

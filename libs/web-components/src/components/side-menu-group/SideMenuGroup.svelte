@@ -14,7 +14,7 @@
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { calculateMargin, Spacing } from "../../common/styling";
 
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   /** The heading text for the menu group. */
   export let heading: string;

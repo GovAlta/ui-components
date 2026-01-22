@@ -37,8 +37,7 @@
   type SkeletonType = (typeof Types)[number];
   type SkeletonSize = (typeof Sizes)[number];
 
-  /** Set component maximum width. Currently only used in card skeleton type */
-
+  /** Sets the maximum width. Currently only used in card skeleton type. */
   export let maxwidth: string = "300px";
   /** Size can affect either the height, width or both for different skeleton types. */
   export let size: SkeletonSize = "1";

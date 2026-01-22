@@ -36,7 +36,7 @@
   export let arialive: AriaLiveType = "polite";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   /** Sets the visual prominence. 'high' for full background, 'filled' for medium. */
   export let emphasis: EmphasisType = "high";

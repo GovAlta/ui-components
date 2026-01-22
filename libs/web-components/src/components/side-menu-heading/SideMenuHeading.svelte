@@ -3,7 +3,7 @@
 <script lang="ts">
   import type { GoAIconType } from "../icon/Icon.svelte";
 
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   /** Icon displayed before the heading text. */
   export let icon: GoAIconType | null = null;

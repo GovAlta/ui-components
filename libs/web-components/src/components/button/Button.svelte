@@ -83,8 +83,11 @@
   /** Sets the left margin using design system spacing tokens. */
   export let ml: Spacing = null;
 
+  /** Action identifier passed in click events for event delegation patterns. */
   export let action: string = "";
+  /** Single argument value passed with the action in click events. */
   export let actionArg: string = "";
+  /** Multiple argument values passed with the action in click events. */
   export let actionArgs: Record<string, unknown> = {};
 
   // ========

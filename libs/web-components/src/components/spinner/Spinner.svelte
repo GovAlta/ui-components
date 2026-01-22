@@ -10,7 +10,7 @@
   import { tweened } from "svelte/motion";
   import { quartOut } from "svelte/easing";
 
-  /** Sets the size of the spinner. */
+  /** @required Sets the size of the spinner. */
   export let size: SpinnerSize;
 
   /** When true, inverts colors for use on dark backgrounds. */

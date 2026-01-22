@@ -84,7 +84,7 @@
   export let requirement: RequirementType = "";
   /** Sets the maximum width of the form item. */
   export let maxwidth: string = "none";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
   /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   export let type: InputType = "";

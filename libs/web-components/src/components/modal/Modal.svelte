@@ -32,7 +32,7 @@
   export let maxwidth: string = "60ch";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "modal";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
 
   /** @deprecated Use maxwidth instead. */

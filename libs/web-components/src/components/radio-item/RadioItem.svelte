@@ -61,7 +61,7 @@
   export let label: string = "";
   /** Additional description text displayed below the label. */
   export let description: string = "";
-  /** Disables this radio option. */
+  /** Disables this radio option. Also disabled if the parent RadioGroup is disabled. */
   export let disabled: string = "false";
   /** Shows an error state on this radio option. */
   export let error: string = "false";

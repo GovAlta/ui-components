@@ -50,7 +50,7 @@
   export let disabled: string = "false";
   /** Shows an error state on all radio items in the group. */
   export let error: string = "false";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
   /** Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only). */
   export let size: SizeType = "default";

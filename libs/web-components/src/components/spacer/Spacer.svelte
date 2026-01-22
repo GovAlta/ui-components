@@ -4,12 +4,11 @@
   import { onMount } from "svelte";
   import { injectCss, type Spacing } from "../../common/styling";
 
-  /** Horizontal spacing */
-
+  /** Horizontal spacing. */
   export let hspacing: Spacing | "fill" = "none";
   /** Vertical spacing */
   export let vspacing: Spacing = "none";
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let rootEl: HTMLElement;

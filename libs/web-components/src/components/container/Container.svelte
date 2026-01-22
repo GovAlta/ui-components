@@ -46,9 +46,7 @@
   type Width = (typeof Widths)[number];
 
   // Props
-
   /** Sets the container and accent bar styling. */
-
   export let type: Type = "interactive";
   /** Sets the style of accent on the container. */
   export let accent: Accent = "filled";
@@ -62,7 +60,7 @@
   export let minHeight = "";
   /** Sets the maximum height of the container. */
   export let maxHeight = "";
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Top margin. */
   export let mt: Spacing = null;

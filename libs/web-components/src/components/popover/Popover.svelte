@@ -68,7 +68,7 @@
 
   // Exposed privates - used internally by other components
 
-  /** Prevents the popover from closing when other popovers open. Used for nested interactions. */
+  /** @internal Prevents the popover from closing when other popovers open. */
   export let disableGlobalClosePopover: boolean = false;
 
   /** Controls whether the popover is open or closed. Used by parent components like AppHeaderMenu. */
@@ -89,7 +89,7 @@
   /** Border radius of the popover window. */
   export let borderradius = "var(--goa-border-radius-m)";
 
-  /** When true, clicking inside the popover will close it. */
+  /** @internal When true, clicking inside the popover will close it. */
   export let closeOnClickWithinBounds = false;
 
   /** Indicates the popover is used within a filterable context like a combobox. */
