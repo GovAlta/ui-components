@@ -29,7 +29,7 @@
   export let testid: string = "";
   /** Accessible label for the filter chip. Defaults to content with 'removable' suffix. */
   export let ariaLabel: string = "";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   // Private variables

@@ -46,7 +46,7 @@
   /** Left margin. */
   export let ml: Spacing = null;
 
-  /** The medium callout has reduced padding and type size to adjust for a compact area and smaller viewport width when a smaller size is required. */
+  /** Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. */
   export let size: CalloutSize = "large";
   /** @required Define the context and colour of the callout. */
   export let type: CalloutType;
@@ -62,7 +62,7 @@
   export let arialive: AriaLiveType = "off";
   /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. */
   export let icontheme: IconTheme = "outline";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
 
   // Private

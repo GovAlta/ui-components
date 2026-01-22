@@ -62,9 +62,9 @@
   export let value: string | undefined = "";
   /** When true the dropdown will have the ability to filter options by typing into the input field. */
   export let filterable: string = "false";
-  /** Show an icon to the left of the dropdown option. */
+  /** Icon shown to the left of the dropdown input. */
   export let leadingicon: GoAIconType | null = null;
-  /** Maximum height of the dropdown menu items popover. Non-native only. */
+  /** Maximum height of the dropdown menu. Non-native only. */
   export let maxheight: string = "276px";
   /** The text displayed for the dropdown before a selection is made. Non-native only. */
   export let placeholder: string = "";
@@ -76,13 +76,13 @@
   export let disabled: string = "false";
   /** Show an error state. */
   export let error: string = "false";
-  /** When true, allows multiple items to be selected. */
+  /** @internal When true, allows multiple items to be selected. Not currently exposed. */
   export let multiselect: string = "false";
   /** When true will render the native select HTML element. */
   export let native: string = "false";
   /** Sets the size of the dropdown. Compact reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   /** @deprecated This property has no effect and will be removed in a future version. */

@@ -51,7 +51,9 @@
   export let testid: string = "";
   /** Sets the width of the date picker input. */
   export let width: string = "";
+  /** Sets the size of the date picker. 'compact' reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   /** Top margin. */

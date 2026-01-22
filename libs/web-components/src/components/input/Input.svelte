@@ -68,97 +68,66 @@
 
   /** Sets the type of the input field. */
   export let type: Type = "text";
-
   /** Name of input value that is received in the onChange event. */
   export let name: string = "";
-
   /** Bound to value. */
   export let value: string = "";
-
   /** Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices. */
   export let autocapitalize: AutoCapitalize = "off";
-
   /** Specifies the autocomplete attribute for the input field. */
   export let autocomplete: string = "";
-
   /** Text displayed within the input when no value is set. */
   export let placeholder: string = "";
-
   /** Icon shown to the left of the text. */
   export let leadingicon: GoAIconType | null = null;
-
   /** Icon shown to the right of the text. */
   export let trailingicon: GoAIconType | null = null;
-
   /** Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling. */
   export let variant: GoAInputVariant = "goa";
-
   /** Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl]. */
   export let disabled: string = "false";
-
   /** Flag that will result in an icon button component being rendered instead of an icon. */
   export let handletrailingiconclick: string = "false";
-
   /** Sets the cursor focus to the input. */
   export let focused: string = "false";
-
   /** Makes the input readonly. */
   export let readonly: string = "false";
-
   /** Sets the input to an error state. */
   export let error: string = "false";
-
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-
   /** Sets the width of the text input area. */
   export let width: string = "30ch";
-
   /** Defines how the input will be translated for the screen reader. If not specified it will fall back to the name. */
   export let arialabel: string = "";
-
   /** The aria-labelledby attribute identifies the element (or elements) that labels the input. */
   export let arialabelledby: string = "";
-
   /** A string value that supports any number, or an ISO 8601 format if using the date or datetime type. */
   export let min: string = "";
-
   /** A string value that supports any number, or an ISO 8601 format if using the date or datetime type. */
   export let max: string = "";
-
-  /** How much a number or date should changed by. */
+  /** How much a number or date should change by. */
   export let step: number = 1;
-
   /** @deprecated Use leadingContent slot instead. */
   export let prefix: string = "";
-
   /** @deprecated Use trailingContent slot instead. */
   export let suffix: string = "";
-
   /** Debounce delay in milliseconds before firing the change event. 0 means no debounce. */
   export let debounce: number = 0;
-
   /** Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input. */
   export let maxlength: number | null = null;
-
   /** Unique identifier for the input element. Used for label associations and accessibility. */
   export let id: string = "";
-
-  /** Apply margin to the top of the component. */
+  /** Top margin. */
   export let mt: Spacing = null;
-
-  /** Apply margin to the right of the component. */
+  /** Right margin. */
   export let mr: Spacing = null;
-
-  /** Apply margin to the bottom of the component. */
+  /** Bottom margin. */
   export let mb: Spacing = null;
-
-  /** Apply margin to the left of the component. */
+  /** Left margin. */
   export let ml: Spacing = null;
-
   /** Aria label for the trailing icon. Use only when the trailing icon is interactive. */
   export let trailingiconarialabel: string = "";
-
   /** Sets the text alignment within the input field. */
   export let textalign: TextAlign = "left";
 

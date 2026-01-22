@@ -53,7 +53,7 @@
   export let maxwidth: string = "none";
   /** Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   /** Top margin. */

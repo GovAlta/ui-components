@@ -23,7 +23,6 @@
 
   type Variant = (typeof Variants)[number];
 
-  // required
   /** @required Sets the icon. */
   export let icon: GoAIconType;
 
@@ -36,7 +35,7 @@
   export let variant: Variant = "color";
   /** Sets the title of the button. */
   export let title: string = "";
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Disables the button. */
   export let disabled: string = "false";
@@ -53,9 +52,11 @@
   export let mb: Spacing = null;
   /** Left margin. */
   export let ml: Spacing = null;
-
+  /** Action identifier passed in click events for event delegation patterns. */
   export let action: string = "";
+  /** Single argument value passed with the action in click events. */
   export let actionArg: string = "";
+  /** Multiple argument values passed with the action in click events. */
   export let actionArgs: Record<string, unknown> = {};
 
   // private

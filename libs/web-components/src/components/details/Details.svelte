@@ -10,8 +10,7 @@
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
-  /** @required The title heading */
-
+  /** @required The title heading. */
   export let heading: string;
   /** Sets the maximum width of the details. */
   export let maxwidth: string = "75ch";

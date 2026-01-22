@@ -17,13 +17,13 @@
 
   /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   export let type: Type;
-  /** Version number or identifier displayed in the header. */
+  /** App or service version displayed on the right side of the header. */
   export let version: string = "";
   /** Url to feedback page that will be displayed when provided. */
   export let feedbackurl: string = "";
   /** Maximum width of the content area */
   export let maxcontentwidth = "100%";
-  /** For internal header urls sets target= */
+  /** Sets the target attribute for the header link. */
   export let headerurltarget: UrlTargetType = "blank";
   /** For internal feedback urls sets target= */
   export let feedbackurltarget: UrlTargetType = "blank";

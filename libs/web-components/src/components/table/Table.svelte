@@ -35,9 +35,9 @@
   export let striped: string = "false";
   /** A relaxed variant of the table with more vertical padding for the cells. */
   export let variant: Variant = "normal";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   /** Top margin. */

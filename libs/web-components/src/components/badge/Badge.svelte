@@ -75,7 +75,7 @@
   export let type: BadgeType;
 
   // Optional
-  /** Sets the data-testid attribute. Used with ByTestId queries in tests. */
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Text label of the badge. */
   export let content: string = "";

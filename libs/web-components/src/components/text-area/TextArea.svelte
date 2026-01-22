@@ -27,8 +27,7 @@
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
 
-  /** Name of the input value that is received in the _change event */
-
+  /** Name of the input value that is received in the _change event. */
   export let name: string;
   /** Bound to value */
   export let value: string = "";
