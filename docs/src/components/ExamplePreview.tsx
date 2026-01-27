@@ -61,9 +61,9 @@ export function ExamplePreview({
       const scriptMatch = code.webComponents.match(/<script>([\s\S]*?)<\/script>/i);
       const scriptContent = scriptMatch ? scriptMatch[1] : null;
 
-      // Extract HTML (strip scripts) and add version attribute
+      // Sanitize HTML and add version attribute
+      // DOMPurify handles script removal — no need for regex stripping
       const html = code.webComponents
-        .replace(/<script[\s\S]*?<\/script>/gi, '')
         .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
         .trim();
       const safeHtml = DOMPurify.sanitize(html, DOMPURIFY_CONFIG);
