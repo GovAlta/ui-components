@@ -94,3 +94,14 @@ describe("width property", () => {
     expect(formItem?.getAttribute("style") ?? "").not.toContain("width");
   });
 });
+
+describe("placeholder property", () => {
+  it("defaults to the placeholder value", async () => {
+    const { container } = render(DatePicker, {
+      type: "input",
+    });
+
+    const monthInput = container.querySelector("[testid='input-month']");
+    expect(monthInput?.getAttribute("value")).toBe("0");
+  });
+});

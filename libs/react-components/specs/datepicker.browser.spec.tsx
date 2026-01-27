@@ -341,7 +341,8 @@ describe("Date Picker input type", () => {
 
     // Select month
     await datePickerMonth.click();
-    await userEvent.keyboard("{ArrowDown}");
+    await userEvent.keyboard("{ArrowDown}"); // First item is --select a month--
+    await userEvent.keyboard("{ArrowDown}"); // Second item is January
     await userEvent.keyboard("{Enter}");
 
     // should be null because date is invalid

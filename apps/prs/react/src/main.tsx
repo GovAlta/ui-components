@@ -39,6 +39,7 @@ import { Bug3201Route } from "./routes/bugs/bug3201";
 import { Bug3215Route } from "./routes/bugs/bug3215";
 import { Bug3232Route } from "./routes/bugs/bug3232";
 import { Bug3248Route } from "./routes/bugs/bug3248";
+import { Bug3275Route } from "./routes/bugs/bug3275";
 import { Bug3322Route } from "./routes/bugs/bug3322";
 
 import { EverythingRoute } from "./routes/everything";
@@ -110,6 +111,7 @@ root.render(
           <Route path="bugs/3215" element={<Bug3215Route />} />
           <Route path="bugs/3232" element={<Bug3232Route />} />
           <Route path="bugs/3248" element={<Bug3248Route />} />
+          <Route path="bugs/3275" element={<Bug3275Route />} />
           <Route path="bugs/3322" element={<Bug3322Route />} />
 
           <Route path="features/1383" element={<Feat1383Route />} />
@@ -123,7 +125,10 @@ root.render(
           <Route path="features/2440" element={<Feat2440Route />} />
           <Route path="features/2492" element={<Feat2492Route />} />
           <Route path="features/2611" element={<Feat2611Route />} />
-          <Route path="features/2611-tabs-disabled" element={<Feat2611TabsDisabledRoute />} />
+          <Route
+            path="features/2611-tabs-disabled"
+            element={<Feat2611TabsDisabledRoute />}
+          />
           <Route path="features/2609" element={<Feat2609Route />} />
           <Route path="features/2682" element={<Feat2682Route />} />
           <Route path="features/2722" element={<Feat2722Route />} />
