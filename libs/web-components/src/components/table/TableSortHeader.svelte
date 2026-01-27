@@ -6,6 +6,7 @@
 
 <script lang="ts">
   import { onMount } from "svelte";
+  /** Sets the sort direction indicator. */
   export let direction: GoATableSortDirection = "none";
 
   // Private

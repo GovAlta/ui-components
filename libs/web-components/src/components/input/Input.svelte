@@ -130,10 +130,9 @@
   export let trailingiconarialabel: string = "";
   /** Sets the text alignment within the input field. */
   export let textalign: TextAlign = "left";
-
   /** Sets the size of the input. 'compact' reduces height for dense layouts. */
   export let size: "default" | "compact" = "default";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   let _leadingContentSlot = false;

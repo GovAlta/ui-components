@@ -89,7 +89,7 @@
   export let size: BadgeSize = "medium";
   /** Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. */
   export let emphasis: (typeof emphasisLevels)[number] = "strong";
-  /** The design system version for styling purposes. */
+  /** @internal Design system version for styling. */
   export let version: BadgeVersion = "1";
 
   /** Top margin. */

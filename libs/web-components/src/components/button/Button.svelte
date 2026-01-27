@@ -68,7 +68,7 @@
   /** Sets a custom width for the button (e.g., "200px" or "100%"). */
   export let width: string = "";
 
-  /** Design system version. Version 2 includes updated styling and accessibility improvements. */
+  /** @internal Design system version for styling. */
   export let version: Version = "1";
 
   /** Sets the top margin using design system spacing tokens. */

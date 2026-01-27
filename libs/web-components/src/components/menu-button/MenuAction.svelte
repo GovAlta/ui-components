@@ -21,9 +21,13 @@
   import { onMount } from "svelte";
   import { receive, relay, style, styles } from "../../common/utils";
 
+  /** Display text for the menu action. */
   export let text: string = "";
+  /** Action identifier included in the click event. */
   export let action: string = "default";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Icon displayed before the text. */
   export let icon: GoAIconType | undefined = undefined;
 
   let _el: HTMLElement;

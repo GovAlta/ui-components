@@ -32,8 +32,11 @@
   type SnackbarVerticalPosition = "top" | "bottom";
   type SnackbarHorizontalPosition = "left" | "center" | "right";
 
+  /** Vertical position of the notification container. */
   export let vPosition: SnackbarVerticalPosition = "bottom";
+  /** Horizontal position of the notification container. */
   export let hPosition: SnackbarHorizontalPosition = "center";
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string;
 
   let _notificationQueue: GoabNotification[] = [];
