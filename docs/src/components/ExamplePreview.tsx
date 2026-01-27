@@ -14,6 +14,16 @@ import { CodeSnippet } from './CodeSnippet';
 import type { ExampleCode } from '../lib/example-code';
 import DOMPurify from 'dompurify';
 
+// Allow GoA web component custom elements through DOMPurify.
+// By default, DOMPurify strips all custom elements (tags containing hyphens).
+// Our previews render <goa-*> web components, so we must whitelist them.
+const DOMPURIFY_CONFIG = {
+  CUSTOM_ELEMENT_HANDLING: {
+    tagNameCheck: /^goa-/,          // allow all <goa-*> elements
+    attributeNameCheck: () => true,  // allow their attributes (type, name, label, etc.)
+  },
+};
+
 interface ExamplePreviewProps {
   /** Example title */
   title: string;
@@ -56,7 +66,7 @@ export function ExamplePreview({
         .replace(/<script[\s\S]*?<\/script>/gi, '')
         .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
         .trim();
-      const safeHtml = DOMPurify.sanitize(html);
+      const safeHtml = DOMPurify.sanitize(html, DOMPURIFY_CONFIG);
       previewRef.current.innerHTML = safeHtml;
 
       // Execute script content after HTML is rendered

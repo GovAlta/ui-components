@@ -17,6 +17,16 @@ import { useGitHubIssueCount } from '../hooks/useGitHubIssueCount';
 import type { ComponentConfigurations } from '../data/configurations/types';
 import DOMPurify from 'dompurify';
 
+// Allow GoA web component custom elements through DOMPurify.
+// By default, DOMPurify strips all custom elements (tags containing hyphens).
+// Our previews render <goa-*> web components, so we must whitelist them.
+const DOMPURIFY_CONFIG = {
+  CUSTOM_ELEMENT_HANDLING: {
+    tagNameCheck: /^goa-/,          // allow all <goa-*> elements
+    attributeNameCheck: () => true,  // allow their attributes (type, name, label, etc.)
+  },
+};
+
 interface ConfigurationPreviewProps {
   configurations: ComponentConfigurations;
   figmaUrl?: string;
@@ -51,7 +61,7 @@ export function ConfigurationPreview({
       const scriptContent = scriptMatch ? scriptMatch[1] : null;
 
       // Sanitize HTML and add version="2" to all goa- components
-      const sanitizedHtml = DOMPurify.sanitize(rawCode, { USE_PROFILES: { html: true } });
+      const sanitizedHtml = DOMPurify.sanitize(rawCode, DOMPURIFY_CONFIG);
       const html = sanitizedHtml
         .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
         .trim();
