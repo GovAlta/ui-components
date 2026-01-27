@@ -14,11 +14,17 @@ export function App() {
     <GoabOneColumnLayout>
       <section slot="header">
         <GoabMicrositeHeader type="alpha" version="UAT" />
-        <GoabAppHeader heading="Testing Playground" url="/">
-        </GoabAppHeader>
+        <GoabAppHeader heading="Testing Playground" url="/"></GoabAppHeader>
       </section>
       <div style={{ display: "flex", minHeight: "100vh" }}>
-        <section style={{ flex: "0 0 250px", borderRight: "1px solid var(--goa-color-greyscale-200)", minHeight: "100%" }} role="nav">
+        <section
+          style={{
+            flex: "0 0 250px",
+            borderRight: "1px solid var(--goa-color-greyscale-200)",
+            minHeight: "100%",
+          }}
+          role="nav"
+        >
           <GoabSideMenu>
             <GoabSideMenuGroup heading="Bugs">
               <Link to="/bugs/2152">2152 Icon Custom Alignment</Link>
@@ -55,6 +61,7 @@ export function App() {
               <Link to="/bugs/3215">3215 Drawer Initial Height</Link>
               <Link to="/bugs/3232">3232 GoabText Tag Size</Link>
               <Link to="/bugs/3248">3248 Dropdown Dynamic Children Sync</Link>
+              <Link to="/bugs/3275">3275 Can't unset month</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
