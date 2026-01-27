@@ -33,9 +33,13 @@
 
   // Props
 
+  /** Text used to filter and match this item in typeahead search. */
   export let filter: string = "";
+  /** Display label for the dropdown item. */
   export let label: string = "";
+  /** The value submitted when this item is selected. */
   export let value: string = "";
+  /** Controls how the item is registered with the parent dropdown. */
   export let mount: DropdownItemMountType = "reset";
 
   let _rootEl: HTMLElement;
