@@ -6,6 +6,17 @@ is designed to be used to help bring consistency to all Government of Alberta
 websites and web applications. It's also being designed to help ease the burden
 on designers and developers alike throughout the development process.
 
+### Developer setup
+
+LSP tools
+```
+npm i -g typescript-language-server \
+  svelte-language-server \
+  prettier \
+  vscode-css-languageservice \
+  vscode-html-languageservice
+```
+
 ### Playground setup
 
 Run the `dev-setup` file.
