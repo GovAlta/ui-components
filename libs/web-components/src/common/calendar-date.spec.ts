@@ -142,12 +142,62 @@ describe("CalendarDate", () => {
       expect(calDate.day).toBe(15);
     });
 
-    it("sets the month", () => {
-      const calDate = new CalendarDate("2024-03-15");
-      calDate.setMonth(6);
-      expect(calDate.year).toBe(2024);
-      expect(calDate.month).toBe(6);
-      expect(calDate.day).toBe(15);
+    describe("setMonth", () => {
+      it("sets the month", () => {
+        const calDate = new CalendarDate("2024-03-15");
+        calDate.setMonth(6);
+        expect(calDate.year).toBe(2024);
+        expect(calDate.month).toBe(6);
+        expect(calDate.day).toBe(15);
+      });
+
+      describe("given the current date is 2026-January-15", () => {
+        const startDate = new CalendarDate("2026-01-15");
+
+        it("when setting month to February, then day is not adjusted", () => {
+          startDate.setMonth(2);
+
+          expect(startDate.year).toBe(2026);
+          expect(startDate.month).toBe(2);
+          expect(startDate.day).toBe(15);
+        });
+      });
+
+      describe("given the current date is 2026-January-31", () => {
+        const startDate = new CalendarDate("2026-01-31");
+
+        it("when setting month to February, then day is adjusted to 1", () => {
+          startDate.setMonth(2);
+
+          expect(startDate.year).toBe(2026);
+          expect(startDate.month).toBe(2);
+          expect(startDate.day).toBe(1);
+        });
+      });
+
+      describe("given the current date is 2024-March-31", () => {
+        const startDate = new CalendarDate("2024-03-31");
+
+        it("when setting month to February, then day is adjusted to 1", () => {
+          startDate.setMonth(2);
+
+          expect(startDate.year).toBe(2024);
+          expect(startDate.month).toBe(2);
+          expect(startDate.day).toBe(1);
+        });
+      });
+
+      describe("given the current date is 2024-March-29 a leap year", () => {
+        const startDate = new CalendarDate("2024-03-29");
+
+        it("when setting month to February, then day is not adjusted", () => {
+          startDate.setMonth(2);
+
+          expect(startDate.year).toBe(2024);
+          expect(startDate.month).toBe(2);
+          expect(startDate.day).toBe(29);
+        });
+      });
     });
 
     it("sets the day and returns the instance", () => {

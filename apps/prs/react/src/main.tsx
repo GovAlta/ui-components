@@ -64,6 +64,7 @@ import Feat3102Route from "./routes/features/feat3102";
 import { Feat2611Route } from "./routes/features/feat2611";
 import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
 import { Feat3137Route } from "./routes/features/feat3137";
+import { Bug3305Route } from "./routes/bugs/bug3305";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -109,6 +110,7 @@ root.render(
           <Route path="bugs/3215" element={<Bug3215Route />} />
           <Route path="bugs/3232" element={<Bug3232Route />} />
           <Route path="bugs/3248" element={<Bug3248Route />} />
+          <Route path="bugs/3305" element={<Bug3305Route />} />
           <Route path="bugs/3322" element={<Bug3322Route />} />
 
           <Route path="features/1383" element={<Feat1383Route />} />
@@ -122,7 +124,10 @@ root.render(
           <Route path="features/2440" element={<Feat2440Route />} />
           <Route path="features/2492" element={<Feat2492Route />} />
           <Route path="features/2611" element={<Feat2611Route />} />
-          <Route path="features/2611-tabs-disabled" element={<Feat2611TabsDisabledRoute />} />
+          <Route
+            path="features/2611-tabs-disabled"
+            element={<Feat2611TabsDisabledRoute />}
+          />
           <Route path="features/2609" element={<Feat2609Route />} />
           <Route path="features/2682" element={<Feat2682Route />} />
           <Route path="features/2722" element={<Feat2722Route />} />

@@ -5,10 +5,8 @@ import {
   getDaysInMonth as _getDaysInMonth,
   isSameDay as _isSameDay,
   lastDayOfMonth as _lastDayOfMonth,
-  setDate as _setDate,
   isSameMonth as _isSameMonth,
   isBefore as _isBefore,
-  addYears as _addYears,
   isAfter as _isAfter,
 } from "date-fns";
 
@@ -117,6 +115,12 @@ export class CalendarDate {
 
   setMonth(val: number) {
     this._dateNums[1] = val;
+    const yearAndMonthDate = new Date(`${this.year}-$${this.month}`);
+    // Adjust the day if it exceeds the number of days in the new month
+    // For example, if changing from Jan 31 to Feb (only 28 days) then set the day to 1
+    if (_getDaysInMonth(yearAndMonthDate) < this.day) {
+      this.setDay(1);
+    }
   }
 
   setDay(val: number): CalendarDate {
