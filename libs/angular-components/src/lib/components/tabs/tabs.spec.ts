@@ -10,7 +10,7 @@ import { fireEvent } from "@testing-library/dom";
   imports: [GoabTabs, GoabTab],
   template: `
     <goab-tabs [initialTab]="1" testId="foo" (onChange)="onChange($event)">
-      <goab-tab heading="Profile">Tab content </goab-tab>
+      <goab-tab heading="Profile">Tab content</goab-tab>
     </goab-tabs>
   `,
 })
@@ -19,6 +19,20 @@ class TestTabsComponent {
   onChange(event: GoabTabsOnChangeDetail) {
     /** do nothing **/
   }
+}
+
+@Component({
+  standalone: true,
+  imports: [GoabTabs, GoabTab],
+  template: `
+    <goab-tabs [initialTab]="1" testId="slug-tabs">
+      <goab-tab heading="Overview" slug="overview-section">Overview content</goab-tab>
+      <goab-tab heading="Details">Details content</goab-tab>
+    </goab-tabs>
+  `,
+})
+class TestTabsWithSlugComponent {
+  /** do nothing **/
 }
 
 describe("GoABTabs", () => {
@@ -40,9 +54,10 @@ describe("GoABTabs", () => {
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-tabs");
+
     expect(el?.getAttribute("initialtab")).toBe("1");
     expect(el?.getAttribute("testid")).toBe("foo");
-    expect(el?.querySelector("goa-tab")?.innerHTML).toContain("Profile");
+    expect(el?.innerHTML).toContain("Profile");
     expect(el?.textContent).toContain("Tab content");
   });
 
@@ -59,4 +74,20 @@ describe("GoABTabs", () => {
 
     expect(onChange).toHaveBeenCalledWith({ tab: 2 });
   });
+
+  it("should render tabs with slug props", fakeAsync(() => {
+    const slugFixture = TestBed.createComponent(TestTabsWithSlugComponent);
+    slugFixture.detectChanges();
+    tick();
+    slugFixture.detectChanges();
+
+    const tabElements = slugFixture.nativeElement.querySelectorAll("goa-tab");
+    expect(tabElements.length).toBe(2);
+
+    // First tab should have slug attribute
+    expect(tabElements[0].getAttribute("slug")).toBe("overview-section");
+
+    // Second tab should not have slug attribute
+    expect(tabElements[1].getAttribute("slug")).toBeNull();
+  }));
 });

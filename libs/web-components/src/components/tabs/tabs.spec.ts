@@ -219,4 +219,41 @@ describe("Tabs", () => {
       writable: true
     });
   });
+
+  it("should use slug prop in tab href when provided", async () => {
+    const SlugTabs = await import("./TabsWrapperWithSlug.test.svelte");
+    const { container } = render(SlugTabs.default);
+
+    await waitFor(() => {
+      const tab1Link = container.querySelector("a#tab-1") as HTMLAnchorElement;
+      const tab2Link = container.querySelector("a#tab-2") as HTMLAnchorElement;
+
+      expect(tab1Link).toBeTruthy();
+      expect(tab2Link).toBeTruthy();
+
+      // First tab with slug should use the slug value
+      expect(tab1Link.getAttribute("href")).toContain("#review-pending");
+
+      // Second tab without slug should default to "tab-{index}" where index is 1
+      expect(tab2Link.getAttribute("href")).toContain("#complete");
+    });
+  });
+
+  it("should navigate to tab when clicking link with slug", async () => {
+    const SlugTabs = await import("./TabsWrapperWithSlug.test.svelte");
+    const { container } = render(SlugTabs.default);
+
+    await waitFor(() => {
+      const tab1Link = container.querySelector("a#tab-1") as HTMLElement;
+      expect(tab1Link).toBeTruthy();
+    });
+
+    const tab1Link = container.querySelector("a#tab-1") as HTMLElement;
+    await fireEvent.click(tab1Link);
+
+    await waitFor(() => {
+      expect(window.location.hash).toContain("review-pending");
+      expect(tab1Link.getAttribute("aria-selected")).toBe("true");
+    });
+  });
 });

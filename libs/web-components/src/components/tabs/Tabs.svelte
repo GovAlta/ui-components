@@ -94,7 +94,6 @@
 
     for (let i = 0; i < tabs.length; i++) {
       const tab = tabs[i] as HTMLAnchorElement;
-
       const tabHref = tab.getAttribute("href");
       const tabHash = tabHref?.split("#")[1] || "";
 
@@ -108,7 +107,6 @@
   function addChildMountListener() {
     _rootEl.addEventListener("tab:mounted", (e: Event) => {
       const detail = (e as CustomEvent<GoATabProps>).detail;
-
       // tabs initially marked as unbound
       _tabProps = [..._tabProps, { ...detail, bound: false }];
 
@@ -167,11 +165,13 @@
       // create tabs
       if (tabProps.headingType === "slot") {
         headingEl = tabProps.heading as HTMLElement;
+        tabSlug = tabProps.slug;
       } else {
         const heading = tabProps.heading as string;
+
         headingEl = document.createElement("div");
         headingEl.textContent = heading;
-        tabSlug = heading;
+        tabSlug = tabProps.slug || toSlug(heading);
       }
 
       headingEl.classList.add("tab");
@@ -295,11 +295,15 @@
     }
 
     let currentLocation = "";
+
+    // send message to each tab to set visibility within
     // @ts-expect-error
     [..._tabsEl.querySelectorAll("[role=tab]")].map((el, index) => {
       const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
+
       el.setAttribute("aria-selected", fromBoolean(isCurrent));
       el.setAttribute("tabindex", isCurrent ? "0" : "-1");
+
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
         el.focus();
@@ -326,7 +330,8 @@
       // to make sure we preserve multiple #, for example /#tab-1#example
       const allHashes = window.location.href.split('#').slice(1);
       const otherHashes = allHashes.filter(hash => !hash.startsWith('tab-')); // #example
-      const newHash = [url.hash.substring(1), ...otherHashes].filter(Boolean).join('#');
+      const uniqHashes = [...new Set([url.hash.substring(1), ...otherHashes])];
+      const newHash = uniqHashes.filter(Boolean).join('#');
 
       history.replaceState({}, "", url.pathname + url.search + (newHash ? '#' + newHash : ''));
 
@@ -393,6 +398,13 @@
       e.stopPropagation();
       e.preventDefault();
     }
+  }
+
+  /** Converts the input string to a kebab format url encoded string */
+  function toSlug(input: string): string {
+    const parts = input.toLowerCase().split(" ");
+    const str = parts.map(val => val.toLowerCase()).join("-");
+    return encodeURIComponent(str);
   }
 </script>
 
