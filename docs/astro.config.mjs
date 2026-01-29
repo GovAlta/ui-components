@@ -46,6 +46,9 @@ export default defineConfig({
       fs: {
         allow: [workspaceRoot]
       }
+    },
+    ssr: {
+      noExternal: ['@astrojs/react', '@astrojs/mdx']
     }
   },
 
