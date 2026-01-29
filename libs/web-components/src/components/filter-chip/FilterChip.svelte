@@ -46,9 +46,7 @@
 
   // Event handlers
   function onDelete(e: Event) {
-    el.dispatchEvent(
-      new CustomEvent("_click", { composed: true, bubbles: true }),
-    );
+    el.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true }));
     e.stopPropagation();
   }
 
@@ -94,7 +92,7 @@
     <goa-icon-button
       size="3"
       icon="close"
-      onclick={onDelete}
+      on:_click={onDelete}
       arialabel="Remove filter"
       variant={_error ? "destructive" : "dark"}
       testid="delete-button"
@@ -140,10 +138,7 @@
   .chip {
     display: inline-flex;
     align-items: center;
-    background-color: var(
-      --goa-filter-chip-bg-color,
-      var(--goa-color-greyscale-white)
-    );
+    background-color: var(--goa-filter-chip-bg-color, var(--goa-color-greyscale-white));
     border-radius: var(--goa-filter-chip-border-radius, 1rem);
     border: var(
       --goa-filter-chip-border,
@@ -180,10 +175,7 @@
       --goa-filter-chip-border-color-error,
       var(--goa-color-emergency-default)
     );
-    color: var(
-      --goa-filter-chip-text-color-error,
-      var(--goa-color-emergency-default)
-    );
+    color: var(--goa-filter-chip-text-color-error, var(--goa-color-emergency-default));
   }
 
   .chip:not(.v2).error:hover {
@@ -203,10 +195,7 @@
   }
 
   .text {
-    line-height: var(
-      --goa-filter-chip-line-height,
-      var(--goa-line-height-2)
-    ); /* 24px */
+    line-height: var(--goa-filter-chip-line-height, var(--goa-line-height-2)); /* 24px */
     padding-top: 0;
     display: flex;
     align-items: center;
