@@ -34,7 +34,7 @@
     "validate": "npm run build && npm run lint && vitest --run"
   },
   "devDependencies": {
-    "@abgov/design-tokens": "^1.8.0",
+    "@abgov/design-tokens": "^2.0.0",
     "@abgov/nx-release": "^10.0.0",
     "@angular-devkit/build-angular": "^20.3.10",
     "@angular-devkit/core": "20.1.5",
