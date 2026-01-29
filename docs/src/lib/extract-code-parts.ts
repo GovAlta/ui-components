@@ -309,13 +309,13 @@ export function extractWebComponentsCode(html: string): ExtractedWebComponentsCo
   }
 
   // Extract <script> block
-  const scriptMatch = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/i);
+  const scriptMatch = html.match(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/i);
   if (scriptMatch) {
     javascript = cleanIndentation(scriptMatch[1]);
     let previousMarkup: string;
     do {
       previousMarkup = markup;
-      markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, '');
+      markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>\s*/gi, '');
     } while (markup !== previousMarkup);
   }
 

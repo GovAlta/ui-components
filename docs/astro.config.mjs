@@ -34,7 +34,7 @@ export default defineConfig({
         { find: '@abgov/web-components', replacement: path.resolve(workspaceRoot, 'dist/libs/web-components/') },
         { find: '@abgov/ui-components-common', replacement: path.resolve(workspaceRoot, 'libs/common/src/index.ts') },
         { find: '@abgov/style', replacement: path.resolve(workspaceRoot, 'dist/libs/web-components/index.css') },
-        { find: '@design-tokens', replacement: path.resolve(workspaceRoot, '../design-tokens/dist') },
+        { find: '@design-tokens', replacement: path.resolve(workspaceRoot, 'node_modules/@abgov/design-tokens/dist') },
       ],
       dedupe: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
     },
