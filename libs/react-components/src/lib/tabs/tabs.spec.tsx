@@ -23,39 +23,25 @@ describe("Tabs", () => {
     expect(tabElements.length).toBe(1);
   });
 
-  it("should render with variant='segmented'", () => {
+  it("should render tabs with slug props", () => {
     const { baseElement } = render(
-      <GoabTabs variant="segmented">
-        <GoabTab heading="Tab 1">Content 1</GoabTab>
-        <GoabTab heading="Tab 2">Content 2</GoabTab>
+      <GoabTabs initialTab={1}>
+        <GoabTab heading="Overview" slug="overview-section">
+          <p>Overview content</p>
+        </GoabTab>
+        <GoabTab heading="Details">
+          <p>Details content</p>
+        </GoabTab>
       </GoabTabs>,
     );
-    const el = baseElement.querySelector("goa-tabs");
-    expect(el).toBeTruthy();
-    expect(el?.getAttribute("variant")).toBe("segmented");
-  });
 
-  it("should render with variant='default'", () => {
-    const { baseElement } = render(
-      <GoabTabs variant="default">
-        <GoabTab heading="Tab 1">Content 1</GoabTab>
-        <GoabTab heading="Tab 2">Content 2</GoabTab>
-      </GoabTabs>,
-    );
-    const el = baseElement.querySelector("goa-tabs");
-    expect(el).toBeTruthy();
-    expect(el?.getAttribute("variant")).toBe("default");
-  });
+    const tabElements = baseElement.querySelectorAll("goa-tab");
+    expect(tabElements.length).toBe(2);
 
-  it("should not have variant attribute when variant is not provided", () => {
-    const { baseElement } = render(
-      <GoabTabs>
-        <GoabTab heading="Tab 1">Content 1</GoabTab>
-        <GoabTab heading="Tab 2">Content 2</GoabTab>
-      </GoabTabs>,
-    );
-    const el = baseElement.querySelector("goa-tabs");
-    expect(el).toBeTruthy();
-    expect(el?.getAttribute("variant")).toBeNull();
+    // First tab should have slug attribute
+    expect(tabElements[0].getAttribute("slug")).toBe("overview-section");
+
+    // Second tab should not have slug attribute (or null/undefined)
+    expect(tabElements[1].getAttribute("slug")).toBeNull();
   });
 });

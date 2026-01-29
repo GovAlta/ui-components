@@ -12,6 +12,7 @@
     heading: HTMLSlotElement | string;
     open: boolean;
     disabled: boolean;
+    slug: string;
   }
 </script>
 
@@ -26,6 +27,7 @@
   export let heading: string = "";
   export let open: boolean = false;
   export let disabled: boolean = false;
+  export let slug: string = "";
 
   // =======
   // Private
@@ -59,8 +61,9 @@
           el: _rootEl,
           headingType,
           heading: headingType === "string" ? heading : getHeadingContents(),
-          open: open,
-          disabled: disabled
+          disabled,
+          open,
+          slug,
         }
       }))
     }, 1);

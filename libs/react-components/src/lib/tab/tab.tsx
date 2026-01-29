@@ -2,6 +2,7 @@ import type { JSX } from "react";
 interface WCProps {
   heading?: React.ReactNode;
   disabled?: string;
+  slug?: string;
 }
 
 declare module "react" {
@@ -17,12 +18,17 @@ export interface GoabTabItemProps {
   heading?: React.ReactNode;
   disabled?: boolean;
   children?: React.ReactNode;
+  slug?: string;
 }
 
-export function GoabTab({ heading, disabled, children }: GoabTabItemProps): JSX.Element {
+export function GoabTab({ heading, disabled, slug, children }: GoabTabItemProps): JSX.Element {
   return (
-    <goa-tab disabled={disabled ? "true" : undefined}>
-      {heading && <span slot="heading">{heading}</span>}
+    <goa-tab
+      slug={slug}
+      disabled={disabled ? "true" : undefined}
+      heading={typeof heading === "string" ? heading : undefined}
+    >
+      {typeof heading !== "string" && <span slot="heading">{heading}</span>}
       {children}
     </goa-tab>
   );

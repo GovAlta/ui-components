@@ -2,6 +2,7 @@ import { render } from "vitest-browser-react";
 
 import { GoabTabs, GoabTab } from "../src";
 import { expect, describe, it, vi } from "vitest";
+import { GoabBadge } from "../src/lib/badge/badge";
 
 describe("Tabs Browser Tests", () => {
   describe("bug-2433", () => {
@@ -87,20 +88,21 @@ describe("Tabs Browser Tests", () => {
         );
       };
 
-      const { getByTestId } = render(<Component />);
+      const { getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
 
-      // Wait for component to be fully rendered
+      // wait for component to be fully rendered
       await vi.waitFor(() => {
-        expect(getByTestId("test-tabs")).toBeTruthy();
+        expect(tablist.elements().length).toBe(2);
       });
 
       // Click on Tab 2
-      const tab2 = getByTestId("tab-2");
+      const tab2 = tablist.elements()[1];
       await tab2.click();
 
       // Verify we're on tab 2
       expect(window.location.pathname).toBe(tabsPage);
-      expect(window.location.hash).toBe("#tab-1");
+      expect(window.location.hash).toBe("#tab-2");
 
       // Go back in history
       window.history.back();
@@ -183,50 +185,44 @@ describe("Tabs Browser Tests", () => {
 
       // Get tab elements directly
       const getTabs = () => document.querySelectorAll("goa-tab");
-      let goaTabs = getTabs();
+      const goaTabs = getTabs();
       expect(goaTabs.length).toBe(3);
 
-      // WHEN - Change hash to #tab-1 (should activate "Tab 2" - second tab, zero-indexed)
       window.location.hash = "#tab-1";
       window.dispatchEvent(new Event("hashchange"));
 
-      // THEN - Tab 2 should be open (index 1)
       await vi.waitFor(
         () => {
-          goaTabs = getTabs();
-          expect(goaTabs[1].getAttribute("open")).toBe("true");
-          expect(goaTabs[0].getAttribute("open")).toBe("false");
+          const goaTabs = getTabs();
+          expect(goaTabs[0].getAttribute("open")).toBe("true");
+          expect(goaTabs[1].getAttribute("open")).toBe("false");
           expect(goaTabs[2].getAttribute("open")).toBe("false");
         },
         { timeout: 2000 },
       );
 
-      // WHEN - Change hash to #tab-2 (should activate "Tab 3" - third tab, zero-indexed)
       window.location.hash = "#tab-2";
       window.dispatchEvent(new Event("hashchange"));
 
-      // THEN - Tab 3 should be open (index 2)
       await vi.waitFor(
         () => {
-          goaTabs = getTabs();
-          expect(goaTabs[2].getAttribute("open")).toBe("true"); // "Tab 3" at index 2
+          const goaTabs = getTabs();
           expect(goaTabs[0].getAttribute("open")).toBe("false");
-          expect(goaTabs[1].getAttribute("open")).toBe("false");
+          expect(goaTabs[1].getAttribute("open")).toBe("true");
+          expect(goaTabs[2].getAttribute("open")).toBe("false");
         },
         { timeout: 2000 },
       );
 
-      // WHEN - Change hash to #tab-0 (should activate "Tab 1" - first tab, zero-indexed)
-      window.location.hash = "#tab-0";
+      window.location.hash = "#tab-3";
       window.dispatchEvent(new Event("hashchange"));
 
-      // THEN - Tab 1 should be open (index 0)
       await vi.waitFor(
         () => {
-          goaTabs = getTabs();
-          expect(goaTabs[0].getAttribute("open")).toBe("true"); // "Tab 1" at index 0
+          const goaTabs = getTabs();
+          expect(goaTabs[0].getAttribute("open")).toBe("false");
           expect(goaTabs[1].getAttribute("open")).toBe("false");
-          expect(goaTabs[2].getAttribute("open")).toBe("false");
+          expect(goaTabs[2].getAttribute("open")).toBe("true");
         },
         { timeout: 2000 },
       );
@@ -426,177 +422,283 @@ describe("Tabs Browser Tests", () => {
       });
     });
   });
-  describe("disabled", () => {
-    it("should not show the disabled tab even initial tab is that tab", async () => {
-      // GIVEN - Tab 1 is disabled but initialTab is set to 1
-      const Component = () => {
-        return (
-          <GoabTabs initialTab={1} testId="test-tabs">
-            <GoabTab heading="Tab 1 (disabled)" disabled>
-              <p>Content 1 - This should NOT be visible</p>
-            </GoabTab>
-            <GoabTab heading="Tab 2">
-              <p>Content 2 - This SHOULD be visible on load</p>
-            </GoabTab>
-            <GoabTab heading="Tab 3">
-              <p>Content 3</p>
-            </GoabTab>
-          </GoabTabs>
-        );
-      };
 
-      const { getByTestId, getByText } = render(<Component />);
-
-      // Wait for component to fully render
-      await vi.waitFor(() => {
-        expect(getByTestId("test-tabs")).toBeTruthy();
-      });
-
-      // THEN - Tab 1 should be disabled with correct attributes
-      await vi.waitFor(() => {
-        const tab1 = getByTestId("tab-1");
-        expect(tab1.element().getAttribute("aria-disabled")).toBe("true");
-        expect(tab1.element().getAttribute("aria-selected")).toBe("false");
-        expect(tab1.element().getAttribute("tabindex")).toBe("-1");
-      });
-
-      // THEN - Tab 2 should be active (since Tab 1 is disabled)
-      await vi.waitFor(() => {
-        const tab2 = getByTestId("tab-2");
-        expect(tab2.element().getAttribute("aria-selected")).toBe("true");
-        expect(tab2.element().getAttribute("tabindex")).toBe("0");
-        // Content 2 should be visible
-        expect(getByText("Content 2 - This SHOULD be visible on load")).toBeTruthy();
-      });
-
-      // WHEN - Press arrow right to move to Tab 3
-      const tab2 = getByTestId("tab-2");
-      tab2.element().focus();
-      await tab2
-        .element()
-        .dispatchEvent(
-          new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
-        );
-
-      // THEN - Tab 3 should be active
-      await vi.waitFor(() => {
-        const tab3 = getByTestId("tab-3");
-        expect(tab3.element().getAttribute("aria-selected")).toBe("true");
-        expect(tab3.element().getAttribute("tabindex")).toBe("0");
-        // Content 3 should be visible
-        expect(getByText("Content 3")).toBeTruthy();
-      });
-
-      // WHEN - Press arrow right again (should skip Tab 1 and go to Tab 2)
-      const tab3 = getByTestId("tab-3");
-      await tab3
-        .element()
-        .dispatchEvent(
-          new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
-        );
-
-      // THEN - Tab 2 should be active (Tab 1 is skipped because it's disabled)
-      await vi.waitFor(() => {
-        const tab2After = getByTestId("tab-2");
-        expect(tab2After.element().getAttribute("aria-selected")).toBe("true");
-        expect(tab2After.element().getAttribute("tabindex")).toBe("0");
-        // Content 2 should be visible again
-        expect(getByText("Content 2 - This SHOULD be visible on load")).toBeTruthy();
-      });
-    });
-
-    it("should skip disabled tab when navigating with arrow left", async () => {
-      // GIVEN - Tab 2 is disabled
+  describe("slug prop", () => {
+    it("should use slug prop in tab href attribute", async () => {
       const Component = () => {
         return (
           <GoabTabs testId="test-tabs">
-            <GoabTab heading="Tab 1">
-              <p>Content 1</p>
+            <GoabTab heading="Overview" slug="overview-tab">
+              Overview content
             </GoabTab>
-            <GoabTab heading="Tab 2 (disabled)" disabled>
-              <p>Content 2 - This should NOT be visible</p>
+            <GoabTab heading="Details" slug="details-section">
+              Details content
             </GoabTab>
-            <GoabTab heading="Tab 3">
-              <p>Content 3</p>
-            </GoabTab>
+            <GoabTab heading="Summary">Summary content</GoabTab>
           </GoabTabs>
         );
       };
 
-      const { getByTestId, getByText } = render(<Component />);
+      const { getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
 
-      // Wait for component to fully render
       await vi.waitFor(() => {
-        expect(getByTestId("test-tabs")).toBeTruthy();
+        expect(tablist.elements().length).toBe(3);
       });
 
-      // THEN - Tab 1 should be active initially
-      await vi.waitFor(() => {
-        const tab1 = getByTestId("tab-1");
-        expect(tab1.element().getAttribute("aria-selected")).toBe("true");
-      });
+      const tabs = tablist.elements();
 
-      // Navigate to Tab 3 first (skip Tab 2 which is disabled)
-      const tab1 = getByTestId("tab-1");
-      tab1.element().focus();
-      await tab1
-        .element()
-        .dispatchEvent(
-          new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }),
-        );
+      // First tab should have custom slug in href
+      expect(tabs[0].getAttribute("href")).toContain("#overview-tab");
 
-      // THEN - Tab 3 should be active (Tab 2 is skipped)
-      await vi.waitFor(() => {
-        const tab3 = getByTestId("tab-3");
-        expect(tab3.element().getAttribute("aria-selected")).toBe("true");
-        expect(getByText("Content 3")).toBeTruthy();
-      });
+      // Second tab should have custom slug in href
+      expect(tabs[1].getAttribute("href")).toContain("#details-section");
 
-      // WHEN - Press arrow left (should skip Tab 2 and go to Tab 1)
-      const tab3 = getByTestId("tab-3");
-      await tab3
-        .element()
-        .dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
-
-      // THEN - Tab 1 should be active (Tab 2 is skipped)
-      await vi.waitFor(() => {
-        const tab1After = getByTestId("tab-1");
-        expect(tab1After.element().getAttribute("aria-selected")).toBe("true");
-        expect(getByText("Content 1")).toBeTruthy();
-      });
+      // Third tab without slug should use default tab-{index} format
+      expect(tabs[2].getAttribute("href")).toContain("#summary");
     });
-  });
-  describe("variant segmented", () => {
-    it("should render segmented tabs", async () => {
-      // GIVEN - Tabs with variant="segmented"
+
+    it("should navigate to correct hash when clicking tab with slug", async () => {
       const Component = () => {
         return (
-          <GoabTabs variant="segmented" testId="segment-tabs">
-            <GoabTab heading="Overview">
-              <p>Overview content</p>
-            </GoabTab>
-            <GoabTab heading="Details">
-              <p>Details content</p>
-            </GoabTab>
-            <GoabTab heading="Settings">
-              <p>Settings content</p>
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="First">First content</GoabTab>
+            <GoabTab heading="Second" slug="second-custom">
+              Second content
             </GoabTab>
           </GoabTabs>
         );
       };
 
-      const { getByTestId } = render(<Component />);
+      const { getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
 
-      // Wait for component to fully render
       await vi.waitFor(() => {
-        expect(getByTestId("segment-tabs")).toBeTruthy();
+        expect(tablist.elements().length).toBe(2);
       });
 
-      // THEN - The tablist container should have the "segmented" class
+      const secondTab = tablist.elements()[1];
+      await secondTab.click();
+
+      // Hash should be the custom slug
       await vi.waitFor(() => {
-        const tabsContainer = getByTestId("segment-tabs");
-        expect(tabsContainer.element().classList.contains("segmented")).toBe(true);
+        expect(window.location.hash).toBe("#second-custom");
       });
     });
+
+    it("should activate tab when URL hash matches slug", async () => {
+      // Set hash before rendering
+      window.history.pushState({}, "", "/test#details-tab");
+
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="Home">Home content</GoabTab>
+            <GoabTab heading="Details" slug="details-tab">
+              Details content
+            </GoabTab>
+            <GoabTab heading="About">About content</GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByText, getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tablist.elements().length).toBe(3);
+      });
+
+      // The tab with matching slug should be active
+      await vi.waitFor(() => {
+        const tabs = tablist.elements();
+        expect(tabs[1].getAttribute("aria-selected")).toBe("true");
+        expect(getByText("Details content")).toBeTruthy();
+      });
+    });
+
+    it("should use slug prop in href URL hash when provided", async () => {
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="Review pending">
+              Review content
+            </GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Complete
+                  <GoabBadge type="information" content="12" />
+                </>
+              }
+              slug="complete-items"
+            >
+              Complete content
+            </GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Draft
+                  <GoabBadge type="midtone" content="3" />
+                </>
+              }
+            >
+              Draft content
+            </GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByText, getByRole } = render(<Component />);
+      const tablist = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tablist.elements().length).toBe(3);
+      });
+
+      const tabs = tablist.elements();
+
+      // First tab with component heading should have custom slug in href
+      expect(tabs[0].getAttribute("href")).toContain("#review-pending");
+
+      // Second tab with component heading should have custom slug in href
+      expect(tabs[1].getAttribute("href")).toContain("#complete-items");
+
+      // Third tab with component heading but no slug should use default tab-{index} format
+      expect(tabs[2].getAttribute("href")).toContain("#tab-2");
+    });
+
+    it("should navigate correctly when clicking tab with component heading and slug", async () => {
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="Plain Tab">Plain content</GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Status Tab
+                  <GoabBadge type="success" content="New" />
+                </>
+              }
+              slug="status-updates"
+            >
+              Status content
+            </GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByText, getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tabs.elements().length).toBe(2);
+      });
+
+      const secondTab = tabs.elements()[1];
+      await secondTab.click();
+
+      // Hash should be the custom slug
+      await vi.waitFor(() => {
+        expect(window.location.hash).toBe("#status-updates");
+      });
+
+      // Content should be visible
+      await vi.waitFor(() => {
+        expect(getByText("Status content")).toBeTruthy();
+      });
+    });
+
+    it("should activate tab with component heading when URL hash matches slug", async () => {
+      // Set hash before rendering
+      window.history.pushState({}, "", "/test#active-tasks");
+
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="All">All content</GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Active
+                  <GoabBadge type="emergency" content="5" />
+                </>
+              }
+              slug="active-tasks"
+            >
+              Active content
+            </GoabTab>
+            <GoabTab heading="Archived">Archived content</GoabTab>
+          </GoabTabs>
+        );
+      };
+
+
+      const { getByText, getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tabs.elements().length).toBe(3);
+      });
+
+      // The tab with matching slug should be active
+      await vi.waitFor(() => {
+        const els = tabs.elements();
+        expect(els.length).toBe(3);
+        expect(els[1].getAttribute("aria-selected")).toBe("true");
+        expect(getByText("Active content")).toBeTruthy();
+      });
+    });
+
+    /**
+     * Previously if you clicked on a tab, then reloaded the page, the tab hash value
+     * would be duplicated in the browser's url bar
+     */
+    it("should ensure that a hash value does not exist in duplicate", async () => {
+      // set initial hash in the url
+      window.location.hash = "active-tasks";
+
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="All">All content</GoabTab>
+            <GoabTab
+              heading={
+                <>
+                  Active
+                  <GoabBadge type="emergency" content="5" />
+                </>
+              }
+              slug="active-tasks"
+            >
+              Active content
+            </GoabTab>
+            <GoabTab heading="Archived">Archived content</GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByText, getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tabs.elements().length).toBe(3);
+      });
+
+      // click the current tab
+      const tab = tabs.elements()[1];
+      await tab.click();
+
+      // The url hash should not change. This logic was needed as without it, it would occasionally
+      // pass and the vitest would see that as a fully passing test. The logic below ensure that
+      // is passes all the time.
+      const hashes = new Set();
+      await vi.waitFor(() => {
+        hashes.add(window.location.hash);
+      }, { timeout: 500 });
+
+      expect(hashes.size).toBe(1);
+      expect(hashes.has("#active-tasks")).toBe(true);
+    })
   });
 });

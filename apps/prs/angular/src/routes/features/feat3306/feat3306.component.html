@@ -1,0 +1,111 @@
+<goab-block direction="column" gap="l">
+  <goab-block direction="column" gap="s">
+    <goab-text tag="h1" mb="0" mt="0">
+      <a href="https://github.com/GovAlta/ui-components/issues/3306" target="_blank"
+        >3306</a
+      >
+      - Feature 3306
+    </goab-text>
+    <goab-text tag="p" mt="0">
+      Add ability to set the `slug` for a Tab component. This slug value will work for
+      tabs that use a string `heading` value as well as when a `heading` slot is
+      defined.
+    </goab-text>
+  </goab-block>
+
+  <goab-divider mt="xl" mb="xl"></goab-divider>
+
+  <!-- Add feature implementation here -->
+  <goab-tabs initialTab="1">
+    <goab-tab heading="All">
+      <goab-table width="100%">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Text</th>
+            <th class="goa-table-number-header">Number</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of review">
+            <td>
+              <goab-badge type="important" content="Review pending"></goab-badge>
+            </td>
+            <td>Lorem Ipsum</td>
+            <td class="goa-table-number-column">1234567890</td>
+            <td>
+              <goab-button type="tertiary">Action</goab-button>
+            </td>
+          </tr>
+          <tr *ngFor="let i of complete">
+            <td>
+              <goab-badge type="information" content="Complete"></goab-badge>
+            </td>
+            <td>Lorem Ipsum</td>
+            <td class="goa-table-number-column">1234567890</td>
+            <td>
+              <goab-button type="tertiary">Action</goab-button>
+            </td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </goab-tab>
+    <goab-tab slug="review-pending">
+      <div slot="heading">
+        Review pending<goab-badge type="important" content="4"></goab-badge>
+      </div>
+      There should be a slug here
+      <goab-table width="100%">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Text</th>
+            <th class="goa-table-number-header">Number</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of review">
+            <td>
+              <goab-badge type="important" content="Review pending"></goab-badge>
+            </td>
+            <td>Lorem Ipsum</td>
+            <td class="goa-table-number-column">1234567890</td>
+            <td>
+              <goab-button type="tertiary">Action</goab-button>
+            </td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </goab-tab>
+    <goab-tab>
+      <div slot="heading">
+        Complete<goab-badge type="information" content="338"></goab-badge>
+      </div>
+      <goab-table width="100%">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Text</th>
+            <th class="goa-table-number-header">Number</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of complete">
+            <td>
+              <goab-badge type="information" content="Complete"></goab-badge>
+            </td>
+            <td>Lorem Ipsum</td>
+            <td class="goa-table-number-column">1234567890</td>
+            <td>
+              <goab-button type="tertiary">Action</goab-button>
+            </td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </goab-tab>
+  </goab-tabs>
+
+</goab-block>
