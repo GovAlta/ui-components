@@ -5,8 +5,15 @@
 />
 
 <script lang="ts">
+  // some comemntj
   import { onMount } from "svelte";
-  import { dispatch, performOnce, receive, relay, style } from "../../common/utils";
+  import {
+    dispatch,
+    performOnce,
+    receive,
+    relay,
+    style,
+  } from "../../common/utils";
   import {
     ExternalContinueMsg,
     ExternalContinueRelayDetail,
@@ -39,7 +46,8 @@
     FormPageBindRelayDetail,
     FieldsetBindRelayDetail,
     FieldsetBindMsg,
-    FormPageBackMsg, FormStatus,
+    FormPageBackMsg,
+    FormStatus,
   } from "../../types/relay-types";
 
   // ========
@@ -117,7 +125,11 @@
     _childReceiverEl.addEventListener(StateChangeEvent, (e) => {
       const detail = (e as CustomEvent).detail as StateChangeRelayDetail;
       if (detail.type === "details") {
-        console.warn("Form:addSubformRelayListener", name, "received details type, ignoring");
+        console.warn(
+          "Form:addSubformRelayListener",
+          name,
+          "received details type, ignoring",
+        );
         return;
       }
 
@@ -194,7 +206,11 @@
     _childForms[detail.id] = detail.el;
 
     // bind all the child forms
-    _childFormStateTimeoutId = performOnce(_childFormStateTimeoutId, dispatchChildFormState, 100);
+    _childFormStateTimeoutId = performOnce(
+      _childFormStateTimeoutId,
+      dispatchChildFormState,
+      100,
+    );
   }
 
   /**
@@ -223,7 +239,10 @@
     _formPages[detail.id] = detail;
 
     // save the initial state of the fieldset (data prop not set)
-    _state.form[detail.id] = { ..._state.form[detail.id], heading: detail.heading };
+    _state.form[detail.id] = {
+      ..._state.form[detail.id],
+      heading: detail.heading,
+    };
 
     // Once all FormPages are obtained, set the visibility of the first item in the list
     // as visible for the default state; this may be overridden if the state is initialized
@@ -244,7 +263,12 @@
    */
   function addToHistory(id: string) {
     if (_state.history.includes(id)) {
-      console.warn("Form:addToHistory", name, "history already contains id", id);
+      console.warn(
+        "Form:addToHistory",
+        name,
+        "history already contains id",
+        id,
+      );
       return;
     }
 
@@ -259,7 +283,10 @@
     const { id, state } = detail;
 
     // updating form state with the fieldset specific data
-    _state.form[id] = { heading: state.heading, data: { type: "details", fieldsets: state.data } };
+    _state.form[id] = {
+      heading: state.heading,
+      data: { type: "details", fieldsets: state.data },
+    };
   }
 
   /**
@@ -359,11 +386,9 @@
    */
   function sendEdittingStateMsg(id: string) {
     for (const formPage of Object.values(_formPages)) {
-      relay<FormDispatchEditRelayDetail>(
-        formPage.el,
-        FormDispatchEditMsg,
-        { id }
-      );
+      relay<FormDispatchEditRelayDetail>(formPage.el, FormDispatchEditMsg, {
+        id,
+      });
     }
   }
 
@@ -372,9 +397,11 @@
    */
   function onFormComplete() {
     dispatchStateChange("complete", 0);
-    dispatch<FormState>(_rootEl, "_complete",
-      {..._state, status: "complete"},
-      { bubbles: true }
+    dispatch<FormState>(
+      _rootEl,
+      "_complete",
+      { ..._state, status: "complete" },
+      { bubbles: true },
     );
   }
 
@@ -406,15 +433,25 @@
   /**
    * Dispatches state change events to the app to trigger any dynamic binding
    */
-  function dispatchStateChange(status: FormStatus = "in-progress", debounce = 500) {
-    _stateChangeTimeoutId = performOnce(_stateChangeTimeoutId, () => {
-      dispatch<StateChangeRelayDetail>(
-        _rootEl,
+  function dispatchStateChange(
+    status: FormStatus = "in-progress",
+    debounce = 500,
+  ) {
+    _stateChangeTimeoutId = performOnce(
+      _stateChangeTimeoutId,
+      () => {
+        dispatch<StateChangeRelayDetail>(
+          _rootEl,
           StateChangeEvent,
-          { type: "details", data: { ..._state, lastModified: new Date(), status }},
+          {
+            type: "details",
+            data: { ..._state, lastModified: new Date(), status },
+          },
           { bubbles: true },
-      );
-    }, debounce);
+        );
+      },
+      debounce,
+    );
   }
 
   /**
@@ -424,7 +461,12 @@
   function resetFieldsetErrors(fieldsetName: string) {
     // fieldsets don't exist in all FormPages
     if (!_fieldsets[fieldsetName]) {
-      console.warn("Form:resetFieldsetErrors", name, "fieldset does not exist", fieldsetName);
+      console.warn(
+        "Form:resetFieldsetErrors",
+        name,
+        "fieldset does not exist",
+        fieldsetName,
+      );
       return;
     }
     relay(_fieldsets[fieldsetName].el, FormResetErrorsMsg, null);
@@ -496,7 +538,9 @@
       }
 
       syncFormSummaryState();
-      dispatchStateChange(_state.history.length > 1 ? "in-progress" : "not-started");
+      dispatchStateChange(
+        _state.history.length > 1 ? "in-progress" : "not-started",
+      );
       dispatchChildFormState();
     }, 200);
   }
@@ -506,10 +550,14 @@
    */
   function dispatchChildFormState() {
     for (const [id, el] of Object.entries(_childForms)) {
-     const data = _state.form[id]?.data;
+      const data = _state.form[id]?.data;
       // data is only sent to child forms and all child forms are lists
       if (data?.type === "list") {
-        relay<FormDispatchStateRelayDetailList>(el, FormDispatchStateMsg, data.items);
+        relay<FormDispatchStateRelayDetailList>(
+          el,
+          FormDispatchStateMsg,
+          data.items,
+        );
       }
     }
   }
