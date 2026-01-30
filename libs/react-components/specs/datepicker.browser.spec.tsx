@@ -4,6 +4,11 @@ import { expect, describe, it, vi } from "vitest";
 import { userEvent } from "@vitest/browser/context";
 import { format } from "date-fns";
 
+function getTodayDate(): Date {
+  const today = new Date();
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+}
+
 describe("DatePicker", () => {
   it("renders", async () => {
     const Component = () => {
@@ -34,7 +39,7 @@ describe("DatePicker", () => {
   });
 
   it("shows an error state", async () => {
-    const value = new Date();
+    const value = getTodayDate();
 
     const Component = () => {
       return <GoabDatePicker testId="date-picker" value={value} error={true} />;

@@ -73,8 +73,8 @@
       const newDate = new CalendarDate(value);
       if (newDate.isValid()) {
         renderCalendar({ type: "date", value: newDate });
-        _selectedDate = newDate;
-        _calendarDate = newDate;
+        _selectedDate = newDate.clone();
+        _calendarDate = newDate.clone();
       }
     }
   }
@@ -99,7 +99,10 @@
     }
 
     // Re-render with updated values
-    renderCalendar({ type: "date", value: _calendarDate || new CalendarDate() });
+    renderCalendar({
+      type: "date",
+      value: _calendarDate || new CalendarDate(),
+    });
   }
 
   // *****
@@ -108,9 +111,12 @@
 
   onMount(() => {
     if (value) {
-      _calendarDate = _selectedDate = new CalendarDate(value);
+      _calendarDate = new CalendarDate(value);
+      _selectedDate = _calendarDate.clone();
     } else {
-      _calendarDate = new CalendarDate();
+      // Bug3305: by default _calendarDate defaults to today. To prevent issues
+      // initialize calendarDate to the 1st of the month.
+      _calendarDate = new CalendarDate().setDay(1);
       _selectedDate = new CalendarDate(0);
     }
 
@@ -132,9 +138,18 @@
         _calendarDate = change.value;
         break;
       case "month":
+        // Bug3305: when the month changes we need to reset the day to the 1st
+        // to prevent _calendarDate from becoming invalid.
+        // For example if January 31 is selected, February would not show
+        // because February 31 is not a date.
+        _calendarDate.setDay(1);
         _calendarDate.setMonth(change.value);
         break;
       case "year":
+        // Bug3305: As with "month", when the "year" changes we need to reset
+        // the day to the 1st to prevent _calendarDate from becoming invalid in
+        // edge cases like a leap year, i.e. Feb 29, 2024 is valid, but not 2025
+        _calendarDate.setDay(1);
         _calendarDate.setYear(change.value);
         break;
     }
@@ -148,8 +163,12 @@
     _monthDays = [];
     for (let i = 0; i < dayCount; i++) {
       _monthDays.push(
-          new CalendarDate({year: _calendarDate.year, month: _calendarDate.month, day: i+1})
-      )
+        new CalendarDate({
+          year: _calendarDate.year,
+          month: _calendarDate.month,
+          day: i + 1,
+        }),
+      );
     }
 
     // previous month days to fill the start of the calendar
@@ -164,7 +183,8 @@
 
     // next month days to fill the end of the calendar
     _nextMonthDays = [];
-    _nextMonthDayCount = 7 - ((_previousMonthDays.length + _monthDays.length) % 7);
+    _nextMonthDayCount =
+      7 - ((_previousMonthDays.length + _monthDays.length) % 7);
 
     // ensure a full week is not appended to the end
     if (_nextMonthDayCount < 7) {
@@ -180,8 +200,8 @@
       e.stopPropagation();
       e.preventDefault();
 
-      // prevent selection outsite min/max boundies
-      if ( newDate.isBefore(_min) || newDate.isAfter(_max) ) {
+      // prevent selection outside min/max boundaries
+      if (newDate.isBefore(_min) || newDate.isAfter(_max)) {
         return;
       }
 
@@ -241,7 +261,7 @@
           }
           break;
         case "Enter":
-          _selectedDate = _calendarDate;
+          _selectedDate = _calendarDate.clone();
           dispatchValue();
           e.stopPropagation();
           e.preventDefault();
@@ -296,7 +316,8 @@
       renderCalendar({ type: "date", value: d });
     }
 
-    _selectedDate = _calendarDate = d;
+    _calendarDate = d.clone();
+    _selectedDate = d.clone();
     dispatchValue();
   }
 </script>
@@ -307,8 +328,13 @@
   data-testid={testid}
   tabindex="-1"
 >
-   <goa-block gap="s" mb="s">
-    <goa-form-item label="Month" mt="0" {version} labelsize={version === "2" ? "compact" : "regular"}>
+  <goa-block gap="s" mb="s">
+    <goa-form-item
+      label="Month"
+      mt="0"
+      {version}
+      labelsize={version === "2" ? "compact" : "regular"}
+    >
       <goa-dropdown
         name="month"
         disable-global-close-popover="yes"
@@ -322,12 +348,17 @@
         size={version === "2" ? "compact" : "default"}
       >
         {#each _months as month, i}
-          <goa-dropdown-item value={i+1+""} label={month} />
+          <goa-dropdown-item value={i + 1 + ""} label={month} />
         {/each}
       </goa-dropdown>
     </goa-form-item>
 
-    <goa-form-item label="Year" mt="0" {version} labelsize={version === "2" ? "compact" : "regular"}>
+    <goa-form-item
+      label="Year"
+      mt="0"
+      {version}
+      labelsize={version === "2" ? "compact" : "regular"}
+    >
       <goa-dropdown
         name="year"
         disable-global-close-popover="yes"
@@ -405,7 +436,10 @@
 <style>
   .bordered {
     display: inline-block;
-    border: var(--goa-date-input-calendar-border, 1px solid var(--goa-color-greyscale-700));
+    border: var(
+      --goa-date-input-calendar-border,
+      1px solid var(--goa-color-greyscale-700)
+    );
     border-radius: var(--goa-date-input-calendar-border-radius);
     padding: 1rem;
   }
