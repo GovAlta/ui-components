@@ -1,8 +1,8 @@
-import { type JSX } from "react";
+import { useEffect, useRef, type JSX } from "react";
 import { GoabWorkSideMenuItemType } from "@abgov/ui-components-common";
 interface WCProps {
   label: string;
-  url: string;
+  url?: string;
   badge?: string;
   current?: string;
   divider?: string;
@@ -15,14 +15,17 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-work-side-menu-item": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-work-side-menu-item": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
 export interface GoabWorkSideMenuItemProps {
   label: string;
-  url: string;
+  url?: string;
   badge?: string;
   current?: boolean;
   divider?: boolean;
@@ -30,21 +33,50 @@ export interface GoabWorkSideMenuItemProps {
   testId?: string;
   type?: GoabWorkSideMenuItemType;
   children?: React.ReactNode;
+  onCLick?: () => void;
 }
 
-export function GoabxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Element {
+export function GoabxWorkSideMenuItem({
+  label,
+  url,
+  badge,
+  current,
+  divider,
+  icon,
+  testId,
+  type,
+  children,
+  onClick,
+}: GoabWorkSideMenuItemProps): JSX.Element {
+  const el = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!el.current) return;
+    if (!onClick) return;
+    const current = el.current;
+    const listener = () => {
+      onClick?.();
+    };
+
+    current.addEventListener("_click", listener);
+    return () => {
+      current.removeEventListener("_click", listener);
+    };
+  }, [el, onClick]);
+
   return (
     <goa-work-side-menu-item
-      label={props.label}
-      url={props.url}
-      badge={props.badge}
-      current={props.current ? "true" : undefined}
-      divider={props.divider ? "true" : undefined}
-      icon={props.icon}
-      testid={props.testId}
-      type={props.type}
+      ref={el}
+      label={label}
+      url={url}
+      badge={badge}
+      current={current ? "true" : undefined}
+      divider={divider ? "true" : undefined}
+      icon={icon}
+      testid={testId}
+      type={type}
     >
-      {props.children}
+      {children}
     </goa-work-side-menu-item>
   );
 }

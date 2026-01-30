@@ -1,0 +1,25 @@
+<h1>Feature 3340: Work Side Menu Item Click Handling</h1>
+
+<p>
+  This demonstrates handling click events on items within a
+  <code>goabx-work-side-menu</code> component.
+</p>
+
+<p>
+  Total item clicks:
+  <strong>{{ itemClicks }}</strong>
+</p>
+
+<goabx-work-side-menu
+  heading="Menu heading"
+  url="#"
+  [primaryContent]="primaryTemplate"
+  [open]="true"
+>
+</goabx-work-side-menu>
+
+<ng-template #primaryTemplate>
+  <goabx-work-side-menu-item label="Menu item 1" icon="star" (click)="onItemClick()" />
+  <goabx-work-side-menu-item label="Menu item 2" icon="star" (click)="onItemClick()" />
+  <goabx-work-side-menu-item label="Menu item 3" icon="star" (click)="onItemClick()" />
+</ng-template>
