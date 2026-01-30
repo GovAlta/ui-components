@@ -153,7 +153,14 @@ it("emits an event when a date is selected", async () => {
 });
 
 it("updates the calendar when a new month is selected", async () => {
-  const { container, queryByTestId } = render(Calendar);
+  const year = 2026;
+  const month = 4;
+  const day = 1;
+  const date = new Date(year, month, day);
+
+  const { container, queryByTestId } = render(Calendar, {
+    value: `${year}-0${month}-${day}`,
+  });
   await tick();
 
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -161,8 +168,6 @@ it("updates the calendar when a new month is selected", async () => {
 
   // validate the day of the first day for the current month
   {
-    const date = toDayStart(new Date());
-    date.setDate(1);
     const dayOfWeek = date.getDay();
     const buttonEl = container.querySelector(
       `[data-date="${getDateStamp(date)}"]`,
@@ -173,17 +178,14 @@ it("updates the calendar when a new month is selected", async () => {
   }
 
   // change month
-  const otherMonth = ((new Date().getMonth() + 1) % 12) + 1; // +1 since getMonth is zero based we need some +1s
   monthsEl?.dispatchEvent(
     new CustomEvent("_change", {
-      detail: { value: otherMonth },
+      detail: { value: month + 1 },
     }),
   );
 
   await waitFor(() => {
-    const date = toDayStart(new Date());
-    date.setMonth(otherMonth - 1); // revert to 0-index value
-    date.setDate(1);
+    const date = new Date(year, month + 1, day);
     const dayOfWeek = date.getDay();
     const buttonEl = queryByTestId(getDateStamp(date));
 
