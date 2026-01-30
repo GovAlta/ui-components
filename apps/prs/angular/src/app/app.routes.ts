@@ -62,11 +62,12 @@ import { Feat2722Component } from "../routes/features/feat2722/feat2722.componen
 import { Feat2730Component } from "../routes/features/feat2730/feat2730.component";
 import { Feat2829Component } from "../routes/features/feat2829/feat2829.component";
 import { Feat3102Component } from "../routes/features/feat3102/feat3102.component";
-import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-icons.component";
 import { Feat3137Component } from "../routes/features/feat3137/feat3137.component";
 import { Feat3241Component } from "../routes/features/feat3241/feat3241.component";
 import { Feat3306Component } from "../routes/features/feat3306/feat3306.component";
 import { Feat2469Component } from "../routes/features/feat2469/feat2469.component";
+import { Feat3370Component } from "../routes/features/feat3370/feat3370.component";
+import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-icons.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -135,5 +136,7 @@ export const appRoutes: Route[] = [
   { path: "features/3137", component: Feat3137Component },
   { path: "features/3241", component: Feat3241Component },
   { path: "features/v2-icons", component: FeatV2IconsComponent },
+  { path: "features/3137", component: Feat3137Component },
   { path: "features/3306", component: Feat3306Component },
+  { path: "features/3370", component: Feat3370Component },
 ];

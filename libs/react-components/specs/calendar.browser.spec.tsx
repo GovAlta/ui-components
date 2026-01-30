@@ -1,5 +1,4 @@
-import { render } from "vitest-browser-react";
-
+import { render, RenderResult } from "vitest-browser-react";
 import { GoabCalendar } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { userEvent } from "@vitest/browser/context";
@@ -599,6 +598,109 @@ describe("Calendar", () => {
     });
   });
 
+  describe("Given a date is selected", () => {
+    const currentValue = "2026-01-31";
+    const handleChange = vi.fn();
+
+    let result: RenderResult;
+
+    beforeEach(async () => {
+      const Component = () => {
+        return (
+          <GoabCalendar
+            testId="test-calendar"
+            value={currentValue}
+            onChange={handleChange}
+          />
+        );
+      };
+      result = render(<Component />);
+    });
+
+    it("focuses the value selected date", async () => {
+      await vi.waitFor(() => {
+        const selected = result.getByTestId(currentValue);
+        expect(selected.element().classList.contains("selected")).toBe(true);
+      });
+    });
+
+    it("does not select a day in the next month when another month is selected", async () => {
+      // Move from January to February 2026
+      const monthsDropdown = result.getByTestId("months");
+      const februaryItem = result.getByTestId("dropdown-item-2");
+
+      // select February
+      await monthsDropdown.click();
+      await februaryItem.click();
+
+      await vi.waitFor(() => {
+        const firstDayOfFeb = result.getByTestId("2026-02-01");
+        expect(firstDayOfFeb).toBeVisible();
+      });
+
+      await vi.waitFor(() => {
+        // Feb 2026 is four weeks that fit perfectly in the calendar view. Jan 31
+        // should not be visible or in the calendar at all.
+        expect(result.container.getElementsByClassName("selected").length).toBe(0);
+        // Value didn't change
+        expect(handleChange).not.toHaveBeenCalled();
+      });
+    });
+
+    it("does not select a day in the next year when another year is selected", async () => {
+      // Move from 2026 to January 2027
+      const yearsDropdown = result.getByTestId("years");
+      const jan2027Item = result.getByTestId("dropdown-item-2027");
+      const firstDayOfJan2027 = result.getByTestId("2027-01-01");
+
+      // select 2027
+      await yearsDropdown.click();
+      await jan2027Item.click();
+
+      // Wait for dropdown to be interactive
+      await vi.waitFor(() => {
+        expect(firstDayOfJan2027).toBeVisible();
+      });
+
+      await vi.waitFor(() => {
+        expect(result.container.getElementsByClassName("selected").length).toBe(0);
+        // Value didn't change
+        expect(handleChange).not.toHaveBeenCalled();
+      });
+    });
+
+    it("will keep the selection when navigating back to the original month", async () => {
+      // Move from January to February 2026
+      const monthsDropdown = result.getByTestId("months");
+      const februaryItem = result.getByTestId("dropdown-item-2");
+      const firstDayOfFeb = result.getByTestId("2026-02-01");
+
+      // select February
+      await monthsDropdown.click();
+      await februaryItem.click();
+
+      await vi.waitFor(() => {
+        expect(firstDayOfFeb).toBeVisible();
+      });
+
+      const januaryItem = result.getByTestId("dropdown-item-1");
+      const firstDayOfJan = result.getByTestId("2026-01-01");
+
+      // select January again
+      await monthsDropdown.click();
+      await januaryItem.click();
+
+      await vi.waitFor(() => {
+        expect(firstDayOfJan).toBeVisible();
+      });
+
+      await vi.waitFor(() => {
+        const selected = result.getByTestId(currentValue);
+        expect(selected.element().classList.contains("selected")).toBe(true);
+      });
+    });
+  });
+
   describe("Visual states", () => {
     it("highlights today's date", async () => {
       const handleChange = vi.fn();
@@ -714,6 +816,71 @@ describe("Calendar", () => {
 
         await vi.waitFor(() => {
           expect(falseyOption.element()).toBeTruthy();
+        });
+      });
+    });
+
+    // #3305: If you selected a date that didn't exist in the next month
+    // (e.g., Jan 31 to Feb), the calendar would not render February at all.
+    describe("3305", async () => {
+      const handleChange = vi.fn();
+      let result: RenderResult;
+
+      beforeEach(async () => {
+        const Component = () => {
+          return <GoabCalendar testId="test-calendar" onChange={handleChange} />;
+        };
+
+        result = render(<Component />);
+      });
+
+      it("can show February after selecting Jan 31", async () => {
+        // Move from January to February 2026
+        const yearsDropdown = result.getByTestId("years");
+        const year2027Item = result.getByTestId("dropdown-item-2027");
+
+        // Select 2027
+        await yearsDropdown.click();
+        await year2027Item.click();
+
+        // Select January (2027)
+        const monthsDropdown = result.getByTestId("months");
+        const januaryItem = result.getByTestId("dropdown-item-1");
+        const lastDayOfJan = result.getByTestId("2027-01-31");
+
+        // Select January
+        await monthsDropdown.click();
+        await januaryItem.click();
+
+        // Wait for dropdown to be interactive
+        await vi.waitFor(() => {
+          expect(lastDayOfJan).toBeVisible();
+        });
+
+        await lastDayOfJan.click();
+        await vi.waitFor(() => {
+          expect(handleChange).toHaveBeenCalledWith({
+            name: "",
+            value: "2027-01-31",
+          });
+        });
+
+        handleChange.mockReset();
+
+        // Select February
+        const februaryItem = result.getByTestId("dropdown-item-2");
+
+        await monthsDropdown.click();
+        await februaryItem.click();
+
+        const firstDayOfFeb = result.getByTestId("2027-02-01");
+        const lastDayOfFeb = result.getByTestId("2027-02-28");
+
+        // Wait for calendar to be interactive at February, which means a pass.
+        await vi.waitFor(() => {
+          expect(firstDayOfFeb).toBeVisible();
+          expect(lastDayOfFeb).toBeVisible();
+          expect(handleChange).not.toHaveBeenCalled();
         });
       });
     });

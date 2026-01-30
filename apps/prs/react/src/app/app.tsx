@@ -92,6 +92,7 @@ export function App() {
               <Link to="/features/3241">3241 V2 Experimental Wrappers</Link>
               <Link to="/features/v2-icons">v2 header icons</Link>
               <Link to="/features/3306">3306 Custom slug value for tabs</Link>
+              <Link to="/features/3370">3370 Clear calendar day selection</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>
