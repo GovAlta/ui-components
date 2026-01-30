@@ -9,6 +9,7 @@
   export let testid: string = "";
   export let version: "1" | "2" = "1";
   export let variant: "default" | "segmented" = "default";
+// and another
 // sxome other line
  // Private
   let _rootEl: HTMLElement;
