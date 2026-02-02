@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@abgov/design-tokens": "^2.0.0",
     "@abgov/react-components": "*",
     "@abgov/ui-components-common": "*",
     "@abgov/web-components": "*"
