@@ -1,0 +1,35 @@
+name: Docs Next Release
+
+on:
+  push:
+    branches:
+      - next
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build:docs
+
+      - name: Release
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: next
+          FOLDER: dist/docs
