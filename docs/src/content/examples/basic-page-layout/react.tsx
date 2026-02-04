@@ -1,11 +1,11 @@
+import { GoabxAppFooter } from "@abgov/react-components/experimental";
 import {
-  GoabAppFooter,
   GoabAppHeader,
   GoabGrid,
   GoabMicrositeHeader,
   GoabOneColumnLayout,
   GoabPageBlock,
-  GoabSkeleton
+  GoabSkeleton,
 } from "@abgov/react-components";
 
 export function BasicPageLayout() {
@@ -32,7 +32,7 @@ export function BasicPageLayout() {
         </GoabGrid>
       </GoabPageBlock>
       <section slot="footer">
-        <GoabAppFooter />
+        <GoabxAppFooter />
       </section>
     </GoabOneColumnLayout>
   );

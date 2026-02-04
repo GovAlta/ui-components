@@ -49,8 +49,8 @@ export const heroBannerConfigurations: ComponentConfigurations = {
         react: `<GoabHeroBanner heading="Start your application">
   <p>Apply for government services quickly and easily online.</p>
   <GoabButtonGroup mt="l">
-    <GoabButton>Get started</GoabButton>
-    <GoabButton type="secondary">Learn more</GoabButton>
+    <GoabxButton>Get started</GoabxButton>
+    <GoabxButton type="secondary">Learn more</GoabxButton>
   </GoabButtonGroup>
 </GoabHeroBanner>`,
         angular: `<goab-hero-banner heading="Start your application">

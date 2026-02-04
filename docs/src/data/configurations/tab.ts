@@ -17,14 +17,14 @@ export const tabConfigurations: ComponentConfigurations = {
       name: 'Basic tab',
       description: 'Single tab within Tabs component',
       code: {
-        react: `<GoabTabs>
+        react: `<GoabxTabs>
   <GoabTab heading="First tab">
     Content for the first tab.
   </GoabTab>
   <GoabTab heading="Second tab">
     Content for the second tab.
   </GoabTab>
-</GoabTabs>`,
+</GoabxTabs>`,
         angular: `<goab-tabs>
   <goab-tab heading="First tab">
     Content for the first tab.

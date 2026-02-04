@@ -26,7 +26,7 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Basic drawer',
       description: 'Simple drawer from right side',
       code: {
-        react: `<GoabDrawer heading="Application details" position="right" open={isOpen} onClose={handleClose}>
+        react: `<GoabxDrawer heading="Application details" position="right" open={isOpen} onClose={handleClose}>
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
   <p>Drawers are useful for:</p>
   <ul>
@@ -34,7 +34,7 @@ export const drawerConfigurations: ComponentConfigurations = {
     <li>Editing settings or preferences</li>
     <li>Completing a quick task related to the main content</li>
   </ul>
-</GoabDrawer>`,
+</GoabxDrawer>`,
         angular: `<goab-drawer heading="Application details" position="right" [open]="isOpen" (_close)="handleClose()">
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
   <p>Drawers are useful for:</p>
@@ -62,9 +62,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Bottom position',
       description: 'Drawer opening from the bottom of the screen',
       code: {
-        react: `<GoabDrawer heading="Bottom drawer" position="bottom" open={isOpen} onClose={handleClose}>
+        react: `<GoabxDrawer heading="Bottom drawer" position="bottom" open={isOpen} onClose={handleClose}>
   <p>Opens from the bottom of the screen.</p>
-</GoabDrawer>`,
+</GoabxDrawer>`,
         angular: `<goab-drawer heading="Bottom drawer" position="bottom" [open]="isOpen" (_close)="handleClose()">
   <p>Opens from the bottom of the screen.</p>
 </goab-drawer>`,
@@ -80,13 +80,13 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'With actions',
       description: 'Drawer with footer actions',
       code: {
-        react: `<GoabDrawer heading="Edit settings" position="right" open={isOpen} onClose={handleClose}>
+        react: `<GoabxDrawer heading="Edit settings" position="right" open={isOpen} onClose={handleClose}>
   <p>Make changes to your settings here.</p>
   <GoabButtonGroup slot="actions" alignment="end">
-    <GoabButton type="secondary" onClick={handleClose}>Cancel</GoabButton>
-    <GoabButton onClick={handleSave}>Save</GoabButton>
+    <GoabxButton type="secondary" onClick={handleClose}>Cancel</GoabxButton>
+    <GoabxButton onClick={handleSave}>Save</GoabxButton>
   </GoabButtonGroup>
-</GoabDrawer>`,
+</GoabxDrawer>`,
         angular: `<goab-drawer heading="Edit settings" position="right" [open]="isOpen" (_close)="handleClose()">
   <p>Make changes to your settings here.</p>
   <goab-button-group slot="actions" alignment="end">
@@ -110,9 +110,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Narrow size',
       description: 'Narrow drawer for simple content',
       code: {
-        react: `<GoabDrawer heading="Narrow drawer" position="right" size="narrow" open={isOpen} onClose={handleClose}>
+        react: `<GoabxDrawer heading="Narrow drawer" position="right" size="narrow" open={isOpen} onClose={handleClose}>
   <p>Narrow width for simple content.</p>
-</GoabDrawer>`,
+</GoabxDrawer>`,
         angular: `<goab-drawer heading="Narrow drawer" position="right" size="narrow" [open]="isOpen" (_close)="handleClose()">
   <p>Narrow width for simple content.</p>
 </goab-drawer>`,
@@ -128,9 +128,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Wide size',
       description: 'Wide drawer for complex content',
       code: {
-        react: `<GoabDrawer heading="Wide drawer" position="right" size="wide" open={isOpen} onClose={handleClose}>
+        react: `<GoabxDrawer heading="Wide drawer" position="right" size="wide" open={isOpen} onClose={handleClose}>
   <p>Wide width for more complex content.</p>
-</GoabDrawer>`,
+</GoabxDrawer>`,
         angular: `<goab-drawer heading="Wide drawer" position="right" size="wide" [open]="isOpen" (_close)="handleClose()">
   <p>Wide width for more complex content.</p>
 </goab-drawer>`,

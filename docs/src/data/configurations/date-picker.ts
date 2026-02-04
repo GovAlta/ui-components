@@ -17,9 +17,9 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: 'Basic date picker',
       description: 'Simple date selection',
       code: {
-        react: `<GoabFormItem label="Date" mb="l">
-  <GoabDatePicker name="date" onChange={handleDateChange} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Date" mb="l">
+  <GoabxDatePicker name="date" onChange={handleDateChange} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Date" mb="l">
   <goab-date-picker name="date" (_change)="handleDateChange($event)"></goab-date-picker>
 </goab-form-item>`,
@@ -33,9 +33,9 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: 'With initial value',
       description: 'Date picker with preset date',
       code: {
-        react: `<GoabFormItem label="Start date" mb="l">
-  <GoabDatePicker name="startDate" value="2024-01-15" onChange={handleDateChange} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Start date" mb="l">
+  <GoabxDatePicker name="startDate" value="2024-01-15" onChange={handleDateChange} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Start date" mb="l">
   <goab-date-picker name="startDate" value="2024-01-15" (_change)="handleDateChange($event)"></goab-date-picker>
 </goab-form-item>`,
@@ -49,14 +49,14 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: 'With date range',
       description: 'Restrict selectable dates',
       code: {
-        react: `<GoabFormItem label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
-  <GoabDatePicker
+        react: `<GoabxFormItem label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
+  <GoabxDatePicker
     name="appointment"
     min="2024-01-01"
     max="2024-01-31"
     onChange={handleDateChange}
   />
-</GoabFormItem>`,
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
   <goab-date-picker
     name="appointment"
@@ -79,9 +79,9 @@ export const datePickerConfigurations: ComponentConfigurations = {
       name: 'Disabled',
       description: 'Date picker in disabled state',
       code: {
-        react: `<GoabFormItem label="Locked date" mb="l">
-  <GoabDatePicker name="locked" value="2024-01-01" disabled />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Locked date" mb="l">
+  <GoabxDatePicker name="locked" value="2024-01-01" disabled />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Locked date" mb="l">
   <goab-date-picker name="locked" value="2024-01-01" [disabled]="true"></goab-date-picker>
 </goab-form-item>`,

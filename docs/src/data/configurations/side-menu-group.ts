@@ -17,17 +17,17 @@ export const sideMenuGroupConfigurations: ComponentConfigurations = {
       name: 'Basic side menu group',
       description: 'Collapsible group within SideMenu',
       code: {
-        react: `<GoabSideMenu>
-  <GoabSideMenuGroup heading="Applications">
+        react: `<GoabxSideMenu>
+  <GoabxSideMenuGroup heading="Applications">
     <a href="/apps/active">Active</a>
     <a href="/apps/pending">Pending</a>
     <a href="/apps/archived">Archived</a>
-  </GoabSideMenuGroup>
-  <GoabSideMenuGroup heading="Reports">
+  </GoabxSideMenuGroup>
+  <GoabxSideMenuGroup heading="Reports">
     <a href="/reports/monthly">Monthly</a>
     <a href="/reports/annual">Annual</a>
-  </GoabSideMenuGroup>
-</GoabSideMenu>`,
+  </GoabxSideMenuGroup>
+</GoabxSideMenu>`,
         angular: `<goab-side-menu>
   <goab-side-menu-group heading="Applications">
     <a href="/apps/active">Active</a>

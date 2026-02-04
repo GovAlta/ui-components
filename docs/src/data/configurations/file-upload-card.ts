@@ -17,7 +17,7 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
       name: 'Basic file upload card',
       description: 'Card showing uploaded file',
       code: {
-        react: `<GoabFileUploadCard
+        react: `<GoabxFileUploadCard
   filename="document.pdf"
   size={1024000}
   onDelete={handleDelete}
@@ -38,7 +38,7 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
       name: 'With upload progress',
       description: 'Card showing upload in progress',
       code: {
-        react: `<GoabFileUploadCard
+        react: `<GoabxFileUploadCard
   filename="image.png"
   size={2048000}
   progress={65}
@@ -60,7 +60,7 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
       name: 'Error state',
       description: 'Card showing upload error',
       code: {
-        react: `<GoabFileUploadCard
+        react: `<GoabxFileUploadCard
   filename="large-file.zip"
   size={104857600}
   error="File exceeds maximum size limit"

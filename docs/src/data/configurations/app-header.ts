@@ -39,8 +39,8 @@ export const appHeaderConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabAppHeader heading="My Application" url="/">
   <div slot="actions">
-    <GoabButton type="tertiary">Help</GoabButton>
-    <GoabButton type="tertiary">Sign out</GoabButton>
+    <GoabxButton type="tertiary">Help</GoabxButton>
+    <GoabxButton type="tertiary">Sign out</GoabxButton>
   </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="My Application" url="/">
@@ -69,7 +69,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
     <a href="/settings">Settings</a>
   </GoabAppHeaderMenu>
   <div slot="actions">
-    <GoabButton type="tertiary" leadingIcon="person">John Smith</GoabButton>
+    <GoabxButton type="tertiary" leadingIcon="person">John Smith</GoabxButton>
   </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="Service Portal" url="/">

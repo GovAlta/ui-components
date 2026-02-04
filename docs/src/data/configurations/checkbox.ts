@@ -15,7 +15,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
       name: 'Basic checkbox',
       description: 'Single checkbox with label',
       code: {
-        react: `<GoabCheckbox name="agree" text="I agree to the terms" />`,
+        react: `<GoabxCheckbox name="agree" text="I agree to the terms" />`,
         angular: `<goab-checkbox name="agree" text="I agree to the terms"></goab-checkbox>`,
         webComponents: `<goa-checkbox name="agree" text="I agree to the terms"></goa-checkbox>`,
       },
@@ -25,7 +25,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
       name: 'With description',
       description: 'Checkbox with additional description text',
       code: {
-        react: `<GoabCheckbox
+        react: `<GoabxCheckbox
   name="newsletter"
   text="Subscribe to newsletter"
   description="Receive weekly updates about new features"
@@ -47,7 +47,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
       name: 'Checked state',
       description: 'Checkbox in checked state',
       code: {
-        react: `<GoabCheckbox name="remember" text="Remember me" checked />`,
+        react: `<GoabxCheckbox name="remember" text="Remember me" checked />`,
         angular: `<goab-checkbox name="remember" text="Remember me" [checked]="true"></goab-checkbox>`,
         webComponents: `<goa-checkbox name="remember" text="Remember me" checked></goa-checkbox>`,
       },
@@ -57,7 +57,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
       name: 'Indeterminate',
       description: 'Mixed state for "select all" scenarios',
       code: {
-        react: `<GoabCheckbox name="selectAll" text="Select all items" indeterminate />`,
+        react: `<GoabxCheckbox name="selectAll" text="Select all items" indeterminate />`,
         angular: `<goab-checkbox name="selectAll" text="Select all items" [indeterminate]="true"></goab-checkbox>`,
         webComponents: `<goa-checkbox name="selectAll" text="Select all items" indeterminate></goa-checkbox>`,
       },
@@ -67,8 +67,8 @@ export const checkboxConfigurations: ComponentConfigurations = {
       name: 'Disabled',
       description: 'Checkbox in disabled state',
       code: {
-        react: `<GoabCheckbox name="disabled" text="Cannot be changed" disabled />
-<GoabCheckbox name="disabledChecked" text="Checked and disabled" checked disabled />`,
+        react: `<GoabxCheckbox name="disabled" text="Cannot be changed" disabled />
+<GoabxCheckbox name="disabledChecked" text="Checked and disabled" checked disabled />`,
         angular: `<goab-checkbox name="disabled" text="Cannot be changed" [disabled]="true"></goab-checkbox>
 <goab-checkbox name="disabledChecked" text="Checked and disabled" [checked]="true" [disabled]="true"></goab-checkbox>`,
         webComponents: `<goa-checkbox name="disabled" text="Cannot be changed" disabled></goa-checkbox>
@@ -80,7 +80,7 @@ export const checkboxConfigurations: ComponentConfigurations = {
       name: 'Error state',
       description: 'Checkbox showing validation error',
       code: {
-        react: `<GoabCheckbox name="terms" text="Accept terms and conditions" error />`,
+        react: `<GoabxCheckbox name="terms" text="Accept terms and conditions" error />`,
         angular: `<goab-checkbox name="terms" text="Accept terms and conditions" [error]="true"></goab-checkbox>`,
         webComponents: `<goa-checkbox name="terms" text="Accept terms and conditions" error></goa-checkbox>`,
       },

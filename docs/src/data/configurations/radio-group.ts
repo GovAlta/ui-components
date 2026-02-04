@@ -17,13 +17,13 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       name: 'Basic example',
       description: 'Radio group with vertical layout',
       code: {
-        react: `<GoabFormItem label="Contact preference" mb="l">
-  <GoabRadioGroup name="contact" value="">
-    <GoabRadioItem value="email" label="Email" />
-    <GoabRadioItem value="phone" label="Phone" />
-    <GoabRadioItem value="mail" label="Mail" />
-  </GoabRadioGroup>
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Contact preference" mb="l">
+  <GoabxRadioGroup name="contact" value="">
+    <GoabxRadioItem value="email" label="Email" />
+    <GoabxRadioItem value="phone" label="Phone" />
+    <GoabxRadioItem value="mail" label="Mail" />
+  </GoabxRadioGroup>
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Contact preference" mb="l">
   <goab-radio-group name="contact" value="">
     <goab-radio-item value="email" label="Email"></goab-radio-item>
@@ -45,13 +45,13 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       name: 'Horizontal layout',
       description: 'Radio group arranged horizontally',
       code: {
-        react: `<GoabFormItem label="Size" mb="l">
-  <GoabRadioGroup name="size" value="" orientation="horizontal">
-    <GoabRadioItem value="small" label="Small" />
-    <GoabRadioItem value="medium" label="Medium" />
-    <GoabRadioItem value="large" label="Large" />
-  </GoabRadioGroup>
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Size" mb="l">
+  <GoabxRadioGroup name="size" value="" orientation="horizontal">
+    <GoabxRadioItem value="small" label="Small" />
+    <GoabxRadioItem value="medium" label="Medium" />
+    <GoabxRadioItem value="large" label="Large" />
+  </GoabxRadioGroup>
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Size" mb="l">
   <goab-radio-group name="size" value="" orientation="horizontal">
     <goab-radio-item value="small" label="Small"></goab-radio-item>
@@ -73,13 +73,13 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       name: 'With descriptions',
       description: 'Radio items with additional description text',
       code: {
-        react: `<GoabFormItem label="Shipping method" mb="l">
-  <GoabRadioGroup name="shipping" value="">
-    <GoabRadioItem value="standard" label="Standard" description="5-7 business days" />
-    <GoabRadioItem value="express" label="Express" description="2-3 business days" />
-    <GoabRadioItem value="overnight" label="Overnight" description="Next business day" />
-  </GoabRadioGroup>
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Shipping method" mb="l">
+  <GoabxRadioGroup name="shipping" value="">
+    <GoabxRadioItem value="standard" label="Standard" description="5-7 business days" />
+    <GoabxRadioItem value="express" label="Express" description="2-3 business days" />
+    <GoabxRadioItem value="overnight" label="Overnight" description="Next business day" />
+  </GoabxRadioGroup>
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Shipping method" mb="l">
   <goab-radio-group name="shipping" value="">
     <goab-radio-item value="standard" label="Standard" description="5-7 business days"></goab-radio-item>
@@ -101,13 +101,13 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       name: 'Preselected',
       description: 'Radio group with default selection',
       code: {
-        react: `<GoabFormItem label="Notification frequency" mb="l">
-  <GoabRadioGroup name="frequency" value="daily">
-    <GoabRadioItem value="realtime" label="Real-time" />
-    <GoabRadioItem value="daily" label="Daily digest" />
-    <GoabRadioItem value="weekly" label="Weekly summary" />
-  </GoabRadioGroup>
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Notification frequency" mb="l">
+  <GoabxRadioGroup name="frequency" value="daily">
+    <GoabxRadioItem value="realtime" label="Real-time" />
+    <GoabxRadioItem value="daily" label="Daily digest" />
+    <GoabxRadioItem value="weekly" label="Weekly summary" />
+  </GoabxRadioGroup>
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Notification frequency" mb="l">
   <goab-radio-group name="frequency" value="daily">
     <goab-radio-item value="realtime" label="Real-time"></goab-radio-item>
@@ -129,12 +129,12 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       name: 'Disabled',
       description: 'Radio group in disabled state',
       code: {
-        react: `<GoabFormItem label="Account type" mb="l">
-  <GoabRadioGroup name="accountType" value="basic" disabled>
-    <GoabRadioItem value="basic" label="Basic" />
-    <GoabRadioItem value="premium" label="Premium" />
-  </GoabRadioGroup>
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Account type" mb="l">
+  <GoabxRadioGroup name="accountType" value="basic" disabled>
+    <GoabxRadioItem value="basic" label="Basic" />
+    <GoabxRadioItem value="premium" label="Premium" />
+  </GoabxRadioGroup>
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Account type" mb="l">
   <goab-radio-group name="accountType" value="basic" [disabled]="true">
     <goab-radio-item value="basic" label="Basic"></goab-radio-item>
@@ -154,13 +154,13 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       name: 'Error state',
       description: 'Radio group showing validation error',
       code: {
-        react: `<GoabFormItem label="Payment method" error="Please select a payment method" mb="l">
-  <GoabRadioGroup name="payment" value="" error>
-    <GoabRadioItem value="credit" label="Credit card" />
-    <GoabRadioItem value="debit" label="Debit card" />
-    <GoabRadioItem value="bank" label="Bank transfer" />
-  </GoabRadioGroup>
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Payment method" error="Please select a payment method" mb="l">
+  <GoabxRadioGroup name="payment" value="" error>
+    <GoabxRadioItem value="credit" label="Credit card" />
+    <GoabxRadioItem value="debit" label="Debit card" />
+    <GoabxRadioItem value="bank" label="Bank transfer" />
+  </GoabxRadioGroup>
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Payment method" error="Please select a payment method" mb="l">
   <goab-radio-group name="payment" value="" [error]="true">
     <goab-radio-item value="credit" label="Credit card"></goab-radio-item>

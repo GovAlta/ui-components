@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
-  GoabButton,
-  GoabDropdown,
-  GoabDropdownItem,
-  GoabFormItem,
-  GoabInput,
-  GoabLink,
-  GoabText,
-} from "@abgov/react-components";
+  GoabxButton,
+  GoabxDropdown,
+  GoabxDropdownItem,
+  GoabxFormItem,
+  GoabxInput,
+  GoabxLink,
+} from "@abgov/react-components/experimental";
+import { GoabText } from "@abgov/react-components";
 
 export function GroupRelatedQuestionsTogetherOnAQuestionPage() {
   const [addressLine1, setAddressLine1] = useState("");
@@ -18,78 +18,78 @@ export function GroupRelatedQuestionsTogetherOnAQuestionPage() {
 
   return (
     <>
-      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabLink>
+      </GoabxLink>
 
       <GoabText as="h2" mt="xl" mb="m">Your address</GoabText>
       <GoabText mt="none" mb="xl">This is the home address of the person applying</GoabText>
 
-      <GoabFormItem label="Address line 1">
-        <GoabInput
+      <GoabxFormItem label="Address line 1">
+        <GoabxInput
           onChange={(event) => setAddressLine1(event.value)}
           value={addressLine1}
           name="address-line-1"
           ariaLabel="Address line 1"
           width="100%"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
 
-      <GoabFormItem label="Address line 2" mt="l">
-        <GoabInput
+      <GoabxFormItem label="Address line 2" mt="l">
+        <GoabxInput
           onChange={(event) => setAddressLine2(event.value)}
           value={addressLine2}
           name="address-line-2"
           ariaLabel="Address line 2"
           width="100%"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
 
-      <GoabFormItem label="Town or city" mt="l">
-        <GoabInput
+      <GoabxFormItem label="Town or city" mt="l">
+        <GoabxInput
           onChange={(event) => setTownCity(event.value)}
           value={townCity}
           name="town-city"
           ariaLabel="Town or city name"
           width="460px"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
 
-      <GoabFormItem label="Province or territory" mt="l" id="provinceLabel">
-        <GoabDropdown
+      <GoabxFormItem label="Province or territory" mt="l" id="provinceLabel">
+        <GoabxDropdown
           onChange={(event) => setProvince(event.value ?? "")}
           value={province}
           name="province-territory"
           ariaLabelledBy="provinceLabel"
         >
-          <GoabDropdownItem value="AB" label="Alberta" />
-          <GoabDropdownItem value="BC" label="British Columbia" />
-          <GoabDropdownItem value="MB" label="Manitoba" />
-          <GoabDropdownItem value="NB" label="New Brunswick" />
-          <GoabDropdownItem value="NL" label="Newfoundland and Labrador" />
-          <GoabDropdownItem value="NS" label="Nova Scotia" />
-          <GoabDropdownItem value="ON" label="Ontario" />
-          <GoabDropdownItem value="PE" label="Prince Edward Island" />
-          <GoabDropdownItem value="QC" label="Quebec" />
-          <GoabDropdownItem value="SK" label="Saskatchewan" />
-          <GoabDropdownItem value="NT" label="Northwest Territories" />
-          <GoabDropdownItem value="NU" label="Nunavut" />
-          <GoabDropdownItem value="YT" label="Yukon" />
-        </GoabDropdown>
-      </GoabFormItem>
+          <GoabxDropdownItem value="AB" label="Alberta" />
+          <GoabxDropdownItem value="BC" label="British Columbia" />
+          <GoabxDropdownItem value="MB" label="Manitoba" />
+          <GoabxDropdownItem value="NB" label="New Brunswick" />
+          <GoabxDropdownItem value="NL" label="Newfoundland and Labrador" />
+          <GoabxDropdownItem value="NS" label="Nova Scotia" />
+          <GoabxDropdownItem value="ON" label="Ontario" />
+          <GoabxDropdownItem value="PE" label="Prince Edward Island" />
+          <GoabxDropdownItem value="QC" label="Quebec" />
+          <GoabxDropdownItem value="SK" label="Saskatchewan" />
+          <GoabxDropdownItem value="NT" label="Northwest Territories" />
+          <GoabxDropdownItem value="NU" label="Nunavut" />
+          <GoabxDropdownItem value="YT" label="Yukon" />
+        </GoabxDropdown>
+      </GoabxFormItem>
 
-      <GoabFormItem label="Postal code" mt="l">
-        <GoabInput
+      <GoabxFormItem label="Postal code" mt="l">
+        <GoabxInput
           onChange={(event) => setPostalCode(event.value)}
           value={postalCode}
           name="postal-code"
           width="105px"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
 
-      <GoabButton type="submit" mt="2xl">
+      <GoabxButton type="submit" mt="2xl">
         Save and continue
-      </GoabButton>
+      </GoabxButton>
     </>
   );
 }

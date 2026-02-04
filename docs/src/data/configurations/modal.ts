@@ -33,13 +33,13 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'Basic modal',
       description: 'Simple modal with heading and content',
       code: {
-        react: `<GoabModal heading="Confirm action" open={isOpen} closable onClose={handleClose}>
+        react: `<GoabxModal heading="Confirm action" open={isOpen} closable onClose={handleClose}>
   <p>Are you sure you want to proceed with this action?</p>
   <GoabButtonGroup alignment="end" mt="l">
-    <GoabButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabButton>
-    <GoabButton size="compact" onClick={handleConfirm}>Confirm</GoabButton>
+    <GoabxButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabxButton>
+    <GoabxButton size="compact" onClick={handleConfirm}>Confirm</GoabxButton>
   </GoabButtonGroup>
-</GoabModal>`,
+</GoabxModal>`,
         angular: `<goab-modal heading="Confirm action" [open]="isOpen" [closable]="true" (_close)="handleClose()">
   <p>Are you sure you want to proceed with this action?</p>
   <goab-button-group alignment="end" mt="l">
@@ -63,9 +63,9 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'With transition',
       description: 'Modal with animated opening/closing',
       code: {
-        react: `<GoabModal heading="Animated modal" open={isOpen} transition="fast" closable onClose={handleClose}>
+        react: `<GoabxModal heading="Animated modal" open={isOpen} transition="fast" closable onClose={handleClose}>
   <p>This modal animates when opening and closing.</p>
-</GoabModal>`,
+</GoabxModal>`,
         angular: `<goab-modal heading="Animated modal" [open]="isOpen" transition="fast" [closable]="true" (_close)="handleClose()">
   <p>This modal animates when opening and closing.</p>
 </goab-modal>`,
@@ -81,9 +81,9 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'Custom width',
       description: 'Modal with specified maximum width',
       code: {
-        react: `<GoabModal heading="Wide modal" open={isOpen} maxWidth="80ch" closable onClose={handleClose}>
+        react: `<GoabxModal heading="Wide modal" open={isOpen} maxWidth="80ch" closable onClose={handleClose}>
   <p>This modal has a wider maximum width for more content.</p>
-</GoabModal>`,
+</GoabxModal>`,
         angular: `<goab-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" [closable]="true" (_close)="handleClose()">
   <p>This modal has a wider maximum width for more content.</p>
 </goab-modal>`,
@@ -99,13 +99,13 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'Destructive action',
       description: 'Confirmation modal for destructive actions',
       code: {
-        react: `<GoabModal heading="Are you sure you want to delete this item?" open={isOpen} closable onClose={handleClose}>
+        react: `<GoabxModal heading="Are you sure you want to delete this item?" open={isOpen} closable onClose={handleClose}>
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <GoabButtonGroup alignment="end" mt="l">
-    <GoabButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabButton>
-    <GoabButton variant="destructive" size="compact" onClick={handleDelete}>Delete</GoabButton>
+    <GoabxButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabxButton>
+    <GoabxButton variant="destructive" size="compact" onClick={handleDelete}>Delete</GoabxButton>
   </GoabButtonGroup>
-</GoabModal>`,
+</GoabxModal>`,
         angular: `<goab-modal heading="Are you sure you want to delete this item?" [open]="isOpen" [closable]="true" (_close)="handleClose()">
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <goab-button-group alignment="end" mt="l">

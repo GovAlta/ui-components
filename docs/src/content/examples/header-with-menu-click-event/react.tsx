@@ -1,10 +1,6 @@
 import { useState } from "react";
-import {
-  GoabAppHeader,
-  GoabAppHeaderMenu,
-  GoabRadioGroup,
-  GoabRadioItem,
-} from "@abgov/react-components";
+import { GoabxRadioGroup, GoabxRadioItem } from "@abgov/react-components/experimental";
+import { GoabAppHeader, GoabAppHeaderMenu } from "@abgov/react-components";
 import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
 export function HeaderWithMenuClickEvent() {
@@ -16,16 +12,16 @@ export function HeaderWithMenuClickEvent() {
 
   return (
     <>
-      <GoabRadioGroup
+      <GoabxRadioGroup
         name="device"
         value={deviceWidth}
         onChange={(event: GoabRadioGroupOnChangeDetail) =>
           setDeviceWidth(event.value)
         }
       >
-        <GoabRadioItem value="600" label="Desktop" />
-        <GoabRadioItem value="5000" label="Mobile" />
-      </GoabRadioGroup>
+        <GoabxRadioItem value="600" label="Desktop" />
+        <GoabxRadioItem value="5000" label="Mobile" />
+      </GoabxRadioGroup>
 
       <GoabAppHeader
         url="https://example.com"

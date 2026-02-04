@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoabFormItem, GoabInput } from "@abgov/react-components";
+import { GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
 import type { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
 
 export function SlottedHelperTextInAFormItem() {
@@ -16,8 +16,8 @@ export function SlottedHelperTextInAFormItem() {
   );
 
   return (
-    <GoabFormItem label="First name" helpText={helpText}>
-      <GoabInput onChange={onChange} value={value} name="item" />
-    </GoabFormItem>
+    <GoabxFormItem label="First name" helpText={helpText}>
+      <GoabxInput onChange={onChange} value={value} name="item" />
+    </GoabxFormItem>
   );
 }

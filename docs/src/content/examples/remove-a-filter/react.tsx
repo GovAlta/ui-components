@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoabFilterChip } from "@abgov/react-components";
+import { GoabxFilterChip } from "@abgov/react-components/experimental";
 
 export function RemoveAFilter() {
   const [chips, setChips] = useState(["Chip 1", "Chip 2", "Chip 3"]);
@@ -11,7 +11,7 @@ export function RemoveAFilter() {
   return (
     <div>
       {chips.map((chip) => (
-        <GoabFilterChip
+        <GoabxFilterChip
           key={chip}
           content={chip}
           onClick={() => deleteChip(chip)}

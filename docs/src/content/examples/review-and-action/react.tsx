@@ -1,16 +1,13 @@
 import {
-  GoabBlock,
-  GoabButton,
-  GoabContainer,
-  GoabDropdown,
-  GoabDropdownItem,
-  GoabFormItem,
-  GoabGrid,
-  GoabRadioGroup,
-  GoabRadioItem,
-  GoabText,
-  GoabTextarea,
-} from "@abgov/react-components";
+  GoabxButton,
+  GoabxDropdown,
+  GoabxDropdownItem,
+  GoabxFormItem,
+  GoabxRadioGroup,
+  GoabxRadioItem,
+  GoabxTextArea,
+} from "@abgov/react-components/experimental";
+import { GoabBlock, GoabContainer, GoabGrid, GoabText } from "@abgov/react-components";
 
 export function ReviewAndAction() {
   return (
@@ -61,28 +58,28 @@ export function ReviewAndAction() {
             qualify for the Lodge Assistance Program subsidy.
           </GoabText>
 
-          <GoabFormItem label="Case history and new request" mt="l">
-            <GoabRadioGroup name="case" orientation="horizontal" onChange={() => {}}>
-              <GoabRadioItem value="grant" label="Grant" />
-              <GoabRadioItem value="deny" label="Deny" />
-            </GoabRadioGroup>
-          </GoabFormItem>
+          <GoabxFormItem label="Case history and new request" mt="l">
+            <GoabxRadioGroup name="case" orientation="horizontal" onChange={() => {}}>
+              <GoabxRadioItem value="grant" label="Grant" />
+              <GoabxRadioItem value="deny" label="Deny" />
+            </GoabxRadioGroup>
+          </GoabxFormItem>
 
-          <GoabFormItem label="Reason to deny" mt="l">
-            <GoabDropdown name="reason" width="100%" onChange={() => {}}>
-              <GoabDropdownItem value="1" label="Incomplete Application" />
-              <GoabDropdownItem value="2" label="Eligibility Criteria Not Met" />
-              <GoabDropdownItem value="3" label="Documentation Verification Failure" />
-            </GoabDropdown>
-          </GoabFormItem>
+          <GoabxFormItem label="Reason to deny" mt="l">
+            <GoabxDropdown name="reason" width="100%" onChange={() => {}}>
+              <GoabxDropdownItem value="1" label="Incomplete Application" />
+              <GoabxDropdownItem value="2" label="Eligibility Criteria Not Met" />
+              <GoabxDropdownItem value="3" label="Documentation Verification Failure" />
+            </GoabxDropdown>
+          </GoabxFormItem>
 
-          <GoabFormItem label="Message" mt="l">
-            <GoabTextarea name="message" rows={5} width="100%" value="" onChange={() => {}} />
-          </GoabFormItem>
+          <GoabxFormItem label="Message" mt="l">
+            <GoabxTextArea name="message" rows={5} width="100%" value="" onChange={() => {}} />
+          </GoabxFormItem>
 
-          <GoabButton mt="xl" onClick={() => {}}>
+          <GoabxButton mt="xl" onClick={() => {}}>
             Confirm adjournment
-          </GoabButton>
+          </GoabxButton>
         </form>
       </GoabContainer>
     </GoabGrid>

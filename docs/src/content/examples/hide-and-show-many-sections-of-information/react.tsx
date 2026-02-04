@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { GoabAccordion, GoabButton } from "@abgov/react-components";
+import { GoabxButton } from "@abgov/react-components/experimental";
+import { GoabAccordion } from "@abgov/react-components";
 
 export function HideAndShowManySectionsOfInformation() {
   const [expandedAll, setExpandedAll] = useState<boolean>(false);
@@ -28,9 +29,9 @@ export function HideAndShowManySectionsOfInformation() {
 
   return (
     <>
-      <GoabButton type="tertiary" size="compact" mb="m" onClick={() => expandOrCollapseAll()}>
+      <GoabxButton type="tertiary" size="compact" mb="m" onClick={() => expandOrCollapseAll()}>
         {expandedAll ? "Hide all sections" : "Show all sections"}
-      </GoabButton>
+      </GoabxButton>
 
       <GoabAccordion
         open={expandedList.includes(1)}

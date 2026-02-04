@@ -18,7 +18,7 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Simple popover with content',
       code: {
         react: `<GoabPopover>
-  <GoabButton slot="target">Open popover</GoabButton>
+  <GoabxButton slot="target">Open popover</GoabxButton>
   <p>Popover content goes here. It can contain any content.</p>
 </GoabPopover>`,
         angular: `<goab-popover>
@@ -37,19 +37,19 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Popover placement options',
       code: {
         react: `<GoabPopover position="top">
-  <GoabButton slot="target">Top</GoabButton>
+  <GoabxButton slot="target">Top</GoabxButton>
   <p>Content above the trigger.</p>
 </GoabPopover>
 <GoabPopover position="bottom">
-  <GoabButton slot="target">Bottom</GoabButton>
+  <GoabxButton slot="target">Bottom</GoabxButton>
   <p>Content below the trigger.</p>
 </GoabPopover>
 <GoabPopover position="left">
-  <GoabButton slot="target">Left</GoabButton>
+  <GoabxButton slot="target">Left</GoabxButton>
   <p>Content to the left.</p>
 </GoabPopover>
 <GoabPopover position="right">
-  <GoabButton slot="target">Right</GoabButton>
+  <GoabxButton slot="target">Right</GoabxButton>
   <p>Content to the right.</p>
 </GoabPopover>`,
         angular: `<goab-popover position="top">
@@ -92,7 +92,7 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Popover with custom padding',
       code: {
         react: `<GoabPopover padded>
-  <GoabButton slot="target">Show details</GoabButton>
+  <GoabxButton slot="target">Show details</GoabxButton>
   <p>Content with default padding applied.</p>
 </GoabPopover>`,
         angular: `<goab-popover [padded]="true">
@@ -111,7 +111,7 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Popover with constrained width',
       code: {
         react: `<GoabPopover maxWidth="300px">
-  <GoabButton slot="target">More info</GoabButton>
+  <GoabxButton slot="target">More info</GoabxButton>
   <p>This popover has a maximum width of 300 pixels to control content width.</p>
 </GoabPopover>`,
         angular: `<goab-popover maxWidth="300px">

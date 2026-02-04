@@ -17,7 +17,7 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'Basic badge',
       description: 'Simple badge with text',
       code: {
-        react: `<GoabBadge type="default" content="New" emphasis="subtle" icon={false} />`,
+        react: `<GoabxBadge type="default" content="New" emphasis="subtle" icon={false} />`,
         angular: `<goab-badge type="default" content="New" emphasis="subtle" [icon]="false"></goab-badge>`,
         webComponents: `<goa-badge type="default" content="New" emphasis="subtle" icon="false"></goa-badge>`,
       },
@@ -27,11 +27,11 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'Semantic types',
       description: 'Badges for different statuses',
       code: {
-        react: `<GoabBadge type="information" content="Information" />
-<GoabBadge type="important" content="Important" />
-<GoabBadge type="emergency" content="Emergency" />
-<GoabBadge type="success" content="Success" />
-<GoabBadge type="archived" content="Archived" />`,
+        react: `<GoabxBadge type="information" content="Information" />
+<GoabxBadge type="important" content="Important" />
+<GoabxBadge type="emergency" content="Emergency" />
+<GoabxBadge type="success" content="Success" />
+<GoabxBadge type="archived" content="Archived" />`,
         angular: `<goab-badge type="information" content="Information"></goab-badge>
 <goab-badge type="important" content="Important"></goab-badge>
 <goab-badge type="emergency" content="Emergency"></goab-badge>
@@ -49,18 +49,18 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'Extended colours',
       description: 'Additional colour options for categorization',
       code: {
-        react: `<GoabBadge type="sky" content="Sky" icon={false} />
-<GoabBadge type="sky" content="Sky" icon={false} emphasis="subtle" />
-<GoabBadge type="prairie" content="Prairie" icon={false} />
-<GoabBadge type="prairie" content="Prairie" icon={false} emphasis="subtle" />
-<GoabBadge type="lilac" content="Lilac" icon={false} />
-<GoabBadge type="lilac" content="Lilac" icon={false} emphasis="subtle" />
-<GoabBadge type="pasture" content="Pasture" icon={false} />
-<GoabBadge type="pasture" content="Pasture" icon={false} emphasis="subtle" />
-<GoabBadge type="sunset" content="Sunset" icon={false} />
-<GoabBadge type="sunset" content="Sunset" icon={false} emphasis="subtle" />
-<GoabBadge type="dawn" content="Dawn" icon={false} />
-<GoabBadge type="dawn" content="Dawn" icon={false} emphasis="subtle" />`,
+        react: `<GoabxBadge type="sky" content="Sky" icon={false} />
+<GoabxBadge type="sky" content="Sky" icon={false} emphasis="subtle" />
+<GoabxBadge type="prairie" content="Prairie" icon={false} />
+<GoabxBadge type="prairie" content="Prairie" icon={false} emphasis="subtle" />
+<GoabxBadge type="lilac" content="Lilac" icon={false} />
+<GoabxBadge type="lilac" content="Lilac" icon={false} emphasis="subtle" />
+<GoabxBadge type="pasture" content="Pasture" icon={false} />
+<GoabxBadge type="pasture" content="Pasture" icon={false} emphasis="subtle" />
+<GoabxBadge type="sunset" content="Sunset" icon={false} />
+<GoabxBadge type="sunset" content="Sunset" icon={false} emphasis="subtle" />
+<GoabxBadge type="dawn" content="Dawn" icon={false} />
+<GoabxBadge type="dawn" content="Dawn" icon={false} emphasis="subtle" />`,
         angular: `<goab-badge type="sky" content="Sky" [icon]="false"></goab-badge>
 <goab-badge type="sky" content="Sky" [icon]="false" emphasis="subtle"></goab-badge>
 <goab-badge type="prairie" content="Prairie" [icon]="false"></goab-badge>
@@ -92,18 +92,18 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'High emphasis',
       description: 'Strong versions of all badge types',
       code: {
-        react: `<GoabBadge type="default" content="Default" icon={false} />
-<GoabBadge type="information" content="Information" icon={false} />
-<GoabBadge type="important" content="Important" icon={false} />
-<GoabBadge type="emergency" content="Emergency" icon={false} />
-<GoabBadge type="success" content="Success" icon={false} />
-<GoabBadge type="archived" content="Archived" icon={false} />
-<GoabBadge type="sky" content="Sky" icon={false} />
-<GoabBadge type="prairie" content="Prairie" icon={false} />
-<GoabBadge type="lilac" content="Lilac" icon={false} />
-<GoabBadge type="pasture" content="Pasture" icon={false} />
-<GoabBadge type="sunset" content="Sunset" icon={false} />
-<GoabBadge type="dawn" content="Dawn" icon={false} />`,
+        react: `<GoabxBadge type="default" content="Default" icon={false} />
+<GoabxBadge type="information" content="Information" icon={false} />
+<GoabxBadge type="important" content="Important" icon={false} />
+<GoabxBadge type="emergency" content="Emergency" icon={false} />
+<GoabxBadge type="success" content="Success" icon={false} />
+<GoabxBadge type="archived" content="Archived" icon={false} />
+<GoabxBadge type="sky" content="Sky" icon={false} />
+<GoabxBadge type="prairie" content="Prairie" icon={false} />
+<GoabxBadge type="lilac" content="Lilac" icon={false} />
+<GoabxBadge type="pasture" content="Pasture" icon={false} />
+<GoabxBadge type="sunset" content="Sunset" icon={false} />
+<GoabxBadge type="dawn" content="Dawn" icon={false} />`,
         angular: `<goab-badge type="default" content="Default" [icon]="false"></goab-badge>
 <goab-badge type="information" content="Information" [icon]="false"></goab-badge>
 <goab-badge type="important" content="Important" [icon]="false"></goab-badge>
@@ -135,18 +135,18 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'Low emphasis',
       description: 'Subtle versions of all badge types',
       code: {
-        react: `<GoabBadge type="default" content="Default" emphasis="subtle" icon={false} />
-<GoabBadge type="information" content="Information" emphasis="subtle" icon={false} />
-<GoabBadge type="important" content="Important" emphasis="subtle" icon={false} />
-<GoabBadge type="emergency" content="Emergency" emphasis="subtle" icon={false} />
-<GoabBadge type="success" content="Success" emphasis="subtle" icon={false} />
-<GoabBadge type="archived" content="Archived" emphasis="subtle" icon={false} />
-<GoabBadge type="sky" content="Sky" emphasis="subtle" icon={false} />
-<GoabBadge type="prairie" content="Prairie" emphasis="subtle" icon={false} />
-<GoabBadge type="lilac" content="Lilac" emphasis="subtle" icon={false} />
-<GoabBadge type="pasture" content="Pasture" emphasis="subtle" icon={false} />
-<GoabBadge type="sunset" content="Sunset" emphasis="subtle" icon={false} />
-<GoabBadge type="dawn" content="Dawn" emphasis="subtle" icon={false} />`,
+        react: `<GoabxBadge type="default" content="Default" emphasis="subtle" icon={false} />
+<GoabxBadge type="information" content="Information" emphasis="subtle" icon={false} />
+<GoabxBadge type="important" content="Important" emphasis="subtle" icon={false} />
+<GoabxBadge type="emergency" content="Emergency" emphasis="subtle" icon={false} />
+<GoabxBadge type="success" content="Success" emphasis="subtle" icon={false} />
+<GoabxBadge type="archived" content="Archived" emphasis="subtle" icon={false} />
+<GoabxBadge type="sky" content="Sky" emphasis="subtle" icon={false} />
+<GoabxBadge type="prairie" content="Prairie" emphasis="subtle" icon={false} />
+<GoabxBadge type="lilac" content="Lilac" emphasis="subtle" icon={false} />
+<GoabxBadge type="pasture" content="Pasture" emphasis="subtle" icon={false} />
+<GoabxBadge type="sunset" content="Sunset" emphasis="subtle" icon={false} />
+<GoabxBadge type="dawn" content="Dawn" emphasis="subtle" icon={false} />`,
         angular: `<goab-badge type="default" content="Default" emphasis="subtle" [icon]="false"></goab-badge>
 <goab-badge type="information" content="Information" emphasis="subtle" [icon]="false"></goab-badge>
 <goab-badge type="important" content="Important" emphasis="subtle" [icon]="false"></goab-badge>
@@ -178,9 +178,9 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'With custom icon',
       description: 'Badge with an icon',
       code: {
-        react: `<GoabBadge type="success" content="Approved" iconType="checkmark" />
-<GoabBadge type="emergency" content="Rejected" iconType="close" />
-<GoabBadge type="information" content="Pending" iconType="time" />`,
+        react: `<GoabxBadge type="success" content="Approved" iconType="checkmark" />
+<GoabxBadge type="emergency" content="Rejected" iconType="close" />
+<GoabxBadge type="information" content="Pending" iconType="time" />`,
         angular: `<goab-badge type="success" content="Approved" iconType="checkmark"></goab-badge>
 <goab-badge type="emergency" content="Rejected" iconType="close"></goab-badge>
 <goab-badge type="information" content="Pending" iconType="time"></goab-badge>`,
@@ -194,8 +194,8 @@ export const badgeConfigurations: ComponentConfigurations = {
       name: 'Sizes',
       description: 'Medium and large badge sizes',
       code: {
-        react: `<GoabBadge type="default" content="Medium" size="medium" emphasis="subtle" />
-<GoabBadge type="default" content="Large" size="large" emphasis="subtle" />`,
+        react: `<GoabxBadge type="default" content="Medium" size="medium" emphasis="subtle" />
+<GoabxBadge type="default" content="Large" size="large" emphasis="subtle" />`,
         angular: `<goab-badge type="default" content="Medium" size="medium" emphasis="subtle"></goab-badge>
 <goab-badge type="default" content="Large" size="large" emphasis="subtle"></goab-badge>`,
         webComponents: `<goa-badge type="default" content="Medium" size="medium" emphasis="subtle"></goa-badge>

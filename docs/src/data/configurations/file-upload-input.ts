@@ -17,9 +17,9 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       name: 'Basic file upload',
       description: 'Simple file selection input',
       code: {
-        react: `<GoabFormItem label="Upload document" mb="l">
-  <GoabFileUploadInput onChange={handleFileChange} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Upload document" mb="l">
+  <GoabxFileUploadInput onChange={handleFileChange} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Upload document" mb="l">
   <goab-file-upload-input (_change)="handleFileChange($event)"></goab-file-upload-input>
 </goab-form-item>`,
@@ -33,12 +33,12 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       name: 'Accepted file types',
       description: 'Restrict to specific file types',
       code: {
-        react: `<GoabFormItem label="Upload image" mb="l">
-  <GoabFileUploadInput accept="image/*" onChange={handleFileChange} />
-</GoabFormItem>
-<GoabFormItem label="Upload PDF" mb="l">
-  <GoabFileUploadInput accept=".pdf" onChange={handleFileChange} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Upload image" mb="l">
+  <GoabxFileUploadInput accept="image/*" onChange={handleFileChange} />
+</GoabxFormItem>
+<GoabxFormItem label="Upload PDF" mb="l">
+  <GoabxFileUploadInput accept=".pdf" onChange={handleFileChange} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Upload image" mb="l">
   <goab-file-upload-input accept="image/*" (_change)="handleFileChange($event)"></goab-file-upload-input>
 </goab-form-item>
@@ -58,9 +58,9 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       name: 'Multiple files',
       description: 'Allow selecting multiple files',
       code: {
-        react: `<GoabFormItem label="Upload files" mb="l">
-  <GoabFileUploadInput multiple onChange={handleFilesChange} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Upload files" mb="l">
+  <GoabxFileUploadInput multiple onChange={handleFilesChange} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Upload files" mb="l">
   <goab-file-upload-input [multiple]="true" (_change)="handleFilesChange($event)"></goab-file-upload-input>
 </goab-form-item>`,
@@ -74,12 +74,12 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       name: 'Variants',
       description: 'Different visual styles',
       code: {
-        react: `<GoabFormItem label="Button variant" mb="l">
-  <GoabFileUploadInput variant="button" onChange={handleFileChange} />
-</GoabFormItem>
-<GoabFormItem label="Dragdrop variant" mb="l">
-  <GoabFileUploadInput variant="dragdrop" onChange={handleFileChange} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Button variant" mb="l">
+  <GoabxFileUploadInput variant="button" onChange={handleFileChange} />
+</GoabxFormItem>
+<GoabxFormItem label="Dragdrop variant" mb="l">
+  <GoabxFileUploadInput variant="dragdrop" onChange={handleFileChange} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Button variant" mb="l">
   <goab-file-upload-input variant="button" (_change)="handleFileChange($event)"></goab-file-upload-input>
 </goab-form-item>

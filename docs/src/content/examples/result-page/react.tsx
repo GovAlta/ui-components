@@ -1,14 +1,15 @@
-import { GoabCallout, GoabText } from "@abgov/react-components";
+import { GoabxCallout } from "@abgov/react-components/experimental";
+import { GoabText } from "@abgov/react-components";
 
 export function ResultPage() {
   return (
     <>
       <GoabText as="h1" mt="none">You have completed the application</GoabText>
 
-      <GoabCallout type="success" heading="Application submitted">
+      <GoabxCallout type="success" heading="Application submitted">
         <GoabText size="body-m" mt="none" mb="s">You will receive a copy of the confirmation to the email name@email.com</GoabText>
         <GoabText size="body-m" mt="none" mb="none">Your reference number is: <strong>1234ABC</strong></GoabText>
-      </GoabCallout>
+      </GoabxCallout>
 
       <GoabText as="h2" mt="xl" mb="m">What happens next</GoabText>
       <GoabText size="body-m" mt="none" mb="s">We've sent your application to service name. They will contact you to confirm your registration.</GoabText>

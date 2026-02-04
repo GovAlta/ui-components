@@ -1,4 +1,5 @@
-import { GoabButton, GoabTemporaryNotificationCtrl } from "@abgov/react-components";
+import { GoabxButton } from "@abgov/react-components/experimental";
+import { GoabTemporaryNotificationCtrl } from "@abgov/react-components";
 import { TemporaryNotification } from "@abgov/ui-components-common";
 
 export function ShowAUserProgressWhenTheTimeIsUnknown() {
@@ -40,9 +41,9 @@ export function ShowAUserProgressWhenTheTimeIsUnknown() {
   return (
     <>
       <GoabTemporaryNotificationCtrl />
-      <GoabButton type="secondary" leadingIcon="search" onClick={search}>
+      <GoabxButton type="secondary" leadingIcon="search" onClick={search}>
         Search case history
-      </GoabButton>
+      </GoabxButton>
     </>
   );
 }

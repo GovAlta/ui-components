@@ -17,14 +17,14 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
       name: 'Basic side menu heading',
       description: 'Section heading within SideMenu',
       code: {
-        react: `<GoabSideMenu>
-  <GoabSideMenuHeading>Main Menu</GoabSideMenuHeading>
+        react: `<GoabxSideMenu>
+  <GoabxSideMenuHeading>Main Menu</GoabxSideMenuHeading>
   <a href="/dashboard">Dashboard</a>
   <a href="/reports">Reports</a>
-  <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
+  <GoabxSideMenuHeading>Settings</GoabxSideMenuHeading>
   <a href="/profile">Profile</a>
   <a href="/preferences">Preferences</a>
-</GoabSideMenu>`,
+</GoabxSideMenu>`,
         angular: `<goab-side-menu>
   <goab-side-menu-heading>Main Menu</goab-side-menu-heading>
   <a href="/dashboard">Dashboard</a>
