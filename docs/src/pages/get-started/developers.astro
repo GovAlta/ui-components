@@ -1,0 +1,239 @@
+---
+/**
+ * Get Started - Developers (Early Adopters)
+ *
+ * Developer onboarding for the early adopters program.
+ * Package setup, template repo, branches, compatibility, custom components.
+ * Content from Confluence (Brief 65).
+ */
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Get started as a developer"
+  description="Get started with the experimental GoA Design System as a developer"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Get started as a developer</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Onboarding for the early adopters program.
+  </goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" heading="Key differences from v1" mb="m">
+    Early adopters use the same design system packages you're already familiar with, but opt into
+    experimental DS v2 by:
+    <ul style="margin-bottom: 0;">
+      <li>Importing Goabx components</li>
+      <li>Using the experimental prefix (<code>goab</code> &rarr; <code>goabx</code>)</li>
+      <li>Installing and applying <a href="https://www.npmjs.com/package/@abgov/design-tokens" target="_blank">design tokens</a></li>
+    </ul>
+  </goa-callout>
+
+  <goa-callout version="2" type="important" emphasis="low" mt="none" mb="m">
+    Angular 21 has not been formally tested by the design system team. A couple of teams have
+    used it successfully, but we can't guarantee full compatibility.
+  </goa-callout>
+
+  <!-- TODO: Add video walkthrough link when available -->
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="choose-how">Using design system v2</h2>
+
+  <h3 id="option-a">A) Try it in your existing app <goa-badge version="2" type="success" icon="false" emphasis="subtle" ml="m" content="Recommended" style="vertical-align: middle;"></goa-badge></h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    See what changes in your context before committing to a full upgrade.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ol>
+      <li>Create a branch in your repo</li>
+      <li>Apply the initial DS v2 setup changes (imports, prefix, tokens v2)</li>
+      <li>Run the app and review the changes</li>
+      <li>Start with one page and share back with your team — don't try to fix the entire app on day one</li>
+    </ol>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <strong>Why this approach works well:</strong>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    <ul>
+      <li>Quick feedback on impact and risk</li>
+      <li>Easy to abandon (don't merge the branch)</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="option-b" style="margin-top: var(--goa-space-xl);">B) Try the workspace template repo</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Understand the workspace pattern and DS v2 structure before applying it to your product.
+  </goa-text>
+
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ol>
+      <li>
+        Open the template repo for your framework:
+        <ul>
+          <li><a href="#">React</a></li>
+          <li><a href="#">Angular</a></li>
+        </ul>
+      </li>
+      <li>Click <strong>Use this template</strong></li>
+      <li>Choose <strong>Create a new repository</strong></li>
+      <li>Select an owner + repo name</li>
+      <li>Choose <strong>Public</strong> or <strong>Private</strong></li>
+      <li>Click <strong>Create repository from template</strong></li>
+      <li>Clone the repo locally</li>
+      <li>
+        Install and run, go into the directory you created and run the following commands (in order):
+        <ol>
+          <li><code>npm i</code></li>
+          <li><code>npm run build</code></li>
+          <li><code>npm run start</code> (Angular) or <code>npm run dev</code> (React)</li>
+        </ol>
+      </li>
+      <li>Go to the listed port number of your localhost</li>
+    </ol>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="receive-updates">Choose how you receive updates</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    Consider your tolerance for changes.
+  </goa-text>
+
+  <h3 id="next-branch">Next branch <goa-badge version="2" type="success" icon="false" emphasis="subtle" ml="m" content="Recommended" style="vertical-align: middle;"></goa-badge></h3>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    Best balance of stability and the latest changes. You get changes once they have been reviewed
+    and tested.
+  </goa-text>
+
+  <h3 id="dev-branch">Dev branch <goa-badge version="2" type="warning" icon="false" emphasis="subtle" ml="m" content="Most current" style="vertical-align: middle;"></goa-badge></h3>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    Fastest access to new fixes and improvements. Expect more churn and occasional breaking
+    changes.
+  </goa-text>
+
+  <h3 id="production-branch">Production branch <goa-badge version="2" type="midtone" icon="false" emphasis="subtle" ml="m" content="Most stable" style="vertical-align: middle;"></goa-badge></h3>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    Least change over time. Not ideal for early adopters, since fixes and improvements arrive later.
+  </goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" mt="none" mb="m">
+    If you're unsure, start on "Next." Move to Dev if you need fixes sooner, or to
+    Production if you need more stability.
+  </goa-callout>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="compatibility">Compatibility and mixing rules</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    DS v2 experimental isn't "fully backward compatible" in practice because tokens v2 can
+    visually impact DS 1.0 components.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>You'll get the best results when tokens and components are upgraded together.</li>
+      <li>Mixing experimental and production components in one app may be possible, but is not recommended.</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="plan-upgrade">Plan your upgrade scope</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>If possible, start with a small/simple application while you're learning the new system.</li>
+      <li>For most teams with a monorepo setup, you will need to update the import statements and add the design tokens to the specific project you're upgrading.</li>
+    </ul>
+  </goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" mt="none" mb="m">
+    Monorepo setups can vary, which may affect the exact update steps. If you have
+    any questions, book a drop-in hours session.
+    <!-- TODO: Add drop-in hours booking link -->
+  </goa-callout>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="custom-components">Updating your custom components</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Most DDD services have custom UI alongside design system components. Set aside time to
+    review and adjust custom elements to align with DS v2 styles.
+  </goa-text>
+
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Start by identifying where you have custom UI (a quick inventory is enough to begin).</li>
+      <li>
+        Replace hard-coded values in your custom UI with the corresponding Tokens v2
+        values, such as:
+        <ul>
+          <li>Spacing (padding, margin, gaps)</li>
+          <li>Typography (font, size, weight, line height)</li>
+          <li>Color (text, background, borders)</li>
+          <li>Elevation / shadow (surfaces)</li>
+        </ul>
+      </li>
+    </ul>
+  </goa-text>
+
+  <h3 id="token-gaps">When tokens v2 values don't cover what you need</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Identify gaps where Tokens v2 don't cover what you need.</li>
+      <li>Where needed, create custom styles to bridge those gaps, while keeping them consistent with the DS v2 look and feel.</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="getting-help">Getting help and reporting issues</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Use the <a href="https://goa-dio.slack.com/archives/C0A9SN3JM7E" target="_blank"><strong>#design-system-early-adopters</strong></a> Slack channel first so the cohort benefits
+    and the design system team can clarify details before a GitHub issue is created.
+  </goa-text>
+  <goa-callout version="2" type="important" emphasis="low" mb="m">
+    Avoid DMs to individual design system team members, and avoid the standard
+    #design-system-support channel. Use the early adopters channel so all
+    participants can benefit.
+  </goa-callout>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Drop-in hours are the best option for deeper troubleshooting, debugging, or
+    talking through bugs and features.
+  </goa-text>
+  <goa-block version="2" gap="s" direction="row" alignment="center" mb="m">
+    <goa-link version="2"><a href="#">Book drop-in hours</a></goa-link>
+    <goa-text version="2" size="body-s" mt="none" mb="none">(Tuesdays + Fridays, 1–3 PM MT)</goa-text>
+  </goa-block>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="rollback">Rollback and branching strategy</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>The simplest rollback is to reverse the setup steps.</li>
+      <li>If you're working in a branch, rollback can be as simple as not merging the branch.</li>
+      <li>Rollback becomes harder once you've made many manual updates to custom components.</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="end-of-program">End of program expectations</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>
+        Moving to production at the end of the early adopter program (end of March 2026) includes
+        switching <code>goabx</code> &rarr; <code>goab</code>.
+      </li>
+      <li>
+        Once the early adopter program ends:
+        <ul>
+          <li>The experimental library will no longer be updated</li>
+          <li>Design system team effort will shift to the production libraries and packages</li>
+          <li>Web components continue to be updated</li>
+        </ul>
+      </li>
+    </ul>
+  </goa-text>
+</DocumentationPageLayout>

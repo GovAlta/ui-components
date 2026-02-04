@@ -10,6 +10,7 @@
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
+  GoabxWorkSideMenuGroup,
 } from '@abgov/react-components/experimental';
 import { GoabSpacer } from '@abgov/react-components';
 
@@ -33,12 +34,20 @@ interface ParentMenuProps {
 const DIRECT_NAV_SECTIONS: Record<string, string> = {
   'tokens': '/tokens',
   'examples': '/examples',
-  'get-started': '/get-started',
   'foundations': '/foundations',
 };
 
 // Sections that open a submenu
 const SUBMENU_SECTIONS = ['components'];
+
+// Sections that render as expandable groups with sub-items
+const GROUP_SECTIONS: Record<string, Array<{ label: string; url: string }>> = {
+  'get-started': [
+    { label: 'Early Adopters', url: '/get-started' },
+    { label: 'Designers', url: '/get-started/designers' },
+    { label: 'Developers', url: '/get-started/developers' },
+  ],
+};
 
 // Main navigation sections
 const SECTIONS = [
@@ -63,9 +72,27 @@ export function ParentMenu({ isOpen, onToggle, onSelectSection, currentSection }
       {SECTIONS.map((section) => {
         const directUrl = DIRECT_NAV_SECTIONS[section.id];
         const hasSubmenu = SUBMENU_SECTIONS.includes(section.id);
+        const groupItems = GROUP_SECTIONS[section.id];
         const isActive = currentSection === section.id;
 
-        if (directUrl) {
+        if (groupItems) {
+          // Expandable group with sub-items
+          return (
+            <GoabxWorkSideMenuGroup
+              key={section.id}
+              heading={section.label}
+              icon={section.icon}
+            >
+              {groupItems.map((item) => (
+                <GoabxWorkSideMenuItem
+                  key={item.url}
+                  label={item.label}
+                  url={item.url}
+                />
+              ))}
+            </GoabxWorkSideMenuGroup>
+          );
+        } else if (directUrl) {
           // Direct navigation - use url prop
           return (
             <GoabxWorkSideMenuItem
@@ -91,7 +118,7 @@ export function ParentMenu({ isOpen, onToggle, onSelectSection, currentSection }
             </div>
           );
         } else {
-          // Placeholder sections (get-started, foundations) - disabled for now
+          // Placeholder sections - disabled for now
           return (
             <GoabxWorkSideMenuItem
               key={section.id}
