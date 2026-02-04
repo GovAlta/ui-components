@@ -18,7 +18,7 @@ export const tooltipConfigurations: ComponentConfigurations = {
       description: 'Simple tooltip on hover',
       code: {
         react: `<GoabTooltip content="Additional information about this item">
-  <GoabButton>Hover me</GoabButton>
+  <GoabxButton>Hover me</GoabxButton>
 </GoabTooltip>`,
         angular: `<goab-tooltip content="Additional information about this item">
   <goab-button>Hover me</goab-button>
@@ -34,16 +34,16 @@ export const tooltipConfigurations: ComponentConfigurations = {
       description: 'Tooltip placement options',
       code: {
         react: `<GoabTooltip content="Top tooltip" position="top">
-  <GoabButton>Top</GoabButton>
+  <GoabxButton>Top</GoabxButton>
 </GoabTooltip>
 <GoabTooltip content="Bottom tooltip" position="bottom">
-  <GoabButton>Bottom</GoabButton>
+  <GoabxButton>Bottom</GoabxButton>
 </GoabTooltip>
 <GoabTooltip content="Left tooltip" position="left">
-  <GoabButton>Left</GoabButton>
+  <GoabxButton>Left</GoabxButton>
 </GoabTooltip>
 <GoabTooltip content="Right tooltip" position="right">
-  <GoabButton>Right</GoabButton>
+  <GoabxButton>Right</GoabxButton>
 </GoabTooltip>`,
         angular: `<goab-tooltip content="Top tooltip" position="top">
   <goab-button>Top</goab-button>
@@ -93,7 +93,7 @@ export const tooltipConfigurations: ComponentConfigurations = {
       description: 'Tooltip with custom hover delay',
       code: {
         react: `<GoabTooltip content="This appears after 500ms" hoverDelay={500}>
-  <GoabButton>Delayed tooltip</GoabButton>
+  <GoabxButton>Delayed tooltip</GoabxButton>
 </GoabTooltip>`,
         angular: `<goab-tooltip content="This appears after 500ms" [hoverDelay]="500">
   <goab-button>Delayed tooltip</goab-button>

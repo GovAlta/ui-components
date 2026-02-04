@@ -17,15 +17,15 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       name: 'Basic work side menu',
       description: 'Side navigation for internal apps',
       code: {
-        react: `<GoabWorkSideMenu
+        react: `<GoabxWorkSideMenu
   heading="My Application"
   url="/"
   primaryContent={
     <>
-      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      <GoabWorkSideMenuItem icon="document" label="Reports" url="/reports" />
-      <GoabWorkSideMenuItem icon="settings" label="Admin" url="/admin" />
+      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabxWorkSideMenuItem icon="document" label="Reports" url="/reports" />
+      <GoabxWorkSideMenuItem icon="settings" label="Admin" url="/admin" />
     </>
   }
 />`,
@@ -50,18 +50,18 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       name: 'With nested items',
       description: 'Work menu with expandable sub-items',
       code: {
-        react: `<GoabWorkSideMenu
+        react: `<GoabxWorkSideMenu
   heading="My Application"
   url="/"
   primaryContent={
     <>
-      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabWorkSideMenuItem icon="document" label="Documents" url="/documents">
-        <GoabWorkSideMenuItem label="Invoices" url="/documents/invoices" />
-        <GoabWorkSideMenuItem label="Contracts" url="/documents/contracts" />
-        <GoabWorkSideMenuItem label="Reports" url="/documents/reports" />
-      </GoabWorkSideMenuItem>
-      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabxWorkSideMenuItem icon="document" label="Documents" url="/documents">
+        <GoabxWorkSideMenuItem label="Invoices" url="/documents/invoices" />
+        <GoabxWorkSideMenuItem label="Contracts" url="/documents/contracts" />
+        <GoabxWorkSideMenuItem label="Reports" url="/documents/reports" />
+      </GoabxWorkSideMenuItem>
+      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
     </>
   }
 />`,

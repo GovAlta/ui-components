@@ -18,14 +18,14 @@ export const formConfigurations: ComponentConfigurations = {
       description: 'Simple form wrapper',
       code: {
         react: `<GoabForm onSubmit={handleSubmit}>
-  <GoabFormItem label="Name" mb="l">
-    <GoabInput name="name" width="100%" />
-  </GoabFormItem>
-  <GoabFormItem label="Email" mb="l">
-    <GoabInput name="email" type="email" width="100%" />
-  </GoabFormItem>
+  <GoabxFormItem label="Name" mb="l">
+    <GoabxInput name="name" width="100%" />
+  </GoabxFormItem>
+  <GoabxFormItem label="Email" mb="l">
+    <GoabxInput name="email" type="email" width="100%" />
+  </GoabxFormItem>
   <GoabButtonGroup mt="l">
-    <GoabButton type="submit">Submit</GoabButton>
+    <GoabxButton type="submit">Submit</GoabxButton>
   </GoabButtonGroup>
 </GoabForm>`,
         angular: `<goab-form (_submit)="handleSubmit($event)">

@@ -1,34 +1,34 @@
 import {
-  GoabButton,
-  GoabFormItem,
-  GoabLink,
-  GoabRadioGroup,
-  GoabRadioItem,
-  GoabText
-} from "@abgov/react-components";
+  GoabxButton,
+  GoabxFormItem,
+  GoabxLink,
+  GoabxRadioGroup,
+  GoabxRadioItem,
+} from "@abgov/react-components/experimental";
+import { GoabText } from "@abgov/react-components";
 
 export function ShowASimpleProgressIndicatorOnAQuestionPage() {
   return (
     <>
-      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabLink>
+      </GoabxLink>
 
       <GoabText as="h3" size="body-m" mt="xl" mb="m" color="secondary">Question 3 of 9</GoabText>
 
-      <GoabFormItem label="Do you currently live in Canada?" labelSize="large">
-        <GoabRadioGroup
+      <GoabxFormItem label="Do you currently live in Canada?" labelSize="large">
+        <GoabxRadioGroup
           name="canada"
           ariaLabel="Do you currently live in Canada?"
           onChange={() => {}}>
-          <GoabRadioItem value="yes" label="Yes" />
-          <GoabRadioItem value="no" label="No" />
-        </GoabRadioGroup>
-      </GoabFormItem>
+          <GoabxRadioItem value="yes" label="Yes" />
+          <GoabxRadioItem value="no" label="No" />
+        </GoabxRadioGroup>
+      </GoabxFormItem>
 
-      <GoabButton type="submit" mt="2xl">
+      <GoabxButton type="submit" mt="2xl">
         Save and continue
-      </GoabButton>
+      </GoabxButton>
     </>
   );
 }

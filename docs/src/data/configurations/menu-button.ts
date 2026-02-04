@@ -18,7 +18,7 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       description: 'Button with dropdown menu',
       code: {
         react: `<GoabMenuButton>
-  <GoabButton slot="trigger">Actions</GoabButton>
+  <GoabxButton slot="trigger">Actions</GoabxButton>
   <GoabMenuItem label="Edit" onClick={() => {}} />
   <GoabMenuItem label="Copy" onClick={() => {}} />
   <GoabMenuItem label="Delete" onClick={() => {}} />
@@ -68,7 +68,7 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       description: 'Menu items with leading icons',
       code: {
         react: `<GoabMenuButton>
-  <GoabButton slot="trigger">Options</GoabButton>
+  <GoabxButton slot="trigger">Options</GoabxButton>
   <GoabMenuItem label="Download" icon="download" onClick={() => {}} />
   <GoabMenuItem label="Share" icon="share" onClick={() => {}} />
   <GoabMenuItem label="Print" icon="print" onClick={() => {}} />

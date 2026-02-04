@@ -23,8 +23,8 @@ export const cardActionsConfigurations: ComponentConfigurations = {
     <p>Review and submit your application.</p>
   </GoabCardContent>
   <GoabCardActions>
-    <GoabButton type="tertiary">Cancel</GoabButton>
-    <GoabButton>Submit</GoabButton>
+    <GoabxButton type="tertiary">Cancel</GoabxButton>
+    <GoabxButton>Submit</GoabxButton>
   </GoabCardActions>
 </GoabCard>`,
         angular: `<goab-card>

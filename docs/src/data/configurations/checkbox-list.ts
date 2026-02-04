@@ -17,12 +17,12 @@ export const checkboxListConfigurations: ComponentConfigurations = {
       name: 'Basic checkbox list',
       description: 'Group of related checkboxes',
       code: {
-        react: `<GoabFormItem label="Select interests" mb="l">
-  <GoabCheckbox name="sports" text="Sports" />
-  <GoabCheckbox name="music" text="Music" />
-  <GoabCheckbox name="travel" text="Travel" />
-  <GoabCheckbox name="reading" text="Reading" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Select interests" mb="l">
+  <GoabxCheckbox name="sports" text="Sports" />
+  <GoabxCheckbox name="music" text="Music" />
+  <GoabxCheckbox name="travel" text="Travel" />
+  <GoabxCheckbox name="reading" text="Reading" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Select interests" mb="l">
   <goab-checkbox name="sports" text="Sports"></goab-checkbox>
   <goab-checkbox name="music" text="Music"></goab-checkbox>
@@ -42,10 +42,10 @@ export const checkboxListConfigurations: ComponentConfigurations = {
       name: 'With select all',
       description: 'Checkbox list with select all option',
       code: {
-        react: `<GoabCheckbox name="selectAll" text="Select all" indeterminate={someSelected} checked={allSelected} />
-<GoabCheckbox name="option1" text="Option 1" checked={selected.includes('option1')} />
-<GoabCheckbox name="option2" text="Option 2" checked={selected.includes('option2')} />
-<GoabCheckbox name="option3" text="Option 3" checked={selected.includes('option3')} />`,
+        react: `<GoabxCheckbox name="selectAll" text="Select all" indeterminate={someSelected} checked={allSelected} />
+<GoabxCheckbox name="option1" text="Option 1" checked={selected.includes('option1')} />
+<GoabxCheckbox name="option2" text="Option 2" checked={selected.includes('option2')} />
+<GoabxCheckbox name="option3" text="Option 3" checked={selected.includes('option3')} />`,
         angular: `<goab-checkbox name="selectAll" text="Select all" [indeterminate]="someSelected" [checked]="allSelected"></goab-checkbox>
 <goab-checkbox name="option1" text="Option 1" [checked]="isSelected('option1')"></goab-checkbox>
 <goab-checkbox name="option2" text="Option 2" [checked]="isSelected('option2')"></goab-checkbox>
@@ -61,11 +61,11 @@ export const checkboxListConfigurations: ComponentConfigurations = {
       name: 'With error',
       description: 'Checkbox list showing validation error',
       code: {
-        react: `<GoabFormItem label="Select at least one" error="Please select at least one option" mb="l">
-  <GoabCheckbox name="opt1" text="Option 1" error />
-  <GoabCheckbox name="opt2" text="Option 2" error />
-  <GoabCheckbox name="opt3" text="Option 3" error />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Select at least one" error="Please select at least one option" mb="l">
+  <GoabxCheckbox name="opt1" text="Option 1" error />
+  <GoabxCheckbox name="opt2" text="Option 2" error />
+  <GoabxCheckbox name="opt3" text="Option 3" error />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Select at least one" error="Please select at least one option" mb="l">
   <goab-checkbox name="opt1" text="Option 1" [error]="true"></goab-checkbox>
   <goab-checkbox name="opt2" text="Option 2" [error]="true"></goab-checkbox>

@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { GoabxButton } from "@abgov/react-components/experimental";
 import {
-  GoabButton,
   GoabFormStep,
   GoabFormStepper,
   GoabPages,
   GoabSkeleton,
-  GoabSpacer
+  GoabSpacer,
 } from "@abgov/react-components";
 import { GoabFormStepperOnChangeDetail } from "@abgov/ui-components-common";
 
@@ -50,12 +50,12 @@ export function FormStepperWithControlledNavigation() {
       </GoabPages>
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <GoabButton type="secondary" onClick={() => setPage(step - 1)}>
+        <GoabxButton type="secondary" onClick={() => setPage(step - 1)}>
           Previous
-        </GoabButton>
-        <GoabButton type="primary" onClick={() => setPage(step + 1)}>
+        </GoabxButton>
+        <GoabxButton type="primary" onClick={() => setPage(step + 1)}>
           Next
-        </GoabButton>
+        </GoabxButton>
       </div>
     </>
   );

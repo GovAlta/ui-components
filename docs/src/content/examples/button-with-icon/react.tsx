@@ -1,11 +1,12 @@
-import { GoabButton, GoabButtonGroup } from "@abgov/react-components";
+import { GoabxButton } from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 
 export function ButtonWithIcon() {
   return (
     <GoabButtonGroup>
-      <GoabButton leadingIcon="arrow-back">Go back</GoabButton>
-      <GoabButton trailingIcon="arrow-forward">Continue</GoabButton>
-      <GoabButton type="secondary" leadingIcon="add">Add item</GoabButton>
+      <GoabxButton leadingIcon="arrow-back">Go back</GoabxButton>
+      <GoabxButton trailingIcon="arrow-forward">Continue</GoabxButton>
+      <GoabxButton type="secondary" leadingIcon="add">Add item</GoabxButton>
     </GoabButtonGroup>
   );
 }

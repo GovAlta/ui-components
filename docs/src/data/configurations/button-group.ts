@@ -18,8 +18,8 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Group of buttons with default spacing',
       code: {
         react: `<GoabButtonGroup>
-  <GoabButton type="secondary">Cancel</GoabButton>
-  <GoabButton>Submit</GoabButton>
+  <GoabxButton type="secondary">Cancel</GoabxButton>
+  <GoabxButton>Submit</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group>
   <goab-button type="secondary">Cancel</goab-button>
@@ -37,13 +37,13 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Different alignment options',
       code: {
         react: `<GoabButtonGroup alignment="start">
-  <GoabButton>Start aligned</GoabButton>
+  <GoabxButton>Start aligned</GoabxButton>
 </GoabButtonGroup>
 <GoabButtonGroup alignment="center">
-  <GoabButton>Center aligned</GoabButton>
+  <GoabxButton>Center aligned</GoabxButton>
 </GoabButtonGroup>
 <GoabButtonGroup alignment="end">
-  <GoabButton>End aligned</GoabButton>
+  <GoabxButton>End aligned</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group alignment="start">
   <goab-button>Start aligned</goab-button>
@@ -71,12 +71,12 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Button group with specific spacing',
       code: {
         react: `<GoabButtonGroup gap="relaxed">
-  <GoabButton type="secondary">Back</GoabButton>
-  <GoabButton>Continue</GoabButton>
+  <GoabxButton type="secondary">Back</GoabxButton>
+  <GoabxButton>Continue</GoabxButton>
 </GoabButtonGroup>
 <GoabButtonGroup gap="compact">
-  <GoabButton type="secondary" size="compact">Back</GoabButton>
-  <GoabButton size="compact">Continue</GoabButton>
+  <GoabxButton type="secondary" size="compact">Back</GoabxButton>
+  <GoabxButton size="compact">Continue</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group gap="relaxed">
   <goab-button type="secondary">Back</goab-button>
@@ -102,9 +102,9 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Common pattern for form button placement',
       code: {
         react: `<GoabButtonGroup alignment="start">
-  <GoabButton type="primary">Save and continue</GoabButton>
-  <GoabButton type="secondary">Save as draft</GoabButton>
-  <GoabButton type="tertiary">Cancel</GoabButton>
+  <GoabxButton type="primary">Save and continue</GoabxButton>
+  <GoabxButton type="secondary">Save as draft</GoabxButton>
+  <GoabxButton type="tertiary">Cancel</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group alignment="start">
   <goab-button type="primary">Save and continue</goab-button>
@@ -128,8 +128,8 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
 };
 
 <GoabButtonGroup>
-  <GoabButton>Submit</GoabButton>
-  <GoabButton type="secondary">Save draft</GoabButton>
+  <GoabxButton>Submit</GoabxButton>
+  <GoabxButton type="secondary">Save draft</GoabxButton>
   <GoabMenuButton text="More" type="tertiary" onAction={handleAction}>
     <GoabMenuAction text="Preview" action="preview" />
     <GoabMenuAction text="Duplicate" action="duplicate" />

@@ -17,13 +17,13 @@ export const footerNavSectionConfigurations: ComponentConfigurations = {
       name: 'Basic footer nav section',
       description: 'Navigation section within Footer',
       code: {
-        react: `<GoabFooter>
-  <GoabFooterNavSection heading="Services">
+        react: `<GoabxAppFooter>
+  <GoabxAppFooterNavSection heading="Services">
     <a href="/apply">Apply online</a>
     <a href="/renew">Renew</a>
     <a href="/check-status">Check status</a>
-  </GoabFooterNavSection>
-</GoabFooter>`,
+  </GoabxAppFooterNavSection>
+</GoabxAppFooter>`,
         angular: `<goab-footer>
   <goab-footer-nav-section heading="Services">
     <a href="/apply">Apply online</a>

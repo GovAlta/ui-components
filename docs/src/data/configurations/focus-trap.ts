@@ -18,13 +18,13 @@ export const focusTrapConfigurations: ComponentConfigurations = {
       description: 'Container that traps keyboard focus',
       code: {
         react: `<GoabFocusTrap active={isActive}>
-  <GoabFormItem label="Username" mb="l">
-    <GoabInput name="username" width="100%" />
-  </GoabFormItem>
-  <GoabFormItem label="Password" mb="l">
-    <GoabInput name="password" type="password" width="100%" />
-  </GoabFormItem>
-  <GoabButton>Submit</GoabButton>
+  <GoabxFormItem label="Username" mb="l">
+    <GoabxInput name="username" width="100%" />
+  </GoabxFormItem>
+  <GoabxFormItem label="Password" mb="l">
+    <GoabxInput name="password" type="password" width="100%" />
+  </GoabxFormItem>
+  <GoabxButton>Submit</GoabxButton>
 </GoabFocusTrap>`,
         angular: `<goab-focus-trap [active]="isActive">
   <goab-form-item label="Username" mb="l">

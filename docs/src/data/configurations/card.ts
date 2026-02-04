@@ -95,8 +95,8 @@ export const cardConfigurations: ComponentConfigurations = {
     <p>Review your application status and next steps.</p>
   </GoabCardContent>
   <GoabCardActions>
-    <GoabButton type="tertiary">View details</GoabButton>
-    <GoabButton>Continue</GoabButton>
+    <GoabxButton type="tertiary">View details</GoabxButton>
+    <GoabxButton>Continue</GoabxButton>
   </GoabCardActions>
 </GoabCard>`,
         angular: `<goab-card>

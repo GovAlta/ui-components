@@ -17,7 +17,7 @@ export const paginationConfigurations: ComponentConfigurations = {
       name: 'Basic pagination',
       description: 'Simple pagination with page numbers',
       code: {
-        react: `<GoabPagination
+        react: `<GoabxPagination
   page={1}
   itemCount={100}
   perPageCount={10}
@@ -41,13 +41,13 @@ export const paginationConfigurations: ComponentConfigurations = {
       name: 'Variants',
       description: 'Different pagination styles',
       code: {
-        react: `<GoabPagination
+        react: `<GoabxPagination
   page={1}
   itemCount={50}
   perPageCount={10}
   variant="all"
 />
-<GoabPagination
+<GoabxPagination
   page={1}
   itemCount={50}
   perPageCount={10}
@@ -84,7 +84,7 @@ export const paginationConfigurations: ComponentConfigurations = {
       name: 'Middle page',
       description: 'Pagination showing middle page selected',
       code: {
-        react: `<GoabPagination
+        react: `<GoabxPagination
   page={5}
   itemCount={100}
   perPageCount={10}

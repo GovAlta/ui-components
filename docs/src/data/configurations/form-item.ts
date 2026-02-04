@@ -18,9 +18,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       name: 'Basic example',
       description: 'Form item with label wrapping an input',
       code: {
-        react: `<GoabFormItem label="Email address" mb="l">
-  <GoabInput name="email" type="email" width="100%" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Email address" mb="l">
+  <GoabxInput name="email" type="email" width="100%" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Email address" mb="l">
   <goab-input name="email" type="email" width="100%"></goab-input>
 </goab-form-item>`,
@@ -34,9 +34,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       name: 'With help text',
       description: 'Form item with additional guidance',
       code: {
-        react: `<GoabFormItem label="Password" helpText="Must be at least 8 characters" mb="l">
-  <GoabInput name="password" type="password" width="100%" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Password" helpText="Must be at least 8 characters" mb="l">
+  <GoabxInput name="password" type="password" width="100%" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
   <goab-input name="password" type="password" width="100%"></goab-input>
 </goab-form-item>`,
@@ -50,9 +50,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       name: 'Required field',
       description: 'Form item marked as required',
       code: {
-        react: `<GoabFormItem label="Full name" requirement="required" mb="l">
-  <GoabInput name="fullName" width="100%" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Full name" requirement="required" mb="l">
+  <GoabxInput name="fullName" width="100%" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Full name" requirement="required" mb="l">
   <goab-input name="fullName" width="100%"></goab-input>
 </goab-form-item>`,
@@ -66,9 +66,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       name: 'Optional field',
       description: 'Form item marked as optional',
       code: {
-        react: `<GoabFormItem label="Middle name" requirement="optional" mb="l">
-  <GoabInput name="middleName" width="100%" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Middle name" requirement="optional" mb="l">
+  <GoabxInput name="middleName" width="100%" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Middle name" requirement="optional" mb="l">
   <goab-input name="middleName" width="100%"></goab-input>
 </goab-form-item>`,
@@ -82,9 +82,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       name: 'With error',
       description: 'Form item showing validation error',
       code: {
-        react: `<GoabFormItem label="Email address" error="Please enter a valid email address" mb="l">
-  <GoabInput name="email" type="email" error width="100%" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Email address" error="Please enter a valid email address" mb="l">
+  <GoabxInput name="email" type="email" error width="100%" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Email address" error="Please enter a valid email address" mb="l">
   <goab-input name="email" type="email" [error]="true" width="100%"></goab-input>
 </goab-form-item>`,
@@ -98,15 +98,15 @@ export const formItemConfigurations: ComponentConfigurations = {
       name: 'Label sizes',
       description: 'Different label size options',
       code: {
-        react: `<GoabFormItem label="Compact label" labelSize="compact" mb="l">
-  <GoabInput name="compact" width="100%" />
-</GoabFormItem>
-<GoabFormItem label="Regular label" labelSize="regular" mb="l">
-  <GoabInput name="regular" width="100%" />
-</GoabFormItem>
-<GoabFormItem label="Large label" labelSize="large" mb="l">
-  <GoabInput name="large" width="100%" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Compact label" labelSize="compact" mb="l">
+  <GoabxInput name="compact" width="100%" />
+</GoabxFormItem>
+<GoabxFormItem label="Regular label" labelSize="regular" mb="l">
+  <GoabxInput name="regular" width="100%" />
+</GoabxFormItem>
+<GoabxFormItem label="Large label" labelSize="large" mb="l">
+  <GoabxInput name="large" width="100%" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Compact label" labelSize="compact" mb="l">
   <goab-input name="compact" width="100%"></goab-input>
 </goab-form-item>

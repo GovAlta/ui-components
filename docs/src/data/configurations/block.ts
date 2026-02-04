@@ -83,19 +83,19 @@ export const blockConfigurations: ComponentConfigurations = {
       description: 'Horizontal alignment options',
       code: {
         react: `<GoabBlock alignment="start">
-  <GoabFormItem label="Start aligned">
-    <GoabInput name="start" width="20ch" />
-  </GoabFormItem>
+  <GoabxFormItem label="Start aligned">
+    <GoabxInput name="start" width="20ch" />
+  </GoabxFormItem>
 </GoabBlock>
 <GoabBlock alignment="center">
-  <GoabFormItem label="Center aligned">
-    <GoabInput name="center" width="20ch" />
-  </GoabFormItem>
+  <GoabxFormItem label="Center aligned">
+    <GoabxInput name="center" width="20ch" />
+  </GoabxFormItem>
 </GoabBlock>
 <GoabBlock alignment="end">
-  <GoabFormItem label="End aligned">
-    <GoabInput name="end" width="20ch" />
-  </GoabFormItem>
+  <GoabxFormItem label="End aligned">
+    <GoabxInput name="end" width="20ch" />
+  </GoabxFormItem>
 </GoabBlock>`,
         angular: `<goab-block alignment="start">
   <goab-form-item label="Start aligned">
@@ -135,12 +135,12 @@ export const blockConfigurations: ComponentConfigurations = {
       description: 'Items arranged horizontally',
       code: {
         react: `<GoabBlock direction="row" gap="l">
-  <GoabFormItem label="First name">
-    <GoabInput name="firstName" />
-  </GoabFormItem>
-  <GoabFormItem label="Last name">
-    <GoabInput name="lastName" />
-  </GoabFormItem>
+  <GoabxFormItem label="First name">
+    <GoabxInput name="firstName" />
+  </GoabxFormItem>
+  <GoabxFormItem label="Last name">
+    <GoabxInput name="lastName" />
+  </GoabxFormItem>
 </GoabBlock>`,
         angular: `<goab-block direction="row" gap="l">
   <goab-form-item label="First name">

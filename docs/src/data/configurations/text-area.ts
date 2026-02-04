@@ -17,9 +17,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       name: 'Basic example',
       description: 'Text area wrapped in FormItem with label',
       code: {
-        react: `<GoabFormItem label="Comments" mb="l">
-  <GoabTextArea name="comments" />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Comments" mb="l">
+  <GoabxTextArea name="comments" />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Comments" mb="l">
   <goab-textarea name="comments"></goab-textarea>
 </goab-form-item>`,
@@ -33,9 +33,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       name: 'With placeholder',
       description: 'Text area with placeholder text',
       code: {
-        react: `<GoabFormItem label="Feedback" mb="l">
-  <GoabTextArea name="feedback" placeholder="Enter your feedback here..." />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Feedback" mb="l">
+  <GoabxTextArea name="feedback" placeholder="Enter your feedback here..." />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Feedback" mb="l">
   <goab-textarea name="feedback" placeholder="Enter your feedback here..."></goab-textarea>
 </goab-form-item>`,
@@ -49,9 +49,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       name: 'Custom rows',
       description: 'Text area with custom height',
       code: {
-        react: `<GoabFormItem label="Description" mb="l">
-  <GoabTextArea name="description" rows={6} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Description" mb="l">
+  <GoabxTextArea name="description" rows={6} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Description" mb="l">
   <goab-textarea name="description" [rows]="6"></goab-textarea>
 </goab-form-item>`,
@@ -65,9 +65,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       name: 'Character count',
       description: 'Text area with character limit',
       code: {
-        react: `<GoabFormItem label="Bio" helpText="Maximum 200 characters" mb="l">
-  <GoabTextArea name="bio" countBy="character" maxCount={200} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Bio" helpText="Maximum 200 characters" mb="l">
+  <GoabxTextArea name="bio" countBy="character" maxCount={200} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Bio" helpText="Maximum 200 characters" mb="l">
   <goab-textarea name="bio" countby="character" [maxCount]="200"></goab-textarea>
 </goab-form-item>`,
@@ -81,9 +81,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       name: 'Word count',
       description: 'Text area with word limit',
       code: {
-        react: `<GoabFormItem label="Essay" helpText="Maximum 500 words" mb="l">
-  <GoabTextArea name="essay" countBy="word" maxCount={500} rows={8} />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Essay" helpText="Maximum 500 words" mb="l">
+  <GoabxTextArea name="essay" countBy="word" maxCount={500} rows={8} />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Essay" helpText="Maximum 500 words" mb="l">
   <goab-textarea name="essay" countby="word" [maxCount]="500" [rows]="8"></goab-textarea>
 </goab-form-item>`,
@@ -97,15 +97,15 @@ export const textAreaConfigurations: ComponentConfigurations = {
       name: 'States',
       description: 'Disabled, readonly, and error states',
       code: {
-        react: `<GoabFormItem label="Disabled" mb="l">
-  <GoabTextArea name="disabled" disabled value="Cannot edit this content" />
-</GoabFormItem>
-<GoabFormItem label="Read-only" mb="l">
-  <GoabTextArea name="readonly" readOnly value="View only content" />
-</GoabFormItem>
-<GoabFormItem label="With error" error="This field is required" mb="l">
-  <GoabTextArea name="error" error />
-</GoabFormItem>`,
+        react: `<GoabxFormItem label="Disabled" mb="l">
+  <GoabxTextArea name="disabled" disabled value="Cannot edit this content" />
+</GoabxFormItem>
+<GoabxFormItem label="Read-only" mb="l">
+  <GoabxTextArea name="readonly" readOnly value="View only content" />
+</GoabxFormItem>
+<GoabxFormItem label="With error" error="This field is required" mb="l">
+  <GoabxTextArea name="error" error />
+</GoabxFormItem>`,
         angular: `<goab-form-item label="Disabled" mb="l">
   <goab-textarea name="disabled" [disabled]="true" value="Cannot edit this content"></goab-textarea>
 </goab-form-item>

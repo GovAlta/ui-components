@@ -1,24 +1,25 @@
 import { useState } from "react";
-import { GoabButton, GoabButtonGroup, GoabModal } from "@abgov/react-components";
+import { GoabxButton, GoabxModal } from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 
 export function WarnAUserOfADeadline() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <GoabButton type="secondary" onClick={() => setOpen(true)}>
+      <GoabxButton type="secondary" onClick={() => setOpen(true)}>
         Save for later
-      </GoabButton>
-      <GoabModal
+      </GoabxButton>
+      <GoabxModal
         heading="Complete submission prior to 1PM"
         calloutVariant="important"
         open={open}
         onClose={() => setOpen(false)}
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabButton type="primary" onClick={() => setOpen(false)}>
+            <GoabxButton type="primary" onClick={() => setOpen(false)}>
               I understand
-            </GoabButton>
+            </GoabxButton>
           </GoabButtonGroup>
         }
       >
@@ -27,7 +28,7 @@ export function WarnAUserOfADeadline() {
           location does not accept adjournment requests past 1PM MST. Please submit your
           adjournment request as soon as possible.
         </p>
-      </GoabModal>
+      </GoabxModal>
     </>
   );
 }

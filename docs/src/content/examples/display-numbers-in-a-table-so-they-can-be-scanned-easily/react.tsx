@@ -1,8 +1,8 @@
-import { GoabTable } from "@abgov/react-components";
+import { GoabxTable } from "@abgov/react-components/experimental";
 
 export function DisplayNumbersInATableSoTheyCanBeScannedEasily() {
   return (
-    <GoabTable width="100%">
+    <GoabxTable width="100%">
       <thead>
         <tr>
           <th>First name</th>
@@ -37,6 +37,6 @@ export function DisplayNumbersInATableSoTheyCanBeScannedEasily() {
           <td className="goa-table-number-column">7</td>
         </tr>
       </tbody>
-    </GoabTable>
+    </GoabxTable>
   );
 }

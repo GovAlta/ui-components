@@ -1,8 +1,4 @@
-import {
-  GoabButtonGroup,
-  GoabIconButton,
-  GoabTooltip
-} from "@abgov/react-components";
+import { GoabButtonGroup, GoabIconButton, GoabTooltip } from "@abgov/react-components";
 
 export function ShowALabelOnAnIconOnlyButton() {
   return (

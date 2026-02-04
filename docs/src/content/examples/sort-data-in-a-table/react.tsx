@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GoabTable, GoabTableSortHeader } from "@abgov/react-components";
+import { GoabxTable, GoabxTableSortHeader } from "@abgov/react-components/experimental";
 import type { GoabTableOnSortDetail } from "@abgov/ui-components-common";
 
 interface User {
@@ -30,19 +30,19 @@ export function SortDataInATable() {
   }
 
   return (
-    <GoabTable onSort={sortData} width="100%">
+    <GoabxTable onSort={sortData} width="100%">
       <thead>
         <tr>
           <th>
-            <GoabTableSortHeader name="firstName">First name</GoabTableSortHeader>
+            <GoabxTableSortHeader name="firstName">First name</GoabxTableSortHeader>
           </th>
           <th>
-            <GoabTableSortHeader name="lastName">Last name</GoabTableSortHeader>
+            <GoabxTableSortHeader name="lastName">Last name</GoabxTableSortHeader>
           </th>
           <th>
-            <GoabTableSortHeader name="age" direction="asc">
+            <GoabxTableSortHeader name="age" direction="asc">
               Age
-            </GoabTableSortHeader>
+            </GoabxTableSortHeader>
           </th>
         </tr>
       </thead>
@@ -55,6 +55,6 @@ export function SortDataInATable() {
           </tr>
         ))}
       </tbody>
-    </GoabTable>
+    </GoabxTable>
   );
 }

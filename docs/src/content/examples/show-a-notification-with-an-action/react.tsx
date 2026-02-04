@@ -1,4 +1,5 @@
-import { GoabButton, GoabTemporaryNotificationCtrl } from "@abgov/react-components";
+import { GoabxButton } from "@abgov/react-components/experimental";
+import { GoabTemporaryNotificationCtrl } from "@abgov/react-components";
 import { TemporaryNotification } from "@abgov/ui-components-common";
 
 export function ShowANotificationWithAnAction() {
@@ -17,7 +18,7 @@ export function ShowANotificationWithAnAction() {
   return (
     <>
       <GoabTemporaryNotificationCtrl />
-      <GoabButton onClick={comment}>Comment</GoabButton>
+      <GoabxButton onClick={comment}>Comment</GoabxButton>
     </>
   );
 }
