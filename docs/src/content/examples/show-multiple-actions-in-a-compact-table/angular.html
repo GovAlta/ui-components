@@ -1,4 +1,4 @@
-<goab-table width="100%">
+<goabx-table width="100%">
   <thead>
     <tr>
       <th>Status</th>
@@ -10,7 +10,7 @@
   <tbody>
     <tr *ngFor="let row of rows">
       <td>
-        <goab-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goab-badge>
+        <goabx-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goabx-badge>
       </td>
       <td>{{ row.name }}</td>
       <td class="goa-table-number-column">{{ row.id }}</td>
@@ -23,4 +23,4 @@
       </td>
     </tr>
   </tbody>
-</goab-table>
+</goabx-table>

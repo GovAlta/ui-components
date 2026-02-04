@@ -27,22 +27,22 @@ export const focusTrapConfigurations: ComponentConfigurations = {
   <GoabxButton>Submit</GoabxButton>
 </GoabFocusTrap>`,
         angular: `<goab-focus-trap [active]="isActive">
-  <goab-form-item label="Username" mb="l">
-    <goab-input name="username" width="100%"></goab-input>
-  </goab-form-item>
-  <goab-form-item label="Password" mb="l">
-    <goab-input name="password" type="password" width="100%"></goab-input>
-  </goab-form-item>
-  <goab-button>Submit</goab-button>
+  <goabx-form-item label="Username" mb="l">
+    <goabx-input name="username" width="100%"></goabx-input>
+  </goabx-form-item>
+  <goabx-form-item label="Password" mb="l">
+    <goabx-input name="password" type="password" width="100%"></goabx-input>
+  </goabx-form-item>
+  <goabx-button>Submit</goabx-button>
 </goab-focus-trap>`,
         webComponents: `<goa-focus-trap active>
-  <goa-form-item label="Username" mb="l">
-    <goa-input name="username" width="100%"></goa-input>
+  <goa-form-item version="2" label="Username" mb="l">
+    <goa-input version="2" name="username" width="100%"></goa-input>
   </goa-form-item>
-  <goa-form-item label="Password" mb="l">
-    <goa-input name="password" type="password" width="100%"></goa-input>
+  <goa-form-item version="2" label="Password" mb="l">
+    <goa-input version="2" name="password" type="password" width="100%"></goa-input>
   </goa-form-item>
-  <goa-button>Submit</goa-button>
+  <goa-button version="2">Submit</goa-button>
 </goa-focus-trap>`,
       },
     },

@@ -18,8 +18,8 @@ export const calendarConfigurations: ComponentConfigurations = {
       description: 'Simple date calendar',
       code: {
         react: `<GoabxCalendar name="calendar" onChange={handleDateChange} />`,
-        angular: `<goab-calendar name="calendar" (_change)="handleDateChange($event)"></goab-calendar>`,
-        webComponents: `<goa-calendar name="calendar"></goa-calendar>`,
+        angular: `<goabx-calendar name="calendar" (_change)="handleDateChange($event)"></goabx-calendar>`,
+        webComponents: `<goa-calendar version="2" name="calendar"></goa-calendar>`,
       },
     },
     {
@@ -28,8 +28,8 @@ export const calendarConfigurations: ComponentConfigurations = {
       description: 'Calendar with preset selection',
       code: {
         react: `<GoabxCalendar name="calendar" value="2024-06-15" onChange={handleDateChange} />`,
-        angular: `<goab-calendar name="calendar" value="2024-06-15" (_change)="handleDateChange($event)"></goab-calendar>`,
-        webComponents: `<goa-calendar name="calendar" value="2024-06-15"></goa-calendar>`,
+        angular: `<goabx-calendar name="calendar" value="2024-06-15" (_change)="handleDateChange($event)"></goabx-calendar>`,
+        webComponents: `<goa-calendar version="2" name="calendar" value="2024-06-15"></goa-calendar>`,
       },
     },
     {
@@ -43,13 +43,13 @@ export const calendarConfigurations: ComponentConfigurations = {
   max="2024-12-31"
   onChange={handleDateChange}
 />`,
-        angular: `<goab-calendar
+        angular: `<goabx-calendar
   name="booking"
   min="2024-01-01"
   max="2024-12-31"
   (_change)="handleDateChange($event)">
-</goab-calendar>`,
-        webComponents: `<goa-calendar
+</goabx-calendar>`,
+        webComponents: `<goa-calendar version="2"
   name="booking"
   min="2024-01-01"
   max="2024-12-31">

@@ -40,19 +40,19 @@ export const modalConfigurations: ComponentConfigurations = {
     <GoabxButton size="compact" onClick={handleConfirm}>Confirm</GoabxButton>
   </GoabButtonGroup>
 </GoabxModal>`,
-        angular: `<goab-modal heading="Confirm action" [open]="isOpen" [closable]="true" (_close)="handleClose()">
+        angular: `<goabx-modal heading="Confirm action" [open]="isOpen" [closable]="true" (_close)="handleClose()">
   <p>Are you sure you want to proceed with this action?</p>
   <goab-button-group alignment="end" mt="l">
-    <goab-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goab-button>
-    <goab-button size="compact" (_click)="handleConfirm()">Confirm</goab-button>
+    <goabx-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goabx-button>
+    <goabx-button size="compact" (_click)="handleConfirm()">Confirm</goabx-button>
   </goab-button-group>
-</goab-modal>`,
-        webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal id="demo-modal" heading="Confirm action" closable>
+</goabx-modal>`,
+        webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
+<goa-modal version="2" id="demo-modal" heading="Confirm action" closable>
   <p>Are you sure you want to proceed with this action?</p>
   <goa-button-group alignment="end" mt="l">
-    <goa-button type="secondary" size="compact">Cancel</goa-button>
-    <goa-button size="compact">Confirm</goa-button>
+    <goa-button version="2" type="secondary" size="compact">Cancel</goa-button>
+    <goa-button version="2" size="compact">Confirm</goa-button>
   </goa-button-group>
 </goa-modal>
 <script>${modalScript}</script>`,
@@ -66,11 +66,11 @@ export const modalConfigurations: ComponentConfigurations = {
         react: `<GoabxModal heading="Animated modal" open={isOpen} transition="fast" closable onClose={handleClose}>
   <p>This modal animates when opening and closing.</p>
 </GoabxModal>`,
-        angular: `<goab-modal heading="Animated modal" [open]="isOpen" transition="fast" [closable]="true" (_close)="handleClose()">
+        angular: `<goabx-modal heading="Animated modal" [open]="isOpen" transition="fast" [closable]="true" (_close)="handleClose()">
   <p>This modal animates when opening and closing.</p>
-</goab-modal>`,
-        webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal id="demo-modal" heading="Animated modal" transition="fast" closable>
+</goabx-modal>`,
+        webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
+<goa-modal version="2" id="demo-modal" heading="Animated modal" transition="fast" closable>
   <p>This modal animates when opening and closing.</p>
 </goa-modal>
 <script>${modalScript}</script>`,
@@ -84,11 +84,11 @@ export const modalConfigurations: ComponentConfigurations = {
         react: `<GoabxModal heading="Wide modal" open={isOpen} maxWidth="80ch" closable onClose={handleClose}>
   <p>This modal has a wider maximum width for more content.</p>
 </GoabxModal>`,
-        angular: `<goab-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" [closable]="true" (_close)="handleClose()">
+        angular: `<goabx-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" [closable]="true" (_close)="handleClose()">
   <p>This modal has a wider maximum width for more content.</p>
-</goab-modal>`,
-        webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal id="demo-modal" heading="Wide modal" maxwidth="80ch" closable>
+</goabx-modal>`,
+        webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
+<goa-modal version="2" id="demo-modal" heading="Wide modal" maxwidth="80ch" closable>
   <p>This modal has a wider maximum width for more content.</p>
 </goa-modal>
 <script>${modalScript}</script>`,
@@ -106,19 +106,19 @@ export const modalConfigurations: ComponentConfigurations = {
     <GoabxButton variant="destructive" size="compact" onClick={handleDelete}>Delete</GoabxButton>
   </GoabButtonGroup>
 </GoabxModal>`,
-        angular: `<goab-modal heading="Are you sure you want to delete this item?" [open]="isOpen" [closable]="true" (_close)="handleClose()">
+        angular: `<goabx-modal heading="Are you sure you want to delete this item?" [open]="isOpen" [closable]="true" (_close)="handleClose()">
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <goab-button-group alignment="end" mt="l">
-    <goab-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goab-button>
-    <goab-button variant="destructive" size="compact" (_click)="handleDelete()">Delete</goab-button>
+    <goabx-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goabx-button>
+    <goabx-button variant="destructive" size="compact" (_click)="handleDelete()">Delete</goabx-button>
   </goab-button-group>
-</goab-modal>`,
-        webComponents: `<goa-button id="open-modal">Open modal</goa-button>
-<goa-modal id="demo-modal" heading="Are you sure you want to delete this item?" closable>
+</goabx-modal>`,
+        webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
+<goa-modal version="2" id="demo-modal" heading="Are you sure you want to delete this item?" closable>
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <goa-button-group alignment="end" mt="l">
-    <goa-button type="secondary" size="compact">Cancel</goa-button>
-    <goa-button variant="destructive" size="compact">Delete</goa-button>
+    <goa-button version="2" type="secondary" size="compact">Cancel</goa-button>
+    <goa-button version="2" variant="destructive" size="compact">Delete</goa-button>
   </goa-button-group>
 </goa-modal>
 <script>${modalScript}</script>`,

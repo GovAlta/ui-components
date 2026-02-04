@@ -22,12 +22,12 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
   size={1024000}
   onDelete={handleDelete}
 />`,
-        angular: `<goab-file-upload-card
+        angular: `<goabx-file-upload-card
   filename="document.pdf"
   [size]="1024000"
   (_delete)="handleDelete()">
-</goab-file-upload-card>`,
-        webComponents: `<goa-file-upload-card
+</goabx-file-upload-card>`,
+        webComponents: `<goa-file-upload-card version="2"
   filename="document.pdf"
   size="1024000">
 </goa-file-upload-card>`,
@@ -43,12 +43,12 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
   size={2048000}
   progress={65}
 />`,
-        angular: `<goab-file-upload-card
+        angular: `<goabx-file-upload-card
   filename="image.png"
   [size]="2048000"
   [progress]="65">
-</goab-file-upload-card>`,
-        webComponents: `<goa-file-upload-card
+</goabx-file-upload-card>`,
+        webComponents: `<goa-file-upload-card version="2"
   filename="image.png"
   size="2048000"
   progress="65">
@@ -66,13 +66,13 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
   error="File exceeds maximum size limit"
   onDelete={handleDelete}
 />`,
-        angular: `<goab-file-upload-card
+        angular: `<goabx-file-upload-card
   filename="large-file.zip"
   [size]="104857600"
   error="File exceeds maximum size limit"
   (_delete)="handleDelete()">
-</goab-file-upload-card>`,
-        webComponents: `<goa-file-upload-card
+</goabx-file-upload-card>`,
+        webComponents: `<goa-file-upload-card version="2"
   filename="large-file.zip"
   size="104857600"
   error="File exceeds maximum size limit">

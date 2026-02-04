@@ -1,17 +1,17 @@
-<goab-form-item label="Type to create a chip" mb="m">
-  <goab-input
+<goabx-form-item label="Type to create a chip" mb="m">
+  <goabx-input
     [value]="inputValue"
     (onChange)="handleInputChange($event)"
     (onKeyPress)="handleInputKeyPress($event)"
     width="100%">
-  </goab-input>
-</goab-form-item>
+  </goabx-input>
+</goabx-form-item>
 <div *ngIf="typedChips.length > 0">
-  <goab-filter-chip
+  <goabx-filter-chip
     *ngFor="let typedChip of typedChips"
     [content]="typedChip"
     mb="xs"
     mr="xs"
     (onClick)="removeTypedChip(typedChip)">
-  </goab-filter-chip>
+  </goabx-filter-chip>
 </div>

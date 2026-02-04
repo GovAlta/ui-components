@@ -1,5 +1,5 @@
-<goab-button type="secondary" (onClick)="toggleModal()">Save for later</goab-button>
-<goab-modal
+<goabx-button type="secondary" (onClick)="toggleModal()">Save for later</goabx-button>
+<goabx-modal
   [open]="open"
   calloutVariant="important"
   (onClose)="toggleModal()"
@@ -12,7 +12,7 @@
   </p>
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goab-button type="primary" (onClick)="toggleModal()">I understand</goab-button>
+      <goabx-button type="primary" (onClick)="toggleModal()">I understand</goabx-button>
     </goab-button-group>
   </ng-template>
-</goab-modal>
+</goabx-modal>

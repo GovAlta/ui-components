@@ -20,11 +20,11 @@ export const datePickerConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Date" mb="l">
   <GoabxDatePicker name="date" onChange={handleDateChange} />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Date" mb="l">
-  <goab-date-picker name="date" (_change)="handleDateChange($event)"></goab-date-picker>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Date" mb="l">
-  <goa-date-picker name="date"></goa-date-picker>
+        angular: `<goabx-form-item label="Date" mb="l">
+  <goabx-date-picker name="date" (_change)="handleDateChange($event)"></goabx-date-picker>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Date" mb="l">
+  <goa-date-picker version="2" name="date"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -36,11 +36,11 @@ export const datePickerConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Start date" mb="l">
   <GoabxDatePicker name="startDate" value="2024-01-15" onChange={handleDateChange} />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Start date" mb="l">
-  <goab-date-picker name="startDate" value="2024-01-15" (_change)="handleDateChange($event)"></goab-date-picker>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Start date" mb="l">
-  <goa-date-picker name="startDate" value="2024-01-15"></goa-date-picker>
+        angular: `<goabx-form-item label="Start date" mb="l">
+  <goabx-date-picker name="startDate" value="2024-01-15" (_change)="handleDateChange($event)"></goabx-date-picker>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Start date" mb="l">
+  <goa-date-picker version="2" name="startDate" value="2024-01-15"></goa-date-picker>
 </goa-form-item>`,
       },
     },
@@ -57,16 +57,16 @@ export const datePickerConfigurations: ComponentConfigurations = {
     onChange={handleDateChange}
   />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
-  <goab-date-picker
+        angular: `<goabx-form-item label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
+  <goabx-date-picker
     name="appointment"
     min="2024-01-01"
     max="2024-01-31"
     (_change)="handleDateChange($event)">
-  </goab-date-picker>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
-  <goa-date-picker
+  </goabx-date-picker>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
+  <goa-date-picker version="2"
     name="appointment"
     min="2024-01-01"
     max="2024-01-31">
@@ -82,11 +82,11 @@ export const datePickerConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Locked date" mb="l">
   <GoabxDatePicker name="locked" value="2024-01-01" disabled />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Locked date" mb="l">
-  <goab-date-picker name="locked" value="2024-01-01" [disabled]="true"></goab-date-picker>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Locked date" mb="l">
-  <goa-date-picker name="locked" value="2024-01-01" disabled></goa-date-picker>
+        angular: `<goabx-form-item label="Locked date" mb="l">
+  <goabx-date-picker name="locked" value="2024-01-01" [disabled]="true"></goabx-date-picker>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Locked date" mb="l">
+  <goa-date-picker version="2" name="locked" value="2024-01-01" disabled></goa-date-picker>
 </goa-form-item>`,
       },
     },

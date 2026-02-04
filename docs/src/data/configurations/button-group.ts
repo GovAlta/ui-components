@@ -22,12 +22,12 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <GoabxButton>Submit</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group>
-  <goab-button type="secondary">Cancel</goab-button>
-  <goab-button>Submit</goab-button>
+  <goabx-button type="secondary">Cancel</goabx-button>
+  <goabx-button>Submit</goabx-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group>
-  <goa-button type="secondary">Cancel</goa-button>
-  <goa-button>Submit</goa-button>
+  <goa-button version="2" type="secondary">Cancel</goa-button>
+  <goa-button version="2">Submit</goa-button>
 </goa-button-group>`,
       },
     },
@@ -46,22 +46,22 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <GoabxButton>End aligned</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group alignment="start">
-  <goab-button>Start aligned</goab-button>
+  <goabx-button>Start aligned</goabx-button>
 </goab-button-group>
 <goab-button-group alignment="center">
-  <goab-button>Center aligned</goab-button>
+  <goabx-button>Center aligned</goabx-button>
 </goab-button-group>
 <goab-button-group alignment="end">
-  <goab-button>End aligned</goab-button>
+  <goabx-button>End aligned</goabx-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start">
-  <goa-button>Start aligned</goa-button>
+  <goa-button version="2">Start aligned</goa-button>
 </goa-button-group>
 <goa-button-group alignment="center">
-  <goa-button>Center aligned</goa-button>
+  <goa-button version="2">Center aligned</goa-button>
 </goa-button-group>
 <goa-button-group alignment="end">
-  <goa-button>End aligned</goa-button>
+  <goa-button version="2">End aligned</goa-button>
 </goa-button-group>`,
       },
     },
@@ -79,20 +79,20 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <GoabxButton size="compact">Continue</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group gap="relaxed">
-  <goab-button type="secondary">Back</goab-button>
-  <goab-button>Continue</goab-button>
+  <goabx-button type="secondary">Back</goabx-button>
+  <goabx-button>Continue</goabx-button>
 </goab-button-group>
 <goab-button-group gap="compact">
-  <goab-button type="secondary" size="compact">Back</goab-button>
-  <goab-button size="compact">Continue</goab-button>
+  <goabx-button type="secondary" size="compact">Back</goabx-button>
+  <goabx-button size="compact">Continue</goabx-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group gap="relaxed">
-  <goa-button type="secondary">Back</goa-button>
-  <goa-button>Continue</goa-button>
+  <goa-button version="2" type="secondary">Back</goa-button>
+  <goa-button version="2">Continue</goa-button>
 </goa-button-group>
 <goa-button-group gap="compact">
-  <goa-button type="secondary" size="compact">Back</goa-button>
-  <goa-button size="compact">Continue</goa-button>
+  <goa-button version="2" type="secondary" size="compact">Back</goa-button>
+  <goa-button version="2" size="compact">Continue</goa-button>
 </goa-button-group>`,
       },
     },
@@ -107,14 +107,14 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <GoabxButton type="tertiary">Cancel</GoabxButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group alignment="start">
-  <goab-button type="primary">Save and continue</goab-button>
-  <goab-button type="secondary">Save as draft</goab-button>
-  <goab-button type="tertiary">Cancel</goab-button>
+  <goabx-button type="primary">Save and continue</goabx-button>
+  <goabx-button type="secondary">Save as draft</goabx-button>
+  <goabx-button type="tertiary">Cancel</goabx-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start">
-  <goa-button type="primary">Save and continue</goa-button>
-  <goa-button type="secondary">Save as draft</goa-button>
-  <goa-button type="tertiary">Cancel</goa-button>
+  <goa-button version="2" type="primary">Save and continue</goa-button>
+  <goa-button version="2" type="secondary">Save as draft</goa-button>
+  <goa-button version="2" type="tertiary">Cancel</goa-button>
 </goa-button-group>`,
       },
     },
@@ -143,8 +143,8 @@ handleAction(event: GoabMenuButtonOnActionDetail) {
 }
 
 <goab-button-group>
-  <goab-button>Submit</goab-button>
-  <goab-button type="secondary">Save draft</goab-button>
+  <goabx-button>Submit</goabx-button>
+  <goabx-button type="secondary">Save draft</goabx-button>
   <goab-menu-button text="More" type="tertiary" (_action)="handleAction($event)">
     <goab-menu-action text="Preview" action="preview"></goab-menu-action>
     <goab-menu-action text="Duplicate" action="duplicate"></goab-menu-action>
@@ -153,8 +153,8 @@ handleAction(event: GoabMenuButtonOnActionDetail) {
   </goab-menu-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group>
-  <goa-button>Submit</goa-button>
-  <goa-button type="secondary">Save draft</goa-button>
+  <goa-button version="2">Submit</goa-button>
+  <goa-button version="2" type="secondary">Save draft</goa-button>
   <goa-menu-button text="More" type="tertiary">
     <goa-menu-action text="Preview" action="preview"></goa-menu-action>
     <goa-menu-action text="Duplicate" action="duplicate"></goa-menu-action>

@@ -1,21 +1,21 @@
-<goa-button id="open-modal-btn">Save and continue</goa-button>
+<goa-button version="2" id="open-modal-btn">Save and continue</goa-button>
 
-<goa-modal id="change-modal" heading="Address has changed">
+<goa-modal version="2" id="change-modal" heading="Address has changed">
   <goa-container type="non-interactive" accent="filled" padding="compact" width="full">
     <goa-text as="h4" mt="none" mb="s">Before</goa-text>
     <goa-text mt="none">123456 78 Ave NW, Edmonton, Alberta</goa-text>
     <goa-text as="h4" mt="none" mb="s">After</goa-text>
     <goa-text mt="none" mb="none">881 12 Ave NW, Edmonton, Alberta</goa-text>
   </goa-container>
-  <goa-form-item label="Effective date" mt="l">
-    <goa-date-picker id="effective-date" name="effectiveDate"></goa-date-picker>
+  <goa-form-item version="2" label="Effective date" mt="l">
+    <goa-date-picker version="2" id="effective-date" name="effectiveDate"></goa-date-picker>
   </goa-form-item>
   <div slot="actions">
     <goa-button-group alignment="end">
-      <goa-button type="secondary" size="compact" id="undo-btn">
+      <goa-button version="2" type="secondary" size="compact" id="undo-btn">
         Undo address change
       </goa-button>
-      <goa-button type="primary" size="compact" id="confirm-btn">
+      <goa-button version="2" type="primary" size="compact" id="confirm-btn">
         Confirm
       </goa-button>
     </goa-button-group>

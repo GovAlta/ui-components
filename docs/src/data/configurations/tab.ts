@@ -25,15 +25,15 @@ export const tabConfigurations: ComponentConfigurations = {
     Content for the second tab.
   </GoabTab>
 </GoabxTabs>`,
-        angular: `<goab-tabs>
+        angular: `<goabx-tabs>
   <goab-tab heading="First tab">
     Content for the first tab.
   </goab-tab>
   <goab-tab heading="Second tab">
     Content for the second tab.
   </goab-tab>
-</goab-tabs>`,
-        webComponents: `<goa-tabs>
+</goabx-tabs>`,
+        webComponents: `<goa-tabs version="2">
   <goa-tab heading="First tab">
     Content for the first tab.
   </goa-tab>

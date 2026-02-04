@@ -18,7 +18,7 @@ export const linkConfigurations: ComponentConfigurations = {
       description: 'Simple text link',
       code: {
         react: `<GoabxLink href="/about">Learn more about our services</GoabxLink>`,
-        angular: `<goab-link href="/about">Learn more about our services</goab-link>`,
+        angular: `<goabx-link href="/about">Learn more about our services</goabx-link>`,
         webComponents: `<goa-link href="/about">Learn more about our services</goa-link>`,
       },
     },
@@ -30,9 +30,9 @@ export const linkConfigurations: ComponentConfigurations = {
         react: `<GoabxLink href="https://www.alberta.ca">
   Visit Alberta.ca
 </GoabxLink>`,
-        angular: `<goab-link href="https://www.alberta.ca">
+        angular: `<goabx-link href="https://www.alberta.ca">
   Visit Alberta.ca
-</goab-link>`,
+</goabx-link>`,
         webComponents: `<goa-link href="https://www.alberta.ca">
   Visit Alberta.ca
 </goa-link>`,
@@ -47,7 +47,7 @@ export const linkConfigurations: ComponentConfigurations = {
   <GoabxLink href="/contact" color="light">Contact us</GoabxLink>
 </div>`,
         angular: `<div style="background-color: #333; padding: 1rem">
-  <goab-link href="/contact" color="light">Contact us</goab-link>
+  <goabx-link href="/contact" color="light">Contact us</goabx-link>
 </div>`,
         webComponents: `<div style="background-color: #333; padding: 1rem">
   <goa-link href="/contact" color="light">Contact us</goa-link>
@@ -62,9 +62,9 @@ export const linkConfigurations: ComponentConfigurations = {
         react: `<GoabxLink href="/download" leadingIcon="download">
   Download form
 </GoabxLink>`,
-        angular: `<goab-link href="/download" leadingIcon="download">
+        angular: `<goabx-link href="/download" leadingIcon="download">
   Download form
-</goab-link>`,
+</goabx-link>`,
         webComponents: `<goa-link href="/download" leadingicon="download">
   Download form
 </goa-link>`,
@@ -78,9 +78,9 @@ export const linkConfigurations: ComponentConfigurations = {
         react: `<GoabxLink href="/next" trailingIcon="arrow-forward">
   Continue to next step
 </GoabxLink>`,
-        angular: `<goab-link href="/next" trailingIcon="arrow-forward">
+        angular: `<goabx-link href="/next" trailingIcon="arrow-forward">
   Continue to next step
-</goab-link>`,
+</goabx-link>`,
         webComponents: `<goa-link href="/next" trailingicon="arrow-forward">
   Continue to next step
 </goa-link>`,

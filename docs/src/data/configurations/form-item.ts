@@ -21,11 +21,11 @@ export const formItemConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Email address" mb="l">
   <GoabxInput name="email" type="email" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Email address" mb="l">
-  <goab-input name="email" type="email" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Email address" mb="l">
-  <goa-input name="email" type="email" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Email address" mb="l">
+  <goabx-input name="email" type="email" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Email address" mb="l">
+  <goa-input version="2" name="email" type="email" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -37,11 +37,11 @@ export const formItemConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Password" helpText="Must be at least 8 characters" mb="l">
   <GoabxInput name="password" type="password" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
-  <goab-input name="password" type="password" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
-  <goa-input name="password" type="password" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
+  <goabx-input name="password" type="password" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Password" helpText="Must be at least 8 characters" mb="l">
+  <goa-input version="2" name="password" type="password" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -53,11 +53,11 @@ export const formItemConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Full name" requirement="required" mb="l">
   <GoabxInput name="fullName" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Full name" requirement="required" mb="l">
-  <goab-input name="fullName" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Full name" requirement="required" mb="l">
-  <goa-input name="fullName" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Full name" requirement="required" mb="l">
+  <goabx-input name="fullName" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Full name" requirement="required" mb="l">
+  <goa-input version="2" name="fullName" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -69,11 +69,11 @@ export const formItemConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Middle name" requirement="optional" mb="l">
   <GoabxInput name="middleName" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Middle name" requirement="optional" mb="l">
-  <goab-input name="middleName" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Middle name" requirement="optional" mb="l">
-  <goa-input name="middleName" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Middle name" requirement="optional" mb="l">
+  <goabx-input name="middleName" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Middle name" requirement="optional" mb="l">
+  <goa-input version="2" name="middleName" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -85,11 +85,11 @@ export const formItemConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Email address" error="Please enter a valid email address" mb="l">
   <GoabxInput name="email" type="email" error width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Email address" error="Please enter a valid email address" mb="l">
-  <goab-input name="email" type="email" [error]="true" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Email address" error="Please enter a valid email address" mb="l">
-  <goa-input name="email" type="email" error width="100%"></goa-input>
+        angular: `<goabx-form-item label="Email address" error="Please enter a valid email address" mb="l">
+  <goabx-input name="email" type="email" [error]="true" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Email address" error="Please enter a valid email address" mb="l">
+  <goa-input version="2" name="email" type="email" error width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -107,23 +107,23 @@ export const formItemConfigurations: ComponentConfigurations = {
 <GoabxFormItem label="Large label" labelSize="large" mb="l">
   <GoabxInput name="large" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Compact label" labelSize="compact" mb="l">
-  <goab-input name="compact" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Regular label" labelSize="regular" mb="l">
-  <goab-input name="regular" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Large label" labelSize="large" mb="l">
-  <goab-input name="large" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Compact label" labelsize="compact" mb="l">
-  <goa-input name="compact" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Compact label" labelSize="compact" mb="l">
+  <goabx-input name="compact" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Regular label" labelSize="regular" mb="l">
+  <goabx-input name="regular" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Large label" labelSize="large" mb="l">
+  <goabx-input name="large" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Compact label" labelsize="compact" mb="l">
+  <goa-input version="2" name="compact" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Regular label" labelsize="regular" mb="l">
-  <goa-input name="regular" width="100%"></goa-input>
+<goa-form-item version="2" label="Regular label" labelsize="regular" mb="l">
+  <goa-input version="2" name="regular" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Large label" labelsize="large" mb="l">
-  <goa-input name="large" width="100%"></goa-input>
+<goa-form-item version="2" label="Large label" labelsize="large" mb="l">
+  <goa-input version="2" name="large" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
