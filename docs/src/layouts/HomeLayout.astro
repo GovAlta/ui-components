@@ -23,7 +23,7 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} page="home">
   <!-- Full-width grey background wrapper -->
   <div class="layout-wrapper">
     <div class="layout-container">
@@ -68,7 +68,7 @@ const { title, description } = Astro.props;
     top: 0;
     height: 100vh;
     background: var(--goa-color-greyscale-50);
-    z-index: 5;
+    z-index: 2; /* Above content (1) for tooltips, below modals (998+) */
   }
 
   .main-content {
@@ -118,6 +118,8 @@ const { title, description } = Astro.props;
       border-radius: 0;
       border: none;
       min-height: auto;
+      /* Pull content up behind transparent header (header is ~73px) */
+      margin-top: -73px;
     }
   }
 

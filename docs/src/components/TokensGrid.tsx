@@ -331,7 +331,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const renderTokenCard = useCallback(
     (token: FlatToken) => (
       <div key={token.name} className="token-card">
-        <GoabContainer type="non-interactive" accent="thin" padding="compact">
+        <GoabContainer type="interactive" padding="compact" mb="none">
           <div className="token-card-content">
             <div className="token-card-main">
               {renderPreview(token)}
@@ -741,9 +741,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           gap: var(--goa-space-m);
         }
 
-        .token-card {
-          margin-bottom: var(--goa-space-s);
-        }
 
         .token-card-content {
           display: flex;

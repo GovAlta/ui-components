@@ -1132,9 +1132,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 623px) {
           .examples-card-grid {
             grid-template-columns: 1fr;
+          }
+
+          .view-toggle-wrapper {
+            display: none;
           }
         }
 

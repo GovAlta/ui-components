@@ -5,6 +5,7 @@
  * Uses GoabxWorkSideMenuGroup for expandable category sections.
  */
 
+import type { MouseEvent } from 'react';
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
@@ -118,19 +119,35 @@ export function ComponentsSubMenu({
   // We're on the All Components page if there's no currentSlug
   const isAllComponentsPage = !currentSlug;
 
+  // Handle back button click - wrap prevents navigation, triggers state change
+  const handleBackClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onBack();
+  };
+
+  // Handle All Components click on detail pages - navigate without URL auto-matching
+  const handleAllComponentsClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = '/components';
+  };
+
   // Primary content: Back button + All Components link + component categories
   const primaryContent = (
     <>
-      {/* Back to parent menu */}
-      <GoabxWorkSideMenuItem
-        label="All"
-        icon="arrow-back"
-        onClick={onBack}
-      />
+      {/* Back to parent menu - wrapped div captures click since component doesn't expose onClick */}
+      <div onClick={handleBackClick} style={{ cursor: 'pointer' }}>
+        <GoabxWorkSideMenuItem
+          label="All"
+          icon="arrow-back"
+          url="/__back__"
+        />
+      </div>
 
       {/* All Components page link
           - On All Components page: use url so auto-matching highlights it
-          - On component detail pages: use onClick to prevent auto-matching */}
+          - On component detail pages: wrap in div to prevent auto-matching */}
       {isAllComponentsPage ? (
         <GoabxWorkSideMenuItem
           label="All Components"
@@ -138,11 +155,13 @@ export function ComponentsSubMenu({
           url="/components"
         />
       ) : (
-        <GoabxWorkSideMenuItem
-          label="All Components"
-          icon="apps"
-          onClick={() => window.location.href = '/components'}
-        />
+        <div onClick={handleAllComponentsClick} style={{ cursor: 'pointer' }}>
+          <GoabxWorkSideMenuItem
+            label="All Components"
+            icon="apps"
+            url="/__all_components__"
+          />
+        </div>
       )}
 
       {/* Component categories - using GoabxWorkSideMenuGroup for expandable sections */}

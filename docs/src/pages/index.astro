@@ -252,6 +252,10 @@ import CardLite from '../components/CardLite.astro';
     margin-bottom: var(--goa-space-4xl);
   }
 
+  .card-grid:last-child {
+    margin-bottom: 0;
+  }
+
   .card-grid.two-col {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -268,8 +272,8 @@ import CardLite from '../components/CardLite.astro';
 
     .hero-content {
       flex-direction: column;
-      text-align: center;
-      align-items: center;
+      text-align: left;
+      align-items: flex-start;
     }
 
     .hero-image {
@@ -303,6 +307,10 @@ import CardLite from '../components/CardLite.astro';
       font: var(--goa-typography-heading-xl);
     }
 
+    .hero-image {
+      max-width: 220px;
+    }
+
     .cta-text h2,
     .section-heading {
       font: var(--goa-typography-heading-l);
@@ -317,6 +325,8 @@ import CardLite from '../components/CardLite.astro';
       flex-direction: column;
       border-radius: 0;
       padding: 0 var(--goa-space-xs);
+      /* Extra top padding to account for header overlay (~73px) */
+      padding-top: 73px;
     }
 
     .hero-content {
