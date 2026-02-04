@@ -543,7 +543,9 @@
     );
   }
 
-  .goa-input:not(.error):not(.input--disabled):hover:not(:has(input:focus-visible)) {
+  .goa-input:not(.error):not(.input--disabled):hover:not(
+      :has(input:focus-visible)
+    ) {
     /* hover border */
     box-shadow: var(--goa-text-input-border-hover);
   }
@@ -696,7 +698,9 @@
   }
 
   /* V2: Read-only input field styling (exclude disabled inputs) */
-  .container.v2.goa-input:not(.error)::has(input:read-only:not(:disabled):not(:focus-visible):not(:hover)) {
+  .container.v2.goa-input:not(.error)::has(
+      input:read-only:not(:disabled):not(:focus-visible):not(:hover)
+    ) {
     box-shadow: var(--goa-text-input-border-readonly);
   }
 
@@ -801,7 +805,6 @@
 
   /* Autofill styling - override browser defaults */
   input:autofill {
-    background-color: var(--goa-text-input-color-bg) !important;
-    -webkit-text-fill-color: var(--goa-text-input-color-text) !important;
+    transition: all 0s 5000s;
   }
 </style>

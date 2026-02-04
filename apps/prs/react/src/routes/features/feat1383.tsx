@@ -304,5 +304,3 @@ export function Feat1383Route() {
     </main>
   );
 }
-
-export default Feat1383Route;

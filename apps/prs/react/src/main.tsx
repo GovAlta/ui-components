@@ -42,10 +42,12 @@ import { Bug3248Route } from "./routes/bugs/bug3248";
 import { Bug3275Route } from "./routes/bugs/bug3275";
 import { Bug3322Route } from "./routes/bugs/bug3322";
 import { Bug3281Route } from "./routes/bugs/bug3281";
+import { Bug3337Route } from "./routes/bugs/bug3337";
 
 import { EverythingRoute } from "./routes/everything";
 import { EverythingBRoute } from "./routes/everything-b";
-import Feat1383Route from "./routes/features/feat1383";
+
+import { Feat1383Route } from "./routes/features/feat1383";
 import { Feat1547Route } from "./routes/features/feat1547";
 import { Feat1813Route } from "./routes/features/feat1813";
 import { Feat1908Route } from "./routes/features/feat1908";
@@ -67,7 +69,7 @@ import { Feat3102Route } from "./routes/features/feat3102";
 import { Feat3241Route } from "./routes/features/feat3241";
 import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
 import { Feat3137Route } from "./routes/features/feat3137";
-import Feat3306Route from "./routes/features/feat3306";
+import { Feat3306Route } from "./routes/features/feat3306";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -116,6 +118,7 @@ root.render(
           <Route path="bugs/3275" element={<Bug3275Route />} />
           <Route path="bugs/3322" element={<Bug3322Route />} />
           <Route path="bugs/3281" element={<Bug3281Route />} />
+          <Route path="bugs/3337" element={<Bug3337Route />} />
 
           <Route path="features/1383" element={<Feat1383Route />} />
           <Route path="features/1547" element={<Feat1547Route />} />
@@ -139,10 +142,9 @@ root.render(
           <Route path="features/2829" element={<Feat2829Route />} />
           <Route path="features/2877" element={<Feat2877Route />} />
           <Route path="features/3102" element={<Feat3102Route />} />
+          <Route path="features/3137" element={<Feat3137Route />} />
           <Route path="features/3241" element={<Feat3241Route />} />
           <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
-          <Route path="features/3137" element={<Feat3137Route />} />
-          <Route path="features/1908" element={<Feat1908Route />} />
           <Route path="features/3306" element={<Feat3306Route />} />
         </Route>
       </Routes>
