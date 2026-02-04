@@ -65,6 +65,7 @@ export function App() {
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
               <Link to="/bugs/3281">3281 GoabText p tag margin issues</Link>
               <Link to="/bugs/3337">3337 Input autocomplete styling</Link>
+              <Link to="/bugs/3279">3279 Work Side Menu Key Nav</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>

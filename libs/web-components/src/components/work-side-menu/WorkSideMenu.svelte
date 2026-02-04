@@ -48,16 +48,11 @@
   let _showAccountMenu = false;
   let _showTooltip = false;
 
-  let _focusedIndex: number = -1;
-  let _focusItems: HTMLElement[] = [];
-
   let _menuEl: HTMLElement;
   let _menuLinks: HTMLElement[] = [];
   let _rootEl: HTMLElement;
   let _scrollEl: HTMLElement;
   let _tooltipEl: HTMLElement;
-  let _profileButtonEl: HTMLElement;
-  let _toggleButtonEl: HTMLElement;
   let _tooltipLabel: string = "";
 
   let _bindTimeoutId: any;
@@ -117,13 +112,11 @@
       _menuLinks = [..._menuLinks, link];
     }
 
-    // set URL, check scrolling, and get focusable items after all menu links are added
     performOnce(
       _bindTimeoutId,
       () => {
         setCurrentUrl();
         setMenuScrolling();
-        getFocusItems();
       },
       1,
     );
@@ -136,7 +129,7 @@
     el: HTMLElement,
   ) {
     if (!open && menuType !== "account") {
-      updateTooltip(label, el);
+      setTooltipPos(label, el);
       showTooltip();
     } else {
       hideTooltip();
@@ -151,7 +144,7 @@
     }, 300);
   }
 
-  function updateTooltip(label: string, el: HTMLElement) {
+  function setTooltipPos(label: string, el: HTMLElement) {
     let top = el?.getBoundingClientRect().top - 2;
     _tooltipEl.style.top = `${top}px`;
     _tooltipLabel = label;
@@ -170,9 +163,6 @@
     _showAccountMenu = true;
 
     await tick();
-    let firstAccountItem =
-      _focusItems[_focusItems.indexOf(_profileButtonEl) + 1];
-    setFocusedIndexToElement(firstAccountItem);
     document.body.addEventListener("click", closeAccountMenu);
   }
 
@@ -203,120 +193,12 @@
 
   function handleKeyDown(e: KeyboardEvent) {
     switch (e?.key) {
-      case "ArrowDown":
-        onArrow("down");
-        break;
-      case "ArrowUp":
-        onArrow("up");
-        break;
       case "[":
         if (e?.ctrlKey) dispatch(_rootEl, "_toggle", {}, {});
         break;
       case "Escape":
         closeAccountMenu();
         break;
-    }
-  }
-
-  function onArrow(direction: "up" | "down") {
-    changeFocusedMenuItem(direction === "up" ? -1 : 1);
-  }
-
-  function isFocusable(element: HTMLElement): boolean {
-    // Check if element has tabindex >= 0 or is naturally focusable
-    const tabindex = element.getAttribute("tabindex");
-    if (tabindex !== null && parseInt(tabindex) >= 0) {
-      return true;
-    }
-
-    const focusableElements = [
-      "WORK-SIDE-MENU",
-      "A",
-      "BUTTON",
-      "INPUT",
-      "SELECT",
-      "TEXTAREA",
-    ];
-    if (focusableElements.some((tag) => element.tagName.includes(tag))) {
-      return !element.hasAttribute("disabled");
-    }
-
-    return false;
-  }
-
-  function getMenuSlotItems(slotName: string): HTMLElement[] {
-    let slot = _menuEl.querySelector(
-      `slot[name='${slotName}']`,
-    ) as HTMLSlotElement;
-    if (!slot) return [];
-    let assignedNodes = slot.assignedElements({ flatten: true });
-    let items: HTMLElement[] = [];
-    assignedNodes.forEach((node) => {
-      Array.from(node.children).forEach((child) => {
-        const element = child as HTMLElement;
-        if (isFocusable(element)) {
-          items.push(element);
-        }
-      });
-    });
-    return items;
-  }
-
-  function getFocusItems() {
-    _focusItems = [
-      ...getMenuSlotItems("primary"),
-      ...getMenuSlotItems("secondary"),
-      _profileButtonEl,
-      ...getMenuSlotItems("account"),
-      _toggleButtonEl,
-    ];
-  }
-
-  function changeFocusedMenuItem(offset: number) {
-    let oldItem = _focusItems[_focusedIndex];
-    let index = _focusedIndex;
-    index += offset;
-    if (index < 0) {
-      index = _focusItems.length - 1;
-    } else if (index >= _focusItems.length) {
-      index = 0;
-    }
-
-    _focusedIndex = index;
-    let newItem = _focusItems[_focusedIndex];
-
-    if (oldItem === _profileButtonEl && offset > 0 && !_showAccountMenu) {
-      setFocusedIndexToElement(_toggleButtonEl);
-    }
-
-    if (oldItem === _toggleButtonEl && offset < 0 && !_showAccountMenu) {
-      setFocusedIndexToElement(_profileButtonEl);
-    }
-
-    if (newItem === _profileButtonEl && offset < 0 && _showAccountMenu) {
-      closeAccountMenu();
-    }
-
-    if (newItem === _toggleButtonEl && offset > 0 && _showAccountMenu) {
-      closeAccountMenu();
-    }
-
-    tick().then(() => {
-      focusOnMenuItem(newItem);
-    });
-  }
-
-  function setFocusedIndexToElement(el: HTMLElement) {
-    _focusedIndex = _focusItems.indexOf(el);
-    focusOnMenuItem(el);
-  }
-
-  function focusOnMenuItem(el: HTMLElement) {
-    if (el.tagName.includes("WORK-SIDE-MENU")) {
-      let link = getShadowLinkEl(el);
-      link?.focus();
-    } else {
-      el.focus();
     }
   }
 
@@ -336,6 +218,12 @@
     closeAccountMenu();
     window.removeEventListener("click", closeAccountMenu);
     dispatch(_rootEl, "_toggle", {}, { bubbles: true });
+  }
+
+  function handleAccountFocusOut(e: FocusEvent) {
+    const target = e.relatedTarget as HTMLElement;
+    if (target?.closest?.('[slot="account"]') || target?.closest?.('.profile')) return;
+    closeAccountMenu();
   }
 
   function handleWindowResize() {
@@ -375,6 +263,7 @@
     window.removeEventListener("popstate", setCurrentUrl);
     window.removeEventListener("keydown", handleKeyDown);
     window.removeEventListener("resize", handleWindowResize);
+    document.body.removeEventListener("click", closeAccountMenu);
   }
 </script>
 
@@ -433,6 +322,7 @@
             role="presentation"
             class:show={_showAccountMenu}
             on:mouseleave={handleMouseLeave}
+            on:focusout={handleAccountFocusOut}
           >
             <slot name="account"></slot>
           </div>
@@ -440,9 +330,9 @@
           <button
             class="profile"
             on:click={handleProfileClick}
+            on:focusout={handleAccountFocusOut}
             aria-haspopup="true"
             aria-expanded={_showAccountMenu}
-            bind:this={_profileButtonEl}
           >
             <div class="profile-image">
               <goa-icon
@@ -467,7 +357,6 @@
             class="toggle-button"
             data-testid="toggle-menu"
             on:click={handleToggleClick}
-            bind:this={_toggleButtonEl}
             aria-label={open ? "Collapse menu" : "Expand menu"}
           >
             <goa-icon

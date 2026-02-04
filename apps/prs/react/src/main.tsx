@@ -38,6 +38,7 @@ import { Bug3118Route } from "./routes/bugs/bug3118";
 import { Bug3201Route } from "./routes/bugs/bug3201";
 import { Bug3215Route } from "./routes/bugs/bug3215";
 import { Bug3232Route } from "./routes/bugs/bug3232";
+import { Bug3279Route } from "./routes/bugs/bug3279";
 import { Bug3248Route } from "./routes/bugs/bug3248";
 import { Bug3275Route } from "./routes/bugs/bug3275";
 import { Bug3322Route } from "./routes/bugs/bug3322";
@@ -78,6 +79,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/everything/b" element={<EverythingBRoute />} />
+        <Route path="/bugs/3279" element={<Bug3279Route />} />
         <Route path="/" element={<App />}>
           <Route path="everything" element={<EverythingRoute />} />
 
