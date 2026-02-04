@@ -22,12 +22,12 @@ export const radioItemConfigurations: ComponentConfigurations = {
   <GoabxRadioItem value="opt2" label="Option 2" />
   <GoabxRadioItem value="opt3" label="Option 3" />
 </GoabxRadioGroup>`,
-        angular: `<goab-radio-group name="option" value="">
-  <goab-radio-item value="opt1" label="Option 1"></goab-radio-item>
-  <goab-radio-item value="opt2" label="Option 2"></goab-radio-item>
-  <goab-radio-item value="opt3" label="Option 3"></goab-radio-item>
-</goab-radio-group>`,
-        webComponents: `<goa-radio-group name="option" value="">
+        angular: `<goabx-radio-group name="option" value="">
+  <goabx-radio-item value="opt1" label="Option 1"></goabx-radio-item>
+  <goabx-radio-item value="opt2" label="Option 2"></goabx-radio-item>
+  <goabx-radio-item value="opt3" label="Option 3"></goabx-radio-item>
+</goabx-radio-group>`,
+        webComponents: `<goa-radio-group version="2" name="option" value="">
   <goa-radio-item value="opt1" label="Option 1"></goa-radio-item>
   <goa-radio-item value="opt2" label="Option 2"></goa-radio-item>
   <goa-radio-item value="opt3" label="Option 3"></goa-radio-item>
@@ -43,11 +43,11 @@ export const radioItemConfigurations: ComponentConfigurations = {
   <GoabxRadioItem value="basic" label="Basic" description="Free tier with limited features" />
   <GoabxRadioItem value="pro" label="Professional" description="Full access to all features" />
 </GoabxRadioGroup>`,
-        angular: `<goab-radio-group name="plan" value="">
-  <goab-radio-item value="basic" label="Basic" description="Free tier with limited features"></goab-radio-item>
-  <goab-radio-item value="pro" label="Professional" description="Full access to all features"></goab-radio-item>
-</goab-radio-group>`,
-        webComponents: `<goa-radio-group name="plan" value="">
+        angular: `<goabx-radio-group name="plan" value="">
+  <goabx-radio-item value="basic" label="Basic" description="Free tier with limited features"></goabx-radio-item>
+  <goabx-radio-item value="pro" label="Professional" description="Full access to all features"></goabx-radio-item>
+</goabx-radio-group>`,
+        webComponents: `<goa-radio-group version="2" name="plan" value="">
   <goa-radio-item value="basic" label="Basic" description="Free tier with limited features"></goa-radio-item>
   <goa-radio-item value="pro" label="Professional" description="Full access to all features"></goa-radio-item>
 </goa-radio-group>`,

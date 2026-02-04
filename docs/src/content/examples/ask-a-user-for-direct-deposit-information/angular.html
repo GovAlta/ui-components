@@ -4,46 +4,46 @@
   Contact your bank if you can't find this information.
 </goab-text>
 <form [formGroup]="form">
-  <goab-form-item
+  <goabx-form-item
     label="Bank or Institution number"
     helpText="3-4 digits in length">
-    <goab-input
+    <goabx-input
       [maxLength]="4"
       name="bankNumber"
       [formControl]="form.controls.bankNumber"
       ariaLabel="bankNumber"
       width="88px">
-    </goab-input>
-  </goab-form-item>
-  <goab-form-item
+    </goabx-input>
+  </goabx-form-item>
+  <goabx-form-item
     label="Branch or Transit number"
     helpText="5 digits in length"
     mt="l">
-    <goab-input
+    <goabx-input
       [maxLength]="5"
       name="transitNumber"
       [formControl]="form.controls.transitNumber"
       ariaLabel="transitNumber"
       width="143px">
-    </goab-input>
-  </goab-form-item>
-  <goab-form-item
+    </goabx-input>
+  </goabx-form-item>
+  <goabx-form-item
     label="Account number"
     helpText="3-12 digits in length"
     mt="l">
-    <goab-input
+    <goabx-input
       [maxLength]="12"
       name="accountNumber"
       [formControl]="form.controls.accountNumber"
       ariaLabel="accountNumber">
-    </goab-input>
-  </goab-form-item>
+    </goabx-input>
+  </goabx-form-item>
 </form>
 <goab-details heading="Where can I find this information on a personal cheque?" mt="l">
   <goab-text as="p" mb="m">Below is an example of where you can find the required bank information on a personal cheque.</goab-text>
   <img src="https://design.alberta.ca/images/details-demo.jpg" alt="Cheque example" />
 </goab-details>
 
-<goab-button type="submit" mt="2xl" (onClick)="onSubmit()">
+<goabx-button type="submit" mt="2xl" (onClick)="onSubmit()">
   Save and continue
-</goab-button>
+</goabx-button>

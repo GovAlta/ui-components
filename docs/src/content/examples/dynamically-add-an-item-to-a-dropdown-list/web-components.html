@@ -1,27 +1,27 @@
-<goa-form-item
+<goa-form-item version="2"
   id="item-form-item"
   requirement="required"
   label="Name of item"
   helptext="Add an item to the dropdown list below">
-  <goa-input id="item-input" name="item"></goa-input>
+  <goa-input version="2" id="item-input" name="item"></goa-input>
 </goa-form-item>
 
-<goa-form-item mt="l" label="Add to">
-  <goa-radio-group id="mount-type" name="mountType" value="append" orientation="horizontal">
+<goa-form-item version="2" mt="l" label="Add to">
+  <goa-radio-group version="2" id="mount-type" name="mountType" value="append" orientation="horizontal">
     <goa-radio-item value="prepend" label="Start"></goa-radio-item>
     <goa-radio-item value="append" label="End"></goa-radio-item>
   </goa-radio-group>
 </goa-form-item>
 
 <goa-button-group alignment="start" gap="relaxed" mt="l">
-  <goa-button id="add-btn" type="primary">Add new item</goa-button>
-  <goa-button id="reset-btn" type="tertiary">Reset list</goa-button>
+  <goa-button version="2" id="add-btn" type="primary">Add new item</goa-button>
+  <goa-button version="2" id="reset-btn" type="tertiary">Reset list</goa-button>
 </goa-button-group>
 
 <goa-divider mt="l"></goa-divider>
 
-<goa-form-item mt="l" label="All items">
-  <goa-dropdown id="task-dropdown" name="selectedTask">
+<goa-form-item version="2" mt="l" label="All items">
+  <goa-dropdown version="2" id="task-dropdown" name="selectedTask">
     <goa-dropdown-item value="finish-report" label="Finish Report"></goa-dropdown-item>
     <goa-dropdown-item value="attend-meeting" label="Attend Meeting"></goa-dropdown-item>
     <goa-dropdown-item value="reply-emails" label="Reply Emails"></goa-dropdown-item>

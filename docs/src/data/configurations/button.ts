@@ -20,8 +20,8 @@ export const buttonConfigurations: ComponentConfigurations = {
       description: 'Simple button with default styling',
       code: {
         react: `<GoabxButton>Submit</GoabxButton>`,
-        angular: `<goab-button>Submit</goab-button>`,
-        webComponents: `<goa-button>Submit</goa-button>`,
+        angular: `<goabx-button>Submit</goabx-button>`,
+        webComponents: `<goa-button version="2">Submit</goa-button>`,
       },
     },
     {
@@ -32,12 +32,12 @@ export const buttonConfigurations: ComponentConfigurations = {
         react: `<GoabxButton type="primary">Primary</GoabxButton>
 <GoabxButton type="secondary">Secondary</GoabxButton>
 <GoabxButton type="tertiary">Tertiary</GoabxButton>`,
-        angular: `<goab-button type="primary">Primary</goab-button>
-<goab-button type="secondary">Secondary</goab-button>
-<goab-button type="tertiary">Tertiary</goab-button>`,
-        webComponents: `<goa-button type="primary">Primary</goa-button>
-<goa-button type="secondary">Secondary</goa-button>
-<goa-button type="tertiary">Tertiary</goa-button>`,
+        angular: `<goabx-button type="primary">Primary</goabx-button>
+<goabx-button type="secondary">Secondary</goabx-button>
+<goabx-button type="tertiary">Tertiary</goabx-button>`,
+        webComponents: `<goa-button version="2" type="primary">Primary</goa-button>
+<goa-button version="2" type="secondary">Secondary</goa-button>
+<goa-button version="2" type="tertiary">Tertiary</goa-button>`,
       },
     },
     {
@@ -47,10 +47,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabxButton size="normal">Normal</GoabxButton>
 <GoabxButton size="compact">Compact</GoabxButton>`,
-        angular: `<goab-button size="normal">Normal</goab-button>
-<goab-button size="compact">Compact</goab-button>`,
-        webComponents: `<goa-button size="normal">Normal</goa-button>
-<goa-button size="compact">Compact</goa-button>`,
+        angular: `<goabx-button size="normal">Normal</goabx-button>
+<goabx-button size="compact">Compact</goabx-button>`,
+        webComponents: `<goa-button version="2" size="normal">Normal</goa-button>
+<goa-button version="2" size="compact">Compact</goa-button>`,
       },
     },
     {
@@ -60,10 +60,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabxButton leadingIcon="add">Add item</GoabxButton>
 <GoabxButton trailingIcon="arrow-forward">Next</GoabxButton>`,
-        angular: `<goab-button leadingIcon="add">Add item</goab-button>
-<goab-button trailingIcon="arrow-forward">Next</goab-button>`,
-        webComponents: `<goa-button leadingicon="add">Add item</goa-button>
-<goa-button trailingicon="arrow-forward">Next</goa-button>`,
+        angular: `<goabx-button leadingIcon="add">Add item</goabx-button>
+<goabx-button trailingIcon="arrow-forward">Next</goabx-button>`,
+        webComponents: `<goa-button version="2" leadingicon="add">Add item</goa-button>
+<goa-button version="2" trailingicon="arrow-forward">Next</goa-button>`,
       },
     },
     {
@@ -73,10 +73,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabxButton disabled>Disabled primary</GoabxButton>
 <GoabxButton type="secondary" disabled>Disabled secondary</GoabxButton>`,
-        angular: `<goab-button disabled="true">Disabled primary</goab-button>
-<goab-button type="secondary" disabled="true">Disabled secondary</goab-button>`,
-        webComponents: `<goa-button disabled>Disabled primary</goa-button>
-<goa-button type="secondary" disabled>Disabled secondary</goa-button>`,
+        angular: `<goabx-button disabled="true">Disabled primary</goabx-button>
+<goabx-button type="secondary" disabled="true">Disabled secondary</goabx-button>`,
+        webComponents: `<goa-button version="2" disabled>Disabled primary</goa-button>
+<goa-button version="2" type="secondary" disabled>Disabled secondary</goa-button>`,
       },
     },
     {
@@ -86,10 +86,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabxButton variant="destructive">Delete</GoabxButton>
 <GoabxButton variant="destructive" type="secondary">Cancel subscription</GoabxButton>`,
-        angular: `<goab-button variant="destructive">Delete</goab-button>
-<goab-button variant="destructive" type="secondary">Cancel subscription</goab-button>`,
-        webComponents: `<goa-button variant="destructive">Delete</goa-button>
-<goa-button variant="destructive" type="secondary">Cancel subscription</goa-button>`,
+        angular: `<goabx-button variant="destructive">Delete</goabx-button>
+<goabx-button variant="destructive" type="secondary">Cancel subscription</goabx-button>`,
+        webComponents: `<goa-button version="2" variant="destructive">Delete</goa-button>
+<goa-button version="2" variant="destructive" type="secondary">Cancel subscription</goa-button>`,
       },
     },
     {
@@ -99,10 +99,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabxButton variant="inverse">Learn more</GoabxButton>
 <GoabxButton variant="inverse" type="secondary">Contact us</GoabxButton>`,
-        angular: `<goab-button variant="inverse">Learn more</goab-button>
-<goab-button variant="inverse" type="secondary">Contact us</goab-button>`,
-        webComponents: `<goa-button variant="inverse">Learn more</goa-button>
-<goa-button variant="inverse" type="secondary">Contact us</goa-button>`,
+        angular: `<goabx-button variant="inverse">Learn more</goabx-button>
+<goabx-button variant="inverse" type="secondary">Contact us</goabx-button>`,
+        webComponents: `<goa-button version="2" variant="inverse">Learn more</goa-button>
+<goa-button version="2" variant="inverse" type="secondary">Contact us</goa-button>`,
       },
     },
   ],

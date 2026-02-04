@@ -21,11 +21,11 @@ export const inputConfigurations: ComponentConfigurations = {
         react: `<GoabxFormItem label="Full name" mb="l">
   <GoabxInput name="fullName" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Full name" mb="l">
-  <goab-input name="fullName" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Full name" mb="l">
-  <goa-input name="fullName" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Full name" mb="l">
+  <goabx-input name="fullName" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Full name" mb="l">
+  <goa-input version="2" name="fullName" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -46,29 +46,29 @@ export const inputConfigurations: ComponentConfigurations = {
 <GoabxFormItem label="Age" mb="l">
   <GoabxInput name="age" type="number" width="3ch" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Email address" mb="l">
-  <goab-input name="email" type="email" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Password" mb="l">
-  <goab-input name="password" type="password" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Date of birth" mb="l">
-  <goab-input name="dob" type="date"></goab-input>
-</goab-form-item>
-<goab-form-item label="Age" mb="l">
-  <goab-input name="age" type="number" width="3ch"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Email address" mb="l">
-  <goa-input name="email" type="email" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Email address" mb="l">
+  <goabx-input name="email" type="email" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Password" mb="l">
+  <goabx-input name="password" type="password" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Date of birth" mb="l">
+  <goabx-input name="dob" type="date"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Age" mb="l">
+  <goabx-input name="age" type="number" width="3ch"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Email address" mb="l">
+  <goa-input version="2" name="email" type="email" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Password" mb="l">
-  <goa-input name="password" type="password" width="100%"></goa-input>
+<goa-form-item version="2" label="Password" mb="l">
+  <goa-input version="2" name="password" type="password" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Date of birth" mb="l">
-  <goa-input name="dob" type="date"></goa-input>
+<goa-form-item version="2" label="Date of birth" mb="l">
+  <goa-input version="2" name="dob" type="date"></goa-input>
 </goa-form-item>
-<goa-form-item label="Age" mb="l">
-  <goa-input name="age" type="number" width="3ch"></goa-input>
+<goa-form-item version="2" label="Age" mb="l">
+  <goa-input version="2" name="age" type="number" width="3ch"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -83,17 +83,17 @@ export const inputConfigurations: ComponentConfigurations = {
 <GoabxFormItem label="Website" mb="l">
   <GoabxInput name="website" trailingIcon="open" width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Search" mb="l">
-  <goab-input name="search" leadingIcon="search" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Website" mb="l">
-  <goab-input name="website" trailingIcon="open" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Search" mb="l">
-  <goa-input name="search" leading-icon="search" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Search" mb="l">
+  <goabx-input name="search" leadingIcon="search" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Website" mb="l">
+  <goabx-input name="website" trailingIcon="open" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Search" mb="l">
+  <goa-input version="2" name="search" leading-icon="search" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Website" mb="l">
-  <goa-input name="website" trailing-icon="open" width="100%"></goa-input>
+<goa-form-item version="2" label="Website" mb="l">
+  <goa-input version="2" name="website" trailing-icon="open" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -111,23 +111,23 @@ export const inputConfigurations: ComponentConfigurations = {
 <GoabxFormItem label="SIN" mb="l">
   <GoabxInput name="sin" width="11ch" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Postal code" mb="l">
-  <goab-input name="postalCode" width="7ch"></goab-input>
-</goab-form-item>
-<goab-form-item label="Year" mb="l">
-  <goab-input name="year" type="number" width="4ch"></goab-input>
-</goab-form-item>
-<goab-form-item label="SIN" mb="l">
-  <goab-input name="sin" width="11ch"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Postal code" mb="l">
-  <goa-input name="postalCode" width="7ch"></goa-input>
+        angular: `<goabx-form-item label="Postal code" mb="l">
+  <goabx-input name="postalCode" width="7ch"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Year" mb="l">
+  <goabx-input name="year" type="number" width="4ch"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="SIN" mb="l">
+  <goabx-input name="sin" width="11ch"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Postal code" mb="l">
+  <goa-input version="2" name="postalCode" width="7ch"></goa-input>
 </goa-form-item>
-<goa-form-item label="Year" mb="l">
-  <goa-input name="year" type="number" width="4ch"></goa-input>
+<goa-form-item version="2" label="Year" mb="l">
+  <goa-input version="2" name="year" type="number" width="4ch"></goa-input>
 </goa-form-item>
-<goa-form-item label="SIN" mb="l">
-  <goa-input name="sin" width="11ch"></goa-input>
+<goa-form-item version="2" label="SIN" mb="l">
+  <goa-input version="2" name="sin" width="11ch"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -142,17 +142,17 @@ export const inputConfigurations: ComponentConfigurations = {
 <GoabxFormItem label="Weight" mb="l">
   <GoabxInput name="weight" type="number" width="10ch" trailingContent="kg" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Price" mb="l">
-  <goab-input name="price" type="number" width="10ch" leadingContent="$"></goab-input>
-</goab-form-item>
-<goab-form-item label="Weight" mb="l">
-  <goab-input name="weight" type="number" width="10ch" trailingContent="kg"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Price" mb="l">
-  <goa-input name="price" type="number" width="10ch" leading-content="$"></goa-input>
+        angular: `<goabx-form-item label="Price" mb="l">
+  <goabx-input name="price" type="number" width="10ch" leadingContent="$"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Weight" mb="l">
+  <goabx-input name="weight" type="number" width="10ch" trailingContent="kg"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Price" mb="l">
+  <goa-input version="2" name="price" type="number" width="10ch" leading-content="$"></goa-input>
 </goa-form-item>
-<goa-form-item label="Weight" mb="l">
-  <goa-input name="weight" type="number" width="10ch" trailing-content="kg"></goa-input>
+<goa-form-item version="2" label="Weight" mb="l">
+  <goa-input version="2" name="weight" type="number" width="10ch" trailing-content="kg"></goa-input>
 </goa-form-item>`,
       },
     },
@@ -170,23 +170,23 @@ export const inputConfigurations: ComponentConfigurations = {
 <GoabxFormItem label="Input with error" error="This field is required" mb="l">
   <GoabxInput name="error" error width="100%" />
 </GoabxFormItem>`,
-        angular: `<goab-form-item label="Disabled input" mb="l">
-  <goab-input name="disabled" [disabled]="true" value="Cannot edit" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Read-only input" mb="l">
-  <goab-input name="readonly" [readOnly]="true" value="View only" width="100%"></goab-input>
-</goab-form-item>
-<goab-form-item label="Input with error" error="This field is required" mb="l">
-  <goab-input name="error" [error]="true" width="100%"></goab-input>
-</goab-form-item>`,
-        webComponents: `<goa-form-item label="Disabled input" mb="l">
-  <goa-input name="disabled" disabled value="Cannot edit" width="100%"></goa-input>
+        angular: `<goabx-form-item label="Disabled input" mb="l">
+  <goabx-input name="disabled" [disabled]="true" value="Cannot edit" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Read-only input" mb="l">
+  <goabx-input name="readonly" [readOnly]="true" value="View only" width="100%"></goabx-input>
+</goabx-form-item>
+<goabx-form-item label="Input with error" error="This field is required" mb="l">
+  <goabx-input name="error" [error]="true" width="100%"></goabx-input>
+</goabx-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Disabled input" mb="l">
+  <goa-input version="2" name="disabled" disabled value="Cannot edit" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Read-only input" mb="l">
-  <goa-input name="readonly" read-only value="View only" width="100%"></goa-input>
+<goa-form-item version="2" label="Read-only input" mb="l">
+  <goa-input version="2" name="readonly" read-only value="View only" width="100%"></goa-input>
 </goa-form-item>
-<goa-form-item label="Input with error" error="This field is required" mb="l">
-  <goa-input name="error" error width="100%"></goa-input>
+<goa-form-item version="2" label="Input with error" error="This field is required" mb="l">
+  <goa-input version="2" name="error" error width="100%"></goa-input>
 </goa-form-item>`,
       },
     },

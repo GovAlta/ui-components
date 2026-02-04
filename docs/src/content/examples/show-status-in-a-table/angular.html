@@ -1,4 +1,4 @@
-<goab-table width="100%">
+<goabx-table width="100%">
   <thead>
     <tr>
       <th>Status</th>
@@ -10,13 +10,13 @@
   <tbody>
     <tr *ngFor="let badge of badgeValues">
       <td>
-        <goab-badge [type]="badge.type" [content]="badge.content" [icon]="false"></goab-badge>
+        <goabx-badge [type]="badge.type" [content]="badge.content" [icon]="false"></goabx-badge>
       </td>
       <td>Lorem ipsum dolor sit amet consectetur.</td>
       <td class="goa-table-number-column">1234567890</td>
       <td>
-        <goab-button size="compact" type="tertiary" (onClick)="onClick()">Assign</goab-button>
+        <goabx-button size="compact" type="tertiary" (onClick)="onClick()">Assign</goabx-button>
       </td>
     </tr>
   </tbody>
-</goab-table>
+</goabx-table>

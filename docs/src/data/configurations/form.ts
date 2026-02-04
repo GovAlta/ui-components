@@ -29,25 +29,25 @@ export const formConfigurations: ComponentConfigurations = {
   </GoabButtonGroup>
 </GoabForm>`,
         angular: `<goab-form (_submit)="handleSubmit($event)">
-  <goab-form-item label="Name" mb="l">
-    <goab-input name="name" width="100%"></goab-input>
-  </goab-form-item>
-  <goab-form-item label="Email" mb="l">
-    <goab-input name="email" type="email" width="100%"></goab-input>
-  </goab-form-item>
+  <goabx-form-item label="Name" mb="l">
+    <goabx-input name="name" width="100%"></goabx-input>
+  </goabx-form-item>
+  <goabx-form-item label="Email" mb="l">
+    <goabx-input name="email" type="email" width="100%"></goabx-input>
+  </goabx-form-item>
   <goab-button-group mt="l">
-    <goab-button type="submit">Submit</goab-button>
+    <goabx-button type="submit">Submit</goabx-button>
   </goab-button-group>
 </goab-form>`,
         webComponents: `<goa-form>
-  <goa-form-item label="Name" mb="l">
-    <goa-input name="name" width="100%"></goa-input>
+  <goa-form-item version="2" label="Name" mb="l">
+    <goa-input version="2" name="name" width="100%"></goa-input>
   </goa-form-item>
-  <goa-form-item label="Email" mb="l">
-    <goa-input name="email" type="email" width="100%"></goa-input>
+  <goa-form-item version="2" label="Email" mb="l">
+    <goa-input version="2" name="email" type="email" width="100%"></goa-input>
   </goa-form-item>
   <goa-button-group mt="l">
-    <goa-button type="submit">Submit</goa-button>
+    <goa-button version="2" type="submit">Submit</goa-button>
   </goa-button-group>
 </goa-form>`,
       },

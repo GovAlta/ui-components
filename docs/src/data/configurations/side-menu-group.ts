@@ -28,24 +28,24 @@ export const sideMenuGroupConfigurations: ComponentConfigurations = {
     <a href="/reports/annual">Annual</a>
   </GoabxSideMenuGroup>
 </GoabxSideMenu>`,
-        angular: `<goab-side-menu>
-  <goab-side-menu-group heading="Applications">
+        angular: `<goabx-side-menu>
+  <goabx-side-menu-group heading="Applications">
     <a href="/apps/active">Active</a>
     <a href="/apps/pending">Pending</a>
     <a href="/apps/archived">Archived</a>
-  </goab-side-menu-group>
-  <goab-side-menu-group heading="Reports">
+  </goabx-side-menu-group>
+  <goabx-side-menu-group heading="Reports">
     <a href="/reports/monthly">Monthly</a>
     <a href="/reports/annual">Annual</a>
-  </goab-side-menu-group>
-</goab-side-menu>`,
-        webComponents: `<goa-side-menu>
-  <goa-side-menu-group heading="Applications">
+  </goabx-side-menu-group>
+</goabx-side-menu>`,
+        webComponents: `<goa-side-menu version="2">
+  <goa-side-menu-group version="2" heading="Applications">
     <a href="/apps/active">Active</a>
     <a href="/apps/pending">Pending</a>
     <a href="/apps/archived">Archived</a>
   </goa-side-menu-group>
-  <goa-side-menu-group heading="Reports">
+  <goa-side-menu-group version="2" heading="Reports">
     <a href="/reports/monthly">Monthly</a>
     <a href="/reports/annual">Annual</a>
   </goa-side-menu-group>
