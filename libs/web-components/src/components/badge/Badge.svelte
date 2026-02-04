@@ -419,37 +419,37 @@
 
   .v2.badge-subtle.badge-sky {
     background-color: var(--goa-color-extended-sky-light);
-    box-shadow: var(--goa-color-extended-sky-subtle-border);
+    box-shadow: var(--goa-badge-sky-subtle-border);
     color: var(--goa-color-extended-sky-text);
   }
 
   .v2.badge-subtle.badge-prairie {
     background-color: var(--goa-color-extended-prairie-light);
-    box-shadow: var(--goa-color-extended-prairie-subtle-border);
+    box-shadow: var(--goa-badge-prairie-subtle-border);
     color: var(--goa-color-extended-prairie-text);
   }
 
   .v2.badge-subtle.badge-lilac {
     background-color: var(--goa-color-extended-lilac-light);
-    box-shadow: var(--goa-color-extended-lilac-subtle-border);
+    box-shadow: var(--goa-badge-lilac-subtle-border);
     color: var(--goa-color-extended-lilac-text);
   }
 
   .v2.badge-subtle.badge-pasture {
     background-color: var(--goa-color-extended-pasture-light);
-    box-shadow: var(--goa-color-extended-pasture-subtle-border);
+    box-shadow: var(--goa-badge-pasture-subtle-border);
     color: var(--goa-color-extended-pasture-text);
   }
 
   .v2.badge-subtle.badge-sunset {
     background-color: var(--goa-color-extended-sunset-light);
-    box-shadow: var(--goa-color-extended-sunset-subtle-border);
+    box-shadow: var(--goa-badge-sunset-subtle-border);
     color: var(--goa-color-extended-sunset-text);
   }
 
   .v2.badge-subtle.badge-dawn {
     background-color: var(--goa-color-extended-dawn-light);
-    box-shadow: var(--goa-color-extended-dawn-subtle-border);
+    box-shadow: var(--goa-badge-dawn-subtle-border);
     color: var(--goa-color-extended-dawn-text);
   }
 
