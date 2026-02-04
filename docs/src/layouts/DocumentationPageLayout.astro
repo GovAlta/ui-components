@@ -99,7 +99,7 @@ const {
     top: 0;
     height: 100vh;
     background: var(--goa-color-greyscale-50);
-    z-index: 5;
+    z-index: 2; /* Above content (1) for tooltips, below modals (998+) */
   }
 
   .main-content {
@@ -122,6 +122,8 @@ const {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--goa-space-2xl);
+    max-width: 960px;
+    margin: 0 auto;
   }
 
   .content-grid.with-toc {
@@ -131,6 +133,7 @@ const {
   /* Prose typography */
   .prose-content {
     max-width: 70ch;
+    min-width: 0; /* Allow shrinking in grid to prevent overflow */
   }
 
   /* Page title */

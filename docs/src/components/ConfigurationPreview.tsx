@@ -184,7 +184,6 @@ export function ConfigurationPreview({
           gap: var(--goa-space-m, 1rem);
           margin-bottom: var(--goa-space-m, 1rem);
           position: relative;
-          z-index: 2;
         }
 
         .config-dropdown {
@@ -225,7 +224,7 @@ export function ConfigurationPreview({
           min-height: 120px;
           margin-bottom: var(--goa-space-m, 1rem);
           position: relative;
-          z-index: 1;
+          z-index: 1; /* Allow dropdowns to appear above code snippets */
           isolation: isolate;
         }
 

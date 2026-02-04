@@ -75,7 +75,7 @@ const { title, description, currentSlug, category } = Astro.props;
     top: 0;
     height: 100vh;
     background: var(--goa-color-greyscale-50);
-    z-index: 5;
+    z-index: 2; /* Above content (1) for tooltips, below modals (998+) */
   }
 
   .main-content {

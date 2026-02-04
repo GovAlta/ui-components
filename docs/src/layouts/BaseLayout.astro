@@ -6,9 +6,10 @@ import '@design-tokens/tokens.css';
 interface Props {
   title: string;
   description?: string;
+  page?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, page } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -156,14 +157,26 @@ const { title, description } = Astro.props;
       z-index: 50;
       padding: var(--goa-space-m) var(--goa-space-m); /* 16px vertical, 16px horizontal */
       border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
-      /* Smooth transition for hide/show */
+      /* Smooth transitions for hide/show and background */
       transform: translateY(0);
-      transition: transform 0.25s ease-out;
+      transition: transform 0.25s ease-out, background 0.2s ease, border-bottom 0.2s ease;
     }
 
     /* Header hidden on scroll down */
     body[data-mobile="true"][data-header-hidden="true"] .mobile-header-container {
       transform: translateY(-100%);
+    }
+
+    /* Homepage: transparent header at top blends with hero */
+    body[data-page="home"][data-mobile="true"][data-scrolled="false"] .mobile-header-container {
+      background: transparent;
+      border-bottom: none;
+    }
+
+    /* Homepage: restore white header when scrolled */
+    body[data-page="home"][data-mobile="true"][data-scrolled="true"] .mobile-header-container {
+      background: white;
+      border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
     }
 
     /* Mobile header content layout */
@@ -226,7 +239,7 @@ const { title, description } = Astro.props;
     }
   </style>
 </head>
-<body>
+<body data-page={page}>
   <slot />
 </body>
 </html>

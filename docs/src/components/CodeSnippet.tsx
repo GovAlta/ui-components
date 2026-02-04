@@ -387,10 +387,37 @@ export function CodeSnippet({
     );
   };
 
+  // Helper to render code blocks for a specific framework
+  const renderBlocksForFramework = (fw: Framework) => {
+    if (!extractParts) {
+      const rawCode = getFrameworkRawCode(frameworkCode, fw);
+      const lang = fw === 'react' ? 'tsx' : 'html';
+      return (
+        <SingleCodeBlock
+          code={rawCode}
+          language={lang}
+          showCopy={showCopy}
+          maxHeight={maxHeight}
+        />
+      );
+    }
+
+    switch (fw) {
+      case 'react':
+        return renderReactBlocks(frameworkCode.react);
+      case 'angular':
+        return renderAngularBlocks(frameworkCode.angular);
+      case 'webComponents':
+        return renderWebComponentsBlocks(frameworkCode.webComponents);
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="code-snippet-wrapper">
-      {/* Framework Switcher - outside the code container */}
-      {availableFrameworks.length > 1 && (
+      {availableFrameworks.length > 1 ? (
+        // Multiple frameworks - use tabs with content inside
         <div className="framework-switcher" ref={tabsRef}>
           <GoabxTabs
             key={selectedFramework}
@@ -399,17 +426,23 @@ export function CodeSnippet({
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
-                {/* Empty - content rendered separately below */}
+                <div className="code-snippet">
+                  <div className="code-blocks">
+                    {renderBlocksForFramework(fw)}
+                  </div>
+                </div>
               </GoabTab>
             ))}
           </GoabxTabs>
         </div>
+      ) : (
+        // Single framework - no tabs needed
+        <div className="code-snippet">
+          <div className="code-blocks">
+            {renderFrameworkBlocks()}
+          </div>
+        </div>
       )}
-
-      <div className="code-snippet">
-        {/* Code Blocks */}
-        <div className="code-blocks">{renderFrameworkBlocks()}</div>
-      </div>
 
       <CodeSnippetStyles />
     </div>
@@ -465,8 +498,8 @@ function CodeSnippetStyles() {
         font-size: 0.875rem;
       }
 
-      .framework-switcher {
-        margin-bottom: -24px; /* Compensate for 32px margin inside goa-tabs to get 8px gap */
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
       }
 
       .code-blocks {
@@ -485,7 +518,6 @@ function CodeSnippetStyles() {
         position: absolute;
         top: var(--goa-space-xs, 0.25rem);
         right: var(--goa-space-s, 0.5rem);
-        z-index: 1;
       }
 
       .code-block-title {
@@ -558,7 +590,6 @@ function CodeSnippetStyles() {
         justify-content: center;
         padding: var(--goa-space-s, 0.5rem) 0;
         position: relative;
-        z-index: 2;
         margin-top: -2rem;
       }
 

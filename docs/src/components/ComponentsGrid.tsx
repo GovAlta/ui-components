@@ -1024,9 +1024,13 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 623px) {
           .components-card-grid {
             grid-template-columns: 1fr;
+          }
+
+          .view-toggle-wrapper {
+            display: none;
           }
         }
 

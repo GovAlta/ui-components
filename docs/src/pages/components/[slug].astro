@@ -105,7 +105,8 @@ const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3A
     </goa-tab>
 
     <!-- Examples Tab -->
-    <goa-tab>
+    <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation -->
+    <goa-tab heading="Examples">
       <span slot="heading">Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={String(componentExamples.length)}></goa-badge></span>
       <TabContentWrapper tocQuery=".example-preview .example-title">
         {componentExamples.length > 0 ? (
