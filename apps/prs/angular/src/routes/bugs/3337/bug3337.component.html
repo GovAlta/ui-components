@@ -1,0 +1,25 @@
+<goab-text tag="h1">Bug 3337 - Input autocomplete default styling</goab-text>
+<goab-text tag="p">
+  Chromium browsers add their own styling to inputs using autocomplete, which overwrites
+  our styling. This is to ensure our styling remains at all times.
+</goab-text>
+
+<goab-form-item label="Autocomplete Input" mb="xl">
+  <goab-input
+    name="autocomplete-test"
+    leadingIcon="search"
+    (onBlur)="inputBlur($event)"
+    [value]="inputValue"
+    autoComplete="name"
+  />
+</goab-form-item>
+<goab-form-item label="Autocomplete Input (Goabx)" mb="xl">
+  <goabx-input
+    name="autocomplete-test-v2"
+    leadingIcon="search"
+    (onBlur)="inputBlur($event)"
+    [value]="inputValue"
+    autoComplete="name"
+  />
+</goab-form-item>
+<goab-button (onClick)="buttonClick()">Click Me</goab-button>

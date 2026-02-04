@@ -64,6 +64,7 @@ export function App() {
               <Link to="/bugs/3275">3275 Can't unset month</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
               <Link to="/bugs/3281">3281 GoabText p tag margin issues</Link>
+              <Link to="/bugs/3337">3337 Input autocomplete styling</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>
@@ -85,9 +86,9 @@ export function App() {
               <Link to="/features/2829">2829 Modal ARIA Live Region</Link>
               <Link to="/features/2877">2877 Badge Types and Custom Icon</Link>
               <Link to="/features/3102">3102 MenuButton Width</Link>
+              <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3241">3241 V2 Experimental Wrappers</Link>
               <Link to="/features/v2-icons">v2 header icons</Link>
-              <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3306">3306 Custom slug value for tabs</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
