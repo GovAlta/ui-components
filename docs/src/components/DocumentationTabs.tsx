@@ -4,8 +4,9 @@
  * This component tests and implements GoA tabs for the docs site dogfooding effort.
  * Uses actual GoA React components instead of custom CSS tabs.
  */
-import { GoabTabs, GoabTab } from '@abgov/react-components';
-import type { ReactNode } from 'react';
+import { GoabxTabs } from "@abgov/react-components/experimental";
+import { GoabTab } from "@abgov/react-components";
+import type { ReactNode } from "react";
 
 interface TabConfig {
   heading: string;
@@ -20,16 +21,18 @@ interface DocumentationTabsProps {
 
 export function DocumentationTabs({ tabs, initialTab = 0 }: DocumentationTabsProps) {
   return (
-    <GoabTabs initialTab={initialTab}>
+    <GoabxTabs initialTab={initialTab}>
       {tabs.map((tab, index) => (
         <GoabTab
           key={index}
-          heading={tab.count !== undefined ? `${tab.heading} (${tab.count})` : tab.heading}
+          heading={
+            tab.count !== undefined ? `${tab.heading} (${tab.count})` : tab.heading
+          }
         >
           {tab.content}
         </GoabTab>
       ))}
-    </GoabTabs>
+    </GoabxTabs>
   );
 }
 

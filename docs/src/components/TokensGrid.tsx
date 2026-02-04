@@ -11,28 +11,28 @@
  * Design pattern based on ExamplesGrid - Figma + workspace demo hybrid approach.
  */
 
-import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import {
-  GoabTable,
-  GoabTableSortHeader,
-  GoabButton,
+  GoabxButton,
+  GoabxInput,
+  GoabxFormItem,
+  GoabxFilterChip,
+  GoabxDrawer,
+  GoabxCheckbox,
+} from "@abgov/react-components/experimental";
+import {
   GoabIconButton,
-  GoabInput,
-  GoabFormItem,
-  GoabFilterChip,
-  GoabBadge,
   GoabIcon,
-  GoabDrawer,
-  GoabCheckbox,
   GoabDivider,
   GoabButtonGroup,
   GoabContainer,
-  GoabTabs,
+  GoabCheckboxList,
   GoabTab,
-} from '@abgov/react-components';
-import { useTwoLevelSort } from '../hooks/useTwoLevelSort';
-import { useMobile } from '../hooks/useCompactToolbar';
-import type { FlatToken } from '../lib/tokens';
+  type GoabCheckboxListOnChangeDetail,
+} from "@abgov/react-components";
+import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
+import { useMobile } from "../hooks/useCompactToolbar";
+import type { FlatToken } from "../lib/tokens";
 
 interface FilterGroup {
   name: string;
@@ -45,14 +45,22 @@ interface TokensGridProps {
 }
 
 // Badge type mapping for categories (using V2 extended colors)
-function getCategoryBadgeType(category: string): 'sky' | 'pasture' | 'sunset' | 'lilac' | 'prairie' | 'dawn' {
+function getCategoryBadgeType(
+  category: string,
+): "sky" | "pasture" | "sunset" | "lilac" | "prairie" | "dawn" {
   switch (category) {
-    case 'color': return 'sky';
-    case 'spacing': return 'pasture';
-    case 'typography': return 'sunset';
-    case 'border': return 'lilac';
-    case 'shadow': return 'prairie';
-    default: return 'dawn';
+    case "color":
+      return "sky";
+    case "spacing":
+      return "pasture";
+    case "typography":
+      return "sunset";
+    case "border":
+      return "lilac";
+    case "shadow":
+      return "prairie";
+    default:
+      return "dawn";
   }
 }
 
@@ -62,27 +70,29 @@ function formatCategory(category: string): string {
 }
 
 // Token syntax types
-type TokenSyntax = 'css' | 'scss';
+type TokenSyntax = "css" | "scss";
 
 // Convert CSS variable name to SCSS variable name
 function toScssSyntax(cssName: string): string {
   // --goa-color-primary → $goa-color-primary
-  return cssName.replace(/^--/, '$');
+  return cssName.replace(/^--/, "$");
 }
 
 export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   // State
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [searchChips, setSearchChips] = useState<string[]>([]);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
-  const [tokenSyntax, setTokenSyntax] = useState<TokenSyntax>('css');
+  const [tokenSyntax, setTokenSyntax] = useState<TokenSyntax>("css");
 
   // Ref for sticky detection sentinel
   const sentinelRef = useRef<HTMLDivElement>(null);
-  // Ref for syntax toggle tabs
-  const syntaxToggleRef = useRef<HTMLDivElement>(null);
+  // Ref for table (to handle sort events from web component)
+  const tableRef = useRef<HTMLElement>(null);
+  // TODO: Remove tabsRef when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
+  const tabsRef = useRef<HTMLElement>(null);
 
   // Detect when toolbar becomes sticky using IntersectionObserver
   useEffect(() => {
@@ -94,32 +104,11 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         // When sentinel is not intersecting (scrolled out of view), toolbar is sticky
         setIsSticky(!entry.isIntersecting);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, []);
-
-  // Listen for syntax toggle tab changes (native event - GoA tabs are 1-indexed)
-  useEffect(() => {
-    if (!syntaxToggleRef.current) return;
-
-    const handleSyntaxChange = (e: Event) => {
-      const customEvent = e as CustomEvent<{ tab: number }>;
-      const tabIndex = customEvent.detail?.tab;
-      if (tabIndex === 1) {
-        setTokenSyntax('css');
-      } else if (tabIndex === 2) {
-        setTokenSyntax('scss');
-      }
-    };
-
-    const tabsElement = syntaxToggleRef.current.querySelector('goa-tabs');
-    if (tabsElement) {
-      tabsElement.addEventListener('_change', handleSyntaxChange);
-      return () => tabsElement.removeEventListener('_change', handleSyntaxChange);
-    }
   }, []);
 
   // Filter state
@@ -127,13 +116,48 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
 
   // Hooks
-  const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } = useTwoLevelSort();
+  const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
+    useTwoLevelSort();
   const isMobile = useMobile();
+
+  // Listen for table sort events (from goa-table web component)
+  useEffect(() => {
+    const table = tableRef.current;
+    if (!table) return;
+
+    const handleSort = (e: Event) => {
+      const detail = (e as CustomEvent<{ sortBy: string; sortDir: "asc" | "desc" }>)
+        .detail;
+      handleTableSort(detail);
+    };
+
+    table.addEventListener("_sort", handleSort);
+    return () => table.removeEventListener("_sort", handleSort);
+  }, [handleTableSort]);
+
+  // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
+  // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
+  useEffect(() => {
+    const tabs = tabsRef.current;
+    if (!tabs) return;
+
+    const handleChange = (e: Event) => {
+      const detail = (e as CustomEvent<{ tab: number }>).detail;
+      if (detail.tab === 1) {
+        setTokenSyntax("css");
+      } else if (detail.tab === 2) {
+        setTokenSyntax("scss");
+      }
+    };
+
+    tabs.addEventListener("_change", handleChange);
+    return () => tabs.removeEventListener("_change", handleChange);
+  }, []);
 
   // View mode: 'list' (table) on desktop, 'card' on mobile
   // No user toggle - automatically switches based on viewport
-  const viewMode = useMemo((): 'card' | 'list' => {
-    return isMobile ? 'card' : 'list';
+  const viewMode = useMemo((): "card" | "list" => {
+    return isMobile ? "card" : "list";
   }, [isMobile]);
 
   // Filter and sort tokens
@@ -147,8 +171,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           (chip) =>
             token.name.toLowerCase().includes(chip.toLowerCase()) ||
             token.value.toLowerCase().includes(chip.toLowerCase()) ||
-            token.category.toLowerCase().includes(chip.toLowerCase())
-        )
+            token.category.toLowerCase().includes(chip.toLowerCase()),
+        ),
       );
     }
 
@@ -165,18 +189,18 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     if (sortConfig.primary) {
       result = [...result].sort((a, b) => {
         const key = sortConfig.primary!.key as keyof FlatToken;
-        const aVal = String(a[key] || '');
-        const bVal = String(b[key] || '');
+        const aVal = String(a[key] || "");
+        const bVal = String(b[key] || "");
         const cmp = aVal.localeCompare(bVal);
-        const dir = sortConfig.primary!.direction === 'asc' ? 1 : -1;
+        const dir = sortConfig.primary!.direction === "asc" ? 1 : -1;
 
         if (cmp !== 0) return cmp * dir;
 
         if (sortConfig.secondary) {
           const secKey = sortConfig.secondary.key as keyof FlatToken;
-          const secAVal = String(a[secKey] || '');
-          const secBVal = String(b[secKey] || '');
-          const secDir = sortConfig.secondary.direction === 'asc' ? 1 : -1;
+          const secAVal = String(a[secKey] || "");
+          const secBVal = String(b[secKey] || "");
+          const secDir = sortConfig.secondary.direction === "asc" ? 1 : -1;
           return secAVal.localeCompare(secBVal) * secDir;
         }
 
@@ -187,13 +211,12 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     return result;
   }, [tokens, searchChips, appliedFilters, sortConfig, filterGroups]);
 
-
   // Search handlers
   const applySearch = useCallback(() => {
     const trimmed = searchValue.trim();
     if (trimmed && !searchChips.includes(trimmed)) {
       setSearchChips((prev) => [...prev, trimmed]);
-      setSearchValue('');
+      setSearchValue("");
     }
   }, [searchValue, searchChips]);
 
@@ -204,7 +227,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   // Filter handlers
   const togglePendingFilter = useCallback((category: string) => {
     setPendingFilters((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category],
     );
   }, []);
 
@@ -223,21 +246,27 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   }, []);
 
   // Get formatted token name based on current syntax
-  const getFormattedTokenName = useCallback((cssName: string): string => {
-    return tokenSyntax === 'scss' ? toScssSyntax(cssName) : cssName;
-  }, [tokenSyntax]);
+  const getFormattedTokenName = useCallback(
+    (cssName: string): string => {
+      return tokenSyntax === "scss" ? toScssSyntax(cssName) : cssName;
+    },
+    [tokenSyntax],
+  );
 
   // Copy to clipboard (copies the formatted name)
-  const copyToClipboard = useCallback(async (tokenName: string) => {
-    try {
-      const formattedName = getFormattedTokenName(tokenName);
-      await navigator.clipboard.writeText(formattedName);
-      setCopiedToken(tokenName);
-      setTimeout(() => setCopiedToken(null), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  }, [getFormattedTokenName]);
+  const copyToClipboard = useCallback(
+    async (tokenName: string) => {
+      try {
+        const formattedName = getFormattedTokenName(tokenName);
+        await navigator.clipboard.writeText(formattedName);
+        setCopiedToken(tokenName);
+        setTimeout(() => setCopiedToken(null), 2000);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    },
+    [getFormattedTokenName],
+  );
 
   // Clear all filters, search, and sort
   const clearAll = useCallback(() => {
@@ -247,30 +276,36 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   }, [clearAllFilters, clearSort]);
 
   // Get sort direction for column headers
-  const getColumnSortDirection = useCallback((columnKey: string): 'asc' | 'desc' | 'none' => {
-    if (sortConfig.primary?.key === columnKey) {
-      return sortConfig.primary.direction;
-    }
-    if (sortConfig.secondary?.key === columnKey) {
-      return sortConfig.secondary.direction;
-    }
-    return 'none';
-  }, [sortConfig]);
+  const getColumnSortDirection = useCallback(
+    (columnKey: string): "asc" | "desc" | "none" => {
+      if (sortConfig.primary?.key === columnKey) {
+        return sortConfig.primary.direction;
+      }
+      if (sortConfig.secondary?.key === columnKey) {
+        return sortConfig.secondary.direction;
+      }
+      return "none";
+    },
+    [sortConfig],
+  );
 
   // Get sort order indicator ("1" or "2") for column headers
-  const getColumnSortOrder = useCallback((columnKey: string): string | undefined => {
-    // Only show numbers if there are two sorts active
-    if (!sortConfig.primary || !sortConfig.secondary) {
+  const getColumnSortOrder = useCallback(
+    (columnKey: string): string | undefined => {
+      // Only show numbers if there are two sorts active
+      if (!sortConfig.primary || !sortConfig.secondary) {
+        return undefined;
+      }
+      if (sortConfig.primary.key === columnKey) {
+        return "1";
+      }
+      if (sortConfig.secondary.key === columnKey) {
+        return "2";
+      }
       return undefined;
-    }
-    if (sortConfig.primary.key === columnKey) {
-      return "1";
-    }
-    if (sortConfig.secondary.key === columnKey) {
-      return "2";
-    }
-    return undefined;
-  }, [sortConfig]);
+    },
+    [sortConfig],
+  );
 
   // Render color preview
   const renderPreview = (token: FlatToken) => {
@@ -283,7 +318,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             height: 24,
             borderRadius: 4,
             backgroundColor: token.value,
-            border: '1px solid var(--goa-color-greyscale-200)',
+            border: "1px solid var(--goa-color-greyscale-200)",
           }}
           title={token.value}
         />
@@ -305,19 +340,24 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                 <span className="token-value">{token.value}</span>
               </div>
               <GoabIconButton
-                icon={copiedToken === token.name ? 'checkmark' : 'copy'}
+                icon={copiedToken === token.name ? "checkmark" : "copy"}
                 size="small"
                 variant="dark"
                 ariaLabel={`Copy ${getFormattedTokenName(token.name)}`}
                 onClick={() => copyToClipboard(token.name)}
               />
             </div>
-            <GoabBadge type={getCategoryBadgeType(token.category)} content={formatCategory(token.category)} emphasis="subtle" />
+            <goa-badge
+              version="2"
+              type={getCategoryBadgeType(token.category)}
+              content={formatCategory(token.category)}
+              emphasis="subtle"
+            />
           </div>
         </GoabContainer>
       </div>
     ),
-    [copiedToken, copyToClipboard, getFormattedTokenName]
+    [copiedToken, copyToClipboard, getFormattedTokenName],
   );
 
   // Render table row (list view)
@@ -332,11 +372,16 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           <code className="token-value">{token.value}</code>
         </td>
         <td>
-          <GoabBadge type={getCategoryBadgeType(token.category)} content={formatCategory(token.category)} emphasis="subtle" />
+          <goa-badge
+            version="2"
+            type={getCategoryBadgeType(token.category)}
+            content={formatCategory(token.category)}
+            emphasis="subtle"
+          />
         </td>
         <td>
           <GoabIconButton
-            icon={copiedToken === token.name ? 'checkmark' : 'copy'}
+            icon={copiedToken === token.name ? "checkmark" : "copy"}
             size="small"
             variant="dark"
             ariaLabel={`Copy ${getFormattedTokenName(token.name)}`}
@@ -345,10 +390,11 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         </td>
       </tr>
     ),
-    [copiedToken, copyToClipboard, getFormattedTokenName]
+    [copiedToken, copyToClipboard, getFormattedTokenName],
   );
 
-  const hasActiveFilters = searchChips.length > 0 || appliedFilters.length > 0 || sortConfig.primary;
+  const hasActiveFilters =
+    searchChips.length > 0 || appliedFilters.length > 0 || sortConfig.primary;
 
   return (
     <div className="tokens-grid">
@@ -356,40 +402,54 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       <div ref={sentinelRef} className="tokens-sentinel" aria-hidden="true" />
 
       {/* Toolbar */}
-      <div className={`tokens-toolbar ${isSticky ? 'tokens-toolbar--sticky' : ''}`}>
+      <div className={`tokens-toolbar ${isSticky ? "tokens-toolbar--sticky" : ""}`}>
         {/* Search input */}
         <div className="tokens-search-section">
-          <GoabFormItem
-            helpText={!isSticky ? 'Search by name, value, or category' : undefined}
+          <GoabxFormItem
+            helpText={!isSticky ? "Search by name, value, or category" : undefined}
           >
-            <GoabInput
+            <GoabxInput
               name="tokenSearch"
               value={searchValue}
               leadingIcon="search"
               width="100%"
               size="compact"
               onChange={(e) => setSearchValue(e.value)}
-              onKeyPress={(e) => e.key === 'Enter' && applySearch()}
+              onKeyPress={(e) => e.key === "Enter" && applySearch()}
             />
-          </GoabFormItem>
+          </GoabxFormItem>
         </div>
 
         {/* Syntax toggle + Filters */}
         <div className="tokens-toolbar-actions">
-          {/* CSS/SCSS syntax toggle - segmented tabs */}
-          <div className="syntax-toggle-wrapper" ref={syntaxToggleRef}>
-            <GoabTabs
+          {/*
+           * TODO: Replace <goa-tabs> with GoabxTabs when wrapper exposes these props
+           *
+           * Using web component directly because GoabxTabs wrapper is missing:
+           * - updateUrl prop (we need false to avoid polluting browser history)
+           * - stackOnMobile prop (we need false for compact toggle)
+           *
+           * When fixed, remove: tabsRef, useEffect for _change event, goa-tabs from global.d.ts
+           */}
+          <div className="syntax-toggle-wrapper">
+            <goa-tabs
+              ref={tabsRef}
+              version="2"
               variant="segmented"
-              initialTab={tokenSyntax === 'css' ? 1 : 2}
-              updateUrl={false}
-              stackOnMobile={false}
+              initialtab={tokenSyntax === "css" ? 1 : 2}
+              updateurl="false"
+              stackonmobile="false"
             >
-              <GoabTab heading="CSS"><span /></GoabTab>
-              <GoabTab heading="SCSS"><span /></GoabTab>
-            </GoabTabs>
+              <goa-tab heading="CSS">
+                <span />
+              </goa-tab>
+              <goa-tab heading="SCSS">
+                <span />
+              </goa-tab>
+            </goa-tabs>
           </div>
 
-          <GoabButton
+          <GoabxButton
             type="secondary"
             leadingIcon="filter-lines"
             size="compact"
@@ -399,28 +459,38 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             }}
           >
             Filters
-          </GoabButton>
+          </GoabxButton>
         </div>
       </div>
 
       {/* Active filters chips */}
       {hasActiveFilters && (
         <div className="tokens-chips">
-          <GoabIcon type="filter-lines" size="small" fillColor="var(--goa-color-text-secondary)" />
+          <GoabIcon
+            type="filter-lines"
+            size="small"
+            fillColor="var(--goa-color-text-secondary)"
+          />
 
           {/* Sort chips */}
           {sortConfig.primary && (
-            <GoabFilterChip
+            <GoabxFilterChip
               content={sortConfig.primary.key}
-              leadingIcon={sortConfig.primary.direction === 'asc' ? 'arrow-up' : 'arrow-down'}
-              secondaryText={sortConfig.secondary ? '1st' : undefined}
-              onClick={() => setSortConfig({ primary: sortConfig.secondary, secondary: null })}
+              leadingIcon={
+                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText={sortConfig.secondary ? "1st" : undefined}
+              onClick={() =>
+                setSortConfig({ primary: sortConfig.secondary, secondary: null })
+              }
             />
           )}
           {sortConfig.secondary && (
-            <GoabFilterChip
+            <GoabxFilterChip
               content={sortConfig.secondary.key}
-              leadingIcon={sortConfig.secondary.direction === 'asc' ? 'arrow-up' : 'arrow-down'}
+              leadingIcon={
+                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
               secondaryText="2nd"
               onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
             />
@@ -428,15 +498,30 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
           {/* Search chips */}
           {searchChips.map((chip) => (
-            <GoabFilterChip key={chip} content={chip} onClick={() => removeSearchChip(chip)} />
+            <GoabxFilterChip
+              key={chip}
+              content={chip}
+              onClick={() => removeSearchChip(chip)}
+            />
           ))}
 
           {/* Filter group chips */}
           {appliedFilters.map((filterName) => (
-            <GoabFilterChip key={filterName} content={filterName} onClick={() => removeAppliedFilter(filterName)} />
+            <GoabxFilterChip
+              key={filterName}
+              content={filterName}
+              onClick={() => removeAppliedFilter(filterName)}
+            />
           ))}
 
-          <a href="#" className="clear-all-link" onClick={(e) => { e.preventDefault(); clearAll(); }}>
+          <a
+            href="#"
+            className="clear-all-link"
+            onClick={(e) => {
+              e.preventDefault();
+              clearAll();
+            }}
+          >
             Clear all
           </a>
         </div>
@@ -444,56 +529,55 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
       {/* Results count */}
       <p className="tokens-count">
-        {filteredTokens.length} token{filteredTokens.length !== 1 ? 's' : ''}
+        {filteredTokens.length} token{filteredTokens.length !== 1 ? "s" : ""}
       </p>
 
       {/* List View (table) */}
-      {viewMode === 'list' && (
+      {viewMode === "list" && (
         <div className="tokens-table-wrapper">
-          <GoabTable width="100%" variant="normal" onSort={handleTableSort}>
-            <thead>
-              <tr>
-                <th style={{ width: 60 }}>Preview</th>
-                <th style={{ minWidth: 320 }}>
-                  <GoabTableSortHeader
-                    name="name"
-                    direction={getColumnSortDirection('name')}
-                    sortOrder={getColumnSortOrder('name')}
-                  >
-                    Token
-                  </GoabTableSortHeader>
-                </th>
-                <th>Value</th>
-                <th>
-                  <GoabTableSortHeader
-                    name="category"
-                    direction={getColumnSortDirection('category')}
-                    sortOrder={getColumnSortOrder('category')}
-                  >
-                    Category
-                  </GoabTableSortHeader>
-                </th>
-                <th style={{ width: 60 }}></th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredTokens.map(renderTableRow)}
-            </tbody>
-          </GoabTable>
+          {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
+          <goa-table ref={tableRef} version="2" width="100%" variant="normal">
+            <table style={{ width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={{ width: 60 }}>Preview</th>
+                  <th style={{ minWidth: 320 }}>
+                    <goa-table-sort-header
+                      version="2"
+                      name="name"
+                      direction={getColumnSortDirection("name")}
+                    >
+                      Token
+                    </goa-table-sort-header>
+                  </th>
+                  <th>Value</th>
+                  <th>
+                    <goa-table-sort-header
+                      version="2"
+                      name="category"
+                      direction={getColumnSortDirection("category")}
+                    >
+                      Category
+                    </goa-table-sort-header>
+                  </th>
+                  <th style={{ width: 60 }}></th>
+                </tr>
+              </thead>
+              <tbody>{filteredTokens.map(renderTableRow)}</tbody>
+            </table>
+          </goa-table>
         </div>
       )}
 
       {/* Card View (mobile only) */}
-      {viewMode === 'card' && (
+      {viewMode === "card" && (
         <div className="tokens-card-view">
-          <div className="tokens-card-grid">
-            {filteredTokens.map(renderTokenCard)}
-          </div>
+          <div className="tokens-card-grid">{filteredTokens.map(renderTokenCard)}</div>
         </div>
       )}
 
       {/* Filter Drawer */}
-      <GoabDrawer
+      <GoabxDrawer
         heading="Filter tokens"
         position="right"
         open={filterDrawerOpen}
@@ -501,40 +585,54 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         onClose={() => setFilterDrawerOpen(false)}
         actions={
           <GoabButtonGroup alignment="start" gap="compact">
-            <GoabButton type="primary" size="compact" onClick={applyFilters}>
+            <GoabxButton type="primary" size="compact" onClick={applyFilters}>
               Apply filters
-            </GoabButton>
-            <GoabButton type="tertiary" size="compact" onClick={() => setFilterDrawerOpen(false)}>
+            </GoabxButton>
+            <GoabxButton
+              type="tertiary"
+              size="compact"
+              onClick={() => setFilterDrawerOpen(false)}
+            >
               Cancel
-            </GoabButton>
+            </GoabxButton>
           </GoabButtonGroup>
         }
       >
         <div className="filter-drawer-content">
-          <GoabFormItem label="Category">
-            <div className="filter-checkboxes">
+          <GoabxFormItem label="Category">
+            <GoabCheckboxList
+              name="category"
+              value={pendingFilters}
+              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                setPendingFilters(detail.value)
+              }
+            >
               {filterGroups.map((group) => (
-                <GoabCheckbox
+                <GoabxCheckbox
                   key={group.name}
-                  name={`filter-${group.name}`}
+                  name={group.name}
+                  value={group.name}
                   text={group.name}
-                  checked={pendingFilters.includes(group.name)}
-                  onChange={() => togglePendingFilter(group.name)}
+                  size="compact"
                 />
               ))}
-            </div>
-          </GoabFormItem>
+            </GoabCheckboxList>
+          </GoabxFormItem>
 
           {pendingFilters.length > 0 && (
             <>
               <GoabDivider />
-              <GoabButton type="tertiary" size="compact" onClick={() => setPendingFilters([])}>
+              <GoabxButton
+                type="tertiary"
+                size="compact"
+                onClick={() => setPendingFilters([])}
+              >
                 Clear all filters
-              </GoabButton>
+              </GoabxButton>
             </>
           )}
         </div>
-      </GoabDrawer>
+      </GoabxDrawer>
 
       <style>{`
         .tokens-grid {
