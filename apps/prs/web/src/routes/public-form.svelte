@@ -59,7 +59,7 @@
         birthdate: { label: "Birthdate" },
       },
       next: "description",
-      valdiators: {},
+      validators: {},
     },
 
     description: {

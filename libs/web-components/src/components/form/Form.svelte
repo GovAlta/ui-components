@@ -248,7 +248,6 @@
   }
 
   function init(data: PFState, { outline }: FormProps): PFState {
-    console.log("in the init");
     const state = data || {
       data: {},
       dataBuffer: {},

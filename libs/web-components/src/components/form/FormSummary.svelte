@@ -4,7 +4,12 @@
   import { onMount } from "svelte";
 
   import { relay } from "../../common/utils";
-  import { PFField, PFSummary, PFOutlineItem, PFPage } from "@abgov/ui-components-common";
+  import {
+    PFField,
+    PFSummary,
+    PFOutlineItem,
+    PFPage,
+  } from "@abgov/ui-components-common";
 
   export let heading: string = "";
 
@@ -29,16 +34,16 @@
   // Listen for events when clicking the `Change` link
   function addChangeListener() {
     _rootEl.addEventListener("change", (e) => {
-      const id = (e as CustomEvent).detail
+      const id = (e as CustomEvent).detail;
       relay(_rootEl, "form-summary:change", id, { bubbles: true });
-    })
+    });
   }
 
   // ====
   // Formatting
   // ====
 
-  function isBlank(val: string | number | Date | string[]): boolean {
+  function isBlank(val?: string | number | Date | string[]): boolean {
     if (Array.isArray(val)) {
       return val.length === 0;
     }
@@ -52,8 +57,8 @@
   }
 
   function format(
-    value: string,
-    formatter?: (input: string) => string
+    value?: string,
+    formatter?: (input: string) => string,
   ): string | string[] {
     if (formatter && value) {
       return formatter(value);
@@ -69,7 +74,7 @@
   // show if the page contains data => is either an array or object
   function showInSummary(pageId: string) {
     let page = _state.data[pageId];
-    return page && Array.isArray(page) || Object.keys(page).length > 0;
+    return (page && Array.isArray(page)) || Object.keys(page).length > 0;
   }
 
   function getOutlineItem(pageId: string): PFOutlineItem {
@@ -89,11 +94,28 @@
   }
 
   function getLabel(pageId: string, name: string): string {
+    console.log(
+      "get label",
+      pageId,
+      name,
+      getOutlineItem(pageId).fields[name]?.label ?? name,
+    );
     return getOutlineItem(pageId).fields[name]?.label ?? name;
   }
 
   function getField(pageId: string, name: string): PFField {
     return getOutlineItem(pageId).fields[name] ?? {};
+  }
+
+  function showField(page: string, key: string, value?: string): boolean {
+    const notAlways = getField(page, key).hideInSummary !== "always";
+    const dontShowAsIsBlank = !(
+      getField(page, key).hideInSummary === "ifBlank" && value === ""
+    );
+    const notAnId = key !== "_id";
+    const notAnIndex = isNaN(parseInt(key));
+
+    return notAlways && dontShowAsIsBlank && notAnId && notAnIndex;
   }
 
   function getSummary(pageId: string): Record<string, string> {
@@ -139,14 +161,10 @@
                           </td>
                         </tr>
                       {/each}
-                    <!-- show each data field -->
+                      <!-- show each data field -->
                     {:else}
                       {#each Object.entries(item) as [key, value]}
-                        {#if
-                          getField(page, key).hideInSummary !== "always"
-                          && !(getField(page, key).hideInSummary === "ifBlank" && value === "")
-                          && key !== "_id"
-                        }
+                        {#if showField(page, key, value)}
                           <tr>
                             <td class="label">{getLabel(page, key)}</td>
                             <td class="value" class:empty={isBlank(value)}>
@@ -157,7 +175,7 @@
                       {/each}
                     {/if}
                   </table>
-                  {#if getDataItems(page).length-1 !== index}
+                  {#if getDataItems(page).length - 1 !== index}
                     <goa-divider mt="l" mb="l" />
                   {/if}
                 {/each}
@@ -175,12 +193,10 @@
                         </td>
                       </tr>
                     {/each}
-                  <!-- show each data field -->
+                    <!-- show each data field -->
                   {:else}
                     {#each Object.entries(getDataItem(page)) as [key, value]}
-                      {#if getField(page, key).hideInSummary !== "always"
-                        && !(getField(page, key).hideInSummary === "ifBlank" && value === "")
-                      }
+                      {#if getField(page, key).hideInSummary !== "always" && !(getField(page, key).hideInSummary === "ifBlank" && value === "")}
                         <tr>
                           <td class="label">{getLabel(page, key)}</td>
                           <td class="value" class:empty={isBlank(value)}>
