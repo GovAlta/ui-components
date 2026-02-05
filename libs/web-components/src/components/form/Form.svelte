@@ -68,16 +68,16 @@
       const { pageId } = (e as CustomEvent).detail;
 
       // clear all the subform items
-      _state = {..._state, dataBuffer: {}};
+      _state = { ..._state, dataBuffer: {} };
       resetFormFields(pageId);
     });
 
     _rootEl.addEventListener("pf:subform:edit", (e) => {
       e.stopPropagation();
 
-      const {pageId, _id} = (e as CustomEvent).detail;
+      const { pageId, _id } = (e as CustomEvent).detail;
       const data = _state.data[pageId] as PFPage[];
-      const record = data.find(item => item._id === _id);
+      const record = data.find((item) => item._id === _id);
 
       if (!record) {
         console.error("Subform item not found: _id");
@@ -86,7 +86,7 @@
 
       // populate the dataBuffer with the item's data to ensure non-updated data is not lost
       // when re-saved
-      _state = {..._state, dataBuffer: record as Record<string, string>};
+      _state = { ..._state, dataBuffer: record as Record<string, string> };
 
       bindSubformFieldValues(pageId);
     });
@@ -101,8 +101,12 @@
       }
 
       // remove the subform item from the collection
-      const newPage = data.filter(item => item._id !== _id);
-      _state = {..._state, dataBuffer: {}, data: { ..._state.data, [pageId]: newPage } };
+      const newPage = data.filter((item) => item._id !== _id);
+      _state = {
+        ..._state,
+        dataBuffer: {},
+        data: { ..._state.data, [pageId]: newPage },
+      };
 
       // send message up to app level with the changes
       dispatch(_rootEl, "_subformChange", _state);
@@ -124,20 +128,27 @@
       if (_id) {
         // find index to preserve the order of the list
         const list = _state.data[pageId] as Array<PFPage>;
-        const index = list.findIndex(item => item._id === _id);
+        const index = list.findIndex((item) => item._id === _id);
 
         list[index] = _state.dataBuffer;
-        _state = {..._state, dataBuffer: {}, data: { ..._state.data, [pageId]: [...list]} };
-
+        _state = {
+          ..._state,
+          dataBuffer: {},
+          data: { ..._state.data, [pageId]: [...list] },
+        };
       } else {
         const page = [
-          ...(_state.data[pageId] as []),   // add original items in the page
+          ...(_state.data[pageId] as []), // add original items in the page
           {
-            ..._state.dataBuffer,           // add all the data obtained from the form
-            _id: crypto.randomUUID()        // add in additonal uuid if not already set
-          }
+            ..._state.dataBuffer, // add all the data obtained from the form
+            _id: crypto.randomUUID(), // add in additonal uuid if not already set
+          },
         ];
-        _state = {..._state, dataBuffer: {}, data: { ..._state.data, [pageId]: page } };
+        _state = {
+          ..._state,
+          dataBuffer: {},
+          data: { ..._state.data, [pageId]: page },
+        };
       }
 
       // clear all the subform items
@@ -191,7 +202,10 @@
       }
 
       // data added to buffer to allow for cancellation
-      _state = {..._state, dataBuffer: {..._state.dataBuffer, [name]: valueStr || value }}
+      _state = {
+        ..._state,
+        dataBuffer: { ..._state.dataBuffer, [name]: valueStr || value },
+      };
 
       // emit the form's change event that may be handled externally
       dispatch(
@@ -234,6 +248,7 @@
   }
 
   function init(data: PFState, { outline }: FormProps): PFState {
+    console.log("in the init");
     const state = data || {
       data: {},
       dataBuffer: {},
@@ -251,7 +266,9 @@
       const id = page.getAttribute("id") || page.id;
 
       if (!id) {
-        console.error("Missing the `id` attribute from the goa-public-form-page component");
+        console.error(
+          "Missing the `id` attribute from the goa-public-form-page component",
+        );
         return;
       }
 
@@ -310,7 +327,7 @@
           // TODO: don't like that this is being specific
           if (el.tagName === "GOA-CHECKBOX") {
             if (data) {
-              el.setAttribute("checked", data)
+              el.setAttribute("checked", data);
             }
           } else {
             el.setAttribute("value", data);
@@ -340,7 +357,7 @@
 
     let errorCount = 0;
 
-   // perform error checks for each form item
+    // perform error checks for each form item
     for (const [name, validators] of Object.entries(section.validators || {})) {
       const val = _state.dataBuffer[name];
 

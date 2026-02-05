@@ -8,12 +8,18 @@
     type PFPage,
   } from "@abgov/ui-components-common";
 
-
   function toHumanDate(val: string) {
     const [y, m, d] = val.split("-");
-    const months = "January February March April May June July August September October November December".split(" ");
-    const [year, month, day] = [y, parseInt(month.replace(/^0/g, "")), day.replace(/^0/g, "")]
-    return `${months[month-1]} ${day}, ${year}`
+    const months =
+      "January February March April May June July August September October November December".split(
+        " ",
+      );
+    const [year, month, day] = [
+      y,
+      parseInt(month.replace(/^0/g, "")),
+      day.replace(/^0/g, ""),
+    ];
+    return `${months[month - 1]} ${day}, ${year}`;
   }
 
   let _state = undefined;
@@ -25,7 +31,7 @@
         "section-title": "Support order details",
       },
       fields: {
-        "role": { label: "What is your role?", formatter: (val) => val.toUpperCase() },
+        role: { label: "What is your role?", formatter: (val) => val.toUpperCase() },
       },
       next: (state: PFState) => {
         const role = state.dataBuffer["role"];
@@ -39,17 +45,21 @@
     children: {
       subform: true,
       props: {
-       heading: "Do you have children",
+        heading: "Do you have children",
       },
       fields: {
-        "first-name": { label: "First name", formatter: (val) => val[0].toUpperCase() + val.substr(1)},
-        "last-name": { label: "Last name", formatter: (val) => val[0].toUpperCase() + val.substr(1)},
-        "birthdate": { label: "Birthdate" },
+        "first-name": {
+          label: "First name",
+          formatter: (val) => val[0].toUpperCase() + val.substr(1),
+        },
+        "last-name": {
+          label: "Last name",
+          formatter: (val) => val[0].toUpperCase() + val.substr(1),
+        },
+        birthdate: { label: "Birthdate" },
       },
       next: "description",
-      valdiators: {
-
-      }
+      valdiators: {},
     },
 
     description: {
@@ -64,7 +74,7 @@
     foobar: {
       props: {
         "section-title": "Support order details",
-        heading: "Slotted checkbox test"
+        heading: "Slotted checkbox test",
       },
       fields: {
         "fav-color": { label: "Favourite color?", hideInSummary: "always" },
@@ -79,7 +89,7 @@
         heading: "Payor salary",
       },
       fields: {
-        "salary": { label: "Yearly income" }
+        salary: { label: "Yearly income" },
       },
       next: "summary",
       validators: {
@@ -93,15 +103,15 @@
         heading: "Do you know any of the identifiers about the other party?",
       },
       fields: {
-        "sin": {
+        sin: {
           label: "Social Insurance #",
-          formatter: (val: string) => val.match(/(.{3})/g)?.join(" ")
+          formatter: (val: string) => val.match(/(.{3})/g)?.join(" "),
         },
-        "ahcn": {
+        ahcn: {
           label: "Alberta Health Care #",
-          formatter: (val: string) => val.match(/(.{4})/g)?.join("-")
+          formatter: (val: string) => val.match(/(.{4})/g)?.join("-"),
         },
-        "info": { label: "Additional information" }
+        info: { label: "Additional information" },
       },
       next: (state): string => {
         const sin = state.dataBuffer["sin"];
@@ -152,8 +162,8 @@
         heading: "Summary",
       },
       next: (state): string => {
-        console.log("submit to backend here", state)
-      }
+        console.log("submit to backend here", state);
+      },
     },
   };
 
@@ -226,7 +236,7 @@
     setTimeout(() => {
       const initData = JSON.parse(raw);
       const fn = e.detail;
-
+      console.log("func", fn);
       _state = fn(null, { outline });
     }, 1000);
   }
@@ -251,7 +261,7 @@
   // fired on each keypress, like simular to how the _change works
   function onSubformChange(e) {
     const state = (e as CustomEvent).detail;
-    _state = {...state};
+    _state = { ...state };
   }
 </script>
 
@@ -278,9 +288,10 @@
             <tr>
               <td>{child["first-name"]}</td>
               <td>{child["last-name"]}</td>
-              <td><goa-link action="edit" action-arg={child._id}>Edit</goa-link>
-              <td><goa-link action="delete" action-arg={child._id}>Remove</goa-link>
-            </tr>
+              <td><goa-link action="edit" action-arg={child._id}>Edit</goa-link> </td><td
+                ><goa-link action="delete" action-arg={child._id}>Remove</goa-link>
+              </td></tr
+            >
           {/each}
         </table>
 
@@ -295,33 +306,39 @@
             <goa-date-picker type="input" name="birthdate" data-pf-item />
           </goa-form-item>
         </form>
-
       </goa-pf-subform>
     </goa-public-form-page>
-
 
     <goa-public-form-page id="description">
       This is a page that is read-only
 
       <goa-details heading="Some important detail">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, odit! Voluptatem
-        dolor soluta aspernatur ipsa dolorem est iure vitae eaque ea, vero architecto
-        praesentium, quia excepturi, odio porro? Fuga, officia?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, odit!
+        Voluptatem dolor soluta aspernatur ipsa dolorem est iure vitae eaque ea, vero
+        architecto praesentium, quia excepturi, odio porro? Fuga, officia?
       </goa-details>
     </goa-public-form-page>
 
     <goa-public-form-page id="foobar">
       <goa-radio-group data-pf-item name="fav-color">
         <goa-radio-item value="yes" label="Yes">
-          <goa-input slot="reveal" name="fav-color-value" data-pf-item placeholder="What is it?" />
+          <goa-input
+            slot="reveal"
+            name="fav-color-value"
+            data-pf-item
+            placeholder="What is it?"
+          />
         </goa-radio-item>
         <goa-radio-item value="no fav color" label="No">
           <div slot="reveal">
-            <goa-input name="fav-number-value" data-pf-item placeholder="What is your fav number then?" />
+            <goa-input
+              name="fav-number-value"
+              data-pf-item
+              placeholder="What is your fav number then?"
+            />
           </div>
         </goa-radio-item>
       </goa-radio-group>
-
     </goa-public-form-page>
 
     <goa-public-form-page id="identification">

@@ -1,9 +1,11 @@
-<svelte:options customElement={{
-  tag: "goa-textarea",
-  props: {
-    value: { reflect: true },
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-textarea",
+    props: {
+      value: { reflect: true },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts">
@@ -103,8 +105,6 @@
   onMount(() => {
     validateVersion(version);
     validateSize(size);
-    addRelayListener();
-    sendMountedMessage();
     const finalWidth = width.includes("%") ? width : `min(${width}, 100%)`;
     const cssProps: Record<string, string> = { width: finalWidth };
 
@@ -127,7 +127,7 @@
     dispatch(el, "goa:bind", el, { bubbles: true });
   }
 
-  function onChange(_e: Event) {
+  function onInput(_e: Event) {
     if (isDisabled) return;
     dispatchChange(_textareaEl.value);
   }
