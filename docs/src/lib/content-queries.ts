@@ -1,6 +1,4 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import fs from 'node:fs/promises';
-import path from 'node:path';
 
 // Types for extracted API data
 export interface PropDefinition {
@@ -34,18 +32,31 @@ export interface ComponentApi {
   slots: SlotDefinition[];
 }
 
+// Load all component API JSON files at build time using Vite glob import
+const apiModules = import.meta.glob<{ default: ComponentApi }>(
+  '../../generated/component-apis/*.json',
+  { eager: true }
+);
+
+// Build lookup map: slug -> ComponentApi
+const apiBySlug = new Map<string, ComponentApi>();
+for (const [path, module] of Object.entries(apiModules)) {
+  const slug = path.split('/').pop()?.replace('.json', '');
+  if (slug && module.default) {
+    apiBySlug.set(slug, module.default);
+  }
+}
+
 /**
  * Get extracted API data for a component
  */
 export async function getComponentApi(slug: string): Promise<ComponentApi | null> {
-  try {
-    const apiPath = new URL(`../../generated/component-apis/${slug}.json`, import.meta.url).pathname;
-    const content = await fs.readFile(apiPath, 'utf-8');
-    return JSON.parse(content) as ComponentApi;
-  } catch (error) {
+  const api = apiBySlug.get(slug);
+  if (!api) {
     console.warn(`No API data found for component: ${slug}`);
     return null;
   }
+  return api;
 }
 
 /**
