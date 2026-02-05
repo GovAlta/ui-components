@@ -20,7 +20,7 @@ export interface ExampleCode {
  * @returns Object with code for each framework
  */
 export async function getExampleCode(exampleSlug: string): Promise<ExampleCode> {
-  const exampleDir = path.join(process.cwd(), 'src/content/examples', exampleSlug);
+  const exampleDir = new URL(`../content/examples/${exampleSlug}`, import.meta.url).pathname;
   const code: ExampleCode = {};
 
   // Read React code

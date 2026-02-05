@@ -1,7 +1,7 @@
 {
   "componentSlug": "radio-item",
   "extractedFrom": "libs/web-components/src/components/radio-item/RadioItem.svelte",
-  "extractedAt": "2026-01-05T23:10:27.457Z",
+  "extractedAt": "2026-02-04T08:10:50.415Z",
   "props": [
     {
       "name": "value",
@@ -36,7 +36,7 @@
       "type": "boolean",
       "required": false,
       "default": "false",
-      "description": "Disables this radio option."
+      "description": "Disables this radio option. Also disabled if the parent RadioGroup is disabled."
     },
     {
       "name": "error",

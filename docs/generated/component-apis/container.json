@@ -1,7 +1,7 @@
 {
   "componentSlug": "container",
   "extractedFrom": "libs/web-components/src/components/container/Container.svelte",
-  "extractedAt": "2026-01-05T23:10:27.432Z",
+  "extractedAt": "2026-02-04T08:10:50.399Z",
   "props": [
     {
       "name": "type",
@@ -64,11 +64,25 @@
       "description": "Sets the maximum width of the container."
     },
     {
+      "name": "minHeight",
+      "type": "any",
+      "required": false,
+      "default": "",
+      "description": "Sets the minimum height of the container."
+    },
+    {
+      "name": "maxHeight",
+      "type": "any",
+      "required": false,
+      "default": "",
+      "description": "Sets the maximum height of the container."
+    },
+    {
       "name": "testId",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+      "description": "Sets a data-testid attribute for automated testing."
     },
     {
       "name": "mt",

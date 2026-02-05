@@ -1,14 +1,14 @@
 {
   "componentSlug": "calendar",
   "extractedFrom": "libs/web-components/src/components/calendar/Calendar.svelte",
-  "extractedAt": "2026-01-05T23:10:27.423Z",
+  "extractedAt": "2026-02-04T08:10:50.395Z",
   "props": [
     {
       "name": "name",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Name identifier for the calendar, used in form submission and change events."
+      "description": "Name identifier for the calendar, included in change events."
     },
     {
       "name": "value",

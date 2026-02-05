@@ -1,7 +1,7 @@
 {
   "componentSlug": "block",
   "extractedFrom": "libs/web-components/src/components/block/Block.svelte",
-  "extractedAt": "2026-01-05T23:10:27.421Z",
+  "extractedAt": "2026-02-04T08:10:50.394Z",
   "props": [
     {
       "name": "gap",

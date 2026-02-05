@@ -1,7 +1,7 @@
 {
   "componentSlug": "tabs",
   "extractedFrom": "libs/web-components/src/components/tabs/Tabs.svelte",
-  "extractedAt": "2026-01-05T23:10:27.461Z",
+  "extractedAt": "2026-02-04T08:10:50.418Z",
   "props": [
     {
       "name": "initialtab",
@@ -18,17 +18,6 @@
       "description": "Sets a data-testid attribute for automated testing."
     },
     {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "2",
-      "description": "The design system version for styling purposes."
-    },
-    {
       "name": "variant",
       "type": "\"default\" | \"segmented\"",
       "values": [
@@ -37,53 +26,7 @@
       ],
       "required": false,
       "default": "default",
-      "description": "Sets the visual style of tabs. 'segmented' shows pill/button style tabs."
-    },
-    {
-      "name": "updateurl",
-      "type": "boolean",
-      "required": false,
-      "default": "true",
-      "description": "When true, appends the tab ID as a URL hash when a tab is clicked."
-    },
-    {
-      "name": "stackonmobile",
-      "type": "boolean",
-      "required": false,
-      "default": "true",
-      "description": "When true, tabs stack vertically on mobile. When false, tabs stay horizontal."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin (applied to tab header)."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin (applied to tab header)."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin (applied to tab header)."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin (applied to tab header)."
+      "description": ""
     }
   ],
   "events": [

@@ -1,7 +1,7 @@
 {
   "componentSlug": "accordion",
   "extractedFrom": "libs/web-components/src/components/accordion/Accordion.svelte",
-  "extractedAt": "2026-01-05T23:10:27.416Z",
+  "extractedAt": "2026-02-04T08:10:50.390Z",
   "props": [
     {
       "name": "open",
@@ -41,7 +41,7 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Unique identifier for the accordion. Auto-generated if not provided."
+      "description": "Unique identifier for the accordion."
     },
     {
       "name": "maxWidth",

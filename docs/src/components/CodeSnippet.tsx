@@ -88,14 +88,30 @@ function SingleCodeBlock({
 
   const cleanedCode = cleanCode(code);
 
+  // Syntax highlighting
   useEffect(() => {
     if (codeRef.current) {
       codeRef.current.removeAttribute("data-highlighted");
       hljs.highlightElement(codeRef.current);
     }
-    if (containerRef.current && maxHeight) {
-      setNeedsExpand(containerRef.current.scrollHeight > maxHeight);
-    }
+  }, [cleanedCode]);
+
+  // Detect whether expand button is needed using ResizeObserver.
+  // A one-shot useEffect fails here because inside GoabxTabs, inactive tab
+  // content is hidden (scrollHeight = 0). ResizeObserver fires when the
+  // container becomes visible after a tab switch, so the measurement is reliable.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !maxHeight) return;
+
+    const check = () => {
+      setNeedsExpand(container.scrollHeight > maxHeight);
+    };
+
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(container);
+    return () => observer.disconnect();
   }, [cleanedCode, maxHeight]);
 
   const handleCopy = async () => {
@@ -205,17 +221,50 @@ export function CodeSnippet({
       ) as Framework[])
     : [];
 
-  // Subscribe to global framework preference changes from other components
+  // Subscribe to global framework preference changes from other components.
+  // Directly manipulate the tab DOM state without triggering focus or hash changes.
   useEffect(() => {
     return subscribeToFrameworkPreference((framework) => {
-      // Only update if the framework is available in this snippet
       if (availableFrameworks.length === 0 || availableFrameworks.includes(framework)) {
         setSelectedFramework(framework);
+
+        // Directly switch goa-tabs without triggering focus
+        if (tabsRef.current) {
+          const goaTabs = tabsRef.current.querySelector("goa-tabs");
+          if (goaTabs) {
+            const targetIndex = availableFrameworks.indexOf(framework);
+            const tabs = goaTabs.querySelectorAll('[role="tab"]');
+
+            // Check if already on the correct tab
+            const targetTab = tabs[targetIndex] as HTMLElement;
+            if (targetTab && targetTab.getAttribute("aria-selected") === "true") {
+              return; // Already selected, nothing to do
+            }
+
+            // Update tab button states (aria-selected, tabindex)
+            tabs.forEach((tab, i) => {
+              tab.setAttribute("aria-selected", i === targetIndex ? "true" : "false");
+              tab.setAttribute("tabindex", i === targetIndex ? "0" : "-1");
+            });
+
+            // Tell each goa-tab content whether it should be open
+            const tabContents = goaTabs.querySelectorAll("goa-tab");
+            tabContents.forEach((content, i) => {
+              content.dispatchEvent(
+                new CustomEvent("tabs:set-open", {
+                  composed: true,
+                  detail: { open: i === targetIndex },
+                })
+              );
+            });
+          }
+        }
       }
     });
   }, [availableFrameworks]);
 
-  // Listen for native tab change events (more reliable than React wrapper onChange)
+  // Listen for native tab change events (user clicking a tab in THIS component).
+  // Broadcasts the change to all other CodeSnippet instances on the page.
   // Note: GoA tabs are 1-indexed, so we subtract 1 to get the array index
   useEffect(() => {
     if (!tabsRef.current || availableFrameworks.length <= 1) return;
@@ -420,7 +469,6 @@ export function CodeSnippet({
         // Multiple frameworks - use tabs with content inside
         <div className="framework-switcher" ref={tabsRef}>
           <GoabxTabs
-            key={selectedFramework}
             variant="segmented"
             initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
           >

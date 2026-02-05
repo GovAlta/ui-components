@@ -1,7 +1,7 @@
 {
   "componentSlug": "button-group",
   "extractedFrom": "libs/web-components/src/components/button-group/ButtonGroup.svelte",
-  "extractedAt": "2026-01-05T23:10:27.423Z",
+  "extractedAt": "2026-02-04T08:10:50.394Z",
   "props": [
     {
       "name": "alignment",
@@ -12,7 +12,7 @@
         "end",
         "center"
       ],
-      "required": true,
+      "required": false,
       "default": "start",
       "description": "Positions the button group in the page layout."
     },
@@ -33,7 +33,7 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+      "description": "Sets a data-testid attribute for automated testing."
     },
     {
       "name": "mt",

@@ -1,7 +1,7 @@
 {
   "componentSlug": "form",
   "extractedFrom": "libs/web-components/src/components/form/Form.svelte",
-  "extractedAt": "2026-01-05T23:10:27.444Z",
+  "extractedAt": "2026-02-04T08:10:50.407Z",
   "props": [
     {
       "name": "status",

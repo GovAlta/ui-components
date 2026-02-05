@@ -1,7 +1,7 @@
 {
   "componentSlug": "form-item",
   "extractedFrom": "libs/web-components/src/components/form-item/FormItem.svelte",
-  "extractedAt": "2026-01-05T23:10:27.445Z",
+  "extractedAt": "2026-02-04T08:10:50.407Z",
   "props": [
     {
       "name": "mt",
@@ -94,18 +94,6 @@
       "required": false,
       "default": "none",
       "description": "Sets the maximum width of the form item."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "typeLabel": "GoabFormItemVersionType",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
     },
     {
       "name": "type",
