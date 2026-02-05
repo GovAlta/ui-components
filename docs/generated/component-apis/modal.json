@@ -1,7 +1,7 @@
 {
   "componentSlug": "modal",
   "extractedFrom": "libs/web-components/src/components/modal/Modal.svelte",
-  "extractedAt": "2026-01-05T23:10:27.452Z",
+  "extractedAt": "2026-02-04T08:10:50.412Z",
   "props": [
     {
       "name": "heading",
@@ -63,23 +63,12 @@
       "description": "Sets a data-testid attribute for automated testing."
     },
     {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "typeLabel": "GoabModalVersionType",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
-    },
-    {
       "name": "width",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "@deprecated Use maxwidth instead."
+      "description": "@deprecated Use maxwidth instead.",
+      "deprecated": true
     }
   ],
   "events": [

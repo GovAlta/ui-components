@@ -1,14 +1,14 @@
 {
   "componentSlug": "text-area",
   "extractedFrom": "libs/web-components/src/components/text-area/TextArea.svelte",
-  "extractedAt": "2026-01-05T23:10:27.463Z",
+  "extractedAt": "2026-02-04T08:10:50.419Z",
   "props": [
     {
       "name": "name",
       "type": "string",
       "required": true,
       "default": null,
-      "description": "Name of the input value that is received in the _change event"
+      "description": "Name of the input value that is received in the _change event."
     },
     {
       "name": "value",
@@ -110,14 +110,14 @@
       "type": "VersionType",
       "required": false,
       "default": "1",
-      "description": "The design system version for styling purposes."
+      "description": ""
     },
     {
       "name": "size",
       "type": "SizeType",
       "required": false,
       "default": "default",
-      "description": "Sets the size of the text area. 'compact' reduces height for dense layouts."
+      "description": ""
     },
     {
       "name": "mt",

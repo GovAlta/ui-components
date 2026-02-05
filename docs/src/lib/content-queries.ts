@@ -39,7 +39,7 @@ export interface ComponentApi {
  */
 export async function getComponentApi(slug: string): Promise<ComponentApi | null> {
   try {
-    const apiPath = path.join(process.cwd(), 'generated', 'component-apis', `${slug}.json`);
+    const apiPath = new URL(`../../generated/component-apis/${slug}.json`, import.meta.url).pathname;
     const content = await fs.readFile(apiPath, 'utf-8');
     return JSON.parse(content) as ComponentApi;
   } catch (error) {

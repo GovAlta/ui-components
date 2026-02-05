@@ -1,7 +1,7 @@
 {
   "componentSlug": "app-header",
   "extractedFrom": "libs/web-components/src/components/app-header/AppHeader.svelte",
-  "extractedAt": "2026-01-05T23:10:27.419Z",
+  "extractedAt": "2026-02-04T08:10:50.392Z",
   "props": [
     {
       "name": "heading",

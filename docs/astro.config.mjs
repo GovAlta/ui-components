@@ -52,10 +52,10 @@ export default defineConfig({
           find: "@abgov/style",
           replacement: path.resolve(workspaceRoot, "dist/libs/web-components/index.css"),
         },
-        // Design tokens from npm (V2 at root)
+        // Design tokens V2 for docs styling (via npm alias)
         {
           find: "@design-tokens",
-          replacement: path.resolve(workspaceRoot, "node_modules/@abgov/design-tokens/dist"),
+          replacement: path.resolve(workspaceRoot, "node_modules/@abgov/design-tokens-v2/dist"),
         },
       ],
       dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],

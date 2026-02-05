@@ -1,7 +1,7 @@
 {
   "componentSlug": "popover",
   "extractedFrom": "libs/web-components/src/components/popover/Popover.svelte",
-  "extractedAt": "2026-01-05T23:10:27.456Z",
+  "extractedAt": "2026-02-04T08:10:50.414Z",
   "props": [
     {
       "name": "testId",
@@ -12,11 +12,10 @@
     },
     {
       "name": "position",
-      "type": "\"above\" | \"below\" | \"right\" | \"auto\"",
+      "type": "\"above\" | \"below\" | \"auto\"",
       "values": [
         "above",
         "below",
-        "right",
         "auto"
       ],
       "required": false,
@@ -85,7 +84,8 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "@deprecated This property has no effect and will be removed in a future version."
+      "description": "@deprecated This property has no effect and will be removed in a future version.",
+      "deprecated": true
     },
     {
       "name": "mt",
@@ -118,13 +118,6 @@
       "required": false,
       "default": null,
       "description": "Left margin."
-    },
-    {
-      "name": "disableGlobalClosePopover",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Prevents the popover from closing when other popovers open. Used for nested interactions."
     },
     {
       "name": "open",
@@ -169,29 +162,11 @@
       "description": "Border radius of the popover window."
     },
     {
-      "name": "closeOnClickWithinBounds",
-      "type": "any",
-      "required": false,
-      "default": "false",
-      "description": "When true, clicking inside the popover will close it."
-    },
-    {
       "name": "filterablecontext",
       "type": "boolean",
       "required": false,
       "default": "false",
       "description": "Indicates the popover is used within a filterable context like a combobox."
-    },
-    {
-      "name": "externalTarget",
-      "type": "HTMLElement | null",
-      "values": [
-        "HTMLElement",
-        "null"
-      ],
-      "required": false,
-      "default": null,
-      "description": "An external element to use as the popover target instead of the slotted target."
     }
   ],
   "events": [

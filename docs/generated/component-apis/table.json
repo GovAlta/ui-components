@@ -1,7 +1,7 @@
 {
   "componentSlug": "table",
   "extractedFrom": "libs/web-components/src/components/table/Table.svelte",
-  "extractedAt": "2026-01-05T23:10:27.461Z",
+  "extractedAt": "2026-02-04T08:10:50.417Z",
   "props": [
     {
       "name": "width",
@@ -37,23 +37,11 @@
       "description": "A relaxed variant of the table with more vertical padding for the cells."
     },
     {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "typeLabel": "GoabTableVersionType",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
-    },
-    {
       "name": "testId",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+      "description": "Sets a data-testid attribute for automated testing."
     },
     {
       "name": "mt",

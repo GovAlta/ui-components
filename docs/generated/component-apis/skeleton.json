@@ -1,14 +1,14 @@
 {
   "componentSlug": "skeleton",
   "extractedFrom": "libs/web-components/src/components/skeleton/Skeleton.svelte",
-  "extractedAt": "2026-01-05T23:10:27.459Z",
+  "extractedAt": "2026-02-04T08:10:50.416Z",
   "props": [
     {
       "name": "maxWidth",
       "type": "string",
       "required": false,
       "default": "300px",
-      "description": "Set component maximum width. Currently only used in card skeleton type"
+      "description": "Sets the maximum width. Currently only used in card skeleton type."
     },
     {
       "name": "size",
@@ -51,7 +51,7 @@
       ],
       "required": true,
       "default": null,
-      "description": "Reset skeleton shapes to represent your content."
+      "description": "Sets the skeleton shape to represent your content."
     },
     {
       "name": "testId",

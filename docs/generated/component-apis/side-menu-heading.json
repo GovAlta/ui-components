@@ -1,7 +1,7 @@
 {
   "componentSlug": "side-menu-heading",
   "extractedFrom": "libs/web-components/src/components/side-menu-heading/SideMenuHeading.svelte",
-  "extractedAt": "2026-01-05T23:10:27.459Z",
+  "extractedAt": "2026-02-04T08:10:50.416Z",
   "props": [
     {
       "name": "icon",

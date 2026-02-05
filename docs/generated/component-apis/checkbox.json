@@ -1,7 +1,7 @@
 {
   "componentSlug": "checkbox",
   "extractedFrom": "libs/web-components/src/components/checkbox/Checkbox.svelte",
-  "extractedAt": "2026-01-05T23:10:27.427Z",
+  "extractedAt": "2026-02-04T08:10:50.397Z",
   "props": [
     {
       "name": "name",
@@ -97,17 +97,6 @@
       "required": false,
       "default": "default",
       "description": "Sets the size of the checkbox. 'compact' reduces spacing for dense layouts."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
     },
     {
       "name": "mt",

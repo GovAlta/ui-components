@@ -1,7 +1,7 @@
 {
   "componentSlug": "file-upload-input",
   "extractedFrom": "libs/web-components/src/components/file-upload-input/FileUploadInput.svelte",
-  "extractedAt": "2026-01-05T23:10:27.440Z",
+  "extractedAt": "2026-02-04T08:10:50.404Z",
   "props": [
     {
       "name": "variant",
@@ -22,7 +22,7 @@
       "type": "string",
       "required": false,
       "default": "5MB",
-      "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Files exceeding this will be rejected."
+      "description": "Maximum file size with unit (e.g., \"5MB\", \"100KB\", \"1GB\"). Defaults to 5MB. Files exceeding this will be rejected."
     },
     {
       "name": "testId",
@@ -30,6 +30,17 @@
       "required": false,
       "default": "",
       "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": ""
     }
   ],
   "events": [

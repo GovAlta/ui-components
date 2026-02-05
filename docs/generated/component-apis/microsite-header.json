@@ -1,7 +1,7 @@
 {
   "componentSlug": "microsite-header",
   "extractedFrom": "libs/web-components/src/components/microsite-header/MicrositeHeader.svelte",
-  "extractedAt": "2026-01-05T23:10:27.452Z",
+  "extractedAt": "2026-02-04T08:10:50.412Z",
   "props": [
     {
       "name": "type",
@@ -21,7 +21,7 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Version number or identifier displayed in the header."
+      "description": "App or service version displayed on the right side of the header."
     },
     {
       "name": "feedbackurl",
@@ -47,7 +47,7 @@
       ],
       "required": false,
       "default": "blank",
-      "description": "For internal header urls sets target="
+      "description": "Sets the target attribute for the header link."
     },
     {
       "name": "feedbackurltarget",

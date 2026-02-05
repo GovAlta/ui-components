@@ -1,7 +1,7 @@
 {
   "componentSlug": "grid",
   "extractedFrom": "libs/web-components/src/components/grid/Grid.svelte",
-  "extractedAt": "2026-01-05T23:10:27.447Z",
+  "extractedAt": "2026-02-04T08:10:50.408Z",
   "props": [
     {
       "name": "gap",
@@ -9,7 +9,7 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": "m",
-      "description": "Gap between child items"
+      "description": "Gap between child items."
     },
     {
       "name": "minchildwidth",
@@ -23,7 +23,7 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+      "description": "Sets a data-testid attribute for automated testing."
     },
     {
       "name": "mt",
