@@ -23,9 +23,20 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
     Early adopters use the same design system packages you're already familiar with, but opt into
     experimental DS v2 by:
     <ul style="margin-bottom: 0;">
-      <li>Importing Goabx components</li>
-      <li>Using the experimental prefix (<code>goab</code> &rarr; <code>goabx</code>)</li>
-      <li>Installing and applying <a href="https://www.npmjs.com/package/@abgov/design-tokens" target="_blank">design tokens</a></li>
+      <li>Importing Goabx components
+        <ul>
+          <li>Angular: <a href="https://www.npmjs.com/package/@abgov/angular-components/v/4.10.0-next.1" target="_blank">4.10.0-next.1</a> or later</li>
+          <li>React: <a href="https://www.npmjs.com/package/@abgov/react-components/v/6.10.0-next.1" target="_blank">6.10.0-next.1</a> or later</li>
+          <li>Web: <a href="https://www.npmjs.com/package/@abgov/web-components/v/1.40.0-next.1" target="_blank">1.40.0-next.1</a> or later</li>
+          <li>ui-components-common: <a href="https://www.npmjs.com/package/@abgov/ui-components-common/v/1.10.0-next.1" target="_blank">1.10.0-next.1</a> or later</li>
+        </ul>
+      </li>
+      <li>Using the experimental prefix (<code>goab</code> &rarr; <code>goabx</code>)
+        <ul>
+          <li><a href="https://gist.github.com/vanessatran-ddi/29ec983351144bc3eb328c2a4d835a2b" target="_blank">Modified components reference</a></li>
+        </ul>
+      </li>
+      <li>Installing and applying <a href="https://www.npmjs.com/package/@abgov/design-tokens" target="_blank">tokens v2</a> (<code>designtokens2</code>)</li>
     </ul>
   </goa-callout>
 
@@ -34,7 +45,9 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
     used it successfully, but we can't guarantee full compatibility.
   </goa-callout>
 
-  <!-- TODO: Add video walkthrough link when available -->
+  <goa-button version="2" type="tertiary" size="compact" mt="m" mb="m">
+    <a href="https://jam.dev/c/e9bbd0f4-47a4-405a-b591-9b144f57a496" target="_blank" style="text-decoration: none; color: inherit;">View setup walkthrough video</a>
+  </goa-button>
 
   <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
 
