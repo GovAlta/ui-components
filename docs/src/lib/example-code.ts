@@ -2,9 +2,6 @@
  * Helper functions to read example code files at build time
  */
 
-import fs from 'node:fs/promises';
-import path from 'node:path';
-
 export interface ExampleCode {
   react?: string;
   angular?: {
@@ -14,41 +11,75 @@ export interface ExampleCode {
   webComponents?: string;
 }
 
+// Load all example code files at build time using Vite glob imports
+const reactFiles = import.meta.glob<string>(
+  '../content/examples/*/react.tsx',
+  { eager: true, query: '?raw', import: 'default' }
+);
+const angularTemplates = import.meta.glob<string>(
+  '../content/examples/*/angular.html',
+  { eager: true, query: '?raw', import: 'default' }
+);
+const angularComponents = import.meta.glob<string>(
+  '../content/examples/*/angular.ts',
+  { eager: true, query: '?raw', import: 'default' }
+);
+const webComponentFiles = import.meta.glob<string>(
+  '../content/examples/*/web-components.html',
+  { eager: true, query: '?raw', import: 'default' }
+);
+
+// Helper to extract slug from path like "../content/examples/button-basic/react.tsx"
+function getSlugFromPath(path: string): string {
+  const parts = path.split('/');
+  return parts[parts.length - 2]; // folder name before the filename
+}
+
+// Build lookup maps
+const reactBySlug = new Map<string, string>();
+for (const [path, content] of Object.entries(reactFiles)) {
+  reactBySlug.set(getSlugFromPath(path), content);
+}
+
+const angularTemplateBySlug = new Map<string, string>();
+for (const [path, content] of Object.entries(angularTemplates)) {
+  angularTemplateBySlug.set(getSlugFromPath(path), content);
+}
+
+const angularComponentBySlug = new Map<string, string>();
+for (const [path, content] of Object.entries(angularComponents)) {
+  angularComponentBySlug.set(getSlugFromPath(path), content);
+}
+
+const webComponentBySlug = new Map<string, string>();
+for (const [path, content] of Object.entries(webComponentFiles)) {
+  webComponentBySlug.set(getSlugFromPath(path), content);
+}
+
 /**
- * Read all code files for an example
+ * Get all code files for an example
  * @param exampleSlug - The example folder name (e.g., "button-with-icon")
  * @returns Object with code for each framework
  */
 export async function getExampleCode(exampleSlug: string): Promise<ExampleCode> {
-  const exampleDir = new URL(`../content/examples/${exampleSlug}`, import.meta.url).pathname;
   const code: ExampleCode = {};
 
-  // Read React code
-  try {
-    code.react = await fs.readFile(path.join(exampleDir, 'react.tsx'), 'utf-8');
-  } catch {
-    // File doesn't exist
+  const react = reactBySlug.get(exampleSlug);
+  if (react) {
+    code.react = react;
   }
 
-  // Read Angular code (template + component)
-  try {
-    const template = await fs.readFile(path.join(exampleDir, 'angular.html'), 'utf-8');
-    let component: string | undefined;
-    try {
-      component = await fs.readFile(path.join(exampleDir, 'angular.ts'), 'utf-8');
-    } catch {
-      // Component file is optional
-    }
-    code.angular = { template, component };
-  } catch {
-    // Files don't exist
+  const angularTemplate = angularTemplateBySlug.get(exampleSlug);
+  if (angularTemplate) {
+    code.angular = {
+      template: angularTemplate,
+      component: angularComponentBySlug.get(exampleSlug),
+    };
   }
 
-  // Read Web Components code
-  try {
-    code.webComponents = await fs.readFile(path.join(exampleDir, 'web-components.html'), 'utf-8');
-  } catch {
-    // File doesn't exist
+  const webComponent = webComponentBySlug.get(exampleSlug);
+  if (webComponent) {
+    code.webComponents = webComponent;
   }
 
   return code;
