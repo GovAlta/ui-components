@@ -19,10 +19,7 @@ export function MobileHeader() {
   };
 
   const handleSearchClick = () => {
-    // Dispatch event for search - to be connected later
     window.dispatchEvent(new CustomEvent('goa-search-open'));
-    // For now, navigate to search page as fallback
-    window.location.href = '/search';
   };
 
   return (

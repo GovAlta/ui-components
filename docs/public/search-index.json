@@ -1,29 +1,2700 @@
 [
   {
-    "id": "badge",
-    "title": "Badge",
-    "description": " Small labels which hold small amounts of information, system feedback, or states. ",
-    "content": "# Badge\n\nSmall labels which hold small amounts of information, system feedback, or states.\n",
-    "component": "badge",
-    "filePath": "docs/src/pages/components/badge/badge.mdx",
-    "urlPath": "components/badge",
+    "type": "component",
+    "id": "accordion",
+    "name": "Accordion",
+    "description": "Let users show and hide sections of related content on a page.",
+    "status": "stable",
+    "category": "content-layout",
     "tags": [
-      "filter chip",
-      "icons",
-      "table"
-    ]
+      "expand",
+      "blind",
+      "collapse",
+      "content layout",
+      "expandable panel",
+      "expand"
+    ],
+    "slug": "accordion"
   },
   {
-    "id": "accordion",
-    "title": "Accordion",
-    "description": "Some additional description for the component",
-    "content": "# Accordion\nAccordion containers enable multiple content sections to be displayed in a limited space and collapsed or expanded by the user. You can create hierarchy of information by hiding secondary content inside collapsed expand containers.\n\n## Examples\n\n<GoabAccordion heading=\"Contact information\">\n  <dl>\n    <dt>Name</dt>\n    <dd>Joan Smith</dd>\n    <dt>Contact preference</dt>\n    <dd>Text message</dd>\n  </dl>\n</GoabAccordion>\n\n### Close all\n\nconst AccordionCloseAllExample => () {\n  const [expandedAll, setExpandedAll] = useState<boolean>(false);\n  const [expandedList, setExpandedList] = useState<number[]>([]);\n  useEffect(() => {\n    setExpandedAll(expandedList.length === 4);\n  }, [expandedList.length]);\n\n  const expandOrCollapseAll = () => {\n      setExpandedAll((prev) => {\n      const newState = !prev;\n      setExpandedList(newState ? [1, 2, 3, 4] : []);\n      return newState;\n    });\n  };\n\n  const updateAccordion = (order: number, isOpen: boolean) => {\n    setExpandedList((prev) => {\n    if (isOpen) {\n      return prev.includes(order) ? prev: [...prev, order];\n    }\n    return prev.filter((item) => item !== order);\n  });\n\n  return (\n    <GoabButton type=\"tertiary\" mb=\"m\" onClick={() => expandOrCollapseAll()}>\n       {expandedAll ? \"Hide all sections\" : \"Show all sections\"}\n    </GoabButton>\n\n    <GoabAccordion open={expandedList.includes(1)} heading=\"How do I create an account?\" headingSize=\"medium\" onChange={(open) => updateAccordion(1, open)}>\n       To create an account you will need to contact your office admin.\n    </GoabAccordion>\n\n    <GoabAccordion open={expandedList.includes(2)} heading=\"What verification is needed to sign documents digitally?\" headingSize=\"medium\" onChange={(open) => updateAccordion(2, open)}>\n       You will need to verify your identity through our two factor authentication in addition to the digital signature.\n    </GoabAccordion>\n\n    <GoabAccordion open={expandedList.includes(3)} heading=\"Can I track the status of my service requests online?\" headingSize=\"medium\" onChange={(open) => updateAccordion(3, open)}>\n       Yes, you can see the status of your application on the main service dashboard when you login. You will receive updates and notifications in your email as your request progresses.\n    </GoabAccordion>\n\n    <GoabAccordion open={expandedList.includes(4)} heading=\"Are there accessibility features for people with disabilities?\" headingSize=\"medium\" onChange={(open) => updateAccordion(4, open)}>\n       Yes, our digital service is designed with accessibility in mind. <a href=\"\">More information on accessibility.</a>\n    </GoabAccordion>\n  )\n}\n\n<AccordionCloseAllExample />\n",
-    "component": "accordion",
-    "filePath": "docs/src/pages/components/accordion/accordion.mdx",
-    "urlPath": "components/accordion",
+    "type": "component",
+    "id": "app-header",
+    "name": "Header",
+    "description": "Provide structure to help users find their way around the service.",
+    "status": "stable",
+    "category": "structure-and-navigation",
     "tags": [
+      "app header",
+      "global navigation",
+      "header",
+      "header and navigation",
+      "main navigation",
+      "navigation header",
+      "navigation menu",
+      "primary navigation",
+      "service header",
+      "structure and navigation",
+      "top navigation"
+    ],
+    "slug": "app-header"
+  },
+  {
+    "type": "component",
+    "id": "badge",
+    "name": "Badge",
+    "description": "Small labels which hold small amounts of information, system feedback, or states.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "feedback and alerts",
+      "label",
+      "lozenge",
+      "status",
+      "tag",
+      "token"
+    ],
+    "slug": "badge"
+  },
+  {
+    "type": "component",
+    "id": "block",
+    "name": "Block",
+    "description": "Group components into a block with consistent space between.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "utility"
+    ],
+    "slug": "block"
+  },
+  {
+    "type": "component",
+    "id": "button-group",
+    "name": "Button group",
+    "description": "Display multiple related actions stacked or in a horizontal row to help with arrangement and spacing.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "action",
+      "inputs and actions",
+      "submit"
+    ],
+    "slug": "button-group"
+  },
+  {
+    "type": "component",
+    "id": "button",
+    "name": "Button",
+    "description": "Carry out an important action or navigate to another page.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "action",
+      "inputs and actions",
+      "submit"
+    ],
+    "slug": "button"
+  },
+  {
+    "type": "component",
+    "id": "callout",
+    "name": "Callout",
+    "description": "Communicate important information through a strong visual emphasis.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "alert",
+      "feedback and alerts",
+      "show more information"
+    ],
+    "slug": "callout"
+  },
+  {
+    "type": "component",
+    "id": "checkbox-list",
+    "name": "Checkbox list",
+    "description": "A multiple selection input.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "checkbox",
+      "input",
+      "inputs and actions"
+    ],
+    "slug": "checkbox-list"
+  },
+  {
+    "type": "component",
+    "id": "checkbox",
+    "name": "Checkbox",
+    "description": "Let the user select one or more options.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "checklist",
+      "input",
+      "inputs and actions",
+      "options"
+    ],
+    "slug": "checkbox"
+  },
+  {
+    "type": "component",
+    "id": "circular-progress",
+    "name": "Circular progress indicator",
+    "description": "Provide feedback of progress to users while loading.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "feedback and alerts",
+      "loading",
+      "loader",
+      "loading indicator",
+      "progress spinner",
+      "process timer",
+      "spinner"
+    ],
+    "slug": "circular-progress"
+  },
+  {
+    "type": "component",
+    "id": "container",
+    "name": "Container",
+    "description": "Group information, create hierarchy, and show related information.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "card",
+      "content",
+      "content layout",
+      "group",
+      "structure"
+    ],
+    "slug": "container"
+  },
+  {
+    "type": "component",
+    "id": "data-grid",
+    "name": "Data Grid",
+    "description": "Advanced table with sorting and selection.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [],
+    "slug": "data-grid"
+  },
+  {
+    "type": "component",
+    "id": "date-picker",
+    "name": "Date picker",
+    "description": "Lets users select a date through a calendar without the need to manually type it in a field.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "calendar",
+      "date",
+      "date picker",
+      "inputs and actions",
+      "input"
+    ],
+    "slug": "date-picker"
+  },
+  {
+    "type": "component",
+    "id": "details",
+    "name": "Details",
+    "description": "Let users reveal more detailed information when they need it.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "accordion details",
+      "additional info",
+      "additional information",
+      "content layout",
+      "detail accordion",
+      "details expander",
+      "details toggle",
+      "disclosure",
+      "expand",
+      "expander",
+      "expanding detail",
+      "expandable details",
+      "expandable help text",
+      "more info",
+      "see more",
+      "show more",
+      "show more information"
+    ],
+    "slug": "details"
+  },
+  {
+    "type": "component",
+    "id": "divider",
+    "name": "Divider",
+    "description": "Indicate a separation of layout, or to distinguish large chunks of information on a page.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "dividing line",
+      "page divider",
+      "utilities"
+    ],
+    "slug": "divider"
+  },
+  {
+    "type": "component",
+    "id": "drawer",
+    "name": "Drawer",
+    "description": "A panel that slides in from the side of the screen to display additional content or actions without navigating away from the current view.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "sections",
+      "structure and navigation",
+      "sheet",
+      "sidesheet",
+      "sidepanel"
+    ],
+    "slug": "drawer"
+  },
+  {
+    "type": "component",
+    "id": "dropdown",
+    "name": "Dropdown",
+    "description": "Present a list of options to the user to select from.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "inputs and actions",
+      "select",
+      "single select dropdown"
+    ],
+    "slug": "dropdown"
+  },
+  {
+    "type": "component",
+    "id": "file-upload-input",
+    "name": "File uploader",
+    "description": "Help users select and upload a file.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "drag and drop",
+      "file upload",
+      "inputs and actions",
+      "uploader"
+    ],
+    "slug": "file-upload-input"
+  },
+  {
+    "type": "component",
+    "id": "filter-chip",
+    "name": "Filter chip",
+    "description": "Allow the user to enter information, filter content, and make selections.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "inputs and actions",
+      "pill"
+    ],
+    "slug": "filter-chip"
+  },
+  {
+    "type": "component",
+    "id": "footer",
+    "name": "Footer",
+    "description": "Provides information related your service at the bottom of every page.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "page footer",
+      "structure and navigation"
+    ],
+    "slug": "footer"
+  },
+  {
+    "type": "component",
+    "id": "form-item",
+    "name": "Form item",
+    "description": "Wraps an input control with a text label, requirement label, helper text, and error text.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "form",
+      "input",
+      "inputs and actions"
+    ],
+    "slug": "form-item"
+  },
+  {
+    "type": "component",
+    "id": "form-stepper",
+    "name": "Form stepper",
+    "description": "Provides a visual representation of a form through a series of steps.",
+    "status": "deprecated",
+    "category": "structure-and-navigation",
+    "tags": [
+      "form stepper",
+      "horizontal step navigation",
+      "process overview",
+      "progress indicator",
+      "steps",
+      "structure and navigation",
+      "wizard"
+    ],
+    "slug": "form-stepper"
+  },
+  {
+    "type": "component",
+    "id": "form",
+    "name": "Form",
+    "description": "Container for form inputs and validation.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [],
+    "slug": "form"
+  },
+  {
+    "type": "component",
+    "id": "grid",
+    "name": "Grid",
+    "description": "Arrange a number of components into a responsive grid pattern.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "utilities"
+    ],
+    "slug": "grid"
+  },
+  {
+    "type": "component",
+    "id": "hero-banner",
+    "name": "Hero banner",
+    "description": "A visual band of text, including an image and a call to action.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "promotion banner",
+      "hero panel",
+      "structure and navigation"
+    ],
+    "slug": "hero-banner"
+  },
+  {
+    "type": "component",
+    "id": "icon-button",
+    "name": "Icon button",
+    "description": "A compact button with an icon and no text.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "action",
+      "inputs and actions",
+      "submit"
+    ],
+    "slug": "icon-button"
+  },
+  {
+    "type": "component",
+    "id": "icon",
+    "name": "Icons",
+    "description": "A simple and universal graphic symbol representing an action, object, or concept to help guide the user.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "utilities"
+    ],
+    "slug": "icon"
+  },
+  {
+    "type": "component",
+    "id": "input",
+    "name": "Input",
+    "description": "A single-line field where users can input and edit text.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "inputs and actions",
+      "text field",
+      "text box",
+      "search",
+      "text input"
+    ],
+    "slug": "input"
+  },
+  {
+    "type": "component",
+    "id": "linear-progress",
+    "name": "Linear progress indicator",
+    "description": "Provide visual feedback to users while loading.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "progress",
+      "feedback and alerts",
+      "loading",
+      "loader",
+      "loading indicator",
+      "process timer"
+    ],
+    "slug": "linear-progress"
+  },
+  {
+    "type": "component",
+    "id": "link-button",
+    "name": "Link Button",
+    "description": "Button styled as a link for secondary actions.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [],
+    "slug": "link-button"
+  },
+  {
+    "type": "component",
+    "id": "link",
+    "name": "Link",
+    "description": "Wraps an anchor element to add icons or margins.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "utilities",
+      "text"
+    ],
+    "slug": "link"
+  },
+  {
+    "type": "component",
+    "id": "menu-button",
+    "name": "Menu button",
+    "description": "A button with more than one action.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "menu button",
+      "split button"
+    ],
+    "slug": "menu-button"
+  },
+  {
+    "type": "component",
+    "id": "microsite-header",
+    "name": "Microsite header",
+    "description": "Communicate what stage the service is at, connect to Alberta.ca, and gather feedback on your service.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "banner",
+      "development header",
+      "feedback bar",
+      "microheader",
+      "microsite banner",
+      "service header",
+      "service bar",
+      "service stage banner",
+      "service state banner",
+      "status bar",
+      "structure and navigation"
+    ],
+    "slug": "microsite-header"
+  },
+  {
+    "type": "component",
+    "id": "modal",
+    "name": "Modal",
+    "description": "An overlay that appears in front of all other content, and requires a user to take an action before continuing.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "feedback and alerts",
+      "popup modal",
+      "popup box",
+      "modal dialog",
+      "show more information"
+    ],
+    "slug": "modal"
+  },
+  {
+    "type": "component",
+    "id": "notification",
+    "name": "Notification banner",
+    "description": "Display important page level information or notifications.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "alert banner",
+      "banner",
+      "feedback and alerts"
+    ],
+    "slug": "notification"
+  },
+  {
+    "type": "component",
+    "id": "page-block",
+    "name": "Page Block",
+    "description": "Full-width section with optional background.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [],
+    "slug": "page-block"
+  },
+  {
+    "type": "component",
+    "id": "pagination",
+    "name": "Pagination",
+    "description": "Help users navigation between multiple pages or screens as part of a set.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "pager",
+      "pagination controls",
+      "structure and navigation"
+    ],
+    "slug": "pagination"
+  },
+  {
+    "type": "component",
+    "id": "popover",
+    "name": "Popover",
+    "description": "A small overlay that opens on demand, used in other components.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "content layout",
+      "show more information"
+    ],
+    "slug": "popover"
+  },
+  {
+    "type": "component",
+    "id": "radio-group",
+    "name": "Radio",
+    "description": "Allow users to select one option from a set.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "inputs and actions",
+      "option button",
+      "radio button group",
+      "radio buttons"
+    ],
+    "slug": "radio-group"
+  },
+  {
+    "type": "component",
+    "id": "side-menu",
+    "name": "Side menu",
+    "description": "A side navigation that helps the user navigate between pages.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "secondary navigation",
+      "side nav",
+      "side bar",
+      "structure and navigation"
+    ],
+    "slug": "side-menu"
+  },
+  {
+    "type": "component",
+    "id": "skeleton",
+    "name": "Skeleton loader",
+    "description": "Provide visual feedback to users while loading a content heavy page or page element.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "content layout",
+      "loading"
+    ],
+    "slug": "skeleton"
+  },
+  {
+    "type": "component",
+    "id": "spacer",
+    "name": "Spacer",
+    "description": "Negative area between the components and the interface.",
+    "status": "stable",
+    "category": "utilities",
+    "tags": [
+      "gap",
+      "margin",
+      "padding",
+      "space",
+      "utilities"
+    ],
+    "slug": "spacer"
+  },
+  {
+    "type": "component",
+    "id": "table",
+    "name": "Table",
+    "description": "A set of structured data that is easy for a user to scan, examine, and compare.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "data table",
+      "content layout",
+      "interactive table",
+      "sortable table"
+    ],
+    "slug": "table"
+  },
+  {
+    "type": "component",
+    "id": "tabs",
+    "name": "Tabs",
+    "description": "Let users navigate between related sections of content, displaying one section at a time.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "sections",
+      "structure and navigation",
+      "tabbed interface"
+    ],
+    "slug": "tabs"
+  },
+  {
+    "type": "component",
+    "id": "temporary-notification",
+    "name": "Temporary notification",
+    "description": "A notification that appears at the bottom of the screen.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "snackbar",
+      "toast",
+      "temporary notification"
+    ],
+    "slug": "temporary-notification"
+  },
+  {
+    "type": "component",
+    "id": "text-area",
+    "name": "Text area",
+    "description": "A multi-line field where users can input and edit text.",
+    "status": "stable",
+    "category": "inputs-and-actions",
+    "tags": [
+      "inputs and actions",
+      "long answer input field",
+      "multi line text input",
+      "multiple text box",
+      "text box",
+      "text input area"
+    ],
+    "slug": "text-area"
+  },
+  {
+    "type": "component",
+    "id": "text",
+    "name": "Text",
+    "description": "Provides consistent sizing, spacing, and colour to written content.",
+    "status": "stable",
+    "category": "content-layout",
+    "tags": [
+      "text",
+      "body",
+      "copy"
+    ],
+    "slug": "text"
+  },
+  {
+    "type": "component",
+    "id": "tooltip",
+    "name": "Tooltip",
+    "description": "A small popover that displays more information about an item.",
+    "status": "stable",
+    "category": "feedback-and-alerts",
+    "tags": [
+      "feedback and alerts"
+    ],
+    "slug": "tooltip"
+  },
+  {
+    "type": "component",
+    "id": "work-side-menu",
+    "name": "Work Side Menu",
+    "description": "Side menu variant for worker applications.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [],
+    "slug": "work-side-menu"
+  },
+  {
+    "type": "example",
+    "id": "add-a-filter-chip",
+    "title": "Add a filter chip",
+    "description": "Allow users to apply filters using selectable chips, which visually represent active filters and can be removed to update results dynamically.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "filtering",
+      "chips",
+      "dynamic"
+    ],
+    "components": [
+      "filter-chip",
+      "button"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "add-a-filter-chip"
+  },
+  {
+    "type": "example",
+    "id": "add-a-record-using-a-drawer",
+    "title": "Add a record using a drawer",
+    "description": "Add a record using a drawer. The drawer slides in from the side to allow data entry without navigating away from the current view.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "drawer",
+      "forms",
+      "records",
+      "data-entry"
+    ],
+    "components": [
+      "drawer",
+      "button",
+      "button-group",
+      "form-item",
+      "dropdown",
+      "input",
+      "radio-group",
+      "block"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "add-a-record-using-a-drawer"
+  },
+  {
+    "type": "example",
+    "id": "add-and-edit-lots-of-filters",
+    "title": "Add and edit lots of filters",
+    "description": "Add and edit filters using a drawer. This pattern is useful when you have many filter options that would clutter the main interface.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "filtering",
+      "drawer",
+      "forms",
+      "data-management"
+    ],
+    "components": [
+      "drawer",
+      "button",
+      "button-group",
+      "form-item",
+      "checkbox-list",
+      "checkbox",
+      "dropdown",
+      "radio-group"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "add-and-edit-lots-of-filters"
+  },
+  {
+    "type": "example",
+    "id": "add-another-item-in-a-modal",
+    "title": "Add another item in a modal",
+    "description": "Add a new item within a modal window without navigating away from the current context.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "modal",
+      "forms",
+      "data-entry"
+    ],
+    "components": [
+      "modal",
+      "button",
+      "button-group",
+      "form-item",
+      "dropdown",
+      "input",
+      "text-area"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "add-another-item-in-a-modal"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-long-answer-question-with-a-maximum-word-count",
+    "title": "Ask a long answer question with a maximum word count",
+    "description": "Restrict a long answer input to a maximum number of words or characters.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "text-area",
+      "validation",
+      "word-count"
+    ],
+    "components": [
+      "form-item",
+      "text-area"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "ask-a-long-answer-question-with-a-maximum-word-count"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-user-for-a-birthday",
+    "title": "Ask a user for a birthday",
+    "description": "Asks for a user's birthday using the date picker component.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "date-input",
+      "ask-a-user-for"
+    ],
+    "components": [
+      "form-item",
+      "date-picker"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "ask-a-user-for-a-birthday"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-user-for-an-address",
+    "title": "Ask a user for an address",
+    "description": "Collect a complete mailing address from the user, including fields like street, city, and postal code.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "address",
+      "location"
+    ],
+    "components": [
+      "form-item",
+      "input",
+      "dropdown",
+      "block",
+      "button",
+      "button-group",
+      "text"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "ask-a-user-for-an-address"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-user-for-an-indian-registration-number",
+    "title": "Ask a user for an Indian registration number",
+    "description": "Request a user's Indian registration number with appropriate validation and context.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "identity",
+      "registration"
+    ],
+    "components": [
+      "form-item",
+      "input",
+      "block"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "ask-a-user-for-an-indian-registration-number"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-user-for-direct-deposit-information",
+    "title": "Ask a user for direct deposit information",
+    "description": "Gather banking details from users to enable direct deposit, including account number and financial institution information.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "banking",
+      "financial"
+    ],
+    "components": [
+      "form-item",
+      "input",
       "details",
-      "tabs"
-    ]
+      "text"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "ask-a-user-for-direct-deposit-information"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-user-for-dollar-amounts",
+    "title": "Ask a user for dollar amounts",
+    "description": "Prompt users to enter monetary values using a consistent input format that supports validation and currency symbols.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "currency",
+      "financial"
+    ],
+    "components": [
+      "form-item",
+      "input"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "ask-a-user-for-dollar-amounts"
+  },
+  {
+    "type": "example",
+    "id": "ask-a-user-one-question-at-a-time",
+    "title": "Ask a user one question at a time",
+    "description": "Ask a user one question at a time.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "questions",
+      "public-form"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "ask-a-user-one-question-at-a-time"
+  },
+  {
+    "type": "example",
+    "id": "basic-page-layout",
+    "title": "Basic page layout",
+    "description": "A basic page template to use as a starting point.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "layout",
+      "page-structure",
+      "template"
+    ],
+    "components": [
+      "microsite-header",
+      "app-header",
+      "footer",
+      "page-block",
+      "skeleton",
+      "grid"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "basic-page-layout"
+  },
+  {
+    "type": "example",
+    "id": "button-with-icon",
+    "title": "Button with Icon",
+    "description": "Shows how to add leading or trailing icons to buttons for enhanced visual communication.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "icons",
+      "buttons",
+      "actions"
+    ],
+    "components": [
+      "button",
+      "button-group",
+      "icon"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "button-with-icon"
+  },
+  {
+    "type": "example",
+    "id": "card-grid",
+    "title": "Card grid",
+    "description": "Display multiple cards in a grid layout, each containing related content or actions.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "cards",
+      "grid",
+      "navigation",
+      "dashboard"
+    ],
+    "components": [
+      "container",
+      "grid",
+      "link",
+      "text"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "card-grid"
+  },
+  {
+    "type": "example",
+    "id": "card-view-of-case-files",
+    "title": "Card view of case files",
+    "description": "Present a visual overview of individual case files in a card format for scanning and access.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "cards",
+      "case-management",
+      "status",
+      "list"
+    ],
+    "components": [
+      "container",
+      "block",
+      "badge",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "card-view-of-case-files"
+  },
+  {
+    "type": "example",
+    "id": "communicate-a-future-service-outage",
+    "title": "Communicate a future service outage",
+    "description": "Display a clear message to inform users about an upcoming service outage, including the date, time, and expected impact on service availability.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "notification",
+      "maintenance",
+      "alerts",
+      "system-status"
+    ],
+    "components": [
+      "notification"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "communicate-a-future-service-outage"
+  },
+  {
+    "type": "example",
+    "id": "confirm-a-change",
+    "title": "Confirm a change",
+    "description": "Ask the user to confirm a proposed change before it is applied.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "modal",
+      "confirmation",
+      "forms",
+      "changes"
+    ],
+    "components": [
+      "modal",
+      "button",
+      "button-group",
+      "container",
+      "form-item",
+      "date-picker"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "confirm-a-change"
+  },
+  {
+    "type": "example",
+    "id": "confirm-a-destructive-action",
+    "title": "Confirm a destructive action",
+    "description": "Confirm a destructive action like deletion to prevent accidental data loss.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "modal",
+      "confirmation",
+      "delete",
+      "destructive"
+    ],
+    "components": [
+      "modal",
+      "button",
+      "button-group"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "confirm-a-destructive-action"
+  },
+  {
+    "type": "example",
+    "id": "confirm-before-navigating-away",
+    "title": "Confirm before navigating away",
+    "description": "Prompt the user in a modal before navigating to a new route to preserve context.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "modal",
+      "navigation",
+      "confirmation",
+      "routing"
+    ],
+    "components": [
+      "modal",
+      "button",
+      "button-group"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "confirm-before-navigating-away"
+  },
+  {
+    "type": "example",
+    "id": "confirm-that-an-application-was-submitted",
+    "title": "Confirm that an application was submitted",
+    "description": "Display a confirmation screen to indicate successful application submission.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "confirmation",
+      "success",
+      "callout",
+      "application"
+    ],
+    "components": [
+      "callout",
+      "button",
+      "button-group"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "confirm-that-an-application-was-submitted"
+  },
+  {
+    "type": "example",
+    "id": "copy-to-clipboard",
+    "title": "Copy to clipboard",
+    "description": "Allow users to quickly copy text or data to their clipboard with a single click.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "clipboard",
+      "copy",
+      "tooltip",
+      "icon-button"
+    ],
+    "components": [
+      "block",
+      "icon-button",
+      "tooltip"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "copy-to-clipboard"
+  },
+  {
+    "type": "example",
+    "id": "disabled-button-with-a-required-field",
+    "title": "Disabled button with a required field",
+    "description": "Disable a submit button until required form fields are completed.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "button",
+      "form",
+      "validation",
+      "disabled",
+      "required"
+    ],
+    "components": [
+      "button",
+      "button-group",
+      "form-item",
+      "input"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "disabled-button-with-a-required-field"
+  },
+  {
+    "type": "example",
+    "id": "display-numbers-in-a-table-so-they-can-be-scanned-easily",
+    "title": "Display numbers in a table so they can be scanned easily",
+    "description": "Right-align numeric columns in tables to make them easier to scan and compare.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "table",
+      "numbers",
+      "data",
+      "alignment",
+      "scanning"
+    ],
+    "components": [
+      "table"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "display-numbers-in-a-table-so-they-can-be-scanned-easily"
+  },
+  {
+    "type": "example",
+    "id": "display-user-information",
+    "title": "Display user information",
+    "description": "Display user contact information and related data using containers with clear visual hierarchy.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "container",
+      "user-info",
+      "contact",
+      "profile",
+      "table"
+    ],
+    "components": [
+      "container",
+      "block",
+      "button",
+      "table",
+      "text"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "display-user-information"
+  },
+  {
+    "type": "example",
+    "id": "dynamically-add-an-item-to-a-dropdown-list",
+    "title": "Dynamically add an item to a dropdown list",
+    "description": "Allow users to add new items to a dropdown list dynamically.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "dropdown",
+      "dynamic",
+      "form",
+      "input",
+      "radio"
+    ],
+    "components": [
+      "dropdown",
+      "dropdown-item",
+      "form-item",
+      "input",
+      "button"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "dynamically-add-an-item-to-a-dropdown-list"
+  },
+  {
+    "type": "example",
+    "id": "dynamically-change-items-in-a-dropdown-list",
+    "title": "Dynamically change items in a dropdown list",
+    "description": "Update dropdown options based on the selection in another dropdown (cascading/dependent dropdowns).",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "dropdown",
+      "dynamic",
+      "cascading",
+      "dependent",
+      "form"
+    ],
+    "components": [
+      "dropdown",
+      "dropdown-item",
+      "form-item"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "dynamically-change-items-in-a-dropdown-list"
+  },
+  {
+    "type": "example",
+    "id": "expand-or-collapse-part-of-a-form",
+    "title": "Expand or collapse part of a form",
+    "description": "Use accordions to organize form review sections that users can expand or collapse.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "accordion",
+      "form",
+      "review",
+      "collapsible",
+      "badge"
+    ],
+    "components": [
+      "accordion",
+      "badge"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "expand-or-collapse-part-of-a-form"
+  },
+  {
+    "type": "example",
+    "id": "filter-data-in-a-table",
+    "title": "Filter data in a table",
+    "description": "Enable users to filter table data using search input and filter chips.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "table",
+      "filter",
+      "search",
+      "chips",
+      "data"
+    ],
+    "components": [
+      "table",
+      "filter-chip",
+      "input",
+      "button",
+      "block",
+      "form-item",
+      "badge",
+      "text"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "filter-data-in-a-table"
+  },
+  {
+    "type": "example",
+    "id": "form-stepper-with-controlled-navigation",
+    "title": "Form stepper with controlled navigation",
+    "description": "Create a multi-step form with controlled navigation using Previous/Next buttons.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "stepper",
+      "form",
+      "wizard",
+      "multi-step",
+      "navigation",
+      "pages"
+    ],
+    "components": [
+      "form-stepper",
+      "form-step",
+      "pages",
+      "button",
+      "skeleton",
+      "spacer"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "form-stepper-with-controlled-navigation"
+  },
+  {
+    "type": "example",
+    "id": "give-background-information-before-asking-a-question",
+    "title": "Give background information before asking a question",
+    "description": "Provide explanatory context before asking a question to help users understand what is being asked.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "form",
+      "question",
+      "context",
+      "radio",
+      "citizen-facing"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "give-background-information-before-asking-a-question"
+  },
+  {
+    "type": "example",
+    "id": "give-context-before-asking-a-long-answer-question",
+    "title": "Give context before asking a long answer question",
+    "description": "Provide context and guidance before a long-answer text field to help users provide relevant information.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "form",
+      "text-area",
+      "question",
+      "context",
+      "details",
+      "citizen-facing"
+    ],
+    "components": [
+      "text-area",
+      "form-item",
+      "details",
+      "button",
+      "button-group"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "give-context-before-asking-a-long-answer-question"
+  },
+  {
+    "type": "example",
+    "id": "group-related-questions-together-on-a-question-page",
+    "title": "Group related questions together on a question page",
+    "description": "Group related form fields together on a single page to collect address information from users, making it easier to complete logically connected questions at once.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "address",
+      "question-page"
+    ],
+    "components": [
+      "form-item",
+      "input",
+      "dropdown",
+      "dropdown-item",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "group-related-questions-together-on-a-question-page"
+  },
+  {
+    "type": "example",
+    "id": "header-with-menu-click-event",
+    "title": "Header with menu click event",
+    "description": "Handle custom menu click behavior in the app header, allowing you to intercept the mobile menu button click and implement custom functionality like custom navigation drawers.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "header",
+      "navigation",
+      "mobile",
+      "menu"
+    ],
+    "components": [
+      "app-header",
+      "app-header-menu",
+      "radio-group",
+      "radio-item"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "header-with-menu-click-event"
+  },
+  {
+    "type": "example",
+    "id": "header-with-navigation",
+    "title": "Header with navigation",
+    "description": "Implement a standard application header with navigation menus, search functionality, and sign-in links for government services.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "header",
+      "navigation",
+      "menu"
+    ],
+    "components": [
+      "app-header",
+      "app-header-menu",
+      "microsite-header"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "header-with-navigation"
+  },
+  {
+    "type": "example",
+    "id": "hero-banner-with-actions",
+    "title": "Hero banner with actions",
+    "description": "Create a hero banner with a call-to-action button to guide users toward the primary task on a landing page.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "hero",
+      "banner",
+      "cta",
+      "landing"
+    ],
+    "components": [
+      "hero-banner",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "hero-banner-with-actions"
+  },
+  {
+    "type": "example",
+    "id": "hide-and-show-many-sections-of-information",
+    "title": "Hide and show many sections of information",
+    "description": "Allow users to expand and collapse multiple accordion sections, with a button to show or hide all sections at once.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "accordion",
+      "expand",
+      "collapse",
+      "faq"
+    ],
+    "components": [
+      "accordion",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "hide-and-show-many-sections-of-information"
+  },
+  {
+    "type": "example",
+    "id": "include-a-link-in-the-helper-text-of-an-option",
+    "title": "Include a link in the helper text of an option",
+    "description": "Add links within the description text of checkbox options to provide additional context or resources while users are making selections.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "checkbox",
+      "helper-text",
+      "links",
+      "forms"
+    ],
+    "components": [
+      "checkbox",
+      "form-item"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "include-a-link-in-the-helper-text-of-an-option"
+  },
+  {
+    "type": "example",
+    "id": "include-descriptions-for-items-in-a-checkbox-list",
+    "title": "Include descriptions for items in a checkbox list",
+    "description": "Add descriptive text to radio button options to help users understand the implications of each choice.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "radio",
+      "descriptions",
+      "forms"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "include-descriptions-for-items-in-a-checkbox-list"
+  },
+  {
+    "type": "example",
+    "id": "link-the-user-to-give-feedback-to-the-service",
+    "title": "Link the user to give feedback to the service",
+    "description": "Use the microsite header's feedback functionality to collect user feedback during alpha or beta phases of a service.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "feedback",
+      "microsite-header",
+      "alpha",
+      "beta"
+    ],
+    "components": [
+      "microsite-header"
+    ],
+    "scale": "interaction",
+    "userType": "citizen",
+    "slug": "link-the-user-to-give-feedback-to-the-service"
+  },
+  {
+    "type": "example",
+    "id": "link-to-an-external-page",
+    "title": "Link to an external page",
+    "description": "Use an external link indicator to show users when a link will take them to a different website.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "link",
+      "external",
+      "navigation"
+    ],
+    "components": [
+      "link"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "link-to-an-external-page"
+  },
+  {
+    "type": "example",
+    "id": "public-form",
+    "title": "Public form",
+    "description": "The public form pattern provides a structure for citizen-facing form experiences, emphasizing simplicity, accessibility, and low cognitive load.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "form",
+      "public",
+      "citizen",
+      "pattern"
+    ],
+    "components": [],
+    "scale": "service",
+    "userType": "citizen",
+    "slug": "public-form"
+  },
+  {
+    "type": "example",
+    "id": "question-page",
+    "title": "Question page",
+    "description": "A question page pattern that presents one question at a time to help users focus, reduce cognitive load, and navigate complex forms more easily.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "question",
+      "wizard",
+      "one-thing-per-page"
+    ],
+    "components": [
+      "form-item",
+      "input",
+      "button",
+      "button-group"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "question-page"
+  },
+  {
+    "type": "example",
+    "id": "remove-a-filter",
+    "title": "Remove a filter",
+    "description": "Allow users to remove active filters by clicking on filter chips, providing clear visual feedback and dynamic updates to filtered results.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "filtering",
+      "chips",
+      "remove"
+    ],
+    "components": [
+      "filter-chip"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "remove-a-filter"
+  },
+  {
+    "type": "example",
+    "id": "require-user-action-before-continuing",
+    "title": "Require user action before continuing",
+    "description": "Use a modal dialog to require users to confirm an action before proceeding, especially for irreversible operations or important decision points.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "modal",
+      "confirmation",
+      "warning",
+      "action"
+    ],
+    "components": [
+      "modal",
+      "button",
+      "button-group"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "require-user-action-before-continuing"
+  },
+  {
+    "type": "example",
+    "id": "reset-date-picker-field",
+    "title": "Reset date picker field",
+    "description": "Allow users to programmatically set or clear a date picker field value, useful for reset functionality or setting default dates.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "date-picker",
+      "form",
+      "reset",
+      "clear"
+    ],
+    "components": [
+      "date-picker",
+      "form-item",
+      "button",
+      "button-group"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "reset-date-picker-field"
+  },
+  {
+    "type": "example",
+    "id": "result-page",
+    "title": "Result page",
+    "description": "A result page shown after form submission to confirm success, provide next steps, and offer relevant contact information.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "confirmation",
+      "success",
+      "completion",
+      "forms"
+    ],
+    "components": [
+      "block",
+      "callout"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "result-page"
+  },
+  {
+    "type": "example",
+    "id": "reveal-input-based-on-a-selection",
+    "title": "Reveal input based on a selection",
+    "description": "Progressively reveal additional form fields based on user selections, reducing visual complexity while gathering necessary information.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "conditional",
+      "reveal",
+      "radio",
+      "checkbox",
+      "progressive-disclosure"
+    ],
+    "components": [
+      "radio-group",
+      "radio-item",
+      "checkbox",
+      "form-item",
+      "input"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "reveal-input-based-on-a-selection"
+  },
+  {
+    "type": "example",
+    "id": "review-and-action",
+    "title": "Review and action",
+    "description": "A side-by-side layout for workers to review case details while taking an action, commonly used in case management and approval workflows.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "review",
+      "action",
+      "container",
+      "case-management",
+      "worker"
+    ],
+    "components": [
+      "container",
+      "grid",
+      "block",
+      "form-item",
+      "radio-group",
+      "dropdown",
+      "text-area",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "review-and-action"
+  },
+  {
+    "type": "example",
+    "id": "review-page",
+    "title": "Review page",
+    "description": "A review page where users can check their answers before submitting a form, with options to change individual responses.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "review",
+      "check-answers",
+      "forms",
+      "submission"
+    ],
+    "components": [
+      "table",
+      "button",
+      "button-group"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "review-page"
+  },
+  {
+    "type": "example",
+    "id": "search",
+    "title": "Search",
+    "description": "A search input pattern with a search icon and button for users to find content or filter results.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "search",
+      "input",
+      "filtering"
+    ],
+    "components": [
+      "input",
+      "button",
+      "block",
+      "form-item"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "search"
+  },
+  {
+    "type": "example",
+    "id": "select-one-or-more-from-a-list-of-options",
+    "title": "Select one or more from a list of options",
+    "description": "Use checkboxes to let users select one or more options from a list when multiple selections are valid.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "checkbox",
+      "selection",
+      "multiple",
+      "form"
+    ],
+    "components": [
+      "checkbox",
+      "form-item"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "select-one-or-more-from-a-list-of-options"
+  },
+  {
+    "type": "example",
+    "id": "set-a-max-width-on-a-long-radio-item",
+    "title": "Set a max width on a long radio item",
+    "description": "Set a max width on a long radio item to control line wrapping.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "radio",
+      "forms",
+      "layout"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "set-a-max-width-on-a-long-radio-item"
+  },
+  {
+    "type": "example",
+    "id": "set-a-specific-tab-to-be-active",
+    "title": "Set a specific tab to be active",
+    "description": "Set a specific tab to be active on page load using the initialTab property.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "tabs",
+      "navigation",
+      "tables"
+    ],
+    "components": [
+      "tabs",
+      "tab",
+      "table",
+      "badge",
+      "button"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "set-a-specific-tab-to-be-active"
+  },
+  {
+    "type": "example",
+    "id": "set-the-status-of-step-on-a-form-stepper",
+    "title": "Set the status of step on a form stepper",
+    "description": "Set the status of each step on a form stepper to indicate completion progress.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "forms",
+      "stepper",
+      "multi-step",
+      "navigation"
+    ],
+    "components": [
+      "form-stepper",
+      "form-step",
+      "pages",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "set-the-status-of-step-on-a-form-stepper"
+  },
+  {
+    "type": "example",
+    "id": "show-a-label-on-an-icon-only-button",
+    "title": "Show a label on an icon only button",
+    "description": "Show a label on an icon-only button using a tooltip to improve discoverability.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "buttons",
+      "icons",
+      "accessibility",
+      "tooltip"
+    ],
+    "components": [
+      "icon-button",
+      "tooltip",
+      "button-group"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "show-a-label-on-an-icon-only-button"
+  },
+  {
+    "type": "example",
+    "id": "show-a-list-to-help-answer-a-question",
+    "title": "Show a list to help answer a question",
+    "description": "Show a list to help answer a question using an expandable details component.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "details",
+      "guidance",
+      "help"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item",
+      "details",
+      "block"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "show-a-list-to-help-answer-a-question"
+  },
+  {
+    "type": "example",
+    "id": "show-a-notification",
+    "title": "Show a notification",
+    "description": "Show a temporary notification to confirm an action was completed successfully.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "notification",
+      "feedback",
+      "success",
+      "toast"
+    ],
+    "components": [
+      "temporary-notification",
+      "button"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "show-a-notification"
+  },
+  {
+    "type": "example",
+    "id": "show-a-notification-with-an-action",
+    "title": "Show a notification with an action",
+    "description": "Show a temporary notification with an action button for user interaction.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "notification",
+      "feedback",
+      "action",
+      "toast"
+    ],
+    "components": [
+      "temporary-notification",
+      "button"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "show-a-notification-with-an-action"
+  },
+  {
+    "type": "example",
+    "id": "show-a-section-title-on-a-question-page",
+    "title": "Show a section title on a question page",
+    "description": "Show a section title on a question page to help users understand which part of the form they are completing.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "questions",
+      "navigation",
+      "section"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "show-a-section-title-on-a-question-page"
+  },
+  {
+    "type": "example",
+    "id": "show-a-simple-progress-indicator-on-a-question-page",
+    "title": "Show a simple progress indicator on a question page",
+    "description": "Show a simple progress indicator on a question page to help users understand their progress through the form.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "questions",
+      "progress",
+      "navigation"
+    ],
+    "components": [
+      "form-item",
+      "radio-group",
+      "radio-item",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "show-a-simple-progress-indicator-on-a-question-page"
+  },
+  {
+    "type": "example",
+    "id": "show-a-simple-progress-indicator-on-a-question-page-with-multiple-questions",
+    "title": "Show a simple progress indicator on a question page with multiple questions",
+    "description": "Show a simple progress indicator on a question page when grouping multiple related questions together.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "forms",
+      "questions",
+      "progress",
+      "navigation",
+      "multi-question"
+    ],
+    "components": [
+      "form-item",
+      "input",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "show-a-simple-progress-indicator-on-a-question-page-with-multiple-questions"
+  },
+  {
+    "type": "example",
+    "id": "show-a-user-progress",
+    "title": "Show a user progress",
+    "description": "Display progress feedback during long-running operations like downloads, showing percentage completion with the ability to cancel and receive success confirmation.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "progress",
+      "notification",
+      "download",
+      "feedback"
+    ],
+    "components": [
+      "temporary-notification",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "show-a-user-progress"
+  },
+  {
+    "type": "example",
+    "id": "show-a-user-progress-when-the-time-is-unknown",
+    "title": "Show a user progress when the time is unknown",
+    "description": "Display indeterminate progress for operations where completion time cannot be estimated, such as complex searches or external system queries.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "progress",
+      "notification",
+      "indeterminate",
+      "search",
+      "feedback"
+    ],
+    "components": [
+      "temporary-notification",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "show-a-user-progress-when-the-time-is-unknown"
+  },
+  {
+    "type": "example",
+    "id": "show-different-views-of-data-in-a-table",
+    "title": "Show different views of data in a table",
+    "description": "Use tabs to organize table data into different views based on status or category, showing counts in each tab to help workers quickly navigate to relevant items.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "table",
+      "tabs",
+      "filtering",
+      "status",
+      "data-views"
+    ],
+    "components": [
+      "tabs",
+      "tab",
+      "table",
+      "badge",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "show-different-views-of-data-in-a-table"
+  },
+  {
+    "type": "example",
+    "id": "show-full-date-in-a-tooltip",
+    "title": "Show full date in a tooltip",
+    "description": "Display relative time (like \"4 hours ago\") while providing the full date and time on hover via tooltip for users who need exact timestamps.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "tooltip",
+      "date",
+      "relative-time",
+      "hover"
+    ],
+    "components": [
+      "tooltip",
+      "container"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "show-full-date-in-a-tooltip"
+  },
+  {
+    "type": "example",
+    "id": "show-links-to-navigation-items",
+    "title": "Show links to navigation items",
+    "description": "Use the app footer to display comprehensive navigation links organized into sections, along with meta links for common utilities like privacy and accessibility.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "footer",
+      "navigation",
+      "links",
+      "sitemap"
+    ],
+    "components": [
+      "footer",
+      "footer-nav-section",
+      "footer-meta-section"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "show-links-to-navigation-items"
+  },
+  {
+    "type": "example",
+    "id": "show-more-information-to-help-answer-a-question",
+    "title": "Show more information to help answer a question",
+    "description": "Use the Details component to provide optional contextual help that explains why a question is being asked, helping users understand the purpose without cluttering the main form.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "form",
+      "details",
+      "help",
+      "question-page",
+      "expandable"
+    ],
+    "components": [
+      "details",
+      "form-item",
+      "radio-group",
+      "radio-item",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "citizen",
+    "slug": "show-more-information-to-help-answer-a-question"
+  },
+  {
+    "type": "example",
+    "id": "show-multiple-actions-in-a-compact-table",
+    "title": "Show multiple actions in a compact table",
+    "description": "Use icon buttons to provide multiple row actions in tables where space is limited, keeping the interface compact while maintaining accessibility through aria labels.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "table",
+      "icon-button",
+      "actions",
+      "compact",
+      "worker-ui"
+    ],
+    "components": [
+      "table",
+      "icon-button",
+      "badge",
+      "block"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "show-multiple-actions-in-a-compact-table"
+  },
+  {
+    "type": "example",
+    "id": "show-multiple-tags-together",
+    "title": "Show multiple tags together",
+    "description": "Display multiple badges together using GoabBlock with tight spacing to show multiple statuses or categories for a single item.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "badge",
+      "tags",
+      "status",
+      "grouping"
+    ],
+    "components": [
+      "badge",
+      "block"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "show-multiple-tags-together"
+  },
+  {
+    "type": "example",
+    "id": "show-number-of-results-per-page",
+    "title": "Show number of results per page",
+    "description": "Combine pagination with a dropdown selector to let users control how many results appear per page, improving data browsing for different use cases.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "pagination",
+      "table",
+      "dropdown",
+      "results",
+      "per-page"
+    ],
+    "components": [
+      "pagination",
+      "dropdown",
+      "dropdown-item",
+      "table",
+      "block",
+      "spacer"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "show-number-of-results-per-page"
+  },
+  {
+    "type": "example",
+    "id": "show-quick-links",
+    "title": "Show quick links",
+    "description": "Use the app footer meta section to display essential quick links like feedback, accessibility, privacy, and contact information without the full navigation structure.",
+    "status": "published",
+    "categories": [
+      "structure-and-navigation"
+    ],
+    "tags": [
+      "footer",
+      "navigation",
+      "meta-links",
+      "quick-access"
+    ],
+    "components": [
+      "footer",
+      "footer-meta-section"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "show-quick-links"
+  },
+  {
+    "type": "example",
+    "id": "show-status-in-a-table",
+    "title": "Show status in a table",
+    "description": "Display status information within table rows using badges to provide clear visual indicators of item states like pending, complete, failed, or in progress.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "table",
+      "badge",
+      "status"
+    ],
+    "components": [
+      "table",
+      "badge",
+      "button"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "show-status-in-a-table"
+  },
+  {
+    "type": "example",
+    "id": "show-status-on-a-card",
+    "title": "Show status on a card",
+    "description": "Display status indicators on cards using badges in the actions slot, allowing workers to quickly see the priority or state of each item.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "card",
+      "container",
+      "badge",
+      "status"
+    ],
+    "components": [
+      "container",
+      "badge"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "show-status-on-a-card"
+  },
+  {
+    "type": "example",
+    "id": "show-version-number",
+    "title": "Show version number",
+    "description": "Display version information in the microsite header using the version slot, allowing custom formatting and styling of version text.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "microsite-header",
+      "version",
+      "alpha",
+      "beta"
+    ],
+    "components": [
+      "microsite-header"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "show-version-number"
+  },
+  {
+    "type": "example",
+    "id": "slotted-error-text-in-a-form-item",
+    "title": "Slotted error text in a form item",
+    "description": "Use the error slot in a form item to display formatted error messages with custom styling like bold or italic text.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "form",
+      "form-item",
+      "error",
+      "validation",
+      "slot"
+    ],
+    "components": [
+      "form-item",
+      "input"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "slotted-error-text-in-a-form-item"
+  },
+  {
+    "type": "example",
+    "id": "slotted-helper-text-in-a-form-item",
+    "title": "Slotted helper text in a form item",
+    "description": "Use the helpText slot in a form item to display formatted helper text with custom styling like bold, italic, or links.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "form",
+      "form-item",
+      "helper-text",
+      "slot"
+    ],
+    "components": [
+      "form-item",
+      "input"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "slotted-helper-text-in-a-form-item"
+  },
+  {
+    "type": "example",
+    "id": "sort-data-in-a-table",
+    "title": "Sort data in a table",
+    "description": "Enable column sorting in tables using sort headers, allowing workers to organize data by clicking column headers to toggle ascending/descending order.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "table",
+      "sorting",
+      "data"
+    ],
+    "components": [
+      "table",
+      "table-sort-header"
+    ],
+    "scale": "task",
+    "userType": "worker",
+    "slug": "sort-data-in-a-table"
+  },
+  {
+    "type": "example",
+    "id": "start-page",
+    "title": "Start page",
+    "description": "A start page is the front door to a government service for citizens. It provides essential information about the service and a clear call to action to begin.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "page",
+      "service",
+      "start",
+      "citizen"
+    ],
+    "components": [
+      "button"
+    ],
+    "scale": "page",
+    "userType": "citizen",
+    "slug": "start-page"
+  },
+  {
+    "type": "example",
+    "id": "task-list-page",
+    "title": "Task list page",
+    "description": "A task list page provides a structure for multi-step services, showing users their progress through a series of tasks with clear status indicators.",
+    "status": "published",
+    "categories": [
+      "forms"
+    ],
+    "tags": [
+      "page",
+      "task-list",
+      "progress",
+      "form"
+    ],
+    "components": [
+      "table",
+      "badge",
+      "callout"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "task-list-page"
+  },
+  {
+    "type": "example",
+    "id": "type-to-create-a-new-filter",
+    "title": "Type to create a new filter",
+    "description": "Allow users to type custom filter values and create filter chips by pressing Enter, with the ability to remove chips using Backspace or by clicking them.",
+    "status": "published",
+    "categories": [
+      "inputs-and-actions"
+    ],
+    "tags": [
+      "filter-chip",
+      "input",
+      "dynamic",
+      "keyboard"
+    ],
+    "components": [
+      "filter-chip",
+      "input",
+      "form-item",
+      "container"
+    ],
+    "scale": "interaction",
+    "userType": "both",
+    "slug": "type-to-create-a-new-filter"
+  },
+  {
+    "type": "example",
+    "id": "warn-a-user-of-a-deadline",
+    "title": "Warn a user of a deadline",
+    "description": "Use a modal with important callout styling to warn users about time-sensitive deadlines that could affect their submission or action.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "modal",
+      "warning",
+      "deadline",
+      "callout"
+    ],
+    "components": [
+      "modal",
+      "button",
+      "button-group"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "warn-a-user-of-a-deadline"
   }
 ]
