@@ -114,6 +114,27 @@ function formatStatus(status: string): string {
   return status.charAt(0).toUpperCase() + status.slice(1);
 }
 
+// Thumbnail filename mapping for slugs that don't match the filename
+const THUMBNAIL_MAP: Record<string, string> = {
+  'app-header': 'header',
+  'icon': 'icons',
+  'input': 'text-input',
+  'checkbox-list': 'checkbox-group',
+  'circular-progress': 'circular-progress-indicator',
+  'linear-progress': 'linear-progress-indicator',
+  'notification': 'notification-banner',
+  'skeleton': 'skeleton-loader',
+  'radio-group': 'radio',
+  'file-upload-input': 'file-uploader',
+  'link-button': 'link',
+  'page-block': 'block',
+};
+
+function getThumbnailPath(slug: string): string {
+  const filename = THUMBNAIL_MAP[slug] || slug;
+  return `/images/component-thumbnails/${filename}.svg`;
+}
+
 export function ComponentsGrid({ components }: ComponentsGridProps) {
   // State
   const [searchValue, setSearchValue] = useState("");
@@ -166,12 +187,11 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   });
 
   // Listen for table sort events (from goa-table web component)
-  // Also explicitly set version="2" attribute since React may not set it correctly on custom elements
   useEffect(() => {
     const table = tableRef.current;
     if (!table) return;
 
-    // Explicitly set version attribute for V2 styling (React doesn't always set attributes on custom elements)
+    // Explicitly set version attribute for V2 styling
     table.setAttribute("version", "2");
 
     const handleSort = (e: Event) => {
@@ -481,8 +501,23 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         className="component-card-link"
       >
         <div className="component-card-content">
-          {/* Thumbnail placeholder - V2 images needed */}
-          <div className="component-card-thumbnail" aria-hidden="true" />
+          {/* Component thumbnail */}
+          <div className="component-card-thumbnail" aria-hidden="true">
+            <img
+              src={getThumbnailPath(component.slug)}
+              alt=""
+              loading="lazy"
+              onError={(e) => {
+                // Hide broken image, show fallback
+                (e.target as HTMLImageElement).style.display = 'none';
+                const fallback = (e.target as HTMLImageElement).nextElementSibling;
+                if (fallback) (fallback as HTMLElement).style.display = 'flex';
+              }}
+            />
+            <span className="component-card-thumbnail-fallback" style={{ display: 'none' }}>
+              {component.data.name}
+            </span>
+          </div>
 
           {/* Title */}
           <h3 className="component-card-title">{component.data.name}</h3>
@@ -499,6 +534,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
               type={getCategoryBadgeType(component.data.category)}
               content={formatCategory(component.data.category)}
               emphasis="subtle"
+              icon="false"
             />
           </div>
         </div>
@@ -525,6 +561,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
             type={getCategoryBadgeType(component.data.category)}
             content={formatCategory(component.data.category)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
         <td>
@@ -533,6 +570,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
             type={getStatusBadgeType(component.data.status)}
             content={formatStatus(component.data.status)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
       </tr>
@@ -695,7 +733,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
       {/* List View (table) */}
       {viewMode === "list" && (
         <div className="components-table-wrapper">
-          {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
+          {/* TODO: Table not rendering with V2 styling despite version="2" - investigate CSS loading or timing issue */}
           <goa-table ref={tableRef} version="2" width="100%" variant="normal">
             <table style={{ width: "100%" }}>
               <thead>
@@ -1045,10 +1083,30 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         }
 
         .component-card-thumbnail {
-          aspect-ratio: 16 / 10;
+          aspect-ratio: 386 / 256;
           background: var(--goa-color-greyscale-200);
           border-radius: var(--goa-border-radius-m);
           margin-bottom: var(--goa-space-xs);
+          overflow: hidden;
+        }
+
+        .component-card-thumbnail img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .component-card-thumbnail-fallback {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font: var(--goa-typography-heading-s);
+          color: var(--goa-color-text-secondary);
+          text-align: center;
+          padding: var(--goa-space-m);
         }
 
         .component-card-title {

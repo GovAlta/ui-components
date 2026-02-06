@@ -21,6 +21,20 @@ import CardLite from '../components/CardLite.astro';
         <p class="hero-description">
           Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.
         </p>
+        <button class="hero-search-trigger" onclick="window.dispatchEvent(new CustomEvent('goa-search-open'))">
+          <svg class="hero-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>Search components and examples...</span>
+          <kbd class="search-shortcut">⌘K</kbd>
+        </button>
+        <script>
+          const isMac = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+          document.querySelectorAll('.search-shortcut').forEach(el => {
+            el.textContent = isMac ? '⌘K' : 'Ctrl K';
+          });
+        </script>
       </div>
     </div>
   </div>
@@ -168,6 +182,60 @@ import CardLite from '../components/CardLite.astro';
     max-width: 550px;
   }
 
+  /* Hero Search Trigger */
+  .hero-search-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--goa-space-s);
+    width: 100%;
+    max-width: 500px;
+    margin-top: var(--goa-space-xl);
+    padding: var(--goa-space-s) var(--goa-space-m);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--goa-color-greyscale-300);
+    border-radius: var(--goa-border-radius-m);
+    font: var(--goa-typography-body-m);
+    cursor: pointer;
+    color: var(--goa-color-text-secondary);
+    text-align: left;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .hero-search-trigger:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--goa-color-greyscale-black);
+    box-shadow: inset 0 0 0 1px var(--goa-color-greyscale-black);
+  }
+
+  .hero-search-trigger:focus-visible {
+    outline: 3px solid var(--goa-color-interactive-focus);
+    outline-offset: 2px;
+  }
+
+  .hero-search-icon {
+    flex-shrink: 0;
+    color: var(--goa-color-text-secondary);
+  }
+
+  .hero-search-trigger span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-search-trigger kbd {
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: var(--goa-space-2xs) var(--goa-space-xs);
+    background: var(--goa-color-greyscale-100);
+    border: 1px solid var(--goa-color-greyscale-200);
+    border-radius: 6px;
+    color: var(--goa-color-greyscale-800);
+  }
+
   /* Main Content - White background */
   .ds-main-content {
     background: white;
@@ -288,6 +356,12 @@ import CardLite from '../components/CardLite.astro';
       max-width: 100%;
     }
 
+    .hero-search-trigger {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .ds-main-content {
       padding: var(--goa-space-3xl) var(--goa-space-m);
     }
@@ -338,6 +412,17 @@ import CardLite from '../components/CardLite.astro';
 
     .hero-image {
       max-width: 200px;
+    }
+
+    .hero-search-trigger {
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: var(--goa-space-xl);
+    }
+
+    .hero-search-trigger kbd {
+      display: none;
     }
 
     .ds-main-content {

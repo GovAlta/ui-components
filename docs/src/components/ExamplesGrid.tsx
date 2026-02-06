@@ -64,10 +64,10 @@ const DEFAULT_VISIBLE_COLUMNS = ["title", "scale", "category", "userType", "stat
 // Badge type mapping for scales (using V2 extended colors)
 function getScaleBadgeType(
   scale: string,
-): "sky" | "sunset" | "pasture" | "lilac" | "prairie" | "dawn" {
+): "sky" | "sunset" | "pasture" | "lilac" | "prairie" | "dawn" | "information" {
   switch (scale) {
     case "interaction":
-      return "sky";
+      return "information";
     case "task":
       return "sunset";
     case "page":
@@ -510,7 +510,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 type={getScaleBadgeType(example.data.scale)}
                 content={tag}
                 emphasis="subtle"
-              />
+              icon="false"
+            />
             ))}
           </div>
         </div>
@@ -537,7 +538,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 type={getCategoryBadgeType(cat)}
                 content={formatCategory(cat)}
                 emphasis="subtle"
-              />
+              icon="false"
+            />
             ))}
           </div>
         </td>
@@ -547,6 +549,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             type={getScaleBadgeType(example.data.scale)}
             content={formatScale(example.data.scale)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
         <td>{formatUserType(example.data.userType)}</td>
@@ -556,9 +559,10 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               <goa-badge
                 key={tag}
                 version="2"
-                type="information"
+                type="default"
                 content={tag}
                 emphasis="subtle"
+                icon="false"
               />
             ))}
           </div>

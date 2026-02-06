@@ -3,6 +3,9 @@
 import '@abgov/web-components/index.css';
 import '@design-tokens/tokens.css';
 
+// Global search modal (available on all pages)
+import { SearchModal } from '../components/search';
+
 interface Props {
   title: string;
   description?: string;
@@ -240,6 +243,8 @@ const { title, description, page } = Astro.props;
   </style>
 </head>
 <body data-page={page}>
+  <!-- Global search modal (Cmd+K / Ctrl+K or mobile search button) -->
+  <SearchModal client:only="react" />
   <slot />
 </body>
 </html>

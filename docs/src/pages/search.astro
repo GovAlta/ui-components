@@ -1,0 +1,160 @@
+---
+/**
+ * Search Page
+ *
+ * Standalone search page for direct URL access.
+ * - Provides fallback search access when modal isn't available
+ * - Supports URL parameters: /search?q=button
+ * - Good for mobile, SEO, and sharing search links
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SiteNav } from '../components/SiteNav';
+import { MobileHeader } from '../components/MobileHeader';
+import { SearchPage } from '../components/search';
+
+// Get query from URL parameters
+const url = new URL(Astro.request.url);
+const initialQuery = url.searchParams.get('q') || '';
+---
+
+<BaseLayout title="Search" description="Search the GoA Design System for components, patterns, and examples">
+  <div class="layout-wrapper">
+    <div class="layout-container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar-left">
+        <SiteNav
+          client:only="react"
+          initialSection="components"
+        />
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Mobile Header -->
+        <div class="mobile-header-container">
+          <MobileHeader client:only="react" />
+        </div>
+
+        <div class="content-card">
+          <div class="search-page-header">
+            <h1>Search</h1>
+            <p class="lead">
+              Find components, patterns, and examples in the GoA Design System.
+            </p>
+          </div>
+
+          <SearchPage client:only="react" initialQuery={initialQuery} />
+        </div>
+      </main>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full-width grey background */
+  .layout-wrapper {
+    background: var(--goa-color-greyscale-50);
+    min-height: 100vh;
+  }
+
+  .layout-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width, 280px) 1fr;
+    min-height: 100vh;
+    transition: grid-template-columns 100ms ease-out;
+  }
+
+  .sidebar-left {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--goa-color-greyscale-50);
+    z-index: 5;
+  }
+
+  .main-content {
+    padding: var(--goa-space-l);
+    padding-left: 0;
+    min-height: 100vh;
+    min-width: 0;
+  }
+
+  .content-card {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid var(--goa-color-greyscale-150);
+    padding: var(--goa-space-xl) var(--goa-space-2xl);
+    min-height: calc(100vh - var(--goa-space-l) * 2);
+  }
+
+  /* Search page header */
+  .search-page-header {
+    max-width: 700px;
+    margin: 0 auto var(--goa-space-xl);
+    text-align: center;
+  }
+
+  .search-page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--goa-space-s);
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.2;
+  }
+
+  .lead {
+    font: var(--goa-typography-body-l);
+    color: var(--goa-color-text-secondary, #666);
+    margin: 0;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .content-card {
+      padding: var(--goa-space-l) var(--goa-space-xl);
+    }
+  }
+
+  /* Mobile: 624px breakpoint */
+  @media (max-width: 623px) {
+    .layout-wrapper {
+      background: white;
+    }
+
+    .layout-container {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar-left {
+      position: fixed;
+      left: -280px;
+      z-index: 100;
+      transition: left 0.3s ease;
+    }
+
+    .main-content {
+      padding: 0;
+    }
+
+    .content-card {
+      border-radius: 0;
+      border: none;
+      padding: var(--goa-space-m);
+      min-height: auto;
+    }
+
+    .search-page-header {
+      text-align: left;
+      margin-bottom: var(--goa-space-l);
+    }
+
+    .search-page-header h1 {
+      font-size: 1.75rem;
+    }
+  }
+
+  /* Sidebar open state */
+  :global(body[data-menu-open="true"]) .sidebar-left {
+    left: 0;
+  }
+</style>

@@ -8,8 +8,5 @@
  * Tokens and Examples are single-page sections that link directly from ParentMenu.
  */
 
-export { ParentMenu, type MenuSection } from './ParentMenu';
-export { ComponentsSubMenu } from './ComponentsSubMenu';
-
-// Note: ExamplesSubMenu and TokensSubMenu are no longer used
-// These sections now navigate directly to their single page from the parent menu
+export { ParentMenu, type MenuSection } from "./ParentMenu";
+export { ComponentsSubMenu } from "./ComponentsSubMenu";
