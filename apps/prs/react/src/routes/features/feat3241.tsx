@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   GoabAppFooter,
   GoabAppFooterMetaSection,
@@ -30,6 +30,7 @@ import {
   GoabSideMenuHeading,
   GoabTab,
   GoabTable,
+  GoabTableSortHeader,
   GoabTabs,
   GoabText,
   GoabTextArea,
@@ -62,15 +63,45 @@ import {
   GoabxSideMenuGroup,
   GoabxSideMenuHeading,
   GoabxTable,
+  GoabxTableSortHeader,
   GoabxTabs,
   GoabxTextArea,
 } from "@abgov/react-components/experimental";
 import type {
   GoabPaginationOnChangeDetail,
+  GoabTableOnSortDetail,
   GoabTabsOnChangeDetail,
 } from "@abgov/ui-components-common";
 
+interface User {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
+
 export function Feat3241Route() {
+  const [users, setUsers] = useState<User[]>([
+    {
+      firstName: "Christian",
+      lastName: "Batz",
+      age: 18,
+    },
+    {
+      firstName: "Brain",
+      lastName: "Wisozk",
+      age: 19,
+    },
+    {
+      firstName: "Neha",
+      lastName: "Jones",
+      age: 23,
+    },
+    {
+      firstName: "Tristin",
+      lastName: "Buckridge",
+      age: 31,
+    },
+  ]);
   const [goabxDrawerOpen, setGoabxDrawerOpen] = useState(false);
   const [goabDrawerOpen, setGoabDrawerOpen] = useState(false);
   const [goabxModalOpen, setGoabxModalOpen] = useState(false);
@@ -123,6 +154,15 @@ export function Feat3241Route() {
   const noop = () => {
     /* nothing */
   };
+
+  function sortData(event: GoabTableOnSortDetail) {
+    console.log("sorting");
+    const _users = [...users];
+    _users.sort((a: any, b: any) => {
+      return (a[event.sortBy] > b[event.sortBy] ? 1 : -1) * event.sortDir;
+    });
+    setUsers(_users);
+  }
 
   return (
     <>
@@ -700,22 +740,30 @@ export function Feat3241Route() {
           <GoabText tag="h3" mb="m">
             GoabxTable
           </GoabText>
-          <GoabxTable>
+          <GoabxTable onSort={sortData}>
             <thead>
               <tr>
-                <th>Service</th>
-                <th>Status</th>
+                <th>
+                  <GoabxTableSortHeader name="firstName">First name</GoabxTableSortHeader>
+                </th>
+                <th>
+                  <GoabxTableSortHeader name="lastName">Last name</GoabxTableSortHeader>
+                </th>
+                <th>
+                  <GoabxTableSortHeader name="age" direction="asc">
+                    Age
+                  </GoabxTableSortHeader>
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Payments</td>
-                <td>Active</td>
-              </tr>
-              <tr>
-                <td>Reporting</td>
-                <td>Pending</td>
-              </tr>
+              {users.map((user) => (
+                <tr key={user.firstName}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.age}</td>
+                </tr>
+              ))}
             </tbody>
           </GoabxTable>
           <GoabText tag="h3" mb="m">
@@ -724,19 +772,19 @@ export function Feat3241Route() {
           <GoabxTable striped>
             <thead>
               <tr>
-                <th>Service</th>
-                <th>Status</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Age</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Payments</td>
-                <td>Active</td>
-              </tr>
-              <tr>
-                <td>Reporting</td>
-                <td>Pending</td>
-              </tr>
+              {users.map((user) => (
+                <tr key={user.firstName}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.age}</td>
+                </tr>
+              ))}
             </tbody>
           </GoabxTable>
         </div>
@@ -744,22 +792,30 @@ export function Feat3241Route() {
           <GoabText tag="h3" mb="m">
             GoabTable
           </GoabText>
-          <GoabTable>
+          <GoabTable onSort={sortData}>
             <thead>
               <tr>
-                <th>Service</th>
-                <th>Status</th>
+                <th>
+                  <GoabTableSortHeader name="firstName">First name</GoabTableSortHeader>
+                </th>
+                <th>
+                  <GoabTableSortHeader name="lastName">Last name</GoabTableSortHeader>
+                </th>
+                <th>
+                  <GoabTableSortHeader name="age" direction="asc">
+                    Age
+                  </GoabTableSortHeader>
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Payments</td>
-                <td>Active</td>
-              </tr>
-              <tr>
-                <td>Reporting</td>
-                <td>Pending</td>
-              </tr>
+              {users.map((user) => (
+                <tr key={user.firstName}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.age}</td>
+                </tr>
+              ))}
             </tbody>
           </GoabTable>
         </div>
