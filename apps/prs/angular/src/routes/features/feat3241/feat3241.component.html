@@ -411,62 +411,78 @@
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
     <goab-text tag="h3" mb="m">GoabxTable</goab-text>
-    <goabx-table>
+    <goabx-table (onSort)="handleSort($event)">
       <thead>
         <tr>
-          <th>Service</th>
-          <th>Status</th>
+          <th>
+            <goabx-table-sort-header name="firstName">First name</goabx-table-sort-header>
+          </th>
+          <th>
+            <goabx-table-sort-header name="lastName">Last name</goabx-table-sort-header>
+          </th>
+          <th>
+            <goabx-table-sort-header name="age" direction="asc"
+              >Age</goabx-table-sort-header
+            >
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Payments</td>
-          <td>Active</td>
-        </tr>
-        <tr>
-          <td>Reporting</td>
-          <td>Pending</td>
-        </tr>
+        @for (user of users; track $index) {
+          <tr>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.age }}</td>
+          </tr>
+        }
       </tbody>
     </goabx-table>
     <goab-text tag="h3" mb="m">GoabxTable - Striped = true</goab-text>
     <goabx-table [striped]="true">
       <thead>
         <tr>
-          <th>Service</th>
-          <th>Status</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Age</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Payments</td>
-          <td>Active</td>
-        </tr>
-        <tr>
-          <td>Reporting</td>
-          <td>Pending</td>
-        </tr>
+        @for (user of users; track $index) {
+          <tr>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.age }}</td>
+          </tr>
+        }
       </tbody>
     </goabx-table>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabTable</goab-text>
-    <goab-table>
+    <goab-table (onSort)="handleSort($event)">
       <thead>
         <tr>
-          <th>Service</th>
-          <th>Status</th>
+          <th>
+            <goab-table-sort-header name="firstName">First name</goab-table-sort-header>
+          </th>
+          <th>
+            <goab-table-sort-header name="lastName">Last name</goab-table-sort-header>
+          </th>
+          <th>
+            <goab-table-sort-header name="age" direction="asc"
+              >Age</goab-table-sort-header
+            >
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Payments</td>
-          <td>Active</td>
-        </tr>
-        <tr>
-          <td>Reporting</td>
-          <td>Pending</td>
-        </tr>
+        @for (user of users; track $index) {
+          <tr>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.age }}</td>
+          </tr>
+        }
       </tbody>
     </goab-table>
   </div>
