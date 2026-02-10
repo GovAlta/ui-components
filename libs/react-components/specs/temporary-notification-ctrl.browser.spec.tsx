@@ -216,9 +216,13 @@ describe("Temporary Notification Controller", () => {
       });
     }, 0);
 
-    await vi.waitFor(async () => {
+    await vi.waitFor(() => {
       expect(actionButton.elements().length).toBe(1);
-      await actionButton.click();
+    });
+
+    await actionButton.click();
+
+    await vi.waitFor(() => {
       expect(actionMock).toHaveBeenCalledOnce();
     });
   });

@@ -2,7 +2,7 @@ import { render } from "vitest-browser-react";
 import { GoabDatePicker } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { userEvent } from "@vitest/browser/context";
-import { addDays, format, addMonths, addYears } from "date-fns";
+import { format } from "date-fns";
 
 describe("DatePicker", () => {
   it("renders", async () => {
@@ -19,7 +19,7 @@ describe("DatePicker", () => {
   });
 
   it("renders with props", async () => {
-    const value = addDays(new Date(), -10);
+    const value = "2026-01-30";
     const Component = () => {
       return <GoabDatePicker testId="date-picker" value={value} />;
     };
@@ -29,7 +29,7 @@ describe("DatePicker", () => {
 
     await vi.waitFor(() => {
       const inputEl = input.element() as HTMLInputElement;
-      expect(inputEl.value).toBe(format(value, "MMMM d, yyyy"));
+      expect(inputEl.value).toBe("January 30, 2026");
     });
   });
 
@@ -65,11 +65,11 @@ describe("DatePicker", () => {
 
     await userEvent.click(input);
 
-    await vi.waitFor(async () => {
-      const dateEl = dateToSelect.element() as HTMLElement;
-      expect(dateEl).toBeTruthy();
-      await userEvent.click(dateEl);
+    await vi.waitFor(() => {
+      expect(dateToSelect.element()).toBeTruthy();
     });
+
+    await dateToSelect.click();
 
     await vi.waitFor(() => {
       expect(handleChange).toHaveBeenCalledTimes(1);
@@ -402,7 +402,8 @@ describe("Date Picker input type", () => {
     };
 
     const result = render(<Component />);
-    const monthInput = result.getByTestId("input");
+
+    const monthInput = result.getByTestId("input-month").getByTestId("input");
     const datePickerDay = result.getByTestId("input-day");
     const datePickerYear = result.getByTestId("input-year");
 
