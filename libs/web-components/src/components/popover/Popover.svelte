@@ -101,6 +101,9 @@
   let _targetEl: HTMLElement;
   let _popoverEl: HTMLElement;
   let _focusTrapEl: HTMLElement;
+  // the closest parent parent Container element (i.e. <goa-modal>), if one
+  // doesn't exist it is null. Used to determine popover position.
+  let _parentContainerEl: HTMLElement | null = null;
   let _sectionHeight: number;
   let _contentFitsWidth: boolean = false;
 
@@ -142,9 +145,30 @@
 
     showDeprecationWarnings();
     addGlobalCloseListener();
+
+    _parentContainerEl = findContainingParentElement(_rootEl);
   });
 
   // Functions
+
+  function findContainingParentElement(
+    rootEl: HTMLElement,
+  ): HTMLElement | null {
+    const containingParentNodeNames = ["GOA-MODAL"];
+
+    let parentNode: HTMLElement = rootEl;
+    while (parentNode) {
+      if (containingParentNodeNames.includes(parentNode.nodeName)) {
+        return parentNode;
+      }
+      parentNode = parentNode.parentNode as HTMLElement;
+      if (parentNode && (parentNode as unknown as { host: HTMLElement }).host) {
+        parentNode = (parentNode as unknown as { host: HTMLElement }).host;
+      }
+    }
+
+    return null;
+  }
 
   // Since the focused element is being changed when the popover is open, the scoped keybinding for the escape key may
   // no longer work, so the binding must be done on the document.body
@@ -341,26 +365,70 @@
     };
   }
 
+  function getParentContentElement() {
+    if (!_parentContainerEl) return null;
+
+    let contentEl: HTMLElement | null = null;
+
+    switch (_parentContainerEl.nodeName) {
+      case "GOA-MODAL":
+        // Assuming parent is <goa-modal>, the content element is the div with class
+        // "modal-pane" within the modal's shadow DOM
+        contentEl =
+          _parentContainerEl.shadowRoot?.querySelector("div.modal-pane") ||
+          null;
+        break;
+      default:
+        console.error(
+          "Unhandled parent container type: ",
+          _parentContainerEl.nodeName,
+        );
+    }
+
+    if (!contentEl) {
+      // If a CSS or structural DOM change was made to the parent container, the
+      // query selector in the switch above must also be updated. (i.e. if the
+      // "modal-pane" class was removed or changed)
+      console.error(
+        "Could not find content element within parent container. Popover positioning may be incorrect.",
+      );
+    }
+
+    return contentEl;
+  }
+
   async function setPopoverPosition() {
     await tick();
 
     // Get target and content rectangles
+    const isWithinModal = !!_parentContainerEl;
     const targetRect = getBoundingClientRectWithMargins(_targetEl);
+    const parentContainerContentEl = getParentContentElement();
+    const parentContainerRect = !!parentContainerContentEl
+      ? getBoundingClientRectWithMargins(parentContainerContentEl)
+      : null;
+
     const popoverRect = getBoundingClientRectWithMargins(_popoverEl);
 
     // exit if the popover hasn't yet been filled
     if (popoverRect.height < 20) return;
 
     // Calculate available space above and below the target element
-    const spaceAbove = targetRect.top;
-    const spaceBelow = window.innerHeight - targetRect.bottom;
+    const spaceAbove =
+      isWithinModal && parentContainerRect
+        ? targetRect.top - parentContainerRect.top
+        : targetRect.top;
+    const spaceBelow =
+      isWithinModal && parentContainerRect
+        ? parentContainerRect.bottom - targetRect.bottom
+        : window.innerHeight - targetRect.bottom;
 
     // Determine if there's more space above or below the target element
     const displayOnTop =
       position === "auto"
-        ? spaceBelow < popoverRect.height &&
-          spaceAbove > popoverRect.height &&
-          spaceAbove > spaceBelow
+        ? spaceBelow < popoverRect.height && // Not enough room below the target
+          spaceAbove > popoverRect.height && // Enough room above the target
+          spaceAbove > spaceBelow // More space above than below
         : position === "above";
 
     if (displayOnTop) {
@@ -428,11 +496,21 @@
         // attribute is set, the content width is set to fit-content instead of inheriting the target width.
         style("width", _contentFitsWidth ? "fit-content" : width),
         style("min-width", minwidth),
-        style("max-width", _contentFitsWidth ? maxwidth : width ? `max(${width}, ${maxwidth})` : maxwidth),
+        style(
+          "max-width",
+          _contentFitsWidth
+            ? maxwidth
+            : width
+              ? `max(${width}, ${maxwidth})`
+              : maxwidth,
+        ),
         style("padding", _padded ? "var(--goa-space-m)" : "0"),
       )}
     >
-      <goa-focus-trap open="true" prevent-scroll-into-view={preventScrollIntoView || undefined}>
+      <goa-focus-trap
+        open="true"
+        prevent-scroll-into-view={preventScrollIntoView || undefined}
+      >
         <div bind:this={_focusTrapEl}>
           <slot />
         </div>
