@@ -3,7 +3,7 @@
 // non-key properties change. Using the `watch` function provides the control and makes
 // it clear what the function is watching
 export function watch(fn: () => void, _: unknown[]) {
-  fn()
+  fn();
 }
 
 // Creates a style string from a list of styles.
@@ -53,7 +53,7 @@ export function receive(
   const listener = (e: Event) => {
     const ce = e as CustomEvent;
     handler(ce.detail.action, ce.detail.data, e);
-  }
+  };
 
   el?.addEventListener("msg", listener);
 
@@ -290,9 +290,14 @@ export function isPointInRectangle(
   rectX: number,
   rectY: number,
   rectWidth: number,
-  rectHeight: number
+  rectHeight: number,
 ): boolean {
-  return x >= rectX && x <= rectX + rectWidth && y >= rectY && y <= rectY + rectHeight;
+  return (
+    x >= rectX &&
+    x <= rectX + rectWidth &&
+    y >= rectY &&
+    y <= rectY + rectHeight
+  );
 }
 
 export function ensureSlotExists(el: HTMLElement) {
@@ -372,7 +377,7 @@ export function getLocalDateValues(input: string | Date): {
         year: +matches[1],
         month: +matches[2],
         day: +matches[3],
-      }
+      };
     }
   }
 
@@ -381,7 +386,7 @@ export function getLocalDateValues(input: string | Date): {
       year: input.getFullYear(),
       month: input.getMonth() + 1,
       day: input.getDate(),
-    }
+    };
   }
 
   return null;

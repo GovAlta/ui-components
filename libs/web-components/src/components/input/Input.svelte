@@ -15,8 +15,6 @@
   import {
     typeValidator,
     toBoolean,
-    relay,
-    receive,
     dispatch,
     styles,
   } from "../../common/utils";
@@ -24,16 +22,7 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
-  import {
-    FieldsetErrorRelayDetail,
-    FieldsetResetErrorsMsg,
-    FieldsetResetFieldsMsg,
-    FieldsetSetErrorMsg,
-    FormFieldMountMsg,
-    FormFieldMountRelayDetail,
-    FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
-  } from "../../types/relay-types";
+
   // Validators
   const [Types, validateType] = typeValidator("Input type", [
     "text",
@@ -187,15 +176,28 @@
     validateType(type);
     validateAutoCapitalize(autocapitalize);
     validateTextAlign(textalign);
-    addRelayListener();
     showDeprecationWarnings();
     checkSlots();
-    sendMountedMessage();
 
     const { containerStyle, inputWidth } = handleWidth(width, type);
     _containerStyle = containerStyle;
     _inputWidth = inputWidth;
+
+    bindReset(_rootEl);
   });
+
+  function bindReset(el: HTMLElement) {
+    el.addEventListener("goa:reset", (e) => {
+      // TODO: ensure all other rese events stop the events
+      e.stopPropagation();
+      if (value) {
+        value = "";
+        dispatch(el, "_change", { name, value }, { bubbles: true });
+      }
+    });
+
+    dispatch(el, "goa:bind", el, { bubbles: true });
+  }
 
   // =========
   // Functions
@@ -233,51 +235,6 @@
       containerStyle: `width: ${width}; `,
       inputWidth: "",
     };
-  }
-
-  function addRelayListener() {
-    receive(_inputEl, (action, data) => {
-      switch (action) {
-        case FieldsetSetValueMsg:
-          setValue(data as FieldsetSetValueRelayDetail);
-          break;
-        case FieldsetSetErrorMsg:
-          setError(data as FieldsetErrorRelayDetail);
-          break;
-        case FieldsetResetErrorsMsg:
-          error = "false";
-          break;
-        case FieldsetResetFieldsMsg:
-          setValue({ name, value: "" });
-          break;
-      }
-    });
-  }
-
-  function setError(detail: FieldsetErrorRelayDetail) {
-    error = detail.error ? "true" : "false";
-  }
-
-  function setValue(detail: FieldsetSetValueRelayDetail) {
-    // @ts-expect-error
-    value = detail.value;
-    dispatchOnChange(value);
-  }
-
-  function dispatchOnChange(value: string) {
-    dispatch(_rootEl, "_change", { name, value: value }, { bubbles: true });
-  }
-
-  // Relay message up the chain to allow any parent element to have a reference to the input element
-  function sendMountedMessage() {
-    if (name) {
-      relay<FormFieldMountRelayDetail>(
-        _rootEl,
-        FormFieldMountMsg,
-        { name, el: _inputEl },
-        { bubbles: true, timeout: 10 },
-      );
-    }
   }
 
   function onInput(e: Event) {
@@ -543,7 +500,9 @@
     );
   }
 
-  .goa-input:not(.error):not(.input--disabled):hover:not(:has(input:focus-visible)) {
+  .goa-input:not(.error):not(.input--disabled):hover:not(
+      :has(input:focus-visible)
+    ) {
     /* hover border */
     box-shadow: var(--goa-text-input-border-hover);
   }
@@ -696,7 +655,9 @@
   }
 
   /* V2: Read-only input field styling (exclude disabled inputs) */
-  .container.v2.goa-input:not(.error)::has(input:read-only:not(:disabled):not(:focus-visible):not(:hover)) {
+  .container.v2.goa-input:not(.error)::has(
+      input:read-only:not(:disabled):not(:focus-visible):not(:hover)
+    ) {
     box-shadow: var(--goa-text-input-border-readonly);
   }
 

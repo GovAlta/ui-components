@@ -1,8 +1,5 @@
 <svelte:options customElement={{
   tag: "goa-form-item",
-  props: {
-    publicFormSummaryOrder: { type: "Number", attribute: "public-form-summary-order" },
-  }
 }} />
 
 <!-- Script -->
@@ -18,23 +15,10 @@
   import { calculateMargin } from "../../common/styling";
   import {
     receive,
-    relay,
     generateRandomId,
     typeValidator,
     announceToScreenReader,
   } from "../../common/utils";
-  import {
-    FieldsetResetErrorsMsg,
-    FieldsetSetErrorMsg,
-    FormFieldMountMsg,
-    FormItemMountMsg,
-  } from "../../types/relay-types";
-
-  import type {
-    FieldsetErrorRelayDetail,
-    FormFieldMountRelayDetail,
-    FormItemMountRelayDetail,
-  } from "../../types/relay-types";
 
   // Validators
   const [REQUIREMENT_TYPES, validateRequirementType] = typeValidator(
@@ -89,11 +73,6 @@
   /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   export let type: InputType = "";
 
-  /** Overrides the label value within the form-summary. For public-form use only. */
-  export let name: string = "blank";
-  /** Sets the display order within the form summary. For public-form use only. */
-  export let publicFormSummaryOrder: number = 0;
-
   let _rootEl: HTMLElement;
   let _inputEl: HTMLElement;
   let _errorId = `error-${generateRandomId()}`;
@@ -110,43 +89,9 @@
     validateVersion(version);
     validateType(type);
 
-    receive(_rootEl, (action, data) => {
-      switch (action) {
-        case FormFieldMountMsg:
-          onInputMount(data as FormFieldMountRelayDetail);
-          break;
-        case FieldsetSetErrorMsg:
-          onSetError(data as FieldsetErrorRelayDetail);
-          break;
-        case FieldsetResetErrorsMsg:
-          error = "";
-          break;
-      }
-    });
-
-    _rootEl?.addEventListener("form-field::bind", handleInputMounted);
     _rootEl?.addEventListener("error::change", handleErrorChange);
     _rootEl?.addEventListener("help-text::announce", handleAnnounceHelperText);
   });
-
-  function handleInputMounted(e: Event) {
-    const ce = e as CustomEvent<FormFieldMountRelayDetail>;
-    _inputEl = ce.detail.el;
-
-    // Check if aria-label is present and has a value in the child element
-    const ariaLabel = _inputEl.getAttribute("aria-label");
-    if (!ariaLabel || ariaLabel.trim() === "") {
-      _inputEl.setAttribute("aria-label", label);
-    }
-
-    // Set aria-required
-    _inputEl.setAttribute(
-      "aria-required",
-      requirement === "required" ? "true" : "false",
-    );
-
-    updateAriaDescribedBy();
-  }
 
   function handleErrorChange(e: Event) {
     const ce = e as CustomEvent<{ isError: boolean }>;
@@ -175,33 +120,6 @@
     } else {
       _inputEl.setAttribute("aria-describedby", "");
     }
-  }
-
-  function onSetError(d: FieldsetErrorRelayDetail) {
-    error = (d as Record<string, string>)["error"];
-  }
-
-  function onInputMount(props: FormFieldMountRelayDetail) {
-    const { el, name } = props;
-
-    // Check if aria-label is present and has a value in the child element
-    const ariaLabel = el.getAttribute("aria-label");
-    if (!ariaLabel || ariaLabel.trim() === "") {
-      el.setAttribute("aria-label", label);
-    }
-
-    sendMountedMessage(name);
-  }
-
-  // Allows binding to Fieldset components. The `_name` value is what was obtained from the "input" element's
-  // event, which ensures that the requirement of the "input" and formitem having the same name will be met.
-  function sendMountedMessage(_name: string) {
-    relay<FormItemMountRelayDetail>(
-      _rootEl,
-      FormItemMountMsg,
-      { id: _name, label: name !== "blank" ? name : label, el: _rootEl, order: publicFormSummaryOrder },
-      { bubbles: true, timeout: 10 },
-    );
   }
 </script>
 

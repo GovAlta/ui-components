@@ -1,16 +1,14 @@
-import { ReactNode, useRef, useLayoutEffect } from "react";
+import { ReactNode, useRef, useEffect } from "react";
 
 import {
   DataAttributes,
-  GoabFormState,
-  GoabPublicFormStatus,
+  Margins,
+  PFState,
+  PFOutline,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
-interface WCProps {
-  status?: string;
-  name?: string;
-}
+interface WCProps extends Margins {}
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -23,71 +21,70 @@ declare module "react" {
   }
 }
 
-interface GoabPublicFormProps extends DataAttributes {
-  status?: GoabPublicFormStatus;
-  name?: string;
-  onInit?: (event: Event) => void;
-  onComplete?: (event: GoabFormState) => void;
-  onStateChange?: (event: GoabFormState) => void;
+type InitFunction = (data: PFState, props: { outline: PFOutline }) => PFState;
+
+interface GoabPublicFormChangeDetail {
+  state: PFState;
+  name: string;
+  value: string;
+}
+
+interface GoabPublicFormProps extends Margins, DataAttributes {
+  onInit?: (initFn: InitFunction) => void;
+  onChange?: (detail: GoabPublicFormChangeDetail) => void;
+  onNext?: (state: PFState) => void;
+  onSubformChange?: (state: PFState) => void;
   children: ReactNode;
 }
 
 export function GoabPublicForm({
   onInit,
-  onComplete,
-  onStateChange,
+  onChange,
+  onNext,
+  onSubformChange,
   children,
   ...rest
 }: GoabPublicFormProps) {
   const ref = useRef<HTMLElement>(null);
-  const initialized = useRef(false);
 
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  // Use useLayoutEffect to set up listeners before the component mounts
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) return;
     const current = ref.current;
 
     const initListener = (e: Event) => {
-      onInit?.(e);
+      const initFn = (e as CustomEvent<InitFunction>).detail;
+      onInit?.(initFn);
     };
 
-    //  First time initialization, add init listener immediately
-    if (onInit && !initialized.current) {
-      current.addEventListener("_init", initListener);
-    }
-
-    const completeListener = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      onComplete?.(detail);
+    const changeListener = (e: Event) => {
+      const detail = (e as CustomEvent<GoabPublicFormChangeDetail>).detail;
+      onChange?.(detail);
     };
 
-    const stateChangeListener = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
-      onStateChange?.(detail.data);
+    const nextListener = (e: Event) => {
+      const state = (e as CustomEvent<PFState>).detail;
+      onNext?.(state);
     };
 
-    if (onComplete) {
-      current.addEventListener("_complete", completeListener);
-    }
+    const subformChangeListener = (e: Event) => {
+      const state = (e as CustomEvent<PFState>).detail;
+      onSubformChange?.(state);
+    };
 
-    if (onStateChange) {
-      current.addEventListener("_stateChange", stateChangeListener);
-    }
+    current.addEventListener("_init", initListener);
+    current.addEventListener("_change", changeListener);
+    current.addEventListener("_next", nextListener);
+    current.addEventListener("_subformChange", subformChangeListener);
 
     return () => {
-      if (onInit) {
-        current.removeEventListener("_init", initListener);
-      }
-      if (onComplete) {
-        current.removeEventListener("_complete", completeListener);
-      }
-      if (onStateChange) {
-        current.removeEventListener("_stateChange", stateChangeListener);
-      }
+      current.removeEventListener("_init", initListener);
+      current.removeEventListener("_change", changeListener);
+      current.removeEventListener("_next", nextListener);
+      current.removeEventListener("_subformChange", subformChangeListener);
     };
-  }, [onInit, onComplete, onStateChange]);
+  }, [onInit, onChange, onNext, onSubformChange]);
 
   return (
     <goa-public-form ref={ref} {..._props}>

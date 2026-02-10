@@ -1,4 +1,9 @@
-<svelte:options customElement="goa-radio-group" />
+<svelte:options customElement={{
+  tag: "goa-radio-group",
+  props: {
+    value: { reflect: true }
+  }
+}} />
 
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
@@ -6,8 +11,6 @@
     typeValidator,
     toBoolean,
     dispatch,
-    receive,
-    relay,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
@@ -15,15 +18,6 @@
     GoARadioItemProps,
     RadioItemSelectProps,
   } from "../radio-item/RadioItem.svelte";
-  import {
-    FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
-    FieldsetSetErrorMsg,
-    FieldsetResetErrorsMsg,
-    FormFieldMountRelayDetail,
-    FormFieldMountMsg,
-    FieldsetErrorRelayDetail, FieldsetResetFieldsMsg,
-  } from "../../types/relay-types";
 
   // Validators
   const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
@@ -110,55 +104,27 @@
     validateOrientation(orientation);
     validateVersion(version);
     validateSize(size);
-    addRelayListener();
-    sendMountedMessage();
     getChildren();
 
     _rootEl.addEventListener("_radioItemChange", (e: Event) => {
       const detail = (e as CustomEvent).detail;
       onChange(detail.value, detail.label);
     });
+
+     bindReset(_rootEl);
   });
 
-  // Functions
-
-  function addRelayListener() {
-    receive(_rootEl, (action, data) => {
-      switch (action) {
-        case FieldsetSetValueMsg:
-          onSetValue(data as FieldsetSetValueRelayDetail);
-          break;
-        case FieldsetSetErrorMsg:
-          setError(data as FieldsetErrorRelayDetail);
-          break;
-        case FieldsetResetErrorsMsg:
-          error = "false";
-          break;
-        case FieldsetResetFieldsMsg:
-          onSetValue({ name, value: ""})
-          break;
+  function bindReset(el: HTMLElement) {
+    el.addEventListener("goa:reset", () => {
+      if (value) {
+        value = "";
+        dispatch(el, "_change", { name, value }, { bubbles: true })  ;
       }
     });
+    dispatch(el, "goa:bind", el, { bubbles: true });
   }
 
-  function setError(detail: FieldsetErrorRelayDetail) {
-    error = detail.error ? "true" : "false";
-  }
-
-  function onSetValue(detail: FieldsetSetValueRelayDetail) {
-    // @ts-expect-error
-    value = detail.value;
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
-  }
-
-  function sendMountedMessage() {
-    relay<FormFieldMountRelayDetail>(
-      _rootEl,
-      FormFieldMountMsg,
-      { name, el: _rootEl },
-      { bubbles: true, timeout: 10 },
-    );
-  }
+  // Functions
 
   function getChildren() {
     _rootEl.addEventListener("radio-item:mounted", (e: Event) => {
@@ -218,7 +184,7 @@
   function setCurrentSelectedOption(value: string) {
     _radioItems.forEach((item) => {
       item.el.dispatchEvent(
-        new CustomEvent<RadioItemSelectProps>("radio-group:select", {
+        new CustomEvent<RadioItemSelectProps>("radio-group:change", {
           composed: true,
           detail: {
             checked: item.value === value,
@@ -228,7 +194,7 @@
     });
   }
 
-  function onFocus(e: Event) {
+  function onFocus(_e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
 </script>

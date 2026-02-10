@@ -1,12 +1,17 @@
-<svelte:options customElement="goa-textarea" />
+<svelte:options
+  customElement={{
+    tag: "goa-textarea",
+    props: {
+      value: { reflect: true },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts">
   import {
     dispatch,
     pluralize,
-    receive,
-    relay,
     toBoolean,
     typeValidator,
   } from "../../common/utils";
@@ -16,16 +21,6 @@
     type Spacing,
   } from "../../common/styling";
   import { onMount } from "svelte";
-  import {
-    FieldsetErrorRelayDetail,
-    FieldsetResetErrorsMsg,
-    FieldsetSetErrorMsg,
-    FormFieldMountMsg,
-    FormFieldMountRelayDetail,
-    FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
-    FieldsetResetFieldsMsg,
-  } from "../../types/relay-types";
 
   /** Name of the input value that is received in the _change event. */
   export let name: string;
@@ -110,8 +105,6 @@
   onMount(() => {
     validateVersion(version);
     validateSize(size);
-    addRelayListener();
-    sendMountedMessage();
     const finalWidth = width.includes("%") ? width : `min(${width}, 100%)`;
     const cssProps: Record<string, string> = { width: finalWidth };
 
@@ -120,45 +113,18 @@
     }
 
     injectCss(_rootEl, ":host", cssProps);
+
+    bindReset(_rootEl);
   });
 
-  // functions
-  function addRelayListener() {
-    receive(_textareaEl, (action, data) => {
-      switch (action) {
-        case FieldsetSetValueMsg:
-          onSetValue(data as FieldsetSetValueRelayDetail);
-          break;
-        case FieldsetSetErrorMsg:
-          setError(data as FieldsetErrorRelayDetail);
-          break;
-        case FieldsetResetErrorsMsg:
-          error = "false";
-          break;
-        case FieldsetResetFieldsMsg:
-          onSetValue({ name, value: "" });
-          break;
+  function bindReset(el: HTMLElement) {
+    el.addEventListener("goa:reset", () => {
+      if (value) {
+        value = "";
+        dispatchChange("");
       }
     });
-  }
-
-  function setError(detail: FieldsetErrorRelayDetail) {
-    error = detail.error ? "true" : "false";
-  }
-
-  function onSetValue(detail: FieldsetSetValueRelayDetail) {
-    // @ts-expect-error
-    value = detail.value;
-    dispatchChange(value);
-  }
-
-  function sendMountedMessage() {
-    relay<FormFieldMountRelayDetail>(
-      _textareaEl,
-      FormFieldMountMsg,
-      { name, el: _textareaEl },
-      { bubbles: true, timeout: 10 },
-    );
+    dispatch(el, "goa:bind", el, { bubbles: true });
   }
 
   function onInput(_e: Event) {
