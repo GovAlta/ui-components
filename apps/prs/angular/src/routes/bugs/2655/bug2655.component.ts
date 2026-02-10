@@ -31,10 +31,11 @@ import {
       <goab-modal
         [open]="isModalOpen"
         heading="Test Modal"
-        [closable]="true"
         (onClose)="closeModal()"
+        [closable]="true"
       >
-        <div>
+        <div [style.margin-bottom]="'2em'">
+          <h4>At the top these open downwards</h4>
           <div [style.margin-bottom]="'20px'">
             <goab-form-item>
               <goab-date-picker
@@ -43,44 +44,7 @@ import {
               ></goab-date-picker>
             </goab-form-item>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae
-            ultricies leo. Cras sodales lacinia sagittis. Aliquam viverra, risus quis
-            imperdiet euismod, libero lacus blandit tortor, vel tristique est sapien sed
-            urna. Phasellus convallis auctor leo sed volutpat. Sed vel arcu suscipit,
-            porta augue et, vehicula felis. Pellentesque at pulvinar velit. Phasellus
-            lacus metus, dictum vel ultricies eu, rutrum eu nibh. Curabitur at dapibus
-            ligula. Nam nulla massa, egestas vitae urna a, maximus aliquam leo.
-            Suspendisse condimentum condimentum nunc, eu pulvinar tellus convallis sed.
-            Praesent non mauris quis diam feugiat gravida nec porta ipsum. Proin elementum
-            nibh eu tellus porta, sed rhoncus felis dictum. Nullam mattis purus at urna
-            convallis vulputate. Sed aliquet maximus varius. Sed aliquet mi eget arcu
-            ullamcorper tempor. Etiam condimentum fermentum lacus, sed ultricies velit
-            scelerisque id.
-          </p>
-          <div [style.margin-bottom]="'20px'" style="position: relative;">
-            <goab-form-item>
-              <goab-date-picker
-                name="date2"
-                (onChange)="onDate2Change($event)"
-              ></goab-date-picker>
-            </goab-form-item>
-          </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae
-            ultricies leo. Cras sodales lacinia sagittis. Aliquam viverra, risus quis
-            imperdiet euismod, libero lacus blandit tortor, vel tristique est sapien sed
-            urna. Phasellus convallis auctor leo sed volutpat. Sed vel arcu suscipit,
-            porta augue et, vehicula felis. Pellentesque at pulvinar velit. Phasellus
-            lacus metus, dictum vel ultricies eu, rutrum eu nibh. Curabitur at dapibus
-            ligula. Nam nulla massa, egestas vitae urna a, maximus aliquam leo.
-            Suspendisse condimentum condimentum nunc, eu pulvinar tellus convallis sed.
-            Praesent non mauris quis diam feugiat gravida nec porta ipsum. Proin elementum
-            nibh eu tellus porta, sed rhoncus felis dictum. Nullam mattis purus at urna
-            convallis vulputate. Sed aliquet maximus varius. Sed aliquet mi eget arcu
-            ullamcorper tempor. Etiam condimentum fermentum lacus, sed ultricies velit
-            scelerisque id.
-          </p>
+
           <div [style.margin-bottom]="'20px'">
             <goab-form-item>
               <goab-dropdown name="dropdown1" (onChange)="onDropdown1Change($event)">
@@ -91,7 +55,21 @@ import {
             </goab-form-item>
           </div>
 
-          <div [style.margin-bottom]="'20px'" style="position: relative;">
+          <div
+            [style.margin-bottom]="'20px'"
+            [style.margin-top]="'200px'"
+            style="position: relative;"
+          >
+            <h4>At the bottom these open upwards</h4>
+            <goab-form-item>
+              <goab-date-picker
+                name="date2"
+                (onChange)="onDate2Change($event)"
+              ></goab-date-picker>
+            </goab-form-item>
+          </div>
+
+          <div [style.margin-bottom]="'20px'">
             <goab-form-item>
               <goab-dropdown name="dropdown2" (onChange)="onDropdown2Change($event)">
                 <goab-dropdown-item value="red" label="Red"></goab-dropdown-item>
@@ -102,12 +80,50 @@ import {
           </div>
         </div>
       </goab-modal>
+
+      <goab-button (onClick)="openSmallModal()" ml="4"> Open Small Modal </goab-button>
+
+      <goab-modal
+        [open]="isSmallModalOpen"
+        heading="Small Height Test Modal"
+        (onClose)="closeSmallModal()"
+        [closable]="true"
+      >
+        <div [style.margin-bottom]="'2em'" [style.height]="'200px'">
+          <h4>
+            It should expand downwards within a space too small for the popover content
+          </h4>
+          <div [style.margin-bottom]="'20px'">
+            <goab-form-item>
+              <goab-date-picker
+                name="date3"
+                (onChange)="onDate3Change($event)"
+              ></goab-date-picker>
+            </goab-form-item>
+          </div>
+        </div>
+      </goab-modal>
+      <div [style.margin-top]="'20px'" style="position: relative;">
+        <p>
+          A good testing cheat to test if the dropdown opens above or below the target is
+          to anchor the developer tools window to the bottom and slide it up and down to
+          reduce window size.
+        </p>
+        <goab-form-item>
+          <goab-dropdown name="dropdown3" (onChange)="onDropdown3Change($event)">
+            <goab-dropdown-item value="red" label="Red"></goab-dropdown-item>
+            <goab-dropdown-item value="green" label="Green"></goab-dropdown-item>
+            <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+          </goab-dropdown>
+        </goab-form-item>
+      </div>
     </div>
   `,
   styles: [],
 })
 export class Bug2655Component {
   isModalOpen = false;
+  isSmallModalOpen = false;
 
   openModal() {
     this.isModalOpen = true;
@@ -115,6 +131,14 @@ export class Bug2655Component {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  openSmallModal() {
+    this.isSmallModalOpen = true;
+  }
+
+  closeSmallModal() {
+    this.isSmallModalOpen = false;
   }
 
   onDate1Change(event: any) {
@@ -125,11 +149,19 @@ export class Bug2655Component {
     console.log("Date 2 changed:", event);
   }
 
+  onDate3Change(event: any) {
+    console.log("Date 3 changed:", event);
+  }
+
   onDropdown1Change(event: any) {
     console.log("Dropdown 1 changed:", event);
   }
 
   onDropdown2Change(event: any) {
     console.log("Dropdown 2 changed:", event);
+  }
+
+  onDropdown3Change(event: any) {
+    console.log("Dropdown 3 changed:", event);
   }
 }
