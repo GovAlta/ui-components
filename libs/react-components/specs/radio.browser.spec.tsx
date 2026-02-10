@@ -40,44 +40,40 @@ describe("Radio", () => {
     };
 
     const result = render(<Component />);
-    const radioItems = result.getByTestId(/^radio-option-.*/);
+    const radioItemsLoc = result.getByTestId(/^radio-option-.*/);
+    const selectedValue = result.getByTestId("selected-value");
 
-    // Check that radio inputs are actually disabled
-    await vi.waitFor(async () => {
-      expect(radioItems.elements().length).toBe(2);
+    // check that the radio items are all disabled
+    await vi.waitFor(() => {
+      const els = radioItemsLoc.all();
+      expect(els.length).toBe(2);
+      for (const item of els) {
+        expect(item).toBeDisabled();
+      }
     });
 
-    for (const item of radioItems.elements()) {
-      expect((item as HTMLInputElement).disabled).toBeTruthy();
-    }
-
-    // Try to click a radio item - it should not work when disabled
-    for (const item of radioItems.elements()) {
-      (item as HTMLInputElement).click();
-    }
-
-    // check that no value was selected
+    // validate the selected value is blank
     await vi.waitFor(() => {
-      const selectedValue = result.getByTestId("selected-value");
       expect(selectedValue.element().textContent).toBe("");
     });
 
-    // Click the toggle button to enable the radio group
+    // enable the radio group
     const toggleButton = result.getByTestId("toggle-button");
     await toggleButton.click();
 
-    // Check that radio inputs are now enabled
-    for (const item of radioItems.elements()) {
-      expect((item as HTMLInputElement).disabled).toBeFalsy();
-    }
+    // validate they are now enabled
+    await vi.waitFor(() => {
+      for (const item of radioItemsLoc.all()) {
+        expect(item).toBeEnabled();
+      }
+    });
 
-    // Now try to click a radio item - it should work when enabled
-    const appleRadioItem = radioItems.elements()[0];
-    (appleRadioItem as HTMLInputElement).click();
+    // click the first radio item
+    const appleRadioItem = radioItemsLoc.nth(0).element() as HTMLInputElement;
+    appleRadioItem.click();
 
     // Check that the value was selected
     await vi.waitFor(() => {
-      const selectedValue = result.getByTestId("selected-value");
       expect(selectedValue.element().textContent).toBe("apple");
     });
 
@@ -85,17 +81,18 @@ describe("Radio", () => {
     await toggleButton.click();
 
     // Check that radio inputs are disabled again
-    for (const item of radioItems.elements()) {
-      expect((item as HTMLInputElement).disabled).toBeTruthy();
-    }
+    await vi.waitFor(() => {
+      for (const item of radioItemsLoc.all()) {
+        expect(item).toBeDisabled();
+      }
+    });
 
     // Try to click a different radio item - it should not work when disabled
-    const bananaRadioItem = radioItems.elements()[0];
-    (bananaRadioItem as HTMLInputElement).click();
+    const bananaRadioItem = radioItemsLoc.nth(1).element() as HTMLInputElement;
+    bananaRadioItem.click();
 
     // Check that the value didn't change (should still be apple)
     await vi.waitFor(() => {
-      const selectedValue = result.getByTestId("selected-value");
       expect(selectedValue.element().textContent).toBe("apple");
     });
   });
@@ -104,7 +101,7 @@ describe("Radio", () => {
     const result = render(
       <GoabRadioGroup name="test" value="">
         <GoabRadioItem name="test" value="option1" label="Option 1" />
-      </GoabRadioGroup>
+      </GoabRadioGroup>,
     );
 
     const radioInput = result.getByTestId("radio-option-option1");

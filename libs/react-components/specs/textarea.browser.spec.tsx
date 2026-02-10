@@ -66,13 +66,11 @@ describe("TextArea Browser Tests", () => {
     const textarea = result.getByTestId("test-textarea");
     const input = result.getByTestId("test-input");
 
-    await vi.waitFor(async () => {
-      const textareaEL = textarea.element() as HTMLTextAreaElement;
-      expect(textarea).toBeTruthy();
-      textareaEL.focus();
-
-      await userEvent.type(textareaEL, "s");
+    await vi.waitFor(() => {
+      expect(textarea.length).toBe(1);
     });
+
+    await userEvent.type(textarea.element(), "s");
 
     await vi.waitFor(() => {
       expect(onChange).toHaveBeenCalledTimes(1);
@@ -90,11 +88,7 @@ describe("TextArea Browser Tests", () => {
     });
 
     // Trigger blur by focusing on the input element
-    await vi.waitFor(() => {
-      const inputEL = input.element() as HTMLInputElement;
-      expect(inputEL).toBeTruthy();
-      inputEL.focus();
-    });
+    input.element().focus();
 
     // Verify onBlur was called with correct values
     await vi.waitFor(() => {

@@ -117,7 +117,7 @@
     "typescript": "5.8.3",
     "vite": "~5.4.20",
     "vite-plugin-dts": "4.5.4",
-    "vitest": "4.0.9",
+    "vitest": "^4.0.13",
     "vitest-browser-react": "^1.0.0",
     "vitest-dom": "^0.1.1"
   },
