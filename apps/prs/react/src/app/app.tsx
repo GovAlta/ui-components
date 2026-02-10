@@ -89,6 +89,7 @@ export function App() {
               <Link to="/features/v2-icons">v2 header icons</Link>
               <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3306">3306 Custom slug value for tabs</Link>
+              <Link to="/features/3340">3340 Work Side Menu Item Click</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>

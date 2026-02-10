@@ -13,7 +13,7 @@
   /** The text label displayed for the menu item. */
   export let label: string;
   /** The URL the menu item links to. */
-  export let url: string;
+  export let url: string = "";
 
   // optional
   /** Badge text displayed alongside the menu item (e.g., notification count). */
@@ -61,8 +61,9 @@
   // Functions
   // *********
 
-  function handleClick() {
+  function handleClick(e: Event) {
     dispatch(_rootEl, "_update", {}, { bubbles: true });
+    dispatch(_rootEl, "_click", {}, { bubbles: true });
   }
 
   function handleUpdateItem(e: CustomEvent) {
@@ -104,7 +105,8 @@
   on:mouseenter={handleMouseEnter}
   bind:this={_rootEl}
 >
-  <a
+  <svelte:element
+    this={url ? "a" : "button"}
     class="menu-item"
     class:current
     aria-current={current ? "page" : undefined}
@@ -138,7 +140,7 @@
         {badge}
       </div>
     {/if}
-  </a>
+  </svelte:element>
 </div>
 
 <style>
@@ -194,6 +196,13 @@
   goa-icon {
     display: var(--goa-work-side-menu-item-icon-display, flex);
     margin-top: var(--goa-space-3xs);
+  }
+
+  button.menu-item {
+    border: none;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
   }
 
   /* Divider */

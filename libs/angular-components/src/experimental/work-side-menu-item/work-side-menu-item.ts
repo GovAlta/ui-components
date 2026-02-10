@@ -3,6 +3,8 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   Input,
+  Output,
+  EventEmitter,
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
@@ -23,6 +25,7 @@ import { CommonModule } from "@angular/common";
       [attr.icon]="icon"
       [attr.testid]="testId"
       [attr.type]="type"
+      (_click)="_onClick()"
     >
       <ng-content />
     </goa-work-side-menu-item>
@@ -31,13 +34,15 @@ import { CommonModule } from "@angular/common";
 })
 export class GoabxWorkSideMenuItem implements OnInit {
   @Input({ required: true }) label!: string;
-  @Input({ required: true }) url!: string;
+  @Input() url?: string;
   @Input() badge?: string;
   @Input() current?: boolean;
   @Input() divider?: boolean;
   @Input() icon?: string;
   @Input() testId?: string;
   @Input() type?: GoabWorkSideMenuItemType = "normal";
+
+  @Output() onClick = new EventEmitter();
 
   isReady = false;
 
@@ -50,5 +55,9 @@ export class GoabxWorkSideMenuItem implements OnInit {
       this.isReady = true;
       this.cdr.detectChanges();
     }, 0);
+  }
+
+  _onClick() {
+    this.onClick.emit();
   }
 }
