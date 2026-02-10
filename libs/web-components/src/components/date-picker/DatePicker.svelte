@@ -114,11 +114,16 @@
   function dispatchValue() {
     value = _date.toString();
 
-    dispatch<OnChangeDetail>(_rootEl, "_change", {
-      name,
-      value: _date.date,
-      valueStr: value,
-    }, { bubbles: true });
+    dispatch<OnChangeDetail>(
+      _rootEl,
+      "_change",
+      {
+        name,
+        value: _date.date,
+        valueStr: value,
+      },
+      { bubbles: true },
+    );
   }
 
   function hideCalendar() {
@@ -291,8 +296,8 @@
     <goa-block direction="row">
       <goa-form-item helptext="Month" {version}>
         <goa-dropdown
-          native="true"
           name="month"
+          native="true"
           testid="input-month"
           on:_change={onInputChange}
           {error}

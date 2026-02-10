@@ -1,9 +1,11 @@
-<svelte:options customElement={{
-  tag: "goa-checkbox",
-  props: {
-    checked: { type: "String", reflect: true }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-checkbox",
+    props: {
+      checked: { type: "String", reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -104,8 +106,8 @@
     // collect bindable goa fields to allow for later resetting
     _revealSlotEl.addEventListener("goa:bind", (e: Event) => {
       const el = (e as CustomEvent).detail;
-      _revealSlotEls.push(el)
-    })
+      _revealSlotEls.push(el);
+    });
 
     bindReset(_rootEl);
   });
@@ -114,7 +116,7 @@
     el.addEventListener("goa:reset", () => {
       if (checked === "true") {
         checked = "false";
-        dispatch(el, "_change", { name, value, checked }, { bubbles: true })  ;
+        dispatch(el, "_change", { name, value, checked }, { bubbles: true });
       }
     });
     dispatch(el, "goa:bind", el, { bubbles: true });
@@ -122,7 +124,7 @@
 
   function resetChildFormFields() {
     for (const el of _revealSlotEls) {
-      dispatch(el, "goa:reset")
+      dispatch(el, "goa:reset");
     }
   }
 
@@ -150,7 +152,12 @@
     }
 
     // Announce the reveal content change to screen readers if checkbox is checked and reveal content exists
-    if ($$slots.reveal && newCheckStatus && _revealSlotEl && revealarialabel !== "") {
+    if (
+      $$slots.reveal &&
+      newCheckStatus &&
+      _revealSlotEl &&
+      revealarialabel !== ""
+    ) {
       announceToScreenReader(revealarialabel);
     }
   }
@@ -166,6 +173,19 @@
     _revealSlotEl?.addEventListener("_click", (e: Event) => {
       // when we click a button/accordion.. inside the reveal slot, it will uncheck the parent checkbox. stopPropagation (_click) will fix it
       e.stopPropagation();
+    });
+
+    _revealSlotEl?.addEventListener("_change", (e: Event) => {
+      console.log("in the _change listener for the checbox");
+      const eventDetail = (e as CustomEvent).detail;
+      // when we check/change a checkbox/input... inside the reveal slot, it will uncheck the parent checkbox whenever _change is fired. stopPropagation (_change) will fix it
+      e.stopPropagation();
+
+      // If this is a form field value change (public form)
+      // relay it so the Fieldset initialize the reveal slot form field to public form state
+      if (eventDetail?.name && typeof eventDetail.value !== "undefined") {
+        dispatch(_rootEl, "_revealChange", eventDetail, { bubbles: true });
+      }
     });
   }
 </script>

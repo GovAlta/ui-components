@@ -9,7 +9,7 @@ declare module "react" {
     interface IntrinsicElements {
       "goa-pf-subform": WCProps &
         React.HTMLAttributes<HTMLElement> & {
-          children?: ReactNode;
+          children?: React.ReactNode;
         };
     }
   }

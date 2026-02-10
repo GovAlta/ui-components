@@ -329,7 +329,7 @@ describe("Date Picker input type", () => {
 
     const result = render(<Component />);
     const datePickerMonth = result.getByTestId("input-month");
-    const datePickerMonthMarch = result.getByTestId("dropdown-item-3");
+    const datePickerMonthMarch = result.getByTestId("dropdown-item-3");  // march = 3
     const datePickerDay = result.getByTestId("input-day");
     const datePickerYear = result.getByTestId("input-year");
 
@@ -352,7 +352,7 @@ describe("Date Picker input type", () => {
     rootElChangeHandler.mockClear();
 
     // Input day
-    await datePickerDay.click();
+    await userEvent.click(datePickerDay);
     await userEvent.type(datePickerDay, "1");
 
     // Select month
