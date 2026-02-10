@@ -2,6 +2,7 @@
   customElement={{
     tag: "goa-input",
     props: {
+      name: { attribute: "name", type: "String", reflect: true },
       value: { attribute: "value", type: "String", reflect: true },
     },
   }}

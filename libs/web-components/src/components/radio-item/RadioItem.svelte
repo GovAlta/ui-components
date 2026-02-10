@@ -2,6 +2,7 @@
   customElement={{
     tag: "goa-radio-item",
     props: {
+      name: { reflect: true },
       value: { reflect: true },
       description: { reflect: true },
       checked: { reflect: true },
@@ -103,7 +104,6 @@
   });
 
   // Functions
-
 
   /**
    * Obtain list of all the form field element within the reveal slot
@@ -214,7 +214,7 @@
   function resetChildFormFields() {
     for (const el of _revealSlotEls) {
       // send reset message ot child form fields
-      dispatch(el, "goa:reset")
+      dispatch(el, "goa:reset");
     }
   }
 </script>

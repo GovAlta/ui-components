@@ -1,17 +1,16 @@
-<svelte:options customElement={{
-  tag: "goa-radio-group",
-  props: {
-    value: { reflect: true }
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-radio-group",
+    props: {
+      name: { reflect: true },
+      value: { reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts">
   import type { Spacing } from "../../common/styling";
-  import {
-    typeValidator,
-    toBoolean,
-    dispatch,
-  } from "../../common/utils";
+  import { typeValidator, toBoolean, dispatch } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
   import { onMount } from "svelte";
   import {
@@ -20,10 +19,10 @@
   } from "../radio-item/RadioItem.svelte";
 
   // Validators
-  const [Orientations, validateOrientation] = typeValidator("Radio group orientation", [
-    "vertical",
-    "horizontal",
-  ]);
+  const [Orientations, validateOrientation] = typeValidator(
+    "Radio group orientation",
+    ["vertical", "horizontal"],
+  );
   const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
   const [Size, validateSize] = typeValidator("Size", ["default", "compact"]);
 
@@ -111,14 +110,14 @@
       onChange(detail.value, detail.label);
     });
 
-     bindReset(_rootEl);
+    bindReset(_rootEl);
   });
 
   function bindReset(el: HTMLElement) {
     el.addEventListener("goa:reset", () => {
       if (value) {
         value = "";
-        dispatch(el, "_change", { name, value }, { bubbles: true })  ;
+        dispatch(el, "_change", { name, value }, { bubbles: true });
       }
     });
     dispatch(el, "goa:bind", el, { bubbles: true });
@@ -216,8 +215,7 @@
 </div>
 
 <style>
-
-:host {
+  :host {
     font-family: var(--goa-font-family-sans);
   }
 
@@ -234,8 +232,8 @@
 
   .goa-radio-group--vertical {
     display: flex;
-    flex-direction: column;  /* Vertical stacking */
-    gap: var(--goa-radio-group-gap-vertical);  /* Adds spacing */
+    flex-direction: column; /* Vertical stacking */
+    gap: var(--goa-radio-group-gap-vertical); /* Adds spacing */
     width: 100%;
   }
 

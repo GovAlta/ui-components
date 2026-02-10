@@ -259,7 +259,7 @@ function PublicFormTestComponent() {
 }
 
 describe("PublicForm Browser Tests", () => {
-  it.only("initializes the form", async () => {
+  it("initializes the form", async () => {
     const result = render(<PublicFormTestComponent />);
 
     await vi.waitFor(() => {
@@ -272,16 +272,17 @@ describe("PublicForm Browser Tests", () => {
       () => {
         // on first page, so it should be visible
         const recipient = result.container.querySelector(
-          'input[type="radio"][name="role"][value="Recipient"]'
+          "goa-radio-group[name=role]"
         );
 
         // on later page, so should not be visible yet
         const sin = result.container.querySelector(
-          'input[name=sin]'
+          "goa-input[name=sin]"
         );
+
         expect(recipient).toBeTruthy();
         expect(recipient).toBeVisible();
-        console.log(result.container.innerHTML)
+
         expect(sin).toBeTruthy();
         expect(sin).not.toBeVisible();
       },
@@ -289,7 +290,7 @@ describe("PublicForm Browser Tests", () => {
     );
   });
 
-  it("can select a radio button and continue to next page", async () => {
+  it.only("can select a radio button and continue to next page", async () => {
     const result = render(<PublicFormTestComponent />);
 
     await vi.waitFor(() => {
@@ -301,7 +302,7 @@ describe("PublicForm Browser Tests", () => {
     await vi.waitFor(
       () => {
         const recipientRadio = result.container.querySelector(
-          'goa-radio-item[value="Recipient"]'
+          "goa-radio-item[value=Recipient]"
         );
         expect(recipientRadio).toBeTruthy();
       },
@@ -310,7 +311,7 @@ describe("PublicForm Browser Tests", () => {
 
     // Select the Recipient radio button
     const recipientRadio = result.container.querySelector(
-      'goa-radio-item[value="Recipient"]'
+      "goa-radio-item[value=Recipient]"
     ) as HTMLElement;
     await userEvent.click(recipientRadio);
 
@@ -318,7 +319,7 @@ describe("PublicForm Browser Tests", () => {
     await vi.waitFor(
       () => {
         const continueButton = result.container.querySelector(
-          'goa-button[type="primary"]'
+          "goa-button[type=primary]"
         ) as HTMLElement;
         expect(continueButton).toBeTruthy();
       },

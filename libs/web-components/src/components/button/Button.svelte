@@ -2,6 +2,7 @@
   customElement={{
     tag: "goa-button",
     props: {
+      type: { reflect: true },
       actionArg: { type: "String", attribute: "action-arg" },
       actionArgs: { type: "Object", attribute: "action-args" },
     },
@@ -155,7 +156,7 @@
     {#if leadingicon}
       <goa-icon
         id="leading-icon"
-        size={ version === "2" && size === "normal" ? "4" : "3" }
+        size={version === "2" && size === "normal" ? "4" : "3"}
         type={leadingicon}
         inverted={isButtonDark}
       />
@@ -166,7 +167,7 @@
     {#if trailingicon}
       <goa-icon
         id="trailing-icon"
-        size={ version === "2" && size === "normal" ? "4" : "3" }
+        size={version === "2" && size === "normal" ? "4" : "3"}
         type={trailingicon}
         inverted={isButtonDark}
       />
@@ -235,7 +236,10 @@
   button.compact {
     height: var(--goa-button-height-compact);
     font: var(--goa-button-text-compact);
-    padding: var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));
+    padding: var(
+      --goa-button-padding-compact,
+      var(--goa-button-padding-lr-compact)
+    );
     gap: var(--goa-button-compact-gap);
   }
 
@@ -419,7 +423,7 @@
   }
 
   button.v2.primary:disabled {
-    background-color: var(--goa-button-primary-disabled-color-bg)
+    background-color: var(--goa-button-primary-disabled-color-bg);
   }
 
   button.v2.secondary.destructive {
@@ -443,7 +447,6 @@
     border: var(--goa-button-tertiary-inverse-border);
   }
 
-
   button.v2.tertiary.inverse:hover {
     border: var(--goa-button-tertiary-inverse-hover-border);
   }
@@ -453,7 +456,7 @@
   }
 
   button.v2.tertiary.destructive:hover {
-    border: var(--goa-button-tertiary-destructive-hover-border)
+    border: var(--goa-button-tertiary-destructive-hover-border);
   }
 
   button.v2.tertiary:disabled {
