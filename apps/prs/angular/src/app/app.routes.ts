@@ -38,6 +38,8 @@ import { Bug3156Component } from "../routes/bugs/3156/bug3156.component";
 import { Bug3201Component } from "../routes/bugs/3201/bug3201.component";
 import { Bug3215Component } from "../routes/bugs/3215/bug3215.component";
 import { Bug3248Component } from "../routes/bugs/3248/bug3248.component";
+import { Bug3273Component } from "../routes/bugs/3273/bug3273.component";
+import { Bug32732Component } from "../routes/bugs/3273/bug3273-2.component";
 import { Bug3275Component } from "../routes/bugs/3275/bug3275.component";
 import { Bug3281Component } from "../routes/bugs/3281/bug3281.component";
 import { Bug3337Component } from "../routes/bugs/3337/bug3337.component";
@@ -114,6 +116,8 @@ export const appRoutes: Route[] = [
   { path: "bugs/3201", component: Bug3201Component },
   { path: "bugs/3215", component: Bug3215Component },
   { path: "bugs/3248", component: Bug3248Component },
+  { path: "bugs/3273", component: Bug3273Component },
+  { path: "bugs/3273-2", component: Bug32732Component },
   { path: "bugs/3275", component: Bug3275Component },
   { path: "bugs/3281", component: Bug3281Component },
   { path: "bugs/3337", component: Bug3337Component },
