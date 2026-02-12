@@ -78,7 +78,7 @@
 
     // listen to events by children (if child is open the parent also has to be open)
     _rootEl.addEventListener("_open", (e: Event) => {
-      _open = _current = (e as CustomEvent).detail.current;
+      if ((e as CustomEvent).detail.current) _current = _open = true;
     });
   }
 
