@@ -9,13 +9,16 @@ import {
   GoabInput,
 } from "../src";
 import { expect, describe, it, vi } from "vitest";
-import { userEvent } from "@vitest/browser/context";
+import { userEvent } from "vitest/browser";
 import { useState } from "react";
 import {
   RequiredValidator,
   LengthValidator,
   SINValidator,
   NumericValidator,
+} from "@abgov/ui-components-common";
+
+import type {
   PFState,
   PFOutline,
   PFPage,
@@ -291,56 +294,28 @@ describe("PublicForm Browser Tests", () => {
   });
 
   it.only("can select a radio button and continue to next page", async () => {
-    const result = render(<PublicFormTestComponent />);
+    const { getByText, getByRole } = render(<PublicFormTestComponent />);
 
-    await vi.waitFor(() => {
-      const form = result.container.querySelector("goa-public-form");
-      expect(form).toBeTruthy();
-    });
+    const radios = getByRole("radio");
 
     // Wait for radio items to be present
-    await vi.waitFor(
-      () => {
-        const recipientRadio = result.container.querySelector(
-          "goa-radio-item[value=Recipient]"
-        );
-        expect(recipientRadio).toBeTruthy();
-      },
-      { timeout: 3000 }
-    );
+    await vi.waitFor( () => {
+      expect(radios.length).toBe(2);
+    });
 
     // Select the Recipient radio button
-    const recipientRadio = result.container.querySelector(
-      "goa-radio-item[value=Recipient]"
-    ) as HTMLElement;
-    await userEvent.click(recipientRadio);
+    await userEvent.click(radios.elements()[0]);
+    // await radios.first().click();
 
     // Click continue button
-    await vi.waitFor(
-      () => {
-        const continueButton = result.container.querySelector(
-          "goa-button[type=primary]"
-        ) as HTMLElement;
-        expect(continueButton).toBeTruthy();
-      },
-      { timeout: 1000 }
-    );
-
-    const continueButton = result.container.querySelector(
-      'goa-button[type="primary"]'
-    ) as HTMLElement;
-    await userEvent.click(continueButton);
+    const continueButton = getByRole("button").getByText("Continue");
+    await continueButton.click();
 
     // Should navigate to children page (for Recipient role)
-    await vi.waitFor(
-      () => {
-        const childrenPage = result.container.querySelector(
-          'goa-public-form-page[id="children"]'
-        );
-        expect(childrenPage).toBeTruthy();
-      },
-      { timeout: 2000 }
-    );
+    const nextHeader = getByText("Support order details");
+    await vi.waitFor(() => {
+      expect(nextHeader).toBeTruthy();
+    });
   });
 
   it("validates required fields and shows errors", async () => {

@@ -1129,69 +1129,8 @@ export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
 export type GoabTextColor = "primary" | "secondary";
 
-// Simple Form
-export type GoabFormField = {
-  label: string;
-  value: string;
-};
-
-export type GoabFormStorageType = "none" | "local" | "session";
-export type GoabFormOnMountDetail = {
-  fn: (next: string) => void;
-};
-export type GoabFormOnStateChange = {
-  id: string;
-  state: Record<string, Record<string, GoabFormField>>;
-};
-
-// Common types to use between public form components
-export type GoabFormStatus =
-  | "not-started"
-  | "cannot-start-yet"
-  | "in-progress"
-  | "submitted"
-  | "update-needed"
-  | "complete";
-export type GoabFormState = {
-  uuid: string;
-  form: Record<string, GoabFieldsetSchema>;
-  history: string[];
-  editting: string;
-  lastModified?: Date;
-  status: GoabFormStatus;
-};
-export type GoabFormDispatchOn = "change" | "continue";
-export type GoabFieldsetItemValue = string | number | Date;
-export type GoabFieldsetItemState = {
-  name: string;
-  label: string;
-  value: GoabFieldsetItemValue;
-  order: number;
-  valueLabel?: string;
-};
-
-// Fieldset component
-export type GoabFieldsetData =
-  | { type: "details"; fieldsets: Record<string, GoabFieldsetItemState> }
-  | { type: "list"; items: GoabFormState[] };
-
-export type GoabFieldsetSchema = {
-  heading?: string;
-  data?: GoabFieldsetData;
-};
-
-export interface GoabFieldsetOnContinueDetail {
-  el: HTMLElement;
-  state: Record<string, GoabFieldsetItemState>;
-  cancelled: boolean;
-}
-
-// Public form component
-export type GoabPublicFormStatus = "initializing" | "complete";
-export type GoabPublicFormPageStep = "step" | "summary" | "multistep";
-export type GoabPublicFormPageButtonVisibility = "visible" | "hidden";
-
 // Public form Task
+// TODO: remove this later. It is kept in now as a reminder
 export type GoabPublicFormTaskStatus = "completed" | "not-started" | "cannot-start";
 
 // Drawer

@@ -29,7 +29,6 @@ export * from "./lib/form/public-form-page";
 export * from "./lib/form/public-form-summary";
 export * from "./lib/form/public-form";
 export * from "./lib/form/public-subform";
-export * from "./lib/form/public-subform-index";
 export * from "./lib/form/task";
 export * from "./lib/form/task-list";
 export * from "./lib/form-item/form-item";
