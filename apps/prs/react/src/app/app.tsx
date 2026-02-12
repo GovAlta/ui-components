@@ -90,6 +90,7 @@ export function App() {
               <Link to="/bugs/3215">3215 Drawer Initial Height</Link>
               <Link to="/bugs/3232">3232 GoabText Tag Size</Link>
               <Link to="/bugs/3248">3248 Dropdown Dynamic Children Sync</Link>
+              <Link to="/bugs/3273">3273 Nested Side Menu Groups</Link>
               <Link to="/bugs/3275">3275 Can't unset month</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
               <Link to="/bugs/3281">3281 GoabText p tag margin issues</Link>

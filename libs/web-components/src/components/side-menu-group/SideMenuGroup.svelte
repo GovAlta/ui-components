@@ -34,6 +34,7 @@
   let _open = false;
   let _current = false;
   let _rootEl: HTMLElement;
+  let _senderEl: HTMLElement;
 
   $: _slug = toSlug(heading);
 
@@ -56,7 +57,7 @@
       });
 
     setTimeout(() => {
-      _rootEl.dispatchEvent(
+      _senderEl.dispatchEvent(
         new CustomEvent<SideMenuGroupProps>("sidemenugroup:mounted", {
           detail: {
             el: _rootEl,
@@ -78,7 +79,7 @@
 
     // listen to events by children (if child is open the parent also has to be open)
     _rootEl.addEventListener("_open", (e: Event) => {
-      _open = _current = (e as CustomEvent).detail.current;
+      _open = _current = true;
     });
   }
 
@@ -109,7 +110,7 @@
       (matchedChild as Element).classList.add("current");
     }
     _current = _open = !!matchedChild;
-    notifyParent(_open);
+    if (_open) dispatchGroupOpen();
   }
 
   function handleClick(e: Event) {
@@ -117,17 +118,17 @@
     e.preventDefault();
   }
 
-  function notifyParent(current: boolean) {
-    _rootEl.dispatchEvent(
+  function dispatchGroupOpen() {
+    _senderEl.dispatchEvent(
       new CustomEvent("_open", {
         bubbles: true,
-        composed: true,
-        detail: { current },
+        composed: true
       }),
     );
   }
 </script>
 
+<div bind:this={_senderEl}></div>
 <div bind:this={_rootEl}
      class="side-menu-group"
      class:v2={version === "2"}
