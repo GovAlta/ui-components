@@ -1,9 +1,19 @@
 <svelte:options
   customElement={{
+    shadow: "open",
     tag: "goa-radio-group",
     props: {
       name: { reflect: true },
       value: { reflect: true },
+    },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+        constructor() {
+          super();
+          this.attachedInternals = this.attachInternals();
+        }
+      };
     },
   }}
 />

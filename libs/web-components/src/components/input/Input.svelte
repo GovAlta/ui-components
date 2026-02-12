@@ -1,9 +1,19 @@
 <svelte:options
   customElement={{
+    shadow: "open",
     tag: "goa-input",
     props: {
       name: { attribute: "name", type: "String", reflect: true },
       value: { attribute: "value", type: "String", reflect: true },
+    },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+        constructor() {
+          super();
+          this.attachedInternals = this.attachInternals();
+        }
+      };
     },
   }}
 />
@@ -402,7 +412,7 @@
       id={id || name}
       role="textbox"
       aria-label={arialabel}
-      aria-labelledby={arialabelledby}
+      aria-labelledby={arialabelledby || undefined}
       aria-invalid={_error ? "true" : "false"}
       on:input={onInput}
       on:keyup={onKeyUp}

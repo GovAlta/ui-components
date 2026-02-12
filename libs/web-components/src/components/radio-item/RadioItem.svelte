@@ -1,5 +1,6 @@
 <svelte:options
   customElement={{
+    shadow: "open",
     tag: "goa-radio-item",
     props: {
       name: { reflect: true },
@@ -10,6 +11,15 @@
       error: { reflect: true },
       revealarialabel: { reflect: true },
       disabled: { reflect: true },
+    },
+    extend: (customElementConstructor) => {
+      return class extends customElementConstructor {
+        static formAssociated = true;
+        constructor() {
+          super();
+          this.attachedInternals = this.attachInternals();
+        }
+      };
     },
   }}
 />
@@ -242,7 +252,7 @@
       data-testid="radio-option-{value}"
       disabled={isDisabled}
       checked={isChecked}
-      aria-label={arialabel}
+      aria-label={arialabel || value}
       aria-describedby={$$slots.description || description
         ? `${name}-${value}-description`
         : undefined}

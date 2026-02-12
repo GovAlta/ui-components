@@ -262,50 +262,49 @@ function PublicFormTestComponent() {
 }
 
 describe("PublicForm Browser Tests", () => {
-  it("initializes the form", async () => {
-    const result = render(<PublicFormTestComponent />);
 
+  it.only("should pass", async () => {
+    const { getByLabelText } = render(<>
+      <goa-input arialabel="Full name" />
+    </>);
+
+    const name = getByLabelText("Full name");
     await vi.waitFor(() => {
-      const form = result.container.querySelector("goa-public-form");
-      expect(form).toBeTruthy();
-    });
+      expect(name.length).toBe(1);
+      // console.log(name.element());
+    })
+  })
+
+  it.only("initializes the form", async () => {
+    const { getByRole, getByLabelText } = render(<PublicFormTestComponent />);
+
+    const roles = getByRole("radiogroup");
+    const sin = getByLabelText("sin");
 
     // Wait for form to initialize
-    await vi.waitFor(
-      () => {
-        // on first page, so it should be visible
-        const recipient = result.container.querySelector(
-          "goa-radio-group[name=role]"
-        );
-
-        // on later page, so should not be visible yet
-        const sin = result.container.querySelector(
-          "goa-input[name=sin]"
-        );
-
-        expect(recipient).toBeTruthy();
-        expect(recipient).toBeVisible();
-
-        expect(sin).toBeTruthy();
-        expect(sin).not.toBeVisible();
-      },
-      { timeout: 3000 }
-    );
+    await vi.waitFor(() => {
+      // on first page, so it should be visible
+      expect(roles.length).toBe(1);
+      // sin should not be visible yet
+      expect(sin.length).toBe(0);
+    });
   });
 
   it.only("can select a radio button and continue to next page", async () => {
-    const { getByText, getByRole } = render(<PublicFormTestComponent />);
+    const { getByLabelText, getByRole } = render(<PublicFormTestComponent />);
 
     const radios = getByRole("radio");
+    const receiverOption = getByLabelText("Recipient");
 
     // Wait for radio items to be present
     await vi.waitFor( () => {
       expect(radios.length).toBe(2);
     });
 
+
     // Select the Recipient radio button
-    await userEvent.click(radios.elements()[0]);
-    // await radios.first().click();
+    // await userEvent.click(radios.elements()[0]);
+    await receiverOption.click();
 
     // Click continue button
     const continueButton = getByRole("button").getByText("Continue");
