@@ -411,7 +411,7 @@
       {maxlength}
       id={id || name}
       role="textbox"
-      aria-label={arialabel}
+      aria-label={arialabel || name}
       aria-labelledby={arialabelledby || undefined}
       aria-invalid={_error ? "true" : "false"}
       on:input={onInput}

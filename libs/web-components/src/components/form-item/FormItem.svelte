@@ -1,6 +1,8 @@
-<svelte:options customElement={{
-  tag: "goa-form-item",
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-form-item",
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts" context="module">
@@ -14,7 +16,6 @@
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
   import {
-    receive,
     generateRandomId,
     typeValidator,
     announceToScreenReader,
@@ -81,7 +82,7 @@
 
   // Computed: Error icon size based on form item size
   // Compact: xsmall (16px), Regular/Large: small (18px)
-  $: errorIconSize = labelsize === 'compact' ? 'xsmall' : 'small';
+  $: errorIconSize = labelsize === "compact" ? "xsmall" : "small";
 
   onMount(() => {
     validateRequirementType(requirement);
@@ -126,7 +127,7 @@
 <!-- HTML -->
 <div
   class:v2={version === "2"}
-  class={`${labelsize}${type ? ' ' + type : ''}`}
+  class={`${labelsize}${type ? " " + type : ""}`}
   data-testid={testid}
   style={`
     ${calculateMargin(mt, mr, mb, ml)}
@@ -146,7 +147,7 @@
 
   <slot />
 
-  {#if ($$slots.error || error) || ($$slots.helptext || helptext)}
+  {#if $$slots.error || error || $$slots.helptext || helptext}
     <div class={`messages-container ${labelsize}`}>
       {#if $$slots.error || error}
         <div class="error-msg" id={_errorId} role="alert">
@@ -209,33 +210,51 @@
   /* V2: Size and input-type specific spacing */
 
   .large .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-large, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 16px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-large,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    ); /* V2: 16px, V1: 12px */
   }
 
   .regular .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-regular, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 12px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-regular,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    ); /* V2: 12px, V1: 12px */
   }
 
   /* V2 ONLY: Compact size messages container spacing */
   .v2.compact .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-compact, 0.5rem); /* V2: 8px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-compact,
+      0.5rem
+    ); /* V2: 8px */
   }
 
   /* InputType overrides: checkbox-list, radio-group for adjusted sizing */
   .large.checkbox-list .messages-container,
   .large.radio-group .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-selection-large, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 20px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-selection-large,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    ); /* V2: 20px, V1: 12px */
   }
 
   .regular.checkbox-list .messages-container,
   .regular.radio-group .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-selection-regular, var(--goa-form-item-message-margin-top, 0.75rem)); /* V2: 16px, V1: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-selection-regular,
+      var(--goa-form-item-message-margin-top, 0.75rem)
+    ); /* V2: 16px, V1: 12px */
   }
 
   /* V2 ONLY: Compact size inputType pattern overrides for adjusted sizing */
   .v2.compact.checkbox-list .messages-container,
   .v2.compact.radio-group .messages-container {
-    margin-top: var(--goa-form-item-message-margin-top-selection-compact, 0.75rem); /* V2: 12px */
+    margin-top: var(
+      --goa-form-item-message-margin-top-selection-compact,
+      0.75rem
+    ); /* V2: 12px */
   }
 
   /* V2: Flex layout for error + helper stacking */
@@ -282,7 +301,10 @@
   /* V1: Gap between error and helper when both present (sibling selector) */
   /* Uses space.xs (8px) for proper vertical stacking */
   .error-msg + .help-msg {
-    margin-top: var(--goa-form-item-message-stack-gap, var(--goa-space-xs, 0.5rem));
+    margin-top: var(
+      --goa-form-item-message-stack-gap,
+      var(--goa-space-xs, 0.5rem)
+    );
   }
 
   /* V2: Remove sibling margin (flex gap handles spacing) */
