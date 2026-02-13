@@ -22,6 +22,8 @@
     return `${months[month - 1]} ${day}, ${year}`;
   }
 
+  // Normally we don't need to keep track of the state, unless we have a subform; to show the child
+  // items we need a reference to the state data
   let _state = undefined;
 
   const outline = {
