@@ -1,4 +1,6 @@
 export type FieldValidator = (value: unknown) => string;
+export type PageValidator = (value: unknown, pageData: Record<string, unknown>) => string;
+export type AnyValidator = FieldValidator | PageValidator;
 export type FieldsetState = Record<string, FieldsetItemState>;
 export type FieldsetItemState = {
   name: string;
@@ -278,4 +280,67 @@ export function LengthValidator({
 
     return "";
   };
+}
+
+/**
+ * Marker to identify PageValidators that need full page data
+ */
+export const PAGE_VALIDATOR_MARKER = Symbol("pageValidator");
+
+export type MarkedPageValidator = PageValidator & {
+  [PAGE_VALIDATOR_MARKER]: true;
+};
+
+/**
+ * Helper to check if a validator is a PageValidator
+ */
+export function isPageValidator(
+  validator: AnyValidator
+): validator is MarkedPageValidator {
+  return PAGE_VALIDATOR_MARKER in validator;
+}
+
+/**
+ * Creates a PageValidator that marks itself for full page data access
+ */
+function createPageValidator(fn: PageValidator): MarkedPageValidator {
+  const marked = fn as MarkedPageValidator;
+  marked[PAGE_VALIDATOR_MARKER] = true;
+  return marked;
+}
+
+/**
+ * Conditional required validator - requires value only when condition is met
+ *
+ * @param conditionFn - Function that receives pageData and returns true if field should be required
+ * @param msg - Error message when required but empty
+ *
+ * @example
+ * // Require phone number only when "phone" is selected in contactMethod
+ * ConditionalRequiredValidator(
+ *   (pageData) => String(pageData.contactMethod || "").includes("phone"),
+ *   "Enter your phone number"
+ * )
+ */
+export function ConditionalRequiredValidator(
+  conditionFn: (pageData: Record<string, unknown>) => boolean,
+  msg?: string
+): MarkedPageValidator {
+  return createPageValidator((value: unknown, pageData: Record<string, unknown>) => {
+    // Only validate if condition is met
+    if (!conditionFn(pageData)) {
+      return ""; // Not required, skip validation
+    }
+
+    // Same logic as RequiredValidator
+    msg = msg || "Required";
+
+    if (typeof value === "number" && !isNaN(value)) {
+      return "";
+    }
+    if (value) {
+      return "";
+    }
+    return msg;
+  });
 }
