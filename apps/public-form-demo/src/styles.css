@@ -1,0 +1,103 @@
+/* Global styles for Public Form Demo */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: acumin-pro-semi-condensed, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* App layout - footer just below the fold */
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  min-height: calc(100vh - 66px); /* Account for header height */
+  padding: var(--goa-space-xl) 0 var(--goa-space-3xl); /* 32px top, 64px bottom */
+}
+
+.form-container {
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+.service-description {
+  font-size: var(--goa-font-size-4);
+  color: var(--goa-color-text-secondary);
+  margin: 0 0 var(--goa-space-xl);
+}
+
+/* =============================================================================
+   FormSet Pattern
+   Centered form container with consistent spacing.
+   See Brief 05a for design rationale.
+   ============================================================================= */
+
+.form-set {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 var(--goa-space-m); /* Horizontal only; vertical handled by .main-content */
+}
+
+/* Section spacing - 32px between major sections */
+.form-set > * + * {
+  margin-top: var(--goa-space-xl);
+}
+
+/* Field spacing within sections - 16px between fields */
+.form-section > * + * {
+  margin-top: var(--goa-space-m);
+}
+
+/* Form fields container - 32px gap between fields (matches Figma goa-form-set) */
+.form-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Default spacing between form elements - 32px */
+.form-fields > * + * {
+  margin-top: var(--goa-space-xl); /* 32px */
+}
+
+/* Details following a form-item gets reduced spacing - 16px */
+.form-fields > goa-form-item + goa-details,
+.form-fields > goax-form-item + goa-details {
+  margin-top: var(--goa-space-m); /* 16px */
+}
+
+/* =============================================================================
+   Action Link
+   Button styled to look like a link (for onClick handlers that aren't navigation).
+   GoabxLink uses action-based events which don't work well with React handlers.
+   ============================================================================= */
+
+.action-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--goa-color-interactive-default);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.action-link:hover {
+  color: var(--goa-color-interactive-hover);
+}
+
+.action-link:focus-visible {
+  outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
+  border-radius: var(--goa-border-radius-s);
+}
