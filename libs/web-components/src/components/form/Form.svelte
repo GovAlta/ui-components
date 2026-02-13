@@ -5,7 +5,7 @@
 />
 
 <script lang="ts" context="module">
-  import { PFOutline, PFPage, PFState } from "@abgov/ui-components-common";
+  import { PFOutline, PFPage, PFState, isPageValidator } from "@abgov/ui-components-common";
   import { Spacing } from "../../common/styling";
 </script>
 
@@ -48,7 +48,8 @@
     addBackListener();
     addSubformListeners();
 
-    dispatch(_rootEl, "_init", init, { bubbles: true });
+    // Timeout to ensure React's useEffect has attached its listener
+    dispatch(_rootEl, "_init", init, { bubbles: true, timeout: 100 });
   });
 
   function bindSubformFieldValues(id: string) {
@@ -109,7 +110,7 @@
       };
 
       // send message up to app level with the changes
-      dispatch(_rootEl, "_subformChange", _state);
+      dispatch(_rootEl, "_subformChange", _state, { bubbles: true });
     });
 
     _rootEl.addEventListener("pf:subform:save", (e) => {
@@ -155,7 +156,7 @@
       resetFormFields(pageId);
 
       // send message up to app level with the changes
-      dispatch(_rootEl, "_subformChange", _state);
+      dispatch(_rootEl, "_subformChange", _state, { bubbles: true });
     });
   }
 
@@ -310,6 +311,10 @@
 
     _state = state;
 
+    // Populate dataBuffer from current page's data (for validation when re-entering)
+    // This mirrors what setPageVisibility does during normal navigation
+    _state.dataBuffer = (_state.data[_currentPage] as PFPage) || {};
+
     syncFormSummary();
     bindFormFieldValues(state);
 
@@ -361,7 +366,10 @@
       const val = _state.dataBuffer[name];
 
       for (const validator of validators) {
-        const err = validator(val);
+        // PageValidators receive full page data for conditional validation
+        const err = isPageValidator(validator)
+          ? validator(val, _state.dataBuffer)
+          : validator(val);
         if (err) {
           errors[name] = err;
           errorCount++;
@@ -375,17 +383,42 @@
 
   // Set error attrs on html elements to allow errors to appear within the form
   function renderErrors(id: string, errors: Record<string, string>) {
+    // Set errors on individual form items
     for (const [name, error] of Object.entries(errors)) {
       const key = `${id}:${name}`;
       _formFields[key].setAttribute("error", "");
       _formFields[key].closest("goa-form-item")?.setAttribute("error", error);
     }
+
+    // Set errors summary on the form page for the error summary callout
+    _formPages[id]?.setAttribute("errors", JSON.stringify(errors));
+
+    // Scroll based on error summary position
+    const errorSummaryPosition = _formPages[id]?.getAttribute("error-summary-position") || "top";
+
+    if (errorSummaryPosition === "top") {
+      // Scroll to top of page to show error summary
+      _formPages[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (errorSummaryPosition === "none") {
+      // Scroll to first field with error instead
+      const firstErrorKey = Object.keys(errors)[0];
+      if (firstErrorKey) {
+        const firstErrorField = _formFields[`${id}:${firstErrorKey}`];
+        firstErrorField?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+    // For "bottom", don't scroll - the error is near the button they just clicked
   }
 
   function resetErrors() {
     for (const [_name, el] of Object.entries(_formFields)) {
       el.removeAttribute("error");
       el.closest("goa-form-item")?.removeAttribute("error");
+    }
+
+    // Clear errors summary from all form pages
+    for (const [_id, page] of Object.entries(_formPages)) {
+      page.removeAttribute("errors");
     }
   }
 
@@ -402,14 +435,18 @@
       return;
     }
 
-    const [errors, errorCount] = validate(id);
-    if (errorCount > 0) {
-      renderErrors(id, errors);
-      return;
-    }
-
-    // if there are no errors ensure all form-items have their error state reset
+    // Always reset errors first so previously fixed errors are cleared
     resetErrors();
+
+    // Skip validation for subform pages - items are validated when saved in the modal
+    // The validators defined for subforms are for individual items, not the main page
+    if (!isSubform) {
+      const [errors, errorCount] = validate(id);
+      if (errorCount > 0) {
+        renderErrors(id, errors);
+        return;
+      }
+    }
 
     // the `next` section is either a string or a function that returns a string
     try {

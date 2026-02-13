@@ -1,7 +1,12 @@
 <svelte:options customElement={{
   tag: "goa-pf-subform",
   props: {
-
+    addbuttontext: { attribute: "addbuttontext", reflect: true, type: "String" },
+    addbuttontype: { attribute: "addbuttontype", reflect: true, type: "String" },
+    addbuttonsize: { attribute: "addbuttonsize", reflect: true, type: "String" },
+    addbuttonicon: { attribute: "addbuttonicon", reflect: true, type: "String" },
+    addheading: { attribute: "addheading", reflect: true, type: "String" },
+    editheading: { attribute: "editheading", reflect: true, type: "String" },
   }
 }} />
 
@@ -9,15 +14,22 @@
   import { dispatch } from "@abgov/ui-components-common";
   import { onMount } from "svelte";
 
+  // Add button customization
+  export let addbuttontext: string = "Add";
+  export let addbuttontype: string = "primary";
+  export let addbuttonsize: string = "default";
+  export let addbuttonicon: string = "";
+
+  // Modal headings
+  export let addheading: string = "";
+  export let editheading: string = "";
+
   let open = false;
 
   let _id: string;  // uuid for the editted item
   let _rootEl: HTMLElement;
 
   onMount(() => {
-    // TODO: I think that for these events the parent form-page needs to intercept the event
-    // and add the page id to the event detail, then re-dispatch the event, otherwise there is
-    // no way to reset the group of values
     _rootEl.addEventListener("edit", (e) => {
       e.stopPropagation();
       _id = (e as CustomEvent).detail;
@@ -56,15 +68,16 @@
 </script>
 
 <div bind:this={_rootEl}>
-  <goa-modal {open}>
+  <goa-modal {open} heading={_id ? editheading : addheading}>
     <slot name="form" />
-    <goa-block slot="actions">
-      <goa-button type="tertiary" action="cancel">Cancel</goa-button>
-      <goa-spacer hspacing="fill" />
-      <goa-button action="save">Save</goa-button>
-    </goa-block>
+    <div slot="actions">
+      <goa-button-group alignment="end">
+        <goa-button type="tertiary" action="cancel">Cancel</goa-button>
+        <goa-button action="save">Save</goa-button>
+      </goa-button-group>
+    </div>
   </goa-modal>
 
   <slot />
-  <goa-button action="add">Add</goa-button>
+  <goa-button action="add" type={addbuttontype} size={addbuttonsize} leadingicon={addbuttonicon || undefined}>{addbuttontext}</goa-button>
 </div>
