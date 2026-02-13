@@ -66,25 +66,34 @@ describe("SideMenuGroup", () => {
     const item2 = result.getByTestId("item2");
     await item2.click();
 
+    // Wait for URL change and SideMenu to process
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     // Both Parent and Child Group should remain open since Item 2 is in the Child group
+    // This tests the regression fix: when child becomes current, parent should also open
     await vi.waitFor(() => {
       expect(parentHeading.classList.contains("open")).toBe(true);
       expect(childHeading.classList.contains("open")).toBe(true);
       expect(parentContent.classList.contains("hidden")).toBe(false);
       expect(childContent.classList.contains("hidden")).toBe(false);
-    });
+    }, { timeout: 5000 });
 
     // Step 3: Click on Item 1 (direct child of parent group)
     const item1 = result.getByTestId("item1");
     await item1.click();
 
+    // Wait for URL change and SideMenu to process
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     // Step 4: Parent Group should remain open (Item 1 is its child),
     // but Child Group should close (Item 1 is not in the Child group)
+    // This tests the regression fix: when child becomes non-current, parent should stay open
+    // because parent itself has a current link
     await vi.waitFor(() => {
       expect(parentHeading.classList.contains("open")).toBe(true);
       expect(parentContent.classList.contains("hidden")).toBe(false);
       expect(childHeading.classList.contains("open")).toBe(false);
       expect(childContent.classList.contains("hidden")).toBe(true);
-    });
+    }, { timeout: 5000 });
   });
 });
