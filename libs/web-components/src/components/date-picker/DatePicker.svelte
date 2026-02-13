@@ -306,7 +306,7 @@
           {size}
           {version}
         >
-          <goa-dropdown-item value="0" label="--select a month--" />
+          <goa-dropdown-item value="0" label="—Select month—" />
           <goa-dropdown-item value="1" label="January" />
           <goa-dropdown-item value="2" label="February" />
           <goa-dropdown-item value="3" label="March" />
