@@ -9,6 +9,7 @@ interface WCProps {
   "section-title"?: string;
   "button-text"?: string;
   "back-visibility"?: string;
+  "error-summary-position"?: string;
   error?: string;
   "data-pf-editting"?: string;
 }
@@ -29,6 +30,8 @@ interface GoabPublicFormPageProps extends DataAttributes {
   sectionTitle?: string;
   buttonText?: string;
   backVisibility?: "visible" | "hidden";
+  /** Controls where the error summary callout appears. Default is "top". */
+  errorSummaryPosition?: "top" | "bottom" | "none";
   error?: string;
   editting?: boolean;
   children: ReactNode;
@@ -39,6 +42,7 @@ export function GoabPublicFormPage({
   sectionTitle,
   buttonText,
   backVisibility,
+  errorSummaryPosition,
   editting,
   children,
   ...rest
@@ -50,6 +54,7 @@ export function GoabPublicFormPage({
       "section-title": sectionTitle,
       "button-text": buttonText,
       "back-visibility": backVisibility,
+      "error-summary-position": errorSummaryPosition,
       "data-pf-editting": editting ? "true" : undefined,
     },
     kebab
