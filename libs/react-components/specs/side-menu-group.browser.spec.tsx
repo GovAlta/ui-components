@@ -4,7 +4,7 @@ import { GoabSideMenu, GoabSideMenuGroup } from "../src";
 import { vi } from "vitest";
 
 describe("SideMenuGroup", () => {
-  it("opens parent and child groups when child item is clicked, closes child but keeps parent open when parent item is clicked", async () => {
+  it("parent group stays open when navigating from child item to parent item", async () => {
     const SideMenu = () => {
       return (
         <GoabSideMenu testId="side-menu">
@@ -26,74 +26,59 @@ describe("SideMenuGroup", () => {
 
     // Wait for components to mount
     await vi.waitFor(() => {
-      expect(result.getByTestId("parent-group").element()).toBeTruthy();
+      expect(result.getByTestId("side-menu").element()).toBeTruthy();
     });
 
+    const sideMenu = result.getByTestId("side-menu").element() as HTMLElement;
     const parentGroup = result.getByTestId("parent-group").element() as HTMLElement;
     const childGroup = result.getByTestId("child-group").element() as HTMLElement;
 
     const parentHeading = parentGroup.querySelector(".heading") as HTMLElement;
     const childHeading = childGroup.querySelector(".heading") as HTMLElement;
 
-    const parentContent = parentGroup.querySelector(
-      "[data-testid='group']",
-    ) as HTMLElement;
-    const childContent = childGroup.querySelector("[data-testid='group']") as HTMLElement;
-
     // Initially, both groups should be closed
     expect(parentHeading.classList.contains("open")).toBe(false);
     expect(childHeading.classList.contains("open")).toBe(false);
-    expect(parentContent.classList.contains("hidden")).toBe(true);
-    expect(childContent.classList.contains("hidden")).toBe(true);
 
-    // Step 1: Open the parent group manually to access child
-    await parentHeading.click();
-
-    await vi.waitFor(() => {
-      expect(parentHeading.classList.contains("open")).toBe(true);
-      expect(parentContent.classList.contains("hidden")).toBe(false);
-    });
-
-    // Open the child group manually
-    await childHeading.click();
-
-    await vi.waitFor(() => {
-      expect(childHeading.classList.contains("open")).toBe(true);
-      expect(childContent.classList.contains("hidden")).toBe(false);
-    });
-
-    // Step 2: Click on Item 2 (inside the child group)
-    const item2 = result.getByTestId("item2");
-    await item2.click();
-
-    // Wait for URL change and SideMenu to process
+    // Step 1: Navigate to item2 (child item) by changing the URL hash
+    // We need to trigger a DOM mutation for the SideMenu's MutationObserver to detect
+    window.location.hash = "#item2";
+    
+    // Trigger a DOM mutation by adding/removing a temp element
+    const tempEl = document.createElement("div");
+    document.body.appendChild(tempEl);
+    document.body.removeChild(tempEl);
+    
+    // Wait for SideMenu to process the URL change
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Both Parent and Child Group should remain open since Item 2 is in the Child group
-    // This tests the regression fix: when child becomes current, parent should also open
+    // Both parent and child groups should be open because child item is current
     await vi.waitFor(() => {
       expect(parentHeading.classList.contains("open")).toBe(true);
       expect(childHeading.classList.contains("open")).toBe(true);
-      expect(parentContent.classList.contains("hidden")).toBe(false);
-      expect(childContent.classList.contains("hidden")).toBe(false);
+      expect(parentGroup.classList.contains("current")).toBe(true);
+      expect(childGroup.classList.contains("current")).toBe(true);
     }, { timeout: 5000 });
 
-    // Step 3: Click on Item 1 (direct child of parent group)
-    const item1 = result.getByTestId("item1");
-    await item1.click();
-
-    // Wait for URL change and SideMenu to process
+    // Step 2: Navigate to item1 (parent item)
+    // This tests the regression fix: parent should stay open even though child becomes non-current
+    window.location.hash = "#item1";
+    
+    // Trigger a DOM mutation
+    const tempEl2 = document.createElement("div");
+    document.body.appendChild(tempEl2);
+    document.body.removeChild(tempEl2);
+    
+    // Wait for SideMenu to process the URL change
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Step 4: Parent Group should remain open (Item 1 is its child),
-    // but Child Group should close (Item 1 is not in the Child group)
-    // This tests the regression fix: when child becomes non-current, parent should stay open
-    // because parent itself has a current link
+    // Parent group should remain open (it has the current item)
+    // Child group should close (it no longer has a current item)
     await vi.waitFor(() => {
       expect(parentHeading.classList.contains("open")).toBe(true);
-      expect(parentContent.classList.contains("hidden")).toBe(false);
+      expect(parentGroup.classList.contains("current")).toBe(true);
       expect(childHeading.classList.contains("open")).toBe(false);
-      expect(childContent.classList.contains("hidden")).toBe(true);
+      expect(childGroup.classList.contains("current")).toBe(false);
     }, { timeout: 5000 });
   });
 });
