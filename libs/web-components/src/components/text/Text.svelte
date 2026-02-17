@@ -9,7 +9,8 @@
     | "heading-l"
     | "heading-m"
     | "heading-s"
-    | "heading-xs";
+    | "heading-xs"
+    | "heading-2xs";
 
   type BodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 
@@ -86,6 +87,8 @@
         return "s";
       case "heading-xs":
         return "xs";
+      case "heading-2xs":
+        return "xs";
       case "body-l":
       case "body-m":
       case "body-s":
@@ -109,6 +112,7 @@
         return "2xl";
       case "heading-s":
       case "heading-xs":
+      case "heading-2xs":
         return "xl";
       case "body-l":
         return "2xl";
@@ -166,6 +170,9 @@
   .heading-xs {
     font: var(--goa-typography-heading-xs);
   }
+  .heading-2xs {
+    font: var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));
+  }
   .body-l {
     font: var(--goa-typography-body-l);
   }
@@ -194,6 +201,9 @@
     }
     .heading-xs {
       font: var(--goa-typography-mobile-heading-xs);
+    }
+    .heading-2xs {
+      font: var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));
     }
     .body-l {
       font: var(--goa-typography-mobile-body-l);

@@ -1124,7 +1124,8 @@ export type GoabTextHeadingSize =
   | "heading-l"
   | "heading-m"
   | "heading-s"
-  | "heading-xs";
+  | "heading-xs"
+  | "heading-2xs";
 export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
 export type GoabTextColor = "primary" | "secondary";
