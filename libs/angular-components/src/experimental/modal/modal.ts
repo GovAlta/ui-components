@@ -13,37 +13,42 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-modal",
-  imports: [NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
-    <goa-modal
-      *ngIf="isReady"
-      [attr.version]="version"
-      [attr.calloutvariant]="calloutVariant"
-      [attr.open]="open"
-      [attr.maxwidth]="maxWidth"
-      [attr.testid]="testId"
-      [attr.role]="role"
-      [attr.closable]="closable"
-      [attr.transition]="transition"
-      [attr.heading]="getHeadingAsString()"
-      (_close)="_onClose()"
+    @if (isReady) {
+      <goa-modal
+        [attr.version]="version"
+        [attr.calloutvariant]="calloutVariant"
+        [attr.open]="open"
+        [attr.maxwidth]="maxWidth"
+        [attr.testid]="testId"
+        [attr.role]="role"
+        [attr.closable]="closable"
+        [attr.transition]="transition"
+        [attr.heading]="getHeadingAsString()"
+        (_close)="_onClose()"
       >
-      <div slot="heading">
-        <ng-container *ngIf="this.heading !== '' && getHeadingAsTemplate() !== null" [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
-      </div>
+        <div slot="heading">
+          @if (this.heading !== "" && getHeadingAsTemplate() !== null) {
+            <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+          }
+        </div>
 
-      <ng-content></ng-content>
+        <ng-content></ng-content>
 
-      <div slot="actions">
-        <ng-container *ngIf="this.actions" [ngTemplateOutlet]="actions"></ng-container>
-      </div>
-    </goa-modal>
-    `,
+        <div slot="actions">
+          @if (this.actions) {
+            <ng-container [ngTemplateOutlet]="actions"></ng-container>
+          }
+        </div>
+      </goa-modal>
+    }
+  `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxModal implements OnInit {

@@ -5,14 +5,12 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-app-footer",
-  template: `
+  template: `@if (isReady) {
     <goa-app-footer
-      *ngIf="isReady"
       [attr.maxcontentwidth]="maxContentWidth"
       [attr.url]="url"
       [attr.testid]="testId"
@@ -22,9 +20,8 @@ import { CommonModule } from "@angular/common";
       <ng-content select="goabx-app-footer-meta-section"></ng-content>
       <ng-content></ng-content>
     </goa-app-footer>
-  `,
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabxAppFooter implements OnInit {
   @Input() maxContentWidth?: string;

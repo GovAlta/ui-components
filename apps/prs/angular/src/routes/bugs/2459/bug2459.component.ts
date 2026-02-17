@@ -5,7 +5,6 @@ import {
   GoabFileUploadInput,
   GoabFileUploadInputOnSelectFileDetail,
 } from "@abgov/angular-components";
-import { NgFor } from "@angular/common";
 
 interface Uploader {
   upload: (url: string | ArrayBuffer) => void;
@@ -42,7 +41,7 @@ class MockUploader implements Uploader {
   selector: "abgov-accordion",
   standalone: true,
   templateUrl: "./bug2459.component.html",
-  imports: [GoabFormItem, GoabFileUploadCard, GoabFileUploadInput, NgFor],
+  imports: [GoabFormItem, GoabFileUploadCard, GoabFileUploadInput],
 })
 export class Bug2459Component {
   uploads: Upload[] = [];

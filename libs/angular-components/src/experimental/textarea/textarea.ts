@@ -19,42 +19,43 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goabx-textarea",
-  imports: [CommonModule],
+
   template: `
-    <goa-textarea
-      #goaComponentRef
-      *ngIf="isReady"
-      [attr.version]="version"
-      [attr.name]="name"
-      [attr.value]="value"
-      [attr.placeholder]="placeholder"
-      [attr.rows]="rows"
-      [attr.error]="error"
-      [disabled]="disabled"
-      [attr.readonly]="readOnly"
-      [attr.width]="width"
-      [attr.maxwidth]="maxWidth"
-      [attr.arialabel]="ariaLabel"
-      [attr.countby]="countBy"
-      [attr.maxcount]="maxCount"
-      [attr.autocomplete]="autoComplete"
-      [attr.size]="size"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_change)="_onChange($event)"
-      (_keyPress)="_onKeyPress($event)"
-      (_blur)="_onBlur($event)"
-    >
-    </goa-textarea>
+    @if (isReady) {
+      <goa-textarea
+        #goaComponentRef
+        [attr.version]="version"
+        [attr.name]="name"
+        [attr.value]="value"
+        [attr.placeholder]="placeholder"
+        [attr.rows]="rows"
+        [attr.error]="error"
+        [disabled]="disabled"
+        [attr.readonly]="readOnly"
+        [attr.width]="width"
+        [attr.maxwidth]="maxWidth"
+        [attr.arialabel]="ariaLabel"
+        [attr.countby]="countBy"
+        [attr.maxcount]="maxCount"
+        [attr.autocomplete]="autoComplete"
+        [attr.size]="size"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        (_change)="_onChange($event)"
+        (_keyPress)="_onKeyPress($event)"
+        (_blur)="_onBlur($event)"
+      >
+      </goa-textarea>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
@@ -109,7 +110,10 @@ export class GoabxTextArea extends GoabControlValueAccessor implements OnInit {
   }
 
   _onKeyPress(e: Event) {
-    const detail = { ...(e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail, event: e };
+    const detail = {
+      ...(e as CustomEvent<GoabTextAreaOnKeyPressDetail>).detail,
+      event: e,
+    };
     this.markAsTouched();
     this.onKeyPress.emit(detail);
   }

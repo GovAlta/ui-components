@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import {
   GoabBlock,
   GoabButton,
@@ -13,7 +12,7 @@ import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
   standalone: true,
   selector: "abgov-bug2331",
   templateUrl: "./bug2331.component.html",
-  imports: [CommonModule, GoabBlock, GoabButton, GoabTabs, GoabTab, GoabText],
+  imports: [ GoabBlock, GoabButton, GoabTabs, GoabTab, GoabText],
 })
 export class Bug2331Component {
   blockContent: string | null = null;

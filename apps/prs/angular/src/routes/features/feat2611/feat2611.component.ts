@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabTabs,
   GoabTab,
@@ -16,7 +16,6 @@ import {
   selector: "abgov-feat2611",
   templateUrl: "./feat2611.component.html",
   imports: [
-    CommonModule,
     GoabTabs,
     GoabTab,
     GoabBlock,

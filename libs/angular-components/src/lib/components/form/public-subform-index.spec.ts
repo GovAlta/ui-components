@@ -50,7 +50,9 @@ describe("GoabPublicSubformIndex", () => {
   it("should render with properties", () => {
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(By.css("goa-public-subform-index")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-public-subform-index"),
+    ).nativeElement;
 
     expect(el?.getAttribute("heading")).toBe(component.heading);
     expect(el?.getAttribute("section-title")).toBe(component.sectionTitle);
@@ -76,7 +78,9 @@ describe("GoabPublicSubformIndex", () => {
   it("should have the correct slot attribute on host element", () => {
     fixture.detectChanges();
 
-    const hostElement = fixture.debugElement.query(By.css("goab-public-subform-index")).nativeElement;
+    const hostElement = fixture.debugElement.query(
+      By.css("goab-public-subform-index"),
+    ).nativeElement;
     expect(hostElement.getAttribute("slot")).toBe("subform-index");
   });
 
@@ -92,7 +96,9 @@ describe("GoabPublicSubformIndex", () => {
 
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(By.css("goa-public-subform-index")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-public-subform-index"),
+    ).nativeElement;
 
     expect(el?.getAttribute("heading")).toBe("Updated Heading");
     expect(el?.getAttribute("section-title")).toBe("Updated Section");

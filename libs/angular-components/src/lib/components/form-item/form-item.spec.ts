@@ -4,11 +4,10 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabFormItemRequirement, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { GoabFormItemSlot } from "./form-item-slot";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
-  imports: [GoabFormItem, GoabFormItemSlot, CommonModule],
+  imports: [GoabFormItem, GoabFormItemSlot],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <goab-form-item
@@ -25,8 +24,12 @@ import { CommonModule } from "@angular/common";
       [ml]="ml"
     >
       <input data-testid="foo" />
-      <goab-form-item-slot slot="error" *ngIf="errorSlot">This is an error slot</goab-form-item-slot>
-      <goab-form-item-slot slot="helptext" *ngIf="helpTextSlot">This is a helpText slot</goab-form-item-slot>
+      @if (errorSlot) {
+        <goab-form-item-slot slot="error">This is an error slot</goab-form-item-slot>
+      }
+      @if (helpTextSlot) {
+        <goab-form-item-slot slot="helptext">This is a helpText slot</goab-form-item-slot>
+      }
     </goab-form-item>
   `,
 })

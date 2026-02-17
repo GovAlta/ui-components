@@ -38,12 +38,13 @@
       [value]="selectedTask"
       name="selectedTask"
       (onChange)="onSelectedTaskChange($event)">
+      @for (task of tasks; track task.value) {
       <goabx-dropdown-item
-        *ngFor="let task of tasks; trackBy: trackByFn"
         [value]="task.value"
         [mountType]="task.mount"
         [label]="task.label">
       </goabx-dropdown-item>
+      }
     </goabx-dropdown>
   </ng-container>
 </goabx-form-item>

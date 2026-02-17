@@ -7,16 +7,18 @@ import { GoabSkeletonType, Spacing } from "@abgov/ui-components-common";
   standalone: true,
   imports: [GoabSkeleton],
   template: `
-  <goab-skeleton [type]="type"
-                 [maxWidth]="maxWidth"
-                 [lineCount]="lineCount"
-                 [size]="size"
-                 [testId]="testId"
-                 [mt]="mt"
-                 [mb]="mb"
-                 [mr]="mr"
-                 [ml]="ml"></goab-skeleton>
-  `
+    <goab-skeleton
+      [type]="type"
+      [maxWidth]="maxWidth"
+      [lineCount]="lineCount"
+      [size]="size"
+      [testId]="testId"
+      [mt]="mt"
+      [mb]="mb"
+      [mr]="mr"
+      [ml]="ml"
+    ></goab-skeleton>
+  `,
 })
 class TestSkeletonComponent {
   type = "image" as GoabSkeletonType;
@@ -37,7 +39,7 @@ describe("GoABSkeleton", () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [GoabSkeleton, TestSkeletonComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSkeletonComponent);
@@ -45,7 +47,7 @@ describe("GoABSkeleton", () => {
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
-  }))
+  }));
 
   it("should render successfully", () => {
     const el = fixture.nativeElement.querySelector("goa-skeleton");
@@ -57,5 +59,5 @@ describe("GoABSkeleton", () => {
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("ml")).toBe(component.ml);
     expect(el?.getAttribute("mr")).toBe(component.mr);
-  })
-})
+  });
+});

@@ -78,7 +78,12 @@ describe("GoABDropdown", () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TestDropdownComponent, GoabDropdown, GoabDropdownItem, ReactiveFormsModule],
+      imports: [
+        TestDropdownComponent,
+        GoabDropdown,
+        GoabDropdownItem,
+        ReactiveFormsModule,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -158,8 +163,12 @@ describe("GoABDropdown", () => {
 
   describe("writeValue", () => {
     it("should set value attribute when writeValue is called with a value", () => {
-      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
-      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+      const dropdownComponent = fixture.debugElement.query(
+        By.css("goab-dropdown"),
+      ).componentInstance;
+      const dropdownElement = fixture.debugElement.query(
+        By.css("goa-dropdown"),
+      ).nativeElement;
 
       dropdownComponent.writeValue("red");
       expect(dropdownElement.getAttribute("value")).toBe("red");
@@ -169,8 +178,12 @@ describe("GoABDropdown", () => {
     });
 
     it("should set value attribute to empty string when writeValue is called with null", () => {
-      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
-      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+      const dropdownComponent = fixture.debugElement.query(
+        By.css("goab-dropdown"),
+      ).componentInstance;
+      const dropdownElement = fixture.debugElement.query(
+        By.css("goa-dropdown"),
+      ).nativeElement;
 
       // First set a value
       dropdownComponent.writeValue("red");
@@ -182,7 +195,9 @@ describe("GoABDropdown", () => {
     });
 
     it("should update component value property", () => {
-      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
+      const dropdownComponent = fixture.debugElement.query(
+        By.css("goab-dropdown"),
+      ).componentInstance;
 
       dropdownComponent.writeValue("yellow");
       expect(dropdownComponent.value).toBe("yellow");
@@ -194,8 +209,12 @@ describe("GoABDropdown", () => {
 
   describe("_onChange", () => {
     it("should update component value when user selects an option", () => {
-      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
-      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+      const dropdownComponent = fixture.debugElement.query(
+        By.css("goab-dropdown"),
+      ).componentInstance;
+      const dropdownElement = fixture.debugElement.query(
+        By.css("goa-dropdown"),
+      ).nativeElement;
 
       fireEvent(
         dropdownElement,
@@ -208,8 +227,12 @@ describe("GoABDropdown", () => {
     });
 
     it("should update value to null when cleared", () => {
-      const dropdownComponent = fixture.debugElement.query(By.css("goab-dropdown")).componentInstance;
-      const dropdownElement = fixture.debugElement.query(By.css("goa-dropdown")).nativeElement;
+      const dropdownComponent = fixture.debugElement.query(
+        By.css("goab-dropdown"),
+      ).componentInstance;
+      const dropdownElement = fixture.debugElement.query(
+        By.css("goa-dropdown"),
+      ).nativeElement;
 
       // Set initial value
       fireEvent(

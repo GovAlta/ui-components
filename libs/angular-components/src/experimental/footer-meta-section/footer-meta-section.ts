@@ -5,19 +5,17 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-app-footer-meta-section",
-  template: `
-    <goa-app-footer-meta-section *ngIf="isReady" [attr.testid]="testId">
+  template: `@if (isReady) {
+    <goa-app-footer-meta-section [attr.testid]="testId">
       <ng-content />
     </goa-app-footer-meta-section>
-  `,
+  }`,
   styles: [":host { width: 100%; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabxAppFooterMetaSection implements OnInit {
   @Input() testId?: string;

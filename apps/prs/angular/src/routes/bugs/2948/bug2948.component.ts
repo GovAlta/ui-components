@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabModal,
   GoabButton,
@@ -11,7 +11,7 @@ import {
   standalone: true,
   selector: "abgov-bug2948",
   templateUrl: "./bug2948.component.html",
-  imports: [CommonModule, GoabModal, GoabButton, GoabButtonGroup, GoabBlock],
+  imports: [GoabModal, GoabButton, GoabButtonGroup, GoabBlock],
 })
 export class Bug2948Component {
   // Modal 1: String heading

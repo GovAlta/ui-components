@@ -4,8 +4,8 @@
     (onSelectFile)="uploadFile($event)"
     maxFileSize="100MB"
   />
+  @for (upload of uploads; track upload.file.name; let i = $index) {
   <goab-file-upload-card
-    *ngFor="let upload of uploads; index as i"
     [type]="upload.file.type"
     [size]="upload.file.size"
     [filename]="upload.file.name"
@@ -14,4 +14,5 @@
     (onCancel)="deleteFile(upload)"
   >
   </goab-file-upload-card>
+  }
 </goab-form-item>

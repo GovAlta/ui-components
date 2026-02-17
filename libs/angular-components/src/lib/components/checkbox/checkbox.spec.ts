@@ -112,8 +112,12 @@ describe("GoabCheckbox", () => {
 
   describe("writeValue", () => {
     it("should set checked attribute to true when value is truthy", () => {
-      const checkboxComponent = fixture.debugElement.query(By.css("goab-checkbox")).componentInstance;
-      const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
+      const checkboxComponent = fixture.debugElement.query(
+        By.css("goab-checkbox"),
+      ).componentInstance;
+      const checkboxElement = fixture.debugElement.query(
+        By.css("goa-checkbox"),
+      ).nativeElement;
 
       checkboxComponent.writeValue(true);
       expect(checkboxElement.getAttribute("checked")).toBe("true");
@@ -126,8 +130,12 @@ describe("GoabCheckbox", () => {
     });
 
     it("should set checked attribute to false when value is falsy", () => {
-      const checkboxComponent = fixture.debugElement.query(By.css("goab-checkbox")).componentInstance;
-      const checkboxElement = fixture.debugElement.query(By.css("goa-checkbox")).nativeElement;
+      const checkboxComponent = fixture.debugElement.query(
+        By.css("goab-checkbox"),
+      ).componentInstance;
+      const checkboxElement = fixture.debugElement.query(
+        By.css("goa-checkbox"),
+      ).nativeElement;
 
       checkboxComponent.writeValue(false);
       expect(checkboxElement.getAttribute("checked")).toBe("false");
@@ -143,7 +151,9 @@ describe("GoabCheckbox", () => {
     });
 
     it("should update component value property", () => {
-      const checkboxComponent = fixture.debugElement.query(By.css("goab-checkbox")).componentInstance;
+      const checkboxComponent = fixture.debugElement.query(
+        By.css("goab-checkbox"),
+      ).componentInstance;
 
       checkboxComponent.writeValue(true);
       expect(checkboxComponent.value).toBe(true);
@@ -179,7 +189,11 @@ describe("Checkbox with description slot", () => {
 
   it("should render with slot description", fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TestCheckboxWithDescriptionSlotComponent, GoabCheckbox, ReactiveFormsModule],
+      imports: [
+        TestCheckboxWithDescriptionSlotComponent,
+        GoabCheckbox,
+        ReactiveFormsModule,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -242,6 +256,8 @@ describe("Checkbox with reveal slot", () => {
     const checkboxElement = fixture.debugElement.query(
       By.css("goa-checkbox"),
     ).nativeElement;
-    expect(checkboxElement.getAttribute("revealarialabel")).toBe("Screen reader announcement for reveal content");
+    expect(checkboxElement.getAttribute("revealarialabel")).toBe(
+      "Screen reader announcement for reveal content",
+    );
   });
 });

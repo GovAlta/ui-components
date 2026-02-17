@@ -41,12 +41,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of sampleData">
-            <td>{{ row.id }}</td>
-            <td>{{ row.name }}</td>
-            <td>{{ row.age }}</td>
-            <td>{{ row.department }}</td>
-          </tr>
+          @for (row of sampleData; track row.id) {
+            <tr>
+              <td>{{ row.id }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.age }}</td>
+              <td>{{ row.department }}</td>
+            </tr>
+          }
         </tbody>
       </goab-table>
     </section>
@@ -60,31 +62,29 @@
         <goab-text tag="span">Click Count: {{ clickCount }}</goab-text>
       </goab-block>
 
-      <div
-        *ngIf="sortLog.length > 0; else noLogs"
-        style="
-          border: 1px solid #ccc;
-          padding: 1rem;
-          background-color: #f9f9f9;
-          max-height: 300px;
-          overflow-y: auto;
-        "
-      >
+      @if (sortLog.length > 0) {
         <div
-          *ngFor="let log of sortLog; trackBy: trackByIndex"
-          style="margin-bottom: 0.5rem; font-family: monospace"
+          style="
+            border: 1px solid #ccc;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            max-height: 300px;
+            overflow-y: auto;
+          "
         >
-          {{ log }}
+          @for (log of sortLog; track $index) {
+            <div style="margin-bottom: 0.5rem; font-family: monospace">
+              {{ log }}
+            </div>
+          }
         </div>
-      </div>
-
-      <ng-template #noLogs>
+      } @else {
         <div style="font-style: italic; color: #666">
           <goab-text tag="p">
             No sort events yet. Click on a column header to start testing.
           </goab-text>
         </div>
-      </ng-template>
+      }
     </section>
 
     <section>

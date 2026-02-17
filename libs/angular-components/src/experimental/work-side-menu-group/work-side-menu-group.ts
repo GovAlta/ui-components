@@ -6,21 +6,21 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-work-side-menu-group", // eslint-disable-line
-  imports: [CommonModule],
+
   template: `
-    <goa-work-side-menu-group
-      *ngIf="isReady"
-      [attr.heading]="heading"
-      [attr.icon]="icon"
-      [attr.testid]="testId"
-    >
-      <ng-content />
-    </goa-work-side-menu-group>
+    @if (isReady) {
+      <goa-work-side-menu-group
+        [attr.heading]="heading"
+        [attr.icon]="icon"
+        [attr.testid]="testId"
+      >
+        <ng-content />
+      </goa-work-side-menu-group>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

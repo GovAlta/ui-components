@@ -10,25 +10,28 @@
     <goab-block gap="s" direction="column">
       <goab-text tag="h3" size="heading-s">Recent events</goab-text>
       <goab-block gap="2xs" direction="column">
-        <goab-text tag="p" size="body-s" *ngIf="eventLog().length === 0"
-          >Interact with the components to populate the log.</goab-text
-        >
-        <goab-container
-          type="interactive"
-          padding="relaxed"
-          *ngFor="let entry of eventLog()"
-          mb="xs"
-        >
-          <goab-block gap="xs" direction="column">
-            <goab-text tag="p" size="body-s">
-              <strong>{{ entry.timestamp }}</strong>
-              ??" {{ entry.name }}
-            </goab-text>
-            <pre style="font-size: 12px; white-space: pre-wrap; margin: 0">
+        @if (eventLog().length === 0) {
+          <goab-text tag="p" size="body-s"
+            >Interact with the components to populate the log.</goab-text
+          >
+        }
+        @for (entry of eventLog(); track $index) {
+          <goab-container
+            type="interactive"
+            padding="relaxed"
+            mb="xs"
+          >
+            <goab-block gap="xs" direction="column">
+              <goab-text tag="p" size="body-s">
+                <strong>{{ entry.timestamp }}</strong>
+                ??" {{ entry.name }}
+              </goab-text>
+              <pre style="font-size: 12px; white-space: pre-wrap; margin: 0">
               {{ entry.detail | json }}
             </pre>
-          </goab-block>
-        </goab-container>
+            </goab-block>
+          </goab-container>
+        }
       </goab-block>
     </goab-block>
   </goab-details>
@@ -38,26 +41,28 @@
         <goab-container type="interactive" padding="relaxed">
           <goab-text tag="h3" size="heading-s">Text sizes</goab-text>
           <goab-block gap="xs" direction="column">
-            <goab-text
-              *ngFor="let size of textSizes"
-              [tag]="size.startsWith('heading') ? 'h4' : 'p'"
-              [size]="size"
-            >
-              {{ size }}
-            </goab-text>
+            @for (size of textSizes; track $index) {
+              <goab-text
+                [tag]="size.startsWith('heading') ? 'h4' : 'p'"
+                [size]="size"
+              >
+                {{ size }}
+              </goab-text>
+            }
           </goab-block>
         </goab-container>
         <goab-container type="interactive" padding="relaxed">
           <goab-text tag="h3" size="heading-s">Text colors</goab-text>
           <goab-block gap="xs" direction="column">
-            <goab-text
-              *ngFor="let colour of textColors"
-              tag="p"
-              size="body-m"
-              [color]="colour"
-            >
-              {{ colour | titlecase }} text
-            </goab-text>
+            @for (colour of textColors; track $index) {
+              <goab-text
+                tag="p"
+                size="body-m"
+                [color]="colour"
+              >
+                {{ colour | titlecase }} text
+              </goab-text>
+            }
           </goab-block>
         </goab-container>
         <goab-container type="interactive" padding="relaxed">
@@ -77,18 +82,19 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Containers</goab-text>
         <goab-grid minChildWidth="240px" gap="m">
-          <goab-container
-            *ngFor="let type of containerTypes; let idx = index"
-            [type]="type"
-            [accent]="containerAccents[idx % containerAccents.length]"
-            [padding]="containerPaddings[idx % containerPaddings.length]"
-            [width]="containerWidths[idx % containerWidths.length]"
-          >
-            <goab-text tag="p" size="body-m">
-              Type: {{ type }}<br />
-              Accent: {{ containerAccents[idx % containerAccents.length] || "none" }}
-            </goab-text>
-          </goab-container>
+          @for (type of containerTypes; track $index; let idx = $index) {
+            <goab-container
+              [type]="type"
+              [accent]="containerAccents[idx % containerAccents.length]"
+              [padding]="containerPaddings[idx % containerPaddings.length]"
+              [width]="containerWidths[idx % containerWidths.length]"
+            >
+              <goab-text tag="p" size="body-m">
+                Type: {{ type }}<br />
+                Accent: {{ containerAccents[idx % containerAccents.length] || "none" }}
+              </goab-text>
+            </goab-container>
+          }
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
@@ -169,37 +175,40 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Buttons by type</goab-text>
         <goab-grid minChildWidth="160px" gap="m">
-          <goab-button
-            *ngFor="let type of buttonTypes"
-            [type]="type"
-            (onClick)="onButtonClick(type)"
-          >
-            {{ type | titlecase }} button
-          </goab-button>
+          @for (type of buttonTypes; track $index) {
+            <goab-button
+              [type]="type"
+              (onClick)="onButtonClick(type)"
+            >
+              {{ type | titlecase }} button
+            </goab-button>
+          }
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Variants & sizes</goab-text>
         <goab-block gap="m" direction="column">
-          <goab-block
-            *ngFor="let variant of buttonVariants"
-            gap="s"
-            direction="row"
-            alignment="center"
-          >
-            <goab-text tag="span" size="body-m" mb="none">
-              {{ variant | titlecase }}
-            </goab-text>
-            <goab-button
-              *ngFor="let size of buttonSizes"
-              [type]="'primary'"
-              [variant]="variant"
-              [size]="size"
-              (onClick)="onButtonClick('primary', variant, size)"
+          @for (variant of buttonVariants; track $index) {
+            <goab-block
+              gap="s"
+              direction="row"
+              alignment="center"
             >
-              {{ size }} / {{ variant }}
-            </goab-button>
-          </goab-block>
+              <goab-text tag="span" size="body-m" mb="none">
+                {{ variant | titlecase }}
+              </goab-text>
+              @for (size of buttonSizes; track $index) {
+                <goab-button
+                  [type]="'primary'"
+                  [variant]="variant"
+                  [size]="size"
+                  (onClick)="onButtonClick('primary', variant, size)"
+                >
+                  {{ size }} / {{ variant }}
+                </goab-button>
+              }
+            </goab-block>
+          }
         </goab-block>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
@@ -217,33 +226,37 @@
             >
           </goab-button-group>
           <goab-block gap="xs" direction="column">
-            <goab-link *ngFor="let linkType of linkButtonTypes" [action]="linkType">
-              {{ linkType | titlecase }} link (action logged)
-            </goab-link>
+            @for (linkType of linkButtonTypes; track $index) {
+              <goab-link [action]="linkType">
+                {{ linkType | titlecase }} link (action logged)
+              </goab-link>
+            }
           </goab-block>
         </goab-block>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Icon buttons & icons</goab-text>
         <goab-grid minChildWidth="160px" gap="m">
-          <goab-icon-button
-            *ngFor="let variant of iconButtonVariants; let idx = index"
-            [variant]="variant"
-            [icon]="iconTypes[idx % iconTypes.length]"
-            title="{{ variant }} icon button"
-            (onClick)="onIconButtonClick(variant)"
-          />
+          @for (variant of iconButtonVariants; track $index; let idx = $index) {
+            <goab-icon-button
+              [variant]="variant"
+              [icon]="iconTypes[idx % iconTypes.length]"
+              title="{{ variant }} icon button"
+              (onClick)="onIconButtonClick(variant)"
+            />
+          }
         </goab-grid>
         <goab-text tag="p" size="body-s">
           Click counts: {{ iconButtonClickCount | json }}
         </goab-text>
         <goab-grid minChildWidth="120px" gap="s" mt="s">
-          <goab-icon
-            *ngFor="let icon of iconTypes; let idx = index"
-            [type]="icon"
-            [size]="getIconSize(idx)"
-            [theme]="idx % 2 === 0 ? 'outline' : 'filled'"
-          ></goab-icon>
+          @for (icon of iconTypes; track $index; let idx = $index) {
+            <goab-icon
+              [type]="icon"
+              [size]="getIconSize(idx)"
+              [theme]="idx % 2 === 0 ? 'outline' : 'filled'"
+            ></goab-icon>
+          }
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
@@ -256,8 +269,11 @@
         </goab-menu-button>
         <goab-text tag="p" size="body-s" mt="s">
           Latest menu action:
-          <strong *ngIf="menuAction; else noMenuAction">{{ menuAction }}</strong>
-          <ng-template #noMenuAction>pending</ng-template>
+          @if (menuAction) {
+            <strong>{{ menuAction }}</strong>
+          } @else {
+            pending
+          }
         </goab-text>
       </goab-container>
     </goab-block>
@@ -267,11 +283,12 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Badge palette</goab-text>
         <goab-grid minChildWidth="140px" gap="s">
-          <goab-badge
-            *ngFor="let badgeType of badgeTypes"
-            [type]="badgeType"
-            [content]="badgeType"
-          />
+          @for (badgeType of badgeTypes; track $index) {
+            <goab-badge
+              [type]="badgeType"
+              [content]="badgeType"
+            />
+          }
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
@@ -299,12 +316,13 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Filter chips</goab-text>
         <goab-block gap="m" direction="row">
-          <goab-filter-chip
-            *ngFor="let theme of filterChipThemes"
-            [content]="theme + ' theme'"
-            [iconTheme]="theme"
-            (onClick)="onFilterChipClick(theme)"
-          ></goab-filter-chip>
+          @for (theme of filterChipThemes; track $index) {
+            <goab-filter-chip
+              [content]="theme + ' theme'"
+              [iconTheme]="theme"
+              (onClick)="onFilterChipClick(theme)"
+            ></goab-filter-chip>
+          }
         </goab-block>
         <goab-text tag="p" size="body-s"
           >Filter chip clicks: {{ filterChipClicks }}</goab-text
@@ -339,18 +357,19 @@
               Value: {{ textInputValue }}
             </goab-form-item-slot>
           </goab-form-item>
-          <goab-form-item
-            *ngFor="let size of formItemLabelSizes"
-            [label]="'Label ' + size"
-            [labelSize]="size"
-            [requirement]="formItemRequirements[0]"
-          >
-            <goab-input
-              name="input-{{ size }}"
-              [placeholder]="'Label size: ' + size"
-              (onChange)="onInputChange($event)"
-            ></goab-input>
-          </goab-form-item>
+          @for (size of formItemLabelSizes; track $index) {
+            <goab-form-item
+              [label]="'Label ' + size"
+              [labelSize]="size"
+              [requirement]="formItemRequirements[0]"
+            >
+              <goab-input
+                name="input-{{ size }}"
+                [placeholder]="'Label size: ' + size"
+                (onChange)="onInputChange($event)"
+              ></goab-input>
+            </goab-form-item>
+          }
         </goab-grid>
         <goab-text tag="p" size="body-s" mt="s">
           Trailing icon clicks: {{ inputTrailingClicks }}
@@ -478,12 +497,13 @@
               placeholder="Select mounts"
               (onChange)="onDropdownChange($event)"
             >
-              <goab-dropdown-item
-                *ngFor="let mount of dropdownMountTypes; let idx = index"
-                [value]="mount"
-                [label]="mount | titlecase"
-                [mountType]="mount"
-              />
+              @for (mount of dropdownMountTypes; track $index; let idx = $index) {
+                <goab-dropdown-item
+                  [value]="mount"
+                  [label]="mount | titlecase"
+                  [mountType]="mount"
+                />
+              }
             </goab-dropdown>
             <goab-form-item-slot slot="helptext">
               Selected: {{ dropdownMultiSelection || "None" }}
@@ -501,11 +521,12 @@
               [value]="linkedDropdownCategory"
               (onChange)="onLinkedDropdownCategoryChange($event)"
             >
-              <goab-dropdown-item
-                *ngFor="let option of linkedDropdownCategories"
-                [value]="option.value"
-                [label]="option.label"
-              />
+              @for (option of linkedDropdownCategories; track option.value) {
+                <goab-dropdown-item
+                  [value]="option.value"
+                  [label]="option.label"
+                />
+              }
             </goab-dropdown>
             <goab-form-item-slot slot="helptext">
               Selected: {{ linkedDropdownCategory | titlecase }}
@@ -521,11 +542,12 @@
               [value]="linkedDropdownItem"
               (onChange)="onLinkedDropdownItemChange($event)"
             >
-              <goab-dropdown-item
-                *ngFor="let option of dependentDropdownItems"
-                [value]="option.value"
-                [label]="option.label"
-              />
+              @for (option of dependentDropdownItems; track option.value) {
+                <goab-dropdown-item
+                  [value]="option.value"
+                  [label]="option.label"
+                />
+              }
             </goab-dropdown>
             <goab-form-item-slot slot="helptext">
               Selected:
@@ -569,11 +591,12 @@
                 [value]="reactiveDemoForm.get('radio')?.value || undefined"
                 formControlName="radio"
               >
-                <goab-radio-item
-                  *ngFor="let option of reactiveRadioOptions"
-                  [value]="option.value"
-                  [label]="option.label"
-                ></goab-radio-item>
+                @for (option of reactiveRadioOptions; track option.value) {
+                  <goab-radio-item
+                    [value]="option.value"
+                    [label]="option.label"
+                  ></goab-radio-item>
+                }
               </goab-radio-group>
             </goab-form-item>
             <goab-form-item
@@ -606,11 +629,12 @@
                 [value]="reactiveDemoForm.get('dropdown')?.value || ''"
                 formControlName="dropdown"
               >
-                <goab-dropdown-item
-                  *ngFor="let option of reactiveDropdownOptions"
-                  [value]="option.value"
-                  [label]="option.label"
-                />
+                @for (option of reactiveDropdownOptions; track option.value) {
+                  <goab-dropdown-item
+                    [value]="option.value"
+                    [label]="option.label"
+                  />
+                }
               </goab-dropdown>
             </goab-form-item>
             <goab-form-item
@@ -632,12 +656,13 @@
                 [value]="reactiveDemoForm.get('checkboxList')?.value || []"
                 formControlName="checkboxList"
               >
-                <goab-checkbox
-                  *ngFor="let option of reactiveCheckboxListOptions"
-                  [name]="'interest-' + option.value"
-                  [value]="option.value"
-                  [text]="option.label"
-                ></goab-checkbox>
+                @for (option of reactiveCheckboxListOptions; track option.value) {
+                  <goab-checkbox
+                    [name]="'interest-' + option.value"
+                    [value]="option.value"
+                    [text]="option.label"
+                  ></goab-checkbox>
+                }
               </goab-checkbox-list>
             </goab-form-item>
             <goab-form-item
@@ -745,11 +770,12 @@
           [step]="formStepperState.step"
           (onChange)="onFormStepperChange($event)"
         >
-          <goab-form-step
-            *ngFor="let status of formStepStatuses; let idx = index"
-            [text]="'Step ' + (idx + 1)"
-            [status]="status"
-          ></goab-form-step>
+          @for (status of formStepStatuses; track $index; let idx = $index) {
+            <goab-form-step
+              [text]="'Step ' + (idx + 1)"
+              [status]="status"
+            ></goab-form-step>
+          }
         </goab-form-stepper>
         <goab-text tag="p" size="body-s" mt="s">
           Active step: {{ formStepperState.step }}
@@ -789,18 +815,19 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Callouts</goab-text>
         <goab-grid minChildWidth="260px" gap="m">
-          <goab-callout
-            *ngFor="let type of calloutTypes; let idx = index"
-            [type]="type"
-            heading="{{ type | titlecase }}"
-            [iconTheme]="calloutIconThemes[idx % calloutIconThemes.length]"
-          >
-            <goab-text tag="p" size="body-m">
-              This is a {{ type }} callout using the
-              {{ calloutIconThemes[idx % calloutIconThemes.length] }}
-              icon theme.
-            </goab-text>
-          </goab-callout>
+          @for (type of calloutTypes; track $index; let idx = $index) {
+            <goab-callout
+              [type]="type"
+              heading="{{ type | titlecase }}"
+              [iconTheme]="calloutIconThemes[idx % calloutIconThemes.length]"
+            >
+              <goab-text tag="p" size="body-m">
+                This is a {{ type }} callout using the
+                {{ calloutIconThemes[idx % calloutIconThemes.length] }}
+                icon theme.
+              </goab-text>
+            </goab-callout>
+          }
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
@@ -884,11 +911,12 @@
         <goab-grid minChildWidth="200px" gap="m">
           <goab-block direction="column" gap="xs">
             <goab-text tag="span" size="body-m">Circular progress</goab-text>
-            <goab-circular-progress
-              *ngFor="let variant of circularProgressVariants; let idx = index"
-              [variant]="variant"
-              [size]="circularProgressSizes[idx % circularProgressSizes.length]"
-            ></goab-circular-progress>
+            @for (variant of circularProgressVariants; track $index; let idx = $index) {
+              <goab-circular-progress
+                [variant]="variant"
+                [size]="circularProgressSizes[idx % circularProgressSizes.length]"
+              ></goab-circular-progress>
+            }
           </goab-block>
           <goab-block direction="column" gap="xs">
             <goab-text tag="span" size="body-m">Linear progress</goab-text>
@@ -911,12 +939,13 @@
           </goab-block>
           <goab-block direction="column" gap="xs">
             <goab-text tag="span" size="body-m">Skeletons</goab-text>
-            <goab-skeleton
-              *ngFor="let skeleton of skeletonTypes; let idx = index"
-              [type]="skeleton"
-              [size]="skeletonSizes[idx % skeletonSizes.length]"
-              [lineCount]="idx + 1"
-            ></goab-skeleton>
+            @for (skeleton of skeletonTypes; track $index; let idx = $index) {
+              <goab-skeleton
+                [type]="skeleton"
+                [size]="skeletonSizes[idx % skeletonSizes.length]"
+                [lineCount]="idx + 1"
+              ></goab-skeleton>
+            }
           </goab-block>
         </goab-grid>
         <goab-block direction="row" gap="m" mt="m">
@@ -952,20 +981,21 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Accordion & Tabs</goab-text>
         <goab-grid minChildWidth="320px" gap="m">
-          <goab-accordion
-            *ngFor="let headingSize of accordionHeadingSizes; let idx = index"
-            [heading]="'Accordion ' + (idx + 1)"
-            [headingSize]="headingSize"
-            [iconPosition]="accordionIconPositions[idx % accordionIconPositions.length]"
-            [headingContent]="accordionHeadingExtra"
-            [open]="idx === 0"
-            (onChange)="onAccordionChange('Accordion ' + (idx + 1), $event)"
-          >
-            <goab-text tag="p" size="body-m">
-              Accordion content for {{ headingSize }} heading. Toggle to emit change
-              events.
-            </goab-text>
-          </goab-accordion>
+          @for (headingSize of accordionHeadingSizes; track $index; let idx = $index) {
+            <goab-accordion
+              [heading]="'Accordion ' + (idx + 1)"
+              [headingSize]="headingSize"
+              [iconPosition]="accordionIconPositions[idx % accordionIconPositions.length]"
+              [headingContent]="accordionHeadingExtra"
+              [open]="idx === 0"
+              (onChange)="onAccordionChange('Accordion ' + (idx + 1), $event)"
+            >
+              <goab-text tag="p" size="body-m">
+                Accordion content for {{ headingSize }} heading. Toggle to emit change
+                events.
+              </goab-text>
+            </goab-accordion>
+          }
         </goab-grid>
         <goab-text tag="p" size="body-s" mt="s">
           Last toggle: {{ accordionLastToggle?.heading || "None" }} →
@@ -1045,7 +1075,8 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Data Grid (Keyboard Navigation)</goab-text>
         <goab-text tag="p" size="body-s" mb="m">
-          The data grid wraps a table to enable keyboard navigation. Use arrow keys to move between cells.
+          The data grid wraps a table to enable keyboard navigation. Use arrow keys to
+          move between cells.
         </goab-text>
         <goab-data-grid keyboardNav="table">
           <goab-table width="100%">
@@ -1064,7 +1095,10 @@
                   <td data-grid="cell">{{ row.name }}</td>
                   <td data-grid="cell">{{ row.created }}</td>
                   <td data-grid="cell">
-                    <goab-badge [type]="row.status === 'Active' ? 'success' : 'important'" [content]="row.status"></goab-badge>
+                    <goab-badge
+                      [type]="row.status === 'Active' ? 'success' : 'important'"
+                      [content]="row.status"
+                    ></goab-badge>
                   </td>
                   <td data-grid="cell">{{ row.progress }}%</td>
                   <td data-grid="cell">

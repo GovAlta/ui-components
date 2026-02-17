@@ -6,21 +6,18 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-table-sort-header",
   template: `
-    <goa-table-sort-header
-      *ngIf="isReady"
-      [attr.name]="name"
-      [attr.direction]="direction"
-    >
-      <ng-content />
-    </goa-table-sort-header>
+    @if (isReady) {
+      <goa-table-sort-header [attr.name]="name" [attr.direction]="direction">
+        <ng-content />
+      </goa-table-sort-header>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxTableSortHeader implements OnInit {

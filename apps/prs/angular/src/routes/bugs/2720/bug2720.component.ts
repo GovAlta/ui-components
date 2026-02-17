@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabTabs,
   GoabTab,
@@ -16,16 +16,7 @@ import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
   selector: "abgov-bug2720",
   templateUrl: "./bug2720.component.html",
   styleUrls: ["./bug2720.component.css"],
-  imports: [
-    CommonModule,
-    GoabTabs,
-    GoabTab,
-    GoabBlock,
-    GoabText,
-    GoabButton,
-    GoabLink,
-    GoabBadge,
-  ],
+  imports: [GoabTabs, GoabTab, GoabBlock, GoabText, GoabButton, GoabLink, GoabBadge],
 })
 export class Bug2720Component {
   currentTab = 0;

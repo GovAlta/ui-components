@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgStyle } from "@angular/common";
 import {
   GoabDatePicker,
   GoabDatePickerOnChangeDetail,
@@ -41,7 +41,6 @@ interface ScenarioMeasurement {
   templateUrl: "./feat1813.component.html",
   styleUrls: ["./feat1813.component.css"],
   imports: [
-    CommonModule,
     GoabDatePicker,
     GoabPopover,
     GoabButton,
@@ -52,6 +51,7 @@ interface ScenarioMeasurement {
     ReactiveFormsModule,
     FormsModule,
     GoabBlock,
+    NgStyle,
   ],
 })
 export class Feat1813Component implements OnInit, AfterViewInit, OnDestroy {

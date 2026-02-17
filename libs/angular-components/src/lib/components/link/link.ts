@@ -1,28 +1,34 @@
 import { GoabIconType, Spacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "goab-link",
   template: `
-    <goa-link
-      *ngIf="isReady"
-      [attr.leadingicon]="leadingIcon"
-      [attr.trailingicon]="trailingIcon"
-      [attr.testid]="testId"
-      [attr.action]="action"
-      [attr.action-arg]="actionArg"
-      [attr.action-args]="JSON.stringify(actionArgs)"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-    </goa-link>
+    @if (isReady) {
+      <goa-link
+        [attr.leadingicon]="leadingIcon"
+        [attr.trailingicon]="trailingIcon"
+        [attr.testid]="testId"
+        [attr.action]="action"
+        [attr.action-arg]="actionArg"
+        [attr.action-args]="JSON.stringify(actionArgs)"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-link>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabLink implements OnInit {

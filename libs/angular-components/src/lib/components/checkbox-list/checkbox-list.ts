@@ -11,31 +11,32 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-checkbox-list",
-  template: ` <goa-checkbox-list
-    *ngIf="isReady"
-    [attr.name]="name"
-    [value]="value"
-    [disabled]="disabled"
-    [attr.error]="error"
-    [attr.testid]="testId"
-    [id]="id"
-    [attr.maxwidth]="maxWidth"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    [attr.mr]="mr"
-    (_change)="_onChange($event)"
-  >
-    <ng-content />
-  </goa-checkbox-list>`,
+  template: ` @if (isReady) {
+    <goa-checkbox-list
+      [attr.name]="name"
+      [value]="value"
+      [disabled]="disabled"
+      [attr.error]="error"
+      [attr.testid]="testId"
+      [id]="id"
+      [attr.maxwidth]="maxWidth"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+      (_change)="_onChange($event)"
+    >
+      <ng-content />
+    </goa-checkbox-list>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
+
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -70,7 +71,10 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
 
   _onChange(e: Event) {
     try {
-      const detail = { ...(e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail, event: e };
+      const detail = {
+        ...(e as CustomEvent<GoabCheckboxListOnChangeDetail>).detail,
+        event: e,
+      };
       this.onChange.emit(detail);
       this.markAsTouched();
 

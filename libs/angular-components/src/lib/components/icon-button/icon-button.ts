@@ -13,35 +13,35 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-icon-button",
   template: `
-    <goa-icon-button
-      *ngIf="isReady"
-      [attr.icon]="icon"
-      [disabled]="disabled"
-      [attr.size]="size"
-      [attr.variant]="variant"
-      [title]="title"
-      [attr.arialabel]="ariaLabel"
-      [attr.testid]="testId"
-      [attr.action]="action"
-      [attr.action-arg]="actionArg"
-      [attr.action-args]="JSON.stringify(actionArgs)"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_click)="_onClick()"
-    >
-      <ng-content></ng-content>
-    </goa-icon-button>
+    @if (isReady) {
+      <goa-icon-button
+        [attr.icon]="icon"
+        [disabled]="disabled"
+        [attr.size]="size"
+        [attr.variant]="variant"
+        [title]="title"
+        [attr.arialabel]="ariaLabel"
+        [attr.testid]="testId"
+        [attr.action]="action"
+        [attr.action-arg]="actionArg"
+        [attr.action-args]="JSON.stringify(actionArgs)"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        (_click)="_onClick()"
+      >
+        <ng-content></ng-content>
+      </goa-icon-button>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabIconButton extends GoabBaseComponent implements OnInit {
@@ -72,6 +72,4 @@ export class GoabIconButton extends GoabBaseComponent implements OnInit {
   _onClick() {
     this.onClick.emit();
   }
-
-
 }

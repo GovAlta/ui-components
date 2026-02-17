@@ -5,24 +5,22 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
 @Component({
   standalone: true,
   selector: "goab-linear-progress",
   template: `
-    <goa-linear-progress
-      *ngIf="isReady"
-      [attr.progress]="progress"
-      [attr.percent-visibility]="percentVisibility"
-      [attr.aria-label]="ariaLabel"
-      [attr.aria-labelledby]="ariaLabelledBy"
-      [attr.testid]="testid"
-    >
-    </goa-linear-progress>
+    @if (isReady) {
+      <goa-linear-progress
+        [attr.progress]="progress"
+        [attr.percent-visibility]="percentVisibility"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.testid]="testid"
+      >
+      </goa-linear-progress>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabLinearProgress implements OnInit {
   @Input() progress?: number | null | undefined;

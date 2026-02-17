@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabBlock,
@@ -12,14 +11,7 @@ import {
   standalone: true,
   selector: "abgov-feat3102",
   templateUrl: "./feat3102.component.html",
-  imports: [
-    CommonModule,
-    GoabBlock,
-    GoabMenuAction,
-    GoabMenuButton,
-    GoabText,
-    GoabDivider,
-  ],
+  imports: [GoabBlock, GoabMenuAction, GoabMenuButton, GoabText, GoabDivider],
 })
 export class Feat3102Component {
   onAction(e: unknown) {

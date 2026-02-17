@@ -12,26 +12,25 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-file-upload-card",
-  template: `<goa-file-upload-card
-    *ngIf="isReady"
-    [attr.version]="version"
-    [attr.filename]="filename"
-    [attr.size]="size"
-    [attr.type]="type"
-    [attr.progress]="progress"
-    [attr.error]="error"
-    [attr.testid]="testId"
-    (_cancel)="_onCancel($event)"
-    (_delete)="_onDelete($event)"
-  >
-  </goa-file-upload-card>`,
+  template: ` @if (isReady) {
+    <goa-file-upload-card
+      [attr.version]="version"
+      [attr.filename]="filename"
+      [attr.size]="size"
+      [attr.type]="type"
+      [attr.progress]="progress"
+      [attr.error]="error"
+      [attr.testid]="testId"
+      (_cancel)="_onCancel($event)"
+      (_delete)="_onDelete($event)"
+    >
+    </goa-file-upload-card>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabxFileUploadCard implements OnInit {
   @Input({ required: true }) filename!: string;

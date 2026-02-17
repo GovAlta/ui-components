@@ -7,9 +7,7 @@ import { By } from "@angular/platform-browser";
   standalone: true,
   imports: [GoabPublicFormTaskList],
   template: `
-    <goab-public-form-task-list
-      [heading]="heading"
-    >
+    <goab-public-form-task-list [heading]="heading">
       <div data-testid="task-item-1">Task 1</div>
       <div data-testid="task-item-2">Task 2</div>
     </goab-public-form-task-list>
@@ -36,7 +34,9 @@ describe("GoabPublicFormTaskList", () => {
   it("should render with heading property", () => {
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(By.css("goa-public-form-task-list")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-public-form-task-list"),
+    ).nativeElement;
 
     expect(el?.getAttribute("heading")).toBe(component.heading);
 
@@ -54,7 +54,9 @@ describe("GoabPublicFormTaskList", () => {
     // Initial heading
     fixture.detectChanges();
 
-    let el = fixture.debugElement.query(By.css("goa-public-form-task-list")).nativeElement;
+    let el = fixture.debugElement.query(
+      By.css("goa-public-form-task-list"),
+    ).nativeElement;
     expect(el?.getAttribute("heading")).toBe("Required Tasks");
 
     // Change heading
@@ -76,14 +78,18 @@ describe("GoabPublicFormTaskList", () => {
     component.heading = undefined as any;
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(By.css("goa-public-form-task-list")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-public-form-task-list"),
+    ).nativeElement;
     expect(el?.hasAttribute("heading")).toBeFalsy();
   });
 
   it("should handle multiple nested elements", () => {
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(By.css("goa-public-form-task-list")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-public-form-task-list"),
+    ).nativeElement;
     const taskItems = el?.querySelectorAll("[data-testid^='task-item']");
 
     expect(taskItems?.length).toBe(2);
@@ -96,15 +102,17 @@ describe("GoabPublicFormTaskList", () => {
       "Tasks & Requirements",
       "Tasks > 5",
       "Tasks < 10",
-      "Tasks with \"quotes\"",
+      'Tasks with "quotes"',
       "Tasks with 'apostrophes'",
     ];
 
-    specialHeadings.forEach(heading => {
+    specialHeadings.forEach((heading) => {
       component.heading = heading;
       fixture.detectChanges();
 
-      const el = fixture.debugElement.query(By.css("goa-public-form-task-list")).nativeElement;
+      const el = fixture.debugElement.query(
+        By.css("goa-public-form-task-list"),
+      ).nativeElement;
       expect(el?.getAttribute("heading")).toBe(heading);
     });
   });

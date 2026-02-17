@@ -7,43 +7,43 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-radio-item",
   template: `
-    <goa-radio-item
-      *ngIf="isReady"
-      [attr.name]="name"
-      [attr.value]="value"
-      [attr.label]="label"
-      [attr.description]="getDescriptionAsString()"
-      [attr.arialabel]="ariaLabel"
-      [attr.revealarialabel]="revealAriaLabel"
-      [disabled]="disabled"
-      [attr.maxwidth]="maxWidth"
-      [attr.checked]="checked"
-      [attr.error]="error"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-      <div slot="description">
-        <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
-      </div>
-      <div slot="reveal">
-        <ng-container
-          *ngIf="this.reveal"
-          [ngTemplateOutlet]="reveal"
-        ></ng-container>
-      </div>
-    </goa-radio-item>
-    `,
-  imports: [NgTemplateOutlet, CommonModule],
+    @if (isReady) {
+      <goa-radio-item
+        [attr.name]="name"
+        [attr.value]="value"
+        [attr.label]="label"
+        [attr.description]="getDescriptionAsString()"
+        [attr.arialabel]="ariaLabel"
+        [attr.revealarialabel]="revealAriaLabel"
+        [disabled]="disabled"
+        [attr.maxwidth]="maxWidth"
+        [attr.checked]="checked"
+        [attr.error]="error"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+        <div slot="description">
+          <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
+        </div>
+        <div slot="reveal">
+          @if (this.reveal) {
+            <ng-container [ngTemplateOutlet]="reveal"></ng-container>
+          }
+        </div>
+      </goa-radio-item>
+    }
+  `,
+  imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabRadioItem extends GoabBaseComponent {

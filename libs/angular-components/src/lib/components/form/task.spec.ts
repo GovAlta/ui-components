@@ -8,9 +8,7 @@ import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
   standalone: true,
   imports: [GoabPublicFormTask],
   template: `
-    <goab-public-form-task
-      [status]="status"
-    >
+    <goab-public-form-task [status]="status">
       <div data-testid="content">Task content</div>
     </goab-public-form-task>
   `,
@@ -50,9 +48,13 @@ describe("GoabPublicFormTask", () => {
   });
 
   it("should handle all valid status values", () => {
-    const statuses: GoabPublicFormTaskStatus[] = ["completed", "not-started", "cannot-start"];
+    const statuses: GoabPublicFormTaskStatus[] = [
+      "completed",
+      "not-started",
+      "cannot-start",
+    ];
 
-    statuses.forEach(status => {
+    statuses.forEach((status) => {
       component.status = status;
       fixture.detectChanges();
 

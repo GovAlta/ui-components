@@ -29,11 +29,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of tableData">
+    @for (row of tableData; track $index) {
+          <tr>
             <td>{{ row.firstName }}</td>
             <td>{{ row.lastName }}</td>
             <td class="goa-table-number-column">{{ row.numberCol }}</td>
           </tr>
+    }
         </tbody>
       </goab-table>
     </div>

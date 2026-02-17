@@ -1,20 +1,23 @@
 import { GoabPageBlockSize } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "goab-page-block",
   template: `
-    <goa-page-block
-      *ngIf="isReady"
-      [attr.width]="width"
-      [attr.testid]="testId"
-    >
-      <ng-content></ng-content>
-    </goa-page-block>
+    @if (isReady) {
+      <goa-page-block [attr.width]="width" [attr.testid]="testId">
+        <ng-content></ng-content>
+      </goa-page-block>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPageBlock implements OnInit {

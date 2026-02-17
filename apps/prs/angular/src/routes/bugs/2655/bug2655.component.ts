@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabButton,
   GoabModal,
@@ -13,7 +13,6 @@ import {
   selector: "abgov-bug2655",
   standalone: true,
   imports: [
-    CommonModule,
     GoabButton,
     GoabModal,
     GoabDatePicker,

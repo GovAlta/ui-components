@@ -7,7 +7,6 @@ import {
   GoabInput,
 } from "@abgov/angular-components";
 import { GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
-import { NgFor } from "@angular/common";
 
 // US State Capitals
 const US_CAPITALS = [
@@ -67,7 +66,7 @@ const US_CAPITALS = [
   selector: "abgov-bug2852",
   templateUrl: "./bug2852.component.html",
   standalone: true,
-  imports: [GoabBlock, GoabDropdown, GoabFormItem, GoabDropdownItem, GoabInput, NgFor],
+  imports: [GoabBlock, GoabDropdown, GoabFormItem, GoabDropdownItem, GoabInput],
 })
 export class Bug2852Component {
   selectedCapital: string | number = "";

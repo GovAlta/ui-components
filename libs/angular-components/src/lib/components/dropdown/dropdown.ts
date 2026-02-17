@@ -12,44 +12,45 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+
 import { GoabControlValueAccessor } from "../base.component";
 
 // "disabled", "value", "id" is an exposed property of HTMLInputElement, no need to bind with attr
 @Component({
   standalone: true,
   selector: "goab-dropdown",
-  imports: [CommonModule],
+
   template: `
-    <goa-dropdown
-      #goaComponentRef
-      *ngIf="isReady"
-      [attr.name]="name"
-      [value]="value"
-      [attr.arialabel]="ariaLabel"
-      [attr.arialabelledby]="ariaLabelledBy"
-      [disabled]="disabled"
-      [attr.error]="error"
-      [attr.filterable]="filterable"
-      [attr.leadingicon]="leadingIcon"
-      [attr.maxheight]="maxHeight"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      [attr.mt]="mt"
-      [attr.multiselect]="multiselect"
-      [attr.native]="native"
-      [attr.placeholder]="placeholder"
-      [attr.testid]="testId"
-      [attr.width]="width"
-      [attr.maxwidth]="maxWidth"
-      [attr.relative]="relative"
-      [attr.autocomplete]="autoComplete"
-      [id]="id"
-      (_change)="_onChange($event)"
-    >
-      <ng-content />
-    </goa-dropdown>
+    @if (isReady) {
+      <goa-dropdown
+        #goaComponentRef
+        [attr.name]="name"
+        [value]="value"
+        [attr.arialabel]="ariaLabel"
+        [attr.arialabelledby]="ariaLabelledBy"
+        [disabled]="disabled"
+        [attr.error]="error"
+        [attr.filterable]="filterable"
+        [attr.leadingicon]="leadingIcon"
+        [attr.maxheight]="maxHeight"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        [attr.mt]="mt"
+        [attr.multiselect]="multiselect"
+        [attr.native]="native"
+        [attr.placeholder]="placeholder"
+        [attr.testid]="testId"
+        [attr.width]="width"
+        [attr.maxwidth]="maxWidth"
+        [attr.relative]="relative"
+        [attr.autocomplete]="autoComplete"
+        [id]="id"
+        (_change)="_onChange($event)"
+      >
+        <ng-content />
+      </goa-dropdown>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

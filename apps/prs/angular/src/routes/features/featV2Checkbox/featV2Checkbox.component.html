@@ -6,8 +6,8 @@
   </goab-text>
   <goab-block direction="column" gap="s" mb="m">
     <goab-text size="body-s">
-      1. <strong>Checkbox auto-margin removed</strong> - Checkboxes no longer have
-      default bottom margin, fixing alignment in tables
+      1. <strong>Checkbox auto-margin removed</strong> - Checkboxes no longer have default
+      bottom margin, fixing alignment in tables
     </goab-text>
     <goab-text size="body-s">
       2. <strong>CheckboxList gap</strong> - CheckboxList now controls its own spacing
@@ -22,8 +22,8 @@
     Test 1: Checkbox in Table
   </goab-text>
   <goab-text size="body-s" mb="m">
-    Previously, checkboxes in tables had unwanted bottom margin causing misalignment.
-    Now they align properly with the row content.
+    Previously, checkboxes in tables had unwanted bottom margin causing misalignment. Now
+    they align properly with the row content.
   </goab-text>
 
   <goab-table width="100%">
@@ -44,19 +44,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of tableData">
-        <td>
-          <goabx-checkbox
-            [name]="'select-' + row.id"
-            [checked]="isRowSelected(row.id)"
-            (onChange)="toggleRow(row.id, $event)"
-            [ariaLabel]="'Select ' + row.name"
-          ></goabx-checkbox>
-        </td>
-        <td>{{ row.name }}</td>
-        <td>{{ row.email }}</td>
-        <td>{{ row.status }}</td>
-      </tr>
+      @for (row of tableData; track row.id) {
+        <tr>
+          <td>
+            <goabx-checkbox
+              [name]="'select-' + row.id"
+              [checked]="isRowSelected(row.id)"
+              (onChange)="toggleRow(row.id, $event)"
+              [ariaLabel]="'Select ' + row.name"
+            ></goabx-checkbox>
+          </td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.email }}</td>
+          <td>{{ row.status }}</td>
+        </tr>
+      }
     </tbody>
   </goab-table>
 
@@ -86,7 +88,7 @@
   </goabx-checkbox-list>
 
   <goab-text size="body-xs" mt="m">
-    Selected: {{ checkboxListValue.length > 0 ? checkboxListValue.join(', ') : 'none' }}
+    Selected: {{ checkboxListValue.length > 0 ? checkboxListValue.join(", ") : "none" }}
   </goab-text>
 
   <goab-divider mt="xl"></goab-divider>
@@ -105,13 +107,25 @@
     [value]="compactListValue"
     (onChange)="onCompactListChange($event)"
   >
-    <goabx-checkbox name="compact1" size="compact" text="Compact option 1"></goabx-checkbox>
-    <goabx-checkbox name="compact2" size="compact" text="Compact option 2"></goabx-checkbox>
-    <goabx-checkbox name="compact3" size="compact" text="Compact option 3"></goabx-checkbox>
+    <goabx-checkbox
+      name="compact1"
+      size="compact"
+      text="Compact option 1"
+    ></goabx-checkbox>
+    <goabx-checkbox
+      name="compact2"
+      size="compact"
+      text="Compact option 2"
+    ></goabx-checkbox>
+    <goabx-checkbox
+      name="compact3"
+      size="compact"
+      text="Compact option 3"
+    ></goabx-checkbox>
   </goabx-checkbox-list>
 
   <goab-text size="body-xs" mt="m">
-    Selected: {{ compactListValue.length > 0 ? compactListValue.join(', ') : 'none' }}
+    Selected: {{ compactListValue.length > 0 ? compactListValue.join(", ") : "none" }}
   </goab-text>
 
   <goab-divider mt="xl"></goab-divider>
@@ -121,8 +135,8 @@
     Test 4: V2 Standalone Checkbox (No Auto-Margin)
   </goab-text>
   <goab-text size="body-s" mb="m">
-    V2 checkboxes no longer have default bottom margin.
-    Spacing should be controlled by the parent layout.
+    V2 checkboxes no longer have default bottom margin. Spacing should be controlled by
+    the parent layout.
   </goab-text>
 
   <goab-block direction="row" gap="xl" alignment="center">
@@ -138,9 +152,7 @@
   <goab-divider mt="xl"></goab-divider>
 
   <!-- V1 Regression Tests -->
-  <goab-text tag="h2" size="heading-l" mt="xl" mb="m">
-    V1 Regression Tests
-  </goab-text>
+  <goab-text tag="h2" size="heading-l" mt="xl" mb="m"> V1 Regression Tests </goab-text>
   <goab-text size="body-s" mb="m">
     These tests verify V1 checkboxes still behave correctly after the V2 spacing changes.
   </goab-text>
@@ -154,8 +166,14 @@
   </goab-text>
 
   <div style="border: 1px dashed #ccc; padding: 1rem">
-    <goab-checkbox name="v1-standalone1" text="V1 Default - should have margin-bottom: space-m"></goab-checkbox>
-    <goab-checkbox name="v1-standalone2" text="V1 Default - should have margin-bottom: space-m"></goab-checkbox>
+    <goab-checkbox
+      name="v1-standalone1"
+      text="V1 Default - should have margin-bottom: space-m"
+    ></goab-checkbox>
+    <goab-checkbox
+      name="v1-standalone2"
+      text="V1 Default - should have margin-bottom: space-m"
+    ></goab-checkbox>
   </div>
 
   <goab-divider mt="xl"></goab-divider>
@@ -165,7 +183,8 @@
     Test 6: V1 CheckboxList (No Gap Change)
   </goab-text>
   <goab-text size="body-s" mb="m">
-    V1 checkbox lists should look the same as before - individual checkbox margins control spacing, list gap is 0.
+    V1 checkbox lists should look the same as before - individual checkbox margins control
+    spacing, list gap is 0.
   </goab-text>
 
   <goab-checkbox-list
@@ -179,6 +198,6 @@
   </goab-checkbox-list>
 
   <goab-text size="body-xs" mt="m">
-    Selected: {{ v1ListValue.length > 0 ? v1ListValue.join(', ') : 'none' }}
+    Selected: {{ v1ListValue.length > 0 ? v1ListValue.join(", ") : "none" }}
   </goab-text>
 </div>

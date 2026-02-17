@@ -111,7 +111,7 @@ describe("GoABTextArea", () => {
       }),
     );
 
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it("should dispatch onBlur", () => {
@@ -125,7 +125,7 @@ describe("GoABTextArea", () => {
       }),
     );
 
-    expect(onBlur).toBeCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 
   describe("writeValue", () => {

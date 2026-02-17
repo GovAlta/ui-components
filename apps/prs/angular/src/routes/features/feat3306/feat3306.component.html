@@ -7,9 +7,7 @@
       - Feature 3306
     </goab-text>
     <goab-text tag="p" mt="0">
-      Add ability to set the `slug` for a Tab component. This slug value will work for
-      tabs that use a string `heading` value as well as when a `heading` slot is
-      defined.
+      The "OnChange" event should only fire once per click on the stepper items
     </goab-text>
   </goab-block>
 
@@ -28,26 +26,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let i of review">
-            <td>
-              <goab-badge type="important" content="Review pending"></goab-badge>
-            </td>
-            <td>Lorem Ipsum</td>
-            <td class="goa-table-number-column">1234567890</td>
-            <td>
-              <goab-button type="tertiary">Action</goab-button>
-            </td>
-          </tr>
-          <tr *ngFor="let i of complete">
-            <td>
-              <goab-badge type="information" content="Complete"></goab-badge>
-            </td>
-            <td>Lorem Ipsum</td>
-            <td class="goa-table-number-column">1234567890</td>
-            <td>
-              <goab-button type="tertiary">Action</goab-button>
-            </td>
-          </tr>
+          @for (i of review; track $index) {
+            <tr>
+              <td>
+                <goab-badge type="important" content="Review pending"></goab-badge>
+              </td>
+              <td>Lorem Ipsum</td>
+              <td class="goa-table-number-column">1234567890</td>
+              <td>
+                <goab-button type="tertiary">Action</goab-button>
+              </td>
+            </tr>
+          }
+          @for (i of complete; track $index) {
+            <tr>
+              <td>
+                <goab-badge type="information" content="Complete"></goab-badge>
+              </td>
+              <td>Lorem Ipsum</td>
+              <td class="goa-table-number-column">1234567890</td>
+              <td>
+                <goab-button type="tertiary">Action</goab-button>
+              </td>
+            </tr>
+          }
         </tbody>
       </goab-table>
     </goab-tab>
@@ -66,16 +68,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let i of review">
-            <td>
-              <goab-badge type="important" content="Review pending"></goab-badge>
-            </td>
-            <td>Lorem Ipsum</td>
-            <td class="goa-table-number-column">1234567890</td>
-            <td>
-              <goab-button type="tertiary">Action</goab-button>
-            </td>
-          </tr>
+          @for (i of review; track $index) {
+            <tr>
+              <td>
+                <goab-badge type="important" content="Review pending"></goab-badge>
+              </td>
+              <td>Lorem Ipsum</td>
+              <td class="goa-table-number-column">1234567890</td>
+              <td>
+                <goab-button type="tertiary">Action</goab-button>
+              </td>
+            </tr>
+          }
         </tbody>
       </goab-table>
     </goab-tab>
@@ -93,19 +97,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let i of complete">
-            <td>
-              <goab-badge type="information" content="Complete"></goab-badge>
-            </td>
-            <td>Lorem Ipsum</td>
-            <td class="goa-table-number-column">1234567890</td>
-            <td>
-              <goab-button type="tertiary">Action</goab-button>
-            </td>
-          </tr>
+          @for (i of complete; track $index) {
+            <tr>
+              <td>
+                <goab-badge type="information" content="Complete"></goab-badge>
+              </td>
+              <td>Lorem Ipsum</td>
+              <td class="goa-table-number-column">1234567890</td>
+              <td>
+                <goab-button type="tertiary">Action</goab-button>
+              </td>
+            </tr>
+          }
         </tbody>
       </goab-table>
     </goab-tab>
   </goab-tabs>
-
 </goab-block>

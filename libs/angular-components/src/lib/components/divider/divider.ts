@@ -4,23 +4,24 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-divider",
-  imports: [CommonModule],
+
   template: `
-    <goa-divider
-      *ngIf="isReady"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-    </goa-divider>
+    @if (isReady) {
+      <goa-divider
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+      </goa-divider>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

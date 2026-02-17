@@ -99,6 +99,6 @@ describe("GoABIconButton", () => {
 
     fireEvent(el, new CustomEvent("_click"));
 
-    expect(onClick).toBeCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });

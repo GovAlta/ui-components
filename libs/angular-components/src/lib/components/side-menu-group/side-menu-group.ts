@@ -1,5 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 import { GoabIconType } from "@abgov/ui-components-common";
 import { GoabBaseComponent } from "../base.component";
 
@@ -7,20 +12,21 @@ import { GoabBaseComponent } from "../base.component";
   standalone: true,
   selector: "goab-side-menu-group",
   template: `
-    <goa-side-menu-group
-      *ngIf="isReady"
-      [attr.heading]="heading"
-      [attr.testid]="testId"
-      [attr.icon]="icon"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-    </goa-side-menu-group>
+    @if (isReady) {
+      <goa-side-menu-group
+        [attr.heading]="heading"
+        [attr.testid]="testId"
+        [attr.icon]="icon"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-side-menu-group>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabSideMenuGroup extends GoabBaseComponent implements OnInit {

@@ -10,7 +10,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of review">
+        @for (i of review; track $index) {
+        <tr>
           <td>
             <goabx-badge type="important" content="Review pending"></goabx-badge>
           </td>
@@ -20,7 +21,8 @@
             <goabx-button type="tertiary" size="compact">Action</goabx-button>
           </td>
         </tr>
-        <tr *ngFor="let i of complete">
+        } @for (i of complete; track $index) {
+        <tr>
           <td>
             <goabx-badge type="information" content="Complete"></goabx-badge>
           </td>
@@ -30,11 +32,18 @@
             <goabx-button type="tertiary" size="compact">Action</goabx-button>
           </td>
         </tr>
+        }
       </tbody>
     </goabx-table>
   </goab-tab>
   <goab-tab [heading]="reviewPending">
-    <ng-template #reviewPending>Review pending<goabx-badge type="important" content="4" [icon]="false"></goabx-badge></ng-template>
+    <ng-template #reviewPending
+      >Review pending<goabx-badge
+        type="important"
+        content="4"
+        [icon]="false"
+      ></goabx-badge
+    ></ng-template>
     <goabx-table width="100%">
       <thead>
         <tr>
@@ -45,7 +54,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of review">
+        @for (i of review; track $index) {
+        <tr>
           <td>
             <goabx-badge type="important" content="Review pending"></goabx-badge>
           </td>
@@ -55,11 +65,14 @@
             <goabx-button type="tertiary" size="compact">Action</goabx-button>
           </td>
         </tr>
+        }
       </tbody>
     </goabx-table>
   </goab-tab>
   <goab-tab [heading]="completeTemplate">
-    <ng-template #completeTemplate>Complete<goabx-badge type="information" content="338" [icon]="false"></goabx-badge></ng-template>
+    <ng-template #completeTemplate
+      >Complete<goabx-badge type="information" content="338" [icon]="false"></goabx-badge
+    ></ng-template>
     <goabx-table width="100%">
       <thead>
         <tr>
@@ -70,7 +83,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of complete">
+        @for (i of complete; track $index) {
+        <tr>
           <td>
             <goabx-badge type="information" content="Complete"></goabx-badge>
           </td>
@@ -80,6 +94,7 @@
             <goabx-button type="tertiary" size="compact">Action</goabx-button>
           </td>
         </tr>
+        }
       </tbody>
     </goabx-table>
   </goab-tab>
