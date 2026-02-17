@@ -16,34 +16,35 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goabx-date-picker",
-  imports: [CommonModule],
-  template: ` <goa-date-picker
-    #goaComponentRef
-    *ngIf="isReady"
-    [attr.name]="name"
-    [attr.value]="formatValue(value)"
-    [attr.min]="min"
-    [attr.max]="max"
-    [attr.error]="error"
-    [attr.disabled]="disabled"
-    [attr.relative]="relative"
-    [attr.type]="type"
-    [attr.testid]="testId"
-    [attr.width]="width"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    [attr.mr]="mr"
-    [attr.version]="version"
-    (_change)="_onChange($event)"
-  >
-  </goa-date-picker>`,
+
+  template: `@if (isReady) {
+    <goa-date-picker
+      #goaComponentRef
+      [attr.name]="name"
+      [attr.value]="formatValue(value)"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.error]="error"
+      [attr.disabled]="disabled"
+      [attr.relative]="relative"
+      [attr.type]="type"
+      [attr.testid]="testId"
+      [attr.width]="width"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+      [attr.version]="version"
+      (_change)="_onChange($event)"
+    >
+    </goa-date-picker>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
@@ -81,7 +82,10 @@ export class GoabxDatePicker extends GoabControlValueAccessor implements OnInit 
   }
 
   _onChange(e: Event) {
-    const detail = { ...(e as CustomEvent<GoabDatePickerOnChangeDetail>).detail, event: e };
+    const detail = {
+      ...(e as CustomEvent<GoabDatePickerOnChangeDetail>).detail,
+      event: e,
+    };
     this.onChange.emit(detail);
     this.markAsTouched();
     this.fcChange?.(detail.value);
@@ -115,8 +119,9 @@ export class GoabxDatePicker extends GoabControlValueAccessor implements OnInit 
     this.elementRef.nativeElement.disabled = isDisabled;
   }
 
-  @HostListener("disabledChange", ["$event.detail.disabled"])
-  listenDisabledChange(isDisabled: boolean) {
+  @HostListener("disabledChange", ["$event"])
+  listenDisabledChange(event: Event) {
+    const isDisabled = (event as CustomEvent<{ disabled: boolean }>).detail.disabled;
     this.setDisabledState(isDisabled);
   }
 

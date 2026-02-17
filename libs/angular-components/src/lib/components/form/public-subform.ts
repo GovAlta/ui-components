@@ -1,25 +1,31 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  Output,
+} from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   selector: "goab-public-subform",
   standalone: true,
   template: `
-  <goa-public-subform
-    [attr.id]="id"
-    [attr.name]="name"
-    [attr.continue-msg]="continueMsg"
-    [attr.mt]="mt"
-    [attr.mr]="mr"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    (_init)="_onInit($event)"
-    (_stateChange)="_onStateChange($event)"
-  >
-    <ng-content />
-  </goa-public-subform>
+    <goa-public-subform
+      [attr.id]="id"
+      [attr.name]="name"
+      [attr.continue-msg]="continueMsg"
+      [attr.mt]="mt"
+      [attr.mr]="mr"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      (_init)="_onInit($event)"
+      (_stateChange)="_onStateChange($event)"
+    >
+      <ng-content />
+    </goa-public-subform>
   `,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPublicSubform extends GoabBaseComponent {
   @Input() id?: string = "";

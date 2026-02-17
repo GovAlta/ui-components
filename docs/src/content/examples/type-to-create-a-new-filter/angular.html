@@ -3,15 +3,20 @@
     [value]="inputValue"
     (onChange)="handleInputChange($event)"
     (onKeyPress)="handleInputKeyPress($event)"
-    width="100%">
+    width="100%"
+  >
   </goabx-input>
 </goabx-form-item>
-<div *ngIf="typedChips.length > 0">
+@if (typedChips.length > 0) {
+<div>
+  @for (typedChip of typedChips; track typedChip) {
   <goabx-filter-chip
-    *ngFor="let typedChip of typedChips"
     [content]="typedChip"
     mb="xs"
     mr="xs"
-    (onClick)="removeTypedChip(typedChip)">
+    (onClick)="removeTypedChip(typedChip)"
+  >
   </goabx-filter-chip>
+  }
 </div>
+}

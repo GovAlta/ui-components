@@ -8,7 +8,7 @@ import {
   GoabInputType,
   Spacing,
 } from "@abgov/ui-components-common";
-import { NgIf, NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -27,71 +27,74 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 @Component({
   standalone: true,
   selector: "goab-input-number",
-  imports: [NgIf, NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
-    <goa-input
-      *ngIf="isReady"
-      [attr.type]="type"
-      [attr.name]="name"
-      [attr.focused]="focused"
-      [attr.value]="value !== null ? value : ''"
-      [attr.autocapitalize]="autoCapitalize"
-      [attr.placeholder]="placeholder"
-      [attr.leadingicon]="leadingIcon"
-      [attr.trailingicon]="trailingIcon"
-      [attr.variant]="variant"
-      [disabled]="disabled"
-      [attr.readonly]="readonly"
-      [attr.error]="error"
-      [attr.data-testid]="testId"
-      [attr.width]="width"
-      [attr.arialabel]="ariaLabel"
-      [attr.arialabelledby]="ariaLabelledBy"
-      [attr.min]="min"
-      [attr.max]="max"
-      [attr.step]="step"
-      [attr.prefix]="prefix"
-      [attr.suffix]="suffix"
-      [attr.debounce]="debounce"
-      [attr.maxlength]="maxLength"
-      [attr.id]="id"
-      [attr.mt]="mt"
-      [attr.mr]="mr"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.handletrailingiconclick]="handleTrailingIconClick"
-      [attr.textalign]="textAlign"
-      (_trailingIconClick)="_onTrailingIconClick($event)"
-      (_change)="_onChange($event)"
-      (_focus)="_onFocus($event)"
-      (_blur)="_onBlur($event)"
-      (_keypress)="_onKeyPress($event)"
-      [attr.trailingiconarialabel]="trailingIconAriaLabel"
-    >
-      <div slot="leadingContent">
-        <ng-container *ngIf="leadingContent">
-          <ng-container *ngIf="getLeadingContentAsTemplate(); else stringLeading">
-            <ng-container
-              [ngTemplateOutlet]="getLeadingContentAsTemplate()"
-            ></ng-container>
-          </ng-container>
-          <ng-template #stringLeading>{{ getLeadingContentAsString() }}</ng-template>
-        </ng-container>
-      </div>
+    @if (isReady) {
+      <goa-input
+        [attr.type]="type"
+        [attr.name]="name"
+        [attr.focused]="focused"
+        [attr.value]="value !== null ? value : ''"
+        [attr.autocapitalize]="autoCapitalize"
+        [attr.placeholder]="placeholder"
+        [attr.leadingicon]="leadingIcon"
+        [attr.trailingicon]="trailingIcon"
+        [attr.variant]="variant"
+        [disabled]="disabled"
+        [attr.readonly]="readonly"
+        [attr.error]="error"
+        [attr.data-testid]="testId"
+        [attr.width]="width"
+        [attr.arialabel]="ariaLabel"
+        [attr.arialabelledby]="ariaLabelledBy"
+        [attr.min]="min"
+        [attr.max]="max"
+        [attr.step]="step"
+        [attr.prefix]="prefix"
+        [attr.suffix]="suffix"
+        [attr.debounce]="debounce"
+        [attr.maxlength]="maxLength"
+        [attr.id]="id"
+        [attr.mt]="mt"
+        [attr.mr]="mr"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.handletrailingiconclick]="handleTrailingIconClick"
+        [attr.textalign]="textAlign"
+        (_trailingIconClick)="_onTrailingIconClick($event)"
+        (_change)="_onChange($event)"
+        (_focus)="_onFocus($event)"
+        (_blur)="_onBlur($event)"
+        (_keypress)="_onKeyPress($event)"
+        [attr.trailingiconarialabel]="trailingIconAriaLabel"
+      >
+        <div slot="leadingContent">
+          @if (leadingContent) {
+            @if (getLeadingContentAsTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="getLeadingContentAsTemplate()"
+              ></ng-container>
+            } @else {
+              {{ getLeadingContentAsString() }}
+            }
+          }
+        </div>
 
-      <ng-content />
+        <ng-content />
 
-      <div slot="trailingContent">
-        <ng-container *ngIf="trailingContent">
-          <ng-container *ngIf="getTrailingContentAsTemplate(); else stringTrailing">
-            <ng-container
-              [ngTemplateOutlet]="getTrailingContentAsTemplate()"
-            ></ng-container>
-          </ng-container>
-          <ng-template #stringTrailing>{{ getTrailingContentAsString() }}</ng-template>
-        </ng-container>
-      </div>
-    </goa-input>
+        <div slot="trailingContent">
+          @if (trailingContent) {
+            @if (getTrailingContentAsTemplate()) {
+              <ng-container
+                [ngTemplateOutlet]="getTrailingContentAsTemplate()"
+              ></ng-container>
+            } @else {
+              {{ getTrailingContentAsString() }}
+            }
+          }
+        </div>
+      </goa-input>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

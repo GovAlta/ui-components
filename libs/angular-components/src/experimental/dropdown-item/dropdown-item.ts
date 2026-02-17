@@ -5,15 +5,14 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "goabx-dropdown-item",
-  template: `
+  template: ` @if (isReady) {
     <goa-dropdown-item
-      *ngIf="isReady"
       [value]="value"
       [label]="label"
       [attr.filter]="filter"
@@ -21,9 +20,8 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
       [attr.mount]="mountType"
     >
     </goa-dropdown-item>
-  `,
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabxDropdownItem implements OnInit {
   @Input() value?: string;

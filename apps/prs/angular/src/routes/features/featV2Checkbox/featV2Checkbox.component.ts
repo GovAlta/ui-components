@@ -11,14 +11,12 @@ import {
   GoabCheckboxOnChangeDetail,
   GoabCheckboxListOnChangeDetail,
 } from "@abgov/angular-components";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "abgov-feat-v2-checkbox",
   templateUrl: "./featV2Checkbox.component.html",
   imports: [
-    CommonModule,
     GoabCheckbox,
     GoabCheckboxList,
     GoabxCheckbox,
@@ -55,7 +53,7 @@ export class FeatV2CheckboxComponent {
 
   toggleSelectAll(event: GoabCheckboxOnChangeDetail) {
     if (event.checked) {
-      this.selectedRows = new Set(this.tableData.map(row => row.id));
+      this.selectedRows = new Set(this.tableData.map((row) => row.id));
     } else {
       this.selectedRows = new Set();
     }

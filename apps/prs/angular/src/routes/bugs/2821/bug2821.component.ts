@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabTable,
   GoabTableSortHeader,
@@ -20,14 +20,7 @@ interface TableRow {
   standalone: true,
   selector: "abgov-bug2821",
   templateUrl: "./bug2821.component.html",
-  imports: [
-    CommonModule,
-    GoabTable,
-    GoabTableSortHeader,
-    GoabBlock,
-    GoabText,
-    GoabButton,
-  ],
+  imports: [GoabTable, GoabTableSortHeader, GoabBlock, GoabText, GoabButton],
 })
 export class Bug2821Component {
   sortLog: string[] = [];

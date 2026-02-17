@@ -7,28 +7,29 @@ import {
   ChangeDetectorRef,
   booleanAttribute,
 } from "@angular/core";
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-tab",
   template: `
-    <goa-tab
-      *ngIf="isReady"
-      [attr.slug]="slug"
-      [attr.disabled]="disabled || null"
-      [attr.heading]="getHeadingAsString()"
-    >
-      <ng-content />
-      @if (typeof heading !== "string") {
-        <div slot="heading">
-          <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
-        </div>
-      }
-    </goa-tab>
+    @if (isReady) {
+      <goa-tab
+        [attr.slug]="slug"
+        [attr.disabled]="disabled || null"
+        [attr.heading]="getHeadingAsString()"
+      >
+        <ng-content />
+        @if (isHeadingTemplate()) {
+          <div slot="heading">
+            <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+          </div>
+        }
+      </goa-tab>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
 })
 export class GoabTab implements OnInit {
   isReady = false;
@@ -43,6 +44,10 @@ export class GoabTab implements OnInit {
       this.isReady = true;
       this.cdr.detectChanges();
     });
+  }
+
+  isHeadingTemplate(): boolean {
+    return typeof this.heading !== "string";
   }
 
   getHeadingAsString(): string {

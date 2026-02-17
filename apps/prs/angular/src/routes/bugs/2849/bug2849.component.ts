@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabDropdown, GoabDropdownItem, GoabBlock } from "@abgov/angular-components";
 
 @Component({
@@ -7,7 +7,7 @@ import { GoabDropdown, GoabDropdownItem, GoabBlock } from "@abgov/angular-compon
   selector: "abgov-bug2849",
   templateUrl: "./bug2849.component.html",
   styleUrls: ["./bug2849.component.css"],
-  imports: [CommonModule, GoabDropdown, GoabDropdownItem, GoabBlock],
+  imports: [GoabDropdown, GoabDropdownItem, GoabBlock],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Bug2849Component {

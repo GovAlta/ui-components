@@ -2,13 +2,15 @@ import { GoabAccordion } from "./accordion";
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
 import { By } from "@angular/platform-browser";
-import { GoabAccordionHeadingSize, GoabAccordionIconPosition } from "@abgov/ui-components-common";
+import {
+  GoabAccordionHeadingSize,
+  GoabAccordionIconPosition,
+} from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   imports: [GoabAccordion],
-  template: `
-    <goab-accordion
+  template: ` <goab-accordion
     [heading]="heading"
     [secondaryText]="secondaryText"
     [open]="open"
@@ -18,7 +20,7 @@ import { GoabAccordionHeadingSize, GoabAccordionIconPosition } from "@abgov/ui-c
     maxWidth="480px"
   >
     test content
-      <ng-template #headingContent>This is the headingcontent</ng-template>
+    <ng-template #headingContent>This is the headingcontent</ng-template>
   </goab-accordion>`,
 })
 class TestAccordionComponent {

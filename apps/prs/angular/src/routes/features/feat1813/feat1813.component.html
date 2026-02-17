@@ -6,8 +6,8 @@
   </goab-text>
 
   <goab-block direction="column" gap="l">
+    @for (scenario of scenarios; track scenario.id) {
     <div
-      *ngFor="let scenario of scenarios; trackBy: trackByScenarioId"
       class="scenario-wrapper"
       [attr.data-scenario]="scenario.id"
       [ngStyle]="scenario.containerWidth ? { width: scenario.containerWidth } : null"
@@ -57,6 +57,7 @@
         </goab-text>
       </goab-block>
     </div>
+    }
   </goab-block>
 
   <goab-block direction="column" gap="m">

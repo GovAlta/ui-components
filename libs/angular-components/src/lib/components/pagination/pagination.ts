@@ -12,29 +12,30 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-pagination",
   template: `
-    <goa-pagination
-      *ngIf="isReady"
-      [attr.itemcount]="itemCount"
-      [attr.perpagecount]="perPageCount"
-      [attr.pagenumber]="pageNumber"
-      [attr.variant]="variant"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_change)="_onChange($event)"
-    >
-    </goa-pagination>
+    @if (isReady) {
+      <goa-pagination
+        [attr.itemcount]="itemCount"
+        [attr.perpagecount]="perPageCount"
+        [attr.pagenumber]="pageNumber"
+        [attr.variant]="variant"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        (_change)="_onChange($event)"
+      >
+      </goa-pagination>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPagination extends GoabBaseComponent implements OnInit {

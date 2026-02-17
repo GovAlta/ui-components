@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabBlock,
   GoabText,
@@ -12,7 +12,7 @@ import { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
   standalone: true,
   selector: "abgov-bug2837",
   templateUrl: "./bug2837.component.html",
-  imports: [CommonModule, GoabBlock, GoabText, GoabInput, GoabInputNumber],
+  imports: [GoabBlock, GoabText, GoabInput, GoabInputNumber],
 })
 export class Bug2837Component {
   handleInputChange(detail: GoabInputOnChangeDetail) {

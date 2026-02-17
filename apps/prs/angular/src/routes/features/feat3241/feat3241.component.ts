@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabAppFooter,
@@ -83,7 +82,6 @@ interface User {
   selector: "abgov-feat3241",
   templateUrl: "./feat3241.component.html",
   imports: [
-    CommonModule,
     GoabAppFooter,
     GoabAppFooterMetaSection,
     GoabAppFooterNavSection,

@@ -1,20 +1,29 @@
-import { GoabSpacerHorizontalSpacing, GoabSpacerVerticalSpacing } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {
+  GoabSpacerHorizontalSpacing,
+  GoabSpacerVerticalSpacing,
+} from "@abgov/ui-components-common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "goab-spacer",
   template: `
-    <goa-spacer
-      *ngIf="isReady"
-      [attr.hspacing]="hSpacing"
-      [attr.vspacing]="vSpacing"
-      [attr.testid]="testId"
-    >
-    </goa-spacer>
+    @if (isReady) {
+      <goa-spacer
+        [attr.hspacing]="hSpacing"
+        [attr.vspacing]="vSpacing"
+        [attr.testid]="testId"
+      >
+      </goa-spacer>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabSpacer implements OnInit {

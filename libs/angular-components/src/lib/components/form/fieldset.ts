@@ -1,17 +1,25 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, Output, EventEmitter } from "@angular/core";
-import { GoabFormDispatchOn, GoabFieldsetOnContinueDetail } from "@abgov/ui-components-common";
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
+import {
+  GoabFormDispatchOn,
+  GoabFieldsetOnContinueDetail,
+} from "@abgov/ui-components-common";
 
 @Component({
-  selector: 'goab-fieldset',
-  template: `
-    <goa-fieldset
-      [attr.section-title]="sectionTitle"
-      [attr.dispatch-on]="dispatchOn"
-      [attr.id]="id"
-      (_continue)="_onContinue($event)"
-    >
-      <ng-content></ng-content>
-    </goa-fieldset>`,
+  selector: "goab-fieldset",
+  template: ` <goa-fieldset
+    [attr.section-title]="sectionTitle"
+    [attr.dispatch-on]="dispatchOn"
+    [attr.id]="id"
+    (_continue)="_onContinue($event)"
+  >
+    <ng-content></ng-content>
+  </goa-fieldset>`,
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

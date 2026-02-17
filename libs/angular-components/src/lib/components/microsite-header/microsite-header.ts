@@ -9,30 +9,31 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-microsite-header",
   template: `
-    <goa-microsite-header
-      *ngIf="isReady"
-      [attr.type]="type"
-      [attr.version]="getVersionAsString()"
-      [attr.feedbackurl]="feedbackUrl"
-      [attr.maxcontentwidth]="maxContentWidth"
-      [attr.feedbackurltarget]="feedbackUrlTarget"
-      [attr.headerurltarget]="headerUrlTarget"
-      [attr.testid]="testId"
-      [attr.hasfeedbackhandler]="onFeedbackClick.observed"
-      (_feedbackClick)="_onFeedbackClick()"
-    >
-      <div slot="version">
-        <ng-container [ngTemplateOutlet]="getVersionAsTemplate()"></ng-container>
-      </div>
-    </goa-microsite-header>
+    @if (isReady) {
+      <goa-microsite-header
+        [attr.type]="type"
+        [attr.version]="getVersionAsString()"
+        [attr.feedbackurl]="feedbackUrl"
+        [attr.maxcontentwidth]="maxContentWidth"
+        [attr.feedbackurltarget]="feedbackUrlTarget"
+        [attr.headerurltarget]="headerUrlTarget"
+        [attr.testid]="testId"
+        [attr.hasfeedbackhandler]="onFeedbackClick.observed"
+        (_feedbackClick)="_onFeedbackClick()"
+      >
+        <div slot="version">
+          <ng-container [ngTemplateOutlet]="getVersionAsTemplate()"></ng-container>
+        </div>
+      </goa-microsite-header>
+    }
   `,
-  imports: [NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabMicrositeHeader implements OnInit {

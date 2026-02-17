@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import {
   GoabBlock,
@@ -15,7 +14,6 @@ import { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
   selector: "abgov-feat3229",
   templateUrl: "./feat3229.component.html",
   imports: [
-    CommonModule,
     GoabBlock,
     GoabDivider,
     GoabxMenuAction,

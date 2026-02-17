@@ -23,7 +23,9 @@ class TestFieldsetComponent {
   dispatchOn: "change" | "continue" = "continue";
   id?: string;
 
-  handleContinue(event: GoabFieldsetOnContinueDetail): void {/** do nothing **/}
+  handleContinue(event: GoabFieldsetOnContinueDetail): void {
+    /** do nothing **/
+  }
 }
 
 describe("GoabFieldSet", () => {

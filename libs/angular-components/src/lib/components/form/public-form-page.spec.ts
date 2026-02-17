@@ -47,7 +47,9 @@ class TestPublicFormPageComponent {
   mb = "l" as Spacing;
   ml = "xl" as Spacing;
 
-  handleContinue(event: Event): void {/** do nothing **/}
+  handleContinue(event: Event): void {
+    /** do nothing **/
+  }
 }
 
 describe("GoabPublicFormPage", () => {
@@ -94,14 +96,14 @@ describe("GoabPublicFormPage", () => {
     const detail = {
       el: document.createElement("form"),
       state: {
-        "field1": {
+        field1: {
           name: "field1",
           label: "Field 1",
           value: "test",
-          order: 1
-        }
+          order: 1,
+        },
       },
-      cancelled: false
+      cancelled: false,
     };
 
     el.dispatchEvent(new CustomEvent("_continue", { detail }));

@@ -7,11 +7,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of pageUsers">
+    @for (user of pageUsers; track $index) {
+    <tr>
       <td>{{ user.firstName }}</td>
       <td>{{ user.lastName }}</td>
       <td>{{ user.age }}</td>
     </tr>
+    }
   </tbody>
 </goabx-table>
 

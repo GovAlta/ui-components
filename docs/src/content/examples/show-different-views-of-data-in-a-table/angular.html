@@ -10,18 +10,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of reviewItems">
+        @for (i of reviewItems; track $index) {
+        <tr>
           <td><goabx-badge type="important" content="Review pending"></goabx-badge></td>
           <td>Lorem ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
           <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
         </tr>
-        <tr *ngFor="let i of completeItems">
+        }
+        @for (i of completeItems; track $index) {
+        <tr>
           <td><goabx-badge type="information" content="Complete"></goabx-badge></td>
           <td>Lorem Ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
           <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
         </tr>
+        }
       </tbody>
     </goabx-table>
   </goab-tab>
@@ -37,12 +41,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of reviewItems">
+        @for (i of reviewItems; track $index) {
+        <tr>
           <td><goabx-badge type="important" content="Review pending"></goabx-badge></td>
           <td>Lorem ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
           <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
         </tr>
+        }
       </tbody>
     </goabx-table>
   </goab-tab>
@@ -58,12 +64,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let i of completeItems">
+        @for (i of completeItems; track $index) {
+        <tr>
           <td><goabx-badge type="information" content="Complete"></goabx-badge></td>
           <td>Lorem Ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
           <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
         </tr>
+        }
       </tbody>
     </goabx-table>
   </goab-tab>

@@ -1,5 +1,5 @@
 import { Component, signal } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabBlock,
   GoabButton,
@@ -16,7 +16,6 @@ import {
   templateUrl: "./bug2943.component.html",
   styleUrls: ["./bug2943.component.css"],
   imports: [
-    CommonModule,
     GoabBlock,
     GoabButton,
     GoabDrawer,

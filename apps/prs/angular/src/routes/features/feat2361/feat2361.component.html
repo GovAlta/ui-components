@@ -30,14 +30,15 @@
           [disabled]="disabledActive"
           [error]="errorActive"
         >
+          @for (option of horizontalOptions; track option.value) {
           <goab-radio-item
-            *ngFor="let option of horizontalOptions"
             [value]="option.value"
             [label]="option.label"
             name="feat2361-horizontal"
             [disabled]="disabledActive"
             [error]="errorActive"
           ></goab-radio-item>
+          }
         </goab-radio-group>
       </goab-form-item>
 
@@ -52,14 +53,15 @@
           [disabled]="disabledActive"
           [error]="errorActive"
         >
+          @for (option of verticalOptions; track option.value) {
           <goab-radio-item
-            *ngFor="let option of verticalOptions"
             [value]="option.value"
             [label]="option.label"
             name="feat2361-vertical"
             [disabled]="disabledActive"
             [error]="errorActive"
           ></goab-radio-item>
+          }
         </goab-radio-group>
       </goab-form-item>
 
@@ -73,14 +75,15 @@
           [disabled]="disabledActive"
           [error]="errorActive"
         >
+          @for (option of checkboxListOptions; track option.value) {
           <goab-checkbox
-            *ngFor="let option of checkboxListOptions"
             [name]="option.value"
             [value]="option.value"
             [text]="option.label"
             [disabled]="disabledActive"
             [error]="errorActive"
           ></goab-checkbox>
+          }
         </goab-checkbox-list>
       </goab-form-item>
 
@@ -90,14 +93,15 @@
         requirement="optional"
       >
         <div class="feat2361__checkboxes">
+          @for (option of checkboxOptions; track option.value) {
           <goab-checkbox
-            *ngFor="let option of checkboxOptions"
             [name]="option.value"
             [text]="option.label"
             [value]="option.value"
             [disabled]="disabledActive"
             [error]="errorActive"
           ></goab-checkbox>
+          }
         </div>
       </goab-form-item>
     </goab-grid>

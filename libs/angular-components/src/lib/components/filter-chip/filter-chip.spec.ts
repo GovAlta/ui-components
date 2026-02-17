@@ -64,7 +64,9 @@ describe("GoabFilterChip", () => {
   }));
 
   it("should render properties", () => {
-    const chipElement = fixture.debugElement.query(By.css("goa-filter-chip")).nativeElement;
+    const chipElement = fixture.debugElement.query(
+      By.css("goa-filter-chip"),
+    ).nativeElement;
     expect(chipElement.getAttribute("error")).toBe(`${component.error}`);
     expect(chipElement.getAttribute("content")).toBe(component.content);
     expect(chipElement.getAttribute("icontheme")).toBe(`${component.iconTheme}`);
@@ -77,7 +79,9 @@ describe("GoabFilterChip", () => {
 
   it("should allow to handle delete event", fakeAsync(() => {
     const onClick = jest.spyOn(component, "onClick");
-    const chipElement = fixture.debugElement.query(By.css("goa-filter-chip")).nativeElement;
+    const chipElement = fixture.debugElement.query(
+      By.css("goa-filter-chip"),
+    ).nativeElement;
     fireEvent(chipElement, new CustomEvent("_click"));
 
     expect(onClick).toHaveBeenCalled();

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabInput,
   GoabInputNumber,
@@ -13,7 +13,7 @@ import {
   standalone: true,
   selector: "abgov-feat2722",
   templateUrl: "./feat2722.component.html",
-  imports: [CommonModule, GoabInput, GoabInputNumber, GoabBlock, GoabText, GoabFormItem],
+  imports: [GoabInput, GoabInputNumber, GoabBlock, GoabText, GoabFormItem],
 })
 export class Feat2722Component {
   textValue = "Sample text input";

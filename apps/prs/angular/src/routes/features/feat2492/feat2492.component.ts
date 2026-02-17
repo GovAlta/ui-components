@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabBlock,
   GoabFormItem,
@@ -8,22 +8,18 @@ import {
   GoabText,
   GoabTextArea,
 } from "@abgov/angular-components";
-import { GoabTextAreaOnBlurDetail, GoabTextAreaOnChangeDetail, GoabTextAreaOnKeyPressDetail } from "@abgov/ui-components-common";
+import {
+  GoabTextAreaOnBlurDetail,
+  GoabTextAreaOnChangeDetail,
+  GoabTextAreaOnKeyPressDetail,
+} from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "abgov-feat2492",
   templateUrl: "./feat2492.component.html",
   styleUrls: ["./feat2492.component.css"],
-  imports: [
-    CommonModule,
-    GoabBlock,
-    GoabFormItem,
-    GoabGrid,
-    GoabInput,
-    GoabText,
-    GoabTextArea,
-  ],
+  imports: [GoabBlock, GoabFormItem, GoabGrid, GoabInput, GoabText, GoabTextArea],
 })
 export class Feat2492Component {
   lastBlurValue = "";

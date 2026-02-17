@@ -222,7 +222,7 @@ describe("GoABInput", () => {
       new CustomEvent("_change", { detail: { name: "foo", value: "new value" } }),
     );
 
-    expect(validateOnChange).toBeCalledWith(
+    expect(validateOnChange).toHaveBeenCalledWith(
       expect.objectContaining({
         name: "foo",
         value: "new value",
@@ -238,7 +238,7 @@ describe("GoABInput", () => {
 
     fireEvent(input, new CustomEvent("_focus"));
 
-    expect(validateOnFocus).toBeCalled();
+    expect(validateOnFocus).toHaveBeenCalled();
   });
 
   it("should handle onBlur event", () => {
@@ -248,7 +248,7 @@ describe("GoABInput", () => {
 
     fireEvent(input, new CustomEvent("_blur"));
 
-    expect(validateOnBlur).toBeCalled();
+    expect(validateOnBlur).toHaveBeenCalled();
   });
 
   it("should handle onKeyPress event", () => {
@@ -258,7 +258,7 @@ describe("GoABInput", () => {
 
     fireEvent(input, new CustomEvent("_keyPress"));
 
-    expect(validateOnKeyPress).toBeCalled();
+    expect(validateOnKeyPress).toHaveBeenCalled();
   });
 
   it("should render leading and trailing content", () => {

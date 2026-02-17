@@ -1,23 +1,30 @@
 import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
-import { CUSTOM_ELEMENTS_SCHEMA, Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 @Component({
   standalone: true,
   selector: "goab-notification",
   template: `
-    <goa-notification
-      *ngIf="isReady"
-      [attr.type]="type"
-      [attr.arialive]="ariaLive"
-      [attr.maxcontentwidth]="maxContentWidth"
-      [attr.testid]="testId"
-      (_dismiss)="_onDismiss()"
-    >
-      <ng-content />
-    </goa-notification>
+    @if (isReady) {
+      <goa-notification
+        [attr.type]="type"
+        [attr.arialive]="ariaLive"
+        [attr.maxcontentwidth]="maxContentWidth"
+        [attr.testid]="testId"
+        (_dismiss)="_onDismiss()"
+      >
+        <ng-content />
+      </goa-notification>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabNotification implements OnInit {

@@ -1,5 +1,4 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import {} from "@abgov/angular-components";
 
 @Component({
@@ -12,6 +11,5 @@ import {} from "@abgov/angular-components";
   `,
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class AbgovAppComponent {}

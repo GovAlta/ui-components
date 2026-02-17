@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBlock, GoabContainer, GoabTable, GoabText } from "@abgov/angular-components";
 
 @Component({
@@ -7,7 +7,7 @@ import { GoabBlock, GoabContainer, GoabTable, GoabText } from "@abgov/angular-co
   selector: "abgov-bug3281",
   templateUrl: "./bug3281.component.html",
   styleUrls: ["./bug3281.component.css"],
-  imports: [CommonModule, GoabBlock, GoabContainer, GoabTable, GoabText],
+  imports: [GoabBlock, GoabContainer, GoabTable, GoabText],
 })
 export class Bug3281Component implements OnInit {
   ngOnInit() {

@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabButton,
@@ -16,7 +15,6 @@ import {
   selector: "abgov-bug3279",
   templateUrl: "./bug3279.component.html",
   imports: [
-    CommonModule,
     GoabButton,
     GoabContainer,
     GoabDetails,

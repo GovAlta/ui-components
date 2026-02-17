@@ -6,7 +6,7 @@ import {
   ChangeDetectorRef,
   HostBinding,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabTextColor,
   GoabTextHeadingElement,
@@ -19,21 +19,22 @@ import {
 @Component({
   standalone: true,
   selector: "goab-text",
-  imports: [CommonModule],
+
   template: `
-    <goa-text
-      *ngIf="isReady"
-      [attr.as]="tag"
-      [attr.size]="size"
-      [attr.maxwidth]="maxWidth"
-      [attr.color]="color"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-    </goa-text>
+    @if (isReady) {
+      <goa-text
+        [attr.as]="tag"
+        [attr.size]="size"
+        [attr.maxwidth]="maxWidth"
+        [attr.color]="color"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-text>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

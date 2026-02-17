@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabButton,
   GoabCheckbox,
@@ -18,7 +18,6 @@ import {
   selector: "abgov-bug2768",
   templateUrl: "./bug2768.component.html",
   imports: [
-    CommonModule,
     GoabButton,
     GoabCheckbox,
     GoabDatePicker,

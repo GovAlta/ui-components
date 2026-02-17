@@ -1,7 +1,13 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabButton } from "./button";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabButtonSize, GoabButtonVariant, GoabIconType, Spacing, GoabButtonType } from "@abgov/ui-components-common";
+import {
+  GoabButtonSize,
+  GoabButtonVariant,
+  GoabIconType,
+  Spacing,
+  GoabButtonType,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -21,12 +27,13 @@ import { fireEvent } from "@testing-library/dom";
       [mb]="mb"
       [ml]="ml"
       [mr]="mr"
-      (onClick)="onClick()">
-      {{buttonText}}
+      (onClick)="onClick()"
+    >
+      {{ buttonText }}
     </goab-button>
-  `
+  `,
 })
-class TestButtonComponent{
+class TestButtonComponent {
   type?: GoabButtonType;
   size?: GoabButtonSize;
   variant?: GoabButtonVariant;
@@ -43,7 +50,6 @@ class TestButtonComponent{
   onClick() {
     /* do nothing */
   }
-
 }
 
 describe("GoABButton", () => {
@@ -94,5 +100,5 @@ describe("GoABButton", () => {
 
     fireEvent(buttonElement, new CustomEvent("_click"));
     expect(onClick).toHaveBeenCalled();
-  }))
-})
+  }));
+});

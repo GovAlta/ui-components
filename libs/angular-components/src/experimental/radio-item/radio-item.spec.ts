@@ -19,7 +19,7 @@ import { GoabxRadioItem } from "./radio-item";
     </goabx-radio-item>
   `,
 })
-class TestRadioItemWithRevealSlotComponent { }
+class TestRadioItemWithRevealSlotComponent {}
 
 describe("Radio item with reveal slot", () => {
   let fixture: ComponentFixture<TestRadioItemWithRevealSlotComponent>;
@@ -37,13 +37,17 @@ describe("Radio item with reveal slot", () => {
   }));
 
   it("should render with slot reveal", () => {
-    const radioItemElement = fixture.debugElement.nativeElement.querySelector("goa-radio-item");
+    const radioItemElement =
+      fixture.debugElement.nativeElement.querySelector("goa-radio-item");
     const slotReveal = radioItemElement.querySelector("[slot='reveal']");
     expect(slotReveal.textContent).toContain("A reveal slot");
   });
 
   it("should pass the revealAriaLabel property to the web component", () => {
-    const radioItemElement = fixture.debugElement.nativeElement.querySelector("goa-radio-item");
-    expect(radioItemElement.getAttribute("revealarialabel")).toBe("Screen reader announcement for radio reveal content");
+    const radioItemElement =
+      fixture.debugElement.nativeElement.querySelector("goa-radio-item");
+    expect(radioItemElement.getAttribute("revealarialabel")).toBe(
+      "Screen reader announcement for radio reveal content",
+    );
   });
 });

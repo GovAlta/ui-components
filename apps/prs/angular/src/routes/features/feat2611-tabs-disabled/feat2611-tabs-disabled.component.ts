@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import {
   GoabTabs,
   GoabTab,
@@ -11,7 +10,7 @@ import {
   standalone: true,
   selector: "abgov-feat2611-tabs-disabled",
   templateUrl: "./feat2611-tabs-disabled.component.html",
-  imports: [CommonModule, GoabTabs, GoabTab, GoabButtonGroup, GoabButton],
+  imports: [GoabTabs, GoabTab, GoabButtonGroup, GoabButton],
 })
 export class Feat2611TabsDisabledComponent {
   setHash(hash: string): void {

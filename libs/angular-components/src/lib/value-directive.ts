@@ -4,20 +4,26 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 // @deprecated: Use the new <goab-input .. /> component
 @Directive({
   standalone: true,
-  selector: "[goaValue]", 
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ValueDirective),
-    multi: true,
-  }],
+  selector: "[goaValue]",
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ValueDirective),
+      multi: true,
+    },
+  ],
 })
 export class ValueDirective implements ControlValueAccessor {
   private _value = "";
   private _disabled = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  onChange: any = () => { /* default implementation */ };
-  onTouched: any = () => { /* default implementation */ };
+  onChange: any = () => {
+    /* default implementation */
+  };
+  onTouched: any = () => {
+    /* default implementation */
+  };
 
   get value(): string {
     return this._value;
@@ -47,14 +53,16 @@ export class ValueDirective implements ControlValueAccessor {
     this.elementRef.nativeElement.disabled = isDisabled;
   }
 
-  constructor(protected elementRef: ElementRef) { }
+  constructor(protected elementRef: ElementRef) {}
 
-  @HostListener("_change", ["$event.detail.value"])
-  listenForValueChange(value: string) {
+  @HostListener("_change", ["$event"])
+  listenForValueChange(event: Event) {
+    const value = (event as CustomEvent<{ value: string }>).detail.value;
     this.value = value;
   }
-  @HostListener("disabledChange", ["$event.detail.disabled"])
-  listenForDisabledChange(isDisabled: boolean) {
+  @HostListener("disabledChange", ["$event"])
+  listenForDisabledChange(event: Event) {
+    const isDisabled = (event as CustomEvent<{ disabled: boolean }>).detail.disabled;
     this.setDisabledState(isDisabled);
   }
 }
@@ -62,17 +70,19 @@ export class ValueDirective implements ControlValueAccessor {
 @Directive({
   standalone: true,
   selector: "[goaValueList]",
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => ValueListDirective),
-    multi: true,
-  }],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ValueListDirective),
+      multi: true,
+    },
+  ],
 })
 export class ValueListDirective implements ControlValueAccessor {
   private _value?: string[] = [];
 
-  onChange: any = () => { };
-  onTouched: any = () => { };
+  onChange: any = () => {};
+  onTouched: any = () => {};
 
   get value(): string[] | undefined {
     return this._value;
@@ -99,10 +109,11 @@ export class ValueListDirective implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  constructor(protected elementRef: ElementRef) { }
+  constructor(protected elementRef: ElementRef) {}
 
-  @HostListener("_change", ["$event.detail.value"])
-  listenForValueChange(value: string) {
+  @HostListener("_change", ["$event"])
+  listenForValueChange(event: Event) {
+    const value = (event as CustomEvent<{ value: string }>).detail.value;
     if (!value) {
       this._setValue(undefined);
       return;

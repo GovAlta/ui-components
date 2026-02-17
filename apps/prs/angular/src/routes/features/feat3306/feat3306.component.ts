@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabBlock,
@@ -16,7 +15,6 @@ import {
   selector: "abgov-feat3306",
   templateUrl: "./feat3306.component.html",
   imports: [
-    CommonModule,
     GoabBlock,
     GoabText,
     GoabDivider,
