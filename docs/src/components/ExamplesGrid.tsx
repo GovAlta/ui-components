@@ -647,9 +647,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               ref={tabsRef}
               version="2"
               variant="segmented"
-              initialtab={viewMode === "card" ? 1 : 2}
-              updateurl="false"
-              stackonmobile="false"
+              initialTab={viewMode === "card" ? 1 : 2}
+              orientation="horizontal"
             >
               <goa-tab heading="Grid">
                 <span />
@@ -811,35 +810,35 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               <tbody>
                 {groupedExamples
                   ? groupedExamples.map((group) => (
-                      <React.Fragment key={group.key}>
-                        <tr
-                          className="examples-group-row"
-                          onClick={() => toggleGroup(group.key)}
-                        >
-                          <td colSpan={5}>
-                            <div className="examples-group-header">
-                              <GoabIcon
-                                type={
-                                  expandedGroups.has(group.key)
-                                    ? "chevron-down"
-                                    : "chevron-forward"
-                                }
-                                size="small"
-                              />
-                              <strong>{group.label}</strong>
-                              <goa-badge
-                                version="2"
-                                type="default"
-                                content={String(group.examples.length)}
-                                emphasis="subtle"
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        {expandedGroups.has(group.key) &&
-                          group.examples.map(renderTableRow)}
-                      </React.Fragment>
-                    ))
+                    <React.Fragment key={group.key}>
+                      <tr
+                        className="examples-group-row"
+                        onClick={() => toggleGroup(group.key)}
+                      >
+                        <td colSpan={5}>
+                          <div className="examples-group-header">
+                            <GoabIcon
+                              type={
+                                expandedGroups.has(group.key)
+                                  ? "chevron-down"
+                                  : "chevron-forward"
+                              }
+                              size="small"
+                            />
+                            <strong>{group.label}</strong>
+                            <goa-badge
+                              version="2"
+                              type="default"
+                              content={String(group.examples.length)}
+                              emphasis="subtle"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      {expandedGroups.has(group.key) &&
+                        group.examples.map(renderTableRow)}
+                    </React.Fragment>
+                  ))
                   : filteredExamples.map(renderTableRow)}
               </tbody>
             </table>
@@ -975,19 +974,19 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           {(pendingFilters.category.length > 0 ||
             pendingFilters.scale.length > 0 ||
             pendingFilters.userType.length > 0) && (
-            <>
-              <GoabDivider />
-              <GoabxButton
-                type="tertiary"
-                size="compact"
-                onClick={() =>
-                  setPendingFilters({ category: [], scale: [], userType: [] })
-                }
-              >
-                Clear all filters
-              </GoabxButton>
-            </>
-          )}
+              <>
+                <GoabDivider />
+                <GoabxButton
+                  type="tertiary"
+                  size="compact"
+                  onClick={() =>
+                    setPendingFilters({ category: [], scale: [], userType: [] })
+                  }
+                >
+                  Clear all filters
+                </GoabxButton>
+              </>
+            )}
         </div>
       </GoabxDrawer>
 

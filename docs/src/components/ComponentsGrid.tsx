@@ -39,11 +39,11 @@ export interface Component {
     description?: string;
     status: "stable" | "beta" | "deprecated" | "experimental";
     category:
-      | "inputs-and-actions"
-      | "content-layout"
-      | "structure-and-navigation"
-      | "feedback-and-alerts"
-      | "utilities";
+    | "inputs-and-actions"
+    | "content-layout"
+    | "structure-and-navigation"
+    | "feedback-and-alerts"
+    | "utilities";
     tags?: string[];
     relatedComponents?: string[];
     webComponentTag?: string;
@@ -164,7 +164,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     defaultLayout: "card", // 'card' = grid view
     defaultColumns: DEFAULT_VISIBLE_COLUMNS,
   });
-
 
   // Listen for table sort events (from goa-table web component)
   // Also explicitly set version="2" attribute since React may not set it correctly on custom elements
@@ -589,9 +588,8 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
               ref={tabsRef}
               version="2"
               variant="segmented"
-              initialtab={viewMode === "card" ? 1 : 2}
-              updateurl="false"
-              stackonmobile="false"
+              initialTab={viewMode === "card" ? 1 : 2}
+              orientation="horizontal"
             >
               <goa-tab heading="Grid">
                 <span />
@@ -735,35 +733,35 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
               <tbody>
                 {groupedComponents
                   ? groupedComponents.map((group) => (
-                      <React.Fragment key={group.key}>
-                        <tr
-                          className="components-group-row"
-                          onClick={() => toggleGroup(group.key)}
-                        >
-                          <td colSpan={4}>
-                            <div className="components-group-header">
-                              <GoabIcon
-                                type={
-                                  expandedGroups.has(group.key)
-                                    ? "chevron-down"
-                                    : "chevron-forward"
-                                }
-                                size="small"
-                              />
-                              <strong>{group.label}</strong>
-                              <goa-badge
-                                version="2"
-                                type="default"
-                                content={String(group.components.length)}
-                                emphasis="subtle"
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        {expandedGroups.has(group.key) &&
-                          group.components.map(renderTableRow)}
-                      </React.Fragment>
-                    ))
+                    <React.Fragment key={group.key}>
+                      <tr
+                        className="components-group-row"
+                        onClick={() => toggleGroup(group.key)}
+                      >
+                        <td colSpan={4}>
+                          <div className="components-group-header">
+                            <GoabIcon
+                              type={
+                                expandedGroups.has(group.key)
+                                  ? "chevron-down"
+                                  : "chevron-forward"
+                              }
+                              size="small"
+                            />
+                            <strong>{group.label}</strong>
+                            <goa-badge
+                              version="2"
+                              type="default"
+                              content={String(group.components.length)}
+                              emphasis="subtle"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      {expandedGroups.has(group.key) &&
+                        group.components.map(renderTableRow)}
+                    </React.Fragment>
+                  ))
                   : filteredComponents.map(renderTableRow)}
               </tbody>
             </table>

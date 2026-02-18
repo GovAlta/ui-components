@@ -219,10 +219,12 @@ export type GoabTextAreaOnBlurDetail = {
 // Tabs
 
 export type GoabTabsVariant = "default" | "segmented";
+export type GoabTabsOrientation = "auto" | "horizontal";
 
 export interface GoabTabsProps {
   initialTab?: number;
   variant?: GoabTabsVariant;
+  orientation?: GoabTabsOrientation;
 }
 
 export type GoabTabsOnChangeDetail = {

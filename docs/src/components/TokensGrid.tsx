@@ -436,9 +436,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               ref={tabsRef}
               version="2"
               variant="segmented"
-              initialtab={tokenSyntax === "css" ? 1 : 2}
-              updateurl="false"
-              stackonmobile="false"
+              initialTab={tokenSyntax === "css" ? 1 : 2}
+              orientation="horizontal"
             >
               <goa-tab heading="CSS">
                 <span />

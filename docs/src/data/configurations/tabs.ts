@@ -4,18 +4,18 @@
  * Tabs organize content into separate views.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const tabsConfigurations: ComponentConfigurations = {
-  componentSlug: 'tabs',
-  componentName: 'Tabs',
-  defaultConfigurationId: 'basic',
+  componentSlug: "tabs",
+  componentName: "Tabs",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic tabs',
-      description: 'Simple tab navigation',
+      id: "basic",
+      name: "Basic tabs",
+      description: "Simple tab navigation",
       code: {
         react: `<GoabxTabs initialTab={1}>
   <GoabTab heading="Overview">
@@ -53,9 +53,9 @@ export const tabsConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'initial-tab',
-      name: 'Initial tab',
-      description: 'Start with a specific tab selected',
+      id: "initial-tab",
+      name: "Initial tab",
+      description: "Start with a specific tab selected",
       code: {
         react: `<GoabxTabs initialTab={2}>
   <GoabTab heading="First">First tab content.</GoabTab>
@@ -75,9 +75,9 @@ export const tabsConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'segmented',
-      name: 'Segmented variant',
-      description: 'Pill/button style tabs',
+      id: "segmented",
+      name: "Segmented variant",
+      description: "Pill/button style tabs",
       code: {
         react: `<GoabxTabs variant="segmented">
   <GoabTab heading="Day">Daily view</GoabTab>
@@ -97,9 +97,9 @@ export const tabsConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'no-url-update',
-      name: 'Without URL update',
-      description: 'Tabs that do not update browser URL',
+      id: "no-url-update",
+      name: "Without URL update",
+      description: "Tabs that do not update browser URL",
       code: {
         react: `<GoabxTabs initialTab={1} updateUrl={false}>
   <GoabTab heading="Settings">Settings panel</GoabTab>
@@ -116,21 +116,21 @@ export const tabsConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'no-stack-mobile',
-      name: 'Horizontal on mobile',
-      description: 'Tabs stay horizontal on small screens',
+      id: "horizontal-on-mobile",
+      name: "Horizontal on mobile",
+      description: "Tabs stay horizontal on small screens",
       code: {
-        react: `<GoabxTabs initialTab={1} stackOnMobile={false}>
-  <GoabTab heading="Tab 1">Content 1</GoabTab>
-  <GoabTab heading="Tab 2">Content 2</GoabTab>
-  <GoabTab heading="Tab 3">Content 3</GoabTab>
+        react: `<GoabxTabs initialTab={1} orientation="horizontal">
+  <GoabxTab heading="Tab 1">Content 1</GoabxTab>
+  <GoabxTab heading="Tab 2">Content 2</GoabxTab>
+  <GoabxTab heading="Tab 3">Content 3</GoabxTab>
 </GoabxTabs>`,
-        angular: `<goabx-tabs [initialTab]="1" [stackOnMobile]="false">
-  <goab-tab heading="Tab 1">Content 1</goab-tab>
-  <goab-tab heading="Tab 2">Content 2</goab-tab>
-  <goab-tab heading="Tab 3">Content 3</goab-tab>
+        angular: `<goabx-tabs [initialTab]="1" orientation="horizontal">
+  <goabx-tab heading="Tab 1">Content 1</goabx-tab>
+  <goabx-tab heading="Tab 2">Content 2</goabx-tab>
+  <goabx-tab heading="Tab 3">Content 3</goabx-tab>
 </goabx-tabs>`,
-        webComponents: `<goa-tabs version="2" initialtab="1" stackonmobile="false">
+        webComponents: `<goa-tabs initialtab="1" orientation="horizontal">
   <goa-tab heading="Tab 1">Content 1</goa-tab>
   <goa-tab heading="Tab 2">Content 2</goa-tab>
   <goa-tab heading="Tab 3">Content 3</goa-tab>

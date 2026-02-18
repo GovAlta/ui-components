@@ -70,6 +70,8 @@ import { Feat2877Route } from "./routes/features/feat2877";
 import { Feat3102Route } from "./routes/features/feat3102";
 import { Feat3241Route } from "./routes/features/feat3241";
 import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
+import { Feat3407SkipOnFocusTabRoute } from "./routes/features/feat3407SkipOnFocusTab";
+import { Feat3407StackOnMobileRoute } from "./routes/features/feat3407StackOnMobile";
 import { Feat3137Route } from "./routes/features/feat3137";
 import { Feat3306Route } from "./routes/features/feat3306";
 import { Feat2469Route } from "./routes/features/feat2469";
@@ -153,7 +155,8 @@ root.render(
           <Route path="features/3137" element={<Feat3137Route />} />
           <Route path="features/3241" element={<Feat3241Route />} />
           <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
-          <Route path="features/3137" element={<Feat3137Route />} />
+          <Route path="features/3407-skip-on-focus-tab" element={<Feat3407SkipOnFocusTabRoute />} />
+          <Route path="features/3407-stack-on-mobile" element={<Feat3407StackOnMobileRoute />} />
           <Route path="features/3306" element={<Feat3306Route />} />
           <Route path="features/3370" element={<Feat3370Route />} />
           <Route path="features/3396" element={<Feat3396Route />} />

@@ -217,8 +217,8 @@ export function CodeSnippet({
   // Get available frameworks
   const availableFrameworks = hasFrameworkSwitcher
     ? (Object.keys(frameworkCode).filter(
-        (k) => frameworkCode[k as Framework],
-      ) as Framework[])
+      (k) => frameworkCode[k as Framework],
+    ) as Framework[])
     : [];
 
   // Subscribe to global framework preference changes from other components.
@@ -254,7 +254,7 @@ export function CodeSnippet({
                 new CustomEvent("tabs:set-open", {
                   composed: true,
                   detail: { open: i === targetIndex },
-                })
+                }),
               );
             });
           }
@@ -440,7 +440,7 @@ export function CodeSnippet({
   const renderBlocksForFramework = (fw: Framework) => {
     if (!extractParts) {
       const rawCode = getFrameworkRawCode(frameworkCode, fw);
-      const lang = fw === 'react' ? 'tsx' : 'html';
+      const lang = fw === "react" ? "tsx" : "html";
       return (
         <SingleCodeBlock
           code={rawCode}
@@ -452,11 +452,11 @@ export function CodeSnippet({
     }
 
     switch (fw) {
-      case 'react':
+      case "react":
         return renderReactBlocks(frameworkCode.react);
-      case 'angular':
+      case "angular":
         return renderAngularBlocks(frameworkCode.angular);
-      case 'webComponents':
+      case "webComponents":
         return renderWebComponentsBlocks(frameworkCode.webComponents);
       default:
         return null;
@@ -471,13 +471,12 @@ export function CodeSnippet({
           <GoabxTabs
             variant="segmented"
             initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
+            orientation="horizontal"
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
                 <div className="code-snippet">
-                  <div className="code-blocks">
-                    {renderBlocksForFramework(fw)}
-                  </div>
+                  <div className="code-blocks">{renderBlocksForFramework(fw)}</div>
                 </div>
               </GoabTab>
             ))}
@@ -486,9 +485,7 @@ export function CodeSnippet({
       ) : (
         // Single framework - no tabs needed
         <div className="code-snippet">
-          <div className="code-blocks">
-            {renderFrameworkBlocks()}
-          </div>
+          <div className="code-blocks">{renderFrameworkBlocks()}</div>
         </div>
       )}
 
