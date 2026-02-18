@@ -297,7 +297,7 @@ describe("PublicForm Browser Tests", () => {
   });
 
   it.only("can select a radio button and continue to next page", async () => {
-    const { getByLabelText, getByRole } = render(<PublicFormTestComponent />);
+    const { getByLabelText, getByRole, getByText } = render(<PublicFormTestComponent />);
 
     const radios = getByRole("radio");
     const receiverOption = getByLabelText("Recipient");
@@ -308,18 +308,18 @@ describe("PublicForm Browser Tests", () => {
       expect(receiverOption.length).toBe(1);
     });
 
-    // FAILS HERE
+    // FAILS HERE: saying that it can't click it as it is not visible or not stable
     // Select the Recipient radio button
     // await userEvent.click(receiverOption.element());
     // await radios.first().click();
+    // await radios[0].click();
     await receiverOption.click();
-    // await userEvent.click(receiverOption.element());
 
     // Click continue button
-    const continueButton = getByRole("button").getByText("Continue");
+    const continueButton = getByRole("button").and(getByText("Continue"));
     await continueButton.click();
 
-    // Should navigate to children page (for Recipient role)
+    // // Should navigate to children page (for Recipient role)
     const nextHeader = getByText("Support order details");
     await vi.waitFor(() => {
       expect(nextHeader).toBeTruthy();
