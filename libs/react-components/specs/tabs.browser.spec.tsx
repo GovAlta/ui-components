@@ -1,7 +1,9 @@
 import { render } from "vitest-browser-react";
 
 import { GoabTabs, GoabTab } from "../src";
+import { GoabxTabs, GoabxTab } from "../src/experimental";
 import { expect, describe, it, vi } from "vitest";
+import { page } from "@vitest/browser/context";
 import { GoabBadge } from "../src/lib/badge/badge";
 
 describe("Tabs Browser Tests", () => {
@@ -521,9 +523,7 @@ describe("Tabs Browser Tests", () => {
       const Component = () => {
         return (
           <GoabTabs testId="test-tabs">
-            <GoabTab heading="Review pending">
-              Review content
-            </GoabTab>
+            <GoabTab heading="Review pending">Review content</GoabTab>
             <GoabTab
               heading={
                 <>
@@ -633,7 +633,6 @@ describe("Tabs Browser Tests", () => {
         );
       };
 
-
       const { getByText, getByRole } = render(<Component />);
       const tabs = getByRole("tab");
 
@@ -693,12 +692,124 @@ describe("Tabs Browser Tests", () => {
       // pass and the vitest would see that as a fully passing test. The logic below ensure that
       // is passes all the time.
       const hashes = new Set();
-      await vi.waitFor(() => {
-        hashes.add(window.location.hash);
-      }, { timeout: 500 });
+      await vi.waitFor(
+        () => {
+          hashes.add(window.location.hash);
+        },
+        { timeout: 500 },
+      );
 
       expect(hashes.size).toBe(1);
       expect(hashes.has("#active-tasks")).toBe(true);
-    })
+    });
+  });
+
+  describe("skip focus on initial load", () => {
+    it("should not focus any tab on initial page load", async () => {
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="Tab 1">Content 1</GoabTab>
+            <GoabTab heading="Tab 2">Content 2</GoabTab>
+            <GoabTab heading="Tab 3">Content 3</GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      await vi.waitFor(() => {
+        expect(tabs.elements().length).toBe(3);
+      });
+
+      // No tab should be focus-visible on initial page load
+      tabs.elements().forEach((tab) => {
+        expect(tab.matches(":focus-visible")).toBe(false);
+      });
+    });
+
+    it("should not focus any tab when initialTab is set", async () => {
+      const Component = () => {
+        return (
+          <GoabTabs testId="test-tabs" initialTab={2}>
+            <GoabTab heading="Tab 1">Content 1</GoabTab>
+            <GoabTab heading="Tab 2">Content 2</GoabTab>
+            <GoabTab heading="Tab 3">Content 3</GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const { getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      // The second goa-tab should be open (active)
+      await vi.waitFor(() => {
+        const goaTabs = document.querySelectorAll("goa-tab");
+        expect(goaTabs[1].getAttribute("open")).toBe("true");
+      });
+
+      // But it should NOT be focus-visible
+      await vi.waitFor(() => {
+        expect(tabs.elements().length).toBe(3);
+      });
+
+      const secondTab = tabs.elements()[1];
+      expect(secondTab.matches(":focus-visible")).toBe(false);
+    });
+  });
+
+  describe("orientation (experimental)", () => {
+    it("should stack tabs vertically on mobile by default (orientation='auto')", async () => {
+      // Simulate mobile viewport (iPhone SE dimensions)
+      await page.viewport(375, 667);
+
+      const Component = () => {
+        return (
+          <GoabxTabs testId="test-tabs">
+            <GoabxTab heading="Tab 1">Content 1</GoabxTab>
+            <GoabxTab heading="Tab 2">Content 2</GoabxTab>
+          </GoabxTabs>
+        );
+      };
+
+      const { getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      await vi.waitFor(() => {
+        const els = tabs.elements();
+        expect(els.length).toBe(2);
+      });
+
+      const tabsDiv = tabs.elements()[0].parentElement!;
+      const borderLeft = getComputedStyle(tabsDiv).borderLeftStyle;
+      expect(borderLeft).not.toBe("none"); // on mobile css, we have border left while desktop we don't
+    });
+
+    it("should keep tabs horizontal on mobile when orientation is 'horizontal'", async () => {
+      // Simulate mobile viewport (iPhone SE dimensions)
+      await page.viewport(375, 667);
+
+      const Component = () => {
+        return (
+          <GoabxTabs testId="test-tabs" orientation="horizontal">
+            <GoabxTab heading="Tab 1">Content 1</GoabxTab>
+            <GoabxTab heading="Tab 2">Content 2</GoabxTab>
+          </GoabxTabs>
+        );
+      };
+
+      const { getByRole } = render(<Component />);
+      const tabs = getByRole("tab");
+
+      await vi.waitFor(() => {
+        const els = tabs.elements();
+        expect(els.length).toBe(2);
+      });
+
+      const tabsDiv = tabs.elements()[0].parentElement!;
+      const borderLeft = getComputedStyle(tabsDiv).borderLeftStyle;
+      expect(borderLeft).toBe("none");
+    });
   });
 });

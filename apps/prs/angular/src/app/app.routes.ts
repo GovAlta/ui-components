@@ -54,6 +54,7 @@ import { Feat2267Component } from "../routes/features/feat2267/feat2267.componen
 import { Feat2328Component } from "../routes/features/feat2328/feat2328.component";
 import { Feat2361Component } from "../routes/features/feat2361/feat2361.component";
 import { Feat2440Component } from "../routes/features/feat2440/feat2440.component";
+import { Feat2469Component } from "../routes/features/feat2469/feat2469.component";
 import { Feat2492Component } from "../routes/features/feat2492/feat2492.component";
 import { Feat2609Component } from "../routes/features/feat2609/feat2609.component";
 import { Feat2611Component } from "../routes/features/feat2611/feat2611.component";
@@ -66,14 +67,15 @@ import { Feat3102Component } from "../routes/features/feat3102/feat3102.componen
 import { Feat3137Component } from "../routes/features/feat3137/feat3137.component";
 import { Feat3241Component } from "../routes/features/feat3241/feat3241.component";
 import { Feat3306Component } from "../routes/features/feat3306/feat3306.component";
-import { Feat2469Component } from "../routes/features/feat2469/feat2469.component";
 import { Feat3370Component } from "../routes/features/feat3370/feat3370.component";
+import { Feat3407SkipOnFocusTabComponent } from "../routes/features/feat3407SkipOnFocusTab/feat3407-skip-on-focus-tab.component";
+import { Feat3407StackOnMobileComponent } from "../routes/features/feat3407StackOnMobile/feat3407-stack-on-mobile.component";
 import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-icons.component";
 import { Feat3396Component } from "../routes/features/feat3396/feat3396.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
-
+  // Bug routes
   { path: "bugs/2152", component: Bug2152Component },
   { path: "bugs/2331", component: Bug2331Component },
   { path: "bugs/2393", component: Bug2393Component },
@@ -115,7 +117,7 @@ export const appRoutes: Route[] = [
   { path: "bugs/3337", component: Bug3337Component },
   { path: "bugs/3279", component: Bug3279Component },
   { path: "bugs/3384", component: Bug3384Component },
-
+  // Feature routes
   { path: "features/1328", component: Feat1328Component },
   { path: "features/1383", component: Feat1383Component },
   { path: "features/1547", component: Feat1547Component },
@@ -143,4 +145,6 @@ export const appRoutes: Route[] = [
   { path: "features/3306", component: Feat3306Component },
   { path: "features/3370", component: Feat3370Component },
   { path: "features/3396", component: Feat3396Component },
+  { path: "features/3407-skip-on-focus-tab", component: Feat3407SkipOnFocusTabComponent },
+  { path: "features/3407-stack-on-mobile", component: Feat3407StackOnMobileComponent },
 ];

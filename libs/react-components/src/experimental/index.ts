@@ -25,6 +25,7 @@ export * from "./side-menu-group/side-menu-group";
 export * from "./side-menu-heading/side-menu-heading";
 export * from "./table/table";
 export * from "./table/table-sort-header";
+export * from "./tab/tab";
 export * from "./tabs/tabs";
 export * from "./textarea/textarea";
 export * from "./work-side-menu/work-side-menu";
