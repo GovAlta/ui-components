@@ -1,0 +1,1804 @@
+/* Import web-components CSS from dist (built by nx dependency) */
+@import "../../../dist/libs/web-components/index.css";
+
+/* ============================================================================
+   APP LAYOUT
+   ============================================================================ */
+
+/* Main app container */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #F8F8F8;
+}
+
+/* Main content area - fills remaining width after sidebar */
+.main-content-area {
+  flex: 1;
+  min-width: 0; /* Prevents flex item from overflowing */
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Table cell utilities */
+.goa-table-cell--nowrap {
+  white-space: nowrap;
+}
+
+.goa-table-cell--capitalize {
+  text-transform: capitalize;
+}
+
+.goa-table-cell--notes {
+  white-space: nowrap;
+  min-width: 200px;
+}
+
+/* Checkbox in table cells - remove default bottom margin */
+.goa-table-cell--checkbox goa-checkbox {
+  margin-bottom: 0;
+}
+
+/* Clickable table rows - link styling */
+.table-row-link,
+.table-row-link:visited {
+  color: var(--goa-color-text-default);
+  text-decoration: none;
+  font-weight: var(--goa-font-weight-semi-bold, 600);
+}
+
+/* Only underline on direct link hover, not row hover */
+.table-row-link:hover,
+.table-row-link:visited:hover {
+  text-decoration: underline;
+  color: var(--goa-color-text-default);
+}
+
+.table-row-link:focus,
+.table-row-link:focus-visible {
+  outline: 2px solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
+  border-radius: var(--goa-border-radius-s);
+}
+
+/* Error pages (404, 401, 500) */
+.error-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: var(--goa-space-3xl) var(--goa-space-xl) 128px;
+}
+
+@media (max-width: 1024px) {
+  .error-page {
+    padding: var(--goa-space-2xl) var(--goa-space-xl) 112px;
+  }
+}
+
+@media (max-width: 623px) {
+  .error-page {
+    /* Subtract approximate header height (icon button ~44px + padding 32px) to prevent unnecessary scroll */
+    min-height: calc(100% - 76px);
+    padding: var(--goa-space-xl) var(--goa-space-m) 96px;
+  }
+}
+
+.error-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.error-page-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--goa-color-greyscale-100);
+}
+
+.error-page-underline {
+  width: 110px;
+  height: 8px;
+  background-color: var(--goa-color-brand-default);
+  margin-top: var(--goa-space-m);
+}
+
+/* ============================================================================
+   PAGE LAYOUTS
+   ============================================================================
+   Using GoA Design System spacing tokens for consistent spacing.
+   Mobile breakpoint: 624px (matches the app's isMobile logic)
+   ============================================================================ */
+
+/* Content padding - responsive left/right padding */
+/* Also serves as container query context for child layouts */
+.cases-content-padding {
+  container-type: inline-size;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 624px) {
+  .cases-content-padding {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Table wrapper - uses margin for scroll container compatibility */
+.table-wrapper {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media (min-width: 624px) {
+  .table-wrapper {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+}
+
+/* V2 table border styling (shadow DOM doesn't style slotted content) */
+.table-wrapper goa-table[version="2"] table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--goa-color-greyscale-200, #e7e7e7);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Filter section - contains search input and filter button */
+.cases-filter-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: var(--goa-space-xs);
+  margin-bottom: 16px;
+  gap: var(--goa-space-xl);
+}
+
+/* Container query: Stack search above tabs when container is narrow */
+@container (max-width: 960px) {
+  .cases-filter-section {
+    flex-direction: column-reverse;
+    gap: var(--goa-space-s);
+  }
+
+  .cases-filter-section goa-form-item {
+    max-width: none !important;
+    width: 100%;
+  }
+
+  .cases-filter-section goa-tabs {
+    width: 100%;
+  }
+}
+
+/* Mobile: Fix spacing when in mobile viewport */
+@media (max-width: 623px) {
+  .cases-filter-section {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    gap: 16px;
+  }
+}
+
+.cases-filter-section goa-form-item {
+  flex: 1;
+  max-width: 80ch;
+}
+
+/* Toolbar row - tabs on left, search on right */
+.cases-toolbar-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--goa-space-l);
+  width: 100%;
+}
+
+/* Tabs wrapper for horizontal scrolling */
+.cases-toolbar-tabs {
+  display: flex;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.cases-toolbar-tabs::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.cases-toolbar-tabs goa-tabs {
+  flex-shrink: 0;
+  --goa-tabs-margin-bottom: 0;
+}
+
+/* Spacer element at end of tabs for scroll padding */
+.cases-toolbar-tabs__spacer {
+  display: none;
+}
+
+/* When stacked, extend tabs to screen edge with negative margin */
+@media (max-width: 1200px) {
+  .cases-toolbar-tabs {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+  }
+
+  .cases-toolbar-tabs__spacer {
+    display: block;
+    flex-shrink: 0;
+    width: 16px;
+  }
+}
+
+/* Fix missing left border on segmented tabs on mobile */
+@media (max-width: 623px) {
+  .cases-toolbar-tabs goa-tabs[variant="segmented"] {
+    border-left: 1px solid var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-m);
+  }
+}
+
+@media (min-width: 624px) and (max-width: 1200px) {
+  .cases-toolbar-tabs {
+    margin-left: -32px;
+    margin-right: -32px;
+    padding-left: 32px;
+  }
+
+  .cases-toolbar-tabs__spacer {
+    width: 32px;
+  }
+}
+
+.cases-toolbar-row .cases-search-row {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Wrap to stacked layout when viewport is narrow */
+@media (max-width: 1200px) {
+  .cases-toolbar-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--goa-space-m);
+  }
+}
+
+/* Hide tabs in sticky/collapsed header */
+.page-header--collapsed .cases-toolbar-tabs {
+  display: none;
+}
+
+.cases-search-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: var(--goa-space-m);
+  width: 100%;
+}
+
+.cases-search-group {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 120px; /* minimum search field width */
+  gap: var(--goa-space-xs);
+}
+
+.cases-search-group goa-form-item {
+  flex: 1;
+  min-width: 0; /* allow form-item to shrink below content size */
+}
+
+.cases-actions-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--goa-space-s);
+}
+
+/* Tabs in filter section - remove bottom margin from shadow DOM */
+.cases-filter-section goa-tabs {
+  margin-bottom: -2rem; /* Counteract the internal 2rem margin */
+}
+
+/* Clear all link button styled like GoabLink color="dark" size="small" */
+.clear-all-link {
+  background: none;
+  border: none;
+  color: var(--goa-color-text-default);
+  font: var(--goa-typography-body-s);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  margin-left: var(--goa-space-2xs);
+}
+
+.clear-all-link:hover {
+  color: var(--goa-color-interactive-hover);
+}
+
+/* Filter chips container */
+.cases-chips-container {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+  margin-top: 0; /* toolbar already provides 16px gap */
+  margin-bottom: var(--goa-space-m);
+}
+
+/* Empty state - inside table body */
+.cases-empty-state-cell {
+  padding: 0 !important;
+  border: none !important;
+}
+
+.cases-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px var(--goa-space-m);
+  background-color: var(--goa-color-greyscale-white, #ffffff);
+  text-align: center;
+}
+
+.cases-empty-state__illustration {
+  width: 100px;
+  height: auto;
+  margin-bottom: 32px;
+}
+
+.cases-empty-state__heading {
+  font: var(--goa-typography-heading-2xs);
+  color: var(--goa-color-text-secondary);
+  margin-bottom: 16px;
+}
+
+.cases-empty-state__subline {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-500);
+  margin-bottom: 32px;
+}
+
+/* Loading state - shown while data is being fetched */
+.cases-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px var(--goa-space-m);
+  background-color: var(--goa-color-greyscale-white, #ffffff);
+}
+
+
+/* ============================================================================
+   DESKTOP CARD CONTAINER - Adaptive chrome based on vertical scroll state
+   ============================================================================
+   The content card "floats" on the grey background. Margins, borders, and
+   border-radius appear/disappear based on scroll position:
+   - no-scroll: All chrome visible (content fits in viewport)
+   - at-top: Top chrome visible, bottom bleeds off
+   - middle: No chrome, content edge-to-edge
+   - at-bottom: Bottom chrome visible, top bleeds off
+
+   IMPORTANT: Height stays constant to prevent layout jitter. We use padding
+   on the wrapper (.card-container) to create space, not height changes.
+   ============================================================================ */
+
+/* Wrapper - provides the spacing around the card */
+.card-container {
+  transition: padding 0.15s ease-out;
+}
+
+.card-container:has([data-scroll-state="no-scroll"]) {
+  padding: 20px 20px 20px 0;
+}
+
+.card-container:has([data-scroll-state="at-top"]) {
+  padding: 20px 20px 0 0;
+}
+
+.card-container:has([data-scroll-state="middle"]) {
+  padding: 0 20px 0 0;
+}
+
+.card-container:has([data-scroll-state="at-bottom"]) {
+  padding: 0 20px 20px 0;
+}
+
+/* Card itself - height always 100% of available space */
+.desktop-card-container {
+  background-color: white;
+  height: 100%;
+  overflow: auto;
+  transition: border-radius 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+/* No scroll - full chrome (all borders, all radius) */
+.desktop-card-container[data-scroll-state="no-scroll"] {
+  border: 1px solid #E9E9E9;
+  border-radius: 24px;
+}
+
+/* At top - top chrome only */
+.desktop-card-container[data-scroll-state="at-top"] {
+  border: 1px solid #E9E9E9;
+  border-bottom: none;
+  border-radius: 24px 24px 0 0;
+}
+
+/* Middle - side borders only, no top/bottom chrome */
+.desktop-card-container[data-scroll-state="middle"] {
+  border: 1px solid #E9E9E9;
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0;
+}
+
+/* At bottom - bottom chrome only */
+.desktop-card-container[data-scroll-state="at-bottom"] {
+  border: 1px solid #E9E9E9;
+  border-top: none;
+  border-radius: 0 0 24px 24px;
+}
+
+/* ============================================================================
+   SCROLL CONTAINER - Horizontal scroll shadows with gradient overlays
+   ============================================================================ */
+
+.scroll-container {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  /* Constrain width so content doesn't expand parent - enables horizontal scroll */
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  /* Hide the native scrollbar on the content - we'll use the fixed one instead */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+/* Ensure content fills container width OR fits content (whichever is larger) */
+/* flex-grow: 1 fills available space, min-width: max-content allows expansion for scroll */
+.scroll-container > *:not(.scroll-container-shadow) {
+  flex-grow: 1;
+  min-width: max-content;
+}
+
+/* Horizontal scroll shadows - use sticky positioning to stay at edges */
+.scroll-container-shadow {
+  position: sticky;
+  width: 8px;
+  min-width: 8px;
+  /* Height set dynamically via JS for mobile compatibility */
+  /* Opacity set dynamically via inline styles */
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.scroll-container-shadow--left {
+  left: 0;
+  margin-right: -8px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+}
+
+.scroll-container-shadow--right {
+  right: 0;
+  margin-left: -8px;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+}
+
+/* Fixed scrollbar that stays at bottom of card container */
+.scroll-container-scrollbar {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 14px;
+  z-index: 100;
+}
+
+/* Inner element that provides the scroll width */
+.scroll-container-scrollbar-inner {
+  height: 1px;
+}
+
+/* ============================================================================
+   PAGE HEADER
+   ============================================================================ */
+
+/* Header container base styles */
+.page-header {
+  position: relative; /* Required for ::after pseudo-element positioning */
+  background-color: white;
+  border-bottom: none; /* Explicit default - no border */
+  transition: padding 0.15s ease-out, box-shadow 0.15s ease-out, border-bottom 0.1s ease-out;
+}
+
+/* Desktop: Header states based on scroll position */
+@media (min-width: 624px) {
+  .desktop-card-container .page-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+  }
+
+  /* Expanded state - at top or no scroll */
+  .desktop-card-container .page-header--expanded {
+    padding: 24px 32px 16px 32px;
+    border-bottom: none;
+  }
+
+  /* Collapsed state - middle or bottom scroll */
+  .desktop-card-container .page-header--collapsed {
+    padding: 12px 32px;
+    border-bottom: 1px solid var(--goa-color-greyscale-150);
+  }
+
+  /* With tabs - no bottom padding */
+  .desktop-card-container .page-header--with-tabs.page-header--expanded {
+    padding-bottom: 0;
+  }
+
+  .desktop-card-container .page-header--with-tabs.page-header--collapsed {
+    padding-bottom: 0;
+  }
+
+  /* With toolbar expanded - spacing below header */
+  .desktop-card-container .page-header--with-toolbar.page-header--expanded {
+    padding-bottom: var(--goa-space-m);
+  }
+
+  /* Collapsed header with toolbar - keep equal padding (sticky header) */
+  /* The default collapsed padding (12px 32px) provides equal spacing */
+
+}
+
+/* Page header scroll shadow - gradient fade when content scrolls behind */
+.page-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  transform: translateY(100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), transparent);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden; /* Fully remove when not visible */
+  transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+}
+
+/* Shadow visible when content scrolls behind header */
+.page-header--middle::after,
+.page-header--atbottom::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Explicitly hide shadow when at top or no scroll */
+.page-header--attop::after,
+.page-header--noscroll::after {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Mobile header styles */
+@media (max-width: 623px) {
+  .page-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+    padding: var(--goa-space-m) 16px;
+    margin-bottom: 0;
+    border-bottom: none;
+    transition: padding 0.15s ease-out, box-shadow 0.15s ease-out;
+  }
+
+  /* Collapsed state on mobile - smaller padding */
+  .page-header--collapsed {
+    padding: var(--goa-space-s) var(--goa-space-m);
+    border-bottom: 1px solid var(--goa-color-greyscale-150);
+  }
+
+  /* Collapsed header with toolbar - 12px gap below */
+  .page-header--collapsed.page-header--with-toolbar {
+    padding-bottom: 12px;
+  }
+}
+
+/* Header content container */
+.page-header__content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--goa-space-s);
+}
+
+@media (min-width: 624px) {
+  .page-header__content {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+}
+
+/* Title container with menu button */
+.page-header__title-container {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-xs);
+}
+
+/* Align menu icon to content edge on mobile by compensating for button's internal padding */
+@media (max-width: 623px) {
+  .page-header__title-container > goa-icon-button:first-child {
+    margin-left: -12px;
+  }
+}
+
+/* Spacer element - pushes actions to the right in desktop mode */
+.page-header__spacer {
+  flex: 1;
+  min-width: 1rem;
+}
+
+/* Hide spacer when actions contain expandable search */
+.page-header__content:has(.page-header-search) .page-header__spacer,
+.page-header__content:has(.search-header-filters) .page-header__spacer {
+  display: none;
+}
+
+/* Gap between title and search input */
+.page-header__content:has(.page-header-search),
+.page-header__content:has(.search-header-filters) {
+  gap: 32px;
+}
+
+@media (min-width: 624px) {
+  .page-header__content:has(.page-header-search),
+  .page-header__content:has(.search-header-filters) {
+    gap: 48px;
+  }
+}
+
+/* ============================================================================
+   SEARCH PAGE HEADER
+   Desktop: inline [Search] [Dropdowns]
+   Tablet (624-700px): wrapped, search below title row
+   Mobile expanded: 3 rows - title, search, dropdowns
+   Mobile collapsed: single row - menu, search, dropdowns inline
+   ============================================================================ */
+
+/* Desktop: Search input and dropdowns inline */
+.search-header-filters {
+  display: flex;
+  gap: var(--goa-space-s);
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.search-header-filters__dropdowns {
+  display: flex;
+  gap: var(--goa-space-s);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.search-header-filters__search {
+  flex: 1;
+  min-width: 150px;
+}
+
+.page-header__actions:has(.search-header-filters) {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Tablet (624-880px): Search drops below title row */
+@media (max-width: 880px) {
+  .page-header__content:has(.search-header-filters) {
+    flex-wrap: wrap;
+    row-gap: var(--goa-space-m);
+  }
+
+  .page-header__content:has(.search-header-filters) .page-header__spacer {
+    display: none;
+  }
+
+  .page-header__actions:has(.search-header-filters) {
+    flex: 1 0 100%;
+  }
+
+  .search-header-filters {
+    flex-wrap: wrap;
+    row-gap: var(--goa-space-s);
+  }
+
+  .search-header-filters__dropdowns {
+    flex: 0 0 auto;
+  }
+
+  .search-header-filters__search {
+    flex: 1 0 100%;
+  }
+}
+
+/* All sizes: Hide title text when collapsed, remove gap */
+.page-header--collapsed .page-header__content:has(.search-header-filters) .page-header__title-container goa-text {
+  display: none;
+}
+
+.page-header--collapsed .page-header__content:has(.search-header-filters) {
+  gap: 0;
+}
+
+/* Mobile (623px and below) */
+@media (max-width: 623px) {
+  /* Expanded: 3-row grid layout */
+  .page-header__content:has(.search-header-filters) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: var(--goa-space-s);
+    align-items: center;
+  }
+
+  .page-header__content:has(.search-header-filters) .page-header__title-container {
+    grid-row: 1;
+  }
+
+  .page-header__actions:has(.search-header-filters) {
+    display: contents;
+  }
+
+  .search-header-filters {
+    display: contents;
+  }
+
+  .search-header-filters__search {
+    grid-row: 2;
+  }
+
+  .search-header-filters__dropdowns {
+    grid-row: 3;
+    display: flex;
+    gap: var(--goa-space-s);
+  }
+
+  /* Collapsed: 2-row layout - search on top, dropdowns below */
+  .page-header--collapsed .page-header__content:has(.search-header-filters) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--goa-space-xs);
+    align-items: center;
+  }
+
+  .page-header--collapsed .page-header__content:has(.search-header-filters) .page-header__title-container {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .page-header--collapsed .page-header__actions:has(.search-header-filters) {
+    display: contents;
+  }
+
+  .page-header--collapsed .search-header-filters {
+    display: contents;
+  }
+
+  .page-header--collapsed .search-header-filters__search {
+    grid-row: 1;
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .page-header--collapsed .search-header-filters__dropdowns {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    display: flex;
+    gap: var(--goa-space-xs);
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================================
+   ROW ACTION MENU - Fix popover in table cells
+   ============================================================================ */
+
+/* Wrapper to contain the popover */
+.row-action-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Trigger button for row actions */
+.row-action-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--goa-border-radius-m);
+  background: transparent;
+  cursor: pointer;
+  color: var(--goa-color-text-secondary);
+}
+
+.row-action-trigger:hover {
+  background: var(--goa-color-greyscale-100);
+  color: var(--goa-color-text-default);
+}
+
+.row-action-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--goa-color-interactive-focus);
+}
+
+/* Row action menu container */
+.row-action-menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-2xs);
+  margin: calc(-1 * var(--goa-space-m)); /* Offset popover padding */
+  padding: var(--goa-space-xs);
+  width: max-content;
+}
+
+/* Row action menu items - styled like dropdown 2.0 */
+.row-action-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+  width: 100%;
+  padding: var(--goa-space-s) var(--goa-space-m);
+  border: none;
+  border-radius: var(--goa-border-radius-m);
+  background: transparent;
+  font: var(--goa-typography-body-m);
+  color: var(--goa-color-text-default);
+  cursor: pointer;
+  text-align: left;
+}
+
+.row-action-menu__item:hover,
+.row-action-menu__item:focus-visible {
+  background: var(--goa-dropdown-item-color-bg-hover);
+  color: var(--goa-dropdown-item-color-text-hover);
+  outline: none;
+}
+
+.row-action-menu__item:focus-visible {
+  box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+}
+
+/* Destructive action variant (delete, remove, etc.) */
+.row-action-menu__item--destructive {
+  color: var(--goa-input-color-text-error);
+}
+
+.row-action-menu__item--destructive:hover,
+.row-action-menu__item--destructive:focus-visible {
+  background: var(--goa-color-emergency-background);
+  color: var(--goa-input-color-text-error);
+}
+
+/* Actions container */
+.page-header__actions {
+  display: flex;
+  gap: var(--goa-space-s);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Allow actions to expand (e.g., search input in header) */
+.page-header__actions:has(.page-header-search) {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Page header tabs section */
+.page-header__tabs {
+  padding: 0;
+}
+
+.page-header--expanded .page-header__tabs {
+  margin-top: 8px;
+}
+
+.page-header--with-tabs {
+  padding-bottom: 0;
+}
+
+/* Page header toolbar section (search/sort/filter) */
+.page-header__toolbar {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--goa-space-s);
+  flex: 1;
+  min-width: 0;
+}
+
+.page-header__toolbar--expanded {
+  margin-top: var(--goa-space-m);
+  margin-bottom: 0;
+  padding: 0;
+}
+
+/* Toolbar search row in header */
+.page-header__toolbar .cases-search-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: var(--goa-space-m);
+  width: 100%;
+}
+
+.page-header__toolbar .cases-search-group {
+  flex: 1;
+  min-width: 120px;
+}
+
+.page-header__toolbar .cases-actions-group {
+  flex-shrink: 0;
+}
+
+/* Collapsed header with toolbar - hide title, tabs, actions */
+.page-header--collapsed.page-header--with-toolbar .page-header__title-container goa-text,
+.page-header--collapsed.page-header--with-toolbar .page-header__spacer,
+.page-header--collapsed.page-header--with-toolbar .page-header__actions,
+.page-header--collapsed.page-header--with-toolbar .page-header__tabs {
+  display: none;
+}
+
+/* Hide title on scroll option - rearranges to single row with tabs left, actions right */
+.page-header--collapsed.page-header--hide-title-on-scroll {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--goa-space-m);
+}
+
+.desktop-card-container .page-header--collapsed.page-header--hide-title-on-scroll,
+.desktop-card-container .page-header--with-tabs.page-header--collapsed.page-header--hide-title-on-scroll {
+  padding-bottom: var(--goa-space-xs);
+}
+
+/* Hide title and spacer, keep actions */
+.page-header--collapsed.page-header--hide-title-on-scroll .page-header__title-container,
+.page-header--collapsed.page-header--hide-title-on-scroll .page-header__spacer {
+  display: none;
+}
+
+/* Content container just holds actions now */
+.page-header--collapsed.page-header--hide-title-on-scroll .page-header__content {
+  order: 2;
+  flex-shrink: 0;
+}
+
+/* Tabs take left side */
+.page-header--collapsed.page-header--hide-title-on-scroll .page-header__tabs {
+  order: 1;
+  flex: 1;
+}
+
+/* Toolbar adjustments when collapsed */
+.page-header--collapsed.page-header--with-toolbar .page-header__toolbar {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Mobile collapsed: menu icon and toolbar on same row */
+@media (max-width: 623px) {
+  .page-header--collapsed.page-header--with-toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--goa-space-m);
+  }
+
+  .page-header--collapsed.page-header--with-toolbar .page-header__content {
+    flex-shrink: 0;
+  }
+
+  .page-header--collapsed.page-header--with-toolbar .page-header__toolbar {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ============================================================================
+   PAGE FOOTER
+   ============================================================================
+   Sticky footer that appears at the bottom of the viewport.
+   Visibility controlled by visibleWhen mode (always, selection, scrolled).
+   Matches header pattern with scroll-aware shadow.
+   ============================================================================ */
+
+/* Footer container base styles */
+.page-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  background-color: white;
+  border-top: 1px solid var(--goa-color-greyscale-150);
+  padding: var(--goa-space-s) var(--goa-space-xl);
+  transition: border-color 0.1s ease-out;
+}
+
+/* At bottom - no border, extra bottom padding to match card chrome */
+.page-footer--atbottom,
+.page-footer--noscroll {
+  border-top-color: transparent;
+  padding-bottom: var(--goa-space-l);
+}
+
+/* Mobile footer styles */
+@media (max-width: 623px) {
+  .page-footer {
+    padding: var(--goa-space-s) var(--goa-space-m);
+  }
+}
+
+/* Footer scroll shadow - gradient fade when content scrolls behind */
+.page-footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 8px;
+  transform: translateY(-100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.08), transparent);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+}
+
+/* Shadow visible when content scrolls behind footer */
+.page-footer--attop::before,
+.page-footer--middle::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Explicitly hide shadow when at bottom or no scroll */
+.page-footer--atbottom::before,
+.page-footer--noscroll::before {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Footer content container */
+.page-footer__content {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-m);
+}
+
+/* ============================================================================
+   NOTIFICATION CENTRE
+   ============================================================================ */
+
+/* Use darker shadow for notification popover */
+goa-work-side-menu {
+  --goa-popover-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Remove default tabs margin in notification centre */
+goa-work-side-menu goa-tabs {
+  --goa-tabs-margin-bottom: 0;
+}
+
+/* Header shadow - appears when content scrolls behind */
+.notification-header {
+  position: relative;
+  padding-bottom: var(--goa-space-xs);
+}
+
+.notification-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  transform: translateY(100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 1;
+}
+
+.notification-header--shadowed::after {
+  opacity: 1;
+}
+
+/* Footer shadow - appears when content scrolls behind */
+.notification-footer {
+  position: relative;
+}
+
+.notification-footer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 5px;
+  transform: translateY(-100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 1;
+}
+
+.notification-footer--shadowed::before {
+  opacity: 1;
+}
+
+/* Notification drawer content (mobile) - adjust drawer padding */
+goa-drawer .notification-drawer-content {
+  --goa-drawer-content-padding-vertical: 0;
+  --goa-drawer-content-padding-horizontal: 12px;
+}
+
+/* Remove border-bottom from notification header on mobile (drawer already has border) */
+goa-drawer .notification-drawer-content .notification-header {
+  border-bottom: none;
+}
+
+/* Remove tabs bottom margin in drawer on mobile */
+goa-drawer goa-tabs {
+  --goa-tabs-margin-bottom: 0;
+}
+
+/* Notification empty state */
+.notification-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--goa-space-3xl) var(--goa-space-m);
+  text-align: center;
+}
+
+.notification-empty-state__illustration {
+  width: 80px;
+  height: auto;
+  margin-bottom: var(--goa-space-l);
+}
+
+.notification-empty-state__heading {
+  font: var(--goa-typography-heading-2xs);
+  color: var(--goa-color-text-secondary);
+  margin-bottom: var(--goa-space-xs);
+}
+
+.notification-empty-state__subline {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-500);
+}
+
+/* ============================================================================
+   EXPANDABLE LIST VIEW - Accordion-style rows with expand/collapse
+   ============================================================================ */
+
+.expandable-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-xs);
+}
+
+.expandable-list__item {
+  background: white;
+  border: 1px solid var(--goa-color-greyscale-200);
+  border-radius: var(--goa-border-radius-xl);
+}
+
+.expandable-list__header {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--goa-space-xs) var(--goa-space-l) var(--goa-space-xs) var(--goa-space-s);
+  gap: var(--goa-space-2xs);
+  background-color: var(--goa-color-greyscale-100);
+  border-radius: var(--goa-border-radius-xl);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.expandable-list__header:hover {
+  background-color: var(--goa-color-greyscale-200);
+}
+
+/* When expanded, only round top corners of header */
+.expandable-list__item--expanded .expandable-list__header {
+  border-radius: var(--goa-border-radius-xl) var(--goa-border-radius-xl) 0 0;
+}
+
+.expandable-list__toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--goa-space-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--goa-border-radius-s);
+  transition: background-color 0.15s ease;
+}
+
+/* Toggle hover removed - header has hover state now */
+
+.expandable-list__toggle:focus-visible {
+  outline: 2px solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
+}
+
+.expandable-list__heading-group {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-m);
+  flex-wrap: wrap;
+  padding: var(--goa-space-xs) 0;
+}
+
+.expandable-list__title {
+  font-weight: var(--goa-font-weight-bold);
+  flex-shrink: 0;
+}
+
+.expandable-list__name {
+  font: var(--goa-typography-heading-xs);
+}
+
+/* Responsive: stack badge under name on small screens */
+@media (max-width: 623px) {
+  .expandable-list__heading-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--goa-space-xs);
+  }
+}
+
+.expandable-list__right-group {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+}
+
+.expandable-list__secondary {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+}
+
+.expandable-list__actions {
+  flex-shrink: 0;
+}
+
+.expandable-list__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-m);
+}
+
+.expandable-list__header-actions goa-link {
+  white-space: nowrap;
+}
+
+.expandable-list__content {
+  padding: var(--goa-space-m) var(--goa-space-l) var(--goa-space-l) var(--goa-space-l);
+  border-top: 1px solid var(--goa-color-greyscale-200);
+}
+
+.expandable-list__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-m);
+}
+
+.expandable-list__detail-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--goa-space-l);
+}
+
+.expandable-list__detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-2xs);
+}
+
+.expandable-list__detail-label {
+  font: var(--goa-typography-body-xs);
+  color: var(--goa-color-text-secondary);
+}
+
+.expandable-list__detail-value {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-text-default);
+}
+
+.expandable-list__note {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-xs);
+  padding: var(--goa-space-s) var(--goa-space-m);
+  background-color: var(--goa-color-warning-100);
+  border-radius: var(--goa-border-radius-s);
+  color: var(--goa-color-text-default);
+  font: var(--goa-typography-body-s);
+}
+
+/* ============================================================================
+   CLIENT CARD VIEW - Card-based display for clients using GoabContainer
+   ============================================================================ */
+
+.cases-card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-s);
+  position: relative;
+}
+
+/* Ensure GoabDataGrid keyboard navigation indicator is not clipped in card view */
+.cases-content-padding goa-data-grid {
+  overflow: visible;
+}
+
+/* Title slot content - name and badges */
+.case-card__title {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--goa-space-s);
+  flex-wrap: wrap;
+  padding: var(--goa-space-xs) 0;
+}
+
+/* Checkbox in card title - remove default margins */
+.case-card__title goa-checkbox {
+  margin-bottom: 0;
+  margin-top: -3px;
+  margin-right: -8px; /* Compensate for empty label space inside checkbox */
+  flex-shrink: 0;
+}
+
+.case-card__name {
+  font: var(--goa-typography-heading-s);
+  color: var(--goa-color-interactive-default);
+  text-decoration: none;
+}
+
+.case-card__name:hover {
+  text-decoration: underline;
+}
+
+/* Actions slot content - comments link and View button */
+.case-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-m);
+}
+
+.case-card__actions goa-link {
+  white-space: nowrap;
+}
+
+/* Body content - grouped sections */
+.case-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-l);
+}
+
+/* Sections container - two columns that wrap */
+.case-card__sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--goa-space-l);
+}
+
+/* Individual section */
+.case-card__section {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Section heading - gray with underline */
+.case-card__section-heading {
+  font: var(--goa-typography-heading-2xs);
+  color: var(--goa-color-greyscale-600);
+  padding-bottom: var(--goa-space-xs);
+  border-bottom: 1px solid var(--goa-color-greyscale-400);
+  margin-bottom: var(--goa-space-s);
+}
+
+/* Fields within a section */
+.case-card__section-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--goa-space-m) var(--goa-space-xl);
+}
+
+.case-card__label {
+  font: var(--goa-typography-heading-2xs);
+  color: var(--goa-color-text-secondary);
+}
+
+.case-card__value {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-text-default);
+}
+
+/* Skeleton loading state */
+.case-card--skeleton {
+  pointer-events: none;
+}
+
+/* ============================================================================
+   SEARCH FILTER BAR - Enhanced filter UI for Search page
+   ============================================================================ */
+
+.search-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-m);
+  margin-top: var(--goa-space-m);
+  margin-bottom: var(--goa-space-m);
+}
+
+.search-filter-bar__indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-xs);
+  color: var(--goa-color-text-secondary);
+  font: var(--goa-typography-body-s);
+}
+
+.search-filter-bar__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--goa-space-m);
+  align-items: flex-end;
+}
+
+.search-filter-bar__date-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-filter-bar__date-field goa-form-item {
+  margin-bottom: 0;
+}
+
+.search-filter-bar__search {
+  flex: 1;
+  min-width: 150px;
+}
+
+.search-filter-bar__tabs {
+  margin-top: var(--goa-space-xs);
+}
+
+.search-filter-bar__tabs goa-tabs {
+  --goa-tabs-margin-bottom: 0;
+}
+
+/* Responsive adjustments for filter bar */
+@media (max-width: 768px) {
+  .search-filter-bar__controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-filter-bar__controls > * {
+    width: 100%;
+  }
+
+  .search-filter-bar__controls goa-dropdown {
+    width: 100% !important;
+  }
+
+  .search-filter-bar__search {
+    max-width: none;
+  }
+
+  .search-filter-bar__date-field {
+    width: 100%;
+  }
+
+  .search-filter-bar__date-field goa-date-picker {
+    width: 100% !important;
+  }
+}
+
+/* ============================================================================
+   SETTINGS POPOVER - Cascading menu for view settings
+   ============================================================================ */
+
+.settings-popover__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+}
+
+.settings-popover__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--goa-space-s) var(--goa-space-m);
+}
+
+.settings-popover__title {
+  font: var(--goa-typography-heading-2xs);
+  color: var(--goa-color-text-default);
+}
+
+.settings-popover__back {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-xs);
+  background: none;
+  border: none;
+  padding: 0;
+  font: var(--goa-typography-heading-2xs);
+  color: var(--goa-color-text-default);
+  cursor: pointer;
+}
+
+.settings-popover__back:hover {
+  color: var(--goa-color-interactive-hover);
+}
+
+.settings-popover__back:focus-visible {
+  outline: 2px solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
+  border-radius: var(--goa-border-radius-s);
+}
+
+.settings-popover__menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-popover__menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+  padding: var(--goa-space-s) var(--goa-space-m);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--goa-color-text-default);
+  transition: background-color 0.15s ease;
+}
+
+.settings-popover__menu-item:hover {
+  background-color: var(--goa-color-greyscale-100);
+}
+
+.settings-popover__menu-item:focus-visible {
+  outline: none;
+  background-color: var(--goa-color-greyscale-100);
+  box-shadow: inset 0 0 0 2px var(--goa-color-interactive-focus);
+}
+
+.settings-popover__menu-label {
+  flex: 1;
+  font: var(--goa-typography-body-m);
+}
+
+.settings-popover__menu-value {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-text-secondary);
+}
+
+.settings-popover__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-xs);
+  padding: 0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m);
+}
+
+.settings-popover__options goa-radio-group goa-radio-item {
+  margin-left: -0.5rem;
+  margin-bottom: -0.25rem;
+}
+
+.settings-popover__reset {
+  padding: var(--goa-space-s) var(--goa-space-m);
+}
+
+/* ============================================================================
+   GROUPED VIEW - Group headers for grouped data display
+   ============================================================================ */
+
+.cases-grouped-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.cases-group__header {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+  width: 100%;
+  padding: var(--goa-space-s) 0;
+  margin-bottom: var(--goa-space-m);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--goa-color-greyscale-200);
+  cursor: pointer;
+  text-align: left;
+}
+
+.cases-group__header:hover {
+  background-color: var(--goa-color-greyscale-100);
+}
+
+.cases-group__header:focus-visible {
+  outline: 2px solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
+  border-radius: var(--goa-border-radius-s);
+}
+
+.cases-group__label {
+  font: var(--goa-typography-heading-xs);
+  color: var(--goa-color-text-default);
+}
+
+.cases-group .cases-card-grid,
+.cases-group__table,
+.cases-group__list {
+  margin-bottom: var(--goa-space-xl);
+}
+
+/* Table group row styling */
+.table-group-row td {
+  background-color: var(--goa-color-greyscale-150) !important;
+  padding: var(--goa-space-s) var(--goa-space-m) !important;
+  border-bottom: 1px solid var(--goa-color-greyscale-200) !important;
+}
+
+.table-group-row:hover td {
+  background-color: var(--goa-color-greyscale-200) !important;
+}
+
+.table-group-row__content {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+}
+
+.table-group-row__label {
+  font: var(--goa-typography-body-m);
+  font-weight: 600;
+  color: var(--goa-color-text-default);
+}
+
+/* ============================================================================
+   BUTTON-STYLE TABS - Tabs styled like a button group (toggle pills)
+   ============================================================================
+   Usage: Wrap GoabTabs in a div with class "tabs--button-style"
+
+   Example:
+   <div className="tabs--button-style">
+     <GoabTabs>...</GoabTabs>
+   </div>
+   ============================================================================ */
+
+.tabs--button-style goa-tabs {
+  --goa-tabs-margin-bottom: 0;
+}
+
+/* Override the tabs container - remove underline, add gap */
+.tabs--button-style goa-tabs::part(tabs),
+.tabs--button-style [role="tablist"] .tabs {
+  border-bottom: none;
+  gap: var(--goa-space-xs);
+}
+
+/* Target tabs via shadow DOM and direct styling */
+.tabs--button-style [role="tab"] {
+  /* Reset default tab styling */
+  border-bottom: none !important;
+
+  /* Button-like appearance */
+  border: 1px solid var(--goa-color-interactive-default);
+  border-radius: var(--goa-border-radius-m);
+  background: transparent;
+  padding: var(--goa-space-xs) var(--goa-space-m);
+
+  /* Typography */
+  font: var(--goa-typography-body-s);
+  font-weight: var(--goa-font-weight-regular);
+  color: var(--goa-color-interactive-default);
+
+  /* Transitions */
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Remove the ::after indicator from V2 tabs */
+.tabs--button-style [role="tab"]::after {
+  display: none !important;
+}
+
+/* Hover state - unselected */
+.tabs--button-style [role="tab"]:hover:not([aria-selected="true"]) {
+  background: var(--goa-color-interactive-hover);
+  border-color: var(--goa-color-interactive-hover);
+  color: white;
+}
+
+/* Selected state - filled button */
+.tabs--button-style [role="tab"][aria-selected="true"] {
+  background: var(--goa-color-interactive-default);
+  border-color: var(--goa-color-interactive-default);
+  color: white;
+  font-weight: var(--goa-font-weight-bold);
+}
+
+/* Focus state - accessibility */
+.tabs--button-style [role="tab"]:focus-visible {
+  outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
+}
+
+/* Ensure badges inside tabs maintain proper styling */
+.tabs--button-style [role="tab"] goa-badge {
+  vertical-align: middle;
+}
+
+/* Mobile adjustments - keep horizontal for button-style tabs */
+@media (max-width: 623px) {
+  .tabs--button-style goa-tabs::part(tabs),
+  .tabs--button-style [role="tablist"] .tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    padding-bottom: 0;
+  }
+
+  .tabs--button-style [role="tab"] {
+    border-left: none !important;
+    border: 1px solid var(--goa-color-interactive-default);
+    white-space: nowrap;
+  }
+
+  .tabs--button-style [role="tab"][aria-selected="true"] {
+    background: var(--goa-color-interactive-default);
+    border-left: none;
+  }
+}
