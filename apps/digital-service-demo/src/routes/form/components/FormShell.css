@@ -1,0 +1,29 @@
+.form-shell {
+  min-height: 100vh;
+  padding: var(--goa-space-xl) var(--goa-space-m);
+}
+
+.form-shell__header {
+  max-width: 60ch;
+  margin: 0 auto var(--goa-space-2xl);
+}
+
+.form-shell__service-name {
+  font-size: var(--goa-font-size-8);
+  font-weight: var(--goa-font-weight-bold);
+  line-height: var(--goa-line-height-2);
+  margin: 0 0 var(--goa-space-xs);
+  color: var(--goa-color-text-default);
+}
+
+.form-shell__service-description {
+  font-size: var(--goa-font-size-4);
+  line-height: var(--goa-line-height-3);
+  margin: 0;
+  color: var(--goa-color-text-secondary);
+}
+
+.form-shell__content {
+  max-width: 60ch;
+  margin: 0 auto;
+}
