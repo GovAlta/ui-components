@@ -387,7 +387,6 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={styles(
-    "display: inline-block",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
@@ -412,12 +411,7 @@
     <slot name="target" />
   </button>
 
-  <div
-    style={styles(
-      style("display", _open ? "block" : "none"),
-      style("position", "relative"),
-    )}
-  >
+  <div style={styles(style("display", _open ? "block" : "none"))}>
     <section
       bind:clientHeight={_sectionHeight}
       bind:this={_popoverEl}
@@ -428,11 +422,21 @@
         // attribute is set, the content width is set to fit-content instead of inheriting the target width.
         style("width", _contentFitsWidth ? "fit-content" : width),
         style("min-width", minwidth),
-        style("max-width", _contentFitsWidth ? maxwidth : width ? `max(${width}, ${maxwidth})` : maxwidth),
+        style(
+          "max-width",
+          _contentFitsWidth
+            ? maxwidth
+            : width
+              ? `max(${width}, ${maxwidth})`
+              : maxwidth,
+        ),
         style("padding", _padded ? "var(--goa-space-m)" : "0"),
       )}
     >
-      <goa-focus-trap open="true" prevent-scroll-into-view={preventScrollIntoView || undefined}>
+      <goa-focus-trap
+        open="true"
+        prevent-scroll-into-view={preventScrollIntoView || undefined}
+      >
         <div bind:this={_focusTrapEl}>
           <slot />
         </div>
