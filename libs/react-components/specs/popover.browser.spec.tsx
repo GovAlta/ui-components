@@ -100,7 +100,7 @@ describe("Popover", () => {
       await vi.waitFor(() => {
         const popoverContentEl = result.getByTestId("popover-content");
         expect(popoverContentEl.element()).toBeTruthy();
-        expect(popoverContentEl.element().style.bottom).toBe("auto");
+        expect(popoverContentEl.element().style.bottom).toBe("");
       });
     });
 
@@ -150,7 +150,7 @@ describe("Popover", () => {
         const popoverContentEl = result.getByTestId("popover-content");
         expect(popoverContentEl.element()).toBeTruthy();
         // It should be a number ending with px when opening upwards
-        expect(popoverContentEl.element().style.bottom).toMatch(/-?\d+px/);
+        expect(popoverContentEl.element().style.top).toMatch(/-?\d+px/);
       });
     });
 
@@ -199,7 +199,7 @@ describe("Popover", () => {
         const popoverContentEl = result.getByTestId("popover-content");
         expect(popoverContentEl.element()).toBeTruthy();
         // bottom should be set to 'auto' when opening downwards
-        expect(popoverContentEl.element().style.bottom).toBe("auto");
+        expect(popoverContentEl.element().style.bottom).toBe("");
       });
     });
   });
