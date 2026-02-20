@@ -2,6 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import {
   GoabAppFooter,
   GoabAppHeader,
+  GoabAppHeaderMenu,
   GoabMicrositeHeader,
   GoabOneColumnLayout,
   GoabSideMenu,
@@ -12,9 +13,37 @@ import "@abgov/style";
 export function App() {
   return (
     <GoabOneColumnLayout>
-      <section slot="header">
+      <section slot="header" id="top">
         <GoabMicrositeHeader type="alpha" version="UAT" />
-        <GoabAppHeader heading="Testing Playground" url="/"></GoabAppHeader>
+        <GoabAppHeader heading="Testing Playground" url="/">
+          <a href="/">Home</a>
+          <GoabAppHeaderMenu heading="Insights">
+            <a href="/bugs/bug2720">bug2720</a>
+            <a href="/bugs/3450">Dropdown expanding</a>
+            <a href="/bugs/3450">...inside Container</a>
+            <a href="/bugs/3450">
+              Super long menu item to test overflow handling lorem ipsum dolor sit amet
+            </a>
+          </GoabAppHeaderMenu>
+          <GoabAppHeaderMenu heading="Popover">
+            <a href="/bugs/3450">Bug 3450</a>
+            <a href="/bugs/3450">Bug 3450</a>
+            <a href="/bugs/3450">
+              Super long menu item to test overflow handling lorem ipsum dolor sit amet
+            </a>
+          </GoabAppHeaderMenu>
+          <GoabAppHeaderMenu heading="John Smith" leadingIcon="person-circle">
+            <a href="#top">Manage account</a>
+            <a href="#top">Request new staff account</a>
+            <a href="#top">System admin</a>
+            <a href="#top" className="interactive">
+              Sign out
+            </a>
+            <a href="/bugs/3450">
+              Super long menu item to test overflow handling lorem ipsum dolor sit amet
+            </a>
+          </GoabAppHeaderMenu>
+        </GoabAppHeader>
       </section>
       <div style={{ display: "flex", minHeight: "100vh" }}>
         <section
@@ -67,6 +96,7 @@ export function App() {
               <Link to="/bugs/3337">3337 Input autocomplete styling</Link>
               <Link to="/bugs/3279">3279 Work Side Menu Key Nav</Link>
               <Link to="/bugs/3384">3384 v2 Table Border</Link>
+              <Link to="/bugs/3450">3450 Dropdown expanding inside Container</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>

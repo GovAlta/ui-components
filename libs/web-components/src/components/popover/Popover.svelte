@@ -409,6 +409,8 @@
       : null;
 
     const popoverRect = getBoundingClientRectWithMargins(_popoverEl);
+    const offsetParent = _popoverEl.offsetParent as HTMLElement | null;
+    const offsetParentTop = offsetParent?.getBoundingClientRect().top || 0;
 
     // exit if the popover hasn't yet been filled
     if (popoverRect.height < 20) return;
@@ -432,9 +434,12 @@
         : position === "above";
 
     if (displayOnTop) {
-      _popoverEl.style.bottom = `${targetRect.height}px`;
+      const topPos = targetRect.top - popoverRect.height - offsetParentTop;
+      _popoverEl.style.top = `${topPos}px`;
     } else {
-      _popoverEl.style.bottom = "auto"; // In case this is triggered by _sectionHeight is changed
+      // Clear top/bottom to keep default below-target static positioning.
+      _popoverEl.style.top = "";
+      _popoverEl.style.bottom = "";
     }
 
     // Move the popover to the left if it is too far to the right and only if there is space to the left
@@ -480,12 +485,7 @@
     <slot name="target" />
   </button>
 
-  <div
-    style={styles(
-      style("display", _open ? "block" : "none"),
-      style("position", "relative"),
-    )}
-  >
+  <div style={styles(style("display", _open ? "block" : "none"))}>
     <section
       bind:clientHeight={_sectionHeight}
       bind:this={_popoverEl}

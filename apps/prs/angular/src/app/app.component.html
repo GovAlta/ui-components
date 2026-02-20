@@ -1,13 +1,37 @@
 <div style="min-height: 100vh; display: flex; flex-direction: column">
-  <section slot="header" class="width" role="header" style="flex: 0 0 auto">
+  <section slot="header" id="top" class="width" role="header" style="flex: 0 0 auto">
     <goab-microsite-header type="alpha" version="UAT" />
     <goab-app-header>
       <a href="/">Home</a>
       <goab-app-header-menu heading="Insights">
-        <a class="interactive" href="/bugs/bug2720">2878</a>
-        <a href="/">Regional Insights</a>
-        <a href="/">Occupational Insights</a>
+        <a href="/bugs/bug2720"> bug2720 </a>
+        <a href="/bugs/3450"> Dropdown expanding </a>
+        <a href="/bugs/3450"> ...inside Container </a>
+        <a href="/bugs/3450">
+          Interactive super long menu item to test overflow handling lorem ipsum dolor sit
+          amet
+        </a>
+        <a href="/bugs/3450">
+          Noninteractive super long menu item to test overflow handling lorem ipsum dolor
+          sit amet
+        </a>
       </goab-app-header-menu>
+      <goab-app-header-menu heading="Popover">
+        <a href="/bugs/3450"> Bug 3450 </a>
+        <a href="/bugs/3450">Bug 3450</a>
+        <a href="/bugs/3450">
+          Super long menu item to test overflow handling lorem ipsum dolor sit amet
+        </a>
+      </goab-app-header-menu>
+      <goa-app-header-menu heading="John Smith" leadingIcon="person-circle">
+        <a href="#top">Manage account</a>
+        <a href="#top">Request new staff account for a long</a>
+        <a href="#top">System admin</a>
+        <a href="#top" class="interactive">Sign out</a
+        ><a href="/bugs/3450">
+          Super long menu item to test overflow handling lorem ipsum dolor sit amet
+        </a>
+      </goa-app-header-menu>
     </goab-app-header>
   </section>
 
@@ -57,6 +81,7 @@
           <a href="/bugs/3337">3337 - Autocomplete styling</a>
           <a href="/bugs/3279">3279</a>
           <a href="/bugs/3384">3384 Table v2 sample</a>
+          <a href="/bugs/3450">3450 Dropdown expanding inside Container</a>
         </goab-side-menu-group>
         <goab-side-menu-group heading="Features">
           <a href="/features/1328">1328</a>
