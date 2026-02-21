@@ -24,8 +24,8 @@ import { TableOfContents } from '../components/TableOfContents';
 interface Props {
   title: string;
   description?: string;
-  /** Section to highlight in menu: 'get-started' | 'foundations' */
-  section: 'get-started' | 'foundations';
+  /** Section to highlight in menu: 'get-started' | 'foundations' | 'parent' (no highlight) */
+  section: 'get-started' | 'foundations' | 'parent';
   /** Show table of contents on right side (default: true) */
   showToc?: boolean;
   /** CSS selector for TOC headings (default: 'h2[id], h3[id]') */
