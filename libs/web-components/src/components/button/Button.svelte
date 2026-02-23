@@ -409,7 +409,7 @@
 
   /* Version 2 */
   button.v2:focus-visible {
-    box-shadow: none;
+    box-shadow: 0 0 0 var(--goa-button-outline-offset) var(--goa-color-greyscale-white);
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
     outline-offset: var(--goa-button-outline-offset);
   }
