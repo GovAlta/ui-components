@@ -9,15 +9,15 @@
  *   const results = search('button');
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
-import FlexSearch from 'flexsearch';
+import { useState, useEffect, useCallback, useRef } from "react";
+import FlexSearch from "flexsearch";
 
 // ============================================================================
 // Types
 // ============================================================================
 
 export interface ComponentEntry {
-  type: 'component';
+  type: "component";
   id: string;
   name: string;
   description?: string;
@@ -28,7 +28,7 @@ export interface ComponentEntry {
 }
 
 export interface ExampleEntry {
-  type: 'example';
+  type: "example";
   id: string;
   title: string;
   description?: string;
@@ -41,7 +41,30 @@ export interface ExampleEntry {
   slug: string;
 }
 
-export type SearchEntry = ComponentEntry | ExampleEntry;
+export interface TokenEntry {
+  type: "token";
+  id: string;
+  title: string;
+  description?: string;
+  status: string;
+  tags: string[];
+  slug: string; // category slug (e.g., "color", "space")
+  category?: string;
+}
+
+export interface PageEntry {
+  type: "page";
+  id: string;
+  title: string;
+  name?: string;
+  description?: string;
+  status: string;
+  tags: string[];
+  slug: string; // URL path (e.g., "get-started/developers")
+  category: string; // e.g., "get started"
+}
+
+export type SearchEntry = ComponentEntry | ExampleEntry | TokenEntry | PageEntry;
 
 /**
  * SearchResult is a SearchEntry with an additional score property.
@@ -53,7 +76,7 @@ export type SearchResult = SearchEntry & {
 };
 
 /** Filter type for limiting search results */
-export type SearchFilter = 'component' | 'example' | null;
+export type SearchFilter = "component" | "example" | "token" | "page" | null;
 
 interface UseSearchReturn {
   /** Search function - returns results sorted by relevance and status */
@@ -72,16 +95,18 @@ interface UseSearchReturn {
 
 /**
  * Type priority for sorting results.
- * Components should appear before examples for the same query.
+ * Pages first, then components, tokens, examples.
  * Lower number = higher priority (appears first).
  */
 const TYPE_PRIORITY: Record<string, number> = {
-  component: 0,
-  example: 1,
+  page: 0,
+  component: 1,
+  token: 2,
+  example: 3,
 };
 
 function getTypePriority(type: string): number {
-  return TYPE_PRIORITY[type] ?? 2;
+  return TYPE_PRIORITY[type] ?? 3;
 }
 
 /**
@@ -119,54 +144,73 @@ function createSearchIndex() {
   // FlexSearch Document index for multi-field search
   return new FlexSearch.Document<SearchEntry, string[]>({
     // Tokenize for partial matching
-    tokenize: 'forward',
+    tokenize: "forward",
     // Enable scoring
     resolution: 9,
     // Document fields to index
     document: {
-      id: 'id',
+      id: "id",
       index: [
         // Primary fields (highest weight via boost)
         {
-          field: 'name',
-          tokenize: 'forward',
+          field: "name",
+          tokenize: "forward",
           resolution: 9,
         },
         {
-          field: 'title',
-          tokenize: 'forward',
+          field: "title",
+          tokenize: "forward",
           resolution: 9,
         },
         // Secondary fields
         {
-          field: 'description',
-          tokenize: 'forward',
+          field: "description",
+          tokenize: "forward",
           resolution: 5,
         },
         {
-          field: 'tags',
-          tokenize: 'forward',
+          field: "tags",
+          tokenize: "forward",
           resolution: 7,
         },
         {
-          field: 'components',
-          tokenize: 'forward',
+          field: "components",
+          tokenize: "forward",
           resolution: 6,
         },
         {
-          field: 'category',
-          tokenize: 'strict',
+          field: "category",
+          tokenize: "strict",
           resolution: 4,
         },
         {
-          field: 'categories',
-          tokenize: 'strict',
-          resolution: 4,
+          field: "categories",
+          tokenize: "strict",
+        },
+        // Content field - includes token names for token entries
+        {
+          field: "content",
+          tokenize: "forward",
+          resolution: 4, // Lower weight than title/name but still searchable
         },
       ],
       // Store these fields for retrieval
       // Using explicit field list for TypeScript compatibility
-      store: ['id', 'type', 'name', 'title', 'description', 'status', 'category', 'categories', 'tags', 'components', 'scale', 'userType', 'slug'],
+      store: [
+        "id",
+        "type",
+        "name",
+        "title",
+        "description",
+        "status",
+        "category",
+        "categories",
+        "tags",
+        "components",
+        "scale",
+        "userType",
+        "slug",
+      ],
     },
   });
 }
@@ -200,7 +244,7 @@ async function loadSearchIndex(): Promise<SearchCache> {
 
   // Fetch and build the index
   cachePromise = (async () => {
-    const response = await fetch('/search-index.json');
+    const response = await fetch("/search-index.json");
 
     if (!response.ok) {
       throw new Error(`Failed to load search index: ${response.status}`);
@@ -223,12 +267,29 @@ async function loadSearchIndex(): Promise<SearchCache> {
         ...entry,
         id: uniqueId,
         tags: entry.tags,
-        name: entry.type === 'component' ? entry.name : '',
-        category: entry.type === 'component' ? entry.category : '',
-        title: entry.type === 'example' ? entry.title : '',
-        categories: entry.type === 'example' ? entry.categories : [],
-        components: entry.type === 'example' ? entry.components : [],
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        name:
+          entry.type === "component"
+            ? (entry as ComponentEntry).name
+            : entry.type === "page"
+              ? (entry as PageEntry).name || ""
+              : "",
+        category:
+          entry.type === "component"
+            ? (entry as ComponentEntry).category
+            : entry.type === "page"
+              ? (entry as PageEntry).category
+              : "",
+        title:
+          entry.type === "example"
+            ? (entry as ExampleEntry).title
+            : entry.type === "token"
+              ? (entry as TokenEntry).title
+              : entry.type === "page"
+                ? (entry as PageEntry).title
+                : "",
+        categories: entry.type === "example" ? (entry as ExampleEntry).categories : [],
+        components: entry.type === "example" ? (entry as ExampleEntry).components : [],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
     }
 
@@ -277,8 +338,8 @@ export function useSearch(): UseSearchReturn {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error('Failed to load search index:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        console.error("Failed to load search index:", err);
+        setError(err instanceof Error ? err.message : "Unknown error");
         setIsLoading(false);
       });
   }, []);
@@ -315,9 +376,10 @@ export function useSearch(): UseSearchReturn {
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
         // Result can be string, number, or object with id property
-        const id = typeof result === 'string' || typeof result === 'number'
-          ? String(result)
-          : (result as { id: string }).id;
+        const id =
+          typeof result === "string" || typeof result === "number"
+            ? String(result)
+            : (result as { id: string }).id;
         // Score based on position (earlier = higher score) and field
         // Field importance is already handled by resolution
         const positionScore = 1 - (i / results.length) * 0.5;
@@ -335,11 +397,14 @@ export function useSearch(): UseSearchReturn {
       if (entry) {
         let finalScore = score;
 
-        // Exact name match boost: if query matches component/example name exactly
+        // Exact name match boost: if query matches component/example/token name exactly
         // "button" query + "Button" component = exact match = big boost
-        const entryName = entry.type === 'component'
-          ? (entry as ComponentEntry).name
-          : (entry as ExampleEntry).title;
+        const entryName =
+          entry.type === "component"
+            ? (entry as ComponentEntry).name
+            : entry.type === "token"
+              ? (entry as TokenEntry).title
+              : (entry as ExampleEntry).title;
 
         if (entryName.toLowerCase() === queryLower) {
           // Exact match - this is almost certainly what they want
@@ -351,7 +416,7 @@ export function useSearch(): UseSearchReturn {
         }
 
         // Small boost for components over examples (tiebreaker)
-        if (entry.type === 'component') {
+        if (entry.type === "component") {
           finalScore += 0.5;
         }
 
@@ -378,7 +443,7 @@ export function useSearch(): UseSearchReturn {
 
     // Apply filter if specified
     if (filter) {
-      return results.filter(result => result.type === filter);
+      return results.filter((result) => result.type === filter);
     }
 
     return results;

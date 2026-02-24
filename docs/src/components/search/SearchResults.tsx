@@ -16,11 +16,17 @@ import {
   useImperativeHandle,
   forwardRef,
 } from "react";
-import type { SearchResult, ComponentEntry, ExampleEntry } from "./useSearch";
+import type {
+  SearchResult,
+  ComponentEntry,
+  ExampleEntry,
+  SearchFilter,
+} from "./useSearch";
 import type { HistoryItem } from "./useSearchHistory";
 import { SearchResultItem } from "./SearchResultItem";
 import { SearchEmptyState } from "./SearchEmptyState";
 import { SearchNoResults } from "./SearchNoResults";
+import { getResultUrl } from "./search-utils";
 
 export interface SearchResultsHandle {
   /** Handle arrow/enter keyboard navigation from the search input */
@@ -42,6 +48,8 @@ interface SearchResultsProps {
   onClearHistory: () => void;
   /** Called when user clicks a suggestion to search for it */
   onSuggestionClick: (suggestion: string) => void;
+  /** Active filter - when set with empty query, show all items of that type */
+  activeFilter?: SearchFilter;
 }
 
 /** Number of results to show initially */
@@ -61,6 +69,7 @@ export const SearchResults = forwardRef<SearchResultsHandle, SearchResultsProps>
       onHistoryClick,
       onClearHistory,
       onSuggestionClick,
+      activeFilter,
     },
     ref,
   ) {
@@ -103,8 +112,7 @@ export const SearchResults = forwardRef<SearchResultsHandle, SearchResultsProps>
             const selected = displayedResults[selectedIndex];
             if (selected) {
               onResultClick(selected);
-              const prefix = selected.type === "component" ? "components" : "examples";
-              window.location.href = `/${prefix}/${selected.slug}`;
+              window.location.href = getResultUrl(selected.type, selected.slug);
               onClose();
             }
             break;
@@ -141,8 +149,9 @@ export const SearchResults = forwardRef<SearchResultsHandle, SearchResultsProps>
       );
     }
 
-    // Initial state (no query yet) - show empty state with history and quick links
-    if (!query.trim()) {
+    // Initial state (no query and no filter) - show empty state with history and quick links
+    // When a filter is active, show all items of that type instead
+    if (!query.trim() && !activeFilter) {
       return (
         <div className="search-results">
           <SearchEmptyState
@@ -197,13 +206,15 @@ export const SearchResults = forwardRef<SearchResultsHandle, SearchResultsProps>
           onKeyDown={(e) => {
             if (e.key === "ArrowDown" || e.key === "ArrowUp") {
               e.preventDefault();
-              const items = listRef.current?.querySelectorAll<HTMLElement>("a.search-result-item");
+              const items =
+                listRef.current?.querySelectorAll<HTMLElement>("a.search-result-item");
               if (!items || items.length === 0) return;
               const currentIndex = Array.from(items).indexOf(e.target as HTMLElement);
               const fromIndex = currentIndex >= 0 ? currentIndex : selectedIndex;
-              const nextIndex = e.key === "ArrowDown"
-                ? Math.min(fromIndex + 1, items.length - 1)
-                : Math.max(fromIndex - 1, 0);
+              const nextIndex =
+                e.key === "ArrowDown"
+                  ? Math.min(fromIndex + 1, items.length - 1)
+                  : Math.max(fromIndex - 1, 0);
               items[nextIndex].focus();
               setSelectedIndex(nextIndex);
             }

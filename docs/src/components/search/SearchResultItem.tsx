@@ -2,14 +2,21 @@
  * SearchResultItem.tsx
  *
  * Renders a single search result with:
- * - Type icon: △ for components, □ for examples
+ * - Type icon matching sidebar icons (shapes, browsers, code-slash)
  * - Breadcrumb showing category context
  * - Title (clickable link)
  * - Description (truncated)
  * - Status badge for non-stable content
  */
 
-import type { SearchResult, ComponentEntry, ExampleEntry } from './useSearch';
+import type {
+  SearchResult,
+  ComponentEntry,
+  ExampleEntry,
+  TokenEntry,
+  PageEntry,
+} from "./useSearch";
+import { getTypeIcon, getResultUrl } from "./search-utils";
 
 interface SearchResultItemProps {
   result: SearchResult;
@@ -23,19 +30,44 @@ interface SearchResultItemProps {
  * Truncate text to a maximum length, adding ellipsis if needed.
  */
 function truncate(text: string | undefined, maxLength: number): string {
-  if (!text) return '';
+  if (!text) return "";
   if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + '…';
+  return text.slice(0, maxLength).trim() + "…";
 }
 
 /**
  * Get display name based on entry type.
  */
 function getDisplayName(result: SearchResult): string {
-  if (result.type === 'component') {
+  if (result.type === "component") {
     return (result as ComponentEntry).name;
   }
+  if (result.type === "token") {
+    return (result as TokenEntry).title;
+  }
+  if (result.type === "page") {
+    return (result as PageEntry).title;
+  }
   return (result as ExampleEntry).title;
+}
+
+/**
+ * Format a kebab-case or lowercase string to Title Case.
+ * "inputs-and-actions" → "Inputs and Actions"
+ * "get started" → "Get Started"
+ */
+function formatCategory(raw: string): string {
+  const smallWords = new Set(["and", "or", "the", "in", "of", "for", "to", "a", "an"]);
+  return raw
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/-/g, " ")
+    .split(" ")
+    .map((word, i) =>
+      i === 0 || !smallWords.has(word)
+        ? word.charAt(0).toUpperCase() + word.slice(1)
+        : word,
+    )
+    .join(" ");
 }
 
 /**
@@ -43,23 +75,24 @@ function getDisplayName(result: SearchResult): string {
  * Examples: "Components > Feedback" or "Examples > Forms"
  */
 function getBreadcrumb(result: SearchResult): string {
-  if (result.type === 'component') {
+  if (result.type === "page") {
+    const page = result as PageEntry;
+    return page.category ? formatCategory(page.category) : "Pages";
+  }
+  if (result.type === "component") {
     const comp = result as ComponentEntry;
-    return `Components > ${comp.category}`;
+    return `Components > ${formatCategory(comp.category)}`;
+  }
+  if (result.type === "token") {
+    const token = result as TokenEntry;
+    if (token.category) {
+      return `Design Tokens > ${formatCategory(token.category)}`;
+    }
+    return "Design Tokens";
   }
   const example = result as ExampleEntry;
-  const category = example.categories?.[0] || 'General';
-  return `Examples > ${category}`;
-}
-
-/**
- * Build the URL for the result based on type.
- * Components: /components/{slug}
- * Examples: /examples/{slug}
- */
-function getUrl(result: SearchResult): string {
-  const prefix = result.type === 'component' ? 'components' : 'examples';
-  return `/${prefix}/${result.slug}`;
+  const category = example.categories?.[0] || "General";
+  return `Examples > ${formatCategory(category)}`;
 }
 
 /**
@@ -67,14 +100,14 @@ function getUrl(result: SearchResult): string {
  */
 function getBadgeClass(status: string): string | null {
   switch (status) {
-    case 'beta':
-      return 'search-result-badge--beta';
-    case 'draft':
-      return 'search-result-badge--draft';
-    case 'experimental':
-      return 'search-result-badge--experimental';
-    case 'deprecated':
-      return 'search-result-badge--deprecated';
+    case "beta":
+      return "search-result-badge--beta";
+    case "draft":
+      return "search-result-badge--draft";
+    case "experimental":
+      return "search-result-badge--experimental";
+    case "deprecated":
+      return "search-result-badge--deprecated";
     default:
       return null;
   }
@@ -85,13 +118,18 @@ function getBadgeClass(status: string): string | null {
  * Stable/published items don't need badges.
  */
 function shouldShowBadge(status: string): boolean {
-  return !['stable', 'published'].includes(status);
+  return !["stable", "published"].includes(status);
 }
 
-export function SearchResultItem({ result, isSelected, onClick, onNavigate }: SearchResultItemProps) {
+export function SearchResultItem({
+  result,
+  isSelected,
+  onClick,
+  onNavigate,
+}: SearchResultItemProps) {
   const name = getDisplayName(result);
   const breadcrumb = getBreadcrumb(result);
-  const url = getUrl(result);
+  const url = getResultUrl(result.type, result.slug);
   const description = truncate(result.description, 80);
   const badgeClass = getBadgeClass(result.status);
   const itemId = `search-result-${result.type}-${result.id}`;
@@ -102,11 +140,7 @@ export function SearchResultItem({ result, isSelected, onClick, onNavigate }: Se
   };
 
   return (
-    <li
-      role="option"
-      id={itemId}
-      aria-selected={isSelected}
-    >
+    <li role="option" id={itemId} aria-selected={isSelected}>
       <a
         href={url}
         className="search-result-item"
@@ -114,11 +148,10 @@ export function SearchResultItem({ result, isSelected, onClick, onNavigate }: Se
         onClick={handleClick}
         tabIndex={0}
       >
-        {/* Type icon */}
-        <span
-          className={`search-result-icon search-result-icon--${result.type}`}
-          aria-hidden="true"
-        />
+        {/* Type icon - matches sidebar navigation icons */}
+        <span className="search-result-icon" aria-hidden="true">
+          <goa-icon type={getTypeIcon(result.type)} size="small" />
+        </span>
 
         <div className="search-result-content">
           {/* Breadcrumb */}
@@ -128,16 +161,12 @@ export function SearchResultItem({ result, isSelected, onClick, onNavigate }: Se
           <div className="search-result-title">
             {name}
             {shouldShowBadge(result.status) && badgeClass && (
-              <span className={`search-result-badge ${badgeClass}`}>
-                {result.status}
-              </span>
+              <span className={`search-result-badge ${badgeClass}`}>{result.status}</span>
             )}
           </div>
 
           {/* Description */}
-          {description && (
-            <div className="search-result-description">{description}</div>
-          )}
+          {description && <div className="search-result-description">{description}</div>}
         </div>
       </a>
     </li>

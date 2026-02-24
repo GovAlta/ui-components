@@ -49,12 +49,9 @@ import CardLite from '../components/CardLite.astro';
         <p>
           Our accessible, brand-compliant components and templates help you launch faster while staying aligned with the current standard.
         </p>
-        <a href="/get-started" class="cta-link">
-          Start using the design system
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6"/>
-          </svg>
-        </a>
+        <goa-link version="2" trailingicon="arrow-forward">
+          <a href="/get-started">Start using the design system</a>
+        </goa-link>
       </div>
       <div class="cta-image">
         <img src="/images/home/splash-reel.png" alt="" />
@@ -68,13 +65,13 @@ import CardLite from '../components/CardLite.astro';
         imageUrl="/images/home/public-form-thumb.png"
         title="Public form"
         description="A pattern optimized for clarity and error prevention for public-facing applications. It includes templates for page types: Start, Task list, Question, Review, and Result."
-        linkTo="/examples"
+        linkTo="/examples?userType=citizen"
       />
       <CardLite
         imageUrl="/images/home/workspace-thumb.png"
         title="Workspace"
         description="A pattern optimized for efficiently managing cases, records, and tasks. It includes layout, multiple data views, detail views, drawers, modals and notifications."
-        linkTo="/examples"
+        linkTo="/examples?userType=worker"
       />
     </div>
 
@@ -85,22 +82,16 @@ import CardLite from '../components/CardLite.astro';
     </p>
     <div class="card-grid three-col">
       <CardLite
-        imageUrl="/images/home/primary-users-thumb.png"
         title="Card sort"
         description="Understand how users naturally group and label information in your service. Does your team share a mental model with your users?"
-        linkTo="/guidance"
       />
       <CardLite
-        imageUrl="/images/home/storyboard-thumb.png"
         title="Test form content"
         description="Turn your form designs into coded prototypes and test them with users rapidly. Are you asking the right questions to collect the information you need?"
-        linkTo="/guidance"
       />
       <CardLite
-        imageUrl="/images/home/main-pages-thumb.png"
         title="Time on task"
         description="Measure how long it takes users to complete key tasks in your service. Are your users working efficiently or struggling?"
-        linkTo="/guidance"
       />
     </div>
 
@@ -114,19 +105,19 @@ import CardLite from '../components/CardLite.astro';
         imageUrl="/images/home/primary-users-thumb.png"
         title="Identify the primary users and their main tasks"
         description="Share the primary users and their main tasks in your digital service. Do you know your users?"
-        linkTo="/guidance"
+        linkTo="https://forms.cloud.microsoft/r/qz8XKnbcsE"
       />
       <CardLite
         imageUrl="/images/home/storyboard-thumb.png"
         title="Identify the main pages"
         description="Share the most used pages from your digital service. What page or pages define your service?"
-        linkTo="/guidance"
+        linkTo="https://forms.cloud.microsoft/r/aq7SCVtEg8"
       />
       <CardLite
         imageUrl="/images/home/main-pages-thumb.png"
         title="Create a short storyboard"
         description="You can only use 3 pages from your product to make a storyboard of your digital service, what do you show?"
-        linkTo="/guidance"
+        linkTo="https://forms.cloud.microsoft/r/vbhkWQnTyP"
       />
     </div>
     </div>
@@ -272,19 +263,6 @@ import CardLite from '../components/CardLite.astro';
     font: var(--goa-typography-body-m);
     color: var(--goa-color-text-secondary);
     margin: 0 0 var(--goa-space-m);
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--goa-space-2xs);
-    color: var(--goa-color-interactive-default);
-    font: var(--goa-typography-body-m);
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    text-decoration: underline;
   }
 
   .cta-image {

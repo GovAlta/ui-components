@@ -3,9 +3,10 @@
  *
  * Dropdown shown when user types "/" in search input.
  * Displays available filter commands:
+ * - /get-started (/g) - Filter to get started pages only
  * - /component (/c) - Filter to components only
  * - /example (/e) - Filter to examples only
- * - /token - Coming soon (disabled)
+ * - /token (/t) - Filter to design tokens only
  *
  * Supports keyboard navigation (↑↓) and selection (Enter/click).
  */
@@ -31,6 +32,13 @@ export interface FilterOption {
 /** Available filter commands */
 export const FILTER_OPTIONS: FilterOption[] = [
   {
+    command: '/get-started',
+    alias: '/g',
+    label: 'Get started',
+    description: 'Search only get started pages',
+    filter: 'page',
+  },
+  {
     command: '/component',
     alias: '/c',
     label: 'Components',
@@ -48,9 +56,8 @@ export const FILTER_OPTIONS: FilterOption[] = [
     command: '/token',
     alias: '/t',
     label: 'Tokens',
-    description: 'Coming soon',
-    filter: null,
-    disabled: true,
+    description: 'Search only design tokens',
+    filter: 'token',
   },
 ];
 

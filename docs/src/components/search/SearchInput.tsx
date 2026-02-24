@@ -10,6 +10,7 @@
 
 import { useEffect, useRef } from "react";
 import type { SearchFilter } from "./useSearch";
+import { getFilterLabel } from "./search-utils";
 
 interface SearchInputProps {
   value: string;
@@ -72,18 +73,6 @@ function isMac(): boolean {
   return navigator.platform.toLowerCase().includes("mac");
 }
 
-/** Get display label for a filter type */
-function getFilterLabel(filter: SearchFilter): string {
-  switch (filter) {
-    case "component":
-      return "Components";
-    case "example":
-      return "Examples";
-    default:
-      return "";
-  }
-}
-
 export function SearchInput({
   value,
   onChange,
@@ -128,7 +117,7 @@ export function SearchInput({
 
   // Determine the placeholder text based on filter
   const placeholder = activeFilter
-    ? `Search ${activeFilter === "component" ? "components" : "examples"}...`
+    ? `Search ${getFilterLabel(activeFilter)}...`
     : "Search components and examples... (type / to filter)";
 
   return (

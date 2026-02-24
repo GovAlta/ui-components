@@ -563,6 +563,7 @@ function CodeSnippetStyles() {
         position: absolute;
         top: var(--goa-space-xs, 0.25rem);
         right: var(--goa-space-s, 0.5rem);
+        z-index: 1; /* Above code content so copy button is clickable */
       }
 
       .code-block-title {
