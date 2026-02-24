@@ -12,18 +12,25 @@
  * - Screen reader announcements for results
  */
 
-import { useState, useEffect, useCallback, useRef, useId } from 'react';
-import { useSearch, type SearchFilter, type SearchResult, type ComponentEntry, type ExampleEntry } from './useSearch';
-import { useSearchHistory, type HistoryItem } from './useSearchHistory';
-import { SearchResults } from './SearchResults';
+import { useState, useEffect, useCallback, useRef, useId, useMemo } from "react";
+import {
+  useSearch,
+  type SearchFilter,
+  type SearchResult,
+  type ComponentEntry,
+  type ExampleEntry,
+} from "./useSearch";
+import { useSearchHistory, type HistoryItem } from "./useSearchHistory";
+import { SearchResults } from "./SearchResults";
 import {
   SearchFilterHints,
   shouldShowFilterHints,
   parseFilterCommand,
   getFilteredOptions,
   type FilterOption,
-} from './SearchFilterHints';
-import './search.css';
+} from "./SearchFilterHints";
+import { getFilterLabel, getResultUrl } from "./search-utils";
+import "./search.css";
 
 interface SearchPageProps {
   /** Initial query from URL parameter */
@@ -55,23 +62,11 @@ function SearchIcon() {
  * Detect if user is on Mac for keyboard shortcut display.
  */
 function isMac(): boolean {
-  if (typeof navigator === 'undefined') return false;
-  return navigator.platform.toLowerCase().includes('mac');
+  if (typeof navigator === "undefined") return false;
+  return navigator.platform.toLowerCase().includes("mac");
 }
 
-/** Get display label for a filter type */
-function getFilterLabel(filter: SearchFilter): string {
-  switch (filter) {
-    case 'component':
-      return 'Components';
-    case 'example':
-      return 'Examples';
-    default:
-      return '';
-  }
-}
-
-export function SearchPage({ initialQuery = '' }: SearchPageProps) {
+export function SearchPage({ initialQuery = "" }: SearchPageProps) {
   const [query, setQuery] = useState(initialQuery);
   const [activeFilter, setActiveFilter] = useState<SearchFilter>(null);
   const [activeCommand, setActiveCommand] = useState<string | null>(null);
@@ -100,7 +95,18 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
   }, [parsed.filter, parsed.command, parsed.query]);
 
   // Run search when query changes
-  const results = searchQuery.trim() ? search(searchQuery, effectiveFilter) : [];
+  // If filter is active but no query, show all items of that type
+  const results = useMemo(
+    () =>
+      searchQuery.trim()
+        ? search(searchQuery, effectiveFilter)
+        : effectiveFilter
+          ? entries
+              .filter((e) => e.type === effectiveFilter)
+              .map((e) => ({ ...e, score: 0 }))
+          : [],
+    [searchQuery, effectiveFilter, search, entries],
+  );
 
   // Focus input on mount
   useEffect(() => {
@@ -111,11 +117,11 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
   useEffect(() => {
     const url = new URL(window.location.href);
     if (query.trim()) {
-      url.searchParams.set('q', query);
+      url.searchParams.set("q", query);
     } else {
-      url.searchParams.delete('q');
+      url.searchParams.delete("q");
     }
-    window.history.replaceState({}, '', url.toString());
+    window.history.replaceState({}, "", url.toString());
   }, [query]);
 
   /**
@@ -124,7 +130,7 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
   const handleFilterSelect = useCallback((option: FilterOption) => {
     setActiveFilter(option.filter);
     setActiveCommand(option.command);
-    setQuery(''); // Clear input - the filter chip shows the active filter
+    setQuery(""); // Clear input - the filter chip shows the active filter
     setHintSelectedIndex(0);
     inputRef.current?.focus();
   }, []);
@@ -135,33 +141,36 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
   const clearFilter = useCallback(() => {
     setActiveFilter(null);
     setActiveCommand(null);
-    setQuery('');
+    setQuery("");
     inputRef.current?.focus();
   }, []);
 
   /**
    * Handle when a search result is clicked (for history tracking).
    */
-  const handleResultClick = useCallback((result: SearchResult) => {
-    const title = result.type === 'component'
-      ? (result as ComponentEntry).name
-      : (result as ExampleEntry).title;
+  const handleResultClick = useCallback(
+    (result: SearchResult) => {
+      const title =
+        result.type === "component"
+          ? (result as ComponentEntry).name
+          : (result as ExampleEntry).title;
 
-    addToHistory({
-      id: result.id,
-      type: result.type,
-      title,
-      slug: result.slug,
-      query: searchQuery || undefined,
-    });
-  }, [addToHistory, searchQuery]);
+      addToHistory({
+        id: result.id,
+        type: result.type,
+        title,
+        slug: result.slug,
+        query: searchQuery || undefined,
+      });
+    },
+    [addToHistory, searchQuery],
+  );
 
   /**
    * Handle when a history item is clicked.
    */
   const handleHistoryClick = useCallback((item: HistoryItem) => {
-    const prefix = item.type === 'component' ? 'components' : 'examples';
-    window.location.href = `/${prefix}/${item.slug}`;
+    window.location.href = getResultUrl(item.type, item.slug);
   }, []);
 
   /**
@@ -184,7 +193,7 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
    */
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // Backspace on empty input clears the active filter
-    if (e.key === 'Backspace' && query === '' && activeFilter) {
+    if (e.key === "Backspace" && query === "" && activeFilter) {
       e.preventDefault();
       clearFilter();
       return;
@@ -193,23 +202,23 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
     // Only handle hint navigation when hints are showing
     if (!showHints) return;
 
-    const enabledOptions = getFilteredOptions(query).filter(opt => !opt.disabled);
+    const enabledOptions = getFilteredOptions(query).filter((opt) => !opt.disabled);
     if (enabledOptions.length === 0) return;
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
-        setHintSelectedIndex(prev =>
-          prev < enabledOptions.length - 1 ? prev + 1 : prev
+        setHintSelectedIndex((prev) =>
+          prev < enabledOptions.length - 1 ? prev + 1 : prev,
         );
         break;
 
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
-        setHintSelectedIndex(prev => (prev > 0 ? prev - 1 : prev));
+        setHintSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
         break;
 
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         const selected = enabledOptions[hintSelectedIndex];
         if (selected) {
@@ -221,11 +230,11 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
 
   // Generate announcement text for screen readers
   const getAnnouncement = () => {
-    if (isLoading) return 'Loading search index...';
+    if (isLoading) return "Loading search index...";
     if (error) return `Error loading search: ${error}`;
-    if (!searchQuery.trim()) return '';
+    if (!searchQuery.trim()) return "";
     if (results.length === 0) return `No results found for "${searchQuery}"`;
-    return `Found ${results.length} result${results.length === 1 ? '' : 's'} for "${searchQuery}"`;
+    return `Found ${results.length} result${results.length === 1 ? "" : "s"} for "${searchQuery}"`;
   };
 
   return (
@@ -268,7 +277,11 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
           ref={inputRef}
           type="text"
           className="search-input-field"
-          placeholder="Search components and examples... (type / to filter)"
+          placeholder={
+            effectiveFilter
+              ? `Search ${getFilterLabel(effectiveFilter)}...`
+              : "Search components and examples... (type / to filter)"
+          }
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleInputKeyDown}
@@ -283,7 +296,7 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
         {/* Keyboard hint */}
         <span className="search-input-hint" aria-hidden="true">
           <span className="search-page-hint-text">
-            or press <kbd className="search-input-kbd">{isMac() ? '⌘' : 'Ctrl'}</kbd>
+            or press <kbd className="search-input-kbd">{isMac() ? "⌘" : "Ctrl"}</kbd>
             <kbd className="search-input-kbd">K</kbd> anywhere
           </span>
         </span>
@@ -302,7 +315,10 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
           <div className="search-results">
             <div className="search-results-error" role="alert">
               <strong>Error loading search:</strong> {error}
-              <p>Try refreshing the page. If the problem persists, search may be temporarily unavailable.</p>
+              <p>
+                Try refreshing the page. If the problem persists, search may be
+                temporarily unavailable.
+              </p>
             </div>
           </div>
         ) : (
@@ -316,6 +332,7 @@ export function SearchPage({ initialQuery = '' }: SearchPageProps) {
             onHistoryClick={handleHistoryClick}
             onClearHistory={clearHistory}
             onSuggestionClick={handleSuggestionClick}
+            activeFilter={effectiveFilter}
           />
         )}
       </div>

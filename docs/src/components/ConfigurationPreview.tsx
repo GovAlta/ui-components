@@ -10,20 +10,20 @@
  * Code snippet changes based on selected framework preference.
  */
 
-import { useState, useEffect, useRef } from 'react';
-import { GoabDropdown, GoabDropdownItem } from '@abgov/react-components';
-import { CodeSnippet } from './CodeSnippet';
-import { useGitHubIssueCount } from '../hooks/useGitHubIssueCount';
-import type { ComponentConfigurations } from '../data/configurations/types';
-import DOMPurify from 'dompurify';
+import { useState, useEffect, useRef, useCallback } from "react";
+// Note: Using web component directly for v2 styling (React wrapper doesn't pass version prop)
+import { CodeSnippet } from "./CodeSnippet";
+import { useGitHubIssueCount } from "../hooks/useGitHubIssueCount";
+import type { ComponentConfigurations } from "../data/configurations/types";
+import DOMPurify from "dompurify";
 
 // Allow GoA web component custom elements through DOMPurify.
 // By default, DOMPurify strips all custom elements (tags containing hyphens).
 // Our previews render <goa-*> web components, so we must whitelist them.
 const DOMPURIFY_CONFIG = {
   CUSTOM_ELEMENT_HANDLING: {
-    tagNameCheck: /^goa-/,          // allow all <goa-*> elements
-    attributeNameCheck: () => true,  // allow their attributes (type, name, label, etc.)
+    tagNameCheck: /^goa-/, // allow all <goa-*> elements
+    attributeNameCheck: () => true, // allow their attributes (type, name, label, etc.)
   },
 };
 
@@ -41,14 +41,15 @@ export function ConfigurationPreview({
   componentName,
 }: ConfigurationPreviewProps) {
   const [selectedConfigId, setSelectedConfigId] = useState(
-    configurations.defaultConfigurationId
+    configurations.defaultConfigurationId,
   );
   const previewRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLElement | null>(null);
   const issueCount = useGitHubIssueCount(componentName);
 
   // Get the currently selected configuration
   const selectedConfig = configurations.configurations.find(
-    (c) => c.id === selectedConfigId
+    (c) => c.id === selectedConfigId,
   );
 
   // Update preview when configuration changes
@@ -62,9 +63,7 @@ export function ConfigurationPreview({
 
       // Sanitize HTML and add version="2" to all goa- components
       const sanitizedHtml = DOMPurify.sanitize(rawCode, DOMPURIFY_CONFIG);
-      const html = sanitizedHtml
-        .replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"')
-        .trim();
+      const html = sanitizedHtml.replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"').trim();
 
       previewRef.current.innerHTML = html;
 
@@ -73,27 +72,43 @@ export function ConfigurationPreview({
         try {
           const container = previewRef.current;
           const scopedScript = scriptContent
-            .replace(/document\.getElementById\s*\(\s*["']([^"']+)["']\s*\)/g,
-              (_, id) => `container.querySelector("#${id}")`
+            .replace(
+              /document\.getElementById\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, id) => `container.querySelector("#${id}")`,
             )
-            .replace(/document\.querySelector\s*\(\s*["']([^"']+)["']\s*\)/g,
-              (_, selector) => `container.querySelector("${selector}")`
+            .replace(
+              /document\.querySelector\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, selector) => `container.querySelector("${selector}")`,
             );
 
-          const fn = new Function('container', scopedScript);
+          const fn = new Function("container", scopedScript);
           fn(container);
         } catch (err) {
-          console.error('Error executing configuration script:', err);
+          console.error("Error executing configuration script:", err);
         }
       }
     }
   }, [selectedConfig]);
 
   // Handle configuration dropdown change
-  const handleConfigChange = (detail: { name: string; value: string | string[] }) => {
-    const newValue = Array.isArray(detail.value) ? detail.value[0] : detail.value;
-    setSelectedConfigId(newValue);
-  };
+  const handleConfigChange = useCallback(
+    (detail: { name: string; value: string | string[] }) => {
+      const newValue = Array.isArray(detail.value) ? detail.value[0] : detail.value;
+      setSelectedConfigId(newValue);
+    },
+    [],
+  );
+
+  // Attach _change listener with proper cleanup to avoid leaks
+  useEffect(() => {
+    const el = dropdownRef.current;
+    if (!el) return;
+    const handler = (e: Event) => {
+      handleConfigChange((e as CustomEvent).detail);
+    };
+    el.addEventListener("_change", handler);
+    return () => el.removeEventListener("_change", handler);
+  }, [handleConfigChange]);
 
   if (!selectedConfig) {
     return <div>No configuration found</div>;
@@ -104,20 +119,18 @@ export function ConfigurationPreview({
       {/* Control Bar */}
       <div className="control-bar">
         <div className="config-dropdown">
-          <GoabDropdown
+          {/* @ts-expect-error - goa-dropdown is a web component */}
+          <goa-dropdown
             name="configuration"
             value={selectedConfigId}
-            onChange={handleConfigChange}
+            version="2"
             size="compact"
+            ref={dropdownRef}
           >
             {configurations.configurations.map((config) => (
-              <GoabDropdownItem
-                key={config.id}
-                value={config.id}
-                label={config.name}
-              />
+              <goa-dropdown-item key={config.id} value={config.id} label={config.name} />
             ))}
-          </GoabDropdown>
+          </goa-dropdown>
         </div>
 
         <div className="external-links">
@@ -143,9 +156,7 @@ export function ConfigurationPreview({
               title="View GitHub issues"
             >
               <goa-icon version="2" type="logo-github" size="medium"></goa-icon>
-              {issueCount !== null && (
-                <span className="issue-count">({issueCount})</span>
-              )}
+              {issueCount !== null && <span className="issue-count">({issueCount})</span>}
             </a>
           )}
         </div>
@@ -217,23 +228,23 @@ export function ConfigurationPreview({
           color: var(--goa-color-text-secondary, #666);
         }
 
-        .preview-area {
+        .configuration-preview .preview-area {
           border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
           border-radius: var(--goa-border-radius-m, 4px);
           background: var(--goa-color-greyscale-white, #fff);
           min-height: 120px;
           margin-bottom: var(--goa-space-m, 1rem);
           position: relative;
-          z-index: 1; /* Allow dropdowns to appear above code snippets */
-          isolation: isolate;
+          z-index: 2; /* Allow dropdowns to appear above code snippets */
+        }
+
+        .configuration-preview .code-area {
+          position: relative;
+          z-index: 1;
         }
 
         .configuration-preview .preview-container {
           padding: var(--goa-space-xl, 2rem);
-        }
-
-        .code-area {
-          /* CodeSnippet component handles its own styling */
         }
       `}</style>
     </div>

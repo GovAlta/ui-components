@@ -8,24 +8,37 @@
 interface Props {
   title: string;
   description: string;
-  imageUrl: string;
-  linkTo: string;
+  imageUrl?: string;
+  linkTo?: string;
 }
 
 const { title, description, imageUrl, linkTo } = Astro.props;
+const isExternal = linkTo?.startsWith("http");
+const isDisabled = !linkTo;
 ---
 
-<a href={linkTo} class="card-lite">
-  <div class="card-image">
-    <img src={imageUrl} alt="" loading="lazy" />
+{isDisabled ? (
+  <div class="card-lite">
+    {imageUrl && <div class="card-image"><img src={imageUrl} alt="" loading="lazy" /></div>}
+    <goa-text version="2" size="heading-m" mt="l" mb="m">
+      {title}
+    </goa-text>
+    <goa-text version="2" size="body-m" mt="none" mb="xs">
+      <span class="card-description">{description}</span>
+    </goa-text>
+    <goa-badge version="2" type="default" content="Coming soon" icon="false" emphasis="subtle" mt="s"></goa-badge>
   </div>
-  <goa-text version="2" size="heading-m" mt="l" mb="m">
-    <u>{title}</u>
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="xs">
-    <span class="card-description">{description}</span>
-  </goa-text>
-</a>
+) : (
+  <a href={linkTo} class="card-lite" {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}>
+    {imageUrl && <div class="card-image"><img src={imageUrl} alt="" loading="lazy" /></div>}
+    <goa-text version="2" size="heading-m" mt="l" mb="m">
+      <u>{title}</u>
+    </goa-text>
+    <goa-text version="2" size="body-m" mt="none" mb="xs">
+      <span class="card-description">{description}</span>
+    </goa-text>
+  </a>
+)}
 
 <style>
   .card-lite {

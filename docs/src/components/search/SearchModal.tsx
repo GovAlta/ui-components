@@ -12,7 +12,7 @@
  *   <SearchModal client:only="react" />
  */
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
   useSearch,
   type SearchFilter,
@@ -30,6 +30,7 @@ import {
   getFilteredOptions,
   type FilterOption,
 } from "./SearchFilterHints";
+import { getResultUrl } from "./search-utils";
 import "./search.css";
 
 // ============================================================================
@@ -50,7 +51,7 @@ function SearchModalContent({ onClose, previousFocusRef }: SearchModalContentPro
   const searchResultsRef = useRef<SearchResultsHandle>(null);
 
   // These hooks only run when the modal is open (component is mounted)
-  const { search, isLoading, error } = useSearch();
+  const { search, isLoading, error, entries } = useSearch();
   const { history, addToHistory, clearHistory } = useSearchHistory();
 
   // Determine if we should show filter hints
@@ -71,7 +72,18 @@ function SearchModalContent({ onClose, previousFocusRef }: SearchModalContentPro
   }, [parsed.filter, parsed.command, parsed.query]);
 
   // Run search when query changes (using the parsed query and filter)
-  const results = searchQuery.trim() ? search(searchQuery, effectiveFilter) : [];
+  // If filter is active but no query, show all items of that type
+  const results = useMemo(
+    () =>
+      searchQuery.trim()
+        ? search(searchQuery, effectiveFilter)
+        : effectiveFilter
+          ? entries
+              .filter((e) => e.type === effectiveFilter)
+              .map((e) => ({ ...e, score: 0 }))
+          : [],
+    [searchQuery, effectiveFilter, search, entries],
+  );
 
   /**
    * Handle filter selection from hints dropdown.
@@ -132,8 +144,7 @@ function SearchModalContent({ onClose, previousFocusRef }: SearchModalContentPro
    */
   const handleHistoryClick = useCallback(
     (item: HistoryItem) => {
-      const prefix = item.type === "component" ? "components" : "examples";
-      window.location.href = `/${prefix}/${item.slug}`;
+      window.location.href = getResultUrl(item.type, item.slug);
       closeModal();
     },
     [closeModal],
@@ -267,6 +278,7 @@ function SearchModalContent({ onClose, previousFocusRef }: SearchModalContentPro
               onHistoryClick={handleHistoryClick}
               onClearHistory={clearHistory}
               onSuggestionClick={handleSuggestionClick}
+              activeFilter={effectiveFilter}
             />
           )}
         </div>

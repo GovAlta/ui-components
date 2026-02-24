@@ -19,6 +19,7 @@ import {
   GoabxFilterChip,
   GoabxDrawer,
   GoabxCheckbox,
+  GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
 import {
   GoabIconButton,
@@ -26,7 +27,6 @@ import {
   GoabDivider,
   GoabButtonGroup,
   GoabContainer,
-  GoabCheckboxList,
   GoabTab,
   type GoabCheckboxListOnChangeDetail,
 } from "@abgov/react-components";
@@ -48,19 +48,36 @@ interface TokensGridProps {
 function getCategoryBadgeType(
   category: string,
 ): "sky" | "pasture" | "sunset" | "lilac" | "prairie" | "dawn" {
-  switch (category) {
+  switch (category.toLowerCase()) {
+    // Colors
     case "color":
       return "sky";
+    // Spacing
+    case "space":
     case "spacing":
       return "pasture";
+    // Typography
+    case "fontfamily":
+    case "fontsize":
+    case "fontweight":
+    case "lineheight":
+    case "fontvariationsettings":
     case "typography":
       return "sunset";
+    // Borders
     case "border":
+    case "borderradius":
+    case "borderwidth":
       return "lilac";
+    // Shadows
     case "shadow":
       return "prairie";
-    default:
+    // Icons & misc
+    case "iconsize":
+    case "opacity":
       return "dawn";
+    default:
+      return "sky";
   }
 }
 
@@ -110,6 +127,15 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, []);
+
+  // Read URL search parameter on mount (e.g., /tokens?search=color)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get("search");
+    if (searchParam && !searchChips.includes(searchParam)) {
+      setSearchChips([searchParam]);
+    }
+  }, []); // Only run on mount
 
   // Filter state
   const [pendingFilters, setPendingFilters] = useState<string[]>([]);
@@ -307,8 +333,9 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     [sortConfig],
   );
 
-  // Render color preview
+  // Render token preview (color, opacity, etc.)
   const renderPreview = (token: FlatToken) => {
+    const value = token.resolvedValue || token.value;
     if (token.isColor) {
       return (
         <div
@@ -317,13 +344,341 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             width: 24,
             height: 24,
             borderRadius: 4,
-            backgroundColor: token.value,
+            backgroundColor: token.resolvedValue,
             border: "1px solid var(--goa-color-greyscale-200)",
+          }}
+          title={token.resolvedValue}
+        />
+      );
+    }
+
+    // Opacity tokens - show overlay on top of content to demonstrate the effect
+    if (token.category === "opacity") {
+      // Parse opacity value (e.g., "50%" -> 0.5, "0.9" -> 0.9)
+      let opacity = 0.5;
+      if (value.endsWith("%")) {
+        opacity = parseFloat(value) / 100;
+      } else {
+        opacity = parseFloat(value);
+      }
+
+      return (
+        <div
+          className="token-opacity-swatch"
+          style={{
+            width: 48,
+            height: 48,
+            position: "relative",
+          }}
+          title={token.value}
+        >
+          {/* Back: blue square (content behind overlay) */}
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              bottom: 0,
+              width: 32,
+              height: 32,
+              backgroundColor: "var(--goa-color-interactive-default)",
+            }}
+          />
+          {/* Front: gray overlay at the specified opacity */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: 32,
+              height: 32,
+              backgroundColor: "var(--goa-color-greyscale-700)",
+              opacity: opacity,
+            }}
+          />
+        </div>
+      );
+    }
+
+    // Border radius tokens - show gray square with the radius applied
+    if (token.category === "borderRadius") {
+      return (
+        <div
+          className="token-radius-swatch"
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: value,
+            backgroundColor: "var(--goa-color-greyscale-400)",
           }}
           title={token.value}
         />
       );
     }
+
+    // Border width tokens - show horizontal line with the width applied
+    if (token.category === "borderWidth") {
+      return (
+        <div
+          className="token-border-width-swatch"
+          style={{
+            width: 48,
+            height: value,
+            backgroundColor: "var(--goa-color-greyscale-700)",
+            borderRadius: 1,
+          }}
+          title={token.value}
+        />
+      );
+    }
+
+    // Space tokens - show two endpoints with a colored bar between them
+    if (token.category === "space") {
+      // Color mapping based on spacing size (use endsWith to avoid matching "-space-")
+      const getSpacingColor = (name: string): string => {
+        if (name.endsWith("-none")) return "var(--goa-color-greyscale-400)";
+        if (name.endsWith("-3xs")) return "#f8a5a5"; // light red/pink
+        if (name.endsWith("-2xs")) return "#a5e8e0"; // light teal
+        if (name.endsWith("-xs")) return "#e0a5e8"; // light magenta
+        if (name.endsWith("-s")) return "#a5d4f8"; // light blue
+        if (name.endsWith("-m")) return "#f8cfa5"; // light orange
+        if (name.endsWith("-l")) return "#a5e8c0"; // light green
+        if (name.endsWith("-xl")) return "#f8f0a5"; // light yellow
+        if (name.endsWith("-2xl")) return "#f8a5b5"; // light coral
+        if (name.endsWith("-3xl")) return "#a5e8e8"; // light cyan
+        if (name.endsWith("-4xl")) return "#c5f8a5"; // light lime
+        return "var(--goa-color-interactive-default)";
+      };
+
+      return (
+        <div
+          className="token-space-swatch"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            height: 24,
+          }}
+          title={token.value}
+        >
+          {/* Left endpoint */}
+          <div
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              backgroundColor: "var(--goa-color-greyscale-300)",
+              flexShrink: 0,
+            }}
+          />
+          {/* Spacing bar */}
+          <div
+            style={{
+              width: value,
+              height: 16,
+              backgroundColor: getSpacingColor(token.name),
+              flexShrink: 0,
+            }}
+          />
+          {/* Right endpoint */}
+          <div
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              backgroundColor: "var(--goa-color-greyscale-300)",
+              flexShrink: 0,
+            }}
+          />
+        </div>
+      );
+    }
+
+    // Icon size tokens - show plus icon with background sized to the token value
+    if (token.category === "iconSize") {
+      // Map token suffix to GoabIconSize ("1"-"6")
+      const getIconSize = (name: string): "1" | "2" | "3" | "4" | "5" | "6" => {
+        if (name.endsWith("-1")) return "1";
+        if (name.endsWith("-2")) return "2";
+        if (name.endsWith("-3")) return "3";
+        if (name.endsWith("-4")) return "4";
+        if (name.endsWith("-5")) return "5";
+        if (name.endsWith("-6")) return "6";
+        if (name.endsWith("-xs")) return "1";
+        if (name.endsWith("-s")) return "2";
+        if (name.endsWith("-m")) return "3";
+        if (name.endsWith("-l")) return "4";
+        if (name.endsWith("-xl")) return "5";
+        return "3";
+      };
+
+      return (
+        <div
+          className="token-icon-size-swatch"
+          style={{
+            width: value,
+            height: value,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "var(--goa-color-emergency-light)",
+          }}
+          title={token.value}
+        >
+          <GoabIcon type="add" size={getIconSize(token.name)} />
+        </div>
+      );
+    }
+
+    // Shadow tokens - show white card with shadow on gray background
+    if (token.category === "shadow") {
+      return (
+        <div
+          className="token-shadow-swatch"
+          style={{
+            width: 64,
+            height: 64,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "white",
+            borderRadius: 4,
+          }}
+          title={token.value}
+        >
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              backgroundColor: "white",
+              borderRadius: 8,
+              border: "1px solid var(--goa-color-greyscale-100)",
+              boxShadow: value,
+            }}
+          />
+        </div>
+      );
+    }
+
+    // Font weight tokens - show "Aa" at the weight
+    if (token.category === "fontWeight") {
+      return (
+        <div
+          className="token-font-weight-swatch"
+          style={{
+            fontWeight: value,
+            fontFamily: "var(--goa-fontFamily-sans)",
+            fontSize: "16px",
+            color: "var(--goa-color-greyscale-700)",
+          }}
+          title={token.value}
+        >
+          Aa
+        </div>
+      );
+    }
+
+    // Letter spacing tokens - show "Aa" with the letter spacing
+    if (token.category === "letterSpacing") {
+      return (
+        <div
+          className="token-letter-spacing-swatch"
+          style={{
+            letterSpacing: `${value}px`,
+            fontFamily: "var(--goa-fontFamily-sans)",
+            fontSize: "16px",
+            color: "var(--goa-color-greyscale-700)",
+          }}
+          title={token.value}
+        >
+          Aa
+        </div>
+      );
+    }
+
+    // Typography tokens - show "Aa" with all typography styles applied
+    if (token.category === "typography") {
+      // Parse the resolved value to get individual properties
+      let typographyStyles: React.CSSProperties = {
+        color: "var(--goa-color-greyscale-700)",
+      };
+
+      try {
+        const parsed = JSON.parse(token.resolvedValue || "{}");
+        if (parsed.fontFamily) typographyStyles.fontFamily = parsed.fontFamily;
+        if (parsed.fontSize) typographyStyles.fontSize = parsed.fontSize;
+        if (parsed.fontWeight) typographyStyles.fontWeight = parsed.fontWeight;
+        if (parsed.lineHeight) typographyStyles.lineHeight = parsed.lineHeight;
+        if (parsed.letterSpacing) typographyStyles.letterSpacing = parsed.letterSpacing;
+      } catch {
+        // Fallback if parsing fails
+        typographyStyles.fontFamily = "var(--goa-fontFamily-sans)";
+        typographyStyles.fontSize = "16px";
+      }
+
+      return (
+        <div
+          className="token-typography-swatch"
+          style={typographyStyles}
+          title={token.value}
+        >
+          Aa
+        </div>
+      );
+    }
+
+    // Font size tokens - show "Aa" at the actual size
+    if (token.category === "fontSize") {
+      return (
+        <div
+          className="token-font-size-swatch"
+          style={{
+            fontSize: value,
+            fontFamily: "var(--goa-fontFamily-sans)",
+            lineHeight: 1,
+            color: "var(--goa-color-greyscale-700)",
+          }}
+          title={token.value}
+        >
+          Aa
+        </div>
+      );
+    }
+
+    // Font family tokens - show sample text in the font
+    if (token.category === "fontFamily") {
+      return (
+        <div
+          className="token-font-family-swatch"
+          style={{
+            fontFamily: value,
+            fontSize: "14px",
+            color: "var(--goa-color-greyscale-700)",
+          }}
+          title={token.value}
+        >
+          Abc 123
+        </div>
+      );
+    }
+
+    // Line height tokens - show two lines of "Ag" with the line-height applied
+    if (token.category === "lineHeight") {
+      return (
+        <div
+          className="token-line-height-swatch"
+          style={{
+            lineHeight: value,
+            fontSize: "14px",
+            color: "var(--goa-color-greyscale-700)",
+          }}
+          title={token.value}
+        >
+          Ag
+          <br />
+          Ag
+        </div>
+      );
+    }
+
     return <span className="token-no-preview">—</span>;
   };
 
@@ -352,6 +707,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               type={getCategoryBadgeType(token.category)}
               content={formatCategory(token.category)}
               emphasis="subtle"
+              icon="false"
             />
           </div>
         </GoabContainer>
@@ -377,6 +733,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             type={getCategoryBadgeType(token.category)}
             content={formatCategory(token.category)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
         <td>
@@ -448,17 +805,19 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             </goa-tabs>
           </div>
 
-          <GoabxButton
-            type="secondary"
-            leadingIcon="filter-lines"
-            size="compact"
-            onClick={() => {
-              setPendingFilters(appliedFilters);
-              setFilterDrawerOpen(true);
-            }}
-          >
-            Filters
-          </GoabxButton>
+          <div>
+            <GoabxButton
+              type="secondary"
+              leadingIcon="filter-lines"
+              size="compact"
+              onClick={() => {
+                setPendingFilters(appliedFilters);
+                setFilterDrawerOpen(true);
+              }}
+            >
+              Filters
+            </GoabxButton>
+          </div>
         </div>
       </div>
 
@@ -599,8 +958,9 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       >
         <div className="filter-drawer-content">
           <GoabxFormItem label="Category">
-            <GoabCheckboxList
+            <GoabxCheckboxList
               name="category"
+              size="compact"
               value={pendingFilters}
               onChange={(detail: GoabCheckboxListOnChangeDetail) =>
                 setPendingFilters(detail.value)
@@ -615,7 +975,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                   size="compact"
                 />
               ))}
-            </GoabCheckboxList>
+            </GoabxCheckboxList>
           </GoabxFormItem>
 
           {pendingFilters.length > 0 && (
@@ -687,6 +1047,22 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           display: flex;
           align-items: flex-start;
           gap: var(--goa-space-m);
+        }
+
+        /* Mobile: stack toolbar vertically */
+        @media (max-width: 640px) {
+          .tokens-toolbar {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .tokens-search-section {
+            min-width: unset;
+          }
+
+          .tokens-toolbar-actions {
+            align-self: flex-start;
+          }
         }
 
         /* Syntax toggle wrapper */

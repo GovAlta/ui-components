@@ -32,8 +32,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .search-modal {
@@ -218,7 +222,7 @@
 }
 
 .search-results-loading::before {
-  content: '';
+  content: "";
   width: 24px;
   height: 24px;
   border: 2px solid var(--goa-color-greyscale-200, #e0e0e0);
@@ -277,18 +281,7 @@
   align-items: center;
   justify-content: center;
   color: var(--goa-color-greyscale-500, #666);
-  font-size: 14px;
-  margin-top: 2px;
-}
-
-/* Component icon: triangle */
-.search-result-icon--component::before {
-  content: '△';
-}
-
-/* Example icon: square */
-.search-result-icon--example::before {
-  content: '□';
+  margin-top: 21px;
 }
 
 .search-result-content {
@@ -603,16 +596,6 @@
   align-items: center;
   justify-content: center;
   color: var(--goa-color-greyscale-500, #666);
-  font-size: 14px;
-}
-
-/* History item icons use type-specific icons */
-.search-empty-icon--component::before {
-  content: '△';
-}
-
-.search-empty-icon--example::before {
-  content: '□';
 }
 
 .search-empty-item-title {
@@ -676,7 +659,9 @@
   border-radius: 4px;
   padding: var(--goa-space-2xs) var(--goa-space-s);
   cursor: pointer;
-  transition: background-color 100ms ease, border-color 100ms ease;
+  transition:
+    background-color 100ms ease,
+    border-color 100ms ease;
 }
 
 .search-no-results-suggestion:hover {
@@ -702,16 +687,25 @@
   display: flex;
   align-items: center;
   gap: var(--goa-space-s);
-  padding: var(--goa-space-m) var(--goa-space-l);
+  padding: var(--goa-space-s) var(--goa-space-m);
   background: white;
-  border: 2px solid var(--goa-color-greyscale-200, #e0e0e0);
-  border-radius: var(--goa-space-m);
-  transition: border-color 150ms ease;
+  border: 1px solid var(--goa-color-greyscale-300, #ccc);
+  border-radius: var(--goa-border-radius-m);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.search-page-input-container:hover,
+.search-page-input-container:focus-within {
+  border-color: var(--goa-color-greyscale-black);
+  box-shadow: inset 0 0 0 1px var(--goa-color-greyscale-black);
 }
 
 .search-page-input-container:focus-within {
-  border-color: var(--goa-color-interactive-focus, #0070c4);
-  box-shadow: 0 0 0 3px rgba(0, 112, 196, 0.15);
+  outline: 3px solid var(--goa-color-interactive-focus);
+  outline-offset: 2px;
 }
 
 .search-page-hint-text {

@@ -18,7 +18,7 @@ import { useState, useCallback, useEffect } from 'react';
 export interface HistoryItem {
   /** The result that was clicked */
   id: string;
-  type: 'component' | 'example';
+  type: 'component' | 'example' | 'token' | 'page';
   title: string;
   slug: string;
   /** Category slug for components (e.g., 'inputs-and-actions') */
