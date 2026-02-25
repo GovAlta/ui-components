@@ -66,6 +66,7 @@ import { Feat2829Component } from "../routes/features/feat2829/feat2829.componen
 import { Feat3102Component } from "../routes/features/feat3102/feat3102.component";
 import { Feat3137Component } from "../routes/features/feat3137/feat3137.component";
 import { Feat3241Component } from "../routes/features/feat3241/feat3241.component";
+import { Feat3229Component } from "../routes/features/feat3229/feat3229.component";
 import { Feat3306Component } from "../routes/features/feat3306/feat3306.component";
 import { Feat3370Component } from "../routes/features/feat3370/feat3370.component";
 import { Feat3407SkipOnFocusTabComponent } from "../routes/features/feat3407SkipOnFocusTab/feat3407-skip-on-focus-tab.component";
@@ -142,6 +143,7 @@ export const appRoutes: Route[] = [
   { path: "features/3241", component: Feat3241Component },
   { path: "features/v2-icons", component: FeatV2IconsComponent },
   { path: "features/3137", component: Feat3137Component },
+  { path: "features/3229", component: Feat3229Component },
   { path: "features/3306", component: Feat3306Component },
   { path: "features/3370", component: Feat3370Component },
   { path: "features/3396", component: Feat3396Component },
