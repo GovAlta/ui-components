@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { Router, NavigationEnd } from "@angular/router";
+import { filter } from "rxjs/operators";
 
 @Component({
   selector: "abgov-root",
@@ -6,4 +8,18 @@ import { Component } from "@angular/core";
   styles: ``,
   standalone: false,
 })
-export class AppComponent {}
+export class AppComponent {
+  isFullPage = false;
+
+  private fullPageRoutes = ["/features/2885"];
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        this.isFullPage = this.fullPageRoutes.includes(
+          (event as NavigationEnd).urlAfterRedirects,
+        );
+      });
+  }
+}

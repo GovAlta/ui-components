@@ -3,6 +3,8 @@
     tag: "goa-popover",
     props: {
       open: { reflect: true, type: "String" },
+      targetWidth: { type: "String", attribute: "target-width" },
+      targetTextAlign: { type: "String", attribute: "target-text-align" },
     },
   }}
 />
@@ -24,7 +26,7 @@
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "popover";
   /** Provides control to where the popover content is positioned. */
-  export let position: "above" | "below" | "auto" = "auto";
+  export let position: "above" | "below" | "auto" | "right" = "auto";
   /** Sets the maximum width of the popover container. */
   export let maxwidth: string | "none" = "320px";
   /** Sets the minimum width of the popover container. */
@@ -61,6 +63,10 @@
   export let focusborderwidth = "var(--goa-border-width-l)";
   /** Border radius of the popover window. */
   export let borderradius = "var(--goa-border-radius-m)";
+  /** Width of the popover target button. */
+  export let targetWidth = "";
+  /** Text alignment of the popover target button. */
+  export let targetTextAlign = "";
   /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
 
@@ -254,7 +260,8 @@
   bind:this={_rootEl}
   data-testid={testid}
   style={styles(
-    "display: inline-block",
+    // Use block display when targetWidth is customized so width property works
+    targetWidth ? "display: block" : "display: inline-block",
     height === "full" && "height: 100%;",
     calculateMargin(mt, mr, mb, ml),
     style("--offset-top", voffset),
@@ -263,7 +270,9 @@
     style("--offset-right", hoffset),
     style("--focus-border-width", focusborderwidth),
     style("--border-radius", borderradius),
-    style("width", width),
+    targetWidth && style("--target-width", targetWidth),
+    targetTextAlign && style("--target-text-align", targetTextAlign),
+    !targetWidth && style("width", width),
   )}
 >
   <button
@@ -293,6 +302,7 @@
       (position === "auto" && _autoPosition === "above")}
     class:position-below={position === "below" ||
       (position === "auto" && _autoPosition === "below")}
+    class:position-right={position === "right"}
     style={styles(
       style("width", width),
       style("min-width", minwidth),
@@ -326,7 +336,8 @@
     border: none;
     padding: 0;
     background-color: transparent;
-    width: inherit;
+    width: var(--target-width, inherit);
+    text-align: var(--target-text-align, inherit);
     anchor-name: --goa-popover-target;
   }
 
@@ -367,6 +378,14 @@
   .popover-content.position-below {
     inset-block-start: anchor(bottom);
     --popover-translate-y: var(--offset-top, 3px);
+  }
+
+  .popover-content.position-right {
+    inset-block-start: anchor(top);
+    inset-inline-start: anchor(right);
+    --popover-translate-x: var(--offset-left, 0);
+    --popover-translate-y: var(--offset-top, 0);
+    position-try-fallbacks: flip-inline;
   }
 
   :global(::slotted(ul)) {

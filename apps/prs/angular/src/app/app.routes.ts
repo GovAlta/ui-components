@@ -81,6 +81,8 @@ import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-ico
 import { Feat3396Component } from "../routes/features/feat3396/feat3396.component";
 import { FeatV2CheckboxComponent } from "../routes/features/featV2Checkbox/featV2Checkbox.component";
 import { Feat3478Component } from "../routes/features/feat3478/feat3478.component";
+import { Feat2885Component } from "../routes/features/feat2885/feat2885.component";
+import { Feat2885NavigationTabsComponent } from "../routes/features/feat2885-navigation-tabs/feat2885-navigation-tabs.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -150,6 +152,8 @@ export const appRoutes: Route[] = [
   { path: "features/2722", component: Feat2722Component },
   { path: "features/2730", component: Feat2730Component },
   { path: "features/2829", component: Feat2829Component },
+  { path: "features/2885", component: Feat2885Component },
+  { path: "features/2885-navigation-tabs", component: Feat2885NavigationTabsComponent },
   { path: "features/3102", component: Feat3102Component },
   { path: "features/3137", component: Feat3137Component },
   { path: "features/3211", component: Feat3211Component },

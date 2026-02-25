@@ -50,47 +50,236 @@
       "name": "onUpdate",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_update",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onToggle",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_toggle",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [
     {
       "name": "primary",
-      "description": ""
+      "description": "Primary navigation items displayed at the top of the menu."
     },
     {
       "name": "secondary",
-      "description": ""
+      "description": "Secondary navigation items displayed below the primary section."
     },
     {
       "name": "account",
-      "description": ""
+      "description": "Account-related items shown in the user profile dropdown."
+    }
+  ],
+  "subComponents": [
+    {
+      "name": "WorkSideMenuItem",
+      "webComponentTag": "goa-work-side-menu-item",
+      "description": "A single menu item within the WorkSideMenu. Can render as a link (when url is provided) or as a button with popover content.",
+      "props": [
+        {
+          "name": "icon",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Icon name displayed for the menu item."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The text label displayed for the menu item."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The URL the menu item links to. When absent, renders as a button instead of a link."
+        },
+        {
+          "name": "badge",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Badge text displayed alongside the menu item (e.g., notification count)."
+        },
+        {
+          "name": "type",
+          "type": "\"normal\" | \"emergency\" | \"success\"",
+          "values": ["normal", "emergency", "success"],
+          "required": false,
+          "default": "normal",
+          "description": "The visual type of the menu item, affecting badge color."
+        },
+        {
+          "name": "current",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether the menu item represents the currently active page."
+        },
+        {
+          "name": "divider",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether to show a divider line below this menu item."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Fired when the menu item is clicked.",
+          "frameworks": ["react", "angular"]
+        }
+      ],
+      "slots": [
+        {
+          "name": "popoverContent",
+          "description": "Content displayed in a popover panel when the menu item is clicked. On desktop, renders inside a goa-popover. On mobile, renders inside a bottom drawer."
+        }
+      ]
+    },
+    {
+      "name": "WorkSideNotificationPanel",
+      "webComponentTag": "goa-work-side-notification-panel",
+      "description": "A notification panel with tabbed filtering (Unread, Urgent, All). Typically placed inside a WorkSideMenuItem's popoverContent slot.",
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "Notifications",
+          "description": "The heading text displayed at the top of the panel."
+        },
+        {
+          "name": "activeTab",
+          "type": "\"unread\" | \"urgent\" | \"all\"",
+          "values": ["unread", "urgent", "all"],
+          "required": false,
+          "default": "unread",
+          "description": "The initially active tab for filtering notifications."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onMarkAllRead",
+          "type": "() => void",
+          "description": "Fired when the 'Mark all as read' footer button is clicked.",
+          "frameworks": ["react", "angular"]
+        },
+        {
+          "name": "onViewAll",
+          "type": "() => void",
+          "description": "Fired when the 'View all' footer button is clicked.",
+          "frameworks": ["react", "angular"]
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "WorkSideNotificationItem components to display in the panel."
+        }
+      ]
+    },
+    {
+      "name": "WorkSideNotificationItem",
+      "webComponentTag": "goa-work-side-notification-item",
+      "description": "An individual notification card with title, description, timestamp, type badge, and read/unread status.",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The notification title."
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The notification description text."
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "ISO 8601 timestamp. Displayed as relative time (e.g., '5 min ago', '2 h ago')."
+        },
+        {
+          "name": "type",
+          "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
+          "values": ["default", "success", "critical", "warning", "info"],
+          "required": false,
+          "default": "default",
+          "description": "The notification type, shown as a badge icon."
+        },
+        {
+          "name": "readStatus",
+          "type": "\"read\" | \"unread\"",
+          "values": ["read", "unread"],
+          "required": false,
+          "default": "unread",
+          "description": "The read status. Unread items show a green dot indicator."
+        },
+        {
+          "name": "priority",
+          "type": "\"normal\" | \"urgent\"",
+          "values": ["normal", "urgent"],
+          "required": false,
+          "default": "normal",
+          "description": "The priority level. Urgent items have a warning background color."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Fired when the notification item is clicked.",
+          "frameworks": ["react", "angular"]
+        }
+      ],
+      "slots": []
     }
   ]
 }

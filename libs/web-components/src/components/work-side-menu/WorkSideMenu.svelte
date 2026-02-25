@@ -47,6 +47,8 @@
   let _isScrolling = false;
   let _showAccountMenu = false;
   let _showTooltip = false;
+  let _menuItemWithOpenPopover: HTMLElement | null = null;
+  let _mobilePopoverOpen = false;
 
   let _menuEl: HTMLElement;
   let _menuLinks: HTMLElement[] = [];
@@ -94,6 +96,19 @@
     _showTooltip = false;
   }
 
+  function onMobilePopoverOpen() {
+    _mobilePopoverOpen = true;
+    // Close the menu when drawer opens
+    if (open) {
+      open = false;
+      dispatch(_rootEl, "_toggle", { open }, { bubbles: true });
+    }
+  }
+
+  function onMobilePopoverClose() {
+    _mobilePopoverOpen = false;
+  }
+
   function getShadowLinkEl(el: Element): HTMLAnchorElement | null | undefined {
     if (el.tagName.includes("GOABX")) {
       const firstChild = el.firstElementChild as Element;
@@ -127,7 +142,7 @@
     label: string,
     el: HTMLElement,
   ) {
-    if (!open && menuType !== "account") {
+    if (!open && menuType !== "account" && el !== _menuItemWithOpenPopover) {
       setTooltipPos(label, el);
       showTooltip();
     } else {
@@ -190,10 +205,31 @@
     hideTooltip();
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
+  // hide menu item's tooltip when if that menu item has popoverContentSlot shown
+  function onDesktopPopoverOpen(e: CustomEvent) {
+    _menuItemWithOpenPopover = e.detail.el;
+    hideTooltip();
+  }
+
+  function onDesktopPopoverClose() {
+    _menuItemWithOpenPopover = null;
+  }
+
+  // Global shortcut for toggling menu (Ctrl+[)
+  function handleWindowKeyDown(e: KeyboardEvent) {
+    if (e?.key === "[" && e?.ctrlKey) {
+      dispatch(_rootEl, "_toggle", {}, {});
+    }
+  }
+
+  // Menu-scoped keyboard navigation (only fires when focus is inside menu)
+  function handleMenuKeyDown(e: KeyboardEvent) {
     switch (e?.key) {
-      case "[":
-        if (e?.ctrlKey) dispatch(_rootEl, "_toggle", {}, {});
+      case "ArrowDown":
+        onArrow("down");
+        break;
+      case "ArrowUp":
+        onArrow("up");
         break;
       case "Escape":
         closeAccountMenu();
@@ -221,7 +257,8 @@
 
   function handleAccountFocusOut(e: FocusEvent) {
     const target = e.relatedTarget as HTMLElement;
-    if (target?.closest?.('[slot="account"]') || target?.closest?.('.profile')) return;
+    if (target?.closest?.('[slot="account"]') || target?.closest?.(".profile"))
+      return;
     closeAccountMenu();
   }
 
@@ -245,24 +282,42 @@
     _rootEl.addEventListener("_update", setCurrentUrl);
     _rootEl.addEventListener("_mountItem", addMenuLink);
     _rootEl.addEventListener("_hoverItem", handleHover as EventListener);
+    _rootEl.addEventListener("_blurItem", hideTooltip);
     _rootEl.addEventListener("_toggle", toggleMenu);
     _rootEl.addEventListener("_groupOpen", () => {
       open = true;
     });
+    _rootEl.addEventListener(
+      "_desktopPopoverOpen",
+      onDesktopPopoverOpen as EventListener,
+    );
+    _rootEl.addEventListener("_desktopPopoverClose", onDesktopPopoverClose);
+    _rootEl.addEventListener("keydown", handleMenuKeyDown); // arrow up/down.. only handled when users focus on the menu
     window.addEventListener("popstate", setCurrentUrl); // watch for hash & browser history changes
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleWindowKeyDown); // global Ctrl+[ shortcut, even we not focus on the menu
     window.addEventListener("resize", handleWindowResize);
+    _rootEl.addEventListener("_mobilePopoverOpen", onMobilePopoverOpen);
+    _rootEl.addEventListener("_mobilePopoverClose", onMobilePopoverClose);
   }
 
   function removeEventListeners() {
     _rootEl.removeEventListener("_update", setCurrentUrl);
     _rootEl.removeEventListener("_mountItem", addMenuLink);
     _rootEl.removeEventListener("_hoverItem", handleHover as EventListener);
+    _rootEl.removeEventListener("_blurItem", hideTooltip);
     _rootEl.removeEventListener("_toggle", toggleMenu);
+    _rootEl.removeEventListener(
+      "_desktopPopoverOpen",
+      onDesktopPopoverOpen as EventListener,
+    );
+    _rootEl.removeEventListener("_desktopPopoverClose", onDesktopPopoverClose);
+    _rootEl.removeEventListener("keydown", handleMenuKeyDown);
     window.removeEventListener("popstate", setCurrentUrl);
-    window.removeEventListener("keydown", handleKeyDown);
+    window.removeEventListener("keydown", handleWindowKeyDown);
     window.removeEventListener("resize", handleWindowResize);
     document.body.removeEventListener("click", closeAccountMenu);
+    _rootEl.removeEventListener("_mobilePopoverOpen", onMobilePopoverOpen);
+    _rootEl.removeEventListener("_mobilePopoverClose", onMobilePopoverClose);
   }
 </script>
 
@@ -270,6 +325,7 @@
   class="root"
   class:closed={!open}
   class:scrolling={_isScrolling}
+  class:drawer-open={_mobilePopoverOpen}
   data-testid={testid}
   role="presentation"
   bind:this={_rootEl}
@@ -301,7 +357,11 @@
       bind:this={_scrollEl}
     >
       <nav class="menu" role="presentation" bind:this={_menuEl}>
-        <div class="primary-menu" role="presentation" on:mouseleave={handleMouseLeave}>
+        <div
+          class="primary-menu"
+          role="presentation"
+          on:mouseleave={handleMouseLeave}
+        >
           <slot name="primary"></slot>
         </div>
 
@@ -441,7 +501,7 @@
 
   .root {
     position: relative;
-    z-index: 2;
+    z-index: 101;
     height: 100vh;
   }
 
@@ -752,6 +812,12 @@
     }
 
     .root.closed {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    /* Hide menu when drawer is open (drawer is rendered on document.body) */
+    .root.drawer-open {
       visibility: hidden;
       opacity: 0;
     }

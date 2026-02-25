@@ -90,3 +90,5 @@ export * from "./experimental/ExperimentalFormStep.svelte";
 export * from "./components/work-side-menu/WorkSideMenu.svelte";
 export * from "./components/work-side-menu/WorkSideMenuItem.svelte";
 export * from "./components/work-side-menu/WorkSideMenuGroup.svelte";
+export * from "./components/work-side-menu/WorkSideNotificationPanel.svelte";
+export * from "./components/work-side-menu/WorkSideNotificationItem.svelte";

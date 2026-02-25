@@ -1,15 +1,23 @@
-<svelte:options customElement={{
-  tag: "goa-drawer",
-  props: {
-    open: { type: "Boolean", reflect: true }
-  }
-}}/>
+<svelte:options
+  customElement={{
+    tag: "goa-drawer",
+    props: {
+      open: { type: "Boolean", reflect: true },
+      closeButton: { type: "String", attribute: "close-button" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
-  import { dispatch, style, styles, typeValidator } from "../../common/utils";
+  import {
+    dispatch,
+    style,
+    styles,
+    typeValidator,
+  } from "../../common/utils";
   import { DrawerPosition, DrawerSize } from "../../common/types";
 
   // ******
@@ -26,6 +34,8 @@
   export let maxsize: DrawerSize = undefined;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "drawer";
+  /** Controls visibility of the close button and header. */
+  export let closeButton: "show" | "none" = "show";
 
   // version
   type VersionType = "1" | "2";
@@ -51,6 +61,7 @@
   // ========
   // Reactive
   // ========
+  $: _showCloseButton = closeButton !== "none";
   $: maxsize = maxsize || (position === "bottom" ? "80vh" : "320px");
   $: _flyParams = {
     duration: 200,
@@ -75,7 +86,7 @@
   // V2: Check initial scroll state when drawer opens
   $: if (open && version === "2" && _contentEl) {
     tick().then(() => {
-      const drawerContent = _contentEl?.querySelector('.drawer-content');
+      const drawerContent = _contentEl?.querySelector(".drawer-content");
       if (drawerContent) {
         const { scrollTop, scrollHeight, clientHeight } = drawerContent;
         _scrollPos = calculateScrollPos(scrollTop, scrollHeight, clientHeight);
@@ -193,7 +204,11 @@
   }
 
   // Shared helper to calculate scroll position from scroll metrics
-  function calculateScrollPos(scrollTop: number, scrollHeight: number, clientHeight: number): "top" | "middle" | "bottom" | null {
+  function calculateScrollPos(
+    scrollTop: number,
+    scrollHeight: number,
+    clientHeight: number,
+  ): "top" | "middle" | "bottom" | null {
     const hasScroll = scrollHeight > clientHeight;
     if (!hasScroll) return null;
     if (scrollTop < 1) return "top";
@@ -202,7 +217,7 @@
   }
 </script>
 
-<goa-focus-trap open={open} prevent-scroll-into-view={true}>
+<goa-focus-trap {open} prevent-scroll-into-view={true}>
   <div
     class={`root ${_scrollPos ?? ""}`}
     style={style("visibility", open ? "visible" : "hidden")}
@@ -221,13 +236,34 @@
       style={styles(
         style("--drawer-offset", `-${_drawerSize}px`),
         style("height", position === "bottom" ? "unset" : undefined),
-        style("max-width", position === "bottom" ? "unset" : (version === "2" ? `min(${maxsize}, calc(100vw - 2 * var(--goa-drawer-offset, 0)))` : `min(${maxsize}, 100vw)`)),
-        style("width", position === "bottom" ? "100%" : (version === "2" ? `min(${maxsize}, calc(100vw - 2 * var(--goa-drawer-offset, 0)))` : `min(${maxsize}, 100vw)`)),
-        style("max-height", position === "bottom" ? (version === "2" ? `min(${maxsize}, calc(100vh - 2 * var(--goa-drawer-offset, 0)))` : `min(${maxsize}, 100vh)`) : undefined),
+        style(
+          "max-width",
+          position === "bottom"
+            ? "unset"
+            : version === "2"
+              ? `min(${maxsize}, calc(100vw - 2 * var(--goa-drawer-offset, 0)))`
+              : `min(${maxsize}, 100vw)`,
+        ),
+        style(
+          "width",
+          position === "bottom"
+            ? "100%"
+            : version === "2"
+              ? `min(${maxsize}, calc(100vw - 2 * var(--goa-drawer-offset, 0)))`
+              : `min(${maxsize}, 100vw)`,
+        ),
+        style(
+          "max-height",
+          position === "bottom"
+            ? version === "2"
+              ? `min(${maxsize}, calc(100vh - 2 * var(--goa-drawer-offset, 0)))`
+              : `min(${maxsize}, 100vh)`
+            : undefined,
+        ),
       )}
       in:fly={_flyParams}
       out:fly={{ ..._flyParams, delay: 200 }}
-      class:open={open}
+      class:open
       class:closing={!open}
       class:v2={version === "2"}
       class={`drawer drawer-${position}`}
@@ -239,33 +275,39 @@
       aria-modal="true"
       tabindex="-1"
       data-first-focus="true"
-      aria-labelledby="goa-drawer-heading"
+      aria-labelledby={_showCloseButton ? "goa-drawer-heading" : undefined}
     >
       <!-- Header -->
-      <div class="header" id="goa-drawer-heading">
-        {#if heading || $$slots.heading}
-          {#if heading}
-            {#if version === "2"}
-              <goa-text size="heading-s" as="h3" mt="2xs" mb="none">{heading}</goa-text>
+      {#if _showCloseButton}
+        <div class="header" id="goa-drawer-heading">
+          {#if heading || $$slots.heading}
+            {#if heading}
+              {#if version === "2"}
+                <goa-text size="heading-s" as="h3" mt="2xs" mb="none"
+                  >{heading}</goa-text
+                >
+              {:else}
+                <goa-text size="heading-m" as="h3" mt="none" mb="none"
+                  >{heading}</goa-text
+                >
+              {/if}
             {:else}
-              <goa-text size="heading-m" as="h3" mt="none" mb="none">{heading}</goa-text>
+              <slot name="heading" />
             {/if}
-          {:else}
-            <slot name="heading" />
           {/if}
-        {/if}
 
-        <goa-icon-button
-          size="medium"
-          data-ignore-focus="true"
-          data-testid="drawer-close-button"
-          arialabel="Close the drawer"
-          variant="dark"
-          icon="close"
-          theme="filled"
-          on:click={close}
-        />
-      </div>
+          <goa-icon-button
+            size="medium"
+            data-ignore-focus="true"
+            data-testid="drawer-close-button"
+            arialabel="Close the drawer"
+            variant="dark"
+            icon="close"
+            theme="filled"
+            on:click={close}
+          />
+        </div>
+      {/if}
 
       <!-- Content -->
       <div
@@ -373,9 +415,10 @@
   /* Header styles */
   .header {
     border-bottom: var(--goa-border-width-s) solid
-    var(--goa-color-greyscale-200);
+      var(--goa-color-greyscale-200);
     display: flex;
-    padding: var(--goa-space-l) var(--goa-space-l) var(--goa-space-s) var(--goa-space-l);
+    padding: var(--goa-space-l) var(--goa-space-l) var(--goa-space-s)
+      var(--goa-space-l);
     /* Padding: 24px top/right/left, 12px bottom */
     justify-content: space-between;
     align-items: flex-start; /* Align to top instead of center */
@@ -394,7 +437,8 @@
   /* V2: Show header border when scrolled from top (middle or bottom position) */
   .root.middle .drawer.v2 .header,
   .root.bottom .drawer.v2 .header {
-    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+    border-bottom: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-200);
   }
 
   /* Content styles */
@@ -414,7 +458,8 @@
   }
 
   .scroll-content {
-    padding: var(--goa-drawer-content-padding-vertical, var(--goa-space-l)) var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl));
+    padding: var(--goa-drawer-content-padding-vertical, var(--goa-space-l))
+      var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl));
   }
 
   /* Remove margin-top from first child in content to prevent double spacing */
@@ -425,7 +470,9 @@
   /* Actions styles */
   .drawer-actions {
     width: 100%;
-    padding: var(--goa-drawer-actions-padding-top, var(--goa-space-l)) var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl)) var(--goa-drawer-actions-padding-bottom, var(--goa-space-xl));
+    padding: var(--goa-drawer-actions-padding-top, var(--goa-space-l))
+      var(--goa-drawer-content-padding-horizontal, var(--goa-space-xl))
+      var(--goa-drawer-actions-padding-bottom, var(--goa-space-xl));
     border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
     background: var(--goa-color-greyscale-white);
   }
@@ -523,7 +570,9 @@
     box-shadow: var(--goa-drawer-shadow);
     transform: translateX(100%); /* Start off-screen to the right */
     /* Smooth transitions for position and transform */
-    transition: bottom 0.15s ease-out, transform 0.2s ease-out;
+    transition:
+      bottom 0.15s ease-out,
+      transform 0.2s ease-out;
   }
   .v2.drawer-open-right {
     right: var(--goa-drawer-offset, 0);
@@ -563,7 +612,9 @@
     box-shadow: var(--goa-drawer-shadow);
     transform: translateX(-100%); /* Start off-screen to the left */
     /* Smooth transitions for position and transform */
-    transition: bottom 0.15s ease-out, transform 0.2s ease-out;
+    transition:
+      bottom 0.15s ease-out,
+      transform 0.2s ease-out;
   }
   .v2.drawer-open-left {
     left: var(--goa-drawer-offset, 0);
