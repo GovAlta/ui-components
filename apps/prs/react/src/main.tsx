@@ -77,6 +77,7 @@ import { Feat3306Route } from "./routes/features/feat3306";
 import { Feat2469Route } from "./routes/features/feat2469";
 import { Feat3370Route } from "./routes/features/feat3370";
 import { Feat3396Route } from "./routes/features/feat3396";
+import { Feat3229Route } from "./routes/features/feat3229";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -155,11 +156,13 @@ root.render(
           <Route path="features/3137" element={<Feat3137Route />} />
           <Route path="features/3241" element={<Feat3241Route />} />
           <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
-          <Route path="features/3407-skip-on-focus-tab" element={<Feat3407SkipOnFocusTabRoute />} />
-          <Route path="features/3407-stack-on-mobile" element={<Feat3407StackOnMobileRoute />} />
+          <Route path="features/3137" element={<Feat3137Route />} />
+          <Route path="features/3229" element={<Feat3229Route />} />
           <Route path="features/3306" element={<Feat3306Route />} />
           <Route path="features/3370" element={<Feat3370Route />} />
           <Route path="features/3396" element={<Feat3396Route />} />
+          <Route path="features/3407-skip-on-focus-tab" element={<Feat3407SkipOnFocusTabRoute />} />
+          <Route path="features/3407-stack-on-mobile" element={<Feat3407StackOnMobileRoute />} />
         </Route>
       </Routes>
     </BrowserRouter>

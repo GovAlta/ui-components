@@ -17,7 +17,12 @@
         "tsConfig": "apps/prs/angular/tsconfig.app.json",
         "assets": [
           "apps/prs/angular/src/favicon.ico",
-          "apps/prs/angular/src/assets"
+          "apps/prs/angular/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@abgov/design-tokens-v2/dist",
+            "output": "/v2-tokens"
+          }
         ],
         "styles": ["apps/prs/angular/src/styles.css"],
         "scripts": []
