@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  GoabFilterChip,
-  GoabFormItem,
-  GoabInput,
-} from "@abgov/react-components";
+import { GoabxFilterChip, GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
 
 export function TypeToCreateANewFilter() {
   const [typedChips, setTypedChips] = useState<string[]>([]);
@@ -11,8 +7,8 @@ export function TypeToCreateANewFilter() {
 
   return (
     <>
-      <GoabFormItem label="Type to create a chip" mb="m">
-        <GoabInput
+      <GoabxFormItem label="Type to create a chip" mb="m">
+        <GoabxInput
           name="chipInput"
           value={inputValue}
           onChange={(e) => setInputValue(e.value.trim())}
@@ -26,10 +22,10 @@ export function TypeToCreateANewFilter() {
           }}
           width="100%"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
       <div>
         {typedChips.map((chip, index) => (
-          <GoabFilterChip
+          <GoabxFilterChip
             key={index}
             content={chip}
             mb="xs"

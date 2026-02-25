@@ -83,48 +83,48 @@ export const blockConfigurations: ComponentConfigurations = {
       description: 'Horizontal alignment options',
       code: {
         react: `<GoabBlock alignment="start">
-  <GoabFormItem label="Start aligned">
-    <GoabInput name="start" width="20ch" />
-  </GoabFormItem>
+  <GoabxFormItem label="Start aligned">
+    <GoabxInput name="start" width="20ch" />
+  </GoabxFormItem>
 </GoabBlock>
 <GoabBlock alignment="center">
-  <GoabFormItem label="Center aligned">
-    <GoabInput name="center" width="20ch" />
-  </GoabFormItem>
+  <GoabxFormItem label="Center aligned">
+    <GoabxInput name="center" width="20ch" />
+  </GoabxFormItem>
 </GoabBlock>
 <GoabBlock alignment="end">
-  <GoabFormItem label="End aligned">
-    <GoabInput name="end" width="20ch" />
-  </GoabFormItem>
+  <GoabxFormItem label="End aligned">
+    <GoabxInput name="end" width="20ch" />
+  </GoabxFormItem>
 </GoabBlock>`,
         angular: `<goab-block alignment="start">
-  <goab-form-item label="Start aligned">
-    <goab-input name="start" width="20ch"></goab-input>
-  </goab-form-item>
+  <goabx-form-item label="Start aligned">
+    <goabx-input name="start" width="20ch"></goabx-input>
+  </goabx-form-item>
 </goab-block>
 <goab-block alignment="center">
-  <goab-form-item label="Center aligned">
-    <goab-input name="center" width="20ch"></goab-input>
-  </goab-form-item>
+  <goabx-form-item label="Center aligned">
+    <goabx-input name="center" width="20ch"></goabx-input>
+  </goabx-form-item>
 </goab-block>
 <goab-block alignment="end">
-  <goab-form-item label="End aligned">
-    <goab-input name="end" width="20ch"></goab-input>
-  </goab-form-item>
+  <goabx-form-item label="End aligned">
+    <goabx-input name="end" width="20ch"></goabx-input>
+  </goabx-form-item>
 </goab-block>`,
         webComponents: `<goa-block alignment="start">
-  <goa-form-item label="Start aligned">
-    <goa-input name="start" width="20ch"></goa-input>
+  <goa-form-item version="2" label="Start aligned">
+    <goa-input version="2" name="start" width="20ch"></goa-input>
   </goa-form-item>
 </goa-block>
 <goa-block alignment="center">
-  <goa-form-item label="Center aligned">
-    <goa-input name="center" width="20ch"></goa-input>
+  <goa-form-item version="2" label="Center aligned">
+    <goa-input version="2" name="center" width="20ch"></goa-input>
   </goa-form-item>
 </goa-block>
 <goa-block alignment="end">
-  <goa-form-item label="End aligned">
-    <goa-input name="end" width="20ch"></goa-input>
+  <goa-form-item version="2" label="End aligned">
+    <goa-input version="2" name="end" width="20ch"></goa-input>
   </goa-form-item>
 </goa-block>`,
       },
@@ -135,27 +135,27 @@ export const blockConfigurations: ComponentConfigurations = {
       description: 'Items arranged horizontally',
       code: {
         react: `<GoabBlock direction="row" gap="l">
-  <GoabFormItem label="First name">
-    <GoabInput name="firstName" />
-  </GoabFormItem>
-  <GoabFormItem label="Last name">
-    <GoabInput name="lastName" />
-  </GoabFormItem>
+  <GoabxFormItem label="First name">
+    <GoabxInput name="firstName" />
+  </GoabxFormItem>
+  <GoabxFormItem label="Last name">
+    <GoabxInput name="lastName" />
+  </GoabxFormItem>
 </GoabBlock>`,
         angular: `<goab-block direction="row" gap="l">
-  <goab-form-item label="First name">
-    <goab-input name="firstName"></goab-input>
-  </goab-form-item>
-  <goab-form-item label="Last name">
-    <goab-input name="lastName"></goab-input>
-  </goab-form-item>
+  <goabx-form-item label="First name">
+    <goabx-input name="firstName"></goabx-input>
+  </goabx-form-item>
+  <goabx-form-item label="Last name">
+    <goabx-input name="lastName"></goabx-input>
+  </goabx-form-item>
 </goab-block>`,
         webComponents: `<goa-block direction="row" gap="l">
-  <goa-form-item label="First name">
-    <goa-input name="firstName"></goa-input>
+  <goa-form-item version="2" label="First name">
+    <goa-input version="2" name="firstName"></goa-input>
   </goa-form-item>
-  <goa-form-item label="Last name">
-    <goa-input name="lastName"></goa-input>
+  <goa-form-item version="2" label="Last name">
+    <goa-input version="2" name="lastName"></goa-input>
   </goa-form-item>
 </goa-block>`,
       },

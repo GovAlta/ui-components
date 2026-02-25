@@ -1,6 +1,6 @@
-<goab-link leadingIcon="arrow-back" size="small" mb="none">
+<goabx-link leadingIcon="arrow-back" size="small" mb="none">
   Back
-</goab-link>
+</goabx-link>
 
 <goab-text as="h2" mt="xl" mb="m">Current school status</goab-text>
 <goab-text mt="none" mb="s">
@@ -18,16 +18,16 @@
   Contact your provider if you're concerned about your school status.
 </goab-text>
 
-<goab-form-item label="Are you currently in school?">
-  <goab-radio-group
+<goabx-form-item label="Are you currently in school?">
+  <goabx-radio-group
     name="school"
     ariaLabel="are you currently in school?"
     (onChange)="onChange($event)">
-    <goab-radio-item value="yes" label="Yes"></goab-radio-item>
-    <goab-radio-item value="no" label="No"></goab-radio-item>
-  </goab-radio-group>
-</goab-form-item>
+    <goabx-radio-item value="yes" label="Yes"></goabx-radio-item>
+    <goabx-radio-item value="no" label="No"></goabx-radio-item>
+  </goabx-radio-group>
+</goabx-form-item>
 
-<goab-button type="submit" mt="2xl" (onClick)="onSubmit()">
+<goabx-button type="submit" mt="2xl" (onClick)="onSubmit()">
   Save and continue
-</goab-button>
+</goabx-button>

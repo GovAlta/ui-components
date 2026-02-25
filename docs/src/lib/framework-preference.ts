@@ -25,7 +25,7 @@ export function getFrameworkPreference(): Framework {
 }
 
 /**
- * Set the user's framework preference and broadcast to all components
+ * Set the user's framework preference and broadcast to all components.
  */
 export function setFrameworkPreference(framework: Framework): void {
   if (typeof window === 'undefined') return;

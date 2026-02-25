@@ -1,7 +1,7 @@
-<goab-form-item id="filterChipInput" [error]="inputError" mb="m">
+<goabx-form-item id="filterChipInput" [error]="inputError" mb="m">
     <goab-block gap="xs" direction="row" alignment="start" width="100%">
       <div style="flex: 1;">
-        <goab-input
+        <goabx-input
           name="filterChipInput"
           aria-labelledby="filterChipInput"
           [value]="inputValue"
@@ -9,31 +9,31 @@
           width="100%"
           (onChange)="handleInputChange($event)"
           (onKeyPress)="handleInputKeyPress($event)">
-        </goab-input>
+        </goabx-input>
       </div>
-      <goab-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
+      <goabx-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
         Filter
-      </goab-button>
+      </goabx-button>
     </goab-block>
-  </goab-form-item>
+  </goabx-form-item>
 
   <ng-container *ngIf="typedChips.length > 0">
     <goab-text tag="span" color="secondary" mb="xs" mr="xs">
       Filter:
     </goab-text>
-    <goab-filter-chip
+    <goabx-filter-chip
       *ngFor="let typedChip of typedChips; let index = index"
       [content]="typedChip"
       mb="xs"
       mr="xs"
       (onClick)="removeTypedChip(typedChip)">
-    </goab-filter-chip>
-    <goab-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
+    </goabx-filter-chip>
+    <goabx-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
       Clear all
-    </goab-button>
+    </goabx-button>
   </ng-container>
 
-  <goab-table width="full">
+  <goabx-table width="full">
     <thead>
       <tr>
         <th>Status</th>
@@ -44,13 +44,13 @@
     <tbody>
       <tr *ngFor="let item of dataFiltered">
         <td>
-          <goab-badge [type]="item.status.type" [content]="item.status.text" [icon]="false"></goab-badge>
+          <goabx-badge [type]="item.status.type" [content]="item.status.text" [icon]="false"></goabx-badge>
         </td>
         <td>{{ item.name }}</td>
         <td class="goa-table-number-column">{{ item.id }}</td>
       </tr>
     </tbody>
-  </goab-table>
+  </goabx-table>
 
 <goab-block mt="l" mb="l" *ngIf="dataFiltered.length === 0 && data.length > 0">
   No results found

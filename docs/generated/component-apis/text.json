@@ -1,14 +1,20 @@
 {
   "componentSlug": "text",
   "extractedFrom": "libs/web-components/src/components/text/Text.svelte",
-  "extractedAt": "2026-01-05T23:10:27.462Z",
+  "extractedAt": "2026-02-04T19:50:01.587Z",
   "props": [
     {
       "name": "as",
-      "type": "TextElement | HeadingElement",
+      "type": "\"span\" | \"div\" | \"p\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\"",
       "values": [
-        "TextElement",
-        "HeadingElement"
+        "span",
+        "div",
+        "p",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5"
       ],
       "required": false,
       "default": "div",
@@ -27,7 +33,7 @@
     },
     {
       "name": "size",
-      "type": "Size",
+      "type": "\"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
       "values": [
         "heading-xl",
         "heading-l",

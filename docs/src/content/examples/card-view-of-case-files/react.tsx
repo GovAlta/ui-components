@@ -1,4 +1,5 @@
-import { GoabBadge, GoabBlock, GoabButton, GoabContainer, GoabText } from "@abgov/react-components";
+import { GoabxBadge, GoabxButton } from "@abgov/react-components/experimental";
+import { GoabBlock, GoabContainer, GoabText } from "@abgov/react-components";
 
 export function CardViewOfCaseFiles() {
   return (
@@ -20,8 +21,8 @@ export function CardViewOfCaseFiles() {
             <GoabText size="body-s" mt="none" mb="none">Submitted: April 23, 2023</GoabText>
           </GoabBlock>
           <GoabBlock direction="row" gap="l" alignment="center">
-            <GoabBadge type="midtone" content="Not started" />
-            <GoabButton type="tertiary" size="compact">Start</GoabButton>
+            <GoabxBadge type="midtone" content="Not started" />
+            <GoabxButton type="tertiary" size="compact">Start</GoabxButton>
           </GoabBlock>
         </div>
       </GoabContainer>
@@ -33,8 +34,8 @@ export function CardViewOfCaseFiles() {
             <GoabText size="body-s" mt="none" mb="none">Submitted: April 9, 2022</GoabText>
           </GoabBlock>
           <GoabBlock direction="row" gap="l" alignment="center">
-            <GoabBadge type="important" content="Information needed" />
-            <GoabButton type="tertiary" size="compact">Edit</GoabButton>
+            <GoabxBadge type="important" content="Information needed" />
+            <GoabxButton type="tertiary" size="compact">Edit</GoabxButton>
           </GoabBlock>
         </div>
       </GoabContainer>
@@ -46,8 +47,8 @@ export function CardViewOfCaseFiles() {
             <GoabText size="body-s" mt="none" mb="none">Submitted: April 14, 2021</GoabText>
           </GoabBlock>
           <GoabBlock direction="row" gap="l" alignment="center">
-            <GoabBadge type="success" content="Approved" />
-            <GoabButton type="tertiary" size="compact">View</GoabButton>
+            <GoabxBadge type="success" content="Approved" />
+            <GoabxButton type="tertiary" size="compact">View</GoabxButton>
           </GoabBlock>
         </div>
       </GoabContainer>

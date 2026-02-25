@@ -36,7 +36,7 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabCalendar extends GoabBaseComponent implements OnInit {
   @Input() name?: string;
-  @Input() value?: Date;
+  @Input() value?: Date | string;
   @Input() min?: Date;
   @Input() max?: Date;
 

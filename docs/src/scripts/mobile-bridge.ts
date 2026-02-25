@@ -8,6 +8,7 @@
  * - data-mobile: "true" | "false" (viewport width < 624px)
  * - data-menu-open: "true" | "false" (sidebar menu state)
  * - data-header-hidden: "true" | "false" (header hidden on scroll down)
+ * - data-scrolled: "true" | "false" (page scrolled from top)
  *
  * Custom events listened for:
  * - goa-menu-change: { detail: { isOpen: boolean } }
@@ -19,6 +20,7 @@ const SIDEBAR_EXPANDED = 280;
 const SIDEBAR_COLLAPSED = 72;
 const SCROLL_UP_THRESHOLD = 10; // pixels of upward scroll to show header
 const SCROLL_DOWN_THRESHOLD = 50; // pixels from top before header can hide
+const SCROLLED_THRESHOLD = 80; // pixels before header background changes (after header hides)
 
 let lastScrollY = 0;
 let headerHidden = false;
@@ -56,10 +58,18 @@ function updateMobileState(): void {
  * - Scrolling up (any amount): show header
  */
 function handleScroll(): void {
-  // Only apply on mobile
-  if (window.innerWidth >= MOBILE_BREAKPOINT) return;
-
   const currentScrollY = window.scrollY;
+
+  // Track scrolled state (applies to all viewports, used for header transparency)
+  const isScrolled = currentScrollY > SCROLLED_THRESHOLD;
+  document.body.setAttribute('data-scrolled', String(isScrolled));
+
+  // Header hide/show only applies on mobile
+  if (window.innerWidth >= MOBILE_BREAKPOINT) {
+    lastScrollY = currentScrollY;
+    return;
+  }
+
   const scrollDelta = currentScrollY - lastScrollY;
 
   // Near top of page - always show header
@@ -112,6 +122,7 @@ function init(): void {
   updateMobileState();
   document.body.setAttribute('data-menu-open', 'false');
   document.body.setAttribute('data-header-hidden', 'false');
+  document.body.setAttribute('data-scrolled', String(window.scrollY > SCROLLED_THRESHOLD));
   lastScrollY = window.scrollY;
 
   // Listen for viewport changes

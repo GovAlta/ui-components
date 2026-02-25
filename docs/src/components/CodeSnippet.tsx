@@ -1,31 +1,32 @@
-import { useState, useEffect, useRef } from 'react';
-import { GoabTabs, GoabTab } from '@abgov/react-components';
-import hljs from 'highlight.js/lib/core';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
-import css from 'highlight.js/lib/languages/css';
-import javascript from 'highlight.js/lib/languages/javascript';
+import { useState, useEffect, useRef } from "react";
+import { GoabxTabs, GoabxButton } from "@abgov/react-components/experimental";
+import { GoabTab } from "@abgov/react-components";
+import hljs from "highlight.js/lib/core";
+import typescript from "highlight.js/lib/languages/typescript";
+import xml from "highlight.js/lib/languages/xml";
+import css from "highlight.js/lib/languages/css";
+import javascript from "highlight.js/lib/languages/javascript";
 import {
   extractReactCode,
   extractAngularCode,
   extractWebComponentsCode,
   type ExtractedReactCode,
   type ExtractedAngularCode,
-  type ExtractedWebComponentsCode
-} from '../lib/extract-code-parts';
+  type ExtractedWebComponentsCode,
+} from "../lib/extract-code-parts";
 import {
   getFrameworkPreference,
   setFrameworkPreference,
   subscribeToFrameworkPreference,
-  type Framework
-} from '../lib/framework-preference';
+  type Framework,
+} from "../lib/framework-preference";
 
 // Register languages
-hljs.registerLanguage('typescript', typescript);
-hljs.registerLanguage('tsx', typescript);
-hljs.registerLanguage('html', xml);
-hljs.registerLanguage('css', css);
-hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("tsx", typescript);
+hljs.registerLanguage("html", xml);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("javascript", javascript);
 
 interface AngularCode {
   ts?: string;
@@ -45,7 +46,7 @@ interface CodeSnippetProps {
   frameworkCode?: FrameworkCode;
   /** Initial framework when using frameworkCode */
   initialFramework?: Framework;
-  language?: 'tsx' | 'typescript' | 'html' | 'css' | 'javascript';
+  language?: "tsx" | "typescript" | "html" | "css" | "javascript";
   showCopy?: boolean;
   showLineNumbers?: boolean;
   maxHeight?: number;
@@ -55,9 +56,9 @@ interface CodeSnippetProps {
 }
 
 const FRAMEWORK_LABELS: Record<Framework, string> = {
-  react: 'React',
-  angular: 'Angular',
-  webComponents: 'Web Components',
+  react: "React",
+  angular: "Angular",
+  webComponents: "Web Components",
 };
 
 // ============================================================================
@@ -72,7 +73,13 @@ interface SingleCodeBlockProps {
   maxHeight?: number;
 }
 
-function SingleCodeBlock({ code, language, title, showCopy = true, maxHeight }: SingleCodeBlockProps) {
+function SingleCodeBlock({
+  code,
+  language,
+  title,
+  showCopy = true,
+  maxHeight,
+}: SingleCodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [needsExpand, setNeedsExpand] = useState(false);
@@ -81,14 +88,30 @@ function SingleCodeBlock({ code, language, title, showCopy = true, maxHeight }: 
 
   const cleanedCode = cleanCode(code);
 
+  // Syntax highlighting
   useEffect(() => {
     if (codeRef.current) {
-      codeRef.current.removeAttribute('data-highlighted');
+      codeRef.current.removeAttribute("data-highlighted");
       hljs.highlightElement(codeRef.current);
     }
-    if (containerRef.current && maxHeight) {
-      setNeedsExpand(containerRef.current.scrollHeight > maxHeight);
-    }
+  }, [cleanedCode]);
+
+  // Detect whether expand button is needed using ResizeObserver.
+  // A one-shot useEffect fails here because inside GoabxTabs, inactive tab
+  // content is hidden (scrollHeight = 0). ResizeObserver fires when the
+  // container becomes visible after a tab switch, so the measurement is reliable.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !maxHeight) return;
+
+    const check = () => {
+      setNeedsExpand(container.scrollHeight > maxHeight);
+    };
+
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(container);
+    return () => observer.disconnect();
   }, [cleanedCode, maxHeight]);
 
   const handleCopy = async () => {
@@ -97,27 +120,39 @@ function SingleCodeBlock({ code, language, title, showCopy = true, maxHeight }: 
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   };
 
   return (
-    <div className={`code-block ${needsExpand && !isExpanded ? 'has-gradient' : ''}`}>
+    <div className={`code-block ${needsExpand && !isExpanded ? "has-gradient" : ""}`}>
       <div className="code-block-header">
         {title && <span className="code-block-title">{title}</span>}
         {showCopy && (
           <button
-            className={`copy-button ${copied ? 'copied' : ''}`}
+            className={`copy-button ${copied ? "copied" : ""}`}
             onClick={handleCopy}
-            aria-label={copied ? 'Copied!' : 'Copy code'}
-            title={copied ? 'Copied!' : 'Copy code'}
+            aria-label={copied ? "Copied!" : "Copy code"}
+            title={copied ? "Copied!" : "Copy code"}
           >
             {copied ? (
-              <svg className="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                className="copy-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             ) : (
-              <svg className="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                className="copy-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
@@ -127,8 +162,8 @@ function SingleCodeBlock({ code, language, title, showCopy = true, maxHeight }: 
       </div>
       <div
         ref={containerRef}
-        className={`code-container ${isExpanded ? 'expanded' : ''}`}
-        style={{ maxHeight: isExpanded ? 'none' : maxHeight ? `${maxHeight}px` : 'none' }}
+        className={`code-container ${isExpanded ? "expanded" : ""}`}
+        style={{ maxHeight: isExpanded ? "none" : maxHeight ? `${maxHeight}px` : "none" }}
       >
         <pre>
           <code ref={codeRef} className={`language-${language}`}>
@@ -139,15 +174,14 @@ function SingleCodeBlock({ code, language, title, showCopy = true, maxHeight }: 
       {needsExpand && (
         <div className="expand-wrapper">
           <span className="expand-button-bg">
-            <goa-button
-              version="2"
+            <GoabxButton
               type="tertiary"
               size="compact"
-              trailingicon={isExpanded ? 'chevron-up' : 'chevron-down'}
+              trailingIcon={isExpanded ? "chevron-up" : "chevron-down"}
               onClick={() => setIsExpanded(!isExpanded)}
             >
-              {isExpanded ? 'Show less' : 'Show more'}
-            </goa-button>
+              {isExpanded ? "Show less" : "Show more"}
+            </GoabxButton>
           </span>
         </div>
       )}
@@ -162,13 +196,13 @@ function SingleCodeBlock({ code, language, title, showCopy = true, maxHeight }: 
 export function CodeSnippet({
   code,
   frameworkCode,
-  initialFramework = 'react',
-  language = 'tsx',
+  initialFramework = "react",
+  language = "tsx",
   showCopy = true,
   showLineNumbers = false,
   maxHeight,
   title,
-  extractParts = true
+  extractParts = true,
 }: CodeSnippetProps) {
   // Initialize from global preference (falls back to initialFramework prop if not set)
   const [selectedFramework, setSelectedFramework] = useState<Framework>(() => {
@@ -182,20 +216,55 @@ export function CodeSnippet({
 
   // Get available frameworks
   const availableFrameworks = hasFrameworkSwitcher
-    ? (Object.keys(frameworkCode).filter(k => frameworkCode[k as Framework]) as Framework[])
+    ? (Object.keys(frameworkCode).filter(
+      (k) => frameworkCode[k as Framework],
+    ) as Framework[])
     : [];
 
-  // Subscribe to global framework preference changes from other components
+  // Subscribe to global framework preference changes from other components.
+  // Directly manipulate the tab DOM state without triggering focus or hash changes.
   useEffect(() => {
     return subscribeToFrameworkPreference((framework) => {
-      // Only update if the framework is available in this snippet
       if (availableFrameworks.length === 0 || availableFrameworks.includes(framework)) {
         setSelectedFramework(framework);
+
+        // Directly switch goa-tabs without triggering focus
+        if (tabsRef.current) {
+          const goaTabs = tabsRef.current.querySelector("goa-tabs");
+          if (goaTabs) {
+            const targetIndex = availableFrameworks.indexOf(framework);
+            const tabs = goaTabs.querySelectorAll('[role="tab"]');
+
+            // Check if already on the correct tab
+            const targetTab = tabs[targetIndex] as HTMLElement;
+            if (targetTab && targetTab.getAttribute("aria-selected") === "true") {
+              return; // Already selected, nothing to do
+            }
+
+            // Update tab button states (aria-selected, tabindex)
+            tabs.forEach((tab, i) => {
+              tab.setAttribute("aria-selected", i === targetIndex ? "true" : "false");
+              tab.setAttribute("tabindex", i === targetIndex ? "0" : "-1");
+            });
+
+            // Tell each goa-tab content whether it should be open
+            const tabContents = goaTabs.querySelectorAll("goa-tab");
+            tabContents.forEach((content, i) => {
+              content.dispatchEvent(
+                new CustomEvent("tabs:set-open", {
+                  composed: true,
+                  detail: { open: i === targetIndex },
+                }),
+              );
+            });
+          }
+        }
       }
     });
   }, [availableFrameworks]);
 
-  // Listen for native tab change events (more reliable than React wrapper onChange)
+  // Listen for native tab change events (user clicking a tab in THIS component).
+  // Broadcasts the change to all other CodeSnippet instances on the page.
   // Note: GoA tabs are 1-indexed, so we subtract 1 to get the array index
   useEffect(() => {
     if (!tabsRef.current || availableFrameworks.length <= 1) return;
@@ -203,7 +272,7 @@ export function CodeSnippet({
     const handleTabChange = (e: Event) => {
       const customEvent = e as CustomEvent<{ tab: number }>;
       const tabIndex = customEvent.detail?.tab;
-      if (typeof tabIndex === 'number') {
+      if (typeof tabIndex === "number") {
         const frameworkIndex = tabIndex - 1; // GoA tabs are 1-indexed
         if (availableFrameworks[frameworkIndex]) {
           // Broadcast to all other components and persist to localStorage
@@ -212,10 +281,10 @@ export function CodeSnippet({
       }
     };
 
-    const tabsElement = tabsRef.current.querySelector('goa-tabs');
+    const tabsElement = tabsRef.current.querySelector("goa-tabs");
     if (tabsElement) {
-      tabsElement.addEventListener('_change', handleTabChange);
-      return () => tabsElement.removeEventListener('_change', handleTabChange);
+      tabsElement.addEventListener("_change", handleTabChange);
+      return () => tabsElement.removeEventListener("_change", handleTabChange);
     }
   }, [availableFrameworks]);
 
@@ -225,7 +294,7 @@ export function CodeSnippet({
       <div className="code-snippet-wrapper">
         <div className="code-snippet">
           <SingleCodeBlock
-            code={code || ''}
+            code={code || ""}
             language={language}
             title={title}
             showCopy={showCopy}
@@ -242,7 +311,7 @@ export function CodeSnippet({
     if (!extractParts) {
       // Simple mode - just show the raw code for selected framework
       const rawCode = getFrameworkRawCode(frameworkCode, selectedFramework);
-      const lang = selectedFramework === 'react' ? 'tsx' : 'html';
+      const lang = selectedFramework === "react" ? "tsx" : "html";
       return (
         <SingleCodeBlock
           code={rawCode}
@@ -255,11 +324,11 @@ export function CodeSnippet({
 
     // Extract and render multiple blocks based on framework
     switch (selectedFramework) {
-      case 'react':
+      case "react":
         return renderReactBlocks(frameworkCode.react);
-      case 'angular':
+      case "angular":
         return renderAngularBlocks(frameworkCode.angular);
-      case 'webComponents':
+      case "webComponents":
         return renderWebComponentsBlocks(frameworkCode.webComponents);
       default:
         return null;
@@ -273,12 +342,27 @@ export function CodeSnippet({
     return (
       <>
         {extracted.css && (
-          <SingleCodeBlock code={extracted.css} language="css" showCopy={showCopy} maxHeight={maxHeight} />
+          <SingleCodeBlock
+            code={extracted.css}
+            language="css"
+            showCopy={showCopy}
+            maxHeight={maxHeight}
+          />
         )}
         {extracted.setup && (
-          <SingleCodeBlock code={extracted.setup} language="tsx" showCopy={showCopy} maxHeight={maxHeight} />
+          <SingleCodeBlock
+            code={extracted.setup}
+            language="tsx"
+            showCopy={showCopy}
+            maxHeight={maxHeight}
+          />
         )}
-        <SingleCodeBlock code={extracted.jsx} language="tsx" showCopy={showCopy} maxHeight={maxHeight} />
+        <SingleCodeBlock
+          code={extracted.jsx}
+          language="tsx"
+          showCopy={showCopy}
+          maxHeight={maxHeight}
+        />
       </>
     );
   };
@@ -287,68 +371,123 @@ export function CodeSnippet({
     if (!angular) return <div className="no-code">No Angular code available</div>;
 
     // Handle both string (legacy) and object format
-    const angularObj: AngularCode = typeof angular === 'string'
-      ? { template: angular }
-      : angular;
+    const angularObj: AngularCode =
+      typeof angular === "string" ? { template: angular } : angular;
 
     const extracted = extractAngularCode(angularObj.ts, angularObj.template);
     return (
       <>
         {extracted.css && (
-          <SingleCodeBlock code={extracted.css} language="css" showCopy={showCopy} maxHeight={maxHeight} />
+          <SingleCodeBlock
+            code={extracted.css}
+            language="css"
+            showCopy={showCopy}
+            maxHeight={maxHeight}
+          />
         )}
         {extracted.typescript && (
-          <SingleCodeBlock code={extracted.typescript} language="typescript" showCopy={showCopy} maxHeight={maxHeight} />
+          <SingleCodeBlock
+            code={extracted.typescript}
+            language="typescript"
+            showCopy={showCopy}
+            maxHeight={maxHeight}
+          />
         )}
-        <SingleCodeBlock code={extracted.template} language="html" showCopy={showCopy} maxHeight={maxHeight} />
+        <SingleCodeBlock
+          code={extracted.template}
+          language="html"
+          showCopy={showCopy}
+          maxHeight={maxHeight}
+        />
       </>
     );
   };
 
   const renderWebComponentsBlocks = (webComponentsCode?: string) => {
-    if (!webComponentsCode) return <div className="no-code">No Web Components code available</div>;
+    if (!webComponentsCode)
+      return <div className="no-code">No Web Components code available</div>;
 
     const extracted = extractWebComponentsCode(webComponentsCode);
     return (
       <>
         {extracted.css && (
-          <SingleCodeBlock code={extracted.css} language="css" showCopy={showCopy} maxHeight={maxHeight} />
+          <SingleCodeBlock
+            code={extracted.css}
+            language="css"
+            showCopy={showCopy}
+            maxHeight={maxHeight}
+          />
         )}
         {extracted.javascript && (
-          <SingleCodeBlock code={extracted.javascript} language="javascript" showCopy={showCopy} maxHeight={maxHeight} />
+          <SingleCodeBlock
+            code={extracted.javascript}
+            language="javascript"
+            showCopy={showCopy}
+            maxHeight={maxHeight}
+          />
         )}
-        <SingleCodeBlock code={extracted.html} language="html" showCopy={showCopy} maxHeight={maxHeight} />
+        <SingleCodeBlock
+          code={extracted.html}
+          language="html"
+          showCopy={showCopy}
+          maxHeight={maxHeight}
+        />
       </>
     );
   };
 
+  // Helper to render code blocks for a specific framework
+  const renderBlocksForFramework = (fw: Framework) => {
+    if (!extractParts) {
+      const rawCode = getFrameworkRawCode(frameworkCode, fw);
+      const lang = fw === "react" ? "tsx" : "html";
+      return (
+        <SingleCodeBlock
+          code={rawCode}
+          language={lang}
+          showCopy={showCopy}
+          maxHeight={maxHeight}
+        />
+      );
+    }
+
+    switch (fw) {
+      case "react":
+        return renderReactBlocks(frameworkCode.react);
+      case "angular":
+        return renderAngularBlocks(frameworkCode.angular);
+      case "webComponents":
+        return renderWebComponentsBlocks(frameworkCode.webComponents);
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="code-snippet-wrapper">
-      {/* Framework Switcher - outside the code container */}
-      {availableFrameworks.length > 1 && (
+      {availableFrameworks.length > 1 ? (
+        // Multiple frameworks - use tabs with content inside
         <div className="framework-switcher" ref={tabsRef}>
-          <GoabTabs
-            key={selectedFramework}
+          <GoabxTabs
             variant="segmented"
             initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
-            updateUrl={false}
-            stackOnMobile={false}
+            orientation="horizontal"
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
-                {/* Empty - content rendered separately below */}
+                <div className="code-snippet">
+                  <div className="code-blocks">{renderBlocksForFramework(fw)}</div>
+                </div>
               </GoabTab>
             ))}
-          </GoabTabs>
+          </GoabxTabs>
+        </div>
+      ) : (
+        // Single framework - no tabs needed
+        <div className="code-snippet">
+          <div className="code-blocks">{renderFrameworkBlocks()}</div>
         </div>
       )}
-
-      <div className="code-snippet">
-        {/* Code Blocks */}
-        <div className="code-blocks">
-          {renderFrameworkBlocks()}
-        </div>
-      </div>
 
       <CodeSnippetStyles />
     </div>
@@ -360,32 +499,32 @@ export function CodeSnippet({
 // ============================================================================
 
 function cleanCode(raw: string): string {
-  const lines = raw.split('\n');
+  const lines = raw.split("\n");
   while (lines.length && !lines[0].trim()) lines.shift();
   while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
   const minIndent = lines
-    .filter(line => line.trim())
+    .filter((line) => line.trim())
     .reduce((min, line) => {
       const match = line.match(/^(\s*)/);
       return match ? Math.min(min, match[1].length) : min;
     }, Infinity);
   return lines
-    .map(line => line.slice(minIndent === Infinity ? 0 : minIndent))
-    .join('\n');
+    .map((line) => line.slice(minIndent === Infinity ? 0 : minIndent))
+    .join("\n");
 }
 
 function getFrameworkRawCode(frameworkCode: FrameworkCode, framework: Framework): string {
   switch (framework) {
-    case 'react':
-      return frameworkCode.react || '';
-    case 'angular':
+    case "react":
+      return frameworkCode.react || "";
+    case "angular":
       const angular = frameworkCode.angular;
-      if (typeof angular === 'string') return angular;
-      return angular?.template || '';
-    case 'webComponents':
-      return frameworkCode.webComponents || '';
+      if (typeof angular === "string") return angular;
+      return angular?.template || "";
+    case "webComponents":
+      return frameworkCode.webComponents || "";
     default:
-      return '';
+      return "";
   }
 }
 
@@ -404,8 +543,8 @@ function CodeSnippetStyles() {
         font-size: 0.875rem;
       }
 
-      .framework-switcher {
-        margin-bottom: -24px; /* Compensate for 32px margin inside goa-tabs to get 8px gap */
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
       }
 
       .code-blocks {
@@ -424,7 +563,6 @@ function CodeSnippetStyles() {
         position: absolute;
         top: var(--goa-space-xs, 0.25rem);
         right: var(--goa-space-s, 0.5rem);
-        z-index: 1;
       }
 
       .code-block-title {
@@ -497,7 +635,6 @@ function CodeSnippetStyles() {
         justify-content: center;
         padding: var(--goa-space-s, 0.5rem) 0;
         position: relative;
-        z-index: 2;
         margin-top: -2rem;
       }
 

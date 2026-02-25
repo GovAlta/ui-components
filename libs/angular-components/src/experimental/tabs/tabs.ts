@@ -9,7 +9,7 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
+import { GoabTabsOnChangeDetail, GoabTabsOrientation, GoabTabsVariant } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -21,6 +21,7 @@ import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-co
       [attr.initialtab]="initialTab"
       [attr.testid]="testId"
       [attr.variant]="variant"
+      [attr.orientation]="orientation"
       (_change)="_onChange($event)"
     >
       <ng-content />
@@ -35,6 +36,8 @@ export class GoabxTabs implements OnInit {
   @Input({ transform: numberAttribute }) initialTab?: number;
   @Input() testId?: string;
   @Input() variant?: GoabTabsVariant;
+  /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
+  @Input() orientation?: GoabTabsOrientation;
 
   constructor(private cdr: ChangeDetectorRef) {}
 

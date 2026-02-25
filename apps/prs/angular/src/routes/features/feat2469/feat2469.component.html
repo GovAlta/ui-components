@@ -1,0 +1,56 @@
+<goab-page-block width="100%">
+  <div style="display: flex; flex-direction: row; min-height: 80vh">
+    <div
+      style="flex: 1 1 0%; overflow: hidden; border: 1px solid green"
+      test-id="container"
+    >
+      <h1>Pushed In Content</h1>
+      <div style="display: flex; gap: 10px; margin-top: 20px">
+        <goab-button (click)="togglePushDrawerOpen()">
+          {{ pushDrawerOpen ? "Close" : "Open" }} Push Drawer
+        </goab-button>
+      </div>
+      <div style="margin-top: 10px; max-width: 300px">
+        <goab-input name="width" [(ngModel)]="drawerWidth" variant="goa">
+          Width
+        </goab-input>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 10px">
+        <goab-button (click)="clearTableData()">Clear Table Data</goab-button>
+        <goab-button (click)="addTableData()">Add Table Data</goab-button>
+        <goab-button (click)="addDrawerContent()">Add Drawer Content</goab-button>
+      </div>
+      <goab-table width="100%">
+        <thead>
+          <tr>
+            <th>First</th>
+            <th>Last</th>
+            <th class="goa-table-number-header">Number Column</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tableData">
+            <td>{{ row.firstName }}</td>
+            <td>{{ row.lastName }}</td>
+            <td class="goa-table-number-column">{{ row.numberCol }}</td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </div>
+    <goab-push-drawer
+      testid="drawer"
+      [open]="pushDrawerOpen"
+      heading="Push Drawer"
+      [width]="drawerWidth"
+      [actions]="drawerActions"
+      (onClose)="closePushDrawer()"
+    >
+      <div [innerHTML]="pushDrawerControls"></div>
+      <goab-button (click)="closePushDrawer()">Close</goab-button>
+    </goab-push-drawer>
+  </div>
+</goab-page-block>
+
+<ng-template #drawerActions>
+  <goab-button (click)="closePushDrawer()">Close</goab-button>
+</ng-template>

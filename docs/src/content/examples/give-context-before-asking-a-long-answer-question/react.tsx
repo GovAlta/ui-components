@@ -1,19 +1,12 @@
 import { useState } from "react";
-import {
-  GoabButton,
-  GoabButtonGroup,
-  GoabDetails,
-  GoabFormItem,
-  GoabLink,
-  GoabText,
-  GoabTextarea
-} from "@abgov/react-components";
-import { GoabTextareaOnChangeDetail } from "@abgov/ui-components-common";
+import { GoabxButton, GoabxFormItem, GoabxLink, GoabxTextArea } from "@abgov/react-components/experimental";
+import { GoabButtonGroup, GoabDetails, GoabText } from "@abgov/react-components";
+import { GoabTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 
 export function GiveContextBeforeAskingALongAnswerQuestion() {
   const [textValue, setTextValue] = useState("");
 
-  const handleChange = (event: GoabTextareaOnChangeDetail) => {
+  const handleChange = (event: GoabTextAreaOnChangeDetail) => {
     setTextValue(event.value);
   };
 
@@ -23,9 +16,9 @@ export function GiveContextBeforeAskingALongAnswerQuestion() {
 
   return (
     <>
-      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabLink>
+      </GoabxLink>
 
       <GoabText as="h2" mt="xl" mb="m">Submit a question about your benefits</GoabText>
       <GoabText mt="none" mb="xl">
@@ -34,17 +27,17 @@ export function GiveContextBeforeAskingALongAnswerQuestion() {
       </GoabText>
 
       <form>
-        <GoabFormItem
+        <GoabxFormItem
           label="Provide details about your situation"
           helpText="Include specific details to help us answer your question quickly.">
-          <GoabTextarea
+          <GoabxTextArea
             name="program"
             onChange={handleChange}
             value={textValue}
             maxCount={400}
             countBy="character"
           />
-        </GoabFormItem>
+        </GoabxFormItem>
       </form>
 
       <GoabDetails mt="m" heading="What kind of information is useful?">
@@ -55,9 +48,9 @@ export function GiveContextBeforeAskingALongAnswerQuestion() {
       </GoabDetails>
 
       <GoabButtonGroup alignment="start" mt="2xl">
-        <GoabButton type="primary" onClick={handleContinue}>
+        <GoabxButton type="primary" onClick={handleContinue}>
           Continue
-        </GoabButton>
+        </GoabxButton>
       </GoabButtonGroup>
     </>
   );

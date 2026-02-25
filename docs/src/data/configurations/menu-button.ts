@@ -18,19 +18,19 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       description: 'Button with dropdown menu',
       code: {
         react: `<GoabMenuButton>
-  <GoabButton slot="trigger">Actions</GoabButton>
+  <GoabxButton slot="trigger">Actions</GoabxButton>
   <GoabMenuItem label="Edit" onClick={() => {}} />
   <GoabMenuItem label="Copy" onClick={() => {}} />
   <GoabMenuItem label="Delete" onClick={() => {}} />
 </GoabMenuButton>`,
         angular: `<goab-menu-button>
-  <goab-button slot="trigger">Actions</goab-button>
+  <goabx-button slot="trigger">Actions</goabx-button>
   <goab-menu-item label="Edit" (_click)="handleEdit()"></goab-menu-item>
   <goab-menu-item label="Copy" (_click)="handleCopy()"></goab-menu-item>
   <goab-menu-item label="Delete" (_click)="handleDelete()"></goab-menu-item>
 </goab-menu-button>`,
         webComponents: `<goa-menu-button>
-  <goa-button slot="trigger">Actions</goa-button>
+  <goa-button version="2" slot="trigger">Actions</goa-button>
   <goa-menu-item label="Edit"></goa-menu-item>
   <goa-menu-item label="Copy"></goa-menu-item>
   <goa-menu-item label="Delete"></goa-menu-item>
@@ -68,19 +68,19 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       description: 'Menu items with leading icons',
       code: {
         react: `<GoabMenuButton>
-  <GoabButton slot="trigger">Options</GoabButton>
+  <GoabxButton slot="trigger">Options</GoabxButton>
   <GoabMenuItem label="Download" icon="download" onClick={() => {}} />
   <GoabMenuItem label="Share" icon="share" onClick={() => {}} />
   <GoabMenuItem label="Print" icon="print" onClick={() => {}} />
 </GoabMenuButton>`,
         angular: `<goab-menu-button>
-  <goab-button slot="trigger">Options</goab-button>
+  <goabx-button slot="trigger">Options</goabx-button>
   <goab-menu-item label="Download" icon="download" (_click)="handleDownload()"></goab-menu-item>
   <goab-menu-item label="Share" icon="share" (_click)="handleShare()"></goab-menu-item>
   <goab-menu-item label="Print" icon="print" (_click)="handlePrint()"></goab-menu-item>
 </goab-menu-button>`,
         webComponents: `<goa-menu-button>
-  <goa-button slot="trigger">Options</goa-button>
+  <goa-button version="2" slot="trigger">Options</goa-button>
   <goa-menu-item label="Download" icon="download"></goa-menu-item>
   <goa-menu-item label="Share" icon="share"></goa-menu-item>
   <goa-menu-item label="Print" icon="print"></goa-menu-item>

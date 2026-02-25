@@ -1,0 +1,79 @@
+<main>
+  <goab-text tag="h1" mt="m">#3407: orientation Prop</goab-text>
+  <goab-text tag="p">
+    Testing orientation prop (controls mobile stacking behavior). orientation is
+    only available on goabx-tabs (experimental).
+  </goab-text>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-block direction="column" gap="xl">
+    <goab-block direction="column" gap="s">
+      <goab-text tag="h2">
+        Test 1: Experimental Tabs + orientation="auto" (default)
+      </goab-text>
+      <goab-text tag="p">
+        Experimental (v2) tabs that stack vertically on mobile (default behavior).
+        Resize browser to mobile width to verify tabs stack.
+      </goab-text>
+      <goabx-tabs>
+        <goabx-tab heading="Overview">
+          <goab-text tag="p">These tabs should stack vertically on mobile.</goab-text>
+        </goabx-tab>
+        <goabx-tab heading="Details">
+          <goab-text tag="p">Vertical stacking on narrow screens.</goab-text>
+        </goabx-tab>
+        <goabx-tab heading="Settings">
+          <goab-text tag="p">Compare with Test 2 below.</goab-text>
+        </goabx-tab>
+      </goabx-tabs>
+    </goab-block>
+
+    <goab-block direction="column" gap="s">
+      <goab-text tag="h2">Test 2: Experimental Tabs + orientation="horizontal"</goab-text>
+      <goab-text tag="p">
+        Experimental (v2) tabs that stay horizontal on mobile. Resize browser to
+        mobile width to verify tabs remain in a row.
+      </goab-text>
+      <goabx-tabs orientation="horizontal">
+        <goabx-tab heading="Overview">
+          <goab-text tag="p">These tabs should stay horizontal on mobile.</goab-text>
+        </goabx-tab>
+        <goabx-tab heading="Details">
+          <goab-text tag="p">No vertical stacking on narrow screens.</goab-text>
+        </goabx-tab>
+        <goabx-tab heading="Settings">
+          <goab-text tag="p">Useful when horizontal space is preferred.</goab-text>
+        </goabx-tab>
+      </goabx-tabs>
+    </goab-block>
+
+    <goab-block direction="column" gap="s">
+      <goab-text tag="h2">
+        Test 3: Segmented variant (always not stacked on mobile)
+      </goab-text>
+      <goab-text tag="p">
+        Segmented tabs stay horizontal on mobile by default (no prop needed). Resize
+        to mobile width to verify.
+      </goab-text>
+      <goabx-tabs variant="segmented">
+        <goabx-tab heading="Active"></goabx-tab>
+        <goabx-tab heading="Completed"></goabx-tab>
+        <goabx-tab heading="Archived"></goabx-tab>
+      </goabx-tabs>
+    </goab-block>
+
+    <goab-block direction="column" gap="s">
+      <goab-text tag="h2">Test 4: Segmented + orientation="horizontal"</goab-text>
+      <goab-text tag="p">
+        Segmented tabs with orientation explicitly set to "horizontal". Should remain
+        horizontal on mobile (same as default segmented behavior).
+      </goab-text>
+      <goabx-tabs variant="segmented" orientation="horizontal">
+        <goabx-tab heading="All"></goabx-tab>
+        <goabx-tab heading="Open"></goabx-tab>
+        <goabx-tab heading="Closed"></goabx-tab>
+      </goabx-tabs>
+    </goab-block>
+  </goab-block>
+</main>

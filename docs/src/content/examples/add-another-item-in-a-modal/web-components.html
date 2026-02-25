@@ -1,22 +1,22 @@
-<goa-button id="open-modal-btn" type="tertiary" leadingicon="add">Add another item</goa-button>
-<goa-modal id="add-item-modal" heading="Add a new item">
+<goa-button version="2" id="open-modal-btn" type="tertiary" leadingicon="add">Add another item</goa-button>
+<goa-modal version="2" id="add-item-modal" heading="Add a new item">
   <p>Fill in the information to create a new item</p>
-  <goa-form-item label="Type" mt="l">
-    <goa-dropdown id="type-dropdown">
+  <goa-form-item version="2" label="Type" mt="l">
+    <goa-dropdown version="2" id="type-dropdown">
       <goa-dropdown-item value="1" label="Option 1"></goa-dropdown-item>
       <goa-dropdown-item value="2" label="Option 2"></goa-dropdown-item>
     </goa-dropdown>
   </goa-form-item>
-  <goa-form-item label="Name" mt="l">
-    <goa-input name="name" width="100%" id="name-input"></goa-input>
+  <goa-form-item version="2" label="Name" mt="l">
+    <goa-input version="2" name="name" width="100%" id="name-input"></goa-input>
   </goa-form-item>
-  <goa-form-item label="Description" mt="l">
-    <goa-textarea name="description" width="100%" rows="3" id="description-textarea"></goa-textarea>
+  <goa-form-item version="2" label="Description" mt="l">
+    <goa-textarea version="2" name="description" width="100%" rows="3" id="description-textarea"></goa-textarea>
   </goa-form-item>
   <div slot="actions">
     <goa-button-group alignment="end">
-      <goa-button id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
-      <goa-button id="save-btn" type="primary" size="compact">Save new item</goa-button>
+      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
+      <goa-button version="2" id="save-btn" type="primary" size="compact">Save new item</goa-button>
     </goa-button-group>
   </div>
 </goa-modal>

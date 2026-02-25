@@ -39,7 +39,7 @@ export class GoabxCalendar extends GoabBaseComponent implements OnInit {
   version = 2;
 
   @Input() name?: string;
-  @Input() value?: Date;
+  @Input() value?: Date | string;
   @Input() min?: Date;
   @Input() max?: Date;
 

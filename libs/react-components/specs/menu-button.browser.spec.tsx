@@ -10,7 +10,12 @@ describe("MenuButton", () => {
       return (
         <GoabMenuButton text="Show actions" testId="menu-button" onAction={onAction}>
           <GoabMenuAction text="Action 1" action="action1" testId="menu-action-1" />
-          <GoabMenuAction text="Action 2" action="action2" testId="menu-action-2" icon="add" />
+          <GoabMenuAction
+            text="Action 2"
+            action="action2"
+            testId="menu-action-2"
+            icon="add"
+          />
           <GoabMenuAction text="Action 3" action="action3" testId="menu-action-3" />
         </GoabMenuButton>
       );
@@ -18,62 +23,49 @@ describe("MenuButton", () => {
 
     const result = render(<Component />);
     const menuButton = result.getByTestId("menu-button");
-
-    // Menu actions should not be visible initially
-    for (let i = 1; i <= 3; i++) {
-      try {
-        result.getByTestId(`menu-action-${i}`).element();
-        expect(true).toBe(false); // Should not reach here
-      } catch (e) {
-        // Expected - elements should not be found
-      }
-    }
+    const menuAction = result.getByTestId(/menu-action-*/);
 
     // Test each menu action
     for (let i = 1; i <= 3; i++) {
-      await vi.waitFor(async () => {
-        // open menu
-        await menuButton.click();
+      await menuButton.click();
 
-        const menuAction = result.getByTestId(`menu-action-${i}`);
-        expect(menuAction).toBeDefined();
+      // Click the action
+      await menuAction.nth(i - 1).click();
 
-        // Verify the action is visible
-        const element = menuAction.element();
-        expect(element).toBeDefined();
-
-        // Click the action
-        await menuAction.click();
-
-        // Verify the correct action was triggered
-        expect(onAction).toHaveBeenCalledWith({
-          action: `action${i}`
+      // Verify the correct action was triggered
+      await vi.waitFor(() => {
+        expect(onAction).toHaveBeenNthCalledWith(i, {
+          action: `action${i}`,
         });
+        expect(onAction).toHaveBeenCalledTimes(i);
       });
     }
+
+    expect(onAction).toHaveBeenCalledTimes(3);
   });
 
   it("should render with icon", async () => {
     const Component = () => {
       return (
         <GoabMenuButton text="Show actions" testId="menu-button">
-          <GoabMenuAction text="Action with icon" action="action-icon" testId="menu-action-icon" icon="add" />
+          <GoabMenuAction
+            text="Action with icon"
+            action="action-icon"
+            testId="menu-action-icon"
+            icon="add"
+          />
         </GoabMenuButton>
       );
     };
 
     const result = render(<Component />);
     const menuButton = result.getByTestId("menu-button");
+    const actionIcon = result.getByTestId("icon-add");
 
-    // Verify the action with icon is rendered
-    await vi.waitFor(async () => {
-      // open menu
-      await menuButton.click();
+    await menuButton.click();
 
-      const actionIcon = result.getByTestId("icon-add");
-      expect(actionIcon).toBeDefined();
-
-      // Check if the icon attribute is set correctly
+    // Check if the icon attribute is set correctly
+    await vi.waitFor(() => {
       const element = actionIcon.element();
       expect(element.getAttribute("type")).toBe("add");
     });
@@ -93,46 +85,59 @@ describe("MenuButton", () => {
 
     const result = render(<Component />);
     const menuButton = result.getByTestId("menu-button");
+    const firstAction = result.getByTestId("first-action");
+    const secondAction = result.getByTestId("second-action");
+
+    // open menu
+    await menuButton.click();
 
     // Click first action
-    await vi.waitFor(async () => {
-      // open menu
-      await menuButton.click();
+    await firstAction.click();
 
-      const firstAction = result.getByTestId("first-action");
-      await firstAction.click();
-      expect(onAction).toHaveBeenCalledWith({
-        action: "first"
+    await vi.waitFor(() => {
+      expect(onAction).toHaveBeenNthCalledWith(1, {
+        action: "first",
       });
+      expect(onAction).toHaveBeenCalledTimes(1);
     });
+
+    // Menu should close after clicking an action, so click again to reopen
+    await menuButton.click();
 
     // Click second action
-    await vi.waitFor(async () => {
-      // Menu should close after clicking an action, so click again to reopen
-      await menuButton.click();
+    await secondAction.click();
 
-      const secondAction = result.getByTestId("second-action");
-      await secondAction.click();
-      expect(onAction).toHaveBeenCalledWith({
-        action: "second"
+    await vi.waitFor(() => {
+      expect(onAction).toHaveBeenNthCalledWith(2, {
+        action: "second",
       });
+      expect(onAction).toHaveBeenCalledTimes(2);
     });
-
-    // Verify the correct number of calls and order
-    expect(onAction).toHaveBeenCalledTimes(2);
-    expect(onAction.mock.calls[0][0].action).toBe("first");
-    expect(onAction.mock.calls[1][0].action).toBe("second");
   });
-
 
   it("should render with leadingIcon", async () => {
     const onAction = vi.fn();
 
     const Component = () => {
       return (
-        <GoabMenuButton text="Dual icons" testId="menu-button" leadingIcon="calendar" onAction={onAction}>
-          <GoabMenuAction text="Add item" action="add" testId="menu-action-add" icon="add" />
-          <GoabMenuAction text="Delete item" action="delete" testId="menu-action-delete" icon="trash" />
+        <GoabMenuButton
+          text="Dual icons"
+          testId="menu-button"
+          leadingIcon="calendar"
+          onAction={onAction}
+        >
+          <GoabMenuAction
+            text="Add item"
+            action="add"
+            testId="menu-action-add"
+            icon="add"
+          />
+          <GoabMenuAction
+            text="Delete item"
+            action="delete"
+            testId="menu-action-delete"
+            icon="trash"
+          />
         </GoabMenuButton>
       );
     };

@@ -9,7 +9,7 @@ import {
   GoabButton,
 } from "@abgov/react-components";
 
-export default function Feat3306Component() {
+export function Feat3306Route() {
   const review = [0, 1, 2, 3];
   const complete = [0, 1];
 

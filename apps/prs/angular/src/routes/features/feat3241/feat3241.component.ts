@@ -29,6 +29,7 @@ import {
   GoabSideMenuHeading,
   GoabTab,
   GoabTable,
+  GoabTableSortHeader,
   GoabTabs,
   GoabText,
   GoabTextArea,
@@ -57,6 +58,7 @@ import {
   GoabxSideMenuGroup,
   GoabxSideMenuHeading,
   GoabxTable,
+  GoabxTableSortHeader,
   GoabxTabs,
   GoabxTextArea,
   GoabDatePicker,
@@ -67,7 +69,14 @@ import {
 import {
   GoabPaginationOnChangeDetail,
   GoabTabsOnChangeDetail,
+  GoabTableOnSortDetail,
 } from "@abgov/ui-components-common";
+
+interface User {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
 
 @Component({
   standalone: true,
@@ -105,6 +114,7 @@ import {
     GoabSideMenuHeading,
     GoabTab,
     GoabTable,
+    GoabTableSortHeader,
     GoabTabs,
     GoabText,
     GoabTextArea,
@@ -135,6 +145,7 @@ import {
     GoabxSideMenuGroup,
     GoabxSideMenuHeading,
     GoabxTable,
+    GoabxTableSortHeader,
     GoabxTabs,
     GoabxTextArea,
   ],
@@ -156,6 +167,38 @@ export class Feat3241Component {
 
   goabxNotificationStatus = "No dismiss action yet.";
   goabNotificationStatus = "No dismiss action yet.";
+
+  users: User[] = [];
+
+  constructor() {
+    this.users = [
+      {
+        firstName: "Christian",
+        lastName: "Batz",
+        age: 18,
+      },
+      {
+        firstName: "Brain",
+        lastName: "Wisozk",
+        age: 19,
+      },
+      {
+        firstName: "Neha",
+        lastName: "Jones",
+        age: 23,
+      },
+      {
+        firstName: "Tristin",
+        lastName: "Buckridge",
+        age: 31,
+      },
+    ];
+  }
+
+  handleSort(event: GoabTableOnSortDetail) {
+    const { sortBy, sortDir } = event;
+    this.users.sort((a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir);
+  }
 
   openGoabxDrawer() {
     this.goabxDrawerOpen = true;

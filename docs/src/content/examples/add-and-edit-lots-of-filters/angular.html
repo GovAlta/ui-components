@@ -1,36 +1,36 @@
-<goab-button (onClick)="onClick()">Filters</goab-button>
-<goab-drawer heading="Filters" [open]="open" (onClose)="onClose()" position="right" [actions]="actions">
-  <goab-form-item label="Entry status">
+<goabx-button (onClick)="onClick()">Filters</goabx-button>
+<goabx-drawer heading="Filters" [open]="open" (onClose)="onClose()" position="right" [actions]="actions">
+  <goabx-form-item label="Entry status">
     <goab-checkbox-list name="entryStatus" (onChange)="onCheckboxChange($event)">
-      <goab-checkbox name="draft" text="Draft" value="draft"></goab-checkbox>
-      <goab-checkbox name="published" text="Published" value="published"></goab-checkbox>
+      <goabx-checkbox name="draft" text="Draft" value="draft"></goabx-checkbox>
+      <goabx-checkbox name="published" text="Published" value="published"></goabx-checkbox>
     </goab-checkbox-list>
-  </goab-form-item>
-  <goab-form-item label="Assigned to - Region" mt="l">
+  </goabx-form-item>
+  <goabx-form-item label="Assigned to - Region" mt="l">
     <goab-checkbox-list name="region" (onChange)="onCheckboxChange($event)">
-      <goab-checkbox name="calgary" text="Calgary" value="calgary"></goab-checkbox>
-      <goab-checkbox name="central" text="Central" value="central"></goab-checkbox>
-      <goab-checkbox name="edmonton" text="Edmonton" value="edmonton"></goab-checkbox>
-      <goab-checkbox name="north" text="North" value="north"></goab-checkbox>
-      <goab-checkbox name="south" text="South" value="south"></goab-checkbox>
+      <goabx-checkbox name="calgary" text="Calgary" value="calgary"></goabx-checkbox>
+      <goabx-checkbox name="central" text="Central" value="central"></goabx-checkbox>
+      <goabx-checkbox name="edmonton" text="Edmonton" value="edmonton"></goabx-checkbox>
+      <goabx-checkbox name="north" text="North" value="north"></goabx-checkbox>
+      <goabx-checkbox name="south" text="South" value="south"></goabx-checkbox>
     </goab-checkbox-list>
-  </goab-form-item>
-  <goab-form-item label="Assigned to" mt="l">
-    <goab-dropdown [value]="assignedTo" name="assignedToData" (onChange)="onChangeAssignedTo($event)">
-      <goab-dropdown-item value="1" label="Person 1"></goab-dropdown-item>
-      <goab-dropdown-item value="2" label="Person 2"></goab-dropdown-item>
-    </goab-dropdown>
-  </goab-form-item>
-  <goab-form-item label="Date taken" mt="l">
-    <goab-radio-group name="dateTaken" (onChange)="radioOnChange($event)">
-      <goab-radio-item value="24" label="Last 24 hours"></goab-radio-item>
-      <goab-radio-item value="72" label="Last 72 hours"></goab-radio-item>
-    </goab-radio-group>
-  </goab-form-item>
+  </goabx-form-item>
+  <goabx-form-item label="Assigned to" mt="l">
+    <goabx-dropdown [value]="assignedTo" name="assignedToData" (onChange)="onChangeAssignedTo($event)">
+      <goabx-dropdown-item value="1" label="Person 1"></goabx-dropdown-item>
+      <goabx-dropdown-item value="2" label="Person 2"></goabx-dropdown-item>
+    </goabx-dropdown>
+  </goabx-form-item>
+  <goabx-form-item label="Date taken" mt="l">
+    <goabx-radio-group name="dateTaken" (onChange)="radioOnChange($event)">
+      <goabx-radio-item value="24" label="Last 24 hours"></goabx-radio-item>
+      <goabx-radio-item value="72" label="Last 72 hours"></goabx-radio-item>
+    </goabx-radio-group>
+  </goabx-form-item>
   <ng-template #actions>
     <goab-button-group>
-      <goab-button type="primary" size="compact" (onClick)="closeDrawer()">Apply filters</goab-button>
-      <goab-button type="tertiary" size="compact" (onClick)="closeDrawer()">Cancel</goab-button>
+      <goabx-button type="primary" size="compact" (onClick)="closeDrawer()">Apply filters</goabx-button>
+      <goabx-button type="tertiary" size="compact" (onClick)="closeDrawer()">Cancel</goabx-button>
     </goab-button-group>
   </ng-template>
-</goab-drawer>
+</goabx-drawer>

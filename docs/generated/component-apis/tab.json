@@ -1,7 +1,7 @@
 {
   "componentSlug": "tab",
   "extractedFrom": "libs/web-components/src/components/tab/Tab.svelte",
-  "extractedAt": "2026-01-05T23:10:27.460Z",
+  "extractedAt": "2026-02-04T08:10:50.417Z",
   "props": [
     {
       "name": "heading",
@@ -16,6 +16,20 @@
       "required": false,
       "default": "false",
       "description": "Whether this tab is currently selected/active."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": ""
+    },
+    {
+      "name": "slug",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
     }
   ],
   "events": [],

@@ -17,26 +17,26 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       name: 'Basic work side menu',
       description: 'Side navigation for internal apps',
       code: {
-        react: `<GoabWorkSideMenu
+        react: `<GoabxWorkSideMenu
   heading="My Application"
   url="/"
   primaryContent={
     <>
-      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      <GoabWorkSideMenuItem icon="document" label="Reports" url="/reports" />
-      <GoabWorkSideMenuItem icon="settings" label="Admin" url="/admin" />
+      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabxWorkSideMenuItem icon="document" label="Reports" url="/reports" />
+      <GoabxWorkSideMenuItem icon="settings" label="Admin" url="/admin" />
     </>
   }
 />`,
-        angular: `<goab-work-side-menu heading="My Application" url="/">
+        angular: `<goabx-work-side-menu heading="My Application" url="/">
   <div slot="primary-content">
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="document" label="Reports" url="/reports"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="settings" label="Admin" url="/admin"></goab-work-side-menu-item>
+    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goabx-work-side-menu-item>
+    <goabx-work-side-menu-item icon="list" label="Cases" url="/cases"></goabx-work-side-menu-item>
+    <goabx-work-side-menu-item icon="document" label="Reports" url="/reports"></goabx-work-side-menu-item>
+    <goabx-work-side-menu-item icon="settings" label="Admin" url="/admin"></goabx-work-side-menu-item>
   </div>
-</goab-work-side-menu>`,
+</goabx-work-side-menu>`,
         webComponents: `<goa-work-side-menu heading="My Application" url="/" open="true">
   <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
   <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
@@ -50,32 +50,32 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       name: 'With nested items',
       description: 'Work menu with expandable sub-items',
       code: {
-        react: `<GoabWorkSideMenu
+        react: `<GoabxWorkSideMenu
   heading="My Application"
   url="/"
   primaryContent={
     <>
-      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabWorkSideMenuItem icon="document" label="Documents" url="/documents">
-        <GoabWorkSideMenuItem label="Invoices" url="/documents/invoices" />
-        <GoabWorkSideMenuItem label="Contracts" url="/documents/contracts" />
-        <GoabWorkSideMenuItem label="Reports" url="/documents/reports" />
-      </GoabWorkSideMenuItem>
-      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabxWorkSideMenuItem icon="document" label="Documents" url="/documents">
+        <GoabxWorkSideMenuItem label="Invoices" url="/documents/invoices" />
+        <GoabxWorkSideMenuItem label="Contracts" url="/documents/contracts" />
+        <GoabxWorkSideMenuItem label="Reports" url="/documents/reports" />
+      </GoabxWorkSideMenuItem>
+      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
     </>
   }
 />`,
-        angular: `<goab-work-side-menu heading="My Application" url="/">
+        angular: `<goabx-work-side-menu heading="My Application" url="/">
   <div slot="primary-content">
-    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="document" label="Documents" url="/documents">
-      <goab-work-side-menu-item label="Invoices" url="/documents/invoices"></goab-work-side-menu-item>
-      <goab-work-side-menu-item label="Contracts" url="/documents/contracts"></goab-work-side-menu-item>
-      <goab-work-side-menu-item label="Reports" url="/documents/reports"></goab-work-side-menu-item>
-    </goab-work-side-menu-item>
-    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goabx-work-side-menu-item>
+    <goabx-work-side-menu-item icon="document" label="Documents" url="/documents">
+      <goabx-work-side-menu-item label="Invoices" url="/documents/invoices"></goabx-work-side-menu-item>
+      <goabx-work-side-menu-item label="Contracts" url="/documents/contracts"></goabx-work-side-menu-item>
+      <goabx-work-side-menu-item label="Reports" url="/documents/reports"></goabx-work-side-menu-item>
+    </goabx-work-side-menu-item>
+    <goabx-work-side-menu-item icon="list" label="Cases" url="/cases"></goabx-work-side-menu-item>
   </div>
-</goab-work-side-menu>`,
+</goabx-work-side-menu>`,
         webComponents: `<goa-work-side-menu heading="My Application" url="/" open="true">
   <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
   <goa-work-side-menu-item slot="primary" icon="document" label="Documents" url="/documents">

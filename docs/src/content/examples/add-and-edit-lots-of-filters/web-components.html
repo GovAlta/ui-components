@@ -1,36 +1,36 @@
-<goa-button id="open-filters-btn">Filters</goa-button>
-<goa-drawer id="filters-drawer" heading="Filters" position="right">
-  <goa-form-item label="Entry status">
+<goa-button version="2" id="open-filters-btn">Filters</goa-button>
+<goa-drawer version="2" id="filters-drawer" heading="Filters" position="right">
+  <goa-form-item version="2" label="Entry status">
     <goa-checkbox-list name="entryStatus">
-      <goa-checkbox name="draft" text="Draft" value="draft"></goa-checkbox>
-      <goa-checkbox name="published" text="Published" value="published"></goa-checkbox>
+      <goa-checkbox version="2" name="draft" text="Draft" value="draft"></goa-checkbox>
+      <goa-checkbox version="2" name="published" text="Published" value="published"></goa-checkbox>
     </goa-checkbox-list>
   </goa-form-item>
-  <goa-form-item label="Assigned to - Region" mt="l">
+  <goa-form-item version="2" label="Assigned to - Region" mt="l">
     <goa-checkbox-list name="region">
-      <goa-checkbox name="calgary" text="Calgary" value="calgary"></goa-checkbox>
-      <goa-checkbox name="central" text="Central" value="central"></goa-checkbox>
-      <goa-checkbox name="edmonton" text="Edmonton" value="edmonton"></goa-checkbox>
-      <goa-checkbox name="north" text="North" value="north"></goa-checkbox>
-      <goa-checkbox name="south" text="South" value="south"></goa-checkbox>
+      <goa-checkbox version="2" name="calgary" text="Calgary" value="calgary"></goa-checkbox>
+      <goa-checkbox version="2" name="central" text="Central" value="central"></goa-checkbox>
+      <goa-checkbox version="2" name="edmonton" text="Edmonton" value="edmonton"></goa-checkbox>
+      <goa-checkbox version="2" name="north" text="North" value="north"></goa-checkbox>
+      <goa-checkbox version="2" name="south" text="South" value="south"></goa-checkbox>
     </goa-checkbox-list>
   </goa-form-item>
-  <goa-form-item label="Assigned to" mt="l">
-    <goa-dropdown name="assignedTo">
+  <goa-form-item version="2" label="Assigned to" mt="l">
+    <goa-dropdown version="2" name="assignedTo">
       <goa-dropdown-item value="1" label="Person 1"></goa-dropdown-item>
       <goa-dropdown-item value="2" label="Person 2"></goa-dropdown-item>
     </goa-dropdown>
   </goa-form-item>
-  <goa-form-item label="Date taken" mt="l">
-    <goa-radio-group name="dateTaken">
+  <goa-form-item version="2" label="Date taken" mt="l">
+    <goa-radio-group version="2" name="dateTaken">
       <goa-radio-item value="24" label="Last 24 hours"></goa-radio-item>
       <goa-radio-item value="72" label="Last 72 hours"></goa-radio-item>
     </goa-radio-group>
   </goa-form-item>
   <div slot="actions">
     <goa-button-group>
-      <goa-button id="apply-filters-btn" type="primary" size="compact">Apply filters</goa-button>
-      <goa-button id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
+      <goa-button version="2" id="apply-filters-btn" type="primary" size="compact">Apply filters</goa-button>
+      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
     </goa-button-group>
   </div>
 </goa-drawer>

@@ -17,13 +17,13 @@ export const notificationConfigurations: ComponentConfigurations = {
       name: 'Information notification',
       description: 'Default informational notification',
       code: {
-        react: `<GoabNotification type="information">
+        react: `<GoabxNotification type="information">
   Your application has been received and is being processed.
-</GoabNotification>`,
-        angular: `<goab-notification type="information">
+</GoabxNotification>`,
+        angular: `<goabx-notification type="information">
   Your application has been received and is being processed.
-</goab-notification>`,
-        webComponents: `<goa-notification type="information">
+</goabx-notification>`,
+        webComponents: `<goa-notification version="2" type="information">
   Your application has been received and is being processed.
 </goa-notification>`,
       },
@@ -33,40 +33,40 @@ export const notificationConfigurations: ComponentConfigurations = {
       name: 'Notification types',
       description: 'Different notification types for various contexts',
       code: {
-        react: `<GoabNotification type="information">
+        react: `<GoabxNotification type="information">
   Information: General updates for the user.
-</GoabNotification>
-<GoabNotification type="important">
+</GoabxNotification>
+<GoabxNotification type="important">
   Important: Action may be required.
-</GoabNotification>
-<GoabNotification type="emergency">
+</GoabxNotification>
+<GoabxNotification type="emergency">
   Emergency: Critical issue requiring attention.
-</GoabNotification>
-<GoabNotification type="event">
+</GoabxNotification>
+<GoabxNotification type="event">
   Event: Upcoming deadline or scheduled event.
-</GoabNotification>`,
-        angular: `<goab-notification type="information">
+</GoabxNotification>`,
+        angular: `<goabx-notification type="information">
   Information: General updates for the user.
-</goab-notification>
-<goab-notification type="important">
+</goabx-notification>
+<goabx-notification type="important">
   Important: Action may be required.
-</goab-notification>
-<goab-notification type="emergency">
+</goabx-notification>
+<goabx-notification type="emergency">
   Emergency: Critical issue requiring attention.
-</goab-notification>
-<goab-notification type="event">
+</goabx-notification>
+<goabx-notification type="event">
   Event: Upcoming deadline or scheduled event.
-</goab-notification>`,
-        webComponents: `<goa-notification type="information">
+</goabx-notification>`,
+        webComponents: `<goa-notification version="2" type="information">
   Information: General updates for the user.
 </goa-notification>
-<goa-notification type="important">
+<goa-notification version="2" type="important">
   Important: Action may be required.
 </goa-notification>
-<goa-notification type="emergency">
+<goa-notification version="2" type="emergency">
   Emergency: Critical issue requiring attention.
 </goa-notification>
-<goa-notification type="event">
+<goa-notification version="2" type="event">
   Event: Upcoming deadline or scheduled event.
 </goa-notification>`,
       },
@@ -76,13 +76,13 @@ export const notificationConfigurations: ComponentConfigurations = {
       name: 'Dismissable',
       description: 'Notification that can be closed',
       code: {
-        react: `<GoabNotification type="information" onDismiss={() => setVisible(false)}>
+        react: `<GoabxNotification type="information" onDismiss={() => setVisible(false)}>
   This notification can be dismissed by clicking the close button.
-</GoabNotification>`,
-        angular: `<goab-notification type="information" (_dismiss)="handleDismiss()">
+</GoabxNotification>`,
+        angular: `<goabx-notification type="information" (_dismiss)="handleDismiss()">
   This notification can be dismissed by clicking the close button.
-</goab-notification>`,
-        webComponents: `<goa-notification type="information" dismissable>
+</goabx-notification>`,
+        webComponents: `<goa-notification version="2" type="information" dismissable>
   This notification can be dismissed by clicking the close button.
 </goa-notification>`,
       },
@@ -92,13 +92,13 @@ export const notificationConfigurations: ComponentConfigurations = {
       name: 'With max width',
       description: 'Notification with constrained width',
       code: {
-        react: `<GoabNotification type="information" maxWidth="600px">
+        react: `<GoabxNotification type="information" maxWidth="600px">
   This notification has a maximum width for narrower layouts.
-</GoabNotification>`,
-        angular: `<goab-notification type="information" maxWidth="600px">
+</GoabxNotification>`,
+        angular: `<goabx-notification type="information" maxWidth="600px">
   This notification has a maximum width for narrower layouts.
-</goab-notification>`,
-        webComponents: `<goa-notification type="information" maxwidth="600px">
+</goabx-notification>`,
+        webComponents: `<goa-notification version="2" type="information" maxwidth="600px">
   This notification has a maximum width for narrower layouts.
 </goa-notification>`,
       },

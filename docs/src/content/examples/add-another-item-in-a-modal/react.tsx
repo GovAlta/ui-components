@@ -1,14 +1,14 @@
 import { useState } from "react";
 import {
-  GoabButton,
-  GoabButtonGroup,
-  GoabDropdown,
-  GoabDropdownItem,
-  GoabFormItem,
-  GoabInput,
-  GoabModal,
-  GoabTextarea,
-} from "@abgov/react-components";
+  GoabxButton,
+  GoabxDropdown,
+  GoabxDropdownItem,
+  GoabxFormItem,
+  GoabxInput,
+  GoabxModal,
+  GoabxTextArea,
+} from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 
 export function AddAnotherItemInAModal() {
   const [open, setOpen] = useState(false);
@@ -18,48 +18,48 @@ export function AddAnotherItemInAModal() {
 
   return (
     <>
-      <GoabButton type="tertiary" leadingIcon="add" onClick={() => setOpen(true)}>
+      <GoabxButton type="tertiary" leadingIcon="add" onClick={() => setOpen(true)}>
         Add another item
-      </GoabButton>
-      <GoabModal
+      </GoabxButton>
+      <GoabxModal
           heading="Add a new item"
           open={open}
           actions={
             <GoabButtonGroup alignment="end">
-              <GoabButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
+              <GoabxButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
                 Cancel
-              </GoabButton>
-              <GoabButton type="primary" size="compact" onClick={() => setOpen(false)}>
+              </GoabxButton>
+              <GoabxButton type="primary" size="compact" onClick={() => setOpen(false)}>
                 Save new item
-              </GoabButton>
+              </GoabxButton>
             </GoabButtonGroup>
           }
         >
           <p>Fill in the information to create a new item</p>
-          <GoabFormItem label="Type" mt="l">
-            <GoabDropdown onChange={(e) => setType(e.value)} value={type}>
-              <GoabDropdownItem value="1" label="Option 1" />
-              <GoabDropdownItem value="2" label="Option 2" />
-            </GoabDropdown>
-          </GoabFormItem>
-          <GoabFormItem label="Name" mt="l">
-            <GoabInput
+          <GoabxFormItem label="Type" mt="l">
+            <GoabxDropdown onChange={(e) => setType(e.value)} value={type}>
+              <GoabxDropdownItem value="1" label="Option 1" />
+              <GoabxDropdownItem value="2" label="Option 2" />
+            </GoabxDropdown>
+          </GoabxFormItem>
+          <GoabxFormItem label="Name" mt="l">
+            <GoabxInput
               onChange={(e) => setName(e.value)}
               value={name}
               name="name"
               width="100%"
             />
-          </GoabFormItem>
-          <GoabFormItem label="Description" mt="l">
-            <GoabTextarea
+          </GoabxFormItem>
+          <GoabxFormItem label="Description" mt="l">
+            <GoabxTextArea
               name="description"
               rows={3}
               width="100%"
               onChange={(e) => setDescription(e.value)}
               value={description}
             />
-          </GoabFormItem>
-      </GoabModal>
+          </GoabxFormItem>
+      </GoabxModal>
     </>
   );
 }

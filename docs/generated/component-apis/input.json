@@ -1,7 +1,7 @@
 {
   "componentSlug": "input",
   "extractedFrom": "libs/web-components/src/components/input/Input.svelte",
-  "extractedAt": "2026-01-05T23:10:27.449Z",
+  "extractedAt": "2026-02-04T08:10:50.410Z",
   "props": [
     {
       "name": "type",
@@ -29,7 +29,7 @@
     {
       "name": "name",
       "type": "string",
-      "required": true,
+      "required": false,
       "default": "",
       "description": "Name of input value that is received in the onChange event."
     },
@@ -133,7 +133,7 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Sets the data-testid attribute. Used with ByTestId queries in tests."
+      "description": "Sets a data-testid attribute for automated testing."
     },
     {
       "name": "width",
@@ -175,21 +175,23 @@
       "type": "number",
       "required": false,
       "default": "1",
-      "description": "How much a number or date should changed by."
+      "description": "How much a number or date should change by."
     },
     {
       "name": "prefix",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "@deprecated Use leadingContent slot instead."
+      "description": "@deprecated Use leadingContent slot instead.",
+      "deprecated": true
     },
     {
       "name": "suffix",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "@deprecated Use trailingContent slot instead."
+      "description": "@deprecated Use trailingContent slot instead.",
+      "deprecated": true
     },
     {
       "name": "debounce",
@@ -222,7 +224,7 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Apply margin to the top of the component."
+      "description": "Top margin."
     },
     {
       "name": "mr",
@@ -230,7 +232,7 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Apply margin to the right of the component."
+      "description": "Right margin."
     },
     {
       "name": "mb",
@@ -238,7 +240,7 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Apply margin to the bottom of the component."
+      "description": "Bottom margin."
     },
     {
       "name": "ml",
@@ -246,7 +248,7 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Apply margin to the left of the component."
+      "description": "Left margin."
     },
     {
       "name": "trailingIconAriaLabel",
@@ -277,17 +279,6 @@
       "required": false,
       "default": "default",
       "description": "Sets the size of the input. 'compact' reduces height for dense layouts."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
     }
   ],
   "events": [

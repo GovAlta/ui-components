@@ -1,37 +1,38 @@
 import { useState } from "react";
-import { GoabButton, GoabButtonGroup, GoabModal } from "@abgov/react-components";
+import { GoabxButton, GoabxModal } from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 
 export function ConfirmADestructiveAction() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <GoabButton
+      <GoabxButton
         type="tertiary"
         leadingIcon="trash"
         onClick={() => setOpen(true)}>
         Delete record
-      </GoabButton>
-      <GoabModal
+      </GoabxButton>
+      <GoabxModal
         heading="Are you sure you want to delete this record?"
         open={open}
         onClose={() => setOpen(false)}
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
+            <GoabxButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
               Cancel
-            </GoabButton>
-            <GoabButton
+            </GoabxButton>
+            <GoabxButton
               type="primary"
               variant="destructive"
               size="compact"
               onClick={() => setOpen(false)}>
               Delete record
-            </GoabButton>
+            </GoabxButton>
           </GoabButtonGroup>
         }>
         <p>This action cannot be undone.</p>
-      </GoabModal>
+      </GoabxModal>
     </>
   );
 }

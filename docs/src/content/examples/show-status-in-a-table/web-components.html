@@ -1,4 +1,4 @@
-<goa-table width="100%" id="status-table">
+<goa-table version="2" width="100%" id="status-table">
   <table width="100%">
     <thead>
       <tr>
@@ -27,10 +27,10 @@
   badgeValues.forEach((badge) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><goa-badge type="${badge.type}" content="${badge.content}" icon="false"></goa-badge></td>
+      <td><goa-badge version="2" type="${badge.type}" content="${badge.content}" icon="false"></goa-badge></td>
       <td>Lorem ipsum dolor sit amet consectetur</td>
       <td class="goa-table-number-column">1234567890</td>
-      <td><goa-button size="compact" type="tertiary">Assign</goa-button></td>
+      <td><goa-button version="2" size="compact" type="tertiary">Assign</goa-button></td>
     `;
     const button = row.querySelector("goa-button");
     button.addEventListener("_click", () => console.log("clicked"));

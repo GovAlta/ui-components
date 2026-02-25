@@ -1,7 +1,7 @@
 {
   "componentSlug": "dropdown",
   "extractedFrom": "libs/web-components/src/components/dropdown/Dropdown.svelte",
-  "extractedAt": "2026-01-05T23:10:27.438Z",
+  "extractedAt": "2026-02-04T08:10:50.403Z",
   "props": [
     {
       "name": "name",
@@ -48,14 +48,14 @@
       "typeLabel": "GoAIconType",
       "required": false,
       "default": null,
-      "description": "Show an icon to the left of the dropdown option."
+      "description": "Icon shown to the left of the dropdown input."
     },
     {
       "name": "maxHeight",
       "type": "string",
       "required": false,
       "default": "276px",
-      "description": "Maximum height of the dropdown menu items popover. Non-native only."
+      "description": "Maximum height of the dropdown menu. Non-native only."
     },
     {
       "name": "placeholder",
@@ -93,13 +93,6 @@
       "description": "Show an error state."
     },
     {
-      "name": "multiselect",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, allows multiple items to be selected."
-    },
-    {
       "name": "native",
       "type": "boolean",
       "required": false,
@@ -118,22 +111,12 @@
       "description": "Sets the size of the dropdown. Compact reduces height for dense layouts."
     },
     {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
-    },
-    {
       "name": "relative",
       "type": "string",
       "required": false,
       "default": "",
-      "description": "@deprecated This property has no effect and will be removed in a future version."
+      "description": "@deprecated This property has no effect and will be removed in a future version.",
+      "deprecated": true
     },
     {
       "name": "mt",

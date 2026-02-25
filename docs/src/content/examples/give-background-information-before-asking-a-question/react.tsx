@@ -1,11 +1,11 @@
 import {
-  GoabButton,
-  GoabFormItem,
-  GoabLink,
-  GoabRadioGroup,
-  GoabRadioItem,
-  GoabText
-} from "@abgov/react-components";
+  GoabxButton,
+  GoabxFormItem,
+  GoabxLink,
+  GoabxRadioGroup,
+  GoabxRadioItem,
+} from "@abgov/react-components/experimental";
+import { GoabText } from "@abgov/react-components";
 import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 import { useState } from "react";
 
@@ -22,9 +22,9 @@ export function GiveBackgroundInformationBeforeAskingAQuestion() {
 
   return (
     <>
-      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabLink>
+      </GoabxLink>
 
       <GoabText as="h2" mt="xl" mb="m">Current school status</GoabText>
       <GoabText mt="none" mb="s">
@@ -42,19 +42,19 @@ export function GiveBackgroundInformationBeforeAskingAQuestion() {
         Contact your provider if you're concerned about your school status.
       </GoabText>
 
-      <GoabFormItem label="Are you currently in school?">
-        <GoabRadioGroup
+      <GoabxFormItem label="Are you currently in school?">
+        <GoabxRadioGroup
           name="school"
           ariaLabel="are you currently in school?"
           onChange={handleChange}>
-          <GoabRadioItem value="yes" label="Yes" />
-          <GoabRadioItem value="no" label="No" />
-        </GoabRadioGroup>
-      </GoabFormItem>
+          <GoabxRadioItem value="yes" label="Yes" />
+          <GoabxRadioItem value="no" label="No" />
+        </GoabxRadioGroup>
+      </GoabxFormItem>
 
-      <GoabButton type="submit" mt="2xl" onClick={handleSubmit}>
+      <GoabxButton type="submit" mt="2xl" onClick={handleSubmit}>
         Save and continue
-      </GoabButton>
+      </GoabxButton>
     </>
   );
 }

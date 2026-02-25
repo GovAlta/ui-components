@@ -1,14 +1,14 @@
 {
   "componentSlug": "checkbox-list",
   "extractedFrom": "libs/web-components/src/components/checkbox-list/CheckboxList.svelte",
-  "extractedAt": "2026-01-05T23:10:27.431Z",
+  "extractedAt": "2026-02-04T19:24:42.584Z",
   "props": [
     {
       "name": "name",
       "type": "string",
       "required": true,
       "default": null,
-      "description": "- Manages a selected values array and synchronizes state down to child checkboxes. - Relays form-related events (mount, set value, set/reset error, reset fields) to and from children. Approach - Children register themselves via a FormFieldMount event; we track them in _childRecords. - All value and error changes flow through a small relay bus (receive/relay helpers). - Support both slotted goa-checkbox elements and direct child component instances. / import { onMount, tick } from \"svelte\"; import type { Spacing } from \"../../common/styling\"; import { calculateMargin } from \"../../common/styling\"; import { receive, relay, toBoolean } from \"../../common/utils\"; import { FieldsetSetValueMsg, FieldsetSetValueRelayDetail, FieldsetSetErrorMsg, FieldsetResetErrorsMsg, FormFieldMountRelayDetail, FormFieldMountMsg, FieldsetResetFieldsMsg, FieldsetErrorRelayDetail, } from \"../../types/relay-types\"; /** The name for the checkbox list group. Used for form submission."
+      "description": "The name for the checkbox list group. Used as group identifier in change events."
     },
     {
       "name": "value",

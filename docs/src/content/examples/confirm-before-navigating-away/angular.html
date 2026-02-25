@@ -1,9 +1,9 @@
-<goab-button (onClick)="onOpen()">Open</goab-button>
-<goab-modal [open]="open" heading="Are you sure you want to change route?" [actions]="actions">
+<goabx-button (onClick)="onOpen()">Open</goabx-button>
+<goabx-modal [open]="open" heading="Are you sure you want to change route?" [actions]="actions">
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goab-button type="secondary" size="compact" (onClick)="onClose()">Cancel</goab-button>
-      <goab-button type="primary" size="compact" (onClick)="onChangeRoute()">Change route</goab-button>
+      <goabx-button type="secondary" size="compact" (onClick)="onClose()">Cancel</goabx-button>
+      <goabx-button type="primary" size="compact" (onClick)="onChangeRoute()">Change route</goabx-button>
     </goab-button-group>
   </ng-template>
-</goab-modal>
+</goabx-modal>

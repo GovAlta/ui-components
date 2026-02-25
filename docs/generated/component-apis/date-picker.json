@@ -1,7 +1,7 @@
 {
   "componentSlug": "date-picker",
   "extractedFrom": "libs/web-components/src/components/date-picker/DatePicker.svelte",
-  "extractedAt": "2026-01-05T23:10:27.434Z",
+  "extractedAt": "2026-02-04T08:10:50.400Z",
   "props": [
     {
       "name": "type",
@@ -54,7 +54,8 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "@deprecated This property has no effect and will be removed in a future version."
+      "description": "@deprecated This property has no effect and will be removed in a future version.",
+      "deprecated": true
     },
     {
       "name": "disabled",
@@ -76,6 +77,17 @@
       "required": false,
       "default": "",
       "description": "Sets the width of the date picker input."
+    },
+    {
+      "name": "size",
+      "type": "\"default\" | \"compact\"",
+      "values": [
+        "default",
+        "compact"
+      ],
+      "required": false,
+      "default": "default",
+      "description": "Sets the size of the date picker. 'compact' reduces height for dense layouts."
     },
     {
       "name": "mt",

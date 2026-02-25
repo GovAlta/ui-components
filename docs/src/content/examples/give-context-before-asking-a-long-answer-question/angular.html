@@ -1,6 +1,6 @@
-<goab-link leadingIcon="arrow-back" size="small" mb="none">
+<goabx-link leadingIcon="arrow-back" size="small" mb="none">
   Back
-</goab-link>
+</goabx-link>
 
 <goab-text as="h2" mt="xl" mb="m">Submit a question about your benefits</goab-text>
 <goab-text mt="none" mb="xl">
@@ -9,16 +9,16 @@
 </goab-text>
 
 <form [formGroup]="form">
-  <goab-form-item
+  <goabx-form-item
     label="Provide details about your situation"
     helpText="Include specific details to help us answer your question quickly.">
-    <goab-textarea
+    <goabx-textarea
       formControlName="program"
       name="program"
       [maxCount]="400"
       countBy="character">
-    </goab-textarea>
-  </goab-form-item>
+    </goabx-textarea>
+  </goabx-form-item>
 </form>
 
 <goab-details mt="m" heading="What kind of information is useful?">
@@ -29,7 +29,7 @@
 </goab-details>
 
 <goab-button-group alignment="start" mt="2xl">
-  <goab-button type="primary" (onClick)="onContinue()">
+  <goabx-button type="primary" (onClick)="onContinue()">
     Continue
-  </goab-button>
+  </goabx-button>
 </goab-button-group>

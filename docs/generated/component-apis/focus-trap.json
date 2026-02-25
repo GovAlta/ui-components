@@ -1,7 +1,7 @@
 {
   "componentSlug": "focus-trap",
   "extractedFrom": "libs/web-components/src/components/focus-trap/FocusTrap.svelte",
-  "extractedAt": "2026-01-05T23:10:27.441Z",
+  "extractedAt": "2026-02-04T08:10:50.405Z",
   "props": [
     {
       "name": "open",

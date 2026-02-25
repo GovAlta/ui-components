@@ -1,0 +1,29 @@
+<div>
+  <h1>
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3370"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Feature 3370
+    </a>
+  </h1>
+  <div>
+    <h2>Clear calendar day selection when year and/or month changes</h2>
+    <goab-calendar (onChange)="handleOnChange($event)" [value]="calendarValue" />
+    <p>Selected Date: {{ calendarValue || "none" }}</p>
+    <goab-button (onClick)="clearCalendarValue()">Clear Selection</goab-button>
+  </div>
+  <div>
+    <goab-date-picker
+      (onChange)="handleDatePickerChange($event)"
+      [value]="datePickerValue"
+    />
+    <p>Selected Date: {{ datePickerValue || "none" }}</p>
+    <goab-button-group>
+      <goab-button (onClick)="clearDatePickerValue()">Clear Selection</goab-button>
+      <goab-button (onClick)="toCalendarDateValue()">To Calendar as Date</goab-button>
+      <goab-button (onClick)="toCalendarStringValue()">To Calendar as String</goab-button>
+    </goab-button-group>
+  </div>
+</div>

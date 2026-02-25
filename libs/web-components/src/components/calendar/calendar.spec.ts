@@ -5,7 +5,7 @@ import {
   render,
   waitFor,
 } from "@testing-library/svelte";
-import { addDays, lastDayOfMonth, startOfDay } from "date-fns";
+import { addDays, lastDayOfMonth, startOfDay, addMonths } from "date-fns";
 import { tick } from "svelte";
 import { it, expect, vi } from "vitest";
 
@@ -166,6 +166,9 @@ it("updates the calendar when a new month is selected", async () => {
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const monthsEl = queryByTestId("months");
 
+  const today = toDayStart(new Date());
+  today.setDate(1);
+
   // validate the day of the first day for the current month
   {
     const dayOfWeek = date.getDay();
@@ -177,27 +180,29 @@ it("updates the calendar when a new month is selected", async () => {
     expect((buttonEl as HTMLElement).dataset.day).toBe(dayNames[dayOfWeek]);
   }
 
+  // The date should be selected
+  expect(container.querySelector(".selected")).toBeTruthy();
+
   // change month
+  const nextMonth = addMonths(today, 1);
   monthsEl?.dispatchEvent(
     new CustomEvent("_change", {
-      detail: { value: month + 1 },
+      detail: { type: "month", value: nextMonth.getMonth() + 1 },
     }),
   );
 
   await waitFor(() => {
-    const date = new Date(year, month + 1, day);
-    const dayOfWeek = date.getDay();
-    const buttonEl = queryByTestId(getDateStamp(date));
+    const date = toDayStart(nextMonth);
+    date.setMonth(nextMonth.getMonth() - 1); // revert to 0-index value
+    date.setDate(1);
 
-    expect(buttonEl).toBeTruthy();
-    const dayEl = buttonEl?.querySelector("[data-testid=date]");
-    expect(dayEl?.innerHTML).toBe("1");
-    expect((buttonEl as HTMLElement).dataset.day).toBe(dayNames[dayOfWeek]);
+    // 3370: After changing the month a day in the new month should not be selected
+    expect(container.querySelector(".selected")).toBeFalsy();
   });
 });
 
 it("updates the calendar when a new year is selected", async () => {
-  const { container, queryByTestId } = render(Calendar);
+  const { queryByTestId } = render(Calendar);
   await tick();
 
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

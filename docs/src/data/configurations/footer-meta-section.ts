@@ -17,13 +17,13 @@ export const footerMetaSectionConfigurations: ComponentConfigurations = {
       name: 'Basic footer meta section',
       description: 'Meta links section within Footer',
       code: {
-        react: `<GoabFooter>
-  <GoabFooterMetaSection>
+        react: `<GoabxAppFooter>
+  <GoabxAppFooterMetaSection>
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms of use</a>
     <a href="/accessibility">Accessibility</a>
-  </GoabFooterMetaSection>
-</GoabFooter>`,
+  </GoabxAppFooterMetaSection>
+</GoabxAppFooter>`,
         angular: `<goab-footer>
   <goab-footer-meta-section>
     <a href="/privacy">Privacy</a>

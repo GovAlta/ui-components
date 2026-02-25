@@ -39,20 +39,20 @@ export const appHeaderConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabAppHeader heading="My Application" url="/">
   <div slot="actions">
-    <GoabButton type="tertiary">Help</GoabButton>
-    <GoabButton type="tertiary">Sign out</GoabButton>
+    <GoabxButton type="tertiary">Help</GoabxButton>
+    <GoabxButton type="tertiary">Sign out</GoabxButton>
   </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="My Application" url="/">
   <div slot="actions">
-    <goab-button type="tertiary">Help</goab-button>
-    <goab-button type="tertiary">Sign out</goab-button>
+    <goabx-button type="tertiary">Help</goabx-button>
+    <goabx-button type="tertiary">Sign out</goabx-button>
   </div>
 </goab-app-header>`,
         webComponents: `<goa-app-header heading="My Application" url="/">
   <div slot="actions">
-    <goa-button type="tertiary">Help</goa-button>
-    <goa-button type="tertiary">Sign out</goa-button>
+    <goa-button version="2" type="tertiary">Help</goa-button>
+    <goa-button version="2" type="tertiary">Sign out</goa-button>
   </div>
 </goa-app-header>`,
       },
@@ -69,7 +69,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
     <a href="/settings">Settings</a>
   </GoabAppHeaderMenu>
   <div slot="actions">
-    <GoabButton type="tertiary" leadingIcon="person">John Smith</GoabButton>
+    <GoabxButton type="tertiary" leadingIcon="person">John Smith</GoabxButton>
   </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="Service Portal" url="/">
@@ -79,7 +79,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
     <a href="/settings">Settings</a>
   </goab-app-header-menu>
   <div slot="actions">
-    <goab-button type="tertiary" leadingIcon="person">John Smith</goab-button>
+    <goabx-button type="tertiary" leadingIcon="person">John Smith</goabx-button>
   </div>
 </goab-app-header>`,
         webComponents: `<goa-app-header heading="Service Portal" url="/">
@@ -89,7 +89,7 @@ export const appHeaderConfigurations: ComponentConfigurations = {
     <a href="/settings">Settings</a>
   </goa-app-header-menu>
   <div slot="actions">
-    <goa-button type="tertiary" leadingicon="person">John Smith</goa-button>
+    <goa-button version="2" type="tertiary" leadingicon="person">John Smith</goa-button>
   </div>
 </goa-app-header>`,
       },

@@ -39,6 +39,11 @@ goa-table table {
   border-collapse: collapse;
 }
 
+goa-table[version="2"] table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
 goa-table.sticky thead {
   position: sticky;
   top: 0;

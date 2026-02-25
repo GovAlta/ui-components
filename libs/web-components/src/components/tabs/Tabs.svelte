@@ -1,8 +1,16 @@
-<svelte:options customElement="goa-tabs" />
+<svelte:options
+  customElement={{
+    tag: "goa-tabs",
+  }}
+/>
 
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
-  import { clamp, ensureSlotExists, fromBoolean } from "../../common/utils";
+  import {
+    clamp,
+    ensureSlotExists,
+    fromBoolean,
+  } from "../../common/utils";
   import { GoATabProps } from "../tab/Tab.svelte";
 
   /** The initially active tab (1-based index). If not set, the first tab is active. */
@@ -11,9 +19,12 @@
   export let testid: string = "";
   /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
+  /** Visual style variant. "segmented" shows pill-style tabs with animation. */
   export let variant: "default" | "segmented" = "default";
+  /** Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. */
+  export let orientation: "auto" | "horizontal" = "auto";
 
- // Private
+  // Private
   let _rootEl: HTMLElement;
   let _tabsEl: HTMLElement;
   let _slotEl: HTMLElement;
@@ -132,7 +143,7 @@
             targetTab = getFirstEnabledTab();
           }
 
-          setCurrentTab(targetTab);
+          setCurrentTab(targetTab, { skipFocus: true });
           _initialLoad = false;
         }
       }, 1);
@@ -248,7 +259,11 @@
    * Updates the segmented indicator position with velocity-based animation.
    * @param withAnimation - Whether to animate the transition (false on first load, true on tab change)
    */
-  function updateSegmentedIndicatorPosition({ withAnimation }: { withAnimation: boolean }) {
+  function updateSegmentedIndicatorPosition({
+    withAnimation,
+  }: {
+    withAnimation: boolean;
+  }) {
     if (!_tabsEl || variant !== "segmented") return;
 
     const tabs = _tabsEl.querySelectorAll('[role="tab"]');
@@ -262,9 +277,13 @@
     if (withAnimation) {
       const previousTab = tabs[_previousTabIndex - 1] as HTMLElement;
       if (previousTab) {
-        const tabDistance = Math.abs(selectedRect.left - previousTab.getBoundingClientRect().left);
-        const calculatedDuration = MIN_TRANSITION_DURATION + DURATION_PER_PIXEL * tabDistance;
-        _segmentedTransitionDuration = Math.min(calculatedDuration, MAX_TRANSITION_DURATION) / 1000;
+        const tabDistance = Math.abs(
+          selectedRect.left - previousTab.getBoundingClientRect().left,
+        );
+        const calculatedDuration =
+          MIN_TRANSITION_DURATION + DURATION_PER_PIXEL * tabDistance;
+        _segmentedTransitionDuration =
+          Math.min(calculatedDuration, MAX_TRANSITION_DURATION) / 1000;
       } else {
         _segmentedTransitionDuration = 0;
       }
@@ -279,7 +298,8 @@
     _previousTabIndex = _currentTab;
   }
 
-  function setCurrentTab(tab: number) {
+  function setCurrentTab(tab: number, options: { skipFocus?: boolean } = {}) {
+    const { skipFocus = false } = options;
     if (!_tabsEl) return;
 
     const previousTab = _currentTab;
@@ -309,7 +329,9 @@
 
       if (isCurrent) {
         currentLocation = (el as HTMLLinkElement).href;
-        el.focus();
+        if (!skipFocus) {
+          el.focus();
+        }
       }
     });
 
@@ -327,24 +349,30 @@
     _slotEl.setAttribute("aria-labelledby", `tab-${_currentTab}`);
     _slotEl.setAttribute("id", `tabpanel-${_currentTab}`);
 
-    // update the browswers url with the new hash
+    // update the browser's url with the new hash
     if (currentLocation) {
       const url = new URL(currentLocation);
       // to make sure we preserve multiple #, for example /#tab-1#example
-      const allHashes = window.location.href.split('#').slice(1);
-      const otherHashes = allHashes.filter(hash => !hash.startsWith('tab-')); // #example
+      const allHashes = window.location.href.split("#").slice(1);
+      const otherHashes = allHashes.filter((hash) => !hash.startsWith("tab-")); // #example
       const uniqHashes = [...new Set([url.hash.substring(1), ...otherHashes])];
-      const newHash = uniqHashes.filter(Boolean).join('#');
+      const newHash = uniqHashes.filter(Boolean).join("#");
 
-      history.replaceState({}, "", url.pathname + url.search + (newHash ? '#' + newHash : ''));
+      history.replaceState(
+        {},
+        "",
+        url.pathname + url.search + (newHash ? "#" + newHash : ""),
+      );
 
       if (_initialLoad) {
         const anchorHash = otherHashes[0];
         if (anchorHash) {
           tick().then(() => {
-            const element = document.getElementById(anchorHash) || document.querySelector(`[name="${anchorHash}"]`);
+            const element =
+              document.getElementById(anchorHash) ||
+              document.querySelector(`[name="${anchorHash}"]`);
             if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
+              element.scrollIntoView({ behavior: "smooth" });
             }
           });
         }
@@ -406,7 +434,7 @@
   /** Converts the input string to a kebab format url encoded string */
   function toSlug(input: string): string {
     const parts = input.toLowerCase().split(" ");
-    const str = parts.map(val => val.toLowerCase()).join("-");
+    const str = parts.map((val) => val.toLowerCase()).join("-");
     return encodeURIComponent(str);
   }
 </script>
@@ -417,6 +445,7 @@
   role="tablist"
   bind:this={_rootEl}
   class:v2={version === "2"}
+  class:horizontal={orientation === "horizontal"}
   class:segmented={variant === "segmented"}
   data-testid={testid}
 >
@@ -429,13 +458,17 @@
       <div class="segmented-indicator"></div>
     {/if}
   </div>
-  <div class="tabpanel" tabindex="0" bind:this={_slotEl} role="tabpanel">
+  <div
+    class="tabpanel"
+    tabindex={variant === "segmented" ? -1 : 0}
+    bind:this={_slotEl}
+    role="tabpanel"
+  >
     <slot />
   </div>
 </div>
 
 <style>
-
   :host {
     box-sizing: border-box;
     font: var(--goa-tab-typography);
@@ -489,6 +522,9 @@
     outline: var(--goa-tab-border-focus);
     outline-offset: 4px;
   }
+  .segmented .tabpanel:focus-visible {
+    outline: none;
+  }
 
   @media (--not-mobile) {
     .tabs {
@@ -525,7 +561,10 @@
       display: flex;
       flex-direction: column;
       gap: var(--goa-tabs-gap-small-screen);
-      padding-bottom: var(--goa-tabs-padding-bottom-small-screen, var(--goa-space-m));
+      padding-bottom: var(
+        --goa-tabs-padding-bottom-small-screen,
+        var(--goa-space-m)
+      );
     }
     :global([role="tab"]) {
       padding: var(--goa-tab-padding-mobile);
@@ -549,6 +588,40 @@
     :global([role="tab"][aria-disabled="true"]) {
       border-left: var(--goa-tab-border-not-selected);
     }
+
+    /* horizontal: override mobile styles to use desktop layout */
+    .horizontal .tabs {
+      border-left: none;
+      border-bottom: var(--goa-tabs-bottom-border);
+      flex-direction: row;
+      gap: var(--goa-tabs-gap);
+      padding-bottom: 0;
+      margin-bottom: var(--goa-space-xl);
+    }
+    .horizontal :global([role="tab"]) {
+      padding: var(--goa-tab-padding);
+      border-left: none;
+      border-bottom: var(--goa-tab-border-not-selected);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: var(--goa-space-2xl);
+      justify-content: center;
+    }
+    .horizontal :global([role="tab"][aria-selected="true"]) {
+      border-left: none;
+      border-bottom: var(--goa-tab-border-selected);
+      background: transparent;
+    }
+    .horizontal
+      :global(
+        [role="tab"]:hover:not([aria-selected="true"]):not(
+            [aria-disabled="true"]
+          )
+      ) {
+      border-left: none;
+      border-bottom: var(--goa-tab-border-hover);
+      background: transparent;
+    }
   }
 
   .v2 :global([role="tab"]) {
@@ -563,7 +636,7 @@
     :global(
       [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
     ) {
-    border-bottom: none; /* Remove V1 border on hover */
+    border-bottom: none;
   }
 
   @media (--not-mobile) {
@@ -580,10 +653,13 @@
       right: 0;
       height: var(--goa-tab-indicator-width, 3px);
       background: transparent;
-      border-radius: var(--goa-tab-indicator-border-radius-desktop, 6px 6px 0 0);
+      border-radius: var(
+        --goa-tab-indicator-border-radius-desktop,
+        6px 6px 0 0
+      );
     }
     .v2 :global([role="tab"][aria-selected="true"]::after) {
-      background: var(--goa-tab-indicator-color-active, #0070C4);
+      background: var(--goa-tab-indicator-color-active, #0070c4);
     }
     .v2
       :global(
@@ -599,6 +675,17 @@
     .v2 :global([role="tab"]) {
       border-left: none; /* Remove V1 border, replaced with ::after */
     }
+    .v2 :global([role="tab"][aria-selected="true"]) {
+      border-left: none;
+    }
+    .v2
+      :global(
+        [role="tab"]:hover:not([aria-selected="true"]):not(
+            [aria-disabled="true"]
+          )
+      ) {
+      border-left: none;
+    }
 
     /* V2 uses ::after pseudo-element for rounded corner indicators */
     .v2 :global([role="tab"]::after) {
@@ -609,10 +696,13 @@
       bottom: 0;
       width: var(--goa-tab-indicator-width, 3px);
       background: transparent;
-      border-radius: var(--goa-tab-indicator-border-radius-small-screen, 0 6px 6px 0);
+      border-radius: var(
+        --goa-tab-indicator-border-radius-small-screen,
+        0 6px 6px 0
+      );
     }
     .v2 :global([role="tab"][aria-selected="true"]::after) {
-      background: var(--goa-tab-indicator-color-active, #0070C4);
+      background: var(--goa-tab-indicator-color-active, #0070c4);
     }
     .v2
       :global(
@@ -621,6 +711,35 @@
           )::after
       ) {
       background: var(--goa-tab-indicator-color-hover, #dcdcdc);
+    }
+
+    /* V2 horizontal on mobile: remove V1 borders, use ::after bottom indicator instead */
+    .horizontal.v2 :global([role="tab"]) {
+      border-bottom: none;
+    }
+    .horizontal.v2 :global([role="tab"][aria-selected="true"]) {
+      border-bottom: none;
+    }
+    .horizontal.v2
+      :global(
+        [role="tab"]:hover:not([aria-selected="true"]):not(
+            [aria-disabled="true"]
+          )
+      ) {
+      border-bottom: none;
+    }
+    /* V2 horizontal: switch ::after from left indicator to bottom indicator */
+    .horizontal.v2 :global([role="tab"]::after) {
+      top: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: var(--goa-tab-indicator-width, 3px);
+      border-radius: var(
+        --goa-tab-indicator-border-radius-desktop,
+        6px 6px 0 0
+      );
     }
   }
 
@@ -651,7 +770,8 @@
     width: var(--segmented-indicator-width, 0);
     height: var(--segmented-indicator-height, 30px);
     background: var(--goa-color-greyscale-white, #ffffff);
-    border: var(--goa-border-width-s) solid var(--goa-color-greyscale-150, #dcdcdc);
+    border: var(--goa-border-width-s) solid
+      var(--goa-color-greyscale-150, #dcdcdc);
     border-radius: var(--goa-border-radius-xl);
     pointer-events: none;
     z-index: 0;

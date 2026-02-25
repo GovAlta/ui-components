@@ -1,12 +1,12 @@
-<goab-form-item label="Date Picker">
-  <goab-date-picker
+<goabx-form-item label="Date Picker">
+  <goabx-date-picker
     (onChange)="onChange($event)"
     name="item"
     [value]="item">
-  </goab-date-picker>
-</goab-form-item>
+  </goabx-date-picker>
+</goabx-form-item>
 
 <goab-button-group alignment="start" mt="xs">
-  <goab-button (onClick)="setValue()">Set Value</goab-button>
-  <goab-button (onClick)="clearValue()">Clear Value</goab-button>
+  <goabx-button (onClick)="setValue()">Set Value</goabx-button>
+  <goabx-button (onClick)="clearValue()">Clear Value</goabx-button>
 </goab-button-group>

@@ -1,0 +1,24 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1">Bug 3384 - Goabx Table Border</goab-text>
+
+  <goab-text tag="p"> The below table should have a border and border radius.</goab-text>
+
+  <goabx-table width="100%">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Status</th>
+        <th class="Goab-table-number-header">Requests</th>
+        <th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows">
+        <td>{{ row.service }}</td>
+        <td>{{ row.status }}</td>
+        <td class="Goab-table-number-cell">{{ row.requests }}</td>
+        <td>{{ row.updated }}</td>
+      </tr>
+    </tbody>
+  </goabx-table>
+</goab-block>

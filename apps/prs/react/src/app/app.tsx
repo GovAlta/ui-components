@@ -64,6 +64,9 @@ export function App() {
               <Link to="/bugs/3275">3275 Can't unset month</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
               <Link to="/bugs/3281">3281 GoabText p tag margin issues</Link>
+              <Link to="/bugs/3337">3337 Input autocomplete styling</Link>
+              <Link to="/bugs/3279">3279 Work Side Menu Key Nav</Link>
+              <Link to="/bugs/3384">3384 v2 Table Border</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>
@@ -75,6 +78,7 @@ export function App() {
               <Link to="/features/2328">2328 Container Height Property</Link>
               <Link to="/features/2361">2361 Radio/Checkbox Clickable Area</Link>
               <Link to="/features/2440">2440 MenuButton Icon</Link>
+              <Link to="/features/2469">2469 Push Drawer</Link>
               <Link to="/features/2492">2492 TextArea onBlur</Link>
               <Link to="/features/2609">2609 Data Table Base Component</Link>
               <Link to="/features/2611">2611 Segmented Tab</Link>
@@ -85,10 +89,14 @@ export function App() {
               <Link to="/features/2829">2829 Modal ARIA Live Region</Link>
               <Link to="/features/2877">2877 Badge Types and Custom Icon</Link>
               <Link to="/features/3102">3102 MenuButton Width</Link>
+              <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3241">3241 V2 Experimental Wrappers</Link>
               <Link to="/features/v2-icons">v2 header icons</Link>
-              <Link to="/features/3137">3137 Work Side Menu Group</Link>
+              <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
+              <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
               <Link to="/features/3306">3306 Custom slug value for tabs</Link>
+              <Link to="/features/3370">3370 Clear calendar day selection</Link>
+              <Link to="/features/3396">3396 Text heading-2xs size</Link>
               <Link to="/features/public-form">Public form</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">

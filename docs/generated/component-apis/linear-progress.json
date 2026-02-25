@@ -1,7 +1,7 @@
 {
   "componentSlug": "linear-progress",
   "extractedFrom": "libs/web-components/src/components/linear-progress/LinearProgress.svelte",
-  "extractedAt": "2026-01-05T23:10:27.450Z",
+  "extractedAt": "2026-02-04T08:10:50.411Z",
   "props": [
     {
       "name": "testId",

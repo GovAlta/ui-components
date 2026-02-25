@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { GoabDatePicker, GoabFormItem } from "@abgov/react-components";
+import { GoabxDatePicker, GoabxFormItem } from "@abgov/react-components/experimental";
 
 export function AskForBirthday() {
   const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
 
   return (
-    <GoabFormItem label="What is your date of birth?">
-      <GoabDatePicker
+    <GoabxFormItem label="What is your date of birth?">
+      <GoabxDatePicker
         name="birthdate"
         type="input"
         value={birthdate}
         onChange={(e) => setBirthdate(e.value)}
       />
-    </GoabFormItem>
+    </GoabxFormItem>
   );
 }

@@ -7,7 +7,7 @@
 
 // Import the global design tokens JSON
 // Note: This will be resolved at build time by Astro/Vite
-import globalTokens from '@abgov/design-tokens/data/goa-global-design-tokens.json';
+import globalTokens from "@abgov/design-tokens-v2/data/goa-global-design-tokens.json";
 
 /**
  * Flattened token structure for grid display
@@ -43,12 +43,12 @@ interface TokenValue {
  */
 function isTokenValue(obj: unknown): obj is TokenValue {
   return (
-    typeof obj === 'object' &&
+    typeof obj === "object" &&
     obj !== null &&
-    'value' in obj &&
-    (typeof (obj as TokenValue).value === 'string' ||
-      typeof (obj as TokenValue).value === 'number' ||
-      typeof (obj as TokenValue).value === 'object')
+    "value" in obj &&
+    (typeof (obj as TokenValue).value === "string" ||
+      typeof (obj as TokenValue).value === "number" ||
+      typeof (obj as TokenValue).value === "object")
   );
 }
 
@@ -57,17 +57,17 @@ function isTokenValue(obj: unknown): obj is TokenValue {
  * e.g., ['color', 'interactive', 'default'] -> '--goa-color-interactive-default'
  */
 function pathToCssVar(path: string[]): string {
-  return `--goa-${path.join('-')}`;
+  return `--goa-${path.join("-")}`;
 }
 
 /**
  * Format a token value for display
  */
 function formatValue(value: string | number | object): string {
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     return value;
   }
-  if (typeof value === 'number') {
+  if (typeof value === "number") {
     return String(value);
   }
   // For complex values (like typography objects), stringify
@@ -80,7 +80,7 @@ function formatValue(value: string | number | object): string {
 function flattenTokensRecursive(
   obj: Record<string, unknown>,
   path: string[] = [],
-  results: FlatToken[] = []
+  results: FlatToken[] = [],
 ): FlatToken[] {
   for (const [key, value] of Object.entries(obj)) {
     const currentPath = [...path, key];
@@ -88,11 +88,11 @@ function flattenTokensRecursive(
     if (isTokenValue(value)) {
       // This is a leaf token
       const category = path[0] || key;
-      const tokenPath = currentPath.slice(1).join('/');
-      const tokenType = value.type || 'unknown';
+      const tokenPath = currentPath.slice(1).join("/");
+      const tokenType = value.type || "unknown";
       const isColor =
-        tokenType === 'color' ||
-        (typeof value.value === 'string' && value.value.startsWith('#'));
+        tokenType === "color" ||
+        (typeof value.value === "string" && value.value.startsWith("#"));
 
       results.push({
         name: pathToCssVar(currentPath),
@@ -103,7 +103,7 @@ function flattenTokensRecursive(
         isColor,
         description: value.description,
       });
-    } else if (typeof value === 'object' && value !== null) {
+    } else if (typeof value === "object" && value !== null) {
       // Recurse into nested object
       flattenTokensRecursive(value as Record<string, unknown>, currentPath, results);
     }
@@ -133,13 +133,13 @@ export function getCategories(): string[] {
  * Categories must match the top-level keys in the token JSON
  */
 export const FILTER_GROUPS: Record<string, string[]> = {
-  'Border': ['borderRadius', 'borderWidth', 'border-none'],
-  'Color': ['color'],
-  'Typography': ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'typography'],
-  'Icon': ['iconSize'],
-  'Opacity': ['opacity'],
-  'Shadow': ['shadow'],
-  'Space': ['space'],
+  Border: ["borderRadius", "borderWidth", "border-none"],
+  Color: ["color"],
+  Typography: ["fontFamily", "fontSize", "fontWeight", "lineHeight", "typography"],
+  Icon: ["iconSize"],
+  Opacity: ["opacity"],
+  Shadow: ["shadow"],
+  Space: ["space"],
 };
 
 /**
@@ -183,17 +183,20 @@ export function filterBySearch(tokens: FlatToken[], search: string): FlatToken[]
     (t) =>
       t.name.toLowerCase().includes(term) ||
       t.path.toLowerCase().includes(term) ||
-      t.value.toLowerCase().includes(term)
+      t.value.toLowerCase().includes(term),
   );
 }
 
 /**
  * Sort tokens by name
  */
-export function sortByName(tokens: FlatToken[], direction: 'asc' | 'desc' = 'asc'): FlatToken[] {
+export function sortByName(
+  tokens: FlatToken[],
+  direction: "asc" | "desc" = "asc",
+): FlatToken[] {
   return [...tokens].sort((a, b) => {
     const cmp = a.name.localeCompare(b.name);
-    return direction === 'asc' ? cmp : -cmp;
+    return direction === "asc" ? cmp : -cmp;
   });
 }
 

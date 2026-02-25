@@ -1,14 +1,14 @@
 {
   "componentSlug": "details",
   "extractedFrom": "libs/web-components/src/components/details/Details.svelte",
-  "extractedAt": "2026-01-05T23:10:27.434Z",
+  "extractedAt": "2026-02-04T08:10:50.401Z",
   "props": [
     {
       "name": "heading",
       "type": "string",
       "required": true,
       "default": null,
-      "description": "The title heading"
+      "description": "The title heading."
     },
     {
       "name": "maxWidth",

@@ -1,9 +1,9 @@
-import { GoabLink } from "@abgov/react-components";
+import { GoabxLink } from "@abgov/react-components/experimental";
 
 export function LinkToAnExternalPage() {
   return (
-    <GoabLink trailingIcon="open">
+    <GoabxLink trailingIcon="open">
       <a href="#external-url">External link</a>
-    </GoabLink>
+    </GoabxLink>
   );
 }

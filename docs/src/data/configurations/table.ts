@@ -17,7 +17,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Basic table',
       description: 'Simple table with data',
       code: {
-        react: `<GoabTable>
+        react: `<GoabxTable>
   <thead>
     <tr>
       <th>Name</th>
@@ -37,8 +37,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</GoabTable>`,
-        angular: `<goab-table>
+</GoabxTable>`,
+        angular: `<goabx-table>
   <thead>
     <tr>
       <th>Name</th>
@@ -58,8 +58,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</goab-table>`,
-        webComponents: `<goa-table>
+</goabx-table>`,
+        webComponents: `<goa-table version="2">
   <table>
     <thead>
       <tr>
@@ -89,7 +89,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Striped rows',
       description: 'Alternating row colors for readability',
       code: {
-        react: `<GoabTable striped>
+        react: `<GoabxTable striped>
   <thead>
     <tr>
       <th>Item</th>
@@ -114,8 +114,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>$10.00</td>
     </tr>
   </tbody>
-</GoabTable>`,
-        angular: `<goab-table [striped]="true">
+</GoabxTable>`,
+        angular: `<goabx-table [striped]="true">
   <thead>
     <tr>
       <th>Item</th>
@@ -140,8 +140,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>$10.00</td>
     </tr>
   </tbody>
-</goab-table>`,
-        webComponents: `<goa-table striped>
+</goabx-table>`,
+        webComponents: `<goa-table version="2" striped>
   <table>
     <thead>
       <tr>
@@ -176,7 +176,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Relaxed variant',
       description: 'More vertical padding for comfortable reading',
       code: {
-        react: `<GoabTable variant="relaxed">
+        react: `<GoabxTable variant="relaxed">
   <thead>
     <tr>
       <th>Service</th>
@@ -193,8 +193,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Register a new or used vehicle</td>
     </tr>
   </tbody>
-</GoabTable>`,
-        angular: `<goab-table variant="relaxed">
+</GoabxTable>`,
+        angular: `<goabx-table variant="relaxed">
   <thead>
     <tr>
       <th>Service</th>
@@ -211,8 +211,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Register a new or used vehicle</td>
     </tr>
   </tbody>
-</goab-table>`,
-        webComponents: `<goa-table variant="relaxed">
+</goabx-table>`,
+        webComponents: `<goa-table version="2" variant="relaxed">
   <table>
     <thead>
       <tr>
@@ -239,7 +239,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Sticky header',
       description: 'Header stays visible when scrolling',
       code: {
-        react: `<GoabTable stickyHeader width="100%">
+        react: `<GoabxTable stickyHeader width="100%">
   <thead>
     <tr>
       <th>ID</th>
@@ -264,8 +264,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Finance</td>
     </tr>
   </tbody>
-</GoabTable>`,
-        angular: `<goab-table [stickyHeader]="true" width="100%">
+</GoabxTable>`,
+        angular: `<goabx-table [stickyHeader]="true" width="100%">
   <thead>
     <tr>
       <th>ID</th>
@@ -290,8 +290,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Finance</td>
     </tr>
   </tbody>
-</goab-table>`,
-        webComponents: `<goa-table stickyheader width="100%">
+</goabx-table>`,
+        webComponents: `<goa-table version="2" stickyheader width="100%">
   <table>
     <thead>
       <tr>
@@ -326,7 +326,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Full width',
       description: 'Table that spans container width',
       code: {
-        react: `<GoabTable width="100%" striped>
+        react: `<GoabxTable width="100%" striped>
   <thead>
     <tr>
       <th>Application ID</th>
@@ -349,8 +349,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 14, 2024</td>
     </tr>
   </tbody>
-</GoabTable>`,
-        angular: `<goab-table width="100%" [striped]="true">
+</GoabxTable>`,
+        angular: `<goabx-table width="100%" [striped]="true">
   <thead>
     <tr>
       <th>Application ID</th>
@@ -373,8 +373,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 14, 2024</td>
     </tr>
   </tbody>
-</goab-table>`,
-        webComponents: `<goa-table width="100%" striped>
+</goabx-table>`,
+        webComponents: `<goa-table version="2" width="100%" striped>
   <table>
     <thead>
       <tr>

@@ -1,10 +1,6 @@
 import { useState } from "react";
-import {
-  GoabButton,
-  GoabButtonGroup,
-  GoabFormItem,
-  GoabInput
-} from "@abgov/react-components";
+import { GoabxButton, GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 import { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
 
 export function DisabledButtonWithARequiredField() {
@@ -26,23 +22,23 @@ export function DisabledButtonWithARequiredField() {
 
   return (
     <form>
-      <GoabFormItem label="Name" requirement="required">
-        <GoabInput
+      <GoabxFormItem label="Name" requirement="required">
+        <GoabxInput
           name="input"
           type="text"
           onChange={handleInputChange}
           value={inputValue}
           width="100%"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
 
       <GoabButtonGroup alignment="start" mt="xl">
-        <GoabButton disabled={inputValue.trim() === ""} onClick={handleConfirm}>
+        <GoabxButton disabled={inputValue.trim() === ""} onClick={handleConfirm}>
           Confirm
-        </GoabButton>
-        <GoabButton type="secondary" onClick={handleCancel}>
+        </GoabxButton>
+        <GoabxButton type="secondary" onClick={handleCancel}>
           Cancel
-        </GoabButton>
+        </GoabxButton>
       </GoabButtonGroup>
     </form>
   );

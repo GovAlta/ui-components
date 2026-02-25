@@ -1,14 +1,14 @@
 {
   "componentSlug": "radio-group",
   "extractedFrom": "libs/web-components/src/components/radio-group/RadioGroup.svelte",
-  "extractedAt": "2026-01-05T23:10:27.457Z",
+  "extractedAt": "2026-02-04T08:10:50.414Z",
   "props": [
     {
       "name": "name",
       "type": "string",
       "required": true,
       "default": null,
-      "description": "The name for the radio group. Used for form submission and accessibility."
+      "description": "The name for the radio group. Used for accessibility and change events."
     },
     {
       "name": "value",
@@ -42,18 +42,6 @@
       "required": false,
       "default": "false",
       "description": "Shows an error state on all radio items in the group."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "typeLabel": "GoabRadioGroupVersionType",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
     },
     {
       "name": "size",

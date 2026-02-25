@@ -1,0 +1,149 @@
+---
+/**
+ * Get Started - Designers (Early Adopters)
+ *
+ * Designer onboarding for the early adopters program.
+ * Figma setup, BETA libraries, illustration requests, project updates.
+ * Content from Confluence (Brief 65).
+ */
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Get started as a designer"
+  description="Get started with the experimental GoA Design System as a designer"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Get started as a designer</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Onboarding for the early adopters program.
+  </goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" heading="What you'll do as a designer early adopter" mb="m">
+    <ul style="margin-bottom: 0;">
+      <li>Get access to the experimental Figma libraries.</li>
+      <li>Use experimental libraries to design or evaluate screens in your service context.</li>
+      <li>Provide feedback on what's working, what's not working and what's missing.</li>
+    </ul>
+  </goa-callout>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="setup">Available resources <goa-badge version="2" type="success" icon="false" emphasis="subtle" ml="m" content="Start here" style="vertical-align: middle;"></goa-badge></h2>
+
+  <goa-text version="2" size="heading-xs" mt="xl" mb="s">Figma assets</goa-text>
+  <goa-grid version="2" minchildwidth="300px" gap="xl">
+    <goa-block version="2" gap="s" direction="column">
+      <goa-text version="2" size="body-m" mt="m" mb="2xs"><strong>Production</strong></goa-text>
+      <goa-link version="2"><a href="https://www.figma.com/design/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Component-library-%7C-DDD?node-id=33054-33175" target="_blank">Component library</a></goa-link>
+      <goa-link version="2"><a href="https://www.figma.com/design/ylmHeuDMfxnDBnP1VaQYz8/%E2%9D%96-Styles--Tokens--Icons--and-Guidelines-%7C-DDD?node-id=12132-379669" target="_blank">Styles, tokens, icons, and guidelines</a></goa-link>
+      <goa-link version="2"><a href="https://www.figma.com/design/aIRjvBzpIUH0GbkffjbL04/%E2%9D%96-Patterns-library-%7C-DDD?node-id=6345-1491163" target="_blank">Patterns library</a></goa-link>
+    </goa-block>
+    <goa-block version="2" gap="s" direction="column">
+      <goa-text version="2" size="body-m" mt="m" mb="2xs"><strong>Beta</strong></goa-text>
+      <goa-link version="2"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-BETA-Component-library?node-id=60166-171607" target="_blank">Component library BETA</a></goa-link>
+      <goa-link version="2"><a href="https://www.figma.com/design/1xnHCsSgKHvkQEEDRvEa9y/%E2%9D%96-BETA-Styles-library?node-id=36-7" target="_blank">Styles library BETA</a></goa-link>
+      <goa-link version="2"><a href="https://www.figma.com/design/1DyrNxvQ1yhIEGqtpAtJqp/Illustration-library?node-id=0-1" target="_blank">Illustration library BETA</a></goa-link>
+    </goa-block>
+  </goa-grid>
+
+  <goa-callout version="2" type="information" emphasis="low" mt="l" mb="l">
+    Component names are the same in both libraries, which makes
+    <a href="https://help.figma.com/hc/en-us/articles/4404856784663-Swap-style-and-component-libraries" target="_blank">library swapping</a>
+    possible. Be aware this can make it harder to tell which library a component came from once
+    it's on the canvas.
+  </goa-callout>
+
+  <h3 id="illustrations" style="margin-top: var(--goa-space-xl);">Illustrations</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    The illustration library is a collection of custom GoA illustrations to be used at various
+    points throughout a service. We will continue to update it regularly, so start by checking what's already
+    available.
+  </goa-text>
+  <goa-container version="2" type="non-interactive" padding="compact" mb="m">
+    Can't find an existing illustration that fits your scenario? Need a new
+    composition combining existing illustration elements?
+    <br /><br />
+    <goa-button version="2" type="tertiary" size="compact">Request an illustration</goa-button>
+  </goa-container>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    If you're unsure, ask in
+    <a href="https://goa-dio.slack.com/archives/C0A9SN3JM7E" target="_blank"><strong>#design-system-early-adopters</strong></a>
+    or bring it to drop-in hours — we'll help you decide the best path.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="start-designing">Designing with the BETA libraries in Figma</h2>
+
+  <h3 id="new-designs">Starting a new design</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    We recommend starting from <a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-BETA-Component-library?node-id=58855-81995" target="_blank">DS 2.0 templates</a>.
+  </goa-text>
+
+  <h3 id="existing-files">Starting from an existing design</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li><strong>Library swap</strong> — If your goal is to convert the whole file to DS 2.0, consider trying the library swap approach.</li>
+      <li><strong>Manual rebuild</strong> — The slowest approach, but gives you the most control. Consider using starter templates as a base for rebuilding your pages.</li>
+    </ul>
+  </goa-text>
+
+  <goa-callout version="2" type="important" emphasis="low" mt="none" mb="m">
+    <a href="https://help.figma.com/hc/en-us/articles/4404856784663-Swap-style-and-component-libraries" target="_blank">Library swap</a> results can vary. We recommend creating a copy of the file before attempting
+    a library swap.
+  </goa-callout>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="update-existing">Updating an existing project</h2>
+
+  <h3 id="developer-first">Developer-first</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    A developer creates a new branch, completes the upgrade steps, and runs the upgraded
+    application. This helps the team quickly see which areas need design updates to align with
+    DS 2.0.
+  </goa-text>
+
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <strong>When reviewing the upgraded branch, watch for:</strong>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Spacing and layout rhythm</li>
+      <li>Typography scale/weight usage</li>
+      <li>Screens with dense content or constrained layouts (these will often have the highest risk of "breaking" during the update)</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="design-first">Design-first</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ol>
+      <li>Identify custom elements created to support your users' needs.</li>
+      <li>Create an inventory and prioritize items by importance and effort.</li>
+      <li>Redesign the highest priority elements using the visual design values from the Styles library BETA.</li>
+    </ol>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    This can allow design work to proceed ahead of development rather than being blocked by the
+    version update.
+  </goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" mt="none" mb="m">
+    In most cases we recommend the Developer-First approach.
+  </goa-callout>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="file-location">File location and sharing</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Early adopter Figma files will be collected within the <a href="https://www.figma.com/files/1352057334427203708/project/546230850" target="_blank"><strong>Early adopter project</strong></a>
+    in the Design system workspace to:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Facilitate learning from fellow early adopters and the design system team</li>
+      <li>Avoid confusion / chance encounters of experimental assets by practitioners who are not part of the early adopter program</li>
+    </ul>
+  </goa-text>
+</DocumentationPageLayout>

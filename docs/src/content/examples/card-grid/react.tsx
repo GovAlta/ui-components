@@ -1,12 +1,13 @@
-import { GoabContainer, GoabGrid, GoabLink, GoabText } from "@abgov/react-components";
+import { GoabxLink } from "@abgov/react-components/experimental";
+import { GoabContainer, GoabGrid, GoabText } from "@abgov/react-components";
 
 export function CardGrid() {
   return (
     <GoabGrid gap="xl" minChildWidth="320px">
       <GoabContainer accent="thin" mb="none">
-        <GoabLink size="large" mb="m">
+        <GoabxLink size="large" mb="m">
           <a href="#">Waitlist submission</a>
-        </GoabLink>
+        </GoabxLink>
         <GoabText mt="none" mb="none">
           Enter and maintain information about the households waiting for affordable housing
           with your organization.
@@ -14,9 +15,9 @@ export function CardGrid() {
       </GoabContainer>
 
       <GoabContainer accent="thin" mb="none">
-        <GoabLink size="large" mb="m">
+        <GoabxLink size="large" mb="m">
           <a href="#">Lodge assistance program</a>
-        </GoabLink>
+        </GoabxLink>
         <GoabText mt="none" mb="none">
           Keep track of the individuals who are placed in lodges and may qualify for the Lodge
           Assistance Program subsidy.
@@ -24,9 +25,9 @@ export function CardGrid() {
       </GoabContainer>
 
       <GoabContainer accent="thin" mb="none">
-        <GoabLink size="large" mb="m">
+        <GoabxLink size="large" mb="m">
           <a href="#">Education Support</a>
-        </GoabLink>
+        </GoabxLink>
         <GoabText mt="none" mb="none">
           Explore educational resources, enroll in courses, and track your academic progress
           effortlessly.
@@ -34,9 +35,9 @@ export function CardGrid() {
       </GoabContainer>
 
       <GoabContainer accent="thin" mb="none">
-        <GoabLink size="large" mb="m">
+        <GoabxLink size="large" mb="m">
           <a href="#">Social Assistance</a>
-        </GoabLink>
+        </GoabxLink>
         <GoabText mt="none" mb="none">
           Learn about available support programs, apply for financial aid, and access community
           resources.
@@ -44,9 +45,9 @@ export function CardGrid() {
       </GoabContainer>
 
       <GoabContainer accent="thin" mb="none">
-        <GoabLink size="large" mb="m">
+        <GoabxLink size="large" mb="m">
           <a href="#">Employment Opportunity</a>
-        </GoabLink>
+        </GoabxLink>
         <GoabText mt="none" mb="none">
           Search for job openings, access career development tools, and receive
           employment-related updates.
@@ -54,9 +55,9 @@ export function CardGrid() {
       </GoabContainer>
 
       <GoabContainer accent="thin" mb="none">
-        <GoabLink size="large" mb="m">
+        <GoabxLink size="large" mb="m">
           <a href="#">Housing Assistance</a>
-        </GoabLink>
+        </GoabxLink>
         <GoabText mt="none" mb="none">
           Find affordable housing options, apply for housing subsidies, and report maintenance
           issues seamlessly.

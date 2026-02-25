@@ -1,33 +1,30 @@
 import { useState } from "react";
-import {
-  GoabButton,
-  GoabButtonGroup,
-  GoabModal,
-} from "@abgov/react-components";
+import { GoabxButton, GoabxModal } from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 
 export function RequireUserActionBeforeContinuing() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <GoabButton onClick={() => setOpen(true)}>Open Basic Modal</GoabButton>
-      <GoabModal
+      <GoabxButton onClick={() => setOpen(true)}>Open Basic Modal</GoabxButton>
+      <GoabxModal
         heading="Are you sure you want to continue?"
         open={open}
         onClose={() => setOpen(false)}
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabButton type="secondary" size="compact" onClick={() => setOpen(false)}>
+            <GoabxButton type="secondary" size="compact" onClick={() => setOpen(false)}>
               Back
-            </GoabButton>
-            <GoabButton type="primary" size="compact" onClick={() => setOpen(false)}>
+            </GoabxButton>
+            <GoabxButton type="primary" size="compact" onClick={() => setOpen(false)}>
               Continue
-            </GoabButton>
+            </GoabxButton>
           </GoabButtonGroup>
         }
       >
         <p>You cannot return to this page.</p>
-      </GoabModal>
+      </GoabxModal>
     </>
   );
 }

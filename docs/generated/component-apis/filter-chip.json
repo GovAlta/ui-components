@@ -1,7 +1,7 @@
 {
   "componentSlug": "filter-chip",
   "extractedFrom": "libs/web-components/src/components/filter-chip/FilterChip.svelte",
-  "extractedAt": "2026-01-05T23:10:27.440Z",
+  "extractedAt": "2026-02-04T08:10:50.404Z",
   "props": [
     {
       "name": "mt",
@@ -77,17 +77,6 @@
       "required": false,
       "default": "",
       "description": "Accessible label for the filter chip. Defaults to content with 'removable' suffix."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
     }
   ],
   "events": [

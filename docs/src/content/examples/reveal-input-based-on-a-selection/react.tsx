@@ -1,12 +1,12 @@
 import { useState } from "react";
 import {
-  GoabCheckbox,
-  GoabCheckboxList,
-  GoabFormItem,
-  GoabInput,
-  GoabRadioGroup,
-  GoabRadioItem,
-} from "@abgov/react-components";
+  GoabxCheckbox,
+  GoabxFormItem,
+  GoabxInput,
+  GoabxRadioGroup,
+  GoabxRadioItem,
+} from "@abgov/react-components/experimental";
+import { GoabCheckboxList } from "@abgov/react-components";
 
 export function RevealInputBasedOnASelection() {
   const [contactMethod, setContactMethod] = useState("");
@@ -14,83 +14,83 @@ export function RevealInputBasedOnASelection() {
 
   return (
     <>
-      <GoabFormItem
+      <GoabxFormItem
         label="How would you like to be contacted?"
         helpText="Select one option"
       >
-        <GoabRadioGroup
+        <GoabxRadioGroup
           name="contactMethod"
           value={contactMethod}
           onChange={(e) => setContactMethod(e.value)}
         >
-          <GoabRadioItem
+          <GoabxRadioItem
             value="email"
             label="Email"
             reveal={
-              <GoabFormItem label="Email address">
-                <GoabInput name="email" onChange={() => {}} value="" />
-              </GoabFormItem>
+              <GoabxFormItem label="Email address">
+                <GoabxInput name="email" onChange={() => {}} value="" />
+              </GoabxFormItem>
             }
           />
-          <GoabRadioItem
+          <GoabxRadioItem
             value="phone"
             label="Phone"
             reveal={
-              <GoabFormItem label="Phone number">
-                <GoabInput name="phoneNumber" onChange={() => {}} value="" />
-              </GoabFormItem>
+              <GoabxFormItem label="Phone number">
+                <GoabxInput name="phoneNumber" onChange={() => {}} value="" />
+              </GoabxFormItem>
             }
           />
-          <GoabRadioItem
+          <GoabxRadioItem
             value="text"
             label="Text message"
             reveal={
-              <GoabFormItem label="Mobile phone number">
-                <GoabInput name="mobilePhoneNumber" onChange={() => {}} value="" />
-              </GoabFormItem>
+              <GoabxFormItem label="Mobile phone number">
+                <GoabxInput name="mobilePhoneNumber" onChange={() => {}} value="" />
+              </GoabxFormItem>
             }
           />
-        </GoabRadioGroup>
-      </GoabFormItem>
+        </GoabxRadioGroup>
+      </GoabxFormItem>
 
-      <GoabFormItem label="How would you like to be contacted?" mt="xl">
+      <GoabxFormItem label="How would you like to be contacted?" mt="xl">
         <GoabCheckboxList
           name="contactMethods"
           value={checkboxSelection}
           onChange={(e) => setCheckboxSelection(e.values || [])}
         >
-          <GoabCheckbox
+          <GoabxCheckbox
             name="email"
             text="Email"
             value="email"
             reveal={
-              <GoabFormItem label="Email address">
-                <GoabInput name="email" onChange={() => {}} value="" />
-              </GoabFormItem>
+              <GoabxFormItem label="Email address">
+                <GoabxInput name="email" onChange={() => {}} value="" />
+              </GoabxFormItem>
             }
           />
-          <GoabCheckbox
+          <GoabxCheckbox
             name="phone"
             text="Phone"
             value="phone"
             reveal={
-              <GoabFormItem label="Phone number">
-                <GoabInput name="phoneNumber" onChange={() => {}} value="" />
-              </GoabFormItem>
+              <GoabxFormItem label="Phone number">
+                <GoabxInput name="phoneNumber" onChange={() => {}} value="" />
+              </GoabxFormItem>
             }
           />
-          <GoabCheckbox
+          <GoabxCheckbox
             name="text"
             text="Text message"
             value="text"
             reveal={
-              <GoabFormItem label="Mobile phone number">
-                <GoabInput name="mobilePhoneNumber" onChange={() => {}} value="" />
-              </GoabFormItem>
+              <GoabxFormItem label="Mobile phone number">
+                <GoabxInput name="mobilePhoneNumber" onChange={() => {}} value="" />
+              </GoabxFormItem>
             }
           />
         </GoabCheckboxList>
-      </GoabFormItem>
+      </GoabxFormItem>
     </>
   );
 }

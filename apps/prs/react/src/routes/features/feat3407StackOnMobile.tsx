@@ -1,0 +1,105 @@
+import { GoabBlock, GoabText, GoabDivider } from "@abgov/react-components";
+import { GoabxTabs, GoabxTab } from "@abgov/react-components/experimental";
+import { useEffect, type JSX } from "react";
+// ?url suffix tells Vite to resolve the path without injecting the CSS
+import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
+
+export function Feat3407StackOnMobileRoute(): JSX.Element {
+  // Dynamically load v2 design tokens only while this page is mounted,
+  // so they don't leak into other routes in the SPA.
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = v2TokensUrl;
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  return (
+    <div>
+      <GoabText tag="h1" mt="m">
+        #3407: orientation Prop
+      </GoabText>
+      <GoabText tag="p">
+        Testing orientation prop (controls mobile stacking behavior). orientation is
+        only available on GoabxTabs (experimental).
+      </GoabText>
+
+      <GoabDivider mt="l" mb="l" />
+
+      <GoabBlock direction="column" gap="xl">
+        <GoabBlock direction="column" gap="s">
+          <GoabText tag="h2">
+            Test 1: Experimental Tabs + orientation="auto" (default)
+          </GoabText>
+          <GoabText tag="p">
+            Experimental (v2) tabs that stack vertically on mobile (default behavior).
+            Resize browser to mobile width to verify tabs stack.
+          </GoabText>
+          <GoabxTabs>
+            <GoabxTab heading="Overview">
+              <GoabText tag="p">These tabs should stack vertically on mobile.</GoabText>
+            </GoabxTab>
+            <GoabxTab heading="Details">
+              <GoabText tag="p">Vertical stacking on narrow screens.</GoabText>
+            </GoabxTab>
+            <GoabxTab heading="Settings">
+              <GoabText tag="p">Compare with Test 2 below.</GoabText>
+            </GoabxTab>
+          </GoabxTabs>
+        </GoabBlock>
+
+        <GoabBlock direction="column" gap="s">
+          <GoabText tag="h2">Test 2: Experimental Tabs + orientation="horizontal"</GoabText>
+          <GoabText tag="p">
+            Experimental (v2) tabs that stay horizontal on mobile. Resize browser to
+            mobile width to verify tabs remain in a row.
+          </GoabText>
+          <GoabxTabs orientation="horizontal">
+            <GoabxTab heading="Overview">
+              <GoabText tag="p">These tabs should stay horizontal on mobile.</GoabText>
+            </GoabxTab>
+            <GoabxTab heading="Details">
+              <GoabText tag="p">No vertical stacking on narrow screens.</GoabText>
+            </GoabxTab>
+            <GoabxTab heading="Settings">
+              <GoabText tag="p">Useful when horizontal space is preferred.</GoabText>
+            </GoabxTab>
+          </GoabxTabs>
+        </GoabBlock>
+
+        <GoabBlock direction="column" gap="s">
+          <GoabText tag="h2">
+            Test 3: Segmented variant (always not stacked on mobile)
+          </GoabText>
+          <GoabText tag="p">
+            Segmented tabs stay horizontal on mobile by default (no prop needed). Resize
+            to mobile width to verify.
+          </GoabText>
+          <GoabxTabs variant="segmented">
+            <GoabxTab heading="Active">{""}</GoabxTab>
+            <GoabxTab heading="Completed">{""}</GoabxTab>
+            <GoabxTab heading="Archived">{""}</GoabxTab>
+          </GoabxTabs>
+        </GoabBlock>
+
+        <GoabBlock direction="column" gap="s">
+          <GoabText tag="h2">Test 4: Segmented + orientation="horizontal"</GoabText>
+          <GoabText tag="p">
+            Segmented tabs with orientation explicitly set to "horizontal". Should remain
+            horizontal on mobile (same as default segmented behavior).
+          </GoabText>
+          <GoabxTabs variant="segmented" orientation="horizontal">
+            <GoabxTab heading="All">{""}</GoabxTab>
+            <GoabxTab heading="Open">{""}</GoabxTab>
+            <GoabxTab heading="Closed">{""}</GoabxTab>
+          </GoabxTabs>
+        </GoabBlock>
+      </GoabBlock>
+    </div>
+  );
+}
+
+export default Feat3407StackOnMobileRoute;

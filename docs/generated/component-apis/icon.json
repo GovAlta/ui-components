@@ -1,7 +1,7 @@
 {
   "componentSlug": "icon",
   "extractedFrom": "libs/web-components/src/components/icon/Icon.svelte",
-  "extractedAt": "2026-01-05T23:10:27.448Z",
+  "extractedAt": "2026-02-04T08:10:50.410Z",
   "props": [
     {
       "name": "mt",

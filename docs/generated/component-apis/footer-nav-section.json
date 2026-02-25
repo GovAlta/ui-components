@@ -1,7 +1,7 @@
 {
   "componentSlug": "footer-nav-section",
   "extractedFrom": "libs/web-components/src/components/footer-nav-section/FooterNavSection.svelte",
-  "extractedAt": "2026-01-05T23:10:27.442Z",
+  "extractedAt": "2026-02-04T08:10:50.406Z",
   "props": [
     {
       "name": "heading",

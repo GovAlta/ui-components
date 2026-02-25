@@ -219,10 +219,12 @@ export type GoabTextAreaOnBlurDetail = {
 // Tabs
 
 export type GoabTabsVariant = "default" | "segmented";
+export type GoabTabsOrientation = "auto" | "horizontal";
 
 export interface GoabTabsProps {
   initialTab?: number;
   variant?: GoabTabsVariant;
+  orientation?: GoabTabsOrientation;
 }
 
 export type GoabTabsOnChangeDetail = {
@@ -1124,7 +1126,8 @@ export type GoabTextHeadingSize =
   | "heading-l"
   | "heading-m"
   | "heading-s"
-  | "heading-xs";
+  | "heading-xs"
+  | "heading-2xs";
 export type GoabTextBodySize = "body-l" | "body-m" | "body-s" | "body-xs";
 export type GoabTextSize = GoabTextHeadingSize | GoabTextBodySize;
 export type GoabTextColor = "primary" | "secondary";

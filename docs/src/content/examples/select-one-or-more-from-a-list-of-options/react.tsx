@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { GoabCheckbox, GoabCheckboxList, GoabFormItem } from "@abgov/react-components";
+import { GoabxCheckbox, GoabxFormItem } from "@abgov/react-components/experimental";
+import { GoabCheckboxList } from "@abgov/react-components";
 
 export function SelectOneOrMoreFromAListOfOptions() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
   return (
-    <GoabFormItem
+    <GoabxFormItem
       label="How would you like to be contacted?"
       helpText="Choose all that apply"
     >
@@ -14,10 +15,10 @@ export function SelectOneOrMoreFromAListOfOptions() {
         value={selectedOptions}
         onChange={(e) => setSelectedOptions(e.detail.value)}
       >
-        <GoabCheckbox name="email" text="Email" value="email" />
-        <GoabCheckbox name="phone" text="Phone" value="phone" />
-        <GoabCheckbox name="text" text="Text message" value="text" />
+        <GoabxCheckbox name="email" text="Email" value="email" />
+        <GoabxCheckbox name="phone" text="Phone" value="phone" />
+        <GoabxCheckbox name="text" text="Text message" value="text" />
       </GoabCheckboxList>
-    </GoabFormItem>
+    </GoabxFormItem>
   );
 }

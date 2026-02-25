@@ -762,7 +762,6 @@
 
   /* Autofill styling - override browser defaults */
   input:autofill {
-    background-color: var(--goa-text-input-color-bg) !important;
-    -webkit-text-fill-color: var(--goa-text-input-color-text) !important;
+    transition: all 0s 5000s;
   }
 </style>

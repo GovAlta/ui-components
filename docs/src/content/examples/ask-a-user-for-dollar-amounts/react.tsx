@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoabFormItem, GoabInput } from "@abgov/react-components";
+import { GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
 
 export function AskAUserForDollarAmounts() {
   const [tuitionAmount, setTuitionAmount] = useState("");
@@ -8,30 +8,30 @@ export function AskAUserForDollarAmounts() {
 
   return (
     <>
-      <GoabFormItem label="Tuition">
-        <GoabInput
+      <GoabxFormItem label="Tuition">
+        <GoabxInput
           onChange={(e) => setTuitionAmount(e.value)}
           value={tuitionAmount}
           name="tuitionAmount"
           leadingContent="$"
         />
-      </GoabFormItem>
-      <GoabFormItem label="Books/Supplies/Instruments" mt="l">
-        <GoabInput
+      </GoabxFormItem>
+      <GoabxFormItem label="Books/Supplies/Instruments" mt="l">
+        <GoabxInput
           onChange={(e) => setSuppliesAmount(e.value)}
           value={suppliesAmount}
           name="suppliesAmount"
           leadingContent="$"
         />
-      </GoabFormItem>
-      <GoabFormItem label="Other costs" mt="l">
-        <GoabInput
+      </GoabxFormItem>
+      <GoabxFormItem label="Other costs" mt="l">
+        <GoabxInput
           onChange={(e) => setOthersAmount(e.value)}
           value={othersAmount}
           name="othersAmount"
           leadingContent="$"
         />
-      </GoabFormItem>
+      </GoabxFormItem>
     </>
   );
 }

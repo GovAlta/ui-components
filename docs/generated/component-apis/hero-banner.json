@@ -1,7 +1,7 @@
 {
   "componentSlug": "hero-banner",
   "extractedFrom": "libs/web-components/src/components/hero-banner/HeroBanner.svelte",
-  "extractedAt": "2026-01-05T23:10:27.447Z",
+  "extractedAt": "2026-02-04T08:10:50.408Z",
   "props": [
     {
       "name": "heading",
@@ -43,14 +43,14 @@
       "type": "string",
       "required": false,
       "default": "",
-      "description": "Text color within the hero banner"
+      "description": "Text color within the hero banner."
     },
     {
       "name": "testId",
       "type": "string",
       "required": false,
       "default": "background",
-      "description": "Test ID for the component"
+      "description": "Sets a data-testid attribute for automated testing."
     }
   ],
   "events": [],

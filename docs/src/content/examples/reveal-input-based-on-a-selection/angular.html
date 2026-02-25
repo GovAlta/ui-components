@@ -1,51 +1,51 @@
-<goab-form-item [formGroup]="form" label="How would you like to be contacted?" helpText="Select one option">
-  <goab-radio-group name="contactMethod" formControlName="contactMethod">
-    <goab-radio-item label="Email" value="email" [reveal]="emailReveal">
+<goabx-form-item [formGroup]="form" label="How would you like to be contacted?" helpText="Select one option">
+  <goabx-radio-group name="contactMethod" formControlName="contactMethod">
+    <goabx-radio-item label="Email" value="email" [reveal]="emailReveal">
       <ng-template #emailReveal>
-        <goab-form-item label="Email address">
-          <goab-input name="email" formControlName="emailAddress"></goab-input>
-        </goab-form-item>
+        <goabx-form-item label="Email address">
+          <goabx-input name="email" formControlName="emailAddress"></goabx-input>
+        </goabx-form-item>
       </ng-template>
-    </goab-radio-item>
-    <goab-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
+    </goabx-radio-item>
+    <goabx-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
       <ng-template #phoneReveal>
-        <goab-form-item label="Phone number">
-          <goab-input name="phone" formControlName="phoneNumber"></goab-input>
-        </goab-form-item>
+        <goabx-form-item label="Phone number">
+          <goabx-input name="phone" formControlName="phoneNumber"></goabx-input>
+        </goabx-form-item>
       </ng-template>
-    </goab-radio-item>
-    <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+    </goabx-radio-item>
+    <goabx-radio-item value="text" label="Text message" [reveal]="textReveal">
       <ng-template #textReveal>
-        <goab-form-item label="Mobile phone number">
-          <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
-        </goab-form-item>
+        <goabx-form-item label="Mobile phone number">
+          <goabx-input name="mobile" formControlName="phoneNumber"></goabx-input>
+        </goabx-form-item>
       </ng-template>
-    </goab-radio-item>
-  </goab-radio-group>
-</goab-form-item>
+    </goabx-radio-item>
+  </goabx-radio-group>
+</goabx-form-item>
 
-<goab-form-item [formGroup]="form" label="How would you like to be contacted?" mt="xl">
+<goabx-form-item [formGroup]="form" label="How would you like to be contacted?" mt="xl">
   <goab-checkbox-list name="contactMethods" formControlName="contactMethods">
-    <goab-checkbox name="email" text="Email" value="email" [reveal]="checkEmailReveal">
+    <goabx-checkbox name="email" text="Email" value="email" [reveal]="checkEmailReveal">
       <ng-template #checkEmailReveal>
-        <goab-form-item label="Email address">
-          <goab-input name="email" formControlName="emailAddress"></goab-input>
-        </goab-form-item>
+        <goabx-form-item label="Email address">
+          <goabx-input name="email" formControlName="emailAddress"></goabx-input>
+        </goabx-form-item>
       </ng-template>
-    </goab-checkbox>
-    <goab-checkbox name="phone" text="Phone" value="phone" [reveal]="checkPhoneReveal">
+    </goabx-checkbox>
+    <goabx-checkbox name="phone" text="Phone" value="phone" [reveal]="checkPhoneReveal">
       <ng-template #checkPhoneReveal>
-        <goab-form-item label="Phone number">
-          <goab-input name="phone" formControlName="phoneNumber"></goab-input>
-        </goab-form-item>
+        <goabx-form-item label="Phone number">
+          <goabx-input name="phone" formControlName="phoneNumber"></goabx-input>
+        </goabx-form-item>
       </ng-template>
-    </goab-checkbox>
-    <goab-checkbox name="text" text="Text message" value="text" [reveal]="checkTextReveal">
+    </goabx-checkbox>
+    <goabx-checkbox name="text" text="Text message" value="text" [reveal]="checkTextReveal">
       <ng-template #checkTextReveal>
-        <goab-form-item label="Mobile phone number">
-          <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
-        </goab-form-item>
+        <goabx-form-item label="Mobile phone number">
+          <goabx-input name="mobile" formControlName="phoneNumber"></goabx-input>
+        </goabx-form-item>
       </ng-template>
-    </goab-checkbox>
+    </goabx-checkbox>
   </goab-checkbox-list>
-</goab-form-item>
+</goabx-form-item>

@@ -1,7 +1,7 @@
 {
   "componentSlug": "spinner",
   "extractedFrom": "libs/web-components/src/components/spinner/Spinner.svelte",
-  "extractedAt": "2026-01-05T23:10:27.460Z",
+  "extractedAt": "2026-02-04T08:10:50.416Z",
   "props": [
     {
       "name": "size",

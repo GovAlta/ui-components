@@ -122,15 +122,17 @@ export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNa
     }
   }, [isOpen]);
 
-  // Close menu when viewport shrinks (gives more room for content)
+  // Close menu on viewport changes to prevent state desync
   useEffect(() => {
     let previousWidth = window.innerWidth;
 
     const handleResize = () => {
       const width = window.innerWidth;
+      const crossedToDesktop = previousWidth < MOBILE_BREAKPOINT && width >= MOBILE_BREAKPOINT;
 
-      // Close menu when window shrinks
-      if (width < previousWidth) {
+      // Close menu when window shrinks (gives more room for content)
+      // OR when crossing from mobile to desktop (prevents floating menu bug)
+      if (width < previousWidth || crossedToDesktop) {
         setIsOpen(false);
       }
 

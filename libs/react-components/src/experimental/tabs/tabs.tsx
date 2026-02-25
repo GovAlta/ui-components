@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, type JSX } from "react";
-import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
+import { GoabTabsOnChangeDetail, GoabTabsOrientation, GoabTabsVariant } from "@abgov/ui-components-common";
 
 interface WCProps {
   initialtab?: number;
@@ -8,6 +8,7 @@ interface WCProps {
   testid?: string;
   variant?: GoabTabsVariant;
   version?: string;
+  orientation?: string;
 }
 
 declare module "react" {
@@ -24,8 +25,9 @@ export interface GoabxTabsProps {
   children?: React.ReactNode;
   testId?: string;
   variant?: GoabTabsVariant;
+  /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
+  orientation?: GoabTabsOrientation;
   onChange?: (detail: GoabTabsOnChangeDetail) => void;
-  version?: string;
 }
 
 export function GoabxTabs({
@@ -34,7 +36,7 @@ export function GoabxTabs({
   testId,
   onChange,
   variant,
-  version = "2",
+  orientation,
 }: GoabxTabsProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
@@ -58,7 +60,8 @@ export function GoabxTabs({
       initialtab={initialTab}
       testid={testId}
       variant={variant}
-      version={version}
+      version="2"
+      orientation={orientation}
     >
       {children}
     </goa-tabs>

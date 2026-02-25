@@ -1,15 +1,8 @@
 {
   "componentSlug": "pagination",
   "extractedFrom": "libs/web-components/src/components/pagination/Pagination.svelte",
-  "extractedAt": "2026-01-05T23:10:27.456Z",
+  "extractedAt": "2026-02-04T08:10:50.414Z",
   "props": [
-    {
-      "name": "version",
-      "type": "Version",
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
-    },
     {
       "name": "pagenumber",
       "type": "number",

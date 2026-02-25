@@ -1,20 +1,20 @@
 <div [formGroup]="changeForm" style="padding: 40px;">
-  <goab-form-item label="Size" requirement="optional" helpText="Choose the size to change the list below">
-    <goab-dropdown formControlName="parentDropdown" placeholder="Select a value" name="parent">
-      <goab-dropdown-item *ngFor="let parent of parents" [value]="parent" [label]="parent" />
-    </goab-dropdown>
-  </goab-form-item>
+  <goabx-form-item label="Size" requirement="optional" helpText="Choose the size to change the list below">
+    <goabx-dropdown formControlName="parentDropdown" placeholder="Select a value" name="parent">
+      <goabx-dropdown-item *ngFor="let parent of parents" [value]="parent" [label]="parent" />
+    </goabx-dropdown>
+  </goabx-form-item>
 
-  <goab-form-item label="Items" requirement="optional" mt="xl">
-    <goab-dropdown formControlName="childDropdown" placeholder="Select a value" name="children">
+  <goabx-form-item label="Items" requirement="optional" mt="xl">
+    <goabx-dropdown formControlName="childDropdown" placeholder="Select a value" name="children">
       <ng-container *ngIf="children.length > 0">
-        <goab-dropdown-item
+        <goabx-dropdown-item
           *ngFor="let child of children; trackBy: generateUniqueKey"
           [value]="child"
           [label]="child"
           [mountType]="'reset'"
         />
       </ng-container>
-    </goab-dropdown>
-  </goab-form-item>
+    </goabx-dropdown>
+  </goabx-form-item>
 </div>

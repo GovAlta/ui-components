@@ -1,5 +1,5 @@
 <div id="filter-container"></div>
-<goa-button mt="l" id="add-filter-btn">Add Random Filter</goa-button>
+<goa-button version="2" mt="l" id="add-filter-btn">Add Random Filter</goa-button>
 
 <script>
   const activeFilters = [];
@@ -10,6 +10,7 @@
     container.innerHTML = "";
     activeFilters.forEach((filter) => {
       const chip = document.createElement("goa-filter-chip");
+      chip.setAttribute("version", "2");
       chip.setAttribute("content", filter);
       chip.setAttribute("mr", "s");
       chip.setAttribute("mb", "s");

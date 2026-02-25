@@ -1,19 +1,19 @@
 {
   "componentSlug": "drawer",
   "extractedFrom": "libs/web-components/src/components/drawer/Drawer.svelte",
-  "extractedAt": "2026-01-05T23:10:27.435Z",
+  "extractedAt": "2026-02-04T08:10:50.401Z",
   "props": [
     {
       "name": "open",
       "type": "any",
-      "required": true,
+      "required": false,
       "default": "false",
       "description": "Whether the drawer is open."
     },
     {
       "name": "position",
       "type": "DrawerPosition",
-      "required": true,
+      "required": false,
       "default": null,
       "description": "The position of the drawer."
     },
@@ -42,8 +42,8 @@
       "name": "version",
       "type": "VersionType",
       "required": false,
-      "default": "2",
-      "description": "The design system version for styling purposes."
+      "default": "1",
+      "description": ""
     }
   ],
   "events": [

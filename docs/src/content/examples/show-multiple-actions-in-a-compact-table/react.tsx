@@ -1,9 +1,5 @@
-import {
-  GoabBadge,
-  GoabBlock,
-  GoabIconButton,
-  GoabTable,
-} from "@abgov/react-components";
+import { GoabxBadge, GoabxTable } from "@abgov/react-components/experimental";
+import { GoabBlock, GoabIconButton } from "@abgov/react-components";
 
 export function ShowMultipleActionsInACompactTable() {
   const rows = [
@@ -16,7 +12,7 @@ export function ShowMultipleActionsInACompactTable() {
   ];
 
   return (
-    <GoabTable width="100%">
+    <GoabxTable width="100%">
       <thead>
         <tr>
           <th>Status</th>
@@ -29,7 +25,7 @@ export function ShowMultipleActionsInACompactTable() {
         {rows.map((row) => (
           <tr key={row.id}>
             <td>
-              <GoabBadge
+              <GoabxBadge
                 type={row.status as "information" | "dark" | "success" | "important"}
                 content={row.statusText}
                 icon={false}
@@ -47,6 +43,6 @@ export function ShowMultipleActionsInACompactTable() {
           </tr>
         ))}
       </tbody>
-    </GoabTable>
+    </GoabxTable>
   );
 }

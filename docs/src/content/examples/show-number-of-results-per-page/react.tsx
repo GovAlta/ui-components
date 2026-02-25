@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import {
-  GoabBlock,
-  GoabDropdown,
-  GoabDropdownItem,
-  GoabPagination,
-  GoabSpacer,
-  GoabTable,
-} from "@abgov/react-components";
+  GoabxDropdown,
+  GoabxDropdownItem,
+  GoabxPagination,
+  GoabxTable,
+} from "@abgov/react-components/experimental";
+import { GoabBlock, GoabSpacer } from "@abgov/react-components";
 import { GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
 
 interface User {
@@ -56,7 +55,7 @@ export function ShowNumberOfResultsPerPage() {
 
   return (
     <>
-      <GoabTable width="100%" mb="xl">
+      <GoabxTable width="100%" mb="xl">
         <thead>
           <tr>
             <th>First name</th>
@@ -73,24 +72,24 @@ export function ShowNumberOfResultsPerPage() {
             </tr>
           ))}
         </tbody>
-      </GoabTable>
+      </GoabxTable>
 
       <GoabBlock alignment="center" width="100%">
         <GoabBlock mb="m" alignment="center">
           Show
-          <GoabDropdown
+          <GoabxDropdown
             onChange={handlePerPageCountChangeEvent}
             value={perPage.toString()}
             width="9ch"
           >
-            <GoabDropdownItem value="10" label="10" />
-            <GoabDropdownItem value="20" label="20" />
-            <GoabDropdownItem value="30" label="30" />
-          </GoabDropdown>
+            <GoabxDropdownItem value="10" label="10" />
+            <GoabxDropdownItem value="20" label="20" />
+            <GoabxDropdownItem value="30" label="30" />
+          </GoabxDropdown>
           <span style={{ width: "75px" }}>per page</span>
         </GoabBlock>
         <GoabSpacer hSpacing="fill" />
-        <GoabPagination
+        <GoabxPagination
           itemCount={users.length}
           perPageCount={perPage}
           pageNumber={page}

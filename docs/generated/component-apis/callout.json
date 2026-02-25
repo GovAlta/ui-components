@@ -1,7 +1,7 @@
 {
   "componentSlug": "callout",
   "extractedFrom": "libs/web-components/src/components/callout/Callout.svelte",
-  "extractedAt": "2026-01-05T23:10:27.425Z",
+  "extractedAt": "2026-02-04T08:10:50.395Z",
   "props": [
     {
       "name": "mt",
@@ -45,7 +45,7 @@
       ],
       "required": false,
       "default": "large",
-      "description": "The medium callout has reduced padding and type size to adjust for a compact area and smaller viewport width when a smaller size is required."
+      "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
     },
     {
       "name": "type",
@@ -115,18 +115,6 @@
       "required": false,
       "default": "outline",
       "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "typeLabel": "GoabCalloutVersionType",
-      "values": [
-        "1",
-        "2"
-      ],
-      "required": false,
-      "default": "1",
-      "description": "The design system version for styling purposes."
     }
   ],
   "events": [],

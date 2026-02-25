@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { GoabButton, GoabButtonGroup, GoabModal } from "@abgov/react-components";
+import { GoabxButton, GoabxModal } from "@abgov/react-components/experimental";
+import { GoabButtonGroup } from "@abgov/react-components";
 
 export function ConfirmBeforeNavigatingAway() {
   const [open, setOpen] = useState(false);
@@ -13,19 +14,19 @@ export function ConfirmBeforeNavigatingAway() {
 
   return (
     <>
-      <GoabButton onClick={() => setOpen(true)}>Open</GoabButton>
-      <GoabModal
+      <GoabxButton onClick={() => setOpen(true)}>Open</GoabxButton>
+      <GoabxModal
         heading="Are you sure you want to change route?"
         open={open}
         onClose={() => setOpen(false)}
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabButton type="secondary" size="compact" onClick={() => setOpen(false)}>
+            <GoabxButton type="secondary" size="compact" onClick={() => setOpen(false)}>
               Cancel
-            </GoabButton>
-            <GoabButton type="primary" size="compact" onClick={handleChangeRoute}>
+            </GoabxButton>
+            <GoabxButton type="primary" size="compact" onClick={handleChangeRoute}>
               Change route
-            </GoabButton>
+            </GoabxButton>
           </GoabButtonGroup>
         }
       />

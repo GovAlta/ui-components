@@ -1,16 +1,12 @@
 {
   "componentSlug": "menu-button",
   "extractedFrom": "libs/web-components/src/components/menu-button/MenuButton.svelte",
-  "extractedAt": "2026-01-05T23:10:27.451Z",
+  "extractedAt": "2026-02-04T08:10:50.411Z",
   "props": [
     {
       "name": "text",
-      "type": "string | undefined",
-      "values": [
-        "string",
-        "undefined"
-      ],
-      "required": false,
+      "type": "string",
+      "required": true,
       "default": null,
       "description": "The button label text. When provided, displays as a text button with a dropdown icon."
     },
@@ -42,25 +38,11 @@
       "description": "Icon displayed before the button text. When no text is provided, displays as an icon button."
     },
     {
-      "name": "leadingIconTheme",
-      "type": "IconTheme",
-      "required": false,
-      "default": "outline",
-      "description": "Theme for the leading icon."
-    },
-    {
       "name": "maxWidth",
       "type": "string",
       "required": true,
       "default": null,
       "description": "Maximum width of the dropdown menu."
-    },
-    {
-      "name": "size",
-      "type": "MenuActionSize",
-      "required": false,
-      "default": "normal",
-      "description": "Size of the button and menu items."
     }
   ],
   "events": [

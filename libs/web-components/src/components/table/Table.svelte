@@ -170,9 +170,7 @@
   }
 
   /* V2 Border and Border-Radius */
-  .v2 table {
-    border-collapse: separate;
-    border-spacing: 0;
+  .v2.goatable {
     border: var(--goa-table-container-border, 1px solid #e7e7e7);
     border-radius: var(--goa-table-border-radius-container, 16px);
     overflow: hidden;
