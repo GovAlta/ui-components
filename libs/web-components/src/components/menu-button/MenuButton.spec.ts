@@ -89,6 +89,47 @@ describe("GoAMenuButton", () => {
     });
   });
 
+  describe("icon-only mode", () => {
+    it("should render icon-button with default ariaLabel when no text is provided", async () => {
+      const { container } = render(GoAMenuButton);
+
+      const iconButton = container.querySelector("goa-icon-button");
+      expect(iconButton).toBeTruthy();
+      expect(iconButton?.getAttribute("arialabel")).toBe("Open menu");
+    });
+
+    it("should render icon-button with custom ariaLabel", async () => {
+      const { container } = render(GoAMenuButton, {
+        ariaLabel: "Actions for John Smith",
+      });
+
+      const iconButton = container.querySelector("goa-icon-button");
+      expect(iconButton).toBeTruthy();
+      expect(iconButton?.getAttribute("arialabel")).toBe("Actions for John Smith");
+    });
+  });
+
+  describe("button variants", () => {
+    ["normal", "destructive"].forEach((variant) => {
+      it(`should render ${variant} variant`, async () => {
+        const { container } = render(GoAMenuButton, {
+          text: "Menu Button",
+          variant: variant as "normal" | "destructive",
+        });
+
+        expect(container.innerHTML).toContain(`variant="${variant}"`);
+      });
+    });
+
+    it("should default to normal variant", async () => {
+      const { container } = render(GoAMenuButton, {
+        text: "Menu Button",
+      });
+
+      expect(container.innerHTML).toContain('variant="normal"');
+    });
+  });
+
   describe("leading icon", () => {
     it("should render without leadingIcon by default", async () => {
       const { container } = render(GoAMenuButton, {

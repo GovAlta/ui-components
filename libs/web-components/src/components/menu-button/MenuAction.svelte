@@ -12,14 +12,15 @@
 
 <script lang="ts" context="module">
   import { GoAIconType } from "../icon/Icon.svelte";
-  export type MenuAction = {
+  export type MenuActionProps = {
     action?: string;
+    size?: "normal" | "compact";
   };
 </script>
 
 <script lang="ts">
   import { onMount } from "svelte";
-  import { receive, relay, style, styles } from "../../common/utils";
+  import { relay, style, styles } from "../../common/utils";
 
   /** Display text for the menu action. */
   export let text: string = "";
@@ -29,10 +30,18 @@
   export let testid: string = "";
   /** Icon displayed before the text. */
   export let icon: GoAIconType | undefined = undefined;
+  // Set internally by MenuButton via menu-button:init event
+  let size: "normal" | "compact" = "normal";
 
   let _el: HTMLElement;
 
+  // Hooks
   onMount(() => {
+    _el.addEventListener("menu-button:init", (e: Event) => {
+      const data = (e as CustomEvent<MenuActionProps>).detail;
+      size = data.size || "normal";
+    });
+
     relay(_el, "bind", _el, { bubbles: true, timeout: 1 });
   });
 
@@ -46,10 +55,15 @@
   data-testid={testid}
   on:click={onClick}
   tabindex="0"
+  class:compact={size === "compact"}
   style={styles(style("width", "100%"))}
 >
   {#if icon}
-    <goa-icon data-testid={`icon-${icon}`} size="3" type={icon} />
+    <goa-icon
+      data-testid={`icon-${icon}`}
+      size={size === "normal" ? "4" : "3"}
+      type={icon}
+    />
   {/if}
   <div class="text">{text}</div>
 </button>
@@ -62,7 +76,7 @@
     font: var(--goa-button-text);
     min-height: var(--goa-button-height);
     letter-spacing: var(--goa-button-letter-spacing);
-    padding: 4px var(--goa-button-padding-lr);
+    padding: 4px var(--goa-button-padding-lr, var(--goa-space-s));
     gap: var(--goa-button-gap);
     align-items: center; /* for leading and trailing icon vertical alignment */
 
@@ -73,6 +87,13 @@
     outline: none;
   }
 
+  button.compact {
+    min-height: var(--goa-button-height-compact);
+    font: var(--goa-button-text-compact);
+    padding: 4px var(--goa-button-padding-lr-compact, var(--goa-space-xs));
+    gap: var(--goa-button-compact-gap);
+  }
+
   button:focus-visible,
   button:hover {
     background-color: var(--goa-button-tertiary-hover-color-bg);
@@ -80,7 +101,8 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
   }
 
   .text {

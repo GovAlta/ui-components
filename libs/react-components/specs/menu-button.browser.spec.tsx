@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { vi } from "vitest";
 import { GoabMenuAction, GoabMenuButton } from "../src";
+import { GoabxMenuButton, GoabxMenuAction } from "../src/experimental";
 
 describe("MenuButton", () => {
   it("should render and trigger action when clicked", async () => {
@@ -148,6 +149,101 @@ describe("MenuButton", () => {
     await vi.waitFor(async () => {
       const leadingIcon = result.getByTestId("icon-calendar");
       expect(leadingIcon).toBeDefined();
+    });
+  });
+});
+
+describe("GoabxMenuButton", () => {
+  it("should render icon-only without text and trigger action", async () => {
+    const onAction = vi.fn();
+
+    const Component = () => {
+      return (
+        <GoabxMenuButton leadingIcon="ellipsis-horizontal" testId="icon-menu" onAction={onAction}>
+          <GoabxMenuAction text="View" action="view" />
+          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabxMenuButton>
+      );
+    };
+
+    const result = render(<Component />);
+    const menuButton = result.getByTestId("icon-menu");
+
+    await menuButton.click();
+    await result.getByText("View").click();
+
+    await vi.waitFor(() => {
+      expect(onAction).toHaveBeenCalledWith({ action: "view" });
+    });
+  });
+
+  it("should render with size compact and text", async () => {
+    const onAction = vi.fn();
+
+    const Component = () => {
+      return (
+        <GoabxMenuButton text="Actions" size="compact" onAction={onAction}>
+          <GoabxMenuAction text="Edit" action="edit" icon="pencil" />
+          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabxMenuButton>
+      );
+    };
+
+    const result = render(<Component />);
+    const menuButton = result.getByText("Actions");
+
+    await menuButton.click();
+    await result.getByText("Edit").click();
+
+    await vi.waitFor(() => {
+      expect(onAction).toHaveBeenCalledWith({ action: "edit" });
+    });
+  });
+
+  it("should render with variant destructive and correct background color", async () => {
+    const Component = () => {
+      return (
+        <GoabxMenuButton text="Destructive" variant="destructive">
+          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabxMenuButton>
+      );
+    };
+
+    const result = render(<Component />);
+    const menuButton = result.getByText("Destructive");
+    expect(menuButton).toBeDefined();
+
+    await vi.waitFor(() => {
+      const button = menuButton.element()
+        .closest("goa-button")
+        ?.shadowRoot?.querySelector("button");
+
+      expect(button).toBeDefined();
+      const styles = window.getComputedStyle(button!);
+      expect(styles.backgroundColor).toBe("rgb(218, 41, 28)");
+    });
+  });
+
+  it("should render icon-only with size compact", async () => {
+    const onAction = vi.fn();
+
+    const Component = () => {
+      return (
+        <GoabxMenuButton leadingIcon="ellipsis-horizontal" size="compact" testId="icon-compact-menu" onAction={onAction}>
+          <GoabxMenuAction text="Assign" action="assign" />
+          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabxMenuButton>
+      );
+    };
+
+    const result = render(<Component />);
+    const menuButton = result.getByTestId("icon-compact-menu");
+
+    await menuButton.click();
+    await result.getByText("Assign").click();
+
+    await vi.waitFor(() => {
+      expect(onAction).toHaveBeenCalledWith({ action: "assign" });
     });
   });
 });

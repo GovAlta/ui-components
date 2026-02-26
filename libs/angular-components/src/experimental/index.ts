@@ -16,6 +16,8 @@ export * from "./footer-meta-section/footer-meta-section";
 export * from "./footer-nav-section/footer-nav-section";
 export * from "./input/input";
 export * from "./link/link";
+export * from "./menu-action/menu-action";
+export * from "./menu-button/menu-button";
 export * from "./modal/modal";
 export * from "./notification/notification";
 export * from "./pagination/pagination";

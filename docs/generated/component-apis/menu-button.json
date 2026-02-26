@@ -6,18 +6,14 @@
     {
       "name": "text",
       "type": "string",
-      "required": true,
-      "default": null,
+      "required": false,
+      "default": "",
       "description": "The button label text. When provided, displays as a text button with a dropdown icon."
     },
     {
       "name": "type",
       "type": "\"primary\" | \"secondary\" | \"tertiary\"",
-      "values": [
-        "primary",
-        "secondary",
-        "tertiary"
-      ],
+      "values": ["primary", "secondary", "tertiary"],
       "required": false,
       "default": "primary",
       "description": "The button style variant."
@@ -43,6 +39,29 @@
       "required": true,
       "default": null,
       "description": "Maximum width of the dropdown menu."
+    },
+    {
+      "name": "size",
+      "type": "\"normal\" | \"compact\"",
+      "values": ["normal", "compact"],
+      "required": false,
+      "default": "normal",
+      "description": "Sets the size of the button."
+    },
+    {
+      "name": "variant",
+      "type": "\"normal\" | \"destructive\"",
+      "values": ["normal", "destructive"],
+      "required": false,
+      "default": "normal",
+      "description": "Sets the color variant for semantic meaning."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "Open menu",
+      "description": "Sets the aria-label for the icon button in icon-only mode."
     }
   ],
   "events": [
@@ -50,17 +69,13 @@
       "name": "onAction",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_action",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [
