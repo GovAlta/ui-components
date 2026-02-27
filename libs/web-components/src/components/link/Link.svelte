@@ -60,6 +60,14 @@
     e.preventDefault();
     dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
   }
+
+  function handleIconClick() {
+    if (action) return; // Let click bubble to container action handler
+    const rootNode = _rootEl.getRootNode();
+    const host = rootNode instanceof ShadowRoot ? rootNode.host : _rootEl;
+    const anchor = host?.querySelector("a") as HTMLAnchorElement | null;
+    anchor?.click();
+  }
 </script>
 
 <div
@@ -75,9 +83,13 @@
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
 >
-  {#if leadingicon}<goa-icon data-testid="leading-icon" type={leadingicon} size={_iconSize} />{/if}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  {#if leadingicon}<goa-icon aria-hidden="true" data-testid="leading-icon" type={leadingicon} size={_iconSize} on:click={handleIconClick} />{/if}
   <slot />
-  {#if trailingicon}<goa-icon data-testid="trailing-icon" type={trailingicon} size={_iconSize} />{/if}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  {#if trailingicon}<goa-icon aria-hidden="true" data-testid="trailing-icon" type={trailingicon} size={_iconSize} on:click={handleIconClick} />{/if}
 </div>
 
 <style>

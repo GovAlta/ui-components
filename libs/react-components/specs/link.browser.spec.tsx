@@ -67,4 +67,48 @@ describe("Link", () => {
       expect(spy).toBeCalledWith({foo: "bar"});
     })
   })
+
+  it("should trigger the anchor when the leading icon is clicked", async () => {
+    const Component = () => {
+      return (
+        <GoabLink testId={"link"} leadingIcon={"home"}>
+          <a href="#test-anchor" data-testid="anchor">Link text</a>
+        </GoabLink>
+      );
+    };
+
+    const result = render(<Component />);
+    const leadingIcon = result.container.querySelector("[data-testid='leading-icon']");
+
+    const spy = vi.fn();
+    result.container.querySelector("[data-testid='anchor']")!.addEventListener("click", spy);
+
+    (leadingIcon as HTMLElement).click();
+
+    await vi.waitFor(() => {
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  it("should trigger the anchor when the trailing icon is clicked", async () => {
+    const Component = () => {
+      return (
+        <GoabLink testId={"link"} trailingIcon={"home"}>
+          <a href="#test-anchor" data-testid="anchor">Link text</a>
+        </GoabLink>
+      );
+    };
+
+    const result = render(<Component />);
+    const trailingIcon = result.container.querySelector("[data-testid='trailing-icon']");
+
+    const spy = vi.fn();
+    result.container.querySelector("[data-testid='anchor']")!.addEventListener("click", spy);
+
+    (trailingIcon as HTMLElement).click();
+
+    await vi.waitFor(() => {
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 })
