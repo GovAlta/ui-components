@@ -14,6 +14,8 @@ import { StatusPage } from "./routes/StatusPage";
 import { PublicFormApp } from "./routes/form/PublicFormApp";
 import { DashboardPage } from "./routes/workspace/DashboardPage";
 import { CasesPage } from "./routes/workspace/CasesPage";
+import { CaseDetailPage } from "./routes/workspace/CaseDetailPage";
+import { TimelinePage } from "./routes/workspace/TimelinePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -32,8 +34,9 @@ root.render(
         {/* Worker workspace routes */}
         <Route path="/workspace" element={<WorkspaceLayout />}>
           <Route index element={<DashboardPage />} />
-          <Route path="cases" element={<CasesPage />} />
-          <Route path="cases/:id" element={<CasesPage />} />
+          <Route path="applications" element={<CasesPage />} />
+          <Route path="application/:id" element={<CaseDetailPage />} />
+          <Route path="application/:id/timeline" element={<TimelinePage />} />
         </Route>
       </Routes>
     </Router>

@@ -20,6 +20,7 @@ export interface Submission {
   form_data: Record<string, unknown>;
   citizen_name: string | null;
   citizen_email: string | null;
+  citizen_phone: string | null;
   submitted_at: string;
 }
 

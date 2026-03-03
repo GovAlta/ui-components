@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
     GoabText,
     GoabIcon,
@@ -7,8 +7,6 @@ import {
     GoabDivider,
     GoabBlock,
     GoabTab,
-    GoabMenuButton,
-    GoabMenuAction,
     GoabIconButton,
 } from "@abgov/react-components";
 import {
@@ -19,9 +17,11 @@ import {
     GoabxLink,
     GoabxFilterChip,
     GoabxFormItem,
-    GoabxDrawer,
     GoabxCheckbox,
+    GoabxMenuButton,
+    GoabxMenuAction,
 } from "@abgov/react-components/experimental";
+import { PortalDrawer } from "../../workspace/components/PortalDrawer";
 import { GoabInputOnChangeDetail, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { supabase, CaseWithSubmission } from "../../lib/supabase";
 import { DataTable } from "../../workspace/components/DataTable";
@@ -38,7 +38,7 @@ import { TableColumn } from "../../workspace/types/TableColumn";
 import { sortData } from "../../workspace/utils/searchUtils";
 
 // Tab categories for filtering
-type TabCategory = 'all' | 'unassigned' | 'active' | 'needs_action' | 'complete';
+type TabCategory = 'all' | 'unassigned' | 'assigned_to_me' | 'waiting' | 'complete';
 
 // Status badge type mapping
 function getStatusBadgeType(status: CaseWithSubmission['status']): 'information' | 'success' | 'important' | 'emergency' {
@@ -87,14 +87,25 @@ function formatDate(dateStr: string): string {
 const sortFieldLabels: Record<string, string> = {
     status: 'Status',
     submittedAt: 'Submitted date',
-    name: 'Citizen name',
+    name: 'Applicant name',
     formType: 'Form type',
 };
 
 export function CasesPage() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const { isMobile } = useMenu();
     const isCompactToolbar = useCompactToolbar();
+
+    // Get initial tab from URL parameter
+    const getInitialTab = (): TabCategory => {
+        const tabParam = searchParams.get('tab');
+        const validTabs: TabCategory[] = ['all', 'unassigned', 'assigned_to_me', 'waiting', 'complete'];
+        if (tabParam && validTabs.includes(tabParam as TabCategory)) {
+            return tabParam as TabCategory;
+        }
+        return 'all';
+    };
 
     // Data state
     const [cases, setCases] = useState<CaseWithSubmission[]>([]);
@@ -102,7 +113,7 @@ export function CasesPage() {
     const [error, setError] = useState<string | null>(null);
 
     // UI state
-    const [activeTab, setActiveTab] = useState<TabCategory>('all');
+    const [activeTab, setActiveTab] = useState<TabCategory>(getInitialTab);
     const [searchTerm, setSearchTerm] = useState('');
     const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
 
@@ -113,8 +124,8 @@ export function CasesPage() {
     const getDefaultLayout = useCallback((tab: string): LayoutType => {
         switch (tab) {
             case 'all': return 'table';
-            case 'active': return 'card';
-            case 'needs_action': return 'card';
+            case 'waiting': return 'card';
+            case 'assigned_to_me': return 'card';
             case 'unassigned': return 'list';
             case 'complete': return 'list';
             default: return 'table';
@@ -184,10 +195,10 @@ export function CasesPage() {
     // Calculate tab counts
     const tabCounts = useMemo(() => {
         const unassigned = cases.filter(c => !c.assigned_worker).length;
-        const active = cases.filter(c => c.status === 'under_review').length;
-        const needsAction = cases.filter(c => c.status === 'submitted' || c.status === 'info_requested').length;
+        const assignedToMe = cases.filter(c => c.assigned_worker === 'Edna Mode').length;
+        const waiting = cases.filter(c => c.status === 'info_requested').length;
         const complete = cases.filter(c => c.status === 'approved' || c.status === 'denied').length;
-        return { unassigned, active, needsAction, complete };
+        return { unassigned, assignedToMe, waiting, complete };
     }, [cases]);
 
     // Extract filter options
@@ -242,11 +253,11 @@ export function CasesPage() {
             case 'unassigned':
                 filtered = filtered.filter(c => !c.assigned_worker);
                 break;
-            case 'active':
-                filtered = filtered.filter(c => c.status === 'under_review');
+            case 'waiting':
+                filtered = filtered.filter(c => c.status === 'info_requested');
                 break;
-            case 'needs_action':
-                filtered = filtered.filter(c => c.status === 'submitted' || c.status === 'info_requested');
+            case 'assigned_to_me':
+                filtered = filtered.filter(c => c.assigned_worker === 'Edna Mode');
                 break;
             case 'complete':
                 filtered = filtered.filter(c => c.status === 'approved' || c.status === 'denied');
@@ -306,8 +317,14 @@ export function CasesPage() {
 
     // Handle tab change
     const handleTabChange = (e: { tab: number }) => {
-        const tabMap: TabCategory[] = ['all', 'unassigned', 'needs_action', 'active', 'complete'];
+        const tabMap: TabCategory[] = ['all', 'unassigned', 'assigned_to_me', 'waiting', 'complete'];
         setActiveTab(tabMap[e.tab - 1] || 'all');
+    };
+
+    // Get tab index from category (1-based)
+    const getTabIndex = (tab: TabCategory): number => {
+        const tabMap: TabCategory[] = ['all', 'unassigned', 'assigned_to_me', 'waiting', 'complete'];
+        return tabMap.indexOf(tab) + 1;
     };
 
     // Sort actions
@@ -335,22 +352,15 @@ export function CasesPage() {
     // Table columns
     const columns: TableColumn<CaseWithSubmission>[] = useMemo(() => [
         {
-            key: 'referenceNumber',
-            header: 'Reference',
+            key: 'name',
+            header: 'Applicant',
             type: 'link',
-            sortable: false,
+            sortable: true,
             render: (c) => (
-                <Link to={`/workspace/case/${c.id}`} className="table-row-link">
-                    {c.submissions.reference_number}
+                <Link to={`/workspace/application/${c.id}`} className="table-row-link">
+                    {formatCitizenName(c.submissions)}
                 </Link>
             ),
-        },
-        {
-            key: 'name',
-            header: 'Citizen',
-            type: 'text',
-            sortable: true,
-            render: (c) => formatCitizenName(c.submissions),
         },
         {
             key: 'status',
@@ -358,8 +368,15 @@ export function CasesPage() {
             type: 'badge',
             sortable: true,
             render: (c) => (
-                <GoabxBadge type={getStatusBadgeType(c.status)} content={getStatusText(c.status)} emphasis="subtle" icon={true} />
+                <GoabxBadge type={getStatusBadgeType(c.status)} content={getStatusText(c.status)} emphasis="subtle" icon={false} />
             ),
+        },
+        {
+            key: 'referenceNumber',
+            header: 'Reference',
+            type: 'text',
+            sortable: false,
+            render: (c) => c.submissions.reference_number,
         },
         {
             key: 'submittedAt',
@@ -387,7 +404,7 @@ export function CasesPage() {
     const headerActions = useMemo(() => (
         <GoabButtonGroup gap="compact" alignment="start">
             <GoabxButton type="secondary" size="compact">More</GoabxButton>
-            <GoabxButton type="primary" size="compact" onClick={() => navigate('/')}>Add application</GoabxButton>
+            <GoabxButton type="primary" size="compact" onClick={() => navigate('/')}>New application</GoabxButton>
         </GoabButtonGroup>
     ), [navigate]);
 
@@ -395,11 +412,11 @@ export function CasesPage() {
     const headerToolbar = useMemo(() => (
         <div className="cases-toolbar-row">
             <div className="cases-toolbar-tabs">
-                <GoabxTabs initialTab={1} variant="segmented" onChange={handleTabChange}>
+                <GoabxTabs initialTab={getTabIndex(activeTab)} variant="segmented" onChange={handleTabChange}>
                     <GoabTab heading="All" />
                     <GoabTab heading={<>Unassigned {tabCounts.unassigned > 0 && <GoabxBadge type="information" content={String(tabCounts.unassigned)} emphasis="subtle" />}</>} />
-                    <GoabTab heading={<>Needs Action {tabCounts.needsAction > 0 && <GoabxBadge type="emergency" content={String(tabCounts.needsAction)} emphasis="subtle" />}</>} />
-                    <GoabTab heading={<>Active {tabCounts.active > 0 && <GoabxBadge type="important" content={String(tabCounts.active)} emphasis="subtle" />}</>} />
+                    <GoabTab heading={<>Assigned to me {tabCounts.assignedToMe > 0 && <GoabxBadge type="information" content={String(tabCounts.assignedToMe)} emphasis="subtle" />}</>} />
+                    <GoabTab heading={<>Waiting {tabCounts.waiting > 0 && <GoabxBadge type="important" content={String(tabCounts.waiting)} emphasis="subtle" />}</>} />
                     <GoabTab heading="Complete" />
                 </GoabxTabs>
                 <div className="cases-toolbar-tabs__spacer" aria-hidden="true" />
@@ -419,20 +436,21 @@ export function CasesPage() {
                     </GoabxFormItem>
                 </div>
                 <div className="cases-actions-group">
-                    <GoabMenuButton
+                    <GoabxMenuButton
                         type="tertiary"
+                        size="compact"
                         leadingIcon={isCompactToolbar ? "swap-vertical" : undefined}
                         text={isCompactToolbar ? "" : "Sort"}
                         onAction={(e: GoabMenuButtonOnActionDetail) => handleSortAction(e.action)}
                     >
-                        <GoabMenuAction text={`Status${getSortIndicator('status')}`} action="sort-status" />
-                        <GoabMenuAction text={`Submitted date${getSortIndicator('submittedAt')}`} action="sort-submittedAt" />
-                        <GoabMenuAction text={`Citizen name${getSortIndicator('name')}`} action="sort-name" />
-                        <GoabMenuAction text={`Form type${getSortIndicator('formType')}`} action="sort-formType" />
+                        <GoabxMenuAction text={`Status${getSortIndicator('status')}`} action="sort-status" />
+                        <GoabxMenuAction text={`Submitted date${getSortIndicator('submittedAt')}`} action="sort-submittedAt" />
+                        <GoabxMenuAction text={`Applicant name${getSortIndicator('name')}`} action="sort-name" />
+                        <GoabxMenuAction text={`Form type${getSortIndicator('formType')}`} action="sort-formType" />
                         {sortConfig.primary && (
-                            <GoabMenuAction text="Clear sort" action="clear-sort" />
+                            <GoabxMenuAction text="Clear sort" action="clear-sort" />
                         )}
-                    </GoabMenuButton>
+                    </GoabxMenuButton>
                     {isCompactToolbar ? (
                         <GoabIconButton
                             icon="filter-lines"
@@ -470,7 +488,7 @@ export function CasesPage() {
     ), [activeTab, searchTerm, sortConfig, appliedFilters, viewSettings, defaultLayout, isMobile, isCompactToolbar, tabCounts, handleSettingsChange]);
 
     // Set page header
-    usePageHeader('Cases', {
+    usePageHeader('Applications', {
         actions: headerActions,
         toolbar: headerToolbar,
     });
@@ -492,13 +510,13 @@ export function CasesPage() {
     // Empty state
     const emptyStateContent = cases.length === 0 ? (
         <EmptyState
-            heading="No cases yet"
-            subline="Submit a form to create your first case."
+            heading="No applications yet"
+            subline="Submit a form to create your first application."
             buttonText=""
         />
     ) : (
         <EmptyState
-            heading="No matching cases"
+            heading="No matching applications"
             subline="Try adjusting your search or filters."
             buttonText="Clear filters"
             onButtonClick={handleClearAll}
@@ -576,9 +594,9 @@ export function CasesPage() {
                             getRowKey={(c) => c.id}
                             renderCard={(c) => ({
                                 title: <GoabText size="heading-xs" mt="none" mb="none">{formatCitizenName(c.submissions)}</GoabText>,
-                                badge: <GoabxBadge type={getStatusBadgeType(c.status)} content={getStatusText(c.status)} emphasis="subtle" icon={true} />,
+                                badge: <GoabxBadge type={getStatusBadgeType(c.status)} content={getStatusText(c.status)} emphasis="subtle" icon={false} />,
                                 actions: (
-                                    <GoabxButton type="tertiary" size="compact" onClick={() => navigate(`/workspace/case/${c.id}`)}>
+                                    <GoabxButton type="tertiary" size="compact" onClick={() => navigate(`/workspace/application/${c.id}`)}>
                                         View
                                     </GoabxButton>
                                 ),
@@ -617,14 +635,14 @@ export function CasesPage() {
                             getRowKey={(c) => c.id}
                             renderCollapsed={(c) => ({
                                 title: <span className="expandable-list__name">{formatCitizenName(c.submissions)}</span>,
-                                badge: <GoabxBadge type={getStatusBadgeType(c.status)} content={getStatusText(c.status)} emphasis="subtle" icon={true} />,
+                                badge: <GoabxBadge type={getStatusBadgeType(c.status)} content={getStatusText(c.status)} emphasis="subtle" icon={false} />,
                                 secondaryInfo: (
                                     <span style={{ font: 'var(--goa-typography-body-xs)', color: 'var(--goa-color-text-secondary)' }}>
                                         {c.submissions.reference_number}
                                     </span>
                                 ),
                                 actions: (
-                                    <GoabxButton type="tertiary" size="compact" onClick={() => navigate(`/workspace/case/${c.id}`)}>
+                                    <GoabxButton type="tertiary" size="compact" onClick={() => navigate(`/workspace/application/${c.id}`)}>
                                         View
                                     </GoabxButton>
                                 ),
@@ -670,7 +688,7 @@ export function CasesPage() {
 
             {/* Filter Drawer */}
             <GoabxDrawer
-                heading="Filter cases"
+                heading="Filter applications"
                 position="right"
                 open={filterDrawerOpen}
                 maxSize="300px"

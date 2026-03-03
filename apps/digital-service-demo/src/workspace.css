@@ -19,6 +19,55 @@
   min-width: 0; /* Prevents flex item from overflowing */
   height: 100%;
   overflow: hidden;
+  transition: flex 0.25s ease-out;
+  /* Create stacking context so internal z-index values don't compete with side menu */
+  isolation: isolate;
+}
+
+/* ============================================================================
+   PUSH DRAWER - Match card container styling
+   ============================================================================
+   The push drawer should visually match the main content card:
+   - Same border-radius (24px top corners)
+   - Same margin from top/right edges (20px)
+   - Sits beside the content card as a sibling panel
+   ============================================================================ */
+
+.push-drawer-container {
+  /* Padding always present - only width animates */
+  padding: 20px 20px 20px 0;
+  width: 0;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: width 0.25s ease-out, min-width 0.25s ease-out;
+  /* Anchor content to the right so it reveals from the right edge */
+  display: flex;
+  justify-content: flex-end;
+  /* Remove drawer's internal border, radius, and left margin - clip wrapper handles styling */
+  --goa-push-drawer-border-radius: 0;
+  --goa-border-width-s: 0;
+  --goa-drawer-padding: 0;
+}
+
+/* Open state - expand to drawer width + padding */
+.push-drawer-container--open {
+  width: calc(352px + 20px); /* drawer width + right padding */
+  min-width: calc(352px + 20px);
+}
+
+/* Clip wrapper - provides border, border-radius, and clips background */
+.push-drawer-clip {
+  height: 100%;
+  width: 352px;
+  min-width: 352px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--goa-color-greyscale-150);
+  background: white;
+  /* Remove the header bottom border inside the drawer */
+  --goa-color-greyscale-200: transparent;
 }
 
 /* Table cell utilities */
@@ -142,15 +191,6 @@
     margin-left: 32px;
     margin-right: 32px;
   }
-}
-
-/* V2 table border styling (shadow DOM doesn't style slotted content) */
-.table-wrapper goa-table[version="2"] table {
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid var(--goa-color-greyscale-200, #e7e7e7);
-  border-radius: 16px;
-  overflow: hidden;
 }
 
 /* Filter section - contains search input and filter button */
@@ -1170,6 +1210,20 @@ goa-work-side-menu goa-tabs {
 goa-drawer .notification-drawer-content {
   --goa-drawer-content-padding-vertical: 0;
   --goa-drawer-content-padding-horizontal: 12px;
+}
+
+/* ============================================================================
+   DRAWER Z-INDEX FIX
+   ============================================================================
+   Ensure modal drawers (Comments, Filter, etc.) appear above the side menu.
+   The side menu uses z-index: 2 on desktop, but we need the drawer overlay
+   and content to sit above it.
+   ============================================================================ */
+
+goa-drawer {
+  /* Ensure the drawer's internal z-index values are high enough to sit above side menu */
+  position: relative;
+  z-index: 1000;
 }
 
 /* Remove border-bottom from notification header on mobile (drawer already has border) */

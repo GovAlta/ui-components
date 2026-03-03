@@ -178,7 +178,7 @@ interface WorkQueueCardProps {
 
 function WorkQueueCard({ caseItem, isUrgent }: WorkQueueCardProps) {
   return (
-    <Link to={`/workspace/case/${caseItem.id}`} className="dashboard-queue-card">
+    <Link to={`/workspace/application/${caseItem.id}`} className="dashboard-queue-card">
       <div className="dashboard-queue-card__main">
         <div className="dashboard-queue-card__header">
           <span className="dashboard-queue-card__name">{formatCitizenName(caseItem.submissions)}</span>
@@ -191,7 +191,7 @@ function WorkQueueCard({ caseItem, isUrgent }: WorkQueueCardProps) {
             type={getStatusBadgeType(caseItem.status)}
             content={getStatusText(caseItem.status)}
             emphasis="subtle"
-            icon={true}
+            icon={false}
           />
           <GoabxBadge
             type="information"
@@ -212,7 +212,7 @@ interface RecentItemProps {
 
 function RecentItem({ caseItem, relativeDate }: RecentItemProps) {
   return (
-    <Link to={`/workspace/case/${caseItem.id}`} className="dashboard-recent-item">
+    <Link to={`/workspace/application/${caseItem.id}`} className="dashboard-recent-item">
       <span className="dashboard-recent-item__date">{relativeDate}</span>
       <span className="dashboard-recent-item__name">{formatCitizenName(caseItem.submissions)}</span>
     </Link>
@@ -257,10 +257,10 @@ export function DashboardPage() {
     return { active, needsReview, pendingResponse, completed };
   }, [cases]);
 
-  // Get work queue (cases needing attention, oldest first)
+  // Get cases assigned to current worker (Edna Mode), oldest first
   const workQueue = useMemo(() => {
     return cases
-      .filter(c => c.status === 'submitted' || c.status === 'info_requested')
+      .filter(c => c.assigned_worker === 'Edna Mode')
       .sort((a, b) => new Date(a.submissions.submitted_at).getTime() - new Date(b.submissions.submitted_at).getTime())
       .slice(0, 5);
   }, [cases]);
@@ -283,9 +283,9 @@ export function DashboardPage() {
     } : undefined
   );
 
-  // Handle stat card clicks
-  const handleStatClick = (filter: string) => {
-    navigate(`/workspace/cases?filter=${filter}`);
+  // Handle stat card clicks - navigate to appropriate tab
+  const handleStatClick = (tab: string) => {
+    navigate(`/workspace/applications?tab=${tab}`);
   };
 
   return (
@@ -299,7 +299,7 @@ export function DashboardPage() {
             mb="none"
             color={isMobile ? "secondary" : undefined}
           >
-            {getGreeting()}, Worker
+            {getGreeting()}, Edna
           </GoabText>
           {!isMobile && (
             <span className="dashboard-greeting__subtitle">
@@ -320,7 +320,7 @@ export function DashboardPage() {
             label="Under Review"
             icon="eye"
             isLoading={isLoading}
-            onClick={() => handleStatClick("under_review")}
+            onClick={() => handleStatClick("assigned_to_me")}
           />
           <StatCard
             value={stats.needsReview}
@@ -328,7 +328,7 @@ export function DashboardPage() {
             icon="mail"
             highlight={stats.needsReview > 0}
             isLoading={isLoading}
-            onClick={() => handleStatClick("submitted")}
+            onClick={() => handleStatClick("unassigned")}
           />
           <StatCard
             value={stats.pendingResponse}
@@ -336,14 +336,14 @@ export function DashboardPage() {
             icon="time"
             highlight={stats.pendingResponse > 0}
             isLoading={isLoading}
-            onClick={() => handleStatClick("info_requested")}
+            onClick={() => handleStatClick("waiting")}
           />
           <StatCard
             value={stats.completed}
             label="Completed"
             icon="checkmark-circle"
             isLoading={isLoading}
-            onClick={() => handleStatClick("completed")}
+            onClick={() => handleStatClick("complete")}
           />
         </div>
       ) : (
@@ -353,7 +353,7 @@ export function DashboardPage() {
             label="Under Review"
             icon="eye"
             isLoading={isLoading}
-            onClick={() => handleStatClick("under_review")}
+            onClick={() => handleStatClick("assigned_to_me")}
           />
           <StatCard
             value={stats.needsReview}
@@ -361,7 +361,7 @@ export function DashboardPage() {
             icon="mail"
             highlight={stats.needsReview > 0}
             isLoading={isLoading}
-            onClick={() => handleStatClick("submitted")}
+            onClick={() => handleStatClick("unassigned")}
           />
           <StatCard
             value={stats.pendingResponse}
@@ -369,14 +369,14 @@ export function DashboardPage() {
             icon="time"
             highlight={stats.pendingResponse > 0}
             isLoading={isLoading}
-            onClick={() => handleStatClick("info_requested")}
+            onClick={() => handleStatClick("waiting")}
           />
           <StatCard
             value={stats.completed}
             label="Completed"
             icon="checkmark-circle"
             isLoading={isLoading}
-            onClick={() => handleStatClick("completed")}
+            onClick={() => handleStatClick("complete")}
           />
         </GoabGrid>
       )}
@@ -446,15 +446,15 @@ export function DashboardPage() {
 
       {/* Two-Column Main Content */}
       <div className="dashboard-main">
-        {/* Left Column - Work Queue */}
+        {/* Left Column - Assigned to me */}
         <div className="dashboard-main__left">
           <Widget
-            title="Work Queue"
+            title="Assigned to me"
             action={
               <GoabxButton
                 type="tertiary"
                 size="compact"
-                onClick={() => navigate("/workspace/cases")}
+                onClick={() => navigate("/workspace/applications?tab=assigned_to_me")}
               >
                 View all
               </GoabxButton>
@@ -466,7 +466,7 @@ export function DashboardPage() {
                   <GoabSkeleton type="text" lineCount={3} />
                 </div>
               ) : workQueue.length === 0 ? (
-                <p className="dashboard-empty">No cases need attention</p>
+                <p className="dashboard-empty">No applications need attention</p>
               ) : (
                 workQueue.map((caseItem) => (
                   <WorkQueueCard
