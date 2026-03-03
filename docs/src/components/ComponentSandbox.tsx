@@ -175,16 +175,16 @@ export function ComponentSandbox({
 
       <style>{`
         .component-sandbox {
-          border: 1px solid var(--goa-color-border, #ddd);
-          border-radius: var(--goa-radius-m, 8px);
+          border: 1px solid var(--goa-color-greyscale-200);
+          border-radius: var(--goa-border-radius-m);
           overflow: hidden;
-          background: white;
+          background: var(--goa-color-greyscale-white);
         }
 
         .sandbox-preview {
           padding: var(--goa-space-xl, 2rem);
           background: #fafafa;
-          border-bottom: 1px solid var(--goa-color-border, #ddd);
+          border-bottom: 1px solid var(--goa-color-greyscale-200);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -197,16 +197,16 @@ export function ComponentSandbox({
 
         .sandbox-controls {
           padding: var(--goa-space-m, 1rem);
-          border-bottom: 1px solid var(--goa-color-border, #ddd);
-          background: white;
+          border-bottom: 1px solid var(--goa-color-greyscale-200);
+          background: var(--goa-color-greyscale-white);
         }
 
         .controls-header {
           display: flex;
           align-items: center;
           gap: var(--goa-space-xs, 0.25rem);
-          font-weight: 600;
-          font-size: 0.875rem;
+          font-weight: var(--goa-font-weight-semi-bold);
+          font-size: var(--goa-font-size-2);
           margin-bottom: var(--goa-space-m, 1rem);
           color: var(--goa-color-text-secondary, #666);
         }
@@ -232,9 +232,9 @@ export function ComponentSandbox({
 
         .control-item input[type="text"] {
           padding: 0.5rem;
-          border: 1px solid var(--goa-color-border, #ddd);
-          border-radius: 4px;
-          font-size: 0.875rem;
+          border: 1px solid var(--goa-color-greyscale-200);
+          border-radius: var(--goa-border-radius-xs);
+          font-size: var(--goa-font-size-2);
         }
 
         .toggle-label {
@@ -252,7 +252,7 @@ export function ComponentSandbox({
           display: flex;
           align-items: center;
           background: #f5f5f5;
-          border-bottom: 1px solid var(--goa-color-border, #ddd);
+          border-bottom: 1px solid var(--goa-color-greyscale-200);
         }
 
         .code-tab {
@@ -261,18 +261,18 @@ export function ComponentSandbox({
           border: none;
           border-bottom: 2px solid transparent;
           cursor: pointer;
-          font-size: 0.875rem;
+          font-size: var(--goa-font-size-2);
           color: var(--goa-color-text-secondary, #666);
           transition: color 0.15s, border-color 0.15s;
         }
 
         .code-tab:hover {
-          color: var(--goa-color-brand, #0070c4);
+          color: var(--goa-color-brand-default);
         }
 
         .code-tab.active {
-          color: var(--goa-color-brand, #0070c4);
-          border-bottom-color: var(--goa-color-brand, #0070c4);
+          color: var(--goa-color-brand-default);
+          border-bottom-color: var(--goa-color-brand-default);
           font-weight: 500;
         }
 
@@ -293,7 +293,7 @@ export function ComponentSandbox({
         }
 
         .action-link:hover {
-          color: var(--goa-color-brand, #0070c4);
+          color: var(--goa-color-brand-default);
         }
 
         .code-panel {

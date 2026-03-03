@@ -53,184 +53,171 @@ const { title, description, page } = Astro.props;
     import '../scripts/mobile-bridge.ts';
   </script>
 
-  <style is:global>
-    /* GoA Design System CSS Custom Properties */
-    :root {
-      --goa-color-brand: #0070c4;
-      --goa-color-brand-dark: #004f8a;
-      --goa-color-text: #333;
-      --goa-color-text-secondary: #666;
-      --goa-color-border: #ddd;
-      --goa-color-background-light: #f5f5f5;
-      --goa-color-success: #2e7d32;
-      --goa-color-error: #d32f2f;
-      --goa-color-warning: #ed6c02;
-      --goa-color-info: #0288d1;
+    <style is:global>
+      * {
+        box-sizing: border-box;
+      }
 
-      /* Spacing tokens */
-      --goa-space-3xs: 0.125rem;
-      --goa-space-2xs: 0.25rem;
-      --goa-space-xs: 0.5rem;
-      --goa-space-s: 0.75rem;
-      --goa-space-m: 1rem;
-      --goa-space-l: 1.5rem;
-      --goa-space-xl: 2rem;
-      --goa-space-2xl: 3rem;
-      --goa-space-3xl: 4rem;
+      /* Reset margin but NOT padding - padding resets break component internals and slots */
+      *:where(:not([slot])) {
+        margin: 0;
+      }
 
-      /* Border radius */
-      --goa-radius-s: 4px;
-      --goa-radius-m: 8px;
-      --goa-radius-l: 12px;
+      html {
+        color-scheme: light;
+      }
 
-      /* Typography */
-      --goa-font-family: 'acumin-pro-semi-condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --goa-font-family-mono: 'SF Mono', Monaco, 'Courier New', monospace;
-    }
+      body {
+        font: var(--goa-typography-body-m);
+        color: var(--goa-color-text-default);
+        background: var(--goa-color-greyscale-white);
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      h1 {
+        font: var(--goa-typography-heading-xl);
+      }
 
-    /* Reset margin but NOT padding - padding resets break component internals and slots */
-    *:where(:not([slot])) {
-      margin: 0;
-    }
+      h2 {
+        font: var(--goa-typography-heading-l);
+      }
 
-    html {
-      color-scheme: light;
-    }
+      h3 {
+        font: var(--goa-typography-heading-m);
+      }
 
-    body {
-      font-family: var(--goa-font-family);
-      line-height: 1.6;
-      color: var(--goa-color-text);
-      background: #fff;
-    }
+      h4 {
+        font: var(--goa-typography-heading-s);
+      }
 
-    h1, h2, h3, h4, h5, h6 {
-      line-height: 1.3;
-      font-weight: 600;
-    }
+      h5 {
+        font: var(--goa-typography-heading-xs);
+      }
 
-    code {
-      background: var(--goa-color-background-light);
-      padding: 0.2em 0.4em;
-      border-radius: var(--goa-radius-s);
-      font-family: var(--goa-font-family-mono);
-      font-size: 0.9em;
-    }
+      h6 {
+        font: var(--goa-typography-heading-2xs);
+      }
 
-    pre code {
-      display: block;
-      padding: var(--goa-space-m);
-      overflow-x: auto;
-    }
+      code {
+        background: var(--goa-color-greyscale-white);
+        padding: var(--goa-space-2xs) var(--goa-space-xs);
+        border-radius: var(--goa-border-radius-s);
+        font-family: var(--goa-font-family-number);
+        font-size: var(--goa-font-size-2);
+      }
 
-    a {
-      color: var(--goa-color-brand);
-    }
+      pre code {
+        display: block;
+        padding: var(--goa-space-m);
+        overflow-x: auto;
+      }
 
-    a:hover {
-      color: var(--goa-color-brand-dark);
-    }
+      a {
+        color: var(--goa-color-interactive-default);
+      }
 
-    /* Focus styles for accessibility */
-    :focus-visible {
-      outline: 2px solid var(--goa-color-brand);
-      outline-offset: 2px;
-    }
+      a:hover {
+        color: var(--goa-color-interactive-hover);
+      }
 
-    /* ==========================================================================
+      /* Focus styles for accessibility */
+      :focus-visible {
+        outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+        outline-offset: var(--goa-space-3xs);
+      }
+
+      /* ==========================================================================
        Mobile Bridge: Base styles for responsive behavior
        Uses body attributes set by mobile-bridge.ts script
        ========================================================================== */
 
-    /* Mobile header - hidden by default, shown on mobile */
-    .mobile-header-container {
-      display: none;
-    }
+      /* Mobile header - hidden by default, shown on mobile */
+      .mobile-header-container {
+        display: none;
+      }
 
-    /* Mobile viewport (< 624px) - matches GoA component breakpoint */
-    body[data-mobile="true"] .mobile-header-container {
-      display: block;
-      position: sticky;
-      top: 0;
-      background: white;
-      z-index: 50;
-      padding: var(--goa-space-m) var(--goa-space-m); /* 16px vertical, 16px horizontal */
-      border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
-      /* Smooth transitions for hide/show and background */
-      transform: translateY(0);
-      transition: transform 0.25s ease-out, background 0.2s ease, border-bottom 0.2s ease;
-    }
+      /* Mobile viewport (< 624px) - matches GoA component breakpoint */
+      body[data-mobile="true"] .mobile-header-container {
+        display: block;
+        position: sticky;
+        top: 0;
+        background: var(--goa-color-greyscale-white);
+        z-index: 50;
+        padding: var(--goa-space-m) var(--goa-space-m); /* 16px vertical, 16px horizontal */
+        border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
+        /* Smooth transitions for hide/show and background */
+        transform: translateY(0);
+        transition:
+          transform 0.25s ease-out,
+          background 0.2s ease,
+          border-bottom 0.2s ease;
+      }
 
-    /* Header hidden on scroll down */
-    body[data-mobile="true"][data-header-hidden="true"] .mobile-header-container {
-      transform: translateY(-100%);
-    }
+      /* Header hidden on scroll down */
+      body[data-mobile="true"][data-header-hidden="true"] .mobile-header-container {
+        transform: translateY(-100%);
+      }
 
-    /* Homepage: transparent header at top blends with hero */
-    body[data-page="home"][data-mobile="true"][data-scrolled="false"] .mobile-header-container {
-      background: transparent;
-      border-bottom: none;
-    }
+      /* Homepage: transparent header at top blends with hero */
+      body[data-page="home"][data-mobile="true"][data-scrolled="false"]
+        .mobile-header-container {
+        background: transparent;
+        border-bottom: none;
+      }
 
-    /* Homepage: restore white header when scrolled */
-    body[data-page="home"][data-mobile="true"][data-scrolled="true"] .mobile-header-container {
-      background: white;
-      border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
-    }
+      /* Homepage: restore white header when scrolled */
+      body[data-page="home"][data-mobile="true"][data-scrolled="true"]
+        .mobile-header-container {
+        background: var(--goa-color-greyscale-white);
+        border-bottom: 1px solid var(--goa-color-greyscale-150, #e0e0e0);
+      }
 
-    /* Mobile header content layout */
-    .mobile-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+      /* Mobile header content layout */
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-    .mobile-header__left {
-      display: flex;
-      align-items: center;
-      gap: var(--goa-space-2xs);
-    }
+      .mobile-header__left {
+        display: flex;
+        align-items: center;
+        gap: var(--goa-space-2xs);
+      }
 
-    .mobile-header__right {
-      display: flex;
-      align-items: center;
-    }
+      .mobile-header__right {
+        display: flex;
+        align-items: center;
+      }
 
-    /* Pull icons slightly toward edges for better visual alignment */
-    .mobile-header__left > goa-icon-button:first-child {
-      margin-left: -8px;
-    }
+      /* Pull icons slightly toward edges for better visual alignment */
+      .mobile-header__left > goa-icon-button:first-child {
+        margin-left: -8px;
+      }
 
-    .mobile-header__right > goa-icon-button:last-child {
-      margin-right: -8px;
-    }
+      .mobile-header__right > goa-icon-button:last-child {
+        margin-right: -8px;
+      }
 
-    /* Brand link with logo and title */
-    .mobile-header__brand {
-      display: flex;
-      align-items: center;
-      gap: var(--goa-space-xs);
-      text-decoration: none;
-    }
+      /* Brand link with logo and title */
+      .mobile-header__brand {
+        display: flex;
+        align-items: center;
+        gap: var(--goa-space-xs);
+        text-decoration: none;
+      }
 
-    .mobile-header__brand:hover {
-      text-decoration: none;
-    }
+      .mobile-header__brand:hover {
+        text-decoration: none;
+      }
 
-    .mobile-header__logo {
-      flex-shrink: 0;
-    }
+      .mobile-header__logo {
+        flex-shrink: 0;
+      }
 
-    .mobile-header__title {
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--goa-color-text-default, #333);
-    }
+      .mobile-header__title {
+        font: var(--goa-typography-mobile-heading-xs);
+        color: var(--goa-color-text-default);
+      }
 
     /* Menu overlay backdrop when sidebar is open on mobile */
     body[data-mobile="true"][data-menu-open="true"]::before {

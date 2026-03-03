@@ -540,7 +540,7 @@ function CodeSnippetStyles() {
         border-radius: var(--goa-border-radius-m, 4px);
         overflow: hidden;
         background: var(--goa-color-greyscale-100, #f1f1f1);
-        font-size: 0.875rem;
+        font-size: var(--goa-font-size-2);
       }
 
       .framework-switcher .code-snippet {
@@ -568,19 +568,19 @@ function CodeSnippetStyles() {
 
       .code-block-title {
         font-size: 0.75rem;
-        font-weight: 600;
+        font-weight: var(--goa-font-weight-semi-bold);
         color: var(--goa-color-text-secondary, #666);
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
 
       .copy-button {
-        background: white;
+        background: var(--goa-color-greyscale-white);
         border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
         color: var(--goa-color-interactive-default, #0070c4);
         width: 28px;
         height: 28px;
-        border-radius: 4px;
+        border-radius: var(--goa-border-radius-xs);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -596,7 +596,7 @@ function CodeSnippetStyles() {
       .copy-button.copied {
         background: var(--goa-color-status-success, #2e7d32);
         border-color: var(--goa-color-status-success, #2e7d32);
-        color: white;
+        color: var(--goa-color-greyscale-white);
       }
 
       .copy-icon {

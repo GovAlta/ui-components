@@ -37,6 +37,6 @@
   font-size: var(--goa-font-size-2);
   background-color: var(--goa-color-greyscale-100);
   border: 1px solid var(--goa-color-greyscale-200);
-  border-radius: 6px;
+  border-radius: var(--goa-border-radius-s);
   padding: 0 6px;
 }

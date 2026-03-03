@@ -79,8 +79,8 @@ const { title, description } = Astro.props;
   }
 
   .content-card {
-    background: white;
-    border-radius: 24px;
+    background: var(--goa-color-greyscale-white);
+    border-radius: var(--goa-border-radius-3xl);
     border: 1px solid var(--goa-color-greyscale-150);
     padding: var(--goa-space-xl) var(--goa-space-2xl);
     min-height: calc(100vh - var(--goa-space-l) * 2);
@@ -97,7 +97,7 @@ const { title, description } = Astro.props;
   /* Mobile: 624px breakpoint matches GoA components */
   @media (max-width: 623px) {
     .layout-wrapper {
-      background: white;
+      background: var(--goa-color-greyscale-white);
     }
 
     .layout-container {
@@ -118,7 +118,7 @@ const { title, description } = Astro.props;
     }
 
     .content-card {
-      border-radius: 0;
+      border-radius: var(--goa-border-radius-none);
       border: none;
       padding: var(--goa-space-m);
       min-height: auto;

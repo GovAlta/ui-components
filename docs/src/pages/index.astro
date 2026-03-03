@@ -223,13 +223,13 @@ import CardLite from '../components/CardLite.astro';
     padding: var(--goa-space-2xs) var(--goa-space-xs);
     background: var(--goa-color-greyscale-100);
     border: 1px solid var(--goa-color-greyscale-200);
-    border-radius: 6px;
+    border-radius: var(--goa-border-radius-s);
     color: var(--goa-color-greyscale-800);
   }
 
   /* Main Content - White background */
   .ds-main-content {
-    background: white;
+    background: var(--goa-color-greyscale-white);
     padding: var(--goa-space-4xl) var(--goa-space-m);
   }
 
@@ -375,7 +375,7 @@ import CardLite from '../components/CardLite.astro';
       min-height: 515px;
       display: flex;
       flex-direction: column;
-      border-radius: 0;
+      border-radius: var(--goa-border-radius-none);
       padding: 0 var(--goa-space-xs);
       /* Extra top padding to account for header overlay (~73px) */
       padding-top: 73px;
