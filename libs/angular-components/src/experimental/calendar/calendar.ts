@@ -8,8 +8,8 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-
 import { GoabBaseComponent } from "../base.component";
+import { formatDate } from "../../date-utils";
 
 @Component({
   standalone: true,
@@ -20,8 +20,8 @@ import { GoabBaseComponent } from "../base.component";
       <goa-calendar
         [attr.name]="name"
         [value]="value"
-        [attr.min]="min"
-        [attr.max]="max"
+        [attr.min]="minString()"
+        [attr.max]="maxString()"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
@@ -47,6 +47,16 @@ export class GoabxCalendar extends GoabBaseComponent implements OnInit {
   @Output() onChange = new EventEmitter<GoabCalendarOnChangeDetail>();
 
   isReady = false;
+
+  minString(): string | undefined {
+    if (!this.min) return undefined;
+    return formatDate(this.min);
+  }
+
+  maxString(): string | undefined {
+    if (!this.max) return undefined;
+    return formatDate(this.max);
+  }
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

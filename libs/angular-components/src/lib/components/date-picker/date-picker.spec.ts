@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { addMonths } from "date-fns";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
+import { formatDate } from "../../../date-utils";
 
 @Component({
   standalone: true,
@@ -75,10 +76,10 @@ describe("GoABDatePicker", () => {
     expect(el).toBeTruthy();
 
     expect(el?.getAttribute("name")).toBe(component.name);
-    expect(el?.getAttribute("value")).toBe((component.value as Date)?.toISOString());
+    expect(el?.getAttribute("value")).toBe(formatDate(component.value as Date));
     expect(el?.getAttribute("error")).toBe(`${component.error}`);
-    expect(el?.getAttribute("min")).toBe(component.min?.toString());
-    expect(el?.getAttribute("max")).toBe(component.max?.toString());
+    expect(el?.getAttribute("min")).toBe(formatDate(component.min as Date));
+    expect(el?.getAttribute("max")).toBe(formatDate(component.max as Date));
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("ml")).toBe(component.ml);

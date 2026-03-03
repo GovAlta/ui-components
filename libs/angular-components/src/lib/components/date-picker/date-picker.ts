@@ -16,7 +16,7 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-
+import { formatDate } from "../../../date-utils";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
@@ -28,8 +28,8 @@ import { GoabControlValueAccessor } from "../base.component";
       #goaComponentRef
       [attr.name]="name"
       [attr.value]="formatValue(value)"
-      [attr.min]="min"
-      [attr.max]="max"
+      [attr.min]="formatValue(min)"
+      [attr.max]="formatValue(max)"
       [attr.error]="error"
       [attr.disabled]="disabled"
       [attr.relative]="relative"
@@ -72,7 +72,7 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
     if (!val) return "";
 
     if (val instanceof Date) {
-      return val.toISOString();
+      return formatDate(val);
     }
 
     return val;

@@ -81,7 +81,18 @@
 
   $: {
     _min = min ? new CalendarDate(min) : new CalendarDate().addYears(-5);
+    if (!_min.isValid()) {
+      console.error(
+        `goa-calendar ${name ?? testid}: Invalid min date provided: ${min}.`,
+      );
+    }
+
     _max = max ? new CalendarDate(max) : new CalendarDate().addYears(+5);
+    if (!_max.isValid()) {
+      console.error(
+        `goa-calendar ${name ?? testid}: Invalid max date provided: ${max}.`,
+      );
+    }
 
     // Update years list based on new min/max
     const yearStart = _min.year;

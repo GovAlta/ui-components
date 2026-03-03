@@ -3,6 +3,7 @@ import { GoabxCalendar } from "./calendar";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
 import { GoabCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-common";
+import { formatDate } from "../../date-utils";
 
 @Component({
   standalone: true,
@@ -68,8 +69,8 @@ describe("GoABCalendar", () => {
   it("should render properties", () => {
     const calendar = fixture.nativeElement.querySelector("goa-calendar");
     expect(calendar.getAttribute("name")).toBe(component.name);
-    expect(calendar.getAttribute("min")).toBe(component.min?.toString());
-    expect(calendar.getAttribute("max")).toBe(component.max?.toString());
+    expect(calendar.getAttribute("min")).toBe(formatDate(component.min as Date));
+    expect(calendar.getAttribute("max")).toBe(formatDate(component.max as Date));
     expect(calendar.getAttribute("testid")).toBe(component.testId);
     expect(calendar.getAttribute("mt")).toBe(component.mt);
     expect(calendar.getAttribute("mb")).toBe(component.mb);
