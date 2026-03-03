@@ -2,7 +2,7 @@ import { CaseWithSubmission } from '../../lib/supabase';
 import { WorkspaceCase } from '../types/Case';
 
 // Map Supabase case status to GoA badge type
-function getStatusBadgeType(status: CaseWithSubmission['status']): WorkspaceCase['status'] {
+export function getStatusBadgeType(status: CaseWithSubmission['status']): WorkspaceCase['status'] {
   switch (status) {
     case 'submitted':
       return 'information';
@@ -37,17 +37,32 @@ function getStatusText(status: CaseWithSubmission['status']): string {
   }
 }
 
-// Format citizen name from submission data
+// Format citizen name from submission data (with backward compatibility)
 function formatCitizenName(submission: CaseWithSubmission['submissions']): string {
+  const formData = submission.form_data as Record<string, unknown>;
+
+  // 1. Try new location: task3.about-you.fullName (Brief 07+)
+  const task3Data = formData?.task3 as Record<string, Record<string, unknown>> | undefined;
+  const aboutYou = task3Data?.['about-you'];
+  if (aboutYou?.fullName && typeof aboutYou.fullName === 'string') {
+    return aboutYou.fullName;
+  }
+
+  // 2. Fall back to old location: task1.consent.fullName (pre-Brief 07)
+  const task1Data = formData?.task1 as Record<string, Record<string, unknown>> | undefined;
+  const consent = task1Data?.['consent'];
+  if (consent?.fullName && typeof consent.fullName === 'string') {
+    return consent.fullName;
+  }
+
+  // 3. Fall back to citizen_name column
   if (submission.citizen_name) {
     return submission.citizen_name;
   }
 
-  // Try to extract from form data
-  const formData = submission.form_data as Record<string, unknown>;
-  const firstName = formData.firstName || formData.first_name || '';
-  const lastName = formData.lastName || formData.last_name || '';
-
+  // 4. Try legacy flat structure
+  const firstName = formData?.firstName || formData?.first_name || '';
+  const lastName = formData?.lastName || formData?.last_name || '';
   if (firstName || lastName) {
     return `${firstName} ${lastName}`.trim();
   }

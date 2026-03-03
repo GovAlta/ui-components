@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useLayoutEffect, useMemo, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 
 interface PageHeaderValuesType {
   title: string;
@@ -8,46 +8,30 @@ interface PageHeaderValuesType {
   hideTitleOnScroll?: boolean;
 }
 
-interface PageHeaderSettersType {
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  setActions: React.Dispatch<React.SetStateAction<ReactNode>>;
-  setTabs: React.Dispatch<React.SetStateAction<ReactNode>>;
-  setToolbar: React.Dispatch<React.SetStateAction<ReactNode>>;
-  setHideTitleOnScroll: React.Dispatch<React.SetStateAction<boolean>>;
+interface PageHeaderContextType {
+  values: PageHeaderValuesType;
+  setValues: (values: PageHeaderValuesType) => void;
 }
 
-const PageHeaderSettersContext = createContext<PageHeaderSettersType | undefined>(undefined);
-const PageHeaderValuesContext = createContext<PageHeaderValuesType | undefined>(undefined);
+const PageHeaderContext = createContext<PageHeaderContextType | undefined>(undefined);
 
 export function PageHeaderProvider({ children }: { children: ReactNode }) {
-  const [title, setTitle] = useState('');
-  const [actions, setActions] = useState<ReactNode>(undefined);
-  const [tabs, setTabs] = useState<ReactNode>(undefined);
-  const [toolbar, setToolbar] = useState<ReactNode>(undefined);
-  const [hideTitleOnScroll, setHideTitleOnScroll] = useState(false);
+  const [values, setValuesState] = useState<PageHeaderValuesType>({
+    title: '',
+    actions: undefined,
+    tabs: undefined,
+    toolbar: undefined,
+    hideTitleOnScroll: false,
+  });
 
-  const setters = useMemo(() => ({
-    setTitle,
-    setActions,
-    setTabs,
-    setToolbar,
-    setHideTitleOnScroll,
-  }), []);
-
-  const values = useMemo(() => ({
-    title,
-    actions,
-    tabs,
-    toolbar,
-    hideTitleOnScroll,
-  }), [title, actions, tabs, toolbar, hideTitleOnScroll]);
+  const setValues = useCallback((newValues: PageHeaderValuesType) => {
+    setValuesState(newValues);
+  }, []);
 
   return (
-    <PageHeaderSettersContext.Provider value={setters}>
-      <PageHeaderValuesContext.Provider value={values}>
-        {children}
-      </PageHeaderValuesContext.Provider>
-    </PageHeaderSettersContext.Provider>
+    <PageHeaderContext.Provider value={{ values, setValues }}>
+      {children}
+    </PageHeaderContext.Provider>
   );
 }
 
@@ -77,8 +61,8 @@ interface UsePageHeaderOptions {
  * ```
  */
 export function usePageHeader(title: string, options?: UsePageHeaderOptions | ReactNode) {
-  const setters = useContext(PageHeaderSettersContext);
-  if (!setters) {
+  const context = useContext(PageHeaderContext);
+  if (!context) {
     throw new Error('usePageHeader must be used within PageHeaderProvider');
   }
 
@@ -88,45 +72,38 @@ export function usePageHeader(title: string, options?: UsePageHeaderOptions | Re
   const toolbar = isOptionsObject ? (options as UsePageHeaderOptions).toolbar : undefined;
   const hideTitleOnScroll = isOptionsObject ? (options as UsePageHeaderOptions).hideTitleOnScroll ?? false : false;
 
-  useLayoutEffect(() => {
-    setters.setTitle(title);
-  }, [title, setters]);
+  // Update header when title changes (e.g., after data loads)
+  // Actions/tabs/toolbar should be memoized by calling component to avoid loops
+  useEffect(() => {
+    context.setValues({
+      title,
+      actions,
+      tabs,
+      toolbar,
+      hideTitleOnScroll,
+    });
 
-  useLayoutEffect(() => {
-    setters.setActions(actions);
-  }, [actions, setters]);
-
-  useLayoutEffect(() => {
-    setters.setTabs(tabs);
-  }, [tabs, setters]);
-
-  useLayoutEffect(() => {
-    setters.setToolbar(toolbar);
-  }, [toolbar, setters]);
-
-  useLayoutEffect(() => {
-    setters.setHideTitleOnScroll(hideTitleOnScroll);
-  }, [hideTitleOnScroll, setters]);
-
-  // Cleanup on unmount
-  useLayoutEffect(() => {
+    // Cleanup on unmount
     return () => {
-      setters.setTitle('');
-      setters.setActions(undefined);
-      setters.setTabs(undefined);
-      setters.setToolbar(undefined);
-      setters.setHideTitleOnScroll(false);
+      context.setValues({
+        title: '',
+        actions: undefined,
+        tabs: undefined,
+        toolbar: undefined,
+        hideTitleOnScroll: false,
+      });
     };
-  }, [setters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]); // Re-run when title changes
 }
 
 /**
  * Hook for components that display the header (internal use).
  */
 export function usePageHeaderContext() {
-  const values = useContext(PageHeaderValuesContext);
-  if (!values) {
+  const context = useContext(PageHeaderContext);
+  if (!context) {
     throw new Error('usePageHeaderContext must be used within PageHeaderProvider');
   }
-  return values;
+  return context.values;
 }

@@ -1,5 +1,11 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { GoabButtonGroup, GoabPushDrawer } from '@abgov/react-components';
 import {
+    GoabxButton,
+    GoabxFormItem,
+    GoabxRadioGroup,
+    GoabxRadioItem,
+    GoabxTextArea,
     GoabxWorkSideMenu,
     GoabxWorkSideMenuItem,
 } from '@abgov/react-components/experimental';
@@ -7,8 +13,10 @@ import { MenuProvider, useMenu } from '../workspace/contexts/MenuContext';
 import { PageHeaderProvider } from '../workspace/contexts/PageHeaderContext';
 import { PageFooterProvider } from '../workspace/contexts/PageFooterContext';
 import { ScrollStateProvider, useScrollState } from '../workspace/contexts/ScrollStateContext';
+import { PushDrawerProvider, usePushDrawer } from '../workspace/contexts/PushDrawerContext';
 import { PageHeader } from '../workspace/components/PageHeader';
 import { PageFooter } from '../workspace/components/PageFooter';
+import { CaseDetailSubMenu } from '../workspace/components/CaseDetailSubMenu';
 
 /**
  * Inner workspace layout that uses the menu context.
@@ -16,7 +24,64 @@ import { PageFooter } from '../workspace/components/PageFooter';
 function WorkspaceLayoutInner() {
     const { menuOpen, setMenuOpen, isMobile } = useMenu();
     const { scrollPosition } = useScrollState();
+    const { isOpen, drawerType, decision, setDecision, formValue, setFormValue, closeDrawer, handlers } = usePushDrawer();
     const location = useLocation();
+
+    // Get textarea config based on decision
+    const getTextAreaConfig = () => {
+        switch (decision) {
+            case 'approve':
+                return {
+                    label: 'Note (optional)',
+                    placeholder: 'Add a note about this approval...',
+                    required: false,
+                };
+            case 'deny':
+                return {
+                    label: 'Reason for denial',
+                    placeholder: 'Explain why this application is being denied...',
+                    required: true,
+                };
+            case 'requestInfo':
+                return {
+                    label: 'What information is needed?',
+                    placeholder: 'Describe what additional information the applicant needs to provide...',
+                    required: true,
+                };
+            default:
+                return null;
+        }
+    };
+
+    const textAreaConfig = getTextAreaConfig();
+
+    // Determine if submit should be disabled
+    const isSubmitDisabled = !decision || (textAreaConfig?.required && !formValue.trim());
+
+    // Get submit button text based on decision
+    const getSubmitText = () => {
+        switch (decision) {
+            case 'approve': return 'Approve';
+            case 'deny': return 'Deny';
+            case 'requestInfo': return 'Send request';
+            default: return 'Submit';
+        }
+    };
+
+    // Handle submit
+    const handleSubmit = () => {
+        if (decision) {
+            handlers.onSubmitReview?.(decision, formValue);
+        }
+    };
+
+    // Drawer heading
+    const drawerHeading = isOpen ? 'Review application' : '';
+
+    // Check if we're on an application detail page (or timeline subpage)
+    const caseDetailMatch = location.pathname.match(/^\/workspace\/application\/([^/]+)/);
+    const isCaseDetailPage = !!caseDetailMatch;
+    const caseId = caseDetailMatch?.[1];
 
     // Check if a path is active
     const isActive = (path: string) => {
@@ -31,12 +96,23 @@ function WorkspaceLayoutInner() {
         setMenuOpen(!menuOpen);
     };
 
-    return (
-        <div className="app-layout">
+    // Render contextual submenu for case detail, otherwise main menu
+    const renderSideMenu = () => {
+        if (isCaseDetailPage) {
+            return (
+                <CaseDetailSubMenu
+                    isOpen={menuOpen}
+                    onToggle={handleToggle}
+                    caseId={caseId}
+                />
+            );
+        }
+
+        return (
             <GoabxWorkSideMenu
                 heading="Digital Service"
                 url="/workspace"
-                userName="Worker"
+                userName="Edna Mode"
                 userSecondaryText="worker@example.gov.ab.ca"
                 open={menuOpen}
                 onToggle={handleToggle}
@@ -46,24 +122,30 @@ function WorkspaceLayoutInner() {
                             icon="grid"
                             label="Dashboard"
                             url="/workspace"
-                            current={isActive('/workspace') && !location.pathname.includes('/cases')}
+                            current={isActive('/workspace') && !location.pathname.includes('/application')}
                         />
                         <GoabxWorkSideMenuItem
                             icon="list"
-                            label="Cases"
-                            url="/workspace/cases"
-                            current={isActive('/workspace/cases')}
+                            label="Applications"
+                            url="/workspace/applications"
+                            current={isActive('/workspace/applications')}
                         />
                     </>
                 }
                 accountContent={
                     <GoabxWorkSideMenuItem
                         icon="log-out"
-                        label="Exit to citizen view"
+                        label="Logout"
                         url="/"
                     />
                 }
             />
+        );
+    };
+
+    return (
+        <div className="app-layout">
+            {renderSideMenu()}
             {/* Main content area - sibling to menu, not children */}
             <div className="main-content-area">
                 {!isMobile ? (
@@ -85,6 +167,63 @@ function WorkspaceLayoutInner() {
                     </div>
                 )}
             </div>
+            {/* Push drawer at layout level */}
+            <div className={`push-drawer-container ${isOpen ? 'push-drawer-container--open' : ''}`}>
+                <div className="push-drawer-clip">
+                    <GoabPushDrawer
+                        open={isOpen}
+                        heading={drawerHeading}
+                        onClose={closeDrawer}
+                        actions={
+                            <GoabButtonGroup alignment="start" gap="compact">
+                                <GoabxButton
+                                    type="primary"
+                                    size="compact"
+                                    onClick={handleSubmit}
+                                    disabled={isSubmitDisabled}
+                                >
+                                    {getSubmitText()}
+                                </GoabxButton>
+                                <GoabxButton type="tertiary" size="compact" onClick={closeDrawer}>
+                                    Cancel
+                                </GoabxButton>
+                            </GoabButtonGroup>
+                        }
+                    >
+                        <div>
+                            <GoabxFormItem label="Decision" type="radio-group" mb="l">
+                                <GoabxRadioGroup
+                                    name="decision"
+                                    value={decision || ''}
+                                    onChange={(detail) => {
+                                        setDecision(detail.value as 'approve' | 'deny' | 'requestInfo');
+                                        setFormValue('');
+                                    }}
+                                >
+                                    <GoabxRadioItem value="approve" label="Approve" />
+                                    <GoabxRadioItem value="deny" label="Deny" />
+                                    <GoabxRadioItem value="requestInfo" label="Request more information" />
+                                </GoabxRadioGroup>
+                            </GoabxFormItem>
+
+                            {textAreaConfig && (
+                                <GoabxFormItem
+                                    label={textAreaConfig.label}
+                                    requirement={textAreaConfig.required ? 'required' : undefined}
+                                >
+                                    <GoabxTextArea
+                                        name="reviewDetails"
+                                        value={formValue}
+                                        onChange={(e) => setFormValue(e.value)}
+                                        placeholder={textAreaConfig.placeholder}
+                                        rows={4}
+                                    />
+                                </GoabxFormItem>
+                            )}
+                        </div>
+                    </GoabPushDrawer>
+                </div>
+            </div>
         </div>
     );
 }
@@ -99,7 +238,9 @@ export function WorkspaceLayout() {
             <PageHeaderProvider>
                 <PageFooterProvider>
                     <ScrollStateProvider>
-                        <WorkspaceLayoutInner />
+                        <PushDrawerProvider>
+                            <WorkspaceLayoutInner />
+                        </PushDrawerProvider>
                     </ScrollStateProvider>
                 </PageFooterProvider>
             </PageHeaderProvider>
