@@ -46,6 +46,7 @@ import { Bug3337Component } from "../routes/bugs/3337/bug3337.component";
 import { Bug3279Component } from "../routes/bugs/3279/bug3279.component";
 import { Bug3384Component } from "../routes/bugs/3384/bug3384.component";
 import { Bug3450Component } from "../routes/bugs/3450/bug3450.component";
+import { Bug3497Component } from "../routes/bugs/3497/bug3497.component";
 import { Bug3498Component } from "../routes/bugs/3498/bug3498.component";
 
 import { Feat1328Component } from "../routes/features/feat1328/feat1328.component";
@@ -132,6 +133,7 @@ export const appRoutes: Route[] = [
   { path: "bugs/3279", component: Bug3279Component },
   { path: "bugs/3384", component: Bug3384Component },
   { path: "bugs/3450", component: Bug3450Component },
+  { path: "bugs/3497", component: Bug3497Component },
   { path: "bugs/3498", component: Bug3498Component },
 
   // Feature routes

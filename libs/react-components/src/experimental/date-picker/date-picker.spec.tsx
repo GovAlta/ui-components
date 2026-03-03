@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { addMonths } from "date-fns";
 import { describe, it, expect, vi } from "vitest";
+import { CalendarDate } from "@abgov/ui-components-common";
 
 import DatePicker from "./date-picker";
 
@@ -43,11 +44,11 @@ describe("DatePicker", () => {
     const el = baseElement.querySelector("goa-date-picker");
     expect(el).toBeTruthy();
     expect(el?.getAttribute("name")).toBe("foo");
-    expect(el?.getAttribute("value")).toBe(value.toISOString());
+    expect(el?.getAttribute("value")).toBe(new CalendarDate(value).toString());
     expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("disabled")).toBe("true");
-    expect(el?.getAttribute("min")).toBe(min.toISOString());
-    expect(el?.getAttribute("max")).toBe(max.toISOString());
+    expect(el?.getAttribute("min")).toBe(new CalendarDate(min).toString());
+    expect(el?.getAttribute("max")).toBe(new CalendarDate(max).toString());
     expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.getAttribute("type")).toBe("input");
   });

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabxDatePicker } from "./date-picker";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { Spacing } from "@abgov/ui-components-common";
+import { CalendarDate, Spacing } from "@abgov/ui-components-common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { addMonths } from "date-fns";
 import { By } from "@angular/platform-browser";
@@ -75,10 +75,16 @@ describe("GoABDatePicker", () => {
     expect(el).toBeTruthy();
 
     expect(el?.getAttribute("name")).toBe(component.name);
-    expect(el?.getAttribute("value")).toBe((component.value as Date)?.toISOString());
+    expect(el?.getAttribute("value")).toBe(
+      new CalendarDate(component.value as Date).toString(),
+    );
     expect(el?.getAttribute("error")).toBe(`${component.error}`);
-    expect(el?.getAttribute("min")).toBe(component.min?.toString());
-    expect(el?.getAttribute("max")).toBe(component.max?.toString());
+    expect(el?.getAttribute("min")).toBe(
+      new CalendarDate(component.min as Date).toString(),
+    );
+    expect(el?.getAttribute("max")).toBe(
+      new CalendarDate(component.max as Date).toString(),
+    );
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("ml")).toBe(component.ml);
@@ -93,7 +99,7 @@ describe("GoABDatePicker", () => {
     fireEvent(
       el,
       new CustomEvent("_change", {
-        detail: { name: component.name, value: new Date() },
+        detail: { name: component.name, value: new CalendarDate(new Date()).toString() },
       }),
     );
 
