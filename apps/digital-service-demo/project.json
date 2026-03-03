@@ -51,6 +51,13 @@
           "buildTarget": "digital-service-demo:build:production"
         }
       }
+    },
+    "seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx tsx apps/digital-service-demo/scripts/seed-demo-data.ts",
+        "cwd": "{workspaceRoot}"
+      }
     }
   },
   "tags": []
