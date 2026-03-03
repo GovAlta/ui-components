@@ -1,5 +1,5 @@
-import { GoabButton, GoabButtonGroup, GoabText } from "@abgov/react-components";
-import { GoabxCallout } from "@abgov/react-components/experimental";
+import { GoabButtonGroup, GoabText } from "@abgov/react-components";
+import { GoabxButton, GoabxCallout } from "@abgov/react-components/experimental";
 
 type IneligibleResultsPageProps = {
   onBackToStart: () => void;
@@ -17,10 +17,8 @@ export function IneligibleResultsPage({ onBackToStart, onBackToApplications }: I
         You are not eligible for this service
       </GoabText>
 
-      <GoabxCallout type="important" heading="You are not eligible for this service" emphasis="high">
-        You must be 18 years or older to apply for this service.
-        <br /><br />
-        You may now close this window.
+      <GoabxCallout type="important" heading="You must be 18 years or older to be eligible for this service" emphasis="high">
+        Based on the information you provided, you do not meet the eligibility requirements for this service at this time. You may close this window or contact us if you have questions.
       </GoabxCallout>
 
       <GoabText as="h2" size="heading-s" mt="xl" mb="s">
@@ -45,12 +43,12 @@ export function IneligibleResultsPage({ onBackToStart, onBackToApplications }: I
       </div>
 
       <GoabButtonGroup alignment="start">
-        <GoabButton type="secondary" onClick={onBackToApplications}>
+        <GoabxButton type="secondary" onClick={onBackToApplications}>
           Return to my applications
-        </GoabButton>
-        <GoabButton type="tertiary" onClick={onBackToStart}>
+        </GoabxButton>
+        <GoabxButton type="tertiary" onClick={onBackToStart}>
           Back to Alberta.ca
-        </GoabButton>
+        </GoabxButton>
       </GoabButtonGroup>
     </div>
   );

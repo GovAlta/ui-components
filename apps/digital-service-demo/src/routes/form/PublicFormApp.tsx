@@ -16,6 +16,7 @@ import {
 import { Task1Form } from "./task1";
 import { Task2Form } from "./task2";
 import { Task3Form } from "./task3";
+import { Task4Form } from "./task4";
 
 import "./styles.css";
 
@@ -52,7 +53,8 @@ export function PublicFormApp() {
   const task1Complete = currentApp?.task1Complete ?? false;
   const task2Complete = currentApp?.task2Complete ?? false;
   const task3Complete = currentApp?.task3Complete ?? false;
-  const allComplete = task1Complete && task2Complete && task3Complete;
+  const task4Complete = currentApp?.task4Complete ?? false;
+  const allComplete = task1Complete && task2Complete && task3Complete && task4Complete;
 
   // Scroll to top when view changes
   useEffect(() => {
@@ -82,7 +84,7 @@ export function PublicFormApp() {
     }
   };
 
-  const handleStartTask = (taskNumber: 1 | 2 | 3) => {
+  const handleStartTask = (taskNumber: 1 | 2 | 3 | 4) => {
     if (!currentApp) return;
 
     const updates: Partial<Application> = {};
@@ -100,13 +102,16 @@ export function PublicFormApp() {
       updates.task2State = emptyState;
     } else if (taskNumber === 3 && !currentApp.task3State) {
       updates.task3State = emptyState;
+    } else if (taskNumber === 4 && !currentApp.task4State) {
+      updates.task4State = emptyState;
     }
 
     // If task is complete, ensure history ends with "review"
     const isComplete =
       (taskNumber === 1 && currentApp.task1Complete) ||
       (taskNumber === 2 && currentApp.task2Complete) ||
-      (taskNumber === 3 && currentApp.task3Complete);
+      (taskNumber === 3 && currentApp.task3Complete) ||
+      (taskNumber === 4 && currentApp.task4Complete);
 
     if (isComplete) {
       const taskState =
@@ -114,18 +119,20 @@ export function PublicFormApp() {
           ? currentApp.task1State
           : taskNumber === 2
             ? currentApp.task2State
-            : currentApp.task3State;
+            : taskNumber === 3
+              ? currentApp.task3State
+              : currentApp.task4State;
 
-      if (taskState && taskState.history[taskState.history.length - 1] === "") {
-        const cleanedHistory = taskState.history.filter((h) => h !== "");
-        if (!cleanedHistory.includes("review")) {
-          cleanedHistory.push("review");
-        }
-        const cleanedState: PFState = { ...taskState, history: cleanedHistory };
+      // Ensure history ends with "" to signal re-entry to the form component
+      // The form's handleInit will detect this and clean it, setting wasReentry=true
+      if (taskState && taskState.history[taskState.history.length - 1] !== "") {
+        const historyWithMarker = [...taskState.history, ""];
+        const markedState: PFState = { ...taskState, history: historyWithMarker };
 
-        if (taskNumber === 1) updates.task1State = cleanedState;
-        else if (taskNumber === 2) updates.task2State = cleanedState;
-        else updates.task3State = cleanedState;
+        if (taskNumber === 1) updates.task1State = markedState;
+        else if (taskNumber === 2) updates.task2State = markedState;
+        else if (taskNumber === 3) updates.task3State = markedState;
+        else updates.task4State = markedState;
       }
     }
 
@@ -147,7 +154,7 @@ export function PublicFormApp() {
   };
 
   // Called when task "Submit section" is clicked - marks complete
-  const handleTaskComplete = (taskNumber: 1 | 2 | 3, state: PFState) => {
+  const handleTaskComplete = (taskNumber: 1 | 2 | 3 | 4, state: PFState) => {
     const updates: Partial<Application> = {};
     if (taskNumber === 1) {
       updates.task1State = state;
@@ -155,21 +162,25 @@ export function PublicFormApp() {
     } else if (taskNumber === 2) {
       updates.task2State = state;
       updates.task2Complete = true;
-    } else {
+    } else if (taskNumber === 3) {
       updates.task3State = state;
       updates.task3Complete = true;
+    } else {
+      updates.task4State = state;
+      updates.task4Complete = true;
     }
     updateApplication(updates);
     setView("task-list");
   };
 
   // Called when exiting task without completing - preserves progress only
-  const handleTaskExit = (taskNumber: 1 | 2 | 3, state: PFState | null) => {
+  const handleTaskExit = (taskNumber: 1 | 2 | 3 | 4, state: PFState | null) => {
     if (state) {
       const updates: Partial<Application> = {};
       if (taskNumber === 1) updates.task1State = state;
       else if (taskNumber === 2) updates.task2State = state;
-      else updates.task3State = state;
+      else if (taskNumber === 3) updates.task3State = state;
+      else updates.task4State = state;
       updateApplication(updates);
     }
     setView("task-list");
@@ -187,13 +198,21 @@ export function PublicFormApp() {
       task1: currentApp.task1State?.data || {},
       task2: currentApp.task2State?.data || {},
       task3: currentApp.task3State?.data || {},
+      task4: currentApp.task4State?.data || {},
     };
 
-    // Extract citizen info from task1 (consent page has fullName, contact preference has email)
-    const consentData = currentApp.task1State?.data?.consent as Record<string, unknown> | undefined;
+    // Extract citizen info:
+    // - Name and phone from task3 "about-you" page (collected early for workspace case header)
+    // - Email from task1 "contact-preference" page
+    const aboutYouData = currentApp.task3State?.data?.['about-you'] as Record<string, unknown> | undefined;
     const contactData = currentApp.task1State?.data?.['contact-preference'] as Record<string, unknown> | undefined;
-    const citizenName = (consentData?.fullName as string) || null;
+    const citizenName = (aboutYouData?.fullName as string) || null;
+    const citizenPhone = (aboutYouData?.phoneNumber as string) || null;
     const citizenEmail = (contactData?.emailAddress as string) || null;
+
+    // Debug: log extracted citizen info
+    console.log('[Submit] Citizen info:', { citizenName, citizenEmail, citizenPhone });
+    console.log('[Submit] Form data:', formData);
 
     try {
       const { data, error } = await supabase
@@ -202,6 +221,7 @@ export function PublicFormApp() {
           form_type: "service-application",
           citizen_name: citizenName,
           citizen_email: citizenEmail,
+          citizen_phone: citizenPhone,
           form_data: formData,
         })
         .select("reference_number")
@@ -239,8 +259,18 @@ export function PublicFormApp() {
 
   return (
     <div className="form-app">
-      {/* TODO: Add Sign in link when V2 header lands (PR #3184) */}
-      <GoabAppHeader heading="Apply for a Service" url="/" />
+      <GoabAppHeader heading="Apply for a Service" url="/" version="2">
+        <a
+          slot="utilities"
+          href="#my-applications"
+          onClick={(e) => {
+            e.preventDefault();
+            setView("my-applications");
+          }}
+        >
+          My applications
+        </a>
+      </GoabAppHeader>
 
       <main className="main-content">
         {view === "start" && (
@@ -274,6 +304,7 @@ export function PublicFormApp() {
         {view === "task-1" && currentApp && (
           <Task1Form
             initialState={currentApp.task1State}
+            readOnly={currentApp.status === "submitted"}
             onComplete={(state) => handleTaskComplete(1, state)}
             onExit={(state) => handleTaskExit(1, state)}
           />
@@ -282,6 +313,7 @@ export function PublicFormApp() {
         {view === "task-2" && currentApp && (
           <Task2Form
             initialState={currentApp.task2State}
+            readOnly={currentApp.status === "submitted"}
             onComplete={(state) => handleTaskComplete(2, state)}
             onIneligible={() => setView("ineligible")}
             onExit={(state) => handleTaskExit(2, state)}
@@ -291,14 +323,25 @@ export function PublicFormApp() {
         {view === "task-3" && currentApp && (
           <Task3Form
             initialState={currentApp.task3State}
+            readOnly={currentApp.status === "submitted"}
             onComplete={(state) => handleTaskComplete(3, state)}
             onExit={(state) => handleTaskExit(3, state)}
+          />
+        )}
+
+        {view === "task-4" && currentApp && (
+          <Task4Form
+            initialState={currentApp.task4State}
+            readOnly={currentApp.status === "submitted"}
+            onComplete={(state) => handleTaskComplete(4, state)}
+            onExit={(state) => handleTaskExit(4, state)}
           />
         )}
 
         {view === "results" && (
           <ResultsPage
             referenceId={currentApp?.referenceId}
+            citizenEmail={(currentApp?.task1State?.data?.['contact-preference'] as Record<string, unknown>)?.emailAddress as string | undefined}
             onBackToDashboard={() => setView("my-applications")}
             onBackToStart={handleBackToHome}
           />
@@ -318,6 +361,7 @@ export function PublicFormApp() {
           <a href="#">Accessibility</a>
           <a href="#">Privacy</a>
           <a href="#">Terms and conditions</a>
+          <a href="/workspace">Worker login</a>
         </GoabxAppFooterMetaSection>
       </GoabxAppFooter>
     </div>

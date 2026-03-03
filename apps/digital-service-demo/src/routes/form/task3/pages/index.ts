@@ -1,3 +1,4 @@
+export { AboutYou } from "./AboutYou";
 export { ApplyingFor } from "./ApplyingFor";
 export { Relationship } from "./Relationship";
 export { Employment } from "./Employment";

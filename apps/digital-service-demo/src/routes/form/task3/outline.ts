@@ -6,16 +6,34 @@ import {
 } from "@abgov/ui-components-common";
 
 /**
- * Task 3: Your Situation
+ * Task 3: Your Application
  *
  * Pages:
- * 1. applying-for - Radio: "myself" or "someone else" (BRANCHING)
- * 2. relationship - CONDITIONAL: only shows if "someone else" selected
- * 3. employment - Dropdown: employment status
- * 4. when-needed - Date picker: future dates
- * 5. review - Summary page
+ * 1. about-you - Name + phone (for workspace case header)
+ * 2. applying-for - Radio: "myself" or "someone else" (BRANCHING)
+ * 3. relationship - CONDITIONAL: only shows if "someone else" selected
+ * 4. employment - Dropdown: employment status
+ * 5. when-needed - Date picker: future dates
+ * 6. review - Summary page
  */
 export const task3Outline: PFOutline = {
+  "about-you": {
+    subform: false,
+    props: {
+      "section-title": "Your situation",
+      heading: "About you",
+    },
+    fields: {
+      fullName: { label: "Full name", hideInSummary: "never" },
+      phoneNumber: { label: "Phone number", hideInSummary: "never" },
+    },
+    validators: {
+      fullName: [RequiredValidator("Enter your full name")],
+      phoneNumber: [RequiredValidator("Enter your phone number")],
+    },
+    next: "applying-for",
+  },
+
   "applying-for": {
     subform: false,
     props: {

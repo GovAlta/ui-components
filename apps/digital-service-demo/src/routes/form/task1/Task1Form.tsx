@@ -16,12 +16,12 @@ import {
   Address,
   ContactPreference,
   Consent,
-  UploadId,
   Dependants,
 } from "./pages";
 
 type Task1FormProps = {
   initialState: PFState | null;
+  readOnly?: boolean;
   onComplete: (state: PFState) => void;
   onExit: (state: PFState | null) => void;
 };
@@ -29,17 +29,16 @@ type Task1FormProps = {
 /**
  * Task 1: Personal Information
  *
- * Full GoabPublicForm implementation with 8 pages:
+ * Full GoabPublicForm implementation with 7 pages:
  * 1. Urgent need (radio)
  * 2. Marital status (dropdown)
  * 3. Address (multi-field)
  * 4. Contact preference (checkbox + conditional)
  * 5. Consent (checkboxes + textarea)
- * 6. Upload ID (file upload)
- * 7. Dependants (repeater/subform)
- * 8. Review (GoabPublicFormSummary)
+ * 6. Dependants (repeater/subform)
+ * 7. Review (GoabPublicFormSummary)
  */
-export function Task1Form({ initialState, onComplete, onExit }: Task1FormProps) {
+export function Task1Form({ initialState, readOnly = false, onComplete, onExit }: Task1FormProps) {
   const [state, setState] = useState<PFState | undefined>();
   const formContainerRef = useRef<HTMLDivElement>(null);
 
@@ -47,9 +46,8 @@ export function Task1Form({ initialState, onComplete, onExit }: Task1FormProps) 
   const handleInit = (initFn: InitFunction) => {
     let stateToUse = initialState || { data: {}, dataBuffer: {}, history: [] };
 
-    // If re-entering a completed task, clean up history so it ends with "review"
-    // (completed tasks have "" at end of history which would otherwise reset to first page)
-    if (stateToUse.history.length > 0 && stateToUse.history[stateToUse.history.length - 1] === "") {
+    // In readOnly mode or re-entering a completed task, start on review page
+    if (readOnly || (stateToUse.history.length > 0 && stateToUse.history[stateToUse.history.length - 1] === "")) {
       const cleanedHistory = stateToUse.history.filter((h) => h !== "");
       if (!cleanedHistory.includes("review")) {
         cleanedHistory.push("review");
@@ -92,6 +90,11 @@ export function Task1Form({ initialState, onComplete, onExit }: Task1FormProps) 
     // Empty string in history signals form completion
     const lastPage = newState.history[newState.history.length - 1];
     if (lastPage === "") {
+      // In readOnly mode, just go back to task list
+      if (readOnly) {
+        onExit(null);
+        return;
+      }
       onComplete(newState);
     }
   };
@@ -119,19 +122,21 @@ export function Task1Form({ initialState, onComplete, onExit }: Task1FormProps) 
   return (
     <div className="form-set" ref={formContainerRef}>
       {/* Back link above the form - only on first page */}
-      <div
-        style={{
-          marginBottom: isFirstPage ? "var(--goa-space-2xl)" : 0,
-          opacity: isFirstPage ? 1 : 0,
-          height: isFirstPage ? "auto" : 0,
-          overflow: "hidden",
-          transition: "opacity 150ms ease-in-out",
-        }}
-      >
-        <BackLink onClick={() => onExit(state || null)}>
-          Back to all tasks
-        </BackLink>
-      </div>
+      {!readOnly && (
+        <div
+          style={{
+            marginBottom: isFirstPage ? "var(--goa-space-2xl)" : 0,
+            opacity: isFirstPage ? 1 : 0,
+            height: isFirstPage ? "auto" : 0,
+            overflow: "hidden",
+            transition: "opacity 150ms ease-in-out",
+          }}
+        >
+          <BackLink onClick={() => onExit(state || null)}>
+            Back to all tasks
+          </BackLink>
+        </div>
+      )}
 
       <GoabPublicForm
         onInit={handleInit}
@@ -158,25 +163,30 @@ export function Task1Form({ initialState, onComplete, onExit }: Task1FormProps) 
           <Consent />
         </GoabPublicFormPage>
 
-        <GoabPublicFormPage id="upload-id">
-          <UploadId />
-        </GoabPublicFormPage>
-
         <GoabPublicFormPage id="dependants" data-pf-list="">
           <Dependants dependants={getDependants()} />
         </GoabPublicFormPage>
 
-        <GoabPublicFormPage id="review" buttonText="Save and continue" backVisibility="hidden" errorSummaryPosition="none">
-          <GoabPublicFormSummary heading="Personal information" />
-          <div style={{ marginTop: "var(--goa-space-2xl)" }}>
-            <GoabxFormItem label="">
-              <GoabxCheckbox
-                name="confirmCorrect"
-                data-pf-item=""
-                text="I confirm that the information above is correct"
-              />
-            </GoabxFormItem>
-          </div>
+        <GoabPublicFormPage
+          id="review"
+          buttonText={readOnly ? "Back to all tasks" : "Save and continue"}
+          buttonType={readOnly ? "secondary" : "primary"}
+          buttonLeadingIcon={readOnly ? "arrow-back" : undefined}
+          errorSummaryPosition="none"
+          backVisibility={readOnly ? "hidden" : "visible"}
+        >
+          <GoabPublicFormSummary heading="Personal information" readOnly={readOnly} />
+          {!readOnly && (
+            <div style={{ marginTop: "var(--goa-space-2xl)" }}>
+              <GoabxFormItem label="">
+                <GoabxCheckbox
+                  name="confirmCorrect"
+                  data-pf-item=""
+                  text="I confirm that the information above is correct"
+                />
+              </GoabxFormItem>
+            </div>
+          )}
         </GoabPublicFormPage>
       </GoabPublicForm>
     </div>

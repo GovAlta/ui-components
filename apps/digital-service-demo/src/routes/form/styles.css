@@ -10,7 +10,7 @@ html, body {
 }
 
 body {
-  font-family: acumin-pro-semi-condensed, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--goa-font-family-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -44,7 +44,7 @@ body {
    ============================================================================= */
 
 .form-set {
-  max-width: 640px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 var(--goa-space-m); /* Horizontal only; vertical handled by .main-content */
 }

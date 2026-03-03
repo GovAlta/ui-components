@@ -17,9 +17,8 @@ import {
  * 3. address - Multi-field: Current address (street, city, province, postal)
  * 4. contact-preference - Checkbox + conditional: How should we contact you?
  * 5. consent - Checkboxes + textarea: Consent and additional info
- * 6. upload-id - File upload: Supporting documents
- * 7. dependants - Repeater/subform: Add dependants
- * 8. review - Summary page with GoabPublicFormSummary
+ * 6. dependants - Repeater/subform: Add dependants
+ * 7. review - Summary page with GoabPublicFormSummary
  */
 export const task1Outline: PFOutline = {
   "urgent-need": {
@@ -140,25 +139,6 @@ export const task1Outline: PFOutline = {
       "Full name": (page["fullName"] as string) || "",
       Signature: page["signature"] ? "Complete" : "Incomplete",
     }),
-    next: "upload-id",
-  },
-
-  "upload-id": {
-    subform: false,
-    props: {
-      "section-title": "Personal information",
-      heading: "Upload your personal identification card",
-    },
-    fields: {
-      idDocument: {
-        label: "Personal identification card",
-        hideInSummary: "never",
-        type: "file",
-      },
-    },
-    validators: {
-      idDocument: [RequiredValidator("Upload your identification")],
-    },
     next: "dependants",
   },
 

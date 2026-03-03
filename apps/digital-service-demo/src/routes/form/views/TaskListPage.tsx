@@ -5,7 +5,8 @@ import {
   GoabxCheckbox,
   GoabxFormItem,
 } from "@abgov/react-components/experimental";
-import { GoabButton, GoabText } from "@abgov/react-components";
+import { GoabText } from "@abgov/react-components";
+import { GoabxButton } from "@abgov/react-components/experimental";
 import { Application, TaskStatus } from "../types";
 
 // Simple action link styled like GoabxLink (for onClick handlers)
@@ -31,7 +32,7 @@ function ActionLink({ onClick, children }: { onClick: () => void; children: Reac
 
 type TaskListPageProps = {
   application: Application;
-  onStartTask: (taskNumber: 1 | 2 | 3) => void;
+  onStartTask: (taskNumber: 1 | 2 | 3 | 4) => void;
   onSubmitApplication: () => void;
   onBackToDashboard: () => void;
   canSubmit: boolean;
@@ -60,7 +61,23 @@ type TaskItemProps = {
 
 function TaskItem({ name, status, onClick, isLast }: TaskItemProps) {
   const isLocked = status === "locked";
+  const isComplete = status === "complete";
   const [isHovered, setIsHovered] = useState(false);
+
+  // Determine text color based on status and hover state
+  const getTextColor = () => {
+    if (isLocked) return "var(--goa-color-text-default)";
+    if (isHovered) return "var(--goa-color-interactive-hover)";
+    if (isComplete) return "var(--goa-color-text-default)";
+    return "var(--goa-color-interactive-default)";
+  };
+
+  // Determine text decoration based on status and hover state
+  const getTextDecoration = () => {
+    if (isLocked) return "none";
+    if (isComplete) return isHovered ? "underline" : "none";
+    return "underline";
+  };
 
   return (
     <div
@@ -92,13 +109,9 @@ function TaskItem({ name, status, onClick, isLast }: TaskItemProps) {
         style={{
           fontSize: "18px",
           lineHeight: "24px",
-          color: isLocked
-            ? "var(--goa-color-text-default)"
-            : isHovered
-              ? "var(--goa-color-interactive-hover)"
-              : "var(--goa-color-interactive-default)",
-          textDecoration: isLocked ? "none" : "underline",
-          transition: "color 0.15s ease",
+          color: getTextColor(),
+          textDecoration: getTextDecoration(),
+          transition: "color 0.15s ease, text-decoration 0.15s ease",
         }}
       >
         {name}
@@ -193,10 +206,8 @@ function StatusCallout({ completedCount, totalCount, hasAnyProgress, onContinue 
 
   if (allComplete) {
     return (
-      <GoabxCallout type="success" heading="Application complete" emphasis="low">
-        You have completed all sections of this application.
-        <br />
-        <a href="#submit-section" style={{ color: "inherit" }}>Submit your application below</a>
+      <GoabxCallout type="information" heading="Ready to submit" emphasis="low">
+        All {totalCount} sections complete. Confirm and submit your application below.
       </GoabxCallout>
     );
   }
@@ -210,16 +221,19 @@ function StatusCallout({ completedCount, totalCount, hasAnyProgress, onContinue 
   }
 
   // Some progress made but not all sections complete
-  const headingText = completedCount === 0
-    ? "No sections complete"
-    : `${completedCount} ${completedCount === 1 ? "section" : "sections"} complete`;
+  const sectionsLeft = totalCount - completedCount;
+  const headingText = `${sectionsLeft} ${sectionsLeft === 1 ? "section" : "sections"} left to complete`;
+
   return (
     <GoabxCallout
       type="information"
       heading={headingText}
       emphasis="low"
     >
-      You have completed {completedCount} of {totalCount} sections
+      You have completed {completedCount} of {totalCount} sections.
+      <div style={{ marginTop: "var(--goa-space-m)" }}>
+        <ActionLink onClick={() => onContinue?.()}>Continue</ActionLink>
+      </div>
     </GoabxCallout>
   );
 }
@@ -242,24 +256,29 @@ export function TaskListPage({
   const task1Status = getTaskStatus(!!application.task1State, application.task1Complete);
   const task2Status = getTaskStatus(!!application.task2State, application.task2Complete);
   const task3Status = getTaskStatus(!!application.task3State, application.task3Complete);
+  const task4Status = getTaskStatus(!!application.task4State, application.task4Complete);
 
-  // Section 1 is complete when tasks 2 and 3 are complete
+  // Section 1: Verify your eligibility (task 2 - age, task 3 - situation)
   const section1Complete = application.task2Complete && application.task3Complete;
-  // Section 2 is complete when task 1 is complete
+  // Section 2: Your application (task 1 - personal information)
   const section2Complete = application.task1Complete;
+  // Section 3: Important documents (task 4 - ID upload)
+  const section3Complete = application.task4Complete;
 
   // Count completed sections
-  const completedSections = [section1Complete, section2Complete].filter(Boolean).length;
-  const totalSections = 2;
+  const completedSections = [section1Complete, section2Complete, section3Complete].filter(Boolean).length;
+  const totalSections = 3;
 
   // Check if any task has been started or completed
-  const hasAnyProgress = !!(application.task1State || application.task2State || application.task3State);
+  const hasAnyProgress = !!(application.task1State || application.task2State || application.task3State || application.task4State);
 
-  // Find the next task to continue (Section 1: tasks 2,3 then Section 2: task 1)
-  const getNextTask = (): 1 | 2 | 3 => {
-    if (!application.task2Complete) return 2;
-    if (!application.task3Complete) return 3;
-    return 1; // Section 2
+  // Find the next task to continue
+  const getNextTask = (): 1 | 2 | 3 | 4 => {
+    if (!application.task2Complete) return 2; // Verify your age
+    if (!application.task3Complete) return 3; // Your situation
+    if (!application.task1Complete) return 1; // Personal information
+    if (!application.task4Complete) return 4; // Upload ID
+    return 4; // Default
   };
 
   const handleSubmit = () => {
@@ -278,22 +297,41 @@ export function TaskListPage({
     }
   };
 
+  const isSubmitted = application.status === "submitted";
+
   return (
     <div className="form-set">
-      <GoabText as="h1" size="heading-l" mt="2xl" mb="none">
-        Application {application.referenceId}
-      </GoabText>
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--goa-space-m)", marginTop: "var(--goa-space-2xl)" }}>
+        <GoabText as="h1" size="heading-l" mt="none" mb="none">
+          Application for a service
+        </GoabText>
+        {isSubmitted ? (
+          <GoabxBadge type="success" emphasis="subtle" content="Submitted" size="large" />
+        ) : (
+          <GoabxBadge type="default" emphasis="subtle" content="Draft" size="large" />
+        )}
+      </div>
 
       <GoabText size="body-m" mt="m" mb="xl">
-        Your progress is saved automatically. You can return to complete this application at any time.
+        {isSubmitted
+          ? "You can review your answers below."
+          : "Your progress is saved automatically. You can return to complete this application at any time."}
       </GoabText>
 
-      <StatusCallout
-        completedCount={completedSections}
-        totalCount={totalSections}
-        hasAnyProgress={hasAnyProgress}
-        onContinue={() => onStartTask(getNextTask())}
-      />
+      {isSubmitted && (
+        <GoabxCallout type="success" heading="Application submitted" emphasis="low">
+          Reference number: <strong>{application.referenceId}</strong>
+        </GoabxCallout>
+      )}
+
+      {!isSubmitted && (
+        <StatusCallout
+          completedCount={completedSections}
+          totalCount={totalSections}
+          hasAnyProgress={hasAnyProgress}
+          onContinue={() => onStartTask(getNextTask())}
+        />
+      )}
 
       <div
         style={{
@@ -303,8 +341,8 @@ export function TaskListPage({
           marginTop: "var(--goa-space-xl)",
         }}
       >
-        {/* Section 1: Prepare your application */}
-        <TaskGroup number={1} title="Prepare your application">
+        {/* Section 1: Verify your eligibility */}
+        <TaskGroup number={1} title="Verify your eligibility">
           <TaskItem
             name="Verify your age"
             status={task2Status}
@@ -318,17 +356,32 @@ export function TaskListPage({
           />
         </TaskGroup>
 
-        {/* Section 2: Additional information (locked until section 1 complete) */}
+        {/* Section 2: Your application (locked until eligibility verified) */}
         <TaskGroup
           number={2}
-          title="Additional information"
+          title="Your application"
           locked={!section1Complete}
-          lockedMessage="You need to complete the previous section before you can start this task."
+          lockedMessage="You need to verify your eligibility before continuing."
         >
           <TaskItem
             name="Personal information"
             status={task1Status}
             onClick={() => onStartTask(1)}
+            isLast
+          />
+        </TaskGroup>
+
+        {/* Section 3: Important documents (locked until section 1 complete) */}
+        <TaskGroup
+          number={3}
+          title="Important documents"
+          locked={!section1Complete}
+          lockedMessage="You need to verify your eligibility before uploading documents."
+        >
+          <TaskItem
+            name="Upload your identification"
+            status={section1Complete ? task4Status : "locked"}
+            onClick={() => onStartTask(4)}
             isLast
           />
         </TaskGroup>
@@ -341,20 +394,27 @@ export function TaskListPage({
           marginTop: "var(--goa-space-2xl)",
         }}
       >
+        {/* Already submitted - show back button */}
+        {isSubmitted && (
+          <GoabxButton type="secondary" leadingIcon="arrow-back" onClick={onBackToDashboard}>
+            Back to my applications
+          </GoabxButton>
+        )}
+
         {/* Not ready to submit */}
-        {!canSubmit && (
+        {!isSubmitted && !canSubmit && (
           <>
             <GoabText size="body-xs" color="secondary" mt="none" mb="m">
               Complete all sections above to submit your application.
             </GoabText>
-            <GoabButton type="primary" disabled>
+            <GoabxButton type="primary" disabled>
               Submit application
-            </GoabButton>
+            </GoabxButton>
           </>
         )}
 
         {/* Ready to submit */}
-        {canSubmit && (
+        {!isSubmitted && canSubmit && (
           <>
             {submissionError && (
               <div style={{ marginBottom: "var(--goa-space-l)" }}>
@@ -376,9 +436,9 @@ export function TaskListPage({
               />
             </GoabxFormItem>
             <div style={{ marginTop: "var(--goa-space-l)" }}>
-              <GoabButton type="primary" onClick={handleSubmit} disabled={isSubmitting}>
-                {isSubmitting ? "Submitting..." : "Submit application"}
-              </GoabButton>
+              <GoabxButton type="primary" onClick={handleSubmit} disabled={isSubmitting}>
+                Submit application
+              </GoabxButton>
             </div>
           </>
         )}

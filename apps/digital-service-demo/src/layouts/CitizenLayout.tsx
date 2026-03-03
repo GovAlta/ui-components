@@ -4,7 +4,7 @@ import { GoabOneColumnLayout, GoabPageBlock, GoabAppHeader } from '@abgov/react-
 export function CitizenLayout() {
   return (
     <>
-      <GoabAppHeader heading="Apply for a Service" url="/" />
+      <GoabAppHeader heading="Apply for a Service" url="/" version="2" />
       <GoabOneColumnLayout>
         <GoabPageBlock width="704px">
           <Outlet />

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GoabxButton, GoabxBadge, GoabxModal } from "@abgov/react-components/experimental";
 import { GoabButtonGroup, GoabText } from "@abgov/react-components";
 import { Application, ApplicationStatus } from "../types";
+import emptyStateSrc from "../assets/empty-state.svg";
 
 type MyApplicationsPageProps = {
   applications: Application[];
@@ -91,16 +92,38 @@ export function MyApplicationsPage({
 
       {/* Subtext */}
       <GoabText tag="p" size="body-m" mt="m" mb="xl">
-        You may have up to 5 active registrations. Be aware files must be
+        You may have up to 5 active applications. Be aware files must be
         activated within 6 months or else they will expire.
       </GoabText>
 
       {/* Application cards */}
       {applications.length === 0 ? (
-        <GoabText tag="p" size="body-m" mt="none" mb="none">
-          You don't have any applications yet. Click "+ New application" to get
-          started.
-        </GoabText>
+        <div
+          style={{
+            border: "1px solid var(--goa-color-greyscale-200)",
+            borderRadius: "12px",
+            padding: "var(--goa-space-3xl) var(--goa-space-xl)",
+            backgroundColor: "var(--goa-color-greyscale-white)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--goa-space-l)",
+          }}
+        >
+          <img
+            src={emptyStateSrc}
+            alt="Empty folder"
+            style={{ width: "100px", height: "78px" }}
+          />
+
+          <GoabText as="p" size="heading-2xs" mt="none" mb="none">
+            You don't have any applications yet
+          </GoabText>
+
+          <GoabxButton type="tertiary" size="compact" leadingIcon="add" onClick={onNewApplication}>
+            Start a new Application
+          </GoabxButton>
+        </div>
       ) : (
         <div
           style={{
@@ -162,31 +185,17 @@ export function MyApplicationsPage({
               >
                 {/* Status */}
                 <div>
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      lineHeight: "24px",
-                      marginBottom: "var(--goa-space-xs)",
-                    }}
-                  >
-                    Status
-                  </div>
+                  <GoabText tag="div" size="body-m" mt="none" mb="xs">
+                    <strong>Status</strong>
+                  </GoabText>
                   <StatusBadge status={app.status} />
                 </div>
 
                 {/* Last updated */}
                 <div>
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      lineHeight: "24px",
-                      marginBottom: "var(--goa-space-xs)",
-                    }}
-                  >
-                    Last updated
-                  </div>
+                  <GoabText tag="div" size="body-m" mt="none" mb="xs">
+                    <strong>Last updated</strong>
+                  </GoabText>
                   <GoabText tag="div" size="body-s" mt="none" mb="none">
                     {formatDate(app.updatedAt)}
                   </GoabText>
@@ -194,16 +203,9 @@ export function MyApplicationsPage({
 
                 {/* Created */}
                 <div>
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      lineHeight: "24px",
-                      marginBottom: "var(--goa-space-xs)",
-                    }}
-                  >
-                    Created
-                  </div>
+                  <GoabText tag="div" size="body-m" mt="none" mb="xs">
+                    <strong>Created</strong>
+                  </GoabText>
                   <GoabText tag="div" size="body-s" mt="none" mb="none">
                     {formatDate(app.createdAt)}
                   </GoabText>

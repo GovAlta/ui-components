@@ -11,6 +11,7 @@ export type View =
   | "task-1"
   | "task-2"
   | "task-3"
+  | "task-4"
   | "confirmation"
   | "results"
   | "ineligible";
@@ -38,11 +39,13 @@ export type Application = {
   task1State: PFState | null;
   task2State: PFState | null;
   task3State: PFState | null;
+  task4State: PFState | null;
 
   // Explicit completion tracking (set when "Submit section" clicked)
   task1Complete: boolean;
   task2Complete: boolean;
   task3Complete: boolean;
+  task4Complete: boolean;
 };
 
 /**
@@ -76,8 +79,10 @@ export function createApplication(): Application {
     task1State: null,
     task2State: null,
     task3State: null,
+    task4State: null,
     task1Complete: false,
     task2Complete: false,
     task3Complete: false,
+    task4Complete: false,
   };
 }
