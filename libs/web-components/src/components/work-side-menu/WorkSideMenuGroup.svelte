@@ -2,20 +2,26 @@
 
 <script lang="ts">
   import type { GoAIconType } from "../icon/Icon.svelte";
-  import { toBoolean } from "../../common/utils";
+  import { toBoolean, dispatch } from "../../common/utils";
 
   export let heading: string;
   export let icon: GoAIconType;
   export let testid: string = "";
 
   let _open = false;
+  let _rootEl: HTMLElement;
+
+  function handleMouseEnter() {
+    dispatch(_rootEl, "_hoverItem", { el: _rootEl, label: heading }, { bubbles: true });
+  }
 </script>
 
-<div class="root" data-testid={testid}>
+<div class="root" data-testid={testid} bind:this={_rootEl}>
   <details
     open={_open}
     aria-label={_open ? "Close group" : "Open group"}
     on:toggle={({ target }) => (_open = toBoolean(`${target?.open}`))}
+    on:mouseenter={handleMouseEnter}
   >
     <summary aria-expanded={_open}>
       <goa-icon type={icon} size="small" theme={_open ? "filled" : "outline"} />
