@@ -43,7 +43,7 @@
     "@angular-eslint/eslint-plugin": "18.0.1",
     "@angular-eslint/eslint-plugin-template": "18.0.1",
     "@angular-eslint/template-parser": "18.0.1",
-    "@angular/cli": "^21.1.5",
+    "@angular/cli": "^21.2.5",
     "@angular/compiler-cli": "20.1.6",
     "@angular/language-service": "20.1.6",
     "@astrojs/check": "^0.9.6",
