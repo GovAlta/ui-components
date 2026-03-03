@@ -1,0 +1,108 @@
+<h1>Bug 3497 Calendar Years Empty</h1>
+<p>
+  When [min] or [max] is set to today then the year dropdown is empty and doesn't show
+  anything.
+</p>
+
+<hr />
+<h3>Original Calendar Tests</h3>
+
+<h3>min = today (Date object)</h3>
+<goab-calendar name="calMinTest" [min]="today"></goab-calendar>
+
+<h3>max = today (Date object)</h3>
+<goab-calendar name="calMaxTest" [max]="today"></goab-calendar>
+
+<h3>value = today (Date object)</h3>
+<goab-calendar name="calOrdinaryTest" [value]="today"></goab-calendar>
+
+<hr />
+<h3>DatePicker — Event-based (min/max = today, Date object)</h3>
+<goab-form-item label="Event-based DatePicker">
+  <goab-date-picker
+    (onChange)="dateOnChange($event)"
+    name="eventBased"
+    [min]="today"
+    [max]="today"
+  ></goab-date-picker>
+</goab-form-item>
+
+<hr />
+<h3>DatePicker — Reactive Form (min/max = today, Date object)</h3>
+<form [formGroup]="form">
+  <goab-form-item label="Reactive Form DatePicker">
+    <goab-date-picker
+      name="reactiveBased"
+      formControlName="item"
+      [min]="today"
+      [max]="today"
+    ></goab-date-picker>
+  </goab-form-item>
+</form>
+<div>
+  <dl>
+    <dt>min</dt>
+    <dd>{{ today | date: "yyyy-MM-dd" }} (Date)</dd>
+    <dt>max</dt>
+    <dd>{{ today | date: "yyyy-MM-dd" }} (Date)</dd>
+  </dl>
+</div>
+
+<hr />
+<h3>DatePicker — Template-driven (min/max = today, Date object)</h3>
+<goab-form-item label="Template-driven DatePicker">
+  <goab-date-picker
+    (onChange)="dateOnChange($event)"
+    name="templateDriven"
+    [(ngModel)]="item"
+    [min]="today"
+    [max]="today"
+  ></goab-date-picker>
+</goab-form-item>
+<div>
+  <dl>
+    <dt>min</dt>
+    <dd>{{ today | date: "yyyy-MM-dd" }} (Date)</dd>
+    <dt>max</dt>
+    <dd>{{ today | date: "yyyy-MM-dd" }} (Date)</dd>
+  </dl>
+</div>
+
+<hr />
+<h3>DatePicker — min/max NOT today (Date object)</h3>
+<goab-form-item label="Not-today min/max">
+  <goab-date-picker
+    (onChange)="dateOnChange($event)"
+    name="notTodayTest"
+    [min]="notToday"
+    [max]="notTodayMax"
+  ></goab-date-picker>
+</goab-form-item>
+<div>
+  <dl>
+    <dt>min</dt>
+    <dd>{{ notToday | date: "yyyy-MM-dd" }} (Date)</dd>
+    <dt>max</dt>
+    <dd>{{ notTodayMax | date: "yyyy-MM-dd" }} (Date)</dd>
+  </dl>
+</div>
+
+<hr />
+<h3>DatePicker — min/max = string (not Date object)</h3>
+<goab-form-item label="String min/max">
+  <goab-date-picker
+    (onChange)="dateOnChange($event)"
+    name="stringTest"
+    value="2026-03-10"
+    min="2026-01-01"
+    max="2026-12-31"
+  ></goab-date-picker>
+</goab-form-item>
+<div>
+  <dl>
+    <dt>min</dt>
+    <dd>"2026-01-01" (string)</dd>
+    <dt>max</dt>
+    <dd>"2026-12-31" (string)</dd>
+  </dl>
+</div>

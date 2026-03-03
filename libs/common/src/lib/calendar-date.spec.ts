@@ -55,6 +55,15 @@ describe("CalendarDate", () => {
       expect(calDate.month).toBe(now.getMonth() + 1);
       expect(calDate.day).toBe(now.getDate());
     });
+
+    it("creates a CalendarDate with a Date.toString value", () => {
+      const calDate = new CalendarDate(
+        "Fri Mar 20 2026 15:31:05 GMT-0600 (Mountain Daylight Time)",
+      );
+      expect(calDate.year).toBe(2026);
+      expect(calDate.month).toBe(3);
+      expect(calDate.day).toBe(20);
+    });
   });
 
   describe("getters", () => {

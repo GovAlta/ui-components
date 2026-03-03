@@ -1,6 +1,8 @@
 import {
+  CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
+  Once,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -16,7 +18,6 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
@@ -27,9 +28,9 @@ import { GoabControlValueAccessor } from "../base.component";
     <goa-date-picker
       #goaComponentRef
       [attr.name]="name"
-      [attr.value]="formatValue(value)"
-      [attr.min]="min"
-      [attr.max]="max"
+      [attr.value]="valueString()"
+      [attr.min]="minString()"
+      [attr.max]="maxString()"
       [attr.error]="error"
       [attr.disabled]="disabled"
       [attr.relative]="relative"
@@ -68,14 +69,29 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
-  formatValue(val: Date | string | null | undefined): string {
+  private once: Once = new Once();
+
+  private formatValue(param: string, val: Date | string | null | undefined): string {
     if (!val) return "";
 
-    if (val instanceof Date) {
-      return val.toISOString();
-    }
+    this.once.when(val instanceof Date).do(param, () => {
+      console.warn(
+        `GoabDatePicker: Using Date for '${param}' is deprecated. Use a string in YYYY-MM-DD format instead.`,
+      );
+    });
 
-    return val;
+    return new CalendarDate(val).toString();
+  }
+  valueString(): string {
+    return this.formatValue("value", this.value);
+  }
+
+  minString(): string {
+    return this.formatValue("min", this.min);
+  }
+
+  maxString(): string {
+    return this.formatValue("max", this.max);
   }
 
   _onChange(e: Event) {
@@ -133,7 +149,7 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
         this.renderer.setAttribute(
           datePickerEl,
           "value",
-          value instanceof Date ? value.toISOString() : value,
+          value instanceof Date ? new CalendarDate(value).toString() : value,
         );
       }
     }

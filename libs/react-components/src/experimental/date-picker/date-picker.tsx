@@ -1,5 +1,6 @@
 import { useEffect, useRef, type JSX } from "react";
 import {
+  CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
   Margins,
@@ -100,7 +101,7 @@ export function GoabxDatePicker({
     if (!val) return "";
 
     if (val instanceof Date) {
-      return val.toISOString();
+      return new CalendarDate(val).toString();
     }
 
     return val;
