@@ -1,0 +1,11 @@
+<h1>Bug 3497 Calendar Years Empty</h1>
+<p>
+  When [min] or [max] is set to today then the year dropdown is empty and doesn't show
+  anything.
+</p>
+<h2>min test</h2>
+<goab-calendar name="minTest" [min]="today"></goab-calendar>
+<h2>max test</h2>
+<goab-calendar name="maxTest" [max]="today"></goab-calendar>
+<h2>ordinary</h2>
+<goab-calendar name="ordinaryTest" [value]="today"></goab-calendar>

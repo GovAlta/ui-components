@@ -20,8 +20,8 @@ import { GoabBaseComponent } from "../base.component";
       <goa-calendar
         [attr.name]="name"
         [value]="value"
-        [attr.min]="min"
-        [attr.max]="max"
+        [attr.min]="min?.toISOString()"
+        [attr.max]="max?.toISOString()"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
@@ -55,6 +55,11 @@ export class GoabCalendar extends GoabBaseComponent implements OnInit {
     setTimeout(() => {
       this.isReady = true;
       this.cdr.detectChanges();
+      console.log("GoabCalendar initialized with:", this.name, {
+        value: this.value,
+        min: this.min,
+        max: this.max,
+      });
     }, 0);
   }
 

@@ -82,6 +82,12 @@
   $: {
     _min = min ? new CalendarDate(min) : new CalendarDate().addYears(-5);
     _max = max ? new CalendarDate(max) : new CalendarDate().addYears(+5);
+    if (!_min.isValid()) {
+      console.warn(`Invalid min date: ${min}.`);
+    }
+    if (!_max.isValid()) {
+      console.warn(`Invalid max date: ${max}.`);
+    }
 
     // Update years list based on new min/max
     const yearStart = _min.year;

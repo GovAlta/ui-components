@@ -68,8 +68,8 @@ describe("GoABCalendar", () => {
   it("should render properties", () => {
     const calendar = fixture.nativeElement.querySelector("goa-calendar");
     expect(calendar.getAttribute("name")).toBe(component.name);
-    expect(calendar.getAttribute("min")).toBe(component.min?.toString());
-    expect(calendar.getAttribute("max")).toBe(component.max?.toString());
+    expect(calendar.getAttribute("min")).toBe(component.min?.toISOString());
+    expect(calendar.getAttribute("max")).toBe(component.max?.toISOString());
     expect(calendar.getAttribute("testid")).toBe(component.testId);
     expect(calendar.getAttribute("mt")).toBe(component.mt);
     expect(calendar.getAttribute("mb")).toBe(component.mb);
