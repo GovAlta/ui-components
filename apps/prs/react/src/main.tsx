@@ -82,6 +82,7 @@ import { Feat3370Route } from "./routes/features/feat3370";
 import { Feat3396Route } from "./routes/features/feat3396";
 import { Feat3229Route } from "./routes/features/feat3229";
 import { FeatV2CheckboxRoute } from "./routes/features/featV2Checkbox";
+import { Feat3398Route } from "./routes/features/feat3398";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -171,6 +172,7 @@ root.render(
           <Route path="features/3407-skip-on-focus-tab" element={<Feat3407SkipOnFocusTabRoute />} />
           <Route path="features/3407-stack-on-mobile" element={<Feat3407StackOnMobileRoute />} />
           <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
+          <Route path="features/3398" element={<Feat3398Route />} />
         </Route>
       </Routes>
     </BrowserRouter>

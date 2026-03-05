@@ -75,6 +75,7 @@ import { Feat3306Component } from "../routes/features/feat3306/feat3306.componen
 import { Feat3370Component } from "../routes/features/feat3370/feat3370.component";
 import { Feat3407SkipOnFocusTabComponent } from "../routes/features/feat3407SkipOnFocusTab/feat3407-skip-on-focus-tab.component";
 import { Feat3407StackOnMobileComponent } from "../routes/features/feat3407StackOnMobile/feat3407-stack-on-mobile.component";
+import { Feat3398Component } from "../routes/features/feat3398/feat3398.component";
 import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-icons.component";
 import { Feat3396Component } from "../routes/features/feat3396/feat3396.component";
 import { FeatV2CheckboxComponent } from "../routes/features/featV2Checkbox/featV2Checkbox.component";
@@ -160,4 +161,5 @@ export const appRoutes: Route[] = [
   { path: "features/3407-skip-on-focus-tab", component: Feat3407SkipOnFocusTabComponent },
   { path: "features/3407-stack-on-mobile", component: Feat3407StackOnMobileComponent },
   { path: "features/v2-checkbox", component: FeatV2CheckboxComponent },
+  { path: "features/3398", component: Feat3398Component },
 ];

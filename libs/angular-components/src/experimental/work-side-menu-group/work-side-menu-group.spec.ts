@@ -7,18 +7,25 @@ import { By } from "@angular/platform-browser";
   standalone: true,
   imports: [GoabxWorkSideMenuGroup],
   template: `
-    <goabx-work-side-menu-group [heading]="heading" [icon]="icon" [testId]="testId">
+    <goabx-work-side-menu-group
+      [heading]="heading"
+      [icon]="icon"
+      [testId]="testId"
+      [open]="open"
+    >
     </goabx-work-side-menu-group>
   `,
 })
 class TestWorkSideMenuGroupComponent {
-  heading = "Test heading";
-  icon = "star";
-  testId = "test-id";
+  heading?: string;
+  icon?: string;
+  testId?: string;
+  open?: boolean;
 }
 
 describe("GoabxWorkSideMenuGroup", () => {
   let fixture: ComponentFixture<TestWorkSideMenuGroupComponent>;
+  let component: TestWorkSideMenuGroupComponent;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -26,6 +33,11 @@ describe("GoabxWorkSideMenuGroup", () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestWorkSideMenuGroupComponent);
+    component = fixture.componentInstance;
+    component.heading = "Test heading";
+    component.icon = "star";
+    component.testId = "test-id";
+    component.open = true;
 
     fixture.detectChanges();
     tick(); // Wait for setTimeout in ngOnInit
@@ -39,5 +51,6 @@ describe("GoabxWorkSideMenuGroup", () => {
     expect(menuGroupElement.getAttribute("heading")).toBe("Test heading");
     expect(menuGroupElement.getAttribute("icon")).toBe("star");
     expect(menuGroupElement.getAttribute("testid")).toBe("test-id");
+    expect(menuGroupElement.hasAttribute("open")).toBe(true);
   });
 });

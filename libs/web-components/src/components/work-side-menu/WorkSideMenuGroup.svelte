@@ -1,15 +1,35 @@
-<svelte:options customElement="goa-work-side-menu-group" />
+<svelte:options
+  customElement={{
+    tag: "goa-work-side-menu-group",
+    props: {
+      open: { type: "Boolean", reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts">
+  import { onMount } from "svelte";
   import type { GoAIconType } from "../icon/Icon.svelte";
   import { toBoolean, dispatch } from "../../common/utils";
 
+  /** The text displayed in the group heading. */
   export let heading: string;
+  /** Icon displayed before the group label. */
   export let icon: GoAIconType;
+  /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** Whether the group is open. */
+  export let open: boolean = false;
 
-  let _open = false;
   let _rootEl: HTMLElement;
+
+  onMount(() => {
+    _rootEl.addEventListener("_itemCurrent", handleItemCurrent);
+  });
+
+  function handleItemCurrent() {
+    open = true;
+  }
 
   function handleMouseEnter() {
     dispatch(_rootEl, "_hoverItem", { el: _rootEl, label: heading }, { bubbles: true });
@@ -18,13 +38,13 @@
 
 <div class="root" data-testid={testid} bind:this={_rootEl}>
   <details
-    open={_open}
-    aria-label={_open ? "Close group" : "Open group"}
-    on:toggle={({ target }) => (_open = toBoolean(`${target?.open}`))}
+    {open}
+    aria-label={open ? "Close group" : "Open group"}
+    on:toggle={({ target }) => (open = toBoolean(`${target?.open}`))}
     on:mouseenter={handleMouseEnter}
   >
-    <summary aria-expanded={_open}>
-      <goa-icon type={icon} size="small" theme={_open ? "filled" : "outline"} />
+    <summary aria-expanded={open}>
+      <goa-icon type={icon} size="small" theme={open ? "filled" : "outline"} />
       <span class="label">{heading}</span>
       <goa-icon class="marker-icon" type="chevron-forward" size="small" />
     </summary>
