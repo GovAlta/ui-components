@@ -5,6 +5,7 @@ interface WCProps {
   heading: string;
   icon: GoabIconType;
   testid?: string;
+  open?: boolean;
 }
 
 declare module "react" {
@@ -19,6 +20,7 @@ declare module "react" {
 export interface GoabWorkSideMenuGroupProps {
   heading: string;
   icon: GoabIconType;
+  open?: boolean;
   testId?: string;
   children?: React.ReactNode;
 }
@@ -28,6 +30,7 @@ export function GoabxWorkSideMenuGroup(props: GoabWorkSideMenuGroupProps): JSX.E
     <goa-work-side-menu-group
       heading={props.heading}
       icon={props.icon}
+      open={props.open ? true : undefined}
       testid={props.testId}
     >
       {props.children}

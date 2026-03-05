@@ -130,6 +130,7 @@ export function App() {
               <Link to="/features/3370">3370 Clear calendar day selection</Link>
               <Link to="/features/3396">3396 Text heading-2xs size</Link>
               <Link to="/features/v2-checkbox">3399 V2 Checkbox Spacing</Link>
+              <Link to="/features/3398">3398 Group open prop</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>
