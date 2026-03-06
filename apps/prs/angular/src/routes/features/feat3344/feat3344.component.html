@@ -1,0 +1,111 @@
+<h1>PR 4: Table & TableSortHeader V2</h1>
+
+<goab-block>
+  <goab-details heading="Changes in this PR">
+    <p>
+      <strong>TableSortHeader:</strong><br />
+      - Always-visible sort icon (chevron-expand when unsorted)<br />
+      - Arrow-up/arrow-down for sorted states<br />
+      - sortOrder prop shows "1", "2" for multi-column sort<br />
+      <br />
+      <strong>Table:</strong><br />
+      - sortMode="single" (default) or "multi" (up to 2 columns)<br />
+      - Initial sort declared on headers via direction + sortOrder<br />
+      - onSort callback with sortBy, sortDir, and sorts array
+    </p>
+  </goab-details>
+</goab-block>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Test 1: Single-Column Sort (Default)</h2>
+<p>Click column headers to sort. Only one column sorts at a time (default behavior).</p>
+<p><small>Current sort: {{ formatSorts(currentSorts) }}</small></p>
+
+<goabx-table mt="m" (onSort)="onSingleSortChange($event)">
+  <thead>
+    <tr>
+      <th>
+        <goabx-table-sort-header name="name">Name</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="department">Department</goabx-table-sort-header>
+      </th>
+      <th class="goa-table-cell--numeric">
+        <goabx-table-sort-header name="salary">Salary</goabx-table-sort-header>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of singleSorted; track row.id) {
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.department }}</td>
+      <td class="goa-table-cell--numeric">{{ formatCurrency(row.salary) }}</td>
+    </tr>
+    }
+  </tbody>
+</goabx-table>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Test 2: Multi-Column Sort</h2>
+<p>With sortMode="multi", click columns to add them to sort order (up to 2).</p>
+<p><small>Current sort: {{ formatSorts(multiSorts) }}</small></p>
+
+<goabx-table mt="m" sortMode="multi" (onMultiSort)="onMultiSortChange($event)">
+  <thead>
+    <tr>
+      <th>
+        <goabx-table-sort-header name="name">Name</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="department">Department</goabx-table-sort-header>
+      </th>
+      <th class="goa-table-cell--numeric">
+        <goabx-table-sort-header name="salary">Salary</goabx-table-sort-header>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of multiSorted; track row.id) {
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.department }}</td>
+      <td class="goa-table-cell--numeric">{{ formatCurrency(row.salary) }}</td>
+    </tr>
+    }
+  </tbody>
+</goabx-table>
+
+<goab-divider mt="l" mb="l"></goab-divider>
+
+<h2>Test 3: Multi Initial Sort (declarative)</h2>
+<p>Two initial sorts declared on headers: Department ascending (primary), Salary descending (secondary).
+Use direction + sortOrder on each header to set priority.</p>
+<p><small>Current sort: {{ formatSorts(test3Sorts) }}</small></p>
+
+<goabx-table mt="m" sortMode="multi" (onMultiSort)="onTest3SortChange($event)">
+  <thead>
+    <tr>
+      <th>
+        <goabx-table-sort-header name="name">Name</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="department" direction="asc" [sortOrder]="1">Department</goabx-table-sort-header>
+      </th>
+      <th class="goa-table-cell--numeric">
+        <goabx-table-sort-header name="salary" direction="desc" [sortOrder]="2">Salary</goabx-table-sort-header>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of test3Sorted; track row.id) {
+    <tr>
+      <td>{{ row.name }}</td>
+      <td>{{ row.department }}</td>
+      <td class="goa-table-cell--numeric">{{ formatCurrency(row.salary) }}</td>
+    </tr>
+    }
+  </tbody>
+</goabx-table>

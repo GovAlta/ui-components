@@ -242,9 +242,21 @@ export interface GoabTableProps extends Margins {
   testId?: string;
 }
 
+export type GoabTableSortMode = "single" | "multi";
+export type GoabTableSortOrder = 1 | 2;
+
+export type GoabTableSortEntry = {
+  column: string;
+  direction: "asc" | "desc";
+};
+
 export type GoabTableOnSortDetail = {
   sortBy: string;
   sortDir: number;
+};
+
+export type GoabTableOnMultiSortDetail = {
+  sorts: GoabTableSortEntry[];
 };
 
 // Spacer

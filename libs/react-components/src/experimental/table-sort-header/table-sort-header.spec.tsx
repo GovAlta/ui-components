@@ -19,4 +19,12 @@ describe("GoabxTableSortHeader", () => {
     const el = document.querySelector("goa-table-sort-header");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
+
+  it("should render sort-order attribute", () => {
+    render(<GoabxTableSortHeader name="salary" direction="desc" sortOrder={2} />);
+    const el = document.querySelector("goa-table-sort-header");
+    expect(el?.getAttribute("sort-order")).toBe("2");
+    expect(el?.getAttribute("name")).toBe("salary");
+    expect(el?.getAttribute("direction")).toBe("desc");
+  });
 });

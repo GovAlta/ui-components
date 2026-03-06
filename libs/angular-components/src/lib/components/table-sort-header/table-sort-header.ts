@@ -12,7 +12,10 @@ import {
   selector: "goab-table-sort-header",
   template: `
     @if (isReady) {
-      <goa-table-sort-header [attr.name]="name" [attr.direction]="direction">
+      <goa-table-sort-header
+        [attr.name]="name"
+        [attr.direction]="direction"
+      >
         <ng-content />
       </goa-table-sort-header>
     }
@@ -24,7 +27,6 @@ export class GoabTableSortHeader implements OnInit {
   isReady = false;
   @Input() name?: string;
   @Input() direction?: GoabTableSortDirection = "none";
-
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
