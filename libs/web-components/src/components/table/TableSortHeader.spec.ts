@@ -16,7 +16,7 @@ describe("GoATableSortHeader", () => {
     const icon = container.querySelector("goa-icon");
 
     expect(button.classList.contains("asc"));
-    expect(icon.getAttribute("type")).toBe("caret-up")
+    expect(icon.getAttribute("type")).toBe("arrow-up")
   })
 
   it('binds desc direction param', async () => {
@@ -26,6 +26,6 @@ describe("GoATableSortHeader", () => {
     const icon = container.querySelector("goa-icon");
 
     expect(button.classList.contains("desc"));
-    expect(icon.getAttribute("type")).toBe("caret-down")
+    expect(icon.getAttribute("type")).toBe("arrow-down")
   })
 })

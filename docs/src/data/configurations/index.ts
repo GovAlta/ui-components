@@ -73,6 +73,7 @@ export { cardContentConfigurations } from './card-content';
 export { cardImageConfigurations } from './card-image';
 export { cardActionsConfigurations } from './card-actions';
 export { tableConfigurations } from './table';
+export { tableSortHeaderConfigurations } from './table-sort-header';
 export { dataGridConfigurations } from './data-grid';
 export { modalConfigurations } from './modal';
 export { drawerConfigurations } from './drawer';
@@ -147,6 +148,7 @@ import { cardContentConfigurations } from './card-content';
 import { cardImageConfigurations } from './card-image';
 import { cardActionsConfigurations } from './card-actions';
 import { tableConfigurations } from './table';
+import { tableSortHeaderConfigurations } from './table-sort-header';
 import { dataGridConfigurations } from './data-grid';
 import { modalConfigurations } from './modal';
 import { drawerConfigurations } from './drawer';
@@ -231,6 +233,7 @@ export const configurationRegistry: ConfigurationRegistry = {
   'card-image': cardImageConfigurations,
   'card-actions': cardActionsConfigurations,
   table: tableConfigurations,
+  'table-sort-header': tableSortHeaderConfigurations,
   'data-grid': dataGridConfigurations,
   modal: modalConfigurations,
   drawer: drawerConfigurations,

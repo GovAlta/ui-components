@@ -123,13 +123,14 @@ export function App() {
               <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3241">3241 V2 Experimental Wrappers</Link>
               <Link to="/features/v2-icons">v2 header icons</Link>
-              <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
-              <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
               <Link to="/features/3229">3229 V2 Menu Button vs size and icon-only</Link>
+              <Link to="/features/3344">3344 Table Multi-Sort</Link>
               <Link to="/features/3306">3306 Custom slug value for tabs</Link>
               <Link to="/features/3370">3370 Clear calendar day selection</Link>
               <Link to="/features/3396">3396 Text heading-2xs size</Link>
               <Link to="/features/v2-checkbox">3399 V2 Checkbox Spacing</Link>
+              <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
+              <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
               <Link to="/features/3398">3398 Group open prop</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
