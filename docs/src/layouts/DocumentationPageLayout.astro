@@ -17,6 +17,7 @@
  */
 
 import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
 import { TableOfContents } from '../components/TableOfContents';
@@ -63,6 +64,9 @@ const navCategories = await getNavCategories();
         </div>
 
         <div class="content-card">
+          <div class="breadcrumb-row">
+            <Breadcrumbs />
+          </div>
           <div class:list={["content-grid", { "with-toc": showToc }]}>
             <!-- Documentation Content -->
             <article class="prose-content">
@@ -131,6 +135,12 @@ const navCategories = await getNavCategories();
 
   .content-grid.with-toc {
     grid-template-columns: 1fr 200px;
+  }
+
+  /* Breadcrumb: match content-grid centering */
+  .breadcrumb-row {
+    max-width: 960px;
+    margin: 0 auto var(--goa-space-xs);
   }
 
   /* Prose typography */

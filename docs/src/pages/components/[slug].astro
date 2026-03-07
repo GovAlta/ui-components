@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ComponentPageLayout from '../../layouts/ComponentPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import PropsTable from '../../components/PropsTable.astro';
 import GuidanceGrid from '../../components/GuidanceGrid.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
@@ -28,6 +29,8 @@ export async function getStaticPaths() {
 
 const { component } = Astro.props;
 const { slug } = Astro.params;
+const categoryLabel = component.data.category
+  .split('-').map((w: string, i: number) => i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w).join(' ');
 
 // 1. Render the component MDX content
 const { Content } = await render(component);
@@ -65,11 +68,11 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
   category={component.data.category}
 >
   <div class="component-page">
+  <Breadcrumbs
+    parentGroup={{ label: categoryLabel, url: `/components?category=${component.data.category}` }}
+  />
   <!-- Component Header -->
   <header class="component-header">
-    <!-- Category Badge -->
-    <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={component.data.category.replace(/-/g, ' ')}></goa-badge>
-
     <!-- Title -->
     <h1 class="component-title">{component.data.name}</h1>
 

@@ -10,6 +10,7 @@
  */
 import { getCollection, render } from 'astro:content';
 import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
 import { TableOfContents } from '../../components/TableOfContents';
 import { getExampleCode } from '../../lib/example-code';
@@ -79,14 +80,9 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
   currentSlug={slug}
 >
   <article class="example-page">
+    <Breadcrumbs />
     <!-- Header -->
     <header class="example-header">
-      <!-- Back button -->
-      <goa-link version="2" leadingicon="arrow-back" size="small">
-        <a href="/examples">Back to all examples</a>
-      </goa-link>
-
-      <!-- Badges -->
       <div class="badges">
         {data.categories.map((cat: string) => (
           <goa-badge version="2" type="information" emphasis="subtle" icon="false" content={formatCategory(cat)}></goa-badge>
@@ -164,10 +160,6 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: var(--goa-space-l, 1.5rem);
-  }
-
-  .example-header goa-link {
-    margin-bottom: var(--goa-space-m, 1rem);
   }
 
   /* Badges */

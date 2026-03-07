@@ -11,6 +11,7 @@
  */
 import { getCollection } from 'astro:content';
 import ComponentPageLayout from '../../layouts/ComponentPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { ComponentsGrid } from '../../components/ComponentsGrid';
 
 // Get all visible components (filter out hidden)
@@ -34,6 +35,7 @@ const components = sortedComponents.map(component => ({
   description="Browse all GoA Design System components"
 >
   <div class="components-page">
+    <Breadcrumbs />
     <!-- Header -->
     <header class="page-header">
       <h1>All Components</h1>
