@@ -24,13 +24,14 @@ import {
   GoabFormItem,
   GoabIcon,
   GoabIconButton,
-  GoabInput,
   GoabPushDrawer,
 } from "@abgov/react-components";
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
 import { useContainerNarrow } from "../hooks/useContainerWidth";
 import { useViewSettings, type LayoutType } from "../hooks/useViewSettings";
+import { InlineSearch, type SlashCommand } from "./search/InlineSearch";
+import { useSearch } from "./search/useSearch";
 
 // Type for example data (matches Astro content collection)
 export interface Example {
@@ -106,27 +107,28 @@ function getCategoryBadgeType(
   }
 }
 
-// Format category for display
+// Format category for display (sentence case)
 function formatCategory(category: string): string {
-  return category.replace(/-/g, " ");
+  const words = category.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
 // Format scale for display
 function formatScale(scale: string): string {
-  return scale;
+  return scale.charAt(0).toUpperCase() + scale.slice(1);
 }
 
 // Format user type for display
 function formatUserType(userType: string): string {
-  return userType;
+  if (userType === "both") return "Citizen and worker";
+  return userType.charAt(0).toUpperCase() + userType.slice(1);
 }
 
 export function ExamplesGrid({ examples }: ExamplesGridProps) {
   // State
-  const [searchValue, setSearchValue] = useState("");
-  const [searchChips, setSearchChips] = useState<string[]>([]);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Ref for sticky detection sentinel
   const gridRef = useRef<HTMLDivElement>(null);
@@ -183,6 +185,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
     useTwoLevelSort();
   const isContainerNarrow = useContainerNarrow(gridRef, 780);
+  const { search, isLoading, error } = useSearch();
   const { viewSettings, setLayout } = useViewSettings({
     pageKey: "examples",
     defaultLayout: "card", // 'card' = grid view
@@ -241,11 +244,85 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
   // Extract unique filter values
   const filterOptions = useMemo(() => {
-    const categories = [...new Set(examples.flatMap((e) => e.data.categories))].sort();
-    const scales = [...new Set(examples.map((e) => e.data.scale))].sort();
-    const userTypes = [...new Set(examples.map((e) => e.data.userType))].sort();
-    return { categories, scales, userTypes };
+    const categories = [...new Set(examples.flatMap((e) => e.data.categories))].sort(
+      (a, b) => (a === "forms" ? -1 : b === "forms" ? 1 : a.localeCompare(b)),
+    );
+    const scales = [...new Set(examples.map((e) => e.data.scale))].sort((a, b) =>
+      a === "product" ? 1 : b === "product" ? -1 : a.localeCompare(b),
+    );
+    const allUserTypes = [...new Set(examples.map((e) => e.data.userType))].sort(
+      (a, b) => (a === "both" ? 1 : b === "both" ? -1 : a.localeCompare(b)),
+    );
+    const userTypes = allUserTypes.filter((ut) => ut !== "both");
+    return { categories, scales, userTypes, allUserTypes };
   }, [examples]);
+
+  // Slash commands derived from available filter values
+  const slashCommands = useMemo((): SlashCommand[] => {
+    const cmds: SlashCommand[] = [];
+    filterOptions.scales.forEach((scale) => {
+      cmds.push({
+        id: `scale:${scale}`,
+        label: formatScale(scale),
+        group: "Scale",
+        filterType: "scale",
+        filterValue: scale,
+        active: appliedFilters.scale.includes(scale),
+      });
+    });
+    filterOptions.categories.forEach((cat) => {
+      cmds.push({
+        id: `category:${cat}`,
+        label: formatCategory(cat),
+        group: "Category",
+        filterType: "category",
+        filterValue: cat,
+        active: appliedFilters.category.includes(cat),
+      });
+    });
+    filterOptions.allUserTypes.forEach((ut) => {
+      cmds.push({
+        id: `userType:${ut}`,
+        label: formatUserType(ut),
+        group: "User Type",
+        filterType: "userType",
+        filterValue: ut,
+        active:
+          ut === "both"
+            ? appliedFilters.userType.includes("citizen") &&
+              appliedFilters.userType.includes("worker")
+            : appliedFilters.userType.includes(ut),
+      });
+    });
+    return cmds;
+  }, [filterOptions, appliedFilters]);
+
+  const handleSlashCommand = useCallback((cmd: SlashCommand) => {
+    const filterType = cmd.filterType as "category" | "scale" | "userType";
+    // "both" expands to citizen + worker
+    if (filterType === "userType" && cmd.filterValue === "both") {
+      setAppliedFilters((prev) => {
+        const hasBoth =
+          prev.userType.includes("citizen") && prev.userType.includes("worker");
+        return {
+          ...prev,
+          userType: hasBoth
+            ? prev.userType.filter((v) => v !== "citizen" && v !== "worker")
+            : [...new Set([...prev.userType, "citizen", "worker"])],
+        };
+      });
+      return;
+    }
+    setAppliedFilters((prev) => {
+      const current = prev[filterType];
+      return {
+        ...prev,
+        [filterType]: current.includes(cmd.filterValue)
+          ? current.filter((v) => v !== cmd.filterValue)
+          : [...current, cmd.filterValue],
+      };
+    });
+  }, []);
 
   // View mode: 'card' = grid view, 'list' = list view
   // On mobile, always use grid view (cards)
@@ -271,24 +348,14 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   const filteredExamples = useMemo(() => {
     let result = examples;
 
-    // Apply search chips
-    if (searchChips.length > 0) {
-      result = result.filter((example) =>
-        searchChips.every(
-          (chip) =>
-            example.data.title.toLowerCase().includes(chip.toLowerCase()) ||
-            example.data.categories.some((cat) =>
-              cat.toLowerCase().includes(chip.toLowerCase()),
-            ) ||
-            example.data.scale.toLowerCase().includes(chip.toLowerCase()) ||
-            (example.data.tags || []).some((tag) =>
-              tag.toLowerCase().includes(chip.toLowerCase()),
-            ) ||
-            example.data.components.some((comp) =>
-              comp.toLowerCase().includes(chip.toLowerCase()),
-            ),
-        ),
-      );
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const searchResults = search(searchQuery, "example");
+      const matchingSlugs = new Set(searchResults.map((r) => r.slug));
+      const slugOrder = new Map(searchResults.map((r, i) => [r.slug, i]));
+      result = result
+        .filter((e) => matchingSlugs.has(e.slug))
+        .sort((a, b) => (slugOrder.get(a.slug) ?? 0) - (slugOrder.get(b.slug) ?? 0));
     }
 
     // Apply category filters (OR logic - show if example has ANY of the selected categories)
@@ -305,10 +372,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
       );
     }
 
-    // Apply userType filters
+    // Apply userType filters ("both" examples match either citizen or worker)
     if (appliedFilters.userType.length > 0) {
       result = result.filter((example) =>
-        appliedFilters.userType.includes(example.data.userType),
+        example.data.userType === "both"
+          ? appliedFilters.userType.includes("citizen") ||
+            appliedFilters.userType.includes("worker")
+          : appliedFilters.userType.includes(example.data.userType),
       );
     }
 
@@ -383,7 +453,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     }
 
     return result;
-  }, [examples, searchChips, appliedFilters, sortConfig]);
+  }, [examples, appliedFilters, sortConfig, searchQuery, search]);
 
   // Group examples
   const groupedExamples = useMemo(() => {
@@ -455,19 +525,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     });
   }, []);
 
-  // Search handlers
-  const applySearch = useCallback(() => {
-    const trimmed = searchValue.trim();
-    if (trimmed && !searchChips.includes(trimmed)) {
-      setSearchChips((prev) => [...prev, trimmed]);
-      setSearchValue("");
-    }
-  }, [searchValue, searchChips]);
-
-  const removeSearchChip = useCallback((chip: string) => {
-    setSearchChips((prev) => prev.filter((c) => c !== chip));
-  }, []);
-
   // Filter handlers
   const togglePendingFilter = useCallback(
     (filterType: "category" | "scale" | "userType", value: string) => {
@@ -502,9 +559,9 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     [],
   );
 
-  // Clear all filters and search
+  // Clear all filters, sort, and search
   const clearAll = useCallback(() => {
-    setSearchChips([]);
+    setSearchQuery("");
     clearAllFilters();
     clearSort();
   }, [clearAllFilters, clearSort]);
@@ -678,7 +735,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   );
 
   const hasActiveFilters =
-    searchChips.length > 0 ||
     appliedFilters.category.length > 0 ||
     appliedFilters.scale.length > 0 ||
     appliedFilters.userType.length > 0;
@@ -690,21 +746,18 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
       {/* Toolbar */}
       <div className={`examples-toolbar ${isSticky ? "examples-toolbar--sticky" : ""}`}>
-        {/* Search input */}
+        {/* Search input - filters the grid directly */}
         <div className="examples-search-section">
-          <GoabFormItem
-            helpText={!isSticky ? "Search by keyword, category, or name" : undefined}
-          >
-            <GoabInput
-              name="exampleSearch"
-              value={searchValue}
-              leadingIcon="search"
-              width="100%"
-              size="compact"
-              onChange={(e) => setSearchValue(e.value)}
-              onKeyPress={(e) => e.key === "Enter" && applySearch()}
-            />
-          </GoabFormItem>
+          <InlineSearch
+            value={searchQuery}
+            onChange={setSearchQuery}
+            onClear={() => setSearchQuery("")}
+            placeholder="Search or type / to filter..."
+            commands={slashCommands}
+            onCommandSelect={handleSlashCommand}
+            isLoading={isLoading}
+            error={error}
+          />
         </div>
 
         {/* View toggle + Filters */}
@@ -779,14 +832,29 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             fillColor="var(--goa-color-text-secondary)"
           />
 
-          {/* Search chips */}
-          {searchChips.map((chip) => (
+          {/* Sort chips */}
+          {sortConfig.primary && (
             <GoabFilterChip
-              key={chip}
-              content={chip}
-              onClick={() => removeSearchChip(chip)}
+              content={sortConfig.primary.key}
+              leadingIcon={
+                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText={sortConfig.secondary ? "1st" : undefined}
+              onClick={() =>
+                setSortConfig({ primary: sortConfig.secondary, secondary: null })
+              }
             />
-          ))}
+          )}
+          {sortConfig.secondary && (
+            <GoabFilterChip
+              content={sortConfig.secondary.key}
+              leadingIcon={
+                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText="2nd"
+              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
+            />
+          )}
 
           {/* Category filter chips */}
           {appliedFilters.category.map((cat) => (
@@ -1156,14 +1224,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           flex-direction: row;
           align-items: flex-start;
           gap: var(--goa-space-m);
-          padding: var(--goa-space-m) 0;
-          margin-bottom: 12px;
+          padding: var(--goa-space-m) 0 var(--goa-space-xs);
           transition: padding 0.15s ease;
         }
 
         /* When sticky - add shadow */
         .examples-toolbar--sticky {
-          padding: var(--goa-space-s) 0;
+          padding: var(--goa-space-s) 0 var(--goa-space-xs);
           margin-bottom: 0;
           background: transparent;
         }
@@ -1190,6 +1257,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           display: flex;
           align-items: flex-start;
           gap: var(--goa-space-m);
+          min-height: 40px;
         }
 
         /* Narrow container: stack toolbar vertically */
@@ -1237,12 +1305,14 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           align-items: center;
           gap: var(--goa-space-s);
           flex-wrap: wrap;
-          margin-bottom: var(--goa-space-m);
+          padding-top: var(--goa-space-2xs);
+          margin-bottom: var(--goa-space-l);
         }
 
         .examples-count {
           color: var(--goa-color-text-secondary);
           font: var(--goa-typography-body-s);
+          margin-top: var(--goa-space-m);
           margin-bottom: var(--goa-space-m);
         }
 

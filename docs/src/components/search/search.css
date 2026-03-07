@@ -114,6 +114,11 @@
   background: transparent;
 }
 
+.search-input-field:focus,
+.search-input-field:focus-visible {
+  outline: none;
+}
+
 .search-input-field::placeholder {
   color: var(--goa-color-greyscale-500, #666);
 }
@@ -747,6 +752,232 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ==========================================================================
+   Inline Search (grid pages)
+   ========================================================================== */
+
+.inline-search {
+  position: relative;
+}
+
+/* Give the input a full border and compact padding when used inline */
+.inline-search .search-input-container {
+  border: 1px solid var(--goa-color-greyscale-300, #ccc);
+  border-radius: var(--goa-border-radius-m);
+  border-bottom: 1px solid var(--goa-color-greyscale-300, #ccc);
+  padding: var(--goa-space-xs) var(--goa-space-m);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.inline-search:focus-within .search-input-container {
+  border-color: var(--goa-color-greyscale-black);
+  box-shadow: inset 0 0 0 1px var(--goa-color-greyscale-black);
+}
+
+/* Suppress browser/global focus outline on the input itself —
+   the container's :focus-within border is the visual indicator */
+.inline-search .search-input-field:focus,
+.inline-search .search-input-field:focus-visible {
+  outline: none;
+}
+
+/* ==========================================================================
+   Inline Slash Commands Dropdown
+   ========================================================================== */
+
+.inline-search-commands {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: white;
+  border: 1px solid var(--goa-color-greyscale-200, #e0e0e0);
+  border-radius: var(--goa-border-radius-m);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  max-height: 50vh;
+  overflow-y: auto;
+  margin-top: var(--goa-space-2xs);
+  animation: inlineCommandsIn 100ms ease-out;
+}
+
+@keyframes inlineCommandsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inline-commands-group-header {
+  padding: var(--goa-space-xs) var(--goa-space-l);
+  font: var(--goa-typography-body-xs);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--goa-color-greyscale-500, #666);
+}
+
+.inline-commands-group:not(:first-child) .inline-commands-group-header {
+  border-top: 1px solid var(--goa-color-greyscale-200, #e0e0e0);
+  padding-top: var(--goa-space-s);
+}
+
+.inline-commands-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.inline-commands-item {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+  padding: var(--goa-space-s) var(--goa-space-l);
+  cursor: pointer;
+  transition: background-color 100ms ease;
+}
+
+.inline-commands-item:hover,
+.inline-commands-item[data-selected="true"] {
+  background: var(--goa-color-greyscale-100, #f5f5f5);
+}
+
+.inline-commands-command {
+  font: var(--goa-typography-body-m);
+  font-weight: 600;
+  color: var(--goa-color-interactive-default, #0070c4);
+  min-width: 0;
+}
+
+.inline-commands-shortcut {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-500, #666);
+}
+
+.inline-commands-label {
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-600, #555);
+}
+
+.inline-commands-check {
+  margin-left: auto;
+  color: var(--goa-color-interactive-default, #0070c4);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.inline-commands-item--active {
+  background: var(--goa-color-greyscale-50, #fafafa);
+}
+
+/* Dimension picker items (stepped slash commands) */
+
+.inline-commands-meta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+  flex-shrink: 0;
+}
+
+.inline-commands-active-count {
+  font: var(--goa-typography-body-xs);
+  color: var(--goa-color-interactive-default, #0070c4);
+  font-weight: 600;
+}
+
+.inline-commands-chevron {
+  color: var(--goa-color-greyscale-400, #999);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Back button at top of value list (stepped mode) */
+
+.inline-commands-back {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-xs);
+  width: 100%;
+  padding: var(--goa-space-xs) var(--goa-space-l);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--goa-color-greyscale-200, #e0e0e0);
+  cursor: pointer;
+  font: var(--goa-typography-body-s);
+  font-weight: 600;
+  color: var(--goa-color-greyscale-600, #555);
+  text-align: left;
+}
+
+.inline-commands-back:hover {
+  background: var(--goa-color-greyscale-100, #f5f5f5);
+}
+
+.inline-commands-back-arrow {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.inline-commands-footer {
+  padding: var(--goa-space-xs) var(--goa-space-l);
+  border-top: 1px solid var(--goa-color-greyscale-200, #e0e0e0);
+  font: var(--goa-typography-body-xs);
+  color: var(--goa-color-greyscale-500, #666);
+}
+
+.inline-commands-footer kbd {
+  display: inline-block;
+  padding: 0 var(--goa-space-2xs);
+  font-family: var(--goa-font-family-mono, monospace);
+  font-size: 11px;
+  background: var(--goa-color-greyscale-100, #f5f5f5);
+  border: 1px solid var(--goa-color-greyscale-200, #e0e0e0);
+  border-radius: 3px;
+}
+
+/* Inline search error state */
+.inline-search-error {
+  padding: var(--goa-space-m) var(--goa-space-l);
+  text-align: center;
+}
+
+.inline-search-error strong {
+  display: block;
+  color: var(--goa-color-status-emergency, #d32f2f);
+  font: var(--goa-typography-body-s);
+  font-weight: var(--goa-font-weight-semi-bold);
+  margin-bottom: var(--goa-space-2xs);
+}
+
+.inline-search-error p {
+  margin: 0;
+  font: var(--goa-typography-body-xs);
+  color: var(--goa-color-greyscale-600, #555);
+}
+
+/* Inline search loading state */
+.inline-search-loading {
+  padding: var(--goa-space-m) var(--goa-space-l);
+  text-align: center;
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-600, #555);
+}
+
+@media (max-width: 640px) {
+  .inline-commands-item {
+    min-height: 44px;
+  }
 }
 
 /* Mobile adjustments for search page */
