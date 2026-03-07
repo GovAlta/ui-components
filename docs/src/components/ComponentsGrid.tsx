@@ -24,13 +24,14 @@ import {
   GoabFormItem,
   GoabIcon,
   GoabIconButton,
-  GoabInput,
   GoabPushDrawer,
 } from "@abgov/react-components";
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
 import { useContainerNarrow } from "../hooks/useContainerWidth";
 import { useViewSettings } from "../hooks/useViewSettings";
+import { InlineSearch, type SlashCommand } from "./search/InlineSearch";
+import { useSearch } from "./search/useSearch";
 
 // Type for component data (matches Astro content collection)
 export interface Component {
@@ -103,10 +104,8 @@ function getCategoryBadgeType(
 
 // Format category for display
 function formatCategory(category: string): string {
-  return category
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  const words = category.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
 // Format status for display
@@ -117,10 +116,9 @@ function formatStatus(status: string): string {
 
 export function ComponentsGrid({ components }: ComponentsGridProps) {
   // State
-  const [searchValue, setSearchValue] = useState("");
-  const [searchChips, setSearchChips] = useState<string[]>([]);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Ref for grid container (used by ResizeObserver for container-aware breakpoints)
   const gridRef = useRef<HTMLDivElement>(null);
@@ -178,6 +176,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
     useTwoLevelSort();
   const isContainerNarrow = useContainerNarrow(gridRef, 624);
+  const { search, isLoading, error } = useSearch();
   const { viewSettings, setLayout } = useViewSettings({
     pageKey: "components",
     defaultLayout: "card", // 'card' = grid view
@@ -240,6 +239,45 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     return { categories, statuses };
   }, [components]);
 
+  // Slash commands derived from available filter values
+  const slashCommands = useMemo((): SlashCommand[] => {
+    const cmds: SlashCommand[] = [];
+    filterOptions.categories.forEach((cat) => {
+      cmds.push({
+        id: `category:${cat}`,
+        label: formatCategory(cat),
+        group: "Category",
+        filterType: "category",
+        filterValue: cat,
+        active: appliedFilters.category.includes(cat),
+      });
+    });
+    filterOptions.statuses.forEach((status) => {
+      cmds.push({
+        id: `status:${status}`,
+        label: formatStatus(status),
+        group: "Status",
+        filterType: "status",
+        filterValue: status,
+        active: appliedFilters.status.includes(status),
+      });
+    });
+    return cmds;
+  }, [filterOptions, appliedFilters]);
+
+  const handleSlashCommand = useCallback((cmd: SlashCommand) => {
+    const filterType = cmd.filterType as "category" | "status";
+    setAppliedFilters((prev) => {
+      const current = prev[filterType];
+      return {
+        ...prev,
+        [filterType]: current.includes(cmd.filterValue)
+          ? current.filter((v) => v !== cmd.filterValue)
+          : [...current, cmd.filterValue],
+      };
+    });
+  }, []);
+
   // View mode: 'card' = grid view, 'list' = list view (table)
   const viewMode = useMemo(
     (): "card" | "list" => (viewSettings.layout === "list" ? "list" : "card"),
@@ -263,24 +301,15 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   const filteredComponents = useMemo(() => {
     let result = components;
 
-    // Apply search chips
-    if (searchChips.length > 0) {
-      result = result.filter((component) =>
-        searchChips.every(
-          (chip) =>
-            component.data.name.toLowerCase().includes(chip.toLowerCase()) ||
-            (component.data.description || "")
-              .toLowerCase()
-              .includes(chip.toLowerCase()) ||
-            component.data.category.toLowerCase().includes(chip.toLowerCase()) ||
-            (component.data.tags || []).some((tag) =>
-              tag.toLowerCase().includes(chip.toLowerCase()),
-            ) ||
-            (component.data.webComponentTag || "")
-              .toLowerCase()
-              .includes(chip.toLowerCase()),
-        ),
-      );
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const searchResults = search(searchQuery, "component");
+      const matchingSlugs = new Set(searchResults.map((r) => r.slug));
+      // Preserve search relevance order by sorting to match searchResults order
+      const slugOrder = new Map(searchResults.map((r, i) => [r.slug, i]));
+      result = result
+        .filter((c) => matchingSlugs.has(c.slug))
+        .sort((a, b) => (slugOrder.get(a.slug) ?? 0) - (slugOrder.get(b.slug) ?? 0));
     }
 
     // Apply category filters
@@ -359,7 +388,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     }
 
     return result;
-  }, [components, searchChips, appliedFilters, sortConfig]);
+  }, [components, appliedFilters, sortConfig, searchQuery, search]);
 
   // Group components by category
   const groupedComponents = useMemo(() => {
@@ -425,19 +454,6 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     });
   }, []);
 
-  // Search handlers
-  const applySearch = useCallback(() => {
-    const trimmed = searchValue.trim();
-    if (trimmed && !searchChips.includes(trimmed)) {
-      setSearchChips((prev) => [...prev, trimmed]);
-      setSearchValue("");
-    }
-  }, [searchValue, searchChips]);
-
-  const removeSearchChip = useCallback((chip: string) => {
-    setSearchChips((prev) => prev.filter((c) => c !== chip));
-  }, []);
-
   // Filter handlers
   const togglePendingFilter = useCallback(
     (filterType: "category" | "status", value: string) => {
@@ -472,9 +488,9 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     [],
   );
 
-  // Clear all filters, search, and sort
+  // Clear all filters, sort, and search
   const clearAll = useCallback(() => {
-    setSearchChips([]);
+    setSearchQuery("");
     clearAllFilters();
     clearSort();
   }, [clearAllFilters, clearSort]);
@@ -601,9 +617,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   );
 
   const hasActiveFilters =
-    searchChips.length > 0 ||
-    appliedFilters.category.length > 0 ||
-    appliedFilters.status.length > 0;
+    appliedFilters.category.length > 0 || appliedFilters.status.length > 0;
 
   return (
     <div className="components-grid" ref={gridRef}>
@@ -614,21 +628,18 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
       <div
         className={`components-toolbar ${isSticky ? "components-toolbar--sticky" : ""}`}
       >
-        {/* Search input */}
+        {/* Search input - filters the grid directly */}
         <div className="components-search-section">
-          <GoabFormItem
-            helpText={!isSticky ? "Search by name, category, or tag" : undefined}
-          >
-            <GoabInput
-              name="componentSearch"
-              value={searchValue}
-              leadingIcon="search"
-              width="100%"
-              size="compact"
-              onChange={(e) => setSearchValue(e.value)}
-              onKeyPress={(e) => e.key === "Enter" && applySearch()}
-            />
-          </GoabFormItem>
+          <InlineSearch
+            value={searchQuery}
+            onChange={setSearchQuery}
+            onClear={() => setSearchQuery("")}
+            placeholder="Search or type / to filter..."
+            commands={slashCommands}
+            onCommandSelect={handleSlashCommand}
+            isLoading={isLoading}
+            error={error}
+          />
         </div>
 
         {/* View toggle + Filters */}
@@ -703,14 +714,29 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
             fillColor="var(--goa-color-text-secondary)"
           />
 
-          {/* Search chips */}
-          {searchChips.map((chip) => (
+          {/* Sort chips */}
+          {sortConfig.primary && (
             <GoabFilterChip
-              key={chip}
-              content={chip}
-              onClick={() => removeSearchChip(chip)}
+              content={sortConfig.primary.key}
+              leadingIcon={
+                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText={sortConfig.secondary ? "1st" : undefined}
+              onClick={() =>
+                setSortConfig({ primary: sortConfig.secondary, secondary: null })
+              }
             />
-          ))}
+          )}
+          {sortConfig.secondary && (
+            <GoabFilterChip
+              content={sortConfig.secondary.key}
+              leadingIcon={
+                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText="2nd"
+              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
+            />
+          )}
 
           {/* Category filter chips */}
           {appliedFilters.category.map((cat) => (
@@ -1014,14 +1040,13 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           flex-direction: row;
           align-items: flex-start;
           gap: var(--goa-space-m);
-          padding: var(--goa-space-m) 0;
-          margin-bottom: 12px;
+          padding: var(--goa-space-m) 0 var(--goa-space-xs);
           transition: padding 0.15s ease;
         }
 
         /* When sticky - add shadow */
         .components-toolbar--sticky {
-          padding: var(--goa-space-s) 0;
+          padding: var(--goa-space-s) 0 var(--goa-space-xs);
           background: transparent;
           margin-bottom: 0;
         }
@@ -1048,6 +1073,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           display: flex;
           align-items: flex-start;
           gap: var(--goa-space-m);
+          min-height: 40px;
         }
 
         /* Narrow container: stack toolbar vertically */
@@ -1096,12 +1122,14 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           align-items: center;
           gap: var(--goa-space-s);
           flex-wrap: wrap;
-          margin-bottom: var(--goa-space-m);
+          padding-top: var(--goa-space-2xs);
+          margin-bottom: var(--goa-space-l);
         }
 
         .components-count {
           color: var(--goa-color-text-secondary);
           font: var(--goa-typography-body-s);
+          margin-top: var(--goa-space-m);
           margin-bottom: var(--goa-space-m);
         }
 

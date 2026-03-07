@@ -3,6 +3,9 @@
 import '@abgov/web-components/index.css';
 import '@design-tokens/tokens.css';
 
+// Import search styles eagerly so inline search inputs don't flash unstyled
+import '../components/search/search.css';
+
 // Global search modal (available on all pages)
 import { SearchModal } from '../components/search';
 

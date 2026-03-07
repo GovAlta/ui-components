@@ -9,7 +9,7 @@
  *   const { history, addToHistory, clearHistory } = useSearchHistory();
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 
 // ============================================================================
 // Types
@@ -18,7 +18,7 @@ import { useState, useCallback, useEffect } from 'react';
 export interface HistoryItem {
   /** The result that was clicked */
   id: string;
-  type: 'component' | 'example' | 'token' | 'page';
+  type: "component" | "example" | "token" | "page";
   title: string;
   slug: string;
   /** Category slug for components (e.g., 'inputs-and-actions') */
@@ -33,7 +33,7 @@ interface UseSearchHistoryReturn {
   /** Recent search history, most recent first */
   history: HistoryItem[];
   /** Add a result to history */
-  addToHistory: (item: Omit<HistoryItem, 'timestamp'>) => void;
+  addToHistory: (item: Omit<HistoryItem, "timestamp">) => void;
   /** Clear all history */
   clearHistory: () => void;
 }
@@ -42,7 +42,7 @@ interface UseSearchHistoryReturn {
 // Constants
 // ============================================================================
 
-const STORAGE_KEY = 'goa-ds-recent-searches';
+const STORAGE_KEY = "goa-ds-recent-searches";
 const MAX_HISTORY_ITEMS = 5;
 
 // ============================================================================
@@ -53,7 +53,7 @@ const MAX_HISTORY_ITEMS = 5;
  * Safely read history from localStorage.
  */
 function readHistory(): HistoryItem[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
 
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -65,13 +65,13 @@ function readHistory(): HistoryItem[] {
     // Validate each item has required fields
     return parsed.filter(
       (item): item is HistoryItem =>
-        typeof item === 'object' &&
+        typeof item === "object" &&
         item !== null &&
-        typeof item.id === 'string' &&
-        typeof item.type === 'string' &&
-        typeof item.title === 'string' &&
-        typeof item.slug === 'string' &&
-        typeof item.timestamp === 'number'
+        typeof item.id === "string" &&
+        typeof item.type === "string" &&
+        typeof item.title === "string" &&
+        typeof item.slug === "string" &&
+        typeof item.timestamp === "number",
     );
   } catch {
     return [];
@@ -82,13 +82,13 @@ function readHistory(): HistoryItem[] {
  * Safely write history to localStorage.
  */
 function writeHistory(history: HistoryItem[]): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
   } catch (error) {
     // localStorage might be full or disabled
-    console.warn('Failed to save search history:', error);
+    console.warn("Failed to save search history:", error);
   }
 }
 
@@ -109,8 +109,8 @@ export function useSearchHistory(): UseSearchHistoryReturn {
    * Deduplicates by id+type, moves existing items to top.
    * Limits to MAX_HISTORY_ITEMS.
    */
-  const addToHistory = useCallback((item: Omit<HistoryItem, 'timestamp'>) => {
-    setHistory(prev => {
+  const addToHistory = useCallback((item: Omit<HistoryItem, "timestamp">) => {
+    setHistory((prev) => {
       // Create the new item with timestamp
       const newItem: HistoryItem = {
         ...item,
@@ -118,9 +118,7 @@ export function useSearchHistory(): UseSearchHistoryReturn {
       };
 
       // Remove any existing item with same id+type (dedup)
-      const filtered = prev.filter(
-        h => !(h.id === item.id && h.type === item.type)
-      );
+      const filtered = prev.filter((h) => !(h.id === item.id && h.type === item.type));
 
       // Add new item at the start, limit to max items
       const updated = [newItem, ...filtered].slice(0, MAX_HISTORY_ITEMS);
@@ -137,7 +135,7 @@ export function useSearchHistory(): UseSearchHistoryReturn {
    */
   const clearHistory = useCallback(() => {
     setHistory([]);
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       localStorage.removeItem(STORAGE_KEY);
     }
   }, []);
