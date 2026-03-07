@@ -178,6 +178,22 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     status: string[];
   }>({ category: [], status: [] });
 
+  // Read URL params on mount for initial filters (e.g. ?category=inputs-and-actions)
+  const [urlFiltersApplied, setUrlFiltersApplied] = useState(false);
+  useEffect(() => {
+    if (urlFiltersApplied) return;
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = {
+      category: params.get("category")?.split(",").filter(Boolean) ?? [],
+      status: params.get("status")?.split(",").filter(Boolean) ?? [],
+    };
+    if (fromUrl.category.length || fromUrl.status.length) {
+      setPendingFilters(fromUrl);
+      setAppliedFilters(fromUrl);
+    }
+    setUrlFiltersApplied(true);
+  }, [urlFiltersApplied]);
+
   // Hooks
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
     useTwoLevelSort();

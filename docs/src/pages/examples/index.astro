@@ -11,6 +11,7 @@
  */
 import { getCollection } from 'astro:content';
 import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { ExamplesGrid } from '../../components/ExamplesGrid';
 
 // Get all examples
@@ -35,6 +36,7 @@ const examples = sortedExamples.map(example => ({
   description="Code examples showing GoA Design System components in context"
 >
   <div class="examples-page">
+    <Breadcrumbs />
     <!-- Header -->
     <header class="page-header">
       <h1>Examples</h1>
