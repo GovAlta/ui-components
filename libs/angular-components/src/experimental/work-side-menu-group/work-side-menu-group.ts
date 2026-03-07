@@ -1,6 +1,7 @@
 import { GoabIconType } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
+  booleanAttribute,
   Component,
   Input,
   OnInit,
@@ -16,6 +17,7 @@ import {
       <goa-work-side-menu-group
         [attr.heading]="heading"
         [attr.icon]="icon"
+        [attr.open]="open ? '' : null"
         [attr.testid]="testId"
       >
         <ng-content />
@@ -27,6 +29,7 @@ import {
 export class GoabxWorkSideMenuGroup implements OnInit {
   @Input({ required: true }) heading!: string;
   @Input({ required: true }) icon!: GoabIconType;
+  @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() testId?: string;
 
   isReady = false;

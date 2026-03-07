@@ -131,6 +131,7 @@ export function App() {
               <Link to="/features/v2-checkbox">3399 V2 Checkbox Spacing</Link>
               <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
               <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
+              <Link to="/features/3398">3398 Group open prop</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>
