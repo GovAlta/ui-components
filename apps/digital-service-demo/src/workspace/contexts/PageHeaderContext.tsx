@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+} from "react";
 
 interface PageHeaderValuesType {
   title: string;
@@ -17,7 +24,7 @@ const PageHeaderContext = createContext<PageHeaderContextType | undefined>(undef
 
 export function PageHeaderProvider({ children }: { children: ReactNode }) {
   const [values, setValuesState] = useState<PageHeaderValuesType>({
-    title: '',
+    title: "",
     actions: undefined,
     tabs: undefined,
     toolbar: undefined,
@@ -63,14 +70,24 @@ interface UsePageHeaderOptions {
 export function usePageHeader(title: string, options?: UsePageHeaderOptions | ReactNode) {
   const context = useContext(PageHeaderContext);
   if (!context) {
-    throw new Error('usePageHeader must be used within PageHeaderProvider');
+    throw new Error("usePageHeader must be used within PageHeaderProvider");
   }
 
-  const isOptionsObject = options && typeof options === 'object' && ('actions' in options || 'tabs' in options || 'toolbar' in options || 'hideTitleOnScroll' in options);
-  const actions = isOptionsObject ? (options as UsePageHeaderOptions).actions : options as ReactNode;
+  const isOptionsObject =
+    options &&
+    typeof options === "object" &&
+    ("actions" in options ||
+      "tabs" in options ||
+      "toolbar" in options ||
+      "hideTitleOnScroll" in options);
+  const actions = isOptionsObject
+    ? (options as UsePageHeaderOptions).actions
+    : (options as ReactNode);
   const tabs = isOptionsObject ? (options as UsePageHeaderOptions).tabs : undefined;
   const toolbar = isOptionsObject ? (options as UsePageHeaderOptions).toolbar : undefined;
-  const hideTitleOnScroll = isOptionsObject ? (options as UsePageHeaderOptions).hideTitleOnScroll ?? false : false;
+  const hideTitleOnScroll = isOptionsObject
+    ? ((options as UsePageHeaderOptions).hideTitleOnScroll ?? false)
+    : false;
 
   // Update header when title changes (e.g., after data loads)
   // Actions/tabs/toolbar should be memoized by calling component to avoid loops
@@ -86,7 +103,7 @@ export function usePageHeader(title: string, options?: UsePageHeaderOptions | Re
     // Cleanup on unmount
     return () => {
       context.setValues({
-        title: '',
+        title: "",
         actions: undefined,
         tabs: undefined,
         toolbar: undefined,
@@ -103,7 +120,7 @@ export function usePageHeader(title: string, options?: UsePageHeaderOptions | Re
 export function usePageHeaderContext() {
   const context = useContext(PageHeaderContext);
   if (!context) {
-    throw new Error('usePageHeaderContext must be used within PageHeaderProvider');
+    throw new Error("usePageHeaderContext must be used within PageHeaderProvider");
   }
   return context.values;
 }

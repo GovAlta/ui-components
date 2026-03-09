@@ -13,7 +13,7 @@ import {
 
 interface CaseDetailHeaderProps {
   referenceNumber?: string;
-  statuses?: Array<{ label: string; type?: string, emphasis?: string }>;
+  statuses?: Array<{ label: string; type?: string; emphasis?: string }>;
   assignedTo?: string | null;
   onUnassign?: () => void;
   isLoading?: boolean;
@@ -40,7 +40,9 @@ export function CaseDetailHeader({
       {/* Status Badges */}
       <div className="case-detail-header__badges">
         {isLoading ? (
-          <div style={{ display: "flex", gap: "var(--goa-space-s)", alignItems: "center" }}>
+          <div
+            style={{ display: "flex", gap: "var(--goa-space-s)", alignItems: "center" }}
+          >
             <div style={{ minWidth: "70px" }}>
               <GoabSkeleton type="text" maxWidth="70px" />
             </div>
@@ -69,13 +71,15 @@ export function CaseDetailHeader({
               <GoabText mb="none" mt="none">
                 {referenceNumber}
               </GoabText>
-              <GoabTooltip content={copiedField === 'referenceNumber' ? 'Copied' : 'Copy'}>
+              <GoabTooltip
+                content={copiedField === "referenceNumber" ? "Copied" : "Copy"}
+              >
                 <GoabIconButton
                   icon="copy"
                   ariaLabel="Copy reference number"
                   variant="dark"
                   size="small"
-                  onClick={() => handleCopy(referenceNumber, 'referenceNumber')}
+                  onClick={() => handleCopy(referenceNumber, "referenceNumber")}
                 />
               </GoabTooltip>
             </>

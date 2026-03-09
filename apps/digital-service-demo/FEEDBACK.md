@@ -7,6 +7,7 @@ While implementing a full public form demo using `GoabPublicForm`, we encountere
 **Demo:** https://publicform.netlify.app
 
 **Overview:**
+
 - 4 bug fixes applied
 - 6 enhancements implemented (logic changes)
 - 6 checkbox/form pattern issues documented
@@ -31,9 +32,9 @@ While implementing a full public form demo using `GoabPublicForm`, we encountere
 
 - **No `onBack` callback** — When user clicks the form's Back button, the parent component isn't notified. We need to know when they click "Back to all tasks" so we can navigate to the task list instead of the previous question.
 
-- **Content renders below heading** — The back link needs to appear *above* the page heading (per Figma), but `GoabPublicFormPage` children render below it.
+- **Content renders below heading** — The back link needs to appear _above_ the page heading (per Figma), but `GoabPublicFormPage` children render below it.
 
-**What we did:** Hide the native back button (`backVisibility="hidden"`), render our own `BackLink` component *outside* `GoabPublicForm`, and manually track the current page from state to determine what text to show and where to navigate.
+**What we did:** Hide the native back button (`backVisibility="hidden"`), render our own `BackLink` component _outside_ `GoabPublicForm`, and manually track the current page from state to determine what text to show and where to navigate.
 
 **Open to better approaches** — If there's a cleaner way to handle this (props, callbacks, slots), happy to refactor.
 
@@ -60,6 +61,7 @@ While implementing a full public form demo using `GoabPublicForm`, we encountere
 - Modified `Form.svelte` to detect page validators and pass full `dataBuffer`
 
 **Example usage:**
+
 ```typescript
 phone: {
   label: "Phone number",
@@ -74,6 +76,7 @@ phone: {
 ```
 
 **Files modified:**
+
 - `validators.ts` — Added types and factory
 - `public-form.ts` — Changed `validators` type to `AnyValidator[]`
 - `Form.svelte` — Pass full `dataBuffer` to page validators
@@ -126,6 +129,7 @@ phone: {
 2. **`validate()`** - Checks `state.dataBuffer` for field values
 
 During normal navigation, `setPageVisibility()` populates `dataBuffer` from `data[pageId]`:
+
 ```javascript
 // In setPageVisibility() - line 514
 _state.dataBuffer = (_state.data[pageId] as PFPage) || {};
@@ -181,10 +185,12 @@ _state.dataBuffer = (_state.data[_currentPage] as PFPage) || {};
 - `editHeading` (string) — Modal heading when editing
 
 **Files modified:**
+
 - `libs/web-components/src/components/form/Subform.svelte`
 - `libs/react-components/src/lib/form/public-subform.tsx`
 
 **Usage example:**
+
 ```tsx
 <GoabPfSubform
   formContent={<DependantForm />}
@@ -206,6 +212,7 @@ This is backward-compatible - existing usages without these props continue to wo
 **Problem:** When validation fails, users only see field-level errors. Figma design shows an error summary callout at the top of the form listing all errors.
 
 **Solution implemented:**
+
 - `FormPage.svelte`: Added `errors` prop (JSON string), renders `goa-callout` with `type="emergency"` `emphasis="low"` `version="2"`
 - `Form.svelte`: Updated `renderErrors()` to set `errors` attribute on FormPage, added scroll to top
 
@@ -218,6 +225,7 @@ This is backward-compatible - existing usages without these props continue to wo
 **Solution:** Added `<slot name="description" />` to FormPage.svelte that renders before error summary.
 
 **Usage:**
+
 ```tsx
 <GoabPublicFormPage id="dependants">
   <p slot="description">Add all dependants under 18...</p>
@@ -271,36 +279,47 @@ These V2 components are used within public forms but have bugs that affect the e
 ## Suggestions
 
 ### 1. Add `backText` prop to GoabPublicFormPage
+
 **Why:** First page of each task needs "Back to all tasks" to return to task list. Subsequent pages need "Back" to go to previous question. Can't customize per page currently.
 
 ### 2. Add `onBack` callback
+
 **Why:** When user clicks "Back to all tasks", the parent component needs to navigate to the task list instead of the previous form page. Currently we listen for DOM events manually.
 
 ### 3. Expose current page info
+
 **Why:** Need to conditionally show/hide back button and change its text based on whether we're on the first page. Currently we manually check `currentPage === "urgent-need"`.
 
 ### 4. Add Button variant="text"
+
 **Why:** Forms need action buttons styled as links ("Save and exit", "Back to all tasks"). GoabxLink is for navigation only. We created custom styled buttons as workaround.
 
 ### 5. Don't mutate state directly
+
 **Why:** Form mutates `_state.history` with `pop()`. In React, this causes reference issues — React doesn't detect the change. Creating a new array instead would work better with React's state model.
 
 ### 6. Built-in conditional validation support
+
 **Why:** Common pattern: "phone required if phone checkbox selected." We built `ConditionalRequiredValidator` but it adds complexity. Could be a core feature.
 
 ### 7. Error summary should be built-in
+
 **Why:** Figma designs show error summary callout at top of page. Standard accessibility pattern. We added it manually via props, but it could be default behavior.
 
 ### 8. Error summary links should focus fields
+
 **Why:** Figma shows error summary items as clickable links that focus the related field. Standard accessibility pattern. We implemented as plain text because click handlers in nested shadow DOMs didn't work reliably.
 
 ### 9. Subform needs API for external edit/delete triggers
+
 **Why:** React slot children don't update dynamically, so we render the repeater list outside `<GoabPfSubform>`. But then Edit/Delete buttons can't trigger subform actions. We reach into shadow DOM as workaround. Methods like `subform.edit(id)` would be cleaner.
 
 ### 10. Refactor init() to use setPageVisibility()
+
 **Why:** `init()` sets page visibility directly, bypassing `setPageVisibility()` which also populates `dataBuffer`. This caused validation bugs on form re-entry. We patched it, but refactoring would be cleaner.
 
 ### 11. Make FormPage heading margin configurable
+
 **Why:** Currently hardcoded `mb="xl"` (32px). Pages with description text below the heading need tighter spacing (~8px gap between heading and description).
 
 ---
@@ -319,6 +338,7 @@ Rewrote FormSummary.svelte template and styles to match Figma review cards:
 - Long answers: constrained to 50% → wraps full width below
 
 **Also added helper functions:**
+
 - `isFileField()` — file answers render as clickable links
 - `formatValue()` — converts "checked" → "Yes"
 - `shouldShowHeading()` — hides redundant heading for single-field pages
@@ -344,20 +364,21 @@ The new architecture uses **direct DOM event dispatching** with `bubbles: true` 
 
 ### Files Deleted
 
-| File | Lines Removed | Reason |
-|------|---------------|--------|
-| `Fieldset.svelte` | ~400 | Abstraction layer removed. Form.svelte now queries `[data-pf-item]` elements directly. |
-| `SubForm.svelte` | ~340 | Replaced by simpler `Subform.svelte` (83 lines). New version is just a modal wrapper. |
-| `SubFormIndex.svelte` | ~80 | List rendering moved to consuming app. React manages the list directly. |
-| `public-form-controller.ts` | ~380 | State management consolidated into Form.svelte. Types moved to `public-form.ts`. |
-| `use-public-form-controller.ts` | ~110 | React hook replaced by `_init` callback pattern. |
-| `relay-types.ts` | ~230 | Custom message types no longer needed with direct dispatch. |
+| File                            | Lines Removed | Reason                                                                                 |
+| ------------------------------- | ------------- | -------------------------------------------------------------------------------------- |
+| `Fieldset.svelte`               | ~400          | Abstraction layer removed. Form.svelte now queries `[data-pf-item]` elements directly. |
+| `SubForm.svelte`                | ~340          | Replaced by simpler `Subform.svelte` (83 lines). New version is just a modal wrapper.  |
+| `SubFormIndex.svelte`           | ~80           | List rendering moved to consuming app. React manages the list directly.                |
+| `public-form-controller.ts`     | ~380          | State management consolidated into Form.svelte. Types moved to `public-form.ts`.       |
+| `use-public-form-controller.ts` | ~110          | React hook replaced by `_init` callback pattern.                                       |
+| `relay-types.ts`                | ~230          | Custom message types no longer needed with direct dispatch.                            |
 
 **Total removed:** ~1,550 lines
 
 ### Why This Happened
 
 While building the demo, I ran into issues with the relay system:
+
 1. Events not reaching React wrappers (the `bubbles: true` bug)
 2. Difficulty tracing the message flow between components
 3. Subform state not syncing properly with parent form
@@ -377,20 +398,24 @@ If the original architecture was serving a purpose I missed, we can restore it a
 ## Files Changed
 
 **libs/web-components/src/components/form/**
+
 - `Form.svelte` — Bug fixes (bubbles, dataBuffer, resetErrors), PageValidator support, error passing, subform validation skip
 - `FormPage.svelte` — Error summary, errorSummaryPosition, description slot, spacing
 - `FormSummary.svelte` — Styling overhaul, helper functions
 - `Subform.svelte` — Customization props
 
 **libs/react-components/src/lib/form/**
+
 - `public-form-page.tsx` — errorSummaryPosition prop
 - `public-subform.tsx` — Subform customization props
 
 **libs/common/src/lib/**
+
 - `validators.ts` — PageValidator, ConditionalRequiredValidator
 - `public-form.ts` — AnyValidator type, PFField type property
 
 **Also touched (minor):**
+
 - `DatePicker.svelte` — Label text fix ("—Select month—")
 
 ---

@@ -1,6 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GoabDivider, GoabIconButton, GoabSkeleton, GoabText } from "@abgov/react-components";
+import {
+  GoabDivider,
+  GoabIconButton,
+  GoabSkeleton,
+  GoabText,
+} from "@abgov/react-components";
 import { GoabxBadge, GoabxButton, GoabxLink } from "@abgov/react-components/experimental";
 import { supabase, CaseWithSubmission } from "../../lib/supabase";
 import { getDateGroupLabel, formatRelativeTime } from "../../workspace/utils/dateUtils";
@@ -31,11 +36,18 @@ interface TimelineItem {
   description: string;
   timestamp: Date;
   actor: string;
-  badge?: { label: string; type: "success" | "important" | "information" | "emergency" | "archived" };
+  badge?: {
+    label: string;
+    type: "success" | "important" | "information" | "emergency" | "archived";
+  };
 }
 
 // Map action types to display info
-function getActionDisplay(action: Action): { title: string; description: string; badge?: TimelineItem["badge"] } {
+function getActionDisplay(action: Action): {
+  title: string;
+  description: string;
+  badge?: TimelineItem["badge"];
+} {
   const { action_type, actor, details } = action;
 
   switch (action_type) {
@@ -218,7 +230,10 @@ export function TimelinePage() {
       <div className="timeline-page">
         <div className="timeline-page__content">
           <GoabText size="heading-m">Application not found</GoabText>
-          <GoabxButton type="tertiary" onClick={() => navigate("/workspace/applications")}>
+          <GoabxButton
+            type="tertiary"
+            onClick={() => navigate("/workspace/applications")}
+          >
             Back to applications
           </GoabxButton>
         </div>
@@ -255,7 +270,9 @@ export function TimelinePage() {
           </div>
         ) : groupedItems.length === 0 ? (
           <div className="timeline-page__empty">
-            <GoabText color="secondary">No activity recorded for this application yet.</GoabText>
+            <GoabText color="secondary">
+              No activity recorded for this application yet.
+            </GoabText>
           </div>
         ) : (
           <div className="timeline-page__groups">

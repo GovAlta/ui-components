@@ -57,7 +57,7 @@ export function CommentsDrawer({
   };
 
   const handleEditComment = (commentId: number) => {
-    const comment = comments.find(c => c.id === commentId);
+    const comment = comments.find((c) => c.id === commentId);
     if (comment) {
       setEditingCommentId(commentId);
       setEditingCommentText(comment.text);
@@ -107,10 +107,20 @@ export function CommentsDrawer({
                 Add comment
               </GoabText>
               <GoabButtonGroup alignment="end">
-                <GoabxButton type="tertiary" size="compact" onClick={handleClearComment} disabled={!commentText.trim()}>
+                <GoabxButton
+                  type="tertiary"
+                  size="compact"
+                  onClick={handleClearComment}
+                  disabled={!commentText.trim()}
+                >
                   Clear
                 </GoabxButton>
-                <GoabxButton type="primary" size="compact" disabled={!commentText.trim()} onClick={handleSaveComment}>
+                <GoabxButton
+                  type="primary"
+                  size="compact"
+                  disabled={!commentText.trim()}
+                  onClick={handleSaveComment}
+                >
                   Save
                 </GoabxButton>
               </GoabButtonGroup>
@@ -131,77 +141,92 @@ export function CommentsDrawer({
 
           {/* Comments List */}
           <div className="page__comments_list">
-            {[...comments].sort((a, b) => {
-              const dateA = parseDate(a.timestamp);
-              const dateB = parseDate(b.timestamp);
-              if (!dateA) return 1;
-              if (!dateB) return -1;
-              return dateB.getTime() - dateA.getTime();
-            }).map((comment) => (
-              <div key={comment.id} className="page__comments_single">
-                <div className="page__comments_single_heading">
-                  <div>
-                    <div className="page__comments_single_author">
-                      {comment.author}
+            {[...comments]
+              .sort((a, b) => {
+                const dateA = parseDate(a.timestamp);
+                const dateB = parseDate(b.timestamp);
+                if (!dateA) return 1;
+                if (!dateB) return -1;
+                return dateB.getTime() - dateA.getTime();
+              })
+              .map((comment) => (
+                <div key={comment.id} className="page__comments_single">
+                  <div className="page__comments_single_heading">
+                    <div>
+                      <div className="page__comments_single_author">{comment.author}</div>
+                      <div className="page__comments_single_date">
+                        {comment.timestamp}
+                      </div>
                     </div>
-                    <div className="page__comments_single_date">
-                      {comment.timestamp}
-                    </div>
+                    {comment.isOwned && editingCommentId !== comment.id && (
+                      <GoabxMenuButton
+                        type="tertiary"
+                        size="compact"
+                        leadingIcon="ellipsis-vertical:filled"
+                        text=""
+                        ariaLabel="Comment actions"
+                        onAction={(e: any) => {
+                          const action =
+                            (e as any)?.detail?.action || (e as any)?.action || "";
+                          if (action === "edit") {
+                            handleEditComment(comment.id);
+                          } else if (action === "delete") {
+                            handleDeleteComment(comment.id);
+                          }
+                        }}
+                      >
+                        <GoabxMenuAction text="Edit" action="edit" />
+                        <GoabxMenuAction text="Delete" action="delete" />
+                      </GoabxMenuButton>
+                    )}
                   </div>
-                  {comment.isOwned && editingCommentId !== comment.id && (
-                    <GoabxMenuButton
-                      type="tertiary"
-                      size="compact"
-                      leadingIcon="ellipsis-vertical:filled"
-                      text=""
-                      ariaLabel="Comment actions"
-                      onAction={(e: any) => {
-                        const action = (e as any)?.detail?.action || (e as any)?.action || "";
-                        if (action === "edit") {
-                          handleEditComment(comment.id);
-                        } else if (action === "delete") {
-                          handleDeleteComment(comment.id);
-                        }
-                      }}
-                    >
-                      <GoabxMenuAction text="Edit" action="edit" />
-                      <GoabxMenuAction text="Delete" action="delete" />
-                    </GoabxMenuButton>
-                  )}
+                  <div className="page__comments_single_content">
+                    {editingCommentId === comment.id ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "var(--goa-space-s)",
+                        }}
+                      >
+                        <GoabFormItem>
+                          <GoabTextArea
+                            name={`edit-comment-${comment.id}`}
+                            key={`edit-comment-${comment.id}`}
+                            value={editingCommentText}
+                            countBy="character"
+                            onChange={(e: any) => {
+                              const value = e?.value ?? e?.detail?.value ?? "";
+                              setEditingCommentText(value);
+                            }}
+                            maxCount={200}
+                          />
+                        </GoabFormItem>
+                        <GoabButtonGroup alignment="end">
+                          <GoabxButton
+                            type="tertiary"
+                            size="compact"
+                            onClick={handleCancelEditComment}
+                          >
+                            Cancel
+                          </GoabxButton>
+                          <GoabxButton
+                            type="primary"
+                            size="compact"
+                            onClick={handleSaveEditComment}
+                          >
+                            Save
+                          </GoabxButton>
+                        </GoabButtonGroup>
+                      </div>
+                    ) : (
+                      <GoabText size="body-s" mb="none" mt="none" color="secondary">
+                        {comment.text}
+                      </GoabText>
+                    )}
+                  </div>
                 </div>
-                <div className="page__comments_single_content">
-                  {editingCommentId === comment.id ? (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "var(--goa-space-s)" }}>
-                      <GoabFormItem>
-                        <GoabTextArea
-                          name={`edit-comment-${comment.id}`}
-                          key={`edit-comment-${comment.id}`}
-                          value={editingCommentText}
-                          countBy="character"
-                          onChange={(e: any) => {
-                            const value = e?.value ?? e?.detail?.value ?? "";
-                            setEditingCommentText(value);
-                          }}
-                          maxCount={200}
-                        />
-                      </GoabFormItem>
-                      <GoabButtonGroup alignment="end">
-                        <GoabxButton type="tertiary" size="compact" onClick={handleCancelEditComment}>
-                          Cancel
-                        </GoabxButton>
-                        <GoabxButton type="primary" size="compact" onClick={handleSaveEditComment}>
-                          Save
-                        </GoabxButton>
-                      </GoabButtonGroup>
-                    </div>
-                  ) : (
-                    <GoabText size="body-s" mb="none" mt="none" color="secondary">
-                      {comment.text}
-                    </GoabText>
-                  )}
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </GoabxDrawer>
@@ -213,7 +238,11 @@ export function CommentsDrawer({
         calloutVariant="emergency"
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabxButton type="tertiary" size="compact" onClick={() => setShowDeleteCommentModal(false)}>
+            <GoabxButton
+              type="tertiary"
+              size="compact"
+              onClick={() => setShowDeleteCommentModal(false)}
+            >
               Cancel
             </GoabxButton>
             <GoabxButton

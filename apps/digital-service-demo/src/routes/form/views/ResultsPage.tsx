@@ -1,5 +1,9 @@
 import { GoabButtonGroup, GoabText } from "@abgov/react-components";
-import { GoabxButton, GoabxCallout, GoabxLink } from "@abgov/react-components/experimental";
+import {
+  GoabxButton,
+  GoabxCallout,
+  GoabxLink,
+} from "@abgov/react-components/experimental";
 
 type ResultsPageProps = {
   referenceId?: string;
@@ -12,7 +16,12 @@ type ResultsPageProps = {
  * Results Page - shown after successful application submission
  * Matches Figma design: node-id=60560-209724
  */
-export function ResultsPage({ referenceId, citizenEmail, onBackToDashboard, onBackToStart }: ResultsPageProps) {
+export function ResultsPage({
+  referenceId,
+  citizenEmail,
+  onBackToDashboard,
+  onBackToStart,
+}: ResultsPageProps) {
   return (
     <div className="form-set">
       <GoabText as="h1" size="heading-l" mt="2xl" mb="xl">
@@ -35,13 +44,12 @@ export function ResultsPage({ referenceId, citizenEmail, onBackToDashboard, onBa
       </GoabText>
 
       <GoabText size="body-m" mt="none" mb="m">
-        We've sent your application for review. You will be contacted by email if we
-        need any more information from you. You can now close this window.
+        We've sent your application for review. You will be contacted by email if we need
+        any more information from you. You can now close this window.
       </GoabText>
 
       <GoabText size="body-m" mt="none" mb="xl">
-        What did you think of this service?{" "}
-        <a href="#">Give feedback</a>
+        What did you think of this service? <a href="#">Give feedback</a>
       </GoabText>
 
       <GoabText as="h2" size="heading-s" mt="none" mb="s">
@@ -52,7 +60,14 @@ export function ResultsPage({ referenceId, citizenEmail, onBackToDashboard, onBa
         Contact the Service Support team.
       </GoabText>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--goa-space-m)", marginBottom: "var(--goa-space-2xl)" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--goa-space-m)",
+          marginBottom: "var(--goa-space-2xl)",
+        }}
+      >
         <GoabText size="body-m" mt="none" mb="none">
           <strong>Email:</strong>{" "}
           <a href="mailto:information@gov.ab.ca">information@gov.ab.ca</a>

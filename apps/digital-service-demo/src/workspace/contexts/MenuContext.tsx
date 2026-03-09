@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 interface MenuContextType {
   menuOpen: boolean;
@@ -18,8 +18,8 @@ export function MenuProvider({ children }: { children: ReactNode }) {
     const handleResize = () => {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -32,7 +32,7 @@ export function MenuProvider({ children }: { children: ReactNode }) {
 export function useMenu() {
   const context = useContext(MenuContext);
   if (context === undefined) {
-    throw new Error('useMenu must be used within MenuProvider');
+    throw new Error("useMenu must be used within MenuProvider");
   }
   return context;
 }

@@ -30,7 +30,12 @@ type Task3FormProps = {
  * 5. When needed (date picker)
  * 6. Review (GoabPublicFormSummary)
  */
-export function Task3Form({ initialState, readOnly = false, onComplete, onExit }: Task3FormProps) {
+export function Task3Form({
+  initialState,
+  readOnly = false,
+  onComplete,
+  onExit,
+}: Task3FormProps) {
   const [state, setState] = useState<PFState | undefined>();
 
   // Initialize form with outline and any existing state
@@ -38,7 +43,11 @@ export function Task3Form({ initialState, readOnly = false, onComplete, onExit }
     let stateToUse = initialState || { data: {}, dataBuffer: {}, history: [] };
 
     // In readOnly mode or re-entering a completed task, start on review page
-    if (readOnly || (stateToUse.history.length > 0 && stateToUse.history[stateToUse.history.length - 1] === "")) {
+    if (
+      readOnly ||
+      (stateToUse.history.length > 0 &&
+        stateToUse.history[stateToUse.history.length - 1] === "")
+    ) {
       const cleanedHistory = stateToUse.history.filter((h) => h !== "");
       if (!cleanedHistory.includes("review")) {
         cleanedHistory.push("review");
@@ -103,9 +112,7 @@ export function Task3Form({ initialState, readOnly = false, onComplete, onExit }
             transition: "opacity 150ms ease-in-out",
           }}
         >
-          <BackLink onClick={() => onExit(state || null)}>
-            Back to all tasks
-          </BackLink>
+          <BackLink onClick={() => onExit(state || null)}>Back to all tasks</BackLink>
         </div>
       )}
 

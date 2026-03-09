@@ -4,7 +4,10 @@ type DrawerType = "review" | null;
 type DecisionType = "approve" | "deny" | "requestInfo" | null;
 
 interface ActionHandlers {
-  onSubmitReview?: (decision: Exclude<DecisionType, null>, details: string) => Promise<void>;
+  onSubmitReview?: (
+    decision: Exclude<DecisionType, null>,
+    details: string,
+  ) => Promise<void>;
 }
 
 interface PushDrawerContextValue {
@@ -48,18 +51,20 @@ export function PushDrawerProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <PushDrawerContext.Provider value={{
-      isOpen,
-      drawerType,
-      decision,
-      setDecision,
-      formValue,
-      setFormValue,
-      openDrawer,
-      closeDrawer,
-      handlers,
-      registerHandlers,
-    }}>
+    <PushDrawerContext.Provider
+      value={{
+        isOpen,
+        drawerType,
+        decision,
+        setDecision,
+        formValue,
+        setFormValue,
+        openDrawer,
+        closeDrawer,
+        handlers,
+        registerHandlers,
+      }}
+    >
       {children}
     </PushDrawerContext.Provider>
   );

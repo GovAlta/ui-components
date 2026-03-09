@@ -1,4 +1,8 @@
-import { GoabxFormItem, GoabxDropdown, GoabxDropdownItem } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxDropdown,
+  GoabxDropdownItem,
+} from "@abgov/react-components/experimental";
 import { GoabDetails } from "@abgov/react-components";
 
 /**
@@ -23,16 +27,28 @@ export function MaritalStatus() {
 
       <GoabDetails heading="How do I know my marital status?" mb="none">
         <p>
-          Your marital status is your legal relationship status. Choose the option
-          that best describes your current situation.
+          Your marital status is your legal relationship status. Choose the option that
+          best describes your current situation.
         </p>
         <ul>
-          <li><strong>Single:</strong> Never been legally married</li>
-          <li><strong>Married:</strong> Currently legally married</li>
-          <li><strong>Common-law:</strong> Living with a partner for at least 12 months</li>
-          <li><strong>Separated:</strong> Legally married but living apart from your spouse</li>
-          <li><strong>Divorced:</strong> Marriage has been legally dissolved</li>
-          <li><strong>Widowed:</strong> Spouse has passed away</li>
+          <li>
+            <strong>Single:</strong> Never been legally married
+          </li>
+          <li>
+            <strong>Married:</strong> Currently legally married
+          </li>
+          <li>
+            <strong>Common-law:</strong> Living with a partner for at least 12 months
+          </li>
+          <li>
+            <strong>Separated:</strong> Legally married but living apart from your spouse
+          </li>
+          <li>
+            <strong>Divorced:</strong> Marriage has been legally dissolved
+          </li>
+          <li>
+            <strong>Widowed:</strong> Spouse has passed away
+          </li>
         </ul>
       </GoabDetails>
     </div>

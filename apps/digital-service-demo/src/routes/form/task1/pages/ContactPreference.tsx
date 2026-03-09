@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { GoabxFormItem, GoabxCheckbox, GoabxInput } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxCheckbox,
+  GoabxInput,
+} from "@abgov/react-components/experimental";
 
 /**
  * Page 4: Contact Preference

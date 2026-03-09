@@ -42,7 +42,10 @@ interface TimelineItem {
   description: string;
   timestamp: Date;
   actor: string;
-  badge?: { label: string; type: "success" | "important" | "information" | "emergency" | "archived" };
+  badge?: {
+    label: string;
+    type: "success" | "important" | "information" | "emergency" | "archived";
+  };
   isOwned?: boolean;
   originalComment?: Comment;
 }
@@ -58,7 +61,11 @@ interface TimelineDrawerProps {
 }
 
 // Map action types to display info
-function getActionDisplay(action: Action): { title: string; description: string; badge?: TimelineItem["badge"] } {
+function getActionDisplay(action: Action): {
+  title: string;
+  description: string;
+  badge?: TimelineItem["badge"];
+} {
   const { action_type, actor, details } = action;
 
   switch (action_type) {
@@ -341,29 +348,36 @@ export function TimelineDrawer({
                             )}
                           </div>
                           <div className="timeline__item-meta">
-                            <GoabText size="body-xs" color="secondary" mb="none" mt="none">
+                            <GoabText
+                              size="body-xs"
+                              color="secondary"
+                              mb="none"
+                              mt="none"
+                            >
                               {formatRelativeTime(item.timestamp.toISOString())}
                             </GoabText>
-                            {item.type === "comment" && item.isOwned && editingCommentId !== item.originalComment?.id && (
-                              <GoabxMenuButton
-                                type="tertiary"
-                                size="compact"
-                                leadingIcon="ellipsis-vertical:filled"
-                                text=""
-                                ariaLabel="Comment actions"
-                                onAction={(e: any) => {
-                                  const action = e?.detail?.action || e?.action || "";
-                                  if (action === "edit") {
-                                    handleEditComment(item.originalComment!.id);
-                                  } else if (action === "delete") {
-                                    handleDeleteComment(item.originalComment!.id);
-                                  }
-                                }}
-                              >
-                                <GoabxMenuAction text="Edit" action="edit" />
-                                <GoabxMenuAction text="Delete" action="delete" />
-                              </GoabxMenuButton>
-                            )}
+                            {item.type === "comment" &&
+                              item.isOwned &&
+                              editingCommentId !== item.originalComment?.id && (
+                                <GoabxMenuButton
+                                  type="tertiary"
+                                  size="compact"
+                                  leadingIcon="ellipsis-vertical:filled"
+                                  text=""
+                                  ariaLabel="Comment actions"
+                                  onAction={(e: any) => {
+                                    const action = e?.detail?.action || e?.action || "";
+                                    if (action === "edit") {
+                                      handleEditComment(item.originalComment!.id);
+                                    } else if (action === "delete") {
+                                      handleDeleteComment(item.originalComment!.id);
+                                    }
+                                  }}
+                                >
+                                  <GoabxMenuAction text="Edit" action="edit" />
+                                  <GoabxMenuAction text="Delete" action="delete" />
+                                </GoabxMenuButton>
+                              )}
                           </div>
                         </div>
 
@@ -382,10 +396,18 @@ export function TimelineDrawer({
                               />
                             </GoabFormItem>
                             <GoabButtonGroup alignment="end" mt="s">
-                              <GoabxButton type="tertiary" size="compact" onClick={handleCancelEditComment}>
+                              <GoabxButton
+                                type="tertiary"
+                                size="compact"
+                                onClick={handleCancelEditComment}
+                              >
                                 Cancel
                               </GoabxButton>
-                              <GoabxButton type="primary" size="compact" onClick={handleSaveEditComment}>
+                              <GoabxButton
+                                type="primary"
+                                size="compact"
+                                onClick={handleSaveEditComment}
+                              >
                                 Save
                               </GoabxButton>
                             </GoabButtonGroup>
@@ -416,10 +438,19 @@ export function TimelineDrawer({
         calloutVariant="emergency"
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabxButton type="tertiary" size="compact" onClick={() => setShowDeleteModal(false)}>
+            <GoabxButton
+              type="tertiary"
+              size="compact"
+              onClick={() => setShowDeleteModal(false)}
+            >
               Cancel
             </GoabxButton>
-            <GoabxButton type="primary" size="compact" variant="destructive" onClick={confirmDeleteComment}>
+            <GoabxButton
+              type="primary"
+              size="compact"
+              variant="destructive"
+              onClick={confirmDeleteComment}
+            >
               Delete comment
             </GoabxButton>
           </GoabButtonGroup>

@@ -8,8 +8,8 @@ export function IdInfo() {
   return (
     <div className="form-fields">
       <GoabText size="body-m" mt="none">
-        To verify your age, you will need to provide your date of birth. This
-        helps us determine your eligibility for age-restricted services.
+        To verify your age, you will need to provide your date of birth. This helps us
+        determine your eligibility for age-restricted services.
       </GoabText>
     </div>
   );

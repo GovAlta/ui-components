@@ -27,89 +27,92 @@ import { SortConfig } from "../utils/searchUtils";
  *   setSortConfig(prev => ({ ...prev, secondary: null }));
  */
 export function useTwoLevelSort(initialConfig?: SortConfig) {
-    const [sortConfig, setSortConfig] = useState<SortConfig>(
-        initialConfig ?? { primary: null, secondary: null }
-    );
+  const [sortConfig, setSortConfig] = useState<SortConfig>(
+    initialConfig ?? { primary: null, secondary: null },
+  );
 
-    /**
-     * Sort by a specific key. Core cycling logic.
-     * Click cycle: none -> asc -> desc -> none
-     */
-    const sortByKey = useCallback((key: string) => {
-        setSortConfig(prev => {
-            const currentPrimary = prev.primary;
-            const currentSecondary = prev.secondary;
+  /**
+   * Sort by a specific key. Core cycling logic.
+   * Click cycle: none -> asc -> desc -> none
+   */
+  const sortByKey = useCallback((key: string) => {
+    setSortConfig((prev) => {
+      const currentPrimary = prev.primary;
+      const currentSecondary = prev.secondary;
 
-            // If clicking on current primary: cycle asc -> desc -> remove
-            if (currentPrimary?.key === key) {
-                if (currentPrimary.direction === 'asc') {
-                    // asc -> desc
-                    return {
-                        primary: { key, direction: 'desc' },
-                        secondary: currentSecondary
-                    };
-                } else {
-                    // desc -> remove (promote secondary to primary)
-                    return {
-                        primary: currentSecondary,
-                        secondary: null
-                    };
-                }
-            }
+      // If clicking on current primary: cycle asc -> desc -> remove
+      if (currentPrimary?.key === key) {
+        if (currentPrimary.direction === "asc") {
+          // asc -> desc
+          return {
+            primary: { key, direction: "desc" },
+            secondary: currentSecondary,
+          };
+        } else {
+          // desc -> remove (promote secondary to primary)
+          return {
+            primary: currentSecondary,
+            secondary: null,
+          };
+        }
+      }
 
-            // If clicking on current secondary: cycle asc -> desc -> remove
-            if (currentSecondary?.key === key) {
-                if (currentSecondary.direction === 'asc') {
-                    // asc -> desc
-                    return {
-                        primary: currentPrimary,
-                        secondary: { key, direction: 'desc' }
-                    };
-                } else {
-                    // desc -> remove
-                    return {
-                        primary: currentPrimary,
-                        secondary: null
-                    };
-                }
-            }
+      // If clicking on current secondary: cycle asc -> desc -> remove
+      if (currentSecondary?.key === key) {
+        if (currentSecondary.direction === "asc") {
+          // asc -> desc
+          return {
+            primary: currentPrimary,
+            secondary: { key, direction: "desc" },
+          };
+        } else {
+          // desc -> remove
+          return {
+            primary: currentPrimary,
+            secondary: null,
+          };
+        }
+      }
 
-            // New field: if no primary, set as primary; if primary exists, set as secondary
-            if (!currentPrimary) {
-                return {
-                    primary: { key, direction: 'asc' },
-                    secondary: null
-                };
-            } else {
-                return {
-                    primary: currentPrimary,
-                    secondary: { key, direction: 'asc' }
-                };
-            }
-        });
-    }, []);
+      // New field: if no primary, set as primary; if primary exists, set as secondary
+      if (!currentPrimary) {
+        return {
+          primary: { key, direction: "asc" },
+          secondary: null,
+        };
+      } else {
+        return {
+          primary: currentPrimary,
+          secondary: { key, direction: "asc" },
+        };
+      }
+    });
+  }, []);
 
-    /**
-     * Handle sort from table header click event.
-     * Convenience wrapper around sortByKey.
-     */
-    const handleTableSort = useCallback((event: GoabTableOnSortDetail) => {
-        const { sortBy } = event;
-        sortByKey(sortBy);
-    }, [sortByKey]);
+  /**
+   * Handle sort from table header click event.
+   * Convenience wrapper around sortByKey.
+   */
+  const handleTableSort = useCallback(
+    (event: GoabTableOnSortDetail) => {
+      const { sortBy } = event;
+      sortByKey(sortBy);
+    },
+    [sortByKey],
+  );
 
-    /**
-     * Clear all sorting.
-     */
-    const clearSort = useCallback(() => {
-        setSortConfig({ primary: null, secondary: null });
-    }, []);
+  /**
+   * Clear all sorting.
+   */
+  const clearSort = useCallback(() => {
+    setSortConfig({ primary: null, secondary: null });
+  }, []);
 
-    return {
-        sortConfig,
-        setSortConfig,
-        sortByKey,
-        handleTableSort,
-        clearSort
-    };
+  return {
+    sortConfig,
+    setSortConfig,
+    sortByKey,
+    handleTableSort,
+    clearSort,
+  };
 }

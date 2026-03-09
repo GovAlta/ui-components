@@ -1,5 +1,9 @@
-import { Outlet } from 'react-router-dom';
-import { GoabOneColumnLayout, GoabPageBlock, GoabAppHeader } from '@abgov/react-components';
+import { Outlet } from "react-router-dom";
+import {
+  GoabOneColumnLayout,
+  GoabPageBlock,
+  GoabAppHeader,
+} from "@abgov/react-components";
 
 export function CitizenLayout() {
   return (

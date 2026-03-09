@@ -1,7 +1,15 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef, ReactNode } from 'react';
-import { useMenu } from './MenuContext';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  ReactNode,
+} from "react";
+import { useMenu } from "./MenuContext";
 
-export type ScrollPosition = 'no-scroll' | 'at-top' | 'middle' | 'at-bottom';
+export type ScrollPosition = "no-scroll" | "at-top" | "middle" | "at-bottom";
 
 interface ScrollStateContextType {
   scrollPosition: ScrollPosition;
@@ -18,20 +26,22 @@ interface ScrollStateProviderProps {
 const TRANSITION_LOCK_MS = 0;
 
 export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
-  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>('no-scroll');
+  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("no-scroll");
   const [isScrollable, setIsScrollable] = useState(false);
   const { isMobile } = useMenu();
 
   // Track when we're in a transition lock period
   const transitionLockRef = useRef<number | null>(null);
-  const lastPositionRef = useRef<ScrollPosition>('no-scroll');
+  const lastPositionRef = useRef<ScrollPosition>("no-scroll");
 
   const calculateScrollState = useCallback(() => {
-    const containerSelector = isMobile ? '.mobile-content-container' : '.desktop-card-container';
+    const containerSelector = isMobile
+      ? ".mobile-content-container"
+      : ".desktop-card-container";
     const container = document.querySelector(containerSelector);
 
     if (!container) {
-      setScrollPosition('no-scroll');
+      setScrollPosition("no-scroll");
       setIsScrollable(false);
       return;
     }
@@ -45,11 +55,11 @@ export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
     const scrollableExitThreshold = 100;
 
     // Hysteresis thresholds for scroll position
-    const enterThreshold = 5;   // Distance to ENTER a boundary state
-    const exitThreshold = 15;   // Distance to EXIT a boundary state
+    const enterThreshold = 5; // Distance to ENTER a boundary state
+    const exitThreshold = 15; // Distance to EXIT a boundary state
 
     // Update isScrollable with hysteresis
-    setIsScrollable(prev => {
+    setIsScrollable((prev) => {
       if (prev) {
         return scrollOverflow > -scrollableExitThreshold;
       } else {
@@ -60,51 +70,51 @@ export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
     // Calculate what position we WOULD be in
     const calculateTargetPosition = (prevPosition: ScrollPosition): ScrollPosition => {
       // Handle no-scroll -> scrolled
-      if (prevPosition === 'no-scroll') {
+      if (prevPosition === "no-scroll") {
         if (scrollOverflow <= scrollableEnterThreshold) {
-          return 'no-scroll';
+          return "no-scroll";
         }
         if (scrollTop <= enterThreshold) {
-          return 'at-top';
+          return "at-top";
         }
         if (distanceFromBottom <= enterThreshold) {
-          return 'at-bottom';
+          return "at-bottom";
         }
-        return 'middle';
+        return "middle";
       }
 
       // Exit to no-scroll only if content fits with margin
       if (scrollOverflow <= -scrollableExitThreshold) {
-        return 'no-scroll';
+        return "no-scroll";
       }
 
       // From at-top - need to scroll far to leave
-      if (prevPosition === 'at-top') {
+      if (prevPosition === "at-top") {
         if (scrollTop > exitThreshold) {
-          return 'middle';
+          return "middle";
         }
-        return 'at-top';
+        return "at-top";
       }
 
       // From at-bottom - need to scroll far to leave
-      if (prevPosition === 'at-bottom') {
+      if (prevPosition === "at-bottom") {
         if (distanceFromBottom > exitThreshold) {
-          return 'middle';
+          return "middle";
         }
-        return 'at-bottom';
+        return "at-bottom";
       }
 
       // From middle - check boundaries
       if (scrollTop <= enterThreshold) {
-        return 'at-top';
+        return "at-top";
       }
       if (distanceFromBottom <= enterThreshold) {
-        return 'at-bottom';
+        return "at-bottom";
       }
-      return 'middle';
+      return "middle";
     };
 
-    setScrollPosition(prevPosition => {
+    setScrollPosition((prevPosition) => {
       const targetPosition = calculateTargetPosition(prevPosition);
 
       // If position would change, check if we're in a transition lock
@@ -127,7 +137,9 @@ export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
   }, [isMobile]);
 
   useEffect(() => {
-    const containerSelector = isMobile ? '.mobile-content-container' : '.desktop-card-container';
+    const containerSelector = isMobile
+      ? ".mobile-content-container"
+      : ".desktop-card-container";
     const container = document.querySelector(containerSelector);
 
     if (!container) return;
@@ -161,7 +173,7 @@ export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
     calculateScrollState();
 
     // Listen for scroll
-    container.addEventListener('scroll', handleScroll, { passive: true });
+    container.addEventListener("scroll", handleScroll, { passive: true });
 
     // Listen for content size changes (debounced)
     const resizeObserver = new ResizeObserver(handleResize);
@@ -177,12 +189,12 @@ export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
     const handleWindowResize = () => {
       setTimeout(calculateScrollState, 10);
     };
-    window.addEventListener('resize', handleWindowResize, { passive: true });
+    window.addEventListener("resize", handleWindowResize, { passive: true });
 
     return () => {
-      container.removeEventListener('scroll', handleScroll);
+      container.removeEventListener("scroll", handleScroll);
       resizeObserver.disconnect();
-      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener("resize", handleWindowResize);
       if (rafId) cancelAnimationFrame(rafId);
       if (resizeDebounceId) clearTimeout(resizeDebounceId);
     };
@@ -198,7 +210,7 @@ export function ScrollStateProvider({ children }: ScrollStateProviderProps) {
 export function useScrollState() {
   const context = useContext(ScrollStateContext);
   if (context === undefined) {
-    throw new Error('useScrollState must be used within a ScrollStateProvider');
+    throw new Error("useScrollState must be used within a ScrollStateProvider");
   }
   return context;
 }

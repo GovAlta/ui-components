@@ -12,11 +12,7 @@ export function WhenNeeded() {
   return (
     <div className="form-fields">
       <GoabxFormItem label="">
-        <GoabxDatePicker
-          name="assistanceDate"
-          data-pf-item=""
-          min={tomorrow}
-        />
+        <GoabxDatePicker name="assistanceDate" data-pf-item="" min={tomorrow} />
       </GoabxFormItem>
     </div>
   );

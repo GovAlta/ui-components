@@ -16,11 +16,7 @@ interface FormShellProps {
  *
  * Designed for citizen-facing services using the "one idea per page" pattern.
  */
-export function FormShell({
-  serviceName,
-  serviceDescription,
-  children
-}: FormShellProps) {
+export function FormShell({ serviceName, serviceDescription, children }: FormShellProps) {
   return (
     <div className="form-shell">
       {serviceName && (
@@ -31,9 +27,7 @@ export function FormShell({
           )}
         </header>
       )}
-      <main className="form-shell__content">
-        {children}
-      </main>
+      <main className="form-shell__content">{children}</main>
     </div>
   );
 }

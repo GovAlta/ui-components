@@ -28,7 +28,13 @@ type Task2FormProps = {
  * 2. Date of birth (date picker)
  * 3. Review (GoabPublicFormSummary)
  */
-export function Task2Form({ initialState, readOnly = false, onComplete, onIneligible, onExit }: Task2FormProps) {
+export function Task2Form({
+  initialState,
+  readOnly = false,
+  onComplete,
+  onIneligible,
+  onExit,
+}: Task2FormProps) {
   const [state, setState] = useState<PFState | undefined>();
   const [wasReentry, setWasReentry] = useState(false);
 
@@ -45,7 +51,8 @@ export function Task2Form({ initialState, readOnly = false, onComplete, onInelig
       stateToUse = { ...stateToUse, history: cleanedHistory };
       setWasReentry(true);
     } else {
-      const isReentryTask = stateToUse.history.length > 0 &&
+      const isReentryTask =
+        stateToUse.history.length > 0 &&
         stateToUse.history[stateToUse.history.length - 1] === "";
 
       // If re-entering a completed task, clean up history so it ends with "review"
@@ -120,9 +127,7 @@ export function Task2Form({ initialState, readOnly = false, onComplete, onInelig
       {/* Back link above the form - only on first page */}
       {showBackLink && (
         <div style={{ marginBottom: "var(--goa-space-2xl)" }}>
-          <BackLink onClick={() => onExit(state || null)}>
-            Back to all tasks
-          </BackLink>
+          <BackLink onClick={() => onExit(state || null)}>Back to all tasks</BackLink>
         </div>
       )}
 

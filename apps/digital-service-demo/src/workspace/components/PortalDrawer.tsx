@@ -6,16 +6,13 @@
  * stacking contexts in the DOM hierarchy.
  */
 
-import { ReactNode } from 'react';
-import { createPortal } from 'react-dom';
-import { GoabxDrawer, GoabxDrawerProps } from '@abgov/react-components/experimental';
+import { ReactNode } from "react";
+import { createPortal } from "react-dom";
+import { GoabxDrawer, GoabxDrawerProps } from "@abgov/react-components/experimental";
 
 export function PortalDrawer(props: GoabxDrawerProps): ReactNode {
   // Render the drawer at the body level to escape any stacking contexts
-  return createPortal(
-    <GoabxDrawer {...props} />,
-    document.body
-  );
+  return createPortal(<GoabxDrawer {...props} />, document.body);
 }
 
 export default PortalDrawer;

@@ -1,7 +1,4 @@
-import {
-  PFOutline,
-  RequiredValidator,
-} from "@abgov/ui-components-common";
+import { PFOutline, RequiredValidator } from "@abgov/ui-components-common";
 
 /**
  * Task 4: Important Documents

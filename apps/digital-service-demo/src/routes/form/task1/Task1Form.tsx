@@ -38,7 +38,12 @@ type Task1FormProps = {
  * 6. Dependants (repeater/subform)
  * 7. Review (GoabPublicFormSummary)
  */
-export function Task1Form({ initialState, readOnly = false, onComplete, onExit }: Task1FormProps) {
+export function Task1Form({
+  initialState,
+  readOnly = false,
+  onComplete,
+  onExit,
+}: Task1FormProps) {
   const [state, setState] = useState<PFState | undefined>();
   const formContainerRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +52,11 @@ export function Task1Form({ initialState, readOnly = false, onComplete, onExit }
     let stateToUse = initialState || { data: {}, dataBuffer: {}, history: [] };
 
     // In readOnly mode or re-entering a completed task, start on review page
-    if (readOnly || (stateToUse.history.length > 0 && stateToUse.history[stateToUse.history.length - 1] === "")) {
+    if (
+      readOnly ||
+      (stateToUse.history.length > 0 &&
+        stateToUse.history[stateToUse.history.length - 1] === "")
+    ) {
       const cleanedHistory = stateToUse.history.filter((h) => h !== "");
       if (!cleanedHistory.includes("review")) {
         cleanedHistory.push("review");
@@ -132,9 +141,7 @@ export function Task1Form({ initialState, readOnly = false, onComplete, onExit }
             transition: "opacity 150ms ease-in-out",
           }}
         >
-          <BackLink onClick={() => onExit(state || null)}>
-            Back to all tasks
-          </BackLink>
+          <BackLink onClick={() => onExit(state || null)}>Back to all tasks</BackLink>
         </div>
       )}
 

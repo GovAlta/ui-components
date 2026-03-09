@@ -26,7 +26,12 @@ type Task4FormProps = {
  * 1. Upload ID (file upload)
  * 2. Review (GoabPublicFormSummary)
  */
-export function Task4Form({ initialState, readOnly = false, onComplete, onExit }: Task4FormProps) {
+export function Task4Form({
+  initialState,
+  readOnly = false,
+  onComplete,
+  onExit,
+}: Task4FormProps) {
   const [state, setState] = useState<PFState | undefined>();
 
   // Initialize form with outline and any existing state
@@ -34,7 +39,11 @@ export function Task4Form({ initialState, readOnly = false, onComplete, onExit }
     let stateToUse = initialState || { data: {}, dataBuffer: {}, history: [] };
 
     // In readOnly mode or re-entering a completed task, start on review page
-    if (readOnly || (stateToUse.history.length > 0 && stateToUse.history[stateToUse.history.length - 1] === "")) {
+    if (
+      readOnly ||
+      (stateToUse.history.length > 0 &&
+        stateToUse.history[stateToUse.history.length - 1] === "")
+    ) {
       const cleanedHistory = stateToUse.history.filter((h) => h !== "");
       if (!cleanedHistory.includes("review")) {
         cleanedHistory.push("review");
@@ -99,16 +108,11 @@ export function Task4Form({ initialState, readOnly = false, onComplete, onExit }
             transition: "opacity 150ms ease-in-out",
           }}
         >
-          <BackLink onClick={() => onExit(state || null)}>
-            Back to all tasks
-          </BackLink>
+          <BackLink onClick={() => onExit(state || null)}>Back to all tasks</BackLink>
         </div>
       )}
 
-      <GoabPublicForm
-        onInit={handleInit}
-        onNext={handleNext}
-      >
+      <GoabPublicForm onInit={handleInit} onNext={handleNext}>
         <GoabPublicFormPage id="upload-id" backVisibility="hidden">
           <UploadId />
         </GoabPublicFormPage>

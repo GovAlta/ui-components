@@ -35,14 +35,18 @@ interface ScrollbarPosition {
  *     </div>
  *   </ScrollContainer>
  */
-export function ScrollContainer({ children, className = '' }: ScrollContainerProps) {
+export function ScrollContainer({ children, className = "" }: ScrollContainerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<HTMLDivElement>(null);
   const leftShadowRef = useRef<HTMLDivElement>(null);
   const rightShadowRef = useRef<HTMLDivElement>(null);
   const [scrollWidth, setScrollWidth] = useState(0);
   const [showScrollbar, setShowScrollbar] = useState(false);
-  const [scrollbarPosition, setScrollbarPosition] = useState<ScrollbarPosition>({ left: 0, bottom: 0, width: 0 });
+  const [scrollbarPosition, setScrollbarPosition] = useState<ScrollbarPosition>({
+    left: 0,
+    bottom: 0,
+    width: 0,
+  });
   const [shadowLeft, setShadowLeft] = useState(false);
   const [shadowRight, setShadowRight] = useState(false);
   const isScrollingSelf = useRef(false);
@@ -73,7 +77,9 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
 
     // Get margin from first content child (skip shadow elements) to know when content hits the edge
     const contentChild = container.children[1] as HTMLElement; // children[0] is left shadow
-    const margin = contentChild ? parseFloat(getComputedStyle(contentChild).marginLeft) || 0 : 0;
+    const margin = contentChild
+      ? parseFloat(getComputedStyle(contentChild).marginLeft) || 0
+      : 0;
 
     // Left shadow: show when scrolled past the content's left margin
     setShadowLeft(scrollLeft > margin);
@@ -84,7 +90,7 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
   // Update dimensions and scrollbar position
   const updateDimensions = useCallback(() => {
     const container = containerRef.current;
-    const cardContainer = document.querySelector('.desktop-card-container');
+    const cardContainer = document.querySelector(".desktop-card-container");
     if (!container) return;
 
     const newScrollWidth = container.scrollWidth;
@@ -111,7 +117,7 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
         setScrollbarPosition({
           left: containerRect.left + marginLeft,
           bottom: window.innerHeight - cardRect.bottom + bottomInset,
-          width: containerRect.width - marginLeft - marginRight
+          width: containerRect.width - marginLeft - marginRight,
         });
       }
     }
@@ -150,7 +156,7 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
   useEffect(() => {
     const container = containerRef.current;
     const scrollbar = scrollbarRef.current;
-    const cardContainer = document.querySelector('.desktop-card-container');
+    const cardContainer = document.querySelector(".desktop-card-container");
     if (!container) return;
 
     // Initial dimension check, shadows, and shadow heights
@@ -159,11 +165,11 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
     updateShadowHeights();
 
     // Listen to content scroll
-    container.addEventListener('scroll', handleContentScroll, { passive: true });
+    container.addEventListener("scroll", handleContentScroll, { passive: true });
 
     // Listen to scrollbar scroll
     if (scrollbar) {
-      scrollbar.addEventListener('scroll', handleScrollbarScroll, { passive: true });
+      scrollbar.addEventListener("scroll", handleScrollbarScroll, { passive: true });
     }
 
     // Listen to vertical scroll on card container to update scrollbar position
@@ -171,7 +177,7 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
       requestAnimationFrame(updateDimensions);
     };
     if (cardContainer) {
-      cardContainer.addEventListener('scroll', handleCardScroll, { passive: true });
+      cardContainer.addEventListener("scroll", handleCardScroll, { passive: true });
     }
 
     // Observe size changes
@@ -186,20 +192,27 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
     }
 
     // Window resize
-    window.addEventListener('resize', updateDimensions, { passive: true });
+    window.addEventListener("resize", updateDimensions, { passive: true });
 
     return () => {
-      container.removeEventListener('scroll', handleContentScroll);
+      container.removeEventListener("scroll", handleContentScroll);
       if (scrollbar) {
-        scrollbar.removeEventListener('scroll', handleScrollbarScroll);
+        scrollbar.removeEventListener("scroll", handleScrollbarScroll);
       }
       if (cardContainer) {
-        cardContainer.removeEventListener('scroll', handleCardScroll);
+        cardContainer.removeEventListener("scroll", handleCardScroll);
       }
-      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener("resize", updateDimensions);
       resizeObserver.disconnect();
     };
-  }, [handleContentScroll, handleScrollbarScroll, updateDimensions, updateShadows, updateShadowHeights, showScrollbar]);
+  }, [
+    handleContentScroll,
+    handleScrollbarScroll,
+    updateDimensions,
+    updateShadows,
+    updateShadowHeights,
+    showScrollbar,
+  ]);
 
   return (
     <>
@@ -230,10 +243,10 @@ export function ScrollContainer({ children, className = '' }: ScrollContainerPro
           ref={scrollbarRef}
           className="scroll-container-scrollbar"
           style={{
-            position: 'fixed',
+            position: "fixed",
             left: scrollbarPosition.left,
             bottom: scrollbarPosition.bottom,
-            width: scrollbarPosition.width
+            width: scrollbarPosition.width,
           }}
         >
           <div

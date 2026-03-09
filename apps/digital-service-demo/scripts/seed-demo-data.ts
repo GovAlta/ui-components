@@ -24,12 +24,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // Seed Data Configuration
 // ─────────────────────────────────────────────────────────────────────────────
 
-type CaseStatus =
-  | "submitted"
-  | "under_review"
-  | "info_requested"
-  | "approved"
-  | "denied";
+type CaseStatus = "submitted" | "under_review" | "info_requested" | "approved" | "denied";
 
 interface SeedCitizen {
   name: string;
@@ -299,7 +294,11 @@ async function createSubmissionAndCase(citizen: SeedCitizen) {
     await createActionsForCase(caseId, citizen);
   }
 
-  return { submissionId: submission.id, caseId, referenceNumber: submission.reference_number };
+  return {
+    submissionId: submission.id,
+    caseId,
+    referenceNumber: submission.reference_number,
+  };
 }
 
 async function createActionsForCase(caseId: string, citizen: SeedCitizen) {
@@ -406,15 +405,17 @@ async function main() {
   }
 
   console.log("\n  Tab distribution:");
-  console.log(`    Unassigned:     ${results.filter((r) => r.status === "submitted").length}`);
   console.log(
-    `    Assigned to me: ${results.filter((r) => r.status === "under_review").length}`
+    `    Unassigned:     ${results.filter((r) => r.status === "submitted").length}`,
   );
   console.log(
-    `    Waiting:        ${results.filter((r) => r.status === "info_requested").length}`
+    `    Assigned to me: ${results.filter((r) => r.status === "under_review").length}`,
   );
   console.log(
-    `    Complete:       ${results.filter((r) => r.status === "approved" || r.status === "denied").length}`
+    `    Waiting:        ${results.filter((r) => r.status === "info_requested").length}`,
+  );
+  console.log(
+    `    Complete:       ${results.filter((r) => r.status === "approved" || r.status === "denied").length}`,
   );
 
   console.log("\nView at: https://digital-service-demo-v1.netlify.app/workspace\n");

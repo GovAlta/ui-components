@@ -1,5 +1,10 @@
 import { GoabText } from "@abgov/react-components";
-import { GoabxFormItem, GoabxCheckbox, GoabxInput, GoabxTextArea } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxCheckbox,
+  GoabxInput,
+  GoabxTextArea,
+} from "@abgov/react-components/experimental";
 
 /**
  * Page 5: Consent
@@ -12,9 +17,9 @@ export function Consent() {
     <div className="form-fields">
       {/* TODO: Spacing not ideal - heading has 32px mb, want 8px. Negative margin doesn't work. See brief bug. */}
       <GoabText size="body-m" mt="none" mb="m">
-        The personal information collected through this service is for searching for
-        your record. This collection is authorized by section 33C of the Freedom of
-        Information and Protection of Privacy Act.
+        The personal information collected through this service is for searching for your
+        record. This collection is authorized by section 33C of the Freedom of Information
+        and Protection of Privacy Act.
       </GoabText>
 
       <GoabxFormItem label="Read and agree to the following statements">
@@ -36,7 +41,10 @@ export function Consent() {
         <GoabxInput name="fullName" data-pf-item="" />
       </GoabxFormItem>
 
-      <GoabxFormItem label="Signature" helpText="Type your full name as your electronic signature">
+      <GoabxFormItem
+        label="Signature"
+        helpText="Type your full name as your electronic signature"
+      >
         <GoabxTextArea name="signature" data-pf-item="" rows={2} />
       </GoabxFormItem>
     </div>

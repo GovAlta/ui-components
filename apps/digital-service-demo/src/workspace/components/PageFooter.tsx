@@ -1,6 +1,6 @@
 import React from "react";
-import { usePageFooterContext } from '../contexts/PageFooterContext';
-import { useScrollState } from '../contexts/ScrollStateContext';
+import { usePageFooterContext } from "../contexts/PageFooterContext";
+import { useScrollState } from "../contexts/ScrollStateContext";
 
 /**
  * Sticky page footer component that renders at the bottom of the viewport.
@@ -26,13 +26,15 @@ export function PageFooter() {
 
     // String modes
     switch (visibleWhen) {
-      case 'always':
+      case "always":
         return true;
-      case 'selection':
+      case "selection":
         return hasSelection;
-      case 'scrolled':
+      case "scrolled":
         // Visible when NOT at top and content is scrollable
-        return isScrollable && scrollPosition !== 'at-top' && scrollPosition !== 'no-scroll';
+        return (
+          isScrollable && scrollPosition !== "at-top" && scrollPosition !== "no-scroll"
+        );
       default:
         return true;
     }
@@ -43,15 +45,17 @@ export function PageFooter() {
 
   // Build class names based on state
   const footerClasses = [
-    'page-footer',
-    isScrollable && scrollPosition ? `page-footer--${scrollPosition.replace('-', '')}` : '',
-  ].filter(Boolean).join(' ');
+    "page-footer",
+    isScrollable && scrollPosition
+      ? `page-footer--${scrollPosition.replace("-", "")}`
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={footerClasses}>
-      <div className="page-footer__content">
-        {content}
-      </div>
+      <div className="page-footer__content">{content}</div>
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { GoabxFormItem, GoabxFileUploadInput, GoabxFileUploadCard } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxFileUploadInput,
+  GoabxFileUploadCard,
+} from "@abgov/react-components/experimental";
 import { GoabDetails } from "@abgov/react-components";
 
 type UploadedFile = {
@@ -71,14 +75,25 @@ export function UploadId() {
 
   return (
     <div className="form-fields">
-      <GoabxFormItem label="" helpText={!uploadedFile ? "Maximum file size is 10MB. Accepted formats: JPG, PNG, PDF" : ""}>
+      <GoabxFormItem
+        label=""
+        helpText={
+          !uploadedFile
+            ? "Maximum file size is 10MB. Accepted formats: JPG, PNG, PDF"
+            : ""
+        }
+      >
         {/* Text input (visually hidden) to capture filename for public form */}
         <input
           ref={inputRef}
           type="text"
           name="idDocument"
           data-pf-item=""
-          value={uploadedFile ? JSON.stringify({ name: uploadedFile.name, url: uploadedFile.url }) : ""}
+          value={
+            uploadedFile
+              ? JSON.stringify({ name: uploadedFile.name, url: uploadedFile.url })
+              : ""
+          }
           onChange={() => {}} // Controlled by state
           style={{
             position: "absolute",
@@ -119,8 +134,8 @@ export function UploadId() {
           <li>Permanent resident card</li>
         </ul>
         <p>
-          Make sure the image is clear and all text is readable. Both sides of
-          the ID may be required.
+          Make sure the image is clear and all text is readable. Both sides of the ID may
+          be required.
         </p>
       </GoabDetails>
     </div>

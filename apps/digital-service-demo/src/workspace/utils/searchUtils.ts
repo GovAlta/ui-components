@@ -1,7 +1,7 @@
 // Sort configuration types for DataTable
 export interface SortLevel {
   key: string;
-  direction: 'asc' | 'desc';
+  direction: "asc" | "desc";
 }
 
 export interface SortConfig {
@@ -10,22 +10,17 @@ export interface SortConfig {
 }
 
 // Compare two values for sorting
-const compareValues = <T>(
-  a: T,
-  b: T,
-  key: string,
-  direction: 'asc' | 'desc'
-): number => {
+const compareValues = <T>(a: T, b: T, key: string, direction: "asc" | "desc"): number => {
   const aValue = (a as Record<string, unknown>)[key];
   const bValue = (b as Record<string, unknown>)[key];
-  const sortDir = direction === 'asc' ? 1 : -1;
+  const sortDir = direction === "asc" ? 1 : -1;
 
   if (aValue == null && bValue == null) return 0;
   if (aValue == null) return 1;
   if (bValue == null) return -1;
 
   // Date sorting for specific fields
-  if (key === 'submittedAt') {
+  if (key === "submittedAt") {
     const aDate = new Date(aValue as string);
     const bDate = new Date(bValue as string);
     if (!isNaN(aDate.getTime()) && !isNaN(bDate.getTime())) {
@@ -42,14 +37,19 @@ const compareValues = <T>(
 export const sortData = <T extends Record<string, unknown>>(
   data: T[],
   primaryKey: string | null,
-  primaryDirection: 'asc' | 'desc' | 'none',
+  primaryDirection: "asc" | "desc" | "none",
   secondaryKey?: string | null,
-  secondaryDirection?: 'asc' | 'desc'
+  secondaryDirection?: "asc" | "desc",
 ): T[] => {
-  if (primaryDirection === 'none' || !primaryKey) return data;
+  if (primaryDirection === "none" || !primaryKey) return data;
 
   return [...data].sort((a: T, b: T) => {
-    const primaryCompare = compareValues(a, b, primaryKey, primaryDirection as 'asc' | 'desc');
+    const primaryCompare = compareValues(
+      a,
+      b,
+      primaryKey,
+      primaryDirection as "asc" | "desc",
+    );
     if (primaryCompare === 0 && secondaryKey && secondaryDirection) {
       return compareValues(a, b, secondaryKey, secondaryDirection);
     }

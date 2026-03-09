@@ -89,21 +89,24 @@ export const task1Outline: PFOutline = {
       // At least one contact method required - validate on first checkbox
       contactByPhone: [
         ConditionalRequiredValidator(
-          (pageData) => !pageData?.contactByPhone && !pageData?.contactByEmail && !pageData?.contactByMail,
-          "Select at least one contact method"
+          (pageData) =>
+            !pageData?.contactByPhone &&
+            !pageData?.contactByEmail &&
+            !pageData?.contactByMail,
+          "Select at least one contact method",
         ),
       ],
       phoneNumber: [
         ConditionalRequiredValidator(
           (pageData) => !!pageData?.contactByPhone,
-          "Enter your phone number"
+          "Enter your phone number",
         ),
         PhoneNumberValidator("Enter a valid phone number"),
       ],
       emailAddress: [
         ConditionalRequiredValidator(
           (pageData) => !!pageData?.contactByEmail,
-          "Enter your email address"
+          "Enter your email address",
         ),
         EmailValidator("Enter a valid email address"),
       ],

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * Breakpoint for compact toolbar (icon-only buttons)
@@ -11,18 +11,18 @@ export const COMPACT_TOOLBAR_BREAKPOINT = 768;
  * @returns boolean indicating if the toolbar should show icon-only buttons
  */
 export function useCompactToolbar(): boolean {
-    const [isCompact, setIsCompact] = useState(
-        () => window.innerWidth < COMPACT_TOOLBAR_BREAKPOINT
-    );
+  const [isCompact, setIsCompact] = useState(
+    () => window.innerWidth < COMPACT_TOOLBAR_BREAKPOINT,
+  );
 
-    useEffect(() => {
-        const handleResize = () => {
-            setIsCompact(window.innerWidth < COMPACT_TOOLBAR_BREAKPOINT);
-        };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsCompact(window.innerWidth < COMPACT_TOOLBAR_BREAKPOINT);
+    };
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    return isCompact;
+  return isCompact;
 }

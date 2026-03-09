@@ -1,4 +1,9 @@
-import { GoabxFormItem, GoabxInput, GoabxDropdown, GoabxDropdownItem } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxInput,
+  GoabxDropdown,
+  GoabxDropdownItem,
+} from "@abgov/react-components/experimental";
 
 /**
  * Page 3: Address
@@ -18,7 +23,14 @@ export function Address() {
         <GoabxInput name="city" data-pf-item="" />
       </GoabxFormItem>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--goa-space-l)", alignItems: "start" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "var(--goa-space-l)",
+          alignItems: "start",
+        }}
+      >
         <GoabxFormItem label="Province or territory">
           <GoabxDropdown name="province" data-pf-item="">
             <GoabxDropdownItem value="AB" label="Alberta" />

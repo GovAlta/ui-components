@@ -2,15 +2,16 @@ export function parseDate(dateStr: string): Date | null {
   if (!dateStr) return null;
 
   // Try parsing custom format: "Nov 21, 2025 at 10:01 am" or "Feb 20, 2025 10:30 AM"
-  const customFormatRegex = /(\w+)\s+(\d{1,2}),?\s+(\d{4})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(am|pm)/i;
+  const customFormatRegex =
+    /(\w+)\s+(\d{1,2}),?\s+(\d{4})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(am|pm)/i;
   const match = dateStr.match(customFormatRegex);
 
   if (match) {
     const [, month, day, year, hour, minute, period] = match;
     let hours = parseInt(hour, 10);
-    if (period.toLowerCase() === 'pm' && hours !== 12) {
+    if (period.toLowerCase() === "pm" && hours !== 12) {
       hours += 12;
-    } else if (period.toLowerCase() === 'am' && hours === 12) {
+    } else if (period.toLowerCase() === "am" && hours === 12) {
       hours = 0;
     }
     const dateString = `${month} ${day}, ${year} ${hours}:${minute}`;
