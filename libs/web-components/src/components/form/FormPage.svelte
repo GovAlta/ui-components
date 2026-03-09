@@ -5,12 +5,21 @@
       id: { type: "String", reflect: true },
       error: { type: "String", reflect: true },
       errors: { type: "String", reflect: true },
-      editting: { type: "Boolean", attribute: "data-pf-editting", reflect: true },
+      editting: {
+        type: "Boolean",
+        attribute: "data-pf-editting",
+        reflect: true,
+      },
       buttonText: { type: "String", attribute: "button-text" },
+      buttonType: { type: "String", attribute: "button-type" },
+      buttonLeadingIcon: { type: "String", attribute: "button-leading-icon" },
       subHeading: { type: "String", attribute: "sub-heading" },
       sectionTitle: { type: "String", attribute: "section-title" },
       backVisibility: { attribute: "back-visibility", type: "String" },
-      errorSummaryPosition: { attribute: "error-summary-position", type: "String" },
+      errorSummaryPosition: {
+        attribute: "error-summary-position",
+        type: "String",
+      },
     },
   }}
 />
@@ -23,6 +32,8 @@
 
   export let id: string = "";
   export let buttonText: string = "";
+  export let buttonType: "primary" | "secondary" | "tertiary" = "primary";
+  export let buttonLeadingIcon: string = "";
   export let error: string = "";
   export let errors: string = ""; // JSON string of Record<string, string> - field name to error message
   export let editting: boolean;
@@ -50,7 +61,7 @@
 
   onMount(() => {
     addSubformInterceptors();
-  })
+  });
 
   // Need to add the form page's id to any events dispatched form a subform
   function addSubformInterceptors() {
@@ -60,7 +71,7 @@
 
       e.stopPropagation();
       dispatch(_senderEl, e.type, detail, { bubbles: true });
-    }
+    };
 
     _rootEl.addEventListener("pf:subform:add", addIdToEvent);
     _rootEl.addEventListener("pf:subform:edit", addIdToEvent);
@@ -81,21 +92,28 @@
 <div bind:this={_senderEl} />
 <section bind:this={_rootEl}>
   {#if !editting && backVisibility === "visible"}
-    <goa-link-button leadingicon="chevron-back" mb="2xl" action="form-page:back">
+    <goa-link
+      leadingicon="chevron-back"
+      color="dark"
+      mb="2xl"
+      action="form-page:back"
+    >
       Back
-    </goa-link-button>
+    </goa-link>
   {/if}
 
   {#if sectionTitle}
-    <goa-text size="body-l" mt="none" mb="xs" color="secondary">{sectionTitle}</goa-text>
-  {/if}
-  {#if heading}
-    <goa-text as="h2" size="heading-l" mt="none" mb="xl"
-      >{heading}</goa-text
+    <goa-text size="body-l" mt="none" mb="xs" color="secondary"
+      >{sectionTitle}</goa-text
     >
   {/if}
+  {#if heading}
+    <goa-text as="h2" size="heading-l" mt="none" mb="xl">{heading}</goa-text>
+  {/if}
   {#if subHeading}
-    <goa-text size="body-l" mt="2xs" mb="xl" color="primary">{subHeading}</goa-text>
+    <goa-text size="body-l" mt="2xs" mb="xl" color="primary"
+      >{subHeading}</goa-text
+    >
   {/if}
 
   {#if error}
@@ -106,7 +124,13 @@
   <slot name="description" />
 
   {#if hasErrors && errorSummaryPosition === "top"}
-    <goa-callout type="emergency" emphasis="low" heading="There is a problem" mb="xl" version="2">
+    <goa-callout
+      type="emergency"
+      emphasis="low"
+      heading="There is a problem"
+      mb="xl"
+      version="2"
+    >
       <ul style="margin: 0; padding-left: var(--goa-space-l);">
         {#each Object.entries(parsedErrors) as [_fieldName, errorMsg]}
           <li>{errorMsg}</li>
@@ -118,7 +142,13 @@
   <slot />
 
   {#if hasErrors && errorSummaryPosition === "bottom"}
-    <goa-callout type="emergency" emphasis="low" heading="There is a problem" mb="xl" version="2">
+    <goa-callout
+      type="emergency"
+      emphasis="low"
+      heading="There is a problem"
+      mb="xl"
+      version="2"
+    >
       <ul style="margin: 0; padding-left: var(--goa-space-l);">
         {#each Object.entries(parsedErrors) as [_fieldName, errorMsg]}
           <li>{errorMsg}</li>
@@ -129,12 +159,23 @@
 
   <goa-block mt="xl">
     {#if editting}
-      <goa-button on:_click={dispatchCancel} type="secondary">
+      <goa-button on:_click={dispatchCancel} type="secondary" version="2">
         Cancel
       </goa-button>
     {/if}
-    <goa-button on:_click={dispatchContinue} type="primary">
-      {buttonText || "Continue"}
-    </goa-button>
+    {#if buttonLeadingIcon}
+      <goa-button
+        on:_click={dispatchContinue}
+        type={buttonType}
+        leadingicon={buttonLeadingIcon}
+        version="2"
+      >
+        {buttonText || "Continue"}
+      </goa-button>
+    {:else}
+      <goa-button on:_click={dispatchContinue} type={buttonType} version="2">
+        {buttonText || "Continue"}
+      </goa-button>
+    {/if}
   </goa-block>
 </section>

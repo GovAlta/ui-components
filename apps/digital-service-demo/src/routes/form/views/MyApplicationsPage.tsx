@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { GoabxButton, GoabxBadge, GoabxModal } from "@abgov/react-components/experimental";
+import {
+  GoabxButton,
+  GoabxBadge,
+  GoabxModal,
+} from "@abgov/react-components/experimental";
 import { GoabButtonGroup, GoabText } from "@abgov/react-components";
 import { Application, ApplicationStatus } from "../types";
 import emptyStateSrc from "../assets/empty-state.svg";
@@ -41,9 +45,7 @@ function getActionButtonText(status: ApplicationStatus): string {
   }
 }
 
-function getActionButtonType(
-  status: ApplicationStatus
-): "secondary" | "tertiary" {
+function getActionButtonType(status: ApplicationStatus): "secondary" | "tertiary" {
   return status === "submitted" ? "tertiary" : "secondary";
 }
 
@@ -92,8 +94,8 @@ export function MyApplicationsPage({
 
       {/* Subtext */}
       <GoabText tag="p" size="body-m" mt="m" mb="xl">
-        You may have up to 5 active applications. Be aware files must be
-        activated within 6 months or else they will expire.
+        You may have up to 5 active applications. Be aware files must be activated within
+        6 months or else they will expire.
       </GoabText>
 
       {/* Application cards */}
@@ -103,7 +105,7 @@ export function MyApplicationsPage({
             border: "1px solid var(--goa-color-greyscale-200)",
             borderRadius: "12px",
             padding: "var(--goa-space-3xl) var(--goa-space-xl)",
-            backgroundColor: "var(--goa-color-greyscale-white)",
+            backgroundColor: "var(--app-card-bg, var(--goa-color-greyscale-white))",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -120,7 +122,12 @@ export function MyApplicationsPage({
             You don't have any applications yet
           </GoabText>
 
-          <GoabxButton type="tertiary" size="compact" leadingIcon="add" onClick={onNewApplication}>
+          <GoabxButton
+            type="tertiary"
+            size="compact"
+            leadingIcon="add"
+            onClick={onNewApplication}
+          >
             Start a new Application
           </GoabxButton>
         </div>
@@ -138,9 +145,10 @@ export function MyApplicationsPage({
               style={{
                 border: "1px solid var(--goa-color-greyscale-200)",
                 borderRadius: "12px",
-                padding: "var(--goa-space-xs) var(--goa-space-l) var(--goa-space-l) var(--goa-space-l)",
-                backgroundColor: "var(--goa-color-greyscale-white)",
-                boxShadow: "0 1px 0 0 rgba(26, 26, 26, 0.07)",
+                padding:
+                  "var(--goa-space-xs) var(--goa-space-l) var(--goa-space-l) var(--goa-space-l)",
+                backgroundColor: "var(--app-card-bg, var(--goa-color-greyscale-white))",
+                boxShadow: "var(--goa-shadow-100)",
               }}
             >
               {/* Top row: Reference ID + Actions */}
@@ -226,14 +234,20 @@ export function MyApplicationsPage({
             <GoabxButton type="tertiary" size="compact" onClick={handleDeleteCancel}>
               Cancel
             </GoabxButton>
-            <GoabxButton type="primary" size="compact" variant="destructive" onClick={handleDeleteConfirm}>
+            <GoabxButton
+              type="primary"
+              size="compact"
+              variant="destructive"
+              onClick={handleDeleteConfirm}
+            >
               Delete application
             </GoabxButton>
           </GoabButtonGroup>
         }
         onClose={handleDeleteCancel}
       >
-        You are about to delete the application <strong>{deleteModalApp?.referenceId}</strong>. This cannot be undone.
+        You are about to delete the application{" "}
+        <strong>{deleteModalApp?.referenceId}</strong>. This cannot be undone.
       </GoabxModal>
     </div>
   );

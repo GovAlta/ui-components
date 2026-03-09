@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoabAppHeader } from "@abgov/react-components";
-import { GoabxAppFooter, GoabxAppFooterMetaSection } from "@abgov/react-components/experimental";
+import {
+  GoabxAppFooter,
+  GoabxAppFooterMetaSection,
+} from "@abgov/react-components/experimental";
 import { PFState } from "@abgov/ui-components-common";
 import { supabase } from "../../lib/supabase";
 
@@ -146,10 +149,8 @@ export function PublicFormApp() {
   const updateApplication = (updates: Partial<Application>) => {
     setApplications(
       applications.map((app) =>
-        app.id === currentAppId
-          ? { ...app, ...updates, updatedAt: new Date() }
-          : app
-      )
+        app.id === currentAppId ? { ...app, ...updates, updatedAt: new Date() } : app,
+      ),
     );
   };
 
@@ -204,15 +205,19 @@ export function PublicFormApp() {
     // Extract citizen info:
     // - Name and phone from task3 "about-you" page (collected early for workspace case header)
     // - Email from task1 "contact-preference" page
-    const aboutYouData = currentApp.task3State?.data?.['about-you'] as Record<string, unknown> | undefined;
-    const contactData = currentApp.task1State?.data?.['contact-preference'] as Record<string, unknown> | undefined;
+    const aboutYouData = currentApp.task3State?.data?.["about-you"] as
+      | Record<string, unknown>
+      | undefined;
+    const contactData = currentApp.task1State?.data?.["contact-preference"] as
+      | Record<string, unknown>
+      | undefined;
     const citizenName = (aboutYouData?.fullName as string) || null;
     const citizenPhone = (aboutYouData?.phoneNumber as string) || null;
     const citizenEmail = (contactData?.emailAddress as string) || null;
 
     // Debug: log extracted citizen info
-    console.log('[Submit] Citizen info:', { citizenName, citizenEmail, citizenPhone });
-    console.log('[Submit] Form data:', formData);
+    console.log("[Submit] Citizen info:", { citizenName, citizenEmail, citizenPhone });
+    console.log("[Submit] Form data:", formData);
 
     try {
       const { data, error } = await supabase
@@ -341,7 +346,14 @@ export function PublicFormApp() {
         {view === "results" && (
           <ResultsPage
             referenceId={currentApp?.referenceId}
-            citizenEmail={(currentApp?.task1State?.data?.['contact-preference'] as Record<string, unknown>)?.emailAddress as string | undefined}
+            citizenEmail={
+              (
+                currentApp?.task1State?.data?.["contact-preference"] as Record<
+                  string,
+                  unknown
+                >
+              )?.emailAddress as string | undefined
+            }
             onBackToDashboard={() => setView("my-applications")}
             onBackToStart={handleBackToHome}
           />

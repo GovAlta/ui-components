@@ -11,10 +11,7 @@ type BackLinkProps = {
 export function BackLink({ onClick, children }: BackLinkProps) {
   return (
     <span onClick={onClick} style={{ cursor: "pointer" }}>
-      <GoabxLink
-        leadingIcon="arrow-back"
-        color="dark"
-      >
+      <GoabxLink leadingIcon="arrow-back" color="dark">
         {children}
       </GoabxLink>
     </span>

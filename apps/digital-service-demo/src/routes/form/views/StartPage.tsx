@@ -23,7 +23,14 @@ type StepCardProps = {
   imageAlt: string;
 };
 
-function StepCard({ number, title, duration, description, imageSrc, imageAlt }: StepCardProps) {
+function StepCard({
+  number,
+  title,
+  duration,
+  description,
+  imageSrc,
+  imageAlt,
+}: StepCardProps) {
   return (
     <div style={{ flex: "1 1 0", minWidth: "180px" }}>
       <div
@@ -33,11 +40,7 @@ function StepCard({ number, title, duration, description, imageSrc, imageAlt }: 
           marginBottom: "var(--goa-space-m)",
         }}
       >
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          style={{ width: "120px", height: "120px" }}
-        />
+        <img src={imageSrc} alt={imageAlt} style={{ width: "120px", height: "120px" }} />
       </div>
       <GoabText size="heading-xs" mt="none" mb="xs">
         {number}. {title}
@@ -71,8 +74,7 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
             Apply for a [service]
           </GoabText>
           <GoabText as="p" size="body-m" mt="none" mb="xl">
-            Apply for supports to pay for basic expenses like food, clothing and
-            shelter.
+            Apply for supports to pay for basic expenses like food, clothing and shelter.
           </GoabText>
           <div style={{ display: "flex", gap: "var(--goa-space-m)" }}>
             <GoabxButton type="primary" onClick={onStartNew}>
@@ -106,7 +108,11 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
         In order to complete the application you will need to complete these steps
       </GoabText>
 
-      <GoabxCallout heading="You can use this service to:" type="information" emphasis="medium">
+      <GoabxCallout
+        heading="You can use this service to:"
+        type="information"
+        emphasis="medium"
+      >
         <ul style={{ margin: 0, paddingLeft: "var(--goa-space-l)" }}>
           <li>See if you or a family member is eligible for service.</li>
           <li>Communicate and submit an application for service.</li>
@@ -154,12 +160,11 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
         Other information about the service
       </GoabText>
       <GoabText as="p" size="body-m" mt="none">
-        This section contains supplementary details about the service,
-        including descriptions of less common scenarios, exceptions, and
-        additional resources available. It provides context and additional
-        insights that may be relevant to your specific circumstances or
-        interests, helping you understand the full scope and utility of the
-        service offered.
+        This section contains supplementary details about the service, including
+        descriptions of less common scenarios, exceptions, and additional resources
+        available. It provides context and additional insights that may be relevant to
+        your specific circumstances or interests, helping you understand the full scope
+        and utility of the service offered.
       </GoabText>
 
       {/* Support */}
@@ -167,8 +172,7 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
         Support
       </GoabText>
       <GoabText as="p" size="body-m" mt="none" mb="none">
-        For assistance, email us at{" "}
-        <a href="mailto:help@gov.ab.ca">help@gov.ab.ca</a>
+        For assistance, email us at <a href="mailto:help@gov.ab.ca">help@gov.ab.ca</a>
       </GoabText>
     </div>
   );
