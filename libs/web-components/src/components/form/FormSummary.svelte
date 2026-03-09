@@ -1,4 +1,12 @@
-<svelte:options customElement="goa-public-form-summary" />
+<svelte:options
+  customElement={{
+    tag: "goa-public-form-summary",
+    props: {
+      heading: { type: "String", attribute: "heading" },
+      readonly: { type: "Boolean", attribute: "readonly" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -12,6 +20,7 @@
   } from "@abgov/ui-components-common";
 
   export let heading: string = "";
+  export let readonly: boolean = false;
 
   let _rootEl: HTMLElement;
   let _state: PFSummary;
@@ -174,7 +183,10 @@
   }
 
   // Format checkbox values - convert "checked" to "Yes"
-  function formatValue(value: string | undefined, formatter?: (input: string) => string): string | string[] {
+  function formatValue(
+    value: string | undefined,
+    formatter?: (input: string) => string,
+  ): string | string[] {
     if (value === "checked") return "Yes";
     return format(value, formatter);
   }
@@ -228,7 +240,9 @@
                   {#each Object.entries(getSummary(page)) as [key, value]}
                     <div class="question-row">
                       <p class="question">{getLabel(page, key)}</p>
-                      <p class="answer" class:empty={isBlank(value)}>{format(value)}</p>
+                      <p class="answer" class:empty={isBlank(value)}>
+                        {format(value)}
+                      </p>
                     </div>
                   {/each}
                 {:else}
@@ -236,7 +250,9 @@
                     {#if showField(page, key, value)}
                       <div class="question-row">
                         <p class="question">{getLabel(page, key)}</p>
-                        <p class="answer" class:empty={isBlank(value)}>{formatValue(value, getField(page, key).formatter)}</p>
+                        <p class="answer" class:empty={isBlank(value)}>
+                          {formatValue(value, getField(page, key).formatter)}
+                        </p>
                       </div>
                     {/if}
                   {/each}
@@ -251,7 +267,9 @@
                 {#each Object.entries(getSummary(page)) as [key, value]}
                   <div class="question-row">
                     <p class="question">{getLabel(page, key)}</p>
-                    <p class="answer" class:empty={isBlank(value)}>{format(value)}</p>
+                    <p class="answer" class:empty={isBlank(value)}>
+                      {format(value)}
+                    </p>
                   </div>
                 {/each}
               {:else}
@@ -262,12 +280,22 @@
                       {#if isFileField(page, key) && value}
                         {@const fileData = parseFileData(value)}
                         {#if fileData?.url}
-                          <p class="answer file-link"><a href={fileData.url} target="_blank" rel="noopener noreferrer">{fileData.name}</a></p>
+                          <p class="answer file-link">
+                            <a
+                              href={fileData.url}
+                              target="_blank"
+                              rel="noopener noreferrer">{fileData.name}</a
+                            >
+                          </p>
                         {:else}
-                          <p class="answer file-link">{getFileDisplayName(value)}</p>
+                          <p class="answer file-link">
+                            {getFileDisplayName(value)}
+                          </p>
                         {/if}
                       {:else}
-                        <p class="answer" class:empty={isBlank(value)}>{formatValue(value, getField(page, key).formatter)}</p>
+                        <p class="answer" class:empty={isBlank(value)}>
+                          {formatValue(value, getField(page, key).formatter)}
+                        </p>
                       {/if}
                     </div>
                   {/if}
@@ -275,11 +303,13 @@
               {/if}
             {/if}
           </div>
-          <div class="action">
-            <goa-link leadingicon="pencil" action="change" action-arg={page}>
-              <a href="#">Change</a>
-            </goa-link>
-          </div>
+          {#if !readonly}
+            <div class="action">
+              <goa-link leadingicon="pencil" action="change" action-arg={page}>
+                <a href="#">Change</a>
+              </goa-link>
+            </div>
+          {/if}
         </div>
       {/if}
     {/each}
@@ -300,7 +330,7 @@
     gap: var(--goa-space-s);
     align-items: flex-start;
     padding: var(--goa-space-m) var(--goa-space-l);
-    background: white;
+    background: var(--goa-form-summary-bg, white);
     border: 1px solid var(--goa-color-greyscale-200);
     border-radius: 12px;
   }

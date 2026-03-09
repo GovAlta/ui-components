@@ -58,7 +58,12 @@ export function CaseDetailPage() {
   const [isCommentsDrawerOpen, setIsCommentsDrawerOpen] = useState(false);
   const [comments, setComments] = useState<Comment[]>(initialComments);
   const { scrollPosition } = useScrollState();
-  const { isOpen: isDrawerOpen, openDrawer, closeDrawer, registerHandlers } = usePushDrawer();
+  const {
+    isOpen: isDrawerOpen,
+    openDrawer,
+    closeDrawer,
+    registerHandlers,
+  } = usePushDrawer();
 
   // Show shadow when scrolled (not at top or no-scroll)
   const isScrolled = scrollPosition !== "at-top" && scrollPosition !== "no-scroll";
@@ -129,14 +134,12 @@ export function CaseDetailPage() {
     }
 
     // Insert action record for audit trail
-    const { error: actionError } = await supabase
-      .from("actions")
-      .insert({
-        case_id: id,
-        action_type: "assigned",
-        actor: "Edna Mode",
-        details: {},
-      });
+    const { error: actionError } = await supabase.from("actions").insert({
+      case_id: id,
+      action_type: "assigned",
+      actor: "Edna Mode",
+      details: {},
+    });
 
     if (actionError) {
       console.error("Error recording action:", actionError);
@@ -175,14 +178,12 @@ export function CaseDetailPage() {
     }
 
     // Insert action record for audit trail
-    await supabase
-      .from("actions")
-      .insert({
-        case_id: id,
-        action_type: "status_change",
-        actor: "Edna Mode",
-        details: { action: "unassigned", previousWorker: caseData.assigned_worker },
-      });
+    await supabase.from("actions").insert({
+      case_id: id,
+      action_type: "status_change",
+      actor: "Edna Mode",
+      details: { action: "unassigned", previousWorker: caseData.assigned_worker },
+    });
 
     // Refresh case data
     const { data, error } = await supabase
@@ -210,60 +211,48 @@ export function CaseDetailPage() {
   };
 
   // Handle review submission (approve, deny, or request info)
-  const handleSubmitReview = async (decision: "approve" | "deny" | "requestInfo", details: string) => {
+  const handleSubmitReview = async (
+    decision: "approve" | "deny" | "requestInfo",
+    details: string,
+  ) => {
     if (!id) return;
 
     switch (decision) {
       case "approve":
-        await supabase
-          .from("cases")
-          .update({ status: "approved" })
-          .eq("id", id);
+        await supabase.from("cases").update({ status: "approved" }).eq("id", id);
 
-        await supabase
-          .from("actions")
-          .insert({
-            case_id: id,
-            action_type: "status_change",
-            actor: "Edna Mode",
-            details: { new_status: "approved", note: details || null },
-          });
+        await supabase.from("actions").insert({
+          case_id: id,
+          action_type: "status_change",
+          actor: "Edna Mode",
+          details: { new_status: "approved", note: details || null },
+        });
         break;
 
       case "deny":
         if (!details.trim()) return;
 
-        await supabase
-          .from("cases")
-          .update({ status: "denied" })
-          .eq("id", id);
+        await supabase.from("cases").update({ status: "denied" }).eq("id", id);
 
-        await supabase
-          .from("actions")
-          .insert({
-            case_id: id,
-            action_type: "status_change",
-            actor: "Edna Mode",
-            details: { new_status: "denied", reason: details },
-          });
+        await supabase.from("actions").insert({
+          case_id: id,
+          action_type: "status_change",
+          actor: "Edna Mode",
+          details: { new_status: "denied", reason: details },
+        });
         break;
 
       case "requestInfo":
         if (!details.trim()) return;
 
-        await supabase
-          .from("cases")
-          .update({ status: "info_requested" })
-          .eq("id", id);
+        await supabase.from("cases").update({ status: "info_requested" }).eq("id", id);
 
-        await supabase
-          .from("actions")
-          .insert({
-            case_id: id,
-            action_type: "feedback_sent",
-            actor: "Edna Mode",
-            details: { request: details },
-          });
+        await supabase.from("actions").insert({
+          case_id: id,
+          action_type: "feedback_sent",
+          actor: "Edna Mode",
+          details: { request: details },
+        });
         break;
     }
 
@@ -286,27 +275,27 @@ export function CaseDetailPage() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1); // Remove the #
-      if (hash === 'comments') {
+      if (hash === "comments") {
         setIsCommentsDrawerOpen(true);
         // Clear the hash after opening
-        window.history.replaceState(null, '', window.location.pathname);
+        window.history.replaceState(null, "", window.location.pathname);
       } else if (hash) {
         // Scroll to section
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
         // Clear the hash after scrolling
         setTimeout(() => {
-          window.history.replaceState(null, '', window.location.pathname);
+          window.history.replaceState(null, "", window.location.pathname);
         }, 100);
       }
     };
 
     // Check on mount and on hash change
     handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   const handleAddComment = (text: string) => {
@@ -346,7 +335,11 @@ export function CaseDetailPage() {
   const formData = (caseData?.submissions?.form_data || {}) as FormData;
 
   // Helper to get value from nested task/page/field structure
-  const getTaskValue = (task: "task1" | "task2" | "task3" | "task4", page: string, field: string): string => {
+  const getTaskValue = (
+    task: "task1" | "task2" | "task3" | "task4",
+    page: string,
+    field: string,
+  ): string => {
     const pageData = formData[task]?.[page];
     if (!pageData) return "-";
     const value = pageData[field];
@@ -414,18 +407,23 @@ export function CaseDetailPage() {
       case "complete":
         return <GoabxBadge type="success" emphasis="subtle" content="Complete" />;
       case "missing":
-        return <GoabxBadge type="important" emphasis="subtle" content="Missing information" />;
+        return (
+          <GoabxBadge type="important" emphasis="subtle" content="Missing information" />
+        );
       case "not-started":
         return <GoabxBadge type="archived" emphasis="subtle" content="Not started" />;
     }
   };
 
   // Check if case can be assigned (unassigned and not terminal)
-  const canAssign = caseData && !caseData.assigned_worker &&
+  const canAssign =
+    caseData &&
+    !caseData.assigned_worker &&
     !["approved", "denied"].includes(caseData.status);
 
   // Check if worker can take decision actions (assigned to them and not terminal)
-  const canTakeAction = caseData &&
+  const canTakeAction =
+    caseData &&
     caseData.assigned_worker === "Edna Mode" &&
     !["approved", "denied"].includes(caseData.status);
 
@@ -444,11 +442,7 @@ export function CaseDetailPage() {
           </GoabxButton>
         )}
         {canTakeAction && !isDrawerOpen && (
-          <GoabxButton
-            type="secondary"
-            size="compact"
-            onClick={() => openDrawer()}
-          >
+          <GoabxButton type="secondary" size="compact" onClick={() => openDrawer()}>
             Review
           </GoabxButton>
         )}
@@ -462,7 +456,7 @@ export function CaseDetailPage() {
         </GoabxButton>
       </>
     ),
-    [comments.length, canAssign, canTakeAction, isAssigning, isDrawerOpen, openDrawer]
+    [comments.length, canAssign, canTakeAction, isAssigning, isDrawerOpen, openDrawer],
   );
 
   const SkeletonAccordion = () => (
@@ -488,7 +482,10 @@ export function CaseDetailPage() {
       <div className="case-detail__page_template">
         <div className="case-detail__page_content">
           <GoabText size="heading-m">Case not found</GoabText>
-          <GoabxButton type="tertiary" onClick={() => navigate("/workspace/applications")}>
+          <GoabxButton
+            type="tertiary"
+            onClick={() => navigate("/workspace/applications")}
+          >
             Back to applications
           </GoabxButton>
         </div>
@@ -514,17 +511,30 @@ export function CaseDetailPage() {
     <>
       <div className="case-detail__page_template">
         {/* Sticky header with name, status badges, and actions */}
-        <div style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 10,
-          backgroundColor: "var(--goa-color-greyscale-white)",
-          padding: "var(--goa-space-m) var(--goa-space-xl)",
-          borderBottom: isScrolled ? "1px solid var(--goa-color-greyscale-100)" : "none",
-          boxShadow: isScrolled ? "0 1px 3px rgba(0, 0, 0, 0.08)" : "none",
-          transition: "box-shadow 0.2s ease, border-bottom 0.2s ease",
-        }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 10,
+            backgroundColor:
+              "var(--case-detail-header-bg, var(--goa-color-greyscale-white))",
+            padding: "var(--goa-space-m) var(--goa-space-xl)",
+            borderBottom: isScrolled
+              ? "1px solid var(--goa-color-greyscale-100)"
+              : "none",
+            boxShadow: isScrolled ? "var(--goa-shadow-100)" : "none",
+            transition: "box-shadow 0.2s ease, border-bottom 0.2s ease",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <GoabText size="heading-m" mb="none" mt="none">
                 {isLoading ? "Loading..." : citizenName}
@@ -537,9 +547,7 @@ export function CaseDetailPage() {
                 isLoading={isLoading}
               />
             </div>
-            <div style={{ display: "flex", gap: "0.5rem" }}>
-              {headerActions}
-            </div>
+            <div style={{ display: "flex", gap: "0.5rem" }}>{headerActions}</div>
           </div>
         </div>
 
@@ -579,14 +587,19 @@ export function CaseDetailPage() {
                           headingContent={getTaskBadge(task2Status)}
                           mb="m"
                         >
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Date of birth</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task2", "date-of-birth", "dateOfBirth")}
-                            </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr 1fr" }}
+                          >
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Date of birth
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task2", "date-of-birth", "dateOfBirth")}
+                              </GoabText>
+                            </div>
                           </div>
-                        </div>
                         </GoabAccordion>
                       </div>
 
@@ -598,63 +611,94 @@ export function CaseDetailPage() {
                           headingContent={getTaskBadge(task3Status)}
                           mb="m"
                         >
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Applying for</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {formatValue(getTaskValue("task3", "applying-for", "applyingFor"))}
-                            </GoabText>
-                          </div>
-
-                          {getTaskValue("task3", "relationship", "relationship") !== "-" && (
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr 1fr" }}
+                          >
                             <div className="data-card_info">
-                              <GoabText as="span" size="body-xs" color="secondary">Relationship</GoabText>
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Applying for
+                              </GoabText>
                               <GoabText as="span" size="body-s">
-                                {formatValue(getTaskValue("task3", "relationship", "relationship"))}
+                                {formatValue(
+                                  getTaskValue("task3", "applying-for", "applyingFor"),
+                                )}
                               </GoabText>
                             </div>
-                          )}
 
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Employment status</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {formatValue(getTaskValue("task3", "employment", "employmentStatus"))}
-                            </GoabText>
+                            {getTaskValue("task3", "relationship", "relationship") !==
+                              "-" && (
+                              <div className="data-card_info">
+                                <GoabText as="span" size="body-xs" color="secondary">
+                                  Relationship
+                                </GoabText>
+                                <GoabText as="span" size="body-s">
+                                  {formatValue(
+                                    getTaskValue("task3", "relationship", "relationship"),
+                                  )}
+                                </GoabText>
+                              </div>
+                            )}
+
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Employment status
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {formatValue(
+                                  getTaskValue("task3", "employment", "employmentStatus"),
+                                )}
+                              </GoabText>
+                            </div>
+
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Assistance needed by
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task3", "when-needed", "assistanceDate")}
+                              </GoabText>
+                            </div>
                           </div>
 
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Assistance needed by</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task3", "when-needed", "assistanceDate")}
-                            </GoabText>
-                          </div>
-                        </div>
+                          <GoabDivider mt="l" mb="l" />
 
-                        <GoabDivider mt="l" mb="l" />
-
-                        {/* About you */}
-                        <GoabText size="body-s" color="secondary" mb="xs">
-                          About you
-                        </GoabText>
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Full name</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task3", "about-you", "fullName")}
-                            </GoabText>
+                          {/* About you */}
+                          <GoabText size="body-s" color="secondary" mb="xs">
+                            About you
+                          </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr 1fr" }}
+                          >
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Full name
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task3", "about-you", "fullName")}
+                              </GoabText>
+                            </div>
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Phone number
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task3", "about-you", "phoneNumber")}
+                              </GoabText>
+                            </div>
                           </div>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Phone number</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task3", "about-you", "phoneNumber")}
-                            </GoabText>
-                          </div>
-                        </div>
                         </GoabAccordion>
                       </div>
 
                       {/* Section 2: Your application */}
-                      <GoabText as="h2" size="heading-xs" mt="2xl" mb="m" color="secondary">
+                      <GoabText
+                        as="h2"
+                        size="heading-xs"
+                        mt="2xl"
+                        mb="m"
+                        color="secondary"
+                      >
                         2. Your application
                       </GoabText>
 
@@ -666,141 +710,225 @@ export function CaseDetailPage() {
                           headingContent={getTaskBadge(task1Status)}
                           mb="m"
                         >
-                        {/* Urgent need */}
-                        <GoabText size="body-s" color="secondary" mb="xs">
-                          Urgent need
-                        </GoabText>
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Urgent financial need</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "urgent-need", "urgentNeed") === "Yes" ? (
-                                <GoabxBadge type="emergency" emphasis="subtle" content="Yes" />
-                              ) : (
-                                getTaskValue("task1", "urgent-need", "urgentNeed")
-                              )}
-                            </GoabText>
-                          </div>
-                        </div>
-
-                        <GoabDivider mt="l" mb="l" />
-
-                        {/* Marital status */}
-                        <GoabText size="body-s" color="secondary" mb="xs">
-                          Marital status
-                        </GoabText>
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Marital status</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {formatValue(getTaskValue("task1", "marital-status", "maritalStatus"))}
-                            </GoabText>
-                          </div>
-                        </div>
-
-                        <GoabDivider mt="l" mb="l" />
-
-                        {/* Address */}
-                        <GoabText size="body-s" color="secondary" mb="xs">
-                          Address
-                        </GoabText>
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Street address</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "address", "streetAddress")}
-                            </GoabText>
-                          </div>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">City or town</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "address", "city")}
-                            </GoabText>
-                          </div>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Province or territory</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "address", "province")}
-                            </GoabText>
-                          </div>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Postal code</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "address", "postalCode")}
-                            </GoabText>
-                          </div>
-                        </div>
-
-                        <GoabDivider mt="l" mb="l" />
-
-                        {/* Contact preference */}
-                        <GoabText size="body-s" color="secondary" mb="xs">
-                          Contact preference
-                        </GoabText>
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                          {getTaskValue("task1", "contact-preference", "contactByPhone") === "true" && (
+                          {/* Urgent need */}
+                          <GoabText size="body-s" color="secondary" mb="xs">
+                            Urgent need
+                          </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr" }}
+                          >
                             <div className="data-card_info">
-                              <GoabText as="span" size="body-xs" color="secondary">Phone number</GoabText>
-                              <GoabText as="span" size="body-s">
-                                {getTaskValue("task1", "contact-preference", "phoneNumber")}
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Urgent financial need
                               </GoabText>
-                            </div>
-                          )}
-                          {getTaskValue("task1", "contact-preference", "contactByEmail") === "true" && (
-                            <div className="data-card_info">
-                              <GoabText as="span" size="body-xs" color="secondary">Email address</GoabText>
                               <GoabText as="span" size="body-s">
-                                {getTaskValue("task1", "contact-preference", "emailAddress")}
-                                <GoabTooltip content={copiedField === "email" ? "Copied" : "Copy"}>
-                                  <GoabIconButton
-                                    icon="copy"
-                                    ariaLabel="Copy email"
-                                    variant="dark"
-                                    size="small"
-                                    onClick={() =>
-                                      handleCopy(
-                                        getTaskValue("task1", "contact-preference", "emailAddress"),
-                                        "email"
-                                      )
-                                    }
+                                {getTaskValue("task1", "urgent-need", "urgentNeed") ===
+                                "Yes" ? (
+                                  <GoabxBadge
+                                    type="emergency"
+                                    emphasis="subtle"
+                                    content="Yes"
                                   />
-                                </GoabTooltip>
+                                ) : (
+                                  getTaskValue("task1", "urgent-need", "urgentNeed")
+                                )}
                               </GoabText>
                             </div>
-                          )}
-                          {getTaskValue("task1", "contact-preference", "contactByMail") === "true" && (
+                          </div>
+
+                          <GoabDivider mt="l" mb="l" />
+
+                          {/* Marital status */}
+                          <GoabText size="body-s" color="secondary" mb="xs">
+                            Marital status
+                          </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr" }}
+                          >
                             <div className="data-card_info">
-                              <GoabText as="span" size="body-xs" color="secondary">Mail</GoabText>
-                              <GoabText as="span" size="body-s">Yes (postal address)</GoabText>
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Marital status
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {formatValue(
+                                  getTaskValue(
+                                    "task1",
+                                    "marital-status",
+                                    "maritalStatus",
+                                  ),
+                                )}
+                              </GoabText>
                             </div>
-                          )}
-                        </div>
-
-                        <GoabDivider mt="l" mb="l" />
-
-                        {/* Consent */}
-                        <GoabText size="body-s" color="secondary" mb="xs">
-                          Consent
-                        </GoabText>
-                        <div className="data-card" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Full name</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "consent", "fullName")}
-                            </GoabText>
                           </div>
-                          <div className="data-card_info">
-                            <GoabText as="span" size="body-xs" color="secondary">Signature provided</GoabText>
-                            <GoabText as="span" size="body-s">
-                              {getTaskValue("task1", "consent", "signature") !== "-" ? "Yes" : "No"}
-                            </GoabText>
+
+                          <GoabDivider mt="l" mb="l" />
+
+                          {/* Address */}
+                          <GoabText size="body-s" color="secondary" mb="xs">
+                            Address
+                          </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr 1fr" }}
+                          >
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Street address
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task1", "address", "streetAddress")}
+                              </GoabText>
+                            </div>
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                City or town
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task1", "address", "city")}
+                              </GoabText>
+                            </div>
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Province or territory
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task1", "address", "province")}
+                              </GoabText>
+                            </div>
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Postal code
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task1", "address", "postalCode")}
+                              </GoabText>
+                            </div>
                           </div>
-                        </div>
+
+                          <GoabDivider mt="l" mb="l" />
+
+                          {/* Contact preference */}
+                          <GoabText size="body-s" color="secondary" mb="xs">
+                            Contact preference
+                          </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr 1fr" }}
+                          >
+                            {getTaskValue(
+                              "task1",
+                              "contact-preference",
+                              "contactByPhone",
+                            ) === "true" && (
+                              <div className="data-card_info">
+                                <GoabText as="span" size="body-xs" color="secondary">
+                                  Phone number
+                                </GoabText>
+                                <GoabText as="span" size="body-s">
+                                  {getTaskValue(
+                                    "task1",
+                                    "contact-preference",
+                                    "phoneNumber",
+                                  )}
+                                </GoabText>
+                              </div>
+                            )}
+                            {getTaskValue(
+                              "task1",
+                              "contact-preference",
+                              "contactByEmail",
+                            ) === "true" && (
+                              <div className="data-card_info">
+                                <GoabText as="span" size="body-xs" color="secondary">
+                                  Email address
+                                </GoabText>
+                                <GoabText as="span" size="body-s">
+                                  {getTaskValue(
+                                    "task1",
+                                    "contact-preference",
+                                    "emailAddress",
+                                  )}
+                                  <GoabTooltip
+                                    content={copiedField === "email" ? "Copied" : "Copy"}
+                                  >
+                                    <GoabIconButton
+                                      icon="copy"
+                                      ariaLabel="Copy email"
+                                      variant="dark"
+                                      size="small"
+                                      onClick={() =>
+                                        handleCopy(
+                                          getTaskValue(
+                                            "task1",
+                                            "contact-preference",
+                                            "emailAddress",
+                                          ),
+                                          "email",
+                                        )
+                                      }
+                                    />
+                                  </GoabTooltip>
+                                </GoabText>
+                              </div>
+                            )}
+                            {getTaskValue(
+                              "task1",
+                              "contact-preference",
+                              "contactByMail",
+                            ) === "true" && (
+                              <div className="data-card_info">
+                                <GoabText as="span" size="body-xs" color="secondary">
+                                  Mail
+                                </GoabText>
+                                <GoabText as="span" size="body-s">
+                                  Yes (postal address)
+                                </GoabText>
+                              </div>
+                            )}
+                          </div>
+
+                          <GoabDivider mt="l" mb="l" />
+
+                          {/* Consent */}
+                          <GoabText size="body-s" color="secondary" mb="xs">
+                            Consent
+                          </GoabText>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr 1fr" }}
+                          >
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Full name
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task1", "consent", "fullName")}
+                              </GoabText>
+                            </div>
+                            <div className="data-card_info">
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                Signature provided
+                              </GoabText>
+                              <GoabText as="span" size="body-s">
+                                {getTaskValue("task1", "consent", "signature") !== "-"
+                                  ? "Yes"
+                                  : "No"}
+                              </GoabText>
+                            </div>
+                          </div>
                         </GoabAccordion>
                       </div>
 
                       {/* Section 3: Important documents */}
-                      <GoabText as="h2" size="heading-xs" mt="2xl" mb="m" color="secondary">
+                      <GoabText
+                        as="h2"
+                        size="heading-xs"
+                        mt="2xl"
+                        mb="m"
+                        color="secondary"
+                      >
                         3. Important documents
                       </GoabText>
 
@@ -812,11 +940,18 @@ export function CaseDetailPage() {
                           headingContent={getTaskBadge(task4Status)}
                           mb="m"
                         >
-                          <div className="data-card" style={{ gridTemplateColumns: "1fr" }}>
+                          <div
+                            className="data-card"
+                            style={{ gridTemplateColumns: "1fr" }}
+                          >
                             <div className="data-card_info">
-                              <GoabText as="span" size="body-xs" color="secondary">ID document uploaded</GoabText>
+                              <GoabText as="span" size="body-xs" color="secondary">
+                                ID document uploaded
+                              </GoabText>
                               <GoabText as="span" size="body-s">
-                                {getTaskValue("task4", "upload-id", "idDocument") !== "-" ? "Yes" : "No"}
+                                {getTaskValue("task4", "upload-id", "idDocument") !== "-"
+                                  ? "Yes"
+                                  : "No"}
                               </GoabText>
                             </div>
                           </div>

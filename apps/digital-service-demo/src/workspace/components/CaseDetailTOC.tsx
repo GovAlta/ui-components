@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useIsDarkMode } from "../hooks/useIsDarkMode";
 import css from "./CaseDetailTOC.module.css";
 
 // Task status matching CaseDetailPage
@@ -19,16 +20,20 @@ interface CaseDetailTOCProps {
  * Highlights the section currently in view while showing completion status.
  */
 export function CaseDetailTOC({ sections }: CaseDetailTOCProps) {
+  const isDark = useIsDarkMode();
   const [activeId, setActiveId] = useState<string | null>(sections[0]?.id ?? null);
 
   // Update active section based on scroll position
   const updateActiveSection = useCallback(() => {
-    const scrollContainer = document.querySelector('.desktop-card-container');
+    const scrollContainer = document.querySelector(".desktop-card-container");
     if (!scrollContainer) return;
 
     // Check if we're at the bottom of the scroll container
     const isAtBottom =
-      scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight < 20;
+      scrollContainer.scrollHeight -
+        scrollContainer.scrollTop -
+        scrollContainer.clientHeight <
+      20;
 
     // If at bottom, select the last section
     if (isAtBottom && sections.length > 0) {
@@ -63,7 +68,7 @@ export function CaseDetailTOC({ sections }: CaseDetailTOCProps) {
 
   useEffect(() => {
     // Find the scrollable container (desktop-card-container in workspace layout)
-    const scrollContainer = document.querySelector('.desktop-card-container');
+    const scrollContainer = document.querySelector(".desktop-card-container");
 
     if (scrollContainer) {
       scrollContainer.addEventListener("scroll", updateActiveSection);
@@ -89,21 +94,39 @@ export function CaseDetailTOC({ sections }: CaseDetailTOCProps) {
       case "complete":
         return (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="12" fill="#00853F" />
-            <path d="M7 12L10.5 15.5L17 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="12" cy="12" r="12" fill={isDark ? "#7eb36a" : "#00853F"} />
+            <path
+              d="M7 12L10.5 15.5L17 9"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         );
       case "missing":
         return (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="12" fill="#FCBA19" />
-            <path d="M12 7V13M12 17V17.01" stroke="#333" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="12" cy="12" r="12" fill={isDark ? "#c9a227" : "#FCBA19"} />
+            <path
+              d="M12 7V13M12 17V17.01"
+              stroke={isDark ? "#1a1a1a" : "#333"}
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </svg>
         );
       case "not-started":
         return (
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" stroke="#666" strokeWidth="2" strokeDasharray="4 4" />
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke={isDark ? "#858585" : "#666"}
+              strokeWidth="2"
+              strokeDasharray="4 4"
+            />
           </svg>
         );
     }

@@ -174,14 +174,14 @@
       : new DropdownKeyUpHandler(_inputEl);
     showDeprecationWarnings();
 
-     bindReset(_rootEl);
+    bindReset(_rootEl);
   });
 
   function bindReset(el: HTMLElement) {
     el.addEventListener("goa:reset", () => {
       if (value) {
         value = "";
-        dispatch(el, "_change", { name, value }, { bubbles: true })  ;
+        dispatch(el, "_change", { name, value }, { bubbles: true });
       }
     });
     dispatch(el, "goa:bind", el, { bubbles: true });
@@ -795,7 +795,7 @@
           <goa-icon
             class="dropdown-input--leading-icon"
             data-testid="leading-icon"
-              size={size === "compact" ? "small" : "medium"}
+            size={size === "compact" ? "small" : "medium"}
             type={leadingicon}
           />
         {/if}
@@ -1019,7 +1019,10 @@
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(--goa-dropdown-menu-border-radius, var(--goa-dropdown-border-radius));
+    border-radius: var(
+      --goa-dropdown-menu-border-radius,
+      var(--goa-dropdown-border-radius)
+    );
     padding: 0;
     margin: var(--goa-dropdown-menu-margin, 0);
   }
@@ -1037,7 +1040,6 @@
     overflow-wrap: break-word; /* Alternative for word wrapping */
     border-radius: var(--goa-dropdown-item-border-radius, 0);
   }
-
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {
@@ -1100,7 +1102,10 @@
     pointer-events: none;
     width: 1.5rem;
     height: 1.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E");
+    background-image: var(
+      --goa-dropdown-native-chevron-icon,
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E")
+    );
     background-repeat: no-repeat;
   }
 

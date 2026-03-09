@@ -10,7 +10,7 @@
   display: flex;
   height: 100vh;
   overflow: hidden;
-  background-color: #F8F8F8;
+  background-color: var(--goa-color-greyscale-50);
 }
 
 /* Main content area - fills remaining width after sidebar */
@@ -41,7 +41,9 @@
   height: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  transition: width 0.25s ease-out, min-width 0.25s ease-out;
+  transition:
+    width 0.25s ease-out,
+    min-width 0.25s ease-out;
   /* Anchor content to the right so it reveals from the right edge */
   display: flex;
   justify-content: flex-end;
@@ -65,7 +67,7 @@
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid var(--goa-color-greyscale-150);
-  background: white;
+  background: var(--goa-color-greyscale-white);
   /* Remove the header bottom border inside the drawer */
   --goa-color-greyscale-200: transparent;
 }
@@ -390,7 +392,7 @@
   align-items: center;
   justify-content: center;
   padding: 64px var(--goa-space-m);
-  background-color: var(--goa-color-greyscale-white, #ffffff);
+  background-color: var(--goa-color-greyscale-white);
   text-align: center;
 }
 
@@ -419,9 +421,8 @@
   align-items: center;
   justify-content: center;
   padding: 64px var(--goa-space-m);
-  background-color: var(--goa-color-greyscale-white, #ffffff);
+  background-color: var(--goa-color-greyscale-white);
 }
-
 
 /* ============================================================================
    DESKTOP CARD CONTAINER - Adaptive chrome based on vertical scroll state
@@ -460,28 +461,30 @@
 
 /* Card itself - height always 100% of available space */
 .desktop-card-container {
-  background-color: white;
+  background-color: var(--goa-color-greyscale-white);
   height: 100%;
   overflow: auto;
-  transition: border-radius 0.15s ease-out, border-color 0.15s ease-out;
+  transition:
+    border-radius 0.15s ease-out,
+    border-color 0.15s ease-out;
 }
 
 /* No scroll - full chrome (all borders, all radius) */
 .desktop-card-container[data-scroll-state="no-scroll"] {
-  border: 1px solid #E9E9E9;
+  border: 1px solid var(--goa-color-greyscale-150);
   border-radius: 24px;
 }
 
 /* At top - top chrome only */
 .desktop-card-container[data-scroll-state="at-top"] {
-  border: 1px solid #E9E9E9;
+  border: 1px solid var(--goa-color-greyscale-150);
   border-bottom: none;
   border-radius: 24px 24px 0 0;
 }
 
 /* Middle - side borders only, no top/bottom chrome */
 .desktop-card-container[data-scroll-state="middle"] {
-  border: 1px solid #E9E9E9;
+  border: 1px solid var(--goa-color-greyscale-150);
   border-top: none;
   border-bottom: none;
   border-radius: 0;
@@ -489,7 +492,7 @@
 
 /* At bottom - bottom chrome only */
 .desktop-card-container[data-scroll-state="at-bottom"] {
-  border: 1px solid #E9E9E9;
+  border: 1px solid var(--goa-color-greyscale-150);
   border-top: none;
   border-radius: 0 0 24px 24px;
 }
@@ -567,9 +570,12 @@
 /* Header container base styles */
 .page-header {
   position: relative; /* Required for ::after pseudo-element positioning */
-  background-color: white;
+  background-color: var(--goa-color-greyscale-white);
   border-bottom: none; /* Explicit default - no border */
-  transition: padding 0.15s ease-out, box-shadow 0.15s ease-out, border-bottom 0.1s ease-out;
+  transition:
+    padding 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    border-bottom 0.1s ease-out;
 }
 
 /* Desktop: Header states based on scroll position */
@@ -578,7 +584,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: white;
+    background-color: var(--goa-color-greyscale-white);
   }
 
   /* Expanded state - at top or no scroll */
@@ -609,12 +615,11 @@
 
   /* Collapsed header with toolbar - keep equal padding (sticky header) */
   /* The default collapsed padding (12px 32px) provides equal spacing */
-
 }
 
 /* Page header scroll shadow - gradient fade when content scrolls behind */
 .page-header::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -625,7 +630,9 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden; /* Fully remove when not visible */
-  transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+  transition:
+    opacity 0.1s ease-out,
+    visibility 0.1s ease-out;
 }
 
 /* Shadow visible when content scrolls behind header */
@@ -648,11 +655,13 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: white;
+    background-color: var(--goa-color-greyscale-white);
     padding: var(--goa-space-m) 16px;
     margin-bottom: 0;
     border-bottom: none;
-    transition: padding 0.15s ease-out, box-shadow 0.15s ease-out;
+    transition:
+      padding 0.15s ease-out,
+      box-shadow 0.15s ease-out;
   }
 
   /* Collapsed state on mobile - smaller padding */
@@ -787,7 +796,10 @@
 }
 
 /* All sizes: Hide title text when collapsed, remove gap */
-.page-header--collapsed .page-header__content:has(.search-header-filters) .page-header__title-container goa-text {
+.page-header--collapsed
+  .page-header__content:has(.search-header-filters)
+  .page-header__title-container
+  goa-text {
   display: none;
 }
 
@@ -837,7 +849,9 @@
     align-items: center;
   }
 
-  .page-header--collapsed .page-header__content:has(.search-header-filters) .page-header__title-container {
+  .page-header--collapsed
+    .page-header__content:has(.search-header-filters)
+    .page-header__title-container {
     grid-row: 1;
     grid-column: 1;
   }
@@ -1026,7 +1040,8 @@
 }
 
 .desktop-card-container .page-header--collapsed.page-header--hide-title-on-scroll,
-.desktop-card-container .page-header--with-tabs.page-header--collapsed.page-header--hide-title-on-scroll {
+.desktop-card-container
+  .page-header--with-tabs.page-header--collapsed.page-header--hide-title-on-scroll {
   padding-bottom: var(--goa-space-xs);
 }
 
@@ -1086,7 +1101,7 @@
   position: sticky;
   bottom: 0;
   z-index: 100;
-  background-color: white;
+  background-color: var(--goa-color-greyscale-white);
   border-top: 1px solid var(--goa-color-greyscale-150);
   padding: var(--goa-space-s) var(--goa-space-xl);
   transition: border-color 0.1s ease-out;
@@ -1108,7 +1123,7 @@
 
 /* Footer scroll shadow - gradient fade when content scrolls behind */
 .page-footer::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -1119,7 +1134,9 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+  transition:
+    opacity 0.1s ease-out,
+    visibility 0.1s ease-out;
 }
 
 /* Shadow visible when content scrolls behind footer */
@@ -1147,6 +1164,28 @@
    NOTIFICATION CENTRE
    ============================================================================ */
 
+/* Theme toggle in account popover - match WorkSideMenuItem styles */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-m);
+  padding: var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs)
+    calc(var(--goa-space-xs) + var(--goa-space-3xs));
+  background: none;
+  border: none;
+  border-radius: var(--goa-border-radius-m);
+  cursor: pointer;
+  font: var(--goa-typography-body-s);
+  color: var(--goa-color-greyscale-600);
+  width: 100%;
+  min-height: 40px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--goa-color-greyscale-100);
+  color: var(--goa-color-text-default);
+}
+
 /* Use darker shadow for notification popover */
 goa-work-side-menu {
   --goa-popover-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
@@ -1164,7 +1203,7 @@ goa-work-side-menu goa-tabs {
 }
 
 .notification-header::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -1188,7 +1227,7 @@ goa-work-side-menu goa-tabs {
 }
 
 .notification-footer::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -1274,7 +1313,7 @@ goa-drawer goa-tabs {
 }
 
 .expandable-list__item {
-  background: white;
+  background: var(--goa-color-greyscale-white);
   border: 1px solid var(--goa-color-greyscale-200);
   border-radius: var(--goa-border-radius-xl);
 }
@@ -1801,7 +1840,10 @@ goa-drawer goa-tabs {
   color: var(--goa-color-interactive-default);
 
   /* Transitions */
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 /* Remove the ::after indicator from V2 tabs */

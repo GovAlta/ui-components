@@ -14,14 +14,31 @@ import {
 } from "recharts";
 import { usePageHeader } from "../../workspace/contexts/PageHeaderContext";
 import { useMenu } from "../../workspace/contexts/MenuContext";
+import { useIsDarkMode } from "../../workspace/hooks/useIsDarkMode";
 import { supabase, CaseWithSubmission } from "../../lib/supabase";
 import "./DashboardPage.css";
 
-// GoA Design System colors for charts
+// Chart chrome colors (grid, axis, tooltip) - light and dark variants
+const CHART_CHROME = {
+  light: {
+    grid: "#e5e5e5",
+    axisText: "#666",
+    tooltipBg: "#fff",
+    tooltipBorder: "#e5e5e5",
+  },
+  dark: {
+    grid: "#3d3d3d",
+    axisText: "#999",
+    tooltipBg: "#2a2a2a",
+    tooltipBorder: "#3d3d3d",
+  },
+};
+
+// GoA Design System colors for chart series (work in both modes)
 const CHART_COLORS = {
-  lilac: "#ae7fe6",    // New cases
-  pasture: "#4caf50",  // Completed
-  sunset: "#f2a71e",   // Updated
+  lilac: "#ae7fe6", // New cases
+  pasture: "#4caf50", // Completed
+  sunset: "#f2a71e", // Updated
 };
 
 // Mock chart data (last 7 days)
@@ -76,53 +93,76 @@ function formatRelativeDate(dateStr: string): string {
 }
 
 // Get status badge type
-function getStatusBadgeType(status: CaseWithSubmission['status']): 'information' | 'success' | 'important' | 'emergency' {
+function getStatusBadgeType(
+  status: CaseWithSubmission["status"],
+): "information" | "success" | "important" | "emergency" {
   switch (status) {
-    case 'submitted': return 'information';
-    case 'under_review': return 'important';
-    case 'info_requested': return 'emergency';
-    case 'approved': return 'success';
-    case 'denied': return 'emergency';
-    default: return 'information';
+    case "submitted":
+      return "information";
+    case "under_review":
+      return "important";
+    case "info_requested":
+      return "emergency";
+    case "approved":
+      return "success";
+    case "denied":
+      return "emergency";
+    default:
+      return "information";
   }
 }
 
 // Get status display text
-function getStatusText(status: CaseWithSubmission['status']): string {
+function getStatusText(status: CaseWithSubmission["status"]): string {
   switch (status) {
-    case 'submitted': return 'Submitted';
-    case 'under_review': return 'Under Review';
-    case 'info_requested': return 'Info Requested';
-    case 'approved': return 'Approved';
-    case 'denied': return 'Denied';
-    default: return status;
+    case "submitted":
+      return "Submitted";
+    case "under_review":
+      return "Under Review";
+    case "info_requested":
+      return "Info Requested";
+    case "approved":
+      return "Approved";
+    case "denied":
+      return "Denied";
+    default:
+      return status;
   }
 }
 
 // Format citizen name from submission
-function formatCitizenName(submission: CaseWithSubmission['submissions']): string {
+function formatCitizenName(submission: CaseWithSubmission["submissions"]): string {
   if (submission.citizen_name) return submission.citizen_name;
   const formData = submission.form_data as Record<string, unknown>;
-  const firstName = formData.firstName || formData.first_name || '';
-  const lastName = formData.lastName || formData.last_name || '';
+  const firstName = formData.firstName || formData.first_name || "";
+  const lastName = formData.lastName || formData.last_name || "";
   if (firstName || lastName) return `${firstName} ${lastName}`.trim();
-  return 'Unknown Citizen';
+  return "Unknown Citizen";
 }
 
 // Stat Card component
+type StatCardTint = "emergency" | "success" | "info" | undefined;
+
 interface StatCardProps {
   value: number;
   label: string;
   icon: string;
-  highlight?: boolean;
+  tint?: StatCardTint;
   onClick?: () => void;
   isLoading?: boolean;
 }
 
-function StatCard({ value, label, icon, highlight, onClick, isLoading }: StatCardProps) {
+const tintIconColors: Record<string, string> = {
+  emergency: "var(--goa-color-emergency-default)",
+  success: "var(--goa-color-success-default)",
+  info: "var(--goa-color-info-default)",
+};
+
+function StatCard({ value, label, icon, tint, onClick, isLoading }: StatCardProps) {
+  const tintClass = tint ? `dashboard-stat-card--${tint}` : "";
   return (
     <div
-      className={`dashboard-stat-card ${highlight ? "dashboard-stat-card--highlight" : ""} ${onClick ? "dashboard-stat-card--clickable" : ""}`}
+      className={`dashboard-stat-card ${tintClass} ${onClick ? "dashboard-stat-card--clickable" : ""}`}
       onClick={onClick}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
@@ -132,18 +172,24 @@ function StatCard({ value, label, icon, highlight, onClick, isLoading }: StatCar
         <GoabIcon
           type={icon as never}
           size="medium"
-          fillColor={highlight ? "var(--goa-color-emergency-text-dark)" : "var(--goa-color-interactive-default)"}
+          fillColor={tint ? tintIconColors[tint] : "var(--goa-color-interactive-default)"}
         />
       </div>
       <div className="dashboard-stat-card__content">
         {isLoading ? (
           <GoabSkeleton type="title" maxWidth="40px" />
         ) : (
-          <span className={`dashboard-stat-card__value ${highlight ? "dashboard-stat-card__value--highlight" : ""}`}>
+          <span
+            className={`dashboard-stat-card__value ${tint ? `dashboard-stat-card__value--${tint}` : ""}`}
+          >
             {value}
           </span>
         )}
-        <span className="dashboard-stat-card__label">{label}</span>
+        <span
+          className={`dashboard-stat-card__label ${tint ? `dashboard-stat-card__label--${tint}` : ""}`}
+        >
+          {label}
+        </span>
       </div>
     </div>
   );
@@ -181,8 +227,12 @@ function WorkQueueCard({ caseItem, isUrgent }: WorkQueueCardProps) {
     <Link to={`/workspace/application/${caseItem.id}`} className="dashboard-queue-card">
       <div className="dashboard-queue-card__main">
         <div className="dashboard-queue-card__header">
-          <span className="dashboard-queue-card__name">{formatCitizenName(caseItem.submissions)}</span>
-          <span className={`dashboard-queue-card__date ${isUrgent ? "dashboard-queue-card__date--highlight" : ""}`}>
+          <span className="dashboard-queue-card__name">
+            {formatCitizenName(caseItem.submissions)}
+          </span>
+          <span
+            className={`dashboard-queue-card__date ${isUrgent ? "dashboard-queue-card__date--highlight" : ""}`}
+          >
             {formatRelativeDate(caseItem.submissions.submitted_at)}
           </span>
         </div>
@@ -214,7 +264,9 @@ function RecentItem({ caseItem, relativeDate }: RecentItemProps) {
   return (
     <Link to={`/workspace/application/${caseItem.id}`} className="dashboard-recent-item">
       <span className="dashboard-recent-item__date">{relativeDate}</span>
-      <span className="dashboard-recent-item__name">{formatCitizenName(caseItem.submissions)}</span>
+      <span className="dashboard-recent-item__name">
+        {formatCitizenName(caseItem.submissions)}
+      </span>
     </Link>
   );
 }
@@ -222,6 +274,8 @@ function RecentItem({ caseItem, relativeDate }: RecentItemProps) {
 export function DashboardPage() {
   const navigate = useNavigate();
   const { isMobile } = useMenu();
+  const isDark = useIsDarkMode();
+  const chrome = isDark ? CHART_CHROME.dark : CHART_CHROME.light;
   const [cases, setCases] = useState<CaseWithSubmission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -230,15 +284,17 @@ export function DashboardPage() {
     async function fetchCases() {
       setIsLoading(true);
       const { data, error } = await supabase
-        .from('cases')
-        .select(`
+        .from("cases")
+        .select(
+          `
           *,
           submissions (*)
-        `)
-        .order('created_at', { ascending: false });
+        `,
+        )
+        .order("created_at", { ascending: false });
 
       if (error) {
-        console.error('Error fetching cases:', error);
+        console.error("Error fetching cases:", error);
       } else if (data) {
         setCases(data as CaseWithSubmission[]);
       }
@@ -249,10 +305,12 @@ export function DashboardPage() {
 
   // Calculate stats from cases
   const stats = useMemo(() => {
-    const active = cases.filter(c => c.status === 'under_review').length;
-    const needsReview = cases.filter(c => c.status === 'submitted').length;
-    const pendingResponse = cases.filter(c => c.status === 'info_requested').length;
-    const completed = cases.filter(c => c.status === 'approved' || c.status === 'denied').length;
+    const active = cases.filter((c) => c.status === "under_review").length;
+    const needsReview = cases.filter((c) => c.status === "submitted").length;
+    const pendingResponse = cases.filter((c) => c.status === "info_requested").length;
+    const completed = cases.filter(
+      (c) => c.status === "approved" || c.status === "denied",
+    ).length;
 
     return { active, needsReview, pendingResponse, completed };
   }, [cases]);
@@ -260,27 +318,40 @@ export function DashboardPage() {
   // Get cases assigned to current worker (Edna Mode), oldest first
   const workQueue = useMemo(() => {
     return cases
-      .filter(c => c.assigned_worker === 'Edna Mode')
-      .sort((a, b) => new Date(a.submissions.submitted_at).getTime() - new Date(b.submissions.submitted_at).getTime())
+      .filter((c) => c.assigned_worker === "Edna Mode")
+      .sort(
+        (a, b) =>
+          new Date(a.submissions.submitted_at).getTime() -
+          new Date(b.submissions.submitted_at).getTime(),
+      )
       .slice(0, 5);
   }, [cases]);
 
   // Get recent submissions
   const recentSubmissions = useMemo(() => {
-    return cases
-      .slice(0, 5)
-      .map(c => ({
-        ...c,
-        relativeDate: formatRelativeDate(c.submissions.submitted_at),
-      }));
+    return cases.slice(0, 5).map((c) => ({
+      ...c,
+      relativeDate: formatRelativeDate(c.submissions.submitted_at),
+    }));
   }, [cases]);
 
   // Set page header (mobile only)
   usePageHeader(
     isMobile ? "Overview" : "",
-    isMobile ? {
-      actions: <span style={{ font: "var(--goa-typography-body-s)", color: "var(--goa-color-text-secondary)" }}>{formatShortDate(new Date())}</span>
-    } : undefined
+    isMobile
+      ? {
+          actions: (
+            <span
+              style={{
+                font: "var(--goa-typography-body-s)",
+                color: "var(--goa-color-text-secondary)",
+              }}
+            >
+              {formatShortDate(new Date())}
+            </span>
+          ),
+        }
+      : undefined,
   );
 
   // Handle stat card clicks - navigate to appropriate tab
@@ -319,6 +390,7 @@ export function DashboardPage() {
             value={stats.active}
             label="Under Review"
             icon="eye"
+            tint="info"
             isLoading={isLoading}
             onClick={() => handleStatClick("assigned_to_me")}
           />
@@ -326,7 +398,7 @@ export function DashboardPage() {
             value={stats.needsReview}
             label="Needs Review"
             icon="mail"
-            highlight={stats.needsReview > 0}
+            tint={stats.needsReview > 0 ? "emergency" : undefined}
             isLoading={isLoading}
             onClick={() => handleStatClick("unassigned")}
           />
@@ -334,7 +406,7 @@ export function DashboardPage() {
             value={stats.pendingResponse}
             label="Pending Response"
             icon="time"
-            highlight={stats.pendingResponse > 0}
+            tint={stats.pendingResponse > 0 ? "emergency" : undefined}
             isLoading={isLoading}
             onClick={() => handleStatClick("waiting")}
           />
@@ -342,6 +414,7 @@ export function DashboardPage() {
             value={stats.completed}
             label="Completed"
             icon="checkmark-circle"
+            tint="success"
             isLoading={isLoading}
             onClick={() => handleStatClick("complete")}
           />
@@ -352,6 +425,7 @@ export function DashboardPage() {
             value={stats.active}
             label="Under Review"
             icon="eye"
+            tint="info"
             isLoading={isLoading}
             onClick={() => handleStatClick("assigned_to_me")}
           />
@@ -359,7 +433,7 @@ export function DashboardPage() {
             value={stats.needsReview}
             label="Needs Review"
             icon="mail"
-            highlight={stats.needsReview > 0}
+            tint={stats.needsReview > 0 ? "emergency" : undefined}
             isLoading={isLoading}
             onClick={() => handleStatClick("unassigned")}
           />
@@ -367,7 +441,7 @@ export function DashboardPage() {
             value={stats.pendingResponse}
             label="Pending Response"
             icon="time"
-            highlight={stats.pendingResponse > 0}
+            tint={stats.pendingResponse > 0 ? "emergency" : undefined}
             isLoading={isLoading}
             onClick={() => handleStatClick("waiting")}
           />
@@ -375,6 +449,7 @@ export function DashboardPage() {
             value={stats.completed}
             label="Completed"
             icon="checkmark-circle"
+            tint="success"
             isLoading={isLoading}
             onClick={() => handleStatClick("complete")}
           />
@@ -390,27 +465,25 @@ export function DashboardPage() {
                 data={mockChartData}
                 margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                <CartesianGrid strokeDasharray="3 3" stroke={chrome.grid} />
                 <XAxis
                   dataKey="date"
-                  tick={{ fontSize: 12, fill: "#666" }}
-                  axisLine={{ stroke: "#e5e5e5" }}
+                  tick={{ fontSize: 12, fill: chrome.axisText }}
+                  axisLine={{ stroke: chrome.grid }}
                 />
                 <YAxis
-                  tick={{ fontSize: 12, fill: "#666" }}
-                  axisLine={{ stroke: "#e5e5e5" }}
+                  tick={{ fontSize: 12, fill: chrome.axisText }}
+                  axisLine={{ stroke: chrome.grid }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "1px solid #e5e5e5",
+                    backgroundColor: chrome.tooltipBg,
+                    border: `1px solid ${chrome.tooltipBorder}`,
                     borderRadius: "4px",
                     fontSize: "12px",
                   }}
                 />
-                <Legend
-                  wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }}
-                />
+                <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }} />
                 <Area
                   type="monotone"
                   dataKey="newCases"
@@ -472,7 +545,7 @@ export function DashboardPage() {
                   <WorkQueueCard
                     key={caseItem.id}
                     caseItem={caseItem}
-                    isUrgent={caseItem.status === 'info_requested'}
+                    isUrgent={caseItem.status === "info_requested"}
                   />
                 ))
               )}

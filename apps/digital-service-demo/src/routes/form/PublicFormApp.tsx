@@ -4,9 +4,12 @@ import { GoabAppHeader } from "@abgov/react-components";
 import {
   GoabxAppFooter,
   GoabxAppFooterMetaSection,
+  GoabxMenuButton,
+  GoabxMenuAction,
 } from "@abgov/react-components/experimental";
-import { PFState } from "@abgov/ui-components-common";
+import { PFState, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { supabase } from "../../lib/supabase";
+import { useTheme } from "../../workspace/hooks/useTheme";
 
 import { View, Application, createApplication } from "./types";
 import {
@@ -35,6 +38,10 @@ import "./styles.css";
  */
 export function PublicFormApp() {
   const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
+
+  // Auth state - demo only, no real authentication
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // View state - which screen is currently displayed
   const [view, setView] = useState<View>("start");
@@ -258,6 +265,22 @@ export function PublicFormApp() {
     navigate("/");
   };
 
+  // Account menu actions
+  const handleAccountAction = (detail: GoabMenuButtonOnActionDetail) => {
+    switch (detail.action) {
+      case "my-applications":
+        setView("my-applications");
+        break;
+      case "theme":
+        toggleTheme();
+        break;
+      case "sign-out":
+        setIsLoggedIn(false);
+        setView("start");
+        break;
+    }
+  };
+
   // ─────────────────────────────────────────────────────────────────────────────
   // Render
   // ─────────────────────────────────────────────────────────────────────────────
@@ -265,16 +288,35 @@ export function PublicFormApp() {
   return (
     <div className="form-app">
       <GoabAppHeader heading="Apply for a Service" url="/" version="2">
-        <a
-          slot="utilities"
-          href="#my-applications"
-          onClick={(e) => {
-            e.preventDefault();
-            setView("my-applications");
-          }}
-        >
-          My applications
-        </a>
+        {isLoggedIn ? (
+          <div slot="utilities">
+            <GoabxMenuButton
+              text="Jordan Smith"
+              type="tertiary"
+              size="compact"
+              onAction={handleAccountAction}
+            >
+              <GoabxMenuAction text="My applications" action="my-applications" />
+              <GoabxMenuAction
+                text={isDark ? "Light mode" : "Dark mode"}
+                action="theme"
+                icon={isDark ? "sunny" : "moon"}
+              />
+              <GoabxMenuAction text="Sign out" action="sign-out" icon="log-out" />
+            </GoabxMenuButton>
+          </div>
+        ) : (
+          <a
+            slot="utilities"
+            href="#sign-in"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsLoggedIn(true);
+            }}
+          >
+            Sign in
+          </a>
+        )}
       </GoabAppHeader>
 
       <main className="main-content">

@@ -6,6 +6,12 @@ import "@abgov/web-components";
 import "@abgov/style";
 import "@abgov/design-tokens/dist/tokens.css";
 import "./workspace.css";
+import "./dark-theme.css";
+
+import { initTheme } from "./workspace/hooks/useTheme";
+
+// Set data-theme before React renders to prevent flash of wrong theme
+initTheme();
 
 import { CitizenLayout } from "./layouts/CitizenLayout";
 import { WorkspaceLayout } from "./layouts/WorkspaceLayout";
@@ -40,5 +46,5 @@ root.render(
         </Route>
       </Routes>
     </Router>
-  </StrictMode>
+  </StrictMode>,
 );

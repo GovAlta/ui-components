@@ -10,7 +10,13 @@ import { GoabxButton } from "@abgov/react-components/experimental";
 import { Application, TaskStatus } from "../types";
 
 // Simple action link styled like GoabxLink (for onClick handlers)
-function ActionLink({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
+function ActionLink({
+  onClick,
+  children,
+}: {
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"
@@ -40,10 +46,7 @@ type TaskListPageProps = {
   submissionError?: string | null;
 };
 
-function getTaskStatus(
-  hasState: boolean,
-  isComplete: boolean
-): TaskStatus {
+function getTaskStatus(hasState: boolean, isComplete: boolean): TaskStatus {
   if (isComplete) return "complete";
   if (hasState) return "in-progress";
   return "not-started";
@@ -85,11 +88,16 @@ function TaskItem({ name, status, onClick, isLast }: TaskItemProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        borderBottom: isLast ? "none" : "1px solid var(--goa-color-greyscale-100)",
+        borderBottom: isLast
+          ? "none"
+          : "1px solid var(--task-item-border, var(--goa-color-greyscale-100))",
         padding: "12px 16px 8px 16px",
         minHeight: "48px",
         cursor: isLocked ? "default" : "pointer",
-        backgroundColor: !isLocked && isHovered ? "var(--goa-color-greyscale-50)" : "transparent",
+        backgroundColor:
+          !isLocked && isHovered
+            ? "var(--task-item-hover-bg, var(--goa-color-greyscale-50))"
+            : "transparent",
         transition: "background-color 0.15s ease",
       }}
       onMouseEnter={() => !isLocked && setIsHovered(true)}
@@ -159,7 +167,7 @@ function TaskGroup({ number, title, locked, lockedMessage, children }: TaskGroup
       style={{
         border: "1px solid var(--goa-color-greyscale-150)",
         borderRadius: "12px",
-        backgroundColor: "var(--goa-color-greyscale-white)",
+        backgroundColor: "var(--task-group-bg, var(--goa-color-greyscale-white))",
         padding: "32px",
       }}
     >
@@ -178,13 +186,12 @@ function TaskGroup({ number, title, locked, lockedMessage, children }: TaskGroup
               color: "var(--goa-color-text-secondary)",
             }}
           >
-            {lockedMessage || "You need to complete the previous section before you can start this task."}
+            {lockedMessage ||
+              "You need to complete the previous section before you can start this task."}
           </span>
         </div>
       ) : (
-        <div style={{ marginTop: "var(--goa-space-m)" }}>
-          {children}
-        </div>
+        <div style={{ marginTop: "var(--goa-space-m)" }}>{children}</div>
       )}
     </div>
   );
@@ -200,7 +207,12 @@ type StatusCalloutProps = {
   onContinue?: () => void;
 };
 
-function StatusCallout({ completedCount, totalCount, hasAnyProgress, onContinue }: StatusCalloutProps) {
+function StatusCallout({
+  completedCount,
+  totalCount,
+  hasAnyProgress,
+  onContinue,
+}: StatusCalloutProps) {
   const allComplete = completedCount === totalCount;
   const noneComplete = completedCount === 0;
 
@@ -214,7 +226,11 @@ function StatusCallout({ completedCount, totalCount, hasAnyProgress, onContinue 
 
   if (noneComplete && !hasAnyProgress) {
     return (
-      <GoabxCallout type="information" heading={`You have ${totalCount} sections to complete`} emphasis="low">
+      <GoabxCallout
+        type="information"
+        heading={`You have ${totalCount} sections to complete`}
+        emphasis="low"
+      >
         <ActionLink onClick={() => onContinue?.()}>Start first section</ActionLink>
       </GoabxCallout>
     );
@@ -225,11 +241,7 @@ function StatusCallout({ completedCount, totalCount, hasAnyProgress, onContinue 
   const headingText = `${sectionsLeft} ${sectionsLeft === 1 ? "section" : "sections"} left to complete`;
 
   return (
-    <GoabxCallout
-      type="information"
-      heading={headingText}
-      emphasis="low"
-    >
+    <GoabxCallout type="information" heading={headingText} emphasis="low">
       You have completed {completedCount} of {totalCount} sections.
       <div style={{ marginTop: "var(--goa-space-m)" }}>
         <ActionLink onClick={() => onContinue?.()}>Continue</ActionLink>
@@ -266,11 +278,18 @@ export function TaskListPage({
   const section3Complete = application.task4Complete;
 
   // Count completed sections
-  const completedSections = [section1Complete, section2Complete, section3Complete].filter(Boolean).length;
+  const completedSections = [section1Complete, section2Complete, section3Complete].filter(
+    Boolean,
+  ).length;
   const totalSections = 3;
 
   // Check if any task has been started or completed
-  const hasAnyProgress = !!(application.task1State || application.task2State || application.task3State || application.task4State);
+  const hasAnyProgress = !!(
+    application.task1State ||
+    application.task2State ||
+    application.task3State ||
+    application.task4State
+  );
 
   // Find the next task to continue
   const getNextTask = (): 1 | 2 | 3 | 4 => {
@@ -301,7 +320,14 @@ export function TaskListPage({
 
   return (
     <div className="form-set">
-      <div style={{ display: "flex", alignItems: "center", gap: "var(--goa-space-m)", marginTop: "var(--goa-space-2xl)" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "var(--goa-space-m)",
+          marginTop: "var(--goa-space-2xl)",
+        }}
+      >
         <GoabText as="h1" size="heading-l" mt="none" mb="none">
           Application for a service
         </GoabText>
@@ -396,7 +422,11 @@ export function TaskListPage({
       >
         {/* Already submitted - show back button */}
         {isSubmitted && (
-          <GoabxButton type="secondary" leadingIcon="arrow-back" onClick={onBackToDashboard}>
+          <GoabxButton
+            type="secondary"
+            leadingIcon="arrow-back"
+            onClick={onBackToDashboard}
+          >
             Back to my applications
           </GoabxButton>
         )}
@@ -425,7 +455,11 @@ export function TaskListPage({
             )}
             <GoabxFormItem
               label=""
-              error={showConfirmError ? "You must confirm that all of your answers are correct" : ""}
+              error={
+                showConfirmError
+                  ? "You must confirm that all of your answers are correct"
+                  : ""
+              }
             >
               <GoabxCheckbox
                 name="confirmSubmit"

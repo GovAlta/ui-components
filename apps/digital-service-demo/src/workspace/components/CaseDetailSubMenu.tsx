@@ -6,10 +6,20 @@
  * Section navigation is handled by the page TOC, not the side menu.
  */
 
+import { GoabIcon } from "@abgov/react-components";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
-} from '@abgov/react-components/experimental';
+} from "@abgov/react-components/experimental";
+import { useTheme } from "../hooks/useTheme";
+
+function getThemeIcon(isDark: boolean) {
+  return isDark ? "sunny" : "moon";
+}
+
+function getThemeLabel(isDark: boolean) {
+  return isDark ? "Light mode" : "Dark mode";
+}
 
 interface CaseDetailSubMenuProps {
   isOpen: boolean;
@@ -21,9 +31,10 @@ interface CaseDetailSubMenuProps {
 export function CaseDetailSubMenu({
   isOpen,
   onToggle,
-  citizenName = 'Case',
+  citizenName = "Case",
   caseId,
 }: CaseDetailSubMenuProps) {
+  const { isDark, toggleTheme } = useTheme();
   // Primary content: Back link + Application + Comments + Timeline
   const primaryContent = (
     <>
@@ -51,13 +62,15 @@ export function CaseDetailSubMenu({
     </>
   );
 
-  // Account content: Logout
+  // Account content: Theme toggle + Logout
   const accountContent = (
-    <GoabxWorkSideMenuItem
-      icon="log-out"
-      label="Logout"
-      url="/"
-    />
+    <>
+      <button className="theme-toggle" onClick={toggleTheme}>
+        <GoabIcon type={getThemeIcon(isDark)} size="small" />
+        {getThemeLabel(isDark)}
+      </button>
+      <GoabxWorkSideMenuItem icon="log-out" label="Logout" url="/" />
+    </>
   );
 
   return (
