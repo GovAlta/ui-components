@@ -1,0 +1,46 @@
+{
+  "componentSlug": "push-drawer",
+  "extractedFrom": "libs/web-components/src/components/push-drawer/PushDrawer.svelte",
+  "extractedAt": "2026-03-03T18:47:38.073Z",
+  "props": [
+    {
+      "name": "testId",
+      "type": "\"string\"",
+      "required": false,
+      "default": null,
+      "description": ""
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": ""
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "492px",
+      "description": ""
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    },
+    {
+      "name": "actions",
+      "description": ""
+    }
+  ]
+}

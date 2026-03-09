@@ -91,6 +91,9 @@ const config = typeConfig[type];
 ) : (
   <!-- Info type: raw content, no wrapper -->
   <div class="info-content">
+    {description && (
+      <div class="description">{description}</div>
+    )}
     <slot />
   </div>
 )}
@@ -196,6 +199,7 @@ const config = typeConfig[type];
   .info-content {
     color: var(--goa-color-info-text);
     margin-bottom: var(--goa-space-l);
+    max-width: 70ch;
   }
 
   .info-content :global(p) {
