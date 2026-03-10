@@ -1,10 +1,13 @@
-<goab-microsite-header type="live"></goab-microsite-header>
-<goab-app-header url="https://example.com" heading="Service name">
-  <goab-app-header-menu heading="Search" leadingIcon="search">
+<goabx-app-header url="https://example.com" heading="Service name">
+  <a slot="navigation" href="#">Dashboard</a>
+  <goabx-app-header-menu slotName="navigation" heading="Search">
     <a href="#">Cases</a>
     <a href="#">Payments</a>
     <a href="#">Outstanding</a>
-  </goab-app-header-menu>
-  <a href="#">Support</a>
-  <a href="#" class="interactive">Sign in</a>
-</goab-app-header>
+  </goabx-app-header-menu>
+  <a slot="navigation" href="#">Support</a>
+  <goabx-menu-button slot="utilities" text="John Smith" type="tertiary" size="compact">
+    <goabx-menu-action text="User settings" action="user-settings"></goabx-menu-action>
+    <goabx-menu-action text="Sign out" action="sign-out"></goabx-menu-action>
+  </goabx-menu-button>
+</goabx-app-header>

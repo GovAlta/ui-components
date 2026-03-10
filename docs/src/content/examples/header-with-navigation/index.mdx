@@ -12,23 +12,22 @@ tags:
 components:
   - app-header
   - app-header-menu
-  - microsite-header
 status: published
+fullWidth: true
+previewStyle: "padding: 0 0 2rem 0"
 ---
 
-Implement a standard application header with navigation menus, search functionality, and sign-in links for government services.
+An application header with navigation links, grouped menu items, and a user account menu.
+
+## How it works
+
+The header has two main slots for content:
+
+- **Navigation** — links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown.
+- **Utilities** — actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions.
+
+Navigation items automatically collapse into a "More" menu when the screen gets narrow.
 
 ## When to use
 
-Use this pattern when:
-- Building a government service application
-- You need consistent navigation across pages
-- Users need access to search, support, and authentication
-- Following the GoA header pattern
-
-## Considerations
-
-- Use the microsite header above the app header for government branding
-- Group related navigation items under dropdown menus
-- Include a sign-in link with the "interactive" class for proper styling
-- Consider mobile responsiveness for navigation items
+Use this pattern when your service needs persistent navigation across pages. See the basic page layout example for a simpler header without navigation.
