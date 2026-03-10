@@ -1,6 +1,7 @@
 import { render } from "vitest-browser-react";
 import { GoabPopover, GoabButton, GoabModal } from "../src";
 import { expect, describe, it, vi } from "vitest";
+import { userEvent } from "@vitest/browser/context";
 
 describe("Popover", () => {
   it("should allow popover to be closed via a button with a close action", async () => {
@@ -19,20 +20,16 @@ describe("Popover", () => {
     const target = result.getByTestId("target");
     const closeButton = result.getByTestId("close-button");
 
-    // Actions
-
     await target.click();
-    expect(closeButton.element()).toBeTruthy();
+    expect(closeButton).toBeVisible();
     await closeButton.click();
 
-    // Result
-
     await vi.waitFor(() => {
-      expect(closeButton.element().checkVisibility()).toBeFalsy();
+      expect(closeButton).not.toBeVisible();
     });
   });
 
-  it("should close popover when clicking on the document body", async () => {
+  it("should close popover when pressing Escape", async () => {
     const Component = () => {
       return (
         <GoabPopover target={<GoabButton testId={"target"}>Open popover</GoabButton>}>
@@ -46,26 +43,167 @@ describe("Popover", () => {
 
     const result = render(<Component />);
     const target = result.getByTestId("target");
+    const closeButton = result.getByTestId("close-button");
 
-    // Actions
+    // Open popover
     await target.click();
 
     await vi.waitFor(() => {
-      const closeButton = result.getByTestId("close-button");
-      expect(closeButton.element().checkVisibility()).toBeTruthy();
+      expect(closeButton).toBeVisible();
     });
 
-    document.body.click(); // Simulate click on document body
+    // Press Escape to close (native popover light dismiss)
+    await userEvent.keyboard("{Escape}");
 
-    // Result
     await vi.waitFor(() => {
-      const closeButton = result.getByTestId("close-button");
-      expect(closeButton.element().checkVisibility()).toBeFalsy();
+      expect(closeButton).not.toBeVisible();
     });
   });
 
+  it("should return focus to trigger after closing with Escape - issue3067", async () => {
+    const Component = () => {
+      return (
+        <GoabPopover
+          target={<GoabButton testId={"focus-target"}>Focus Test Button</GoabButton>}
+        >
+          <p>Popover content</p>
+        </GoabPopover>
+      );
+    };
+
+    const result = render(<Component />);
+    const target = result.getByTestId("focus-target");
+    const popoverContent = result.getByTestId("popover-content");
+    const popoverTarget = result.getByTestId("popover-target");
+
+    // Open popover
+    await target.click();
+    await vi.waitFor(() => {
+      expect(popoverContent).toBeVisible();
+    });
+
+    // Close with Escape
+    await userEvent.keyboard("{Escape}");
+    await vi.waitFor(() => {
+      expect(popoverContent).not.toBeVisible();
+    });
+
+    // Focus should be on the popover target button
+    await vi.waitFor(() => {
+      expect(popoverTarget.element().matches(":focus-within")).toBeTruthy();
+    });
+  });
+
+  it("should close Popover A when Popover B is opened (popover='auto' behavior)", async () => {
+    const Component = () => {
+      return (
+        <>
+          <GoabPopover
+            testId="popover-a"
+            target={<GoabButton testId={"target-a"}>Popover A</GoabButton>}
+          >
+            <p data-testid="content-a">Content A</p>
+          </GoabPopover>
+          <GoabPopover
+            testId="popover-b"
+            target={<GoabButton testId={"target-b"}>Popover B</GoabButton>}
+          >
+            <p data-testid="content-b">Content B</p>
+          </GoabPopover>
+        </>
+      );
+    };
+
+    const result = render(<Component />);
+    const targetA = result.getByTestId("target-a");
+    const targetB = result.getByTestId("target-b");
+    const contentA = result.getByTestId("content-a");
+    const contentB = result.getByTestId("content-b");
+
+    // Open Popover A
+    await targetA.click();
+    await vi.waitFor(() => {
+      expect(contentA).toBeVisible();
+    });
+
+    // Open Popover B — should auto-close Popover A
+    await targetB.click();
+    await vi.waitFor(() => {
+      expect(contentB).toBeVisible();
+      expect(contentA).not.toBeVisible();
+    });
+  });
+
+  it("should respect maxWidth when popover is placed above a button - issue3062", async () => {
+    const Component = () => {
+      return (
+        <>
+          <GoabPopover
+            testId="popover-above"
+            maxWidth="320px"
+            target={
+              <GoabButton testId={"target-above"} type="secondary">
+                Show Popover
+              </GoabButton>
+            }
+          >
+            <p>This popover is above the button. It should respect maxWidth (320px).</p>
+          </GoabPopover>
+
+          <GoabButton type="primary">Submit Form</GoabButton>
+
+          <GoabPopover
+            testId="popover-below"
+            maxWidth="320px"
+            target={
+              <GoabButton testId={"target-below"} type="secondary" size="compact">
+                Popover Test
+              </GoabButton>
+            }
+          >
+            <p>
+              This popover is below the button. It should also respect maxWidth (320px).
+            </p>
+          </GoabPopover>
+        </>
+      );
+    };
+
+    const result = render(<Component />);
+    const targetAbove = result.getByTestId("target-above");
+    const targetBelow = result.getByTestId("target-below");
+    const popoverAbove = result.getByTestId("popover-above");
+    const popoverBelow = result.getByTestId("popover-below");
+
+    // Open popover above the button
+    await targetAbove.click();
+
+    let aboveWidth: number;
+    const contentAbove = popoverAbove.getByTestId("popover-content");
+    await vi.waitFor(() => {
+      expect(contentAbove).toBeVisible();
+      aboveWidth = contentAbove.element().getBoundingClientRect().width;
+    });
+
+    // Close it
+    await userEvent.keyboard("{Escape}");
+
+    // Open popover below the button
+    await targetBelow.click();
+
+    let belowWidth: number;
+    const contentBelow = popoverBelow.getByTestId("popover-content");
+    await vi.waitFor(() => {
+      expect(contentBelow).toBeVisible();
+      belowWidth = contentBelow.element().getBoundingClientRect().width;
+    });
+
+    // Both popovers should have the same width (maxWidth respected equally)
+    expect(aboveWidth!).toBe(belowWidth!);
+  });
+
   describe("Popover within a modal", () => {
-    it("should open the popover downwards within a modal if content exceeds available space", async () => {
+    it("should open the popover within a modal even with long content", async () => {
       const Component = () => {
         const longContent = Array.from({ length: 50 }, (_, i) => (
           <p key={i}>This is line {i + 1} of the popover content.</p>
@@ -75,9 +213,7 @@ describe("Popover", () => {
           <GoabModal
             heading="Scrollable Modal"
             open={true}
-            onClose={() => {
-              console.log("Does nothing in this test");
-            }}
+            onClose={vi.fn()}
             testId="test-modal"
           >
             <GoabPopover
@@ -85,9 +221,7 @@ describe("Popover", () => {
               target={<GoabButton testId={"target"}>Open popover</GoabButton>}
             >
               <div style={{ minHeight: "300px" }}>{longContent}</div>
-              <GoabButton testId={"open-popover-button"} action={"close"}>
-                Close
-              </GoabButton>
+              <GoabButton action={"close"}>Close</GoabButton>
             </GoabPopover>
           </GoabModal>
         );
@@ -95,12 +229,12 @@ describe("Popover", () => {
 
       const result = render(<Component />);
       const target = result.getByTestId("target");
+      const popoverContent = result.getByTestId("popover-content");
+
       await target.click();
 
       await vi.waitFor(() => {
-        const popoverContentEl = result.getByTestId("popover-content");
-        expect(popoverContentEl.element()).toBeTruthy();
-        expect(popoverContentEl.element().style.bottom).toBe("");
+        expect(popoverContent).toBeVisible();
       });
     });
 
@@ -110,9 +244,7 @@ describe("Popover", () => {
           <GoabModal
             heading="Scrollable Modal"
             open={true}
-            onClose={() => {
-              console.log("Does nothing in this test");
-            }}
+            onClose={vi.fn()}
             testId="test-modal"
           >
             <div style={{ height: "400px" }}>
@@ -132,9 +264,7 @@ describe("Popover", () => {
                 <div style={{ minHeight: "200px" }}>
                   <p>Popover Content</p>
                 </div>
-                <GoabButton testId={"open-popover-button"} action={"close"}>
-                  Close
-                </GoabButton>
+                <GoabButton action={"close"}>Close</GoabButton>
               </GoabPopover>
               <p>Space Below</p>
             </div>
@@ -144,13 +274,12 @@ describe("Popover", () => {
 
       const result = render(<Component />);
       const target = result.getByTestId("target");
+      const popoverContent = result.getByTestId("popover-content");
+
       await target.click();
 
       await vi.waitFor(() => {
-        const popoverContentEl = result.getByTestId("popover-content");
-        expect(popoverContentEl.element()).toBeTruthy();
-        // It should be a number ending with px when opening upwards
-        expect(popoverContentEl.element().style.top).toMatch(/-?\d+px/);
+        expect(popoverContent).toBeVisible();
       });
     });
 
@@ -160,9 +289,7 @@ describe("Popover", () => {
           <GoabModal
             heading="Scrollable Modal"
             open={true}
-            onClose={() => {
-              console.log("Does nothing in this test");
-            }}
+            onClose={vi.fn()}
             testId="test-modal"
           >
             <div style={{ height: "400px" }}>
@@ -176,9 +303,7 @@ describe("Popover", () => {
                 <div style={{ minHeight: "200px" }}>
                   <p>Popover Content</p>
                 </div>
-                <GoabButton testId={"open-popover-button"} action={"close"}>
-                  Close
-                </GoabButton>
+                <GoabButton action={"close"}>Close</GoabButton>
               </GoabPopover>
               <p>Space Below</p>
               <p>Space Below</p>
@@ -193,13 +318,12 @@ describe("Popover", () => {
 
       const result = render(<Component />);
       const target = result.getByTestId("target");
+      const popoverContent = result.getByTestId("popover-content");
+
       await target.click();
 
       await vi.waitFor(() => {
-        const popoverContentEl = result.getByTestId("popover-content");
-        expect(popoverContentEl.element()).toBeTruthy();
-        // bottom should be set to 'auto' when opening downwards
-        expect(popoverContentEl.element().style.bottom).toBe("");
+        expect(popoverContent).toBeVisible();
       });
     });
   });

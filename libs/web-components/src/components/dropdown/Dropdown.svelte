@@ -1,13 +1,7 @@
 <svelte:options
   customElement={{
     tag: "goa-dropdown",
-    props: {
-      disableGlobalClosePopover: {
-        type: "Boolean",
-        reflect: true,
-        attribute: "disable-global-close-popover",
-      },
-    },
+    props: {},
   }}
 />
 
@@ -99,12 +93,6 @@
   export let autocomplete: string = "";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-
-  // Exposed Privates
-
-  /** Prevents the popover from closing when clicking outside. Used for nested dropdowns or complex interactions. */
-  export let disableGlobalClosePopover: boolean = false;
-
   //
   // Private
 
@@ -176,9 +164,6 @@
     sendMountedMessage();
     setupPopoverListeners();
 
-    if (disableGlobalClosePopover) {
-      _popoverEl.setAttribute("disable-global-close-popover", "yes");
-    }
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
@@ -824,7 +809,7 @@
           <goa-icon
             class="dropdown-input--leading-icon"
             data-testid="leading-icon"
-              size={size === "compact" ? "small" : "medium"}
+            size={size === "compact" ? "small" : "medium"}
             type={leadingicon}
           />
         {/if}
@@ -1048,7 +1033,10 @@
 
   /** menu **/
   ul[role="listbox"] {
-    border-radius: var(--goa-dropdown-menu-border-radius, var(--goa-dropdown-border-radius));
+    border-radius: var(
+      --goa-dropdown-menu-border-radius,
+      var(--goa-dropdown-border-radius)
+    );
     padding: 0;
     margin: var(--goa-dropdown-menu-margin, 0);
   }
@@ -1066,7 +1054,6 @@
     overflow-wrap: break-word; /* Alternative for word wrapping */
     border-radius: var(--goa-dropdown-item-border-radius, 0);
   }
-
 
   .dropdown-item:hover,
   .dropdown-item--highlighted {

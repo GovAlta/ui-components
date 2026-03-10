@@ -3,30 +3,19 @@
     tag: "goa-popover",
     props: {
       open: { reflect: true, type: "String" },
-      disableGlobalClosePopover: {
-        reflect: true,
-        type: "Boolean",
-        attribute: "disable-global-close-popover",
-      },
-      preventScrollIntoView: {
-        attribute: "prevent-scroll-into-view",
-        type: "Boolean",
-      },
     },
   }}
 />
 
-<!-- Script -->
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { calculateMargin } from "../../common/styling";
   import {
+    dispatch,
+    generateRandomId,
     style,
-    getSlottedChildren,
     styles,
     toBoolean,
-    dispatch,
-    isPointInRectangle,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
 
@@ -44,19 +33,12 @@
   export let width: string = "";
   /** Controls the height behavior. 'full' stretches to parent height, 'wrap-content' fits content. */
   export let height: "full" | "wrap-content" = "wrap-content";
-
-  /** Prevents scrolling into view when focus trap is activated. Passed to FocusTrap. */
-  export let preventScrollIntoView: boolean = false;
-
   /** Sets if the popover has padding. Use false when content needs to be flush with boundaries. */
   export let padded: string = "true";
-
   /** Sets the tabindex. Use -1 to skip tabbing when a parent handles keyboard events. */
   export let tabindex: number = 0;
-
   /** @deprecated This property has no effect and will be removed in a future version. */
   export let relative: string = "";
-
   /** Top margin. */
   export let mt: Spacing = null;
   /** Right margin. */
@@ -67,76 +49,67 @@
   export let ml: Spacing = null;
 
   // Exposed privates - used internally by other components
-
-  /** @internal Prevents the popover from closing when other popovers open. */
-  export let disableGlobalClosePopover: boolean = false;
-
-  /** Controls whether the popover is open or closed. Used by parent components like AppHeaderMenu. */
+  /** Controls the open state of the popover programmatically. Used by Dropdown, AppHeaderMenu. */
   export let open: string = "false";
-
   /** Disables the popover interaction. Used by parent components like Dropdown. */
   export let disabled: string = "false";
-
   /** Additional vertical offset added to the popover's position. */
   export let voffset = "";
-
   /** Additional horizontal offset added to the popover's position. */
   export let hoffset = "";
-
   /** Width of the focus outline border. */
   export let focusborderwidth = "var(--goa-border-width-l)";
-
   /** Border radius of the popover window. */
   export let borderradius = "var(--goa-border-radius-m)";
-
-  /** @internal When true, clicking inside the popover will close it. */
-  export let closeOnClickWithinBounds = false;
-
   /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
 
   // Private
-
   let _rootEl: HTMLElement;
-  let _targetEl: HTMLElement;
   let _popoverEl: HTMLElement;
-  let _focusTrapEl: HTMLElement;
-  // the closest parent parent Container element (i.e. <goa-modal>), if one
-  // doesn't exist it is null. Used to determine popover position.
-  let _parentContainerEl: HTMLElement | null = null;
-  let _sectionHeight: number;
-  let _contentFitsWidth: boolean = false;
 
   // Reactive
+  let _targetEl: HTMLElement;
+  let _isOpen = false;
+  let _autoPosition: "above" | "below" = "below";
+  const _popoverId = `goa-popover-${generateRandomId()}`;
 
-  $: _padded = toBoolean(padded);
-  $: _open = toBoolean(open);
   $: _disabled = toBoolean(disabled);
+  $: _padded = toBoolean(padded);
   $: _filterableContext = toBoolean(filterablecontext);
 
-  $: (async () => _open && (await setPopoverPosition()))();
-  $: (async () => _sectionHeight && (await setPopoverPosition()))();
+  $: syncPopoverOpenState(_popoverEl, open);
+
+  function syncPopoverOpenState(
+    popoverEl: HTMLElement | undefined,
+    openProp: string,
+  ) {
+    if (!popoverEl) return;
+
+    const shouldBeOpen = toBoolean(openProp);
+    const actuallyOpen = isPopoverOpen();
+
+    if (shouldBeOpen && !actuallyOpen) {
+      popoverEl.showPopover();
+    } else if (!shouldBeOpen && actuallyOpen) {
+      popoverEl.hidePopover();
+    }
+  }
+
+  // Close the popover on URL changes (e.g. clicking a link inside the popover)
   $: {
-    if (_open) {
+    if (_isOpen) {
       window.addEventListener("popstate", handleUrlChange, true);
     } else {
       window.removeEventListener("popstate", handleUrlChange, true);
     }
   }
 
-  // Hooks
-
-  onMount(async () => {
-    await tick();
-
-    // to make the popover content fit its contents instead of the target width
-    const hostElement = _rootEl?.getRootNode() as ShadowRoot;
-    _contentFitsWidth =
-      hostElement?.host?.getAttribute("data-content-fits-width") === "true";
+  onMount(() => {
+    _popoverEl?.addEventListener("toggle", handleNativeToggle);
 
     // add keybinding to open the popover
-    _targetEl.addEventListener("keydown", onTargetEvent);
-
+    _targetEl?.addEventListener("keydown", onTargetEvent);
     // listener for `close` events emitted from child components
     _rootEl.addEventListener("close", (e) => {
       closePopover();
@@ -145,55 +118,30 @@
 
     showDeprecationWarnings();
     addGlobalCloseListener();
+    window.addEventListener("resize", updateAutoPosition);
+  });
 
-    _parentContainerEl = findContainingParentElement(_rootEl);
+  onDestroy(() => {
+    window.removeEventListener("resize", updateAutoPosition);
+    // true was passed when the listener was added, so it's necesary to be passed here as well
+    window.removeEventListener("popstate", handleUrlChange, true);
   });
 
   // Functions
 
-  function findContainingParentElement(
-    rootEl: HTMLElement,
-  ): HTMLElement | null {
-    const containingParentNodeNames = ["GOA-MODAL"];
-
-    let parentNode: HTMLElement = rootEl;
-    while (parentNode) {
-      if (containingParentNodeNames.includes(parentNode.nodeName)) {
-        return parentNode;
-      }
-      parentNode = parentNode.parentNode as HTMLElement;
-      if (parentNode && (parentNode as unknown as { host: HTMLElement }).host) {
-        parentNode = (parentNode as unknown as { host: HTMLElement }).host;
-      }
+  function isPopoverOpen(): boolean {
+    try {
+      return _popoverEl.matches(":popover-open");
+    } catch {
+      return _popoverEl.getAttribute("data-popover-open") === "true";
     }
-
-    return null;
-  }
-
-  // Since the focused element is being changed when the popover is open, the scoped keybinding for the escape key may
-  // no longer work, so the binding must be done on the document.body
-  function addGlobalEscapeKeybinding() {
-    document.body.addEventListener("keydown", handleGlobalEscapeKeybinding);
-  }
-
-  function handleGlobalEscapeKeybinding(e: KeyboardEvent) {
-    if (e.key === "Escape") {
-      if (_open) {
-        closePopover();
-      }
-      e.stopPropagation();
-    }
-  }
-
-  function removeGlobalEscapeKeybinding() {
-    document.body.removeEventListener("keydown", handleGlobalEscapeKeybinding);
   }
 
   // When one popover is opened it dispatches a `goa:closePopover` to the document.body element, so adding a listener
   // here will allow any other popover that is currently open to be closed
   function addGlobalCloseListener() {
     document.body.addEventListener("goa:closePopover", (e: Event) => {
-      if (!_open) {
+      if (!_isOpen) {
         return;
       }
 
@@ -208,7 +156,7 @@
   }
 
   function showDeprecationWarnings() {
-    if (relative != "") {
+    if (relative !== "") {
       console.warn(
         "Popover `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.",
       );
@@ -218,243 +166,89 @@
   // Called on window popstate changes. This allows for clicking links within
   // the popover to close the popover
   function handleUrlChange(_e: Event) {
-    closePopover();
+    if (_popoverEl && isPopoverOpen()) {
+      _popoverEl.hidePopover();
+    }
   }
 
-  // Handles events when the targetEl has focus
   function onTargetEvent(e: KeyboardEvent) {
     switch (e.key) {
       case " ":
         if (_filterableContext) {
           break;
         }
-        // case "Enter":
-        openPopover();
+        // Prevent the button's native click from firing on Space keyup,
+        // which would immediately toggle the popover closed again.
+        e.preventDefault();
+        if (!_isOpen) {
+          _popoverEl?.showPopover();
+        }
         e.stopPropagation();
         break;
     }
   }
 
-  // Opens the popover and adds the required binding to the new slot element
-  function openPopover() {
-    if (_disabled) return;
-
-    // close any other open popovers
-    if (!disableGlobalClosePopover) {
-      dispatch(document.body, "goa:closePopover", { target: _targetEl });
-    }
-
-    // open this popover
-    _open = true;
-
-    addGlobalEscapeKeybinding();
-    // keep current tab within the bounds of the wrapping focustrap component
-    // _focusTrapEl.addEventListener("keydown", onFocusTrapEvent, true);
-
-    // notify parent components of the status change
-    dispatch(_rootEl, "_open");
-
-    // find the element that will have initial focus when the popover is shown
-    setTimeout(() => {
-      const firstFocusableEl = getFirstFocusableEl(_focusTrapEl);
-      firstFocusableEl?.focus();
-    }, 0);
-
-    document.body.addEventListener("click", handleClick);
-  }
-
-  /**
-   * Recursively retrieves the first focusable element within a given HTML element.
-   * A focusable element is determined by having a non-negative tabIndex.
-   *
-   * @param {HTMLElement} el - The root HTML element to search within for focusable elements.
-   * @return {HTMLElement | null} - Returns the first focusable HTML element found within the given element,
-   * or null if no focusable element is found.
-   */
-  function getFirstFocusableEl(el: HTMLElement): HTMLElement | null {
-    if (el.tabIndex >= 0) {
-      return el;
-    }
-    const children = [
-      ...el.children,
-      ...getSlottedChildren(el),
-      el.shadowRoot,
-    ].filter(Boolean) as HTMLElement[];
-    for (const child of children) {
-      const firstFocusable = getFirstFocusableEl(child);
-      if (firstFocusable) {
-        return firstFocusable;
-      }
-    }
-    return null;
-  }
-
-  function handleClick(e: MouseEvent) {
-    e.stopPropagation();
-
-    if (!_popoverEl) return;
-
-    const rect = _popoverEl.getBoundingClientRect();
-    const clickedInPopover = isPointInRectangle(
-      e.clientX,
-      e.clientY,
-      rect.x,
-      rect.y,
-      rect.width,
-      rect.height,
-    );
-    const onlyCloseWhenClickedOutside = !closeOnClickWithinBounds;
-
-    // keep open on click
-    if (onlyCloseWhenClickedOutside && clickedInPopover) {
-      return;
-    }
-
-    if (_open) {
-      closePopover();
-    }
-  }
-
-  // Ensures that upon closing of the popover that the element that triggered
-  // the popover to be shown re-attains focus and that any window event binding
-  // is removed (it may not have been added if target was clicked)
-  function closePopover() {
-    if (!_open) {
-      return;
-    }
-
-    if (!_rootEl || !_targetEl || !_popoverEl) {
-      return;
-    }
-
-    _open = false;
-
-    removeGlobalEscapeKeybinding();
-
-    window.removeEventListener("popstate", handleUrlChange, true);
-    dispatch(_rootEl, "_close");
-    _targetEl.focus();
-
-    document.body.removeEventListener("click", handleClick);
-  }
-
-  function togglePopover(e: Event) {
-    _open ? closePopover() : openPopover();
-    e.stopPropagation();
-  }
-
-  function getBoundingClientRectWithMargins(
-    el: Element,
-  ): Omit<DOMRect, "toJSON"> {
-    const rect = el.getBoundingClientRect();
-    const style = window.getComputedStyle(el);
-    const mTop = parseInt(style.marginTop, 10) || 0;
-    const mRight = parseInt(style.marginRight, 10) || 0;
-    const mBottom = parseInt(style.marginBottom, 10) || 0;
-    const mLeft = parseInt(style.marginLeft, 10) || 0;
-
-    return {
-      top: rect.top - mTop,
-      right: rect.right + mRight,
-      bottom: rect.bottom + mBottom,
-      left: rect.left - mLeft,
-      width: rect.width + mLeft + mRight,
-      height: rect.height + mTop + mBottom,
-      x: rect.x - mLeft,
-      y: rect.y - mTop,
-    };
-  }
-
-  function getParentContentElement() {
-    if (!_parentContainerEl) return null;
-
-    let contentEl: HTMLElement | null = null;
-
-    switch (_parentContainerEl.nodeName) {
-      case "GOA-MODAL":
-        // Assuming parent is <goa-modal>, the content element is the div with class
-        // "modal-pane" within the modal's shadow DOM
-        contentEl =
-          _parentContainerEl.shadowRoot?.querySelector("div.modal-pane") ||
-          null;
-        break;
-      default:
-        console.error(
-          "Unhandled parent container type: ",
-          _parentContainerEl.nodeName,
-        );
-    }
-
-    if (!contentEl) {
-      // If a CSS or structural DOM change was made to the parent container, the
-      // query selector in the switch above must also be updated. (i.e. if the
-      // "modal-pane" class was removed or changed)
-      console.error(
-        "Could not find content element within parent container. Popover positioning may be incorrect.",
-      );
-    }
-
-    return contentEl;
-  }
-
-  async function setPopoverPosition() {
-    await tick();
-
-    // Get target and content rectangles
-    const isWithinModal = !!_parentContainerEl;
-    const targetRect = getBoundingClientRectWithMargins(_targetEl);
-    const parentContainerContentEl = getParentContentElement();
-    const parentContainerRect = !!parentContainerContentEl
-      ? getBoundingClientRectWithMargins(parentContainerContentEl)
-      : null;
-
-    const popoverRect = getBoundingClientRectWithMargins(_popoverEl);
-    const offsetParent = _popoverEl.offsetParent as HTMLElement | null;
-    const offsetParentTop = offsetParent?.getBoundingClientRect().top || 0;
-
-    // exit if the popover hasn't yet been filled
-    if (popoverRect.height < 20) return;
-
-    // Calculate available space above and below the target element
-    const spaceAbove =
-      isWithinModal && parentContainerRect
-        ? targetRect.top - parentContainerRect.top
-        : targetRect.top;
-    const spaceBelow =
-      isWithinModal && parentContainerRect
-        ? parentContainerRect.bottom - targetRect.bottom
-        : window.innerHeight - targetRect.bottom;
-
-    // Determine if there's more space above or below the target element
-    const displayOnTop =
-      position === "auto"
-        ? spaceBelow < popoverRect.height && // Not enough room below the target
-          spaceAbove > popoverRect.height && // Enough room above the target
-          spaceAbove > spaceBelow // More space above than below
-        : position === "above";
-
-    if (displayOnTop) {
-      const topPos = targetRect.top - popoverRect.height - offsetParentTop;
-      _popoverEl.style.top = `${topPos}px`;
+  function handleNativeToggle(e: Event) {
+    const toggleEvent = e as Event & { newState?: "open" | "closed" };
+    if (toggleEvent.newState === "open") {
+      _isOpen = true;
+    } else if (toggleEvent.newState === "closed") {
+      _isOpen = false;
     } else {
-      // Clear top/bottom to keep default below-target static positioning.
-      _popoverEl.style.top = "";
-      _popoverEl.style.bottom = "";
+      _isOpen = isPopoverOpen();
     }
 
-    // Move the popover to the left if it is too far to the right and only if there is space to the left
-    const rightAligned =
-      document.body.clientWidth - targetRect.left < popoverRect.width &&
-      targetRect.left > popoverRect.width;
+    open = _isOpen ? "true" : "false";
 
-    if (rightAligned) {
-      _popoverEl.style.right = "0";
-      _popoverEl.style.left = "";
+    // Dispatch _open/_close events for consumer components
+    // (MenuButton, AppHeader, AppHeaderMenu, Dropdown)
+    if (_isOpen) {
+      dispatch(_rootEl, "_open");
+      requestAnimationFrame(updateAutoPosition); // same vs await tick(), make sure popover element is fully rendered before we measure its dimension
+    } else {
+      _targetEl.focus();
+      dispatch(_rootEl, "_close");
     }
+  }
+
+  function closePopover() {
+    if (_isOpen) {
+      _popoverEl?.hidePopover(); // browser will fire and trigger handleNativeToggle
+    }
+  }
+
+  function togglePopover(e: MouseEvent) {
+    e.stopPropagation();
+    if (_disabled || !_popoverEl) {
+      return;
+    }
+
+    if (_isOpen) {
+      _popoverEl.hidePopover();
+      _isOpen = false;
+    } else {
+      _popoverEl.showPopover();
+      _isOpen = true;
+      requestAnimationFrame(updateAutoPosition);
+    }
+  }
+
+  function updateAutoPosition() {
+    if (position !== "auto" || !_isOpen || !_targetEl || !_popoverEl) {
+      return;
+    }
+
+    const targetRect = _targetEl.getBoundingClientRect();
+    const popoverRect = _popoverEl.getBoundingClientRect();
+    const spaceAbove = targetRect.top;
+    const spaceBelow = window.innerHeight - targetRect.bottom;
+
+    _autoPosition =
+      spaceBelow < popoverRect.height && spaceAbove > spaceBelow
+        ? "above"
+        : "below";
   }
 </script>
-
-<!-- HTML -->
 
 <div
   bind:this={_rootEl}
@@ -475,7 +269,10 @@
   <button
     class="popover-target"
     bind:this={_targetEl}
+    aria-haspopup="dialog"
+    aria-controls={_popoverId}
     {tabindex}
+    disabled={_disabled}
     on:click={togglePopover}
     on:keyup={(e) => {
       e.preventDefault();
@@ -485,38 +282,28 @@
     <slot name="target" />
   </button>
 
-  <div style={styles(style("display", _open ? "block" : "none"))}>
-    <section
-      bind:clientHeight={_sectionHeight}
-      bind:this={_popoverEl}
-      data-testid="popover-content"
-      class="popover-content"
-      style={styles(
-        // For certain contexts (e.g., DatePicker) when the internal data-content-fits-width
-        // attribute is set, the content width is set to fit-content instead of inheriting the target width.
-        style("width", _contentFitsWidth ? "fit-content" : width),
-        style("min-width", minwidth),
-        style(
-          "max-width",
-          _contentFitsWidth
-            ? maxwidth
-            : width
-              ? `max(${width}, ${maxwidth})`
-              : maxwidth,
-        ),
-        style("padding", _padded ? "var(--goa-space-m)" : "0"),
-      )}
-    >
-      <goa-focus-trap
-        open="true"
-        prevent-scroll-into-view={preventScrollIntoView || undefined}
-      >
-        <div bind:this={_focusTrapEl}>
-          <slot />
-        </div>
-      </goa-focus-trap>
-    </section>
-  </div>
+  <section
+    id={_popoverId}
+    popover="auto"
+    bind:this={_popoverEl}
+    data-testid="popover-content"
+    class="popover-content"
+    class:is-open={_isOpen}
+    class:position-above={position === "above" ||
+      (position === "auto" && _autoPosition === "above")}
+    class:position-below={position === "below" ||
+      (position === "auto" && _autoPosition === "below")}
+    style={styles(
+      style("width", width),
+      style("min-width", minwidth),
+      style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
+      style("padding", _padded ? "var(--goa-space-m)" : "0"),
+    )}
+  >
+    <goa-focus-trap open={_isOpen}>
+      <slot />
+    </goa-focus-trap>
+  </section>
 </div>
 
 <!-- Style -->
@@ -540,29 +327,46 @@
     padding: 0;
     background-color: transparent;
     width: inherit;
+    anchor-name: --goa-popover-target;
   }
 
   .popover-target:has(:focus-visible) {
-    outline: var(--goa-popover-border-focus);
+    outline: var(
+      --goa-popover-border-focus,
+      var(--focus-border-width) solid var(--goa-color-interactive-default)
+    );
   }
 
   .popover-content {
     color: var(--goa-color-text-default);
-    position: absolute;
-    z-index: 99;
     width: fit-content;
     list-style-type: none;
     background: var(--goa-popover-color-bg);
-    border-radius: var(--goa-popover-border-radius);
+    border-radius: var(--border-radius, var(--goa-popover-border-radius));
     outline: none;
     overflow: visible;
     box-shadow: var(--goa-popover-box-shadow, none);
     filter: var(--goa-popover-shadow, none);
     border: var(--goa-popover-border, none);
-    margin-top: var(--offset-top, 3px);
-    margin-bottom: var(--offset-bottom, 3px);
-    margin-left: var(--offset-left, 0);
-    margin-right: var(--offset-right, 0);
+    margin: 0;
+
+    position-anchor: --goa-popover-target;
+    inset-block-start: anchor(bottom);
+    inset-inline-start: anchor(left);
+    --popover-translate-x: var(--offset-left, 0);
+    --popover-translate-y: var(--offset-top, 3px);
+    translate: var(--popover-translate-x) var(--popover-translate-y);
+  }
+
+  .popover-content.position-above {
+    inset-block-start: anchor(top);
+    --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
+    position-try-fallbacks: none;
+  }
+
+  .popover-content.position-below {
+    inset-block-start: anchor(bottom);
+    --popover-translate-y: var(--offset-top, 3px);
   }
 
   :global(::slotted(ul)) {

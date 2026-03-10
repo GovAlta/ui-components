@@ -1,6 +1,15 @@
 import { render } from "vitest-browser-react";
-import { GoabModal, GoabButton, GoabIcon } from "../src";
+import {
+  GoabModal,
+  GoabButton,
+  GoabIcon,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabDatePicker,
+  GoabFormItem,
+} from "../src";
 import { expect, describe, it, vi } from "vitest";
+import { userEvent } from "@vitest/browser/context";
 import { useState } from "react";
 
 describe("Modal", () => {
@@ -124,5 +133,80 @@ describe("Modal", () => {
     
     expect(testLink1.element()).toBeTruthy();
     expect(testLink2.element()).toBeTruthy();
+  });
+
+  it("should allow dropdown selection within a modal", async () => {
+    const onChange = vi.fn();
+    const Component = () => {
+      return (
+        <GoabModal
+          heading="Modal with Dropdown"
+          open={true}
+          onClose={vi.fn()}
+          testId="test-modal"
+        >
+          <GoabFormItem label="Dropdown">
+            <GoabDropdown
+              name="modal-dropdown"
+              value=""
+              testId="modal-dropdown"
+              onChange={onChange}
+            >
+              <GoabDropdownItem value="option1" label="Option 1" />
+              <GoabDropdownItem value="option2" label="Option 2" />
+              <GoabDropdownItem value="option3" label="Option 3" />
+            </GoabDropdown>
+          </GoabFormItem>
+        </GoabModal>
+      );
+    };
+
+    const result = render(<Component />);
+
+    // Click the dropdown to open it
+    const dropdown = result.getByTestId("modal-dropdown");
+    await dropdown.click();
+
+    // The dropdown popover should be visible (rendered in top layer)
+    await vi.waitFor(() => {
+      const popoverContent = result.getByTestId("popover-content");
+      expect(popoverContent.element()).toBeTruthy();
+      expect(popoverContent.element().checkVisibility()).toBeTruthy();
+    });
+  });
+
+  it("should open date picker calendar within a modal", async () => {
+    const Component = () => {
+      return (
+        <GoabModal
+          heading="Modal with DatePicker"
+          open={true}
+          onClose={vi.fn()}
+          testId="test-modal"
+        >
+          <GoabFormItem label="Date Picker">
+            <GoabDatePicker
+              name="modal-datepicker"
+              value="2026-03-19"
+              testId="modal-datepicker"
+              onChange={vi.fn()}
+            />
+          </GoabFormItem>
+        </GoabModal>
+      );
+    };
+
+    const result = render(<Component />);
+
+    // Click the calendar input to open the date picker
+    const calendarInput = result.getByTestId("calendar-input");
+    await userEvent.click(calendarInput);
+
+    // The calendar popover should be visible (rendered in top layer)
+    await vi.waitFor(() => {
+      const popoverContent = result.getByTestId("calendar-popover");
+      expect(popoverContent.element()).toBeTruthy();
+      expect(popoverContent.element().checkVisibility()).toBeTruthy();
+    });
   });
 });
