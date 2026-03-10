@@ -221,7 +221,7 @@ export function ConfigurationPreview({
         }
 
         .github-link {
-          font-size: 0.875rem;
+          font-size: var(--goa-font-size-2);
         }
 
         .issue-count {

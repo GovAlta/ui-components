@@ -1009,7 +1009,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           position: sticky;
           top: 0;
           z-index: 1;
-          background: white;
+          background: var(--goa-color-greyscale-white);
           display: flex;
           flex-direction: row;
           align-items: flex-start;
@@ -1032,7 +1032,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           bottom: 0;
           left: -9999px;
           right: -9999px;
-          background: white;
+          background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
         }

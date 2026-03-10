@@ -237,12 +237,12 @@ const config = typeConfig[type];
   .do-indicator {
     height: 1.25rem;
     background-color: var(--goa-color-success-default);
-    border-radius: 0 0 8px 8px;
+    border-radius: var(--goa-border-radius-none) var(--goa-border-radius-none)  var(--goa-border-radius-m) var(--goa-border-radius-m);
   }
 
   /* When container is visible, indicator doesn't need top radius */
   .do-container:not([style*="display: none"]) + .do-indicator {
-    border-radius: 0 0 8px 8px;
+    border-radius: var(--goa-border-radius-none) var(--goa-border-radius-none)  var(--goa-border-radius-m) var(--goa-border-radius-m);
   }
 
   /* When container is hidden, indicator needs full radius */
@@ -276,7 +276,7 @@ const config = typeConfig[type];
   }
 
   .content-label {
-    font-weight: 600;
+    font-weight: var(--goa-font-weight-semi-bold);
     margin-top: 1px;
   }
 
@@ -329,7 +329,7 @@ const config = typeConfig[type];
   .details-content :global(code) {
     background: rgba(0, 0, 0, 0.06);
     padding: 0.1em 0.3em;
-    border-radius: 3px;
+    border-radius: var(--goa-border-radius-xs);
     font-size: 0.85em;
   }
 </style>

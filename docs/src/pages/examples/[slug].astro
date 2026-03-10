@@ -160,7 +160,7 @@ function formatComponentName(component: string): string {
 
   .example-content :global(h2) {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: var(--goa-font-weight-semi-bold);
     margin: var(--goa-space-xl, 2rem) 0 var(--goa-space-m, 1rem);
     color: var(--goa-color-text-default, #333);
   }
@@ -194,7 +194,7 @@ function formatComponentName(component: string): string {
 
   .related-examples h2 {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: var(--goa-font-weight-semi-bold);
     margin: 0 0 var(--goa-space-m, 1rem);
     color: var(--goa-color-text-default, #333);
   }
@@ -226,7 +226,7 @@ function formatComponentName(component: string): string {
   }
 
   .related-category {
-    font-size: 0.875rem;
+    font-size: var(--goa-font-size-2);
     color: var(--goa-color-text-secondary, #666);
   }
 </style>
