@@ -1,17 +1,35 @@
-import { GoabAppHeader, GoabAppHeaderMenu } from "@abgov/react-components";
+import {
+  GoabxAppHeader,
+  GoabxAppHeaderMenu,
+  GoabxMenuButton,
+  GoabxMenuAction,
+} from "@abgov/react-components/experimental";
 
 export function HeaderWithNavigation() {
   return (
-    <GoabAppHeader url="https://www.alberta.ca" heading="Service name">
-      <GoabAppHeaderMenu heading="Search" leadingIcon="search">
-        <a href="#">Cases</a>
-        <a href="#">Payments</a>
-        <a href="#">Outstanding</a>
-      </GoabAppHeaderMenu>
-      <a href="#">Support</a>
-      <a href="#" className="interactive">
-        Sign in
-      </a>
-    </GoabAppHeader>
+    <>
+      <GoabxAppHeader url="https://www.alberta.ca" heading="Service name">
+        <a slot="navigation" href="#">
+          Dashboard
+        </a>
+        <GoabxAppHeaderMenu slot="navigation" heading="Search">
+          <a href="#">Cases</a>
+          <a href="#">Payments</a>
+          <a href="#">Outstanding</a>
+        </GoabxAppHeaderMenu>
+        <a slot="navigation" href="#">
+          Support
+        </a>
+        <GoabxMenuButton
+          slot="utilities"
+          text="John Smith"
+          type="tertiary"
+          size="compact"
+        >
+          <GoabxMenuAction text="User settings" action="user-settings" />
+          <GoabxMenuAction text="Sign out" action="sign-out" />
+        </GoabxMenuButton>
+      </GoabxAppHeader>
+    </>
   );
 }

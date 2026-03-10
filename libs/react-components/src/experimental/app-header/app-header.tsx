@@ -1,18 +1,33 @@
 import { useEffect, useRef, type JSX } from "react";
 import { DataAttributes } from "@abgov/ui-components-common";
-import { transformProps, lowercase } from "../common/extract-props";
+import { transformProps, lowercase } from "../../lib/common/extract-props";
 
 interface WCProps {
   heading?: string;
+  secondarytext?: string;
   url?: string;
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
   hasmenuclickhandler?: string;
   testid?: string;
+  version?: string;
 }
 
-export interface GoabAppHeaderProps extends DataAttributes {
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-app-header": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
+    }
+  }
+}
+
+export interface GoabxAppHeaderProps extends DataAttributes {
   heading?: string;
+  secondaryText?: string;
   url?: string;
   maxContentWidth?: string;
   fullMenuBreakpoint?: number;
@@ -21,11 +36,12 @@ export interface GoabAppHeaderProps extends DataAttributes {
   testId?: string;
 }
 
-export function GoabAppHeader({
+export function GoabxAppHeader({
   onMenuClick,
   children,
+  secondaryText,
   ...rest
-}: GoabAppHeaderProps): JSX.Element {
+}: GoabxAppHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   const _props = transformProps<WCProps>(rest, lowercase);
@@ -51,11 +67,11 @@ export function GoabAppHeader({
     <goa-app-header
       ref={el}
       hasmenuclickhandler={onMenuClick ? "true" : "false"}
+      secondarytext={secondaryText}
       {..._props}
+      version="2"
     >
       {children}
     </goa-app-header>
   );
 }
-
-export default GoabAppHeader;
