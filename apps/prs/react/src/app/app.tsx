@@ -16,9 +16,10 @@ export function App() {
       <section slot="header" id="top">
         <GoabMicrositeHeader type="alpha" version="UAT" />
         <GoabAppHeader heading="Testing Playground" url="/">
-          <a href="/">Home</a>
-          <GoabAppHeaderMenu heading="Insights">
+          {/* Verify AppHeaderMenu still works after Popover API refactor (PR #3478) */}
+          <GoabAppHeaderMenu heading="Services" leadingIcon="apps">
             <a href="/bugs/bug2720">bug2720</a>
+            <a href="/features/3478">Popover Test</a>
             <a href="/bugs/3450">Dropdown expanding</a>
             <a href="/bugs/3450">...inside Container</a>
             <a href="/bugs/3450">
@@ -132,6 +133,7 @@ export function App() {
               <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
               <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
               <Link to="/features/3398">3398 Group open prop</Link>
+              <Link to="/features/3478">3478 Popover API Rewrite</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>

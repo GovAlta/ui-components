@@ -80,6 +80,7 @@ import { Feat3398Component } from "../routes/features/feat3398/feat3398.componen
 import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-icons.component";
 import { Feat3396Component } from "../routes/features/feat3396/feat3396.component";
 import { FeatV2CheckboxComponent } from "../routes/features/featV2Checkbox/featV2Checkbox.component";
+import { Feat3478Component } from "../routes/features/feat3478/feat3478.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -164,4 +165,5 @@ export const appRoutes: Route[] = [
   { path: "features/3407-stack-on-mobile", component: Feat3407StackOnMobileComponent },
   { path: "features/v2-checkbox", component: FeatV2CheckboxComponent },
   { path: "features/3398", component: Feat3398Component },
+  { path: "features/3478", component: Feat3478Component },
 ];
