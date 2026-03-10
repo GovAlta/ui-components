@@ -1,7 +1,6 @@
 {
   "componentSlug": "pages",
   "extractedFrom": "libs/web-components/src/components/pages/Pages.svelte",
-  "extractedAt": "2026-02-04T08:10:50.413Z",
   "props": [
     {
       "name": "current",

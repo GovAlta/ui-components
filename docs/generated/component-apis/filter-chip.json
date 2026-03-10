@@ -1,7 +1,6 @@
 {
   "componentSlug": "filter-chip",
   "extractedFrom": "libs/web-components/src/components/filter-chip/FilterChip.svelte",
-  "extractedAt": "2026-02-04T08:10:50.404Z",
   "props": [
     {
       "name": "mt",

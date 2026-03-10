@@ -1,7 +1,6 @@
 {
   "componentSlug": "divider",
   "extractedFrom": "libs/web-components/src/components/divider/Divider.svelte",
-  "extractedAt": "2026-02-04T08:10:50.401Z",
   "props": [
     {
       "name": "testId",

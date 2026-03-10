@@ -1,7 +1,6 @@
 {
   "componentSlug": "circular-progress",
   "extractedFrom": "libs/web-components/src/components/circular-progress/CircularProgress.svelte",
-  "extractedAt": "2026-02-04T08:10:50.399Z",
   "props": [
     {
       "name": "variant",

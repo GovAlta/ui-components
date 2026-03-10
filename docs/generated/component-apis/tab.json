@@ -1,7 +1,6 @@
 {
   "componentSlug": "tab",
   "extractedFrom": "libs/web-components/src/components/tab/Tab.svelte",
-  "extractedAt": "2026-02-04T08:10:50.417Z",
   "props": [
     {
       "name": "heading",

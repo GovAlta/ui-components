@@ -1,7 +1,6 @@
 {
   "componentSlug": "spacer",
   "extractedFrom": "libs/web-components/src/components/spacer/Spacer.svelte",
-  "extractedAt": "2026-02-04T08:10:50.416Z",
   "props": [
     {
       "name": "hspacing",

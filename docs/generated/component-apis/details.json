@@ -1,7 +1,6 @@
 {
   "componentSlug": "details",
   "extractedFrom": "libs/web-components/src/components/details/Details.svelte",
-  "extractedAt": "2026-02-04T08:10:50.401Z",
   "props": [
     {
       "name": "heading",

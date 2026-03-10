@@ -1,7 +1,6 @@
 {
   "componentSlug": "card-image",
   "extractedFrom": "libs/web-components/src/components/card-image/CardImage.svelte",
-  "extractedAt": "2026-02-04T08:10:50.396Z",
   "props": [
     {
       "name": "src",

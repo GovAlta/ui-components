@@ -1,7 +1,6 @@
 {
   "componentSlug": "link",
   "extractedFrom": "libs/web-components/src/components/link/Link.svelte",
-  "extractedAt": "2026-02-04T08:10:50.411Z",
   "props": [
     {
       "name": "leadingIcon",

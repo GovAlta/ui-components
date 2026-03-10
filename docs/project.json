@@ -9,7 +9,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/docs"],
       "options": {
-        "command": "astro build --root docs"
+        "command": "npm run build --prefix docs"
       }
     },
     "serve": {

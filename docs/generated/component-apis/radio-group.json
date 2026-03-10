@@ -1,7 +1,6 @@
 {
   "componentSlug": "radio-group",
   "extractedFrom": "libs/web-components/src/components/radio-group/RadioGroup.svelte",
-  "extractedAt": "2026-02-04T08:10:50.414Z",
   "props": [
     {
       "name": "name",

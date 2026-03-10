@@ -1,7 +1,6 @@
 {
   "componentSlug": "tooltip",
   "extractedFrom": "libs/web-components/src/components/tooltip/Tooltip.svelte",
-  "extractedAt": "2026-02-04T08:10:50.419Z",
   "props": [
     {
       "name": "content",

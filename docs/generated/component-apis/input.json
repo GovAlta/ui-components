@@ -1,7 +1,6 @@
 {
   "componentSlug": "input",
   "extractedFrom": "libs/web-components/src/components/input/Input.svelte",
-  "extractedAt": "2026-02-04T08:10:50.410Z",
   "props": [
     {
       "name": "type",
@@ -88,7 +87,11 @@
     },
     {
       "name": "variant",
-      "type": "GoAInputVariant",
+      "type": "\"goa\" | \"bare\"",
+      "values": [
+        "goa",
+        "bare"
+      ],
       "required": false,
       "default": "goa",
       "description": "Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling."
@@ -202,11 +205,7 @@
     },
     {
       "name": "maxLength",
-      "type": "number | null",
-      "values": [
-        "number",
-        "null"
-      ],
+      "type": "number",
       "required": false,
       "default": null,
       "description": "Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input."

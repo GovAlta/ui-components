@@ -1,7 +1,6 @@
 {
   "componentSlug": "scrollable",
   "extractedFrom": "libs/web-components/src/components/scrollable/Scrollable.svelte",
-  "extractedAt": "2026-02-04T08:10:50.415Z",
   "props": [
     {
       "name": "direction",

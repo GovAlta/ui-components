@@ -1,7 +1,6 @@
 {
   "componentSlug": "accordion",
   "extractedFrom": "libs/web-components/src/components/accordion/Accordion.svelte",
-  "extractedAt": "2026-02-04T08:10:50.390Z",
   "props": [
     {
       "name": "open",

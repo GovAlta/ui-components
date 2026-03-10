@@ -1,7 +1,6 @@
 {
   "componentSlug": "badge",
   "extractedFrom": "libs/web-components/src/components/badge/Badge.svelte",
-  "extractedAt": "2026-02-04T08:10:50.393Z",
   "props": [
     {
       "name": "type",

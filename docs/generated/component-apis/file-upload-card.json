@@ -1,7 +1,6 @@
 {
   "componentSlug": "file-upload-card",
   "extractedFrom": "libs/web-components/src/components/file-upload-card/FileUploadCard.svelte",
-  "extractedAt": "2026-02-04T08:10:50.404Z",
   "props": [
     {
       "name": "filename",
