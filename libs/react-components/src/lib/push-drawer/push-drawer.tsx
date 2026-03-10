@@ -53,7 +53,7 @@ export function GoabPushDrawer({
     <goa-push-drawer
       ref={el}
       testid={testid}
-      open={open ?? false}
+      open={open ? true : undefined}
       heading={typeof heading === "string" ? heading : undefined}
       width={width}
     >
