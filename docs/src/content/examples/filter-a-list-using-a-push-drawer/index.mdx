@@ -1,0 +1,39 @@
+---
+id: filter-a-list-using-a-push-drawer
+title: Filter a list using a push drawer
+categories:
+  - content-layout
+scale: task
+userType: worker
+tags:
+  - push-drawer
+  - filters
+  - list
+  - search
+components:
+  - push-drawer
+  - button
+  - table
+  - badge
+  - checkbox
+  - checkbox-list
+  - dropdown
+  - form-item
+status: published
+---
+
+Use a push drawer to house filters alongside a list of records. The push drawer keeps the filter controls accessible while users can still see and interact with the filtered results.
+
+## When to use
+
+Use this pattern when:
+
+- Users need to filter a list or table and see results update alongside the filters
+- The filter panel should be dismissible to reclaim screen space
+- Users go back and forth between adjusting filters and reviewing results
+
+## Considerations
+
+- On smaller screens, the push drawer falls back to an overlay drawer automatically
+- Consider whether filters should apply immediately or require a Save action
+- Consider hiding the trigger button while the drawer is open to reduce visual clutter
