@@ -1,5 +1,5 @@
-import { CommonModule } from "@angular/common";
 import { Component, signal } from "@angular/core";
+import { DecimalPipe, JsonPipe, TitleCasePipe } from "@angular/common";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import {
   GoabAccordion,
@@ -165,7 +165,6 @@ interface DemoFormValue {
   templateUrl: "./everything.component.html",
   styleUrls: ["./everything.component.css"],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     GoabAccordion,
     GoabAppFooter,
@@ -230,6 +229,9 @@ interface DemoFormValue {
     GoabText,
     GoabTextArea,
     GoabTooltip,
+    DecimalPipe,
+    JsonPipe,
+    TitleCasePipe,
   ],
 })
 export class EverythingComponent {

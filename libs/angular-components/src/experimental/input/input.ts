@@ -24,16 +24,15 @@ import {
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
-import { NgIf, NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-input",
-  imports: [NgIf, NgTemplateOutlet, CommonModule],
-  template: `
+  imports: [NgTemplateOutlet],
+  template: `@if (isReady) {
     <goa-input
       #goaComponentRef
-      *ngIf="isReady"
       [attr.version]="version"
       [attr.type]="type"
       [attr.name]="name"
@@ -74,31 +73,32 @@ import { NgIf, NgTemplateOutlet, CommonModule } from "@angular/common";
       (_keyPress)="_onKeyPress($event)"
       [attr.trailingiconarialabel]="trailingIconAriaLabel"
     >
-      <div slot="leadingContent">
-        <ng-container *ngIf="leadingContent">
-          <ng-container *ngIf="getLeadingContentAsTemplate(); else stringLeading">
-            <ng-container
-              [ngTemplateOutlet]="getLeadingContentAsTemplate()"
-            ></ng-container>
-          </ng-container>
-          <ng-template #stringLeading>{{ getLeadingContentAsString() }}</ng-template>
-        </ng-container>
-      </div>
+      @if (leadingContent) {
+        <div slot="leadingContent">
+          @if (getLeadingContentAsTemplate()) {
+            <ng-container [ngTemplateOutlet]="getLeadingContentAsTemplate()">
+            </ng-container>
+          } @else {
+            {{ getLeadingContentAsString() }}
+          }
+        </div>
+      }
 
       <ng-content />
 
-      <div slot="trailingContent">
-        <ng-container *ngIf="trailingContent">
-          <ng-container *ngIf="getTrailingContentAsTemplate(); else stringTrailing">
+      @if (trailingContent) {
+        <div slot="trailingContent">
+          @if (getTrailingContentAsTemplate()) {
             <ng-container
               [ngTemplateOutlet]="getTrailingContentAsTemplate()"
             ></ng-container>
-          </ng-container>
-          <ng-template #stringTrailing>{{ getTrailingContentAsString() }}</ng-template>
-        </ng-container>
-      </div>
+          } @else {
+            {{ getTrailingContentAsString() }}
+          }
+        </div>
+      }
     </goa-input>
-  `,
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {

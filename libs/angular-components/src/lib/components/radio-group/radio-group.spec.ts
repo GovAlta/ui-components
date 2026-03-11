@@ -9,7 +9,6 @@ import {
 import { GoabRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
 import { By } from "@angular/platform-browser";
-import { CommonModule } from "@angular/common";
 
 interface RadioOption {
   text: string;
@@ -20,7 +19,7 @@ interface RadioOption {
 
 @Component({
   standalone: true,
-  imports: [GoabRadioGroup, GoabRadioItem, CommonModule],
+  imports: [GoabRadioGroup, GoabRadioItem],
   template: `
     <goab-radio-group
       [name]="name"
@@ -36,20 +35,23 @@ interface RadioOption {
       [ml]="ml"
       (onChange)="onChange($event)"
     >
-      <goab-radio-item
-        *ngFor="let option of options"
-        [label]="option.text"
-        [name]="name"
-        [checked]="value === option.value"
-        [value]="option.value"
-        [ariaLabel]="option.text"
-        [description]="option.isDescriptionSlot ? '' : option.description"
-      >
-        {{ option.text }}
-        <div slot="description" *ngIf="option.isDescriptionSlot">
-          {{ option.description }}
-        </div>
-      </goab-radio-item>
+      @for (option of options; track option.value) {
+        <goab-radio-item
+          [label]="option.text"
+          [name]="name"
+          [checked]="value === option.value"
+          [value]="option.value"
+          [ariaLabel]="option.text"
+          [description]="option.isDescriptionSlot ? '' : option.description"
+        >
+          {{ option.text }}
+          @if (option.isDescriptionSlot) {
+            <div slot="description">
+              {{ option.description }}
+            </div>
+          }
+        </goab-radio-item>
+      }
     </goab-radio-group>
   `,
 })
@@ -139,7 +141,8 @@ describe("GoABRadioGroup", () => {
 
   it("should render description", () => {
     component.options.forEach((option, index) => {
-      component.options[index].description = `Description for ${component.options[index].text}`;
+      component.options[index].description =
+        `Description for ${component.options[index].text}`;
     });
     component.options[0].isDescriptionSlot = true;
     fixture.detectChanges();
@@ -150,12 +153,17 @@ describe("GoABRadioGroup", () => {
     expect(radioItems.length).toBe(component.options.length);
 
     // Slot description
-    expect(radioItems[0].querySelector("div[slot='description']")?.innerHTML,
-    ).toContain(`Description for ${component.options[0].text}`);
+    expect(radioItems[0].querySelector("div[slot='description']")?.innerHTML).toContain(
+      `Description for ${component.options[0].text}`,
+    );
 
     // attribute description
-    expect(radioItems[1].getAttribute("description")).toBe(`Description for ${component.options[1].text}`);
-    expect(radioItems[2].getAttribute("description")).toBe(`Description for ${component.options[2].text}`);
+    expect(radioItems[1].getAttribute("description")).toBe(
+      `Description for ${component.options[1].text}`,
+    );
+    expect(radioItems[2].getAttribute("description")).toBe(
+      `Description for ${component.options[2].text}`,
+    );
   });
 
   it("should dispatch onChange", () => {
@@ -163,18 +171,31 @@ describe("GoABRadioGroup", () => {
     const changeEvent = new Event("change");
 
     const radioGroup = fixture.nativeElement.querySelector("goa-radio-group");
-    fireEvent(radioGroup, new CustomEvent("_change", {
-      detail: { name: component.name, value: component.options[0].value, event: changeEvent }
-    }));
+    fireEvent(
+      radioGroup,
+      new CustomEvent("_change", {
+        detail: {
+          name: component.name,
+          value: component.options[0].value,
+          event: changeEvent,
+        },
+      }),
+    );
 
-    expect(onChange).toBeCalledWith(
-      expect.objectContaining({ name: component.name, value: component.options[0].value, event: expect.any(Event) }),
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: component.name,
+        value: component.options[0].value,
+        event: expect.any(Event),
+      }),
     );
   });
 
   describe("writeValue", () => {
     it("should set value attribute when writeValue is called", () => {
-      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupComponent = fixture.debugElement.query(
+        By.css("goab-radio-group"),
+      ).componentInstance;
       const radioGroupElement = fixture.nativeElement.querySelector("goa-radio-group");
 
       radioGroupComponent.writeValue("apples");
@@ -185,7 +206,9 @@ describe("GoABRadioGroup", () => {
     });
 
     it("should set value attribute to empty string when writeValue is called with null or empty", () => {
-      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupComponent = fixture.debugElement.query(
+        By.css("goab-radio-group"),
+      ).componentInstance;
       const radioGroupElement = fixture.nativeElement.querySelector("goa-radio-group");
 
       // First set a value
@@ -208,7 +231,9 @@ describe("GoABRadioGroup", () => {
     });
 
     it("should update component value property", () => {
-      const radioGroupComponent = fixture.debugElement.query(By.css("goab-radio-group")).componentInstance;
+      const radioGroupComponent = fixture.debugElement.query(
+        By.css("goab-radio-group"),
+      ).componentInstance;
 
       radioGroupComponent.writeValue("apples");
       expect(radioGroupComponent.value).toBe("apples");

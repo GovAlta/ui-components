@@ -18,12 +18,12 @@ import {
   GoabxFilterChip,
   GoabxDrawer,
   GoabxCheckbox,
+  GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
 import {
   GoabIcon,
   GoabDivider,
   GoabButtonGroup,
-  GoabCheckboxList,
   GoabTab,
   type GoabCheckboxListOnChangeDetail,
 } from "@abgov/react-components";
@@ -39,11 +39,11 @@ export interface Component {
     description?: string;
     status: "stable" | "beta" | "deprecated" | "experimental";
     category:
-    | "inputs-and-actions"
-    | "content-layout"
-    | "structure-and-navigation"
-    | "feedback-and-alerts"
-    | "utilities";
+      | "inputs-and-actions"
+      | "content-layout"
+      | "structure-and-navigation"
+      | "feedback-and-alerts"
+      | "utilities";
     tags?: string[];
     relatedComponents?: string[];
     webComponentTag?: string;
@@ -114,6 +114,27 @@ function formatStatus(status: string): string {
   return status.charAt(0).toUpperCase() + status.slice(1);
 }
 
+// Thumbnail filename mapping for slugs that don't match the filename
+const THUMBNAIL_MAP: Record<string, string> = {
+  "app-header": "header",
+  icon: "icons",
+  input: "text-input",
+  "checkbox-list": "checkbox-group",
+  "circular-progress": "circular-progress-indicator",
+  "linear-progress": "linear-progress-indicator",
+  notification: "notification-banner",
+  skeleton: "skeleton-loader",
+  "radio-group": "radio",
+  "file-upload-input": "file-uploader",
+  "link-button": "link",
+  "page-block": "block",
+};
+
+function getThumbnailPath(slug: string): string {
+  const filename = THUMBNAIL_MAP[slug] || slug;
+  return `/images/component-thumbnails/${filename}.svg`;
+}
+
 export function ComponentsGrid({ components }: ComponentsGridProps) {
   // State
   const [searchValue, setSearchValue] = useState("");
@@ -166,12 +187,11 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
   });
 
   // Listen for table sort events (from goa-table web component)
-  // Also explicitly set version="2" attribute since React may not set it correctly on custom elements
   useEffect(() => {
     const table = tableRef.current;
     if (!table) return;
 
-    // Explicitly set version attribute for V2 styling (React doesn't always set attributes on custom elements)
+    // Explicitly set version attribute for V2 styling
     table.setAttribute("version", "2");
 
     const handleSort = (e: Event) => {
@@ -481,8 +501,26 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         className="component-card-link"
       >
         <div className="component-card-content">
-          {/* Thumbnail placeholder - V2 images needed */}
-          <div className="component-card-thumbnail" aria-hidden="true" />
+          {/* Component thumbnail */}
+          <div className="component-card-thumbnail" aria-hidden="true">
+            <img
+              src={getThumbnailPath(component.slug)}
+              alt=""
+              loading="lazy"
+              onError={(e) => {
+                // Hide broken image, show fallback
+                (e.target as HTMLImageElement).style.display = "none";
+                const fallback = (e.target as HTMLImageElement).nextElementSibling;
+                if (fallback) (fallback as HTMLElement).style.display = "flex";
+              }}
+            />
+            <span
+              className="component-card-thumbnail-fallback"
+              style={{ display: "none" }}
+            >
+              {component.data.name}
+            </span>
+          </div>
 
           {/* Title */}
           <h3 className="component-card-title">{component.data.name}</h3>
@@ -499,6 +537,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
               type={getCategoryBadgeType(component.data.category)}
               content={formatCategory(component.data.category)}
               emphasis="subtle"
+              icon="false"
             />
           </div>
         </div>
@@ -525,6 +564,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
             type={getCategoryBadgeType(component.data.category)}
             content={formatCategory(component.data.category)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
         <td>
@@ -533,6 +573,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
             type={getStatusBadgeType(component.data.status)}
             content={formatStatus(component.data.status)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
       </tr>
@@ -695,7 +736,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
       {/* List View (table) */}
       {viewMode === "list" && (
         <div className="components-table-wrapper">
-          {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
+          {/* TODO: Table not rendering with V2 styling despite version="2" - investigate CSS loading or timing issue */}
           <goa-table ref={tableRef} version="2" width="100%" variant="normal">
             <table style={{ width: "100%" }}>
               <thead>
@@ -733,35 +774,35 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
               <tbody>
                 {groupedComponents
                   ? groupedComponents.map((group) => (
-                    <React.Fragment key={group.key}>
-                      <tr
-                        className="components-group-row"
-                        onClick={() => toggleGroup(group.key)}
-                      >
-                        <td colSpan={4}>
-                          <div className="components-group-header">
-                            <GoabIcon
-                              type={
-                                expandedGroups.has(group.key)
-                                  ? "chevron-down"
-                                  : "chevron-forward"
-                              }
-                              size="small"
-                            />
-                            <strong>{group.label}</strong>
-                            <goa-badge
-                              version="2"
-                              type="default"
-                              content={String(group.components.length)}
-                              emphasis="subtle"
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {expandedGroups.has(group.key) &&
-                        group.components.map(renderTableRow)}
-                    </React.Fragment>
-                  ))
+                      <React.Fragment key={group.key}>
+                        <tr
+                          className="components-group-row"
+                          onClick={() => toggleGroup(group.key)}
+                        >
+                          <td colSpan={4}>
+                            <div className="components-group-header">
+                              <GoabIcon
+                                type={
+                                  expandedGroups.has(group.key)
+                                    ? "chevron-down"
+                                    : "chevron-forward"
+                                }
+                                size="small"
+                              />
+                              <strong>{group.label}</strong>
+                              <goa-badge
+                                version="2"
+                                type="default"
+                                content={String(group.components.length)}
+                                emphasis="subtle"
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                        {expandedGroups.has(group.key) &&
+                          group.components.map(renderTableRow)}
+                      </React.Fragment>
+                    ))
                   : filteredComponents.map(renderTableRow)}
               </tbody>
             </table>
@@ -833,8 +874,9 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         <div className="filter-drawer-content">
           {/* Category filter */}
           <GoabxFormItem label="Category">
-            <GoabCheckboxList
+            <GoabxCheckboxList
               name="category"
+              size="compact"
               value={pendingFilters.category}
               onChange={(detail: GoabCheckboxListOnChangeDetail) =>
                 setPendingFilters((prev) => ({ ...prev, category: detail.value }))
@@ -849,13 +891,14 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   size="compact"
                 />
               ))}
-            </GoabCheckboxList>
+            </GoabxCheckboxList>
           </GoabxFormItem>
 
           {/* Status filter */}
           <GoabxFormItem label="Status">
-            <GoabCheckboxList
+            <GoabxCheckboxList
               name="status"
+              size="compact"
               value={pendingFilters.status}
               onChange={(detail: GoabCheckboxListOnChangeDetail) =>
                 setPendingFilters((prev) => ({ ...prev, status: detail.value }))
@@ -870,7 +913,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
                   size="compact"
                 />
               ))}
-            </GoabCheckboxList>
+            </GoabxCheckboxList>
           </GoabxFormItem>
 
           {(pendingFilters.category.length > 0 || pendingFilters.status.length > 0) && (
@@ -904,7 +947,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           position: sticky;
           top: 0;
           z-index: 1;
-          background: white;
+          background: var(--goa-color-greyscale-white);
           display: flex;
           flex-direction: row;
           align-items: flex-start;
@@ -927,7 +970,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
           bottom: 0;
           left: -9999px;
           right: -9999px;
-          background: white;
+          background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
         }
@@ -1045,10 +1088,30 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
         }
 
         .component-card-thumbnail {
-          aspect-ratio: 16 / 10;
+          aspect-ratio: 386 / 256;
           background: var(--goa-color-greyscale-200);
           border-radius: var(--goa-border-radius-m);
           margin-bottom: var(--goa-space-xs);
+          overflow: hidden;
+        }
+
+        .component-card-thumbnail img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .component-card-thumbnail-fallback {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font: var(--goa-typography-heading-s);
+          color: var(--goa-color-text-secondary);
+          text-align: center;
+          padding: var(--goa-space-m);
         }
 
         .component-card-title {

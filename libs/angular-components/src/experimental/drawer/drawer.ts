@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import {
   booleanAttribute,
   Component,
@@ -15,10 +15,9 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
 @Component({
   standalone: true,
   selector: "goabx-drawer",
-  imports: [NgTemplateOutlet, CommonModule],
-  template: `
+  imports: [NgTemplateOutlet],
+  template: `@if (isReady) {
     <goa-drawer
-      *ngIf="isReady"
       [open]="open"
       [attr.position]="position"
       [attr.heading]="getHeadingAsString()"
@@ -35,7 +34,7 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
         <ng-container [ngTemplateOutlet]="actions"></ng-container>
       </div>
     </goa-drawer>
-  `,
+  } `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxDrawer implements OnInit {

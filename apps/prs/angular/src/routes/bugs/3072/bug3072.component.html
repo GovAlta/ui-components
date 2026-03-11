@@ -43,11 +43,12 @@
             placeholder="Select a gender"
             formControlName="genderId"
           >
+            @for (gender of genders; track gender.value) {
             <goab-dropdown-item
-              *ngFor="let gender of genders"
               [value]="gender.value"
               [label]="gender.label"
             ></goab-dropdown-item>
+            }
           </goab-dropdown>
         </goab-form-item>
 
@@ -69,11 +70,12 @@
 
         <goab-form-item label="Program interests" helpText="Pick zero or more options.">
           <goab-checkbox-list name="interests" formControlName="interests">
+            @for (interest of interests; track interest.value) {
             <goab-checkbox
-              *ngFor="let interest of interests"
               [name]="interest.value"
               [text]="interest.label"
             ></goab-checkbox>
+            }
           </goab-checkbox-list>
         </goab-form-item>
 

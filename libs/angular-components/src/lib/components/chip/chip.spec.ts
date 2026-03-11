@@ -1,7 +1,12 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabChip } from "./chip";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabChipTheme, GoabChipVariant, GoabIconType, Spacing } from "@abgov/ui-components-common";
+import {
+  GoabChipTheme,
+  GoabChipVariant,
+  GoabIconType,
+  Spacing,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 

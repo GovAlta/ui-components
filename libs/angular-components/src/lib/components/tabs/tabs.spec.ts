@@ -68,8 +68,8 @@ describe("GoABTabs", () => {
     fireEvent(
       el,
       new CustomEvent("_change", {
-        detail: { tab: 2 }
-      })
+        detail: { tab: 2 },
+      }),
     );
 
     expect(onChange).toHaveBeenCalledWith({ tab: 2 });

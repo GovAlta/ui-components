@@ -1,11 +1,11 @@
-import { DataAttributes, GoabTableSortDirection } from "@abgov/ui-components-common";
+import { DataAttributes, GoabTableSortDirection, GoabTableSortOrder } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
-import { transformProps, lowercase } from "../../lib/common/extract-props";
 
 interface WCProps {
   name?: string;
   direction?: GoabTableSortDirection;
+  "sort-order"?: GoabTableSortOrder;
 }
 
 declare module "react" {
@@ -21,16 +21,22 @@ declare module "react" {
 export interface GoabxTableSortProps extends DataAttributes {
   name?: string;
   direction?: GoabTableSortDirection;
+  sortOrder?: GoabTableSortOrder;
   children?: React.ReactNode;
 }
 
 export function GoabxTableSortHeader({
+  name,
+  direction = "none",
+  sortOrder,
   children,
   ...rest
 }: GoabxTableSortProps): JSX.Element {
-  const _props = transformProps<WCProps>(rest, lowercase);
-
-  return <goa-table-sort-header {..._props}>{children}</goa-table-sort-header>;
+  return (
+    <goa-table-sort-header name={name} direction={direction} sort-order={sortOrder} {...rest}>
+      {children}
+    </goa-table-sort-header>
+  );
 }
 
 export default GoabxTableSortHeader;

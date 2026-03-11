@@ -1,19 +1,25 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, ChangeDetectorRef, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  ChangeDetectorRef,
+  OnInit,
+} from "@angular/core";
 
 @Component({
   standalone: true,
   selector: "goab-data-grid",
-  imports: [CommonModule],
+
   template: `
-    <goa-data-grid
-      *ngIf="isReady"
-      [attr.keyboard-icon-visibility]="keyboardIconVisibility"
-      [attr.keyboard-icon-position]="keyboardIconPosition"
-      [attr.keyboard-nav]="keyboardNav"
-    >
-      <ng-content></ng-content>
-    </goa-data-grid>
+    @if (isReady) {
+      <goa-data-grid
+        [attr.keyboard-icon-visibility]="keyboardIconVisibility"
+        [attr.keyboard-icon-position]="keyboardIconPosition"
+        [attr.keyboard-nav]="keyboardNav"
+      >
+        <ng-content></ng-content>
+      </goa-data-grid>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

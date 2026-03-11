@@ -5,11 +5,11 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 @Component({
   standalone: true,
   imports: [GoabSpacer],
-  template: `
-  <goab-spacer hSpacing="2xl" vSpacing="m" testId="foo"></goab-spacer>
-  `
+  template: ` <goab-spacer hSpacing="2xl" vSpacing="m" testId="foo"></goab-spacer> `,
 })
-class TestSpacerComponent {/** do nothing **/}
+class TestSpacerComponent {
+  /** do nothing **/
+}
 
 describe("GoASpacer", () => {
   let fixture: ComponentFixture<TestSpacerComponent>;
@@ -17,7 +17,7 @@ describe("GoASpacer", () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [GoabSpacer, TestSpacerComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSpacerComponent);

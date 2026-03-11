@@ -9,16 +9,15 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 import { GoabFormItemType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "goabx-form-item",
-  template: `
+  template: `@if (isReady) {
     <goa-form-item
-      *ngIf="isReady"
       [attr.version]="version"
       [attr.label]="label"
       [attr.labelsize]="labelSize"
@@ -39,9 +38,8 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
       <ng-content />
       <ng-content select="goab-form-item-slot"></ng-content>
     </goa-form-item>
-  `,
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabxFormItem extends GoabBaseComponent implements OnInit {
   @Input() label?: string;

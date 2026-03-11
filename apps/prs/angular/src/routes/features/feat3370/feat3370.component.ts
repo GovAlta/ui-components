@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabButton,
@@ -15,7 +14,7 @@ import {
   standalone: true,
   selector: "abgov-feat3370",
   templateUrl: "./feat3370.component.html",
-  imports: [CommonModule, GoabButton, GoabButtonGroup, GoabCalendar, GoabDatePicker],
+  imports: [GoabButton, GoabButtonGroup, GoabCalendar, GoabDatePicker],
 })
 export class Feat3370Component {
   calendarValue: Date | string = "";

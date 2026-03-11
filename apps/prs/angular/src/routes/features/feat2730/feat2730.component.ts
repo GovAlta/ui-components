@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabButton,
   GoabBlock,
@@ -22,7 +22,6 @@ import {
   templateUrl: "./feat2730.component.html",
   styleUrls: ["./feat2730.component.css"],
   imports: [
-    CommonModule,
     GoabButton,
     GoabBlock,
     GoabText,

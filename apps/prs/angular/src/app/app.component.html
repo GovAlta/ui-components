@@ -1,13 +1,37 @@
 <div style="min-height: 100vh; display: flex; flex-direction: column">
-  <section slot="header" class="width" role="header" style="flex: 0 0 auto">
+  <section slot="header" id="top" class="width" role="header" style="flex: 0 0 auto">
     <goab-microsite-header type="alpha" version="UAT" />
     <goab-app-header>
       <a href="/">Home</a>
       <goab-app-header-menu heading="Insights">
-        <a class="interactive" href="/bugs/bug2720">2878</a>
-        <a href="/">Regional Insights</a>
-        <a href="/">Occupational Insights</a>
+        <a href="/bugs/bug2720"> bug2720 </a>
+        <a href="/bugs/3450"> Dropdown expanding </a>
+        <a href="/bugs/3450"> ...inside Container </a>
+        <a href="/bugs/3450">
+          Interactive super long menu item to test overflow handling lorem ipsum dolor sit
+          amet
+        </a>
+        <a href="/bugs/3450">
+          Noninteractive super long menu item to test overflow handling lorem ipsum dolor
+          sit amet
+        </a>
       </goab-app-header-menu>
+      <goab-app-header-menu heading="Popover">
+        <a href="/bugs/3450"> Bug 3450 </a>
+        <a href="/bugs/3450">Bug 3450</a>
+        <a href="/bugs/3450">
+          Super long menu item to test overflow handling lorem ipsum dolor sit amet
+        </a>
+      </goab-app-header-menu>
+      <goa-app-header-menu heading="John Smith" leadingIcon="person-circle">
+        <a href="#top">Manage account</a>
+        <a href="#top">Request new staff account for a long</a>
+        <a href="#top">System admin</a>
+        <a href="#top" class="interactive">Sign out</a
+        ><a href="/bugs/3450">
+          Super long menu item to test overflow handling lorem ipsum dolor sit amet
+        </a>
+      </goa-app-header-menu>
     </goab-app-header>
   </section>
 
@@ -52,11 +76,13 @@
           <a href="/bugs/3201">3201</a>
           <a href="/bugs/3215">3215</a>
           <a href="/bugs/3248">3248</a>
+          <a href="/bugs/3273">3273</a>
           <a href="/bugs/3275">3275 Can't unset month</a>
           <a href="/bugs/3281">3281</a>
           <a href="/bugs/3337">3337 - Autocomplete styling</a>
           <a href="/bugs/3279">3279</a>
           <a href="/bugs/3384">3384 Table v2 sample</a>
+          <a href="/bugs/3450">3450 Dropdown expanding inside Container</a>
         </goab-side-menu-group>
         <goab-side-menu-group heading="Features">
           <a href="/features/1328">1328</a>
@@ -81,13 +107,18 @@
           <a href="/features/3102">3102</a>
           <a href="/features/3229">3229 MenuButton vs size and icon-only</a>
           <a href="/features/3137">3137</a>
+          <a href="/features/3211">3211 Angular v21</a>
           <a href="/features/3241">3241</a>
           <a href="/features/3306">3306</a>
           <a href="/features/3370">3370</a>
+          <a href="/features/3398">3398 Work side menu group open prop </a>
           <a href="/features/v2-icons">v2 header icons</a>
+          <a href="/features/3344">3344 Table Multi-Sort</a>
           <a href="/features/3396">3396 Text heading-2xs size</a>
           <a href="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</a>
           <a href="/features/3407-stack-on-mobile">3407 Tabs Orientation</a>
+          <a href="/features/v2-checkbox">3399 V2 Checkbox Spacing</a>
+          <a href="/features/3478">3478 Popover API Rewrite</a>
         </goab-side-menu-group>
       </goab-side-menu>
     </section>

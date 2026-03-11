@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabFormItem,
   GoabDatePicker,
@@ -12,7 +12,7 @@ import { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
   standalone: true,
   selector: "abgov-feat2682",
   templateUrl: "./feat2682.component.html",
-  imports: [CommonModule, GoabFormItem, GoabDatePicker, GoabBlock, GoabText],
+  imports: [GoabFormItem, GoabDatePicker, GoabBlock, GoabText],
 })
 export class Feat2682Component {
   // Calculate min and max dates (one month before and after today)

@@ -8,24 +8,25 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "goab-tabs",
   template: `
-    <goa-tabs
-      *ngIf="isReady"
-      [attr.initialtab]="initialTab"
-      [attr.testid]="testId"
-      [attr.variant]="variant"
-      (_change)="_onChange($event)"
-    >
-      <ng-content />
-    </goa-tabs>
+    @if (isReady) {
+      <goa-tabs
+        [attr.initialtab]="initialTab"
+        [attr.testid]="testId"
+        [attr.variant]="variant"
+        (_change)="_onChange($event)"
+      >
+        <ng-content />
+      </goa-tabs>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTabs implements OnInit {

@@ -10,10 +10,11 @@ import { By } from "@angular/platform-browser";
     <goab-data-grid
       [keyboardIconVisibility]="keyboardIconVisibility"
       [keyboardIconPosition]="keyboardIconPosition"
-      [keyboardNav]="keyboardNav">
+      [keyboardNav]="keyboardNav"
+    >
       <div>Test content</div>
     </goab-data-grid>
-  `
+  `,
 })
 class TestDataGridComponent {
   keyboardIconVisibility: "visible" | "hidden" = "visible";
@@ -42,7 +43,9 @@ describe("GoabDataGrid", () => {
 
     expect(component).toBeTruthy();
 
-    const dataGridElement = fixture.debugElement.query(By.css("goa-data-grid"))?.nativeElement;
+    const dataGridElement = fixture.debugElement.query(
+      By.css("goa-data-grid"),
+    )?.nativeElement;
     expect(dataGridElement).toBeTruthy();
     expect(dataGridElement.textContent).toContain("Test content");
     expect(dataGridElement.getAttribute("keyboard-icon-visibility")).toBe("visible");
@@ -55,7 +58,9 @@ describe("GoabDataGrid", () => {
     tick();
     fixture.detectChanges();
 
-    const dataGridElement = fixture.debugElement.query(By.css("goa-data-grid"))?.nativeElement;
+    const dataGridElement = fixture.debugElement.query(
+      By.css("goa-data-grid"),
+    )?.nativeElement;
     expect(dataGridElement).toBeTruthy();
     expect(dataGridElement.getAttribute("keyboard-icon-visibility")).toBe("hidden");
   }));
@@ -66,7 +71,9 @@ describe("GoabDataGrid", () => {
     tick();
     fixture.detectChanges();
 
-    const dataGridElement = fixture.debugElement.query(By.css("goa-data-grid"))?.nativeElement;
+    const dataGridElement = fixture.debugElement.query(
+      By.css("goa-data-grid"),
+    )?.nativeElement;
     expect(dataGridElement).toBeTruthy();
     expect(dataGridElement.getAttribute("keyboard-icon-position")).toBe("right");
   }));
@@ -77,7 +84,9 @@ describe("GoabDataGrid", () => {
     tick();
     fixture.detectChanges();
 
-    const dataGridElement = fixture.debugElement.query(By.css("goa-data-grid"))?.nativeElement;
+    const dataGridElement = fixture.debugElement.query(
+      By.css("goa-data-grid"),
+    )?.nativeElement;
     expect(dataGridElement).toBeTruthy();
     expect(dataGridElement.getAttribute("keyboard-nav")).toBe("table");
   }));
@@ -88,7 +97,9 @@ describe("GoabDataGrid", () => {
     tick();
     fixture.detectChanges();
 
-    const dataGridElement = fixture.debugElement.query(By.css("goa-data-grid"))?.nativeElement;
+    const dataGridElement = fixture.debugElement.query(
+      By.css("goa-data-grid"),
+    )?.nativeElement;
     expect(dataGridElement).toBeTruthy();
     expect(dataGridElement.getAttribute("keyboard-nav")).toBe("layout");
   }));

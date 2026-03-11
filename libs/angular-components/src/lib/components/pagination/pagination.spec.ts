@@ -1,23 +1,29 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabPagination } from "./pagination";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabPaginationOnChangeDetail, GoabPaginationVariant, Spacing } from "@abgov/ui-components-common";
+import {
+  GoabPaginationOnChangeDetail,
+  GoabPaginationVariant,
+  Spacing,
+} from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   imports: [GoabPagination],
   template: `
-  <goab-pagination [itemCount]="itemCount"
-                    [pageNumber]="pageNumber"
-                    [perPageCount]="perPageCount"
-                    [variant]="variant"
-                    [mt]="mt"
-                    [mb]="mb"
-                    [ml]="ml"
-                    [mr]="mr"
-                    (onChange)="onChange($event)">
-  </goab-pagination>
-  `
+    <goab-pagination
+      [itemCount]="itemCount"
+      [pageNumber]="pageNumber"
+      [perPageCount]="perPageCount"
+      [variant]="variant"
+      [mt]="mt"
+      [mb]="mb"
+      [ml]="ml"
+      [mr]="mr"
+      (onChange)="onChange($event)"
+    >
+    </goab-pagination>
+  `,
 })
 class TestPaginationComponent {
   itemCount = 100;
@@ -25,11 +31,13 @@ class TestPaginationComponent {
   perPageCount = 20;
   variant = "all" as GoabPaginationVariant;
   mt = "s" as Spacing;
-  mb = "m"  as Spacing;
-  ml = "l"  as Spacing;
-  mr = "xl"  as Spacing;
+  mb = "m" as Spacing;
+  ml = "l" as Spacing;
+  mr = "xl" as Spacing;
 
-  onChange = (event: GoabPaginationOnChangeDetail) => {/** do nothing **/};
+  onChange = (event: GoabPaginationOnChangeDetail) => {
+    /** do nothing **/
+  };
 }
 
 describe("GoABPagination", () => {
@@ -39,7 +47,7 @@ describe("GoABPagination", () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [GoabPagination, TestPaginationComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestPaginationComponent);
@@ -59,7 +67,7 @@ describe("GoABPagination", () => {
     expect(el.getAttribute("mt")).toBe(component.mt);
     expect(el.getAttribute("mb")).toBe(component.mb);
     expect(el.getAttribute("ml")).toBe(component.ml);
-    expect(el.getAttribute("mr")).toBe( component.mr);
+    expect(el.getAttribute("mr")).toBe(component.mr);
   });
 
   it("should handle the onChange event", () => {

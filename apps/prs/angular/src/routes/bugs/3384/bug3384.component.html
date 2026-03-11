@@ -13,12 +13,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of rows">
+      @for (row of rows; track $index) {
+      <tr>
         <td>{{ row.service }}</td>
         <td>{{ row.status }}</td>
         <td class="Goab-table-number-cell">{{ row.requests }}</td>
         <td>{{ row.updated }}</td>
       </tr>
+      }
     </tbody>
   </goabx-table>
 </goab-block>

@@ -122,8 +122,8 @@ const mdxComponents = { Preview, InfoCard };
     font-style: italic;
     padding: var(--goa-space-l);
     text-align: center;
-    background: var(--goa-color-background-light);
-    border-radius: var(--goa-radius-m);
+    background: var(--goa-color-greyscale-100);
+    border-radius: var(--goa-border-radius-m);
   }
 
   .guidance-content {
@@ -141,7 +141,7 @@ const mdxComponents = { Preview, InfoCard };
   .guidance-content :global(code) {
     background: rgba(0, 0, 0, 0.06);
     padding: 0.1em 0.3em;
-    border-radius: 3px;
+    border-radius: var(--goa-border-radius-xs);
     font-size: 0.85em;
   }
 </style>

@@ -1,0 +1,86 @@
+---
+/**
+ * Get Support
+ *
+ * Contact info, issue reporting, Slack channels, drop-in hours,
+ * and design system team members.
+ */
+import DocumentationPageLayout from '../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Get support"
+  description="Get help from the design system team with components, guidelines, best practices, and accessibility."
+  section="parent"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Get support</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Get help from our team with using the design system, including components, guidelines, best
+    practices, and accessibility.
+  </goa-text>
+
+  <h2 id="raise-an-issue">Raise an issue</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Let us know if you find a problem in the design system or if you need a new component or
+    pattern. You can report a bug or request a new feature on GitHub.
+  </goa-text>
+  <goa-button version="2" type="primary" mt="m" mb="m">
+    <a href="https://github.com/GovAlta/ui-components/issues/new/choose" target="_blank" style="text-decoration: none; color: inherit;">Raise an issue on GitHub</a>
+  </goa-button>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="talk-to-us">Talk to us</h2>
+
+  <h3 id="slack">Slack</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9" target="_blank"><strong>#design-system-support</strong></a>
+    &mdash; Reach out to the design system directly to ask a question and get support.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <a href="https://goa-dio.slack.com/archives/C02BQQBKN66" target="_blank"><strong>#figma</strong></a>
+    &mdash; A place for any Figma discussion. Share tips, tricks, techniques, ask questions, report
+    issues.
+  </goa-text>
+
+  <h3 id="drop-in-hours">Drop-in hours</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <strong>Tuesday and Friday, 1:00 &ndash; 3:00 pm MST</strong>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    For product teams to get feedback on their usage of the design system, propose new components or
+    changes to existing components, ask any questions, and give feedback to the design system.
+  </goa-text>
+  <goa-button version="2" type="tertiary" size="compact" mt="m" mb="m">
+    <a href="https://outlook.office365.com/book/BKGDesignsystemdropinhours@abgov.onmicrosoft.com/" target="_blank" style="text-decoration: none; color: inherit;">Book a time</a>
+  </goa-button>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="design-system-team">Design system team</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li><strong>Product owner:</strong> Mark Elamatha</li>
+      <li><strong>Digital architect and Lead developer:</strong> Chris Olsen</li>
+      <li><strong>Scrum master and DevOps:</strong> Dustin Nielsen</li>
+      <li><strong>Developers:</strong> Vanessa Tran, Eric Hoff</li>
+      <li><strong>Designer and Developer:</strong> Thomas Jeffery, Benji Franck</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <goa-callout version="2" type="information" emphasis="low" heading="Need help building a government service?" mb="m">
+    Join design system drop-in hours to:
+    <ul>
+      <li>Get feedback on your service</li>
+      <li>Propose new components or patterns</li>
+      <li>Suggest updates to existing resources</li>
+      <li>Ask questions</li>
+      <li>Share feedback</li>
+    </ul>
+    Drop-in sessions are available to Government of Alberta product teams.
+    <br /><br />
+    <a href="https://outlook.office365.com/book/BKGDesignsystemdropinhours@abgov.onmicrosoft.com/" target="_blank">Book time in drop-in hours</a>
+  </goa-callout>
+</DocumentationPageLayout>

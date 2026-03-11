@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabButton,
   GoabDropdown,
@@ -12,7 +12,7 @@ import {
   standalone: true,
   selector: "abgov-bug3248",
   templateUrl: "./bug3248.component.html",
-  imports: [CommonModule, GoabButton, GoabDropdown, GoabDropdownItem, GoabText],
+  imports: [GoabButton, GoabDropdown, GoabDropdownItem, GoabText],
 })
 export class Bug3248Component {
   colors = ["red", "blue", "green", "yellow", "purple"];

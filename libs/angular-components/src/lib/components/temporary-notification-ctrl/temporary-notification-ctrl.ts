@@ -1,5 +1,10 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, ChangeDetectorRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectorRef,
+} from "@angular/core";
 
 type SnackbarVerticalPosition = "top" | "bottom";
 type SnackbarHorizontalPosition = "left" | "center" | "right";
@@ -8,15 +13,16 @@ type SnackbarHorizontalPosition = "left" | "center" | "right";
   standalone: true,
   selector: "goab-temporary-notification-ctrl",
   template: `
-    <goa-temp-notification-ctrl
-      *ngIf="isReady"
-      [attr.vertical-position]="verticalPosition"
-      [attr.horizontal-position]="horizontalPosition"
-      [attr.testid]="testId"
-    >
-    </goa-temp-notification-ctrl>
+    @if (isReady) {
+      <goa-temp-notification-ctrl
+        [attr.vertical-position]="verticalPosition"
+        [attr.horizontal-position]="horizontalPosition"
+        [attr.testid]="testId"
+      >
+      </goa-temp-notification-ctrl>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTemporaryNotificationCtrl implements OnInit {

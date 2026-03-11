@@ -56,7 +56,12 @@ describe("GoabCheckboxList", () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [TestCheckboxListHostComponent, GoabCheckboxList, GoabCheckbox, ReactiveFormsModule],
+      imports: [
+        TestCheckboxListHostComponent,
+        GoabCheckboxList,
+        GoabCheckbox,
+        ReactiveFormsModule,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 

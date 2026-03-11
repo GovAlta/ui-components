@@ -1,0 +1,49 @@
+<div>
+  <h1>Bug 3450 - Dropdown expanding inside Container</h1>
+
+  <goab-block gap="m" direction="row">
+    <goab-container>
+      <p>The GoabDropdown below should expand outside of the container.</p>
+
+      <goab-form-item label="Basic GoabDropdown">
+        <goab-dropdown placeholder="-- Watch me Expand --">
+          <goab-dropdown-item value="1" label="Option 1"></goab-dropdown-item>
+          <goab-dropdown-item value="2" label="Option 2"></goab-dropdown-item>
+          <goab-dropdown-item value="3" label="Option 3"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+    </goab-container>
+    <goab-container>
+      <p>The GoabDatePicker below should expand outside of the container.</p>
+
+      <goab-form-item label="Basic GoabDatePicker">
+        <goab-date-picker></goab-date-picker>
+      </goab-form-item>
+    </goab-container>
+    <goab-container>
+      <p>Menu Button should open properly also.</p>
+      <goab-menu-button text="Download" (onAction)="onMenuAction($event)">
+        <goab-menu-action text="CSV (Filtered)" action="csv-filtered" />
+        <goab-menu-action text="CSV (All)" action="csv-all" />
+        <goab-menu-action text="JSON (Filtered)" action="json-filtered" />
+        <goab-menu-action text="JSON (All)" action="json-all" />
+      </goab-menu-button>
+    </goab-container>
+  </goab-block>
+
+  <h2>Testing Directions</h2>
+  <p>This is a test of GoabPopover not GoabDropdown or GoabDatePicker.</p>
+  <ul>
+    <li>
+      Open the GoabDropdown and GoabDatePicker and verify that they expand outside of the
+      container.
+    </li>
+    <li>
+      Verify that the GoabDropdown and GoabDatePicker are not cut off by the container.
+    </li>
+    <li>
+      Shrink and expand the window to cause the GoabDropdown and GoabDatePicker to expand
+      upwards instead.
+    </li>
+  </ul>
+</div>

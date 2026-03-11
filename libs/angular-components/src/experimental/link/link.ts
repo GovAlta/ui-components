@@ -11,31 +11,31 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-link",
   template: `
-    <goa-link
-      *ngIf="isReady"
-      [attr.leadingicon]="leadingIcon"
-      [attr.trailingicon]="trailingIcon"
-      [attr.testid]="testId"
-      [attr.action]="action"
-      [attr.color]="color"
-      [attr.size]="size"
-      [attr.action-arg]="actionArg"
-      [attr.action-args]="JSON.stringify(actionArgs)"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-    </goa-link>
+    @if (isReady) {
+      <goa-link
+        [attr.leadingicon]="leadingIcon"
+        [attr.trailingicon]="trailingIcon"
+        [attr.testid]="testId"
+        [attr.action]="action"
+        [attr.color]="color"
+        [attr.size]="size"
+        [attr.action-arg]="actionArg"
+        [attr.action-args]="JSON.stringify(actionArgs)"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-link>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxLink implements OnInit {

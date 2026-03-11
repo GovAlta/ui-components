@@ -9,7 +9,6 @@ import {
 import { GoabxRadioItem } from "../radio-item/radio-item";
 import { fireEvent } from "@testing-library/dom";
 import { By } from "@angular/platform-browser";
-import { CommonModule } from "@angular/common";
 
 interface RadioOption {
   text: string;
@@ -20,7 +19,7 @@ interface RadioOption {
 
 @Component({
   standalone: true,
-  imports: [GoabxRadioGroup, GoabxRadioItem, CommonModule],
+  imports: [GoabxRadioGroup, GoabxRadioItem],
   template: `
     <goabx-radio-group
       [name]="name"
@@ -36,20 +35,23 @@ interface RadioOption {
       [ml]="ml"
       (onChange)="onChange($event)"
     >
-      <goabx-radio-item
-        *ngFor="let option of options"
-        [label]="option.text"
-        [name]="name"
-        [checked]="value === option.value"
-        [value]="option.value"
-        [ariaLabel]="option.text"
-        [description]="option.isDescriptionSlot ? '' : option.description"
-      >
-        {{ option.text }}
-        <div slot="description" *ngIf="option.isDescriptionSlot">
-          {{ option.description }}
-        </div>
-      </goabx-radio-item>
+      @for (option of options; track option.value) {
+        <goabx-radio-item
+          [label]="option.text"
+          [name]="name"
+          [checked]="value === option.value"
+          [value]="option.value"
+          [ariaLabel]="option.text"
+          [description]="option.isDescriptionSlot ? '' : option.description"
+        >
+          {{ option.text }}
+          @if (option.isDescriptionSlot) {
+            <div slot="description">
+              {{ option.description }}
+            </div>
+          }
+        </goabx-radio-item>
+      }
     </goabx-radio-group>
   `,
 })
@@ -180,7 +182,7 @@ describe("GoABRadioGroup", () => {
       }),
     );
 
-    expect(onChange).toBeCalledWith(
+    expect(onChange).toHaveBeenCalledWith(
       expect.objectContaining({
         name: component.name,
         value: component.options[0].value,

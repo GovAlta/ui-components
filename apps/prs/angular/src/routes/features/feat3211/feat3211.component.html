@@ -1,0 +1,59 @@
+<div>
+  <h1>Feature 3211 – Angular v21 Upgrade Tests</h1>
+
+  <div>
+    <h2>Stepper</h2>
+    <goab-form-stepper testid="foo" [step]="step" (onChange)="onChange($event)">
+      <goab-form-step text="Personal details" [status]="status[0]"></goab-form-step>
+      <goab-form-step text="Employment history" [status]="status[1]"></goab-form-step>
+      <goab-form-step text="References" [status]="status[2]"></goab-form-step>
+      <goab-form-step text="Review" [status]="status[3]"></goab-form-step>
+    </goab-form-stepper>
+    <goab-pages [current]="step" mb="3xl">
+      <div>Page 1 content</div>
+      <div>Page 2 content</div>
+      <div>Page 3 content</div>
+      <div>Page 4 content</div>
+    </goab-pages>
+    <goab-button-group>
+      <goab-button (onClick)="setPage(step - 1)" type="secondary">Previous</goab-button>
+      <goab-button (onClick)="setPage(step + 1)" type="primary">Next</goab-button>
+    </goab-button-group>
+  </div>
+
+  <h2>Input Testing</h2>
+  <goab-block direction="column" gap="l" mb="l">
+    <goab-form-item label="Input with leadingContent">
+      <goab-input
+        name="with-leadingContent"
+        placeholder="0.00"
+        leadingContent="$"
+        type="number"
+        textAlign="right"
+        width="20rem"
+      ></goab-input>
+    </goab-form-item>
+    <goab-form-item label="Input with Icons">
+      <goab-input
+        name="standard-input"
+        placeholder="Type here…"
+        [value]="'Hello World'"
+        leadingIcon="search"
+        trailingIcon="close"
+        trailingIconAriaLabel="clear input"
+      ></goab-input
+    ></goab-form-item>
+    <goab-form-item label="Tuition">
+      <goab-input
+        name="tuition"
+        formControlName="tuitionFeeAmount"
+        leadingContent="$"
+      ></goab-input>
+    </goab-form-item>
+    <goab-form-item label="Books/Supplies/Instruments">
+      <goab-input name="book" formControlName="suppliesAmount">
+        <ng-template #leadingContent>$$</ng-template>
+      </goab-input>
+    </goab-form-item>
+  </goab-block>
+</div>

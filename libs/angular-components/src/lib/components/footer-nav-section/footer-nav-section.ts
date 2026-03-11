@@ -5,24 +5,23 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-app-footer-nav-section",
   template: `
-    <goa-app-footer-nav-section
-      *ngIf="isReady"
-      [attr.maxcolumncount]="maxColumnCount"
-      [attr.heading]="heading"
-      [attr.testid]="testId"
-    >
-      <ng-content />
-    </goa-app-footer-nav-section>
+    @if (isReady) {
+      <goa-app-footer-nav-section
+        [attr.maxcolumncount]="maxColumnCount"
+        [attr.heading]="heading"
+        [attr.testid]="testId"
+      >
+        <ng-content />
+      </goa-app-footer-nav-section>
+    }
   `,
   styles: [":host { width: 100%; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabAppFooterNavSection implements OnInit {
   @Input() heading?: string;

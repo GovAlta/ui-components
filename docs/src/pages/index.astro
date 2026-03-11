@@ -21,6 +21,20 @@ import CardLite from '../components/CardLite.astro';
         <p class="hero-description">
           Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.
         </p>
+        <button class="hero-search-trigger" onclick="window.dispatchEvent(new CustomEvent('goa-search-open'))">
+          <svg class="hero-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <span>Search components and examples...</span>
+          <kbd class="search-shortcut">⌘K</kbd>
+        </button>
+        <script>
+          const isMac = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+          document.querySelectorAll('.search-shortcut').forEach(el => {
+            el.textContent = isMac ? '⌘K' : 'Ctrl K';
+          });
+        </script>
       </div>
     </div>
   </div>
@@ -35,12 +49,9 @@ import CardLite from '../components/CardLite.astro';
         <p>
           Our accessible, brand-compliant components and templates help you launch faster while staying aligned with the current standard.
         </p>
-        <a href="/get-started" class="cta-link">
-          Start using the design system
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6"/>
-          </svg>
-        </a>
+        <goa-link version="2" trailingicon="arrow-forward">
+          <a href="/get-started">Start using the design system</a>
+        </goa-link>
       </div>
       <div class="cta-image">
         <img src="/images/home/splash-reel.png" alt="" />
@@ -54,13 +65,13 @@ import CardLite from '../components/CardLite.astro';
         imageUrl="/images/home/public-form-thumb.png"
         title="Public form"
         description="A pattern optimized for clarity and error prevention for public-facing applications. It includes templates for page types: Start, Task list, Question, Review, and Result."
-        linkTo="/examples"
+        linkTo="/examples?userType=citizen"
       />
       <CardLite
         imageUrl="/images/home/workspace-thumb.png"
         title="Workspace"
         description="A pattern optimized for efficiently managing cases, records, and tasks. It includes layout, multiple data views, detail views, drawers, modals and notifications."
-        linkTo="/examples"
+        linkTo="/examples?userType=worker"
       />
     </div>
 
@@ -71,22 +82,16 @@ import CardLite from '../components/CardLite.astro';
     </p>
     <div class="card-grid three-col">
       <CardLite
-        imageUrl="/images/home/primary-users-thumb.png"
         title="Card sort"
         description="Understand how users naturally group and label information in your service. Does your team share a mental model with your users?"
-        linkTo="/guidance"
       />
       <CardLite
-        imageUrl="/images/home/storyboard-thumb.png"
         title="Test form content"
         description="Turn your form designs into coded prototypes and test them with users rapidly. Are you asking the right questions to collect the information you need?"
-        linkTo="/guidance"
       />
       <CardLite
-        imageUrl="/images/home/main-pages-thumb.png"
         title="Time on task"
         description="Measure how long it takes users to complete key tasks in your service. Are your users working efficiently or struggling?"
-        linkTo="/guidance"
       />
     </div>
 
@@ -100,19 +105,19 @@ import CardLite from '../components/CardLite.astro';
         imageUrl="/images/home/primary-users-thumb.png"
         title="Identify the primary users and their main tasks"
         description="Share the primary users and their main tasks in your digital service. Do you know your users?"
-        linkTo="/guidance"
+        linkTo="https://forms.cloud.microsoft/r/qz8XKnbcsE"
       />
       <CardLite
         imageUrl="/images/home/storyboard-thumb.png"
         title="Identify the main pages"
         description="Share the most used pages from your digital service. What page or pages define your service?"
-        linkTo="/guidance"
+        linkTo="https://forms.cloud.microsoft/r/aq7SCVtEg8"
       />
       <CardLite
         imageUrl="/images/home/main-pages-thumb.png"
         title="Create a short storyboard"
         description="You can only use 3 pages from your product to make a storyboard of your digital service, what do you show?"
-        linkTo="/guidance"
+        linkTo="https://forms.cloud.microsoft/r/vbhkWQnTyP"
       />
     </div>
     </div>
@@ -168,9 +173,63 @@ import CardLite from '../components/CardLite.astro';
     max-width: 550px;
   }
 
+  /* Hero Search Trigger */
+  .hero-search-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--goa-space-s);
+    width: 100%;
+    max-width: 500px;
+    margin-top: var(--goa-space-xl);
+    padding: var(--goa-space-s) var(--goa-space-m);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--goa-color-greyscale-300);
+    border-radius: var(--goa-border-radius-m);
+    font: var(--goa-typography-body-m);
+    cursor: pointer;
+    color: var(--goa-color-text-secondary);
+    text-align: left;
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .hero-search-trigger:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--goa-color-greyscale-black);
+    box-shadow: inset 0 0 0 1px var(--goa-color-greyscale-black);
+  }
+
+  .hero-search-trigger:focus-visible {
+    outline: 3px solid var(--goa-color-interactive-focus);
+    outline-offset: 2px;
+  }
+
+  .hero-search-icon {
+    flex-shrink: 0;
+    color: var(--goa-color-text-secondary);
+  }
+
+  .hero-search-trigger span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hero-search-trigger kbd {
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: var(--goa-space-2xs) var(--goa-space-xs);
+    background: var(--goa-color-greyscale-100);
+    border: 1px solid var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-s);
+    color: var(--goa-color-greyscale-800);
+  }
+
   /* Main Content - White background */
   .ds-main-content {
-    background: white;
+    background: var(--goa-color-greyscale-white);
     padding: var(--goa-space-4xl) var(--goa-space-m);
   }
 
@@ -204,19 +263,6 @@ import CardLite from '../components/CardLite.astro';
     font: var(--goa-typography-body-m);
     color: var(--goa-color-text-secondary);
     margin: 0 0 var(--goa-space-m);
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--goa-space-2xs);
-    color: var(--goa-color-interactive-default);
-    font: var(--goa-typography-body-m);
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    text-decoration: underline;
   }
 
   .cta-image {
@@ -288,6 +334,12 @@ import CardLite from '../components/CardLite.astro';
       max-width: 100%;
     }
 
+    .hero-search-trigger {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .ds-main-content {
       padding: var(--goa-space-3xl) var(--goa-space-m);
     }
@@ -323,7 +375,7 @@ import CardLite from '../components/CardLite.astro';
       min-height: 515px;
       display: flex;
       flex-direction: column;
-      border-radius: 0;
+      border-radius: var(--goa-border-radius-none);
       padding: 0 var(--goa-space-xs);
       /* Extra top padding to account for header overlay (~73px) */
       padding-top: 73px;
@@ -338,6 +390,17 @@ import CardLite from '../components/CardLite.astro';
 
     .hero-image {
       max-width: 200px;
+    }
+
+    .hero-search-trigger {
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: var(--goa-space-xl);
+    }
+
+    .hero-search-trigger kbd {
+      display: none;
     }
 
     .ds-main-content {

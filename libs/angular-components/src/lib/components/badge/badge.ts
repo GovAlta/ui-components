@@ -7,30 +7,30 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-badge",
   template: `
-    <goa-badge
-      *ngIf="isReady"
-      [attr.type]="type"
-      [attr.icon]="icon ? 'true' : 'false'"
-      [attr.icontype]="iconType"
-      [attr.arialabel]="ariaLabel"
-      [attr.content]="content"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-    </goa-badge>
+    @if (isReady) {
+      <goa-badge
+        [attr.type]="type"
+        [attr.icon]="icon ? 'true' : 'false'"
+        [attr.icontype]="iconType"
+        [attr.arialabel]="ariaLabel"
+        [attr.content]="content"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+      </goa-badge>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
+
   styles: [
     `
       :host {

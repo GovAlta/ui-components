@@ -1,0 +1,27 @@
+<div>
+  <h2>Bug 3273: Keep side menu group open</h2>
+  <p>This page tests a nested side menu group.</p>
+
+  <h4>Scenario one</h4>
+  <p>
+    When you open the Child Group,
+    <br />
+    And you select the Child Item,
+    <br />
+    Then the Child Group will be open,
+    <br />
+    And the Parent Group will be open.
+  </p>
+
+  <div style="max-width: 300px; margin-top: 24px">
+    <goab-side-menu>
+      <goab-side-menu-group heading="Parent Group">
+        <a href="/bugs/3273">Parent Item</a>
+
+        <goab-side-menu-group heading="Child Group">
+          <a href="/bugs/3273-2">Child Item</a>
+        </goab-side-menu-group>
+      </goab-side-menu-group>
+    </goab-side-menu>
+  </div>
+</div>

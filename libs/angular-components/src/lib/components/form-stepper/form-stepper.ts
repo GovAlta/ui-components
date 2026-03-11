@@ -8,27 +8,27 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-form-stepper",
   template: `
-    <goa-form-stepper
-      *ngIf="isReady"
-      [attr.step]="step"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_change)="_onChange($event)"
-    >
-      <ng-content />
-    </goa-form-stepper>
+    @if (isReady) {
+      <goa-form-stepper
+        [attr.step]="step"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        (_change)="_onChange($event)"
+      >
+        <ng-content />
+      </goa-form-stepper>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormStepper extends GoabBaseComponent implements OnInit {

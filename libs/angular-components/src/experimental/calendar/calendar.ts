@@ -8,30 +8,31 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goabx-calendar",
-  imports: [CommonModule],
+
   template: `
-    <goa-calendar
-      *ngIf="isReady"
-      [attr.name]="name"
-      [value]="value"
-      [attr.min]="min"
-      [attr.max]="max"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      [attr.version]="version"
-      (_change)="_onChange($event)"
-    >
-      <ng-content />
-    </goa-calendar>
+    @if (isReady) {
+      <goa-calendar
+        [attr.name]="name"
+        [value]="value"
+        [attr.min]="min"
+        [attr.max]="max"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        [attr.version]="version"
+        (_change)="_onChange($event)"
+      >
+        <ng-content />
+      </goa-calendar>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

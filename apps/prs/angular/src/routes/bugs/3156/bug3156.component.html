@@ -1,5 +1,7 @@
 <goab-block class="bug3156" direction="column" gap="xl">
-  <goab-text size="heading-l">Bug 3156 &mdash; January disappears in Angular dropdowns</goab-text>
+  <goab-text size="heading-l"
+    >Bug 3156 &mdash; January disappears in Angular dropdowns</goab-text
+  >
 
   <goab-text size="body-m">
     The Calendar hotfix relies on every <code>goa-dropdown-item</code> emitting its
@@ -11,9 +13,13 @@
   <section>
     <goab-text size="heading-m" mb="s">Reproduction checklist</goab-text>
     <ol class="bug3156__steps">
-      <li>Open the dropdown below &mdash; with the regression the first entry renders blank.</li>
+      <li>
+        Open the dropdown below &mdash; with the regression the first entry renders blank.
+      </li>
       <li>Attempt to pick January &mdash; there is nothing to select.</li>
-      <li>Inspect the diagnostics table &mdash; the first mount event carries empty data.</li>
+      <li>
+        Inspect the diagnostics table &mdash; the first mount event carries empty data.
+      </li>
     </ol>
   </section>
 
@@ -23,12 +29,10 @@
   >
     <div #dropdownHost>
       <goab-dropdown name="calendar-month" (onChange)="onDropdownChange($event)">
-        <goab-dropdown-item
-          *ngFor="let month of months; trackBy: trackByValue"
-          [label]="month.label"
-          [value]="month.value"
-        >
-        </goab-dropdown-item>
+        @for (month of months; track month.value) {
+          <goab-dropdown-item [label]="month.label" [value]="month.value">
+          </goab-dropdown-item>
+        }
       </goab-dropdown>
     </div>
   </goab-form-item>
@@ -46,7 +50,7 @@
     </goab-text>
 
     <goab-form-item
-      label="DatePicker &mdash; type=&quot;calendar&quot;"
+      label='DatePicker &mdash; type="calendar"'
       helpText="Open the month selector to ensure January is present."
     >
       <goab-date-picker
@@ -64,32 +68,37 @@
   <section class="bug3156__diagnostics">
     <goab-text size="heading-m" mb="s">Captured dropdown-item:mounted events</goab-text>
 
-    <p *ngIf="mountedItems.length === 0" class="bug3156__empty">
-      Open the dropdown above to log the mount events.
-    </p>
+    @if (mountedItems.length === 0) {
+      <p class="bug3156__empty">Open the dropdown above to log the mount events.</p>
+    }
 
-    <table *ngIf="mountedItems.length > 0">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Label</th>
-          <th scope="col">Value</th>
-          <th scope="col">Mount type</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of mountedItems; index as index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ item.label }}</td>
-          <td>{{ item.value }}</td>
-          <td>{{ item.mountType }}</td>
-        </tr>
-      </tbody>
-    </table>
+    @if (mountedItems.length > 0) {
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Label</th>
+            <th scope="col">Value</th>
+            <th scope="col">Mount type</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of mountedItems; track item.value; let index = $index) {
+            <tr>
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.label }}</td>
+              <td>{{ item.value }}</td>
+              <td>{{ item.mountType }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
 
     <goab-text size="body-s" mt="s">
-      Expected: January appears as row 1 with value "0". Regression: the row reads "(empty)",
-      so the dropdown never registers January and the Calendar regression remains.
+      Expected: January appears as row 1 with value "0". Regression: the row reads
+      "(empty)", so the dropdown never registers January and the Calendar regression
+      remains.
     </goab-text>
   </section>
 </goab-block>

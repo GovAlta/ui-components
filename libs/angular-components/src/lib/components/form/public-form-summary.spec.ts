@@ -7,9 +7,7 @@ import { By } from "@angular/platform-browser";
   standalone: true,
   imports: [GoabPublicFormSummary],
   template: `
-    <goab-public-form-summary
-      [heading]="heading"
-    >
+    <goab-public-form-summary [heading]="heading">
       <div data-testid="content">Test content</div>
     </goab-public-form-summary>
   `,
@@ -35,7 +33,9 @@ describe("GoabPublicFormSummary", () => {
   it("should render with properties", () => {
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(By.css("goa-public-form-summary")).nativeElement;
+    const el = fixture.debugElement.query(
+      By.css("goa-public-form-summary"),
+    ).nativeElement;
 
     expect(el?.getAttribute("heading")).toBe(component.heading);
 

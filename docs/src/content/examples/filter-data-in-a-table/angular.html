@@ -1,57 +1,66 @@
 <goabx-form-item id="filterChipInput" [error]="inputError" mb="m">
-    <goab-block gap="xs" direction="row" alignment="start" width="100%">
-      <div style="flex: 1;">
-        <goabx-input
-          name="filterChipInput"
-          aria-labelledby="filterChipInput"
-          [value]="inputValue"
-          leadingIcon="search"
-          width="100%"
-          (onChange)="handleInputChange($event)"
-          (onKeyPress)="handleInputKeyPress($event)">
-        </goabx-input>
-      </div>
-      <goabx-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
-        Filter
-      </goabx-button>
-    </goab-block>
-  </goabx-form-item>
-
-  <ng-container *ngIf="typedChips.length > 0">
-    <goab-text tag="span" color="secondary" mb="xs" mr="xs">
-      Filter:
-    </goab-text>
-    <goabx-filter-chip
-      *ngFor="let typedChip of typedChips; let index = index"
-      [content]="typedChip"
-      mb="xs"
-      mr="xs"
-      (onClick)="removeTypedChip(typedChip)">
-    </goabx-filter-chip>
-    <goabx-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
-      Clear all
+  <goab-block gap="xs" direction="row" alignment="start" width="100%">
+    <div style="flex: 1">
+      <goabx-input
+        name="filterChipInput"
+        aria-labelledby="filterChipInput"
+        [value]="inputValue"
+        leadingIcon="search"
+        width="100%"
+        (onChange)="handleInputChange($event)"
+        (onKeyPress)="handleInputKeyPress($event)"
+      >
+      </goabx-input>
+    </div>
+    <goabx-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
+      Filter
     </goabx-button>
-  </ng-container>
+  </goab-block>
+</goabx-form-item>
 
-  <goabx-table width="full">
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th>Name</th>
-        <th class="goa-table-number-header">ID Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of dataFiltered">
-        <td>
-          <goabx-badge [type]="item.status.type" [content]="item.status.text" [icon]="false"></goabx-badge>
-        </td>
-        <td>{{ item.name }}</td>
-        <td class="goa-table-number-column">{{ item.id }}</td>
-      </tr>
-    </tbody>
-  </goabx-table>
+@if (typedChips.length > 0) {
+<ng-container>
+  <goab-text tag="span" color="secondary" mb="xs" mr="xs"> Filter: </goab-text>
+  @for (typedChip of typedChips; track typedChip; let index = $index) {
+  <goabx-filter-chip
+    [content]="typedChip"
+    mb="xs"
+    mr="xs"
+    (onClick)="removeTypedChip(typedChip)"
+  >
+  </goabx-filter-chip>
+  }
+  <goabx-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
+    Clear all
+  </goabx-button>
+</ng-container>
+}
 
-<goab-block mt="l" mb="l" *ngIf="dataFiltered.length === 0 && data.length > 0">
-  No results found
-</goab-block>
+<goabx-table width="full">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th class="goa-table-number-header">ID Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of dataFiltered; track $index) {
+    <tr>
+      <td>
+        <goabx-badge
+          [type]="item.status.type"
+          [content]="item.status.text"
+          [icon]="false"
+        ></goabx-badge>
+      </td>
+      <td>{{ item.name }}</td>
+      <td class="goa-table-number-column">{{ item.id }}</td>
+    </tr>
+    }
+  </tbody>
+</goabx-table>
+
+@if (dataFiltered.length === 0 && data.length > 0) {
+<goab-block mt="l" mb="l"> No results found </goab-block>
+}

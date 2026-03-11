@@ -14,34 +14,35 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { CommonModule } from "@angular/common";
+
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-radio-group",
   template: `
-    <goa-radio-group
-      #goaComponentRef
-      *ngIf="isReady"
-      [attr.name]="name"
-      [attr.value]="value"
-      [disabled]="disabled"
-      [attr.orientation]="orientation"
-      [attr.error]="error"
-      [attr.arialabel]="ariaLabel"
-      [id]="id"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_change)="_onChange($event)"
-    >
-      <ng-content />
-    </goa-radio-group>
+    @if (isReady) {
+      <goa-radio-group
+        #goaComponentRef
+        [attr.name]="name"
+        [attr.value]="value"
+        [disabled]="disabled"
+        [attr.orientation]="orientation"
+        [attr.error]="error"
+        [attr.arialabel]="ariaLabel"
+        [id]="id"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        (_change)="_onChange($event)"
+      >
+        <ng-content />
+      </goa-radio-group>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
@@ -74,7 +75,10 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   @Output() onChange = new EventEmitter<GoabRadioGroupOnChangeDetail>();
 
   _onChange(e: Event) {
-    const detail = { ...(e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail, event: e };
+    const detail = {
+      ...(e as CustomEvent<GoabRadioGroupOnChangeDetail>).detail,
+      event: e,
+    };
     this.markAsTouched();
     this.onChange.emit(detail);
 

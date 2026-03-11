@@ -5,22 +5,18 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-card-image",
   template: `
-    <goa-card-image
-      *ngIf="isReady"
-      [attr.src]="src"
-      [attr.height]="height"
-    >
-      <ng-content />
-    </goa-card-image>
+    @if (isReady) {
+      <goa-card-image [attr.src]="src" [attr.height]="height">
+        <ng-content />
+      </goa-card-image>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabCardImage implements OnInit {
   @Input({ required: true }) src!: string;

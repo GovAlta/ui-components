@@ -121,31 +121,29 @@
 
     <section>
       <goab-text tag="h2">Tab Change Event Log</goab-text>
-      <div
-        *ngIf="tabChangeLog.length > 0; else noLogs"
-        style="
-          border: 1px solid #ccc;
-          padding: 1rem;
-          background-color: #f9f9f9;
-          max-height: 300px;
-          overflow-y: auto;
-        "
-      >
+      @if (tabChangeLog.length > 0) {
         <div
-          *ngFor="let log of tabChangeLog; trackBy: trackByIndex"
-          style="margin-bottom: 0.5rem; font-family: monospace"
+          style="
+            border: 1px solid #ccc;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            max-height: 300px;
+            overflow-y: auto;
+          "
         >
-          {{ log }}
+          @for (log of tabChangeLog; track $index) {
+            <div style="margin-bottom: 0.5rem; font-family: monospace">
+              {{ log }}
+            </div>
+          }
         </div>
-      </div>
-
-      <ng-template #noLogs>
+      } @else {
         <div style="font-style: italic; color: #666">
           <goab-text tag="p">
             No tab change events yet. Try changing tabs or using the test controls above.
           </goab-text>
         </div>
-      </ng-template>
+      }
     </section>
 
     <section>

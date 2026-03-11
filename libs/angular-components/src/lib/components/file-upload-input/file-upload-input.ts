@@ -11,28 +11,28 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-file-upload-input",
-  template: `<goa-file-upload-input
-    *ngIf="isReady"
-    [attr.variant]="variant"
-    [attr.accept]="accept"
-    [attr.maxfilesize]="maxFileSize"
-    [attr.testid]="testId"
-    [id]="id"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.mr]="mr"
-    [attr.ml]="ml"
-    (_selectFile)="_onSelectFile($event)"
-  >
-  </goa-file-upload-input>`,
+  template: `@if (isReady) {
+    <goa-file-upload-input
+      [attr.variant]="variant"
+      [attr.accept]="accept"
+      [attr.maxfilesize]="maxFileSize"
+      [attr.testid]="testId"
+      [id]="id"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.mr]="mr"
+      [attr.ml]="ml"
+      (_selectFile)="_onSelectFile($event)"
+    >
+    </goa-file-upload-input>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
   @Input() id?: string = "";
@@ -58,7 +58,10 @@ export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
   }
 
   _onSelectFile(e: Event) {
-    const detail = { ...(e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail, event: e };
+    const detail = {
+      ...(e as CustomEvent<GoabFileUploadInputOnSelectFileDetail>).detail,
+      event: e,
+    };
     this.onSelectFile.emit(detail);
   }
 }

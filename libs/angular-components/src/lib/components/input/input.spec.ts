@@ -222,8 +222,12 @@ describe("GoABInput", () => {
       new CustomEvent("_change", { detail: { name: "foo", value: "new value" } }),
     );
 
-    expect(validateOnChange).toBeCalledWith(
-      expect.objectContaining({ name: "foo", value: "new value", event: expect.any(Event) }),
+    expect(validateOnChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: "foo",
+        value: "new value",
+        event: expect.any(Event),
+      }),
     );
   });
 
@@ -234,7 +238,7 @@ describe("GoABInput", () => {
 
     fireEvent(input, new CustomEvent("_focus"));
 
-    expect(validateOnFocus).toBeCalled();
+    expect(validateOnFocus).toHaveBeenCalled();
   });
 
   it("should handle onBlur event", () => {
@@ -244,7 +248,7 @@ describe("GoABInput", () => {
 
     fireEvent(input, new CustomEvent("_blur"));
 
-    expect(validateOnBlur).toBeCalled();
+    expect(validateOnBlur).toHaveBeenCalled();
   });
 
   it("should handle onKeyPress event", () => {
@@ -254,7 +258,7 @@ describe("GoABInput", () => {
 
     fireEvent(input, new CustomEvent("_keyPress"));
 
-    expect(validateOnKeyPress).toBeCalled();
+    expect(validateOnKeyPress).toHaveBeenCalled();
   });
 
   it("should render leading and trailing content", () => {
@@ -271,7 +275,9 @@ describe("GoABInput", () => {
 
   describe("writeValue", () => {
     it("should set value attribute when writeValue is called", () => {
-      const inputComponent = fixture.debugElement.query(By.css("goab-input")).componentInstance;
+      const inputComponent = fixture.debugElement.query(
+        By.css("goab-input"),
+      ).componentInstance;
       const inputElement = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
       inputComponent.writeValue("new value");
@@ -282,7 +288,9 @@ describe("GoABInput", () => {
     });
 
     it("should set value attribute to empty string when writeValue is called with null or empty", () => {
-      const inputComponent = fixture.debugElement.query(By.css("goab-input")).componentInstance;
+      const inputComponent = fixture.debugElement.query(
+        By.css("goab-input"),
+      ).componentInstance;
       const inputElement = fixture.debugElement.query(By.css("goa-input")).nativeElement;
 
       // First set a value
@@ -305,7 +313,9 @@ describe("GoABInput", () => {
     });
 
     it("should update component value property", () => {
-      const inputComponent = fixture.debugElement.query(By.css("goab-input")).componentInstance;
+      const inputComponent = fixture.debugElement.query(
+        By.css("goab-input"),
+      ).componentInstance;
 
       inputComponent.writeValue("updated");
       expect(inputComponent.value).toBe("updated");

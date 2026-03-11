@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabButton,
   GoabIconButton,
@@ -11,7 +11,7 @@ import {
   standalone: true,
   selector: "abgov-bug2839",
   templateUrl: "./bug2839.component.html",
-  imports: [CommonModule, GoabButton, GoabIconButton, GoabButtonGroup, GoabBlock],
+  imports: [GoabButton, GoabIconButton, GoabButtonGroup, GoabBlock],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Bug2839Component {

@@ -7,9 +7,12 @@ import { GoabBadge } from "../badge/badge";
   standalone: true,
   imports: [GoabSideMenuHeading, GoabBadge],
   template: `
-  <goab-side-menu-heading icon="home" testId="foo" [meta]="meta">Heading
-    <ng-template #meta><goab-badge type="dark" content="details"></goab-badge></ng-template>
-  </goab-side-menu-heading>
+    <goab-side-menu-heading icon="home" testId="foo" [meta]="meta"
+      >Heading
+      <ng-template #meta
+        ><goab-badge type="dark" content="details"></goab-badge
+      ></ng-template>
+    </goab-side-menu-heading>
   `,
 })
 class TestSideMenuHeadingComponent {
@@ -21,7 +24,7 @@ describe("GoABSideMenuHeading", () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [GoabSideMenuHeading, GoabBadge, TestSideMenuHeadingComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestSideMenuHeadingComponent);
@@ -36,5 +39,5 @@ describe("GoABSideMenuHeading", () => {
     expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.textContent).toContain("Heading");
     expect(el?.querySelector("[slot='meta']")?.innerHTML).toContain("details");
-  })
-})
+  });
+});

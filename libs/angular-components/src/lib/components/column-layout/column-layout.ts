@@ -4,18 +4,18 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-column-layout",
   template: `
-    <goa-one-column-layout *ngIf="isReady">
-      <ng-content />
-    </goa-one-column-layout>
+    @if (isReady) {
+      <goa-one-column-layout>
+        <ng-content />
+      </goa-one-column-layout>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabColumnLayout implements OnInit {
   /** no props **/

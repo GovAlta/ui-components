@@ -76,6 +76,6 @@ describe("GoABFormStepper", () => {
 
     fireEvent(el, new CustomEvent("_change"));
 
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 });

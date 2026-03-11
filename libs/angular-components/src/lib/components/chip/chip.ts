@@ -13,30 +13,31 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-chip",
-  imports: [CommonModule],
-  template: `<goa-chip
-    *ngIf="isReady"
-    [attr.leadingicon]="leadingIcon"
-    [attr.variant]="variant"
-    [attr.error]="error"
-    [attr.deletable]="deletable"
-    [attr.icontheme]="iconTheme"
-    [attr.content]="content"
-    [attr.testid]="testId"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    [attr.mr]="mr"
-    (_click)="_onClick()"
-  >
-    <ng-content />
-  </goa-chip>`,
+
+  template: `@if (isReady) {
+    <goa-chip
+      [attr.leadingicon]="leadingIcon"
+      [attr.variant]="variant"
+      [attr.error]="error"
+      [attr.deletable]="deletable"
+      [attr.icontheme]="iconTheme"
+      [attr.content]="content"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+      (_click)="_onClick()"
+    >
+      <ng-content />
+    </goa-chip>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabChip extends GoabBaseComponent implements OnInit {

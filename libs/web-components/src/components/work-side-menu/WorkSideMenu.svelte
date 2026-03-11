@@ -17,7 +17,7 @@
 
 <script lang="ts">
   import { dispatch, performOnce } from "../../common/utils";
-  import { getMatchedLink, isUrlMatch } from "../../common/urls";
+  import { getMatchedLink } from "../../common/urls";
   import { onMount, onDestroy, tick } from "svelte";
 
   // ******
@@ -80,7 +80,6 @@
   onMount(async () => {
     await tick();
     addEventListeners();
-    watchPathChanges(setCurrentUrl);
     observer = watchPathChanges(setCurrentUrl);
 
     _themeObserver = new MutationObserver(() => {
@@ -131,7 +130,7 @@
       _menuLinks = [..._menuLinks, link];
     }
 
-    performOnce(
+    _bindTimeoutId = performOnce(
       _bindTimeoutId,
       () => {
         setCurrentUrl();
@@ -253,7 +252,7 @@
   function watchPathChanges(action: () => void): MutationObserver {
     let currentLocation = document.location.href;
     const observer = new MutationObserver((_mutationList) => {
-      if (isUrlMatch(document.location, currentLocation)) {
+      if (currentLocation !== document.location.href) {
         currentLocation = document.location.href;
         action();
       }

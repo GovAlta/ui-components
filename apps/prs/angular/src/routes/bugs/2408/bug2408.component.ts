@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabFormStepper,
   GoabFormStep,
@@ -13,7 +13,7 @@ import {
   standalone: true,
   selector: "abgov-bug2408",
   templateUrl: "./bug2408.component.html",
-  imports: [CommonModule, GoabFormStepper, GoabFormStep, GoabBlock, GoabText, GoabButton],
+  imports: [GoabFormStepper, GoabFormStep, GoabBlock, GoabText, GoabButton],
 })
 export class Bug2408Component {
   currentStep = 1;

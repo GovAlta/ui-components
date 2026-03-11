@@ -9,32 +9,33 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule, NgTemplateOutlet } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 @Component({
   standalone: true,
   selector: "goabx-work-side-menu", // eslint-disable-line
-  imports: [NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
-    <goa-work-side-menu
-      *ngIf="isReady"
-      [open]="open ?? false"
-      [attr.heading]="heading"
-      [attr.url]="url"
-      [attr.user-name]="userName"
-      [attr.user-secondary-text]="userSecondaryText"
-      [attr.testid]="testId"
-      (_toggle)="_onToggle()"
-    >
-      <div slot="primary">
-        <ng-container [ngTemplateOutlet]="primaryContent"></ng-container>
-      </div>
-      <div slot="secondary">
-        <ng-container [ngTemplateOutlet]="secondaryContent"></ng-container>
-      </div>
-      <div slot="account">
-        <ng-container [ngTemplateOutlet]="accountContent"></ng-container>
-      </div>
-    </goa-work-side-menu>
+    @if (isReady) {
+      <goa-work-side-menu
+        [open]="open ?? false"
+        [attr.heading]="heading"
+        [attr.url]="url"
+        [attr.user-name]="userName"
+        [attr.user-secondary-text]="userSecondaryText"
+        [attr.testid]="testId"
+        (_toggle)="_onToggle()"
+      >
+        <div slot="primary">
+          <ng-container [ngTemplateOutlet]="primaryContent"></ng-container>
+        </div>
+        <div slot="secondary">
+          <ng-container [ngTemplateOutlet]="secondaryContent"></ng-container>
+        </div>
+        <div slot="account">
+          <ng-container [ngTemplateOutlet]="accountContent"></ng-container>
+        </div>
+      </goa-work-side-menu>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

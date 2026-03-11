@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabBadge,
@@ -113,7 +112,6 @@ const scenarios: {
   selector: "abgov-feat1383",
   templateUrl: "./feat1383.component.html",
   imports: [
-    CommonModule,
     GoabText,
     GoabGrid,
     GoabBlock,

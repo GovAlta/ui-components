@@ -5,10 +5,7 @@ import {
   HostListener,
   Renderer2,
 } from "@angular/core";
-import {
-  CheckboxControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-} from "@angular/forms";
+import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 // @deprecated: Use the new <goab-checkbox .. /> component
 @Directive({
@@ -26,10 +23,17 @@ export class CheckedDirective extends CheckboxControlValueAccessor {
   private _checked = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  override onChange: any = () => {/** No implementation **/ };
-  override onTouched: any = () => {/** No implementation **/ };
+  override onChange: any = () => {
+    /** No implementation **/
+  };
+  override onTouched: any = () => {
+    /** No implementation **/
+  };
 
-  constructor(protected renderer: Renderer2, protected elementRef: ElementRef) {
+  constructor(
+    protected renderer: Renderer2,
+    protected elementRef: ElementRef,
+  ) {
     super(renderer, elementRef);
   }
 
@@ -56,8 +60,9 @@ export class CheckedDirective extends CheckboxControlValueAccessor {
     this.onTouched = fn;
   }
 
-  @HostListener("_change", ["$event.detail.checked"])
-  listenForValueChange(checked: any) {
+  @HostListener("_change", ["$event"])
+  listenForValueChange(event: Event) {
+    const checked = (event as CustomEvent<{ checked: boolean }>).detail.checked;
     this.value = checked;
   }
 }

@@ -14,3 +14,30 @@ console.error = (...params) => {
     originalConsoleError(...params);
   }
 };
+
+// jsdom does not implement the HTML Popover API yet.
+if (!HTMLElement.prototype.showPopover) {
+  Object.defineProperty(HTMLElement.prototype, "showPopover", {
+    configurable: true,
+    writable: true,
+    value() {
+      this.setAttribute("data-popover-open", "true");
+      this.dispatchEvent(
+        Object.assign(new Event("toggle"), { newState: "open", oldState: "closed" }),
+      );
+    },
+  });
+}
+
+if (!HTMLElement.prototype.hidePopover) {
+  Object.defineProperty(HTMLElement.prototype, "hidePopover", {
+    configurable: true,
+    writable: true,
+    value() {
+      this.removeAttribute("data-popover-open");
+      this.dispatchEvent(
+        Object.assign(new Event("toggle"), { newState: "closed", oldState: "open" }),
+      );
+    },
+  });
+}

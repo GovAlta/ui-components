@@ -9,36 +9,36 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-form-item",
   template: `
-    <goa-form-item
-      *ngIf="isReady"
-      [attr.label]="label"
-      [attr.labelsize]="labelSize"
-      [attr.helptext]="helpText"
-      [attr.error]="error"
-      [attr.testid]="testId"
-      [id]="id"
-      [attr.name]="name"
-      [attr.requirement]="requirement"
-      [attr.maxwidth]="maxWidth"
-      [attr.public-form-summary-order]="publicFormSummaryOrder"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.mr]="mr"
-      [attr.ml]="ml"
-    >
-      <ng-content />
-      <ng-content select="goab-form-item-slot"></ng-content>
-    </goa-form-item>
+    @if (isReady) {
+      <goa-form-item
+        [attr.label]="label"
+        [attr.labelsize]="labelSize"
+        [attr.helptext]="helpText"
+        [attr.error]="error"
+        [attr.testid]="testId"
+        [id]="id"
+        [attr.name]="name"
+        [attr.requirement]="requirement"
+        [attr.maxwidth]="maxWidth"
+        [attr.public-form-summary-order]="publicFormSummaryOrder"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.mr]="mr"
+        [attr.ml]="ml"
+      >
+        <ng-content />
+        <ng-content select="goab-form-item-slot"></ng-content>
+      </goa-form-item>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabFormItem extends GoabBaseComponent implements OnInit {
   @Input() label?: string;

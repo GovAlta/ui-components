@@ -12,13 +12,11 @@ describe("GoabxTable", () => {
   });
 
   it("should render with properties", () => {
-    const { baseElement } = render(<GoabxTable stickyHeader striped />);
+    const { baseElement } = render(<GoabxTable striped sortMode="multi" />);
 
     const table = baseElement.querySelector("goa-table");
-    expect(table?.getAttribute("stickyHeader")).toBeNull();
     expect(table?.getAttribute("striped")).toBe("true");
-    // TODO: Enable this later if needed
-    // expect(table?.getAttribute("stickyHeader")).toBe("true");
+    expect(table?.getAttribute("sort-mode")).toBe("multi");
   });
 
   it("should call onSort when _sort event is triggered", () => {
@@ -26,11 +24,11 @@ describe("GoabxTable", () => {
     const { baseElement } = render(<GoabxTable onSort={onSort} />);
 
     const table = baseElement.querySelector("goa-table");
-    const event: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
+    const detail: GoabTableOnSortDetail = { sortBy: "name", sortDir: 1 };
     expect(table).toBeTruthy();
 
-    table && fireEvent(table, new CustomEvent("_sort", { detail: event }));
-    expect(onSort).toHaveBeenCalledWith(event);
+    table && fireEvent(table, new CustomEvent("_sort", { detail }));
+    expect(onSort).toHaveBeenCalledWith(detail);
   });
 
   it("should handle _sort event gracefully when no onSort prop is passed", () => {

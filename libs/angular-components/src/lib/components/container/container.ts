@@ -12,40 +12,41 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-container",
-  imports: [NgTemplateOutlet, CommonModule],
-  template: `<goa-container
-    *ngIf="isReady"
-    [attr.type]="type"
-    [attr.accent]="accent"
-    [attr.padding]="padding"
-    [attr.width]="width"
-    [attr.maxwidth]="maxWidth"
-    [attr.minheight]="minHeight"
-    [attr.maxheight]="maxHeight"
-    [attr.testid]="testId"
-    [attr.mt]="mt"
-    [attr.mb]="mb"
-    [attr.ml]="ml"
-    [attr.mr]="mr"
-  >
-    @if (title) {
-      <div slot="title">
-        <ng-container [ngTemplateOutlet]="title"></ng-container>
-      </div>
-    }
-    <ng-content />
-    @if (actions) {
-      <div slot="actions">
-        <ng-container [ngTemplateOutlet]="actions"></ng-container>
-      </div>
-    }
-  </goa-container>`,
+  imports: [NgTemplateOutlet],
+  template: `@if (isReady) {
+    <goa-container
+      [attr.type]="type"
+      [attr.accent]="accent"
+      [attr.padding]="padding"
+      [attr.width]="width"
+      [attr.maxwidth]="maxWidth"
+      [attr.minheight]="minHeight"
+      [attr.maxheight]="maxHeight"
+      [attr.testid]="testId"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.mr]="mr"
+    >
+      @if (title) {
+        <div slot="title">
+          <ng-container [ngTemplateOutlet]="title"></ng-container>
+        </div>
+      }
+      <ng-content />
+      @if (actions) {
+        <div slot="actions">
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+      }
+    </goa-container>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabContainer extends GoabBaseComponent implements OnInit {

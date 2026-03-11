@@ -1,4 +1,3 @@
-import { CommonModule, NgFor } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   GoabBlock,
@@ -20,8 +19,6 @@ type SelectionOption = { value: string; label: string };
   templateUrl: "./feat2361.component.html",
   styleUrls: ["./feat2361.component.css"],
   imports: [
-    CommonModule,
-    NgFor,
     GoabBlock,
     GoabButton,
     GoabCheckbox,

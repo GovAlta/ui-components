@@ -111,7 +111,7 @@ describe("GoABTextArea", () => {
       }),
     );
 
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toHaveBeenCalledTimes(1);
   });
 
   it("should dispatch onBlur", () => {
@@ -125,12 +125,14 @@ describe("GoABTextArea", () => {
       }),
     );
 
-    expect(onBlur).toBeCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledTimes(1);
   });
 
   describe("writeValue", () => {
     it("should set value attribute when writeValue is called", () => {
-      const textareaComponent = fixture.debugElement.query(By.css("goab-textarea")).componentInstance;
+      const textareaComponent = fixture.debugElement.query(
+        By.css("goab-textarea"),
+      ).componentInstance;
       const textareaElement = fixture.nativeElement.querySelector("goa-textarea");
 
       textareaComponent.writeValue("new content");
@@ -141,7 +143,9 @@ describe("GoABTextArea", () => {
     });
 
     it("should set value attribute to empty string when writeValue is called with null or empty", () => {
-      const textareaComponent = fixture.debugElement.query(By.css("goab-textarea")).componentInstance;
+      const textareaComponent = fixture.debugElement.query(
+        By.css("goab-textarea"),
+      ).componentInstance;
       const textareaElement = fixture.nativeElement.querySelector("goa-textarea");
 
       // First set a value
@@ -164,7 +168,9 @@ describe("GoABTextArea", () => {
     });
 
     it("should update component value property", () => {
-      const textareaComponent = fixture.debugElement.query(By.css("goab-textarea")).componentInstance;
+      const textareaComponent = fixture.debugElement.query(
+        By.css("goab-textarea"),
+      ).componentInstance;
 
       textareaComponent.writeValue("updated value");
       expect(textareaComponent.value).toBe("updated value");

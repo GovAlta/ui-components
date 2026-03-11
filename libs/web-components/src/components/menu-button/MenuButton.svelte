@@ -157,7 +157,6 @@
   padded="false"
   tabindex="-1"
   maxwidth={maxWidth || "none"}
-  prevent-scroll-into-view={true}
 >
   {#if text}
     <goa-button

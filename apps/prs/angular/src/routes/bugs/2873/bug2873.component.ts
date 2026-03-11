@@ -1,5 +1,5 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 import {
   GoabAccordion,
   GoabBlock,
@@ -17,7 +17,6 @@ import {
   selector: "abgov-bug2873",
   templateUrl: "./bug2873.component.html",
   imports: [
-    CommonModule,
     GoabAccordion,
     GoabBlock,
     GoabButton,
@@ -27,6 +26,7 @@ import {
     GoabInput,
     GoabText,
     GoabTextArea,
+    NgTemplateOutlet,
   ],
 })
 export class Bug2873Component {

@@ -14,36 +14,37 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goabx-button",
-  imports: [CommonModule],
+
   template: `
-    <goa-button
-      *ngIf="isReady"
-      [attr.version]="version"
-      [attr.type]="type"
-      [attr.size]="size"
-      [attr.variant]="variant"
-      [disabled]="disabled"
-      [attr.leadingicon]="leadingIcon"
-      [attr.trailingicon]="trailingIcon"
-      [attr.width]="width"
-      [attr.testid]="testId"
-      [attr.action]="action"
-      [attr.action-arg]="actionArg"
-      [attr.action-args]="JSON.stringify(actionArgs)"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-      (_click)="_onClick()"
-    >
-      <ng-content />
-    </goa-button>
+    @if (isReady) {
+      <goa-button
+        [attr.version]="version"
+        [attr.type]="type"
+        [attr.size]="size"
+        [attr.variant]="variant"
+        [disabled]="disabled"
+        [attr.leadingicon]="leadingIcon"
+        [attr.trailingicon]="trailingIcon"
+        [attr.width]="width"
+        [attr.testid]="testId"
+        [attr.action]="action"
+        [attr.action-arg]="actionArg"
+        [attr.action-args]="JSON.stringify(actionArgs)"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+        (_click)="_onClick()"
+      >
+        <ng-content />
+      </goa-button>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

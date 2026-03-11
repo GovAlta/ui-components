@@ -8,7 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let badge of badgeValues">
+    @for (badge of badgeValues; track $index) {
+    <tr>
       <td>
         <goabx-badge [type]="badge.type" [content]="badge.content" [icon]="false"></goabx-badge>
       </td>
@@ -18,5 +19,6 @@
         <goabx-button size="compact" type="tertiary" (onClick)="onClick()">Assign</goabx-button>
       </td>
     </tr>
+    }
   </tbody>
 </goabx-table>

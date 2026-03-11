@@ -4,25 +4,6 @@ import {
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-checkbox-list": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
-interface WCProps extends Margins {
-  ref: React.RefObject<HTMLElement | null>;
-  name: string;
-  value?: string[];
-  disabled?: string;
-  error?: string;
-  testid?: string;
-  maxwidth?: string;
-}
-
 export interface GoabCheckboxListProps extends Margins {
   name: string;
   value?: string[];

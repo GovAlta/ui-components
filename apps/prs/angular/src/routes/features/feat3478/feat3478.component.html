@@ -1,0 +1,370 @@
+<div>
+  <goab-text tag="h1" mt="m">Feature #3478: Popover API Rewrite</goab-text>
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <!-- Calendar -->
+  <goab-text tag="h2" mt="l">Calendar</goab-text>
+  <goab-form-item
+    label="Date Picker with width to test vs popover"
+    helpText="Verify when Calendar opens, the year and month dropdown 'open' stage are independent from Popover. We are using popover 'auto' attribute so it should handle correctly. This test is to verify we are safe to remove 'disableGlobalClosePopover' from Popover.svelte. Verify when we select a date, the date picker will auto-close."
+  >
+    <goab-date-picker
+      width="500px"
+      (onChange)="onDateChange($event)"
+      name="item"
+      [value]="'2026-03-03'"
+    ></goab-date-picker>
+  </goab-form-item>
+
+  <!-- Popover -->
+  <goab-text tag="h2" mt="l">Popover</goab-text>
+
+  <goab-text tag="h3">Popover with Close Button (Focus Trap test)</goab-text>
+  <goab-text tag="p">
+    Open the popover and verify Tab key cycles focus within the popover content (focus
+    trap). Click the Close button inside to close.
+  </goab-text>
+  <goab-popover [target]="closeBtnTarget" minWidth="250px">
+    <ng-template #closeBtnTarget>
+      <goab-button>Open Popover</goab-button>
+    </ng-template>
+    <p>This popover has buttons inside. Tab between them to test focus trap.</p>
+    <goab-block gap="s" mt="m">
+      <goab-button type="primary" size="compact" (onClick)="onMenuAction($any($event))">
+        Action
+      </goab-button>
+      <goab-button type="secondary" size="compact" action="close">
+        Close Popover
+      </goab-button>
+    </goab-block>
+  </goab-popover>
+
+  <goab-text tag="h3">Popover Playground</goab-text>
+  <goab-text tag="p">
+    Modify popover properties dynamically to verify positioning, sizing, and padding work
+    correctly after the rewrite.
+  </goab-text>
+
+  <div
+    style="
+      border: 1px solid var(--goa-color-greyscale-200);
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    "
+  >
+    <goab-popover
+      [target]="playgroundTarget"
+      [maxWidth]="popoverMaxWidth"
+      [minWidth]="popoverMinWidth"
+      [position]="popoverPosition"
+      [padded]="popoverPadded"
+    >
+      <ng-template #playgroundTarget>
+        <goab-button>Click me</goab-button>
+      </ng-template>
+      <goab-text tag="p">Popover content with dynamic properties.</goab-text>
+      <goab-text tag="p">
+        Max Width: {{ popoverMaxWidth || "(default)" }} | Min Width:
+        {{ popoverMinWidth || "(none)" }} | Position: {{ popoverPosition }} | Padded:
+        {{ popoverPadded ? "Yes" : "No" }}
+      </goab-text>
+    </goab-popover>
+  </div>
+
+  <goab-details heading="Playground controls" [open]="true">
+    <goab-block gap="l" direction="column" mt="m">
+      <goab-block gap="l">
+        <goab-form-item label="Max Width">
+          <goab-input
+            name="maxWidth"
+            [value]="popoverMaxWidth"
+            (onChange)="onMaxWidthChange($event)"
+          ></goab-input>
+        </goab-form-item>
+        <goab-form-item label="Min Width">
+          <goab-input
+            name="minWidth"
+            [value]="popoverMinWidth"
+            (onChange)="onMinWidthChange($event)"
+          ></goab-input>
+        </goab-form-item>
+      </goab-block>
+      <goab-block gap="l">
+        <goab-form-item label="Position">
+          <goab-dropdown
+            name="position"
+            [value]="popoverPosition"
+            (onChange)="onPositionChange($event)"
+          >
+            <goab-dropdown-item value="auto" label="Auto"></goab-dropdown-item>
+            <goab-dropdown-item value="above" label="Above"></goab-dropdown-item>
+            <goab-dropdown-item value="below" label="Below"></goab-dropdown-item>
+          </goab-dropdown>
+        </goab-form-item>
+        <goab-form-item label="Padding">
+          <goab-checkbox
+            name="padded"
+            [checked]="popoverPadded"
+            text="Yes"
+            (onChange)="onPaddedChange($event)"
+          ></goab-checkbox>
+        </goab-form-item>
+      </goab-block>
+    </goab-block>
+  </goab-details>
+
+  <!-- Menu Button -->
+  <hr style="margin: 2rem 0" />
+  <goab-text tag="h2" mt="l">Menu Button</goab-text>
+  <goab-text tag="p">
+    Test Menu Button: Press Enter and arrow up and down see whether Menu Button works as
+    expected.
+  </goab-text>
+  <goab-block gap="l" direction="column">
+    <div>
+      <goab-text tag="p" mb="s"><strong>Short actions:</strong></goab-text>
+      <goab-menu-button text="Quick Actions" (onAction)="onMenuAction($event)">
+        <goab-menu-action key="1" text="Edit" action="edit"></goab-menu-action>
+        <goab-menu-action key="2" text="Delete" action="delete"></goab-menu-action>
+      </goab-menu-button>
+    </div>
+    <div>
+      <goab-text tag="p" mb="s"><strong>Many actions with long text:</strong></goab-text>
+      <goab-menu-button text="More Actions" (onAction)="onMenuAction($event)">
+        <goab-menu-action key="1" text="Edit this item" action="edit"></goab-menu-action>
+        <goab-menu-action
+          key="2"
+          text="Delete permanently"
+          action="delete"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="3"
+          text="Archive for later review"
+          action="archive"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="4"
+          text="Duplicate and create a new copy"
+          action="duplicate"
+        ></goab-menu-action>
+        <goab-menu-action
+          key="5"
+          text="Share with team members"
+          action="share"
+        ></goab-menu-action>
+      </goab-menu-button>
+    </div>
+  </goab-block>
+
+  <!-- Dropdown -->
+  <hr style="margin: 2rem 0" />
+  <goab-text tag="h2" mt="l">Dropdown</goab-text>
+
+  <goab-text tag="h3">Standard Dropdown</goab-text>
+  <goab-text tag="p">
+    Dropdown controls its popover by setting open="true"/"false". Click it to verify the
+    option list appears. If the open prop is missing, the Dropdown will not show its
+    options.
+  </goab-text>
+  <goab-dropdown
+    name="open-prop-test"
+    [value]="modalDropdownValue"
+    (onChange)="onModalDropdownChange($event)"
+  >
+    <goab-dropdown-item value="alpha" label="Alpha"></goab-dropdown-item>
+    <goab-dropdown-item value="beta" label="Beta"></goab-dropdown-item>
+    <goab-dropdown-item value="gamma" label="Gamma"></goab-dropdown-item>
+  </goab-dropdown>
+  <goab-text tag="p">Selected: {{ modalDropdownValue || "(none)" }}</goab-text>
+
+  <goab-text tag="h3" mt="l">Filterable Dropdown</goab-text>
+  <goab-text tag="p">
+    Focus the input and press Space — it should type a space, not toggle the popover.
+  </goab-text>
+  <goab-dropdown
+    name="filterable-test"
+    [filterable]="true"
+    value=""
+    (onChange)="onFilterableChange($event)"
+  >
+    <goab-dropdown-item value="new york" label="New York"></goab-dropdown-item>
+    <goab-dropdown-item value="los angeles" label="Los Angeles"></goab-dropdown-item>
+    <goab-dropdown-item value="san francisco" label="San Francisco"></goab-dropdown-item>
+    <goab-dropdown-item value="las vegas" label="Las Vegas"></goab-dropdown-item>
+  </goab-dropdown>
+
+  <!-- Edge Cases -->
+  <hr style="margin: 2rem 0" />
+  <goab-text tag="h2" mt="l">Edge Cases</goab-text>
+
+  <!-- Test 1: Popover in Modal -->
+  <goab-text tag="h3">Test 1: Popover in Modal (z-index fix)</goab-text>
+  <goab-text tag="p">
+    Previously, position: absolute and z-index: 99 on the popover content caused dropdowns
+    and date pickers inside modals to render behind or outside the modal. The native
+    Popover API renders in the top layer, fixing this. Click the button below to open a
+    modal with a Dropdown and DatePicker inside.
+  </goab-text>
+  <goab-button (onClick)="modalOpen = true"
+    >Open Modal with Popover Components</goab-button
+  >
+  <goab-modal
+    heading="Popover in Modal Test"
+    [open]="modalOpen"
+    (onClose)="modalOpen = false"
+    [closable]="true"
+  >
+    <goab-text tag="p" maxWidth="40ch">
+      The Dropdown and DatePicker below should render their popovers correctly above the
+      modal — not clipped or hidden behind it.
+    </goab-text>
+    <goab-block direction="column" gap="l" mt="m">
+      <goab-form-item label="Dropdown (top of modal)">
+        <goab-dropdown
+          name="modal-dropdown"
+          [value]="modalDropdownValue"
+          (onChange)="onModalDropdownChange($event)"
+        >
+          <goab-dropdown-item value="option1" label="Option 1"></goab-dropdown-item>
+          <goab-dropdown-item value="option2" label="Option 2"></goab-dropdown-item>
+          <goab-dropdown-item value="option3" label="Option 3"></goab-dropdown-item>
+        </goab-dropdown>
+      </goab-form-item>
+
+      <div style="padding: 1rem 0">
+        <goab-text tag="p" maxWidth="40ch">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </goab-text>
+        <goab-text tag="p" mt="m" maxWidth="40ch">
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+          deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus
+          error sit voluptatem accusantium doloremque laudantium.
+        </goab-text>
+      </div>
+
+      <goab-form-item label="Date Picker (bottom of modal — scroll down)">
+        <goab-date-picker
+          name="modal-datepicker"
+          [value]="modalDateValue"
+          (onChange)="onModalDateChange($event)"
+        ></goab-date-picker>
+      </goab-form-item>
+    </goab-block>
+  </goab-modal>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- Test 2: AppHeaderMenu closes on navigation -->
+  <goab-text tag="h3">Test 2: AppHeaderMenu closes on navigation</goab-text>
+  <goab-text tag="p">
+    The "Services" and "Account" menus <strong>in the header above</strong> use
+    goab-app-header-menu, which uses goa-popover internally. Open a menu, then click a
+    link inside it. The page content will change but the header stays — verify the menu
+    popover closed. This is to test handleUrlChange inside the Popover.svelte
+  </goab-text>
+
+  <!-- Test 3: Multiple Popovers -->
+  <goab-text tag="h3">Test 3: Multiple Popovers</goab-text>
+  <goab-text tag="p">
+    Opening one popover should close others (popover="auto" behavior).
+  </goab-text>
+  <goab-block gap="l">
+    <goab-popover [target]="popoverATarget">
+      <ng-template #popoverATarget><goab-button>Popover A</goab-button></ng-template>
+      <goab-text tag="p">Content A</goab-text>
+    </goab-popover>
+    <goab-popover [target]="popoverBTarget">
+      <ng-template #popoverBTarget><goab-button>Popover B</goab-button></ng-template>
+      <goab-text tag="p">Content B</goab-text>
+    </goab-popover>
+    <goab-popover [target]="popoverCTarget">
+      <ng-template #popoverCTarget><goab-button>Popover C</goab-button></ng-template>
+      <goab-text tag="p">Content C</goab-text>
+    </goab-popover>
+  </goab-block>
+
+  <!-- Test 4: #3499 Dismissing Notification breaks AppHeaderMenu -->
+  <goab-text tag="h3"
+    >Test 4: #3499 Dismissing Notification breaks AppHeaderMenu</goab-text
+  >
+  <goab-text tag="p">
+    When a Notification banner is dismissed (removed from the DOM), it should not break
+    the AppHeaderMenu popover. Steps to reproduce: dismiss the notification below, then
+    try opening the AppHeaderMenu in the header. It should still work.
+  </goab-text>
+  <goab-app-header-menu heading="Test Menu">
+    <a href="#">Menu Item 1</a>
+    <a href="#">Menu Item 2</a>
+    <a href="#">Menu Item 3</a>
+  </goab-app-header-menu>
+  @if (showBanner) {
+    <goab-notification type="information" (onDismiss)="dismissNotification()">
+      Dismiss this notification, then verify AppHeaderMenu still works.
+    </goab-notification>
+  }
+  @if (!showBanner) {
+    <goab-text tag="p" mt="m">
+      Notification dismissed. Now open the AppHeaderMenu above — it should still function
+      correctly.
+    </goab-text>
+    <goab-button mt="m" type="tertiary" (onClick)="resetNotification()">
+      Reset notification
+    </goab-button>
+  }
+
+  <!-- Test 5: #3067 Focus issues with Popover -->
+  <goab-text tag="h3">Test 5: #3067 Focus issues with Popover</goab-text>
+  <goab-text tag="p">
+    After closing a popover with Escape, focus should return to the trigger element.
+    Steps: 1) Focus the button below, 2) Press Enter to open the popover, 3) Press Escape
+    to close, 4) The button should still be focused (yellow border visible), 5) Press Tab
+    — the next interactive element should be selected, not the popover.
+  </goab-text>
+  <goab-block gap="l">
+    <goab-popover [target]="focusTestTarget">
+      <ng-template #focusTestTarget
+        ><goab-button>Focus Test Button</goab-button></ng-template
+      >
+      <goab-text tag="p"
+        >Press Escape to close. Focus should return to the button.</goab-text
+      >
+    </goab-popover>
+    <goab-button type="secondary">Next Focusable Element</goab-button>
+  </goab-block>
+
+  <!-- Test 6: #3062 Popover maxWidth not respected above a button -->
+  <goab-text tag="h3"
+    >Test 6: #3062 Popover maxWidth not respected above a button</goab-text
+  >
+  <goab-text tag="p">
+    When a Popover is placed directly above a goab-button or goab-input in the DOM, it
+    should still respect the maxWidth property. Both popovers below should have the same
+    width (default 320px). Previously the one above the button would ignore maxWidth.
+  </goab-text>
+  <goab-block direction="column" gap="l">
+    <goab-popover [target]="maxWidthTarget1">
+      <ng-template #maxWidthTarget1>
+        <goab-button type="secondary">Show Popover</goab-button>
+      </ng-template>
+      <goab-text tag="p"
+        >This popover is above the button. It should respect maxWidth (320px).</goab-text
+      >
+    </goab-popover>
+
+    <goab-button type="primary">Submit Form</goab-button>
+
+    <goab-popover [target]="maxWidthTarget2">
+      <ng-template #maxWidthTarget2>
+        <goab-button type="secondary" size="compact">Popover Test</goab-button>
+      </ng-template>
+      <goab-text tag="p"
+        >This popover is below the button. It should also respect maxWidth
+        (320px).</goab-text
+      >
+    </goab-popover>
+  </goab-block>
+</div>

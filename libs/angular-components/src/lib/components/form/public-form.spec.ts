@@ -23,9 +23,15 @@ class TestPublicFormComponent {
   status: GoabPublicFormStatus = "complete";
   name = "test-form";
 
-  handleInit(event: Event): void {/** do nothing **/}
-  handleComplete(event: GoabFormState): void {/** do nothing **/}
-  handleStateChange(event: GoabFormState): void {/** do nothing **/}
+  handleInit(event: Event): void {
+    /** do nothing **/
+  }
+  handleComplete(event: GoabFormState): void {
+    /** do nothing **/
+  }
+  handleStateChange(event: GoabFormState): void {
+    /** do nothing **/
+  }
 }
 
 describe("GoabPublicForm", () => {
@@ -60,7 +66,7 @@ describe("GoabPublicForm", () => {
 
     const el = fixture.debugElement.query(By.css("goa-public-form")).nativeElement;
     const detail = {
-      el: document.createElement("form")
+      el: document.createElement("form"),
     };
 
     el.dispatchEvent(new CustomEvent("_init", { detail }));
@@ -77,7 +83,7 @@ describe("GoabPublicForm", () => {
       form: {},
       history: [],
       editting: "",
-      status: "complete"
+      status: "complete",
     };
 
     el.dispatchEvent(new CustomEvent("_complete", { detail }));
@@ -94,7 +100,7 @@ describe("GoabPublicForm", () => {
       form: {},
       history: [],
       editting: "",
-      status: "complete"
+      status: "complete",
     };
     const detail = { data: formState };
 

@@ -2,6 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import {
   GoabAppFooter,
   GoabAppHeader,
+  GoabAppHeaderMenu,
   GoabMicrositeHeader,
   GoabOneColumnLayout,
   GoabSideMenu,
@@ -12,9 +13,38 @@ import "@abgov/style";
 export function App() {
   return (
     <GoabOneColumnLayout>
-      <section slot="header">
+      <section slot="header" id="top">
         <GoabMicrositeHeader type="alpha" version="UAT" />
-        <GoabAppHeader heading="Testing Playground" url="/"></GoabAppHeader>
+        <GoabAppHeader heading="Testing Playground" url="/">
+          {/* Verify AppHeaderMenu still works after Popover API refactor (PR #3478) */}
+          <GoabAppHeaderMenu heading="Services" leadingIcon="apps">
+            <a href="/bugs/bug2720">bug2720</a>
+            <a href="/features/3478">Popover Test</a>
+            <a href="/bugs/3450">Dropdown expanding</a>
+            <a href="/bugs/3450">...inside Container</a>
+            <a href="/bugs/3450">
+              Super long menu item to test overflow handling lorem ipsum dolor sit amet
+            </a>
+          </GoabAppHeaderMenu>
+          <GoabAppHeaderMenu heading="Popover">
+            <a href="/bugs/3450">Bug 3450</a>
+            <a href="/bugs/3450">Bug 3450</a>
+            <a href="/bugs/3450">
+              Super long menu item to test overflow handling lorem ipsum dolor sit amet
+            </a>
+          </GoabAppHeaderMenu>
+          <GoabAppHeaderMenu heading="John Smith" leadingIcon="person-circle">
+            <a href="#top">Manage account</a>
+            <a href="#top">Request new staff account</a>
+            <a href="#top">System admin</a>
+            <a href="#top" className="interactive">
+              Sign out
+            </a>
+            <a href="/bugs/3450">
+              Super long menu item to test overflow handling lorem ipsum dolor sit amet
+            </a>
+          </GoabAppHeaderMenu>
+        </GoabAppHeader>
       </section>
       <div style={{ display: "flex", minHeight: "100vh" }}>
         <section
@@ -61,12 +91,14 @@ export function App() {
               <Link to="/bugs/3215">3215 Drawer Initial Height</Link>
               <Link to="/bugs/3232">3232 GoabText Tag Size</Link>
               <Link to="/bugs/3248">3248 Dropdown Dynamic Children Sync</Link>
+              <Link to="/bugs/3273">3273 Nested Side Menu Groups</Link>
               <Link to="/bugs/3275">3275 Can't unset month</Link>
               <Link to="/bugs/3322">3322 App Header Menu Hover</Link>
               <Link to="/bugs/3281">3281 GoabText p tag margin issues</Link>
               <Link to="/bugs/3337">3337 Input autocomplete styling</Link>
               <Link to="/bugs/3279">3279 Work Side Menu Key Nav</Link>
               <Link to="/bugs/3384">3384 v2 Table Border</Link>
+              <Link to="/bugs/3450">3450 Dropdown expanding inside Container</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>
@@ -92,13 +124,16 @@ export function App() {
               <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3241">3241 V2 Experimental Wrappers</Link>
               <Link to="/features/v2-icons">v2 header icons</Link>
-              <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
-              <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
               <Link to="/features/3229">3229 V2 Menu Button vs size and icon-only</Link>
+              <Link to="/features/3344">3344 Table Multi-Sort</Link>
               <Link to="/features/3306">3306 Custom slug value for tabs</Link>
               <Link to="/features/3370">3370 Clear calendar day selection</Link>
               <Link to="/features/3396">3396 Text heading-2xs size</Link>
-              <Link to="/features/public-form">Public form</Link>
+              <Link to="/features/v2-checkbox">3399 V2 Checkbox Spacing</Link>
+              <Link to="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</Link>
+              <Link to="/features/3407-stack-on-mobile">3407 Tabs Orientation</Link>
+              <Link to="/features/3398">3398 Group open prop</Link>
+              <Link to="/features/3478">3478 Popover API Rewrite</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Everything">
               <Link to="/everything">A</Link>

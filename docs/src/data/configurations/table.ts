@@ -402,5 +402,173 @@ export const tableConfigurations: ComponentConfigurations = {
 </goa-table>`,
       },
     },
+    {
+      id: 'single-sort',
+      name: 'Single-column sorting',
+      description: 'Sortable columns using TableSortHeader (default single sort mode)',
+      code: {
+        react: `<GoabxTable onSort={(detail) => console.log(detail)}>
+  <thead>
+    <tr>
+      <th>
+        <GoabxTableSortHeader name="name" direction="asc">Name</GoabxTableSortHeader>
+      </th>
+      <th>
+        <GoabxTableSortHeader name="status">Status</GoabxTableSortHeader>
+      </th>
+      <th>
+        <GoabxTableSortHeader name="date">Date</GoabxTableSortHeader>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Smith</td>
+      <td>Active</td>
+      <td>Jan 15, 2024</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Pending</td>
+      <td>Jan 16, 2024</td>
+    </tr>
+  </tbody>
+</GoabxTable>`,
+        angular: `<goabx-table (onSort)="onSort($event)">
+  <thead>
+    <tr>
+      <th>
+        <goabx-table-sort-header name="name" direction="asc">Name</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="status">Status</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="date">Date</goabx-table-sort-header>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Smith</td>
+      <td>Active</td>
+      <td>Jan 15, 2024</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Pending</td>
+      <td>Jan 16, 2024</td>
+    </tr>
+  </tbody>
+</goabx-table>`,
+        webComponents: `<goa-table version="2">
+  <table>
+    <thead>
+      <tr>
+        <th><goa-table-sort-header name="name" direction="asc">Name</goa-table-sort-header></th>
+        <th><goa-table-sort-header name="status">Status</goa-table-sort-header></th>
+        <th><goa-table-sort-header name="date">Date</goa-table-sort-header></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Smith</td>
+        <td>Active</td>
+        <td>Jan 15, 2024</td>
+      </tr>
+      <tr>
+        <td>Jane Doe</td>
+        <td>Pending</td>
+        <td>Jan 16, 2024</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>`,
+      },
+    },
+    {
+      id: 'multi-sort',
+      name: 'Multi-column sorting',
+      description: 'Sort by multiple columns with sortMode="multi" and sortOrder for priority',
+      code: {
+        react: `<GoabxTable sortMode="multi" onMultiSort={(detail) => console.log(detail.sorts)}>
+  <thead>
+    <tr>
+      <th>
+        <GoabxTableSortHeader name="name" direction="asc" sortOrder={1}>Name</GoabxTableSortHeader>
+      </th>
+      <th>
+        <GoabxTableSortHeader name="status" direction="desc" sortOrder={2}>Status</GoabxTableSortHeader>
+      </th>
+      <th>
+        <GoabxTableSortHeader name="date">Date</GoabxTableSortHeader>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Smith</td>
+      <td>Active</td>
+      <td>Jan 15, 2024</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Pending</td>
+      <td>Jan 16, 2024</td>
+    </tr>
+  </tbody>
+</GoabxTable>`,
+        angular: `<goabx-table sortMode="multi" (onMultiSort)="onMultiSort($event)">
+  <thead>
+    <tr>
+      <th>
+        <goabx-table-sort-header name="name" direction="asc" [sortOrder]="1">Name</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="status" direction="desc" [sortOrder]="2">Status</goabx-table-sort-header>
+      </th>
+      <th>
+        <goabx-table-sort-header name="date">Date</goabx-table-sort-header>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Smith</td>
+      <td>Active</td>
+      <td>Jan 15, 2024</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Pending</td>
+      <td>Jan 16, 2024</td>
+    </tr>
+  </tbody>
+</goabx-table>`,
+        webComponents: `<goa-table version="2" sort-mode="multi">
+  <table>
+    <thead>
+      <tr>
+        <th><goa-table-sort-header name="name" direction="asc" sort-order="1">Name</goa-table-sort-header></th>
+        <th><goa-table-sort-header name="status" direction="desc" sort-order="2">Status</goa-table-sort-header></th>
+        <th><goa-table-sort-header name="date">Date</goa-table-sort-header></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Smith</td>
+        <td>Active</td>
+        <td>Jan 15, 2024</td>
+      </tr>
+      <tr>
+        <td>Jane Doe</td>
+        <td>Pending</td>
+        <td>Jan 16, 2024</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>`,
+      },
+    },
   ],
 };

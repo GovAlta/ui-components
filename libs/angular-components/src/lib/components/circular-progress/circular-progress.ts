@@ -7,7 +7,6 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 import {
   GoabCircularProgressSize,
@@ -18,19 +17,19 @@ import {
   standalone: true,
   selector: "goab-circular-progress",
   template: `
-    <goa-circular-progress
-      *ngIf="isReady"
-      [attr.variant]="variant || 'inline'"
-      [attr.size]="size || 'large'"
-      [attr.message]="message"
-      [attr.visible]="visible"
-      [attr.progress]="progress"
-      [attr.testid]="testId"
-    >
-    </goa-circular-progress>
+    @if (isReady) {
+      <goa-circular-progress
+        [attr.variant]="variant || 'inline'"
+        [attr.size]="size || 'large'"
+        [attr.message]="message"
+        [attr.visible]="visible"
+        [attr.progress]="progress"
+        [attr.testid]="testId"
+      >
+      </goa-circular-progress>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabCircularProgress implements OnInit {
   @Input() variant?: GoabCircularProgressVariant;

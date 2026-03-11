@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "npm run build:search-index && astro check && astro build",
+    "build:search-index": "tsx src/scripts/build-search-index.ts",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -13,6 +14,10 @@
     "@abgov/design-tokens-v2": "npm:@abgov/design-tokens@^2.0.0",
     "@abgov/react-components": "*",
     "@abgov/ui-components-common": "*",
-    "@abgov/web-components": "*"
+    "@abgov/web-components": "*",
+    "flexsearch": "^0.7.43"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
   }
 }

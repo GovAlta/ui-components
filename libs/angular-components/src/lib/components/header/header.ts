@@ -8,26 +8,25 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
 @Component({
   standalone: true,
   selector: "goab-app-header",
   template: `
-    <goa-app-header
-      *ngIf="isReady"
-      [attr.url]="url"
-      [attr.heading]="heading"
-      [attr.maxcontentwidth]="maxContentWidth"
-      [attr.fullmenubreakpoint]="fullMenuBreakpoint"
-      [attr.testid]="testId"
-      [attr.hasmenuclickhandler]="onMenuClick.observed ? 'true' : 'false'"
-      (_menuClick)="_onMenuClick()"
-    >
-      <ng-content />
-    </goa-app-header>
+    @if (isReady) {
+      <goa-app-header
+        [attr.url]="url"
+        [attr.heading]="heading"
+        [attr.maxcontentwidth]="maxContentWidth"
+        [attr.fullmenubreakpoint]="fullMenuBreakpoint"
+        [attr.testid]="testId"
+        [attr.hasmenuclickhandler]="onMenuClick.observed ? 'true' : 'false'"
+        (_menuClick)="_onMenuClick()"
+      >
+        <ng-content />
+      </goa-app-header>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppHeader implements OnInit {

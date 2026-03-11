@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import {
   booleanAttribute,
   Component,
@@ -14,28 +14,29 @@ import {
 @Component({
   standalone: true,
   selector: "goab-push-drawer",
-  imports: [NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
-    <goa-push-drawer
-      *ngIf="isReady"
-      [open]="open"
-      [attr.heading]="getHeadingAsString()"
-      [attr.test-id]="testId"
-      [attr.width]="width"
-      (_close)="_onClose()"
-    >
-      <ng-content></ng-content>
-      @if (getHeadingAsTemplate()) {
-        <div slot="heading">
-          <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
-        </div>
-      }
-      @if (actions) {
-        <div slot="actions">
-          <ng-container [ngTemplateOutlet]="actions"></ng-container>
-        </div>
-      }
-    </goa-push-drawer>
+    @if (isReady) {
+      <goa-push-drawer
+        [open]="open"
+        [attr.heading]="getHeadingAsString()"
+        [attr.test-id]="testId"
+        [attr.width]="width"
+        (_close)="_onClose()"
+      >
+        <ng-content></ng-content>
+        @if (getHeadingAsTemplate()) {
+          <div slot="heading">
+            <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+          </div>
+        }
+        @if (actions) {
+          <div slot="actions">
+            <ng-container [ngTemplateOutlet]="actions"></ng-container>
+          </div>
+        }
+      </goa-push-drawer>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

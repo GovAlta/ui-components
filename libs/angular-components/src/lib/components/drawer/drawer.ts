@@ -1,4 +1,4 @@
-import { NgTemplateOutlet, CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 import {
   booleanAttribute,
   Component,
@@ -15,25 +15,26 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
 @Component({
   standalone: true,
   selector: "goab-drawer",
-  imports: [NgTemplateOutlet, CommonModule],
+  imports: [NgTemplateOutlet],
   template: `
-    <goa-drawer
-      *ngIf="isReady"
-      [open]="open"
-      [attr.position]="position"
-      [attr.heading]="getHeadingAsString()"
-      [attr.maxsize]="maxSize"
-      [attr.testid]="testId"
-      (_close)="_onClose()"
-    >
-      <ng-content></ng-content>
-      <div slot="heading">
-        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
-      </div>
-      <div slot="actions">
-        <ng-container [ngTemplateOutlet]="actions"></ng-container>
-      </div>
-    </goa-drawer>
+    @if (isReady) {
+      <goa-drawer
+        [open]="open"
+        [attr.position]="position"
+        [attr.heading]="getHeadingAsString()"
+        [attr.maxsize]="maxSize"
+        [attr.testid]="testId"
+        (_close)="_onClose()"
+      >
+        <ng-content></ng-content>
+        <div slot="heading">
+          <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+        </div>
+        <div slot="actions">
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+      </goa-drawer>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

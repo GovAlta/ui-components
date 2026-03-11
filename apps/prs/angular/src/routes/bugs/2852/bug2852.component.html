@@ -9,11 +9,12 @@
       [filterable]="true"
       placeholder="Search for a state capital..."
     >
-      <goab-dropdown-item
-        *ngFor="let capital of usCapitals"
-        [value]="capital.value"
-        [label]="capital.label"
-      ></goab-dropdown-item>
+      @for (capital of usCapitals; track capital.value) {
+        <goab-dropdown-item
+          [value]="capital.value"
+          [label]="capital.label"
+        ></goab-dropdown-item>
+      }
     </goab-dropdown>
   </goab-form-item>
 
@@ -30,11 +31,12 @@
       [filterable]="false"
       placeholder="Search for a state capital..."
     >
-      <goab-dropdown-item
-        *ngFor="let capital of usCapitals"
-        [value]="capital.value"
-        [label]="capital.label"
-      ></goab-dropdown-item>
+      @for (capital of usCapitals; track capital.value) {
+        <goab-dropdown-item
+          [value]="capital.value"
+          [label]="capital.label"
+        ></goab-dropdown-item>
+      }
     </goab-dropdown>
   </goab-form-item>
 </goab-block>

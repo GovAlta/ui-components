@@ -1,14 +1,7 @@
 <svelte:options
   customElement={{
     tag: "goa-dropdown",
-    props: {
-      disableGlobalClosePopover: {
-        type: "Boolean",
-        reflect: true,
-        attribute: "disable-global-close-popover",
-      },
-      value: { reflect: true },
-    },
+    props: {},
   }}
 />
 
@@ -35,6 +28,16 @@
     toBoolean,
   } from "../../common/utils";
   import { calculateMargin } from "../../common/styling";
+  import {
+    FieldsetErrorRelayDetail,
+    FieldsetResetErrorsMsg,
+    FieldsetSetErrorMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
+    FieldsetResetFieldsMsg,
+  } from "../../types/relay-types";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -90,12 +93,6 @@
   export let autocomplete: string = "";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-
-  // Exposed Privates
-
-  /** Prevents the popover from closing when clicking outside. Used for nested dropdowns or complex interactions. */
-  export let disableGlobalClosePopover: boolean = false;
-
   //
   // Private
 
@@ -164,28 +161,14 @@
   onMount(() => {
     ensureSlotExists(_rootEl);
     addRelayListener();
+    sendMountedMessage();
     setupPopoverListeners();
 
-    if (disableGlobalClosePopover) {
-      _popoverEl.setAttribute("disable-global-close-popover", "yes");
-    }
     _eventHandler = _filterable
       ? new ComboboxKeyUpHandler(_inputEl)
       : new DropdownKeyUpHandler(_inputEl);
     showDeprecationWarnings();
-
-    bindReset(_rootEl);
   });
-
-  function bindReset(el: HTMLElement) {
-    el.addEventListener("goa:reset", () => {
-      if (value) {
-        value = "";
-        dispatch(el, "_change", { name, value }, { bubbles: true });
-      }
-    });
-    dispatch(el, "goa:bind", el, { bubbles: true });
-  }
 
   //
   // Functions
@@ -222,11 +205,11 @@
   }
 
   function setupPopoverListeners() {
-    _popoverEl?.addEventListener("_open", (_e) => {
+    _popoverEl?.addEventListener("_open", (e) => {
       _isMenuVisible = true;
     });
 
-    _popoverEl?.addEventListener("_close", (_e) => {
+    _popoverEl?.addEventListener("_close", (e) => {
       _isMenuVisible = false;
     });
   }
@@ -240,8 +223,20 @@
   }
 
   function addRelayListener() {
-    receive(_rootEl, (action, data, _event) => {
+    receive(_rootEl, (action, data, event) => {
       switch (action) {
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          setError(data as FieldsetErrorRelayDetail);
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({ name, value: "" });
+          break;
         case DropdownItemMountedMsg:
           onChildMounted(data as DropdownItemMountedRelayDetail);
           break;
@@ -250,6 +245,25 @@
           break;
       }
     });
+  }
+
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
+    value = detail.value;
+    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
+  }
+
+  function sendMountedMessage() {
+    relay<FormFieldMountRelayDetail>(
+      _rootEl,
+      FormFieldMountMsg,
+      { name, el: _rootEl },
+      { bubbles: true, timeout: 10 },
+    );
   }
 
   /**
@@ -498,7 +512,7 @@
   }
 
   // Auto-select matching option from input after browser autofill/autocomplete or paste from clipboard.
-  function onInputChange(_e: Event) {
+  function onInputChange(e: Event) {
     if (_disabled || !_filterable) return;
 
     const isAutofilled =
@@ -577,7 +591,7 @@
     setDisplayedValue();
   }
 
-  function onFocus(_e: Event) {
+  function onFocus(e: Event) {
     dispatch(_rootEl, "help-text::announce", undefined, { bubbles: true });
   }
 
@@ -888,7 +902,7 @@
             data-value={option.value}
             role="option"
             style="display: block"
-            on:click={(_e) => {
+            on:click={(e) => {
               onFilteredOptionClick(option);
               _inputEl?.focus();
             }}
@@ -1102,10 +1116,7 @@
     pointer-events: none;
     width: 1.5rem;
     height: 1.5rem;
-    background-image: var(
-      --goa-dropdown-native-chevron-icon,
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E")
-    );
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E");
     background-repeat: no-repeat;
   }
 

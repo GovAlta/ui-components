@@ -19,12 +19,12 @@ import {
   GoabxFilterChip,
   GoabxDrawer,
   GoabxCheckbox,
+  GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
 import {
   GoabIcon,
   GoabDivider,
   GoabButtonGroup,
-  GoabCheckboxList,
   GoabTab,
   type GoabCheckboxListOnChangeDetail,
 } from "@abgov/react-components";
@@ -64,10 +64,10 @@ const DEFAULT_VISIBLE_COLUMNS = ["title", "scale", "category", "userType", "stat
 // Badge type mapping for scales (using V2 extended colors)
 function getScaleBadgeType(
   scale: string,
-): "sky" | "sunset" | "pasture" | "lilac" | "prairie" | "dawn" {
+): "sky" | "sunset" | "pasture" | "lilac" | "prairie" | "dawn" | "information" {
   switch (scale) {
     case "interaction":
-      return "sky";
+      return "information";
     case "task":
       return "sunset";
     case "page":
@@ -156,16 +156,30 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   }, []);
 
   // Filter state
-  const [pendingFilters, setPendingFilters] = useState<{
-    category: string[];
-    scale: string[];
-    userType: string[];
-  }>({ category: [], scale: [], userType: [] });
-  const [appliedFilters, setAppliedFilters] = useState<{
-    category: string[];
-    scale: string[];
-    userType: string[];
-  }>({ category: [], scale: [], userType: [] });
+  const emptyFilters = {
+    category: [] as string[],
+    scale: [] as string[],
+    userType: [] as string[],
+  };
+  const [pendingFilters, setPendingFilters] = useState(emptyFilters);
+  const [appliedFilters, setAppliedFilters] = useState(emptyFilters);
+
+  // Read URL params on mount for initial filters (e.g. ?userType=citizen)
+  const [urlFiltersApplied, setUrlFiltersApplied] = useState(false);
+  useEffect(() => {
+    if (urlFiltersApplied) return;
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = {
+      category: params.get("category")?.split(",").filter(Boolean) ?? [],
+      scale: params.get("scale")?.split(",").filter(Boolean) ?? [],
+      userType: params.get("userType")?.split(",").filter(Boolean) ?? [],
+    };
+    if (fromUrl.category.length || fromUrl.scale.length || fromUrl.userType.length) {
+      setPendingFilters(fromUrl);
+      setAppliedFilters(fromUrl);
+    }
+    setUrlFiltersApplied(true);
+  }, [urlFiltersApplied]);
 
   // Hooks
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
@@ -510,6 +524,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 type={getScaleBadgeType(example.data.scale)}
                 content={tag}
                 emphasis="subtle"
+                icon="false"
               />
             ))}
           </div>
@@ -537,6 +552,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 type={getCategoryBadgeType(cat)}
                 content={formatCategory(cat)}
                 emphasis="subtle"
+                icon="false"
               />
             ))}
           </div>
@@ -547,6 +563,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             type={getScaleBadgeType(example.data.scale)}
             content={formatScale(example.data.scale)}
             emphasis="subtle"
+            icon="false"
           />
         </td>
         <td>{formatUserType(example.data.userType)}</td>
@@ -556,9 +573,10 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               <goa-badge
                 key={tag}
                 version="2"
-                type="information"
+                type="default"
                 content={tag}
                 emphasis="subtle"
+                icon="false"
               />
             ))}
           </div>
@@ -810,35 +828,35 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               <tbody>
                 {groupedExamples
                   ? groupedExamples.map((group) => (
-                    <React.Fragment key={group.key}>
-                      <tr
-                        className="examples-group-row"
-                        onClick={() => toggleGroup(group.key)}
-                      >
-                        <td colSpan={5}>
-                          <div className="examples-group-header">
-                            <GoabIcon
-                              type={
-                                expandedGroups.has(group.key)
-                                  ? "chevron-down"
-                                  : "chevron-forward"
-                              }
-                              size="small"
-                            />
-                            <strong>{group.label}</strong>
-                            <goa-badge
-                              version="2"
-                              type="default"
-                              content={String(group.examples.length)}
-                              emphasis="subtle"
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      {expandedGroups.has(group.key) &&
-                        group.examples.map(renderTableRow)}
-                    </React.Fragment>
-                  ))
+                      <React.Fragment key={group.key}>
+                        <tr
+                          className="examples-group-row"
+                          onClick={() => toggleGroup(group.key)}
+                        >
+                          <td colSpan={5}>
+                            <div className="examples-group-header">
+                              <GoabIcon
+                                type={
+                                  expandedGroups.has(group.key)
+                                    ? "chevron-down"
+                                    : "chevron-forward"
+                                }
+                                size="small"
+                              />
+                              <strong>{group.label}</strong>
+                              <goa-badge
+                                version="2"
+                                type="default"
+                                content={String(group.examples.length)}
+                                emphasis="subtle"
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                        {expandedGroups.has(group.key) &&
+                          group.examples.map(renderTableRow)}
+                      </React.Fragment>
+                    ))
                   : filteredExamples.map(renderTableRow)}
               </tbody>
             </table>
@@ -910,8 +928,9 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         <div className="filter-drawer-content">
           {/* Scale filter */}
           <GoabxFormItem label="Scale">
-            <GoabCheckboxList
+            <GoabxCheckboxList
               name="scale"
+              size="compact"
               value={pendingFilters.scale}
               onChange={(detail: GoabCheckboxListOnChangeDetail) =>
                 setPendingFilters((prev) => ({ ...prev, scale: detail.value }))
@@ -926,13 +945,14 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   size="compact"
                 />
               ))}
-            </GoabCheckboxList>
+            </GoabxCheckboxList>
           </GoabxFormItem>
 
           {/* Category filter */}
           <GoabxFormItem label="Category">
-            <GoabCheckboxList
+            <GoabxCheckboxList
               name="category"
+              size="compact"
               value={pendingFilters.category}
               onChange={(detail: GoabCheckboxListOnChangeDetail) =>
                 setPendingFilters((prev) => ({ ...prev, category: detail.value }))
@@ -947,13 +967,14 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   size="compact"
                 />
               ))}
-            </GoabCheckboxList>
+            </GoabxCheckboxList>
           </GoabxFormItem>
 
           {/* User Type filter */}
           <GoabxFormItem label="User Type">
-            <GoabCheckboxList
+            <GoabxCheckboxList
               name="userType"
+              size="compact"
               value={pendingFilters.userType}
               onChange={(detail: GoabCheckboxListOnChangeDetail) =>
                 setPendingFilters((prev) => ({ ...prev, userType: detail.value }))
@@ -968,25 +989,25 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   size="compact"
                 />
               ))}
-            </GoabCheckboxList>
+            </GoabxCheckboxList>
           </GoabxFormItem>
 
           {(pendingFilters.category.length > 0 ||
             pendingFilters.scale.length > 0 ||
             pendingFilters.userType.length > 0) && (
-              <>
-                <GoabDivider />
-                <GoabxButton
-                  type="tertiary"
-                  size="compact"
-                  onClick={() =>
-                    setPendingFilters({ category: [], scale: [], userType: [] })
-                  }
-                >
-                  Clear all filters
-                </GoabxButton>
-              </>
-            )}
+            <>
+              <GoabDivider />
+              <GoabxButton
+                type="tertiary"
+                size="compact"
+                onClick={() =>
+                  setPendingFilters({ category: [], scale: [], userType: [] })
+                }
+              >
+                Clear all filters
+              </GoabxButton>
+            </>
+          )}
         </div>
       </GoabxDrawer>
 
@@ -1006,7 +1027,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           position: sticky;
           top: 0;
           z-index: 1;
-          background: white;
+          background: var(--goa-color-greyscale-white);
           display: flex;
           flex-direction: row;
           align-items: flex-start;
@@ -1029,7 +1050,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           bottom: 0;
           left: -9999px;
           right: -9999px;
-          background: white;
+          background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
         }

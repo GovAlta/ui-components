@@ -6,26 +6,27 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-card",
-  imports: [CommonModule],
+
   template: `
-    <goa-card
-      *ngIf="isReady"
-      [attr.elevation]="elevation"
-      [attr.width]="width"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-    </goa-card>
+    @if (isReady) {
+      <goa-card
+        [attr.elevation]="elevation"
+        [attr.width]="width"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-card>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -5,7 +5,7 @@ import {
   OnDestroy,
   ViewChild,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabBlock,
   GoabDatePicker,
@@ -29,7 +29,6 @@ type DropdownItemLog = {
   templateUrl: "./bug3156.component.html",
   styleUrls: ["./bug3156.component.css"],
   imports: [
-    CommonModule,
     GoabBlock,
     GoabDatePicker,
     GoabDropdown,

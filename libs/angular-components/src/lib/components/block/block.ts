@@ -10,30 +10,31 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-block",
-  imports: [CommonModule],
+
   template: `
-    <goa-block
-      *ngIf="isReady"
-      [attr.gap]="gap"
-      [attr.direction]="direction"
-      [attr.alignment]="alignment"
-      [attr.width]="width"
-      [attr.min-width]="minWidth"
-      [attr.max-width]="maxWidth"
-      [attr.testid]="testId"
-      [attr.mt]="mt"
-      [attr.mb]="mb"
-      [attr.ml]="ml"
-      [attr.mr]="mr"
-    >
-      <ng-content />
-    </goa-block>
+    @if (isReady) {
+      <goa-block
+        [attr.gap]="gap"
+        [attr.direction]="direction"
+        [attr.alignment]="alignment"
+        [attr.width]="width"
+        [attr.min-width]="minWidth"
+        [attr.max-width]="maxWidth"
+        [attr.testid]="testId"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
+      >
+        <ng-content />
+      </goa-block>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

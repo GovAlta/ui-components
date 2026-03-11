@@ -1,7 +1,11 @@
 import { render } from "vitest-browser-react";
 import { useState } from "react";
 import { GoabButton } from "../src";
-import { GoabxWorkSideMenu, GoabxWorkSideMenuItem } from "../src/experimental";
+import {
+  GoabxWorkSideMenu,
+  GoabxWorkSideMenuItem,
+  GoabxWorkSideMenuGroup,
+} from "../src/experimental";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
@@ -94,9 +98,6 @@ describe("WorkSideMenu", () => {
         );
       };
       const result = render(<Component />);
-
-      expect(result.getByTestId("work-side-menu")).toBeTruthy();
-
       const menu = result.getByTestId("work-side-menu");
       const toggle = result.getByTestId("toggle-menu");
 
@@ -130,8 +131,6 @@ describe("WorkSideMenu", () => {
         );
       };
       const result = render(<Component />);
-      expect(result.getByTestId("work-side-menu")).toBeTruthy();
-
       const item1 = result.getByTestId("menu-item-1");
 
       await item1.click();
@@ -160,9 +159,6 @@ describe("WorkSideMenu", () => {
         );
       };
       const result = render(<Component />);
-
-      expect(result.getByTestId("work-side-menu")).toBeTruthy();
-
       const menu = result.getByTestId("work-side-menu");
       const background = result.getByTestId("work-side-menu-background");
 
@@ -201,15 +197,104 @@ describe("WorkSideMenu", () => {
         );
       };
       const result = render(<Component />);
-
-      expect(result.getByTestId("work-side-menu")).toBeTruthy();
-
       const menu = result.getByTestId("work-side-menu");
       const button = result.getByText("Toggle menu");
 
       await button.click();
       await vi.waitFor(() => {
         expect(menu.element().classList.contains("closed")).toBeFalsy();
+      });
+    });
+  });
+
+  describe("WorkSideMenuGroup", () => {
+    let isOpen = false;
+    const Component = () => {
+      return (
+        <GoabxWorkSideMenu
+          heading="Test Heading"
+          url="https://example.com/"
+          userName="John Doe"
+          userSecondaryText="test@example.com"
+          testId="work-side-menu"
+          primaryContent={
+            <>
+              <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+              <GoabxWorkSideMenuGroup
+                icon="document"
+                heading="Group heading"
+                open={isOpen}
+                testId="test-group"
+              >
+                <GoabxWorkSideMenuItem
+                  label="Invoices"
+                  url="/test-url"
+                  testId="test-item"
+                />
+                <GoabxWorkSideMenuItem label="Contracts" url="/contracts" />
+                <GoabxWorkSideMenuItem label="Reports" url="/reports" />
+              </GoabxWorkSideMenuGroup>
+              <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+            </>
+          }
+          open={true}
+        />
+      );
+    };
+
+    it("should render a group expanded when open is true", async () => {
+      isOpen = true;
+      await page.viewport(1024, 768);
+
+      const result = render(<Component />);
+      const group = result.getByTestId("test-group");
+
+      await vi.waitFor(() => {
+        const heading = group.getByText("Group heading");
+        const detailsEl = heading.element().closest("details");
+        const item = result.getByTestId("test-item");
+
+        expect(detailsEl).toHaveAttribute("open");
+        expect(item).toBeVisible();
+      });
+    });
+
+    it("should render a group collapsed when open is false", async () => {
+      isOpen = false;
+      await page.viewport(1024, 768);
+
+      const result = render(<Component />);
+      const group = result.getByTestId("test-group");
+
+      await vi.waitFor(() => {
+        const heading = group.getByText("Group heading");
+        const detailsEl = heading.element().closest("details");
+        const item = result.getByTestId("test-item");
+
+        expect(detailsEl).not.toHaveAttribute("open");
+        expect(item).not.toBeVisible();
+      });
+    });
+
+    it("should render a group expanded when it has a current menu item", async () => {
+      isOpen = false;
+      await page.viewport(1024, 768);
+
+      window.history.pushState({}, "", "/test-url");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+
+      const result = render(<Component />);
+      const group = result.getByTestId("test-group");
+
+      await vi.waitFor(() => {
+        const heading = group.getByText("Group heading");
+        const detailsEl = heading.element().closest("details");
+        const item = result.getByTestId("test-item");
+        const link = item.element().querySelector("a");
+
+        expect(detailsEl).toHaveAttribute("open");
+        expect(item).toBeVisible();
+        expect(link?.classList.contains("current")).toBe(true);
       });
     });
   });

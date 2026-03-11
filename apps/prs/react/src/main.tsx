@@ -40,11 +40,14 @@ import { Bug3215Route } from "./routes/bugs/bug3215";
 import { Bug3232Route } from "./routes/bugs/bug3232";
 import { Bug3279Route } from "./routes/bugs/bug3279";
 import { Bug3248Route } from "./routes/bugs/bug3248";
+import { Bug3273Route } from "./routes/bugs/bug3273";
+import { Bug3273Page2Route } from "./routes/bugs/bug3273-2";
 import { Bug3275Route } from "./routes/bugs/bug3275";
 import { Bug3322Route } from "./routes/bugs/bug3322";
 import { Bug3281Route } from "./routes/bugs/bug3281";
 import { Bug3337Route } from "./routes/bugs/bug3337";
 import { Bug3384Route } from "./routes/bugs/bug3384";
+import { Bug3450Route } from "./routes/bugs/bug3450";
 
 import { EverythingRoute } from "./routes/everything";
 import { EverythingBRoute } from "./routes/everything-b";
@@ -72,13 +75,16 @@ import { Feat3241Route } from "./routes/features/feat3241";
 import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
 import { Feat3407SkipOnFocusTabRoute } from "./routes/features/feat3407SkipOnFocusTab";
 import { Feat3407StackOnMobileRoute } from "./routes/features/feat3407StackOnMobile";
+import { Feat3344Route } from "./routes/features/feat3344";
 import { Feat3137Route } from "./routes/features/feat3137";
 import { Feat3306Route } from "./routes/features/feat3306";
 import { Feat2469Route } from "./routes/features/feat2469";
 import { Feat3370Route } from "./routes/features/feat3370";
 import { Feat3396Route } from "./routes/features/feat3396";
-import { PublicFormRoute } from "./routes/features/public-form";
 import { Feat3229Route } from "./routes/features/feat3229";
+import { FeatV2CheckboxRoute } from "./routes/features/featV2Checkbox";
+import { Feat3398Route } from "./routes/features/feat3398";
+import { Feat3478Route } from "./routes/features/feat3478";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -125,11 +131,14 @@ root.render(
           <Route path="bugs/3215" element={<Bug3215Route />} />
           <Route path="bugs/3232" element={<Bug3232Route />} />
           <Route path="bugs/3248" element={<Bug3248Route />} />
+          <Route path="bugs/3273" element={<Bug3273Route />} key={"bugs/3273"} />
+          <Route path="bugs/3273-2" element={<Bug3273Page2Route key={"bugs/3273-2"} />} />
           <Route path="bugs/3275" element={<Bug3275Route />} />
           <Route path="bugs/3322" element={<Bug3322Route />} />
           <Route path="bugs/3281" element={<Bug3281Route />} />
           <Route path="bugs/3337" element={<Bug3337Route />} />
           <Route path="bugs/3384" element={<Bug3384Route />} />
+          <Route path="bugs/3450" element={<Bug3450Route />} />
 
           <Route path="features/1383" element={<Feat1383Route />} />
           <Route path="features/1547" element={<Feat1547Route />} />
@@ -159,12 +168,21 @@ root.render(
           <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
           <Route path="features/3137" element={<Feat3137Route />} />
           <Route path="features/3229" element={<Feat3229Route />} />
+          <Route path="features/3344" element={<Feat3344Route />} />
           <Route path="features/3306" element={<Feat3306Route />} />
           <Route path="features/3370" element={<Feat3370Route />} />
           <Route path="features/3396" element={<Feat3396Route />} />
-          <Route path="features/public-form" element={<PublicFormRoute />} />
-          <Route path="features/3407-skip-on-focus-tab" element={<Feat3407SkipOnFocusTabRoute />} />
-          <Route path="features/3407-stack-on-mobile" element={<Feat3407StackOnMobileRoute />} />
+          <Route
+            path="features/3407-skip-on-focus-tab"
+            element={<Feat3407SkipOnFocusTabRoute />}
+          />
+          <Route
+            path="features/3407-stack-on-mobile"
+            element={<Feat3407StackOnMobileRoute />}
+          />
+          <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
+          <Route path="features/3398" element={<Feat3398Route />} />
+          <Route path="features/3478" element={<Feat3478Route />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule } from "@angular/common";
+import { AsyncPipe, JsonPipe } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import {
@@ -23,7 +23,6 @@ import {
   templateUrl: "./bug3072.component.html",
   styleUrls: ["./bug3072.component.css"],
   imports: [
-    CommonModule,
     AsyncPipe,
     ReactiveFormsModule,
     GoabBlock,
@@ -39,6 +38,7 @@ import {
     GoabInputNumber,
     GoabText,
     GoabTextArea,
+    JsonPipe,
   ],
 })
 export class Bug3072Component {

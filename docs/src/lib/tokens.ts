@@ -15,8 +15,10 @@ import globalTokens from "@abgov/design-tokens-v2/data/goa-global-design-tokens.
 export interface FlatToken {
   /** Full token name with CSS variable prefix (e.g., --goa-color-interactive-default) */
   name: string;
-  /** Token value (resolved or raw) */
+  /** Token value as defined (may be a reference like {color.greyscale.300}) */
   value: string;
+  /** Resolved value for preview (follows references to get actual hex, etc.) */
+  resolvedValue: string;
   /** Top-level category (e.g., color, space, typography) */
   category: string;
   /** Sub-category path (e.g., interactive/default) */
@@ -61,6 +63,36 @@ function pathToCssVar(path: string[]): string {
 }
 
 /**
+ * Check if a value is a box-shadow object (has x, y, blur, spread, color)
+ */
+function isBoxShadowObject(
+  value: unknown,
+): value is { x: string; y: string; blur: string; spread: string; color: string } {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "x" in value &&
+    "y" in value &&
+    "blur" in value &&
+    "spread" in value &&
+    "color" in value
+  );
+}
+
+/**
+ * Convert a box-shadow object to CSS syntax
+ */
+function boxShadowToCss(shadow: {
+  x: string;
+  y: string;
+  blur: string;
+  spread: string;
+  color: string;
+}): string {
+  return `${shadow.x}px ${shadow.y}px ${shadow.blur}px ${shadow.spread}px ${shadow.color}`;
+}
+
+/**
  * Format a token value for display
  */
 function formatValue(value: string | number | object): string {
@@ -70,8 +102,92 @@ function formatValue(value: string | number | object): string {
   if (typeof value === "number") {
     return String(value);
   }
+  // Convert box-shadow objects to CSS syntax
+  if (isBoxShadowObject(value)) {
+    return boxShadowToCss(value);
+  }
   // For complex values (like typography objects), stringify
   return JSON.stringify(value);
+}
+
+/**
+ * Check if a value is a token reference (e.g., "{color.greyscale.300}")
+ */
+function isTokenReference(value: string): boolean {
+  return value.startsWith("{") && value.endsWith("}");
+}
+
+/**
+ * Parse a token reference path (e.g., "{color.greyscale.300}" -> ["color", "greyscale", "300"])
+ */
+function parseTokenReference(value: string): string[] {
+  const path = value.slice(1, -1); // Remove { and }
+  return path.split(".");
+}
+
+/**
+ * Resolve a token reference to its actual value.
+ * Follows references recursively until a concrete value is found.
+ */
+function resolveTokenReference(
+  value: string,
+  tokens: Record<string, unknown>,
+  maxDepth = 10,
+): string {
+  if (maxDepth <= 0) return value; // Prevent infinite loops
+  if (!isTokenReference(value)) return value;
+
+  const path = parseTokenReference(value);
+  let current: unknown = tokens;
+
+  for (const key of path) {
+    if (typeof current !== "object" || current === null) {
+      return value; // Path not found, return original
+    }
+    current = (current as Record<string, unknown>)[key];
+  }
+
+  if (isTokenValue(current)) {
+    const resolvedValue = formatValue(current.value);
+    // Recursively resolve if the found value is also a reference
+    if (typeof resolvedValue === "string" && isTokenReference(resolvedValue)) {
+      return resolveTokenReference(resolvedValue, tokens, maxDepth - 1);
+    }
+    return resolvedValue;
+  }
+
+  return value; // Couldn't resolve, return original
+}
+
+/**
+ * Check if a value is a typography object (has fontFamily, fontSize, etc.)
+ */
+function isTypographyObject(
+  value: unknown,
+): value is Record<string, string> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    ("fontFamily" in value || "fontSize" in value || "fontWeight" in value)
+  );
+}
+
+/**
+ * Resolve a typography object by resolving each property's reference
+ */
+function resolveTypographyObject(
+  value: Record<string, string>,
+  tokens: Record<string, unknown>,
+): Record<string, string> {
+  const resolved: Record<string, string> = {};
+  for (const [key, val] of Object.entries(value)) {
+    if (typeof val === "string" && isTokenReference(val)) {
+      resolved[key] = resolveTokenReference(val, tokens);
+    } else {
+      resolved[key] = val;
+    }
+  }
+  return resolved;
 }
 
 /**
@@ -79,6 +195,7 @@ function formatValue(value: string | number | object): string {
  */
 function flattenTokensRecursive(
   obj: Record<string, unknown>,
+  rootTokens: Record<string, unknown>,
   path: string[] = [],
   results: FlatToken[] = [],
 ): FlatToken[] {
@@ -90,13 +207,28 @@ function flattenTokensRecursive(
       const category = path[0] || key;
       const tokenPath = currentPath.slice(1).join("/");
       const tokenType = value.type || "unknown";
+
+      // Keep original value, resolve for preview
+      const rawValue = formatValue(value.value);
+      let resolvedValue: string;
+
+      // Handle typography objects specially - resolve each property
+      if (isTypographyObject(value.value)) {
+        const resolved = resolveTypographyObject(value.value as Record<string, string>, rootTokens);
+        resolvedValue = JSON.stringify(resolved);
+      } else {
+        resolvedValue =
+          typeof rawValue === "string" ? resolveTokenReference(rawValue, rootTokens) : rawValue;
+      }
+
       const isColor =
         tokenType === "color" ||
-        (typeof value.value === "string" && value.value.startsWith("#"));
+        (typeof resolvedValue === "string" && resolvedValue.startsWith("#"));
 
       results.push({
         name: pathToCssVar(currentPath),
-        value: formatValue(value.value),
+        value: rawValue, // Original value (may be a reference)
+        resolvedValue, // Resolved value for preview
         category,
         path: tokenPath,
         type: tokenType,
@@ -105,7 +237,7 @@ function flattenTokensRecursive(
       });
     } else if (typeof value === "object" && value !== null) {
       // Recurse into nested object
-      flattenTokensRecursive(value as Record<string, unknown>, currentPath, results);
+      flattenTokensRecursive(value as Record<string, unknown>, rootTokens, currentPath, results);
     }
   }
 
@@ -113,10 +245,22 @@ function flattenTokensRecursive(
 }
 
 /**
+ * Component-specific token prefixes to exclude from the global tokens display.
+ * These are implementation details, not meant for direct consumer use.
+ */
+const EXCLUDED_TOKEN_PREFIXES = ["--goa-input-", "--goa-border-none", "--goa-fontVariationSettings"];
+
+/**
  * Get all design tokens flattened for grid display
  */
 export function getAllTokens(): FlatToken[] {
-  return flattenTokensRecursive(globalTokens as Record<string, unknown>);
+  const tokensObj = globalTokens as Record<string, unknown>;
+  const allTokens = flattenTokensRecursive(tokensObj, tokensObj);
+
+  // Filter out component-specific tokens
+  return allTokens.filter(
+    (token) => !EXCLUDED_TOKEN_PREFIXES.some((prefix) => token.name.startsWith(prefix)),
+  );
 }
 
 /**

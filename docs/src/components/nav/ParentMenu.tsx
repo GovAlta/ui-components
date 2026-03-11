@@ -7,20 +7,21 @@
  * - Get started, Foundations: direct navigation (when content exists)
  */
 
+import React from "react";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
   GoabxWorkSideMenuGroup,
-} from '@abgov/react-components/experimental';
-import { GoabSpacer } from '@abgov/react-components';
+} from "@abgov/react-components/experimental";
+import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
 export type MenuSection =
-  | 'parent'
-  | 'get-started'
-  | 'foundations'
-  | 'examples'
-  | 'components'
-  | 'tokens';
+  | "parent"
+  | "get-started"
+  | "foundations"
+  | "examples"
+  | "components"
+  | "tokens";
 
 interface ParentMenuProps {
   isOpen: boolean;
@@ -32,38 +33,43 @@ interface ParentMenuProps {
 
 // Sections that navigate directly to a page (no submenu)
 const DIRECT_NAV_SECTIONS: Record<string, string> = {
-  'tokens': '/tokens',
-  'examples': '/examples',
-  'foundations': '/foundations',
+  tokens: "/tokens",
+  examples: "/examples",
+  foundations: "/foundations",
 };
 
 // Sections that open a submenu
-const SUBMENU_SECTIONS = ['components'];
+const SUBMENU_SECTIONS = ["components"];
 
 // Sections that render as expandable groups with sub-items
 const GROUP_SECTIONS: Record<string, Array<{ label: string; url: string }>> = {
-  'get-started': [
-    { label: 'Early Adopters', url: '/get-started' },
-    { label: 'Designers', url: '/get-started/designers' },
-    { label: 'Developers', url: '/get-started/developers' },
+  "get-started": [
+    { label: "Early Adopters", url: "/get-started" },
+    { label: "Designers", url: "/get-started/designers" },
+    { label: "Developers", url: "/get-started/developers" },
   ],
 };
 
 // Main navigation sections
 const SECTIONS = [
-  { id: 'get-started' as const, label: 'Get started', icon: 'document-text' },
-  { id: 'foundations' as const, label: 'Foundations', icon: 'list' },
-  { id: 'examples' as const, label: 'Examples', icon: 'browsers' },
-  { id: 'components' as const, label: 'Components', icon: 'shapes' },
-  { id: 'tokens' as const, label: 'Tokens', icon: 'code-slash' },
+  { id: "get-started" as const, label: "Get started", icon: "document-text" },
+  { id: "foundations" as const, label: "Foundations", icon: "list" },
+  { id: "examples" as const, label: "Examples", icon: "browsers" },
+  { id: "components" as const, label: "Components", icon: "shapes" },
+  { id: "tokens" as const, label: "Tokens", icon: "code-slash" },
 ];
 
-export function ParentMenu({ isOpen, onToggle, onSelectSection, currentSection }: ParentMenuProps) {
+export function ParentMenu({
+  isOpen,
+  onToggle,
+  onSelectSection,
+  currentSection,
+}: ParentMenuProps) {
   // Handle click on Components item - prevent navigation, open submenu instead
   const handleComponentsClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onSelectSection('components');
+    onSelectSection("components");
   };
 
   // Primary content: Main navigation sections
@@ -84,11 +90,7 @@ export function ParentMenu({ isOpen, onToggle, onSelectSection, currentSection }
               icon={section.icon}
             >
               {groupItems.map((item) => (
-                <GoabxWorkSideMenuItem
-                  key={item.url}
-                  label={item.label}
-                  url={item.url}
-                />
+                <GoabxWorkSideMenuItem key={item.url} label={item.label} url={item.url} />
               ))}
             </GoabxWorkSideMenuGroup>
           );
@@ -106,9 +108,13 @@ export function ParentMenu({ isOpen, onToggle, onSelectSection, currentSection }
         } else if (hasSubmenu) {
           // Opens submenu - use /components URL when on component pages for matching,
           // otherwise use non-matching URL to prevent false positives on homepage
-          const submenuUrl = isActive ? '/components' : '/__never_match__';
+          const submenuUrl = isActive ? "/components" : "/__never_match__";
           return (
-            <div key={section.id} onClick={handleComponentsClick} style={{ cursor: 'pointer' }}>
+            <div
+              key={section.id}
+              onClick={handleComponentsClick}
+              style={{ cursor: "pointer" }}
+            >
               <GoabxWorkSideMenuItem
                 label={section.label}
                 icon={section.icon}
@@ -132,38 +138,17 @@ export function ParentMenu({ isOpen, onToggle, onSelectSection, currentSection }
     </>
   );
 
-  // Secondary content: Utility links at bottom
-  const secondaryContent = (
-    <>
-      <GoabxWorkSideMenuItem
-        label="Search"
-        icon="search"
-        badge="/"
-        url="/search"
-      />
-      <GoabxWorkSideMenuItem
-        label="Get support"
-        icon="help-circle"
-        url="/support"
-      />
-      <GoabxWorkSideMenuItem
-        label="Release notes"
-        icon="open"
-        url="https://github.com/GovAlta/ui-components/releases"
-      />
-      <GoabSpacer vSpacing="m" />
-    </>
-  );
-
   return (
-    <GoabxWorkSideMenu
-      heading="Design system"
-      url="/"
-      open={isOpen}
-      onToggle={onToggle}
-      primaryContent={primaryContent}
-      secondaryContent={secondaryContent}
-    />
+    <>
+      <GoabxWorkSideMenu
+        heading="Design system"
+        url="/"
+        open={isOpen}
+        onToggle={onToggle}
+        primaryContent={primaryContent}
+        secondaryContent={<MenuSecondaryContent isOpen={isOpen} />}
+      />
+    </>
   );
 }
 

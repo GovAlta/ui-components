@@ -154,22 +154,19 @@ it("emits an event when a date is selected", async () => {
 
 it("updates the calendar when a new month is selected", async () => {
   const year = 2026;
-  const month = 4;
+  const month = 4; // 0-indexed: May
   const day = 1;
-  const date = new Date(year, month, day);
+  const date = new Date(year, month, day); // May 1, 2026
 
   const { container, queryByTestId } = render(Calendar, {
-    value: `${year}-0${month}-${day}`,
+    value: getDateStamp(date), // "2026-05-01" (1-indexed month)
   });
   await tick();
 
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const monthsEl = queryByTestId("months");
 
-  const today = toDayStart(new Date());
-  today.setDate(1);
-
-  // validate the day of the first day for the current month
+  // validate the day of the first day for the current month (May)
   {
     const dayOfWeek = date.getDay();
     const buttonEl = container.querySelector(
@@ -180,24 +177,33 @@ it("updates the calendar when a new month is selected", async () => {
     expect((buttonEl as HTMLElement).dataset.day).toBe(dayNames[dayOfWeek]);
   }
 
-  // The date should be selected
+  // The date should be selected and visible in the calendar grid
   expect(container.querySelector(".selected")).toBeTruthy();
 
-  // change month
-  const nextMonth = addMonths(today, 1);
+  // change to a different month
+  const nextMonthIndex = month + 2;
   monthsEl?.dispatchEvent(
     new CustomEvent("_change", {
-      detail: { type: "month", value: nextMonth.getMonth() + 1 },
+      detail: { type: "month", value: nextMonthIndex + 1 }, // 1-indexed
     }),
   );
 
-  await waitFor(() => {
-    const date = toDayStart(nextMonth);
-    date.setMonth(nextMonth.getMonth() - 1); // revert to 0-index value
-    date.setDate(1);
+  const nextMonthFirstDay = new Date(year, nextMonthIndex, 1); // July 1, 2026
 
+  await waitFor(() => {
     // 3370: After changing the month a day in the new month should not be selected
     expect(container.querySelector(".selected")).toBeFalsy();
+
+    // The calendar grid should now show the new month's dates
+    const buttonEl = container.querySelector(
+      `[data-date="${getDateStamp(nextMonthFirstDay)}"]`,
+    );
+    expect(buttonEl).toBeTruthy();
+    const dayEl = buttonEl?.querySelector("[data-testid=date]");
+    expect(dayEl?.innerHTML).toBe("1");
+    expect((buttonEl as HTMLElement).dataset.day).toBe(
+      dayNames[nextMonthFirstDay.getDay()],
+    );
   });
 });
 

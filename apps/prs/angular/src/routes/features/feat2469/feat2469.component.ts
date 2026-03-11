@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { FormsModule } from "@angular/forms";
 import {
   GoabButton,
@@ -34,15 +34,7 @@ function generateFakeData(numRows: number): DataTableFields[] {
   selector: "abgov-feat2469",
   templateUrl: "./feat2469.component.html",
   styleUrls: ["./feat2469.component.css"],
-  imports: [
-    CommonModule,
-    FormsModule,
-    GoabButton,
-    GoabInput,
-    GoabPageBlock,
-    GoabPushDrawer,
-    GoabTable,
-  ],
+  imports: [FormsModule, GoabButton, GoabInput, GoabPageBlock, GoabPushDrawer, GoabTable],
 })
 export class Feat2469Component {
   pushDrawerOpen = false;

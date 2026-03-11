@@ -3,6 +3,7 @@ export * from "./button/button";
 export * from "./calendar/calendar";
 export * from "./callout/callout";
 export * from "./checkbox/checkbox";
+export * from "./checkbox-list/checkbox-list";
 export * from "./date-picker/date-picker";
 export * from "./drawer/drawer";
 export * from "./dropdown/dropdown";

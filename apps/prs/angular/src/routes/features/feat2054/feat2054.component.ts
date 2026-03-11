@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import {
   GoabBlock,
   GoabDropdown,
@@ -20,7 +20,6 @@ interface MaxWidthExample {
   templateUrl: "./feat2054.component.html",
   styleUrls: ["./feat2054.component.css"],
   imports: [
-    CommonModule,
     GoabBlock,
     GoabDropdown,
     GoabDropdownItem,

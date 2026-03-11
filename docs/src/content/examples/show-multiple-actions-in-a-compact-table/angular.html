@@ -8,7 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of rows">
+    @for (row of rows; track row.id) {
+    <tr>
       <td>
         <goabx-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goabx-badge>
       </td>
@@ -22,5 +23,6 @@
         </goab-block>
       </td>
     </tr>
+    }
   </tbody>
 </goabx-table>

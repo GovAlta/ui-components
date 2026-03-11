@@ -3,7 +3,8 @@ import { GoabButtonGroup } from "./button-group";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   GoabButtonGroupAlignment,
-  GoabButtonGroupGap, Spacing,
+  GoabButtonGroupGap,
+  Spacing,
 } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { GoabButton } from "../button/button";

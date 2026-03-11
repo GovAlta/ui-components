@@ -13,27 +13,27 @@ import {
   ChangeDetectorRef,
   booleanAttribute,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-notification",
   template: `
-    <goa-notification
-      *ngIf="isReady"
-      [attr.version]="version"
-      [attr.type]="type"
-      [attr.arialive]="ariaLive"
-      [attr.maxcontentwidth]="maxContentWidth"
-      [attr.emphasis]="emphasis"
-      [attr.compact]="compact"
-      [attr.testid]="testId"
-      (_dismiss)="_onDismiss()"
-    >
-      <ng-content />
-    </goa-notification>
+    @if (isReady) {
+      <goa-notification
+        [attr.version]="version"
+        [attr.type]="type"
+        [attr.arialive]="ariaLive"
+        [attr.maxcontentwidth]="maxContentWidth"
+        [attr.emphasis]="emphasis"
+        [attr.compact]="compact"
+        [attr.testid]="testId"
+        (_dismiss)="_onDismiss()"
+      >
+        <ng-content />
+      </goa-notification>
+    }
   `,
-  imports: [CommonModule],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxNotification implements OnInit {

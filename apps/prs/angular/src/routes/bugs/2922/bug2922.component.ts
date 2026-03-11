@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { GoabFormStepper, GoabFormStep } from "@abgov/angular-components";
 import { GoabFormStepperOnChangeDetail } from "@abgov/ui-components-common";
 
@@ -7,7 +7,7 @@ import { GoabFormStepperOnChangeDetail } from "@abgov/ui-components-common";
   standalone: true,
   selector: "abgov-bug2922",
   templateUrl: "./bug2922.component.html",
-  imports: [CommonModule, GoabFormStepper, GoabFormStep],
+  imports: [GoabFormStepper, GoabFormStep],
 })
 export class Bug2922Component {
   currentStep = 1;

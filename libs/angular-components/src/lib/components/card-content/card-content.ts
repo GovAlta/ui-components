@@ -4,18 +4,18 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-card-content",
   template: `
-    <goa-card-content *ngIf="isReady">
-      <ng-content />
-    </goa-card-content>
+    @if (isReady) {
+      <goa-card-content>
+        <ng-content />
+      </goa-card-content>
+    }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [CommonModule],
 })
 export class GoabCardContent implements OnInit {
   isReady = false;
