@@ -1,11 +1,10 @@
 {
   "componentSlug": "push-drawer",
   "extractedFrom": "libs/web-components/src/components/push-drawer/PushDrawer.svelte",
-  "extractedAt": "2026-03-03T18:47:38.073Z",
   "props": [
     {
       "name": "testId",
-      "type": "\"string\"",
+      "type": "string",
       "required": false,
       "default": null,
       "description": ""

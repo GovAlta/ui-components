@@ -1,7 +1,6 @@
 {
   "componentSlug": "side-menu",
   "extractedFrom": "libs/web-components/src/components/side-menu/SideMenu.svelte",
-  "extractedAt": "2026-02-04T08:10:50.415Z",
   "props": [
     {
       "name": "testId",

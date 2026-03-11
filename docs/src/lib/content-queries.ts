@@ -26,7 +26,6 @@ export interface SlotDefinition {
 export interface ComponentApi {
   componentSlug: string;
   extractedFrom: string;
-  extractedAt: string;
   props: PropDefinition[];
   events: EventDefinition[];
   slots: SlotDefinition[];

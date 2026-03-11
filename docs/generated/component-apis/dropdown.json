@@ -1,7 +1,6 @@
 {
   "componentSlug": "dropdown",
   "extractedFrom": "libs/web-components/src/components/dropdown/Dropdown.svelte",
-  "extractedAt": "2026-02-04T08:10:50.403Z",
   "props": [
     {
       "name": "name",
@@ -26,11 +25,7 @@
     },
     {
       "name": "value",
-      "type": "string | undefined",
-      "values": [
-        "string",
-        "undefined"
-      ],
+      "type": "string",
       "required": false,
       "default": "",
       "description": "Stores the value of the item selected from the dropdown."

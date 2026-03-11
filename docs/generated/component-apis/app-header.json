@@ -1,14 +1,31 @@
 {
   "componentSlug": "app-header",
   "extractedFrom": "libs/web-components/src/components/app-header/AppHeader.svelte",
-  "extractedAt": "2026-02-04T08:10:50.392Z",
   "props": [
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": ""
+    },
     {
       "name": "heading",
       "type": "string",
       "required": false,
       "default": "",
       "description": "Set the service name to display in the app header."
+    },
+    {
+      "name": "secondarytext",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "V2 only: Secondary text displayed under the service name."
     },
     {
       "name": "url",
@@ -67,6 +84,22 @@
   "slots": [
     {
       "name": "default",
+      "description": ""
+    },
+    {
+      "name": "banner",
+      "description": ""
+    },
+    {
+      "name": "phase",
+      "description": ""
+    },
+    {
+      "name": "utilities",
+      "description": ""
+    },
+    {
+      "name": "navigation",
       "description": ""
     }
   ]

@@ -14,6 +14,7 @@
 import BaseLayout from './BaseLayout.astro';
 import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
+import { getNavCategories } from '../lib/nav-categories';
 
 interface Props {
   title: string;
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const navCategories = await getNavCategories();
 ---
 
 <BaseLayout title={title} description={description} page="home">
@@ -32,6 +34,7 @@ const { title, description } = Astro.props;
         <SiteNav
           client:only="react"
           initialSection="parent"
+          categories={navCategories}
         />
       </aside>
 

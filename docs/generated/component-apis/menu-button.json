@@ -1,7 +1,6 @@
 {
   "componentSlug": "menu-button",
   "extractedFrom": "libs/web-components/src/components/menu-button/MenuButton.svelte",
-  "extractedAt": "2026-02-04T08:10:50.411Z",
   "props": [
     {
       "name": "text",
@@ -13,7 +12,11 @@
     {
       "name": "type",
       "type": "\"primary\" | \"secondary\" | \"tertiary\"",
-      "values": ["primary", "secondary", "tertiary"],
+      "values": [
+        "primary",
+        "secondary",
+        "tertiary"
+      ],
       "required": false,
       "default": "primary",
       "description": "The button style variant."
@@ -43,7 +46,10 @@
     {
       "name": "size",
       "type": "\"normal\" | \"compact\"",
-      "values": ["normal", "compact"],
+      "values": [
+        "normal",
+        "compact"
+      ],
       "required": false,
       "default": "normal",
       "description": "Sets the size of the button."
@@ -51,7 +57,10 @@
     {
       "name": "variant",
       "type": "\"normal\" | \"destructive\"",
-      "values": ["normal", "destructive"],
+      "values": [
+        "normal",
+        "destructive"
+      ],
       "required": false,
       "default": "normal",
       "description": "Sets the color variant for semantic meaning."
@@ -69,13 +78,17 @@
       "name": "onAction",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": ["react"]
+      "frameworks": [
+        "react"
+      ]
     },
     {
       "name": "_action",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": ["angular"]
+      "frameworks": [
+        "angular"
+      ]
     }
   ],
   "slots": [

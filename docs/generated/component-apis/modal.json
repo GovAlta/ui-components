@@ -1,7 +1,6 @@
 {
   "componentSlug": "modal",
   "extractedFrom": "libs/web-components/src/components/modal/Modal.svelte",
-  "extractedAt": "2026-02-04T08:10:50.412Z",
   "props": [
     {
       "name": "heading",
@@ -39,11 +38,7 @@
     },
     {
       "name": "calloutVariant",
-      "type": "CalloutVariant | null",
-      "values": [
-        "CalloutVariant",
-        "null"
-      ],
+      "type": "\"\"",
       "required": false,
       "default": null,
       "description": "Define the context and colour of the callout modal. It is required when type is set to callout."

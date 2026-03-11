@@ -1,26 +1,17 @@
 {
   "componentSlug": "linear-progress",
   "extractedFrom": "libs/web-components/src/components/linear-progress/LinearProgress.svelte",
-  "extractedAt": "2026-02-04T08:10:50.411Z",
   "props": [
     {
       "name": "testId",
-      "type": "string | undefined",
-      "values": [
-        "string",
-        "undefined"
-      ],
+      "type": "string",
       "required": false,
       "default": null,
       "description": "Sets a data-testid attribute for automated testing."
     },
     {
       "name": "progress",
-      "type": "number | undefined",
-      "values": [
-        "number",
-        "undefined"
-      ],
+      "type": "number",
       "required": false,
       "default": null,
       "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
@@ -38,22 +29,14 @@
     },
     {
       "name": "ariaLabel",
-      "type": "string | undefined",
-      "values": [
-        "string",
-        "undefined"
-      ],
+      "type": "string",
       "required": false,
       "default": null,
       "description": "Accessible label for the progress bar."
     },
     {
       "name": "ariaLabelledBy",
-      "type": "string | undefined",
-      "values": [
-        "string",
-        "undefined"
-      ],
+      "type": "string",
       "required": false,
       "default": null,
       "description": "ID of the element that labels this progress bar."

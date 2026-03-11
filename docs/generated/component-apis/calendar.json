@@ -1,7 +1,6 @@
 {
   "componentSlug": "calendar",
   "extractedFrom": "libs/web-components/src/components/calendar/Calendar.svelte",
-  "extractedAt": "2026-02-04T08:10:50.395Z",
   "props": [
     {
       "name": "name",

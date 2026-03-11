@@ -1,7 +1,6 @@
 {
   "componentSlug": "button",
   "extractedFrom": "libs/web-components/src/components/button/Button.svelte",
-  "extractedAt": "2026-02-04T08:10:50.394Z",
   "props": [
     {
       "name": "type",

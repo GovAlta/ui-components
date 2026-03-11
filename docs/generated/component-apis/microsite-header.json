@@ -1,7 +1,6 @@
 {
   "componentSlug": "microsite-header",
   "extractedFrom": "libs/web-components/src/components/microsite-header/MicrositeHeader.svelte",
-  "extractedAt": "2026-02-04T08:10:50.412Z",
   "props": [
     {
       "name": "type",

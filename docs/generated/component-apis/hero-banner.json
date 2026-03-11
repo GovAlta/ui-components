@@ -1,7 +1,6 @@
 {
   "componentSlug": "hero-banner",
   "extractedFrom": "libs/web-components/src/components/hero-banner/HeroBanner.svelte",
-  "extractedAt": "2026-02-04T08:10:50.408Z",
   "props": [
     {
       "name": "heading",

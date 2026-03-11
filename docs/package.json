@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run build:search-index && astro check && astro build",
-    "build:search-index": "tsx src/scripts/build-search-index.ts",
+    "build": "npm run extract-api && npm run build:search-index && astro build",
+    "build:search-index": "npx tsx src/scripts/build-search-index.ts",
+    "extract-api": "npx tsx src/scripts/extract-api.ts --all",
     "preview": "astro preview",
     "astro": "astro"
   },

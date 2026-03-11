@@ -1,7 +1,6 @@
 {
   "componentSlug": "container",
   "extractedFrom": "libs/web-components/src/components/container/Container.svelte",
-  "extractedAt": "2026-02-04T08:10:50.399Z",
   "props": [
     {
       "name": "type",

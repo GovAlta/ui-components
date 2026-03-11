@@ -1,7 +1,6 @@
 {
   "componentSlug": "footer-meta-section",
   "extractedFrom": "libs/web-components/src/components/footer-meta-section/FooterMetaSection.svelte",
-  "extractedAt": "2026-02-04T08:10:50.405Z",
   "props": [
     {
       "name": "testId",

@@ -1,11 +1,14 @@
 {
   "componentSlug": "file-upload-input",
   "extractedFrom": "libs/web-components/src/components/file-upload-input/FileUploadInput.svelte",
-  "extractedAt": "2026-02-04T08:10:50.404Z",
   "props": [
     {
       "name": "variant",
-      "type": "Variant",
+      "type": "\"dragdrop\" | \"button\"",
+      "values": [
+        "dragdrop",
+        "button"
+      ],
       "required": false,
       "default": "dragdrop",
       "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."

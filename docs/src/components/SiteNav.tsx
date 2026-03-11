@@ -13,12 +13,8 @@
  * - Sub-menu view: Shows section-specific navigation (only for components)
  */
 
-import { useState, useEffect, useCallback } from 'react';
-import {
-  ParentMenu,
-  ComponentsSubMenu,
-  type MenuSection,
-} from './nav';
+import { useState, useEffect, useCallback } from "react";
+import { ParentMenu, ComponentsSubMenu, type MenuSection, type NavCategory } from "./nav";
 
 interface SiteNavProps {
   /** Current page slug (for highlighting current item) */
@@ -27,24 +23,26 @@ interface SiteNavProps {
   currentCategory?: string;
   /** Initial section to show (detected from URL if not provided) */
   initialSection?: MenuSection;
+  /** Component nav categories (from content collection, passed by Astro layout) */
+  categories?: NavCategory[];
 }
 
 // Sections that have submenus (show submenu when navigated to)
-const SUBMENU_SECTIONS = ['components'];
+const SUBMENU_SECTIONS = ["components"];
 
 // Sections that are single pages (stay on parent menu, just highlight)
-const SINGLE_PAGE_SECTIONS = ['tokens', 'examples'];
+const SINGLE_PAGE_SECTIONS = ["tokens", "examples"];
 
 /**
  * Detect the current section from URL pathname
  */
 function detectSectionFromUrl(pathname: string): MenuSection {
-  if (pathname.startsWith('/components')) return 'components';
-  if (pathname.startsWith('/examples')) return 'examples';
-  if (pathname.startsWith('/tokens')) return 'tokens';
-  if (pathname.startsWith('/get-started')) return 'get-started';
-  if (pathname.startsWith('/foundations')) return 'foundations';
-  return 'parent';
+  if (pathname.startsWith("/components")) return "components";
+  if (pathname.startsWith("/examples")) return "examples";
+  if (pathname.startsWith("/tokens")) return "tokens";
+  if (pathname.startsWith("/get-started")) return "get-started";
+  if (pathname.startsWith("/foundations")) return "foundations";
+  return "parent";
 }
 
 /**
@@ -56,11 +54,11 @@ function getMenuLevelForSection(section: MenuSection): MenuSection {
   if (SUBMENU_SECTIONS.includes(section)) {
     return section; // Show the submenu
   }
-  return 'parent'; // Stay on parent menu
+  return "parent"; // Stay on parent menu
 }
 
 const MOBILE_BREAKPOINT = 624;
-const MENU_STATE_KEY = 'goa-ds-menu-open';
+const MENU_STATE_KEY = "goa-ds-menu-open";
 
 /**
  * Get initial menu state:
@@ -68,7 +66,7 @@ const MENU_STATE_KEY = 'goa-ds-menu-open';
  * - Desktop: check localStorage, default to open
  */
 function getInitialMenuState(): boolean {
-  if (typeof window === 'undefined') return true; // SSR fallback
+  if (typeof window === "undefined") return true; // SSR fallback
 
   // Mobile always starts closed
   if (window.innerWidth < MOBILE_BREAKPOINT) {
@@ -78,22 +76,29 @@ function getInitialMenuState(): boolean {
   // Desktop: check localStorage for saved preference
   const saved = localStorage.getItem(MENU_STATE_KEY);
   if (saved !== null) {
-    return saved === 'true';
+    return saved === "true";
   }
 
   // Default to open on desktop
   return true;
 }
 
-export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNavProps) {
+export function SiteNav({
+  currentSlug,
+  currentCategory,
+  initialSection,
+  categories = [],
+}: SiteNavProps) {
   // Menu state - persisted on desktop, always closed on mobile
   const [isOpen, setIsOpen] = useState(getInitialMenuState);
-  const [currentSection, setCurrentSection] = useState<MenuSection>(initialSection || 'parent');
-  const [menuLevel, setMenuLevel] = useState<MenuSection>('parent');
+  const [currentSection, setCurrentSection] = useState<MenuSection>(
+    initialSection || "parent",
+  );
+  const [menuLevel, setMenuLevel] = useState<MenuSection>("parent");
 
   // Initialize from URL on mount (client-side only)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const section = initialSection || detectSectionFromUrl(window.location.pathname);
       setCurrentSection(section);
       setMenuLevel(getMenuLevelForSection(section));
@@ -103,20 +108,18 @@ export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNa
   // Event bridge: Listen for 'goa-menu-open' from MobileHeader hamburger button
   useEffect(() => {
     const handleMenuOpen = () => setIsOpen(true);
-    window.addEventListener('goa-menu-open', handleMenuOpen);
-    return () => window.removeEventListener('goa-menu-open', handleMenuOpen);
+    window.addEventListener("goa-menu-open", handleMenuOpen);
+    return () => window.removeEventListener("goa-menu-open", handleMenuOpen);
   }, []);
 
   // Event bridge: Emit 'goa-menu-change' when isOpen changes (for mobile-bridge.ts)
   useEffect(() => {
-    window.dispatchEvent(
-      new CustomEvent('goa-menu-change', { detail: { isOpen } })
-    );
+    window.dispatchEvent(new CustomEvent("goa-menu-change", { detail: { isOpen } }));
   }, [isOpen]);
 
   // Persist menu state to localStorage (desktop only)
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
       localStorage.setItem(MENU_STATE_KEY, String(isOpen));
     }
@@ -128,7 +131,8 @@ export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNa
 
     const handleResize = () => {
       const width = window.innerWidth;
-      const crossedToDesktop = previousWidth < MOBILE_BREAKPOINT && width >= MOBILE_BREAKPOINT;
+      const crossedToDesktop =
+        previousWidth < MOBILE_BREAKPOINT && width >= MOBILE_BREAKPOINT;
 
       // Close menu when window shrinks (gives more room for content)
       // OR when crossing from mobile to desktop (prevents floating menu bug)
@@ -139,28 +143,31 @@ export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNa
       previousWidth = width;
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
 
-  const handleSelectSection = useCallback((section: MenuSection) => {
-    // Only components has a submenu - switch to it
-    if (SUBMENU_SECTIONS.includes(section)) {
-      setMenuLevel(section);
-      // Auto-expand when entering submenu while collapsed (icons aren't descriptive enough)
-      if (!isOpen) {
-        setIsOpen(true);
+  const handleSelectSection = useCallback(
+    (section: MenuSection) => {
+      // Only components has a submenu - switch to it
+      if (SUBMENU_SECTIONS.includes(section)) {
+        setMenuLevel(section);
+        // Auto-expand when entering submenu while collapsed (icons aren't descriptive enough)
+        if (!isOpen) {
+          setIsOpen(true);
+        }
       }
-    }
-    // Other sections navigate directly via url prop, no state change needed
-  }, [isOpen]);
+      // Other sections navigate directly via url prop, no state change needed
+    },
+    [isOpen],
+  );
 
   const handleBack = useCallback(() => {
-    setMenuLevel('parent');
+    setMenuLevel("parent");
   }, []);
 
   const handleExpandMenu = useCallback(() => {
@@ -169,7 +176,7 @@ export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNa
 
   // Render the appropriate menu based on current level
   switch (menuLevel) {
-    case 'components':
+    case "components":
       return (
         <ComponentsSubMenu
           isOpen={isOpen}
@@ -177,11 +184,12 @@ export function SiteNav({ currentSlug, currentCategory, initialSection }: SiteNa
           onBack={handleBack}
           onExpandMenu={handleExpandMenu}
           currentSlug={currentSlug}
+          categories={categories}
         />
       );
 
     // All other cases show the parent menu with appropriate highlighting
-    case 'parent':
+    case "parent":
     default:
       return (
         <ParentMenu

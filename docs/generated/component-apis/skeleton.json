@@ -1,7 +1,6 @@
 {
   "componentSlug": "skeleton",
   "extractedFrom": "libs/web-components/src/components/skeleton/Skeleton.svelte",
-  "extractedAt": "2026-02-04T08:10:50.416Z",
   "props": [
     {
       "name": "maxWidth",

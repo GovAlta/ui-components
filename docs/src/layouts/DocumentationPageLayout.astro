@@ -20,6 +20,7 @@ import BaseLayout from './BaseLayout.astro';
 import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
 import { TableOfContents } from '../components/TableOfContents';
+import { getNavCategories } from '../lib/nav-categories';
 
 interface Props {
   title: string;
@@ -39,6 +40,7 @@ const {
   showToc = true,
   tocQuery = 'h2[id], h3[id]'
 } = Astro.props;
+const navCategories = await getNavCategories();
 ---
 
 <BaseLayout title={title} description={description}>
@@ -49,6 +51,7 @@ const {
         <SiteNav
           client:only="react"
           initialSection={section}
+          categories={navCategories}
         />
       </aside>
 
