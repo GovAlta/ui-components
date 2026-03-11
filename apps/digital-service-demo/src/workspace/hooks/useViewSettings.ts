@@ -9,7 +9,9 @@ interface UseViewSettingsOptions {
 
 interface UseViewSettingsReturn {
   viewSettings: ViewSettings;
-  setViewSettings: (settings: ViewSettings) => void;
+  setViewSettings: (
+    settingsOrUpdater: ViewSettings | ((prev: ViewSettings) => ViewSettings),
+  ) => void;
   layoutCustomized: boolean;
   setLayoutCustomized: (customized: boolean) => void;
   handleSettingsChange: (
@@ -22,11 +24,10 @@ interface UseViewSettingsReturn {
 const DEFAULT_VISIBLE_COLUMNS = [
   "name",
   "status",
-  "staff",
-  "dueDate",
-  "jurisdiction",
-  "fileNumber",
-  "priority",
+  "referenceNumber",
+  "submittedAt",
+  "assignedWorker",
+  "formType",
 ];
 
 function getStorageKey(pageKey: string): string {
@@ -98,12 +99,18 @@ export function useViewSettings({
     saveSettings(pageKey, state);
   }, [pageKey, state]);
 
-  const setViewSettings = useCallback((settings: ViewSettings) => {
-    setState((prev) => ({
-      ...prev,
-      viewSettings: settings,
-    }));
-  }, []);
+  const setViewSettings = useCallback(
+    (settingsOrUpdater: ViewSettings | ((prev: ViewSettings) => ViewSettings)) => {
+      setState((prev) => ({
+        ...prev,
+        viewSettings:
+          typeof settingsOrUpdater === "function"
+            ? settingsOrUpdater(prev.viewSettings)
+            : settingsOrUpdater,
+      }));
+    },
+    [],
+  );
 
   const setLayoutCustomized = useCallback((customized: boolean) => {
     setState((prev) => ({

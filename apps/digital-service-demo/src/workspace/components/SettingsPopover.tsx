@@ -33,13 +33,12 @@ interface SettingsPopoverProps {
 type Screen = "main" | "layout" | "columns" | "grouping";
 
 const COLUMN_OPTIONS = [
-  { key: "name", label: "Name" },
+  { key: "name", label: "Applicant" },
   { key: "status", label: "Status" },
-  { key: "staff", label: "Assigned to" },
-  { key: "dueDate", label: "Due date" },
-  { key: "jurisdiction", label: "Jurisdiction" },
-  { key: "fileNumber", label: "File number" },
-  { key: "priority", label: "Priority" },
+  { key: "referenceNumber", label: "Reference" },
+  { key: "submittedAt", label: "Submitted" },
+  { key: "assignedWorker", label: "Assigned to" },
+  { key: "formType", label: "Type" },
 ];
 
 const GROUPING_OPTIONS: { value: GroupByField; label: string }[] = [

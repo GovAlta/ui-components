@@ -187,12 +187,14 @@ export function CasesPage() {
   // Update layout when tab changes (if user hasn't customized)
   useEffect(() => {
     if (!layoutCustomized) {
-      setViewSettings({
-        ...viewSettings,
+      setViewSettings((prev) => ({
+        ...prev,
         layout: defaultLayout,
-      });
+      }));
     }
-  }, [activeTab, defaultLayout, layoutCustomized, setViewSettings, viewSettings]);
+    // Only reset layout when the active tab changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
 
   // Filter state
   const [pendingFilters, setPendingFilters] = useState({
@@ -753,7 +755,7 @@ export function CasesPage() {
       {/* Table View */}
       {viewMode === "table" && (
         <DataTable
-          columns={columns}
+          columns={columns.filter((c) => viewSettings.visibleColumns.includes(c.key))}
           data={filteredCases}
           isLoading={isLoading}
           skeletonRows={10}
