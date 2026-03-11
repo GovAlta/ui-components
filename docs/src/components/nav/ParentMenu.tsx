@@ -48,6 +48,9 @@ const GROUP_SECTIONS: Record<string, Array<{ label: string; url: string }>> = {
     { label: "Designers", url: "/get-started/designers" },
     { label: "Developers", url: "/get-started/developers" },
   ],
+  "foundations": [
+    { label: "Motion", url: "/foundations/motion" },
+  ],
 };
 
 // Main navigation sections
