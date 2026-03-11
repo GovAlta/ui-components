@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   GoabText,
@@ -8,6 +9,7 @@ import {
   GoabBlock,
   GoabTab,
   GoabIconButton,
+  GoabPushDrawer,
 } from "@abgov/react-components";
 import {
   GoabxBadge,
@@ -20,9 +22,7 @@ import {
   GoabxCheckbox,
   GoabxMenuButton,
   GoabxMenuAction,
-  GoabxDrawer,
 } from "@abgov/react-components/experimental";
-import { PortalDrawer } from "../../workspace/components/PortalDrawer";
 import {
   GoabInputOnChangeDetail,
   GoabMenuButtonOnActionDetail,
@@ -918,87 +918,101 @@ export function CasesPage() {
         </div>
       )}
 
-      {/* Filter Drawer */}
-      <GoabxDrawer
-        heading="Filter applications"
-        position="right"
-        open={filterDrawerOpen}
-        maxSize="300px"
-        onClose={() => setFilterDrawerOpen(false)}
-        actions={
-          <GoabButtonGroup alignment="start" gap="compact">
-            <GoabxButton type="primary" size="compact" onClick={applyFilters}>
-              Apply filters
-            </GoabxButton>
-            <GoabxButton
-              type="tertiary"
-              size="compact"
-              onClick={() => setFilterDrawerOpen(false)}
-            >
-              Cancel
-            </GoabxButton>
-          </GoabButtonGroup>
-        }
-      >
-        <div
-          style={{ display: "flex", flexDirection: "column", gap: "var(--goa-space-l)" }}
-        >
-          <GoabxFormItem label="Status">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "var(--goa-space-xs)",
-              }}
-            >
-              {filterOptions.statuses.map((status) => (
-                <GoabxCheckbox
-                  key={status}
-                  name={`status-${status}`}
-                  text={getStatusText(status as CaseWithSubmission["status"])}
-                  checked={pendingFilters.status.includes(status)}
-                  onChange={() => togglePendingFilter("status", status)}
-                />
-              ))}
+      {/* Filter Push Drawer - portaled to layout level for proper push behavior */}
+      {document.getElementById("page-push-drawer-portal") &&
+        createPortal(
+          <div
+            className={`push-drawer-container ${filterDrawerOpen ? "push-drawer-container--open" : ""}`}
+          >
+            <div className="push-drawer-clip">
+              <GoabPushDrawer
+                open={filterDrawerOpen}
+                heading="Filter applications"
+                onClose={() => setFilterDrawerOpen(false)}
+                actions={
+                  <GoabButtonGroup alignment="start" gap="compact">
+                    <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                      Apply filters
+                    </GoabxButton>
+                    <GoabxButton
+                      type="tertiary"
+                      size="compact"
+                      onClick={() => setFilterDrawerOpen(false)}
+                    >
+                      Cancel
+                    </GoabxButton>
+                  </GoabButtonGroup>
+                }
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "var(--goa-space-l)",
+                  }}
+                >
+                  <GoabxFormItem label="Status">
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "var(--goa-space-xs)",
+                      }}
+                    >
+                      {filterOptions.statuses.map((status) => (
+                        <GoabxCheckbox
+                          key={status}
+                          name={`status-${status}`}
+                          text={getStatusText(status as CaseWithSubmission["status"])}
+                          checked={pendingFilters.status.includes(status)}
+                          onChange={() => togglePendingFilter("status", status)}
+                        />
+                      ))}
+                    </div>
+                  </GoabxFormItem>
+
+                  {filterOptions.workers.length > 0 && (
+                    <GoabxFormItem label="Assigned to">
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "var(--goa-space-xs)",
+                        }}
+                      >
+                        {filterOptions.workers.map((worker) => (
+                          <GoabxCheckbox
+                            key={worker}
+                            name={`worker-${worker}`}
+                            text={worker}
+                            checked={pendingFilters.assignedWorker.includes(worker)}
+                            onChange={() => togglePendingFilter("assignedWorker", worker)}
+                          />
+                        ))}
+                      </div>
+                    </GoabxFormItem>
+                  )}
+
+                  {Object.values(pendingFilters).some((arr) => arr.length > 0) && (
+                    <>
+                      <GoabDivider />
+                      <GoabxButton
+                        type="tertiary"
+                        size="compact"
+                        onClick={() =>
+                          setPendingFilters({ status: [], assignedWorker: [] })
+                        }
+                      >
+                        Clear all filters
+                      </GoabxButton>
+                    </>
+                  )}
+                </div>
+              </GoabPushDrawer>
             </div>
-          </GoabxFormItem>
-
-          {filterOptions.workers.length > 0 && (
-            <GoabxFormItem label="Assigned to">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "var(--goa-space-xs)",
-                }}
-              >
-                {filterOptions.workers.map((worker) => (
-                  <GoabxCheckbox
-                    key={worker}
-                    name={`worker-${worker}`}
-                    text={worker}
-                    checked={pendingFilters.assignedWorker.includes(worker)}
-                    onChange={() => togglePendingFilter("assignedWorker", worker)}
-                  />
-                ))}
-              </div>
-            </GoabxFormItem>
-          )}
-
-          {Object.values(pendingFilters).some((arr) => arr.length > 0) && (
-            <>
-              <GoabDivider />
-              <GoabxButton
-                type="tertiary"
-                size="compact"
-                onClick={() => setPendingFilters({ status: [], assignedWorker: [] })}
-              >
-                Clear all filters
-              </GoabxButton>
-            </>
-          )}
-        </div>
-      </GoabxDrawer>
+          </div>,
+          document.getElementById("page-push-drawer-portal")!,
+        )}
     </div>
   );
 }

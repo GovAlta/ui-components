@@ -197,6 +197,8 @@ function WorkspaceLayoutInner() {
           </div>
         )}
       </div>
+      {/* Portal target for page-level push drawers (e.g., filters) */}
+      <div id="page-push-drawer-portal" />
       {/* Push drawer at layout level */}
       <div
         className={`push-drawer-container ${isOpen ? "push-drawer-container--open" : ""}`}
