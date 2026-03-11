@@ -99,6 +99,7 @@ export function App() {
               <Link to="/bugs/3279">3279 Work Side Menu Key Nav</Link>
               <Link to="/bugs/3384">3384 v2 Table Border</Link>
               <Link to="/bugs/3450">3450 Dropdown expanding inside Container</Link>
+              <Link to="/bugs/3498">3498 Radio alignment</Link>
             </GoabSideMenuGroup>
             <GoabSideMenuGroup heading="Features">
               <Link to="/features/1383">1383 Button Filled Icons</Link>

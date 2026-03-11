@@ -310,7 +310,6 @@
   .radio {
     display: inline-flex;
     align-items: flex-start;
-    gap: var(--goa-radio-gap-label, var(--goa-space-xs));
   }
 
   /* V2 compact: Use smaller gap */
@@ -348,6 +347,7 @@
   .label {
     font: var(--goa-radio-label);
     margin-top: -3px; /* V1: Optical centering - move text up */
+    padding-left: var(--goa-space-s);
   }
 
   /* V2: Adjust for different line-height */
@@ -381,9 +381,9 @@
     display: block;
   }
   .reveal.visible.has-content {
-    padding: var(--goa-space-m);
-    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
-    border-left: 4px solid var(--goa-color-greyscale-200);
+    padding: var(--goa-space-m) var(--goa-space-l);
+    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 1px);
+    border-left: 1px solid var(--goa-color-greyscale-200);
   }
 
   .icon {
