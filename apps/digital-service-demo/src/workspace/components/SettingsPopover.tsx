@@ -14,7 +14,7 @@ import {
 import { GoabIconType } from "@abgov/ui-components-common";
 
 export type LayoutType = "table" | "card" | "list";
-export type GroupByField = null | "status" | "priority" | "staff" | "jurisdiction";
+export type GroupByField = null | "status" | "assigned_worker" | "form_type";
 
 export interface ViewSettings {
   layout: LayoutType;
@@ -44,9 +44,8 @@ const COLUMN_OPTIONS = [
 const GROUPING_OPTIONS: { value: GroupByField; label: string }[] = [
   { value: null, label: "None" },
   { value: "status", label: "Status" },
-  { value: "priority", label: "Priority" },
-  { value: "staff", label: "Assigned to" },
-  { value: "jurisdiction", label: "Jurisdiction" },
+  { value: "assigned_worker", label: "Assigned to" },
+  { value: "form_type", label: "Form type" },
 ];
 
 const LAYOUT_OPTIONS: { value: LayoutType; label: string; icon: GoabIconType }[] = [

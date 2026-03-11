@@ -30,7 +30,7 @@ import {
   GoabTableOnMultiSortDetail,
 } from "@abgov/ui-components-common";
 import { supabase, CaseWithSubmission } from "../../lib/supabase";
-import { DataTable } from "../../workspace/components/DataTable";
+import { DataTable, DataTableGroup } from "../../workspace/components/DataTable";
 import { ExpandableListView } from "../../workspace/components/ExpandableListView";
 import { CardView } from "../../workspace/components/CardView";
 import { EmptyState } from "../../workspace/components/EmptyState";
@@ -38,6 +38,7 @@ import {
   SettingsPopover,
   ViewSettings,
   LayoutType,
+  GroupByField,
 } from "../../workspace/components/SettingsPopover";
 import { usePageHeader } from "../../workspace/contexts/PageHeaderContext";
 import { useMenu } from "../../workspace/contexts/MenuContext";
@@ -113,6 +114,61 @@ const sortFieldLabels: Record<string, string> = {
   formType: "Form type",
 };
 
+// Status display order for grouping
+const STATUS_ORDER = [
+  "submitted",
+  "under_review",
+  "info_requested",
+  "approved",
+  "denied",
+];
+
+function groupCases(
+  cases: CaseWithSubmission[],
+  groupBy: GroupByField,
+): DataTableGroup<CaseWithSubmission>[] {
+  if (!groupBy) return [];
+
+  const groupMap = new Map<string, CaseWithSubmission[]>();
+
+  for (const c of cases) {
+    let key: string;
+    switch (groupBy) {
+      case "status":
+        key = c.status;
+        break;
+      case "assigned_worker":
+        key = c.assigned_worker || "Unassigned";
+        break;
+      case "form_type":
+        key = c.submissions.form_type;
+        break;
+    }
+    if (!groupMap.has(key)) groupMap.set(key, []);
+    groupMap.get(key)!.push(c);
+  }
+
+  const groups = Array.from(groupMap, ([key, items]) => ({
+    key,
+    label:
+      groupBy === "status" ? getStatusText(key as CaseWithSubmission["status"]) : key,
+    items,
+  }));
+
+  // Sort groups: status in workflow order, others alphabetical
+  if (groupBy === "status") {
+    groups.sort((a, b) => STATUS_ORDER.indexOf(a.key) - STATUS_ORDER.indexOf(b.key));
+  } else {
+    groups.sort((a, b) => {
+      if (a.key === "Unassigned") return -1;
+      if (b.key === "Unassigned") return 1;
+      return a.label.localeCompare(b.label);
+    });
+  }
+
+  return groups;
+}
+
 export function CasesPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -147,6 +203,9 @@ export function CasesPage() {
 
   // Sort state - driven by GoabxTable's built-in multi-sort
   const [sorts, setSorts] = useState<GoabTableSortEntry[]>([]);
+
+  // Group collapse state
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
 
   // View settings - different default layouts per tab
   const getDefaultLayout = useCallback((tab: string): LayoutType => {
@@ -380,6 +439,24 @@ export function CasesPage() {
 
     return filtered;
   }, [cases, activeTab, searchTerm, appliedFilters, sorts]);
+
+  // Group filtered cases
+  const groupedCases = useMemo(
+    () => groupCases(filteredCases, viewSettings.groupBy),
+    [filteredCases, viewSettings.groupBy],
+  );
+
+  const toggleGroup = useCallback((groupKey: string) => {
+    setCollapsedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(groupKey)) {
+        next.delete(groupKey);
+      } else {
+        next.add(groupKey);
+      }
+      return next;
+    });
+  }, []);
 
   // Clear all
   const handleClearAll = useCallback(() => {
@@ -631,8 +708,12 @@ export function CasesPage() {
                 variant="dark"
                 ariaLabel="Filter"
                 onClick={() => {
-                  setPendingFilters(appliedFilters);
-                  setFilterDrawerOpen(true);
+                  if (filterDrawerOpen) {
+                    setFilterDrawerOpen(false);
+                  } else {
+                    setPendingFilters(appliedFilters);
+                    setFilterDrawerOpen(true);
+                  }
                 }}
               />
             ) : (
@@ -641,8 +722,12 @@ export function CasesPage() {
                 leadingIcon="filter-lines"
                 size="compact"
                 onClick={() => {
-                  setPendingFilters(appliedFilters);
-                  setFilterDrawerOpen(true);
+                  if (filterDrawerOpen) {
+                    setFilterDrawerOpen(false);
+                  } else {
+                    setPendingFilters(appliedFilters);
+                    setFilterDrawerOpen(true);
+                  }
                 }}
               >
                 Filter
@@ -664,6 +749,7 @@ export function CasesPage() {
       searchTerm,
       sorts,
       appliedFilters,
+      filterDrawerOpen,
       viewSettings,
       defaultLayout,
       isMobile,
@@ -714,6 +800,153 @@ export function CasesPage() {
         onButtonClick={handleClearAll}
       />
     );
+
+  const renderCardContent = useCallback(
+    (c: CaseWithSubmission) => ({
+      title: (
+        <GoabText size="heading-xs" mt="none" mb="none">
+          {formatCitizenName(c.submissions)}
+        </GoabText>
+      ),
+      badge: (
+        <GoabxBadge
+          type={getStatusBadgeType(c.status)}
+          content={getStatusText(c.status)}
+          emphasis="subtle"
+          icon={false}
+        />
+      ),
+      actions: (
+        <GoabxButton
+          type="tertiary"
+          size="compact"
+          onClick={() => navigate(`/workspace/application/${c.id}`)}
+        >
+          View
+        </GoabxButton>
+      ),
+      sections: [
+        {
+          heading: "Submission",
+          fields: [
+            { label: "Reference", value: c.submissions.reference_number },
+            { label: "Form type", value: c.submissions.form_type },
+          ],
+        },
+        {
+          heading: "Assignment",
+          fields: [
+            { label: "Assigned to", value: c.assigned_worker || "Unassigned" },
+            {
+              label: "Submitted",
+              value: formatDate(c.submissions.submitted_at),
+            },
+            { label: "Status", value: getStatusText(c.status) },
+          ],
+        },
+      ],
+    }),
+    [navigate],
+  );
+
+  const renderListCollapsed = useCallback(
+    (c: CaseWithSubmission) => ({
+      title: (
+        <span className="expandable-list__name">{formatCitizenName(c.submissions)}</span>
+      ),
+      badge: (
+        <GoabxBadge
+          type={getStatusBadgeType(c.status)}
+          content={getStatusText(c.status)}
+          emphasis="subtle"
+          icon={false}
+        />
+      ),
+      secondaryInfo: (
+        <span
+          style={{
+            font: "var(--goa-typography-body-xs)",
+            color: "var(--goa-color-text-secondary)",
+          }}
+        >
+          {c.submissions.reference_number}
+        </span>
+      ),
+      actions: (
+        <GoabxButton
+          type="tertiary"
+          size="compact"
+          onClick={() => navigate(`/workspace/application/${c.id}`)}
+        >
+          View
+        </GoabxButton>
+      ),
+    }),
+    [navigate],
+  );
+
+  const renderListExpanded = useCallback(
+    (c: CaseWithSubmission) => (
+      <div className="case-card__sections">
+        <div className="case-card__section">
+          <div className="case-card__section-heading">Submission</div>
+          <div className="case-card__section-fields">
+            <GoabBlock direction="column" gap="xs">
+              <span className="case-card__label">Reference</span>
+              <span className="case-card__value">{c.submissions.reference_number}</span>
+            </GoabBlock>
+            <GoabBlock direction="column" gap="xs">
+              <span className="case-card__label">Submitted</span>
+              <span className="case-card__value">
+                {formatDate(c.submissions.submitted_at)}
+              </span>
+            </GoabBlock>
+            <GoabBlock direction="column" gap="xs">
+              <span className="case-card__label">Form Type</span>
+              <span className="case-card__value">{c.submissions.form_type}</span>
+            </GoabBlock>
+          </div>
+        </div>
+        <div className="case-card__section">
+          <div className="case-card__section-heading">Assignment</div>
+          <div className="case-card__section-fields">
+            <GoabBlock direction="column" gap="xs">
+              <span className="case-card__label">Assigned to</span>
+              <span className="case-card__value">
+                {c.assigned_worker || "Unassigned"}
+              </span>
+            </GoabBlock>
+            <GoabBlock direction="column" gap="xs">
+              <span className="case-card__label">Email</span>
+              <span className="case-card__value">
+                {c.submissions.citizen_email || "—"}
+              </span>
+            </GoabBlock>
+          </div>
+        </div>
+      </div>
+    ),
+    [],
+  );
+
+  const renderGroupHeader = (group: DataTableGroup<CaseWithSubmission>) => {
+    const isCollapsed = collapsedGroups.has(group.key);
+    return (
+      <button
+        className="cases-group__header"
+        onClick={() => toggleGroup(group.key)}
+        aria-expanded={!isCollapsed}
+      >
+        <GoabIcon type={isCollapsed ? "chevron-forward" : "chevron-down"} size="small" />
+        <span className="cases-group__label">{group.label}</span>
+        <GoabxBadge
+          type="information"
+          content={String(group.items.length)}
+          emphasis="subtle"
+        />
+      </button>
+    );
+  };
 
   return (
     <div style={{ maxWidth: "100%", overflow: "hidden", paddingBottom: "16px" }}>
@@ -770,6 +1003,9 @@ export function CasesPage() {
         <DataTable
           columns={columns.filter((c) => viewSettings.visibleColumns.includes(c.key))}
           data={filteredCases}
+          groups={viewSettings.groupBy ? groupedCases : undefined}
+          collapsedGroups={collapsedGroups}
+          onToggleGroup={toggleGroup}
           isLoading={isLoading}
           skeletonRows={10}
           onMultiSort={handleMultiSort}
@@ -783,55 +1019,28 @@ export function CasesPage() {
         <div className="cases-content-padding">
           {filteredCases.length === 0 && !isLoading ? (
             emptyStateContent
+          ) : viewSettings.groupBy && groupedCases.length > 0 ? (
+            <div className="cases-grouped-view">
+              {groupedCases.map((group) => (
+                <div key={group.key} className="cases-group">
+                  {renderGroupHeader(group)}
+                  {!collapsedGroups.has(group.key) && (
+                    <CardView
+                      data={group.items}
+                      isLoading={false}
+                      getRowKey={(c) => c.id}
+                      renderCard={renderCardContent}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
           ) : (
             <CardView
               data={filteredCases}
               isLoading={isLoading}
               getRowKey={(c) => c.id}
-              renderCard={(c) => ({
-                title: (
-                  <GoabText size="heading-xs" mt="none" mb="none">
-                    {formatCitizenName(c.submissions)}
-                  </GoabText>
-                ),
-                badge: (
-                  <GoabxBadge
-                    type={getStatusBadgeType(c.status)}
-                    content={getStatusText(c.status)}
-                    emphasis="subtle"
-                    icon={false}
-                  />
-                ),
-                actions: (
-                  <GoabxButton
-                    type="tertiary"
-                    size="compact"
-                    onClick={() => navigate(`/workspace/application/${c.id}`)}
-                  >
-                    View
-                  </GoabxButton>
-                ),
-                sections: [
-                  {
-                    heading: "Submission",
-                    fields: [
-                      { label: "Reference", value: c.submissions.reference_number },
-                      { label: "Form type", value: c.submissions.form_type },
-                    ],
-                  },
-                  {
-                    heading: "Assignment",
-                    fields: [
-                      { label: "Assigned to", value: c.assigned_worker || "Unassigned" },
-                      {
-                        label: "Submitted",
-                        value: formatDate(c.submissions.submitted_at),
-                      },
-                      { label: "Status", value: getStatusText(c.status) },
-                    ],
-                  },
-                ],
-              })}
+              renderCard={renderCardContent}
             />
           )}
         </div>
@@ -842,89 +1051,30 @@ export function CasesPage() {
         <div className="cases-content-padding">
           {filteredCases.length === 0 && !isLoading ? (
             emptyStateContent
+          ) : viewSettings.groupBy && groupedCases.length > 0 ? (
+            <div className="cases-grouped-view">
+              {groupedCases.map((group) => (
+                <div key={group.key} className="cases-group">
+                  {renderGroupHeader(group)}
+                  {!collapsedGroups.has(group.key) && (
+                    <ExpandableListView
+                      data={group.items}
+                      isLoading={false}
+                      getRowKey={(c) => c.id}
+                      renderCollapsed={renderListCollapsed}
+                      renderExpanded={renderListExpanded}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
           ) : (
             <ExpandableListView
               data={filteredCases}
               isLoading={isLoading}
               getRowKey={(c) => c.id}
-              renderCollapsed={(c) => ({
-                title: (
-                  <span className="expandable-list__name">
-                    {formatCitizenName(c.submissions)}
-                  </span>
-                ),
-                badge: (
-                  <GoabxBadge
-                    type={getStatusBadgeType(c.status)}
-                    content={getStatusText(c.status)}
-                    emphasis="subtle"
-                    icon={false}
-                  />
-                ),
-                secondaryInfo: (
-                  <span
-                    style={{
-                      font: "var(--goa-typography-body-xs)",
-                      color: "var(--goa-color-text-secondary)",
-                    }}
-                  >
-                    {c.submissions.reference_number}
-                  </span>
-                ),
-                actions: (
-                  <GoabxButton
-                    type="tertiary"
-                    size="compact"
-                    onClick={() => navigate(`/workspace/application/${c.id}`)}
-                  >
-                    View
-                  </GoabxButton>
-                ),
-              })}
-              renderExpanded={(c) => (
-                <div className="case-card__sections">
-                  <div className="case-card__section">
-                    <div className="case-card__section-heading">Submission</div>
-                    <div className="case-card__section-fields">
-                      <GoabBlock direction="column" gap="xs">
-                        <span className="case-card__label">Reference</span>
-                        <span className="case-card__value">
-                          {c.submissions.reference_number}
-                        </span>
-                      </GoabBlock>
-                      <GoabBlock direction="column" gap="xs">
-                        <span className="case-card__label">Submitted</span>
-                        <span className="case-card__value">
-                          {formatDate(c.submissions.submitted_at)}
-                        </span>
-                      </GoabBlock>
-                      <GoabBlock direction="column" gap="xs">
-                        <span className="case-card__label">Form Type</span>
-                        <span className="case-card__value">
-                          {c.submissions.form_type}
-                        </span>
-                      </GoabBlock>
-                    </div>
-                  </div>
-                  <div className="case-card__section">
-                    <div className="case-card__section-heading">Assignment</div>
-                    <div className="case-card__section-fields">
-                      <GoabBlock direction="column" gap="xs">
-                        <span className="case-card__label">Assigned to</span>
-                        <span className="case-card__value">
-                          {c.assigned_worker || "Unassigned"}
-                        </span>
-                      </GoabBlock>
-                      <GoabBlock direction="column" gap="xs">
-                        <span className="case-card__label">Email</span>
-                        <span className="case-card__value">
-                          {c.submissions.citizen_email || "—"}
-                        </span>
-                      </GoabBlock>
-                    </div>
-                  </div>
-                </div>
-              )}
+              renderCollapsed={renderListCollapsed}
+              renderExpanded={renderListExpanded}
             />
           )}
         </div>

@@ -110,8 +110,7 @@ export function usePageHeader(title: string, options?: UsePageHeaderOptions | Re
         hideTitleOnScroll: false,
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title]); // Re-run when title changes
+  }, [title, actions, tabs, toolbar, hideTitleOnScroll, context.setValues]);
 }
 
 /**

@@ -1,13 +1,23 @@
 import React, { ReactNode } from "react";
 import { GoabxTable, GoabxTableSortHeader } from "@abgov/react-components/experimental";
-import { GoabDataGrid, GoabSkeleton } from "@abgov/react-components";
+import { GoabxBadge } from "@abgov/react-components/experimental";
+import { GoabDataGrid, GoabSkeleton, GoabIcon } from "@abgov/react-components";
 import { GoabTableOnMultiSortDetail } from "@abgov/ui-components-common";
 import { TableColumn } from "../types/TableColumn";
 import { ScrollContainer } from "./ScrollContainer";
 
+export interface DataTableGroup<T> {
+  key: string;
+  label: string;
+  items: T[];
+}
+
 export interface DataTableProps<T> {
   columns: TableColumn<T>[];
   data: T[];
+  groups?: DataTableGroup<T>[];
+  collapsedGroups?: Set<string>;
+  onToggleGroup?: (groupKey: string) => void;
   isLoading?: boolean;
   skeletonRows?: number;
   onMultiSort?: (detail: GoabTableOnMultiSortDetail) => void;
@@ -21,6 +31,9 @@ export interface DataTableProps<T> {
 export function DataTable<T>({
   columns,
   data,
+  groups,
+  collapsedGroups,
+  onToggleGroup,
   isLoading = false,
   skeletonRows = 10,
   onMultiSort,
@@ -71,6 +84,45 @@ export function DataTable<T>({
     return column.header || null;
   };
 
+  const renderDataRow = (item: T, index: number) => (
+    <tr
+      key={getRowKey(item)}
+      data-grid="row"
+      aria-selected={getRowSelected?.(item) ? "true" : undefined}
+      onClick={(e) => {
+        if (!onRowClick) return;
+        const target = e.target as HTMLElement;
+        if (
+          target.closest("button") ||
+          target.closest("a") ||
+          target.closest('input[type="checkbox"]') ||
+          target.closest("goa-checkbox") ||
+          target.closest("goa-menu-button") ||
+          target.closest("goa-popover")
+        ) {
+          return;
+        }
+        onRowClick(item);
+      }}
+      style={{ cursor: onRowClick ? "pointer" : undefined }}
+    >
+      {columns.map((column) => (
+        <td
+          key={column.key}
+          data-grid="cell"
+          className={getCellClassName(column.type)}
+          style={
+            column.type === "text" || column.type === "link"
+              ? { whiteSpace: "nowrap" }
+              : undefined
+          }
+        >
+          {column.render?.(item, index)}
+        </td>
+      ))}
+    </tr>
+  );
+
   return (
     <ScrollContainer>
       <div className="table-wrapper">
@@ -113,51 +165,44 @@ export function DataTable<T>({
                     ))}
                   </tr>
                 ))
-              ) : data.length === 0 && emptyState ? (
+              ) : (groups || data).length === 0 && emptyState ? (
                 <tr>
                   <td colSpan={columns.length} className="cases-empty-state-cell">
                     {emptyState}
                   </td>
                 </tr>
-              ) : (
-                data.map((item, index) => (
-                  <tr
-                    key={getRowKey(item)}
-                    data-grid="row"
-                    aria-selected={getRowSelected?.(item) ? "true" : undefined}
-                    onClick={(e) => {
-                      if (!onRowClick) return;
-                      const target = e.target as HTMLElement;
-                      if (
-                        target.closest("button") ||
-                        target.closest("a") ||
-                        target.closest('input[type="checkbox"]') ||
-                        target.closest("goa-checkbox") ||
-                        target.closest("goa-menu-button") ||
-                        target.closest("goa-popover")
-                      ) {
-                        return;
-                      }
-                      onRowClick(item);
-                    }}
-                    style={{ cursor: onRowClick ? "pointer" : undefined }}
-                  >
-                    {columns.map((column) => (
-                      <td
-                        key={column.key}
-                        data-grid="cell"
-                        className={getCellClassName(column.type)}
-                        style={
-                          column.type === "text" || column.type === "link"
-                            ? { whiteSpace: "nowrap" }
-                            : undefined
-                        }
+              ) : groups ? (
+                groups.map((group) => {
+                  const isCollapsed = collapsedGroups?.has(group.key) ?? false;
+                  return (
+                    <React.Fragment key={group.key}>
+                      <tr
+                        className="table-group-row"
+                        onClick={() => onToggleGroup?.(group.key)}
+                        style={{ cursor: "pointer" }}
                       >
-                        {column.render?.(item, index)}
-                      </td>
-                    ))}
-                  </tr>
-                ))
+                        <td colSpan={columns.length}>
+                          <div className="table-group-row__content">
+                            <GoabIcon
+                              type={isCollapsed ? "chevron-forward" : "chevron-down"}
+                              size="small"
+                            />
+                            <span className="table-group-row__label">{group.label}</span>
+                            <GoabxBadge
+                              type="information"
+                              content={String(group.items.length)}
+                              emphasis="subtle"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      {!isCollapsed &&
+                        group.items.map((item, index) => renderDataRow(item, index))}
+                    </React.Fragment>
+                  );
+                })
+              ) : (
+                data.map((item, index) => renderDataRow(item, index))
               )}
             </tbody>
           </GoabxTable>

@@ -1789,13 +1789,13 @@ goa-drawer goa-tabs {
 
 /* Table group row styling */
 .table-group-row td {
-  background-color: var(--goa-color-greyscale-150) !important;
+  background-color: var(--goa-color-greyscale-200) !important;
   padding: var(--goa-space-s) var(--goa-space-m) !important;
-  border-bottom: 1px solid var(--goa-color-greyscale-200) !important;
+  border-bottom: 1px solid var(--goa-color-greyscale-300) !important;
 }
 
 .table-group-row:hover td {
-  background-color: var(--goa-color-greyscale-200) !important;
+  background-color: var(--goa-color-greyscale-300) !important;
 }
 
 .table-group-row__content {
