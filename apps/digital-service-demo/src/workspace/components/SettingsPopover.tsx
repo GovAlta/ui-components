@@ -305,28 +305,33 @@ export function SettingsPopover({
     setScreen("main");
   };
 
+  // TODO: Remove .settings-popover-align wrapper when GoabPopover gets an alignment prop.
+  // The Popover rewrite (PR #3478) always left-aligns, causing right-edge overflow.
+  // See workspace.css for the CSS workaround and the GitHub issue for tracking.
   return (
-    <GoabPopover
-      padded={false}
-      maxWidth="280px"
-      position="below"
-      target={
-        isCompact ? (
-          <GoabIconButton
-            icon="settings"
-            size="medium"
-            variant="dark"
-            ariaLabel="Settings"
-            onClick={handleTargetClick}
-          />
-        ) : (
-          <GoabButton type="tertiary" size="compact" onClick={handleTargetClick}>
-            Settings
-          </GoabButton>
-        )
-      }
-    >
-      {renderScreen()}
-    </GoabPopover>
+    <div className="settings-popover-align">
+      <GoabPopover
+        padded={false}
+        maxWidth="280px"
+        position="below"
+        target={
+          isCompact ? (
+            <GoabIconButton
+              icon="settings"
+              size="medium"
+              variant="dark"
+              ariaLabel="Settings"
+              onClick={handleTargetClick}
+            />
+          ) : (
+            <GoabButton type="tertiary" size="compact" onClick={handleTargetClick}>
+              Settings
+            </GoabButton>
+          )
+        }
+      >
+        {renderScreen()}
+      </GoabPopover>
+    </div>
   );
 }

@@ -1734,6 +1734,15 @@ goa-drawer goa-tabs {
   padding: var(--goa-space-s) var(--goa-space-m);
 }
 
+/* TODO: Remove this workaround when Popover gets an alignment prop.
+   The Popover rewrite (PR #3478) uses CSS Anchor Positioning which always
+   left-aligns the popover to the trigger via `inset-inline-start: anchor(left)`.
+   When the trigger is near the right viewport edge, the popover overflows.
+   This shifts the settings popover left as a temporary fix. */
+.settings-popover-align goa-popover {
+  --offset-left: -150px;
+}
+
 /* ============================================================================
    GROUPED VIEW - Group headers for grouped data display
    ============================================================================ */
