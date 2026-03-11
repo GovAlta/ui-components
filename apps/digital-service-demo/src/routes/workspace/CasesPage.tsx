@@ -26,6 +26,8 @@ import {
 import {
   GoabInputOnChangeDetail,
   GoabMenuButtonOnActionDetail,
+  GoabTableSortEntry,
+  GoabTableOnMultiSortDetail,
 } from "@abgov/ui-components-common";
 import { supabase, CaseWithSubmission } from "../../lib/supabase";
 import { DataTable } from "../../workspace/components/DataTable";
@@ -39,11 +41,9 @@ import {
 } from "../../workspace/components/SettingsPopover";
 import { usePageHeader } from "../../workspace/contexts/PageHeaderContext";
 import { useMenu } from "../../workspace/contexts/MenuContext";
-import { useTwoLevelSort } from "../../workspace/hooks/useTwoLevelSort";
 import { useCompactToolbar } from "../../workspace/hooks/useViewport";
 import { useViewSettings } from "../../workspace/hooks/useViewSettings";
 import { TableColumn } from "../../workspace/types/TableColumn";
-import { sortData } from "../../workspace/utils/searchUtils";
 
 // Tab categories for filtering
 type TabCategory = "all" | "unassigned" | "assigned_to_me" | "waiting" | "complete";
@@ -145,9 +145,8 @@ export function CasesPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
 
-  // Sort state
-  const { sortConfig, setSortConfig, sortByKey, handleTableSort, clearSort } =
-    useTwoLevelSort();
+  // Sort state - driven by GoabxTable's built-in multi-sort
+  const [sorts, setSorts] = useState<GoabTableSortEntry[]>([]);
 
   // View settings - different default layouts per tab
   const getDefaultLayout = useCallback((tab: string): LayoutType => {
@@ -347,9 +346,8 @@ export function CasesPage() {
       );
     }
 
-    // Sort (adapt fields for sortData)
-    if (sortConfig.primary) {
-      // Map our fields to the case structure for sorting
+    // Sort using GoabTableSortEntry[] format
+    if (sorts.length > 0) {
       const adaptedData = filtered.map((c) => ({
         ...c,
         name: formatCitizenName(c.submissions),
@@ -357,27 +355,38 @@ export function CasesPage() {
         formType: c.submissions.form_type,
       }));
 
-      const sorted = sortData(
-        adaptedData,
-        sortConfig.primary.key,
-        sortConfig.primary.direction,
-        sortConfig.secondary?.key,
-        sortConfig.secondary?.direction,
-      );
+      const sorted = [...adaptedData].sort((a, b) => {
+        for (const { column, direction } of sorts) {
+          const aVal = a[column as keyof typeof a];
+          const bVal = b[column as keyof typeof b];
+          const dir = direction === "asc" ? 1 : -1;
+          if (aVal == null && bVal == null) continue;
+          if (aVal == null) return 1;
+          if (bVal == null) return -1;
+          if (column === "submittedAt") {
+            const cmp =
+              new Date(aVal as string).getTime() - new Date(bVal as string).getTime();
+            if (cmp !== 0) return cmp * dir;
+          } else {
+            if (aVal > bVal) return dir;
+            if (aVal < bVal) return -dir;
+          }
+        }
+        return 0;
+      });
 
-      // Map back to original structure
       filtered = sorted.map((s) => cases.find((c) => c.id === s.id)!).filter(Boolean);
     }
 
     return filtered;
-  }, [cases, activeTab, searchTerm, appliedFilters, sortConfig]);
+  }, [cases, activeTab, searchTerm, appliedFilters, sorts]);
 
   // Clear all
   const handleClearAll = useCallback(() => {
     setSearchTerm("");
     clearAllFilters();
-    clearSort();
-  }, [clearSort]);
+    setSorts([]);
+  }, []);
 
   // Handle tab change
   const handleTabChange = (e: { tab: number }) => {
@@ -403,26 +412,43 @@ export function CasesPage() {
     return tabMap.indexOf(tab) + 1;
   };
 
-  // Sort actions
+  // Sort actions (for Sort menu in card/list views)
   const handleSortAction = (action: string) => {
     if (action === "clear-sort") {
-      clearSort();
+      setSorts([]);
       return;
     }
     const key = action.replace("sort-", "");
-    sortByKey(key);
+    setSorts((prev) => {
+      const existing = prev.find((s) => s.column === key);
+      if (existing) {
+        // Cycle: asc → desc → remove
+        if (existing.direction === "asc") {
+          return prev.map((s) =>
+            s.column === key ? { ...s, direction: "desc" as const } : s,
+          );
+        }
+        const remaining = prev.filter((s) => s.column !== key);
+        return remaining;
+      }
+      // New column: add if under 2
+      if (prev.length < 2) {
+        return [...prev, { column: key, direction: "asc" as const }];
+      }
+      return prev;
+    });
   };
 
+  // Handle multi-sort from table component
+  const handleMultiSort = useCallback((detail: GoabTableOnMultiSortDetail) => {
+    setSorts(detail.sorts);
+  }, []);
+
   const getSortIndicator = (key: string): string => {
-    if (sortConfig.primary?.key === key) {
-      const arrow = sortConfig.primary.direction === "asc" ? "↑" : "↓";
-      return sortConfig.secondary ? ` (1st ${arrow})` : ` ${arrow}`;
-    }
-    if (sortConfig.secondary?.key === key) {
-      const arrow = sortConfig.secondary.direction === "asc" ? "↑" : "↓";
-      return ` (2nd ${arrow})`;
-    }
-    return "";
+    const index = sorts.findIndex((s) => s.column === key);
+    if (index === -1) return "";
+    const arrow = sorts[index].direction === "asc" ? "↑" : "↓";
+    return sorts.length > 1 ? ` (${index === 0 ? "1st" : "2nd"} ${arrow})` : ` ${arrow}`;
   };
 
   // Table columns
@@ -594,7 +620,7 @@ export function CasesPage() {
                 text={`Form type${getSortIndicator("formType")}`}
                 action="sort-formType"
               />
-              {sortConfig.primary && (
+              {sorts.length > 0 && (
                 <GoabxMenuAction text="Clear sort" action="clear-sort" />
               )}
             </GoabxMenuButton>
@@ -636,7 +662,7 @@ export function CasesPage() {
     [
       activeTab,
       searchTerm,
-      sortConfig,
+      sorts,
       appliedFilters,
       viewSettings,
       defaultLayout,
@@ -693,7 +719,7 @@ export function CasesPage() {
     <div style={{ maxWidth: "100%", overflow: "hidden", paddingBottom: "16px" }}>
       {/* Filter chips section */}
       <div className="cases-content-padding">
-        {(searchTerm || filterChips.length > 0 || sortConfig.primary) && (
+        {(searchTerm || filterChips.length > 0 || sorts.length > 0) && (
           <div className="cases-chips-container">
             <GoabIcon
               type="filter-lines"
@@ -701,32 +727,19 @@ export function CasesPage() {
               fillColor="var(--goa-color-text-secondary)"
               mr="2xs"
             />
-            {sortConfig.primary && (
+            {sorts.map((sort, index) => (
               <GoabxFilterChip
-                content={
-                  sortFieldLabels[sortConfig.primary.key] || sortConfig.primary.key
+                key={sort.column}
+                content={sortFieldLabels[sort.column] || sort.column}
+                leadingIcon={sort.direction === "asc" ? "arrow-up" : "arrow-down"}
+                secondaryText={
+                  sorts.length > 1 ? (index === 0 ? "1st" : "2nd") : undefined
                 }
-                leadingIcon={
-                  sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
-                }
-                secondaryText={sortConfig.secondary ? "1st" : undefined}
                 onClick={() =>
-                  setSortConfig({ primary: sortConfig.secondary, secondary: null })
+                  setSorts((prev) => prev.filter((s) => s.column !== sort.column))
                 }
               />
-            )}
-            {sortConfig.secondary && (
-              <GoabxFilterChip
-                content={
-                  sortFieldLabels[sortConfig.secondary.key] || sortConfig.secondary.key
-                }
-                leadingIcon={
-                  sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
-                }
-                secondaryText="2nd"
-                onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
-              />
-            )}
+            ))}
             {searchTerm && (
               <GoabxFilterChip content={searchTerm} onClick={() => setSearchTerm("")} />
             )}
@@ -759,8 +772,7 @@ export function CasesPage() {
           data={filteredCases}
           isLoading={isLoading}
           skeletonRows={10}
-          onSort={handleTableSort}
-          sortConfig={sortConfig}
+          onMultiSort={handleMultiSort}
           emptyState={emptyStateContent}
           getRowKey={(c) => c.id}
         />

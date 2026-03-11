@@ -1,19 +1,16 @@
 import React, { ReactNode } from "react";
 import { GoabxTable, GoabxTableSortHeader } from "@abgov/react-components/experimental";
 import { GoabDataGrid, GoabSkeleton } from "@abgov/react-components";
-import { GoabTableOnSortDetail } from "@abgov/ui-components-common";
+import { GoabTableOnMultiSortDetail } from "@abgov/ui-components-common";
 import { TableColumn } from "../types/TableColumn";
 import { ScrollContainer } from "./ScrollContainer";
-import { useMenu } from "../contexts/MenuContext";
-import { SortConfig } from "../utils/searchUtils";
 
 export interface DataTableProps<T> {
   columns: TableColumn<T>[];
   data: T[];
   isLoading?: boolean;
   skeletonRows?: number;
-  onSort?: (event: GoabTableOnSortDetail) => void;
-  sortConfig?: SortConfig; // Two-level sort config
+  onMultiSort?: (detail: GoabTableOnMultiSortDetail) => void;
   emptyState?: ReactNode;
   getRowKey: (item: T) => string;
   getRowSelected?: (item: T) => boolean;
@@ -26,16 +23,13 @@ export function DataTable<T>({
   data,
   isLoading = false,
   skeletonRows = 10,
-  onSort,
-  sortConfig,
+  onMultiSort,
   emptyState,
   getRowKey,
   getRowSelected,
   striped = true,
   onRowClick,
 }: DataTableProps<T>) {
-  const { isMobile } = useMenu();
-
   const renderSkeletonCell = (column: TableColumn<T>, rowIndex: number) => {
     switch (column.type) {
       case "checkbox":
@@ -65,47 +59,13 @@ export function DataTable<T>({
     }
   };
 
-  // Get sort direction for a column (checks both primary and secondary)
-  const getColumnSortDirection = (columnKey: string): "asc" | "desc" | "none" => {
-    if (sortConfig?.primary?.key === columnKey) {
-      return sortConfig.primary.direction;
-    }
-    if (sortConfig?.secondary?.key === columnKey) {
-      return sortConfig.secondary.direction;
-    }
-    return "none";
-  };
-
-  // Get sort order for a column ("1", "2", or undefined)
-  const getColumnSortOrder = (columnKey: string): string | undefined => {
-    // Only show numbers if there are two sorts active
-    if (!sortConfig?.primary || !sortConfig?.secondary) {
-      return undefined;
-    }
-    if (sortConfig.primary.key === columnKey) {
-      return "1";
-    }
-    if (sortConfig.secondary.key === columnKey) {
-      return "2";
-    }
-    return undefined;
-  };
-
   const renderHeader = (column: TableColumn<T>) => {
-    // Custom header render takes priority
     if (column.headerRender) {
       return column.headerRender();
     }
-    if (column.sortable && column.header && onSort && sortConfig) {
-      // Note: V2 GoabxTableSortHeader doesn't support sortOrder prop for two-level sort indicators
-      // Only the primary sort column shows the direction indicator
+    if (column.sortable && column.header) {
       return (
-        <GoabxTableSortHeader
-          name={column.key}
-          direction={getColumnSortDirection(column.key)}
-        >
-          {column.header}
-        </GoabxTableSortHeader>
+        <GoabxTableSortHeader name={column.key}>{column.header}</GoabxTableSortHeader>
       );
     }
     return column.header || null;
@@ -115,7 +75,13 @@ export function DataTable<T>({
     <ScrollContainer>
       <div className="table-wrapper">
         <GoabDataGrid keyboardNav="table" keyboardIconPosition="right">
-          <GoabxTable width="100%" onSort={onSort} variant="normal" striped={striped}>
+          <GoabxTable
+            width="100%"
+            sortMode="multi"
+            onMultiSort={onMultiSort}
+            variant="normal"
+            striped={striped}
+          >
             <thead>
               <tr data-grid="row">
                 {columns.map((column) => (
@@ -161,7 +127,6 @@ export function DataTable<T>({
                     aria-selected={getRowSelected?.(item) ? "true" : undefined}
                     onClick={(e) => {
                       if (!onRowClick) return;
-                      // Don't trigger if clicking on interactive elements
                       const target = e.target as HTMLElement;
                       if (
                         target.closest("button") ||
