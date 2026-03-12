@@ -1,6 +1,6 @@
 import { render } from "vitest-browser-react";
 
-import { GoabDropdown, GoabDropdownItem } from "../src";
+import { GoabDropdown, GoabDropdownItem, GoabTabs, GoabTab } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page, userEvent } from "@vitest/browser/context";
 
@@ -10,9 +10,7 @@ describe("Dropdown", () => {
   };
 
   describe("Dropdown", () => {
-
     it("should render with the default props", async () => {
-
       // Setup
 
       const Component = () => {
@@ -56,7 +54,6 @@ describe("Dropdown", () => {
     });
 
     it("should perform action when menu item clicked", async () => {
-
       const handleChange = vi.fn();
 
       // Setup
@@ -90,6 +87,83 @@ describe("Dropdown", () => {
       });
     });
 
+    it("should not perform action when currently selected menu item clicked", async () => {
+      const handleChange = vi.fn();
+
+      // Setup
+      const Component = () => {
+        return (
+          <GoabDropdown
+            name="favcolor"
+            testId="dropdown"
+            value={"red"}
+            onChange={handleChange}
+          >
+            <GoabDropdownItem label="Red" value="red" />
+            <GoabDropdownItem label="Blue" value="blue" />
+            <GoabDropdownItem label="Green" value="green" />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const dropdown = result.getByTestId("dropdown");
+      const menuItem1 = result.getByTestId("dropdown-item-red");
+
+      // Actions
+
+      await dropdown.click();
+      await menuItem1.click();
+
+      // Result
+
+      await vi.waitFor(() => {
+        expect(handleChange).toHaveBeenCalledTimes(0);
+      });
+    });
+
+    it("should trigger change event when native dropdown selection changes", async () => {
+      const handleChange = vi.fn();
+
+      // Setup
+      const Component = () => {
+        return (
+          <GoabDropdown
+            name="favcolor"
+            testId="dropdown"
+            onChange={handleChange}
+            native={true}
+          >
+            <GoabDropdownItem label="Red" value="red" />
+            <GoabDropdownItem label="Blue" value="blue" />
+            <GoabDropdownItem label="Green" value="green" />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+      const dropdown = result.getByTestId("dropdown");
+      const host = result.container.querySelector("goa-dropdown") as HTMLElement | null;
+
+      await vi.waitFor(() => {
+        expect(dropdown.element()).toBeTruthy();
+      });
+
+      const select = host?.shadowRoot?.querySelector("select");
+
+      select && (select.value = "blue");
+      select?.dispatchEvent(new Event("change", { bubbles: true }));
+
+      // Result
+      await vi.waitFor(() => {
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        const detail = handleChange.mock.calls[0][0];
+        expect(detail.name).toEqual("favcolor");
+        expect(detail.value).toEqual("blue");
+        expect(detail.event).toBeInstanceOf(Event);
+      });
+    });
+
     describe("Width", () => {
       it("uses the width supplied", async () => {
         const Component = () => {
@@ -99,8 +173,8 @@ describe("Dropdown", () => {
               <GoabDropdownItem label="Blue" value="blue" />
               <GoabDropdownItem label="Green" value="green" />
             </GoabDropdown>
-          )
-        }
+          );
+        };
 
         const result = render(<Component />);
 
@@ -113,7 +187,7 @@ describe("Dropdown", () => {
           await dropdown.click();
           expect(popover.element().getAttribute("open")).toBe("true");
           expect(popoverDiv.element().getAttribute("style")).toContain("500px");
-        })
+        });
       });
 
       it("actually applis width using CSS custom property", async () => {
@@ -369,7 +443,7 @@ describe("Dropdown", () => {
               </div>
             </>
           );
-        }
+        };
         const result = render(<Component />);
         // Scroll to the bottom of the page
         window.scrollTo(0, document.body.scrollHeight);
@@ -383,7 +457,7 @@ describe("Dropdown", () => {
           const lastOptionRect = lastOption.element().getBoundingClientRect();
           expect(lastOptionRect.bottom).toBeLessThan(dropdownRect.top);
         });
-      })
+      });
 
       it("should maintain popover width equal to dropdown width when container resizes", async () => {
         const Component = () => {
@@ -409,7 +483,9 @@ describe("Dropdown", () => {
           expect(dropdownOption).toBeDefined();
           const dropdownRect = dropdown.element().getBoundingClientRect();
           const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
-          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+          expect(
+            Math.abs(dropdownOptionRect.width - dropdownRect.width),
+          ).toBeLessThanOrEqual(1);
         });
       });
 
@@ -418,7 +494,12 @@ describe("Dropdown", () => {
         await page.viewport(250, 800);
         const Component = () => {
           return (
-            <GoabDropdown name="favcolor" testId="dropdown" width={"100%"} onChange={noop}>
+            <GoabDropdown
+              name="favcolor"
+              testId="dropdown"
+              width={"100%"}
+              onChange={noop}
+            >
               <GoabDropdownItem label="Red" value="red" />
               <GoabDropdownItem label="Blue" value="blue" />
               <GoabDropdownItem label="Green" value="green" />
@@ -433,11 +514,13 @@ describe("Dropdown", () => {
           const dropdownOption = result.getByText("Green");
           const dropdownRect = dropdown.element().getBoundingClientRect();
           const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
-          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+          expect(
+            Math.abs(dropdownOptionRect.width - dropdownRect.width),
+          ).toBeLessThanOrEqual(1);
         });
       });
-    })
-  })
+    });
+  });
 
   describe("Filterable Dropdown", () => {
     it("should render with the default props", async () => {
@@ -493,10 +576,9 @@ describe("Dropdown", () => {
         // icon
         expect(dropdownIcon.element().getAttribute("data-type")).toBe("chevron-up");
       });
-    })
+    });
 
     it("should filter the items", async () => {
-
       // Setup
       const Component = () => {
         return (
@@ -522,7 +604,7 @@ describe("Dropdown", () => {
           const ddi = result.getByTestId(`dropdown-item-${item}`);
           expect(ddi.elements().length).toBe(0);
         });
-      })
+      });
     });
 
     it("clears the input and opens the menu when the clear icon is clicked", async () => {
@@ -586,19 +668,117 @@ describe("Dropdown", () => {
 
         expect(popover.element().getAttribute("open")).toBe("true");
       });
-    })
-  })
+    });
+
+    it("should change selections when arrow keys are used while inside GoabTabs", async () => {
+      // Setup
+
+      const Component = () => {
+        return (
+          <GoabTabs onChange={noop}>
+            <GoabTab heading="Favorite Color">
+              <GoabDropdown name="favcolor" onChange={noop}>
+                <GoabDropdownItem label="Red" value="red" />
+                <GoabDropdownItem label="Blue" value="blue" />
+                <GoabDropdownItem label="Green" value="green" />
+              </GoabDropdown>
+            </GoabTab>
+          </GoabTabs>
+        );
+      };
+
+      const result = render(<Component />);
+
+      const input = result.getByRole("combobox");
+      const popover = result.getByTestId("option-list");
+
+      await vi.waitFor(() => {
+        expect(input.element()).toBeTruthy();
+      });
+
+      // Actions
+      const inputEl = input.element() as HTMLInputElement;
+      inputEl.focus();
+      await userEvent.keyboard("{Space}");
+
+      // Verifying the popover is open before continuing
+      expect(popover.element().getAttribute("open")).toBe("true");
+
+      const redOption = popover.element().querySelector("li#red");
+      const blueOption = popover.element().querySelector("li#blue");
+
+      await userEvent.keyboard("[ArrowDown]");
+
+      // Verify the first option was selected
+      expect(redOption?.classList.contains("dropdown-item--highlighted"));
+
+      await userEvent.keyboard("[ArrowDown]");
+
+      // Verify the first option is not selected and the second option is
+      expect(redOption?.classList.contains("dropdown-item--highlighted")).toBeFalsy();
+      expect(blueOption?.classList.contains("dropdown-item--highlighted"));
+    });
+
+    it("should select a value when enter key is pressed", async () => {
+      const handleChange = vi.fn();
+
+      // Setup
+      const Component = () => {
+        return (
+          <GoabDropdown name="favcolor" onChange={handleChange}>
+            <GoabDropdownItem label="Red" value="red" />
+            <GoabDropdownItem label="Blue" value="blue" />
+            <GoabDropdownItem label="Green" value="green" />
+          </GoabDropdown>
+        );
+      };
+
+      const result = render(<Component />);
+
+      const input = result.getByRole("combobox");
+      const popover = result.getByTestId("option-list");
+
+      await vi.waitFor(() => {
+        expect(input.element()).toBeTruthy();
+      });
+
+      // Actions
+      const inputEl = input.element() as HTMLInputElement;
+      inputEl.focus();
+      await userEvent.keyboard("{Space}");
+
+      // Verifying the popover is open before continuing
+      expect(popover.element().getAttribute("open")).toBe("true");
+
+      const redOption = popover.element().querySelector("li#red");
+
+      await userEvent.keyboard("[ArrowDown]");
+
+      // Verify the first option was selected
+      expect(redOption?.classList.contains("dropdown-item--highlighted"));
+
+      await userEvent.keyboard("{Enter}");
+
+      await vi.waitFor(() => {
+        expect(handleChange).toHaveBeenCalledTimes(1);
+        const detail = handleChange.mock.calls[0][0];
+        expect(detail.name).toEqual("favcolor");
+        expect(detail.value).toEqual("red");
+        expect(detail.event).toBeInstanceOf(Event);
+      });
+    });
+  });
 
   describe("Dropdown reset", () => {
     it("should reduce the number of element displayed within the dropdown", async () => {
-      let values: string[] = ["red", "blue", "green"]
+      let values: string[] = ["red", "blue", "green"];
 
       const Component = () => {
         return (
           <GoabDropdown name="favcolor" onChange={noop}>
-            {values.map((item) =>
+            {values.map((item) => (
               <GoabDropdownItem label={item} value={item} key={item} />
-            )}
+            ))}
           </GoabDropdown>
         );
       };
@@ -610,26 +790,26 @@ describe("Dropdown", () => {
       // Initial state
 
       await vi.waitFor(async () => {
-        const inputEl = input.element() as HTMLInputElement
+        const inputEl = input.element() as HTMLInputElement;
         inputEl.click();
         expect(items.elements().length).toBe(values.length);
         items.elements().forEach((el, index) => {
           expect(el.innerHTML.trim()).toBe(values[index]);
-        })
+        });
       });
 
       // Reduce to 1 item
 
       values = ["blue"]; // the previous failure happened with this item, was one of the previous items
-      result.rerender(<Component />)
+      result.rerender(<Component />);
 
       await vi.waitFor(async () => {
-        const inputEl = input.element() as HTMLInputElement
+        const inputEl = input.element() as HTMLInputElement;
         inputEl.click();
         const items = result.getByRole("option");
         expect(items.elements().length).toBe(1);
         expect(items.element().innerHTML.trim()).toBe("blue");
       });
-    })
-  })
+    });
+  });
 });
