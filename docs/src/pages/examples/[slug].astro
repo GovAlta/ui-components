@@ -63,6 +63,8 @@ function formatComponentName(component: string): string {
     .map((word, i) => i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
     .join(' ');
 }
+
+const oldDocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
 ---
 
 <ExamplesPageLayout
@@ -112,6 +114,10 @@ function formatComponentName(component: string): string {
         </div>
       </section>
     )}
+
+    <goa-link size="small" trailingicon="open">
+      <a href={oldDocsUrl} target="_blank" rel="noopener noreferrer">View old example docs</a>
+    </goa-link>
   </article>
 </ExamplesPageLayout>
 
@@ -189,7 +195,7 @@ function formatComponentName(component: string): string {
   /* Related Examples */
   .related-examples {
     border-top: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-    padding-top: var(--goa-space-xl, 2rem);
+    padding: var(--goa-space-xl) 0;
   }
 
   .related-examples h2 {

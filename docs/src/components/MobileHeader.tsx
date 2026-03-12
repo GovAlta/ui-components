@@ -40,7 +40,7 @@ export function MobileHeader() {
             height="28"
             className="mobile-header__logo"
           />
-          <span className="mobile-header__title">Design system</span>
+          <span className="mobile-header__title">Design System</span>
         </a>
       </div>
       <div className="mobile-header__right">

@@ -45,6 +45,8 @@ const configurations = getComponentConfigurations(slug);
 
 // GitHub issues URL for this component
 const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3Aissue+is%3Aopen+label%3A%22${encodeURIComponent(component.data.name)}%22`;
+
+const oldDocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
 ---
 
 <ComponentPageLayout
@@ -101,6 +103,10 @@ const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3A
             API documentation is automatically extracted from the component source code.
           </goa-callout>
         )}
+        
+        <goa-link size="small" trailingicon="open">
+          <a href={oldDocsUrl} target="_blank" rel="noopener noreferrer">View old component docs</a>
+        </goa-link>
       </TabContentWrapper>
     </goa-tab>
 
