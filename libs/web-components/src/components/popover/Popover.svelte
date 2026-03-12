@@ -74,6 +74,10 @@
   let _autoPosition: "above" | "below" = "below";
   const _popoverId = `goa-popover-${generateRandomId()}`;
 
+  // CSS Anchor Positioning is not supported in Safari < 18.4. Fall back to
+  // getBoundingClientRect()-based positioning via JS when unsupported.
+  const _needsPosFallback = !CSS?.supports?.("anchor-name", "--test");
+
   $: _disabled = toBoolean(disabled);
   $: _padded = toBoolean(padded);
   $: _filterableContext = toBoolean(filterablecontext);
@@ -106,6 +110,7 @@
   }
 
   onMount(() => {
+    console.log("Popover position fallback needed:", _needsPosFallback);
     _popoverEl?.addEventListener("toggle", handleNativeToggle);
 
     // add keybinding to open the popover
@@ -119,12 +124,18 @@
     showDeprecationWarnings();
     addGlobalCloseListener();
     window.addEventListener("resize", updateAutoPosition);
+    if (_needsPosFallback) {
+      window.addEventListener("scroll", updateAutoPosition, { passive: true, capture: true });
+    }
   });
 
   onDestroy(() => {
     window.removeEventListener("resize", updateAutoPosition);
     // true was passed when the listener was added, so it's necesary to be passed here as well
     window.removeEventListener("popstate", handleUrlChange, true);
+    if (_needsPosFallback) {
+      window.removeEventListener("scroll", updateAutoPosition, { capture: true });
+    }
   });
 
   // Functions
@@ -234,19 +245,46 @@
   }
 
   function updateAutoPosition() {
-    if (position !== "auto" || !_isOpen || !_targetEl || !_popoverEl) {
+    if (!_isOpen || !_targetEl || !_popoverEl) {
       return;
     }
 
+    if (position === "auto") {
+      const targetRect = _targetEl.getBoundingClientRect();
+      const popoverRect = _popoverEl.getBoundingClientRect();
+      const spaceAbove = targetRect.top;
+      const spaceBelow = window.innerHeight - targetRect.bottom;
+
+      _autoPosition =
+        spaceBelow < popoverRect.height && spaceAbove > spaceBelow
+          ? "above"
+          : "below";
+    }
+
+    if (_needsPosFallback) {
+      applyJsPosition();
+    }
+  }
+
+  function applyJsPosition() {
     const targetRect = _targetEl.getBoundingClientRect();
     const popoverRect = _popoverEl.getBoundingClientRect();
-    const spaceAbove = targetRect.top;
-    const spaceBelow = window.innerHeight - targetRect.bottom;
+    const vOff = parseFloat(voffset) || 3;
+    const hOff = parseFloat(hoffset) || 0;
+    const isAbove =
+      position === "above" ||
+      (position === "auto" && _autoPosition === "above");
 
-    _autoPosition =
-      spaceBelow < popoverRect.height && spaceAbove > spaceBelow
-        ? "above"
-        : "below";
+    const top = isAbove
+      ? targetRect.top - popoverRect.height - vOff
+      : targetRect.bottom + vOff;
+
+    // Clamp so the popover doesn't overflow the right or left edge of the viewport
+    const rawLeft = targetRect.left + hOff;
+    const left = Math.max(0, Math.min(rawLeft, window.innerWidth - popoverRect.width));
+
+    _popoverEl.style.top = `${top}px`;
+    _popoverEl.style.left = `${left}px`;
   }
 </script>
 
@@ -327,7 +365,12 @@
     padding: 0;
     background-color: transparent;
     width: inherit;
-    anchor-name: --goa-popover-target;
+  }
+
+  @supports (anchor-name: --test) {
+    .popover-target {
+      anchor-name: --goa-popover-target;
+    }
   }
 
   .popover-target:has(:focus-visible) {
@@ -349,24 +392,37 @@
     filter: var(--goa-popover-shadow, none);
     border: var(--goa-popover-border, none);
     margin: 0;
-
-    position-anchor: --goa-popover-target;
-    inset-block-start: anchor(bottom);
-    inset-inline-start: anchor(left);
-    --popover-translate-x: var(--offset-left, 0);
-    --popover-translate-y: var(--offset-top, 3px);
-    translate: var(--popover-translate-x) var(--popover-translate-y);
   }
 
-  .popover-content.position-above {
-    inset-block-start: anchor(top);
-    --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
-    position-try-fallbacks: none;
+  @supports (anchor-name: --test) {
+    .popover-content {
+      position-anchor: --goa-popover-target;
+      inset-block-start: anchor(bottom);
+      inset-inline-start: anchor(left);
+      --popover-translate-x: var(--offset-left, 0);
+      --popover-translate-y: var(--offset-top, 3px);
+      translate: var(--popover-translate-x) var(--popover-translate-y);
+    }
+
+    .popover-content.position-above {
+      inset-block-start: anchor(top);
+      --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
+      position-try-fallbacks: none;
+    }
+
+    .popover-content.position-below {
+      inset-block-start: anchor(bottom);
+      --popover-translate-y: var(--offset-top, 3px);
+    }
   }
 
-  .popover-content.position-below {
-    inset-block-start: anchor(bottom);
-    --popover-translate-y: var(--offset-top, 3px);
+  @supports not (anchor-name: --test) {
+    /* Reset the UA popover centering so JS can position via top/left inline styles */
+    .popover-content {
+      inset: unset;
+      top: 0;
+      left: 0;
+    }
   }
 
   :global(::slotted(ul)) {

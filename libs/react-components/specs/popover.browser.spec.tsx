@@ -202,6 +202,28 @@ describe("Popover", () => {
     expect(aboveWidth!).toBe(belowWidth!);
   });
 
+  it("should position via inline styles when anchor positioning is unsupported", async () => {
+    const supportsSpy = vi.spyOn(CSS, "supports").mockReturnValue(false);
+
+    const Component = () => (
+      <GoabPopover testId="popover" target={<GoabButton testId="target">Open</GoabButton>}>
+        <p>Content</p>
+      </GoabPopover>
+    );
+
+    const result = render(<Component />);
+    await result.getByTestId("target").click();
+
+    await vi.waitFor(() => {
+      const content = result.getByTestId("popover-content");
+      // applyJsPosition sets inline top/left when anchor positioning is unsupported
+      expect(content.element().style.top).toMatch(/\d+px/);
+      expect(content.element().style.left).toMatch(/\d+px/);
+    });
+
+    supportsSpy.mockRestore();
+  });
+
   describe("Popover within a modal", () => {
     it("should open the popover within a modal even with long content", async () => {
       const Component = () => {
