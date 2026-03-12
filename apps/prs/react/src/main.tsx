@@ -85,6 +85,8 @@ import { Feat3229Route } from "./routes/features/feat3229";
 import { FeatV2CheckboxRoute } from "./routes/features/featV2Checkbox";
 import { Feat3398Route } from "./routes/features/feat3398";
 import { Feat3478Route } from "./routes/features/feat3478";
+import { Feat2885Route } from "./routes/features/feat2885";
+import { Feat2885NavigationTabsRoute } from "./routes/features/feat2885-navigation-tabs";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -169,9 +171,6 @@ root.render(
           <Route path="features/3137" element={<Feat3137Route />} />
           <Route path="features/3229" element={<Feat3229Route />} />
           <Route path="features/3344" element={<Feat3344Route />} />
-          <Route path="features/3306" element={<Feat3306Route />} />
-          <Route path="features/3370" element={<Feat3370Route />} />
-          <Route path="features/3396" element={<Feat3396Route />} />
           <Route
             path="features/3407-skip-on-focus-tab"
             element={<Feat3407SkipOnFocusTabRoute />}
@@ -180,10 +179,28 @@ root.render(
             path="features/3407-stack-on-mobile"
             element={<Feat3407StackOnMobileRoute />}
           />
+          <Route path="features/3306" element={<Feat3306Route />} />
+          <Route path="features/3370" element={<Feat3370Route />} />
+          <Route path="features/3396" element={<Feat3396Route />} />
           <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
           <Route path="features/3398" element={<Feat3398Route />} />
           <Route path="features/3478" element={<Feat3478Route />} />
+          <Route
+            path="features/2885-navigation-tabs"
+            element={<Feat2885NavigationTabsRoute />}
+          />
         </Route>
+
+        <Route path="features/3102" element={<Feat3102Route />} />
+        <Route path="features/3137" element={<Feat3137Route />} />
+        <Route path="features/3241" element={<Feat3241Route />} />
+        <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
+        <Route path="features/3137" element={<Feat3137Route />} />
+        <Route path="features/3306" element={<Feat3306Route />} />
+        <Route path="features/3370" element={<Feat3370Route />} />
+        <Route path="features/3396" element={<Feat3396Route />} />
+        {/* Standalone route without App wrapper for full-page layout demos */}
+        <Route path="features/2885" element={<Feat2885Route />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

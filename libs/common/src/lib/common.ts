@@ -220,6 +220,7 @@ export type GoabTextAreaOnBlurDetail = {
 
 export type GoabTabsVariant = "default" | "segmented";
 export type GoabTabsOrientation = "auto" | "horizontal";
+export type GoabTabsNavigation = "hash" | "none";
 
 export interface GoabTabsProps {
   initialTab?: number;
@@ -1216,3 +1217,14 @@ export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
 
 // Work side menu
 export type GoabWorkSideMenuItemType = "normal" | "emergency" | "success";
+
+// Work side notification
+export type GoabWorkSideNotificationItemType =
+  | "default"
+  | "success"
+  | "critical"
+  | "warning"
+  | "info";
+export type GoabWorkSideNotificationReadStatus = "read" | "unread";
+export type GoabWorkSideNotificationPriority = "normal" | "urgent";
+export type GoabWorkSideNotificationActiveTabType = "unread" | "urgent" | "all";

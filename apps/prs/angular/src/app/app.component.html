@@ -1,4 +1,4 @@
-<div style="min-height: 100vh; display: flex; flex-direction: column">
+<div *ngIf="!isFullPage" style="min-height: 100vh; display: flex; flex-direction: column">
   <section slot="header" id="top" class="width" role="header" style="flex: 0 0 auto">
     <goab-microsite-header type="alpha" version="UAT" />
     <goab-app-header>
@@ -104,6 +104,8 @@
           <a href="/features/2722">2722</a>
           <a href="/features/2730">2730</a>
           <a href="/features/2829">2829</a>
+          <a href="/features/2885">2885 WorkSpace Notification</a>
+          <a href="/features/2885-navigation-tabs">2885 Navigation Tabs</a>
           <a href="/features/3102">3102</a>
           <a href="/features/3229">3229 MenuButton vs size and icon-only</a>
           <a href="/features/3137">3137</a>
@@ -130,3 +132,5 @@
     <goab-app-footer maxContentWidth="100%" />
   </section>
 </div>
+
+<router-outlet *ngIf="isFullPage"></router-outlet>

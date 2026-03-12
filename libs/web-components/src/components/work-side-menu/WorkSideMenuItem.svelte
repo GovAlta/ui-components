@@ -3,6 +3,7 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from "svelte";
   import { dispatch } from "../../common/utils";
+  import { MOBILE_BP } from "../../common/breakpoints";
 
   type WorkSideMenuItemType = "normal" | "emergency" | "success";
 
@@ -12,8 +13,8 @@
 
   /** The text label displayed for the menu item. */
   export let label: string;
-  /** The URL the menu item links to. */
-  export let url: string;
+  /** The URL the menu item links to. Optional — when absent, renders as a button instead of a link. */
+  export let url: string = "";
 
   // optional
   /** Badge text displayed alongside the menu item (e.g., notification count). */
@@ -34,14 +35,27 @@
   // *******
 
   let _rootEl: HTMLElement;
-  let _linkEl: HTMLAnchorElement;
+  let _linkEl: HTMLElement;
+  let _popoverEl: HTMLElement;
+  let _mobileContentEl: HTMLElement;
+  let _drawerEl: HTMLElement | null = null;
+  let _slotContent: Element[] = [];
+  let _drawerOpen = false;
+  let _windowWidth = window.innerWidth;
 
   // ========
   // Reactive
   // ========
 
+  $: _isMobile = _windowWidth < MOBILE_BP;
   $: _alwaysVisible =
     !isNaN(parseInt(badge)) && parseInt(badge) > 0 && parseInt(badge) < 10;
+  $: _hasPopoverContent = $$slots.popoverContent;
+  $: _badgeType = type === "emergency" ? "emergency" : "success";
+
+  $: if (_popoverEl) {
+    addPopoverListeners();
+  }
 
   // *****
   // Hooks
@@ -54,15 +68,77 @@
   });
 
   onDestroy(() => {
-    removeEventListeners();
+    if (_drawerEl) {
+      document.removeEventListener(
+        "goa:work-side-notification-panel:closePopover",
+        handleCloseNotificationPanel,
+      );
+      _drawerEl.remove();
+      _drawerEl = null;
+    }
   });
 
   // *********
   // Functions
   // *********
 
-  function handleClick() {
+  function openMobileDrawer() {
+    // create `goa-drawer` on the document.body to make sure GoabWorkSideMenu hidden but GoabDrawer still visible
+    if (!_drawerEl) {
+      _drawerEl = document.createElement("goa-drawer");
+      _drawerEl.setAttribute("position", "bottom");
+      _drawerEl.setAttribute("maxsize", "85vh");
+      _drawerEl.setAttribute("close-button", "none");
+      _drawerEl.setAttribute("version", "2");
+      _drawerEl.style.setProperty("--goa-drawer-content-padding-vertical", "0");
+      _drawerEl.style.setProperty(
+        "--goa-drawer-content-padding-horizontal",
+        "0",
+      );
+
+      document.body.appendChild(_drawerEl);
+
+      if (_mobileContentEl) {
+        const slotEl = _mobileContentEl.querySelector(
+          "slot",
+        ) as HTMLSlotElement;
+        if (slotEl) {
+          _slotContent = Array.from(slotEl.assignedElements());
+          _slotContent.forEach((el) => {
+            el.removeAttribute("slot");
+            _drawerEl!.appendChild(el);
+          });
+        }
+      }
+
+      // To listen to Close button dispatched from Notification Panel
+      document.addEventListener(
+        "goa:work-side-notification-panel:closePopover",
+        handleCloseNotificationPanel,
+      );
+    }
+
+    // give browser one frame to render the drawer first and open, to have the animation when opening a drawer first time
+    requestAnimationFrame(() => {
+      _drawerEl!.setAttribute("open", "true");
+      _drawerOpen = true;
+      dispatch(_rootEl, "_mobilePopoverOpen", {}, { bubbles: true });
+    });
+  }
+
+  function closeMobileDrawer() {
+    _drawerOpen = false;
+
+    if (_drawerEl) {
+      _drawerEl.removeAttribute("open");
+    }
+
+    dispatch(_rootEl, "_mobilePopoverClose", {}, { bubbles: true });
+  }
+
+  function handleLinkClick() {
     dispatch(_rootEl, "_update", {}, { bubbles: true });
+    dispatch(_rootEl, "_click", {}, { bubbles: true });
   }
 
   function handleUpdateItem(e: CustomEvent) {
@@ -87,14 +163,63 @@
     );
   }
 
-  function addEventListeners() {
-    _linkEl.addEventListener("_update", handleUpdateItem as EventListener);
+  function handleFocus() {
+    dispatch(
+      _rootEl,
+      "_hoverItem",
+      { el: _linkEl, label: label },
+      { bubbles: true },
+    );
   }
 
-  function removeEventListeners() {
-    _linkEl.removeEventListener("_update", handleUpdateItem as EventListener);
+  function handleBlur() {
+    dispatch(_rootEl, "_blurItem", {}, { bubbles: true });
   }
+
+  function handleCloseNotificationPanel() {
+    if (_drawerEl) {
+      closeMobileDrawer();
+    } else {
+      dispatch(document.body, "goa:closePopover", {});
+    }
+  }
+
+  function addEventListeners() {
+    _linkEl.addEventListener("_update", handleUpdateItem as EventListener);
+    _linkEl.addEventListener("focus", handleFocus);
+    _linkEl.addEventListener("blur", handleBlur);
+    _rootEl.addEventListener(
+      "goa:work-side-notification-panel:closePopover",
+      handleCloseNotificationPanel,
+    );
+  }
+
+  function handlePopoverOpen() {
+    dispatch(
+      _rootEl,
+      "_desktopPopoverOpen",
+      { el: _linkEl },
+      { bubbles: true },
+    );
+  }
+
+  function handlePopoverClose() {
+    dispatch(
+      _rootEl,
+      "_desktopPopoverClose",
+      { el: _linkEl },
+      { bubbles: true },
+    );
+  }
+
+  function addPopoverListeners() {
+    _popoverEl?.addEventListener("_open", handlePopoverOpen);
+    _popoverEl?.addEventListener("_close", handlePopoverClose);
+  }
+
 </script>
+
+<svelte:window bind:innerWidth={_windowWidth} />
 
 <div
   class="root"
@@ -104,41 +229,125 @@
   on:mouseenter={handleMouseEnter}
   bind:this={_rootEl}
 >
-  <a
-    class="menu-item"
-    class:current
-    aria-current={current ? "page" : undefined}
-    role="menuitem"
-    href={url}
-    bind:this={_linkEl}
-    on:click={handleClick}
-    tabindex="0"
-  >
-    <goa-icon
-      size="small"
-      theme={current ? "filled" : "outline"}
-      type={icon}
-      arialabel={label}
-    />
-    <div class="menu-item-label">
-      {label}
-    </div>
-    {#if $$slots.trailingContent}
-      <div class="trailing-content-slot">
-        <slot name="trailingContent" />
-      </div>
-    {/if}
-    {#if badge}
-      <div
-        class="badge"
-        class:emergency={type == "emergency"}
-        class:success={type == "success"}
-        class:alwaysvisible={_alwaysVisible}
+  {#if _hasPopoverContent}
+    {#if _isMobile}
+      <button
+        class="menu-item"
+        class:current
+        aria-current={current ? "page" : undefined}
+        role="menuitem"
+        bind:this={_linkEl}
+        on:click={openMobileDrawer}
+        tabindex="0"
       >
-        {badge}
+        <goa-icon
+          size="small"
+          theme={current ? "filled" : "outline"}
+          type={icon}
+          arialabel={label}
+        />
+        <div class="menu-item-label">
+          {label}
+        </div>
+        {#if badge}
+          <goa-badge
+            class="badge"
+            class:alwaysvisible={_alwaysVisible}
+            type={_badgeType}
+            content={badge}
+            icon="false"
+            min-width="var(--goa-space-m)"
+            justify-content="center"
+          />
+        {/if}
+      </button>
+      <!-- Slot content is moved to a goa-drawer appended to document.body on open.
+           The drawer cannot live inside the menu because the menu is hidden on mobile,
+           which would hide the drawer along with it. -->
+      <div class="mobile-drawer-content" bind:this={_mobileContentEl}>
+        <slot name="popoverContent" />
+      </div>
+    {:else}
+      <div class="popover-wrapper">
+        <goa-popover
+          position="right"
+          width="500px"
+          min-width="500px"
+          maxwidth="500px"
+          padded="false"
+          target-width="100%"
+          target-text-align="left"
+          hoffset="36"
+          bind:this={_popoverEl}
+        >
+          <button
+            slot="target"
+            class="menu-item"
+            class:current
+            aria-current={current ? "page" : undefined}
+            role="menuitem"
+            bind:this={_linkEl}
+            tabindex="0"
+          >
+            <goa-icon
+              size="small"
+              theme={current ? "filled" : "outline"}
+              type={icon}
+              arialabel={label}
+            />
+            <div class="menu-item-label">
+              {label}
+            </div>
+            {#if badge}
+              <goa-badge
+                class="badge"
+                class:alwaysvisible={_alwaysVisible}
+                type={_badgeType}
+                content={badge}
+                icon="false"
+                min-width="var(--goa-space-m)"
+                justify-content="center"
+              />
+            {/if}
+          </button>
+          <slot name="popoverContent" />
+        </goa-popover>
       </div>
     {/if}
-  </a>
+  {:else}
+    <svelte:element
+      this={url ? "a" : "button"}
+      class="menu-item"
+      class:current
+      aria-current={current ? "page" : undefined}
+      role="menuitem"
+      href={url || undefined}
+      bind:this={_linkEl}
+      on:click={handleLinkClick}
+      tabindex="0"
+    >
+      <goa-icon
+        size="small"
+        theme={current ? "filled" : "outline"}
+        type={icon}
+        arialabel={label}
+      />
+      <div class="menu-item-label">
+        {label}
+      </div>
+      {#if badge}
+        <goa-badge
+          class="badge"
+          class:alwaysvisible={_alwaysVisible}
+          type={_badgeType}
+          content={badge}
+          icon="false"
+          min-width="var(--goa-space-m)"
+          justify-content="center"
+        />
+      {/if}
+    </svelte:element>
+  {/if}
 </div>
 
 <style>
@@ -149,6 +358,10 @@
   .root {
     container-type: inline-size;
     position: relative;
+  }
+
+  .mobile-drawer-content {
+    display: none;
   }
 
   /* Menu item */
@@ -172,6 +385,13 @@
       var(--goa-color-greyscale-600)
     );
     min-height: var(--goa-work-side-menu-item-min-height, 40px);
+  }
+
+  button.menu-item {
+    border: none;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
   }
 
   .menu-item:hover {
@@ -234,37 +454,15 @@
     font-weight: var(--goa-font-weight-semi-bold);
   }
 
-  /* Badge */
-  .badge {
-    color: var(--goa-color-text-light);
-    height: 1.25rem;
-    min-width: 1.25rem;
-    line-height: 1.3;
-    text-align: center;
-    font-size: var(
+  /* Badge - using goa-badge component */
+  goa-badge.badge {
+    --goa-badge-height: 1.25rem;
+    --goa-badge-padding: 0 6px;
+    --goa-badge-font-size: var(
       --goa-work-side-menu-item-badge-text-size,
       var(--goa-font-size-2)
     );
-    background-color: var(
-      --goa-work-side-menu-item-badge-background-color,
-      var(--goa-color-success-default)
-    );
-    border-radius: 1.25rem;
-    padding: 0 6px;
-  }
-
-  .badge.success {
-    background-color: var(
-      --goa-work-side-menu-item-badge-success-background-color,
-      var(--goa-color-success-default)
-    );
-  }
-
-  .badge.emergency {
-    background-color: var(
-      --goa-work-side-menu-item-badge-emergency-background-color,
-      var(--goa-color-emergency-default)
-    );
+    --goa-badge-border-radius: 1.25rem;
   }
 
   /* Icon-only items when menu is closed */
@@ -278,22 +476,18 @@
     .trailing-content-slot {
       display: none;
     }
-    .badge {
+
+    goa-badge.badge {
       position: absolute;
-      height: var(--goa-space-m);
-      width: var(--goa-space-m);
-      min-width: auto;
-      padding: 0;
       top: var(--goa-space-3xs);
       right: var(--goa-space-3xs);
-      text-align: center;
-      line-height: 1.2;
-      font-size: var(--goa-font-size-1);
+      --goa-badge-height: var(--goa-space-m);
+      --goa-badge-padding: 0;
+      --goa-badge-font-size: var(--goa-font-size-1);
     }
 
-    .badge:not(.alwaysvisible) {
-      font-size: 0;
-      color: transparent;
+    goa-badge.badge:not(.alwaysvisible) {
+      --goa-badge-font-size: 0;
     }
 
     @keyframes delayText {

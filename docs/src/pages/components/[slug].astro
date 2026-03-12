@@ -93,9 +93,20 @@ const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3A
   <goa-tabs version="2" initialtab="1">
     <!-- Properties Tab -->
     <goa-tab heading="Properties">
-      <TabContentWrapper tocQuery=".api-section h3">
+      <TabContentWrapper tocQuery=".api-section h3, .sub-component-section h2">
         {api ? (
-          <PropsTable props={api.props} events={api.events} slots={api.slots} />
+          <>
+            <PropsTable props={api.props} events={api.events} slots={api.slots} />
+            {api.subComponents && api.subComponents.length > 0 && (
+              api.subComponents.map((sub) => (
+                <div class="sub-component-section">
+                  <h2 id={sub.webComponentTag}>{sub.name}</h2>
+                  <p class="sub-component-description">{sub.description}</p>
+                  <PropsTable props={sub.props} events={sub.events} slots={sub.slots} />
+                </div>
+              ))
+            )}
+          </>
         ) : (
           <goa-callout version="2" type="information" heading="No API data available">
             API documentation is automatically extracted from the component source code.
@@ -216,6 +227,26 @@ const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3A
   .examples-list {
     display: flex;
     flex-direction: column;
+  }
+
+  /* Sub-component sections */
+  .sub-component-section {
+    margin-top: var(--goa-space-2xl);
+    padding-top: var(--goa-space-xl);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .sub-component-section h2 {
+    font: var(--goa-typography-heading-m);
+    color: var(--goa-color-text-default);
+    margin-bottom: var(--goa-space-xs);
+  }
+
+  .sub-component-description {
+    font: var(--goa-typography-body-m);
+    color: var(--goa-color-text-secondary);
+    margin-bottom: var(--goa-space-l);
+    max-width: 65ch;
   }
 
   /* MDX Content */

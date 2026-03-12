@@ -120,6 +120,8 @@ export function App() {
               <Link to="/features/2730">2730 Temporary Notification Controller</Link>
               <Link to="/features/2829">2829 Modal ARIA Live Region</Link>
               <Link to="/features/2877">2877 Badge Types and Custom Icon</Link>
+              <Link to="/features/2885">2885 Work Side Notification Popover</Link>
+              <Link to="/features/2885-navigation-tabs">2885 Navigation Tabs</Link>
               <Link to="/features/3102">3102 MenuButton Width</Link>
               <Link to="/features/3137">3137 Work Side Menu Group</Link>
               <Link to="/features/3241">3241 V2 Experimental Wrappers</Link>

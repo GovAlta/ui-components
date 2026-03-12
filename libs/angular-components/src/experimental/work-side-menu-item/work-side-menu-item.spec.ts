@@ -31,24 +31,37 @@ class TestWorkSideMenuItemComponent {
   type = "normal";
 }
 
-describe("GoabxWorkSideMenuItem", () => {
-  let fixture: ComponentFixture<TestWorkSideMenuItemComponent>;
-  let component: TestWorkSideMenuItemComponent;
+@Component({
+  standalone: true,
+  imports: [GoabxWorkSideMenuItem],
+  template: `
+    <goabx-work-side-menu-item
+      [label]="label"
+      [url]="url"
+      [popoverContent]="popoverTpl"
+    >
+    </goabx-work-side-menu-item>
+    <ng-template #popoverTpl>
+      <div class="popover-test-content">Popover content here</div>
+    </ng-template>
+  `,
+})
+class TestWorkSideMenuItemWithPopoverComponent {
+  label = "Popover item";
+  url = "/popover";
+}
 
-  beforeEach(fakeAsync(() => {
+describe("GoabxWorkSideMenuItem", () => {
+  it("should render and set the props correctly", fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [TestWorkSideMenuItemComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestWorkSideMenuItemComponent);
-    component = fixture.componentInstance;
-
+    const fixture = TestBed.createComponent(TestWorkSideMenuItemComponent);
     fixture.detectChanges();
-    tick(); // Wait for setTimeout in ngOnInit
+    tick();
     fixture.detectChanges();
-  }));
 
-  it("should render and set the props correctly", () => {
     const menuItemElement = fixture.debugElement.query(
       By.css("goa-work-side-menu-item"),
     ).nativeElement;
@@ -60,5 +73,27 @@ describe("GoabxWorkSideMenuItem", () => {
     expect(menuItemElement.getAttribute("icon")).toBe("triangle");
     expect(menuItemElement.getAttribute("testid")).toBe("test-id");
     expect(menuItemElement.getAttribute("type")).toBe("normal");
-  });
+  }));
+
+  it("should render popover content into the popoverContent slot", fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestWorkSideMenuItemWithPopoverComponent],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestWorkSideMenuItemWithPopoverComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const slotDiv = fixture.debugElement.query(
+      By.css('[slot="popoverContent"]'),
+    );
+    expect(slotDiv).toBeTruthy();
+
+    const popoverContent = fixture.debugElement.query(
+      By.css(".popover-test-content"),
+    );
+    expect(popoverContent).toBeTruthy();
+    expect(popoverContent.nativeElement.textContent).toBe("Popover content here");
+  }));
 });
