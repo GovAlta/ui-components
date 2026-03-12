@@ -23,7 +23,7 @@
     FieldsetResetFieldsMsg,
     FormItemMountMsg,
   } from "../../types/relay-types";
-  import { CalendarDate } from "../../common/calendar-date";
+  import { CalendarDate } from "@abgov/ui-components-common";
 
   type OnChangeDetail = {
     name: string;

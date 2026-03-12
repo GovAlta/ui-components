@@ -1,4 +1,5 @@
 import {
+  CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
 } from "@abgov/ui-components-common";
@@ -16,7 +17,6 @@ import {
   Renderer2,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { formatDate } from "../../../date-utils";
 import { GoabControlValueAccessor } from "../base.component";
 
 @Component({
@@ -27,9 +27,9 @@ import { GoabControlValueAccessor } from "../base.component";
     <goa-date-picker
       #goaComponentRef
       [attr.name]="name"
-      [attr.value]="formatValue(value)"
-      [attr.min]="formatValue(min)"
-      [attr.max]="formatValue(max)"
+      [attr.value]="valueString()"
+      [attr.min]="minString()"
+      [attr.max]="maxString()"
       [attr.error]="error"
       [attr.disabled]="disabled"
       [attr.relative]="relative"
@@ -68,14 +68,29 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();
 
-  formatValue(val: Date | string | null | undefined): string {
+  formatValue(param: string, val: Date | string | null | undefined): string {
     if (!val) return "";
 
     if (val instanceof Date) {
-      return formatDate(val);
+      console.warn(
+        `GoabDatePicker: Using Date for '${param}' is deprecated. Use a string in YYYY-MM-DD format instead.`,
+      );
+      return new CalendarDate(val).toString();
     }
 
     return val;
+  }
+
+  valueString(): string | undefined {
+    return this.formatValue("value", this.value);
+  }
+
+  minString(): string | undefined {
+    return this.formatValue("min", this.min);
+  }
+
+  maxString(): string | undefined {
+    return this.formatValue("max", this.max);
   }
 
   _onChange(e: Event) {

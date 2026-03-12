@@ -2,8 +2,11 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testin
 import { GoabCalendar } from "./calendar";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { fireEvent } from "@testing-library/dom";
-import { GoabCalendarOnChangeDetail, Spacing } from "@abgov/ui-components-common";
-import { formatDate } from "../../../date-utils";
+import {
+  CalendarDate,
+  GoabCalendarOnChangeDetail,
+  Spacing,
+} from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
@@ -69,8 +72,12 @@ describe("GoABCalendar", () => {
   it("should render properties", () => {
     const calendar = fixture.nativeElement.querySelector("goa-calendar");
     expect(calendar.getAttribute("name")).toBe(component.name);
-    expect(calendar.getAttribute("min")).toBe(formatDate(component.min as Date));
-    expect(calendar.getAttribute("max")).toBe(formatDate(component.max as Date));
+    expect(calendar.getAttribute("min")).toBe(
+      new CalendarDate(component.min as Date).toString(),
+    );
+    expect(calendar.getAttribute("max")).toBe(
+      new CalendarDate(component.max as Date).toString(),
+    );
     expect(calendar.getAttribute("testid")).toBe(component.testId);
     expect(calendar.getAttribute("mt")).toBe(component.mt);
     expect(calendar.getAttribute("mb")).toBe(component.mb);

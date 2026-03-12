@@ -4,7 +4,7 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { CalendarDate } from "../../common/calendar-date";
+  import { CalendarDate } from "@abgov/ui-components-common";
 
   // ******
   // Public

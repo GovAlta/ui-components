@@ -1,4 +1,4 @@
-import { GoabCalendarOnChangeDetail } from "@abgov/ui-components-common";
+import { CalendarDate, GoabCalendarOnChangeDetail } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -9,7 +9,6 @@ import {
   ChangeDetectorRef,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
-import { formatDate } from "../../date-utils";
 
 @Component({
   standalone: true,
@@ -41,8 +40,8 @@ export class GoabxCalendar extends GoabBaseComponent implements OnInit {
 
   @Input() name?: string;
   @Input() value?: Date | string;
-  @Input() min?: Date;
-  @Input() max?: Date;
+  @Input() min?: Date | string | undefined;
+  @Input() max?: Date | string | undefined;
 
   @Output() onChange = new EventEmitter<GoabCalendarOnChangeDetail>();
 
@@ -50,12 +49,24 @@ export class GoabxCalendar extends GoabBaseComponent implements OnInit {
 
   minString(): string | undefined {
     if (!this.min) return undefined;
-    return formatDate(this.min);
+    if (this.min instanceof Date) {
+      console.warn(
+        "GoabCalendar: Using Date for 'min' is deprecated. Use a string in YYYY-MM-DD format instead.",
+      );
+      return new CalendarDate(this.min).toString();
+    }
+    return this.min;
   }
 
   maxString(): string | undefined {
     if (!this.max) return undefined;
-    return formatDate(this.max);
+    if (this.max instanceof Date) {
+      console.warn(
+        "GoabCalendar: Using Date for 'max' is deprecated. Use a string in YYYY-MM-DD format instead.",
+      );
+      return new CalendarDate(this.max).toString();
+    }
+    return this.max;
   }
 
   constructor(private cdr: ChangeDetectorRef) {
