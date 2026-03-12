@@ -7,7 +7,7 @@ const STORAGE_KEY = "theme-preference";
 function getStoredPreference(): ThemePreference {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === "light" || stored === "dark" || stored === "system") return stored;
-  return "system";
+  return "light";
 }
 
 function getSystemDark(): boolean {

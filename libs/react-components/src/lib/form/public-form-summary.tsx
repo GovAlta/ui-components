@@ -3,6 +3,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps {
   heading?: string;
+  readonly?: string;
 }
 
 declare module "react" {
@@ -16,20 +17,24 @@ declare module "react" {
 
 interface GoabPublicFormSummaryProps extends DataAttributes {
   heading?: string;
+  readOnly?: boolean;
 }
 
 export function GoabPublicFormSummary({
   heading = "",
+  readOnly,
   ...rest
 }: GoabPublicFormSummaryProps) {
   const _props = transformProps<WCProps>(
-    { heading, ...rest },
-    lowercase
+    {
+      heading,
+      readonly: readOnly ? "true" : undefined,
+      ...rest,
+    },
+    lowercase,
   );
 
-  return (
-    <goa-public-form-summary {..._props} />
-  );
+  return <goa-public-form-summary {..._props} />;
 }
 
 export default GoabPublicFormSummary;

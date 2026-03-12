@@ -5,6 +5,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps {
   heading?: string;
   url?: string;
+  version?: string;
   maxcontentwidth?: string;
   fullmenubreakpoint?: number;
   hasmenuclickhandler?: string;
@@ -15,9 +16,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-app-header": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-app-header": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -25,6 +27,7 @@ declare module "react" {
 export interface GoabAppHeaderProps extends DataAttributes {
   heading?: string;
   url?: string;
+  version?: "1" | "2";
   maxContentWidth?: string;
   fullMenuBreakpoint?: number;
   children?: React.ReactNode;

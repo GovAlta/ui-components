@@ -8,6 +8,8 @@ interface WCProps {
   "sub-heading"?: string;
   "section-title"?: string;
   "button-text"?: string;
+  "button-type"?: string;
+  "button-leading-icon"?: string;
   "back-visibility"?: string;
   "error-summary-position"?: string;
   error?: string;
@@ -29,6 +31,8 @@ interface GoabPublicFormPageProps extends DataAttributes {
   subHeading?: string;
   sectionTitle?: string;
   buttonText?: string;
+  buttonType?: "primary" | "secondary" | "tertiary";
+  buttonLeadingIcon?: string;
   backVisibility?: "visible" | "hidden";
   /** Controls where the error summary callout appears. Default is "top". */
   errorSummaryPosition?: "top" | "bottom" | "none";
@@ -41,6 +45,8 @@ export function GoabPublicFormPage({
   subHeading,
   sectionTitle,
   buttonText,
+  buttonType,
+  buttonLeadingIcon,
   backVisibility,
   errorSummaryPosition,
   editting,
@@ -53,11 +59,13 @@ export function GoabPublicFormPage({
       "sub-heading": subHeading,
       "section-title": sectionTitle,
       "button-text": buttonText,
+      "button-type": buttonType,
+      "button-leading-icon": buttonLeadingIcon,
       "back-visibility": backVisibility,
       "error-summary-position": errorSummaryPosition,
       "data-pf-editting": editting ? "true" : undefined,
     },
-    kebab
+    kebab,
   );
 
   return <goa-public-form-page {..._props}>{children}</goa-public-form-page>;
