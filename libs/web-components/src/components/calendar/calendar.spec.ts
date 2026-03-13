@@ -8,6 +8,7 @@ import {
 import { addDays, lastDayOfMonth, startOfDay, addMonths } from "date-fns";
 import { tick } from "svelte";
 import { it, expect, vi } from "vitest";
+import { CalendarDate } from "@abgov/ui-components-common";
 
 function toDayStart(d: Date): Date {
   d.setHours(0);
@@ -391,8 +392,8 @@ it("updates year dropdown when min date changes", async () => {
   const initialMax = new Date(2025, 0, 1);
 
   const { component, queryByTestId } = render(Calendar, {
-    min: initialMin.toISOString(),
-    max: initialMax.toISOString(),
+    min: new CalendarDate(initialMin).toString(),
+    max: new CalendarDate(initialMax).toString(),
   });
   await tick();
 
@@ -411,7 +412,7 @@ it("updates year dropdown when min date changes", async () => {
 
   // Update min to 2022, reducing the range
   const newMin = new Date(2022, 0, 1);
-  component.$set({ min: newMin.toISOString() });
+  component.$set({ min: new CalendarDate(newMin).toString() });
   await tick();
 
   // Check updated years in dropdown
@@ -444,8 +445,8 @@ it("updates year dropdown when max date changes", async () => {
   const initialMax = new Date(2025, 0, 1);
 
   const { component, queryByTestId } = render(Calendar, {
-    min: initialMin.toISOString(),
-    max: initialMax.toISOString(),
+    min: new CalendarDate(initialMin).toString(),
+    max: new CalendarDate(initialMax).toString(),
   });
   await tick();
 
@@ -464,7 +465,7 @@ it("updates year dropdown when max date changes", async () => {
 
   // Update max to 2023, reducing the range
   const newMax = new Date(2023, 0, 1);
-  component.$set({ max: newMax.toISOString() });
+  component.$set({ max: new CalendarDate(newMax).toString() });
   await tick();
 
   // Check updated years in dropdown

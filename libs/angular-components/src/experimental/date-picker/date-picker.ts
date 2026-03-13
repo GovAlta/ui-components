@@ -151,7 +151,7 @@ export class GoabxDatePicker extends GoabControlValueAccessor implements OnInit 
         this.renderer.setAttribute(
           datePickerEl,
           "value",
-          value instanceof Date ? value.toISOString() : value,
+          value instanceof Date ? new CalendarDate(value).toString() : value,
         );
       }
     }

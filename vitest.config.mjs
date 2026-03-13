@@ -44,6 +44,14 @@ export default defineConfig({
       },
       {
         plugins: [react()],
+        resolve: {
+          alias: {
+            "@abgov/ui-components-common": resolve(
+              __dirname,
+              "./dist/libs/common/index.js",
+            ),
+          },
+        },
         test: {
           name: "react-unit",
           globals: true,
