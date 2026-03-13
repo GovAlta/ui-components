@@ -1,0 +1,228 @@
+---
+/**
+ * Get Started - Migration Guide
+ *
+ * Migration pathways and guidance for moving products from DS 1.x to DS 2.0.
+ * Content adapted from Confluence.
+ */
+import DocumentationPageLayout from "../../layouts/DocumentationPageLayout.astro";
+---
+
+<DocumentationPageLayout
+  title="Migration guide"
+  description="Choose the right Design System 2.0 migration pathway for your product"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Migration guide</goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Design System 2.0 (DS 2.0) becomes the Government of Alberta standard in March 2026.
+    New products starting after launch should use DS 2.0. Existing active products should
+    plan their move to DS 2.0 during the recommended migration window, which runs from
+    March 2026 to September 2026.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="migration-pathways">Migration pathways</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    The right migration path depends on your product&apos;s context, including team
+    funding and capacity, other delivery obligations, product lifecycle, and the effort
+    required to update. The three pathways are standard migration, late migration, and no
+    migration.
+  </goa-text>
+
+  <h3 id="starting-a-new-product">Starting a new product</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="l">
+    If your product starts after March 2026, start with DS 2.0. Migration pathways apply
+    to existing products moving from DS 1.x to DS 2.0.
+  </goa-text>
+
+  <h3 id="compare-the-pathways">Compare the pathways</h3>
+  <div style="margin-bottom: var(--goa-space-xl);">
+    <goa-table version="2" width="100%">
+      <table width="100%" style="table-layout: fixed;">
+        <thead>
+          <tr>
+            <th style="width: 18%;">Pathway</th>
+            <th style="width: 58%;">Use it when</th>
+            <th style="width: 24%;">Recommendation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none"
+                >Standard migration</goa-text
+              >
+            </td>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none">
+                Your product has an active funded team and can migrate by September 2026
+              </goa-text>
+            </td>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none"
+                >Recommended default</goa-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none"
+                >Late migration</goa-text
+              >
+            </td>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none">
+                Your team cannot meet the standard window because of delivery timelines,
+                dependencies, or capacity constraints
+              </goa-text>
+            </td>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none"
+                >Only when necessary</goa-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none"
+                >No migration</goa-text
+              >
+            </td>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none">
+                Your product does not have an active funded team and/or is not in a
+                position to upgrade
+              </goa-text>
+            </td>
+            <td>
+              <goa-text version="2" size="body-s" mt="none" mb="none"
+                >Only in specific cases</goa-text
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </goa-table>
+  </div>
+
+  <h3 id="standard-migration">
+    Standard migration
+    <goa-badge
+      version="2"
+      type="success"
+      icon="false"
+      emphasis="subtle"
+      ml="m"
+      content="Recommended default"
+      style="vertical-align: middle;"></goa-badge>
+  </h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Standard migration is the <strong>default pathway for active products.</strong>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Choose this path if your product has an active funded team and can schedule migration
+    work between March 2026 and September 2026. This is the recommended path for most
+    teams because it keeps your product aligned with the current standard and gives you
+    the best support.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">Use this pathway when:</goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>your product is actively maintained</li>
+      <li>your team can reserve time to migrate by September 2026</li>
+      <li>you want access to the latest templates, components, tokens, and guidance</li>
+    </ul>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="xl">
+    Plan for work across the product team. Typical upgrade tasks include the library
+    updates, adjusting spacing and typography, and updating custom code to align with the
+    DS 2.0 visual design. This is a significant update and will usually involve design,
+    development, and testing.
+  </goa-text>
+
+  <h3 id="late-migration">Late migration</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Late migration is a last-resort pathway for active products.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Choose this path only when delivery deadlines, dependencies, or capacity constraints
+    make the standard migration window unrealistic. This path gives your team more time,
+    but it also increases risk and reduces your ongoing support.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">Use this pathway when:</goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <ul>
+      <li>a major delivery deadline blocks migration work</li>
+      <li>critical dependencies prevent the upgrade during the standard window</li>
+      <li>capacity or funding makes the standard window unrealistic</li>
+    </ul>
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="xl">
+    Delaying migration means your product will wait longer to benefit from DS 2.0
+    improvements. Over time, compatibility gaps may increase, unresolved issues may
+    remain, and your product may be inconsistent with the new standard for longer.
+  </goa-text>
+
+  <h3 id="no-migration">No migration</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    No migration is an opt-out pathway for specific situations.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Choose this path only when your product does not have an active funded team and/or is
+    not in a position to upgrade. In these cases, the product may remain on DS 1.x.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="xl">
+    Teams on this path should understand that the product will not receive DS 2.0
+    improvements and will not align with the current standard. Support for DS 1.x is more
+    limited from March to September and ends after September 2026.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="what-changes-after-launch">What changes after launch</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    After the DS 2.0 launch in March 2026:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>New products should use DS 2.0</li>
+      <li>Active products should aim to migrate by September 2026</li>
+      <li>Web components 1.x receive limited fixes from March to September</li>
+      <li>Angular 4.x and React 6.x receive limited fixes or features after March</li>
+      <li>Support for DS 1.0 ends after September 2026</li>
+      <li>Web components will move to a new major version after September 2026</li>
+    </ul>
+  </goa-text>
+
+  <h2 id="how-to-choose">How to choose a pathway</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Use these questions to guide your decision:
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>Is this a new product starting after March 2026?</li>
+      <li>Does the product have an active funded team?</li>
+      <li>Can the team schedule migration work before September 2026?</li>
+      <li>
+        Are there delivery deadlines or dependencies that block the standard window?
+      </li>
+      <li>
+        Is the team prepared to accept reduced support and higher maintenance risk if
+        migration is delayed?
+      </li>
+    </ul>
+  </goa-text>
+
+  <h2 id="related-guidance">Related guidance</h2>
+  <goa-block version="2" gap="s" direction="column">
+    <goa-link version="2"
+      ><a href="/get-started/developers">Review the setup steps for developers</a
+      ></goa-link
+    >
+    <goa-text version="2" size="body-m" mt="none" mb="none">
+      Watch a real GoA service go through the migration when the recording is available.
+    </goa-text>
+  </goa-block>
+</DocumentationPageLayout>

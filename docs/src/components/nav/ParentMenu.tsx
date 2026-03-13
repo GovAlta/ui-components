@@ -47,6 +47,8 @@ const GROUP_SECTIONS: Record<string, Array<{ label: string; url: string }>> = {
     { label: "Early Adopters", url: "/get-started" },
     { label: "Designers", url: "/get-started/designers" },
     { label: "Developers", url: "/get-started/developers" },
+    { label: "Migration guide", url: "/get-started/migration-guide" },
+    { label: "Roadmap", url: "/get-started/roadmap" },
   ],
 };
 

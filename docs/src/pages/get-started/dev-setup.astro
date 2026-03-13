@@ -1,0 +1,155 @@
+---
+/**
+ * Get Started - Developer Setup
+ *
+ * Setup instructions for Angular, React, and Web Components.
+ * Based on the current website content with DS 2.0 token updates.
+ */
+import DocumentationPageLayout from "../../layouts/DocumentationPageLayout.astro";
+---
+
+<DocumentationPageLayout
+  title="Developer setup"
+  description="Set up Angular, React, or Web Components to use the GoA Design System"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Developer setup</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Set up the Government of Alberta Design System in Angular, React, or directly with Web
+    Components.
+  </goa-text>
+
+  <h2 id="angular">Angular UI components</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <strong>Versions supported in latest:</strong> 18, 19, 20, 21
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    This is the web component library and utilizes Angular&apos;s web component
+    integration.
+  </goa-text>
+
+  <h3 id="angular-step-1">1. Add dependencies</h3>
+  <pre><code>npm i @abgov/web-components
+npm i @abgov/angular-components
+npm i @abgov/design-tokens</code></pre>
+
+  <h3 id="angular-step-2">2. Link ionicons in app/index.html</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Add the following in the <code>head</code> element:
+  </goa-text>
+  <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"&gt;&lt;/script&gt;
+&lt;script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"&gt;&lt;/script&gt;</code></pre>
+
+  <h3 id="angular-step-3">3. Update src/app/app.module.ts</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Update <code>src/app/app.module.ts</code> as per the four steps below:
+  </goa-text>
+  <pre><code>// 1. Import the CUSTOM_ELEMENTS_SCHEMA
+import &#123; CUSTOM_ELEMENTS_SCHEMA &#125; from "@angular/core";
+
+// 2. Import the libs
+import "@abgov/web-components";
+import &#123; AngularComponentsModule &#125; from "@abgov/angular-components";
+
+@NgModule(&#123;
+	declarations: [AppComponent],
+	imports: [
+		// 3. Add the needed imports
+		BrowserModule,
+		AngularComponentsModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
+	// 4. Add the CUSTOM_ELEMENTS_SCHEMA to the NgModule
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	&#125;)
+export class AppModule &#123;&#125;</code></pre>
+
+  <h3 id="angular-step-4">4. Add the styles link in src/styles.css</h3>
+  <pre><code>@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="react">React UI components</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    <strong>Versions supported in latest:</strong> 17, 18, 19
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    This library contains React components which wrap the Government of Alberta Web
+    Components.
+  </goa-text>
+
+  <h3 id="react-step-1">1. Add dependencies</h3>
+  <pre><code>npm i @abgov/react-components
+npm i @abgov/web-components
+npm i @abgov/design-tokens</code></pre>
+
+  <h3 id="react-step-2">2. Link ionicons in app/index.html</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Add the following to the <code>head</code> element:
+  </goa-text>
+  <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"&gt;&lt;/script&gt;
+&lt;script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"&gt;&lt;/script&gt;</code></pre>
+
+  <h3 id="react-step-3">3. Import the web components in src/main.tsx</h3>
+  <pre><code>import "@abgov/web-components";</code></pre>
+
+  <h3 id="react-step-4">4. Import the styles in src/index.css</h3>
+  <pre><code>@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="web-components">Web components</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    This library contains web components from the Government of Alberta.
+  </goa-text>
+
+  <h3 id="web-step-1">1. Add dependencies</h3>
+  <pre><code>npm i @abgov/web-components
+npm i @abgov/design-tokens</code></pre>
+
+  <h3 id="web-step-2">2. Link ionicons in index.html</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Add the following in the <code>head</code> element:
+  </goa-text>
+  <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"&gt;&lt;/script&gt;
+&lt;script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"&gt;&lt;/script&gt;</code></pre>
+
+  <h3 id="web-step-3">3. Import the web components into src/main.js</h3>
+  <pre><code>import "@abgov/web-components";</code></pre>
+
+  <h3 id="web-step-4">4. Add the styles link in your main CSS file</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Add the following in <code>src/assets/main.css</code> or wherever your main CSS file is
+    located:
+  </goa-text>
+  <pre><code>@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <goa-callout
+    version="2"
+    type="information"
+    emphasis="low"
+    heading="Need help building a government service?"
+    mb="m"
+  >
+    Join design system drop-in hours to:
+    <ul>
+      <li>Get feedback on your service</li>
+      <li>Propose new components or patterns</li>
+      <li>Suggest updates to existing resources</li>
+      <li>Ask questions</li>
+      <li>Share feedback</li>
+    </ul>
+    Drop-in sessions are available to Government of Alberta product teams.
+    <br /><br />
+    <a
+      href="https://outlook.office365.com/book/BKGDesignsystemdropinhours@abgov.onmicrosoft.com/"
+      target="_blank">Book time in drop-in hours</a
+    >
+  </goa-callout>
+</DocumentationPageLayout>
