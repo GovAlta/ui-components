@@ -8,6 +8,7 @@ export * from "./checkbox/checkbox";
 export * from "./checkbox-list/checkbox-list";
 export * from "./date-picker/date-picker";
 export * from "./drawer/drawer";
+export * from "./push-drawer/push-drawer";
 export * from "./dropdown/dropdown";
 export * from "./dropdown-item/dropdown-item";
 export * from "./file-upload-card/file-upload-card";

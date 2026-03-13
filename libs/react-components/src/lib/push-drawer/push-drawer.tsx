@@ -1,21 +1,5 @@
 import { ReactNode, useEffect, useRef } from "react";
 
-interface WCProps {
-  open?: boolean;
-  testid?: string;
-  heading?: string;
-  width?: string;
-  ref: React.RefObject<HTMLElement | null>;
-}
-declare module "react" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "goa-push-drawer": WCProps & React.HTMLAttributes<HTMLElement>;
-    }
-  }
-}
-
 export interface GoabPushDrawerProps {
   testid?: string;
   open?: boolean;

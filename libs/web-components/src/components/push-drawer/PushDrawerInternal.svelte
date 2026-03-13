@@ -6,6 +6,7 @@
       open: { type: "Boolean", reflect: true },
       heading: { type: "String", reflect: true },
       width: { type: "String", reflect: true },
+      version: { type: "String", attribute: "version", reflect: true },
     },
   }}
 />
@@ -19,6 +20,7 @@
   export let open: boolean = false;
   export let heading: string = "";
   export let width: string = "492px";
+  export let version: string | undefined = undefined;
   let _contentEl: HTMLElement | null = null;
   let drawerState: DrawerState = "initial";
   let closingTimeout: number | null = null;
@@ -63,21 +65,15 @@
   };
 
   // Scrolling ---
-  let _scrollEl: HTMLElement | null = null;
-  let _scrollPos: "top" | "middle" | "bottom" | null = null; // to add the box-shadow to the drawer content
+  let _scrollPos: "top" | "middle" | "bottom" | null = null;
   let _actionsSlotHasContent: boolean = false;
   async function checkActionsSlotContent() {
     await tick();
     _actionsSlotHasContent = !!$$slots.actions;
   }
 
-  // Add reactive statement for checking actions slot content (for class style and height calculations) and scroll position (for box-shadow)
   $: if (open) {
     checkActionsSlotContent();
-    if (_scrollEl) {
-      const hasScroll = _scrollEl.scrollHeight > _scrollEl.offsetHeight;
-      _scrollPos = hasScroll ? "top" : null;
-    }
   }
 
   function onScroll(e: Event) {
