@@ -9,7 +9,7 @@ import {
   GoabxTable,
   GoabxBadge,
 } from "@abgov/react-components/experimental";
-import { GoabPushDrawer } from "@abgov/react-components";
+import { GoabxPushDrawer } from "@abgov/react-components/experimental";
 
 export function FilterAListUsingAPushDrawer() {
   const [open, setOpen] = useState(false);
@@ -94,7 +94,7 @@ export function FilterAListUsingAPushDrawer() {
         </GoabxTable>
       </div>
 
-      <GoabPushDrawer
+      <GoabxPushDrawer
         heading="Filters"
         width="260px"
         open={open}
@@ -123,7 +123,7 @@ export function FilterAListUsingAPushDrawer() {
             <GoabxDropdownItem value="completed" label="Completed" />
           </GoabxDropdown>
         </GoabxFormItem>
-      </GoabPushDrawer>
+      </GoabxPushDrawer>
     </div>
   );
 }
