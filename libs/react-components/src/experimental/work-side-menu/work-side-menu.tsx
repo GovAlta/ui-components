@@ -33,6 +33,7 @@ export interface GoabWorkSideMenuProps {
   accountContent?: ReactNode;
   open?: boolean;
   onToggle?: () => void;
+  onNavigate?: (path: string) => void;
 }
 
 export function GoabxWorkSideMenu({
@@ -46,6 +47,7 @@ export function GoabxWorkSideMenu({
   accountContent,
   open,
   onToggle,
+  onNavigate,
 }: GoabWorkSideMenuProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
@@ -58,6 +60,20 @@ export function GoabxWorkSideMenu({
       el.current?.removeEventListener("_toggle", onToggle);
     };
   }, [el, onToggle]);
+
+  useEffect(() => {
+    if (!el?.current || !onNavigate) {
+      return;
+    }
+    const handler = (e: Event) => {
+      onNavigate((e as CustomEvent).detail.url);
+    };
+    el.current?.addEventListener("_navigate", handler);
+    return () => {
+      el.current?.removeEventListener("_navigate", handler);
+    };
+  }, [el, onNavigate]);
+
   return (
     <goa-work-side-menu
       ref={el}

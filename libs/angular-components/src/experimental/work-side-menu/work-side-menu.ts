@@ -24,6 +24,7 @@ import { NgTemplateOutlet } from "@angular/common";
         [attr.user-secondary-text]="userSecondaryText"
         [attr.testid]="testId"
         (_toggle)="_onToggle()"
+        (_navigate)="_onNavigate($event)"
       >
         <div slot="primary">
           <ng-container [ngTemplateOutlet]="primaryContent"></ng-container>
@@ -50,6 +51,7 @@ export class GoabxWorkSideMenu implements OnInit {
   @Input() secondaryContent!: TemplateRef<any>;
   @Input() accountContent!: TemplateRef<any>;
   @Output() onToggle = new EventEmitter();
+  @Output() onNavigate = new EventEmitter<string>();
 
   isReady = false;
 
@@ -66,5 +68,9 @@ export class GoabxWorkSideMenu implements OnInit {
 
   _onToggle() {
     this.onToggle.emit();
+  }
+
+  _onNavigate(e: Event) {
+    this.onNavigate.emit((e as CustomEvent).detail.url);
   }
 }

@@ -36,92 +36,99 @@
   </section>
 
   <div style="display: flex; flex: 1 1 auto">
-    <section style="flex: 0 0 250px" role="nav">
-      <goab-side-menu>
-        <a href="/everything">All Components</a>
-        <goab-side-menu-group heading="Bugs">
-          <a href="/bugs/2152">2152</a>
-          <a href="/bugs/2331">2331</a>
-          <a href="/bugs/2393">2393</a>
-          <a href="/bugs/2404">2404</a>
-          <a href="/bugs/2408">2408</a>
-          <a href="/bugs/2459">2459</a>
-          <a href="/bugs/2473">2473</a>
-          <a href="/bugs/2502">2502</a>
-          <a href="/bugs/2529">2529</a>
-          <a href="/bugs/2547">2547</a>
-          <a href="/bugs/2655">2655</a>
-          <a href="/bugs/2720">2720</a>
-          <a href="/bugs/2721">2721</a>
-          <a href="/bugs/2750">2750</a>
-          <a href="/bugs/2768">2768</a>
-          <a href="/bugs/2782">2782</a>
-          <a href="/bugs/2789">2789</a>
-          <a href="/bugs/2821">2821</a>
-          <a href="/bugs/2837">2837</a>
-          <a href="/bugs/2839">2839</a>
-          <a href="/bugs/2849">2849</a>
-          <a href="/bugs/2852">2852</a>
-          <a href="/bugs/2873">2873</a>
-          <a href="/bugs/2878">2878</a>
-          <a href="/bugs/2892">2892</a>
-          <a href="/bugs/2922">2922</a>
-          <a href="/bugs/2943">2943</a>
-          <a href="/bugs/2948">2948</a>
-          <a href="/bugs/2977">2977</a>
-          <a href="/bugs/2991">2991</a>
-          <a href="/bugs/3072">3072</a>
-          <a href="/bugs/3118">3118</a>
-          <a href="/bugs/3156">3156</a>
-          <a href="/bugs/3201">3201</a>
-          <a href="/bugs/3215">3215</a>
-          <a href="/bugs/3248">3248</a>
-          <a href="/bugs/3273">3273</a>
-          <a href="/bugs/3275">3275 Can't unset month</a>
-          <a href="/bugs/3281">3281</a>
-          <a href="/bugs/3337">3337 - Autocomplete styling</a>
-          <a href="/bugs/3279">3279</a>
-          <a href="/bugs/3384">3384 Table v2 sample</a>
-          <a href="/bugs/3450">3450 Dropdown expanding inside Container</a>
-        </goab-side-menu-group>
-        <goab-side-menu-group heading="Features">
-          <a href="/features/1328">1328</a>
-          <a href="/features/1383">1383</a>
-          <a href="/features/1547">1547</a>
-          <a href="/features/1813">1813</a>
-          <a href="/features/1908">1908</a>
-          <a href="/features/2054">2054</a>
-          <a href="/features/2267">2267</a>
-          <a href="/features/2328">2328</a>
-          <a href="/features/2440">2440</a>
-          <a href="/features/2469">2469</a>
-          <a href="/features/2361">2361</a>
-          <a href="/features/2492">2492</a>
-          <a href="/features/2609">2609</a>
-          <a href="/features/2611">2611</a>
-          <a href="/features/2611-tabs-disabled">2611-tabs-disabled</a>
-          <a href="/features/2682">2682</a>
-          <a href="/features/2722">2722</a>
-          <a href="/features/2730">2730</a>
-          <a href="/features/2829">2829</a>
-          <a href="/features/3102">3102</a>
-          <a href="/features/3229">3229 MenuButton vs size and icon-only</a>
-          <a href="/features/3137">3137</a>
-          <a href="/features/3211">3211 Angular v21</a>
-          <a href="/features/3241">3241</a>
-          <a href="/features/3306">3306</a>
-          <a href="/features/3370">3370</a>
-          <a href="/features/3398">3398 Work side menu group open prop </a>
-          <a href="/features/v2-icons">v2 header icons</a>
-          <a href="/features/3344">3344 Table Multi-Sort</a>
-          <a href="/features/3396">3396 Text heading-2xs size</a>
-          <a href="/features/3407-skip-on-focus-tab">3407 Skip Focus on Tab</a>
-          <a href="/features/3407-stack-on-mobile">3407 Tabs Orientation</a>
-          <a href="/features/v2-checkbox">3399 V2 Checkbox Spacing</a>
-          <a href="/features/3478">3478 Popover API Rewrite</a>
-        </goab-side-menu-group>
-      </goab-side-menu>
-    </section>
+    <goabx-work-side-menu
+      heading="Testing Playground"
+      url="/"
+      [open]="true"
+      (onNavigate)="handleNavigate($event)"
+      [primaryContent]="primaryTemplate"
+    >
+    </goabx-work-side-menu>
+
+    <ng-template #primaryTemplate>
+      <goabx-work-side-menu-item label="All Components" url="/everything" icon="list"></goabx-work-side-menu-item>
+      <goabx-work-side-menu-group icon="alert-circle" heading="Bugs">
+        <goabx-work-side-menu-item label="2152" url="/bugs/2152"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2331" url="/bugs/2331"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2393" url="/bugs/2393"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2404" url="/bugs/2404"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2408" url="/bugs/2408"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2459" url="/bugs/2459"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2473" url="/bugs/2473"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2502" url="/bugs/2502"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2529" url="/bugs/2529"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2547" url="/bugs/2547"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2655" url="/bugs/2655"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2720" url="/bugs/2720"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2721" url="/bugs/2721"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2750" url="/bugs/2750"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2768" url="/bugs/2768"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2782" url="/bugs/2782"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2789" url="/bugs/2789"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2821" url="/bugs/2821"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2837" url="/bugs/2837"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2839" url="/bugs/2839"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2849" url="/bugs/2849"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2852" url="/bugs/2852"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2873" url="/bugs/2873"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2878" url="/bugs/2878"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2892" url="/bugs/2892"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2922" url="/bugs/2922"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2943" url="/bugs/2943"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2948" url="/bugs/2948"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2977" url="/bugs/2977"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2991" url="/bugs/2991"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3072" url="/bugs/3072"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3118" url="/bugs/3118"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3156" url="/bugs/3156"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3201" url="/bugs/3201"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3215" url="/bugs/3215"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3248" url="/bugs/3248"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3273" url="/bugs/3273"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3275 Can't unset month" url="/bugs/3275"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3281" url="/bugs/3281"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3337 Autocomplete styling" url="/bugs/3337"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3279" url="/bugs/3279"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3384 Table v2 sample" url="/bugs/3384"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3450 Dropdown expanding" url="/bugs/3450"></goabx-work-side-menu-item>
+      </goabx-work-side-menu-group>
+      <goabx-work-side-menu-group icon="star" heading="Features">
+        <goabx-work-side-menu-item label="1328" url="/features/1328"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="1383" url="/features/1383"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="1547" url="/features/1547"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="1813" url="/features/1813"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="1908" url="/features/1908"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2054" url="/features/2054"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2267" url="/features/2267"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2328" url="/features/2328"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2440" url="/features/2440"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2469" url="/features/2469"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2361" url="/features/2361"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2492" url="/features/2492"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2609" url="/features/2609"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2611" url="/features/2611"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2611 tabs disabled" url="/features/2611-tabs-disabled"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2682" url="/features/2682"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2722" url="/features/2722"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2730" url="/features/2730"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2829" url="/features/2829"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3102" url="/features/3102"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3229 MenuButton" url="/features/3229"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3137" url="/features/3137"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3211 Angular v21" url="/features/3211"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3241" url="/features/3241"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3306" url="/features/3306"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3370" url="/features/3370"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3398 Group open prop" url="/features/3398"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="v2 header icons" url="/features/v2-icons"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3344 Table Multi-Sort" url="/features/3344"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3396 Text heading-2xs" url="/features/3396"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3407 Skip Focus on Tab" url="/features/3407-skip-on-focus-tab"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3407 Tabs Orientation" url="/features/3407-stack-on-mobile"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3399 V2 Checkbox" url="/features/v2-checkbox"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="3478 Popover API Rewrite" url="/features/3478"></goabx-work-side-menu-item>
+      </goabx-work-side-menu-group>
+    </ng-template>
     <section style="padding: 30px; width: 100%" role="main">
       <router-outlet></router-outlet>
     </section>
