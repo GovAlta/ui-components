@@ -1,0 +1,65 @@
+---
+/**
+ * Get Started - Developers - Verify a bug
+ *
+ * Process for verifying and reporting Design System component issues.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Verify a bug"
+  description="How to verify and report a bug in a Design System component"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Verify a bug</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Follow this process when you encounter an issue with a Design System component.
+  </goa-text>
+
+  <p>
+    These steps help confirm whether the issue is caused by the Design System, your product setup, or
+    custom code. This process applies to Angular and React implementations.
+  </p>
+
+  <goa-text as="h2" id="check-versions" version="2" size="heading-m">1. Check versions</goa-text>
+  <p>Confirm you are using the latest version of:</p>
+  <ul>
+    <li>Web Components</li>
+    <li>Angular or React</li>
+  </ul>
+  <p>
+    If you are not using the latest version, upgrade and retest. If the issue remains, continue to the next step.
+  </p>
+
+  <goa-text as="h2" id="test-with-templates" version="2" size="heading-m">2. Test with product templates</goa-text>
+  <p>Use the official Angular or React product templates to isolate the issue.</p>
+  <ul>
+    <li><a href="https://stackblitz.com/~/github.com/GovAlta/ui-components-angular-sandbox" target="_blank">Test with Angular template</a></li>
+    <li><a href="https://stackblitz.com/~/github.com/GovAlta/ui-components-react-sandbox" target="_blank">Test with React template</a></li>
+  </ul>
+  <p>This helps determine whether the issue exists outside your project configuration.</p>
+
+  <goa-text as="h2" id="recreate-the-issue" version="2" size="heading-m">3. Recreate the issue</goa-text>
+  <p>Create a minimal test environment.</p>
+  <ul>
+    <li>Use only the code required for the example to function</li>
+    <li>Include only the component experiencing the issue</li>
+    <li>Remove unrelated dependencies or custom logic</li>
+  </ul>
+  <p>Confirm whether the issue can be replicated.</p>
+
+  <goa-text as="h2" id="share-and-report" version="2" size="heading-m">4. Share and report</goa-text>
+  <p>If you can reproduce the issue:</p>
+  <ul>
+    <li>Share the template application link in the <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9" target="_blank">#design-system-support</a> Slack channel</li>
+    <li>Provide a link to your repository so the team can review and replicate the issue</li>
+  </ul>
+  <p>
+    Following these steps will help to ensure efficient investigation and quicker resolution of
+    design system component issues.
+  </p>
+  <DropInCallout />
+</DocumentationPageLayout>

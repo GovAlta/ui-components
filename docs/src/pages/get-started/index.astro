@@ -1,102 +1,107 @@
 ---
 /**
- * Get Started - Landing Page (Early Adopters Program)
+ * Get Started - Landing Page
  *
- * Helps early adopter teams start using the experimental (pre-production)
- * version of the design system. Content from Confluence (Brief 65).
+ * Overview of the design system and how to use it in your service.
+ * Content from Confluence (Brief 87).
  */
+import DropInCallout from '../../components/DropInCallout.astro';
 import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
 ---
 
 <DocumentationPageLayout
-  title="Early adopters program: Get started"
-  description="Get started with the experimental version of the GoA Design System"
+  title="Start with the design system"
+  description="Start with the design system to build on the research and experience of other service teams"
   section="get-started"
 >
-  <goa-text version="2" size="heading-xl" mt="none" mb="m">Early adopters program: Get started</goa-text>
-  <goa-text version="2" size="body-l" mt="none" mb="2xl">
-    This page helps early adopter teams start using the experimental (pre-production) version of
-    the design system.
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Start with the design system</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="xl">
+    Start with the design system to build on the research and experience of other service teams.
+    This helps you avoid repeating work that has already been done.
   </goa-text>
 
-  <goa-callout version="2" type="information" emphasis="low" heading="What &quot;experimental&quot; means" mb="m">
-    DS 2.0 pre-production components and templates available for early adopters to use and test
-    before the production release. Properties and visual design may change as the library
-    receives feedback and matures.
-    <br /><br />
-    Early adopters should expect more change (and occasional rough edges) than production assets.
-  </goa-callout>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="choose-your-path">Choose your path</h2>
-
-  <goa-container version="2" type="non-interactive" accent="thick" padding="compact" mb="m">
-    <span slot="title">A: Upgrade an existing service</span>
-    Best if your team wants to use DS 2.0 experimental components and templates to update an
-    existing product to the new look and feel. This gives you a head start on migration and
-    produces the most actionable feedback.
+  <goa-container version="2" type="non-interactive" padding="relaxed" mb="m">
+    <goa-text version="2" size="body-m" mt="none" mb="none">The design system gives you a strong foundation for common service needs. It allows your team
+    to focus on the specific challenges of your product.</goa-text>
+    <goa-text version="2" size="body-m" mb="none"><strong>Build on it. Do not start from scratch.</strong></goa-text>
   </goa-container>
 
-  <goa-container version="2" type="non-interactive" accent="thick" padding="compact" mb="m">
-    <span slot="title">B: Build a new service</span>
-    Best if your team is starting a new product or major feature and wants to build with DS 2.0
-    from the beginning. This is the cleanest path (no updating custom elements).
-  </goa-container>
+  <goa-text as="h2" id="design-system-by-role" version="2" size="heading-m">Design system by role</goa-text>
 
-  <goa-container version="2" type="non-interactive" accent="thick" padding="compact" mb="m">
-    <span slot="title">C: Test in a sample project</span>
-    Best if your team wants to get a high level understanding of how DS 2.0 works and test the
-    setup process.
-  </goa-container>
+  <ul>
+    <li><a href="/get-started/designers">Designer</a></li>
+    <li><a href="/get-started/developers">Developer</a></li>
+    <li><a href="/get-started/qa-testing">QA tester</a></li>
+  </ul>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-text as="h2" id="why-start-with-the-design-system" version="2" size="heading-m">Why start with the design system?</goa-text>
 
-  <h2 id="before-you-start">Before you start</h2>
+  <goa-text version="2" size="heading-xs">Streamline collaboration</goa-text>
+  <p>
+    Designers and developers work from shared components and guidance. This reduces rework and misalignment.
+  </p>
 
-  <goa-callout version="2" type="important" emphasis="low" mb="m">
-    Be on the latest version of the current next branch of the design system before
-    attempting the experimental update.
-  </goa-callout>
-  <goa-text version="2" size="heading-xs" mt="none" mb="s">Minimum versions</goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>Angular: <a href="https://www.npmjs.com/package/@abgov/angular-components/v/4.10.0-next.1" target="_blank">4.10.0-next.1</a> or later</li>
-      <li>React: <a href="https://www.npmjs.com/package/@abgov/react-components/v/6.10.0-next.1" target="_blank">6.10.0-next.1</a> or later</li>
-      <li>Web: <a href="https://www.npmjs.com/package/@abgov/web-components/v/1.40.0-next.1" target="_blank">1.40.0-next.1</a> or later</li>
-      <li>ui-components-common: <a href="https://www.npmjs.com/package/@abgov/ui-components-common/v/1.10.0-next.1" target="_blank">1.10.0-next.1</a> or later</li>
+  <goa-text version="2" size="heading-xs">Improve accessibility</goa-text>
+  <p>Accessibility is built into both the design and coded components.</p>
+
+  <goa-text version="2" size="heading-xs">Reduce testing effort</goa-text>
+  <p>Components are tested across devices, browsers, and service contexts.</p>
+
+  <goa-text version="2" size="heading-xs">Maintain consistency</goa-text>
+  <p>
+    Components align with the broader system to create a cohesive user experience across government services.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Spend more time on high-value work</goa-text>
+  <p>Using existing components saves time. You can focus on work that improves service quality, including:</p>
+  <ul>
+    <li>Usability testing</li>
+    <li>User research</li>
+    <li>Content design</li>
+    <li>Accessibility reviews</li>
+    <li>Design quality checks</li>
+    <li>Low-fidelity prototyping and testing</li>
+  </ul>
+  <p>This leads to better outcomes for users.</p>
+  <goa-text as="h2" id="how-to-use-the-design-system" version="2" size="heading-m">How to use the design system in your service</goa-text>
+  <p>Follow these steps when designing and building your service.</p>
+
+  <goa-text version="2" size="heading-xs">Use system components first</goa-text>
+  <p>Start with existing components and patterns. These meet most user needs.</p>
+
+  <goa-text version="2" size="heading-xs">Identify gaps through user testing</goa-text>
+  <p>Test your service with users. Identify needs that are not covered by current components.</p>
+
+  <goa-text version="2" size="heading-xs">Before you design something new</goa-text>
+  <p>
+    Check what's already available and what's in progress. The team can point you to existing components,
+    solutions other teams have built, and planned work that may meet your need.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Design and test new solutions when you need them</goa-text>
+  <p>
+    If you still have a gap, design a new solution and test it with users. Move forward only when
+    testing shows clear user value.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Share what you learn</goa-text>
+  <p>
+    Share your findings with the design system team. Your solution may become part of the design system.
+  </p>
+
+  <goa-callout version="2" type="important" emphasis="low" heading="Avoid unnecessary custom solutions" mt="xl" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="s">Do not create custom components without a clear user need.</goa-text>
+    <goa-text version="2" size="body-m" mt="none" mb="s">Unnecessary customization:</goa-text>
+    <ul style="margin-bottom: var(--goa-space-s);">
+      <li>Increases maintenance effort</li>
+      <li>Slows delivery</li>
+      <li>Reduces consistency</li>
     </ul>
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="getting-help">Getting help and reporting issues</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    Use the <a href="https://goa-dio.slack.com/archives/C0A9SN3JM7E" target="_blank"><strong>#design-system-early-adopters</strong></a> Slack channel first so the whole
-    cohort can learn from questions and answers, and so the design system team can ask
-    clarifying questions before a GitHub issue is created.
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    When reporting an issue, include any relevant screenshots, links, version details, or
-    reproduction steps.
-  </goa-text>
-  <goa-callout version="2" type="important" emphasis="low" mb="m">
-    Avoid DMs to individual design system team members, use the Slack channel so all
-    participants can benefit from the questions and answers.
+    <goa-text version="2" size="body-m" mt="none" mb="none">Always confirm the need through research and testing.</goa-text>
   </goa-callout>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="useful-links">Useful links</h2>
-  <goa-block version="2" gap="s" direction="column">
-    <goa-link version="2"><a href="/get-started/designers">Designers: Get started</a></goa-link>
-    <goa-link version="2"><a href="/get-started/developers">Developers: Get started</a></goa-link>
-    <goa-link version="2"><a href="#">Workspace template repo</a></goa-link>
-    <goa-link version="2"><a href="#">Deployed workspace demo</a></goa-link>
-    <goa-link version="2"><a href="https://goa-dio.slack.com/archives/C0A9SN3JM7E" target="_blank">Early adopter Slack channel</a></goa-link>
-    <goa-block version="2" gap="s" direction="row" alignment="center">
-      <goa-link version="2"><a href="#">Book Drop-in hours</a></goa-link>
-      <goa-text version="2" size="body-s" mt="none" mb="none">(Tuesday and Friday 1-3 PM MST)</goa-text>
-    </goa-block>
-  </goa-block>
+  <goa-link version="2" mb="m">
+    <a href="/get-started/component-lifecycle">View the design system governance process</a>
+  </goa-link>
+  <DropInCallout />
 </DocumentationPageLayout>

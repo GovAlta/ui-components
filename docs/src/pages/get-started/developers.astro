@@ -1,256 +1,103 @@
 ---
 /**
- * Get Started - Developers (Early Adopters)
+ * Get Started - Developers Overview
  *
- * Developer onboarding for the early adopters program.
- * Package setup, template repo, branches, compatibility, custom components.
- * Content from Confluence (Brief 65).
+ * Overview of design system resources for developers.
+ * Content from Confluence (Brief 87).
  */
+import DropInCallout from '../../components/DropInCallout.astro';
 import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
 ---
 
 <DocumentationPageLayout
-  title="Get started as a developer"
-  description="Get started with the experimental GoA Design System as a developer"
+  title="Developers overview"
+  description="How developers use the design system through tokens, components, examples, and templates"
   section="get-started"
 >
-  <goa-text version="2" size="heading-xl" mt="none" mb="m">Get started as a developer</goa-text>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Overview</goa-text>
   <goa-text version="2" size="body-l" mt="none" mb="2xl">
-    Onboarding for the early adopters program.
+    As a developer, you use the Design System through tokens, components, examples, and templates.
   </goa-text>
 
-  <goa-callout version="2" type="information" emphasis="low" heading="Key differences from v1" mb="m">
-    <p style="margin: 0;">Early adopters use the same design system packages you're already familiar with, but opt into
-    experimental DS v2 by:</p>
-    <ul style="margin-bottom: 0;">
-      <li>Importing Goabx components
-        <ul>
-          <li>Angular: <a href="https://www.npmjs.com/package/@abgov/angular-components/v/4.10.0-next.1" target="_blank">4.10.0-next.1</a> or later</li>
-          <li>React: <a href="https://www.npmjs.com/package/@abgov/react-components/v/6.10.0-next.1" target="_blank">6.10.0-next.1</a> or later</li>
-          <li>Web: <a href="https://www.npmjs.com/package/@abgov/web-components/v/1.40.0-next.1" target="_blank">1.40.0-next.1</a> or later</li>
-          <li>ui-components-common: <a href="https://www.npmjs.com/package/@abgov/ui-components-common/v/1.10.0-next.1" target="_blank">1.10.0-next.1</a> or later</li>
-        </ul>
-      </li>
-      <li>Using the experimental prefix (<code>goab</code> &rarr; <code>goabx</code>)
-        <ul>
-          <li><a href="https://gist.github.com/vanessatran-ddi/29ec983351144bc3eb328c2a4d835a2b" target="_blank">Modified components reference</a></li>
-        </ul>
-      </li>
-      <li>Installing and applying <a href="https://www.npmjs.com/package/@abgov/design-tokens" target="_blank">tokens v2</a> (<code>designtokens2</code>)
-        <ul>
-          <li>Import <code>@abgov/design-tokens/dist/tokens.css</code> in the global CSS of your app, below where you import <code>@abgov/web-components/index.css</code></li>
-        </ul>
-      </li>
-    </ul>
-  </goa-callout>
+  <p>
+    The DDD Design System is built using Web Components. Web Components are framework-agnostic.
+    You can use them with Angular, React, or other front-end frameworks.
+  </p>
+  <p>The Design System includes:</p>
+  <ul>
+    <li><a href="/tokens"><strong>Tokens</strong></a></li>
+    <li><a href="/components"><strong>Components</strong></a></li>
+    <li><a href="/examples"><strong>Examples</strong></a></li>
+    <li><strong>Templates</strong></li>
+  </ul>
+  <p>
+    Designers use equivalent resources in Figma. When they design with Design System components, you
+    can build with the matching coded components. This reduces custom development and rework.
+  </p>
+  <p>
+    All Design System components are designed and built to meet
+    <a href="https://www.w3.org/TR/WCAG22/" target="_blank">WCAG 2.2 accessibility standards</a>.
+  </p>
+  <goa-text as="h2" id="tokens" version="2" size="heading-m">Tokens</goa-text>
+  <p>
+    Access the tokens as an
+    <a href="https://www.npmjs.com/package/@abgov/design-tokens" target="_blank">NPM package</a>.
+  </p>
+  <p>
+    Import the SCSS or CSS file into your project. Replace hard-coded values with Design System token variables.
+  </p>
+  <p>
+    Designers reference the same tokens in their tools. This keeps design and development aligned during handoff.
+  </p>
 
-  <goa-callout version="2" type="important" emphasis="low" mt="none" mb="m">
-    Angular 21 has not been formally tested by the design system team. A couple of teams have
-    used it successfully, but we can't guarantee full compatibility.
-  </goa-callout>
+  <goa-text as="h2" id="components" version="2" size="heading-m">Components</goa-text>
+  <p>Components are reusable user interface elements built for use across services.</p>
+  <p>You can:</p>
+  <ul>
+    <li>Use components individually</li>
+    <li>Combine them into patterns</li>
+    <li>Apply them in different contexts</li>
+  </ul>
+  <p>Components are available:</p>
+  <ul>
+    <li>As <a href="https://www.npmjs.com/package/@abgov/web-components" target="_blank">Web Components</a></li>
+    <li>As <a href="https://www.npmjs.com/package/@abgov/angular-components" target="_blank">Angular</a> wrappers</li>
+    <li>As <a href="https://www.npmjs.com/package/@abgov/react-components" target="_blank">React</a> wrappers</li>
+  </ul>
+  <p>
+    Refer to the Design System <a href="/get-started/developers/technologies">technologies</a> documentation
+    for implementation details.
+  </p>
 
-  <goa-button version="2" type="tertiary" size="compact" mt="m" mb="m">
-    <a href="https://jam.dev/c/e9bbd0f4-47a4-405a-b591-9b144f57a496" target="_blank" style="text-decoration: none; color: inherit;">View setup walkthrough video</a>
-  </goa-button>
+  <goa-text as="h2" id="examples" version="2" size="heading-m">Examples</goa-text>
+  <p>
+    Examples are multiple components assembled in realistic service contexts. They help you understand
+    how to apply Design System guidance in a working interface.
+  </p>
+  <p>You can use examples to:</p>
+  <ul>
+    <li>Understand how components work together</li>
+    <li>Use them as a starting point for building parts of your interface</li>
+    <li>Use proven approaches to meet user needs</li>
+  </ul>
+  <p>
+    Examples help you build with more consistency and less rework. Use them to guide implementation,
+    then adjust them to meet the needs of your product.
+  </p>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="choose-how">Using design system v2</h2>
-
-  <h3 id="option-a">A) Try it in your existing app <goa-badge version="2" type="success" icon="false" emphasis="subtle" ml="m" content="Recommended" style="vertical-align: middle;"></goa-badge></h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    See what changes in your context before committing to a full upgrade.
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ol>
-      <li>Create a branch in your repo</li>
-      <li>Apply the initial DS v2 setup changes (imports, prefix, tokens v2)</li>
-      <li>Run the app and review the changes</li>
-      <li>Start with one page and share back with your team — don't try to fix the entire app on day one</li>
-    </ol>
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <strong>Why this approach works well:</strong>
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="l">
-    <ul>
-      <li>Quick feedback on impact and risk</li>
-      <li>Easy to abandon (don't merge the branch)</li>
-    </ul>
-  </goa-text>
-
-  <h3 id="option-b" style="margin-top: var(--goa-space-xl);">B) Try the workspace template repo</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    Understand the workspace pattern and DS v2 structure before applying it to your product.
-  </goa-text>
-
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ol>
-      <li>
-        Open the template repo for your framework:
-        <ul>
-          <li><a href="#">React</a></li>
-          <li><a href="#">Angular</a></li>
-        </ul>
-      </li>
-      <li>Click <strong>Use this template</strong></li>
-      <li>Choose <strong>Create a new repository</strong></li>
-      <li>Select an owner + repo name</li>
-      <li>Choose <strong>Public</strong> or <strong>Private</strong></li>
-      <li>Click <strong>Create repository from template</strong></li>
-      <li>Clone the repo locally</li>
-      <li>
-        Install and run, go into the directory you created and run the following commands (in order):
-        <ol>
-          <li><code>npm i</code></li>
-          <li><code>npm run build</code></li>
-          <li><code>npm run start</code> (Angular) or <code>npm run dev</code> (React)</li>
-        </ol>
-      </li>
-      <li>Go to the listed port number of your localhost</li>
-    </ol>
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="receive-updates">Choose how you receive updates</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="l">
-    Consider your tolerance for changes.
-  </goa-text>
-
-  <h3 id="next-branch">Next branch <goa-badge version="2" type="success" icon="false" emphasis="subtle" ml="m" content="Recommended" style="vertical-align: middle;"></goa-badge></h3>
-  <goa-text version="2" size="body-m" mt="none" mb="l">
-    Best balance of stability and the latest changes. You get changes once they have been reviewed
-    and tested.
-  </goa-text>
-
-  <h3 id="dev-branch">Dev branch <goa-badge version="2" type="warning" icon="false" emphasis="subtle" ml="m" content="Most current" style="vertical-align: middle;"></goa-badge></h3>
-  <goa-text version="2" size="body-m" mt="none" mb="l">
-    Fastest access to new fixes and improvements. Expect more churn and occasional breaking
-    changes.
-  </goa-text>
-
-  <h3 id="production-branch">Production branch <goa-badge version="2" type="midtone" icon="false" emphasis="subtle" ml="m" content="Most stable" style="vertical-align: middle;"></goa-badge></h3>
-  <goa-text version="2" size="body-m" mt="none" mb="l">
-    Least change over time. Not ideal for early adopters, since fixes and improvements arrive later.
-  </goa-text>
-
-  <goa-callout version="2" type="information" emphasis="low" mt="none" mb="m">
-    If you're unsure, start on "Next." Move to Dev if you need fixes sooner, or to
-    Production if you need more stability.
-  </goa-callout>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="compatibility">Compatibility and mixing rules</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    DS v2 experimental isn't "fully backward compatible" in practice because tokens v2 can
-    visually impact DS 1.0 components.
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>You'll get the best results when tokens and components are upgraded together.</li>
-      <li>Mixing experimental and production components in one app may be possible, but is not recommended.</li>
-    </ul>
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="plan-upgrade">Plan your upgrade scope</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>If possible, start with a small/simple application while you're learning the new system.</li>
-      <li>For most teams with a monorepo setup, you will need to update the import statements and add the design tokens to the specific project you're upgrading.</li>
-    </ul>
-  </goa-text>
-
-  <goa-callout version="2" type="information" emphasis="low" mt="none" mb="m">
-    Monorepo setups can vary, which may affect the exact update steps. If you have
-    any questions, book a drop-in hours session.
-    <!-- TODO: Add drop-in hours booking link -->
-  </goa-callout>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="custom-components">Updating your custom components</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    Most DDD services have custom UI alongside design system components. Set aside time to
-    review and adjust custom elements to align with DS v2 styles.
-  </goa-text>
-
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>Start by identifying where you have custom UI (a quick inventory is enough to begin).</li>
-      <li>
-        Replace hard-coded values in your custom UI with the corresponding Tokens v2
-        values, such as:
-        <ul>
-          <li>Spacing (padding, margin, gaps)</li>
-          <li>Typography (font, size, weight, line height)</li>
-          <li>Color (text, background, borders)</li>
-          <li>Elevation / shadow (surfaces)</li>
-        </ul>
-      </li>
-    </ul>
-  </goa-text>
-
-  <h3 id="token-gaps">When tokens v2 values don't cover what you need</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>Identify gaps where Tokens v2 don't cover what you need.</li>
-      <li>Where needed, create custom styles to bridge those gaps, while keeping them consistent with the DS v2 look and feel.</li>
-    </ul>
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="getting-help">Getting help and reporting issues</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    Use the <a href="https://goa-dio.slack.com/archives/C0A9SN3JM7E" target="_blank"><strong>#design-system-early-adopters</strong></a> Slack channel first so the cohort benefits
-    and the design system team can clarify details before a GitHub issue is created.
-  </goa-text>
-  <goa-callout version="2" type="important" emphasis="low" mb="m">
-    Avoid DMs to individual design system team members, and avoid the standard
-    #design-system-support channel. Use the early adopters channel so all
-    participants can benefit.
-  </goa-callout>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    Drop-in hours are the best option for deeper troubleshooting, debugging, or
-    talking through bugs and features.
-  </goa-text>
-  <goa-block version="2" gap="s" direction="row" alignment="center" mb="m">
-    <goa-link version="2"><a href="#">Book drop-in hours</a></goa-link>
-    <goa-text version="2" size="body-s" mt="none" mb="none">(Tuesdays + Fridays, 1–3 PM MT)</goa-text>
-  </goa-block>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="rollback">Rollback and branching strategy</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>The simplest rollback is to reverse the setup steps.</li>
-      <li>If you're working in a branch, rollback can be as simple as not merging the branch.</li>
-      <li>Rollback becomes harder once you've made many manual updates to custom components.</li>
-    </ul>
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="end-of-program">End of program expectations</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>
-        Moving to production at the end of the early adopter program (end of March 2026) includes
-        switching <code>goabx</code> &rarr; <code>goab</code>.
-      </li>
-      <li>
-        Once the early adopter program ends:
-        <ul>
-          <li>The experimental library will no longer be updated</li>
-          <li>Design system team effort will shift to the production libraries and packages</li>
-          <li>Web components continue to be updated</li>
-        </ul>
-      </li>
-    </ul>
-  </goa-text>
+  <goa-text as="h2" id="templates" version="2" size="heading-m">Templates</goa-text>
+  <p>
+    Templates are opinionated starting points for common service types. They package layout, navigation,
+    spacing, and example content so you can start with a proven structure instead of building from scratch.
+  </p>
+  <p>You can use templates to:</p>
+  <ul>
+    <li>Start a new product with a proven structure</li>
+    <li>Learn how components work together in a real layout</li>
+    <li>Adapt a proven starting point to fit your service needs</li>
+  </ul>
+  <p>
+    Templates help teams move faster, reduce rework, and stay aligned with Design System guidance.
+  </p>
+  <DropInCallout />
 </DocumentationPageLayout>

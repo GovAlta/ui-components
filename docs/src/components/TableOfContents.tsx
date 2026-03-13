@@ -39,12 +39,18 @@ export function TableOfContents({ cssQuery }: TOCProps) {
         const id = el.getAttribute("id");
         const title = el.textContent?.trim();
 
+        // For goa-text elements, read the "as" attribute for the heading level
+        const tagName =
+          el.tagName === "GOA-TEXT"
+            ? (el.getAttribute("as") || "h2").toUpperCase()
+            : el.tagName;
+
         // Only include visible headings
         if (id && title && isVisible(el)) {
           result.push({
             id,
             title,
-            tagName: el.tagName,
+            tagName,
           });
         }
       });
