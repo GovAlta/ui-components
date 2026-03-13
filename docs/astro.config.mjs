@@ -12,6 +12,19 @@ const workspaceRoot = path.resolve(__dirname, "..");
 export default defineConfig({
   root: ".",
   outDir: "../dist/docs",
+  redirects: {
+    "/components/circular-progress-indicator": "/components/circular-progress",
+    "/components/file-uploader": "/components/file-upload-input",
+    "/components/header": "/components/app-header",
+    "/components/icons": "/components/icon",
+    "/components/linear-progress-indicator": "/components/linear-progress",
+    "/components/notification-banner": "/components/notification",
+    "/components/radio": "/components/radio-group",
+    "/components/skeleton-loader": "/components/skeleton",
+    "/design-tokens": "/tokens",
+    "/get-started/support": "/support",
+    "/examples/show-multiple-actions-in-a-table": "/examples/show-multiple-actions-in-a-compact-table",
+  },
   build: {
     chunkSizeWarningLimit: 1000,
   },
