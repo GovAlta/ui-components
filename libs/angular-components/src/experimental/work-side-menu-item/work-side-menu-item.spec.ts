@@ -33,7 +33,6 @@ class TestWorkSideMenuItemComponent {
 
 describe("GoabxWorkSideMenuItem", () => {
   let fixture: ComponentFixture<TestWorkSideMenuItemComponent>;
-  let component: TestWorkSideMenuItemComponent;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -41,7 +40,6 @@ describe("GoabxWorkSideMenuItem", () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestWorkSideMenuItemComponent);
-    component = fixture.componentInstance;
 
     fixture.detectChanges();
     tick(); // Wait for setTimeout in ngOnInit

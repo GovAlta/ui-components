@@ -5,25 +5,27 @@
  * Uses goa-data-grid for keyboard navigation and GoabContainer for styling.
  * Matches the current ui-components-docs pattern.
  */
-import type { PropDefinition, EventDefinition, SlotDefinition } from '../lib/content-queries';
+import type { PropDefinition, EventDefinition, SlotDefinition } from "../lib/content-queries";
 
 interface Props {
   props?: PropDefinition[];
   events?: EventDefinition[];
   slots?: SlotDefinition[];
+  headingPrefix?: string;
 }
 
-const { props = [], events = [], slots = [] } = Astro.props;
+const { props = [], events = [], slots = [], headingPrefix = "" } = Astro.props;
+const prefix = headingPrefix ? `${headingPrefix} ` : "";
 
 // Filter slots: hide "default" slots with no description (adds noise, no value)
 // Keep named slots even without descriptions (the name itself is useful info)
 const meaningfulSlots = slots.filter(slot =>
-  slot.name !== 'default' || (slot.description && slot.description.trim() !== '')
+  slot.name !== "default" || (slot.description && slot.description.trim() !== "")
 );
 
 // Helper to detect and parse deprecated props
 function parseDeprecated(description: string | undefined): { isDeprecated: boolean; cleanDescription: string } {
-  if (!description) return { isDeprecated: false, cleanDescription: '' };
+  if (!description) return { isDeprecated: false, cleanDescription: "" };
 
   const deprecatedMatch = description.match(/^@deprecated\s*(.*)/i);
   if (deprecatedMatch) {
@@ -37,19 +39,19 @@ function parseDeprecated(description: string | undefined): { isDeprecated: boole
 }
 
 // Combine margin props (mt, mr, mb, ml) into a single row
-const marginPropNames = ['mt', 'mr', 'mb', 'ml'];
+const marginPropNames = ["mt", "mr", "mb", "ml"];
 const marginProps = props.filter(p => marginPropNames.includes(p.name));
 const hasAllMarginProps = marginPropNames.every(name => marginProps.some(p => p.name === name));
 
 // Standard spacing values used by margin props
-const spacingValues = ['none', '3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl'];
+const spacingValues = ["none", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl", "3xl", "4xl"];
 
 // Create combined margin prop if all four exist
 const combinedMarginProp = hasAllMarginProps ? {
-  name: 'mt, mr, mb, ml',
-  type: 'Spacing',
+  name: "mt, mr, mb, ml",
+  type: "Spacing",
   values: spacingValues,
-  description: 'Apply margin to the top, right, bottom, and/or left of the component.',
+  description: "Apply margin to the top, right, bottom, and/or left of the component.",
   required: false,
   default: null
 } : null;
@@ -67,7 +69,7 @@ const finalProps = combinedMarginProp
 
 {finalProps.length > 0 && (
   <div class="api-section">
-    <h3 id="props">Props</h3>
+    <h3 id={prefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-props` : "props"}>{prefix}Props</h3>
     <goa-container version="2" type="interactive">
       <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
         {finalProps.map((prop, index) => {
@@ -84,7 +86,7 @@ const finalProps = combinedMarginProp
               {prop.type && (
                 <div class="prop-cell prop-cell-type" data-grid="cell">
                   <span class="prop-type">
-                    {prop.values ? prop.values.join(' | ') : prop.type}
+                    {prop.values ? prop.values.join(" | ") : prop.type}
                   </span>
                 </div>
               )}
@@ -95,7 +97,7 @@ const finalProps = combinedMarginProp
                 </div>
               )}
               {/* Cell 4: Default value (if exists) */}
-              {prop.default !== null && prop.default !== '' && (
+              {prop.default !== null && prop.default !== "" && (
                 <div class="prop-cell prop-cell-default" data-grid="cell">
                   Defaults to <code>{String(prop.default)}</code>.
                 </div>
@@ -110,11 +112,15 @@ const finalProps = combinedMarginProp
 
 {events.length > 0 && (
   <div class="api-section">
-    <h3 id="events">Events</h3>
+    <h3 id={prefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-events` : "events"}>{prefix}Events</h3>
     <goa-container version="2" type="interactive">
       <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
         {events.map((event) => (
-          <div class="prop-row" data-grid="row">
+          <div
+            class="prop-row"
+            data-grid="row"
+            data-frameworks={event.frameworks?.join(",") || ""}
+          >
             <div class="prop-cell prop-cell-name" data-grid="cell">
               <span class="prop-name">{event.name}</span>
             </div>
@@ -135,16 +141,16 @@ const finalProps = combinedMarginProp
 
 {meaningfulSlots.length > 0 && (
   <div class="api-section">
-    <h3 id="slots">Slots</h3>
+    <h3 id={prefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-slots` : "slots"}>{prefix}Slots</h3>
     <goa-container version="2" type="interactive">
       <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
         {meaningfulSlots.map((slot) => (
           <div class="prop-row" data-grid="row">
             <div class="prop-cell prop-cell-name" data-grid="cell">
-              <span class="prop-name">{slot.name === 'default' ? '(default)' : slot.name}</span>
+              <span class="prop-name">{slot.name === "default" ? "(default)" : slot.name}</span>
             </div>
             <div class="prop-cell prop-cell-description" data-grid="cell">
-              {slot.description || 'Named slot for content'}
+              {slot.description || "Named slot for content"}
             </div>
           </div>
         ))}
@@ -239,3 +245,32 @@ const finalProps = combinedMarginProp
     border-radius: var(--goa-border-radius-s);
   }
 </style>
+
+<script>
+  import { getFrameworkPreference, subscribeToFrameworkPreference } from "../lib/framework-preference";
+
+  // Map framework preference values to the frameworks field in event JSON
+  const frameworkMap: Record<string, string> = {
+    react: "react",
+    angular: "angular",
+    webComponents: "angular", // Web Components use the same event names as Angular (_prefix)
+  };
+
+  function filterEventsByFramework(framework: string) {
+    const mapped = frameworkMap[framework] || "react";
+    document.querySelectorAll("[data-frameworks]").forEach((row) => {
+      const el = row as HTMLElement;
+      const frameworks = el.dataset.frameworks;
+      if (!frameworks) return; // No framework filter, always show
+      el.style.display = frameworks.includes(mapped) ? "" : "none";
+    });
+  }
+
+  // Apply on load
+  filterEventsByFramework(getFrameworkPreference());
+
+  // React to changes
+  subscribeToFrameworkPreference((framework) => {
+    filterEventsByFramework(framework);
+  });
+</script>
