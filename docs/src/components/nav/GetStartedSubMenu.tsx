@@ -19,6 +19,8 @@ const TOP_PAGES = [
   { label: "Starting with the design system", url: "/get-started" },
   { label: "Automated accessibility", url: "/get-started/automated-accessibility" },
   { label: "Component lifecycle", url: "/get-started/component-lifecycle" },
+  { label: "Roadmap", url: "/get-started/roadmap" },
+  { label: "Migration guide", url: "/get-started/migration-guide" },
 ];
 
 // Grouped sections with sub-pages
@@ -47,7 +49,6 @@ const PAGE_GROUPS = [
       { label: "Verify a bug", url: "/get-started/developers/bug" },
       { label: "Technologies", url: "/get-started/developers/technologies" },
       { label: "Supported browsers", url: "/get-started/developers/browsers" },
-      { label: "Version update guide", url: "/get-started/developers/update" },
     ],
   },
 ];
