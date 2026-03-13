@@ -200,6 +200,7 @@ export function ComponentsSubMenu({
         url="/"
         open={isOpen}
         onToggle={onToggle}
+        onNavigate={(path: string) => { if (path && !path.startsWith("/__")) window.location.href = path; }}
         primaryContent={primaryContent}
         secondaryContent={<MenuSecondaryContent isOpen={isOpen} />}
       />

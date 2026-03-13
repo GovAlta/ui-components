@@ -109,34 +109,67 @@ describe("WorkSideMenu", () => {
       expect(menu.element().classList.contains("closed")).toBeFalsy();
     });
 
-    it("selecting a menu item navigates to a new location", async () => {
-      const handler = vi.fn();
-      window.addEventListener("_update", handler);
+    it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
+      await page.viewport(1024, 768);
+      const onNavigate = vi.fn();
 
       const Component = () => {
+        const [currentPage, setCurrentPage] = useState("/dashboard");
+
         return (
-          <GoabxWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            userName="John Doe"
-            userSecondaryText="test@example.com"
-            testId="work-side-menu"
-            primaryContent={
-              <GoabxWorkSideMenuItem url="#item1" label="Item 1" testId="menu-item-1" />
-            }
-            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
-            open={true}
-          />
+          <div>
+            <GoabxWorkSideMenu
+              heading="Test App"
+              url="/dashboard"
+              open={true}
+              testId="work-side-menu"
+              onNavigate={(path: string) => {
+                setCurrentPage(path);
+                onNavigate(path);
+              }}
+              primaryContent={
+                <>
+                  <GoabxWorkSideMenuItem
+                    icon="grid"
+                    label="Dashboard"
+                    url="/dashboard"
+                    testId="nav-dashboard"
+                  />
+                  <GoabxWorkSideMenuItem
+                    icon="search"
+                    label="Search"
+                    url="/search"
+                    testId="nav-search"
+                  />
+                </>
+              }
+            />
+            <div data-testid="current-page">{currentPage}</div>
+          </div>
         );
       };
-      const result = render(<Component />);
-      const item1 = result.getByTestId("menu-item-1");
 
-      await item1.click();
+      const result = render(<Component />);
+
       await vi.waitFor(() => {
-        expect(window.location.hash).toBe("#item1");
+        const searchItem = result.getByTestId("nav-search");
+        expect(searchItem).toBeTruthy();
       });
+
+      const searchItem = result.getByTestId("nav-search");
+      const link = searchItem.element().querySelector("a");
+      expect(link).toBeTruthy();
+
+      await searchItem.click();
+
+      await vi.waitFor(() => {
+        expect(onNavigate).toHaveBeenCalledWith("/search");
+        const currentPageEl = result.getByTestId("current-page");
+        expect(currentPageEl.element().textContent).toBe("/search");
+      });
+
+      // Verify no full page navigation occurred
+      expect(window.location.pathname).not.toBe("/search");
     });
   });
 

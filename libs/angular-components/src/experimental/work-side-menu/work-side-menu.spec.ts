@@ -17,6 +17,7 @@ import { By } from "@angular/platform-browser";
       [primaryContent]="primaryTemplate"
       [secondaryContent]="secondaryTemplate"
       [accountContent]="accountTemplate"
+      (onNavigate)="handleNavigate($event)"
     >
     </goabx-work-side-menu>
     <ng-template #primaryTemplate>
@@ -37,6 +38,11 @@ class TestWorkSideMenuComponent {
   userName = "Test User";
   userSecondaryText = "test@example.com";
   testId = "test-id";
+  navigatedUrl = "";
+
+  handleNavigate(path: string) {
+    this.navigatedUrl = path;
+  }
 }
 describe("GoabxBWorkSideMenu", () => {
   let fixture: ComponentFixture<TestWorkSideMenuComponent>;
@@ -64,4 +70,17 @@ describe("GoabxBWorkSideMenu", () => {
     expect(menuElement.getAttribute("user-secondary-text")).toBe("test@example.com");
     expect(menuElement.getAttribute("testId")).toBe("test-id");
   });
+
+  it("should emit onNavigate when _navigate event is dispatched", fakeAsync(() => {
+    const menuElement = fixture.debugElement.query(
+      By.css("goa-work-side-menu"),
+    ).nativeElement;
+
+    menuElement.dispatchEvent(
+      new CustomEvent("_navigate", { detail: { url: "/dashboard" }, bubbles: true }),
+    );
+    fixture.detectChanges();
+
+    expect(component.navigatedUrl).toBe("/dashboard");
+  }));
 });

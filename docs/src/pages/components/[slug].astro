@@ -32,6 +32,15 @@ const { Content } = await render(component);
 // 2. Get the extracted API
 const api = await getComponentApi(slug);
 
+// 2b. Get child component APIs (if any)
+const childComponents = component.data.childComponents ?? [];
+const childApis = await Promise.all(
+  childComponents.map(async (child: { slug: string; name: string }) => ({
+    name: child.name,
+    api: await getComponentApi(child.slug),
+  }))
+);
+
 // 3. Query related guidance
 const allGuidance = await getGuidanceForComponent(slug);
 const { usage: usageGuidance, accessibility: accessibilityGuidance } =
@@ -101,6 +110,12 @@ const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3A
             API documentation is automatically extracted from the component source code.
           </goa-callout>
         )}
+        {childApis.map(({ name, api: childApi }) => childApi && (
+          <div class="child-component-api">
+            <h2>{name}</h2>
+            <PropsTable props={childApi.props} events={childApi.events} slots={childApi.slots} headingPrefix={name} />
+          </div>
+        ))}
       </TabContentWrapper>
     </goa-tab>
 
@@ -179,6 +194,20 @@ const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3A
     color: var(--goa-color-text-secondary, #666);
     margin: 0;
     max-width: 688px;
+  }
+
+  /* Child component API sections */
+  .child-component-api {
+    margin-top: var(--goa-space-2xl);
+    padding-top: var(--goa-space-xl);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .child-component-api h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--goa-space-l);
+    color: var(--goa-color-text-default, #333);
   }
 
   /* No configurations fallback */

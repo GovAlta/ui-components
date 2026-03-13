@@ -61,8 +61,21 @@
   // Functions
   // *********
 
-  function handleClick() {
-    dispatch(_rootEl, "_update", {}, { bubbles: true });
+  // Intercepts anchor clicks to enable SPA navigation via the _navigate event.
+  // Modifier keys (Ctrl/Cmd/Shift/Alt) are allowed through so the browser can
+  // open links in new tabs as expected.
+  function handleClick(e: Event) {
+    const mouseEvent = e as MouseEvent;
+    if (
+      mouseEvent.ctrlKey ||
+      mouseEvent.metaKey ||
+      mouseEvent.shiftKey ||
+      mouseEvent.altKey
+    ) {
+      return;
+    }
+    e.preventDefault();
+    dispatch(_rootEl, "_navigate", { url }, { bubbles: true });
   }
 
   function handleUpdateItem(e: CustomEvent) {
