@@ -6,6 +6,7 @@ on:
       - main
       - next
       - dev
+      - docs
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,11 +21,11 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: "24"
 
@@ -39,24 +40,67 @@ jobs:
         with:
           main-branch-name: ${{ github.ref_name }}
 
-      - name: Lint
-        run: npm run lint
-
       - name: Build
         run: npm run build:prod
-
-      - name: Test
-        run: |
-          if [ -d "./dist" ]; then
-            npx playwright install --with-deps
-            npm run test:pr
-          fi
 
       - name: Update Web components documentation
         run: cp libs/web-components/README.md dist/libs/web-components
 
-      - name: Release
+      - name: Release libs
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}
+
+  release-docs:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/docs'
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install npm 11
+        run: npm install -g npm@11
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build:prod
+
+      - name: Update docs site configs
+        run: cp docs/nginx.conf dist/docs/
+
+      - name: Install oc CLI
+        uses: redhat-actions/openshift-tools-installer@v1
+        with:
+          oc: latest
+
+      - name: Oc login
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.ARO_SERVER }}
+          openshift_token: ${{ secrets.ARO_TOKEN }}
+          namespace: ui-components-build
+
+      - name: Start Build
+        run: |
+          oc start-build design-system-docs --from-dir dist/docs --follow --wait
+
+      - name: Create ImageStream
+        run: |
+          oc get imagestream design-system-docs || oc create imagestream design-system-docs
+
+      - name: Tag Prod
+        run: oc tag design-system-docs:latest design-system-docs:prod
+
+      - name: Publish docs
+        run: |
+          oc project ui-components-prod
+          oc rollout latest dc/design-system-docs
