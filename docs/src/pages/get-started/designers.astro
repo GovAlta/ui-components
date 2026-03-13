@@ -1,149 +1,93 @@
 ---
 /**
- * Get Started - Designers (Early Adopters)
+ * Get Started - Designers Overview
  *
- * Designer onboarding for the early adopters program.
- * Figma setup, BETA libraries, illustration requests, project updates.
- * Content from Confluence (Brief 65).
+ * Overview of design system resources for designers.
+ * Content from Confluence (Brief 87).
  */
+import DropInCallout from '../../components/DropInCallout.astro';
 import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
 ---
 
 <DocumentationPageLayout
-  title="Get started as a designer"
-  description="Get started with the experimental GoA Design System as a designer"
+  title="Designers overview"
+  description="How designers use the design system through Figma"
   section="get-started"
 >
-  <goa-text version="2" size="heading-xl" mt="none" mb="m">Get started as a designer</goa-text>
-  <goa-text version="2" size="body-l" mt="none" mb="2xl">
-    Onboarding for the early adopters program.
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Overview</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="m">
+    As a designer, you use the design system through Figma.
   </goa-text>
+  <p>In Figma, you can access:</p>
 
-  <goa-callout version="2" type="information" emphasis="low" heading="What you'll do as a designer early adopter" mb="m">
-    <ul style="margin-bottom: 0;">
-      <li>Get access to the experimental Figma libraries.</li>
-      <li>Use experimental libraries to design or evaluate screens in your service context.</li>
-      <li>Provide feedback on what's working, what's not working and what's missing.</li>
-    </ul>
-  </goa-callout>
+  <ul>
+    <li><a href="/tokens">Design tokens</a></li>
+    <li><a href="/components">Components</a></li>
+    <li><a href="https://www.figma.com/design/aIRjvBzpIUH0GbkffjbL04/%E2%9D%96-Patterns-library-%7C-DDD?node-id=6345-1491163" target="_blank">Patterns</a></li>
+  </ul>
 
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <p>
+    The design system library in Figma aligns with coded components used by developers. Start with
+    design system components for common parts of your service. This helps developers use the matching
+    coded components and reduces custom work.
+  </p>
+  <p>
+    Start with the design system. Validate your design through user testing. If usability issues arise,
+    or the problem cannot be solved within the system, consider creating a custom solution.
+  </p>
+  <goa-text as="h2" id="design-with-development-in-mind" version="2" size="heading-m">Design with development in mind</goa-text>
+  <p>
+    When selecting components, prioritize those with a <strong>"goa-" prefix</strong>, such as
+    <code>goa-input</code>. These components exist in both design and development. Using them reduces
+    the need for custom development.
+  </p>
+  <p>Choose shared components whenever possible to maintain consistency and efficiency.</p>
 
-  <h2 id="setup">Available resources <goa-badge version="2" type="success" icon="false" emphasis="subtle" ml="m" content="Start here" style="vertical-align: middle;"></goa-badge></h2>
+  <goa-text as="h2" id="design-tokens" version="2" size="heading-m">Design tokens</goa-text>
+  <p>Design system components in Figma and code are built using design tokens.</p>
+  <p>
+    Use tokens to communicate design decisions clearly. Developers can reference the same tokens in code.
+  </p>
+  <p>Instead of sharing hex values or pixel adjustments, reference semantic tokens.</p>
+  <p>For example:</p>
+  <ul>
+    <li>Colour: <code>--goa-color-info-default</code></li>
+    <li>Spacing: <code>--goa-spacing-m</code></li>
+  </ul>
+  <p>Using tokens reduces back-and-forth and keeps design and development aligned.</p>
 
-  <goa-text version="2" size="heading-xs" mt="xl" mb="s">Figma assets</goa-text>
-  <goa-grid version="2" minchildwidth="300px" gap="xl">
-    <goa-block version="2" gap="s" direction="column">
-      <goa-text version="2" size="body-m" mt="m" mb="2xs"><strong>Production</strong></goa-text>
-      <goa-link version="2"><a href="https://www.figma.com/design/3pb2IK8s2QUqWieH79KdN7/%E2%9D%96-Component-library-%7C-DDD?node-id=33054-33175" target="_blank">Component library</a></goa-link>
-      <goa-link version="2"><a href="https://www.figma.com/design/ylmHeuDMfxnDBnP1VaQYz8/%E2%9D%96-Styles--Tokens--Icons--and-Guidelines-%7C-DDD?node-id=12132-379669" target="_blank">Styles, tokens, icons, and guidelines</a></goa-link>
-      <goa-link version="2"><a href="https://www.figma.com/design/aIRjvBzpIUH0GbkffjbL04/%E2%9D%96-Patterns-library-%7C-DDD?node-id=6345-1491163" target="_blank">Patterns library</a></goa-link>
-    </goa-block>
-    <goa-block version="2" gap="s" direction="column">
-      <goa-text version="2" size="body-m" mt="m" mb="2xs"><strong>Beta</strong></goa-text>
-      <goa-link version="2"><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-BETA-Component-library?node-id=60166-171607" target="_blank">Component library BETA</a></goa-link>
-      <goa-link version="2"><a href="https://www.figma.com/design/1xnHCsSgKHvkQEEDRvEa9y/%E2%9D%96-BETA-Styles-library?node-id=36-7" target="_blank">Styles library BETA</a></goa-link>
-      <goa-link version="2"><a href="https://www.figma.com/design/1DyrNxvQ1yhIEGqtpAtJqp/Illustration-library?node-id=0-1" target="_blank">Illustration library BETA</a></goa-link>
-    </goa-block>
-  </goa-grid>
+  <goa-text as="h2" id="components" version="2" size="heading-m">Components</goa-text>
+  <p>All design system components are available in Figma and in code.</p>
+  <p>
+    These components are designed to meet
+    <a href="https://www.w3.org/TR/WCAG22/" target="_blank">WCAG 2.2</a> accessibility standards.
+  </p>
+  <p>Avoid detaching components. Instead:</p>
+  <ul>
+    <li>Use variants</li>
+    <li>Show or hide layers within the component</li>
+  </ul>
+  <p>
+    Use <a href="https://goa-dio.slack.com/archives/C02BQQBKN66" target="_blank">#figma</a> for Figma-related issues, including library updates, missing components,
+    broken instances, or component behaviour in Figma.
+  </p>
+  <p>
+    Use <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9" target="_blank">#design-system-support</a> for design system guidance, component usage questions,
+    standards, and implementation support.
+  </p>
+  <p>Keep your components up to date. Figma will notify you when library updates are available.</p>
 
-  <goa-callout version="2" type="information" emphasis="low" mt="l" mb="l">
-    Component names are the same in both libraries, which makes
-    <a href="https://help.figma.com/hc/en-us/articles/4404856784663-Swap-style-and-component-libraries" target="_blank">library swapping</a>
-    possible. Be aware this can make it harder to tell which library a component came from once
-    it's on the canvas.
-  </goa-callout>
-
-  <h3 id="illustrations" style="margin-top: var(--goa-space-xl);">Illustrations</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    The illustration library is a collection of custom GoA illustrations to be used at various
-    points throughout a service. We will continue to update it regularly, so start by checking what's already
-    available.
-  </goa-text>
-  <goa-container version="2" type="non-interactive" padding="compact" mb="m">
-    Can't find an existing illustration that fits your scenario? Need a new
-    composition combining existing illustration elements?
-    <br /><br />
-    <goa-button version="2" type="tertiary" size="compact">Request an illustration</goa-button>
-  </goa-container>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    If you're unsure, ask in
-    <a href="https://goa-dio.slack.com/archives/C0A9SN3JM7E" target="_blank"><strong>#design-system-early-adopters</strong></a>
-    or bring it to drop-in hours — we'll help you decide the best path.
-  </goa-text>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="start-designing">Designing with the BETA libraries in Figma</h2>
-
-  <h3 id="new-designs">Starting a new design</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    We recommend starting from <a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-BETA-Component-library?node-id=58855-81995" target="_blank">DS 2.0 templates</a>.
-  </goa-text>
-
-  <h3 id="existing-files">Starting from an existing design</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li><strong>Library swap</strong> — If your goal is to convert the whole file to DS 2.0, consider trying the library swap approach.</li>
-      <li><strong>Manual rebuild</strong> — The slowest approach, but gives you the most control. Consider using starter templates as a base for rebuilding your pages.</li>
-    </ul>
-  </goa-text>
-
-  <goa-callout version="2" type="important" emphasis="low" mt="none" mb="m">
-    <a href="https://help.figma.com/hc/en-us/articles/4404856784663-Swap-style-and-component-libraries" target="_blank">Library swap</a> results can vary. We recommend creating a copy of the file before attempting
-    a library swap.
-  </goa-callout>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="update-existing">Updating an existing project</h2>
-
-  <h3 id="developer-first">Developer-first</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    A developer creates a new branch, completes the upgrade steps, and runs the upgraded
-    application. This helps the team quickly see which areas need design updates to align with
-    DS 2.0.
-  </goa-text>
-
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <strong>When reviewing the upgraded branch, watch for:</strong>
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>Spacing and layout rhythm</li>
-      <li>Typography scale/weight usage</li>
-      <li>Screens with dense content or constrained layouts (these will often have the highest risk of "breaking" during the update)</li>
-    </ul>
-  </goa-text>
-
-  <h3 id="design-first">Design-first</h3>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ol>
-      <li>Identify custom elements created to support your users' needs.</li>
-      <li>Create an inventory and prioritize items by importance and effort.</li>
-      <li>Redesign the highest priority elements using the visual design values from the Styles library BETA.</li>
-    </ol>
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    This can allow design work to proceed ahead of development rather than being blocked by the
-    version update.
-  </goa-text>
-
-  <goa-callout version="2" type="information" emphasis="low" mt="none" mb="m">
-    In most cases we recommend the Developer-First approach.
-  </goa-callout>
-
-  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
-
-  <h2 id="file-location">File location and sharing</h2>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    Early adopter Figma files will be collected within the <a href="https://www.figma.com/files/1352057334427203708/project/546230850" target="_blank"><strong>Early adopter project</strong></a>
-    in the Design system workspace to:
-  </goa-text>
-  <goa-text version="2" size="body-m" mt="none" mb="m">
-    <ul>
-      <li>Facilitate learning from fellow early adopters and the design system team</li>
-      <li>Avoid confusion / chance encounters of experimental assets by practitioners who are not part of the early adopter program</li>
-    </ul>
-  </goa-text>
+  <goa-text as="h2" id="figma-file-templates" version="2" size="heading-m">Figma file templates and helper components</goa-text>
+  <p>Each digital service project folder includes a starter Figma template.</p>
+  <p>Use this template to:</p>
+  <ul>
+    <li>Organize your design file</li>
+    <li>Support developer handoff</li>
+    <li>Help team members navigate files</li>
+  </ul>
+  <p>
+    Helper components are also available. Use them to clearly communicate intent when sharing designs
+    with developers and other team members.
+  </p>
+  <DropInCallout />
 </DocumentationPageLayout>

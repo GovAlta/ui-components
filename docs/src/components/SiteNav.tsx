@@ -4,17 +4,23 @@
  * Unified site navigation with parent/sub-menu state switching.
  *
  * Navigation behavior:
- * - Components: Has submenu (many component pages)
+ * - Components, Get started: Has submenu (many pages)
  * - Tokens: Direct link, stays on parent menu, highlights "Tokens"
  * - Examples: Direct link, stays on parent menu, highlights "Examples"
  *
  * Menu level is managed via React state:
  * - Parent view: Shows all sections
- * - Sub-menu view: Shows section-specific navigation (only for components)
+ * - Sub-menu view: Shows section-specific navigation (components, get-started)
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { ParentMenu, ComponentsSubMenu, type MenuSection, type NavCategory } from "./nav";
+import {
+  ParentMenu,
+  ComponentsSubMenu,
+  GetStartedSubMenu,
+  type MenuSection,
+  type NavCategory,
+} from "./nav";
 
 interface SiteNavProps {
   /** Current page slug (for highlighting current item) */
@@ -28,7 +34,7 @@ interface SiteNavProps {
 }
 
 // Sections that have submenus (show submenu when navigated to)
-const SUBMENU_SECTIONS = ["components"];
+const SUBMENU_SECTIONS = ["components", "get-started"];
 
 // Sections that are single pages (stay on parent menu, just highlight)
 const SINGLE_PAGE_SECTIONS = ["tokens", "examples"];
@@ -101,7 +107,9 @@ export function SiteNav({
     if (typeof window !== "undefined") {
       const section = initialSection || detectSectionFromUrl(window.location.pathname);
       setCurrentSection(section);
-      setMenuLevel(getMenuLevelForSection(section));
+      // Only show submenu if menu is open; collapsed submenu icons aren't useful
+      const menuIsOpen = getInitialMenuState();
+      setMenuLevel(menuIsOpen ? getMenuLevelForSection(section) : "parent");
     }
   }, [initialSection]);
 
@@ -138,6 +146,7 @@ export function SiteNav({
       // OR when crossing from mobile to desktop (prevents floating menu bug)
       if (width < previousWidth || crossedToDesktop) {
         setIsOpen(false);
+        setMenuLevel("parent");
       }
 
       previousWidth = width;
@@ -148,8 +157,15 @@ export function SiteNav({
   }, []);
 
   const handleToggle = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  }, []);
+    setIsOpen((prev) => {
+      // When closing any submenu, return to parent instead of collapsing
+      // (the collapsed icon view isn't useful without icons)
+      if (prev && SUBMENU_SECTIONS.includes(menuLevel)) {
+        setMenuLevel("parent");
+      }
+      return !prev;
+    });
+  }, [menuLevel]);
 
   const handleSelectSection = useCallback(
     (section: MenuSection) => {
@@ -174,6 +190,9 @@ export function SiteNav({
     setIsOpen(true);
   }, []);
 
+  // Derive the current URL path for get-started submenu highlighting
+  const currentUrl = typeof window !== "undefined" ? window.location.pathname : "";
+
   // Render the appropriate menu based on current level
   switch (menuLevel) {
     case "components":
@@ -185,6 +204,17 @@ export function SiteNav({
           onExpandMenu={handleExpandMenu}
           currentSlug={currentSlug}
           categories={categories}
+        />
+      );
+
+    case "get-started":
+      return (
+        <GetStartedSubMenu
+          isOpen={isOpen}
+          onToggle={handleToggle}
+          onBack={handleBack}
+          onExpandMenu={handleExpandMenu}
+          currentUrl={currentUrl}
         />
       );
 

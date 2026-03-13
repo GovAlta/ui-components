@@ -1,0 +1,53 @@
+---
+/**
+ * Get Started - Out of Support Versions
+ *
+ * Information about unsupported Design System versions.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Out of support versions"
+  description="Design System versions that are no longer supported"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Out-of-support versions</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    With the launch of the new Design System, support for Angular v4 and lower, and React v6 and lower
+    is significantly reduced.
+  </goa-text>
+
+  <goa-text as="h2" id="what-this-means" version="2" size="heading-m">What this means</goa-text>
+
+  <goa-text version="2" size="heading-xs">Fewer fixes or patches</goa-text>
+  <p>Bug fixes and security updates are no longer prioritized for these versions.</p>
+
+  <goa-text version="2" size="heading-xs">No new features</goa-text>
+  <p>All new features and enhancements are released only in the current major version.</p>
+
+  <goa-text version="2" size="heading-xs">Use at your own risk</goa-text>
+  <p>Existing projects may continue to run. However:</p>
+  <ul>
+    <li>Compatibility with new browsers or operating systems is not guaranteed</li>
+    <li>Compatibility with future framework updates is not guaranteed</li>
+    <li>Issues discovered in these versions will not be resolved</li>
+  </ul>
+
+  <goa-callout version="2" type="emergency" emphasis="low" heading="Active maintenance has ended" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">Projects using Angular v4 and lower, and React v6 and lower will continue to function.
+    New issues or defects identified in these versions may not be fixed.</goa-text>
+  </goa-callout>
+  <goa-text as="h2" id="what-to-do-next" version="2" size="heading-m">What to do next</goa-text>
+  <p>
+    Upgrade to the latest supported version. Refer to the
+    <a href="/get-started/developers/update">version update guide</a>.
+  </p>
+  <p>
+    If you need support planning your upgrade,
+    <a href="https://outlook.office365.com/owa/calendar/DesignSystemDropinHours@abgov.onmicrosoft.com/bookings/" target="_blank">book time in drop-in hours</a>.
+  </p>
+  <DropInCallout />
+</DocumentationPageLayout>

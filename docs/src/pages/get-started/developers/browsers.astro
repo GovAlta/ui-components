@@ -1,0 +1,86 @@
+---
+/**
+ * Get Started - Developers - Supported browsers
+ *
+ * Browser and OS support matrix for Design System components.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Supported browsers"
+  description="Browser and operating system support for Design System components"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Supported browsers</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Design System components are tested across supported browsers and devices.
+  </goa-text>
+
+  <p>
+    We support the latest version of each browser listed on this page. Support applies to the browser and
+    operating system combinations shown in the table below. On mobile, support is limited to the browser
+    and operating system combinations listed for Android and iOS.
+  </p>
+
+  <goa-text as="h2" id="browser-os-support" version="2" size="heading-m">Browser and operating system support</goa-text>
+
+  <goa-table version="2" width="100%" mb="xl">
+    <table width="100%">
+      <thead>
+        <tr>
+          <th>Browser</th>
+          <th>Windows</th>
+          <th>Mac OS</th>
+          <th>Android</th>
+          <th>iOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Google Chrome</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Microsoft Edge</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Mozilla Firefox</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Apple Safari</td>
+          <td>N/A</td>
+          <td>Yes</td>
+          <td>N/A</td>
+          <td>Yes</td>
+        </tr>
+      </tbody>
+    </table>
+  </goa-table>
+
+  <goa-text version="2" size="heading-xs">Representative mobile OS used in testing</goa-text>
+  <ul>
+    <li>Android OS: 10+</li>
+    <li>iOS: 15+</li>
+  </ul>
+  <goa-text as="h2" id="testing-guidance" version="2" size="heading-m">Testing guidance</goa-text>
+  <p>
+    Use supported browsers and operating system versions when developing and testing services. If you
+    encounter a browser-specific issue, follow the
+    <a href="/get-started/developers/bug">Verify a bug</a> process.
+  </p>
+  <DropInCallout />
+</DocumentationPageLayout>

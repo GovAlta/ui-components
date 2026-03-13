@@ -1,0 +1,110 @@
+---
+/**
+ * Get Started - Developers - Technologies
+ *
+ * Overview of Design System technologies: Web Components, Svelte, Angular, React.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Technologies"
+  description="An overview of the technologies used in the Design System"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Technologies</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    An overview of the technologies used in the Design System.
+  </goa-text>
+
+  <goa-text as="h2" id="how-technologies-fit-together" version="2" size="heading-m">How the technologies fit together</goa-text>
+  <p>
+    The Design System is built on Web Components. Most component functionality lives in the core Web
+    Components layer. Angular and React wrappers sit on top of that layer to make the components easier
+    to use in those frameworks.
+  </p>
+  <p>
+    We use Svelte to author the components that are compiled to custom elements. You can use the Design
+    System through the core Web Components or through Angular and React wrappers.
+  </p>
+  <img src="/images/technologies.svg" alt="Diagram showing the technology layers: Svelte compiles to Web Components, which are wrapped by Angular and React" style="width: 100%; max-width: 700px; margin: var(--goa-space-l) 0;" />
+  <goa-text as="h2" id="web-components" version="2" size="heading-m">Web Components</goa-text>
+  <p>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Components" target="_blank">Web Components</a>
+    are a set of standard web technologies that allow you to create reusable custom elements. Each component
+    includes its own structure, styling, and behaviour. This keeps it independent from the rest of your code.
+  </p>
+  <p>
+    In the Design System, Web Components are the core library. They are framework-agnostic, so teams
+    can use them in different front-end environments.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Benefits of using Web Components</goa-text>
+  <ul>
+    <li><strong>Reuse:</strong> Build once and use across pages, applications, and frameworks</li>
+    <li><strong>Browser support:</strong> Work in modern browsers without additional libraries</li>
+    <li><strong>Maintenance:</strong> Modular and self-contained structure simplifies updates</li>
+    <li><strong>Encapsulation:</strong> Structure, style, and behaviour remain isolated from other page elements</li>
+    <li><strong>Reliability:</strong> Code is not spread across HTML and JS files, thereby avoiding inconsistencies</li>
+    <li><strong>Flexibility:</strong> Use inline, import, or compile components as needed</li>
+    <li><strong>Composability:</strong> Combine components or integrate them with other components</li>
+  </ul>
+
+  <goa-callout version="2" type="important" emphasis="low" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">Do not use Web Components directly unless there is a specific reason to do so. Using wrappers provides
+    type checking and developer helpers that are not available when working with the core Web Components alone.</goa-text>
+  </goa-callout>
+  <goa-text as="h2" id="svelte" version="2" size="heading-m">Svelte</goa-text>
+  <p>
+    <a href="https://svelte.dev/" target="_blank">Svelte</a> is the framework used to generate the
+    Design System Web Components. Svelte combines JavaScript (logic), HTML (structure), and CSS (style)
+    within a single file. It compiles these into efficient, reusable components.
+  </p>
+  <goa-text version="2" size="heading-xs">Why Svelte</goa-text>
+  <p>We use Svelte to:</p>
+  <ul>
+    <li>Build reusable Web Components</li>
+    <li>Keep component logic, structure, and styling together</li>
+    <li>Support integration with multiple front-end frameworks</li>
+  </ul>
+  <goa-text as="h2" id="angular" version="2" size="heading-m">Angular</goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">Supported versions: 18, 19, 20, 21</goa-text>
+  </goa-callout>
+
+  <p>
+    <a href="https://angular.dev/" target="_blank">Angular</a> is a TypeScript-based framework for building
+    web applications. The Design System supports Angular through Angular wrappers around the core Web Components.
+  </p>
+
+  <goa-text version="2" size="heading-xs">How Web Components and Angular work together</goa-text>
+  <p>Angular wrappers are created around the Web Components. These wrappers:</p>
+  <ul>
+    <li>Manage component properties and events</li>
+    <li>Support form binding (Reactive and Template-driven)</li>
+    <li>Allow integration within Angular applications</li>
+  </ul>
+  <p>The Angular application interacts with the wrapper, which renders the underlying Web Component.</p>
+  <goa-text as="h2" id="react" version="2" size="heading-m">React</goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">Supported versions: 17, 18, 19</goa-text>
+  </goa-callout>
+
+  <p>
+    <a href="https://react.dev/" target="_blank">React</a> is an open-source JavaScript library used to
+    build user interfaces from reusable components.
+  </p>
+
+  <goa-text version="2" size="heading-xs">How Web Components and React work together</goa-text>
+  <p>React wrappers are created around the Web Components. These wrappers:</p>
+  <ul>
+    <li>Manage properties and events</li>
+    <li>Enable integration within React applications</li>
+  </ul>
+  <p>The React application interacts with the wrapper, which renders the underlying Web Component.</p>
+  <DropInCallout />
+</DocumentationPageLayout>

@@ -5,20 +5,20 @@
  * Uses GoabxWorkSideMenuGroup for expandable category sections.
  */
 
-import { type MouseEvent } from "react";
+import { type MouseEvent, useRef } from "react";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
   GoabxWorkSideMenuGroup,
 } from "@abgov/react-components/experimental";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { useGroupShadowDomFixes } from "./useGroupShadowDomFixes";
 
 // Component categories - synced with content collection (visible components only)
 const COMPONENT_CATEGORIES = [
   {
     name: "Content layout",
     slug: "content-layout",
-    icon: "grid",
     components: [
       { name: "Accordion", slug: "accordion" },
       { name: "Container", slug: "container" },
@@ -35,7 +35,6 @@ const COMPONENT_CATEGORIES = [
   {
     name: "Feedback and alerts",
     slug: "feedback-and-alerts",
-    icon: "notifications",
     components: [
       { name: "Badge", slug: "badge" },
       { name: "Callout", slug: "callout" },
@@ -52,7 +51,6 @@ const COMPONENT_CATEGORIES = [
   {
     name: "Inputs and actions",
     slug: "inputs-and-actions",
-    icon: "create",
     components: [
       { name: "Button", slug: "button" },
       { name: "Button group", slug: "button-group" },
@@ -73,7 +71,6 @@ const COMPONENT_CATEGORIES = [
   {
     name: "Structure and navigation",
     slug: "structure-and-navigation",
-    icon: "browsers",
     components: [
       { name: "Footer", slug: "footer" },
       { name: "Form stepper", slug: "form-stepper" },
@@ -88,7 +85,6 @@ const COMPONENT_CATEGORIES = [
   {
     name: "Utilities",
     slug: "utilities",
-    icon: "build",
     components: [
       { name: "Block", slug: "block" },
       { name: "Divider", slug: "divider" },
@@ -116,6 +112,9 @@ export function ComponentsSubMenu({
   onExpandMenu,
   currentSlug,
 }: ComponentsSubMenuProps) {
+  const groupsRef = useRef<HTMLDivElement>(null);
+  useGroupShadowDomFixes(groupsRef);
+
   // We're on the All Components page if there's no currentSlug
   const isAllComponentsPage = !currentSlug;
 
@@ -145,51 +144,48 @@ export function ComponentsSubMenu({
           - On All Components page: use url so auto-matching highlights it
           - On component detail pages: wrap in div to prevent auto-matching */}
       {isAllComponentsPage ? (
-        <GoabxWorkSideMenuItem label="All Components" icon="apps" url="/components" />
+        <GoabxWorkSideMenuItem label="All Components" url="/components" />
       ) : (
         <div onClick={handleAllComponentsClick} style={{ cursor: "pointer" }}>
-          <GoabxWorkSideMenuItem
-            label="All Components"
-            icon="apps"
-            url="/__all_components__"
-          />
+          <GoabxWorkSideMenuItem label="All Components" url="/__all_components__" />
         </div>
       )}
 
       {/* Component categories - using GoabxWorkSideMenuGroup for expandable sections */}
-      {COMPONENT_CATEGORIES.map((category) => {
-        // Auto-expand category if it contains the current component
-        const containsCurrentComponent = category.components.some(
-          (c) => c.slug === currentSlug,
-        );
+      <div ref={groupsRef}>
+        {COMPONENT_CATEGORIES.map((category) => {
+          // Auto-expand category if it contains the current component
+          const containsCurrentComponent = category.components.some(
+            (c) => c.slug === currentSlug,
+          );
 
-        // Handler to expand menu when clicking on a collapsed category group
-        // Using capture phase to catch event before internal component handles it
-        const handleGroupClickCapture = () => {
-          if (!isOpen && onExpandMenu) {
-            onExpandMenu();
-          }
-        };
+          // Handler to expand menu when clicking on a collapsed category group
+          // Using capture phase to catch event before internal component handles it
+          const handleGroupClickCapture = () => {
+            if (!isOpen && onExpandMenu) {
+              onExpandMenu();
+            }
+          };
 
-        return (
-          <div key={category.slug} onClickCapture={handleGroupClickCapture}>
-            <GoabxWorkSideMenuGroup
-              heading={category.name}
-              icon={category.icon}
-              open={containsCurrentComponent}
-            >
-              {category.components.map((component) => (
-                <GoabxWorkSideMenuItem
-                  key={component.slug}
-                  label={component.name}
-                  url={`/components/${component.slug}`}
-                  current={component.slug === currentSlug}
-                />
-              ))}
-            </GoabxWorkSideMenuGroup>
-          </div>
-        );
-      })}
+          return (
+            <div key={category.slug} onClickCapture={handleGroupClickCapture}>
+              <GoabxWorkSideMenuGroup
+                heading={category.name}
+                open={containsCurrentComponent}
+              >
+                {category.components.map((component) => (
+                  <GoabxWorkSideMenuItem
+                    key={component.slug}
+                    label={component.name}
+                    url={`/components/${component.slug}`}
+                    current={component.slug === currentSlug}
+                  />
+                ))}
+              </GoabxWorkSideMenuGroup>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 
