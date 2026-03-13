@@ -5,9 +5,11 @@ import {
 } from "@abgov/react-components/experimental";
 import { GoabText } from "@abgov/react-components";
 import illustrationSrc from "../assets/form-illustration.svg";
+import illustrationDarkSrc from "../assets/person-using-computer-dark.svg";
 import eligibilityCheckSrc from "../assets/eligibility-check.svg";
 import prepareDocsSrc from "../assets/prepare-docs.svg";
 import submitDocsSrc from "../assets/submit-docs.svg";
+import { useIsDarkMode } from "../../../workspace/hooks/useIsDarkMode";
 
 type StartPageProps = {
   onStartNew: () => void;
@@ -56,6 +58,8 @@ function StepCard({
 }
 
 export function StartPage({ onStartNew, onContinue }: StartPageProps) {
+  const isDark = useIsDarkMode();
+
   return (
     <div className="form-set">
       {/* Hero section - two column layout */}
@@ -89,7 +93,7 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
         {/* Right column - illustration */}
         <div style={{ flex: "1 1 40%", display: "flex", justifyContent: "center" }}>
           <img
-            src={illustrationSrc}
+            src={isDark ? illustrationDarkSrc : illustrationSrc}
             alt="Person using a computer to apply for services"
             style={{
               width: "100%",

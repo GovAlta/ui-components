@@ -14,7 +14,7 @@
 
 .case-detail__page_template > .case-detail__page_content {
   max-width: 100%;
-  overflow: visible;
+  overflow: hidden;
   padding: var(--goa-space-m) var(--goa-space-xl) var(--goa-space-m) var(--goa-space-xl);
 }
 
@@ -34,6 +34,11 @@
   position: sticky;
   top: 80px;
   margin-top: var(--goa-space-xl);
+}
+
+/* Hide TOC when push drawer is open */
+.case-detail__layout--drawer-open {
+  grid-template-columns: 1fr;
 }
 
 /* Hide TOC on smaller screens */

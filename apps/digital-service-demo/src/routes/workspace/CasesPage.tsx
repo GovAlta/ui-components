@@ -594,7 +594,7 @@ export function CasesPage() {
         <GoabxButton type="secondary" size="compact">
           More
         </GoabxButton>
-        <GoabxButton type="primary" size="compact" onClick={() => navigate("/")}>
+        <GoabxButton type="primary" size="compact" onClick={() => {}}>
           New application
         </GoabxButton>
       </GoabButtonGroup>

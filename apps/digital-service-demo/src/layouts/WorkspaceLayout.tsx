@@ -207,6 +207,7 @@ function WorkspaceLayoutInner() {
           <GoabPushDrawer
             open={isOpen}
             heading={drawerHeading}
+            width="352px"
             onClose={closeDrawer}
             actions={
               <GoabButtonGroup alignment="start" gap="compact">

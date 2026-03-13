@@ -561,7 +561,9 @@ export function CaseDetailPage() {
         />
 
         <div className="case-detail__page_content">
-          <div className="case-detail__layout">
+          <div
+            className={`case-detail__layout${isDrawerOpen ? " case-detail__layout--drawer-open" : ""}`}
+          >
             {/* Main content */}
             <div className="case-detail__main">
               <GoabxTabs initialTab={1} variant="segmented">
@@ -988,8 +990,8 @@ export function CaseDetailPage() {
               </GoabxTabs>
             </div>
 
-            {/* Right sidebar TOC with scroll tracking */}
-            {!isLoading && (
+            {/* Right sidebar TOC - hidden when push drawer is open */}
+            {!isLoading && !isDrawerOpen && (
               <aside className="case-detail__toc">
                 <CaseDetailTOC sections={tocSections} />
               </aside>
