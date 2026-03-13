@@ -2,16 +2,15 @@
  * ParentMenu.tsx
  *
  * Parent-level navigation showing all main sections.
- * - Components: opens submenu (has many pages)
+ * - Components, Get started: opens submenu (has many pages)
  * - Tokens, Examples: direct navigation (single page each)
- * - Get started, Foundations: direct navigation (when content exists)
+ * - Foundations: direct navigation (when content exists)
  */
 
 import React from "react";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
 } from "@abgov/react-components/experimental";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
@@ -39,24 +38,15 @@ const DIRECT_NAV_SECTIONS: Record<string, string> = {
 };
 
 // Sections that open a submenu
-const SUBMENU_SECTIONS = ["components"];
-
-// Sections that render as expandable groups with sub-items
-const GROUP_SECTIONS: Record<string, Array<{ label: string; url: string }>> = {
-  "get-started": [
-    { label: "Early Adopters", url: "/get-started" },
-    { label: "Designers", url: "/get-started/designers" },
-    { label: "Developers", url: "/get-started/developers" },
-  ],
-};
+const SUBMENU_SECTIONS = ["components", "get-started"];
 
 // Main navigation sections
 const SECTIONS = [
   { id: "get-started" as const, label: "Get started", icon: "document-text" },
-  { id: "foundations" as const, label: "Foundations", icon: "list" },
   { id: "examples" as const, label: "Examples", icon: "browsers" },
   { id: "components" as const, label: "Components", icon: "shapes" },
   { id: "tokens" as const, label: "Tokens", icon: "code-slash" },
+  { id: "foundations" as const, label: "Foundations", icon: "list" },
 ];
 
 export function ParentMenu({
@@ -65,11 +55,11 @@ export function ParentMenu({
   onSelectSection,
   currentSection,
 }: ParentMenuProps) {
-  // Handle click on Components item - prevent navigation, open submenu instead
-  const handleComponentsClick = (e: React.MouseEvent) => {
+  // Handle click on submenu item - prevent navigation, open submenu instead
+  const handleSubmenuClick = (sectionId: MenuSection) => (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onSelectSection("components");
+    onSelectSection(sectionId);
   };
 
   // Primary content: Main navigation sections
@@ -78,23 +68,9 @@ export function ParentMenu({
       {SECTIONS.map((section) => {
         const directUrl = DIRECT_NAV_SECTIONS[section.id];
         const hasSubmenu = SUBMENU_SECTIONS.includes(section.id);
-        const groupItems = GROUP_SECTIONS[section.id];
         const isActive = currentSection === section.id;
 
-        if (groupItems) {
-          // Expandable group with sub-items
-          return (
-            <GoabxWorkSideMenuGroup
-              key={section.id}
-              heading={section.label}
-              icon={section.icon}
-            >
-              {groupItems.map((item) => (
-                <GoabxWorkSideMenuItem key={item.url} label={item.label} url={item.url} />
-              ))}
-            </GoabxWorkSideMenuGroup>
-          );
-        } else if (directUrl) {
+        if (directUrl) {
           // Direct navigation - use url prop
           return (
             <GoabxWorkSideMenuItem
@@ -106,13 +82,13 @@ export function ParentMenu({
             />
           );
         } else if (hasSubmenu) {
-          // Opens submenu - use /components URL when on component pages for matching,
+          // Opens submenu - use section URL when active for matching,
           // otherwise use non-matching URL to prevent false positives on homepage
-          const submenuUrl = isActive ? "/components" : "/__never_match__";
+          const submenuUrl = isActive ? `/${section.id}` : "/__never_match__";
           return (
             <div
               key={section.id}
-              onClick={handleComponentsClick}
+              onClick={handleSubmenuClick(section.id)}
               style={{ cursor: "pointer" }}
             >
               <GoabxWorkSideMenuItem

@@ -1,0 +1,81 @@
+---
+/**
+ * Get Started - Designers - Designing with Design System 2.0
+ *
+ * How to start new designs and update existing projects to DS 2.0.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Designing with Design System 2.0"
+  description="How to start new designs and update existing projects to Design System 2.0"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Designing with Design System 2.0</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    What's new in DS 2.0 and how to start using it in your designs.
+  </goa-text>
+  <p>
+    The Digital Design and Delivery (DDD) Design System has evolved to better support how service teams
+    design and build digital government services. Design System 2.0 includes an updated design
+    language, new tokens, refreshed components, and ready-to-use templates.
+  </p>
+  <goa-text as="h2" id="starting-a-new-design" version="2" size="heading-m" style="margin-top: var(--goa-space-xl);">Starting a new design</goa-text>
+  <p>
+    Use <a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-BETA-Component-library?node-id=58855-81995" target="_blank">DS 2.0 templates</a> as your starting point. Templates package layout, navigation, spacing, and
+    example content that you can adapt to your service. Some templates are built for specific service types
+    (for example, public-facing forms and workspace applications), and others are more general-purpose
+    starting points you can use across many kinds of pages and flows.
+  </p>
+
+  <goa-text as="h2" id="starting-from-an-existing-design" version="2" size="heading-m">Starting from an existing design</goa-text>
+
+  <goa-text version="2" size="heading-xs">Library swap</goa-text>
+  <p>
+    Use a <a href="https://help.figma.com/hc/en-us/articles/4404856784663-Swap-style-and-component-libraries" target="_blank">library swap</a> if
+    your goal is to convert most of the file to DS 2.0 in one pass.
+  </p>
+  <ul>
+    <li>Make a copy of your file before you start.</li>
+    <li>Expect mixed results. Some screens may need cleanup after the swap.</li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Manual rebuild</goa-text>
+  <p>Use a manual rebuild if you need more control.</p>
+  <ul>
+    <li>Rebuild your highest value screens first.</li>
+    <li>Consider using DS 2.0 templates as a base to speed things up.</li>
+  </ul>
+  <goa-text as="h2" id="update-existing-project" version="2" size="heading-m">Update an existing project to the new design library</goa-text>
+
+  <goa-text version="2" size="heading-xs">Approach 1: Developer-first</goa-text>
+  <p>Use this approach in most cases.</p>
+  <ol>
+    <li>A developer creates a new branch and completes the upgrade steps.</li>
+    <li>The team runs the upgraded application to see what changed.</li>
+    <li>Designers review the upgraded screens and identify what needs design updates.</li>
+  </ol>
+  <p>When reviewing the upgraded branch, watch for:</p>
+  <ul>
+    <li>Spacing and layout rhythm</li>
+    <li>Typography scale and weight usage</li>
+    <li>Dense or constrained screens (these often have the highest risk during an update)</li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Approach 2: Design-first</goa-text>
+  <p>Use this approach when you want design work to move ahead of development work.</p>
+  <ol>
+    <li>Identify custom elements that support your users' needs.</li>
+    <li>Create an inventory and prioritize items by importance and effort.</li>
+    <li>Redesign the highest priority items using the visual design values in the Styles library.</li>
+  </ol>
+
+  <goa-callout version="2" type="important" emphasis="low" heading="Start with the developer-first approach" mt="l" mb="l">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">In most cases, start with the developer-first approach. It helps you quickly see what changed in your
+    real product, so you can focus design effort where it matters most.</goa-text>
+  </goa-callout>
+  <DropInCallout />
+</DocumentationPageLayout>

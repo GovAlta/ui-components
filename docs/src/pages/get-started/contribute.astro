@@ -1,0 +1,187 @@
+---
+/**
+ * Get Started - Contribute
+ *
+ * How to contribute to the Design System (design and code).
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Contribute"
+  description="How to contribute to the GoA Design System"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Contribute</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    The Design System is a shared resource used and improved by service teams. All roles are encouraged
+    to contribute.
+  </goa-text>
+
+  <p>
+    Start by using existing Design System components and patterns. If a component or pattern does not
+    meet your needs, follow the contribution process below.
+  </p>
+  <goa-text as="h2" id="design-contribution-process" version="2" size="heading-m">Design contribution process</goa-text>
+  <p>
+    If a required <a href="/components">component</a> or <a href="/examples">example</a> does not exist in production,
+    contact the Design System team. We will review the request together and determine next steps.
+  </p>
+
+  <goa-text version="2" size="heading-xs">1. Contact the team</goa-text>
+  <p>
+    Book a <a href="https://outlook.office365.com/owa/calendar/DesignSystemDropinHours@abgov.onmicrosoft.com/bookings/" target="_blank">design system drop-in hours</a> session.
+  </p>
+  <p>Be prepared to:</p>
+  <ul>
+    <li>Describe the component or pattern and its purpose</li>
+    <li>Explain your user needs and service goals</li>
+    <li>Share iterations explored with and without the Design System</li>
+  </ul>
+
+  <goa-callout version="2" type="information" emphasis="low" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">There are open <a href="https://www.figma.com/files/1352057334427203708/team/1365458889622139826" target="_blank">contribution files in Figma</a> for every component and pattern in the design system,
+    including unpublished ideas and experiments.</goa-text>
+  </goa-callout>
+
+  <goa-text version="2" size="heading-xs">2. Contribution criteria</goa-text>
+  <p>A proposed component or pattern must meet the following criteria.</p>
+
+  <goa-text as="h4" version="2" size="heading-xs">Proposal criteria</goa-text>
+  <p><strong>Useful</strong></p>
+  <p>
+    Evidence shows it supports multiple teams or services. Provide screenshots or links to demonstrate usage.
+  </p>
+
+  <p><strong>Unique</strong></p>
+  <p>
+    It does not duplicate an existing component or pattern. If replacing an existing component, provide
+    evidence that the new approach improves usability or accessibility.
+  </p>
+
+  <goa-text as="h4" version="2" size="heading-xs">Publication standards</goa-text>
+  <p>To be published, the solution must be:</p>
+
+  <p><strong>Usable</strong></p>
+  <p>
+    Improves clarity, usability, and accessibility for users. Is informed by research and addresses a
+    validated user need.
+  </p>
+
+  <p><strong>Universal</strong></p>
+  <p>
+    Inclusive and accessible. Meets or exceeds accessibility standards.
+    <a href="https://www.w3.org/TR/WCAG22/" target="_blank">WCAG 2.2 AA</a> is the minimum requirement.
+  </p>
+
+  <goa-text version="2" size="heading-xs">3. Backlog and collaboration</goa-text>
+  <p>
+    If approved, the item is added to the
+    <a href="https://github.com/GovAlta/ui-components/issues" target="_blank">Design System's backlog</a>.
+  </p>
+  <p>
+    When development begins, the Design System team will collaborate with you to confirm detailed requirements.
+  </p>
+  <goa-text as="h2" id="code-contribution-process" version="2" size="heading-m">Code contribution process</goa-text>
+  <p>
+    The Design System supports multiple development frameworks through Web Components. Contributing full
+    components can be complex. Smaller contributions are encouraged.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Recommended contribution types</goa-text>
+  <ul>
+    <li>Bug fixes</li>
+    <li>Documentation updates</li>
+    <li>Enhancements to existing components</li>
+  </ul>
+  <p>
+    Start by contacting the team in the <a href="https://goa-dio.slack.com/archives/C02PLLT9HQ9" target="_blank">#design-system-support</a> Slack channel.
+  </p>
+  <p>
+    Select an issue tagged <strong>ready-for-contribution</strong> from the
+    <a href="https://github.com/GovAlta/ui-components/issues" target="_blank">backlog</a>.
+    Confirm which issue you will work on.
+  </p>
+
+  <goa-callout version="2" type="information" emphasis="low" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">Since the repository is public, use a personal GitHub account instead of your Enterprise Managed User (EMU) account.</goa-text>
+  </goa-callout>
+
+  <goa-text version="2" size="heading-xs">Set up your contribution environment</goa-text>
+  <ol>
+    <li>Clone the <a href="https://github.com/GovAlta/ui-components" target="_blank">ui-components</a> repository.</li>
+    <li>Open the repository in your IDE.</li>
+    <li>Create a branch named: <code>contributions/story-number</code></li>
+    <li>
+      Run the following commands:
+      <pre><code>npm i
+npm run build</code></pre>
+    </li>
+    <li>
+      The playgrounds for local testing are located in:
+      <pre><code>/apps/dev/angular
+/apps/dev/react</code></pre>
+    </li>
+  </ol>
+
+  <goa-text as="h4" version="2" size="heading-xs">Run playground environments</goa-text>
+  <p><strong>Angular</strong></p>
+  <pre><code>npm run dev:watch
+npm run serve:dev:angular</code></pre>
+
+  <p><strong>React</strong></p>
+  <pre><code>npm run dev:watch
+npm run serve:dev:react</code></pre>
+
+  <goa-text version="2" size="heading-xs">Repository structure</goa-text>
+
+  <p><strong>React wrappers</strong></p>
+  <p><code>/libs/react-components/src/lib</code></p>
+  <p>Each folder represents a single component with its associated unit tests and wrapper code.</p>
+
+  <p><strong>Angular wrappers</strong></p>
+  <p><code>/libs/angular-components/src/lib/components</code></p>
+  <p>Each folder represents a single component with its associated unit tests and wrapper code.</p>
+
+  <p><strong>Web Components</strong></p>
+  <p><code>/libs/web-components/src/components</code></p>
+  <ul>
+    <li>Unit tests as <code>*.spec.ts</code></li>
+    <li>Component code as <code>*.ts</code></li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Testing requirements</goa-text>
+  <ul>
+    <li>Write all unit tests in Svelte.</li>
+    <li>If updating React or Angular wrappers, write unit tests in those respective frameworks.</li>
+    <li>
+      Add browser testing using Jest for React wrappers and Svelte components when appropriate.
+      These can be found in: <code>libs/react-components/specs</code>
+    </li>
+    <li>Manually test components in both React and Angular.</li>
+    <li>
+      Create test files that others can use to manually test the PR. These can be created in:
+      <pre><code>/apps/prs/angular
+/apps/prs/react</code></pre>
+    </li>
+    <li>Follow the conventions already used in those files to create your test files.</li>
+  </ul>
+  <p>A Design System developer will also manually test the pull request.</p>
+
+  <goa-text version="2" size="heading-xs">Submit your contribution</goa-text>
+  <p>Use the following commit message format:</p>
+
+  <p><strong>Bug fix</strong></p>
+  <pre><code>fix(#storyNumber): short description (7 words max)</code></pre>
+
+  <p><strong>Feature request</strong></p>
+  <pre><code>feat(#storyNumber): short description (7 words max)</code></pre>
+
+  <ul>
+    <li>Create a pull request from your branch to the <code>dev</code> branch.</li>
+    <li>Notify the design system team of the PR.</li>
+  </ul>
+  <DropInCallout />
+</DocumentationPageLayout>

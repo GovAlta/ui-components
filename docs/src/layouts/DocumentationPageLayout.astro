@@ -38,7 +38,7 @@ const {
   description,
   section,
   showToc = true,
-  tocQuery = 'h2[id], h3[id]'
+  tocQuery = 'h2[id], h3[id], goa-text[id][as="h2"], goa-text[id][as="h3"]'
 } = Astro.props;
 const navCategories = await getNavCategories();
 ---
