@@ -1,4 +1,4 @@
-import { GoabCalendarOnChangeDetail } from "@abgov/ui-components-common";
+import { CalendarDate, GoabCalendarOnChangeDetail } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -8,7 +8,6 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
-
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -19,9 +18,9 @@ import { GoabBaseComponent } from "../base.component";
     @if (isReady) {
       <goa-calendar
         [attr.name]="name"
-        [value]="value"
-        [attr.min]="min"
-        [attr.max]="max"
+        [attr.value]="valueString()"
+        [attr.min]="minString()"
+        [attr.max]="maxString()"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
@@ -38,12 +37,45 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabCalendar extends GoabBaseComponent implements OnInit {
   @Input() name?: string;
   @Input() value?: Date | string;
-  @Input() min?: Date;
-  @Input() max?: Date;
+  @Input() min?: Date | string | undefined;
+  @Input() max?: Date | string | undefined;
 
   @Output() onChange = new EventEmitter<GoabCalendarOnChangeDetail>();
 
   isReady = false;
+
+  valueString(): string | undefined {
+    if (!this.value) return undefined;
+    if (this.value instanceof Date) {
+      console.warn(
+        "GoabCalendar: Using Date for 'value' is deprecated. Use a string in YYYY-MM-DD format instead.",
+      );
+      return new CalendarDate(this.value).toString();
+    }
+    return this.value;
+  }
+
+  minString(): string | undefined {
+    if (!this.min) return undefined;
+    if (this.min instanceof Date) {
+      console.warn(
+        "GoabCalendar: Using Date for 'min' is deprecated. Use a string in YYYY-MM-DD format instead.",
+      );
+      return new CalendarDate(this.min).toString();
+    }
+    return this.min;
+  }
+
+  maxString(): string | undefined {
+    if (!this.max) return undefined;
+    if (this.max instanceof Date) {
+      console.warn(
+        "GoabCalendar: Using Date for 'max' is deprecated. Use a string in YYYY-MM-DD format instead.",
+      );
+      return new CalendarDate(this.max).toString();
+    }
+    return this.max;
+  }
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

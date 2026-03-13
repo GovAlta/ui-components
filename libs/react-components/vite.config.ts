@@ -15,7 +15,7 @@ export default defineConfig({
     dts({
       entryRoot: "src",
       tsconfigPath: path.join(__dirname, "tsconfig.lib.json"),
-      aliasesExclude: [/^@abgov\/ui-components-common$/],
+      // aliasesExclude: [/^@abgov\/ui-components-common$/],
     }),
   ],
 
@@ -42,6 +42,14 @@ export default defineConfig({
       // External packages that should not be bundled into your library.
       external: ["react", "react-dom", "react/jsx-runtime"],
     },
+    resolve: {
+      alias: {
+        "@abgov/ui-components-common": path.resolve(
+          __dirname,
+          "../../node_modules/@abgov/ui-components-common",
+        ),
+      },
+    },
   },
 
   test: {
@@ -55,6 +63,14 @@ export default defineConfig({
     coverage: {
       reportsDirectory: "../../coverage/libs/react-components",
       provider: "v8",
+    },
+    resolve: {
+      alias: {
+        "@abgov/ui-components-common": path.resolve(
+          __dirname,
+          "../../node_modules/@abgov/ui-components-common",
+        ),
+      },
     },
   },
 });
