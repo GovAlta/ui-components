@@ -6,6 +6,7 @@
       open: { type: "Boolean", reflect: true },
       heading: { type: "String", reflect: true },
       width: { type: "String", reflect: true },
+      version: { type: "String", attribute: "version", reflect: true },
     },
   }}
 />
@@ -19,6 +20,7 @@
   export let open: boolean = false;
   export let heading: string = "";
   export let width: string = "492px";
+  export let version: string | undefined = undefined;
   let _contentEl: HTMLElement | null = null;
   let drawerState: DrawerState = "initial";
   let closingTimeout: number | null = null;

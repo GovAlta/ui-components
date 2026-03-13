@@ -6,6 +6,7 @@
       open: { type: "Boolean", reflect: true },
       heading: { type: "String", reflect: true },
       width: { type: "String", reflect: true },
+      version: { type: "String", reflect: true },
     },
   }}
 />
@@ -17,6 +18,7 @@
   export let open: boolean = false;
   export let heading: string = "";
   export let width: string = "492px";
+  export let version: string | undefined = undefined;
 
   // Minimum window width for desktop layout from vite.config.js
   const minimumDesktopWidth = 1023;
@@ -40,6 +42,7 @@
     position="right"
     maxsize={width}
     {heading}
+    {version}
   >
     <span slot="actions">
       <slot name="actions" />
@@ -53,6 +56,7 @@
     {open}
     {width}
     {heading}
+    {version}
   >
     <span slot="actions">
       <slot name="actions" />

@@ -27,7 +27,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
       name: "Basic push drawer",
       description: "Opens from the right, pushing page content aside",
       code: {
-        react: `<GoabPushDrawer heading="Application details" width="260px" open={isOpen} onClose={handleClose}>
+        react: `<GoabxPushDrawer heading="Application details" width="260px" open={isOpen} onClose={handleClose}>
   <GoabText tag="h4" size="heading-xs" mb="s" mt="none">Applicant name</GoabText>
   <GoabText size="body-m" mt="none">Jane Smith</GoabText>
   <GoabText tag="h4" size="heading-xs" mb="s" mt="none">File number</GoabText>
@@ -36,8 +36,8 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <GoabxBadge type="success" content="Approved" />
   <GoabText tag="h4" size="heading-xs" mb="s" mt="m">Submitted</GoabText>
   <GoabText size="body-m" mt="none">January 15, 2025</GoabText>
-</GoabPushDrawer>`,
-        angular: `<goab-push-drawer heading="Application details" width="260px" [open]="isOpen" (onClose)="handleClose()">
+</GoabxPushDrawer>`,
+        angular: `<goabx-push-drawer heading="Application details" width="260px" [open]="isOpen" (onClose)="handleClose()">
   <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Applicant name</goab-text>
   <goab-text size="body-m" mt="none">Jane Smith</goab-text>
   <goab-text tag="h4" size="heading-xs" mb="s" mt="none">File number</goab-text>
@@ -46,7 +46,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
   <goab-badge version="2" type="success" content="Approved"></goab-badge>
   <goab-text tag="h4" size="heading-xs" mb="s" mt="m">Submitted</goab-text>
   <goab-text size="body-m" mt="none">January 15, 2025</goab-text>
-</goab-push-drawer>`,
+</goabx-push-drawer>`,
         webComponents: `<div style="display: flex; min-height: 320px;">
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button version="2" id="open-push-drawer">Open push drawer</goa-button>
@@ -70,22 +70,22 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
       name: "Custom width",
       description: "Push drawer with a custom width",
       code: {
-        react: `<GoabPushDrawer heading="Case notes" width="600px" open={isOpen} onClose={handleClose}>
+        react: `<GoabxPushDrawer heading="Case notes" width="600px" open={isOpen} onClose={handleClose}>
   <GoabText tag="h4" size="heading-xs" mb="s" mt="none">Officer</GoabText>
   <GoabText size="body-m" mt="none">Const. M. Roberts, Badge #4412</GoabText>
   <GoabText tag="h4" size="heading-xs" mb="s" mt="none">Date</GoabText>
   <GoabText size="body-m" mt="none">February 3, 2025</GoabText>
   <GoabText tag="h4" size="heading-xs" mb="s" mt="none">Notes</GoabText>
   <GoabText size="body-m" mt="none">Applicant provided updated documentation. Reviewed supporting evidence and confirmed eligibility criteria are met. Forwarded to supervisor for final approval.</GoabText>
-</GoabPushDrawer>`,
-        angular: `<goab-push-drawer heading="Case notes" width="600px" [open]="isOpen" (onClose)="handleClose()">
+</GoabxPushDrawer>`,
+        angular: `<goabx-push-drawer heading="Case notes" width="600px" [open]="isOpen" (onClose)="handleClose()">
   <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Officer</goab-text>
   <goab-text size="body-m" mt="none">Const. M. Roberts, Badge #4412</goab-text>
   <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Date</goab-text>
   <goab-text size="body-m" mt="none">February 3, 2025</goab-text>
   <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Notes</goab-text>
   <goab-text size="body-m" mt="none">Applicant provided updated documentation. Reviewed supporting evidence and confirmed eligibility criteria are met. Forwarded to supervisor for final approval.</goab-text>
-</goab-push-drawer>`,
+</goabx-push-drawer>`,
         webComponents: `<div style="display: flex; min-height: 320px;">
   <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
     <goa-button version="2" id="open-push-drawer">Open push drawer</goa-button>
@@ -107,7 +107,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
       name: "With actions",
       description: "Push drawer with footer actions",
       code: {
-        react: `<GoabPushDrawer
+        react: `<GoabxPushDrawer
   heading="Edit notification preferences"
   width="280px"
   open={isOpen}
@@ -126,8 +126,8 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
       <GoabxCheckbox name="assignments" text="New assignments" />
     </GoabxCheckboxList>
   </GoabxFormItem>
-</GoabPushDrawer>`,
-        angular: `<goab-push-drawer
+</GoabxPushDrawer>`,
+        angular: `<goabx-push-drawer
   heading="Edit notification preferences"
   width="280px"
   [open]="isOpen"
@@ -141,7 +141,7 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
       <goabx-checkbox name="assignments" text="New assignments"></goabx-checkbox>
     </goabx-checkbox-list>
   </goabx-form-item>
-</goab-push-drawer>
+</goabx-push-drawer>
 
 <ng-template #pushDrawerActions>
   <goab-button-group alignment="start">

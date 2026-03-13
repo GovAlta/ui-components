@@ -28,6 +28,7 @@ const COMPONENT_CATEGORIES = [
       { name: "Hero banner", slug: "hero-banner" },
       { name: "Page Block", slug: "page-block" },
       { name: "Popover", slug: "popover" },
+      { name: "Push Drawer", slug: "push-drawer" },
       { name: "Table", slug: "table" },
       { name: "Text", slug: "text" },
     ],
