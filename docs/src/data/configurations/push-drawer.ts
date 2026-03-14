@@ -170,5 +170,89 @@ export const pushDrawerConfigurations: ComponentConfigurations = {
 <script>${pushDrawerScript}</script>`,
       },
     },
+    {
+      id: "long-content",
+      name: "Long content",
+      description:
+        "Content that exceeds the drawer height scrolls while the header and actions stay pinned",
+      code: {
+        react: `<GoabxPushDrawer
+  heading="Case history"
+  width="320px"
+  open={isOpen}
+  onClose={handleClose}
+  actions={
+    <GoabButtonGroup alignment="start">
+      <GoabxButton size="compact">Export</GoabxButton>
+      <GoabxButton type="secondary" size="compact">Close</GoabxButton>
+    </GoabButtonGroup>
+  }
+>
+  <GoabText tag="h4" size="heading-xs" mb="s" mt="none">Jan 15, 2025</GoabText>
+  <GoabText size="body-m" mt="none">Application received. Initial review completed by intake officer. All required documents present.</GoabText>
+  <GoabText tag="h4" size="heading-xs" mb="s" mt="l">Feb 3, 2025</GoabText>
+  <GoabText size="body-m" mt="none">Background check initiated. Applicant contacted for additional verification of employment history.</GoabText>
+  <GoabText tag="h4" size="heading-xs" mb="s" mt="l">Feb 18, 2025</GoabText>
+  <GoabText size="body-m" mt="none">Employment verification received. Forwarded to senior reviewer for assessment.</GoabText>
+  <GoabText tag="h4" size="heading-xs" mb="s" mt="l">Mar 1, 2025</GoabText>
+  <GoabText size="body-m" mt="none">Senior review complete. Recommendation for approval pending supervisor sign-off.</GoabText>
+  <GoabText tag="h4" size="heading-xs" mb="s" mt="l">Mar 10, 2025</GoabText>
+  <GoabText size="body-m" mt="none">Supervisor approved. Final documentation prepared for applicant notification.</GoabText>
+  <GoabText tag="h4" size="heading-xs" mb="s" mt="l">Mar 12, 2025</GoabText>
+  <GoabText size="body-m" mt="none">Approval letter sent to applicant via registered mail. Case marked as complete.</GoabText>
+</GoabxPushDrawer>`,
+        angular: `<goabx-push-drawer
+  heading="Case history"
+  width="320px"
+  [open]="isOpen"
+  (onClose)="handleClose()"
+  [actions]="pushDrawerActions"
+>
+  <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Jan 15, 2025</goab-text>
+  <goab-text size="body-m" mt="none">Application received. Initial review completed by intake officer. All required documents present.</goab-text>
+  <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Feb 3, 2025</goab-text>
+  <goab-text size="body-m" mt="none">Background check initiated. Applicant contacted for additional verification of employment history.</goab-text>
+  <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Feb 18, 2025</goab-text>
+  <goab-text size="body-m" mt="none">Employment verification received. Forwarded to senior reviewer for assessment.</goab-text>
+  <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 1, 2025</goab-text>
+  <goab-text size="body-m" mt="none">Senior review complete. Recommendation for approval pending supervisor sign-off.</goab-text>
+  <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 10, 2025</goab-text>
+  <goab-text size="body-m" mt="none">Supervisor approved. Final documentation prepared for applicant notification.</goab-text>
+  <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 12, 2025</goab-text>
+  <goab-text size="body-m" mt="none">Approval letter sent to applicant via registered mail. Case marked as complete.</goab-text>
+</goabx-push-drawer>
+
+<ng-template #pushDrawerActions>
+  <goab-button-group alignment="start">
+    <goabx-button size="compact">Export</goabx-button>
+    <goabx-button type="secondary" size="compact">Close</goabx-button>
+  </goab-button-group>
+</ng-template>`,
+        webComponents: `<div style="display: flex; min-height: 320px;">
+  <div style="flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;">
+    <goa-button version="2" id="open-push-drawer">Open push drawer</goa-button>
+  </div>
+  <goa-push-drawer version="2" id="demo-push-drawer" heading="Case history" width="320px">
+    <goa-text tag="h4" size="heading-xs" mb="s" mt="none">Jan 15, 2025</goa-text>
+    <goa-text size="body-m" mt="none">Application received. Initial review completed by intake officer. All required documents present.</goa-text>
+    <goa-text tag="h4" size="heading-xs" mb="s" mt="l">Feb 3, 2025</goa-text>
+    <goa-text size="body-m" mt="none">Background check initiated. Applicant contacted for additional verification of employment history.</goa-text>
+    <goa-text tag="h4" size="heading-xs" mb="s" mt="l">Feb 18, 2025</goa-text>
+    <goa-text size="body-m" mt="none">Employment verification received. Forwarded to senior reviewer for assessment.</goa-text>
+    <goa-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 1, 2025</goa-text>
+    <goa-text size="body-m" mt="none">Senior review complete. Recommendation for approval pending supervisor sign-off.</goa-text>
+    <goa-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 10, 2025</goa-text>
+    <goa-text size="body-m" mt="none">Supervisor approved. Final documentation prepared for applicant notification.</goa-text>
+    <goa-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 12, 2025</goa-text>
+    <goa-text size="body-m" mt="none">Approval letter sent to applicant via registered mail. Case marked as complete.</goa-text>
+    <goa-button-group slot="actions" alignment="start">
+      <goa-button version="2" size="compact">Export</goa-button>
+      <goa-button version="2" type="secondary" size="compact">Close</goa-button>
+    </goa-button-group>
+  </goa-push-drawer>
+</div>
+<script>${pushDrawerScript}</script>`,
+      },
+    },
   ],
 };
