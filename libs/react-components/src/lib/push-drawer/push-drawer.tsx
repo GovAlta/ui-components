@@ -5,6 +5,7 @@ interface WCProps {
   testid?: string;
   heading?: string;
   width?: string;
+  version?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 declare module "react" {
