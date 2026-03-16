@@ -61,22 +61,22 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx nx affected --target release --parallel=false --base=${{ steps.last_successful_commit.outputs.base }}
 
-    - name: Oc login
-      uses: redhat-actions/oc-login@v1
-      with:
-        # URL to your OpenShift cluster.
-        # Refer to Step 2.
-        openshift_server_url: ${{ secrets.ARO_SERVER }}
-        openshift_token: ${{ secrets.ARO_TOKEN }}
+      - name: Oc login
+        uses: redhat-actions/oc-login@v1
+        with:
+          # URL to your OpenShift cluster.
+          # Refer to Step 2.
+          openshift_server_url: ${{ secrets.ARO_SERVER }}
+          openshift_token: ${{ secrets.ARO_TOKEN }}
 
-        # Optional - this sets your Kubernetes context's current namespace after logging in.
-        namespace: ui-components-build
+          # Optional - this sets your Kubernetes context's current namespace after logging in.
+          namespace: ui-components-build
 
-    - name: Start Build
-      # for now just run on the "doc" branch
-      if: github.ref == 'refs/heads/docs'
+      - name: Start Build
+        # for now just run on the "doc" branch
+        if: github.ref == 'refs/heads/docs'
 
-      run: oc start-build ui-components --from-dir dist/docs --follow --wait
+        run: oc start-build ui-components --from-dir dist/docs --follow --wait
 
   publishDocs:
     runs-on: ubuntu-latest
