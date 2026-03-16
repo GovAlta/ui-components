@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Focus Treatment Test">
+  <div class="focus-test">
+    <h1>Focus Treatment Comparison</h1>
+    <p>Tab through each component below to compare focus styles.</p>
+
+    <section>
+      <h2>Text Area</h2>
+      <goa-text-area version="2" name="textarea"></goa-text-area>
+    </section>
+
+    <section>
+      <h2>Dropdown</h2>
+      <goa-dropdown version="2" name="dropdown">
+        <goa-dropdown-item value="a" label="Option A"></goa-dropdown-item>
+        <goa-dropdown-item value="b" label="Option B"></goa-dropdown-item>
+        <goa-dropdown-item value="c" label="Option C"></goa-dropdown-item>
+      </goa-dropdown>
+    </section>
+
+    <section>
+      <h2>Checkbox</h2>
+      <goa-checkbox version="2" name="checkbox" text="Checkbox label"></goa-checkbox>
+    </section>
+
+    <section>
+      <h2>Radio Group</h2>
+      <goa-radio-group version="2" name="radio-group">
+        <goa-radio-item value="1" label="Option 1"></goa-radio-item>
+        <goa-radio-item value="2" label="Option 2"></goa-radio-item>
+        <goa-radio-item value="3" label="Option 3"></goa-radio-item>
+      </goa-radio-group>
+    </section>
+
+    <section>
+      <h2>Date Picker</h2>
+      <goa-date-picker version="2" name="date"></goa-date-picker>
+    </section>
+
+    <section>
+      <h2>Button</h2>
+      <goa-button version="2" type="primary">Primary</goa-button>
+      <goa-button version="2" type="secondary">Secondary</goa-button>
+      <goa-button version="2" type="tertiary">Tertiary</goa-button>
+    </section>
+
+    <section>
+      <h2>Icon Button</h2>
+      <goa-icon-button version="2" icon="add"></goa-icon-button>
+    </section>
+
+    <section>
+      <h2>Link Button</h2>
+      <goa-link-button version="2">Link button</goa-link-button>
+    </section>
+
+    <section>
+      <h2>Filter Chip</h2>
+      <goa-filter-chip version="2" content="Filter chip"></goa-filter-chip>
+    </section>
+
+    <section>
+      <h2>Chip</h2>
+      <goa-chip version="2" content="Chip"></goa-chip>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .focus-test {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  section:has(goa-button) {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  section:has(goa-button) h2 {
+    width: 100%;
+  }
+</style>
