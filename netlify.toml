@@ -1,7 +1,10 @@
 [build]
-  publish = "dist/docs"
-  command = "npm ci && cd docs && npm ci && cd .. && npm run build:prod"
+  publish = "dist/apps/public-form-demo"
+  command = "mkdir -p dist/apps/public-form-demo"
 
-[build.environment]
-  NODE_VERSION = "24"
-  NPM_FLAGS = "--legacy-peer-deps"
+# Redirect all traffic to the digital service demo
+[[redirects]]
+  from = "/*"
+  to = "https://digital-service-demo-v2.netlify.app/"
+  status = 301
+  force = true
