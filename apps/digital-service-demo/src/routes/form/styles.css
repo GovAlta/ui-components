@@ -152,9 +152,8 @@ body {
     padding: var(--goa-space-m);
   }
 
-  /* Keep tertiary/compact buttons auto-width on mobile (primary stays full-width) */
-  .form-set goa-button[type="tertiary"],
-  .form-set goa-button[size="compact"] {
+  /* Keep non-primary buttons auto-width on mobile */
+  .form-set .btn-auto-width goa-button {
     width: auto;
   }
 }

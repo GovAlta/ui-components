@@ -76,6 +76,7 @@ export function MyApplicationsPage({
     <div className="form-set">
       {/* Heading row with "+ New application" on right */}
       <div
+        className="btn-auto-width"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -101,6 +102,7 @@ export function MyApplicationsPage({
       {/* Application cards */}
       {applications.length === 0 ? (
         <div
+          className="btn-auto-width"
           style={{
             border: "1px solid var(--goa-color-greyscale-200)",
             borderRadius: "12px",
