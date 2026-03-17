@@ -143,6 +143,57 @@ export function Bug3232Route() {
 
       <GoabDivider mt="xl" mb="l" />
 
+      <GoabText tag="h3">Test 6b: ID prop with inline side nav (restored from PR #3216)</GoabText>
+      <GoabText tag="p">
+        The headings below use GoabText with id props. The side nav should link to them.
+        Clicking a nav link should scroll to the matching heading.
+      </GoabText>
+
+      <div style={{ display: "flex", gap: "var(--goa-space-xl)" }}>
+        <nav style={{ minWidth: "200px", position: "sticky", top: "1rem", alignSelf: "flex-start" }}>
+          <GoabText tag="h4">On this page</GoabText>
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            <li><a onClick={() => document.getElementById("section-overview")?.scrollIntoView({ behavior: "smooth" })} style={{ cursor: "pointer" }}>Overview</a></li>
+            <li><a onClick={() => document.getElementById("section-getting-started")?.scrollIntoView({ behavior: "smooth" })} style={{ cursor: "pointer" }}>Getting started</a></li>
+            <li><a onClick={() => document.getElementById("section-configuration")?.scrollIntoView({ behavior: "smooth" })} style={{ cursor: "pointer" }}>Configuration</a></li>
+            <li><a onClick={() => document.getElementById("section-examples")?.scrollIntoView({ behavior: "smooth" })} style={{ cursor: "pointer" }}>Examples</a></li>
+          </ul>
+        </nav>
+
+        <div style={{ flex: 1 }}>
+          <GoabText tag="h2" id="section-overview">Overview</GoabText>
+          <GoabText tag="p" size="body-m">
+            This section tests that GoabText headings with id props work as scroll targets
+            for a table of contents navigation.
+          </GoabText>
+
+          <div style={{ height: "300px" }} />
+
+          <GoabText tag="h2" id="section-getting-started">Getting started</GoabText>
+          <GoabText tag="p" size="body-m">
+            If clicking "Getting started" in the side nav scrolled here, the id prop is working.
+          </GoabText>
+
+          <div style={{ height: "300px" }} />
+
+          <GoabText tag="h2" id="section-configuration">Configuration</GoabText>
+          <GoabText tag="p" size="body-m">
+            Another section to test anchor scrolling with GoabText id prop.
+          </GoabText>
+
+          <div style={{ height: "300px" }} />
+
+          <GoabText tag="h2" id="section-examples">Examples</GoabText>
+          <GoabText tag="p" size="body-m">
+            Last section. All four headings should be reachable via the side nav links.
+          </GoabText>
+
+          <div style={{ height: "200px" }} />
+        </div>
+      </div>
+
+      <GoabDivider mt="xl" mb="l" />
+
       <GoabText tag="h3">Test 7: Explicit size overrides tag default</GoabText>
       <GoabText tag="p">
         Setting size explicitly should override the tag-based default.

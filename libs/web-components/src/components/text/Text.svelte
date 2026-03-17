@@ -1,4 +1,11 @@
-<svelte:options customElement="goa-text" />
+<svelte:options
+  customElement={{
+    tag: "goa-text",
+    props: {
+      id: { attribute: "id", type: "String", reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts" context="module">
   export type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5";
