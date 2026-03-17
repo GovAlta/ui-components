@@ -144,6 +144,7 @@ export function MyApplicationsPage({
           {applications.map((app) => (
             <div
               key={app.id}
+              className="btn-auto-width"
               style={{
                 border: "1px solid var(--goa-color-greyscale-200)",
                 borderRadius: "12px",
