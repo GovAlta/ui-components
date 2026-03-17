@@ -145,6 +145,9 @@ export function GetStartedSubMenu({
       onToggle={onToggle}
       primaryContent={primaryContent}
       secondaryContent={<MenuSecondaryContent isOpen={isOpen} />}
+      onNavigate={(path: string) => {
+        if (path && !path.startsWith("/__")) window.location.href = path;
+      }}
     />
   );
 }
