@@ -51,6 +51,7 @@ export interface Example {
     tags?: string[];
     components: string[];
     status: "published" | "draft" | "deprecated";
+    previewImage?: string;
   };
   body?: string;
 }
@@ -107,21 +108,17 @@ function getCategoryBadgeType(
 
 // Format category for display
 function formatCategory(category: string): string {
-  return category
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+  return category.replace(/-/g, " ");
 }
 
 // Format scale for display
 function formatScale(scale: string): string {
-  return scale.charAt(0).toUpperCase() + scale.slice(1);
+  return scale;
 }
 
 // Format user type for display
 function formatUserType(userType: string): string {
-  if (userType === "both") return "Both";
-  return userType.charAt(0).toUpperCase() + userType.slice(1);
+  return userType;
 }
 
 export function ExamplesGrid({ examples }: ExamplesGridProps) {
@@ -498,8 +495,16 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         className="example-card-link"
       >
         <div className="example-card-content">
-          {/* Thumbnail placeholder - V2 images needed */}
-          <div className="example-card-thumbnail" aria-hidden="true" />
+          {example.data.previewImage ? (
+            <img
+              className="example-card-thumbnail"
+              src={example.data.previewImage}
+              alt=""
+              loading="lazy"
+            />
+          ) : (
+            <div className="example-card-thumbnail" aria-hidden="true" />
+          )}
 
           {/* Title */}
           <h3 className="example-card-title">{example.data.title}</h3>
@@ -515,14 +520,44 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             </p>
           )}
 
-          {/* Category badges */}
+          {/* Metadata badges */}
           <div className="example-card-badges">
+            <goa-badge
+              version="2"
+              type="lilac"
+              content={formatScale(example.data.scale)}
+              emphasis="subtle"
+              icon="false"
+            />
+            {example.data.categories.map((cat) => (
+              <goa-badge
+                key={cat}
+                version="2"
+                type="sunset"
+                content={formatCategory(cat)}
+                emphasis="subtle"
+                icon="false"
+              />
+            ))}
+            {(example.data.userType === "both"
+              ? ["citizen", "worker"]
+              : [formatUserType(example.data.userType)]
+            ).map((ut) => (
+              <goa-badge
+                key={ut}
+                version="2"
+                type="sky"
+                content={ut}
+                emphasis="subtle"
+                icon="false"
+              />
+            ))}
             {example.data.tags?.slice(0, 3).map((tag) => (
               <goa-badge
                 key={tag}
                 version="2"
-                type={getScaleBadgeType(example.data.scale)}
-                content={tag}
+                type="default"
+                content={tag.replace(/-/g, " ")}
                 emphasis="subtle"
                 icon="false"
               />
@@ -927,7 +962,14 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
       >
         <div className="filter-drawer-content">
           {/* Scale filter */}
-          <GoabxFormItem label="Scale">
+          <div className="filter-group">
+            <div className="filter-group-label">
+              Scale{" "}
+              <span
+                className="filter-swatch"
+                style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
+              />
+            </div>
             <GoabxCheckboxList
               name="scale"
               size="compact"
@@ -946,10 +988,17 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 />
               ))}
             </GoabxCheckboxList>
-          </GoabxFormItem>
+          </div>
 
           {/* Category filter */}
-          <GoabxFormItem label="Category">
+          <div className="filter-group">
+            <div className="filter-group-label">
+              Category{" "}
+              <span
+                className="filter-swatch"
+                style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
+              />
+            </div>
             <GoabxCheckboxList
               name="category"
               size="compact"
@@ -968,10 +1017,17 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 />
               ))}
             </GoabxCheckboxList>
-          </GoabxFormItem>
+          </div>
 
           {/* User Type filter */}
-          <GoabxFormItem label="User Type">
+          <div className="filter-group">
+            <div className="filter-group-label">
+              User type{" "}
+              <span
+                className="filter-swatch"
+                style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
+              />
+            </div>
             <GoabxCheckboxList
               name="userType"
               size="compact"
@@ -990,7 +1046,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 />
               ))}
             </GoabxCheckboxList>
-          </GoabxFormItem>
+          </div>
 
           {(pendingFilters.category.length > 0 ||
             pendingFilters.scale.length > 0 ||
@@ -1137,7 +1193,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         .examples-card-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: var(--goa-space-l);
+          column-gap: var(--goa-space-l);
+          row-gap: var(--goa-space-xl);
         }
 
         @media (max-width: 1200px) {
@@ -1174,7 +1231,16 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           gap: var(--goa-space-s);
         }
 
-        .example-card-thumbnail {
+        img.example-card-thumbnail {
+          aspect-ratio: 16 / 10;
+          width: 100%;
+          object-fit: contain;
+          border-radius: var(--goa-border-radius-m);
+          border: 1px solid var(--goa-color-greyscale-200);
+          margin-bottom: var(--goa-space-2xs);
+        }
+
+        div.example-card-thumbnail {
           aspect-ratio: 16 / 10;
           background: var(--goa-color-greyscale-200);
           border-radius: var(--goa-border-radius-m);
@@ -1250,6 +1316,24 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           display: flex;
           flex-direction: column;
           gap: var(--goa-space-xs);
+        }
+
+        .filter-group-label {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-s);
+          font: var(--goa-typography-body-m);
+          font-weight: var(--goa-font-weight-bold);
+          margin-bottom: var(--goa-space-s);
+        }
+
+        .filter-swatch {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border-radius: 3px;
+          border: 1px solid;
+          flex-shrink: 0;
         }
 
       `}</style>

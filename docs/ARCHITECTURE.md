@@ -245,8 +245,27 @@ One guidance atom can apply to multiple components — just list them all in `ap
    - `angular.html` + `angular.ts` — Angular template and component
    - `web-components.html` — Web components HTML
 4. List the component slugs in the `components` array — this links the example to those component pages
+5. Generate a preview image (see below)
 
 All three framework files are optional, but at least one is needed.
+
+### Generate example preview images
+
+Preview images show a screenshot of each example in the grid cards. To generate them:
+
+```bash
+cd ui-components/docs
+
+# Generate for all examples (skips manually-provided ones)
+npm run generate-previews -- --url http://localhost:4203
+
+# Generate for a specific example
+npm run generate-previews -- --url http://localhost:4203 my-example-slug
+```
+
+This requires the dev server to be running (`npm run dev`). Images are saved as WebP to `public/images/examples/`. Add `previewImage: /images/examples/my-example.webp` to the example's frontmatter.
+
+**For modals, drawers, or notifications:** the script can't capture these well automatically. Take a manual screenshot (1280x800 viewport), save it as a PNG in `public/images/examples/`, update the frontmatter path to `.png`, and add the slug to the `SKIP_EXAMPLES` list in `src/scripts/generate-preview-images.ts`.
 
 ### Update a configuration preview
 
@@ -260,20 +279,20 @@ Place an SVG in `docs/public/thumbnails/<slug>.svg`. The components grid referen
 
 ## Key files reference
 
-| What                    | Where                                            |
-| ----------------------- | ------------------------------------------------ |
-| Astro config            | `docs/astro.config.mjs`                          |
-| Content schemas         | `docs/src/content/config.ts`                     |
-| Component page template | `docs/src/pages/components/[slug].astro`         |
-| Example page template   | `docs/src/pages/examples/[slug].astro`           |
-| Content query helpers   | `docs/src/lib/content-queries.ts`                |
-| Example code loader     | `docs/src/lib/example-code.ts`                   |
-| API extraction script   | `docs/src/scripts/extract-api.ts`                |
-| Configuration registry  | `docs/src/data/configurations/index.ts`          |
-| Configuration types     | `docs/src/data/configurations/types.ts`          |
-| JSX workarounds         | `docs/src/global.d.ts`                           |
-| Layouts                 | `docs/src/layouts/`                              |
-| Generated API JSON      | `docs/generated/component-apis/`                 |
+| What                    | Where                                    |
+| ----------------------- | ---------------------------------------- |
+| Astro config            | `docs/astro.config.mjs`                  |
+| Content schemas         | `docs/src/content/config.ts`             |
+| Component page template | `docs/src/pages/components/[slug].astro` |
+| Example page template   | `docs/src/pages/examples/[slug].astro`   |
+| Content query helpers   | `docs/src/lib/content-queries.ts`        |
+| Example code loader     | `docs/src/lib/example-code.ts`           |
+| API extraction script   | `docs/src/scripts/extract-api.ts`        |
+| Configuration registry  | `docs/src/data/configurations/index.ts`  |
+| Configuration types     | `docs/src/data/configurations/types.ts`  |
+| JSX workarounds         | `docs/src/global.d.ts`                   |
+| Layouts                 | `docs/src/layouts/`                      |
+| Generated API JSON      | `docs/generated/component-apis/`         |
 
 ---
 
