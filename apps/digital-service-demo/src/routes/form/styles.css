@@ -113,3 +113,48 @@ body {
   outline-offset: 2px;
   border-radius: var(--goa-border-radius-s);
 }
+
+/* =============================================================================
+   Responsive - Mobile (375px) and Tablet (768px)
+   ============================================================================= */
+
+@media (max-width: 623px) {
+  /* StartPage: Stack hero columns */
+  .start-hero {
+    flex-direction: column;
+    gap: var(--goa-space-l);
+  }
+
+  .start-hero__illustration {
+    order: -1;
+    flex-basis: auto;
+  }
+
+  .start-hero__illustration img {
+    max-width: 200px;
+  }
+
+  /* MyApplicationsPage: Stack card actions below ref ID */
+  .app-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--goa-space-s);
+  }
+
+  /* MyApplicationsPage: 3-col metadata → 1-col */
+  .app-card__metadata {
+    grid-template-columns: 1fr;
+    gap: var(--goa-space-m);
+  }
+
+  /* TaskListPage: Reduce card padding */
+  .task-group-card {
+    padding: var(--goa-space-m);
+  }
+
+  /* Keep tertiary/compact buttons auto-width on mobile (primary stays full-width) */
+  .form-set goa-button[type="tertiary"],
+  .form-set goa-button[size="compact"] {
+    width: auto;
+  }
+}

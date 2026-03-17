@@ -64,6 +64,7 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
     <div className="form-set">
       {/* Hero section - two column layout */}
       <div
+        className="start-hero"
         style={{
           display: "flex",
           alignItems: "center",
@@ -91,7 +92,10 @@ export function StartPage({ onStartNew, onContinue }: StartPageProps) {
         </div>
 
         {/* Right column - illustration */}
-        <div style={{ flex: "1 1 40%", display: "flex", justifyContent: "center" }}>
+        <div
+          className="start-hero__illustration"
+          style={{ flex: "1 1 40%", display: "flex", justifyContent: "center" }}
+        >
           <img
             src={isDark ? illustrationDarkSrc : illustrationSrc}
             alt="Person using a computer to apply for services"

@@ -106,7 +106,7 @@ export function CommentsDrawer({
               <GoabText size="heading-xs" mt="none" mb="none">
                 Add comment
               </GoabText>
-              <GoabButtonGroup alignment="end">
+              <GoabButtonGroup alignment="end" gap="compact">
                 <GoabxButton
                   type="tertiary"
                   size="compact"
@@ -202,7 +202,7 @@ export function CommentsDrawer({
                             maxCount={200}
                           />
                         </GoabFormItem>
-                        <GoabButtonGroup alignment="end">
+                        <GoabButtonGroup alignment="end" gap="compact">
                           <GoabxButton
                             type="tertiary"
                             size="compact"
@@ -237,7 +237,7 @@ export function CommentsDrawer({
         open={showDeleteCommentModal}
         calloutVariant="emergency"
         actions={
-          <GoabButtonGroup alignment="end">
+          <GoabButtonGroup alignment="end" gap="compact">
             <GoabxButton
               type="tertiary"
               size="compact"

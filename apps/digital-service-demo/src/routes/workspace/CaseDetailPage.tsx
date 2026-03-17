@@ -9,11 +9,18 @@ import {
   GoabText,
   GoabTooltip,
 } from "@abgov/react-components";
-import { GoabxBadge, GoabxButton, GoabxTabs } from "@abgov/react-components/experimental";
+import {
+  GoabxBadge,
+  GoabxButton,
+  GoabxTabs,
+  GoabxMenuButton,
+  GoabxMenuAction,
+} from "@abgov/react-components/experimental";
 import { CommentsDrawer, Comment } from "../../workspace/components/CommentsDrawer";
 import { CaseDetailTOC, type TOCSection } from "../../workspace/components/CaseDetailTOC";
 import { useScrollState } from "../../workspace/contexts/ScrollStateContext";
 import { usePushDrawer } from "../../workspace/contexts/PushDrawerContext";
+import { useMenu } from "../../workspace/contexts/MenuContext";
 import { CaseDetailHeader } from "./CaseDetailHeader";
 import { supabase, CaseWithSubmission } from "../../lib/supabase";
 import { getStatusBadgeType } from "../../workspace/utils/caseAdapter";
@@ -58,6 +65,7 @@ export function CaseDetailPage() {
   const [isCommentsDrawerOpen, setIsCommentsDrawerOpen] = useState(false);
   const [comments, setComments] = useState<Comment[]>(initialComments);
   const { scrollPosition } = useScrollState();
+  const { isMobile, setMenuOpen } = useMenu();
   const {
     isOpen: isDrawerOpen,
     openDrawer,
@@ -431,6 +439,20 @@ export function CaseDetailPage() {
   const headerActions = useMemo(
     () => (
       <>
+        {caseData?.assigned_worker && (
+          <GoabxMenuButton
+            text="Assigned to Me"
+            type="tertiary"
+            size="compact"
+            onAction={(detail) => {
+              if (detail.action === "unassign") {
+                unassign();
+              }
+            }}
+          >
+            <GoabxMenuAction text="Unassign" action="unassign" icon="person-remove" />
+          </GoabxMenuButton>
+        )}
         {canAssign && (
           <GoabxButton
             type="secondary"
@@ -456,7 +478,15 @@ export function CaseDetailPage() {
         </GoabxButton>
       </>
     ),
-    [comments.length, canAssign, canTakeAction, isAssigning, isDrawerOpen, openDrawer],
+    [
+      comments.length,
+      canAssign,
+      canTakeAction,
+      isAssigning,
+      isDrawerOpen,
+      openDrawer,
+      caseData?.assigned_worker,
+    ],
   );
 
   const SkeletonAccordion = () => (
@@ -512,13 +542,13 @@ export function CaseDetailPage() {
       <div className="case-detail__page_template">
         {/* Sticky header with name, status badges, and actions */}
         <div
+          className="case-detail__sticky-header"
           style={{
             position: "sticky",
             top: 0,
             zIndex: 10,
             backgroundColor:
               "var(--case-detail-header-bg, var(--goa-color-greyscale-white))",
-            padding: "var(--goa-space-m) var(--goa-space-xl)",
             borderBottom: isScrolled
               ? "1px solid var(--goa-color-greyscale-100)"
               : "none",
@@ -527,6 +557,7 @@ export function CaseDetailPage() {
           }}
         >
           <div
+            className="case-detail__sticky-header-inner"
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -536,18 +567,30 @@ export function CaseDetailPage() {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              {isMobile && (
+                <GoabIconButton
+                  icon="menu"
+                  size="medium"
+                  variant="dark"
+                  onClick={() => setMenuOpen(true)}
+                  ariaLabel="Open menu"
+                />
+              )}
               <GoabText size="heading-m" mb="none" mt="none">
                 {isLoading ? "Loading..." : citizenName}
               </GoabText>
               <CaseDetailHeader
                 referenceNumber={caseData?.submissions?.reference_number}
                 statuses={getStatusBadges()}
-                assignedTo={caseData?.assigned_worker}
-                onUnassign={unassign}
                 isLoading={isLoading}
               />
             </div>
-            <div style={{ display: "flex", gap: "0.5rem" }}>{headerActions}</div>
+            <div
+              className="case-detail__header-actions"
+              style={{ display: "flex", gap: "0.5rem" }}
+            >
+              {headerActions}
+            </div>
           </div>
         </div>
 

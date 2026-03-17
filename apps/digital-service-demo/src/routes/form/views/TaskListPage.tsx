@@ -164,6 +164,7 @@ type TaskGroupProps = {
 function TaskGroup({ number, title, locked, lockedMessage, children }: TaskGroupProps) {
   return (
     <div
+      className="task-group-card"
       style={{
         border: "1px solid var(--goa-color-greyscale-150)",
         borderRadius: "12px",

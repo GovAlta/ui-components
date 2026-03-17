@@ -34,8 +34,7 @@
    ============================================================================ */
 
 .push-drawer-container {
-  /* Padding always present - only width animates */
-  padding: 20px 20px 20px 0;
+  padding: 0;
   width: 0;
   min-width: 0;
   height: 100%;
@@ -43,7 +42,8 @@
   overflow: hidden;
   transition:
     width 0.25s ease-out,
-    min-width 0.25s ease-out;
+    min-width 0.25s ease-out,
+    padding 0.25s ease-out;
   /* Anchor content to the right so it reveals from the right edge */
   display: flex;
   justify-content: flex-end;
@@ -55,6 +55,7 @@
 
 /* Open state - expand to drawer width + padding */
 .push-drawer-container--open {
+  padding: 20px 20px 20px 0;
   width: calc(352px + 20px); /* drawer width + right padding */
   min-width: calc(352px + 20px);
 }
@@ -70,6 +71,53 @@
   background: var(--goa-color-greyscale-white);
   /* Remove the header bottom border inside the drawer */
   --goa-color-greyscale-200: transparent;
+}
+
+/* Below 1024px: goa-push-drawer switches to goa-drawer (modal) internally.
+   Container should not animate width - the modal handles its own overlay. */
+@media (max-width: 1023px) {
+  .push-drawer-container {
+    overflow: visible;
+  }
+
+  .push-drawer-container--open {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .push-drawer-clip {
+    overflow: visible;
+    border: none;
+    background: none !important;
+    border-radius: 0;
+    width: 0;
+    min-width: 0;
+  }
+}
+
+/* Mobile: Push drawer becomes full-width overlay */
+@media (max-width: 623px) {
+  .push-drawer-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 200;
+    padding: 0;
+    height: 100%;
+  }
+
+  .push-drawer-container--open {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .push-drawer-clip {
+    width: 100%;
+    min-width: 100%;
+    border-radius: 0;
+    border: none;
+  }
 }
 
 /* Table cell utilities */
@@ -348,6 +396,7 @@
   display: flex;
   flex-shrink: 0;
   gap: var(--goa-space-s);
+  align-items: center;
 }
 
 /* Tabs in filter section - remove bottom margin from shadow DOM */
@@ -969,6 +1018,19 @@
   gap: var(--goa-space-s);
   flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+/* Prevent header action buttons from going full-width on mobile */
+.page-header__actions goa-button,
+.page-header__actions goax-button {
+  width: auto;
+}
+
+/* Prevent buttons in drawers/panels/modals from going full-width on mobile */
+.push-drawer-clip goa-button,
+goa-drawer goa-button,
+goa-modal goa-button {
+  width: auto;
 }
 
 /* Allow actions to expand (e.g., search input in header) */

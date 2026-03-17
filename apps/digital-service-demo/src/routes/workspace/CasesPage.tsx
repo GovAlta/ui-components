@@ -678,7 +678,7 @@ export function CasesPage() {
               type="tertiary"
               size="compact"
               leadingIcon={isCompactToolbar ? "swap-vertical" : undefined}
-              text={isCompactToolbar ? "" : "Sort"}
+              text={isCompactToolbar ? undefined : "Sort"}
               onAction={(e: GoabMenuButtonOnActionDetail) => handleSortAction(e.action)}
             >
               <GoabxMenuAction

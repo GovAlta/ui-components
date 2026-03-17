@@ -261,6 +261,23 @@
   margin-top: var(--goa-space-s);
 }
 
+/* Default sticky header padding */
+.case-detail__sticky-header {
+  padding: var(--goa-space-m) var(--goa-space-xl);
+}
+
+/* Name never wraps */
+.case-detail__sticky-header-inner goa-text {
+  white-space: nowrap;
+}
+
+/* Hide PageHeader when side menu is gone - hamburger is in the sticky header instead */
+@media (max-width: 623px) {
+  .mobile-content-container:has(.case-detail__page_template) > .page-header {
+    display: none;
+  }
+}
+
 @media (max-width: 623px) {
   .case-detail__page_template > .case-detail__page_content {
     padding: var(--goa-space-m) 16px;
@@ -268,5 +285,52 @@
 
   .page-header--collapsed.page-header--with-toolbar .page-header__content {
     flex-shrink: initial;
+  }
+
+  /* Match PageHeader mobile padding exactly */
+  .case-detail__sticky-header {
+    padding: var(--goa-space-m) 16px;
+  }
+
+  /* Stack: name row → tombstone row → actions row */
+  .case-detail__sticky-header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--goa-space-s);
+  }
+
+  /* Name row: hamburger + name on one line, always full width */
+  .case-detail__sticky-header-inner > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-xs);
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  /* Align hamburger icon to content edge (same as PageHeader) */
+  .case-detail__sticky-header-inner > div:first-child > goa-icon-button:first-child {
+    margin-left: -12px;
+  }
+
+  /* Name stays on one line */
+  .case-detail__sticky-header-inner > div:first-child > goa-text {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Tombstone (badge + reference + assigned to) flows inline on its own row */
+  .case-detail-header__tombstone {
+    width: 100%;
+  }
+
+  /* Actions row: buttons stay inline and left-aligned */
+  .case-detail__header-actions {
+    justify-content: flex-start;
+    align-self: flex-start;
+  }
+
+  .case-detail__header-actions goa-button {
+    width: auto;
   }
 }

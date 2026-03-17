@@ -8,7 +8,7 @@ interface MenuContextType {
 
 export const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
-const MOBILE_BREAKPOINT = 768;
+const MOBILE_BREAKPOINT = 624; // Matches WorkSideMenu's internal @media (--mobile) at 623px
 
 export function MenuProvider({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);

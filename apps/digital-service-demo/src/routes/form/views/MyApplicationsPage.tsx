@@ -153,6 +153,7 @@ export function MyApplicationsPage({
             >
               {/* Top row: Reference ID + Actions */}
               <div
+                className="app-card__header"
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -185,6 +186,7 @@ export function MyApplicationsPage({
 
               {/* Bottom row: 3-column metadata */}
               <div
+                className="app-card__metadata"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr 1fr",
