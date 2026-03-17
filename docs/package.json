@@ -9,6 +9,7 @@
     "build:search-index": "npx tsx src/scripts/build-search-index.ts",
     "extract-api": "npx tsx src/scripts/extract-api.ts --all",
     "preview": "astro preview",
+    "generate-previews": "npx tsx src/scripts/generate-preview-images.ts",
     "astro": "astro"
   },
   "dependencies": {
