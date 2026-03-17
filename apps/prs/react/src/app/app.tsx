@@ -258,7 +258,7 @@ export function App() {
                   label="2440 MenuButton Icon"
                   url="/features/2440"
                 />
-                <GoabxWorkSideMenuItem label="2469 Push Drawer" url="/features/2469" />
+                <GoabxWorkSideMenuItem label="2469/3580 Push Drawer" url="/features/2469" />
                 <GoabxWorkSideMenuItem
                   label="2492 TextArea onBlur"
                   url="/features/2492"

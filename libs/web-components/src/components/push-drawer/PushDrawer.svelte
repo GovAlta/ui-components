@@ -44,9 +44,11 @@
     {heading}
     {version}
   >
-    <span slot="actions">
-      <slot name="actions" />
-    </span>
+    {#if $$slots.actions}
+      <span slot="actions">
+        <slot name="actions" />
+      </span>
+    {/if}
     <slot />
   </goa-drawer>
 {:else}
@@ -58,9 +60,11 @@
     {heading}
     {version}
   >
-    <span slot="actions">
-      <slot name="actions" />
-    </span>
+    {#if $$slots.actions}
+      <span slot="actions">
+        <slot name="actions" />
+      </span>
+    {/if}
     <slot />
   </goa-push-drawer-internal>
 {/if}
