@@ -8,7 +8,6 @@ import autoprefixer from "autoprefixer";
 import { postcssReplace } from "./utils/postcss-replace";
 
 export default defineConfig(({ mode }) => {
-
   const env = loadEnv(mode, process.cwd());
   const isDev = env.VITE_DEV === "true";
 
@@ -25,19 +24,19 @@ export default defineConfig(({ mode }) => {
           }),
           postcssReplace({
             pattern: /\(--mobile\)/g,
-            replaceWith: "(max-width: 623px)"
+            replaceWith: "(max-width: 623px)",
           }),
           postcssReplace({
             pattern: /\(--mobile\)/g,
-            replaceWith: "(max-width: 623px)"
+            replaceWith: "(max-width: 623px)",
           }),
           postcssReplace({
             pattern: /\(--mobile\)/g,
-            replaceWith: "(max-width: 623px)"
+            replaceWith: "(max-width: 623px)",
           }),
           postcssReplace({
             pattern: /\(--mobile\)/g,
-            replaceWith: "(max-width: 623px)"
+            replaceWith: "(max-width: 623px)",
           }),
           postcssReplace({
             pattern: /\(--not-mobile\)/g,
@@ -56,8 +55,8 @@ export default defineConfig(({ mode }) => {
             replaceWith: "(max-width: 1023px)",
           }),
           autoprefixer(),
-        ]
-      }
+        ],
+      },
     },
 
     plugins: [
@@ -98,7 +97,7 @@ export default defineConfig(({ mode }) => {
               return "index.css";
             }
             return info.name;
-          }
+          },
         },
         external: [],
       },
@@ -118,5 +117,5 @@ export default defineConfig(({ mode }) => {
         provider: "v8",
       },
     },
-  }
+  };
 });

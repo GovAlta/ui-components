@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { vi } from "vitest";
+import { expect, describe, it, vi } from "vitest";
 import { GoabMenuAction, GoabMenuButton } from "../src";
 import { GoabxMenuButton, GoabxMenuAction } from "../src/experimental";
 
@@ -24,14 +24,20 @@ describe("MenuButton", () => {
 
     const result = render(<Component />);
     const menuButton = result.getByTestId("menu-button");
-    const menuAction = result.getByTestId(/menu-action-*/);
 
     // Test each menu action
     for (let i = 1; i <= 3; i++) {
+      const menuAction = result.getByTestId(`menu-action-${i}`);
+
       await menuButton.click();
 
+      // Wait for the menu to open
+      await vi.waitFor(() => {
+        expect(menuAction).toBeVisible();
+      });
+
       // Click the action
-      await menuAction.nth(i - 1).click();
+      await menuAction.click();
 
       // Verify the correct action was triggered
       await vi.waitFor(() => {
@@ -39,6 +45,11 @@ describe("MenuButton", () => {
           action: `action${i}`,
         });
         expect(onAction).toHaveBeenCalledTimes(i);
+      });
+
+      // Wait for the menu to close
+      await vi.waitFor(() => {
+        expect(menuAction).not.toBeVisible();
       });
     }
 
@@ -90,9 +101,11 @@ describe("MenuButton", () => {
     const secondAction = result.getByTestId("second-action");
 
     // open menu
+    console.log("[spec] Clicking menu button to open menu");
     await menuButton.click();
 
     // Click first action
+    console.log("[spec] Clicking first action");
     await firstAction.click();
 
     await vi.waitFor(() => {
@@ -103,9 +116,11 @@ describe("MenuButton", () => {
     });
 
     // Menu should close after clicking an action, so click again to reopen
+    console.log("[spec] Clicking menu button to reopen menu");
     await menuButton.click();
 
     // Click second action
+    console.log("[spec] Clicking second action");
     await secondAction.click();
 
     await vi.waitFor(() => {
@@ -159,7 +174,11 @@ describe("GoabxMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabxMenuButton leadingIcon="ellipsis-horizontal" testId="icon-menu" onAction={onAction}>
+        <GoabxMenuButton
+          leadingIcon="ellipsis-horizontal"
+          testId="icon-menu"
+          onAction={onAction}
+        >
           <GoabxMenuAction text="View" action="view" />
           <GoabxMenuAction text="Delete" action="delete" icon="trash" />
         </GoabxMenuButton>
@@ -200,12 +219,42 @@ describe("GoabxMenuButton", () => {
     });
   });
 
+  it("should render with variant destructive and correct background color", async () => {
+    const Component = () => {
+      return (
+        <GoabxMenuButton text="Destructive" variant="destructive">
+          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabxMenuButton>
+      );
+    };
+
+    const result = render(<Component />);
+    const menuButton = result.getByText("Destructive");
+    expect(menuButton).toBeDefined();
+
+    await vi.waitFor(() => {
+      const button = menuButton
+        .element()
+        .closest("goa-button")
+        ?.shadowRoot?.querySelector("button");
+
+      expect(button).toBeDefined();
+      const styles = window.getComputedStyle(button!);
+      expect(styles.backgroundColor).toBe("rgb(218, 41, 28)");
+    });
+  });
+
   it("should render icon-only with size compact", async () => {
     const onAction = vi.fn();
 
     const Component = () => {
       return (
-        <GoabxMenuButton leadingIcon="ellipsis-horizontal" size="compact" testId="icon-compact-menu" onAction={onAction}>
+        <GoabxMenuButton
+          leadingIcon="ellipsis-horizontal"
+          size="compact"
+          testId="icon-compact-menu"
+          onAction={onAction}
+        >
           <GoabxMenuAction text="Assign" action="assign" />
           <GoabxMenuAction text="Delete" action="delete" icon="trash" />
         </GoabxMenuButton>

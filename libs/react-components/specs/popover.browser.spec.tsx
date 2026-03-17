@@ -121,12 +121,14 @@ describe("Popover", () => {
     const contentB = result.getByTestId("content-b");
 
     // Open Popover A
+    console.log("Clicking Target A to open Popover A");
     await targetA.click();
     await vi.waitFor(() => {
       expect(contentA).toBeVisible();
     });
 
     // Open Popover B — should auto-close Popover A
+    console.log("Clicking Target B to open Popover B (should close Popover A)");
     await targetB.click();
     await vi.waitFor(() => {
       expect(contentB).toBeVisible();

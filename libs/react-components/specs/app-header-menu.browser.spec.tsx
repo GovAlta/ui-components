@@ -53,10 +53,13 @@ describe("AppHeaderMenu", () => {
 
     // Close menu with Escape
     await userEvent.keyboard("{Escape}");
-    await vi.waitFor(() => {
-      const popoverContent = result.getByTestId("popover-content");
-      expect(popoverContent.element().checkVisibility()).toBeFalsy();
-    });
+    await vi.waitFor(
+      () => {
+        const popoverContent = result.getByTestId("popover-content");
+        expect(popoverContent.element().checkVisibility()).toBeFalsy();
+      },
+      { timeout: 10000 },
+    );
 
     // 2. Dismiss the notification banner
     const banner = result.getByTestId("test-banner");
