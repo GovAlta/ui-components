@@ -318,14 +318,16 @@
     );
   }
 
-  /* V2 focus state - single blue border only (no layered borders) */
+  /* V2 focus state - offset outline ring consistent with button focus style */
   .v2.root:focus-within {
-    box-shadow: var(--goa-text-area-border-focus);
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: var(--goa-space-3xs);
   }
   .v2.error:focus,
   .v2.error:focus-within,
   .v2.error:focus-within:hover {
-    box-shadow: var(--goa-text-area-border-focus);
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: var(--goa-space-3xs);
   }
 
   /* V2 compact size variant */

@@ -957,10 +957,11 @@
     box-shadow: var(--goa-dropdown-border), var(--goa-dropdown-border-focus);
   }
 
-  /* V2: Focus state has a single border */
+  /* V2: Focus state - offset outline ring consistent with button focus style */
   .v2 .dropdown-input-group:has(input:focus-visible),
   .v2 .dropdown-input-group.error:has(:focus-visible) {
-    box-shadow: var(--goa-dropdown-border-focus);
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: var(--goa-space-3xs);
   }
 
   .dropdown-input-group.error,

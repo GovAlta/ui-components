@@ -568,9 +568,10 @@
       var(--goa-text-input-border), var(--goa-text-input-border-focus);
   }
 
-  /* V2: Focus state shows only blue focus border (no default border) */
+  /* V2: Focus state - offset outline ring consistent with button focus style */
   .container.v2 .goa-input:has(input:focus-visible) {
-    box-shadow: var(--goa-text-input-border-focus);
+    outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: var(--goa-space-3xs);
   }
 
   /* type=range does not have an outline/box-shadow */
