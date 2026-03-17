@@ -133,4 +133,90 @@ describe("GoAPushDrawerInternal", () => {
 
     consoleErrorSpy.mockRestore();
   });
+
+  describe("V2", () => {
+    it("should apply v2 class when version is 2", async () => {
+      const result = render(PushDrawerInternalWrapper, {
+        props: {
+          testId: "test-drawer",
+          open: true,
+          version: "2",
+        },
+      });
+
+      const drawer = result.getByTestId("test-drawer");
+      await waitFor(() => {
+        expect(drawer).toHaveClass("v2");
+      });
+    });
+
+    it("should not apply v2 class when version is 1", async () => {
+      const result = render(PushDrawerInternalWrapper, {
+        props: {
+          testId: "test-drawer",
+          open: true,
+          version: "1",
+        },
+      });
+
+      const drawer = result.getByTestId("test-drawer");
+      await waitFor(() => {
+        expect(drawer).not.toHaveClass("v2");
+      });
+    });
+
+    it("should use heading-s for V2 heading", async () => {
+      const result = render(PushDrawerInternalWrapper, {
+        props: {
+          testId: "test-drawer",
+          open: true,
+          version: "2",
+          heading: "Test Heading",
+        },
+      });
+
+      const heading = result.container.querySelector("goa-text");
+      await waitFor(() => {
+        expect(heading?.getAttribute("size")).toBe("heading-s");
+      });
+    });
+
+    it("should use heading-m for V1 heading", async () => {
+      const result = render(PushDrawerInternalWrapper, {
+        props: {
+          testId: "test-drawer",
+          open: true,
+          version: "1",
+          heading: "Test Heading",
+        },
+      });
+
+      const heading = result.container.querySelector("goa-text");
+      await waitFor(() => {
+        expect(heading?.getAttribute("size")).toBe("heading-m");
+      });
+    });
+
+    it("should validate version prop on mount", async () => {
+      const consoleErrorSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {
+          /* noop */
+        });
+
+      render(PushDrawerInternalWrapper, {
+        props: {
+          testId: "test-drawer",
+          open: true,
+          version: "3" as any,
+        },
+      });
+
+      await waitFor(() => {
+        expect(consoleErrorSpy).toHaveBeenCalled();
+      });
+
+      consoleErrorSpy.mockRestore();
+    });
+  });
 });
