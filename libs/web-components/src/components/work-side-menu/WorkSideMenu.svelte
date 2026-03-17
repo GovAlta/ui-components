@@ -45,7 +45,6 @@
   // *******
 
   let _isScrolling = false;
-  let _showAccountMenu = false;
   let _showTooltip = false;
 
   let _menuEl: HTMLElement;
@@ -156,21 +155,6 @@
     }, 300);
   }
 
-  // Account menu
-  async function openAccountMenu() {
-    if (_showAccountMenu) return;
-    _showAccountMenu = true;
-
-    await tick();
-    document.body.addEventListener("click", closeAccountMenu);
-  }
-
-  function closeAccountMenu() {
-    if (!_showAccountMenu) return;
-    _showAccountMenu = false;
-    document.body.removeEventListener("click", closeAccountMenu);
-  }
-
   // Current menu item
   function setCurrentUrl() {
     const currentEl = getMatchedLink(_menuLinks, window.location);
@@ -195,34 +179,12 @@
       case "[":
         if (e?.ctrlKey) dispatch(_rootEl, "_toggle", {}, {});
         break;
-      case "Escape":
-        closeAccountMenu();
-        break;
-    }
-  }
-
-  function handleProfileClick(e: Event) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!_showAccountMenu) {
-      openAccountMenu();
-    } else {
-      closeAccountMenu();
     }
   }
 
   function handleToggleClick(e: Event) {
     e.preventDefault();
-    closeAccountMenu();
-    window.removeEventListener("click", closeAccountMenu);
     dispatch(_rootEl, "_toggle", {}, { bubbles: true });
-  }
-
-  function handleAccountFocusOut(e: FocusEvent) {
-    const target = e.relatedTarget as HTMLElement;
-    if (target?.closest?.('[slot="account"]') || target?.closest?.('.profile')) return;
-    closeAccountMenu();
   }
 
   function handleWindowResize() {
@@ -262,7 +224,6 @@
     window.removeEventListener("popstate", setCurrentUrl);
     window.removeEventListener("keydown", handleKeyDown);
     window.removeEventListener("resize", handleWindowResize);
-    document.body.removeEventListener("click", closeAccountMenu);
   }
 </script>
 
@@ -316,40 +277,30 @@
         {/if}
 
         {#if $$slots.account}
-          <div
-            class="account-menu"
-            role="presentation"
-            class:show={_showAccountMenu}
-            on:mouseleave={handleMouseLeave}
-            on:focusout={handleAccountFocusOut}
-          >
+          <goa-popover minwidth="240px">
+            <button
+              class="profile"
+              slot="target"
+            >
+              <div class="profile-image">
+                <goa-icon
+                  size="large"
+                  type="person-circle"
+                  fillcolor="var(--goa-color-greyscale-400)"
+                  arialabel={userName}
+                />
+              </div>
+
+              <div class="profile-details">
+                <div class="profile-name">{userName}</div>
+                <div class="profile-secondary">{userSecondaryText}</div>
+              </div>
+              <div class="profile-chevron">
+                <goa-icon size="small" type="chevron-down" />
+              </div>
+            </button>
             <slot name="account"></slot>
-          </div>
-
-          <button
-            class="profile"
-            on:click={handleProfileClick}
-            on:focusout={handleAccountFocusOut}
-            aria-haspopup="true"
-            aria-expanded={_showAccountMenu}
-          >
-            <div class="profile-image">
-              <goa-icon
-                size="large"
-                type="person-circle"
-                fillcolor="var(--goa-color-greyscale-400)"
-                arialabel={userName}
-              />
-            </div>
-
-            <div class="profile-details">
-              <div class="profile-name">{userName}</div>
-              <div class="profile-secondary">{userSecondaryText}</div>
-            </div>
-            <div class="profile-chevron">
-              <goa-icon size="small" type="chevron-down" />
-            </div>
-          </button>
+          </goa-popover>
         {/if}
         <div class="toggle-menu">
           <button
