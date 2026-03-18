@@ -11,6 +11,8 @@
 import { getCollection, render } from 'astro:content';
 import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
+import { TableOfContents } from '../../components/TableOfContents';
+import { getExampleCode } from '../../lib/example-code';
 
 // Generate static paths for all examples
 export async function getStaticPaths() {
@@ -27,6 +29,10 @@ const { data } = example;
 
 // Render the MDX content
 const { Content } = await render(example);
+
+// Check if this example has code files
+const code = await getExampleCode(example.slug);
+const hasCode = !!(code.react || code.angular || code.webComponents);
 
 // Get related examples if defined
 let relatedExamples: typeof example[] = [];
@@ -88,15 +94,40 @@ function formatComponentName(component: string): string {
       </div>
     </header>
 
-    <!-- Live Preview + Code -->
-    <section class="example-preview-section">
-      <ExampleDisplay example={example} titleSize="large" />
-    </section>
+    <!-- Live Preview + Code (only if code files exist) -->
+    {hasCode ? (
+      <section class="example-preview-section">
+        <ExampleDisplay example={example} titleSize="large" />
+      </section>
+    ) : data.previewImage ? (
+      <section class="example-hero-section">
+        <h1 class="example-title">{data.title}</h1>
+        {data.description && (
+          <p class="example-description" set:html={data.description} />
+        )}
+        <div class="example-hero-image">
+          <img src={data.previewImage} alt={`${data.title} example`} />
+        </div>
+      </section>
+    ) : null}
 
     <!-- MDX Content (When to use, Considerations, etc.) -->
-    <section class="example-content">
-      <Content />
-    </section>
+    {!hasCode ? (
+      <div class="content-with-toc">
+        <section class="example-content">
+          <Content />
+        </section>
+        <aside class="example-toc">
+          <div class="example-toc-sticky">
+            <TableOfContents client:only="react" cssQuery=".example-content h2[id]" />
+          </div>
+        </aside>
+      </div>
+    ) : (
+      <section class="example-content">
+        <Content />
+      </section>
+    )}
 
     <!-- Related Examples -->
     {relatedExamples.length > 0 && (
@@ -117,7 +148,7 @@ function formatComponentName(component: string): string {
 
 <style>
   .example-page {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
@@ -148,9 +179,34 @@ function formatComponentName(component: string): string {
     line-height: 1.2;
   }
 
+  .example-description {
+    font-size: 1.125rem;
+    color: var(--goa-color-text-secondary, #666);
+    margin: var(--goa-space-s, 0.5rem) 0 var(--goa-space-l, 1.5rem);
+    max-width: 688px;
+    line-height: 1.6;
+  }
+
   /* Preview Section */
   .example-preview-section {
     margin-bottom: var(--goa-space-xl, 2rem);
+  }
+
+  /* Hero section (when no code preview) */
+  .example-hero-section {
+    margin-bottom: var(--goa-space-m, 1rem);
+  }
+
+  .example-hero-image {
+    margin-top: var(--goa-space-l, 1.5rem);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-hero-image img {
+    width: 100%;
+    display: block;
   }
 
   /* Content Section */
@@ -160,7 +216,7 @@ function formatComponentName(component: string): string {
 
   .example-content :global(h2) {
     font-size: 1.25rem;
-    font-weight: var(--goa-font-weight-semi-bold);
+    font-weight: 600;
     margin: var(--goa-space-xl, 2rem) 0 var(--goa-space-m, 1rem);
     color: var(--goa-color-text-default, #333);
   }
@@ -186,6 +242,33 @@ function formatComponentName(component: string): string {
     margin-bottom: var(--goa-space-xs, 0.25rem);
   }
 
+  /* Content + TOC grid (for long-form examples without code) */
+  .content-with-toc {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: var(--goa-space-2xl, 2.5rem);
+  }
+
+  .example-toc {
+    position: relative;
+  }
+
+  .example-toc-sticky {
+    position: sticky;
+    top: var(--goa-space-l, 1.5rem);
+    padding-top: var(--goa-space-m, 1rem);
+  }
+
+  @media (max-width: 1024px) {
+    .content-with-toc {
+      grid-template-columns: 1fr;
+    }
+
+    .example-toc {
+      display: none;
+    }
+  }
+
   /* Related Examples */
   .related-examples {
     border-top: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
@@ -194,7 +277,7 @@ function formatComponentName(component: string): string {
 
   .related-examples h2 {
     font-size: 1.25rem;
-    font-weight: var(--goa-font-weight-semi-bold);
+    font-weight: 600;
     margin: 0 0 var(--goa-space-m, 1rem);
     color: var(--goa-color-text-default, #333);
   }
@@ -226,7 +309,7 @@ function formatComponentName(component: string): string {
   }
 
   .related-category {
-    font-size: var(--goa-font-size-2);
+    font-size: 0.875rem;
     color: var(--goa-color-text-secondary, #666);
   }
 </style>

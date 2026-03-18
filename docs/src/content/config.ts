@@ -37,10 +37,14 @@ const components = defineCollection({
     angularSelector: z.string().optional(),
 
     // Child components (shown on same page under separate headings)
-    childComponents: z.array(z.object({
-      slug: z.string(),
-      name: z.string(),
-    })).optional(),
+    childComponents: z
+      .array(
+        z.object({
+          slug: z.string(),
+          name: z.string(),
+        }),
+      )
+      .optional(),
 
     // Visibility
     hidden: z.boolean().optional(), // Hide from navigation and public views
@@ -116,6 +120,7 @@ const examples = defineCollection({
     // Identity
     id: z.string(),
     title: z.string(),
+    description: z.string().optional(),
     slug: z.string().optional(),
 
     // Classification
@@ -129,7 +134,7 @@ const examples = defineCollection({
         "technical",
       ]),
     ),
-    scale: z.enum(["interaction", "task", "page", "service"]),
+    scale: z.enum(["interaction", "task", "page", "product"]),
     userType: z.enum(["citizen", "worker", "both"]),
 
     tags: z.array(z.string()).optional(),

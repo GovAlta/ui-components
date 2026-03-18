@@ -46,7 +46,7 @@ export interface Example {
       | "structure-and-navigation"
       | "technical"
     )[];
-    scale: "interaction" | "task" | "page" | "service";
+    scale: "interaction" | "task" | "page" | "product";
     userType: "citizen" | "worker" | "both";
     tags?: string[];
     components: string[];
@@ -74,7 +74,7 @@ function getScaleBadgeType(
       return "pasture";
     case "flow":
       return "lilac";
-    case "service":
+    case "product":
       return "prairie";
     default:
       return "dawn";
