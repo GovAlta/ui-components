@@ -25,8 +25,9 @@ const sortedExamples = allExamples.sort((a, b) =>
 const examples = sortedExamples.map(example => ({
   slug: example.slug,
   data: example.data,
-  body: example.body,
+  body: example.data.description || example.body,
 }));
+
 ---
 
 <ExamplesPageLayout
@@ -41,6 +42,34 @@ const examples = sortedExamples.map(example => ({
         Common patterns, pages, tasks, component configurations, flows, and more to use as a starting point when creating government digital services.
       </p>
     </header>
+
+    <!-- Service patterns -->
+    <section class="service-patterns">
+      <div class="patterns-row">
+        <a href="/examples/workspace" class="pattern-card">
+          <img src="/images/home/workspace-thumb.png" alt="" class="pattern-image" />
+          <div class="pattern-text">
+            <strong class="pattern-title">Workspace</strong>
+            <span class="pattern-desc">For staff who review, manage, and process cases</span>
+          </div>
+        </a>
+        <a href="/examples/public-form" class="pattern-card">
+          <img src="/images/home/public-form-thumb.png" alt="" class="pattern-image" />
+          <div class="pattern-text">
+            <strong class="pattern-title">Public form</strong>
+            <span class="pattern-desc">For citizens submitting applications and requests</span>
+          </div>
+        </a>
+        <div class="pattern-card disabled">
+          <div class="pattern-image-placeholder"></div>
+          <div class="pattern-text">
+            <strong class="pattern-title">Digital service</strong>
+            <span class="pattern-desc">How workspace and public form connect end-to-end</span>
+            <goa-badge version="2" type="default" content="Coming soon" icon="false" emphasis="subtle" mt="xs"></goa-badge>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Examples Grid (React component) -->
     <ExamplesGrid
@@ -72,5 +101,82 @@ const examples = sortedExamples.map(example => ({
     color: var(--goa-color-text-default, #333);
     margin: 0;
     max-width: 70ch;
+  }
+
+  /* Service patterns */
+  .service-patterns {
+    margin-top: var(--goa-space-xl, 2rem);
+    margin-bottom: var(--goa-space-l, 1.5rem);
+  }
+
+  .patterns-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--goa-space-m, 1rem);
+  }
+
+  .pattern-card {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    border-radius: var(--goa-border-radius-m, 4px);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  a.pattern-card:hover {
+    border-color: var(--goa-color-greyscale-black, #333);
+  }
+
+  a.pattern-card:hover .pattern-title {
+    text-decoration: underline;
+  }
+
+  a.pattern-card:focus-visible {
+    outline: 3px solid var(--goa-color-interactive-focus);
+    outline-offset: 2px;
+  }
+
+  .pattern-card.disabled {
+    opacity: 0.7;
+  }
+
+  .pattern-image,
+  .pattern-image-placeholder {
+    width: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--goa-color-greyscale-100, #f5f5f5);
+  }
+
+  .pattern-text {
+    display: flex;
+    flex-direction: column;
+    padding: var(--goa-space-m, 1rem);
+    min-width: 0;
+  }
+
+
+
+  .pattern-title {
+    font: var(--goa-typography-body-m);
+    font-weight: 600;
+    color: var(--goa-color-text-default, #333);
+  }
+
+  a.pattern-card .pattern-title {
+    color: var(--goa-color-interactive-default, #0070c4);
+  }
+
+  .pattern-desc {
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-text-secondary, #666);
+  }
+
+  @media (max-width: 900px) {
+    .patterns-row {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
