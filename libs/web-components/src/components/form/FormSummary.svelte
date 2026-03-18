@@ -314,6 +314,7 @@
     .label {
       width: 50%;
       font: var(--goa-typography-heading-s);
+      letter-spacing: var(--goa-typography-heading-s-letter-spacing);
     }
     .value {
       width: 50%;
