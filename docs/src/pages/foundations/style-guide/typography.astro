@@ -1,0 +1,249 @@
+---
+/**
+ * Foundations - Style guide - Typography
+ *
+ * Typography guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guide -> Typography.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+---
+
+<DocumentationPageLayout
+  title="Typography"
+  description="Typography guidance and text hierarchy recommendations for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Typography</goa-text>
+  <goa-text size="body-l" mt="none" mb="2xl">
+    The typography system creates a consistent and accessible experience across Government
+    of Alberta digital products. Clear typography, combined with effective content design,
+    improves readability and helps people quickly find and understand information.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="our-fonts">Our fonts</h2>
+
+  <h3 id="acumin-vf">Acumin VF</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Acumin VF is the primary font used across Government of Alberta digital interfaces.
+    Use it for headings, body text, labels, and most interface content.
+  </goa-text>
+
+  <h3 id="roboto-mono">Roboto Mono</h3>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Roboto Mono is used for numeric content where alignment and comparison are important.
+    This font improves readability when displaying numerical data, making it easier to
+    compare figures accurately.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="using-type">Using type</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Typography choices affect how content is read and understood. Follow these guidelines
+    to ensure content is clear, accessible, and consistent across digital products.
+  </goa-text>
+
+  <h3 id="text-styles">Text styles</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    The design system provides predefined <a href="/tokens">text styles</a> for headings, paragraphs,
+    and numeric content.
+  </goa-text>
+
+  <h4 id="headings">Headings</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Seven heading sizes are available to structure content:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>2XL heading</li>
+      <li>XL heading</li>
+      <li>L heading</li>
+      <li>M heading</li>
+      <li>S heading</li>
+      <li>XS heading</li>
+      <li>2XS heading</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use headings to organize content and guide users through the page.
+  </goa-text>
+
+  <h4 id="paragraphs">Paragraphs</h4>
+
+  <goa-text size="heading-2xs" mt="none" mb="none"> Large text </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use as an introductory or lead paragraph at the top of a page.
+  </goa-text>
+
+  <goa-text size="heading-2xs" mb="none">Medium text</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use for the main content and descriptive paragraphs. This is the default body text
+    size in the Design System.
+  </goa-text>
+
+  <goa-text size="heading-2xs" mb="none">Small text</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use sparingly in compact areas such as tables or dense layouts.
+  </goa-text>
+
+  <goa-text size="heading-2xs" mb="none">XSmall text</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use for secondary or less critical content such as terms and conditions.
+  </goa-text>
+
+  <h4 id="links">Links</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    4 link text sizes are available depending on context.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Links use:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Underlined text</li>
+      <li><code>--goa-color-interactive-default</code></li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    This improves usability and accessibility.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="alignment">Alignment</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Left-align all text elements, including:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Headings</li>
+      <li>Body text</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Consistent alignment improves readability and scanning.
+  </goa-text>
+
+  <h3 id="number-alignment">Number alignment</h3>
+
+  <h4 id="right-alignment">Right alignment</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use for numbers in tables containing comparable values, such as financial or
+    statistical data. This helps users compare values more easily.
+  </goa-text>
+
+  <h4 id="left-alignment">Left alignment</h4>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Use for numbers that are not intended to be compared, such as phone numbers or
+    identification numbers.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="capitalization">Capitalization</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use <strong>sentence case</strong> for:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>Headings</li>
+      <li>Body text</li>
+      <li>Links</li>
+      <li>Buttons</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="decoration">Decoration</h2>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Use the defined text styles and font weights. Avoid underlining text unless it is a
+    link.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="line-length">Line length</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    For optimal readability, aim for <strong>45 to 72 characters per line</strong>.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="why-visual-hierarchy-matters">Why visual hierarchy matters</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Visual hierarchy helps users understand content quickly because it:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Shapes how readers see the content</li>
+      <li>Improves readability</li>
+      <li>Highlights important information</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="designing-for-visual-hierarchy">Designing for visual hierarchy</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Consider these key principles for creating effective visual hierarchy:
+  </goa-text>
+
+  <h4 id="structure-content-clearly">Structure content clearly</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use different heading sizes to indicate content importance.</li>
+      <li>
+        Maintain a logical structure from most important to least important information.
+      </li>
+      <li>
+        Ensure headings follow a consistent <strong>2XL</strong> to <strong
+          >2XS hierarchy</strong
+        >
+        to support accessibility.
+      </li>
+    </ul>
+  </goa-text>
+
+  <h4 id="use-emphasis-carefully">Use emphasis carefully</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use variations in size, weight, or style to highlight key information.</li>
+      <li>Highlight critical actions or important information.</li>
+      <li>Create clear distinctions between different content levels.</li>
+    </ul>
+  </goa-text>
+
+  <h4 id="match-typography-to-content-purpose">Match typography to content purpose</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Choose text styles that reflect the intent of the content.</li>
+      <li>Typography should support the message and guide the users&apos; attention.</li>
+    </ul>
+  </goa-text>
+
+  <h4 id="prioritize-readability">Prioritize readability</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>
+        Use body text that supports comfortable reading. In the Design System,
+        <code>--goa-fontSize-4</code> meets the minimum recommended size for body text.
+      </li>
+      <li>Maintain sufficient colour contrast between text and background.</li>
+      <li>Ensure text remains readable across devices and screen sizes.</li>
+    </ul>
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .type-specs-image {
+    border: 1px solid var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-m);
+    display: block;
+    height: auto;
+    margin: 0 0 var(--goa-space-l);
+    max-width: 100%;
+  }
+</style>

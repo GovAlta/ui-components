@@ -1,0 +1,231 @@
+---
+/**
+ * Foundations - Style guide - Layout
+ *
+ * Layout guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guidelines -> Layout.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+---
+
+<DocumentationPageLayout
+  title="Layout"
+  description="Layout guidance for structuring clear, consistent, and responsive Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Layout</goa-text>
+  <goa-text size="body-l" mt="none" mb="2xl">
+    Layout is the structure of a page, it helps people understand content, move through a
+    task, and focus on what matters. Use layout to create clear hierarchy, group related
+    information, and support consistent experiences across services.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="start-with-the-user">Start with the user</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Layout decisions should begin with the people using the service.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Consider who your users are, what they need to accomplish, and how they will engage
+    with the service over time. Some services need to feel immediately clear and intuitive
+    for first-time and occasional users. Others can support more complex structures
+    because users return often and build familiarity through repeated use.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Think about:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>What the user is trying to do</li>
+      <li>How often they use the service</li>
+      <li>How much time they will have to learn the interface</li>
+      <li>Their level of familiarity or expertise</li>
+      <li>What aspects of the experience should be prioritized to help them succeed</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    These questions help determine the kind of service you are designing and the layout
+    that will support it best.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="service-type">Service type</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Choose a layout that matches the type of service you are building.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    The Design System provides templates for the most common service types. These
+    templates package layout, navigation, spacing, and example content so teams can start
+    from a proven structure. The 2 primary service types are Public form and Workspace.
+  </goa-text>
+
+  <goa-callout version="2" type="information" emphasis="low">
+    <goa-text size="body-m" mt="none" mb="m">
+      Workspace and Public form can be adapted to many contexts, but they may not fit
+      every situation.
+    </goa-text>
+    <goa-text size="body-m" mt="none" mb="none">
+      If neither service type fits well, talk to the Design System team before creating
+      something custom. We can help you explore early design decisions, adapt existing
+      patterns where possible, and identify where new guidance may be needed. This also
+      helps the system continue to learn from emerging service contexts.
+    </goa-text>
+  </goa-callout>
+
+  <h3 id="public-form">Public form</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    This layout supports focused task completion. It helps people move through a process
+    one step at a time with clear headings, form content, actions, and progress cues.
+  </goa-text>
+
+  <h4 id="public-form-anatomy">Typical page anatomy includes</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Header</li>
+      <li>Single column content area</li>
+      <li>Footer</li>
+    </ul>
+  </goa-text>
+
+  <h4 id="choose-public-form-when">Choose Public form when</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>The user is completing a guided step-by-step task</li>
+      <li>The page should stay focused and distraction-free</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="l">
+    <a href="/examples/public-form">View Public form documentation</a>
+  </goa-text>
+  <img
+    src="/images/foundations/style-guide/public-form-1.svg"
+    alt="Public form start page"
+    width="500"
+    height="592"
+  />
+  <img
+    src="/images/foundations/style-guide/public-form-2.svg"
+    alt="Public form example question"
+    width="500"
+    height="246"
+  />
+
+  <h3 id="workspace">Workspace</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use a workspace layout for internal tools and productivity services.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    This layout supports navigation, data views, task panels, and ongoing work. It is
+    better suited to products where users manage information, review records, switch
+    between views, or complete repeated tasks.
+  </goa-text>
+
+  <h4 id="workspace-anatomy">Typical page anatomy includes</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul class="workspace-anatomy-list">
+      <li>Work side menu</li>
+      <li>Page title and actions</li>
+      <li>
+        Content area
+        <ul>
+          <li>Dashboards</li>
+          <li>
+            Multiple data views
+            <ul>
+              <li>Cards</li>
+              <li>Tables</li>
+              <li>Lists</li>
+            </ul>
+          </li>
+          <li>Toolbars</li>
+        </ul>
+      </li>
+      <li>Panel for supporting or contextual content</li>
+    </ul>
+  </goa-text>
+
+  <h4 id="choose-workspace-when">Choose Workspace when</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>The user is managing information or reviewing records</li>
+      <li>The service supports repeated or ongoing tasks</li>
+      <li>The service needs navigation, utilities, and supporting panels</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="l">
+    <a href="/examples/workspace">View Workspace documentation</a>
+  </goa-text>
+  <img
+    src="/images/foundations/style-guide/workspace-1.svg"
+    alt="Workspace table view"
+    width="500"
+    height="324"
+  />
+  <img
+    src="/images/foundations/style-guide/workspace-2.svg"
+    alt="Workspace dashboard view"
+    width="500"
+    height="278"
+  /><br />
+  <img
+    src="/images/foundations/style-guide/workspace-3.svg"
+    alt="Workspace list view"
+    width="164"
+    height="452"
+  />
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="keep-layouts-simple">Keep layouts simple</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Start with the simplest structure that supports the task.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Use the fewest layout regions needed</li>
+      <li>Group related content into clear sections</li>
+      <li>Use spacing tokens to add consistent space throughout the interface</li>
+      <li>Use a single-column layout when it supports the task</li>
+      <li>Start with an existing template before creating a custom structure</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="design-for-responsiveness">Design for responsiveness</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Layouts should adapt across screen sizes without losing clarity.
+  </goa-text>
+
+  <h3 id="public-form-considerations">Public form considerations</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use a single-column layout to support a clear reading flow</li>
+      <li>Keep the main task and primary actions in a predictable location</li>
+      <li>Avoid adding secondary regions that compete for attention</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="workspace-considerations">Workspace considerations</h3>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Keep the main content area as the focus</li>
+      <li>
+        Let supporting panels and secondary regions move below or hide as space becomes
+        limited
+      </li>
+      <li>Ensure secondary content is still easy to access</li>
+      <li>Maintain a clear and predictable page structure across screen sizes</li>
+    </ul>
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .workspace-anatomy-list ul {
+    margin-bottom: var(--goa-space-xs);
+  }
+</style>
