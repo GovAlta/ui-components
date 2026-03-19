@@ -4,7 +4,7 @@
  * Unified site navigation with parent/sub-menu state switching.
  *
  * Navigation behavior:
- * - Components, Get started: Has submenu (many pages)
+ * - Components, Get started, Foundations: has submenu (many pages)
  * - Tokens: Direct link, stays on parent menu, highlights "Tokens"
  * - Examples: Direct link, stays on parent menu, highlights "Examples"
  *
@@ -170,7 +170,7 @@ export function SiteNav({
 
   const handleSelectSection = useCallback(
     (section: MenuSection) => {
-      // Only components has a submenu - switch to it
+      // Submenu sections switch the menu into their dedicated view.
       if (SUBMENU_SECTIONS.includes(section)) {
         setMenuLevel(section);
         // Auto-expand when entering submenu while collapsed (icons aren't descriptive enough)

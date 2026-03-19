@@ -14,14 +14,49 @@ import {
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
 // Top-level pages (not in a group)
-const TOP_PAGES = [{ label: "Overview", url: "/foundations" }];
+const TOP_PAGES = [
+  { label: "Design at GoA", url: "/foundations" },
+  { label: "Accessibility", url: "/foundations/accessibility" },
+  { label: "Brand guidelines", url: "/foundations/brand-guidelines" },
+];
 
 // Grouped sections with sub-pages
 const PAGE_GROUPS = [
   {
     name: "Style guide",
     slug: "style-guide",
-    pages: [{ label: "Motion", url: "/foundations/style-guide/motion" }],
+    pages: [
+      { label: "Colour", url: "/foundations/style-guide/colour" },
+      { label: "Iconography", url: "/foundations/style-guide/iconography" },
+      { label: "Illustration", url: "/foundations/style-guide/illustration" },
+      { label: "Photography", url: "/foundations/style-guide/photography" },
+      { label: "Logo", url: "/foundations/style-guide/logo" },
+      { label: "Typography", url: "/foundations/style-guide/typography" },
+      { label: "Motion", url: "/foundations/style-guide/motion" },
+      { label: "Layout", url: "/foundations/style-guide/layout" },
+    ],
+  },
+  {
+    name: "Content guidelines",
+    slug: "content-guidelines",
+    pages: [
+      {
+        label: "Date format",
+        url: "/foundations/content-guidelines/date-format",
+      },
+      {
+        label: "Capitalization",
+        url: "/foundations/content-guidelines/capitalization",
+      },
+      {
+        label: "Error messages",
+        url: "/foundations/content-guidelines/error-messages",
+      },
+      {
+        label: "Helper text",
+        url: "/foundations/content-guidelines/helper-text",
+      },
+    ],
   },
 ];
 

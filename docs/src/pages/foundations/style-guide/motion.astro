@@ -7,7 +7,7 @@
 
 import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
 import { CodeCopy } from "../../../components/CodeCopy";
-import DropInCallout from '../../../components/DropInCallout.astro';
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
 import { DesktopOnly, MobileOnly, ResponsiveBlock } from "../../../components/ResponsiveDisplay";
 
 const easeData = [
@@ -152,6 +152,8 @@ const motionDurations = [
     provides clarity, reduces cognitive load, and directs attention to what matters.
   </goa-text>
 
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
   <h2 id="overview">Overview</h2>
   <goa-text size="body-m" mt="l" mb="l">
     Use motion when it helps users understand what changed. Keep small interactions quick and subtle. Use slightly longer transitions when content is entering, leaving, or changing section of a page so the change is easier to follow.
@@ -278,7 +280,7 @@ const motionDurations = [
 
   <h2 id="duration">Duration</h2>
   <goa-text size="body-m" mt="l" mb="l">
-    Duration is how long a transition takes, setting the pace of the interface and helps users understand what changed. They are tuned differently for Public and Workspace contexts:
+    Duration is how long a transition takes, setting the pace of the interface and helping users understand what changed. They are tuned differently for Public and Workspace contexts:
   </goa-text>
   <goa-text size="body-m" mt="l" mb="l">
     <ul>
@@ -426,11 +428,11 @@ const motionDurations = [
         <strong>Minimize flashing</strong>: Web pages should not contain anything that flashes more than three times in any one-second period, as it can trigger epileptic physical reactions especially for users who have vestibular disorders. If you do need to include flashing content, ensure that it is below the "general flash" and "red flash" thresholds.
       </li>
       <li>
-        <strong>Design alternatives for reduced motion</strong>: Users should have control on how they view animations. They should have the ability to disable animations unless they are essential to the functionality or information being conveyed. Use the <code>prefers-reduced-motion</code> CSS media query to check if someone has asked for less animation. If they have, make sure that your product respects those settings.
+        <strong>Design alternatives for reduced motion</strong>: Users should have control over how they view animations. They should have the ability to disable animations unless they are essential to the functionality or information being conveyed. Use the <code>prefers-reduced-motion</code> CSS media query to check if someone has asked for less animation. If they have, make sure that your product respects those settings.
       </li>
     </ul>
   </goa-text>
-  <DropInCallout/>
+  <FoundationsSupportCallout />
 </DocumentationPageLayout>
 
 <style>
