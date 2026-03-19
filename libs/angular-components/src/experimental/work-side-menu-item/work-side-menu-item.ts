@@ -3,14 +3,16 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   Input,
+  TemplateRef,
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goabx-work-side-menu-item", // eslint-disable-line
-
+  imports: [NgTemplateOutlet],
   template: `
     @if (isReady) {
       <goa-work-side-menu-item
@@ -23,6 +25,11 @@ import {
         [attr.testid]="testId"
         [attr.type]="type"
       >
+        @if (popoverContent) {
+          <div slot="popoverContent">
+            <ng-container [ngTemplateOutlet]="popoverContent"></ng-container>
+          </div>
+        }
         <ng-content />
       </goa-work-side-menu-item>
     }
@@ -31,13 +38,14 @@ import {
 })
 export class GoabxWorkSideMenuItem implements OnInit {
   @Input({ required: true }) label!: string;
-  @Input({ required: true }) url!: string;
+  @Input() url?: string;
   @Input() badge?: string;
   @Input() current?: boolean;
   @Input() divider?: boolean;
   @Input() icon?: string;
   @Input() testId?: string;
   @Input() type?: GoabWorkSideMenuItemType = "normal";
+  @Input() popoverContent!: TemplateRef<any>;
 
   isReady = false;
 

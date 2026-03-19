@@ -387,6 +387,95 @@ export function getLocalDateValues(input: string | Date): {
   return null;
 }
 
+// ===============
+// Date formatting
+// ===============
+
+/**
+ * Returns "Today", "Yesterday", or null for other dates.
+ */
+export function getRelativeDayLabel(date: Date): "Today" | "Yesterday" | null {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  const dateOnly = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  );
+
+  if (dateOnly.getTime() === today.getTime()) return "Today";
+  if (dateOnly.getTime() === yesterday.getTime()) return "Yesterday";
+  return null;
+}
+
+/**
+ * Formats a relative timestamp: "Now", "5 min ago", "2 h ago", "3 d ago",
+ * or a short date string for older dates.
+ */
+export function formatRelativeTimestamp(date: Date | null): string {
+  if (!date || !date.getTime()) return "";
+
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffSecs = Math.floor(diffMs / 1000);
+  const diffMins = Math.floor(diffSecs / 60);
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffSecs < 60) return "Now";
+  if (diffMins < 60) return `${diffMins} min ago`;
+  if (diffHours < 24) return `${diffHours} h ago`;
+  if (diffDays < 7) return `${diffDays} d ago`;
+
+  return date.toLocaleString("en-CA", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
+/**
+ * Formats a full date for tooltips: "Today, February 24, 2026, 2:30 p.m."
+ */
+export function formatFullDate(date: Date | null): string {
+  if (!date || !date.getTime()) return "";
+
+  const fullDateString = date.toLocaleString("en-CA", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  const label = getRelativeDayLabel(date);
+  if (label) {
+    return `${label}, ${fullDateString.split(", ").slice(1).join(", ")}`;
+  }
+  return fullDateString;
+}
+
+/**
+ * Formats a date group heading: "Today", "Yesterday", or "February 24, 2026".
+ */
+export function formatDateGroup(date: Date): string {
+  const label = getRelativeDayLabel(date);
+  if (label) return label;
+
+  return date.toLocaleDateString("en-CA", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 /**
  * Check if a node is focusable
  * @param node

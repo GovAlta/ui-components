@@ -23,12 +23,22 @@ export interface SlotDefinition {
   description: string;
 }
 
+export interface SubComponentApi {
+  name: string;
+  webComponentTag: string;
+  description: string;
+  props: PropDefinition[];
+  events: EventDefinition[];
+  slots: SlotDefinition[];
+}
+
 export interface ComponentApi {
   componentSlug: string;
   extractedFrom: string;
   props: PropDefinition[];
   events: EventDefinition[];
   slots: SlotDefinition[];
+  subComponents?: SubComponentApi[];
 }
 
 // Load all component API JSON files at build time using Vite glob import

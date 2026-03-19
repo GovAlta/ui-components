@@ -1,4 +1,4 @@
-<div style="min-height: 100vh; display: flex; flex-direction: column">
+<div *ngIf="!isFullPage" style="min-height: 100vh; display: flex; flex-direction: column">
   <section slot="header" id="top" class="width" role="header" style="flex: 0 0 auto">
     <goab-microsite-header type="alpha" version="UAT" />
     <goab-app-header>
@@ -113,6 +113,7 @@
         <goabx-work-side-menu-item label="2722" url="/features/2722"></goabx-work-side-menu-item>
         <goabx-work-side-menu-item label="2730" url="/features/2730"></goabx-work-side-menu-item>
         <goabx-work-side-menu-item label="2829" url="/features/2829"></goabx-work-side-menu-item>
+        <goabx-work-side-menu-item label="2885 WorkSpace Notification" url="/features/2885"></goabx-work-side-menu-item>
         <goabx-work-side-menu-item label="3102" url="/features/3102"></goabx-work-side-menu-item>
         <goabx-work-side-menu-item label="3229 MenuButton" url="/features/3229"></goabx-work-side-menu-item>
         <goabx-work-side-menu-item label="3137" url="/features/3137"></goabx-work-side-menu-item>
@@ -138,3 +139,5 @@
     <goab-app-footer maxContentWidth="100%" />
   </section>
 </div>
+
+<router-outlet *ngIf="isFullPage"></router-outlet>

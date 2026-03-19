@@ -11,6 +11,7 @@
   export let content: string = "";
   export let actions: string = "";
   export let testid: string = "";
+  export let closeButtonVisibility: "visible" | "hidden" = "visible";
 
   function closeDrawer() {
     open = false;
@@ -24,7 +25,7 @@
 
 <button on:click={openDrawer} data-testid="open">Open</button>
 
-<Drawer {open} {testid} {position}  {heading} {maxsize} on:_close={closeDrawer}>
+<Drawer {open} {testid} {position} {heading} {maxsize} {closeButtonVisibility} on:_close={closeDrawer}>
   {content}
   <div slot="actions">{actions}</div>
 </Drawer>
