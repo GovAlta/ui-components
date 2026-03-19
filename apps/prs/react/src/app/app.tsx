@@ -14,6 +14,7 @@ import {
 import "@abgov/style";
 
 export function App() {
+
   const navigate = useNavigate();
 
   return (
@@ -102,6 +103,7 @@ export function App() {
                 <GoabxWorkSideMenuItem label="3279 Work Side Menu Key Nav" url="/bugs/3279" />
                 <GoabxWorkSideMenuItem label="3384 v2 Table Border" url="/bugs/3384" />
                 <GoabxWorkSideMenuItem label="3450 Dropdown expanding inside Container" url="/bugs/3450" />
+                <GoabxWorkSideMenuItem label="3498 Radio alignment" url="/bugs/3498" />
               </GoabxWorkSideMenuGroup>
               <GoabxWorkSideMenuGroup icon="star" heading="Features">
                 <GoabxWorkSideMenuItem label="1383 Button Filled Icons" url="/features/1383" />
