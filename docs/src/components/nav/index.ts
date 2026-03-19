@@ -12,4 +12,5 @@
 export { ParentMenu, type MenuSection } from "./ParentMenu";
 export { ComponentsSubMenu } from "./ComponentsSubMenu";
 export { GetStartedSubMenu } from "./GetStartedSubMenu";
+export { FoundationsSubMenu } from "./FoundationsSubMenu";
 export type { NavCategory } from "../../lib/nav-categories";

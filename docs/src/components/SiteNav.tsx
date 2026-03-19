@@ -10,7 +10,7 @@
  *
  * Menu level is managed via React state:
  * - Parent view: Shows all sections
- * - Sub-menu view: Shows section-specific navigation (components, get-started)
+ * - Sub-menu view: Shows section-specific navigation (components, get-started, foundations)
  */
 
 import { useState, useEffect, useCallback } from "react";
@@ -18,6 +18,7 @@ import {
   ParentMenu,
   ComponentsSubMenu,
   GetStartedSubMenu,
+  FoundationsSubMenu,
   type MenuSection,
   type NavCategory,
 } from "./nav";
@@ -34,7 +35,7 @@ interface SiteNavProps {
 }
 
 // Sections that have submenus (show submenu when navigated to)
-const SUBMENU_SECTIONS = ["components", "get-started"];
+const SUBMENU_SECTIONS = ["components", "get-started", "foundations"];
 
 // Sections that are single pages (stay on parent menu, just highlight)
 const SINGLE_PAGE_SECTIONS = ["tokens", "examples"];
@@ -210,6 +211,17 @@ export function SiteNav({
     case "get-started":
       return (
         <GetStartedSubMenu
+          isOpen={isOpen}
+          onToggle={handleToggle}
+          onBack={handleBack}
+          onExpandMenu={handleExpandMenu}
+          currentUrl={currentUrl}
+        />
+      );
+
+    case "foundations":
+      return (
+        <FoundationsSubMenu
           isOpen={isOpen}
           onToggle={handleToggle}
           onBack={handleBack}
