@@ -85,6 +85,8 @@ import { Feat3229Route } from "./routes/features/feat3229";
 import { FeatV2CheckboxRoute } from "./routes/features/featV2Checkbox";
 import { Feat3398Route } from "./routes/features/feat3398";
 import { Feat3478Route } from "./routes/features/feat3478";
+import { Feat2885Route } from "./routes/features/feat2885";
+import { Feat2885NavigationTabsRoute } from "./routes/features/feat2885-navigation-tabs";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -183,7 +185,14 @@ root.render(
           <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
           <Route path="features/3398" element={<Feat3398Route />} />
           <Route path="features/3478" element={<Feat3478Route />} />
+          <Route
+            path="features/2885-navigation-tabs"
+            element={<Feat2885NavigationTabsRoute />}
+          />
         </Route>
+
+        {/* Standalone route without App wrapper for full-page layout demos */}
+        <Route path="features/2885" element={<Feat2885Route />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

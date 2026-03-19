@@ -123,6 +123,7 @@ export function App() {
                 <GoabxWorkSideMenuItem label="2730 Temporary Notification Controller" url="/features/2730" />
                 <GoabxWorkSideMenuItem label="2829 Modal ARIA Live Region" url="/features/2829" />
                 <GoabxWorkSideMenuItem label="2877 Badge Types and Custom Icon" url="/features/2877" />
+                <GoabxWorkSideMenuItem label="2885 Work Side Notification Popover" url="/features/2885" />
                 <GoabxWorkSideMenuItem label="3102 MenuButton Width" url="/features/3102" />
                 <GoabxWorkSideMenuItem label="3137 Work Side Menu Group" url="/features/3137" />
                 <GoabxWorkSideMenuItem label="3241 V2 Experimental Wrappers" url="/features/3241" />

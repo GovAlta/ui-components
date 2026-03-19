@@ -24,7 +24,7 @@
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "popover";
   /** Provides control to where the popover content is positioned. */
-  export let position: "above" | "below" | "auto" = "auto";
+  export let position: "above" | "below" | "right" | "auto" = "auto";
   /** Sets the maximum width of the popover container. */
   export let maxwidth: string | "none" = "320px";
   /** Sets the minimum width of the popover container. */
@@ -203,11 +203,11 @@
     // Dispatch _open/_close events for consumer components
     // (MenuButton, AppHeader, AppHeaderMenu, Dropdown)
     if (_isOpen) {
-      dispatch(_rootEl, "_open");
+      dispatch(_rootEl, "_open", {}, { bubbles: true });
       requestAnimationFrame(updateAutoPosition); // same vs await tick(), make sure popover element is fully rendered before we measure its dimension
     } else {
       _targetEl.focus();
-      dispatch(_rootEl, "_close");
+      dispatch(_rootEl, "_close", {}, { bubbles: true });
     }
   }
 
@@ -234,7 +234,11 @@
   }
 
   function updateAutoPosition() {
-    if (position !== "auto" || !_isOpen || !_targetEl || !_popoverEl) {
+    if (!_isOpen || !_targetEl || !_popoverEl) {
+      return;
+    }
+
+    if (position !== "auto") {
       return;
     }
 
@@ -293,10 +297,11 @@
       (position === "auto" && _autoPosition === "above")}
     class:position-below={position === "below" ||
       (position === "auto" && _autoPosition === "below")}
+    class:position-right={position === "right"}
     style={styles(
-      style("width", width),
+      style("width", position !== "right" ? width : undefined),
       style("min-width", minwidth),
-      style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
+      style("max-width", position !== "right" && width ? `max(${width}, ${maxwidth})` : maxwidth),
       style("padding", _padded ? "var(--goa-space-m)" : "0"),
     )}
   >
@@ -327,6 +332,7 @@
     padding: 0;
     background-color: transparent;
     width: inherit;
+    text-align: inherit;
     anchor-name: --goa-popover-target;
   }
 
@@ -367,6 +373,15 @@
   .popover-content.position-below {
     inset-block-start: anchor(bottom);
     --popover-translate-y: var(--offset-top, 3px);
+  }
+
+  .popover-content.position-right {
+    inset-block-start: unset;
+    inset-block-end: max(8px, anchor(bottom));
+    inset-inline-start: anchor(right);
+    --popover-translate-x: var(--offset-left, 8px);
+    --popover-translate-y: var(--offset-bottom, 0px);
+    position-try-fallbacks: none;
   }
 
   :global(::slotted(ul)) {

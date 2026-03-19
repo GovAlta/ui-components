@@ -1,0 +1,69 @@
+<h1>Feature #2885: Tabs navigation prop</h1>
+<p>
+  Showcases the new <code>navigation</code> prop on <code>goabx-tabs</code>.
+  When set to <code>"none"</code>, tabs act as a UI switcher without updating the browser URL hash.
+</p>
+
+<hr style="margin: 24px 0" />
+
+<h2>Test 1: Segmented + navigation="none"</h2>
+<p>Tabs switch content without changing the URL hash. Used inside notification panels.</p>
+<goabx-tabs variant="segmented" navigation="none" (_change)="onTabChange($event)">
+  <goab-tab heading="Unread">
+    <p>Unread notifications content</p>
+  </goab-tab>
+  <goab-tab heading="Urgent">
+    <p>Urgent notifications content</p>
+  </goab-tab>
+  <goab-tab heading="All">
+    <p>All notifications content</p>
+  </goab-tab>
+</goabx-tabs>
+
+<hr style="margin: 24px 0" />
+
+<h2>Test 2: Segmented + navigation="url" (default)</h2>
+<p>Default behavior: tabs update the browser URL hash when switched.</p>
+<goabx-tabs variant="segmented" (_change)="onTabChange($event)">
+  <goab-tab heading="Tab A">
+    <p>Tab A content with URL navigation</p>
+  </goab-tab>
+  <goab-tab heading="Tab B">
+    <p>Tab B content with URL navigation</p>
+  </goab-tab>
+  <goab-tab heading="Tab C">
+    <p>Tab C content with URL navigation</p>
+  </goab-tab>
+</goabx-tabs>
+
+<hr style="margin: 24px 0" />
+
+<h2>Test 3: Default (non-segmented) + navigation="none"</h2>
+<p>Standard tab style with URL navigation disabled.</p>
+<goabx-tabs navigation="none" (_change)="onTabChange($event)">
+  <goab-tab heading="Overview">
+    <p>Overview content</p>
+  </goab-tab>
+  <goab-tab heading="Details">
+    <p>Details content</p>
+  </goab-tab>
+  <goab-tab heading="History">
+    <p>History content</p>
+  </goab-tab>
+</goabx-tabs>
+
+<hr style="margin: 24px 0" />
+
+<h2>Test 4: Default (non-segmented) + navigation="url" (default)</h2>
+<p>Standard tab style with default URL navigation.</p>
+<goabx-tabs (_change)="onTabChange($event)">
+  <goab-tab heading="Section 1">
+    <p>Section 1 content with URL navigation</p>
+  </goab-tab>
+  <goab-tab heading="Section 2">
+    <p>Section 2 content with URL navigation</p>
+  </goab-tab>
+  <goab-tab heading="Section 3">
+    <p>Section 3 content with URL navigation</p>
+  </goab-tab>
+</goabx-tabs>

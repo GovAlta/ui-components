@@ -12,6 +12,7 @@ import {
   GoabTabsOnChangeDetail,
   GoabTabsOrientation,
   GoabTabsVariant,
+  GoabTabsNavigation,
 } from "@abgov/ui-components-common";
 
 @Component({
@@ -25,6 +26,7 @@ import {
         [attr.testid]="testId"
         [attr.variant]="variant"
         [attr.orientation]="orientation"
+        [attr.navigation]="navigation"
         (_change)="_onChange($event)"
       >
         <ng-content />
@@ -42,8 +44,9 @@ export class GoabxTabs implements OnInit {
   @Input() variant?: GoabTabsVariant;
   /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
   @Input() orientation?: GoabTabsOrientation;
+  @Input() navigation?: GoabTabsNavigation;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     setTimeout(() => {

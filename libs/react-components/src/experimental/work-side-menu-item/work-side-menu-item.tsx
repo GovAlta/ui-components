@@ -2,7 +2,7 @@ import { type JSX } from "react";
 import { GoabWorkSideMenuItemType } from "@abgov/ui-components-common";
 interface WCProps {
   label: string;
-  url: string;
+  url?: string;
   badge?: string;
   current?: string;
   divider?: string;
@@ -22,7 +22,7 @@ declare module "react" {
 
 export interface GoabWorkSideMenuItemProps {
   label: string;
-  url: string;
+  url?: string;
   badge?: string;
   current?: boolean;
   divider?: boolean;
@@ -30,6 +30,7 @@ export interface GoabWorkSideMenuItemProps {
   testId?: string;
   type?: GoabWorkSideMenuItemType;
   children?: React.ReactNode;
+  popoverContent?: React.ReactNode;
 }
 
 export function GoabxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Element {
@@ -44,6 +45,7 @@ export function GoabxWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Ele
       testid={props.testId}
       type={props.type}
     >
+      {props.popoverContent && <div slot="popoverContent">{props.popoverContent}</div>}
       {props.children}
     </goa-work-side-menu-item>
   );

@@ -122,5 +122,126 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
         `,
       },
     },
+    {
+      id: 'with-notifications',
+      name: 'With notifications',
+      description: 'Work menu with notification popover panel',
+      code: {
+        react: `<GoabxWorkSideMenu
+  heading="My Application"
+  url="/"
+  primaryContent={
+    <>
+      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+    </>
+  }
+  secondaryContent={
+    <>
+      <GoabxWorkSideMenuItem
+        icon="notifications"
+        label="Notifications"
+        badge="3"
+        type="success"
+        popoverContent={
+          <GoabxWorkSideNotificationPanel
+            heading="Notifications"
+            activeTab="unread"
+            onMarkAllRead={() => handleMarkAllRead()}
+            onViewAll={() => handleViewAll()}
+          >
+            <GoabxWorkSideNotificationItem
+              title="New case assigned"
+              description="Case #12345 has been assigned to you."
+              timestamp="2025-02-09T10:30:00Z"
+              type="info"
+              readStatus="unread"
+              priority="normal"
+              onClick={() => handleClick("1")}
+            />
+            <GoabxWorkSideNotificationItem
+              title="System maintenance"
+              description="Scheduled maintenance tonight at 11 PM."
+              timestamp="2025-02-09T09:00:00Z"
+              type="critical"
+              readStatus="unread"
+              priority="urgent"
+              onClick={() => handleClick("2")}
+            />
+          </GoabxWorkSideNotificationPanel>
+        }
+      />
+    </>
+  }
+/>`,
+        angular: `<goabx-work-side-menu heading="My Application" url="/">
+  <div slot="primary-content">
+    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goabx-work-side-menu-item>
+    <goabx-work-side-menu-item icon="list" label="Cases" url="/cases"></goabx-work-side-menu-item>
+  </div>
+  <div slot="secondary-content">
+    <goabx-work-side-menu-item
+      icon="notifications"
+      label="Notifications"
+      badge="3"
+      type="success"
+      [popoverContent]="notificationsTpl"
+    ></goabx-work-side-menu-item>
+  </div>
+</goabx-work-side-menu>
+
+<ng-template #notificationsTpl>
+  <goabx-work-side-notification-panel
+    heading="Notifications"
+    activeTab="unread"
+    (onMarkAllRead)="handleMarkAllRead()"
+    (onViewAll)="handleViewAll()"
+  >
+    <goabx-work-side-notification-item
+      title="New case assigned"
+      description="Case #12345 has been assigned to you."
+      timestamp="2025-02-09T10:30:00Z"
+      type="info"
+      readStatus="unread"
+      priority="normal"
+      (onClick)="handleClick('1')"
+    ></goabx-work-side-notification-item>
+    <goabx-work-side-notification-item
+      title="System maintenance"
+      description="Scheduled maintenance tonight at 11 PM."
+      timestamp="2025-02-09T09:00:00Z"
+      type="critical"
+      readStatus="unread"
+      priority="urgent"
+      (onClick)="handleClick('2')"
+    ></goabx-work-side-notification-item>
+  </goabx-work-side-notification-panel>
+</ng-template>`,
+        webComponents: `<goa-work-side-menu heading="My Application" url="/" open="true">
+  <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
+  <goa-work-side-menu-item slot="primary" icon="list" label="Cases" url="/cases"></goa-work-side-menu-item>
+  <goa-work-side-menu-item slot="secondary" icon="notifications" label="Notifications" badge="3" type="success">
+    <goa-work-side-notification-panel slot="popoverContent" heading="Notifications" active-tab="unread">
+      <goa-work-side-notification-item
+        title="New case assigned"
+        description="Case #12345 has been assigned to you."
+        timestamp="2025-02-09T10:30:00Z"
+        type="info"
+        read-status="unread"
+        priority="normal"
+      ></goa-work-side-notification-item>
+      <goa-work-side-notification-item
+        title="System maintenance"
+        description="Scheduled maintenance tonight at 11 PM."
+        timestamp="2025-02-09T09:00:00Z"
+        type="critical"
+        read-status="unread"
+        priority="urgent"
+      ></goa-work-side-notification-item>
+    </goa-work-side-notification-panel>
+  </goa-work-side-menu-item>
+</goa-work-side-menu>`,
+      },
+    },
   ],
 };
