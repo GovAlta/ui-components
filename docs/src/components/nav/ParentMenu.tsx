@@ -2,9 +2,8 @@
  * ParentMenu.tsx
  *
  * Parent-level navigation showing all main sections.
- * - Components, Get started: opens submenu (has many pages)
+ * - Components, Get started, Foundations: opens submenu (has many pages)
  * - Tokens, Examples: direct navigation (single page each)
- * - Foundations: direct navigation (when content exists)
  */
 
 import React from "react";
@@ -34,11 +33,10 @@ interface ParentMenuProps {
 const DIRECT_NAV_SECTIONS: Record<string, string> = {
   tokens: "/tokens",
   examples: "/examples",
-  foundations: "/foundations",
 };
 
 // Sections that open a submenu
-const SUBMENU_SECTIONS = ["components", "get-started"];
+const SUBMENU_SECTIONS = ["components", "get-started", "foundations"];
 
 // Main navigation sections
 const SECTIONS = [
