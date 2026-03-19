@@ -53,6 +53,7 @@
     FormFieldMountRelayDetail,
   } from "../../types/relay-types";
 
+
   /** The value of this radio option. Will be emitted when selected. */
   export let value: string;
   /** The name of the radio group. Inherited from the parent RadioGroup if not set. */
@@ -310,12 +311,6 @@
   .radio {
     display: inline-flex;
     align-items: flex-start;
-    gap: var(--goa-radio-gap-label, var(--goa-space-xs));
-  }
-
-  /* V2 compact: Use smaller gap */
-  .radio.v2.compact {
-    gap: var(--goa-space-xs);
   }
 
   label.radio {
@@ -348,21 +343,26 @@
   .label {
     font: var(--goa-radio-label);
     margin-top: -3px; /* V1: Optical centering - move text up */
+    padding-left: var(--goa-radio-gap-label, var(--goa-space-s));
   }
-
   /* V2: Adjust for different line-height */
   .radio.v2 .label {
     margin-top: 1px; /* V2: Optical centering - slight downward adjustment */
   }
 
+  /* V2 compact: Use smaller gap */
+  .radio.v2.compact .label {
+    padding-left: var(--goa-radio-gap-label-compact);
+  }
+
   /* Compact mode - V2 only */
-  .radio.compact .label {
+  .radio.v2.compact .label {
     font: var(--goa-radio-label-compact);
   }
 
   .description {
     font: var(--goa-radio-description);
-    margin-left: var(--goa-space-xl);
+    margin-left: calc(var(--goa-radio-size) + var(--goa-space-s));
     margin-top: var(--goa-space-2xs);
     color: var(--goa-input-color-text-helper, var(--goa-color-text-default));
   }
@@ -370,6 +370,12 @@
   /* V2 default: Description aligns with label (icon width + gap) */
   .radio.v2:not(.compact) ~ .description {
     margin-left: calc(var(--goa-radio-size) + var(--goa-radio-gap-label));
+  }
+
+  /* V2 compact: Description aligns with label (icon width + gap) */
+  .radio.v2.compact ~ .description {
+    margin-left: calc(var(--goa-radio-size) + var(--goa-radio-gap-label-compact));
+    margin-top: var(--goa-space-3xs);
   }
 
   .reveal {
@@ -380,10 +386,20 @@
     height: fit-content;
     display: block;
   }
-  .reveal.visible.has-content {
-    padding: var(--goa-space-m);
-    margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
-    border-left: 4px solid var(--goa-color-greyscale-200);
+
+   .reveal.visible.has-content {
+    padding: var(--goa-radio-reveal-padding, var(--goa-space-m));
+    margin: var(--goa-radio-reveal-margin, var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px));
+    border-left: var(--goa-radio-reveal-border, 4px solid var(--goa-color-greyscale-200));
+  }
+
+  .radio.v2 ~ .reveal.visible.has-content {
+    padding: var(--goa-radio-reveal-padding, var(--goa-space-l));
+    border-left: var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200));
+  }
+
+  .radio.v2.compact ~ .reveal.visible.has-content {
+    padding: calc(var(--goa-space-m) + var(--goa-space-2xs));
   }
 
   .icon {
@@ -466,7 +482,7 @@
 
   /* Checked - Default */
   input[type="radio"]:checked ~ .icon {
-    border: var(--goa-radio-border-checked);
+    border: var(--goa-radio-border-checked, 4px solid var(--goa-color-greyscale-200));
   }
   /* V2 only: Inner dot */
   .radio.v2 input[type="radio"]:checked ~ .icon::after {
