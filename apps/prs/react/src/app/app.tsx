@@ -222,6 +222,10 @@ export function App() {
                   label="3450 Dropdown expanding inside Container"
                   url="/bugs/3450"
                 />
+                <GoabxWorkSideMenuItem
+                  label="3607 Radio and Checkbox Interaction Area"
+                  url="/bugs/3607"
+                />
               </GoabxWorkSideMenuGroup>
 
               <GoabxWorkSideMenuGroup icon="star" heading="Features">
