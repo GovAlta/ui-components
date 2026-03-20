@@ -47,10 +47,7 @@
     {
       "name": "version",
       "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
+      "values": ["1", "2"],
       "required": false,
       "default": "1",
       "description": ""

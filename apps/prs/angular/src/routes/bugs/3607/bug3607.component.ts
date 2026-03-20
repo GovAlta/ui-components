@@ -15,24 +15,24 @@ import {
   GoabxRadioItem,
 } from "@abgov/angular-components";
 
-
 @Component({
   standalone: true,
   selector: "abgov-bug3607",
   templateUrl: "./bug3607.component.html",
-  imports: [CommonModule,
-  GoabCheckbox,
-  GoabCheckboxList,
-  GoabFormItem,
-  GoabInput,
-  GoabRadioGroup,
-  GoabRadioItem,
-  GoabxCheckbox,
-  GoabxCheckboxList,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-],
+  imports: [
+    CommonModule,
+    GoabCheckbox,
+    GoabCheckboxList,
+    GoabFormItem,
+    GoabInput,
+    GoabRadioGroup,
+    GoabRadioItem,
+    GoabxCheckbox,
+    GoabxCheckboxList,
+    GoabxFormItem,
+    GoabxInput,
+    GoabxRadioGroup,
+    GoabxRadioItem,
+  ],
 })
 export class Bug3607Component {}

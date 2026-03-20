@@ -4,18 +4,18 @@
  * Temporary notifications appear briefly then dismiss.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const temporaryNotificationConfigurations: ComponentConfigurations = {
-  componentSlug: 'temporary-notification',
-  componentName: 'Temporary notification',
-  defaultConfigurationId: 'basic',
+  componentSlug: "temporary-notification",
+  componentName: "Temporary notification",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic notification',
-      description: 'Simple temporary message',
+      id: "basic",
+      name: "Basic notification",
+      description: "Simple temporary message",
       code: {
         react: `<GoabTemporaryNotification type="information">
   Your changes have been saved.
@@ -29,9 +29,9 @@ export const temporaryNotificationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Notification types',
-      description: 'Different message types',
+      id: "types",
+      name: "Notification types",
+      description: "Different message types",
       code: {
         react: `<GoabTemporaryNotification type="success">
   Action completed successfully.
@@ -72,9 +72,9 @@ export const temporaryNotificationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-actions',
-      name: 'With actions',
-      description: 'Notification with action buttons',
+      id: "with-actions",
+      name: "With actions",
+      description: "Notification with action buttons",
       code: {
         react: `<GoabTemporaryNotification type="information">
   File uploaded. <a href="/files">View file</a>

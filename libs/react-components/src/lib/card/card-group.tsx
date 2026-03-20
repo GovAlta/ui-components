@@ -14,10 +14,7 @@ export interface GoabCardGroupProps extends DataAttributes {
   children?: React.ReactNode;
 }
 
-export function GoabCardGroup({
-  children,
-  ...rest
-}: GoabCardGroupProps): JSX.Element {
+export function GoabCardGroup({ children, ...rest }: GoabCardGroupProps): JSX.Element {
   const _props = transformProps(rest, lowercase);
 
   return <goa-card-group {..._props}>{children}</goa-card-group>;

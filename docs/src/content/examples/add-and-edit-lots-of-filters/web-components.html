@@ -3,14 +3,34 @@
   <goa-form-item version="2" label="Entry status">
     <goa-checkbox-list name="entryStatus">
       <goa-checkbox version="2" name="draft" text="Draft" value="draft"></goa-checkbox>
-      <goa-checkbox version="2" name="published" text="Published" value="published"></goa-checkbox>
+      <goa-checkbox
+        version="2"
+        name="published"
+        text="Published"
+        value="published"
+      ></goa-checkbox>
     </goa-checkbox-list>
   </goa-form-item>
   <goa-form-item version="2" label="Assigned to - Region" mt="l">
     <goa-checkbox-list name="region">
-      <goa-checkbox version="2" name="calgary" text="Calgary" value="calgary"></goa-checkbox>
-      <goa-checkbox version="2" name="central" text="Central" value="central"></goa-checkbox>
-      <goa-checkbox version="2" name="edmonton" text="Edmonton" value="edmonton"></goa-checkbox>
+      <goa-checkbox
+        version="2"
+        name="calgary"
+        text="Calgary"
+        value="calgary"
+      ></goa-checkbox>
+      <goa-checkbox
+        version="2"
+        name="central"
+        text="Central"
+        value="central"
+      ></goa-checkbox>
+      <goa-checkbox
+        version="2"
+        name="edmonton"
+        text="Edmonton"
+        value="edmonton"
+      ></goa-checkbox>
       <goa-checkbox version="2" name="north" text="North" value="north"></goa-checkbox>
       <goa-checkbox version="2" name="south" text="South" value="south"></goa-checkbox>
     </goa-checkbox-list>
@@ -29,8 +49,12 @@
   </goa-form-item>
   <div slot="actions">
     <goa-button-group>
-      <goa-button version="2" id="apply-filters-btn" type="primary" size="compact">Apply filters</goa-button>
-      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
+      <goa-button version="2" id="apply-filters-btn" type="primary" size="compact"
+        >Apply filters</goa-button
+      >
+      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact"
+        >Cancel</goa-button
+      >
     </goa-button-group>
   </div>
 </goa-drawer>

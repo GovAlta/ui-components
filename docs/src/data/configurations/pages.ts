@@ -4,18 +4,18 @@
  * Pages provides page layout structure.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const pagesConfigurations: ComponentConfigurations = {
-  componentSlug: 'pages',
-  componentName: 'Pages',
-  defaultConfigurationId: 'basic',
+  componentSlug: "pages",
+  componentName: "Pages",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic pages layout',
-      description: 'Standard page structure',
+      id: "basic",
+      name: "Basic pages layout",
+      description: "Standard page structure",
       code: {
         react: `<GoabPages>
   <GoabPageBlock>

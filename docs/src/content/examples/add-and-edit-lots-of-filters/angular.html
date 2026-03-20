@@ -1,9 +1,19 @@
 <goabx-button (onClick)="onClick()">Filters</goabx-button>
-<goabx-drawer heading="Filters" [open]="open" (onClose)="onClose()" position="right" [actions]="actions">
+<goabx-drawer
+  heading="Filters"
+  [open]="open"
+  (onClose)="onClose()"
+  position="right"
+  [actions]="actions"
+>
   <goabx-form-item label="Entry status">
     <goab-checkbox-list name="entryStatus" (onChange)="onCheckboxChange($event)">
       <goabx-checkbox name="draft" text="Draft" value="draft"></goabx-checkbox>
-      <goabx-checkbox name="published" text="Published" value="published"></goabx-checkbox>
+      <goabx-checkbox
+        name="published"
+        text="Published"
+        value="published"
+      ></goabx-checkbox>
     </goab-checkbox-list>
   </goabx-form-item>
   <goabx-form-item label="Assigned to - Region" mt="l">
@@ -16,7 +26,11 @@
     </goab-checkbox-list>
   </goabx-form-item>
   <goabx-form-item label="Assigned to" mt="l">
-    <goabx-dropdown [value]="assignedTo" name="assignedToData" (onChange)="onChangeAssignedTo($event)">
+    <goabx-dropdown
+      [value]="assignedTo"
+      name="assignedToData"
+      (onChange)="onChangeAssignedTo($event)"
+    >
       <goabx-dropdown-item value="1" label="Person 1"></goabx-dropdown-item>
       <goabx-dropdown-item value="2" label="Person 2"></goabx-dropdown-item>
     </goabx-dropdown>
@@ -29,8 +43,12 @@
   </goabx-form-item>
   <ng-template #actions>
     <goab-button-group>
-      <goabx-button type="primary" size="compact" (onClick)="closeDrawer()">Apply filters</goabx-button>
-      <goabx-button type="tertiary" size="compact" (onClick)="closeDrawer()">Cancel</goabx-button>
+      <goabx-button type="primary" size="compact" (onClick)="closeDrawer()"
+        >Apply filters</goabx-button
+      >
+      <goabx-button type="tertiary" size="compact" (onClick)="closeDrawer()"
+        >Cancel</goabx-button
+      >
     </goab-button-group>
   </ng-template>
 </goabx-drawer>

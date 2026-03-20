@@ -6,29 +6,14 @@
       >
       - Allow icon to be set on MenuButton
     </goab-text>
-    <goab-text tag="p" mt="0">
-      All the MenuButton to have a leading icon set
-    </goab-text>
+    <goab-text tag="p" mt="0"> All the MenuButton to have a leading icon set </goab-text>
   </goab-block>
 
   <goab-divider mt="xl" mb="xl"></goab-divider>
 
   <goab-menu-button text="Download" leadingIcon="download" (onAction)="onAction($event)">
-    <goab-menu-action
-      key="1"
-      text="CSV"
-      action="csv"
-    ></goab-menu-action>
-    <goab-menu-action
-      key="2"
-      text="JSON"
-      action="json"
-    ></goab-menu-action>
-    <goab-menu-action
-      key="3"
-      text="XML"
-      action="xml"
-    ></goab-menu-action>
+    <goab-menu-action key="1" text="CSV" action="csv"></goab-menu-action>
+    <goab-menu-action key="2" text="JSON" action="json"></goab-menu-action>
+    <goab-menu-action key="3" text="XML" action="xml"></goab-menu-action>
   </goab-menu-button>
-
 </goab-block>

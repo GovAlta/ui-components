@@ -20,12 +20,7 @@
       "name": "position",
       "type": "\"top\" | \"bottom\" | \"left\" | \"right\"",
       "typeLabel": "GoabTooltipPosition",
-      "values": [
-        "top",
-        "bottom",
-        "left",
-        "right"
-      ],
+      "values": ["top", "bottom", "left", "right"],
       "required": false,
       "default": "top",
       "description": "Position with respect to the child element."
@@ -34,11 +29,7 @@
       "name": "halign",
       "type": "\"left\" | \"right\" | \"center\"",
       "typeLabel": "GoabTooltipAlignment",
-      "values": [
-        "left",
-        "right",
-        "center"
-      ],
+      "values": ["left", "right", "center"],
       "required": false,
       "default": "center",
       "description": "Horizontal alignment to the child element."

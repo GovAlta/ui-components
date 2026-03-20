@@ -48,12 +48,7 @@ describe("GoabChip", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    const { container } = render(
-      <GoabChip
-        content="test chip"
-        data-grid="cell"
-      />
-    );
+    const { container } = render(<GoabChip content="test chip" data-grid="cell" />);
     const el = container.querySelector("goa-chip");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });

@@ -85,28 +85,28 @@ describe("GoabCheckbox", () => {
   });
 
   it("should render with slot reveal", () => {
-    const result = render(
-      <GoabCheckbox name={"foo"} reveal={<div>reveal slot</div>} />,
-    );
+    const result = render(<GoabCheckbox name={"foo"} reveal={<div>reveal slot</div>} />);
 
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("reveal")).toBe(null);
-    expect(
-      result.container.querySelector('div[slot="reveal"]')?.innerHTML,
-    ).toContain("reveal slot");
+    expect(result.container.querySelector('div[slot="reveal"]')?.innerHTML).toContain(
+      "reveal slot",
+    );
   });
 
   it("should pass the revealAriaLabel property to the web component", () => {
     render(
-      <GoabCheckbox 
-        name={"foo"} 
-        reveal={<div>reveal slot</div>} 
-        revealAriaLabel="Screen reader announcement for checkbox reveal content" 
+      <GoabCheckbox
+        name={"foo"}
+        reveal={<div>reveal slot</div>}
+        revealAriaLabel="Screen reader announcement for checkbox reveal content"
       />,
     );
 
     const checkbox = document.querySelector("goa-checkbox");
-    expect(checkbox?.getAttribute("revealarialabel")).toBe("Screen reader announcement for checkbox reveal content");
+    expect(checkbox?.getAttribute("revealarialabel")).toBe(
+      "Screen reader announcement for checkbox reveal content",
+    );
   });
 
   it("should handle the onChange event", async function () {
@@ -147,12 +147,7 @@ describe("GoabCheckbox", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    render(
-      <GoabCheckbox
-        name="test"
-        data-grid="cell"
-      />
-    );
+    render(<GoabCheckbox name="test" data-grid="cell" />);
     const checkbox = document.querySelector("goa-checkbox");
     expect(checkbox?.getAttribute("data-grid")).toBe("cell");
   });

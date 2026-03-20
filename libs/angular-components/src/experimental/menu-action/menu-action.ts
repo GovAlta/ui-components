@@ -17,8 +17,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxMenuAction {
-  @Input({required: true}) text!: string;
-  @Input({required: true}) action!: string;
+  @Input({ required: true }) text!: string;
+  @Input({ required: true }) action!: string;
   @Input() icon?: GoabIconType;
   @Input() testId?: string;
 }

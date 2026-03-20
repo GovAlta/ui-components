@@ -21,20 +21,11 @@ interface GoabLinkProps extends Margins, DataAttributes {
   children: ReactNode;
 }
 
-export function GoabLink({
-  actionArgs,
-  actionArg,
-  children,
-  ...rest
-}: GoabLinkProps) {
+export function GoabLink({ actionArgs, actionArg, children, ...rest }: GoabLinkProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (
-    <goa-link
-      action-arg={actionArg}
-      action-args={JSON.stringify(actionArgs)}
-      {..._props}
-    >
+    <goa-link action-arg={actionArg} action-args={JSON.stringify(actionArgs)} {..._props}>
       {children}
     </goa-link>
   );

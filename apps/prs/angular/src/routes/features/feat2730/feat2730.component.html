@@ -191,14 +191,14 @@
   <h3>Notification History (Last 10)</h3>
   <goab-block gap="s" direction="column">
     @for (notification of notificationHistory; track notification.uuid) {
-    <div class="history-item">
-      <goab-text tag="p">
-        <strong>{{ notification.timestamp.toLocaleTimeString() }}</strong> -
-        <strong>{{ notification.type }}</strong
-        >: {{ notification.message }}
-      </goab-text>
-      <goab-text tag="span">UUID: {{ notification.uuid }}</goab-text>
-    </div>
+      <div class="history-item">
+        <goab-text tag="p">
+          <strong>{{ notification.timestamp.toLocaleTimeString() }}</strong> -
+          <strong>{{ notification.type }}</strong
+          >: {{ notification.message }}
+        </goab-text>
+        <goab-text tag="span">UUID: {{ notification.uuid }}</goab-text>
+      </div>
     }
     <goab-text tag="p" *ngIf="notificationHistory.length === 0">
       No notifications yet. Try clicking some buttons above!

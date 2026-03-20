@@ -5,10 +5,7 @@
     {
       "name": "type",
       "type": "\"calendar\" | \"input\"",
-      "values": [
-        "calendar",
-        "input"
-      ],
+      "values": ["calendar", "input"],
       "required": false,
       "default": "calendar",
       "description": "Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input."
@@ -80,10 +77,7 @@
     {
       "name": "size",
       "type": "\"default\" | \"compact\"",
-      "values": [
-        "default",
-        "compact"
-      ],
+      "values": ["default", "compact"],
       "required": false,
       "default": "default",
       "description": "Sets the size of the date picker. 'compact' reduces height for dense layouts."
@@ -126,17 +120,13 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": []

@@ -62,17 +62,13 @@
       "name": "onOpen",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_open",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

@@ -4,7 +4,8 @@ import {
   GoabButtonType,
   GoabButtonVariant,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 

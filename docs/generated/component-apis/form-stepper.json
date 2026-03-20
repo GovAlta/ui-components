@@ -54,17 +54,13 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

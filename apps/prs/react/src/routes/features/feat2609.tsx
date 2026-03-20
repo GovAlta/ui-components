@@ -58,7 +58,9 @@ const initialUsers: User[] = [
   },
 ];
 
-const getStatusBadgeType = (status: string): "success" | "emergency" | "information" | "important" => {
+const getStatusBadgeType = (
+  status: string,
+): "success" | "emergency" | "information" | "important" => {
   switch (status) {
     case "Removed":
       return "success";
@@ -110,7 +112,9 @@ export function Feat2609Route() {
 
   const handleSort = (event: { sortBy: string; sortDir: number }) => {
     const { sortBy, sortDir } = event;
-    const sortedUsers = [...users].sort((a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir);
+    const sortedUsers = [...users].sort(
+      (a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir,
+    );
     setUsers(sortedUsers);
   };
 
@@ -167,8 +171,8 @@ export function Feat2609Route() {
     <main>
       <h2>Feature #2609: Data Grid Component</h2>
       <p>
-        This feature adds a keyboard-navigable grid wrapper component that provides ARIA-compliant accessibility for
-        tables and grid layouts.
+        This feature adds a keyboard-navigable grid wrapper component that provides
+        ARIA-compliant accessibility for tables and grid layouts.
       </p>
 
       <h3>Table with Dynamic Row Addition (Testing Dropdown Focus Issue)</h3>
@@ -185,71 +189,76 @@ export function Feat2609Route() {
 
       <p style={{ color: "#FF6B6B", marginBottom: "1rem" }}>
         <strong>Test Instructions:</strong>
-        1. Navigate to a cell with a dropdown (Approver column) using arrow keys.
-        2. Click "Add 3 New Rows" button.
-        3. Navigate to a cell with a dropdown again.
-        4. Try to navigate away with arrow keys - it should take only 1 press, not 3.
+        1. Navigate to a cell with a dropdown (Approver column) using arrow keys. 2. Click
+        "Add 3 New Rows" button. 3. Navigate to a cell with a dropdown again. 4. Try to
+        navigate away with arrow keys - it should take only 1 press, not 3.
       </p>
 
       <GoabDataGrid keyboardNav="table">
         <GoabTable width="100%" mb="xl" onSort={handleSort}>
           <thead>
-          <tr data-grid="row">
-            <th style={{ paddingBottom: 0 }} data-grid="cell">
-              <GoabCheckbox
-                name="selectAll"
-                mt="2"
-                checked={isSelectedAll}
-                onChange={(e) => selectAll(e.checked)}
-              />
-            </th>
-            <th data-grid="cell">
-              <GoabTableSortHeader name="idNumber">ID</GoabTableSortHeader>
-            </th>
-            <th data-grid="cell">
-              <GoabTableSortHeader name="nameOfChild">Name</GoabTableSortHeader>
-            </th>
-            <th data-grid="cell">
-              <GoabTableSortHeader name="status">Status</GoabTableSortHeader>
-            </th>
-            <th data-grid="cell">Approver (Dropdown)</th>
-            <th data-grid="cell">Actions</th>
-          </tr>
+            <tr data-grid="row">
+              <th style={{ paddingBottom: 0 }} data-grid="cell">
+                <GoabCheckbox
+                  name="selectAll"
+                  mt="2"
+                  checked={isSelectedAll}
+                  onChange={(e) => selectAll(e.checked)}
+                />
+              </th>
+              <th data-grid="cell">
+                <GoabTableSortHeader name="idNumber">ID</GoabTableSortHeader>
+              </th>
+              <th data-grid="cell">
+                <GoabTableSortHeader name="nameOfChild">Name</GoabTableSortHeader>
+              </th>
+              <th data-grid="cell">
+                <GoabTableSortHeader name="status">Status</GoabTableSortHeader>
+              </th>
+              <th data-grid="cell">Approver (Dropdown)</th>
+              <th data-grid="cell">Actions</th>
+            </tr>
           </thead>
           <tbody>
-          {users.map((user) => (
-            <tr key={user.idNumber} data-grid="row">
-              <td data-grid="cell">
-                <GoabCheckbox
-                  name={`user${user.idNumber}`}
-                  checked={isSelected(user.idNumber)}
-                  onChange={() => toggleSelection(user.idNumber)}
-                />
-              </td>
-              <td data-grid="cell">{user.idNumber}</td>
-              <td data-grid="cell">{user.nameOfChild}</td>
-              <td data-grid="cell">
-                <GoabBadge type={getStatusBadgeType(user.status)} content={user.status} />
-              </td>
-              <td data-grid="cell">
-                <GoabDropdown value={user.approver} onChange={(e) => onApproverChange(user.idNumber, e.value ?? "")}>
-                  <GoabDropdownItem value="Sarah Ellis" label="Sarah Ellis" />
-                  <GoabDropdownItem value="John Doe" label="John Doe" />
-                  <GoabDropdownItem value="Jane Smith" label="Jane Smith" />
-                </GoabDropdown>
-              </td>
-              <td data-grid="cell">
-                <GoabMenuButton
-                  text="Actions"
-                  type="tertiary"
-                  onAction={(e) => handleMenuAction(user.idNumber, e.action)}
-                >
-                  <GoabMenuAction action="open" text="Open" />
-                  <GoabMenuAction action="delete" text="Delete" />
-                </GoabMenuButton>
-              </td>
-            </tr>
-          ))}
+            {users.map((user) => (
+              <tr key={user.idNumber} data-grid="row">
+                <td data-grid="cell">
+                  <GoabCheckbox
+                    name={`user${user.idNumber}`}
+                    checked={isSelected(user.idNumber)}
+                    onChange={() => toggleSelection(user.idNumber)}
+                  />
+                </td>
+                <td data-grid="cell">{user.idNumber}</td>
+                <td data-grid="cell">{user.nameOfChild}</td>
+                <td data-grid="cell">
+                  <GoabBadge
+                    type={getStatusBadgeType(user.status)}
+                    content={user.status}
+                  />
+                </td>
+                <td data-grid="cell">
+                  <GoabDropdown
+                    value={user.approver}
+                    onChange={(e) => onApproverChange(user.idNumber, e.value ?? "")}
+                  >
+                    <GoabDropdownItem value="Sarah Ellis" label="Sarah Ellis" />
+                    <GoabDropdownItem value="John Doe" label="John Doe" />
+                    <GoabDropdownItem value="Jane Smith" label="Jane Smith" />
+                  </GoabDropdown>
+                </td>
+                <td data-grid="cell">
+                  <GoabMenuButton
+                    text="Actions"
+                    type="tertiary"
+                    onAction={(e) => handleMenuAction(user.idNumber, e.action)}
+                  >
+                    <GoabMenuAction action="open" text="Open" />
+                    <GoabMenuAction action="delete" text="Delete" />
+                  </GoabMenuButton>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </GoabTable>
       </GoabDataGrid>
@@ -272,7 +281,10 @@ export function Feat2609Route() {
                   <GoabBlock direction="row" gap="s" alignment="center">
                     <strong data-grid="cell-1">{user.nameOfChild}</strong>
                     <GoabBlock data-grid="cell-2">
-                      <GoabBadge type={getStatusBadgeType(user.status)} content={user.status} />
+                      <GoabBadge
+                        type={getStatusBadgeType(user.status)}
+                        content={user.status}
+                      />
                     </GoabBlock>
                   </GoabBlock>
 
@@ -336,70 +348,71 @@ export function Feat2609Route() {
 
       <h3>Table with Colspan and Different Column Counts</h3>
       <p>
-        This table tests navigation with varying column counts and colspan attributes. Use arrow keys to navigate and
-        observe focus behavior.
+        This table tests navigation with varying column counts and colspan attributes. Use
+        arrow keys to navigate and observe focus behavior.
       </p>
       <GoabDataGrid keyboardNav="table">
         <GoabTable width="100%" mb="xl">
           <thead>
-          <tr data-grid="row">
-            <th data-grid="cell">Column 1</th>
-            <th data-grid="cell">Column 2</th>
-            <th data-grid="cell">Column 3</th>
-            <th data-grid="cell">Column 4</th>
-            <th data-grid="cell">Column 5</th>
-          </tr>
+            <tr data-grid="row">
+              <th data-grid="cell">Column 1</th>
+              <th data-grid="cell">Column 2</th>
+              <th data-grid="cell">Column 3</th>
+              <th data-grid="cell">Column 4</th>
+              <th data-grid="cell">Column 5</th>
+            </tr>
           </thead>
           <tbody>
-          <tr data-grid="row">
-            <td data-grid="cell">Row 1, Cell 1</td>
-            <td data-grid="cell">Row 1, Cell 2</td>
-            <td data-grid="cell">Row 1, Cell 3</td>
-            <td data-grid="cell">Row 1, Cell 4</td>
-            <td data-grid="cell">Row 1, Cell 5</td>
-          </tr>
-          <tr data-grid="row">
-            <td data-grid="cell">Row 2, Cell 1</td>
-            <td data-grid="cell" colSpan={2}>
-              Row 2, Cell 2 (spans 2 cols)
-            </td>
-            <td data-grid="cell" colSpan={2}>
-              Row 2, Cell 3 (spans 2 cols)
-            </td>
-          </tr>
-          <tr data-grid="row">
-            <td data-grid="cell" colSpan={3}>
-              Row 3, Cell 1 (spans 3 cols)
-            </td>
-            <td data-grid="cell" colSpan={2}>
-              Row 3, Cell 2 (spans 2 cols)
-            </td>
-          </tr>
-          <tr data-grid="row">
-            <td data-grid="cell">Row 4, Cell 1</td>
-            <td data-grid="cell">Row 4, Cell 2</td>
-            <td data-grid="cell">Row 4, Cell 3</td>
-            <td data-grid="cell">Row 4, Cell 4</td>
-            <td data-grid="cell">Row 4, Cell 5</td>
-          </tr>
-          <tr data-grid="row">
-            <td data-grid="cell" colSpan={5}>
-              Row 5, Single Cell (spans all 5 cols)
-            </td>
-          </tr>
+            <tr data-grid="row">
+              <td data-grid="cell">Row 1, Cell 1</td>
+              <td data-grid="cell">Row 1, Cell 2</td>
+              <td data-grid="cell">Row 1, Cell 3</td>
+              <td data-grid="cell">Row 1, Cell 4</td>
+              <td data-grid="cell">Row 1, Cell 5</td>
+            </tr>
+            <tr data-grid="row">
+              <td data-grid="cell">Row 2, Cell 1</td>
+              <td data-grid="cell" colSpan={2}>
+                Row 2, Cell 2 (spans 2 cols)
+              </td>
+              <td data-grid="cell" colSpan={2}>
+                Row 2, Cell 3 (spans 2 cols)
+              </td>
+            </tr>
+            <tr data-grid="row">
+              <td data-grid="cell" colSpan={3}>
+                Row 3, Cell 1 (spans 3 cols)
+              </td>
+              <td data-grid="cell" colSpan={2}>
+                Row 3, Cell 2 (spans 2 cols)
+              </td>
+            </tr>
+            <tr data-grid="row">
+              <td data-grid="cell">Row 4, Cell 1</td>
+              <td data-grid="cell">Row 4, Cell 2</td>
+              <td data-grid="cell">Row 4, Cell 3</td>
+              <td data-grid="cell">Row 4, Cell 4</td>
+              <td data-grid="cell">Row 4, Cell 5</td>
+            </tr>
+            <tr data-grid="row">
+              <td data-grid="cell" colSpan={5}>
+                Row 5, Single Cell (spans all 5 cols)
+              </td>
+            </tr>
           </tbody>
         </GoabTable>
       </GoabDataGrid>
 
       <h3>Keyboard Icon Options</h3>
       <p>
-        The keyboard navigation icon can be customized with <code>keyboardIconVisibility</code> and{" "}
-        <code>keyboardIconPosition</code> props.
+        The keyboard navigation icon can be customized with{" "}
+        <code>keyboardIconVisibility</code> and <code>keyboardIconPosition</code> props.
       </p>
 
       <h4>Icon Position: Left (Default)</h4>
       <p>
-        <code>keyboardIconPosition="left"</code> - Icon appears in the bottom-left corner when navigating.
+        <code>keyboardIconPosition="left"</code> - Icon appears in the bottom-left corner
+        when navigating.
       </p>
       <GoabDataGrid keyboardNav="table" keyboardIconPosition="left">
         <GoabTable width="100%" mb="xl">
@@ -427,7 +440,8 @@ export function Feat2609Route() {
 
       <h4>Icon Position: Right</h4>
       <p>
-        <code>keyboardIconPosition="right"</code> - Icon appears in the bottom-right corner when navigating.
+        <code>keyboardIconPosition="right"</code> - Icon appears in the bottom-right
+        corner when navigating.
       </p>
       <GoabDataGrid keyboardNav="table" keyboardIconPosition="right">
         <GoabTable width="100%" mb="xl">
@@ -455,7 +469,8 @@ export function Feat2609Route() {
 
       <h4>Icon Visibility: Hidden</h4>
       <p>
-        <code>keyboardIconVisibility="hidden"</code> - Keyboard navigation still works but the icon is not shown.
+        <code>keyboardIconVisibility="hidden"</code> - Keyboard navigation still works but
+        the icon is not shown.
       </p>
       <GoabDataGrid keyboardNav="layout" keyboardIconVisibility="hidden">
         <GoabBlock data-grid="row">
@@ -463,7 +478,9 @@ export function Feat2609Route() {
             <a href="https://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1 Specification</a>
           </GoabLink>
           <GoabLink data-grid="cell">
-            <a href="https://www.w3.org/TR/core-aam-1.1/">Core Accessibility API Mappings 1.1</a>
+            <a href="https://www.w3.org/TR/core-aam-1.1/">
+              Core Accessibility API Mappings 1.1
+            </a>
           </GoabLink>
           <GoabLink data-grid="cell">
             <a href="https://www.w3.org/WAI/intro/aria.php">WAI-ARIA Overview</a>
@@ -476,9 +493,14 @@ export function Feat2609Route() {
 
       <h4>Icon Visibility: Visible (Default)</h4>
       <p>
-        <code>keyboardIconVisibility="visible"</code> - The keyboard icon is shown when navigating (default behavior).
+        <code>keyboardIconVisibility="visible"</code> - The keyboard icon is shown when
+        navigating (default behavior).
       </p>
-      <GoabDataGrid keyboardNav="layout" keyboardIconVisibility="visible" keyboardIconPosition="right">
+      <GoabDataGrid
+        keyboardNav="layout"
+        keyboardIconVisibility="visible"
+        keyboardIconPosition="right"
+      >
         <GoabBlock data-grid="row">
           <GoabButton data-grid="cell" type="primary">
             Button 1

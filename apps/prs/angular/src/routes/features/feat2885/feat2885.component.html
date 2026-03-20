@@ -12,16 +12,8 @@
   />
 
   <ng-template #primaryTpl>
-    <goabx-work-side-menu-item
-      icon="grid"
-      label="Dashboard"
-      url="/features/2885"
-    />
-    <goabx-work-side-menu-item
-      icon="search"
-      label="Search"
-      url="/features/2885/search"
-    />
+    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/features/2885" />
+    <goabx-work-side-menu-item icon="search" label="Search" url="/features/2885/search" />
     <goabx-work-side-menu-item
       icon="list"
       label="Cases"
@@ -46,13 +38,10 @@
 
   <ng-template #alertsTpl>
     <div style="padding: 1rem; width: 280px">
-      <h3 style="margin: 0 0 0.5rem 0; font-size: 1rem">
-        Custom Popover Content
-      </h3>
+      <h3 style="margin: 0 0 0.5rem 0; font-size: 1rem">Custom Popover Content</h3>
       <p style="margin: 0 0 1rem 0; color: #666; font-size: 0.875rem">
-        This demonstrates that <code>popoverContent</code> accepts any Angular
-        template, not just
-        <code>GoabxWorkSideNotificationPanel</code>.
+        This demonstrates that <code>popoverContent</code> accepts any Angular template,
+        not just <code>GoabxWorkSideNotificationPanel</code>.
       </p>
       <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.875rem">
         <li>Custom alerts</li>
@@ -61,9 +50,7 @@
         <li>Any custom UI</li>
       </ul>
       <div style="margin-top: 1rem; text-align: right">
-        <goa-button type="tertiary" size="compact" action="close">
-          Close
-        </goa-button>
+        <goa-button type="tertiary" size="compact" action="close"> Close </goa-button>
       </div>
     </div>
   </ng-template>
@@ -109,53 +96,38 @@
       label="Settings"
       url="/features/2885/settings"
     />
-    <goabx-work-side-menu-item
-      icon="log-out"
-      label="Log out"
-      url="/logout"
-    />
+    <goabx-work-side-menu-item icon="log-out" label="Log out" url="/logout" />
   </ng-template>
 
-  <main
-    style="
-      flex: 1;
-      padding: 2rem;
-      background-color: #f3f3f3;
-      overflow: auto;
-    "
-  >
+  <main style="flex: 1; padding: 2rem; background-color: #f3f3f3; overflow: auto">
     <div class="mobile-menu-toggle">
-      <goab-icon-button
-        icon="menu"
-        variant="dark"
-        (onClick)="openMenu()"
-      />
+      <goab-icon-button icon="menu" variant="dark" (onClick)="openMenu()" />
     </div>
 
     <h1>Feature #2885: Work Side Menu with Notification Popover</h1>
     <p>
-      This demonstrates the <code>GoabxWorkSideMenu</code> with the new
-      notification popover feature.
+      This demonstrates the <code>GoabxWorkSideMenu</code> with the new notification
+      popover feature.
     </p>
 
     <h2>New Features</h2>
     <ul>
       <li>
-        <strong>Notification Popover</strong> - Click the "Notifications" menu
-        item to see the popover panel
+        <strong>Notification Popover</strong> - Click the "Notifications" menu item to see
+        the popover panel
       </li>
       <li>
-        <strong>Custom Popover Content</strong> - Click the "Alerts" menu item
-        to see a custom div, demonstrating that <code>popoverContent</code>
+        <strong>Custom Popover Content</strong> - Click the "Alerts" menu item to see a
+        custom div, demonstrating that <code>popoverContent</code>
         accepts any Angular template
       </li>
       <li>
-        <strong>GoabxWorkSideNotificationPanel</strong> - Panel with tabs
-        (Unread, Urgent, All)
+        <strong>GoabxWorkSideNotificationPanel</strong> - Panel with tabs (Unread, Urgent,
+        All)
       </li>
       <li>
-        <strong>GoabxWorkSideNotificationItem</strong> - Individual notification
-        cards with:
+        <strong>GoabxWorkSideNotificationItem</strong> - Individual notification cards
+        with:
         <ul>
           <li>Title and description</li>
           <li>Smart timestamp formatting (e.g., "5 min ago", "2 h ago")</li>
@@ -164,16 +136,13 @@
           <li>Urgent priority styling</li>
         </ul>
       </li>
-      <li>
-        <strong>Footer actions</strong> - "View all" and "Mark all as read"
-        buttons
-      </li>
+      <li><strong>Footer actions</strong> - "View all" and "Mark all as read" buttons</li>
     </ul>
 
     <h2>Console Output</h2>
     <p>
-      Open the browser console to see events when clicking notifications or
-      footer actions.
+      Open the browser console to see events when clicking notifications or footer
+      actions.
     </p>
   </main>
 </div>

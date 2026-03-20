@@ -26,7 +26,9 @@ describe("GoabxMenuButton", () => {
   });
 
   it("should render with testId", () => {
-    const { container } = render(<GoabxMenuButton text="Menu Button" testId="test-menu-button" />);
+    const { container } = render(
+      <GoabxMenuButton text="Menu Button" testId="test-menu-button" />,
+    );
     const el = container.querySelector("goa-menu-button");
 
     expect(el?.getAttribute("testid")).toBe("test-menu-button");
@@ -37,7 +39,7 @@ describe("GoabxMenuButton", () => {
       <GoabxMenuButton text="Menu Button">
         <GoabxMenuAction text="Action 1" action="action1" />
         <GoabxMenuAction text="Action 2" action="action2" />
-      </GoabxMenuButton>
+      </GoabxMenuButton>,
     );
     const el = container.querySelector("goa-menu-button");
     const menuActions = container.querySelectorAll("goa-menu-action");
@@ -52,7 +54,7 @@ describe("GoabxMenuButton", () => {
 
   it("should render with all properties", () => {
     const { container } = render(
-      <GoabxMenuButton text="Advanced Menu" type="tertiary" testId="advanced-menu" />
+      <GoabxMenuButton text="Advanced Menu" type="tertiary" testId="advanced-menu" />,
     );
     const el = container.querySelector("goa-menu-button");
 
@@ -93,7 +95,7 @@ describe("GoabxMenuButton", () => {
 
   it("should render with leading icon and text", () => {
     const { container } = render(
-      <GoabxMenuButton text="More" leadingIcon="ellipsis-horizontal" />
+      <GoabxMenuButton text="More" leadingIcon="ellipsis-horizontal" />,
     );
     const el = container.querySelector("goa-menu-button");
 
@@ -103,7 +105,7 @@ describe("GoabxMenuButton", () => {
 
   it("should render icon-only with size compact", () => {
     const { container } = render(
-      <GoabxMenuButton leadingIcon="ellipsis-horizontal" size="compact" />
+      <GoabxMenuButton leadingIcon="ellipsis-horizontal" size="compact" />,
     );
     const el = container.querySelector("goa-menu-button");
 
@@ -113,7 +115,9 @@ describe("GoabxMenuButton", () => {
   });
 
   it("should render with variant destructive", () => {
-    const { container } = render(<GoabxMenuButton text="Menu Button" variant="destructive" />);
+    const { container } = render(
+      <GoabxMenuButton text="Menu Button" variant="destructive" />,
+    );
     const el = container.querySelector("goa-menu-button");
 
     expect(el?.getAttribute("variant")).toBe("destructive");
@@ -127,9 +131,7 @@ describe("GoabxMenuButton", () => {
   });
 
   it("should render icon-only with custom ariaLabel", () => {
-    const { container } = render(
-      <GoabxMenuButton ariaLabel="Actions for John Smith" />
-    );
+    const { container } = render(<GoabxMenuButton ariaLabel="Actions for John Smith" />);
     const el = container.querySelector("goa-menu-button");
 
     expect(el?.getAttribute("aria-label")).toBe("Actions for John Smith");

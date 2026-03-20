@@ -3,7 +3,8 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 import type {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -69,11 +70,7 @@ export function GoabAccordion({
   }, [onChange]);
 
   return (
-    <goa-accordion
-      ref={ref}
-      open={open ? "true" : undefined}
-      {..._props}
-    >
+    <goa-accordion ref={ref} open={open ? "true" : undefined} {..._props}>
       {headingContent && <div slot="headingcontent">{headingContent}</div>}
       {children}
     </goa-accordion>

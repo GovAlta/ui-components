@@ -98,23 +98,23 @@ function extractReactSetup(code: string): string | undefined {
     while (idx < code.length && /\s/.test(code[idx])) idx++;
 
     let endIdx: number;
-    if (code[idx] === '{') {
+    if (code[idx] === "{") {
       // Object type - use brace counting
       let braceCount = 1;
       endIdx = idx + 1;
       while (endIdx < code.length && braceCount > 0) {
-        if (code[endIdx] === '{') braceCount++;
-        else if (code[endIdx] === '}') braceCount--;
+        if (code[endIdx] === "{") braceCount++;
+        else if (code[endIdx] === "}") braceCount--;
         endIdx++;
       }
       // Include the semicolon after closing brace
       while (endIdx < code.length && /\s/.test(code[endIdx])) endIdx++;
-      if (code[endIdx] === ';') endIdx++;
+      if (code[endIdx] === ";") endIdx++;
     } else {
       // Simple type alias - find the semicolon
       endIdx = idx;
-      while (endIdx < code.length && code[endIdx] !== ';') endIdx++;
-      if (code[endIdx] === ';') endIdx++;
+      while (endIdx < code.length && code[endIdx] !== ";") endIdx++;
+      if (code[endIdx] === ";") endIdx++;
     }
 
     setupParts.push(code.slice(startIdx, endIdx).trim());
@@ -141,7 +141,7 @@ function extractReactSetup(code: string): string | undefined {
   if (setupParts.length === 0) return undefined;
 
   // Join with double newlines and clean up
-  let result = setupParts.join('\n\n');
+  let result = setupParts.join("\n\n");
   result = cleanIndentation(result);
 
   return result;
@@ -170,7 +170,7 @@ function extractJsxBody(code: string): string {
         // Create a match object with the correct global index
         const globalMatch = {
           ...localMatch,
-          index: jsxReturnIndex + localMatch.index
+          index: jsxReturnIndex + localMatch.index,
         } as RegExpMatchArray;
         return extractFromReturn(code, globalMatch);
       }
@@ -199,11 +199,11 @@ function extractFromReturn(code: string, returnMatch: RegExpMatchArray): string 
   while (endIdx < code.length && parenCount > 0) {
     const char = code[endIdx];
     // Skip string contents to avoid counting parens in strings
-    if (char === '"' || char === "'" || char === '`') {
+    if (char === '"' || char === "'" || char === "`") {
       endIdx = skipString(code, endIdx, char);
     } else {
-      if (char === '(') parenCount++;
-      else if (char === ')') parenCount--;
+      if (char === "(") parenCount++;
+      else if (char === ")") parenCount--;
       endIdx++;
     }
   }
@@ -212,9 +212,9 @@ function extractFromReturn(code: string, returnMatch: RegExpMatchArray): string 
   let jsx = code.slice(startIdx, endIdx - 1);
 
   // Clean up: remove fragment wrappers, style blocks
-  jsx = jsx.replace(/^[ \t]*<>[ \t]*\n?/m, '');
-  jsx = jsx.replace(/\n?[ \t]*<\/>[ \t]*$/m, '');
-  jsx = jsx.replace(/<style>\{`[\s\S]*?`\}<\/style>\s*/g, '');
+  jsx = jsx.replace(/^[ \t]*<>[ \t]*\n?/m, "");
+  jsx = jsx.replace(/\n?[ \t]*<\/>[ \t]*$/m, "");
+  jsx = jsx.replace(/<style>\{`[\s\S]*?`\}<\/style>\s*/g, "");
 
   return cleanIndentation(jsx.trim());
 }
@@ -225,7 +225,7 @@ function extractFromReturn(code: string, returnMatch: RegExpMatchArray): string 
 function skipString(code: string, startIdx: number, quote: string): number {
   let idx = startIdx + 1;
   while (idx < code.length) {
-    if (code[idx] === '\\') {
+    if (code[idx] === "\\") {
       idx += 2; // Skip escaped char
     } else if (code[idx] === quote) {
       return idx + 1;
@@ -245,7 +245,10 @@ function skipString(code: string, startIdx: number, quote: string): number {
  * @param tsCode - The angular.ts file content
  * @param htmlTemplate - The angular.html file content
  */
-export function extractAngularCode(tsCode: string | undefined, htmlTemplate: string): ExtractedAngularCode {
+export function extractAngularCode(
+  tsCode: string | undefined,
+  htmlTemplate: string,
+): ExtractedAngularCode {
   let css: string | undefined;
   let typescript: string | undefined;
 
@@ -304,7 +307,7 @@ export function extractWebComponentsCode(html: string): ExtractedWebComponentsCo
     let previousMarkup: string;
     do {
       previousMarkup = markup;
-      markup = markup.replace(/<style\b[^>]*>[\s\S]*?<\/style>\s*/gi, '');
+      markup = markup.replace(/<style\b[^>]*>[\s\S]*?<\/style>\s*/gi, "");
     } while (markup !== previousMarkup);
   }
 
@@ -315,7 +318,7 @@ export function extractWebComponentsCode(html: string): ExtractedWebComponentsCo
     let previousMarkup: string;
     do {
       previousMarkup = markup;
-      markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, '');
+      markup = markup.replace(/<script\b[^>]*>[\s\S]*?<\/script>\s*/gi, "");
     } while (markup !== previousMarkup);
   }
 
@@ -347,23 +350,23 @@ function removeTypeDefinitions(code: string): string {
     while (idx < code.length && /\s/.test(code[idx])) idx++;
 
     let endIdx: number;
-    if (code[idx] === '{') {
+    if (code[idx] === "{") {
       // Object type - use brace counting
       let braceCount = 1;
       endIdx = idx + 1;
       while (endIdx < code.length && braceCount > 0) {
-        if (code[endIdx] === '{') braceCount++;
-        else if (code[endIdx] === '}') braceCount--;
+        if (code[endIdx] === "{") braceCount++;
+        else if (code[endIdx] === "}") braceCount--;
         endIdx++;
       }
       // Include the semicolon after closing brace
       while (endIdx < code.length && /\s/.test(code[endIdx])) endIdx++;
-      if (code[endIdx] === ';') endIdx++;
+      if (code[endIdx] === ";") endIdx++;
     } else {
       // Simple type alias - find the semicolon
       endIdx = idx;
-      while (endIdx < code.length && code[endIdx] !== ';') endIdx++;
-      if (code[endIdx] === ';') endIdx++;
+      while (endIdx < code.length && code[endIdx] !== ";") endIdx++;
+      if (code[endIdx] === ";") endIdx++;
     }
 
     // Include trailing whitespace
@@ -387,7 +390,8 @@ function removeTypeDefinitions(code: string): string {
 function removeHookCalls(code: string): string {
   let result = code;
   // Match useEffect, useMemo, useCallback, useLayoutEffect, etc.
-  const hookStart = /\b(useEffect|useMemo|useCallback|useLayoutEffect)\s*\(\s*\([^)]*\)\s*=>\s*\{/g;
+  const hookStart =
+    /\b(useEffect|useMemo|useCallback|useLayoutEffect)\s*\(\s*\([^)]*\)\s*=>\s*\{/g;
   let match;
 
   const matches: Array<{ start: number; end: number }> = [];
@@ -400,8 +404,8 @@ function removeHookCalls(code: string): string {
 
     // Find matching closing brace for the arrow function body
     while (endIdx < code.length && braceCount > 0) {
-      if (code[endIdx] === '{') braceCount++;
-      else if (code[endIdx] === '}') braceCount--;
+      if (code[endIdx] === "{") braceCount++;
+      else if (code[endIdx] === "}") braceCount--;
       endIdx++;
     }
 
@@ -410,8 +414,8 @@ function removeHookCalls(code: string): string {
     // Find the closing paren and semicolon
     let parenCount = 1; // We're inside the hook call parens
     while (endIdx < code.length && parenCount > 0) {
-      if (code[endIdx] === '(') parenCount++;
-      else if (code[endIdx] === ')') parenCount--;
+      if (code[endIdx] === "(") parenCount++;
+      else if (code[endIdx] === ")") parenCount--;
       endIdx++;
     }
 
@@ -448,8 +452,8 @@ function removeRegularFunctions(code: string): string {
     let endIdx = braceStart + 1;
 
     while (endIdx < code.length && braceCount > 0) {
-      if (code[endIdx] === '{') braceCount++;
-      else if (code[endIdx] === '}') braceCount--;
+      if (code[endIdx] === "{") braceCount++;
+      else if (code[endIdx] === "}") braceCount--;
       endIdx++;
     }
 
@@ -489,8 +493,8 @@ function removeArrowFunctions(code: string): string {
     let endIdx = braceStart + 1;
 
     while (endIdx < code.length && braceCount > 0) {
-      if (code[endIdx] === '{') braceCount++;
-      else if (code[endIdx] === '}') braceCount--;
+      if (code[endIdx] === "{") braceCount++;
+      else if (code[endIdx] === "}") braceCount--;
       endIdx++;
     }
 
@@ -514,7 +518,7 @@ function removeArrowFunctions(code: string): string {
  * Remove common leading indentation from code
  */
 function cleanIndentation(code: string): string {
-  const lines = code.split('\n');
+  const lines = code.split("\n");
 
   // Remove leading/trailing empty lines
   while (lines.length && !lines[0].trim()) lines.shift();
@@ -522,7 +526,7 @@ function cleanIndentation(code: string): string {
 
   // Find minimum indentation (ignoring empty lines)
   const minIndent = lines
-    .filter(line => line.trim())
+    .filter((line) => line.trim())
     .reduce((min, line) => {
       const match = line.match(/^(\s*)/);
       return match ? Math.min(min, match[1].length) : min;
@@ -530,6 +534,6 @@ function cleanIndentation(code: string): string {
 
   // Remove common indentation
   return lines
-    .map(line => line.slice(minIndent === Infinity ? 0 : minIndent))
-    .join('\n');
+    .map((line) => line.slice(minIndent === Infinity ? 0 : minIndent))
+    .join("\n");
 }

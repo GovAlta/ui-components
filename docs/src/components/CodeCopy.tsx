@@ -20,9 +20,15 @@ export const CodeCopy: React.FC<Props> = ({ code, className }) => {
 
   return (
     <>
-    <div className={`goa-code-copy ${className || ""}`}>
-      <GoabIconButton ml="xs" mt="3xs" size="small" icon={isCopied ? "checkmark" :  "copy"} onClick={copyCode} />
-    </div>
+      <div className={`goa-code-copy ${className || ""}`}>
+        <GoabIconButton
+          ml="xs"
+          mt="3xs"
+          size="small"
+          icon={isCopied ? "checkmark" : "copy"}
+          onClick={copyCode}
+        />
+      </div>
     </>
   );
 };

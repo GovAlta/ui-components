@@ -5,12 +5,7 @@
     {
       "name": "size",
       "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
-      "values": [
-        "small",
-        "medium",
-        "large",
-        "xlarge"
-      ],
+      "values": ["small", "medium", "large", "xlarge"],
       "required": true,
       "default": null,
       "description": "Sets the size of the spinner."

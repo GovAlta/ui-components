@@ -21,11 +21,7 @@ export function GoabTableSortHeader({
 }: GoabTableSortProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-table-sort-header {..._props}>
-      {children}
-    </goa-table-sort-header>
-  );
+  return <goa-table-sort-header {..._props}>{children}</goa-table-sort-header>;
 }
 
 export default GoabTableSortHeader;

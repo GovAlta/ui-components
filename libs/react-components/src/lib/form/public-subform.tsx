@@ -12,9 +12,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-subform": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-public-subform": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -41,7 +42,7 @@ export function GoabPublicSubform({
 
   const _props = transformProps<WCProps>(
     { id, name, "continue-msg": continueMsg, ...rest },
-    kebab
+    kebab,
   );
 
   useEffect(() => {

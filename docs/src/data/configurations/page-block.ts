@@ -4,18 +4,18 @@
  * PageBlock provides consistent page layout structure.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const pageBlockConfigurations: ComponentConfigurations = {
-  componentSlug: 'page-block',
-  componentName: 'Page block',
-  defaultConfigurationId: 'basic',
+  componentSlug: "page-block",
+  componentName: "Page block",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic page block',
-      description: 'Standard page content wrapper',
+      id: "basic",
+      name: "Basic page block",
+      description: "Standard page content wrapper",
       code: {
         react: `<GoabPageBlock>
   <h1>Page Title</h1>
@@ -32,9 +32,9 @@ export const pageBlockConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'width-options',
-      name: 'Width options',
-      description: 'Different content widths',
+      id: "width-options",
+      name: "Width options",
+      description: "Different content widths",
       code: {
         react: `<GoabPageBlock width="full">
   <p>Full width content</p>

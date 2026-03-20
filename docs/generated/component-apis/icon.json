@@ -572,10 +572,7 @@
     {
       "name": "theme",
       "type": "\"outline\" | \"filled\"",
-      "values": [
-        "outline",
-        "filled"
-      ],
+      "values": ["outline", "filled"],
       "required": false,
       "default": "outline",
       "description": "Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons."

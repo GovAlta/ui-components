@@ -5,9 +5,7 @@ import GoabxFileUploadCard from "./file-upload-card";
 
 describe("GoabxFileUploadCard", () => {
   it("should render with base params", () => {
-    const { container } = render(
-      <GoabxFileUploadCard filename="foo.png" size={1e3} />
-    );
+    const { container } = render(<GoabxFileUploadCard filename="foo.png" size={1e3} />);
 
     const el = container.querySelector("goa-file-upload-card");
     expect(el?.getAttribute("filename")).toBe("foo.png");
@@ -23,7 +21,7 @@ describe("GoabxFileUploadCard", () => {
         progress={23}
         error="true"
         testId="foo"
-      />
+      />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -43,7 +41,7 @@ describe("GoabxFileUploadCard", () => {
         size={1e3}
         onCancel={onCancel}
         progress={23}
-      />
+      />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -60,7 +58,7 @@ describe("GoabxFileUploadCard", () => {
         size={1e3}
         onDelete={onDelete}
         progress={100}
-      />
+      />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -77,7 +75,7 @@ describe("GoabxFileUploadCard", () => {
         size={1e3}
         onDelete={onDelete}
         error="fail"
-      />
+      />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -107,14 +105,9 @@ describe("GoabxFileUploadCard", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabxFileUploadCard
-        filename="test.pdf"
-        size={1000}
-        data-grid="cell"
-      />
+      <GoabxFileUploadCard filename="test.pdf" size={1000} data-grid="cell" />,
     );
     const el = container.querySelector("goa-file-upload-card");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
-
 });

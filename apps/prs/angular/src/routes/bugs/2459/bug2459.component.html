@@ -5,14 +5,14 @@
     maxFileSize="100MB"
   />
   @for (upload of uploads; track upload.file.name; let i = $index) {
-  <goab-file-upload-card
-    [type]="upload.file.type"
-    [size]="upload.file.size"
-    [filename]="upload.file.name"
-    [progress]="progressList[upload.file.name]"
-    (onDelete)="deleteFile(upload)"
-    (onCancel)="deleteFile(upload)"
-  >
-  </goab-file-upload-card>
+    <goab-file-upload-card
+      [type]="upload.file.type"
+      [size]="upload.file.size"
+      [filename]="upload.file.name"
+      [progress]="progressList[upload.file.name]"
+      (onDelete)="deleteFile(upload)"
+      (onCancel)="deleteFile(upload)"
+    >
+    </goab-file-upload-card>
   }
 </goab-form-item>

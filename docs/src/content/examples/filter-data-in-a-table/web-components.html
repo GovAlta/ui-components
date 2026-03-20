@@ -1,11 +1,13 @@
 <goa-form-item version="2" id="filter-form-item" mb="m">
   <goa-block gap="xs" direction="row" alignment="center" width="100%">
-    <div style="flex: 1;">
-      <goa-input version="2"
+    <div style="flex: 1">
+      <goa-input
+        version="2"
         id="filter-input"
         name="filterChipInput"
         leadingicon="search"
-        width="100%">
+        width="100%"
+      >
       </goa-input>
     </div>
     <goa-button version="2" id="filter-btn" type="secondary" leadingicon="filter">
@@ -14,7 +16,7 @@
   </goa-block>
 </goa-form-item>
 
-<div id="chips-container" style="display: none;">
+<div id="chips-container" style="display: none">
   <goa-text tag="span" color="secondary" mb="xs" mr="xs">Filter:</goa-text>
   <span id="chips-list"></span>
   <goa-button version="2" id="clear-all-btn" type="tertiary" size="compact" mb="xs">
@@ -23,7 +25,7 @@
 </div>
 
 <goa-table version="2" width="100%" mt="s">
-  <table style="width: 100%;">
+  <table style="width: 100%">
     <thead>
       <tr>
         <th>Status</th>
@@ -33,32 +35,74 @@
     </thead>
     <tbody>
       <tr>
-        <td><goa-badge version="2" type="information" content="In progress" icon="false"></goa-badge></td>
+        <td>
+          <goa-badge
+            version="2"
+            type="information"
+            content="In progress"
+            icon="false"
+          ></goa-badge>
+        </td>
         <td>Ivan Schmidt</td>
         <td class="goa-table-number-column">7838576954</td>
       </tr>
       <tr>
-        <td><goa-badge version="2" type="success" content="Completed" icon="false"></goa-badge></td>
+        <td>
+          <goa-badge
+            version="2"
+            type="success"
+            content="Completed"
+            icon="false"
+          ></goa-badge>
+        </td>
         <td>Luz Lakin</td>
         <td class="goa-table-number-column">8576953364</td>
       </tr>
       <tr>
-        <td><goa-badge version="2" type="information" content="In progress" icon="false"></goa-badge></td>
+        <td>
+          <goa-badge
+            version="2"
+            type="information"
+            content="In progress"
+            icon="false"
+          ></goa-badge>
+        </td>
         <td>Keith McGlynn</td>
         <td class="goa-table-number-column">9846041345</td>
       </tr>
       <tr>
-        <td><goa-badge version="2" type="success" content="Completed" icon="false"></goa-badge></td>
+        <td>
+          <goa-badge
+            version="2"
+            type="success"
+            content="Completed"
+            icon="false"
+          ></goa-badge>
+        </td>
         <td>Melody Frami</td>
         <td class="goa-table-number-column">7385256175</td>
       </tr>
       <tr>
-        <td><goa-badge version="2" type="important" content="Updated" icon="false"></goa-badge></td>
+        <td>
+          <goa-badge
+            version="2"
+            type="important"
+            content="Updated"
+            icon="false"
+          ></goa-badge>
+        </td>
         <td>Frederick Skiles</td>
         <td class="goa-table-number-column">5807570418</td>
       </tr>
       <tr>
-        <td><goa-badge version="2" type="success" content="Completed" icon="false"></goa-badge></td>
+        <td>
+          <goa-badge
+            version="2"
+            type="success"
+            content="Completed"
+            icon="false"
+          ></goa-badge>
+        </td>
         <td>Dana Pfannerstill</td>
         <td class="goa-table-number-column">5736306857</td>
       </tr>
@@ -67,64 +111,66 @@
 </goa-table>
 
 <script>
-  const filterInput = document.getElementById('filter-input');
-  const filterBtn = document.getElementById('filter-btn');
-  const filterFormItem = document.getElementById('filter-form-item');
-  const chipsContainer = document.getElementById('chips-container');
-  const chipsList = document.getElementById('chips-list');
-  const clearAllBtn = document.getElementById('clear-all-btn');
-  const tableRows = document.querySelectorAll('tbody tr');
+  const filterInput = document.getElementById("filter-input");
+  const filterBtn = document.getElementById("filter-btn");
+  const filterFormItem = document.getElementById("filter-form-item");
+  const chipsContainer = document.getElementById("chips-container");
+  const chipsList = document.getElementById("chips-list");
+  const clearAllBtn = document.getElementById("clear-all-btn");
+  const tableRows = document.querySelectorAll("tbody tr");
 
   let typedChips = [];
 
   function filterTable() {
-    tableRows.forEach(row => {
-      const badge = row.querySelector('goa-badge');
-      const badgeText = badge ? badge.getAttribute('content') || '' : '';
-      const text = (row.textContent + ' ' + badgeText).toLowerCase();
-      const matches = typedChips.length === 0 || typedChips.every(chip => text.includes(chip.toLowerCase()));
-      row.style.display = matches ? '' : 'none';
+    tableRows.forEach((row) => {
+      const badge = row.querySelector("goa-badge");
+      const badgeText = badge ? badge.getAttribute("content") || "" : "";
+      const text = (row.textContent + " " + badgeText).toLowerCase();
+      const matches =
+        typedChips.length === 0 ||
+        typedChips.every((chip) => text.includes(chip.toLowerCase()));
+      row.style.display = matches ? "" : "none";
     });
   }
 
   function renderChips() {
-    chipsList.innerHTML = '';
-    typedChips.forEach(chip => {
-      const filterChip = document.createElement('goa-filter-chip');
-      filterChip.setAttribute('version', '2');
-      filterChip.setAttribute('content', chip);
-      filterChip.setAttribute('mb', 'xs');
-      filterChip.setAttribute('mr', 'xs');
-      filterChip.addEventListener('_click', () => removeChip(chip));
+    chipsList.innerHTML = "";
+    typedChips.forEach((chip) => {
+      const filterChip = document.createElement("goa-filter-chip");
+      filterChip.setAttribute("version", "2");
+      filterChip.setAttribute("content", chip);
+      filterChip.setAttribute("mb", "xs");
+      filterChip.setAttribute("mr", "xs");
+      filterChip.addEventListener("_click", () => removeChip(chip));
       chipsList.appendChild(filterChip);
     });
-    chipsContainer.style.display = typedChips.length > 0 ? 'block' : 'none';
+    chipsContainer.style.display = typedChips.length > 0 ? "block" : "none";
     filterTable();
   }
 
   function applyFilter() {
     const value = filterInput.value.trim();
-    if (value === '') {
-      filterFormItem.setAttribute('error', 'Empty filter');
+    if (value === "") {
+      filterFormItem.setAttribute("error", "Empty filter");
       return;
     }
     if (typedChips.includes(value)) {
-      filterFormItem.setAttribute('error', 'Enter a unique filter');
+      filterFormItem.setAttribute("error", "Enter a unique filter");
       return;
     }
     typedChips.push(value);
-    filterInput.value = '';
-    filterFormItem.removeAttribute('error');
+    filterInput.value = "";
+    filterFormItem.removeAttribute("error");
     renderChips();
   }
 
   function removeChip(chip) {
-    typedChips = typedChips.filter(c => c !== chip);
+    typedChips = typedChips.filter((c) => c !== chip);
     renderChips();
   }
 
-  filterBtn.addEventListener('_click', applyFilter);
-  clearAllBtn.addEventListener('_click', () => {
+  filterBtn.addEventListener("_click", applyFilter);
+  clearAllBtn.addEventListener("_click", () => {
     typedChips = [];
     renderChips();
   });

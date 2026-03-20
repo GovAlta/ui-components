@@ -5,18 +5,18 @@
  * Note: Dropdown must ALWAYS be wrapped in FormItem for proper labeling.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const dropdownConfigurations: ComponentConfigurations = {
-  componentSlug: 'dropdown',
-  componentName: 'Dropdown',
-  defaultConfigurationId: 'basic',
+  componentSlug: "dropdown",
+  componentName: "Dropdown",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Simple dropdown with options',
+      id: "basic",
+      name: "Basic example",
+      description: "Simple dropdown with options",
       code: {
         react: `<GoabxFormItem label="Province or territory" mb="l">
   <GoabxDropdown name="province">
@@ -72,9 +72,9 @@ export const dropdownConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-custom-placeholder',
-      name: 'With custom placeholder',
-      description: 'Dropdown with placeholder text when no selection',
+      id: "with-custom-placeholder",
+      name: "With custom placeholder",
+      description: "Dropdown with placeholder text when no selection",
       code: {
         react: `<GoabxFormItem label="How would you like to be contacted?" mb="l">
   <GoabxDropdown name="contactMethod" placeholder="—Select contact method—">
@@ -100,9 +100,9 @@ export const dropdownConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'filterable',
-      name: 'Filterable',
-      description: 'Dropdown with search/filter capability for long lists',
+      id: "filterable",
+      name: "Filterable",
+      description: "Dropdown with search/filter capability for long lists",
       code: {
         react: `<GoabxFormItem label="City" mb="l">
   <GoabxDropdown name="city" filterable>
@@ -179,9 +179,9 @@ export const dropdownConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'states',
-      name: 'States',
-      description: 'Disabled and error states',
+      id: "states",
+      name: "States",
+      description: "Disabled and error states",
       code: {
         react: `<GoabxFormItem label="Disabled dropdown" mb="l">
   <GoabxDropdown name="disabled" disabled value="AB">

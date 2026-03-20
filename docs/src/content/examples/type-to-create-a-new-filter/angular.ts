@@ -21,7 +21,11 @@ export class TypeToCreateANewFilterComponent {
     const newValue = detail.value.trim();
     if (detail.key === "Enter" && newValue !== "") {
       this.addChip();
-    } else if (!this.inputValue && this.typedChips.length > 0 && detail.key === "Backspace") {
+    } else if (
+      !this.inputValue &&
+      this.typedChips.length > 0 &&
+      detail.key === "Backspace"
+    ) {
       this.typedChips.pop();
     }
   }

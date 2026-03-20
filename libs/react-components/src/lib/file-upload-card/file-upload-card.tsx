@@ -51,9 +51,7 @@ export function GoabFileUploadCard({
     };
   }, [el, onDelete, onCancel, filename]);
 
-  return (
-    <goa-file-upload-card ref={el} {..._props} />
-  );
+  return <goa-file-upload-card ref={el} {..._props} />;
 }
 
 export default GoabFileUploadCard;

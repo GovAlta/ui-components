@@ -21,11 +21,7 @@
     {
       "name": "color",
       "type": "\"interactive\" | \"dark\" | \"light\"",
-      "values": [
-        "interactive",
-        "dark",
-        "light"
-      ],
+      "values": ["interactive", "dark", "light"],
       "required": false,
       "default": "interactive",
       "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
@@ -33,12 +29,7 @@
     {
       "name": "size",
       "type": "\"xsmall\" | \"small\" | \"medium\" | \"large\"",
-      "values": [
-        "xsmall",
-        "small",
-        "medium",
-        "large"
-      ],
+      "values": ["xsmall", "small", "medium", "large"],
       "required": false,
       "default": "medium",
       "description": "Sets the text size and corresponding icon size."

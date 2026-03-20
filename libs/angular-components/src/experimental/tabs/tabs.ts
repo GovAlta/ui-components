@@ -46,7 +46,7 @@ export class GoabxTabs implements OnInit {
   @Input() orientation?: GoabTabsOrientation;
   @Input() navigation?: GoabTabsNavigation;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

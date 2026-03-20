@@ -41,12 +41,9 @@ describe("Tooltip", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabTooltip
-        content="This is a tooltip"
-        data-grid="cell"
-      >
+      <GoabTooltip content="This is a tooltip" data-grid="cell">
         Hover me
-      </GoabTooltip>
+      </GoabTooltip>,
     );
     const el = baseElement.querySelector("goa-tooltip");
     expect(el?.getAttribute("data-grid")).toBe("cell");

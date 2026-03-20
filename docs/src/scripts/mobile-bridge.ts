@@ -30,24 +30,24 @@ let headerHidden = false;
  */
 function updateMobileState(): void {
   const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-  document.body.setAttribute('data-mobile', String(isMobile));
+  document.body.setAttribute("data-mobile", String(isMobile));
 
   // Sync sidebar width CSS variable for layout
   if (isMobile) {
-    document.documentElement.style.setProperty('--sidebar-width', '0px');
+    document.documentElement.style.setProperty("--sidebar-width", "0px");
   } else {
     // Desktop: check saved menu state for correct width
-    const saved = localStorage.getItem('goa-ds-menu-open');
-    const isOpen = saved === null ? true : saved === 'true';
+    const saved = localStorage.getItem("goa-ds-menu-open");
+    const isOpen = saved === null ? true : saved === "true";
     const width = isOpen ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED;
-    document.documentElement.style.setProperty('--sidebar-width', `${width}px`);
+    document.documentElement.style.setProperty("--sidebar-width", `${width}px`);
   }
 
   // Auto-close menu when resizing to desktop
   if (!isMobile) {
-    document.body.setAttribute('data-menu-open', 'false');
+    document.body.setAttribute("data-menu-open", "false");
     // Reset header visibility on desktop
-    document.body.setAttribute('data-header-hidden', 'false');
+    document.body.setAttribute("data-header-hidden", "false");
     headerHidden = false;
   }
 }
@@ -62,7 +62,7 @@ function handleScroll(): void {
 
   // Track scrolled state (applies to all viewports, used for header transparency)
   const isScrolled = currentScrollY > SCROLLED_THRESHOLD;
-  document.body.setAttribute('data-scrolled', String(isScrolled));
+  document.body.setAttribute("data-scrolled", String(isScrolled));
 
   // Header hide/show only applies on mobile
   if (window.innerWidth >= MOBILE_BREAKPOINT) {
@@ -76,18 +76,18 @@ function handleScroll(): void {
   if (currentScrollY < SCROLL_DOWN_THRESHOLD) {
     if (headerHidden) {
       headerHidden = false;
-      document.body.setAttribute('data-header-hidden', 'false');
+      document.body.setAttribute("data-header-hidden", "false");
     }
   }
   // Scrolling down - hide header
   else if (scrollDelta > 0 && !headerHidden) {
     headerHidden = true;
-    document.body.setAttribute('data-header-hidden', 'true');
+    document.body.setAttribute("data-header-hidden", "true");
   }
   // Scrolling up past threshold - show header
   else if (scrollDelta < -SCROLL_UP_THRESHOLD && headerHidden) {
     headerHidden = false;
-    document.body.setAttribute('data-header-hidden', 'false');
+    document.body.setAttribute("data-header-hidden", "false");
   }
 
   lastScrollY = currentScrollY;
@@ -99,18 +99,18 @@ function handleScroll(): void {
 function handleMenuChange(event: Event): void {
   const customEvent = event as CustomEvent<{ isOpen: boolean }>;
   const isOpen = customEvent.detail?.isOpen ?? false;
-  document.body.setAttribute('data-menu-open', String(isOpen));
+  document.body.setAttribute("data-menu-open", String(isOpen));
 
   // Update sidebar width CSS variable (desktop only)
   if (window.innerWidth >= MOBILE_BREAKPOINT) {
     const width = isOpen ? SIDEBAR_EXPANDED : SIDEBAR_COLLAPSED;
-    document.documentElement.style.setProperty('--sidebar-width', `${width}px`);
+    document.documentElement.style.setProperty("--sidebar-width", `${width}px`);
   }
 
   // Always show header when menu is open
   if (isOpen && headerHidden) {
     headerHidden = false;
-    document.body.setAttribute('data-header-hidden', 'false');
+    document.body.setAttribute("data-header-hidden", "false");
   }
 }
 
@@ -120,24 +120,27 @@ function handleMenuChange(event: Event): void {
 function init(): void {
   // Set initial states
   updateMobileState();
-  document.body.setAttribute('data-menu-open', 'false');
-  document.body.setAttribute('data-header-hidden', 'false');
-  document.body.setAttribute('data-scrolled', String(window.scrollY > SCROLLED_THRESHOLD));
+  document.body.setAttribute("data-menu-open", "false");
+  document.body.setAttribute("data-header-hidden", "false");
+  document.body.setAttribute(
+    "data-scrolled",
+    String(window.scrollY > SCROLLED_THRESHOLD),
+  );
   lastScrollY = window.scrollY;
 
   // Listen for viewport changes
-  window.addEventListener('resize', updateMobileState);
+  window.addEventListener("resize", updateMobileState);
 
   // Listen for scroll (passive for performance)
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, { passive: true });
 
   // Listen for menu state changes from React
-  window.addEventListener('goa-menu-change', handleMenuChange);
+  window.addEventListener("goa-menu-change", handleMenuChange);
 }
 
 // Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
 } else {
   init();
 }

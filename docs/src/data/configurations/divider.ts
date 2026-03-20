@@ -4,18 +4,18 @@
  * Dividers separate content sections visually.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const dividerConfigurations: ComponentConfigurations = {
-  componentSlug: 'divider',
-  componentName: 'Divider',
-  defaultConfigurationId: 'basic',
+  componentSlug: "divider",
+  componentName: "Divider",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic divider',
-      description: 'Simple horizontal line',
+      id: "basic",
+      name: "Basic divider",
+      description: "Simple horizontal line",
       code: {
         react: `<p>Section one content</p>
 <GoabDivider />
@@ -29,9 +29,9 @@ export const dividerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-margins',
-      name: 'With margins',
-      description: 'Divider with custom spacing',
+      id: "with-margins",
+      name: "With margins",
+      description: "Divider with custom spacing",
       code: {
         react: `<p>Section one</p>
 <GoabDivider mt="xl" mb="xl" />

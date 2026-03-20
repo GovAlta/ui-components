@@ -6,11 +6,7 @@
       "name": "type",
       "type": "\"live\" | \"alpha\" | \"beta\"",
       "typeLabel": "GoabMicrositeHeaderType",
-      "values": [
-        "live",
-        "alpha",
-        "beta"
-      ],
+      "values": ["live", "alpha", "beta"],
       "required": true,
       "default": null,
       "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
@@ -40,10 +36,7 @@
       "name": "headerurltarget",
       "type": "\"self\" | \"blank\"",
       "typeLabel": "GoabMicrositeHeaderUrlTargetType",
-      "values": [
-        "self",
-        "blank"
-      ],
+      "values": ["self", "blank"],
       "required": false,
       "default": "blank",
       "description": "Sets the target attribute for the header link."
@@ -52,10 +45,7 @@
       "name": "feedbackurltarget",
       "type": "\"self\" | \"blank\"",
       "typeLabel": "GoabMicrositeHeaderUrlTargetType",
-      "values": [
-        "self",
-        "blank"
-      ],
+      "values": ["self", "blank"],
       "required": false,
       "default": "blank",
       "description": "For internal feedback urls sets target="
@@ -80,17 +70,13 @@
       "name": "onFeedbackClick",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_feedbackClick",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   GoabFormItem,
   GoabInput,
@@ -18,7 +18,7 @@ export function Bug3498Route() {
   const [contactMethodThree, setContactMethodThree] = useState("");
 
   return (
-     <div>
+    <div>
       <h1>3498 - Radio group alignment and border adjustment</h1>
       <h2>Version 1</h2>
       <GoabFormItem
@@ -143,6 +143,5 @@ export function Bug3498Route() {
         </GoabxRadioGroup>
       </GoabxFormItem>
     </div>
-
   );
 }

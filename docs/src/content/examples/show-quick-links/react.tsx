@@ -1,4 +1,7 @@
-import { GoabxAppFooter, GoabxAppFooterMetaSection } from "@abgov/react-components/experimental";
+import {
+  GoabxAppFooter,
+  GoabxAppFooterMetaSection,
+} from "@abgov/react-components/experimental";
 
 export function ShowQuickLinks() {
   return (

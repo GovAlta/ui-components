@@ -4,18 +4,18 @@
  * File upload input allows users to select files.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const fileUploadInputConfigurations: ComponentConfigurations = {
-  componentSlug: 'file-upload-input',
-  componentName: 'File upload input',
-  defaultConfigurationId: 'basic',
+  componentSlug: "file-upload-input",
+  componentName: "File upload input",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic file upload',
-      description: 'Simple file selection input',
+      id: "basic",
+      name: "Basic file upload",
+      description: "Simple file selection input",
       code: {
         react: `<GoabxFormItem label="Upload document" mb="l">
   <GoabxFileUploadInput onChange={handleFileChange} />
@@ -29,9 +29,9 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-accept',
-      name: 'Accepted file types',
-      description: 'Restrict to specific file types',
+      id: "with-accept",
+      name: "Accepted file types",
+      description: "Restrict to specific file types",
       code: {
         react: `<GoabxFormItem label="Upload image" mb="l">
   <GoabxFileUploadInput accept="image/*" onChange={handleFileChange} />
@@ -54,9 +54,9 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'multiple',
-      name: 'Multiple files',
-      description: 'Allow selecting multiple files',
+      id: "multiple",
+      name: "Multiple files",
+      description: "Allow selecting multiple files",
       code: {
         react: `<GoabxFormItem label="Upload files" mb="l">
   <GoabxFileUploadInput multiple onChange={handleFilesChange} />
@@ -70,9 +70,9 @@ export const fileUploadInputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'variants',
-      name: 'Variants',
-      description: 'Different visual styles',
+      id: "variants",
+      name: "Variants",
+      description: "Different visual styles",
       code: {
         react: `<GoabxFormItem label="Button variant" mb="l">
   <GoabxFileUploadInput variant="button" onChange={handleFileChange} />

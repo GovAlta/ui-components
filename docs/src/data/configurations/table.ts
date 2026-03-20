@@ -4,18 +4,18 @@
  * Tables display data in rows and columns.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const tableConfigurations: ComponentConfigurations = {
-  componentSlug: 'table',
-  componentName: 'Table',
-  defaultConfigurationId: 'basic',
+  componentSlug: "table",
+  componentName: "Table",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic table',
-      description: 'Simple table with data',
+      id: "basic",
+      name: "Basic table",
+      description: "Simple table with data",
       code: {
         react: `<GoabxTable>
   <thead>
@@ -85,9 +85,9 @@ export const tableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'striped',
-      name: 'Striped rows',
-      description: 'Alternating row colors for readability',
+      id: "striped",
+      name: "Striped rows",
+      description: "Alternating row colors for readability",
       code: {
         react: `<GoabxTable striped>
   <thead>
@@ -172,9 +172,9 @@ export const tableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'relaxed',
-      name: 'Relaxed variant',
-      description: 'More vertical padding for comfortable reading',
+      id: "relaxed",
+      name: "Relaxed variant",
+      description: "More vertical padding for comfortable reading",
       code: {
         react: `<GoabxTable variant="relaxed">
   <thead>
@@ -235,9 +235,9 @@ export const tableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sticky-header',
-      name: 'Sticky header',
-      description: 'Header stays visible when scrolling',
+      id: "sticky-header",
+      name: "Sticky header",
+      description: "Header stays visible when scrolling",
       code: {
         react: `<GoabxTable stickyHeader width="100%">
   <thead>
@@ -322,9 +322,9 @@ export const tableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'full-width',
-      name: 'Full width',
-      description: 'Table that spans container width',
+      id: "full-width",
+      name: "Full width",
+      description: "Table that spans container width",
       code: {
         react: `<GoabxTable width="100%" striped>
   <thead>
@@ -403,9 +403,9 @@ export const tableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'single-sort',
-      name: 'Single-column sorting',
-      description: 'Sortable columns using TableSortHeader (default single sort mode)',
+      id: "single-sort",
+      name: "Single-column sorting",
+      description: "Sortable columns using TableSortHeader (default single sort mode)",
       code: {
         react: `<GoabxTable onSort={(detail) => console.log(detail)}>
   <thead>
@@ -487,9 +487,10 @@ export const tableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'multi-sort',
-      name: 'Multi-column sorting',
-      description: 'Sort by multiple columns with sortMode="multi" and sortOrder for priority',
+      id: "multi-sort",
+      name: "Multi-column sorting",
+      description:
+        'Sort by multiple columns with sortMode="multi" and sortOrder for priority',
       code: {
         react: `<GoabxTable sortMode="multi" onMultiSort={(detail) => console.log(detail.sorts)}>
   <thead>

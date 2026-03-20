@@ -1,7 +1,8 @@
 import {
   GoabDropdownOnChangeDetail,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";

@@ -73,7 +73,12 @@ describe("GoabxTable Browser Tests", () => {
           <GoabxTable
             testId="single-sort-table"
             onSort={(detail) => {
-              setSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }]);
+              setSorts([
+                {
+                  column: detail.sortBy,
+                  direction: detail.sortDir === 1 ? "asc" : "desc",
+                },
+              ]);
               onSort(detail);
             }}
           >
@@ -83,7 +88,9 @@ describe("GoabxTable Browser Tests", () => {
                   <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+                  <GoabxTableSortHeader name="department">
+                    Department
+                  </GoabxTableSortHeader>
                 </th>
                 <th>
                   <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
@@ -139,7 +146,12 @@ describe("GoabxTable Browser Tests", () => {
           <GoabxTable
             testId="toggle-sort-table"
             onSort={(detail) => {
-              setSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }]);
+              setSorts([
+                {
+                  column: detail.sortBy,
+                  direction: detail.sortDir === 1 ? "asc" : "desc",
+                },
+              ]);
             }}
           >
             <thead>
@@ -201,7 +213,12 @@ describe("GoabxTable Browser Tests", () => {
           <GoabxTable
             testId="switch-col-table"
             onSort={(detail) => {
-              setSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }]);
+              setSorts([
+                {
+                  column: detail.sortBy,
+                  direction: detail.sortDir === 1 ? "asc" : "desc",
+                },
+              ]);
             }}
           >
             <thead>
@@ -270,7 +287,9 @@ describe("GoabxTable Browser Tests", () => {
                   <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+                  <GoabxTableSortHeader name="department">
+                    Department
+                  </GoabxTableSortHeader>
                 </th>
                 <th>
                   <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
@@ -472,14 +491,21 @@ describe("GoabxTable Browser Tests", () => {
     it("should update direction attribute on sort header after clicking", async () => {
       const Component = () => {
         return (
-          <GoabxTable testId="direction-attr-table" onSort={() => { /* noop */ }}>
+          <GoabxTable
+            testId="direction-attr-table"
+            onSort={() => {
+              /* noop */
+            }}
+          >
             <thead>
               <tr>
                 <th>
                   <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+                  <GoabxTableSortHeader name="department">
+                    Department
+                  </GoabxTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -497,7 +523,9 @@ describe("GoabxTable Browser Tests", () => {
       await waitForHeaders(container, 2);
 
       const nameHeader = container.querySelector('goa-table-sort-header[name="name"]')!;
-      const deptHeader = container.querySelector('goa-table-sort-header[name="department"]')!;
+      const deptHeader = container.querySelector(
+        'goa-table-sort-header[name="department"]',
+      )!;
 
       // Initially both should be "none"
       expect(nameHeader.getAttribute("direction")).toBe("none");

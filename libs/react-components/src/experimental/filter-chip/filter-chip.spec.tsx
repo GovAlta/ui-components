@@ -74,10 +74,7 @@ describe("GoabxFilterChip", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabxFilterChip
-        content="test chip"
-        data-grid="cell"
-      />
+      <GoabxFilterChip content="test chip" data-grid="cell" />,
     );
     const el = container.querySelector("goa-filter-chip");
     expect(el?.getAttribute("data-grid")).toBe("cell");

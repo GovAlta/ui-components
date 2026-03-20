@@ -21,7 +21,9 @@ export function ShowFullDateInATooltip() {
         </span>
       }
     >
-      <GoabText as="body-m" mt="none" mb="none">Hover on the time it was added to see the full date and time.</GoabText>
+      <GoabText as="body-m" mt="none" mb="none">
+        Hover on the time it was added to see the full date and time.
+      </GoabText>
     </GoabContainer>
   );
 }

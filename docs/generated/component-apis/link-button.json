@@ -5,10 +5,7 @@
     {
       "name": "color",
       "type": "\"interactive\" | \"light\"",
-      "values": [
-        "interactive",
-        "light"
-      ],
+      "values": ["interactive", "light"],
       "required": false,
       "default": "interactive",
       "description": "Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds."
@@ -67,17 +64,13 @@
       "name": "onClick",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_click",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

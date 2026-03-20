@@ -1,4 +1,8 @@
-import { GoabxFormItem, GoabxRadioGroup, GoabxRadioItem } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxRadioGroup,
+  GoabxRadioItem,
+} from "@abgov/react-components/experimental";
 import { GoabBlock, GoabDetails } from "@abgov/react-components";
 import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
@@ -12,7 +16,8 @@ export function ShowAListToHelpAnswerAQuestion() {
       <GoabxFormItem
         label="Do you have additional education expenses?"
         helpText="You can request funding for these now or at any time during your program."
-        mb="m">
+        mb="m"
+      >
         <GoabxRadioGroup name="additional" onChange={handleChange}>
           <GoabxRadioItem label="Yes" value="yes" name="additional" />
           <GoabxRadioItem label="No" value="no" name="additional" />

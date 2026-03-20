@@ -5,10 +5,7 @@
     {
       "name": "variant",
       "type": "\"dragdrop\" | \"button\"",
-      "values": [
-        "dragdrop",
-        "button"
-      ],
+      "values": ["dragdrop", "button"],
       "required": false,
       "default": "dragdrop",
       "description": "The input display variant. \"dragdrop\" shows a drag-and-drop area, \"button\" shows a simple button."
@@ -37,10 +34,7 @@
     {
       "name": "version",
       "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
+      "values": ["1", "2"],
       "required": false,
       "default": "1",
       "description": ""
@@ -51,17 +45,13 @@
       "name": "onSelectFile",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_selectFile",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": []

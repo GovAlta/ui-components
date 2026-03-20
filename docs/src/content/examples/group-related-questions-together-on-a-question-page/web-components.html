@@ -1,42 +1,48 @@
-<goa-link leadingicon="arrow-back" size="small" mb="none">
-  Back
-</goa-link>
+<goa-link leadingicon="arrow-back" size="small" mb="none"> Back </goa-link>
 
 <goa-text as="h2" mt="xl" mb="m">Your address</goa-text>
 <goa-text mt="none" mb="xl">This is the home address of the person applying</goa-text>
 
 <goa-form-item version="2" label="Address line 1">
-  <goa-input version="2"
+  <goa-input
+    version="2"
     id="address-line-1"
     name="address-line-1"
     aria-label="Address line 1"
-    width="100%">
+    width="100%"
+  >
   </goa-input>
 </goa-form-item>
 
 <goa-form-item version="2" label="Address line 2" mt="l">
-  <goa-input version="2"
+  <goa-input
+    version="2"
     id="address-line-2"
     name="address-line-2"
     aria-label="Address line 2"
-    width="100%">
+    width="100%"
+  >
   </goa-input>
 </goa-form-item>
 
 <goa-form-item version="2" label="Town or city" mt="l">
-  <goa-input version="2"
+  <goa-input
+    version="2"
     id="town-city"
     name="town-city"
     aria-label="Town or city name"
-    width="460px">
+    width="460px"
+  >
   </goa-input>
 </goa-form-item>
 
 <goa-form-item version="2" label="Province or territory" mt="l" id="provinceLabel">
-  <goa-dropdown version="2"
+  <goa-dropdown
+    version="2"
     id="province-territory"
     name="province-territory"
-    aria-labelledby="provinceLabel">
+    aria-labelledby="provinceLabel"
+  >
     <goa-dropdown-item value="AB" label="Alberta"></goa-dropdown-item>
     <goa-dropdown-item value="BC" label="British Columbia"></goa-dropdown-item>
     <goa-dropdown-item value="MB" label="Manitoba"></goa-dropdown-item>
@@ -54,11 +60,7 @@
 </goa-form-item>
 
 <goa-form-item version="2" label="Postal code" mt="l">
-  <goa-input version="2"
-    id="postal-code"
-    name="postal-code"
-    width="105px">
-  </goa-input>
+  <goa-input version="2" id="postal-code" name="postal-code" width="105px"> </goa-input>
 </goa-form-item>
 
 <goa-button version="2" type="submit" mt="2xl" id="submit-btn">

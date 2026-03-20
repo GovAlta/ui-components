@@ -22,11 +22,7 @@
       "name": "accent",
       "type": "\"thick\" | \"thin\" | \"filled\"",
       "typeLabel": "GoabContainerAccent",
-      "values": [
-        "thick",
-        "thin",
-        "filled"
-      ],
+      "values": ["thick", "thin", "filled"],
       "required": false,
       "default": "filled",
       "description": "Sets the style of accent on the container."
@@ -35,10 +31,7 @@
       "name": "padding",
       "type": "\"relaxed\" | \"compact\"",
       "typeLabel": "GoabContainerPadding",
-      "values": [
-        "relaxed",
-        "compact"
-      ],
+      "values": ["relaxed", "compact"],
       "required": false,
       "default": "relaxed",
       "description": "Sets the amount of white space in the container."
@@ -47,10 +40,7 @@
       "name": "width",
       "type": "\"full\" | \"content\"",
       "typeLabel": "GoabContainerWidth",
-      "values": [
-        "full",
-        "content"
-      ],
+      "values": ["full", "content"],
       "required": false,
       "default": "full",
       "description": "Sets the width of the container."

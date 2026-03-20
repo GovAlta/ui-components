@@ -1,4 +1,9 @@
-import { DataAttributes, GoabChipTheme, GoabChipVariant, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabChipTheme,
+  GoabChipVariant,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -16,9 +21,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-chip": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -34,12 +40,7 @@ export interface GoabChipProps extends Margins, DataAttributes {
   testId?: string;
 }
 
-export const GoabChip = ({
-  error,
-  deletable,
-  onClick,
-  ...rest
-}: GoabChipProps) => {
+export const GoabChip = ({ error, deletable, onClick, ...rest }: GoabChipProps) => {
   const el = useRef<HTMLElement>(null);
 
   const _props = transformProps<WCProps>(rest, lowercase);

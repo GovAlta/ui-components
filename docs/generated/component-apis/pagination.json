@@ -27,10 +27,7 @@
       "name": "variant",
       "type": "\"all\" | \"links-only\"",
       "typeLabel": "GoabPaginationVariant",
-      "values": [
-        "all",
-        "links-only"
-      ],
+      "values": ["all", "links-only"],
       "required": false,
       "default": "all",
       "description": "Controls which nav controls are visible."
@@ -80,17 +77,13 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": []

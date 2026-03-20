@@ -4,18 +4,18 @@
  * Scrollable provides a scrollable container.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const scrollableConfigurations: ComponentConfigurations = {
-  componentSlug: 'scrollable',
-  componentName: 'Scrollable',
-  defaultConfigurationId: 'basic',
+  componentSlug: "scrollable",
+  componentName: "Scrollable",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic scrollable',
-      description: 'Scrollable content area',
+      id: "basic",
+      name: "Basic scrollable",
+      description: "Scrollable content area",
       code: {
         react: `<GoabScrollable maxHeight="300px">
   <p>Long content that scrolls...</p>
@@ -35,9 +35,9 @@ export const scrollableConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'horizontal',
-      name: 'Horizontal scroll',
-      description: 'Horizontally scrollable content',
+      id: "horizontal",
+      name: "Horizontal scroll",
+      description: "Horizontally scrollable content",
       code: {
         react: `<GoabScrollable direction="horizontal">
   <div style={{ display: 'flex', gap: '1rem' }}>

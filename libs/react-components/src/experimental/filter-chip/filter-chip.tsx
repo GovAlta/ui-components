@@ -21,9 +21,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-filter-chip": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -48,10 +49,7 @@ export const GoabxFilterChip = ({
 }: GoabxFilterChipProps) => {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { icontheme: iconTheme, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ icontheme: iconTheme, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) return;

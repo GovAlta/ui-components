@@ -14,12 +14,12 @@
     </thead>
     <tbody>
       @for (row of rows; track $index) {
-      <tr>
-        <td>{{ row.service }}</td>
-        <td>{{ row.status }}</td>
-        <td class="Goab-table-number-cell">{{ row.requests }}</td>
-        <td>{{ row.updated }}</td>
-      </tr>
+        <tr>
+          <td>{{ row.service }}</td>
+          <td>{{ row.status }}</td>
+          <td class="Goab-table-number-cell">{{ row.requests }}</td>
+          <td>{{ row.updated }}</td>
+        </tr>
       }
     </tbody>
   </goabx-table>

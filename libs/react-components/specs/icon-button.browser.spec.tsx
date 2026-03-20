@@ -8,7 +8,12 @@ describe("Icon Button", () => {
     const Component = () => {
       return (
         <div data-testid={"container"}>
-          <GoabIconButton icon="add" testId={"button"} action="some-action" actionArg="some-arg-value" />
+          <GoabIconButton
+            icon="add"
+            testId={"button"}
+            action="some-action"
+            actionArg="some-arg-value"
+          />
         </div>
       );
     };
@@ -31,14 +36,19 @@ describe("Icon Button", () => {
 
     await vi.waitFor(() => {
       expect(spy).toBeCalledWith("some-arg-value");
-    })
-  })
+    });
+  });
 
   it("should trigger the action with an args object", async () => {
     const Component = () => {
       return (
         <div data-testid={"container"}>
-          <GoabIconButton icon="add" testId={"button"} action="some-action" actionArgs={{foo: "bar"}} />
+          <GoabIconButton
+            icon="add"
+            testId={"button"}
+            action="some-action"
+            actionArgs={{ foo: "bar" }}
+          />
         </div>
       );
     };
@@ -60,7 +70,7 @@ describe("Icon Button", () => {
     // Result
 
     await vi.waitFor(() => {
-      expect(spy).toBeCalledWith({foo: "bar"});
-    })
-  })
-})
+      expect(spy).toBeCalledWith({ foo: "bar" });
+    });
+  });
+});

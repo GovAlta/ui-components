@@ -5,7 +5,8 @@ import {
   GoabTextTextElement,
   GoabTextSize,
   GoabTextColor,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -37,19 +38,11 @@ interface GoATextProps extends Margins, DataAttributes {
   children: ReactNode;
 }
 
-export function GoabText({
-  as,
-  tag,
-  children,
-  ...rest
-}: GoATextProps): JSX.Element {
+export function GoabText({ as, tag, children, ...rest }: GoATextProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (
-    <goa-text
-      as={tag || as}
-      {..._props}
-    >
+    <goa-text as={tag || as} {..._props}>
       {children}
     </goa-text>
   );

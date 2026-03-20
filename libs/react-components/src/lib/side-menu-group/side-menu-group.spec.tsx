@@ -17,5 +17,5 @@ describe("SideMenuGroup", () => {
 
     const el = baseElement.querySelector("goa-side-menu-group");
     expect(el?.getAttribute("icon")).toBe("accessibility");
-  })
+  });
 });

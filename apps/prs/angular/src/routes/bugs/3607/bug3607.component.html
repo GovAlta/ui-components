@@ -1,10 +1,17 @@
 <div>
   <h1>3607 Radio and Checkbox Interaction Area</h1>
   <h2>Version 1</h2>
-  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+  <goab-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
     <goab-radio-group name="contactMethod" formControlName="contactMethod">
-      <goab-radio-item label="Email" value="email"  description="Receive updates via email"/>
-      <goab-radio-item value="phone" label="Phone"/>
+      <goab-radio-item
+        label="Email"
+        value="email"
+        description="Receive updates via email"
+      />
+      <goab-radio-item value="phone" label="Phone" />
       <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
         <ng-template #textReveal>
           <goab-form-item label="Mobile phone number">
@@ -17,14 +24,18 @@
 
   <goab-form-item label="Select any interests you have" mt="xl">
     <goab-checkbox-list name="contactMethods" formControlName="contactMethods">
-      <goab-checkbox name="travel" text="Travel" value="travel"
-        [description]="descriptionTemplate">
+      <goab-checkbox
+        name="travel"
+        text="Travel"
+        value="travel"
+        [description]="descriptionTemplate"
+      >
         <ng-template #descriptionTemplate>
           <span>Help text with a <a href="#">link</a>.</span>
         </ng-template>
       </goab-checkbox>
-      <goab-checkbox name="music" text="Music" value="music"/>
-      <goab-checkbox name="sports" text="Sports" value="sports"/>
+      <goab-checkbox name="music" text="Music" value="music" />
+      <goab-checkbox name="sports" text="Sports" value="sports" />
       <goab-checkbox name="other" text="Other" value="other" [reveal]="checkTextReveal">
         <ng-template #checkTextReveal>
           <goab-form-item label="Mobile phone number">
@@ -37,10 +48,17 @@
 
   <h2>Version 2 (Experimental)</h2>
   <h3>Regular size</h3>
-  <goabx-form-item label="How would you like to be contacted?" helpText="Select one option">
+  <goabx-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
     <goabx-radio-group name="contactMethod" formControlName="contactMethod">
-      <goabx-radio-item label="Email" value="email"  description="Receive updates via email"/>
-      <goabx-radio-item value="phone" label="Phone"/>
+      <goabx-radio-item
+        label="Email"
+        value="email"
+        description="Receive updates via email"
+      />
+      <goabx-radio-item value="phone" label="Phone" />
       <goabx-radio-item value="text" label="Text message" [reveal]="textReveal">
         <ng-template #textReveal>
           <goabx-form-item label="Mobile phone number">
@@ -53,14 +71,18 @@
 
   <goabx-form-item label="Select any interests you have" mt="xl">
     <goabx-checkbox-list name="contactMethods" formControlName="contactMethods">
-      <goabx-checkbox name="travel" text="Travel" value="travel"
-        [description]="descriptionTemplate">
+      <goabx-checkbox
+        name="travel"
+        text="Travel"
+        value="travel"
+        [description]="descriptionTemplate"
+      >
         <ng-template #descriptionTemplate>
           <span>Help text with a <a href="#">link</a>.</span>
         </ng-template>
       </goabx-checkbox>
-      <goabx-checkbox name="music" text="Music" value="music"/>
-      <goabx-checkbox name="sports" text="Sports" value="sports"/>
+      <goabx-checkbox name="music" text="Music" value="music" />
+      <goabx-checkbox name="sports" text="Sports" value="sports" />
       <goabx-checkbox name="other" text="Other" value="other" [reveal]="checkTextReveal">
         <ng-template #checkTextReveal>
           <goabx-form-item label="Mobile phone number">
@@ -72,10 +94,21 @@
   </goabx-form-item>
 
   <h3>Compact size</h3>
-  <goabx-form-item label="How would you like to be contacted?" helpText="Select one option">
-    <goabx-radio-group name="contactMethod" size="compact" formControlName="contactMethod">
-      <goabx-radio-item label="Email" value="email"  description="Receive updates via email"/>
-      <goabx-radio-item value="phone" label="Phone"/>
+  <goabx-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
+    <goabx-radio-group
+      name="contactMethod"
+      size="compact"
+      formControlName="contactMethod"
+    >
+      <goabx-radio-item
+        label="Email"
+        value="email"
+        description="Receive updates via email"
+      />
+      <goabx-radio-item value="phone" label="Phone" />
       <goabx-radio-item value="text" label="Text message" [reveal]="textReveal">
         <ng-template #textReveal>
           <goabx-form-item label="Mobile phone number">
@@ -87,16 +120,31 @@
   </goabx-form-item>
 
   <goabx-form-item label="Select any interests you have" mt="xl">
-    <goabx-checkbox-list name="contactMethods" size="compact" formControlName="contactMethods">
-      <goabx-checkbox name="travel" text="Travel" size="compact" value="travel"
-        [description]="descriptionTemplate">
+    <goabx-checkbox-list
+      name="contactMethods"
+      size="compact"
+      formControlName="contactMethods"
+    >
+      <goabx-checkbox
+        name="travel"
+        text="Travel"
+        size="compact"
+        value="travel"
+        [description]="descriptionTemplate"
+      >
         <ng-template #descriptionTemplate>
           <span>Help text with a <a href="#">link</a>.</span>
         </ng-template>
       </goabx-checkbox>
-      <goabx-checkbox name="music" text="Music" size="compact" value="music"/>
-      <goabx-checkbox name="sports" text="Sports" size="compact" value="sports"/>
-      <goabx-checkbox name="other" text="Other" size="compact" value="other" [reveal]="checkTextReveal">
+      <goabx-checkbox name="music" text="Music" size="compact" value="music" />
+      <goabx-checkbox name="sports" text="Sports" size="compact" value="sports" />
+      <goabx-checkbox
+        name="other"
+        text="Other"
+        size="compact"
+        value="other"
+        [reveal]="checkTextReveal"
+      >
         <ng-template #checkTextReveal>
           <goabx-form-item label="Mobile phone number">
             <goabx-input name="mobile" formControlName="phoneNumber"></goabx-input>

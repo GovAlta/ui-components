@@ -8,12 +8,7 @@ import { By } from "@angular/platform-browser";
   standalone: true,
   imports: [GoabxMenuAction],
   template: `
-    <goabx-menu-action
-      [text]="text"
-      [action]="action"
-      [icon]="icon"
-      [testId]="testId"
-    >
+    <goabx-menu-action [text]="text" [action]="action" [icon]="icon" [testId]="testId">
     </goabx-menu-action>
   `,
 })
@@ -40,9 +35,7 @@ describe("GoabxMenuAction", () => {
   });
 
   it("should render text and action attributes", () => {
-    const el = fixture.debugElement.query(
-      By.css("goa-menu-action"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-menu-action")).nativeElement;
     expect(el.getAttribute("text")).toBe("View case");
     expect(el.getAttribute("action")).toBe("view");
   });
@@ -51,16 +44,12 @@ describe("GoabxMenuAction", () => {
     component.icon = "pencil";
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(
-      By.css("goa-menu-action"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-menu-action")).nativeElement;
     expect(el.getAttribute("icon")).toBe("pencil");
   });
 
   it("should render without icon when not provided", () => {
-    const el = fixture.debugElement.query(
-      By.css("goa-menu-action"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-menu-action")).nativeElement;
     expect(el.getAttribute("icon")).toBeNull();
   });
 
@@ -68,16 +57,12 @@ describe("GoabxMenuAction", () => {
     component.testId = "test-action";
     fixture.detectChanges();
 
-    const el = fixture.debugElement.query(
-      By.css("goa-menu-action"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-menu-action")).nativeElement;
     expect(el.getAttribute("testid")).toBe("test-action");
   });
 
   it("should render without testId when not provided", () => {
-    const el = fixture.debugElement.query(
-      By.css("goa-menu-action"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-menu-action")).nativeElement;
     expect(el.getAttribute("testid")).toBeNull();
   });
 });

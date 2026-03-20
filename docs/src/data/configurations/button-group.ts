@@ -4,18 +4,18 @@
  * ButtonGroup arranges buttons in a consistent layout.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const buttonGroupConfigurations: ComponentConfigurations = {
-  componentSlug: 'button-group',
-  componentName: 'Button group',
-  defaultConfigurationId: 'basic',
+  componentSlug: "button-group",
+  componentName: "Button group",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic button group',
-      description: 'Group of buttons with default spacing',
+      id: "basic",
+      name: "Basic button group",
+      description: "Group of buttons with default spacing",
       code: {
         react: `<GoabButtonGroup>
   <GoabxButton type="secondary">Cancel</GoabxButton>
@@ -32,9 +32,9 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'alignment',
-      name: 'Alignment',
-      description: 'Different alignment options',
+      id: "alignment",
+      name: "Alignment",
+      description: "Different alignment options",
       code: {
         react: `<GoabButtonGroup alignment="start">
   <GoabxButton>Start aligned</GoabxButton>
@@ -66,9 +66,9 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'gap',
-      name: 'Custom gap',
-      description: 'Button group with specific spacing',
+      id: "gap",
+      name: "Custom gap",
+      description: "Button group with specific spacing",
       code: {
         react: `<GoabButtonGroup gap="relaxed">
   <GoabxButton type="secondary">Back</GoabxButton>
@@ -97,9 +97,9 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'form-actions',
-      name: 'Form actions',
-      description: 'Common pattern for form button placement',
+      id: "form-actions",
+      name: "Form actions",
+      description: "Common pattern for form button placement",
       code: {
         react: `<GoabButtonGroup alignment="start">
   <GoabxButton type="primary">Save and continue</GoabxButton>
@@ -119,9 +119,9 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'many-actions',
-      name: 'Many actions',
-      description: 'Use a menu button to group additional actions',
+      id: "many-actions",
+      name: "Many actions",
+      description: "Use a menu button to group additional actions",
       code: {
         react: `const handleAction = (detail: GoabMenuButtonOnActionDetail) => {
   console.log("Action selected:", detail.action);

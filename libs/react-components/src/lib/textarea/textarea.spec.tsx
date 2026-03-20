@@ -94,13 +94,7 @@ describe("TextArea", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    render(
-      <GoabTextArea
-        name="textarea-name"
-        onChange={noop}
-        data-grid="cell"
-      />
-    );
+    render(<GoabTextArea name="textarea-name" onChange={noop} data-grid="cell" />);
     const el = document.querySelector("goa-textarea");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });

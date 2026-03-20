@@ -1,18 +1,17 @@
 import { render } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { GoabFieldset } from "./fieldset";
-import { GoabFieldsetOnContinueDetail, GoabFieldsetItemState } from "@abgov/ui-components-common";
+import {
+  GoabFieldsetOnContinueDetail,
+  GoabFieldsetItemState,
+} from "@abgov/ui-components-common";
 
 describe("GoabFieldset", () => {
   it("renders with all properties", () => {
     const { baseElement } = render(
-      <GoabFieldset
-        id="testFieldset"
-        sectionTitle="Test Section"
-        dispatchOn="change"
-      >
+      <GoabFieldset id="testFieldset" sectionTitle="Test Section" dispatchOn="change">
         <div>Test content</div>
-      </GoabFieldset>
+      </GoabFieldset>,
     );
 
     const el = baseElement.querySelector("goa-fieldset");
@@ -27,7 +26,7 @@ describe("GoabFieldset", () => {
     const { baseElement } = render(
       <GoabFieldset onContinue={handleContinue}>
         <div>Test content</div>
-      </GoabFieldset>
+      </GoabFieldset>,
     );
 
     const el = baseElement.querySelector("goa-fieldset");
@@ -38,10 +37,10 @@ describe("GoabFieldset", () => {
           name: "field1",
           label: "Field 1",
           value: "test",
-          order: 1
-        }
+          order: 1,
+        },
       },
-      cancelled: false
+      cancelled: false,
     };
     const event = new CustomEvent("_continue", { detail });
     el?.dispatchEvent(event);
@@ -54,7 +53,7 @@ describe("GoabFieldset", () => {
     const { baseElement, unmount } = render(
       <GoabFieldset onContinue={handleContinue}>
         <div>Test content</div>
-      </GoabFieldset>
+      </GoabFieldset>,
     );
 
     const el = baseElement.querySelector("goa-fieldset");
@@ -66,15 +65,15 @@ describe("GoabFieldset", () => {
         name: "field1",
         label: "Field 1",
         value: "test",
-        order: 1
-      }
+        order: 1,
+      },
     };
     const continueEvent = new CustomEvent("_continue", {
       detail: {
         el: el as HTMLElement,
         state: mockData,
-        cancelled: false
-      }
+        cancelled: false,
+      },
     });
     el?.dispatchEvent(continueEvent);
 
@@ -83,11 +82,9 @@ describe("GoabFieldset", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabFieldset
-        data-grid="cell"
-      >
+      <GoabFieldset data-grid="cell">
         <div>Test content</div>
-      </GoabFieldset>
+      </GoabFieldset>,
     );
     const el = baseElement.querySelector("goa-fieldset");
     expect(el?.getAttribute("data-grid")).toBe("cell");

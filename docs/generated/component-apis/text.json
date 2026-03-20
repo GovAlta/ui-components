@@ -5,16 +5,7 @@
     {
       "name": "as",
       "type": "\"span\" | \"div\" | \"p\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\"",
-      "values": [
-        "span",
-        "div",
-        "p",
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5"
-      ],
+      "values": ["span", "div", "p", "h1", "h2", "h3", "h4", "h5"],
       "required": false,
       "default": "div",
       "description": "The HTML element to render. Use semantic elements like 'h1'-'h6' for headings."
@@ -22,10 +13,7 @@
     {
       "name": "maxWidth",
       "type": "string | \"none\"",
-      "values": [
-        "string",
-        "none"
-      ],
+      "values": ["string", "none"],
       "required": false,
       "default": "65ch",
       "description": "Sets the max width."
@@ -52,10 +40,7 @@
     {
       "name": "color",
       "type": "\"primary\" | \"secondary\"",
-      "values": [
-        "primary",
-        "secondary"
-      ],
+      "values": ["primary", "secondary"],
       "required": false,
       "default": "primary",
       "description": "Sets the text colour."

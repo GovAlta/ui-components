@@ -28,13 +28,7 @@
       "name": "variant",
       "type": "\"color\" | \"nocolor\" | \"light\" | \"dark\" | \"destructive\"",
       "typeLabel": "GoabIconButtonVariant",
-      "values": [
-        "color",
-        "nocolor",
-        "light",
-        "dark",
-        "destructive"
-      ],
+      "values": ["color", "nocolor", "light", "dark", "destructive"],
       "required": false,
       "default": "color",
       "description": "Styles the button to show color, light, dark or destructive action."
@@ -112,17 +106,13 @@
       "name": "onClick",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_click",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": []

@@ -12,13 +12,7 @@
     {
       "name": "type",
       "type": "\"basic\" | \"success\" | \"failure\" | \"indeterminate\" | \"progress\"",
-      "values": [
-        "basic",
-        "success",
-        "failure",
-        "indeterminate",
-        "progress"
-      ],
+      "values": ["basic", "success", "failure", "indeterminate", "progress"],
       "required": false,
       "default": "basic",
       "description": "The notification type which determines the visual style and icon."
@@ -54,10 +48,7 @@
     {
       "name": "animationDirection",
       "type": "\"up\" | \"down\"",
-      "values": [
-        "up",
-        "down"
-      ],
+      "values": ["up", "down"],
       "required": false,
       "default": "down",
       "description": "Direction the notification animates from when appearing or disappearing."

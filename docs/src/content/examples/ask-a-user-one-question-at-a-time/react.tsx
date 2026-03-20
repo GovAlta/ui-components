@@ -16,8 +16,13 @@ export function AskAUserOneQuestionAtATime() {
         mt="xl"
         label="Are you currently in school?"
         labelSize="large"
-        helpText="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education.">
-        <GoabxRadioGroup name="school" ariaLabel="are you currently in school?" onChange={() => {}}>
+        helpText="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education."
+      >
+        <GoabxRadioGroup
+          name="school"
+          ariaLabel="are you currently in school?"
+          onChange={() => {}}
+        >
           <GoabxRadioItem value="yes" label="Yes" />
           <GoabxRadioItem value="no" label="No" />
         </GoabxRadioGroup>

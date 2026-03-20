@@ -107,13 +107,7 @@ describe("GoabxButton", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    const { container } = render(
-      <GoabxButton
-        data-grid="cell"
-      >
-        Button Text
-      </GoabxButton>,
-    );
+    const { container } = render(<GoabxButton data-grid="cell">Button Text</GoabxButton>);
     const el = container.querySelector("goa-button");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
@@ -122,7 +116,7 @@ describe("GoabxButton", () => {
 describe("GoabxButton disabled attribute", () => {
   it("should set disabled attribute correctly when disabled=true", () => {
     const { container } = render(
-      <GoabxButton disabled={true}>Disabled Button</GoabxButton>
+      <GoabxButton disabled={true}>Disabled Button</GoabxButton>,
     );
     const el = container.querySelector("goa-button");
 
@@ -131,7 +125,7 @@ describe("GoabxButton disabled attribute", () => {
 
   it("should not include disabled attribute when disabled=false", () => {
     const { container } = render(
-      <GoabxButton disabled={false}>Enabled Button</GoabxButton>
+      <GoabxButton disabled={false}>Enabled Button</GoabxButton>,
     );
     const el = container.querySelector("goa-button");
 
@@ -142,7 +136,7 @@ describe("GoabxButton disabled attribute", () => {
   it("should handle toggle between disabled states", () => {
     // First render with disabled=true
     const { container, rerender } = render(
-      <GoabxButton disabled={true}>Toggle Button</GoabxButton>
+      <GoabxButton disabled={true}>Toggle Button</GoabxButton>,
     );
     let el = container.querySelector("goa-button");
     expect(el?.getAttribute("disabled")).toBe("true");

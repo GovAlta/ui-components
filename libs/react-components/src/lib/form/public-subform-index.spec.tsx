@@ -16,7 +16,7 @@ describe("GoabPublicSubformIndex", () => {
         ml="xl"
       >
         <div data-testid="test-content">Test content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     const el = baseElement.querySelector("goa-public-subform-index");
@@ -38,7 +38,7 @@ describe("GoabPublicSubformIndex", () => {
     const { baseElement } = render(
       <GoabPublicSubformIndex>
         <div>Test content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     const el = baseElement.querySelector("goa-public-subform-index");
@@ -51,12 +51,9 @@ describe("GoabPublicSubformIndex", () => {
 
   it("renders with hidden button visibility", () => {
     const { baseElement } = render(
-      <GoabPublicSubformIndex
-        heading="Test Heading"
-        buttonVisibility="hidden"
-      >
+      <GoabPublicSubformIndex heading="Test Heading" buttonVisibility="hidden">
         <div>Test content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     const el = baseElement.querySelector("goa-public-subform-index");
@@ -66,9 +63,7 @@ describe("GoabPublicSubformIndex", () => {
   it("renders complex children content", () => {
     const { baseElement } = render(
       <GoabPublicSubformIndex heading="Dependents List">
-        <p data-testid="description">
-          Please add information about your dependents.
-        </p>
+        <p data-testid="description">Please add information about your dependents.</p>
         <table data-testid="dependents-table">
           <thead>
             <tr>
@@ -86,7 +81,7 @@ describe("GoabPublicSubformIndex", () => {
             </tr>
           </tbody>
         </table>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     expect(baseElement.querySelector("[data-testid='description']")).toBeTruthy();
@@ -97,13 +92,9 @@ describe("GoabPublicSubformIndex", () => {
 
   it("handles empty string properties", () => {
     const { baseElement } = render(
-      <GoabPublicSubformIndex
-        heading=""
-        sectionTitle=""
-        actionButtonText=""
-      >
+      <GoabPublicSubformIndex heading="" sectionTitle="" actionButtonText="">
         <div>Test content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     const el = baseElement.querySelector("goa-public-subform-index");
@@ -116,7 +107,7 @@ describe("GoabPublicSubformIndex", () => {
     const specialTexts = {
       heading: "Dependents & Family",
       sectionTitle: "Section > Details",
-      actionButtonText: "Add \"New\" Item",
+      actionButtonText: 'Add "New" Item',
     };
 
     const { baseElement } = render(
@@ -126,7 +117,7 @@ describe("GoabPublicSubformIndex", () => {
         actionButtonText={specialTexts.actionButtonText}
       >
         <div>Test content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     const el = baseElement.querySelector("goa-public-subform-index");
@@ -139,7 +130,7 @@ describe("GoabPublicSubformIndex", () => {
     const { baseElement } = render(
       <GoabPublicSubformIndex heading="Any heading">
         <div>Any content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
     const el = baseElement.querySelector("goa-public-subform-index");
@@ -149,9 +140,7 @@ describe("GoabPublicSubformIndex", () => {
   it("renders nested components correctly", () => {
     const { baseElement } = render(
       <GoabPublicSubformIndex heading="Task List">
-        <div data-testid="text-content">
-          Please complete the following tasks:
-        </div>
+        <div data-testid="text-content">Please complete the following tasks:</div>
         <div data-testid="task-item-1">
           <span>Task 1: Complete profile</span>
           <button>Edit</button>
@@ -160,11 +149,12 @@ describe("GoabPublicSubformIndex", () => {
           <span>Task 2: Upload documents</span>
           <button>Remove</button>
         </div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
 
-    expect(baseElement.querySelector("[data-testid='text-content']")?.textContent)
-      .toContain("Please complete the following tasks:");
+    expect(
+      baseElement.querySelector("[data-testid='text-content']")?.textContent,
+    ).toContain("Please complete the following tasks:");
     expect(baseElement.querySelector("[data-testid='task-item-1']")).toBeTruthy();
     expect(baseElement.querySelector("[data-testid='task-item-2']")).toBeTruthy();
     expect(baseElement.querySelectorAll("button")).toHaveLength(2);
@@ -172,12 +162,9 @@ describe("GoabPublicSubformIndex", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPublicSubformIndex
-        heading="Test Index"
-        data-grid="cell"
-      >
+      <GoabPublicSubformIndex heading="Test Index" data-grid="cell">
         <div>Test content</div>
-      </GoabPublicSubformIndex>
+      </GoabPublicSubformIndex>,
     );
     const el = baseElement.querySelector("goa-public-subform-index");
     expect(el?.getAttribute("data-grid")).toBe("cell");

@@ -3,7 +3,8 @@ import {
   GoabContainerPadding,
   GoabContainerType,
   GoabContainerWidth,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";

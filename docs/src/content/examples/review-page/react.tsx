@@ -4,13 +4,19 @@ import { GoabButtonGroup, GoabText } from "@abgov/react-components";
 export function ReviewPage() {
   return (
     <>
-      <GoabText size="heading-l" mt="none" mb="none">Review your answers</GoabText>
-      <GoabText size="heading-s" color="secondary" mt="l" mb="none">Your situation</GoabText>
+      <GoabText size="heading-l" mt="none" mb="none">
+        Review your answers
+      </GoabText>
+      <GoabText size="heading-s" color="secondary" mt="l" mb="none">
+        Your situation
+      </GoabText>
       <GoabxTable mt="l">
         <tbody>
           <tr>
             <td>
-              <strong>What was your (the applicant's) relationship to the deceased?</strong>
+              <strong>
+                What was your (the applicant's) relationship to the deceased?
+              </strong>
             </td>
             <td>Other</td>
             <td>
@@ -29,8 +35,8 @@ export function ReviewPage() {
           <tr>
             <td>
               <strong>
-                Was the deceased part of a household that was receiving Assured Income for the
-                Severely Handicapped (AISH) or Income Support?
+                Was the deceased part of a household that was receiving Assured Income for
+                the Severely Handicapped (AISH) or Income Support?
               </strong>
             </td>
             <td>No</td>

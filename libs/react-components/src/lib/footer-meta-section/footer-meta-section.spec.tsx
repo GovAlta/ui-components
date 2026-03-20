@@ -12,11 +12,7 @@ describe("FooterMetaSection", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <FooterMetaSection
-        data-grid="cell"
-      >
-        Meta content
-      </FooterMetaSection>
+      <FooterMetaSection data-grid="cell">Meta content</FooterMetaSection>,
     );
     const el = baseElement.querySelector("goa-app-footer-meta-section");
     expect(el?.getAttribute("data-grid")).toBe("cell");

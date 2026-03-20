@@ -2,7 +2,8 @@ import {
   GoabIconButtonVariant,
   GoabIconSize,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX, ReactNode } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
@@ -24,9 +25,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-icon-button": WCProps & React.HTMLAttributes<HTMLButtonElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-icon-button": WCProps &
+        React.HTMLAttributes<HTMLButtonElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -58,10 +60,7 @@ export function GoabIconButton({
 }: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { variant, size, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ variant, size, ...rest }, lowercase);
 
   useEffect(() => {
     if (!ref.current) {

@@ -4,18 +4,18 @@
  * Popovers display content in a floating panel.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const popoverConfigurations: ComponentConfigurations = {
-  componentSlug: 'popover',
-  componentName: 'Popover',
-  defaultConfigurationId: 'basic',
+  componentSlug: "popover",
+  componentName: "Popover",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic popover',
-      description: 'Simple popover with content',
+      id: "basic",
+      name: "Basic popover",
+      description: "Simple popover with content",
       code: {
         react: `<GoabPopover>
   <GoabxButton slot="target">Open popover</GoabxButton>
@@ -32,9 +32,9 @@ export const popoverConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'positions',
-      name: 'Positions',
-      description: 'Popover placement options',
+      id: "positions",
+      name: "Positions",
+      description: "Popover placement options",
       code: {
         react: `<GoabPopover position="top">
   <GoabxButton slot="target">Top</GoabxButton>
@@ -87,9 +87,9 @@ export const popoverConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-padding',
-      name: 'With padding',
-      description: 'Popover with custom padding',
+      id: "with-padding",
+      name: "With padding",
+      description: "Popover with custom padding",
       code: {
         react: `<GoabPopover padded>
   <GoabxButton slot="target">Show details</GoabxButton>
@@ -106,9 +106,9 @@ export const popoverConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-max-width',
-      name: 'With max width',
-      description: 'Popover with constrained width',
+      id: "with-max-width",
+      name: "With max width",
+      description: "Popover with constrained width",
       code: {
         react: `<GoabPopover maxWidth="300px">
   <GoabxButton slot="target">More info</GoabxButton>

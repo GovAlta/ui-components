@@ -6,9 +6,7 @@
 
 import { useCompactToolbar } from "../hooks/useCompactToolbar";
 import { type ReactNode } from "react";
-import {
-  GoabBlock
-} from "@abgov/react-components"
+import { GoabBlock } from "@abgov/react-components";
 
 interface ResponsiveProps {
   children: ReactNode;
@@ -54,12 +52,7 @@ export function ResponsiveBlock({
   const direction = isCompact ? mobileDirection : desktopDirection;
 
   return (
-    <GoabBlock
-      maxWidth={maxWidth}
-      width={width}
-      direction={direction}
-      gap={gap}
-    >
+    <GoabBlock maxWidth={maxWidth} width={width} direction={direction} gap={gap}>
       {children}
     </GoabBlock>
   );

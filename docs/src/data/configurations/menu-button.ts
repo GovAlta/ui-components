@@ -4,18 +4,18 @@
  * Menu buttons show dropdown menus on click.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const menuButtonConfigurations: ComponentConfigurations = {
-  componentSlug: 'menu-button',
-  componentName: 'Menu button',
-  defaultConfigurationId: 'basic',
+  componentSlug: "menu-button",
+  componentName: "Menu button",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic menu button',
-      description: 'Button with dropdown menu',
+      id: "basic",
+      name: "Basic menu button",
+      description: "Button with dropdown menu",
       code: {
         react: `<GoabxMenuButton text="Actions" onAction={(detail) => console.log(detail.action)}>
   <GoabxMenuAction text="Edit" action="edit" />
@@ -35,9 +35,9 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'icon-only',
-      name: 'Icon-only menu button',
-      description: 'Menu with icon button (no text)',
+      id: "icon-only",
+      name: "Icon-only menu button",
+      description: "Menu with icon button (no text)",
       code: {
         react: `<GoabxMenuButton
   leadingIcon="ellipsis-horizontal"
@@ -68,9 +68,9 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icons',
-      name: 'Items with icons',
-      description: 'Menu items with leading icons',
+      id: "with-icons",
+      name: "Items with icons",
+      description: "Menu items with leading icons",
       code: {
         react: `<GoabxMenuButton text="Options" onAction={(detail) => console.log(detail.action)}>
   <GoabxMenuAction text="Download" action="download" icon="download" />
@@ -90,9 +90,9 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'destructive',
-      name: 'Destructive variant',
-      description: 'Menu button with destructive styling for dangerous actions',
+      id: "destructive",
+      name: "Destructive variant",
+      description: "Menu button with destructive styling for dangerous actions",
       code: {
         react: `<GoabxMenuButton text="Delete" variant="destructive" onAction={(detail) => console.log(detail.action)}>
   <GoabxMenuAction text="Delete item" action="delete" icon="trash" />

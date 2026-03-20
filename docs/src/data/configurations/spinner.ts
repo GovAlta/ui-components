@@ -4,18 +4,18 @@
  * Spinners indicate loading or processing states.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const spinnerConfigurations: ComponentConfigurations = {
-  componentSlug: 'spinner',
-  componentName: 'Spinner',
-  defaultConfigurationId: 'basic',
+  componentSlug: "spinner",
+  componentName: "Spinner",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic spinner',
-      description: 'Simple loading spinner',
+      id: "basic",
+      name: "Basic spinner",
+      description: "Simple loading spinner",
       code: {
         react: `<GoabSpinner />`,
         angular: `<goab-spinner></goab-spinner>`,
@@ -23,9 +23,9 @@ export const spinnerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Different spinner sizes',
+      id: "sizes",
+      name: "Sizes",
+      description: "Different spinner sizes",
       code: {
         react: `<GoabSpinner size="small" />
 <GoabSpinner size="medium" />
@@ -42,9 +42,9 @@ export const spinnerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Types',
-      description: 'Infinite and progress spinners',
+      id: "types",
+      name: "Types",
+      description: "Infinite and progress spinners",
       code: {
         react: `<GoabSpinner type="infinite" />
 <GoabSpinner type="progress" progress={45} />`,
@@ -55,9 +55,9 @@ export const spinnerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'inverted',
-      name: 'Inverted',
-      description: 'Spinner for dark backgrounds',
+      id: "inverted",
+      name: "Inverted",
+      description: "Spinner for dark backgrounds",
       code: {
         react: `<div style={{ backgroundColor: '#333', padding: '1rem' }}>
   <GoabSpinner invert />

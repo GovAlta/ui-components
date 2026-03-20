@@ -4,18 +4,18 @@
  * Links navigate users to other pages or resources.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const linkConfigurations: ComponentConfigurations = {
-  componentSlug: 'link',
-  componentName: 'Link',
-  defaultConfigurationId: 'basic',
+  componentSlug: "link",
+  componentName: "Link",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic link',
-      description: 'Simple text link',
+      id: "basic",
+      name: "Basic link",
+      description: "Simple text link",
       code: {
         react: `<GoabxLink href="/about">Learn more about our services</GoabxLink>`,
         angular: `<goabx-link href="/about">Learn more about our services</goabx-link>`,
@@ -23,9 +23,9 @@ export const linkConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'external',
-      name: 'External link',
-      description: 'Link to external website (icon added automatically)',
+      id: "external",
+      name: "External link",
+      description: "Link to external website (icon added automatically)",
       code: {
         react: `<GoabxLink href="https://www.alberta.ca">
   Visit Alberta.ca
@@ -39,9 +39,9 @@ export const linkConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'inverted',
-      name: 'Inverted',
-      description: 'Link for dark backgrounds',
+      id: "inverted",
+      name: "Inverted",
+      description: "Link for dark backgrounds",
       code: {
         react: `<div style={{ backgroundColor: '#333', padding: '1rem' }}>
   <GoabxLink href="/contact" color="light">Contact us</GoabxLink>
@@ -55,9 +55,9 @@ export const linkConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-leading-icon',
-      name: 'With leading icon',
-      description: 'Link with an icon before text',
+      id: "with-leading-icon",
+      name: "With leading icon",
+      description: "Link with an icon before text",
       code: {
         react: `<GoabxLink href="/download" leadingIcon="download">
   Download form
@@ -71,9 +71,9 @@ export const linkConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-trailing-icon',
-      name: 'With trailing icon',
-      description: 'Link with an icon after text',
+      id: "with-trailing-icon",
+      name: "With trailing icon",
+      description: "Link with an icon after text",
       code: {
         react: `<GoabxLink href="/next" trailingIcon="arrow-forward">
   Continue to next step

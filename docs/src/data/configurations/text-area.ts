@@ -4,18 +4,18 @@
  * Note: TextArea should be wrapped in FormItem for proper labeling.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const textAreaConfigurations: ComponentConfigurations = {
-  componentSlug: 'text-area',
-  componentName: 'Text area',
-  defaultConfigurationId: 'basic',
+  componentSlug: "text-area",
+  componentName: "Text area",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Text area wrapped in FormItem with label',
+      id: "basic",
+      name: "Basic example",
+      description: "Text area wrapped in FormItem with label",
       code: {
         react: `<GoabxFormItem label="Comments" mb="l">
   <GoabxTextArea name="comments" />
@@ -29,9 +29,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-placeholder',
-      name: 'With placeholder',
-      description: 'Text area with placeholder text',
+      id: "with-placeholder",
+      name: "With placeholder",
+      description: "Text area with placeholder text",
       code: {
         react: `<GoabxFormItem label="Feedback" mb="l">
   <GoabxTextArea name="feedback" placeholder="Enter your feedback here..." />
@@ -45,9 +45,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'custom-rows',
-      name: 'Custom rows',
-      description: 'Text area with custom height',
+      id: "custom-rows",
+      name: "Custom rows",
+      description: "Text area with custom height",
       code: {
         react: `<GoabxFormItem label="Description" mb="l">
   <GoabxTextArea name="description" rows={6} />
@@ -61,9 +61,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'character-count',
-      name: 'Character count',
-      description: 'Text area with character limit',
+      id: "character-count",
+      name: "Character count",
+      description: "Text area with character limit",
       code: {
         react: `<GoabxFormItem label="Bio" helpText="Maximum 200 characters" mb="l">
   <GoabxTextArea name="bio" countBy="character" maxCount={200} />
@@ -77,9 +77,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'word-count',
-      name: 'Word count',
-      description: 'Text area with word limit',
+      id: "word-count",
+      name: "Word count",
+      description: "Text area with word limit",
       code: {
         react: `<GoabxFormItem label="Essay" helpText="Maximum 500 words" mb="l">
   <GoabxTextArea name="essay" countBy="word" maxCount={500} rows={8} />
@@ -93,9 +93,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'states',
-      name: 'States',
-      description: 'Disabled, readonly, and error states',
+      id: "states",
+      name: "States",
+      description: "Disabled, readonly, and error states",
       code: {
         react: `<GoabxFormItem label="Disabled" mb="l">
   <GoabxTextArea name="disabled" disabled value="Cannot edit this content" />

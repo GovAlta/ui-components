@@ -204,11 +204,7 @@ describe("CheckboxList V2", () => {
 
   it("should propagate disabled state to child checkboxes on mount", async () => {
     const Component = () => (
-      <GoabxCheckboxList
-        name="test-list"
-        testId="checkbox-list"
-        disabled={true}
-      >
+      <GoabxCheckboxList name="test-list" testId="checkbox-list" disabled={true}>
         <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
         <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
       </GoabxCheckboxList>
@@ -229,11 +225,7 @@ describe("CheckboxList V2", () => {
 
   it("should propagate error state to child checkboxes on mount", async () => {
     const Component = () => (
-      <GoabxCheckboxList
-        name="test-list"
-        testId="checkbox-list"
-        error={true}
-      >
+      <GoabxCheckboxList name="test-list" testId="checkbox-list" error={true}>
         <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
         <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
       </GoabxCheckboxList>
@@ -283,9 +275,23 @@ describe("CheckboxList V2", () => {
     const Component = () => {
       return (
         <div data-testid="container">
-          <GoabxCheckboxList name="compact-list" testId="compact-checkbox-list" size="compact">
-            <GoabxCheckbox name="option1" text="Option 1" size="compact" testId="compact-checkbox-1" />
-            <GoabxCheckbox name="option2" text="Option 2" size="compact" testId="compact-checkbox-2" />
+          <GoabxCheckboxList
+            name="compact-list"
+            testId="compact-checkbox-list"
+            size="compact"
+          >
+            <GoabxCheckbox
+              name="option1"
+              text="Option 1"
+              size="compact"
+              testId="compact-checkbox-1"
+            />
+            <GoabxCheckbox
+              name="option2"
+              text="Option 2"
+              size="compact"
+              testId="compact-checkbox-2"
+            />
           </GoabxCheckboxList>
         </div>
       );

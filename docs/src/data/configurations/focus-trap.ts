@@ -4,18 +4,18 @@
  * FocusTrap keeps focus within a container.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const focusTrapConfigurations: ComponentConfigurations = {
-  componentSlug: 'focus-trap',
-  componentName: 'Focus trap',
-  defaultConfigurationId: 'basic',
+  componentSlug: "focus-trap",
+  componentName: "Focus trap",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic focus trap',
-      description: 'Container that traps keyboard focus',
+      id: "basic",
+      name: "Basic focus trap",
+      description: "Container that traps keyboard focus",
       code: {
         react: `<GoabFocusTrap active={isActive}>
   <GoabxFormItem label="Username" mb="l">

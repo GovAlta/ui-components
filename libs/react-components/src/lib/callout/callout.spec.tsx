@@ -63,11 +63,7 @@ describe("Callout", () => {
 
   test("should pass data-grid attributes", () => {
     const result = render(
-      <GoabCallout
-        type="information"
-        heading="Callout Title"
-        data-grid="cell"
-      >
+      <GoabCallout type="information" heading="Callout Title" data-grid="cell">
         Test content
       </GoabCallout>,
     );

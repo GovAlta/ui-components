@@ -8,7 +8,6 @@ import {
 } from "@abgov/react-components";
 import "@abgov/style";
 
-
 export function App() {
   return (
     <GoabOneColumnLayout>

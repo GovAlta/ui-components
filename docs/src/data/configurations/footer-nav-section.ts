@@ -4,18 +4,18 @@
  * FooterNavSection is a child component of Footer.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const footerNavSectionConfigurations: ComponentConfigurations = {
-  componentSlug: 'footer-nav-section',
-  componentName: 'Footer nav section',
-  defaultConfigurationId: 'basic',
+  componentSlug: "footer-nav-section",
+  componentName: "Footer nav section",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic footer nav section',
-      description: 'Navigation section within Footer',
+      id: "basic",
+      name: "Basic footer nav section",
+      description: "Navigation section within Footer",
       code: {
         react: `<GoabxAppFooter>
   <GoabxAppFooterNavSection heading="Services">

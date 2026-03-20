@@ -26,12 +26,14 @@ export function GiveBackgroundInformationBeforeAskingAQuestion() {
         Back
       </GoabxLink>
 
-      <GoabText as="h2" mt="xl" mb="m">Current school status</GoabText>
+      <GoabText as="h2" mt="xl" mb="m">
+        Current school status
+      </GoabText>
       <GoabText mt="none" mb="s">
-        School can encompass foundational programs that help individuals gain basic skills for
-        further learning and living, such as literacy and numeracy courses. It also includes
-        skills and employment training programs, designed to equip you with specific skills for
-        the job market.
+        School can encompass foundational programs that help individuals gain basic skills
+        for further learning and living, such as literacy and numeracy courses. It also
+        includes skills and employment training programs, designed to equip you with
+        specific skills for the job market.
       </GoabText>
       <GoabText mt="none" mb="s">
         Post-secondary education, such as Bachelor's, Master's, or Doctoral degrees, and
@@ -46,7 +48,8 @@ export function GiveBackgroundInformationBeforeAskingAQuestion() {
         <GoabxRadioGroup
           name="school"
           ariaLabel="are you currently in school?"
-          onChange={handleChange}>
+          onChange={handleChange}
+        >
           <GoabxRadioItem value="yes" label="Yes" />
           <GoabxRadioItem value="no" label="No" />
         </GoabxRadioGroup>

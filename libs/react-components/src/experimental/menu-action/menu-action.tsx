@@ -9,7 +9,6 @@ interface WCProps {
   testid?: string;
 }
 
-
 export interface GoabxMenuActionProps extends DataAttributes {
   text: string;
   action: string;
@@ -20,9 +19,7 @@ export interface GoabxMenuActionProps extends DataAttributes {
 export function GoabxMenuAction(props: GoabxMenuActionProps): JSX.Element {
   const _props = transformProps<WCProps>(props, lowercase);
 
-  return (
-    <goa-menu-action {..._props}></goa-menu-action>
-  );
+  return <goa-menu-action {..._props}></goa-menu-action>;
 }
 
 export default GoabxMenuAction;

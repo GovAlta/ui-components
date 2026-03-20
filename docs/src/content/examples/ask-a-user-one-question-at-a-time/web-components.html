@@ -1,22 +1,22 @@
 <goa-link leadingicon="arrow-back" size="small">
   <a href="#">Back</a>
 </goa-link>
-<goa-form-item version="2"
+<goa-form-item
+  version="2"
   mt="xl"
   label="Are you currently in school?"
   labelsize="large"
-  helptext="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education.">
+  helptext="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education."
+>
   <goa-radio-group version="2" name="school" aria-label="are you currently in school?">
     <goa-radio-item value="yes" label="Yes"></goa-radio-item>
     <goa-radio-item value="no" label="No"></goa-radio-item>
   </goa-radio-group>
 </goa-form-item>
-<goa-button version="2" type="submit" mt="2xl">
-  Save and continue
-</goa-button>
+<goa-button version="2" type="submit" mt="2xl"> Save and continue </goa-button>
 
 <script>
-  document.querySelector('goa-radio-group').addEventListener('_change', (e) => {
-    console.log('Selected:', e.detail.value);
+  document.querySelector("goa-radio-group").addEventListener("_change", (e) => {
+    console.log("Selected:", e.detail.value);
   });
 </script>

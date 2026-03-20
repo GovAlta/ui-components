@@ -19,7 +19,7 @@ describe("GoabPublicSubform", () => {
         ml="xl"
       >
         <div data-testid="test-content">Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     const el = baseElement.querySelector("goa-public-subform");
@@ -39,7 +39,7 @@ describe("GoabPublicSubform", () => {
     const { baseElement } = render(
       <GoabPublicSubform>
         <div>Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     const el = baseElement.querySelector("goa-public-subform");
@@ -52,7 +52,7 @@ describe("GoabPublicSubform", () => {
     const { baseElement } = render(
       <GoabPublicSubform>
         <div>Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     const el = baseElement.querySelector("goa-public-subform");
@@ -93,7 +93,7 @@ describe("GoabPublicSubform", () => {
           <input data-testid="age-input" placeholder="Age" />
           <button data-testid="save-btn">Save</button>
         </div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     expect(baseElement.querySelector("[data-testid='subform-index']")).toBeTruthy();
@@ -106,13 +106,9 @@ describe("GoabPublicSubform", () => {
 
   it("handles empty string properties", () => {
     const { baseElement } = render(
-      <GoabPublicSubform
-        id=""
-        name=""
-        continueMsg=""
-      >
+      <GoabPublicSubform id="" name="" continueMsg="">
         <div>Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     const el = baseElement.querySelector("goa-public-subform");
@@ -124,7 +120,7 @@ describe("GoabPublicSubform", () => {
   it("renders with all margin values", () => {
     const marginValues = ["none", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl", "3xl"];
 
-    marginValues.forEach(margin => {
+    marginValues.forEach((margin) => {
       const { baseElement } = render(
         <GoabPublicSubform
           mt={margin as any}
@@ -133,7 +129,7 @@ describe("GoabPublicSubform", () => {
           ml={margin as any}
         >
           <div>Test content</div>
-        </GoabPublicSubform>
+        </GoabPublicSubform>,
       );
 
       const el = baseElement.querySelector("goa-public-subform");
@@ -160,7 +156,7 @@ describe("GoabPublicSubform", () => {
         continueMsg={specialTexts.continueMsg}
       >
         <div>Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     const el = baseElement.querySelector("goa-public-subform");
@@ -173,7 +169,7 @@ describe("GoabPublicSubform", () => {
     const { baseElement } = render(
       <GoabPublicSubform continueMsg="Test message">
         <div>Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     const el = baseElement.querySelector("goa-public-subform");
@@ -201,7 +197,7 @@ describe("GoabPublicSubform", () => {
             <textarea></textarea>
           </div>
         </div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
 
     expect(baseElement.querySelector("[data-testid='subform-index']")).toBeTruthy();
@@ -215,12 +211,9 @@ describe("GoabPublicSubform", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPublicSubform
-        name="test-subform"
-        data-grid="cell"
-      >
+      <GoabPublicSubform name="test-subform" data-grid="cell">
         <div>Test content</div>
-      </GoabPublicSubform>
+      </GoabPublicSubform>,
     );
     const el = baseElement.querySelector("goa-public-subform");
     expect(el?.getAttribute("data-grid")).toBe("cell");

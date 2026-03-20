@@ -2,11 +2,9 @@
   requirement="required"
   label="Name of item"
   [error]="taskError ? 'Please enter item name' : undefined"
-  helpText="Add an item to the dropdown list below">
-  <goabx-input
-    name="item"
-    [value]="newTask"
-    (onChange)="onNewTaskChange($event)">
+  helpText="Add an item to the dropdown list below"
+>
+  <goabx-input name="item" [value]="newTask" (onChange)="onNewTaskChange($event)">
   </goabx-input>
 </goabx-form-item>
 
@@ -15,19 +13,16 @@
     name="mountType"
     [value]="mountType"
     orientation="horizontal"
-    (onChange)="onMountTypeChange($event)">
+    (onChange)="onMountTypeChange($event)"
+  >
     <goabx-radio-item value="prepend" label="Start"></goabx-radio-item>
     <goabx-radio-item value="append" label="End"></goabx-radio-item>
   </goabx-radio-group>
 </goabx-form-item>
 
 <goab-button-group alignment="start" gap="relaxed" mt="l">
-  <goabx-button type="primary" (onClick)="addTask()">
-    Add new item
-  </goabx-button>
-  <goabx-button type="tertiary" (onClick)="reset()">
-    Reset list
-  </goabx-button>
+  <goabx-button type="primary" (onClick)="addTask()"> Add new item </goabx-button>
+  <goabx-button type="tertiary" (onClick)="reset()"> Reset list </goabx-button>
 </goab-button-group>
 
 <goab-divider mt="l"></goab-divider>
@@ -37,12 +32,14 @@
     <goabx-dropdown
       [value]="selectedTask"
       name="selectedTask"
-      (onChange)="onSelectedTaskChange($event)">
+      (onChange)="onSelectedTaskChange($event)"
+    >
       @for (task of tasks; track task.value) {
       <goabx-dropdown-item
         [value]="task.value"
         [mountType]="task.mount"
-        [label]="task.label">
+        [label]="task.label"
+      >
       </goabx-dropdown-item>
       }
     </goabx-dropdown>

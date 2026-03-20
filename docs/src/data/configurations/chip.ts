@@ -4,18 +4,18 @@
  * Chips display compact information or selections.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const chipConfigurations: ComponentConfigurations = {
-  componentSlug: 'chip',
-  componentName: 'Chip',
-  defaultConfigurationId: 'basic',
+  componentSlug: "chip",
+  componentName: "Chip",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic chip',
-      description: 'Simple chip with text',
+      id: "basic",
+      name: "Basic chip",
+      description: "Simple chip with text",
       code: {
         react: `<GoabChip content="Label" />`,
         angular: `<goab-chip content="Label"></goab-chip>`,
@@ -23,9 +23,9 @@ export const chipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'deletable',
-      name: 'Deletable',
-      description: 'Chip that can be removed',
+      id: "deletable",
+      name: "Deletable",
+      description: "Chip that can be removed",
       code: {
         react: `<GoabChip content="Selected item" deletable onDelete={handleDelete} />`,
         angular: `<goab-chip content="Selected item" [deletable]="true" (_delete)="handleDelete()"></goab-chip>`,
@@ -33,9 +33,9 @@ export const chipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icon',
-      name: 'With icon',
-      description: 'Chip with leading icon',
+      id: "with-icon",
+      name: "With icon",
+      description: "Chip with leading icon",
       code: {
         react: `<GoabChip content="Documents" leadingIcon="folder" />
 <GoabChip content="Email" leadingIcon="mail" />`,
@@ -46,9 +46,9 @@ export const chipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-error',
-      name: 'Error state',
-      description: 'Chip showing error',
+      id: "with-error",
+      name: "Error state",
+      description: "Chip showing error",
       code: {
         react: `<GoabChip content="Invalid selection" error />`,
         angular: `<goab-chip content="Invalid selection" [error]="true"></goab-chip>`,
@@ -56,9 +56,9 @@ export const chipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'multiple-selections',
-      name: 'Multiple selections',
-      description: 'Group of chips showing selections',
+      id: "multiple-selections",
+      name: "Multiple selections",
+      description: "Group of chips showing selections",
       code: {
         react: `<GoabChip content="Alberta" deletable onDelete={() => {}} />
 <GoabChip content="British Columbia" deletable onDelete={() => {}} />

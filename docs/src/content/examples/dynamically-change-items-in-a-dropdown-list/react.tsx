@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { GoabxDropdown, GoabxDropdownItem, GoabxFormItem } from "@abgov/react-components/experimental";
+import {
+  GoabxDropdown,
+  GoabxDropdownItem,
+  GoabxFormItem,
+} from "@abgov/react-components/experimental";
 import { GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
 
 export function DynamicallyChangeItemsInADropdownList() {
@@ -22,32 +26,38 @@ export function DynamicallyChangeItemsInADropdownList() {
   return (
     <>
       <GoabxFormItem
-          label="Size"
-          requirement="optional"
-          helpText="Choose the size to change the list below">
-          <GoabxDropdown
-            name="parent"
-            placeholder="Select a value"
-            onChange={(event: GoabDropdownOnChangeDetail) =>
-              loadItems(event.value as string)
-            }>
-            {parents.map(parent => (
-              <GoabxDropdownItem key={parent} value={parent} label={parent} />
-            ))}
-          </GoabxDropdown>
-        </GoabxFormItem>
+        label="Size"
+        requirement="optional"
+        helpText="Choose the size to change the list below"
+      >
+        <GoabxDropdown
+          name="parent"
+          placeholder="Select a value"
+          onChange={(event: GoabDropdownOnChangeDetail) =>
+            loadItems(event.value as string)
+          }
+        >
+          {parents.map((parent) => (
+            <GoabxDropdownItem key={parent} value={parent} label={parent} />
+          ))}
+        </GoabxDropdown>
+      </GoabxFormItem>
 
-        <GoabxFormItem label="Items" requirement="optional" mt="xl">
-          <GoabxDropdown name="children" placeholder="Select a value" onChange={logSelection}>
-            {children.map((child) => (
-              <GoabxDropdownItem
-                key={crypto.randomUUID()}
-                value={child}
-                label={child}
-                mountType="reset"
-              />
-            ))}
-          </GoabxDropdown>
+      <GoabxFormItem label="Items" requirement="optional" mt="xl">
+        <GoabxDropdown
+          name="children"
+          placeholder="Select a value"
+          onChange={logSelection}
+        >
+          {children.map((child) => (
+            <GoabxDropdownItem
+              key={crypto.randomUUID()}
+              value={child}
+              label={child}
+              mountType="reset"
+            />
+          ))}
+        </GoabxDropdown>
       </GoabxFormItem>
     </>
   );

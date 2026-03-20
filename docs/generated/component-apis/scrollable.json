@@ -5,10 +5,7 @@
     {
       "name": "direction",
       "type": "\"vertical\" | \"horizontal\"",
-      "values": [
-        "vertical",
-        "horizontal"
-      ],
+      "values": ["vertical", "horizontal"],
       "required": false,
       "default": "vertical",
       "description": "The scroll direction."
@@ -54,17 +51,13 @@
       "name": "onScroll",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_scroll",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

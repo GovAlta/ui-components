@@ -26,17 +26,10 @@ export interface GoabCardProps extends Margins, DataAttributes {
   children?: React.ReactNode;
 }
 
-export function GoabCard({
-  children,
-  ...rest
-}: GoabCardProps): JSX.Element {
+export function GoabCard({ children, ...rest }: GoabCardProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-card {..._props}>
-      {children}
-    </goa-card>
-  );
+  return <goa-card {..._props}>{children}</goa-card>;
 }
 
 export default GoabCard;

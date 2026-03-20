@@ -26,7 +26,9 @@ describe("GoabMenuButton", () => {
   });
 
   it("should render with testId", () => {
-    const { container } = render(<GoabMenuButton text="Menu Button" testId="test-menu-button" />);
+    const { container } = render(
+      <GoabMenuButton text="Menu Button" testId="test-menu-button" />,
+    );
     const el = container.querySelector("goa-menu-button");
 
     expect(el?.getAttribute("testid")).toBe("test-menu-button");
@@ -37,7 +39,7 @@ describe("GoabMenuButton", () => {
       <GoabMenuButton text="Menu Button">
         <GoabMenuAction text="Action 1" action="action1" />
         <GoabMenuAction text="Action 2" action="action2" />
-      </GoabMenuButton>
+      </GoabMenuButton>,
     );
     const el = container.querySelector("goa-menu-button");
     const menuActions = container.querySelectorAll("goa-menu-action");
@@ -52,7 +54,7 @@ describe("GoabMenuButton", () => {
 
   it("should render with all properties", () => {
     const { container } = render(
-      <GoabMenuButton text="Advanced Menu" type="tertiary" testId="advanced-menu" />
+      <GoabMenuButton text="Advanced Menu" type="tertiary" testId="advanced-menu" />,
     );
     const el = container.querySelector("goa-menu-button");
 

@@ -1,9 +1,6 @@
 <div>
   @for (chip of chips; track chip) {
-  <goabx-filter-chip
-    [content]="chip"
-    (onClick)="deleteChip(chip)"
-    mr="s">
+  <goabx-filter-chip [content]="chip" (onClick)="deleteChip(chip)" mr="s">
   </goabx-filter-chip>
   }
 </div>

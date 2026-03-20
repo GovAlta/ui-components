@@ -4,18 +4,18 @@
  * DataGrid displays structured data with advanced features.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const dataGridConfigurations: ComponentConfigurations = {
-  componentSlug: 'data-grid',
-  componentName: 'Data grid',
-  defaultConfigurationId: 'basic',
+  componentSlug: "data-grid",
+  componentName: "Data grid",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic data grid',
-      description: 'Simple data grid with columns',
+      id: "basic",
+      name: "Basic data grid",
+      description: "Simple data grid with columns",
       code: {
         react: `<GoabDataGrid data={data}>
   <GoabDataGridColumn field="name" header="Name" />
@@ -35,9 +35,9 @@ export const dataGridConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sortable',
-      name: 'Sortable columns',
-      description: 'Data grid with sorting enabled',
+      id: "sortable",
+      name: "Sortable columns",
+      description: "Data grid with sorting enabled",
       code: {
         react: `<GoabDataGrid data={data}>
   <GoabDataGridColumn field="name" header="Name" sortable />
@@ -57,9 +57,9 @@ export const dataGridConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-selection',
-      name: 'With selection',
-      description: 'Data grid with row selection',
+      id: "with-selection",
+      name: "With selection",
+      description: "Data grid with row selection",
       code: {
         react: `<GoabDataGrid data={data} selectable onSelectionChange={handleSelection}>
   <GoabDataGridColumn field="id" header="ID" />

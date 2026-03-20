@@ -26,11 +26,7 @@ export function GoabPublicFormTaskList({
 }: GoabPublicFormTaskListProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-public-form-task-list {..._props}>
-      {children}
-    </goa-public-form-task-list>
-  );
+  return <goa-public-form-task-list {..._props}>{children}</goa-public-form-task-list>;
 }
 
 export default GoabPublicFormTaskList;

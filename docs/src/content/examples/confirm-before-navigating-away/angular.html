@@ -1,9 +1,17 @@
 <goabx-button (onClick)="onOpen()">Open</goabx-button>
-<goabx-modal [open]="open" heading="Are you sure you want to change route?" [actions]="actions">
+<goabx-modal
+  [open]="open"
+  heading="Are you sure you want to change route?"
+  [actions]="actions"
+>
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goabx-button type="secondary" size="compact" (onClick)="onClose()">Cancel</goabx-button>
-      <goabx-button type="primary" size="compact" (onClick)="onChangeRoute()">Change route</goabx-button>
+      <goabx-button type="secondary" size="compact" (onClick)="onClose()"
+        >Cancel</goabx-button
+      >
+      <goabx-button type="primary" size="compact" (onClick)="onChangeRoute()"
+        >Change route</goabx-button
+      >
     </goab-button-group>
   </ng-template>
 </goabx-modal>

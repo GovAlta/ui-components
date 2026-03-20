@@ -1,4 +1,11 @@
-import { DataAttributes, GoabButtonSize, GoabButtonType, GoabButtonVariant, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabButtonSize,
+  GoabButtonType,
+  GoabButtonVariant,
+  GoabIconType,
+  GoabMenuButtonOnActionDetail,
+} from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
 import { transformProps, kebab } from "../../lib/common/extract-props";
 
@@ -36,10 +43,7 @@ export function GoabxMenuButton({
 }: GoabxMenuButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { type, testid: testId, ...rest },
-    kebab
-  );
+  const _props = transformProps<WCProps>({ type, testid: testId, ...rest }, kebab);
 
   useEffect(() => {
     if (!el.current) {

@@ -7,7 +7,7 @@ describe("SideMenu", () => {
     const { baseElement } = render(
       <SideMenu testId="foo">
         <a href="#foo">Link</a>
-      </SideMenu>
+      </SideMenu>,
     );
     const el = baseElement.querySelector("goa-side-menu");
     expect(baseElement).toBeTruthy();

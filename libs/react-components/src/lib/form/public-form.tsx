@@ -16,9 +16,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-public-form": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }

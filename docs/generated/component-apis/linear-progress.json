@@ -19,10 +19,7 @@
     {
       "name": "percentVisibility",
       "type": "\"visible\" | \"hidden\"",
-      "values": [
-        "visible",
-        "hidden"
-      ],
+      "values": ["visible", "hidden"],
       "required": false,
       "default": "visible",
       "description": "Controls visibility of the percentage text."

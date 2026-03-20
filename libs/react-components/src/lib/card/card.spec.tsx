@@ -18,13 +18,7 @@ describe("GoabCard", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    const { container } = render(
-      <GoabCard
-        data-grid="cell"
-      >
-        Card content
-      </GoabCard>,
-    );
+    const { container } = render(<GoabCard data-grid="cell">Card content</GoabCard>);
     const el = container.querySelector("goa-card");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });

@@ -43,14 +43,7 @@
       "name": "autoCapitalize",
       "type": "\"on\" | \"off\" | \"none\" | \"sentences\" | \"words\" | \"characters\"",
       "typeLabel": "GoabInputAutoCapitalize",
-      "values": [
-        "on",
-        "off",
-        "none",
-        "sentences",
-        "words",
-        "characters"
-      ],
+      "values": ["on", "off", "none", "sentences", "words", "characters"],
       "required": false,
       "default": "off",
       "description": "Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices."
@@ -88,10 +81,7 @@
     {
       "name": "variant",
       "type": "\"goa\" | \"bare\"",
-      "values": [
-        "goa",
-        "bare"
-      ],
+      "values": ["goa", "bare"],
       "required": false,
       "default": "goa",
       "description": "Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling."
@@ -260,10 +250,7 @@
       "name": "textAlign",
       "type": "\"left\" | \"right\"",
       "typeLabel": "GoabInputTextAlign",
-      "values": [
-        "left",
-        "right"
-      ],
+      "values": ["left", "right"],
       "required": false,
       "default": "left",
       "description": "Sets the text alignment within the input field."
@@ -271,10 +258,7 @@
     {
       "name": "size",
       "type": "\"default\" | \"compact\"",
-      "values": [
-        "default",
-        "compact"
-      ],
+      "values": ["default", "compact"],
       "required": false,
       "default": "default",
       "description": "Sets the size of the input. 'compact' reduces height for dense layouts."
@@ -285,81 +269,61 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onKeyPress",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_keyPress",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onFocus",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_focus",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onBlur",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_blur",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onTrailingIconClick",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_trailingIconClick",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

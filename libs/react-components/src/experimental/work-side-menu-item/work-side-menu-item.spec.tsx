@@ -12,7 +12,7 @@ describe("WorkSideMenuItem", () => {
         icon="star"
         testId="foo"
         type="success"
-        ></WorkSideMenuItem>
+      ></WorkSideMenuItem>,
     );
     expect(baseElement).toBeTruthy();
     const menuItem = baseElement.querySelector("goa-work-side-menu-item");
@@ -25,9 +25,7 @@ describe("WorkSideMenuItem", () => {
   });
 
   it("should render without url", () => {
-    const { baseElement } = render(
-      <WorkSideMenuItem label="No Link" icon="settings" />,
-    );
+    const { baseElement } = render(<WorkSideMenuItem label="No Link" icon="settings" />);
     const menuItem = baseElement.querySelector("goa-work-side-menu-item");
     expect(menuItem).toBeTruthy();
     expect(menuItem?.getAttribute("label")).toBe("No Link");

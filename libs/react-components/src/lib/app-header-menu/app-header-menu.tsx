@@ -25,17 +25,10 @@ declare module "react" {
   }
 }
 
-export function GoabAppHeaderMenu({
-  children,
-  ...rest
-}: GoabAppHeaderMenuProps) {
+export function GoabAppHeaderMenu({ children, ...rest }: GoabAppHeaderMenuProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-app-header-menu {..._props}>
-      {children}
-    </goa-app-header-menu>
-  );
+  return <goa-app-header-menu {..._props}>{children}</goa-app-header-menu>;
 }
 
 export default GoabAppHeaderMenu;

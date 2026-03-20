@@ -5,7 +5,7 @@
  * Used for switching between text+icon and icon-only buttons.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const COMPACT_TOOLBAR_BREAKPOINT = 768;
 export const MOBILE_BREAKPOINT = 624;
@@ -24,8 +24,8 @@ export function useCompactToolbar(): boolean {
       setIsCompact(window.innerWidth < COMPACT_TOOLBAR_BREAKPOINT);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return isCompact;
@@ -44,8 +44,8 @@ export function useMobile(): boolean {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return isMobile;

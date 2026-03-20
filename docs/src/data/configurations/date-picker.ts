@@ -4,18 +4,18 @@
  * DatePicker allows users to select dates.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const datePickerConfigurations: ComponentConfigurations = {
-  componentSlug: 'date-picker',
-  componentName: 'Date picker',
-  defaultConfigurationId: 'basic',
+  componentSlug: "date-picker",
+  componentName: "Date picker",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic date picker',
-      description: 'Simple date selection',
+      id: "basic",
+      name: "Basic date picker",
+      description: "Simple date selection",
       code: {
         react: `<GoabxFormItem label="Date" mb="l">
   <GoabxDatePicker name="date" onChange={handleDateChange} />
@@ -29,9 +29,9 @@ export const datePickerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-value',
-      name: 'With initial value',
-      description: 'Date picker with preset date',
+      id: "with-value",
+      name: "With initial value",
+      description: "Date picker with preset date",
       code: {
         react: `<GoabxFormItem label="Start date" mb="l">
   <GoabxDatePicker name="startDate" value="2024-01-15" onChange={handleDateChange} />
@@ -45,9 +45,9 @@ export const datePickerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-min-max',
-      name: 'With date range',
-      description: 'Restrict selectable dates',
+      id: "with-min-max",
+      name: "With date range",
+      description: "Restrict selectable dates",
       code: {
         react: `<GoabxFormItem label="Appointment date" helpText="Select a date within the next 30 days" mb="l">
   <GoabxDatePicker
@@ -75,9 +75,9 @@ export const datePickerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'disabled',
-      name: 'Disabled',
-      description: 'Date picker in disabled state',
+      id: "disabled",
+      name: "Disabled",
+      description: "Date picker in disabled state",
       code: {
         react: `<GoabxFormItem label="Locked date" mb="l">
   <GoabxDatePicker name="locked" value="2024-01-01" disabled />

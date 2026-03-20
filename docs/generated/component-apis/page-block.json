@@ -5,10 +5,7 @@
     {
       "name": "width",
       "type": "\"full\" | string",
-      "values": [
-        "full",
-        "string"
-      ],
+      "values": ["full", "string"],
       "required": false,
       "default": "full",
       "description": "Maximum width of the content area. Use \"full\" for 100% width or a CSS dimension like \"1200px\"."

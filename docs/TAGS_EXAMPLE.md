@@ -6,7 +6,7 @@ Tags are now supported in the search index! You can add tags to any component do
 
 To add tags to a component's documentation, add frontmatter at the top of the file:
 
-```markdown
+````markdown
 ---
 title: Button Component
 tags: [form, input, interactive, primary]
@@ -19,13 +19,14 @@ Use a button to carry out an important action or to navigate to another page.
 Use it like this:
 
 \```html
-<goa-button (_click)="onClick()" type="primary">Primary</goa-button>
+<goa-button (\_click)="onClick()" type="primary">Primary</goa-button>
 \```
-```
+````
 
 ## Frontmatter Format
 
 The frontmatter must:
+
 - Start and end with `---` on its own line
 - Use YAML syntax
 - Come at the very beginning of the file
@@ -55,6 +56,7 @@ tags:
 Here are some suggested tag categories for component documentation:
 
 ### By Purpose
+
 - `form` - Form-related components
 - `input` - Input controls
 - `display` - Display/presentational components
@@ -64,16 +66,19 @@ Here are some suggested tag categories for component documentation:
 - `data` - Data display (tables, lists, etc.)
 
 ### By Interaction
+
 - `interactive` - User can interact with it
 - `static` - Non-interactive display
 - `clickable` - Responds to clicks
 
 ### By Complexity
+
 - `simple` - Simple, standalone component
 - `composite` - Made up of multiple components
 - `advanced` - Advanced features/configuration
 
 ### By Framework
+
 - `react` - Has React-specific features
 - `angular` - Has Angular-specific features
 - `web-components` - Standard web component
@@ -121,5 +126,6 @@ npm run index:docs
 ```
 
 This will update both:
+
 - `docs/search-index.json`
 - `docs/public/search-index.json`

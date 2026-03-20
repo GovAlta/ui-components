@@ -32,6 +32,7 @@ Open your new file and:
    - Feature: `Feat1547Route`
 
 2. **Update the constants**:
+
    ```tsx
    const ISSUE_NUMBER = "2878";
    const ISSUE_TYPE: "bug" | "feature" = "bug";
@@ -60,11 +61,15 @@ import { Feat1547Route } from "./routes/features/feat1547";
 Inside the `<Routes>` component, add your route in the appropriate section:
 
 ```tsx
-{/* In the bugs section */}
-<Route path="bugs/2878" element={<Bug2878Route />} />
+{
+  /* In the bugs section */
+}
+<Route path="bugs/2878" element={<Bug2878Route />} />;
 
-{/* In the features section */}
-<Route path="features/1547" element={<Feat1547Route />} />
+{
+  /* In the features section */
+}
+<Route path="features/1547" element={<Feat1547Route />} />;
 ```
 
 **Note:** Keep routes in numerical order for easy scanning.
@@ -74,14 +79,19 @@ Inside the `<Routes>` component, add your route in the appropriate section:
 In the `GoabSideMenu`, add a link in the appropriate `GoabSideMenuGroup`:
 
 ```tsx
-{/* For bugs - include short descriptive label */}
-<Link to="/bugs/bug2878">2878 DatePicker onChange</Link>
+{
+  /* For bugs - include short descriptive label */
+}
+<Link to="/bugs/bug2878">2878 DatePicker onChange</Link>;
 
-{/* For features */}
-<Link to="/features/feat1547">1547 Tooltip Multiline</Link>
+{
+  /* For features */
+}
+<Link to="/features/feat1547">1547 Tooltip Multiline</Link>;
 ```
 
 **Navigation label format:** `{NUMBER} {Short Title}`
+
 - Keep titles concise (2-4 words)
 - Focus on the component/behavior being tested
 - The number allows quick reference to the GitHub issue

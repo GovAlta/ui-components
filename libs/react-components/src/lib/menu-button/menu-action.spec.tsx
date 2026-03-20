@@ -9,7 +9,9 @@ describe("GoabMenuAction", () => {
   });
 
   it("should render with required properties", () => {
-    const { container } = render(<GoabMenuAction text="Test Action" action="test-action" />);
+    const { container } = render(
+      <GoabMenuAction text="Test Action" action="test-action" />,
+    );
     const el = container.querySelector("goa-menu-action");
 
     expect(el?.getAttribute("text")).toBe("Test Action");
@@ -18,7 +20,7 @@ describe("GoabMenuAction", () => {
 
   it("should render with icon", () => {
     const { container } = render(
-      <GoabMenuAction text="Action with Icon" action="icon-action" icon="add" />
+      <GoabMenuAction text="Action with Icon" action="icon-action" icon="add" />,
     );
     const el = container.querySelector("goa-menu-action");
 
@@ -29,7 +31,11 @@ describe("GoabMenuAction", () => {
 
   it("should render with testId", () => {
     const { container } = render(
-      <GoabMenuAction text="Testable Action" action="testable-action" testId="test-menu-action" />
+      <GoabMenuAction
+        text="Testable Action"
+        action="testable-action"
+        testId="test-menu-action"
+      />,
     );
     const el = container.querySelector("goa-menu-action");
 
@@ -45,7 +51,7 @@ describe("GoabMenuAction", () => {
         action="complete-action"
         icon="checkmark"
         testId="complete-test"
-      />
+      />,
     );
     const el = container.querySelector("goa-menu-action");
 

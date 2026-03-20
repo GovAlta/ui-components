@@ -1,12 +1,17 @@
-import { useState, useEffect, type ReactNode } from 'react';
-import { GoabButton, GoabIcon, GoabDropdown, GoabDropdownItem } from '@abgov/react-components';
-import { CodeSnippet } from './CodeSnippet';
+import { useState, useEffect, type ReactNode } from "react";
+import {
+  GoabButton,
+  GoabIcon,
+  GoabDropdown,
+  GoabDropdownItem,
+} from "@abgov/react-components";
+import { CodeSnippet } from "./CodeSnippet";
 import {
   getFrameworkPreference,
   setFrameworkPreference,
   subscribeToFrameworkPreference,
-  type Framework
-} from '../lib/framework-preference';
+  type Framework,
+} from "../lib/framework-preference";
 
 interface ControlOption {
   label: string;
@@ -15,7 +20,7 @@ interface ControlOption {
 
 interface Control {
   name: string;
-  type: 'select' | 'boolean' | 'text';
+  type: "select" | "boolean" | "text";
   options?: ControlOption[];
   defaultValue: string | boolean;
 }
@@ -39,45 +44,45 @@ interface ComponentSandboxProps {
 export function ComponentSandbox({
   componentName,
   controls = [],
-  reactCode = '',
-  angularCode = '',
+  reactCode = "",
+  angularCode = "",
   children,
   figmaUrl,
-  githubUrl
+  githubUrl,
 }: ComponentSandboxProps) {
   // Initialize from global preference (only react/angular supported here)
-  const [activeTab, setActiveTab] = useState<'react' | 'angular'>(() => {
+  const [activeTab, setActiveTab] = useState<"react" | "angular">(() => {
     const stored = getFrameworkPreference();
-    return stored === 'angular' ? 'angular' : 'react';
+    return stored === "angular" ? "angular" : "react";
   });
 
   // Subscribe to global framework preference changes
   useEffect(() => {
     return subscribeToFrameworkPreference((framework) => {
       // Map webComponents preference to react for this component
-      setActiveTab(framework === 'angular' ? 'angular' : 'react');
+      setActiveTab(framework === "angular" ? "angular" : "react");
     });
   }, []);
 
-  const [controlValues, setControlValues] = useState<Record<string, string | boolean>>(() => {
-    const initial: Record<string, string | boolean> = {};
-    controls.forEach(c => {
-      initial[c.name] = c.defaultValue;
-    });
-    return initial;
-  });
+  const [controlValues, setControlValues] = useState<Record<string, string | boolean>>(
+    () => {
+      const initial: Record<string, string | boolean> = {};
+      controls.forEach((c) => {
+        initial[c.name] = c.defaultValue;
+      });
+      return initial;
+    },
+  );
 
   const handleControlChange = (name: string, value: string | boolean) => {
-    setControlValues(prev => ({ ...prev, [name]: value }));
+    setControlValues((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
     <div className="component-sandbox">
       {/* Preview Area */}
       <div className="sandbox-preview">
-        <div className="preview-container">
-          {children}
-        </div>
+        <div className="preview-container">{children}</div>
       </div>
 
       {/* Controls */}
@@ -88,15 +93,17 @@ export function ComponentSandbox({
             <span>Controls</span>
           </div>
           <div className="controls-grid">
-            {controls.map(control => (
+            {controls.map((control) => (
               <div key={control.name} className="control-item">
                 <label>{control.name}</label>
-                {control.type === 'select' && control.options && (
+                {control.type === "select" && control.options && (
                   <GoabDropdown
                     value={String(controlValues[control.name])}
-                    onChange={(e) => handleControlChange(control.name, e.detail.value || '')}
+                    onChange={(e) =>
+                      handleControlChange(control.name, e.detail.value || "")
+                    }
                   >
-                    {control.options.map(opt => (
+                    {control.options.map((opt) => (
                       <GoabDropdownItem
                         key={opt.value}
                         value={opt.value}
@@ -105,17 +112,19 @@ export function ComponentSandbox({
                     ))}
                   </GoabDropdown>
                 )}
-                {control.type === 'boolean' && (
+                {control.type === "boolean" && (
                   <label className="toggle-label">
                     <input
                       type="checkbox"
                       checked={Boolean(controlValues[control.name])}
-                      onChange={(e) => handleControlChange(control.name, e.target.checked)}
+                      onChange={(e) =>
+                        handleControlChange(control.name, e.target.checked)
+                      }
                     />
-                    <span>{controlValues[control.name] ? 'Yes' : 'No'}</span>
+                    <span>{controlValues[control.name] ? "Yes" : "No"}</span>
                   </label>
                 )}
-                {control.type === 'text' && (
+                {control.type === "text" && (
                   <input
                     type="text"
                     value={String(controlValues[control.name])}
@@ -132,26 +141,36 @@ export function ComponentSandbox({
       <div className="sandbox-code">
         <div className="code-tabs">
           <button
-            className={`code-tab ${activeTab === 'react' ? 'active' : ''}`}
-            onClick={() => setFrameworkPreference('react')}
+            className={`code-tab ${activeTab === "react" ? "active" : ""}`}
+            onClick={() => setFrameworkPreference("react")}
           >
             React
           </button>
           <button
-            className={`code-tab ${activeTab === 'angular' ? 'active' : ''}`}
-            onClick={() => setFrameworkPreference('angular')}
+            className={`code-tab ${activeTab === "angular" ? "active" : ""}`}
+            onClick={() => setFrameworkPreference("angular")}
           >
             Angular
           </button>
           <div className="code-actions">
             {figmaUrl && (
-              <a href={figmaUrl} target="_blank" rel="noopener noreferrer" className="action-link">
+              <a
+                href={figmaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="action-link"
+              >
                 <GoabIcon type="open" size="small" />
                 Figma
               </a>
             )}
             {githubUrl && (
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="action-link">
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="action-link"
+              >
                 <GoabIcon type="open" size="small" />
                 Source
               </a>
@@ -159,15 +178,16 @@ export function ComponentSandbox({
           </div>
         </div>
         <div className="code-panel">
-          {activeTab === 'react' && reactCode && (
+          {activeTab === "react" && reactCode && (
             <CodeSnippet code={reactCode} language="tsx" showCopy maxHeight={300} />
           )}
-          {activeTab === 'angular' && angularCode && (
+          {activeTab === "angular" && angularCode && (
             <CodeSnippet code={angularCode} language="html" showCopy maxHeight={300} />
           )}
-          {((activeTab === 'react' && !reactCode) || (activeTab === 'angular' && !angularCode)) && (
+          {((activeTab === "react" && !reactCode) ||
+            (activeTab === "angular" && !angularCode)) && (
             <div className="no-code">
-              No {activeTab === 'react' ? 'React' : 'Angular'} code example available.
+              No {activeTab === "react" ? "React" : "Angular"} code example available.
             </div>
           )}
         </div>

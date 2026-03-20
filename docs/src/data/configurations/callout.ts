@@ -4,18 +4,18 @@
  * Callouts are used to highlight important information.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const calloutConfigurations: ComponentConfigurations = {
-  componentSlug: 'callout',
-  componentName: 'Callout',
-  defaultConfigurationId: 'basic',
+  componentSlug: "callout",
+  componentName: "Callout",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Information callout',
-      description: 'Default informational callout',
+      id: "basic",
+      name: "Information callout",
+      description: "Default informational callout",
       code: {
         react: `<GoabxCallout type="information" emphasis="low" maxWidth="480px">
   This is important information for the user.
@@ -29,9 +29,9 @@ export const calloutConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Callout types',
-      description: 'Different semantic types for various contexts',
+      id: "types",
+      name: "Callout types",
+      description: "Different semantic types for various contexts",
       code: {
         react: `<GoabxCallout type="information" heading="Information">
   General information for the user.
@@ -72,9 +72,9 @@ export const calloutConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-heading',
-      name: 'With heading',
-      description: 'Callout with a heading',
+      id: "with-heading",
+      name: "With heading",
+      description: "Callout with a heading",
       code: {
         react: `<GoabxCallout type="important" heading="Application deadline">
   Your application must be submitted by December 31, 2024.
@@ -88,9 +88,9 @@ export const calloutConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'emphasis',
-      name: 'Emphasis levels',
-      description: 'Different visual prominence levels',
+      id: "emphasis",
+      name: "Emphasis levels",
+      description: "Different visual prominence levels",
       code: {
         react: `<GoabxCallout type="important" emphasis="high" heading="High emphasis">
   Full background color for maximum visibility.

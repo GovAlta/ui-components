@@ -75,9 +75,7 @@ describe("GoabxCheckboxList", () => {
   }));
 
   it("should render properties", () => {
-    const el = fixture.debugElement.query(
-      By.css("goa-checkbox-list"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-checkbox-list")).nativeElement;
     expect(el.getAttribute("name")).toBe(component.name);
     expect(el.getAttribute("version")).toBe("2");
     expect(el.getAttribute("size")).toBe("compact");
@@ -90,18 +88,14 @@ describe("GoabxCheckboxList", () => {
   });
 
   it("should default version to 2", () => {
-    const el = fixture.debugElement.query(
-      By.css("goa-checkbox-list"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-checkbox-list")).nativeElement;
     expect(el.getAttribute("version")).toBe("2");
   });
 
   it("should handle onChange event", async () => {
     const onChange = jest.spyOn(component, "onChange");
 
-    const el = fixture.debugElement.query(
-      By.css("goa-checkbox-list"),
-    ).nativeElement;
+    const el = fixture.debugElement.query(By.css("goa-checkbox-list")).nativeElement;
 
     fireEvent(
       el,

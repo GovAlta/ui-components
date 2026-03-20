@@ -21,8 +21,6 @@ export class SortDataInATableComponent {
 
   handleSort(event: GoabTableOnSortDetail): void {
     const { sortBy, sortDir } = event;
-    this.users.sort(
-      (a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir
-    );
+    this.users.sort((a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir);
   }
 }

@@ -120,13 +120,9 @@ describe("GoabDropdown", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabDropdown
-        name="test"
-        onChange={noop}
-        data-grid="cell"
-      >
+      <GoabDropdown name="test" onChange={noop} data-grid="cell">
         <GoabDropdownItem name="test" label="Option 1" value="option1" />
-      </GoabDropdown>
+      </GoabDropdown>,
     );
     const el = baseElement.querySelector("goa-dropdown");
     expect(el?.getAttribute("data-grid")).toBe("cell");

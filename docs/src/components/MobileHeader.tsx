@@ -10,16 +10,16 @@
  * Visibility controlled by CSS via body[data-mobile] attribute.
  */
 
-import { GoabIconButton } from '@abgov/react-components';
+import { GoabIconButton } from "@abgov/react-components";
 
 export function MobileHeader() {
   const handleMenuClick = () => {
     // Dispatch event that SiteNav listens for
-    window.dispatchEvent(new CustomEvent('goa-menu-open'));
+    window.dispatchEvent(new CustomEvent("goa-menu-open"));
   };
 
   const handleSearchClick = () => {
-    window.dispatchEvent(new CustomEvent('goa-search-open'));
+    window.dispatchEvent(new CustomEvent("goa-search-open"));
   };
 
   return (

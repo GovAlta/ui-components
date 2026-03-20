@@ -5,16 +5,13 @@
       type="text"
       (onChange)="onInputChange($event)"
       [value]="inputValue"
-      width="100%">
+      width="100%"
+    >
     </goabx-input>
   </goabx-form-item>
 
   <goab-button-group alignment="start" mt="xl">
-    <goabx-button [disabled]="isDisabled" (onClick)="onConfirm()">
-      Confirm
-    </goabx-button>
-    <goabx-button type="secondary" (onClick)="onCancel()">
-      Cancel
-    </goabx-button>
+    <goabx-button [disabled]="isDisabled" (onClick)="onConfirm()"> Confirm </goabx-button>
+    <goabx-button type="secondary" (onClick)="onCancel()"> Cancel </goabx-button>
   </goab-button-group>
 </form>

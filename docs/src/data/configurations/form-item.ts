@@ -5,18 +5,18 @@
  * for form inputs like Input, TextArea, Dropdown, etc.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const formItemConfigurations: ComponentConfigurations = {
-  componentSlug: 'form-item',
-  componentName: 'Form item',
-  defaultConfigurationId: 'basic',
+  componentSlug: "form-item",
+  componentName: "Form item",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Form item with label wrapping an input',
+      id: "basic",
+      name: "Basic example",
+      description: "Form item with label wrapping an input",
       code: {
         react: `<GoabxFormItem label="Email address" mb="l">
   <GoabxInput name="email" type="email" width="100%" />
@@ -30,9 +30,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-help-text',
-      name: 'With help text',
-      description: 'Form item with additional guidance',
+      id: "with-help-text",
+      name: "With help text",
+      description: "Form item with additional guidance",
       code: {
         react: `<GoabxFormItem label="Password" helpText="Must be at least 8 characters" mb="l">
   <GoabxInput name="password" type="password" width="100%" />
@@ -46,9 +46,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'required',
-      name: 'Required field',
-      description: 'Form item marked as required',
+      id: "required",
+      name: "Required field",
+      description: "Form item marked as required",
       code: {
         react: `<GoabxFormItem label="Full name" requirement="required" mb="l">
   <GoabxInput name="fullName" width="100%" />
@@ -62,9 +62,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'optional',
-      name: 'Optional field',
-      description: 'Form item marked as optional',
+      id: "optional",
+      name: "Optional field",
+      description: "Form item marked as optional",
       code: {
         react: `<GoabxFormItem label="Middle name" requirement="optional" mb="l">
   <GoabxInput name="middleName" width="100%" />
@@ -78,9 +78,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-error',
-      name: 'With error',
-      description: 'Form item showing validation error',
+      id: "with-error",
+      name: "With error",
+      description: "Form item showing validation error",
       code: {
         react: `<GoabxFormItem label="Email address" error="Please enter a valid email address" mb="l">
   <GoabxInput name="email" type="email" error width="100%" />
@@ -94,9 +94,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'label-sizes',
-      name: 'Label sizes',
-      description: 'Different label size options',
+      id: "label-sizes",
+      name: "Label sizes",
+      description: "Different label size options",
       code: {
         react: `<GoabxFormItem label="Compact label" labelSize="compact" mb="l">
   <GoabxInput name="compact" width="100%" />

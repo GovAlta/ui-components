@@ -61,4 +61,4 @@ describe("Accordion", () => {
 
     expect(spy).not.toHaveBeenCalled();
   });
-})
+});

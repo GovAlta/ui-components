@@ -1,4 +1,8 @@
-import { DataAttributes, GoabTableSortDirection, GoabTableSortOrder } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabTableSortDirection,
+  GoabTableSortOrder,
+} from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
 
@@ -33,7 +37,12 @@ export function GoabxTableSortHeader({
   ...rest
 }: GoabxTableSortProps): JSX.Element {
   return (
-    <goa-table-sort-header name={name} direction={direction} sort-order={sortOrder} {...rest}>
+    <goa-table-sort-header
+      name={name}
+      direction={direction}
+      sort-order={sortOrder}
+      {...rest}
+    >
       {children}
     </goa-table-sort-header>
   );

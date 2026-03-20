@@ -4,18 +4,18 @@
  * Containers provide consistent horizontal padding and max-width.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const containerConfigurations: ComponentConfigurations = {
-  componentSlug: 'container',
-  componentName: 'Container',
-  defaultConfigurationId: 'basic',
+  componentSlug: "container",
+  componentName: "Container",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic container',
-      description: 'Standard page container',
+      id: "basic",
+      name: "Basic container",
+      description: "Standard page container",
       code: {
         react: `<GoabContainer>
   <h1>Page content</h1>
@@ -32,9 +32,9 @@ export const containerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Container types',
-      description: 'Different container purposes',
+      id: "types",
+      name: "Container types",
+      description: "Different container purposes",
       code: {
         react: `<GoabContainer type="non-interactive">
   <p>Non-interactive content container</p>
@@ -66,9 +66,9 @@ export const containerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'accent-colors',
-      name: 'Accent colors',
-      description: 'Container with accent bar',
+      id: "accent-colors",
+      name: "Accent colors",
+      description: "Container with accent bar",
       code: {
         react: `<GoabContainer accent="thick">
   <p>Container with thick accent bar</p>
@@ -91,9 +91,9 @@ export const containerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-heading',
-      name: 'With heading',
-      description: 'Container with heading and actions',
+      id: "with-heading",
+      name: "With heading",
+      description: "Container with heading and actions",
       code: {
         react: `<GoabContainer heading="Section title">
   <p>Container content with a heading.</p>

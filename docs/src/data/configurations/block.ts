@@ -4,18 +4,18 @@
  * Block provides vertical spacing and horizontal alignment.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const blockConfigurations: ComponentConfigurations = {
-  componentSlug: 'block',
-  componentName: 'Block',
-  defaultConfigurationId: 'basic',
+  componentSlug: "block",
+  componentName: "Block",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic block',
-      description: 'Block with default spacing',
+      id: "basic",
+      name: "Basic block",
+      description: "Block with default spacing",
       code: {
         react: `<GoabBlock>
   <p>First item</p>
@@ -35,9 +35,9 @@ export const blockConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'gap-sizes',
-      name: 'Gap sizes',
-      description: 'Different spacing between items',
+      id: "gap-sizes",
+      name: "Gap sizes",
+      description: "Different spacing between items",
       code: {
         react: `<GoabBlock gap="xs">
   <p>Extra small gap</p>
@@ -78,9 +78,9 @@ export const blockConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'alignment',
-      name: 'Alignment',
-      description: 'Horizontal alignment options',
+      id: "alignment",
+      name: "Alignment",
+      description: "Horizontal alignment options",
       code: {
         react: `<GoabBlock alignment="start">
   <GoabxFormItem label="Start aligned">
@@ -130,9 +130,9 @@ export const blockConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'horizontal',
-      name: 'Horizontal layout',
-      description: 'Items arranged horizontally',
+      id: "horizontal",
+      name: "Horizontal layout",
+      description: "Items arranged horizontally",
       code: {
         react: `<GoabBlock direction="row" gap="l">
   <GoabxFormItem label="First name">

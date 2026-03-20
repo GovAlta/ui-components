@@ -4,18 +4,18 @@
  * Pagination helps users navigate through multiple pages of content.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const paginationConfigurations: ComponentConfigurations = {
-  componentSlug: 'pagination',
-  componentName: 'Pagination',
-  defaultConfigurationId: 'basic',
+  componentSlug: "pagination",
+  componentName: "Pagination",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic pagination',
-      description: 'Simple pagination with page numbers',
+      id: "basic",
+      name: "Basic pagination",
+      description: "Simple pagination with page numbers",
       code: {
         react: `<GoabxPagination
   page={1}
@@ -37,9 +37,9 @@ export const paginationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-variants',
-      name: 'Variants',
-      description: 'Different pagination styles',
+      id: "with-variants",
+      name: "Variants",
+      description: "Different pagination styles",
       code: {
         react: `<GoabxPagination
   page={1}
@@ -80,9 +80,9 @@ export const paginationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'middle-page',
-      name: 'Middle page',
-      description: 'Pagination showing middle page selected',
+      id: "middle-page",
+      name: "Middle page",
+      description: "Pagination showing middle page selected",
       code: {
         react: `<GoabxPagination
   page={5}

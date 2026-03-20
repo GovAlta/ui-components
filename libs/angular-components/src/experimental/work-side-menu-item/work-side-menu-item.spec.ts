@@ -35,11 +35,7 @@ class TestWorkSideMenuItemComponent {
   standalone: true,
   imports: [GoabxWorkSideMenuItem],
   template: `
-    <goabx-work-side-menu-item
-      [label]="label"
-      [url]="url"
-      [popoverContent]="popoverTpl"
-    >
+    <goabx-work-side-menu-item [label]="label" [url]="url" [popoverContent]="popoverTpl">
     </goabx-work-side-menu-item>
     <ng-template #popoverTpl>
       <div class="popover-test-content">Popover content here</div>
@@ -85,14 +81,10 @@ describe("GoabxWorkSideMenuItem", () => {
     tick();
     fixture.detectChanges();
 
-    const slotDiv = fixture.debugElement.query(
-      By.css('[slot="popoverContent"]'),
-    );
+    const slotDiv = fixture.debugElement.query(By.css('[slot="popoverContent"]'));
     expect(slotDiv).toBeTruthy();
 
-    const popoverContent = fixture.debugElement.query(
-      By.css(".popover-test-content"),
-    );
+    const popoverContent = fixture.debugElement.query(By.css(".popover-test-content"));
     expect(popoverContent).toBeTruthy();
     expect(popoverContent.nativeElement.textContent).toBe("Popover content here");
   }));

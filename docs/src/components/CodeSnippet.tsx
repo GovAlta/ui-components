@@ -217,8 +217,8 @@ export function CodeSnippet({
   // Get available frameworks
   const availableFrameworks = hasFrameworkSwitcher
     ? (Object.keys(frameworkCode).filter(
-      (k) => frameworkCode[k as Framework],
-    ) as Framework[])
+        (k) => frameworkCode[k as Framework],
+      ) as Framework[])
     : [];
 
   // Subscribe to global framework preference changes from other components.

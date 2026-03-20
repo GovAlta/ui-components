@@ -52,11 +52,7 @@
       "name": "labelSize",
       "type": "\"compact\" | \"regular\" | \"large\"",
       "typeLabel": "GoabFormItemLabelSizeType",
-      "values": [
-        "compact",
-        "regular",
-        "large"
-      ],
+      "values": ["compact", "regular", "large"],
       "required": false,
       "default": "regular",
       "description": "Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis."
@@ -79,10 +75,7 @@
       "name": "requirement",
       "type": "\"optional\" | \"required\"",
       "typeLabel": "GoabFormItemRequirementType",
-      "values": [
-        "optional",
-        "required"
-      ],
+      "values": ["optional", "required"],
       "required": false,
       "default": "",
       "description": "Marks the field with an optional or required label indicator."
@@ -98,12 +91,7 @@
       "name": "type",
       "type": "\"text-input\" | \"textarea\" | \"checkbox-list\" | \"radio-group\"",
       "typeLabel": "GoabFormItemInputType",
-      "values": [
-        "text-input",
-        "textarea",
-        "checkbox-list",
-        "radio-group"
-      ],
+      "values": ["text-input", "textarea", "checkbox-list", "radio-group"],
       "required": false,
       "default": "",
       "description": "Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group."

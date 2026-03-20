@@ -6,10 +6,7 @@
       "name": "variant",
       "type": "\"fullscreen\" | \"inline\"",
       "typeLabel": "GoabCircularProgressVariant",
-      "values": [
-        "fullscreen",
-        "inline"
-      ],
+      "values": ["fullscreen", "inline"],
       "required": false,
       "default": "inline",
       "description": "Stretch across the full screen or use it inline"
@@ -18,10 +15,7 @@
       "name": "size",
       "type": "\"small\" | \"large\"",
       "typeLabel": "GoabCircularProgressSize",
-      "values": [
-        "small",
-        "large"
-      ],
+      "values": ["small", "large"],
       "required": false,
       "default": "large",
       "description": "Size of the progress indicator"

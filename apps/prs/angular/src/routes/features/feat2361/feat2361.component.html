@@ -1,8 +1,11 @@
 <div class="feat2361">
   <goab-block direction="column" gap="l">
-    <goab-text tag="h1" size="heading-l">Feature 2361 - Selection control toggles</goab-text>
+    <goab-text tag="h1" size="heading-l"
+      >Feature 2361 - Selection control toggles</goab-text
+    >
     <goab-text tag="p" size="body-m">
-      Manual scenarios to verify the expanded clickable area on radio and checkbox controls while sharing error and disabled toggles.
+      Manual scenarios to verify the expanded clickable area on radio and checkbox
+      controls while sharing error and disabled toggles.
     </goab-text>
 
     <div class="feat2361__actions">
@@ -15,7 +18,8 @@
     </div>
 
     <goab-text tag="p" size="body-s">
-      Error state: {{ errorActive ? "on" : "off" }} | Disabled: {{ disabledActive ? "on" : "off" }}
+      Error state: {{ errorActive ? "on" : "off" }} | Disabled:
+      {{ disabledActive ? "on" : "off" }}
     </goab-text>
 
     <goab-grid minChildWidth="320px" gap="l">
@@ -31,13 +35,13 @@
           [error]="errorActive"
         >
           @for (option of horizontalOptions; track option.value) {
-          <goab-radio-item
-            [value]="option.value"
-            [label]="option.label"
-            name="feat2361-horizontal"
-            [disabled]="disabledActive"
-            [error]="errorActive"
-          ></goab-radio-item>
+            <goab-radio-item
+              [value]="option.value"
+              [label]="option.label"
+              name="feat2361-horizontal"
+              [disabled]="disabledActive"
+              [error]="errorActive"
+            ></goab-radio-item>
           }
         </goab-radio-group>
       </goab-form-item>
@@ -54,13 +58,13 @@
           [error]="errorActive"
         >
           @for (option of verticalOptions; track option.value) {
-          <goab-radio-item
-            [value]="option.value"
-            [label]="option.label"
-            name="feat2361-vertical"
-            [disabled]="disabledActive"
-            [error]="errorActive"
-          ></goab-radio-item>
+            <goab-radio-item
+              [value]="option.value"
+              [label]="option.label"
+              name="feat2361-vertical"
+              [disabled]="disabledActive"
+              [error]="errorActive"
+            ></goab-radio-item>
           }
         </goab-radio-group>
       </goab-form-item>
@@ -76,13 +80,13 @@
           [error]="errorActive"
         >
           @for (option of checkboxListOptions; track option.value) {
-          <goab-checkbox
-            [name]="option.value"
-            [value]="option.value"
-            [text]="option.label"
-            [disabled]="disabledActive"
-            [error]="errorActive"
-          ></goab-checkbox>
+            <goab-checkbox
+              [name]="option.value"
+              [value]="option.value"
+              [text]="option.label"
+              [disabled]="disabledActive"
+              [error]="errorActive"
+            ></goab-checkbox>
           }
         </goab-checkbox-list>
       </goab-form-item>
@@ -94,13 +98,13 @@
       >
         <div class="feat2361__checkboxes">
           @for (option of checkboxOptions; track option.value) {
-          <goab-checkbox
-            [name]="option.value"
-            [text]="option.label"
-            [value]="option.value"
-            [disabled]="disabledActive"
-            [error]="errorActive"
-          ></goab-checkbox>
+            <goab-checkbox
+              [name]="option.value"
+              [text]="option.label"
+              [value]="option.value"
+              [disabled]="disabledActive"
+              [error]="errorActive"
+            ></goab-checkbox>
           }
         </div>
       </goab-form-item>

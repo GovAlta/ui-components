@@ -38,11 +38,7 @@ describe("GoabBadge", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabBadge
-        type="information"
-        content="Text Content"
-        data-grid="cell"
-      />,
+      <GoabBadge type="information" content="Text Content" data-grid="cell" />,
     );
     const el = container.querySelector("goa-badge");
     expect(el?.getAttribute("data-grid")).toBe("cell");
@@ -50,11 +46,7 @@ describe("GoabBadge", () => {
 
   it("should render custom icon type when icontype is provided", () => {
     const { container } = render(
-      <GoabBadge
-        type="information"
-        content="Custom Icon"
-        iconType="home"
-      />,
+      <GoabBadge type="information" content="Custom Icon" iconType="home" />,
     );
     const el = container.querySelector("goa-badge");
 
@@ -64,11 +56,7 @@ describe("GoabBadge", () => {
 
   it("should not render icontype when not provided", () => {
     const { container } = render(
-      <GoabBadge
-        type="success"
-        content="Default Icon"
-        icon
-      />,
+      <GoabBadge type="success" content="Default Icon" icon />,
     );
     const el = container.querySelector("goa-badge");
 
@@ -78,12 +66,7 @@ describe("GoabBadge", () => {
 
   it("should pass icon=false correctly to web component", () => {
     const { container } = render(
-      <GoabBadge
-        type="success"
-        content="No Icon"
-        icon={false}
-        iconType="star"
-      />,
+      <GoabBadge type="success" content="No Icon" icon={false} iconType="star" />,
     );
     const el = container.querySelector("goa-badge");
 
@@ -93,11 +76,7 @@ describe("GoabBadge", () => {
 
   it("should pass icon='true' when icon={true} explicitly", () => {
     const { container } = render(
-      <GoabBadge
-        type="information"
-        content="Show Icon"
-        icon={true}
-      />,
+      <GoabBadge type="information" content="Show Icon" icon={true} />,
     );
     const el = container.querySelector("goa-badge");
 
@@ -107,11 +86,7 @@ describe("GoabBadge", () => {
 
   it("should pass icon='false' when icon={false} without iconType", () => {
     const { container } = render(
-      <GoabBadge
-        type="success"
-        content="No Icon"
-        icon={false}
-      />,
+      <GoabBadge type="success" content="No Icon" icon={false} />,
     );
     const el = container.querySelector("goa-badge");
 
@@ -121,11 +96,7 @@ describe("GoabBadge", () => {
 
   it("should pass icon='false' when icon={undefined}", () => {
     const { container } = render(
-      <GoabBadge
-        type="important"
-        content="Undefined Icon"
-        icon={undefined}
-      />,
+      <GoabBadge type="important" content="Undefined Icon" icon={undefined} />,
     );
     const el = container.querySelector("goa-badge");
 
@@ -134,12 +105,7 @@ describe("GoabBadge", () => {
 
   it("should pass icon='true' when iconType and icon={true} both provided", () => {
     const { container } = render(
-      <GoabBadge
-        type="success"
-        content="Custom Star"
-        icon={true}
-        iconType="star"
-      />,
+      <GoabBadge type="success" content="Custom Star" icon={true} iconType="star" />,
     );
     const el = container.querySelector("goa-badge");
 

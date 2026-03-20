@@ -38,10 +38,7 @@ describe("AppHeaderMenu", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabAppHeaderMenu
-        heading="Test heading"
-        data-grid="row"
-      >
+      <GoabAppHeaderMenu heading="Test heading" data-grid="row">
         Content
       </GoabAppHeaderMenu>,
     );

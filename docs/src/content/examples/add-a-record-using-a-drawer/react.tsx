@@ -54,17 +54,30 @@ export function AddARecordUsingADrawer() {
           <GoabxInput name="fieldOfStudy" type="text" onChange={() => {}} />
         </GoabxFormItem>
         <GoabxFormItem label="Is the person currently attending?" mt="l">
-          <GoabxRadioGroup name="attendTraining" orientation="horizontal" onChange={() => {}}>
+          <GoabxRadioGroup
+            name="attendTraining"
+            orientation="horizontal"
+            onChange={() => {}}
+          >
             <GoabxRadioItem value="yes" label="Yes" />
             <GoabxRadioItem value="no" label="No" />
           </GoabxRadioGroup>
         </GoabxFormItem>
         <GoabxFormItem label="Start date" mt="l">
           <GoabxDatePicker onChange={() => {}} value={new Date("2022-09-01")} />
-          <GoabxCheckbox name="startDateApproximate" text="Approximate date" value="y" mt="s" />
+          <GoabxCheckbox
+            name="startDateApproximate"
+            text="Approximate date"
+            value="y"
+            mt="s"
+          />
         </GoabxFormItem>
         <GoabxFormItem label="Credential received?" mt="l">
-          <GoabxRadioGroup name="credentialReceived" orientation="horizontal" onChange={() => {}}>
+          <GoabxRadioGroup
+            name="credentialReceived"
+            orientation="horizontal"
+            onChange={() => {}}
+          >
             <GoabxRadioItem value="yes" label="Yes" />
             <GoabxRadioItem value="no" label="No" />
           </GoabxRadioGroup>

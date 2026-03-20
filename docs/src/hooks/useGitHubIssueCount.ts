@@ -5,7 +5,7 @@
  * Client-side only to avoid SSR hydration mismatches.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
@@ -42,19 +42,19 @@ export function useGitHubIssueCount(componentName?: string): number | null {
     const fetchIssueCount = async () => {
       try {
         const query = encodeURIComponent(
-          `repo:GovAlta/ui-components is:issue is:open label:"${componentName}"`
+          `repo:GovAlta/ui-components is:issue is:open label:"${componentName}"`,
         );
         const response = await fetch(
           `https://api.github.com/search/issues?q=${query}&per_page=1`,
           {
             headers: {
-              Accept: 'application/vnd.github.v3+json',
+              Accept: "application/vnd.github.v3+json",
             },
-          }
+          },
         );
 
         if (!response.ok) {
-          console.warn('GitHub API error:', response.status);
+          console.warn("GitHub API error:", response.status);
           setCount(0);
           return;
         }
@@ -67,13 +67,13 @@ export function useGitHubIssueCount(componentName?: string): number | null {
         try {
           sessionStorage.setItem(
             cacheKey,
-            JSON.stringify({ count: issueCount, timestamp: Date.now() })
+            JSON.stringify({ count: issueCount, timestamp: Date.now() }),
           );
         } catch (e) {
           // sessionStorage not available
         }
       } catch (error) {
-        console.warn('Failed to fetch GitHub issue count:', error);
+        console.warn("Failed to fetch GitHub issue count:", error);
         setCount(0);
       }
     };

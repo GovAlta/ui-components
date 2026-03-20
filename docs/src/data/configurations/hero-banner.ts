@@ -4,18 +4,18 @@
  * Hero banners display prominent page headers.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const heroBannerConfigurations: ComponentConfigurations = {
-  componentSlug: 'hero-banner',
-  componentName: 'Hero banner',
-  defaultConfigurationId: 'basic',
+  componentSlug: "hero-banner",
+  componentName: "Hero banner",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic hero banner',
-      description: 'Simple page header banner',
+      id: "basic",
+      name: "Basic hero banner",
+      description: "Simple page header banner",
       code: {
         react: `<GoabHeroBanner heading="Welcome to Alberta Services" />`,
         angular: `<goab-hero-banner heading="Welcome to Alberta Services"></goab-hero-banner>`,
@@ -23,9 +23,9 @@ export const heroBannerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-background',
-      name: 'With background image',
-      description: 'Hero banner with image background',
+      id: "with-background",
+      name: "With background image",
+      description: "Hero banner with image background",
       code: {
         react: `<GoabHeroBanner
   heading="Explore Alberta"
@@ -42,9 +42,9 @@ export const heroBannerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-content',
-      name: 'With content',
-      description: 'Hero banner with description and actions',
+      id: "with-content",
+      name: "With content",
+      description: "Hero banner with description and actions",
       code: {
         react: `<GoabHeroBanner heading="Start your application">
   <p>Apply for government services quickly and easily online.</p>
@@ -70,9 +70,9 @@ export const heroBannerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'min-height',
-      name: 'Custom height',
-      description: 'Hero banner with minimum height',
+      id: "min-height",
+      name: "Custom height",
+      description: "Hero banner with minimum height",
       code: {
         react: `<GoabHeroBanner
   heading="Full viewport hero"

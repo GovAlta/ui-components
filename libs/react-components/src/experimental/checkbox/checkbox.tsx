@@ -11,9 +11,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-checkbox": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }

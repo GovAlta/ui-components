@@ -4,18 +4,18 @@
  * Note: RadioGroup should be wrapped in FormItem for proper labeling.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const radioGroupConfigurations: ComponentConfigurations = {
-  componentSlug: 'radio-group',
-  componentName: 'Radio group',
-  defaultConfigurationId: 'basic',
+  componentSlug: "radio-group",
+  componentName: "Radio group",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Radio group with vertical layout',
+      id: "basic",
+      name: "Basic example",
+      description: "Radio group with vertical layout",
       code: {
         react: `<GoabxFormItem label="Contact preference" mb="l">
   <GoabxRadioGroup name="contact" value="">
@@ -41,9 +41,9 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'horizontal',
-      name: 'Horizontal layout',
-      description: 'Radio group arranged horizontally',
+      id: "horizontal",
+      name: "Horizontal layout",
+      description: "Radio group arranged horizontally",
       code: {
         react: `<GoabxFormItem label="Size" mb="l">
   <GoabxRadioGroup name="size" value="" orientation="horizontal">
@@ -69,9 +69,9 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-descriptions',
-      name: 'With descriptions',
-      description: 'Radio items with additional description text',
+      id: "with-descriptions",
+      name: "With descriptions",
+      description: "Radio items with additional description text",
       code: {
         react: `<GoabxFormItem label="Shipping method" mb="l">
   <GoabxRadioGroup name="shipping" value="">
@@ -97,9 +97,9 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'preselected',
-      name: 'Preselected',
-      description: 'Radio group with default selection',
+      id: "preselected",
+      name: "Preselected",
+      description: "Radio group with default selection",
       code: {
         react: `<GoabxFormItem label="Notification frequency" mb="l">
   <GoabxRadioGroup name="frequency" value="daily">
@@ -125,9 +125,9 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'disabled',
-      name: 'Disabled',
-      description: 'Radio group in disabled state',
+      id: "disabled",
+      name: "Disabled",
+      description: "Radio group in disabled state",
       code: {
         react: `<GoabxFormItem label="Account type" mb="l">
   <GoabxRadioGroup name="accountType" value="basic" disabled>
@@ -150,9 +150,9 @@ export const radioGroupConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'error',
-      name: 'Error state',
-      description: 'Radio group showing validation error',
+      id: "error",
+      name: "Error state",
+      description: "Radio group showing validation error",
       code: {
         react: `<GoabxFormItem label="Payment method" error="Please select a payment method" mb="l">
   <GoabxRadioGroup name="payment" value="" error>

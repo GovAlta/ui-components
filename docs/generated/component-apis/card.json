@@ -19,10 +19,7 @@
     {
       "name": "height",
       "type": "\"auto\" | \"max\"",
-      "values": [
-        "auto",
-        "max"
-      ],
+      "values": ["auto", "max"],
       "required": false,
       "default": "auto",
       "description": "Sets the height behavior. 'auto' fits content, 'max' fills available height."

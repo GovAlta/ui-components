@@ -37,10 +37,7 @@ describe("Accordion", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabAccordion
-        heading="Test heading"
-        data-grid="row"
-      >
+      <GoabAccordion heading="Test heading" data-grid="row">
         Content
       </GoabAccordion>,
     );

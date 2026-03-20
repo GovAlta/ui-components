@@ -3,7 +3,8 @@ import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
   GoabRadioGroupSize,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../../lib/common/extract-props";
 
@@ -26,9 +27,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-radio-group": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-radio-group": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }

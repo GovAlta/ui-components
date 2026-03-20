@@ -8,7 +8,9 @@ describe("Pagination", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <Pagination
-        onChange={() => { /* do nothing */ }}
+        onChange={() => {
+          /* do nothing */
+        }}
         pageNumber={1}
         itemCount={100}
         perPageCount={20}
@@ -17,7 +19,7 @@ describe("Pagination", () => {
         mb="m"
         ml="l"
         mr="xl"
-      />
+      />,
     );
 
     const el = baseElement.querySelector("goa-pagination");
@@ -36,7 +38,7 @@ describe("Pagination", () => {
     const fn = vi.fn();
 
     const { baseElement } = render(
-      <Pagination onChange={fn} pageNumber={1} itemCount={100} />
+      <Pagination onChange={fn} pageNumber={1} itemCount={100} />,
     );
     const detail: GoabPaginationOnChangeDetail = { page: 2 };
 

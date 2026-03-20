@@ -19,17 +19,10 @@ export interface GoabAppFooterProps extends DataAttributes {
 // legacy name
 export type FooterProps = GoabAppFooterProps;
 
-export function GoabAppFooter({
-  children,
-  ...rest
-}: GoabAppFooterProps): JSX.Element {
+export function GoabAppFooter({ children, ...rest }: GoabAppFooterProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-app-footer {..._props}>
-      {children}
-    </goa-app-footer>
-  );
+  return <goa-app-footer {..._props}>{children}</goa-app-footer>;
 }
 
 export default GoabAppFooter;

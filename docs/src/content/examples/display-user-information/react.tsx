@@ -9,16 +9,28 @@ export function DisplayUserInformation() {
   return (
     <>
       <GoabContainer>
-        <GoabText as="span" size="body-m" color="secondary" mt="none" mb="none">Housing Advisor</GoabText>
-        <GoabText size="heading-m" mt="none" mb="s">Tracy Hero</GoabText>
+        <GoabText as="span" size="body-m" color="secondary" mt="none" mb="none">
+          Housing Advisor
+        </GoabText>
+        <GoabText size="heading-m" mt="none" mb="s">
+          Tracy Hero
+        </GoabText>
         <GoabBlock direction="row" gap="s">
           <GoabBlock direction="column" gap="m">
-            <GoabText as="span" size="heading-xs" mt="none" mb="none">Email</GoabText>
-            <GoabText as="span" size="heading-xs" mt="none" mb="none">Phone</GoabText>
+            <GoabText as="span" size="heading-xs" mt="none" mb="none">
+              Email
+            </GoabText>
+            <GoabText as="span" size="heading-xs" mt="none" mb="none">
+              Phone
+            </GoabText>
           </GoabBlock>
           <GoabBlock direction="column" gap="m">
-            <GoabText as="span" size="body-m" mt="none" mb="none">tracyhero@email.com</GoabText>
-            <GoabText as="span" size="body-m" mt="none" mb="none">283-203-4921</GoabText>
+            <GoabText as="span" size="body-m" mt="none" mb="none">
+              tracyhero@email.com
+            </GoabText>
+            <GoabText as="span" size="body-m" mt="none" mb="none">
+              283-203-4921
+            </GoabText>
           </GoabBlock>
         </GoabBlock>
       </GoabContainer>
@@ -32,10 +44,12 @@ export function DisplayUserInformation() {
             type="tertiary"
             size="compact"
             leadingIcon="calendar"
-            onClick={handleAddToCalendar}>
+            onClick={handleAddToCalendar}
+          >
             Add to calendar
           </GoabxButton>
-        }>
+        }
+      >
         <GoabxTable width="100%" striped>
           <tbody>
             <tr>

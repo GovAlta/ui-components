@@ -115,10 +115,7 @@ describe("GoabxTable", () => {
       sortBy: "column1",
       sortDir: 1,
     };
-    fireEvent(
-      el,
-      new CustomEvent("_sort", { detail }),
-    );
+    fireEvent(el, new CustomEvent("_sort", { detail }));
 
     expect(onSort).toHaveBeenCalledWith(detail);
   });
@@ -132,10 +129,7 @@ describe("GoabxTable", () => {
         { column: "column2", direction: "desc" },
       ],
     };
-    fireEvent(
-      el,
-      new CustomEvent("_multisort", { detail }),
-    );
+    fireEvent(el, new CustomEvent("_multisort", { detail }));
 
     expect(onMultiSort).toHaveBeenCalledWith(detail);
   });

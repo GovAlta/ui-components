@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import { fireEvent } from "@testing-library/dom";
-import GoabxCheckboxList, { GoabxCheckboxListProps as CheckboxListProps } from "./checkbox-list";
+import GoabxCheckboxList, {
+  GoabxCheckboxListProps as CheckboxListProps,
+} from "./checkbox-list";
 import { describe, it, expect, vi } from "vitest";
 import { GoabCheckboxListOnChangeDetail } from "@abgov/ui-components-common";
 
@@ -88,7 +90,7 @@ describe("GoabxCheckboxList", () => {
     render(
       <GoabxCheckboxList name="foo">
         <div data-testid="child">Child content</div>
-      </GoabxCheckboxList>
+      </GoabxCheckboxList>,
     );
 
     const child = document.querySelector("[data-testid='child']");

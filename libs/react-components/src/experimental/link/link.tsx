@@ -51,11 +51,7 @@ export function GoabxLink({
   const _props = transformProps<WCProps>({ color, size, ...rest }, lowercase);
 
   return (
-    <goa-link
-      action-arg={actionArg}
-      action-args={JSON.stringify(actionArgs)}
-      {..._props}
-    >
+    <goa-link action-arg={actionArg} action-args={JSON.stringify(actionArgs)} {..._props}>
       {children}
     </goa-link>
   );

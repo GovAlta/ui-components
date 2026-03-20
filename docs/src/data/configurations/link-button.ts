@@ -4,18 +4,18 @@
  * LinkButton provides button-styled anchor elements.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const linkButtonConfigurations: ComponentConfigurations = {
-  componentSlug: 'link-button',
-  componentName: 'Link button',
-  defaultConfigurationId: 'basic',
+  componentSlug: "link-button",
+  componentName: "Link button",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic link button',
-      description: 'Anchor styled as button',
+      id: "basic",
+      name: "Basic link button",
+      description: "Anchor styled as button",
       code: {
         react: `<GoabLinkButton href="/apply">Apply now</GoabLinkButton>`,
         angular: `<goab-link-button href="/apply">Apply now</goab-link-button>`,
@@ -23,9 +23,9 @@ export const linkButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Button types',
-      description: 'Different visual styles',
+      id: "types",
+      name: "Button types",
+      description: "Different visual styles",
       code: {
         react: `<GoabLinkButton href="/primary" type="primary">Primary</GoabLinkButton>
 <GoabLinkButton href="/secondary" type="secondary">Secondary</GoabLinkButton>
@@ -39,9 +39,9 @@ export const linkButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icons',
-      name: 'With icons',
-      description: 'Link button with icons',
+      id: "with-icons",
+      name: "With icons",
+      description: "Link button with icons",
       code: {
         react: `<GoabLinkButton href="/download" leadingIcon="download">Download</GoabLinkButton>
 <GoabLinkButton href="/next" trailingIcon="arrow-forward">Continue</GoabLinkButton>`,
@@ -52,9 +52,9 @@ export const linkButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'external',
-      name: 'External link',
-      description: 'Link button opening new tab',
+      id: "external",
+      name: "External link",
+      description: "Link button opening new tab",
       code: {
         react: `<GoabLinkButton href="https://www.alberta.ca" external>Visit Alberta.ca</GoabLinkButton>`,
         angular: `<goab-link-button href="https://www.alberta.ca" [external]="true">Visit Alberta.ca</goab-link-button>`,

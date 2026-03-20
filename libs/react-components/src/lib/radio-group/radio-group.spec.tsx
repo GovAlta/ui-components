@@ -192,10 +192,12 @@ describe("RadioGroup", () => {
       );
 
       const radioItem = document.querySelector("goa-radio-item");
-      expect(radioItem?.getAttribute("revealarialabel")).toBe("Screen reader announcement for radio reveal content");
-      expect(
-        result.container.querySelector("div[slot='reveal']")?.innerHTML,
-      ).toContain("Additional apple options");
+      expect(radioItem?.getAttribute("revealarialabel")).toBe(
+        "Screen reader announcement for radio reveal content",
+      );
+      expect(result.container.querySelector("div[slot='reveal']")?.innerHTML).toContain(
+        "Additional apple options",
+      );
     });
   });
 
@@ -272,13 +274,11 @@ describe("RadioGroup", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabRadioGroup
-        name="fruits"
-        onChange={noop}
-        data-grid="cell"
-      >
-        <GoabRadioItem name="fruits" value="apples">Apples</GoabRadioItem>
-      </GoabRadioGroup>
+      <GoabRadioGroup name="fruits" onChange={noop} data-grid="cell">
+        <GoabRadioItem name="fruits" value="apples">
+          Apples
+        </GoabRadioItem>
+      </GoabRadioGroup>,
     );
     const el = baseElement.querySelector("goa-radio-group");
     expect(el?.getAttribute("data-grid")).toBe("cell");

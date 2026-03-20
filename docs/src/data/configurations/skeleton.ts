@@ -4,18 +4,18 @@
  * Skeletons show placeholder content while loading.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const skeletonConfigurations: ComponentConfigurations = {
-  componentSlug: 'skeleton',
-  componentName: 'Skeleton',
-  defaultConfigurationId: 'basic',
+  componentSlug: "skeleton",
+  componentName: "Skeleton",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic skeleton',
-      description: 'Simple loading placeholder',
+      id: "basic",
+      name: "Basic skeleton",
+      description: "Simple loading placeholder",
       code: {
         react: `<GoabSkeleton />`,
         angular: `<goab-skeleton></goab-skeleton>`,
@@ -23,9 +23,9 @@ export const skeletonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Types',
-      description: 'Different skeleton shapes',
+      id: "types",
+      name: "Types",
+      description: "Different skeleton shapes",
       code: {
         react: `<GoabSkeleton type="text" />
 <GoabSkeleton type="title" />
@@ -48,9 +48,9 @@ export const skeletonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'custom-size',
-      name: 'Custom size',
-      description: 'Skeleton with specific dimensions',
+      id: "custom-size",
+      name: "Custom size",
+      description: "Skeleton with specific dimensions",
       code: {
         react: `<GoabSkeleton type="text" size={4} />
 <GoabSkeleton type="image" width="200px" height="150px" />`,
@@ -61,9 +61,9 @@ export const skeletonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'card-loading',
-      name: 'Card loading state',
-      description: 'Skeleton inside a card',
+      id: "card-loading",
+      name: "Card loading state",
+      description: "Skeleton inside a card",
       code: {
         react: `<GoabCard>
   <GoabSkeleton type="title" mb="s" />

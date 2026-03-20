@@ -18,9 +18,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-file-upload-input": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -58,9 +59,7 @@ export function GoabxFileUploadInput({
     };
   }, [el, onSelectFile]);
 
-  return (
-    <goa-file-upload-input ref={el} {..._props} version={version} />
-  );
+  return <goa-file-upload-input ref={el} {..._props} version={version} />;
 }
 
 export default GoabxFileUploadInput;

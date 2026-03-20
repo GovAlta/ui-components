@@ -120,7 +120,9 @@ describe("transformProps", () => {
 
       const originalProps = {
         headingSize: "large",
-        onChange: () => { /* noop */ },
+        onChange: () => {
+          /* noop */
+        },
         open: true,
         children: "some content",
       };

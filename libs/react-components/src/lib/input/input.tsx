@@ -9,7 +9,8 @@ import {
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
   GoabInputType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -136,7 +137,10 @@ export function GoabInput({
 }: GoabInputProps & { type?: GoabInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
-  const _props = transformProps<WCProps>({ variant, textalign: textAlign, ...rest }, lowercase);
+  const _props = transformProps<WCProps>(
+    { variant, textalign: textAlign, ...rest },
+    lowercase,
+  );
 
   useEffect(() => {
     if (!ref.current) {

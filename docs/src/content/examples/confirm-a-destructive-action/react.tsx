@@ -7,10 +7,7 @@ export function ConfirmADestructiveAction() {
 
   return (
     <>
-      <GoabxButton
-        type="tertiary"
-        leadingIcon="trash"
-        onClick={() => setOpen(true)}>
+      <GoabxButton type="tertiary" leadingIcon="trash" onClick={() => setOpen(true)}>
         Delete record
       </GoabxButton>
       <GoabxModal
@@ -26,11 +23,13 @@ export function ConfirmADestructiveAction() {
               type="primary"
               variant="destructive"
               size="compact"
-              onClick={() => setOpen(false)}>
+              onClick={() => setOpen(false)}
+            >
               Delete record
             </GoabxButton>
           </GoabButtonGroup>
-        }>
+        }
+      >
         <p>This action cannot be undone.</p>
       </GoabxModal>
     </>

@@ -12,11 +12,7 @@
     {
       "name": "status",
       "type": "\"complete\" | \"incomplete\" | \"not-started\"",
-      "values": [
-        "complete",
-        "incomplete",
-        "not-started"
-      ],
+      "values": ["complete", "incomplete", "not-started"],
       "required": false,
       "default": null,
       "description": "The completion status of the step. Affects visual styling and icons."
@@ -34,17 +30,13 @@
       "name": "onClick",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_click",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": []

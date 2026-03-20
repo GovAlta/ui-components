@@ -44,7 +44,7 @@ describe("GoabxLink", () => {
     const { container } = render(
       <GoabxLink data-grid="cell">
         <a href="https://example.com">Test link</a>
-      </GoabxLink>
+      </GoabxLink>,
     );
     const el = container.querySelector("goa-link");
     expect(el?.getAttribute("data-grid")).toBe("cell");

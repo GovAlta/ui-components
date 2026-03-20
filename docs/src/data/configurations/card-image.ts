@@ -4,18 +4,18 @@
  * CardImage displays an image within a Card.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const cardImageConfigurations: ComponentConfigurations = {
-  componentSlug: 'card-image',
-  componentName: 'Card image',
-  defaultConfigurationId: 'basic',
+  componentSlug: "card-image",
+  componentName: "Card image",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic card image',
-      description: 'Image at top of Card',
+      id: "basic",
+      name: "Basic card image",
+      description: "Image at top of Card",
       code: {
         react: `<GoabCard>
   <GoabCardImage src="/images/feature.jpg" alt="Feature image" />

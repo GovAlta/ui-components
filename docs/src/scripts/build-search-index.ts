@@ -7,28 +7,35 @@
  * The index is consumed by useSearch.ts at runtime for client-side search.
  */
 
-import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync } from 'node:fs';
-import { join, basename, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {
+  readFileSync,
+  writeFileSync,
+  readdirSync,
+  statSync,
+  existsSync,
+  mkdirSync,
+} from "node:fs";
+import { join, basename, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 // Get directory paths relative to this script
 // Script is in docs/src/scripts/, so go up two levels to docs/
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const ROOT = join(__dirname, '../..');
+const ROOT = join(__dirname, "../..");
 
 // Content directories
-const COMPONENTS_DIR = join(ROOT, 'src/content/components');
-const EXAMPLES_DIR = join(ROOT, 'src/content/examples');
-const OUTPUT_FILE = join(ROOT, 'public/search-index.json');
+const COMPONENTS_DIR = join(ROOT, "src/content/components");
+const EXAMPLES_DIR = join(ROOT, "src/content/examples");
+const OUTPUT_FILE = join(ROOT, "public/search-index.json");
 
 // ============================================================================
 // Types
 // ============================================================================
 
 interface ComponentEntry {
-  type: 'component';
-  id: string;           // filename without .mdx
+  type: "component";
+  id: string; // filename without .mdx
   name: string;
   description?: string;
   status: string;
@@ -38,14 +45,14 @@ interface ComponentEntry {
 }
 
 interface ExampleEntry {
-  type: 'example';
+  type: "example";
   id: string;
   title: string;
   description?: string;
   status: string;
   categories: string[];
   tags: string[];
-  components: string[];  // What components this example uses
+  components: string[]; // What components this example uses
   scale: string;
   userType: string;
   slug: string;
@@ -69,7 +76,10 @@ type SearchEntry = ComponentEntry | ExampleEntry;
  * This is a simple parser that handles the common cases without
  * pulling in a full YAML library.
  */
-function parseFrontmatter(content: string): { frontmatter: Record<string, unknown>; body: string } {
+function parseFrontmatter(content: string): {
+  frontmatter: Record<string, unknown>;
+  body: string;
+} {
   const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---/;
   const match = content.match(frontmatterRegex);
 
@@ -85,10 +95,10 @@ function parseFrontmatter(content: string): { frontmatter: Record<string, unknow
   let currentKey: string | null = null;
   let currentArray: string[] | null = null;
 
-  for (const line of yamlContent.split('\n')) {
+  for (const line of yamlContent.split("\n")) {
     // Array item (starts with "  - ")
     if (line.match(/^\s+-\s+/)) {
-      const value = line.replace(/^\s+-\s+/, '').trim();
+      const value = line.replace(/^\s+-\s+/, "").trim();
       if (currentArray) {
         currentArray.push(value);
       }
@@ -107,12 +117,12 @@ function parseFrontmatter(content: string): { frontmatter: Record<string, unknow
       const value = kvMatch[2].trim();
 
       // Check if this starts an array (empty value followed by array items)
-      if (value === '' || value === '|') {
+      if (value === "" || value === "|") {
         currentArray = [];
       } else {
         currentArray = null;
         // Remove quotes if present
-        frontmatter[currentKey] = value.replace(/^["']|["']$/g, '');
+        frontmatter[currentKey] = value.replace(/^["']|["']$/g, "");
       }
     }
   }
@@ -131,8 +141,8 @@ function parseFrontmatter(content: string): { frontmatter: Record<string, unknow
  */
 function extractFirstParagraph(body: string): string | undefined {
   // Skip headings and empty lines, find first paragraph
-  const lines = body.split('\n');
-  let paragraph = '';
+  const lines = body.split("\n");
+  let paragraph = "";
 
   for (const line of lines) {
     const trimmed = line.trim();
@@ -141,11 +151,11 @@ function extractFirstParagraph(body: string): string | undefined {
     if (!paragraph && !trimmed) continue;
 
     // Skip headings
-    if (trimmed.startsWith('#')) continue;
+    if (trimmed.startsWith("#")) continue;
 
     // Found content
     if (trimmed) {
-      paragraph += (paragraph ? ' ' : '') + trimmed;
+      paragraph += (paragraph ? " " : "") + trimmed;
     } else if (paragraph) {
       // Empty line after content = end of paragraph
       break;
@@ -164,23 +174,23 @@ function extractFirstParagraph(body: string): string | undefined {
  */
 function processComponent(filePath: string): ComponentEntry | null {
   try {
-    const content = readFileSync(filePath, 'utf-8');
+    const content = readFileSync(filePath, "utf-8");
     const { frontmatter } = parseFrontmatter(content);
 
-    const id = basename(filePath, '.mdx');
+    const id = basename(filePath, ".mdx");
 
     // Skip hidden components
-    if (frontmatter.hidden === true || frontmatter.hidden === 'true') {
+    if (frontmatter.hidden === true || frontmatter.hidden === "true") {
       return null;
     }
 
     return {
-      type: 'component',
+      type: "component",
       id,
       name: String(frontmatter.name || id),
       description: frontmatter.description ? String(frontmatter.description) : undefined,
-      status: String(frontmatter.status || 'stable'),
-      category: String(frontmatter.category || 'utilities'),
+      status: String(frontmatter.status || "stable"),
+      category: String(frontmatter.category || "utilities"),
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
       slug: String(frontmatter.slug || id),
     };
@@ -196,7 +206,7 @@ function processComponent(filePath: string): ComponentEntry | null {
  */
 function processExample(filePath: string): ExampleEntry | null {
   try {
-    const content = readFileSync(filePath, 'utf-8');
+    const content = readFileSync(filePath, "utf-8");
     const { frontmatter, body } = parseFrontmatter(content);
 
     // Get ID from directory name
@@ -209,11 +219,11 @@ function processExample(filePath: string): ExampleEntry | null {
       : extractFirstParagraph(body);
 
     return {
-      type: 'example',
+      type: "example",
       id,
       title: String(frontmatter.title || id),
       description,
-      status: String(frontmatter.status || 'published'),
+      status: String(frontmatter.status || "published"),
       categories: Array.isArray(frontmatter.categories)
         ? frontmatter.categories.map(String)
         : [],
@@ -221,8 +231,8 @@ function processExample(filePath: string): ExampleEntry | null {
       components: Array.isArray(frontmatter.components)
         ? frontmatter.components.map(String)
         : [],
-      scale: String(frontmatter.scale || 'interaction'),
-      userType: String(frontmatter.userType || 'both'),
+      scale: String(frontmatter.scale || "interaction"),
+      userType: String(frontmatter.userType || "both"),
       slug: String(frontmatter.slug || id),
     };
   } catch (error) {
@@ -248,7 +258,7 @@ function findMdxFiles(dir: string): string[] {
 
     if (stat.isDirectory()) {
       files.push(...findMdxFiles(fullPath));
-    } else if (entry.endsWith('.mdx')) {
+    } else if (entry.endsWith(".mdx")) {
       files.push(fullPath);
     }
   }
@@ -261,12 +271,12 @@ function findMdxFiles(dir: string): string[] {
 // ============================================================================
 
 function main() {
-  console.log('Building search index...\n');
+  console.log("Building search index...\n");
 
   const entries: SearchEntry[] = [];
 
   // Process components
-  console.log('Processing components...');
+  console.log("Processing components...");
   const componentFiles = findMdxFiles(COMPONENTS_DIR);
   for (const file of componentFiles) {
     const entry = processComponent(file);
@@ -274,10 +284,12 @@ function main() {
       entries.push(entry);
     }
   }
-  console.log(`  Found ${componentFiles.length} files, indexed ${entries.filter(e => e.type === 'component').length} components`);
+  console.log(
+    `  Found ${componentFiles.length} files, indexed ${entries.filter((e) => e.type === "component").length} components`,
+  );
 
   // Process examples
-  console.log('Processing examples...');
+  console.log("Processing examples...");
   const exampleFiles = findMdxFiles(EXAMPLES_DIR);
   const exampleCount = entries.length;
   for (const file of exampleFiles) {
@@ -286,7 +298,9 @@ function main() {
       entries.push(entry);
     }
   }
-  console.log(`  Found ${exampleFiles.length} files, indexed ${entries.length - exampleCount} examples`);
+  console.log(
+    `  Found ${exampleFiles.length} files, indexed ${entries.length - exampleCount} examples`,
+  );
 
   // Ensure public directory exists
   const publicDir = dirname(OUTPUT_FILE);
@@ -299,7 +313,7 @@ function main() {
   console.log(`\nWrote ${entries.length} entries to ${OUTPUT_FILE}`);
 
   // Show sample
-  console.log('\nSample entries:');
+  console.log("\nSample entries:");
   console.log(JSON.stringify(entries.slice(0, 2), null, 2));
 }
 

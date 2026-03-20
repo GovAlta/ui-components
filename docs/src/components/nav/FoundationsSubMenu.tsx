@@ -15,21 +15,16 @@ import { MenuSecondaryContent } from "./MenuSecondaryContent";
 import { useGroupShadowDomFixes } from "./useGroupShadowDomFixes";
 
 // Top-level pages (not in a group)
-const TOP_PAGES = [
-  { label: "Overview", url: "/foundations" },
-];
+const TOP_PAGES = [{ label: "Overview", url: "/foundations" }];
 
 // Grouped sections with sub-pages
 const PAGE_GROUPS = [
   {
     name: "Style guide",
     slug: "style-guide",
-    pages: [
-      { label: "Motion", url: "/foundations/style-guide/motion" },
-    ],
+    pages: [{ label: "Motion", url: "/foundations/style-guide/motion" }],
   },
 ];
-
 
 // All URLs for matching current page
 const ALL_URLS = [

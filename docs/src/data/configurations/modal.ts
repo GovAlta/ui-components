@@ -4,7 +4,7 @@
  * Modals display content in a layer above the page.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 const modalScript = `
 const modal = document.getElementById('demo-modal');
@@ -23,15 +23,15 @@ modal.querySelectorAll('goa-button').forEach(btn => {
 `;
 
 export const modalConfigurations: ComponentConfigurations = {
-  componentSlug: 'modal',
-  componentName: 'Modal',
-  defaultConfigurationId: 'basic',
+  componentSlug: "modal",
+  componentName: "Modal",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic modal',
-      description: 'Simple modal with heading and content',
+      id: "basic",
+      name: "Basic modal",
+      description: "Simple modal with heading and content",
       code: {
         react: `<GoabxModal heading="Confirm action" open={isOpen} closable onClose={handleClose}>
   <p>Are you sure you want to proceed with this action?</p>
@@ -59,9 +59,9 @@ export const modalConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-transition',
-      name: 'With transition',
-      description: 'Modal with animated opening/closing',
+      id: "with-transition",
+      name: "With transition",
+      description: "Modal with animated opening/closing",
       code: {
         react: `<GoabxModal heading="Animated modal" open={isOpen} transition="fast" closable onClose={handleClose}>
   <p>This modal animates when opening and closing.</p>
@@ -77,9 +77,9 @@ export const modalConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'custom-width',
-      name: 'Custom width',
-      description: 'Modal with specified maximum width',
+      id: "custom-width",
+      name: "Custom width",
+      description: "Modal with specified maximum width",
       code: {
         react: `<GoabxModal heading="Wide modal" open={isOpen} maxWidth="80ch" closable onClose={handleClose}>
   <p>This modal has a wider maximum width for more content.</p>
@@ -95,9 +95,9 @@ export const modalConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'destructive-action',
-      name: 'Destructive action',
-      description: 'Confirmation modal for destructive actions',
+      id: "destructive-action",
+      name: "Destructive action",
+      description: "Confirmation modal for destructive actions",
       code: {
         react: `<GoabxModal heading="Are you sure you want to delete this item?" open={isOpen} closable onClose={handleClose}>
   <p>This action cannot be undone. The item will be permanently removed.</p>

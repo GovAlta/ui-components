@@ -7,56 +7,56 @@
 
   <goab-block direction="column" gap="l">
     @for (scenario of scenarios; track scenario.id) {
-    <div
-      class="scenario-wrapper"
-      [attr.data-scenario]="scenario.id"
-      [ngStyle]="scenario.containerWidth ? { width: scenario.containerWidth } : null"
-    >
-      <goab-block class="scenario-card" direction="column" gap="s">
-        <goab-text tag="h3" size="heading-s">{{ scenario.label }}</goab-text>
-        <goab-text tag="p" size="body-s">{{ scenario.description }}</goab-text>
-        <goab-text
-          *ngIf="scenario.emphasis"
-          tag="p"
-          size="body-s"
-          class="scenario-emphasis"
-        >
-          {{ scenario.emphasis }}
-        </goab-text>
+      <div
+        class="scenario-wrapper"
+        [attr.data-scenario]="scenario.id"
+        [ngStyle]="scenario.containerWidth ? { width: scenario.containerWidth } : null"
+      >
+        <goab-block class="scenario-card" direction="column" gap="s">
+          <goab-text tag="h3" size="heading-s">{{ scenario.label }}</goab-text>
+          <goab-text tag="p" size="body-s">{{ scenario.description }}</goab-text>
+          <goab-text
+            *ngIf="scenario.emphasis"
+            tag="p"
+            size="body-s"
+            class="scenario-emphasis"
+          >
+            {{ scenario.emphasis }}
+          </goab-text>
 
-        <goab-form-item [label]="scenario.label">
-          <goab-date-picker
-            [name]="scenario.id"
-            [type]="scenario.type"
-            [width]="scenario.width"
-            (onChange)="onDateChange($event)"
-          ></goab-date-picker>
-        </goab-form-item>
+          <goab-form-item [label]="scenario.label">
+            <goab-date-picker
+              [name]="scenario.id"
+              [type]="scenario.type"
+              [width]="scenario.width"
+              (onChange)="onDateChange($event)"
+            ></goab-date-picker>
+          </goab-form-item>
 
-        <goab-text tag="p" size="body-s" class="measurement">
-          Host width:
-          {{
-            measurements[scenario.id].hostWidth !== undefined
-              ? measurements[scenario.id].hostWidth + "px"
-              : "–"
-          }}
-          · Input width:
-          {{
-            measurements[scenario.id].inputWidth !== undefined
-              ? measurements[scenario.id].inputWidth + "px"
-              : "–"
-          }}
-        </goab-text>
-        <goab-text tag="p" size="body-s" class="measurement">
-          Input width attribute:
-          {{
-            measurements[scenario.id].widthAttr !== undefined
-              ? measurements[scenario.id].widthAttr || "none"
-              : "–"
-          }}
-        </goab-text>
-      </goab-block>
-    </div>
+          <goab-text tag="p" size="body-s" class="measurement">
+            Host width:
+            {{
+              measurements[scenario.id].hostWidth !== undefined
+                ? measurements[scenario.id].hostWidth + "px"
+                : "–"
+            }}
+            · Input width:
+            {{
+              measurements[scenario.id].inputWidth !== undefined
+                ? measurements[scenario.id].inputWidth + "px"
+                : "–"
+            }}
+          </goab-text>
+          <goab-text tag="p" size="body-s" class="measurement">
+            Input width attribute:
+            {{
+              measurements[scenario.id].widthAttr !== undefined
+                ? measurements[scenario.id].widthAttr || "none"
+                : "–"
+            }}
+          </goab-text>
+        </goab-block>
+      </div>
     }
   </goab-block>
 

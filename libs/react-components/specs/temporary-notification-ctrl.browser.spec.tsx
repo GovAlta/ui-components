@@ -109,7 +109,7 @@ function sendCancellableNotificationWithoutNotificationResponse(
 
 describe("Temporary Notification Controller", () => {
   describe("position", () => {
-    it("should render with default positions", async function() {
+    it("should render with default positions", async function () {
       const Component = () => {
         return <GoabTemporaryNotificationCtrl testId="notification-ctrl" />;
       };
@@ -128,7 +128,7 @@ describe("Temporary Notification Controller", () => {
       });
     });
 
-    it("should render with custom positions", async function() {
+    it("should render with custom positions", async function () {
       const Component = () => {
         return (
           <GoabTemporaryNotificationCtrl
@@ -154,7 +154,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should show notification", async function() {
+  it("should show notification", async function () {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl />;
     };
@@ -165,7 +165,7 @@ describe("Temporary Notification Controller", () => {
       sendTemporaryNotification("This is the notification", {
         testId: "some-notification",
       });
-    }, 0)
+    }, 0);
 
     await vi.waitFor(() => {
       const notification = result.getByTestId("some-notification");
@@ -173,7 +173,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should hide notification after specified duration", async function() {
+  it("should hide notification after specified duration", async function () {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl />;
     };
@@ -199,7 +199,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should handle action button click", async function() {
+  it("should handle action button click", async function () {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -227,7 +227,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should handle action button click and cancel notification", async function() {
+  it("should handle action button click and cancel notification", async function () {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -258,7 +258,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should allow for dismissing of the notification without a second notification from appearing", async function() {
+  it("should allow for dismissing of the notification without a second notification from appearing", async function () {
     const Component = () => {
       return <GoabTemporaryNotificationCtrl verticalPosition={"top"} />;
     };
@@ -289,7 +289,7 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should handle progress updates", async function() {
+  it("should handle progress updates", async function () {
     const Component = () => {
       return (
         <GoabTemporaryNotificationCtrl
@@ -308,7 +308,7 @@ describe("Temporary Notification Controller", () => {
         type: "progress",
       });
       sendProgress(uuid, 10);
-    }, 0)
+    }, 0);
 
     await vi.waitFor(() => {
       expect(progressIndicator.element().getAttribute("value")).toBe("10");

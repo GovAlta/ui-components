@@ -12,26 +12,29 @@ export interface ExampleCode {
 }
 
 // Load all example code files at build time using Vite glob imports
-const reactFiles = import.meta.glob<string>(
-  '../content/examples/*/react.tsx',
-  { eager: true, query: '?raw', import: 'default' }
-);
-const angularTemplates = import.meta.glob<string>(
-  '../content/examples/*/angular.html',
-  { eager: true, query: '?raw', import: 'default' }
-);
-const angularComponents = import.meta.glob<string>(
-  '../content/examples/*/angular.ts',
-  { eager: true, query: '?raw', import: 'default' }
-);
+const reactFiles = import.meta.glob<string>("../content/examples/*/react.tsx", {
+  eager: true,
+  query: "?raw",
+  import: "default",
+});
+const angularTemplates = import.meta.glob<string>("../content/examples/*/angular.html", {
+  eager: true,
+  query: "?raw",
+  import: "default",
+});
+const angularComponents = import.meta.glob<string>("../content/examples/*/angular.ts", {
+  eager: true,
+  query: "?raw",
+  import: "default",
+});
 const webComponentFiles = import.meta.glob<string>(
-  '../content/examples/*/web-components.html',
-  { eager: true, query: '?raw', import: 'default' }
+  "../content/examples/*/web-components.html",
+  { eager: true, query: "?raw", import: "default" },
 );
 
 // Helper to extract slug from path like "../content/examples/button-basic/react.tsx"
 function getSlugFromPath(path: string): string {
-  const parts = path.split('/');
+  const parts = path.split("/");
   return parts[parts.length - 2]; // folder name before the filename
 }
 

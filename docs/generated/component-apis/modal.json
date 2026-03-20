@@ -27,11 +27,7 @@
       "name": "transition",
       "type": "\"fast\" | \"slow\" | \"none\"",
       "typeLabel": "GoabModalTransition",
-      "values": [
-        "fast",
-        "slow",
-        "none"
-      ],
+      "values": ["fast", "slow", "none"],
       "required": false,
       "default": "none",
       "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
@@ -71,17 +67,13 @@
       "name": "onClose",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_close",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

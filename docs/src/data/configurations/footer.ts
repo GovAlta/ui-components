@@ -4,18 +4,18 @@
  * Footer provides page-level footer navigation.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const footerConfigurations: ComponentConfigurations = {
-  componentSlug: 'footer',
-  componentName: 'Footer',
-  defaultConfigurationId: 'basic',
+  componentSlug: "footer",
+  componentName: "Footer",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic footer',
-      description: 'Simple page footer',
+      id: "basic",
+      name: "Basic footer",
+      description: "Simple page footer",
       code: {
         react: `<GoabxAppFooter />`,
         angular: `<goab-footer></goab-footer>`,
@@ -23,9 +23,9 @@ export const footerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-nav-sections',
-      name: 'With navigation',
-      description: 'Footer with navigation sections',
+      id: "with-nav-sections",
+      name: "With navigation",
+      description: "Footer with navigation sections",
       code: {
         react: `<GoabxAppFooter>
   <GoabxAppFooterNavSection heading="Services">
@@ -63,9 +63,9 @@ export const footerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-meta',
-      name: 'With meta section',
-      description: 'Footer with copyright and links',
+      id: "with-meta",
+      name: "With meta section",
+      description: "Footer with copyright and links",
       code: {
         react: `<GoabxAppFooter>
   <GoabxAppFooterMetaSection>

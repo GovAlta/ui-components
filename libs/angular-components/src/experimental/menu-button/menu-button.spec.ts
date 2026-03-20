@@ -2,7 +2,12 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabxMenuButton } from "./menu-button";
 import { GoabxMenuAction } from "../menu-action/menu-action";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabButtonSize, GoabButtonType, GoabButtonVariant, GoabIconType } from "@abgov/ui-components-common";
+import {
+  GoabButtonSize,
+  GoabButtonType,
+  GoabButtonVariant,
+  GoabIconType,
+} from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 

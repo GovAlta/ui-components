@@ -2,7 +2,8 @@ import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
   GoabFormItemType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";

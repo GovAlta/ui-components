@@ -1,5 +1,9 @@
 import { useEffect, useRef } from "react";
-import { DataAttributes, GoabFilterChipTheme, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabFilterChipTheme,
+  Margins,
+} from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
@@ -25,10 +29,7 @@ export const GoabFilterChip = ({
 }: GoabFilterChipProps) => {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { icontheme: iconTheme, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ icontheme: iconTheme, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) return;
@@ -42,13 +43,7 @@ export const GoabFilterChip = ({
     };
   }, [el, onClick]);
 
-  return (
-    <goa-filter-chip
-      ref={el}
-      error={error ? "true" : undefined}
-      {..._props}
-    />
-  );
+  return <goa-filter-chip ref={el} error={error ? "true" : undefined} {..._props} />;
 };
 
 export default GoabFilterChip;

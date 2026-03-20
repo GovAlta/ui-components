@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { GoabxFormItem, GoabxRadioGroup, GoabxRadioItem } from "@abgov/react-components/experimental";
+import {
+  GoabxFormItem,
+  GoabxRadioGroup,
+  GoabxRadioItem,
+} from "@abgov/react-components/experimental";
 import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
 export function SetAMaxWidthOnALongRadioItem() {
@@ -11,7 +15,8 @@ export function SetAMaxWidthOnALongRadioItem() {
         <GoabxRadioGroup
           name="selectOne"
           value={selectOne}
-          onChange={(e: GoabRadioGroupOnChangeDetail) => setSelectOne(e.value)}>
+          onChange={(e: GoabRadioGroupOnChangeDetail) => setSelectOne(e.value)}
+        >
           <GoabxRadioItem
             value="1"
             label="Option one which has a very long label with lots of text"

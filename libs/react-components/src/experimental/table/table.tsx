@@ -44,7 +44,13 @@ export interface GoabxTableProps extends Margins {
 // legacy name
 export type TableProps = GoabxTableProps;
 
-export function GoabxTable({ onSort, onMultiSort, sortMode, version = "2", ...props }: GoabxTableProps) {
+export function GoabxTable({
+  onSort,
+  onMultiSort,
+  sortMode,
+  version = "2",
+  ...props
+}: GoabxTableProps) {
   const ref = useRef<HTMLTableElement>(null);
   useEffect(() => {
     if (!ref.current) {

@@ -12,110 +12,118 @@ export function ShowDifferentViewsOfDataInATable() {
 
   return (
     <GoabxTabs initialTab={1}>
-          <GoabTab heading="All">
-            <GoabxTable width="100%">
-              <thead>
-                <tr>
-                  <th>Status</th>
-                  <th>Text</th>
-                  <th className="goa-table-number-header">Number</th>
-                  <th style={{ width: "1%", whiteSpace: "nowrap" }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {review.map((i) => (
-                  <tr key={`review-${i}`}>
-                    <td>
-                      <GoabxBadge type="important" content="Review pending" />
-                    </td>
-                    <td>Lorem Ipsum</td>
-                    <td className="goa-table-number-column">1234567890</td>
-                    <td>
-                      <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
-                    </td>
-                  </tr>
-                ))}
-                {complete.map((i) => (
-                  <tr key={`complete-${i}`}>
-                    <td>
-                      <GoabxBadge type="information" content="Complete" />
-                    </td>
-                    <td>Lorem Ipsum</td>
-                    <td className="goa-table-number-column">1234567890</td>
-                    <td>
-                      <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </GoabxTable>
-          </GoabTab>
-          <GoabTab
-            heading={
-              <>
-                Review pending
-                <GoabxBadge type="important" content="4" icon={false} />
-              </>
-            }
-          >
-            <GoabxTable width="100%">
-              <thead>
-                <tr>
-                  <th>Status</th>
-                  <th>Text</th>
-                  <th className="goa-table-number-header">Number</th>
-                  <th style={{ width: "1%", whiteSpace: "nowrap" }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {review.map((i) => (
-                  <tr key={i}>
-                    <td>
-                      <GoabxBadge type="important" content="Review pending" />
-                    </td>
-                    <td>Lorem Ipsum</td>
-                    <td className="goa-table-number-column">1234567890</td>
-                    <td>
-                      <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </GoabxTable>
-          </GoabTab>
-          <GoabTab
-            heading={
-              <>
-                Complete
-                <GoabxBadge type="information" content="338" icon={false} />
-              </>
-            }
-          >
-            <GoabxTable width="100%">
-              <thead>
-                <tr>
-                  <th>Status</th>
-                  <th>Text</th>
-                  <th className="goa-table-number-header">Number</th>
-                  <th style={{ width: "1%", whiteSpace: "nowrap" }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {complete.map((i) => (
-                  <tr key={i}>
-                    <td>
-                      <GoabxBadge type="information" content="Complete" />
-                    </td>
-                    <td>Lorem Ipsum</td>
-                    <td className="goa-table-number-column">1234567890</td>
-                    <td>
-                      <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </GoabxTable>
-          </GoabTab>
+      <GoabTab heading="All">
+        <GoabxTable width="100%">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Text</th>
+              <th className="goa-table-number-header">Number</th>
+              <th style={{ width: "1%", whiteSpace: "nowrap" }}>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {review.map((i) => (
+              <tr key={`review-${i}`}>
+                <td>
+                  <GoabxBadge type="important" content="Review pending" />
+                </td>
+                <td>Lorem Ipsum</td>
+                <td className="goa-table-number-column">1234567890</td>
+                <td>
+                  <GoabxButton type="tertiary" size="compact">
+                    Action
+                  </GoabxButton>
+                </td>
+              </tr>
+            ))}
+            {complete.map((i) => (
+              <tr key={`complete-${i}`}>
+                <td>
+                  <GoabxBadge type="information" content="Complete" />
+                </td>
+                <td>Lorem Ipsum</td>
+                <td className="goa-table-number-column">1234567890</td>
+                <td>
+                  <GoabxButton type="tertiary" size="compact">
+                    Action
+                  </GoabxButton>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </GoabxTable>
+      </GoabTab>
+      <GoabTab
+        heading={
+          <>
+            Review pending
+            <GoabxBadge type="important" content="4" icon={false} />
+          </>
+        }
+      >
+        <GoabxTable width="100%">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Text</th>
+              <th className="goa-table-number-header">Number</th>
+              <th style={{ width: "1%", whiteSpace: "nowrap" }}>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {review.map((i) => (
+              <tr key={i}>
+                <td>
+                  <GoabxBadge type="important" content="Review pending" />
+                </td>
+                <td>Lorem Ipsum</td>
+                <td className="goa-table-number-column">1234567890</td>
+                <td>
+                  <GoabxButton type="tertiary" size="compact">
+                    Action
+                  </GoabxButton>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </GoabxTable>
+      </GoabTab>
+      <GoabTab
+        heading={
+          <>
+            Complete
+            <GoabxBadge type="information" content="338" icon={false} />
+          </>
+        }
+      >
+        <GoabxTable width="100%">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Text</th>
+              <th className="goa-table-number-header">Number</th>
+              <th style={{ width: "1%", whiteSpace: "nowrap" }}>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {complete.map((i) => (
+              <tr key={i}>
+                <td>
+                  <GoabxBadge type="information" content="Complete" />
+                </td>
+                <td>Lorem Ipsum</td>
+                <td className="goa-table-number-column">1234567890</td>
+                <td>
+                  <GoabxButton type="tertiary" size="compact">
+                    Action
+                  </GoabxButton>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </GoabxTable>
+      </GoabTab>
     </GoabxTabs>
   );
 }

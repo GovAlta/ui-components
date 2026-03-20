@@ -22,11 +22,14 @@ export function ExpandOrCollapsePartOfAForm() {
         }
       `}</style>
 
-      <GoabText as="h3" mt="none" mb="m">Review your application</GoabText>
+      <GoabText as="h3" mt="none" mb="m">
+        Review your application
+      </GoabText>
 
       <GoabAccordion
         heading="Referral details"
-        headingContent={<GoabxBadge type="important" content="Updated" />}>
+        headingContent={<GoabxBadge type="important" content="Updated" />}
+      >
         <dl className="accordion-example">
           <dt>Date of referral</dt>
           <dd>January 27, 2021</dd>

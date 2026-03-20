@@ -5,10 +5,7 @@
     {
       "name": "status",
       "type": "\"initializing\" | \"complete\"",
-      "values": [
-        "initializing",
-        "complete"
-      ],
+      "values": ["initializing", "complete"],
       "required": false,
       "default": "complete",
       "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
@@ -26,17 +23,13 @@
       "name": "onInit",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_init",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

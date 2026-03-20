@@ -4,18 +4,18 @@
  * Text component provides consistent typography styles.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const textConfigurations: ComponentConfigurations = {
-  componentSlug: 'text',
-  componentName: 'Text',
-  defaultConfigurationId: 'basic',
+  componentSlug: "text",
+  componentName: "Text",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic text',
-      description: 'Standard paragraph text',
+      id: "basic",
+      name: "Basic text",
+      description: "Standard paragraph text",
       code: {
         react: `<GoabText>This is a paragraph of text with default styling.</GoabText>`,
         angular: `<goab-text>This is a paragraph of text with default styling.</goab-text>`,
@@ -23,9 +23,9 @@ export const textConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'headings',
-      name: 'Headings',
-      description: 'Different heading levels',
+      id: "headings",
+      name: "Headings",
+      description: "Different heading levels",
       code: {
         react: `<GoabText as="h1">Heading 1</GoabText>
 <GoabText as="h2">Heading 2</GoabText>
@@ -42,9 +42,9 @@ export const textConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'heading-sizes',
-      name: 'Heading sizes',
-      description: 'Different heading text sizes',
+      id: "heading-sizes",
+      name: "Heading sizes",
+      description: "Different heading text sizes",
       code: {
         react: `<GoabText size="heading-xl">Heading XL</GoabText>
 <GoabText size="heading-l">Heading L</GoabText>
@@ -64,9 +64,9 @@ export const textConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'body-sizes',
-      name: 'Body sizes',
-      description: 'Different body text sizes',
+      id: "body-sizes",
+      name: "Body sizes",
+      description: "Different body text sizes",
       code: {
         react: `<GoabText size="body-l">Body large text</GoabText>
 <GoabText size="body-m">Body medium text (default)</GoabText>
@@ -83,9 +83,9 @@ export const textConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-margins',
-      name: 'With margins',
-      description: 'Text with spacing',
+      id: "with-margins",
+      name: "With margins",
+      description: "Text with spacing",
       code: {
         react: `<GoabText mb="m">Paragraph with bottom margin.</GoabText>
 <GoabText mt="l" mb="l">Paragraph with top and bottom margin.</GoabText>`,

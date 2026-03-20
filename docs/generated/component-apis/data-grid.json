@@ -5,10 +5,7 @@
     {
       "name": "keyboardIconVisibility",
       "type": "\"visible\" | \"hidden\"",
-      "values": [
-        "visible",
-        "hidden"
-      ],
+      "values": ["visible", "hidden"],
       "required": false,
       "default": "visible",
       "description": "Controls visibility of the keyboard navigation indicator icon. Use \"visible\" to show or \"hidden\" to hide."
@@ -16,10 +13,7 @@
     {
       "name": "keyboardNav",
       "type": "\"layout\" | \"table\"",
-      "values": [
-        "layout",
-        "table"
-      ],
+      "values": ["layout", "table"],
       "required": false,
       "default": "table",
       "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
@@ -27,10 +21,7 @@
     {
       "name": "keyboardIconPosition",
       "type": "\"left\" | \"right\"",
-      "values": [
-        "left",
-        "right"
-      ],
+      "values": ["left", "right"],
       "required": false,
       "default": "left",
       "description": "Position of the keyboard navigation indicator icon."

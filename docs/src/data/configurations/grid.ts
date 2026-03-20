@@ -4,18 +4,18 @@
  * Grid creates responsive multi-column layouts.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const gridConfigurations: ComponentConfigurations = {
-  componentSlug: 'grid',
-  componentName: 'Grid',
-  defaultConfigurationId: 'basic',
+  componentSlug: "grid",
+  componentName: "Grid",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic grid',
-      description: 'Simple multi-column grid',
+      id: "basic",
+      name: "Basic grid",
+      description: "Simple multi-column grid",
       code: {
         react: `<GoabGrid minChildWidth="200px" gap="m">
   <GoabContainer>Item 1</GoabContainer>
@@ -35,9 +35,9 @@ export const gridConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'gap-sizes',
-      name: 'Gap sizes',
-      description: 'Different spacing between items',
+      id: "gap-sizes",
+      name: "Gap sizes",
+      description: "Different spacing between items",
       code: {
         react: `<GoabGrid minChildWidth="150px" gap="xs">
   <GoabContainer>Item 1</GoabContainer>

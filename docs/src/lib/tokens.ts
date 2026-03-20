@@ -162,9 +162,7 @@ function resolveTokenReference(
 /**
  * Check if a value is a typography object (has fontFamily, fontSize, etc.)
  */
-function isTypographyObject(
-  value: unknown,
-): value is Record<string, string> {
+function isTypographyObject(value: unknown): value is Record<string, string> {
   return (
     typeof value === "object" &&
     value !== null &&
@@ -214,11 +212,16 @@ function flattenTokensRecursive(
 
       // Handle typography objects specially - resolve each property
       if (isTypographyObject(value.value)) {
-        const resolved = resolveTypographyObject(value.value as Record<string, string>, rootTokens);
+        const resolved = resolveTypographyObject(
+          value.value as Record<string, string>,
+          rootTokens,
+        );
         resolvedValue = JSON.stringify(resolved);
       } else {
         resolvedValue =
-          typeof rawValue === "string" ? resolveTokenReference(rawValue, rootTokens) : rawValue;
+          typeof rawValue === "string"
+            ? resolveTokenReference(rawValue, rootTokens)
+            : rawValue;
       }
 
       const isColor =
@@ -237,7 +240,12 @@ function flattenTokensRecursive(
       });
     } else if (typeof value === "object" && value !== null) {
       // Recurse into nested object
-      flattenTokensRecursive(value as Record<string, unknown>, rootTokens, currentPath, results);
+      flattenTokensRecursive(
+        value as Record<string, unknown>,
+        rootTokens,
+        currentPath,
+        results,
+      );
     }
   }
 
@@ -248,7 +256,11 @@ function flattenTokensRecursive(
  * Component-specific token prefixes to exclude from the global tokens display.
  * These are implementation details, not meant for direct consumer use.
  */
-const EXCLUDED_TOKEN_PREFIXES = ["--goa-input-", "--goa-border-none", "--goa-fontVariationSettings"];
+const EXCLUDED_TOKEN_PREFIXES = [
+  "--goa-input-",
+  "--goa-border-none",
+  "--goa-fontVariationSettings",
+];
 
 /**
  * Get all design tokens flattened for grid display

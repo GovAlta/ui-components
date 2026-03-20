@@ -4,18 +4,18 @@
  * CardContent is a child component of Card.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const cardContentConfigurations: ComponentConfigurations = {
-  componentSlug: 'card-content',
-  componentName: 'Card content',
-  defaultConfigurationId: 'basic',
+  componentSlug: "card-content",
+  componentName: "Card content",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic card content',
-      description: 'Content area within Card',
+      id: "basic",
+      name: "Basic card content",
+      description: "Content area within Card",
       code: {
         react: `<GoabCard>
   <GoabCardContent>

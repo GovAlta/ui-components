@@ -40,7 +40,7 @@ describe("GoabLink", () => {
     const { container } = render(
       <GoabLink data-grid="cell">
         <a href="https://example.com">Test link</a>
-      </GoabLink>
+      </GoabLink>,
     );
     const el = container.querySelector("goa-link");
     expect(el?.getAttribute("data-grid")).toBe("cell");

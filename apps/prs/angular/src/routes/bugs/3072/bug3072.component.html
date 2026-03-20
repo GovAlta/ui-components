@@ -44,10 +44,10 @@
             formControlName="genderId"
           >
             @for (gender of genders; track gender.value) {
-            <goab-dropdown-item
-              [value]="gender.value"
-              [label]="gender.label"
-            ></goab-dropdown-item>
+              <goab-dropdown-item
+                [value]="gender.value"
+                [label]="gender.label"
+              ></goab-dropdown-item>
             }
           </goab-dropdown>
         </goab-form-item>
@@ -71,10 +71,10 @@
         <goab-form-item label="Program interests" helpText="Pick zero or more options.">
           <goab-checkbox-list name="interests" formControlName="interests">
             @for (interest of interests; track interest.value) {
-            <goab-checkbox
-              [name]="interest.value"
-              [text]="interest.label"
-            ></goab-checkbox>
+              <goab-checkbox
+                [name]="interest.value"
+                [text]="interest.label"
+              ></goab-checkbox>
             }
           </goab-checkbox-list>
         </goab-form-item>

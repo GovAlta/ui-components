@@ -13,10 +13,7 @@
     {
       "name": "direction",
       "type": "\"row\" | \"column\"",
-      "values": [
-        "row",
-        "column"
-      ],
+      "values": ["row", "column"],
       "required": false,
       "default": "row",
       "description": "Stacking direction of child components."
@@ -24,12 +21,7 @@
     {
       "name": "alignment",
       "type": "\"center\" | \"start\" | \"end\" | \"normal\"",
-      "values": [
-        "center",
-        "start",
-        "end",
-        "normal"
-      ],
+      "values": ["center", "start", "end", "normal"],
       "required": false,
       "default": "normal",
       "description": "Primary axis alignment of child components."

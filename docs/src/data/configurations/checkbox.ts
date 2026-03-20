@@ -2,18 +2,18 @@
  * Checkbox Component Configurations
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const checkboxConfigurations: ComponentConfigurations = {
-  componentSlug: 'checkbox',
-  componentName: 'Checkbox',
-  defaultConfigurationId: 'basic',
+  componentSlug: "checkbox",
+  componentName: "Checkbox",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic checkbox',
-      description: 'Single checkbox with label',
+      id: "basic",
+      name: "Basic checkbox",
+      description: "Single checkbox with label",
       code: {
         react: `<GoabxCheckbox name="agree" text="I agree to the terms" />`,
         angular: `<goabx-checkbox name="agree" text="I agree to the terms"></goabx-checkbox>`,
@@ -21,9 +21,9 @@ export const checkboxConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-description',
-      name: 'With description',
-      description: 'Checkbox with additional description text',
+      id: "with-description",
+      name: "With description",
+      description: "Checkbox with additional description text",
       code: {
         react: `<GoabxCheckbox
   name="newsletter"
@@ -43,9 +43,9 @@ export const checkboxConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'checked',
-      name: 'Checked state',
-      description: 'Checkbox in checked state',
+      id: "checked",
+      name: "Checked state",
+      description: "Checkbox in checked state",
       code: {
         react: `<GoabxCheckbox name="remember" text="Remember me" checked />`,
         angular: `<goabx-checkbox name="remember" text="Remember me" [checked]="true"></goabx-checkbox>`,
@@ -53,8 +53,8 @@ export const checkboxConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'indeterminate',
-      name: 'Indeterminate',
+      id: "indeterminate",
+      name: "Indeterminate",
       description: 'Mixed state for "select all" scenarios',
       code: {
         react: `<GoabxCheckbox name="selectAll" text="Select all items" indeterminate />`,
@@ -63,9 +63,9 @@ export const checkboxConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'disabled',
-      name: 'Disabled',
-      description: 'Checkbox in disabled state',
+      id: "disabled",
+      name: "Disabled",
+      description: "Checkbox in disabled state",
       code: {
         react: `<GoabxCheckbox name="disabled" text="Cannot be changed" disabled />
 <GoabxCheckbox name="disabledChecked" text="Checked and disabled" checked disabled />`,
@@ -76,9 +76,9 @@ export const checkboxConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'error',
-      name: 'Error state',
-      description: 'Checkbox showing validation error',
+      id: "error",
+      name: "Error state",
+      description: "Checkbox showing validation error",
       code: {
         react: `<GoabxCheckbox name="terms" text="Accept terms and conditions" error />`,
         angular: `<goabx-checkbox name="terms" text="Accept terms and conditions" [error]="true"></goabx-checkbox>`,

@@ -27,8 +27,50 @@ export class ShowNumberOfResultsPerPageComponent {
   }
 
   prepareUsers(): User[] {
-    const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver", "Mia", "Benjamin", "Charlotte", "Elijah", "Amelia", "Lucas", "Harper", "Mason", "Evelyn", "Logan"];
-    const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Wilson", "Anderson", "Taylor", "Thomas", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White"];
+    const firstNames = [
+      "Emma",
+      "Liam",
+      "Olivia",
+      "Noah",
+      "Ava",
+      "James",
+      "Sophia",
+      "William",
+      "Isabella",
+      "Oliver",
+      "Mia",
+      "Benjamin",
+      "Charlotte",
+      "Elijah",
+      "Amelia",
+      "Lucas",
+      "Harper",
+      "Mason",
+      "Evelyn",
+      "Logan",
+    ];
+    const lastNames = [
+      "Smith",
+      "Johnson",
+      "Williams",
+      "Brown",
+      "Jones",
+      "Garcia",
+      "Miller",
+      "Davis",
+      "Rodriguez",
+      "Martinez",
+      "Wilson",
+      "Anderson",
+      "Taylor",
+      "Thomas",
+      "Moore",
+      "Jackson",
+      "Martin",
+      "Lee",
+      "Thompson",
+      "White",
+    ];
     for (let i = 1; i <= this.total; i++) {
       this.users.push({
         id: `user-${i}`,

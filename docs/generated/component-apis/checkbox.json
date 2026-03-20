@@ -89,10 +89,7 @@
     {
       "name": "size",
       "type": "\"default\" | \"compact\"",
-      "values": [
-        "default",
-        "compact"
-      ],
+      "values": ["default", "compact"],
       "required": false,
       "default": "default",
       "description": "Sets the size of the checkbox. 'compact' reduces spacing for dense layouts."
@@ -135,33 +132,25 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onRevealChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_revealChange",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

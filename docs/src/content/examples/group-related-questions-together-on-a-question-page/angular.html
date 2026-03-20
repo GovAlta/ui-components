@@ -1,6 +1,4 @@
-<goabx-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goabx-link>
+<goabx-link leadingIcon="arrow-back" size="small" mb="none"> Back </goabx-link>
 
 <goab-text as="h2" mt="xl" mb="m">Your address</goab-text>
 <goab-text mt="none" mb="xl">This is the home address of the person applying</goab-text>
@@ -11,7 +9,8 @@
     [value]="addressLine1"
     name="address-line-1"
     ariaLabel="Address line 1"
-    width="100%">
+    width="100%"
+  >
   </goabx-input>
 </goabx-form-item>
 
@@ -21,7 +20,8 @@
     [value]="addressLine2"
     name="address-line-2"
     ariaLabel="Address line 2"
-    width="100%">
+    width="100%"
+  >
   </goabx-input>
 </goabx-form-item>
 
@@ -31,7 +31,8 @@
     [value]="townCity"
     name="town-city"
     ariaLabel="Town or city name"
-    width="460px">
+    width="460px"
+  >
   </goabx-input>
 </goabx-form-item>
 
@@ -40,12 +41,16 @@
     (onChange)="onProvinceChange($event)"
     [value]="province"
     name="province-territory"
-    ariaLabelledBy="provinceLabel">
+    ariaLabelledBy="provinceLabel"
+  >
     <goabx-dropdown-item value="AB" label="Alberta"></goabx-dropdown-item>
     <goabx-dropdown-item value="BC" label="British Columbia"></goabx-dropdown-item>
     <goabx-dropdown-item value="MB" label="Manitoba"></goabx-dropdown-item>
     <goabx-dropdown-item value="NB" label="New Brunswick"></goabx-dropdown-item>
-    <goabx-dropdown-item value="NL" label="Newfoundland and Labrador"></goabx-dropdown-item>
+    <goabx-dropdown-item
+      value="NL"
+      label="Newfoundland and Labrador"
+    ></goabx-dropdown-item>
     <goabx-dropdown-item value="NS" label="Nova Scotia"></goabx-dropdown-item>
     <goabx-dropdown-item value="ON" label="Ontario"></goabx-dropdown-item>
     <goabx-dropdown-item value="PE" label="Prince Edward Island"></goabx-dropdown-item>
@@ -62,7 +67,8 @@
     (onChange)="onPostalCodeChange($event)"
     [value]="postalCode"
     name="postal-code"
-    width="105px">
+    width="105px"
+  >
   </goabx-input>
 </goabx-form-item>
 

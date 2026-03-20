@@ -15,7 +15,10 @@
 
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
-      <goab-text>No text, no icon, no size — defaults to ellipsis-horizontal, normal size, ariaLabel="Open menu"</goab-text>
+      <goab-text
+        >No text, no icon, no size — defaults to ellipsis-horizontal, normal size,
+        ariaLabel="Open menu"</goab-text
+      >
       <goabx-menu-button (onAction)="handleAction($event, 'icon-only defaults')">
         <goabx-menu-action text="View case" action="view"></goabx-menu-action>
         <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
@@ -107,10 +110,7 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>text + normal (default)</goab-text>
-      <goabx-menu-button
-        text="Actions"
-        (onAction)="handleAction($event, 'text normal')"
-      >
+      <goabx-menu-button text="Actions" (onAction)="handleAction($event, 'text normal')">
         <goabx-menu-action text="View case" action="view"></goabx-menu-action>
         <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
         <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
@@ -174,8 +174,8 @@
   <!-- ── Test 5: Menu action variants ── -->
   <goab-text tag="h2">5. Menu action items — with icon vs text-only</goab-text>
   <goab-text tag="p">
-    Verify that menu action items render correctly for both normal and compact sizes,
-    with and without icons.
+    Verify that menu action items render correctly for both normal and compact sizes, with
+    and without icons.
   </goab-text>
 
   <goab-block direction="column" gap="m" mt="m">
@@ -448,8 +448,8 @@
   <!-- ── Test 8: Icon theme — filled vs outline ── -->
   <goab-text tag="h2">8. Icon theme (filled vs outline)</goab-text>
   <goab-text tag="p">
-    Use <code>icon-name:filled</code> or <code>icon-name:outline</code> suffix to
-    control icon theme.
+    Use <code>icon-name:filled</code> or <code>icon-name:outline</code> suffix to control
+    icon theme.
   </goab-text>
 
   <goab-block direction="column" gap="m" mt="m">

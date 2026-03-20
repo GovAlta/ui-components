@@ -25,11 +25,14 @@ status: published
     <goa-form-item label="Email address">
       <goa-input name="email" disabled="true"></goa-input>
     </goa-form-item>
-    <goa-button type="primary" disabled="true">Submit</goa-button>
+    <goa-button type="primary" disabled="true">
+      Submit
+    </goa-button>
   </goa-block>
 </Preview>
 
 When you must disable a button or input:
+
 - Provide nearby text explaining what needs to happen first
 - Consider showing the element enabled with validation on submit instead
 - Use aria-describedby to link the disabled element to explanatory text

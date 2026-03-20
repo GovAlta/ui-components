@@ -10,8 +10,8 @@ export function ShowANotificationWithAnAction() {
         actionText: "View",
         action: () => {
           TemporaryNotification.dismiss(uuid);
-        }
-      }
+        },
+      },
     );
   };
 

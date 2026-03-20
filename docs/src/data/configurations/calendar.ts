@@ -4,18 +4,18 @@
  * Calendar displays dates for selection.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const calendarConfigurations: ComponentConfigurations = {
-  componentSlug: 'calendar',
-  componentName: 'Calendar',
-  defaultConfigurationId: 'basic',
+  componentSlug: "calendar",
+  componentName: "Calendar",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic calendar',
-      description: 'Simple date calendar',
+      id: "basic",
+      name: "Basic calendar",
+      description: "Simple date calendar",
       code: {
         react: `<GoabxCalendar name="calendar" onChange={handleDateChange} />`,
         angular: `<goabx-calendar name="calendar" (_change)="handleDateChange($event)"></goabx-calendar>`,
@@ -23,9 +23,9 @@ export const calendarConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-value',
-      name: 'With selected date',
-      description: 'Calendar with preset selection',
+      id: "with-value",
+      name: "With selected date",
+      description: "Calendar with preset selection",
       code: {
         react: `<GoabxCalendar name="calendar" value="2024-06-15" onChange={handleDateChange} />`,
         angular: `<goabx-calendar name="calendar" value="2024-06-15" (_change)="handleDateChange($event)"></goabx-calendar>`,
@@ -33,9 +33,9 @@ export const calendarConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-range',
-      name: 'Date range',
-      description: 'Calendar with min/max dates',
+      id: "with-range",
+      name: "Date range",
+      description: "Calendar with min/max dates",
       code: {
         react: `<GoabxCalendar
   name="booking"

@@ -23,7 +23,9 @@ describe("FileUploadInput Browser Tests", () => {
       expect(fileUpload.element()).toBeTruthy();
     });
 
-    const host = result.container.querySelector("goa-file-upload-input") as HTMLElement | null;
+    const host = result.container.querySelector(
+      "goa-file-upload-input",
+    ) as HTMLElement | null;
     expect(host).toBeTruthy();
 
     const selectEvent = new CustomEvent("_selectFile", {

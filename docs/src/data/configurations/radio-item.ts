@@ -4,18 +4,18 @@
  * RadioItem is a child component of RadioGroup.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const radioItemConfigurations: ComponentConfigurations = {
-  componentSlug: 'radio-item',
-  componentName: 'Radio item',
-  defaultConfigurationId: 'basic',
+  componentSlug: "radio-item",
+  componentName: "Radio item",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic radio item',
-      description: 'Single radio option within RadioGroup',
+      id: "basic",
+      name: "Basic radio item",
+      description: "Single radio option within RadioGroup",
       code: {
         react: `<GoabxRadioGroup name="option" value="">
   <GoabxRadioItem value="opt1" label="Option 1" />
@@ -35,9 +35,9 @@ export const radioItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-description',
-      name: 'With description',
-      description: 'Radio item with additional text',
+      id: "with-description",
+      name: "With description",
+      description: "Radio item with additional text",
       code: {
         react: `<GoabxRadioGroup name="plan" value="">
   <GoabxRadioItem value="basic" label="Basic" description="Free tier with limited features" />

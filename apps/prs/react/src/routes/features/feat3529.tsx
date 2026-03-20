@@ -25,47 +25,82 @@ export function Feat3529Route() {
       <GoabDivider mt="l" mb="l" />
 
       {/* Explicit size prop */}
-      <h2>Explicit <code>size</code> prop</h2>
-      <p>Each GoabText below uses an explicit size prop. Resize to mobile to verify the mobile tokens also apply.</p>
+      <h2>
+        Explicit <code>size</code> prop
+      </h2>
+      <p>
+        Each GoabText below uses an explicit size prop. Resize to mobile to verify the
+        mobile tokens also apply.
+      </p>
 
       <GoabBlock direction="column" gap="l" mt="l">
         <div>
-          <p><small>size="heading-xl" — token: <code>--goa-typography-heading-xl-letter-spacing</code></small></p>
+          <p>
+            <small>
+              size="heading-xl" — token:{" "}
+              <code>--goa-typography-heading-xl-letter-spacing</code>
+            </small>
+          </p>
           <GoabText size="heading-xl" mt="none">
             Heading XL — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>size="heading-l" — token: <code>--goa-typography-heading-l-letter-spacing</code></small></p>
+          <p>
+            <small>
+              size="heading-l" — token:{" "}
+              <code>--goa-typography-heading-l-letter-spacing</code>
+            </small>
+          </p>
           <GoabText size="heading-l" mt="none">
             Heading L — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>size="heading-m" — token: <code>--goa-typography-heading-m-letter-spacing</code></small></p>
+          <p>
+            <small>
+              size="heading-m" — token:{" "}
+              <code>--goa-typography-heading-m-letter-spacing</code>
+            </small>
+          </p>
           <GoabText size="heading-m" mt="none">
             Heading M — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>size="heading-s" — token: <code>--goa-typography-heading-s-letter-spacing</code></small></p>
+          <p>
+            <small>
+              size="heading-s" — token:{" "}
+              <code>--goa-typography-heading-s-letter-spacing</code>
+            </small>
+          </p>
           <GoabText size="heading-s" mt="none">
             Heading S — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>size="heading-xs" — token: <code>--goa-typography-heading-xs-letter-spacing</code></small></p>
+          <p>
+            <small>
+              size="heading-xs" — token:{" "}
+              <code>--goa-typography-heading-xs-letter-spacing</code>
+            </small>
+          </p>
           <GoabText size="heading-xs" mt="none">
             Heading XS — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>size="heading-2xs" — token: <code>--goa-typography-heading-2xs-letter-spacing</code></small></p>
+          <p>
+            <small>
+              size="heading-2xs" — token:{" "}
+              <code>--goa-typography-heading-2xs-letter-spacing</code>
+            </small>
+          </p>
           <GoabText size="heading-2xs" mt="none">
             Heading 2XS — The quick brown fox jumps over the lazy dog
           </GoabText>
@@ -83,35 +118,60 @@ export function Feat3529Route() {
 
       <GoabBlock direction="column" gap="l" mt="l">
         <div>
-          <p><small>as="h1" → heading-xl — token: <code>--goa-typography-heading-xl-letter-spacing</code></small></p>
+          <p>
+            <small>
+              as="h1" → heading-xl — token:{" "}
+              <code>--goa-typography-heading-xl-letter-spacing</code>
+            </small>
+          </p>
           <GoabText as="h1" mt="none">
             H1 — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>as="h2" → heading-l — token: <code>--goa-typography-heading-l-letter-spacing</code></small></p>
+          <p>
+            <small>
+              as="h2" → heading-l — token:{" "}
+              <code>--goa-typography-heading-l-letter-spacing</code>
+            </small>
+          </p>
           <GoabText as="h2" mt="none">
             H2 — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>as="h3" → heading-m — token: <code>--goa-typography-heading-m-letter-spacing</code></small></p>
+          <p>
+            <small>
+              as="h3" → heading-m — token:{" "}
+              <code>--goa-typography-heading-m-letter-spacing</code>
+            </small>
+          </p>
           <GoabText as="h3" mt="none">
             H3 — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>as="h4" → heading-s — token: <code>--goa-typography-heading-s-letter-spacing</code></small></p>
+          <p>
+            <small>
+              as="h4" → heading-s — token:{" "}
+              <code>--goa-typography-heading-s-letter-spacing</code>
+            </small>
+          </p>
           <GoabText as="h4" mt="none">
             H4 — The quick brown fox jumps over the lazy dog
           </GoabText>
         </div>
 
         <div>
-          <p><small>as="h5" → heading-xs — token: <code>--goa-typography-heading-xs-letter-spacing</code></small></p>
+          <p>
+            <small>
+              as="h5" → heading-xs — token:{" "}
+              <code>--goa-typography-heading-xs-letter-spacing</code>
+            </small>
+          </p>
           <GoabText as="h5" mt="none">
             H5 — The quick brown fox jumps over the lazy dog
           </GoabText>

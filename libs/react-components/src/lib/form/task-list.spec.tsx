@@ -8,7 +8,7 @@ describe("GoabPublicFormTaskList", () => {
       <GoabPublicFormTaskList heading="Required Tasks">
         <div data-testid="task-item-1">Task 1</div>
         <div data-testid="task-item-2">Task 2</div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task-list");
@@ -20,23 +20,18 @@ describe("GoabPublicFormTaskList", () => {
   });
 
   it("renders with different heading values", () => {
-    const headings = [
-      "Application Tasks",
-      "Required Steps",
-      "To-Do Items",
-      "Checklist",
-    ];
+    const headings = ["Application Tasks", "Required Steps", "To-Do Items", "Checklist"];
 
-    headings.forEach(heading => {
+    headings.forEach((heading) => {
       const { baseElement, unmount } = render(
         <GoabPublicFormTaskList heading={heading}>
           <div>Task content</div>
-        </GoabPublicFormTaskList>
+        </GoabPublicFormTaskList>,
       );
 
       const el = baseElement.querySelector("goa-public-form-task-list");
       expect(el?.getAttribute("heading")).toBe(heading);
-      
+
       unmount();
     });
   });
@@ -56,7 +51,7 @@ describe("GoabPublicFormTaskList", () => {
           <span>⏳ Submit application</span>
           <span className="status">Pending</span>
         </div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     expect(baseElement.querySelector("[data-testid='task-completed']")).toBeTruthy();
@@ -80,7 +75,7 @@ describe("GoabPublicFormTaskList", () => {
           <h3>Document Upload</h3>
           <button data-testid="upload-btn">Upload Files</button>
         </div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     expect(baseElement.querySelector("[data-testid='task-1']")).toBeTruthy();
@@ -103,25 +98,23 @@ describe("GoabPublicFormTaskList", () => {
       "Tasks with symbols: @#$%",
     ];
 
-    specialHeadings.forEach(heading => {
+    specialHeadings.forEach((heading) => {
       const { baseElement, unmount } = render(
         <GoabPublicFormTaskList heading={heading}>
           <div>Task content</div>
-        </GoabPublicFormTaskList>
+        </GoabPublicFormTaskList>,
       );
 
       const el = baseElement.querySelector("goa-public-form-task-list");
       expect(el?.getAttribute("heading")).toBe(heading);
-      
+
       unmount();
     });
   });
 
   it("renders empty task list", () => {
     const { baseElement } = render(
-      <GoabPublicFormTaskList heading="Empty List">
-        {null}
-      </GoabPublicFormTaskList>
+      <GoabPublicFormTaskList heading="Empty List">{null}</GoabPublicFormTaskList>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task-list");
@@ -133,13 +126,15 @@ describe("GoabPublicFormTaskList", () => {
     const { baseElement } = render(
       <GoabPublicFormTaskList heading="Single Task">
         <div data-testid="only-task">Complete registration</div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task-list");
     expect(el?.getAttribute("heading")).toBe("Single Task");
     expect(baseElement.querySelector("[data-testid='only-task']")).toBeTruthy();
-    expect(baseElement.querySelector("[data-testid='only-task']")?.textContent).toBe("Complete registration");
+    expect(baseElement.querySelector("[data-testid='only-task']")?.textContent).toBe(
+      "Complete registration",
+    );
   });
 
   it("renders with interactive elements", () => {
@@ -152,7 +147,9 @@ describe("GoabPublicFormTaskList", () => {
         </div>
         <div data-testid="task-with-links">
           <span>Submit documents</span>
-          <a href="#" data-testid="help-link">Need help?</a>
+          <a href="#" data-testid="help-link">
+            Need help?
+          </a>
         </div>
         <div data-testid="task-with-inputs">
           <label>
@@ -160,7 +157,7 @@ describe("GoabPublicFormTaskList", () => {
             Mark as completed
           </label>
         </div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     expect(baseElement.querySelector("[data-testid='edit-btn']")).toBeTruthy();
@@ -173,12 +170,13 @@ describe("GoabPublicFormTaskList", () => {
   });
 
   it("renders with long heading text", () => {
-    const longHeading = "This is a very long heading that might wrap to multiple lines and should still be handled correctly by the component";
-    
+    const longHeading =
+      "This is a very long heading that might wrap to multiple lines and should still be handled correctly by the component";
+
     const { baseElement } = render(
       <GoabPublicFormTaskList heading={longHeading}>
         <div>Task content</div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task-list");
@@ -203,7 +201,7 @@ describe("GoabPublicFormTaskList", () => {
           <div data-testid="task-3-1">Review information</div>
           <div data-testid="task-3-2">Submit application</div>
         </div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
 
     expect(baseElement.querySelectorAll("[data-testid^='group-']")).toHaveLength(3);
@@ -213,12 +211,9 @@ describe("GoabPublicFormTaskList", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPublicFormTaskList
-        heading="Test Tasks"
-        data-grid="cell"
-      >
+      <GoabPublicFormTaskList heading="Test Tasks" data-grid="cell">
         <div>Test content</div>
-      </GoabPublicFormTaskList>
+      </GoabPublicFormTaskList>,
     );
     const el = baseElement.querySelector("goa-public-form-task-list");
     expect(el?.getAttribute("data-grid")).toBe("cell");

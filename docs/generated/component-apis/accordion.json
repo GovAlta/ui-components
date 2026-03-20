@@ -27,10 +27,7 @@
       "name": "headingSize",
       "type": "\"small\" | \"medium\"",
       "typeLabel": "GoabAccordionHeadingSize",
-      "values": [
-        "small",
-        "medium"
-      ],
+      "values": ["small", "medium"],
       "required": false,
       "default": "small",
       "description": "Sets the heading size of the accordion container heading."
@@ -91,10 +88,7 @@
     {
       "name": "iconposition",
       "type": "\"left\" | \"right\"",
-      "values": [
-        "left",
-        "right"
-      ],
+      "values": ["left", "right"],
       "required": false,
       "default": "left",
       "description": "Sets the position of the expand/collapse icon."
@@ -105,17 +99,13 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

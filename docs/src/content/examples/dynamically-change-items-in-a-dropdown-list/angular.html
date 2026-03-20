@@ -1,6 +1,14 @@
-<div [formGroup]="changeForm" style="padding: 40px;">
-  <goabx-form-item label="Size" requirement="optional" helpText="Choose the size to change the list below">
-    <goabx-dropdown formControlName="parentDropdown" placeholder="Select a value" name="parent">
+<div [formGroup]="changeForm" style="padding: 40px">
+  <goabx-form-item
+    label="Size"
+    requirement="optional"
+    helpText="Choose the size to change the list below"
+  >
+    <goabx-dropdown
+      formControlName="parentDropdown"
+      placeholder="Select a value"
+      name="parent"
+    >
       @for (parent of parents; track parent) {
       <goabx-dropdown-item [value]="parent" [label]="parent" />
       }
@@ -8,14 +16,14 @@
   </goabx-form-item>
 
   <goabx-form-item label="Items" requirement="optional" mt="xl">
-    <goabx-dropdown formControlName="childDropdown" placeholder="Select a value" name="children">
+    <goabx-dropdown
+      formControlName="childDropdown"
+      placeholder="Select a value"
+      name="children"
+    >
       <ng-container *ngIf="children.length > 0">
         @for (child of children; track child) {
-        <goabx-dropdown-item
-          [value]="child"
-          [label]="child"
-          [mountType]="'reset'"
-        />
+        <goabx-dropdown-item [value]="child" [label]="child" [mountType]="'reset'" />
         }
       </ng-container>
     </goabx-dropdown>

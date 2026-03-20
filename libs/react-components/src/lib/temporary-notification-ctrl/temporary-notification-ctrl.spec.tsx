@@ -16,7 +16,7 @@ describe("Temporary Notification Controller", () => {
         <GoabTemporaryNotificationCtrl
           verticalPosition="top"
           horizontalPosition="left"
-        />
+        />,
       );
       const el = document.querySelector("goa-temp-notification-ctrl");
       expect(el?.getAttribute("vertical-position")).toEqual("top");

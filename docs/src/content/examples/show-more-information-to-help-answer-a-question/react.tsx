@@ -31,7 +31,9 @@ export function ShowMoreInformationToHelpAnswerAQuestion() {
       </GoabxFormItem>
 
       <GoabDetails heading="Why are we asking this question?" mt="l">
-        <p>We ask this question to determine if you are eligible for child care benefits.</p>
+        <p>
+          We ask this question to determine if you are eligible for child care benefits.
+        </p>
       </GoabDetails>
 
       <GoabxButton type="submit" mt="2xl">

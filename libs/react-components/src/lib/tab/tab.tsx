@@ -21,7 +21,12 @@ export interface GoabTabItemProps {
   slug?: string;
 }
 
-export function GoabTab({ heading, disabled, slug, children }: GoabTabItemProps): JSX.Element {
+export function GoabTab({
+  heading,
+  disabled,
+  slug,
+  children,
+}: GoabTabItemProps): JSX.Element {
   return (
     <goa-tab
       slug={slug}

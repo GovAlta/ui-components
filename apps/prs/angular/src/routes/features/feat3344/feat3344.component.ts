@@ -6,19 +6,17 @@ import {
   GoabxTable,
   GoabxTableSortHeader,
 } from "@abgov/angular-components";
-import { GoabTableOnSortDetail, GoabTableOnMultiSortDetail, GoabTableSortEntry } from "@abgov/ui-components-common";
+import {
+  GoabTableOnSortDetail,
+  GoabTableOnMultiSortDetail,
+  GoabTableSortEntry,
+} from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "abgov-feat3344",
   templateUrl: "./feat3344.component.html",
-  imports: [
-    GoabBlock,
-    GoabDivider,
-    GoabDetails,
-    GoabxTable,
-    GoabxTableSortHeader,
-  ],
+  imports: [GoabBlock, GoabDivider, GoabDetails, GoabxTable, GoabxTableSortHeader],
 })
 export class Feat3344Component implements OnInit, OnDestroy {
   private v2TokensLink: HTMLLinkElement | null = null;
@@ -54,7 +52,9 @@ export class Feat3344Component implements OnInit, OnDestroy {
   }
 
   onSingleSortChange(detail: GoabTableOnSortDetail) {
-    this.currentSorts = [{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }];
+    this.currentSorts = [
+      { column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" },
+    ];
     this.singleSorted = this.sortData(this.data, this.currentSorts);
   }
 

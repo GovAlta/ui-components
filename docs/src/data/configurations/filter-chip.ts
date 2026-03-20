@@ -4,18 +4,18 @@
  * Filter chips allow users to filter content.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const filterChipConfigurations: ComponentConfigurations = {
-  componentSlug: 'filter-chip',
-  componentName: 'Filter chip',
-  defaultConfigurationId: 'basic',
+  componentSlug: "filter-chip",
+  componentName: "Filter chip",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic filter chip',
-      description: 'Simple filter toggle',
+      id: "basic",
+      name: "Basic filter chip",
+      description: "Simple filter toggle",
       code: {
         react: `<GoabxFilterChip content="Active" onClick={handleToggle} />`,
         angular: `<goabx-filter-chip content="Active" (_click)="handleToggle()"></goabx-filter-chip>`,
@@ -23,9 +23,9 @@ export const filterChipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'selected',
-      name: 'Selected state',
-      description: 'Filter chip in selected state',
+      id: "selected",
+      name: "Selected state",
+      description: "Filter chip in selected state",
       code: {
         react: `<GoabxFilterChip content="In Progress" selected onClick={handleToggle} />`,
         angular: `<goabx-filter-chip content="In Progress" [selected]="true" (_click)="handleToggle()"></goabx-filter-chip>`,
@@ -33,9 +33,9 @@ export const filterChipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'filter-group',
-      name: 'Filter group',
-      description: 'Multiple filter options',
+      id: "filter-group",
+      name: "Filter group",
+      description: "Multiple filter options",
       code: {
         react: `<GoabxFilterChip content="All" selected onClick={() => setFilter('all')} />
 <GoabxFilterChip content="Active" onClick={() => setFilter('active')} />
@@ -52,9 +52,9 @@ export const filterChipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-error',
-      name: 'Error state',
-      description: 'Filter chip showing error',
+      id: "with-error",
+      name: "Error state",
+      description: "Filter chip showing error",
       code: {
         react: `<GoabxFilterChip content="Invalid filter" error />`,
         angular: `<goabx-filter-chip content="Invalid filter" [error]="true"></goabx-filter-chip>`,

@@ -27,7 +27,11 @@ export function TemplateRoute() {
 
       <GoabBlock>
         <GoabLink trailingIcon="open">
-          <a href="https://github.com/GovAlta/ui-components/issues/0000" target="_blank" rel="noopener">
+          <a
+            href="https://github.com/GovAlta/ui-components/issues/0000"
+            target="_blank"
+            rel="noopener"
+          >
             View on GitHub
           </a>
         </GoabLink>
@@ -44,15 +48,11 @@ export function TemplateRoute() {
       <GoabText tag="h2">Test Cases</GoabText>
 
       <GoabText tag="h3">Test 1: [Test name]</GoabText>
-      <GoabText tag="p">
-        Description of what this test case verifies.
-      </GoabText>
+      <GoabText tag="p">Description of what this test case verifies.</GoabText>
       {/* Add your test component here */}
 
       <GoabText tag="h3">Test 2: [Test name]</GoabText>
-      <GoabText tag="p">
-        Description of what this test case verifies.
-      </GoabText>
+      <GoabText tag="p">Description of what this test case verifies.</GoabText>
       {/* Add your test component here */}
     </div>
   );

@@ -2,7 +2,8 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 

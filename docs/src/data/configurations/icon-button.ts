@@ -4,18 +4,18 @@
  * Icon buttons provide actions with icons only.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const iconButtonConfigurations: ComponentConfigurations = {
-  componentSlug: 'icon-button',
-  componentName: 'Icon button',
-  defaultConfigurationId: 'basic',
+  componentSlug: "icon-button",
+  componentName: "Icon button",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic icon button',
-      description: 'Simple icon button',
+      id: "basic",
+      name: "Basic icon button",
+      description: "Simple icon button",
       code: {
         react: `<GoabIconButton icon="close" ariaLabel="Close" />`,
         angular: `<goab-icon-button icon="close" ariaLabel="Close"></goab-icon-button>`,
@@ -23,9 +23,9 @@ export const iconButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'common-actions',
-      name: 'Common actions',
-      description: 'Frequently used icon buttons',
+      id: "common-actions",
+      name: "Common actions",
+      description: "Frequently used icon buttons",
       code: {
         react: `<GoabIconButton icon="close" ariaLabel="Close" />
 <GoabIconButton icon="add" ariaLabel="Add" />
@@ -48,9 +48,9 @@ export const iconButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Different icon button sizes',
+      id: "sizes",
+      name: "Sizes",
+      description: "Different icon button sizes",
       code: {
         react: `<GoabIconButton icon="settings" size="small" ariaLabel="Settings" />
 <GoabIconButton icon="settings" size="medium" ariaLabel="Settings" />
@@ -64,9 +64,9 @@ export const iconButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'variants',
-      name: 'Variants',
-      description: 'Different visual styles',
+      id: "variants",
+      name: "Variants",
+      description: "Different visual styles",
       code: {
         react: `<GoabIconButton icon="close" variant="color" ariaLabel="Close" />
 <GoabIconButton icon="close" variant="dark" ariaLabel="Close" />
@@ -80,9 +80,9 @@ export const iconButtonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'disabled',
-      name: 'Disabled',
-      description: 'Icon button in disabled state',
+      id: "disabled",
+      name: "Disabled",
+      description: "Icon button in disabled state",
       code: {
         react: `<GoabIconButton icon="trash" ariaLabel="Delete" disabled />`,
         angular: `<goab-icon-button icon="trash" ariaLabel="Delete" [disabled]="true"></goab-icon-button>`,

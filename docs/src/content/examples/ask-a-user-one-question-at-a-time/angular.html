@@ -5,12 +5,15 @@
   mt="xl"
   label="Are you currently in school?"
   labelSize="large"
-  helpText="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education.">
-  <goabx-radio-group name="school" ariaLabel="are you currently in school?" (onChange)="onSchoolChange($event)">
+  helpText="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education."
+>
+  <goabx-radio-group
+    name="school"
+    ariaLabel="are you currently in school?"
+    (onChange)="onSchoolChange($event)"
+  >
     <goabx-radio-item value="yes" label="Yes"></goabx-radio-item>
     <goabx-radio-item value="no" label="No"></goabx-radio-item>
   </goabx-radio-group>
 </goabx-form-item>
-<goabx-button type="submit" mt="2xl">
-  Save and continue
-</goabx-button>
+<goabx-button type="submit" mt="2xl"> Save and continue </goabx-button>

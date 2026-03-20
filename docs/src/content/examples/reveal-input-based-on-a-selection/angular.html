@@ -1,4 +1,8 @@
-<goabx-form-item [formGroup]="form" label="How would you like to be contacted?" helpText="Select one option">
+<goabx-form-item
+  [formGroup]="form"
+  label="How would you like to be contacted?"
+  helpText="Select one option"
+>
   <goabx-radio-group name="contactMethod" formControlName="contactMethod">
     <goabx-radio-item label="Email" value="email" [reveal]="emailReveal">
       <ng-template #emailReveal>
@@ -40,7 +44,12 @@
         </goabx-form-item>
       </ng-template>
     </goabx-checkbox>
-    <goabx-checkbox name="text" text="Text message" value="text" [reveal]="checkTextReveal">
+    <goabx-checkbox
+      name="text"
+      text="Text message"
+      value="text"
+      [reveal]="checkTextReveal"
+    >
       <ng-template #checkTextReveal>
         <goabx-form-item label="Mobile phone number">
           <goabx-input name="mobile" formControlName="phoneNumber"></goabx-input>

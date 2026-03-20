@@ -1,9 +1,9 @@
-<goabx-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goabx-link>
+<goabx-link leadingIcon="arrow-back" size="small" mb="none"> Back </goabx-link>
 
 <goab-text as="h1" mt="xl" mb="m">What is your email address?</goab-text>
-<goab-text mt="none" mb="xl">We'll use this to send you confirmation of your application.</goab-text>
+<goab-text mt="none" mb="xl"
+  >We'll use this to send you confirmation of your application.</goab-text
+>
 
 <goabx-form-item label="Email address">
   <goabx-input
@@ -11,12 +11,11 @@
     type="email"
     [value]="answer"
     (onChange)="onAnswerChange($event)"
-    width="100%">
+    width="100%"
+  >
   </goabx-input>
 </goabx-form-item>
 
 <goab-button-group alignment="start" mt="2xl">
-  <goabx-button type="primary" (onClick)="handleContinue()">
-    Continue
-  </goabx-button>
+  <goabx-button type="primary" (onClick)="handleContinue()"> Continue </goabx-button>
 </goab-button-group>

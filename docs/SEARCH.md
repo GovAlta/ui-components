@@ -22,6 +22,7 @@ npm run index:docs
 ```
 
 This script:
+
 - Scans all `.md` and `.doc.md` files in `libs/web-components/src/components/`
 - Extracts titles and content
 - Generates `docs/search-index.json` and `docs/public/search-index.json`
@@ -29,6 +30,7 @@ This script:
 ### 2. Search Component
 
 Located at `docs/src/components/Search.tsx`, this React component:
+
 - Loads the search index on page load
 - Provides a search input with auto-complete suggestions
 - Displays search results with highlighted matches
@@ -47,12 +49,14 @@ import Search from '../components/Search';
 ## Files Created/Modified
 
 ### Created:
+
 - `docs/src/components/Search.tsx` - Main search component
 - `docs/src/types/web-components.d.ts` - Type declarations
 - `docs/public/search-index.json` - Search index (generated)
 - `scripts/README.md` - Documentation for the indexing script
 
 ### Modified:
+
 - `scripts/indexdocs.ts` - Updated to copy index to public folder
 - `docs/src/pages/index.astro` - Added Search component
 - `docs/package.json` - Added flexsearch dependency
@@ -63,6 +67,7 @@ import Search from '../components/Search';
 ### For End Users
 
 Simply type in the search box on the documentation homepage. The search will:
+
 - Search across component titles, content, and names
 - Display results in real-time as you type
 - Highlight matching terms in yellow
@@ -112,6 +117,7 @@ tags: [form, input, interactive]
 ---
 
 # Button Library
+
 ...
 ```
 
@@ -134,16 +140,17 @@ Configure FlexSearch options in the component:
 
 ```typescript
 const index = new Document<SearchResult>({
-  tokenize: 'forward', // Enables prefix matching (e.g., "acco" matches "Accordion")
+  tokenize: "forward", // Enables prefix matching (e.g., "acco" matches "Accordion")
   document: {
-    id: 'id',
-    index: ['title', 'content', 'component', 'description', 'tags:0', 'tags:1', 'tags:2'], // Fields to search
-    store: ['id', 'title', 'component', 'path', 'tags', 'description'] // Fields to return
-  }
+    id: "id",
+    index: ["title", "content", "component", "description", "tags:0", "tags:1", "tags:2"], // Fields to search
+    store: ["id", "title", "component", "path", "tags", "description"], // Fields to return
+  },
 });
 ```
 
 **Tokenization Options:**
+
 - `forward` (current) - Prefix matching: "acco" matches "Accordion"
 - `full` - Any substring matching (more memory intensive)
 - `strict` - Exact word matching only
@@ -158,7 +165,7 @@ Change the number of results displayed:
 ```typescript
 const searchResults = indexRef.current.search(query, {
   limit: 10, // Change this value
-  enrich: true
+  enrich: true,
 });
 ```
 
@@ -167,6 +174,7 @@ const searchResults = indexRef.current.search(query, {
 ### When to Regenerate the Index
 
 Run `npm run index:docs` when:
+
 - Adding new component documentation
 - Updating existing documentation
 - Before deploying to production
@@ -192,6 +200,7 @@ To automatically regenerate the index before building docs, update `package.json
 ## Future Enhancements
 
 Possible improvements:
+
 - Add keyboard shortcuts (e.g., Cmd+K to focus search)
 - Add search history
 - Add filter by component type

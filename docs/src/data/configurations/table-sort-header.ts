@@ -4,18 +4,18 @@
  * Sort headers for table columns, used within Table's thead.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const tableSortHeaderConfigurations: ComponentConfigurations = {
-  componentSlug: 'table-sort-header',
-  componentName: 'TableSortHeader',
-  defaultConfigurationId: 'basic',
+  componentSlug: "table-sort-header",
+  componentName: "TableSortHeader",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic sort header',
-      description: 'Sortable column header with name and direction',
+      id: "basic",
+      name: "Basic sort header",
+      description: "Sortable column header with name and direction",
       code: {
         react: `<GoabxTableSortHeader name="name" direction="asc">
   Name
@@ -29,9 +29,9 @@ export const tableSortHeaderConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sort-order',
-      name: 'With sort order',
-      description: 'Sort header with sortOrder for multi-column sort priority display',
+      id: "sort-order",
+      name: "With sort order",
+      description: "Sort header with sortOrder for multi-column sort priority display",
       code: {
         react: `<GoabxTableSortHeader name="name" direction="asc" sortOrder={1}>
   Name

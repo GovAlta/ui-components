@@ -37,17 +37,15 @@ export const GoabTemporaryNotificationCtrl = ({
   const el = useRef<HTMLElement>(null);
 
   const _props = transformProps<WCProps>(
-    { "vertical-position": verticalPosition, "horizontal-position": horizontalPosition, ...rest },
-    kebab
+    {
+      "vertical-position": verticalPosition,
+      "horizontal-position": horizontalPosition,
+      ...rest,
+    },
+    kebab,
   );
 
-  return (
-    <goa-temp-notification-ctrl
-      ref={el}
-      {..._props}
-      testid={testId}
-    />
-  );
+  return <goa-temp-notification-ctrl ref={el} {..._props} testid={testId} />;
 };
 
 export default GoabTemporaryNotificationCtrl;

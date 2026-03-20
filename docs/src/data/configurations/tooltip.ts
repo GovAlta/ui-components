@@ -4,18 +4,18 @@
  * Tooltips provide additional context on hover or focus.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const tooltipConfigurations: ComponentConfigurations = {
-  componentSlug: 'tooltip',
-  componentName: 'Tooltip',
-  defaultConfigurationId: 'basic',
+  componentSlug: "tooltip",
+  componentName: "Tooltip",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic tooltip',
-      description: 'Simple tooltip on hover',
+      id: "basic",
+      name: "Basic tooltip",
+      description: "Simple tooltip on hover",
       code: {
         react: `<GoabTooltip content="Additional information about this item">
   <GoabxButton>Hover me</GoabxButton>
@@ -29,9 +29,9 @@ export const tooltipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'positions',
-      name: 'Positions',
-      description: 'Tooltip placement options',
+      id: "positions",
+      name: "Positions",
+      description: "Tooltip placement options",
       code: {
         react: `<GoabTooltip content="Top tooltip" position="top">
   <GoabxButton>Top</GoabxButton>
@@ -72,9 +72,9 @@ export const tooltipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icon-button',
-      name: 'With icon button',
-      description: 'Tooltip on an icon button',
+      id: "with-icon-button",
+      name: "With icon button",
+      description: "Tooltip on an icon button",
       code: {
         react: `<GoabTooltip content="More options">
   <GoabIconButton icon="ellipsis-vertical" />
@@ -88,9 +88,9 @@ export const tooltipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'hover-delay',
-      name: 'Hover delay',
-      description: 'Tooltip with custom hover delay',
+      id: "hover-delay",
+      name: "Hover delay",
+      description: "Tooltip with custom hover delay",
       code: {
         react: `<GoabTooltip content="This appears after 500ms" hoverDelay={500}>
   <GoabxButton>Delayed tooltip</GoabxButton>

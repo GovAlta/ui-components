@@ -4,7 +4,7 @@
  * Drawers slide in from the side of the screen.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 const drawerScript = `
 document.getElementById('open-drawer').addEventListener('click', () => {
@@ -16,15 +16,15 @@ document.getElementById('demo-drawer').addEventListener('_close', (e) => {
 `;
 
 export const drawerConfigurations: ComponentConfigurations = {
-  componentSlug: 'drawer',
-  componentName: 'Drawer',
-  defaultConfigurationId: 'basic',
+  componentSlug: "drawer",
+  componentName: "Drawer",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic drawer',
-      description: 'Simple drawer from right side',
+      id: "basic",
+      name: "Basic drawer",
+      description: "Simple drawer from right side",
       code: {
         react: `<GoabxDrawer heading="Application details" position="right" open={isOpen} onClose={handleClose}>
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
@@ -58,9 +58,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'position-bottom',
-      name: 'Bottom position',
-      description: 'Drawer opening from the bottom of the screen',
+      id: "position-bottom",
+      name: "Bottom position",
+      description: "Drawer opening from the bottom of the screen",
       code: {
         react: `<GoabxDrawer heading="Bottom drawer" position="bottom" open={isOpen} onClose={handleClose}>
   <p>Opens from the bottom of the screen.</p>
@@ -76,9 +76,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-actions',
-      name: 'With actions',
-      description: 'Drawer with footer actions',
+      id: "with-actions",
+      name: "With actions",
+      description: "Drawer with footer actions",
       code: {
         react: `<GoabxDrawer heading="Edit settings" position="right" open={isOpen} onClose={handleClose}>
   <p>Make changes to your settings here.</p>
@@ -106,9 +106,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'size-narrow',
-      name: 'Narrow size',
-      description: 'Narrow drawer for simple content',
+      id: "size-narrow",
+      name: "Narrow size",
+      description: "Narrow drawer for simple content",
       code: {
         react: `<GoabxDrawer heading="Narrow drawer" position="right" size="narrow" open={isOpen} onClose={handleClose}>
   <p>Narrow width for simple content.</p>
@@ -124,9 +124,9 @@ export const drawerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'size-wide',
-      name: 'Wide size',
-      description: 'Wide drawer for complex content',
+      id: "size-wide",
+      name: "Wide size",
+      description: "Wide drawer for complex content",
       code: {
         react: `<GoabxDrawer heading="Wide drawer" position="right" size="wide" open={isOpen} onClose={handleClose}>
   <p>Wide width for more complex content.</p>

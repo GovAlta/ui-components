@@ -4,18 +4,18 @@
  * Spacer adds consistent vertical or horizontal space.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const spacerConfigurations: ComponentConfigurations = {
-  componentSlug: 'spacer',
-  componentName: 'Spacer',
-  defaultConfigurationId: 'basic',
+  componentSlug: "spacer",
+  componentName: "Spacer",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic spacer',
-      description: 'Vertical space between elements',
+      id: "basic",
+      name: "Basic spacer",
+      description: "Vertical space between elements",
       code: {
         react: `<GoabText mt="none" mb="none">Content above</GoabText>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -41,9 +41,9 @@ export const spacerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'vertical-sizes',
-      name: 'Vertical sizes',
-      description: 'Different vertical spacing amounts',
+      id: "vertical-sizes",
+      name: "Vertical sizes",
+      description: "Different vertical spacing amounts",
       code: {
         react: `<GoabText mt="none" mb="none">S space</GoabText>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -102,9 +102,9 @@ export const spacerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'horizontal',
-      name: 'Horizontal spacing',
-      description: 'Space between inline elements',
+      id: "horizontal",
+      name: "Horizontal spacing",
+      description: "Space between inline elements",
       code: {
         react: `<div style={{ display: 'flex', alignItems: 'center' }}>
   <GoabText mt="none" mb="none">Left</GoabText>

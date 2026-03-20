@@ -28,9 +28,7 @@ export interface GoabMenuActionProps extends DataAttributes {
 export function GoabMenuAction(props: GoabMenuActionProps): JSX.Element {
   const _props = transformProps<WCProps>(props, lowercase);
 
-  return (
-    <goa-menu-action {..._props}></goa-menu-action>
-  );
+  return <goa-menu-action {..._props}></goa-menu-action>;
 }
 
 export default GoabMenuAction;

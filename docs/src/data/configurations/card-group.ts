@@ -4,18 +4,18 @@
  * CardGroup arranges multiple cards in a grid.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const cardGroupConfigurations: ComponentConfigurations = {
-  componentSlug: 'card-group',
-  componentName: 'Card group',
-  defaultConfigurationId: 'basic',
+  componentSlug: "card-group",
+  componentName: "Card group",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic card group',
-      description: 'Grid of cards',
+      id: "basic",
+      name: "Basic card group",
+      description: "Grid of cards",
       code: {
         react: `<GoabCardGroup>
   <GoabCard>

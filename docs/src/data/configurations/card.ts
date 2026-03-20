@@ -4,18 +4,18 @@
  * Cards group related content and actions.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const cardConfigurations: ComponentConfigurations = {
-  componentSlug: 'card',
-  componentName: 'Card',
-  defaultConfigurationId: 'basic',
+  componentSlug: "card",
+  componentName: "Card",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic card',
-      description: 'Simple card with content',
+      id: "basic",
+      name: "Basic card",
+      description: "Simple card with content",
       code: {
         react: `<GoabCard>
   <h3>Card title</h3>
@@ -32,9 +32,9 @@ export const cardConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-elevation',
-      name: 'Elevation levels',
-      description: 'Cards with different shadow depths',
+      id: "with-elevation",
+      name: "Elevation levels",
+      description: "Cards with different shadow depths",
       code: {
         react: `<GoabCard elevation={0}>
   <p>Elevation 0 - No shadow</p>
@@ -66,9 +66,9 @@ export const cardConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-width',
-      name: 'Fixed width',
-      description: 'Card with specified width',
+      id: "with-width",
+      name: "Fixed width",
+      description: "Card with specified width",
       code: {
         react: `<GoabCard width="400px">
   <h3>Fixed width card</h3>
@@ -85,9 +85,9 @@ export const cardConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-structured-content',
-      name: 'Structured content',
-      description: 'Card using CardContent and CardActions',
+      id: "with-structured-content",
+      name: "Structured content",
+      description: "Card using CardContent and CardActions",
       code: {
         react: `<GoabCard>
   <GoabCardContent>
@@ -122,9 +122,9 @@ export const cardConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-image',
-      name: 'With image',
-      description: 'Card with image at the top',
+      id: "with-image",
+      name: "With image",
+      description: "Card with image at the top",
       code: {
         react: `<GoabCard>
   <GoabCardImage src="/images/service.jpg" alt="Service description" />

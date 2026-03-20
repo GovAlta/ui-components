@@ -18,16 +18,16 @@ import {
   selector: "goabx-work-side-notification-item", // eslint-disable-line
   template: `
     @if (isReady) {
-    <goa-work-side-notification-item
-      [attr.type]="type"
-      [attr.timestamp]="timestamp"
-      [attr.title]="title"
-      [attr.description]="description"
-      [attr.read-status]="readStatus"
-      [attr.priority]="priority"
-      [attr.testid]="testId"
-      (_click)="_onClick()"
-    />
+      <goa-work-side-notification-item
+        [attr.type]="type"
+        [attr.timestamp]="timestamp"
+        [attr.title]="title"
+        [attr.description]="description"
+        [attr.read-status]="readStatus"
+        [attr.priority]="priority"
+        [attr.testid]="testId"
+        (_click)="_onClick()"
+      />
     }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

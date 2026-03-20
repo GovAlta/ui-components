@@ -3,7 +3,8 @@ import {
   CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -53,7 +54,9 @@ export function GoabDatePicker({
 
   useEffect(() => {
     if (value && typeof value !== "string") {
-      console.warn("Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`")
+      console.warn(
+        "Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`",
+      );
     }
   }, []);
 

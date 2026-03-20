@@ -4,12 +4,16 @@ import { GoabxMenuAction } from "./menu-action";
 
 describe("GoabxMenuAction", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(<GoabxMenuAction text="Action" action="test-action" />);
+    const { baseElement } = render(
+      <GoabxMenuAction text="Action" action="test-action" />,
+    );
     expect(baseElement).toBeTruthy();
   });
 
   it("should render with required properties", () => {
-    const { container } = render(<GoabxMenuAction text="Test Action" action="test-action" />);
+    const { container } = render(
+      <GoabxMenuAction text="Test Action" action="test-action" />,
+    );
     const el = container.querySelector("goa-menu-action");
 
     expect(el?.getAttribute("text")).toBe("Test Action");
@@ -18,7 +22,7 @@ describe("GoabxMenuAction", () => {
 
   it("should render with icon", () => {
     const { container } = render(
-      <GoabxMenuAction text="Action with Icon" action="icon-action" icon="add" />
+      <GoabxMenuAction text="Action with Icon" action="icon-action" icon="add" />,
     );
     const el = container.querySelector("goa-menu-action");
 
@@ -29,7 +33,11 @@ describe("GoabxMenuAction", () => {
 
   it("should render with testId", () => {
     const { container } = render(
-      <GoabxMenuAction text="Testable Action" action="testable-action" testId="test-menu-action" />
+      <GoabxMenuAction
+        text="Testable Action"
+        action="testable-action"
+        testId="test-menu-action"
+      />,
     );
     const el = container.querySelector("goa-menu-action");
 
@@ -45,7 +53,7 @@ describe("GoabxMenuAction", () => {
         action="complete-action"
         icon="checkmark"
         testId="complete-test"
-      />
+      />,
     );
     const el = container.querySelector("goa-menu-action");
 

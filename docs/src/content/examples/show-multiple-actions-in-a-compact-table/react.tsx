@@ -3,7 +3,12 @@ import { GoabBlock, GoabIconButton } from "@abgov/react-components";
 
 export function ShowMultipleActionsInACompactTable() {
   const rows = [
-    { status: "information", statusText: "In progress", name: "Darlene Robertson", id: 45904 },
+    {
+      status: "information",
+      statusText: "In progress",
+      name: "Darlene Robertson",
+      id: 45904,
+    },
     { status: "dark", statusText: "Inactive", name: "Floyd Miles", id: 47838 },
     { status: "success", statusText: "Active", name: "Kathryn Murphy", id: 34343 },
     { status: "important", statusText: "Recent", name: "Annette Black", id: 89897 },

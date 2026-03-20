@@ -17,7 +17,9 @@ export function AskAUserForAnAddress() {
 
   return (
     <>
-      <GoabText size="heading-l" mt="none" mb="xl">What is your address?</GoabText>
+      <GoabText size="heading-l" mt="none" mb="xl">
+        What is your address?
+      </GoabText>
       <GoabxFormItem label="Street Address">
         <GoabxInput
           name="address"

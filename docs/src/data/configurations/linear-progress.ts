@@ -4,18 +4,18 @@
  * Linear progress bars show completion status.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const linearProgressConfigurations: ComponentConfigurations = {
-  componentSlug: 'linear-progress',
-  componentName: 'Linear progress',
-  defaultConfigurationId: 'basic',
+  componentSlug: "linear-progress",
+  componentName: "Linear progress",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic progress',
-      description: 'Simple linear progress bar',
+      id: "basic",
+      name: "Basic progress",
+      description: "Simple linear progress bar",
       code: {
         react: `<GoabLinearProgress progress={50} />`,
         angular: `<goab-linear-progress [progress]="50"></goab-linear-progress>`,
@@ -23,9 +23,9 @@ export const linearProgressConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'progress-levels',
-      name: 'Progress levels',
-      description: 'Different completion percentages',
+      id: "progress-levels",
+      name: "Progress levels",
+      description: "Different completion percentages",
       code: {
         react: `<GoabLinearProgress progress={0} />
 <GoabLinearProgress progress={25} />
@@ -45,9 +45,9 @@ export const linearProgressConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-label',
-      name: 'With label',
-      description: 'Progress bar showing percentage',
+      id: "with-label",
+      name: "With label",
+      description: "Progress bar showing percentage",
       code: {
         react: `<GoabLinearProgress progress={65} showLabel />`,
         angular: `<goab-linear-progress [progress]="65" [showLabel]="true"></goab-linear-progress>`,
@@ -55,9 +55,9 @@ export const linearProgressConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'variants',
-      name: 'Variants',
-      description: 'Different visual styles',
+      id: "variants",
+      name: "Variants",
+      description: "Different visual styles",
       code: {
         react: `<GoabLinearProgress progress={50} variant="fullscreen" />`,
         angular: `<goab-linear-progress [progress]="50" variant="fullscreen"></goab-linear-progress>`,

@@ -6,12 +6,9 @@ import { GoabFormState } from "@abgov/ui-components-common";
 describe("GoabPublicForm", () => {
   it("renders with all properties", () => {
     const { baseElement } = render(
-      <GoabPublicForm
-        status="complete"
-        name="testForm"
-      >
+      <GoabPublicForm status="complete" name="testForm">
         <div>Test content</div>
-      </GoabPublicForm>
+      </GoabPublicForm>,
     );
 
     const el = baseElement.querySelector("goa-public-form");
@@ -25,13 +22,13 @@ describe("GoabPublicForm", () => {
     const { baseElement } = render(
       <GoabPublicForm onInit={handleInit}>
         <div>Test content</div>
-      </GoabPublicForm>
+      </GoabPublicForm>,
     );
 
     const el = baseElement.querySelector("goa-public-form");
     const mockFormElement = document.createElement("form");
     const detail = {
-      el: mockFormElement
+      el: mockFormElement,
     };
     const event = new CustomEvent("_init", { detail });
     el?.dispatchEvent(event);
@@ -44,7 +41,7 @@ describe("GoabPublicForm", () => {
     const { baseElement } = render(
       <GoabPublicForm onComplete={handleComplete}>
         <div>Test content</div>
-      </GoabPublicForm>
+      </GoabPublicForm>,
     );
 
     const el = baseElement.querySelector("goa-public-form");
@@ -53,7 +50,7 @@ describe("GoabPublicForm", () => {
       form: {},
       history: [],
       editting: "",
-      status: "complete"
+      status: "complete",
     };
     const event = new CustomEvent("_complete", { detail: mockFormState });
     el?.dispatchEvent(event);
@@ -66,7 +63,7 @@ describe("GoabPublicForm", () => {
     const { baseElement } = render(
       <GoabPublicForm onStateChange={handleStateChange}>
         <div>Test content</div>
-      </GoabPublicForm>
+      </GoabPublicForm>,
     );
 
     const el = baseElement.querySelector("goa-public-form");
@@ -75,10 +72,10 @@ describe("GoabPublicForm", () => {
       form: {},
       history: [],
       editting: "",
-      status: "complete"
+      status: "complete",
     };
     const event = new CustomEvent("_stateChange", {
-      detail: { data: mockFormState }
+      detail: { data: mockFormState },
     });
     el?.dispatchEvent(event);
 
@@ -97,7 +94,7 @@ describe("GoabPublicForm", () => {
         onStateChange={handleStateChange}
       >
         <div>Test content</div>
-      </GoabPublicForm>
+      </GoabPublicForm>,
     );
 
     const el = baseElement.querySelector("goa-public-form");
@@ -106,7 +103,7 @@ describe("GoabPublicForm", () => {
     // After unmount, events should not trigger callbacks
     const mockFormElement = document.createElement("form");
     const initEvent = new CustomEvent("_init", {
-      detail: { el: mockFormElement }
+      detail: { el: mockFormElement },
     });
 
     const mockFormState: GoabFormState = {
@@ -114,15 +111,15 @@ describe("GoabPublicForm", () => {
       form: {},
       history: [],
       editting: "",
-      status: "complete"
+      status: "complete",
     };
 
     const completeEvent = new CustomEvent("_complete", {
-      detail: mockFormState
+      detail: mockFormState,
     });
 
     const stateChangeEvent = new CustomEvent("_stateChange", {
-      detail: { data: mockFormState }
+      detail: { data: mockFormState },
     });
 
     el?.dispatchEvent(initEvent);
@@ -136,12 +133,9 @@ describe("GoabPublicForm", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPublicForm
-        name="testForm"
-        data-grid="cell"
-      >
+      <GoabPublicForm name="testForm" data-grid="cell">
         <div>Test content</div>
-      </GoabPublicForm>
+      </GoabPublicForm>,
     );
     const el = baseElement.querySelector("goa-public-form");
     expect(el?.getAttribute("data-grid")).toBe("cell");

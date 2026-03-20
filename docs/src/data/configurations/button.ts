@@ -6,18 +6,18 @@
  * code snippets for all three frameworks.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const buttonConfigurations: ComponentConfigurations = {
-  componentSlug: 'button',
-  componentName: 'Button',
-  defaultConfigurationId: 'basic',
+  componentSlug: "button",
+  componentName: "Button",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Primary button',
-      description: 'Simple button with default styling',
+      id: "basic",
+      name: "Primary button",
+      description: "Simple button with default styling",
       code: {
         react: `<GoabxButton>Submit</GoabxButton>`,
         angular: `<goabx-button>Submit</goabx-button>`,
@@ -25,9 +25,9 @@ export const buttonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'variants',
-      name: 'Variants',
-      description: 'Primary, secondary, and tertiary button types',
+      id: "variants",
+      name: "Variants",
+      description: "Primary, secondary, and tertiary button types",
       code: {
         react: `<GoabxButton type="primary">Primary</GoabxButton>
 <GoabxButton type="secondary">Secondary</GoabxButton>
@@ -41,9 +41,9 @@ export const buttonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Normal and compact button sizes',
+      id: "sizes",
+      name: "Sizes",
+      description: "Normal and compact button sizes",
       code: {
         react: `<GoabxButton size="normal">Normal</GoabxButton>
 <GoabxButton size="compact">Compact</GoabxButton>`,
@@ -54,9 +54,9 @@ export const buttonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icons',
-      name: 'With icons',
-      description: 'Buttons with leading or trailing icons',
+      id: "with-icons",
+      name: "With icons",
+      description: "Buttons with leading or trailing icons",
       code: {
         react: `<GoabxButton leadingIcon="add">Add item</GoabxButton>
 <GoabxButton trailingIcon="arrow-forward">Next</GoabxButton>`,
@@ -67,9 +67,9 @@ export const buttonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'disabled',
-      name: 'Disabled',
-      description: 'Buttons in disabled state',
+      id: "disabled",
+      name: "Disabled",
+      description: "Buttons in disabled state",
       code: {
         react: `<GoabxButton disabled>Disabled primary</GoabxButton>
 <GoabxButton type="secondary" disabled>Disabled secondary</GoabxButton>`,
@@ -80,9 +80,9 @@ export const buttonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'destructive',
-      name: 'Destructive',
-      description: 'Buttons for destructive actions like delete',
+      id: "destructive",
+      name: "Destructive",
+      description: "Buttons for destructive actions like delete",
       code: {
         react: `<GoabxButton variant="destructive">Delete</GoabxButton>
 <GoabxButton variant="destructive" type="secondary">Cancel subscription</GoabxButton>`,
@@ -93,9 +93,9 @@ export const buttonConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'inverse',
-      name: 'Inverse',
-      description: 'Buttons for use on dark backgrounds',
+      id: "inverse",
+      name: "Inverse",
+      description: "Buttons for use on dark backgrounds",
       code: {
         react: `<GoabxButton variant="inverse">Learn more</GoabxButton>
 <GoabxButton variant="inverse" type="secondary">Contact us</GoabxButton>`,

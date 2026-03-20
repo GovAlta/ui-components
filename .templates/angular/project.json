@@ -15,10 +15,7 @@
         "browser": "apps/dev/angular/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/dev/angular/tsconfig.app.json",
-        "assets": [
-          "apps/dev/angular/src/favicon.ico",
-          "apps/dev/angular/src/assets"
-        ],
+        "assets": ["apps/dev/angular/src/favicon.ico", "apps/dev/angular/src/assets"],
         "styles": ["apps/dev/angular/src/styles.css"],
         "scripts": []
       },

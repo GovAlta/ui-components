@@ -4,18 +4,18 @@
  * Form wraps form elements with proper structure.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const formConfigurations: ComponentConfigurations = {
-  componentSlug: 'form',
-  componentName: 'Form',
-  defaultConfigurationId: 'basic',
+  componentSlug: "form",
+  componentName: "Form",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic form',
-      description: 'Simple form wrapper',
+      id: "basic",
+      name: "Basic form",
+      description: "Simple form wrapper",
       code: {
         react: `<GoabForm onSubmit={handleSubmit}>
   <GoabxFormItem label="Name" mb="l">

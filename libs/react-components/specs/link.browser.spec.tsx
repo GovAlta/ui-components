@@ -33,14 +33,14 @@ describe("Link", () => {
 
     await vi.waitFor(() => {
       expect(spy).toBeCalledWith("some-arg-value");
-    })
-  })
+    });
+  });
 
   it("should trigger the action with an args object", async () => {
     const Component = () => {
       return (
         <div data-testid={"container"}>
-          <GoabLink testId={"link"} action="some-action" actionArgs={{foo: "bar"}}>
+          <GoabLink testId={"link"} action="some-action" actionArgs={{ foo: "bar" }}>
             Some action
           </GoabLink>
         </div>
@@ -64,7 +64,7 @@ describe("Link", () => {
     // Result
 
     await vi.waitFor(() => {
-      expect(spy).toBeCalledWith({foo: "bar"});
-    })
-  })
-})
+      expect(spy).toBeCalledWith({ foo: "bar" });
+    });
+  });
+});

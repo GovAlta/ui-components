@@ -29,7 +29,12 @@ export function HideAndShowManySectionsOfInformation() {
 
   return (
     <>
-      <GoabxButton type="tertiary" size="compact" mb="m" onClick={() => expandOrCollapseAll()}>
+      <GoabxButton
+        type="tertiary"
+        size="compact"
+        mb="m"
+        onClick={() => expandOrCollapseAll()}
+      >
         {expandedAll ? "Hide all sections" : "Show all sections"}
       </GoabxButton>
 
@@ -48,8 +53,8 @@ export function HideAndShowManySectionsOfInformation() {
         headingSize="medium"
         onChange={(open) => updateAccordion(2, open)}
       >
-        You will need to verify your identity through our two factor
-        authentication in addition to the digital signature.
+        You will need to verify your identity through our two factor authentication in
+        addition to the digital signature.
       </GoabAccordion>
 
       <GoabAccordion
@@ -58,9 +63,9 @@ export function HideAndShowManySectionsOfInformation() {
         headingSize="medium"
         onChange={(open) => updateAccordion(3, open)}
       >
-        Yes, you can see the status of your application on the main service
-        dashboard when you login. You will receive updates and notifications in
-        your email as your request progresses.
+        Yes, you can see the status of your application on the main service dashboard when
+        you login. You will receive updates and notifications in your email as your
+        request progresses.
       </GoabAccordion>
 
       <GoabAccordion

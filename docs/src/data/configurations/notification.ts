@@ -4,18 +4,18 @@
  * Notifications display important messages at the page level.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const notificationConfigurations: ComponentConfigurations = {
-  componentSlug: 'notification',
-  componentName: 'Notification',
-  defaultConfigurationId: 'basic',
+  componentSlug: "notification",
+  componentName: "Notification",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Information notification',
-      description: 'Default informational notification',
+      id: "basic",
+      name: "Information notification",
+      description: "Default informational notification",
       code: {
         react: `<GoabxNotification type="information">
   Your application has been received and is being processed.
@@ -29,9 +29,9 @@ export const notificationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Notification types',
-      description: 'Different notification types for various contexts',
+      id: "types",
+      name: "Notification types",
+      description: "Different notification types for various contexts",
       code: {
         react: `<GoabxNotification type="information">
   Information: General updates for the user.
@@ -72,9 +72,9 @@ export const notificationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'dismissable',
-      name: 'Dismissable',
-      description: 'Notification that can be closed',
+      id: "dismissable",
+      name: "Dismissable",
+      description: "Notification that can be closed",
       code: {
         react: `<GoabxNotification type="information" onDismiss={() => setVisible(false)}>
   This notification can be dismissed by clicking the close button.
@@ -88,9 +88,9 @@ export const notificationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-max-width',
-      name: 'With max width',
-      description: 'Notification with constrained width',
+      id: "with-max-width",
+      name: "With max width",
+      description: "Notification with constrained width",
       code: {
         react: `<GoabxNotification type="information" maxWidth="600px">
   This notification has a maximum width for narrower layouts.

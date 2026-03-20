@@ -19,10 +19,7 @@
     {
       "name": "variant",
       "type": "\"default\" | \"segmented\"",
-      "values": [
-        "default",
-        "segmented"
-      ],
+      "values": ["default", "segmented"],
       "required": false,
       "default": "default",
       "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
@@ -30,10 +27,7 @@
     {
       "name": "orientation",
       "type": "\"auto\" | \"horizontal\"",
-      "values": [
-        "auto",
-        "horizontal"
-      ],
+      "values": ["auto", "horizontal"],
       "required": false,
       "default": "auto",
       "description": "Tab layout orientation. \"auto\" stacks vertically on mobile, \"horizontal\" keeps horizontal on all screen sizes."
@@ -44,17 +38,13 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

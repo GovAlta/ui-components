@@ -6,7 +6,12 @@
  * It also includes TypeScript interfaces for improved type checking and development experience.
  */
 
-import { DataAttributes, GoabButtonType, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabButtonType,
+  GoabIconType,
+  GoabMenuButtonOnActionDetail,
+} from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
 import { transformProps, kebab } from "../common/extract-props";
 
@@ -23,7 +28,7 @@ import { transformProps, kebab } from "../common/extract-props";
 interface WCProps {
   text: string;
   type: GoabButtonType;
-  "max-width"?: string,
+  "max-width"?: string;
   "leading-icon"?: GoabIconType;
   testid?: string;
   ref: React.RefObject<HTMLElement | null>;
@@ -96,10 +101,7 @@ export function GoabMenuButton({
 }: GoabMenuButtonProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { type, testid: testId, ...rest },
-    kebab
-  );
+  const _props = transformProps<WCProps>({ type, testid: testId, ...rest }, kebab);
 
   useEffect(() => {
     if (!el.current) {

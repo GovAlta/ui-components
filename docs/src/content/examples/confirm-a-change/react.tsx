@@ -33,12 +33,24 @@ export function ConfirmAChange() {
               Confirm
             </GoabxButton>
           </GoabButtonGroup>
-        }>
-        <GoabContainer type="non-interactive" accent="filled" padding="compact" width="full">
-          <GoabText as="h4" mt="none" mb="s">Before</GoabText>
+        }
+      >
+        <GoabContainer
+          type="non-interactive"
+          accent="filled"
+          padding="compact"
+          width="full"
+        >
+          <GoabText as="h4" mt="none" mb="s">
+            Before
+          </GoabText>
           <GoabText mt="none">123456 78 Ave NW, Edmonton, Alberta</GoabText>
-          <GoabText as="h4" mt="none" mb="s">After</GoabText>
-          <GoabText mt="none" mb="none">881 12 Ave NW, Edmonton, Alberta</GoabText>
+          <GoabText as="h4" mt="none" mb="s">
+            After
+          </GoabText>
+          <GoabText mt="none" mb="none">
+            881 12 Ave NW, Edmonton, Alberta
+          </GoabText>
         </GoabContainer>
         <GoabxFormItem label="Effective date" mt="l">
           <GoabxDatePicker

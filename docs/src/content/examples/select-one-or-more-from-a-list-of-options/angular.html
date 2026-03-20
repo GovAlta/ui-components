@@ -1,10 +1,12 @@
 <goabx-form-item
   label="How would you like to be contacted?"
-  helpText="Choose all that apply">
+  helpText="Choose all that apply"
+>
   <goab-checkbox-list
     name="contactPreferences"
     [value]="selectedOptions"
-    (onChange)="onSelectionChange($event)">
+    (onChange)="onSelectionChange($event)"
+  >
     <goabx-checkbox name="email" text="Email" value="email"></goabx-checkbox>
     <goabx-checkbox name="phone" text="Phone" value="phone"></goabx-checkbox>
     <goabx-checkbox name="text" text="Text message" value="text"></goabx-checkbox>

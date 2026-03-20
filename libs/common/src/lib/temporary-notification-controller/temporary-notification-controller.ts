@@ -17,7 +17,11 @@ export type GoabNotificationOptions = {
   visible: boolean;
 };
 
-const TypesRequiringDuration: GoabTemporaryNotificationType[] = ["basic", "success", "failure"];
+const TypesRequiringDuration: GoabTemporaryNotificationType[] = [
+  "basic",
+  "success",
+  "failure",
+];
 
 function show(message: string, opts?: Partial<GoabNotificationOptions>): string {
   const uuid = crypto.randomUUID();
@@ -39,9 +43,7 @@ function show(message: string, opts?: Partial<GoabNotificationOptions>): string 
 }
 
 function dismiss(uuid: string) {
-  relay(
-    document.body, "goa:temp-notification:dismiss", uuid, { bubbles: true }
-  );
+  relay(document.body, "goa:temp-notification:dismiss", uuid, { bubbles: true });
 }
 
 function setProgress(uuid: string, progress: number) {

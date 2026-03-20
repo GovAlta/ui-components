@@ -14,11 +14,7 @@
       "name": "direction",
       "type": "\"asc\" | \"desc\" | \"none\"",
       "typeLabel": "GoabTableSortDirection",
-      "values": [
-        "asc",
-        "desc",
-        "none"
-      ],
+      "values": ["asc", "desc", "none"],
       "required": false,
       "default": "none",
       "description": "Sets the sort direction indicator."

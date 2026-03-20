@@ -27,10 +27,7 @@
       "name": "variant",
       "type": "\"normal\" | \"relaxed\"",
       "typeLabel": "GoabTableVariant",
-      "values": [
-        "normal",
-        "relaxed"
-      ],
+      "values": ["normal", "relaxed"],
       "required": false,
       "default": "normal",
       "description": "A relaxed variant of the table with more vertical padding for the cells."
@@ -39,10 +36,7 @@
       "name": "sortMode",
       "type": "\"single\" | \"multi\"",
       "typeLabel": "GoabTableSortMode",
-      "values": [
-        "single",
-        "multi"
-      ],
+      "values": ["single", "multi"],
       "required": false,
       "default": "single",
       "description": "Sort mode: \"single\" allows one column, \"multi\" allows up to 2 columns."
@@ -92,33 +86,25 @@
       "name": "onSort",
       "type": "(detail: GoabTableOnSortDetail) => void",
       "description": "Called when sort state changes in single-sort mode. Receives { sortBy, sortDir }.",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_sort",
       "type": "CustomEvent",
       "description": "Dispatched when sort state changes in single-sort mode. Detail contains { sortBy, sortDir }.",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onMultiSort",
       "type": "(detail: GoabTableOnMultiSortDetail) => void",
       "description": "Called when sort state changes in multi-sort mode. Receives { sorts: GoabTableSortEntry[] }.",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_multisort",
       "type": "CustomEvent",
       "description": "Dispatched when sort state changes in multi-sort mode. Detail contains { sorts: GoabTableSortEntry[] }.",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

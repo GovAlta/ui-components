@@ -4,18 +4,18 @@
  * Icons provide visual cues and enhance comprehension.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const iconConfigurations: ComponentConfigurations = {
-  componentSlug: 'icon',
-  componentName: 'Icon',
-  defaultConfigurationId: 'basic',
+  componentSlug: "icon",
+  componentName: "Icon",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic icon',
-      description: 'Simple icon display',
+      id: "basic",
+      name: "Basic icon",
+      description: "Simple icon display",
       code: {
         react: `<GoabIcon type="information" />`,
         angular: `<goab-icon type="information"></goab-icon>`,
@@ -23,9 +23,9 @@ export const iconConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'common-icons',
-      name: 'Common icons',
-      description: 'Frequently used icons',
+      id: "common-icons",
+      name: "Common icons",
+      description: "Frequently used icons",
       code: {
         react: `<GoabIcon type="checkmark" />
 <GoabIcon type="close" />
@@ -54,9 +54,9 @@ export const iconConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Different icon sizes (1-6)',
+      id: "sizes",
+      name: "Sizes",
+      description: "Different icon sizes (1-6)",
       code: {
         react: `<GoabIcon type="information" size="1" />
 <GoabIcon type="information" size="2" />
@@ -79,9 +79,9 @@ export const iconConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'themes',
-      name: 'Themes',
-      description: 'Outline and filled icon styles',
+      id: "themes",
+      name: "Themes",
+      description: "Outline and filled icon styles",
       code: {
         react: `<GoabIcon type="checkmark-circle" theme="outline" />
 <GoabIcon type="checkmark-circle" theme="filled" />`,
@@ -92,9 +92,9 @@ export const iconConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-color',
-      name: 'With color',
-      description: 'Icons with custom colors',
+      id: "with-color",
+      name: "With color",
+      description: "Icons with custom colors",
       code: {
         react: `<GoabIcon type="checkmark-circle" fillColor="#00853F" />
 <GoabIcon type="warning" fillColor="#FCBA19" />

@@ -8,8 +8,8 @@ export function HeroBannerWithActions() {
 
   return (
     <GoabHeroBanner heading="Supporting Businesses">
-      Resources are available to help Alberta entrepreneurs and small businesses
-      start, grow and succeed.
+      Resources are available to help Alberta entrepreneurs and small businesses start,
+      grow and succeed.
       <GoabHeroBannerActions>
         <GoabxButton type="start" onClick={handleClick}>
           Call to action

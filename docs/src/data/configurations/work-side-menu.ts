@@ -123,9 +123,9 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-notifications',
-      name: 'With notifications',
-      description: 'Work menu with notification popover panel',
+      id: "with-notifications",
+      name: "With notifications",
+      description: "Work menu with notification popover panel",
       code: {
         react: `<GoabxWorkSideMenu
   heading="My Application"

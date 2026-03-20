@@ -14,15 +14,15 @@ import {
   selector: "goabx-work-side-notification-panel", // eslint-disable-line
   template: `
     @if (isReady) {
-    <goa-work-side-notification-panel
-      [attr.heading]="heading"
-      [attr.active-tab]="activeTab"
-      [attr.testid]="testId"
-      (_markAllRead)="_onMarkAllRead()"
-      (_viewAll)="_onViewAll()"
-    >
-      <ng-content />
-    </goa-work-side-notification-panel>
+      <goa-work-side-notification-panel
+        [attr.heading]="heading"
+        [attr.active-tab]="activeTab"
+        [attr.testid]="testId"
+        (_markAllRead)="_onMarkAllRead()"
+        (_viewAll)="_onViewAll()"
+      >
+        <ng-content />
+      </goa-work-side-notification-panel>
     }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

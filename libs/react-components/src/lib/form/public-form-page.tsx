@@ -2,7 +2,8 @@ import { ReactNode, useEffect, useRef } from "react";
 import {
   GoabPublicFormPageButtonVisibility,
   GoabPublicFormPageStep,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, kebab } from "../common/extract-props";
 
@@ -22,9 +23,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-public-form-page": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }

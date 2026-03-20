@@ -32,13 +32,7 @@ describe("Block", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    const { container } = render(
-      <GoabBlock
-        data-grid="cell"
-      >
-        Content
-      </GoabBlock>,
-    );
+    const { container } = render(<GoabBlock data-grid="cell">Content</GoabBlock>);
     const el = container.querySelector("goa-block");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });

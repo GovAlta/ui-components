@@ -2,7 +2,8 @@ import {
   GoabDropdownOnChangeDetail,
   GoabDropdownSize,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../../lib/common/extract-props";
@@ -35,9 +36,10 @@ declare module "react" {
   namespace JSX {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface IntrinsicElements {
-      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-dropdown": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }

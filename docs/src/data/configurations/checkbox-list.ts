@@ -4,18 +4,18 @@
  * Checkbox list groups multiple checkboxes together.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const checkboxListConfigurations: ComponentConfigurations = {
-  componentSlug: 'checkbox-list',
-  componentName: 'Checkbox list',
-  defaultConfigurationId: 'basic',
+  componentSlug: "checkbox-list",
+  componentName: "Checkbox list",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic checkbox list',
-      description: 'Group of related checkboxes',
+      id: "basic",
+      name: "Basic checkbox list",
+      description: "Group of related checkboxes",
       code: {
         react: `<GoabxFormItem label="Select interests" mb="l">
   <GoabxCheckbox name="sports" text="Sports" />
@@ -38,9 +38,9 @@ export const checkboxListConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-select-all',
-      name: 'With select all',
-      description: 'Checkbox list with select all option',
+      id: "with-select-all",
+      name: "With select all",
+      description: "Checkbox list with select all option",
       code: {
         react: `<GoabxCheckbox name="selectAll" text="Select all" indeterminate={someSelected} checked={allSelected} />
 <GoabxCheckbox name="option1" text="Option 1" checked={selected.includes('option1')} />
@@ -57,9 +57,9 @@ export const checkboxListConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-error',
-      name: 'With error',
-      description: 'Checkbox list showing validation error',
+      id: "with-error",
+      name: "With error",
+      description: "Checkbox list showing validation error",
       code: {
         react: `<GoabxFormItem label="Select at least one" error="Please select at least one option" mb="l">
   <GoabxCheckbox name="opt1" text="Option 1" error />

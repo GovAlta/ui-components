@@ -1,8 +1,4 @@
-import {
-  GoabAppHeader,
-  GoabAppHeaderMenu,
-  GoabPageBlock,
-} from "@abgov/react-components";
+import { GoabAppHeader, GoabAppHeaderMenu, GoabPageBlock } from "@abgov/react-components";
 
 export function Bug3322Route() {
   return (
@@ -18,7 +14,9 @@ export function Bug3322Route() {
             <a href="#">Outstanding</a>
           </GoabAppHeaderMenu>
           <a href="#">Support</a>
-          <a href="#" className="interactive">Sign in</a>
+          <a href="#" className="interactive">
+            Sign in
+          </a>
         </GoabAppHeader>
       </GoabPageBlock>
     </>

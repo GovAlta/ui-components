@@ -6,11 +6,7 @@
       "name": "alignment",
       "type": "\"start\" | \"end\" | \"center\"",
       "typeLabel": "GoabButtonGroupButtonAlignment",
-      "values": [
-        "start",
-        "end",
-        "center"
-      ],
+      "values": ["start", "end", "center"],
       "required": false,
       "default": "start",
       "description": "Positions the button group in the page layout."
@@ -19,10 +15,7 @@
       "name": "gap",
       "type": "\"relaxed\" | \"compact\"",
       "typeLabel": "GoabButtonGroupGap",
-      "values": [
-        "relaxed",
-        "compact"
-      ],
+      "values": ["relaxed", "compact"],
       "required": false,
       "default": "relaxed",
       "description": "Sets the spacing between buttons in the button group."

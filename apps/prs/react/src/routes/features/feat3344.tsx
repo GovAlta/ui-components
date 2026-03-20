@@ -10,11 +10,7 @@
  */
 
 import { useEffect, useMemo, useState } from "react";
-import {
-  GoabBlock,
-  GoabDivider,
-  GoabDetails,
-} from "@abgov/react-components";
+import { GoabBlock, GoabDivider, GoabDetails } from "@abgov/react-components";
 // ?url suffix tells Vite to resolve the path without injecting the CSS
 import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 import { GoabxTable, GoabxTableSortHeader } from "@abgov/react-components/experimental";
@@ -79,15 +75,21 @@ export function Feat3344Route() {
       <GoabBlock>
         <GoabDetails heading="Changes in this PR">
           <p>
-            <strong>TableSortHeader:</strong><br />
-            - Always-visible sort icon (chevron-expand when unsorted)<br />
-            - Arrow-up/arrow-down for sorted states<br />
-            - sortOrder prop shows "1", "2" for multi-column sort<br />
+            <strong>TableSortHeader:</strong>
             <br />
-            <strong>Table:</strong><br />
-            - sortMode="single" (default) or "multi" (up to 2 columns)<br />
-            - Initial sort declared on headers via direction + sortOrder<br />
-            - onSort callback with sortBy, sortDir, and sorts array
+            - Always-visible sort icon (chevron-expand when unsorted)
+            <br />
+            - Arrow-up/arrow-down for sorted states
+            <br />
+            - sortOrder prop shows "1", "2" for multi-column sort
+            <br />
+            <br />
+            <strong>Table:</strong>
+            <br />
+            - sortMode="single" (default) or "multi" (up to 2 columns)
+            <br />
+            - Initial sort declared on headers via direction + sortOrder
+            <br />- onSort callback with sortBy, sortDir, and sorts array
           </p>
         </GoabDetails>
       </GoabBlock>
@@ -95,10 +97,21 @@ export function Feat3344Route() {
       <GoabDivider mt="l" mb="l" />
 
       <h2>Test 1: Single-Column Sort (Default)</h2>
-      <p>Click column headers to sort. Only one column sorts at a time (default behavior).</p>
-      <p><small>Current sort: {formatSorts(currentSorts)}</small></p>
+      <p>
+        Click column headers to sort. Only one column sorts at a time (default behavior).
+      </p>
+      <p>
+        <small>Current sort: {formatSorts(currentSorts)}</small>
+      </p>
 
-      <GoabxTable mt="m" onSort={(detail) => setCurrentSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }])}>
+      <GoabxTable
+        mt="m"
+        onSort={(detail) =>
+          setCurrentSorts([
+            { column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" },
+          ])
+        }
+      >
         <thead>
           <tr>
             <th>
@@ -127,9 +140,15 @@ export function Feat3344Route() {
 
       <h2>Test 2: Multi-Column Sort</h2>
       <p>With sortMode="multi", click columns to add them to sort order (up to 2).</p>
-      <p><small>Current sort: {formatSorts(multiSorts)}</small></p>
+      <p>
+        <small>Current sort: {formatSorts(multiSorts)}</small>
+      </p>
 
-      <GoabxTable mt="m" sortMode="multi" onMultiSort={(detail) => setMultiSorts(detail.sorts)}>
+      <GoabxTable
+        mt="m"
+        sortMode="multi"
+        onMultiSort={(detail) => setMultiSorts(detail.sorts)}
+      >
         <thead>
           <tr>
             <th>
@@ -157,9 +176,13 @@ export function Feat3344Route() {
       <GoabDivider mt="l" mb="l" />
 
       <h2>Test 3: Multi Initial Sort (declarative)</h2>
-      <p>Two initial sorts declared on headers: Department ascending (primary), Salary
-        descending (secondary). Use direction + sortOrder on each header to set priority.</p>
-      <p><small>Current sort: {formatSorts(test3Sorts)}</small></p>
+      <p>
+        Two initial sorts declared on headers: Department ascending (primary), Salary
+        descending (secondary). Use direction + sortOrder on each header to set priority.
+      </p>
+      <p>
+        <small>Current sort: {formatSorts(test3Sorts)}</small>
+      </p>
 
       <GoabxTable
         mt="m"

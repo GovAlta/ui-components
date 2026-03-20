@@ -3,22 +3,30 @@
     <goab-text size="heading-m" mt="none" mb="m">Appearance details</goab-text>
     <goab-grid minChildWidth="200px" gap="m">
       <goab-block direction="column" gap="xs">
-        <goab-text size="body-s" color="secondary" mt="none" mb="none">Accused name</goab-text>
+        <goab-text size="body-s" color="secondary" mt="none" mb="none"
+          >Accused name</goab-text
+        >
         <goab-text size="body-m" mt="none" mb="none">Doe, John Scott</goab-text>
       </goab-block>
 
       <goab-block direction="column" gap="xs">
-        <goab-text size="body-s" color="secondary" mt="none" mb="none">Date of birth</goab-text>
+        <goab-text size="body-s" color="secondary" mt="none" mb="none"
+          >Date of birth</goab-text
+        >
         <goab-text size="body-m" mt="none" mb="none">Mar 14, 2021</goab-text>
       </goab-block>
 
       <goab-block direction="column" gap="xs">
-        <goab-text size="body-s" color="secondary" mt="none" mb="none">Court location</goab-text>
+        <goab-text size="body-s" color="secondary" mt="none" mb="none"
+          >Court location</goab-text
+        >
         <goab-text size="body-m" mt="none" mb="none">Calgary</goab-text>
       </goab-block>
 
       <goab-block direction="column" gap="xs">
-        <goab-text size="body-s" color="secondary" mt="none" mb="none">Upcoming appearance date(s)</goab-text>
+        <goab-text size="body-s" color="secondary" mt="none" mb="none"
+          >Upcoming appearance date(s)</goab-text
+        >
         <goab-text size="body-m" mt="none" mb="none">Sep 20, 2021</goab-text>
       </goab-block>
     </goab-grid>
@@ -26,14 +34,22 @@
     <goab-text size="heading-xs" mt="l" mb="s">Docket number(s) &amp; charges</goab-text>
     <goab-container type="non-interactive" padding="compact">
       <goab-text size="heading-xs" mt="none" mb="xs">1) 12345678</goab-text>
-      <goab-text size="body-m" mt="none" mb="none">CC 334(1) - Theft under $5000</goab-text>
-      <goab-text size="body-m" mt="none" mb="none">CC 268(1) - Aggravated assault</goab-text>
+      <goab-text size="body-m" mt="none" mb="none"
+        >CC 334(1) - Theft under $5000</goab-text
+      >
+      <goab-text size="body-m" mt="none" mb="none"
+        >CC 268(1) - Aggravated assault</goab-text
+      >
     </goab-container>
 
     <goab-container type="non-interactive" padding="compact">
       <goab-text size="heading-xs" mt="none" mb="xs">2) 12345678</goab-text>
-      <goab-text size="body-m" mt="none" mb="none">CC 334(1) - Theft under $5000</goab-text>
-      <goab-text size="body-m" mt="none" mb="none">CC 268(1) - Aggravated assault</goab-text>
+      <goab-text size="body-m" mt="none" mb="none"
+        >CC 334(1) - Theft under $5000</goab-text
+      >
+      <goab-text size="body-m" mt="none" mb="none"
+        >CC 268(1) - Aggravated assault</goab-text
+      >
     </goab-container>
   </goab-container>
 
@@ -41,8 +57,8 @@
     <form [formGroup]="form">
       <goab-text size="heading-m" mt="none" mb="m">Adjournment request</goab-text>
       <goab-text size="body-m" mt="none" mb="none">
-        Keep track of the individuals who are placed in lodges and may qualify for the Lodge
-        Assistance Program subsidy.
+        Keep track of the individuals who are placed in lodges and may qualify for the
+        Lodge Assistance Program subsidy.
       </goab-text>
 
       <goabx-form-item label="Case history and new request" mt="l">
@@ -54,14 +70,28 @@
 
       <goabx-form-item label="Reason to deny" mt="l">
         <goabx-dropdown name="reason" width="100%" formControlName="reason">
-          <goabx-dropdown-item value="1" label="Incomplete Application"></goabx-dropdown-item>
-          <goabx-dropdown-item value="2" label="Eligibility Criteria Not Met"></goabx-dropdown-item>
-          <goabx-dropdown-item value="3" label="Documentation Verification Failure"></goabx-dropdown-item>
+          <goabx-dropdown-item
+            value="1"
+            label="Incomplete Application"
+          ></goabx-dropdown-item>
+          <goabx-dropdown-item
+            value="2"
+            label="Eligibility Criteria Not Met"
+          ></goabx-dropdown-item>
+          <goabx-dropdown-item
+            value="3"
+            label="Documentation Verification Failure"
+          ></goabx-dropdown-item>
         </goabx-dropdown>
       </goabx-form-item>
 
       <goabx-form-item label="Message" mt="l">
-        <goabx-textarea name="message" [rows]="5" width="100%" formControlName="message"></goabx-textarea>
+        <goabx-textarea
+          name="message"
+          [rows]="5"
+          width="100%"
+          formControlName="message"
+        ></goabx-textarea>
       </goabx-form-item>
 
       <goabx-button mt="xl" (onClick)="onClick()">Confirm adjournment</goabx-button>

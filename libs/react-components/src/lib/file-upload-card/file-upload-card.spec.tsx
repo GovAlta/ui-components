@@ -5,9 +5,7 @@ import FileUploadCard from "./file-upload-card";
 
 describe("FileUploadCard", () => {
   it("should render with base params", () => {
-    const { container } = render(
-      <FileUploadCard filename="foo.png" size={1e3} />
-    );
+    const { container } = render(<FileUploadCard filename="foo.png" size={1e3} />);
 
     const el = container.querySelector("goa-file-upload-card");
     expect(el?.getAttribute("filename")).toBe("foo.png");
@@ -23,7 +21,7 @@ describe("FileUploadCard", () => {
         progress={23}
         error="true"
         testId="foo"
-      />
+      />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -38,12 +36,7 @@ describe("FileUploadCard", () => {
   it("dispatches and event when cancel is clicked while uploading", () => {
     const onCancel = vi.fn();
     const { container } = render(
-      <FileUploadCard
-        filename="foo.png"
-        size={1e3}
-        onCancel={onCancel}
-        progress={23}
-      />
+      <FileUploadCard filename="foo.png" size={1e3} onCancel={onCancel} progress={23} />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -55,12 +48,7 @@ describe("FileUploadCard", () => {
   it("dispatches and event when delete is clicked and upload is complete", () => {
     const onDelete = vi.fn();
     const { container } = render(
-      <FileUploadCard
-        filename="foo.png"
-        size={1e3}
-        onDelete={onDelete}
-        progress={100}
-      />
+      <FileUploadCard filename="foo.png" size={1e3} onDelete={onDelete} progress={100} />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -72,12 +60,7 @@ describe("FileUploadCard", () => {
   it("dispatches and event when an error occurs", () => {
     const onDelete = vi.fn();
     const { container } = render(
-      <FileUploadCard
-        filename="foo.png"
-        size={1e3}
-        onDelete={onDelete}
-        error="fail"
-      />
+      <FileUploadCard filename="foo.png" size={1e3} onDelete={onDelete} error="fail" />,
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -107,14 +90,9 @@ describe("FileUploadCard", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <FileUploadCard
-        filename="test.pdf"
-        size={1000}
-        data-grid="cell"
-      />
+      <FileUploadCard filename="test.pdf" size={1000} data-grid="cell" />,
     );
     const el = container.querySelector("goa-file-upload-card");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
-
 });

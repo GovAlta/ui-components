@@ -3,7 +3,7 @@ import { TemporaryNotification } from "@abgov/ui-components-common";
 
 @Component({
   selector: "app-show-a-notification-with-an-action",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class ShowANotificationWithAnActionComponent {
   comment(): void {
@@ -13,8 +13,8 @@ export class ShowANotificationWithAnActionComponent {
         actionText: "View",
         action: () => {
           TemporaryNotification.dismiss(uuid);
-        }
-      }
+        },
+      },
     );
   }
 }

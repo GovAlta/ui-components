@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-show-a-list-to-help-answer-a-question",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class ShowAListToHelpAnswerAQuestionComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      additional: [""]
+      additional: [""],
     });
   }
 

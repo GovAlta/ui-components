@@ -1,7 +1,8 @@
 import {
   GoabButtonGroupAlignment,
   GoabButtonGroupGap,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
@@ -35,11 +36,7 @@ export function GoabButtonGroup({
 }: GoabButtonGroupProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-button-group {..._props}>
-      {children}
-    </goa-button-group>
-  );
+  return <goa-button-group {..._props}>{children}</goa-button-group>;
 }
 
 export default GoabButtonGroup;

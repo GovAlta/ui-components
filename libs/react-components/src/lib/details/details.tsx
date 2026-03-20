@@ -27,18 +27,11 @@ export interface GoabDetailsProps extends Margins, DataAttributes {
   children: ReactNode;
 }
 
-export function GoabDetails({
-  open,
-  children,
-  ...rest
-}: GoabDetailsProps) {
+export function GoabDetails({ open, children, ...rest }: GoabDetailsProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (
-    <goa-details
-      open={open ? "true" : undefined}
-      {..._props}
-    >
+    <goa-details open={open ? "true" : undefined} {..._props}>
       {children}
     </goa-details>
   );

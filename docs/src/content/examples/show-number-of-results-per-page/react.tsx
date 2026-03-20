@@ -23,8 +23,50 @@ export function ShowNumberOfResultsPerPage() {
 
   useEffect(() => {
     // Generate sample data
-    const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver", "Mia", "Benjamin", "Charlotte", "Elijah", "Amelia", "Lucas", "Harper", "Mason", "Evelyn", "Logan"];
-    const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Wilson", "Anderson", "Taylor", "Thomas", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White"];
+    const firstNames = [
+      "Emma",
+      "Liam",
+      "Olivia",
+      "Noah",
+      "Ava",
+      "James",
+      "Sophia",
+      "William",
+      "Isabella",
+      "Oliver",
+      "Mia",
+      "Benjamin",
+      "Charlotte",
+      "Elijah",
+      "Amelia",
+      "Lucas",
+      "Harper",
+      "Mason",
+      "Evelyn",
+      "Logan",
+    ];
+    const lastNames = [
+      "Smith",
+      "Johnson",
+      "Williams",
+      "Brown",
+      "Jones",
+      "Garcia",
+      "Miller",
+      "Davis",
+      "Rodriguez",
+      "Martinez",
+      "Wilson",
+      "Anderson",
+      "Taylor",
+      "Thomas",
+      "Moore",
+      "Jackson",
+      "Martin",
+      "Lee",
+      "Thompson",
+      "White",
+    ];
     const _users: User[] = [];
     for (let i = 1; i <= 100; i++) {
       _users.push({

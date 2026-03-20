@@ -4,18 +4,18 @@
  * FileUploadCard displays uploaded file information.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const fileUploadCardConfigurations: ComponentConfigurations = {
-  componentSlug: 'file-upload-card',
-  componentName: 'File upload card',
-  defaultConfigurationId: 'basic',
+  componentSlug: "file-upload-card",
+  componentName: "File upload card",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic file upload card',
-      description: 'Card showing uploaded file',
+      id: "basic",
+      name: "Basic file upload card",
+      description: "Card showing uploaded file",
       code: {
         react: `<GoabxFileUploadCard
   filename="document.pdf"
@@ -34,9 +34,9 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-progress',
-      name: 'With upload progress',
-      description: 'Card showing upload in progress',
+      id: "with-progress",
+      name: "With upload progress",
+      description: "Card showing upload in progress",
       code: {
         react: `<GoabxFileUploadCard
   filename="image.png"
@@ -56,9 +56,9 @@ export const fileUploadCardConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-error',
-      name: 'Error state',
-      description: 'Card showing upload error',
+      id: "with-error",
+      name: "Error state",
+      description: "Card showing upload error",
       code: {
         react: `<GoabxFileUploadCard
   filename="large-file.zip"

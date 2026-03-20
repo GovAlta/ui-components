@@ -201,11 +201,7 @@ describe("Input", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabInputText
-        name="test"
-        onChange={noop}
-        data-grid="cell"
-      />
+      <GoabInputText name="test" onChange={noop} data-grid="cell" />,
     );
     const el = container.querySelector("goa-input");
     expect(el?.getAttribute("data-grid")).toBe("cell");

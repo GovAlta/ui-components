@@ -3,7 +3,9 @@ import { describe, it, expect, vi } from "vitest";
 
 import GoabxFileUploadInput from "./file-upload-input";
 
-const noop = () => { /* do nothing */ };
+const noop = () => {
+  /* do nothing */
+};
 
 describe("GoabxFileUploadInput", () => {
   it("should render successfully", () => {
@@ -14,7 +16,7 @@ describe("GoabxFileUploadInput", () => {
         accept="image/*"
         variant="dragdrop"
         testId="foo"
-      />
+      />,
     );
     const el = baseElement.querySelector("goa-file-upload-input");
 
@@ -35,10 +37,7 @@ describe("GoabxFileUploadInput", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabxFileUploadInput
-        onSelectFile={noop}
-        data-grid="cell"
-      />
+      <GoabxFileUploadInput onSelectFile={noop} data-grid="cell" />,
     );
     const el = baseElement.querySelector("goa-file-upload-input");
     expect(el?.getAttribute("data-grid")).toBe("cell");

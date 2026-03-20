@@ -59,8 +59,8 @@ export function FeatV2CheckboxRoute() {
               default bottom margin, fixing alignment in tables
             </GoabText>
             <GoabText size="body-s">
-              2. <strong>CheckboxList gap</strong> - CheckboxList now controls its own spacing
-              between items using gap: var(--goa-space-m)
+              2. <strong>CheckboxList gap</strong> - CheckboxList now controls its own
+              spacing between items using gap: var(--goa-space-m)
             </GoabText>
           </GoabBlock>
 
@@ -71,8 +71,8 @@ export function FeatV2CheckboxRoute() {
             Test 1: Checkbox in Table
           </GoabText>
           <GoabText size="body-s" mb="m">
-            Previously, checkboxes in tables had unwanted bottom margin causing misalignment.
-            Now they align properly with the row content.
+            Previously, checkboxes in tables had unwanted bottom margin causing
+            misalignment. Now they align properly with the row content.
           </GoabText>
 
           <goa-table width="100%">
@@ -82,10 +82,12 @@ export function FeatV2CheckboxRoute() {
                   <GoabxCheckbox
                     name="select-all"
                     checked={selectedRows.size === tableData.length}
-                    indeterminate={selectedRows.size > 0 && selectedRows.size < tableData.length}
+                    indeterminate={
+                      selectedRows.size > 0 && selectedRows.size < tableData.length
+                    }
                     onChange={(detail: GoabCheckboxOnChangeDetail) => {
                       if (detail.checked) {
-                        setSelectedRows(new Set(tableData.map(row => row.id)));
+                        setSelectedRows(new Set(tableData.map((row) => row.id)));
                       } else {
                         setSelectedRows(new Set());
                       }
@@ -105,7 +107,9 @@ export function FeatV2CheckboxRoute() {
                     <GoabxCheckbox
                       name={`select-${row.id}`}
                       checked={selectedRows.has(row.id)}
-                      onChange={(detail: GoabCheckboxOnChangeDetail) => handleRowSelect(row.id, detail)}
+                      onChange={(detail: GoabCheckboxOnChangeDetail) =>
+                        handleRowSelect(row.id, detail)
+                      }
                       ariaLabel={`Select ${row.name}`}
                     />
                   </td>
@@ -128,14 +132,16 @@ export function FeatV2CheckboxRoute() {
             Test 2: CheckboxList Spacing
           </GoabText>
           <GoabText size="body-s" mb="m">
-            CheckboxList now uses gap: var(--goa-space-m) for consistent spacing between items.
-            Previously relied on individual checkbox margins.
+            CheckboxList now uses gap: var(--goa-space-m) for consistent spacing between
+            items. Previously relied on individual checkbox margins.
           </GoabText>
 
           <GoabxCheckboxList
             name="preferences"
             value={checkboxListValue}
-            onChange={(detail: GoabCheckboxListOnChangeDetail) => setCheckboxListValue(detail.value)}
+            onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+              setCheckboxListValue(detail.value)
+            }
           >
             <GoabxCheckbox name="option1" text="Option 1: Email notifications" />
             <GoabxCheckbox name="option2" text="Option 2: SMS notifications" />
@@ -159,7 +165,9 @@ export function FeatV2CheckboxRoute() {
           <GoabxCheckboxList
             name="with-descriptions"
             value={descListValue}
-            onChange={(detail: GoabCheckboxListOnChangeDetail) => setDescListValue(detail.value)}
+            onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+              setDescListValue(detail.value)
+            }
           >
             <GoabxCheckbox
               name="desc1"
@@ -191,7 +199,9 @@ export function FeatV2CheckboxRoute() {
           <GoabCheckboxList
             name="v1-with-descriptions"
             value={v1DescListValue}
-            onChange={(detail: GoabCheckboxListOnChangeDetail) => setV1DescListValue(detail.value)}
+            onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+              setV1DescListValue(detail.value)
+            }
           >
             <GoabCheckbox
               name="v1desc1"
@@ -224,7 +234,9 @@ export function FeatV2CheckboxRoute() {
             name="compact-prefs"
             size="compact"
             value={v2CompactListValue}
-            onChange={(detail: GoabCheckboxListOnChangeDetail) => setV2CompactListValue(detail.value)}
+            onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+              setV2CompactListValue(detail.value)
+            }
           >
             <GoabxCheckbox
               name="compact1"
@@ -257,8 +269,8 @@ export function FeatV2CheckboxRoute() {
             Test 4: V2 Standalone Checkbox (No Auto-Margin)
           </GoabText>
           <GoabText size="body-s" mb="m">
-            V2 checkboxes no longer have default bottom margin.
-            Spacing should be controlled by the parent layout.
+            V2 checkboxes no longer have default bottom margin. Spacing should be
+            controlled by the parent layout.
           </GoabText>
 
           <GoabBlock direction="row" gap="xl" alignment="center">
@@ -268,7 +280,8 @@ export function FeatV2CheckboxRoute() {
           </GoabBlock>
 
           <GoabText size="body-xs" mt="m">
-            Notice: No extra margin between checkboxes - spacing controlled by GoabBlock gap.
+            Notice: No extra margin between checkboxes - spacing controlled by GoabBlock
+            gap.
           </GoabText>
 
           <GoabDivider mt="xl" />
@@ -278,7 +291,8 @@ export function FeatV2CheckboxRoute() {
             V1 Regression Tests
           </GoabText>
           <GoabText size="body-s" mb="m">
-            These tests verify V1 checkboxes still behave correctly after the V2 spacing changes.
+            These tests verify V1 checkboxes still behave correctly after the V2 spacing
+            changes.
           </GoabText>
 
           {/* Test Case 5: V1 Standalone Checkboxes */}
@@ -290,8 +304,14 @@ export function FeatV2CheckboxRoute() {
           </GoabText>
 
           <div style={{ border: "1px dashed #ccc", padding: "1rem" }}>
-            <GoabCheckbox name="v1-standalone1" text="V1 Default - should have margin-bottom: space-m" />
-            <GoabCheckbox name="v1-standalone2" text="V1 Default - should have margin-bottom: space-m" />
+            <GoabCheckbox
+              name="v1-standalone1"
+              text="V1 Default - should have margin-bottom: space-m"
+            />
+            <GoabCheckbox
+              name="v1-standalone2"
+              text="V1 Default - should have margin-bottom: space-m"
+            />
           </div>
 
           <GoabDivider mt="xl" />
@@ -301,13 +321,16 @@ export function FeatV2CheckboxRoute() {
             Test 6: V1 CheckboxList (No Gap Change)
           </GoabText>
           <GoabText size="body-s" mb="m">
-            V1 checkbox lists should look the same as before - individual checkbox margins control spacing, list gap is 0.
+            V1 checkbox lists should look the same as before - individual checkbox margins
+            control spacing, list gap is 0.
           </GoabText>
 
           <GoabCheckboxList
             name="v1-list"
             value={v1ListValue}
-            onChange={(detail: GoabCheckboxListOnChangeDetail) => setV1ListValue(detail.value)}
+            onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+              setV1ListValue(detail.value)
+            }
           >
             <GoabCheckbox name="v1opt1" text="V1 list option 1" />
             <GoabCheckbox name="v1opt2" text="V1 list option 2" />

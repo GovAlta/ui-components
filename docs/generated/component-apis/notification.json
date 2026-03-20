@@ -6,12 +6,7 @@
       "name": "type",
       "type": "\"emergency\" | \"important\" | \"information\" | \"event\"",
       "typeLabel": "GoabNotificationType",
-      "values": [
-        "emergency",
-        "important",
-        "information",
-        "event"
-      ],
+      "values": ["emergency", "important", "information", "event"],
       "required": false,
       "default": "",
       "description": "Define the context and colour of the notification."
@@ -27,11 +22,7 @@
       "name": "arialive",
       "type": "\"assertive\" | \"off\" | \"polite\"",
       "typeLabel": "GoabNotificationAriaLiveType",
-      "values": [
-        "assertive",
-        "off",
-        "polite"
-      ],
+      "values": ["assertive", "off", "polite"],
       "required": false,
       "default": "polite",
       "description": "Indicates how assistive technology should handle updates to the live region."
@@ -47,10 +38,7 @@
       "name": "emphasis",
       "type": "\"high\" | \"low\"",
       "typeLabel": "GoabNotificationEmphasisType",
-      "values": [
-        "high",
-        "low"
-      ],
+      "values": ["high", "low"],
       "required": false,
       "default": "high",
       "description": "Sets the visual prominence. 'high' for full background, 'filled' for medium."
@@ -68,17 +56,13 @@
       "name": "onDismiss",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_dismiss",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

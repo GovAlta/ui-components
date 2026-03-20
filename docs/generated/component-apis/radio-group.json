@@ -20,10 +20,7 @@
       "name": "orientation",
       "type": "\"vertical\" | \"horizontal\"",
       "typeLabel": "GoabRadioGroupOrientation",
-      "values": [
-        "vertical",
-        "horizontal"
-      ],
+      "values": ["vertical", "horizontal"],
       "required": false,
       "default": "vertical",
       "description": "Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row."
@@ -46,10 +43,7 @@
       "name": "size",
       "type": "\"default\" | \"compact\"",
       "typeLabel": "GoabRadioGroupSizeType",
-      "values": [
-        "default",
-        "compact"
-      ],
+      "values": ["default", "compact"],
       "required": false,
       "default": "default",
       "description": "Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only)."
@@ -106,17 +100,13 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

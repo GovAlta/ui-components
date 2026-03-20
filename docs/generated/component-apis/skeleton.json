@@ -13,12 +13,7 @@
       "name": "size",
       "type": "\"1\" | \"2\" | \"3\" | \"4\"",
       "typeLabel": "GoabSkeletonSize",
-      "values": [
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
+      "values": ["1", "2", "3", "4"],
       "required": false,
       "default": "1",
       "description": "Size can affect either the height, width or both for different skeleton types."

@@ -4,7 +4,8 @@ import {
   GoabCalloutSize,
   GoabCalloutType,
   GoabCalloutIconTheme,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../../lib/common/extract-props";
 
@@ -54,7 +55,7 @@ export const GoabxCallout = ({
 }: GoabxCalloutProps) => {
   const _props = transformProps<WCProps>(
     { type, icontheme: iconTheme, size, arialive: ariaLive, emphasis, ...rest },
-    lowercase
+    lowercase,
   );
 
   return (

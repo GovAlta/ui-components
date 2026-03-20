@@ -1,5 +1,9 @@
 import { useEffect, useRef, type JSX } from "react";
-import { DataAttributes, GoabCalendarOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabCalendarOnChangeDetail,
+  Margins,
+} from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
@@ -40,12 +44,12 @@ export function GoabCalendar({
         name: name || "",
         value: (e as CustomEvent).detail.value,
       });
-    }
+    };
     current.addEventListener("_change", listener);
 
     return () => {
       current.removeEventListener("_change", listener);
-    }
+    };
   }, []);
 
   return (

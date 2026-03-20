@@ -5,18 +5,18 @@
  * Note: Input must ALWAYS be wrapped in FormItem for proper labeling.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const inputConfigurations: ComponentConfigurations = {
-  componentSlug: 'input',
-  componentName: 'Input',
-  defaultConfigurationId: 'basic',
+  componentSlug: "input",
+  componentName: "Input",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Text input wrapped in FormItem with label',
+      id: "basic",
+      name: "Basic example",
+      description: "Text input wrapped in FormItem with label",
       code: {
         react: `<GoabxFormItem label="Full name" mb="l">
   <GoabxInput name="fullName" width="100%" />
@@ -30,9 +30,9 @@ export const inputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Input types',
-      description: 'Different input types for various data formats',
+      id: "types",
+      name: "Input types",
+      description: "Different input types for various data formats",
       code: {
         react: `<GoabxFormItem label="Email address" mb="l">
   <GoabxInput name="email" type="email" width="100%" />
@@ -73,9 +73,9 @@ export const inputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icons',
-      name: 'With icons',
-      description: 'Inputs with leading or trailing icons',
+      id: "with-icons",
+      name: "With icons",
+      description: "Inputs with leading or trailing icons",
       code: {
         react: `<GoabxFormItem label="Search" mb="l">
   <GoabxInput name="search" leadingIcon="search" width="100%" />
@@ -98,9 +98,9 @@ export const inputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'fixed-widths',
-      name: 'Fixed widths',
-      description: 'Inputs sized for specific data types',
+      id: "fixed-widths",
+      name: "Fixed widths",
+      description: "Inputs sized for specific data types",
       code: {
         react: `<GoabxFormItem label="Postal code" mb="l">
   <GoabxInput name="postalCode" width="7ch" />
@@ -132,9 +132,9 @@ export const inputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'leading-trailing-content',
-      name: 'With leading or trailing content',
-      description: 'Inputs with text content before or after the input field',
+      id: "leading-trailing-content",
+      name: "With leading or trailing content",
+      description: "Inputs with text content before or after the input field",
       code: {
         react: `<GoabxFormItem label="Price" mb="l">
   <GoabxInput name="price" type="number" width="10ch" leadingContent="$" />
@@ -157,9 +157,9 @@ export const inputConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'states',
-      name: 'States',
-      description: 'Disabled, readonly, and error states',
+      id: "states",
+      name: "States",
+      description: "Disabled, readonly, and error states",
       code: {
         react: `<GoabxFormItem label="Disabled input" mb="l">
   <GoabxInput name="disabled" disabled value="Cannot edit" width="100%" />

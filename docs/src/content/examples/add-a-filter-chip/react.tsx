@@ -29,7 +29,9 @@ export function AddAFilterChip() {
           />
         ))}
       </div>
-      <GoabxButton mt="l" onClick={addFilter}>Add Random Filter</GoabxButton>
+      <GoabxButton mt="l" onClick={addFilter}>
+        Add Random Filter
+      </GoabxButton>
     </>
   );
 }

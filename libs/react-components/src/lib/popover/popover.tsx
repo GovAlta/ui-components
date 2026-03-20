@@ -1,4 +1,8 @@
-import { DataAttributes, GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabPopoverPosition,
+  Margins,
+} from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 

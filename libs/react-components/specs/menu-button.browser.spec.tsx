@@ -159,7 +159,11 @@ describe("GoabxMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabxMenuButton leadingIcon="ellipsis-horizontal" testId="icon-menu" onAction={onAction}>
+        <GoabxMenuButton
+          leadingIcon="ellipsis-horizontal"
+          testId="icon-menu"
+          onAction={onAction}
+        >
           <GoabxMenuAction text="View" action="view" />
           <GoabxMenuAction text="Delete" action="delete" icon="trash" />
         </GoabxMenuButton>
@@ -205,7 +209,12 @@ describe("GoabxMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabxMenuButton leadingIcon="ellipsis-horizontal" size="compact" testId="icon-compact-menu" onAction={onAction}>
+        <GoabxMenuButton
+          leadingIcon="ellipsis-horizontal"
+          size="compact"
+          testId="icon-compact-menu"
+          onAction={onAction}
+        >
           <GoabxMenuAction text="Assign" action="assign" />
           <GoabxMenuAction text="Delete" action="delete" icon="trash" />
         </GoabxMenuButton>

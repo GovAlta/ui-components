@@ -5,9 +5,9 @@
  * Handles layout, visible columns, and grouping preferences.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-export type LayoutType = 'table' | 'card' | 'list';
+export type LayoutType = "table" | "card" | "list";
 export type GroupByField = string | null;
 
 export interface ViewSettings {
@@ -33,7 +33,7 @@ function getStorageKey(pageKey: string): string {
 }
 
 function loadSettings(pageKey: string): StoredSettings | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   try {
     const stored = localStorage.getItem(getStorageKey(pageKey));
@@ -41,31 +41,31 @@ function loadSettings(pageKey: string): StoredSettings | null {
       const parsed = JSON.parse(stored) as StoredSettings;
       if (
         parsed.viewSettings &&
-        typeof parsed.viewSettings.layout === 'string' &&
+        typeof parsed.viewSettings.layout === "string" &&
         Array.isArray(parsed.viewSettings.visibleColumns)
       ) {
         return parsed;
       }
     }
   } catch (e) {
-    console.warn('Failed to load view settings:', e);
+    console.warn("Failed to load view settings:", e);
   }
   return null;
 }
 
 function saveSettings(pageKey: string, settings: StoredSettings): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     localStorage.setItem(getStorageKey(pageKey), JSON.stringify(settings));
   } catch (e) {
-    console.warn('Failed to save view settings:', e);
+    console.warn("Failed to save view settings:", e);
   }
 }
 
 export function useViewSettings({
   pageKey,
-  defaultLayout = 'table',
+  defaultLayout = "table",
   defaultColumns,
 }: UseViewSettingsOptions) {
   const [state, setState] = useState<StoredSettings>(() => {
@@ -95,13 +95,16 @@ export function useViewSettings({
     }));
   }, []);
 
-  const setLayout = useCallback((layout: LayoutType) => {
-    setState((prev) => ({
-      ...prev,
-      viewSettings: { ...prev.viewSettings, layout },
-      layoutCustomized: layout !== defaultLayout,
-    }));
-  }, [defaultLayout]);
+  const setLayout = useCallback(
+    (layout: LayoutType) => {
+      setState((prev) => ({
+        ...prev,
+        viewSettings: { ...prev.viewSettings, layout },
+        layoutCustomized: layout !== defaultLayout,
+      }));
+    },
+    [defaultLayout],
+  );
 
   const setGroupBy = useCallback((groupBy: GroupByField) => {
     setState((prev) => ({

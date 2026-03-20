@@ -8,7 +8,7 @@ describe("GoabPublicFormTask", () => {
     const { baseElement } = render(
       <GoabPublicFormTask status="completed">
         <div data-testid="task-content">Complete profile</div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task");
@@ -16,22 +16,28 @@ describe("GoabPublicFormTask", () => {
 
     // Content is rendered
     expect(baseElement.querySelector("[data-testid='task-content']")).toBeTruthy();
-    expect(baseElement.querySelector("[data-testid='task-content']")?.textContent).toBe("Complete profile");
+    expect(baseElement.querySelector("[data-testid='task-content']")?.textContent).toBe(
+      "Complete profile",
+    );
   });
 
   it("handles all valid status values", () => {
-    const statuses: GoabPublicFormTaskStatus[] = ["completed", "not-started", "cannot-start"];
-    
-    statuses.forEach(status => {
+    const statuses: GoabPublicFormTaskStatus[] = [
+      "completed",
+      "not-started",
+      "cannot-start",
+    ];
+
+    statuses.forEach((status) => {
       const { baseElement, unmount } = render(
         <GoabPublicFormTask status={status}>
           <div>Task content</div>
-        </GoabPublicFormTask>
+        </GoabPublicFormTask>,
       );
-      
+
       const el = baseElement.querySelector("goa-public-form-task");
       expect(el?.getAttribute("status")).toBe(status);
-      
+
       unmount();
     });
   });
@@ -40,7 +46,7 @@ describe("GoabPublicFormTask", () => {
     const { baseElement } = render(
       <GoabPublicFormTask status="completed">
         <span>✓ Application submitted</span>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task");
@@ -52,7 +58,7 @@ describe("GoabPublicFormTask", () => {
     const { baseElement } = render(
       <GoabPublicFormTask status="not-started">
         <span>📝 Upload documents</span>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task");
@@ -64,12 +70,14 @@ describe("GoabPublicFormTask", () => {
     const { baseElement } = render(
       <GoabPublicFormTask status="cannot-start">
         <span>🔒 Final submission (complete other tasks first)</span>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task");
     expect(el?.getAttribute("status")).toBe("cannot-start");
-    expect(baseElement.textContent).toContain("🔒 Final submission (complete other tasks first)");
+    expect(baseElement.textContent).toContain(
+      "🔒 Final submission (complete other tasks first)",
+    );
   });
 
   it("renders complex children content", () => {
@@ -83,15 +91,19 @@ describe("GoabPublicFormTask", () => {
           <button data-testid="start-btn">Start Task</button>
           <button data-testid="skip-btn">Skip for Now</button>
         </div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     expect(baseElement.querySelector("[data-testid='task-header']")).toBeTruthy();
     expect(baseElement.querySelector("[data-testid='task-actions']")).toBeTruthy();
     expect(baseElement.querySelector("[data-testid='start-btn']")).toBeTruthy();
     expect(baseElement.querySelector("[data-testid='skip-btn']")).toBeTruthy();
-    expect(baseElement.querySelector("h3")?.textContent).toBe("Complete Personal Information");
-    expect(baseElement.querySelector("p")?.textContent).toBe("Fill out all required fields in your profile");
+    expect(baseElement.querySelector("h3")?.textContent).toBe(
+      "Complete Personal Information",
+    );
+    expect(baseElement.querySelector("p")?.textContent).toBe(
+      "Fill out all required fields in your profile",
+    );
   });
 
   it("renders with interactive elements", () => {
@@ -100,12 +112,18 @@ describe("GoabPublicFormTask", () => {
         <div data-testid="task-item">
           <span>Review application details</span>
           <div className="actions">
-            <button data-testid="edit-btn" type="button">Edit</button>
-            <button data-testid="view-btn" type="button">View</button>
-            <a href="#details" data-testid="details-link">More details</a>
+            <button data-testid="edit-btn" type="button">
+              Edit
+            </button>
+            <button data-testid="view-btn" type="button">
+              View
+            </button>
+            <a href="#details" data-testid="details-link">
+              More details
+            </a>
           </div>
         </div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     expect(baseElement.querySelector("[data-testid='edit-btn']")).toBeTruthy();
@@ -120,8 +138,8 @@ describe("GoabPublicFormTask", () => {
       <GoabPublicFormTask status="not-started">
         <div data-testid="task-form">
           <label>
-            <input type="checkbox" data-testid="agree-checkbox" />
-            I agree to the terms and conditions
+            <input type="checkbox" data-testid="agree-checkbox" />I agree to the terms and
+            conditions
           </label>
           <div>
             <input type="text" data-testid="name-input" placeholder="Enter your name" />
@@ -132,7 +150,7 @@ describe("GoabPublicFormTask", () => {
             </select>
           </div>
         </div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     expect(baseElement.querySelector("[data-testid='agree-checkbox']")).toBeTruthy();
@@ -162,7 +180,7 @@ describe("GoabPublicFormTask", () => {
             </div>
           </div>
         </div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     expect(baseElement.querySelector("[data-testid='main-task']")).toBeTruthy();
@@ -177,12 +195,14 @@ describe("GoabPublicFormTask", () => {
     const { baseElement } = render(
       <GoabPublicFormTask status="completed">
         Complete your profile information by filling out all required fields
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task");
     expect(el?.getAttribute("status")).toBe("completed");
-    expect(el?.textContent).toBe("Complete your profile information by filling out all required fields");
+    expect(el?.textContent).toBe(
+      "Complete your profile information by filling out all required fields",
+    );
   });
 
   it("renders with mixed content types", () => {
@@ -199,21 +219,21 @@ describe("GoabPublicFormTask", () => {
         <div>
           Progress: <span data-testid="progress">0/3 completed</span>
         </div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
 
     expect(baseElement.querySelector("strong")?.textContent).toBe("bold text");
     expect(baseElement.querySelector("em")?.textContent).toBe("italic text");
     expect(baseElement.querySelector("[data-testid='task-list']")).toBeTruthy();
-    expect(baseElement.querySelector("[data-testid='progress']")?.textContent).toBe("0/3 completed");
+    expect(baseElement.querySelector("[data-testid='progress']")?.textContent).toBe(
+      "0/3 completed",
+    );
     expect(baseElement.querySelectorAll("li")).toHaveLength(3);
   });
 
   it("renders empty children", () => {
     const { baseElement } = render(
-      <GoabPublicFormTask status="completed">
-        {null}
-      </GoabPublicFormTask>
+      <GoabPublicFormTask status="completed">{null}</GoabPublicFormTask>,
     );
 
     const el = baseElement.querySelector("goa-public-form-task");
@@ -224,12 +244,9 @@ describe("GoabPublicFormTask", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPublicFormTask
-        status="completed"
-        data-grid="cell"
-      >
+      <GoabPublicFormTask status="completed" data-grid="cell">
         <div>Test content</div>
-      </GoabPublicFormTask>
+      </GoabPublicFormTask>,
     );
     const el = baseElement.querySelector("goa-public-form-task");
     expect(el?.getAttribute("data-grid")).toBe("cell");

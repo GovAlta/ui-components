@@ -1,5 +1,10 @@
 import { ReactNode } from "react";
-import { DataAttributes, GoabIconType, GoabLinkButtonType, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabIconType,
+  GoabLinkButtonType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
@@ -29,16 +34,9 @@ export function GoALinkButton({
   children,
   ...rest
 }: GoALinkButtonProps) {
-  const _props = transformProps<WCProps>(
-    { type, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ type, ...rest }, lowercase);
 
-  return (
-    <goa-link-button {..._props}>
-      {children}
-    </goa-link-button>
-  );
+  return <goa-link-button {..._props}>{children}</goa-link-button>;
 }
 
 export default GoALinkButton;

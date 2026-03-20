@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   GoabFormItem,
   GoabCheckbox,
@@ -25,7 +25,7 @@ export function Bug3607Route() {
   const [checkboxSelectionThree, setCheckboxSelectionThree] = useState<string[]>([]);
 
   return (
-     <div>
+    <div>
       <h1>3607 - Radio and Checkbox Interaction Area</h1>
       <h2>Version 1</h2>
       <GoabFormItem
@@ -42,10 +42,7 @@ export function Bug3607Route() {
             description="Receive updates via email"
             label="Email"
           />
-          <GoabRadioItem
-            value="phone-0"
-            label="Phone"
-          />
+          <GoabRadioItem value="phone-0" label="Phone" />
           <GoabRadioItem
             value="text-0"
             label="Text message"
@@ -66,24 +63,12 @@ export function Bug3607Route() {
         >
           <GoabCheckbox
             name="travel-0"
-            description={
-              <span>
-                Help text with as a description.
-              </span>
-            }
+            description={<span>Help text with as a description.</span>}
             text="Travel"
             value="travel-0"
           />
-          <GoabCheckbox
-            name="music-0"
-            text="Music"
-            value="music-0"
-          />
-          <GoabCheckbox
-            name="sports-0"
-            text="Sports"
-            value="sports-0"
-          />
+          <GoabCheckbox name="music-0" text="Music" value="music-0" />
+          <GoabCheckbox name="sports-0" text="Sports" value="sports-0" />
           <GoabCheckbox
             name="other-0"
             text="Other"
@@ -113,10 +98,7 @@ export function Bug3607Route() {
             description="Receive updates via email"
             label="Email"
           />
-          <GoabxRadioItem
-            value="phone-1"
-            label="Phone"
-          />
+          <GoabxRadioItem value="phone-1" label="Phone" />
           <GoabxRadioItem
             value="text-1"
             label="Text message"
@@ -137,24 +119,12 @@ export function Bug3607Route() {
         >
           <GoabxCheckbox
             name="travel-1"
-            description={
-              <span>
-                Help text with as a description.
-              </span>
-            }
+            description={<span>Help text with as a description.</span>}
             text="Travel"
             value="travel-1"
           />
-          <GoabxCheckbox
-            name="music-1"
-            text="Music"
-            value="music-1"
-          />
-          <GoabxCheckbox
-            name="sports-1"
-            text="Sports"
-            value="sports-1"
-          />
+          <GoabxCheckbox name="music-1" text="Music" value="music-1" />
+          <GoabxCheckbox name="sports-1" text="Sports" value="sports-1" />
           <GoabxCheckbox
             name="other-1"
             text="Other"
@@ -184,10 +154,7 @@ export function Bug3607Route() {
             description="Receive updates via email"
             label="Email"
           />
-          <GoabxRadioItem
-            value="phone-2"
-            label="Phone"
-          />
+          <GoabxRadioItem value="phone-2" label="Phone" />
           <GoabxRadioItem
             value="text-2"
             label="Text message"
@@ -209,27 +176,13 @@ export function Bug3607Route() {
         >
           <GoabxCheckbox
             size="compact"
-            description={
-              <span>
-                Help text with as a description.
-              </span>
-            }
+            description={<span>Help text with as a description.</span>}
             name="travel-2"
             text="Travel"
             value="travel-2"
           />
-          <GoabxCheckbox
-            size="compact"
-            name="music-2"
-            text="Music"
-            value="music-2"
-          />
-          <GoabxCheckbox
-            size="compact"
-            name="sports-2"
-            text="Sports"
-            value="sports-2"
-          />
+          <GoabxCheckbox size="compact" name="music-2" text="Music" value="music-2" />
+          <GoabxCheckbox size="compact" name="sports-2" text="Sports" value="sports-2" />
           <GoabxCheckbox
             size="compact"
             name="other-2"
@@ -244,6 +197,5 @@ export function Bug3607Route() {
         </GoabxCheckboxList>
       </GoabxFormItem>
     </div>
-
   );
 }

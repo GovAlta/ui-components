@@ -87,10 +87,7 @@
       "name": "size",
       "type": "\"medium\" | \"large\"",
       "typeLabel": "GoabBadgeSize",
-      "values": [
-        "medium",
-        "large"
-      ],
+      "values": ["medium", "large"],
       "required": false,
       "default": "medium",
       "description": "Sets the size of the badge."

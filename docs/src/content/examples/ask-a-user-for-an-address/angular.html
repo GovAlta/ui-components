@@ -1,12 +1,27 @@
 <goab-text size="heading-l" mt="none" mb="xl">What is your address?</goab-text>
 <goabx-form-item label="Street Address">
-  <goabx-input name="address" type="text" [formControl]="form.controls.address" width="100%"></goabx-input>
+  <goabx-input
+    name="address"
+    type="text"
+    [formControl]="form.controls.address"
+    width="100%"
+  ></goabx-input>
 </goabx-form-item>
 <goabx-form-item label="Suite or unit #" mt="l">
-  <goabx-input name="suite" type="text" [formControl]="form.controls.suite" width="100%"></goabx-input>
+  <goabx-input
+    name="suite"
+    type="text"
+    [formControl]="form.controls.suite"
+    width="100%"
+  ></goabx-input>
 </goabx-form-item>
 <goabx-form-item label="City or town" mt="l">
-  <goabx-input name="city" type="text" [formControl]="form.controls.city" width="100%"></goabx-input>
+  <goabx-input
+    name="city"
+    type="text"
+    [formControl]="form.controls.city"
+    width="100%"
+  ></goabx-input>
 </goabx-form-item>
 <goab-block direction="row" gap="l" mt="l">
   <goabx-form-item label="Province or territory">
@@ -15,7 +30,10 @@
       <goabx-dropdown-item label="British Columbia" value="BC"></goabx-dropdown-item>
       <goabx-dropdown-item label="Manitoba" value="MB"></goabx-dropdown-item>
       <goabx-dropdown-item label="New Brunswick" value="NB"></goabx-dropdown-item>
-      <goabx-dropdown-item label="Newfoundland and Labrador" value="NL"></goabx-dropdown-item>
+      <goabx-dropdown-item
+        label="Newfoundland and Labrador"
+        value="NL"
+      ></goabx-dropdown-item>
       <goabx-dropdown-item label="Northwest Territories" value="NT"></goabx-dropdown-item>
       <goabx-dropdown-item label="Nova Scotia" value="NS"></goabx-dropdown-item>
       <goabx-dropdown-item label="Nunavut" value="NU"></goabx-dropdown-item>
@@ -27,7 +45,12 @@
     </goabx-dropdown>
   </goabx-form-item>
   <goabx-form-item label="Postal Code">
-    <goabx-input name="postalCode" type="text" [formControl]="form.controls.postalCode" width="7ch"></goabx-input>
+    <goabx-input
+      name="postalCode"
+      type="text"
+      [formControl]="form.controls.postalCode"
+      width="7ch"
+    ></goabx-input>
   </goabx-form-item>
 </goab-block>
 <goab-button-group alignment="start" mt="2xl">

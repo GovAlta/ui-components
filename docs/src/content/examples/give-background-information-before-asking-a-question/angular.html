@@ -1,6 +1,4 @@
-<goabx-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goabx-link>
+<goabx-link leadingIcon="arrow-back" size="small" mb="none"> Back </goabx-link>
 
 <goab-text as="h2" mt="xl" mb="m">Current school status</goab-text>
 <goab-text mt="none" mb="s">
@@ -22,7 +20,8 @@
   <goabx-radio-group
     name="school"
     ariaLabel="are you currently in school?"
-    (onChange)="onChange($event)">
+    (onChange)="onChange($event)"
+  >
     <goabx-radio-item value="yes" label="Yes"></goabx-radio-item>
     <goabx-radio-item value="no" label="No"></goabx-radio-item>
   </goabx-radio-group>

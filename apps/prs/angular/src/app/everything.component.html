@@ -16,11 +16,7 @@
           >
         }
         @for (entry of eventLog(); track $index) {
-          <goab-container
-            type="interactive"
-            padding="relaxed"
-            mb="xs"
-          >
+          <goab-container type="interactive" padding="relaxed" mb="xs">
             <goab-block gap="xs" direction="column">
               <goab-text tag="p" size="body-s">
                 <strong>{{ entry.timestamp }}</strong>
@@ -28,7 +24,8 @@
               </goab-text>
               <pre style="font-size: 12px; white-space: pre-wrap; margin: 0">
               {{ entry.detail | json }}
-            </pre>
+            </pre
+              >
             </goab-block>
           </goab-container>
         }
@@ -42,10 +39,7 @@
           <goab-text tag="h3" size="heading-s">Text sizes</goab-text>
           <goab-block gap="xs" direction="column">
             @for (size of textSizes; track $index) {
-              <goab-text
-                [tag]="size.startsWith('heading') ? 'h4' : 'p'"
-                [size]="size"
-              >
+              <goab-text [tag]="size.startsWith('heading') ? 'h4' : 'p'" [size]="size">
                 {{ size }}
               </goab-text>
             }
@@ -55,11 +49,7 @@
           <goab-text tag="h3" size="heading-s">Text colors</goab-text>
           <goab-block gap="xs" direction="column">
             @for (colour of textColors; track $index) {
-              <goab-text
-                tag="p"
-                size="body-m"
-                [color]="colour"
-              >
+              <goab-text tag="p" size="body-m" [color]="colour">
                 {{ colour | titlecase }} text
               </goab-text>
             }
@@ -176,10 +166,7 @@
         <goab-text tag="h3" size="heading-s">Buttons by type</goab-text>
         <goab-grid minChildWidth="160px" gap="m">
           @for (type of buttonTypes; track $index) {
-            <goab-button
-              [type]="type"
-              (onClick)="onButtonClick(type)"
-            >
+            <goab-button [type]="type" (onClick)="onButtonClick(type)">
               {{ type | titlecase }} button
             </goab-button>
           }
@@ -189,11 +176,7 @@
         <goab-text tag="h3" size="heading-s">Variants & sizes</goab-text>
         <goab-block gap="m" direction="column">
           @for (variant of buttonVariants; track $index) {
-            <goab-block
-              gap="s"
-              direction="row"
-              alignment="center"
-            >
+            <goab-block gap="s" direction="row" alignment="center">
               <goab-text tag="span" size="body-m" mb="none">
                 {{ variant | titlecase }}
               </goab-text>
@@ -284,10 +267,7 @@
         <goab-text tag="h3" size="heading-s">Badge palette</goab-text>
         <goab-grid minChildWidth="140px" gap="s">
           @for (badgeType of badgeTypes; track $index) {
-            <goab-badge
-              [type]="badgeType"
-              [content]="badgeType"
-            />
+            <goab-badge [type]="badgeType" [content]="badgeType" />
           }
         </goab-grid>
       </goab-container>
@@ -522,10 +502,7 @@
               (onChange)="onLinkedDropdownCategoryChange($event)"
             >
               @for (option of linkedDropdownCategories; track option.value) {
-                <goab-dropdown-item
-                  [value]="option.value"
-                  [label]="option.label"
-                />
+                <goab-dropdown-item [value]="option.value" [label]="option.label" />
               }
             </goab-dropdown>
             <goab-form-item-slot slot="helptext">
@@ -543,10 +520,7 @@
               (onChange)="onLinkedDropdownItemChange($event)"
             >
               @for (option of dependentDropdownItems; track option.value) {
-                <goab-dropdown-item
-                  [value]="option.value"
-                  [label]="option.label"
-                />
+                <goab-dropdown-item [value]="option.value" [label]="option.label" />
               }
             </goab-dropdown>
             <goab-form-item-slot slot="helptext">
@@ -630,10 +604,7 @@
                 formControlName="dropdown"
               >
                 @for (option of reactiveDropdownOptions; track option.value) {
-                  <goab-dropdown-item
-                    [value]="option.value"
-                    [label]="option.label"
-                  />
+                  <goab-dropdown-item [value]="option.value" [label]="option.label" />
                 }
               </goab-dropdown>
             </goab-form-item>

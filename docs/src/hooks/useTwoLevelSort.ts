@@ -11,11 +11,11 @@
  * - When primary is removed, secondary is promoted to primary
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 export interface SortLevel {
   key: string;
-  direction: 'asc' | 'desc';
+  direction: "asc" | "desc";
 }
 
 export interface SortConfig {
@@ -25,7 +25,7 @@ export interface SortConfig {
 
 export function useTwoLevelSort(initialConfig?: SortConfig) {
   const [sortConfig, setSortConfig] = useState<SortConfig>(
-    initialConfig ?? { primary: null, secondary: null }
+    initialConfig ?? { primary: null, secondary: null },
   );
 
   /**
@@ -38,9 +38,9 @@ export function useTwoLevelSort(initialConfig?: SortConfig) {
 
       // If clicking on current primary: cycle asc -> desc -> remove
       if (currentPrimary?.key === key) {
-        if (currentPrimary.direction === 'asc') {
+        if (currentPrimary.direction === "asc") {
           return {
-            primary: { key, direction: 'desc' },
+            primary: { key, direction: "desc" },
             secondary: currentSecondary,
           };
         } else {
@@ -54,10 +54,10 @@ export function useTwoLevelSort(initialConfig?: SortConfig) {
 
       // If clicking on current secondary: cycle asc -> desc -> remove
       if (currentSecondary?.key === key) {
-        if (currentSecondary.direction === 'asc') {
+        if (currentSecondary.direction === "asc") {
           return {
             primary: currentPrimary,
-            secondary: { key, direction: 'desc' },
+            secondary: { key, direction: "desc" },
           };
         } else {
           return {
@@ -70,13 +70,13 @@ export function useTwoLevelSort(initialConfig?: SortConfig) {
       // New field: if no primary, set as primary; if primary exists, set as secondary
       if (!currentPrimary) {
         return {
-          primary: { key, direction: 'asc' },
+          primary: { key, direction: "asc" },
           secondary: null,
         };
       } else {
         return {
           primary: currentPrimary,
-          secondary: { key, direction: 'asc' },
+          secondary: { key, direction: "asc" },
         };
       }
     });
@@ -97,10 +97,13 @@ export function useTwoLevelSort(initialConfig?: SortConfig) {
    * It extracts sortBy from the event and delegates to sortByKey,
    * which handles the cycling logic (none → asc → desc → none).
    */
-  const handleTableSort = useCallback((event: { sortBy: string; sortDir: number }) => {
-    const { sortBy } = event;
-    sortByKey(sortBy);
-  }, [sortByKey]);
+  const handleTableSort = useCallback(
+    (event: { sortBy: string; sortDir: number }) => {
+      const { sortBy } = event;
+      sortByKey(sortBy);
+    },
+    [sortByKey],
+  );
 
   return {
     sortConfig,

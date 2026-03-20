@@ -4,18 +4,18 @@
  * SideMenuGroup is a collapsible child component of SideMenu.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const sideMenuGroupConfigurations: ComponentConfigurations = {
-  componentSlug: 'side-menu-group',
-  componentName: 'Side menu group',
-  defaultConfigurationId: 'basic',
+  componentSlug: "side-menu-group",
+  componentName: "Side menu group",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic side menu group',
-      description: 'Collapsible group within SideMenu',
+      id: "basic",
+      name: "Basic side menu group",
+      description: "Collapsible group within SideMenu",
       code: {
         react: `<GoabxSideMenu>
   <GoabxSideMenuGroup heading="Applications">

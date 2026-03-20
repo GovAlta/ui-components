@@ -5,7 +5,7 @@ import { usePublicFormController } from "./use-public-form-controller";
 describe("usePublicFormController", () => {
   const mockFormElement = document.createElement("form");
   const mockInitEvent = {
-    el: mockFormElement
+    el: mockFormElement,
   };
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe("usePublicFormController", () => {
   it("should initialize list state", () => {
     const { result } = renderHook(() => usePublicFormController("details"));
     const mockEvent = new CustomEvent("init", {
-      detail: { el: mockFormElement }
+      detail: { el: mockFormElement },
     });
 
     result.current.initList(mockEvent);
@@ -41,7 +41,7 @@ describe("usePublicFormController", () => {
     const consoleError = vi.spyOn(console, "error");
     const { result } = renderHook(() => usePublicFormController("details"));
     const mockEvent = new CustomEvent("init", {
-      detail: { el: null }
+      detail: { el: null },
     });
 
     result.current.initList(mockEvent);
@@ -64,15 +64,15 @@ describe("usePublicFormController", () => {
                 name: "testField",
                 label: "Test Field",
                 value: "test value",
-                order: 1
-              }
-            }
-          }
-        }
+                order: 1,
+              },
+            },
+          },
+        },
       },
       history: [],
       editting: "",
-      status: "not-started" as const
+      status: "not-started" as const,
     };
 
     result.current.init(mockInitEvent);
@@ -95,7 +95,7 @@ describe("usePublicFormController", () => {
       form: {},
       history: [],
       editting: "",
-      status: "not-started" as const
+      status: "not-started" as const,
     };
 
     result.current.initState(mockState);
@@ -113,13 +113,15 @@ describe("usePublicFormController", () => {
           name: "testField",
           label: "Test Field",
           value: "test value",
-          order: 1
-        }
+          order: 1,
+        },
       },
-      cancelled: false
+      cancelled: false,
     };
 
-    const [isValid, value] = result.current.validate(mockEvent, "testField", [mockValidator]);
+    const [isValid, value] = result.current.validate(mockEvent, "testField", [
+      mockValidator,
+    ]);
 
     expect(isValid).toBe(true);
     expect(value).toBe("test value");

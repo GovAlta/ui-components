@@ -12,11 +12,7 @@
     {
       "name": "position",
       "type": "\"above\" | \"below\" | \"auto\"",
-      "values": [
-        "above",
-        "below",
-        "auto"
-      ],
+      "values": ["above", "below", "auto"],
       "required": false,
       "default": "auto",
       "description": "Provides control to where the popover content is positioned."
@@ -24,10 +20,7 @@
     {
       "name": "maxWidth",
       "type": "string | \"none\"",
-      "values": [
-        "string",
-        "none"
-      ],
+      "values": ["string", "none"],
       "required": false,
       "default": "320px",
       "description": "Sets the maximum width of the popover container."
@@ -49,10 +42,7 @@
     {
       "name": "height",
       "type": "\"full\" | \"wrap-content\"",
-      "values": [
-        "full",
-        "wrap-content"
-      ],
+      "values": ["full", "wrap-content"],
       "required": false,
       "default": "wrap-content",
       "description": "Controls the height behavior. 'full' stretches to parent height, 'wrap-content' fits content."
@@ -173,33 +163,25 @@
       "name": "onOpen",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_open",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onClose",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_close",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

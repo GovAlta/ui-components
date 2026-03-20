@@ -5,7 +5,7 @@ import { TemporaryNotification } from "@abgov/ui-components-common";
 export function ShowAUserProgress() {
   const sendApi = (
     progressCallback: (progress: number) => void,
-    isCancelledRef: { current: boolean }
+    isCancelledRef: { current: boolean },
   ) => {
     return new Promise((resolve, reject) => {
       let progress = 0;

@@ -12,11 +12,7 @@ import {
   isAfter as _isAfter,
 } from "date-fns";
 
-type CalendarDateInput =
-  | string
-  | Date
-  | 0
-  | { year: number; month: number; day: number };
+type CalendarDateInput = string | Date | 0 | { year: number; month: number; day: number };
 
 export class CalendarDate {
   private _dateNums: number[];
@@ -48,11 +44,7 @@ export class CalendarDate {
 
   // Used internally to get the date value for the date_fns
   get date(): Date {
-    return new Date(
-      this._dateNums[0],
-      this._dateNums[1] - 1,
-      this._dateNums[2],
-    );
+    return new Date(this._dateNums[0], this._dateNums[1] - 1, this._dateNums[2]);
   }
 
   get year(): number {
@@ -156,11 +148,7 @@ export class CalendarDate {
   }
 
   isZero(): boolean {
-    return (
-      this._dateNums[0] === 0 &&
-      this._dateNums[1] === 0 &&
-      this._dateNums[2] === 0
-    );
+    return this._dateNums[0] === 0 && this._dateNums[1] === 0 && this._dateNums[2] === 0;
   }
 
   isValid(): boolean {

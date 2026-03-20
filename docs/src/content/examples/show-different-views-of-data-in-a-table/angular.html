@@ -17,8 +17,7 @@
           <td class="goa-table-number-column">1234567890</td>
           <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
         </tr>
-        }
-        @for (i of completeItems; track $index) {
+        } @for (i of completeItems; track $index) {
         <tr>
           <td><goabx-badge type="information" content="Complete"></goabx-badge></td>
           <td>Lorem Ipsum</td>
@@ -30,7 +29,13 @@
     </goabx-table>
   </goab-tab>
   <goab-tab [heading]="reviewPending">
-    <ng-template #reviewPending>Review pending<goabx-badge type="important" content="4" [icon]="false"></goabx-badge></ng-template>
+    <ng-template #reviewPending
+      >Review pending<goabx-badge
+        type="important"
+        content="4"
+        [icon]="false"
+      ></goabx-badge
+    ></ng-template>
     <goabx-table width="100%">
       <thead>
         <tr>
@@ -53,7 +58,9 @@
     </goabx-table>
   </goab-tab>
   <goab-tab [heading]="completeTab">
-    <ng-template #completeTab>Complete<goabx-badge type="information" content="338" [icon]="false"></goabx-badge></ng-template>
+    <ng-template #completeTab
+      >Complete<goabx-badge type="information" content="338" [icon]="false"></goabx-badge
+    ></ng-template>
     <goabx-table width="100%">
       <thead>
         <tr>

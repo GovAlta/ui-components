@@ -15,7 +15,11 @@ export function Bug3232Route() {
 
       <GoabBlock>
         <GoabLink trailingIcon="open">
-          <a href="https://github.com/GovAlta/ui-components/issues/3232" target="_blank" rel="noopener">
+          <a
+            href="https://github.com/GovAlta/ui-components/issues/3232"
+            target="_blank"
+            rel="noopener"
+          >
             View on GitHub
           </a>
         </GoabLink>
@@ -35,8 +39,8 @@ export function Bug3232Route() {
       <GoabText tag="h2">Test Cases</GoabText>
 
       <GoabText tag="p">
-        Left column uses just tag. Center column uses tag + explicit size.
-        Right column uses just explicit size. They should all match.
+        Left column uses just tag. Center column uses tag + explicit size. Right column
+        uses just explicit size. They should all match.
       </GoabText>
 
       <GoabText tag="h3">Test 1: H1 → heading-xl</GoabText>
@@ -46,7 +50,9 @@ export function Bug3232Route() {
           <code>tag="h1"</code>
         </div>
         <div>
-          <GoabText tag="h1" size="heading-xl">Heading XL</GoabText>
+          <GoabText tag="h1" size="heading-xl">
+            Heading XL
+          </GoabText>
           <code>tag="h1" size="heading-xl"</code>
         </div>
         <div>
@@ -62,7 +68,9 @@ export function Bug3232Route() {
           <code>tag="h2"</code>
         </div>
         <div>
-          <GoabText tag="h2" size="heading-l">Heading L</GoabText>
+          <GoabText tag="h2" size="heading-l">
+            Heading L
+          </GoabText>
           <code>tag="h2" size="heading-l"</code>
         </div>
         <div>
@@ -78,7 +86,9 @@ export function Bug3232Route() {
           <code>tag="h3"</code>
         </div>
         <div>
-          <GoabText tag="h3" size="heading-m">Heading M</GoabText>
+          <GoabText tag="h3" size="heading-m">
+            Heading M
+          </GoabText>
           <code>tag="h3" size="heading-m"</code>
         </div>
         <div>
@@ -94,7 +104,9 @@ export function Bug3232Route() {
           <code>tag="h4"</code>
         </div>
         <div>
-          <GoabText tag="h4" size="heading-s">Heading S</GoabText>
+          <GoabText tag="h4" size="heading-s">
+            Heading S
+          </GoabText>
           <code>tag="h4" size="heading-s"</code>
         </div>
         <div>
@@ -110,7 +122,9 @@ export function Bug3232Route() {
           <code>tag="h5"</code>
         </div>
         <div>
-          <GoabText tag="h5" size="heading-xs">Heading XS</GoabText>
+          <GoabText tag="h5" size="heading-xs">
+            Heading XS
+          </GoabText>
           <code>tag="h5" size="heading-xs"</code>
         </div>
         <div>
@@ -132,7 +146,9 @@ export function Bug3232Route() {
           <code>tag="p" (no size)</code>
         </div>
         <div>
-          <GoabText tag="p" size="body-m">Paragraph with body-m size</GoabText>
+          <GoabText tag="p" size="body-m">
+            Paragraph with body-m size
+          </GoabText>
           <code>tag="p" size="body-m"</code>
         </div>
         <div>
@@ -150,11 +166,15 @@ export function Bug3232Route() {
 
       <div>
         <div>
-          <GoabText tag="h1" size="body-s">H1 with body-s size (explicit override)</GoabText>
+          <GoabText tag="h1" size="body-s">
+            H1 with body-s size (explicit override)
+          </GoabText>
           <code>tag="h1" size="body-s"</code>
         </div>
         <div>
-          <GoabText tag="h2" size="heading-xs">H2 with heading-xs size (explicit override)</GoabText>
+          <GoabText tag="h2" size="heading-xs">
+            H2 with heading-xs size (explicit override)
+          </GoabText>
           <code>tag="h2" size="heading-xs"</code>
         </div>
       </div>

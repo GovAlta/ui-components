@@ -35,8 +35,14 @@ export function GoabPublicSubformIndex({
   ...rest
 }: GoabPublicSubformIndexProps) {
   const _props = transformProps<WCProps>(
-    { heading, "section-title": sectionTitle, "action-button-text": actionButtonText, "button-visibility": buttonVisibility, ...rest },
-    kebab
+    {
+      heading,
+      "section-title": sectionTitle,
+      "action-button-text": actionButtonText,
+      "button-visibility": buttonVisibility,
+      ...rest,
+    },
+    kebab,
   );
 
   return (

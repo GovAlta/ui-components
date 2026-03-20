@@ -3,7 +3,8 @@ import {
   GoabIconSize,
   GoabIconTheme,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
@@ -45,10 +46,7 @@ interface WCProps extends Margins {
   testid?: string;
 }
 
-export function GoabIcon({
-  inverted,
-  ...rest
-}: GoabIconProps): JSX.Element {
+export function GoabIcon({ inverted, ...rest }: GoabIconProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (

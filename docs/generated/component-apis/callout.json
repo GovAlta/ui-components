@@ -38,10 +38,7 @@
       "name": "size",
       "type": "\"medium\" | \"large\"",
       "typeLabel": "GoabCalloutSize",
-      "values": [
-        "medium",
-        "large"
-      ],
+      "values": ["medium", "large"],
       "required": false,
       "default": "large",
       "description": "Sets the size of the callout. 'medium' has reduced padding and type size for compact areas."
@@ -50,13 +47,7 @@
       "name": "type",
       "type": "\"emergency\" | \"important\" | \"information\" | \"event\" | \"success\"",
       "typeLabel": "GoabCalloutType",
-      "values": [
-        "emergency",
-        "important",
-        "information",
-        "event",
-        "success"
-      ],
+      "values": ["emergency", "important", "information", "event", "success"],
       "required": true,
       "default": null,
       "description": "Define the context and colour of the callout."
@@ -65,11 +56,7 @@
       "name": "emphasis",
       "type": "\"high\" | \"medium\" | \"low\"",
       "typeLabel": "GoabCalloutEmphasisType",
-      "values": [
-        "high",
-        "medium",
-        "low"
-      ],
+      "values": ["high", "medium", "low"],
       "required": false,
       "default": "medium",
       "description": "Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal."
@@ -99,11 +86,7 @@
       "name": "arialive",
       "type": "\"off\" | \"assertive\" | \"polite\"",
       "typeLabel": "GoabCalloutAriaLiveType",
-      "values": [
-        "off",
-        "assertive",
-        "polite"
-      ],
+      "values": ["off", "assertive", "polite"],
       "required": false,
       "default": "off",
       "description": "Indicates how assistive technology should handle updates to the live region."

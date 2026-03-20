@@ -40,10 +40,7 @@
     {
       "name": "version",
       "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
+      "values": ["1", "2"],
       "required": false,
       "default": "1",
       "description": ""
@@ -54,17 +51,13 @@
       "name": "onClose",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_close",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": [

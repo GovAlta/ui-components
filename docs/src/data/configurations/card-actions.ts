@@ -4,18 +4,18 @@
  * CardActions is a child component of Card.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const cardActionsConfigurations: ComponentConfigurations = {
-  componentSlug: 'card-actions',
-  componentName: 'Card actions',
-  defaultConfigurationId: 'basic',
+  componentSlug: "card-actions",
+  componentName: "Card actions",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic card actions',
-      description: 'Action buttons within Card',
+      id: "basic",
+      name: "Basic card actions",
+      description: "Action buttons within Card",
       code: {
         react: `<GoabCard>
   <GoabCardContent>

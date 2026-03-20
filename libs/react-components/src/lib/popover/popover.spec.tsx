@@ -34,12 +34,9 @@ describe("Popover", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPopover
-        target="Click Action"
-        data-grid="cell"
-      >
+      <GoabPopover target="Click Action" data-grid="cell">
         <div>Test content</div>
-      </GoabPopover>
+      </GoabPopover>,
     );
     const el = baseElement.querySelector("goa-popover");
     expect(el?.getAttribute("data-grid")).toBe("cell");

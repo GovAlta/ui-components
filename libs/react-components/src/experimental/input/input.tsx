@@ -10,7 +10,8 @@ import {
   GoabInputOnKeyPressDetail,
   GoabInputSize,
   GoabInputType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../../lib/common/extract-props";
 
@@ -57,9 +58,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
-        ref?: React.RefObject<HTMLInputElement | null>;
-      };
+      "goa-input": WCProps &
+        React.HTMLAttributes<HTMLInputElement> & {
+          ref?: React.RefObject<HTMLInputElement | null>;
+        };
     }
   }
 }
@@ -156,7 +158,7 @@ export function GoabxInput({
 
   const _props = transformProps<WCProps>(
     { variant, textalign: textAlign, size, ...rest },
-    lowercase
+    lowercase,
   );
 
   useEffect(() => {

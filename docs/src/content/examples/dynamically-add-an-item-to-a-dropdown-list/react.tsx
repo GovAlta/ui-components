@@ -69,58 +69,63 @@ export function DynamicallyAddAnItemToADropdownList() {
   return (
     <>
       <GoabxFormItem
-          requirement="required"
-          label="Name of item"
-          error={taskError ? "Please enter item name" : undefined}
-          helpText="Add an item to the dropdown list below">
-          <GoabxInput
-            onChange={(event: GoabInputOnChangeDetail) => setNewTask(event.value)}
-            name="item"
-            value={newTask}
-          />
-        </GoabxFormItem>
+        requirement="required"
+        label="Name of item"
+        error={taskError ? "Please enter item name" : undefined}
+        helpText="Add an item to the dropdown list below"
+      >
+        <GoabxInput
+          onChange={(event: GoabInputOnChangeDetail) => setNewTask(event.value)}
+          name="item"
+          value={newTask}
+        />
+      </GoabxFormItem>
 
-        <GoabxFormItem mt="l" label="Add to">
-          <GoabxRadioGroup
-            name="mountType"
-            onChange={(event: GoabRadioGroupOnChangeDetail) => onMountTypeChange(event.value)}
-            value={mountType}
-            orientation="horizontal">
-            <GoabxRadioItem value="prepend" label="Start" />
-            <GoabxRadioItem value="append" label="End" />
-          </GoabxRadioGroup>
-        </GoabxFormItem>
+      <GoabxFormItem mt="l" label="Add to">
+        <GoabxRadioGroup
+          name="mountType"
+          onChange={(event: GoabRadioGroupOnChangeDetail) =>
+            onMountTypeChange(event.value)
+          }
+          value={mountType}
+          orientation="horizontal"
+        >
+          <GoabxRadioItem value="prepend" label="Start" />
+          <GoabxRadioItem value="append" label="End" />
+        </GoabxRadioGroup>
+      </GoabxFormItem>
 
-        <GoabButtonGroup alignment="start" gap="relaxed" mt="l">
-          <GoabxButton type="primary" onClick={addTask}>
-            Add new item
-          </GoabxButton>
-          <GoabxButton type="tertiary" onClick={reset}>
-            Reset list
-          </GoabxButton>
-        </GoabButtonGroup>
+      <GoabButtonGroup alignment="start" gap="relaxed" mt="l">
+        <GoabxButton type="primary" onClick={addTask}>
+          Add new item
+        </GoabxButton>
+        <GoabxButton type="tertiary" onClick={reset}>
+          Reset list
+        </GoabxButton>
+      </GoabButtonGroup>
 
-        <GoabDivider mt="l" />
+      <GoabDivider mt="l" />
 
-        <GoabxFormItem mt="l" label="All items">
-          <div style={{ width: isReset ? "320px" : "auto" }}>
-            <GoabxDropdown
-              key={tasks.length}
-              onChange={(event: GoabDropdownOnChangeDetail) =>
-                setSelectedTask(event.value as string)
-              }
-              value={selectedTask}
-              name="selectedTask">
-              {tasks.map(task => (
-                <GoabxDropdownItem
-                  key={task.value}
-                  value={task.value}
-                  mountType={task.mount}
-                  label={task.label}
-                />
-              ))}
-            </GoabxDropdown>
-          </div>
+      <GoabxFormItem mt="l" label="All items">
+        <div style={{ width: isReset ? "320px" : "auto" }}>
+          <GoabxDropdown
+            key={tasks.length}
+            onChange={(event: GoabDropdownOnChangeDetail) =>
+              setSelectedTask(event.value as string)
+            }
+            value={selectedTask}
+            name="selectedTask"
+          >
+            {tasks.map((task) => (
+              <GoabxDropdownItem
+                key={task.value}
+                value={task.value}
+                mountType={task.mount}
+                label={task.label}
+              />
+            ))}
+          </GoabxDropdown>
+        </div>
       </GoabxFormItem>
     </>
   );

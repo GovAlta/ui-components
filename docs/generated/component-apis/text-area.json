@@ -82,10 +82,7 @@
     {
       "name": "countby",
       "type": "\"character\" | \"word\" | \"\"",
-      "values": [
-        "character",
-        "word"
-      ],
+      "values": ["character", "word"],
       "required": false,
       "default": "",
       "description": "Counting interval for characters or words, specifying whether to count every character or word."
@@ -107,10 +104,7 @@
     {
       "name": "version",
       "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
-      ],
+      "values": ["1", "2"],
       "required": false,
       "default": "1",
       "description": ""
@@ -118,10 +112,7 @@
     {
       "name": "size",
       "type": "\"default\" | \"compact\"",
-      "values": [
-        "default",
-        "compact"
-      ],
+      "values": ["default", "compact"],
       "required": false,
       "default": "default",
       "description": ""
@@ -164,49 +155,37 @@
       "name": "onChange",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_change",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onBlur",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_blur",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     },
     {
       "name": "onKeyPress",
       "type": "(event: Event) => void",
       "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "frameworks": ["react"]
     },
     {
       "name": "_keyPress",
       "type": "CustomEvent",
       "description": "",
-      "frameworks": [
-        "angular"
-      ]
+      "frameworks": ["angular"]
     }
   ],
   "slots": []

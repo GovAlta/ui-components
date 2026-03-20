@@ -31,12 +31,9 @@ describe("Detail", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabDetails
-        heading="Test heading"
-        data-grid="cell"
-      >
+      <GoabDetails heading="Test heading" data-grid="cell">
         Detail content
-      </GoabDetails>
+      </GoabDetails>,
     );
     const el = baseElement.querySelector("goa-details");
     expect(el?.getAttribute("data-grid")).toBe("cell");

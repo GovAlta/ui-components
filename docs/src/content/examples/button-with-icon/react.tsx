@@ -6,7 +6,9 @@ export function ButtonWithIcon() {
     <GoabButtonGroup>
       <GoabxButton leadingIcon="arrow-back">Go back</GoabxButton>
       <GoabxButton trailingIcon="arrow-forward">Continue</GoabxButton>
-      <GoabxButton type="secondary" leadingIcon="add">Add item</GoabxButton>
+      <GoabxButton type="secondary" leadingIcon="add">
+        Add item
+      </GoabxButton>
     </GoabButtonGroup>
   );
 }

@@ -10,9 +10,7 @@ describe("Dropdown", () => {
   };
 
   describe("Dropdown", () => {
-
     it("should render with the default props", async () => {
-
       // Setup
 
       const Component = () => {
@@ -56,7 +54,6 @@ describe("Dropdown", () => {
     });
 
     it("should perform action when menu item clicked", async () => {
-
       const handleChange = vi.fn();
 
       // Setup
@@ -99,8 +96,8 @@ describe("Dropdown", () => {
               <GoabDropdownItem label="Blue" value="blue" />
               <GoabDropdownItem label="Green" value="green" />
             </GoabDropdown>
-          )
-        }
+          );
+        };
 
         const result = render(<Component />);
 
@@ -113,7 +110,7 @@ describe("Dropdown", () => {
           await dropdown.click();
           expect(popover.element().getAttribute("open")).toBe("true");
           expect(popoverDiv.element().getAttribute("style")).toContain("500px");
-        })
+        });
       });
 
       it("actually applis width using CSS custom property", async () => {
@@ -369,7 +366,7 @@ describe("Dropdown", () => {
               </div>
             </>
           );
-        }
+        };
         const result = render(<Component />);
         // Scroll to the bottom of the page
         window.scrollTo(0, document.body.scrollHeight);
@@ -383,7 +380,7 @@ describe("Dropdown", () => {
           const lastOptionRect = lastOption.element().getBoundingClientRect();
           expect(lastOptionRect.bottom).toBeLessThan(dropdownRect.top);
         });
-      })
+      });
 
       it("should maintain popover width equal to dropdown width when container resizes", async () => {
         const Component = () => {
@@ -409,7 +406,9 @@ describe("Dropdown", () => {
           expect(dropdownOption).toBeDefined();
           const dropdownRect = dropdown.element().getBoundingClientRect();
           const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
-          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+          expect(
+            Math.abs(dropdownOptionRect.width - dropdownRect.width),
+          ).toBeLessThanOrEqual(1);
         });
       });
 
@@ -418,7 +417,12 @@ describe("Dropdown", () => {
         await page.viewport(250, 800);
         const Component = () => {
           return (
-            <GoabDropdown name="favcolor" testId="dropdown" width={"100%"} onChange={noop}>
+            <GoabDropdown
+              name="favcolor"
+              testId="dropdown"
+              width={"100%"}
+              onChange={noop}
+            >
               <GoabDropdownItem label="Red" value="red" />
               <GoabDropdownItem label="Blue" value="blue" />
               <GoabDropdownItem label="Green" value="green" />
@@ -433,11 +437,13 @@ describe("Dropdown", () => {
           const dropdownOption = result.getByText("Green");
           const dropdownRect = dropdown.element().getBoundingClientRect();
           const dropdownOptionRect = dropdownOption.element().getBoundingClientRect();
-          expect(Math.abs(dropdownOptionRect.width - dropdownRect.width)).toBeLessThanOrEqual(1);
+          expect(
+            Math.abs(dropdownOptionRect.width - dropdownRect.width),
+          ).toBeLessThanOrEqual(1);
         });
       });
-    })
-  })
+    });
+  });
 
   describe("Filterable Dropdown", () => {
     it("should render with the default props", async () => {
@@ -493,10 +499,9 @@ describe("Dropdown", () => {
         // icon
         expect(dropdownIcon.element().getAttribute("data-type")).toBe("chevron-up");
       });
-    })
+    });
 
     it("should filter the items", async () => {
-
       // Setup
       const Component = () => {
         return (
@@ -522,7 +527,7 @@ describe("Dropdown", () => {
           const ddi = result.getByTestId(`dropdown-item-${item}`);
           expect(ddi.elements().length).toBe(0);
         });
-      })
+      });
     });
 
     it("clears the input and opens the menu when the clear icon is clicked", async () => {
@@ -586,19 +591,19 @@ describe("Dropdown", () => {
 
         expect(popover.element().getAttribute("open")).toBe("true");
       });
-    })
-  })
+    });
+  });
 
   describe("Dropdown reset", () => {
     it("should reduce the number of element displayed within the dropdown", async () => {
-      let values: string[] = ["red", "blue", "green"]
+      let values: string[] = ["red", "blue", "green"];
 
       const Component = () => {
         return (
           <GoabDropdown name="favcolor" onChange={noop}>
-            {values.map((item) =>
+            {values.map((item) => (
               <GoabDropdownItem label={item} value={item} key={item} />
-            )}
+            ))}
           </GoabDropdown>
         );
       };
@@ -610,26 +615,26 @@ describe("Dropdown", () => {
       // Initial state
 
       await vi.waitFor(async () => {
-        const inputEl = input.element() as HTMLInputElement
+        const inputEl = input.element() as HTMLInputElement;
         inputEl.click();
         expect(items.elements().length).toBe(values.length);
         items.elements().forEach((el, index) => {
           expect(el.innerHTML.trim()).toBe(values[index]);
-        })
+        });
       });
 
       // Reduce to 1 item
 
       values = ["blue"]; // the previous failure happened with this item, was one of the previous items
-      result.rerender(<Component />)
+      result.rerender(<Component />);
 
       await vi.waitFor(async () => {
-        const inputEl = input.element() as HTMLInputElement
+        const inputEl = input.element() as HTMLInputElement;
         inputEl.click();
         const items = result.getByRole("option");
         expect(items.elements().length).toBe(1);
         expect(items.element().innerHTML.trim()).toBe("blue");
       });
-    })
-  })
+    });
+  });
 });

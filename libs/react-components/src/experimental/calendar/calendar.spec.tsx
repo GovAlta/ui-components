@@ -4,7 +4,9 @@ import { describe, it, expect, vi } from "vitest";
 
 import Calendar from "./calendar";
 
-const noop = () => { /* do nothing */ };
+const noop = () => {
+  /* do nothing */
+};
 
 describe("Calendar", () => {
   it("should render successfully", () => {
@@ -28,8 +30,8 @@ describe("Calendar", () => {
 
   it("should set the props correctly", () => {
     const value = "2025-02-03";
-    const min = "2024-01-01"
-    const max = "2025-01-01"
+    const min = "2024-01-01";
+    const max = "2025-01-01";
 
     const { baseElement } = render(
       <Calendar
@@ -39,7 +41,7 @@ describe("Calendar", () => {
         max={max}
         testId="foo"
         onChange={noop}
-      />
+      />,
     );
     const el = baseElement.querySelector("goa-calendar");
     expect(baseElement).toBeTruthy();
@@ -50,12 +52,7 @@ describe("Calendar", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    const { baseElement } = render(
-      <Calendar
-        onChange={noop}
-        data-grid="cell"
-      />
-    );
+    const { baseElement } = render(<Calendar onChange={noop} data-grid="cell" />);
     const el = baseElement.querySelector("goa-calendar");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });

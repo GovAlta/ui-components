@@ -7,14 +7,16 @@ export function ShowANotification() {
     // await api.save();
 
     TemporaryNotification.show("Your application has been saved.", {
-      type: "success"
+      type: "success",
     });
   };
 
   return (
     <>
       <GoabTemporaryNotificationCtrl />
-      <GoabxButton type="secondary" onClick={save}>Save</GoabxButton>
+      <GoabxButton type="secondary" onClick={save}>
+        Save
+      </GoabxButton>
     </>
   );
 }

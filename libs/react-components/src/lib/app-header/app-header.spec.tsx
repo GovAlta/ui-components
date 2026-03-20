@@ -25,11 +25,7 @@ describe("GoabAppHeader", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabAppHeader
-        heading="Test heading"
-        url="test"
-        data-grid="row"
-      />,
+      <GoabAppHeader heading="Test heading" url="test" data-grid="row" />,
     );
     const el = baseElement.querySelector("goa-app-header");
     expect(el?.getAttribute("data-grid")).toBe("row");

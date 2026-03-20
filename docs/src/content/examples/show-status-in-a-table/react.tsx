@@ -1,4 +1,8 @@
-import { GoabxBadge, GoabxButton, GoabxTable } from "@abgov/react-components/experimental";
+import {
+  GoabxBadge,
+  GoabxButton,
+  GoabxTable,
+} from "@abgov/react-components/experimental";
 import type { GoabBadgeType } from "@abgov/ui-components-common";
 
 interface BadgeValue {

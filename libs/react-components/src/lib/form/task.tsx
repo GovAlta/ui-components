@@ -25,10 +25,7 @@ export function GoabPublicFormTask({
   children,
   ...rest
 }: GoabPublicFormTaskProps) {
-  const _props = transformProps<WCProps>(
-    { status, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ status, ...rest }, lowercase);
 
   return <goa-public-form-task {..._props}>{children}</goa-public-form-task>;
 }

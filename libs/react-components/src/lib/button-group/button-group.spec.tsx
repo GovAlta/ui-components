@@ -14,10 +14,7 @@ describe("GoabButtonGroup", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabButtonGroup
-        alignment={"start" as GoabButtonGroupAlignment}
-        data-grid="row"
-      >
+      <GoabButtonGroup alignment={"start" as GoabButtonGroupAlignment} data-grid="row">
         Content
       </GoabButtonGroup>,
     );

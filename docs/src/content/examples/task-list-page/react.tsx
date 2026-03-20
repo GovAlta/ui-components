@@ -1,10 +1,16 @@
-import { GoabxBadge, GoabxCallout, GoabxTable } from "@abgov/react-components/experimental";
+import {
+  GoabxBadge,
+  GoabxCallout,
+  GoabxTable,
+} from "@abgov/react-components/experimental";
 import { GoabText } from "@abgov/react-components";
 
 export function TaskListPage() {
   return (
     <>
-      <GoabText as="h1" mt="none">Apply for a service</GoabText>
+      <GoabText as="h1" mt="none">
+        Apply for a service
+      </GoabText>
       <GoabxCallout
         type="important"
         emphasis="low"
@@ -25,7 +31,12 @@ export function TaskListPage() {
               <a href="#">Read terms of use</a>
             </td>
             <td className="goa-table-number-column">
-              <GoabxBadge type="success" content="Completed" ariaLabel="completed" icon={false} />
+              <GoabxBadge
+                type="success"
+                content="Completed"
+                ariaLabel="completed"
+                icon={false}
+              />
             </td>
           </tr>
         </tbody>
@@ -39,7 +50,12 @@ export function TaskListPage() {
               <a href="#">Your contact details</a>
             </td>
             <td className="goa-table-number-column">
-              <GoabxBadge type="information" content="Not started" ariaLabel="not started" icon={false} />
+              <GoabxBadge
+                type="information"
+                content="Not started"
+                ariaLabel="not started"
+                icon={false}
+              />
             </td>
           </tr>
           <tr>
@@ -47,7 +63,12 @@ export function TaskListPage() {
               <a href="#">Your family</a>
             </td>
             <td className="goa-table-number-column">
-              <GoabxBadge type="information" content="Not started" ariaLabel="not started" icon={false} />
+              <GoabxBadge
+                type="information"
+                content="Not started"
+                ariaLabel="not started"
+                icon={false}
+              />
             </td>
           </tr>
           <tr>
@@ -55,13 +76,20 @@ export function TaskListPage() {
               <a href="#">Verify your identity</a>
             </td>
             <td className="goa-table-number-column">
-              <GoabxBadge type="information" content="Not started" ariaLabel="not started" icon={false} />
+              <GoabxBadge
+                type="information"
+                content="Not started"
+                ariaLabel="not started"
+                icon={false}
+              />
             </td>
           </tr>
         </tbody>
       </GoabxTable>
 
-      <GoabText as="h2" mb="s">3. Schedule service</GoabText>
+      <GoabText as="h2" mb="s">
+        3. Schedule service
+      </GoabText>
       <GoabText size="body-s" color="secondary" mt="2xs">
         You need to complete the previous section before you can start this task.
       </GoabText>
@@ -70,13 +98,23 @@ export function TaskListPage() {
           <tr>
             <td>Receive email confirmation</td>
             <td className="goa-table-number-column">
-              <GoabxBadge type="light" content="Cannot start yet" ariaLabel="cannot start yet" icon={false} />
+              <GoabxBadge
+                type="light"
+                content="Cannot start yet"
+                ariaLabel="cannot start yet"
+                icon={false}
+              />
             </td>
           </tr>
           <tr>
             <td>Pay service fee</td>
             <td className="goa-table-number-column">
-              <GoabxBadge type="light" content="Cannot start yet" ariaLabel="cannot start yet" icon={false} />
+              <GoabxBadge
+                type="light"
+                content="Cannot start yet"
+                ariaLabel="cannot start yet"
+                icon={false}
+              />
             </td>
           </tr>
         </tbody>

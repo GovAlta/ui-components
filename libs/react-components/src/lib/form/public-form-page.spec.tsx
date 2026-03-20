@@ -1,9 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import { GoabPublicFormPage } from "./public-form-page";
-import {
-  GoabFieldsetItemState
-} from "@abgov/ui-components-common";
+import { GoabFieldsetItemState } from "@abgov/ui-components-common";
 
 describe("GoabPublicFormPage", () => {
   it("renders with all properties", () => {
@@ -24,7 +22,7 @@ describe("GoabPublicFormPage", () => {
         ml="xl"
       >
         <div>Test content</div>
-      </GoabPublicFormPage>
+      </GoabPublicFormPage>,
     );
 
     const el = baseElement.querySelector("goa-public-form-page");
@@ -49,7 +47,7 @@ describe("GoabPublicFormPage", () => {
     const { baseElement } = render(
       <GoabPublicFormPage onContinue={handleContinue}>
         <div>Test content</div>
-      </GoabPublicFormPage>
+      </GoabPublicFormPage>,
     );
 
     const el = baseElement.querySelector("goa-public-form-page");
@@ -58,13 +56,13 @@ describe("GoabPublicFormPage", () => {
         name: "field1",
         label: "Field 1",
         value: "test",
-        order: 1
-      }
+        order: 1,
+      },
     };
     const detail = {
       el: el as HTMLElement,
       state: mockState,
-      cancelled: false
+      cancelled: false,
     };
     const event = new CustomEvent("_continue", { detail });
     el?.dispatchEvent(event);
@@ -76,11 +74,9 @@ describe("GoabPublicFormPage", () => {
     const handleContinue = vi.fn();
 
     const { baseElement, unmount } = render(
-      <GoabPublicFormPage
-        onContinue={handleContinue}
-      >
+      <GoabPublicFormPage onContinue={handleContinue}>
         <div>Test content</div>
-      </GoabPublicFormPage>
+      </GoabPublicFormPage>,
     );
 
     const el = baseElement.querySelector("goa-public-form-page");
@@ -92,16 +88,16 @@ describe("GoabPublicFormPage", () => {
         name: "field1",
         label: "Field 1",
         value: "test",
-        order: 1
-      }
+        order: 1,
+      },
     };
 
     const continueEvent = new CustomEvent("_continue", {
       detail: {
         el: el as HTMLElement,
         state: mockState,
-        cancelled: false
-      }
+        cancelled: false,
+      },
     });
 
     el?.dispatchEvent(continueEvent);
@@ -111,11 +107,9 @@ describe("GoabPublicFormPage", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabPublicFormPage
-        data-grid="cell"
-      >
+      <GoabPublicFormPage data-grid="cell">
         <div>Test content</div>
-      </GoabPublicFormPage>
+      </GoabPublicFormPage>,
     );
     const el = baseElement.querySelector("goa-public-form-page");
     expect(el?.getAttribute("data-grid")).toBe("cell");

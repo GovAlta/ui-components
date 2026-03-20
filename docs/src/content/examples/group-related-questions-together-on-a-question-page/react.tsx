@@ -22,8 +22,12 @@ export function GroupRelatedQuestionsTogetherOnAQuestionPage() {
         Back
       </GoabxLink>
 
-      <GoabText as="h2" mt="xl" mb="m">Your address</GoabText>
-      <GoabText mt="none" mb="xl">This is the home address of the person applying</GoabText>
+      <GoabText as="h2" mt="xl" mb="m">
+        Your address
+      </GoabText>
+      <GoabText mt="none" mb="xl">
+        This is the home address of the person applying
+      </GoabText>
 
       <GoabxFormItem label="Address line 1">
         <GoabxInput

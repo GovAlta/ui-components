@@ -1,7 +1,8 @@
 import {
   GoabBlockAlignment,
   GoabBlockDirection,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
   Spacing,
 } from "@abgov/ui-components-common";
 import { ReactNode } from "react";
@@ -38,19 +39,8 @@ export interface GoabBlockProps extends Margins, DataAttributes {
   children?: ReactNode;
 }
 
-export function GoabBlock({
-  testId,
-  children,
-  ...rest
-}: GoabBlockProps) {
-  const _props = transformProps<WCProps>(
-    { testid: testId, ...rest },
-    kebab
-  );
+export function GoabBlock({ testId, children, ...rest }: GoabBlockProps) {
+  const _props = transformProps<WCProps>({ testid: testId, ...rest }, kebab);
 
-  return (
-    <goa-block {..._props}>
-      {children}
-    </goa-block>
-  );
+  return <goa-block {..._props}>{children}</goa-block>;
 }

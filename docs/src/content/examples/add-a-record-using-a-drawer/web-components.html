@@ -1,8 +1,17 @@
 <goa-button version="2" id="open-drawer-btn" leadingicon="add">Add Record</goa-button>
-<goa-drawer version="2" id="record-drawer" max-size="492px" heading="Add Record" position="right">
+<goa-drawer
+  version="2"
+  id="record-drawer"
+  max-size="492px"
+  heading="Add Record"
+  position="right"
+>
   <goa-form-item version="2" label="Level of education">
     <goa-dropdown version="2" name="education" value="university">
-      <goa-dropdown-item value="high-school" label="High School Diploma"></goa-dropdown-item>
+      <goa-dropdown-item
+        value="high-school"
+        label="High School Diploma"
+      ></goa-dropdown-item>
       <goa-dropdown-item value="college" label="College Diploma"></goa-dropdown-item>
       <goa-dropdown-item value="university" label="University Degree"></goa-dropdown-item>
       <goa-dropdown-item value="masters" label="Master's Degree"></goa-dropdown-item>
@@ -23,7 +32,13 @@
   </goa-form-item>
   <goa-form-item version="2" label="Start date" mt="l">
     <goa-date-picker version="2"></goa-date-picker>
-    <goa-checkbox version="2" name="startDateApproximate" text="Approximate date" value="y" mt="s"></goa-checkbox>
+    <goa-checkbox
+      version="2"
+      name="startDateApproximate"
+      text="Approximate date"
+      value="y"
+      mt="s"
+    ></goa-checkbox>
   </goa-form-item>
   <goa-form-item version="2" label="Credential received?" mt="l">
     <goa-radio-group version="2" name="credentialReceived" orientation="horizontal">
@@ -33,8 +48,12 @@
   </goa-form-item>
   <div slot="actions">
     <goa-button-group>
-      <goa-button version="2" id="add-record-btn" type="primary" size="compact">Add record</goa-button>
-      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact">Cancel</goa-button>
+      <goa-button version="2" id="add-record-btn" type="primary" size="compact"
+        >Add record</goa-button
+      >
+      <goa-button version="2" id="cancel-btn" type="tertiary" size="compact"
+        >Cancel</goa-button
+      >
     </goa-button-group>
   </div>
 </goa-drawer>

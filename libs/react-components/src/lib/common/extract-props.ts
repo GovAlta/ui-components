@@ -35,7 +35,7 @@ export const kebab: TransformFn = (input) =>
  */
 export function transformProps<WC = Record<string, unknown>>(
   props: object,
-  transform: TransformFn = lowercase
+  transform: TransformFn = lowercase,
 ): WC {
   const result: Record<string, unknown> = {};
 

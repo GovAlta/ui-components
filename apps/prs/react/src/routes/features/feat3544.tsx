@@ -78,7 +78,11 @@ export function Feat3544Route() {
               open={true}
               primaryContent={
                 <>
-                  <GoabxWorkSideMenuItem label="All" url="/features/3544" icon="arrow-back" />
+                  <GoabxWorkSideMenuItem
+                    label="All"
+                    url="/features/3544"
+                    icon="arrow-back"
+                  />
                   <GoabxWorkSideMenuItem label="All Components" url="/features/3544" />
                   <GoabxWorkSideMenuGroup heading="Content layout">
                     <GoabxWorkSideMenuItem label="Container" url="/features/3544" />

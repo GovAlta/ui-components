@@ -4,18 +4,18 @@
  * FooterMetaSection is a child component of Footer.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const footerMetaSectionConfigurations: ComponentConfigurations = {
-  componentSlug: 'footer-meta-section',
-  componentName: 'Footer meta section',
-  defaultConfigurationId: 'basic',
+  componentSlug: "footer-meta-section",
+  componentName: "Footer meta section",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic footer meta section',
-      description: 'Meta links section within Footer',
+      id: "basic",
+      name: "Basic footer meta section",
+      description: "Meta links section within Footer",
       code: {
         react: `<GoabxAppFooter>
   <GoabxAppFooterMetaSection>

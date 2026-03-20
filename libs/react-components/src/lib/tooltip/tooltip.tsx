@@ -1,7 +1,8 @@
 import {
   GoabTooltipHorizontalAlignment,
   GoabTooltipPosition,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
@@ -44,10 +45,7 @@ export function GoabTooltip({
   const isStringContent = typeof content === "string";
 
   return (
-    <goa-tooltip
-      content={isStringContent ? (content as string) : undefined}
-      {..._props}
-    >
+    <goa-tooltip content={isStringContent ? (content as string) : undefined} {..._props}>
       {!isStringContent && content && <div slot="content">{content}</div>}
       {children}
     </goa-tooltip>

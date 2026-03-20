@@ -1,7 +1,4 @@
-import {
-  GoabCheckboxListOnChangeDetail,
-  Margins,
-} from "@abgov/ui-components-common";
+import { GoabCheckboxListOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 
 interface WCProps extends Margins {

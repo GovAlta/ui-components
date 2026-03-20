@@ -23,8 +23,8 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
         #3407: orientation Prop
       </GoabText>
       <GoabText tag="p">
-        Testing orientation prop (controls mobile stacking behavior). orientation is
-        only available on GoabxTabs (experimental).
+        Testing orientation prop (controls mobile stacking behavior). orientation is only
+        available on GoabxTabs (experimental).
       </GoabText>
 
       <GoabDivider mt="l" mb="l" />
@@ -52,7 +52,9 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
         </GoabBlock>
 
         <GoabBlock direction="column" gap="s">
-          <GoabText tag="h2">Test 2: Experimental Tabs + orientation="horizontal"</GoabText>
+          <GoabText tag="h2">
+            Test 2: Experimental Tabs + orientation="horizontal"
+          </GoabText>
           <GoabText tag="p">
             Experimental (v2) tabs that stay horizontal on mobile. Resize browser to
             mobile width to verify tabs remain in a row.

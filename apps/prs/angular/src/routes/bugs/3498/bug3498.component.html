@@ -1,9 +1,17 @@
 <div>
   <h1>3498 - Radio group alignment and border adjustment</h1>
   <h2>Version 1</h2>
-  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+  <goab-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
     <goab-radio-group name="contactMethod" formControlName="contactMethod">
-      <goab-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+      <goab-radio-item
+        label="Email"
+        description="Receive updates via email"
+        value="email"
+        [reveal]="emailReveal"
+      >
         <ng-template #emailReveal>
           <goab-form-item label="Email address">
             <goab-input name="email" formControlName="emailAddress"></goab-input>
@@ -28,9 +36,17 @@
   </goab-form-item>
   <h2>Version 2 (Experimental)</h2>
   <h3>Regular size</h3>
-  <goabx-form-item label="How would you like to be contacted?" helpText="Select one option">
+  <goabx-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
     <goabx-radio-group name="contactMethodTwo" formControlName="contactMethodTwo">
-      <goabx-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+      <goabx-radio-item
+        label="Email"
+        description="Receive updates via email"
+        value="email"
+        [reveal]="emailReveal"
+      >
         <ng-template #emailReveal>
           <goabx-form-item label="Email address">
             <goabx-input name="email" formControlName="emailAddress"></goabx-input>
@@ -54,9 +70,21 @@
     </goabx-radio-group>
   </goabx-form-item>
   <h3>Compact size</h3>
-  <goabx-form-item label="How would you like to be contacted?" helpText="Select one option">
-    <goabx-radio-group name="contactMethodThree" size="compact" formControlName="contactMethodThree">
-      <goabx-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+  <goabx-form-item
+    label="How would you like to be contacted?"
+    helpText="Select one option"
+  >
+    <goabx-radio-group
+      name="contactMethodThree"
+      size="compact"
+      formControlName="contactMethodThree"
+    >
+      <goabx-radio-item
+        label="Email"
+        description="Receive updates via email"
+        value="email"
+        [reveal]="emailReveal"
+      >
         <ng-template #emailReveal>
           <goabx-form-item label="Email address">
             <goabx-input name="email" formControlName="emailAddress"></goabx-input>

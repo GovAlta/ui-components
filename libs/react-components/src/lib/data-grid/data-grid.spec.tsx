@@ -6,7 +6,7 @@ describe("GoabDataGrid", () => {
     const { container } = render(
       <GoabDataGrid keyboardNav="table">
         <div>Test content</div>
-      </GoabDataGrid>
+      </GoabDataGrid>,
     );
 
     const el = container.querySelector("goa-data-grid");
@@ -21,7 +21,7 @@ describe("GoabDataGrid", () => {
     const { container } = render(
       <GoabDataGrid keyboardIconVisibility="hidden" keyboardNav="table">
         <div>Test content</div>
-      </GoabDataGrid>
+      </GoabDataGrid>,
     );
 
     const el = container.querySelector("goa-data-grid");
@@ -32,7 +32,7 @@ describe("GoabDataGrid", () => {
     const { container } = render(
       <GoabDataGrid keyboardIconPosition="right" keyboardNav="table">
         <div>Test content</div>
-      </GoabDataGrid>
+      </GoabDataGrid>,
     );
 
     const el = container.querySelector("goa-data-grid");
@@ -43,7 +43,7 @@ describe("GoabDataGrid", () => {
     const { container } = render(
       <GoabDataGrid keyboardNav="table">
         <div>Test content</div>
-      </GoabDataGrid>
+      </GoabDataGrid>,
     );
 
     const el = container.querySelector("goa-data-grid");
@@ -54,7 +54,7 @@ describe("GoabDataGrid", () => {
     const { container } = render(
       <GoabDataGrid keyboardNav="layout">
         <div>Test content</div>
-      </GoabDataGrid>
+      </GoabDataGrid>,
     );
 
     const el = container.querySelector("goa-data-grid");

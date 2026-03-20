@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { GoabxFilterChip, GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
+import {
+  GoabxFilterChip,
+  GoabxFormItem,
+  GoabxInput,
+} from "@abgov/react-components/experimental";
 
 export function TypeToCreateANewFilter() {
   const [typedChips, setTypedChips] = useState<string[]>([]);
@@ -16,7 +20,11 @@ export function TypeToCreateANewFilter() {
             if (e.key === "Enter" && e.value.trim()) {
               setTypedChips([...typedChips, e.value.trim()]);
               setTimeout(() => setInputValue(""), 0);
-            } else if (e.key === "Backspace" && !e.value.trim() && typedChips.length > 0) {
+            } else if (
+              e.key === "Backspace" &&
+              !e.value.trim() &&
+              typedChips.length > 0
+            ) {
               setTypedChips(typedChips.slice(0, -1));
             }
           }}

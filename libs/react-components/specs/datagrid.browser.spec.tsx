@@ -74,7 +74,9 @@ describe("DataGrid", () => {
     },
   ];
 
-  const getStatusBadgeType = (status: string): "success" | "emergency" | "information" | "important" => {
+  const getStatusBadgeType = (
+    status: string,
+  ): "success" | "emergency" | "information" | "important" => {
     switch (status) {
       case "Removed":
         return "success";
@@ -85,20 +87,28 @@ describe("DataGrid", () => {
     }
   };
 
-  const TestDataGrid = ({ onOpen = vi.fn(), initialUsers = testUsers }: { onOpen?: (userId: string) => void, initialUsers?: User[] }) => {
+  const TestDataGrid = ({
+    onOpen = vi.fn(),
+    initialUsers = testUsers,
+  }: {
+    onOpen?: (userId: string) => void;
+    initialUsers?: User[];
+  }) => {
     const [users, setUsers] = useState<User[]>(initialUsers);
     const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
     const [isSelectedAll, setIsSelectedAll] = useState(false);
 
     const handleDelete = (userId: string) => {
       // Actually remove the user from the array to test DOM changes
-      const updatedUsers = users.filter(user => user.idNumber !== userId);
+      const updatedUsers = users.filter((user) => user.idNumber !== userId);
       setUsers(updatedUsers);
     };
 
     const handleSort = (event: any) => {
       const { sortBy, sortDir } = event;
-      const sortedUsers = [...users].sort((a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir);
+      const sortedUsers = [...users].sort(
+        (a: any, b: any) => (a[sortBy] > b[sortBy] ? 1 : -1) * sortDir,
+      );
       setUsers(sortedUsers);
     };
 
@@ -108,7 +118,7 @@ describe("DataGrid", () => {
 
     const toggleSelection = (userId: string) => {
       if (selectedUsers.includes(userId)) {
-        setSelectedUsers(selectedUsers.filter(id => id !== userId));
+        setSelectedUsers(selectedUsers.filter((id) => id !== userId));
       } else {
         setSelectedUsers([...selectedUsers, userId]);
       }
@@ -121,16 +131,25 @@ describe("DataGrid", () => {
             <thead>
               <tr data-grid="row">
                 <th style={{ paddingBottom: 0 }} data-grid="cell">
-                  <GoabCheckbox testId="selectAll" name="selectAll" mt="2" checked={isSelectedAll} />
+                  <GoabCheckbox
+                    testId="selectAll"
+                    name="selectAll"
+                    mt="2"
+                    checked={isSelectedAll}
+                  />
                 </th>
                 <th data-grid="cell">
                   <GoabTableSortHeader name="idNumber">ID Number</GoabTableSortHeader>
                 </th>
                 <th data-grid="cell">
-                  <GoabTableSortHeader name="dataStarted">Date Started</GoabTableSortHeader>
+                  <GoabTableSortHeader name="dataStarted">
+                    Date Started
+                  </GoabTableSortHeader>
                 </th>
                 <th data-grid="cell">
-                  <GoabTableSortHeader name="dateSubmitted">Date Submitted</GoabTableSortHeader>
+                  <GoabTableSortHeader name="dateSubmitted">
+                    Date Submitted
+                  </GoabTableSortHeader>
                 </th>
                 <th data-grid="cell">
                   <GoabTableSortHeader name="status">Status</GoabTableSortHeader>
@@ -140,7 +159,11 @@ describe("DataGrid", () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.idNumber} data-grid="row" data-testid={`row-${user.idNumber}`}>
+                <tr
+                  key={user.idNumber}
+                  data-grid="row"
+                  data-testid={`row-${user.idNumber}`}
+                >
                   <td data-grid="cell">
                     <GoabCheckbox
                       name={`user${user.idNumber}`}
@@ -149,11 +172,23 @@ describe("DataGrid", () => {
                       onChange={() => toggleSelection(user.idNumber)}
                     />
                   </td>
-                  <td data-grid="cell" data-testid={`cell-${user.idNumber}-idNumber`}>{user.idNumber}</td>
-                  <td data-grid="cell" data-testid={`cell-${user.idNumber}-dateStarted`}>{user.dataStarted}</td>
-                  <td data-grid="cell" data-testid={`cell-${user.idNumber}-dateSubmitted`}>{user.dateSubmitted}</td>
+                  <td data-grid="cell" data-testid={`cell-${user.idNumber}-idNumber`}>
+                    {user.idNumber}
+                  </td>
+                  <td data-grid="cell" data-testid={`cell-${user.idNumber}-dateStarted`}>
+                    {user.dataStarted}
+                  </td>
+                  <td
+                    data-grid="cell"
+                    data-testid={`cell-${user.idNumber}-dateSubmitted`}
+                  >
+                    {user.dateSubmitted}
+                  </td>
                   <td data-grid="cell" data-testid={`cell-${user.idNumber}-status`}>
-                    <GoabBadge type={getStatusBadgeType(user.status)} content={user.status} />
+                    <GoabBadge
+                      type={getStatusBadgeType(user.status)}
+                      content={user.status}
+                    />
                   </td>
                   <td data-grid="cell">
                     <GoabButton
@@ -180,7 +215,11 @@ describe("DataGrid", () => {
     );
   };
 
-  const TestDataGridWithContainer = ({ initialUsers = testUsersWithContainer }: { initialUsers?: User[] }) => {
+  const TestDataGridWithContainer = ({
+    initialUsers = testUsersWithContainer,
+  }: {
+    initialUsers?: User[];
+  }) => {
     const [users, setUsers] = useState<User[]>(initialUsers);
     const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
     const [openMessage, setOpenMessage] = useState<string>("");
@@ -191,7 +230,7 @@ describe("DataGrid", () => {
 
     const toggleSelection = (userId: string) => {
       if (selectedUsers.includes(userId)) {
-        setSelectedUsers(selectedUsers.filter(id => id !== userId));
+        setSelectedUsers(selectedUsers.filter((id) => id !== userId));
       } else {
         setSelectedUsers([...selectedUsers, userId]);
       }
@@ -217,7 +256,7 @@ describe("DataGrid", () => {
             <GoabContainer key={user.idNumber} mt="l" data-grid="row">
               <GoabBlock direction="row" gap="m" alignment="start">
                 <GoabCheckbox
-                  name={"container-"+user.idNumber}
+                  name={"container-" + user.idNumber}
                   data-grid="cell-0"
                   checked={isSelected(user.idNumber)}
                   onChange={() => toggleSelection(user.idNumber)}
@@ -227,7 +266,10 @@ describe("DataGrid", () => {
                   <GoabBlock direction="row" gap="s" alignment="center">
                     <strong data-grid="cell-1">{user.nameOfChild}</strong>
                     <GoabBlock data-grid="cell-2">
-                      <GoabBadge type={getStatusBadgeType(user.status)} content={user.status} />
+                      <GoabBadge
+                        type={getStatusBadgeType(user.status)}
+                        content={user.status}
+                      />
                     </GoabBlock>
                   </GoabBlock>
 
@@ -261,14 +303,19 @@ describe("DataGrid", () => {
                       </GoabBlock>
                       <GoabBlock direction="column" gap="xs" data-grid="cell-9">
                         <strong>Approver</strong>
-                        <div data-testid={`approver-${user.idNumber}`}>{user.approver}</div>
+                        <div data-testid={`approver-${user.idNumber}`}>
+                          {user.approver}
+                        </div>
                         <GoabDropdown
                           testId={`approver-dropdown-${user.idNumber}`}
                           value={user.approver}
                           onChange={(event) => onApproverChange(user.idNumber, event)}
                         >
                           <GoabDropdownItem value="Sarah Ellis"></GoabDropdownItem>
-                          <GoabDropdownItem value="John Doe" label={"John Doe"}></GoabDropdownItem>
+                          <GoabDropdownItem
+                            value="John Doe"
+                            label={"John Doe"}
+                          ></GoabDropdownItem>
                           <GoabDropdownItem value="Jane Smith"></GoabDropdownItem>
                         </GoabDropdown>
                       </GoabBlock>
@@ -276,7 +323,11 @@ describe("DataGrid", () => {
                   </GoabBlock>
                 </GoabBlock>
 
-                <GoabButton type="tertiary" data-grid="cell-3" onClick={() => onOpen(user.idNumber)}>
+                <GoabButton
+                  type="tertiary"
+                  data-grid="cell-3"
+                  onClick={() => onOpen(user.idNumber)}
+                >
                   Open
                 </GoabButton>
               </GoabBlock>
@@ -292,7 +343,7 @@ describe("DataGrid", () => {
       const result = render(<TestDataGrid />);
 
       // Wait for components to fully render
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Wait for initial grid setup
       // 6 header cells + 6 cells per row * 2 rows = 18 total
@@ -302,326 +353,370 @@ describe("DataGrid", () => {
       });
 
       // Focus on the first gridcell in header row (select all checkbox)
-      const selectAllCheckbox = result.container.querySelector('thead [role="gridcell"]') as HTMLElement;
+      const selectAllCheckbox = result.container.querySelector(
+        'thead [role="gridcell"]',
+      ) as HTMLElement;
       expect(selectAllCheckbox).toBeTruthy();
       await userEvent.click(selectAllCheckbox);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press key "Arrow Right"
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Arrow Down
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify td data-testid="cell-1-idNumber" has style outline:3px solid var(--goa-color-interactive-focus)
-      const cell1IdNumber = result.container.querySelector('[data-testid="cell-1-idNumber"]') as HTMLElement;
+      const cell1IdNumber = result.container.querySelector(
+        '[data-testid="cell-1-idNumber"]',
+      ) as HTMLElement;
       expect(cell1IdNumber).toBeTruthy();
-      expect(cell1IdNumber.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell1IdNumber.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify td data-testid="cell-1-dateStarted" has style outline:3px solid var(--goa-color-interactive-focus)
-      const cell1DateStarted = result.container.querySelector('[data-testid="cell-1-dateStarted"]') as HTMLElement;
-      expect(cell1DateStarted?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      const cell1DateStarted = result.container.querySelector(
+        '[data-testid="cell-1-dateStarted"]',
+      ) as HTMLElement;
+      expect(cell1DateStarted?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // verify td data-testid="cell-1-idNumber" has no more style defined on line 129 (no focus)
-      expect(cell1IdNumber?.style.outline).toBe('');
+      expect(cell1IdNumber?.style.outline).toBe("");
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify td data-testid="cell-1-dateSubmitted" has inline style outline 3px...
-      const cell1DateSubmitted = result.container.querySelector('[data-testid="cell-1-dateSubmitted"]') as HTMLElement;
-      expect(cell1DateSubmitted?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      const cell1DateSubmitted = result.container.querySelector(
+        '[data-testid="cell-1-dateSubmitted"]',
+      ) as HTMLElement;
+      expect(cell1DateSubmitted?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify td data-testid="cell-1-status" has inline style outline
-      const cell1Status = result.container.querySelector('[data-testid="cell-1-status"]') as HTMLElement;
-      expect(cell1Status?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      const cell1Status = result.container.querySelector(
+        '[data-testid="cell-1-status"]',
+      ) as HTMLElement;
+      expect(cell1Status?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Press Arrow Right to move to Actions column (last cell with buttons)
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Check if it's the Delete button by text content
-      expect(document.activeElement?.tagName).toBe('GOA-BUTTON');
-      expect(document.activeElement?.textContent?.trim()).toContain('Delete');
+      expect(document.activeElement?.tagName).toBe("GOA-BUTTON");
+      expect(document.activeElement?.textContent?.trim()).toContain("Delete");
 
       // Press Arrow Right to move to Open button (second button in same cell)
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify Open button is focused
-      expect(document.activeElement?.tagName).toBe('GOA-BUTTON');
-      expect(document.activeElement?.textContent?.trim()).toContain('Open');
+      expect(document.activeElement?.tagName).toBe("GOA-BUTTON");
+      expect(document.activeElement?.textContent?.trim()).toContain("Open");
 
       // Test table mode boundary - Arrow Right at last cell should stay in same position
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Should still be on Open button (last focusable element in row)
-      expect(document.activeElement?.tagName).toBe('GOA-BUTTON');
-      expect(document.activeElement?.textContent?.trim()).toContain('Open');
+      expect(document.activeElement?.tagName).toBe("GOA-BUTTON");
+      expect(document.activeElement?.textContent?.trim()).toContain("Open");
 
       // Press Arrow Left multiple times to go back to first cell
       await userEvent.keyboard("{ArrowLeft}"); // Back to Delete button
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowLeft}"); // Back to Status cell
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowLeft}"); // Back to Date Submitted
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowLeft}"); // Back to Date Started
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowLeft}"); // Back to ID Number
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowLeft}"); // Back to checkbox (first cell)
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify we're now on the checkbox (first cell)
       // The checkbox is a goa-checkbox web component
-      expect(document.activeElement?.tagName).toBe('GOA-CHECKBOX');
+      expect(document.activeElement?.tagName).toBe("GOA-CHECKBOX");
 
       // Test table mode boundary - Arrow Left at first cell should stay in same position
       await userEvent.keyboard("{ArrowLeft}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Should still be on checkbox or first cell
-      expect(document.activeElement?.tagName).toBe('GOA-CHECKBOX');
+      expect(document.activeElement?.tagName).toBe("GOA-CHECKBOX");
 
       // Verify Grid listens to Slotted content changes
       // Test sorting - Press arrow up to go back to header
       await userEvent.keyboard("{ArrowUp}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Enter to sort by Status column
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Enter again to sort in reverse order
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 200)); // Give time for sort and DOM update
+      await new Promise((resolve) => setTimeout(resolve, 200)); // Give time for sort and DOM update
 
       // Arrow Down to go to first data row
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 200));
 
       // After sorting, focus should be on the first cell of first row (checkbox)
-      expect(document.activeElement?.tagName).toBe('GOA-CHECKBOX');
+      expect(document.activeElement?.tagName).toBe("GOA-CHECKBOX");
 
       // Navigate to the status column to verify sorting worked
       // Press Arrow Right 4 times to get to status column (checkbox -> id -> dateStarted -> dateSubmitted -> status)
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Now we should be on a status cell - verify one is focused
       const statusCells = result.container.querySelectorAll('td[data-testid*="-status"]');
       let focusedStatusCell: HTMLElement | null = null;
 
-      statusCells.forEach(cell => {
+      statusCells.forEach((cell) => {
         const htmlCell = cell as HTMLElement;
-        if (htmlCell.style.outline?.includes('3px solid')) {
+        if (htmlCell.style.outline?.includes("3px solid")) {
           focusedStatusCell = htmlCell;
         }
       });
 
       expect(focusedStatusCell).toBeTruthy();
-      expect(focusedStatusCell?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(focusedStatusCell?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Press arrow right to move to Actions column
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Enter to delete the current row
-      const rowCountBefore = result.container.querySelectorAll('tbody tr').length;
+      const rowCountBefore = result.container.querySelectorAll("tbody tr").length;
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 200)); // Give time for deletion and DOM update
+      await new Promise((resolve) => setTimeout(resolve, 200)); // Give time for deletion and DOM update
 
       // Verify one row is removed from DOM
-      const rowCountAfter = result.container.querySelectorAll('tbody tr').length;
+      const rowCountAfter = result.container.querySelectorAll("tbody tr").length;
       expect(rowCountAfter).toBe(rowCountBefore - 1);
 
       // Press Arrow Left to go back to status column
       await userEvent.keyboard("{ArrowLeft}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify a status cell is still highlighted after deletion
-      const remainingStatusCell = result.container.querySelector('td[data-testid*="-status"]') as HTMLElement;
+      const remainingStatusCell = result.container.querySelector(
+        'td[data-testid*="-status"]',
+      ) as HTMLElement;
       expect(remainingStatusCell).toBeTruthy();
-      expect(remainingStatusCell?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(remainingStatusCell?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
     });
 
-    it("Using with Container - should navigate with arrow keys", async() => {
+    it("Using with Container - should navigate with arrow keys", async () => {
       // TestDataGridWithContainer render
       const result = render(<TestDataGridWithContainer />);
 
       // Wait for components to fully render
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       // Click on <strong data-grid="cell-1"
       const cell1 = result.container.querySelector('[data-grid="cell-1"]') as HTMLElement;
       await userEvent.click(cell1);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify that it is highlighted style: outline: 3px...
-      expect(cell1?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell1?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify goa-block data-grid="cell-2" highlighted
       const cell2 = result.container.querySelector('[data-grid="cell-2"]') as HTMLElement;
-      expect(cell2?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell2?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // verify that data-grid="cell-1" no more highlighted
-      expect(cell1?.style.outline).toBe('');
+      expect(cell1?.style.outline).toBe("");
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Enter
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // We will have a <div data-testid="open-user">{{message}}</div> which will update message when we press Open button => "Open user 1" for example
       // Verify the message to test if Open is triggered
-      const openMessage = result.container.querySelector('[data-testid="open-user"]') as HTMLElement;
+      const openMessage = result.container.querySelector(
+        '[data-testid="open-user"]',
+      ) as HTMLElement;
       expect(openMessage?.textContent).toBe("Open user 1");
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify data-grid="cell-4" highlighted
       const cell4 = result.container.querySelector('[data-grid="cell-4"]') as HTMLElement;
-      expect(cell4?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell4?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify data-grid="cell-5" highlighted
       const cell5 = result.container.querySelector('[data-grid="cell-5"]') as HTMLElement;
-      expect(cell5?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell5?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify data-grid="cell-6" highlighted
       const cell6 = result.container.querySelector('[data-grid="cell-6"]') as HTMLElement;
-      expect(cell6?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell6?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify data-grid="cell-7" highlighted
       const cell7 = result.container.querySelector('[data-grid="cell-7"]') as HTMLElement;
-      expect(cell7?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell7?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify data-grid="cell-8" highlighted
       const cell8 = result.container.querySelector('[data-grid="cell-8"]') as HTMLElement;
-      expect(cell8?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell8?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
       // Arrow right
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Enter
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Arrow Down
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Press Enter
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify div data-testid="approver-1" has text content = John Doe
-      const approver1 = result.container.querySelector('[data-testid="approver-1"]') as HTMLElement;
+      const approver1 = result.container.querySelector(
+        '[data-testid="approver-1"]',
+      ) as HTMLElement;
       expect(approver1?.textContent).toBe("John Doe");
-    })
+    });
 
     it("Using with Container (Layout mode) - arrow right from last cell wraps to next row", async () => {
       // TestDataGridWithContainer render with layout mode
       const result = render(<TestDataGridWithContainer />);
 
       // Wait for components to fully render
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Navigate to the approver cell (cell-9) of the first row by starting from the checkbox
       // Click on the first checkbox to establish initial focus
-      const firstRowCheckbox = result.container.querySelectorAll('[data-grid="cell-0"]')[0] as HTMLElement;
+      const firstRowCheckbox = result.container.querySelectorAll(
+        '[data-grid="cell-0"]',
+      )[0] as HTMLElement;
       await userEvent.click(firstRowCheckbox);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Navigate right through all cells to reach cell-9 (approver)
       // From cell-0 to cell-1
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-1 to cell-2
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-2 to cell-3
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-3 to cell-4
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-4 to cell-5
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-5 to cell-6
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-6 to cell-7
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-7 to cell-8
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // From cell-8 to cell-9 (approver)
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Check if the dropdown inside cell-9 is focused (it contains focusable elements)
       const activeElement = document.activeElement;
 
       // The dropdown should be focused since cell-9 contains a focusable dropdown
-      expect(activeElement?.tagName).toBe('GOA-DROPDOWN');
+      expect(activeElement?.tagName).toBe("GOA-DROPDOWN");
 
       // Press Arrow Right - in layout mode, this should wrap to the next row's first cell (checkbox)
       await userEvent.keyboard("{ArrowRight}");
-      await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
       // Check that a checkbox is now focused (should be the second row's checkbox)
       const newActiveElement = document.activeElement;
-      expect(newActiveElement?.tagName).toBe('GOA-CHECKBOX');
+      expect(newActiveElement?.tagName).toBe("GOA-CHECKBOX");
     });
 
     it("Using with Container (Layout mode) - dynamically added rows should be keyboard navigable", async () => {
@@ -637,7 +732,7 @@ describe("DataGrid", () => {
 
         const toggleSelection = (userId: string) => {
           if (selectedUsers.includes(userId)) {
-            setSelectedUsers(selectedUsers.filter(id => id !== userId));
+            setSelectedUsers(selectedUsers.filter((id) => id !== userId));
           } else {
             setSelectedUsers([...selectedUsers, userId]);
           }
@@ -668,20 +763,29 @@ describe("DataGrid", () => {
 
         return (
           <div>
-            <button data-testid="add-rows-btn" onClick={addNewRows}>Add 2 New Rows</button>
+            <button data-testid="add-rows-btn" onClick={addNewRows}>
+              Add 2 New Rows
+            </button>
             <span data-testid="row-count">Total rows: {users.length}</span>
             <GoabDataGrid keyboardNav="layout">
               {users.map((user) => (
-                <GoabContainer key={user.idNumber} mt="l" data-grid="row" data-testid={`container-row-${user.idNumber}`}>
+                <GoabContainer
+                  key={user.idNumber}
+                  mt="l"
+                  data-grid="row"
+                  data-testid={`container-row-${user.idNumber}`}
+                >
                   <GoabBlock direction="row" gap="m" alignment="start">
                     <GoabCheckbox
-                      name={"container-"+user.idNumber}
+                      name={"container-" + user.idNumber}
                       data-grid="cell-0"
                       testId={`checkbox-${user.idNumber}`}
                       checked={isSelected(user.idNumber)}
                       onChange={() => toggleSelection(user.idNumber)}
                     />
-                    <strong data-grid="cell-1" data-testid={`name-${user.idNumber}`}>{user.nameOfChild}</strong>
+                    <strong data-grid="cell-1" data-testid={`name-${user.idNumber}`}>
+                      {user.nameOfChild}
+                    </strong>
                   </GoabBlock>
                 </GoabContainer>
               ))}
@@ -693,10 +797,12 @@ describe("DataGrid", () => {
       const result = render(<TestDataGridWithDynamicRows />);
 
       // Wait for components to fully render
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       // Verify initial state - should have 2 rows
-      const initialRowCount = result.container.querySelector('[data-testid="row-count"]') as HTMLElement;
+      const initialRowCount = result.container.querySelector(
+        '[data-testid="row-count"]',
+      ) as HTMLElement;
       expect(initialRowCount?.textContent).toBe("Total rows: 2");
 
       // Verify initial grid structure - 2 container rows
@@ -704,28 +810,40 @@ describe("DataGrid", () => {
       expect(initialRows.length).toBe(2);
 
       // Click on the first row's name cell to establish focus
-      const firstRowName = result.container.querySelector('[data-testid="name-1"]') as HTMLElement;
+      const firstRowName = result.container.querySelector(
+        '[data-testid="name-1"]',
+      ) as HTMLElement;
       await userEvent.click(firstRowName);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify first row name is highlighted
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(firstRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Navigate to the second row using Arrow Down
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify second row name is highlighted
-      const secondRowName = result.container.querySelector('[data-testid="name-2"]') as HTMLElement;
-      expect(secondRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      const secondRowName = result.container.querySelector(
+        '[data-testid="name-2"]',
+      ) as HTMLElement;
+      expect(secondRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Add new rows by clicking the button
-      const addRowsBtn = result.container.querySelector('[data-testid="add-rows-btn"]') as HTMLElement;
+      const addRowsBtn = result.container.querySelector(
+        '[data-testid="add-rows-btn"]',
+      ) as HTMLElement;
       await userEvent.click(addRowsBtn);
-      await new Promise(resolve => setTimeout(resolve, 500)); // Wait for React to re-render and slotchange event to rebuild grid
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Wait for React to re-render and slotchange event to rebuild grid
 
       // Verify rows were added - should now have 4 rows
-      const updatedRowCount = result.container.querySelector('[data-testid="row-count"]') as HTMLElement;
+      const updatedRowCount = result.container.querySelector(
+        '[data-testid="row-count"]',
+      ) as HTMLElement;
       expect(updatedRowCount?.textContent).toBe("Total rows: 4");
 
       const updatedRows = result.container.querySelectorAll('[data-grid="row"]');
@@ -733,52 +851,69 @@ describe("DataGrid", () => {
 
       // Click on first row's name to re-establish focus
       await userEvent.click(firstRowName);
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify first row name is highlighted after re-click
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(firstRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Navigate down through all rows including newly added ones
       // Row 1 -> Row 2
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify second row name is highlighted
-      expect(secondRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(secondRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Row 2 -> Row 3 (newly added)
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify we can reach the third row (newly added)
-      const thirdRowName = result.container.querySelector('[data-testid="name-3"]') as HTMLElement;
+      const thirdRowName = result.container.querySelector(
+        '[data-testid="name-3"]',
+      ) as HTMLElement;
       expect(thirdRowName).toBeTruthy();
       expect(thirdRowName?.textContent).toBe("New User 3");
-      expect(thirdRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(thirdRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Row 3 -> Row 4 (newly added)
       await userEvent.keyboard("{ArrowDown}");
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Verify we can reach the fourth row (newly added)
-      const fourthRowName = result.container.querySelector('[data-testid="name-4"]') as HTMLElement;
+      const fourthRowName = result.container.querySelector(
+        '[data-testid="name-4"]',
+      ) as HTMLElement;
       expect(fourthRowName).toBeTruthy();
       expect(fourthRowName?.textContent).toBe("New User 4");
-      expect(fourthRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(fourthRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       // Navigate back up to verify bidirectional navigation works
       await userEvent.keyboard("{ArrowUp}"); // Row 4 -> Row 3
-      await new Promise(resolve => setTimeout(resolve, 100));
-      expect(thirdRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      expect(thirdRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       await userEvent.keyboard("{ArrowUp}"); // Row 3 -> Row 2
-      await new Promise(resolve => setTimeout(resolve, 100));
-      expect(secondRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      expect(secondRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
 
       await userEvent.keyboard("{ArrowUp}"); // Row 2 -> Row 1
-      await new Promise(resolve => setTimeout(resolve, 100));
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      expect(firstRowName?.style.outline).toContain(
+        "3px solid var(--goa-color-interactive-focus)",
+      );
     });
   });
-
 });

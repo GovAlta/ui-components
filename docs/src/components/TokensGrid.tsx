@@ -407,7 +407,14 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
     // Motion curve tokens - show image representing the curve type
     if (token.category === "motionCurve") {
-      const getMotionCurveImage = (name: string): "expressive" | "productive" | "expressive-exit" | "expressive-reveal" | "expressive-transform"  => {
+      const getMotionCurveImage = (
+        name: string,
+      ):
+        | "expressive"
+        | "productive"
+        | "expressive-exit"
+        | "expressive-reveal"
+        | "expressive-transform" => {
         if (name.endsWith("-expressive")) return "expressive";
         if (name.endsWith("-productive")) return "productive";
         if (name.endsWith("-expressive-exit")) return "expressive-exit";

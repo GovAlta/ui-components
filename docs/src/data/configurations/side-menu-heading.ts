@@ -4,18 +4,18 @@
  * SideMenuHeading is a child component of SideMenu.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const sideMenuHeadingConfigurations: ComponentConfigurations = {
-  componentSlug: 'side-menu-heading',
-  componentName: 'Side menu heading',
-  defaultConfigurationId: 'basic',
+  componentSlug: "side-menu-heading",
+  componentName: "Side menu heading",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic side menu heading',
-      description: 'Section heading within SideMenu',
+      id: "basic",
+      name: "Basic side menu heading",
+      description: "Section heading within SideMenu",
       code: {
         react: `<GoabxSideMenu>
   <GoabxSideMenuHeading>Main Menu</GoabxSideMenuHeading>

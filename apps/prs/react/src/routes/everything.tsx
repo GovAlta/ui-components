@@ -1585,7 +1585,8 @@ export function EverythingRoute(): JSX.Element {
             Data Grid (Keyboard Navigation)
           </GoabText>
           <GoabText tag="p" size="body-s" mb="m">
-            The data grid wraps a table to enable keyboard navigation. Use arrow keys to move between cells.
+            The data grid wraps a table to enable keyboard navigation. Use arrow keys to
+            move between cells.
           </GoabText>
           <GoabDataGrid keyboardNav="table">
             <GoabTable width="100%">
@@ -1605,11 +1606,16 @@ export function EverythingRoute(): JSX.Element {
                       <td data-grid="cell">{row.name}</td>
                       <td data-grid="cell">{row.created}</td>
                       <td data-grid="cell">
-                        <GoabBadge type={row.status === "Active" ? "success" : "important"} content={row.status} />
+                        <GoabBadge
+                          type={row.status === "Active" ? "success" : "important"}
+                          content={row.status}
+                        />
                       </td>
                       <td data-grid="cell">{row.progress}%</td>
                       <td data-grid="cell">
-                        <GoabButton type="tertiary" size="compact">View</GoabButton>
+                        <GoabButton type="tertiary" size="compact">
+                          View
+                        </GoabButton>
                       </td>
                     </tr>
                   ))}

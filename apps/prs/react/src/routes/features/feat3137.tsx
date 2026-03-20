@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  GoabButton,
-  GoabText,
-  GoabContainer,
-} from "@abgov/react-components";
+import { GoabButton, GoabText, GoabContainer } from "@abgov/react-components";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuGroup,
@@ -141,11 +137,7 @@ export function Feat3137Route() {
                   url="/documents/favorites"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
-                  label="Trash"
-                  url="/documents/trash"
-                  icon="star"
-                />
+                <GoabxWorkSideMenuItem label="Trash" url="/documents/trash" icon="star" />
               </GoabxWorkSideMenuGroup>
 
               {/* Communication Group */}
@@ -236,11 +228,7 @@ export function Feat3137Route() {
                   url="/account/billing"
                   icon="card"
                 />
-                <GoabxWorkSideMenuItem
-                  label="Log Out"
-                  url="/logout"
-                  icon="log-out"
-                />
+                <GoabxWorkSideMenuItem label="Log Out" url="/logout" icon="log-out" />
               </GoabxWorkSideMenuGroup>
             </>
           }

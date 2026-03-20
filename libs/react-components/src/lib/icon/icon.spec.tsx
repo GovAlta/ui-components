@@ -46,12 +46,7 @@ describe("GoabIcon", () => {
   });
 
   it("should pass data-grid attributes", () => {
-    const { container } = render(
-      <GoabIcon
-        type="information"
-        data-grid="cell"
-      />
-    );
+    const { container } = render(<GoabIcon type="information" data-grid="cell" />);
     const el = container.querySelector("goa-icon");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
