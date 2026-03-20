@@ -13,6 +13,9 @@ interface Props {
 }
 
 const { title, description, page } = Astro.props;
+const metaDescription = description || "Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.";
+const ogImage = new URL('/og-image.png', Astro.site).href;
+const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -36,8 +39,23 @@ const { title, description, page } = Astro.props;
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title} - GoA Design System</title>
-  {description && <meta name="description" content={description} />}
+  <title>{page === 'home' ? title : `${title} - GoA Design System`}</title>
+  <meta name="description" content={metaDescription}>
+
+  <!-- Favicon & icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#333333">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={metaDescription}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:url" content={ogUrl}>
 
   <!-- GoA Web Components JavaScript (registers custom elements) -->
   <script>
