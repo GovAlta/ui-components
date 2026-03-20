@@ -93,6 +93,17 @@
     checkSlotsContent();
   }
 
+  // V2: Check initial scroll state when modal opens
+  $: if (_isOpen && version === "2") {
+    tick().then(() => {
+      const modalContent = _rootEl?.querySelector(".modal-content");
+      if (modalContent) {
+        const { scrollTop, scrollHeight, clientHeight } = modalContent as HTMLElement;
+        _scrollPos = calculateScrollPos(scrollTop, scrollHeight, clientHeight);
+      }
+    });
+  }
+
   $: _iconType =
     calloutvariant === "emergency"
       ? "warning"
@@ -204,6 +215,27 @@
       _scrollPos = "middle";
     }
   }
+
+  // V2: handle scroll event from modal-content to set _scrollPos for borders
+  function handleV2Scroll(e: Event) {
+    if (!_isOpen) return;
+    const target = e.target as HTMLElement;
+    const { scrollTop, scrollHeight, clientHeight } = target;
+    _scrollPos = calculateScrollPos(scrollTop, scrollHeight, clientHeight);
+  }
+
+  // Shared helper to calculate scroll position from scroll metrics
+  function calculateScrollPos(
+    scrollTop: number,
+    scrollHeight: number,
+    clientHeight: number,
+  ): "top" | "middle" | "bottom" | null {
+    const hasScroll = scrollHeight > clientHeight;
+    if (!hasScroll) return null;
+    if (scrollTop < 1) return "top";
+    if (Math.abs(scrollHeight - scrollTop - clientHeight) < 1) return "bottom";
+    return "middle";
+  }
 </script>
 
 {#if _isOpen}
@@ -286,18 +318,28 @@
               </div>
             {/if}
           </header>
-          <div data-testid="modal-content" class="modal-content">
-            <goa-scrollable
-              direction="vertical"
-              hpadding="var(--scrollable-padding)"
-              maxheight="calc(100vh - {_headerHeight}px - var(--goa-space-xl) - {_actionsHeight}px - {_edgeMargin}px)"
-              bind:this={_scrollEl}
-              on:_scroll={handleScroll}
-            >
-              <slot name="content">
-                <slot />
-              </slot>
-            </goa-scrollable>
+          <div data-testid="modal-content" class="modal-content"
+            on:scroll={version === "2" ? handleV2Scroll : undefined}
+          >
+            {#if version !== "2"}
+              <goa-scrollable
+                direction="vertical"
+                hpadding="var(--scrollable-padding)"
+                maxheight="calc(100vh - {_headerHeight}px - var(--goa-space-xl) - {_actionsHeight}px - {_edgeMargin}px)"
+                bind:this={_scrollEl}
+                on:_scroll={handleScroll}
+              >
+                <slot name="content">
+                  <slot />
+                </slot>
+              </goa-scrollable>
+            {:else}
+              <div class="scroll-content">
+                <slot name="content">
+                  <slot />
+                </slot>
+              </div>
+            {/if}
           </div>
           <div
             bind:clientHeight={_actionsHeight}
@@ -458,6 +500,22 @@
       padding: var(--goa-modal-actions-padding-mobile, 0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m));
     }
 
+    /* V2: Suppress modal-content padding (content is now in scroll-content) */
+    .modal-pane.v2 .modal-content {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* V2: Mobile scroll-content padding */
+    .v2 .scroll-content {
+      padding: var(--goa-modal-content-padding-mobile, var(--goa-space-l) var(--goa-space-m) var(--goa-space-xl) var(--goa-space-m));
+    }
+
+    /* V2: Mobile actions padding (re-apply since general rule suppresses border) */
+    .modal-pane.v2 .modal-actions {
+      padding: var(--goa-modal-actions-padding-mobile, 0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m));
+    }
+
   }
 
   @media (--not-mobile) {
@@ -473,6 +531,23 @@
 
     :host {
       --scrollable-padding: var(--goa-modal-scrollable-padding-desktop, var(--goa-scrollable-padding-desktop));
+    }
+
+    /* V2: Desktop padding for sticky layout */
+    .v2 .content header {
+      padding: var(--goa-modal-heading-padding, var(--goa-space-m) var(--goa-space-xl));
+    }
+
+    .v2 .content header.callout {
+      padding: var(--goa-modal-callout-heading-padding);
+    }
+
+    .v2 .scroll-content {
+      padding: var(--goa-modal-content-padding, var(--goa-space-m) var(--goa-space-xl));
+    }
+
+    .v2 .modal-actions {
+      padding: var(--goa-modal-actions-padding, var(--goa-space-m) var(--goa-space-xl));
     }
 
   }
@@ -592,5 +667,85 @@
 
   .v2 header.event goa-icon {
     color: var(--goa-modal-callout-event-icon);
+  }
+
+  /* ====================================================================
+   * V2: Sticky header / footer layout
+   * ==================================================================== */
+
+  /* Modal pane becomes a flex column so header and actions are sticky */
+  .v2.modal-pane {
+    flex-direction: column;
+    max-height: calc(100vh - 128px);
+    overflow: hidden;
+  }
+
+  /* Content fills the pane as a flex column; no outer padding (set per-element below) */
+  .v2 .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0;
+  }
+
+  /* Header stays at the top */
+  .v2 .content header {
+    flex: 0 0 auto;
+    background-color: var(--goa-color-greyscale-white);
+    border-bottom: none;
+  }
+
+  /* Show header bottom border when content has scrolled past the top */
+  .modal.middle .modal-pane.v2 header,
+  .modal.bottom .modal-pane.v2 header {
+    border-bottom: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  }
+
+  /* Callout headers use the callout border colour */
+  .modal.middle .modal-pane.v2 header.callout,
+  .modal.bottom .modal-pane.v2 header.callout {
+    border-bottom-color: inherit;
+  }
+
+  /* Scrollable content area */
+  .modal-pane.v2 .modal-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  /* Actions stay at the bottom */
+  .v2 .modal-actions {
+    flex: 0 0 auto;
+    background-color: var(--goa-color-greyscale-white);
+    margin: 0;
+    border-top: none;
+  }
+
+  /* Show actions top border when content hasn't yet scrolled to the bottom */
+  .modal.top .modal-pane.v2 .modal-actions,
+  .modal.middle .modal-pane.v2 .modal-actions {
+    border-top: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
+  }
+
+  /* Empty actions take no space and never show a border */
+  .modal-pane.v2 .modal-actions.empty-actions {
+    padding: 0;
+    border-top: none;
+  }
+
+  /* Override scroll-state border rules for empty actions */
+  .modal.top .modal-pane.v2 .modal-actions.empty-actions,
+  .modal.middle .modal-pane.v2 .modal-actions.empty-actions {
+    border-top: none;
+  }
+
+  /* Suppress box-shadow on content for v2 (borders convey scroll position) */
+  .modal .modal-pane.v2 .modal-content {
+    box-shadow: none;
   }
 </style>

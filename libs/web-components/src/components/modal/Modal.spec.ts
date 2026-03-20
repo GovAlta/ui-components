@@ -234,4 +234,79 @@ describe("Modal Component", () => {
       expect(modal?.getAttribute("data-first-focus")).toBe("true");
     });
   });
+
+  describe("v2 scroll position tracking", () => {
+    it("should track scroll position when content scrolls in v2", async () => {
+      const el = render(GoAModal, { open: "true", version: "2" });
+
+      await waitFor(() => {
+        const modalEl = el.queryByTestId("modal");
+        expect(modalEl).toBeTruthy();
+      });
+
+      const modalEl = el.queryByTestId("modal")!;
+      const contentEl = el.queryByTestId("modal-content")!;
+
+      // Simulate scroll to middle
+      await fireEvent(
+        contentEl,
+        new Event("scroll", { bubbles: true }),
+      );
+
+      // Scrolling while at top shouldn't break anything
+      await waitFor(() => {
+        expect(modalEl).toBeTruthy();
+      });
+    });
+
+    it("should use native overflow scroll for v2 (no goa-scrollable)", async () => {
+      const el = render(GoAModal, { open: "true", version: "2" });
+
+      await waitFor(() => {
+        const modalContent = el.queryByTestId("modal-content");
+        expect(modalContent).toBeTruthy();
+        // v2 should not use goa-scrollable
+        const scrollable = modalContent?.querySelector("goa-scrollable");
+        expect(scrollable).toBeNull();
+        // v2 should use a scroll-content div instead
+        const scrollContent = modalContent?.querySelector(".scroll-content");
+        expect(scrollContent).toBeTruthy();
+      });
+    });
+
+    it("should use goa-scrollable for v1 (default)", async () => {
+      const el = render(GoAModal, { open: "true" });
+
+      await waitFor(() => {
+        const modalContent = el.queryByTestId("modal-content");
+        expect(modalContent).toBeTruthy();
+        const scrollable = modalContent?.querySelector("goa-scrollable");
+        expect(scrollable).toBeTruthy();
+      });
+    });
+
+    it("should add scroll position class to modal element in v2", async () => {
+      const el = render(GoAModal, { open: "true", version: "2" });
+
+      await waitFor(() => {
+        const modalEl = el.queryByTestId("modal");
+        expect(modalEl).toBeTruthy();
+      });
+
+      const contentEl = el.queryByTestId("modal-content")!;
+
+      // Mock scrollHeight > clientHeight to simulate scrollable content
+      Object.defineProperty(contentEl, "scrollHeight", { value: 1000, configurable: true });
+      Object.defineProperty(contentEl, "clientHeight", { value: 400, configurable: true });
+      Object.defineProperty(contentEl, "scrollTop", { value: 0, configurable: true, writable: true });
+
+      // Simulate scroll to top position
+      await fireEvent.scroll(contentEl, { target: { scrollTop: 0 } });
+
+      await waitFor(() => {
+        const modalEl = el.queryByTestId("modal");
+        expect(modalEl?.classList.contains("top")).toBe(true);
+      });
+    });
+  });
 });

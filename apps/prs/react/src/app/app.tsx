@@ -140,6 +140,7 @@ export function App() {
                 <GoabxWorkSideMenuItem label="3407 Tabs Orientation" url="/features/3407-stack-on-mobile" />
                 <GoabxWorkSideMenuItem label="3398 Group open prop" url="/features/3398" />
                 <GoabxWorkSideMenuItem label="3478 Popover API Rewrite" url="/features/3478" />
+                <GoabxWorkSideMenuItem label="3347 Modal sticky header/footer" url="/features/3347" />
               </GoabxWorkSideMenuGroup>
               <GoabxWorkSideMenuItem icon="list" label="Everything" url="/everything" />
             </>
