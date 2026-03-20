@@ -17,6 +17,7 @@ import { GoabBaseComponent } from "../base.component";
     <goa-sticky-container
       [attr.height]="height"
       [attr.testid]="testId"
+      [style.height]="height"
     >
       @if (header) {
         <div slot="header">

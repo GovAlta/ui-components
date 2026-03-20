@@ -56,6 +56,8 @@ describe("GoabStickyContainer", () => {
     const el = fixture.debugElement.query(By.css("goa-sticky-container"))
       ?.nativeElement;
     expect(el?.getAttribute("height")).toBe("400px");
+    // height is also applied as inline style so shadow-DOM flex layout is constrained
+    expect(el?.style.height).toBe("400px");
   });
 
   it("should set the testid attribute", () => {
