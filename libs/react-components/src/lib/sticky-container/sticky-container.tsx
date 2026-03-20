@@ -1,5 +1,5 @@
 import { DataAttributes } from "@abgov/ui-components-common";
-import { ReactNode, type JSX } from "react";
+import React, { ReactNode, type JSX } from "react";
 
 interface WCProps {
   height?: string;
@@ -39,8 +39,12 @@ export function GoabStickyContainer({
   testId,
   ...rest
 }: GoabStickyContainerProps): JSX.Element {
+  // Set height as an inline style directly on the host element so the shadow-DOM
+  // flex layout is constrained before JavaScript runs.
+  const hostStyle = height ? ({ height } as React.CSSProperties) : undefined;
+
   return (
-    <goa-sticky-container height={height} testid={testId} {...rest}>
+    <goa-sticky-container height={height} testid={testId} style={hostStyle} {...rest}>
       {header && <div slot="header">{header}</div>}
       {children}
       {footer && <div slot="footer">{footer}</div>}

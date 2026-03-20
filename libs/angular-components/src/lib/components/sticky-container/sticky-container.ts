@@ -14,7 +14,11 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-sticky-container",
   imports: [NgTemplateOutlet],
   template: `@if (isReady) {
-    <goa-sticky-container [attr.height]="height" [attr.testid]="testId">
+    <goa-sticky-container
+      [attr.height]="height"
+      [attr.testid]="testId"
+      [style.height]="height"
+    >
       @if (header) {
         <div slot="header">
           <ng-container [ngTemplateOutlet]="header"></ng-container>

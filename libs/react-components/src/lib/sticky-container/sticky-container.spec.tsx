@@ -37,8 +37,11 @@ describe("StickyContainer", () => {
     const { container } = render(
       <GoabStickyContainer height="400px">Body content</GoabStickyContainer>,
     );
-    const el = container.querySelector("goa-sticky-container");
+    const el = container.querySelector("goa-sticky-container") as HTMLElement | null;
     expect(el?.getAttribute("height")).toBe("400px");
+    // height is also applied as inline style on the host so the shadow-DOM flex layout
+    // has a concrete reference before JS runs
+    expect(el?.style.height).toBe("400px");
   });
 
   it("passes testId as testid attribute", () => {

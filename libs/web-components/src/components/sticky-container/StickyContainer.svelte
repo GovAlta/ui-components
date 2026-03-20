@@ -5,7 +5,7 @@
 />
 
 <script lang="ts">
-  import { tick } from "svelte";
+  import { tick, onMount } from "svelte";
 
   // ******
   // Public
@@ -16,6 +16,7 @@
   /**
    * Sets the height of the container. Any valid CSS height value (e.g. "400px", "100%", "100vh").
    * Defaults to "100%". The parent element must establish a height context for "100%" to work.
+   * The value is applied directly to the host element's style.
    */
   export let height: string = "100%";
 
@@ -34,9 +35,33 @@
     tick().then(() => updateScrollPos());
   }
 
+  // Apply height to the host element whenever the prop changes.
+  $: applyHostHeight(height);
+
+  // *****
+  // Hooks
+  // *****
+
+  onMount(() => {
+    applyHostHeight(height);
+  });
+
   // *********
   // Functions
   // *********
+
+  /**
+   * Apply the height value directly to the custom element host so the shadow-DOM
+   * flex layout has a concrete height to work against. CSS `height: 100%` on an
+   * inner div only works when the *host* element has a height — this ensures it does.
+   */
+  function applyHostHeight(h: string) {
+    if (!_contentEl) return;
+    const root = _contentEl.getRootNode();
+    if (root instanceof ShadowRoot) {
+      (root.host as HTMLElement).style.height = h;
+    }
+  }
 
   function calculateScrollPos(
     scrollTop: number,
@@ -63,62 +88,54 @@
   }
 </script>
 
+{#if $$slots.header}
+  <section
+    class="sticky-header"
+    class:sticky-header--bordered={_scrollPos === "middle" || _scrollPos === "bottom"}
+    aria-label="Sticky header"
+  >
+    <slot name="header" />
+  </section>
+{/if}
+
 <div
-  class="sticky-container"
-  style="height: {height};"
+  class="sticky-content"
+  class:sticky-content--shadow-bottom={_scrollPos === "top"}
+  class:sticky-content--shadow-top={_scrollPos === "bottom"}
+  class:sticky-content--shadow-both={_scrollPos === "middle"}
+  bind:this={_contentEl}
+  on:scroll={onScroll}
+  role="region"
+  aria-label="Scrollable content"
   data-testid={testid || undefined}
 >
-  {#if $$slots.header}
-    <section
-      class="sticky-header"
-      class:sticky-header--bordered={_scrollPos === "middle" || _scrollPos === "bottom"}
-      aria-label="Sticky header"
-    >
-      <slot name="header" />
-    </section>
-  {/if}
-
-  <div
-    class="sticky-content"
-    class:sticky-content--shadow-bottom={_scrollPos === "top"}
-    class:sticky-content--shadow-top={_scrollPos === "bottom"}
-    class:sticky-content--shadow-both={_scrollPos === "middle"}
-    bind:this={_contentEl}
-    on:scroll={onScroll}
-    role="region"
-    aria-label="Scrollable content"
-  >
-    <slot />
-  </div>
-
-  {#if $$slots.footer}
-    <section
-      class="sticky-footer"
-      class:sticky-footer--bordered={_scrollPos === "middle" || _scrollPos === "top"}
-      aria-label="Sticky footer"
-    >
-      <slot name="footer" />
-    </section>
-  {/if}
+  <slot />
 </div>
 
+{#if $$slots.footer}
+  <section
+    class="sticky-footer"
+    class:sticky-footer--bordered={_scrollPos === "middle" || _scrollPos === "top"}
+    aria-label="Sticky footer"
+  >
+    <slot name="footer" />
+  </section>
+{/if}
+
 <style>
+  /* The host element IS the flex container — height is set on it via JS. */
   :host {
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
     box-sizing: border-box;
     font-family: var(--goa-font-family-sans);
+    width: 100%;
+    background-color: var(--goa-sticky-container-bg-color, var(--goa-color-greyscale-white));
   }
 
   :host * {
     box-sizing: border-box;
-  }
-
-  .sticky-container {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    width: 100%;
-    background-color: var(--goa-sticky-container-bg-color, var(--goa-color-greyscale-white));
   }
 
   /* Header */
