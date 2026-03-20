@@ -67,6 +67,7 @@ export * from "./components/push-drawer/PushDrawer.svelte";
 export * from "./components/radio-group/RadioGroup.svelte";
 export * from "./components/radio-item/RadioItem.svelte";
 export * from "./components/scrollable/Scrollable.svelte";
+export * from "./components/sticky-container/StickyContainer.svelte";
 export * from "./components/side-menu/SideMenu.svelte";
 export * from "./components/side-menu-group/SideMenuGroup.svelte";
 export * from "./components/side-menu-heading/SideMenuHeading.svelte";

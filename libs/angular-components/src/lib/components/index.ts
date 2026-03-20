@@ -69,6 +69,7 @@ export * from "./side-menu-group/side-menu-group";
 export * from "./side-menu-heading/side-menu-heading";
 export * from "./skeleton/skeleton";
 export * from "./spacer/spacer";
+export * from "./sticky-container/sticky-container";
 export * from "./tab/tab";
 export * from "./table/table";
 export * from "./table-sort-header/table-sort-header";

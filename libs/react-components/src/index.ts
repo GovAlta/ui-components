@@ -63,6 +63,7 @@ export * from "./lib/side-menu/side-menu";
 export * from "./lib/skeleton/skeleton";
 export * from "./lib/spacer/spacer";
 export * from "./lib/spinner/spinner";
+export * from "./lib/sticky-container/sticky-container";
 export * from "./lib/table/table";
 export * from "./lib/table/table-sort-header";
 export * from "./lib/tabs/tabs";
