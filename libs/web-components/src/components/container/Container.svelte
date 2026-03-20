@@ -186,6 +186,7 @@
     border: var(--goa-container-border);
     border-top-left-radius: var(--goa-container-border-radius);
     border-top-right-radius: var(--goa-container-border-radius);
+    flex-shrink: 0;
   }
 
   .content {
