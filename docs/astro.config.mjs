@@ -10,6 +10,7 @@ const workspaceRoot = path.resolve(__dirname, "..");
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://goa-design-2.netlify.app",
   root: ".",
   outDir: "../dist/docs",
   build: {
@@ -55,7 +56,10 @@ export default defineConfig({
         // Design tokens V2 for docs styling (via npm alias)
         {
           find: "@design-tokens",
-          replacement: path.resolve(workspaceRoot, "node_modules/@abgov/design-tokens-v2/dist"),
+          replacement: path.resolve(
+            workspaceRoot,
+            "node_modules/@abgov/design-tokens-v2/dist",
+          ),
         },
       ],
       dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],
