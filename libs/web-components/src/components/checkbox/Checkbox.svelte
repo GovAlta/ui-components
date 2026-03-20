@@ -185,7 +185,8 @@
   function sendMountedMessage() {
     if (!name) return;
 
-    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)?.host as HTMLElement;
+    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)
+      ?.host as HTMLElement;
     const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
 
     relay<FormFieldMountRelayDetail>(
@@ -291,7 +292,9 @@ max-width: ${maxwidth};
         value={`${value}`}
         aria-label={arialabel || text || name}
         aria-checked={isIndeterminate ? "mixed" : isChecked ? "true" : "false"}
-        aria-describedby={$$slots.description || description !== "" ? _descriptionId : null}
+        aria-describedby={$$slots.description || description !== ""
+          ? _descriptionId
+          : null}
         aria-invalid={_error ? "true" : "false"}
         on:change={onChange}
         on:focus={onFocus}
@@ -306,13 +309,7 @@ max-width: ${maxwidth};
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect
-            x="0"
-            y="0"
-            width="18"
-            height="3"
-            rx="1.4"
-          />
+          <rect x="0" y="0" width="18" height="3" rx="1.4" />
         </svg>
       {:else if isIndeterminate}
         <svg
@@ -380,7 +377,10 @@ max-width: ${maxwidth};
   }
 
   .root {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: auto; /* Automatically adjusts to content */
     min-height: 0; /* Ensures no unnecessary minimum height */
     padding: 0; /* Remove padding if it's affecting height */
@@ -457,7 +457,7 @@ max-width: ${maxwidth};
   }
 
   .container::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 44px;
     height: 44px;
@@ -652,6 +652,8 @@ max-width: ${maxwidth};
   }
 
   .compact .description {
-    margin-left: calc(var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact));
+    margin-left: calc(
+      var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact)
+    );
   }
 </style>
