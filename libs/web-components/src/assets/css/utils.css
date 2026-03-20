@@ -1,0 +1,31 @@
+/**
+ * CSS Utilities
+ * Common utility classes used across components
+ */
+
+:root {
+  /* Sticky utility custom properties */
+  --sticky-top: 0;
+  --sticky-z-index: 10;
+  --scroll-container-height: auto;
+}
+
+/**
+ * Sticky Utility Classes
+ * Classes for creating sticky positioned elements
+ */
+
+/* Base sticky class - makes element stick to top of its scrollable parent */
+.sticky {
+  position: sticky;
+  top: var(--sticky-top);
+  z-index: var(--sticky-z-index);
+  width: 100%;
+}
+
+/* Base scroll container - ensures proper setup for sticky children */
+.scroll-container {
+  overflow-y: auto;
+  position: relative;
+  height: var(--scroll-container-height);
+}
