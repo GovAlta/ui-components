@@ -60,6 +60,28 @@ describe("GoA Container", () => {
     });
   });
 
+  describe("Sticky header", () => {
+    it("should add the sticky class to the header when stickyHeader is true", async () => {
+      const baseElement = render(GoAContainer, {
+        testid: "container-test",
+        stickyHeader: true,
+      });
+      const container = await baseElement.findByTestId("container-test");
+      const header = container?.querySelector("header");
+      expect(header?.classList).toContain("sticky");
+    });
+
+    it("should not add the sticky class to the header when stickyHeader is false", async () => {
+      const baseElement = render(GoAContainer, {
+        testid: "container-test",
+        stickyHeader: false,
+      });
+      const container = await baseElement.findByTestId("container-test");
+      const header = container?.querySelector("header");
+      expect(header?.classList).not.toContain("sticky");
+    });
+  });
+
   describe("Margins", () => {
     it(`should add the margin`, async () => {
       const baseElement = render(GoAContainer, {

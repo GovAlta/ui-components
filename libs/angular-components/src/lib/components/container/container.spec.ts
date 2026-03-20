@@ -30,6 +30,7 @@ import { By } from "@angular/platform-browser";
       [ml]="ml"
       [actions]="actions"
       [title]="title"
+      [stickyHeader]="stickyHeader"
     >
       <ng-template #actions>
         <goab-button (onClick)="onClick()">Save</goab-button>
@@ -55,6 +56,7 @@ class TestContainerComponent {
   maxWidth?: string;
   minHeight?: string;
   maxHeight?: string;
+  stickyHeader?: boolean;
 
   onClick() {
     /* do nothing */
@@ -115,4 +117,14 @@ describe("GoABContainer", () => {
 
     expect(el?.innerHTML).toContain("Container content");
   });
+
+  it("should set stickyheader attribute when stickyHeader is true", fakeAsync(() => {
+    component.stickyHeader = true;
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const el = fixture.debugElement.query(By.css("goa-container")).nativeElement;
+    expect(el?.getAttribute("stickyheader")).toBe("true");
+  }));
 });

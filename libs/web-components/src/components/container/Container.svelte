@@ -5,6 +5,7 @@
       maxWidth: { type: "String", attribute: "maxwidth" },
       minHeight: { type: "String", attribute: "minheight" },
       maxHeight: { type: "String", attribute: "maxheight" },
+      stickyHeader: { type: "Boolean", attribute: "stickyheader" },
     },
   }}
 />
@@ -14,7 +15,7 @@
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { ensureSlotExists, typeValidator } from "../../common/utils";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   // Validator
   const [Types, validateType] = typeValidator("Container type", [
@@ -60,6 +61,8 @@
   export let minHeight = "";
   /** Sets the maximum height of the container. */
   export let maxHeight = "";
+  /** When true, keeps the header visible when the container content scrolls. */
+  export let stickyHeader: boolean = false;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Top margin. */
@@ -74,6 +77,24 @@
   // Private
 
   let _contentEl: HTMLElement;
+  let _scrollPos: "top" | "middle" | "bottom" | null = null;
+
+  function handleContentScroll() {
+    if (!_contentEl) return;
+    const { scrollTop, scrollHeight, clientHeight } = _contentEl;
+    const hasScroll = scrollHeight > clientHeight;
+    if (!hasScroll) {
+      _scrollPos = null;
+      return;
+    }
+    if (scrollTop < 1) {
+      _scrollPos = "top";
+    } else if (Math.abs(scrollHeight - scrollTop - clientHeight) < 1) {
+      _scrollPos = "bottom";
+    } else {
+      _scrollPos = "middle";
+    }
+  }
 
   // Hooks
 
@@ -84,6 +105,18 @@
     validateWidth(width);
 
     ensureSlotExists(_contentEl);
+
+    if (stickyHeader) {
+      _contentEl.addEventListener("scroll", handleContentScroll);
+      const hasScroll = _contentEl.scrollHeight > _contentEl.clientHeight;
+      _scrollPos = hasScroll ? "top" : null;
+    }
+  });
+
+  onDestroy(() => {
+    if (stickyHeader) {
+      _contentEl?.removeEventListener("scroll", handleContentScroll);
+    }
   });
 </script>
 
@@ -103,9 +136,10 @@
     padding--${padding}
     accent--${accent}
     width--${width}
+    ${_scrollPos === "middle" || _scrollPos === "bottom" ? "scrolled" : ""}
   `}
 >
-  <header class="heading--{accent}">
+  <header class="heading--{accent}" class:sticky={stickyHeader}>
     {#if $$slots.title}
       <div class="title">
         <slot name="title" />
@@ -300,5 +334,16 @@
 
   .width--content {
     flex-grow: 0;
+  }
+
+  /* Sticky header */
+  header.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .scrolled header.sticky {
+    box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.2);
   }
 </style>

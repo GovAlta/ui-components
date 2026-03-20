@@ -16,6 +16,7 @@ interface WCProps extends Margins {
   maxwidth?: string;
   minheight?: string;
   maxheight?: string;
+  stickyheader?: string;
   testid?: string;
 }
 
@@ -40,6 +41,7 @@ export interface GoabContainerProps extends Margins, DataAttributes {
   maxWidth?: string;
   minHeight?: string;
   maxHeight?: string;
+  stickyHeader?: boolean;
   testId?: string;
 }
 
@@ -48,6 +50,7 @@ export function GoabContainer({
   title,
   actions,
   children,
+  stickyHeader,
   ...rest
 }: GoabContainerProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
@@ -55,7 +58,7 @@ export function GoabContainer({
   const headingContent = heading || title;
 
   return (
-    <goa-container {..._props}>
+    <goa-container {..._props} stickyheader={stickyHeader ? "true" : undefined}>
       {headingContent && <div slot="title">{headingContent}</div>}
       {children}
       {actions && <div slot="actions">{actions}</div>}

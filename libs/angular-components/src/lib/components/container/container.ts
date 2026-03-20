@@ -28,6 +28,7 @@ import { GoabBaseComponent } from "../base.component";
       [attr.maxwidth]="maxWidth"
       [attr.minheight]="minHeight"
       [attr.maxheight]="maxHeight"
+      [attr.stickyheader]="stickyHeader"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -57,6 +58,7 @@ export class GoabContainer extends GoabBaseComponent implements OnInit {
   @Input() maxWidth?: string;
   @Input() minHeight?: string;
   @Input() maxHeight?: string;
+  @Input() stickyHeader?: boolean;
   @Input() title!: TemplateRef<any>;
   @Input() actions!: TemplateRef<any>;
 

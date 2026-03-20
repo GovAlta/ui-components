@@ -64,4 +64,14 @@ describe("Container", () => {
     const el = container.querySelector("goa-container");
     expect(el?.getAttribute("data-grid")).toBe("cell");
   });
+
+  it("should set stickyHeader attribute", () => {
+    const { container } = render(
+      <GoabContainer stickyHeader={true}>
+        Container content
+      </GoabContainer>,
+    );
+    const el = container.querySelector("goa-container");
+    expect(el?.getAttribute("stickyheader")).toBe("true");
+  });
 });

@@ -88,6 +88,7 @@ import { Feat3398Route } from "./routes/features/feat3398";
 import { Feat3478Route } from "./routes/features/feat3478";
 import { Feat2885Route } from "./routes/features/feat2885";
 import { Feat2885NavigationTabsRoute } from "./routes/features/feat2885-navigation-tabs";
+import { Feat3347Route } from "./routes/features/feat3347";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -187,6 +188,7 @@ root.render(
           <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
           <Route path="features/3398" element={<Feat3398Route />} />
           <Route path="features/3478" element={<Feat3478Route />} />
+          <Route path="features/3347" element={<Feat3347Route />} />
           <Route
             path="features/2885-navigation-tabs"
             element={<Feat2885NavigationTabsRoute />}
