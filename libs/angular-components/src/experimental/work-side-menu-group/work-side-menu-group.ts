@@ -28,7 +28,7 @@ import {
 })
 export class GoabxWorkSideMenuGroup implements OnInit {
   @Input({ required: true }) heading!: string;
-  @Input({ required: true }) icon!: GoabIconType;
+  @Input() icon?: GoabIconType;
   @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() testId?: string;
 

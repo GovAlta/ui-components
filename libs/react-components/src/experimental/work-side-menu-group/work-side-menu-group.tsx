@@ -3,7 +3,7 @@ import { GoabIconType } from "@abgov/ui-components-common";
 
 interface WCProps {
   heading: string;
-  icon: GoabIconType;
+  icon?: GoabIconType;
   testid?: string;
   open?: boolean;
 }
@@ -19,7 +19,7 @@ declare module "react" {
 
 export interface GoabWorkSideMenuGroupProps {
   heading: string;
-  icon: GoabIconType;
+  icon?: GoabIconType;
   open?: boolean;
   testId?: string;
   children?: React.ReactNode;

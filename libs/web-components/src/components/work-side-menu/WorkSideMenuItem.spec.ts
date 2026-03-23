@@ -3,6 +3,15 @@ import { render, fireEvent } from "@testing-library/svelte";
 import GoAWorkSideMenuItem from "./WorkSideMenuItem.svelte";
 
 describe("WorkSideMenuItem", () => {
+  it("renders without icon when icon prop is omitted", async () => {
+    const { container } = render(GoAWorkSideMenuItem, {
+      label: "Foo",
+      url: "#",
+    });
+    const icon = container.querySelector("goa-icon");
+    expect(icon).toBeNull();
+  });
+
   it("renders", async () => {
     const { container } = render(GoAWorkSideMenuItem, {
       label: "Foo",

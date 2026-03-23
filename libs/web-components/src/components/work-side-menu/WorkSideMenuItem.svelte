@@ -4,6 +4,7 @@
   import { onMount, onDestroy, tick } from "svelte";
   import { dispatch } from "../../common/utils";
   import { MOBILE_BP } from "../../common/breakpoints";
+  import type { GoAIconType } from "../icon/Icon.svelte";
 
   type WorkSideMenuItemType = "normal" | "emergency" | "success";
 
@@ -24,7 +25,7 @@
   /** When true, displays a divider line above this menu item. */
   export let divider: boolean = false;
   /** Icon displayed before the menu item label. */
-  export let icon: string = "";
+  export let icon: GoAIconType | undefined = undefined;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. */
@@ -248,12 +249,14 @@
         on:click={openMobileDrawer}
         tabindex="0"
       >
-        <goa-icon
-          size="small"
-          theme={current ? "filled" : "outline"}
-          type={icon}
-          arialabel={label}
-        />
+        {#if icon}
+          <goa-icon
+            size="small"
+            theme={current ? "filled" : "outline"}
+            type={icon}
+            arialabel={label}
+          />
+        {/if}
         <div class="menu-item-label">
           {label}
         </div>
@@ -296,12 +299,14 @@
           aria-current={current ? "page" : undefined}
           bind:this={_linkEl}
         >
-          <goa-icon
-            size="small"
-            theme={current ? "filled" : "outline"}
-            type={icon}
-            arialabel={label}
-          />
+          {#if icon}
+            <goa-icon
+              size="small"
+              theme={current ? "filled" : "outline"}
+              type={icon}
+              arialabel={label}
+            />
+          {/if}
           <div class="menu-item-label">
             {label}
           </div>
@@ -332,12 +337,14 @@
       on:click={handleClick}
       tabindex="0"
     >
-      <goa-icon
-        size="small"
-        theme={current ? "filled" : "outline"}
-        type={icon}
-        arialabel={label}
-      />
+      {#if icon}
+        <goa-icon
+          size="small"
+          theme={current ? "filled" : "outline"}
+          type={icon}
+          arialabel={label}
+        />
+      {/if}
       <div class="menu-item-label">
         {label}
       </div>
