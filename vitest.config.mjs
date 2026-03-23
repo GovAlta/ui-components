@@ -29,7 +29,7 @@ export default defineConfig({
           alias: {
             "@abgov/ui-components-common": resolve(
               __dirname,
-              "./dist/libs/common/index.js",
+              "./libs/common/src/index.ts",
             ),
           },
         },
@@ -48,7 +48,7 @@ export default defineConfig({
           alias: {
             "@abgov/ui-components-common": resolve(
               __dirname,
-              "./dist/libs/common/index.js",
+              "./libs/common/src/index.ts",
             ),
           },
         },
@@ -65,7 +65,7 @@ export default defineConfig({
           alias: {
             "@abgov/ui-components-common": resolve(
               __dirname,
-              "./dist/libs/common/index.js",
+              "./libs/common/src/index.ts",
             ),
           },
         },
@@ -93,7 +93,7 @@ export default defineConfig({
           alias: {
             "@abgov/ui-components-common": resolve(
               __dirname,
-              "./dist/libs/common/index.js",
+              "./libs/common/src/index.ts",
             ),
           },
         },
