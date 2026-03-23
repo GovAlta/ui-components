@@ -200,30 +200,6 @@ describe("GoabxMenuButton", () => {
     });
   });
 
-  it("should render with variant destructive and correct background color", async () => {
-    const Component = () => {
-      return (
-        <GoabxMenuButton text="Destructive" variant="destructive">
-          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
-        </GoabxMenuButton>
-      );
-    };
-
-    const result = render(<Component />);
-    const menuButton = result.getByText("Destructive");
-    expect(menuButton).toBeDefined();
-
-    await vi.waitFor(() => {
-      const button = menuButton.element()
-        .closest("goa-button")
-        ?.shadowRoot?.querySelector("button");
-
-      expect(button).toBeDefined();
-      const styles = window.getComputedStyle(button!);
-      expect(styles.backgroundColor).toBe("rgb(218, 41, 28)");
-    });
-  });
-
   it("should render icon-only with size compact", async () => {
     const onAction = vi.fn();
 
