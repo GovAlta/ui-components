@@ -282,6 +282,7 @@ export const FILTER_GROUPS: Record<string, string[]> = {
   Typography: ["fontFamily", "fontSize", "fontWeight", "lineHeight", "typography"],
   Icon: ["iconSize"],
   Opacity: ["opacity"],
+  Motion: ["motionCurve", "transition", "translate", "motionDuration"],
   Shadow: ["shadow"],
   Space: ["space"],
 };

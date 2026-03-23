@@ -47,7 +47,7 @@ interface TokensGridProps {
 // Badge type mapping for categories (using V2 extended colors)
 function getCategoryBadgeType(
   category: string,
-): "sky" | "pasture" | "sunset" | "lilac" | "prairie" | "dawn" {
+): "sky" | "pasture" | "sunset" | "lilac" | "prairie" | "dawn" | "success" {
   switch (category.toLowerCase()) {
     // Colors
     case "color":
@@ -64,6 +64,12 @@ function getCategoryBadgeType(
     case "fontvariationsettings":
     case "typography":
       return "sunset";
+    // Motion
+    case "motioncurve":
+    case "translate":
+    case "motionduration":
+    case "transition":
+      return "success";
     // Borders
     case "border":
     case "borderradius":
@@ -396,6 +402,30 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             }}
           />
         </div>
+      );
+    }
+
+    // Motion curve tokens - show image representing the curve type
+    if (token.category === "motionCurve") {
+      const getMotionCurveImage = (name: string): "expressive" | "productive" | "expressive-exit" | "expressive-reveal" | "expressive-transform"  => {
+        if (name.endsWith("-expressive")) return "expressive";
+        if (name.endsWith("-productive")) return "productive";
+        if (name.endsWith("-expressive-exit")) return "expressive-exit";
+        if (name.endsWith("-expressive-reveal")) return "expressive-reveal";
+        if (name.endsWith("-expressive-transform")) return "expressive-transform";
+        return "expressive";
+      };
+      return (
+        <img
+          src={`/images/foundations/motion/${getMotionCurveImage(token.name)}.svg`}
+          alt={`${token.name} motion curve visualization`}
+          style={{
+            width: 40,
+            height: 40,
+            objectFit: "contain",
+          }}
+          title={token.value}
+        />
       );
     }
 
