@@ -86,6 +86,7 @@ import { Feat3478Component } from "../routes/features/feat3478/feat3478.componen
 import { Feat2885Component } from "../routes/features/feat2885/feat2885.component";
 import { Feat2885NavigationTabsComponent } from "../routes/features/feat2885-navigation-tabs/feat2885-navigation-tabs.component";
 import { Feat3529Component } from "../routes/features/feat3529/feat3529.component";
+import { Feat3544Component } from "../routes/features/feat3544/feat3544.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -176,4 +177,5 @@ export const appRoutes: Route[] = [
   { path: "features/3398", component: Feat3398Component },
   { path: "features/3478", component: Feat3478Component },
   { path: "features/3529", component: Feat3529Component },
+  { path: "features/3544", component: Feat3544Component },
 ];

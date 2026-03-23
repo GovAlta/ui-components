@@ -90,6 +90,7 @@ import { Feat3478Route } from "./routes/features/feat3478";
 import { Feat2885Route } from "./routes/features/feat2885";
 import { Feat2885NavigationTabsRoute } from "./routes/features/feat2885-navigation-tabs";
 import { Feat3529Route } from "./routes/features/feat3529";
+import { Feat3544Route } from "./routes/features/feat3544";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -195,6 +196,7 @@ root.render(
             element={<Feat2885NavigationTabsRoute />}
           />
           <Route path="features/3529" element={<Feat3529Route />} />
+          <Route path="features/3544" element={<Feat3544Route />} />
         </Route>
 
         {/* Standalone route without App wrapper for full-page layout demos */}

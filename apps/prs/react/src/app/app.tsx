@@ -218,6 +218,10 @@ export function App() {
                   url="/bugs/3497"
                 />
                 <GoabxWorkSideMenuItem label="3498 Radio alignment" url="/bugs/3498" />
+                <GoabxWorkSideMenuItem
+                  label="3450 Dropdown expanding inside Container"
+                  url="/bugs/3450"
+                />
               </GoabxWorkSideMenuGroup>
 
               <GoabxWorkSideMenuGroup icon="star" heading="Features">
@@ -340,6 +344,10 @@ export function App() {
                 <GoabxWorkSideMenuItem
                   label="3478 Popover API Rewrite"
                   url="/features/3478"
+                />
+                <GoabxWorkSideMenuItem
+                  label="3544 Optional Side Menu Icons"
+                  url="/features/3544"
                 />
               </GoabxWorkSideMenuGroup>
               <GoabxWorkSideMenuItem icon="list" label="Everything" url="/everything" />
