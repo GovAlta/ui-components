@@ -1,7 +1,5 @@
 import { FieldsetItemState, FieldValidator } from "./validators";
-import {
-  GoabFieldsetItemValue, GoabFormDispatchOn,
-} from "./common";
+import { GoabFieldsetItemValue, GoabFormDispatchOn } from "./common";
 import { relay, dispatch } from "./messaging/messaging";
 
 export type FormStatus = "not-started" | "incomplete" | "complete";
@@ -66,7 +64,7 @@ export class PublicFormController<T> {
     }
 
     if (callback) {
-      setTimeout(callback, 200);
+      setTimeout(callback, 201);
     }
   }
 
@@ -337,7 +335,7 @@ export class PublicFormController<T> {
     this._isCompleting = true;
 
     const stateChangeHandler = (e: Event) => {
-      formRef.removeEventListener('_stateChange', stateChangeHandler);
+      formRef.removeEventListener("_stateChange", stateChangeHandler);
 
       // Now we know state is updated, safe to complete
       // The _formRef points to the inner form within the SubForm
@@ -346,7 +344,7 @@ export class PublicFormController<T> {
       this._isCompleting = false;
     };
 
-    formRef.addEventListener('_stateChange', stateChangeHandler);
+    formRef.addEventListener("_stateChange", stateChangeHandler);
 
     dispatch(formRef, "_continue", null, { bubbles: true });
   }
@@ -381,4 +379,3 @@ export class PublicFormController<T> {
     }, {});
   }
 }
-
