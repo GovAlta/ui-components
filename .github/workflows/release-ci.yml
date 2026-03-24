@@ -47,7 +47,6 @@ jobs:
         run: npm run build:prod
 
       - name: Test
-        on: pull_request
         run: |
           if [ -d "./dist" ]; then
             npx playwright install --with-deps
