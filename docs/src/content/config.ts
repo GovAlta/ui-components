@@ -36,18 +36,9 @@ const components = defineCollection({
     reactClassName: z.string().optional(),
     angularSelector: z.string().optional(),
 
-    // Child components (shown on same page under separate headings)
-    childComponents: z
-      .array(
-        z.object({
-          slug: z.string(),
-          name: z.string(),
-        }),
-      )
-      .optional(),
-
     // Visibility
     hidden: z.boolean().optional(), // Hide from navigation and public views
+    subcomponent: z.boolean().optional(), // Show API on parent component page
   }),
 });
 

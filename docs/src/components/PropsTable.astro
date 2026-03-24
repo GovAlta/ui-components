@@ -12,10 +12,13 @@ interface Props {
   events?: EventDefinition[];
   slots?: SlotDefinition[];
   headingPrefix?: string;
+  idPrefix?: string;
+  badge?: string;
 }
 
-const { props = [], events = [], slots = [], headingPrefix = "" } = Astro.props;
+const { props = [], events = [], slots = [], headingPrefix = "", idPrefix = "", badge = "" } = Astro.props;
 const prefix = headingPrefix ? `${headingPrefix} ` : "";
+const idBase = idPrefix ? `${idPrefix}-` : (headingPrefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-` : "");
 
 // Filter slots: hide "default" slots with no description (adds noise, no value)
 // Keep named slots even without descriptions (the name itself is useful info)
@@ -69,7 +72,10 @@ const finalProps = combinedMarginProp
 
 {finalProps.length > 0 && (
   <div class="api-section">
-    <h3 id={prefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-props` : "props"}>{prefix}Props</h3>
+    <div class="api-heading">
+      <h3 id={`${idBase}props`}>{prefix}Props</h3>
+      {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
+    </div>
     <goa-container version="2" type="interactive">
       <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
         {finalProps.map((prop, index) => {
@@ -112,7 +118,10 @@ const finalProps = combinedMarginProp
 
 {events.length > 0 && (
   <div class="api-section">
-    <h3 id={prefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-events` : "events"}>{prefix}Events</h3>
+    <div class="api-heading">
+      <h3 id={`${idBase}events`}>{prefix}Events</h3>
+      {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
+    </div>
     <goa-container version="2" type="interactive">
       <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
         {events.map((event) => (
@@ -141,7 +150,10 @@ const finalProps = combinedMarginProp
 
 {meaningfulSlots.length > 0 && (
   <div class="api-section">
-    <h3 id={prefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-slots` : "slots"}>{prefix}Slots</h3>
+    <div class="api-heading">
+      <h3 id={`${idBase}slots`}>{prefix}Slots</h3>
+      {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
+    </div>
     <goa-container version="2" type="interactive">
       <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
         {meaningfulSlots.map((slot) => (
@@ -168,6 +180,17 @@ const finalProps = combinedMarginProp
     font: var(--goa-typography-heading-s);
     margin-bottom: var(--goa-space-m);
     color: var(--goa-color-text-default);
+  }
+
+  .api-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-m);
+    margin-bottom: var(--goa-space-m);
+  }
+
+  .api-heading h3 {
+    margin-bottom: 0;
   }
 
   .prop-row {
