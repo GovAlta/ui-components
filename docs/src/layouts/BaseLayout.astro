@@ -199,7 +199,7 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
       .mobile-header__left {
         display: flex;
         align-items: center;
-        gap: var(--goa-space-2xs);
+        gap: var(--goa-space-xs);
       }
 
       .mobile-header__right {
@@ -207,20 +207,20 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
         align-items: center;
       }
 
-      /* Pull icons slightly toward edges for better visual alignment */
+      /* Icon buttons: keep clickable area 16px from screen edge */
       .mobile-header__left > goa-icon-button:first-child {
-        margin-left: -8px;
+        margin-left: 0;
       }
 
       .mobile-header__right > goa-icon-button:last-child {
-        margin-right: -8px;
+        margin-right: 0;
       }
 
       /* Brand link with logo and title */
       .mobile-header__brand {
         display: flex;
         align-items: center;
-        gap: var(--goa-space-xs);
+        gap: var(--goa-space-s);
         text-decoration: none;
       }
 
@@ -233,8 +233,8 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
       }
 
       .mobile-header__title {
-        font: var(--goa-typography-mobile-heading-xs);
-        color: var(--goa-color-text-default);
+        font: var(--goa-typography-body-s);
+        color: var(--goa-color-greyscale-700);
       }
 
     /* Menu overlay backdrop when sidebar is open on mobile */

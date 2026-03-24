@@ -12,24 +12,26 @@
  */
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   GoabxButton,
   GoabxInput,
   GoabxFormItem,
   GoabxFilterChip,
-  GoabxDrawer,
+  GoabxPushDrawer,
   GoabxCheckbox,
   GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
 import {
   GoabIcon,
+  GoabIconButton,
   GoabDivider,
   GoabButtonGroup,
   GoabTab,
   type GoabCheckboxListOnChangeDetail,
 } from "@abgov/react-components";
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
-import { useMobile } from "../hooks/useCompactToolbar";
+import { useContainerNarrow } from "../hooks/useContainerWidth";
 import { useViewSettings, type LayoutType } from "../hooks/useViewSettings";
 
 // Type for example data (matches Astro content collection)
@@ -129,6 +131,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   const [isSticky, setIsSticky] = useState(false);
 
   // Ref for sticky detection sentinel
+  const gridRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   // Ref for table (to handle sort events from web component)
   const tableRef = useRef<HTMLElement>(null);
@@ -181,7 +184,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   // Hooks
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
     useTwoLevelSort();
-  const isMobile = useMobile();
+  const isContainerNarrow = useContainerNarrow(gridRef, 780);
   const { viewSettings, setLayout } = useViewSettings({
     pageKey: "examples",
     defaultLayout: "card", // 'card' = grid view
@@ -197,15 +200,24 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     // Explicitly set version attribute for V2 styling (React doesn't always set attributes on custom elements)
     table.setAttribute("version", "2");
 
-    const handleSort = (e: Event) => {
-      const detail = (e as CustomEvent<{ sortBy: string; sortDir: "asc" | "desc" }>)
-        .detail;
-      handleTableSort(detail);
+    const handleMultiSort = (e: Event) => {
+      const detail = (
+        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
+      ).detail;
+      const sorts = detail.sorts;
+      setSortConfig({
+        primary: sorts[0]
+          ? { key: sorts[0].column, direction: sorts[0].direction }
+          : null,
+        secondary: sorts[1]
+          ? { key: sorts[1].column, direction: sorts[1].direction }
+          : null,
+      });
     };
 
-    table.addEventListener("_sort", handleSort);
-    return () => table.removeEventListener("_sort", handleSort);
-  }, [handleTableSort]);
+    table.addEventListener("_multisort", handleMultiSort);
+    return () => table.removeEventListener("_multisort", handleMultiSort);
+  }, [setSortConfig, viewSettings.layout]);
 
   // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
   // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
@@ -239,10 +251,23 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
   // View mode: 'card' = grid view, 'list' = list view
   // On mobile, always use grid view (cards)
-  const viewMode = useMemo((): "card" | "list" => {
-    if (isMobile) return "card";
-    return viewSettings.layout === "list" ? "list" : "card";
-  }, [isMobile, viewSettings.layout]);
+  const viewMode = useMemo(
+    (): "card" | "list" => (viewSettings.layout === "list" ? "list" : "card"),
+    [viewSettings.layout],
+  );
+
+  // Auto-switch to card view when container transitions to narrow
+  const wasNarrowRef = useRef(false);
+  useEffect(() => {
+    const becameNarrow = isContainerNarrow && !wasNarrowRef.current;
+    wasNarrowRef.current = isContainerNarrow;
+    if (becameNarrow && viewSettings.layout === "list") {
+      setLayout("card");
+      if (tabsRef.current) {
+        tabsRef.current.setAttribute("initialtab", "1");
+      }
+    }
+  }, [isContainerNarrow, viewSettings.layout, setLayout]);
 
   // Filter and sort examples
   const filteredExamples = useMemo(() => {
@@ -510,15 +535,16 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           <h3 className="example-card-title">{example.data.title}</h3>
 
           {/* Description */}
-          {example.body && (
-            <p className="example-card-description">
-              {example.body
-                .split("\n")[0]
-                .replace(/^#+\s*/, "")
-                .substring(0, 120)}
-              {example.body.length > 120 ? "..." : ""}
-            </p>
-          )}
+          {example.body &&
+            (() => {
+              const firstLine = example.body.split("\n")[0].replace(/^#+\s*/, "");
+              return (
+                <p className="example-card-description">
+                  {firstLine.substring(0, 120)}
+                  {firstLine.length > 120 ? "..." : ""}
+                </p>
+              );
+            })()}
 
           {/* Metadata badges */}
           <div className="example-card-badges">
@@ -657,11 +683,10 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     searchChips.length > 0 ||
     appliedFilters.category.length > 0 ||
     appliedFilters.scale.length > 0 ||
-    appliedFilters.userType.length > 0 ||
-    sortConfig.primary;
+    appliedFilters.userType.length > 0;
 
   return (
-    <div className="examples-grid">
+    <div className="examples-grid" ref={gridRef}>
       {/* Sentinel for sticky detection - placed before toolbar */}
       <div ref={sentinelRef} className="examples-sentinel" aria-hidden="true" />
 
@@ -712,17 +737,38 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             </goa-tabs>
           </div>
 
-          <GoabxButton
-            type="secondary"
-            leadingIcon="filter-lines"
-            size="compact"
-            onClick={() => {
-              setPendingFilters(appliedFilters);
-              setFilterDrawerOpen(true);
-            }}
-          >
-            Filters
-          </GoabxButton>
+          <span className="filter-btn-desktop">
+            <GoabxButton
+              type="secondary"
+              leadingIcon="filter-lines"
+              size="compact"
+              onClick={() => {
+                if (filterDrawerOpen) {
+                  setFilterDrawerOpen(false);
+                } else {
+                  setPendingFilters(appliedFilters);
+                  setFilterDrawerOpen(true);
+                }
+              }}
+            >
+              Filters
+            </GoabxButton>
+          </span>
+          <span className="filter-btn-mobile">
+            <GoabIconButton
+              icon="filter-lines"
+              size="medium"
+              variant="dark"
+              onClick={() => {
+                if (filterDrawerOpen) {
+                  setFilterDrawerOpen(false);
+                } else {
+                  setPendingFilters(appliedFilters);
+                  setFilterDrawerOpen(true);
+                }
+              }}
+            />
+          </span>
         </div>
       </div>
 
@@ -734,30 +780,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             size="small"
             fillColor="var(--goa-color-text-secondary)"
           />
-
-          {/* Sort chips */}
-          {sortConfig.primary && (
-            <GoabxFilterChip
-              content={sortConfig.primary.key}
-              leadingIcon={
-                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText={sortConfig.secondary ? "1st" : undefined}
-              onClick={() =>
-                setSortConfig({ primary: sortConfig.secondary, secondary: null })
-              }
-            />
-          )}
-          {sortConfig.secondary && (
-            <GoabxFilterChip
-              content={sortConfig.secondary.key}
-              leadingIcon={
-                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText="2nd"
-              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
-            />
-          )}
 
           {/* Search chips */}
           {searchChips.map((chip) => (
@@ -815,17 +837,56 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
       {/* List View (table) */}
       {viewMode === "list" && (
-        <div className="examples-table-wrapper">
+        <div
+          className="examples-table-wrapper"
+          onScroll={(e) => {
+            const el = e.currentTarget;
+            const table = el.querySelector("goa-table") as HTMLElement;
+            if (!table) return;
+            const inset = parseFloat(getComputedStyle(table).marginLeft) || 0;
+            const maxScroll = el.scrollWidth - el.clientWidth;
+            const leftShadow = el.querySelector(
+              ".examples-table-scroll-shadow-left",
+            ) as HTMLElement;
+            const rightShadow = el.querySelector(
+              ".examples-table-scroll-shadow-right",
+            ) as HTMLElement;
+            if (leftShadow) leftShadow.style.opacity = el.scrollLeft > inset ? "1" : "0";
+            if (rightShadow)
+              rightShadow.style.opacity = el.scrollLeft < maxScroll - inset ? "1" : "0";
+          }}
+          ref={(el) => {
+            if (!el) return;
+            requestAnimationFrame(() => {
+              const table = el.querySelector("goa-table") as HTMLElement;
+              if (!table) return;
+              const inset = parseFloat(getComputedStyle(table).marginLeft) || 0;
+              const maxScroll = el.scrollWidth - el.clientWidth;
+              const rightShadow = el.querySelector(
+                ".examples-table-scroll-shadow-right",
+              ) as HTMLElement;
+              if (rightShadow && maxScroll > inset) rightShadow.style.opacity = "1";
+            });
+          }}
+        >
+          <div className="examples-table-scroll-shadow-left" aria-hidden="true" />
           {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
-          <goa-table ref={tableRef} version="2" width="100%" variant="normal">
+          <goa-table
+            ref={tableRef}
+            version="2"
+            width="100%"
+            variant="normal"
+            sort-mode="multi"
+          >
             <table style={{ width: "100%" }}>
               <thead>
                 <tr>
-                  <th>
+                  <th style={{ width: "320px" }}>
                     <goa-table-sort-header
                       version="2"
                       name="title"
                       direction={getColumnSortDirection("title")}
+                      sort-order={getColumnSortOrder("title")}
                     >
                       Name
                     </goa-table-sort-header>
@@ -835,6 +896,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="category"
                       direction={getColumnSortDirection("category")}
+                      sort-order={getColumnSortOrder("category")}
                     >
                       Category
                     </goa-table-sort-header>
@@ -844,6 +906,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="scale"
                       direction={getColumnSortDirection("scale")}
+                      sort-order={getColumnSortOrder("scale")}
                     >
                       Scale
                     </goa-table-sort-header>
@@ -853,6 +916,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="userType"
                       direction={getColumnSortDirection("userType")}
+                      sort-order={getColumnSortOrder("userType")}
                     >
                       User Type
                     </goa-table-sort-header>
@@ -896,6 +960,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               </tbody>
             </table>
           </goa-table>
+          <div className="examples-table-scroll-shadow-right" aria-hidden="true" />
         </div>
       )}
 
@@ -938,138 +1003,143 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         </div>
       )}
 
-      {/* Filter Drawer */}
-      <GoabxDrawer
-        heading="Filter examples"
-        position="right"
-        open={filterDrawerOpen}
-        maxSize="300px"
-        onClose={() => setFilterDrawerOpen(false)}
-        actions={
-          <GoabButtonGroup alignment="start" gap="compact">
-            <GoabxButton type="primary" size="compact" onClick={applyFilters}>
-              Apply filters
-            </GoabxButton>
-            <GoabxButton
-              type="tertiary"
-              size="compact"
-              onClick={() => setFilterDrawerOpen(false)}
-            >
-              Cancel
-            </GoabxButton>
-          </GoabButtonGroup>
-        }
-      >
-        <div className="filter-drawer-content">
-          {/* Scale filter */}
-          <div className="filter-group">
-            <div className="filter-group-label">
-              Scale{" "}
-              <span
-                className="filter-swatch"
-                style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
-              />
-            </div>
-            <GoabxCheckboxList
-              name="scale"
-              size="compact"
-              value={pendingFilters.scale}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters((prev) => ({ ...prev, scale: detail.value }))
-              }
-            >
-              {filterOptions.scales.map((scale) => (
-                <GoabxCheckbox
-                  key={scale}
-                  name={scale}
-                  value={scale}
-                  text={formatScale(scale)}
+      {/* Filter Push Drawer - portaled to layout level */}
+      {typeof document !== "undefined" &&
+        document.getElementById("push-drawer-portal") &&
+        createPortal(
+          <GoabxPushDrawer
+            heading="Filter examples"
+            open={filterDrawerOpen}
+            width="300px"
+            onClose={() => setFilterDrawerOpen(false)}
+            actions={
+              <GoabButtonGroup alignment="start" gap="compact">
+                <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                  Apply filters
+                </GoabxButton>
+                <GoabxButton
+                  type="tertiary"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </div>
-
-          {/* Category filter */}
-          <div className="filter-group">
-            <div className="filter-group-label">
-              Category{" "}
-              <span
-                className="filter-swatch"
-                style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
-              />
-            </div>
-            <GoabxCheckboxList
-              name="category"
-              size="compact"
-              value={pendingFilters.category}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters((prev) => ({ ...prev, category: detail.value }))
-              }
-            >
-              {filterOptions.categories.map((category) => (
-                <GoabxCheckbox
-                  key={category}
-                  name={category}
-                  value={category}
-                  text={formatCategory(category)}
+                  onClick={() => setFilterDrawerOpen(false)}
+                >
+                  Cancel
+                </GoabxButton>
+              </GoabButtonGroup>
+            }
+          >
+            <div className="filter-drawer-content">
+              {/* Scale filter */}
+              <div className="filter-group">
+                <div className="filter-group-label">
+                  Scale{" "}
+                  <span
+                    className="filter-swatch"
+                    style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
+                  />
+                </div>
+                <GoabxCheckboxList
+                  name="scale"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </div>
+                  value={pendingFilters.scale}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters((prev) => ({ ...prev, scale: detail.value }))
+                  }
+                >
+                  {filterOptions.scales.map((scale) => (
+                    <GoabxCheckbox
+                      key={scale}
+                      name={scale}
+                      value={scale}
+                      text={formatScale(scale)}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </div>
 
-          {/* User Type filter */}
-          <div className="filter-group">
-            <div className="filter-group-label">
-              User type{" "}
-              <span
-                className="filter-swatch"
-                style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
-              />
-            </div>
-            <GoabxCheckboxList
-              name="userType"
-              size="compact"
-              value={pendingFilters.userType}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters((prev) => ({ ...prev, userType: detail.value }))
-              }
-            >
-              {filterOptions.userTypes.map((userType) => (
-                <GoabxCheckbox
-                  key={userType}
-                  name={userType}
-                  value={userType}
-                  text={formatUserType(userType)}
+              {/* Category filter */}
+              <div className="filter-group">
+                <div className="filter-group-label">
+                  Category{" "}
+                  <span
+                    className="filter-swatch"
+                    style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
+                  />
+                </div>
+                <GoabxCheckboxList
+                  name="category"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </div>
+                  value={pendingFilters.category}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters((prev) => ({ ...prev, category: detail.value }))
+                  }
+                >
+                  {filterOptions.categories.map((category) => (
+                    <GoabxCheckbox
+                      key={category}
+                      name={category}
+                      value={category}
+                      text={formatCategory(category)}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </div>
 
-          {(pendingFilters.category.length > 0 ||
-            pendingFilters.scale.length > 0 ||
-            pendingFilters.userType.length > 0) && (
-            <>
-              <GoabDivider />
-              <GoabxButton
-                type="tertiary"
-                size="compact"
-                onClick={() =>
-                  setPendingFilters({ category: [], scale: [], userType: [] })
-                }
-              >
-                Clear all filters
-              </GoabxButton>
-            </>
-          )}
-        </div>
-      </GoabxDrawer>
+              {/* User Type filter */}
+              <div className="filter-group">
+                <div className="filter-group-label">
+                  User type{" "}
+                  <span
+                    className="filter-swatch"
+                    style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
+                  />
+                </div>
+                <GoabxCheckboxList
+                  name="userType"
+                  size="compact"
+                  value={pendingFilters.userType}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters((prev) => ({ ...prev, userType: detail.value }))
+                  }
+                >
+                  {filterOptions.userTypes.map((userType) => (
+                    <GoabxCheckbox
+                      key={userType}
+                      name={userType}
+                      value={userType}
+                      text={formatUserType(userType)}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </div>
+
+              {(pendingFilters.category.length > 0 ||
+                pendingFilters.scale.length > 0 ||
+                pendingFilters.userType.length > 0) && (
+                <>
+                  <GoabDivider />
+                  <GoabxButton
+                    type="tertiary"
+                    size="compact"
+                    onClick={() =>
+                      setPendingFilters({ category: [], scale: [], userType: [] })
+                    }
+                  >
+                    Clear all filters
+                  </GoabxButton>
+                </>
+              )}
+            </div>
+          </GoabxPushDrawer>,
+          document.getElementById("push-drawer-portal")!,
+        )}
 
       <style>{`
         .examples-grid {
           max-width: 100%;
+          container-type: inline-size;
         }
 
         /* Sentinel for sticky detection - invisible marker */
@@ -1096,6 +1166,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         /* When sticky - add shadow */
         .examples-toolbar--sticky {
           padding: var(--goa-space-s) 0;
+          margin-bottom: 0;
           background: transparent;
         }
 
@@ -1104,8 +1175,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           position: absolute;
           top: 0;
           bottom: 0;
-          left: -9999px;
-          right: -9999px;
+          left: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+          right: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
           background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
@@ -1123,13 +1194,43 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           gap: var(--goa-space-m);
         }
 
-        /* View toggle wrapper */
-        .view-toggle-wrapper {
-          margin-bottom: -20px; /* Compensate for goa-tabs internal margin */
+        /* Narrow container: stack toolbar vertically */
+        @container (max-width: 640px) {
+          .examples-toolbar {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .examples-search-section {
+            min-width: unset;
+          }
+
+          .examples-toolbar-actions {
+            align-self: flex-start;
+          }
         }
 
-        .view-toggle-wrapper .tabs {
-          margin-bottom: 0 !important;
+        /* Filter button: desktop shows text, mobile shows icon-only */
+        .filter-btn-mobile { display: none; }
+
+        @media (max-width: 623px) {
+          .filter-btn-desktop { display: none; }
+          .filter-btn-mobile { display: contents; }
+
+          .examples-toolbar {
+            flex-direction: row !important;
+            align-items: flex-start !important;
+          }
+
+          .examples-search-section {
+            min-width: 0 !important;
+          }
+        }
+
+        /* View toggle wrapper - tabs used as segmented toggle, hide content area */
+        .view-toggle-wrapper {
+          overflow: hidden;
+          max-height: 40px;
         }
 
         /* Filter chips */
@@ -1147,9 +1248,49 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           margin-bottom: var(--goa-space-m);
         }
 
-        /* Table/List view */
+        /* Horizontal scroll container for table - bleeds into card padding */
+        /* TODO: Remove calc workaround when goa-table V2 gets box-sizing: border-box */
         .examples-table-wrapper {
-          overflow: auto;
+          display: flex;
+          align-items: stretch;
+          overflow-x: auto;
+          margin-left: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+          margin-right: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+        }
+
+        .examples-table-wrapper > * {
+          flex-grow: 1;
+          min-width: max-content;
+        }
+
+        .examples-table-wrapper goa-table {
+          width: calc(100% - 2px) !important;
+          margin-left: var(--card-padding-h, var(--goa-space-2xl));
+          margin-right: var(--card-padding-h, var(--goa-space-2xl));
+        }
+
+        .examples-table-scroll-shadow-left,
+        .examples-table-scroll-shadow-right {
+          position: sticky;
+          width: 8px;
+          min-width: 8px;
+          flex-shrink: 0;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+
+        .examples-table-scroll-shadow-left {
+          left: 0;
+          margin-right: -8px;
+          background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+        }
+
+        .examples-table-scroll-shadow-right {
+          right: 0;
+          margin-left: -8px;
+          background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
         }
 
         .examples-group-row {
@@ -1192,21 +1333,9 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         /* Card/Grid view */
         .examples-card-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
           column-gap: var(--goa-space-l);
           row-gap: var(--goa-space-xl);
-        }
-
-        @media (max-width: 1200px) {
-          .examples-card-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        @media (max-width: 900px) {
-          .examples-card-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
         }
 
         @media (max-width: 623px) {

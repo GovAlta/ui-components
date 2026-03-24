@@ -12,12 +12,13 @@
  */
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   GoabxButton,
   GoabxInput,
   GoabxFormItem,
   GoabxFilterChip,
-  GoabxDrawer,
+  GoabxPushDrawer,
   GoabxCheckbox,
   GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
@@ -31,7 +32,7 @@ import {
   type GoabCheckboxListOnChangeDetail,
 } from "@abgov/react-components";
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
-import { useMobile } from "../hooks/useCompactToolbar";
+import { useContainerNarrow } from "../hooks/useContainerWidth";
 import type { FlatToken } from "../lib/tokens";
 
 interface FilterGroup {
@@ -111,6 +112,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const [tokenSyntax, setTokenSyntax] = useState<TokenSyntax>("css");
 
   // Ref for sticky detection sentinel
+  const gridRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   // Ref for table (to handle sort events from web component)
   const tableRef = useRef<HTMLElement>(null);
@@ -150,22 +152,31 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   // Hooks
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
     useTwoLevelSort();
-  const isMobile = useMobile();
+  const isContainerNarrow = useContainerNarrow(gridRef, 840);
 
   // Listen for table sort events (from goa-table web component)
   useEffect(() => {
     const table = tableRef.current;
     if (!table) return;
 
-    const handleSort = (e: Event) => {
-      const detail = (e as CustomEvent<{ sortBy: string; sortDir: "asc" | "desc" }>)
-        .detail;
-      handleTableSort(detail);
+    const handleMultiSort = (e: Event) => {
+      const detail = (
+        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
+      ).detail;
+      const sorts = detail.sorts;
+      setSortConfig({
+        primary: sorts[0]
+          ? { key: sorts[0].column, direction: sorts[0].direction }
+          : null,
+        secondary: sorts[1]
+          ? { key: sorts[1].column, direction: sorts[1].direction }
+          : null,
+      });
     };
 
-    table.addEventListener("_sort", handleSort);
-    return () => table.removeEventListener("_sort", handleSort);
-  }, [handleTableSort]);
+    table.addEventListener("_multisort", handleMultiSort);
+    return () => table.removeEventListener("_multisort", handleMultiSort);
+  }, [setSortConfig]);
 
   // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
   // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
@@ -189,8 +200,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   // View mode: 'list' (table) on desktop, 'card' on mobile
   // No user toggle - automatically switches based on viewport
   const viewMode = useMemo((): "card" | "list" => {
-    return isMobile ? "card" : "list";
-  }, [isMobile]);
+    return isContainerNarrow ? "card" : "list";
+  }, [isContainerNarrow]);
 
   // Filter and sort tokens
   const filteredTokens = useMemo(() => {
@@ -407,7 +418,14 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
     // Motion curve tokens - show image representing the curve type
     if (token.category === "motionCurve") {
-      const getMotionCurveImage = (name: string): "expressive" | "productive" | "expressive-exit" | "expressive-reveal" | "expressive-transform"  => {
+      const getMotionCurveImage = (
+        name: string,
+      ):
+        | "expressive"
+        | "productive"
+        | "expressive-exit"
+        | "expressive-reveal"
+        | "expressive-transform" => {
         if (name.endsWith("-expressive")) return "expressive";
         if (name.endsWith("-productive")) return "productive";
         if (name.endsWith("-expressive-exit")) return "expressive-exit";
@@ -780,11 +798,10 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     [copiedToken, copyToClipboard, getFormattedTokenName],
   );
 
-  const hasActiveFilters =
-    searchChips.length > 0 || appliedFilters.length > 0 || sortConfig.primary;
+  const hasActiveFilters = searchChips.length > 0 || appliedFilters.length > 0;
 
   return (
-    <div className="tokens-grid">
+    <div className="tokens-grid" ref={gridRef}>
       {/* Sentinel for sticky detection - placed before toolbar */}
       <div ref={sentinelRef} className="tokens-sentinel" aria-hidden="true" />
 
@@ -835,19 +852,38 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             </goa-tabs>
           </div>
 
-          <div>
+          <span className="filter-btn-desktop">
             <GoabxButton
               type="secondary"
               leadingIcon="filter-lines"
               size="compact"
               onClick={() => {
-                setPendingFilters(appliedFilters);
-                setFilterDrawerOpen(true);
+                if (filterDrawerOpen) {
+                  setFilterDrawerOpen(false);
+                } else {
+                  setPendingFilters(appliedFilters);
+                  setFilterDrawerOpen(true);
+                }
               }}
             >
               Filters
             </GoabxButton>
-          </div>
+          </span>
+          <span className="filter-btn-mobile">
+            <GoabIconButton
+              icon="filter-lines"
+              size="medium"
+              variant="dark"
+              onClick={() => {
+                if (filterDrawerOpen) {
+                  setFilterDrawerOpen(false);
+                } else {
+                  setPendingFilters(appliedFilters);
+                  setFilterDrawerOpen(true);
+                }
+              }}
+            />
+          </span>
         </div>
       </div>
 
@@ -859,30 +895,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             size="small"
             fillColor="var(--goa-color-text-secondary)"
           />
-
-          {/* Sort chips */}
-          {sortConfig.primary && (
-            <GoabxFilterChip
-              content={sortConfig.primary.key}
-              leadingIcon={
-                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText={sortConfig.secondary ? "1st" : undefined}
-              onClick={() =>
-                setSortConfig({ primary: sortConfig.secondary, secondary: null })
-              }
-            />
-          )}
-          {sortConfig.secondary && (
-            <GoabxFilterChip
-              content={sortConfig.secondary.key}
-              leadingIcon={
-                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText="2nd"
-              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
-            />
-          )}
 
           {/* Search chips */}
           {searchChips.map((chip) => (
@@ -922,9 +934,47 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
       {/* List View (table) */}
       {viewMode === "list" && (
-        <div className="tokens-table-wrapper">
+        <div
+          className="tokens-table-wrapper"
+          onScroll={(e) => {
+            const el = e.currentTarget;
+            const table = el.querySelector("goa-table") as HTMLElement;
+            if (!table) return;
+            const inset = parseFloat(getComputedStyle(table).marginLeft) || 0;
+            const maxScroll = el.scrollWidth - el.clientWidth;
+            const leftShadow = el.querySelector(
+              ".tokens-table-scroll-shadow-left",
+            ) as HTMLElement;
+            const rightShadow = el.querySelector(
+              ".tokens-table-scroll-shadow-right",
+            ) as HTMLElement;
+            if (leftShadow) leftShadow.style.opacity = el.scrollLeft > inset ? "1" : "0";
+            if (rightShadow)
+              rightShadow.style.opacity = el.scrollLeft < maxScroll - inset ? "1" : "0";
+          }}
+          ref={(el) => {
+            if (!el) return;
+            requestAnimationFrame(() => {
+              const table = el.querySelector("goa-table") as HTMLElement;
+              if (!table) return;
+              const inset = parseFloat(getComputedStyle(table).marginLeft) || 0;
+              const maxScroll = el.scrollWidth - el.clientWidth;
+              const rightShadow = el.querySelector(
+                ".tokens-table-scroll-shadow-right",
+              ) as HTMLElement;
+              if (rightShadow && maxScroll > inset) rightShadow.style.opacity = "1";
+            });
+          }}
+        >
+          <div className="tokens-table-scroll-shadow-left" aria-hidden="true" />
           {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
-          <goa-table ref={tableRef} version="2" width="100%" variant="normal">
+          <goa-table
+            ref={tableRef}
+            version="2"
+            width="100%"
+            variant="normal"
+            sort-mode="multi"
+          >
             <table style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -934,16 +984,18 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                       version="2"
                       name="name"
                       direction={getColumnSortDirection("name")}
+                      sort-order={getColumnSortOrder("name")}
                     >
                       Token
                     </goa-table-sort-header>
                   </th>
-                  <th>Value</th>
+                  <th style={{ width: "320px" }}>Value</th>
                   <th>
                     <goa-table-sort-header
                       version="2"
                       name="category"
                       direction={getColumnSortDirection("category")}
+                      sort-order={getColumnSortOrder("category")}
                     >
                       Category
                     </goa-table-sort-header>
@@ -954,6 +1006,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               <tbody>{filteredTokens.map(renderTableRow)}</tbody>
             </table>
           </goa-table>
+          <div className="tokens-table-scroll-shadow-right" aria-hidden="true" />
         </div>
       )}
 
@@ -965,67 +1018,72 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       )}
 
       {/* Filter Drawer */}
-      <GoabxDrawer
-        heading="Filter tokens"
-        position="right"
-        open={filterDrawerOpen}
-        maxSize="300px"
-        onClose={() => setFilterDrawerOpen(false)}
-        actions={
-          <GoabButtonGroup alignment="start" gap="compact">
-            <GoabxButton type="primary" size="compact" onClick={applyFilters}>
-              Apply filters
-            </GoabxButton>
-            <GoabxButton
-              type="tertiary"
-              size="compact"
-              onClick={() => setFilterDrawerOpen(false)}
-            >
-              Cancel
-            </GoabxButton>
-          </GoabButtonGroup>
-        }
-      >
-        <div className="filter-drawer-content">
-          <GoabxFormItem label="Category">
-            <GoabxCheckboxList
-              name="category"
-              size="compact"
-              value={pendingFilters}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters(detail.value)
-              }
-            >
-              {filterGroups.map((group) => (
-                <GoabxCheckbox
-                  key={group.name}
-                  name={group.name}
-                  value={group.name}
-                  text={group.name}
+      {typeof document !== "undefined" &&
+        document.getElementById("push-drawer-portal") &&
+        createPortal(
+          <GoabxPushDrawer
+            heading="Filter tokens"
+            open={filterDrawerOpen}
+            width="300px"
+            onClose={() => setFilterDrawerOpen(false)}
+            actions={
+              <GoabButtonGroup alignment="start" gap="compact">
+                <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                  Apply filters
+                </GoabxButton>
+                <GoabxButton
+                  type="tertiary"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </GoabxFormItem>
+                  onClick={() => setFilterDrawerOpen(false)}
+                >
+                  Cancel
+                </GoabxButton>
+              </GoabButtonGroup>
+            }
+          >
+            <div className="filter-drawer-content">
+              <GoabxFormItem label="Category">
+                <GoabxCheckboxList
+                  name="category"
+                  size="compact"
+                  value={pendingFilters}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters(detail.value)
+                  }
+                >
+                  {filterGroups.map((group) => (
+                    <GoabxCheckbox
+                      key={group.name}
+                      name={group.name}
+                      value={group.name}
+                      text={group.name}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </GoabxFormItem>
 
-          {pendingFilters.length > 0 && (
-            <>
-              <GoabDivider />
-              <GoabxButton
-                type="tertiary"
-                size="compact"
-                onClick={() => setPendingFilters([])}
-              >
-                Clear all filters
-              </GoabxButton>
-            </>
-          )}
-        </div>
-      </GoabxDrawer>
+              {pendingFilters.length > 0 && (
+                <>
+                  <GoabDivider />
+                  <GoabxButton
+                    type="tertiary"
+                    size="compact"
+                    onClick={() => setPendingFilters([])}
+                  >
+                    Clear all filters
+                  </GoabxButton>
+                </>
+              )}
+            </div>
+          </GoabxPushDrawer>,
+          document.getElementById("push-drawer-portal")!,
+        )}
 
       <style>{`
         .tokens-grid {
           max-width: 100%;
+          container-type: inline-size;
         }
 
         /* Sentinel for sticky detection - invisible marker */
@@ -1053,6 +1111,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         .tokens-toolbar--sticky {
           padding: var(--goa-space-s) 0;
           background: transparent;
+          margin-bottom: 0;
         }
 
         .tokens-toolbar--sticky::before {
@@ -1060,8 +1119,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           position: absolute;
           top: 0;
           bottom: 0;
-          left: -9999px;
-          right: -9999px;
+          left: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+          right: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
           background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
@@ -1079,8 +1138,25 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           gap: var(--goa-space-m);
         }
 
-        /* Mobile: stack toolbar vertically */
-        @media (max-width: 640px) {
+        /* Filter button: desktop shows text, mobile shows icon-only */
+        .filter-btn-mobile { display: none; }
+
+        @media (max-width: 623px) {
+          .filter-btn-desktop { display: none; }
+          .filter-btn-mobile { display: contents; }
+
+          .tokens-toolbar {
+            flex-direction: row !important;
+            align-items: flex-start !important;
+          }
+
+          .tokens-search-section {
+            min-width: 0 !important;
+          }
+        }
+
+        /* Narrow container: stack toolbar vertically */
+        @container (max-width: 640px) {
           .tokens-toolbar {
             flex-direction: column;
             align-items: stretch;
@@ -1095,13 +1171,11 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           }
         }
 
-        /* Syntax toggle wrapper */
+        /* Syntax toggle wrapper - tabs used as segmented toggle, hide content area */
         .syntax-toggle-wrapper {
-          margin-bottom: -20px; /* Compensate for goa-tabs internal margin */
-        }
-
-        .syntax-toggle-wrapper .tabs {
-          margin-bottom: 0 !important;
+          overflow: hidden;
+          max-height: 40px;
+          flex-shrink: 0;
         }
 
         /* Filter chips */
@@ -1119,9 +1193,49 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           margin-bottom: var(--goa-space-m);
         }
 
-        /* Table/List view */
+        /* Horizontal scroll container for table - bleeds into card padding */
+        /* TODO: Remove calc workaround when goa-table V2 gets box-sizing: border-box */
         .tokens-table-wrapper {
-          overflow: auto;
+          display: flex;
+          align-items: stretch;
+          overflow-x: auto;
+          margin-left: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+          margin-right: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+        }
+
+        .tokens-table-wrapper > * {
+          flex-grow: 1;
+          min-width: max-content;
+        }
+
+        .tokens-table-wrapper goa-table {
+          width: calc(100% - 2px) !important;
+          margin-left: var(--card-padding-h, var(--goa-space-2xl));
+          margin-right: var(--card-padding-h, var(--goa-space-2xl));
+        }
+
+        .tokens-table-scroll-shadow-left,
+        .tokens-table-scroll-shadow-right {
+          position: sticky;
+          width: 8px;
+          min-width: 8px;
+          flex-shrink: 0;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0;
+          transition: opacity 0.15s ease;
+        }
+
+        .tokens-table-scroll-shadow-left {
+          left: 0;
+          margin-right: -8px;
+          background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+        }
+
+        .tokens-table-scroll-shadow-right {
+          right: 0;
+          margin-left: -8px;
+          background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
         }
 
         .token-name {
