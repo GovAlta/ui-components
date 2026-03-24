@@ -5,18 +5,18 @@
  * for form inputs like Input, TextArea, Dropdown, etc.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const formItemConfigurations: ComponentConfigurations = {
-  componentSlug: 'form-item',
-  componentName: 'Form item',
-  defaultConfigurationId: 'basic',
+  componentSlug: "form-item",
+  componentName: "Form item",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Form item with label wrapping an input',
+      id: "basic",
+      name: "Basic example",
+      description: "Form item with label wrapping an input",
       code: {
         react: `<GoabFormItem label="Email address" mb="l">
   <GoabInput name="email" type="email" width="100%" />
@@ -30,9 +30,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-help-text',
-      name: 'With help text',
-      description: 'Form item with additional guidance',
+      id: "with-help-text",
+      name: "With help text",
+      description: "Form item with additional guidance",
       code: {
         react: `<GoabFormItem label="Password" helpText="Must be at least 8 characters" mb="l">
   <GoabInput name="password" type="password" width="100%" />
@@ -40,15 +40,15 @@ export const formItemConfigurations: ComponentConfigurations = {
         angular: `<goab-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
   <goab-input name="password" type="password" width="100%"></goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Password" helpText="Must be at least 8 characters" mb="l">
+        webComponents: `<goa-form-item version="2" label="Password" helptext="Must be at least 8 characters" mb="l">
   <goa-input version="2" name="password" type="password" width="100%"></goa-input>
 </goa-form-item>`,
       },
     },
     {
-      id: 'required',
-      name: 'Required field',
-      description: 'Form item marked as required',
+      id: "required",
+      name: "Required field",
+      description: "Form item marked as required",
       code: {
         react: `<GoabFormItem label="Full name" requirement="required" mb="l">
   <GoabInput name="fullName" width="100%" />
@@ -62,9 +62,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'optional',
-      name: 'Optional field',
-      description: 'Form item marked as optional',
+      id: "optional",
+      name: "Optional field",
+      description: "Form item marked as optional",
       code: {
         react: `<GoabFormItem label="Middle name" requirement="optional" mb="l">
   <GoabInput name="middleName" width="100%" />
@@ -78,9 +78,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-error',
-      name: 'With error',
-      description: 'Form item showing validation error',
+      id: "with-error",
+      name: "With error",
+      description: "Form item showing validation error",
       code: {
         react: `<GoabFormItem label="Email address" error="Please enter a valid email address" mb="l">
   <GoabInput name="email" type="email" error width="100%" />
@@ -94,9 +94,9 @@ export const formItemConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'label-sizes',
-      name: 'Label sizes',
-      description: 'Different label size options',
+      id: "label-sizes",
+      name: "Label sizes",
+      description: "Different label size options",
       code: {
         react: `<GoabFormItem label="Compact label" labelSize="compact" mb="l">
   <GoabInput name="compact" width="100%" />

@@ -94,32 +94,47 @@ export const appHeaderConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: "full-example",
-      name: "Full example",
-      description: "Header with navigation and utilities",
+      id: "with-navigation",
+      name: "With navigation",
+      description: "Header with navigation, groups, and utilities",
       code: {
         react: `<GoabAppHeader heading="Service Portal" url="/">
-  <a slot="navigation" href="/dashboard">Dashboard</a>
-  <a slot="navigation" href="/applications">Applications</a>
-  <a slot="navigation" href="/settings">Settings</a>
+  <a slot="navigation" href="#">Dashboard</a>
+  <GoabAppHeaderMenu slotName="navigation" heading="Applications">
+    <a href="#">New application</a>
+    <a href="#">Active</a>
+    <a href="#">Archived</a>
+  </GoabAppHeaderMenu>
+  <a slot="navigation" href="#">Reports</a>
+  <a slot="navigation" href="#">Settings</a>
   <GoabMenuButton slot="utilities" text="John Smith" type="tertiary" size="compact">
     <GoabMenuAction text="User settings" action="user-settings" />
     <GoabMenuAction text="Sign out" action="sign-out" />
   </GoabMenuButton>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="Service Portal" url="/">
-  <a slot="navigation" href="/dashboard">Dashboard</a>
-  <a slot="navigation" href="/applications">Applications</a>
-  <a slot="navigation" href="/settings">Settings</a>
+  <a slot="navigation" href="#">Dashboard</a>
+  <goab-app-header-menu slot="navigation" heading="Applications">
+    <a href="#">New application</a>
+    <a href="#">Active</a>
+    <a href="#">Archived</a>
+  </goab-app-header-menu>
+  <a slot="navigation" href="#">Reports</a>
+  <a slot="navigation" href="#">Settings</a>
   <goab-menu-button slot="utilities" text="John Smith" type="tertiary" size="compact">
     <goab-menu-action text="User settings" action="user-settings"></goab-menu-action>
     <goab-menu-action text="Sign out" action="sign-out"></goab-menu-action>
   </goab-menu-button>
 </goab-app-header>`,
         webComponents: `<goa-app-header version="2" heading="Service Portal" url="/">
-  <a slot="navigation" href="/dashboard">Dashboard</a>
-  <a slot="navigation" href="/applications">Applications</a>
-  <a slot="navigation" href="/settings">Settings</a>
+  <a slot="navigation" href="#">Dashboard</a>
+  <goa-app-header-menu slot="navigation" version="2" heading="Applications">
+    <a href="#">New application</a>
+    <a href="#">Active</a>
+    <a href="#">Archived</a>
+  </goa-app-header-menu>
+  <a slot="navigation" href="#">Reports</a>
+  <a slot="navigation" href="#">Settings</a>
   <goa-menu-button slot="utilities" version="2" text="John Smith" type="tertiary" size="compact">
     <goa-menu-action text="User settings" action="user-settings"></goa-menu-action>
     <goa-menu-action text="Sign out" action="sign-out"></goa-menu-action>

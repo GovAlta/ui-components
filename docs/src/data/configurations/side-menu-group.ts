@@ -4,18 +4,18 @@
  * SideMenuGroup is a collapsible child component of SideMenu.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const sideMenuGroupConfigurations: ComponentConfigurations = {
-  componentSlug: 'side-menu-group',
-  componentName: 'Side menu group',
-  defaultConfigurationId: 'basic',
+  componentSlug: "side-menu-group",
+  componentName: "Side menu group",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic side menu group',
-      description: 'Collapsible group within SideMenu',
+      id: "basic",
+      name: "Basic side menu group",
+      description: "Collapsible group within SideMenu",
       code: {
         react: `<GoabSideMenu>
   <GoabSideMenuGroup heading="Applications">
@@ -48,6 +48,43 @@ export const sideMenuGroupConfigurations: ComponentConfigurations = {
   <goa-side-menu-group version="2" heading="Reports">
     <a href="/reports/monthly">Monthly</a>
     <a href="/reports/annual">Annual</a>
+  </goa-side-menu-group>
+</goa-side-menu>`,
+      },
+    },
+    {
+      id: "with-icon",
+      name: "With icon",
+      description: "Group headings with icons",
+      code: {
+        react: `<GoabSideMenu>
+  <GoabSideMenuGroup heading="Applications" icon="document">
+    <a href="/apps/active">Active</a>
+    <a href="/apps/pending">Pending</a>
+  </GoabSideMenuGroup>
+  <GoabSideMenuGroup heading="Settings" icon="settings">
+    <a href="/settings/profile">Profile</a>
+    <a href="/settings/security">Security</a>
+  </GoabSideMenuGroup>
+</GoabSideMenu>`,
+        angular: `<goab-side-menu>
+  <goab-side-menu-group heading="Applications" icon="document">
+    <a href="/apps/active">Active</a>
+    <a href="/apps/pending">Pending</a>
+  </goab-side-menu-group>
+  <goab-side-menu-group heading="Settings" icon="settings">
+    <a href="/settings/profile">Profile</a>
+    <a href="/settings/security">Security</a>
+  </goab-side-menu-group>
+</goab-side-menu>`,
+        webComponents: `<goa-side-menu version="2">
+  <goa-side-menu-group version="2" heading="Applications" icon="document">
+    <a href="/apps/active">Active</a>
+    <a href="/apps/pending">Pending</a>
+  </goa-side-menu-group>
+  <goa-side-menu-group version="2" heading="Settings" icon="settings">
+    <a href="/settings/profile">Profile</a>
+    <a href="/settings/security">Security</a>
   </goa-side-menu-group>
 </goa-side-menu>`,
       },

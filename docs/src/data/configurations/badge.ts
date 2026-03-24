@@ -4,28 +4,28 @@
  * Badges are used to label, categorize, or show status.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const badgeConfigurations: ComponentConfigurations = {
-  componentSlug: 'badge',
-  componentName: 'Badge',
-  defaultConfigurationId: 'basic',
+  componentSlug: "badge",
+  componentName: "Badge",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic badge',
-      description: 'Simple badge with text',
+      id: "basic",
+      name: "Basic badge",
+      description: "Simple badge with text",
       code: {
-        react: `<GoabBadge type="default" content="New" emphasis="subtle" icon={false} />`,
-        angular: `<goab-badge type="default" content="New" emphasis="subtle" [icon]="false"></goab-badge>`,
-        webComponents: `<goa-badge version="2" type="default" content="New" emphasis="subtle" icon="false"></goa-badge>`,
+        react: `<GoabBadge type="default" content="New" icon={false} />`,
+        angular: `<goab-badge type="default" content="New" [icon]="false"></goab-badge>`,
+        webComponents: `<goa-badge version="2" type="default" content="New" icon="false"></goa-badge>`,
       },
     },
     {
-      id: 'semantic-types',
-      name: 'Semantic types',
-      description: 'Badges for different statuses',
+      id: "semantic-types",
+      name: "Semantic types",
+      description: "Badges for different statuses",
       code: {
         react: `<GoabBadge type="information" content="Information" />
 <GoabBadge type="important" content="Important" />
@@ -45,9 +45,9 @@ export const badgeConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'extended-colours',
-      name: 'Extended colours',
-      description: 'Additional colour options for categorization',
+      id: "extended-colours",
+      name: "Extended colours",
+      description: "Additional colour options for categorization",
       code: {
         react: `<GoabBadge type="sky" content="Sky" icon={false} />
 <GoabBadge type="sky" content="Sky" icon={false} emphasis="subtle" />
@@ -88,9 +88,9 @@ export const badgeConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'high-emphasis',
-      name: 'High emphasis',
-      description: 'Strong versions of all badge types',
+      id: "high-emphasis",
+      name: "High emphasis",
+      description: "Strong versions of all badge types",
       code: {
         react: `<GoabBadge type="default" content="Default" icon={false} />
 <GoabBadge type="information" content="Information" icon={false} />
@@ -131,9 +131,9 @@ export const badgeConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'low-emphasis',
-      name: 'Low emphasis',
-      description: 'Subtle versions of all badge types',
+      id: "low-emphasis",
+      name: "Low emphasis",
+      description: "Subtle versions of all badge types",
       code: {
         react: `<GoabBadge type="default" content="Default" emphasis="subtle" icon={false} />
 <GoabBadge type="information" content="Information" emphasis="subtle" icon={false} />
@@ -174,9 +174,9 @@ export const badgeConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icon',
-      name: 'With custom icon',
-      description: 'Badge with an icon',
+      id: "with-icon",
+      name: "With custom icon",
+      description: "Badge with an icon",
       code: {
         react: `<GoabBadge type="success" content="Approved" iconType="checkmark" />
 <GoabBadge type="emergency" content="Rejected" iconType="close" />
@@ -190,9 +190,9 @@ export const badgeConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Medium and large badge sizes',
+      id: "sizes",
+      name: "Sizes",
+      description: "Medium and large badge sizes",
       code: {
         react: `<GoabBadge type="default" content="Medium" size="medium" emphasis="subtle" />
 <GoabBadge type="default" content="Large" size="large" emphasis="subtle" />`,

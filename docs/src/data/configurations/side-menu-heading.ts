@@ -4,18 +4,18 @@
  * SideMenuHeading is a child component of SideMenu.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const sideMenuHeadingConfigurations: ComponentConfigurations = {
-  componentSlug: 'side-menu-heading',
-  componentName: 'Side menu heading',
-  defaultConfigurationId: 'basic',
+  componentSlug: "side-menu-heading",
+  componentName: "Side menu heading",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic side menu heading',
-      description: 'Section heading within SideMenu',
+      id: "basic",
+      name: "Basic side menu heading",
+      description: "Section heading within SideMenu",
       code: {
         react: `<GoabSideMenu>
   <GoabSideMenuHeading>Main Menu</GoabSideMenuHeading>
@@ -38,6 +38,37 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
   <a href="/dashboard">Dashboard</a>
   <a href="/reports">Reports</a>
   <goa-side-menu-heading version="2">Settings</goa-side-menu-heading>
+  <a href="/profile">Profile</a>
+  <a href="/preferences">Preferences</a>
+</goa-side-menu>`,
+      },
+    },
+    {
+      id: "with-icon",
+      name: "With icon",
+      description: "Section headings with icons",
+      code: {
+        react: `<GoabSideMenu>
+  <GoabSideMenuHeading icon="grid">Navigation</GoabSideMenuHeading>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/reports">Reports</a>
+  <GoabSideMenuHeading icon="settings">Configuration</GoabSideMenuHeading>
+  <a href="/profile">Profile</a>
+  <a href="/preferences">Preferences</a>
+</GoabSideMenu>`,
+        angular: `<goab-side-menu>
+  <goab-side-menu-heading icon="grid">Navigation</goab-side-menu-heading>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/reports">Reports</a>
+  <goab-side-menu-heading icon="settings">Configuration</goab-side-menu-heading>
+  <a href="/profile">Profile</a>
+  <a href="/preferences">Preferences</a>
+</goab-side-menu>`,
+        webComponents: `<goa-side-menu version="2">
+  <goa-side-menu-heading version="2" icon="grid">Navigation</goa-side-menu-heading>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/reports">Reports</a>
+  <goa-side-menu-heading version="2" icon="settings">Configuration</goa-side-menu-heading>
   <a href="/profile">Profile</a>
   <a href="/preferences">Preferences</a>
 </goa-side-menu>`,

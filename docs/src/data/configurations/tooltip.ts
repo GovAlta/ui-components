@@ -4,18 +4,18 @@
  * Tooltips provide additional context on hover or focus.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const tooltipConfigurations: ComponentConfigurations = {
-  componentSlug: 'tooltip',
-  componentName: 'Tooltip',
-  defaultConfigurationId: 'basic',
+  componentSlug: "tooltip",
+  componentName: "Tooltip",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic tooltip',
-      description: 'Simple tooltip on hover',
+      id: "basic",
+      name: "Basic tooltip",
+      description: "Simple tooltip on hover",
       code: {
         react: `<GoabTooltip content="Additional information about this item">
   <GoabButton>Hover me</GoabButton>
@@ -29,9 +29,9 @@ export const tooltipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'positions',
-      name: 'Positions',
-      description: 'Tooltip placement options',
+      id: "positions",
+      name: "Positions",
+      description: "Tooltip placement options",
       code: {
         react: `<GoabTooltip content="Top tooltip" position="top">
   <GoabButton>Top</GoabButton>
@@ -72,9 +72,9 @@ export const tooltipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-icon-button',
-      name: 'With icon button',
-      description: 'Tooltip on an icon button',
+      id: "with-icon-button",
+      name: "With icon button",
+      description: "Tooltip on an icon button",
       code: {
         react: `<GoabTooltip content="More options">
   <GoabIconButton icon="ellipsis-vertical" />
@@ -88,18 +88,36 @@ export const tooltipConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'hover-delay',
-      name: 'Hover delay',
-      description: 'Tooltip with custom hover delay',
+      id: "halign",
+      name: "Horizontal alignment",
+      description: "Tooltip alignment relative to the trigger",
       code: {
-        react: `<GoabTooltip content="This appears after 500ms" hoverDelay={500}>
-  <GoabButton>Delayed tooltip</GoabButton>
+        react: `<GoabTooltip content="Left aligned tooltip" halign="left">
+  <GoabButton>Left</GoabButton>
+</GoabTooltip>
+<GoabTooltip content="Center aligned tooltip" halign="center">
+  <GoabButton>Center</GoabButton>
+</GoabTooltip>
+<GoabTooltip content="Right aligned tooltip" halign="right">
+  <GoabButton>Right</GoabButton>
 </GoabTooltip>`,
-        angular: `<goab-tooltip content="This appears after 500ms" [hoverDelay]="500">
-  <goab-button>Delayed tooltip</goab-button>
+        angular: `<goab-tooltip content="Left aligned tooltip" halign="left">
+  <goab-button>Left</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Center aligned tooltip" halign="center">
+  <goab-button>Center</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Right aligned tooltip" halign="right">
+  <goab-button>Right</goab-button>
 </goab-tooltip>`,
-        webComponents: `<goa-tooltip content="This appears after 500ms" hoverdelay="500">
-  <goa-button version="2">Delayed tooltip</goa-button>
+        webComponents: `<goa-tooltip content="Left aligned tooltip" halign="left">
+  <goa-button version="2">Left</goa-button>
+</goa-tooltip>
+<goa-tooltip content="Center aligned tooltip" halign="center">
+  <goa-button version="2">Center</goa-button>
+</goa-tooltip>
+<goa-tooltip content="Right aligned tooltip" halign="right">
+  <goa-button version="2">Right</goa-button>
 </goa-tooltip>`,
       },
     },

@@ -4,18 +4,18 @@
  * Note: TextArea should be wrapped in FormItem for proper labeling.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const textAreaConfigurations: ComponentConfigurations = {
-  componentSlug: 'text-area',
-  componentName: 'Text area',
-  defaultConfigurationId: 'basic',
+  componentSlug: "text-area",
+  componentName: "Text area",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic example',
-      description: 'Text area wrapped in FormItem with label',
+      id: "basic",
+      name: "Basic example",
+      description: "Text area wrapped in FormItem with label",
       code: {
         react: `<GoabFormItem label="Comments" mb="l">
   <GoabTextArea name="comments" />
@@ -29,9 +29,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-placeholder',
-      name: 'With placeholder',
-      description: 'Text area with placeholder text',
+      id: "with-placeholder",
+      name: "With placeholder",
+      description: "Text area with placeholder text",
       code: {
         react: `<GoabFormItem label="Feedback" mb="l">
   <GoabTextArea name="feedback" placeholder="Enter your feedback here..." />
@@ -45,9 +45,9 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'custom-rows',
-      name: 'Custom rows',
-      description: 'Text area with custom height',
+      id: "custom-height",
+      name: "Custom height",
+      description: "Text area with custom row count",
       code: {
         react: `<GoabFormItem label="Description" mb="l">
   <GoabTextArea name="description" rows={6} />
@@ -61,41 +61,66 @@ export const textAreaConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'character-count',
-      name: 'Character count',
-      description: 'Text area with character limit',
+      id: "character-count",
+      name: "Character count",
+      description: "Text area with character limit",
       code: {
-        react: `<GoabFormItem label="Bio" helpText="Maximum 200 characters" mb="l">
-  <GoabTextArea name="bio" countBy="character" maxCount={200} />
+        react: `<GoabFormItem label="Tell us about your experience with the service" mb="l">
+  <GoabTextArea name="experience" countBy="character" maxCount={200} />
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Bio" helpText="Maximum 200 characters" mb="l">
-  <goab-textarea name="bio" countby="character" [maxCount]="200"></goab-textarea>
+        angular: `<goab-form-item label="Tell us about your experience with the service" mb="l">
+  <goab-textarea name="experience" countby="character" [maxCount]="200"></goab-textarea>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Bio" helpText="Maximum 200 characters" mb="l">
-  <goa-textarea version="2" name="bio" countby="character" maxcount="200"></goa-textarea>
+        webComponents: `<goa-form-item version="2" label="Tell us about your experience with the service" mb="l">
+  <goa-textarea version="2" name="experience" countby="character" maxcount="200"></goa-textarea>
 </goa-form-item>`,
       },
     },
     {
-      id: 'word-count',
-      name: 'Word count',
-      description: 'Text area with word limit',
+      id: "word-count",
+      name: "Word count",
+      description: "Text area with word limit",
       code: {
-        react: `<GoabFormItem label="Essay" helpText="Maximum 500 words" mb="l">
-  <GoabTextArea name="essay" countBy="word" maxCount={500} rows={8} />
+        react: `<GoabFormItem label="Describe the circumstances that led to this request" mb="l">
+  <GoabTextArea name="circumstances" countBy="word" maxCount={500} rows={8} />
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Essay" helpText="Maximum 500 words" mb="l">
-  <goab-textarea name="essay" countby="word" [maxCount]="500" [rows]="8"></goab-textarea>
+        angular: `<goab-form-item label="Describe the circumstances that led to this request" mb="l">
+  <goab-textarea name="circumstances" countby="word" [maxCount]="500" [rows]="8"></goab-textarea>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Essay" helpText="Maximum 500 words" mb="l">
-  <goa-textarea version="2" name="essay" countby="word" maxcount="500" rows="8"></goa-textarea>
+        webComponents: `<goa-form-item version="2" label="Describe the circumstances that led to this request" mb="l">
+  <goa-textarea version="2" name="circumstances" countby="word" maxcount="500" rows="8"></goa-textarea>
 </goa-form-item>`,
       },
     },
     {
-      id: 'states',
-      name: 'States',
-      description: 'Disabled, readonly, and error states',
+      id: "sizes",
+      name: "Sizes",
+      description: "Default and compact size variants",
+      code: {
+        react: `<GoabFormItem label="Default size" mb="l">
+  <GoabTextArea name="sizeDefault" />
+</GoabFormItem>
+<GoabFormItem label="Compact size" labelSize="compact" mb="l">
+  <GoabTextArea name="sizeCompact" size="compact" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Default size" mb="l">
+  <goab-textarea name="sizeDefault"></goab-textarea>
+</goab-form-item>
+<goab-form-item label="Compact size" labelSize="compact" mb="l">
+  <goab-textarea name="sizeCompact" size="compact"></goab-textarea>
+</goab-form-item>`,
+        webComponents: `<goa-form-item version="2" label="Default size" mb="l">
+  <goa-textarea version="2" name="sizeDefault"></goa-textarea>
+</goa-form-item>
+<goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
+  <goa-textarea version="2" name="sizeCompact" size="compact"></goa-textarea>
+</goa-form-item>`,
+      },
+    },
+    {
+      id: "states",
+      name: "States",
+      description: "Disabled, readonly, and error states",
       code: {
         react: `<GoabFormItem label="Disabled" mb="l">
   <GoabTextArea name="disabled" disabled value="Cannot edit this content" />

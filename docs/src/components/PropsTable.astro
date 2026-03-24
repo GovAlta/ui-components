@@ -77,7 +77,7 @@ const finalProps = combinedMarginProp
       {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
     </div>
     <goa-container version="2" type="interactive">
-      <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
+      <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
         {finalProps.map((prop, index) => {
           const { isDeprecated, cleanDescription } = parseDeprecated(prop.description);
           return (
@@ -123,7 +123,7 @@ const finalProps = combinedMarginProp
       {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
     </div>
     <goa-container version="2" type="interactive">
-      <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
+      <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
         {events.map((event) => (
           <div
             class="prop-row"
@@ -155,7 +155,7 @@ const finalProps = combinedMarginProp
       {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
     </div>
     <goa-container version="2" type="interactive">
-      <goa-data-grid keyboard-nav="layout" keyboard-icon="false">
+      <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
         {meaningfulSlots.map((slot) => (
           <div class="prop-row" data-grid="row">
             <div class="prop-cell prop-cell-name" data-grid="cell">
