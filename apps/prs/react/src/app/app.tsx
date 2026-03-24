@@ -226,6 +226,10 @@ export function App() {
                   label="3607 Radio and Checkbox Interaction Area"
                   url="/bugs/3607"
                 />
+                <GoabxWorkSideMenuItem
+                  label="3505 Link Icon Click"
+                  url="/bugs/3505"
+                />
               </GoabxWorkSideMenuGroup>
 
               <GoabxWorkSideMenuGroup icon="star" heading="Features">
