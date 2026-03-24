@@ -92,11 +92,14 @@ githubUrl: https://github.com/...
 webComponentTag: goa-button
 reactClassName: GoabButton
 angularSelector: goab-button
-hidden: false # set true to hide from nav
+hidden: true # optional — hide from nav (used for subcomponents, deprecated, internal)
+subcomponent: true # optional — show API on parent component page
 ---
 ```
 
 The MDX body is usually empty. Any content you add appears at the bottom of the "Usage guidelines" tab.
+
+**Subcomponents:** Some components are children that developers compose with a parent (e.g., Tab inside Tabs, Footer Nav Section inside Footer). These have `hidden: true` (not in nav) and `subcomponent: true` (API shown on parent page). The parent discovers subcomponents via its `relatedComponents` array. See "Add a subcomponent" below for how this works.
 
 ### Guidance (`src/content/guidance/*.mdx`)
 
@@ -223,6 +226,66 @@ This is a common source of errors when writing configuration code since all thre
 
 4. The component appears in the nav and grid automatically. The side nav is built dynamically from the content collection — Astro queries all component MDX files, groups them by `category`, and passes the data to `ComponentsSubMenu` via `nav-categories.ts`. No hardcoded nav lists to update.
 
+### Add a subcomponent
+
+Subcomponents are child components that developers compose with a parent (e.g., `<goa-tab>` inside `<goa-tabs>`). Their API appears on the parent's Properties tab under a separate heading.
+
+**How it works:** The parent lists the subcomponent in its `relatedComponents`. The page template calls `getSubcomponents()`, which filters that list for entries with `subcomponent: true` and loads their extracted API data.
+
+**Example: Tabs and Tab**
+
+The parent (`tabs.mdx`) includes `tab` in its `relatedComponents`:
+
+```yaml
+# src/content/components/tabs.mdx
+---
+name: Tabs
+status: stable
+category: structure-and-navigation
+relatedComponents:
+  - tab # <-- this is how the parent discovers the subcomponent
+webComponentTag: goa-tabs
+---
+```
+
+The child (`tab.mdx`) marks itself as hidden and a subcomponent:
+
+```yaml
+# src/content/components/tab.mdx
+---
+name: Tab
+status: stable
+category: structure-and-navigation
+hidden: true # not shown in nav
+subcomponent: true # API appears on parent page
+relatedComponents:
+  - tabs
+webComponentTag: goa-tab
+---
+```
+
+Result: the Tabs page shows "Tab Props", "Tab Slots" (and "Tab Events" if any exist) with a "Subcomponent" badge on each heading.
+
+**To add a new subcomponent:**
+
+1. Create the subcomponent MDX file with `hidden: true` and `subcomponent: true`
+2. Add its slug to the parent's `relatedComponents` array
+3. Ensure API data exists. If the Svelte component has its own directory (`libs/web-components/src/components/my-sub/`), the extraction script handles it automatically. If it's a nested file inside the parent's directory (like `WorkSideMenuGroup.svelte` inside `work-side-menu/`), you need to manually create the API JSON in `generated/component-apis/my-sub.json`
+
+**Current subcomponent mappings:**
+
+| Parent         | Subcomponents                             |
+| -------------- | ----------------------------------------- |
+| Header         | App Header Menu                           |
+| File uploader  | File Upload Card                          |
+| Footer         | Footer Meta Section, Footer Nav Section   |
+| Form stepper   | Form Step                                 |
+| Menu button    | Menu Action                               |
+| Radio          | Radio Item                                |
+| Side menu      | Side Menu Group, Side Menu Heading        |
+| Tabs           | Tab                                       |
+| Work Side Menu | Work Side Menu Group, Work Side Menu Item |
+
 ### Hide a component from navigation
 
 Set `hidden: true` in the component's MDX frontmatter. It won't appear in the nav or component grid, but the page still exists if you visit the URL directly.
@@ -298,15 +361,16 @@ Place an SVG in `docs/public/thumbnails/<slug>.svg`. The components grid referen
 
 ## How component pages are assembled
 
-The page template (`src/pages/components/[slug].astro`) pulls from five sources:
+The page template (`src/pages/components/[slug].astro`) pulls from six sources:
 
 1. **MDX content** — renders the component's `.mdx` file (mostly frontmatter-driven)
 2. **Extracted API** — `getComponentApi(slug)` loads from `generated/component-apis/<slug>.json`
-3. **Guidance** — `getGuidanceForComponent(slug)` filters guidance where `appliesTo.components` includes this slug, then splits into usage vs accessibility topics
-4. **Examples** — `getExamplesForComponent(slug)` filters examples where `components` includes this slug
-5. **Configurations** — `getComponentConfigurations(slug)` looks up from the registry
+3. **Subcomponent APIs** — `getSubcomponents(relatedComponents)` finds entries with `subcomponent: true` and loads their API data
+4. **Guidance** — `getGuidanceForComponent(slug)` filters guidance where `appliesTo.components` includes this slug, then splits into usage vs accessibility topics
+5. **Examples** — `getExamplesForComponent(slug)` filters examples where `components` includes this slug
+6. **Configurations** — `getComponentConfigurations(slug)` looks up from the registry
 
-These are rendered into four tabs: Properties, Examples, Usage guidelines, Accessibility.
+These are rendered into four tabs: Properties (including subcomponent APIs), Examples, Usage guidelines, Accessibility.
 
 ---
 
