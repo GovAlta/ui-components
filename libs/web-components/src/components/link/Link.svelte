@@ -60,6 +60,12 @@
     e.preventDefault();
     dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
   }
+
+  function handleIconClick() {
+    if (action) return; // Let click bubble to the container action handler
+    const host = (_rootEl.getRootNode() as ShadowRoot)?.host as HTMLElement;
+    host?.querySelector("a")?.click();
+  }
 </script>
 
 <div
@@ -75,9 +81,18 @@
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
 >
-  {#if leadingicon}<goa-icon data-testid="leading-icon" type={leadingicon} size={_iconSize} />{/if}
+
+  {#if leadingicon}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <goa-icon data-testid="leading-icon" type={leadingicon} size={_iconSize} on:click={handleIconClick} />
+  {/if}
   <slot />
-  {#if trailingicon}<goa-icon data-testid="trailing-icon" type={trailingicon} size={_iconSize} />{/if}
+  {#if trailingicon}
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <goa-icon data-testid="trailing-icon" type={trailingicon} size={_iconSize} on:click={handleIconClick} />
+  {/if}
 </div>
 
 <style>
@@ -186,7 +201,11 @@
     outline-offset: var(--goa-link-focus-offset, var(--goa-space-3xs));
   }
 
-  .link :global(::slotted(a:focus-visible)) {
-    outline: none;
+  .link :global(::slotted(a:focus-visible)),
+  .link :global(::slotted(a:focus-within)),
+  .link :global(::slotted(a:focus)) {
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
   }
 </style>

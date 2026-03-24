@@ -67,4 +67,55 @@ describe("Link", () => {
       expect(spy).toBeCalledWith({foo: "bar"});
     })
   })
+
+  it("should trigger the anchor when the leading icon is clicked", async () => {
+    const Component = () => {
+      return (
+        <GoabLink testId={"link"} leadingIcon={"home"}>
+          <a href="#test-anchor" data-testid="anchor">Link text</a>
+        </GoabLink>
+      );
+    };
+
+    const result = render(<Component />);
+    const link = result.getByTestId("link");
+    const leadingIcon = link.getByTestId("leading-icon");
+
+    const spy = vi.fn();
+
+    const anchor = result.getByTestId("anchor");
+    anchor.element().addEventListener("click", spy);
+
+    await leadingIcon.click();
+
+    await vi.waitFor(() => {
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
+  it("should trigger the anchor when the trailing icon is clicked", async () => {
+    const Component = () => {
+      return (
+        <GoabLink testId={"link"} trailingIcon={"home"}>
+          <a href="#test-anchor" data-testid="anchor">Link text</a>
+        </GoabLink>
+      );
+    };
+
+    const result = render(<Component />);
+    const link = result.getByTestId("link");
+    const trailingIcon = link.getByTestId("trailing-icon");
+
+    const spy = vi.fn();
+
+    const anchor = result.getByTestId("anchor");
+    anchor.element().addEventListener("click", spy);
+
+
+    await trailingIcon.click();
+
+    await vi.waitFor(() => {
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 })
