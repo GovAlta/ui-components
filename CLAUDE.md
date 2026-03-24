@@ -51,14 +51,37 @@ Understanding this pattern is essential for working in this codebase.
 
 ## Development Standards
 
-### Always Follow These Rules
+### Core Principles
 
 1. **Svelte is the source of truth** - Fix bugs in Svelte first, then update wrappers
-2. **Design tokens first** - Use design tokens whenever possible; avoid hardcoding colors, spacing, or typography
+2. **Design tokens over hardcoded values** - No raw hex colors, px values, or font sizes. Use `rem` when no token exists.
 3. **WCAG 2.2 AA** - Accessibility is mandatory, not optional
-4. **All three frameworks** - Every component change needs React + Angular wrapper updates
-5. **Tests required** - No component changes without corresponding test updates
-6. **Backward compatibility** - Don't break existing implementations
+4. **All three frameworks** - Every component change needs React + Angular wrapper updates with matching props
+5. **Tests required** - Browser tests for events/interactions, unit tests for props/rendering
+6. **Backward compatibility** - Flag anything that could break existing consumers
+7. **Scope discipline** - Every changed line justified by the ticket. Bugs found during dev get separate issues.
+
+### Top Review Standards
+
+These are the most frequently enforced rules during PR review. Violating these will result in review comments.
+
+| # | Standard | Enforcer(s) |
+|---|----------|-------------|
+| 1 | Design tokens over hardcoded values | Vanessa, Benji, all |
+| 2 | Scope discipline -- every changed line justified by ticket | Chris |
+| 3 | Cross-framework consistency -- React/Angular match Svelte | Vanessa, Dustin |
+| 4 | Browser tests for event/interaction behavior | Chris |
+| 5 | Locator patterns -- declare outside `waitFor`, no truthy assertions | Chris |
+| 6 | Prop naming describes behavior, not implementation | Chris |
+| 7 | Use `rem` over `px` even without a token | Chris |
+| 8 | No duplicate or redundant state variables | Chris |
+| 9 | Use existing utilities (`performOnce`, `toBoolean`, etc.) | Chris |
+| 10 | V2 CSS must include V1 token fallbacks | Benji |
+| 11 | Tests must test what they claim -- meaningful assertions | Chris, Dustin |
+| 12 | No `console.log` or commented-out code | All |
+| 13 | Event details wrapped in objects for extensibility | Chris |
+| 14 | JSDoc consistency -- `testid` format, no `version` docs, include defaults | Vanessa |
+| 15 | Breaking change awareness | Dustin, Chris |
 
 ### Props Conventions
 
@@ -67,6 +90,25 @@ Understanding this pattern is essential for working in this codebase.
 | Web Component | lowercase       | `disabled="true"`   | `_click` event     |
 | React         | camelCase       | `disabled={true}`   | `onClick` prop     |
 | Angular       | camelCase input | `[disabled]="true"` | `(onClick)` output |
+
+### Pre-PR Checklist
+
+Scan before opening a PR:
+
+- [ ] Every changed line justified by the ticket
+- [ ] No `console.log` or commented-out code
+- [ ] All values from design tokens (zero hardcoded colors, sizes, spacing)
+- [ ] `rem` used instead of `px` even without a token
+- [ ] React and Angular wrappers updated to match Svelte changes
+- [ ] Props match across all three frameworks (required/optional, naming, types)
+- [ ] Unit tests for prop rendering and margins
+- [ ] Browser tests for event/interaction behavior
+- [ ] Tests test what they claim (meaningful assertions matching test name)
+- [ ] Locators declared outside `waitFor`, no truthy assertions on locators
+- [ ] V2 styles include V1 token fallbacks: `var(--goa-v2-token, var(--goa-v1-fallback))`
+- [ ] JSDoc starts with "Sets the...", includes defaults, no `version` docs
+- [ ] No breaking changes (or explicitly flagged if intentional)
+- [ ] Commit message includes ticket number
 
 ---
 
@@ -234,61 +276,17 @@ See `apps/prs/react/src/routes/README.md` for detailed instructions.
 
 ---
 
-## Naming Conventions
+## Naming, Styling, and Detailed Standards
 
-### Components
+Detailed standards for component authoring, styling, framework wrappers, testing, and common utilities are in `.claude/rules/`. These auto-load into Claude Code sessions.
 
-| Context           | Convention      | Example         |
-| ----------------- | --------------- | --------------- |
-| Web Component tag | `goa-{name}`    | `<goa-button>`  |
-| React component   | `Goab{Name}`    | `GoabButton`    |
-| Angular selector  | `goab-{name}`   | `<goab-button>` |
-| File (React)      | `{name}.tsx`    | `button.tsx`    |
-| File (Angular)    | `{name}.ts`     | `button.ts`     |
-| File (Svelte)     | `{Name}.svelte` | `Button.svelte` |
-
-### Props/Attributes
-
-| Type       | Web Component    | React         | Angular       |
-| ---------- | ---------------- | ------------- | ------------- |
-| Regular    | `leadingicon`    | `leadingIcon` | `leadingIcon` |
-| Multi-word | `action-args`    | `actionArgs`  | `actionArgs`  |
-| Boolean    | `"true"/"false"` | `true/false`  | `true/false`  |
-
-### Spacing Values
-
-Used for `mt`, `mr`, `mb`, `ml` props:
-
-```
-Numeric: "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-T-shirt: "none", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl", "3xl", "4xl"
-```
-
----
-
-## Design Tokens
-
-All styling uses CSS custom properties from `@abgov/design-tokens`.
-
-**Location:** `libs/web-components/src/assets/css/`
-
-- `variables.css` - Custom property definitions
-- `components.css` - Component-specific styles
-- `fonts.css` - Typography
-- `reset.css` - CSS reset
-
-**Usage in Svelte:**
-
-```svelte
-<style>
-  button {
-    height: var(--goa-button-height);
-    background-color: var(--goa-color-primary);
-  }
-</style>
-```
-
-**Design tokens first.** If a token doesn't exist for what you need, discuss with the team about adding one.
+| Rules File | Covers |
+|------------|--------|
+| `component-authoring.md` | Script ordering, props, events, lifecycle, naming |
+| `styling.md` | Tokens, V2 fallbacks, responsive, CSS patterns |
+| `framework-wrappers.md` | React and Angular wrapper templates |
+| `testing.md` | Test tiers, enforced patterns, Angular testing |
+| `common-utilities.md` | Utility inventory, relay vs dispatch boundary |
 
 ---
 
@@ -349,27 +347,14 @@ playground/                      # Development playgrounds
 
 ### "Boolean prop not working"
 
-Web components receive all attributes as strings:
-
-```tsx
-// React: Convert boolean to string
-disabled={disabled ? "true" : undefined}
-```
+Web components receive all attributes as strings. See `.claude/rules/component-authoring.md` for the boolean pattern. In React wrappers: `disabled={disabled ? "true" : undefined}`.
 
 ### "Event not firing"
 
-- Web component events use underscore prefix: `_click`, `_change`
-- React/Angular wrappers expose as `onClick`, `onChange`
-- Check the web component is dispatching with `dispatch()` utility
-
-### "Styles not applying"
-
-1. Check you're using CSS custom properties, not hardcoded values
-2. Verify the component imports the correct CSS files
-3. Check if the style is scoped correctly in Svelte
+Web component events use underscore prefix (`_click`, `_change`). Wrappers expose as `onClick`, `onChange`. Check the component is using `dispatch()` from `common/utils.ts`. See `.claude/rules/common-utilities.md` for the relay vs dispatch boundary.
 
 ### "Tests failing after component update"
 
-1. Run `npm run build` first - wrappers may need rebuilt
+1. Run `npm run build` first -- wrappers may need rebuilt
 2. Check all three frameworks have updated tests
 3. Verify types in `libs/common/` match the new props

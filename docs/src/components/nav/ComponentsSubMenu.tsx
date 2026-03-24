@@ -5,14 +5,13 @@
  * Uses GoabxWorkSideMenuGroup for expandable category sections.
  */
 
-import { type MouseEvent, useRef } from "react";
+import { type MouseEvent } from "react";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
   GoabxWorkSideMenuGroup,
 } from "@abgov/react-components/experimental";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
-import { useGroupShadowDomFixes } from "./useGroupShadowDomFixes";
 import type { NavCategory } from "../../lib/nav-categories";
 
 interface ComponentsSubMenuProps {
@@ -32,9 +31,6 @@ export function ComponentsSubMenu({
   currentSlug,
   categories = [],
 }: ComponentsSubMenuProps) {
-  const groupsRef = useRef<HTMLDivElement>(null);
-  useGroupShadowDomFixes(groupsRef);
-
   // We're on the All Components page if there's no currentSlug
   const isAllComponentsPage = !currentSlug;
 
@@ -72,7 +68,7 @@ export function ComponentsSubMenu({
       )}
 
       {/* Component categories - using GoabxWorkSideMenuGroup for expandable sections */}
-      <div ref={groupsRef}>
+      <div>
         {categories.map((category) => {
           // Auto-expand category if it contains the current component
           const containsCurrentComponent = category.components.some(
