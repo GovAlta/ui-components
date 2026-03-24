@@ -87,17 +87,46 @@ export class GoabxCheckbox extends GoabControlValueAccessor implements OnInit {
     }, 0);
   }
 
+  /** Unique name to identify the checkbox. */
   @Input() name?: string;
+  /**
+   * Marks the checkbox item as selected.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) checked?: boolean;
+  /**
+   * Shows a mixed/partial selection state. Used for 'Select All' checkboxes when some items are selected.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) indeterminate?: boolean;
+  /**
+   * Label shown beside the checkbox.
+   * @default ""
+   */
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
   @Input() override value?: string | number | boolean | null;
+  /**
+   * Defines how the text will be translated for the screen reader. If not specified it will fall back to the name.
+   * @default ""
+   */
   @Input() ariaLabel?: string;
+  /**
+   * Additional description text displayed below the checkbox label.
+   * @default ""
+   */
   @Input() description!: string | TemplateRef<any>;
   @Input() reveal?: TemplateRef<any>;
   @Input() revealArialLabel?: string;
+  /**
+   * Sets the maximum width of the checkbox.
+   * @default "none"
+   */
   @Input() maxWidth?: string;
+  /**
+   * Sets the size of the checkbox. 'compact' reduces spacing for dense layouts.
+   * @default "default"
+   */
   @Input() size?: GoabCheckboxSize = "default";
 
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();

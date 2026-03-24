@@ -18,6 +18,10 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxAppFooterMetaSection implements OnInit {
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
   /** "slot" is required and must equal to "meta" so it can be rendered in the correct position **/
   @Input({ required: true }) slot!: "meta";

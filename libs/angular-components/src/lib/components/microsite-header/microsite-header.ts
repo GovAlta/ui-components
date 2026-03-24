@@ -40,6 +40,10 @@ export class GoabMicrositeHeader implements OnInit {
   isReady = false;
   /** The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   @Input({ required: true }) type!: GoabServiceLevel;
+  /**
+   * App or service version displayed on the right side of the header.
+   * @default ""
+   */
   @Input() version!: string | TemplateRef<any>;
   /**
    * Url to feedback page that will be displayed when provided.

@@ -24,7 +24,15 @@ import { GoabFormState, GoabPublicFormStatus } from "@abgov/ui-components-common
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPublicForm {
+  /**
+   * The initialization status of the form. Set to "initializing" while loading external state, then "complete" when ready.
+   * @default "complete"
+   */
   @Input() status?: GoabPublicFormStatus = "complete";
+  /**
+   * A name identifier for the form. Useful for debugging complex forms with multiple nested forms.
+   * @default "[name] not set"
+   */
   @Input() name?: string;
 
   @Output() onInit = new EventEmitter<Event>();

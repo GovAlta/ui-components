@@ -44,8 +44,17 @@ export class GoabxDrawer implements OnInit {
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;
   /** The position of the drawer. */
   @Input({ required: true }) position!: GoabDrawerPosition;
+  /**
+   * The heading text displayed at the top of the drawer.
+   * @default ""
+   */
   @Input() heading!: string | TemplateRef<any>;
+  /** Sets max height on bottom position, sets width on left and right position. */
   @Input() maxSize?: GoabDrawerSize;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "drawer"
+   */
   @Input() testId?: string;
   @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();

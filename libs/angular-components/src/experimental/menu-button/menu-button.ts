@@ -40,11 +40,29 @@ export class GoabxMenuButton {
    * @default ""
    */
   @Input() text?: string;
+  /**
+   * The button style variant.
+   * @default "primary"
+   */
   @Input() type?: GoabButtonType;
+  /**
+   * Sets the size of the button.
+   * @default "normal"
+   */
   @Input() size?: GoabButtonSize;
+  /**
+   * Sets the color variant for semantic meaning.
+   * @default "normal"
+   */
   @Input() variant?: GoabButtonVariant;
+  /** Maximum width of the dropdown menu. */
   @Input() maxWidth?: string;
+  /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   @Input() leadingIcon?: GoabIconType;
+  /**
+   * Sets the aria-label for the icon button in icon-only mode.
+   * @default "Open menu"
+   */
   @Input() ariaLabel?: string;
   /**
    * Sets a data-testid attribute for automated testing.

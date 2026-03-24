@@ -60,8 +60,14 @@ export interface GoabMenuButtonProps extends DataAttributes {
    * @default ""
    */
   text: string;
+  /**
+   * The button style variant.
+   * @default "primary"
+   */
   type?: GoabButtonType;
+  /** Maximum width of the dropdown menu. */
   maxWidth?: string;
+  /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   leadingIcon?: GoabIconType;
   /**
    * Sets a data-testid attribute for automated testing.

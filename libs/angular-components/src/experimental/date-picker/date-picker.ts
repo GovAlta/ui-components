@@ -59,15 +59,35 @@ export class GoabxDatePicker extends GoabControlValueAccessor implements OnInit 
   isReady = false;
   version = 2;
 
+  /**
+   * Name of the date field.
+   * @default ""
+   */
   @Input() name?: string;
   @Input() override value?: Date | string | null | undefined;
+  /**
+   * Minimum date value allowed.
+   * @default ""
+   */
   @Input() min?: Date | string;
+  /**
+   * Maximum date value allowed.
+   * @default ""
+   */
   @Input() max?: Date | string;
+  /**
+   * Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input.
+   * @default "calendar"
+   */
   @Input() type?: GoabDatePickerInputType;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
+  /**
+   * Sets the width of the date picker input.
+   * @default ""
+   */
   @Input() width?: string;
 
   @Output() onChange = new EventEmitter<GoabDatePickerOnChangeDetail>();

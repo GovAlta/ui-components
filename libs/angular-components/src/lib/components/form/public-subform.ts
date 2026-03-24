@@ -29,6 +29,10 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabPublicSubform extends GoabBaseComponent {
   @Input() id?: string = "";
+  /**
+   * A name identifier for the form. Useful for debugging complex forms with multiple nested forms.
+   * @default "[name] not set"
+   */
   @Input() name?: string = "";
   @Input() continueMsg?: string = "";
 

@@ -1,8 +1,58 @@
-# Documentation Indexing Script
+# Scripts
 
-This folder contains the script to generate a FlexSearch-compatible index from the component documentation files.
+This folder contains utility scripts for the GoA Design System component library.
 
-## Usage
+---
+
+## `add-jsdocs.js` — JSDoc Codegen
+
+Reads JSDoc comments from the Svelte source-of-truth components and injects
+them into the corresponding React (`.tsx`) and Angular (`.ts`) wrapper files.
+
+Only adds JSDoc where it is **missing** — safe to run multiple times.
+
+### Usage
+
+```bash
+node scripts/add-jsdocs.js            # write changes to disk
+node scripts/add-jsdocs.js --dry-run  # preview changes without writing
+```
+
+### When to run
+
+Run after:
+- Adding a new component (Svelte + wrapper files created)
+- Adding new props to an existing Svelte component
+- Updating JSDoc in a Svelte source file
+
+### How it works
+
+1. For each Angular/React wrapper file, finds the corresponding `.svelte` source
+   file by matching the component directory and file name.
+2. Parses `/** ... */` comments above every `export let` in the Svelte file.
+3. Injects those comments above the matching `@Input()` decorator (Angular) or
+   interface prop (React) wherever JSDoc is currently absent.
+4. Emits single-line `/** desc */` comments for simple props and multi-line
+   blocks when `@default`, `@required`, or `@deprecated` tags are needed.
+5. Skips props marked `@internal` in the Svelte source.
+
+### Behaviour notes
+
+- `"false"` / `"true"` string defaults in Svelte are normalised to `false` /
+  `true` in the wrapper JSDoc (web component strings → typed booleans).
+- `@required` from a Svelte JSDoc is carried over as a `@required` JSDoc tag in
+  React wrappers; for Angular `@Input({ required: true })` it is omitted because
+  TypeScript already enforces the requirement.
+- Props without a Svelte counterpart (e.g., Angular `TemplateRef` inputs, React
+  event-handler props) are left untouched and can be documented manually.
+
+---
+
+## `indexdocs.ts` — Documentation Indexing Script
+
+Generates a FlexSearch-compatible index from the component documentation files.
+
+### Usage
 
 To generate or update the search index:
 
@@ -15,7 +65,7 @@ This will:
 - Extract the title and content from each file
 - Generate a JSON index file at `docs/search-index.json`
 
-## Output Format
+### Output Format
 
 The generated index is an array of objects with the following structure:
 
@@ -32,7 +82,7 @@ The generated index is an array of objects with the following structure:
 ]
 ```
 
-## Adding Tags to Documentation
+### Adding Tags to Documentation
 
 Tags are extracted from YAML frontmatter in the markdown files. To add tags:
 
@@ -49,7 +99,7 @@ Component documentation here...
 
 See `docs/TAGS_EXAMPLE.md` for detailed examples and suggested tag categories.
 
-## Using with FlexSearch
+### Using with FlexSearch
 
 Here's an example of how to use the generated index with FlexSearch:
 
@@ -109,7 +159,7 @@ console.log(results);
 </script>
 ```
 
-## When to Run
+### When to Run
 
 Run the indexing script whenever:
 - New component documentation is added

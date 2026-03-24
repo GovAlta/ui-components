@@ -10,7 +10,15 @@ interface WCProps {
 
 /* eslint-disable-next-line */
 export interface GoabTableSortProps extends DataAttributes {
+  /**
+   * Column name identifier for sorting.
+   * @default ""
+   */
   name?: string;
+  /**
+   * Sets the sort direction indicator.
+   * @default "none"
+   */
   direction?: GoabTableSortDirection;
   children?: React.ReactNode;
 }

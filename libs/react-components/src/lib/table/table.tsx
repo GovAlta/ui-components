@@ -14,6 +14,10 @@ export interface GoabTableProps extends Margins {
   width?: string;
   onSort?: (detail: GoabTableOnSortDetail) => void;
   // stickyHeader?: boolean; TODO: enable this later
+  /**
+   * A relaxed variant of the table with more vertical padding for the cells.
+   * @default "normal"
+   */
   variant?: GoabTableVariant;
   /**
    * Sets a data-testid attribute for automated testing.

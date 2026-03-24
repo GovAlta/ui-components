@@ -35,10 +35,27 @@ import {
 export class GoabxFileUploadCard implements OnInit {
   /** The name of the uploaded file to display. */
   @Input({ required: true }) filename!: string;
+  /**
+   * The file size in bytes. Displayed in a human-readable format (KB, MB).
+   * @required
+   */
   @Input({ transform: numberAttribute }) size?: number;
+  /**
+   * The MIME type of the file. Used to determine the file type icon.
+   * @default ""
+   */
   @Input() type?: string;
+  /** Upload progress percentage from 0-100. Use -1 to indicate upload is complete. */
   @Input({ transform: numberAttribute }) progress?: number;
+  /**
+   * Error message to display. When set, the card shows an error state with a cancel button.
+   * @default ""
+   */
   @Input() error?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
 
   @Output() onCancel = new EventEmitter<GoabFileUploadOnCancelDetail>();

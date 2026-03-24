@@ -32,10 +32,27 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxAppHeader extends GoabBaseComponent implements OnInit {
+  /**
+   * Set the URL to link from the alberta.ca logo. A full url is required.
+   * @default ""
+   */
   @Input() url?: string;
+  /**
+   * Set the service name to display in the app header.
+   * @default ""
+   */
   @Input() heading?: string;
+  /**
+   * V2 only: Secondary text displayed under the service name.
+   * @default ""
+   */
   @Input() secondaryText?: string;
+  /**
+   * Maximum width of the content area.
+   * @default ""
+   */
   @Input() maxContentWidth?: string;
+  /** Sets the breakpoint in px for the full menu to display. */
   @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
 
   isReady = false;

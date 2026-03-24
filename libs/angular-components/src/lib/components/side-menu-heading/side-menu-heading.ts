@@ -27,6 +27,7 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabSideMenuHeading implements OnInit {
   isReady = false;
+  /** Icon displayed before the heading text. */
   @Input() icon!: GoabIconType;
   /**
    * Sets a data-testid attribute for automated testing.

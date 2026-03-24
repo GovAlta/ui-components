@@ -48,6 +48,10 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
    */
   @Input() content?: string;
   // Ensure boolean input; attribute only set when true so default behaviour is false
+  /**
+   * @deprecated Use icontype instead. Includes an icon in the badge.
+   * @default ""
+   */
   @Input({ transform: booleanAttribute }) icon?: boolean;
   /** Icon type to display in the badge. */
   @Input() iconType?: GoabIconType;

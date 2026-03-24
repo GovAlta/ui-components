@@ -24,8 +24,20 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxAppFooter implements OnInit {
+  /**
+   * The maximum width of the main content area
+   * @default ""
+   */
   @Input() maxContentWidth?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
+  /**
+   * URL for the Government of Alberta logo link. Set to empty string to disable the link.
+   * @default "https://alberta.ca"
+   */
   @Input() url?: string;
 
   isReady = false;

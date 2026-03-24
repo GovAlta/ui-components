@@ -26,28 +26,6 @@ declare module "react" {
 }
 
 export interface GoabxCheckboxListProps extends Margins {
-  /** - Manages a selected values array and synchronizes state down to child checkboxes.
-- Relays form-related events (mount, set value, set/reset error, reset fields) to and from children.
-Approach
-- Children register themselves via a FormFieldMount event; we track them in _childRecords.
-- All value and error changes flow through a small relay bus (receive/relay helpers).
-- Support both slotted goa-checkbox elements and direct child component instances.
-/
-  import { onMount, tick } from "svelte";
-  import type { Spacing } from "../../common/styling";
-  import { calculateMargin } from "../../common/styling";
-  import { receive, relay, toBoolean } from "../../common/utils";
-  import {
-    FieldsetSetValueMsg,
-    FieldsetSetValueRelayDetail,
-    FieldsetSetErrorMsg,
-    FieldsetResetErrorsMsg,
-    FormFieldMountRelayDetail,
-    FormFieldMountMsg,
-    FieldsetResetFieldsMsg,
-    FieldsetErrorRelayDetail,
-  } from "../../types/relay-types";
-
   /** The name for the checkbox list group. Used as group identifier in change events. */
   name: string;
   /**

@@ -35,8 +35,14 @@ export class GoabMenuButton {
    * @default ""
    */
   @Input() text?: string;
+  /**
+   * The button style variant.
+   * @default "primary"
+   */
   @Input() type?: GoabButtonType;
+  /** Maximum width of the dropdown menu. */
   @Input() maxWidth?: string;
+  /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   @Input() leadingIcon?: GoabIconType;
   /**
    * Sets a data-testid attribute for automated testing.

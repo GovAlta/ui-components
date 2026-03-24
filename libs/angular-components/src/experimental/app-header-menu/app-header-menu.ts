@@ -25,7 +25,12 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxAppHeaderMenu extends GoabBaseComponent implements OnInit {
+  /** Icon displayed before the heading text. */
   @Input() leadingIcon?: GoabIconType;
+  /**
+   * The menu heading text displayed as the dropdown trigger.
+   * @required
+   */
   @Input() heading?: string;
   @Input() slotName?: string;
 

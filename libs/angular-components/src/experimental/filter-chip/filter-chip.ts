@@ -36,11 +36,24 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxFilterChip extends GoabBaseComponent implements OnInit {
+  /**
+   * Shows an error state.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) error?: boolean;
   @Input({ transform: booleanAttribute }) deletable?: boolean;
+  /**
+   * Text label of the chip.
+   * @required
+   */
   @Input() content?: string = "";
   @Input() iconTheme?: GoabChipTheme;
+  /**
+   * Secondary text displayed in a smaller size before the main content.
+   * @default ""
+   */
   @Input() secondaryText?: string = "";
+  /** Icon displayed at the start of the chip. */
   @Input() leadingIcon?: GoabIconType | null = null;
 
   @Output() onClick = new EventEmitter();

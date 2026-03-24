@@ -98,6 +98,10 @@ export class GoabxModal implements OnInit {
    * The modal will always use role="dialog".
    */
   @Input() role?: string;
+  /**
+   * The heading text displayed at the top of the modal.
+   * @default ""
+   */
   @Input() heading!: string | TemplateRef<any>;
   @Input() actions!: TemplateRef<any>;
 
