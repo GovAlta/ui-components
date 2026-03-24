@@ -39,8 +39,20 @@ import {
 export class GoabxTabs implements OnInit {
   isReady = false;
   version = "2";
+  /**
+   * The initially active tab (1-based index). If not set, the first tab is active.
+   * @default -1
+   */
   @Input({ transform: numberAttribute }) initialTab?: number;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
+  /**
+   * Visual style variant. "segmented" shows pill-style tabs with animation.
+   * @default "default"
+   */
   @Input() variant?: GoabTabsVariant;
   /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
   @Input() orientation?: GoabTabsOrientation;

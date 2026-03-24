@@ -23,17 +23,55 @@ interface WCProps extends Margins {
 }
 
 export interface GoabButtonProps extends Margins, DataAttributes {
+  /**
+   * Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, and "start" for prominent call-to-action buttons.
+   * @default "primary"
+   */
   type?: GoabButtonType;
+  /**
+   * Controls the size of the button. Use "compact" for inline actions or space-constrained layouts.
+   * @default "normal"
+   */
   size?: GoabButtonSize;
+  /**
+   * Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for dark backgrounds.
+   * @default "normal"
+   */
   variant?: GoabButtonVariant;
+  /**
+   * When true, prevents user interaction and applies disabled styling.
+   * @default false
+   */
   disabled?: boolean;
+  /** Icon displayed before the button text. */
   leadingIcon?: GoabIconType;
+  /** Icon displayed after the button text. */
   trailingIcon?: GoabIconType;
+  /**
+   * Sets a custom width for the button (e.g., "200px" or "100%").
+   * @default ""
+   */
   width?: string;
   onClick?: () => void;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Action identifier passed in click events for event delegation patterns.
+   * @default ""
+   */
   action?: string;
+  /**
+   * Multiple argument values passed with the action in click events.
+   * @default {}
+   */
   actionArgs?: Record<string, unknown>;
+  /**
+   * Single argument value passed with the action in click events.
+   * @default ""
+   */
   actionArg?: string;
   children?: ReactNode;
 }

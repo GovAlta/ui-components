@@ -2,9 +2,21 @@ import React, { useEffect, useRef, type JSX } from "react";
 import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-common";
 
 export interface GoabTabsProps {
+  /**
+   * The initially active tab (1-based index). If not set, the first tab is active.
+   * @default -1
+   */
   initialTab?: number;
   children?: React.ReactNode;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Visual style variant. "segmented" shows pill-style tabs with animation.
+   * @default "default"
+   */
   variant?: GoabTabsVariant;
   onChange?: (detail: GoabTabsOnChangeDetail) => void;
 }

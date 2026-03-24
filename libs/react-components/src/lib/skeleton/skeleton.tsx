@@ -18,10 +18,27 @@ declare module "react" {
 }
 
 export interface GoabSkeletonProps extends Margins {
+  /**
+   * Sets the maximum width. Currently only used in card skeleton type.
+   * @default "300px"
+   */
   maxWidth?: string;
+  /**
+   * Size can affect either the height, width or both for different skeleton types.
+   * @default "1"
+   */
   size?: GoabSkeletonSize;
+  /**
+   * Used within components that contain multiple lines. Currently only used in card skeleton type
+   * @default 3
+   */
   lineCount?: number;
+  /** Sets the skeleton shape to represent your content. */
   type: GoabSkeletonType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

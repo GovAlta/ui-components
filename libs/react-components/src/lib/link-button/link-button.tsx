@@ -19,7 +19,9 @@ declare module "react" {
 
 interface GoALinkButtonProps extends Margins, DataAttributes {
   type?: GoabLinkButtonType;
+  /** Icon displayed before the button text. */
   leadingIcon?: GoabIconType;
+  /** Icon displayed after the button text. */
   trailingIcon?: GoabIconType;
   children: ReactNode;
 }

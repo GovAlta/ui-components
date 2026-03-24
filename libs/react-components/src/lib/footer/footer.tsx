@@ -10,9 +10,21 @@ interface WCProps {
 
 /* eslint-disable-next-line */
 export interface GoabAppFooterProps extends DataAttributes {
+  /**
+   * The maximum width of the main content area
+   * @default ""
+   */
   maxContentWidth?: string;
   children?: ReactNode;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * URL for the Government of Alberta logo link. Set to empty string to disable the link.
+   * @default "https://alberta.ca"
+   */
   url?: string;
 }
 

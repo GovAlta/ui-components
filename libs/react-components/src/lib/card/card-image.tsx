@@ -17,6 +17,10 @@ declare module "react" {
 
 export interface GoabCardImageProps extends DataAttributes {
   src: string;
+  /**
+   * Sets the height behavior. 'auto' fits content, 'max' fills available height.
+   * @default "auto"
+   */
   height: string;
 }
 

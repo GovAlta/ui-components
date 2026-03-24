@@ -40,10 +40,30 @@ export class GoabMicrositeHeader implements OnInit {
   isReady = false;
   @Input({ required: true }) type!: GoabServiceLevel;
   @Input() version!: string | TemplateRef<any>;
+  /**
+   * Url to feedback page that will be displayed when provided.
+   * @default ""
+   */
   @Input() feedbackUrl?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
+  /**
+   * Maximum width of the content area
+   * @default "100%"
+   */
   @Input() maxContentWidth?: string;
+  /**
+   * For internal feedback urls sets target=
+   * @default "blank"
+   */
   @Input() feedbackUrlTarget?: GoabLinkTarget;
+  /**
+   * Sets the target attribute for the header link.
+   * @default "blank"
+   */
   @Input() headerUrlTarget?: GoabLinkTarget;
 
   constructor(private cdr: ChangeDetectorRef) {}

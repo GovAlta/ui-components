@@ -18,8 +18,21 @@ declare module "react" {
 }
 
 export interface GoabGridProps extends Margins {
+  /**
+   * Gap between child items.
+   * @default "m"
+   */
   gap?: Spacing;
+  /**
+   * Minimum width of the child elements
+   * @required
+   * @default ""
+   */
   minChildWidth: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: React.ReactNode;
 }

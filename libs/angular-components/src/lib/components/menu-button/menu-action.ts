@@ -20,6 +20,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
 export class GoabMenuAction {
   @Input({ required: true }) text!: string;
   @Input({ required: true }) action!: string;
+  /** Icon displayed before the text. */
   @Input() icon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
 }

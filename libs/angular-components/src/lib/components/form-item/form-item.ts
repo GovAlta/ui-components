@@ -41,11 +41,35 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormItem extends GoabBaseComponent implements OnInit {
+  /**
+   * Creates a label for the form item.
+   * @default ""
+   */
   @Input() label?: string;
+  /**
+   * Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis.
+   * @default "regular"
+   */
   @Input() labelSize?: GoabFormItemLabelSize;
+  /**
+   * Help text displayed under the form field to provide additional explanation.
+   * @default ""
+   */
   @Input() helpText?: string;
+  /**
+   * Error text displayed under the form field. Leave blank to indicate a valid field.
+   * @default ""
+   */
   @Input() error?: string;
+  /**
+   * Marks the field with an optional or required label indicator.
+   * @default ""
+   */
   @Input() requirement?: GoabFormItemRequirement;
+  /**
+   * Sets the maximum width of the form item.
+   * @default "none"
+   */
   @Input() maxWidth?: string;
   @Input() id?: string;
   /**

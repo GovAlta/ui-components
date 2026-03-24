@@ -17,11 +17,29 @@ interface WCProps extends Margins {
 }
 
 export interface GoabBadgeProps extends Margins, DataAttributes {
+  /** Defines the context and colour of the badge. */
   type: GoabBadgeType;
+  /**
+   * @deprecated Use icontype instead. Includes an icon in the badge.
+   * @default ""
+   */
   icon?: boolean;
+  /**
+   * Text label of the badge.
+   * @default ""
+   */
   content?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Accessible label for screen readers.
+   * @default ""
+   */
   ariaLabel?: string;
+  /** Icon type to display in the badge. */
   iconType?: GoabIconType;
 }
 

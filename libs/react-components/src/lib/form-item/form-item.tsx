@@ -21,11 +21,35 @@ interface WCProps extends Margins {
 }
 
 export interface GoabFormItemProps extends Margins, DataAttributes {
+  /**
+   * Creates a label for the form item.
+   * @default ""
+   */
   label?: string;
+  /**
+   * Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis.
+   * @default "regular"
+   */
   labelSize?: GoabFormItemLabelSize;
+  /**
+   * Marks the field with an optional or required label indicator.
+   * @default ""
+   */
   requirement?: GoabFormItemRequirement;
+  /**
+   * Error text displayed under the form field. Leave blank to indicate a valid field.
+   * @default ""
+   */
   error?: string | React.ReactNode;
+  /**
+   * Help text displayed under the form field to provide additional explanation.
+   * @default ""
+   */
   helpText?: string | React.ReactNode;
+  /**
+   * Sets the maximum width of the form item.
+   * @default "none"
+   */
   maxWidth?: string;
   /**
    * Public form: to arrange fields in the summary
@@ -36,6 +60,10 @@ export interface GoabFormItemProps extends Margins, DataAttributes {
    */
   name?: string;
   children?: React.ReactNode;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   id?: string;
 }

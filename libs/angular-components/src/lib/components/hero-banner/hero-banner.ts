@@ -34,12 +34,31 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabHeroBanner implements OnInit {
   isReady = false;
+  /** Main heading text */
   @Input() heading?: string;
+  /** Background image url */
   @Input() backgroundUrl?: string;
+  /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */
   @Input() minHeight?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "background"
+   */
   @Input() testId?: string;
+  /**
+   * Maximum width of the content area
+   * @default "100%"
+   */
   @Input() maxContentWidth?: string;
+  /**
+   * Hero Banner background color when no background image is provided
+   * @default "#f8f8f8"
+   */
   @Input() backgroundColor?: string;
+  /**
+   * Text color within the hero banner.
+   * @default ""
+   */
   @Input() textColor?: string;
   @Input() actions!: TemplateRef<any>;
 

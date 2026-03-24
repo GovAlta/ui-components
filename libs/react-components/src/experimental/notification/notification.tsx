@@ -26,13 +26,37 @@ declare module "react" {
 }
 
 export interface GoabxNotificationProps {
+  /**
+   * Define the context and colour of the notification.
+   * @default ""
+   */
   type?: GoabNotificationType;
+  /**
+   * Indicates how assistive technology should handle updates to the live region.
+   * @default "polite"
+   */
   ariaLive?: GoabAriaLiveType;
+  /**
+   * Maximum width of the content area.
+   * @default "100%"
+   */
   maxContentWidth?: string;
+  /**
+   * Sets the visual prominence. 'high' for full background, 'filled' for medium.
+   * @default "high"
+   */
   emphasis?: GoabNotificationEmphasis;
+  /**
+   * When true, reduces padding for a more compact notification.
+   * @default false
+   */
   compact?: boolean;
   children?: React.ReactNode;
   onDismiss?: () => void;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   version?: string;
 }

@@ -23,14 +23,32 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabWorkSideMenuProps {
+  /** The application name displayed in the header. */
   heading: string;
+  /** URL for the header link. Clicking the logo/heading navigates to this URL. */
   url: string;
+  /**
+   * User's name displayed in the profile section.
+   * @default ""
+   */
   userName?: string;
+  /**
+   * Secondary text displayed below the user's name, such as role or email.
+   * @default ""
+   */
   userSecondaryText?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   primaryContent?: ReactNode;
   secondaryContent?: ReactNode;
   accountContent?: ReactNode;
+  /**
+   * Controls whether the side menu is expanded or collapsed.
+   * @default false
+   */
   open?: boolean;
   onToggle?: () => void;
   onNavigate?: (path: string) => void;

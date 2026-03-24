@@ -4,7 +4,12 @@ import { ReactNode } from "react";
 /* eslint-disable-next-line */
 export interface GoabSideMenuHeadingProps {
   meta?: ReactNode;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "section-heading"
+   */
   testId?: string;
+  /** Icon displayed before the heading text. */
   icon?: GoabIconType;
   children?: ReactNode;
 }

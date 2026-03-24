@@ -39,9 +39,25 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabPopover extends GoabBaseComponent implements OnInit {
   isReady = false;
+  /**
+   * Sets the maximum width of the popover container.
+   * @default "320px"
+   */
   @Input() maxWidth = "320px";
+  /**
+   * Sets the minimum width of the popover container.
+   * @default ""
+   */
   @Input() minWidth?: string;
+  /**
+   * Sets if the popover has padding. Use false when content needs to be flush with boundaries.
+   * @default true
+   */
   @Input() padded = true;
+  /**
+   * Provides control to where the popover content is positioned.
+   * @default "auto"
+   */
   @Input() position?: GoabPopoverPosition;
   /***
    * @deprecated This property has no effect and will be removed in a future version

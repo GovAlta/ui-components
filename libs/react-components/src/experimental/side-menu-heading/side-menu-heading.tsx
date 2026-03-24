@@ -19,7 +19,12 @@ declare module "react" {
 /* eslint-disable-next-line */
 export interface GoabxSideMenuHeadingProps {
   meta?: ReactNode;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "section-heading"
+   */
   testId?: string;
+  /** Icon displayed before the heading text. */
   icon?: GoabIconType;
   children?: ReactNode;
   version?: string;

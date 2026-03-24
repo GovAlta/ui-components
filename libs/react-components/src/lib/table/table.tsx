@@ -7,10 +7,18 @@ import { ReactNode, useEffect, useRef } from "react";
 
 /* eslint-disable-next-line */
 export interface GoabTableProps extends Margins {
+  /**
+   * Width of the table. By default it will fit the enclosed content.
+   * @default ""
+   */
   width?: string;
   onSort?: (detail: GoabTableOnSortDetail) => void;
   // stickyHeader?: boolean; TODO: enable this later
   variant?: GoabTableVariant;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: ReactNode;
 }

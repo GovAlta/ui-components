@@ -15,9 +15,25 @@ interface WCProps {
 
 /* eslint-disable-next-line */
 export interface GoabFileUploadInputProps extends DataAttributes {
+  /**
+   * The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button.
+   * @default "dragdrop"
+   */
   variant?: GoabFileUploadInputVariant;
+  /**
+   * Accepted file types as a comma-separated list of MIME types or file extensions (e.g., "image/*,.pdf").
+   * @default "*"
+   */
   accept?: string;
+  /**
+   * Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Defaults to 5MB. Files exceeding this will be rejected.
+   * @default "5MB"
+   */
   maxFileSize?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   onSelectFile: (detail: GoabFileUploadInputOnSelectFileDetail) => void;
 }

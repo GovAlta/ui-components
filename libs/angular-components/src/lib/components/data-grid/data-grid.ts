@@ -24,7 +24,15 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDataGrid implements OnInit {
+  /**
+   * Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide.
+   * @default "visible"
+   */
   @Input() keyboardIconVisibility: "visible" | "hidden" = "visible";
+  /**
+   * Position of the keyboard navigation indicator icon.
+   * @default "left"
+   */
   @Input() keyboardIconPosition: "left" | "right" = "left";
   @Input({ required: true }) keyboardNav!: "layout" | "table";
 

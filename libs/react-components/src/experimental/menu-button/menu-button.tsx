@@ -15,6 +15,10 @@ interface WCProps {
 }
 
 export interface GoabxMenuButtonProps extends DataAttributes {
+  /**
+   * Display text for the menu action.
+   * @default ""
+   */
   text?: string;
   type?: GoabButtonType;
   size?: GoabButtonSize;
@@ -22,6 +26,10 @@ export interface GoabxMenuButtonProps extends DataAttributes {
   maxWidth?: string;
   leadingIcon?: GoabIconType;
   ariaLabel?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;

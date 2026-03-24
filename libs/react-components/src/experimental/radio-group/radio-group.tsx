@@ -34,14 +34,40 @@ declare module "react" {
 }
 
 export interface GoabxRadioGroupProps extends Margins, DataAttributes {
+  /** The name for the radio group. Used for accessibility and change events. */
   name: string;
+  /** The currently selected value in the radio group. */
   value?: string;
   id?: string;
+  /**
+   * Disables all radio items in the group.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row.
+   * @default "vertical"
+   */
   orientation?: GoabRadioGroupOrientation;
+  /**
+   * Sets the size of all radio items. 'compact' reduces spacing for dense layouts (V2 only).
+   * @default "default"
+   */
   size?: GoabRadioGroupSize;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Shows an error state on all radio items in the group.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * Defines how the radio group will be announced by screen readers.
+   * @default ""
+   */
   ariaLabel?: string;
   children?: React.ReactNode;
   version?: string;

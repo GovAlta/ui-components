@@ -54,10 +54,34 @@ export class GoabCallout extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
+  /**
+   * Define the context and colour of the callout.
+   * @required
+   */
   @Input() type?: GoabCalloutType = "information";
+  /**
+   * Callout heading text.
+   * @default ""
+   */
   @Input() heading?: string = "";
+  /**
+   * Sets the size of the callout. 'medium' has reduced padding and type size for compact areas.
+   * @default "large"
+   */
   @Input() size?: GoabCalloutSize = "large";
+  /**
+   * Sets the maximum width of the callout.
+   * @default "none"
+   */
   @Input() maxWidth?: string;
+  /**
+   * Indicates how assistive technology should handle updates to the live region.
+   * @default "off"
+   */
   @Input() ariaLive?: GoabCalloutAriaLive = "off";
+  /**
+   * Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons.
+   * @default "outline"
+   */
   @Input() iconTheme?: GoabCalloutIconTheme = "outline";
 }

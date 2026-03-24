@@ -54,8 +54,17 @@ import { GoabControlValueAccessor } from "../base.component";
 })
 export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   isReady = false;
+  /** The name for the radio group. Used for accessibility and change events. */
   @Input() name?: string;
+  /**
+   * Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row.
+   * @default "vertical"
+   */
   @Input() orientation?: GoabRadioGroupOrientation;
+  /**
+   * Defines how the radio group will be announced by screen readers.
+   * @default ""
+   */
   @Input() ariaLabel?: string;
 
   constructor(

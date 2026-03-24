@@ -13,6 +13,10 @@ declare module "react" {
 }
 
 export interface GoabDividerProps extends Margins {
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

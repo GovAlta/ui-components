@@ -40,11 +40,21 @@ import { GoabBaseComponent } from "../base.component";
   ],
 })
 export class GoabBadge extends GoabBaseComponent implements OnInit {
+  /** Defines the context and colour of the badge. */
   @Input() type?: GoabBadgeType;
+  /**
+   * Text label of the badge.
+   * @default ""
+   */
   @Input() content?: string;
   // Ensure boolean input; attribute only set when true so default behaviour is false
   @Input({ transform: booleanAttribute }) icon?: boolean;
+  /** Icon type to display in the badge. */
   @Input() iconType?: GoabIconType;
+  /**
+   * Accessible label for screen readers.
+   * @default ""
+   */
   @Input() ariaLabel?: string;
 
   isReady = false;

@@ -30,8 +30,17 @@ interface GoATextProps extends Margins, DataAttributes {
   /** @deprecated Please use 'tag' property instead */
   as?: GoabTextTextElement | GoabTextHeadingElement;
   tag?: GoabTextTextElement | GoabTextHeadingElement;
+  /** Overrides the text size. */
   size?: GoabTextSize;
+  /**
+   * Sets the max width.
+   * @default "65ch"
+   */
   maxWidth?: GoabTextMaxWidth;
+  /**
+   * Sets the text colour.
+   * @default "primary"
+   */
   color?: GoabTextColor;
   id?: string;
   children: ReactNode;

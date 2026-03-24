@@ -29,17 +29,49 @@ declare module "react" {
 }
 
 export interface GoabContainerProps extends Margins, DataAttributes {
+  /**
+   * Sets the style of accent on the container.
+   * @default "filled"
+   */
   accent?: GoabContainerAccent;
+  /**
+   * Sets the container and accent bar styling.
+   * @default "interactive"
+   */
   type?: GoabContainerType;
   heading?: ReactNode;
   title?: ReactNode;
+  /**
+   * Sets the amount of white space in the container.
+   * @default "relaxed"
+   */
   padding?: GoabContainerPadding;
   actions?: ReactNode;
   children?: ReactNode;
+  /**
+   * Sets the width of the container.
+   * @default "full"
+   */
   width?: GoabContainerWidth;
+  /**
+   * Sets the maximum width of the container.
+   * @default "none"
+   */
   maxWidth?: string;
+  /**
+   * Sets the minimum height of the container.
+   * @default ""
+   */
   minHeight?: string;
+  /**
+   * Sets the maximum height of the container.
+   * @default ""
+   */
   maxHeight?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

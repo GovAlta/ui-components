@@ -66,11 +66,32 @@ export class GoabxModal implements OnInit {
     }, 0);
   }
 
+  /** Define the context and colour of the callout modal. It is required when type is set to callout. */
   @Input() calloutVariant?: GoabModalCalloutVariant;
+  /**
+   * Controls if modal is visible or not.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /**
+   * Set the max allowed width of the modal.
+   * @default "60ch"
+   */
   @Input() maxWidth?: string;
+  /**
+   * Show close icon and allow clicking the background to close the modal.
+   * @default false
+   */
   @Input() closable = false;
+  /**
+   * Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant.
+   * @default "none"
+   */
   @Input() transition?: GoabModalTransition;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "modal"
+   */
   @Input() testId?: string;
   /**
    * @deprecated The role property is deprecated and will be removed in a future version.

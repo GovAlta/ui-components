@@ -2,6 +2,10 @@ import { ReactNode, type JSX } from "react";
 
 /* eslint-disable-next-line */
 export interface GoabSideMenuProps {
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children: ReactNode;
 }

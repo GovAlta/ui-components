@@ -12,11 +12,29 @@ interface WCProps extends Margins {
 }
 
 interface GoabLinkProps extends Margins, DataAttributes {
+  /** Icon displayed before the link text. */
   leadingIcon?: GoabIconType;
+  /** Icon displayed after the link text. */
   trailingIcon?: GoabIconType;
+  /**
+   * Custom action event name to dispatch when the link is clicked.
+   * @default ""
+   */
   action?: string;
+  /**
+   * Object of arguments to pass with the action event.
+   * @default {}
+   */
   actionArgs?: Record<string, unknown>;
+  /**
+   * Single argument to pass with the action event (deprecated, use actionArgs).
+   * @default ""
+   */
   actionArg?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children: ReactNode;
 }

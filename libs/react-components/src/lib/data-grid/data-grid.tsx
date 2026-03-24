@@ -16,8 +16,20 @@ declare module "react" {
 }
 
 export interface GoabDataGridProps {
+  /**
+   * Controls visibility of the keyboard navigation indicator icon. Use "visible" to show or "hidden" to hide.
+   * @default "visible"
+   */
   keyboardIconVisibility?: "visible" | "hidden";
+  /**
+   * Position of the keyboard navigation indicator icon.
+   * @default "left"
+   */
   keyboardIconPosition?: "left" | "right";
+  /**
+   * Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows.
+   * @default "table"
+   */
   keyboardNav: "layout" | "table";
   children?: React.ReactNode;
 }

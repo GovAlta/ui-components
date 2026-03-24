@@ -30,11 +30,35 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabxFileUploadCardProps extends DataAttributes {
+  /**
+   * The name of the uploaded file to display.
+   * @required
+   */
   filename: string;
+  /**
+   * The file size in bytes. Displayed in a human-readable format (KB, MB).
+   * @required
+   */
   size: number;
+  /**
+   * The MIME type of the file. Used to determine the file type icon.
+   * @default ""
+   */
   type?: string;
+  /**
+   * Upload progress percentage from 0-100. Use -1 to indicate upload is complete.
+   * @default -1
+   */
   progress?: number;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Error message to display. When set, the card shows an error state with a cancel button.
+   * @default ""
+   */
   error?: string;
   onDelete?: (detail: GoabFileUploadOnDeleteDetail) => void;
   onCancel?: (detail: GoabFileUploadOnCancelDetail) => void;

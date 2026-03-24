@@ -46,12 +46,37 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAccordion extends GoabBaseComponent implements OnInit {
+  /**
+   * Sets the heading text.
+   * @required
+   * @default ""
+   */
   @Input() heading?: string;
+  /**
+   * Sets secondary text.
+   * @default ""
+   */
   @Input() secondaryText?: string;
+  /**
+   * Sets the state of the accordion container open or closed.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /**
+   * Sets the heading size of the accordion container heading.
+   * @default "small"
+   */
   @Input() headingSize?: GoabAccordionHeadingSize;
   @Input() headingContent!: TemplateRef<any>;
+  /**
+   * Sets the maximum width of the accordion.
+   * @default "none"
+   */
   @Input() maxWidth?: string;
+  /**
+   * Sets the position of the expand/collapse icon.
+   * @default "left"
+   */
   @Input() iconPosition?: GoabAccordionIconPosition;
 
   @Output() onChange = new EventEmitter<boolean>();

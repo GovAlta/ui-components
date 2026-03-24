@@ -35,6 +35,10 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxMenuButton {
+  /**
+   * Display text for the menu action.
+   * @default ""
+   */
   @Input() text?: string;
   @Input() type?: GoabButtonType;
   @Input() size?: GoabButtonSize;
@@ -42,6 +46,10 @@ export class GoabxMenuButton {
   @Input() maxWidth?: string;
   @Input() leadingIcon?: GoabIconType;
   @Input() ariaLabel?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
   @Output() onAction = new EventEmitter<GoabMenuButtonOnActionDetail>();
 

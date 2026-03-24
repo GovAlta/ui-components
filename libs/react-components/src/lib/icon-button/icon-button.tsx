@@ -32,16 +32,56 @@ declare module "react" {
 }
 
 export interface GoabIconButtonProps extends Margins, DataAttributes {
+  /**
+   * Sets the icon.
+   * @required
+   */
   icon: GoabIconType;
+  /**
+   * Sets the size of button.
+   * @default "medium"
+   */
   size?: GoabIconSize;
+  /**
+   * Styles the button to show color, light, dark or destructive action.
+   * @default "color"
+   */
   variant?: GoabIconButtonVariant;
+  /**
+   * Sets the title of the button.
+   * @default ""
+   */
   title?: string;
+  /**
+   * Disables the button.
+   * @default false
+   */
   disabled?: boolean;
   onClick?: () => void;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Sets the aria-label of the button.
+   * @default ""
+   */
   ariaLabel?: string;
+  /**
+   * Action identifier passed in click events for event delegation patterns.
+   * @default ""
+   */
   action?: string;
+  /**
+   * Multiple argument values passed with the action in click events.
+   * @default {}
+   */
   actionArgs?: Record<string, unknown>;
+  /**
+   * Single argument value passed with the action in click events.
+   * @default ""
+   */
   actionArg?: string;
   children?: ReactNode;
 }

@@ -16,6 +16,10 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabxSideMenuProps {
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children: ReactNode;
   version?: string;

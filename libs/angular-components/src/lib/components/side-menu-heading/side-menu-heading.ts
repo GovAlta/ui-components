@@ -28,6 +28,10 @@ import { NgTemplateOutlet } from "@angular/common";
 export class GoabSideMenuHeading implements OnInit {
   isReady = false;
   @Input() icon!: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "section-heading"
+   */
   @Input() testId?: string;
   @Input() meta!: TemplateRef<any>;
 

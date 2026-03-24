@@ -44,9 +44,25 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabTooltip extends GoabBaseComponent implements OnInit {
   isReady = false;
+  /**
+   * Position with respect to the child element.
+   * @default "top"
+   */
   @Input() position?: GoabTooltipPosition;
+  /**
+   * The content of the tooltip.
+   * @default ""
+   */
   @Input() content?: string | TemplateRef<unknown>;
+  /**
+   * Horizontal alignment to the child element.
+   * @default "center"
+   */
   @Input() hAlign?: GoabTooltipHorizontalAlignment;
+  /**
+   * Sets the maximum width of the tooltip. Must use 'px' unit.
+   * @default ""
+   */
   @Input() maxWidth?: string;
 
   constructor(private cdr: ChangeDetectorRef) {

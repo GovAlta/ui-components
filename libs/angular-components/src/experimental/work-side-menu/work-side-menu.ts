@@ -43,9 +43,25 @@ import { NgTemplateOutlet } from "@angular/common";
 export class GoabxWorkSideMenu implements OnInit {
   @Input({ required: true }) heading!: string;
   @Input({ required: true }) url!: string;
+  /**
+   * User's name displayed in the profile section.
+   * @default ""
+   */
   @Input() userName?: string;
+  /**
+   * Secondary text displayed below the user's name, such as role or email.
+   * @default ""
+   */
   @Input() userSecondaryText?: string;
+  /**
+   * Controls whether the side menu is expanded or collapsed.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
   @Input() primaryContent!: TemplateRef<any>;
   @Input() secondaryContent!: TemplateRef<any>;

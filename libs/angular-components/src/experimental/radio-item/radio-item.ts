@@ -49,16 +49,49 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxRadioItem extends GoabBaseComponent {
+  /** The value of this radio option. Will be emitted when selected. */
   @Input() value?: string;
+  /**
+   * The display label for this radio option. Falls back to value if not provided.
+   * @default ""
+   */
   @Input() label?: string;
+  /**
+   * The name of the radio group. Inherited from the parent RadioGroup if not set.
+   * @default ""
+   */
   @Input() name?: string;
   @Input() description!: string | TemplateRef<any>;
   @Input() reveal?: TemplateRef<any>;
+  /**
+   * Defines how this option will be announced by screen readers.
+   * @default ""
+   */
   @Input() ariaLabel?: string;
+  /**
+   * Text announced by screen readers when the reveal slot content is displayed.
+   * @default ""
+   */
   @Input() revealAriaLabel?: string;
+  /**
+   * Disables this radio option. Also disabled if the parent RadioGroup is disabled.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) disabled?: boolean;
+  /**
+   * Sets this radio option as checked/selected.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) checked?: boolean;
+  /**
+   * Shows an error state on this radio option.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) error?: boolean;
+  /**
+   * Sets the maximum width of this radio item.
+   * @default "none"
+   */
   @Input() maxWidth?: string;
   @Input({ transform: booleanAttribute }) compact?: boolean;
 

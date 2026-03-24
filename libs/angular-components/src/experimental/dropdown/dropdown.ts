@@ -68,18 +68,63 @@ import { GoabControlValueAccessor } from "../base.component";
   ],
 })
 export class GoabxDropdown extends GoabControlValueAccessor implements OnInit {
+  /**
+   * Identifier for the dropdown. Should be unique.
+   * @required
+   */
   @Input() name?: string;
+  /**
+   * Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name.
+   * @default ""
+   */
   @Input() ariaLabel?: string;
+  /**
+   * The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label.
+   * @default ""
+   */
   @Input() ariaLabelledBy?: string;
+  /**
+   * When true the dropdown will have the ability to filter options by typing into the input field.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) filterable?: boolean;
+  /** Icon shown to the left of the dropdown input. */
   @Input() leadingIcon?: GoabIconType;
+  /**
+   * Maximum height of the dropdown menu. Non-native only.
+   * @default "276px"
+   */
   @Input() maxHeight?: string;
   @Input({ transform: booleanAttribute }) multiselect?: boolean;
+  /**
+   * When true will render the native select HTML element.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) native?: boolean;
+  /**
+   * The text displayed for the dropdown before a selection is made. Non-native only.
+   * @default ""
+   */
   @Input() placeholder?: string;
+  /**
+   * Overrides the autosized menu width. Non-native only.
+   * @default ""
+   */
   @Input() width?: string;
+  /**
+   * Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em).
+   * @default ""
+   */
   @Input() maxWidth?: string;
+  /**
+   * Specifies the autocomplete attribute for the dropdown input. Native only.
+   * @default ""
+   */
   @Input() autoComplete?: string;
+  /**
+   * Sets the size of the dropdown. Compact reduces height for dense layouts.
+   * @default "default"
+   */
   @Input() size?: GoabDropdownSize = "default";
   /***
    * @deprecated This property has no effect and will be removed in a future version

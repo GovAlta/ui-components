@@ -14,8 +14,17 @@ interface WCProps {
 // Version is auto-detected from the parent goa-app-header[version="2"].
 
 export interface GoabxAppHeaderMenuProps extends DataAttributes {
+  /**
+   * The menu heading text displayed as the dropdown trigger.
+   * @required
+   */
   heading: string;
+  /** Icon displayed before the heading text. */
   leadingIcon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "rootEl"
+   */
   testId?: string;
   slotName?: string;
   children?: ReactNode;

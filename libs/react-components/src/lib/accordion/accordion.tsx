@@ -31,13 +31,42 @@ declare module "react" {
 }
 
 export interface GoabAccordionProps extends Margins, DataAttributes {
+  /**
+   * Sets the state of the accordion container open or closed.
+   * @default false
+   */
   open?: boolean;
+  /**
+   * Sets the heading size of the accordion container heading.
+   * @default "small"
+   */
   headingSize?: GoabAccordionHeadingSize;
+  /**
+   * Sets secondary text.
+   * @default ""
+   */
   secondaryText?: string;
+  /**
+   * Sets the heading text.
+   * @required
+   * @default ""
+   */
   heading: string;
   headingContent?: ReactNode;
+  /**
+   * Sets the maximum width of the accordion.
+   * @default "none"
+   */
   maxWidth?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Sets the position of the expand/collapse icon.
+   * @default "left"
+   */
   iconPosition?: GoabAccordionIconPosition;
   onChange?: (open: boolean) => void;
   children?: ReactNode;

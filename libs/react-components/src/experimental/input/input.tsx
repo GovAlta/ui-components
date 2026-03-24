@@ -70,28 +70,99 @@ interface BaseProps extends Margins, DataAttributes {
 
   // optional
   id?: string;
+  /**
+   * Debounce delay in milliseconds before firing the change event. 0 means no debounce.
+   * @default 0
+   */
   debounce?: number;
+  /**
+   * Disables this input. The input will not receive focus or events. Use [attr.disabled] with [formControl].
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * Controls whether and how text input is automatically capitalized as it is entered/edited by the user. This only works on mobile devices.
+   * @default "off"
+   */
   autoCapitalize?: GoabAutoCapitalize;
+  /**
+   * Specifies the autocomplete attribute for the input field.
+   * @default ""
+   */
   autoComplete?: string;
+  /**
+   * Text displayed within the input when no value is set.
+   * @default ""
+   */
   placeholder?: string;
+  /** Icon shown to the left of the text. */
   leadingIcon?: GoabIconType;
+  /** Icon shown to the right of the text. */
   trailingIcon?: GoabIconType;
   onTrailingIconClick?: () => void;
+  /**
+   * Sets the visual style variant. 'goa' for standard GoA styling, 'bare' for minimal styling.
+   * @default "goa"
+   */
   variant?: "goa" | "bare";
+  /**
+   * Sets the cursor focus to the input.
+   * @default false
+   */
   focused?: boolean;
+  /**
+   * Makes the input readonly.
+   * @default false
+   */
   readonly?: boolean;
+  /**
+   * Sets the input to an error state.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * Sets the width of the text input area.
+   * @default "30ch"
+   */
   width?: string;
+  /**
+   * @deprecated Use leadingContent slot instead.
+   * @default ""
+   */
   prefix?: string;
+  /**
+   * @deprecated Use trailingContent slot instead.
+   * @default ""
+   */
   suffix?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Defines how the input will be translated for the screen reader. If not specified it will fall back to the name.
+   * @default ""
+   */
   ariaLabel?: string;
   leadingContent?: React.ReactNode;
   trailingContent?: React.ReactNode;
+  /** Defines the maximum number of characters (as UTF-16 code units) the user can enter into the input. */
   maxLength?: number;
+  /**
+   * Aria label for the trailing icon. Use only when the trailing icon is interactive.
+   * @default ""
+   */
   trailingIconAriaLabel?: string;
+  /**
+   * Sets the text alignment within the input field.
+   * @default "left"
+   */
   textAlign?: "left" | "right";
+  /**
+   * Sets the size of the input. 'compact' reduces height for dense layouts.
+   * @default "default"
+   */
   size?: GoabInputSize;
   version?: string;
 }
@@ -103,9 +174,25 @@ type OnKeyPress<T = string> = (detail: GoabInputOnKeyPressDetail<T>) => void;
 
 export interface GoabxInputProps extends BaseProps {
   onChange?: OnChange<string>;
+  /**
+   * Bound to value.
+   * @default ""
+   */
   value?: string;
+  /**
+   * A string value that supports any number, or an ISO 8601 format if using the date or datetime type.
+   * @default ""
+   */
   min?: number | string;
+  /**
+   * A string value that supports any number, or an ISO 8601 format if using the date or datetime type.
+   * @default ""
+   */
   max?: number | string;
+  /**
+   * How much a number or date should change by.
+   * @default 1
+   */
   step?: number;
   onFocus?: OnFocus<string>;
   onBlur?: OnBlur<string>;
@@ -114,9 +201,25 @@ export interface GoabxInputProps extends BaseProps {
 
 interface GoabxNumberInputProps extends BaseProps {
   onChange?: OnChange<number>;
+  /**
+   * Bound to value.
+   * @default ""
+   */
   value?: number;
+  /**
+   * A string value that supports any number, or an ISO 8601 format if using the date or datetime type.
+   * @default ""
+   */
   min?: number;
+  /**
+   * A string value that supports any number, or an ISO 8601 format if using the date or datetime type.
+   * @default ""
+   */
   max?: number;
+  /**
+   * How much a number or date should change by.
+   * @default 1
+   */
   step?: number;
   onFocus?: OnFocus<number>;
   onBlur?: OnBlur<number>;
@@ -125,9 +228,25 @@ interface GoabxNumberInputProps extends BaseProps {
 
 interface GoabxDateInputProps extends BaseProps {
   onChange?: OnChange<GoabDate>;
+  /**
+   * Bound to value.
+   * @default ""
+   */
   value?: GoabDate;
+  /**
+   * A string value that supports any number, or an ISO 8601 format if using the date or datetime type.
+   * @default ""
+   */
   min?: GoabDate;
+  /**
+   * A string value that supports any number, or an ISO 8601 format if using the date or datetime type.
+   * @default ""
+   */
   max?: GoabDate;
+  /**
+   * How much a number or date should change by.
+   * @default 1
+   */
   step?: number;
   onFocus?: OnFocus<GoabDate>;
   onBlur?: OnBlur<GoabDate>;

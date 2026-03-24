@@ -26,10 +26,30 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabTooltipProps extends Margins, DataAttributes {
+  /**
+   * Position with respect to the child element.
+   * @default "top"
+   */
   position?: GoabTooltipPosition;
+  /**
+   * The content of the tooltip.
+   * @default ""
+   */
   content?: string | ReactNode;
+  /**
+   * Horizontal alignment to the child element.
+   * @default "center"
+   */
   hAlign?: GoabTooltipHorizontalAlignment;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Sets the maximum width of the tooltip. Must use 'px' unit.
+   * @default ""
+   */
   maxWidth?: string;
   children?: ReactNode;
 }

@@ -17,7 +17,15 @@ declare module "react" {
 }
 
 export interface GoabFormStepperProps extends Margins {
+  /**
+   * The current step state value (1-based index). Leaving it blank (-1) will allow any step to be accessed.
+   * @default -1
+   */
   step?: number;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: ReactNode;
   onChange?: (detail: GoabFormStepperOnChangeDetail) => void;

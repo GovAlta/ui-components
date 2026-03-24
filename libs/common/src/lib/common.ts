@@ -1118,9 +1118,13 @@ export type DataAttributes = {
 };
 
 export interface Margins {
+  /** Sets the top margin using design system spacing tokens. */
   mt?: Spacing;
+  /** Sets the right margin using design system spacing tokens. */
   mr?: Spacing;
+  /** Sets the bottom margin using design system spacing tokens. */
   mb?: Spacing;
+  /** Sets the left margin using design system spacing tokens. */
   ml?: Spacing;
 }
 

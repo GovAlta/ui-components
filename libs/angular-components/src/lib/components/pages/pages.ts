@@ -31,6 +31,10 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabPages extends GoabBaseComponent implements OnInit {
   isReady = false;
+  /**
+   * The currently visible page (1-based index).
+   * @default 1
+   */
   @Input({ transform: numberAttribute }) current?: number;
 
   constructor(private cdr: ChangeDetectorRef) {

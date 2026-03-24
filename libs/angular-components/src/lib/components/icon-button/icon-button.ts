@@ -48,13 +48,45 @@ export class GoabIconButton extends GoabBaseComponent implements OnInit {
   isReady = false;
   protected readonly JSON = JSON;
   @Input({ required: true }) icon!: GoabIconType;
+  /**
+   * Sets the size of button.
+   * @default "medium"
+   */
   @Input() size?: GoabIconSize = "medium";
+  /**
+   * Styles the button to show color, light, dark or destructive action.
+   * @default "color"
+   */
   @Input() variant?: GoabIconButtonVariant;
+  /**
+   * Sets the title of the button.
+   * @default ""
+   */
   @Input() title?: string;
+  /**
+   * Disables the button.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) disabled?: boolean;
+  /**
+   * Sets the aria-label of the button.
+   * @default ""
+   */
   @Input() ariaLabel?: string;
+  /**
+   * Action identifier passed in click events for event delegation patterns.
+   * @default ""
+   */
   @Input() action?: string;
+  /**
+   * Single argument value passed with the action in click events.
+   * @default ""
+   */
   @Input() actionArg?: string;
+  /**
+   * Multiple argument values passed with the action in click events.
+   * @default {}
+   */
   @Input() actionArgs?: Record<string, unknown>;
   @Output() onClick = new EventEmitter();
 

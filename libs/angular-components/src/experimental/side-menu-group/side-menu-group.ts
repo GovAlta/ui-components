@@ -35,6 +35,7 @@ export class GoabxSideMenuGroup extends GoabBaseComponent implements OnInit {
   isReady = false;
   version = "2";
   @Input({ required: true }) heading!: string;
+  /** Icon displayed alongside the heading. */
   @Input() icon?: GoabIconType;
 
   constructor(private cdr: ChangeDetectorRef) {

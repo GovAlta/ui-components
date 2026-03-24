@@ -48,9 +48,25 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabxTable extends GoabBaseComponent implements OnInit {
   isReady = false;
   version = "2";
+  /**
+   * Width of the table. By default it will fit the enclosed content.
+   * @default ""
+   */
   @Input() width?: string;
+  /**
+   * A relaxed variant of the table with more vertical padding for the cells.
+   * @default "normal"
+   */
   @Input() variant?: GoabTableVariant;
+  /**
+   * Sort mode: "single" allows one column, "multi" allows up to 2 columns.
+   * @default "single"
+   */
   @Input() sortMode?: GoabTableSortMode;
+  /**
+   * When true, alternates row background colors for improved readability.
+   * @default false
+   */
   @Input({ transform: booleanAttribute }) striped?: boolean;
 
   constructor(private cdr: ChangeDetectorRef) {

@@ -39,11 +39,35 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabBlock extends GoabBaseComponent implements OnInit {
+  /**
+   * Spacing between items. Uses design system spacing tokens.
+   * @default "m"
+   */
   @Input() gap?: Spacing;
+  /**
+   * Stacking direction of child components.
+   * @default "row"
+   */
   @Input() direction?: GoabBlockDirection;
+  /**
+   * Primary axis alignment of child components.
+   * @default "normal"
+   */
   @Input() alignment?: GoabBlockAlignment;
+  /**
+   * Sets the width of the block container. Defaults to max-content.
+   * @default ""
+   */
   @Input() width?: string;
+  /**
+   * Sets the minimum width of the block container.
+   * @default ""
+   */
   @Input() minWidth?: string;
+  /**
+   * Sets the maximum width of the block container.
+   * @default ""
+   */
   @Input() maxWidth?: string;
 
   isReady = false;

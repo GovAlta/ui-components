@@ -20,6 +20,10 @@ import {
 })
 export class GoabSideMenu implements OnInit {
   isReady = false;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

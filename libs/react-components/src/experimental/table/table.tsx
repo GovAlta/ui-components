@@ -29,13 +29,29 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabxTableProps extends Margins {
+  /**
+   * Width of the table. By default it will fit the enclosed content.
+   * @default ""
+   */
   width?: string;
   onSort?: (detail: GoabTableOnSortDetail) => void;
   onMultiSort?: (detail: GoabTableOnMultiSortDetail) => void;
+  /**
+   * Sort mode: "single" allows one column, "multi" allows up to 2 columns.
+   * @default "single"
+   */
   sortMode?: GoabTableSortMode;
   // stickyHeader?: boolean; TODO: enable this later
   variant?: GoabTableVariant;
+  /**
+   * When true, alternates row background colors for improved readability.
+   * @default false
+   */
   striped?: boolean;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   version?: string;
   children?: ReactNode;

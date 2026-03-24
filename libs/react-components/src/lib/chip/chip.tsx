@@ -25,12 +25,37 @@ declare module "react" {
 
 export interface GoabChipProps extends Margins, DataAttributes {
   onClick?: () => void;
+  /**
+   * @deprecated Use GoAFilterChip instead. When true, shows a delete icon and makes chip clickable.
+   * @default false
+   */
   deletable?: boolean;
+  /**
+   * @deprecated Use GoAFilterChip instead. Icon displayed at the start of the chip.
+   */
   leadingIcon?: string;
+  /**
+   * @deprecated Use GoAFilterChip instead. The icon theme - outline or filled.
+   * @default "outline"
+   */
   iconTheme?: GoabChipTheme;
+  /**
+   * @deprecated Use GoAFilterChip instead. Shows an error state on the chip.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * @deprecated Use GoAFilterChip instead. The text content displayed in the chip.
+   */
   content: string;
+  /**
+   * @deprecated Use GoAFilterChip instead. The chip variant style.
+   */
   variant?: GoabChipVariant;
+  /**
+   * @deprecated Use GoAFilterChip instead. Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

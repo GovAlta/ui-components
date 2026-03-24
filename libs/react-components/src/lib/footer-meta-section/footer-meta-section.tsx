@@ -8,6 +8,10 @@ interface WCProps {
 
 /* eslint-disable-next-line */
 export interface GoabAppFooterMetaSectionProps extends DataAttributes {
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: ReactNode;
 }

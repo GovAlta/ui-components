@@ -29,9 +29,25 @@ import {
 })
 export class GoabNotification implements OnInit {
   isReady = false;
+  /**
+   * Define the context and colour of the notification.
+   * @default ""
+   */
   @Input() type?: GoabNotificationType = "information";
+  /**
+   * Indicates how assistive technology should handle updates to the live region.
+   * @default "polite"
+   */
   @Input() ariaLive?: GoabAriaLiveType;
+  /**
+   * Maximum width of the content area.
+   * @default "100%"
+   */
   @Input() maxContentWidth?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

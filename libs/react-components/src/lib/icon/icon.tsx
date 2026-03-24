@@ -22,14 +22,50 @@ declare module "react" {
 }
 
 export interface GoabIconProps extends Margins, DataAttributes {
+  /**
+   * The icon type to display. See GoAIconType for available icons.
+   * @required
+   */
   type: GoabIconType | GoabIconOverridesType;
+  /**
+   * Sets the size of the icon. Accepts numeric (1-6) or named sizes.
+   * @default "medium"
+   */
   size?: GoabIconSize;
+  /**
+   * Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons.
+   * @default "outline"
+   */
   theme?: GoabIconTheme;
+  /**
+   * When true, inverts the icon colors for use on dark backgrounds.
+   * @default false
+   */
   inverted?: string | boolean; // TODO: Change type to only boolean
+  /**
+   * Sets a custom fill color for the icon. Accepts any valid CSS color value.
+   * @default ""
+   */
   fillColor?: string;
+  /**
+   * Sets the opacity of the icon from 0 (transparent) to 1 (opaque).
+   * @default 1
+   */
   opacity?: number;
+  /**
+   * Adds an accessible title to the icon SVG. Used by screen readers.
+   * @default ""
+   */
   title?: string;
+  /**
+   * Defines how the icon will be announced by screen readers.
+   * @default ""
+   */
   ariaLabel?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

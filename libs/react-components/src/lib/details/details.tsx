@@ -20,9 +20,25 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabDetailsProps extends Margins, DataAttributes {
+  /**
+   * The title heading.
+   * @required
+   */
   heading: string;
+  /**
+   * Controls if details is expanded or not.
+   * @default false
+   */
   open?: boolean;
+  /**
+   * Sets the maximum width of the details.
+   * @default "75ch"
+   */
   maxWidth?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children: ReactNode;
 }

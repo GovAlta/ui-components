@@ -40,8 +40,17 @@ import {
 })
 export class GoabText implements OnInit {
   @Input() tag?: GoabTextTextElement | GoabTextHeadingElement;
+  /** Overrides the text size. */
   @Input() size?: GoabTextSize;
+  /**
+   * Sets the max width.
+   * @default "65ch"
+   */
   @Input() maxWidth?: GoabTextMaxWidth;
+  /**
+   * Sets the text colour.
+   * @default "primary"
+   */
   @Input() color?: GoabTextColor;
   @Input() id?: string;
   /*
@@ -51,9 +60,13 @@ export class GoabText implements OnInit {
   @HostBinding("attr.id") get hostId() {
     return this.id;
   }
+  /** Top margin. */
   @Input() mt?: Spacing;
+  /** Bottom margin. */
   @Input() mb?: Spacing;
+  /** Left margin. */
   @Input() ml?: Spacing;
+  /** Right margin. */
   @Input() mr?: Spacing;
 
   isReady = false;

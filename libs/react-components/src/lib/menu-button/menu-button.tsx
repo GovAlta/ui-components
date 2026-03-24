@@ -55,10 +55,18 @@ declare module "react" {
  * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
  */
 export interface GoabMenuButtonProps extends DataAttributes {
+  /**
+   * Display text for the menu action.
+   * @default ""
+   */
   text: string;
   type?: GoabButtonType;
   maxWidth?: string;
   leadingIcon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;

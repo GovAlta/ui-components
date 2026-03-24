@@ -23,8 +23,20 @@ declare module "react" {
 }
 
 export interface GoabButtonGroupProps extends Margins, DataAttributes {
+  /**
+   * Positions the button group in the page layout.
+   * @default "start"
+   */
   alignment: GoabButtonGroupAlignment;
+  /**
+   * Sets the spacing between buttons in the button group.
+   * @default "relaxed"
+   */
   gap?: GoabButtonGroupGap;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: React.ReactNode;
 }

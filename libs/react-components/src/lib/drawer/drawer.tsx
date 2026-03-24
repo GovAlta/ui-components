@@ -2,10 +2,24 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
 export interface GoabDrawerProps {
+  /** The position of the drawer. */
   position: GoabDrawerPosition;
+  /**
+   * Whether the drawer is open.
+   * @default false
+   */
   open?: boolean;
+  /**
+   * The heading text displayed at the top of the drawer.
+   * @default ""
+   */
   heading?: string | ReactNode;
+  /** Sets max height on bottom position, sets width on left and right position. */
   maxSize?: GoabDrawerSize;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "drawer"
+   */
   testId?: string;
   actions?: ReactNode;
   children: ReactNode;

@@ -43,27 +43,84 @@ declare module "react" {
 }
 
 export interface GoabxDropdownProps extends Margins, DataAttributes {
+  /**
+   * Identifier for the dropdown. Should be unique.
+   * @required
+   */
   name?: string;
+  /**
+   * Stores the value of the item selected from the dropdown.
+   * @default ""
+   */
   value?: string[] | string;
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
   ariaLabel?: string;
+  /**
+   * The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label.
+   * @default ""
+   */
   ariaLabelledBy?: string;
   id?: string;
   children?: React.ReactNode;
+  /**
+   * Disable this control.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * Show an error state.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * When true the dropdown will have the ability to filter options by typing into the input field.
+   * @default false
+   */
   filterable?: boolean;
+  /** Icon shown to the left of the dropdown input. */
   leadingIcon?: GoabIconType;
+  /**
+   * Maximum height of the dropdown menu. Non-native only.
+   * @default "276px"
+   */
   maxHeight?: string;
   multiselect?: boolean;
+  /**
+   * When true will render the native select HTML element.
+   * @default false
+   */
   native?: boolean;
+  /**
+   * The text displayed for the dropdown before a selection is made. Non-native only.
+   * @default ""
+   */
   placeholder?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Overrides the autosized menu width. Non-native only.
+   * @default ""
+   */
   width?: string;
+  /**
+   * Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em).
+   * @default ""
+   */
   maxWidth?: string;
+  /**
+   * Specifies the autocomplete attribute for the dropdown input. Native only.
+   * @default ""
+   */
   autoComplete?: string;
+  /**
+   * Sets the size of the dropdown. Compact reduces height for dense layouts.
+   * @default "default"
+   */
   size?: GoabDropdownSize;
   version?: string;
   /***

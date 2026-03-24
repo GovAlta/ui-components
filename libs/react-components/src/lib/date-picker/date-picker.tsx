@@ -21,18 +21,54 @@ interface WCProps extends Margins {
 }
 
 export interface GoabDatePickerProps extends Margins, DataAttributes {
+  /**
+   * Name of the date field.
+   * @default ""
+   */
   name?: string;
+  /**
+   * Value of the calendar date.
+   * @default ""
+   */
   value?: Date | string | undefined;
+  /**
+   * Sets the input to an error state.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * Minimum date value allowed.
+   * @default ""
+   */
   min?: Date | string;
+  /**
+   * Maximum date value allowed.
+   * @default ""
+   */
   max?: Date | string;
+  /**
+   * Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input.
+   * @default "calendar"
+   */
   type?: GoabDatePickerInputType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
   relative?: boolean;
+  /**
+   * Disables the date picker.
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * Sets the width of the date picker input.
+   * @default ""
+   */
   width?: string;
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }

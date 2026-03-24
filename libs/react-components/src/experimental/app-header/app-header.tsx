@@ -26,13 +26,37 @@ declare module "react" {
 }
 
 export interface GoabxAppHeaderProps extends DataAttributes {
+  /**
+   * Set the service name to display in the app header.
+   * @default ""
+   */
   heading?: string;
+  /**
+   * V2 only: Secondary text displayed under the service name.
+   * @default ""
+   */
   secondaryText?: string;
+  /**
+   * Set the URL to link from the alberta.ca logo. A full url is required.
+   * @default ""
+   */
   url?: string;
+  /**
+   * Maximum width of the content area.
+   * @default ""
+   */
   maxContentWidth?: string;
+  /**
+   * Sets the breakpoint in px for the full menu to display.
+   * @default TABLET_BP
+   */
   fullMenuBreakpoint?: number;
   children?: React.ReactNode;
   onMenuClick?: () => void;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

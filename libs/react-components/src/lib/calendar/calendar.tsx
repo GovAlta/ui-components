@@ -11,10 +11,30 @@ interface WCProps extends Margins {
 }
 
 export interface GoabCalendarProps extends Margins, DataAttributes {
+  /**
+   * Name identifier for the calendar, included in change events.
+   * @default ""
+   */
   name?: string;
+  /**
+   * The currently selected date value in YYYY-MM-DD format.
+   * @default ""
+   */
   value?: string;
+  /**
+   * The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past.
+   * @default ""
+   */
   min?: string;
+  /**
+   * The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future.
+   * @default ""
+   */
   max?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   onChange: (details: GoabCalendarOnChangeDetail) => void;
 }

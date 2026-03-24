@@ -21,9 +21,17 @@ declare module "react" {
 }
 
 export interface GoabxDropdownItemProps {
+  /**
+   * Stores the value of the item selected from the dropdown.
+   * @default ""
+   */
   value: string;
   label?: string;
   filter?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   mountType?: GoabDropdownItemMountType;
 

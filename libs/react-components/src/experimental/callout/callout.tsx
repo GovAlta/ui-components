@@ -30,13 +30,45 @@ declare module "react" {
 }
 
 export interface GoabxCalloutProps extends Margins, DataAttributes {
+  /**
+   * Callout heading text.
+   * @default ""
+   */
   heading?: string;
+  /**
+   * Define the context and colour of the callout.
+   * @required
+   */
   type?: GoabCalloutType;
+  /**
+   * Sets the size of the callout. 'medium' has reduced padding and type size for compact areas.
+   * @default "large"
+   */
   size?: GoabCalloutSize;
+  /**
+   * Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons.
+   * @default "outline"
+   */
   iconTheme?: GoabCalloutIconTheme;
+  /**
+   * Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal.
+   * @default "medium"
+   */
   emphasis?: GoabCalloutEmphasis;
+  /**
+   * Sets the maximum width of the callout.
+   * @default "none"
+   */
   maxWidth?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Indicates how assistive technology should handle updates to the live region.
+   * @default "off"
+   */
   ariaLive?: GoabCalloutAriaLive;
   version?: string;
   children?: React.ReactNode;

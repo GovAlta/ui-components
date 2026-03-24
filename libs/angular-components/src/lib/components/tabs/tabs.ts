@@ -31,8 +31,20 @@ import { GoabTabsOnChangeDetail, GoabTabsVariant } from "@abgov/ui-components-co
 })
 export class GoabTabs implements OnInit {
   isReady = false;
+  /**
+   * The initially active tab (1-based index). If not set, the first tab is active.
+   * @default -1
+   */
   @Input({ transform: numberAttribute }) initialTab?: number;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
+  /**
+   * Visual style variant. "segmented" shows pill-style tabs with animation.
+   * @default "default"
+   */
   @Input() variant?: GoabTabsVariant;
 
   constructor(private cdr: ChangeDetectorRef) {}

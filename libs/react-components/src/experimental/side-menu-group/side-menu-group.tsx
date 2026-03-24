@@ -19,8 +19,14 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabxSideMenuGroupProps extends Margins {
+  /** The heading text for the menu group. */
   heading: string;
+  /** Icon displayed alongside the heading. */
   icon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: ReactNode;
   version?: string;

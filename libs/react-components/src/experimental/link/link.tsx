@@ -29,13 +29,39 @@ declare module "react" {
 }
 
 interface GoabxLinkProps extends Margins, DataAttributes {
+  /** Icon displayed before the link text. */
   leadingIcon?: GoabIconType;
+  /** Icon displayed after the link text. */
   trailingIcon?: GoabIconType;
+  /**
+   * Custom action event name to dispatch when the link is clicked.
+   * @default ""
+   */
   action?: string;
+  /**
+   * Object of arguments to pass with the action event.
+   * @default {}
+   */
   actionArgs?: Record<string, unknown>;
+  /**
+   * Single argument to pass with the action event (deprecated, use actionArgs).
+   * @default ""
+   */
   actionArg?: string;
+  /**
+   * Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text.
+   * @default "interactive"
+   */
   color?: GoabLinkColor;
+  /**
+   * Sets the text size and corresponding icon size.
+   * @default "medium"
+   */
   size?: GoabLinkSize;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children: ReactNode;
 }

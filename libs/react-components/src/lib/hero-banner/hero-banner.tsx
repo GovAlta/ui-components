@@ -19,13 +19,32 @@ declare module "react" {
 }
 
 export interface GoabHeroBannerProps {
+  /** Main heading text */
   heading: string;
+  /** Background image url */
   backgroundUrl?: string;
+  /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */
   minHeight?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "background"
+   */
   testId?: string;
   children?: React.ReactNode;
+  /**
+   * Maximum width of the content area
+   * @default "100%"
+   */
   maxContentWidth?: string;
+  /**
+   * Hero Banner background color when no background image is provided
+   * @default "#f8f8f8"
+   */
   backgroundColor?: string;
+  /**
+   * Text color within the hero banner.
+   * @default ""
+   */
   textColor?: string;
 }
 

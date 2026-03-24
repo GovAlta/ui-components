@@ -12,8 +12,20 @@ interface WCProps extends Margins {
 export interface GoabFilterChipProps extends Margins, DataAttributes {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;
+  /**
+   * Shows an error state.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * Text label of the chip.
+   * @required
+   */
   content: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
 }
 

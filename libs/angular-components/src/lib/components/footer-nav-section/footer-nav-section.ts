@@ -24,8 +24,20 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppFooterNavSection implements OnInit {
+  /**
+   * The section heading displayed above the navigation links.
+   * @default ""
+   */
   @Input() heading?: string;
+  /**
+   * Maximum number of columns to display links in on larger screens.
+   * @default 1
+   */
   @Input() maxColumnCount? = 1;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
   /** "slot" is required and must equal to "nav" so it can be rendered in the correct position **/
   @Input({ required: true }) slot!: "nav";

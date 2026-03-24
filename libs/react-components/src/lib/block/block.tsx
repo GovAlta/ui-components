@@ -28,12 +28,40 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabBlockProps extends Margins, DataAttributes {
+  /**
+   * Spacing between items. Uses design system spacing tokens.
+   * @default "m"
+   */
   gap?: Spacing;
+  /**
+   * Stacking direction of child components.
+   * @default "row"
+   */
   direction?: GoabBlockDirection;
+  /**
+   * Primary axis alignment of child components.
+   * @default "normal"
+   */
   alignment?: GoabBlockAlignment;
+  /**
+   * Sets the minimum width of the block container.
+   * @default ""
+   */
   minWidth?: string;
+  /**
+   * Sets the maximum width of the block container.
+   * @default ""
+   */
   maxWidth?: string;
+  /**
+   * Sets the width of the block container. Defaults to max-content.
+   * @default ""
+   */
   width?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: ReactNode;
 }

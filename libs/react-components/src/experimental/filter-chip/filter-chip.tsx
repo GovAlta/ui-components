@@ -31,10 +31,27 @@ declare module "react" {
 export interface GoabxFilterChipProps extends Margins, DataAttributes {
   onClick?: () => void;
   iconTheme?: GoabFilterChipTheme;
+  /**
+   * Shows an error state.
+   * @default false
+   */
   error?: boolean;
+  /**
+   * Text label of the chip.
+   * @required
+   */
   content: string;
+  /**
+   * Secondary text displayed in a smaller size before the main content.
+   * @default ""
+   */
   secondaryText?: string;
+  /** Icon displayed at the start of the chip. */
   leadingIcon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   version?: string;
 }

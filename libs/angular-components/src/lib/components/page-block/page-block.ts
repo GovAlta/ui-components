@@ -22,7 +22,15 @@ import {
 })
 export class GoabPageBlock implements OnInit {
   isReady = false;
+  /**
+   * Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px".
+   * @default "full"
+   */
   @Input() width?: GoabPageBlockSize;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

@@ -28,8 +28,20 @@ import {
 })
 export class GoabSpacer implements OnInit {
   isReady = false;
+  /**
+   * Horizontal spacing.
+   * @default "none"
+   */
   @Input() hSpacing?: GoabSpacerHorizontalSpacing;
+  /**
+   * Vertical spacing
+   * @default "none"
+   */
   @Input() vSpacing?: GoabSpacerVerticalSpacing;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

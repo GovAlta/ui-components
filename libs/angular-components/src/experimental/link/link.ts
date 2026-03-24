@@ -40,17 +40,47 @@ import {
 })
 export class GoabxLink implements OnInit {
   isReady = false;
+  /** Icon displayed before the link text. */
   @Input() leadingIcon?: GoabIconType;
+  /** Icon displayed after the link text. */
   @Input() trailingIcon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   @Input() testId?: string;
+  /**
+   * Custom action event name to dispatch when the link is clicked.
+   * @default ""
+   */
   @Input() action?: string;
+  /**
+   * Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text.
+   * @default "interactive"
+   */
   @Input() color?: GoabLinkColor = "interactive";
+  /**
+   * Sets the text size and corresponding icon size.
+   * @default "medium"
+   */
   @Input() size?: GoabLinkSize = "medium";
+  /**
+   * Single argument to pass with the action event (deprecated, use actionArgs).
+   * @default ""
+   */
   @Input() actionArg?: string;
+  /**
+   * Object of arguments to pass with the action event.
+   * @default {}
+   */
   @Input() actionArgs?: Record<string, unknown>;
+  /** Top margin. */
   @Input() mt?: Spacing;
+  /** Bottom margin. */
   @Input() mb?: Spacing;
+  /** Left margin. */
   @Input() ml?: Spacing;
+  /** Right margin. */
   @Input() mr?: Spacing;
 
   constructor(private cdr: ChangeDetectorRef) {}

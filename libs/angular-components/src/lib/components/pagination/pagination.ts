@@ -42,7 +42,15 @@ export class GoabPagination extends GoabBaseComponent implements OnInit {
   isReady = false;
   @Input({ required: true }) itemCount!: number;
   @Input({ required: true }) pageNumber!: number;
+  /**
+   * Number of data items shown per page.
+   * @default 10
+   */
   @Input() perPageCount?: number = 10;
+  /**
+   * Controls which nav controls are visible.
+   * @default "all"
+   */
   @Input() variant?: GoabPaginationVariant = "all";
 
   constructor(private cdr: ChangeDetectorRef) {

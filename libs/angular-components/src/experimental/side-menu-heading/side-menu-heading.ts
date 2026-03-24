@@ -33,6 +33,10 @@ export class GoabxSideMenuHeading implements OnInit {
   isReady = false;
   version = "2";
   @Input() icon!: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "section-heading"
+   */
   @Input() testId?: string;
   @Input() meta!: TemplateRef<any>;
 

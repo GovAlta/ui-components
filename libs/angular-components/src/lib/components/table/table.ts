@@ -36,7 +36,15 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabTable extends GoabBaseComponent implements OnInit {
   isReady = false;
+  /**
+   * Width of the table. By default it will fit the enclosed content.
+   * @default ""
+   */
   @Input() width?: string;
+  /**
+   * A relaxed variant of the table with more vertical padding for the cells.
+   * @default "normal"
+   */
   @Input() variant?: GoabTableVariant;
 
   constructor(private cdr: ChangeDetectorRef) {

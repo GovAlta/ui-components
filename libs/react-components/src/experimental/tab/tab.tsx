@@ -16,6 +16,10 @@ declare module "react" {
 }
 
 export interface GoabxTabItemProps {
+  /**
+   * The text label for this tab. Can also use the heading slot for custom content.
+   * @default ""
+   */
   heading?: React.ReactNode;
   disabled?: boolean;
   children?: React.ReactNode;

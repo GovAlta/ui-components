@@ -19,8 +19,20 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabxFooterNavSectionProps extends DataAttributes {
+  /**
+   * Maximum number of columns to display links in on larger screens.
+   * @default 1
+   */
   maxColumnCount?: number;
+  /**
+   * The section heading displayed above the navigation links.
+   * @default ""
+   */
   heading?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   children?: ReactNode;
 }

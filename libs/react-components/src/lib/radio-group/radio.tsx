@@ -3,17 +3,31 @@ import { Margins } from "@abgov/ui-components-common";
 import type { JSX } from "react";
 
 export interface GoabRadioItemProps extends Margins {
+  /** The currently selected value in the radio group. */
   value?: string;
   label?: string;
+  /** The name for the radio group. Used for accessibility and change events. */
   name?: string;
   description?: string | React.ReactNode;
   reveal?: React.ReactNode;
   revealAriaLabel?: string;
   maxWidth?: string;
+  /**
+   * Disables all radio items in the group.
+   * @default false
+   */
   disabled?: boolean;
   checked?: boolean;
+  /**
+   * Shows an error state on all radio items in the group.
+   * @default false
+   */
   error?: boolean;
   children?: React.ReactNode;
+  /**
+   * Defines how the radio group will be announced by screen readers.
+   * @default ""
+   */
   ariaLabel?: string;
 }
 

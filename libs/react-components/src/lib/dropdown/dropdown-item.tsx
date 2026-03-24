@@ -2,9 +2,17 @@ import { useEffect } from "react";
 import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
 export interface GoabDropdownItemProps {
+  /**
+   * Stores the value of the item selected from the dropdown.
+   * @default ""
+   */
   value: string;
   label?: string;
   filter?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
   mountType?: GoabDropdownItemMountType;
 

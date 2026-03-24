@@ -32,14 +32,35 @@ declare module "react" {
 }
 
 export interface GoabxModalProps {
+  /**
+   * The heading text displayed at the top of the modal.
+   * @default ""
+   */
   heading?: ReactNode;
+  /**
+   * Set the max allowed width of the modal.
+   * @default "60ch"
+   */
   maxWidth?: string;
   actions?: ReactElement<any>;
   onClose?: () => void;
+  /**
+   * Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant.
+   * @default "none"
+   */
   transition?: GoabModalTransition;
   children?: ReactNode;
+  /**
+   * Controls if modal is visible or not.
+   * @default false
+   */
   open?: boolean;
+  /** Define the context and colour of the callout modal. It is required when type is set to callout. */
   calloutVariant?: GoabModalCalloutVariant;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "modal"
+   */
   testId?: string;
   version?: string;
   /**

@@ -10,8 +10,17 @@ interface WCProps {
 
 /* eslint-disable-next-line */
 export interface GoabAppHeaderMenuProps extends DataAttributes {
+  /**
+   * The menu heading text displayed as the dropdown trigger.
+   * @required
+   */
   heading: string;
+  /** Icon displayed before the heading text. */
   leadingIcon?: GoabIconType;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default "rootEl"
+   */
   testId?: string;
   children?: ReactNode;
 }

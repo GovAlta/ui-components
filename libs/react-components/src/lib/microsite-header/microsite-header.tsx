@@ -24,12 +24,40 @@ interface WCProps {
 }
 
 export interface GoabHeaderProps {
+  /**
+   * The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges.
+   * @required
+   */
   type: GoabServiceLevel;
+  /**
+   * App or service version displayed on the right side of the header.
+   * @default ""
+   */
   version?: string | React.ReactNode;
+  /**
+   * Url to feedback page that will be displayed when provided.
+   * @default ""
+   */
   feedbackUrl?: string;
+  /**
+   * Sets a data-testid attribute for automated testing.
+   * @default ""
+   */
   testId?: string;
+  /**
+   * Maximum width of the content area
+   * @default "100%"
+   */
   maxContentWidth?: string;
+  /**
+   * For internal feedback urls sets target=
+   * @default "blank"
+   */
   feedbackUrlTarget?: GoabLinkTarget;
+  /**
+   * Sets the target attribute for the header link.
+   * @default "blank"
+   */
   headerUrlTarget?: GoabLinkTarget;
   onFeedbackClick?: () => void;
 }

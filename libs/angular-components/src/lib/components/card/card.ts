@@ -46,6 +46,14 @@ export class GoabCard extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
+  /**
+   * Adds a shadow to the card. 0 shows a border, 1-3 increase shadow intensity.
+   * @default 0
+   */
   @Input({ transform: numberAttribute }) elevation?: number;
+  /**
+   * Sets the width of the card.
+   * @default "100%"
+   */
   @Input() width?: string;
 }
