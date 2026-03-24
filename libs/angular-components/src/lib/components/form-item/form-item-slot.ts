@@ -12,5 +12,6 @@ import { Component, Input } from "@angular/core";
  * // similar to app-footer-meta-section & app-footer-nav-section
  */
 export class GoabFormItemSlot {
+  /** Slot position; must be "helptext" or "error" to render in the correct position. */
   @Input({ required: true }) slot!: "helptext" | "error";
 }

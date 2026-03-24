@@ -32,6 +32,7 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFileUploadCard implements OnInit {
+  /** The name of the uploaded file to display. */
   @Input({ required: true }) filename!: string;
   @Input({ transform: numberAttribute }) size?: number;
   @Input() type?: string;

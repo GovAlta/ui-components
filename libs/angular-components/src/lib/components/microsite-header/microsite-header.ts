@@ -38,6 +38,7 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabMicrositeHeader implements OnInit {
   isReady = false;
+  /** The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   @Input({ required: true }) type!: GoabServiceLevel;
   @Input() version!: string | TemplateRef<any>;
   /**

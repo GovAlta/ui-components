@@ -34,6 +34,7 @@ export class GoabDataGrid implements OnInit {
    * @default "left"
    */
   @Input() keyboardIconPosition: "left" | "right" = "left";
+  /** Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows. */
   @Input({ required: true }) keyboardNav!: "layout" | "table";
 
   isReady = false;

@@ -42,7 +42,9 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabxPagination extends GoabBaseComponent implements OnInit {
   isReady = false;
   version = "2";
+  /** Total number of data items within all pages. */
   @Input({ required: true }) itemCount!: number;
+  /** The current page being viewed (non-zero based). */
   @Input({ required: true }) pageNumber!: number;
   /**
    * Number of data items shown per page.

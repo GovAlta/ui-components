@@ -40,7 +40,9 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
 export class GoabxDrawer implements OnInit {
   version = "2";
 
+  /** Whether the drawer is open. */
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;
+  /** The position of the drawer. */
   @Input({ required: true }) position!: GoabDrawerPosition;
   @Input() heading!: string | TemplateRef<any>;
   @Input() maxSize?: GoabDrawerSize;

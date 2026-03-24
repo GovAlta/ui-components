@@ -41,7 +41,9 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxWorkSideMenu implements OnInit {
+  /** The application name displayed in the header. */
   @Input({ required: true }) heading!: string;
+  /** URL for the header link. Clicking the logo/heading navigates to this URL. */
   @Input({ required: true }) url!: string;
   /**
    * User's name displayed in the profile section.

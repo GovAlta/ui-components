@@ -37,6 +37,7 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxWorkSideMenuItem implements OnInit {
+  /** The text label displayed for the menu item. */
   @Input({ required: true }) label!: string;
   @Input() url?: string;
   @Input() badge?: string;

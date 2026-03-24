@@ -34,6 +34,7 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabSkeleton extends GoabBaseComponent implements OnInit {
   isReady = false;
+  /** Sets the skeleton shape to represent your content. */
   @Input({ required: true }) type!: GoabSkeletonType;
   /**
    * Sets the maximum width. Currently only used in card skeleton type.

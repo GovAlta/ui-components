@@ -36,6 +36,7 @@ export class GoabxWorkSideNotificationItem implements OnInit {
   @Input() type?: GoabWorkSideNotificationItemType;
   @Input() timestamp?: string;
   @Input() title?: string;
+  /** The notification description text. */
   @Input({ required: true }) description!: string;
   @Input() readStatus?: GoabWorkSideNotificationReadStatus;
   @Input() priority?: GoabWorkSideNotificationPriority;
