@@ -5,14 +5,13 @@
  * Uses GoabxWorkSideMenuGroup for expandable Designers/Developers sections.
  */
 
-import { type MouseEvent, useRef } from "react";
+import { type MouseEvent } from "react";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
   GoabxWorkSideMenuGroup,
 } from "@abgov/react-components/experimental";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
-import { useGroupShadowDomFixes } from "./useGroupShadowDomFixes";
 
 // Top-level pages (not in a group)
 const TOP_PAGES = [
@@ -82,9 +81,6 @@ export function GetStartedSubMenu({
   onExpandMenu,
   currentUrl,
 }: GetStartedSubMenuProps) {
-  const groupsRef = useRef<HTMLDivElement>(null);
-  useGroupShadowDomFixes(groupsRef);
-
   const handleBackClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -103,8 +99,8 @@ export function GetStartedSubMenu({
         <GoabxWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
       ))}
 
-      {/* Grouped sections (ref used to hide icons via shadow DOM workaround) */}
-      <div ref={groupsRef}>
+      {/* Grouped sections */}
+      <div>
         {PAGE_GROUPS.map((group) => {
           const containsCurrentPage = group.pages.some((p) => p.url === currentUrl);
 

@@ -12,12 +12,13 @@
  */
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   GoabxButton,
   GoabxInput,
   GoabxFormItem,
   GoabxFilterChip,
-  GoabxDrawer,
+  GoabxPushDrawer,
   GoabxCheckbox,
   GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
@@ -197,15 +198,24 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     // Explicitly set version attribute for V2 styling (React doesn't always set attributes on custom elements)
     table.setAttribute("version", "2");
 
-    const handleSort = (e: Event) => {
-      const detail = (e as CustomEvent<{ sortBy: string; sortDir: "asc" | "desc" }>)
-        .detail;
-      handleTableSort(detail);
+    const handleMultiSort = (e: Event) => {
+      const detail = (
+        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
+      ).detail;
+      const sorts = detail.sorts;
+      setSortConfig({
+        primary: sorts[0]
+          ? { key: sorts[0].column, direction: sorts[0].direction }
+          : null,
+        secondary: sorts[1]
+          ? { key: sorts[1].column, direction: sorts[1].direction }
+          : null,
+      });
     };
 
-    table.addEventListener("_sort", handleSort);
-    return () => table.removeEventListener("_sort", handleSort);
-  }, [handleTableSort]);
+    table.addEventListener("_multisort", handleMultiSort);
+    return () => table.removeEventListener("_multisort", handleMultiSort);
+  }, [setSortConfig]);
 
   // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
   // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
@@ -657,8 +667,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     searchChips.length > 0 ||
     appliedFilters.category.length > 0 ||
     appliedFilters.scale.length > 0 ||
-    appliedFilters.userType.length > 0 ||
-    sortConfig.primary;
+    appliedFilters.userType.length > 0;
 
   return (
     <div className="examples-grid">
@@ -717,8 +726,12 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             leadingIcon="filter-lines"
             size="compact"
             onClick={() => {
-              setPendingFilters(appliedFilters);
-              setFilterDrawerOpen(true);
+              if (filterDrawerOpen) {
+                setFilterDrawerOpen(false);
+              } else {
+                setPendingFilters(appliedFilters);
+                setFilterDrawerOpen(true);
+              }
             }}
           >
             Filters
@@ -734,30 +747,6 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             size="small"
             fillColor="var(--goa-color-text-secondary)"
           />
-
-          {/* Sort chips */}
-          {sortConfig.primary && (
-            <GoabxFilterChip
-              content={sortConfig.primary.key}
-              leadingIcon={
-                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText={sortConfig.secondary ? "1st" : undefined}
-              onClick={() =>
-                setSortConfig({ primary: sortConfig.secondary, secondary: null })
-              }
-            />
-          )}
-          {sortConfig.secondary && (
-            <GoabxFilterChip
-              content={sortConfig.secondary.key}
-              leadingIcon={
-                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText="2nd"
-              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
-            />
-          )}
 
           {/* Search chips */}
           {searchChips.map((chip) => (
@@ -817,7 +806,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
       {viewMode === "list" && (
         <div className="examples-table-wrapper">
           {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
-          <goa-table ref={tableRef} version="2" width="100%" variant="normal">
+          <goa-table
+            ref={tableRef}
+            version="2"
+            width="100%"
+            variant="normal"
+            sort-mode="multi"
+          >
             <table style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -826,6 +821,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="title"
                       direction={getColumnSortDirection("title")}
+                      sort-order={getColumnSortOrder("title")}
                     >
                       Name
                     </goa-table-sort-header>
@@ -835,6 +831,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="category"
                       direction={getColumnSortDirection("category")}
+                      sort-order={getColumnSortOrder("category")}
                     >
                       Category
                     </goa-table-sort-header>
@@ -844,6 +841,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="scale"
                       direction={getColumnSortDirection("scale")}
+                      sort-order={getColumnSortOrder("scale")}
                     >
                       Scale
                     </goa-table-sort-header>
@@ -853,6 +851,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       version="2"
                       name="userType"
                       direction={getColumnSortDirection("userType")}
+                      sort-order={getColumnSortOrder("userType")}
                     >
                       User Type
                     </goa-table-sort-header>
@@ -938,134 +937,138 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         </div>
       )}
 
-      {/* Filter Drawer */}
-      <GoabxDrawer
-        heading="Filter examples"
-        position="right"
-        open={filterDrawerOpen}
-        maxSize="300px"
-        onClose={() => setFilterDrawerOpen(false)}
-        actions={
-          <GoabButtonGroup alignment="start" gap="compact">
-            <GoabxButton type="primary" size="compact" onClick={applyFilters}>
-              Apply filters
-            </GoabxButton>
-            <GoabxButton
-              type="tertiary"
-              size="compact"
-              onClick={() => setFilterDrawerOpen(false)}
-            >
-              Cancel
-            </GoabxButton>
-          </GoabButtonGroup>
-        }
-      >
-        <div className="filter-drawer-content">
-          {/* Scale filter */}
-          <div className="filter-group">
-            <div className="filter-group-label">
-              Scale{" "}
-              <span
-                className="filter-swatch"
-                style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
-              />
-            </div>
-            <GoabxCheckboxList
-              name="scale"
-              size="compact"
-              value={pendingFilters.scale}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters((prev) => ({ ...prev, scale: detail.value }))
-              }
-            >
-              {filterOptions.scales.map((scale) => (
-                <GoabxCheckbox
-                  key={scale}
-                  name={scale}
-                  value={scale}
-                  text={formatScale(scale)}
+      {/* Filter Push Drawer - portaled to layout level */}
+      {typeof document !== "undefined" &&
+        document.getElementById("push-drawer-portal") &&
+        createPortal(
+          <GoabxPushDrawer
+            heading="Filter examples"
+            open={filterDrawerOpen}
+            width="300px"
+            onClose={() => setFilterDrawerOpen(false)}
+            actions={
+              <GoabButtonGroup alignment="start" gap="compact">
+                <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                  Apply filters
+                </GoabxButton>
+                <GoabxButton
+                  type="tertiary"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </div>
-
-          {/* Category filter */}
-          <div className="filter-group">
-            <div className="filter-group-label">
-              Category{" "}
-              <span
-                className="filter-swatch"
-                style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
-              />
-            </div>
-            <GoabxCheckboxList
-              name="category"
-              size="compact"
-              value={pendingFilters.category}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters((prev) => ({ ...prev, category: detail.value }))
-              }
-            >
-              {filterOptions.categories.map((category) => (
-                <GoabxCheckbox
-                  key={category}
-                  name={category}
-                  value={category}
-                  text={formatCategory(category)}
+                  onClick={() => setFilterDrawerOpen(false)}
+                >
+                  Cancel
+                </GoabxButton>
+              </GoabButtonGroup>
+            }
+          >
+            <div className="filter-drawer-content">
+              {/* Scale filter */}
+              <div className="filter-group">
+                <div className="filter-group-label">
+                  Scale{" "}
+                  <span
+                    className="filter-swatch"
+                    style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
+                  />
+                </div>
+                <GoabxCheckboxList
+                  name="scale"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </div>
+                  value={pendingFilters.scale}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters((prev) => ({ ...prev, scale: detail.value }))
+                  }
+                >
+                  {filterOptions.scales.map((scale) => (
+                    <GoabxCheckbox
+                      key={scale}
+                      name={scale}
+                      value={scale}
+                      text={formatScale(scale)}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </div>
 
-          {/* User Type filter */}
-          <div className="filter-group">
-            <div className="filter-group-label">
-              User type{" "}
-              <span
-                className="filter-swatch"
-                style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
-              />
-            </div>
-            <GoabxCheckboxList
-              name="userType"
-              size="compact"
-              value={pendingFilters.userType}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters((prev) => ({ ...prev, userType: detail.value }))
-              }
-            >
-              {filterOptions.userTypes.map((userType) => (
-                <GoabxCheckbox
-                  key={userType}
-                  name={userType}
-                  value={userType}
-                  text={formatUserType(userType)}
+              {/* Category filter */}
+              <div className="filter-group">
+                <div className="filter-group-label">
+                  Category{" "}
+                  <span
+                    className="filter-swatch"
+                    style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
+                  />
+                </div>
+                <GoabxCheckboxList
+                  name="category"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </div>
+                  value={pendingFilters.category}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters((prev) => ({ ...prev, category: detail.value }))
+                  }
+                >
+                  {filterOptions.categories.map((category) => (
+                    <GoabxCheckbox
+                      key={category}
+                      name={category}
+                      value={category}
+                      text={formatCategory(category)}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </div>
 
-          {(pendingFilters.category.length > 0 ||
-            pendingFilters.scale.length > 0 ||
-            pendingFilters.userType.length > 0) && (
-            <>
-              <GoabDivider />
-              <GoabxButton
-                type="tertiary"
-                size="compact"
-                onClick={() =>
-                  setPendingFilters({ category: [], scale: [], userType: [] })
-                }
-              >
-                Clear all filters
-              </GoabxButton>
-            </>
-          )}
-        </div>
-      </GoabxDrawer>
+              {/* User Type filter */}
+              <div className="filter-group">
+                <div className="filter-group-label">
+                  User type{" "}
+                  <span
+                    className="filter-swatch"
+                    style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
+                  />
+                </div>
+                <GoabxCheckboxList
+                  name="userType"
+                  size="compact"
+                  value={pendingFilters.userType}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters((prev) => ({ ...prev, userType: detail.value }))
+                  }
+                >
+                  {filterOptions.userTypes.map((userType) => (
+                    <GoabxCheckbox
+                      key={userType}
+                      name={userType}
+                      value={userType}
+                      text={formatUserType(userType)}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </div>
+
+              {(pendingFilters.category.length > 0 ||
+                pendingFilters.scale.length > 0 ||
+                pendingFilters.userType.length > 0) && (
+                <>
+                  <GoabDivider />
+                  <GoabxButton
+                    type="tertiary"
+                    size="compact"
+                    onClick={() =>
+                      setPendingFilters({ category: [], scale: [], userType: [] })
+                    }
+                  >
+                    Clear all filters
+                  </GoabxButton>
+                </>
+              )}
+            </div>
+          </GoabxPushDrawer>,
+          document.getElementById("push-drawer-portal")!,
+        )}
 
       <style>{`
         .examples-grid {
@@ -1096,6 +1099,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         /* When sticky - add shadow */
         .examples-toolbar--sticky {
           padding: var(--goa-space-s) 0;
+          margin-bottom: 0;
           background: transparent;
         }
 
@@ -1104,8 +1108,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           position: absolute;
           top: 0;
           bottom: 0;
-          left: -9999px;
-          right: -9999px;
+          left: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+          right: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
           background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
@@ -1123,13 +1127,10 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           gap: var(--goa-space-m);
         }
 
-        /* View toggle wrapper */
+        /* View toggle wrapper - tabs used as segmented toggle, hide content area */
         .view-toggle-wrapper {
-          margin-bottom: -20px; /* Compensate for goa-tabs internal margin */
-        }
-
-        .view-toggle-wrapper .tabs {
-          margin-bottom: 0 !important;
+          overflow: hidden;
+          max-height: 40px;
         }
 
         /* Filter chips */
@@ -1192,21 +1193,9 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         /* Card/Grid view */
         .examples-card-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
           column-gap: var(--goa-space-l);
           row-gap: var(--goa-space-xl);
-        }
-
-        @media (max-width: 1200px) {
-          .examples-card-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        @media (max-width: 900px) {
-          .examples-card-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
         }
 
         @media (max-width: 623px) {

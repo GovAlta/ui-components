@@ -5,31 +5,25 @@
  * Uses GoabxWorkSideMenuGroup for expandable Style guide sections.
  */
 
-import { type MouseEvent, useRef } from "react";
+import { type MouseEvent } from "react";
 import {
   GoabxWorkSideMenu,
   GoabxWorkSideMenuItem,
   GoabxWorkSideMenuGroup,
 } from "@abgov/react-components/experimental";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
-import { useGroupShadowDomFixes } from "./useGroupShadowDomFixes";
 
 // Top-level pages (not in a group)
-const TOP_PAGES = [
-  { label: "Overview", url: "/foundations" },
-];
+const TOP_PAGES = [{ label: "Overview", url: "/foundations" }];
 
 // Grouped sections with sub-pages
 const PAGE_GROUPS = [
   {
     name: "Style guide",
     slug: "style-guide",
-    pages: [
-      { label: "Motion", url: "/foundations/style-guide/motion" },
-    ],
+    pages: [{ label: "Motion", url: "/foundations/style-guide/motion" }],
   },
 ];
-
 
 // All URLs for matching current page
 const ALL_URLS = [
@@ -52,9 +46,6 @@ export function FoundationsSubMenu({
   onExpandMenu,
   currentUrl,
 }: FoundationsSubMenuProps) {
-  const groupsRef = useRef<HTMLDivElement>(null);
-  useGroupShadowDomFixes(groupsRef);
-
   const handleBackClick = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -73,8 +64,8 @@ export function FoundationsSubMenu({
         <GoabxWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
       ))}
 
-      {/* Grouped sections (ref used to hide icons via shadow DOM workaround) */}
-      <div ref={groupsRef}>
+      {/* Grouped sections */}
+      <div>
         {PAGE_GROUPS.map((group) => {
           const containsCurrentPage = group.pages.some((p) => p.url === currentUrl);
 
@@ -108,6 +99,9 @@ export function FoundationsSubMenu({
       url="/"
       open={isOpen}
       onToggle={onToggle}
+      onNavigate={(path: string) => {
+        if (path && !path.startsWith("/__")) window.location.href = path;
+      }}
       primaryContent={primaryContent}
       secondaryContent={<MenuSecondaryContent isOpen={isOpen} />}
     />

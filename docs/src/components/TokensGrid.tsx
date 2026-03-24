@@ -12,12 +12,13 @@
  */
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import {
   GoabxButton,
   GoabxInput,
   GoabxFormItem,
   GoabxFilterChip,
-  GoabxDrawer,
+  GoabxPushDrawer,
   GoabxCheckbox,
   GoabxCheckboxList,
 } from "@abgov/react-components/experimental";
@@ -157,15 +158,24 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     const table = tableRef.current;
     if (!table) return;
 
-    const handleSort = (e: Event) => {
-      const detail = (e as CustomEvent<{ sortBy: string; sortDir: "asc" | "desc" }>)
-        .detail;
-      handleTableSort(detail);
+    const handleMultiSort = (e: Event) => {
+      const detail = (
+        e as CustomEvent<{ sorts: { column: string; direction: "asc" | "desc" }[] }>
+      ).detail;
+      const sorts = detail.sorts;
+      setSortConfig({
+        primary: sorts[0]
+          ? { key: sorts[0].column, direction: sorts[0].direction }
+          : null,
+        secondary: sorts[1]
+          ? { key: sorts[1].column, direction: sorts[1].direction }
+          : null,
+      });
     };
 
-    table.addEventListener("_sort", handleSort);
-    return () => table.removeEventListener("_sort", handleSort);
-  }, [handleTableSort]);
+    table.addEventListener("_multisort", handleMultiSort);
+    return () => table.removeEventListener("_multisort", handleMultiSort);
+  }, [setSortConfig]);
 
   // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
   // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
@@ -407,7 +417,14 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
     // Motion curve tokens - show image representing the curve type
     if (token.category === "motionCurve") {
-      const getMotionCurveImage = (name: string): "expressive" | "productive" | "expressive-exit" | "expressive-reveal" | "expressive-transform"  => {
+      const getMotionCurveImage = (
+        name: string,
+      ):
+        | "expressive"
+        | "productive"
+        | "expressive-exit"
+        | "expressive-reveal"
+        | "expressive-transform" => {
         if (name.endsWith("-expressive")) return "expressive";
         if (name.endsWith("-productive")) return "productive";
         if (name.endsWith("-expressive-exit")) return "expressive-exit";
@@ -780,8 +797,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     [copiedToken, copyToClipboard, getFormattedTokenName],
   );
 
-  const hasActiveFilters =
-    searchChips.length > 0 || appliedFilters.length > 0 || sortConfig.primary;
+  const hasActiveFilters = searchChips.length > 0 || appliedFilters.length > 0;
 
   return (
     <div className="tokens-grid">
@@ -841,8 +857,12 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               leadingIcon="filter-lines"
               size="compact"
               onClick={() => {
-                setPendingFilters(appliedFilters);
-                setFilterDrawerOpen(true);
+                if (filterDrawerOpen) {
+                  setFilterDrawerOpen(false);
+                } else {
+                  setPendingFilters(appliedFilters);
+                  setFilterDrawerOpen(true);
+                }
               }}
             >
               Filters
@@ -859,30 +879,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             size="small"
             fillColor="var(--goa-color-text-secondary)"
           />
-
-          {/* Sort chips */}
-          {sortConfig.primary && (
-            <GoabxFilterChip
-              content={sortConfig.primary.key}
-              leadingIcon={
-                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText={sortConfig.secondary ? "1st" : undefined}
-              onClick={() =>
-                setSortConfig({ primary: sortConfig.secondary, secondary: null })
-              }
-            />
-          )}
-          {sortConfig.secondary && (
-            <GoabxFilterChip
-              content={sortConfig.secondary.key}
-              leadingIcon={
-                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
-              }
-              secondaryText="2nd"
-              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
-            />
-          )}
 
           {/* Search chips */}
           {searchChips.map((chip) => (
@@ -924,7 +920,13 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       {viewMode === "list" && (
         <div className="tokens-table-wrapper">
           {/* Using web components directly for V2 styling - React wrappers don't pass version prop */}
-          <goa-table ref={tableRef} version="2" width="100%" variant="normal">
+          <goa-table
+            ref={tableRef}
+            version="2"
+            width="100%"
+            variant="normal"
+            sort-mode="multi"
+          >
             <table style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -934,6 +936,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                       version="2"
                       name="name"
                       direction={getColumnSortDirection("name")}
+                      sort-order={getColumnSortOrder("name")}
                     >
                       Token
                     </goa-table-sort-header>
@@ -944,6 +947,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                       version="2"
                       name="category"
                       direction={getColumnSortDirection("category")}
+                      sort-order={getColumnSortOrder("category")}
                     >
                       Category
                     </goa-table-sort-header>
@@ -965,67 +969,72 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       )}
 
       {/* Filter Drawer */}
-      <GoabxDrawer
-        heading="Filter tokens"
-        position="right"
-        open={filterDrawerOpen}
-        maxSize="300px"
-        onClose={() => setFilterDrawerOpen(false)}
-        actions={
-          <GoabButtonGroup alignment="start" gap="compact">
-            <GoabxButton type="primary" size="compact" onClick={applyFilters}>
-              Apply filters
-            </GoabxButton>
-            <GoabxButton
-              type="tertiary"
-              size="compact"
-              onClick={() => setFilterDrawerOpen(false)}
-            >
-              Cancel
-            </GoabxButton>
-          </GoabButtonGroup>
-        }
-      >
-        <div className="filter-drawer-content">
-          <GoabxFormItem label="Category">
-            <GoabxCheckboxList
-              name="category"
-              size="compact"
-              value={pendingFilters}
-              onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                setPendingFilters(detail.value)
-              }
-            >
-              {filterGroups.map((group) => (
-                <GoabxCheckbox
-                  key={group.name}
-                  name={group.name}
-                  value={group.name}
-                  text={group.name}
+      {typeof document !== "undefined" &&
+        document.getElementById("push-drawer-portal") &&
+        createPortal(
+          <GoabxPushDrawer
+            heading="Filter tokens"
+            open={filterDrawerOpen}
+            width="300px"
+            onClose={() => setFilterDrawerOpen(false)}
+            actions={
+              <GoabButtonGroup alignment="start" gap="compact">
+                <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                  Apply filters
+                </GoabxButton>
+                <GoabxButton
+                  type="tertiary"
                   size="compact"
-                />
-              ))}
-            </GoabxCheckboxList>
-          </GoabxFormItem>
+                  onClick={() => setFilterDrawerOpen(false)}
+                >
+                  Cancel
+                </GoabxButton>
+              </GoabButtonGroup>
+            }
+          >
+            <div className="filter-drawer-content">
+              <GoabxFormItem label="Category">
+                <GoabxCheckboxList
+                  name="category"
+                  size="compact"
+                  value={pendingFilters}
+                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
+                    setPendingFilters(detail.value)
+                  }
+                >
+                  {filterGroups.map((group) => (
+                    <GoabxCheckbox
+                      key={group.name}
+                      name={group.name}
+                      value={group.name}
+                      text={group.name}
+                      size="compact"
+                    />
+                  ))}
+                </GoabxCheckboxList>
+              </GoabxFormItem>
 
-          {pendingFilters.length > 0 && (
-            <>
-              <GoabDivider />
-              <GoabxButton
-                type="tertiary"
-                size="compact"
-                onClick={() => setPendingFilters([])}
-              >
-                Clear all filters
-              </GoabxButton>
-            </>
-          )}
-        </div>
-      </GoabxDrawer>
+              {pendingFilters.length > 0 && (
+                <>
+                  <GoabDivider />
+                  <GoabxButton
+                    type="tertiary"
+                    size="compact"
+                    onClick={() => setPendingFilters([])}
+                  >
+                    Clear all filters
+                  </GoabxButton>
+                </>
+              )}
+            </div>
+          </GoabxPushDrawer>,
+          document.getElementById("push-drawer-portal")!,
+        )}
 
       <style>{`
         .tokens-grid {
           max-width: 100%;
+          container-type: inline-size;
         }
 
         /* Sentinel for sticky detection - invisible marker */
@@ -1053,6 +1062,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
         .tokens-toolbar--sticky {
           padding: var(--goa-space-s) 0;
           background: transparent;
+          margin-bottom: 0;
         }
 
         .tokens-toolbar--sticky::before {
@@ -1060,8 +1070,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           position: absolute;
           top: 0;
           bottom: 0;
-          left: -9999px;
-          right: -9999px;
+          left: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
+          right: calc(-1 * var(--card-padding-h, var(--goa-space-2xl)));
           background: var(--goa-color-greyscale-white);
           box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
           z-index: -1;
@@ -1079,8 +1089,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           gap: var(--goa-space-m);
         }
 
-        /* Mobile: stack toolbar vertically */
-        @media (max-width: 640px) {
+        /* Narrow container: stack toolbar vertically */
+        @container (max-width: 640px) {
           .tokens-toolbar {
             flex-direction: column;
             align-items: stretch;
