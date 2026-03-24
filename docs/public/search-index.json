@@ -1741,7 +1741,7 @@
       "pattern"
     ],
     "components": [],
-    "scale": "product",
+    "scale": "service",
     "userType": "citizen",
     "slug": "public-form"
   },
@@ -2714,37 +2714,5 @@
     "scale": "task",
     "userType": "both",
     "slug": "warn-a-user-of-a-deadline"
-  },
-  {
-    "type": "example",
-    "id": "workspace",
-    "title": "Workspace",
-    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.<br><span style=\"display:block;height:0.5rem\"></span>Workspaces should be adapted to fit each service's context and user needs. The reference example is a starting point to expand on, not a rigid template.",
-    "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
-    "tags": [
-      "workspace",
-      "worker",
-      "service",
-      "case-management",
-      "dashboard",
-      "pattern"
-    ],
-    "components": [
-      "work-side-menu",
-      "table",
-      "badge",
-      "tabs",
-      "container",
-      "accordion",
-      "drawer",
-      "button",
-      "block"
-    ],
-    "scale": "product",
-    "userType": "worker",
-    "slug": "workspace"
   }
 ]

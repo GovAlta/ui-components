@@ -4,18 +4,18 @@
  * Form stepper shows progress through multi-step forms.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const formStepperConfigurations: ComponentConfigurations = {
-  componentSlug: 'form-stepper',
-  componentName: 'Form stepper',
-  defaultConfigurationId: 'basic',
+  componentSlug: "form-stepper",
+  componentName: "Form stepper",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic form stepper',
-      description: 'Simple step indicator',
+      id: "basic",
+      name: "Basic form stepper",
+      description: "Simple step indicator",
       code: {
         react: `<GoabFormStepper step={1}>
   <GoabFormStep text="Personal info" />
@@ -35,9 +35,9 @@ export const formStepperConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'middle-step',
-      name: 'Middle step',
-      description: 'Stepper showing progress midway',
+      id: "middle-step",
+      name: "Middle step",
+      description: "Stepper showing progress midway",
       code: {
         react: `<GoabFormStepper step={2}>
   <GoabFormStep text="Account" status="complete" />
@@ -57,9 +57,9 @@ export const formStepperConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'completed',
-      name: 'All completed',
-      description: 'Stepper at final step',
+      id: "completed",
+      name: "All completed",
+      description: "Stepper at final step",
       code: {
         react: `<GoabFormStepper step={4}>
   <GoabFormStep text="Start" status="complete" />

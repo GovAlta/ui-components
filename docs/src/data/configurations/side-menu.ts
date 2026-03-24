@@ -4,18 +4,18 @@
  * Side menu provides vertical navigation.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const sideMenuConfigurations: ComponentConfigurations = {
-  componentSlug: 'side-menu',
-  componentName: 'Side menu',
-  defaultConfigurationId: 'basic',
+  componentSlug: "side-menu",
+  componentName: "Side menu",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic side menu',
-      description: 'Simple navigation menu',
+      id: "basic",
+      name: "Basic side menu",
+      description: "Simple navigation menu",
       code: {
         react: `<div style={{ width: '200px' }}>
   <GoabSideMenu heading="My Application" url="/">
@@ -41,9 +41,9 @@ export const sideMenuConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-groups',
-      name: 'With groups',
-      description: 'Menu items organized into groups',
+      id: "with-groups",
+      name: "With sections",
+      description: "Menu items organized into sections",
       code: {
         react: `<div style={{ width: '200px' }}>
   <GoabSideMenu heading="My Application" url="/">
@@ -78,9 +78,9 @@ export const sideMenuConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-expandable-groups',
-      name: 'Expandable groups',
-      description: 'Collapsible menu sections',
+      id: "with-expandable-groups",
+      name: "With groups",
+      description: "Collapsible menu groups",
       code: {
         react: `<div style={{ width: '200px' }}>
   <GoabSideMenu heading="My Application" url="/">

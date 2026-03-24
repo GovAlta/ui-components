@@ -4,123 +4,118 @@
  * Popovers display content in a floating panel.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const popoverConfigurations: ComponentConfigurations = {
-  componentSlug: 'popover',
-  componentName: 'Popover',
-  defaultConfigurationId: 'basic',
+  componentSlug: "popover",
+  componentName: "Popover",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic popover',
-      description: 'Simple popover with content',
+      id: "basic",
+      name: "Basic popover",
+      description: "Simple popover with content",
       code: {
-        react: `<GoabPopover>
-  <GoabButton slot="target">Open popover</GoabButton>
-  <p>Popover content goes here. It can contain any content.</p>
+        react: `<GoabPopover target={<GoabButton>Open popover</GoabButton>}>
+  <GoabText mt="none" mb="none">Popover content goes here. It can contain any content.</GoabText>
 </GoabPopover>`,
-        angular: `<goab-popover>
-  <goab-button slot="target">Open popover</goab-button>
-  <p>Popover content goes here. It can contain any content.</p>
+        angular: `<goab-popover [target]="targetTpl">
+  <ng-template #targetTpl>
+    <goab-button>Open popover</goab-button>
+  </ng-template>
+  <goab-text mt="none" mb="none">Popover content goes here. It can contain any content.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover>
   <goa-button version="2" slot="target">Open popover</goa-button>
-  <p>Popover content goes here. It can contain any content.</p>
+  <goa-text mt="none" mb="none">Popover content goes here. It can contain any content.</goa-text>
 </goa-popover>`,
       },
     },
     {
-      id: 'positions',
-      name: 'Positions',
-      description: 'Popover placement options',
+      id: "positions",
+      name: "Positions",
+      description: "Popover placement options",
       code: {
-        react: `<GoabPopover position="top">
-  <GoabButton slot="target">Top</GoabButton>
-  <p>Content above the trigger.</p>
+        react: `<GoabPopover position="above" target={<GoabButton>Above</GoabButton>}>
+  <GoabText mt="none" mb="none">Content positioned above the trigger.</GoabText>
 </GoabPopover>
-<GoabPopover position="bottom">
-  <GoabButton slot="target">Bottom</GoabButton>
-  <p>Content below the trigger.</p>
+<GoabPopover position="below" target={<GoabButton>Below</GoabButton>}>
+  <GoabText mt="none" mb="none">Content positioned below the trigger.</GoabText>
 </GoabPopover>
-<GoabPopover position="left">
-  <GoabButton slot="target">Left</GoabButton>
-  <p>Content to the left.</p>
-</GoabPopover>
-<GoabPopover position="right">
-  <GoabButton slot="target">Right</GoabButton>
-  <p>Content to the right.</p>
+<GoabPopover position="auto" target={<GoabButton>Auto</GoabButton>}>
+  <GoabText mt="none" mb="none">Automatically positions based on available space.</GoabText>
 </GoabPopover>`,
-        angular: `<goab-popover position="top">
-  <goab-button slot="target">Top</goab-button>
-  <p>Content above the trigger.</p>
+        angular: `<goab-popover position="above" [target]="aboveTpl">
+  <ng-template #aboveTpl><goab-button>Above</goab-button></ng-template>
+  <goab-text mt="none" mb="none">Content positioned above the trigger.</goab-text>
 </goab-popover>
-<goab-popover position="bottom">
-  <goab-button slot="target">Bottom</goab-button>
-  <p>Content below the trigger.</p>
+<goab-popover position="below" [target]="belowTpl">
+  <ng-template #belowTpl><goab-button>Below</goab-button></ng-template>
+  <goab-text mt="none" mb="none">Content positioned below the trigger.</goab-text>
 </goab-popover>
-<goab-popover position="left">
-  <goab-button slot="target">Left</goab-button>
-  <p>Content to the left.</p>
-</goab-popover>
-<goab-popover position="right">
-  <goab-button slot="target">Right</goab-button>
-  <p>Content to the right.</p>
+<goab-popover position="auto" [target]="autoTpl">
+  <ng-template #autoTpl><goab-button>Auto</goab-button></ng-template>
+  <goab-text mt="none" mb="none">Automatically positions based on available space.</goab-text>
 </goab-popover>`,
-        webComponents: `<goa-popover position="top">
-  <goa-button version="2" slot="target">Top</goa-button>
-  <p>Content above the trigger.</p>
+        webComponents: `<goa-popover position="above">
+  <goa-button version="2" slot="target">Above</goa-button>
+  <goa-text mt="none" mb="none">Content positioned above the trigger.</goa-text>
 </goa-popover>
-<goa-popover position="bottom">
-  <goa-button version="2" slot="target">Bottom</goa-button>
-  <p>Content below the trigger.</p>
+<goa-popover position="below">
+  <goa-button version="2" slot="target">Below</goa-button>
+  <goa-text mt="none" mb="none">Content positioned below the trigger.</goa-text>
 </goa-popover>
-<goa-popover position="left">
-  <goa-button version="2" slot="target">Left</goa-button>
-  <p>Content to the left.</p>
-</goa-popover>
-<goa-popover position="right">
-  <goa-button version="2" slot="target">Right</goa-button>
-  <p>Content to the right.</p>
+<goa-popover position="auto">
+  <goa-button version="2" slot="target">Auto</goa-button>
+  <goa-text mt="none" mb="none">Automatically positions based on available space.</goa-text>
 </goa-popover>`,
       },
     },
     {
-      id: 'with-padding',
-      name: 'With padding',
-      description: 'Popover with custom padding',
+      id: "with-padding",
+      name: "With padding",
+      description: "Popover with and without padding",
       code: {
-        react: `<GoabPopover padded>
-  <GoabButton slot="target">Show details</GoabButton>
-  <p>Content with default padding applied.</p>
+        react: `<GoabPopover padded target={<GoabButton>Padded</GoabButton>}>
+  <GoabText mt="none" mb="none">Content with padding applied.</GoabText>
+</GoabPopover>
+<GoabPopover padded={false} target={<GoabButton>No padding</GoabButton>}>
+  <GoabText mt="none" mb="none">Content flush with popover boundaries.</GoabText>
 </GoabPopover>`,
-        angular: `<goab-popover [padded]="true">
-  <goab-button slot="target">Show details</goab-button>
-  <p>Content with default padding applied.</p>
+        angular: `<goab-popover [padded]="true" [target]="paddedTpl">
+  <ng-template #paddedTpl><goab-button>Padded</goab-button></ng-template>
+  <goab-text mt="none" mb="none">Content with padding applied.</goab-text>
+</goab-popover>
+<goab-popover [padded]="false" [target]="noPaddingTpl">
+  <ng-template #noPaddingTpl><goab-button>No padding</goab-button></ng-template>
+  <goab-text mt="none" mb="none">Content flush with popover boundaries.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover padded>
-  <goa-button version="2" slot="target">Show details</goa-button>
-  <p>Content with default padding applied.</p>
+  <goa-button version="2" slot="target">Padded</goa-button>
+  <goa-text mt="none" mb="none">Content with padding applied.</goa-text>
+</goa-popover>
+<goa-popover padded="false">
+  <goa-button version="2" slot="target">No padding</goa-button>
+  <goa-text mt="none" mb="none">Content flush with popover boundaries.</goa-text>
 </goa-popover>`,
       },
     },
     {
-      id: 'with-max-width',
-      name: 'With max width',
-      description: 'Popover with constrained width',
+      id: "with-max-width",
+      name: "With max width",
+      description: "Popover with constrained width",
       code: {
-        react: `<GoabPopover maxWidth="300px">
-  <GoabButton slot="target">More info</GoabButton>
-  <p>This popover has a maximum width of 300 pixels to control content width.</p>
+        react: `<GoabPopover maxWidth="300px" target={<GoabButton>More info</GoabButton>}>
+  <GoabText mt="none" mb="none">This popover has a maximum width of 300 pixels to control content width.</GoabText>
 </GoabPopover>`,
-        angular: `<goab-popover maxWidth="300px">
-  <goab-button slot="target">More info</goab-button>
-  <p>This popover has a maximum width of 300 pixels to control content width.</p>
+        angular: `<goab-popover maxWidth="300px" [target]="targetTpl">
+  <ng-template #targetTpl><goab-button>More info</goab-button></ng-template>
+  <goab-text mt="none" mb="none">This popover has a maximum width of 300 pixels to control content width.</goab-text>
 </goab-popover>`,
         webComponents: `<goa-popover maxwidth="300px">
   <goa-button version="2" slot="target">More info</goa-button>
-  <p>This popover has a maximum width of 300 pixels to control content width.</p>
+  <goa-text mt="none" mb="none">This popover has a maximum width of 300 pixels to control content width.</goa-text>
 </goa-popover>`,
       },
     },

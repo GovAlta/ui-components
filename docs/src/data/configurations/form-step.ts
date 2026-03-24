@@ -4,18 +4,18 @@
  * FormStep is a child component of FormStepper.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const formStepConfigurations: ComponentConfigurations = {
-  componentSlug: 'form-step',
-  componentName: 'Form step',
-  defaultConfigurationId: 'basic',
+  componentSlug: "form-step",
+  componentName: "Form step",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic form step',
-      description: 'Single step within FormStepper',
+      id: "basic",
+      name: "Basic form step",
+      description: "Single step within FormStepper",
       code: {
         react: `<GoabFormStepper step={2}>
   <GoabFormStep text="Step 1" status="complete" />

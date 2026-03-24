@@ -4,82 +4,88 @@
  * Skeletons show placeholder content while loading.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const skeletonConfigurations: ComponentConfigurations = {
-  componentSlug: 'skeleton',
-  componentName: 'Skeleton',
-  defaultConfigurationId: 'basic',
+  componentSlug: "skeleton",
+  componentName: "Skeleton",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic skeleton',
-      description: 'Simple loading placeholder',
+      id: "basic",
+      name: "Text",
+      description: "Text loading placeholders",
       code: {
-        react: `<GoabSkeleton />`,
-        angular: `<goab-skeleton></goab-skeleton>`,
-        webComponents: `<goa-skeleton></goa-skeleton>`,
+        react: `<GoabSkeleton type="text" mb="s" />
+<GoabSkeleton type="text" mb="s" />
+<GoabSkeleton type="text" mb="s" />
+<GoabSkeleton type="text" />`,
+        angular: `<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text"></goab-skeleton>`,
+        webComponents: `<goa-skeleton type="text" mb="s"></goa-skeleton>
+<goa-skeleton type="text" mb="s"></goa-skeleton>
+<goa-skeleton type="text" mb="s"></goa-skeleton>
+<goa-skeleton type="text"></goa-skeleton>`,
       },
     },
     {
-      id: 'types',
-      name: 'Types',
-      description: 'Different skeleton shapes',
+      id: "content-types",
+      name: "Content types",
+      description: "Text, title, header, and paragraph skeletons",
       code: {
-        react: `<GoabSkeleton type="text" />
-<GoabSkeleton type="title" />
-<GoabSkeleton type="avatar" />
-<GoabSkeleton type="header" />
-<GoabSkeleton type="paragraph" />
-<GoabSkeleton type="thumbnail" />`,
-        angular: `<goab-skeleton type="text"></goab-skeleton>
-<goab-skeleton type="title"></goab-skeleton>
-<goab-skeleton type="avatar"></goab-skeleton>
-<goab-skeleton type="header"></goab-skeleton>
-<goab-skeleton type="paragraph"></goab-skeleton>
-<goab-skeleton type="thumbnail"></goab-skeleton>`,
-        webComponents: `<goa-skeleton type="text"></goa-skeleton>
-<goa-skeleton type="title"></goa-skeleton>
-<goa-skeleton type="avatar"></goa-skeleton>
-<goa-skeleton type="header"></goa-skeleton>
-<goa-skeleton type="paragraph"></goa-skeleton>
-<goa-skeleton type="thumbnail"></goa-skeleton>`,
+        react: `<GoabSkeleton type="text" mb="s" />
+<GoabSkeleton type="text-small" mb="s" />
+<GoabSkeleton type="title" mb="s" />
+<GoabSkeleton type="header" mb="s" />
+<GoabSkeleton type="paragraph" />`,
+        angular: `<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text-small" mb="s"></goab-skeleton>
+<goab-skeleton type="title" mb="s"></goab-skeleton>
+<goab-skeleton type="header" mb="s"></goab-skeleton>
+<goab-skeleton type="paragraph"></goab-skeleton>`,
+        webComponents: `<goa-skeleton type="text" mb="s"></goa-skeleton>
+<goa-skeleton type="text-small" mb="s"></goa-skeleton>
+<goa-skeleton type="title" mb="s"></goa-skeleton>
+<goa-skeleton type="header" mb="s"></goa-skeleton>
+<goa-skeleton type="paragraph"></goa-skeleton>`,
       },
     },
     {
-      id: 'custom-size',
-      name: 'Custom size',
-      description: 'Skeleton with specific dimensions',
+      id: "media-types",
+      name: "Media types",
+      description: "Avatar, thumbnail, and image skeletons",
       code: {
-        react: `<GoabSkeleton type="text" size={4} />
+        react: `<GoabSkeleton type="avatar" mb="s" />
+<GoabSkeleton type="thumbnail" mb="s" />
 <GoabSkeleton type="image" width="200px" height="150px" />`,
-        angular: `<goab-skeleton type="text" [size]="4"></goab-skeleton>
+        angular: `<goab-skeleton type="avatar" mb="s"></goab-skeleton>
+<goab-skeleton type="thumbnail" mb="s"></goab-skeleton>
 <goab-skeleton type="image" width="200px" height="150px"></goab-skeleton>`,
-        webComponents: `<goa-skeleton type="text" size="4"></goa-skeleton>
+        webComponents: `<goa-skeleton type="avatar" mb="s"></goa-skeleton>
+<goa-skeleton type="thumbnail" mb="s"></goa-skeleton>
 <goa-skeleton type="image" width="200px" height="150px"></goa-skeleton>`,
       },
     },
     {
-      id: 'card-loading',
-      name: 'Card loading state',
-      description: 'Skeleton inside a card',
+      id: "composite-types",
+      name: "Composite types",
+      description: "Pre-built skeleton layouts for common patterns",
       code: {
-        react: `<GoabCard>
-  <GoabSkeleton type="title" mb="s" />
-  <GoabSkeleton type="paragraph" />
-  <GoabSkeleton type="text" size={2} mt="m" />
-</GoabCard>`,
-        angular: `<goab-card>
-  <goab-skeleton type="title" mb="s"></goab-skeleton>
-  <goab-skeleton type="paragraph"></goab-skeleton>
-  <goab-skeleton type="text" [size]="2" mt="m"></goab-skeleton>
-</goab-card>`,
-        webComponents: `<goa-card>
-  <goa-skeleton type="title" mb="s"></goa-skeleton>
-  <goa-skeleton type="paragraph"></goa-skeleton>
-  <goa-skeleton type="text" size="2" mt="m"></goa-skeleton>
-</goa-card>`,
+        react: `<GoabSkeleton type="lines" mb="l" />
+<GoabSkeleton type="profile" mb="l" />
+<GoabSkeleton type="card" mb="l" />
+<GoabSkeleton type="article" />`,
+        angular: `<goab-skeleton type="lines" mb="l"></goab-skeleton>
+<goab-skeleton type="profile" mb="l"></goab-skeleton>
+<goab-skeleton type="card" mb="l"></goab-skeleton>
+<goab-skeleton type="article"></goab-skeleton>`,
+        webComponents: `<goa-skeleton type="lines" mb="l"></goa-skeleton>
+<goa-skeleton type="profile" mb="l"></goa-skeleton>
+<goa-skeleton type="card" mb="l"></goa-skeleton>
+<goa-skeleton type="article"></goa-skeleton>`,
       },
     },
   ],

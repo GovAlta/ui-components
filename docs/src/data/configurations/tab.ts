@@ -4,18 +4,18 @@
  * Tab is a child component of Tabs.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const tabConfigurations: ComponentConfigurations = {
-  componentSlug: 'tab',
-  componentName: 'Tab',
-  defaultConfigurationId: 'basic',
+  componentSlug: "tab",
+  componentName: "Tab",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic tab',
-      description: 'Single tab within Tabs component',
+      id: "basic",
+      name: "Basic tab",
+      description: "Single tab within Tabs component",
       code: {
         react: `<GoabTabs>
   <GoabTab heading="First tab">

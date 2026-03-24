@@ -2,20 +2,21 @@
  * Notification Component Configurations
  *
  * Notifications display important messages at the page level.
+ * Note: Notification does not have margin props. Use wrapper elements for spacing.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const notificationConfigurations: ComponentConfigurations = {
-  componentSlug: 'notification',
-  componentName: 'Notification',
-  defaultConfigurationId: 'basic',
+  componentSlug: "notification",
+  componentName: "Notification",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Information notification',
-      description: 'Default informational notification',
+      id: "basic",
+      name: "Information notification",
+      description: "Default informational notification",
       code: {
         react: `<GoabNotification type="information">
   Your application has been received and is being processed.
@@ -29,77 +30,110 @@ export const notificationConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Notification types',
-      description: 'Different notification types for various contexts',
+      id: "types",
+      name: "Notification types",
+      description: "Different notification types for various contexts",
       code: {
-        react: `<GoabNotification type="information">
-  Information: General updates for the user.
-</GoabNotification>
-<GoabNotification type="important">
-  Important: Action may be required.
-</GoabNotification>
+        react: `<div style={{ marginBottom: "var(--goa-space-m)" }}>
+  <GoabNotification type="information">
+    Information: General updates for the user.
+  </GoabNotification>
+</div>
+<div style={{ marginBottom: "var(--goa-space-m)" }}>
+  <GoabNotification type="important">
+    Important: Action may be required.
+  </GoabNotification>
+</div>
 <GoabNotification type="emergency">
   Emergency: Critical issue requiring attention.
-</GoabNotification>
-<GoabNotification type="event">
-  Event: Upcoming deadline or scheduled event.
 </GoabNotification>`,
-        angular: `<goab-notification type="information">
-  Information: General updates for the user.
-</goab-notification>
-<goab-notification type="important">
-  Important: Action may be required.
-</goab-notification>
+        angular: `<div style="margin-bottom: var(--goa-space-m);">
+  <goab-notification type="information">
+    Information: General updates for the user.
+  </goab-notification>
+</div>
+<div style="margin-bottom: var(--goa-space-m);">
+  <goab-notification type="important">
+    Important: Action may be required.
+  </goab-notification>
+</div>
 <goab-notification type="emergency">
   Emergency: Critical issue requiring attention.
-</goab-notification>
-<goab-notification type="event">
-  Event: Upcoming deadline or scheduled event.
 </goab-notification>`,
-        webComponents: `<goa-notification version="2" type="information">
-  Information: General updates for the user.
-</goa-notification>
-<goa-notification version="2" type="important">
-  Important: Action may be required.
-</goa-notification>
+        webComponents: `<div style="margin-bottom: var(--goa-space-m);">
+  <goa-notification version="2" type="information">
+    Information: General updates for the user.
+  </goa-notification>
+</div>
+<div style="margin-bottom: var(--goa-space-m);">
+  <goa-notification version="2" type="important">
+    Important: Action may be required.
+  </goa-notification>
+</div>
 <goa-notification version="2" type="emergency">
   Emergency: Critical issue requiring attention.
-</goa-notification>
-<goa-notification version="2" type="event">
-  Event: Upcoming deadline or scheduled event.
 </goa-notification>`,
       },
     },
     {
-      id: 'dismissable',
-      name: 'Dismissable',
-      description: 'Notification that can be closed',
+      id: "emphasis",
+      name: "Emphasis levels",
+      description: "High and low visual prominence",
       code: {
-        react: `<GoabNotification type="information" onDismiss={() => setVisible(false)}>
-  This notification can be dismissed by clicking the close button.
+        react: `<div style={{ marginBottom: "var(--goa-space-m)" }}>
+  <GoabNotification type="important" emphasis="high">
+    High emphasis: Full background for maximum visibility.
+  </GoabNotification>
+</div>
+<GoabNotification type="important" emphasis="low">
+  Low emphasis: Minimal styling for less prominent messaging.
 </GoabNotification>`,
-        angular: `<goab-notification type="information" (_dismiss)="handleDismiss()">
-  This notification can be dismissed by clicking the close button.
+        angular: `<div style="margin-bottom: var(--goa-space-m);">
+  <goab-notification type="important" emphasis="high">
+    High emphasis: Full background for maximum visibility.
+  </goab-notification>
+</div>
+<goab-notification type="important" emphasis="low">
+  Low emphasis: Minimal styling for less prominent messaging.
 </goab-notification>`,
-        webComponents: `<goa-notification version="2" type="information" dismissable>
-  This notification can be dismissed by clicking the close button.
+        webComponents: `<div style="margin-bottom: var(--goa-space-m);">
+  <goa-notification version="2" type="important" emphasis="high">
+    High emphasis: Full background for maximum visibility.
+  </goa-notification>
+</div>
+<goa-notification version="2" type="important" emphasis="low">
+  Low emphasis: Minimal styling for less prominent messaging.
 </goa-notification>`,
       },
     },
     {
-      id: 'with-max-width',
-      name: 'With max width',
-      description: 'Notification with constrained width',
+      id: "compact",
+      name: "Compact",
+      description: "Reduced padding for tighter layouts",
       code: {
-        react: `<GoabNotification type="information" maxWidth="600px">
-  This notification has a maximum width for narrower layouts.
+        react: `<div style={{ marginBottom: "var(--goa-space-m)" }}>
+  <GoabNotification type="information">
+    Standard notification with default padding.
+  </GoabNotification>
+</div>
+<GoabNotification type="information" compact>
+  Compact notification with reduced padding.
 </GoabNotification>`,
-        angular: `<goab-notification type="information" maxWidth="600px">
-  This notification has a maximum width for narrower layouts.
+        angular: `<div style="margin-bottom: var(--goa-space-m);">
+  <goab-notification type="information">
+    Standard notification with default padding.
+  </goab-notification>
+</div>
+<goab-notification type="information" [compact]="true">
+  Compact notification with reduced padding.
 </goab-notification>`,
-        webComponents: `<goa-notification version="2" type="information" maxwidth="600px">
-  This notification has a maximum width for narrower layouts.
+        webComponents: `<div style="margin-bottom: var(--goa-space-m);">
+  <goa-notification version="2" type="information">
+    Standard notification with default padding.
+  </goa-notification>
+</div>
+<goa-notification version="2" type="information" compact>
+  Compact notification with reduced padding.
 </goa-notification>`,
       },
     },
