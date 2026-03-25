@@ -33,7 +33,10 @@ export interface GoabSkeletonProps extends Margins {
    * @default 3
    */
   lineCount?: number;
-  /** Sets the skeleton shape to represent your content. */
+  /**
+   * Sets the skeleton shape to represent your content.
+   * @required
+   */
   type: GoabSkeletonType;
   /**
    * Sets a data-testid attribute for automated testing.

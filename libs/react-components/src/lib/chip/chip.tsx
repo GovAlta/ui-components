@@ -46,6 +46,7 @@ export interface GoabChipProps extends Margins, DataAttributes {
   error?: boolean;
   /**
    * @deprecated Use GoAFilterChip instead. The text content displayed in the chip.
+   * @required
    */
   content: string;
   /**

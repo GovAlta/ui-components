@@ -27,7 +27,10 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxWorkSideMenuGroup implements OnInit {
-  /** The text displayed in the group heading. */
+  /**
+   * The text displayed in the group heading.
+   * @required
+   */
   @Input({ required: true }) heading!: string;
   @Input() icon?: GoabIconType;
   @Input({ transform: booleanAttribute }) open?: boolean;

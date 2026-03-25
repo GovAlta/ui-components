@@ -41,9 +41,15 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxWorkSideMenu implements OnInit {
-  /** The application name displayed in the header. */
+  /**
+   * The application name displayed in the header.
+   * @required
+   */
   @Input({ required: true }) heading!: string;
-  /** URL for the header link. Clicking the logo/heading navigates to this URL. */
+  /**
+   * URL for the header link. Clicking the logo/heading navigates to this URL.
+   * @required
+   */
   @Input({ required: true }) url!: string;
   /**
    * User's name displayed in the profile section.
@@ -65,11 +71,17 @@ export class GoabxWorkSideMenu implements OnInit {
    * @default ""
    */
   @Input() testId?: string;
-  /** TO REVIEW: Content rendered in the primary navigation slot of the side menu. */
+  /**
+   * TO REVIEW: Content rendered in the primary navigation slot of the side menu.
+   */
   @Input() primaryContent!: TemplateRef<any>;
-  /** TO REVIEW: Content rendered in the secondary section slot of the side menu. */
+  /**
+   * TO REVIEW: Content rendered in the secondary section slot of the side menu.
+   */
   @Input() secondaryContent!: TemplateRef<any>;
-  /** TO REVIEW: Content rendered in the account section slot of the side menu. */
+  /**
+   * TO REVIEW: Content rendered in the account section slot of the side menu.
+   */
   @Input() accountContent!: TemplateRef<any>;
   @Output() onToggle = new EventEmitter();
   @Output() onNavigate = new EventEmitter<string>();

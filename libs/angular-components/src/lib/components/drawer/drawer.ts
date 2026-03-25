@@ -39,13 +39,18 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDrawer implements OnInit {
-  /** Whether the drawer is open. */
+  /**
+   * Whether the drawer is open.
+   * @required
+   */
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;
-  /** The position of the drawer. */
+  /**
+   * The position of the drawer.
+   * @required
+   */
   @Input({ required: true }) position!: GoabDrawerPosition;
   /**
    * The heading text displayed at the top of the drawer.
-   * @default ""
    */
   @Input() heading!: string | TemplateRef<any>;
   /** Sets max height on bottom position, sets width on left and right position. */
@@ -55,7 +60,9 @@ export class GoabDrawer implements OnInit {
    * @default "drawer"
    */
   @Input() testId?: string;
-  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
+  /**
+   * TO REVIEW: Action buttons or elements displayed in the component's action area.
+   */
   @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 

@@ -19,9 +19,15 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCardImage implements OnInit {
-  /** The URL of the image to display. */
+  /**
+   * The URL of the image to display.
+   * @required
+   */
   @Input({ required: true }) src!: string;
-  /** Height of the image container. Accepts CSS values like "200px" or "100%". */
+  /**
+   * Height of the image container. Accepts CSS values like "200px" or "100%".
+   * @required
+   */
   @Input({ required: true }) height!: string;
 
   isReady = false;

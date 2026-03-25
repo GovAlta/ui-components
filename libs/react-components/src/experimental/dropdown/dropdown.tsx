@@ -45,7 +45,6 @@ declare module "react" {
 export interface GoabxDropdownProps extends Margins, DataAttributes {
   /**
    * Identifier for the dropdown. Should be unique.
-   * @required
    */
   name?: string;
   /**

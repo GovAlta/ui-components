@@ -37,7 +37,7 @@ export interface GoabxCalloutProps extends Margins, DataAttributes {
   heading?: string;
   /**
    * Define the context and colour of the callout.
-   * @required
+   * @default "information"
    */
   type?: GoabCalloutType;
   /**

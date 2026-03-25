@@ -26,7 +26,10 @@ export interface GoabxPushDrawerProps {
   testId?: string;
   /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   actions?: ReactNode;
-  /** TO REVIEW: The content rendered inside the push drawer body. */
+  /**
+   * TO REVIEW: The content rendered inside the push drawer body.
+   * @required
+   */
   children: ReactNode;
   onClose: () => void;
   version?: string;

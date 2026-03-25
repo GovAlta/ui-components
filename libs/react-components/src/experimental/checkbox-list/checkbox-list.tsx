@@ -26,7 +26,10 @@ declare module "react" {
 }
 
 export interface GoabxCheckboxListProps extends Margins {
-  /** The name for the checkbox list group. Used as group identifier in change events. */
+  /**
+   * The name for the checkbox list group. Used as group identifier in change events.
+   * @required
+   */
   name: string;
   /**
    * Array of currently selected checkbox values.

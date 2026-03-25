@@ -31,7 +31,7 @@ export class GoabNotification implements OnInit {
   isReady = false;
   /**
    * Define the context and colour of the notification.
-   * @default ""
+   * @default "information"
    */
   @Input() type?: GoabNotificationType = "information";
   /**

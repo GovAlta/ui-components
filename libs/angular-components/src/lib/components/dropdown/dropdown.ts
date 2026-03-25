@@ -64,7 +64,6 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   /**
    * Identifier for the dropdown. Should be unique.
-   * @required
    */
   @Input() name?: string;
   /**

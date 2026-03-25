@@ -50,7 +50,9 @@ import { GoabControlValueAccessor } from "../base.component";
 export class GoabxCheckboxList extends GoabControlValueAccessor implements OnInit {
   isReady = false;
   version = "2";
-  /** The name for the checkbox list group. Used as group identifier in change events. */
+  /**
+   * The name for the checkbox list group. Used as group identifier in change events.
+   */
   @Input() name!: string;
   /**
    * Sets the maximum width of the checkbox list container.

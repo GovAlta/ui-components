@@ -37,7 +37,10 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxWorkSideMenuItem implements OnInit {
-  /** The text label displayed for the menu item. */
+  /**
+   * The text label displayed for the menu item.
+   * @required
+   */
   @Input({ required: true }) label!: string;
   @Input() url?: string;
   @Input() badge?: string;
@@ -46,7 +49,9 @@ export class GoabxWorkSideMenuItem implements OnInit {
   @Input() icon?: string;
   @Input() testId?: string;
   @Input() type?: GoabWorkSideMenuItemType = "normal";
-  /** TO REVIEW: Custom content rendered inside the popover associated with this menu item. */
+  /**
+   * TO REVIEW: Custom content rendered inside the popover associated with this menu item.
+   */
   @Input() popoverContent!: TemplateRef<any>;
 
   isReady = false;

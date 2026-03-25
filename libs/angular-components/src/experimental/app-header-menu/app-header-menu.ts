@@ -29,7 +29,6 @@ export class GoabxAppHeaderMenu extends GoabBaseComponent implements OnInit {
   @Input() leadingIcon?: GoabIconType;
   /**
    * The menu heading text displayed as the dropdown trigger.
-   * @required
    */
   @Input() heading?: string;
   @Input() slotName?: string;

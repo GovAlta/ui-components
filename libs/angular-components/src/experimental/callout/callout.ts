@@ -61,7 +61,6 @@ export class GoabxCallout extends GoabBaseComponent implements OnInit {
 
   /**
    * Define the context and colour of the callout.
-   * @required
    */
   @Input() type?: GoabCalloutType = "information";
   /**

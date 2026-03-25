@@ -34,7 +34,10 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabxSideMenuGroup extends GoabBaseComponent implements OnInit {
   isReady = false;
   version = "2";
-  /** The heading text for the menu group. */
+  /**
+   * The heading text for the menu group.
+   * @required
+   */
   @Input({ required: true }) heading!: string;
   /** Icon displayed alongside the heading. */
   @Input() icon?: GoabIconType;

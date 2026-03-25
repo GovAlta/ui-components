@@ -3,7 +3,10 @@ import { GoabIconType, Margins } from "@abgov/ui-components-common";
 
 /* eslint-disable-next-line */
 export interface GoabSideMenuGroupProps extends Margins {
-  /** The heading text for the menu group. */
+  /**
+   * The heading text for the menu group.
+   * @required
+   */
   heading: string;
   /** Icon displayed alongside the heading. */
   icon?: GoabIconType;

@@ -17,13 +17,25 @@ declare module "react" {
 export interface GoabTwoColumnLayoutProps {
   navColumnWidth?: string;
   maxContentWidth?: string;
-  /** TO REVIEW: Content rendered in the header slot of the layout. */
+  /**
+   * TO REVIEW: Content rendered in the header slot of the layout.
+   * @required
+   */
   header: ReactNode;
-  /** TO REVIEW: Content rendered in the footer slot of the layout. */
+  /**
+   * TO REVIEW: Content rendered in the footer slot of the layout.
+   * @required
+   */
   footer: ReactNode;
-  /** TO REVIEW: Content rendered in the navigation slot of the layout. */
+  /**
+   * TO REVIEW: Content rendered in the navigation slot of the layout.
+   * @required
+   */
   nav: ReactNode;
-  /** TO REVIEW: The main content rendered in the primary column of the layout. */
+  /**
+   * TO REVIEW: The main content rendered in the primary column of the layout.
+   * @required
+   */
   children: ReactNode;
 }
 

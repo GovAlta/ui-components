@@ -10,6 +10,7 @@ import { Component, Input } from "@angular/core";
  * We need to use a separate component with a required attribute `slot` because
  * svelte component renders based on the `slot` of the wrapper component (which is `div` before)
  * // similar to app-footer-meta-section & app-footer-nav-section
+ * @required
  */
 export class GoabxFormItemSlot {
   /** Slot position; must be "helptext" or "error" to render in the correct position. */

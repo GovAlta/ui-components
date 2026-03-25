@@ -21,7 +21,10 @@ declare module "react" {
 }
 
 export interface GoabxDrawerProps {
-  /** The position of the drawer. */
+  /**
+   * The position of the drawer.
+   * @required
+   */
   position: GoabDrawerPosition;
   /**
    * Whether the drawer is open.
@@ -42,7 +45,10 @@ export interface GoabxDrawerProps {
   testId?: string;
   /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   actions?: ReactNode;
-  /** TO REVIEW: The content rendered inside the drawer body. */
+  /**
+   * TO REVIEW: The content rendered inside the drawer body.
+   * @required
+   */
   children: ReactNode;
   onClose: () => void;
   version?: string;

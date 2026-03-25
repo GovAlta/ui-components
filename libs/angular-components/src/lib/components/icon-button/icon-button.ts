@@ -47,7 +47,10 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabIconButton extends GoabBaseComponent implements OnInit {
   isReady = false;
   protected readonly JSON = JSON;
-  /** Sets the icon. */
+  /**
+   * Sets the icon.
+   * @required
+   */
   @Input({ required: true }) icon!: GoabIconType;
   /**
    * Sets the size of button.

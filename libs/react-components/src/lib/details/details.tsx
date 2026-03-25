@@ -40,7 +40,10 @@ export interface GoabDetailsProps extends Margins, DataAttributes {
    * @default ""
    */
   testId?: string;
-  /** TO REVIEW: The content revealed when the details section is expanded. */
+  /**
+   * TO REVIEW: The content revealed when the details section is expanded.
+   * @required
+   */
   children: ReactNode;
 }
 

@@ -21,12 +21,12 @@ declare module "react" {
 export interface GoabMenuActionProps extends DataAttributes {
   /**
    * Display text for the menu action.
-   * @default ""
+   * @required
    */
   text: string;
   /**
    * Action identifier included in the click event.
-   * @default "default"
+   * @required
    */
   action: string;
   /** Icon displayed before the text. */

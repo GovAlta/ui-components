@@ -19,7 +19,10 @@ declare module "react" {
 }
 
 export interface GoabHeroBannerProps {
-  /** Main heading text */
+  /**
+   * Main heading text
+   * @required
+   */
   heading: string;
   /** Background image url */
   backgroundUrl?: string;

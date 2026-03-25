@@ -7,7 +7,10 @@ export interface GoabSideMenuProps {
    * @default ""
    */
   testId?: string;
-  /** TO REVIEW: Navigation items rendered inside the side menu. */
+  /**
+   * TO REVIEW: Navigation items rendered inside the side menu.
+   * @required
+   */
   children: ReactNode;
 }
 

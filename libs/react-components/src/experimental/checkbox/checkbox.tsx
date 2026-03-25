@@ -40,7 +40,10 @@ interface WCProps extends Margins {
 /* eslint-disable-next-line */
 export interface GoabxCheckboxProps extends Margins, DataAttributes {
   id?: string;
-  /** Unique name to identify the checkbox. */
+  /**
+   * Unique name to identify the checkbox.
+   * @required
+   */
   name: string;
   /**
    * Marks the checkbox item as selected.

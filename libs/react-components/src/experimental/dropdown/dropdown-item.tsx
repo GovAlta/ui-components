@@ -23,7 +23,7 @@ declare module "react" {
 export interface GoabxDropdownItemProps {
   /**
    * Stores the value of the item selected from the dropdown.
-   * @default ""
+   * @required
    */
   value: string;
   /**

@@ -32,7 +32,6 @@ export class GoabSpinner implements OnInit {
   @Input() type?: GoabSpinnerType;
   /**
    * Sets the size of the spinner.
-   * @required
    */
   @Input() size?: GoabSpinnerSize;
   /**

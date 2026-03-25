@@ -63,7 +63,10 @@ export class GoabPopover extends GoabBaseComponent implements OnInit {
    * @deprecated This property has no effect and will be removed in a future version
    */
   @Input() relative?: boolean;
-  /** The popover trigger/target element. */
+  /**
+   * The popover trigger/target element.
+   * @required
+   */
   @Input({ required: true }) target!: TemplateRef<any>;
 
   constructor(private cdr: ChangeDetectorRef) {

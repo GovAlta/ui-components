@@ -41,11 +41,15 @@ export class GoabxPushDrawer implements OnInit {
   version = "2";
 
   @Input({ transform: booleanAttribute }) open?: boolean;
-  /** TO REVIEW: Custom heading content rendered as a template. Use this when the heading requires rich content beyond plain text. */
+  /**
+   * TO REVIEW: Custom heading content rendered as a template. Use this when the heading requires rich content beyond plain text.
+   */
   @Input() heading!: string | TemplateRef<any>;
   @Input() width?: string;
   @Input() testId?: string;
-  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
+  /**
+   * TO REVIEW: Action buttons or elements displayed in the component's action area.
+   */
   @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 

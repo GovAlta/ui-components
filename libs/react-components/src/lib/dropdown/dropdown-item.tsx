@@ -4,7 +4,7 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 export interface GoabDropdownItemProps {
   /**
    * Stores the value of the item selected from the dropdown.
-   * @default ""
+   * @required
    */
   value: string;
   /**

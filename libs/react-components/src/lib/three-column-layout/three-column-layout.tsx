@@ -29,7 +29,10 @@ export interface GoabThreeColumnLayoutProps {
   sidebar?: ReactNode; // DEPRECATED
   /** TO REVIEW: Content rendered in the side menu slot of the layout. */
   sideMenu?: ReactNode;
-  /** TO REVIEW: The main content rendered in the center column of the layout. */
+  /**
+   * TO REVIEW: The main content rendered in the center column of the layout.
+   * @required
+   */
   children: ReactNode;
 }
 

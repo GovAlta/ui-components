@@ -49,7 +49,6 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
   /**
    * Sets the heading text.
    * @required
-   * @default ""
    */
   heading: string;
   /** TO REVIEW: Custom content rendered alongside the accordion heading, such as a badge or status indicator. */

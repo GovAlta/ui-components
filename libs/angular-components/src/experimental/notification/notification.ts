@@ -41,7 +41,7 @@ export class GoabxNotification implements OnInit {
   version = "2";
   /**
    * Define the context and colour of the notification.
-   * @default ""
+   * @default "information"
    */
   @Input() type?: GoabNotificationType = "information";
   /**

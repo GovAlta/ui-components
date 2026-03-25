@@ -30,7 +30,6 @@ interface WCProps extends Margins {
 export interface GoabDropdownProps extends Margins, DataAttributes {
   /**
    * Identifier for the dropdown. Should be unique.
-   * @required
    */
   name?: string;
   /**

@@ -32,7 +32,10 @@ declare module "react" {
 }
 
 export interface GoabxBadgeProps extends Margins, DataAttributes {
-  /** Defines the context and colour of the badge. */
+  /**
+   * Defines the context and colour of the badge.
+   * @required
+   */
   type: GoabxBadgeType;
   /**
    * @deprecated Use icontype instead. Includes an icon in the badge.

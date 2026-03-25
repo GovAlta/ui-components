@@ -28,7 +28,7 @@ export interface GoabDataGridProps {
   keyboardIconPosition?: "left" | "right";
   /**
    * Navigation mode. "table" navigates like a table (up/down between rows), "layout" allows wrapping between rows with left/right arrows.
-   * @default "table"
+   * @required
    */
   keyboardNav: "layout" | "table";
   /** TO REVIEW: The column or row elements rendered inside the data grid. */

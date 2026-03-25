@@ -33,11 +33,13 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabxFileUploadCard implements OnInit {
-  /** The name of the uploaded file to display. */
+  /**
+   * The name of the uploaded file to display.
+   * @required
+   */
   @Input({ required: true }) filename!: string;
   /**
    * The file size in bytes. Displayed in a human-readable format (KB, MB).
-   * @required
    */
   @Input({ transform: numberAttribute }) size?: number;
   /**

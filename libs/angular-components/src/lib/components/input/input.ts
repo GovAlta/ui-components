@@ -214,9 +214,13 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
    * @default "left"
    */
   @Input() textAlign?: "left" | "right" = "left";
-  /** TO REVIEW: Content displayed before the input field, such as a unit label or icon. */
+  /**
+   * TO REVIEW: Content displayed before the input field, such as a unit label or icon.
+   */
   @Input() leadingContent!: string | TemplateRef<any>;
-  /** TO REVIEW: Content displayed after the input field, such as a unit label or icon. */
+  /**
+   * TO REVIEW: Content displayed after the input field, such as a unit label or icon.
+   */
   @Input() trailingContent!: string | TemplateRef<any>;
 
   @Output() onTrailingIconClick = new EventEmitter();

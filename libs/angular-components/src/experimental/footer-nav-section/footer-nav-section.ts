@@ -37,7 +37,10 @@ export class GoabxAppFooterNavSection implements OnInit {
    * @default ""
    */
   @Input() testId?: string;
-  /** "slot" is required and must equal to "nav" so it can be rendered in the correct position **/
+  /**
+   * "slot" is required and must equal to "nav" so it can be rendered in the correct position *
+   * @required
+   */
   @Input({ required: true }) slot!: "nav";
 
   isReady = false;

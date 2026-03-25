@@ -28,7 +28,7 @@ declare module "react" {
 export interface GoabxNotificationProps {
   /**
    * Define the context and colour of the notification.
-   * @default ""
+   * @default "information"
    */
   type?: GoabNotificationType;
   /**

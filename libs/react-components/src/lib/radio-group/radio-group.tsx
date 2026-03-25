@@ -20,7 +20,10 @@ interface WCProps extends Margins {
 }
 
 export interface GoabRadioGroupProps extends Margins, DataAttributes {
-  /** The name for the radio group. Used for accessibility and change events. */
+  /**
+   * The name for the radio group. Used for accessibility and change events.
+   * @required
+   */
   name: string;
   /** The currently selected value in the radio group. */
   value?: string;

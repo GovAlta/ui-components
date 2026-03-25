@@ -61,7 +61,6 @@ export class GoabRadioItem extends GoabBaseComponent {
   @Input() name?: string;
   /**
    * Additional description text displayed below the label.
-   * @default ""
    */
   @Input() description!: string | TemplateRef<any>;
   /** TO REVIEW: Additional content that is revealed when the item is checked or selected. */

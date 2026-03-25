@@ -24,7 +24,10 @@ export class GoabAppFooterMetaSection implements OnInit {
    * @default ""
    */
   @Input() testId?: string;
-  /** "slot" is required and must equal to "meta" so it can be rendered in the correct position **/
+  /**
+   * "slot" is required and must equal to "meta" so it can be rendered in the correct position *
+   * @required
+   */
   @Input({ required: true }) slot!: "meta";
 
   isReady = false;

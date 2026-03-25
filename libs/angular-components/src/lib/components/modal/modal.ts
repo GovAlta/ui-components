@@ -98,10 +98,11 @@ export class GoabModal implements OnInit {
   @Input() role?: string;
   /**
    * The heading text displayed at the top of the modal.
-   * @default ""
    */
   @Input() heading!: string | TemplateRef<any>;
-  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
+  /**
+   * TO REVIEW: Action buttons or elements displayed in the component's action area.
+   */
   @Input() actions!: TemplateRef<any>;
 
   @Output() onClose = new EventEmitter();

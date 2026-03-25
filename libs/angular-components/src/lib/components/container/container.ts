@@ -85,9 +85,13 @@ export class GoabContainer extends GoabBaseComponent implements OnInit {
    * @default ""
    */
   @Input() maxHeight?: string;
-  /** TO REVIEW: Custom title content rendered as a template. */
+  /**
+   * TO REVIEW: Custom title content rendered as a template.
+   */
   @Input() title!: TemplateRef<any>;
-  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
+  /**
+   * TO REVIEW: Action buttons or elements displayed in the component's action area.
+   */
   @Input() actions!: TemplateRef<any>;
 
   isReady = false;

@@ -17,7 +17,10 @@ interface WCProps extends Margins {
 }
 
 export interface GoabBadgeProps extends Margins, DataAttributes {
-  /** Defines the context and colour of the badge. */
+  /**
+   * Defines the context and colour of the badge.
+   * @required
+   */
   type: GoabBadgeType;
   /**
    * @deprecated Use icontype instead. Includes an icon in the badge.

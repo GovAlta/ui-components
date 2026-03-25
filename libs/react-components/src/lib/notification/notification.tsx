@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 export interface GoabNotificationProps {
   /**
    * Define the context and colour of the notification.
-   * @default ""
+   * @default "information"
    */
   type?: GoabNotificationType;
   /**

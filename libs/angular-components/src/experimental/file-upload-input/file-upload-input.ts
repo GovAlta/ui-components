@@ -37,7 +37,10 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabxFileUploadInput extends GoabBaseComponent implements OnInit {
   @Input() id?: string = "";
-  /** The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. */
+  /**
+   * The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button.
+   * @required
+   */
   @Input({ required: true }) variant!: GoabFileUploadInputVariant;
   /**
    * Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Defaults to 5MB. Files exceeding this will be rejected.

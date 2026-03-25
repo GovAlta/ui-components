@@ -19,7 +19,7 @@ export interface GoabCardImageProps extends DataAttributes {
   src: string;
   /**
    * Sets the height behavior. 'auto' fits content, 'max' fills available height.
-   * @default "auto"
+   * @required
    */
   height: string;
 }

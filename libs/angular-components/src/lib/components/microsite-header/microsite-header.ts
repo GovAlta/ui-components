@@ -38,11 +38,13 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabMicrositeHeader implements OnInit {
   isReady = false;
-  /** The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
+  /**
+   * The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges.
+   * @required
+   */
   @Input({ required: true }) type!: GoabServiceLevel;
   /**
    * App or service version displayed on the right side of the header.
-   * @default ""
    */
   @Input() version!: string | TemplateRef<any>;
   /**

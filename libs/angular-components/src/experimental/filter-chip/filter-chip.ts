@@ -44,7 +44,6 @@ export class GoabxFilterChip extends GoabBaseComponent implements OnInit {
   @Input({ transform: booleanAttribute }) deletable?: boolean;
   /**
    * Text label of the chip.
-   * @required
    */
   @Input() content?: string = "";
   @Input() iconTheme?: GoabChipTheme;

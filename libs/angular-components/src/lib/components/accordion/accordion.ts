@@ -48,7 +48,6 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabAccordion extends GoabBaseComponent implements OnInit {
   /**
    * Sets the heading text.
-   * @required
    * @default ""
    */
   @Input() heading?: string;
@@ -67,7 +66,9 @@ export class GoabAccordion extends GoabBaseComponent implements OnInit {
    * @default "small"
    */
   @Input() headingSize?: GoabAccordionHeadingSize;
-  /** TO REVIEW: Custom content rendered alongside the accordion heading, such as a badge or status indicator. */
+  /**
+   * TO REVIEW: Custom content rendered alongside the accordion heading, such as a badge or status indicator.
+   */
   @Input() headingContent!: TemplateRef<any>;
   /**
    * Sets the maximum width of the accordion.

@@ -48,7 +48,10 @@ export interface GoabPopoverProps extends Margins, DataAttributes {
    * @default "auto"
    */
   position?: GoabPopoverPosition;
-  /** TO REVIEW: The content rendered inside the popover body. */
+  /**
+   * TO REVIEW: The content rendered inside the popover body.
+   * @required
+   */
   children: ReactNode;
   /***
    * @deprecated This property has no effect and will be removed in a future version

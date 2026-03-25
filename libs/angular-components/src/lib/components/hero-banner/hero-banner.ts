@@ -60,7 +60,9 @@ export class GoabHeroBanner implements OnInit {
    * @default ""
    */
   @Input() textColor?: string;
-  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
+  /**
+   * TO REVIEW: Action buttons or elements displayed in the component's action area.
+   */
   @Input() actions!: TemplateRef<any>;
 
   constructor(private cdr: ChangeDetectorRef) {}

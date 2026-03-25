@@ -26,7 +26,6 @@ export interface GoabGridProps extends Margins {
   /**
    * Minimum width of the child elements
    * @required
-   * @default ""
    */
   minChildWidth: string;
   /**

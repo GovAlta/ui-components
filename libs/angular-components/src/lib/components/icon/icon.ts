@@ -43,7 +43,10 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabIcon extends GoabBaseComponent implements OnInit {
-  /** The icon type to display. See GoAIconType for available icons. */
+  /**
+   * The icon type to display. See GoAIconType for available icons.
+   * @required
+   */
   @Input({ required: true }) type!: GoabIconType | GoabIconOverridesType;
   /**
    * Sets the size of the icon. Accepts numeric (1-6) or named sizes.

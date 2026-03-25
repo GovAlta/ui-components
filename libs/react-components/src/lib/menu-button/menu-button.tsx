@@ -57,7 +57,7 @@ declare module "react" {
 export interface GoabMenuButtonProps extends DataAttributes {
   /**
    * Display text for the menu action.
-   * @default ""
+   * @required
    */
   text: string;
   /**

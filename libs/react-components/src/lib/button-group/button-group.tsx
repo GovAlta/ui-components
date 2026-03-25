@@ -25,7 +25,7 @@ declare module "react" {
 export interface GoabButtonGroupProps extends Margins, DataAttributes {
   /**
    * Positions the button group in the page layout.
-   * @default "start"
+   * @required
    */
   alignment: GoabButtonGroupAlignment;
   /**

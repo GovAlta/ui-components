@@ -23,9 +23,15 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabWorkSideMenuProps {
-  /** The application name displayed in the header. */
+  /**
+   * The application name displayed in the header.
+   * @required
+   */
   heading: string;
-  /** URL for the header link. Clicking the logo/heading navigates to this URL. */
+  /**
+   * URL for the header link. Clicking the logo/heading navigates to this URL.
+   * @required
+   */
   url: string;
   /**
    * User's name displayed in the profile section.
