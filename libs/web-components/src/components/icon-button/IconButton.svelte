@@ -1,10 +1,12 @@
-<svelte:options customElement={{
-  tag: "goa-icon-button",
-  props: {
-    actionArg: { type: "String", attribute: "action-arg"},
-    actionArgs: { type: "Object", attribute: "action-args"},
-  }
-}} />
+<svelte:options
+  customElement={{
+    tag: "goa-icon-button",
+    props: {
+      actionArg: { type: "String", attribute: "action-arg" },
+      actionArgs: { type: "Object", attribute: "action-args" },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { typeValidator, toBoolean, dispatch } from "../../common/utils";
@@ -70,7 +72,9 @@
     );
 
     if (action) {
-      dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
+      dispatch(e.target as Element, action, actionArg || actionArgs, {
+        bubbles: true,
+      });
     }
   }
 
@@ -89,10 +93,30 @@
       );
     }
   });
+
+  // To reduce the number of CSS classes, convert the numeric sizes to their corresponding named sizes.
+  function normalizeIconSize(size: IconSize): string {
+    switch (size) {
+      case "1":
+        return "2xsmall";
+      case "2":
+        return "xsmall";
+      case "3":
+        return "small";
+      case "4":
+        return "medium";
+      case "5":
+        return "large";
+      case "6":
+        return "xlarge";
+      default:
+        return size;
+    }
+  }
 </script>
 
 <button
-  class={`goa-icon-button goa-icon-button--${size} ${css}`}
+  class={`goa-icon-button goa-icon-button--${normalizeIconSize(size)} ${css}`}
   style={calculateMargin(mt, mr, mb, ml)}
   {title}
   disabled={isDisabled}
@@ -116,15 +140,21 @@
     outline: none !important;
   }
 
+  .goa-icon-button--2xsmall,
+  .goa-icon-button--xsmall,
   .goa-icon-button--small {
-    padding: var(--goa-icon-button-small-padding, var(--goa-icon-button-medium-padding));
+    padding: var(
+      --goa-icon-button-small-padding,
+      var(--goa-icon-button-medium-padding)
+    );
   }
 
   .goa-icon-button--medium {
     padding: var(--goa-icon-button-medium-padding);
   }
 
-  .goa-icon-button--large {
+  .goa-icon-button--large,
+  .goa-icon-button--xlarge {
     padding: var(--goa-icon-button-large-padding);
   }
 
@@ -136,10 +166,14 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    border-radius: var(--goa-icon-button-border-radius, var(--goa-icon-button-medium-border-radius));
-    transition: background-color 0.2s ease-in-out,
-    color 0.2s ease-in-out,
-    transform 0.1s ease-in-out;
+    border-radius: var(
+      --goa-icon-button-border-radius,
+      var(--goa-icon-button-medium-border-radius)
+    );
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out,
+      transform 0.1s ease-in-out;
   }
 
   button:active {
@@ -151,7 +185,11 @@
   }
 
   button:focus-visible {
-    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px) var(--goa-icon-button-focus-border-color, var(--goa-color-interactive-focus));
+    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 3px)
+      var(
+        --goa-icon-button-focus-border-color,
+        var(--goa-color-interactive-focus)
+      );
     outline: none;
   }
 
@@ -195,8 +233,14 @@
   }
 
   .dark:disabled {
-    color: var(--goa-icon-button-dark-disabled-color, var(--goa-icon-button-dark-disabled-color-bg));
-    fill: var(--goa-icon-button-dark-disabled-color, var(--goa-icon-button-dark-disabled-color-bg));
+    color: var(
+      --goa-icon-button-dark-disabled-color,
+      var(--goa-icon-button-dark-disabled-color-bg)
+    );
+    fill: var(
+      --goa-icon-button-dark-disabled-color,
+      var(--goa-icon-button-dark-disabled-color-bg)
+    );
   }
 
   /*  Type: nocolor (same as dark, not documented) */
@@ -254,5 +298,4 @@
   .inverted:active {
     background-color: var(--goa-icon-button-light-hover-color-bg);
   }
-
 </style>
