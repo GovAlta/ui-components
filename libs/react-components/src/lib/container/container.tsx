@@ -39,14 +39,18 @@ export interface GoabContainerProps extends Margins, DataAttributes {
    * @default "interactive"
    */
   type?: GoabContainerType;
+  /** TO DO: Write a description */
   heading?: ReactNode;
+  /** TO DO: Write a description */
   title?: ReactNode;
   /**
    * Sets the amount of white space in the container.
    * @default "relaxed"
    */
   padding?: GoabContainerPadding;
+  /** TO DO: Write a description */
   actions?: ReactNode;
+  /** TO DO: Write a description */
   children?: ReactNode;
   /**
    * Sets the width of the container.

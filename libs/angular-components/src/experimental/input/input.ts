@@ -210,7 +210,9 @@ export class GoabxInput extends GoabControlValueAccessor implements OnInit {
    * @default "left"
    */
   @Input() textAlign?: "left" | "right" = "left";
+  /** TO DO: Write a description */
   @Input() leadingContent!: string | TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() trailingContent!: string | TemplateRef<any>;
   /**
    * Sets the size of the input. 'compact' reduces height for dense layouts.

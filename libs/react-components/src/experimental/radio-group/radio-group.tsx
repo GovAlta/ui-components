@@ -69,6 +69,7 @@ export interface GoabxRadioGroupProps extends Margins, DataAttributes {
    * @default ""
    */
   ariaLabel?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   version?: string;
   onChange?: (detail: GoabRadioGroupOnChangeDetail) => void;

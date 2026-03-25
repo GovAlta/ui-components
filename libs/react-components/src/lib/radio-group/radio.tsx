@@ -8,7 +8,9 @@ export interface GoabRadioItemProps extends Margins {
   label?: string;
   /** The name for the radio group. Used for accessibility and change events. */
   name?: string;
+  /** TO DO: Write a description */
   description?: string | React.ReactNode;
+  /** TO DO: Write a description */
   reveal?: React.ReactNode;
   revealAriaLabel?: string;
   maxWidth?: string;
@@ -23,6 +25,7 @@ export interface GoabRadioItemProps extends Margins {
    * @default false
    */
   error?: boolean;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   /**
    * Defines how the radio group will be announced by screen readers.

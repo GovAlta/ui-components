@@ -27,6 +27,7 @@ export interface GoabxAppHeaderMenuProps extends DataAttributes {
    */
   testId?: string;
   slotName?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

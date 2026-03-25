@@ -22,6 +22,7 @@ export interface GoabWorkSideMenuGroupProps {
   icon?: GoabIconType;
   open?: boolean;
   testId?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
 }
 

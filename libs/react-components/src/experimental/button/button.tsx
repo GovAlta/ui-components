@@ -88,6 +88,7 @@ export interface GoabxButtonProps extends Margins, DataAttributes {
    */
   actionArg?: string;
   version?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

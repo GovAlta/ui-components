@@ -85,7 +85,9 @@ export class GoabContainer extends GoabBaseComponent implements OnInit {
    * @default ""
    */
   @Input() maxHeight?: string;
+  /** TO DO: Write a description */
   @Input() title!: TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() actions!: TemplateRef<any>;
 
   isReady = false;

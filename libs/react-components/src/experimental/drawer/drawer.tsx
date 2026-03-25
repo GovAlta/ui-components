@@ -40,7 +40,9 @@ export interface GoabxDrawerProps {
    * @default "drawer"
    */
   testId?: string;
+  /** TO DO: Write a description */
   actions?: ReactNode;
+  /** TO DO: Write a description */
   children: ReactNode;
   onClose: () => void;
   version?: string;

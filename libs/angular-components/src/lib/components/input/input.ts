@@ -214,7 +214,9 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
    * @default "left"
    */
   @Input() textAlign?: "left" | "right" = "left";
+  /** TO DO: Write a description */
   @Input() leadingContent!: string | TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() trailingContent!: string | TemplateRef<any>;
 
   @Output() onTrailingIconClick = new EventEmitter();

@@ -12,6 +12,7 @@ export interface GoabSideMenuGroupProps extends Margins {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

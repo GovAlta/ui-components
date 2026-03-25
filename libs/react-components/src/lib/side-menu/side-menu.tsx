@@ -7,6 +7,7 @@ export interface GoabSideMenuProps {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children: ReactNode;
 }
 

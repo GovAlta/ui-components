@@ -34,6 +34,7 @@ export interface GoabGridProps extends Margins {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
 }
 

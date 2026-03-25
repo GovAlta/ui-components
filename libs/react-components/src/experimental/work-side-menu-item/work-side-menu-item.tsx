@@ -29,7 +29,9 @@ export interface GoabWorkSideMenuItemProps {
   icon?: string;
   testId?: string;
   type?: GoabWorkSideMenuItemType;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
+  /** TO DO: Write a description */
   popoverContent?: React.ReactNode;
 }
 

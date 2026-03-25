@@ -73,6 +73,7 @@ export interface GoabButtonProps extends Margins, DataAttributes {
    * @default ""
    */
   actionArg?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

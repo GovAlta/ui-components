@@ -5,7 +5,9 @@ export interface GoabPushDrawerProps {
   open?: boolean;
   heading?: string;
   width?: string;
+  /** TO DO: Write a description */
   actions?: ReactNode | undefined;
+  /** TO DO: Write a description */
   children: ReactNode;
   onClose: () => void;
 }

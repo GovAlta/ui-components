@@ -35,6 +35,7 @@ export interface GoabCardProps extends Margins, DataAttributes {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
 }
 

@@ -32,6 +32,7 @@ export interface GoabxTabsProps {
    * @default -1
    */
   initialTab?: number;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.

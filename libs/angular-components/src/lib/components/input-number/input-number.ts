@@ -139,7 +139,9 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Input() textAlign?: "left" | "right" = "right"; // Default to right for numbers
 
   @Input() value: number | null = null;
+  /** TO DO: Write a description */
   @Input() leadingContent!: string | TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() trailingContent!: string | TemplateRef<any>;
 
   @Output() onTrailingIconClick = new EventEmitter<void>(); // Keep void type

@@ -34,6 +34,7 @@ export interface GoabxFooterNavSectionProps extends DataAttributes {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

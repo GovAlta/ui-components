@@ -55,6 +55,7 @@ export class GoabDrawer implements OnInit {
    * @default "drawer"
    */
   @Input() testId?: string;
+  /** TO DO: Write a description */
   @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 

@@ -101,6 +101,7 @@ export class GoabModal implements OnInit {
    * @default ""
    */
   @Input() heading!: string | TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() actions!: TemplateRef<any>;
 
   @Output() onClose = new EventEmitter();

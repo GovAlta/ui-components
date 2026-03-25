@@ -66,6 +66,7 @@ export class GoabxRadioItem extends GoabBaseComponent {
    * @default ""
    */
   @Input() description!: string | TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() reveal?: TemplateRef<any>;
   /**
    * Defines how this option will be announced by screen readers.

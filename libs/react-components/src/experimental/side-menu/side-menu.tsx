@@ -21,6 +21,7 @@ export interface GoabxSideMenuProps {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children: ReactNode;
   version?: string;
 }

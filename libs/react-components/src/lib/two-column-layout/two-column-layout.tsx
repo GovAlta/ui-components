@@ -17,9 +17,13 @@ declare module "react" {
 export interface GoabTwoColumnLayoutProps {
   navColumnWidth?: string;
   maxContentWidth?: string;
+  /** TO DO: Write a description */
   header: ReactNode;
+  /** TO DO: Write a description */
   footer: ReactNode;
+  /** TO DO: Write a description */
   nav: ReactNode;
+  /** TO DO: Write a description */
   children: ReactNode;
 }
 

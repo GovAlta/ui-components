@@ -22,6 +22,7 @@ export interface GoabxAppFooterMetaSectionProps extends DataAttributes {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

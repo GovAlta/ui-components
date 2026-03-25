@@ -10,6 +10,7 @@ declare module "react" {
 }
 
 export interface GoabPageProps {
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

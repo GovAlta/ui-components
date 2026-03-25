@@ -17,6 +17,7 @@ export interface GoabNotificationProps {
    * @default "100%"
    */
   maxContentWidth?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   onDismiss?: () => void;
   /**

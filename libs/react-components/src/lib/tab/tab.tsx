@@ -21,6 +21,7 @@ export interface GoabTabItemProps {
    */
   heading?: React.ReactNode;
   disabled?: boolean;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   slug?: string;
 }

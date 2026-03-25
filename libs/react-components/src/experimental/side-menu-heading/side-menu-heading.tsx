@@ -18,6 +18,7 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabxSideMenuHeadingProps {
+  /** TO DO: Write a description */
   meta?: ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.
@@ -26,6 +27,7 @@ export interface GoabxSideMenuHeadingProps {
   testId?: string;
   /** Icon displayed before the heading text. */
   icon?: GoabIconType;
+  /** TO DO: Write a description */
   children?: ReactNode;
   version?: string;
 }

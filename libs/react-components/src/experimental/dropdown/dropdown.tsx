@@ -56,6 +56,10 @@ export interface GoabxDropdownProps extends Margins, DataAttributes {
   onChange?: (detail: GoabDropdownOnChangeDetail) => void;
 
   // optional
+  /**
+   * Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name.
+   * @default ""
+   */
   ariaLabel?: string;
   /**
    * The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label.
@@ -63,6 +67,7 @@ export interface GoabxDropdownProps extends Margins, DataAttributes {
    */
   ariaLabelledBy?: string;
   id?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   /**
    * Disable this control.

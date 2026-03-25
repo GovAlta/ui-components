@@ -51,6 +51,7 @@ export interface GoabxAppHeaderProps extends DataAttributes {
    * @default TABLET_BP
    */
   fullMenuBreakpoint?: number;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   onMenuClick?: () => void;
   /**

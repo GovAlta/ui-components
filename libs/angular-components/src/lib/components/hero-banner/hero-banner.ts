@@ -60,6 +60,7 @@ export class GoabHeroBanner implements OnInit {
    * @default ""
    */
   @Input() textColor?: string;
+  /** TO DO: Write a description */
   @Input() actions!: TemplateRef<any>;
 
   constructor(private cdr: ChangeDetectorRef) {}

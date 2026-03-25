@@ -20,10 +20,13 @@ declare module "react" {
 
 export interface GoabxPushDrawerProps {
   open?: boolean;
+  /** TO DO: Write a description */
   heading?: string | ReactNode;
   width?: string;
   testId?: string;
+  /** TO DO: Write a description */
   actions?: ReactNode;
+  /** TO DO: Write a description */
   children: ReactNode;
   onClose: () => void;
   version?: string;

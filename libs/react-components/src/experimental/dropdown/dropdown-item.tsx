@@ -26,7 +26,15 @@ export interface GoabxDropdownItemProps {
    * @default ""
    */
   value: string;
+  /**
+   * Display label for the dropdown item.
+   * @default ""
+   */
   label?: string;
+  /**
+   * Text used to filter and match this item in typeahead search.
+   * @default ""
+   */
   filter?: string;
   /**
    * Sets a data-testid attribute for automated testing.

@@ -42,9 +42,11 @@ import {
 })
 export class GoabPushDrawer implements OnInit {
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** TO DO: Write a description */
   @Input() heading?: string | TemplateRef<any>;
   @Input() testId?: string;
   @Input() width?: string;
+  /** TO DO: Write a description */
   @Input() actions?: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 

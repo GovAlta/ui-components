@@ -25,6 +25,7 @@ const DRY_RUN        = process.argv.includes('--dry-run');
 
 const SVELTE_DIR      = path.join(ROOT, 'libs/web-components/src/components');
 const REACT_DIR       = path.join(ROOT, 'libs/react-components/src/lib');
+const REACT_EXP_DIR   = path.join(ROOT, 'libs/react-components/src/experimental');
 const ANGULAR_LIB_DIR = path.join(ROOT, 'libs/angular-components/src/lib/components');
 const ANGULAR_EXP_DIR = path.join(ROOT, 'libs/angular-components/src/experimental');
 
@@ -199,11 +200,35 @@ function buildJsDoc(info, indent, withRequired) {
   ].join('\n');
 }
 
+// ─── Slot Prop Detection ──────────────────────────────────────────────────────
+
+/**
+ * Returns true when a wrapper prop line represents a slot/content prop that
+ * has no Svelte equivalent (e.g. TemplateRef<any> in Angular or ReactNode in
+ * React).  These should receive a placeholder JSDoc comment.
+ *
+ * @param {string}            line  The raw source line
+ * @param {'angular'|'react'} kind
+ * @returns {boolean}
+ */
+function isSlotPropLine(line, kind) {
+  if (kind === 'angular') {
+    // Match Angular prop type annotations that include TemplateRef
+    // e.g. "!: TemplateRef<any>" or "?: string | TemplateRef<any>"
+    return /[?!]?\s*:\s*(?:\w+\s*\|\s*)?TemplateRef/.test(line);
+  }
+  // React: match prop type annotations that include ReactNode
+  // e.g. "?: ReactNode" or "?: string | React.ReactNode" or ": ReactNode"
+  return /\??\s*:\s*(?:\w+\s*\|\s*)?(?:React\.)?ReactNode/.test(line);
+}
+
 // ─── Wrapper File Processing ──────────────────────────────────────────────────
 
 /**
  * Process a single wrapper file: locate props that lack a JSDoc comment and
  * inject the corresponding description extracted from the Svelte source.
+ * For slot props (TemplateRef<any> / ReactNode) with no Svelte equivalent a
+ * placeholder "TO DO: Write a description" comment is inserted instead.
  *
  * @param {string}                filePath
  * @param {Map<string, PropInfo>} svelteProps
@@ -266,6 +291,11 @@ function processWrapperFile(filePath, svelteProps, kind) {
           const withRequired = kind === 'react' || !line.includes('required: true');
           output.push(buildJsDoc(info, indent, withRequired));
           modified = true;
+        } else if (isSlotPropLine(line, kind)) {
+          // Slot prop with no Svelte equivalent — insert placeholder JSDoc.
+          const indent = line.match(/^(\s*)/)[1];
+          output.push(`${indent}/** TO DO: Write a description */`);
+          modified = true;
         }
       }
     }
@@ -304,15 +334,23 @@ function processWrapperFile(filePath, svelteProps, kind) {
  * @returns {string|null} Absolute path to the Svelte file, or null
  */
 function findSvelteFile(wrapperPath) {
-  // Determine which base directory the wrapper lives under
-  const baseDir =
-    wrapperPath.includes(`${path.sep}experimental${path.sep}`) ||
-    wrapperPath.includes('/experimental/')
-      ? ANGULAR_EXP_DIR
-      : wrapperPath.includes(`${path.sep}react-components${path.sep}`) ||
-        wrapperPath.includes('/react-components/')
-        ? REACT_DIR
-        : ANGULAR_LIB_DIR;
+  // Determine which base directory the wrapper lives under.
+  // React must be checked before the generic `experimental` check because a
+  // React experimental file contains both "react-components" and "experimental"
+  // in its path.
+  let baseDir;
+  if (wrapperPath.includes(`${path.sep}react-components${path.sep}`) ||
+      wrapperPath.includes('/react-components/')) {
+    baseDir = (wrapperPath.includes(`${path.sep}experimental${path.sep}`) ||
+               wrapperPath.includes('/experimental/'))
+      ? REACT_EXP_DIR
+      : REACT_DIR;
+  } else if (wrapperPath.includes(`${path.sep}experimental${path.sep}`) ||
+             wrapperPath.includes('/experimental/')) {
+    baseDir = ANGULAR_EXP_DIR;
+  } else {
+    baseDir = ANGULAR_LIB_DIR;
+  }
 
   const rel   = path.relative(baseDir, wrapperPath);
   const parts = rel.split(path.sep);
@@ -355,16 +393,16 @@ function run() {
     ...findFiles(ANGULAR_EXP_DIR, isWrapperTs),
   ].filter(f => !f.endsWith('base.component.ts'));
 
-  const reactFiles = findFiles(REACT_DIR, isWrapperTsx);
+  const reactFiles = [
+    ...findFiles(REACT_DIR, isWrapperTsx),
+    ...findFiles(REACT_EXP_DIR, isWrapperTsx),
+  ];
 
   let updatedCount = 0;
 
   for (const wrapperFile of [...angularFiles, ...reactFiles]) {
-    const svelteFile = findSvelteFile(wrapperFile);
-    if (!svelteFile) continue;
-
-    const svelteProps = parseSvelteProps(svelteFile);
-    if (svelteProps.size === 0) continue;
+    const svelteFile  = findSvelteFile(wrapperFile);
+    const svelteProps = svelteFile ? parseSvelteProps(svelteFile) : new Map();
 
     const kind    = wrapperFile.endsWith('.tsx') ? 'react' : 'angular';
     const changed = processWrapperFile(wrapperFile, svelteProps, kind);

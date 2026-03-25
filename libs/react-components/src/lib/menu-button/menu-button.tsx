@@ -75,6 +75,7 @@ export interface GoabMenuButtonProps extends DataAttributes {
    */
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

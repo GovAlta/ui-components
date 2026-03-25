@@ -65,8 +65,11 @@ export class GoabxWorkSideMenu implements OnInit {
    * @default ""
    */
   @Input() testId?: string;
+  /** TO DO: Write a description */
   @Input() primaryContent!: TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() secondaryContent!: TemplateRef<any>;
+  /** TO DO: Write a description */
   @Input() accountContent!: TemplateRef<any>;
   @Output() onToggle = new EventEmitter();
   @Output() onNavigate = new EventEmitter<string>();

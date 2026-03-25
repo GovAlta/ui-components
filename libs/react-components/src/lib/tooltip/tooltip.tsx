@@ -51,6 +51,7 @@ export interface GoabTooltipProps extends Margins, DataAttributes {
    * @default ""
    */
   maxWidth?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

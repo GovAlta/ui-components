@@ -63,6 +63,7 @@ export interface GoabBlockProps extends Margins, DataAttributes {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

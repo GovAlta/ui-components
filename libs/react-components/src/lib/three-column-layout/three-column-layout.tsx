@@ -19,11 +19,17 @@ export interface GoabThreeColumnLayoutProps {
   leftColumnWidth?: string;
   rightColumnWidth?: string;
   maxContentWidth?: string;
+  /** TO DO: Write a description */
   header?: ReactNode;
+  /** TO DO: Write a description */
   footer?: ReactNode;
+  /** TO DO: Write a description */
   nav?: ReactNode;
+  /** TO DO: Write a description */
   sidebar?: ReactNode; // DEPRECATED
+  /** TO DO: Write a description */
   sideMenu?: ReactNode;
+  /** TO DO: Write a description */
   children: ReactNode;
 }
 

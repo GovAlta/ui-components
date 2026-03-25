@@ -25,6 +25,7 @@ export interface GoabxAppFooterProps extends DataAttributes {
    * @default ""
    */
   maxContentWidth?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.

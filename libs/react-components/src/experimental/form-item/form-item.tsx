@@ -77,6 +77,7 @@ export interface GoabxFormItemProps extends Margins, DataAttributes {
    * Public form: allow to override the label value within the form-summary to provide a shorter description of the value
    */
   name?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.

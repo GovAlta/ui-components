@@ -22,6 +22,7 @@ export interface GoabxTableSortProps extends DataAttributes {
   name?: string;
   direction?: GoabTableSortDirection;
   sortOrder?: GoabTableSortOrder;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
 }
 

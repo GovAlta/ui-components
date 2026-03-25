@@ -26,6 +26,7 @@ export interface GoabPageBlockProps {
    * @default ""
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

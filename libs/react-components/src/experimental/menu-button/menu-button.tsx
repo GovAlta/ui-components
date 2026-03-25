@@ -20,11 +20,29 @@ export interface GoabxMenuButtonProps extends DataAttributes {
    * @default ""
    */
   text?: string;
+  /**
+   * The button style variant.
+   * @default "primary"
+   */
   type?: GoabButtonType;
+  /**
+   * Sets the size of the button.
+   * @default "normal"
+   */
   size?: GoabButtonSize;
+  /**
+   * Sets the color variant for semantic meaning.
+   * @default "normal"
+   */
   variant?: GoabButtonVariant;
+  /** Maximum width of the dropdown menu. */
   maxWidth?: string;
+  /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   leadingIcon?: GoabIconType;
+  /**
+   * Sets the aria-label for the icon button in icon-only mode.
+   * @default "Open menu"
+   */
   ariaLabel?: string;
   /**
    * Sets a data-testid attribute for automated testing.
@@ -32,6 +50,7 @@ export interface GoabxMenuButtonProps extends DataAttributes {
    */
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

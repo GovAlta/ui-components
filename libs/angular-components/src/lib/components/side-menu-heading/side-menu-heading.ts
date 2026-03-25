@@ -34,6 +34,7 @@ export class GoabSideMenuHeading implements OnInit {
    * @default "section-heading"
    */
   @Input() testId?: string;
+  /** TO DO: Write a description */
   @Input() meta!: TemplateRef<any>;
 
   constructor(private cdr: ChangeDetectorRef) {}

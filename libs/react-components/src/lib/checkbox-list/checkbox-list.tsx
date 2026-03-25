@@ -54,6 +54,7 @@ Approach
    * @default "none"
    */
   maxWidth?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
 }

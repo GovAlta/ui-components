@@ -51,6 +51,7 @@ export interface GoabxNotificationProps {
    * @default false
    */
   compact?: boolean;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   onDismiss?: () => void;
   /**

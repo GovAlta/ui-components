@@ -42,6 +42,10 @@ export interface GoabxTableProps extends Margins {
    */
   sortMode?: GoabTableSortMode;
   // stickyHeader?: boolean; TODO: enable this later
+  /**
+   * A relaxed variant of the table with more vertical padding for the cells.
+   * @default "normal"
+   */
   variant?: GoabTableVariant;
   /**
    * When true, alternates row background colors for improved readability.
@@ -54,6 +58,7 @@ export interface GoabxTableProps extends Margins {
    */
   testId?: string;
   version?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

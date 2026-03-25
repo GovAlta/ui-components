@@ -58,6 +58,7 @@ export interface GoabxCheckboxListProps extends Margins {
    * @default "default"
    */
   size?: "default" | "compact";
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
 }

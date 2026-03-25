@@ -30,6 +30,7 @@ export interface GoabHeroBannerProps {
    * @default "background"
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   /**
    * Maximum width of the content area

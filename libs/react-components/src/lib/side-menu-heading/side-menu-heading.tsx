@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 /* eslint-disable-next-line */
 export interface GoabSideMenuHeadingProps {
+  /** TO DO: Write a description */
   meta?: ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.
@@ -11,6 +12,7 @@ export interface GoabSideMenuHeadingProps {
   testId?: string;
   /** Icon displayed before the heading text. */
   icon?: GoabIconType;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

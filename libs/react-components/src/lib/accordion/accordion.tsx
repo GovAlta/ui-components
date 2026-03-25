@@ -52,6 +52,7 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
    * @default ""
    */
   heading: string;
+  /** TO DO: Write a description */
   headingContent?: ReactNode;
   /**
    * Sets the maximum width of the accordion.
@@ -69,6 +70,7 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
    */
   iconPosition?: GoabAccordionIconPosition;
   onChange?: (open: boolean) => void;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

@@ -22,6 +22,7 @@ export interface GoabAppHeaderMenuProps extends DataAttributes {
    * @default "rootEl"
    */
   testId?: string;
+  /** TO DO: Write a description */
   children?: ReactNode;
 }
 

@@ -72,6 +72,7 @@ export interface GoabxCheckboxProps extends Margins, DataAttributes {
    * @default ""
    */
   value?: string | number | boolean;
+  /** TO DO: Write a description */
   children?: React.ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.
@@ -88,6 +89,7 @@ export interface GoabxCheckboxProps extends Margins, DataAttributes {
    * @default ""
    */
   description?: string | React.ReactNode;
+  /** TO DO: Write a description */
   reveal?: React.ReactNode;
   /**
    * Text announced by screen readers when the reveal slot content is displayed.
