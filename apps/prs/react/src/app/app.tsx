@@ -230,6 +230,10 @@ export function App() {
                   label="3505 Link Icon Click"
                   url="/bugs/3505"
                 />
+                <GoabxWorkSideMenuItem
+                  label="3541 Checkbox cut off on the left side in modal"
+                  url="/bugs/3541"
+                />
               </GoabxWorkSideMenuGroup>
 
               <GoabxWorkSideMenuGroup icon="star" heading="Features">
