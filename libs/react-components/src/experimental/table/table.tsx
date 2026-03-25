@@ -58,7 +58,7 @@ export interface GoabxTableProps extends Margins {
    */
   testId?: string;
   version?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Row elements rendered inside the table body. */
   children?: ReactNode;
 }
 

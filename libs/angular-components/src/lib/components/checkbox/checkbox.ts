@@ -110,7 +110,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
    * @default ""
    */
   @Input() description!: string | TemplateRef<any>;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Additional content that is revealed when the item is checked or selected. */
   @Input() reveal?: TemplateRef<any>;
   @Input() revealArialLabel?: string;
   /**

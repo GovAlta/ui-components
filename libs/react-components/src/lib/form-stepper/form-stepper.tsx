@@ -27,7 +27,7 @@ export interface GoabFormStepperProps extends Margins {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Step elements rendered inside the form stepper. */
   children?: ReactNode;
   onChange?: (detail: GoabFormStepperOnChangeDetail) => void;
 }

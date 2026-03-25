@@ -39,18 +39,18 @@ export interface GoabContainerProps extends Margins, DataAttributes {
    * @default "interactive"
    */
   type?: GoabContainerType;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom heading content rendered as a template. Use this when the heading requires rich content beyond plain text. */
   heading?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom title content rendered as a template. */
   title?: ReactNode;
   /**
    * Sets the amount of white space in the container.
    * @default "relaxed"
    */
   padding?: GoabContainerPadding;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   actions?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the container body. */
   children?: ReactNode;
   /**
    * Sets the width of the container.

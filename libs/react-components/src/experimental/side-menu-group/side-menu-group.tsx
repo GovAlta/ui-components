@@ -28,7 +28,7 @@ export interface GoabxSideMenuGroupProps extends Margins {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Side menu items rendered inside this group. */
   children?: ReactNode;
   version?: string;
 }

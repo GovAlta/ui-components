@@ -51,7 +51,7 @@ export interface GoabTooltipProps extends Margins, DataAttributes {
    * @default ""
    */
   maxWidth?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The element that triggers the tooltip when hovered or focused. */
   children?: ReactNode;
 }
 

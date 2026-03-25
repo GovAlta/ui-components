@@ -21,7 +21,7 @@ export interface GoabWorkSideNotificationPanelProps {
   heading?: string;
   activeTab?: GoabWorkSideNotificationActiveTabType;
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Notification items rendered inside the notification panel. */
   children?: ReactNode;
   onMarkAllRead?: () => void;
   onViewAll?: () => void;

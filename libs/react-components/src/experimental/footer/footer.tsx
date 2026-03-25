@@ -25,7 +25,7 @@ export interface GoabxAppFooterProps extends DataAttributes {
    * @default ""
    */
   maxContentWidth?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Navigation sections or meta-information rendered inside the footer. */
   children?: ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.

@@ -26,7 +26,7 @@ export interface GoabPageBlockProps {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the page block container. */
   children?: ReactNode;
 }
 

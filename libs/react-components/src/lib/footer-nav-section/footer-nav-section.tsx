@@ -25,7 +25,7 @@ export interface GoabFooterNavSectionProps extends DataAttributes {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Navigation links rendered inside this footer navigation section. */
   children?: ReactNode;
 }
 

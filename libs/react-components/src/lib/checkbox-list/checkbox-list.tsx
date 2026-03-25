@@ -54,7 +54,7 @@ Approach
    * @default "none"
    */
   maxWidth?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Checkbox items rendered inside the list. */
   children?: React.ReactNode;
   onChange?: (detail: GoabCheckboxListOnChangeDetail) => void;
 }

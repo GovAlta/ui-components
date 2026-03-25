@@ -54,7 +54,7 @@ export interface GoabCheckboxProps extends Margins, DataAttributes {
    * @default ""
    */
   value?: string | number | boolean;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Additional content rendered below the checkbox. */
   children?: React.ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.
@@ -71,7 +71,7 @@ export interface GoabCheckboxProps extends Margins, DataAttributes {
    * @default ""
    */
   description?: string | React.ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Additional content that is revealed when the item is checked or selected. */
   reveal?: React.ReactNode;
   /**
    * Text announced by screen readers when the reveal slot content is displayed.

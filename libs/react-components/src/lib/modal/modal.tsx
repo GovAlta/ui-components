@@ -23,7 +23,7 @@ export interface GoabModalProps {
    * @default "none"
    */
   transition?: GoabModalTransition;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the modal body. */
   children?: ReactNode;
   /**
    * Controls if modal is visible or not.

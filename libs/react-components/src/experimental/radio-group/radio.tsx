@@ -33,9 +33,9 @@ export interface GoabxRadioItemProps extends Margins {
   label?: string;
   /** The name for the radio group. Used for accessibility and change events. */
   name?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Descriptive content shown below the label. Accepts a string or a custom template for rich content. */
   description?: string | React.ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Additional content that is revealed when the item is checked or selected. */
   reveal?: React.ReactNode;
   revealAriaLabel?: string;
   maxWidth?: string;
@@ -51,7 +51,7 @@ export interface GoabxRadioItemProps extends Margins {
    */
   error?: boolean;
   compact?: boolean;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Radio item elements rendered inside the radio group. */
   children?: React.ReactNode;
   /**
    * Defines how the radio group will be announced by screen readers.

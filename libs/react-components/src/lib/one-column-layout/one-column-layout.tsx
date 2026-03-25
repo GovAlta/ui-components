@@ -10,7 +10,7 @@ declare module "react" {
 }
 
 export interface GoabPageProps {
-  /** TO DO: Write a description */
+  /** TO REVIEW: The page content rendered inside the single-column layout. */
   children?: ReactNode;
 }
 

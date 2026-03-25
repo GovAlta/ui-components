@@ -67,7 +67,7 @@ export class GoabAccordion extends GoabBaseComponent implements OnInit {
    * @default "small"
    */
   @Input() headingSize?: GoabAccordionHeadingSize;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom content rendered alongside the accordion heading, such as a badge or status indicator. */
   @Input() headingContent!: TemplateRef<any>;
   /**
    * Sets the maximum width of the accordion.

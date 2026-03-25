@@ -7,7 +7,7 @@ export interface GoabTabsProps {
    * @default -1
    */
   initialTab?: number;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Tab elements rendered inside the tabs container. */
   children?: React.ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.

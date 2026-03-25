@@ -32,7 +32,7 @@ export interface GoabAppHeaderProps extends DataAttributes {
    * @default TABLET_BP
    */
   fullMenuBreakpoint?: number;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Navigation items, menus, or other elements rendered inside the app header. */
   children?: React.ReactNode;
   onMenuClick?: () => void;
   /**

@@ -65,11 +65,11 @@ export class GoabxWorkSideMenu implements OnInit {
    * @default ""
    */
   @Input() testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the primary navigation slot of the side menu. */
   @Input() primaryContent!: TemplateRef<any>;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the secondary section slot of the side menu. */
   @Input() secondaryContent!: TemplateRef<any>;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the account section slot of the side menu. */
   @Input() accountContent!: TemplateRef<any>;
   @Output() onToggle = new EventEmitter();
   @Output() onNavigate = new EventEmitter<string>();

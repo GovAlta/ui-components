@@ -139,9 +139,9 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Input() textAlign?: "left" | "right" = "right"; // Default to right for numbers
 
   @Input() value: number | null = null;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content displayed before the input field, such as a unit label or icon. */
   @Input() leadingContent!: string | TemplateRef<any>;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content displayed after the input field, such as a unit label or icon. */
   @Input() trailingContent!: string | TemplateRef<any>;
 
   @Output() onTrailingIconClick = new EventEmitter<void>(); // Keep void type

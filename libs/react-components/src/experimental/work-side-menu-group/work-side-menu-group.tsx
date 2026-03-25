@@ -22,7 +22,7 @@ export interface GoabWorkSideMenuGroupProps {
   icon?: GoabIconType;
   open?: boolean;
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Work side menu items rendered inside this group. */
   children?: React.ReactNode;
 }
 

@@ -42,11 +42,11 @@ import {
 })
 export class GoabPushDrawer implements OnInit {
   @Input({ transform: booleanAttribute }) open?: boolean;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom heading content rendered as a template. Use this when the heading requires rich content beyond plain text. */
   @Input() heading?: string | TemplateRef<any>;
   @Input() testId?: string;
   @Input() width?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   @Input() actions?: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 

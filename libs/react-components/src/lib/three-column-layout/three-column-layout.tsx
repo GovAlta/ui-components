@@ -19,17 +19,17 @@ export interface GoabThreeColumnLayoutProps {
   leftColumnWidth?: string;
   rightColumnWidth?: string;
   maxContentWidth?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the header slot of the layout. */
   header?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the footer slot of the layout. */
   footer?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the navigation slot of the layout. */
   nav?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the sidebar slot of the layout. */
   sidebar?: ReactNode; // DEPRECATED
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the side menu slot of the layout. */
   sideMenu?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The main content rendered in the center column of the layout. */
   children: ReactNode;
 }
 

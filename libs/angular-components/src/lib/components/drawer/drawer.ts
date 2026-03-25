@@ -55,7 +55,7 @@ export class GoabDrawer implements OnInit {
    * @default "drawer"
    */
   @Input() testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 

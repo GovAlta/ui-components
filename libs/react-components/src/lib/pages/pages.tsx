@@ -21,7 +21,7 @@ export interface GoabPagesProps extends Margins {
    * @default 1
    */
   current?: number;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Page components rendered inside the pages container. */
   children?: ReactNode;
 }
 

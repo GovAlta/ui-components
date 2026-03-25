@@ -24,7 +24,7 @@ export interface GoabTableProps extends Margins {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Row elements rendered inside the table body. */
   children?: ReactNode;
 }
 

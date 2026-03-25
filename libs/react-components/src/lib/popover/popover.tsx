@@ -21,7 +21,7 @@ declare module "react" {
 }
 
 export interface GoabPopoverProps extends Margins, DataAttributes {
-  /** TO DO: Write a description */
+  /** TO REVIEW: The trigger element that opens the popover when interacted with. */
   target?: ReactNode;
   /**
    * Sets a data-testid attribute for automated testing.
@@ -48,7 +48,7 @@ export interface GoabPopoverProps extends Margins, DataAttributes {
    * @default "auto"
    */
   position?: GoabPopoverPosition;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the popover body. */
   children: ReactNode;
   /***
    * @deprecated This property has no effect and will be removed in a future version

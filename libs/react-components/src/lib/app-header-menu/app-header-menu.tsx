@@ -22,7 +22,7 @@ export interface GoabAppHeaderMenuProps extends DataAttributes {
    * @default "rootEl"
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Menu items rendered inside the app header menu. */
   children?: ReactNode;
 }
 

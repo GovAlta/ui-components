@@ -13,7 +13,7 @@ export interface GoabAppFooterMetaSectionProps extends DataAttributes {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Links or other elements rendered inside the footer meta section. */
   children?: ReactNode;
 }
 

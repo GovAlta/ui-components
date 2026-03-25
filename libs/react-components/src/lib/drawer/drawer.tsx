@@ -21,9 +21,9 @@ export interface GoabDrawerProps {
    * @default "drawer"
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   actions?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the drawer body. */
   children: ReactNode;
   onClose: () => void;
 }

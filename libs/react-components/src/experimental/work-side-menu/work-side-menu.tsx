@@ -42,11 +42,11 @@ export interface GoabWorkSideMenuProps {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the primary navigation slot of the side menu. */
   primaryContent?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the secondary section slot of the side menu. */
   secondaryContent?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Content rendered in the account section slot of the side menu. */
   accountContent?: ReactNode;
   /**
    * Controls whether the side menu is expanded or collapsed.

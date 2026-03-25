@@ -20,13 +20,13 @@ declare module "react" {
 
 export interface GoabxPushDrawerProps {
   open?: boolean;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom heading content rendered as a template. Use this when the heading requires rich content beyond plain text. */
   heading?: string | ReactNode;
   width?: string;
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   actions?: ReactNode;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the push drawer body. */
   children: ReactNode;
   onClose: () => void;
   version?: string;

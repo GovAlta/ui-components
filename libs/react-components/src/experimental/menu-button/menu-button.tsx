@@ -50,7 +50,7 @@ export interface GoabxMenuButtonProps extends DataAttributes {
    */
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Menu action items rendered inside the menu button dropdown. */
   children?: ReactNode;
 }
 

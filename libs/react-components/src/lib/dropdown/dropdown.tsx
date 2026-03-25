@@ -52,7 +52,7 @@ export interface GoabDropdownProps extends Margins, DataAttributes {
    */
   ariaLabelledBy?: string;
   id?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Dropdown item elements rendered inside the dropdown. */
   children?: React.ReactNode;
   /**
    * Disable this control.

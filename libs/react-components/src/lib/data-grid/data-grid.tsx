@@ -31,7 +31,7 @@ export interface GoabDataGridProps {
    * @default "table"
    */
   keyboardNav: "layout" | "table";
-  /** TO DO: Write a description */
+  /** TO REVIEW: The column or row elements rendered inside the data grid. */
   children?: React.ReactNode;
 }
 

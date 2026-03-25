@@ -20,7 +20,7 @@ export interface GoabTableSortProps extends DataAttributes {
    * @default "none"
    */
   direction?: GoabTableSortDirection;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The column header label content. */
   children?: React.ReactNode;
 }
 

@@ -101,7 +101,7 @@ export class GoabModal implements OnInit {
    * @default ""
    */
   @Input() heading!: string | TemplateRef<any>;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements displayed in the component's action area. */
   @Input() actions!: TemplateRef<any>;
 
   @Output() onClose = new EventEmitter();

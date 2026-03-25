@@ -71,7 +71,7 @@ export interface GoabxCalloutProps extends Margins, DataAttributes {
    */
   ariaLive?: GoabCalloutAriaLive;
   version?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content displayed inside the callout body. */
   children?: React.ReactNode;
 }
 

@@ -51,7 +51,7 @@ export interface GoabxNotificationProps {
    * @default false
    */
   compact?: boolean;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The message content rendered inside the notification. */
   children?: React.ReactNode;
   onDismiss?: () => void;
   /**

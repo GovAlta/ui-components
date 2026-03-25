@@ -52,7 +52,7 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
    * @default ""
    */
   heading: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom content rendered alongside the accordion heading, such as a badge or status indicator. */
   headingContent?: ReactNode;
   /**
    * Sets the maximum width of the accordion.
@@ -70,7 +70,7 @@ export interface GoabAccordionProps extends Margins, DataAttributes {
    */
   iconPosition?: GoabAccordionIconPosition;
   onChange?: (open: boolean) => void;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside the accordion body when it is expanded. */
   children?: ReactNode;
 }
 

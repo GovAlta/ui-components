@@ -11,7 +11,7 @@ declare module "react" {
 }
 
 export interface GoabCardActionsProps extends DataAttributes {
-  /** TO DO: Write a description */
+  /** TO REVIEW: Action buttons or elements rendered inside the card actions area. */
   children?: React.ReactNode;
 }
 

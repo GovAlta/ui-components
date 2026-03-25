@@ -39,7 +39,7 @@ export class GoabxSideMenuHeading implements OnInit {
    * @default "section-heading"
    */
   @Input() testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: Additional metadata content displayed alongside the heading, such as a status badge or icon. */
   @Input() meta!: TemplateRef<any>;
 
   constructor(private cdr: ChangeDetectorRef) {}

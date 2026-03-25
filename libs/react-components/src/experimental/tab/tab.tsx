@@ -22,7 +22,7 @@ export interface GoabxTabItemProps {
    */
   heading?: React.ReactNode;
   disabled?: boolean;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The content rendered inside this tab panel. */
   children?: React.ReactNode;
   slug?: string;
 }

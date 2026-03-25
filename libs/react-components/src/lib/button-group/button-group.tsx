@@ -38,7 +38,7 @@ export interface GoabButtonGroupProps extends Margins, DataAttributes {
    * @default ""
    */
   testId?: string;
-  /** TO DO: Write a description */
+  /** TO REVIEW: The button elements grouped together inside this container. */
   children?: React.ReactNode;
 }
 

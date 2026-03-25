@@ -46,7 +46,7 @@ export class GoabxWorkSideMenuItem implements OnInit {
   @Input() icon?: string;
   @Input() testId?: string;
   @Input() type?: GoabWorkSideMenuItemType = "normal";
-  /** TO DO: Write a description */
+  /** TO REVIEW: Custom content rendered inside the popover associated with this menu item. */
   @Input() popoverContent!: TemplateRef<any>;
 
   isReady = false;

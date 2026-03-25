@@ -11,7 +11,7 @@ declare module "react" {
 }
 
 export interface GoabCardGroupProps extends DataAttributes {
-  /** TO DO: Write a description */
+  /** TO REVIEW: Card elements rendered inside the card group. */
   children?: React.ReactNode;
 }
 
