@@ -35,38 +35,7 @@ import {
   GoabText,
   GoabTextArea,
 } from "@abgov/react-components";
-import {
-  GoabxAppFooter,
-  GoabxAppFooterMetaSection,
-  GoabxAppFooterNavSection,
-  GoabxBadge,
-  GoabxButton,
-  GoabxCalendar,
-  GoabxCallout,
-  GoabxCheckbox,
-  GoabxDatePicker,
-  GoabxDrawer,
-  GoabxDropdown,
-  GoabxDropdownItem,
-  GoabxFileUploadCard,
-  GoabxFileUploadInput,
-  GoabxFilterChip,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxLink,
-  GoabxModal,
-  GoabxNotification,
-  GoabxPagination,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-  GoabxSideMenu,
-  GoabxSideMenuGroup,
-  GoabxSideMenuHeading,
-  GoabxTable,
-  GoabxTableSortHeader,
-  GoabxTabs,
-  GoabxTextArea,
-} from "@abgov/react-components/experimental";
+
 import type {
   GoabPaginationOnChangeDetail,
   GoabTableOnSortDetail,
@@ -103,18 +72,19 @@ export function Feat3241Route() {
     },
   ]);
   const [goabxDrawerOpen, setGoabxDrawerOpen] = useState(false);
-  const [goabDrawerOpen, setGoabDrawerOpen] = useState(false);
   const [goabxModalOpen, setGoabxModalOpen] = useState(false);
-  const [goabModalOpen, setGoabModalOpen] = useState(false);
   const [goabxPage, setGoabxPage] = useState(1);
-  const [goabPage, setGoabPage] = useState(1);
   const [goabxTab, setGoabxTab] = useState(1);
-  const [goabTab, setGoabTab] = useState(1);
   const [goabxFilterClicks, setGoabxFilterClicks] = useState(0);
-  const [goabFilterClicks, setGoabFilterClicks] = useState(0);
   const [goabxNotificationStatus, setGoabxNotificationStatus] = useState(
     "No dismiss action yet.",
   );
+
+  const [goabDrawerOpen, setGoabDrawerOpen] = useState(false);
+  const [goabModalOpen, setGoabModalOpen] = useState(false);
+  const [goabPage, setGoabPage] = useState(1);
+  const [goabTab, setGoabTab] = useState(1);
+  const [goabFilterClicks, setGoabFilterClicks] = useState(0);
   const [goabNotificationStatus, setGoabNotificationStatus] = useState(
     "No dismiss action yet.",
   );
@@ -123,28 +93,28 @@ export function Feat3241Route() {
     setGoabxPage(detail.page);
   };
 
-  const onGoabPaginationChange = (detail: GoabPaginationOnChangeDetail) => {
-    setGoabPage(detail.page);
-  };
-
   const onGoabxTabsChange = (detail: GoabTabsOnChangeDetail) => {
     setGoabxTab(detail.tab);
-  };
-
-  const onGoabTabsChange = (detail: GoabTabsOnChangeDetail) => {
-    setGoabTab(detail.tab);
   };
 
   const onGoabxFilterClick = () => {
     setGoabxFilterClicks((prev) => prev + 1);
   };
 
-  const onGoabFilterClick = () => {
-    setGoabFilterClicks((prev) => prev + 1);
-  };
-
   const onGoabxNotificationDismiss = () => {
     setGoabxNotificationStatus("Goabx notification dismissed.");
+  };
+
+  const onGoabPaginationChange = (detail: GoabPaginationOnChangeDetail) => {
+    setGoabPage(detail.page);
+  };
+
+  const onGoabTabsChange = (detail: GoabTabsOnChangeDetail) => {
+    setGoabTab(detail.tab);
+  };
+
+  const onGoabFilterClick = () => {
+    setGoabFilterClicks((prev) => prev + 1);
   };
 
   const onGoabNotificationDismiss = () => {
@@ -168,10 +138,10 @@ export function Feat3241Route() {
     <>
       <GoabText tag="h1">Feat 3241 - Experimental wrapper checks</GoabText>
       <GoabText tag="p" maxWidth="900px">
-        Side-by-side comparisons of Goabx wrappers and the matching Goab components.
+        V2 component comparisons — all components now promoted from experimental to the main package.
       </GoabText>
       <GoabText tag="p" maxWidth="900px">
-        Also implements all new properties created for Goabx components
+        Implements all new V2 properties
       </GoabText>
 
       <GoabText tag="h2" mt="3xl" mb="m">
@@ -180,16 +150,16 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxFooter
+            GoabFooter
           </GoabText>
-          <GoabxAppFooter maxContentWidth="100%">
-            <GoabxAppFooterNavSection maxColumnCount={1}>
+          <GoabAppFooter maxContentWidth="100%">
+            <GoabAppFooterNavSection maxColumnCount={1}>
               <a href="a.html">Arts and culture</a>
-            </GoabxAppFooterNavSection>
-            <GoabxAppFooterMetaSection>
+            </GoabAppFooterNavSection>
+            <GoabAppFooterMetaSection>
               <a href="privacy.html">Privacy</a>
-            </GoabxAppFooterMetaSection>
-          </GoabxAppFooter>
+            </GoabAppFooterMetaSection>
+          </GoabAppFooter>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -212,21 +182,21 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxBadge
+            GoabBadge
           </GoabText>
-          <GoabxBadge type="success" content="Experimental" />
+          <GoabBadge type="success" content="Experimental" />
           <GoabText tag="h3" mb="m">
             Size = large
           </GoabText>
-          <GoabxBadge type="success" content="Experimental" size="large" />
+          <GoabBadge type="success" content="Experimental" size="large" />
           <GoabText tag="h3" mb="m">
             Emphasis = subtle
           </GoabText>
-          <GoabxBadge type="success" content="Experimental" emphasis="subtle" />
+          <GoabBadge type="success" content="Experimental" emphasis="subtle" />
           <GoabText tag="h3" mb="m">
             New type property value
           </GoabText>
-          <GoabxBadge type="dawn" content="Experimental" />
+          <GoabBadge type="dawn" content="Experimental" />
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -239,7 +209,7 @@ export function Feat3241Route() {
           <GoabText tag="p" mb="m">
             Should only work with design tokens v1
           </GoabText>
-          <GoabBadge type="pink-light" content="Standard" />
+          <GoabBadge type="prairie" content="Standard" />
         </div>
       </GoabGrid>
 
@@ -249,11 +219,11 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxButton
+            GoabButton
           </GoabText>
-          <GoabxButton type="primary" leadingIcon="add">
+          <GoabButton type="primary" leadingIcon="add">
             Goabx action
-          </GoabxButton>
+          </GoabButton>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -271,9 +241,9 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxCalendar
+            GoabCalendar
           </GoabText>
-          <GoabxCalendar onChange={noop} />
+          <GoabCalendar onChange={noop} />
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -289,17 +259,17 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxCallout
+            GoabCallout
           </GoabText>
-          <GoabxCallout type="information" heading="Goabx callout">
+          <GoabCallout type="information" heading="Goabx callout">
             <GoabText tag="p">Experimental callout content.</GoabText>
-          </GoabxCallout>
+          </GoabCallout>
           <GoabText tag="h3" mb="m">
             Emphasis = high
           </GoabText>
-          <GoabxCallout type="information" heading="Goabx callout" emphasis="high">
+          <GoabCallout type="information" heading="Goabx callout" emphasis="high">
             <GoabText tag="p">Experimental callout content</GoabText>
-          </GoabxCallout>
+          </GoabCallout>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -317,9 +287,9 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxDatepicker
+            GoabDatepicker
           </GoabText>
-          <GoabxDatePicker />
+          <GoabDatePicker />
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -335,36 +305,36 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxFormItem + GoabxInput
+            GoabFormItem + GoabInput
           </GoabText>
-          <GoabxFormItem label="Goabx input" helpText="Experimental wrapper input">
-            <GoabxInput name="goabx-name" placeholder="Enter a name" value="Jordan" />
-          </GoabxFormItem>
+          <GoabFormItem label="Goabx input" helpText="Experimental wrapper input">
+            <GoabInput name="goabx-name" placeholder="Enter a name" value="Jordan" />
+          </GoabFormItem>
           <GoabText tag="h3" mb="m">
             Form Item - Input type = text-input
           </GoabText>
-          <GoabxFormItem
+          <GoabFormItem
             label="Goabx input"
             helpText="Experimental wrapper input"
             type="text-input"
           >
-            <GoabxInput
+            <GoabInput
               name="goabx-name-text-input"
               placeholder="Enter a name"
               value="Jordan"
             />
-          </GoabxFormItem>
+          </GoabFormItem>
           <GoabText tag="h3" mb="m">
             Input - Size = compact
           </GoabText>
-          <GoabxFormItem label="Goabx input" helpText="Experimental wrapper input">
-            <GoabxInput
+          <GoabFormItem label="Goabx input" helpText="Experimental wrapper input">
+            <GoabInput
               name="goabx-name-text-input"
               placeholder="Enter a name"
               value="Jordan"
               size="compact"
             />
-          </GoabxFormItem>
+          </GoabFormItem>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -386,13 +356,13 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxCheckbox
+            GoabCheckbox
           </GoabText>
-          <GoabxCheckbox name="goabx-check" text="Goabx checkbox" />
+          <GoabCheckbox name="goabx-check" text="Goabx checkbox" />
           <GoabText tag="h3" mb="m">
             Size = compact
           </GoabText>
-          <GoabxCheckbox
+          <GoabCheckbox
             name="goabx-check-compact"
             text="Goabx checkbox"
             size="compact"
@@ -412,30 +382,30 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxDropdown
+            GoabDropdown
           </GoabText>
-          <GoabxFormItem label="Goabx dropdown">
-            <GoabxDropdown name="goabx-color" placeholder="Select a color" value="blue">
-              <GoabxDropdownItem label="Red" value="red" />
-              <GoabxDropdownItem label="Blue" value="blue" />
-              <GoabxDropdownItem label="Green" value="green" />
-            </GoabxDropdown>
-          </GoabxFormItem>
+          <GoabFormItem label="Goabx dropdown">
+            <GoabDropdown name="goabx-color" placeholder="Select a color" value="blue">
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          </GoabFormItem>
           <GoabText tag="h3" mb="m">
             Size = compact
           </GoabText>
-          <GoabxFormItem label="Goabx dropdown">
-            <GoabxDropdown
+          <GoabFormItem label="Goabx dropdown">
+            <GoabDropdown
               name="goabx-color-compact"
               placeholder="Select a color"
               value="blue"
               size="compact"
             >
-              <GoabxDropdownItem label="Red" value="red" />
-              <GoabxDropdownItem label="Blue" value="blue" />
-              <GoabxDropdownItem label="Green" value="green" />
-            </GoabxDropdown>
-          </GoabxFormItem>
+              <GoabDropdownItem label="Red" value="red" />
+              <GoabDropdownItem label="Blue" value="blue" />
+              <GoabDropdownItem label="Green" value="green" />
+            </GoabDropdown>
+          </GoabFormItem>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -457,22 +427,22 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxTextArea
+            GoabTextArea
           </GoabText>
-          <GoabxFormItem label="Goabx textarea">
-            <GoabxTextArea name="goabx-notes" rows={3} placeholder="Goabx notes" />
-          </GoabxFormItem>
+          <GoabFormItem label="Goabx textarea">
+            <GoabTextArea name="goabx-notes" rows={3} placeholder="Goabx notes" />
+          </GoabFormItem>
           <GoabText tag="h3" mb="m">
             Text Area - Size = compact
           </GoabText>
-          <GoabxFormItem label="Goabx textarea">
-            <GoabxTextArea
+          <GoabFormItem label="Goabx textarea">
+            <GoabTextArea
               name="goabx-notes"
               rows={3}
               placeholder="Goabx notes"
               size="compact"
             />
-          </GoabxFormItem>
+          </GoabFormItem>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -490,36 +460,36 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxRadioGroup
+            GoabRadioGroup
           </GoabText>
-          <GoabxFormItem label="Goabx radios">
-            <GoabxRadioGroup name="goabx-plan" value="standard">
-              <GoabxRadioItem name="goabx-plan" label="Standard" value="standard" />
-              <GoabxRadioItem name="goabx-plan" label="Premium" value="premium" />
-            </GoabxRadioGroup>
-          </GoabxFormItem>
+          <GoabFormItem label="Goabx radios">
+            <GoabRadioGroup name="goabx-plan" value="standard">
+              <GoabRadioItem name="goabx-plan" label="Standard" value="standard" />
+              <GoabRadioItem name="goabx-plan" label="Premium" value="premium" />
+            </GoabRadioGroup>
+          </GoabFormItem>
           <GoabText tag="h3" mb="m">
             Radio Group - Size = compact
           </GoabText>
           <GoabText tag="h3" mb="m">
             Radio Item - Compact = true
           </GoabText>
-          <GoabxFormItem label="Goabx radios">
-            <GoabxRadioGroup name="goabx-plan-compact" value="standard" size="compact">
-              <GoabxRadioItem
+          <GoabFormItem label="Goabx radios">
+            <GoabRadioGroup name="goabx-plan-compact" value="standard" size="compact">
+              <GoabRadioItem
                 name="goabx-plan-compact"
                 label="Standard"
                 value="standard"
                 compact
               />
-              <GoabxRadioItem
+              <GoabRadioItem
                 name="goabx-plan-compact"
                 label="Premium"
                 value="premium"
                 compact
               />
-            </GoabxRadioGroup>
-          </GoabxFormItem>
+            </GoabRadioGroup>
+          </GoabFormItem>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -540,9 +510,9 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxFilterChip w/ Secondary Text
+            GoabFilterChip w/ Secondary Text
           </GoabText>
-          <GoabxFilterChip
+          <GoabFilterChip
             content="Goabx chip"
             secondaryText="Experimental"
             onClick={onGoabxFilterClick}
@@ -550,7 +520,7 @@ export function Feat3241Route() {
           <GoabText tag="h3" mb="m">
             Leading Icon
           </GoabText>
-          <GoabxFilterChip
+          <GoabFilterChip
             content="Goabx chip"
             secondaryText="Experimental"
             leadingIcon="accessibility"
@@ -578,29 +548,29 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxLink
+            GoabLink
           </GoabText>
-          <GoabxLink>
+          <GoabLink>
             <a href="https://example.com" rel="noreferrer" target="_blank">
               Goabx link
             </a>
-          </GoabxLink>
+          </GoabLink>
           <GoabText tag="h3" mb="m">
             Color = dark
           </GoabText>
-          <GoabxLink color="dark">
+          <GoabLink color="dark">
             <a href="https://example.com" rel="noreferrer" target="_blank">
               Goabx link
             </a>
-          </GoabxLink>
+          </GoabLink>
           <GoabText tag="h3" mb="m">
             Size = large
           </GoabText>
-          <GoabxLink size="large">
+          <GoabLink size="large">
             <a href="https://example.com" rel="noreferrer" target="_blank">
               Goabx link
             </a>
-          </GoabxLink>
+          </GoabLink>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -620,31 +590,31 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxNotification
+            GoabNotification
           </GoabText>
-          <GoabxNotification type="information" onDismiss={onGoabxNotificationDismiss}>
+          <GoabNotification type="information" onDismiss={onGoabxNotificationDismiss}>
             Goabx notification content.
-          </GoabxNotification>
+          </GoabNotification>
           <GoabText tag="h3" mb="m">
             Emphasis = low
           </GoabText>
-          <GoabxNotification
+          <GoabNotification
             type="information"
             onDismiss={onGoabxNotificationDismiss}
             emphasis="low"
           >
             Goabx notification content.
-          </GoabxNotification>
+          </GoabNotification>
           <GoabText tag="h3" mb="m">
             Compact = true
           </GoabText>
-          <GoabxNotification
+          <GoabNotification
             type="information"
             onDismiss={onGoabxNotificationDismiss}
             compact
           >
             Goabx notification content.
-          </GoabxNotification>
+          </GoabNotification>
           <GoabText tag="p">Status: {goabxNotificationStatus}</GoabText>
         </div>
         <div>
@@ -664,9 +634,9 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxPagination
+            GoabPagination
           </GoabText>
-          <GoabxPagination
+          <GoabPagination
             itemCount={87}
             perPageCount={10}
             pageNumber={goabxPage}
@@ -694,9 +664,9 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxTabs
+            GoabTabs
           </GoabText>
-          <GoabxTabs onChange={onGoabxTabsChange}>
+          <GoabTabs onChange={onGoabxTabsChange}>
             <GoabTab heading="Overview">
               <GoabText tag="p">Goabx tab one content.</GoabText>
             </GoabTab>
@@ -706,7 +676,7 @@ export function Feat3241Route() {
             <GoabTab heading="Notes">
               <GoabText tag="p">Goabx tab three content.</GoabText>
             </GoabTab>
-          </GoabxTabs>
+          </GoabTabs>
           <GoabText tag="p" mt="0">
             Selected tab: {goabxTab}
           </GoabText>
@@ -738,21 +708,21 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxTable
+            GoabTable
           </GoabText>
-          <GoabxTable onSort={sortData}>
+          <GoabTable onSort={sortData}>
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="firstName">First name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="firstName">First name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="lastName">Last name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="lastName">Last name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="age" direction="asc">
+                  <GoabTableSortHeader name="age" direction="asc">
                     Age
-                  </GoabxTableSortHeader>
+                  </GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -765,11 +735,11 @@ export function Feat3241Route() {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
           <GoabText tag="h3" mb="m">
-            GoabxTable - Striped = true
+            GoabTable - Striped = true
           </GoabText>
-          <GoabxTable striped>
+          <GoabTable striped>
             <thead>
               <tr>
                 <th>First name</th>
@@ -786,7 +756,7 @@ export function Feat3241Route() {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -827,15 +797,15 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxFileUploadInput
+            GoabFileUploadInput
           </GoabText>
-          <GoabxFormItem label="Goabx upload input">
-            <GoabxFileUploadInput
+          <GoabFormItem label="Goabx upload input">
+            <GoabFileUploadInput
               variant="dragdrop"
               accept=".pdf,.png"
               onSelectFile={() => noop}
             />
-          </GoabxFormItem>
+          </GoabFormItem>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -857,9 +827,9 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxFileUploadCard
+            GoabFileUploadCard
           </GoabText>
-          <GoabxFileUploadCard filename="report.pdf" size={1200000} />
+          <GoabFileUploadCard filename="report.pdf" size={1200000} />
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -875,24 +845,24 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxDrawer
+            GoabDrawer
           </GoabText>
-          <GoabxButton type="secondary" onClick={() => setGoabxDrawerOpen(true)}>
+          <GoabButton type="secondary" onClick={() => setGoabxDrawerOpen(true)}>
             Open Goabx drawer
-          </GoabxButton>
-          <GoabxDrawer
+          </GoabButton>
+          <GoabDrawer
             open={goabxDrawerOpen}
             position="right"
             heading="Goabx drawer"
             actions={
-              <GoabxButton type="secondary" onClick={() => setGoabxDrawerOpen(false)}>
+              <GoabButton type="secondary" onClick={() => setGoabxDrawerOpen(false)}>
                 Close
-              </GoabxButton>
+              </GoabButton>
             }
             onClose={() => setGoabxDrawerOpen(false)}
           >
             <GoabText tag="p">Goabx drawer content.</GoabText>
-          </GoabxDrawer>
+          </GoabDrawer>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -923,28 +893,28 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxModal
+            GoabModal
           </GoabText>
-          <GoabxButton type="secondary" onClick={() => setGoabxModalOpen(true)}>
+          <GoabButton type="secondary" onClick={() => setGoabxModalOpen(true)}>
             Open Goabx modal
-          </GoabxButton>
-          <GoabxModal
+          </GoabButton>
+          <GoabModal
             open={goabxModalOpen}
             heading="Goabx modal"
             actions={
               <GoabButtonGroup alignment="end">
-                <GoabxButton type="secondary" onClick={() => setGoabxModalOpen(false)}>
+                <GoabButton type="secondary" onClick={() => setGoabxModalOpen(false)}>
                   Cancel
-                </GoabxButton>
-                <GoabxButton type="primary" onClick={() => setGoabxModalOpen(false)}>
+                </GoabButton>
+                <GoabButton type="primary" onClick={() => setGoabxModalOpen(false)}>
                   Confirm
-                </GoabxButton>
+                </GoabButton>
               </GoabButtonGroup>
             }
             onClose={() => setGoabxModalOpen(false)}
           >
             <GoabText tag="p">Goabx modal content.</GoabText>
-          </GoabxModal>
+          </GoabModal>
         </div>
         <div>
           <GoabText tag="h3" mb="m">
@@ -979,20 +949,20 @@ export function Feat3241Route() {
       <GoabGrid minChildWidth="500px" gap="xl" mb="xl">
         <div>
           <GoabText tag="h3" mb="m">
-            GoabxSideMenu
+            GoabSideMenu
           </GoabText>
-          <GoabxSideMenu>
-            <GoabxSideMenuHeading
-              meta={<GoabxBadge type="important" content="2" />}
+          <GoabSideMenu>
+            <GoabSideMenuHeading
+              meta={<GoabBadge type="important" content="2" />}
               icon="settings"
             >
               Goabx navigation
-            </GoabxSideMenuHeading>
-            <GoabxSideMenuGroup heading="Primary" icon="home">
+            </GoabSideMenuHeading>
+            <GoabSideMenuGroup heading="Primary" icon="home">
               <a href="#goabx-home">Goabx home</a>
               <a href="#goabx-settings">Goabx settings</a>
-            </GoabxSideMenuGroup>
-          </GoabxSideMenu>
+            </GoabSideMenuGroup>
+          </GoabSideMenu>
         </div>
         <div>
           <GoabText tag="h3" mb="m">

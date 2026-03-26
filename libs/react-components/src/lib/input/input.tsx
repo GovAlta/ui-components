@@ -8,6 +8,7 @@ import {
   GoabInputOnChangeDetail,
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
+  GoabInputSize,
   GoabInputType,
   Margins, DataAttributes,
 } from "@abgov/ui-components-common";
@@ -40,6 +41,7 @@ interface WCProps extends Margins {
   arialabel?: string;
   testid?: string;
   textalign?: string;
+  size?: GoabInputSize;
 
   // type=number
   min?: string | number;
@@ -48,6 +50,18 @@ interface WCProps extends Margins {
   maxlength?: number;
 
   trailingiconarialabel?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
+        ref?: React.RefObject<HTMLInputElement | null>;
+      };
+    }
+  }
 }
 
 interface BaseProps extends Margins, DataAttributes {
@@ -78,6 +92,7 @@ interface BaseProps extends Margins, DataAttributes {
   maxLength?: number;
   trailingIconAriaLabel?: string;
   textAlign?: "left" | "right";
+  size?: GoabInputSize;
 }
 
 type OnChange<T = string> = (detail: GoabInputOnChangeDetail<T>) => void;
@@ -121,6 +136,7 @@ interface GoabDateInputProps extends BaseProps {
 export function GoabInput({
   variant = "goa",
   textAlign = "left",
+  size = "default",
   focused,
   disabled,
   readonly,
@@ -136,7 +152,10 @@ export function GoabInput({
 }: GoabInputProps & { type?: GoabInputType }): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
-  const _props = transformProps<WCProps>({ variant, textalign: textAlign, ...rest }, lowercase);
+  const _props = transformProps<WCProps>(
+    { variant, textalign: textAlign, size, ...rest },
+    lowercase,
+  );
 
   useEffect(() => {
     if (!ref.current) {
@@ -190,6 +209,7 @@ export function GoabInput({
       readonly={readonly ? "true" : undefined}
       error={error ? "true" : undefined}
       handletrailingiconclick={onTrailingIconClick ? "true" : "false"}
+      version="2"
     >
       {leadingContent && <div slot="leadingContent">{leadingContent}</div>}
       {trailingContent && <div slot="trailingContent">{trailingContent}</div>}

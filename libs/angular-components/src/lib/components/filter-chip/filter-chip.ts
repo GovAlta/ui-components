@@ -1,4 +1,4 @@
-import { GoabChipTheme } from "@abgov/ui-components-common";
+import { GoabChipTheme, GoabIconType } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -17,9 +17,12 @@ import { GoabBaseComponent } from "../base.component";
   selector: "goab-filter-chip",
   template: `@if (isReady) {
     <goa-filter-chip
+      [attr.version]="version"
       [attr.error]="error"
       [attr.icontheme]="iconTheme"
       [attr.content]="content"
+      [attr.secondarytext]="secondaryText"
+      [attr.leadingicon]="leadingIcon"
       [attr.testid]="testId"
       [attr.mt]="mt"
       [attr.mb]="mb"
@@ -37,10 +40,13 @@ export class GoabFilterChip extends GoabBaseComponent implements OnInit {
   @Input({ transform: booleanAttribute }) deletable?: boolean;
   @Input() content?: string = "";
   @Input() iconTheme?: GoabChipTheme;
+  @Input() secondaryText?: string = "";
+  @Input() leadingIcon?: GoabIconType | null = null;
 
   @Output() onClick = new EventEmitter();
 
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

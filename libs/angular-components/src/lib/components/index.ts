@@ -77,3 +77,8 @@ export * from "./temporary-notification-ctrl/temporary-notification-ctrl";
 export * from "./text/text";
 export * from "./textarea/textarea";
 export * from "./tooltip/tooltip";
+export * from "./work-side-menu/work-side-menu";
+export * from "./work-side-menu-group/work-side-menu-group";
+export * from "./work-side-menu-item/work-side-menu-item";
+export * from "./work-side-notification-item/work-side-notification-item";
+export * from "./work-side-notification-panel/work-side-notification-panel";

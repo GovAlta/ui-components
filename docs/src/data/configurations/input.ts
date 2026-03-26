@@ -18,12 +18,12 @@ export const inputConfigurations: ComponentConfigurations = {
       name: 'Basic example',
       description: 'Text input wrapped in FormItem with label',
       code: {
-        react: `<GoabxFormItem label="Full name" mb="l">
-  <GoabxInput name="fullName" width="100%" />
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Full name" mb="l">
-  <goabx-input name="fullName" width="100%"></goabx-input>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Full name" mb="l">
+  <GoabInput name="fullName" width="100%" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Full name" mb="l">
+  <goab-input name="fullName" width="100%"></goab-input>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Full name" mb="l">
   <goa-input version="2" name="fullName" width="100%"></goa-input>
 </goa-form-item>`,
@@ -34,30 +34,30 @@ export const inputConfigurations: ComponentConfigurations = {
       name: 'Input types',
       description: 'Different input types for various data formats',
       code: {
-        react: `<GoabxFormItem label="Email address" mb="l">
-  <GoabxInput name="email" type="email" width="100%" />
-</GoabxFormItem>
-<GoabxFormItem label="Password" mb="l">
-  <GoabxInput name="password" type="password" width="100%" />
-</GoabxFormItem>
-<GoabxFormItem label="Date of birth" mb="l">
-  <GoabxInput name="dob" type="date" />
-</GoabxFormItem>
-<GoabxFormItem label="Age" mb="l">
-  <GoabxInput name="age" type="number" width="3ch" />
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Email address" mb="l">
-  <goabx-input name="email" type="email" width="100%"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Password" mb="l">
-  <goabx-input name="password" type="password" width="100%"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Date of birth" mb="l">
-  <goabx-input name="dob" type="date"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Age" mb="l">
-  <goabx-input name="age" type="number" width="3ch"></goabx-input>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Email address" mb="l">
+  <GoabInput name="email" type="email" width="100%" />
+</GoabFormItem>
+<GoabFormItem label="Password" mb="l">
+  <GoabInput name="password" type="password" width="100%" />
+</GoabFormItem>
+<GoabFormItem label="Date of birth" mb="l">
+  <GoabInput name="dob" type="date" />
+</GoabFormItem>
+<GoabFormItem label="Age" mb="l">
+  <GoabInput name="age" type="number" width="3ch" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Email address" mb="l">
+  <goab-input name="email" type="email" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Password" mb="l">
+  <goab-input name="password" type="password" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Date of birth" mb="l">
+  <goab-input name="dob" type="date"></goab-input>
+</goab-form-item>
+<goab-form-item label="Age" mb="l">
+  <goab-input name="age" type="number" width="3ch"></goab-input>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Email address" mb="l">
   <goa-input version="2" name="email" type="email" width="100%"></goa-input>
 </goa-form-item>
@@ -77,18 +77,18 @@ export const inputConfigurations: ComponentConfigurations = {
       name: 'With icons',
       description: 'Inputs with leading or trailing icons',
       code: {
-        react: `<GoabxFormItem label="Search" mb="l">
-  <GoabxInput name="search" leadingIcon="search" width="100%" />
-</GoabxFormItem>
-<GoabxFormItem label="Website" mb="l">
-  <GoabxInput name="website" trailingIcon="open" width="100%" />
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Search" mb="l">
-  <goabx-input name="search" leadingIcon="search" width="100%"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Website" mb="l">
-  <goabx-input name="website" trailingIcon="open" width="100%"></goabx-input>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Search" mb="l">
+  <GoabInput name="search" leadingIcon="search" width="100%" />
+</GoabFormItem>
+<GoabFormItem label="Website" mb="l">
+  <GoabInput name="website" trailingIcon="open" width="100%" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Search" mb="l">
+  <goab-input name="search" leadingIcon="search" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Website" mb="l">
+  <goab-input name="website" trailingIcon="open" width="100%"></goab-input>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Search" mb="l">
   <goa-input version="2" name="search" leading-icon="search" width="100%"></goa-input>
 </goa-form-item>
@@ -102,24 +102,24 @@ export const inputConfigurations: ComponentConfigurations = {
       name: 'Fixed widths',
       description: 'Inputs sized for specific data types',
       code: {
-        react: `<GoabxFormItem label="Postal code" mb="l">
-  <GoabxInput name="postalCode" width="7ch" />
-</GoabxFormItem>
-<GoabxFormItem label="Year" mb="l">
-  <GoabxInput name="year" type="number" width="4ch" />
-</GoabxFormItem>
-<GoabxFormItem label="SIN" mb="l">
-  <GoabxInput name="sin" width="11ch" />
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Postal code" mb="l">
-  <goabx-input name="postalCode" width="7ch"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Year" mb="l">
-  <goabx-input name="year" type="number" width="4ch"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="SIN" mb="l">
-  <goabx-input name="sin" width="11ch"></goabx-input>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Postal code" mb="l">
+  <GoabInput name="postalCode" width="7ch" />
+</GoabFormItem>
+<GoabFormItem label="Year" mb="l">
+  <GoabInput name="year" type="number" width="4ch" />
+</GoabFormItem>
+<GoabFormItem label="SIN" mb="l">
+  <GoabInput name="sin" width="11ch" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Postal code" mb="l">
+  <goab-input name="postalCode" width="7ch"></goab-input>
+</goab-form-item>
+<goab-form-item label="Year" mb="l">
+  <goab-input name="year" type="number" width="4ch"></goab-input>
+</goab-form-item>
+<goab-form-item label="SIN" mb="l">
+  <goab-input name="sin" width="11ch"></goab-input>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Postal code" mb="l">
   <goa-input version="2" name="postalCode" width="7ch"></goa-input>
 </goa-form-item>
@@ -136,18 +136,18 @@ export const inputConfigurations: ComponentConfigurations = {
       name: 'With leading or trailing content',
       description: 'Inputs with text content before or after the input field',
       code: {
-        react: `<GoabxFormItem label="Price" mb="l">
-  <GoabxInput name="price" type="number" width="10ch" leadingContent="$" />
-</GoabxFormItem>
-<GoabxFormItem label="Weight" mb="l">
-  <GoabxInput name="weight" type="number" width="10ch" trailingContent="kg" />
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Price" mb="l">
-  <goabx-input name="price" type="number" width="10ch" leadingContent="$"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Weight" mb="l">
-  <goabx-input name="weight" type="number" width="10ch" trailingContent="kg"></goabx-input>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Price" mb="l">
+  <GoabInput name="price" type="number" width="10ch" leadingContent="$" />
+</GoabFormItem>
+<GoabFormItem label="Weight" mb="l">
+  <GoabInput name="weight" type="number" width="10ch" trailingContent="kg" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Price" mb="l">
+  <goab-input name="price" type="number" width="10ch" leadingContent="$"></goab-input>
+</goab-form-item>
+<goab-form-item label="Weight" mb="l">
+  <goab-input name="weight" type="number" width="10ch" trailingContent="kg"></goab-input>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Price" mb="l">
   <goa-input version="2" name="price" type="number" width="10ch" leading-content="$"></goa-input>
 </goa-form-item>
@@ -161,24 +161,24 @@ export const inputConfigurations: ComponentConfigurations = {
       name: 'States',
       description: 'Disabled, readonly, and error states',
       code: {
-        react: `<GoabxFormItem label="Disabled input" mb="l">
-  <GoabxInput name="disabled" disabled value="Cannot edit" width="100%" />
-</GoabxFormItem>
-<GoabxFormItem label="Read-only input" mb="l">
-  <GoabxInput name="readonly" readOnly value="View only" width="100%" />
-</GoabxFormItem>
-<GoabxFormItem label="Input with error" error="This field is required" mb="l">
-  <GoabxInput name="error" error width="100%" />
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Disabled input" mb="l">
-  <goabx-input name="disabled" [disabled]="true" value="Cannot edit" width="100%"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Read-only input" mb="l">
-  <goabx-input name="readonly" [readOnly]="true" value="View only" width="100%"></goabx-input>
-</goabx-form-item>
-<goabx-form-item label="Input with error" error="This field is required" mb="l">
-  <goabx-input name="error" [error]="true" width="100%"></goabx-input>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Disabled input" mb="l">
+  <GoabInput name="disabled" disabled value="Cannot edit" width="100%" />
+</GoabFormItem>
+<GoabFormItem label="Read-only input" mb="l">
+  <GoabInput name="readonly" readOnly value="View only" width="100%" />
+</GoabFormItem>
+<GoabFormItem label="Input with error" error="This field is required" mb="l">
+  <GoabInput name="error" error width="100%" />
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Disabled input" mb="l">
+  <goab-input name="disabled" [disabled]="true" value="Cannot edit" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Read-only input" mb="l">
+  <goab-input name="readonly" [readOnly]="true" value="View only" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Input with error" error="This field is required" mb="l">
+  <goab-input name="error" [error]="true" width="100%"></goab-input>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Disabled input" mb="l">
   <goa-input version="2" name="disabled" disabled value="Cannot edit" width="100%"></goa-input>
 </goa-form-item>

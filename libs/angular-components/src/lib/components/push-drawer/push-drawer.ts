@@ -15,37 +15,36 @@ import {
   standalone: true,
   selector: "goab-push-drawer",
   imports: [NgTemplateOutlet],
-  template: `
-    @if (isReady) {
-      <goa-push-drawer
-        [open]="open"
-        [attr.heading]="getHeadingAsString()"
-        [attr.test-id]="testId"
-        [attr.width]="width"
-        (_close)="_onClose()"
-      >
-        <ng-content></ng-content>
-        @if (getHeadingAsTemplate()) {
-          <div slot="heading">
-            <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
-          </div>
-        }
-        @if (actions) {
-          <div slot="actions">
-            <ng-container [ngTemplateOutlet]="actions"></ng-container>
-          </div>
-        }
-      </goa-push-drawer>
-    }
-  `,
+  template: `@if (isReady) {
+    <goa-push-drawer
+      [open]="open"
+      [attr.heading]="getHeadingAsString()"
+      [attr.testid]="testId"
+      [attr.width]="width"
+      [attr.version]="version"
+      (_close)="_onClose()"
+    >
+      <ng-content></ng-content>
+      <div slot="heading">
+        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+      </div>
+      @if (actions) {
+        <div slot="actions">
+          <ng-container [ngTemplateOutlet]="actions"></ng-container>
+        </div>
+      }
+    </goa-push-drawer>
+  } `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPushDrawer implements OnInit {
+  version = "2";
+
   @Input({ transform: booleanAttribute }) open?: boolean;
-  @Input() heading?: string | TemplateRef<any>;
-  @Input() testId?: string;
+  @Input() heading!: string | TemplateRef<any>;
   @Input() width?: string;
-  @Input() actions?: TemplateRef<any>;
+  @Input() testId?: string;
+  @Input() actions!: TemplateRef<any>;
   @Output() onClose = new EventEmitter();
 
   isReady = false;
@@ -53,8 +52,6 @@ export class GoabPushDrawer implements OnInit {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    // For Angular 20, we need to delay rendering the web component
-    // to ensure all attributes are properly bound before the component initializes
     setTimeout(() => {
       this.isReady = true;
       this.cdr.detectChanges();
@@ -66,7 +63,7 @@ export class GoabPushDrawer implements OnInit {
   }
 
   getHeadingAsString(): string {
-    return this.heading instanceof TemplateRef ? "" : this.heading || "";
+    return this.heading instanceof TemplateRef ? "" : this.heading;
   }
 
   getHeadingAsTemplate(): TemplateRef<any> | null {

@@ -1,46 +1,46 @@
 import {
-  GoabxButton,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxLink,
-} from "@abgov/react-components/experimental";
-import { GoabText } from "@abgov/react-components";
+  GoabButton,
+  GoabFormItem,
+  GoabInput,
+  GoabLink,
+  GoabText,
+} from "@abgov/react-components";
 
 export function ShowASimpleProgressIndicatorOnAQuestionPageWithMultipleQuestions() {
   return (
     <>
-      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabxLink>
+      </GoabLink>
 
       <GoabText as="h3" size="body-m" mt="xl" mb="none" color="secondary">Step 1 of 5</GoabText>
       <GoabText as="h2" mt="xs" mb="xl">Personal information</GoabText>
 
-      <GoabxFormItem label="What is your name?">
-        <GoabxInput onChange={() => {}} name="name" ariaLabel="what is your name?" width="50ch" />
-      </GoabxFormItem>
+      <GoabFormItem label="What is your name?">
+        <GoabInput onChange={() => {}} name="name" ariaLabel="what is your name?" width="50ch" />
+      </GoabFormItem>
 
-      <GoabxFormItem label="What is your phone number?" mt="l">
-        <GoabxInput
+      <GoabFormItem label="What is your phone number?" mt="l">
+        <GoabInput
           onChange={() => {}}
           name="phone-number"
           ariaLabel="what is your phone number?"
           leadingContent="+1"
         />
-      </GoabxFormItem>
+      </GoabFormItem>
 
-      <GoabxFormItem label="What is your home postal code?" mt="l">
-        <GoabxInput
+      <GoabFormItem label="What is your home postal code?" mt="l">
+        <GoabInput
           onChange={() => {}}
           name="postal-code"
           width="14ch"
           ariaLabel="what is your home postal code"
         />
-      </GoabxFormItem>
+      </GoabFormItem>
 
-      <GoabxButton type="submit" mt="2xl">
+      <GoabButton type="submit" mt="2xl">
         Save and continue
-      </GoabxButton>
+      </GoabButton>
     </>
   );
 }

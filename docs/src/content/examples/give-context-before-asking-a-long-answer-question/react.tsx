@@ -1,6 +1,14 @@
 import { useState } from "react";
-import { GoabxButton, GoabxFormItem, GoabxLink, GoabxTextArea } from "@abgov/react-components/experimental";
-import { GoabButtonGroup, GoabDetails, GoabText } from "@abgov/react-components";
+import {
+  GoabButton,
+  GoabButtonGroup,
+  GoabDetails,
+  GoabFormItem,
+  GoabLink,
+  GoabText,
+  GoabTextArea,
+} from "@abgov/react-components";
+
 import { GoabTextAreaOnChangeDetail } from "@abgov/ui-components-common";
 
 export function GiveContextBeforeAskingALongAnswerQuestion() {
@@ -16,9 +24,9 @@ export function GiveContextBeforeAskingALongAnswerQuestion() {
 
   return (
     <>
-      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabxLink>
+      </GoabLink>
 
       <GoabText as="h2" mt="xl" mb="m">Submit a question about your benefits</GoabText>
       <GoabText mt="none" mb="xl">
@@ -27,17 +35,17 @@ export function GiveContextBeforeAskingALongAnswerQuestion() {
       </GoabText>
 
       <form>
-        <GoabxFormItem
+        <GoabFormItem
           label="Provide details about your situation"
           helpText="Include specific details to help us answer your question quickly.">
-          <GoabxTextArea
+          <GoabTextArea
             name="program"
             onChange={handleChange}
             value={textValue}
             maxCount={400}
             countBy="character"
           />
-        </GoabxFormItem>
+        </GoabFormItem>
       </form>
 
       <GoabDetails mt="m" heading="What kind of information is useful?">
@@ -48,9 +56,9 @@ export function GiveContextBeforeAskingALongAnswerQuestion() {
       </GoabDetails>
 
       <GoabButtonGroup alignment="start" mt="2xl">
-        <GoabxButton type="primary" onClick={handleContinue}>
+        <GoabButton type="primary" onClick={handleContinue}>
           Continue
-        </GoabxButton>
+        </GoabButton>
       </GoabButtonGroup>
     </>
   );

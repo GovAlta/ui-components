@@ -3,6 +3,7 @@ import {
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
   GoabTextAreaOnBlurDetail,
+  GoabTextAreaSize,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -29,6 +30,7 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-textarea
         #goaComponentRef
+        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [attr.placeholder]="placeholder"
@@ -42,6 +44,7 @@ import { GoabControlValueAccessor } from "../base.component";
         [attr.countby]="countBy"
         [attr.maxcount]="maxCount"
         [attr.autocomplete]="autoComplete"
+        [attr.size]="size"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
@@ -74,12 +77,14 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   @Input() maxCount?: number = -1;
   @Input() maxWidth?: string;
   @Input() autoComplete?: string = "on";
+  @Input() size?: GoabTextAreaSize = "default";
 
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
   @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
 
   isReady = false;
+  version = "2";
 
   constructor(
     private cdr: ChangeDetectorRef,

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { render } from "vitest-browser-react";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideNotificationPanel,
-  GoabxWorkSideNotificationItem,
-} from "../src/experimental";
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideNotificationPanel,
+  GoabWorkSideNotificationItem,
+} from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
@@ -125,21 +125,21 @@ function NotificationMenuComponent({
   };
 
   return (
-    <GoabxWorkSideMenu
+    <GoabWorkSideMenu
       heading="Test Heading"
       url="https://example.com/"
       userName="John Doe"
       userSecondaryText="test@example.com"
       testId="work-space-side-menu"
-      primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
+      primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
       secondaryContent={
-        <GoabxWorkSideMenuItem
+        <GoabWorkSideMenuItem
           icon="notifications"
           label="Notifications"
           url="#"
           testId="work-space-side-menu-item-notification"
           popoverContent={
-            <GoabxWorkSideNotificationPanel
+            <GoabWorkSideNotificationPanel
               heading="Notifications"
               activeTab="unread"
               testId="work-space-side-notification-panel"
@@ -147,7 +147,7 @@ function NotificationMenuComponent({
               onViewAll={onViewAll}
             >
               {notifications.map((notif) => (
-                <GoabxWorkSideNotificationItem
+                <GoabWorkSideNotificationItem
                   key={notif.id}
                   testId={`noti-${notif.id}`}
                   title={notif.title}
@@ -159,11 +159,11 @@ function NotificationMenuComponent({
                   onClick={() => handleItemClick(notif.id)}
                 />
               ))}
-            </GoabxWorkSideNotificationPanel>
+            </GoabWorkSideNotificationPanel>
           }
         />
       }
-      accountContent={<GoabxWorkSideMenuItem url="#settings" label="Settings" />}
+      accountContent={<GoabWorkSideMenuItem url="#settings" label="Settings" />}
       open={true}
     />
   );

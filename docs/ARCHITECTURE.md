@@ -182,8 +182,8 @@ export const buttonConfigurations: ComponentConfigurations = {
       id: "basic",
       name: "Primary button",
       code: {
-        react: `<GoabxButton>Submit</GoabxButton>`,
-        angular: `<goabx-button>Submit</goabx-button>`,
+        react: `<GoabButton>Submit</GoabButton>`,
+        angular: `<goab-button>Submit</goab-button>`,
         webComponents: `<goa-button version="2">Submit</goa-button>`,
       },
     },
@@ -192,7 +192,7 @@ export const buttonConfigurations: ComponentConfigurations = {
 };
 ```
 
-**Note:** Most configuration code uses `Goabx` / `goabx-` prefixes (experimental V2 wrappers). However, not all components have experimental wrappers — some (like accordion) only have standard wrappers (`GoabAccordion` / `goab-accordion`). Check `libs/react-components/src/experimental/` to see which components have experimental versions.
+**Note:** Most configuration code uses `Goab*` / `goab-*` prefixes. Some components also include V2-specific variants — check `libs/react-components/src/lib/` for the full list.
 
 **Slots across frameworks:** Each configuration file contains code for all three frameworks, and slots work differently in each:
 

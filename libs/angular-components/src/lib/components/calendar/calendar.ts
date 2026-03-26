@@ -30,6 +30,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.mb]="mb"
         [attr.ml]="ml"
         [attr.mr]="mr"
+        [attr.version]="version"
         (_change)="_onChange($event)"
       >
         <ng-content />
@@ -39,6 +40,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCalendar extends GoabBaseComponent implements OnInit {
+  version = "2";
+
   @Input() name?: string;
   @Input() value?: Date | string;
   @Input() min?: Date | string | undefined;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoabxButton, GoabxFilterChip } from "@abgov/react-components/experimental";
+import { GoabButton, GoabFilterChip } from "@abgov/react-components";
 
 export function AddAFilterChip() {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
@@ -19,7 +19,7 @@ export function AddAFilterChip() {
     <>
       <div>
         {activeFilters.map((filter) => (
-          <GoabxFilterChip
+          <GoabFilterChip
             key={filter}
             content={filter}
             onClick={() => removeFilter(filter)}
@@ -29,7 +29,7 @@ export function AddAFilterChip() {
           />
         ))}
       </div>
-      <GoabxButton mt="l" onClick={addFilter}>Add Random Filter</GoabxButton>
+      <GoabButton mt="l" onClick={addFilter}>Add Random Filter</GoabButton>
     </>
   );
 }

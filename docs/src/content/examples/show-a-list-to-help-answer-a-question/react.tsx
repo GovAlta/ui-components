@@ -1,5 +1,11 @@
-import { GoabxFormItem, GoabxRadioGroup, GoabxRadioItem } from "@abgov/react-components/experimental";
-import { GoabBlock, GoabDetails } from "@abgov/react-components";
+import {
+  GoabBlock,
+  GoabDetails,
+  GoabFormItem,
+  GoabRadioGroup,
+  GoabRadioItem,
+} from "@abgov/react-components";
+
 import { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
 export function ShowAListToHelpAnswerAQuestion() {
@@ -9,15 +15,15 @@ export function ShowAListToHelpAnswerAQuestion() {
 
   return (
     <form>
-      <GoabxFormItem
+      <GoabFormItem
         label="Do you have additional education expenses?"
         helpText="You can request funding for these now or at any time during your program."
         mb="m">
-        <GoabxRadioGroup name="additional" onChange={handleChange}>
-          <GoabxRadioItem label="Yes" value="yes" name="additional" />
-          <GoabxRadioItem label="No" value="no" name="additional" />
-        </GoabxRadioGroup>
-      </GoabxFormItem>
+        <GoabRadioGroup name="additional" onChange={handleChange}>
+          <GoabRadioItem label="Yes" value="yes" name="additional" />
+          <GoabRadioItem label="No" value="no" name="additional" />
+        </GoabRadioGroup>
+      </GoabFormItem>
 
       <GoabDetails heading="What are additional education expenses?">
         <GoabBlock gap="m" mt="m">

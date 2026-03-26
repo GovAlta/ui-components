@@ -1,9 +1,9 @@
 import {
   GoabDivider,
   GoabTab,
+  GoabTabs,
   GoabText,
 } from "@abgov/react-components";
-import { GoabxTabs } from "@abgov/react-components/experimental";
 
 export function Feat2885NavigationTabsRoute() {
   return (
@@ -12,7 +12,7 @@ export function Feat2885NavigationTabsRoute() {
         Feature #2885: Tabs navigation prop
       </GoabText>
       <GoabText tag="p">
-        Showcases the new <code>navigation</code> prop on <code>GoabxTabs</code>.
+        Showcases the new <code>navigation</code> prop on <code>GoabTabs</code>.
         When set to <code>"none"</code>, tabs act as a UI switcher without updating the browser URL hash.
       </GoabText>
 
@@ -22,7 +22,7 @@ export function Feat2885NavigationTabsRoute() {
       <GoabText tag="p">
         Tabs switch content without changing the URL hash. Used inside notification panels.
       </GoabText>
-      <GoabxTabs variant="segmented" navigation="none" onChange={(detail) => console.log("Tab changed:", detail)}>
+      <GoabTabs variant="segmented" navigation="none" onChange={(detail) => console.log("Tab changed:", detail)}>
         <GoabTab heading="Unread">
           <GoabText tag="p">Unread notifications content</GoabText>
         </GoabTab>
@@ -32,7 +32,7 @@ export function Feat2885NavigationTabsRoute() {
         <GoabTab heading="All">
           <GoabText tag="p">All notifications content</GoabText>
         </GoabTab>
-      </GoabxTabs>
+      </GoabTabs>
 
       <GoabDivider mt="l" mb="l" />
 
@@ -40,7 +40,7 @@ export function Feat2885NavigationTabsRoute() {
       <GoabText tag="p">
         Default behavior: tabs update the browser URL hash when switched.
       </GoabText>
-      <GoabxTabs variant="segmented" onChange={(detail) => console.log("Tab changed:", detail)}>
+      <GoabTabs variant="segmented" onChange={(detail) => console.log("Tab changed:", detail)}>
         <GoabTab heading="Tab A">
           <GoabText tag="p">Tab A content with URL navigation</GoabText>
         </GoabTab>
@@ -50,7 +50,7 @@ export function Feat2885NavigationTabsRoute() {
         <GoabTab heading="Tab C">
           <GoabText tag="p">Tab C content with URL navigation</GoabText>
         </GoabTab>
-      </GoabxTabs>
+      </GoabTabs>
 
       <GoabDivider mt="l" mb="l" />
 
@@ -58,7 +58,7 @@ export function Feat2885NavigationTabsRoute() {
       <GoabText tag="p">
         Standard tab style with URL navigation disabled.
       </GoabText>
-      <GoabxTabs navigation="none" onChange={(detail) => console.log("Tab changed:", detail)}>
+      <GoabTabs navigation="none" onChange={(detail) => console.log("Tab changed:", detail)}>
         <GoabTab heading="Overview">
           <GoabText tag="p">Overview content</GoabText>
         </GoabTab>
@@ -68,7 +68,7 @@ export function Feat2885NavigationTabsRoute() {
         <GoabTab heading="History">
           <GoabText tag="p">History content</GoabText>
         </GoabTab>
-      </GoabxTabs>
+      </GoabTabs>
 
       <GoabDivider mt="l" mb="l" />
 
@@ -76,7 +76,7 @@ export function Feat2885NavigationTabsRoute() {
       <GoabText tag="p">
         Standard tab style with default URL navigation.
       </GoabText>
-      <GoabxTabs onChange={(detail) => console.log("Tab changed:", detail)}>
+      <GoabTabs onChange={(detail) => console.log("Tab changed:", detail)}>
         <GoabTab heading="Section 1">
           <GoabText tag="p">Section 1 content with URL navigation</GoabText>
         </GoabTab>
@@ -86,7 +86,7 @@ export function Feat2885NavigationTabsRoute() {
         <GoabTab heading="Section 3">
           <GoabText tag="p">Section 3 content with URL navigation</GoabText>
         </GoabTab>
-      </GoabxTabs>
+      </GoabTabs>
     </div>
   );
 }

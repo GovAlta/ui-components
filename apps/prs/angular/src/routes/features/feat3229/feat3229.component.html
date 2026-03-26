@@ -4,7 +4,7 @@
   <goab-divider mt="l" mb="l"></goab-divider>
 
   <goab-block mb="m" *ngIf="lastAction">
-    <goabx-badge type="information" [content]="lastAction"></goabx-badge>
+    <goab-badge type="information" [content]="lastAction"></goab-badge>
   </goab-block>
 
   <!-- ── Test 1: Icon-only edge cases ── -->
@@ -16,52 +16,52 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>No text, no icon, no size — defaults to ellipsis-horizontal, normal size, ariaLabel="Open menu"</goab-text>
-      <goabx-menu-button (onAction)="handleAction($event, 'icon-only defaults')">
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+      <goab-menu-button (onAction)="handleAction($event, 'icon-only defaults')">
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>No text, no icon, no ariaLabel, size="compact"</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         size="compact"
         (onAction)="handleAction($event, 'icon-only compact no ariaLabel')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>No text, custom ariaLabel="Actions for John Smith"</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         ariaLabel="Actions for John Smith"
         (onAction)="handleAction($event, 'icon-only custom ariaLabel')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>No text, custom ariaLabel, size="compact"</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         ariaLabel="Actions for John Smith"
         size="compact"
         (onAction)="handleAction($event, 'icon-only custom ariaLabel compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -73,29 +73,29 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>icon + normal (default)</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         leadingIcon="ellipsis-horizontal"
         (onAction)="handleAction($event, 'icon normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>icon + compact</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         leadingIcon="ellipsis-horizontal"
         size="compact"
         (onAction)="handleAction($event, 'icon compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -107,29 +107,29 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>text + normal (default)</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Actions"
         (onAction)="handleAction($event, 'text normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>text + compact</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Actions"
         size="compact"
         (onAction)="handleAction($event, 'text compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -141,31 +141,31 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>text + icon + normal</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="More"
         leadingIcon="ellipsis-horizontal"
         (onAction)="handleAction($event, 'text+icon normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>text + icon + compact</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="More"
         leadingIcon="ellipsis-horizontal"
         size="compact"
         (onAction)="handleAction($event, 'text+icon compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -181,56 +181,56 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>normal — actions with icon + text</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="With Icons"
         (onAction)="handleAction($event, 'actions with icons normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>compact — actions with icon + text</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="With Icons"
         size="compact"
         (onAction)="handleAction($event, 'actions with icons compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>normal — actions text-only</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Text Only"
         (onAction)="handleAction($event, 'actions text-only normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>compact — actions text-only</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Text Only"
         size="compact"
         (onAction)="handleAction($event, 'actions text-only compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -242,77 +242,77 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>primary</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Primary"
         type="primary"
         (onAction)="handleAction($event, 'primary normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Primary"
         type="primary"
         size="compact"
         (onAction)="handleAction($event, 'primary compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>secondary</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Secondary"
         type="secondary"
         (onAction)="handleAction($event, 'secondary normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Secondary"
         type="secondary"
         size="compact"
         (onAction)="handleAction($event, 'secondary compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>tertiary</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Tertiary"
         type="tertiary"
         (onAction)="handleAction($event, 'tertiary normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Tertiary"
         type="tertiary"
         size="compact"
         (onAction)="handleAction($event, 'tertiary compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -327,119 +327,119 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>normal (default)</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Normal"
         variant="normal"
         (onAction)="handleAction($event, 'variant normal')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Normal"
         variant="normal"
         size="compact"
         (onAction)="handleAction($event, 'variant normal compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>destructive</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Destructive"
         variant="destructive"
         (onAction)="handleAction($event, 'variant destructive')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Destructive"
         variant="destructive"
         size="compact"
         (onAction)="handleAction($event, 'variant destructive compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>icon-only destructive</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         variant="destructive"
         (onAction)="handleAction($event, 'icon-only destructive')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         variant="destructive"
         size="compact"
         (onAction)="handleAction($event, 'icon-only destructive compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>destructive + secondary</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Delete"
         type="secondary"
         variant="destructive"
         (onAction)="handleAction($event, 'destructive secondary')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Delete"
         type="secondary"
         variant="destructive"
         size="compact"
         (onAction)="handleAction($event, 'destructive secondary compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>destructive + tertiary</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         text="Delete"
         type="tertiary"
         variant="destructive"
         (onAction)="handleAction($event, 'destructive tertiary')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         text="Delete"
         type="tertiary"
         variant="destructive"
         size="compact"
         (onAction)="handleAction($event, 'destructive tertiary compact')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 
@@ -455,90 +455,90 @@
   <goab-block direction="column" gap="m" mt="m">
     <goab-block gap="l" alignment="center">
       <goab-text>ellipsis-horizontal</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         leadingIcon="ellipsis-horizontal:outline"
         (onAction)="handleAction($event, 'ellipsis outline')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         leadingIcon="ellipsis-horizontal:filled"
         (onAction)="handleAction($event, 'ellipsis filled')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>ellipsis-vertical</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         leadingIcon="ellipsis-vertical:outline"
         (onAction)="handleAction($event, 'ellipsis-v outline')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         leadingIcon="ellipsis-vertical:filled"
         (onAction)="handleAction($event, 'ellipsis-v filled')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>menu</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         leadingIcon="menu:outline"
         (onAction)="handleAction($event, 'menu outline')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         leadingIcon="menu:filled"
         (onAction)="handleAction($event, 'menu filled')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
 
     <goab-block gap="l" alignment="center">
       <goab-text>settings</goab-text>
-      <goabx-menu-button
+      <goab-menu-button
         leadingIcon="settings:outline"
         (onAction)="handleAction($event, 'settings outline')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
-      <goabx-menu-button
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
+      <goab-menu-button
         leadingIcon="settings:filled"
         (onAction)="handleAction($event, 'settings filled')"
       >
-        <goabx-menu-action text="View case" action="view"></goabx-menu-action>
-        <goabx-menu-action text="Assign to me" action="assign"></goabx-menu-action>
-        <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-        <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-      </goabx-menu-button>
+        <goab-menu-action text="View case" action="view"></goab-menu-action>
+        <goab-menu-action text="Assign to me" action="assign"></goab-menu-action>
+        <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+        <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+      </goab-menu-button>
     </goab-block>
   </goab-block>
 </div>

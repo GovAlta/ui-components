@@ -18,6 +18,7 @@ declare module "react" {
   }
 }
 
+
 export interface GoabMenuActionProps extends DataAttributes {
   text: string;
   action: string;

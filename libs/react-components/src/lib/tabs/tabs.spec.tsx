@@ -2,10 +2,10 @@ import { render } from "@testing-library/react";
 import { GoabTab } from "../tab/tab";
 import GoabTabs from "./tabs";
 
-describe("Tabs", () => {
+describe("GoabTabs", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <GoabTabs initialTab={1} testId={"foo"}>
+      <GoabTabs initialTab={1} testId={'foo'}>
         <GoabTab heading="Profile">
           <p>
             <b>Profile:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -23,25 +23,13 @@ describe("Tabs", () => {
     expect(tabElements.length).toBe(1);
   });
 
-  it("should render tabs with slug props", () => {
+  it("should render with navigation attribute", () => {
     const { baseElement } = render(
-      <GoabTabs initialTab={1}>
-        <GoabTab heading="Overview" slug="overview-section">
-          <p>Overview content</p>
-        </GoabTab>
-        <GoabTab heading="Details">
-          <p>Details content</p>
-        </GoabTab>
+      <GoabTabs initialTab={1} navigation="none">
+        <GoabTab heading="Tab 1">Tab 1 content</GoabTab>
       </GoabTabs>,
     );
-
-    const tabElements = baseElement.querySelectorAll("goa-tab");
-    expect(tabElements.length).toBe(2);
-
-    // First tab should have slug attribute
-    expect(tabElements[0].getAttribute("slug")).toBe("overview-section");
-
-    // Second tab should not have slug attribute (or null/undefined)
-    expect(tabElements[1].getAttribute("slug")).toBeNull();
+    const el = baseElement.querySelector("goa-tabs");
+    expect(el?.getAttribute("navigation")).toBe("none");
   });
 });

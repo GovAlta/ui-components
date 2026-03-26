@@ -15,47 +15,47 @@
     <goab-container>
       <goab-text tag="h2">With icons</goab-text>
       <div style="height: 380px; overflow: hidden">
-        <goabx-work-side-menu
+        <goab-work-side-menu
           heading="Test Menu"
           url="/"
           [open]="true"
           [primaryContent]="withIconsTemplate"
-        ></goabx-work-side-menu>
+        ></goab-work-side-menu>
       </div>
     </goab-container>
 
     <goab-container>
       <goab-text tag="h2">Without icons</goab-text>
       <div style="height: 380px; overflow: hidden">
-        <goabx-work-side-menu
+        <goab-work-side-menu
           heading="Test Menu"
           url="/"
           [open]="true"
           [primaryContent]="withoutIconsTemplate"
-        ></goabx-work-side-menu>
+        ></goab-work-side-menu>
       </div>
     </goab-container>
   </div>
 </div>
 
 <ng-template #withIconsTemplate>
-  <goabx-work-side-menu-item
+  <goab-work-side-menu-item
     label="Standalone item"
     url="/features/3544"
     icon="home"
-  ></goabx-work-side-menu-item>
-  <goabx-work-side-menu-group heading="Grouped items" icon="folder">
-    <goabx-work-side-menu-item
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-group heading="Grouped items" icon="folder">
+    <goab-work-side-menu-item
       label="Group child"
       url="/features/3544"
       icon="document"
-    ></goabx-work-side-menu-item>
-  </goabx-work-side-menu-group>
+    ></goab-work-side-menu-item>
+  </goab-work-side-menu-group>
 </ng-template>
 
 <ng-template #withoutIconsTemplate>
-  <goabx-work-side-menu-item label="Standalone item" url="/features/3544"></goabx-work-side-menu-item>
-  <goabx-work-side-menu-group heading="Grouped items">
-    <goabx-work-side-menu-item label="Group child" url="/features/3544"></goabx-work-side-menu-item>
-  </goabx-work-side-menu-group>
+  <goab-work-side-menu-item label="Standalone item" url="/features/3544"></goab-work-side-menu-item>
+  <goab-work-side-menu-group heading="Grouped items">
+    <goab-work-side-menu-item label="Group child" url="/features/3544"></goab-work-side-menu-item>
+  </goab-work-side-menu-group>
 </ng-template>

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { GoabButton, GoabText } from "@abgov/react-components";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
-} from "@abgov/react-components/experimental";
+  GoabButton,
+  GoabText,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
+} from "@abgov/react-components";
 
 export function Feat3398Route() {
   const [groupOpen, setGroupOpen] = useState(false);
@@ -20,7 +21,7 @@ export function Feat3398Route() {
       <GoabText>The button should toggle the group open and closed.</GoabText>
 
       <div style={{ display: "flex", height: "310px", overflow: "hidden" }}>
-        <GoabxWorkSideMenu
+        <GoabWorkSideMenu
           heading="Design System"
           url="/"
           userName="John Doe"
@@ -36,18 +37,18 @@ export function Feat3398Route() {
               >
                 {groupOpen ? "Close group" : "Open group"}
               </GoabButton>
-              <GoabxWorkSideMenuGroup
+              <GoabWorkSideMenuGroup
                 heading="Get Started"
                 icon="school"
                 open={groupOpen}
               >
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Early Adopters"
                   url="/get-started/early-adopters"
                 />
-                <GoabxWorkSideMenuItem label="Designers" url="/get-started/designers" />
-                <GoabxWorkSideMenuItem label="Developers" url="/get-started/developers" />
-              </GoabxWorkSideMenuGroup>
+                <GoabWorkSideMenuItem label="Designers" url="/get-started/designers" />
+                <GoabWorkSideMenuItem label="Developers" url="/get-started/developers" />
+              </GoabWorkSideMenuGroup>
             </>
           }
         />
@@ -60,7 +61,7 @@ export function Feat3398Route() {
       </GoabText>
 
       <div style={{ display: "flex", height: "500px", overflow: "hidden" }}>
-        <GoabxWorkSideMenu
+        <GoabWorkSideMenu
           heading="UI Components Playground"
           url="/"
           userName="John Doe"
@@ -68,17 +69,17 @@ export function Feat3398Route() {
           open={true}
           primaryContent={
             <>
-              <GoabxWorkSideMenuGroup heading="Enhancements" icon="rocket">
-                <GoabxWorkSideMenuItem label="Item 1" url="/items/1" />
-                <GoabxWorkSideMenuGroup heading="Features" icon="star">
-                  <GoabxWorkSideMenuItem label="1908" url="/features/1908" />
-                  <GoabxWorkSideMenuItem label="3398" url="/features/3398" />
-                </GoabxWorkSideMenuGroup>
-              </GoabxWorkSideMenuGroup>
-              <GoabxWorkSideMenuGroup heading="Bugs" icon="bug">
-                <GoabxWorkSideMenuItem label="2152" url="/bugs/2152" />
-                <GoabxWorkSideMenuItem label="2331" url="/bugs/2331" />
-              </GoabxWorkSideMenuGroup>
+              <GoabWorkSideMenuGroup heading="Enhancements" icon="rocket">
+                <GoabWorkSideMenuItem label="Item 1" url="/items/1" />
+                <GoabWorkSideMenuGroup heading="Features" icon="star">
+                  <GoabWorkSideMenuItem label="1908" url="/features/1908" />
+                  <GoabWorkSideMenuItem label="3398" url="/features/3398" />
+                </GoabWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
+              <GoabWorkSideMenuGroup heading="Bugs" icon="bug">
+                <GoabWorkSideMenuItem label="2152" url="/bugs/2152" />
+                <GoabWorkSideMenuItem label="2331" url="/bugs/2331" />
+              </GoabWorkSideMenuGroup>
             </>
           }
         />

@@ -24,7 +24,7 @@ import { GoabControlValueAccessor } from "../base.component";
   standalone: true,
   selector: "goab-date-picker",
 
-  template: ` @if (isReady) {
+  template: `@if (isReady) {
     <goa-date-picker
       #goaComponentRef
       [attr.name]="name"
@@ -41,6 +41,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.mb]="mb"
       [attr.ml]="ml"
       [attr.mr]="mr"
+      [attr.version]="version"
       (_change)="_onChange($event)"
     >
     </goa-date-picker>
@@ -56,6 +57,8 @@ import { GoabControlValueAccessor } from "../base.component";
 })
 export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
   isReady = false;
+  version = "2";
+
   @Input() name?: string;
   @Input() override value?: Date | string | null | undefined;
   @Input() min?: Date | string;
@@ -82,6 +85,7 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
 
     return new CalendarDate(val).toString();
   }
+
   valueString(): string {
     return this.formatValue("value", this.value);
   }

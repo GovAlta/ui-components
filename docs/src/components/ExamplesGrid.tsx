@@ -14,22 +14,20 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import {
-  GoabxButton,
-  GoabxInput,
-  GoabxFormItem,
-  GoabxFilterChip,
-  GoabxPushDrawer,
-  GoabxCheckbox,
-  GoabxCheckboxList,
-} from "@abgov/react-components/experimental";
-import {
+  GoabButton,
+  GoabButtonGroup,
+  GoabCheckbox,
+  GoabCheckboxList,
+  type GoabCheckboxListOnChangeDetail,
+  GoabDivider,
+  GoabFilterChip,
+  GoabFormItem,
   GoabIcon,
   GoabIconButton,
-  GoabDivider,
-  GoabButtonGroup,
-  GoabTab,
-  type GoabCheckboxListOnChangeDetail,
+  GoabInput,
+  GoabPushDrawer,
 } from "@abgov/react-components";
+
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
 import { useContainerNarrow } from "../hooks/useContainerWidth";
 import { useViewSettings, type LayoutType } from "../hooks/useViewSettings";
@@ -135,7 +133,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   const sentinelRef = useRef<HTMLDivElement>(null);
   // Ref for table (to handle sort events from web component)
   const tableRef = useRef<HTMLElement>(null);
-  // TODO: Remove tabsRef when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
+  // TODO: Remove tabsRef when GoabTabs wrapper exposes updateUrl and stackOnMobile props
   const tabsRef = useRef<HTMLElement>(null);
 
   // Detect when toolbar becomes sticky using IntersectionObserver
@@ -219,8 +217,8 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     return () => table.removeEventListener("_multisort", handleMultiSort);
   }, [setSortConfig, viewSettings.layout]);
 
-  // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
-  // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
+  // TODO: Remove this useEffect when GoabTabs wrapper exposes updateUrl and stackOnMobile props
+  // Using goa-tabs web component directly because GoabTabs wrapper is missing these props
   useEffect(() => {
     const tabs = tabsRef.current;
     if (!tabs) return;
@@ -694,10 +692,10 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
       <div className={`examples-toolbar ${isSticky ? "examples-toolbar--sticky" : ""}`}>
         {/* Search input */}
         <div className="examples-search-section">
-          <GoabxFormItem
+          <GoabFormItem
             helpText={!isSticky ? "Search by keyword, category, or name" : undefined}
           >
-            <GoabxInput
+            <GoabInput
               name="exampleSearch"
               value={searchValue}
               leadingIcon="search"
@@ -706,15 +704,15 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               onChange={(e) => setSearchValue(e.value)}
               onKeyPress={(e) => e.key === "Enter" && applySearch()}
             />
-          </GoabxFormItem>
+          </GoabFormItem>
         </div>
 
         {/* View toggle + Filters */}
         <div className="examples-toolbar-actions">
           {/*
-           * TODO: Replace <goa-tabs> with GoabxTabs when wrapper exposes these props
+           * TODO: Replace <goa-tabs> with GoabTabs when wrapper exposes these props
            *
-           * Using web component directly because GoabxTabs wrapper is missing:
+           * Using web component directly because GoabTabs wrapper is missing:
            * - updateUrl prop (we need false to avoid polluting browser history)
            * - stackOnMobile prop (we need false for compact view toggle)
            *
@@ -738,7 +736,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           </div>
 
           <span className="filter-btn-desktop">
-            <GoabxButton
+            <GoabButton
               type="secondary"
               leadingIcon="filter-lines"
               size="compact"
@@ -752,7 +750,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               }}
             >
               Filters
-            </GoabxButton>
+            </GoabButton>
           </span>
           <span className="filter-btn-mobile">
             <GoabIconButton
@@ -783,7 +781,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
           {/* Search chips */}
           {searchChips.map((chip) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={chip}
               content={chip}
               onClick={() => removeSearchChip(chip)}
@@ -792,7 +790,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
           {/* Category filter chips */}
           {appliedFilters.category.map((cat) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={`cat-${cat}`}
               content={formatCategory(cat)}
               onClick={() => removeAppliedFilter("category", cat)}
@@ -801,7 +799,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
           {/* Scale filter chips */}
           {appliedFilters.scale.map((scale) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={`scale-${scale}`}
               content={formatScale(scale)}
               onClick={() => removeAppliedFilter("scale", scale)}
@@ -810,7 +808,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
           {/* User type filter chips */}
           {appliedFilters.userType.map((ut) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={`ut-${ut}`}
               content={formatUserType(ut)}
               onClick={() => removeAppliedFilter("userType", ut)}
@@ -1007,23 +1005,23 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
       {typeof document !== "undefined" &&
         document.getElementById("push-drawer-portal") &&
         createPortal(
-          <GoabxPushDrawer
+          <GoabPushDrawer
             heading="Filter examples"
             open={filterDrawerOpen}
             width="300px"
             onClose={() => setFilterDrawerOpen(false)}
             actions={
               <GoabButtonGroup alignment="start" gap="compact">
-                <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                <GoabButton type="primary" size="compact" onClick={applyFilters}>
                   Apply filters
-                </GoabxButton>
-                <GoabxButton
+                </GoabButton>
+                <GoabButton
                   type="tertiary"
                   size="compact"
                   onClick={() => setFilterDrawerOpen(false)}
                 >
                   Cancel
-                </GoabxButton>
+                </GoabButton>
               </GoabButtonGroup>
             }
           >
@@ -1037,7 +1035,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                     style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
                   />
                 </div>
-                <GoabxCheckboxList
+                <GoabCheckboxList
                   name="scale"
                   size="compact"
                   value={pendingFilters.scale}
@@ -1046,7 +1044,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   }
                 >
                   {filterOptions.scales.map((scale) => (
-                    <GoabxCheckbox
+                    <GoabCheckbox
                       key={scale}
                       name={scale}
                       value={scale}
@@ -1054,7 +1052,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       size="compact"
                     />
                   ))}
-                </GoabxCheckboxList>
+                </GoabCheckboxList>
               </div>
 
               {/* Category filter */}
@@ -1066,7 +1064,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                     style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
                   />
                 </div>
-                <GoabxCheckboxList
+                <GoabCheckboxList
                   name="category"
                   size="compact"
                   value={pendingFilters.category}
@@ -1075,7 +1073,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   }
                 >
                   {filterOptions.categories.map((category) => (
-                    <GoabxCheckbox
+                    <GoabCheckbox
                       key={category}
                       name={category}
                       value={category}
@@ -1083,7 +1081,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       size="compact"
                     />
                   ))}
-                </GoabxCheckboxList>
+                </GoabCheckboxList>
               </div>
 
               {/* User Type filter */}
@@ -1095,7 +1093,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                     style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
                   />
                 </div>
-                <GoabxCheckboxList
+                <GoabCheckboxList
                   name="userType"
                   size="compact"
                   value={pendingFilters.userType}
@@ -1104,7 +1102,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                   }
                 >
                   {filterOptions.userTypes.map((userType) => (
-                    <GoabxCheckbox
+                    <GoabCheckbox
                       key={userType}
                       name={userType}
                       value={userType}
@@ -1112,7 +1110,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       size="compact"
                     />
                   ))}
-                </GoabxCheckboxList>
+                </GoabCheckboxList>
               </div>
 
               {(pendingFilters.category.length > 0 ||
@@ -1120,7 +1118,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                 pendingFilters.userType.length > 0) && (
                 <>
                   <GoabDivider />
-                  <GoabxButton
+                  <GoabButton
                     type="tertiary"
                     size="compact"
                     onClick={() =>
@@ -1128,11 +1126,11 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                     }
                   >
                     Clear all filters
-                  </GoabxButton>
+                  </GoabButton>
                 </>
               )}
             </div>
-          </GoabxPushDrawer>,
+          </GoabPushDrawer>,
           document.getElementById("push-drawer-portal")!,
         )}
 

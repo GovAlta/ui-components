@@ -1,5 +1,7 @@
-import { GoabxButton } from "@abgov/react-components/experimental";
-import { GoabText } from "@abgov/react-components";
+import {
+  GoabButton,
+  GoabText,
+} from "@abgov/react-components";
 
 export function StartPage() {
   const handleClick = () => {
@@ -28,9 +30,9 @@ export function StartPage() {
       <ul>
         <li>government issued ID for the person applying</li>
       </ul>
-      <GoabxButton mt="2xl" mb="xl" type="start" onClick={handleClick}>
+      <GoabButton mt="2xl" mb="xl" type="start" onClick={handleClick}>
         Get started
-      </GoabxButton>
+      </GoabButton>
 
       <GoabText size="heading-l" mt="xl" mb="none">Other information about the service</GoabText>
       <GoabText size="body-m" mt="l" mb="none">

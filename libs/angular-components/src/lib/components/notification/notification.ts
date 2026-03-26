@@ -1,4 +1,8 @@
-import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
+import {
+  GoabAriaLiveType,
+  GoabNotificationEmphasis,
+  GoabNotificationType,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -7,16 +11,21 @@ import {
   Output,
   OnInit,
   ChangeDetectorRef,
+  booleanAttribute,
 } from "@angular/core";
+
 @Component({
   standalone: true,
   selector: "goab-notification",
   template: `
     @if (isReady) {
       <goa-notification
+        [attr.version]="version"
         [attr.type]="type"
         [attr.arialive]="ariaLive"
         [attr.maxcontentwidth]="maxContentWidth"
+        [attr.emphasis]="emphasis"
+        [attr.compact]="compact"
         [attr.testid]="testId"
         (_dismiss)="_onDismiss()"
       >
@@ -29,9 +38,12 @@ import {
 })
 export class GoabNotification implements OnInit {
   isReady = false;
+  version = "2";
   @Input() type?: GoabNotificationType = "information";
   @Input() ariaLive?: GoabAriaLiveType;
   @Input() maxContentWidth?: string;
+  @Input() emphasis?: GoabNotificationEmphasis = "high";
+  @Input({ transform: booleanAttribute }) compact?: boolean;
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

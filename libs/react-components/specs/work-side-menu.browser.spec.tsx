@@ -2,10 +2,10 @@ import { render } from "vitest-browser-react";
 import { useState } from "react";
 import { GoabButton } from "../src";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
-} from "../src/experimental";
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
+} from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
@@ -15,28 +15,28 @@ describe("WorkSideMenu", () => {
       await page.viewport(1024, 768);
       const Component = () => {
         return (
-          <GoabxWorkSideMenu
+          <GoabWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
             primaryContent={
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#item1"
                 label="Item 1"
                 testId="primary-menu-item"
               />
             }
             secondaryContent={
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#item2"
                 label="Item 2"
                 testId="secondary-menu-item"
               />
             }
             accountContent={
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#item3"
                 label="Item 3"
                 testId="account-menu-item"
@@ -84,15 +84,15 @@ describe("WorkSideMenu", () => {
     it("should close and open the menu when pressing the toggle button", async () => {
       const Component = () => {
         return (
-          <GoabxWorkSideMenu
+          <GoabWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
-            primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
+            secondaryContent={<GoabWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabWorkSideMenuItem url="#item3" label="Item 3" />}
             open={true}
           />
         );
@@ -118,7 +118,7 @@ describe("WorkSideMenu", () => {
 
         return (
           <div>
-            <GoabxWorkSideMenu
+            <GoabWorkSideMenu
               heading="Test App"
               url="/dashboard"
               open={true}
@@ -129,13 +129,13 @@ describe("WorkSideMenu", () => {
               }}
               primaryContent={
                 <>
-                  <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuItem
                     icon="grid"
                     label="Dashboard"
                     url="/dashboard"
                     testId="nav-dashboard"
                   />
-                  <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuItem
                     icon="search"
                     label="Search"
                     url="/search"
@@ -178,15 +178,15 @@ describe("WorkSideMenu", () => {
       await page.viewport(390, 844);
       const Component = () => {
         return (
-          <GoabxWorkSideMenu
+          <GoabWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
-            primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
+            secondaryContent={<GoabWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabWorkSideMenuItem url="#item3" label="Item 3" />}
             open={true}
           />
         );
@@ -213,15 +213,15 @@ describe("WorkSideMenu", () => {
         }
         return (
           <>
-            <GoabxWorkSideMenu
+            <GoabWorkSideMenu
               heading="Test Heading"
               url="https://example.com/"
               userName="John Doe"
               userSecondaryText="test@example.com"
               testId="work-side-menu"
-              primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
-              secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-              accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+              primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
+              secondaryContent={<GoabWorkSideMenuItem url="#item2" label="Item 2" />}
+              accountContent={<GoabWorkSideMenuItem url="#item3" label="Item 3" />}
               open={open}
               onToggle={menuOnToggle}
             />
@@ -244,7 +244,7 @@ describe("WorkSideMenu", () => {
     let isOpen = false;
     const Component = () => {
       return (
-        <GoabxWorkSideMenu
+        <GoabWorkSideMenu
           heading="Test Heading"
           url="https://example.com/"
           userName="John Doe"
@@ -252,22 +252,22 @@ describe("WorkSideMenu", () => {
           testId="work-side-menu"
           primaryContent={
             <>
-              <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-              <GoabxWorkSideMenuGroup
+              <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+              <GoabWorkSideMenuGroup
                 icon="document"
                 heading="Group heading"
                 open={isOpen}
                 testId="test-group"
               >
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Invoices"
                   url="/test-url"
                   testId="test-item"
                 />
-                <GoabxWorkSideMenuItem label="Contracts" url="/contracts" />
-                <GoabxWorkSideMenuItem label="Reports" url="/reports" />
-              </GoabxWorkSideMenuGroup>
-              <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+                <GoabWorkSideMenuItem label="Contracts" url="/contracts" />
+                <GoabWorkSideMenuItem label="Reports" url="/reports" />
+              </GoabWorkSideMenuGroup>
+              <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
             </>
           }
           open={true}

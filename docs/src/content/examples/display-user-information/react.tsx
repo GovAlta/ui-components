@@ -1,5 +1,10 @@
-import { GoabxButton, GoabxTable } from "@abgov/react-components/experimental";
-import { GoabBlock, GoabContainer, GoabText } from "@abgov/react-components";
+import {
+  GoabBlock,
+  GoabButton,
+  GoabContainer,
+  GoabTable,
+  GoabText,
+} from "@abgov/react-components";
 
 export function DisplayUserInformation() {
   const handleAddToCalendar = () => {
@@ -28,15 +33,15 @@ export function DisplayUserInformation() {
         accent="thick"
         heading="Upcoming important due dates"
         actions={
-          <GoabxButton
+          <GoabButton
             type="tertiary"
             size="compact"
             leadingIcon="calendar"
             onClick={handleAddToCalendar}>
             Add to calendar
-          </GoabxButton>
+          </GoabButton>
         }>
-        <GoabxTable width="100%" striped>
+        <GoabTable width="100%" striped>
           <tbody>
             <tr>
               <td>Business plan submission</td>
@@ -55,7 +60,7 @@ export function DisplayUserInformation() {
               <td style={{ textAlign: "right" }}>January 3, 2025</td>
             </tr>
           </tbody>
-        </GoabxTable>
+        </GoabTable>
       </GoabContainer>
     </>
   );

@@ -1,7 +1,6 @@
 import { render } from "vitest-browser-react";
 import { vi } from "vitest";
 import { GoabMenuAction, GoabMenuButton } from "../src";
-import { GoabxMenuButton, GoabxMenuAction } from "../src/experimental";
 
 describe("MenuButton", () => {
   it("should render and trigger action when clicked", async () => {
@@ -153,16 +152,16 @@ describe("MenuButton", () => {
   });
 });
 
-describe("GoabxMenuButton", () => {
+describe("GoabMenuButton", () => {
   it("should render icon-only without text and trigger action", async () => {
     const onAction = vi.fn();
 
     const Component = () => {
       return (
-        <GoabxMenuButton leadingIcon="ellipsis-horizontal" testId="icon-menu" onAction={onAction}>
-          <GoabxMenuAction text="View" action="view" />
-          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
-        </GoabxMenuButton>
+        <GoabMenuButton leadingIcon="ellipsis-horizontal" testId="icon-menu" onAction={onAction}>
+          <GoabMenuAction text="View" action="view" />
+          <GoabMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabMenuButton>
       );
     };
 
@@ -182,10 +181,10 @@ describe("GoabxMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabxMenuButton text="Actions" size="compact" onAction={onAction}>
-          <GoabxMenuAction text="Edit" action="edit" icon="pencil" />
-          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
-        </GoabxMenuButton>
+        <GoabMenuButton text="Actions" size="compact" onAction={onAction}>
+          <GoabMenuAction text="Edit" action="edit" icon="pencil" />
+          <GoabMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabMenuButton>
       );
     };
 
@@ -205,10 +204,10 @@ describe("GoabxMenuButton", () => {
 
     const Component = () => {
       return (
-        <GoabxMenuButton leadingIcon="ellipsis-horizontal" size="compact" testId="icon-compact-menu" onAction={onAction}>
-          <GoabxMenuAction text="Assign" action="assign" />
-          <GoabxMenuAction text="Delete" action="delete" icon="trash" />
-        </GoabxMenuButton>
+        <GoabMenuButton leadingIcon="ellipsis-horizontal" size="compact" testId="icon-compact-menu" onAction={onAction}>
+          <GoabMenuAction text="Assign" action="assign" />
+          <GoabMenuAction text="Delete" action="delete" icon="trash" />
+        </GoabMenuButton>
       );
     };
 

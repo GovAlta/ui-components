@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+
 interface WCProps {
   heading?: React.ReactNode;
   disabled?: string;

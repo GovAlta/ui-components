@@ -3,7 +3,9 @@ import {
   GoabTextAreaOnChangeDetail,
   GoabTextAreaOnKeyPressDetail,
   GoabTextAreaOnBlurDetail,
-  Margins, DataAttributes,
+  GoabTextAreaSize,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
@@ -23,6 +25,20 @@ interface WCProps extends Margins {
   maxcount?: number;
   autocomplete?: string;
   testid?: string;
+  size?: GoabTextAreaSize;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-textarea": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.Ref<HTMLTextAreaElement>;
+        };
+    }
+  }
 }
 
 export interface GoabTextAreaProps extends Margins, DataAttributes {
@@ -41,6 +57,7 @@ export interface GoabTextAreaProps extends Margins, DataAttributes {
   countBy?: GoabTextAreaCountBy;
   maxCount?: number;
   autoComplete?: string;
+  size?: GoabTextAreaSize;
 
   onChange?: (event: GoabTextAreaOnChangeDetail) => void;
   onKeyPress?: (event: GoabTextAreaOnKeyPressDetail) => void;
@@ -98,6 +115,7 @@ export function GoabTextArea({
       readOnly={readOnly ? "true" : undefined}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
+      version="2"
       {..._props}
     ></goa-textarea>
   );

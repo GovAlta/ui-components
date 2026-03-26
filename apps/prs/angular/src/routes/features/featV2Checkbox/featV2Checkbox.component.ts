@@ -2,8 +2,6 @@ import { Component } from "@angular/core";
 import {
   GoabCheckbox,
   GoabCheckboxList,
-  GoabxCheckbox,
-  GoabxCheckboxList,
   GoabText,
   GoabTable,
   GoabBlock,
@@ -19,8 +17,6 @@ import {
   imports: [
     GoabCheckbox,
     GoabCheckboxList,
-    GoabxCheckbox,
-    GoabxCheckboxList,
     GoabText,
     GoabTable,
     GoabBlock,

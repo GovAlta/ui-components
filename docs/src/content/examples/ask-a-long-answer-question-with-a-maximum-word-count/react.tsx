@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { GoabxFormItem, GoabxTextArea } from "@abgov/react-components/experimental";
+import { GoabFormItem, GoabTextArea } from "@abgov/react-components";
 
 export function AskALongAnswerQuestionWithAMaximumWordCount() {
   const [value, setValue] = useState("");
 
   return (
-    <GoabxFormItem
+    <GoabFormItem
       label="Provide more detail"
       helpText="Maximum 500 words. Do not include personal or financial information."
     >
-      <GoabxTextArea
+      <GoabTextArea
         name="program"
         onChange={(e) => setValue(e.value)}
         value={value}
@@ -18,6 +18,6 @@ export function AskALongAnswerQuestionWithAMaximumWordCount() {
         maxCount={500}
         countBy="word"
       />
-    </GoabxFormItem>
+    </GoabFormItem>
   );
 }

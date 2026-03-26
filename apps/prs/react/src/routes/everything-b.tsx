@@ -400,71 +400,17 @@ export function EverythingBRoute() {
                   </GoabBlock>
 
                   <GoabBlock>
-                    <GoabBadge type="dark" content="Dark" icon={true}></GoabBadge>
-                    <GoabBadge type="midtone" content="Midtone" icon={true}></GoabBadge>
-                    <GoabBadge type="light" content="Light" icon={true}></GoabBadge>
+                    <GoabBadge type="sky" content="Sky" icon={true}></GoabBadge>
+                    <GoabBadge type="prairie" content="Prairie" icon={true}></GoabBadge>
+                    <GoabBadge type="lilac" content="Lilac" icon={true}></GoabBadge>
                   </GoabBlock>
 
                   <GoabBlock>
                     <GoabBadge type="archived" content="Archived" icon={true}></GoabBadge>
-                    <GoabBadge type="aqua" content="Aqua" icon={true}></GoabBadge>
-                    <GoabBadge type="black" content="Black" icon={true}></GoabBadge>
-                    <GoabBadge type="blue" content="Blue" icon={true}></GoabBadge>
-                    <GoabBadge type="green" content="Green" icon={true}></GoabBadge>
-                    <GoabBadge type="orange" content="Orange" icon={true}></GoabBadge>
-                    <GoabBadge type="pink" content="Pink" icon={true}></GoabBadge>
-                    <GoabBadge type="red" content="Red" icon={true}></GoabBadge>
-                    <GoabBadge type="violet" content="Violet" icon={true}></GoabBadge>
-                    <GoabBadge type="white" content="White" icon={true}></GoabBadge>
-                    <GoabBadge type="yellow" content="Yellow" icon={true}></GoabBadge>
-                  </GoabBlock>
-
-                  <GoabBlock>
-                    <GoabBadge
-                      type="aqua-light"
-                      content="Aqua Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="black-light"
-                      content="Black Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="blue-light"
-                      content="Blue Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="green-light"
-                      content="Green Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="orange-light"
-                      content="Orange Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="pink-light"
-                      content="Pink Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="red-light"
-                      content="Red Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="violet-light"
-                      content="Violet Light"
-                      icon={true}
-                    ></GoabBadge>
-                    <GoabBadge
-                      type="yellow-light"
-                      content="Yellow Light"
-                      icon={true}
-                    ></GoabBadge>
+                    <GoabBadge type="pasture" content="Pasture" icon={true}></GoabBadge>
+                    <GoabBadge type="sunset" content="Sunset" icon={true}></GoabBadge>
+                    <GoabBadge type="dawn" content="Dawn" icon={true}></GoabBadge>
+                    <GoabBadge type="default" content="Default" icon={true}></GoabBadge>
                   </GoabBlock>
 
                   <GoabBlock>
@@ -4348,7 +4294,7 @@ export function EverythingBRoute() {
                         <a href="#">Side menu item</a>
                         <GoabSpacer vSpacing="m"></GoabSpacer>
                         <GoabSideMenuHeading
-                          meta={<GoabBadge type="midtone" content="Details"></GoabBadge>}
+                          meta={<GoabBadge type="default" content="Details"></GoabBadge>}
                         >
                           Side menu heading
                         </GoabSideMenuHeading>

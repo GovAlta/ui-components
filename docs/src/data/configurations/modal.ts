@@ -33,20 +33,20 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'Basic modal',
       description: 'Simple modal with heading and content',
       code: {
-        react: `<GoabxModal heading="Confirm action" open={isOpen} closable onClose={handleClose}>
+        react: `<GoabModal heading="Confirm action" open={isOpen} closable onClose={handleClose}>
   <p>Are you sure you want to proceed with this action?</p>
   <GoabButtonGroup alignment="end" mt="l">
-    <GoabxButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabxButton>
-    <GoabxButton size="compact" onClick={handleConfirm}>Confirm</GoabxButton>
+    <GoabButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabButton>
+    <GoabButton size="compact" onClick={handleConfirm}>Confirm</GoabButton>
   </GoabButtonGroup>
-</GoabxModal>`,
-        angular: `<goabx-modal heading="Confirm action" [open]="isOpen" [closable]="true" (_close)="handleClose()">
+</GoabModal>`,
+        angular: `<goab-modal heading="Confirm action" [open]="isOpen" [closable]="true" (_close)="handleClose()">
   <p>Are you sure you want to proceed with this action?</p>
   <goab-button-group alignment="end" mt="l">
-    <goabx-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goabx-button>
-    <goabx-button size="compact" (_click)="handleConfirm()">Confirm</goabx-button>
+    <goab-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goab-button>
+    <goab-button size="compact" (_click)="handleConfirm()">Confirm</goab-button>
   </goab-button-group>
-</goabx-modal>`,
+</goab-modal>`,
         webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
 <goa-modal version="2" id="demo-modal" heading="Confirm action" closable>
   <p>Are you sure you want to proceed with this action?</p>
@@ -63,12 +63,12 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'With transition',
       description: 'Modal with animated opening/closing',
       code: {
-        react: `<GoabxModal heading="Animated modal" open={isOpen} transition="fast" closable onClose={handleClose}>
+        react: `<GoabModal heading="Animated modal" open={isOpen} transition="fast" closable onClose={handleClose}>
   <p>This modal animates when opening and closing.</p>
-</GoabxModal>`,
-        angular: `<goabx-modal heading="Animated modal" [open]="isOpen" transition="fast" [closable]="true" (_close)="handleClose()">
+</GoabModal>`,
+        angular: `<goab-modal heading="Animated modal" [open]="isOpen" transition="fast" [closable]="true" (_close)="handleClose()">
   <p>This modal animates when opening and closing.</p>
-</goabx-modal>`,
+</goab-modal>`,
         webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
 <goa-modal version="2" id="demo-modal" heading="Animated modal" transition="fast" closable>
   <p>This modal animates when opening and closing.</p>
@@ -81,12 +81,12 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'Custom width',
       description: 'Modal with specified maximum width',
       code: {
-        react: `<GoabxModal heading="Wide modal" open={isOpen} maxWidth="80ch" closable onClose={handleClose}>
+        react: `<GoabModal heading="Wide modal" open={isOpen} maxWidth="80ch" closable onClose={handleClose}>
   <p>This modal has a wider maximum width for more content.</p>
-</GoabxModal>`,
-        angular: `<goabx-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" [closable]="true" (_close)="handleClose()">
+</GoabModal>`,
+        angular: `<goab-modal heading="Wide modal" [open]="isOpen" maxWidth="80ch" [closable]="true" (_close)="handleClose()">
   <p>This modal has a wider maximum width for more content.</p>
-</goabx-modal>`,
+</goab-modal>`,
         webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
 <goa-modal version="2" id="demo-modal" heading="Wide modal" maxwidth="80ch" closable>
   <p>This modal has a wider maximum width for more content.</p>
@@ -99,20 +99,20 @@ export const modalConfigurations: ComponentConfigurations = {
       name: 'Destructive action',
       description: 'Confirmation modal for destructive actions',
       code: {
-        react: `<GoabxModal heading="Are you sure you want to delete this item?" open={isOpen} closable onClose={handleClose}>
+        react: `<GoabModal heading="Are you sure you want to delete this item?" open={isOpen} closable onClose={handleClose}>
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <GoabButtonGroup alignment="end" mt="l">
-    <GoabxButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabxButton>
-    <GoabxButton variant="destructive" size="compact" onClick={handleDelete}>Delete</GoabxButton>
+    <GoabButton type="secondary" size="compact" onClick={handleClose}>Cancel</GoabButton>
+    <GoabButton variant="destructive" size="compact" onClick={handleDelete}>Delete</GoabButton>
   </GoabButtonGroup>
-</GoabxModal>`,
-        angular: `<goabx-modal heading="Are you sure you want to delete this item?" [open]="isOpen" [closable]="true" (_close)="handleClose()">
+</GoabModal>`,
+        angular: `<goab-modal heading="Are you sure you want to delete this item?" [open]="isOpen" [closable]="true" (_close)="handleClose()">
   <p>This action cannot be undone. The item will be permanently removed.</p>
   <goab-button-group alignment="end" mt="l">
-    <goabx-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goabx-button>
-    <goabx-button variant="destructive" size="compact" (_click)="handleDelete()">Delete</goabx-button>
+    <goab-button type="secondary" size="compact" (_click)="handleClose()">Cancel</goab-button>
+    <goab-button variant="destructive" size="compact" (_click)="handleDelete()">Delete</goab-button>
   </goab-button-group>
-</goabx-modal>`,
+</goab-modal>`,
         webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
 <goa-modal version="2" id="demo-modal" heading="Are you sure you want to delete this item?" closable>
   <p>This action cannot be undone. The item will be permanently removed.</p>

@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
 import { vi, describe, it, expect } from "vitest";
 import { useState, useMemo } from "react";
-import { GoabxTable, GoabxTableSortHeader } from "../src/experimental";
+import { GoabTable, GoabTableSortHeader } from "../src";
 
 type SortEntry = { column: string; direction: "asc" | "desc" };
 type RowData = { id: number; name: string; department: string; salary: number };
@@ -60,7 +60,7 @@ async function waitForHeaders(container: HTMLElement, count: number) {
   );
 }
 
-describe("GoabxTable Browser Tests", () => {
+describe("GoabTable Browser Tests", () => {
   describe("single-column sorting", () => {
     it("should sort by name ascending on first click", async () => {
       const onSort = vi.fn();
@@ -70,7 +70,7 @@ describe("GoabxTable Browser Tests", () => {
         const sorted = useMemo(() => sortData(initialData, sorts), [sorts]);
 
         return (
-          <GoabxTable
+          <GoabTable
             testId="single-sort-table"
             onSort={(detail) => {
               setSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }]);
@@ -80,13 +80,13 @@ describe("GoabxTable Browser Tests", () => {
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="department">Department</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="salary">Salary</GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -99,7 +99,7 @@ describe("GoabxTable Browser Tests", () => {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 
@@ -136,7 +136,7 @@ describe("GoabxTable Browser Tests", () => {
         const sorted = useMemo(() => sortData(initialData, sorts), [sorts]);
 
         return (
-          <GoabxTable
+          <GoabTable
             testId="toggle-sort-table"
             onSort={(detail) => {
               setSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }]);
@@ -145,10 +145,10 @@ describe("GoabxTable Browser Tests", () => {
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="salary">Salary</GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -160,7 +160,7 @@ describe("GoabxTable Browser Tests", () => {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 
@@ -198,7 +198,7 @@ describe("GoabxTable Browser Tests", () => {
         const sorted = useMemo(() => sortData(initialData, sorts), [sorts]);
 
         return (
-          <GoabxTable
+          <GoabTable
             testId="switch-col-table"
             onSort={(detail) => {
               setSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }]);
@@ -207,10 +207,10 @@ describe("GoabxTable Browser Tests", () => {
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="salary">Salary</GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -222,7 +222,7 @@ describe("GoabxTable Browser Tests", () => {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 
@@ -257,7 +257,7 @@ describe("GoabxTable Browser Tests", () => {
         const sorted = useMemo(() => sortData(initialData, sorts), [sorts]);
 
         return (
-          <GoabxTable
+          <GoabTable
             testId="multi-sort-table"
             sortMode="multi"
             onMultiSort={(detail) => {
@@ -267,13 +267,13 @@ describe("GoabxTable Browser Tests", () => {
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="department">Department</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="salary">Salary</GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -286,7 +286,7 @@ describe("GoabxTable Browser Tests", () => {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 
@@ -329,7 +329,7 @@ describe("GoabxTable Browser Tests", () => {
         const sorted = useMemo(() => sortData(initialData, sorts), [sorts]);
 
         return (
-          <GoabxTable
+          <GoabTable
             testId="initial-sort-table"
             sortMode="multi"
             onMultiSort={(detail) => {
@@ -340,17 +340,17 @@ describe("GoabxTable Browser Tests", () => {
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department" direction="asc" sortOrder={1}>
+                  <GoabTableSortHeader name="department" direction="asc" sortOrder={1}>
                     Department
-                  </GoabxTableSortHeader>
+                  </GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="salary" direction="desc" sortOrder={2}>
+                  <GoabTableSortHeader name="salary" direction="desc" sortOrder={2}>
                     Salary
-                  </GoabxTableSortHeader>
+                  </GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -363,7 +363,7 @@ describe("GoabxTable Browser Tests", () => {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 
@@ -402,7 +402,7 @@ describe("GoabxTable Browser Tests", () => {
         const sorted = useMemo(() => sortData(initialData, sorts), [sorts]);
 
         return (
-          <GoabxTable
+          <GoabTable
             testId="initial-then-click-table"
             sortMode="multi"
             onMultiSort={(detail) => {
@@ -412,17 +412,17 @@ describe("GoabxTable Browser Tests", () => {
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department" direction="asc" sortOrder={1}>
+                  <GoabTableSortHeader name="department" direction="asc" sortOrder={1}>
                     Department
-                  </GoabxTableSortHeader>
+                  </GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="salary" direction="desc" sortOrder={2}>
+                  <GoabTableSortHeader name="salary" direction="desc" sortOrder={2}>
                     Salary
-                  </GoabxTableSortHeader>
+                  </GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -435,7 +435,7 @@ describe("GoabxTable Browser Tests", () => {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 
@@ -472,14 +472,14 @@ describe("GoabxTable Browser Tests", () => {
     it("should update direction attribute on sort header after clicking", async () => {
       const Component = () => {
         return (
-          <GoabxTable testId="direction-attr-table" onSort={() => { /* noop */ }}>
+          <GoabTable testId="direction-attr-table" onSort={() => { /* noop */ }}>
             <thead>
               <tr>
                 <th>
-                  <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
                 </th>
                 <th>
-                  <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+                  <GoabTableSortHeader name="department">Department</GoabTableSortHeader>
                 </th>
               </tr>
             </thead>
@@ -489,7 +489,7 @@ describe("GoabxTable Browser Tests", () => {
                 <td>Engineering</td>
               </tr>
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         );
       };
 

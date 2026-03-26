@@ -1,14 +1,16 @@
 import { useState } from "react";
 import {
-  GoabxButton,
-  GoabxDropdown,
-  GoabxDropdownItem,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-} from "@abgov/react-components/experimental";
-import { GoabButtonGroup, GoabDivider } from "@abgov/react-components";
+  GoabButton,
+  GoabButtonGroup,
+  GoabDivider,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabInput,
+  GoabRadioGroup,
+  GoabRadioItem,
+} from "@abgov/react-components";
+
 import {
   GoabDropdownItemMountType,
   GoabDropdownOnChangeDetail,
@@ -68,43 +70,43 @@ export function DynamicallyAddAnItemToADropdownList() {
 
   return (
     <>
-      <GoabxFormItem
+      <GoabFormItem
           requirement="required"
           label="Name of item"
           error={taskError ? "Please enter item name" : undefined}
           helpText="Add an item to the dropdown list below">
-          <GoabxInput
+          <GoabInput
             onChange={(event: GoabInputOnChangeDetail) => setNewTask(event.value)}
             name="item"
             value={newTask}
           />
-        </GoabxFormItem>
+        </GoabFormItem>
 
-        <GoabxFormItem mt="l" label="Add to">
-          <GoabxRadioGroup
+        <GoabFormItem mt="l" label="Add to">
+          <GoabRadioGroup
             name="mountType"
             onChange={(event: GoabRadioGroupOnChangeDetail) => onMountTypeChange(event.value)}
             value={mountType}
             orientation="horizontal">
-            <GoabxRadioItem value="prepend" label="Start" />
-            <GoabxRadioItem value="append" label="End" />
-          </GoabxRadioGroup>
-        </GoabxFormItem>
+            <GoabRadioItem value="prepend" label="Start" />
+            <GoabRadioItem value="append" label="End" />
+          </GoabRadioGroup>
+        </GoabFormItem>
 
         <GoabButtonGroup alignment="start" gap="relaxed" mt="l">
-          <GoabxButton type="primary" onClick={addTask}>
+          <GoabButton type="primary" onClick={addTask}>
             Add new item
-          </GoabxButton>
-          <GoabxButton type="tertiary" onClick={reset}>
+          </GoabButton>
+          <GoabButton type="tertiary" onClick={reset}>
             Reset list
-          </GoabxButton>
+          </GoabButton>
         </GoabButtonGroup>
 
         <GoabDivider mt="l" />
 
-        <GoabxFormItem mt="l" label="All items">
+        <GoabFormItem mt="l" label="All items">
           <div style={{ width: isReset ? "320px" : "auto" }}>
-            <GoabxDropdown
+            <GoabDropdown
               key={tasks.length}
               onChange={(event: GoabDropdownOnChangeDetail) =>
                 setSelectedTask(event.value as string)
@@ -112,16 +114,16 @@ export function DynamicallyAddAnItemToADropdownList() {
               value={selectedTask}
               name="selectedTask">
               {tasks.map(task => (
-                <GoabxDropdownItem
+                <GoabDropdownItem
                   key={task.value}
                   value={task.value}
                   mountType={task.mount}
                   label={task.label}
                 />
               ))}
-            </GoabxDropdown>
+            </GoabDropdown>
           </div>
-      </GoabxFormItem>
+      </GoabFormItem>
     </>
   );
 }

@@ -1,4 +1,9 @@
-import { GoabIconType, Spacing } from "@abgov/ui-components-common";
+import {
+  GoabIconType,
+  GoabLinkColor,
+  GoabLinkSize,
+  Spacing,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -17,6 +22,8 @@ import {
         [attr.trailingicon]="trailingIcon"
         [attr.testid]="testId"
         [attr.action]="action"
+        [attr.color]="color"
+        [attr.size]="size"
         [attr.action-arg]="actionArg"
         [attr.action-args]="JSON.stringify(actionArgs)"
         [attr.mt]="mt"
@@ -37,6 +44,8 @@ export class GoabLink implements OnInit {
   @Input() trailingIcon?: GoabIconType;
   @Input() testId?: string;
   @Input() action?: string;
+  @Input() color?: GoabLinkColor = "interactive";
+  @Input() size?: GoabLinkSize = "medium";
   @Input() actionArg?: string;
   @Input() actionArgs?: Record<string, unknown>;
   @Input() mt?: Spacing;

@@ -1,5 +1,5 @@
 import { render } from "vitest-browser-react";
-import { GoabxCheckboxList, GoabxCheckbox } from "../src/experimental";
+import { GoabCheckboxList, GoabCheckbox } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { useState } from "react";
 import { userEvent } from "@vitest/browser/context";
@@ -9,10 +9,10 @@ describe("CheckboxList V2", () => {
     const Component = () => {
       return (
         <div data-testid="container">
-          <GoabxCheckboxList name="test-list" testId="checkbox-list">
-            <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-            <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-          </GoabxCheckboxList>
+          <GoabCheckboxList name="test-list" testId="checkbox-list">
+            <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+            <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+          </GoabCheckboxList>
         </div>
       );
     };
@@ -38,16 +38,16 @@ describe("CheckboxList V2", () => {
       return (
         <div data-testid="container">
           <span data-testid="selected-values">{selectedValues.join(",")}</span>
-          <GoabxCheckboxList
+          <GoabCheckboxList
             name="test-list"
             testId="checkbox-list"
             value={selectedValues}
             onChange={(detail) => setSelectedValues(detail.value)}
           >
-            <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-            <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-            <GoabxCheckbox name="option3" text="Option 3" testId="checkbox-3" />
-          </GoabxCheckboxList>
+            <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+            <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+            <GoabCheckbox name="option3" text="Option 3" testId="checkbox-3" />
+          </GoabCheckboxList>
         </div>
       );
     };
@@ -100,16 +100,16 @@ describe("CheckboxList V2", () => {
           <button data-testid="clear-values-btn" onClick={() => setSelectedValues([])}>
             Clear Values
           </button>
-          <GoabxCheckboxList
+          <GoabCheckboxList
             name="test-list"
             testId="checkbox-list"
             value={selectedValues}
             onChange={(detail) => setSelectedValues(detail.value)}
           >
-            <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-            <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-            <GoabxCheckbox name="option3" text="Option 3" testId="checkbox-3" />
-          </GoabxCheckboxList>
+            <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+            <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+            <GoabCheckbox name="option3" text="Option 3" testId="checkbox-3" />
+          </GoabCheckboxList>
         </div>
       );
     };
@@ -161,16 +161,16 @@ describe("CheckboxList V2", () => {
           >
             Toggle Disabled
           </button>
-          <GoabxCheckboxList
+          <GoabCheckboxList
             name="test-list"
             testId="checkbox-list"
             disabled={isDisabled}
             value={selectedValues}
             onChange={(detail) => setSelectedValues(detail.value)}
           >
-            <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-            <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-          </GoabxCheckboxList>
+            <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+            <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+          </GoabCheckboxList>
         </div>
       );
     };
@@ -204,14 +204,14 @@ describe("CheckboxList V2", () => {
 
   it("should propagate disabled state to child checkboxes on mount", async () => {
     const Component = () => (
-      <GoabxCheckboxList
+      <GoabCheckboxList
         name="test-list"
         testId="checkbox-list"
         disabled={true}
       >
-        <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-        <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-      </GoabxCheckboxList>
+        <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+        <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+      </GoabCheckboxList>
     );
 
     const result = render(<Component />);
@@ -229,14 +229,14 @@ describe("CheckboxList V2", () => {
 
   it("should propagate error state to child checkboxes on mount", async () => {
     const Component = () => (
-      <GoabxCheckboxList
+      <GoabCheckboxList
         name="test-list"
         testId="checkbox-list"
         error={true}
       >
-        <GoabxCheckbox name="option1" text="Option 1" testId="checkbox-1" />
-        <GoabxCheckbox name="option2" text="Option 2" testId="checkbox-2" />
-      </GoabxCheckboxList>
+        <GoabCheckbox name="option1" text="Option 1" testId="checkbox-1" />
+        <GoabCheckbox name="option2" text="Option 2" testId="checkbox-2" />
+      </GoabCheckboxList>
     );
 
     const result = render(<Component />);
@@ -256,13 +256,13 @@ describe("CheckboxList V2", () => {
     const onChange = vi.fn();
 
     const Component = () => (
-      <GoabxCheckboxList
+      <GoabCheckboxList
         name="event-list"
         testId="event-checkbox-list"
         onChange={onChange}
       >
-        <GoabxCheckbox name="event-option1" text="Option 1" testId="event-checkbox-1" />
-      </GoabxCheckboxList>
+        <GoabCheckbox name="event-option1" text="Option 1" testId="event-checkbox-1" />
+      </GoabCheckboxList>
     );
 
     const result = render(<Component />);
@@ -283,10 +283,10 @@ describe("CheckboxList V2", () => {
     const Component = () => {
       return (
         <div data-testid="container">
-          <GoabxCheckboxList name="compact-list" testId="compact-checkbox-list" size="compact">
-            <GoabxCheckbox name="option1" text="Option 1" size="compact" testId="compact-checkbox-1" />
-            <GoabxCheckbox name="option2" text="Option 2" size="compact" testId="compact-checkbox-2" />
-          </GoabxCheckboxList>
+          <GoabCheckboxList name="compact-list" testId="compact-checkbox-list" size="compact">
+            <GoabCheckbox name="option1" text="Option 1" size="compact" testId="compact-checkbox-1" />
+            <GoabCheckbox name="option2" text="Option 2" size="compact" testId="compact-checkbox-2" />
+          </GoabCheckboxList>
         </div>
       );
     };

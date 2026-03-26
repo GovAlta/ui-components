@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
-import GoabButton from "../../lib/button/button";
+import GoabButton from "../button/button";
 import { GoabModal, GoabModalProps } from "./modal";
 
-describe("Modal", () => {
+describe("GoabModal", () => {
   it("should render", async () => {
     const { baseElement } = render(<GoabModal>Modal Content</GoabModal>);
 

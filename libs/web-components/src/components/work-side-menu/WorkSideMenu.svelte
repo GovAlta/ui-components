@@ -110,7 +110,7 @@
   }
 
   function getShadowLinkEl(el: Element): HTMLAnchorElement | null | undefined {
-    if (el.tagName.includes("GOABX")) {
+    if (el.tagName.includes("GOAB")) {
       const firstChild = el.firstElementChild as Element;
       if (!firstChild) return null;
       el = firstChild;

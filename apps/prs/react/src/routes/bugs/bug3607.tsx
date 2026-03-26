@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import {
-  GoabFormItem,
   GoabCheckbox,
   GoabCheckboxList,
+  GoabFormItem,
   GoabInput,
   GoabRadioGroup,
   GoabRadioItem,
 } from "@abgov/react-components";
-import {
-  GoabxFormItem,
-  GoabxCheckbox,
-  GoabxCheckboxList,
-  GoabxInput,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-} from "@abgov/react-components/experimental";
 
 export function Bug3607Route() {
   const [contactMethod, setContactMethod] = useState("");
@@ -99,43 +91,43 @@ export function Bug3607Route() {
 
       <h2>Version 2 (Experimental)</h2>
       <h3>Regular size</h3>
-      <GoabxFormItem
+      <GoabFormItem
         label="How would you like to be contacted?"
         helpText="Select one option"
       >
-        <GoabxRadioGroup
+        <GoabRadioGroup
           name="contactMethod"
           value={contactMethodTwo}
           onChange={(e) => setContactMethodTwo(e.value)}
         >
-          <GoabxRadioItem
+          <GoabRadioItem
             value="email-1"
             description="Receive updates via email"
             label="Email"
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="phone-1"
             label="Phone"
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="text-1"
             label="Text message"
             reveal={
-              <GoabxFormItem label="Mobile phone number">
-                <GoabxInput name="mobilePhoneNumber" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Mobile phone number">
+                <GoabInput name="mobilePhoneNumber" value="" />
+              </GoabFormItem>
             }
           />
-        </GoabxRadioGroup>
-      </GoabxFormItem>
+        </GoabRadioGroup>
+      </GoabFormItem>
 
-      <GoabxFormItem label="Select any interests you have" mt="xl">
-        <GoabxCheckboxList
+      <GoabFormItem label="Select any interests you have" mt="xl">
+        <GoabCheckboxList
           name="contactMethods"
           value={checkboxSelectionTwo}
           onChange={(e) => setCheckboxSelectionTwo(e.value || [])}
         >
-          <GoabxCheckbox
+          <GoabCheckbox
             name="travel-1"
             description={
               <span>
@@ -145,69 +137,69 @@ export function Bug3607Route() {
             text="Travel"
             value="travel-1"
           />
-          <GoabxCheckbox
+          <GoabCheckbox
             name="music-1"
             text="Music"
             value="music-1"
           />
-          <GoabxCheckbox
+          <GoabCheckbox
             name="sports-1"
             text="Sports"
             value="sports-1"
           />
-          <GoabxCheckbox
+          <GoabCheckbox
             name="other-1"
             text="Other"
             value="other-1"
             reveal={
-              <GoabxFormItem label="Other field">
-                <GoabxInput name="otherTextField" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Other field">
+                <GoabInput name="otherTextField" value="" />
+              </GoabFormItem>
             }
           />
-        </GoabxCheckboxList>
-      </GoabxFormItem>
+        </GoabCheckboxList>
+      </GoabFormItem>
 
       <h3>Compact size</h3>
-      <GoabxFormItem
+      <GoabFormItem
         label="How would you like to be contacted?"
         helpText="Select one option"
       >
-        <GoabxRadioGroup
+        <GoabRadioGroup
           size="compact"
           name="contactMethodThree"
           value={contactMethodThree}
           onChange={(e) => setContactMethodThree(e.value)}
         >
-          <GoabxRadioItem
+          <GoabRadioItem
             value="email-2"
             description="Receive updates via email"
             label="Email"
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="phone-2"
             label="Phone"
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="text-2"
             label="Text message"
             reveal={
-              <GoabxFormItem label="Mobile phone number">
-                <GoabxInput name="mobilePhoneNumber" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Mobile phone number">
+                <GoabInput name="mobilePhoneNumber" value="" />
+              </GoabFormItem>
             }
           />
-        </GoabxRadioGroup>
-      </GoabxFormItem>
+        </GoabRadioGroup>
+      </GoabFormItem>
 
-      <GoabxFormItem label="Select any interests you have" mt="xl">
-        <GoabxCheckboxList
+      <GoabFormItem label="Select any interests you have" mt="xl">
+        <GoabCheckboxList
           size="compact"
           name="contactMethods"
           value={checkboxSelectionThree}
           onChange={(e) => setCheckboxSelectionThree(e.value || [])}
         >
-          <GoabxCheckbox
+          <GoabCheckbox
             size="compact"
             description={
               <span>
@@ -218,31 +210,31 @@ export function Bug3607Route() {
             text="Travel"
             value="travel-2"
           />
-          <GoabxCheckbox
+          <GoabCheckbox
             size="compact"
             name="music-2"
             text="Music"
             value="music-2"
           />
-          <GoabxCheckbox
+          <GoabCheckbox
             size="compact"
             name="sports-2"
             text="Sports"
             value="sports-2"
           />
-          <GoabxCheckbox
+          <GoabCheckbox
             size="compact"
             name="other-2"
             text="Other"
             value="other-2"
             reveal={
-              <GoabxFormItem label="Other field">
-                <GoabxInput name="otherTextField" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Other field">
+                <GoabInput name="otherTextField" value="" />
+              </GoabFormItem>
             }
           />
-        </GoabxCheckboxList>
-      </GoabxFormItem>
+        </GoabCheckboxList>
+      </GoabFormItem>
     </div>
 
   );

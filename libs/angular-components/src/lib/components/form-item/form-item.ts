@@ -11,33 +11,34 @@ import {
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
+import { GoabFormItemType } from "@abgov/ui-components-common";
 
 @Component({
   standalone: true,
   selector: "goab-form-item",
-  template: `
-    @if (isReady) {
-      <goa-form-item
-        [attr.label]="label"
-        [attr.labelsize]="labelSize"
-        [attr.helptext]="helpText"
-        [attr.error]="error"
-        [attr.testid]="testId"
-        [id]="id"
-        [attr.name]="name"
-        [attr.requirement]="requirement"
-        [attr.maxwidth]="maxWidth"
-        [attr.public-form-summary-order]="publicFormSummaryOrder"
-        [attr.mt]="mt"
-        [attr.mb]="mb"
-        [attr.mr]="mr"
-        [attr.ml]="ml"
-      >
-        <ng-content />
-        <ng-content select="goab-form-item-slot"></ng-content>
-      </goa-form-item>
-    }
-  `,
+  template: `@if (isReady) {
+    <goa-form-item
+      [attr.version]="version"
+      [attr.label]="label"
+      [attr.labelsize]="labelSize"
+      [attr.helptext]="helpText"
+      [attr.error]="error"
+      [attr.testid]="testId"
+      [attr.type]="type"
+      [id]="id"
+      [attr.name]="name"
+      [attr.requirement]="requirement"
+      [attr.maxwidth]="maxWidth"
+      [attr.public-form-summary-order]="publicFormSummaryOrder"
+      [attr.mt]="mt"
+      [attr.mb]="mb"
+      [attr.mr]="mr"
+      [attr.ml]="ml"
+    >
+      <ng-content />
+      <ng-content select="goab-form-item-slot"></ng-content>
+    </goa-form-item>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormItem extends GoabBaseComponent implements OnInit {
@@ -48,6 +49,7 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
   @Input() requirement?: GoabFormItemRequirement;
   @Input() maxWidth?: string;
   @Input() id?: string;
+  @Input() type?: GoabFormItemType = "";
   /**
    * Public form: to arrange fields in the summary
    */
@@ -58,6 +60,7 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
   @Input() name?: string;
 
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

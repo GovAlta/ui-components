@@ -5,6 +5,7 @@ import {
   GoabInputOnChangeDetail,
   GoabInputOnFocusDetail,
   GoabInputOnKeyPressDetail,
+  GoabInputSize,
   GoabInputType,
 } from "@abgov/ui-components-common";
 import {
@@ -25,84 +26,79 @@ import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
 import { NgTemplateOutlet } from "@angular/common";
 
-export interface IgnoreMe {
-  ignore: string;
-}
-
 @Component({
   standalone: true,
   selector: "goab-input",
   imports: [NgTemplateOutlet],
-  template: `
-    @if (isReady) {
-      <goa-input
-        #goaComponentRef
-        [attr.type]="type"
-        [attr.name]="name"
-        [attr.focused]="focused"
-        [attr.value]="value"
-        [attr.autocapitalize]="autoCapitalize"
-        [attr.autocomplete]="autoComplete"
-        [attr.placeholder]="placeholder"
-        [attr.leadingicon]="leadingIcon"
-        [attr.trailingicon]="trailingIcon"
-        [attr.variant]="variant"
-        [disabled]="disabled"
-        [attr.readonly]="readonly"
-        [attr.error]="error"
-        [attr.data-testid]="testId"
-        [attr.width]="width"
-        [attr.arialabel]="ariaLabel"
-        [attr.arialabelledby]="ariaLabelledBy"
-        [attr.min]="min"
-        [attr.max]="max"
-        [attr.step]="step"
-        [attr.prefix]="prefix"
-        [attr.suffix]="suffix"
-        [attr.debounce]="debounce"
-        [attr.maxlength]="maxLength"
-        [attr.id]="id"
-        [attr.mt]="mt"
-        [attr.mr]="mr"
-        [attr.mb]="mb"
-        [attr.ml]="ml"
-        [attr.handletrailingiconclick]="handleTrailingIconClick"
-        [attr.textalign]="textAlign"
-        (_trailingIconClick)="_onTrailingIconClick($event)"
-        (_change)="_onChange($event)"
-        (_focus)="_onFocus($event)"
-        (_blur)="_onBlur($event)"
-        (_keyPress)="_onKeyPress($event)"
-        [attr.trailingiconarialabel]="trailingIconAriaLabel"
-      >
+  template: `@if (isReady) {
+    <goa-input
+      #goaComponentRef
+      [attr.version]="version"
+      [attr.type]="type"
+      [attr.name]="name"
+      [attr.focused]="focused"
+      [attr.value]="value"
+      [attr.autocapitalize]="autoCapitalize"
+      [attr.autocomplete]="autoComplete"
+      [attr.placeholder]="placeholder"
+      [attr.leadingicon]="leadingIcon"
+      [attr.trailingicon]="trailingIcon"
+      [attr.variant]="variant"
+      [disabled]="disabled"
+      [attr.readonly]="readonly"
+      [attr.error]="error"
+      [attr.data-testid]="testId"
+      [attr.width]="width"
+      [attr.arialabel]="ariaLabel"
+      [attr.arialabelledby]="ariaLabelledBy"
+      [attr.min]="min"
+      [attr.max]="max"
+      [attr.step]="step"
+      [attr.prefix]="prefix"
+      [attr.suffix]="suffix"
+      [attr.debounce]="debounce"
+      [attr.maxlength]="maxLength"
+      [attr.id]="id"
+      [attr.mt]="mt"
+      [attr.mr]="mr"
+      [attr.mb]="mb"
+      [attr.ml]="ml"
+      [attr.handletrailingiconclick]="handleTrailingIconClick"
+      [attr.textalign]="textAlign"
+      [attr.size]="size"
+      (_trailingIconClick)="_onTrailingIconClick($event)"
+      (_change)="_onChange($event)"
+      (_focus)="_onFocus($event)"
+      (_blur)="_onBlur($event)"
+      (_keyPress)="_onKeyPress($event)"
+      [attr.trailingiconarialabel]="trailingIconAriaLabel"
+    >
+      @if (leadingContent) {
         <div slot="leadingContent">
-          @if (leadingContent) {
-            @if (getLeadingContentAsTemplate()) {
-              <ng-container
-                [ngTemplateOutlet]="getLeadingContentAsTemplate()"
-              ></ng-container>
-            } @else {
-              {{ getLeadingContentAsString() }}
-            }
+          @if (getLeadingContentAsTemplate()) {
+            <ng-container [ngTemplateOutlet]="getLeadingContentAsTemplate()">
+            </ng-container>
+          } @else {
+            {{ getLeadingContentAsString() }}
           }
         </div>
+      }
 
-        <ng-content />
+      <ng-content />
 
+      @if (trailingContent) {
         <div slot="trailingContent">
-          @if (trailingContent) {
-            @if (getTrailingContentAsTemplate()) {
-              <ng-container
-                [ngTemplateOutlet]="getTrailingContentAsTemplate()"
-              ></ng-container>
-            } @else {
-              {{ getTrailingContentAsString() }}
-            }
+          @if (getTrailingContentAsTemplate()) {
+            <ng-container
+              [ngTemplateOutlet]="getTrailingContentAsTemplate()"
+            ></ng-container>
+          } @else {
+            {{ getTrailingContentAsString() }}
           }
         </div>
-      </goa-input>
-    }
-  `,
+      }
+    </goa-input>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
@@ -137,6 +133,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Input() textAlign?: "left" | "right" = "left";
   @Input() leadingContent!: string | TemplateRef<any>;
   @Input() trailingContent!: string | TemplateRef<any>;
+  @Input() size?: GoabInputSize = "default";
 
   @Output() onTrailingIconClick = new EventEmitter();
   @Output() onFocus = new EventEmitter<GoabInputOnFocusDetail>();
@@ -145,6 +142,7 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
   isReady = false;
+  version = "2";
   handleTrailingIconClick = false;
 
   constructor(

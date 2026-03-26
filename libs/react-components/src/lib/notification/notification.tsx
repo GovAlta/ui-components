@@ -1,10 +1,36 @@
-import { GoabAriaLiveType, GoabNotificationType } from "@abgov/ui-components-common";
+import {
+  GoabAriaLiveType,
+  GoabNotificationEmphasis,
+  GoabNotificationType,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
+
+interface WCProps {
+  ref: React.RefObject<HTMLElement | null>;
+  type: GoabNotificationType;
+  maxcontentwidth?: string;
+  arialive?: GoabAriaLiveType;
+  testid?: string;
+  emphasis?: GoabNotificationEmphasis;
+  compact?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-notification": WCProps & React.HTMLAttributes<HTMLButtonElement>;
+    }
+  }
+}
 
 export interface GoabNotificationProps {
   type?: GoabNotificationType;
   ariaLive?: GoabAriaLiveType;
   maxContentWidth?: string;
+  emphasis?: GoabNotificationEmphasis;
+  compact?: boolean;
   children?: React.ReactNode;
   onDismiss?: () => void;
   testId?: string;
@@ -12,6 +38,8 @@ export interface GoabNotificationProps {
 
 export const GoabNotification = ({
   type = "information",
+  emphasis = "high",
+  compact,
   ariaLive,
   maxContentWidth,
   children,
@@ -42,6 +70,9 @@ export const GoabNotification = ({
       testid={testId}
       maxcontentwidth={maxContentWidth}
       arialive={ariaLive}
+      emphasis={emphasis}
+      compact={compact ? "true" : undefined}
+      version="2"
     >
       {children}
     </goa-notification>

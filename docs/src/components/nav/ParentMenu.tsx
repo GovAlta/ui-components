@@ -8,9 +8,9 @@
 
 import React from "react";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-} from "@abgov/react-components/experimental";
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+} from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
 export type MenuSection =
@@ -71,7 +71,7 @@ export function ParentMenu({
         if (directUrl) {
           // Direct navigation - use url prop
           return (
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               key={section.id}
               label={section.label}
               icon={section.icon}
@@ -89,7 +89,7 @@ export function ParentMenu({
               onClick={handleSubmenuClick(section.id)}
               style={{ cursor: "pointer" }}
             >
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 label={section.label}
                 icon={section.icon}
                 url={submenuUrl}
@@ -100,7 +100,7 @@ export function ParentMenu({
         } else {
           // Placeholder sections - disabled for now
           return (
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               key={section.id}
               label={section.label}
               icon={section.icon}
@@ -114,7 +114,7 @@ export function ParentMenu({
 
   return (
     <>
-      <GoabxWorkSideMenu
+      <GoabWorkSideMenu
         heading="Design system"
         url="/"
         open={isOpen}

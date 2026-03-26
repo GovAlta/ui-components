@@ -3,9 +3,9 @@ import { Component } from "@angular/core";
 import {
   GoabButton,
   GoabText,
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
 } from "@abgov/angular-components";
 
 @Component({
@@ -16,9 +16,9 @@ import {
     CommonModule,
     GoabButton,
     GoabText,
-    GoabxWorkSideMenu,
-    GoabxWorkSideMenuGroup,
-    GoabxWorkSideMenuItem,
+    GoabWorkSideMenu,
+    GoabWorkSideMenuGroup,
+    GoabWorkSideMenuItem,
   ],
 })
 export class Feat3398Component {

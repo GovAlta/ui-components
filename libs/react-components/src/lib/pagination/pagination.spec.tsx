@@ -1,13 +1,13 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
-import Pagination from "./pagination";
+import GoabPagination from "./pagination";
 import { GoabPaginationOnChangeDetail } from "@abgov/ui-components-common";
 
-describe("Pagination", () => {
+describe("GoabPagination", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <Pagination
+      <GoabPagination
         onChange={() => { /* do nothing */ }}
         pageNumber={1}
         itemCount={100}
@@ -36,7 +36,7 @@ describe("Pagination", () => {
     const fn = vi.fn();
 
     const { baseElement } = render(
-      <Pagination onChange={fn} pageNumber={1} itemCount={100} />
+      <GoabPagination onChange={fn} pageNumber={1} itemCount={100} />
     );
     const detail: GoabPaginationOnChangeDetail = { page: 2 };
 

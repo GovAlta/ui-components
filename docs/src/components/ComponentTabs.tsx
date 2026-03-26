@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react";
-import { GoabxTabs } from "@abgov/react-components/experimental";
-import { GoabTab } from "@abgov/react-components";
+import {
+  GoabTab,
+  GoabTabs,
+} from "@abgov/react-components";
 
 interface TabConfig {
   id: string;
@@ -28,7 +30,7 @@ export function ComponentTabs({ tabs, children }: ComponentTabsProps) {
 
   return (
     <div className="component-tabs">
-      <GoabxTabs initialTab={0} onChange={handleTabChange}>
+      <GoabTabs initialTab={0} onChange={handleTabChange}>
         {tabs.map((tab, index) => (
           <GoabTab
             key={tab.id}
@@ -39,7 +41,7 @@ export function ComponentTabs({ tabs, children }: ComponentTabsProps) {
             </div>
           </GoabTab>
         ))}
-      </GoabxTabs>
+      </GoabTabs>
 
       <style>{`
         .component-tabs {

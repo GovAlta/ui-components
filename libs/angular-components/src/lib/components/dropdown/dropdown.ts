@@ -1,4 +1,8 @@
-import { GoabDropdownOnChangeDetail, GoabIconType } from "@abgov/ui-components-common";
+import {
+  GoabDropdownOnChangeDetail,
+  GoabDropdownSize,
+  GoabIconType,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -24,6 +28,7 @@ import { GoabControlValueAccessor } from "../base.component";
     @if (isReady) {
       <goa-dropdown
         #goaComponentRef
+        [attr.version]="version"
         [attr.name]="name"
         [value]="value"
         [attr.arialabel]="ariaLabel"
@@ -45,6 +50,7 @@ import { GoabControlValueAccessor } from "../base.component";
         [attr.maxwidth]="maxWidth"
         [attr.relative]="relative"
         [attr.autocomplete]="autoComplete"
+        [attr.size]="size"
         [id]="id"
         (_change)="_onChange($event)"
       >
@@ -74,6 +80,7 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Input() width?: string;
   @Input() maxWidth?: string;
   @Input() autoComplete?: string;
+  @Input() size?: GoabDropdownSize = "default";
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
@@ -81,6 +88,7 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
 
   isReady = false;
+  version = "2";
 
   constructor(
     private cdr: ChangeDetectorRef,

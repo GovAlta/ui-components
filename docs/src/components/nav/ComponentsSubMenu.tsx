@@ -2,15 +2,15 @@
  * ComponentsSubMenu.tsx
  *
  * Sub-menu for Components section showing categories and component links.
- * Uses GoabxWorkSideMenuGroup for expandable category sections.
+ * Uses GoabWorkSideMenuGroup for expandable category sections.
  */
 
 import { type MouseEvent } from "react";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
-} from "@abgov/react-components/experimental";
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
+} from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 import type { NavCategory } from "../../lib/nav-categories";
 
@@ -53,21 +53,21 @@ export function ComponentsSubMenu({
     <>
       {/* Back to parent menu - wrapped div captures click since component doesn't expose onClick */}
       <div onClick={handleBackClick} style={{ cursor: "pointer" }}>
-        <GoabxWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
+        <GoabWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
       </div>
 
       {/* All Components page link
           - On All Components page: use url so auto-matching highlights it
           - On component detail pages: wrap in div to prevent auto-matching */}
       {isAllComponentsPage ? (
-        <GoabxWorkSideMenuItem label="All Components" url="/components" />
+        <GoabWorkSideMenuItem label="All Components" url="/components" />
       ) : (
         <div onClick={handleAllComponentsClick} style={{ cursor: "pointer" }}>
-          <GoabxWorkSideMenuItem label="All Components" url="/__all_components__" />
+          <GoabWorkSideMenuItem label="All Components" url="/__all_components__" />
         </div>
       )}
 
-      {/* Component categories - using GoabxWorkSideMenuGroup for expandable sections */}
+      {/* Component categories - using GoabWorkSideMenuGroup for expandable sections */}
       <div>
         {categories.map((category) => {
           // Auto-expand category if it contains the current component
@@ -85,19 +85,19 @@ export function ComponentsSubMenu({
 
           return (
             <div key={category.slug} onClickCapture={handleGroupClickCapture}>
-              <GoabxWorkSideMenuGroup
+              <GoabWorkSideMenuGroup
                 heading={category.name}
                 open={containsCurrentComponent}
               >
                 {category.components.map((component) => (
-                  <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuItem
                     key={component.slug}
                     label={component.name}
                     url={`/components/${component.slug}`}
                     current={component.slug === currentSlug}
                   />
                 ))}
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
             </div>
           );
         })}
@@ -107,7 +107,7 @@ export function ComponentsSubMenu({
 
   return (
     <>
-      <GoabxWorkSideMenu
+      <GoabWorkSideMenu
         heading="Design System | Components"
         url="/"
         open={isOpen}
