@@ -17,27 +17,27 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       name: "Basic work side menu",
       description: "Side navigation for internal apps",
       code: {
-        react: `<GoabxWorkSideMenu
+        react: `<GoabWorkSideMenu
   heading="My Application"
   url="/"
   onNavigate={(path: string) => navigate(path)}
   primaryContent={
     <>
-      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
-      <GoabxWorkSideMenuItem icon="document" label="Reports" url="/reports" />
-      <GoabxWorkSideMenuItem icon="settings" label="Admin" url="/admin" />
+      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabWorkSideMenuItem icon="document" label="Reports" url="/reports" />
+      <GoabWorkSideMenuItem icon="settings" label="Admin" url="/admin" />
     </>
   }
 />`,
-        angular: `<goabx-work-side-menu heading="My Application" url="/" (onNavigate)="handleNavigate($event)">
+        angular: `<goab-work-side-menu heading="My Application" url="/" (onNavigate)="handleNavigate($event)">
   <div slot="primary-content">
-    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goabx-work-side-menu-item>
-    <goabx-work-side-menu-item icon="list" label="Cases" url="/cases"></goabx-work-side-menu-item>
-    <goabx-work-side-menu-item icon="document" label="Reports" url="/reports"></goabx-work-side-menu-item>
-    <goabx-work-side-menu-item icon="settings" label="Admin" url="/admin"></goabx-work-side-menu-item>
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="document" label="Reports" url="/reports"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="settings" label="Admin" url="/admin"></goab-work-side-menu-item>
   </div>
-</goabx-work-side-menu>`,
+</goab-work-side-menu>`,
         webComponents: `<!-- Listen for _navigate event to handle SPA navigation -->
 <goa-work-side-menu heading="My Application" url="/" open="true">
   <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>
@@ -61,26 +61,26 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       description: "Work menu with expandable groups of items",
       code: {
         react: `
-<GoabxWorkSideMenu
+<GoabWorkSideMenu
   heading="My Application"
   url="/"
   open={true}
   onNavigate={(path: string) => navigate(path)}
   primaryContent={
     <>
-      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabxWorkSideMenuGroup  icon="document" heading="Documents" open={true} >
-        <GoabxWorkSideMenuItem label="Invoices" url="/documents/invoices" />
-        <GoabxWorkSideMenuItem label="Contracts" url="/documents/contracts" />
-        <GoabxWorkSideMenuItem label="Reports" url="/documents/reports" />
-      </GoabxWorkSideMenuGroup>
-      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabWorkSideMenuGroup  icon="document" heading="Documents" open={true} >
+        <GoabWorkSideMenuItem label="Invoices" url="/documents/invoices" />
+        <GoabWorkSideMenuItem label="Contracts" url="/documents/contracts" />
+        <GoabWorkSideMenuItem label="Reports" url="/documents/reports" />
+      </GoabWorkSideMenuGroup>
+      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
     </>
   }
 />
         `,
         angular: `
-<goabx-work-side-menu
+<goab-work-side-menu
   heading="My Application"
   url="/"
   [primaryContent]="primaryTemplate"
@@ -88,15 +88,15 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
   (onNavigate)="handleNavigate($event)"
 >
   <ng-template #primaryTemplate>
-    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard" />
-    <goabx-work-side-menu-group icon="document" heading="Documents" [open]="true">
-      <goabx-work-side-menu-item label="Invoices" url="/documents/invoices" />
-      <goabx-work-side-menu-item label="Contracts" url="/documents/contracts" />
-      <goabx-work-side-menu-item label="Reports" url="/documents/reports" />
-    </goabx-work-side-menu-group>
-    <goabx-work-side-menu-item icon="list" label="Cases" url="/cases" />
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard" />
+    <goab-work-side-menu-group icon="document" heading="Documents" [open]="true">
+      <goab-work-side-menu-item label="Invoices" url="/documents/invoices" />
+      <goab-work-side-menu-item label="Contracts" url="/documents/contracts" />
+      <goab-work-side-menu-item label="Reports" url="/documents/reports" />
+    </goab-work-side-menu-group>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases" />
   </ng-template>
-</goabx-work-side-menu>
+</goab-work-side-menu>
         `,
         webComponents: `
 <!-- Listen for _navigate event to handle SPA navigation -->
@@ -127,30 +127,30 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       name: 'With notifications',
       description: 'Work menu with notification popover panel',
       code: {
-        react: `<GoabxWorkSideMenu
+        react: `<GoabWorkSideMenu
   heading="My Application"
   url="/"
   primaryContent={
     <>
-      <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-      <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+      <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+      <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
     </>
   }
   secondaryContent={
     <>
-      <GoabxWorkSideMenuItem
+      <GoabWorkSideMenuItem
         icon="notifications"
         label="Notifications"
         badge="3"
         type="success"
         popoverContent={
-          <GoabxWorkSideNotificationPanel
+          <GoabWorkSideNotificationPanel
             heading="Notifications"
             activeTab="unread"
             onMarkAllRead={() => handleMarkAllRead()}
             onViewAll={() => handleViewAll()}
           >
-            <GoabxWorkSideNotificationItem
+            <GoabWorkSideNotificationItem
               title="New case assigned"
               description="Case #12345 has been assigned to you."
               timestamp="2025-02-09T10:30:00Z"
@@ -159,7 +159,7 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
               priority="normal"
               onClick={() => handleClick("1")}
             />
-            <GoabxWorkSideNotificationItem
+            <GoabWorkSideNotificationItem
               title="System maintenance"
               description="Scheduled maintenance tonight at 11 PM."
               timestamp="2025-02-09T09:00:00Z"
@@ -168,36 +168,36 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
               priority="urgent"
               onClick={() => handleClick("2")}
             />
-          </GoabxWorkSideNotificationPanel>
+          </GoabWorkSideNotificationPanel>
         }
       />
     </>
   }
 />`,
-        angular: `<goabx-work-side-menu heading="My Application" url="/">
+        angular: `<goab-work-side-menu heading="My Application" url="/">
   <div slot="primary-content">
-    <goabx-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goabx-work-side-menu-item>
-    <goabx-work-side-menu-item icon="list" label="Cases" url="/cases"></goabx-work-side-menu-item>
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
   </div>
   <div slot="secondary-content">
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="notifications"
       label="Notifications"
       badge="3"
       type="success"
       [popoverContent]="notificationsTpl"
-    ></goabx-work-side-menu-item>
+    ></goab-work-side-menu-item>
   </div>
-</goabx-work-side-menu>
+</goab-work-side-menu>
 
 <ng-template #notificationsTpl>
-  <goabx-work-side-notification-panel
+  <goab-work-side-notification-panel
     heading="Notifications"
     activeTab="unread"
     (onMarkAllRead)="handleMarkAllRead()"
     (onViewAll)="handleViewAll()"
   >
-    <goabx-work-side-notification-item
+    <goab-work-side-notification-item
       title="New case assigned"
       description="Case #12345 has been assigned to you."
       timestamp="2025-02-09T10:30:00Z"
@@ -205,8 +205,8 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       readStatus="unread"
       priority="normal"
       (onClick)="handleClick('1')"
-    ></goabx-work-side-notification-item>
-    <goabx-work-side-notification-item
+    ></goab-work-side-notification-item>
+    <goab-work-side-notification-item
       title="System maintenance"
       description="Scheduled maintenance tonight at 11 PM."
       timestamp="2025-02-09T09:00:00Z"
@@ -214,8 +214,8 @@ export const workSideMenuConfigurations: ComponentConfigurations = {
       readStatus="unread"
       priority="urgent"
       (onClick)="handleClick('2')"
-    ></goabx-work-side-notification-item>
-  </goabx-work-side-notification-panel>
+    ></goab-work-side-notification-item>
+  </goab-work-side-notification-panel>
 </ng-template>`,
         webComponents: `<goa-work-side-menu heading="My Application" url="/" open="true">
   <goa-work-side-menu-item slot="primary" icon="grid" label="Dashboard" url="/dashboard"></goa-work-side-menu-item>

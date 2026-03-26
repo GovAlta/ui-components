@@ -1,5 +1,8 @@
-import { GoabxBadge } from "@abgov/react-components/experimental";
-import { GoabAccordion, GoabText } from "@abgov/react-components";
+import {
+  GoabAccordion,
+  GoabBadge,
+  GoabText,
+} from "@abgov/react-components";
 
 export function ExpandOrCollapsePartOfAForm() {
   return (
@@ -26,7 +29,7 @@ export function ExpandOrCollapsePartOfAForm() {
 
       <GoabAccordion
         heading="Referral details"
-        headingContent={<GoabxBadge type="important" content="Updated" />}>
+        headingContent={<GoabBadge type="important" content="Updated" />}>
         <dl className="accordion-example">
           <dt>Date of referral</dt>
           <dd>January 27, 2021</dd>

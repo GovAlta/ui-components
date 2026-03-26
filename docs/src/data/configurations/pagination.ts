@@ -17,18 +17,18 @@ export const paginationConfigurations: ComponentConfigurations = {
       name: 'Basic pagination',
       description: 'Simple pagination with page numbers',
       code: {
-        react: `<GoabxPagination
+        react: `<GoabPagination
   page={1}
   itemCount={100}
   perPageCount={10}
   onChange={handlePageChange}
 />`,
-        angular: `<goabx-pagination
+        angular: `<goab-pagination
   [page]="1"
   [itemCount]="100"
   [perPageCount]="10"
   (_change)="handlePageChange($event)">
-</goabx-pagination>`,
+</goab-pagination>`,
         webComponents: `<goa-pagination version="2"
   page="1"
   itemcount="100"
@@ -41,30 +41,30 @@ export const paginationConfigurations: ComponentConfigurations = {
       name: 'Variants',
       description: 'Different pagination styles',
       code: {
-        react: `<GoabxPagination
+        react: `<GoabPagination
   page={1}
   itemCount={50}
   perPageCount={10}
   variant="all"
 />
-<GoabxPagination
+<GoabPagination
   page={1}
   itemCount={50}
   perPageCount={10}
   variant="links-only"
 />`,
-        angular: `<goabx-pagination
+        angular: `<goab-pagination
   [page]="1"
   [itemCount]="50"
   [perPageCount]="10"
   variant="all">
-</goabx-pagination>
-<goabx-pagination
+</goab-pagination>
+<goab-pagination
   [page]="1"
   [itemCount]="50"
   [perPageCount]="10"
   variant="links-only">
-</goabx-pagination>`,
+</goab-pagination>`,
         webComponents: `<goa-pagination version="2"
   page="1"
   itemcount="50"
@@ -84,18 +84,18 @@ export const paginationConfigurations: ComponentConfigurations = {
       name: 'Middle page',
       description: 'Pagination showing middle page selected',
       code: {
-        react: `<GoabxPagination
+        react: `<GoabPagination
   page={5}
   itemCount={100}
   perPageCount={10}
   onChange={handlePageChange}
 />`,
-        angular: `<goabx-pagination
+        angular: `<goab-pagination
   [page]="5"
   [itemCount]="100"
   [perPageCount]="10"
   (_change)="handlePageChange($event)">
-</goabx-pagination>`,
+</goab-pagination>`,
         webComponents: `<goa-pagination version="2"
   page="5"
   itemcount="100"

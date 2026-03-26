@@ -5,12 +5,11 @@ import {
   GoabAppHeaderMenu,
   GoabMicrositeHeader,
   GoabOneColumnLayout,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
 } from "@abgov/react-components";
-import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
-} from "@abgov/react-components/experimental";
+
 import "@abgov/style";
 
 export function App() {
@@ -52,313 +51,313 @@ export function App() {
         </GoabAppHeader>
       </section>
       <div style={{ display: "flex", minHeight: "100vh" }}>
-        <GoabxWorkSideMenu
+        <GoabWorkSideMenu
           heading="Testing Playground"
           url="/"
           open={true}
           onNavigate={(path: string) => navigate(path)}
           primaryContent={
             <>
-              <GoabxWorkSideMenuGroup icon="alert-circle" heading="Bugs">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
+                <GoabWorkSideMenuItem
                   label="2152 Icon Custom Alignment"
                   url="/bugs/2152"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2331 Block and Tab Dynamic Data"
                   url="/bugs/2331"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2393 Popover Not Appearing"
                   url="/bugs/2393"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2404 Input Angular Icon Button"
                   url="/bugs/2404"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2408 Form Stepper Incomplete Rendering"
                   url="/bugs/2408"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2459 File Upload Card TestId"
                   url="/bugs/2459"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2473 DatePicker Ordinal Suffixes"
                   url="/bugs/2473"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2502 Native Dropdown Height"
                   url="/bugs/2502"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2529 Input Width Generation"
                   url="/bugs/2529"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2547 Popover Hidden Near Notification"
                   url="/bugs/2547"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2655 Dropdown/DatePicker in Modal"
                   url="/bugs/2655"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2720 Tabs Change via Link"
                   url="/bugs/2720"
                 />
-                <GoabxWorkSideMenuItem label="2721 Text Tag Margin" url="/bugs/2721" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="2721 Text Tag Margin" url="/bugs/2721" />
+                <GoabWorkSideMenuItem
                   label="2750 Year Select Sorting"
                   url="/bugs/2750"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2768 Enable/Disable Components"
                   url="/bugs/2768"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2782 Disabled Inputs Hidden"
                   url="/bugs/2782"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2789 Width Rem Measurements"
                   url="/bugs/2789"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2821 Table Header Sorting Toggle"
                   url="/bugs/2821"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2837 InputNumber Leading/Trailing Content"
                   url="/bugs/2837"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2839 Button State After Click"
                   url="/bugs/2839"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2849 Filterable Dropdown Keyboard"
                   url="/bugs/2849"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2852 Filterable Dropdown Space Key"
                   url="/bugs/2852"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2873 Drawer Scrolling Focus"
                   url="/bugs/2873"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2878 DatePicker Input onChange"
                   url="/bugs/2878"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2892 Input Width Calculations"
                   url="/bugs/2892"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2922 Form Stepper Vertical"
                   url="/bugs/2922"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2943 Drawer Text Components"
                   url="/bugs/2943"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2948 Modal Heading Spacing"
                   url="/bugs/2948"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2977 OnChangeDetails Event Missing"
                   url="/bugs/2977"
                 />
-                <GoabxWorkSideMenuItem label="3118 Text Component ID" url="/bugs/3118" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="3118 Text Component ID" url="/bugs/3118" />
+                <GoabWorkSideMenuItem
                   label="3201 Input Component Events"
                   url="/bugs/3201"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3215 Drawer Initial Height"
                   url="/bugs/3215"
                 />
-                <GoabxWorkSideMenuItem label="3232 GoabText Tag Size" url="/bugs/3232" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="3232 GoabText Tag Size" url="/bugs/3232" />
+                <GoabWorkSideMenuItem
                   label="3248 Dropdown Dynamic Children Sync"
                   url="/bugs/3248"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3273 Nested Side Menu Groups"
                   url="/bugs/3273"
                 />
-                <GoabxWorkSideMenuItem label="3275 Can't unset month" url="/bugs/3275" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="3275 Can't unset month" url="/bugs/3275" />
+                <GoabWorkSideMenuItem
                   label="3322 App Header Menu Hover"
                   url="/bugs/3322"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3281 GoabText p tag margin issues"
                   url="/bugs/3281"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3337 Input autocomplete styling"
                   url="/bugs/3337"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3279 Work Side Menu Key Nav"
                   url="/bugs/3279"
                 />
-                <GoabxWorkSideMenuItem label="3384 v2 Table Border" url="/bugs/3384" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="3384 v2 Table Border" url="/bugs/3384" />
+                <GoabWorkSideMenuItem
                   label="3450 Dropdown expanding inside Container"
                   url="/bugs/3450"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3497 Calendar Years Empty"
                   url="/bugs/3497"
                 />
-                <GoabxWorkSideMenuItem label="3498 Radio alignment" url="/bugs/3498" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="3498 Radio alignment" url="/bugs/3498" />
+                <GoabWorkSideMenuItem
                   label="3450 Dropdown expanding inside Container"
                   url="/bugs/3450"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3607 Radio and Checkbox Interaction Area"
                   url="/bugs/3607"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3505 Link Icon Click"
                   url="/bugs/3505"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
 
-              <GoabxWorkSideMenuGroup icon="star" heading="Features">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup icon="star" heading="Features">
+                <GoabWorkSideMenuItem
                   label="1383 Button Filled Icons"
                   url="/features/1383"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="1547 Tooltip Multiline"
                   url="/features/1547"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="1813 DatePicker Width Properties"
                   url="/features/1813"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="1908 Linear Progress"
                   url="/features/1908"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2054 MaxWidth Support"
                   url="/features/2054"
                 />
-                <GoabxWorkSideMenuItem label="2267 Checkbox List" url="/features/2267" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="2267 Checkbox List" url="/features/2267" />
+                <GoabWorkSideMenuItem
                   label="2328 Container Height Property"
                   url="/features/2328"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2361 Radio/Checkbox Clickable Area"
                   url="/features/2361"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2440 MenuButton Icon"
                   url="/features/2440"
                 />
-                <GoabxWorkSideMenuItem label="2469/3580 Push Drawer" url="/features/2469" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="2469/3580 Push Drawer" url="/features/2469" />
+                <GoabWorkSideMenuItem
                   label="2492 TextArea onBlur"
                   url="/features/2492"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2609 Data Table Base Component"
                   url="/features/2609"
                 />
-                <GoabxWorkSideMenuItem label="2611 Segmented Tab" url="/features/2611" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="2611 Segmented Tab" url="/features/2611" />
+                <GoabWorkSideMenuItem
                   label="2611 Disabled Tab"
                   url="/features/2611-tabs-disabled"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2682 DatePicker Issues"
                   url="/features/2682"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2722 Input Text-Align"
                   url="/features/2722"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2730 Temporary Notification Controller"
                   url="/features/2730"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2829 Modal ARIA Live Region"
                   url="/features/2829"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="2877 Badge Types and Custom Icon"
                   url="/features/2877"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3102 MenuButton Width"
                   url="/features/3102"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3137 Work Side Menu Group"
                   url="/features/3137"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3241 V2 Experimental Wrappers"
                   url="/features/3241"
                 />
-                <GoabxWorkSideMenuItem label="v2 header icons" url="/features/v2-icons" />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem label="v2 header icons" url="/features/v2-icons" />
+                <GoabWorkSideMenuItem
                   label="3229 V2 Menu Button vs size and icon-only"
                   url="/features/3229"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3344 Table Multi-Sort"
                   url="/features/3344"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3306 Custom slug value for tabs"
                   url="/features/3306"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3370 Clear calendar day selection"
                   url="/features/3370"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3396 Text heading-2xs size"
                   url="/features/3396"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3399 V2 Checkbox Spacing"
                   url="/features/v2-checkbox"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3407 Skip Focus on Tab"
                   url="/features/3407-skip-on-focus-tab"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3407 Tabs Orientation"
                   url="/features/3407-stack-on-mobile"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3398 Group open prop"
                   url="/features/3398"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3478 Popover API Rewrite"
                   url="/features/3478"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="3544 Optional Side Menu Icons"
                   url="/features/3544"
                 />
-              </GoabxWorkSideMenuGroup>
-              <GoabxWorkSideMenuItem icon="list" label="Everything" url="/everything" />
+              </GoabWorkSideMenuGroup>
+              <GoabWorkSideMenuItem icon="list" label="Everything" url="/everything" />
             </>
           }
         />

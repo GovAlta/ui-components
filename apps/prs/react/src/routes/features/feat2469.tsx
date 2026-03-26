@@ -7,7 +7,7 @@ import {
   GoabPushDrawer,
   GoabTable,
 } from "@abgov/react-components";
-import { GoabxPushDrawer, GoabxTable } from "@abgov/react-components/experimental";
+
 import { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
 import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
@@ -197,7 +197,7 @@ export function Feat2469Route(): JSX.Element {
       <div style={v2ShellStyle}>
         <div style={v2PageContainerStyles}>
           <h2 style={{ marginTop: 0 }}>Page Content</h2>
-          <GoabxTable width="100%">
+          <GoabTable width="100%">
             <thead>
               <tr>
                 <th>First</th>
@@ -214,9 +214,9 @@ export function Feat2469Route(): JSX.Element {
                 </tr>
               ))}
             </tbody>
-          </GoabxTable>
+          </GoabTable>
         </div>
-        <GoabxPushDrawer
+        <GoabPushDrawer
           testId="drawer"
           open={pushDrawerOpen}
           heading="Push Drawer"
@@ -225,7 +225,7 @@ export function Feat2469Route(): JSX.Element {
           actions={actions}
         >
           {pushDrawerControls}
-        </GoabxPushDrawer>
+        </GoabPushDrawer>
       </div>
 
       <h2 style={{ marginTop: "48px" }}>V1 (Standard)</h2>
@@ -266,7 +266,7 @@ export function Feat2469Route(): JSX.Element {
           <p>V1 push drawer for comparison.</p>
         </div>
         <GoabPushDrawer
-          testid="v1-drawer"
+          testId="v1-drawer"
           open={v1Open}
           heading="Push Drawer (V1)"
           width="500px"

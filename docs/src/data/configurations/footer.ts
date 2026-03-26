@@ -17,7 +17,7 @@ export const footerConfigurations: ComponentConfigurations = {
       name: 'Basic footer',
       description: 'Simple page footer',
       code: {
-        react: `<GoabxAppFooter />`,
+        react: `<GoabAppFooter />`,
         angular: `<goab-footer></goab-footer>`,
         webComponents: `<goa-footer></goa-footer>`,
       },
@@ -27,17 +27,17 @@ export const footerConfigurations: ComponentConfigurations = {
       name: 'With navigation',
       description: 'Footer with navigation sections',
       code: {
-        react: `<GoabxAppFooter>
-  <GoabxAppFooterNavSection heading="Services">
+        react: `<GoabAppFooter>
+  <GoabAppFooterNavSection heading="Services">
     <a href="/apply">Apply online</a>
     <a href="/renew">Renew</a>
     <a href="/status">Check status</a>
-  </GoabxAppFooterNavSection>
-  <GoabxAppFooterNavSection heading="Contact">
+  </GoabAppFooterNavSection>
+  <GoabAppFooterNavSection heading="Contact">
     <a href="/help">Help center</a>
     <a href="/feedback">Feedback</a>
-  </GoabxAppFooterNavSection>
-</GoabxAppFooter>`,
+  </GoabAppFooterNavSection>
+</GoabAppFooter>`,
         angular: `<goab-footer>
   <goab-footer-nav-section heading="Services">
     <a href="/apply">Apply online</a>
@@ -67,13 +67,13 @@ export const footerConfigurations: ComponentConfigurations = {
       name: 'With meta section',
       description: 'Footer with copyright and links',
       code: {
-        react: `<GoabxAppFooter>
-  <GoabxAppFooterMetaSection>
+        react: `<GoabAppFooter>
+  <GoabAppFooterMetaSection>
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms of use</a>
     <a href="/accessibility">Accessibility</a>
-  </GoabxAppFooterMetaSection>
-</GoabxAppFooter>`,
+  </GoabAppFooterMetaSection>
+</GoabAppFooter>`,
         angular: `<goab-footer>
   <goab-footer-meta-section>
     <a href="/privacy">Privacy</a>

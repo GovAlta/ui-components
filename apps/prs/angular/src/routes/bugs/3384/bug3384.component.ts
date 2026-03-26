@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 
-import { GoabBlock, GoabText, GoabxTable } from "@abgov/angular-components";
+import { GoabBlock, GoabText, GoabTable } from "@abgov/angular-components";
 
 type Row = {
   service: string;
@@ -13,7 +13,7 @@ type Row = {
   standalone: true,
   selector: "abgov-bug3384",
   templateUrl: "./bug3384.component.html",
-  imports: [GoabBlock, GoabText, GoabxTable],
+  imports: [GoabBlock, GoabText, GoabTable],
 })
 export class Bug3384Component {
   readonly rows: Row[] = [

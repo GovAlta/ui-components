@@ -1,12 +1,31 @@
 import { useEffect, useRef } from "react";
-import { DataAttributes, GoabFilterChipTheme, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabFilterChipTheme,
+  GoabIconType,
+  Margins,
+} from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
   icontheme: GoabFilterChipTheme;
   error?: string;
   content: string;
+  secondarytext?: string;
+  leadingicon?: GoabIconType;
   testid?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-filter-chip": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
+    }
+  }
 }
 
 export interface GoabFilterChipProps extends Margins, DataAttributes {
@@ -14,6 +33,8 @@ export interface GoabFilterChipProps extends Margins, DataAttributes {
   iconTheme?: GoabFilterChipTheme;
   error?: boolean;
   content: string;
+  secondaryText?: string;
+  leadingIcon?: GoabIconType;
   testId?: string;
 }
 
@@ -25,10 +46,7 @@ export const GoabFilterChip = ({
 }: GoabFilterChipProps) => {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { icontheme: iconTheme, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ icontheme: iconTheme, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) return;
@@ -46,6 +64,7 @@ export const GoabFilterChip = ({
     <goa-filter-chip
       ref={el}
       error={error ? "true" : undefined}
+      version="2"
       {..._props}
     />
   );

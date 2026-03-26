@@ -5,22 +5,22 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+
 @Component({
   standalone: true,
   selector: "goab-app-footer",
-  template: `
-    @if (isReady) {
-      <goa-app-footer
-        [attr.maxcontentwidth]="maxContentWidth"
-        [attr.url]="url"
-        [attr.testid]="testId"
-      >
-        <ng-content select="[slot=nav]" />
-        <ng-content select="goab-app-footer-meta-section"></ng-content>
-        <ng-content></ng-content>
-      </goa-app-footer>
-    }
-  `,
+  template: `@if (isReady) {
+    <goa-app-footer
+      [attr.maxcontentwidth]="maxContentWidth"
+      [attr.url]="url"
+      [attr.testid]="testId"
+      [attr.version]="version"
+    >
+      <ng-content select="[slot=nav]" />
+      <ng-content select="goab-app-footer-meta-section"></ng-content>
+      <ng-content></ng-content>
+    </goa-app-footer>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppFooter implements OnInit {
@@ -29,6 +29,7 @@ export class GoabAppFooter implements OnInit {
   @Input() url?: string;
 
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {}
 

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import {
   GoabButton,
-  GoabText,
   GoabContainer,
+  GoabText,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
 } from "@abgov/react-components";
-import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
-} from "@abgov/react-components/experimental";
 
 export function Feat3137Route() {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
@@ -38,7 +36,7 @@ export function Feat3137Route() {
       <br />
 
       <GoabContainer>
-        <GoabxWorkSideMenu
+        <GoabWorkSideMenu
           heading="My Application"
           url="/"
           userName="John Doe"
@@ -48,200 +46,200 @@ export function Feat3137Route() {
           primaryContent={
             <>
               {/* Dashboard Group */}
-              <GoabxWorkSideMenuGroup heading="Dashboard" icon="apps">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Dashboard" icon="apps">
+                <GoabWorkSideMenuItem
                   label="Overview"
                   url="/dashboard/overview"
                   current={true}
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Analytics"
                   url="/dashboard/analytics"
                   icon="star"
                   badge="3"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Reports"
                   url="/dashboard/reports"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
 
               {/* Projects Group */}
-              <GoabxWorkSideMenuGroup heading="Projects" icon="folder">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Projects" icon="folder">
+                <GoabWorkSideMenuItem
                   label="Active Projects"
                   url="/projects/active"
                   icon="star"
                   badge="12"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Archived Projects"
                   url="/projects/archived"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Templates"
                   url="/projects/templates"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Create New Project"
                   url="/projects/new"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
 
               {/* Team Group */}
-              <GoabxWorkSideMenuGroup heading="People" icon="people">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="People" icon="people">
+                <GoabWorkSideMenuItem
                   label="Team Members"
                   url="/team/members"
                   icon="person"
                   badge="24"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Departments"
                   url="/team/departments"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Permissions"
                   url="/team/permissions"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Activity Log"
                   url="/team/activity"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
 
               {/* Documents Group */}
-              <GoabxWorkSideMenuGroup heading="Documents" icon="document">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Documents" icon="document">
+                <GoabWorkSideMenuItem
                   label="All Documents"
                   url="/documents/all"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Recent"
                   url="/documents/recent"
                   icon="star"
                   badge="5"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Shared with Me"
                   url="/documents/shared"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Favorites"
                   url="/documents/favorites"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Trash"
                   url="/documents/trash"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
 
               {/* Communication Group */}
-              <GoabxWorkSideMenuGroup heading="Communication" icon="chatbubbles">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Communication" icon="chatbubbles">
+                <GoabWorkSideMenuItem
                   label="Messages"
                   url="/communication/messages"
                   icon="star"
                   badge="8"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Notifications"
                   url="/communication/notifications"
                   icon="star"
                   badge="15"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Announcements"
                   url="/communication/announcements"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
             </>
           }
           secondaryContent={
             <>
               {/* Tools Group */}
-              <GoabxWorkSideMenuGroup heading="Tools" icon="build">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Tools" icon="build">
+                <GoabWorkSideMenuItem
                   label="Calendar"
                   url="/tools/calendar"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Task Manager"
                   url="/tools/tasks"
                   icon="star"
                   badge="7"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Time Tracking"
                   url="/tools/time"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
 
               {/* Resources Group */}
-              <GoabxWorkSideMenuGroup heading="Resources" icon="book">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Resources" icon="book">
+                <GoabWorkSideMenuItem
                   label="Documentation"
                   url="/resources/docs"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Training"
                   url="/resources/training"
                   icon="star"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Help Center"
                   url="/resources/help"
                   icon="star"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
             </>
           }
           accountContent={
             <>
               {/* Account Group */}
-              <GoabxWorkSideMenuGroup heading="Account" icon="person-circle">
-                <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuGroup heading="Account" icon="person-circle">
+                <GoabWorkSideMenuItem
                   label="Profile Settings"
                   url="/account/profile"
                   icon="person"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Preferences"
                   url="/account/preferences"
                   icon="settings"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Security"
                   url="/account/security"
                   icon="lock-closed"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Billing"
                   url="/account/billing"
                   icon="card"
                 />
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Log Out"
                   url="/logout"
                   icon="log-out"
                 />
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
             </>
           }
         />

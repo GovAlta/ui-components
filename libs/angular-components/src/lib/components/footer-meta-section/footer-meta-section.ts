@@ -5,16 +5,15 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+
 @Component({
   standalone: true,
   selector: "goab-app-footer-meta-section",
-  template: `
-    @if (isReady) {
-      <goa-app-footer-meta-section [attr.testid]="testId">
-        <ng-content />
-      </goa-app-footer-meta-section>
-    }
-  `,
+  template: `@if (isReady) {
+    <goa-app-footer-meta-section [attr.testid]="testId">
+      <ng-content />
+    </goa-app-footer-meta-section>
+  }`,
   styles: [":host { width: 100%; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

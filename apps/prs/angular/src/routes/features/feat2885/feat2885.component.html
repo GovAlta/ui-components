@@ -1,5 +1,5 @@
 <div style="display: flex; height: 100vh">
-  <goabx-work-side-menu
+  <goab-work-side-menu
     heading="Workspace Demo"
     url="/"
     userName="John Doe"
@@ -12,30 +12,30 @@
   />
 
   <ng-template #primaryTpl>
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="grid"
       label="Dashboard"
       url="/features/2885"
     />
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="search"
       label="Search"
       url="/features/2885/search"
     />
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="list"
       label="Cases"
       url="/features/2885/cases"
       badge="5"
       type="success"
     />
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="document"
       label="Documents"
       url="/features/2885/documents"
       [divider]="true"
     />
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="alert-circle"
       label="Alerts"
       badge="3"
@@ -52,7 +52,7 @@
       <p style="margin: 0 0 1rem 0; color: #666; font-size: 0.875rem">
         This demonstrates that <code>popoverContent</code> accepts any Angular
         template, not just
-        <code>GoabxWorkSideNotificationPanel</code>.
+        <code>GoabWorkSideNotificationPanel</code>.
       </p>
       <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.875rem">
         <li>Custom alerts</li>
@@ -69,14 +69,14 @@
   </ng-template>
 
   <ng-template #secondaryTpl>
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="notifications"
       label="Notifications"
       badge="12"
       type="success"
       [popoverContent]="notificationsTpl"
     />
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="help-circle"
       label="Help"
       url="/features/2885/help"
@@ -84,13 +84,13 @@
   </ng-template>
 
   <ng-template #notificationsTpl>
-    <goabx-work-side-notification-panel
+    <goab-work-side-notification-panel
       heading="Notifications"
       activeTab="unread"
       (onMarkAllRead)="handleMarkAllRead()"
       (onViewAll)="handleViewAll()"
     >
-      <goabx-work-side-notification-item
+      <goab-work-side-notification-item
         *ngFor="let notif of notifications; trackBy: trackById"
         [title]="notif.title"
         [description]="notif.description"
@@ -100,16 +100,16 @@
         [priority]="notif.priority"
         (onClick)="handleNotificationClick(notif.id)"
       />
-    </goabx-work-side-notification-panel>
+    </goab-work-side-notification-panel>
   </ng-template>
 
   <ng-template #accountTpl>
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="settings"
       label="Settings"
       url="/features/2885/settings"
     />
-    <goabx-work-side-menu-item
+    <goab-work-side-menu-item
       icon="log-out"
       label="Log out"
       url="/logout"
@@ -134,7 +134,7 @@
 
     <h1>Feature #2885: Work Side Menu with Notification Popover</h1>
     <p>
-      This demonstrates the <code>GoabxWorkSideMenu</code> with the new
+      This demonstrates the <code>GoabWorkSideMenu</code> with the new
       notification popover feature.
     </p>
 
@@ -150,11 +150,11 @@
         accepts any Angular template
       </li>
       <li>
-        <strong>GoabxWorkSideNotificationPanel</strong> - Panel with tabs
+        <strong>GoabWorkSideNotificationPanel</strong> - Panel with tabs
         (Unread, Urgent, All)
       </li>
       <li>
-        <strong>GoabxWorkSideNotificationItem</strong> - Individual notification
+        <strong>GoabWorkSideNotificationItem</strong> - Individual notification
         cards with:
         <ul>
           <li>Title and description</li>

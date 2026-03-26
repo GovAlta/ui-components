@@ -17,8 +17,8 @@ export const linkConfigurations: ComponentConfigurations = {
       name: 'Basic link',
       description: 'Simple text link',
       code: {
-        react: `<GoabxLink href="/about">Learn more about our services</GoabxLink>`,
-        angular: `<goabx-link href="/about">Learn more about our services</goabx-link>`,
+        react: `<GoabLink href="/about">Learn more about our services</GoabLink>`,
+        angular: `<goab-link href="/about">Learn more about our services</goab-link>`,
         webComponents: `<goa-link href="/about">Learn more about our services</goa-link>`,
       },
     },
@@ -27,12 +27,12 @@ export const linkConfigurations: ComponentConfigurations = {
       name: 'External link',
       description: 'Link to external website (icon added automatically)',
       code: {
-        react: `<GoabxLink href="https://www.alberta.ca">
+        react: `<GoabLink href="https://www.alberta.ca">
   Visit Alberta.ca
-</GoabxLink>`,
-        angular: `<goabx-link href="https://www.alberta.ca">
+</GoabLink>`,
+        angular: `<goab-link href="https://www.alberta.ca">
   Visit Alberta.ca
-</goabx-link>`,
+</goab-link>`,
         webComponents: `<goa-link href="https://www.alberta.ca">
   Visit Alberta.ca
 </goa-link>`,
@@ -44,10 +44,10 @@ export const linkConfigurations: ComponentConfigurations = {
       description: 'Link for dark backgrounds',
       code: {
         react: `<div style={{ backgroundColor: '#333', padding: '1rem' }}>
-  <GoabxLink href="/contact" color="light">Contact us</GoabxLink>
+  <GoabLink href="/contact" color="light">Contact us</GoabLink>
 </div>`,
         angular: `<div style="background-color: #333; padding: 1rem">
-  <goabx-link href="/contact" color="light">Contact us</goabx-link>
+  <goab-link href="/contact" color="light">Contact us</goab-link>
 </div>`,
         webComponents: `<div style="background-color: #333; padding: 1rem">
   <goa-link href="/contact" color="light">Contact us</goa-link>
@@ -59,12 +59,12 @@ export const linkConfigurations: ComponentConfigurations = {
       name: 'With leading icon',
       description: 'Link with an icon before text',
       code: {
-        react: `<GoabxLink href="/download" leadingIcon="download">
+        react: `<GoabLink href="/download" leadingIcon="download">
   Download form
-</GoabxLink>`,
-        angular: `<goabx-link href="/download" leadingIcon="download">
+</GoabLink>`,
+        angular: `<goab-link href="/download" leadingIcon="download">
   Download form
-</goabx-link>`,
+</goab-link>`,
         webComponents: `<goa-link href="/download" leadingicon="download">
   Download form
 </goa-link>`,
@@ -75,12 +75,12 @@ export const linkConfigurations: ComponentConfigurations = {
       name: 'With trailing icon',
       description: 'Link with an icon after text',
       code: {
-        react: `<GoabxLink href="/next" trailingIcon="arrow-forward">
+        react: `<GoabLink href="/next" trailingIcon="arrow-forward">
   Continue to next step
-</GoabxLink>`,
-        angular: `<goabx-link href="/next" trailingIcon="arrow-forward">
+</GoabLink>`,
+        angular: `<goab-link href="/next" trailingIcon="arrow-forward">
   Continue to next step
-</goabx-link>`,
+</goab-link>`,
         webComponents: `<goa-link href="/next" trailingicon="arrow-forward">
   Continue to next step
 </goa-link>`,

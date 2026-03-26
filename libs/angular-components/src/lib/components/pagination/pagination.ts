@@ -21,6 +21,7 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-pagination
+        [attr.version]="version"
         [attr.itemcount]="itemCount"
         [attr.perpagecount]="perPageCount"
         [attr.pagenumber]="pageNumber"
@@ -40,6 +41,7 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabPagination extends GoabBaseComponent implements OnInit {
   isReady = false;
+  version = "2";
   @Input({ required: true }) itemCount!: number;
   @Input({ required: true }) pageNumber!: number;
   @Input() perPageCount?: number = 10;

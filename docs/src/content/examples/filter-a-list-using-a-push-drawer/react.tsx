@@ -1,15 +1,15 @@
 import { useState } from "react";
 import {
-  GoabxButton,
-  GoabxCheckbox,
-  GoabxCheckboxList,
-  GoabxDropdown,
-  GoabxDropdownItem,
-  GoabxFormItem,
-  GoabxTable,
-  GoabxBadge,
-} from "@abgov/react-components/experimental";
-import { GoabxPushDrawer } from "@abgov/react-components/experimental";
+  GoabBadge,
+  GoabButton,
+  GoabCheckbox,
+  GoabCheckboxList,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabPushDrawer,
+  GoabTable,
+} from "@abgov/react-components";
 
 export function FilterAListUsingAPushDrawer() {
   const [open, setOpen] = useState(false);
@@ -27,18 +27,18 @@ export function FilterAListUsingAPushDrawer() {
         >
           <h3 style={{ flex: 1, margin: 0 }}>All cases</h3>
           {!open && (
-            <GoabxButton
+            <GoabButton
               type="secondary"
               size="compact"
               leadingIcon="filter"
               onClick={() => setOpen(true)}
             >
               Filters
-            </GoabxButton>
+            </GoabButton>
           )}
         </div>
 
-        <GoabxTable width="100%">
+        <GoabTable width="100%">
           <table width="100%">
             <thead>
               <tr>
@@ -51,7 +51,7 @@ export function FilterAListUsingAPushDrawer() {
             <tbody>
               <tr>
                 <td>
-                  <GoabxBadge type="success" content="Completed" />
+                  <GoabBadge type="success" content="Completed" />
                 </td>
                 <td>Gilbert Barton</td>
                 <td>24567-9876</td>
@@ -59,7 +59,7 @@ export function FilterAListUsingAPushDrawer() {
               </tr>
               <tr>
                 <td>
-                  <GoabxBadge type="information" content="New" />
+                  <GoabBadge type="information" content="New" />
                 </td>
                 <td>Brynn Hurley</td>
                 <td>98765-3456</td>
@@ -67,7 +67,7 @@ export function FilterAListUsingAPushDrawer() {
               </tr>
               <tr>
                 <td>
-                  <GoabxBadge type="midtone" content="In review" />
+                  <GoabBadge type="midtone" content="In review" />
                 </td>
                 <td>Marco Silva</td>
                 <td>34521-7890</td>
@@ -75,7 +75,7 @@ export function FilterAListUsingAPushDrawer() {
               </tr>
               <tr>
                 <td>
-                  <GoabxBadge type="success" content="Completed" />
+                  <GoabBadge type="success" content="Completed" />
                 </td>
                 <td>Dana Chen</td>
                 <td>55123-4567</td>
@@ -83,7 +83,7 @@ export function FilterAListUsingAPushDrawer() {
               </tr>
               <tr>
                 <td>
-                  <GoabxBadge type="information" content="New" />
+                  <GoabBadge type="information" content="New" />
                 </td>
                 <td>Amira Hassan</td>
                 <td>67890-1234</td>
@@ -91,39 +91,39 @@ export function FilterAListUsingAPushDrawer() {
               </tr>
             </tbody>
           </table>
-        </GoabxTable>
+        </GoabTable>
       </div>
 
-      <GoabxPushDrawer
+      <GoabPushDrawer
         heading="Filters"
         width="260px"
         open={open}
         onClose={() => setOpen(false)}
       >
-        <GoabxFormItem label="Act">
-          <GoabxCheckboxList name="act" onChange={() => {}}>
-            <GoabxCheckbox name="traffic" text="Traffic safety act" size="compact" />
-            <GoabxCheckbox
+        <GoabFormItem label="Act">
+          <GoabCheckboxList name="act" onChange={() => {}}>
+            <GoabCheckbox name="traffic" text="Traffic safety act" size="compact" />
+            <GoabCheckbox
               name="gaming"
               text="Gaming, liquor, and cannabis act"
               size="compact"
             />
-            <GoabxCheckbox
+            <GoabCheckbox
               name="trespass"
               text="Trespass to premises act"
               size="compact"
             />
-          </GoabxCheckboxList>
-        </GoabxFormItem>
-        <GoabxFormItem label="Status" mt="l">
-          <GoabxDropdown name="status" onChange={() => {}} value="" size="compact">
-            <GoabxDropdownItem value="" label="All statuses" />
-            <GoabxDropdownItem value="new" label="New" />
-            <GoabxDropdownItem value="in-review" label="In review" />
-            <GoabxDropdownItem value="completed" label="Completed" />
-          </GoabxDropdown>
-        </GoabxFormItem>
-      </GoabxPushDrawer>
+          </GoabCheckboxList>
+        </GoabFormItem>
+        <GoabFormItem label="Status" mt="l">
+          <GoabDropdown name="status" onChange={() => {}} value="" size="compact">
+            <GoabDropdownItem value="" label="All statuses" />
+            <GoabDropdownItem value="new" label="New" />
+            <GoabDropdownItem value="in-review" label="In review" />
+            <GoabDropdownItem value="completed" label="Completed" />
+          </GoabDropdown>
+        </GoabFormItem>
+      </GoabPushDrawer>
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { GoabxButton } from "@abgov/react-components/experimental";
 import {
+  GoabButton,
   GoabFormStep,
   GoabFormStepper,
   GoabPages,
   GoabSkeleton,
   GoabSpacer,
 } from "@abgov/react-components";
+
 import { GoabFormStepStatus } from "@abgov/ui-components-common";
 
 export function SetTheStatusOfStepOnAFormStepper() {
@@ -54,12 +55,12 @@ export function SetTheStatusOfStepOnAFormStepper() {
         </div>
       </GoabPages>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <GoabxButton type="secondary" onClick={() => setPage(step - 1)}>
+        <GoabButton type="secondary" onClick={() => setPage(step - 1)}>
           Previous
-        </GoabxButton>
-        <GoabxButton type="primary" onClick={() => setPage(step + 1)}>
+        </GoabButton>
+        <GoabButton type="primary" onClick={() => setPage(step + 1)}>
           Next
-        </GoabxButton>
+        </GoabButton>
       </div>
     </>
   );

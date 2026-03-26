@@ -3,7 +3,8 @@ import {
   CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -18,6 +19,19 @@ interface WCProps extends Margins {
   disabled?: string;
   testid?: string;
   width?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-date-picker": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
+    }
+  }
 }
 
 export interface GoabDatePickerProps extends Margins, DataAttributes {
@@ -53,7 +67,9 @@ export function GoabDatePicker({
 
   useEffect(() => {
     if (value && typeof value !== "string") {
-      console.warn("Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`")
+      console.warn(
+        "Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`",
+      );
     }
   }, []);
 
@@ -98,6 +114,7 @@ export function GoabDatePicker({
       min={formatValue(min) || undefined}
       max={formatValue(max) || undefined}
       relative={relative ? "true" : undefined}
+      version="2"
       {..._props}
     />
   );

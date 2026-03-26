@@ -1,10 +1,10 @@
-<goabx-button type="tertiary" leadingIcon="trash" (onClick)="toggleModal()">Delete record</goabx-button>
-<goabx-modal [open]="open" (onClose)="toggleModal()" heading="Are you sure you want to delete this record?" [actions]="actions">
+<goab-button type="tertiary" leadingIcon="trash" (onClick)="toggleModal()">Delete record</goab-button>
+<goab-modal [open]="open" (onClose)="toggleModal()" heading="Are you sure you want to delete this record?" [actions]="actions">
   <p>This action cannot be undone.</p>
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goabx-button type="tertiary" size="compact" (onClick)="toggleModal()">Cancel</goabx-button>
-      <goabx-button type="primary" variant="destructive" size="compact" (onClick)="toggleModal()">Delete record</goabx-button>
+      <goab-button type="tertiary" size="compact" (onClick)="toggleModal()">Cancel</goab-button>
+      <goab-button type="primary" variant="destructive" size="compact" (onClick)="toggleModal()">Delete record</goab-button>
     </goab-button-group>
   </ng-template>
-</goabx-modal>
+</goab-modal>

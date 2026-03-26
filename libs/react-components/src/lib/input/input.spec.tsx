@@ -20,7 +20,7 @@ const defaultProps: GoabInputProps = {
   onChange: noop,
 };
 
-describe("Input", () => {
+describe("GoabInput", () => {
   it("should render", () => {
     render(<GoabInputText name="foo" onChange={noop} />);
 
@@ -49,6 +49,7 @@ describe("Input", () => {
       focused: true,
       error: true,
       placeholder: "placeholder",
+      size: "compact",
       // TODO: remove deprecated property or fix spec failure
       // prefix: "foo",
       suffix: "bar",
@@ -82,6 +83,7 @@ describe("Input", () => {
     expect(input?.getAttribute("readonly")).toBe("true");
     expect(input?.getAttribute("error")).toBe("true");
     expect(input?.getAttribute("placeholder")).toBe("placeholder");
+    expect(input?.getAttribute("size")).toBe("compact");
     // TODO: remove deprecated property or fix spec failure
     // expect(input?.getAttribute("prefix")).toBe("foo");
     expect(input?.getAttribute("suffix")).toBe("bar");
@@ -201,11 +203,7 @@ describe("Input", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <GoabInputText
-        name="test"
-        onChange={noop}
-        data-grid="cell"
-      />
+      <GoabInputText name="test" onChange={noop} data-grid="cell" />,
     );
     const el = container.querySelector("goa-input");
     expect(el?.getAttribute("data-grid")).toBe("cell");

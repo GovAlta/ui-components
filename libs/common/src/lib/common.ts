@@ -111,29 +111,14 @@ export type GoabBadgeType =
   | "success"
   | "important"
   | "emergency"
-  | "dark"
-  | "midtone"
-  | "light"
   | "archived"
-  | "aqua"
-  | "black"
-  | "blue"
-  | "green"
-  | "orange"
-  | "pink"
-  | "red"
-  | "violet"
-  | "white"
-  | "yellow"
-  | "aqua-light"
-  | "black-light"
-  | "blue-light"
-  | "green-light"
-  | "orange-light"
-  | "pink-light"
-  | "red-light"
-  | "violet-light"
-  | "yellow-light";
+  | "sky"
+  | "prairie"
+  | "lilac"
+  | "pasture"
+  | "sunset"
+  | "dawn"
+  | "default";
 
 export type GoabPaginationVariant = "all" | "links-only";
 
@@ -1228,3 +1213,32 @@ export type GoabWorkSideNotificationItemType =
 export type GoabWorkSideNotificationReadStatus = "read" | "unread";
 export type GoabWorkSideNotificationPriority = "normal" | "urgent";
 export type GoabWorkSideNotificationActiveTabType = "unread" | "urgent" | "all";
+
+export type GoabBadgeSize = "medium" | "large";
+
+export type GoabBadgeEmphasis = "subtle" | "strong";
+
+export type GoabCalloutEmphasis = "high" | "medium" | "low";
+
+export type GoabCheckboxSize = "default" | "compact";
+
+export type GoabDropdownSize = "default" | "compact";
+
+export type GoabFormItemType =
+  | ""
+  | "text-input"
+  | "textarea"
+  | "checkbox-list"
+  | "radio-group";
+
+export type GoabLinkColor = "interactive" | "dark" | "light";
+
+export type GoabLinkSize = "xsmall" | "small" | "medium" | "large";
+
+export type GoabNotificationEmphasis = "high" | "low";
+
+export type GoabRadioGroupSize = "default" | "compact";
+
+export type GoabInputSize = "default" | "compact";
+
+export type GoabTextAreaSize = "default" | "compact";

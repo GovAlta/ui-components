@@ -1,12 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
-import FileUploadCard from "./file-upload-card";
+import GoabFileUploadCard from "./file-upload-card";
 
-describe("FileUploadCard", () => {
+describe("GoabFileUploadCard", () => {
   it("should render with base params", () => {
     const { container } = render(
-      <FileUploadCard filename="foo.png" size={1e3} />
+      <GoabFileUploadCard filename="foo.png" size={1e3} />
     );
 
     const el = container.querySelector("goa-file-upload-card");
@@ -16,7 +16,7 @@ describe("FileUploadCard", () => {
 
   it("should render with additional params", () => {
     const { container } = render(
-      <FileUploadCard
+      <GoabFileUploadCard
         filename="foo.png"
         size={1e3}
         type="image/png"
@@ -38,7 +38,7 @@ describe("FileUploadCard", () => {
   it("dispatches and event when cancel is clicked while uploading", () => {
     const onCancel = vi.fn();
     const { container } = render(
-      <FileUploadCard
+      <GoabFileUploadCard
         filename="foo.png"
         size={1e3}
         onCancel={onCancel}
@@ -55,7 +55,7 @@ describe("FileUploadCard", () => {
   it("dispatches and event when delete is clicked and upload is complete", () => {
     const onDelete = vi.fn();
     const { container } = render(
-      <FileUploadCard
+      <GoabFileUploadCard
         filename="foo.png"
         size={1e3}
         onDelete={onDelete}
@@ -72,7 +72,7 @@ describe("FileUploadCard", () => {
   it("dispatches and event when an error occurs", () => {
     const onDelete = vi.fn();
     const { container } = render(
-      <FileUploadCard
+      <GoabFileUploadCard
         filename="foo.png"
         size={1e3}
         onDelete={onDelete}
@@ -86,9 +86,9 @@ describe("FileUploadCard", () => {
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
 
-  it("FileUploadCard should render without testId (testId is optional)", () => {
+  it("GoabFileUploadCard should render without testId (testId is optional)", () => {
     const { container } = render(
-      <FileUploadCard
+      <GoabFileUploadCard
         filename="bar.pdf"
         size={1e3}
         type="application/pdf"
@@ -107,7 +107,7 @@ describe("FileUploadCard", () => {
 
   it("should pass data-grid attributes", () => {
     const { container } = render(
-      <FileUploadCard
+      <GoabFileUploadCard
         filename="test.pdf"
         size={1000}
         data-grid="cell"

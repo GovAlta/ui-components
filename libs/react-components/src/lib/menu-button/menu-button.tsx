@@ -1,38 +1,19 @@
-/**
- * @module GoabMenuButton
- *
- * This module defines the `GoabMenuButton` React component and related types,
- * which wraps a Web Component (`goa-menu-button`) with enhanced functionality for React applications.
- * It also includes TypeScript interfaces for improved type checking and development experience.
- */
-
-import { DataAttributes, GoabButtonType, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
+import { DataAttributes, GoabButtonSize, GoabButtonType, GoabButtonVariant, GoabIconType, GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import { ReactNode, type JSX, useRef, useEffect } from "react";
 import { transformProps, kebab } from "../common/extract-props";
 
-/**
- * Props definition for the `goab-menu-button` Web Component.
- * @typedef {Object} WCProps
- *
- * @property {string} text - The text label to be displayed on the button.
- * @property {GoabButtonType} type - The button type, e.g., "primary", "secondary", etc.
- * @property {GoaIconType} leadingIcon - Optional leading icon appearing within the button.
- * @property {string} [testid] - A test identifier for automated testing purposes.
- * @property {React.RefObject<HTMLElement | null>} ref - A reference object pointing to the Web Component's DOM element.
- */
 interface WCProps {
-  text: string;
+  text?: string;
   type: GoabButtonType;
-  "max-width"?: string,
+  size?: GoabButtonSize;
+  variant?: GoabButtonVariant;
+  "max-width"?: string;
   "leading-icon"?: GoabIconType;
+  "aria-label"?: string;
   testid?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
 
-/**
- * Extends React's `JSX` namespace to include the custom `goa-menu-button` Web Component.
- * The `goa-menu-button` supports additional React-specific props.
- */
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -42,51 +23,19 @@ declare module "react" {
   }
 }
 
-/**
- * Props for the `GoabMenuButton` React component.
- *
- * @typedef {Object} GoabMenuButtonProps
- *
- * @property {string} text - The text label to display on the button.
- * @property {GoabButtonType} [type="primary"] - The button type, e.g., "primary", "secondary". Defaults to "primary".
- * @property {GoaIconType} leadingIcon - Optional leading icon appearing within the button.
- * @property {string} [testId] - A test identifier for automated testing purposes.
- * @property {Function} [onAction] - Callback function invoked when an action event is emitted by the component.
- * @property {ReactNode} [children] - Optional child elements to be rendered inside the button.
- */
 export interface GoabMenuButtonProps extends DataAttributes {
-  text: string;
+  text?: string;
   type?: GoabButtonType;
+  size?: GoabButtonSize;
+  variant?: GoabButtonVariant;
   maxWidth?: string;
   leadingIcon?: GoabIconType;
+  ariaLabel?: string;
   testId?: string;
   onAction?: (detail: GoabMenuButtonOnActionDetail) => void;
   children?: ReactNode;
 }
 
-/**
- * A React wrapper component for the `goa-menu-button` Web Component.
- *
- * This component provides seamless integration of the Web Component into a React application, including React-specific props and event handling.
- *
- * @function GoabMenuButton
- * @param {GoabMenuButtonProps} props - The props for the component.
- *
- * @returns {JSX.Element} A JSX element wrapping the `goa-menu-button` Web Component.
- *
- * @example
- * ```tsx
- * <GoabMenuButton
- *   text="Example Button"
- *   type="secondary"
- *   onAction={(action) => console.log(`Action: ${action}`)}
- * >
- *   <GoabMenuAction text="Option 1" action="option1" />
- *   <GoabMenuAction text="Option 2" action="option2" />
- *   <GoabMenuAction text="Option 3" action="option3" />
- * </GoabMenuButton>
- * ```
- */
 export function GoabMenuButton({
   type = "primary",
   testId,
@@ -110,7 +59,6 @@ export function GoabMenuButton({
     }
     const current = el.current;
 
-    // Event listener for the "_action" event emitted by the Web Component.
     const listener = (e: Event) => {
       const detail = (e as CustomEvent).detail as GoabMenuButtonOnActionDetail;
       onAction?.(detail);
@@ -123,7 +71,8 @@ export function GoabMenuButton({
   }, [el, onAction]);
 
   return (
-    <goa-menu-button {..._props} ref={el}>
+    // @ts-expect-error - stable WCProps requires text, but experimental supports icon-only mode
+    <goa-menu-button {..._props} version="2" ref={el}>
       {children}
     </goa-menu-button>
   );

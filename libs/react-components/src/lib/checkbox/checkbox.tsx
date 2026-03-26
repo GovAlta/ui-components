@@ -1,6 +1,22 @@
-import { DataAttributes, GoabCheckboxOnChangeDetail, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabCheckboxOnChangeDetail,
+  GoabCheckboxSize,
+  Margins,
+} from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
+    }
+  }
+}
 
 interface WCProps extends Margins {
   id?: string;
@@ -17,6 +33,8 @@ interface WCProps extends Margins {
   revealarialabel?: string;
   maxwidth?: string;
   testid?: string;
+  size?: GoabCheckboxSize;
+  version?: string;
 }
 
 /* eslint-disable-next-line */
@@ -36,6 +54,7 @@ export interface GoabCheckboxProps extends Margins, DataAttributes {
   reveal?: React.ReactNode;
   revealAriaLabel?: string;
   maxWidth?: string;
+  size?: GoabCheckboxSize;
   onChange?: (detail: GoabCheckboxOnChangeDetail) => void;
 }
 
@@ -53,11 +72,12 @@ export function GoabCheckbox({
   onChange,
   name,
   children,
+  size = "default",
   ...rest
 }: GoabCheckboxProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ size, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) {
@@ -87,6 +107,7 @@ export function GoabCheckbox({
       disabled={disabled ? "true" : undefined}
       value={typeof value === "boolean" ? (value ? "true" : undefined) : value}
       description={typeof description === "string" ? description : undefined}
+      version="2"
     >
       {children}
       {typeof description !== "string" && description && (

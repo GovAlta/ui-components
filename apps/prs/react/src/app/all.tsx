@@ -237,9 +237,9 @@ export function AllComponents() {
                 </GoabBlock>
 
                 <GoabBlock>
-                  <GoabBadge type="dark" content="Dark" icon={true}></GoabBadge>
-                  <GoabBadge type="midtone" content="Midtone" icon={true}></GoabBadge>
-                  <GoabBadge type="light" content="Light" icon={true}></GoabBadge>
+                  <GoabBadge type="sky" content="Sky" icon={true}></GoabBadge>
+                  <GoabBadge type="prairie" content="Prairie" icon={true}></GoabBadge>
+                  <GoabBadge type="default" content="Default" icon={true}></GoabBadge>
                 </GoabBlock>
 
                 {/* Component ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ */}
@@ -3866,7 +3866,7 @@ export function AllComponents() {
                       <a href="#">Side menu item</a>
                       <GoabSpacer vSpacing="m"></GoabSpacer>
                       <GoabSideMenuHeading
-                        meta={<GoabBadge type="midtone" content="Details"></GoabBadge>}
+                        meta={<GoabBadge type="default" content="Details"></GoabBadge>}
                       >
                         Side menu heading
                       </GoabSideMenuHeading>

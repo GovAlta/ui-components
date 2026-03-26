@@ -18,18 +18,18 @@ export const sideMenuConfigurations: ComponentConfigurations = {
       description: 'Simple navigation menu',
       code: {
         react: `<div style={{ width: '200px' }}>
-  <GoabxSideMenu heading="My Application" url="/">
+  <GoabSideMenu heading="My Application" url="/">
     <a href="/overview">Overview</a>
     <a href="/details">Details</a>
     <a href="/settings">Settings</a>
-  </GoabxSideMenu>
+  </GoabSideMenu>
 </div>`,
         angular: `<div style="width: 200px">
-  <goabx-side-menu heading="My Application" url="/">
+  <goab-side-menu heading="My Application" url="/">
     <a href="/overview">Overview</a>
     <a href="/details">Details</a>
     <a href="/settings">Settings</a>
-  </goabx-side-menu>
+  </goab-side-menu>
 </div>`,
         webComponents: `<div style="width: 200px">
   <goa-side-menu version="2" heading="My Application" url="/">
@@ -46,24 +46,24 @@ export const sideMenuConfigurations: ComponentConfigurations = {
       description: 'Menu items organized into groups',
       code: {
         react: `<div style={{ width: '200px' }}>
-  <GoabxSideMenu heading="My Application" url="/">
-    <GoabxSideMenuHeading>Main</GoabxSideMenuHeading>
+  <GoabSideMenu heading="My Application" url="/">
+    <GoabSideMenuHeading>Main</GoabSideMenuHeading>
     <a href="/dashboard">Dashboard</a>
     <a href="/reports">Reports</a>
-    <GoabxSideMenuHeading>Settings</GoabxSideMenuHeading>
+    <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
     <a href="/profile">Profile</a>
     <a href="/preferences">Preferences</a>
-  </GoabxSideMenu>
+  </GoabSideMenu>
 </div>`,
         angular: `<div style="width: 200px">
-  <goabx-side-menu heading="My Application" url="/">
-    <goabx-side-menu-heading>Main</goabx-side-menu-heading>
+  <goab-side-menu heading="My Application" url="/">
+    <goab-side-menu-heading>Main</goab-side-menu-heading>
     <a href="/dashboard">Dashboard</a>
     <a href="/reports">Reports</a>
-    <goabx-side-menu-heading>Settings</goabx-side-menu-heading>
+    <goab-side-menu-heading>Settings</goab-side-menu-heading>
     <a href="/profile">Profile</a>
     <a href="/preferences">Preferences</a>
-  </goabx-side-menu>
+  </goab-side-menu>
 </div>`,
         webComponents: `<div style="width: 200px">
   <goa-side-menu version="2" heading="My Application" url="/">
@@ -83,30 +83,30 @@ export const sideMenuConfigurations: ComponentConfigurations = {
       description: 'Collapsible menu sections',
       code: {
         react: `<div style={{ width: '200px' }}>
-  <GoabxSideMenu heading="My Application" url="/">
-    <GoabxSideMenuGroup heading="Applications">
+  <GoabSideMenu heading="My Application" url="/">
+    <GoabSideMenuGroup heading="Applications">
       <a href="/apps/active">Active</a>
       <a href="/apps/pending">Pending</a>
       <a href="/apps/archived">Archived</a>
-    </GoabxSideMenuGroup>
-    <GoabxSideMenuGroup heading="Reports">
+    </GoabSideMenuGroup>
+    <GoabSideMenuGroup heading="Reports">
       <a href="/reports/monthly">Monthly</a>
       <a href="/reports/annual">Annual</a>
-    </GoabxSideMenuGroup>
-  </GoabxSideMenu>
+    </GoabSideMenuGroup>
+  </GoabSideMenu>
 </div>`,
         angular: `<div style="width: 200px">
-  <goabx-side-menu heading="My Application" url="/">
-    <goabx-side-menu-group heading="Applications">
+  <goab-side-menu heading="My Application" url="/">
+    <goab-side-menu-group heading="Applications">
       <a href="/apps/active">Active</a>
       <a href="/apps/pending">Pending</a>
       <a href="/apps/archived">Archived</a>
-    </goabx-side-menu-group>
-    <goabx-side-menu-group heading="Reports">
+    </goab-side-menu-group>
+    <goab-side-menu-group heading="Reports">
       <a href="/reports/monthly">Monthly</a>
       <a href="/reports/annual">Annual</a>
-    </goabx-side-menu-group>
-  </goabx-side-menu>
+    </goab-side-menu-group>
+  </goab-side-menu>
 </div>`,
         webComponents: `<div style="width: 200px">
   <goa-side-menu version="2" heading="My Application" url="/">

@@ -1,14 +1,14 @@
 import { fireEvent, render } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 
-import FileUploadInput from "./file-upload-input";
+import GoabFileUploadInput from "./file-upload-input";
 
 const noop = () => { /* do nothing */ };
 
-describe("FileUploadInput", () => {
+describe("GoabFileUploadInput", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <FileUploadInput
+      <GoabFileUploadInput
         onSelectFile={noop}
         maxFileSize="10MB"
         accept="image/*"
@@ -26,7 +26,7 @@ describe("FileUploadInput", () => {
 
   it("handles the onSelectFile event", () => {
     const onSelect = vi.fn();
-    const { baseElement } = render(<FileUploadInput onSelectFile={onSelect} />);
+    const { baseElement } = render(<GoabFileUploadInput onSelectFile={onSelect} />);
     const el = baseElement.querySelector("goa-file-upload-input");
     el && fireEvent(el, new CustomEvent("_selectFile", { detail: {} }));
 
@@ -35,7 +35,7 @@ describe("FileUploadInput", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <FileUploadInput
+      <GoabFileUploadInput
         onSelectFile={noop}
         data-grid="cell"
       />

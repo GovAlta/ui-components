@@ -1,6 +1,25 @@
 import { GoabPaginationOnChangeDetail, Margins } from "@abgov/ui-components-common";
 import { useEffect, useRef } from "react";
 
+interface WCProps extends Margins {
+  ref?: React.RefObject<HTMLElement | null>;
+  itemcount: number;
+  perpagecount?: number;
+  pagenumber: number;
+  variant?: "all" | "links-only";
+  testid?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-pagination": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
 /* eslint-disable-next-line */
 export interface GoabPaginationProps extends Margins {
   itemCount: number;
@@ -45,6 +64,7 @@ export function GoabPagination({ onChange, ...props }: GoabPaginationProps) {
       ml={props.ml}
       mr={props.mr}
       testid={props.testId}
+      version="2"
     />
   );
 }

@@ -18,11 +18,11 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Simple popover with content',
       code: {
         react: `<GoabPopover>
-  <GoabxButton slot="target">Open popover</GoabxButton>
+  <GoabButton slot="target">Open popover</GoabButton>
   <p>Popover content goes here. It can contain any content.</p>
 </GoabPopover>`,
         angular: `<goab-popover>
-  <goabx-button slot="target">Open popover</goabx-button>
+  <goab-button slot="target">Open popover</goab-button>
   <p>Popover content goes here. It can contain any content.</p>
 </goab-popover>`,
         webComponents: `<goa-popover>
@@ -37,35 +37,35 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Popover placement options',
       code: {
         react: `<GoabPopover position="top">
-  <GoabxButton slot="target">Top</GoabxButton>
+  <GoabButton slot="target">Top</GoabButton>
   <p>Content above the trigger.</p>
 </GoabPopover>
 <GoabPopover position="bottom">
-  <GoabxButton slot="target">Bottom</GoabxButton>
+  <GoabButton slot="target">Bottom</GoabButton>
   <p>Content below the trigger.</p>
 </GoabPopover>
 <GoabPopover position="left">
-  <GoabxButton slot="target">Left</GoabxButton>
+  <GoabButton slot="target">Left</GoabButton>
   <p>Content to the left.</p>
 </GoabPopover>
 <GoabPopover position="right">
-  <GoabxButton slot="target">Right</GoabxButton>
+  <GoabButton slot="target">Right</GoabButton>
   <p>Content to the right.</p>
 </GoabPopover>`,
         angular: `<goab-popover position="top">
-  <goabx-button slot="target">Top</goabx-button>
+  <goab-button slot="target">Top</goab-button>
   <p>Content above the trigger.</p>
 </goab-popover>
 <goab-popover position="bottom">
-  <goabx-button slot="target">Bottom</goabx-button>
+  <goab-button slot="target">Bottom</goab-button>
   <p>Content below the trigger.</p>
 </goab-popover>
 <goab-popover position="left">
-  <goabx-button slot="target">Left</goabx-button>
+  <goab-button slot="target">Left</goab-button>
   <p>Content to the left.</p>
 </goab-popover>
 <goab-popover position="right">
-  <goabx-button slot="target">Right</goabx-button>
+  <goab-button slot="target">Right</goab-button>
   <p>Content to the right.</p>
 </goab-popover>`,
         webComponents: `<goa-popover position="top">
@@ -92,11 +92,11 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Popover with custom padding',
       code: {
         react: `<GoabPopover padded>
-  <GoabxButton slot="target">Show details</GoabxButton>
+  <GoabButton slot="target">Show details</GoabButton>
   <p>Content with default padding applied.</p>
 </GoabPopover>`,
         angular: `<goab-popover [padded]="true">
-  <goabx-button slot="target">Show details</goabx-button>
+  <goab-button slot="target">Show details</goab-button>
   <p>Content with default padding applied.</p>
 </goab-popover>`,
         webComponents: `<goa-popover padded>
@@ -111,11 +111,11 @@ export const popoverConfigurations: ComponentConfigurations = {
       description: 'Popover with constrained width',
       code: {
         react: `<GoabPopover maxWidth="300px">
-  <GoabxButton slot="target">More info</GoabxButton>
+  <GoabButton slot="target">More info</GoabButton>
   <p>This popover has a maximum width of 300 pixels to control content width.</p>
 </GoabPopover>`,
         angular: `<goab-popover maxWidth="300px">
-  <goabx-button slot="target">More info</goabx-button>
+  <goab-button slot="target">More info</goab-button>
   <p>This popover has a maximum width of 300 pixels to control content width.</p>
 </goab-popover>`,
         webComponents: `<goa-popover maxwidth="300px">

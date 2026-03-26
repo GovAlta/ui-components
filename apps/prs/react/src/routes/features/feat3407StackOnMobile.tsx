@@ -1,5 +1,11 @@
-import { GoabBlock, GoabText, GoabDivider } from "@abgov/react-components";
-import { GoabxTabs, GoabxTab } from "@abgov/react-components/experimental";
+import {
+  GoabBlock,
+  GoabDivider,
+  GoabTab,
+  GoabTabs,
+  GoabText,
+} from "@abgov/react-components";
+
 import { useEffect, type JSX } from "react";
 // ?url suffix tells Vite to resolve the path without injecting the CSS
 import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
@@ -24,7 +30,7 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
       </GoabText>
       <GoabText tag="p">
         Testing orientation prop (controls mobile stacking behavior). orientation is
-        only available on GoabxTabs (experimental).
+        only available on GoabTabs (experimental).
       </GoabText>
 
       <GoabDivider mt="l" mb="l" />
@@ -38,17 +44,17 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
             Experimental (v2) tabs that stack vertically on mobile (default behavior).
             Resize browser to mobile width to verify tabs stack.
           </GoabText>
-          <GoabxTabs>
-            <GoabxTab heading="Overview">
+          <GoabTabs>
+            <GoabTab heading="Overview">
               <GoabText tag="p">These tabs should stack vertically on mobile.</GoabText>
-            </GoabxTab>
-            <GoabxTab heading="Details">
+            </GoabTab>
+            <GoabTab heading="Details">
               <GoabText tag="p">Vertical stacking on narrow screens.</GoabText>
-            </GoabxTab>
-            <GoabxTab heading="Settings">
+            </GoabTab>
+            <GoabTab heading="Settings">
               <GoabText tag="p">Compare with Test 2 below.</GoabText>
-            </GoabxTab>
-          </GoabxTabs>
+            </GoabTab>
+          </GoabTabs>
         </GoabBlock>
 
         <GoabBlock direction="column" gap="s">
@@ -57,17 +63,17 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
             Experimental (v2) tabs that stay horizontal on mobile. Resize browser to
             mobile width to verify tabs remain in a row.
           </GoabText>
-          <GoabxTabs orientation="horizontal">
-            <GoabxTab heading="Overview">
+          <GoabTabs orientation="horizontal">
+            <GoabTab heading="Overview">
               <GoabText tag="p">These tabs should stay horizontal on mobile.</GoabText>
-            </GoabxTab>
-            <GoabxTab heading="Details">
+            </GoabTab>
+            <GoabTab heading="Details">
               <GoabText tag="p">No vertical stacking on narrow screens.</GoabText>
-            </GoabxTab>
-            <GoabxTab heading="Settings">
+            </GoabTab>
+            <GoabTab heading="Settings">
               <GoabText tag="p">Useful when horizontal space is preferred.</GoabText>
-            </GoabxTab>
-          </GoabxTabs>
+            </GoabTab>
+          </GoabTabs>
         </GoabBlock>
 
         <GoabBlock direction="column" gap="s">
@@ -78,11 +84,11 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
             Segmented tabs stay horizontal on mobile by default (no prop needed). Resize
             to mobile width to verify.
           </GoabText>
-          <GoabxTabs variant="segmented">
-            <GoabxTab heading="Active">{""}</GoabxTab>
-            <GoabxTab heading="Completed">{""}</GoabxTab>
-            <GoabxTab heading="Archived">{""}</GoabxTab>
-          </GoabxTabs>
+          <GoabTabs variant="segmented">
+            <GoabTab heading="Active">{""}</GoabTab>
+            <GoabTab heading="Completed">{""}</GoabTab>
+            <GoabTab heading="Archived">{""}</GoabTab>
+          </GoabTabs>
         </GoabBlock>
 
         <GoabBlock direction="column" gap="s">
@@ -91,11 +97,11 @@ export function Feat3407StackOnMobileRoute(): JSX.Element {
             Segmented tabs with orientation explicitly set to "horizontal". Should remain
             horizontal on mobile (same as default segmented behavior).
           </GoabText>
-          <GoabxTabs variant="segmented" orientation="horizontal">
-            <GoabxTab heading="All">{""}</GoabxTab>
-            <GoabxTab heading="Open">{""}</GoabxTab>
-            <GoabxTab heading="Closed">{""}</GoabxTab>
-          </GoabxTabs>
+          <GoabTabs variant="segmented" orientation="horizontal">
+            <GoabTab heading="All">{""}</GoabTab>
+            <GoabTab heading="Open">{""}</GoabTab>
+            <GoabTab heading="Closed">{""}</GoabTab>
+          </GoabTabs>
         </GoabBlock>
       </GoabBlock>
     </div>

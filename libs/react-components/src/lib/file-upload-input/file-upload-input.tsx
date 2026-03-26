@@ -11,6 +11,18 @@ interface WCProps {
   accept?: string;
   maxfilesize?: string;
   testid?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
+    }
+  }
 }
 
 /* eslint-disable-next-line */
@@ -22,10 +34,7 @@ export interface GoabFileUploadInputProps extends DataAttributes {
   onSelectFile: (detail: GoabFileUploadInputOnSelectFileDetail) => void;
 }
 
-export function GoabFileUploadInput({
-  onSelectFile,
-  ...rest
-}: GoabFileUploadInputProps) {
+export function GoabFileUploadInput({ onSelectFile, ...rest }: GoabFileUploadInputProps) {
   const el = useRef<HTMLElement>(null);
 
   const _props = transformProps<WCProps>(rest, lowercase);
@@ -44,9 +53,7 @@ export function GoabFileUploadInput({
     };
   }, [el, onSelectFile]);
 
-  return (
-    <goa-file-upload-input ref={el} {..._props} />
-  );
+  return <goa-file-upload-input ref={el} {..._props} version="2" />;
 }
 
 export default GoabFileUploadInput;

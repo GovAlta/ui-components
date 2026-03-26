@@ -3,6 +3,7 @@ import {
   GoabCalloutSize,
   GoabCalloutType,
   GoabCalloutIconTheme,
+  GoabCalloutEmphasis,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -11,6 +12,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -20,12 +22,14 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-callout
+        [attr.version]="version"
         [attr.type]="type"
         [attr.heading]="heading"
         [attr.size]="size"
         [attr.maxwidth]="maxWidth"
         [attr.arialive]="ariaLive"
         [attr.icontheme]="iconTheme"
+        [attr.emphasis]="emphasis"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
@@ -40,6 +44,7 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabCallout extends GoabBaseComponent implements OnInit {
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {
     super();
@@ -60,4 +65,5 @@ export class GoabCallout extends GoabBaseComponent implements OnInit {
   @Input() maxWidth?: string;
   @Input() ariaLive?: GoabCalloutAriaLive = "off";
   @Input() iconTheme?: GoabCalloutIconTheme = "outline";
+  @Input() emphasis?: GoabCalloutEmphasis = "medium";
 }

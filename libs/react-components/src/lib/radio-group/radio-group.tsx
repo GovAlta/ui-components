@@ -2,6 +2,7 @@ import { useEffect, useRef, type JSX } from "react";
 import {
   GoabRadioGroupOnChangeDetail,
   GoabRadioGroupOrientation,
+  GoabRadioGroupSize,
   Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
@@ -17,6 +18,19 @@ interface WCProps extends Margins {
   error?: string;
   arialabel?: string;
   testid?: string;
+  size?: GoabRadioGroupSize;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-radio-group": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
+    }
+  }
 }
 
 export interface GoabRadioGroupProps extends Margins, DataAttributes {
@@ -25,6 +39,7 @@ export interface GoabRadioGroupProps extends Margins, DataAttributes {
   id?: string;
   disabled?: boolean;
   orientation?: GoabRadioGroupOrientation;
+  size?: GoabRadioGroupSize;
   testId?: string;
   error?: boolean;
   ariaLabel?: string;
@@ -38,11 +53,12 @@ export function GoabRadioGroup({
   onChange,
   name,
   children,
+  size = "default",
   ...rest
 }: GoabRadioGroupProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ size, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) return;
@@ -71,6 +87,7 @@ export function GoabRadioGroup({
       name={name}
       disabled={disabled ? "true" : undefined}
       error={error ? "true" : undefined}
+      version="2"
     >
       {children}
     </goa-radio-group>

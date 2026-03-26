@@ -21,7 +21,7 @@ const noop = (detail: GoabRadioGroupOnChangeDetail) => {
   /* do nothing */
 };
 
-describe("RadioGroup", () => {
+describe("GoabRadioGroup", () => {
   const baseMockData: MockData = {
     title: "mock title",
     value: "",
@@ -70,6 +70,7 @@ describe("RadioGroup", () => {
           value={data.value}
           disabled
           error
+          size="compact"
           mt="s"
           mr="m"
           mb="l"
@@ -85,6 +86,7 @@ describe("RadioGroup", () => {
               disabled
               error
               checked
+              compact
               value={radio.value}
               ariaLabel={"you are choosing " + radio.value}
             >
@@ -105,6 +107,7 @@ describe("RadioGroup", () => {
       expect(el?.getAttribute("arialabel")).toBe("please select fruit");
       expect(el?.getAttribute("disabled")).toBe("true");
       expect(el?.getAttribute("error")).toBe("true");
+      expect(el?.getAttribute("size")).toBe("compact");
 
       const radios = document.querySelectorAll<HTMLInputElement>("input[type=radio]");
       radios.forEach((radio) => {
@@ -112,6 +115,7 @@ describe("RadioGroup", () => {
         expect(radio.getAttribute("disabled")).toBe("true");
         expect(radio.getAttribute("error")).toBe("true");
         expect(radio.getAttribute("checked")).toBe("true");
+        expect(radio.getAttribute("compact")).toBe("true");
       });
     });
   });

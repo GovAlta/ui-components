@@ -8,6 +8,15 @@ interface WCProps {
   testid?: string;
 }
 
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-app-footer-nav-section": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
 /* eslint-disable-next-line */
 export interface GoabFooterNavSectionProps extends DataAttributes {
   maxColumnCount?: number;

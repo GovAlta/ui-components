@@ -1,71 +1,71 @@
-<goabx-link leadingIcon="arrow-back" size="small" mb="none">
+<goab-link leadingIcon="arrow-back" size="small" mb="none">
   Back
-</goabx-link>
+</goab-link>
 
 <goab-text as="h2" mt="xl" mb="m">Your address</goab-text>
 <goab-text mt="none" mb="xl">This is the home address of the person applying</goab-text>
 
-<goabx-form-item label="Address line 1">
-  <goabx-input
+<goab-form-item label="Address line 1">
+  <goab-input
     (onChange)="onAddressLine1Change($event)"
     [value]="addressLine1"
     name="address-line-1"
     ariaLabel="Address line 1"
     width="100%">
-  </goabx-input>
-</goabx-form-item>
+  </goab-input>
+</goab-form-item>
 
-<goabx-form-item label="Address line 2" mt="l">
-  <goabx-input
+<goab-form-item label="Address line 2" mt="l">
+  <goab-input
     (onChange)="onAddressLine2Change($event)"
     [value]="addressLine2"
     name="address-line-2"
     ariaLabel="Address line 2"
     width="100%">
-  </goabx-input>
-</goabx-form-item>
+  </goab-input>
+</goab-form-item>
 
-<goabx-form-item label="Town or city" mt="l">
-  <goabx-input
+<goab-form-item label="Town or city" mt="l">
+  <goab-input
     (onChange)="onTownCityChange($event)"
     [value]="townCity"
     name="town-city"
     ariaLabel="Town or city name"
     width="460px">
-  </goabx-input>
-</goabx-form-item>
+  </goab-input>
+</goab-form-item>
 
-<goabx-form-item label="Province or territory" mt="l" id="provinceLabel">
-  <goabx-dropdown
+<goab-form-item label="Province or territory" mt="l" id="provinceLabel">
+  <goab-dropdown
     (onChange)="onProvinceChange($event)"
     [value]="province"
     name="province-territory"
     ariaLabelledBy="provinceLabel">
-    <goabx-dropdown-item value="AB" label="Alberta"></goabx-dropdown-item>
-    <goabx-dropdown-item value="BC" label="British Columbia"></goabx-dropdown-item>
-    <goabx-dropdown-item value="MB" label="Manitoba"></goabx-dropdown-item>
-    <goabx-dropdown-item value="NB" label="New Brunswick"></goabx-dropdown-item>
-    <goabx-dropdown-item value="NL" label="Newfoundland and Labrador"></goabx-dropdown-item>
-    <goabx-dropdown-item value="NS" label="Nova Scotia"></goabx-dropdown-item>
-    <goabx-dropdown-item value="ON" label="Ontario"></goabx-dropdown-item>
-    <goabx-dropdown-item value="PE" label="Prince Edward Island"></goabx-dropdown-item>
-    <goabx-dropdown-item value="QC" label="Quebec"></goabx-dropdown-item>
-    <goabx-dropdown-item value="SK" label="Saskatchewan"></goabx-dropdown-item>
-    <goabx-dropdown-item value="NT" label="Northwest Territories"></goabx-dropdown-item>
-    <goabx-dropdown-item value="NU" label="Nunavut"></goabx-dropdown-item>
-    <goabx-dropdown-item value="YT" label="Yukon"></goabx-dropdown-item>
-  </goabx-dropdown>
-</goabx-form-item>
+    <goab-dropdown-item value="AB" label="Alberta"></goab-dropdown-item>
+    <goab-dropdown-item value="BC" label="British Columbia"></goab-dropdown-item>
+    <goab-dropdown-item value="MB" label="Manitoba"></goab-dropdown-item>
+    <goab-dropdown-item value="NB" label="New Brunswick"></goab-dropdown-item>
+    <goab-dropdown-item value="NL" label="Newfoundland and Labrador"></goab-dropdown-item>
+    <goab-dropdown-item value="NS" label="Nova Scotia"></goab-dropdown-item>
+    <goab-dropdown-item value="ON" label="Ontario"></goab-dropdown-item>
+    <goab-dropdown-item value="PE" label="Prince Edward Island"></goab-dropdown-item>
+    <goab-dropdown-item value="QC" label="Quebec"></goab-dropdown-item>
+    <goab-dropdown-item value="SK" label="Saskatchewan"></goab-dropdown-item>
+    <goab-dropdown-item value="NT" label="Northwest Territories"></goab-dropdown-item>
+    <goab-dropdown-item value="NU" label="Nunavut"></goab-dropdown-item>
+    <goab-dropdown-item value="YT" label="Yukon"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
 
-<goabx-form-item label="Postal code" mt="l">
-  <goabx-input
+<goab-form-item label="Postal code" mt="l">
+  <goab-input
     (onChange)="onPostalCodeChange($event)"
     [value]="postalCode"
     name="postal-code"
     width="105px">
-  </goabx-input>
-</goabx-form-item>
+  </goab-input>
+</goab-form-item>
 
-<goabx-button type="submit" mt="2xl" (onClick)="onSubmit()">
+<goab-button type="submit" mt="2xl" (onClick)="onSubmit()">
   Save and continue
-</goabx-button>
+</goab-button>

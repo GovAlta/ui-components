@@ -4,7 +4,8 @@ import {
   GoabButtonType,
   GoabButtonVariant,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -20,6 +21,19 @@ interface WCProps extends Margins {
   action?: string;
   actionArgs?: string;
   actionArg?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-button": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
+    }
+  }
 }
 
 export interface GoabButtonProps extends Margins, DataAttributes {
@@ -75,6 +89,7 @@ export function GoabButton({
       action-arg={actionArg}
       action-args={JSON.stringify(actionArgs)}
       {..._props}
+      version="2"
     >
       {children}
     </goa-button>

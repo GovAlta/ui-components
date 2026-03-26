@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideNotificationPanel,
-  GoabxWorkSideNotificationItem,
-} from "@abgov/react-components/experimental";
-import { GoabIconButton } from "@abgov/react-components";
+  GoabIconButton,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideNotificationItem,
+  GoabWorkSideNotificationPanel,
+} from "@abgov/react-components";
+
 // ?url suffix tells Vite to resolve the path without injecting the CSS
 import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
@@ -166,7 +167,7 @@ export function Feat2885Route() {
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
-      <GoabxWorkSideMenu
+      <GoabWorkSideMenu
         heading="Workspace Demo"
         url="/"
         testId="work-space-side-menu"
@@ -176,26 +177,26 @@ export function Feat2885Route() {
         onToggle={() => setMenuOpen((prev) => !prev)}
         primaryContent={
           <>
-            <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/features/2885" />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/features/2885" />
+            <GoabWorkSideMenuItem
               icon="search"
               label="Search"
               url="/features/2885/search"
             />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               icon="list"
               label="Cases"
               url="/features/2885/cases"
               badge="5"
               type="success"
             />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               icon="document"
               label="Documents"
               url="/features/2885/documents"
               divider={true}
             />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               icon="alert-circle"
               label="Alerts"
               url="#"
@@ -211,7 +212,7 @@ export function Feat2885Route() {
                     style={{ margin: "0 0 1rem 0", color: "#666", fontSize: "0.875rem" }}
                   >
                     This demonstrates that <code>popoverContent</code> accepts any React
-                    node, not just <code>GoabxWorkSideNotificationPanel</code>.
+                    node, not just <code>GoabWorkSideNotificationPanel</code>.
                   </p>
                   <ul
                     style={{ margin: "0", paddingLeft: "1.25rem", fontSize: "0.875rem" }}
@@ -228,7 +229,7 @@ export function Feat2885Route() {
         }
         secondaryContent={
           <>
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               icon="notifications"
               label="Notifications"
               url="#"
@@ -236,7 +237,7 @@ export function Feat2885Route() {
               type="success"
               testId="work-space-side-menu-item-notification"
               popoverContent={
-                <GoabxWorkSideNotificationPanel
+                <GoabWorkSideNotificationPanel
                   testId="work-space-side-notification-panel"
                   heading="Notifications"
                   activeTab="unread"
@@ -245,7 +246,7 @@ export function Feat2885Route() {
                 >
                   {/* Single slot - items are auto-filtered by readStatus/priority */}
                   {notifications.map((notif) => (
-                    <GoabxWorkSideNotificationItem
+                    <GoabWorkSideNotificationItem
                       key={notif.id}
                       testId={`noti-${notif.id}`}
                       title={notif.title}
@@ -257,10 +258,10 @@ export function Feat2885Route() {
                       onClick={() => handleNotificationClick(notif.id)}
                     />
                   ))}
-                </GoabxWorkSideNotificationPanel>
+                </GoabWorkSideNotificationPanel>
               }
             />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               icon="help-circle"
               label="Help"
               url="/features/2885/help"
@@ -269,12 +270,12 @@ export function Feat2885Route() {
         }
         accountContent={
           <>
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               icon="settings"
               label="Settings"
               url="/features/2885/settings"
             />
-            <GoabxWorkSideMenuItem icon="log-out" label="Log out" url="/logout" />
+            <GoabWorkSideMenuItem icon="log-out" label="Log out" url="/logout" />
           </>
         }
       />
@@ -308,7 +309,7 @@ export function Feat2885Route() {
 
         <h1>Feature #2885: Work Side Menu with Notification Popover</h1>
         <p>
-          This demonstrates the <code>GoabxWorkSideMenu</code> with the new notification
+          This demonstrates the <code>GoabWorkSideMenu</code> with the new notification
           popover feature.
         </p>
 
@@ -324,11 +325,11 @@ export function Feat2885Route() {
             node
           </li>
           <li>
-            <strong>GoabxWorkSideNotificationPanel</strong> - Panel with tabs (Unread,
+            <strong>GoabWorkSideNotificationPanel</strong> - Panel with tabs (Unread,
             Urgent, All)
           </li>
           <li>
-            <strong>GoabxWorkSideNotificationItem</strong> - Individual notification cards
+            <strong>GoabWorkSideNotificationItem</strong> - Individual notification cards
             with:
             <ul>
               <li>Title and description</li>

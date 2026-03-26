@@ -26,7 +26,7 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Basic drawer',
       description: 'Simple drawer from right side',
       code: {
-        react: `<GoabxDrawer heading="Application details" position="right" open={isOpen} onClose={handleClose}>
+        react: `<GoabDrawer heading="Application details" position="right" open={isOpen} onClose={handleClose}>
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
   <p>Drawers are useful for:</p>
   <ul>
@@ -34,8 +34,8 @@ export const drawerConfigurations: ComponentConfigurations = {
     <li>Editing settings or preferences</li>
     <li>Completing a quick task related to the main content</li>
   </ul>
-</GoabxDrawer>`,
-        angular: `<goabx-drawer heading="Application details" position="right" [open]="isOpen" (_close)="handleClose()">
+</GoabDrawer>`,
+        angular: `<goab-drawer heading="Application details" position="right" [open]="isOpen" (_close)="handleClose()">
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
   <p>Drawers are useful for:</p>
   <ul>
@@ -43,7 +43,7 @@ export const drawerConfigurations: ComponentConfigurations = {
     <li>Editing settings or preferences</li>
     <li>Completing a quick task related to the main content</li>
   </ul>
-</goabx-drawer>`,
+</goab-drawer>`,
         webComponents: `<goa-button version="2" id="open-drawer">Open drawer</goa-button>
 <goa-drawer version="2" id="demo-drawer" heading="Application details" position="right">
   <p>Use a drawer to display supplementary content or actions without navigating away from the current page.</p>
@@ -62,12 +62,12 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Bottom position',
       description: 'Drawer opening from the bottom of the screen',
       code: {
-        react: `<GoabxDrawer heading="Bottom drawer" position="bottom" open={isOpen} onClose={handleClose}>
+        react: `<GoabDrawer heading="Bottom drawer" position="bottom" open={isOpen} onClose={handleClose}>
   <p>Opens from the bottom of the screen.</p>
-</GoabxDrawer>`,
-        angular: `<goabx-drawer heading="Bottom drawer" position="bottom" [open]="isOpen" (_close)="handleClose()">
+</GoabDrawer>`,
+        angular: `<goab-drawer heading="Bottom drawer" position="bottom" [open]="isOpen" (_close)="handleClose()">
   <p>Opens from the bottom of the screen.</p>
-</goabx-drawer>`,
+</goab-drawer>`,
         webComponents: `<goa-button version="2" id="open-drawer">Open drawer</goa-button>
 <goa-drawer version="2" id="demo-drawer" heading="Bottom drawer" position="bottom">
   <p>Opens from the bottom of the screen.</p>
@@ -80,20 +80,20 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'With actions',
       description: 'Drawer with footer actions',
       code: {
-        react: `<GoabxDrawer heading="Edit settings" position="right" open={isOpen} onClose={handleClose}>
+        react: `<GoabDrawer heading="Edit settings" position="right" open={isOpen} onClose={handleClose}>
   <p>Make changes to your settings here.</p>
   <GoabButtonGroup slot="actions" alignment="end">
-    <GoabxButton type="secondary" onClick={handleClose}>Cancel</GoabxButton>
-    <GoabxButton onClick={handleSave}>Save</GoabxButton>
+    <GoabButton type="secondary" onClick={handleClose}>Cancel</GoabButton>
+    <GoabButton onClick={handleSave}>Save</GoabButton>
   </GoabButtonGroup>
-</GoabxDrawer>`,
-        angular: `<goabx-drawer heading="Edit settings" position="right" [open]="isOpen" (_close)="handleClose()">
+</GoabDrawer>`,
+        angular: `<goab-drawer heading="Edit settings" position="right" [open]="isOpen" (_close)="handleClose()">
   <p>Make changes to your settings here.</p>
   <goab-button-group slot="actions" alignment="end">
-    <goabx-button type="secondary" (_click)="handleClose()">Cancel</goabx-button>
-    <goabx-button (_click)="handleSave()">Save</goabx-button>
+    <goab-button type="secondary" (_click)="handleClose()">Cancel</goab-button>
+    <goab-button (_click)="handleSave()">Save</goab-button>
   </goab-button-group>
-</goabx-drawer>`,
+</goab-drawer>`,
         webComponents: `<goa-button version="2" id="open-drawer">Open drawer</goa-button>
 <goa-drawer version="2" id="demo-drawer" heading="Edit settings" position="right">
   <p>Make changes to your settings here.</p>
@@ -110,12 +110,12 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Narrow size',
       description: 'Narrow drawer for simple content',
       code: {
-        react: `<GoabxDrawer heading="Narrow drawer" position="right" size="narrow" open={isOpen} onClose={handleClose}>
+        react: `<GoabDrawer heading="Narrow drawer" position="right" size="narrow" open={isOpen} onClose={handleClose}>
   <p>Narrow width for simple content.</p>
-</GoabxDrawer>`,
-        angular: `<goabx-drawer heading="Narrow drawer" position="right" size="narrow" [open]="isOpen" (_close)="handleClose()">
+</GoabDrawer>`,
+        angular: `<goab-drawer heading="Narrow drawer" position="right" size="narrow" [open]="isOpen" (_close)="handleClose()">
   <p>Narrow width for simple content.</p>
-</goabx-drawer>`,
+</goab-drawer>`,
         webComponents: `<goa-button version="2" id="open-drawer">Open drawer</goa-button>
 <goa-drawer version="2" id="demo-drawer" heading="Narrow drawer" position="right" size="narrow">
   <p>Narrow width for simple content.</p>
@@ -128,12 +128,12 @@ export const drawerConfigurations: ComponentConfigurations = {
       name: 'Wide size',
       description: 'Wide drawer for complex content',
       code: {
-        react: `<GoabxDrawer heading="Wide drawer" position="right" size="wide" open={isOpen} onClose={handleClose}>
+        react: `<GoabDrawer heading="Wide drawer" position="right" size="wide" open={isOpen} onClose={handleClose}>
   <p>Wide width for more complex content.</p>
-</GoabxDrawer>`,
-        angular: `<goabx-drawer heading="Wide drawer" position="right" size="wide" [open]="isOpen" (_close)="handleClose()">
+</GoabDrawer>`,
+        angular: `<goab-drawer heading="Wide drawer" position="right" size="wide" [open]="isOpen" (_close)="handleClose()">
   <p>Wide width for more complex content.</p>
-</goabx-drawer>`,
+</goab-drawer>`,
         webComponents: `<goa-button version="2" id="open-drawer">Open drawer</goa-button>
 <goa-drawer version="2" id="demo-drawer" heading="Wide drawer" position="right" size="wide">
   <p>Wide width for more complex content.</p>

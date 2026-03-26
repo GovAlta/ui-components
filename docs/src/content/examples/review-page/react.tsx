@@ -1,12 +1,17 @@
-import { GoabxButton, GoabxLink, GoabxTable } from "@abgov/react-components/experimental";
-import { GoabButtonGroup, GoabText } from "@abgov/react-components";
+import {
+  GoabButton,
+  GoabButtonGroup,
+  GoabLink,
+  GoabTable,
+  GoabText,
+} from "@abgov/react-components";
 
 export function ReviewPage() {
   return (
     <>
       <GoabText size="heading-l" mt="none" mb="none">Review your answers</GoabText>
       <GoabText size="heading-s" color="secondary" mt="l" mb="none">Your situation</GoabText>
-      <GoabxTable mt="l">
+      <GoabTable mt="l">
         <tbody>
           <tr>
             <td>
@@ -14,7 +19,7 @@ export function ReviewPage() {
             </td>
             <td>Other</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
           <tr>
@@ -23,7 +28,7 @@ export function ReviewPage() {
             </td>
             <td>Manager</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
           <tr>
@@ -35,7 +40,7 @@ export function ReviewPage() {
             </td>
             <td>No</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
           <tr>
@@ -44,7 +49,7 @@ export function ReviewPage() {
             </td>
             <td>No</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
           <tr>
@@ -53,7 +58,7 @@ export function ReviewPage() {
             </td>
             <td>Married</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
           <tr>
@@ -62,7 +67,7 @@ export function ReviewPage() {
             </td>
             <td>No</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
           <tr>
@@ -71,14 +76,14 @@ export function ReviewPage() {
             </td>
             <td>Yes</td>
             <td>
-              <GoabxLink>Change</GoabxLink>
+              <GoabLink>Change</GoabLink>
             </td>
           </tr>
         </tbody>
-      </GoabxTable>
+      </GoabTable>
       <GoabButtonGroup alignment="start" mt="2xl">
-        <GoabxButton type="primary">Confirm and continue</GoabxButton>
-        <GoabxButton type="tertiary">Back to application overview</GoabxButton>
+        <GoabButton type="primary">Confirm and continue</GoabButton>
+        <GoabButton type="tertiary">Back to application overview</GoabButton>
       </GoabButtonGroup>
     </>
   );

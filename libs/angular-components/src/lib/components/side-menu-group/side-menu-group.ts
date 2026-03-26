@@ -5,6 +5,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+
 import { GoabIconType } from "@abgov/ui-components-common";
 import { GoabBaseComponent } from "../base.component";
 
@@ -14,6 +15,7 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-side-menu-group
+        [attr.version]="version"
         [attr.heading]="heading"
         [attr.testid]="testId"
         [attr.icon]="icon"
@@ -31,6 +33,7 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabSideMenuGroup extends GoabBaseComponent implements OnInit {
   isReady = false;
+  version = "2";
   @Input({ required: true }) heading!: string;
   @Input() icon?: GoabIconType;
 

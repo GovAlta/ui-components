@@ -5,12 +5,13 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+
 @Component({
   standalone: true,
   selector: "goab-side-menu",
   template: `
     @if (isReady) {
-      <goa-side-menu [attr.testid]="testId">
+      <goa-side-menu [attr.version]="version" [attr.testid]="testId">
         <ng-content />
       </goa-side-menu>
     }
@@ -20,6 +21,7 @@ import {
 })
 export class GoabSideMenu implements OnInit {
   isReady = false;
+  version = "2";
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}
