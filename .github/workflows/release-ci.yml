@@ -75,9 +75,6 @@ jobs:
       - name: Build
         run: npm run build:prod
 
-      - name: Copy nginx.conf
-        run: cp docs/nginx.conf /etc/nginx/nginx.conf
-
       - name: Install oc CLI
         uses: redhat-actions/openshift-tools-installer@v1
         with:
