@@ -189,7 +189,7 @@
       class="app-header-menu-popover"
       context="menu"
       focusborderwidth="0"
-      borderradius={_isV2Navigation ? "8" : "0"}
+      borderradius={_isV2Navigation ? "var(--goa-border-radius-xl)" : "0"}
       padded="false"
       tabindex="-1"
       maxwidth="16rem"

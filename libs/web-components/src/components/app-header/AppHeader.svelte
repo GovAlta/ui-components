@@ -536,7 +536,7 @@
         context="menu-toggle-area"
         minwidth="16rem"
         focusborderwidth="0"
-        borderradius="4"
+        borderradius="var(--goa-border-radius-xl)"
         padded="false"
         tabindex="-1"
         height="full"
