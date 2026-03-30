@@ -10,7 +10,7 @@ const workspaceRoot = path.resolve(__dirname, "..");
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://goa-design-2.netlify.app",
+  site: "https://design.alberta.ca",
   root: ".",
   outDir: "../dist/docs",
   build: {
