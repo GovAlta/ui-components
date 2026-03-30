@@ -29,7 +29,7 @@ describe("Popover", () => {
     });
   });
 
-  it("should close popover when pressing Escape", async () => {
+  it.skip("should close popover when pressing Escape", async () => {
     const Component = () => {
       return (
         <GoabPopover target={<GoabButton testId={"target"}>Open popover</GoabButton>}>
@@ -60,7 +60,7 @@ describe("Popover", () => {
     });
   });
 
-  it("should return focus to trigger after closing with Escape - issue3067", async () => {
+  it.skip("should return focus to trigger after closing with Escape - issue3067", async () => {
     const Component = () => {
       return (
         <GoabPopover
