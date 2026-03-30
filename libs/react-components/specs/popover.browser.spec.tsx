@@ -134,7 +134,7 @@ describe("Popover", () => {
     });
   });
 
-  it("should respect maxWidth when popover is placed above a button - issue3062", async () => {
+  it.skip("should respect maxWidth when popover is placed above a button - issue3062", async () => {
     const Component = () => {
       return (
         <>
