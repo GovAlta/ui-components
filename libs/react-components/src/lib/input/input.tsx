@@ -49,8 +49,8 @@ interface WCProps extends Margins {
   step?: number;
   maxlength?: number;
 
-  trailingiconarialabel?: string;
   version?: string;
+  trailingiconarialabel?: string;
 }
 
 declare module "react" {
