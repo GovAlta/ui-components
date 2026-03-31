@@ -11,6 +11,7 @@
  */
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { getThumbnailPath } from "../lib/component-thumbnails";
 import { createPortal } from "react-dom";
 import {
   GoabButton,
@@ -112,27 +113,6 @@ function formatCategory(category: string): string {
 function formatStatus(status: string): string {
   if (status === "stable") return "Available";
   return status.charAt(0).toUpperCase() + status.slice(1);
-}
-
-// Thumbnail filename mapping for slugs that don't match the filename
-const THUMBNAIL_MAP: Record<string, string> = {
-  "app-header": "header",
-  icon: "icons",
-  input: "text-input",
-  "checkbox-list": "checkbox-group",
-  "circular-progress": "circular-progress-indicator",
-  "linear-progress": "linear-progress-indicator",
-  notification: "notification-banner",
-  skeleton: "skeleton-loader",
-  "radio-group": "radio",
-  "file-upload-input": "file-uploader",
-  "link-button": "link",
-  "page-block": "block",
-};
-
-function getThumbnailPath(slug: string): string {
-  const filename = THUMBNAIL_MAP[slug] || slug;
-  return `/images/component-thumbnails/${filename}.svg`;
 }
 
 export function ComponentsGrid({ components }: ComponentsGridProps) {
