@@ -45,10 +45,10 @@ const SUBMENU_SECTIONS = ["components", "get-started", "foundations"] as const;
 // Main navigation sections
 const SECTIONS: TopLevelSection[] = [
   { id: "get-started", label: "Get started", icon: "document-text" },
-  { id: "foundations", label: "Foundations", icon: "list" },
   { id: "examples", label: "Examples", icon: "browsers" },
   { id: "components", label: "Components", icon: "shapes" },
   { id: "tokens", label: "Tokens", icon: "code-slash" },
+  { id: "foundations", label: "Foundations", icon: "list" },
 ];
 
 export function ParentMenu({
