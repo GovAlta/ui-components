@@ -18,10 +18,15 @@ declare module "react" {
 }
 
 export interface GoabWorkSideMenuGroupProps {
+  /** @required The text displayed in the group heading. */
   heading: string;
+  /** Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved. */
   icon?: GoabIconType;
+  /** Whether the group is open. */
   open?: boolean;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Content rendered inside the group, typically WorkSideMenuItem components. */
   children?: React.ReactNode;
 }
 

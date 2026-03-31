@@ -38,12 +38,19 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabMicrositeHeader implements OnInit {
   isReady = false;
+  /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   @Input({ required: true }) type!: GoabServiceLevel;
+  /** @required App or service version displayed on the right side of the header. */
   @Input() version!: string | TemplateRef<any>;
+  /** Url to feedback page that will be displayed when provided. */
   @Input() feedbackUrl?: string;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** Maximum width of the content area. */
   @Input() maxContentWidth?: string;
+  /** For internal feedback urls sets target. */
   @Input() feedbackUrlTarget?: GoabLinkTarget;
+  /** Sets the target attribute for the header link. */
   @Input() headerUrlTarget?: GoabLinkTarget;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -55,6 +62,7 @@ export class GoabMicrositeHeader implements OnInit {
     });
   }
 
+  /** Emits when the feedback link is clicked. */
   @Output() onFeedbackClick = new EventEmitter();
 
   getVersionAsString(): string {

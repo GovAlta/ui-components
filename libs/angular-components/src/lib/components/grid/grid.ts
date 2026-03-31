@@ -32,7 +32,9 @@ import { GoabBaseComponent } from "../base.component";
 })
 export class GoabGrid extends GoabBaseComponent implements OnInit {
   isReady = false;
+  /** @required Minimum width of the child elements. */
   @Input({ required: true }) minChildWidth!: string;
+  /** Gap between child items. */
   @Input() gap?: Spacing;
 
   constructor(private cdr: ChangeDetectorRef) {

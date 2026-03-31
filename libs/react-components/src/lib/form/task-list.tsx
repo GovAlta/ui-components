@@ -16,8 +16,10 @@ declare module "react" {
 }
 
 interface GoabPublicFormTaskListProps extends Margins, DataAttributes {
-  heading?: string;
+  /** Content rendered inside the task list, typically GoabPublicFormTask items. */
   children: ReactNode;
+  /** Sets the heading text displayed above the task list. */
+  heading?: string;
 }
 
 export function GoabPublicFormTaskList({
@@ -26,11 +28,7 @@ export function GoabPublicFormTaskList({
 }: GoabPublicFormTaskListProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return (
-    <goa-public-form-task-list {..._props}>
-      {children}
-    </goa-public-form-task-list>
-  );
+  return <goa-public-form-task-list {..._props}>{children}</goa-public-form-task-list>;
 }
 
 export default GoabPublicFormTaskList;

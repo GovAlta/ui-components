@@ -3,7 +3,8 @@ import { ReactNode, useEffect, useRef, type JSX } from "react";
 import type {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -31,15 +32,25 @@ declare module "react" {
 }
 
 export interface GoabAccordionProps extends Margins, DataAttributes {
-  open?: boolean;
-  headingSize?: GoabAccordionHeadingSize;
-  secondaryText?: string;
+  /** @required Sets the heading text. */
   heading: string;
+  /** Sets the state of the accordion container open or closed. */
+  open?: boolean;
+  /** Sets the heading size of the accordion container heading. @default "small" */
+  headingSize?: GoabAccordionHeadingSize;
+  /** Sets secondary text displayed alongside the heading. */
+  secondaryText?: string;
+  /** Sets content rendered within the accordion heading, alongside the heading text. */
   headingContent?: ReactNode;
+  /** Sets the maximum width of the accordion. @default "none" */
   maxWidth?: string;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Sets the position of the expand/collapse icon. @default "left" */
   iconPosition?: GoabAccordionIconPosition;
+  /** Callback fired when the accordion is opened or closed. Receives the new open state as a boolean. */
   onChange?: (open: boolean) => void;
+  /** Content rendered inside the accordion body. */
   children?: ReactNode;
 }
 
@@ -69,11 +80,7 @@ export function GoabAccordion({
   }, [onChange]);
 
   return (
-    <goa-accordion
-      ref={ref}
-      open={open ? "true" : undefined}
-      {..._props}
-    >
+    <goa-accordion ref={ref} open={open ? "true" : undefined} {..._props}>
       {headingContent && <div slot="headingcontent">{headingContent}</div>}
       {children}
     </goa-accordion>

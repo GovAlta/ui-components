@@ -22,6 +22,7 @@ import {
 export class GoabSideMenu implements OnInit {
   isReady = false;
   version = "2";
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

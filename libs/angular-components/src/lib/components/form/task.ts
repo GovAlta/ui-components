@@ -12,5 +12,6 @@ import { GoabPublicFormTaskStatus } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPublicFormTask {
+  /** Sets the status of the task, which determines its badge display. */
   @Input() status?: GoabPublicFormTaskStatus;
 }

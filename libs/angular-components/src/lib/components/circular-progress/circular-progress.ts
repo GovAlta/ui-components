@@ -32,11 +32,17 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCircularProgress implements OnInit {
+  /** Stretch across the full screen or use it inline. */
   @Input() variant?: GoabCircularProgressVariant;
+  /** Size of the progress indicator. */
   @Input() size?: GoabCircularProgressSize;
+  /** Loading message displayed under the progress indicator. */
   @Input() message?: string;
+  /** Show/hide the page loader. This allows for fade transition to be applied in each transition. */
   @Input({ transform: booleanAttribute }) visible?: boolean;
+  /** Set the progress value. Setting this value will change the type from infinite to progress. */
   @Input({ transform: numberAttribute }) progress?: number;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   isReady = false;

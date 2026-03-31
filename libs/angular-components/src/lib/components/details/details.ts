@@ -32,8 +32,11 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDetails extends GoabBaseComponent implements OnInit {
+  /** @required The title heading. */
   @Input({ required: true }) heading!: string;
+  /** Controls if details is expanded or not. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets the maximum width of the details. */
   @Input() maxWidth?: string;
 
   isReady = false;

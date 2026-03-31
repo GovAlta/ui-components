@@ -42,21 +42,25 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormItem extends GoabBaseComponent implements OnInit {
+  /** Creates a label for the form item. */
   @Input() label?: string;
+  /** Sets the label size. 'compact' for dense layouts, 'regular' for standard, 'large' for emphasis. */
   @Input() labelSize?: GoabFormItemLabelSize;
+  /** Help text displayed under the form field to provide additional explanation. */
   @Input() helpText?: string;
+  /** Error text displayed under the form field. Leave blank to indicate a valid field. */
   @Input() error?: string;
+  /** Marks the field with an optional or required label indicator. */
   @Input() requirement?: GoabFormItemRequirement;
+  /** Sets the maximum width of the form item. */
   @Input() maxWidth?: string;
+  /** Sets the id attribute on the form item element. */
   @Input() id?: string;
+  /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   @Input() type?: GoabFormItemType = "";
-  /**
-   * Public form: to arrange fields in the summary
-   */
+  /** Sets the display order within the form summary. For public-form use only. */
   @Input() publicFormSummaryOrder?: number;
-  /**
-   * Public form: allow to override the label value within the form-summary to provide a shorter description of the value
-   */
+  /** Overrides the label value within the form-summary to provide a shorter description. For public-form use only. */
   @Input() name?: string;
 
   isReady = false;

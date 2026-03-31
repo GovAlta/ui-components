@@ -11,9 +11,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-checkbox": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-checkbox": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
@@ -39,22 +40,39 @@ interface WCProps extends Margins {
 
 /* eslint-disable-next-line */
 export interface GoabCheckboxProps extends Margins, DataAttributes {
-  id?: string;
+  /** @required Unique name to identify the checkbox. */
   name: string;
+  /** Sets a unique id for the checkbox element. */
+  id?: string;
+  /** Marks the checkbox item as selected. */
   checked?: boolean;
+  /** Shows a mixed/partial selection state. Used for 'Select All' checkboxes when some items are selected. */
   indeterminate?: boolean;
+  /** Disable this control. It will not receive focus or events. */
   disabled?: boolean;
+  /** Shows an error on the checkbox item. */
   error?: boolean;
+  /** Label shown beside the checkbox. */
   text?: string;
+  /** The value binding. */
   value?: string | number | boolean;
+  /** Content rendered inside the checkbox label slot. */
   children?: React.ReactNode;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   ariaLabel?: string;
+  /** Additional description text displayed below the checkbox label. */
   description?: string | React.ReactNode;
+  /** Content revealed when the checkbox is checked. */
   reveal?: React.ReactNode;
+  /** Text announced by screen readers when the reveal slot content is displayed. */
   revealAriaLabel?: string;
+  /** Sets the maximum width of the checkbox. */
   maxWidth?: string;
+  /** Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. @default "default" */
   size?: GoabCheckboxSize;
+  /** Callback fired when the checkbox selection changes. */
   onChange?: (detail: GoabCheckboxOnChangeDetail) => void;
 }
 

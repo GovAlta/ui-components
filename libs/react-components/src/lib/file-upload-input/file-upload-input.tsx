@@ -18,20 +18,26 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-file-upload-input": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-file-upload-input": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
 /* eslint-disable-next-line */
 export interface GoabFileUploadInputProps extends DataAttributes {
-  variant?: GoabFileUploadInputVariant;
-  accept?: string;
-  maxFileSize?: string;
-  testId?: string;
+  /** @required Callback fired when a valid file is selected or dropped. */
   onSelectFile: (detail: GoabFileUploadInputOnSelectFileDetail) => void;
+  /** The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. @default "dragdrop" */
+  variant?: GoabFileUploadInputVariant;
+  /** Accepted file types as a comma-separated list of MIME types or file extensions (e.g., "image/*,.pdf"). */
+  accept?: string;
+  /** Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Files exceeding this will be rejected. @default "5MB" */
+  maxFileSize?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
 }
 
 export function GoabFileUploadInput({ onSelectFile, ...rest }: GoabFileUploadInputProps) {

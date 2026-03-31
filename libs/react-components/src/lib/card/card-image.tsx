@@ -16,7 +16,9 @@ declare module "react" {
 }
 
 export interface GoabCardImageProps extends DataAttributes {
+  /** @required The URL of the image to display. */
   src: string;
+  /** @required Height of the image container. Accepts CSS values like "200px" or "100%". */
   height: string;
 }
 

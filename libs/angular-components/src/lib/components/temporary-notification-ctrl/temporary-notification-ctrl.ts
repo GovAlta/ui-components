@@ -27,8 +27,11 @@ type SnackbarHorizontalPosition = "left" | "center" | "right";
 })
 export class GoabTemporaryNotificationCtrl implements OnInit {
   isReady = false;
+  /** Vertical position of the notification container. @default "bottom" */
   @Input() verticalPosition: SnackbarVerticalPosition = "bottom";
+  /** Horizontal position of the notification container. @default "center" */
   @Input() horizontalPosition: SnackbarHorizontalPosition = "center";
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

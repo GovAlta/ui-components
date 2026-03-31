@@ -40,11 +40,17 @@ import {
 export class GoabPushDrawer implements OnInit {
   version = "2";
 
+  /** Sets the open state of the push drawer. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** @required Sets the heading text or template for the push drawer. */
   @Input() heading!: string | TemplateRef<any>;
+  /** Sets the width of the push drawer panel. */
   @Input() width?: string;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** @required Sets the template reference for the actions slot content. */
   @Input() actions!: TemplateRef<any>;
+  /** Emits when the push drawer closes. */
   @Output() onClose = new EventEmitter();
 
   isReady = false;

@@ -42,11 +42,16 @@ import { GoabBaseComponent } from "../base.component";
 export class GoabCalendar extends GoabBaseComponent implements OnInit {
   version = "2";
 
+  /** Name identifier for the calendar, included in change events. */
   @Input() name?: string;
+  /** The currently selected date value in YYYY-MM-DD format. */
   @Input() value?: Date | string;
+  /** The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past. */
   @Input() min?: Date | string | undefined;
+  /** The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future. */
   @Input() max?: Date | string | undefined;
 
+  /** Emits when the selected date changes. Emits the selected date details as GoabCalendarOnChangeDetail. */
   @Output() onChange = new EventEmitter<GoabCalendarOnChangeDetail>();
 
   isReady = false;

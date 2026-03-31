@@ -16,19 +16,25 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-fieldset": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-fieldset": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
 interface GoabFieldsetProps extends DataAttributes {
-  id?: string;
-  sectionTitle?: string;
-  dispatchOn?: GoabFormDispatchOn;
-  onContinue?: (event: GoabFieldsetOnContinueDetail) => void;
+  /** Content rendered inside the fieldset. */
   children: ReactNode;
+  /** Sets the unique identifier for the fieldset. */
+  id?: string;
+  /** Sets the section title of the fieldset. */
+  sectionTitle?: string;
+  /** Sets when form field changes are dispatched to the form. @default "continue" */
+  dispatchOn?: GoabFormDispatchOn;
+  /** Callback fired when the fieldset continue action is triggered. */
+  onContinue?: (event: GoabFieldsetOnContinueDetail) => void;
 }
 
 export function GoabFieldset({

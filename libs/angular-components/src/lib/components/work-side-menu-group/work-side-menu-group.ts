@@ -27,9 +27,13 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabWorkSideMenuGroup implements OnInit {
+  /** @required The text displayed in the group heading. */
   @Input({ required: true }) heading!: string;
+  /** Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved. */
   @Input() icon?: GoabIconType;
+  /** Whether the group is open. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   isReady = false;

@@ -20,10 +20,15 @@ declare module "react" {
 }
 
 export interface GoabSpinnerProps {
+  /** @required Sets the spinner animation type. */
   type: GoabSpinnerType;
+  /** @required Sets the size of the spinner. */
   size: GoabSpinnerSize;
+  /** When true, inverts colors for use on dark backgrounds. */
   invert?: boolean;
+  /** Progress value (0-100). When set to 0 or greater, shows a progress spinner instead of infinite. */
   progress?: number;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

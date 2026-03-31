@@ -12,20 +12,27 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-subform": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-public-subform": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
 interface GoabPublicSubformProps extends Margins, DataAttributes {
-  id?: string;
-  name?: string;
-  continueMsg?: string;
-  onInit?: (event: Event) => void;
-  onStateChange?: (event: Event) => void;
+  /** Content rendered inside the subform. */
   children: ReactNode;
+  /** Sets the unique identifier for the subform. */
+  id?: string;
+  /** Sets the name identifier for the subform. */
+  name?: string;
+  /** Sets the message displayed on the continue button. */
+  continueMsg?: string;
+  /** Callback fired when the subform is initialized. */
+  onInit?: (event: Event) => void;
+  /** Callback fired when the subform state changes. */
+  onStateChange?: (event: Event) => void;
 }
 
 export function GoabPublicSubform({
@@ -41,7 +48,7 @@ export function GoabPublicSubform({
 
   const _props = transformProps<WCProps>(
     { id, name, "continue-msg": continueMsg, ...rest },
-    kebab
+    kebab,
   );
 
   useEffect(() => {

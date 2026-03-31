@@ -24,10 +24,15 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDropdownItem implements OnInit {
+  /** The value submitted when this item is selected. */
   @Input() value?: string;
+  /** Text used to filter and match this item in typeahead search. */
   @Input() filter?: string;
+  /** Display label for the dropdown item. */
   @Input() label?: string;
+  /** Sets the name attribute of the dropdown item. */
   @Input() name?: string;
+  /** Controls how the item is registered with the parent dropdown. */
   @Input() mountType?: GoabDropdownItemMountType;
 
   isReady = false;

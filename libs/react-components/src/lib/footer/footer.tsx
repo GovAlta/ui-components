@@ -20,10 +20,14 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabAppFooterProps extends DataAttributes {
+  /** The maximum width of the main content area. */
   maxContentWidth?: string;
-  children?: ReactNode;
-  testId?: string;
+  /** URL for the Government of Alberta logo link. Set to empty string to disable the link. @default "https://alberta.ca" */
   url?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+  /** Content rendered inside the footer, typically navigation and meta sections. */
+  children?: ReactNode;
 }
 
 export function GoabAppFooter({ children, ...rest }: GoabAppFooterProps): JSX.Element {

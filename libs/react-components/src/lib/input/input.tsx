@@ -10,7 +10,8 @@ import {
   GoabInputOnKeyPressDetail,
   GoabInputSize,
   GoabInputType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -57,9 +58,10 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
-        ref?: React.RefObject<HTMLInputElement | null>;
-      };
+      "goa-input": WCProps &
+        React.HTMLAttributes<HTMLInputElement> & {
+          ref?: React.RefObject<HTMLInputElement | null>;
+        };
     }
   }
 }
@@ -101,13 +103,21 @@ type OnBlur<T = string> = (detail: GoabInputOnBlurDetail<T>) => void;
 type OnKeyPress<T = string> = (detail: GoabInputOnKeyPressDetail<T>) => void;
 
 export interface GoabInputProps extends BaseProps {
+  /** Callback fired when the input value changes. */
   onChange?: OnChange<string>;
+  /** Bound to the current value of the input field. */
   value?: string;
+  /** Minimum value. Supports any number, or ISO 8601 format for date/datetime types. */
   min?: number | string;
+  /** Maximum value. Supports any number, or ISO 8601 format for date/datetime types. */
   max?: number | string;
+  /** How much a number or date value should change by. @default 1 */
   step?: number;
+  /** Callback fired when the input receives focus. */
   onFocus?: OnFocus<string>;
+  /** Callback fired when the input loses focus. */
   onBlur?: OnBlur<string>;
+  /** Callback fired when a key is pressed in the input. */
   onKeyPress?: OnKeyPress<string>;
 }
 

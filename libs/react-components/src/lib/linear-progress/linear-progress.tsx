@@ -16,10 +16,15 @@ declare module "react" {
 }
 
 export interface GoabLinearProgressProps {
+  /** Progress value (0-100). When undefined, shows an indeterminate loading animation. */
   progress?: number | null;
+  /** Controls visibility of the percentage text. @default "visible" */
   percentVisibility?: "visible" | "hidden" | undefined;
+  /** Accessible label for the progress bar. */
   ariaLabel?: string;
+  /** ID of the element that labels this progress bar. */
   ariaLabelledBy?: string;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 

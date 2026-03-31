@@ -36,11 +36,16 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
+  /** Sets the id attribute on the file upload input element. */
   @Input() id?: string = "";
+  /** @required The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. */
   @Input({ required: true }) variant!: GoabFileUploadInputVariant;
+  /** Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Files exceeding this will be rejected. @default "5MB" */
   @Input() maxFileSize?: string = "5MB";
+  /** Accepted file types as a comma-separated list of MIME types or file extensions (e.g., "image/*,.pdf"). */
   @Input() accept?: string;
 
+  /** Emits when a file is selected. Emits the selected file details. */
   @Output() onSelectFile = new EventEmitter<GoabFileUploadInputOnSelectFileDetail>();
 
   isReady = false;

@@ -43,13 +43,21 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabIcon extends GoabBaseComponent implements OnInit {
+  /** @required The icon type to display. See GoAIconType for available icons. */
   @Input({ required: true }) type!: GoabIconType | GoabIconOverridesType;
+  /** Sets the size of the icon. Accepts numeric (1-6) or named sizes. */
   @Input() size?: GoabIconSize;
+  /** Sets the icon theme. 'outline' shows stroked icons, 'filled' shows solid icons. */
   @Input() theme?: GoabIconTheme;
+  /** When true, inverts the icon colors for use on dark backgrounds. */
   @Input({ transform: booleanAttribute }) inverted?: boolean;
+  /** Sets a custom fill color for the icon. Accepts any valid CSS color value. */
   @Input() fillColor?: string;
+  /** Sets the opacity of the icon from 0 (transparent) to 1 (opaque). */
   @Input({ transform: numberAttribute }) opacity?: number;
+  /** Adds an accessible title to the icon SVG. Used by screen readers. */
   @Input() title?: string;
+  /** Defines how the icon will be announced by screen readers. */
   @Input() ariaLabel?: string;
 
   isReady = false;

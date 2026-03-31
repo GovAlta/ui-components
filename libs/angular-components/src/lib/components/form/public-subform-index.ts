@@ -24,8 +24,12 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPublicSubformIndex extends GoabBaseComponent {
+  /** Sets the heading text of the subform index page. */
   @Input() heading?: string = "";
+  /** Sets the section title displayed above the heading. */
   @Input() sectionTitle?: string = "";
+  /** Sets the text for the action button that navigates to the subform. */
   @Input() actionButtonText?: string = "";
+  /** Sets the visibility of the continue button. @default "hidden" */
   @Input() buttonVisibility?: "visible" | "hidden" = "hidden";
 }

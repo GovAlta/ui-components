@@ -34,7 +34,9 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabButtonGroup extends GoabBaseComponent implements OnInit {
+  /** Positions the button group in the page layout. */
   @Input() alignment?: GoabButtonGroupAlignment;
+  /** Sets the spacing between buttons in the button group. */
   @Input() gap?: GoabButtonGroupGap;
 
   isReady = false;

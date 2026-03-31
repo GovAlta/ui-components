@@ -87,19 +87,31 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
     }, 0);
   }
 
+  /** Sets the name of the checkbox input for form submission. */
   @Input() name?: string;
+  /** Marks the checkbox item as selected. */
   @Input({ transform: booleanAttribute }) checked?: boolean;
+  /** Shows a mixed/partial selection state. Used for 'Select All' checkboxes when some items are selected. */
   @Input({ transform: booleanAttribute }) indeterminate?: boolean;
+  /** Label shown beside the checkbox. */
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
+  /** The value binding. */
   @Input() override value?: string | number | boolean | null;
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   @Input() ariaLabel?: string;
+  /** @required Additional description text displayed below the checkbox label. */
   @Input() description!: string | TemplateRef<any>;
+  /** Sets the template for the expandable reveal slot content. */
   @Input() reveal?: TemplateRef<any>;
+  /** Text announced by screen readers when the reveal slot content is displayed. */
   @Input() revealArialLabel?: string;
+  /** Sets the maximum width of the checkbox. */
   @Input() maxWidth?: string;
+  /** Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. @default "default" */
   @Input() size?: GoabCheckboxSize = "default";
 
+  /** Emits when the checkbox value changes. Emits the new checkbox state as a GoabCheckboxOnChangeDetail object. */
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();
 
   getDescriptionAsString(): string {

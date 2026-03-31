@@ -15,7 +15,9 @@ declare module "react" {
 }
 
 export interface GoabFormStepProps {
+  /** @required The step label text displayed to users. */
   text: string;
+  /** The completion status of the step. Affects visual styling and icons. */
   status?: GoabFormStepStatus;
 }
 

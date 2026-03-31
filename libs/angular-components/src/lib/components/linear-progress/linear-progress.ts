@@ -23,10 +23,15 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabLinearProgress implements OnInit {
+  /** Progress value (0-100). When undefined, shows an indeterminate loading animation. */
   @Input() progress?: number | null | undefined;
+  /** Controls visibility of the percentage text. */
   @Input() percentVisibility?: "visible" | "hidden" | undefined;
+  /** Accessible label for the progress bar. */
   @Input() ariaLabel?: string;
+  /** ID of the element that labels this progress bar. */
   @Input() ariaLabelledBy?: string;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testid?: string;
 
   isReady = false;

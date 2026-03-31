@@ -32,7 +32,9 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormStepper extends GoabBaseComponent implements OnInit {
+  /** The current step state value (1-based index). Leaving it blank (-1) will allow any step to be accessed. @default -1 */
   @Input() step?: number = -1;
+  /** Emits when the form stepper step changes. Emits the new step and stepIndex as GoabFormStepperOnChangeDetail. */
   @Output() onChange = new EventEmitter<GoabFormStepperOnChangeDetail>();
 
   isReady = false;

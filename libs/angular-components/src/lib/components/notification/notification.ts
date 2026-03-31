@@ -39,11 +39,17 @@ import {
 export class GoabNotification implements OnInit {
   isReady = false;
   version = "2";
+  /** Define the context and colour of the notification. @default "information" */
   @Input() type?: GoabNotificationType = "information";
+  /** Indicates how assistive technology should handle updates to the live region. */
   @Input() ariaLive?: GoabAriaLiveType;
+  /** Maximum width of the content area. */
   @Input() maxContentWidth?: string;
+  /** Sets the visual prominence. 'high' for full background, 'filled' for medium. @default "high" */
   @Input() emphasis?: GoabNotificationEmphasis = "high";
+  /** When true, reduces padding for a more compact notification. */
   @Input({ transform: booleanAttribute }) compact?: boolean;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -55,6 +61,7 @@ export class GoabNotification implements OnInit {
     });
   }
 
+  /** Emits when the notification is dismissed. */
   @Output() onDismiss = new EventEmitter();
 
   _onDismiss() {

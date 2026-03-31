@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 export type GoabHeroBannerActionsType = {
+  /** Content rendered inside the hero banner actions slot, typically buttons or links. */
   children?: React.ReactNode;
 };
 

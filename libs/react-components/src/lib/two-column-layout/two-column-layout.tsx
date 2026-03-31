@@ -15,12 +15,18 @@ declare module "react" {
 }
 
 export interface GoabTwoColumnLayoutProps {
-  navColumnWidth?: string;
-  maxContentWidth?: string;
+  /** @required Content rendered in the page header slot. */
   header: ReactNode;
+  /** @required Content rendered in the page footer slot. */
   footer: ReactNode;
+  /** @required Content rendered in the navigation column slot. */
   nav: ReactNode;
+  /** @required Main content rendered in the body of the layout. */
   children: ReactNode;
+  /** Sets the width of the navigation column. */
+  navColumnWidth?: string;
+  /** Sets the maximum width of the content area. */
+  maxContentWidth?: string;
 }
 
 export function GoabTwoColumnLayout(props: GoabTwoColumnLayoutProps) {

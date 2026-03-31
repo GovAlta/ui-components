@@ -33,8 +33,11 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabTab implements OnInit {
   isReady = false;
+  /** @required The text label for this tab. Can also use the heading slot for custom content. */
   @Input() heading!: string | TemplateRef<any>;
+  /** When true, disables the tab. */
   @Input({ transform: booleanAttribute }) disabled?: boolean;
+  /** Sets the URL slug for the tab. */
   @Input() slug?: string;
 
   constructor(private cdr: ChangeDetectorRef) {}

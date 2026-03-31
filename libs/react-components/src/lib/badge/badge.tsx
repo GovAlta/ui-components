@@ -31,13 +31,21 @@ declare module "react" {
 }
 
 export interface GoabBadgeProps extends Margins, DataAttributes {
+  /** @required Defines the context and colour of the badge. */
   type: GoabBadgeType;
+  /** @deprecated Use iconType instead. When true, displays an icon in the badge. */
   icon?: boolean;
+  /** Text label of the badge. */
   content?: string;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Accessible label for screen readers. */
   ariaLabel?: string;
+  /** Icon type to display in the badge. */
   iconType?: GoabIconType;
+  /** Sets the size of the badge. @default "medium" */
   size?: GoabBadgeSize;
+  /** Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis. @default "strong" */
   emphasis?: GoabBadgeEmphasis;
 }
 
