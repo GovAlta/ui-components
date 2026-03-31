@@ -10,10 +10,12 @@ import {
   getComponentApi,
   getGuidanceForComponent,
   getExamplesForComponent,
+  getRelatedComponents,
   getSubcomponents,
   categorizeGuidance,
 } from '../../lib/content-queries';
 import { getComponentConfigurations } from '../../data/configurations';
+import { getThumbnailPath } from '../../lib/component-thumbnails';
 
 // Generate static paths for all components
 export async function getStaticPaths() {
@@ -46,6 +48,9 @@ const componentExamples = await getExamplesForComponent(slug);
 
 // 5. Get component configurations (if available)
 const configurations = getComponentConfigurations(slug);
+
+// 6. Get visible related components (peers, not subcomponents)
+const relatedComponents = await getRelatedComponents(component.data.relatedComponents ?? []);
 
 // GitHub issues URL for this component
 const githubIssuesUrl = `https://github.com/GovAlta/ui-components/issues?q=is%3Aissue+is%3Aopen+label%3A%22${encodeURIComponent(component.data.name)}%22`;
@@ -174,6 +179,39 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
       </TabContentWrapper>
     </goa-tab>
   </goa-tabs>
+
+  {relatedComponents.length > 0 && (
+    <section class="related-components">
+      <h2 class="related-heading">Related components</h2>
+      <div class="related-cards">
+        {relatedComponents.map((comp) => {
+          const compSlug = comp.data.slug || comp.slug;
+          return (
+            <a href={`/components/${compSlug}`} class="related-card">
+              <div class="related-card-thumbnail" aria-hidden="true">
+                <img src={getThumbnailPath(compSlug)} alt="" loading="lazy"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                <span class="related-card-thumbnail-fallback">{comp.data.name}</span>
+              </div>
+              <div class="related-card-info">
+                <span class="related-card-name">{comp.data.name}</span>
+                {comp.data.description && (
+                  <p class="related-card-description">{comp.data.description}</p>
+                )}
+                <div class="related-card-badge">
+                  <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={comp.data.category.replace(/-/g, ' ')} />
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+
+  <goa-spacer version="2" vspacing="xl"></goa-spacer>
+  <goa-divider version="2"></goa-divider>
+  <goa-spacer version="2" vspacing="m"></goa-spacer>
   </div>
   <goa-link size="small" trailingicon="open">
     <a href={v1DocsUrl} target="_blank" rel="noopener noreferrer"
@@ -295,6 +333,96 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
     margin: 0 0 var(--goa-space-m);
     padding-left: var(--goa-space-l);
     max-width: 65ch;
+  }
+
+  /* Related Components */
+  .related-components {
+    margin-top: var(--goa-space-2xl);
+    padding-top: var(--goa-space-xl);
+    border-top: 1px solid var(--goa-color-greyscale-200);
+  }
+
+  .related-heading {
+    font: var(--goa-typography-heading-s);
+    color: var(--goa-color-text-default);
+    margin: 0 0 var(--goa-space-m);
+  }
+
+  .related-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 15rem));
+    gap: var(--goa-space-m);
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .related-card:focus-visible {
+    outline: 2px solid var(--goa-color-interactive-focus);
+    outline-offset: 2px;
+    border-radius: var(--goa-border-radius-m);
+  }
+
+  .related-card-thumbnail {
+    aspect-ratio: 386 / 256;
+    background: var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-m);
+    overflow: hidden;
+  }
+
+  .related-card-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .related-card-thumbnail-fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font: var(--goa-typography-heading-xs);
+    color: var(--goa-color-text-secondary);
+    text-align: center;
+    padding: var(--goa-space-s);
+  }
+
+  .related-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-2xs);
+    padding-top: var(--goa-space-xs);
+  }
+
+  .related-card-name {
+    font: var(--goa-typography-heading-xs);
+    color: var(--goa-color-interactive-default);
+    text-decoration: none;
+  }
+
+  .related-card:hover .related-card-name {
+    text-decoration: underline;
+  }
+
+  .related-card-description {
+    margin: 0;
+    font: var(--goa-typography-body-s);
+    color: var(--goa-color-text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .related-card-badge {
+    margin-top: var(--goa-space-3xs);
   }
 </style>
 
