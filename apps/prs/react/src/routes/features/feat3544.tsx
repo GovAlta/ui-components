@@ -1,9 +1,10 @@
-import { GoabContainer, GoabText } from "@abgov/react-components";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
-} from "@abgov/react-components/experimental";
+  GoabContainer,
+  GoabText,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
+} from "@abgov/react-components";
 
 export function Feat3544Route() {
   return (
@@ -26,24 +27,24 @@ export function Feat3544Route() {
         <GoabContainer>
           <GoabText tag="h2">With icons</GoabText>
           <div style={{ height: "380px", overflow: "hidden" }}>
-            <GoabxWorkSideMenu
+            <GoabWorkSideMenu
               heading="Test Menu"
               url="/"
               open={true}
               primaryContent={
                 <>
-                  <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuItem
                     label="Standalone item"
                     url="/features/3544"
                     icon="home"
                   />
-                  <GoabxWorkSideMenuGroup heading="Grouped items" icon="folder">
-                    <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuGroup heading="Grouped items" icon="folder">
+                    <GoabWorkSideMenuItem
                       label="Group child"
                       url="/features/3544"
                       icon="document"
                     />
-                  </GoabxWorkSideMenuGroup>
+                  </GoabWorkSideMenuGroup>
                 </>
               }
             />
@@ -53,16 +54,16 @@ export function Feat3544Route() {
         <GoabContainer>
           <GoabText tag="h2">Without icons</GoabText>
           <div style={{ height: "380px", overflow: "hidden" }}>
-            <GoabxWorkSideMenu
+            <GoabWorkSideMenu
               heading="Test Menu"
               url="/"
               open={true}
               primaryContent={
                 <>
-                  <GoabxWorkSideMenuItem label="Standalone item" url="/features/3544" />
-                  <GoabxWorkSideMenuGroup heading="Grouped items">
-                    <GoabxWorkSideMenuItem label="Group child" url="/features/3544" />
-                  </GoabxWorkSideMenuGroup>
+                  <GoabWorkSideMenuItem label="Standalone item" url="/features/3544" />
+                  <GoabWorkSideMenuGroup heading="Grouped items">
+                    <GoabWorkSideMenuItem label="Group child" url="/features/3544" />
+                  </GoabWorkSideMenuGroup>
                 </>
               }
             />
@@ -72,23 +73,23 @@ export function Feat3544Route() {
         <GoabContainer>
           <GoabText tag="h2">Mixed: back icon + no icons</GoabText>
           <div style={{ height: "380px", overflow: "hidden" }}>
-            <GoabxWorkSideMenu
+            <GoabWorkSideMenu
               heading="Test Menu"
               url="/"
               open={true}
               primaryContent={
                 <>
-                  <GoabxWorkSideMenuItem label="All" url="/features/3544" icon="arrow-back" />
-                  <GoabxWorkSideMenuItem label="All Components" url="/features/3544" />
-                  <GoabxWorkSideMenuGroup heading="Content layout">
-                    <GoabxWorkSideMenuItem label="Container" url="/features/3544" />
-                    <GoabxWorkSideMenuItem label="Divider" url="/features/3544" />
-                    <GoabxWorkSideMenuItem label="Grid" url="/features/3544" />
-                  </GoabxWorkSideMenuGroup>
-                  <GoabxWorkSideMenuGroup heading="Inputs and actions">
-                    <GoabxWorkSideMenuItem label="Button" url="/features/3544" />
-                    <GoabxWorkSideMenuItem label="Input" url="/features/3544" />
-                  </GoabxWorkSideMenuGroup>
+                  <GoabWorkSideMenuItem label="All" url="/features/3544" icon="arrow-back" />
+                  <GoabWorkSideMenuItem label="All Components" url="/features/3544" />
+                  <GoabWorkSideMenuGroup heading="Content layout">
+                    <GoabWorkSideMenuItem label="Container" url="/features/3544" />
+                    <GoabWorkSideMenuItem label="Divider" url="/features/3544" />
+                    <GoabWorkSideMenuItem label="Grid" url="/features/3544" />
+                  </GoabWorkSideMenuGroup>
+                  <GoabWorkSideMenuGroup heading="Inputs and actions">
+                    <GoabWorkSideMenuItem label="Button" url="/features/3544" />
+                    <GoabWorkSideMenuItem label="Input" url="/features/3544" />
+                  </GoabWorkSideMenuGroup>
                 </>
               }
             />

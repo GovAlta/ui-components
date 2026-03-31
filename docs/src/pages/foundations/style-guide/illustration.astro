@@ -1,0 +1,406 @@
+---
+/**
+ * Foundations - Style guide - Illustration
+ *
+ * Illustration guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guide -> Illustration.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+
+const illustrationTokens = [
+  "--goa-color-illustration-dawnDark-700",
+  "--goa-color-illustration-dawnDark-600",
+  "--goa-color-illustration-dawnDark-500",
+  "--goa-color-illustration-dawnDark-400",
+  "--goa-color-illustration-greyscale-white",
+  "--goa-color-illustration-greyscale-50",
+  "--goa-color-illustration-greyscale-100",
+  "--goa-color-illustration-greyscale-200",
+  "--goa-color-illustration-greyscale-black",
+  "--goa-color-illustration-skyDark-navy",
+  "--goa-color-illustration-skyDark-200",
+  "--goa-color-illustration-skyDark-100",
+  "--goa-color-illustration-skyMid-Blue",
+  "--goa-color-illustration-skyMid-200",
+  "--goa-color-illustration-skyMid-100",
+  "--goa-color-illustration-skyMid-25",
+];
+
+const colourApplications = [
+  {
+    title: "Line work",
+    tokens: ["--goa-color-illustration-greyscale-black"],
+  },
+  {
+    title: "Neutral fills",
+    tokens: ["--goa-color-illustration-greyscale-white"],
+  },
+  {
+    title: "Backgrounds",
+    tokens: [
+      "--goa-color-illustration-greyscale-50",
+      "--goa-color-illustration-greyscale-100",
+    ],
+  },
+  {
+    title: "Shadows",
+    tokens: ["--goa-color-illustration-skyDark-200"],
+  },
+  {
+    title: "Accents",
+    tokens: [
+      "--goa-color-illustration-dawnDark-700",
+      "--goa-color-illustration-dawnDark-600",
+      "--goa-color-illustration-dawnDark-500",
+      "--goa-color-illustration-dawnDark-400",
+      "--goa-color-illustration-skyDark-navy",
+      "--goa-color-illustration-skyDark-200",
+      "--goa-color-illustration-skyDark-100",
+      "--goa-color-illustration-skyMid-Blue",
+      "--goa-color-illustration-skyMid-200",
+      "--goa-color-illustration-skyMid-100",
+      "--goa-color-illustration-skyMid-25",
+    ],
+  },
+];
+---
+
+<DocumentationPageLayout
+  title="Illustration"
+  description="Illustration guidance for using consistent, accessible, and adaptable visuals in Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Illustration</goa-text>
+  <goa-text size="body-l" mt="none" mb="m">
+    Illustrations support key moments in a service experience. They add clarity, create
+    visual interest, and help explain the context of a task or outcome.
+  </goa-text>
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+  <goa-text size="body-m" mt="none" mb="m"
+    >Illustrations are most commonly used in:</goa-text
+  >
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Landing screens</li>
+      <li>Success or confirmation screens</li>
+      <li>Important steps in a process</li>
+      <li>Empty states or status messages</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="m" mb="2xl">
+    They introduce a human element while keeping the interface clear and accessible.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="illustration-approach">Illustration approach</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    The illustration style is designed to be inclusive and adaptable across services.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Illustrations avoid specific demographic or geographic details. This ensures they can
+    be used across multiple services and audiences. Use illustrations sparingly and
+    intentionally. They should support the interface without competing with it.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">The visual style combines:</goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Minimal black line work</li>
+      <li>Abstract geometric shapes</li>
+      <li>Controlled colour accents</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="m" mb="none">
+    Together, these elements create a style that feels modern, approachable, and
+    consistent across the design system.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="illustration-ingredients">Illustration ingredients</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Illustrations follow a consistent structure made up of three core elements.
+  </goa-text>
+
+  <h3 id="line-work">Line work</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    The main subject of an illustration is drawn using smooth black vector lines.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="l">Line work should:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use a consistent stroke weight</li>
+      <li>Be clean and minimal</li>
+      <li>Avoid unnecessary details</li>
+      <li>Use only the lines needed to communicate the idea clearly</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    This approach keeps illustrations readable at different sizes and ensures consistency
+    across the system.
+  </goa-text>
+  <img
+    src="/images/foundations/style-guide/illustration-1.svg"
+    alt="Example illustration"
+    width="760"
+    height="224"
+  />
+
+  <h3 id="colour">Colour</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use the following illustration colour tokens:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      {
+        illustrationTokens.map((token) => (
+          <li>
+            <code>{token}</code>
+          </li>
+        ))
+      }
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use colour sparingly so illustrations support the interface rather than compete with
+    it. The palette combines neutral tones for structure with accent colours that
+    highlight key elements.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Apply colours in the following way:</goa-text>
+  {
+    colourApplications.map((group) => (
+      <>
+        <h4 id={group.title.toLowerCase().replaceAll(" ", "-")}>{group.title}</h4>
+        <goa-text size="body-m" mt="none" mb="m">
+          <ul>
+            {group.tokens.map((token) => (
+              <li>
+                <code>{token}</code>
+              </li>
+            ))}
+          </ul>
+        </goa-text>
+      </>
+    ))
+  }
+
+  <h3 id="abstract-shapes">Abstract shapes</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Abstract shapes add energy and depth to an illustration. They help guide the
+    viewer&apos;s attention and support the composition.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="l">Shapes should:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use smooth Bezier curves</li>
+      <li>Avoid jagged or textured edges</li>
+      <li>Sit behind the line work</li>
+      <li>Use colours from the illustration palette</li>
+    </ul>
+  </goa-text>
+  <img
+    src="/images/foundations/style-guide/abstract-shapes.svg"
+    alt="Abstract shapes example"
+    width="752"
+    height="371"
+  />
+
+  <h3 id="the-blend">The blend</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    When combined with line work and colour, these shapes create a balanced and lively
+    composition.
+  </goa-text>
+  <img
+    src="/images/foundations/style-guide/the-blend.svg"
+    alt="Blend example"
+    width="760"
+    height="381"
+  />
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="using-illustrations">Using illustrations</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Illustrations are available through the Design System illustration library. Always
+    start with existing assets before requesting something new.
+  </goa-text>
+
+  <h3 id="for-designers">For designers</h3>
+
+  <h4 id="using-illustrations-in-figma">Using illustrations in Figma</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ol>
+      <li>Open the <strong>Assets panel</strong></li>
+      <li>Select the <strong>Illustrations library</strong></li>
+      <li>Search for the illustration you need</li>
+      <li>Drag the illustration into your frame</li>
+    </ol>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    All illustrations are stored in the <goa-link trailingicon="open"
+      ><a
+        href="https://figma.com/design/1DyrNxvQ1yhIEGqtpAtJqp/❖-BETA-Illustration-library?node-id=0-1&t=Gt9XtFCIhIaEVQsY-1"
+        >Figma illustrations library</a
+      ></goa-link
+    >.
+  </goa-text>
+
+  <h4 id="exporting-svgs-from-figma">Exporting SVGs from Figma</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Export illustrations using the following settings:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li><strong>Format:</strong> SVG</li>
+      <li><strong>Colour profile:</strong> sRGB</li>
+      <li><strong>Image resampling:</strong> Detailed</li>
+      <li><strong>Ignore overlapping layers:</strong> ON</li>
+      <li><strong>Include id attribute:</strong> OFF</li>
+      <li><strong>Suffix:</strong> None</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">File naming rules:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Use lowercase letters</li>
+      <li>Use dashes instead of spaces</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m"> Example: </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <code>person-on-computer.svg</code>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    After export, attach the SVG file to the relevant Jira issue for the development team.
+  </goa-text>
+
+  <h3 id="for-developers">For developers</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Developers should use the SVG assets provided by designers.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Do not:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Redraw illustrations</li>
+      <li>Stretch or distort them</li>
+      <li>Modify colours in code</li>
+    </ul>
+  </goa-text>
+
+  <h4 id="accessibility-guidance">Accessibility guidance</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Only expose illustrations to assistive technologies when they communicate information
+    that is important to the user. Informative illustrations should include alt text that
+    clearly describes what the illustration communicates. Decorative illustrations should
+    use an empty alt attribute: <code>alt=""</code>.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Examples</goa-text>
+
+  <goa-text size="body-m" mt="none" mb="m">Informative illustration</goa-text>
+  <pre><code>&lt;img
+  src="/illustrations/identity-verified.svg"
+  alt="Identity verified"
+  width="320"
+  height="320"
+  loading="lazy"
+  decoding="async"
+  style="max-width:100%; height:auto"
+&gt;</code></pre>
+
+  <goa-text size="body-m" mt="none" mb="m">Decorative illustration</goa-text>
+  <pre><code>&lt;img
+  src="/illustrations/identity-verified.svg"
+  alt=""
+  width="320"
+  height="320"
+  loading="lazy"
+  decoding="async"
+  style="max-width:100%; height:auto"
+&gt;</code></pre>
+
+  <h3 id="responsive-sizing">Responsive sizing</h3>
+  <goa-text size="body-m" mt="none" mb="none">
+    Set <code>width</code> and <code>height</code> to define the default display size and help
+    browsers reserve space for the image. Use <code>max-width:100%; height:auto</code>
+    to keep the illustration responsive across screen sizes.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="requesting-a-new-illustration">Requesting a new illustration</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    The illustration library grows over time as new needs emerge. If you need something
+    that does not exist yet, contact the Design System team.
+  </goa-text>
+
+  <h3 id="illustration-request-process">Illustration request process</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    This process explains how requests move from submission to delivery. It helps product
+    teams understand timelines and gives the Design System team the information needed to
+    plan work.
+  </goa-text>
+
+  <h4 id="pathway-1-self-serve-request">Pathway 1 -- Self-serve request</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use this pathway when you already know what you need.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Choose this option if:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>You have a clear idea of the illustration</li>
+      <li>You understand the context where it will be used</li>
+      <li>You can provide the required details in the request form</li>
+    </ul>
+  </goa-text>
+  <h4 id="self-serve-how-it-works">How it works</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ol>
+      <li>
+        Complete the <goa-link trailingicon="open"
+          ><a
+            href="https://forms.office.com/pages/responsepage.aspx?id=Bhy1K5uvxUKL9Tw7exCFC_ZI_596tSlOqLrYM5p6SHdURTVGSFZGOFpLOTc5QjhETFJFUFRDRjlaVC4u&route=shorturl"
+            >illustration request form</a
+          ></goa-link
+        >
+      </li>
+      <li>You receive an automatic acknowledgement email</li>
+      <li>Issue is created and priority and timelines are assigned</li>
+      <li>The team contacts you with next steps and expected delivery timing</li>
+      <li>Work begins once scope and timelines are confirmed</li>
+    </ol>
+  </goa-text>
+
+  <h4 id="pathway-2-guided-request">Pathway 2 -- Guided request</h4>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use this pathway when you need help shaping the request.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Choose this option if:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>You are unsure what illustration style fits your need</li>
+      <li>You do not yet have a fully formed concept</li>
+      <li>You would benefit from a conversation to explore options and constraints</li>
+    </ul>
+  </goa-text>
+  <h4 id="guided-how-it-works">How it works</h4>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ol>
+      <li>
+        Book an <goa-link trailingicon="open"
+          ><a
+            href="https://outlook.office365.com/book/BKGDesignsystemdropinhours@abgov.onmicrosoft.com/"
+            >illustration consultation</a
+          ></goa-link
+        >
+      </li>
+      <li>The Design System team helps refine the request</li>
+      <li>Issue is created and priority and timelines are assigned</li>
+      <li>The team contacts you with next steps and expected delivery timing</li>
+      <li>Work begins once scope and timelines are confirmed</li>
+    </ol>
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>

@@ -5,12 +5,6 @@ import {
   GoabRadioGroup,
   GoabRadioItem,
 } from "@abgov/react-components";
-import {
-  GoabxFormItem,
-  GoabxInput,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-} from "@abgov/react-components/experimental";
 
 export function Bug3498Route() {
   const [contactMethod, setContactMethod] = useState("");
@@ -62,86 +56,86 @@ export function Bug3498Route() {
       </GoabFormItem>
       <h2>Version 2 (Experimental)</h2>
       <h3>Regular size</h3>
-      <GoabxFormItem
+      <GoabFormItem
         label="How would you like to be contacted?"
         helpText="Select one option"
       >
-        <GoabxRadioGroup
+        <GoabRadioGroup
           name="contactMethodTwo"
           value={contactMethodTwo}
           onChange={(e) => setContactMethodTwo(e.value)}
         >
-          <GoabxRadioItem
+          <GoabRadioItem
             value="email-2"
             label="Email"
             description="Receive updates via email"
             reveal={
-              <GoabxFormItem label="Email address">
-                <GoabxInput name="email" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Email address">
+                <GoabInput name="email" value="" />
+              </GoabFormItem>
             }
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="phone-2"
             label="Phone"
             reveal={
-              <GoabxFormItem label="Phone number">
-                <GoabxInput name="phoneNumber" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Phone number">
+                <GoabInput name="phoneNumber" value="" />
+              </GoabFormItem>
             }
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="text-2"
             label="Text message"
             reveal={
-              <GoabxFormItem label="Mobile phone number">
-                <GoabxInput name="mobilePhoneNumber" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Mobile phone number">
+                <GoabInput name="mobilePhoneNumber" value="" />
+              </GoabFormItem>
             }
           />
-        </GoabxRadioGroup>
-      </GoabxFormItem>
+        </GoabRadioGroup>
+      </GoabFormItem>
       <h3>Compact size</h3>
-      <GoabxFormItem
+      <GoabFormItem
         label="How would you like to be contacted?"
         helpText="Select one option"
       >
-        <GoabxRadioGroup
+        <GoabRadioGroup
           size="compact"
           name="contactMethodThree"
           value={contactMethodThree}
           onChange={(e) => setContactMethodThree(e.value)}
         >
-          <GoabxRadioItem
+          <GoabRadioItem
             value="email-3"
             label="Email"
             description="Receive updates via email"
             reveal={
-              <GoabxFormItem label="Email address">
-                <GoabxInput name="email" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Email address">
+                <GoabInput name="email" value="" />
+              </GoabFormItem>
             }
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="phone-3"
             label="Phone"
             reveal={
-              <GoabxFormItem label="Phone number">
-                <GoabxInput name="phoneNumber" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Phone number">
+                <GoabInput name="phoneNumber" value="" />
+              </GoabFormItem>
             }
           />
-          <GoabxRadioItem
+          <GoabRadioItem
             value="text-3"
             label="Text message"
             reveal={
-              <GoabxFormItem label="Mobile phone number">
-                <GoabxInput name="mobilePhoneNumber" value="" />
-              </GoabxFormItem>
+              <GoabFormItem label="Mobile phone number">
+                <GoabInput name="mobilePhoneNumber" value="" />
+              </GoabFormItem>
             }
           />
-        </GoabxRadioGroup>
-      </GoabxFormItem>
+        </GoabRadioGroup>
+      </GoabFormItem>
     </div>
 
   );

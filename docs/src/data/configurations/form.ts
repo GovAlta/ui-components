@@ -18,25 +18,25 @@ export const formConfigurations: ComponentConfigurations = {
       description: 'Simple form wrapper',
       code: {
         react: `<GoabForm onSubmit={handleSubmit}>
-  <GoabxFormItem label="Name" mb="l">
-    <GoabxInput name="name" width="100%" />
-  </GoabxFormItem>
-  <GoabxFormItem label="Email" mb="l">
-    <GoabxInput name="email" type="email" width="100%" />
-  </GoabxFormItem>
+  <GoabFormItem label="Name" mb="l">
+    <GoabInput name="name" width="100%" />
+  </GoabFormItem>
+  <GoabFormItem label="Email" mb="l">
+    <GoabInput name="email" type="email" width="100%" />
+  </GoabFormItem>
   <GoabButtonGroup mt="l">
-    <GoabxButton type="submit">Submit</GoabxButton>
+    <GoabButton type="submit">Submit</GoabButton>
   </GoabButtonGroup>
 </GoabForm>`,
         angular: `<goab-form (_submit)="handleSubmit($event)">
-  <goabx-form-item label="Name" mb="l">
-    <goabx-input name="name" width="100%"></goabx-input>
-  </goabx-form-item>
-  <goabx-form-item label="Email" mb="l">
-    <goabx-input name="email" type="email" width="100%"></goabx-input>
-  </goabx-form-item>
+  <goab-form-item label="Name" mb="l">
+    <goab-input name="name" width="100%"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Email" mb="l">
+    <goab-input name="email" type="email" width="100%"></goab-input>
+  </goab-form-item>
   <goab-button-group mt="l">
-    <goabx-button type="submit">Submit</goabx-button>
+    <goab-button type="submit">Submit</goab-button>
   </goab-button-group>
 </goab-form>`,
         webComponents: `<goa-form>

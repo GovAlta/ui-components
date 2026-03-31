@@ -14,23 +14,21 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import {
-  GoabxButton,
-  GoabxInput,
-  GoabxFormItem,
-  GoabxFilterChip,
-  GoabxPushDrawer,
-  GoabxCheckbox,
-  GoabxCheckboxList,
-} from "@abgov/react-components/experimental";
-import {
-  GoabIconButton,
-  GoabIcon,
-  GoabDivider,
+  GoabButton,
   GoabButtonGroup,
-  GoabContainer,
-  GoabTab,
+  GoabCheckbox,
+  GoabCheckboxList,
   type GoabCheckboxListOnChangeDetail,
+  GoabContainer,
+  GoabDivider,
+  GoabFilterChip,
+  GoabFormItem,
+  GoabIcon,
+  GoabIconButton,
+  GoabInput,
+  GoabPushDrawer,
 } from "@abgov/react-components";
+
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
 import { useContainerNarrow } from "../hooks/useContainerWidth";
 import type { FlatToken } from "../lib/tokens";
@@ -116,7 +114,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const sentinelRef = useRef<HTMLDivElement>(null);
   // Ref for table (to handle sort events from web component)
   const tableRef = useRef<HTMLElement>(null);
-  // TODO: Remove tabsRef when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
+  // TODO: Remove tabsRef when GoabTabs wrapper exposes updateUrl and stackOnMobile props
   const tabsRef = useRef<HTMLElement>(null);
 
   // Detect when toolbar becomes sticky using IntersectionObserver
@@ -178,8 +176,8 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     return () => table.removeEventListener("_multisort", handleMultiSort);
   }, [setSortConfig]);
 
-  // TODO: Remove this useEffect when GoabxTabs wrapper exposes updateUrl and stackOnMobile props
-  // Using goa-tabs web component directly because GoabxTabs wrapper is missing these props
+  // TODO: Remove this useEffect when GoabTabs wrapper exposes updateUrl and stackOnMobile props
+  // Using goa-tabs web component directly because GoabTabs wrapper is missing these props
   useEffect(() => {
     const tabs = tabsRef.current;
     if (!tabs) return;
@@ -809,10 +807,10 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       <div className={`tokens-toolbar ${isSticky ? "tokens-toolbar--sticky" : ""}`}>
         {/* Search input */}
         <div className="tokens-search-section">
-          <GoabxFormItem
+          <GoabFormItem
             helpText={!isSticky ? "Search by name, value, or category" : undefined}
           >
-            <GoabxInput
+            <GoabInput
               name="tokenSearch"
               value={searchValue}
               leadingIcon="search"
@@ -821,15 +819,15 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               onChange={(e) => setSearchValue(e.value)}
               onKeyPress={(e) => e.key === "Enter" && applySearch()}
             />
-          </GoabxFormItem>
+          </GoabFormItem>
         </div>
 
         {/* Syntax toggle + Filters */}
         <div className="tokens-toolbar-actions">
           {/*
-           * TODO: Replace <goa-tabs> with GoabxTabs when wrapper exposes these props
+           * TODO: Replace <goa-tabs> with GoabTabs when wrapper exposes these props
            *
-           * Using web component directly because GoabxTabs wrapper is missing:
+           * Using web component directly because GoabTabs wrapper is missing:
            * - updateUrl prop (we need false to avoid polluting browser history)
            * - stackOnMobile prop (we need false for compact toggle)
            *
@@ -853,7 +851,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           </div>
 
           <span className="filter-btn-desktop">
-            <GoabxButton
+            <GoabButton
               type="secondary"
               leadingIcon="filter-lines"
               size="compact"
@@ -867,7 +865,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
               }}
             >
               Filters
-            </GoabxButton>
+            </GoabButton>
           </span>
           <span className="filter-btn-mobile">
             <GoabIconButton
@@ -898,7 +896,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
           {/* Search chips */}
           {searchChips.map((chip) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={chip}
               content={chip}
               onClick={() => removeSearchChip(chip)}
@@ -907,7 +905,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
           {/* Filter group chips */}
           {appliedFilters.map((filterName) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={filterName}
               content={filterName}
               onClick={() => removeAppliedFilter(filterName)}
@@ -1021,29 +1019,29 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
       {typeof document !== "undefined" &&
         document.getElementById("push-drawer-portal") &&
         createPortal(
-          <GoabxPushDrawer
+          <GoabPushDrawer
             heading="Filter tokens"
             open={filterDrawerOpen}
             width="300px"
             onClose={() => setFilterDrawerOpen(false)}
             actions={
               <GoabButtonGroup alignment="start" gap="compact">
-                <GoabxButton type="primary" size="compact" onClick={applyFilters}>
+                <GoabButton type="primary" size="compact" onClick={applyFilters}>
                   Apply filters
-                </GoabxButton>
-                <GoabxButton
+                </GoabButton>
+                <GoabButton
                   type="tertiary"
                   size="compact"
                   onClick={() => setFilterDrawerOpen(false)}
                 >
                   Cancel
-                </GoabxButton>
+                </GoabButton>
               </GoabButtonGroup>
             }
           >
             <div className="filter-drawer-content">
-              <GoabxFormItem label="Category">
-                <GoabxCheckboxList
+              <GoabFormItem label="Category">
+                <GoabCheckboxList
                   name="category"
                   size="compact"
                   value={pendingFilters}
@@ -1052,7 +1050,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                   }
                 >
                   {filterGroups.map((group) => (
-                    <GoabxCheckbox
+                    <GoabCheckbox
                       key={group.name}
                       name={group.name}
                       value={group.name}
@@ -1060,23 +1058,23 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
                       size="compact"
                     />
                   ))}
-                </GoabxCheckboxList>
-              </GoabxFormItem>
+                </GoabCheckboxList>
+              </GoabFormItem>
 
               {pendingFilters.length > 0 && (
                 <>
                   <GoabDivider />
-                  <GoabxButton
+                  <GoabButton
                     type="tertiary"
                     size="compact"
                     onClick={() => setPendingFilters([])}
                   >
                     Clear all filters
-                  </GoabxButton>
+                  </GoabButton>
                 </>
               )}
             </div>
-          </GoabxPushDrawer>,
+          </GoabPushDrawer>,
           document.getElementById("push-drawer-portal")!,
         )}
 
@@ -1259,7 +1257,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
           gap: var(--goa-space-m);
         }
-
 
         .token-card-content {
           display: flex;

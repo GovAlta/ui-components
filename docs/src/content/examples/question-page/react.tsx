@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {
-  GoabxButton,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxLink,
-} from "@abgov/react-components/experimental";
-import { GoabButtonGroup, GoabText } from "@abgov/react-components";
+  GoabButton,
+  GoabButtonGroup,
+  GoabFormItem,
+  GoabInput,
+  GoabLink,
+  GoabText,
+} from "@abgov/react-components";
 
 export function QuestionPage() {
   const [answer, setAnswer] = useState("");
@@ -16,27 +17,27 @@ export function QuestionPage() {
 
   return (
     <>
-      <GoabxLink leadingIcon="arrow-back" size="small" mb="none">
+      <GoabLink leadingIcon="arrow-back" size="small" mb="none">
         Back
-      </GoabxLink>
+      </GoabLink>
 
       <GoabText as="h1" mt="xl" mb="m">What is your email address?</GoabText>
       <GoabText mt="none" mb="xl">We'll use this to send you confirmation of your application.</GoabText>
 
-      <GoabxFormItem label="Email address">
-        <GoabxInput
+      <GoabFormItem label="Email address">
+        <GoabInput
           name="email"
           type="email"
           value={answer}
           onChange={(e) => setAnswer(e.value)}
           width="100%"
         />
-      </GoabxFormItem>
+      </GoabFormItem>
 
       <GoabButtonGroup alignment="start" mt="2xl">
-        <GoabxButton type="primary" onClick={handleContinue}>
+        <GoabButton type="primary" onClick={handleContinue}>
           Continue
-        </GoabxButton>
+        </GoabButton>
       </GoabButtonGroup>
     </>
   );

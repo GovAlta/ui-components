@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoabxDropdown, GoabxDropdownItem, GoabxFormItem } from "@abgov/react-components/experimental";
+import { GoabDropdown, GoabDropdownItem, GoabFormItem } from "@abgov/react-components";
 import { GoabDropdownOnChangeDetail } from "@abgov/ui-components-common";
 
 export function DynamicallyChangeItemsInADropdownList() {
@@ -21,34 +21,34 @@ export function DynamicallyChangeItemsInADropdownList() {
 
   return (
     <>
-      <GoabxFormItem
+      <GoabFormItem
           label="Size"
           requirement="optional"
           helpText="Choose the size to change the list below">
-          <GoabxDropdown
+          <GoabDropdown
             name="parent"
             placeholder="Select a value"
             onChange={(event: GoabDropdownOnChangeDetail) =>
               loadItems(event.value as string)
             }>
             {parents.map(parent => (
-              <GoabxDropdownItem key={parent} value={parent} label={parent} />
+              <GoabDropdownItem key={parent} value={parent} label={parent} />
             ))}
-          </GoabxDropdown>
-        </GoabxFormItem>
+          </GoabDropdown>
+        </GoabFormItem>
 
-        <GoabxFormItem label="Items" requirement="optional" mt="xl">
-          <GoabxDropdown name="children" placeholder="Select a value" onChange={logSelection}>
+        <GoabFormItem label="Items" requirement="optional" mt="xl">
+          <GoabDropdown name="children" placeholder="Select a value" onChange={logSelection}>
             {children.map((child) => (
-              <GoabxDropdownItem
-                key={crypto.randomUUID()}
+              <GoabDropdownItem
+                key={child}
                 value={child}
                 label={child}
                 mountType="reset"
               />
             ))}
-          </GoabxDropdown>
-      </GoabxFormItem>
+          </GoabDropdown>
+      </GoabFormItem>
     </>
   );
 }

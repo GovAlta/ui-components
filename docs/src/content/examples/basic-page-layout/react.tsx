@@ -1,5 +1,6 @@
-import { GoabxAppFooter, GoabxAppHeader } from "@abgov/react-components/experimental";
 import {
+  GoabAppFooter,
+  GoabAppHeader,
   GoabGrid,
   GoabOneColumnLayout,
   GoabPageBlock,
@@ -10,9 +11,9 @@ export function BasicPageLayout() {
   return (
     <GoabOneColumnLayout>
       <section slot="header">
-        <GoabxAppHeader url="/" heading="Service name">
+        <GoabAppHeader url="/" heading="Service name">
           <a href="/login">Sign in</a>
-        </GoabxAppHeader>
+        </GoabAppHeader>
       </section>
       <GoabPageBlock width="704px">
         <p>
@@ -29,7 +30,7 @@ export function BasicPageLayout() {
         </GoabGrid>
       </GoabPageBlock>
       <section slot="footer">
-        <GoabxAppFooter />
+        <GoabAppFooter />
       </section>
     </GoabOneColumnLayout>
   );

@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import {
   GoabContainer,
   GoabText,
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
 } from "@abgov/angular-components";
 
 @Component({
@@ -14,9 +14,9 @@ import {
   imports: [
     GoabContainer,
     GoabText,
-    GoabxWorkSideMenu,
-    GoabxWorkSideMenuGroup,
-    GoabxWorkSideMenuItem,
+    GoabWorkSideMenu,
+    GoabWorkSideMenuGroup,
+    GoabWorkSideMenuItem,
   ],
 })
 export class Feat3544Component {}

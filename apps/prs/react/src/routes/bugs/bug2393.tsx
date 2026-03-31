@@ -61,7 +61,7 @@ export function Bug2393Route() {
             <td>MI CASA MONTESSORI LTD.</td>
             <td>July 2025</td>
             <td>
-              <GoabBadge type="midtone" content="In Review" />
+              <GoabBadge type="default" content="In Review" />
             </td>
             <td>
               <GoabPopover

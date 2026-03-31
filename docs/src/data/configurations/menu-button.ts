@@ -17,16 +17,16 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       name: 'Basic menu button',
       description: 'Button with dropdown menu',
       code: {
-        react: `<GoabxMenuButton text="Actions" onAction={(detail) => console.log(detail.action)}>
-  <GoabxMenuAction text="Edit" action="edit" />
-  <GoabxMenuAction text="Copy" action="copy" />
-  <GoabxMenuAction text="Delete" action="delete" />
-</GoabxMenuButton>`,
-        angular: `<goabx-menu-button text="Actions" (onAction)="handleAction($event)">
-  <goabx-menu-action text="Edit" action="edit"></goabx-menu-action>
-  <goabx-menu-action text="Copy" action="copy"></goabx-menu-action>
-  <goabx-menu-action text="Delete" action="delete"></goabx-menu-action>
-</goabx-menu-button>`,
+        react: `<GoabMenuButton text="Actions" onAction={(detail) => console.log(detail.action)}>
+  <GoabMenuAction text="Edit" action="edit" />
+  <GoabMenuAction text="Copy" action="copy" />
+  <GoabMenuAction text="Delete" action="delete" />
+</GoabMenuButton>`,
+        angular: `<goab-menu-button text="Actions" (onAction)="handleAction($event)">
+  <goab-menu-action text="Edit" action="edit"></goab-menu-action>
+  <goab-menu-action text="Copy" action="copy"></goab-menu-action>
+  <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+</goab-menu-button>`,
         webComponents: `<goa-menu-button text="Actions">
   <goa-menu-action text="Edit" action="edit"></goa-menu-action>
   <goa-menu-action text="Copy" action="copy"></goa-menu-action>
@@ -39,24 +39,24 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       name: 'Icon-only menu button',
       description: 'Menu with icon button (no text)',
       code: {
-        react: `<GoabxMenuButton
+        react: `<GoabMenuButton
   leadingIcon="ellipsis-horizontal"
   ariaLabel="More options"
   onAction={(detail) => console.log(detail.action)}
 >
-  <GoabxMenuAction text="View details" action="view" />
-  <GoabxMenuAction text="Edit" action="edit" icon="pencil" />
-  <GoabxMenuAction text="Delete" action="delete" icon="trash" />
-</GoabxMenuButton>`,
-        angular: `<goabx-menu-button
+  <GoabMenuAction text="View details" action="view" />
+  <GoabMenuAction text="Edit" action="edit" icon="pencil" />
+  <GoabMenuAction text="Delete" action="delete" icon="trash" />
+</GoabMenuButton>`,
+        angular: `<goab-menu-button
   leadingIcon="ellipsis-horizontal"
   ariaLabel="More options"
   (onAction)="handleAction($event)"
 >
-  <goabx-menu-action text="View details" action="view"></goabx-menu-action>
-  <goabx-menu-action text="Edit" action="edit" icon="pencil"></goabx-menu-action>
-  <goabx-menu-action text="Delete" action="delete" icon="trash"></goabx-menu-action>
-</goabx-menu-button>`,
+  <goab-menu-action text="View details" action="view"></goab-menu-action>
+  <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+  <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+</goab-menu-button>`,
         webComponents: `<goa-menu-button
   leading-icon="ellipsis-horizontal"
   aria-label="More options"
@@ -72,16 +72,16 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       name: 'Items with icons',
       description: 'Menu items with leading icons',
       code: {
-        react: `<GoabxMenuButton text="Options" onAction={(detail) => console.log(detail.action)}>
-  <GoabxMenuAction text="Download" action="download" icon="download" />
-  <GoabxMenuAction text="Share" action="share" icon="share" />
-  <GoabxMenuAction text="Print" action="print" icon="print" />
-</GoabxMenuButton>`,
-        angular: `<goabx-menu-button text="Options" (onAction)="handleAction($event)">
-  <goabx-menu-action text="Download" action="download" icon="download"></goabx-menu-action>
-  <goabx-menu-action text="Share" action="share" icon="share"></goabx-menu-action>
-  <goabx-menu-action text="Print" action="print" icon="print"></goabx-menu-action>
-</goabx-menu-button>`,
+        react: `<GoabMenuButton text="Options" onAction={(detail) => console.log(detail.action)}>
+  <GoabMenuAction text="Download" action="download" icon="download" />
+  <GoabMenuAction text="Share" action="share" icon="share" />
+  <GoabMenuAction text="Print" action="print" icon="print" />
+</GoabMenuButton>`,
+        angular: `<goab-menu-button text="Options" (onAction)="handleAction($event)">
+  <goab-menu-action text="Download" action="download" icon="download"></goab-menu-action>
+  <goab-menu-action text="Share" action="share" icon="share"></goab-menu-action>
+  <goab-menu-action text="Print" action="print" icon="print"></goab-menu-action>
+</goab-menu-button>`,
         webComponents: `<goa-menu-button text="Options">
   <goa-menu-action text="Download" action="download" icon="download"></goa-menu-action>
   <goa-menu-action text="Share" action="share" icon="share"></goa-menu-action>
@@ -94,14 +94,14 @@ export const menuButtonConfigurations: ComponentConfigurations = {
       name: 'Destructive variant',
       description: 'Menu button with destructive styling for dangerous actions',
       code: {
-        react: `<GoabxMenuButton text="Delete" variant="destructive" onAction={(detail) => console.log(detail.action)}>
-  <GoabxMenuAction text="Delete item" action="delete" icon="trash" />
-  <GoabxMenuAction text="Delete all" action="delete-all" icon="trash" />
-</GoabxMenuButton>`,
-        angular: `<goabx-menu-button text="Delete" variant="destructive" (onAction)="handleAction($event)">
-  <goabx-menu-action text="Delete item" action="delete" icon="trash"></goabx-menu-action>
-  <goabx-menu-action text="Delete all" action="delete-all" icon="trash"></goabx-menu-action>
-</goabx-menu-button>`,
+        react: `<GoabMenuButton text="Delete" variant="destructive" onAction={(detail) => console.log(detail.action)}>
+  <GoabMenuAction text="Delete item" action="delete" icon="trash" />
+  <GoabMenuAction text="Delete all" action="delete-all" icon="trash" />
+</GoabMenuButton>`,
+        angular: `<goab-menu-button text="Delete" variant="destructive" (onAction)="handleAction($event)">
+  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
+  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+</goab-menu-button>`,
         webComponents: `<goa-menu-button text="Delete" variant="destructive">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>

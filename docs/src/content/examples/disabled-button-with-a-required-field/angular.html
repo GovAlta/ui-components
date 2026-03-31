@@ -1,20 +1,20 @@
 <form>
-  <goabx-form-item label="Name" requirement="required">
-    <goabx-input
+  <goab-form-item label="Name" requirement="required">
+    <goab-input
       name="input"
       type="text"
       (onChange)="onInputChange($event)"
       [value]="inputValue"
       width="100%">
-    </goabx-input>
-  </goabx-form-item>
+    </goab-input>
+  </goab-form-item>
 
   <goab-button-group alignment="start" mt="xl">
-    <goabx-button [disabled]="isDisabled" (onClick)="onConfirm()">
+    <goab-button [disabled]="isDisabled" (onClick)="onConfirm()">
       Confirm
-    </goabx-button>
-    <goabx-button type="secondary" (onClick)="onCancel()">
+    </goab-button>
+    <goab-button type="secondary" (onClick)="onCancel()">
       Cancel
-    </goabx-button>
+    </goab-button>
   </goab-button-group>
 </form>

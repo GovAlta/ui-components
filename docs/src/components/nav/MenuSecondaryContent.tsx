@@ -8,8 +8,11 @@
  */
 
 import { useCallback, useState, useEffect } from "react";
-import { GoabxWorkSideMenuItem } from "@abgov/react-components/experimental";
-import { GoabSpacer } from "@abgov/react-components";
+import {
+  GoabSpacer,
+  GoabWorkSideMenuItem,
+} from "@abgov/react-components";
+
 import "./menu-secondary.css";
 
 interface MenuSecondaryContentProps {
@@ -46,8 +49,8 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
           </>
         )}
       </button>
-      <GoabxWorkSideMenuItem label="Get support" icon="help-circle" url="/support" />
-      <GoabxWorkSideMenuItem
+      <GoabWorkSideMenuItem label="Get support" icon="help-circle" url="/support" />
+      <GoabWorkSideMenuItem
         label="Release notes"
         icon="open"
         url="https://github.com/GovAlta/ui-components/releases"

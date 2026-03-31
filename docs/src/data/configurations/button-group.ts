@@ -18,12 +18,12 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Group of buttons with default spacing',
       code: {
         react: `<GoabButtonGroup>
-  <GoabxButton type="secondary">Cancel</GoabxButton>
-  <GoabxButton>Submit</GoabxButton>
+  <GoabButton type="secondary">Cancel</GoabButton>
+  <GoabButton>Submit</GoabButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group>
-  <goabx-button type="secondary">Cancel</goabx-button>
-  <goabx-button>Submit</goabx-button>
+  <goab-button type="secondary">Cancel</goab-button>
+  <goab-button>Submit</goab-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group>
   <goa-button version="2" type="secondary">Cancel</goa-button>
@@ -37,22 +37,22 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Different alignment options',
       code: {
         react: `<GoabButtonGroup alignment="start">
-  <GoabxButton>Start aligned</GoabxButton>
+  <GoabButton>Start aligned</GoabButton>
 </GoabButtonGroup>
 <GoabButtonGroup alignment="center">
-  <GoabxButton>Center aligned</GoabxButton>
+  <GoabButton>Center aligned</GoabButton>
 </GoabButtonGroup>
 <GoabButtonGroup alignment="end">
-  <GoabxButton>End aligned</GoabxButton>
+  <GoabButton>End aligned</GoabButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group alignment="start">
-  <goabx-button>Start aligned</goabx-button>
+  <goab-button>Start aligned</goab-button>
 </goab-button-group>
 <goab-button-group alignment="center">
-  <goabx-button>Center aligned</goabx-button>
+  <goab-button>Center aligned</goab-button>
 </goab-button-group>
 <goab-button-group alignment="end">
-  <goabx-button>End aligned</goabx-button>
+  <goab-button>End aligned</goab-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start">
   <goa-button version="2">Start aligned</goa-button>
@@ -71,20 +71,20 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Button group with specific spacing',
       code: {
         react: `<GoabButtonGroup gap="relaxed">
-  <GoabxButton type="secondary">Back</GoabxButton>
-  <GoabxButton>Continue</GoabxButton>
+  <GoabButton type="secondary">Back</GoabButton>
+  <GoabButton>Continue</GoabButton>
 </GoabButtonGroup>
 <GoabButtonGroup gap="compact">
-  <GoabxButton type="secondary" size="compact">Back</GoabxButton>
-  <GoabxButton size="compact">Continue</GoabxButton>
+  <GoabButton type="secondary" size="compact">Back</GoabButton>
+  <GoabButton size="compact">Continue</GoabButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group gap="relaxed">
-  <goabx-button type="secondary">Back</goabx-button>
-  <goabx-button>Continue</goabx-button>
+  <goab-button type="secondary">Back</goab-button>
+  <goab-button>Continue</goab-button>
 </goab-button-group>
 <goab-button-group gap="compact">
-  <goabx-button type="secondary" size="compact">Back</goabx-button>
-  <goabx-button size="compact">Continue</goabx-button>
+  <goab-button type="secondary" size="compact">Back</goab-button>
+  <goab-button size="compact">Continue</goab-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group gap="relaxed">
   <goa-button version="2" type="secondary">Back</goa-button>
@@ -102,14 +102,14 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
       description: 'Common pattern for form button placement',
       code: {
         react: `<GoabButtonGroup alignment="start">
-  <GoabxButton type="primary">Save and continue</GoabxButton>
-  <GoabxButton type="secondary">Save as draft</GoabxButton>
-  <GoabxButton type="tertiary">Cancel</GoabxButton>
+  <GoabButton type="primary">Save and continue</GoabButton>
+  <GoabButton type="secondary">Save as draft</GoabButton>
+  <GoabButton type="tertiary">Cancel</GoabButton>
 </GoabButtonGroup>`,
         angular: `<goab-button-group alignment="start">
-  <goabx-button type="primary">Save and continue</goabx-button>
-  <goabx-button type="secondary">Save as draft</goabx-button>
-  <goabx-button type="tertiary">Cancel</goabx-button>
+  <goab-button type="primary">Save and continue</goab-button>
+  <goab-button type="secondary">Save as draft</goab-button>
+  <goab-button type="tertiary">Cancel</goab-button>
 </goab-button-group>`,
         webComponents: `<goa-button-group alignment="start">
   <goa-button version="2" type="primary">Save and continue</goa-button>
@@ -128,8 +128,8 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
 };
 
 <GoabButtonGroup>
-  <GoabxButton>Submit</GoabxButton>
-  <GoabxButton type="secondary">Save draft</GoabxButton>
+  <GoabButton>Submit</GoabButton>
+  <GoabButton type="secondary">Save draft</GoabButton>
   <GoabMenuButton text="More" type="tertiary" onAction={handleAction}>
     <GoabMenuAction text="Preview" action="preview" />
     <GoabMenuAction text="Duplicate" action="duplicate" />
@@ -143,8 +143,8 @@ handleAction(event: GoabMenuButtonOnActionDetail) {
 }
 
 <goab-button-group>
-  <goabx-button>Submit</goabx-button>
-  <goabx-button type="secondary">Save draft</goabx-button>
+  <goab-button>Submit</goab-button>
+  <goab-button type="secondary">Save draft</goab-button>
   <goab-menu-button text="More" type="tertiary" (_action)="handleAction($event)">
     <goab-menu-action text="Preview" action="preview"></goab-menu-action>
     <goab-menu-action text="Duplicate" action="duplicate"></goab-menu-action>

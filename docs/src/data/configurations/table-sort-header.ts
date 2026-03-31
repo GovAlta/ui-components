@@ -17,12 +17,12 @@ export const tableSortHeaderConfigurations: ComponentConfigurations = {
       name: 'Basic sort header',
       description: 'Sortable column header with name and direction',
       code: {
-        react: `<GoabxTableSortHeader name="name" direction="asc">
+        react: `<GoabTableSortHeader name="name" direction="asc">
   Name
-</GoabxTableSortHeader>`,
-        angular: `<goabx-table-sort-header name="name" direction="asc">
+</GoabTableSortHeader>`,
+        angular: `<goab-table-sort-header name="name" direction="asc">
   Name
-</goabx-table-sort-header>`,
+</goab-table-sort-header>`,
         webComponents: `<goa-table-sort-header name="name" direction="asc">
   Name
 </goa-table-sort-header>`,
@@ -33,12 +33,12 @@ export const tableSortHeaderConfigurations: ComponentConfigurations = {
       name: 'With sort order',
       description: 'Sort header with sortOrder for multi-column sort priority display',
       code: {
-        react: `<GoabxTableSortHeader name="name" direction="asc" sortOrder={1}>
+        react: `<GoabTableSortHeader name="name" direction="asc" sortOrder={1}>
   Name
-</GoabxTableSortHeader>`,
-        angular: `<goabx-table-sort-header name="name" direction="asc" [sortOrder]="1">
+</GoabTableSortHeader>`,
+        angular: `<goab-table-sort-header name="name" direction="asc" [sortOrder]="1">
   Name
-</goabx-table-sort-header>`,
+</goab-table-sort-header>`,
         webComponents: `<goa-table-sort-header name="name" direction="asc" sort-order="1">
   Name
 </goa-table-sort-header>`,

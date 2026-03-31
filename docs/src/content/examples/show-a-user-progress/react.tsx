@@ -1,5 +1,8 @@
-import { GoabxButton } from "@abgov/react-components/experimental";
-import { GoabTemporaryNotificationCtrl } from "@abgov/react-components";
+import {
+  GoabButton,
+  GoabTemporaryNotificationCtrl,
+} from "@abgov/react-components";
+
 import { TemporaryNotification } from "@abgov/ui-components-common";
 
 export function ShowAUserProgress() {
@@ -70,9 +73,9 @@ export function ShowAUserProgress() {
   return (
     <>
       <GoabTemporaryNotificationCtrl />
-      <GoabxButton type="tertiary" leadingIcon="download" onClick={downloadReport}>
+      <GoabButton type="tertiary" leadingIcon="download" onClick={downloadReport}>
         Download report
-      </GoabxButton>
+      </GoabButton>
     </>
   );
 }

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import {
-  GoabxButton,
-  GoabxDatePicker,
-  GoabxFormItem,
-  GoabxModal,
-} from "@abgov/react-components/experimental";
-import { GoabButtonGroup, GoabContainer, GoabText } from "@abgov/react-components";
+  GoabButton,
+  GoabButtonGroup,
+  GoabContainer,
+  GoabDatePicker,
+  GoabFormItem,
+  GoabModal,
+  GoabText,
+} from "@abgov/react-components";
+
 import { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 
 export function ConfirmAChange() {
@@ -18,20 +21,20 @@ export function ConfirmAChange() {
 
   return (
     <>
-      <GoabxButton onClick={() => setOpen(true)}>Save and continue</GoabxButton>
+      <GoabButton onClick={() => setOpen(true)}>Save and continue</GoabButton>
 
-      <GoabxModal
+      <GoabModal
         heading="Address has changed"
         open={open}
         onClose={() => setOpen(false)}
         actions={
           <GoabButtonGroup alignment="end">
-            <GoabxButton type="secondary" size="compact" onClick={() => setOpen(false)}>
+            <GoabButton type="secondary" size="compact" onClick={() => setOpen(false)}>
               Undo address change
-            </GoabxButton>
-            <GoabxButton type="primary" size="compact" onClick={() => setOpen(false)}>
+            </GoabButton>
+            <GoabButton type="primary" size="compact" onClick={() => setOpen(false)}>
               Confirm
-            </GoabxButton>
+            </GoabButton>
           </GoabButtonGroup>
         }>
         <GoabContainer type="non-interactive" accent="filled" padding="compact" width="full">
@@ -40,14 +43,14 @@ export function ConfirmAChange() {
           <GoabText as="h4" mt="none" mb="s">After</GoabText>
           <GoabText mt="none" mb="none">881 12 Ave NW, Edmonton, Alberta</GoabText>
         </GoabContainer>
-        <GoabxFormItem label="Effective date" mt="l">
-          <GoabxDatePicker
+        <GoabFormItem label="Effective date" mt="l">
+          <GoabDatePicker
             onChange={onChangeEffectiveDate}
             name="effectiveDate"
             value={effectiveDate}
           />
-        </GoabxFormItem>
-      </GoabxModal>
+        </GoabFormItem>
+      </GoabModal>
     </>
   );
 }

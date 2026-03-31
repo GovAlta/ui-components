@@ -2,15 +2,15 @@
  * GetStartedSubMenu.tsx
  *
  * Sub-menu for Get Started section showing grouped pages.
- * Uses GoabxWorkSideMenuGroup for expandable Designers/Developers sections.
+ * Uses GoabWorkSideMenuGroup for expandable Designers/Developers sections.
  */
 
 import { type MouseEvent } from "react";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
-} from "@abgov/react-components/experimental";
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
+} from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
 // Top-level pages (not in a group)
@@ -91,12 +91,12 @@ export function GetStartedSubMenu({
     <>
       {/* Back to parent menu */}
       <div onClick={handleBackClick} style={{ cursor: "pointer" }}>
-        <GoabxWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
+        <GoabWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
       </div>
 
       {/* Top-level pages */}
       {TOP_PAGES.map((page) => (
-        <GoabxWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
       ))}
 
       {/* Grouped sections */}
@@ -112,15 +112,15 @@ export function GetStartedSubMenu({
 
           return (
             <div key={group.slug} onClickCapture={handleGroupClickCapture}>
-              <GoabxWorkSideMenuGroup heading={group.name} open={containsCurrentPage}>
+              <GoabWorkSideMenuGroup heading={group.name} open={containsCurrentPage}>
                 {group.pages.map((page) => (
-                  <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuItem
                     key={page.url}
                     label={page.label}
                     url={page.url}
                   />
                 ))}
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
             </div>
           );
         })}
@@ -128,13 +128,13 @@ export function GetStartedSubMenu({
 
       {/* Bottom pages */}
       {BOTTOM_PAGES.map((page) => (
-        <GoabxWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
       ))}
     </>
   );
 
   return (
-    <GoabxWorkSideMenu
+    <GoabWorkSideMenu
       heading="Design System | Get Started"
       url="/"
       open={isOpen}

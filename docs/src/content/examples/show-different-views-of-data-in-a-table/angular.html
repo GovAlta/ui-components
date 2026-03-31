@@ -1,6 +1,6 @@
-<goabx-tabs>
+<goab-tabs>
   <goab-tab heading="All">
-    <goabx-table width="100%">
+    <goab-table width="100%">
       <thead>
         <tr>
           <th>Status</th>
@@ -12,26 +12,26 @@
       <tbody>
         @for (i of reviewItems; track $index) {
         <tr>
-          <td><goabx-badge type="important" content="Review pending"></goabx-badge></td>
+          <td><goab-badge type="important" content="Review pending"></goab-badge></td>
           <td>Lorem ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
-          <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
         </tr>
         }
         @for (i of completeItems; track $index) {
         <tr>
-          <td><goabx-badge type="information" content="Complete"></goabx-badge></td>
+          <td><goab-badge type="information" content="Complete"></goab-badge></td>
           <td>Lorem Ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
-          <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
         </tr>
         }
       </tbody>
-    </goabx-table>
+    </goab-table>
   </goab-tab>
   <goab-tab [heading]="reviewPending">
-    <ng-template #reviewPending>Review pending<goabx-badge type="important" content="4" [icon]="false"></goabx-badge></ng-template>
-    <goabx-table width="100%">
+    <ng-template #reviewPending>Review pending<goab-badge type="important" content="4" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
       <thead>
         <tr>
           <th>Status</th>
@@ -43,18 +43,18 @@
       <tbody>
         @for (i of reviewItems; track $index) {
         <tr>
-          <td><goabx-badge type="important" content="Review pending"></goabx-badge></td>
+          <td><goab-badge type="important" content="Review pending"></goab-badge></td>
           <td>Lorem ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
-          <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
         </tr>
         }
       </tbody>
-    </goabx-table>
+    </goab-table>
   </goab-tab>
   <goab-tab [heading]="completeTab">
-    <ng-template #completeTab>Complete<goabx-badge type="information" content="338" [icon]="false"></goabx-badge></ng-template>
-    <goabx-table width="100%">
+    <ng-template #completeTab>Complete<goab-badge type="information" content="338" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
       <thead>
         <tr>
           <th>Status</th>
@@ -66,13 +66,13 @@
       <tbody>
         @for (i of completeItems; track $index) {
         <tr>
-          <td><goabx-badge type="information" content="Complete"></goabx-badge></td>
+          <td><goab-badge type="information" content="Complete"></goab-badge></td>
           <td>Lorem Ipsum</td>
           <td class="goa-table-number-column">1234567890</td>
-          <td><goabx-button type="tertiary" size="compact">Action</goabx-button></td>
+          <td><goab-button type="tertiary" size="compact">Action</goab-button></td>
         </tr>
         }
       </tbody>
-    </goabx-table>
+    </goab-table>
   </goab-tab>
-</goabx-tabs>
+</goab-tabs>

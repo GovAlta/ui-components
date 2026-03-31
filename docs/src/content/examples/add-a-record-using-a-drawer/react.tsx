@@ -1,27 +1,28 @@
 import { useState } from "react";
 import {
-  GoabxButton,
-  GoabxCheckbox,
-  GoabxDatePicker,
-  GoabxDrawer,
-  GoabxDropdown,
-  GoabxDropdownItem,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-} from "@abgov/react-components/experimental";
-import { GoabBlock, GoabButtonGroup } from "@abgov/react-components";
+  GoabBlock,
+  GoabButton,
+  GoabButtonGroup,
+  GoabCheckbox,
+  GoabDatePicker,
+  GoabDrawer,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabInput,
+  GoabRadioGroup,
+  GoabRadioItem,
+} from "@abgov/react-components";
 
 export function AddARecordUsingADrawer() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <GoabxButton leadingIcon="add" onClick={() => setOpen(true)}>
+      <GoabButton leadingIcon="add" onClick={() => setOpen(true)}>
         Add Record
-      </GoabxButton>
-      <GoabxDrawer
+      </GoabButton>
+      <GoabDrawer
         maxSize="492px"
         open={open}
         heading="Add Record"
@@ -29,47 +30,47 @@ export function AddARecordUsingADrawer() {
         onClose={() => setOpen(false)}
         actions={
           <GoabButtonGroup>
-            <GoabxButton type="primary" size="compact" onClick={() => setOpen(false)}>
+            <GoabButton type="primary" size="compact" onClick={() => setOpen(false)}>
               Add record
-            </GoabxButton>
-            <GoabxButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
+            </GoabButton>
+            <GoabButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
               Cancel
-            </GoabxButton>
+            </GoabButton>
           </GoabButtonGroup>
         }
       >
-        <GoabxFormItem label="Level of education">
-          <GoabxDropdown onChange={() => {}} name="education" value="university">
-            <GoabxDropdownItem value="high-school" label="High School Diploma" />
-            <GoabxDropdownItem value="college" label="College Diploma" />
-            <GoabxDropdownItem value="university" label="University Degree" />
-            <GoabxDropdownItem value="masters" label="Master's Degree" />
-            <GoabxDropdownItem value="doctorate" label="Doctorate" />
-          </GoabxDropdown>
-        </GoabxFormItem>
-        <GoabxFormItem label="Educational institution" mt="l">
-          <GoabxInput name="education" type="text" onChange={() => {}} />
-        </GoabxFormItem>
-        <GoabxFormItem label="Field of study" requirement="optional" mt="l">
-          <GoabxInput name="fieldOfStudy" type="text" onChange={() => {}} />
-        </GoabxFormItem>
-        <GoabxFormItem label="Is the person currently attending?" mt="l">
-          <GoabxRadioGroup name="attendTraining" orientation="horizontal" onChange={() => {}}>
-            <GoabxRadioItem value="yes" label="Yes" />
-            <GoabxRadioItem value="no" label="No" />
-          </GoabxRadioGroup>
-        </GoabxFormItem>
-        <GoabxFormItem label="Start date" mt="l">
-          <GoabxDatePicker onChange={() => {}} value={new Date("2022-09-01")} />
-          <GoabxCheckbox name="startDateApproximate" text="Approximate date" value="y" mt="s" />
-        </GoabxFormItem>
-        <GoabxFormItem label="Credential received?" mt="l">
-          <GoabxRadioGroup name="credentialReceived" orientation="horizontal" onChange={() => {}}>
-            <GoabxRadioItem value="yes" label="Yes" />
-            <GoabxRadioItem value="no" label="No" />
-          </GoabxRadioGroup>
-        </GoabxFormItem>
-      </GoabxDrawer>
+        <GoabFormItem label="Level of education">
+          <GoabDropdown onChange={() => {}} name="education" value="university">
+            <GoabDropdownItem value="high-school" label="High School Diploma" />
+            <GoabDropdownItem value="college" label="College Diploma" />
+            <GoabDropdownItem value="university" label="University Degree" />
+            <GoabDropdownItem value="masters" label="Master's Degree" />
+            <GoabDropdownItem value="doctorate" label="Doctorate" />
+          </GoabDropdown>
+        </GoabFormItem>
+        <GoabFormItem label="Educational institution" mt="l">
+          <GoabInput name="education" type="text" onChange={() => {}} />
+        </GoabFormItem>
+        <GoabFormItem label="Field of study" requirement="optional" mt="l">
+          <GoabInput name="fieldOfStudy" type="text" onChange={() => {}} />
+        </GoabFormItem>
+        <GoabFormItem label="Is the person currently attending?" mt="l">
+          <GoabRadioGroup name="attendTraining" orientation="horizontal" onChange={() => {}}>
+            <GoabRadioItem value="yes" label="Yes" />
+            <GoabRadioItem value="no" label="No" />
+          </GoabRadioGroup>
+        </GoabFormItem>
+        <GoabFormItem label="Start date" mt="l">
+          <GoabDatePicker onChange={() => {}} value={new Date("2022-09-01")} />
+          <GoabCheckbox name="startDateApproximate" text="Approximate date" value="y" mt="s" />
+        </GoabFormItem>
+        <GoabFormItem label="Credential received?" mt="l">
+          <GoabRadioGroup name="credentialReceived" orientation="horizontal" onChange={() => {}}>
+            <GoabRadioItem value="yes" label="Yes" />
+            <GoabRadioItem value="no" label="No" />
+          </GoabRadioGroup>
+        </GoabFormItem>
+      </GoabDrawer>
     </>
   );
 }

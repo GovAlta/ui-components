@@ -1,30 +1,33 @@
 import { useState, useEffect } from "react";
-import { GoabBlock, GoabText, GoabDivider } from "@abgov/react-components";
 import {
-  GoabxMenuButton,
-  GoabxMenuAction,
-  GoabxBadge,
-} from "@abgov/react-components/experimental";
+  GoabBadge,
+  GoabBlock,
+  GoabDivider,
+  GoabMenuAction,
+  GoabMenuButton,
+  GoabText,
+} from "@abgov/react-components";
+
 import { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
 // Menu actions with icon + text
 const menuActionsWithIcons = (
   <>
-    <GoabxMenuAction text="View case" action="view" />
-    <GoabxMenuAction text="Assign to me" action="assign" />
-    <GoabxMenuAction text="Edit" action="edit" icon="pencil" />
-    <GoabxMenuAction text="Delete" action="delete" icon="trash" />
+    <GoabMenuAction text="View case" action="view" />
+    <GoabMenuAction text="Assign to me" action="assign" />
+    <GoabMenuAction text="Edit" action="edit" icon="pencil" />
+    <GoabMenuAction text="Delete" action="delete" icon="trash" />
   </>
 );
 
 // Menu actions with text only (no icons)
 const menuActionsTextOnly = (
   <>
-    <GoabxMenuAction text="View case" action="view" />
-    <GoabxMenuAction text="Assign to me" action="assign" />
-    <GoabxMenuAction text="Edit" action="edit" />
-    <GoabxMenuAction text="Delete" action="delete" />
+    <GoabMenuAction text="View case" action="view" />
+    <GoabMenuAction text="Assign to me" action="assign" />
+    <GoabMenuAction text="Edit" action="edit" />
+    <GoabMenuAction text="Delete" action="delete" />
   </>
 );
 
@@ -89,7 +92,7 @@ export function Feat3229Route() {
 
       {lastAction && (
         <GoabBlock mb="m">
-          <GoabxBadge type="information" content={lastAction} />
+          <GoabBadge type="information" content={lastAction} />
         </GoabBlock>
       )}
 
@@ -105,40 +108,40 @@ export function Feat3229Route() {
             No text, no icon, no size — defaults to ellipsis-horizontal, normal size,
             ariaLabel="Open menu"
           </GoabText>
-          <GoabxMenuButton onAction={(d) => handleAction(d, "icon-only defaults")}>
+          <GoabMenuButton onAction={(d) => handleAction(d, "icon-only defaults")}>
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>No text, no icon, no ariaLabel, size="compact"</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             size="compact"
             onAction={(d) => handleAction(d, "icon-only compact no ariaLabel")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>No text, custom ariaLabel="Actions for John Smith"</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             ariaLabel="Actions for John Smith"
             onAction={(d) => handleAction(d, "icon-only custom ariaLabel")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>No text, custom ariaLabel, size="compact"</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             ariaLabel="Actions for John Smith"
             size="compact"
             onAction={(d) => handleAction(d, "icon-only custom ariaLabel compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -150,23 +153,23 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>icon + normal (default)</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             leadingIcon="ellipsis-horizontal"
             onAction={(d) => handleAction(d, "icon normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>icon + compact</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             leadingIcon="ellipsis-horizontal"
             size="compact"
             onAction={(d) => handleAction(d, "icon compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -178,23 +181,23 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>text + normal (default)</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Actions"
             onAction={(d) => handleAction(d, "text normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>text + compact</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Actions"
             size="compact"
             onAction={(d) => handleAction(d, "text compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -206,25 +209,25 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>text + icon + normal</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="More"
             leadingIcon="ellipsis-horizontal"
             onAction={(d) => handleAction(d, "text+icon normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>text + icon + compact</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="More"
             leadingIcon="ellipsis-horizontal"
             size="compact"
             onAction={(d) => handleAction(d, "text+icon compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -240,44 +243,44 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>normal — actions with icon + text</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="With Icons"
             onAction={(d) => handleAction(d, "actions with icons normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>compact — actions with icon + text</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="With Icons"
             size="compact"
             onAction={(d) => handleAction(d, "actions with icons compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>normal — actions text-only</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Text Only"
             onAction={(d) => handleAction(d, "actions text-only normal")}
           >
             {menuActionsTextOnly}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>compact — actions text-only</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Text Only"
             size="compact"
             onAction={(d) => handleAction(d, "actions text-only compact")}
           >
             {menuActionsTextOnly}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -289,59 +292,59 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>primary</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Primary"
             type="primary"
             onAction={(d) => handleAction(d, "primary normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Primary"
             type="primary"
             size="compact"
             onAction={(d) => handleAction(d, "primary compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>secondary</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Secondary"
             type="secondary"
             onAction={(d) => handleAction(d, "secondary normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Secondary"
             type="secondary"
             size="compact"
             onAction={(d) => handleAction(d, "secondary compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>tertiary</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Tertiary"
             type="tertiary"
             onAction={(d) => handleAction(d, "tertiary normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Tertiary"
             type="tertiary"
             size="compact"
             onAction={(d) => handleAction(d, "tertiary compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -356,70 +359,70 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>normal (default)</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Normal"
             variant="normal"
             onAction={(d) => handleAction(d, "variant normal")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Normal"
             variant="normal"
             size="compact"
             onAction={(d) => handleAction(d, "variant normal compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>destructive</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Destructive"
             variant="destructive"
             onAction={(d) => handleAction(d, "variant destructive")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Destructive"
             variant="destructive"
             size="compact"
             onAction={(d) => handleAction(d, "variant destructive compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>icon-only destructive</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             variant="destructive"
             onAction={(d) => handleAction(d, "icon-only destructive")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             variant="destructive"
             size="compact"
             onAction={(d) => handleAction(d, "icon-only destructive compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>destructive + secondary</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Delete"
             type="secondary"
             variant="destructive"
             onAction={(d) => handleAction(d, "destructive secondary")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Delete"
             type="secondary"
             variant="destructive"
@@ -427,20 +430,20 @@ export function Feat3229Route() {
             onAction={(d) => handleAction(d, "destructive secondary compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>destructive + tertiary</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             text="Delete"
             type="tertiary"
             variant="destructive"
             onAction={(d) => handleAction(d, "destructive tertiary")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             text="Delete"
             type="tertiary"
             variant="destructive"
@@ -448,7 +451,7 @@ export function Feat3229Route() {
             onAction={(d) => handleAction(d, "destructive tertiary compact")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
 
@@ -464,66 +467,66 @@ export function Feat3229Route() {
       <GoabBlock direction="column" gap="m" mt="m">
         <GoabBlock gap="l" alignment="center">
           <GoabText>ellipsis-horizontal</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             leadingIcon="ellipsis-horizontal:outline"
             onAction={(d) => handleAction(d, "ellipsis outline")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             leadingIcon="ellipsis-horizontal:filled"
             onAction={(d) => handleAction(d, "ellipsis filled")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>ellipsis-vertical</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             leadingIcon="ellipsis-vertical:outline"
             onAction={(d) => handleAction(d, "ellipsis-v outline")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             leadingIcon="ellipsis-vertical:filled"
             onAction={(d) => handleAction(d, "ellipsis-v filled")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>menu</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             leadingIcon="menu:outline"
             onAction={(d) => handleAction(d, "menu outline")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             leadingIcon="menu:filled"
             onAction={(d) => handleAction(d, "menu filled")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
 
         <GoabBlock gap="l" alignment="center">
           <GoabText>settings</GoabText>
-          <GoabxMenuButton
+          <GoabMenuButton
             leadingIcon="settings:outline"
             onAction={(d) => handleAction(d, "settings outline")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
-          <GoabxMenuButton
+          </GoabMenuButton>
+          <GoabMenuButton
             leadingIcon="settings:filled"
             onAction={(d) => handleAction(d, "settings filled")}
           >
             {menuActionsWithIcons}
-          </GoabxMenuButton>
+          </GoabMenuButton>
         </GoabBlock>
       </GoabBlock>
     </div>

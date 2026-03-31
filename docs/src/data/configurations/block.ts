@@ -83,34 +83,34 @@ export const blockConfigurations: ComponentConfigurations = {
       description: 'Horizontal alignment options',
       code: {
         react: `<GoabBlock alignment="start">
-  <GoabxFormItem label="Start aligned">
-    <GoabxInput name="start" width="20ch" />
-  </GoabxFormItem>
+  <GoabFormItem label="Start aligned">
+    <GoabInput name="start" width="20ch" />
+  </GoabFormItem>
 </GoabBlock>
 <GoabBlock alignment="center">
-  <GoabxFormItem label="Center aligned">
-    <GoabxInput name="center" width="20ch" />
-  </GoabxFormItem>
+  <GoabFormItem label="Center aligned">
+    <GoabInput name="center" width="20ch" />
+  </GoabFormItem>
 </GoabBlock>
 <GoabBlock alignment="end">
-  <GoabxFormItem label="End aligned">
-    <GoabxInput name="end" width="20ch" />
-  </GoabxFormItem>
+  <GoabFormItem label="End aligned">
+    <GoabInput name="end" width="20ch" />
+  </GoabFormItem>
 </GoabBlock>`,
         angular: `<goab-block alignment="start">
-  <goabx-form-item label="Start aligned">
-    <goabx-input name="start" width="20ch"></goabx-input>
-  </goabx-form-item>
+  <goab-form-item label="Start aligned">
+    <goab-input name="start" width="20ch"></goab-input>
+  </goab-form-item>
 </goab-block>
 <goab-block alignment="center">
-  <goabx-form-item label="Center aligned">
-    <goabx-input name="center" width="20ch"></goabx-input>
-  </goabx-form-item>
+  <goab-form-item label="Center aligned">
+    <goab-input name="center" width="20ch"></goab-input>
+  </goab-form-item>
 </goab-block>
 <goab-block alignment="end">
-  <goabx-form-item label="End aligned">
-    <goabx-input name="end" width="20ch"></goabx-input>
-  </goabx-form-item>
+  <goab-form-item label="End aligned">
+    <goab-input name="end" width="20ch"></goab-input>
+  </goab-form-item>
 </goab-block>`,
         webComponents: `<goa-block alignment="start">
   <goa-form-item version="2" label="Start aligned">
@@ -135,20 +135,20 @@ export const blockConfigurations: ComponentConfigurations = {
       description: 'Items arranged horizontally',
       code: {
         react: `<GoabBlock direction="row" gap="l">
-  <GoabxFormItem label="First name">
-    <GoabxInput name="firstName" />
-  </GoabxFormItem>
-  <GoabxFormItem label="Last name">
-    <GoabxInput name="lastName" />
-  </GoabxFormItem>
+  <GoabFormItem label="First name">
+    <GoabInput name="firstName" />
+  </GoabFormItem>
+  <GoabFormItem label="Last name">
+    <GoabInput name="lastName" />
+  </GoabFormItem>
 </GoabBlock>`,
         angular: `<goab-block direction="row" gap="l">
-  <goabx-form-item label="First name">
-    <goabx-input name="firstName"></goabx-input>
-  </goabx-form-item>
-  <goabx-form-item label="Last name">
-    <goabx-input name="lastName"></goabx-input>
-  </goabx-form-item>
+  <goab-form-item label="First name">
+    <goab-input name="firstName"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Last name">
+    <goab-input name="lastName"></goab-input>
+  </goab-form-item>
 </goab-block>`,
         webComponents: `<goa-block direction="row" gap="l">
   <goa-form-item version="2" label="First name">

@@ -17,22 +17,22 @@ export const sideMenuHeadingConfigurations: ComponentConfigurations = {
       name: 'Basic side menu heading',
       description: 'Section heading within SideMenu',
       code: {
-        react: `<GoabxSideMenu>
-  <GoabxSideMenuHeading>Main Menu</GoabxSideMenuHeading>
+        react: `<GoabSideMenu>
+  <GoabSideMenuHeading>Main Menu</GoabSideMenuHeading>
   <a href="/dashboard">Dashboard</a>
   <a href="/reports">Reports</a>
-  <GoabxSideMenuHeading>Settings</GoabxSideMenuHeading>
+  <GoabSideMenuHeading>Settings</GoabSideMenuHeading>
   <a href="/profile">Profile</a>
   <a href="/preferences">Preferences</a>
-</GoabxSideMenu>`,
-        angular: `<goabx-side-menu>
-  <goabx-side-menu-heading>Main Menu</goabx-side-menu-heading>
+</GoabSideMenu>`,
+        angular: `<goab-side-menu>
+  <goab-side-menu-heading>Main Menu</goab-side-menu-heading>
   <a href="/dashboard">Dashboard</a>
   <a href="/reports">Reports</a>
-  <goabx-side-menu-heading>Settings</goabx-side-menu-heading>
+  <goab-side-menu-heading>Settings</goab-side-menu-heading>
   <a href="/profile">Profile</a>
   <a href="/preferences">Preferences</a>
-</goabx-side-menu>`,
+</goab-side-menu>`,
         webComponents: `<goa-side-menu version="2">
   <goa-side-menu-heading version="2">Main Menu</goa-side-menu-heading>
   <a href="/dashboard">Dashboard</a>

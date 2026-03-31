@@ -2,26 +2,61 @@
  * FoundationsSubMenu.tsx
  *
  * Sub-menu for Foundations section showing grouped pages.
- * Uses GoabxWorkSideMenuGroup for expandable Style guide sections.
+ * Uses GoabWorkSideMenuGroup for expandable Style guide sections.
  */
 
 import { type MouseEvent } from "react";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
-} from "@abgov/react-components/experimental";
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
+} from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
 // Top-level pages (not in a group)
-const TOP_PAGES = [{ label: "Overview", url: "/foundations" }];
+const TOP_PAGES = [
+  { label: "Design at GoA", url: "/foundations" },
+  { label: "Accessibility", url: "/foundations/accessibility" },
+  { label: "Brand guidelines", url: "/foundations/brand-guidelines" },
+];
 
 // Grouped sections with sub-pages
 const PAGE_GROUPS = [
   {
     name: "Style guide",
     slug: "style-guide",
-    pages: [{ label: "Motion", url: "/foundations/style-guide/motion" }],
+    pages: [
+      { label: "Colour", url: "/foundations/style-guide/colour" },
+      { label: "Iconography", url: "/foundations/style-guide/iconography" },
+      { label: "Illustration", url: "/foundations/style-guide/illustration" },
+      { label: "Photography", url: "/foundations/style-guide/photography" },
+      { label: "Logo", url: "/foundations/style-guide/logo" },
+      { label: "Typography", url: "/foundations/style-guide/typography" },
+      { label: "Motion", url: "/foundations/style-guide/motion" },
+      { label: "Layout", url: "/foundations/style-guide/layout" },
+    ],
+  },
+  {
+    name: "Content guidelines",
+    slug: "content-guidelines",
+    pages: [
+      {
+        label: "Date format",
+        url: "/foundations/content-guidelines/date-format",
+      },
+      {
+        label: "Capitalization",
+        url: "/foundations/content-guidelines/capitalization",
+      },
+      {
+        label: "Error messages",
+        url: "/foundations/content-guidelines/error-messages",
+      },
+      {
+        label: "Helper text",
+        url: "/foundations/content-guidelines/helper-text",
+      },
+    ],
   },
 ];
 
@@ -56,12 +91,12 @@ export function FoundationsSubMenu({
     <>
       {/* Back to parent menu */}
       <div onClick={handleBackClick} style={{ cursor: "pointer" }}>
-        <GoabxWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
+        <GoabWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
       </div>
 
       {/* Top-level pages */}
       {TOP_PAGES.map((page) => (
-        <GoabxWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
       ))}
 
       {/* Grouped sections */}
@@ -77,15 +112,15 @@ export function FoundationsSubMenu({
 
           return (
             <div key={group.slug} onClickCapture={handleGroupClickCapture}>
-              <GoabxWorkSideMenuGroup heading={group.name} open={containsCurrentPage}>
+              <GoabWorkSideMenuGroup heading={group.name} open={containsCurrentPage}>
                 {group.pages.map((page) => (
-                  <GoabxWorkSideMenuItem
+                  <GoabWorkSideMenuItem
                     key={page.url}
                     label={page.label}
                     url={page.url}
                   />
                 ))}
-              </GoabxWorkSideMenuGroup>
+              </GoabWorkSideMenuGroup>
             </div>
           );
         })}
@@ -94,7 +129,7 @@ export function FoundationsSubMenu({
   );
 
   return (
-    <GoabxWorkSideMenu
+    <GoabWorkSideMenu
       heading="Design System | Foundations"
       url="/"
       open={isOpen}

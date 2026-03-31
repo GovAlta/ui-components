@@ -18,40 +18,40 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: 'Basic example',
       description: 'Simple dropdown with options',
       code: {
-        react: `<GoabxFormItem label="Province or territory" mb="l">
-  <GoabxDropdown name="province">
-    <GoabxDropdownItem value="Alberta" />
-    <GoabxDropdownItem value="British Columbia" />
-    <GoabxDropdownItem value="Manitoba" />
-    <GoabxDropdownItem value="New Brunswick" />
-    <GoabxDropdownItem value="Newfoundland and Labrador" />
-    <GoabxDropdownItem value="Nova Scotia" />
-    <GoabxDropdownItem value="Northwest Territories" />
-    <GoabxDropdownItem value="Nunavut" />
-    <GoabxDropdownItem value="Ontario" />
-    <GoabxDropdownItem value="Prince Edward Island" />
-    <GoabxDropdownItem value="Quebec" />
-    <GoabxDropdownItem value="Saskatchewan" />
-    <GoabxDropdownItem value="Yukon" />
-  </GoabxDropdown>
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Province or territory" mb="l">
-  <goabx-dropdown name="province">
-    <goabx-dropdown-item value="Alberta"></goabx-dropdown-item>
-    <goabx-dropdown-item value="British Columbia"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Manitoba"></goabx-dropdown-item>
-    <goabx-dropdown-item value="New Brunswick"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Newfoundland and Labrador"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Nova Scotia"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Northwest Territories"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Nunavut"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Ontario"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Prince Edward Island"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Quebec"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Saskatchewan"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Yukon"></goabx-dropdown-item>
-  </goabx-dropdown>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Province or territory" mb="l">
+  <GoabDropdown name="province">
+    <GoabDropdownItem value="Alberta" />
+    <GoabDropdownItem value="British Columbia" />
+    <GoabDropdownItem value="Manitoba" />
+    <GoabDropdownItem value="New Brunswick" />
+    <GoabDropdownItem value="Newfoundland and Labrador" />
+    <GoabDropdownItem value="Nova Scotia" />
+    <GoabDropdownItem value="Northwest Territories" />
+    <GoabDropdownItem value="Nunavut" />
+    <GoabDropdownItem value="Ontario" />
+    <GoabDropdownItem value="Prince Edward Island" />
+    <GoabDropdownItem value="Quebec" />
+    <GoabDropdownItem value="Saskatchewan" />
+    <GoabDropdownItem value="Yukon" />
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Province or territory" mb="l">
+  <goab-dropdown name="province">
+    <goab-dropdown-item value="Alberta"></goab-dropdown-item>
+    <goab-dropdown-item value="British Columbia"></goab-dropdown-item>
+    <goab-dropdown-item value="Manitoba"></goab-dropdown-item>
+    <goab-dropdown-item value="New Brunswick"></goab-dropdown-item>
+    <goab-dropdown-item value="Newfoundland and Labrador"></goab-dropdown-item>
+    <goab-dropdown-item value="Nova Scotia"></goab-dropdown-item>
+    <goab-dropdown-item value="Northwest Territories"></goab-dropdown-item>
+    <goab-dropdown-item value="Nunavut"></goab-dropdown-item>
+    <goab-dropdown-item value="Ontario"></goab-dropdown-item>
+    <goab-dropdown-item value="Prince Edward Island"></goab-dropdown-item>
+    <goab-dropdown-item value="Quebec"></goab-dropdown-item>
+    <goab-dropdown-item value="Saskatchewan"></goab-dropdown-item>
+    <goab-dropdown-item value="Yukon"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Province or territory" mb="l">
   <goa-dropdown version="2" name="province">
     <goa-dropdown-item value="Alberta"></goa-dropdown-item>
@@ -76,20 +76,20 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: 'With custom placeholder',
       description: 'Dropdown with placeholder text when no selection',
       code: {
-        react: `<GoabxFormItem label="How would you like to be contacted?" mb="l">
-  <GoabxDropdown name="contactMethod" placeholder="—Select contact method—">
-    <GoabxDropdownItem value="Email" />
-    <GoabxDropdownItem value="Phone" />
-    <GoabxDropdownItem value="Mail" />
-  </GoabxDropdown>
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="How would you like to be contacted?" mb="l">
-  <goabx-dropdown name="contactMethod" placeholder="—Select contact method—">
-    <goabx-dropdown-item value="Email"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Phone"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Mail"></goabx-dropdown-item>
-  </goabx-dropdown>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="How would you like to be contacted?" mb="l">
+  <GoabDropdown name="contactMethod" placeholder="—Select contact method—">
+    <GoabDropdownItem value="Email" />
+    <GoabDropdownItem value="Phone" />
+    <GoabDropdownItem value="Mail" />
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: `<goab-form-item label="How would you like to be contacted?" mb="l">
+  <goab-dropdown name="contactMethod" placeholder="—Select contact method—">
+    <goab-dropdown-item value="Email"></goab-dropdown-item>
+    <goab-dropdown-item value="Phone"></goab-dropdown-item>
+    <goab-dropdown-item value="Mail"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="How would you like to be contacted?" mb="l">
   <goa-dropdown version="2" name="contactMethod" placeholder="—Select contact method—">
     <goa-dropdown-item value="Email"></goa-dropdown-item>
@@ -104,54 +104,54 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: 'Filterable',
       description: 'Dropdown with search/filter capability for long lists',
       code: {
-        react: `<GoabxFormItem label="City" mb="l">
-  <GoabxDropdown name="city" filterable>
-    <GoabxDropdownItem value="Airdrie" />
-    <GoabxDropdownItem value="Beaumont" />
-    <GoabxDropdownItem value="Brooks" />
-    <GoabxDropdownItem value="Calgary" />
-    <GoabxDropdownItem value="Camrose" />
-    <GoabxDropdownItem value="Chestermere" />
-    <GoabxDropdownItem value="Cold Lake" />
-    <GoabxDropdownItem value="Edmonton" />
-    <GoabxDropdownItem value="Fort Saskatchewan" />
-    <GoabxDropdownItem value="Grande Prairie" />
-    <GoabxDropdownItem value="Lacombe" />
-    <GoabxDropdownItem value="Leduc" />
-    <GoabxDropdownItem value="Lethbridge" />
-    <GoabxDropdownItem value="Lloydminster" />
-    <GoabxDropdownItem value="Medicine Hat" />
-    <GoabxDropdownItem value="Okotoks" />
-    <GoabxDropdownItem value="Red Deer" />
-    <GoabxDropdownItem value="Spruce Grove" />
-    <GoabxDropdownItem value="St. Albert" />
-    <GoabxDropdownItem value="Wetaskiwin" />
-  </GoabxDropdown>
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="City" mb="l">
-  <goabx-dropdown name="city" [filterable]="true">
-    <goabx-dropdown-item value="Airdrie"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Beaumont"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Brooks"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Calgary"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Camrose"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Chestermere"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Cold Lake"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Edmonton"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Fort Saskatchewan"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Grande Prairie"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Lacombe"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Leduc"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Lethbridge"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Lloydminster"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Medicine Hat"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Okotoks"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Red Deer"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Spruce Grove"></goabx-dropdown-item>
-    <goabx-dropdown-item value="St. Albert"></goabx-dropdown-item>
-    <goabx-dropdown-item value="Wetaskiwin"></goabx-dropdown-item>
-  </goabx-dropdown>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="City" mb="l">
+  <GoabDropdown name="city" filterable>
+    <GoabDropdownItem value="Airdrie" />
+    <GoabDropdownItem value="Beaumont" />
+    <GoabDropdownItem value="Brooks" />
+    <GoabDropdownItem value="Calgary" />
+    <GoabDropdownItem value="Camrose" />
+    <GoabDropdownItem value="Chestermere" />
+    <GoabDropdownItem value="Cold Lake" />
+    <GoabDropdownItem value="Edmonton" />
+    <GoabDropdownItem value="Fort Saskatchewan" />
+    <GoabDropdownItem value="Grande Prairie" />
+    <GoabDropdownItem value="Lacombe" />
+    <GoabDropdownItem value="Leduc" />
+    <GoabDropdownItem value="Lethbridge" />
+    <GoabDropdownItem value="Lloydminster" />
+    <GoabDropdownItem value="Medicine Hat" />
+    <GoabDropdownItem value="Okotoks" />
+    <GoabDropdownItem value="Red Deer" />
+    <GoabDropdownItem value="Spruce Grove" />
+    <GoabDropdownItem value="St. Albert" />
+    <GoabDropdownItem value="Wetaskiwin" />
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: `<goab-form-item label="City" mb="l">
+  <goab-dropdown name="city" [filterable]="true">
+    <goab-dropdown-item value="Airdrie"></goab-dropdown-item>
+    <goab-dropdown-item value="Beaumont"></goab-dropdown-item>
+    <goab-dropdown-item value="Brooks"></goab-dropdown-item>
+    <goab-dropdown-item value="Calgary"></goab-dropdown-item>
+    <goab-dropdown-item value="Camrose"></goab-dropdown-item>
+    <goab-dropdown-item value="Chestermere"></goab-dropdown-item>
+    <goab-dropdown-item value="Cold Lake"></goab-dropdown-item>
+    <goab-dropdown-item value="Edmonton"></goab-dropdown-item>
+    <goab-dropdown-item value="Fort Saskatchewan"></goab-dropdown-item>
+    <goab-dropdown-item value="Grande Prairie"></goab-dropdown-item>
+    <goab-dropdown-item value="Lacombe"></goab-dropdown-item>
+    <goab-dropdown-item value="Leduc"></goab-dropdown-item>
+    <goab-dropdown-item value="Lethbridge"></goab-dropdown-item>
+    <goab-dropdown-item value="Lloydminster"></goab-dropdown-item>
+    <goab-dropdown-item value="Medicine Hat"></goab-dropdown-item>
+    <goab-dropdown-item value="Okotoks"></goab-dropdown-item>
+    <goab-dropdown-item value="Red Deer"></goab-dropdown-item>
+    <goab-dropdown-item value="Spruce Grove"></goab-dropdown-item>
+    <goab-dropdown-item value="St. Albert"></goab-dropdown-item>
+    <goab-dropdown-item value="Wetaskiwin"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="City" mb="l">
   <goa-dropdown version="2" name="city" filterable>
     <goa-dropdown-item value="Airdrie"></goa-dropdown-item>
@@ -183,30 +183,30 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: 'States',
       description: 'Disabled and error states',
       code: {
-        react: `<GoabxFormItem label="Disabled dropdown" mb="l">
-  <GoabxDropdown name="disabled" disabled value="AB">
-    <GoabxDropdownItem value="AB">Alberta</GoabxDropdownItem>
-    <GoabxDropdownItem value="BC">British Columbia</GoabxDropdownItem>
-  </GoabxDropdown>
-</GoabxFormItem>
-<GoabxFormItem label="Dropdown with error" error="Please select an option" mb="l">
-  <GoabxDropdown name="error" error placeholder="Select an option">
-    <GoabxDropdownItem value="opt1">Option 1</GoabxDropdownItem>
-    <GoabxDropdownItem value="opt2">Option 2</GoabxDropdownItem>
-  </GoabxDropdown>
-</GoabxFormItem>`,
-        angular: `<goabx-form-item label="Disabled dropdown" mb="l">
-  <goabx-dropdown name="disabled" [disabled]="true" value="AB">
-    <goabx-dropdown-item value="AB">Alberta</goabx-dropdown-item>
-    <goabx-dropdown-item value="BC">British Columbia</goabx-dropdown-item>
-  </goabx-dropdown>
-</goabx-form-item>
-<goabx-form-item label="Dropdown with error" error="Please select an option" mb="l">
-  <goabx-dropdown name="error" [error]="true" placeholder="Select an option">
-    <goabx-dropdown-item value="opt1">Option 1</goabx-dropdown-item>
-    <goabx-dropdown-item value="opt2">Option 2</goabx-dropdown-item>
-  </goabx-dropdown>
-</goabx-form-item>`,
+        react: `<GoabFormItem label="Disabled dropdown" mb="l">
+  <GoabDropdown name="disabled" disabled value="AB">
+    <GoabDropdownItem value="AB">Alberta</GoabDropdownItem>
+    <GoabDropdownItem value="BC">British Columbia</GoabDropdownItem>
+  </GoabDropdown>
+</GoabFormItem>
+<GoabFormItem label="Dropdown with error" error="Please select an option" mb="l">
+  <GoabDropdown name="error" error placeholder="Select an option">
+    <GoabDropdownItem value="opt1">Option 1</GoabDropdownItem>
+    <GoabDropdownItem value="opt2">Option 2</GoabDropdownItem>
+  </GoabDropdown>
+</GoabFormItem>`,
+        angular: `<goab-form-item label="Disabled dropdown" mb="l">
+  <goab-dropdown name="disabled" [disabled]="true" value="AB">
+    <goab-dropdown-item value="AB">Alberta</goab-dropdown-item>
+    <goab-dropdown-item value="BC">British Columbia</goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+<goab-form-item label="Dropdown with error" error="Please select an option" mb="l">
+  <goab-dropdown name="error" [error]="true" placeholder="Select an option">
+    <goab-dropdown-item value="opt1">Option 1</goab-dropdown-item>
+    <goab-dropdown-item value="opt2">Option 2</goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>`,
         webComponents: `<goa-form-item version="2" label="Disabled dropdown" mb="l">
   <goa-dropdown version="2" name="disabled" disabled value="AB">
     <goa-dropdown-item value="AB">Alberta</goa-dropdown-item>

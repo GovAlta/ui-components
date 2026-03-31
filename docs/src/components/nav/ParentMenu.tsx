@@ -7,10 +7,8 @@
  */
 
 import React from "react";
-import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-} from "@abgov/react-components/experimental";
+import { GoabWorkSideMenu, GoabWorkSideMenuItem } from "@abgov/react-components";
+import type { GoabIconType } from "@abgov/ui-components-common";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 
 export type MenuSection =
@@ -29,22 +27,28 @@ interface ParentMenuProps {
   currentSection?: MenuSection;
 }
 
+interface TopLevelSection {
+  id: Exclude<MenuSection, "parent">;
+  label: string;
+  icon: GoabIconType;
+}
+
 // Sections that navigate directly to a page (no submenu)
-const DIRECT_NAV_SECTIONS: Record<string, string> = {
+const DIRECT_NAV_SECTIONS: Partial<Record<MenuSection, string>> = {
   tokens: "/tokens",
   examples: "/examples",
 };
 
 // Sections that open a submenu
-const SUBMENU_SECTIONS = ["components", "get-started", "foundations"];
+const SUBMENU_SECTIONS = ["components", "get-started", "foundations"] as const;
 
 // Main navigation sections
-const SECTIONS = [
-  { id: "get-started" as const, label: "Get started", icon: "document-text" },
-  { id: "examples" as const, label: "Examples", icon: "browsers" },
-  { id: "components" as const, label: "Components", icon: "shapes" },
-  { id: "tokens" as const, label: "Tokens", icon: "code-slash" },
-  { id: "foundations" as const, label: "Foundations", icon: "list" },
+const SECTIONS: TopLevelSection[] = [
+  { id: "get-started", label: "Get started", icon: "document-text" },
+  { id: "foundations", label: "Foundations", icon: "list" },
+  { id: "examples", label: "Examples", icon: "browsers" },
+  { id: "components", label: "Components", icon: "shapes" },
+  { id: "tokens", label: "Tokens", icon: "code-slash" },
 ];
 
 export function ParentMenu({
@@ -65,13 +69,15 @@ export function ParentMenu({
     <>
       {SECTIONS.map((section) => {
         const directUrl = DIRECT_NAV_SECTIONS[section.id];
-        const hasSubmenu = SUBMENU_SECTIONS.includes(section.id);
+        const hasSubmenu = SUBMENU_SECTIONS.includes(
+          section.id as (typeof SUBMENU_SECTIONS)[number],
+        );
         const isActive = currentSection === section.id;
 
         if (directUrl) {
           // Direct navigation - use url prop
           return (
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               key={section.id}
               label={section.label}
               icon={section.icon}
@@ -79,7 +85,9 @@ export function ParentMenu({
               current={isActive}
             />
           );
-        } else if (hasSubmenu) {
+        }
+
+        if (hasSubmenu) {
           // Opens submenu - use section URL when active for matching,
           // otherwise use non-matching URL to prevent false positives on homepage
           const submenuUrl = isActive ? `/${section.id}` : "/__never_match__";
@@ -89,7 +97,7 @@ export function ParentMenu({
               onClick={handleSubmenuClick(section.id)}
               style={{ cursor: "pointer" }}
             >
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 label={section.label}
                 icon={section.icon}
                 url={submenuUrl}
@@ -100,7 +108,7 @@ export function ParentMenu({
         } else {
           // Placeholder sections - disabled for now
           return (
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               key={section.id}
               label={section.label}
               icon={section.icon}
@@ -114,12 +122,14 @@ export function ParentMenu({
 
   return (
     <>
-      <GoabxWorkSideMenu
+      <GoabWorkSideMenu
         heading="Design system"
         url="/"
         open={isOpen}
         onToggle={onToggle}
-        onNavigate={(path: string) => { if (path && !path.startsWith("/__")) window.location.href = path; }}
+        onNavigate={(path: string) => {
+          if (path && !path.startsWith("/__")) window.location.href = path;
+        }}
         primaryContent={primaryContent}
         secondaryContent={<MenuSecondaryContent isOpen={isOpen} />}
       />

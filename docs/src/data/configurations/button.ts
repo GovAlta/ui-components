@@ -19,8 +19,8 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'Primary button',
       description: 'Simple button with default styling',
       code: {
-        react: `<GoabxButton>Submit</GoabxButton>`,
-        angular: `<goabx-button>Submit</goabx-button>`,
+        react: `<GoabButton>Submit</GoabButton>`,
+        angular: `<goab-button>Submit</goab-button>`,
         webComponents: `<goa-button version="2">Submit</goa-button>`,
       },
     },
@@ -29,12 +29,12 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'Variants',
       description: 'Primary, secondary, and tertiary button types',
       code: {
-        react: `<GoabxButton type="primary">Primary</GoabxButton>
-<GoabxButton type="secondary">Secondary</GoabxButton>
-<GoabxButton type="tertiary">Tertiary</GoabxButton>`,
-        angular: `<goabx-button type="primary">Primary</goabx-button>
-<goabx-button type="secondary">Secondary</goabx-button>
-<goabx-button type="tertiary">Tertiary</goabx-button>`,
+        react: `<GoabButton type="primary">Primary</GoabButton>
+<GoabButton type="secondary">Secondary</GoabButton>
+<GoabButton type="tertiary">Tertiary</GoabButton>`,
+        angular: `<goab-button type="primary">Primary</goab-button>
+<goab-button type="secondary">Secondary</goab-button>
+<goab-button type="tertiary">Tertiary</goab-button>`,
         webComponents: `<goa-button version="2" type="primary">Primary</goa-button>
 <goa-button version="2" type="secondary">Secondary</goa-button>
 <goa-button version="2" type="tertiary">Tertiary</goa-button>`,
@@ -45,10 +45,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'Sizes',
       description: 'Normal and compact button sizes',
       code: {
-        react: `<GoabxButton size="normal">Normal</GoabxButton>
-<GoabxButton size="compact">Compact</GoabxButton>`,
-        angular: `<goabx-button size="normal">Normal</goabx-button>
-<goabx-button size="compact">Compact</goabx-button>`,
+        react: `<GoabButton size="normal">Normal</GoabButton>
+<GoabButton size="compact">Compact</GoabButton>`,
+        angular: `<goab-button size="normal">Normal</goab-button>
+<goab-button size="compact">Compact</goab-button>`,
         webComponents: `<goa-button version="2" size="normal">Normal</goa-button>
 <goa-button version="2" size="compact">Compact</goa-button>`,
       },
@@ -58,10 +58,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'With icons',
       description: 'Buttons with leading or trailing icons',
       code: {
-        react: `<GoabxButton leadingIcon="add">Add item</GoabxButton>
-<GoabxButton trailingIcon="arrow-forward">Next</GoabxButton>`,
-        angular: `<goabx-button leadingIcon="add">Add item</goabx-button>
-<goabx-button trailingIcon="arrow-forward">Next</goabx-button>`,
+        react: `<GoabButton leadingIcon="add">Add item</GoabButton>
+<GoabButton trailingIcon="arrow-forward">Next</GoabButton>`,
+        angular: `<goab-button leadingIcon="add">Add item</goab-button>
+<goab-button trailingIcon="arrow-forward">Next</goab-button>`,
         webComponents: `<goa-button version="2" leadingicon="add">Add item</goa-button>
 <goa-button version="2" trailingicon="arrow-forward">Next</goa-button>`,
       },
@@ -71,10 +71,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'Disabled',
       description: 'Buttons in disabled state',
       code: {
-        react: `<GoabxButton disabled>Disabled primary</GoabxButton>
-<GoabxButton type="secondary" disabled>Disabled secondary</GoabxButton>`,
-        angular: `<goabx-button disabled="true">Disabled primary</goabx-button>
-<goabx-button type="secondary" disabled="true">Disabled secondary</goabx-button>`,
+        react: `<GoabButton disabled>Disabled primary</GoabButton>
+<GoabButton type="secondary" disabled>Disabled secondary</GoabButton>`,
+        angular: `<goab-button disabled="true">Disabled primary</goab-button>
+<goab-button type="secondary" disabled="true">Disabled secondary</goab-button>`,
         webComponents: `<goa-button version="2" disabled>Disabled primary</goa-button>
 <goa-button version="2" type="secondary" disabled>Disabled secondary</goa-button>`,
       },
@@ -84,10 +84,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'Destructive',
       description: 'Buttons for destructive actions like delete',
       code: {
-        react: `<GoabxButton variant="destructive">Delete</GoabxButton>
-<GoabxButton variant="destructive" type="secondary">Cancel subscription</GoabxButton>`,
-        angular: `<goabx-button variant="destructive">Delete</goabx-button>
-<goabx-button variant="destructive" type="secondary">Cancel subscription</goabx-button>`,
+        react: `<GoabButton variant="destructive">Delete</GoabButton>
+<GoabButton variant="destructive" type="secondary">Cancel subscription</GoabButton>`,
+        angular: `<goab-button variant="destructive">Delete</goab-button>
+<goab-button variant="destructive" type="secondary">Cancel subscription</goab-button>`,
         webComponents: `<goa-button version="2" variant="destructive">Delete</goa-button>
 <goa-button version="2" variant="destructive" type="secondary">Cancel subscription</goa-button>`,
       },
@@ -97,10 +97,10 @@ export const buttonConfigurations: ComponentConfigurations = {
       name: 'Inverse',
       description: 'Buttons for use on dark backgrounds',
       code: {
-        react: `<GoabxButton variant="inverse">Learn more</GoabxButton>
-<GoabxButton variant="inverse" type="secondary">Contact us</GoabxButton>`,
-        angular: `<goabx-button variant="inverse">Learn more</goabx-button>
-<goabx-button variant="inverse" type="secondary">Contact us</goabx-button>`,
+        react: `<GoabButton variant="inverse">Learn more</GoabButton>
+<GoabButton variant="inverse" type="secondary">Contact us</GoabButton>`,
+        angular: `<goab-button variant="inverse">Learn more</goab-button>
+<goab-button variant="inverse" type="secondary">Contact us</goab-button>`,
         webComponents: `<goa-button version="2" variant="inverse">Learn more</goa-button>
 <goa-button version="2" variant="inverse" type="secondary">Contact us</goa-button>`,
       },

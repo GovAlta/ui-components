@@ -1,11 +1,14 @@
-import { GoabxCheckbox, GoabxFormItem } from "@abgov/react-components/experimental";
-import { GoabCheckboxList } from "@abgov/react-components";
+import {
+  GoabCheckbox,
+  GoabCheckboxList,
+  GoabFormItem,
+} from "@abgov/react-components";
 
 export function IncludeALinkInTheHelperTextOfAnOption() {
   return (
-    <GoabxFormItem label="How would you like to be contacted?">
+    <GoabFormItem label="How would you like to be contacted?">
       <GoabCheckboxList name="contact-options">
-        <GoabxCheckbox
+        <GoabCheckbox
           name="email"
           text="Email"
           value="email"
@@ -15,9 +18,9 @@ export function IncludeALinkInTheHelperTextOfAnOption() {
             </span>
           }
         />
-        <GoabxCheckbox name="phone" text="Phone" value="phone" />
-        <GoabxCheckbox name="text" text="Text message" value="text" />
+        <GoabCheckbox name="phone" text="Phone" value="phone" />
+        <GoabCheckbox name="text" text="Text message" value="text" />
       </GoabCheckboxList>
-    </GoabxFormItem>
+    </GoabFormItem>
   );
 }

@@ -17,28 +17,28 @@ export const sideMenuGroupConfigurations: ComponentConfigurations = {
       name: 'Basic side menu group',
       description: 'Collapsible group within SideMenu',
       code: {
-        react: `<GoabxSideMenu>
-  <GoabxSideMenuGroup heading="Applications">
+        react: `<GoabSideMenu>
+  <GoabSideMenuGroup heading="Applications">
     <a href="/apps/active">Active</a>
     <a href="/apps/pending">Pending</a>
     <a href="/apps/archived">Archived</a>
-  </GoabxSideMenuGroup>
-  <GoabxSideMenuGroup heading="Reports">
+  </GoabSideMenuGroup>
+  <GoabSideMenuGroup heading="Reports">
     <a href="/reports/monthly">Monthly</a>
     <a href="/reports/annual">Annual</a>
-  </GoabxSideMenuGroup>
-</GoabxSideMenu>`,
-        angular: `<goabx-side-menu>
-  <goabx-side-menu-group heading="Applications">
+  </GoabSideMenuGroup>
+</GoabSideMenu>`,
+        angular: `<goab-side-menu>
+  <goab-side-menu-group heading="Applications">
     <a href="/apps/active">Active</a>
     <a href="/apps/pending">Pending</a>
     <a href="/apps/archived">Archived</a>
-  </goabx-side-menu-group>
-  <goabx-side-menu-group heading="Reports">
+  </goab-side-menu-group>
+  <goab-side-menu-group heading="Reports">
     <a href="/reports/monthly">Monthly</a>
     <a href="/reports/annual">Annual</a>
-  </goabx-side-menu-group>
-</goabx-side-menu>`,
+  </goab-side-menu-group>
+</goab-side-menu>`,
         webComponents: `<goa-side-menu version="2">
   <goa-side-menu-group version="2" heading="Applications">
     <a href="/apps/active">Active</a>

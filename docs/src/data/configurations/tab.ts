@@ -17,22 +17,22 @@ export const tabConfigurations: ComponentConfigurations = {
       name: 'Basic tab',
       description: 'Single tab within Tabs component',
       code: {
-        react: `<GoabxTabs>
+        react: `<GoabTabs>
   <GoabTab heading="First tab">
     Content for the first tab.
   </GoabTab>
   <GoabTab heading="Second tab">
     Content for the second tab.
   </GoabTab>
-</GoabxTabs>`,
-        angular: `<goabx-tabs>
+</GoabTabs>`,
+        angular: `<goab-tabs>
   <goab-tab heading="First tab">
     Content for the first tab.
   </goab-tab>
   <goab-tab heading="Second tab">
     Content for the second tab.
   </goab-tab>
-</goabx-tabs>`,
+</goab-tabs>`,
         webComponents: `<goa-tabs version="2">
   <goa-tab heading="First tab">
     Content for the first tab.

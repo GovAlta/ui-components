@@ -17,7 +17,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Basic table',
       description: 'Simple table with data',
       code: {
-        react: `<GoabxTable>
+        react: `<GoabTable>
   <thead>
     <tr>
       <th>Name</th>
@@ -37,8 +37,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table>
+</GoabTable>`,
+        angular: `<goab-table>
   <thead>
     <tr>
       <th>Name</th>
@@ -58,7 +58,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2">
   <table>
     <thead>
@@ -89,7 +89,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Striped rows',
       description: 'Alternating row colors for readability',
       code: {
-        react: `<GoabxTable striped>
+        react: `<GoabTable striped>
   <thead>
     <tr>
       <th>Item</th>
@@ -114,8 +114,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>$10.00</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table [striped]="true">
+</GoabTable>`,
+        angular: `<goab-table [striped]="true">
   <thead>
     <tr>
       <th>Item</th>
@@ -140,7 +140,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>$10.00</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2" striped>
   <table>
     <thead>
@@ -176,7 +176,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Relaxed variant',
       description: 'More vertical padding for comfortable reading',
       code: {
-        react: `<GoabxTable variant="relaxed">
+        react: `<GoabTable variant="relaxed">
   <thead>
     <tr>
       <th>Service</th>
@@ -193,8 +193,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Register a new or used vehicle</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table variant="relaxed">
+</GoabTable>`,
+        angular: `<goab-table variant="relaxed">
   <thead>
     <tr>
       <th>Service</th>
@@ -211,7 +211,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Register a new or used vehicle</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2" variant="relaxed">
   <table>
     <thead>
@@ -239,7 +239,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Sticky header',
       description: 'Header stays visible when scrolling',
       code: {
-        react: `<GoabxTable stickyHeader width="100%">
+        react: `<GoabTable stickyHeader width="100%">
   <thead>
     <tr>
       <th>ID</th>
@@ -264,8 +264,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Finance</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table [stickyHeader]="true" width="100%">
+</GoabTable>`,
+        angular: `<goab-table [stickyHeader]="true" width="100%">
   <thead>
     <tr>
       <th>ID</th>
@@ -290,7 +290,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Finance</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2" stickyheader width="100%">
   <table>
     <thead>
@@ -326,7 +326,7 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Full width',
       description: 'Table that spans container width',
       code: {
-        react: `<GoabxTable width="100%" striped>
+        react: `<GoabTable width="100%" striped>
   <thead>
     <tr>
       <th>Application ID</th>
@@ -349,8 +349,8 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 14, 2024</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table width="100%" [striped]="true">
+</GoabTable>`,
+        angular: `<goab-table width="100%" [striped]="true">
   <thead>
     <tr>
       <th>Application ID</th>
@@ -373,7 +373,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 14, 2024</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2" width="100%" striped>
   <table>
     <thead>
@@ -407,17 +407,17 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Single-column sorting',
       description: 'Sortable columns using TableSortHeader (default single sort mode)',
       code: {
-        react: `<GoabxTable onSort={(detail) => console.log(detail)}>
+        react: `<GoabTable onSort={(detail) => console.log(detail)}>
   <thead>
     <tr>
       <th>
-        <GoabxTableSortHeader name="name" direction="asc">Name</GoabxTableSortHeader>
+        <GoabTableSortHeader name="name" direction="asc">Name</GoabTableSortHeader>
       </th>
       <th>
-        <GoabxTableSortHeader name="status">Status</GoabxTableSortHeader>
+        <GoabTableSortHeader name="status">Status</GoabTableSortHeader>
       </th>
       <th>
-        <GoabxTableSortHeader name="date">Date</GoabxTableSortHeader>
+        <GoabTableSortHeader name="date">Date</GoabTableSortHeader>
       </th>
     </tr>
   </thead>
@@ -433,18 +433,18 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table (onSort)="onSort($event)">
+</GoabTable>`,
+        angular: `<goab-table (onSort)="onSort($event)">
   <thead>
     <tr>
       <th>
-        <goabx-table-sort-header name="name" direction="asc">Name</goabx-table-sort-header>
+        <goab-table-sort-header name="name" direction="asc">Name</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="status">Status</goabx-table-sort-header>
+        <goab-table-sort-header name="status">Status</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="date">Date</goabx-table-sort-header>
+        <goab-table-sort-header name="date">Date</goab-table-sort-header>
       </th>
     </tr>
   </thead>
@@ -460,7 +460,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2">
   <table>
     <thead>
@@ -491,17 +491,17 @@ export const tableConfigurations: ComponentConfigurations = {
       name: 'Multi-column sorting',
       description: 'Sort by multiple columns with sortMode="multi" and sortOrder for priority',
       code: {
-        react: `<GoabxTable sortMode="multi" onMultiSort={(detail) => console.log(detail.sorts)}>
+        react: `<GoabTable sortMode="multi" onMultiSort={(detail) => console.log(detail.sorts)}>
   <thead>
     <tr>
       <th>
-        <GoabxTableSortHeader name="name" direction="asc" sortOrder={1}>Name</GoabxTableSortHeader>
+        <GoabTableSortHeader name="name" direction="asc" sortOrder={1}>Name</GoabTableSortHeader>
       </th>
       <th>
-        <GoabxTableSortHeader name="status" direction="desc" sortOrder={2}>Status</GoabxTableSortHeader>
+        <GoabTableSortHeader name="status" direction="desc" sortOrder={2}>Status</GoabTableSortHeader>
       </th>
       <th>
-        <GoabxTableSortHeader name="date">Date</GoabxTableSortHeader>
+        <GoabTableSortHeader name="date">Date</GoabTableSortHeader>
       </th>
     </tr>
   </thead>
@@ -517,18 +517,18 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</GoabxTable>`,
-        angular: `<goabx-table sortMode="multi" (onMultiSort)="onMultiSort($event)">
+</GoabTable>`,
+        angular: `<goab-table sortMode="multi" (onMultiSort)="onMultiSort($event)">
   <thead>
     <tr>
       <th>
-        <goabx-table-sort-header name="name" direction="asc" [sortOrder]="1">Name</goabx-table-sort-header>
+        <goab-table-sort-header name="name" direction="asc" [sortOrder]="1">Name</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="status" direction="desc" [sortOrder]="2">Status</goabx-table-sort-header>
+        <goab-table-sort-header name="status" direction="desc" [sortOrder]="2">Status</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="date">Date</goabx-table-sort-header>
+        <goab-table-sort-header name="date">Date</goab-table-sort-header>
       </th>
     </tr>
   </thead>
@@ -544,7 +544,7 @@ export const tableConfigurations: ComponentConfigurations = {
       <td>Jan 16, 2024</td>
     </tr>
   </tbody>
-</goabx-table>`,
+</goab-table>`,
         webComponents: `<goa-table version="2" sort-mode="multi">
   <table>
     <thead>

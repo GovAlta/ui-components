@@ -1,66 +1,67 @@
 import { useState } from "react";
 import {
-  GoabxButton,
-  GoabxCheckbox,
-  GoabxDrawer,
-  GoabxDropdown,
-  GoabxDropdownItem,
-  GoabxFormItem,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-} from "@abgov/react-components/experimental";
-import { GoabButtonGroup, GoabCheckboxList } from "@abgov/react-components";
+  GoabButton,
+  GoabButtonGroup,
+  GoabCheckbox,
+  GoabCheckboxList,
+  GoabDrawer,
+  GoabDropdown,
+  GoabDropdownItem,
+  GoabFormItem,
+  GoabRadioGroup,
+  GoabRadioItem,
+} from "@abgov/react-components";
 
 export function AddAndEditLotsOfFilters() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <GoabxButton onClick={() => setOpen(true)}>Filters</GoabxButton>
-      <GoabxDrawer
+      <GoabButton onClick={() => setOpen(true)}>Filters</GoabButton>
+      <GoabDrawer
           heading="Filters"
           open={open}
           onClose={() => setOpen(false)}
           position="right"
           actions={
             <GoabButtonGroup>
-              <GoabxButton type="primary" size="compact" onClick={() => setOpen(false)}>
+              <GoabButton type="primary" size="compact" onClick={() => setOpen(false)}>
                 Apply filters
-              </GoabxButton>
-              <GoabxButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
+              </GoabButton>
+              <GoabButton type="tertiary" size="compact" onClick={() => setOpen(false)}>
                 Cancel
-              </GoabxButton>
+              </GoabButton>
             </GoabButtonGroup>
           }
         >
-          <GoabxFormItem label="Entry status">
+          <GoabFormItem label="Entry status">
             <GoabCheckboxList name="entryStatus" onChange={() => {}}>
-              <GoabxCheckbox name="draft" text="Draft" value="draft" />
-              <GoabxCheckbox name="published" text="Published" value="published" />
+              <GoabCheckbox name="draft" text="Draft" value="draft" />
+              <GoabCheckbox name="published" text="Published" value="published" />
             </GoabCheckboxList>
-          </GoabxFormItem>
-          <GoabxFormItem label="Assigned to - Region" mt="l">
+          </GoabFormItem>
+          <GoabFormItem label="Assigned to - Region" mt="l">
             <GoabCheckboxList name="region" onChange={() => {}}>
-              <GoabxCheckbox name="calgary" text="Calgary" value="calgary" />
-              <GoabxCheckbox name="central" text="Central" value="central" />
-              <GoabxCheckbox name="edmonton" text="Edmonton" value="edmonton" />
-              <GoabxCheckbox name="north" text="North" value="north" />
-              <GoabxCheckbox name="south" text="South" value="south" />
+              <GoabCheckbox name="calgary" text="Calgary" value="calgary" />
+              <GoabCheckbox name="central" text="Central" value="central" />
+              <GoabCheckbox name="edmonton" text="Edmonton" value="edmonton" />
+              <GoabCheckbox name="north" text="North" value="north" />
+              <GoabCheckbox name="south" text="South" value="south" />
             </GoabCheckboxList>
-          </GoabxFormItem>
-          <GoabxFormItem label="Assigned to" mt="l">
-            <GoabxDropdown name="assignedTo" onChange={() => {}}>
-              <GoabxDropdownItem value="1" label="Person 1" />
-              <GoabxDropdownItem value="2" label="Person 2" />
-            </GoabxDropdown>
-          </GoabxFormItem>
-          <GoabxFormItem label="Date taken" mt="l">
-            <GoabxRadioGroup name="dateTaken" onChange={() => {}}>
-              <GoabxRadioItem value="24" label="Last 24 hours" />
-              <GoabxRadioItem value="72" label="Last 72 hours" />
-            </GoabxRadioGroup>
-          </GoabxFormItem>
-      </GoabxDrawer>
+          </GoabFormItem>
+          <GoabFormItem label="Assigned to" mt="l">
+            <GoabDropdown name="assignedTo" onChange={() => {}}>
+              <GoabDropdownItem value="1" label="Person 1" />
+              <GoabDropdownItem value="2" label="Person 2" />
+            </GoabDropdown>
+          </GoabFormItem>
+          <GoabFormItem label="Date taken" mt="l">
+            <GoabRadioGroup name="dateTaken" onChange={() => {}}>
+              <GoabRadioItem value="24" label="Last 24 hours" />
+              <GoabRadioItem value="72" label="Last 72 hours" />
+            </GoabRadioGroup>
+          </GoabFormItem>
+      </GoabDrawer>
     </>
   );
 }

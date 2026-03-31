@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  GoabxBadge,
-  GoabxButton,
-  GoabxFilterChip,
-  GoabxFormItem,
-  GoabxInput,
-  GoabxTable,
-} from "@abgov/react-components/experimental";
-import { GoabBlock, GoabText } from "@abgov/react-components";
+  GoabBadge,
+  GoabBlock,
+  GoabButton,
+  GoabFilterChip,
+  GoabFormItem,
+  GoabInput,
+  GoabTable,
+  GoabText,
+} from "@abgov/react-components";
+
 import type {
   GoabBadgeType,
   GoabInputOnChangeDetail,
@@ -117,10 +119,10 @@ export function FilterDataInATable() {
 
   return (
     <>
-      <GoabxFormItem id="filterChipInput" error={inputError} mb="m">
+      <GoabFormItem id="filterChipInput" error={inputError} mb="m">
         <GoabBlock gap="xs" direction="row" alignment="start" width="100%">
           <div style={{ flex: 1 }}>
-            <GoabxInput
+            <GoabInput
               name="filterChipInput"
               aria-labelledby="filterChipInput"
               value={inputValue}
@@ -130,11 +132,11 @@ export function FilterDataInATable() {
               onKeyPress={handleInputKeyPress}
             />
           </div>
-          <GoabxButton type="secondary" onClick={applyFilter} leadingIcon="filter">
+          <GoabButton type="secondary" onClick={applyFilter} leadingIcon="filter">
             Filter
-          </GoabxButton>
+          </GoabButton>
         </GoabBlock>
-      </GoabxFormItem>
+      </GoabFormItem>
 
       {typedChips.length > 0 && (
         <div>
@@ -142,7 +144,7 @@ export function FilterDataInATable() {
             Filter:
           </GoabText>
           {typedChips.map((typedChip, index) => (
-            <GoabxFilterChip
+            <GoabFilterChip
               key={index}
               content={typedChip}
               mb="xs"
@@ -150,13 +152,13 @@ export function FilterDataInATable() {
               onClick={() => removeTypedChip(typedChip)}
             />
           ))}
-          <GoabxButton type="tertiary" size="compact" mb="xs" onClick={() => setTypedChips([])}>
+          <GoabButton type="tertiary" size="compact" mb="xs" onClick={() => setTypedChips([])}>
             Clear all
-          </GoabxButton>
+          </GoabButton>
         </div>
       )}
 
-      <GoabxTable width="full">
+      <GoabTable width="full">
         <thead>
           <tr>
             <th>Status</th>
@@ -168,14 +170,14 @@ export function FilterDataInATable() {
           {dataFiltered.map(item => (
             <tr key={item.id}>
               <td>
-                <GoabxBadge type={item.status.type} content={item.status.text} icon={false} />
+                <GoabBadge type={item.status.type} content={item.status.text} icon={false} />
               </td>
               <td>{item.name}</td>
               <td className="goa-table-number-column">{item.id}</td>
             </tr>
           ))}
         </tbody>
-      </GoabxTable>
+      </GoabTable>
 
       {dataFiltered.length === 0 && data.length > 0 && (
         <GoabBlock mt="l" mb="l">

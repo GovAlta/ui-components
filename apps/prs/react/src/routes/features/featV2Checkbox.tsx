@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import {
   GoabBlock,
-  GoabText,
-  GoabOneColumnLayout,
-  GoabPageBlock,
-  GoabDivider,
   GoabCheckbox,
   GoabCheckboxList,
+  GoabDivider,
+  GoabOneColumnLayout,
+  GoabPageBlock,
+  GoabText,
 } from "@abgov/react-components";
-import { GoabxCheckbox, GoabxCheckboxList } from "@abgov/react-components/experimental";
+
 import {
   GoabCheckboxOnChangeDetail,
   GoabCheckboxListOnChangeDetail,
@@ -79,7 +79,7 @@ export function FeatV2CheckboxRoute() {
             <thead>
               <tr>
                 <th>
-                  <GoabxCheckbox
+                  <GoabCheckbox
                     name="select-all"
                     checked={selectedRows.size === tableData.length}
                     indeterminate={selectedRows.size > 0 && selectedRows.size < tableData.length}
@@ -102,7 +102,7 @@ export function FeatV2CheckboxRoute() {
               {tableData.map((row) => (
                 <tr key={row.id}>
                   <td>
-                    <GoabxCheckbox
+                    <GoabCheckbox
                       name={`select-${row.id}`}
                       checked={selectedRows.has(row.id)}
                       onChange={(detail: GoabCheckboxOnChangeDetail) => handleRowSelect(row.id, detail)}
@@ -132,15 +132,15 @@ export function FeatV2CheckboxRoute() {
             Previously relied on individual checkbox margins.
           </GoabText>
 
-          <GoabxCheckboxList
+          <GoabCheckboxList
             name="preferences"
             value={checkboxListValue}
             onChange={(detail: GoabCheckboxListOnChangeDetail) => setCheckboxListValue(detail.value)}
           >
-            <GoabxCheckbox name="option1" text="Option 1: Email notifications" />
-            <GoabxCheckbox name="option2" text="Option 2: SMS notifications" />
-            <GoabxCheckbox name="option3" text="Option 3: Push notifications" />
-          </GoabxCheckboxList>
+            <GoabCheckbox name="option1" text="Option 1: Email notifications" />
+            <GoabCheckbox name="option2" text="Option 2: SMS notifications" />
+            <GoabCheckbox name="option3" text="Option 3: Push notifications" />
+          </GoabCheckboxList>
 
           <GoabText size="body-xs" mt="m">
             Selected: {checkboxListValue.join(", ") || "none"}
@@ -156,27 +156,27 @@ export function FeatV2CheckboxRoute() {
             Testing checkbox description alignment when descriptions are set per option.
           </GoabText>
 
-          <GoabxCheckboxList
+          <GoabCheckboxList
             name="with-descriptions"
             value={descListValue}
             onChange={(detail: GoabCheckboxListOnChangeDetail) => setDescListValue(detail.value)}
           >
-            <GoabxCheckbox
+            <GoabCheckbox
               name="desc1"
               text="Email notifications"
               description="Receive updates about your account via email"
             />
-            <GoabxCheckbox
+            <GoabCheckbox
               name="desc2"
               text="SMS notifications"
               description="Get text messages for urgent alerts only"
             />
-            <GoabxCheckbox
+            <GoabCheckbox
               name="desc3"
               text="Push notifications"
               description="Browser notifications when you're online"
             />
-          </GoabxCheckboxList>
+          </GoabCheckboxList>
 
           <GoabDivider mt="xl" />
 
@@ -220,31 +220,31 @@ export function FeatV2CheckboxRoute() {
             Compact checkbox list uses smaller gap (var(--goa-space-s)) between items.
           </GoabText>
 
-          <GoabxCheckboxList
+          <GoabCheckboxList
             name="compact-prefs"
             size="compact"
             value={v2CompactListValue}
             onChange={(detail: GoabCheckboxListOnChangeDetail) => setV2CompactListValue(detail.value)}
           >
-            <GoabxCheckbox
+            <GoabCheckbox
               name="compact1"
               size="compact"
               text="Compact option 1"
               description="Description for compact option 1"
             />
-            <GoabxCheckbox
+            <GoabCheckbox
               name="compact2"
               size="compact"
               text="Compact option 2"
               description="Description for compact option 2"
             />
-            <GoabxCheckbox
+            <GoabCheckbox
               name="compact3"
               size="compact"
               text="Compact option 3"
               description="Description for compact option 3"
             />
-          </GoabxCheckboxList>
+          </GoabCheckboxList>
 
           <GoabText size="body-xs" mt="m">
             Selected: {v2CompactListValue.join(", ") || "none"}
@@ -262,9 +262,9 @@ export function FeatV2CheckboxRoute() {
           </GoabText>
 
           <GoabBlock direction="row" gap="xl" alignment="center">
-            <GoabxCheckbox name="standalone1" text="Checkbox A" />
-            <GoabxCheckbox name="standalone2" text="Checkbox B" />
-            <GoabxCheckbox name="standalone3" text="Checkbox C" />
+            <GoabCheckbox name="standalone1" text="Checkbox A" />
+            <GoabCheckbox name="standalone2" text="Checkbox B" />
+            <GoabCheckbox name="standalone3" text="Checkbox C" />
           </GoabBlock>
 
           <GoabText size="body-xs" mt="m">

@@ -2,10 +2,10 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, OnDestroy } from "@angular/c
 import { CommonModule } from "@angular/common";
 import {
   GoabIconButton,
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideNotificationPanel,
-  GoabxWorkSideNotificationItem,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideNotificationPanel,
+  GoabWorkSideNotificationItem,
 } from "@abgov/angular-components";
 
 type Notification = {
@@ -40,10 +40,10 @@ type Notification = {
   ],
   imports: [
     CommonModule,
-    GoabxWorkSideMenu,
-    GoabxWorkSideMenuItem,
-    GoabxWorkSideNotificationPanel,
-    GoabxWorkSideNotificationItem,
+    GoabWorkSideMenu,
+    GoabWorkSideMenuItem,
+    GoabWorkSideNotificationPanel,
+    GoabWorkSideNotificationItem,
     GoabIconButton,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -196,7 +196,7 @@ export class Feat2885Component implements OnInit, OnDestroy {
   handleViewAll() {
     console.log("View all clicked");
   }
-  // This is very important in Angular, to make the mounted and updated the read status on GoabxWorkSideNotificationItem correctly
+  // This is very important in Angular, to make the mounted and updated the read status on GoabWorkSideNotificationItem correctly
   trackById(_index: number, notif: Notification): string {
     return notif.id;
   }
