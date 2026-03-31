@@ -141,8 +141,8 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   @Output() onKeyPress = new EventEmitter<GoabInputOnKeyPressDetail>();
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
-  isReady = false;
   version = "2";
+  isReady = false;
   handleTrailingIconClick = false;
 
   constructor(
