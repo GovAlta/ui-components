@@ -241,6 +241,10 @@ export function App() {
                   label="3635 Input Leading icon color"
                   url="/bugs/3635"
                 />
+                <GoabWorkSideMenuItem
+                  label="3637 Checkbox Table Header Row Height Bug"
+                  url="/bugs/3637"
+                />
               </GoabWorkSideMenuGroup>
 
               <GoabWorkSideMenuGroup icon="star" heading="Features">
