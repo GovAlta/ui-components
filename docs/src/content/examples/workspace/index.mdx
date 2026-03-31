@@ -2,8 +2,7 @@
 id: workspace
 title: Workspace
 description: The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.<br><span style="display:block;height:0.5rem"></span>Workspaces should be adapted to fit each service's context and user needs. The reference example is a starting point to expand on, not a rigid template.
-categories:
-  - structure-and-navigation
+categories: []
 scale: product
 userType: worker
 tags:
@@ -27,7 +26,24 @@ previewImage: /thumbnails/workspace-preview.png
 status: published
 ---
 
-<goa-button version="2" type="tertiary" mt="s" mb="xl" onclick="window.open('https://digital-service-demo-v2.netlify.app/workspace', '_blank')">View demo</goa-button>
+<goa-button version="2" type="tertiary" mt="s" mb="l" onclick="window.open('https://digital-service-demo-v2.netlify.app/workspace', '_blank')">View demo</goa-button>
+
+import LinkCard from "../../../components/LinkCard.astro";
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;">
+  <LinkCard
+    href="https://github.com/GovAlta/goa-workspace-playground"
+    icon="logo-react"
+    title="React template"
+    description="GitHub template for building a workspace with React"
+  />
+  <LinkCard
+    href="https://github.com/GovAlta/goa-workspace-angular"
+    icon="logo-angular"
+    title="Angular template"
+    description="GitHub template for building a workspace with Angular"
+  />
+</div>
 
 **Primary user:** Service delivery staff
 
@@ -215,6 +231,27 @@ Workspace patterns are supported by component features designed for denser, more
 - **Data grid** — The [data grid](/components/data-grid) works with the table component to support accessible, keyboard-navigable data views. Use them together when the user needs to move through records efficiently without relying on a mouse.
 - **Segmented tabs** — A new [tab](/components/tab) variant that works as a segmented toggle for switching between views or modes within a workspace, rather than navigating between pages.
 - **Enhanced filter chips** — [Filter chips](/components/filter-chip) now support secondary text and secondary icons, making them more useful for richer filtering in workspace data views.
+
+---
+
+## Get started
+
+Use one of the workspace templates as a starting point for your service. Each template includes the sidebar navigation, dashboard, data views, and case detail patterns described above.
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+  <LinkCard
+    href="https://github.com/GovAlta/goa-workspace-playground"
+    icon="logo-react"
+    title="React template"
+    description="GitHub template for building a workspace with React"
+  />
+  <LinkCard
+    href="https://github.com/GovAlta/goa-workspace-angular"
+    icon="logo-angular"
+    title="Angular template"
+    description="GitHub template for building a workspace with Angular"
+  />
+</div>
 
 ---
 
