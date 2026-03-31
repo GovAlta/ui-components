@@ -233,6 +233,10 @@ export function App() {
                   label="3614 IconButton Hitboxes"
                   url="/bugs/3614"
                 />
+                <GoabWorkSideMenuItem
+                  label="3685 Checkbox & Radio: Reveal width not aligned with item"
+                  url="/bugs/3685"
+                />
               </GoabWorkSideMenuGroup>
 
               <GoabWorkSideMenuGroup icon="star" heading="Features">

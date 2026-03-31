@@ -310,7 +310,7 @@
 <style>
   .radio {
     display: inline-flex;
-    align-items: flex-start;
+    align-self: flex-start;
   }
 
   label.radio {
@@ -322,7 +322,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
   }
 
   .radio:hover {
@@ -393,11 +392,13 @@
     padding: var(--goa-radio-reveal-padding, var(--goa-space-m));
     margin: var(--goa-radio-reveal-margin, var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px));
     border-left: var(--goa-radio-reveal-border, 4px solid var(--goa-color-greyscale-200));
+    box-sizing: border-box;
   }
 
   .radio.v2 ~ .reveal.visible.has-content {
     padding: var(--goa-radio-reveal-padding, var(--goa-space-l));
     border-left: var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200));
+    width: calc(100% - calc(var(--goa-space-s) - 1px));
   }
 
   .radio.v2.compact ~ .reveal.visible.has-content {

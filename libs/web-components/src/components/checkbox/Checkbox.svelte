@@ -380,7 +380,6 @@ max-width: ${maxwidth};
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
     height: auto; /* Automatically adjusts to content */
     min-height: 0; /* Ensures no unnecessary minimum height */
     padding: 0; /* Remove padding if it's affecting height */
@@ -402,6 +401,7 @@ max-width: ${maxwidth};
   label {
     display: flex;
     cursor: pointer;
+    align-self: flex-start;
   }
 
   /* Hover style when the user hovers over the label */
@@ -439,6 +439,7 @@ max-width: ${maxwidth};
     border-left: 4px solid var(--goa-color-greyscale-200);
     padding: var(--goa-space-m);
     margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
+    box-sizing: border-box;
   }
 
   /* Container */
