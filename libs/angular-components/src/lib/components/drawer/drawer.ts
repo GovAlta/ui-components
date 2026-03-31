@@ -16,29 +16,30 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
   standalone: true,
   selector: "goab-drawer",
   imports: [NgTemplateOutlet],
-  template: `
-    @if (isReady) {
-      <goa-drawer
-        [open]="open"
-        [attr.position]="position"
-        [attr.heading]="getHeadingAsString()"
-        [attr.maxsize]="maxSize"
-        [attr.testid]="testId"
-        (_close)="_onClose()"
-      >
-        <ng-content></ng-content>
-        <div slot="heading">
-          <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
-        </div>
-        <div slot="actions">
-          <ng-container [ngTemplateOutlet]="actions"></ng-container>
-        </div>
-      </goa-drawer>
-    }
-  `,
+  template: `@if (isReady) {
+    <goa-drawer
+      [open]="open"
+      [attr.position]="position"
+      [attr.heading]="getHeadingAsString()"
+      [attr.maxsize]="maxSize"
+      [attr.testid]="testId"
+      [attr.version]="version"
+      (_close)="_onClose()"
+    >
+      <ng-content></ng-content>
+      <div slot="heading">
+        <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
+      </div>
+      <div slot="actions">
+        <ng-container [ngTemplateOutlet]="actions"></ng-container>
+      </div>
+    </goa-drawer>
+  } `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDrawer implements OnInit {
+  version = "2";
+
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;
   @Input({ required: true }) position!: GoabDrawerPosition;
   @Input() heading!: string | TemplateRef<any>;

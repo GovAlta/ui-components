@@ -16,6 +16,7 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-radio-item
+        [attr.version]="version"
         [attr.name]="name"
         [attr.value]="value"
         [attr.label]="label"
@@ -23,6 +24,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.arialabel]="ariaLabel"
         [attr.revealarialabel]="revealAriaLabel"
         [disabled]="disabled"
+        [attr.compact]="compact"
         [attr.maxwidth]="maxWidth"
         [attr.checked]="checked"
         [attr.error]="error"
@@ -46,7 +48,7 @@ import { GoabBaseComponent } from "../base.component";
   imports: [NgTemplateOutlet],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GoabRadioItem extends GoabBaseComponent {
+export class GoabRadioItem extends GoabBaseComponent implements OnInit {
   @Input() value?: string;
   @Input() label?: string;
   @Input() name?: string;
@@ -58,8 +60,10 @@ export class GoabRadioItem extends GoabBaseComponent {
   @Input({ transform: booleanAttribute }) checked?: boolean;
   @Input({ transform: booleanAttribute }) error?: boolean;
   @Input() maxWidth?: string;
+  @Input({ transform: booleanAttribute }) compact?: boolean;
 
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

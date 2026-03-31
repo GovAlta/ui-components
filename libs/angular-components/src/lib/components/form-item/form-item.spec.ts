@@ -25,10 +25,12 @@ import { GoabFormItemSlot } from "./form-item-slot";
     >
       <input data-testid="foo" />
       @if (errorSlot) {
-        <goab-form-item-slot slot="error">This is an error slot</goab-form-item-slot>
+        <goab-form-item-slot slot="error"> This is an error slot </goab-form-item-slot>
       }
       @if (helpTextSlot) {
-        <goab-form-item-slot slot="helptext">This is a helpText slot</goab-form-item-slot>
+        <goab-form-item-slot slot="helptext">
+          This is a helpText slot
+        </goab-form-item-slot>
       }
     </goab-form-item>
   `,
@@ -92,6 +94,8 @@ describe("GoABFormItem", () => {
     expect(el?.getAttribute("mb")).toBe(component.mb);
     expect(el?.getAttribute("mr")).toBe(component.mr);
     expect(el?.getAttribute("ml")).toBe(component.ml);
+    expect(el?.getAttribute("version")).toBe("2");
+    expect(el?.getAttribute("type")).toBe("");
 
     // Children is rendered
     expect(el?.querySelector("input[data-testid='foo']")).toBeTruthy();

@@ -11,6 +11,8 @@ describe("GoabLink", () => {
       <GoabLink
         leadingIcon="add"
         trailingIcon="archive"
+        color="dark"
+        size="large"
         testId="test-id"
         mt="s"
         mr="m"
@@ -26,6 +28,8 @@ describe("GoabLink", () => {
     expect(el).toBeTruthy();
     expect(el?.getAttribute("leadingicon")).toBe("add");
     expect(el?.getAttribute("trailingicon")).toBe("archive");
+    expect(el?.getAttribute("color")).toBe("dark");
+    expect(el?.getAttribute("size")).toBe("large");
     expect(el?.getAttribute("testid")).toBe("test-id");
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");

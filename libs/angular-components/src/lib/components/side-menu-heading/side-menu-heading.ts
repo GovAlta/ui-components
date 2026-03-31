@@ -15,7 +15,11 @@ import { NgTemplateOutlet } from "@angular/common";
   imports: [NgTemplateOutlet],
   template: `
     @if (isReady) {
-      <goa-side-menu-heading [attr.testid]="testId" [attr.icon]="icon">
+      <goa-side-menu-heading
+        [attr.version]="version"
+        [attr.testid]="testId"
+        [attr.icon]="icon"
+      >
         <ng-content />
         <span slot="meta">
           <ng-container [ngTemplateOutlet]="meta"></ng-container>
@@ -27,6 +31,7 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabSideMenuHeading implements OnInit {
   isReady = false;
+  version = "2";
   @Input() icon!: GoabIconType;
   @Input() testId?: string;
   @Input() meta!: TemplateRef<any>;

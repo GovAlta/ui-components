@@ -12,18 +12,21 @@ import { By } from "@angular/platform-browser";
       [heading]="heading"
       [leadingIcon]="leadingIcon"
       [testId]="testId"
+      [slotName]="slotName"
     >
-      <a href="#">Home</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#accounts">Accounts</a>
     </goab-app-header-menu>
   `,
 })
 class TestAppHeaderMenuComponent {
-  heading = "Test heading";
+  heading?: string;
   leadingIcon?: GoabIconType;
   testId?: string;
+  slotName?: string;
 }
 
-describe("GoABAppHeaderMenu", () => {
+describe("GoabAppHeaderMenu", () => {
   let fixture: ComponentFixture<TestAppHeaderMenuComponent>;
   let component: TestAppHeaderMenuComponent;
 
@@ -35,21 +38,76 @@ describe("GoABAppHeaderMenu", () => {
 
     fixture = TestBed.createComponent(TestAppHeaderMenuComponent);
     component = fixture.componentInstance;
+  }));
 
-    component.leadingIcon = "accessibility";
-    component.testId = "foo";
-
+  it("should render with heading", fakeAsync(() => {
+    component.heading = "Menu label";
     fixture.detectChanges();
     tick();
     fixture.detectChanges();
+
+    const el = fixture.debugElement.query(By.css("goa-app-header-menu")).nativeElement;
+    expect(el).toBeTruthy();
+    expect(el.getAttribute("heading")).toBe("Menu label");
   }));
 
-  it("should render", () => {
-    const el = fixture.debugElement.query(By.css("goa-app-header-menu")).nativeElement;
+  it("should render all properties", fakeAsync(() => {
+    component.heading = "Menu label";
+    component.leadingIcon = "search";
+    component.testId = "my-menu";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
 
-    expect(el?.getAttribute("heading")).toBe(component.heading);
-    expect(el?.getAttribute("leadingicon")).toBe(component.leadingIcon);
-    expect(el?.getAttribute("testid")).toBe(component.testId);
-    expect(el?.innerHTML).toContain("Home");
-  });
+    const el = fixture.debugElement.query(By.css("goa-app-header-menu")).nativeElement;
+    expect(el.getAttribute("heading")).toBe("Menu label");
+    expect(el.getAttribute("leadingicon")).toBe("search");
+    expect(el.getAttribute("testid")).toBe("my-menu");
+  }));
+
+  it("should render projected content", fakeAsync(() => {
+    component.heading = "Menu label";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const el = fixture.debugElement.query(By.css("goa-app-header-menu")).nativeElement;
+    expect(el.querySelector("a[href='#dashboard']")).toBeTruthy();
+    expect(el.querySelector("a[href='#accounts']")).toBeTruthy();
+  }));
+
+  it("should set slot attribute on host element when slotName is provided", fakeAsync(() => {
+    component.heading = "Menu label";
+    component.slotName = "navigation";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const host = fixture.debugElement.query(
+      By.css("goab-app-header-menu"),
+    ).nativeElement;
+    expect(host.getAttribute("slot")).toBe("navigation");
+  }));
+
+  it("should not set slot attribute when slotName is not provided", fakeAsync(() => {
+    component.heading = "Menu label";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const host = fixture.debugElement.query(
+      By.css("goab-app-header-menu"),
+    ).nativeElement;
+    expect(host.getAttribute("slot")).toBeNull();
+  }));
+
+  it("should render without leadingIcon", fakeAsync(() => {
+    component.heading = "Menu label";
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const el = fixture.debugElement.query(By.css("goa-app-header-menu")).nativeElement;
+    expect(el.getAttribute("leadingicon")).toBeNull();
+  }));
 });

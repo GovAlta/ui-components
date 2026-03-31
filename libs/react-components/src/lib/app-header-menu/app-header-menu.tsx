@@ -8,14 +8,6 @@ interface WCProps {
   testid?: string;
 }
 
-/* eslint-disable-next-line */
-export interface GoabAppHeaderMenuProps extends DataAttributes {
-  heading: string;
-  leadingIcon?: GoabIconType;
-  testId?: string;
-  children?: ReactNode;
-}
-
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -25,14 +17,23 @@ declare module "react" {
   }
 }
 
+export interface GoabAppHeaderMenuProps extends DataAttributes {
+  heading: string;
+  leadingIcon?: GoabIconType;
+  testId?: string;
+  slotName?: string;
+  children?: ReactNode;
+}
+
 export function GoabAppHeaderMenu({
   children,
+  slotName,
   ...rest
 }: GoabAppHeaderMenuProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (
-    <goa-app-header-menu {..._props}>
+    <goa-app-header-menu slot={slotName} {..._props}>
       {children}
     </goa-app-header-menu>
   );

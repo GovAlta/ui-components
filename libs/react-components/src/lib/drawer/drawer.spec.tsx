@@ -6,7 +6,7 @@ const noop = () => {
   /* nothing */
 };
 
-describe("Drawer", () => {
+describe("GoabDrawer", () => {
   it("should render", async () => {
     const content = render(
       <GoabDrawer position="bottom" onClose={noop}>

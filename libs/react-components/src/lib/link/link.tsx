@@ -1,5 +1,11 @@
 import { ReactNode } from "react";
-import { GoabIconType, Margins, DataAttributes } from "@abgov/ui-components-common";
+import {
+  GoabIconType,
+  GoabLinkColor,
+  GoabLinkSize,
+  Margins,
+  DataAttributes,
+} from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
 interface WCProps extends Margins {
@@ -9,14 +15,27 @@ interface WCProps extends Margins {
   actionArgs?: string;
   actionArg?: string;
   testid?: string;
+  color?: GoabLinkColor;
+  size?: GoabLinkSize;
 }
 
-interface GoabLinkProps extends Margins, DataAttributes {
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-link": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
+export interface GoabLinkProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   trailingIcon?: GoabIconType;
   action?: string;
   actionArgs?: Record<string, unknown>;
   actionArg?: string;
+  color?: GoabLinkColor;
+  size?: GoabLinkSize;
   testId?: string;
   children: ReactNode;
 }
@@ -24,10 +43,12 @@ interface GoabLinkProps extends Margins, DataAttributes {
 export function GoabLink({
   actionArgs,
   actionArg,
+  color = "interactive",
+  size = "medium",
   children,
   ...rest
 }: GoabLinkProps) {
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ color, size, ...rest }, lowercase);
 
   return (
     <goa-link

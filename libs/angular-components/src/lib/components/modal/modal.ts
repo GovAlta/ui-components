@@ -22,6 +22,7 @@ import { NgTemplateOutlet } from "@angular/common";
   template: `
     @if (isReady) {
       <goa-modal
+        [attr.version]="version"
         [attr.calloutvariant]="calloutVariant"
         [attr.open]="open"
         [attr.maxwidth]="maxWidth"
@@ -52,6 +53,7 @@ import { NgTemplateOutlet } from "@angular/common";
 })
 export class GoabModal implements OnInit {
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {}
 

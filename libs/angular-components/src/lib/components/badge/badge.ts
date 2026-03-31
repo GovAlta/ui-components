@@ -1,4 +1,9 @@
-import { GoabBadgeType, GoabIconType } from "@abgov/ui-components-common";
+import {
+  GoabBadgeType,
+  GoabIconType,
+  GoabBadgeSize,
+  GoabBadgeEmphasis,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -7,6 +12,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from "@angular/core";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -15,6 +21,9 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-badge
+        [attr.version]="version"
+        [attr.size]="size"
+        [attr.emphasis]="emphasis"
         [attr.type]="type"
         [attr.icon]="icon ? 'true' : 'false'"
         [attr.icontype]="iconType"
@@ -45,9 +54,12 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
   // Ensure boolean input; attribute only set when true so default behaviour is false
   @Input({ transform: booleanAttribute }) icon?: boolean;
   @Input() iconType?: GoabIconType;
+  @Input() size?: GoabBadgeSize = "medium";
+  @Input() emphasis?: GoabBadgeEmphasis = "strong";
   @Input() ariaLabel?: string;
 
   isReady = false;
+  version = "2";
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

@@ -20,7 +20,7 @@ import { NgTemplateOutlet } from "@angular/common";
         [attr.heading]="getHeadingAsString()"
       >
         <ng-content />
-        @if (isHeadingTemplate()) {
+        @if (typeof heading !== "string") {
           <div slot="heading">
             <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
           </div>
@@ -44,10 +44,6 @@ export class GoabTab implements OnInit {
       this.isReady = true;
       this.cdr.detectChanges();
     });
-  }
-
-  isHeadingTemplate(): boolean {
-    return typeof this.heading !== "string";
   }
 
   getHeadingAsString(): string {

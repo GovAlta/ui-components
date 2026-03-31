@@ -1,4 +1,4 @@
-import { GoabTableSortDirection } from "@abgov/ui-components-common";
+import { GoabTableSortDirection, GoabTableSortOrder } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -15,6 +15,7 @@ import {
       <goa-table-sort-header
         [attr.name]="name"
         [attr.direction]="direction"
+        [attr.sort-order]="sortOrder"
       >
         <ng-content />
       </goa-table-sort-header>
@@ -27,6 +28,8 @@ export class GoabTableSortHeader implements OnInit {
   isReady = false;
   @Input() name?: string;
   @Input() direction?: GoabTableSortDirection = "none";
+  @Input() sortOrder?: GoabTableSortOrder;
+
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {

@@ -1,4 +1,7 @@
-import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  GoabCheckboxOnChangeDetail,
+  GoabCheckboxSize,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -19,9 +22,10 @@ import { GoabControlValueAccessor } from "../base.component";
 @Component({
   standalone: true,
   selector: "goab-checkbox",
-  template: ` @if (isReady) {
+  template: `@if (isReady) {
     <goa-checkbox
       #goaComponentRef
+      [attr.version]="version"
       [attr.name]="name"
       [checked]="checked"
       [disabled]="disabled"
@@ -35,6 +39,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.revealarialabel]="revealArialLabel"
       [id]="id"
       [attr.maxwidth]="maxWidth"
+      [attr.size]="size"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -45,11 +50,11 @@ import { GoabControlValueAccessor } from "../base.component";
       <div slot="description">
         <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
       </div>
-      <div slot="reveal">
-        @if (reveal) {
+      @if (reveal) {
+        <div slot="reveal">
           <ng-container [ngTemplateOutlet]="reveal"></ng-container>
-        }
-      </div>
+        </div>
+      }
     </goa-checkbox>
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -64,6 +69,7 @@ import { GoabControlValueAccessor } from "../base.component";
 })
 export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   isReady = false;
+  version = "2";
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -92,6 +98,7 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
   @Input() reveal?: TemplateRef<any>;
   @Input() revealArialLabel?: string;
   @Input() maxWidth?: string;
+  @Input() size?: GoabCheckboxSize = "default";
 
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();
 

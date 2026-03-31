@@ -1,6 +1,25 @@
 import { useEffect } from "react";
 import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 
+interface WCProps {
+  value: string;
+  label?: string;
+  filter?: string;
+  mount?: GoabDropdownItemMountType;
+
+  // @deprecated
+  name?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-dropdown-item": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
 export interface GoabDropdownItemProps {
   value: string;
   label?: string;

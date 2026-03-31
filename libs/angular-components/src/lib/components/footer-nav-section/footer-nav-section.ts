@@ -9,17 +9,15 @@ import {
 @Component({
   standalone: true,
   selector: "goab-app-footer-nav-section",
-  template: `
-    @if (isReady) {
-      <goa-app-footer-nav-section
-        [attr.maxcolumncount]="maxColumnCount"
-        [attr.heading]="heading"
-        [attr.testid]="testId"
-      >
-        <ng-content />
-      </goa-app-footer-nav-section>
-    }
-  `,
+  template: `@if (isReady) {
+    <goa-app-footer-nav-section
+      [attr.maxcolumncount]="maxColumnCount"
+      [attr.heading]="heading"
+      [attr.testid]="testId"
+    >
+      <ng-content />
+    </goa-app-footer-nav-section>
+  }`,
   styles: [":host { width: 100%; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

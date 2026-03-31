@@ -1,5 +1,7 @@
 import {
+  GoabButtonSize,
   GoabButtonType,
+  GoabButtonVariant,
   GoabIconType,
   GoabMenuButtonOnActionDetail,
 } from "@abgov/ui-components-common";
@@ -13,14 +15,17 @@ import {
 
 @Component({
   standalone: true,
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: "goab-menu-button",
   template: `
     <goa-menu-button
       [attr.text]="text"
       [attr.type]="type"
+      [attr.size]="size"
+      [attr.variant]="variant"
+      version="2"
       [attr.max-width]="maxWidth"
       [attr.leading-icon]="leadingIcon"
+      [attr.aria-label]="ariaLabel"
       [attr.testid]="testId"
       (_action)="_onAction($event)"
     >
@@ -32,8 +37,11 @@ import {
 export class GoabMenuButton {
   @Input() text?: string;
   @Input() type?: GoabButtonType;
+  @Input() size?: GoabButtonSize;
+  @Input() variant?: GoabButtonVariant;
   @Input() maxWidth?: string;
   @Input() leadingIcon?: GoabIconType;
+  @Input() ariaLabel?: string;
   @Input() testId?: string;
   @Output() onAction = new EventEmitter<GoabMenuButtonOnActionDetail>();
 

@@ -4,7 +4,7 @@ import { fireEvent } from "@testing-library/dom";
 import { describe, it, expect, vi } from "vitest";
 import { GoabNotificationType } from "@abgov/ui-components-common";
 
-describe("Notification Banner", () => {
+describe("GoabNotification", () => {
   describe("type", () => {
     (["important", "information", "emergency", "event"] as const).forEach(
       (type: GoabNotificationType) => {
@@ -41,5 +41,16 @@ describe("Notification Banner", () => {
     );
     const el = document.querySelector("goa-notification");
     expect(el?.getAttribute("ariaLive")).toEqual("assertive");
+  });
+
+  it("should render notification banner with emphasis and compact", async () => {
+    render(
+      <GoabNotification type="information" emphasis="low" compact>
+        Information to the user goes in the content
+      </GoabNotification>,
+    );
+    const el = document.querySelector("goa-notification");
+    expect(el?.getAttribute("emphasis")).toEqual("low");
+    expect(el?.getAttribute("compact")).toEqual("true");
   });
 });

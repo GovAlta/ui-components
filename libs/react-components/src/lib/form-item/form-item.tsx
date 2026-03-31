@@ -1,6 +1,7 @@
 import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
+  GoabFormItemType,
   Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 
@@ -18,6 +19,17 @@ interface WCProps extends Margins {
   name?: string;
   id?: string;
   testid?: string;
+  type?: GoabFormItemType;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-form-item": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
 }
 
 export interface GoabFormItemProps extends Margins, DataAttributes {
@@ -27,6 +39,7 @@ export interface GoabFormItemProps extends Margins, DataAttributes {
   error?: string | React.ReactNode;
   helpText?: string | React.ReactNode;
   maxWidth?: string;
+  type?: GoabFormItemType;
   /**
    * Public form: to arrange fields in the summary
    */
@@ -45,9 +58,10 @@ export function GoabFormItem({
   helpText,
   publicFormSummaryOrder,
   children,
+  type = "",
   ...rest
 }: GoabFormItemProps): JSX.Element {
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ type, ...rest }, lowercase);
 
   return (
     <goa-form-item
@@ -55,6 +69,7 @@ export function GoabFormItem({
       helptext={typeof helpText === "string" ? helpText : undefined}
       public-form-summary-order={publicFormSummaryOrder}
       {..._props}
+      version="2"
     >
       {error && typeof error !== "string" && <div slot="error">{error}</div>}
       {helpText && typeof helpText !== "string" && <div slot="helptext">{helpText}</div>}

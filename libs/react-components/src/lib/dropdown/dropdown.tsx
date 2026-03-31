@@ -1,5 +1,6 @@
 import {
   GoabDropdownOnChangeDetail,
+  GoabDropdownSize,
   GoabIconType,
   Margins, DataAttributes,
 } from "@abgov/ui-components-common";
@@ -25,6 +26,20 @@ interface WCProps extends Margins {
   id?: string;
   autocomplete?: string;
   testid?: string;
+  size?: GoabDropdownSize;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface IntrinsicElements {
+      "goa-dropdown": WCProps & React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
+    }
+  }
 }
 
 export interface GoabDropdownProps extends Margins, DataAttributes {
@@ -49,6 +64,7 @@ export interface GoabDropdownProps extends Margins, DataAttributes {
   width?: string;
   maxWidth?: string;
   autoComplete?: string;
+  size?: GoabDropdownSize;
   /***
    * @deprecated This property has no effect and will be removed in a future version
    */
@@ -75,11 +91,12 @@ export function GoabDropdown({
   native,
   relative,
   children,
+  size = "default",
   ...rest
 }: GoabDropdownProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(rest, lowercase);
+  const _props = transformProps<WCProps>({ size, ...rest }, lowercase);
 
   useEffect(() => {
     if (!el.current) {
@@ -111,6 +128,7 @@ export function GoabDropdown({
       native={native ? "true" : undefined}
       relative={relative ? "true" : undefined}
       {..._props}
+      version="2"
     >
       {children}
     </goa-dropdown>

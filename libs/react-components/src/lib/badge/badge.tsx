@@ -1,5 +1,7 @@
 import {
   DataAttributes,
+  GoabBadgeEmphasis,
+  GoabBadgeSize,
   GoabBadgeType,
   GoabIconType,
   Margins,
@@ -14,6 +16,18 @@ interface WCProps extends Margins {
   arialabel?: string;
   testid?: string;
   icontype?: GoabIconType;
+  size?: GoabBadgeSize;
+  emphasis?: GoabBadgeEmphasis;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-badge": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
 }
 
 export interface GoabBadgeProps extends Margins, DataAttributes {
@@ -23,6 +37,8 @@ export interface GoabBadgeProps extends Margins, DataAttributes {
   testId?: string;
   ariaLabel?: string;
   iconType?: GoabIconType;
+  size?: GoabBadgeSize;
+  emphasis?: GoabBadgeEmphasis;
 }
 
 /**
@@ -43,8 +59,14 @@ function getIconValue(icon?: boolean, iconType?: GoabIconType): "true" | "false"
   return iconType ? "true" : "false";
 }
 
-export function GoabBadge({ icon, iconType, ...rest }: GoabBadgeProps): JSX.Element {
-  const _props = transformProps<WCProps>(rest, lowercase);
+export function GoabBadge({
+  icon,
+  iconType,
+  size = "medium",
+  emphasis = "strong",
+  ...rest
+}: GoabBadgeProps): JSX.Element {
+  const _props = transformProps<WCProps>({ size, emphasis, ...rest }, lowercase);
 
   return (
     <goa-badge
@@ -52,118 +74,9 @@ export function GoabBadge({ icon, iconType, ...rest }: GoabBadgeProps): JSX.Elem
       icon={getIconValue(icon, iconType)}
       icontype={iconType}
       {..._props}
-    />
-  );
-}
-
-/**
- * @deprecated
- */
-export function GoabInfoBadge({
-  content,
-  testId,
-  icon,
-  mt,
-  mr,
-  mb,
-  ml,
-  ariaLabel,
-}: GoabBadgeProps): JSX.Element {
-  return (
-    <GoabBadge
-      type="information"
-      icon={icon}
-      content={content}
-      testId={testId}
-      ariaLabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    />
-  );
-}
-
-/**
- * @deprecated
- */
-export function GoabSuccessBadge({
-  content,
-  testId,
-  icon,
-  mt,
-  mr,
-  mb,
-  ml,
-  ariaLabel,
-}: GoabBadgeProps): JSX.Element {
-  return (
-    <GoabBadge
-      type="success"
-      icon={icon}
-      content={content}
-      ariaLabel={ariaLabel}
-      testId={testId}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    />
-  );
-}
-
-/**
- * @deprecated
- */
-export function GoabImportantBadge({
-  content,
-  testId,
-  icon,
-  mt,
-  mr,
-  mb,
-  ml,
-  ariaLabel,
-}: GoabBadgeProps): JSX.Element {
-  return (
-    <GoabBadge
-      type="important"
-      icon={icon}
-      content={content}
-      testId={testId}
-      ariaLabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
-    />
-  );
-}
-
-/**
- * @deprecated
- */
-export function GoabEmergencyBadge({
-  content,
-  testId,
-  icon,
-  mt,
-  mr,
-  mb,
-  ml,
-  ariaLabel,
-}: GoabBadgeProps): JSX.Element {
-  return (
-    <GoabBadge
-      type="emergency"
-      icon={icon}
-      content={content}
-      testId={testId}
-      ariaLabel={ariaLabel}
-      mt={mt}
-      mr={mr}
-      mb={mb}
-      ml={ml}
+      version="2"
+      size={size}
+      emphasis={emphasis}
     />
   );
 }

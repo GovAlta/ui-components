@@ -11,18 +11,16 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
 @Component({
   standalone: true,
   selector: "goab-dropdown-item",
-  template: `
-    @if (isReady) {
-      <goa-dropdown-item
-        [value]="value"
-        [label]="label"
-        [attr.filter]="filter"
-        [attr.name]="name"
-        [attr.mount]="mountType"
-      >
-      </goa-dropdown-item>
-    }
-  `,
+  template: ` @if (isReady) {
+    <goa-dropdown-item
+      [value]="value"
+      [label]="label"
+      [attr.filter]="filter"
+      [attr.name]="name"
+      [attr.mount]="mountType"
+    >
+    </goa-dropdown-item>
+  }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDropdownItem implements OnInit {
