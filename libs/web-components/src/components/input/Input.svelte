@@ -305,8 +305,7 @@
   function onKeyUp(e: Event) {
     const input = e.target as HTMLInputElement;
 
-    if (!input) return;
-    if (isReadonly) return;
+    if (!input || isReadonly) return;
 
     input.dispatchEvent(
       new CustomEvent("_keyPress", {
