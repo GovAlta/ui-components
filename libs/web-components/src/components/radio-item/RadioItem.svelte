@@ -398,7 +398,6 @@
   .radio.v2 ~ .reveal.visible.has-content {
     padding: var(--goa-radio-reveal-padding, var(--goa-space-l));
     border-left: var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200));
-    width: calc(100% - calc(var(--goa-space-s) - 1px));
   }
 
   .radio.v2.compact ~ .reveal.visible.has-content {
