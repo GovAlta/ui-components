@@ -4,15 +4,22 @@
   "sourceRoot": "libs/react-components/src",
   "projectType": "library",
   "tags": [],
-  "implicitDependencies": ["web-components", "common"],
+  "implicitDependencies": [
+    "web-components",
+    "common"
+  ],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/react-components",
@@ -30,9 +37,11 @@
     },
     "test": {
       "executor": "@nx/vitest:test",
-      "outputs": ["{options.reportsDirectory}"],
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
-        "reportsDirectory": "../../coverage/libs/react-components"
+        "reportsDirectory": "{projectRoot}/../../coverage/libs/react-components"
       }
     },
     "release": {
