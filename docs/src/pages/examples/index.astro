@@ -18,9 +18,10 @@ import { ExamplesGrid } from '../../components/ExamplesGrid';
 
 // Get all examples
 const allExamples = await getCollection('examples');
+const visibleExamples = allExamples.filter((example) => !example.data.hidden);
 
 // Sort by title (default)
-const sortedExamples = allExamples.sort((a, b) =>
+const sortedExamples = visibleExamples.sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
 );
 

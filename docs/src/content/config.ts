@@ -145,6 +145,9 @@ const examples = defineCollection({
     // Status
     status: z.enum(["published", "draft", "deprecated"]).default("published"),
 
+    // Visibility
+    hidden: z.boolean().optional(), // Hide from examples listing, routes, and search
+
     // Preview image (optional)
     previewImage: z.string().optional(),
 

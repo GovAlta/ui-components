@@ -1,0 +1,127 @@
+{
+  "componentSlug": "dropdown-item",
+  "extractedFrom": "libs/web-components/src/components/dropdown/DropdownItem.svelte",
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "filter",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text used to filter and match this item in typeahead search."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Display label for the dropdown item."
+        },
+        {
+          "name": "mountType",
+          "type": "GoabDropdownItemMountType",
+          "required": false,
+          "default": null,
+          "description": "Controls how the item is registered with the parent dropdown."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The value submitted when this item is selected."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "filter",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text used to filter and match this item in typeahead search."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Display label for the dropdown item."
+        },
+        {
+          "name": "mountType",
+          "type": "GoabDropdownItemMountType",
+          "required": false,
+          "default": null,
+          "description": "Controls how the item is registered with the parent dropdown."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the name attribute of the dropdown item."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The value submitted when this item is selected."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "filter",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Text used to filter and match this item in typeahead search."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Display label for the dropdown item."
+        },
+        {
+          "name": "mount",
+          "type": "\"append\" | \"prepend\" | \"reset\"",
+          "values": [
+            "append",
+            "prepend",
+            "reset"
+          ],
+          "required": false,
+          "default": "reset",
+          "description": "Controls how the item is registered with the parent dropdown."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The value submitted when this item is selected."
+        }
+      ],
+      "events": [],
+      "slots": []
+    }
+  }
+}

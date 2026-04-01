@@ -66,7 +66,7 @@
   export let disabled: string = "false";
   /** Shows an error state on this radio option. */
   export let error: string = "false";
-  /** Sets this radio option as checked/selected. */
+  /** @internal Sets this radio option as checked/selected. */
   export let checked: string = "false";
   /** Defines how this option will be announced by screen readers. */
   export let arialabel: string = "";
@@ -209,7 +209,7 @@
       checked = fromBoolean(data.checked);
       description = data.description;
       name = data.name;
-      revealarialabel = data.revealAriaLabel;
+      revealarialabel = data.revealAriaLabel || "";
       _version = data.version || "1";
       _compact = data.compact || false;
     });

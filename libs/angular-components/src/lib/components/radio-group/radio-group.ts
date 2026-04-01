@@ -63,6 +63,8 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   version = "2";
   /** The name for the radio group. Used for accessibility and change events. */
   @Input() name?: string;
+  /** The currently selected value in the radio group. */
+  @Input() override value?: string;
   /** Sets the layout direction. 'vertical' stacks items, 'horizontal' places them in a row. */
   @Input() orientation?: GoabRadioGroupOrientation;
   /** Defines how the radio group will be announced by screen readers. */

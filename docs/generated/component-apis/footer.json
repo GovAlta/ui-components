@@ -1,49 +1,137 @@
 {
   "componentSlug": "footer",
   "extractedFrom": "libs/web-components/src/components/footer/Footer.svelte",
-  "props": [
-    {
-      "name": "maxcontentwidth",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The maximum width of the main content area"
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "url",
-      "type": "string",
-      "required": false,
-      "default": "https://alberta.ca",
-      "description": "URL for the Government of Alberta logo link. Set to empty string to disable the link."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The maximum width of the main content area."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "https://alberta.ca",
+          "description": "URL for the Government of Alberta logo link. Set to empty string to disable the link."
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": ""
-    }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "nav",
-      "description": ""
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "type": "GoabAppFooterMetaSection",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "nav",
+          "type": "GoabAppFooterNavSection",
+          "description": "",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "meta",
-      "description": ""
+    "angular": {
+      "props": [
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The maximum width of the main content area."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "URL for the Government of Alberta logo link. Set to empty string to disable the link."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "type": "GoabAppFooterMetaSection",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "nav",
+          "type": "GoabAppFooterNavSection",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The maximum width of the main content area"
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "https://alberta.ca",
+          "description": "URL for the Government of Alberta logo link. Set to empty string to disable the link."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "type": "goa-app-footer-meta-section",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "nav",
+          "type": "goa-app-footer-nav-section",
+          "description": "",
+          "required": false
+        }
+      ]
     }
-  ]
+  }
 }

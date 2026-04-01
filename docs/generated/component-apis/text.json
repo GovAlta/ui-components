@@ -1,103 +1,248 @@
 {
   "componentSlug": "text",
   "extractedFrom": "libs/web-components/src/components/text/Text.svelte",
-  "props": [
-    {
-      "name": "as",
-      "type": "\"span\" | \"div\" | \"p\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\"",
-      "values": [
-        "span",
-        "div",
-        "p",
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "color",
+          "type": "GoabTextColor",
+          "required": false,
+          "default": "primary",
+          "description": "Sets the text colour."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the id attribute on the element."
+        },
+        {
+          "name": "maxWidth",
+          "type": "GoabTextMaxWidth",
+          "required": false,
+          "default": "65ch",
+          "description": "Sets the max width."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "size",
+          "type": "GoabTextSize",
+          "required": false,
+          "default": null,
+          "description": "Overrides the text size."
+        },
+        {
+          "name": "tag",
+          "type": "GoabTextTextElement | GoabTextHeadingElement",
+          "values": [
+            "GoabTextTextElement",
+            "GoabTextHeadingElement"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The HTML element to render. Use semantic elements like 'h1'-'h6' for headings."
+        }
       ],
-      "required": false,
-      "default": "div",
-      "description": "The HTML element to render. Use semantic elements like 'h1'-'h6' for headings."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "maxWidth",
-      "type": "string | \"none\"",
-      "values": [
-        "string",
-        "none"
+    "angular": {
+      "props": [
+        {
+          "name": "color",
+          "type": "GoabTextColor",
+          "required": false,
+          "default": null,
+          "description": "Sets the text colour."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the id attribute on the host element."
+        },
+        {
+          "name": "maxWidth",
+          "type": "GoabTextMaxWidth",
+          "required": false,
+          "default": null,
+          "description": "Sets the max width."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "GoabTextSize",
+          "required": false,
+          "default": null,
+          "description": "Overrides the text size."
+        },
+        {
+          "name": "tag",
+          "type": "GoabTextTextElement | GoabTextHeadingElement",
+          "values": [
+            "GoabTextTextElement",
+            "GoabTextHeadingElement"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The HTML element to render. Use semantic elements like 'h1'-'h6' for headings."
+        }
       ],
-      "required": false,
-      "default": "65ch",
-      "description": "Sets the max width."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "size",
-      "type": "\"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
-      "values": [
-        "heading-xl",
-        "heading-l",
-        "heading-m",
-        "heading-s",
-        "heading-xs",
-        "heading-2xs",
-        "body-l",
-        "body-m",
-        "body-s",
-        "body-xs"
+    "webComponents": {
+      "props": [
+        {
+          "name": "as",
+          "type": "\"span\" | \"div\" | \"p\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\"",
+          "values": [
+            "span",
+            "div",
+            "p",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ],
+          "required": false,
+          "default": "div",
+          "description": "The HTML element to render. Use semantic elements like 'h1'-'h6' for headings."
+        },
+        {
+          "name": "color",
+          "type": "\"primary\" | \"secondary\"",
+          "values": [
+            "primary",
+            "secondary"
+          ],
+          "required": false,
+          "default": "primary",
+          "description": "Sets the text colour."
+        },
+        {
+          "name": "maxwidth",
+          "type": "string | \"none\"",
+          "values": [
+            "string",
+            "none"
+          ],
+          "required": false,
+          "default": "65ch",
+          "description": "Sets the max width."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "\"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
+          "values": [
+            "heading-xl",
+            "heading-l",
+            "heading-m",
+            "heading-s",
+            "heading-xs",
+            "heading-2xs",
+            "body-l",
+            "body-m",
+            "body-s",
+            "body-xs"
+          ],
+          "required": false,
+          "default": null,
+          "description": "Overrides the text size."
+        }
       ],
-      "required": false,
-      "default": null,
-      "description": "Overrides the text size."
-    },
-    {
-      "name": "color",
-      "type": "\"primary\" | \"secondary\"",
-      "values": [
-        "primary",
-        "secondary"
-      ],
-      "required": false,
-      "default": "primary",
-      "description": "Sets the text colour."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

@@ -1,66 +1,179 @@
 {
   "componentSlug": "tabs",
   "extractedFrom": "libs/web-components/src/components/tabs/Tabs.svelte",
-  "props": [
-    {
-      "name": "initialtab",
-      "type": "number",
-      "required": false,
-      "default": "-1",
-      "description": "The initially active tab (1-based index). If not set, the first tab is active."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "variant",
-      "type": "\"default\" | \"segmented\"",
-      "values": [
-        "default",
-        "segmented"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "initialTab",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "The initially active tab (1-based index). If not set, the first tab is active."
+        },
+        {
+          "name": "navigation",
+          "type": "GoabTabsNavigation",
+          "required": false,
+          "default": "hash",
+          "description": "Controls URL navigation mode on tab change."
+        },
+        {
+          "name": "orientation",
+          "type": "GoabTabsOrientation",
+          "required": false,
+          "default": "auto",
+          "description": "Tab layout orientation. \"auto\" stacks vertically on mobile, \"horizontal\" keeps horizontal on all screen sizes."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "GoabTabsVariant",
+          "required": false,
+          "default": "default",
+          "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
+        }
       ],
-      "required": false,
-      "default": "default",
-      "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
-    },
-    {
-      "name": "orientation",
-      "type": "\"auto\" | \"horizontal\"",
-      "values": [
-        "auto",
-        "horizontal"
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(detail: GoabTabsOnChangeDetail) => void",
+          "description": "Callback fired when the active tab changes.",
+          "frameworks": [
+            "react"
+          ]
+        }
       ],
-      "required": false,
-      "default": "auto",
-      "description": "Tab layout orientation. \"auto\" stacks vertically on mobile, \"horizontal\" keeps horizontal on all screen sizes."
-    }
-  ],
-  "events": [
-    {
-      "name": "onChange",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
+      "slots": []
     },
-    {
-      "name": "_change",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
+    "angular": {
+      "props": [
+        {
+          "name": "initialTab",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "The initially active tab (1-based index). If not set, the first tab is active."
+        },
+        {
+          "name": "navigation",
+          "type": "GoabTabsNavigation",
+          "required": false,
+          "default": null,
+          "description": "Sets the navigation mode for tab switching. \"hash\" updates the URL hash when switching tabs."
+        },
+        {
+          "name": "orientation",
+          "type": "GoabTabsOrientation",
+          "required": false,
+          "default": null,
+          "description": "Tab layout orientation. \"auto\" stacks vertically on mobile (default), \"horizontal\" keeps horizontal on all screen sizes."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "GoabTabsVariant",
+          "required": false,
+          "default": null,
+          "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(event: GoabTabsOnChangeDetail) => void",
+          "description": "Emits when the active tab changes. Emits the new tab index as GoabTabsOnChangeDetail.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "initialtab",
+          "type": "number",
+          "required": false,
+          "default": "-1",
+          "description": "The initially active tab (1-based index). If not set, the first tab is active."
+        },
+        {
+          "name": "navigation",
+          "type": "\"hash\" | \"none\"",
+          "values": [
+            "hash",
+            "none"
+          ],
+          "required": false,
+          "default": "hash",
+          "description": ""
+        },
+        {
+          "name": "orientation",
+          "type": "\"auto\" | \"horizontal\"",
+          "values": [
+            "auto",
+            "horizontal"
+          ],
+          "required": false,
+          "default": "auto",
+          "description": "Tab layout orientation. \"auto\" stacks vertically on mobile, \"horizontal\" keeps horizontal on all screen sizes."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "\"default\" | \"segmented\"",
+          "values": [
+            "default",
+            "segmented"
+          ],
+          "required": false,
+          "default": "default",
+          "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_change",
+          "type": "CustomEvent<{ tab: number }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

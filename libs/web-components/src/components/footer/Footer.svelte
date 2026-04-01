@@ -10,6 +10,7 @@
   export let testid: string = "";
   /** URL for the Government of Alberta logo link. Set to empty string to disable the link. */
   export let url: string = "https://alberta.ca";
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   let rootEl: HTMLElement;

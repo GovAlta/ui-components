@@ -1,140 +1,334 @@
 {
   "componentSlug": "badge",
   "extractedFrom": "libs/web-components/src/components/badge/Badge.svelte",
-  "props": [
-    {
-      "name": "type",
-      "type": "\"information\" | \"important\" | \"emergency\" | \"success\" | \"dark\" | \"midtone\" | \"light\" | \"archived\" | \"aqua\" | \"black\" | \"blue\" | \"green\" | \"orange\" | \"pink\" | \"red\" | \"violet\" | \"white\" | \"yellow\" | \"aqua-light\" | \"black-light\" | \"blue-light\" | \"green-light\" | \"orange-light\" | \"pink-light\" | \"red-light\" | \"violet-light\" | \"yellow-light\" | \"sky\" | \"prairie\" | \"lilac\" | \"pasture\" | \"sunset\" | \"dawn\" | \"default\"",
-      "typeLabel": "GoabBadgeType",
-      "values": [
-        "information",
-        "important",
-        "emergency",
-        "success",
-        "dark",
-        "midtone",
-        "light",
-        "archived",
-        "aqua",
-        "black",
-        "blue",
-        "green",
-        "orange",
-        "pink",
-        "red",
-        "violet",
-        "white",
-        "yellow",
-        "aqua-light",
-        "black-light",
-        "blue-light",
-        "green-light",
-        "orange-light",
-        "pink-light",
-        "red-light",
-        "violet-light",
-        "yellow-light",
-        "sky",
-        "prairie",
-        "lilac",
-        "pasture",
-        "sunset",
-        "dawn",
-        "default"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accessible label for screen readers."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text label of the badge."
+        },
+        {
+          "name": "emphasis",
+          "type": "GoabBadgeEmphasis",
+          "required": false,
+          "default": "strong",
+          "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
+        },
+        {
+          "name": "iconType",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon type to display in the badge."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "size",
+          "type": "GoabBadgeSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of the badge."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabBadgeType",
+          "required": true,
+          "default": null,
+          "description": "Sets the context and colour of the badge."
+        }
       ],
-      "required": true,
-      "default": null,
-      "description": "Defines the context and colour of the badge."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "content",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Text label of the badge."
-    },
-    {
-      "name": "icon",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "@deprecated Use icontype instead. Includes an icon in the badge.",
-      "deprecated": true
-    },
-    {
-      "name": "icontype",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon type to display in the badge."
-    },
-    {
-      "name": "ariaLabel",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Accessible label for screen readers."
-    },
-    {
-      "name": "size",
-      "type": "\"medium\" | \"large\"",
-      "typeLabel": "GoabBadgeSize",
-      "values": [
-        "medium",
-        "large"
+    "angular": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the accessible label for screen readers."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the text label of the badge."
+        },
+        {
+          "name": "emphasis",
+          "type": "GoabBadgeEmphasis",
+          "required": false,
+          "default": "strong",
+          "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
+        },
+        {
+          "name": "iconType",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Sets the icon type to display in the badge."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "size",
+          "type": "GoabBadgeSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of the badge."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabBadgeType",
+          "required": false,
+          "default": null,
+          "description": "Sets the context and colour of the badge."
+        }
       ],
-      "required": false,
-      "default": "medium",
-      "description": "Sets the size of the badge."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "emphasis",
-      "type": "",
-      "required": false,
-      "default": "strong",
-      "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+    "webComponents": {
+      "props": [
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Accessible label for screen readers."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Text label of the badge."
+        },
+        {
+          "name": "emphasis",
+          "type": "",
+          "required": false,
+          "default": "strong",
+          "description": "Sets the visual emphasis. 'subtle' for less prominent, 'strong' for more emphasis."
+        },
+        {
+          "name": "icontype",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon type to display in the badge."
+        },
+        {
+          "name": "justify-content",
+          "type": "\"center\" | \"flex-start\" | \"flex-end\" | \"space-between\" | \"\"",
+          "values": [
+            "center",
+            "flex-start",
+            "flex-end",
+            "space-between"
+          ],
+          "required": false,
+          "default": "",
+          "description": "justify-content value for the badge container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "min-width",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "min-width value for the badge container (e.g. \"20px\", \"var(--goa-space-m)\")."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "\"medium\" | \"large\"",
+          "typeLabel": "GoabBadgeSize",
+          "values": [
+            "medium",
+            "large"
+          ],
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of the badge."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"information\" | \"important\" | \"emergency\" | \"success\" | \"dark\" | \"midtone\" | \"light\" | \"archived\" | \"aqua\" | \"black\" | \"blue\" | \"green\" | \"orange\" | \"pink\" | \"red\" | \"violet\" | \"white\" | \"yellow\" | \"aqua-light\" | \"black-light\" | \"blue-light\" | \"green-light\" | \"orange-light\" | \"pink-light\" | \"red-light\" | \"violet-light\" | \"yellow-light\" | \"sky\" | \"prairie\" | \"lilac\" | \"pasture\" | \"sunset\" | \"dawn\" | \"default\"",
+          "typeLabel": "GoabBadgeType",
+          "values": [
+            "information",
+            "important",
+            "emergency",
+            "success",
+            "dark",
+            "midtone",
+            "light",
+            "archived",
+            "aqua",
+            "black",
+            "blue",
+            "green",
+            "orange",
+            "pink",
+            "red",
+            "violet",
+            "white",
+            "yellow",
+            "aqua-light",
+            "black-light",
+            "blue-light",
+            "green-light",
+            "orange-light",
+            "pink-light",
+            "red-light",
+            "violet-light",
+            "yellow-light",
+            "sky",
+            "prairie",
+            "lilac",
+            "pasture",
+            "sunset",
+            "dawn",
+            "default"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Defines the context and colour of the badge."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "typeLabel": "GoabBadgeVersion",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }
