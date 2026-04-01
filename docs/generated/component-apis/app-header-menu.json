@@ -1,57 +1,124 @@
 {
   "componentSlug": "app-header-menu",
   "extractedFrom": "libs/web-components/src/components/app-header-menu/AppHeaderMenu.svelte",
-  "props": [
-    {
-      "name": "heading",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "The menu heading text displayed as the dropdown trigger."
-    },
-    {
-      "name": "leadingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": true,
-      "default": null,
-      "description": "Icon displayed before the heading text."
-    },
-    {
-      "name": "type",
-      "type": "\"primary\" | \"secondary\"",
-      "values": [
-        "primary",
-        "secondary"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The menu heading text displayed as the dropdown trigger."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "slotName",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Slot name used to place this menu in the correct slot of the parent component."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
       ],
-      "required": false,
-      "default": "primary",
-      "description": "The menu style variant. Primary uses bold text, secondary uses regular weight."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
+    "angular": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The menu heading text displayed as the dropdown trigger."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "slotName",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the slot name for the component."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": "The header version this menu is used with."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "rootEl",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The menu heading text displayed as the dropdown trigger."
+        },
+        {
+          "name": "leadingicon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "rootEl",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"primary\" | \"secondary\"",
+          "values": [
+            "primary",
+            "secondary"
+          ],
+          "required": false,
+          "default": "primary",
+          "description": "The menu style variant. Primary uses bold text, secondary uses regular weight."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

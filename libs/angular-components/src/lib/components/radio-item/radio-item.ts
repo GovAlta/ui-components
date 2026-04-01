@@ -69,7 +69,7 @@ export class GoabRadioItem extends GoabBaseComponent implements OnInit {
   @Input() revealAriaLabel?: string;
   /** Disables this radio option. Also disabled if the parent RadioGroup is disabled. */
   @Input({ transform: booleanAttribute }) disabled?: boolean;
-  /** Sets this radio option as checked/selected. */
+  /** @internal Sets this radio option as checked/selected. */
   @Input({ transform: booleanAttribute }) checked?: boolean;
   /** Shows an error state on this radio option. */
   @Input({ transform: booleanAttribute }) error?: boolean;

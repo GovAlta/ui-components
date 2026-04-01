@@ -1,99 +1,274 @@
 {
   "componentSlug": "calendar",
   "extractedFrom": "libs/web-components/src/components/calendar/Calendar.svelte",
-  "props": [
-    {
-      "name": "name",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Name identifier for the calendar, included in change events."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "max",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "min",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Name identifier for the calendar, included in change events."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The currently selected date value in YYYY-MM-DD format."
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(details: GoabCalendarOnChangeDetail) => void",
+          "description": "Callback fired when the selected date changes.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "value",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The currently selected date value in YYYY-MM-DD format."
+    "angular": {
+      "props": [
+        {
+          "name": "max",
+          "type": "Date | string | undefined",
+          "values": [
+            "Date",
+            "string"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "min",
+          "type": "Date | string | undefined",
+          "values": [
+            "Date",
+            "string"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Name identifier for the calendar, included in change events."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "Date | string",
+          "values": [
+            "Date",
+            "string"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The currently selected date value in YYYY-MM-DD format."
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(event: GoabCalendarOnChangeDetail) => void",
+          "description": "Emits when the selected date changes. Emits the selected date details as GoabCalendarOnChangeDetail.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "min",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past."
-    },
-    {
-      "name": "max",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
-    },
-    {
-      "name": "bordered",
-      "type": "boolean",
-      "required": false,
-      "default": "true",
-      "description": "Shows a border around the calendar. Set to false when embedding within another component."
+    "webComponents": {
+      "props": [
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Shows a border around the calendar. Set to false when embedding within another component."
+        },
+        {
+          "name": "max",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "min",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Name identifier for the calendar, included in change events."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The currently selected date value in YYYY-MM-DD format."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_change",
+          "type": "CustomEvent<{ type: string; name: string; value: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onChange",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_change",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": []
+  }
 }

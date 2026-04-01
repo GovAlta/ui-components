@@ -179,7 +179,10 @@ export function GoabInput({
   onBlur,
   onKeyPress,
   ...rest
-}: GoabInputProps & { type?: GoabInputType }): JSX.Element {
+}: GoabInputProps & {
+  /** Sets the type of the input field. @default "text" */
+  type?: GoabInputType;
+}): JSX.Element {
   const ref = useRef<HTMLInputElement>(null);
 
   const _props = transformProps<WCProps>(

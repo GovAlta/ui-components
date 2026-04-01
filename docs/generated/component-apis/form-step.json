@@ -1,51 +1,87 @@
 {
   "componentSlug": "form-step",
   "extractedFrom": "libs/web-components/src/components/form-step/FormStep.svelte",
-  "props": [
-    {
-      "name": "text",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "The step label text displayed to users."
-    },
-    {
-      "name": "status",
-      "type": "\"complete\" | \"incomplete\" | \"not-started\"",
-      "values": [
-        "complete",
-        "incomplete",
-        "not-started"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "status",
+          "type": "GoabFormStepStatus",
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
       ],
-      "required": false,
-      "default": null,
-      "description": "The completion status of the step. Affects visual styling and icons."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "last",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Whether this is the last step in the form stepper. Affects styling when complete."
-    }
-  ],
-  "events": [
-    {
-      "name": "onClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
+    "angular": {
+      "props": [
+        {
+          "name": "status",
+          "type": "GoabFormStepStatus",
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "_click",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
+    "webComponents": {
+      "props": [
+        {
+          "name": "last",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether this is the last step in the form stepper. Affects styling when complete."
+        },
+        {
+          "name": "status",
+          "type": "\"complete\" | \"incomplete\" | \"not-started\"",
+          "values": [
+            "complete",
+            "incomplete",
+            "not-started"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The completion status of the step. Affects visual styling and icons."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The step label text displayed to users."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<{ step: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "slots": []
+  }
 }

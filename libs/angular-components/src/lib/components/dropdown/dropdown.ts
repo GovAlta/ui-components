@@ -83,7 +83,7 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   @Input() leadingIcon?: GoabIconType;
   /** Maximum height of the dropdown menu. Non-native only. */
   @Input() maxHeight?: string;
-  /** When true, allows multiple items to be selected. Not currently exposed. */
+  /** When true, allows multiple items to be selected. @internal */
   @Input({ transform: booleanAttribute }) multiselect?: boolean;
   /** When true will render the native select HTML element. */
   @Input({ transform: booleanAttribute }) native?: boolean;

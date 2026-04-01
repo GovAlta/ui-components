@@ -1,100 +1,244 @@
 {
   "componentSlug": "menu-button",
   "extractedFrom": "libs/web-components/src/components/menu-button/MenuButton.svelte",
-  "props": [
-    {
-      "name": "text",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The button label text. When provided, displays as a text button with a dropdown icon."
-    },
-    {
-      "name": "type",
-      "type": "\"primary\" | \"secondary\" | \"tertiary\"",
-      "values": [
-        "primary",
-        "secondary",
-        "tertiary"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": "Open menu",
+          "description": "Sets the aria-label for the icon button in icon-only mode."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the button text. When no text is provided, displays as an icon button."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the dropdown menu."
+        },
+        {
+          "name": "size",
+          "type": "GoabButtonSize",
+          "required": false,
+          "default": "normal",
+          "description": "Sets the size of the button."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The button label text. When provided, displays as a text button with a dropdown icon."
+        },
+        {
+          "name": "type",
+          "type": "GoabButtonType",
+          "required": false,
+          "default": "primary",
+          "description": "The button style variant."
+        },
+        {
+          "name": "variant",
+          "type": "GoabButtonVariant",
+          "required": false,
+          "default": "normal",
+          "description": "Sets the color variant for semantic meaning."
+        }
       ],
-      "required": false,
-      "default": "primary",
-      "description": "The button style variant."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "leadingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon displayed before the button text. When no text is provided, displays as an icon button."
-    },
-    {
-      "name": "maxWidth",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "Maximum width of the dropdown menu."
-    },
-    {
-      "name": "size",
-      "type": "\"normal\" | \"compact\"",
-      "values": [
-        "normal",
-        "compact"
+      "events": [
+        {
+          "name": "onAction",
+          "type": "(detail: GoabMenuButtonOnActionDetail) => void",
+          "description": "Callback fired when a menu action is selected.",
+          "frameworks": [
+            "react"
+          ]
+        }
       ],
-      "required": false,
-      "default": "normal",
-      "description": "Sets the size of the button."
+      "slots": []
     },
-    {
-      "name": "variant",
-      "type": "\"normal\" | \"destructive\"",
-      "values": [
-        "normal",
-        "destructive"
+    "angular": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the aria-label for the icon button in icon-only mode."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the button text. When no text is provided, displays as an icon button."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the dropdown menu."
+        },
+        {
+          "name": "size",
+          "type": "GoabButtonSize",
+          "required": false,
+          "default": null,
+          "description": "Sets the size of the button."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The button label text. When provided, displays as a text button with a dropdown icon."
+        },
+        {
+          "name": "type",
+          "type": "GoabButtonType",
+          "required": false,
+          "default": null,
+          "description": "The button style variant."
+        },
+        {
+          "name": "variant",
+          "type": "GoabButtonVariant",
+          "required": false,
+          "default": null,
+          "description": "Sets the color variant for semantic meaning."
+        }
       ],
-      "required": false,
-      "default": "normal",
-      "description": "Sets the color variant for semantic meaning."
+      "events": [
+        {
+          "name": "onAction",
+          "type": "(event: GoabMenuButtonOnActionDetail) => void",
+          "description": "Emits when a menu action is clicked. Emits the action detail.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "ariaLabel",
-      "type": "string",
-      "required": false,
-      "default": "Open menu",
-      "description": "Sets the aria-label for the icon button in icon-only mode."
+    "webComponents": {
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "required": false,
+          "default": "Open menu",
+          "description": "Sets the aria-label for the icon button in icon-only mode."
+        },
+        {
+          "name": "leading-icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the button text. When no text is provided, displays as an icon button."
+        },
+        {
+          "name": "max-width",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Maximum width of the dropdown menu."
+        },
+        {
+          "name": "size",
+          "type": "\"normal\" | \"compact\"",
+          "values": [
+            "normal",
+            "compact"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": "Sets the size of the button."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The button label text. When provided, displays as a text button with a dropdown icon."
+        },
+        {
+          "name": "type",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\"",
+          "values": [
+            "primary",
+            "secondary",
+            "tertiary"
+          ],
+          "required": false,
+          "default": "primary",
+          "description": "The button style variant."
+        },
+        {
+          "name": "variant",
+          "type": "\"normal\" | \"destructive\"",
+          "values": [
+            "normal",
+            "destructive"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": "Sets the color variant for semantic meaning."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_action",
+          "type": "CustomEvent<{ action?: string; size?: \"normal\" | \"compact\" }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onAction",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_action",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

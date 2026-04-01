@@ -29,7 +29,7 @@ declare module "react" {
 export interface GoabTooltipProps extends Margins, DataAttributes {
   /** Position of the tooltip with respect to the child element. @default "top" */
   position?: GoabTooltipPosition;
-  /** The content of the tooltip. Accepts a string or a ReactNode. */
+  /** The content of the tooltip. Accepts plain text or rich content. */
   content?: string | ReactNode;
   /** Horizontal alignment of the tooltip relative to the child element. @default "center" */
   hAlign?: GoabTooltipHorizontalAlignment;

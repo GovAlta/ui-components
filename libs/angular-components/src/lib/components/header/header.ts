@@ -10,8 +10,6 @@ import {
   inject,
 } from "@angular/core";
 
-import { GoabBaseComponent } from "../base.component";
-
 @Component({
   standalone: true,
   selector: "goab-app-header",
@@ -33,7 +31,7 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 /** Provide structure to help users find their way around the service. */
-export class GoabAppHeader extends GoabBaseComponent implements OnInit {
+export class GoabAppHeader implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   /** Sets the URL to link from the alberta.ca logo. A full url is required. */
@@ -46,6 +44,8 @@ export class GoabAppHeader extends GoabBaseComponent implements OnInit {
   @Input() maxContentWidth?: string;
   /** Sets the breakpoint in px for the full menu to display. */
   @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
 
   isReady = false;
   version = "2";

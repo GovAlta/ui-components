@@ -56,17 +56,17 @@ export class GoabChip extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
-  /** @deprecated Use GoAFilterChip instead. Icon displayed at the start of the chip. */
+  /** @deprecated Use GoabFilterChip (goab-filter-chip) instead. Icon displayed at the start of the chip. */
   @Input() leadingIcon?: GoabIconType | null;
-  /** @deprecated Use GoAFilterChip instead. Shows an error state on the chip. */
+  /** @deprecated Use GoabFilterChip (goab-filter-chip) instead. Shows an error state on the chip. */
   @Input({ transform: booleanAttribute }) error?: boolean;
-  /** @deprecated Use GoAFilterChip instead. When true, shows a delete icon and makes chip clickable. */
+  /** @deprecated Use GoabFilterChip (goab-filter-chip) instead. When true, shows a delete icon and makes chip clickable. */
   @Input({ transform: booleanAttribute }) deletable?: boolean;
-  /** @deprecated Use GoAFilterChip instead. The text content displayed in the chip. */
+  /** @deprecated Use GoabFilterChip (goab-filter-chip) instead. The text content displayed in the chip. */
   @Input() content?: string = "";
-  /** @deprecated Use GoAFilterChip instead. The chip variant style. */
+  /** @deprecated Use GoabFilterChip (goab-filter-chip) instead. The chip variant style. */
   @Input() variant?: GoabChipVariant;
-  /** @deprecated Use GoAFilterChip instead. The icon theme - outline or filled. */
+  /** @deprecated Use GoabFilterChip (goab-filter-chip) instead. The icon theme - outline or filled. */
   @Input() iconTheme?: GoabChipTheme;
 
   /** Emits when the chip is clicked. */

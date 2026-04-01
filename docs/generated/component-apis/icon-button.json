@@ -1,129 +1,386 @@
 {
   "componentSlug": "icon-button",
   "extractedFrom": "libs/web-components/src/components/icon-button/IconButton.svelte",
-  "props": [
-    {
-      "name": "icon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": true,
-      "default": null,
-      "description": "Sets the icon."
-    },
-    {
-      "name": "size",
-      "type": "IconSize",
-      "required": false,
-      "default": "medium",
-      "description": "Sets the size of button."
-    },
-    {
-      "name": "theme",
-      "type": "IconTheme",
-      "required": false,
-      "default": "outline",
-      "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
-    },
-    {
-      "name": "variant",
-      "type": "\"color\" | \"nocolor\" | \"light\" | \"dark\" | \"destructive\"",
-      "typeLabel": "GoabIconButtonVariant",
-      "values": [
-        "color",
-        "nocolor",
-        "light",
-        "dark",
-        "destructive"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Action identifier passed in click events for event delegation patterns."
+        },
+        {
+          "name": "actionArg",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Single argument value passed with the action in click events."
+        },
+        {
+          "name": "actionArgs",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": null,
+          "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the aria-label of the button."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Disables the button."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Sets the icon."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "size",
+          "type": "GoabIconSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of button."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "theme",
+          "type": "GoabIconTheme",
+          "required": false,
+          "default": "outline",
+          "description": "Sets the theme of the icon inside the button. \"outline\" for stroked icons, \"filled\" for solid icons."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the title of the button."
+        },
+        {
+          "name": "variant",
+          "type": "GoabIconButtonVariant",
+          "required": false,
+          "default": "color",
+          "description": "Styles the button to show color, light, dark or destructive action."
+        }
       ],
-      "required": false,
-      "default": "color",
-      "description": "Styles the button to show color, light, dark or destructive action."
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Callback fired when the icon button is clicked.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "title",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets the title of the button."
+    "angular": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Action identifier passed in click events for event delegation patterns."
+        },
+        {
+          "name": "actionArg",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Single argument value passed with the action in click events."
+        },
+        {
+          "name": "actionArgs",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": null,
+          "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the aria-label of the button."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Disables the button."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Sets the icon."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "size",
+          "type": "GoabIconSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of button."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "theme",
+          "type": "GoabIconTheme",
+          "required": false,
+          "default": "outline",
+          "description": "Sets the icon theme. \"outline\" for stroked icons, \"filled\" for solid icons."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the title of the button."
+        },
+        {
+          "name": "variant",
+          "type": "GoabIconButtonVariant",
+          "required": false,
+          "default": null,
+          "description": "Styles the button to show color, light, dark or destructive action."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Emits when the icon button is clicked.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "disabled",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Disables the button."
-    },
-    {
-      "name": "inverted",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, inverts the icon colors for use on dark backgrounds."
-    },
-    {
-      "name": "ariaLabel",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets the aria-label of the button."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+    "webComponents": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Action identifier passed in click events for event delegation patterns."
+        },
+        {
+          "name": "action-arg",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Single argument value passed with the action in click events."
+        },
+        {
+          "name": "action-args",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": "{}",
+          "description": "Multiple argument values passed with the action in click events."
+        },
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the aria-label of the button."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disables the button."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Sets the icon."
+        },
+        {
+          "name": "inverted",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, inverts the icon colors for use on dark backgrounds."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "IconSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the size of button."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "theme",
+          "type": "IconTheme",
+          "required": false,
+          "default": "outline",
+          "description": "Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the title of the button."
+        },
+        {
+          "name": "variant",
+          "type": "\"color\" | \"nocolor\" | \"light\" | \"dark\" | \"destructive\"",
+          "typeLabel": "GoabIconButtonVariant",
+          "values": [
+            "color",
+            "nocolor",
+            "light",
+            "dark",
+            "destructive"
+          ],
+          "required": false,
+          "default": "color",
+          "description": "Styles the button to show color, light, dark or destructive action."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<{ event: Event }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_click",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": []
+  }
 }

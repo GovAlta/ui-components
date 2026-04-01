@@ -1,90 +1,206 @@
 {
   "componentSlug": "notification",
   "extractedFrom": "libs/web-components/src/components/notification/Notification.svelte",
-  "props": [
-    {
-      "name": "type",
-      "type": "\"emergency\" | \"important\" | \"information\" | \"event\"",
-      "typeLabel": "GoabNotificationType",
-      "values": [
-        "emergency",
-        "important",
-        "information",
-        "event"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "ariaLive",
+          "type": "GoabAriaLiveType",
+          "required": false,
+          "default": "polite",
+          "description": "Indicates how assistive technology should handle updates to the live region."
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, reduces padding for a more compact notification."
+        },
+        {
+          "name": "emphasis",
+          "type": "GoabNotificationEmphasis",
+          "required": false,
+          "default": "high",
+          "description": "Sets the visual prominence. 'high' for full background, 'low' for a bordered style."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabNotificationType",
+          "required": false,
+          "default": null,
+          "description": "Define the context and colour of the notification."
+        }
       ],
-      "required": false,
-      "default": "",
-      "description": "Define the context and colour of the notification."
-    },
-    {
-      "name": "maxcontentwidth",
-      "type": "any",
-      "required": false,
-      "default": "100%",
-      "description": "Maximum width of the content area."
-    },
-    {
-      "name": "arialive",
-      "type": "\"assertive\" | \"off\" | \"polite\"",
-      "typeLabel": "GoabNotificationAriaLiveType",
-      "values": [
-        "assertive",
-        "off",
-        "polite"
+      "events": [
+        {
+          "name": "onDismiss",
+          "type": "() => void",
+          "description": "Callback fired when the notification is dismissed.",
+          "frameworks": [
+            "react"
+          ]
+        }
       ],
-      "required": false,
-      "default": "polite",
-      "description": "Indicates how assistive technology should handle updates to the live region."
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "emphasis",
-      "type": "\"high\" | \"low\"",
-      "typeLabel": "GoabNotificationEmphasisType",
-      "values": [
-        "high",
-        "low"
+    "angular": {
+      "props": [
+        {
+          "name": "ariaLive",
+          "type": "GoabAriaLiveType",
+          "required": false,
+          "default": null,
+          "description": "Indicates how assistive technology should handle updates to the live region."
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, reduces padding for a more compact notification."
+        },
+        {
+          "name": "emphasis",
+          "type": "GoabNotificationEmphasis",
+          "required": false,
+          "default": "high",
+          "description": "Sets the visual prominence. 'high' for full background, 'low' for medium."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabNotificationType",
+          "required": false,
+          "default": "information",
+          "description": "Define the context and colour of the notification."
+        }
       ],
-      "required": false,
-      "default": "high",
-      "description": "Sets the visual prominence. 'high' for full background, 'filled' for medium."
+      "events": [
+        {
+          "name": "onDismiss",
+          "type": "() => void",
+          "description": "Emits when the notification is dismissed.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "compact",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, reduces padding for a more compact notification."
+    "webComponents": {
+      "props": [
+        {
+          "name": "arialive",
+          "type": "\"assertive\" | \"off\" | \"polite\"",
+          "typeLabel": "GoabNotificationAriaLiveType",
+          "values": [
+            "assertive",
+            "off",
+            "polite"
+          ],
+          "required": false,
+          "default": "polite",
+          "description": "Indicates how assistive technology should handle updates to the live region."
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, reduces padding for a more compact notification."
+        },
+        {
+          "name": "emphasis",
+          "type": "\"high\" | \"low\"",
+          "typeLabel": "GoabNotificationEmphasisType",
+          "values": [
+            "high",
+            "low"
+          ],
+          "required": false,
+          "default": "high",
+          "description": "Sets the visual prominence. 'high' for full background, 'filled' for medium."
+        },
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"emergency\" | \"important\" | \"information\" | \"event\"",
+          "typeLabel": "GoabNotificationType",
+          "values": [
+            "emergency",
+            "important",
+            "information",
+            "event"
+          ],
+          "required": false,
+          "default": "",
+          "description": "Define the context and colour of the notification."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_dismiss",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onDismiss",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_dismiss",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }
