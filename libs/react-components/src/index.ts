@@ -49,6 +49,8 @@ export * from "./lib/menu-button/menu-button";
 export * from "./lib/menu-button/menu-action";
 export * from "./lib/microsite-header/microsite-header";
 export * from "./lib/modal/modal";
+export * from "./lib/multi-select/multi-select";
+export * from "./lib/multi-select/multi-select-item";
 export * from "./lib/notification/notification";
 export * from "./lib/one-column-layout/one-column-layout";
 export * from "./lib/page-block/page-block";

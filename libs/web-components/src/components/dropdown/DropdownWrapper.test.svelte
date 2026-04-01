@@ -20,6 +20,7 @@
   export let native: string = "false";
   export let items: string[];
   export let filterable: string = "false";
+  export let multiselect: string = "false";
   export let autocomplete: string = 'on';
   export let testid: string = "";
 
@@ -30,7 +31,12 @@
   }
 
   function onChange(e: Event) {
-    value = (e as CustomEvent).detail.value;
+    const detail = (e as CustomEvent).detail;
+    if (detail.values !== undefined) {
+      value = JSON.stringify(detail.values);
+    } else {
+      value = detail.value;
+    }
   }
 </script>
 
@@ -50,6 +56,7 @@
   {width}
   {maxwidth}
   {filterable}
+  {multiselect}
   {autocomplete}
   {testid}
   on:_change={onChange}

@@ -1,9 +1,4 @@
 import {
-  GoabDropdownOnChangeDetail,
-  GoabDropdownSize,
-  GoabIconType,
-} from "@abgov/ui-components-common";
-import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
   EventEmitter,
@@ -13,20 +8,19 @@ import {
   forwardRef,
   OnInit,
   ChangeDetectorRef,
-    inject,
+  inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
+import { GoabDropdownOnChangeDetail, GoabDropdownSize } from "@abgov/ui-components-common";
 import { GoabControlValueAccessor } from "../base.component";
 
-// "disabled", "value", "id" is an exposed property of HTMLInputElement, no need to bind with attr
 @Component({
   standalone: true,
-  selector: "goab-dropdown",
-
+  selector: "goab-multi-select",
   template: `
     @if (isReady) {
-      <goa-dropdown
+      <goa-multi-select
         #goaComponentRef
         [attr.version]="version"
         [attr.name]="name"
@@ -36,26 +30,21 @@ import { GoabControlValueAccessor } from "../base.component";
         [disabled]="disabled"
         [attr.error]="error"
         [attr.filterable]="filterable"
-        [attr.leadingicon]="leadingIcon"
         [attr.maxheight]="maxHeight"
         [attr.mb]="mb"
         [attr.ml]="ml"
         [attr.mr]="mr"
         [attr.mt]="mt"
-        [attr.multiselect]="multiselect"
-        [attr.native]="native"
         [attr.placeholder]="placeholder"
         [attr.testid]="testId"
         [attr.width]="width"
         [attr.maxwidth]="maxWidth"
-        [attr.relative]="relative"
-        [attr.autocomplete]="autoComplete"
         [attr.size]="size"
         [id]="id"
         (_change)="_onChange($event)"
       >
         <ng-content />
-      </goa-dropdown>
+      </goa-multi-select>
     }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -63,39 +52,28 @@ import { GoabControlValueAccessor } from "../base.component";
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => GoabDropdown),
+      useExisting: forwardRef(() => GoabMultiSelect),
     },
   ],
 })
-export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
+export class GoabMultiSelect extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   @Input() name?: string;
   @Input() ariaLabel?: string;
   @Input() ariaLabelledBy?: string;
   @Input({ transform: booleanAttribute }) filterable?: boolean;
-  @Input() leadingIcon?: GoabIconType;
   @Input() maxHeight?: string;
-  @Input({ transform: booleanAttribute }) multiselect?: boolean;
-  @Input({ transform: booleanAttribute }) native?: boolean;
   @Input() placeholder?: string;
   @Input() width?: string;
   @Input() maxWidth?: string;
-  @Input() autoComplete?: string;
   @Input() size?: GoabDropdownSize = "default";
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
-  @Input() relative?: boolean;
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
 
   isReady = false;
   version = "2";
 
-
   ngOnInit(): void {
-    // For Angular 20, we need to delay rendering the web component
-    // to ensure all attributes are properly bound before the component initializes
     setTimeout(() => {
       this.isReady = true;
       this.cdr.detectChanges();
@@ -105,14 +83,11 @@ export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   _onChange(e: Event) {
     const detail = { ...(e as CustomEvent<GoabDropdownOnChangeDetail>).detail, event: e };
     this.onChange.emit(detail);
-
     this.markAsTouched();
-    if (this.multiselect && detail.values !== undefined) {
-      // Store as JSON string so the [value] binding passes a valid string to the web component
+    if (detail.values !== undefined) {
       this.value = JSON.stringify(detail.values);
       this.fcChange?.(detail.values);
     } else {
-      // Keep local value in sync with emitted detail
       this.value = detail.value || null;
       this.fcChange?.(detail.value || "");
     }

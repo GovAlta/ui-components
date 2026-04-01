@@ -1275,4 +1275,379 @@ describe("GoADropdown", () => {
       });
     });
   });
+
+  describe("multiselect", () => {
+    it("should render with aria-multiselectable on the listbox", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+      });
+
+      await waitFor(() => {
+        const ul = result.container.querySelector("ul[role='listbox']");
+        expect(ul?.getAttribute("aria-multiselectable")).toBe("true");
+      });
+    });
+
+    it("should select multiple items and keep the menu open", async () => {
+      const result = render(GoADropdownWrapper, { name, items, multiselect: "true" });
+
+      // Click red option
+      await waitFor(async () => {
+        const redOption = result.queryByTestId("dropdown-item-red");
+        expect(redOption).toBeTruthy();
+        redOption && (await user.click(redOption));
+      });
+
+      await waitFor(() => {
+        // Item should be marked as selected
+        const redOption = result.queryByTestId("dropdown-item-red");
+        expect(redOption?.getAttribute("aria-selected")).toBe("true");
+
+        // Other items should NOT be selected
+        const blueOption = result.queryByTestId("dropdown-item-blue");
+        expect(blueOption?.getAttribute("aria-selected")).toBe("false");
+      });
+
+      // Click blue option too (menu stays open in multiselect, both items selected)
+      await waitFor(async () => {
+        const blueOption = result.queryByTestId("dropdown-item-blue");
+        expect(blueOption).toBeTruthy();
+        blueOption && (await user.click(blueOption));
+      });
+
+      await waitFor(() => {
+        const redOption = result.queryByTestId("dropdown-item-red");
+        const blueOption = result.queryByTestId("dropdown-item-blue");
+        expect(redOption?.getAttribute("aria-selected")).toBe("true");
+        expect(blueOption?.getAttribute("aria-selected")).toBe("true");
+      });
+    });
+
+    it("should toggle selection when clicking an already-selected item", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(["red"]),
+      });
+
+      await waitFor(() => {
+        const redOption = result.queryByTestId("dropdown-item-red");
+        expect(redOption?.getAttribute("aria-selected")).toBe("true");
+      });
+
+      const dropdownIcon = result.container.querySelector("goa-icon");
+      dropdownIcon && (await user.click(dropdownIcon));
+
+      await waitFor(async () => {
+        const redOption = result.queryByTestId("dropdown-item-red");
+        expect(redOption).toBeTruthy();
+        redOption && (await user.click(redOption));
+      });
+
+      await waitFor(() => {
+        const redOption = result.queryByTestId("dropdown-item-red");
+        expect(redOption?.getAttribute("aria-selected")).toBe("false");
+      });
+    });
+
+    it("should dispatch values array in the change event", async () => {
+      const dispatchedValues: string[][] = [];
+      const result = render(GoADropdownWrapper, { name, items, multiselect: "true" });
+
+      result.container.addEventListener("_change", (e) => {
+        dispatchedValues.push((e as CustomEvent).detail.values);
+      });
+
+      const dropdownIcon = result.container.querySelector("goa-icon");
+      dropdownIcon && (await user.click(dropdownIcon));
+
+      await waitFor(async () => {
+        const redOption = result.queryByTestId("dropdown-item-red");
+        expect(redOption).toBeTruthy();
+        redOption && (await user.click(redOption));
+      });
+
+      await waitFor(() => {
+        expect(dispatchedValues.length).toBeGreaterThan(0);
+        expect(dispatchedValues[0]).toContain("red");
+      });
+    });
+
+    it("should show count in input when multiple items are selected", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(["red", "blue"]),
+      });
+
+      await waitFor(() => {
+        const input = result.getByTestId("input") as HTMLInputElement;
+        expect(input.value).toBe("2 selected");
+      });
+    });
+
+    it("should show single item label when only one item is selected", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(["red"]),
+      });
+
+      await waitFor(() => {
+        const input = result.getByTestId("input") as HTMLInputElement;
+        expect(input.value).toBe("red");
+      });
+    });
+
+    it("should show clear button when items are selected and clear all on click", async () => {
+      const dispatchedValues: string[][] = [];
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(["red", "blue"]),
+      });
+
+      result.container.addEventListener("_change", (e) => {
+        dispatchedValues.push((e as CustomEvent).detail.values);
+      });
+
+      await waitFor(() => {
+        const clearIcon = result.queryByTestId("clear-icon");
+        expect(clearIcon).toBeTruthy();
+      });
+
+      const clearIcon = result.queryByTestId("clear-icon");
+      clearIcon && (await user.click(clearIcon));
+
+      await waitFor(() => {
+        expect(dispatchedValues[dispatchedValues.length - 1]).toEqual([]);
+        const input = result.getByTestId("input") as HTMLInputElement;
+        expect(input.value).toBe("");
+      });
+    });
+
+    it("should render chips for each selected value in multiselect mode", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(["red", "blue"]),
+      });
+
+      await waitFor(() => {
+        const chipsContainer = result.queryByTestId("selected-chips");
+        expect(chipsContainer).toBeTruthy();
+        const chips = chipsContainer?.querySelectorAll("goa-filter-chip");
+        expect(chips?.length).toBe(2);
+        expect(chips?.[0].getAttribute("content")).toBe("red");
+        expect(chips?.[1].getAttribute("content")).toBe("blue");
+      });
+    });
+
+    it("should hide chips container when no items are selected", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: "",
+      });
+
+      await waitFor(() => {
+        const chips = result.queryByTestId("selected-chips");
+        expect(chips).toBeNull();
+      });
+    });
+
+    it("should deselect a value and dispatch _change when a chip is removed", async () => {
+      const dispatchedValues: string[][] = [];
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(["red", "blue"]),
+      });
+
+      result.container.addEventListener("_change", (e) => {
+        dispatchedValues.push((e as CustomEvent).detail.values);
+      });
+
+      const chipsContainer = await waitFor(() => {
+        const el = result.queryByTestId("selected-chips");
+        expect(el).toBeTruthy();
+        return el!;
+      });
+
+      const redChip = chipsContainer.querySelector("goa-filter-chip[content='red']");
+      expect(redChip).toBeTruthy();
+      if (redChip) {
+        fireEvent(redChip, new CustomEvent("_click", { bubbles: true }));
+      }
+
+      await waitFor(() => {
+        expect(dispatchedValues.length).toBeGreaterThan(0);
+        expect(dispatchedValues[dispatchedValues.length - 1]).toEqual(["blue"]);
+      });
+    });
+
+    it("should filter options when filterable+multiselect and clear the input after selection", async () => {
+      const dispatchedValues: string[][] = [];
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        filterable: "true",
+        value: "",
+      });
+
+      result.container.addEventListener("_change", (e) => {
+        dispatchedValues.push((e as CustomEvent).detail.values);
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      // Input should NOT be readonly in filterable multiselect
+      expect(input.hasAttribute("readonly")).toBe(false);
+
+      // Type to filter
+      await user.type(input, "bl");
+      await waitFor(() => {
+        const listItems = result.container.querySelectorAll("li.dropdown-item");
+        // Only "blue" matches "bl"
+        expect(listItems.length).toBe(1);
+        expect(listItems[0]).toHaveTextContent("blue");
+      });
+
+      // Select the filtered item
+      const blueOption = result.getByTestId("dropdown-item-blue");
+      await user.click(blueOption);
+
+      // Input should be cleared after selection to allow further searching
+      await waitFor(() => {
+        expect(input.value).toBe("");
+      });
+
+      // All options should be visible again (filter reset after selection), plus "Select All"
+      await waitFor(() => {
+        const listItems = result.container.querySelectorAll("li.dropdown-item--option");
+        expect(listItems.length).toBe(items.length);
+      });
+
+      // A chip should appear for the selected value
+      await waitFor(() => {
+        const chipsContainer = result.queryByTestId("selected-chips");
+        expect(chipsContainer).toBeTruthy();
+        const chips = chipsContainer?.querySelectorAll("goa-filter-chip");
+        expect(chips?.length).toBe(1);
+        expect(chips?.[0].getAttribute("content")).toBe("blue");
+      });
+
+      // A _change event should have been dispatched
+      await waitFor(() => {
+        expect(dispatchedValues.length).toBeGreaterThan(0);
+        expect(dispatchedValues[dispatchedValues.length - 1]).toEqual(["blue"]);
+      });
+    });
+
+    it("should show a Select All item at the top of the multiselect menu", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: "",
+      });
+
+      const trigger = result.getByTestId("input");
+      await user.click(trigger);
+
+      await waitFor(() => {
+        const selectAllItem = result.queryByTestId("dropdown-item-select-all");
+        expect(selectAllItem).toBeTruthy();
+        expect(selectAllItem).toHaveTextContent("Select All");
+      });
+    });
+
+    it("should select all items when Select All is clicked and none are selected", async () => {
+      const dispatchedValues: string[][] = [];
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: "",
+      });
+
+      result.container.addEventListener("_change", (e) => {
+        dispatchedValues.push((e as CustomEvent).detail.values);
+      });
+
+      const trigger = result.getByTestId("input");
+      await user.click(trigger);
+
+      const selectAllItem = await waitFor(() => result.getByTestId("dropdown-item-select-all"));
+      await user.click(selectAllItem);
+
+      await waitFor(() => {
+        expect(dispatchedValues.length).toBeGreaterThan(0);
+        const lastValues = dispatchedValues[dispatchedValues.length - 1];
+        expect(lastValues).toEqual(items);
+      });
+    });
+
+    it("should deselect all items when Select All is clicked and all are selected", async () => {
+      const dispatchedValues: string[][] = [];
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        value: JSON.stringify(items),
+      });
+
+      result.container.addEventListener("_change", (e) => {
+        dispatchedValues.push((e as CustomEvent).detail.values);
+      });
+
+      const trigger = result.getByTestId("input");
+      await user.click(trigger);
+
+      const selectAllItem = await waitFor(() => result.getByTestId("dropdown-item-select-all"));
+      // When all are selected, Select All should be in checked state
+      await waitFor(() => {
+        expect(selectAllItem.getAttribute("aria-selected")).toBe("true");
+      });
+      await user.click(selectAllItem);
+
+      await waitFor(() => {
+        expect(dispatchedValues.length).toBeGreaterThan(0);
+        expect(dispatchedValues[dispatchedValues.length - 1]).toEqual([]);
+      });
+    });
+
+    it("should hide Select All when filter text is entered in filterable multiselect", async () => {
+      const result = render(GoADropdownWrapper, {
+        name,
+        items,
+        multiselect: "true",
+        filterable: "true",
+        value: "",
+      });
+
+      const input = result.getByTestId("input") as HTMLInputElement;
+      await user.click(input);
+
+      // Select All should be visible before typing
+      await waitFor(() => {
+        expect(result.queryByTestId("dropdown-item-select-all")).toBeTruthy();
+      });
+
+      // Type to filter — Select All should disappear
+      await user.type(input, "bl");
+      await waitFor(() => {
+        expect(result.queryByTestId("dropdown-item-select-all")).toBeNull();
+      });
+    });
+  });
 });

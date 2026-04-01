@@ -57,6 +57,8 @@ export * from "./components/menu-button/MenuAction.svelte";
 export * from "./components/menu-button/MenuButton.svelte";
 export * from "./components/microsite-header/MicrositeHeader.svelte";
 export * from "./components/modal/Modal.svelte";
+export * from "./components/multi-select/MultiSelect.svelte";
+export * from "./components/multi-select/MultiSelectOption.svelte";
 export * from "./components/notification/Notification.svelte";
 export * from "./layouts/one-column-layout/OneColumnLayout.svelte";
 export * from "./components/page-block/PageBlock.svelte";

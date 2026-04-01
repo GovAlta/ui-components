@@ -11,6 +11,7 @@ export * from "./types";
 export { buttonConfigurations } from "./button";
 export { inputConfigurations } from "./input";
 export { dropdownConfigurations } from "./dropdown";
+export { multiSelectConfigurations } from "./multi-select";
 export { checkboxConfigurations } from "./checkbox";
 export { checkboxListConfigurations } from "./checkbox-list";
 export { radioGroupConfigurations } from "./radio-group";
@@ -85,6 +86,7 @@ import type { ComponentConfigurations, ConfigurationRegistry } from "./types";
 import { buttonConfigurations } from "./button";
 import { inputConfigurations } from "./input";
 import { dropdownConfigurations } from "./dropdown";
+import { multiSelectConfigurations } from "./multi-select";
 import { checkboxConfigurations } from "./checkbox";
 import { checkboxListConfigurations } from "./checkbox-list";
 import { radioGroupConfigurations } from "./radio-group";
@@ -153,6 +155,7 @@ export const configurationRegistry: ConfigurationRegistry = {
   button: buttonConfigurations,
   input: inputConfigurations,
   dropdown: dropdownConfigurations,
+  "multi-select": multiSelectConfigurations,
   checkbox: checkboxConfigurations,
   "checkbox-list": checkboxListConfigurations,
   "radio-group": radioGroupConfigurations,

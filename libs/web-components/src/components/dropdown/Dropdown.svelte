@@ -70,7 +70,7 @@
   export let disabled: string = "false";
   /** Show an error state. */
   export let error: string = "false";
-  /** @internal When true, allows multiple items to be selected. Not currently exposed. */
+  /** When true, allows multiple items to be selected from the dropdown. */
   export let multiselect: string = "false";
   /** When true will render the native select HTML element. */
   export let native: string = "false";
@@ -112,6 +112,7 @@
   let _isDirty: boolean = false;
   let _filteredOptions: Option[] = [];
   let _values: string[] = [];
+  let _filterText: string = "";
 
   let _bindTimeoutId: any;
 
@@ -123,9 +124,22 @@
   //
 
   $: _disabled = toBoolean(disabled);
-  $: _multiselect = toBoolean(multiselect);
   $: _native = toBoolean(native);
+  $: _multiselect = toBoolean(multiselect) && !_native;
   $: _filterable = toBoolean(filterable) && !_native;
+
+  // Tracks the filtered (non-empty) selected values for multiselect mode
+  $: _selectedValues = _multiselect ? _values.filter((v) => v !== "") : [];
+  $: _showChips = _multiselect;
+
+  // True when all available options are selected (used for the "Select All" checkbox state)
+  $: _allSelected = _multiselect && _options.length > 0 && _options.every((o) => _selectedValues.includes(o.value));
+
+  // True when the user has typed something in the filter input (hides "Select All")
+  $: _isFiltering = _filterable && _filterText !== "";
+
+  // Compute input cursor style
+  $: _inputCursor = _disabled ? "default" : _filterable ? "auto" : "pointer";
 
   // To keep track of active descendant for the accessibility
   $: _activeDescendantId = _filteredOptions[_highlightedIndex]
@@ -136,6 +150,14 @@
   $: {
     _values = parseValues(value || "");
     setSelected();
+  }
+
+  // Sync input display value when multiselect selections change.
+  // _selectedValues is referenced to create a Svelte reactive dependency.
+  $: if (_multiselect && _inputEl) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    _selectedValues;
+    setDisplayedValue();
   }
 
   $: calculateWidths(width, _options, _inputEl);
@@ -297,7 +319,7 @@
       if (!_native) {
         setSelected();
         // Update the displayed value after options are loaded and selected option is set
-        if (_inputEl && _selectedOption) {
+        if (_inputEl && (_selectedOption || (_multiselect && _selectedValues.length > 0))) {
           setDisplayedValue();
         }
       }
@@ -314,7 +336,12 @@
   }
 
   function setSelected() {
-    _selectedOption = _options.find((o) => o.value == _values[0]);
+    if (_multiselect) {
+      // In multiselect mode _selectedValues drives the display; no single _selectedOption needed
+      _selectedOption = undefined;
+    } else {
+      _selectedOption = _options.find((o) => o.value == _values[0]);
+    }
   }
 
   // parse and convert values to strings to avoid later type comparison issues
@@ -420,6 +447,7 @@
   }
 
   function syncFilteredOptions() {
+    _filterText = _filterable ? (_inputEl?.value || "") : "";
     _filteredOptions = _filterable
       ? _options.filter((option) =>
           isFilterMatch(option, _inputEl?.value || ""),
@@ -470,20 +498,34 @@
 
   // update the value show to the user in the <input> element
   function setDisplayedValue() {
+    if (_multiselect) {
+      if (_filterable) {
+        // In filterable multiselect, keep the input clear so the user can type to filter.
+        // Chips below the dropdown show the selected values.
+        _inputEl.value = "";
+      } else {
+        const selected = _values.filter((v) => v !== "");
+        if (selected.length === 0) {
+          _inputEl.value = "";
+        } else if (selected.length === 1) {
+          const opt = _options.find((o) => o.value === selected[0]);
+          _inputEl.value = opt?.label || opt?.value || selected[0];
+        } else {
+          _inputEl.value = `${selected.length} selected`;
+        }
+      }
+      return;
+    }
     const newValue = _selectedOption?.label || _selectedOption?.value || "";
     _inputEl.value = newValue;
   }
 
   function dispatchValue(newValue?: string) {
-    const detail = _multiselect
-      ? { name, values: [newValue, ..._values] }
-      : { name, value: newValue };
-
     if (!_isDirty) {
       return;
     }
 
-    dispatch(_rootEl, "_change", detail, { bubbles: true });
+    dispatch(_rootEl, "_change", { name, value: newValue }, { bubbles: true });
     _isDirty = false;
   }
 
@@ -493,6 +535,29 @@
 
   function onSelect(option: Option) {
     if (_disabled) return;
+
+    if (_multiselect) {
+      const isAlreadySelected = _selectedValues.includes(option.value);
+      const newValues = isAlreadySelected
+        ? _selectedValues.filter((v) => v !== option.value)
+        : [..._selectedValues, option.value];
+
+      _isDirty = true;
+      value = newValues.length > 0 ? JSON.stringify(newValues) : "";
+      dispatch(_rootEl, "_change", { name, values: newValues }, { bubbles: true });
+      _isDirty = false;
+
+      if (!_native) {
+        if (_filterable) {
+          // Clear the filter input after selection so the user can search again.
+          _inputEl.value = "";
+        }
+        syncFilteredOptions();
+        setDisplayedValue();
+        // Keep the menu open in multiselect mode
+      }
+      return;
+    }
 
     _isDirty = option.value !== _selectedOption?.value;
     _selectedOption = option;
@@ -560,15 +625,41 @@
   function onClearIconKeyDown(e: KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
       reset();
-      showMenu();
+      if (!_multiselect) {
+        showMenu();
+      }
       e.stopPropagation();
     }
   }
 
   function onClearIconClick(e: Event) {
     reset();
-    showMenu();
+    if (!_multiselect) {
+      showMenu();
+    }
     e.stopPropagation();
+  }
+
+  function onChipRemove(chipValue: string) {
+    if (_disabled) return;
+    const newValues = _selectedValues.filter((v) => v !== chipValue);
+    _isDirty = true;
+    value = newValues.length > 0 ? JSON.stringify(newValues) : "";
+    dispatch(_rootEl, "_change", { name, values: newValues }, { bubbles: true });
+    _isDirty = false;
+    syncFilteredOptions();
+    setDisplayedValue();
+  }
+
+  function onSelectAll() {
+    if (_disabled) return;
+    const newValues = _allSelected ? [] : _options.map((o) => o.value);
+    _isDirty = true;
+    value = newValues.length > 0 ? JSON.stringify(newValues) : "";
+    dispatch(_rootEl, "_change", { name, values: newValues }, { bubbles: true });
+    _isDirty = false;
+    syncFilteredOptions();
+    setDisplayedValue();
   }
 
   function onNativeSelect(e: Event) {
@@ -587,8 +678,16 @@
     _isDirty = true;
 
     syncFilteredOptions();
-    dispatchValue("");
-    setDisplayedValue();
+
+    if (_multiselect) {
+      value = "";
+      dispatch(_rootEl, "_change", { name, values: [] }, { bubbles: true });
+      _isDirty = false;
+      setDisplayedValue();
+    } else {
+      dispatchValue("");
+      setDisplayedValue();
+    }
   }
 
   function onFocus(e: Event) {
@@ -617,7 +716,10 @@
         onSelect(option);
       }
 
-      if (_selectedOption) {
+      if (_multiselect) {
+        // In multiselect keep menu open; Enter just toggles the highlighted item
+        if (!_isMenuVisible) showMenu();
+      } else if (_selectedOption) {
         hideMenu();
       } else {
         showMenu();
@@ -705,7 +807,9 @@
         if (option) {
           onSelect(option);
         }
-        hideMenu();
+        if (!_multiselect) {
+          hideMenu();
+        }
       } else {
         showMenu();
       }
@@ -815,9 +919,7 @@
         {/if}
 
         <input
-          style={`
-            cursor: ${!_disabled ? (_filterable ? "auto" : "pointer") : "default"};
-          `}
+          style={`cursor: ${_inputCursor};`}
           data-testid="input"
           bind:this={_inputEl}
           value={_selectedOption?.label || _selectedOption?.value || ""}
@@ -844,7 +946,7 @@
           on:focus={onFocus}
         />
 
-        {#if _inputEl?.value && _filterable}
+        {#if (_inputEl?.value && _filterable && !_multiselect) || (_multiselect && _selectedValues.length > 0)}
           <goa-icon-button
             id={name}
             data-testid="clear-icon"
@@ -881,6 +983,7 @@
         bind:this={_menuEl}
         aria-label={arialabel || name}
         aria-labelledby={arialabelledby}
+        aria-multiselectable={_multiselect ? "true" : undefined}
         on:focus={onFocus}
         on:mousedown={(e) => e.preventDefault()}
         style={`
@@ -889,28 +992,50 @@
           max-height: ${maxheight};
         `}
       >
+        {#if _multiselect && !_isFiltering}
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <li
+            aria-selected={_allSelected}
+            class="dropdown-item dropdown-item--multiselect"
+            class:selected={_allSelected}
+            data-testid="dropdown-item-select-all"
+            role="option"
+            style="display: flex"
+            on:click={() => {
+              onSelectAll();
+              _inputEl?.focus();
+            }}
+          >
+            <span class="dropdown-item-checkbox" aria-hidden="true"></span>
+            Select All
+          </li>
+        {/if}
         {#each _filteredOptions as option, index (index)}
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <li
             id={option.value}
-            aria-selected={_selectedOption?.value === option.value}
-            class:selected={_selectedOption?.value === option.value}
-            class="dropdown-item"
+            aria-selected={_multiselect ? _selectedValues.includes(option.value) : _selectedOption?.value === option.value}
+            class:selected={_multiselect ? _selectedValues.includes(option.value) : _selectedOption?.value === option.value}
+            class="dropdown-item dropdown-item--option"
+            class:dropdown-item--multiselect={_multiselect}
             class:dropdown-item--highlighted={index === _highlightedIndex}
             data-index={index}
             data-testid={`dropdown-item-${option.value}`}
             data-value={option.value}
             role="option"
-            style="display: block"
+            style={_multiselect ? "display: flex" : "display: block"}
             on:click={(e) => {
               onFilteredOptionClick(option);
               _inputEl?.focus();
             }}
           >
+            {#if _multiselect}
+              <span class="dropdown-item-checkbox" aria-hidden="true"></span>
+            {/if}
             {option.label || option.value}
           </li>
         {:else}
-          {#if _filterable}
+          {#if _filterable || _multiselect}
             <li class="dropdown-item" data-testid="dropdown-item-not-found">
               No matches found
             </li>
@@ -918,6 +1043,19 @@
         {/each}
       </ul>
     </goa-popover>
+
+    {#if _showChips && _selectedValues.length > 0}
+      <div class="dropdown-chips" data-testid="selected-chips">
+        {#each _selectedValues as chipVal}
+          {@const opt = _options.find((o) => o.value === chipVal)}
+          <goa-filter-chip
+            content={opt?.label || chipVal}
+            version={version}
+            on:_click={() => onChipRemove(chipVal)}
+          />
+        {/each}
+      </div>
+    {/if}
   {/if}
 </div>
 
@@ -1147,5 +1285,52 @@
 
   .compact .dropdown-item {
     font: var(--goa-dropdown-compact-item-typography);
+  }
+
+  /* Multiselect item layout */
+  .dropdown-item--multiselect {
+    align-items: center;
+    gap: var(--goa-space-xs);
+  }
+
+  .dropdown-item-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--goa-checkbox-size);
+    height: var(--goa-checkbox-size);
+    border: var(--goa-checkbox-border);
+    border-radius: var(--goa-checkbox-border-radius);
+    background-color: var(--goa-checkbox-color-bg);
+    transition: background-color 0.1s ease, border-color 0.1s ease;
+  }
+
+  .dropdown-item[aria-selected="true"] .dropdown-item-checkbox {
+    background-color: var(--goa-checkbox-color-bg-checked);
+    border-color: var(--goa-checkbox-color-bg-checked);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M2 6l3 3 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.875rem;
+  }
+
+  /* In multiselect mode, selection is shown by the checkbox — no blue row background */
+  .dropdown-item--multiselect[aria-selected="true"] {
+    background: transparent;
+    color: var(--goa-dropdown-item-color-text);
+  }
+
+  .dropdown-item--multiselect[aria-selected="true"]:hover,
+  .dropdown-item--multiselect[aria-selected="true"].dropdown-item--highlighted {
+    background: var(--goa-dropdown-item-color-bg-hover);
+    color: var(--goa-dropdown-item-color-text-hover);
+  }
+
+  .dropdown-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--goa-space-2xs);
+    margin-top: var(--goa-space-2xs);
   }
 </style>

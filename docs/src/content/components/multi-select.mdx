@@ -1,0 +1,41 @@
+---
+name: Multi Select
+description: Let users choose multiple options from a dropdown list with optional filtering and removable chips.
+status: stable
+category: inputs-and-actions
+tags:
+  - inputs and actions
+  - select
+  - multi select
+  - filter chips
+relatedComponents:
+  - form-item
+  - dropdown
+  - filter-chip
+webComponentTag: goa-multi-select
+reactClassName: GoabMultiSelect
+angularSelector: goab-multi-select
+---
+
+Use Multi Select when people need to choose more than one option from a list while keeping the form compact.
+
+## When to use
+
+Use Multi Select when:
+- Users may need to choose several items from the same list
+- The list is long enough that filtering helps people find options faster
+- Selected values should remain visible as removable chips below the field
+- A standard checkbox list would take too much vertical space
+
+## When not to use
+
+Don't use Multi Select when:
+- Users should choose only one option
+- The option list is short enough that a checkbox list is clearer
+- The selected values need rich descriptions or supporting content in the list
+
+## Behaviour
+
+- Selected items stay visible as chips beneath the control
+- Filterable mode keeps the input clear so users can continue narrowing results
+- Select All appears at the top of the list when no filter is applied

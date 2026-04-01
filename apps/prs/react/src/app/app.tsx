@@ -364,6 +364,10 @@ export function App() {
                   label="3544 Optional Side Menu Icons"
                   url="/features/3544"
                 />
+                <GoabWorkSideMenuItem
+                  label="3596 Dropdown multi-select"
+                  url="/features/3596"
+                />
               </GoabWorkSideMenuGroup>
               <GoabWorkSideMenuItem icon="list" label="Everything" url="/everything" />
             </>

@@ -1,0 +1,157 @@
+{
+  "componentSlug": "multi-select",
+  "extractedFrom": "libs/web-components/src/components/multi-select/MultiSelect.svelte",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "Sets the identifier for the multi-select. Should be unique."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the JSON-encoded array of selected values."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the text displayed before a selection is made."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets whether the control is disabled. Defaults to `false`."
+    },
+    {
+      "name": "error",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets whether to show an error state. Defaults to `false`."
+    },
+    {
+      "name": "filterable",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Sets whether to allow the user to type to filter options. Defaults to `false`."
+    },
+    {
+      "name": "width",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the width, overriding auto-sizing. Use a CSS unit (px, %, ch, rem, em)."
+    },
+    {
+      "name": "maxWidth",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the maximum width. Use a CSS unit (px, %, ch, rem, em)."
+    },
+    {
+      "name": "maxHeight",
+      "type": "string",
+      "required": false,
+      "default": "276px",
+      "description": "Sets the maximum height of the options menu. Defaults to `276px`."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets how the selected value will be translated for the screen reader."
+    },
+    {
+      "name": "ariaLabelledBy",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets the aria-labelledby attribute identifying the element that labels the multi-select."
+    },
+    {
+      "name": "size",
+      "type": "\"default\" | \"compact\"",
+      "values": [
+        "default",
+        "compact"
+      ],
+      "required": false,
+      "default": "default",
+      "description": "Sets the size of the component. Compact reduces height for dense layouts. Defaults to `default`."
+    },
+    {
+      "name": "mt",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Top margin."
+    },
+    {
+      "name": "mr",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Right margin."
+    },
+    {
+      "name": "mb",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Bottom margin."
+    },
+    {
+      "name": "ml",
+      "type": "Spacing",
+      "typeLabel": "Spacing",
+      "required": false,
+      "default": null,
+      "description": "Left margin."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    }
+  ],
+  "events": [
+    {
+      "name": "onChange",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": [
+        "react"
+      ]
+    },
+    {
+      "name": "_change",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": [
+        "angular"
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}
