@@ -6,8 +6,8 @@
  * Content adapted from Confluence export:
  * Foundations -> Style guide -> Illustration.
  */
-import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
-import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+import DocumentationPageLayout from "../../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../../components/FoundationsSupportCallout.astro";
 
 const illustrationTokens = [
   "--goa-color-illustration-dawnDark-700",
@@ -296,9 +296,9 @@ const colourApplications = [
     clearly describes what the illustration communicates. Decorative illustrations should
     use an empty alt attribute: <code>alt=""</code>.
   </goa-text>
-  <goa-text size="body-m" mt="none" mb="m">Examples</goa-text>
+  <h5 id="examples" style="margin-top: var(--goa-space-l); margin-bottom: var(--goa-space-m);">Examples</h5>
 
-  <goa-text size="body-m" mt="none" mb="m">Informative illustration</goa-text>
+  <goa-text size="body-m" mt="none" mb="m"><strong>Informative illustration</strong></goa-text>
   <pre><code>&lt;img
   src="/illustrations/identity-verified.svg"
   alt="Identity verified"
@@ -309,7 +309,7 @@ const colourApplications = [
   style="max-width:100%; height:auto"
 &gt;</code></pre>
 
-  <goa-text size="body-m" mt="none" mb="m">Decorative illustration</goa-text>
+  <goa-text size="body-m" mt="none" mb="m"><strong>Decorative illustration</strong></goa-text>
   <pre><code>&lt;img
   src="/illustrations/identity-verified.svg"
   alt=""

@@ -1,0 +1,369 @@
+---
+/**
+ * Foundations - Style guide - Illustrations - Scene
+ *
+ * Scene illustration guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guide -> Illustrations -> Scene.
+ */
+import DocumentationPageLayout from "../../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../../components/FoundationsSupportCallout.astro";
+import DoDont from "../../../../components/DoDont.astro";
+import Preview from "../../../../components/Preview.astro";
+---
+
+<DocumentationPageLayout
+  title="Scene illustration"
+  description="Scene illustration guidance for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Scene illustration</goa-text>
+  <goa-text size="body-l" mt="none" mb="m">
+    Scene illustrations show a broader context or environment. They combine multiple
+    elements to illustrate a situation or service context.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <goa-text size="body-m" mt="none" mb="m">
+    Keep the composition simple and broadly relatable. Avoid details that suggest a
+    specific age, ethnicity, or location so the illustration can represent all Albertans.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use scene illustrations only at key moments in a service experience, such as:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Landing pages</li>
+      <li>Introductory screens</li>
+      <li>Key entry points to a service</li>
+    </ul>
+  </goa-text>
+
+  <div class="hero-illustrations">
+    <div class="hero-card">
+      <img
+        src="/images/foundations/illustration/scene-hero-1.svg"
+        alt="Scene illustration of a person using a phone with floating documents"
+        width="359"
+        height="305"
+        loading="lazy"
+      />
+    </div>
+    <div class="hero-card">
+      <img
+        src="/images/foundations/illustration/scene-hero-2.svg"
+        alt="Scene illustration of a person sitting on a beanbag by a window"
+        width="392"
+        height="320"
+        loading="lazy"
+      />
+    </div>
+    <div class="hero-card">
+      <img
+        src="/images/foundations/illustration/scene-hero-3.svg"
+        alt="Scene illustration of a person giving a thumbs up"
+        width="472"
+        height="305"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="variants">Variants</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Scene illustrations come in two layout variants. Both share the same visual style and
+    story. Choose the variant that fits the layout of the page.
+  </goa-text>
+
+  <h3 id="variant-a">Variant A</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use Variant A when the illustration sits above the main page content. The artwork sits
+    inside a <strong>responsive 2:1 container</strong> with a <strong>Greyscale 100
+    background</strong>.
+  </goa-text>
+
+  <h4 id="variant-a-layout-guidance">Layout guidance</h4>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Center the illustration within the container.</li>
+      <li>Keep enough white space so the artwork never touches the edges.</li>
+      <li>Maintain the <strong>2:1 ratio</strong> at all screen sizes.</li>
+      <li>Allow the container to span the full width of the main content area.</li>
+      <li>Keep important visual details centered.</li>
+    </ul>
+  </goa-text>
+
+  <h4 id="variant-a-export-guidance">Export guidance</h4>
+  <goa-text size="body-m" mt="none" mb="m">When exporting the illustration:</goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Include the <strong>2:1 grey container</strong> in the SVG.</li>
+      <li>Use the container size as the <strong>viewBox</strong>.</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="m" mb="none">
+    This ensures the illustration scales consistently without stretching, cropping,
+    or shifting.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="examples">Examples</h2>
+
+  <h3 id="variant-a-examples">Variant A</h3>
+  <div class="example-responsive">
+    <img
+      src="/images/foundations/illustration/scene-variant-a1.svg"
+      alt="Variant A scene illustration in a desktop layout"
+      width="1045"
+      height="1518"
+      loading="lazy"
+      style="max-width: 100%; height: auto;"
+    />
+    <div class="example-pair">
+      <img
+        src="/images/foundations/illustration/scene-variant-a2.svg"
+        alt="Variant A scene illustration in a tablet layout"
+        width="627"
+        height="1809"
+        loading="lazy"
+        style="max-width: 100%; height: auto;"
+      />
+      <img
+        src="/images/foundations/illustration/scene-variant-a3.svg"
+        alt="Variant A scene illustration in a mobile layout"
+        width="377"
+        height="1809"
+        loading="lazy"
+        style="max-width: 100%; height: auto;"
+      />
+    </div>
+  </div>
+
+  <h3 id="variant-b">Variant B</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use Variant B when the layout places content on the left and the illustration on the
+    right.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    The illustration sits within a square 1:1 container. As the viewport narrows, the
+    layout responds by stacking the illustration below the heading, description, and
+    actions.
+  </goa-text>
+
+  <h4 id="variant-b-layout-guidance">Layout guidance</h4>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Position the illustration on the right side of the layout.</li>
+      <li>Maintain a square <strong>1:1 ratio</strong>.</li>
+      <li>
+        Keep the composition contained within the frame so it does not interfere with the
+        heading, body text, or primary actions when the layout reflows.
+      </li>
+    </ul>
+  </goa-text>
+
+  <h4 id="variant-b-export-guidance">Export guidance</h4>
+  <goa-text size="body-m" mt="none" mb="m">When exporting the illustration:</goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Include the full <strong>1:1 container</strong> in the SVG.</li>
+      <li>Use the container dimensions for the <code>viewBox</code>.</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="variant-b-examples">Variant B</h3>
+  <div class="example-responsive">
+    <img
+      src="/images/foundations/illustration/scene-variant-b1.svg"
+      alt="Variant B scene illustration in a desktop layout"
+      width="1037"
+      height="986"
+      loading="lazy"
+      style="max-width: 100%; height: auto;"
+    />
+    <div class="example-pair">
+      <img
+        src="/images/foundations/illustration/scene-variant-b2.svg"
+        alt="Variant B scene illustration in a tablet layout"
+        width="618"
+        height="1623"
+        loading="lazy"
+        style="max-width: 100%; height: auto;"
+      />
+      <img
+        src="/images/foundations/illustration/scene-variant-b3.svg"
+        alt="Variant B scene illustration in a mobile layout"
+        width="382"
+        height="1624"
+        loading="lazy"
+        style="max-width: 100%; height: auto;"
+      />
+    </div>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="best-practices">Best practices</h2>
+
+  <div class="dodont-grid">
+    <DoDont
+      type="do"
+      description="Use scene illustrations for key moments such as landing pages or introduction screens."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/scene-do-landing.png"
+          alt="Scene illustration correctly used on a landing page"
+          width="743"
+          height="534"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't use scene illustrations in instructional or supporting sections of a page."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/scene-dont-instructional.png"
+          alt="Scene illustration incorrectly used in an instructional section"
+          width="561"
+          height="560"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="do"
+      description="Use illustrations exactly as they appear in the design system library."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/scene-do-unmodified.png"
+          alt="Scene illustration used as provided in the design system"
+          width="724"
+          height="314"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't rebuild, redraw, or change the colours of illustrations."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/scene-dont-recoloured.png"
+          alt="Scene illustration with colours incorrectly modified"
+          width="732"
+          height="318"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="do"
+      description="Choose illustrations that match the subject of the page. For example, use a Land Registry illustration on a Land Registry service page."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/scene-do-matching.png"
+          alt="Scene illustration matching the page content"
+          width="714"
+          height="512"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't use illustrations that do not relate to the page content. For example, don't use a trades or apprenticeship illustration on a Land Registry page."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/scene-dont-mismatched.png"
+          alt="Scene illustration that does not match the page content"
+          width="708"
+          height="508"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+  </div>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .hero-illustrations {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-l);
+    margin: var(--goa-space-xl) 0;
+  }
+
+  .hero-illustrations img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background: var(--goa-color-greyscale-100);
+    border-radius: var(--goa-border-radius-m);
+    padding: var(--goa-space-xl);
+    box-sizing: content-box;
+  }
+
+  .hero-illustrations .hero-card {
+    background: var(--goa-color-greyscale-100);
+    border-radius: var(--goa-border-radius-m);
+    display: flex;
+    justify-content: center;
+    padding: var(--goa-space-xl);
+  }
+
+  .hero-illustrations .hero-card img {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .example-responsive {
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  .example-pair {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+    gap: var(--goa-space-l);
+    margin-top: var(--goa-space-l);
+  }
+
+  .dodont-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .dodont-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+</style>
