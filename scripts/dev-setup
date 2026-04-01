@@ -2,12 +2,17 @@
 
 if [ ! -f .env ]; then cp ./.env.example ./.env; fi
 
-if [ -d "./apps/dev" ]; then
-  echo "./apps/dev already exists. To re-create manually delete the current folder"
-  exit 0
+if [ ! -d "./apps/dev" ]; then
+  mkdir ./apps/dev
+  cp -r ./.templates/* ./apps/dev
 fi
 
-mkdir ./apps/dev
-cp -r ./.templates/* ./apps/dev
+# formatting github hook prompt
+read -r -p "Enable the format pre-commit git hook? (y/N) " response
+if [[ "$response" =~ ^[Yy]$ ]]; then
+  cp scripts/pre-commit .git/hooks/pre-commit
+  chmod +x .git/hooks/pre-commit
+  echo "Pre-commit hook installed."
+fi
 
 echo "Dev env created!"

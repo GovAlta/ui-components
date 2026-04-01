@@ -1,0 +1,115 @@
+#!/usr/bin/env node
+// Pre-commit hook: runs prettier only on the lines changed in staged files.
+// Uses prettier's --range-start/--range-end to avoid touching unchanged lines.
+//
+// Install: ln -sf ../../scripts/pre-commit .git/hooks/pre-commit
+//      or: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+'use strict';
+
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+const PRETTIER_EXTENSIONS = /\.(ts|tsx|js|jsx|mjs|cjs|json|css|scss|svelte|html|md|yaml|yml)$/;
+
+function getStagedFiles() {
+  try {
+    const out = execSync('git diff --cached --name-only --diff-filter=ACMR', {
+      encoding: 'utf8',
+    });
+    return out
+      .trim()
+      .split('\n')
+      .filter(f => f && PRETTIER_EXTENSIONS.test(f));
+  } catch(e) {
+    console.error("Failed getting files: ", e)
+    return [];
+  }
+}
+
+// Returns [{start, end}] of added/modified line ranges in the staged diff.
+// Line numbers are 1-based. Pure deletions (count=0) are excluded.
+function getChangedLineRanges(file) {
+  try {
+    const diff = execSync(`git diff --cached -U0 -- "${file}"`, { encoding: 'utf8' });
+    const ranges = [];
+    for (const line of diff.split('\n')) {
+      // Matches: @@ -old[,count] +new[,count] @@
+      const m = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/);
+      if (!m) continue;
+      const start = parseInt(m[1], 10);
+      const count = m[2] !== undefined ? parseInt(m[2], 10) : 1;
+      if (count > 0) ranges.push({ start, end: start + count - 1 });
+    }
+    return ranges;
+  } catch {
+    console.error("getChangedLineRanges: ", e)
+    return [];
+  }
+}
+
+// Returns the character offset of the start of the given 1-based line number.
+function lineToCharOffset(content, lineNumber) {
+  let offset = 0;
+  let line = 1;
+  for (let i = 0; i < content.length; i++) {
+    if (line === lineNumber) return offset;
+    if (content[i] === '\n') line++;
+    offset++;
+  }
+  return content.length;
+}
+
+async function main() {
+  const stagedFiles = getStagedFiles();
+  if (stagedFiles.length === 0) return;
+
+  // prettier v3 is ESM-only; use dynamic import from CommonJS
+  const prettier = await import('prettier');
+  const api = prettier.default ?? prettier;
+
+  const formatted = [];
+
+  for (const file of stagedFiles) {
+    const ranges = getChangedLineRanges(file);
+    if (ranges.length === 0) continue; // only deletions staged for this file
+
+    const content = fs.readFileSync(file, 'utf8');
+
+    // Combine all hunks into one span so we make a single prettier call.
+    // prettier expands ranges to AST node boundaries anyway.
+    const minLine = Math.min(...ranges.map(r => r.start));
+    const maxLine = Math.max(...ranges.map(r => r.end));
+    const rangeStart = lineToCharOffset(content, minLine);
+    const rangeEnd = lineToCharOffset(content, maxLine + 1);
+
+    try {
+      const config = await api.resolveConfig(path.resolve(file));
+      const result = await api.format(content, {
+        ...config,
+        filepath: path.resolve(file),
+        rangeStart,
+        rangeEnd,
+      });
+
+      if (result !== content) {
+        fs.writeFileSync(file, result, 'utf8');
+        formatted.push(file);
+      }
+    } catch (err) {
+      process.stderr.write(`prettier: skipping ${file}: ${err.message}\n`);
+    }
+  }
+
+  if (formatted.length > 0) {
+    execSync(`git add ${formatted.map(f => `"${f}"`).join(' ')}`);
+    process.stdout.write(`prettier: formatted ${formatted.length} file(s)\n`);
+    for (const f of formatted) process.stdout.write(`  ${f}\n`);
+  }
+}
+
+main().catch(err => {
+  process.stderr.write(`pre-commit hook error: ${err.message}\n`);
+  process.exit(1);
+});
