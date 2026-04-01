@@ -46,14 +46,19 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A set of structured data that is easy for a user to scan, examine, and compare. */
 export class GoabTable extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
   version = "2";
+  /** Width of the table. By default it will fit the enclosed content. */
   @Input() width?: string;
+  /** Sets a relaxed variant of the table with more vertical padding for the cells. */
   @Input() variant?: GoabTableVariant;
+  /** Sets sort mode: "single" allows one column, "multi" allows up to 2 columns. */
   @Input() sortMode?: GoabTableSortMode;
+  /** When true, alternates row background colors for improved readability. */
   @Input({ transform: booleanAttribute }) striped?: boolean;
 
   ngOnInit(): void {
@@ -63,7 +68,9 @@ export class GoabTable extends GoabBaseComponent implements OnInit {
     });
   }
 
+  /** Emits when a table column is sorted. Emits the sort column and direction as GoabTableOnSortDetail. */
   @Output() onSort = new EventEmitter<GoabTableOnSortDetail>();
+  /** Emits when multi-column sorting changes. Emits an array of sort entries as GoabTableOnMultiSortDetail. */
   @Output() onMultiSort = new EventEmitter<GoabTableOnMultiSortDetail>();
 
   _onSort(e: Event) {

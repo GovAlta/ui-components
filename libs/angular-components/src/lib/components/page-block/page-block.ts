@@ -21,11 +21,14 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Full-width section with optional background. */
 export class GoabPageBlock implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
+  /** Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". */
   @Input() width?: GoabPageBlockSize;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   ngOnInit(): void {

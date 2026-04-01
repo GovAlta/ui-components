@@ -13,7 +13,7 @@ import {
   forwardRef,
   OnInit,
   ChangeDetectorRef,
-    inject,
+  inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -67,31 +67,43 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
+/** Present a list of options to the user to select from. */
 export class GoabDropdown extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** Identifier for the dropdown. Should be unique. */
   @Input() name?: string;
+  /** Defines how the selected value will be translated for the screen reader. If not specified it will fall back to the name. */
   @Input() ariaLabel?: string;
+  /** The aria-labelledby attribute identifies the element(or elements) that labels the dropdown it is applied to. Normally it is the id of the label. */
   @Input() ariaLabelledBy?: string;
+  /** When true the dropdown will have the ability to filter options by typing into the input field. */
   @Input({ transform: booleanAttribute }) filterable?: boolean;
+  /** Icon shown to the left of the dropdown input. */
   @Input() leadingIcon?: GoabIconType;
+  /** Maximum height of the dropdown menu. Non-native only. */
   @Input() maxHeight?: string;
+  /** When true, allows multiple items to be selected. Not currently exposed. */
   @Input({ transform: booleanAttribute }) multiselect?: boolean;
+  /** When true will render the native select HTML element. */
   @Input({ transform: booleanAttribute }) native?: boolean;
+  /** The text displayed for the dropdown before a selection is made. Non-native only. */
   @Input() placeholder?: string;
+  /** Overrides the autosized menu width. Non-native only. */
   @Input() width?: string;
+  /** Sets the maximum width of the dropdown. Use a CSS unit (px, %, ch, rem, em). */
   @Input() maxWidth?: string;
+  /** Specifies the autocomplete attribute for the dropdown input. Native only. */
   @Input() autoComplete?: string;
+  /** Sets the size of the dropdown. Compact reduces height for dense layouts. @default "default" */
   @Input() size?: GoabDropdownSize = "default";
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @deprecated This property has no effect and will be removed in a future version. */
   @Input() relative?: boolean;
+  /** Emits when the user selects a value from the dropdown. Emits a GoabDropdownOnChangeDetail object with the new value. */
   @Output() onChange = new EventEmitter<GoabDropdownOnChangeDetail>();
 
   isReady = false;
   version = "2";
-
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

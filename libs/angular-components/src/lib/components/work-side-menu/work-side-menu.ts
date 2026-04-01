@@ -41,19 +41,31 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Side menu variant for worker applications. */
 export class GoabWorkSideMenu implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** @required The application name displayed in the header. */
   @Input({ required: true }) heading!: string;
+  /** @required URL for the header link. Clicking the logo/heading navigates to this URL. */
   @Input({ required: true }) url!: string;
+  /** User's name displayed in the profile section. */
   @Input() userName?: string;
+  /** Secondary text displayed below the user's name, such as role or email. */
   @Input() userSecondaryText?: string;
+  /** Controls whether the side menu is expanded or collapsed. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** Template reference for the primary navigation slot content. */
   @Input() primaryContent!: TemplateRef<any>;
+  /** Template reference for the secondary navigation slot content. */
   @Input() secondaryContent!: TemplateRef<any>;
+  /** Template reference for the account slot content. */
   @Input() accountContent!: TemplateRef<any>;
+  /** Emits when the side menu is toggled open or closed. */
   @Output() onToggle = new EventEmitter();
+  /** Emits when a navigation link is clicked. Emits the URL as a string. */
   @Output() onNavigate = new EventEmitter<string>();
 
   isReady = false;

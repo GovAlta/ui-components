@@ -26,6 +26,7 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Indicate a separation of layout, or to distinguish large chunks of information on a page. */
 export class GoabDivider extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 

@@ -33,17 +33,26 @@ import {
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Display uploaded file with actions. */
 export class GoabFileUploadCard implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** @required The name of the uploaded file to display. */
   @Input({ required: true }) filename!: string;
-  @Input({ transform: numberAttribute }) size?: number;
+  /** @required The file size in bytes. Displayed in a human-readable format (KB, MB). */
+  @Input({ required: true, transform: numberAttribute }) size!: number;
+  /** The MIME type of the file. Used to determine the file type icon. */
   @Input() type?: string;
+  /** Upload progress percentage from 0-100. Use -1 to indicate upload is complete. */
   @Input({ transform: numberAttribute }) progress?: number;
+  /** Error message to display. When set, the card shows an error state with a cancel button. */
   @Input() error?: string;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
+  /** Emits when the user cancels a file upload. Emits a GoabFileUploadOnCancelDetail object with the filename. */
   @Output() onCancel = new EventEmitter<GoabFileUploadOnCancelDetail>();
+  /** Emits when the user removes an uploaded file. Emits a GoabFileUploadOnDeleteDetail object with the filename. */
   @Output() onDelete = new EventEmitter<GoabFileUploadOnDeleteDetail>();
 
   isReady = false;

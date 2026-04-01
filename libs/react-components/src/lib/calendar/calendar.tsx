@@ -27,14 +27,21 @@ declare module "react" {
   }
 }
 export interface GoabCalendarProps extends Margins, DataAttributes {
-  name?: string;
-  value?: string;
-  min?: string;
-  max?: string;
-  testId?: string;
+  /** @required Callback fired when the selected date changes. */
   onChange: (details: GoabCalendarOnChangeDetail) => void;
+  /** Name identifier for the calendar, included in change events. */
+  name?: string;
+  /** The currently selected date value in YYYY-MM-DD format. */
+  value?: string;
+  /** The minimum selectable date in YYYY-MM-DD format. Defaults to 5 years in the past. */
+  min?: string;
+  /** The maximum selectable date in YYYY-MM-DD format. Defaults to 5 years in the future. */
+  max?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
 }
 
+/** Visual calendar for date selection. */
 export function GoabCalendar({
   min,
   max,

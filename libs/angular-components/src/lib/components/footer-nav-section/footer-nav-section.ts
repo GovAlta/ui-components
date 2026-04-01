@@ -22,13 +22,17 @@ import {
   styles: [":host { width: 100%; }"],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Navigation links section in footer. */
 export class GoabAppFooterNavSection implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** The section heading displayed above the navigation links. */
   @Input() heading?: string;
+  /** Maximum number of columns to display links in on larger screens. @default 1 */
   @Input() maxColumnCount? = 1;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** "slot" is required and must equal to "nav" so it can be rendered in the correct position **/
+  /** @required Sets the slot to "nav" to render the section in the correct footer position. */
   @Input({ required: true }) slot!: "nav";
 
   isReady = false;

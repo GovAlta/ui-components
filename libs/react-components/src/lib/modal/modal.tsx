@@ -32,14 +32,23 @@ declare module "react" {
 }
 
 export interface GoabModalProps {
+  /** The heading text displayed at the top of the modal. */
   heading?: ReactNode;
+  /** Set the max allowed width of the modal. @default "60ch" */
   maxWidth?: string;
+  /** Content rendered in the modal's actions slot, typically action buttons. */
   actions?: ReactElement<any>;
+  /** Callback fired when the modal is closed. When provided, enables the close button and backdrop click-to-close behavior. */
   onClose?: () => void;
+  /** Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant. */
   transition?: GoabModalTransition;
+  /** Content rendered inside the modal body. */
   children?: ReactNode;
+  /** Controls if the modal is visible or not. */
   open?: boolean;
+  /** Sets the context and colour of the callout modal. Required when used as a callout type. */
   calloutVariant?: GoabModalCalloutVariant;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
   /**
    * @deprecated The role property is deprecated and will be removed in a future version.
@@ -48,6 +57,7 @@ export interface GoabModalProps {
   role?: GoabModalRole;
 }
 
+/** An overlay that appears in front of all other content, and requires a user to take an action before continuing. */
 export function GoabModal({
   heading,
   children,
