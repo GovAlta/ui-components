@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -24,14 +25,14 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppFooter implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() maxContentWidth?: string;
   @Input() testId?: string;
   @Input() url?: string;
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

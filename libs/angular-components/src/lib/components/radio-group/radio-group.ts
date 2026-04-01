@@ -12,7 +12,7 @@ import {
   forwardRef,
   OnInit,
   ChangeDetectorRef,
-  Renderer2,
+    inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -56,6 +56,8 @@ import { GoabControlValueAccessor } from "../base.component";
   ],
 })
 export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
   @Input() name?: string;
@@ -63,12 +65,6 @@ export class GoabRadioGroup extends GoabControlValueAccessor implements OnInit {
   @Input() ariaLabel?: string;
   @Input() size?: GoabRadioGroupSize = "default";
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    renderer: Renderer2,
-  ) {
-    super(renderer);
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

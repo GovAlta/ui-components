@@ -20,8 +20,8 @@ import {
 } from "@abgov/angular-components";
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [
+    AppComponent,
     GoabAppHeader,
     GoabAppFooter,
     GoabMicrositeHeader,

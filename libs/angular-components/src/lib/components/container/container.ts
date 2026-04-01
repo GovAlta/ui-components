@@ -11,6 +11,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -50,6 +51,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabContainer extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() type?: GoabContainerType = "interactive";
   @Input() accent?: GoabContainerAccent = "filled";
   @Input() padding?: GoabContainerPadding = "relaxed";
@@ -61,10 +64,6 @@ export class GoabContainer extends GoabBaseComponent implements OnInit {
   @Input() actions!: TemplateRef<any>;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

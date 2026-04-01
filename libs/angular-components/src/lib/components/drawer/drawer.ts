@@ -9,6 +9,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common";
 
@@ -38,6 +39,8 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDrawer implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   version = "2";
 
   @Input({ required: true, transform: booleanAttribute }) open!: boolean;
@@ -49,8 +52,6 @@ export class GoabDrawer implements OnInit {
   @Output() onClose = new EventEmitter();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

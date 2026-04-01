@@ -7,6 +7,7 @@ import {
   Output,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
@@ -32,14 +33,12 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormStepper extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() step?: number = -1;
   @Output() onChange = new EventEmitter<GoabFormStepperOnChangeDetail>();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

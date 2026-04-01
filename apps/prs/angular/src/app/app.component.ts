@@ -1,19 +1,40 @@
-import { Component } from "@angular/core";
-import { Router, NavigationEnd } from "@angular/router";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from "@angular/core";
+import { Router, NavigationEnd, RouterOutlet } from "@angular/router";
 import { filter } from "rxjs/operators";
+import {
+  GoabAppFooter,
+  GoabAppHeader,
+  GoabAppHeaderMenu,
+  GoabMicrositeHeader,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
+} from "@abgov/angular-components";
 
 @Component({
+  standalone: true,
   selector: "abgov-root",
   templateUrl: "./app.component.html",
   styles: ``,
-  standalone: false,
+  imports: [
+    RouterOutlet,
+    GoabAppFooter,
+    GoabAppHeader,
+    GoabAppHeaderMenu,
+    GoabMicrositeHeader,
+    GoabWorkSideMenu,
+    GoabWorkSideMenuItem,
+    GoabWorkSideMenuGroup,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppComponent {
   isFullPage = false;
 
   private fullPageRoutes = ["/features/2885"];
+  private router = inject(Router);
 
-  constructor(private router: Router) {
+  constructor() {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {

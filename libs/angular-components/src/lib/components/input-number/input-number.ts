@@ -21,6 +21,7 @@ import {
   numberAttribute,
   TemplateRef,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -107,6 +108,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class GoabInputNumber implements ControlValueAccessor, OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() type: GoabInputType = "number";
   @Input() name?: string;
@@ -149,8 +152,6 @@ export class GoabInputNumber implements ControlValueAccessor, OnInit {
   @Output() onChange = new EventEmitter<GoabInputOnChangeDetail>();
 
   handleTrailingIconClick = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.handleTrailingIconClick = this.onTrailingIconClick.observed;

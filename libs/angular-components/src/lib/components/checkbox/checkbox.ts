@@ -13,7 +13,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
-  Renderer2,
+    inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgTemplateOutlet } from "@angular/common";
@@ -68,15 +68,11 @@ import { GoabControlValueAccessor } from "../base.component";
   imports: [NgTemplateOutlet],
 })
 export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    renderer: Renderer2,
-  ) {
-    super(renderer);
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

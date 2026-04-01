@@ -10,6 +10,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -39,6 +40,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabLink implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() leadingIcon?: GoabIconType;
   @Input() trailingIcon?: GoabIconType;
@@ -52,8 +55,6 @@ export class GoabLink implements OnInit {
   @Input() mb?: Spacing;
   @Input() ml?: Spacing;
   @Input() mr?: Spacing;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -11,6 +11,7 @@ import {
   Output,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
@@ -40,6 +41,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCalendar extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   version = "2";
 
   @Input() name?: string;
@@ -75,10 +78,6 @@ export class GoabCalendar extends GoabBaseComponent implements OnInit {
 
   maxString(): string {
     return this.formatValue("max", this.max);
-  }
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
   }
 
   ngOnInit(): void {

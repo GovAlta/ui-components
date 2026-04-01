@@ -6,6 +6,7 @@ import {
   OnInit,
   ChangeDetectorRef,
   booleanAttribute,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -32,12 +33,12 @@ import { NgTemplateOutlet } from "@angular/common";
   imports: [NgTemplateOutlet],
 })
 export class GoabTab implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() heading!: string | TemplateRef<any>;
   @Input({ transform: booleanAttribute }) disabled?: boolean;
   @Input() slug?: string;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

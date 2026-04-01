@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabIconType } from "@abgov/ui-components-common";
@@ -32,14 +33,12 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabSideMenuGroup extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
   @Input({ required: true }) heading!: string;
   @Input() icon?: GoabIconType;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -8,6 +8,7 @@ import {
   EventEmitter,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 @Component({
@@ -41,6 +42,8 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabWorkSideMenu implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true }) heading!: string;
   @Input({ required: true }) url!: string;
   @Input() userName?: string;
@@ -54,8 +57,6 @@ export class GoabWorkSideMenu implements OnInit {
   @Output() onNavigate = new EventEmitter<string>();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

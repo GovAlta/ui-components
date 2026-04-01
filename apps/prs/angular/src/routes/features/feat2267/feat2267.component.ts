@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import {
   GoabFormItem,
   GoabCheckbox,
@@ -25,12 +25,10 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from "@angul
   ],
 })
 export class Feat2267Component {
-  form!: FormGroup;
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      checkboxItem: [""],
-    });
-  }
+  private fb = inject(FormBuilder);
+  form: FormGroup = this.fb.group({
+    checkboxItem: [""],
+  });
   private readonly manualContactOptions = ["email", "phone", "sms"];
   basicSelection: string[] = [];
   errorSelection: string[] = [];

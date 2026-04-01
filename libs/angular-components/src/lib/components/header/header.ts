@@ -7,6 +7,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -32,6 +33,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppHeader extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() url?: string;
   @Input() heading?: string;
   @Input() secondaryText?: string;
@@ -40,10 +43,6 @@ export class GoabAppHeader extends GoabBaseComponent implements OnInit {
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

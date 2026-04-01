@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 @Component({
   standalone: true,
@@ -23,6 +24,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabLinearProgress implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() progress?: number | null | undefined;
   @Input() percentVisibility?: "visible" | "hidden" | undefined;
   @Input() ariaLabel?: string;
@@ -30,8 +33,6 @@ export class GoabLinearProgress implements OnInit {
   @Input() testid?: string;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

@@ -7,6 +7,7 @@ import {
   EventEmitter,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -14,20 +15,22 @@ import {
   selector: "goab-work-side-notification-panel", // eslint-disable-line
   template: `
     @if (isReady) {
-    <goa-work-side-notification-panel
-      [attr.heading]="heading"
-      [attr.active-tab]="activeTab"
-      [attr.testid]="testId"
-      (_markAllRead)="_onMarkAllRead()"
-      (_viewAll)="_onViewAll()"
-    >
-      <ng-content />
-    </goa-work-side-notification-panel>
+      <goa-work-side-notification-panel
+        [attr.heading]="heading"
+        [attr.active-tab]="activeTab"
+        [attr.testid]="testId"
+        (_markAllRead)="_onMarkAllRead()"
+        (_viewAll)="_onViewAll()"
+      >
+        <ng-content />
+      </goa-work-side-notification-panel>
     }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabWorkSideNotificationPanel implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() heading?: string;
   @Input() activeTab?: GoabWorkSideNotificationActiveTabType;
   @Input() testId?: string;
@@ -36,8 +39,6 @@ export class GoabWorkSideNotificationPanel implements OnInit {
   @Output() onViewAll = new EventEmitter<void>();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

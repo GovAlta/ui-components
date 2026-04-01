@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -25,12 +26,12 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTableSortHeader implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() name?: string;
   @Input() direction?: GoabTableSortDirection = "none";
   @Input() sortOrder?: GoabTableSortOrder;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

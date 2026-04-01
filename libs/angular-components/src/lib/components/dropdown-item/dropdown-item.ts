@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
@@ -24,6 +25,8 @@ import { GoabDropdownItemMountType } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDropdownItem implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() value?: string;
   @Input() filter?: string;
   @Input() label?: string;
@@ -31,8 +34,6 @@ export class GoabDropdownItem implements OnInit {
   @Input() mountType?: GoabDropdownItemMountType;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

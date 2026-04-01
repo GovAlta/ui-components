@@ -7,6 +7,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -28,14 +29,14 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabSpinner implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() type?: GoabSpinnerType;
   @Input() size?: GoabSpinnerSize;
   @Input({ transform: booleanAttribute }) invert?: boolean;
   @Input({ transform: numberAttribute }) progress?: number;
   @Input() testId?: string;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

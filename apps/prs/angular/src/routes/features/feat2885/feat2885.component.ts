@@ -1,5 +1,4 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, OnDestroy } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import {
   GoabIconButton,
   GoabWorkSideMenu,
@@ -39,7 +38,6 @@ type Notification = {
     `,
   ],
   imports: [
-    CommonModule,
     GoabWorkSideMenu,
     GoabWorkSideMenuItem,
     GoabWorkSideNotificationPanel,

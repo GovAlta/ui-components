@@ -11,6 +11,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -49,6 +50,8 @@ import { GoabBaseComponent } from "../base.component";
   ],
 })
 export class GoabBadge extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() type?: GoabBadgeType;
   @Input() content?: string;
   // Ensure boolean input; attribute only set when true so default behaviour is false
@@ -60,10 +63,6 @@ export class GoabBadge extends GoabBaseComponent implements OnInit {
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

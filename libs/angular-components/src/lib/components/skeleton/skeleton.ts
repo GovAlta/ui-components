@@ -6,6 +6,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -33,15 +34,13 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabSkeleton extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input({ required: true }) type!: GoabSkeletonType;
   @Input() maxWidth = "300px";
   @Input() size?: GoabSkeletonSize;
   @Input({ transform: numberAttribute }) lineCount?: number;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 type SnackbarVerticalPosition = "top" | "bottom";
@@ -26,12 +27,12 @@ type SnackbarHorizontalPosition = "left" | "center" | "right";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTemporaryNotificationCtrl implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() verticalPosition: SnackbarVerticalPosition = "bottom";
   @Input() horizontalPosition: SnackbarHorizontalPosition = "center";
   @Input() testId?: string;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

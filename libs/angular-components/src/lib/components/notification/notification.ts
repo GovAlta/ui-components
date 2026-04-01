@@ -12,6 +12,7 @@ import {
   OnInit,
   ChangeDetectorRef,
   booleanAttribute,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -37,6 +38,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabNotification implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
   @Input() type?: GoabNotificationType = "information";
@@ -45,8 +48,6 @@ export class GoabNotification implements OnInit {
   @Input() emphasis?: GoabNotificationEmphasis = "high";
   @Input({ transform: booleanAttribute }) compact?: boolean;
   @Input() testId?: string;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

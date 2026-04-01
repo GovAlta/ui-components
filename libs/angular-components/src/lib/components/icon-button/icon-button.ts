@@ -12,6 +12,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { GoabBaseComponent } from "../base.component";
 
@@ -45,6 +46,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabIconButton extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   protected readonly JSON = JSON;
   @Input({ required: true }) icon!: GoabIconType;
@@ -57,10 +60,6 @@ export class GoabIconButton extends GoabBaseComponent implements OnInit {
   @Input() actionArg?: string;
   @Input() actionArgs?: Record<string, unknown>;
   @Output() onClick = new EventEmitter();
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

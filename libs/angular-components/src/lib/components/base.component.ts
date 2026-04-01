@@ -7,6 +7,7 @@ import {
   ElementRef,
   ViewChild,
   Renderer2,
+  inject,
 } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
 
@@ -119,9 +120,7 @@ export abstract class GoabControlValueAccessor
   @ViewChild("goaComponentRef", { static: false, read: ElementRef })
   protected goaComponentRef?: ElementRef;
 
-  constructor(protected renderer: Renderer2) {
-    super();
-  }
+  protected renderer = inject(Renderer2);
 
   /**
    * Convert an arbitrary value into a string for DOM attribute assignment.

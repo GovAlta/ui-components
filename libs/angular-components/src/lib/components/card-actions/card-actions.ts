@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -18,9 +19,9 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCardActions implements OnInit {
-  isReady = false;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

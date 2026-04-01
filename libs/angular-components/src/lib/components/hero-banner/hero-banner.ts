@@ -5,6 +5,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -33,6 +34,8 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabHeroBanner implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() heading?: string;
   @Input() backgroundUrl?: string;
@@ -42,8 +45,6 @@ export class GoabHeroBanner implements OnInit {
   @Input() backgroundColor?: string;
   @Input() textColor?: string;
   @Input() actions!: TemplateRef<any>;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

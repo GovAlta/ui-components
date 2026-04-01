@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -25,6 +26,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppHeaderMenu extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() leadingIcon?: GoabIconType;
   @Input() heading?: string;
   @Input() slotName?: string;
@@ -35,10 +38,6 @@ export class GoabAppHeaderMenu extends GoabBaseComponent implements OnInit {
   }
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

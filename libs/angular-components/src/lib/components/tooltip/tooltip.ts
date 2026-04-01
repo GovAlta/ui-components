@@ -9,6 +9,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -43,15 +44,13 @@ import { GoabBaseComponent } from "../base.component";
   imports: [NgTemplateOutlet],
 })
 export class GoabTooltip extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() position?: GoabTooltipPosition;
   @Input() content?: string | TemplateRef<unknown>;
   @Input() hAlign?: GoabTooltipHorizontalAlignment;
   @Input() maxWidth?: string;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

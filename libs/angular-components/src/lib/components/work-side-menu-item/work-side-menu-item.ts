@@ -6,6 +6,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -37,6 +38,8 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabWorkSideMenuItem implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true }) label!: string;
   @Input() url?: string;
   @Input() badge?: string;
@@ -48,8 +51,6 @@ export class GoabWorkSideMenuItem implements OnInit {
   @Input() popoverContent!: TemplateRef<any>;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component
