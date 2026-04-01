@@ -9,7 +9,7 @@
   // Public
 
   /** The content of the tooltip. */
-  export let content = "";
+  export let content: string = "";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Position with respect to the child element. */
@@ -80,8 +80,8 @@
   let _tooltipEl: HTMLElement;
   let _initialPosition: Position;
   let _tooltipVisible = false;
-  let _showTooltipTimeout: string | number | NodeJS.Timeout | undefined;
-  let _hideTooltipTimeout: string | number | NodeJS.Timeout | undefined;
+  let _showTooltipTimeout: ReturnType<typeof setTimeout> | undefined;
+  let _hideTooltipTimeout: ReturnType<typeof setTimeout> | undefined;
 
   // Use a unique id for each tooltip instance.
   // So screen readers can identify the tooltip instance when

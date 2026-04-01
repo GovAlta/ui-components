@@ -69,7 +69,7 @@ export interface GoabDropdownProps extends Margins, DataAttributes {
   leadingIcon?: GoabIconType;
   /** Maximum height of the dropdown menu. Non-native only. @default "276px" */
   maxHeight?: string;
-  /** When true, allows multiple items to be selected. */
+  /** When true, allows multiple items to be selected. @internal */
   multiselect?: boolean;
   /** When true, renders the native select HTML element. */
   native?: boolean;

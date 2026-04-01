@@ -29,6 +29,8 @@ export interface GoabHeroBannerProps {
   testId?: string;
   /** Content rendered inside the hero banner body. */
   children?: React.ReactNode;
+  /** Content rendered in the actions slot. */
+  actions?: React.ReactNode;
   /** Maximum width of the content area. @default "100%" */
   maxContentWidth?: string;
   /** Hero Banner background color when no background image is provided. @default "#f8f8f8" */
@@ -46,6 +48,7 @@ export function GoabHeroBanner({
   backgroundColor,
   textColor,
   children,
+  actions,
   testId,
 }: GoabHeroBannerProps): JSX.Element {
   return (
@@ -59,6 +62,7 @@ export function GoabHeroBanner({
       testid={testId}
     >
       {children}
+      {actions && <div slot="actions">{actions}</div>}
     </goa-hero-banner>
   );
 }

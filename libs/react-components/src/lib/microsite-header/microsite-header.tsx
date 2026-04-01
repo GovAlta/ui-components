@@ -26,7 +26,7 @@ interface WCProps {
 export interface GoabHeaderProps {
   /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   type: GoabServiceLevel;
-  /** App or service version displayed on the right side of the header. Accepts a string or custom ReactNode for rich content. */
+  /** App or service version displayed on the right side of the header. */
   version?: string | React.ReactNode;
   /** URL to a feedback page displayed when provided. */
   feedbackUrl?: string;

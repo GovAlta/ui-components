@@ -1,105 +1,270 @@
 {
   "componentSlug": "block",
   "extractedFrom": "libs/web-components/src/components/block/Block.svelte",
-  "props": [
-    {
-      "name": "gap",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": "m",
-      "description": "Spacing between items. Uses design system spacing tokens."
-    },
-    {
-      "name": "direction",
-      "type": "\"row\" | \"column\"",
-      "values": [
-        "row",
-        "column"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "GoabBlockAlignment",
+          "required": false,
+          "default": "normal",
+          "description": "Primary axis alignment of child components."
+        },
+        {
+          "name": "direction",
+          "type": "GoabBlockDirection",
+          "required": false,
+          "default": "row",
+          "description": "Stacking direction of child components."
+        },
+        {
+          "name": "gap",
+          "type": "Spacing",
+          "required": false,
+          "default": "m",
+          "description": "Spacing between items. Uses design system spacing tokens."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the maximum width of the block container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "minWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the minimum width of the block container."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the width of the block container."
+        }
       ],
-      "required": false,
-      "default": "row",
-      "description": "Stacking direction of child components."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "alignment",
-      "type": "\"center\" | \"start\" | \"end\" | \"normal\"",
-      "values": [
-        "center",
-        "start",
-        "end",
-        "normal"
+    "angular": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "GoabBlockAlignment",
+          "required": false,
+          "default": null,
+          "description": "Sets the primary axis alignment of child components."
+        },
+        {
+          "name": "direction",
+          "type": "GoabBlockDirection",
+          "required": false,
+          "default": null,
+          "description": "Sets the stacking direction of child components."
+        },
+        {
+          "name": "gap",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the spacing between items. Uses design system spacing tokens."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the maximum width of the block container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "minWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the minimum width of the block container."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the width of the block container. Defaults to max-content."
+        }
       ],
-      "required": false,
-      "default": "normal",
-      "description": "Primary axis alignment of child components."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "minWidth",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets the minimum width of the block container."
-    },
-    {
-      "name": "maxWidth",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets the maximum width of the block container."
-    },
-    {
-      "name": "width",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets the width of the block container. Defaults to max-content."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+    "webComponents": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "\"center\" | \"start\" | \"end\" | \"normal\"",
+          "values": [
+            "center",
+            "start",
+            "end",
+            "normal"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": "Primary axis alignment of child components."
+        },
+        {
+          "name": "direction",
+          "type": "\"row\" | \"column\"",
+          "values": [
+            "row",
+            "column"
+          ],
+          "required": false,
+          "default": "row",
+          "description": "Stacking direction of child components."
+        },
+        {
+          "name": "gap",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "m",
+          "description": "Spacing between items. Uses design system spacing tokens."
+        },
+        {
+          "name": "max-width",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the maximum width of the block container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "min-width",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the minimum width of the block container."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the width of the block container. Defaults to max-content."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

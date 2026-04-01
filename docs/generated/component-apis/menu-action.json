@@ -1,37 +1,109 @@
 {
   "componentSlug": "menu-action",
   "extractedFrom": "libs/web-components/src/components/menu-button/MenuAction.svelte",
-  "props": [
-    {
-      "name": "text",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Display text for the menu action."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Action identifier included in the click event."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the text."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Display text for the menu action."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "action",
-      "type": "string",
-      "required": false,
-      "default": "default",
-      "description": "Action identifier included in the click event."
+    "angular": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Action identifier included in the click event."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the text."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Display text for the menu action."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "icon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon displayed before the text."
+    "webComponents": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "default",
+          "description": "Action identifier included in the click event."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the text."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Display text for the menu action."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

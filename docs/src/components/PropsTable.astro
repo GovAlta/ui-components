@@ -5,171 +5,363 @@
  * Uses goa-data-grid for keyboard navigation and GoabContainer for styling.
  * Matches the current ui-components-docs pattern.
  */
-import type { PropDefinition, EventDefinition, SlotDefinition } from "../lib/content-queries";
+import type {
+  PropDefinition,
+  EventDefinition,
+  SlotDefinition,
+  FrameworkApiMap,
+} from "../lib/content-queries";
 
 interface Props {
-  props?: PropDefinition[];
-  events?: EventDefinition[];
-  slots?: SlotDefinition[];
+  frameworks: FrameworkApiMap;
   headingPrefix?: string;
   idPrefix?: string;
   badge?: string;
 }
 
-const { props = [], events = [], slots = [], headingPrefix = "", idPrefix = "", badge = "" } = Astro.props;
+const { frameworks, headingPrefix = "", idPrefix = "", badge = "" } = Astro.props;
 const prefix = headingPrefix ? `${headingPrefix} ` : "";
-const idBase = idPrefix ? `${idPrefix}-` : (headingPrefix ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-` : "");
+const idBase = idPrefix
+  ? `${idPrefix}-`
+  : headingPrefix
+    ? `${headingPrefix.toLowerCase().replace(/\s+/g, "-")}-`
+    : "";
+const tableId = idBase || "component";
 
-// Filter slots: hide "default" slots with no description (adds noise, no value)
-// Keep named slots even without descriptions (the name itself is useful info)
-const meaningfulSlots = slots.filter(slot =>
-  slot.name !== "default" || (slot.description && slot.description.trim() !== "")
-);
+const frameworkOrder = ["react", "angular", "webComponents"] as const;
+type FrameworkKey = (typeof frameworkOrder)[number];
 
-// Helper to detect and parse deprecated props
-function parseDeprecated(description: string | undefined): { isDeprecated: boolean; cleanDescription: string } {
-  if (!description) return { isDeprecated: false, cleanDescription: "" };
+function getMeaningfulSlots(sourceSlots: SlotDefinition[]): SlotDefinition[] {
+  // Default slot content is usually implied by the component example and adds noise.
+  // Hide it only when it has no meaningful description; preserve it when explicitly documented.
+  return sourceSlots.filter((slot) => {
+    if (slot.name !== "default") {
+      return true;
+    }
 
-  const deprecatedMatch = description.match(/^@deprecated\s*(.*)/i);
-  if (deprecatedMatch) {
-    return {
-      isDeprecated: true,
-      cleanDescription: deprecatedMatch[1].trim()
-    };
-  }
-
-  return { isDeprecated: false, cleanDescription: description };
+    return (slot.description?.trim().length ?? 0) > 0;
+  });
 }
 
 // Combine margin props (mt, mr, mb, ml) into a single row
 const marginPropNames = ["mt", "mr", "mb", "ml"];
-const marginProps = props.filter(p => marginPropNames.includes(p.name));
-const hasAllMarginProps = marginPropNames.every(name => marginProps.some(p => p.name === name));
 
 // Standard spacing values used by margin props
-const spacingValues = ["none", "3xs", "2xs", "xs", "s", "m", "l", "xl", "2xl", "3xl", "4xl"];
+const spacingValues = [
+  "none",
+  "3xs",
+  "2xs",
+  "xs",
+  "s",
+  "m",
+  "l",
+  "xl",
+  "2xl",
+  "3xl",
+  "4xl",
+];
 
-// Create combined margin prop if all four exist
-const combinedMarginProp = hasAllMarginProps ? {
-  name: "mt, mr, mb, ml",
-  type: "Spacing",
-  values: spacingValues,
-  description: "Apply margin to the top, right, bottom, and/or left of the component.",
-  required: false,
-  default: null
-} : null;
+function normalizeName(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
 
-// Filter out individual margin props if we're combining them
-const displayProps = hasAllMarginProps
-  ? props.filter(p => !marginPropNames.includes(p.name))
-  : props;
+function isSlotProp(prop: PropDefinition, sourceSlots: SlotDefinition[]): boolean {
+  const slotNames = new Set(sourceSlots.map((slot) => normalizeName(slot.name)));
+  const normalizedPropName = normalizeName(prop.name);
+  const type = prop.type ?? "";
 
-// Insert combined margin prop at the end (or could be sorted differently)
-const finalProps = combinedMarginProp
-  ? [...displayProps, combinedMarginProp]
-  : displayProps;
+  const isReactSlotType = /React(?:\.[A-Za-z]+)?(?:Node|Element)(?:<.+?>)?|JSX\.Element/.test(type);
+  const isAngularSlotType = /TemplateRef\s*<.+?>/.test(type);
+  const isSlotOnlyType = isReactSlotType || isAngularSlotType;
+
+  // Only treat as a slot prop if the type is purely a slot type (no string union).
+  // Props like `error: string | ReactNode` should still appear in the Props table.
+  const isPureSlotType = isSlotOnlyType && !/\bstring\b/.test(type);
+
+  return (
+    (prop.name === "children" && isReactSlotType) ||
+    (slotNames.has(normalizedPropName) && isPureSlotType)
+  );
+}
+
+function getDisplayType(prop: PropDefinition): string {
+  return prop.typeLabel || prop.type;
+}
+
+function getDisplayTypeDetails(prop: PropDefinition, framework: FrameworkKey): string {
+  if (prop.typeLabel && prop.values?.length) {
+    return prop.values.join(" | ");
+  }
+  if (framework === "webComponents" && prop.type === "boolean") {
+    return "true | false";
+  }
+  return "";
+}
+
+function getSlotType(slot: SlotDefinition, framework: FrameworkKey): string {
+  if (slot.type) return slot.type;
+
+  if (framework === "react") return "ReactNode";
+  if (framework === "angular") return "TemplateRef";
+  return "slot";
+}
+
+function getSlotsHeadingLabel(framework: FrameworkKey): string {
+  if (framework === "react") return "ReactNode";
+  if (framework === "angular") return "TemplateRef";
+  return "Slots";
+}
+
+function buildDisplayProps(
+  sourceProps: PropDefinition[],
+  sourceEvents: EventDefinition[] = [],
+  sourceSlots: SlotDefinition[] = [],
+): PropDefinition[] {
+  const eventNames = new Set(sourceEvents.map((event) => event.name));
+  const filteredProps = sourceProps.filter(
+    (prop, index, props) =>
+      !eventNames.has(prop.name) &&
+      !isSlotProp(prop, sourceSlots) &&
+      props.findIndex((candidate) => candidate.name === prop.name) === index,
+  );
+
+  const marginProps = filteredProps.filter((p) => marginPropNames.includes(p.name));
+  const nonMarginProps = filteredProps.filter((p) => !marginPropNames.includes(p.name));
+  const requiredProps = nonMarginProps.filter((p) => p.required);
+  const optionalProps = nonMarginProps.filter((p) => !p.required);
+  const orderedProps = [...requiredProps, ...optionalProps];
+  const hasAllMarginProps = marginPropNames.every((name) =>
+    marginProps.some((p) => p.name === name),
+  );
+
+  if (!hasAllMarginProps) return [...orderedProps, ...marginProps];
+
+  const combinedMarginProp: PropDefinition = {
+    name: "mt, mr, mb, ml",
+    type: "Spacing",
+    values: spacingValues,
+    description: "Apply margin to the top, right, bottom, and/or left of the component.",
+    required: false,
+    default: null,
+  };
+
+  return [...orderedProps, combinedMarginProp];
+}
+
+const frameworkViews = frameworkOrder.reduce(
+  (acc, framework) => {
+    const frameworkApi = frameworks[framework] ?? {
+      props: [],
+      events: [],
+      slots: [],
+    };
+
+    acc[framework] = {
+      props: buildDisplayProps(
+        frameworkApi.props ?? [],
+        frameworkApi.events ?? [],
+        frameworkApi.slots ?? [],
+      ),
+      events: frameworkApi.events ?? [],
+      slots: getMeaningfulSlots(frameworkApi.slots ?? []),
+    };
+    return acc;
+  },
+  {} as Record<
+    FrameworkKey,
+    { props: PropDefinition[]; events: EventDefinition[]; slots: SlotDefinition[] }
+  >,
+);
+
+const initialVisibleFramework =
+  frameworkOrder.find((framework) => {
+    const view = frameworkViews[framework];
+    return view.props.length > 0 || view.events.length > 0 || view.slots.length > 0;
+  }) ?? "react";
 ---
 
-{finalProps.length > 0 && (
-  <div class="api-section">
-    <div class="api-heading">
-      <h3 id={`${idBase}props`}>{prefix}Props</h3>
-      {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
-    </div>
-    <goa-container version="2" type="interactive">
-      <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
-        {finalProps.map((prop, index) => {
-          const { isDeprecated, cleanDescription } = parseDeprecated(prop.description);
-          return (
-            <div class="prop-row" data-grid="row">
-              {/* Cell 1: Name (+ Required/Deprecated badges) */}
-              <div class="prop-cell prop-cell-name" data-grid="cell">
-                <span class="prop-name">{prop.name}</span>
-                {prop.required && <goa-badge version="2" type="important" icon="false" content="Required" />}
-                {isDeprecated && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="Deprecated" />}
-              </div>
-              {/* Cell 2: Type values */}
-              {prop.type && (
-                <div class="prop-cell prop-cell-type" data-grid="cell">
-                  <span class="prop-type">
-                    {prop.values ? prop.values.join(" | ") : prop.type}
-                  </span>
-                </div>
-              )}
-              {/* Cell 3: Description (if exists, with @deprecated stripped) */}
-              {cleanDescription && (
-                <div class="prop-cell prop-cell-description" data-grid="cell">
-                  {cleanDescription}
-                </div>
-              )}
-              {/* Cell 4: Default value (if exists) */}
-              {prop.default !== null && prop.default !== "" && (
-                <div class="prop-cell prop-cell-default" data-grid="cell">
-                  Defaults to <code>{String(prop.default)}</code>.
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </goa-data-grid>
-    </goa-container>
-  </div>
-)}
-
-{events.length > 0 && (
-  <div class="api-section">
-    <div class="api-heading">
-      <h3 id={`${idBase}events`}>{prefix}Events</h3>
-      {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
-    </div>
-    <goa-container version="2" type="interactive">
-      <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
-        {events.map((event) => (
+<div data-props-table={tableId}>
+  {
+    frameworkOrder.some((fw) => frameworkViews[fw].props.length > 0) && (
+      <div class="api-section">
+        <div class="api-heading">
+          <h3 id={`${idBase}props`}>{prefix}Props</h3>
+          {badge && (
+            <goa-badge
+              version="2"
+              type="default"
+              emphasis="subtle"
+              icon="false"
+              content={badge}
+            />
+          )}
+        </div>
+        {frameworkOrder.map((framework) => (
           <div
-            class="prop-row"
-            data-grid="row"
-            data-frameworks={event.frameworks?.join(",") || ""}
+            data-framework-content="props"
+            data-framework={framework}
+            style={framework === initialVisibleFramework ? "" : "display:none;"}
           >
-            <div class="prop-cell prop-cell-name" data-grid="cell">
-              <span class="prop-name">{event.name}</span>
-            </div>
-            <div class="prop-cell prop-cell-type" data-grid="cell">
-              <span class="prop-type">{event.type}</span>
-            </div>
-            {event.description && (
-              <div class="prop-cell prop-cell-description" data-grid="cell">
-                {event.description}
-              </div>
-            )}
+            <goa-container version="2" type="interactive">
+              <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
+                {frameworkViews[framework].props.map((prop) => {
+                  return (
+                    <div class="prop-row" data-grid="row">
+                      <div class="prop-cell prop-cell-name" data-grid="cell">
+                        <span class="prop-name">{prop.name}</span>
+                        {prop.required && (
+                          <goa-badge
+                            version="2"
+                            type="important"
+                            icon="false"
+                            content="Required"
+                          />
+                        )}
+                        {prop.deprecated && (
+                          <goa-badge
+                            version="2"
+                            type="default"
+                            emphasis="subtle"
+                            icon="false"
+                            content="Deprecated"
+                          />
+                        )}
+                      </div>
+                      {prop.type && (
+                        <div class="prop-cell prop-cell-type" data-grid="cell">
+                          <span class="prop-type">{getDisplayType(prop)}</span>
+                          {getDisplayTypeDetails(prop, framework) && (
+                            <span class="prop-type-details">
+                              {getDisplayTypeDetails(prop, framework)}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                      {prop.description && (
+                        <div class="prop-cell prop-cell-description" data-grid="cell">
+                          {prop.description}
+                        </div>
+                      )}
+                      {prop.default !== null && prop.default !== "" && (
+                        <div class="prop-cell prop-cell-default" data-grid="cell">
+                          Defaults to <code>{String(prop.default)}</code>.
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </goa-data-grid>
+            </goa-container>
           </div>
         ))}
-      </goa-data-grid>
-    </goa-container>
-  </div>
-)}
+      </div>
+    )
+  }
 
-{meaningfulSlots.length > 0 && (
-  <div class="api-section">
-    <div class="api-heading">
-      <h3 id={`${idBase}slots`}>{prefix}Slots</h3>
-      {badge && <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={badge}></goa-badge>}
-    </div>
-    <goa-container version="2" type="interactive">
-      <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
-        {meaningfulSlots.map((slot) => (
-          <div class="prop-row" data-grid="row">
-            <div class="prop-cell prop-cell-name" data-grid="cell">
-              <span class="prop-name">{slot.name === "default" ? "(default)" : slot.name}</span>
-            </div>
-            <div class="prop-cell prop-cell-description" data-grid="cell">
-              {slot.description || "Named slot for content"}
-            </div>
+  {
+    frameworkOrder.some((fw) => frameworkViews[fw].events.length > 0) && (
+      <div class="api-section">
+        <div class="api-heading">
+          <h3 id={`${idBase}events`}>{prefix}Events</h3>
+          {badge && (
+            <goa-badge
+              version="2"
+              type="default"
+              emphasis="subtle"
+              icon="false"
+              content={badge}
+            />
+          )}
+        </div>
+        {frameworkOrder.map((framework) => (
+          <div
+            data-framework-content="events"
+            data-framework={framework}
+            style={framework === initialVisibleFramework ? "" : "display:none;"}
+          >
+            <goa-container version="2" type="interactive">
+              <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
+                {frameworkViews[framework].events.map((event) => (
+                  <div class="prop-row" data-grid="row">
+                    <div class="prop-cell prop-cell-name" data-grid="cell">
+                      <span class="prop-name">{event.name}</span>
+                    </div>
+                    <div class="prop-cell prop-cell-type" data-grid="cell">
+                      <span class="prop-type">{event.type}</span>
+                    </div>
+                    {event.description && (
+                      <div class="prop-cell prop-cell-description" data-grid="cell">
+                        {event.description}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </goa-data-grid>
+            </goa-container>
           </div>
         ))}
-      </goa-data-grid>
-    </goa-container>
-  </div>
-)}
+      </div>
+    )
+  }
+
+  {
+    frameworkOrder.some((fw) => frameworkViews[fw].slots.length > 0) && (
+      <div class="api-section">
+        <div class="api-heading">
+          <h3
+            id={`${idBase}slots`}
+            data-slots-heading
+            data-prefix={prefix}
+          >
+            {prefix}{getSlotsHeadingLabel(initialVisibleFramework)}
+          </h3>
+          {badge && (
+            <goa-badge
+              version="2"
+              type="default"
+              emphasis="subtle"
+              icon="false"
+              content={badge}
+            />
+          )}
+        </div>
+        {frameworkOrder.map((framework) => (
+          <div
+            data-framework-content="slots"
+            data-framework={framework}
+            style={framework === initialVisibleFramework ? "" : "display:none;"}
+          >
+            <goa-container version="2" type="interactive">
+              <goa-data-grid keyboard-nav="layout" keyboard-icon-position="right">
+                {frameworkViews[framework].slots.map((slot) => (
+                  <div class="prop-row" data-grid="row">
+                    <div class="prop-cell prop-cell-name" data-grid="cell">
+                      <span class="prop-name">{slot.name}</span>
+                      {slot.required && (
+                        <goa-badge
+                          version="2"
+                          type="important"
+                          icon="false"
+                          content="Required"
+                        />
+                      )}
+                    </div>
+                    <div class="prop-cell prop-cell-type" data-grid="cell">
+                      <span class="prop-type">{getSlotType(slot, framework)}</span>
+                    </div>
+                    <div class="prop-cell prop-cell-description" data-grid="cell">
+                      {slot.description || "Named slot for content"}
+                    </div>
+                  </div>
+                ))}
+              </goa-data-grid>
+            </goa-container>
+          </div>
+        ))}
+      </div>
+    )
+  }
+</div>
 
 <style>
   .api-section {
@@ -251,6 +443,13 @@ const finalProps = combinedMarginProp
     color: var(--goa-color-info-text-dark);
   }
 
+  .prop-type-details {
+    display: block;
+    margin-top: var(--goa-space-3xs);
+    font: var(--goa-typography-body-xs);
+    color: var(--goa-color-greyscale-700);
+  }
+
   .prop-cell-description {
     font: var(--goa-typography-body-s);
     color: var(--goa-color-text-default);
@@ -270,30 +469,48 @@ const finalProps = combinedMarginProp
 </style>
 
 <script>
-  import { getFrameworkPreference, subscribeToFrameworkPreference } from "../lib/framework-preference";
+  import {
+    getFrameworkPreference,
+    subscribeToFrameworkPreference,
+  } from "../lib/framework-preference";
 
-  // Map framework preference values to the frameworks field in event JSON
-  const frameworkMap: Record<string, string> = {
-    react: "react",
-    angular: "angular",
-    webComponents: "angular", // Web Components use the same event names as Angular (_prefix)
-  };
+  function toggleFrameworkRows(framework: string) {
+    const supported =
+      framework === "react" || framework === "angular" || framework === "webComponents"
+        ? framework
+        : "react";
 
-  function filterEventsByFramework(framework: string) {
-    const mapped = frameworkMap[framework] || "react";
-    document.querySelectorAll("[data-frameworks]").forEach((row) => {
-      const el = row as HTMLElement;
-      const frameworks = el.dataset.frameworks;
-      if (!frameworks) return; // No framework filter, always show
-      el.style.display = frameworks.includes(mapped) ? "" : "none";
+    document.querySelectorAll("[data-props-table]").forEach((table) => {
+      const slotsHeading = table.querySelector("[data-slots-heading]") as HTMLElement | null;
+      if (slotsHeading) {
+        const prefix = slotsHeading.dataset.prefix || "";
+        const label =
+          supported === "react"
+            ? "ReactNode"
+            : supported === "angular"
+              ? "TemplateRef"
+              : "Slots";
+        slotsHeading.textContent = `${prefix}${label}`;
+      }
+
+      table.querySelectorAll("[data-framework-content]").forEach((el) => {
+        const node = el as HTMLElement;
+        node.style.display = node.dataset.framework === supported ? "" : "none";
+      });
+
+      table.querySelectorAll(".api-section").forEach((section) => {
+        const visibleFrameworkContent = section.querySelector(
+          `[data-framework-content][data-framework="${supported}"]`,
+        ) as HTMLElement | null;
+        const hasRows = Boolean(visibleFrameworkContent?.querySelector(".prop-row"));
+        (section as HTMLElement).style.display = hasRows ? "" : "none";
+      });
     });
   }
 
-  // Apply on load
-  filterEventsByFramework(getFrameworkPreference());
+  toggleFrameworkRows(getFrameworkPreference());
 
-  // React to changes
   subscribeToFrameworkPreference((framework) => {
-    filterEventsByFramework(framework);
+    toggleFrameworkRows(framework);
   });
 </script>

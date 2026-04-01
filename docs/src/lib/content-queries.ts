@@ -9,6 +9,7 @@ export interface PropDefinition {
   required: boolean;
   default: string | null;
   description: string;
+  deprecated?: boolean;
 }
 
 export interface EventDefinition {
@@ -20,24 +21,34 @@ export interface EventDefinition {
 
 export interface SlotDefinition {
   name: string;
+  type?: string;
   description: string;
+  required?: boolean;
+}
+
+export interface FrameworkApiData {
+  props: PropDefinition[];
+  events: EventDefinition[];
+  slots: SlotDefinition[];
+}
+
+export interface FrameworkApiMap {
+  react: FrameworkApiData;
+  angular: FrameworkApiData;
+  webComponents: FrameworkApiData;
 }
 
 export interface SubComponentApi {
   name: string;
   webComponentTag: string;
   description: string;
-  props: PropDefinition[];
-  events: EventDefinition[];
-  slots: SlotDefinition[];
+  frameworks: FrameworkApiMap;
 }
 
 export interface ComponentApi {
   componentSlug: string;
   extractedFrom: string;
-  props: PropDefinition[];
-  events: EventDefinition[];
-  slots: SlotDefinition[];
+  frameworks: FrameworkApiMap;
   subComponents?: SubComponentApi[];
 }
 
@@ -89,7 +100,9 @@ export async function getExamplesForComponent(
 ): Promise<CollectionEntry<"examples">[]> {
   const allExamples = await getCollection("examples");
 
-  return allExamples.filter((example) => example.data.components.includes(componentSlug));
+  return allExamples.filter(
+    (example) => !example.data.hidden && example.data.components.includes(componentSlug),
+  );
 }
 
 /**
@@ -154,7 +167,7 @@ export async function getContentByTag(tag: string) {
   return {
     components: components.filter((c) => c.data.tags?.includes(tag)),
     guidance: guidance.filter((g) => g.data.tags?.includes(tag)),
-    examples: examples.filter((e) => e.data.tags?.includes(tag)),
+    examples: examples.filter((e) => !e.data.hidden && e.data.tags?.includes(tag)),
   };
 }
 

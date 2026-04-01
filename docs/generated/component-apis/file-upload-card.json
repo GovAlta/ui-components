@@ -1,61 +1,212 @@
 {
   "componentSlug": "file-upload-card",
   "extractedFrom": "libs/web-components/src/components/file-upload-card/FileUploadCard.svelte",
-  "props": [
-    {
-      "name": "filename",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "The name of the uploaded file to display."
-    },
-    {
-      "name": "size",
-      "type": "number",
-      "required": true,
-      "default": null,
-      "description": "The file size in bytes. Displayed in a human-readable format (KB, MB)."
-    },
-    {
-      "name": "type",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The MIME type of the file. Used to determine the file type icon."
-    },
-    {
-      "name": "progress",
-      "type": "number",
-      "required": false,
-      "default": "-1",
-      "description": "Upload progress percentage from 0-100. Use -1 to indicate upload is complete."
-    },
-    {
-      "name": "error",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Error message to display. When set, the card shows an error state with a cancel button."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Error message to display. When set, the card shows an error state with a cancel button."
+        },
+        {
+          "name": "filename",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The name of the uploaded file to display."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": "-1",
+          "description": "Upload progress percentage from 0-100. Use -1 to indicate upload is complete."
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "required": true,
+          "default": null,
+          "description": "The file size in bytes. Displayed in a human-readable format (KB, MB)."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The MIME type of the file. Used to determine the file type icon."
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": ""
+      "events": [
+        {
+          "name": "onCancel",
+          "type": "(detail: GoabFileUploadOnCancelDetail) => void",
+          "description": "Callback fired when the user clicks the cancel button during file upload.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onDelete",
+          "type": "(detail: GoabFileUploadOnDeleteDetail) => void",
+          "description": "Callback fired when the user clicks the remove button on an uploaded file.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Error message to display. When set, the card shows an error state with a cancel button."
+        },
+        {
+          "name": "filename",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The name of the uploaded file to display."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Upload progress percentage from 0-100. Use -1 to indicate upload is complete."
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "required": true,
+          "default": null,
+          "description": "The file size in bytes. Displayed in a human-readable format (KB, MB)."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The MIME type of the file. Used to determine the file type icon."
+        }
+      ],
+      "events": [
+        {
+          "name": "onCancel",
+          "type": "(event: GoabFileUploadOnCancelDetail) => void",
+          "description": "Emits when the user cancels a file upload. Emits a GoabFileUploadOnCancelDetail object with the filename.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onDelete",
+          "type": "(event: GoabFileUploadOnDeleteDetail) => void",
+          "description": "Emits when the user removes an uploaded file. Emits a GoabFileUploadOnDeleteDetail object with the filename.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Error message to display. When set, the card shows an error state with a cancel button."
+        },
+        {
+          "name": "filename",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The name of the uploaded file to display."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": "-1",
+          "description": "Upload progress percentage from 0-100. Use -1 to indicate upload is complete."
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "required": true,
+          "default": null,
+          "description": "The file size in bytes. Displayed in a human-readable format (KB, MB)."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The MIME type of the file. Used to determine the file type icon."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_cancel",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_delete",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

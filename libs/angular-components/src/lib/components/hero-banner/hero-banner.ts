@@ -52,8 +52,8 @@ export class GoabHeroBanner implements OnInit {
   @Input() backgroundColor?: string;
   /** Text color within the hero banner. */
   @Input() textColor?: string;
-  /** Angular template reference for the actions slot content. */
-  @Input() actions!: TemplateRef<any>;
+  /** Content rendered in the actions slot. */
+  @Input() actions?: TemplateRef<any>;
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -1,96 +1,255 @@
 {
   "componentSlug": "work-side-menu",
   "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideMenu.svelte",
-  "props": [
-    {
-      "name": "heading",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "The application name displayed in the header."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The application name displayed in the header."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Controls whether the side menu is expanded or collapsed."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "URL for the header link. Clicking the logo/heading navigates to this URL."
+        },
+        {
+          "name": "userName",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "User's name displayed in the profile section."
+        },
+        {
+          "name": "userSecondaryText",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Secondary text displayed below the user's name, such as role or email."
+        }
+      ],
+      "events": [
+        {
+          "name": "onNavigate",
+          "type": "(path: string) => void",
+          "description": "Callback fired when a menu item is navigated, providing the target URL path.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onToggle",
+          "type": "() => void",
+          "description": "Callback fired when the side menu is toggled open or closed.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "accountContent",
+          "type": "ReactNode",
+          "description": "Content rendered in the account/profile slot.",
+          "required": false
+        },
+        {
+          "name": "primaryContent",
+          "type": "ReactNode",
+          "description": "Content rendered in the primary navigation slot.",
+          "required": false
+        },
+        {
+          "name": "secondaryContent",
+          "type": "ReactNode",
+          "description": "Content rendered in the secondary navigation slot.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "url",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "URL for the header link. Clicking the logo/heading navigates to this URL."
+    "angular": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The application name displayed in the header."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Controls whether the side menu is expanded or collapsed."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "URL for the header link. Clicking the logo/heading navigates to this URL."
+        },
+        {
+          "name": "userName",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "User's name displayed in the profile section."
+        },
+        {
+          "name": "userSecondaryText",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Secondary text displayed below the user's name, such as role or email."
+        }
+      ],
+      "events": [
+        {
+          "name": "onNavigate",
+          "type": "(event: string) => void",
+          "description": "Emits when a navigation link is clicked. Emits the URL as a string.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onToggle",
+          "type": "() => void",
+          "description": "Emits when the side menu is toggled open or closed.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "accountContent",
+          "type": "TemplateRef",
+          "description": "Content rendered in the account/profile slot.",
+          "required": false
+        },
+        {
+          "name": "primaryContent",
+          "type": "TemplateRef",
+          "description": "Content rendered in the primary navigation slot.",
+          "required": false
+        },
+        {
+          "name": "secondaryContent",
+          "type": "TemplateRef",
+          "description": "Content rendered in the secondary navigation slot.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "open",
-      "type": "any",
-      "required": false,
-      "default": "false",
-      "description": "Controls whether the side menu is expanded or collapsed."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "userName",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "User's name displayed in the profile section."
-    },
-    {
-      "name": "userSecondaryText",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Secondary text displayed below the user's name, such as role or email."
+    "webComponents": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The application name displayed in the header."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Controls whether the side menu is expanded or collapsed."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "URL for the header link. Clicking the logo/heading navigates to this URL."
+        },
+        {
+          "name": "user-name",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "User's name displayed in the profile section."
+        },
+        {
+          "name": "user-secondary-text",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Secondary text displayed below the user's name, such as role or email."
+        }
+      ],
+      "events": [
+        {
+          "name": "_navigate",
+          "type": "CustomEvent<{ url: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_toggle",
+          "type": "CustomEvent<{ open: boolean }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "account",
+          "description": "Content rendered in the account/profile slot.",
+          "required": false
+        },
+        {
+          "name": "primary",
+          "description": "Content rendered in the primary navigation slot.",
+          "required": false
+        },
+        {
+          "name": "secondary",
+          "description": "Content rendered in the secondary navigation slot.",
+          "required": false
+        }
+      ]
     }
-  ],
-  "events": [
-    {
-      "name": "onUpdate",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_update",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    },
-    {
-      "name": "onToggle",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_toggle",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": [
-    {
-      "name": "primary",
-      "description": ""
-    },
-    {
-      "name": "secondary",
-      "description": ""
-    },
-    {
-      "name": "account",
-      "description": ""
-    }
-  ]
+  }
 }

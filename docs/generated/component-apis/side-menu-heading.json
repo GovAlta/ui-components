@@ -1,32 +1,98 @@
 {
   "componentSlug": "side-menu-heading",
   "extractedFrom": "libs/web-components/src/components/side-menu-heading/SideMenuHeading.svelte",
-  "props": [
-    {
-      "name": "icon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon displayed before the heading text."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "type": "ReactNode",
+          "description": "Content rendered in the meta slot, displayed alongside the heading.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "section-heading",
-      "description": "Sets a data-testid attribute for automated testing."
-    }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
+    "angular": {
+      "props": [
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "required": true,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "type": "TemplateRef",
+          "description": "Content rendered in the meta slot, displayed alongside the heading.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "meta",
-      "description": ""
+    "webComponents": {
+      "props": [
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the heading text."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "section-heading",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "meta",
+          "description": "Content rendered in the meta slot, displayed alongside the heading.",
+          "required": false
+        }
+      ]
     }
-  ]
+  }
 }

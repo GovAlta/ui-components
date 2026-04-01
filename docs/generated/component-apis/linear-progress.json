@@ -1,47 +1,147 @@
 {
   "componentSlug": "linear-progress",
   "extractedFrom": "libs/web-components/src/components/linear-progress/LinearProgress.svelte",
-  "props": [
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": null,
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "progress",
-      "type": "number",
-      "required": false,
-      "default": null,
-      "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
-    },
-    {
-      "name": "percentVisibility",
-      "type": "\"visible\" | \"hidden\"",
-      "values": [
-        "visible",
-        "hidden"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accessible label for the progress bar."
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "ID of the element that labels this progress bar."
+        },
+        {
+          "name": "percentVisibility",
+          "type": "\"visible\" | \"hidden\" | undefined",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the percentage text."
+        },
+        {
+          "name": "progress",
+          "type": "number | null",
+          "values": [
+            "number"
+          ],
+          "required": false,
+          "default": null,
+          "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
       ],
-      "required": false,
-      "default": "visible",
-      "description": "Controls visibility of the percentage text."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "ariaLabel",
-      "type": "string",
-      "required": false,
-      "default": null,
-      "description": "Accessible label for the progress bar."
+    "angular": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accessible label for the progress bar."
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "ID of the element that labels this progress bar."
+        },
+        {
+          "name": "percentVisibility",
+          "type": "\"visible\" | \"hidden\" | undefined",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": null,
+          "description": "Controls visibility of the percentage text."
+        },
+        {
+          "name": "progress",
+          "type": "number | null | undefined",
+          "values": [
+            "number"
+          ],
+          "required": false,
+          "default": null,
+          "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "ariaLabelledBy",
-      "type": "string",
-      "required": false,
-      "default": null,
-      "description": "ID of the element that labels this progress bar."
+    "webComponents": {
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Accessible label for the progress bar."
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "ID of the element that labels this progress bar."
+        },
+        {
+          "name": "percent-visibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the percentage text."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Progress value (0-100). When undefined, shows an indeterminate loading animation."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

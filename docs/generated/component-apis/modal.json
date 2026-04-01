@@ -1,105 +1,243 @@
 {
   "componentSlug": "modal",
   "extractedFrom": "libs/web-components/src/components/modal/Modal.svelte",
-  "props": [
-    {
-      "name": "heading",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The heading text displayed at the top of the modal."
-    },
-    {
-      "name": "closable",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Show close icon and allow clicking the background to close the modal."
-    },
-    {
-      "name": "open",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Controls if modal is visible or not."
-    },
-    {
-      "name": "transition",
-      "type": "\"fast\" | \"slow\" | \"none\"",
-      "typeLabel": "GoabModalTransition",
-      "values": [
-        "fast",
-        "slow",
-        "none"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "calloutVariant",
+          "type": "GoabModalCalloutVariant",
+          "required": false,
+          "default": null,
+          "description": "Sets the context and colour of the callout modal. Required when used as a callout type."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": "60ch",
+          "description": "Set the max allowed width of the modal."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Controls if the modal is visible or not."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "transition",
+          "type": "GoabModalTransition",
+          "required": false,
+          "default": null,
+          "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
+        }
       ],
-      "required": false,
-      "default": "none",
-      "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
-    },
-    {
-      "name": "calloutVariant",
-      "type": "\"\"",
-      "required": false,
-      "default": null,
-      "description": "Define the context and colour of the callout modal. It is required when type is set to callout."
-    },
-    {
-      "name": "maxWidth",
-      "type": "string",
-      "required": false,
-      "default": "60ch",
-      "description": "Set the max allowed width of the modal."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "modal",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "width",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "@deprecated Use maxwidth instead.",
-      "deprecated": true
-    }
-  ],
-  "events": [
-    {
-      "name": "onClose",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
+      "events": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Callback fired when the modal is closed. When provided, enables the close button and backdrop click-to-close behavior.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "description": "Content rendered in the modal's actions slot, typically action buttons.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "ReactNode",
+          "description": "The heading text displayed at the top of the modal.",
+          "required": false
+        }
       ]
     },
-    {
-      "name": "_close",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
+    "angular": {
+      "props": [
+        {
+          "name": "calloutVariant",
+          "type": "GoabModalCalloutVariant",
+          "required": false,
+          "default": null,
+          "description": "Define the context and colour of the callout modal. It is required when type is set to callout."
+        },
+        {
+          "name": "closable",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show close icon and allow clicking the background to close the modal."
+        },
+        {
+          "name": "heading",
+          "type": "string | TemplateRef<any>",
+          "values": [
+            "string",
+            "TemplateRef<any>"
+          ],
+          "required": true,
+          "default": null,
+          "description": "The heading text displayed at the top of the modal."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Set the max allowed width of the modal."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Controls if modal is visible or not."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "transition",
+          "type": "GoabModalTransition",
+          "required": false,
+          "default": null,
+          "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Emits when the modal is closed.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "TemplateRef",
+          "description": "Content rendered in the modal's actions slot, typically action buttons.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "TemplateRef",
+          "description": "The heading text displayed at the top of the modal.",
+          "required": false
+        }
+      ]
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "calloutvariant",
+          "type": "\"\"",
+          "required": false,
+          "default": null,
+          "description": "Define the context and colour of the callout modal. It is required when type is set to callout."
+        },
+        {
+          "name": "closable",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show close icon and allow clicking the background to close the modal."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The heading text displayed at the top of the modal."
+        },
+        {
+          "name": "maxwidth",
+          "type": "string",
+          "required": false,
+          "default": "60ch",
+          "description": "Set the max allowed width of the modal."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Controls if modal is visible or not."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "modal",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "transition",
+          "type": "\"fast\" | \"slow\" | \"none\"",
+          "typeLabel": "GoabModalTransition",
+          "values": [
+            "fast",
+            "slow",
+            "none"
+          ],
+          "required": false,
+          "default": "none",
+          "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "typeLabel": "GoabModalVersionType",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_close",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "description": "Content rendered in the modal's actions slot, typically action buttons.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "description": "The heading text displayed at the top of the modal.",
+          "required": false
+        }
       ]
     }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    },
-    {
-      "name": "heading",
-      "description": ""
-    },
-    {
-      "name": "content",
-      "description": ""
-    },
-    {
-      "name": "actions",
-      "description": ""
-    }
-  ]
+  }
 }

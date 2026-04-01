@@ -155,6 +155,20 @@ function extractFirstParagraph(body: string): string | undefined {
   return paragraph || undefined;
 }
 
+function isHidden(frontmatter: Record<string, unknown>): boolean {
+  return String(frontmatter.hidden ?? '').toLowerCase() === 'true';
+}
+
+function normalizeDescription(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+
+  const withoutHtml = value.replace(/<[^>]+>/g, ' ');
+  const withoutMarkdownLinks = withoutHtml.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1');
+  const normalized = withoutMarkdownLinks.replace(/\s+/g, ' ').trim();
+
+  return normalized || undefined;
+}
+
 // ============================================================================
 // File Processing
 // ============================================================================
@@ -170,7 +184,7 @@ function processComponent(filePath: string): ComponentEntry | null {
     const id = basename(filePath, '.mdx');
 
     // Skip hidden components
-    if (frontmatter.hidden === true || frontmatter.hidden === 'true') {
+    if (isHidden(frontmatter)) {
       return null;
     }
 
@@ -178,7 +192,9 @@ function processComponent(filePath: string): ComponentEntry | null {
       type: 'component',
       id,
       name: String(frontmatter.name || id),
-      description: frontmatter.description ? String(frontmatter.description) : undefined,
+      description: normalizeDescription(
+        frontmatter.description ? String(frontmatter.description) : undefined,
+      ),
       status: String(frontmatter.status || 'stable'),
       category: String(frontmatter.category || 'utilities'),
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
@@ -199,6 +215,11 @@ function processExample(filePath: string): ExampleEntry | null {
     const content = readFileSync(filePath, 'utf-8');
     const { frontmatter, body } = parseFrontmatter(content);
 
+    // Skip hidden examples
+    if (isHidden(frontmatter)) {
+      return null;
+    }
+
     // Get ID from directory name
     const dirName = basename(dirname(filePath));
     const id = String(frontmatter.id || dirName);
@@ -212,7 +233,7 @@ function processExample(filePath: string): ExampleEntry | null {
       type: 'example',
       id,
       title: String(frontmatter.title || id),
-      description,
+      description: normalizeDescription(description),
       status: String(frontmatter.status || 'published'),
       categories: Array.isArray(frontmatter.categories)
         ? frontmatter.categories.map(String)

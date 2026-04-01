@@ -1,102 +1,229 @@
 {
   "componentSlug": "microsite-header",
   "extractedFrom": "libs/web-components/src/components/microsite-header/MicrositeHeader.svelte",
-  "props": [
-    {
-      "name": "type",
-      "type": "\"live\" | \"alpha\" | \"beta\"",
-      "typeLabel": "GoabMicrositeHeaderType",
-      "values": [
-        "live",
-        "alpha",
-        "beta"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "feedbackUrl",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "URL to a feedback page displayed when provided."
+        },
+        {
+          "name": "feedbackUrlTarget",
+          "type": "GoabLinkTarget",
+          "required": false,
+          "default": "blank",
+          "description": "Sets the target attribute for the feedback URL link."
+        },
+        {
+          "name": "headerUrlTarget",
+          "type": "GoabLinkTarget",
+          "required": false,
+          "default": "blank",
+          "description": "Sets the target attribute for the header link."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabServiceLevel",
+          "required": true,
+          "default": null,
+          "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
+        },
+        {
+          "name": "version",
+          "type": "string | React.ReactNode",
+          "values": [
+            "string",
+            "React.ReactNode"
+          ],
+          "required": false,
+          "default": null,
+          "description": "App or service version displayed on the right side of the header."
+        }
       ],
-      "required": true,
-      "default": null,
-      "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
-    },
-    {
-      "name": "version",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "App or service version displayed on the right side of the header."
-    },
-    {
-      "name": "feedbackurl",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Url to feedback page that will be displayed when provided."
-    },
-    {
-      "name": "maxcontentwidth",
-      "type": "any",
-      "required": false,
-      "default": "100%",
-      "description": "Maximum width of the content area"
-    },
-    {
-      "name": "headerurltarget",
-      "type": "\"self\" | \"blank\"",
-      "typeLabel": "GoabMicrositeHeaderUrlTargetType",
-      "values": [
-        "self",
-        "blank"
+      "events": [
+        {
+          "name": "onFeedbackClick",
+          "type": "() => void",
+          "description": "Callback fired when the feedback link is clicked, enables custom feedback handling.",
+          "frameworks": [
+            "react"
+          ]
+        }
       ],
-      "required": false,
-      "default": "blank",
-      "description": "Sets the target attribute for the header link."
+      "slots": []
     },
-    {
-      "name": "feedbackurltarget",
-      "type": "\"self\" | \"blank\"",
-      "typeLabel": "GoabMicrositeHeaderUrlTargetType",
-      "values": [
-        "self",
-        "blank"
+    "angular": {
+      "props": [
+        {
+          "name": "feedbackUrl",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Url to feedback page that will be displayed when provided."
+        },
+        {
+          "name": "feedbackUrlTarget",
+          "type": "GoabLinkTarget",
+          "required": false,
+          "default": null,
+          "description": "For internal feedback urls sets target."
+        },
+        {
+          "name": "headerUrlTarget",
+          "type": "GoabLinkTarget",
+          "required": false,
+          "default": null,
+          "description": "Sets the target attribute for the header link."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabServiceLevel",
+          "required": true,
+          "default": null,
+          "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
+        },
+        {
+          "name": "version",
+          "type": "string | TemplateRef<any>",
+          "values": [
+            "string",
+            "TemplateRef<any>"
+          ],
+          "required": true,
+          "default": null,
+          "description": "App or service version displayed on the right side of the header."
+        }
       ],
-      "required": false,
-      "default": "blank",
-      "description": "For internal feedback urls sets target="
+      "events": [
+        {
+          "name": "onFeedbackClick",
+          "type": "() => void",
+          "description": "Emits when the feedback link is clicked.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "hasfeedbackhandler",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, enables a custom feedback click handler via the _feedbackClick event instead of navigating to feedbackurl."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "feedbackurl",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Url to feedback page that will be displayed when provided."
+        },
+        {
+          "name": "feedbackurltarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabMicrositeHeaderUrlTargetType",
+          "values": [
+            "self",
+            "blank"
+          ],
+          "required": false,
+          "default": "blank",
+          "description": "For internal feedback urls sets target="
+        },
+        {
+          "name": "hasfeedbackhandler",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, enables a custom feedback click handler via the _feedbackClick event instead of navigating to feedbackurl."
+        },
+        {
+          "name": "headerurltarget",
+          "type": "\"self\" | \"blank\"",
+          "typeLabel": "GoabMicrositeHeaderUrlTargetType",
+          "values": [
+            "self",
+            "blank"
+          ],
+          "required": false,
+          "default": "blank",
+          "description": "Sets the target attribute for the header link."
+        },
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area"
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"live\" | \"alpha\" | \"beta\"",
+          "typeLabel": "GoabMicrositeHeaderType",
+          "values": [
+            "live",
+            "alpha",
+            "beta"
+          ],
+          "required": true,
+          "default": null,
+          "description": "The service type which determines the badge style. \"live\" shows official government site text, \"alpha\" and \"beta\" show development stage badges."
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "App or service version displayed on the right side of the header."
+        }
+      ],
+      "events": [
+        {
+          "name": "_feedbackClick",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onFeedbackClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_feedbackClick",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": [
-    {
-      "name": "version",
-      "description": ""
-    }
-  ]
+  }
 }

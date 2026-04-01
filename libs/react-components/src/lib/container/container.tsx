@@ -46,9 +46,9 @@ export interface GoabContainerProps extends Margins, DataAttributes {
   maxHeight?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Content rendered in the container's title/heading area. */
+  /** @deprecated Use title instead. Alias for the title prop. */
   heading?: ReactNode;
-  /** @deprecated Use heading instead. Alias for the heading prop. */
+  /** Content rendered in the container's title/heading area. */
   title?: ReactNode;
   /** Content rendered in the container's actions area, typically buttons or controls. */
   actions?: ReactNode;

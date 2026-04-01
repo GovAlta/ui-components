@@ -32,7 +32,7 @@
   // optional
 
   /** Controls whether the side menu is expanded or collapsed. */
-  export let open = false;
+  export let open: boolean = false;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** User's name displayed in the profile section. */
@@ -55,10 +55,10 @@
 
   let _menuEl: HTMLElement;
   let _menuLinks: HTMLElement[] = [];
-  let _containerEl: HTMLElement;
+  let _containerEl: HTMLElement | undefined;
   let _rootEl: HTMLElement;
   let _scrollEl: HTMLElement;
-  let _toggleButtonEl: HTMLElement;
+  let _toggleButtonEl: HTMLElement | undefined;
   let _tooltipEl: HTMLElement;
   let _tooltipLabel: string = "";
 
@@ -198,6 +198,7 @@
   }
 
   function setTooltipPos(label: string, el: HTMLElement) {
+    if (!_containerEl || !_tooltipEl) return;
     const rect = el?.getBoundingClientRect();
     const containerRect = _containerEl.getBoundingClientRect();
     const top = rect.top - containerRect.top + rect.height / 2;
@@ -218,7 +219,7 @@
   }
 
   function handleToggleHover() {
-    if (open) return;
+    if (open || !_toggleButtonEl) return;
 
     setTooltipPos("Expand menu", _toggleButtonEl);
     showTooltip();
