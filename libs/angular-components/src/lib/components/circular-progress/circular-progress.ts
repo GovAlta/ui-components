@@ -6,6 +6,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import {
@@ -32,6 +33,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabCircularProgress implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() variant?: GoabCircularProgressVariant;
   @Input() size?: GoabCircularProgressSize;
   @Input() message?: string;
@@ -40,8 +43,6 @@ export class GoabCircularProgress implements OnInit {
   @Input() testId?: string;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

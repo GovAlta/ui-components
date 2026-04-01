@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -31,13 +32,11 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabGrid extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input({ required: true }) minChildWidth!: string;
   @Input() gap?: Spacing;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

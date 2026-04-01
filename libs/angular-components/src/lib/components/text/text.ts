@@ -5,6 +5,7 @@ import {
   OnInit,
   ChangeDetectorRef,
   HostBinding,
+  inject,
 } from "@angular/core";
 
 import {
@@ -39,6 +40,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabText implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() tag?: GoabTextTextElement | GoabTextHeadingElement;
   @Input() size?: GoabTextSize;
   @Input() maxWidth?: GoabTextMaxWidth;
@@ -57,8 +60,6 @@ export class GoabText implements OnInit {
   @Input() mr?: Spacing;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

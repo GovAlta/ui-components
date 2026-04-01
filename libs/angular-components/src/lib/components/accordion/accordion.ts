@@ -12,6 +12,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -46,6 +47,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAccordion extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() heading?: string;
   @Input() secondaryText?: string;
   @Input({ transform: booleanAttribute }) open?: boolean;
@@ -57,10 +60,6 @@ export class GoabAccordion extends GoabBaseComponent implements OnInit {
   @Output() onChange = new EventEmitter<boolean>();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

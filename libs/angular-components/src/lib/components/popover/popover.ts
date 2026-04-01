@@ -6,6 +6,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -38,6 +39,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPopover extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input() maxWidth = "320px";
   @Input() minWidth?: string;
@@ -48,10 +51,6 @@ export class GoabPopover extends GoabBaseComponent implements OnInit {
    */
   @Input() relative?: boolean;
   @Input({ required: true }) target!: TemplateRef<any>;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

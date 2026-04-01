@@ -9,6 +9,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -39,6 +40,8 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabBlock extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() gap?: Spacing;
   @Input() direction?: GoabBlockDirection;
   @Input() alignment?: GoabBlockAlignment;
@@ -47,10 +50,6 @@ export class GoabBlock extends GoabBaseComponent implements OnInit {
   @Input() maxWidth?: string;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

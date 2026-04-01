@@ -20,7 +20,7 @@ import {
   numberAttribute,
   TemplateRef,
   ChangeDetectorRef,
-  Renderer2,
+    inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -109,6 +109,8 @@ import { NgTemplateOutlet } from "@angular/common";
   ],
 })
 export class GoabInput extends GoabControlValueAccessor implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() type?: GoabInputType = "text";
   @Input() name?: string;
   @Input({ transform: numberAttribute }) debounce?: number;
@@ -145,12 +147,6 @@ export class GoabInput extends GoabControlValueAccessor implements OnInit {
   version = "2";
   handleTrailingIconClick = false;
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    renderer: Renderer2,
-  ) {
-    super(renderer);
-  }
   ngOnInit() {
     // For Angular 20, we need to delay rendering the web component
     // to ensure all attributes are properly bound before the component initializes

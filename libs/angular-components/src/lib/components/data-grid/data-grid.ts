@@ -4,6 +4,7 @@ import {
   Input,
   ChangeDetectorRef,
   OnInit,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -24,13 +25,13 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabDataGrid implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() keyboardIconVisibility: "visible" | "hidden" = "visible";
   @Input() keyboardIconPosition: "left" | "right" = "left";
   @Input({ required: true }) keyboardNav!: "layout" | "table";
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular, we need to delay rendering the web component

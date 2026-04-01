@@ -8,6 +8,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -42,6 +43,8 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormItem extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() label?: string;
   @Input() labelSize?: GoabFormItemLabelSize;
   @Input() helpText?: string;
@@ -61,10 +64,6 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

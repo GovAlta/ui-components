@@ -13,6 +13,7 @@ import {
   OnInit,
   ChangeDetectorRef,
   booleanAttribute,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -46,16 +47,14 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTable extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
   @Input() width?: string;
   @Input() variant?: GoabTableVariant;
   @Input() sortMode?: GoabTableSortMode;
   @Input({ transform: booleanAttribute }) striped?: boolean;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

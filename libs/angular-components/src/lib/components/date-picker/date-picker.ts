@@ -15,7 +15,7 @@ import {
   HostListener,
   OnInit,
   ChangeDetectorRef,
-  Renderer2,
+    inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { GoabControlValueAccessor } from "../base.component";
@@ -56,6 +56,9 @@ import { GoabControlValueAccessor } from "../base.component";
   ],
 })
 export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
+  protected elementRef = inject(ElementRef);
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
 
@@ -108,13 +111,6 @@ export class GoabDatePicker extends GoabControlValueAccessor implements OnInit {
     this.fcChange?.(detail.value);
   }
 
-  constructor(
-    protected elementRef: ElementRef,
-    private cdr: ChangeDetectorRef,
-    renderer: Renderer2,
-  ) {
-    super(renderer);
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

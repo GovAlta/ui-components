@@ -7,6 +7,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import {
   GoabTabsOnChangeDetail,
@@ -37,6 +38,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabTabs implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
   @Input({ transform: numberAttribute }) initialTab?: number;
@@ -45,8 +48,6 @@ export class GoabTabs implements OnInit {
   /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
   @Input() orientation?: GoabTabsOrientation;
   @Input() navigation?: GoabTabsNavigation;
-
-  constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     setTimeout(() => {

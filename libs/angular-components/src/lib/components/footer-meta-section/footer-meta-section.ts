@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -18,13 +19,13 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppFooterMetaSection implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() testId?: string;
   /** "slot" is required and must equal to "meta" so it can be rendered in the correct position **/
   @Input({ required: true }) slot!: "meta";
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

@@ -141,12 +141,14 @@
     </goab-button>
   </goab-block>
 
-  <goab-block gap="s" direction="column" *ngIf="currentProgressUuid">
-    <goab-text tag="p"><strong>Current Progress:</strong> {{ progressValue }}%</goab-text>
-    <goab-text tag="p"
-      ><strong>Progress UUID:</strong> {{ currentProgressUuid }}</goab-text
-    >
-  </goab-block>
+  @if (currentProgressUuid) {
+    <goab-block gap="s" direction="column">
+      <goab-text tag="p"><strong>Current Progress:</strong> {{ progressValue }}%</goab-text>
+      <goab-text tag="p"
+        ><strong>Progress UUID:</strong> {{ currentProgressUuid }}</goab-text
+      >
+    </goab-block>
+  }
 
   <!-- Queue Testing -->
   <h2>Queue Testing</h2>
@@ -200,9 +202,11 @@
       <goab-text tag="span">UUID: {{ notification.uuid }}</goab-text>
     </div>
     }
-    <goab-text tag="p" *ngIf="notificationHistory.length === 0">
-      No notifications yet. Try clicking some buttons above!
-    </goab-text>
+    @if (notificationHistory.length === 0) {
+      <goab-text tag="p">
+        No notifications yet. Try clicking some buttons above!
+      </goab-text>
+    }
   </goab-block>
 </goab-block>
 -->

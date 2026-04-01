@@ -8,6 +8,7 @@ import {
   Output,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -37,6 +38,8 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabMicrositeHeader implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   @Input({ required: true }) type!: GoabServiceLevel;
   @Input() version!: string | TemplateRef<any>;
@@ -45,8 +48,6 @@ export class GoabMicrositeHeader implements OnInit {
   @Input() maxContentWidth?: string;
   @Input() feedbackUrlTarget?: GoabLinkTarget;
   @Input() headerUrlTarget?: GoabLinkTarget;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -22,6 +23,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabAppFooterNavSection implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() heading?: string;
   @Input() maxColumnCount? = 1;
   @Input() testId?: string;
@@ -29,8 +32,6 @@ export class GoabAppFooterNavSection implements OnInit {
   @Input({ required: true }) slot!: "nav";
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

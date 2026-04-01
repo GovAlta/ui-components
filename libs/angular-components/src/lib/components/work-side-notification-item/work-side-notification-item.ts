@@ -11,6 +11,7 @@ import {
   EventEmitter,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -18,21 +19,23 @@ import {
   selector: "goab-work-side-notification-item", // eslint-disable-line
   template: `
     @if (isReady) {
-    <goa-work-side-notification-item
-      [attr.type]="type"
-      [attr.timestamp]="timestamp"
-      [attr.title]="title"
-      [attr.description]="description"
-      [attr.read-status]="readStatus"
-      [attr.priority]="priority"
-      [attr.testid]="testId"
-      (_click)="_onClick()"
-    />
+      <goa-work-side-notification-item
+        [attr.type]="type"
+        [attr.timestamp]="timestamp"
+        [attr.title]="title"
+        [attr.description]="description"
+        [attr.read-status]="readStatus"
+        [attr.priority]="priority"
+        [attr.testid]="testId"
+        (_click)="_onClick()"
+      />
     }
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabWorkSideNotificationItem implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() type?: GoabWorkSideNotificationItemType;
   @Input() timestamp?: string;
   @Input() title?: string;
@@ -44,8 +47,6 @@ export class GoabWorkSideNotificationItem implements OnInit {
   @Output() onClick = new EventEmitter<void>();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

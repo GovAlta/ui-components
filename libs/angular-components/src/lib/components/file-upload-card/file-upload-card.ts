@@ -11,6 +11,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -33,6 +34,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFileUploadCard implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true }) filename!: string;
   @Input({ transform: numberAttribute }) size?: number;
   @Input() type?: string;
@@ -45,8 +48,6 @@ export class GoabFileUploadCard implements OnInit {
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

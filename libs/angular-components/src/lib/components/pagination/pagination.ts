@@ -11,6 +11,7 @@ import {
   Output,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -40,16 +41,14 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPagination extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
   @Input({ required: true }) itemCount!: number;
   @Input({ required: true }) pageNumber!: number;
   @Input() perPageCount?: number = 10;
   @Input() variant?: GoabPaginationVariant = "all";
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

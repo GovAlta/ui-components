@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -19,11 +20,12 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabFormStep implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() text?: string;
   @Input() status?: GoabFormStepStatus;
 
   isReady = false;
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

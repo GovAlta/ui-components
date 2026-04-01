@@ -16,7 +16,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
-  Renderer2,
+    inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -67,6 +67,8 @@ import { GoabControlValueAccessor } from "../base.component";
   ],
 })
 export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input() name?: string;
   @Input() placeholder?: string;
   @Input({ transform: numberAttribute }) rows?: number;
@@ -86,12 +88,6 @@ export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   isReady = false;
   version = "2";
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    renderer: Renderer2,
-  ) {
-    super(renderer);
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

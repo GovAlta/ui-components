@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -27,14 +28,14 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabWorkSideMenuGroup implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   @Input({ required: true }) heading!: string;
   @Input() icon?: GoabIconType;
   @Input({ transform: booleanAttribute }) open?: boolean;
   @Input() testId?: string;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

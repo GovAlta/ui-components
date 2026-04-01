@@ -1,4 +1,4 @@
-import { Component, signal } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { DecimalPipe, JsonPipe, TitleCasePipe } from "@angular/common";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import {
@@ -433,6 +433,7 @@ export class EverythingComponent {
     { value: "option-b", label: "Option B" },
     { value: "option-c", label: "Option C" },
   ];
+  private readonly fb = inject(FormBuilder);
   reactiveDemoForm!: FormGroup;
 
   checkboxValue = false;
@@ -841,7 +842,7 @@ export class EverythingComponent {
     return ((idx % 6) + 1).toString() as GoabIconSize;
   }
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor() {
     this.reactiveDemoForm = this.fb.group({
       radio: this.fb.control(this.reactiveFormInitialValue.radio),
       checkbox: this.fb.control(this.reactiveFormInitialValue.checkbox),

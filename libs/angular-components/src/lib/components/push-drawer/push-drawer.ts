@@ -9,6 +9,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -38,6 +39,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GoabPushDrawer implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   version = "2";
 
   @Input({ transform: booleanAttribute }) open?: boolean;
@@ -48,8 +51,6 @@ export class GoabPushDrawer implements OnInit {
   @Output() onClose = new EventEmitter();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {
