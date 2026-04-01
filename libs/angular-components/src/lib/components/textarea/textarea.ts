@@ -16,7 +16,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
-    inject,
+  inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -66,28 +66,42 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
+/** A multi-line field where users can input and edit text. */
 export class GoabTextArea extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** Name of the input value that is received in the _change event. */
   @Input() name?: string;
+  /** Text displayed within the input when no value is set. */
   @Input() placeholder?: string;
+  /** Set the number of rows. @default 3 */
   @Input({ transform: numberAttribute }) rows?: number;
+  /** Sets the input to a read only state. */
   @Input({ transform: booleanAttribute }) readOnly?: boolean;
+  /** Width of the text area. */
   @Input() width?: string;
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   @Input() ariaLabel?: string;
+  /** Counting interval for characters or words, specifying whether to count every character or word. @default "" */
   @Input() countBy?: GoabTextAreaCountBy = "";
+  /** Maximum number of characters or words allowed. @default -1 */
   @Input() maxCount?: number = -1;
+  /** Maximum width of the text area. */
   @Input() maxWidth?: string;
+  /** Specifies the autocomplete attribute for the textarea input. @default "on" */
   @Input() autoComplete?: string = "on";
+  /** Sets the size variant of the textarea. @default "default" */
   @Input() size?: GoabTextAreaSize = "default";
 
+  /** Emits when the textarea value changes. Emits the name and new value. */
   @Output() onChange = new EventEmitter<GoabTextAreaOnChangeDetail>();
+  /** Emits when a key is pressed in the textarea. Emits the name, value, and key. */
   @Output() onKeyPress = new EventEmitter<GoabTextAreaOnKeyPressDetail>();
+  /** Emits when the textarea loses focus. Emits the name and current value. */
   @Output() onBlur = new EventEmitter<GoabTextAreaOnBlurDetail>();
 
   isReady = false;
   version = "2";
-
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

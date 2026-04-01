@@ -37,16 +37,21 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Let users navigate between related sections of content, displaying one section at a time. */
 export class GoabTabs implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
   version = "2";
+  /** The initially active tab (1-based index). If not set, the first tab is active. */
   @Input({ transform: numberAttribute }) initialTab?: number;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** Visual style variant. "segmented" shows pill-style tabs with animation. */
   @Input() variant?: GoabTabsVariant;
   /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
   @Input() orientation?: GoabTabsOrientation;
+  /** Sets the navigation mode for tab switching. "hash" updates the URL hash when switching tabs. */
   @Input() navigation?: GoabTabsNavigation;
 
   ngOnInit(): void {
@@ -56,6 +61,7 @@ export class GoabTabs implements OnInit {
     });
   }
 
+  /** Emits when the active tab changes. Emits the new tab index as GoabTabsOnChangeDetail. */
   @Output() onChange = new EventEmitter<GoabTabsOnChangeDetail>();
 
   _onChange(e: Event) {

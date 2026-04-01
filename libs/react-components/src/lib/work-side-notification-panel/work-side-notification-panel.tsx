@@ -18,14 +18,21 @@ declare module "react" {
 }
 
 export interface GoabWorkSideNotificationPanelProps {
+  /** Sets the panel heading text. @default "Notifications" */
   heading?: string;
+  /** Sets the initially active tab. @default "unread" */
   activeTab?: GoabWorkSideNotificationActiveTabType;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Notification item content rendered inside the panel. */
   children?: ReactNode;
+  /** Callback fired when the "Mark all as read" button is clicked. */
   onMarkAllRead?: () => void;
+  /** Callback fired when the "View all" button is clicked. */
   onViewAll?: () => void;
 }
 
+/** Displays a panel of work-side notifications. */
 export function GoabWorkSideNotificationPanel({
   heading,
   activeTab,

@@ -25,12 +25,16 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A set of structured data that is easy for a user to scan, examine, and compare. */
 export class GoabTableSortHeader implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
+  /** Column name identifier for sorting. */
   @Input() name?: string;
+  /** Sets the sort direction indicator. @default "none" */
   @Input() direction?: GoabTableSortDirection = "none";
+  /** Sort order number for multi-column sort display ("1", "2", etc). */
   @Input() sortOrder?: GoabTableSortOrder;
 
   ngOnInit(): void {

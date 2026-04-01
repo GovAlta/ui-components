@@ -37,17 +37,27 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Individual menu item within the work side menu. */
 export class GoabWorkSideMenuItem implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** @required The text label displayed for the menu item. */
   @Input({ required: true }) label!: string;
+  /** The URL the menu item links to. Optional — when absent, renders as a button instead of a link. */
   @Input() url?: string;
+  /** Badge text displayed alongside the menu item (e.g., notification count). */
   @Input() badge?: string;
+  /** When true, indicates this is the currently active menu item. */
   @Input() current?: boolean;
+  /** When true, displays a divider line above this menu item. */
   @Input() divider?: boolean;
+  /** Icon displayed before the menu item label. */
   @Input() icon?: string;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. @default "normal" */
   @Input() type?: GoabWorkSideMenuItemType = "normal";
+  /** Template reference for the popover content slot. */
   @Input() popoverContent!: TemplateRef<any>;
 
   isReady = false;

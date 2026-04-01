@@ -18,12 +18,17 @@ declare module "react" {
 }
 
 export interface GoabGridProps extends Margins {
-  gap?: Spacing;
+  /** @required Minimum width of the child elements. */
   minChildWidth: string;
+  /** Gap between child items. @default "m" */
+  gap?: Spacing;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Content rendered inside the grid layout. */
   children?: React.ReactNode;
 }
 
+/** Arrange a number of components into a responsive grid pattern. */
 export function GoabGrid({
   gap,
   minChildWidth,
