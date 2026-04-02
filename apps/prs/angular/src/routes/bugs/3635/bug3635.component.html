@@ -1,0 +1,19 @@
+<goab-text tag="h1">Bug 3635 - Input: Leading icon color</goab-text>
+
+<goab-form-item label="Leading Icon Input" mb="xl">
+  <goab-input
+    name="autocomplete-test-v2"
+    leadingIcon="search"
+    (onBlur)="inputBlur($event)"
+    [value]="inputValue"
+  />
+</goab-form-item>
+<goab-form-item label="Leading Icon Input - Compact" mb="xl">
+  <goab-input
+    name="autocomplete-test-v2"
+    leadingIcon="search"
+    size="compact"
+    (onBlur)="inputBlur($event)"
+    [value]="inputValue"
+  />
+</goab-form-item>

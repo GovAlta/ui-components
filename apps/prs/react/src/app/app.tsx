@@ -237,6 +237,10 @@ export function App() {
                   label="3685 Checkbox & Radio: Reveal width not aligned with item"
                   url="/bugs/3685"
                 />
+                <GoabWorkSideMenuItem
+                  label="3635 Input Leading icon color"
+                  url="/bugs/3635"
+                />
               </GoabWorkSideMenuGroup>
 
               <GoabWorkSideMenuGroup icon="star" heading="Features">
