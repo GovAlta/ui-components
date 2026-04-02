@@ -37,6 +37,19 @@ class TestFileUploadInputComponent {
   }
 }
 
+@Component({
+  standalone: true,
+  imports: [GoabFileUploadInput],
+  template: `
+    <goab-file-upload-input (onSelectFile)="onSelectFile()"></goab-file-upload-input>
+  `,
+})
+class TestFileUploadInputNoVariantComponent {
+  onSelectFile() {
+    /** do nothing **/
+  }
+}
+
 describe("GoABFileUploadInput", () => {
   let fixture: ComponentFixture<TestFileUploadInputComponent>;
   let component: TestFileUploadInputComponent;
@@ -83,5 +96,26 @@ describe("GoABFileUploadInput", () => {
     fireEvent(el, new CustomEvent("_selectFile", { detail: {} }));
 
     expect(onSelectFile).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("GoABFileUploadInput - default variant", () => {
+  let fixture: ComponentFixture<TestFileUploadInputNoVariantComponent>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabFileUploadInput, TestFileUploadInputNoVariantComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestFileUploadInputNoVariantComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+
+  it("should default variant to dragdrop when not provided", () => {
+    const el = fixture.debugElement.query(By.css("goa-file-upload-input")).nativeElement;
+    expect(el?.getAttribute("variant")).toBe("dragdrop");
   });
 });

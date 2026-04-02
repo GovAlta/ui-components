@@ -40,7 +40,7 @@ export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   @Input() id?: string = "";
-  @Input({ required: true }) variant!: GoabFileUploadInputVariant;
+  @Input() variant: GoabFileUploadInputVariant = "dragdrop";
   @Input() maxFileSize?: string = "5MB";
   @Input() accept?: string;
 
