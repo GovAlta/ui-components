@@ -10,8 +10,11 @@
     validateRequired,
     generateRandomId,
     ensureSlotExists,
+    dispatch,
+    parseCssTimeToMilliseconds,
   } from "../../common/utils";
   import type { Spacing } from "../../common/styling";
+  import { Once } from "@abgov/ui-components-common";
 
   // Validators
 
@@ -20,9 +23,15 @@
     ["small", "medium"],
   );
 
+  const [IconPositions, validateIconPosition] = typeValidator(
+    "Accordion icon position",
+    ["left", "right"],
+  );
+
   // Types
 
   type HeadingSize = (typeof HeadingSizes)[number];
+  type IconPosition = (typeof IconPositions)[number];
 
   // Props
 
@@ -49,16 +58,27 @@
   /** Left margin. */
   export let ml: Spacing = null;
   /** Sets the position of the expand/collapse icon. */
-  export let iconposition: "left" | "right" = "left";
+  export let iconposition: IconPosition = "left";
 
   // Private
 
   let _hovering: boolean = false;
   let _titleEl: HTMLElement;
   let _rootEl: HTMLElement;
+  let _detailsEl: HTMLDetailsElement;
+  let _summaryEl: HTMLElement;
   let _slotEl: HTMLElement;
   let _headingSlotChildren: Element[] = [];
   let _accordionId: string = "";
+
+  // Store the animation object (so we can cancel it if needed)
+  let _animation: Animation | null = null;
+  // Store if the element is closing
+  let _isClosing = false;
+  // Store if the element is expanding
+  let _isExpanding = false;
+  // Show error messages only once
+  let _once: Once = new Once();
 
   // Reactive
 
@@ -69,6 +89,7 @@
   onMount(() => {
     validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
+    validateIconPosition(iconposition);
     ensureSlotExists(_slotEl);
 
     _headingSlotChildren = getHeadingChildren();
@@ -81,22 +102,172 @@
       if (slot) {
         return slot.assignedElements();
       } else {
-        // @ts-expect-error
         return [..._titleEl.children] as Element[]; // unit tests
       }
     }
     return [];
   }
 
-  function dispatchClickEvent(open?: boolean) {
+  function dispatchChangeEvent(accordionIsOpen: boolean) {
     if (!_rootEl) return;
 
-    _rootEl.dispatchEvent(
-      new CustomEvent("_change", {
-        composed: true,
-        bubbles: true,
-        detail: { open: open },
-      }),
+    dispatch(
+      _rootEl,
+      "_change",
+      {
+        open: accordionIsOpen,
+      },
+      { bubbles: true },
+    );
+  }
+
+  function onAccordionToggle(target: Event) {
+    // Stop default behaviour from the browser
+    target.preventDefault();
+    // Add an overflow on the <details> to avoid content overflowing
+    _detailsEl.style.overflow = "hidden";
+
+    // Check if the element is being closed or is already closed
+    if (_isClosing || !_detailsEl.open) {
+      openAccordion();
+      // Check if the element is being openned or is already open
+    } else if (_isExpanding || _detailsEl.open) {
+      shrink();
+    }
+  }
+
+  function shrink() {
+    // Set the element as "being closed"
+    _isClosing = true;
+
+    // Store the current height of the element
+    const startHeight = `${_detailsEl.offsetHeight}px`;
+    // Calculate the height of the summary
+    const endHeight = `${_summaryEl.offsetHeight}px`;
+
+    // If there is already an animation running
+    if (_animation) {
+      // Cancel the current animation
+      _animation.cancel();
+    }
+
+    // Start a WAAPI animation
+    const duration = getAnimationDuration();
+    const easing = getAnimationEasingExit();
+    _animation = _detailsEl.animate(
+      {
+        // Set the keyframes from the startHeight to endHeight
+        height: [startHeight, endHeight],
+      },
+      {
+        duration,
+        easing,
+      },
+    );
+
+    // When the animation is complete, call onAnimationFinish()
+    _animation.onfinish = () => onAnimationFinish(false);
+    // If the animation is cancelled, isClosing variable is set to false
+    _animation.oncancel = () => (_isClosing = false);
+  }
+
+  function openAccordion() {
+    // Apply a fixed height on the element
+    _detailsEl.style.height = `${_detailsEl.offsetHeight}px`;
+    // Force the [open] attribute on the details element
+    _detailsEl.open = true;
+    // Wait for the next frame to call the expand function
+    window.requestAnimationFrame(() => expand());
+  }
+
+  function expand() {
+    // Set the element as "being expanding"
+    _isExpanding = true;
+    // Get the current fixed height of the element
+    const startHeight = `${_detailsEl.offsetHeight}px`;
+    // Calculate the open height of the element (summary height + content height)
+    const endHeight = `${_summaryEl.offsetHeight + _slotEl.offsetHeight}px`;
+
+    // If there is already an animation running
+    if (_animation) {
+      // Cancel the current animation
+      _animation.cancel();
+    }
+
+    // Start a WAAPI animation
+    const duration = getAnimationDuration();
+    const easing = getAnimationEasingReveal();
+    _animation = _detailsEl.animate(
+      {
+        // Set the keyframes from the startHeight to endHeight
+        height: [startHeight, endHeight],
+      },
+      {
+        duration,
+        easing,
+      },
+    );
+    // When the animation is complete, call onAnimationFinish()
+    _animation.onfinish = () => onAnimationFinish(true);
+    // If the animation is cancelled, isExpanding variable is set to false
+    _animation.oncancel = () => (_isExpanding = false);
+
+    open = "true";
+  }
+
+  function onAnimationFinish(isAccordionOpen: boolean) {
+    // Set the open attribute based on the parameter
+    _detailsEl.open = isAccordionOpen;
+    // Clear the stored animation
+    _animation = null;
+    // Reset isClosing & isExpanding
+    _isClosing = false;
+    _isExpanding = false;
+    // Remove the overflow hidden and the fixed height
+    _detailsEl.style.height = _detailsEl.style.overflow = "";
+
+    dispatchChangeEvent(isAccordionOpen);
+
+    open = isAccordionOpen ? "true" : "false";
+  }
+
+  // Because the animation is done using JavaScript we can't use CSS variables
+  // in the animation, this helps to work around that.
+  function getCssVariableValue(variableName: string): string | null {
+    const value = getComputedStyle(_rootEl)
+      .getPropertyValue(variableName)
+      .trim();
+
+    if (!value || value === "") {
+      // Show a warning only once
+      _once.do(variableName, () =>
+        console.warn(
+          `CSS variable ${variableName} is not defined. Please make sure you're using the correct version of @abgov/design-tokens`,
+        ),
+      );
+      return null;
+    }
+    return value;
+  }
+
+  function getAnimationDuration(): number {
+    const durationValueStr =
+      getCssVariableValue("--goa-motion-duration-short-3") ?? "100ms";
+
+    return parseCssTimeToMilliseconds(durationValueStr, 100);
+  }
+
+  function getAnimationEasingReveal(): string {
+    return (
+      getCssVariableValue("--goa-motion-curve-expressive-reveal") ??
+      "cubic-bezier(0.7, 0, 0.25, 1)"
+    );
+  }
+
+  function getAnimationEasingExit(): string {
+    return (
+      getCssVariableValue("--goa-motion-curve-expressive-exit") ??
+      "cubic-bezier(0.42, 0, 1, 1)"
     );
   }
 </script>
@@ -111,8 +282,13 @@
   class="goa-accordion"
   bind:this={_rootEl}
   data-testid={testid}
+  {id}
 >
-<details open={isOpen} on:toggle={({ target }) => { open = `${target?.open}`; dispatchClickEvent(target?.open); }}>
+  <details
+    bind:this={_detailsEl}
+    open={isOpen}
+    data-testid={`${testid}-details`}
+  >
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <summary
       class={`container-${headingsize}`}
@@ -121,10 +297,12 @@
       on:focus={() => (_hovering = false)}
       on:blur={() => (_hovering = false)}
       aria-controls={`${_accordionId}-content`}
-      aria-expanded={open === "true"}
+      aria-expanded={isOpen}
       class:iconRight={iconposition === "right"}
+      bind:this={_summaryEl}
+      on:click={onAccordionToggle}
+      data-testid={`${testid}-summary`}
     >
-
       {#if iconposition === "left"}
         <goa-icon
           type="chevron-forward"
@@ -145,6 +323,7 @@
         <div
           class="heading-content"
           class:heading-content-top={_headingSlotChildren.length}
+          on:click|stopPropagation
         >
           <slot name="headingcontent" />
         </div>
@@ -207,6 +386,8 @@
 
     /* safari hack (see below) */
     position: relative;
+    transition: var(--goa-motion-duration-short-2) background-color
+      var(--goa-motion-curve-expressive);
   }
 
   summary.iconRight {
@@ -242,7 +423,7 @@
   }
 
   summary goa-icon {
-    padding: 0.125rem 1rem;
+    padding: 0.25rem 1rem;
   }
 
   .title {
@@ -250,27 +431,44 @@
     flex: 1;
   }
 
-  .title span {
-    padding-bottom: var(--goa-space-2xs, 0);
-  }
-
   .heading {
     font: var(--goa-accordion-heading);
-    padding-right: 1rem;
+    padding: 0.125rem 1rem 0 0;
+  }
+
+  .heading-small {
+    padding-top: 0.25rem;
+    line-height: 1.75rem;
+    font: var(--goa-accordion-heading);
+  }
+
+  .heading-medium {
+    line-height: 2rem;
+    font: var(--goa-accordion-heading-m);
   }
 
   .secondary-text {
-    font: var(--goa-accordion-heading-secondary-text, var(--goa-typography-body-s));
-    color: var(--goa-accordion-heading-secondary-text-color, var(--goa-color-text-default));
+    font: var(
+      --goa-accordion-heading-secondary-text,
+      var(--goa-typography-body-s)
+    );
+    color: var(
+      --goa-accordion-heading-secondary-text-color,
+      var(--goa-color-text-default)
+    );
     line-height: 1.5rem;
     padding-right: 1rem;
   }
-  .heading-content {
-    flex: 1;
+
+  .heading-medium + .secondary-text {
+    font: var(
+      --goa-accordion-heading-m-secondary-text,
+      var(--goa-typography-body-s)
+    );
   }
 
-  goa-icon {
-    padding: 0.125rem 1rem;
+  .heading-content {
+    flex: 1;
   }
 
   .container-medium {
@@ -278,7 +476,7 @@
   }
 
   .container-medium goa-icon {
-    padding: 0.375rem 1rem;
+    padding: 0.5rem 1rem;
   }
 
   .content {
@@ -305,30 +503,31 @@
   }
 
   details[open] summary:hover {
-    border-bottom: var(--goa-accordion-divider-hover, var(--goa-accordion-divider));
+    border-bottom: var(
+      --goa-accordion-divider-hover,
+      var(--goa-accordion-divider)
+    );
   }
 
   details[open] summary:focus-visible::before {
-    border-radius: var(--goa-accordion-border-radius-focus, var(--goa-accordion-border-radius));
-  }
-
-
-  /* Sizes */
-  .heading-medium {
-    line-height: 2rem;
-    font: var(--goa-accordion-heading-m);
-  }
-
-  .heading-medium + .secondary-text {
-    font: var(--goa-accordion-heading-m-secondary-text, var(--goa-typography-body-s));
+    border-radius: var(
+      --goa-accordion-border-radius-focus,
+      var(--goa-accordion-border-radius)
+    );
   }
 
   .container-medium {
-    padding: var(--goa-accordion-padding-heading-m-icon-left, var(--goa-accordion-padding-heading-icon-left));
+    padding: var(
+      --goa-accordion-padding-heading-m-icon-left,
+      var(--goa-accordion-padding-heading-icon-left)
+    );
   }
 
   .container-medium.iconRight {
-    padding: var(--goa-accordion-padding-heading-m-icon-right, var(--goa-accordion-padding-heading-icon-right));
+    padding: var(
+      --goa-accordion-padding-heading-m-icon-right,
+      var(--goa-accordion-padding-heading-icon-right)
+    );
   }
 
   @container self (--mobile) {
@@ -347,7 +546,7 @@
       padding: var(--goa-accordion-padding-content-wide);
     }
     .title {
-      align-items: center;
+      align-items: baseline;
     }
   }
 </style>

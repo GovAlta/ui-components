@@ -1,5 +1,14 @@
 import { waitFor } from "@testing-library/svelte";
-import { getTimestamp, performOnce, announceToScreenReader, typeValidator, getLocalDateValues, isFocusable, findFirstFocusableNode } from "./utils";
+import {
+  getTimestamp,
+  performOnce,
+  announceToScreenReader,
+  typeValidator,
+  getLocalDateValues,
+  isFocusable,
+  findFirstFocusableNode,
+  parseCssTimeToMilliseconds,
+} from "./utils";
 import { it, describe, expect, vi, beforeEach, afterEach } from "vitest";
 
 describe("getTimestamp", () => {
@@ -36,19 +45,19 @@ describe("getTimestamp", () => {
       29: "29th",
       30: "30th",
       31: "31st",
-    }
+    };
 
     for (const [day, val] of Object.entries(vals)) {
-      const d = new Date(2023, 2, parseInt(day, 10))
-      expect(getTimestamp(d)).toContain(val)
+      const d = new Date(2023, 2, parseInt(day, 10));
+      expect(getTimestamp(d)).toContain(val);
     }
-  })
+  });
 
   it("handles the 12th hour", () => {
-    expect(getTimestamp(new Date(2023, 1, 1, 12, 23))).toContain("12:23 PM")
-    expect(getTimestamp(new Date(2023, 1, 1, 0, 23))).toContain("12:23 AM")
-  })
-})
+    expect(getTimestamp(new Date(2023, 1, 1, 12, 23))).toContain("12:23 PM");
+    expect(getTimestamp(new Date(2023, 1, 1, 0, 23))).toContain("12:23 AM");
+  });
+});
 
 describe("performOnce", () => {
   it("calls the action only once", async () => {
@@ -62,14 +71,14 @@ describe("performOnce", () => {
     await waitFor(() => {
       expect(count).toBe(1);
     });
-  })
-})
+  });
+});
 
 describe("announceToScreenReader", () => {
   beforeEach(() => {
     vi.useFakeTimers();
     if (!document.body) {
-      const body = document.createElement('body');
+      const body = document.createElement("body");
       document.documentElement.appendChild(body);
     }
   });
@@ -80,7 +89,7 @@ describe("announceToScreenReader", () => {
 
     // Clean up any announcer elements
     const announcers = document.querySelectorAll('[aria-live="polite"]');
-    announcers.forEach(el => el.parentNode?.removeChild(el));
+    announcers.forEach((el) => el.parentNode?.removeChild(el));
   });
 
   it("creates an accessible announcer element with the correct attributes", () => {
@@ -96,7 +105,7 @@ describe("announceToScreenReader", () => {
   });
 
   it("sets up timers to remove the announcer element", () => {
-    const setTimeoutSpy = vi.spyOn(global, 'setTimeout');
+    const setTimeoutSpy = vi.spyOn(global, "setTimeout");
 
     const customDuration = 1500;
     announceToScreenReader("Test announcement", customDuration);
@@ -107,7 +116,7 @@ describe("announceToScreenReader", () => {
   });
 
   it("uses default duration when not specified", () => {
-    const setTimeoutSpy = vi.spyOn(global, 'setTimeout');
+    const setTimeoutSpy = vi.spyOn(global, "setTimeout");
 
     announceToScreenReader("Test announcement");
 
@@ -119,7 +128,9 @@ describe("announceToScreenReader", () => {
   it("applies visually hidden styles to the announcer element", () => {
     announceToScreenReader("Test announcement");
 
-    const announcer = document.querySelector('[aria-live="polite"]') as HTMLElement;
+    const announcer = document.querySelector(
+      '[aria-live="polite"]',
+    ) as HTMLElement;
     expect(announcer).not.toBeNull();
 
     // Check that the element has visually hidden styles
@@ -296,11 +307,7 @@ describe("typeValidator", () => {
   });
 
   it("behaves like required=false when no options provided", () => {
-    const [, validator] = typeValidator(
-      "Color",
-      ["red", "blue", "green"],
-      {},
-    );
+    const [, validator] = typeValidator("Color", ["red", "blue", "green"], {});
 
     validator(null);
     expect(consoleErrorSpy).not.toHaveBeenCalled();
@@ -767,7 +774,7 @@ describe("findFirstFocusableNode", () => {
       const button = document.createElement("button");
 
       // Mock assignedNodes for testing
-      vi.spyOn(slot, 'assignedNodes').mockReturnValue([button]);
+      vi.spyOn(slot, "assignedNodes").mockReturnValue([button]);
 
       expect(findFirstFocusableNode([slot])).toBe(button);
     });
@@ -776,7 +783,7 @@ describe("findFirstFocusableNode", () => {
       const slot = document.createElement("slot");
 
       // Mock assignedNodes returning empty array
-      vi.spyOn(slot, 'assignedNodes').mockReturnValue([]);
+      vi.spyOn(slot, "assignedNodes").mockReturnValue([]);
 
       expect(findFirstFocusableNode([slot])).toBeNull();
     });
@@ -794,10 +801,14 @@ describe("findFirstFocusableNode", () => {
       button3.id = "third";
 
       // Normal order should find first button
-      expect(findFirstFocusableNode([button1, button2, button3], false)).toBe(button1);
+      expect(findFirstFocusableNode([button1, button2, button3], false)).toBe(
+        button1,
+      );
 
       // Reversed order should find last button
-      expect(findFirstFocusableNode([button1, button2, button3], true)).toBe(button3);
+      expect(findFirstFocusableNode([button1, button2, button3], true)).toBe(
+        button3,
+      );
     });
 
     it("finds last focusable element in nested structure when reversed", () => {
@@ -812,7 +823,9 @@ describe("findFirstFocusableNode", () => {
       container2.appendChild(button2);
 
       // Reversed should find the last focusable element
-      expect(findFirstFocusableNode([container1, container2], true)).toBe(button2);
+      expect(findFirstFocusableNode([container1, container2], true)).toBe(
+        button2,
+      );
     });
   });
 
@@ -826,7 +839,15 @@ describe("findFirstFocusableNode", () => {
       const hiddenInput = document.createElement("input");
       hiddenInput.type = "hidden"; // not focusable
 
-      expect(findFirstFocusableNode([span, div, disabledButton, enabledButton, hiddenInput])).toBe(enabledButton);
+      expect(
+        findFirstFocusableNode([
+          span,
+          div,
+          disabledButton,
+          enabledButton,
+          hiddenInput,
+        ]),
+      ).toBe(enabledButton);
     });
 
     it("handles deeply nested structure with mixed content", () => {
@@ -863,7 +884,9 @@ describe("findFirstFocusableNode", () => {
       const commentNode = document.createComment("comment");
       const button = document.createElement("button");
 
-      expect(findFirstFocusableNode([textNode, commentNode, button])).toBe(button);
+      expect(findFirstFocusableNode([textNode, commentNode, button])).toBe(
+        button,
+      );
     });
 
     it("handles elements with conflicting attributes", () => {
@@ -877,5 +900,28 @@ describe("findFirstFocusableNode", () => {
 
       expect(findFirstFocusableNode([input, button])).toBe(button);
     });
+  });
+});
+
+describe("parseCssTimeToMilliseconds", () => {
+  it("parses millisecond values", () => {
+    expect(parseCssTimeToMilliseconds("150ms")).toBe(150);
+    expect(parseCssTimeToMilliseconds(" 200 ms ")).toBe(200);
+  });
+
+  it("parses second values and converts to milliseconds", () => {
+    expect(parseCssTimeToMilliseconds("0.25s")).toBe(250);
+    expect(parseCssTimeToMilliseconds("2 s")).toBe(2000);
+  });
+
+  it("supports uppercase units", () => {
+    expect(parseCssTimeToMilliseconds("1.5S")).toBe(1500);
+    expect(parseCssTimeToMilliseconds("300MS")).toBe(300);
+  });
+
+  it("returns fallback for invalid values", () => {
+    expect(parseCssTimeToMilliseconds("invalid")).toBe(100);
+    expect(parseCssTimeToMilliseconds("1minute")).toBe(100);
+    expect(parseCssTimeToMilliseconds("", 250)).toBe(250);
   });
 });
