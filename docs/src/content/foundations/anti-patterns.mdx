@@ -1,0 +1,106 @@
+---
+id: anti-patterns
+title: Anti-Patterns
+description: Common anti-patterns and pitfalls to avoid when using the GoA Design System
+category: design
+tags:
+  - anti-patterns
+  - common-mistakes
+  - code-quality
+status: published
+---
+
+## Design Anti-Patterns
+
+### Custom Components Over GoA Components
+
+**Severity:** High
+
+Building custom components when equivalent GoA components exist. This fragments the design system, increases maintenance burden, and introduces inconsistencies across government services.
+
+**Detection:**
+
+- Custom button, input, or layout components
+- Reimplementation of existing patterns
+
+**Solution:** Exhaust GoA library options before building custom. Check examples for similar patterns.
+
+---
+
+### Mismatched User Type Patterns
+
+**Severity:** High
+
+Using citizen patterns for worker tools or vice versa. Citizen and worker services have fundamentally different user needs and interaction models that must not be mixed.
+
+**Detection:**
+
+- Worker dashboards with one-question-per-page
+- Citizen forms with high information density
+
+**Solution:** Use appropriate patterns for each user type. See the User Types foundation.
+
+---
+
+### Inconsistent Layout Structure
+
+**Severity:** Critical
+
+Not following the right layout pattern for the service type. Citizen-facing services and worker tools have different layout requirements, and mixing patterns breaks visual hierarchy and user expectations.
+
+**Detection:**
+
+- Citizen-facing services (like public forms) missing AppHeader or AppFooter
+- Worker tools mixing AppHeader/AppFooter with WorkSideMenu
+- Inconsistent page structure within the same service
+
+**Solution:** Use the layout pattern that matches the service type. Citizen services use AppHeader and AppFooter with OneColumnLayout. Worker tools use WorkSideMenu without standard header or footer.
+
+---
+
+### Accessibility as Afterthought
+
+**Severity:** Critical
+
+Adding accessibility features after design/development completion. Retrofitting accessibility is far more expensive than building it in from the start, and risks WCAG 2.2 AA non-compliance.
+
+**Detection:**
+
+- Form inputs without labels
+- Missing ARIA attributes
+- Color contrast issues
+
+**Solution:** Use GoA components which provide accessibility by default. Test early.
+
+---
+
+## Technical Anti-Patterns
+
+### Custom CSS Over Component Props
+
+**Severity:** Medium
+
+Trying to override GoA component appearance with custom CSS. Most attempts won't work anyway because the components use shadow DOM, which isolates styling. The ones that do work create fragile implementations that break on component updates and undermine visual consistency.
+
+**Detection:**
+
+- CSS selectors targeting GoA classes or elements
+- !important declarations attempting to override component styles
+- Wrapper elements with inline styles trying to influence components
+
+**Solution:** Use component props first. If you genuinely need to customize a component beyond what props allow, GoA components expose component tokens (CSS custom properties) that can be overridden. This is the supported escape hatch and is far better than fighting the shadow DOM. If you find yourself reaching for tokens often, talk to the design system team — there may be a missing prop or a pattern worth adding.
+
+---
+
+### Overuse of GoabSpacer
+
+**Severity:** Low
+
+Using GoabSpacer instead of component margin properties. Excessive spacers add unnecessary DOM nodes and ignore built-in spacing controls on components.
+
+**Detection:**
+
+- Many GoabSpacer components
+- Spacers between components that support margins
+
+**Solution:** Use component margin props (mb, mt, ml, mr) when available.

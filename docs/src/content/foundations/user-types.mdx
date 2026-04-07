@@ -1,0 +1,152 @@
+---
+id: user-types
+title: User Types
+description: Two distinct modes shape how government services should be designed. Understanding which mode you're designing for changes everything about the experience.
+category: design
+tags:
+  - user-types
+  - citizen
+  - service-delivery-worker
+  - guided
+  - expert
+status: published
+---
+
+## Citizen vs Service Delivery Worker
+
+Two distinct modes shape how government services should be designed. Understanding which mode you're designing for changes everything about the experience.
+
+### Citizen mode
+
+A citizen is someone accessing a government service from outside government. They might do this once in their life, once a year, or rarely. They didn't choose to be here, they're here because they need something from government.
+
+**The experience should feel like:** A clear, considered path. Slow on purpose. One step at a time. Plain language. Lots of explanation. Easy to find the next thing. Hard to make a mistake.
+
+**It values:** Clarity over speed. Confidence over efficiency. Walking someone through something they may never have done before.
+
+The goal is to simplify while preserving agency. Make the path clear, but don't make decisions for someone that should be theirs to make. Default to choices only when there is one truly right answer. Otherwise, lay out the options and let the person choose.
+
+Simplification serves understanding. Throwing all the information at someone at once makes it harder to grasp, not easier. Progressive disclosure is the main tool: one thing at a time, in an order that makes sense, surfacing the right information at the right moment. This isn't only about forms. It's a guiding principle for any citizen experience: find the simplest, clearest path through, and curate what someone sees at each step.
+
+### Service delivery worker mode
+
+A service delivery worker is someone using a tool to deliver or administer a government service from inside government. They use it every day. It is their job. They know what they are doing.
+
+**The experience should feel like:** A power tool. Fast. Dense. Information-rich. Predictable. Constant feedback so you always know what just happened. Built for repetition and scale.
+
+**It values:** Efficiency over guidance. Density over whitespace. Trusting expertise. Letting the person move through their work without the system slowing them down with explanations they have already internalized.
+
+It is not stripped down. It is loaded with everything an expert needs, organized so the right thing is always at hand.
+
+### The key insight
+
+Frequency matters more than identity. A contractor filing daily permits is technically a citizen, but they need service delivery worker patterns. A service delivery worker handling a once-in-a-career regulatory exception needs guided patterns. The mode is about the relationship to the task, not the person's role.
+
+## Classification Framework
+
+Two dimensions help identify which mode applies: who the person is in relation to the service, and how often they use it.
+
+### Dimension 1: Role
+
+**Receiving Service** — People accessing or benefiting from government services
+
+- Citizens
+- Businesses
+- Professional intermediaries (lawyers, contractors)
+
+**Giving Service** — People administering or managing government services
+
+- Government service delivery workers
+- Service providers
+- Staff processing applications
+
+### Dimension 2: Frequency
+
+**Guided / Infrequent**
+
+- Frequency: Once in a lifetime, annually, or rare
+- Mental model: "Help me through this process"
+- Needs: Step-by-step guidance, clear explanations, error prevention, save progress
+
+**Expert / Frequent**
+
+- Frequency: Daily, weekly, or routine
+- Mental model: "I know what I'm doing, make me efficient"
+- Needs: Shortcuts, bulk actions, dense information, speed
+
+## Design Patterns
+
+### Citizen mode (guided)
+
+**Approach:**
+
+- Progressive disclosure — break into manageable steps
+- Plain language at grade 9 reading level
+- Error prevention with validation and confirmations
+- Inline help and examples
+- Allow saving progress across sessions
+
+**Recommended components:**
+
+- GoabFormItem with help text
+- GoabCallout for guidance
+- GoabDetails for disclosure
+- Clear progress indicators
+
+**Layouts:**
+
+- Single question per page
+- Prominent help
+- Large obvious action buttons
+- AppHeader and AppFooter with OneColumnLayout
+
+### Service delivery worker mode (expert)
+
+**Approach:**
+
+- Dense information display
+- Keyboard shortcuts and quick actions
+- Bulk operations for efficiency
+- Advanced filtering and sorting
+- Customizable interfaces
+- Constant feedback so users know what just happened
+
+**Recommended components:**
+
+- GoabTable with sorting
+- GoabButtonGroup for bulk actions
+- GoabTabs for density
+- GoabPagination
+
+**Layouts:**
+
+- Information-dense layouts
+- Multiple actions per screen
+- Advanced filtering
+- WorkSideMenu without standard header or footer
+
+## Examples
+
+### Citizen mode + Guided
+
+**Scenario:** Citizen buying first home
+
+**Pattern:** Step-by-step wizard, extensive help, one question per page
+
+### Citizen mode + Expert
+
+**Scenario:** Contractor filing routine permits
+
+**Pattern:** Efficient form, bulk submission, saved preferences. Even though the user is a citizen, frequency makes service delivery worker patterns the right choice.
+
+### Service delivery worker mode + Guided
+
+**Scenario:** Service delivery worker handling complex regulatory exception
+
+**Pattern:** Procedural guidance, compliance checklists, validation. Even though the user is a service delivery worker, the rare and high-stakes nature makes guided patterns the right choice.
+
+### Service delivery worker mode + Expert
+
+**Scenario:** Case worker processing daily applications
+
+**Pattern:** Dashboard with queues, bulk actions, keyboard shortcuts
