@@ -9,7 +9,7 @@ tags:
   - accessibility
 appliesTo:
   components:
-    - radio
+    - radio-group
 status: published
 ---
 
@@ -17,7 +17,7 @@ status: published
   <goa-radio-group name="contact">
     <goa-radio-item value="email" label="Email"></goa-radio-item>
     <goa-radio-item value="phone" label="Phone">
-      <goa-radio-group name="phone-type" slot="content">
+      <goa-radio-group name="phone-type" slot="reveal">
         <goa-radio-item value="call" label="Phone call"></goa-radio-item>
         <goa-radio-item value="text" label="Text message"></goa-radio-item>
       </goa-radio-group>
