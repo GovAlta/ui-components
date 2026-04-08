@@ -55,8 +55,10 @@
 
   let _menuEl: HTMLElement;
   let _menuLinks: HTMLElement[] = [];
+  let _containerEl: HTMLElement;
   let _rootEl: HTMLElement;
   let _scrollEl: HTMLElement;
+  let _toggleButtonEl: HTMLElement;
   let _tooltipEl: HTMLElement;
   let _tooltipLabel: string = "";
 
@@ -196,16 +198,30 @@
   }
 
   function setTooltipPos(label: string, el: HTMLElement) {
-    let top = el?.getBoundingClientRect().top - 2;
+    const rect = el?.getBoundingClientRect();
+    const containerRect = _containerEl.getBoundingClientRect();
+    const top = rect.top - containerRect.top + rect.height / 2;
+    const left = rect.right - containerRect.left;
+
     _tooltipEl.style.top = `${top}px`;
+    _tooltipEl.style.left = `${left + 14}px`;
+
     _tooltipLabel = label;
   }
 
   function hideTooltip() {
+    clearTimeout(_mouseEnterTimeoutId);
     clearTimeout(_mouseLeaveTimeoutId);
     _mouseLeaveTimeoutId = setTimeout(() => {
       _showTooltip = false;
     }, 300);
+  }
+
+  function handleToggleHover() {
+    if (open) return;
+
+    setTooltipPos("Expand menu", _toggleButtonEl);
+    showTooltip();
   }
 
   // Account menu
@@ -262,12 +278,6 @@
   // Menu-scoped keyboard navigation (only fires when focus is inside menu)
   function handleMenuKeyDown(e: KeyboardEvent) {
     switch (e?.key) {
-      case "ArrowDown":
-        onArrow("down");
-        break;
-      case "ArrowUp":
-        onArrow("up");
-        break;
       case "Escape":
         closeAccountMenu();
         break;
@@ -489,13 +499,15 @@
   }
 
   .closed .tooltip {
-    position: fixed;
-    left: var(--goa-space-3xl);
+    position: absolute;
     background-color: var(--goa-color-greyscale-700);
     font: var(--goa-typography-body-xs);
     color: var(--goa-color-text-light);
     border-radius: var(--goa-border-radius-m);
     padding: var(--goa-space-xs) var(--goa-space-s);
+    width: max-content;
+    white-space: nowrap;
+    transform: translateY(-50%);
   }
 
   .closed .tooltip::before {
@@ -532,7 +544,7 @@
   .root {
     position: relative;
     z-index: 101;
-    height: 100vh;
+    height: var(--goa-work-side-menu-height, 100vh);
   }
 
   .background {
@@ -619,7 +631,7 @@
     animation: none;
   }
 
-  .scroll-area {
+ .scroll-area {
     flex: 1 1 0;
     min-height: 0;
     overflow: hidden;

@@ -36,7 +36,10 @@
       </goab-app-header>
     </section>
 
-    <div style="display: flex; flex: 1 1 auto">
+    <div
+      style="display: flex; flex: 1 1 auto; min-height: calc(100vh - 10.1875rem)"
+      [style.--goa-work-side-menu-height]="workSideMenuHeight"
+    >
       <goab-work-side-menu
         heading="Testing Playground"
         url="/"
@@ -258,6 +261,10 @@
           url="/bugs/3635"
         ></goab-work-side-menu-item>
         <goab-work-side-menu-item
+            label="3735 Work Side Menu tooltip fixes"
+            url="/bugs/3735"
+          ></goab-work-side-menu-item>
+          <goab-work-side-menu-item
             label="3635 Input Leading icon color"
             url="/bugs/3635"
           ></goab-work-side-menu-item>
