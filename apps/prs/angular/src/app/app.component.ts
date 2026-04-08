@@ -30,6 +30,7 @@ import {
 })
 export class AppComponent {
   isFullPage = false;
+  readonly workSideMenuHeight = "calc(100vh - 10.1875rem)";
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);

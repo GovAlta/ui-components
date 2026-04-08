@@ -8,10 +8,7 @@
  */
 
 import { useCallback, useState, useEffect } from "react";
-import {
-  GoabSpacer,
-  GoabWorkSideMenuItem,
-} from "@abgov/react-components";
+import { GoabIcon, GoabSpacer, GoabWorkSideMenuItem } from "@abgov/react-components";
 
 import "./menu-secondary.css";
 
@@ -33,15 +30,51 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
     window.dispatchEvent(new CustomEvent("goa-search-open"));
   }, []);
 
+  const showSearchTooltip = useCallback(
+    (
+      event: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>,
+    ) => {
+      event.currentTarget.dispatchEvent(
+        new CustomEvent("_hoverItem", {
+          bubbles: true,
+          composed: true,
+          detail: {
+            label: "Search",
+            el: event.currentTarget,
+          },
+        }),
+      );
+    },
+    [],
+  );
+
+  const hideSearchTooltip = useCallback(
+    (
+      event: React.MouseEvent<HTMLButtonElement> | React.FocusEvent<HTMLButtonElement>,
+    ) => {
+      event.currentTarget.dispatchEvent(
+        new CustomEvent("_blurItem", {
+          bubbles: true,
+          composed: true,
+        }),
+      );
+    },
+    [],
+  );
+
   return (
     <>
       <button
         className="search-menu-button"
         onClick={openSearch}
+        onMouseEnter={showSearchTooltip}
+        onMouseLeave={hideSearchTooltip}
+        onFocus={showSearchTooltip}
+        onBlur={hideSearchTooltip}
         type="button"
         aria-label="Search"
       >
-        <goa-icon type="search" size="small" />
+        <GoabIcon type="search" size="small" />
         {isOpen && (
           <>
             <span className="search-menu-label">Search</span>

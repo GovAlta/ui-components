@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
   GoabAppFooter,
@@ -12,6 +13,12 @@ import {
 
 import "@abgov/style";
 import "@abgov/design-tokens-v2/dist/tokens.css"; // Production tokens. Comment out to test with legacy V1 token values.
+
+const appContentStyle: CSSProperties = {
+  display: "flex",
+  minHeight: "calc(100vh - 10.1875rem)",
+  "--goa-work-side-menu-height": "calc(100vh - 10.1875rem)",
+} as CSSProperties;
 
 export function App() {
   const navigate = useNavigate();
@@ -51,7 +58,7 @@ export function App() {
           </GoabAppHeaderMenu>
         </GoabAppHeader>
       </section>
-      <div style={{ display: "flex", minHeight: "100vh" }}>
+      <div style={appContentStyle}>
         <GoabWorkSideMenu
           heading="Testing Playground"
           url="/"
@@ -224,15 +231,14 @@ export function App() {
                   url="/bugs/3607"
                 />
                 <GoabWorkSideMenuItem label="3505 Link Icon Click" url="/bugs/3505" />
-                <GoabWorkSideMenuItem label="3548 Side Menu Scroll" url="/bugs/3548" />
                 <GoabWorkSideMenuItem label="3614 IconButton Hitboxes" url="/bugs/3614" />
                 <GoabWorkSideMenuItem
                   label="3685 Checkbox & Radio: Reveal width not aligned with item"
                   url="/bugs/3685"
                 />
                 <GoabWorkSideMenuItem
-                  label="3640 Work Side Menu Badge Alignment"
-                  url="/bugs/3640"
+                  label="3735 Work Side Menu tooltip fixes"
+                  url="/bugs/3735"
                 />
                 <GoabWorkSideMenuItem
                   label="3635 Input Leading icon color"
@@ -249,6 +255,10 @@ export function App() {
                 <GoabWorkSideMenuItem
                   label="3667 Notification banner refinements"
                   url="/bugs/3667"
+                />
+                <GoabWorkSideMenuItem
+                  label="3735 Work Side Menu tooltip fixes"
+                  url="/bugs/3735"
                 />
               </GoabWorkSideMenuGroup>
 
