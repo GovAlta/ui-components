@@ -242,6 +242,10 @@ export function App() {
                   url="/bugs/3635"
                 />
                 <GoabWorkSideMenuItem
+                  label="3743 Tertiary button background color on mobile"
+                  url="/bugs/3743"
+                />
+                <GoabWorkSideMenuItem
                   label="3637 Checkbox Table Header Row Height Bug"
                   url="/bugs/3637"
                 />
