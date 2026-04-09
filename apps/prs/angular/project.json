@@ -6,8 +6,16 @@
   "sourceRoot": "apps/prs/angular/src",
   "tags": [],
   "targets": {
+    "generate-route-manifest": {
+      "executor": "nx:run-commands",
+      "outputs": ["{projectRoot}/src/app/generated/pr-route-manifest.generated.ts"],
+      "options": {
+        "command": "node scripts/generate-angular-prs-route-manifest.js"
+      }
+    },
     "build": {
       "executor": "@angular-devkit/build-angular:application",
+      "dependsOn": ["generate-route-manifest", "^build"],
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/prs/angular",

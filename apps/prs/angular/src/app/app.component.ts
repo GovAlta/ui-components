@@ -4,12 +4,15 @@ import { filter } from "rxjs/operators";
 import {
   GoabAppFooter,
   GoabAppHeader,
-  GoabAppHeaderMenu,
   GoabMicrositeHeader,
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
   GoabWorkSideMenuGroup,
 } from "@abgov/angular-components";
+import {
+  bugRouteDefinitions,
+  featureRouteDefinitions,
+} from "./generated/pr-route-manifest.generated";
 
 @Component({
   standalone: true,
@@ -20,7 +23,6 @@ import {
     RouterOutlet,
     GoabAppFooter,
     GoabAppHeader,
-    GoabAppHeaderMenu,
     GoabMicrositeHeader,
     GoabWorkSideMenu,
     GoabWorkSideMenuItem,
@@ -31,6 +33,8 @@ import {
 export class AppComponent {
   isFullPage = false;
   readonly workSideMenuHeight = "calc(100vh - 10.1875rem)";
+  readonly bugRouteDefinitions = bugRouteDefinitions;
+  readonly featureRouteDefinitions = featureRouteDefinitions;
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);
