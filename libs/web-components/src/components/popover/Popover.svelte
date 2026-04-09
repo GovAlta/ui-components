@@ -76,6 +76,7 @@
   let _targetEl: HTMLElement;
   let _isOpen = false;
   let _autoPosition: "above" | "below" = "below";
+  let _flipInline = false;
   const _popoverId = `goa-popover-${generateRandomId()}`;
 
   $: _disabled = toBoolean(disabled);
@@ -123,6 +124,7 @@
     showDeprecationWarnings();
     addGlobalCloseListener();
     window.addEventListener("resize", updateAutoPosition);
+    window.addEventListener("resize", updateInlineFlip);
   });
 
   onDestroy(() => {
@@ -130,6 +132,7 @@
       stopManualPositioning();
     }
     window.removeEventListener("resize", updateAutoPosition);
+    window.removeEventListener("resize", updateInlineFlip);
     // true was passed when the listener was added, so it's necesary to be passed here as well
     window.removeEventListener("popstate", handleUrlChange, true);
   });
@@ -262,6 +265,7 @@
     if (_isOpen) {
       dispatch(_rootEl, "_open", {}, { bubbles: true });
       requestAnimationFrame(updateAutoPosition); // same vs await tick(), make sure popover element is fully rendered before we measure its dimension
+      requestAnimationFrame(updateInlineFlip);
       if (_needsManualPositioning) {
         startManualPositioning();
       }
@@ -269,6 +273,7 @@
       if (_needsManualPositioning || _positionRafId) {
         stopManualPositioning();
       }
+      _flipInline = false;
       _targetEl?.focus();
       dispatch(_rootEl, "_close", {}, { bubbles: true });
     }
@@ -307,6 +312,7 @@
       _popoverEl.showPopover();
       _isOpen = true;
       requestAnimationFrame(updateAutoPosition);
+      requestAnimationFrame(updateInlineFlip);
     }
   }
 
@@ -324,6 +330,12 @@
       spaceBelow < popoverRect.height && spaceAbove > spaceBelow
         ? "above"
         : "below";
+  }
+
+  function updateInlineFlip() {
+    if (_needsManualPositioning || position === "right" || !_isOpen || !_targetEl) return;
+    const targetRect = _targetEl.getBoundingClientRect();
+    _flipInline = targetRect.right > window.innerWidth - targetRect.left;
   }
 </script>
 
@@ -372,6 +384,7 @@
       (position === "auto" && _autoPosition === "below")}
     class:position-right={position === "right"}
     class:use-anchor-based-positioning={!_needsManualPositioning}
+    class:flip-inline={_flipInline}
     style={styles(
       style("width", position !== "right" ? width : undefined),
       style("min-width", minwidth),
@@ -440,14 +453,14 @@
     translate: var(--popover-translate-x) var(--popover-translate-y);
   }
 
+  .popover-content.flip-inline {
+    inset-inline-start: unset;
+    inset-inline-end: anchor(right);
+  }
+
   .popover-content.use-anchor-based-positioning {
     inset-block-start: anchor(top);
     --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
-  }
-  .popover-content.use-anchor-based-positioning.position-above {
-    inset-block-start: anchor(top);
-    --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
-    position-try-fallbacks: none;
   }
 
   .popover-content.position-below {

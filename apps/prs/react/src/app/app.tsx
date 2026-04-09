@@ -245,6 +245,10 @@ export function App() {
                   label="3637 Checkbox Table Header Row Height Bug"
                   url="/bugs/3637"
                 />
+                <GoabWorkSideMenuItem
+                  label="3643 Popover Viewport Overflow"
+                  url="/bugs/3643"
+                />
               </GoabWorkSideMenuGroup>
 
               <GoabWorkSideMenuGroup icon="star" heading="Features">
