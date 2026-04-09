@@ -21,7 +21,7 @@
     "serve:dev:react": "nx run react-dev:serve:development",
     "serve:dev:web": "nx run web-dev:serve:development",
     "serve:docs": "nx run docs:serve",
-    "serve:prs:angular": "nx run angular-prs:serve:development",
+    "serve:prs:angular": "node scripts/generate-angular-prs-route-manifest.js && nx run angular-prs:serve:development",
     "serve:prs:react": "nx run react-prs:serve:development",
     "serve:prs:web": "nx run web-prs:serve:development",
     "test:angular": "nx test angular-components",

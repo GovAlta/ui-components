@@ -4,105 +4,9 @@ import * as ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@abgov/web-components";
 import App from "./app/app";
-
-import { Bug2152Route } from "./routes/bugs/bug2152";
-import { Bug2331Route } from "./routes/bugs/bug2331";
-import { Bug2393Route } from "./routes/bugs/bug2393";
-import { Bug2404Route } from "./routes/bugs/bug2404";
-import { Bug2408Route } from "./routes/bugs/bug2408";
-import { Bug2459Route } from "./routes/bugs/bug2459";
-import { Bug2473Route } from "./routes/bugs/bug2473";
-import { Bug2502Route } from "./routes/bugs/bug2502";
-import { Bug2529Route } from "./routes/bugs/bug2529";
-import { Bug2547Route } from "./routes/bugs/bug2547";
-import { Bug2655Route } from "./routes/bugs/bug2655";
-import { Bug2720Route } from "./routes/bugs/bug2720";
-import { Bug2721Route } from "./routes/bugs/bug2721";
-import { Bug2750Route } from "./routes/bugs/bug2750";
-import { Bug2768Route } from "./routes/bugs/bug2768";
-import { Bug2782Route } from "./routes/bugs/bug2782";
-import { Bug2789Route } from "./routes/bugs/bug2789";
-import { Bug2821Route } from "./routes/bugs/bug2821";
-import { Bug2837Route } from "./routes/bugs/bug2837";
-import { Bug2839Route } from "./routes/bugs/bug2839";
-import { Bug2849Route } from "./routes/bugs/bug2849";
-import { Bug2852Route } from "./routes/bugs/bug2852";
-import { Bug2873Route } from "./routes/bugs/bug2873";
-import { Bug2878Route } from "./routes/bugs/bug2878";
-import { Bug2892Route } from "./routes/bugs/bug2892";
-import { Bug2922Route } from "./routes/bugs/bug2922";
-import { Bug2943Route } from "./routes/bugs/bug2943";
-import { Bug2948Route } from "./routes/bugs/bug2948";
-import { Bug2977Route } from "./routes/bugs/bug2977";
-import { Bug3118Route } from "./routes/bugs/bug3118";
-import { Bug3201Route } from "./routes/bugs/bug3201";
-import { Bug3215Route } from "./routes/bugs/bug3215";
-import { Bug3232Route } from "./routes/bugs/bug3232";
-import { Bug3279Route } from "./routes/bugs/bug3279";
-import { Bug3248Route } from "./routes/bugs/bug3248";
-import { Bug3273Route } from "./routes/bugs/bug3273";
-import { Bug3273Page2Route } from "./routes/bugs/bug3273-2";
-import { Bug3275Route } from "./routes/bugs/bug3275";
-import { Bug3322Route } from "./routes/bugs/bug3322";
-import { Bug3281Route } from "./routes/bugs/bug3281";
-import { Bug3337Route } from "./routes/bugs/bug3337";
-import { Bug3384Route } from "./routes/bugs/bug3384";
-import { Bug3450Route } from "./routes/bugs/bug3450";
-import { Bug3497Route } from "./routes/bugs/bug3497";
-import { Bug3498Route } from "./routes/bugs/bug3498";
-import { Bug3548Route } from "./routes/bugs/bug3548";
-import { Bug3607Route } from "./routes/bugs/bug3607";
-import { Bug3505Route } from "./routes/bugs/bug3505";
-import { Bug3614Route } from "./routes/bugs/bug3614";
-import { Bug3640Route } from "./routes/bugs/bug3640";
-import { Bug3735Route } from "./routes/bugs/bug3735";
-import { Bug3627Route } from "./routes/bugs/bug3627";
-import { Bug3635Route } from "./routes/bugs/bug3635";
-import { Bug3699Route } from "./routes/bugs/bug3699";
-import { Bug3637Route } from "./routes/bugs/bug3637";
-import { Bug3667Route } from "./routes/bugs/bug3667";
-import { Bug3685Route } from "./routes/bugs/bug3685";
-
 import { EverythingRoute } from "./routes/everything";
 import { EverythingBRoute } from "./routes/everything-b";
-
-import { Feat1383Route } from "./routes/features/feat1383";
-import { Feat1547Route } from "./routes/features/feat1547";
-import { Feat1813Route } from "./routes/features/feat1813";
-import { Feat1908Route } from "./routes/features/feat1908";
-import { Feat2328Route } from "./routes/features/feat2328";
-import { Feat2361Route } from "./routes/features/feat2361";
-import { Feat2054Route } from "./routes/features/feat2054";
-import { Feat2267Route } from "./routes/features/feat2267";
-import { Feat2440Route } from "./routes/features/feat2440";
-import { Feat2492Route } from "./routes/features/feat2492";
-import { Feat2609Route } from "./routes/features/feat2609";
-import { Feat2611Route } from "./routes/features/feat2611";
-import Feat2611TabsDisabledRoute from "./routes/features/feat2611-tabs-disabled";
-import { Feat2682Route } from "./routes/features/feat2682";
-import { Feat2722Route } from "./routes/features/feat2722";
-import { Feat2730Route } from "./routes/features/feat2730";
-import { Feat2829Route } from "./routes/features/feat2829";
-import { Feat2877Route } from "./routes/features/feat2877";
-import { Feat3102Route } from "./routes/features/feat3102";
-import { Feat3241Route } from "./routes/features/feat3241";
-import { FeatV2IconsRoute } from "./routes/features/featV2Icons";
-import { Feat3407SkipOnFocusTabRoute } from "./routes/features/feat3407SkipOnFocusTab";
-import { Feat3407StackOnMobileRoute } from "./routes/features/feat3407StackOnMobile";
-import { Feat3344Route } from "./routes/features/feat3344";
-import { Feat3137Route } from "./routes/features/feat3137";
-import { Feat3306Route } from "./routes/features/feat3306";
-import { Feat2469Route } from "./routes/features/feat2469";
-import { Feat3370Route } from "./routes/features/feat3370";
-import { Feat3396Route } from "./routes/features/feat3396";
-import { Feat3229Route } from "./routes/features/feat3229";
-import { FeatV2CheckboxRoute } from "./routes/features/featV2Checkbox";
-import { Feat3398Route } from "./routes/features/feat3398";
-import { Feat3478Route } from "./routes/features/feat3478";
-import { Feat2885Route } from "./routes/features/feat2885";
-import { Feat2885NavigationTabsRoute } from "./routes/features/feat2885-navigation-tabs";
-import { Feat3529Route } from "./routes/features/feat3529";
-import { Feat3544Route } from "./routes/features/feat3544";
+import { prRouteDefinitions } from "./app/route-manifest";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -111,121 +15,14 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/everything/b" element={<EverythingBRoute />} />
-        <Route path="/bugs/3279" element={<Bug3279Route />} />
         <Route path="/" element={<App />}>
           <Route path="everything" element={<EverythingRoute />} />
+          {prRouteDefinitions.map((route) => {
+            const Component = route.component;
 
-          <Route path="bugs/2152" element={<Bug2152Route />} />
-          <Route path="bugs/2331" element={<Bug2331Route />} />
-          <Route path="bugs/2393" element={<Bug2393Route />} />
-          <Route path="bugs/2404" element={<Bug2404Route />} />
-          <Route path="bugs/2408" element={<Bug2408Route />} />
-          <Route path="bugs/2459" element={<Bug2459Route />} />
-          <Route path="bugs/2473" element={<Bug2473Route />} />
-          <Route path="bugs/2502" element={<Bug2502Route />} />
-          <Route path="bugs/2529" element={<Bug2529Route />} />
-          <Route path="bugs/2547" element={<Bug2547Route />} />
-          <Route path="bugs/2655" element={<Bug2655Route />} />
-          <Route path="bugs/2720" element={<Bug2720Route />} />
-          <Route path="bugs/2721" element={<Bug2721Route />} />
-          <Route path="bugs/2750" element={<Bug2750Route />} />
-          <Route path="bugs/2768" element={<Bug2768Route />} />
-          <Route path="bugs/2782" element={<Bug2782Route />} />
-          <Route path="bugs/2789" element={<Bug2789Route />} />
-          <Route path="bugs/2821" element={<Bug2821Route />} />
-          <Route path="bugs/2837" element={<Bug2837Route />} />
-          <Route path="bugs/2839" element={<Bug2839Route />} />
-          <Route path="bugs/2849" element={<Bug2849Route />} />
-          <Route path="bugs/2852" element={<Bug2852Route />} />
-          <Route path="bugs/2873" element={<Bug2873Route />} />
-          <Route path="bugs/2878" element={<Bug2878Route />} />
-          <Route path="bugs/2892" element={<Bug2892Route />} />
-          <Route path="bugs/2922" element={<Bug2922Route />} />
-          <Route path="bugs/2943" element={<Bug2943Route />} />
-          <Route path="bugs/2948" element={<Bug2948Route />} />
-          <Route path="bugs/2977" element={<Bug2977Route />} />
-          <Route path="bugs/3118" element={<Bug3118Route />} />
-          <Route path="bugs/3201" element={<Bug3201Route />} />
-          <Route path="bugs/3215" element={<Bug3215Route />} />
-          <Route path="bugs/3232" element={<Bug3232Route />} />
-          <Route path="bugs/3248" element={<Bug3248Route />} />
-          <Route path="bugs/3273" element={<Bug3273Route />} key={"bugs/3273"} />
-          <Route path="bugs/3273-2" element={<Bug3273Page2Route key={"bugs/3273-2"} />} />
-          <Route path="bugs/3275" element={<Bug3275Route />} />
-          <Route path="bugs/3322" element={<Bug3322Route />} />
-          <Route path="bugs/3281" element={<Bug3281Route />} />
-          <Route path="bugs/3337" element={<Bug3337Route />} />
-          <Route path="bugs/3384" element={<Bug3384Route />} />
-          <Route path="bugs/3450" element={<Bug3450Route />} />
-          <Route path="bugs/3497" element={<Bug3497Route />} />
-          <Route path="bugs/3498" element={<Bug3498Route />} />
-          <Route path="bugs/3607" element={<Bug3607Route />} />
-          <Route path="bugs/3505" element={<Bug3505Route />} />
-          <Route path="bugs/3548" element={<Bug3548Route />} />
-          <Route path="bugs/3614" element={<Bug3614Route />} />
-          <Route path="bugs/3685" element={<Bug3685Route />} />
-          <Route path="bugs/3640" element={<Bug3640Route />} />
-          <Route path="bugs/3735" element={<Bug3735Route />} />
-          <Route path="bugs/3627" element={<Bug3627Route />} />
-          <Route path="bugs/3635" element={<Bug3635Route />} />
-          <Route path="bugs/3699" element={<Bug3699Route />} />
-          <Route path="bugs/3637" element={<Bug3637Route />} />
-          <Route path="bugs/3667" element={<Bug3667Route />} />
-          <Route path="bugs/3685" element={<Bug3685Route />} />
-
-          <Route path="features/1383" element={<Feat1383Route />} />
-          <Route path="features/1547" element={<Feat1547Route />} />
-          <Route path="features/1813" element={<Feat1813Route />} />
-          <Route path="features/1908" element={<Feat1908Route />} />
-          <Route path="features/2361" element={<Feat2361Route />} />
-          <Route path="features/2054" element={<Feat2054Route />} />
-          <Route path="features/2267" element={<Feat2267Route />} />
-          <Route path="features/2328" element={<Feat2328Route />} />
-          <Route path="features/2440" element={<Feat2440Route />} />
-          <Route path="features/2469" element={<Feat2469Route />} />
-          <Route path="features/2492" element={<Feat2492Route />} />
-          <Route path="features/2611" element={<Feat2611Route />} />
-          <Route
-            path="features/2611-tabs-disabled"
-            element={<Feat2611TabsDisabledRoute />}
-          />
-          <Route path="features/2609" element={<Feat2609Route />} />
-          <Route path="features/2682" element={<Feat2682Route />} />
-          <Route path="features/2722" element={<Feat2722Route />} />
-          <Route path="features/2730" element={<Feat2730Route />} />
-          <Route path="features/2829" element={<Feat2829Route />} />
-          <Route path="features/2877" element={<Feat2877Route />} />
-          <Route path="features/3102" element={<Feat3102Route />} />
-          <Route path="features/3137" element={<Feat3137Route />} />
-          <Route path="features/3241" element={<Feat3241Route />} />
-          <Route path="features/v2-icons" element={<FeatV2IconsRoute />} />
-          <Route path="features/3137" element={<Feat3137Route />} />
-          <Route path="features/3229" element={<Feat3229Route />} />
-          <Route path="features/3344" element={<Feat3344Route />} />
-          <Route path="features/3306" element={<Feat3306Route />} />
-          <Route path="features/3370" element={<Feat3370Route />} />
-          <Route path="features/3396" element={<Feat3396Route />} />
-          <Route
-            path="features/3407-skip-on-focus-tab"
-            element={<Feat3407SkipOnFocusTabRoute />}
-          />
-          <Route
-            path="features/3407-stack-on-mobile"
-            element={<Feat3407StackOnMobileRoute />}
-          />
-          <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
-          <Route path="features/3398" element={<Feat3398Route />} />
-          <Route path="features/3478" element={<Feat3478Route />} />
-          <Route
-            path="features/2885-navigation-tabs"
-            element={<Feat2885NavigationTabsRoute />}
-          />
-          <Route path="features/3529" element={<Feat3529Route />} />
-          <Route path="features/3544" element={<Feat3544Route />} />
+            return <Route key={route.path} path={route.path} element={<Component />} />;
+          })}
         </Route>
-
-        {/* Standalone route without App wrapper for full-page layout demos */}
-        <Route path="features/2885" element={<Feat2885Route />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

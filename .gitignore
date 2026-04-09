@@ -5,6 +5,7 @@
 apps/dev/angular
 apps/dev/react
 apps/dev/web
+apps/prs/angular/src/app/generated/
 NOTES.md
 /test-results
 __screenshots__
