@@ -113,6 +113,7 @@
           <goa-dropdown
             {version}
             size={version === "2" ? "compact" : "default"}
+            width={version === "2" ? "8rem" : ""}
             bind:this={pageDropdownEl}
             value="1"
             on:_change={handlePageChange}
@@ -124,6 +125,7 @@
             <goa-dropdown
               {version}
               size={version === "2" ? "compact" : "default"}
+              width={version === "2" ? "8rem" : ""}
               bind:this={pageDropdownEl}
               value={pagenumber}
               on:_change={handlePageChange}

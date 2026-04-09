@@ -172,6 +172,24 @@ describe("GoAPagination", () => {
     });
   });
 
+  it("sets a fixed width on the V2 page dropdown so the placeholder fits", async () => {
+    const { container } = render(Pagination, { pagenumber: 1, itemcount: 100, version: "2" });
+    const dropdown = container.querySelector("goa-dropdown");
+    expect(dropdown?.getAttribute("width")).toBe("8rem");
+  });
+
+  it("sets a fixed width on the V2 page dropdown when there are no records", async () => {
+    const { container } = render(Pagination, { pagenumber: 1, itemcount: 0, version: "2" });
+    const dropdown = container.querySelector("goa-dropdown");
+    expect(dropdown?.getAttribute("width")).toBe("8rem");
+  });
+
+  it("does not set a fixed width on the V1 page dropdown", async () => {
+    const { container } = render(Pagination, { pagenumber: 1, itemcount: 100, version: "1" });
+    const dropdown = container.querySelector("goa-dropdown");
+    expect(dropdown?.getAttribute("width")).toBe("");
+  });
+
   it("shows 'page 1 of 1' when there are no records", async () => {
     const { container } = render(Pagination, { pagenumber: 1, itemcount: 0 });
 

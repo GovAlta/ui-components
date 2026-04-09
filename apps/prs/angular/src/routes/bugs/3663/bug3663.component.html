@@ -1,0 +1,78 @@
+<div>
+  <goab-text tag="h1" mt="m">
+    Bug #3663: Pagination page dropdown placeholder is truncated
+  </goab-text>
+
+  <goab-block>
+    <goab-link trailingIcon="open">
+      <a
+        href="https://github.com/GovAlta/ui-components/issues/3663"
+        target="_blank"
+        rel="noopener"
+      >
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue Description">
+      <goab-text tag="p">
+        The page selector dropdown inside the Pagination component is too
+        narrow to render its placeholder text in full. During the initial
+        render, before the dropdown items have mounted, the V2 default
+        placeholder ("—Select—") is visible but truncated because the
+        dropdown auto-sizes to the (very short) numeric option labels.
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <goab-text tag="h3" mt="l">Test 1: Single page (no records)</goab-text>
+  <goab-text tag="p">
+    Forces the "0 of 0" empty state. Verify the dropdown is wide enough to
+    show "—Select—" without truncation while it briefly renders.
+  </goab-text>
+  <goab-pagination
+    [itemCount]="0"
+    [perPageCount]="10"
+    [pageNumber]="1"
+  ></goab-pagination>
+
+  <goab-text tag="h3" mt="l">Test 2: Small page count</goab-text>
+  <goab-text tag="p">
+    10 items, 10 per page = 1 page. Verify the dropdown shows "1" centered
+    with no truncation of the placeholder during initial paint.
+  </goab-text>
+  <goab-pagination
+    [itemCount]="10"
+    [perPageCount]="10"
+    [pageNumber]="pageSmall"
+    (onChange)="onSmallChange($event)"
+  ></goab-pagination>
+
+  <goab-text tag="h3" mt="l">Test 3: Medium page count</goab-text>
+  <goab-text tag="p">
+    100 items, 10 per page = 10 pages. Verify the dropdown comfortably fits
+    the page numbers and the placeholder.
+  </goab-text>
+  <goab-pagination
+    [itemCount]="100"
+    [perPageCount]="10"
+    [pageNumber]="pageMedium"
+    (onChange)="onMediumChange($event)"
+  ></goab-pagination>
+
+  <goab-text tag="h3" mt="l">Test 4: Large page count</goab-text>
+  <goab-text tag="p">
+    9999 items, 10 per page = 1000 pages. Verify the dropdown still fits
+    4-digit page numbers within the fixed width.
+  </goab-text>
+  <goab-pagination
+    [itemCount]="9999"
+    [perPageCount]="10"
+    [pageNumber]="pageLarge"
+    (onChange)="onLargeChange($event)"
+  ></goab-pagination>
+</div>
