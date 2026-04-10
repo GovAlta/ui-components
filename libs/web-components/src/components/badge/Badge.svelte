@@ -77,7 +77,11 @@
   type BadgeType = (typeof Types)[number];
   type BadgeSize = (typeof badgeSizes)[number];
   type BadgeVersion = (typeof versions)[number];
-  type BadgeJustifyContent = "center" | "flex-start" | "flex-end" | "space-between";
+  type BadgeJustifyContent =
+    | "center"
+    | "flex-start"
+    | "flex-end"
+    | "space-between";
 
   /** Defines the context and colour of the badge. */
   export let type: BadgeType;
@@ -382,6 +386,10 @@
 
   .v2 .goa-badge-content {
     padding-bottom: 0;
+  }
+
+  .v2.badge-strong {
+    box-shadow: none;
   }
 
   /* Version 2: Default Colours */
