@@ -1,0 +1,89 @@
+<div>
+  <h1>3654 - Modal refinements</h1>
+  <p>
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3654"
+      target="_blank"
+      rel="noopener"
+    >
+      View on GitHub
+    </a>
+  </p>
+
+  <h2>Test 1: Basic modal (border check)</h2>
+  <p>Inspect the modal surface. There should be no visible border.</p>
+  <goab-button (onClick)="basicOpen = true">Open basic modal</goab-button>
+  <goab-modal
+    heading="Basic Modal"
+    [open]="basicOpen"
+    [closable]="true"
+    (onClose)="basicOpen = false"
+  >
+    <p>Inspect this modal surface for a visible border.</p>
+    <goab-button-group alignment="end" slot="actions">
+      <goab-button type="tertiary" (onClick)="basicOpen = false">Close</goab-button>
+    </goab-button-group>
+  </goab-modal>
+
+  <hr />
+
+  <h2>Test 2: Status modals (close button hover colors)</h2>
+  <p>Hover over the close X button on each status modal.</p>
+
+  <goab-button type="secondary" (onClick)="infoOpen = true">Information</goab-button>
+  <goab-button type="secondary" (onClick)="successOpen = true">Success</goab-button>
+  <goab-button type="secondary" (onClick)="importantOpen = true">Important</goab-button>
+  <goab-button type="secondary" (onClick)="emergencyOpen = true">Emergency</goab-button>
+
+  <goab-modal
+    heading="Information Modal"
+    calloutVariant="information"
+    [open]="infoOpen"
+    [closable]="true"
+    (onClose)="infoOpen = false"
+  >
+    <p>Hover the close button. Check hover color.</p>
+    <goab-button-group alignment="end" slot="actions">
+      <goab-button type="tertiary" (onClick)="infoOpen = false">Close</goab-button>
+    </goab-button-group>
+  </goab-modal>
+
+  <goab-modal
+    heading="Success Modal"
+    calloutVariant="success"
+    [open]="successOpen"
+    [closable]="true"
+    (onClose)="successOpen = false"
+  >
+    <p>Hover the close button. Check hover color.</p>
+    <goab-button-group alignment="end" slot="actions">
+      <goab-button type="tertiary" (onClick)="successOpen = false">Close</goab-button>
+    </goab-button-group>
+  </goab-modal>
+
+  <goab-modal
+    heading="Important Modal"
+    calloutVariant="important"
+    [open]="importantOpen"
+    [closable]="true"
+    (onClose)="importantOpen = false"
+  >
+    <p>Hover the close button. Check hover color.</p>
+    <goab-button-group alignment="end" slot="actions">
+      <goab-button type="tertiary" (onClick)="importantOpen = false">Close</goab-button>
+    </goab-button-group>
+  </goab-modal>
+
+  <goab-modal
+    heading="Emergency Modal"
+    calloutVariant="emergency"
+    [open]="emergencyOpen"
+    [closable]="true"
+    (onClose)="emergencyOpen = false"
+  >
+    <p>Hover the close button. Check hover color.</p>
+    <goab-button-group alignment="end" slot="actions">
+      <goab-button type="tertiary" (onClick)="emergencyOpen = false">Close</goab-button>
+    </goab-button-group>
+  </goab-modal>
+</div>
