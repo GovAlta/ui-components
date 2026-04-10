@@ -6,10 +6,7 @@ import { Component, Input } from "@angular/core";
   template: `<ng-content></ng-content>`,
 })
 /**
- * This component is used to define the slot for the form item component.
- * We need to use a separate component with a required attribute `slot` because
- * svelte component renders based on the `slot` of the wrapper component (which is `div` before)
- * // similar to app-footer-meta-section & app-footer-nav-section
+ * @deprecated Use `TemplateRef` inputs on `goab-form-item` (`[helpText]` / `[error]`) instead.
  */
 export class GoabFormItemSlot {
   /** @required Sets which form-item slot this content should render into. */

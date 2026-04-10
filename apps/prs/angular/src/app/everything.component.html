@@ -337,7 +337,7 @@
         <goab-grid minChildWidth="320px" gap="l">
           <goab-form-item
             label="Standard input"
-            helpText="Tracks focus, blur, change, key press, and trailing icon click."
+            [helpText]="standardInputHelpText"
             [requirement]="formItemRequirements[1]"
           >
             <goab-input
@@ -353,9 +353,10 @@
               (onKeyPress)="onInputKeyPress($event)"
               (onTrailingIconClick)="onInputTrailingIconClick()"
             ></goab-input>
-            <goab-form-item-slot slot="helptext">
-              Value: {{ textInputValue }}
-            </goab-form-item-slot>
+            <ng-template #standardInputHelpText>
+              Tracks focus, blur, change, key press, and trailing icon click. Value:
+              {{ textInputValue }}
+            </ng-template>
           </goab-form-item>
           @for (size of formItemLabelSizes; track $index) {
             <goab-form-item
@@ -380,7 +381,7 @@
         <goab-grid minChildWidth="320px" gap="l">
           <goab-form-item
             label="Number input"
-            helpText="Supports increment controls and events."
+            [helpText]="numberInputHelpText"
           >
             <goab-input-number
               name="numeric"
@@ -391,14 +392,15 @@
               (onChange)="onInputNumberChange($event)"
               (onTrailingIconClick)="onInputNumberTrailingIconClick()"
             ></goab-input-number>
-            <goab-form-item-slot slot="helptext">
-              Current: {{ numberInputValue }} (trailing icon clicks:
+            <ng-template #numberInputHelpText>
+              Supports increment controls and events. Current: {{ numberInputValue }}
+              (trailing icon clicks:
               {{ numberInputTrailingClicks }})
-            </goab-form-item-slot>
+            </ng-template>
           </goab-form-item>
           <goab-form-item
             label="Textarea"
-            helpText="Character, word, and unlimited counting."
+            [helpText]="textareaHelpText"
           >
             <goab-textarea
               name="notes"
@@ -410,16 +412,17 @@
               (onKeyPress)="onTextareaKeyPress($event)"
               (onBlur)="onTextareaBlur($event)"
             ></goab-textarea>
-            <goab-form-item-slot slot="helptext">
-              Length: {{ textareaValue.length }} chars
-            </goab-form-item-slot>
+            <ng-template #textareaHelpText>
+              Character, word, and unlimited counting. Length: {{ textareaValue.length }}
+              chars
+            </ng-template>
           </goab-form-item>
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Checkboxes & radio</goab-text>
         <goab-grid minChildWidth="320px" gap="l">
-          <goab-form-item label="Single checkbox" helpText="Toggles boolean state.">
+          <goab-form-item label="Single checkbox" [helpText]="singleCheckboxHelpText">
             <goab-checkbox
               name="single-checkbox"
               value="agree"
@@ -427,11 +430,11 @@
               [checked]="checkboxValue"
               (onChange)="onCheckboxChange($event)"
             ></goab-checkbox>
-            <goab-form-item-slot slot="helptext">
-              Checked: {{ checkboxValue }}
-            </goab-form-item-slot>
+            <ng-template #singleCheckboxHelpText>
+              Toggles boolean state. Checked: {{ checkboxValue }}
+            </ng-template>
           </goab-form-item>
-          <goab-form-item label="Checkbox list" helpText="Select multiple options.">
+          <goab-form-item label="Checkbox list" [helpText]="checkboxListHelpText">
             <goab-checkbox-list
               name="fruits"
               [value]="checkboxListSelection"
@@ -445,11 +448,12 @@
               ></goab-checkbox>
               <goab-checkbox name="pears" value="pears" text="Pears"></goab-checkbox>
             </goab-checkbox-list>
-            <goab-form-item-slot slot="helptext">
-              Selected: {{ checkboxListSelection.join(", ") || "None" }}
-            </goab-form-item-slot>
+            <ng-template #checkboxListHelpText>
+              Select multiple options. Selected:
+              {{ checkboxListSelection.join(", ") || "None" }}
+            </ng-template>
           </goab-form-item>
-          <goab-form-item label="Radio group" helpText="Orientation horizontal.">
+          <goab-form-item label="Radio group" [helpText]="radioGroupHelpText">
             <goab-radio-group
               name="delivery"
               [value]="selectedRadio"
@@ -464,9 +468,9 @@
                 disabled="true"
               ></goab-radio-item>
             </goab-radio-group>
-            <goab-form-item-slot slot="helptext">
-              Selected: {{ selectedRadio }}
-            </goab-form-item-slot>
+            <ng-template #radioGroupHelpText>
+              Orientation horizontal. Selected: {{ selectedRadio }}
+            </ng-template>
           </goab-form-item>
         </goab-grid>
       </goab-container>
@@ -475,7 +479,7 @@
         <goab-grid minChildWidth="320px" gap="l">
           <goab-form-item
             label="Single select dropdown"
-            helpText="Filterable with action logging."
+            [helpText]="singleSelectDropdownHelpText"
           >
             <goab-dropdown
               name="counties"
@@ -487,11 +491,15 @@
               <goab-dropdown-item value="us" label="United States" />
               <goab-dropdown-item value="mx" label="Mexico" />
             </goab-dropdown>
-            <goab-form-item-slot slot="helptext">
-              Selected: {{ dropdownSelection || "None" }}
-            </goab-form-item-slot>
+            <ng-template #singleSelectDropdownHelpText>
+              Filterable with action logging. Selected:
+              {{ dropdownSelection || "None" }}
+            </ng-template>
           </goab-form-item>
-          <goab-form-item label="Multi select dropdown" helpText="Mount types demo.">
+          <goab-form-item
+            label="Multi select dropdown"
+            [helpText]="multiSelectDropdownHelpText"
+          >
             <goab-dropdown
               name="mounts"
               placeholder="Select mounts"
@@ -505,16 +513,16 @@
                 />
               }
             </goab-dropdown>
-            <goab-form-item-slot slot="helptext">
-              Selected: {{ dropdownMultiSelection || "None" }}
-            </goab-form-item-slot>
+            <ng-template #multiSelectDropdownHelpText>
+              Mount types demo. Selected: {{ dropdownMultiSelection || "None" }}
+            </ng-template>
           </goab-form-item>
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Linked dropdowns</goab-text>
         <goab-grid minChildWidth="320px" gap="l">
-          <goab-form-item label="Group selector" helpText="Controls the options below.">
+          <goab-form-item label="Group selector" [helpText]="groupSelectorHelpText">
             <goab-dropdown
               name="linked-size-category"
               placeholder="Choose size"
@@ -528,13 +536,14 @@
                 />
               }
             </goab-dropdown>
-            <goab-form-item-slot slot="helptext">
-              Selected: {{ linkedDropdownCategory | titlecase }}
-            </goab-form-item-slot>
+            <ng-template #groupSelectorHelpText>
+              Controls the options below. Selected:
+              {{ linkedDropdownCategory | titlecase }}
+            </ng-template>
           </goab-form-item>
           <goab-form-item
             label="Item selector"
-            helpText="Populates based on the group above."
+            [helpText]="itemSelectorHelpText"
           >
             <goab-dropdown
               name="linked-size-item"
@@ -549,10 +558,10 @@
                 />
               }
             </goab-dropdown>
-            <goab-form-item-slot slot="helptext">
-              Selected:
+            <ng-template #itemSelectorHelpText>
+              Populates based on the group above. Selected:
               {{ linkedDropdownItem ? (linkedDropdownItem | titlecase) : "None" }}
-            </goab-form-item-slot>
+            </ng-template>
           </goab-form-item>
         </goab-grid>
       </goab-container>
@@ -711,56 +720,56 @@
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">Input width options</goab-text>
         <goab-grid minChildWidth="320px" gap="l">
-          <goab-form-item label='GoabInput width="75%"'>
+          <goab-form-item label='GoabInput width="75%"' [helpText]="width75HelpText">
             <goab-input
               name="width-75"
               placeholder="Input at seventy five percent width"
               width="75%"
             ></goab-input>
-            <goab-form-item-slot slot="helptext">width="75%"</goab-form-item-slot>
+            <ng-template #width75HelpText>width="75%"</ng-template>
           </goab-form-item>
-          <goab-form-item label='GoabInput width="100ch"'>
+          <goab-form-item label='GoabInput width="100ch"' [helpText]="width100chHelpText">
             <goab-input
               name="width-100ch"
               placeholder="Input at one hundred characters width"
               width="100ch"
             ></goab-input>
-            <goab-form-item-slot slot="helptext">width="100ch"</goab-form-item-slot>
+            <ng-template #width100chHelpText>width="100ch"</ng-template>
           </goab-form-item>
-          <goab-form-item label='GoabInput width="400px"'>
+          <goab-form-item label='GoabInput width="400px"' [helpText]="width400pxHelpText">
             <goab-input
               name="width-400px"
               placeholder="Input at four hundred pixels width"
               width="400px"
             ></goab-input>
-            <goab-form-item-slot slot="helptext">width="400px"</goab-form-item-slot>
+            <ng-template #width400pxHelpText>width="400px"</ng-template>
           </goab-form-item>
         </goab-grid>
       </goab-container>
       <goab-container type="interactive" padding="relaxed">
         <goab-text tag="h3" size="heading-s">File upload</goab-text>
         <goab-grid minChildWidth="320px" gap="l">
-          <goab-form-item label="File upload input">
+          <goab-form-item label="File upload input" [helpText]="fileUploadInputHelpText">
             <goab-file-upload-input
               variant="dragdrop"
               name="documents"
               accept=".pdf,.docx"
               (onSelectFile)="onFileUploadInputSelect($event)"
             ></goab-file-upload-input>
-            <goab-form-item-slot slot="helptext">
+            <ng-template #fileUploadInputHelpText>
               Files: {{ fileUploadInputFiles.join(", ") || "None" }}
-            </goab-form-item-slot>
+            </ng-template>
           </goab-form-item>
-          <goab-form-item label="Upload card" helpText="Cancel and delete emit events.">
+          <goab-form-item label="Upload card" [helpText]="uploadCardHelpText">
             <goab-file-upload-card
               filename="budget.xlsx"
               size="1.2 MB"
               (onCancel)="onFileUploadCardCancel($event)"
               (onDelete)="onFileUploadCardDelete($event)"
             ></goab-file-upload-card>
-            <goab-form-item-slot slot="helptext">
-              {{ fileUploadCardEvents[0] || "No actions yet" }}
-            </goab-form-item-slot>
+            <ng-template #uploadCardHelpText>
+              Cancel and delete emit events. {{ fileUploadCardEvents[0] || "No actions yet" }}
+            </ng-template>
           </goab-form-item>
         </goab-grid>
       </goab-container>
