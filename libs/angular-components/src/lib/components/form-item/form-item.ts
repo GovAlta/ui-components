@@ -8,8 +8,10 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  TemplateRef,
   inject,
 } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { GoabBaseComponent } from "../base.component";
 import { GoabFormItemType } from "@abgov/ui-components-common";
@@ -17,13 +19,14 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
 @Component({
   standalone: true,
   selector: "goab-form-item",
+  imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-form-item
       [attr.version]="version"
       [attr.label]="label"
       [attr.labelsize]="labelSize"
-      [attr.helptext]="helpText"
-      [attr.error]="error"
+      [attr.helptext]="getHelpTextAsString()"
+      [attr.error]="getErrorAsString()"
       [attr.testid]="testId"
       [attr.type]="type"
       [id]="id"
@@ -36,8 +39,17 @@ import { GoabFormItemType } from "@abgov/ui-components-common";
       [attr.mr]="mr"
       [attr.ml]="ml"
     >
+      @if (getErrorAsTemplate()) {
+        <div slot="error">
+          <ng-container [ngTemplateOutlet]="getErrorAsTemplate()"></ng-container>
+        </div>
+      }
+      @if (getHelpTextAsTemplate()) {
+        <div slot="helptext">
+          <ng-container [ngTemplateOutlet]="getHelpTextAsTemplate()"></ng-container>
+        </div>
+      }
       <ng-content />
-      <ng-content select="goab-form-item-slot"></ng-content>
     </goa-form-item>
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -51,9 +63,9 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
   /** Sets the label size. 'regular' for standard, 'large' for emphasis. */
   @Input() labelSize?: GoabFormItemLabelSize;
   /** Help text displayed under the form field to provide additional explanation. */
-  @Input() helpText?: string;
+  @Input() helpText?: string | TemplateRef<any>;
   /** Error text displayed under the form field. Leave blank to indicate a valid field. */
-  @Input() error?: string;
+  @Input() error?: string | TemplateRef<any>;
   /** Marks the field with an optional or required label indicator. */
   @Input() requirement?: GoabFormItemRequirement;
   /** Sets the maximum width of the form item. */
@@ -69,6 +81,22 @@ export class GoabFormItem extends GoabBaseComponent implements OnInit {
 
   isReady = false;
   version = "2";
+
+  getHelpTextAsString(): string | undefined {
+    return typeof this.helpText === "string" ? this.helpText : undefined;
+  }
+
+  getHelpTextAsTemplate(): TemplateRef<any> | null {
+    return this.helpText instanceof TemplateRef ? this.helpText : null;
+  }
+
+  getErrorAsString(): string | undefined {
+    return typeof this.error === "string" ? this.error : undefined;
+  }
+
+  getErrorAsTemplate(): TemplateRef<any> | null {
+    return this.error instanceof TemplateRef ? this.error : null;
+  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component
