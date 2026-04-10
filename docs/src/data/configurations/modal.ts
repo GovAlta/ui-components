@@ -284,30 +284,6 @@ export const modalConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: "callout-event",
-      name: "Event callout",
-      description: "Modal with event callout header",
-      code: {
-        react: {
-          ts: reactModalSetup,
-          jsx: `<GoabModal heading="Scheduled maintenance" open={isOpen} calloutVariant="event" onClose={handleClose}>
-  <p>The system will be unavailable on March 28 from 10:00 PM to 2:00 AM for scheduled maintenance.</p>
-</GoabModal>`,
-        },
-        angular: {
-          ts: angularModalSetup,
-          template: `<goab-modal heading="Scheduled maintenance" [open]="isOpen" [closable]="true" calloutVariant="event" (onClose)="handleClose()">
-  <p>The system will be unavailable on March 28 from 10:00 PM to 2:00 AM for scheduled maintenance.</p>
-</goab-modal>`,
-        },
-        webComponents: `<goa-button version="2" id="open-modal">Open modal</goa-button>
-<goa-modal version="2" id="demo-modal" heading="Scheduled maintenance" closable calloutvariant="event">
-  <p>The system will be unavailable on March 28 from 10:00 PM to 2:00 AM for scheduled maintenance.</p>
-</goa-modal>
-<script>${modalScript}</script>`,
-      },
-    },
-    {
       id: "custom-width",
       name: "Custom width",
       description: "Modal with specified maximum width",
