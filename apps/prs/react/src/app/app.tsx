@@ -238,6 +238,10 @@ export function App() {
                   url="/bugs/3685"
                 />
                 <GoabWorkSideMenuItem
+                  label="3640 Work Side Menu Badge Alignment"
+                  url="/bugs/3640"
+                />
+                <GoabWorkSideMenuItem
                   label="3635 Input Leading icon color"
                   url="/bugs/3635"
                 />
