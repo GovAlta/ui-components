@@ -1,0 +1,105 @@
+<div>
+  <goab-text tag="h1" mt="m">
+    Bug #3643: Popover overflows right edge when trigger is near viewport boundary
+  </goab-text>
+
+  <goab-block>
+    <goab-link trailingIcon="open">
+      <a href="https://github.com/GovAlta/ui-components/issues/3643" target="_blank" rel="noopener">
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue Description">
+      <goab-text tag="p">
+        The Popover rewrite switched to CSS Anchor Positioning, which always left-aligns
+        the popover to the trigger via <code>inset-inline-start: anchor(left)</code>.
+        When the trigger is near the right edge of the viewport, the popover content
+        extends off-screen. The fix right-aligns the popover when the trigger is in the
+        right half of the viewport so it stays within the viewport.
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <goab-text tag="h3">Test 1: Popover near right edge (position=below)</goab-text>
+  <goab-text tag="p">
+    The popovers below should stay within the viewport. The trigger at the far right
+    should cause the popover to flip so its right edge aligns with the trigger's right
+    edge rather than overflowing off-screen.
+  </goab-text>
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
+    <goab-popover maxWidth="280px">
+      <ng-template #target>
+        <goab-button type="secondary">Left-side trigger</goab-button>
+      </ng-template>
+      <goab-text mt="none" mb="none">
+        This popover is triggered near the left edge. It should open normally,
+        left-aligned with the trigger button.
+      </goab-text>
+    </goab-popover>
+
+    <goab-popover maxWidth="280px">
+      <ng-template #target>
+        <goab-button type="secondary">Right-side trigger</goab-button>
+      </ng-template>
+      <goab-text mt="none" mb="none">
+        This popover is triggered near the right edge. It should flip to be
+        right-aligned so it stays within the viewport.
+      </goab-text>
+    </goab-popover>
+  </div>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3">Test 2: MenuButton near right edge</goab-text>
+  <goab-text tag="p">
+    MenuButton uses Popover internally. The right-side menu should stay within the viewport.
+  </goab-text>
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
+    <goab-menu-button leadingIcon="ellipsis" size="compact" buttonType="tertiary">
+      <goab-menu-action>View case</goab-menu-action>
+      <goab-menu-action>Assign to me</goab-menu-action>
+      <goab-menu-action>Delete</goab-menu-action>
+    </goab-menu-button>
+
+    <goab-menu-button leadingIcon="ellipsis" size="compact" buttonType="tertiary">
+      <goab-menu-action>View case</goab-menu-action>
+      <goab-menu-action>Assign to me</goab-menu-action>
+      <goab-menu-action>Delete</goab-menu-action>
+    </goab-menu-button>
+  </div>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h3">Test 3: Popover with position=above near right edge</goab-text>
+  <goab-text tag="p">
+    Popovers that open above the trigger should also flip horizontally when near the right edge.
+  </goab-text>
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
+    <goab-popover maxWidth="280px" position="above">
+      <ng-template #target>
+        <goab-button type="secondary">Left-side trigger (above)</goab-button>
+      </ng-template>
+      <goab-text mt="none" mb="none">
+        This popover opens above, near the left edge. It should open normally.
+      </goab-text>
+    </goab-popover>
+
+    <goab-popover maxWidth="280px" position="above">
+      <ng-template #target>
+        <goab-button type="secondary">Right-side trigger (above)</goab-button>
+      </ng-template>
+      <goab-text mt="none" mb="none">
+        This popover opens above, near the right edge. It should flip to be
+        right-aligned so it stays within the viewport.
+      </goab-text>
+    </goab-popover>
+  </div>
+</div>
