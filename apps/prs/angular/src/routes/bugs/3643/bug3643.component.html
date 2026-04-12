@@ -33,8 +33,8 @@
   </goab-text>
 
   <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
-    <goab-popover maxWidth="280px">
-      <ng-template #target>
+    <goab-popover [target]="leftTrigger" maxWidth="280px">
+      <ng-template #leftTrigger>
         <goab-button type="secondary">Left-side trigger</goab-button>
       </ng-template>
       <goab-text mt="none" mb="none">
@@ -43,8 +43,8 @@
       </goab-text>
     </goab-popover>
 
-    <goab-popover maxWidth="280px">
-      <ng-template #target>
+    <goab-popover [target]="rightTrigger" maxWidth="280px">
+      <ng-template #rightTrigger>
         <goab-button type="secondary">Right-side trigger</goab-button>
       </ng-template>
       <goab-text mt="none" mb="none">
@@ -62,13 +62,13 @@
   </goab-text>
 
   <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
-    <goab-menu-button leadingIcon="ellipsis" size="compact" buttonType="tertiary">
+    <goab-menu-button leadingIcon="ellipse" size="compact" buttonType="tertiary">
       <goab-menu-action>View case</goab-menu-action>
       <goab-menu-action>Assign to me</goab-menu-action>
       <goab-menu-action>Delete</goab-menu-action>
     </goab-menu-button>
 
-    <goab-menu-button leadingIcon="ellipsis" size="compact" buttonType="tertiary">
+    <goab-menu-button leadingIcon="ellipse" size="compact" buttonType="tertiary">
       <goab-menu-action>View case</goab-menu-action>
       <goab-menu-action>Assign to me</goab-menu-action>
       <goab-menu-action>Delete</goab-menu-action>
@@ -83,8 +83,8 @@
   </goab-text>
 
   <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem">
-    <goab-popover maxWidth="280px" position="above">
-      <ng-template #target>
+    <goab-popover [target]="leftTriggerAbove" maxWidth="280px" position="above">
+      <ng-template #leftTriggerAbove>
         <goab-button type="secondary">Left-side trigger (above)</goab-button>
       </ng-template>
       <goab-text mt="none" mb="none">
@@ -92,8 +92,8 @@
       </goab-text>
     </goab-popover>
 
-    <goab-popover maxWidth="280px" position="above">
-      <ng-template #target>
+    <goab-popover [target]="rightTriggerAbove" maxWidth="280px" position="above">
+      <ng-template #rightTriggerAbove>
         <goab-button type="secondary">Right-side trigger (above)</goab-button>
       </ng-template>
       <goab-text mt="none" mb="none">

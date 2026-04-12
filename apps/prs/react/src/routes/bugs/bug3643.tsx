@@ -87,13 +87,13 @@ export function Bug3643Route() {
       </GoabText>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem" }}>
-        <GoabMenuButton leadingIcon="ellipsis" size="compact" buttonType="tertiary">
+        <GoabMenuButton leadingIcon="ellipse" size="compact" buttonType="tertiary">
           <GoabMenuAction onClick={() => {}}>View case</GoabMenuAction>
           <GoabMenuAction onClick={() => {}}>Assign to me</GoabMenuAction>
           <GoabMenuAction onClick={() => {}}>Delete</GoabMenuAction>
         </GoabMenuButton>
 
-        <GoabMenuButton leadingIcon="ellipsis" size="compact" buttonType="tertiary">
+        <GoabMenuButton leadingIcon="ellipse" size="compact" buttonType="tertiary">
           <GoabMenuAction onClick={() => {}}>View case</GoabMenuAction>
           <GoabMenuAction onClick={() => {}}>Assign to me</GoabMenuAction>
           <GoabMenuAction onClick={() => {}}>Delete</GoabMenuAction>
