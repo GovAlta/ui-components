@@ -1,0 +1,93 @@
+<div>
+  <goab-text tag="h1" mt="m">Bug #3667: Notification banner refinements</goab-text>
+
+  <goab-block>
+    <goab-link trailingIcon="open">
+      <a
+        href="https://github.com/GovAlta/ui-components/issues/3667"
+        target="_blank"
+        rel="noopener"
+      >
+        View on GitHub
+      </a>
+    </goab-link>
+
+    <goab-details heading="Issue Description">
+      <goab-text tag="p">
+        Notification banner height refinements. Compact should be 64px (currently ~66px),
+        default should be 80px (currently ~82px). Also need to verify vertical centering of
+        content (icon, text, dismiss button) at both sizes. The Event type should be silently
+        undocumented (docs removal only, no code change needed).
+      </goab-text>
+    </goab-details>
+  </goab-block>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <goab-text tag="h2">Test Cases</goab-text>
+
+  <!-- Test 1: Height measurements -->
+  <goab-text tag="h3">Test 1: Height at default and compact sizes</goab-text>
+  <goab-text tag="p">
+    Measure the rendered height of each banner. Default should be 80px, compact should be
+    64px. Use browser dev tools to inspect the goa-notification element and measure the outer
+    height.
+  </goab-text>
+
+  <goab-text tag="h4" mt="m">Default size (target: 80px)</goab-text>
+  <goab-notification type="information">
+    Default information banner for height measurement.
+  </goab-notification>
+
+  <goab-text tag="h4" mt="m">Compact size (target: 64px)</goab-text>
+  <goab-notification type="information" [compact]="true">
+    Compact information banner for height measurement.
+  </goab-notification>
+
+  <goab-text tag="h4" mt="m">Default important (target: 80px)</goab-text>
+  <goab-notification type="important">
+    Default important banner for height measurement.
+  </goab-notification>
+
+  <goab-text tag="h4" mt="m">Compact important (target: 64px)</goab-text>
+  <goab-notification type="important" [compact]="true">
+    Compact important banner for height measurement.
+  </goab-notification>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- Test 2: Vertical centering -->
+  <goab-text tag="h3">Test 2: Vertical centering of content</goab-text>
+  <goab-text tag="p">
+    Check that the icon, text, and close button are vertically centered at both sizes.
+  </goab-text>
+
+  <goab-text tag="h4" mt="m">Default emergency</goab-text>
+  <goab-notification type="emergency">
+    Emergency banner. Check vertical alignment of icon, text, and close button.
+  </goab-notification>
+
+  <goab-text tag="h4" mt="m">Compact emergency</goab-text>
+  <goab-notification type="emergency" [compact]="true">
+    Compact emergency. Check vertical alignment.
+  </goab-notification>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- Test 3: Event type reference -->
+  <goab-text tag="h3">Test 3: Event type banner (to be undocumented)</goab-text>
+  <goab-text tag="p">
+    The Event type should be silently removed from documentation only (no code change).
+    Showing it here for reference to confirm it still renders correctly.
+  </goab-text>
+
+  <goab-text tag="h4" mt="m">Default event</goab-text>
+  <goab-notification type="event">
+    Event banner at default size. This type will be removed from docs but the code stays.
+  </goab-notification>
+
+  <goab-text tag="h4" mt="m">Compact event</goab-text>
+  <goab-notification type="event" [compact]="true">
+    Event banner at compact size.
+  </goab-notification>
+</div>

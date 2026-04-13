@@ -11,6 +11,7 @@ import {
 } from "@abgov/react-components";
 
 import "@abgov/style";
+import "@abgov/design-tokens-v2/dist/tokens.css"; // Production tokens. Comment out to test with legacy V1 token values.
 
 export function App() {
   const navigate = useNavigate();
@@ -240,6 +241,10 @@ export function App() {
                 <GoabWorkSideMenuItem
                   label="3637 Checkbox Table Header Row Height Bug"
                   url="/bugs/3637"
+                />
+                <GoabWorkSideMenuItem
+                  label="3667 Notification banner refinements"
+                  url="/bugs/3667"
                 />
               </GoabWorkSideMenuGroup>
 
