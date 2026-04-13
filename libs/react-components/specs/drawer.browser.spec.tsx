@@ -16,7 +16,7 @@ describe("Drawer", () => {
     await vi.waitFor(async () => {
       const drawer = getByTestId(testId);
       expect(drawer).toBeInTheDocument();
-      expect(drawer).toHaveStyle({ visibility: "hidden" });
+      expect(drawer).toHaveStyle({ pointerEvents: "none" });
     });
   });
 
@@ -34,21 +34,20 @@ describe("Drawer", () => {
 
       await vi.waitFor(async () => {
         const drawer = getByTestId(testId);
-        expect(drawer).toHaveStyle({ visibility: "visible" });
+        expect(drawer).toHaveStyle({ pointerEvents: "auto" });
       });
     });
 
     it("calls onClose when the close button is clicked", async () => {
       const { getByTestId } = await render(<Component />);
 
-      await vi.waitFor(async () => {
-        const closeButton = getByTestId("drawer-close-button");
-        expect(closeButton).toBeTruthy();
-        await closeButton.click();
-
-        vi.waitFor(() => {
-          expect(handleOnClose).toHaveBeenCalled();
-        });
+      const closeButton = getByTestId("drawer-close-button");
+      await vi.waitFor(() => {
+        expect(closeButton.element()).toBeTruthy();
+      });
+      await closeButton.click();
+      await vi.waitFor(() => {
+        expect(handleOnClose).toHaveBeenCalled();
       });
     });
   });
@@ -63,7 +62,7 @@ describe("Drawer", () => {
 
       await vi.waitFor(async () => {
         const drawer = getByTestId(testId);
-        expect(drawer).toHaveStyle({ visibility: "hidden" });
+        expect(drawer).toHaveStyle({ pointerEvents: "none" });
       });
     });
   });
