@@ -471,9 +471,7 @@ describe("GoADropdown", () => {
         const option = result.queryByTestId(`dropdown-item-${items[0]}`);
         option && (await user.click(option));
         const liElements = result.container.querySelectorAll("li");
-        expect(liElements[0].getAttribute("class")).toContain(
-          "dropdown-item--highlighted",
-        );
+        expect(liElements[0].getAttribute("class")).toContain("selected");
       });
 
       const input = result.getByTestId("input") as HTMLInputElement;
