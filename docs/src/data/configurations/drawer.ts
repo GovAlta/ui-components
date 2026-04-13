@@ -205,7 +205,7 @@ const handleSave = () => {
   open={isOpen}
   onClose={handleClose}
   actions={
-    <GoabButtonGroup alignment="end">
+    <GoabButtonGroup alignment="start">
       <GoabButton size="compact" onClick={handleSave}>
         Save
       </GoabButton>
@@ -244,7 +244,7 @@ const handleSave = () => {
   [actions]="actionsTpl"
 >
   <ng-template #actionsTpl>
-    <goab-button-group alignment="end">
+    <goab-button-group alignment="start">
       <goab-button size="compact" (onClick)="handleSave()">Save</goab-button>
       <goab-button type="tertiary" size="compact" (onClick)="handleClose()"
         >Cancel</goab-button
@@ -258,7 +258,7 @@ const handleSave = () => {
 <goa-drawer version="2" id="demo-drawer" heading="Edit settings" position="right">
   <p>Make changes to your settings here.</p>
   <div slot="actions">
-    <goa-button-group alignment="end">
+    <goa-button-group alignment="start">
       <goa-button version="2" type="primary" size="compact">Save</goa-button>
       <goa-button version="2" type="tertiary" size="compact">Cancel</goa-button>
     </goa-button-group>

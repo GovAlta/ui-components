@@ -10,45 +10,51 @@ beforeEach(() => {
 });
 
 describe("Drawer", () => {
-
   it("renders content in closed state", async () => {
     const el = await render(DrawerWrapper, {
       open: false,
-      testid: "drawer"
+      testid: "drawer",
     });
 
     await waitFor(() => {
       const drawerEl = el.queryByTestId("drawer");
-      expect(drawerEl?.style.visibility).toBe("hidden");
+      expect(drawerEl?.style.pointerEvents).toBe("none");
     });
   });
 
   it("closes when clicking the background or close button", async () => {
     const el = render(DrawerWrapper, {
       open: false,
-      testid: "drawer"
+      testid: "drawer",
     });
 
     // Initial state - wait for first render
     const drawer = el.queryByTestId("drawer");
-    expect(drawer?.style.visibility).toBe("hidden");
+    expect(drawer?.style.pointerEvents).toBe("none");
 
     // Open drawer
     const buttonEl = await el.findByTestId("open");
     await fireEvent.click(buttonEl);
 
-    await waitFor(() => {
-      const drawer = el.queryByTestId("drawer");
-      expect(drawer?.style.visibility).toBe("visible");
-    }, { timeout: 1000 });
+    await waitFor(
+      () => {
+        const drawer = el.queryByTestId("drawer");
+        expect(drawer?.style.pointerEvents).toBe("auto");
+      },
+      { timeout: 1000 },
+    );
 
     // Click background to close
     const background = el.queryByTestId("background");
     await fireEvent.click(background);
 
+    // TODO: The close event doesn't propagate correctly in the unit test
+    // environment, so this assertion can't be properly awaited. The original
+    // test on dev had the same issue (setTimeout that silently skipped).
+    // This needs investigation in a separate PR.
     setTimeout(() => {
       const drawer = el.queryByTestId("drawer");
-      expect(drawer?.style.visibility).toBe("hidden");
+      expect(drawer?.style.pointerEvents).toBe("none");
     }, 1000);
   });
 
@@ -72,36 +78,40 @@ describe("Drawer", () => {
     const el = await render(DrawerWrapper, {
       open: true,
       testid: "drawer",
-      heading: "Heading"
-    });
-    await waitFor(() => {
-      const actionsEl = el.queryByTestId("drawer-actions");
-      expect(actionsEl?.classList.contains("empty-actions")).toBe(true);
-    }, { timeout: 1000 });
-  });
-
-  it.each([
-    "bottom",
-    "left",
-    "right",
-  ])("renders with position %s", async (position) => {
-    const el = render(DrawerWrapper, {
-      position,
       heading: "Heading",
-      content: "Content",
-      testid: "drawer",
     });
-
-    const buttonEl = await el.findByTestId("open");
-    await fireEvent.click(buttonEl);
-
-    const drawerEl = await el.findByTestId("drawer");
-    await waitFor(() => {
-      const drawer = drawerEl.querySelector(".drawer") as HTMLElement;
-      expect(drawer?.classList.contains(`drawer-${position}`)).toBe(true);
-      expect(drawer?.classList.contains(`drawer-open-${position}`)).toBe(true);
-    });
+    await waitFor(
+      () => {
+        const actionsEl = el.queryByTestId("drawer-actions");
+        expect(actionsEl?.classList.contains("empty-actions")).toBe(true);
+      },
+      { timeout: 1000 },
+    );
   });
+
+  it.each(["bottom", "left", "right"])(
+    "renders with position %s",
+    async (position) => {
+      const el = render(DrawerWrapper, {
+        position,
+        heading: "Heading",
+        content: "Content",
+        testid: "drawer",
+      });
+
+      const buttonEl = await el.findByTestId("open");
+      await fireEvent.click(buttonEl);
+
+      const drawerEl = await el.findByTestId("drawer");
+      await waitFor(() => {
+        const drawer = drawerEl.querySelector(".drawer") as HTMLElement;
+        expect(drawer?.classList.contains(`drawer-${position}`)).toBe(true);
+        expect(drawer?.classList.contains(`drawer-open-${position}`)).toBe(
+          true,
+        );
+      });
+    },
+  );
 
   it("respects maxsize prop", async () => {
     const maxsize = "400px";
@@ -170,7 +180,7 @@ describe("Drawer", () => {
     await fireEvent.click(buttonEl);
     const drawerEl = await el.findByTestId("drawer");
     await waitFor(() => {
-      expect(drawerEl.style.visibility).toBe("visible");
+      expect(drawerEl.style.pointerEvents).toBe("auto");
     });
 
     const scrollableEl = drawerEl.querySelector("goa-scrollable");
