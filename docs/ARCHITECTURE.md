@@ -37,7 +37,7 @@ Svelte source code                    Manual MDX content
 | Guidance atoms (~130+)               | `src/content/guidance/*.mdx`                              | Manual                        |
 | Examples (~80)                       | `src/content/examples/*/`                                 | Manual                        |
 | Configuration previews (~65)         | `src/data/configurations/*.ts`                            | Manual (curated)              |
-| Design tokens                        | `@abgov/design-tokens-v2` npm package                     | Yes (npm import)              |
+| Design tokens                        | `@abgov/design-tokens` npm package                        | Yes (npm import)              |
 | Search index                         | `search-index.json`                                       | Yes (build step)              |
 
 ---
