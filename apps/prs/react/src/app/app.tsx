@@ -239,6 +239,10 @@ export function App() {
                   url="/bugs/3635"
                 />
                 <GoabWorkSideMenuItem
+                  label="3699 Notification Popover rounded corners"
+                  url="/bugs/3699"
+                />
+                <GoabWorkSideMenuItem
                   label="3637 Checkbox Table Header Row Height Bug"
                   url="/bugs/3637"
                 />
