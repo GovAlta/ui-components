@@ -108,29 +108,40 @@ export class SomeOtherComponent {
     {
       id: "with-progress",
       name: "Progress and indeterminate",
-      description:
-        "Notifications for loading states (note: progress and indeterminate types may have rendering issues)",
+      description: "Notifications for loading states",
       code: {
         react: `<GoabTemporaryNotificationCtrl />
 
 <GoabButton onClick={() => {
-  const uuid = TemporaryNotification.show("Uploading file...", { type: "progress" });
-  TemporaryNotification.setProgress(uuid, 65);
+  const uuid = TemporaryNotification.show("Uploading file...", { type: "progress", duration: "long" });
+  // Simulate progress; in real usage, drive this from your operation's progress events.
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress = Math.min(progress + 10, 100);
+    TemporaryNotification.setProgress(uuid, progress);
+    if (progress >= 100) clearInterval(interval);
+  }, 500);
 }} mb="xs">Progress</GoabButton>
 <GoabButton onClick={() => {
-  TemporaryNotification.show("Processing your request...", { type: "indeterminate" });
+  TemporaryNotification.show("Processing your request...", { type: "indeterminate", duration: "long" });
 }}>Indeterminate</GoabButton>`,
         angular: {
           ts: `import { TemporaryNotification } from "@abgov/ui-components-common";
 
 export class SomeOtherComponent {
   showProgress() {
-    const uuid = TemporaryNotification.show("Uploading file...", { type: "progress" });
-    TemporaryNotification.setProgress(uuid, 65);
+    const uuid = TemporaryNotification.show("Uploading file...", { type: "progress", duration: "long" });
+    // Simulate progress; in real usage, drive this from your operation's progress events.
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress = Math.min(progress + 10, 100);
+      TemporaryNotification.setProgress(uuid, progress);
+      if (progress >= 100) clearInterval(interval);
+    }, 500);
   }
 
   showIndeterminate() {
-    TemporaryNotification.show("Processing your request...", { type: "indeterminate" });
+    TemporaryNotification.show("Processing your request...", { type: "indeterminate", duration: "long" });
   }
 }`,
           template: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
@@ -145,15 +156,86 @@ export class SomeOtherComponent {
 
 <script>
   document.getElementById("progress-btn").addEventListener("_click", function() {
+    var uuid = crypto.randomUUID();
     document.body.dispatchEvent(new CustomEvent("msg", {
       composed: true, bubbles: true,
-      detail: { action: "goa:temp-notification", data: { message: "Uploading file...", type: "progress", progress: 65, uuid: crypto.randomUUID() } }
+      detail: { action: "goa:temp-notification", data: { message: "Uploading file...", type: "progress", duration: "long", uuid: uuid } }
     }));
+    // Simulate progress; in real usage, drive this from your operation's progress events.
+    var progress = 0;
+    var interval = setInterval(function() {
+      progress = Math.min(progress + 10, 100);
+      document.body.dispatchEvent(new CustomEvent("msg", {
+        composed: true, bubbles: true,
+        detail: { action: "goa:temp-notification:progress", data: { uuid: uuid, progress: progress } }
+      }));
+      if (progress >= 100) clearInterval(interval);
+    }, 500);
   });
   document.getElementById("indeterminate-btn").addEventListener("_click", function() {
     document.body.dispatchEvent(new CustomEvent("msg", {
       composed: true, bubbles: true,
-      detail: { action: "goa:temp-notification", data: { message: "Processing your request...", type: "indeterminate", uuid: crypto.randomUUID() } }
+      detail: { action: "goa:temp-notification", data: { message: "Processing your request...", type: "indeterminate", duration: "long", uuid: crypto.randomUUID() } }
+    }));
+  });
+</script>`,
+      },
+    },
+    {
+      id: "with-action",
+      name: "Notification with action",
+      description: "Notification with a clickable action button (e.g., Undo)",
+      code: {
+        react: `<GoabTemporaryNotificationCtrl />
+
+<GoabButton onClick={() => {
+  TemporaryNotification.show("Item moved to trash", {
+    type: "basic",
+    duration: "long",
+    actionText: "Undo",
+    action: () => {
+      console.log("Undo clicked");
+    },
+  });
+}}>Show notification</GoabButton>`,
+        angular: {
+          ts: `import { TemporaryNotification } from "@abgov/ui-components-common";
+
+export class SomeOtherComponent {
+  showWithAction() {
+    TemporaryNotification.show("Item moved to trash", {
+      type: "basic",
+      duration: "long",
+      actionText: "Undo",
+      action: () => {
+        console.log("Undo clicked");
+      },
+    });
+  }
+}`,
+          template: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+
+<goab-button (onClick)="showWithAction()">Show notification</goab-button>`,
+        },
+        webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
+
+<goa-button version="2" id="action-btn">Show notification</goa-button>
+
+<script>
+  document.getElementById("action-btn").addEventListener("_click", function() {
+    document.body.dispatchEvent(new CustomEvent("msg", {
+      composed: true, bubbles: true,
+      detail: {
+        action: "goa:temp-notification",
+        data: {
+          message: "Item moved to trash",
+          type: "basic",
+          duration: "long",
+          actionText: "Undo",
+          action: function() { console.log("Undo clicked"); },
+          uuid: crypto.randomUUID(),
+        },
+      },
     }));
   });
 </script>`,
