@@ -64,12 +64,10 @@ describe("GoATemporaryNotification", () => {
       });
 
       const progressBar = container.querySelector("goa-linear-progress");
-      const message = container.querySelector(".message");
       expect(progressBar).toBeTruthy();
-      expect(message?.getAttribute("id")).toBeTruthy();
       expect(progressBar?.getAttribute("progress")).toBe("50");
-      expect(progressBar?.getAttribute("aria-labelledby")).toBe(
-        message?.getAttribute("id"),
+      expect(progressBar?.getAttribute("aria-label")).toBe(
+        "Progress notification",
       );
     });
 
@@ -81,11 +79,10 @@ describe("GoATemporaryNotification", () => {
       });
 
       const progressBar = container.querySelector("goa-linear-progress");
-      const message = container.querySelector(".message");
       expect(progressBar).toBeTruthy();
       expect(progressBar?.hasAttribute("progress")).toBe(false);
-      expect(progressBar?.getAttribute("aria-labelledby")).toBe(
-        message?.getAttribute("id"),
+      expect(progressBar?.getAttribute("aria-label")).toBe(
+        "Indeterminate notification",
       );
     });
   });
@@ -148,7 +145,7 @@ describe("GoATemporaryNotification", () => {
         actionText: "Undo",
       });
 
-      const actionButton = container.querySelector("goa-link-button");
+      const actionButton = container.querySelector("goa-button");
       expect(actionButton).toBeTruthy();
       expect(actionButton?.textContent?.trim()).toBe("Undo");
     });
@@ -159,7 +156,7 @@ describe("GoATemporaryNotification", () => {
         message: "Test notification",
       });
 
-      const actionButton = container.querySelector("goa-link-button");
+      const actionButton = container.querySelector("goa-button");
       expect(actionButton).toBeFalsy();
     });
   });
