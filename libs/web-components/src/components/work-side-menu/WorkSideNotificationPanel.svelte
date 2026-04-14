@@ -335,6 +335,7 @@
     display: flex;
     flex-direction: column;
     background: var(--goa-color-greyscale-white);
+    border-radius: var(--goa-popover-border-radius);
     height: 710px;
   }
 
