@@ -10,10 +10,13 @@ import {
   GoabInputOnKeyPressDetail,
   GoabInputSize,
   GoabInputType,
-  Margins,
-  DataAttributes,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
+
+export interface IgnoreMe {
+  ignore: string;
+}
 
 interface WCProps extends Margins {
   type?: GoabInputType;
@@ -54,65 +57,41 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-input": WCProps &
-        React.HTMLAttributes<HTMLInputElement> & {
-          ref?: React.RefObject<HTMLInputElement | null>;
-        };
+      "goa-input": WCProps & React.HTMLAttributes<HTMLInputElement> & {
+        ref?: React.RefObject<HTMLInputElement | null>;
+      };
     }
   }
 }
 
 interface BaseProps extends Margins, DataAttributes {
-  /** Name of input value that is received in event detail payloads. */
+  // required
   name: string;
 
-  /** Sets the id attribute of the input element. */
+  // optional
   id?: string;
-  /** Debounce delay in milliseconds before firing the change event. 0 means no debounce. */
   debounce?: number;
-  /** Sets the input disabled state. */
   disabled?: boolean;
-  /** Controls automatic capitalization behavior on supported mobile browsers. */
   autoCapitalize?: GoabAutoCapitalize;
-  /** Sets the autocomplete attribute for the input element. */
   autoComplete?: string;
-  /** Sets placeholder text when the input is empty. */
   placeholder?: string;
-  /** Sets the icon shown before the value. */
   leadingIcon?: GoabIconType;
-  /** Sets the icon shown after the value. */
   trailingIcon?: GoabIconType;
-  /** Callback fired when the trailing icon is clicked. */
   onTrailingIconClick?: () => void;
-  /** Sets the visual style variant. @default "goa" */
   variant?: "goa" | "bare";
-  /** Sets focus on initial render or controlled updates. */
   focused?: boolean;
-  /** Sets the readonly state. */
   readonly?: boolean;
-  /** Sets the error state styling. */
   error?: boolean;
-  /** Sets the width of the input field. */
   width?: string;
-  /** @deprecated Use leadingContent instead. */
   prefix?: string;
-  /** @deprecated Use trailingContent instead. */
   suffix?: string;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Sets the aria-label used by assistive technologies. */
   ariaLabel?: string;
-  /** Sets content in the leading slot. */
   leadingContent?: React.ReactNode;
-  /** Sets content in the trailing slot. */
   trailingContent?: React.ReactNode;
-  /** Sets the maximum number of characters. */
   maxLength?: number;
-  /** Sets the aria-label for an interactive trailing icon. */
   trailingIconAriaLabel?: string;
-  /** Sets text alignment. @default "left" */
   textAlign?: "left" | "right";
-  /** Sets the input size. @default "default" */
   size?: GoabInputSize;
 }
 
@@ -122,21 +101,13 @@ type OnBlur<T = string> = (detail: GoabInputOnBlurDetail<T>) => void;
 type OnKeyPress<T = string> = (detail: GoabInputOnKeyPressDetail<T>) => void;
 
 export interface GoabInputProps extends BaseProps {
-  /** Callback fired when the input value changes. Receives GoabInputOnChangeDetail. */
   onChange?: OnChange<string>;
-  /** Bound to the current value of the input field. */
   value?: string;
-  /** Minimum value. Supports any number, or ISO 8601 format for date/datetime types. */
   min?: number | string;
-  /** Maximum value. Supports any number, or ISO 8601 format for date/datetime types. */
   max?: number | string;
-  /** How much a number or date value should change by. @default 1 */
   step?: number;
-  /** Callback fired when the input receives focus. Receives GoabInputOnFocusDetail. */
   onFocus?: OnFocus<string>;
-  /** Callback fired when the input loses focus. Receives GoabInputOnBlurDetail. */
   onBlur?: OnBlur<string>;
-  /** Callback fired when a key is pressed in the input. Receives GoabInputOnKeyPressDetail. */
   onKeyPress?: OnKeyPress<string>;
 }
 
@@ -162,7 +133,6 @@ interface GoabDateInputProps extends BaseProps {
   onKeyPress?: OnKeyPress<GoabDate>;
 }
 
-/** A single-line field where users can input and edit text. */
 export function GoabInput({
   variant = "goa",
   textAlign = "left",
@@ -289,17 +259,14 @@ function toString(value: GoabDate | null | undefined, tmpl = "yyyy-MM-dd"): stri
   return format(value, tmpl);
 }
 
-/** A single-line field where users can input and edit text. */
 export function GoabInputText(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="text" />;
 }
 
-/** A single-line field where users can enter masked password text. */
 export function GoabInputPassword(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="password" />;
 }
 
-/** A single-line field where users can enter or select a date. */
 export function GoabInputDate({
   value,
   min = "",
@@ -318,7 +285,6 @@ export function GoabInputDate({
   );
 }
 
-/** A single-line field where users can enter or select a time. */
 export function GoabInputTime({
   value,
   min = "",
@@ -335,7 +301,6 @@ export function GoabInputTime({
   );
 }
 
-/** A single-line field where users can enter a date and time. */
 export function GoabInputDateTime({
   value,
   min = "",
@@ -352,27 +317,22 @@ export function GoabInputDateTime({
   );
 }
 
-/** A single-line field where users can enter an email address. */
 export function GoabInputEmail(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="email" />;
 }
 
-/** A single-line field where users can enter search terms. */
 export function GoabInputSearch(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="search" trailingIcon="search" />;
 }
 
-/** A single-line field where users can enter a URL. */
 export function GoabInputUrl(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="url" />;
 }
 
-/** A single-line field where users can enter a phone number. */
 export function GoabInputTel(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="tel" />;
 }
 
-/** A control that allows users to select a file for upload. */
 export function GoabInputFile(props: GoabInputProps): JSX.Element {
   return (
     <input
@@ -391,12 +351,10 @@ export function GoabInputFile(props: GoabInputProps): JSX.Element {
   );
 }
 
-/** A single-line field where users can enter or select a month. */
 export function GoabInputMonth(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="month" />;
 }
 
-/** A single-line field where users can input and edit numeric values. */
 export function GoabInputNumber({
   min = Number.MIN_VALUE,
   max = Number.MAX_VALUE,
@@ -432,7 +390,6 @@ export function GoabInputNumber({
   );
 }
 
-/** A range input where users can choose a numeric value within minimum and maximum limits. */
 export function GoabInputRange(props: GoabInputProps): JSX.Element {
   return <GoabInput {...props} type="range" />;
 }

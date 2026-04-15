@@ -4,8 +4,7 @@ import {
   GoabCalloutSize,
   GoabCalloutType,
   GoabCalloutIconTheme,
-  Margins,
-  DataAttributes,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -31,27 +30,17 @@ declare module "react" {
 }
 
 export interface GoabCalloutProps extends Margins, DataAttributes {
-  /** Callout heading text. */
   heading?: string;
-  /** Sets the context and colour of the callout. @default "information" */
   type?: GoabCalloutType;
-  /** Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. @default "large" */
   size?: GoabCalloutSize;
-  /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. @default "outline" */
   iconTheme?: GoabCalloutIconTheme;
-  /** Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. @default "medium" */
   emphasis?: GoabCalloutEmphasis;
-  /** Sets the maximum width of the callout. */
   maxWidth?: string;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Indicates how assistive technology should handle updates to the live region. @default "off" */
   ariaLive?: GoabCalloutAriaLive;
-  /** Content rendered inside the callout body. */
   children?: React.ReactNode;
 }
 
-/** Communicate important information through a strong visual emphasis. */
 export const GoabCallout = ({
   type = "information",
   iconTheme = "outline",

@@ -22,24 +22,17 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabPaginationProps extends Margins {
-  /** @required Total number of data items within all pages. */
   itemCount: number;
-  /** @required The current page being viewed (non-zero based). */
-  pageNumber: number;
-  /** @required Callback fired when the user navigates to a different page. */
-  onChange: (detail: GoabPaginationOnChangeDetail) => void;
-  /** Number of data items shown per page. @default 10 */
   perPageCount?: number;
-  /** Controls which nav controls are visible. @default "all" */
+  pageNumber: number;
   variant?: "all" | "links-only";
-  /** Sets a data-testid attribute for automated testing. */
+  onChange: (detail: GoabPaginationOnChangeDetail) => void;
   testId?: string;
 }
 
 // legacy
 export type PaginationProps = GoabPaginationProps;
 
-/** Help users navigation between multiple pages or screens as part of a set. */
 export function GoabPagination({ onChange, ...props }: GoabPaginationProps) {
   const ref = useRef<HTMLElement>(null);
 

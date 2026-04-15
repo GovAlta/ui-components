@@ -24,14 +24,7 @@ export default defineConfig({
     "/components/skeleton-loader": "/components/skeleton",
     "/design-tokens": "/tokens",
     "/get-started/support": "/support",
-    "/examples/show-multiple-actions-in-a-table":
-      "/examples/show-multiple-actions-in-a-compact-table",
-    "/examples/communicate-a-future-service-outage":
-      "/examples/notify-the-user-of-a-future-service-outage",
-    "/examples/give-background-information-before-asking-a-question":
-      "/examples/give-more-information-before-asking-a-question-a",
-    "/examples/give-context-before-asking-a-long-answer-question":
-      "/examples/give-more-information-before-asking-a-question-b",
+    "/examples/show-multiple-actions-in-a-table": "/examples/show-multiple-actions-in-a-compact-table",
   },
   build: {
     chunkSizeWarningLimit: 1000,

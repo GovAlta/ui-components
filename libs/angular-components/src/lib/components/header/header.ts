@@ -32,19 +32,13 @@ import { GoabBaseComponent } from "../base.component";
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Provide structure to help users find their way around the service. */
 export class GoabAppHeader extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Sets the URL to link from the alberta.ca logo. A full url is required. */
   @Input() url?: string;
-  /** Sets the service name to display in the app header. */
   @Input() heading?: string;
-  /** V2 only: Secondary text displayed under the service name. */
   @Input() secondaryText?: string;
-  /** Maximum width of the content area. */
   @Input() maxContentWidth?: string;
-  /** Sets the breakpoint in px for the full menu to display. */
   @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
 
   isReady = false;
@@ -57,7 +51,6 @@ export class GoabAppHeader extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
-  /** Emits when the menu button is clicked. Used for custom menu handling. */
   @Output() onMenuClick = new EventEmitter();
 
   _onMenuClick() {

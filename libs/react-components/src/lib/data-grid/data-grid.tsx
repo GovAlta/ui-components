@@ -16,17 +16,12 @@ declare module "react" {
 }
 
 export interface GoabDataGridProps {
-  /** @required Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows. */
-  keyboardNav: "layout" | "table";
-  /** Controls visibility of the keyboard navigation indicator icon. @default "visible" */
   keyboardIconVisibility?: "visible" | "hidden";
-  /** Position of the keyboard navigation indicator icon. @default "left" */
   keyboardIconPosition?: "left" | "right";
-  /** Content rendered inside the data grid, typically rows and cells. */
+  keyboardNav: "layout" | "table";
   children?: React.ReactNode;
 }
 
-/** Advanced table with sorting and selection. */
 export function GoabDataGrid({
   keyboardIconVisibility = "visible",
   keyboardIconPosition = "left",

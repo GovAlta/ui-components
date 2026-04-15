@@ -24,25 +24,16 @@ interface WCProps {
 }
 
 export interface GoabHeaderProps {
-  /** @required The service type which determines the badge style. "live" shows official government site text, "alpha" and "beta" show development stage badges. */
   type: GoabServiceLevel;
-  /** App or service version displayed on the right side of the header. Accepts a string or custom ReactNode for rich content. */
   version?: string | React.ReactNode;
-  /** URL to a feedback page displayed when provided. */
   feedbackUrl?: string;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Maximum width of the content area. @default "100%" */
   maxContentWidth?: string;
-  /** Sets the target attribute for the feedback URL link. @default "blank" */
   feedbackUrlTarget?: GoabLinkTarget;
-  /** Sets the target attribute for the header link. @default "blank" */
   headerUrlTarget?: GoabLinkTarget;
-  /** Callback fired when the feedback link is clicked, enables custom feedback handling. */
   onFeedbackClick?: () => void;
 }
 
-/** Communicate what stage the service is at, connect to Alberta.ca, and gather feedback on your service. */
 export function GoabMicrositeHeader({
   type,
   version,

@@ -16,18 +16,14 @@ declare module "react" {
 }
 
 export interface GoabPageBlockProps {
-  /** Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". @default "full" */
   width?: GoabPageBlockSize;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Content rendered inside the page block. */
   children?: ReactNode;
 }
 
 // legacy name
 export type PageBlockProps = GoabPageBlockProps;
 
-/** Full-width section with optional background. */
 export function GoabPageBlock(props: PageBlockProps): JSX.Element {
   return (
     <goa-page-block width={props.width} testid={props.testId}>

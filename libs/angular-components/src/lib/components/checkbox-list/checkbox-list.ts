@@ -1,7 +1,4 @@
-import {
-  GoabCheckboxListOnChangeDetail,
-  GoabCheckboxSize,
-} from "@abgov/ui-components-common";
+import { GoabCheckboxListOnChangeDetail, GoabCheckboxSize } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -50,21 +47,16 @@ import { GoabControlValueAccessor } from "../base.component";
     },
   ],
 })
-/** A multiple selection input. */
 export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
   version = "2";
-  /** @required The name for the checkbox list group. Used as group identifier in change events. */
   @Input() name!: string;
-  /** Sets the maximum width of the checkbox list container. */
   @Input() maxWidth?: string;
-  /** Sets the size of the checkbox list. 'compact' reduces spacing between items. @default "default" */
   @Input() size?: GoabCheckboxSize = "default";
 
   // Override value to handle string arrays consistently
-  /** Array of currently selected checkbox values. */
   @Input() override value?: string[];
 
 
@@ -75,7 +67,6 @@ export class GoabCheckboxList extends GoabControlValueAccessor implements OnInit
     });
   }
 
-  /** Emits when a checkbox selection changes. Emits the change detail including name, value array, and event. */
   @Output() onChange = new EventEmitter<GoabCheckboxListOnChangeDetail>();
 
   _onChange(e: Event) {

@@ -16,13 +16,10 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabPagesProps extends Margins {
-  /** The currently visible page (1-based index). @default 1 */
   current?: number;
-  /** Page content to show or hide based on the current page index. */
   children?: ReactNode;
 }
 
-/** Container for paginated content views. */
 export function GoabPages(props: GoabPagesProps): JSX.Element {
   return (
     <goa-pages

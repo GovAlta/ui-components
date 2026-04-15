@@ -218,13 +218,13 @@
       background-color: var(--goa-button-tertiary-color-bg-mobile) !important;
     }
     button.tertiary:hover {
-      background-color: var(--goa-color-greyscale-200) !important;
+      background-color: var(--goa-button-tertiary-color-bg-mobile) !important;
     }
     button.tertiary.inverse {
       background-color: var(--goa-button-tertiary-color-bg) !important;
     }
     button.tertiary.inverse:hover {
-      background-color: var(--goa-color-greyscale-200) !important;
+      background-color: var(--goa-button-tertiary-color-bg-mobile) !important;
     }
   }
 

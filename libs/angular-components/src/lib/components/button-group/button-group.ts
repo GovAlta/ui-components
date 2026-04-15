@@ -34,13 +34,10 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Display multiple related actions stacked or in a horizontal row to help with arrangement and spacing. */
 export class GoabButtonGroup extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Positions the button group in the page layout. */
   @Input() alignment?: GoabButtonGroupAlignment;
-  /** Sets the spacing between buttons in the button group. */
   @Input() gap?: GoabButtonGroupGap;
 
   isReady = false;

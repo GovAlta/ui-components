@@ -34,25 +34,15 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** A button with more than one action. */
 export class GoabMenuButton {
-  /** The button label text. When provided, displays as a text button with a dropdown icon. */
   @Input() text?: string;
-  /** The button style variant. */
   @Input() type?: GoabButtonType;
-  /** Sets the size of the button. */
   @Input() size?: GoabButtonSize;
-  /** Sets the color variant for semantic meaning. */
   @Input() variant?: GoabButtonVariant;
-  /** Maximum width of the dropdown menu. */
   @Input() maxWidth?: string;
-  /** Icon displayed before the button text. When no text is provided, displays as an icon button. */
   @Input() leadingIcon?: GoabIconType;
-  /** Sets the aria-label for the icon button in icon-only mode. */
   @Input() ariaLabel?: string;
-  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** Emits when a menu action is clicked. Emits the action detail. */
   @Output() onAction = new EventEmitter<GoabMenuButtonOnActionDetail>();
 
   _onAction(e: Event) {

@@ -16,14 +16,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Individual action item within a menu button. */
 export class GoabMenuAction {
-  /** @required Display text for the menu action. */
-  @Input({ required: true }) text!: string;
-  /** @required Action identifier included in the click event. */
-  @Input({ required: true }) action!: string;
-  /** Icon displayed before the text. */
+  @Input({required: true}) text!: string;
+  @Input({required: true}) action!: string;
   @Input() icon?: GoabIconType;
-  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 }

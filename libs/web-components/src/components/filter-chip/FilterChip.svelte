@@ -186,7 +186,6 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    pointer-events: none; /* Icon itself should not capture pointer events, the chip handles it */
   }
 
   .label-container {

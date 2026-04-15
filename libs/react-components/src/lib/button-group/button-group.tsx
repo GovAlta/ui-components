@@ -1,8 +1,7 @@
 import {
   GoabButtonGroupAlignment,
   GoabButtonGroupGap,
-  Margins,
-  DataAttributes,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
@@ -24,24 +23,23 @@ declare module "react" {
 }
 
 export interface GoabButtonGroupProps extends Margins, DataAttributes {
-  /** @required Positions the button group in the page layout. */
   alignment: GoabButtonGroupAlignment;
-  /** Sets the spacing between buttons in the button group. @default "relaxed" */
   gap?: GoabButtonGroupGap;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Button components to render inside the group. */
   children?: React.ReactNode;
 }
 
-/** Display multiple related actions stacked or in a horizontal row to help with arrangement and spacing. */
 export function GoabButtonGroup({
   children,
   ...rest
 }: GoabButtonGroupProps): JSX.Element {
   const _props = transformProps<WCProps>(rest, lowercase);
 
-  return <goa-button-group {..._props}>{children}</goa-button-group>;
+  return (
+    <goa-button-group {..._props}>
+      {children}
+    </goa-button-group>
+  );
 }
 
 export default GoabButtonGroup;

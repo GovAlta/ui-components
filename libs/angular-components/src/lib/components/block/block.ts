@@ -39,21 +39,14 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Group components into a block with consistent space between. */
 export class GoabBlock extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** Sets the spacing between items. Uses design system spacing tokens. */
   @Input() gap?: Spacing;
-  /** Sets the stacking direction of child components. */
   @Input() direction?: GoabBlockDirection;
-  /** Sets the primary axis alignment of child components. */
   @Input() alignment?: GoabBlockAlignment;
-  /** Sets the width of the block container. Defaults to max-content. */
   @Input() width?: string;
-  /** Sets the minimum width of the block container. */
   @Input() minWidth?: string;
-  /** Sets the maximum width of the block container. */
   @Input() maxWidth?: string;
 
   isReady = false;

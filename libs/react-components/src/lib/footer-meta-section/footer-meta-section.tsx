@@ -17,13 +17,10 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabAppFooterMetaSectionProps extends DataAttributes {
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Anchor link elements rendered as footer meta navigation links. */
   children?: ReactNode;
 }
 
-/** Copyright and legal links in footer. */
 export function GoabAppFooterMetaSection({
   children,
   ...rest

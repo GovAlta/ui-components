@@ -16,19 +16,19 @@ declare module "react" {
 }
 
 interface GoabPublicFormTaskProps extends DataAttributes {
-  /** Content rendered inside the task item, typically the task name or description. */
-  children: ReactNode;
-  /** Sets the status of the task, which determines the badge displayed. @default "cannot-start" */
   status?: GoabPublicFormTaskStatus;
+  children: ReactNode;
 }
 
-/** Container for form inputs and validation. */
 export function GoabPublicFormTask({
   status = "cannot-start",
   children,
   ...rest
 }: GoabPublicFormTaskProps) {
-  const _props = transformProps<WCProps>({ status, ...rest }, lowercase);
+  const _props = transformProps<WCProps>(
+    { status, ...rest },
+    lowercase
+  );
 
   return <goa-public-form-task {..._props}>{children}</goa-public-form-task>;
 }

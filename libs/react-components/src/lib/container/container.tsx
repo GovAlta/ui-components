@@ -3,8 +3,7 @@ import {
   GoabContainerPadding,
   GoabContainerType,
   GoabContainerWidth,
-  Margins,
-  DataAttributes,
+  Margins, DataAttributes,
 } from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
@@ -30,33 +29,20 @@ declare module "react" {
 }
 
 export interface GoabContainerProps extends Margins, DataAttributes {
-  /** Sets the container and accent bar styling. @default "interactive" */
-  type?: GoabContainerType;
-  /** Sets the style of accent on the container. @default "filled" */
   accent?: GoabContainerAccent;
-  /** Sets the amount of white space in the container. @default "relaxed" */
-  padding?: GoabContainerPadding;
-  /** Sets the width of the container. @default "full" */
-  width?: GoabContainerWidth;
-  /** Sets the maximum width of the container. */
-  maxWidth?: string;
-  /** Sets the minimum height of the container. */
-  minHeight?: string;
-  /** Sets the maximum height of the container. */
-  maxHeight?: string;
-  /** Sets a data-testid attribute for automated testing. */
-  testId?: string;
-  /** Content rendered in the container's title/heading area. */
+  type?: GoabContainerType;
   heading?: ReactNode;
-  /** @deprecated Use heading instead. Alias for the heading prop. */
   title?: ReactNode;
-  /** Content rendered in the container's actions area, typically buttons or controls. */
+  padding?: GoabContainerPadding;
   actions?: ReactNode;
-  /** Content rendered inside the container body. */
   children?: ReactNode;
+  width?: GoabContainerWidth;
+  maxWidth?: string;
+  minHeight?: string;
+  maxHeight?: string;
+  testId?: string;
 }
 
-/** Group information, create hierarchy, and show related information. */
 export function GoabContainer({
   heading,
   title,

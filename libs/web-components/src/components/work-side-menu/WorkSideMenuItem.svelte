@@ -482,7 +482,6 @@
       var(--goa-font-size-2)
     );
     --goa-badge-border-radius: 1.25rem;
-    margin-top: var(--goa-space-3xs);
   }
 
   /* Icon-only items when menu is closed */
