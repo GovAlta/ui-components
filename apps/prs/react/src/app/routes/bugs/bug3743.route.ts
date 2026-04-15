@@ -1,4 +1,4 @@
-import { Bug3735Route } from "../../../routes/bugs/bug3735";
+import { Bug3743Route } from "../../../routes/bugs/bug3743";
 import type { PrRouteDefinition } from "../../route-manifest";
 
 export default {
@@ -6,5 +6,5 @@ export default {
   id: "3743",
   path: "bugs/3743",
   title: "Tertiary button background colour",
-  component: Bug3735Route,
+  component: Bug3743Route,
 } satisfies PrRouteDefinition;
