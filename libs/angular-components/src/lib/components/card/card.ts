@@ -31,6 +31,7 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A container that groups related content and actions. */
 export class GoabCard extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
@@ -45,6 +46,8 @@ export class GoabCard extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
+  /** Adds a shadow to the card. 0 shows a border, 1-3 increase shadow intensity. */
   @Input({ transform: numberAttribute }) elevation?: number;
+  /** Sets the width of the card. */
   @Input() width?: string;
 }

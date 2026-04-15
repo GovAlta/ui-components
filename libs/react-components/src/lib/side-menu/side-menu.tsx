@@ -16,10 +16,13 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabSideMenuProps {
-  testId?: string;
+  /** @required Navigation links and groups rendered inside the side menu. */
   children: ReactNode;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
 }
 
+/** A side navigation that helps the user navigate between pages. */
 export function GoabSideMenu({ testId, children }: GoabSideMenuProps): JSX.Element {
   return (
     <goa-side-menu testid={testId} version="2">

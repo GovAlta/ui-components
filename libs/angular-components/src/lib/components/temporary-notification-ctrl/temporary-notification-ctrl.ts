@@ -26,12 +26,16 @@ type SnackbarHorizontalPosition = "left" | "center" | "right";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A notification that appears at the bottom of the screen. */
 export class GoabTemporaryNotificationCtrl implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
+  /** Vertical position of the notification container. @default "bottom" */
   @Input() verticalPosition: SnackbarVerticalPosition = "bottom";
+  /** Horizontal position of the notification container. @default "center" */
   @Input() horizontalPosition: SnackbarHorizontalPosition = "center";
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   ngOnInit(): void {

@@ -50,17 +50,27 @@ import { GoabBaseComponent } from "../base.component";
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Group information, create hierarchy, and show related information. */
 export class GoabContainer extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** Sets the container and accent bar styling. @default "interactive" */
   @Input() type?: GoabContainerType = "interactive";
+  /** Sets the style of accent on the container. @default "filled" */
   @Input() accent?: GoabContainerAccent = "filled";
+  /** Sets the amount of white space in the container. @default "relaxed" */
   @Input() padding?: GoabContainerPadding = "relaxed";
+  /** Sets the width of the container. @default "full" */
   @Input() width?: GoabContainerWidth = "full";
+  /** Sets the maximum width of the container. */
   @Input() maxWidth?: string;
+  /** Sets the minimum height of the container. */
   @Input() minHeight?: string;
+  /** Sets the maximum height of the container. */
   @Input() maxHeight?: string;
+  /** Sets the template for the title slot content. */
   @Input() title!: TemplateRef<any>;
+  /** Sets the template for the actions slot content. */
   @Input() actions!: TemplateRef<any>;
 
   isReady = false;

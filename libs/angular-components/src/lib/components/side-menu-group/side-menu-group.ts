@@ -32,12 +32,15 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Group of related side menu items. */
 export class GoabSideMenuGroup extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
   version = "2";
+  /** @required The heading text for the menu group. */
   @Input({ required: true }) heading!: string;
+  /** Icon displayed alongside the heading. */
   @Input() icon?: GoabIconType;
 
   ngOnInit(): void {

@@ -2,35 +2,66 @@ export type GoabSpinnerType = "infinite" | "progress";
 
 export type GoabSpinnerSize = "small" | "medium" | "large" | "xlarge";
 
+/**
+ * Provides details when a radio group's selected value changes.
+ */
 export type GoabRadioGroupOnChangeDetail = {
+  /** The radio group name. */
   name: string;
+  /** The selected value. */
   value: string;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a checkbox list value changes.
+ */
 export type GoabCheckboxListOnChangeDetail = {
+  /** The checkbox list name. */
   name: string;
+  /** The selected values. */
   value: string[];
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when an input value changes.
+ */
 export type GoabInputOnChangeDetail<T = string> = {
+  /** The input name. */
   name: string;
+  /** The updated value. */
   value: T;
+  /** The originating DOM event. */
   event: Event;
 };
 
 // @deprecated GoaInputOnBlurDetail has been deprecated. Use GoabInputOnBlurDetail instead.
 export type GoaInputOnBlurDetail = GoabInputOnBlurDetail;
+/**
+ * Provides details when an input loses focus.
+ */
 export type GoabInputOnBlurDetail<T = string> = {
+  /** The input name. */
   name: string;
+  /** The input value at blur time. */
   value: T;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when an input receives focus.
+ */
 export type GoabInputOnFocusDetail<T = string> = GoabInputOnChangeDetail<T>;
 
+/**
+ * Provides details when a menu button action is selected.
+ */
 export type GoabMenuButtonOnActionDetail = {
+  /** The selected action identifier. */
   action: string;
 };
 
@@ -42,48 +73,87 @@ export type GoabInputAutoCapitalize =
   | "words"
   | "characters";
 
+/**
+ * Provides details when a key is pressed in an input.
+ */
 export type GoabInputOnKeyPressDetail<T = string> = {
+  /** The input name. */
   name: string;
+  /** The current input value. */
   value: T;
+  /** The pressed key. */
   key: T;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when the active step changes in a form stepper.
+ */
 export type GoabFormStepperOnChangeDetail = {
+  /** The 1-based step value. */
   step: number;
 };
 
+/**
+ * Provides details when a file is selected in file upload input.
+ */
 export type GoabFileUploadInputOnSelectFileDetail = {
+  /** The selected file. */
   file: File;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a file upload item is canceled.
+ */
 export type GoabFileUploadOnCancelDetail = {
+  /** The file name being canceled. */
   filename: string;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a file upload item is deleted.
+ */
 export type GoabFileUploadOnDeleteDetail = {
+  /** The file name being deleted. */
   filename: string;
+  /** The originating DOM event. */
   event: Event;
 };
 
 export type GoabDropdownItemMountType = "append" | "prepend" | "reset";
 
+/**
+ * Provides details when a dropdown selection changes.
+ */
 export type GoabDropdownOnChangeDetail = {
+  /** The dropdown name, when provided. */
   name?: string;
+  /** The selected value for single-select dropdowns. */
   value?: string;
+  /** The selected values for multi-select dropdowns. */
   values?: string[];
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a date picker value changes.
+ */
 export type GoabDatePickerOnChangeDetail = {
+  /** The date picker name, when provided. */
   name?: string;
+  /** The selected date as a string. */
   valueStr: string;
   /**
    * @deprecated Use `valueStr` instead
    */
   value: Date;
+  /** The originating DOM event. */
   event: Event;
 };
 export type GoabDatePickerInputType = "calendar" | "input";
@@ -93,16 +163,29 @@ export type GoabChipVariant = "filter";
 export type GoabChipTheme = "outline" | "filled";
 export type GoabFilterChipTheme = "outline" | "filled";
 
+/**
+ * Provides details when a checkbox value or checked state changes.
+ */
 export type GoabCheckboxOnChangeDetail = {
+  /** The checkbox name, when provided. */
   name?: string;
+  /** The checkbox value, when provided. */
   value?: string;
+  /** The updated checked state. */
   checked: boolean;
+  /** Indicates whether the change came from value or checked binding. */
   binding: "value" | "check";
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a calendar value changes.
+ */
 export type GoabCalendarOnChangeDetail = {
+  /** The calendar name, when provided. */
   name?: string;
+  /** The selected date value. */
   value: string;
 };
 
@@ -122,7 +205,11 @@ export type GoabBadgeType =
 
 export type GoabPaginationVariant = "all" | "links-only";
 
+/**
+ * Provides details when pagination changes pages.
+ */
 export type GoabPaginationOnChangeDetail = {
+  /** The selected page number. */
   page: number;
 };
 
@@ -182,22 +269,41 @@ export type GoabTooltipHorizontalAlignment = "left" | "right" | "center";
 
 export type GoabTextAreaCountBy = "character" | "word" | "";
 
+/**
+ * Provides details when a textarea value changes.
+ */
 export type GoabTextAreaOnChangeDetail = {
+  /** The textarea name. */
   name: string;
+  /** The updated value. */
   value: string;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a key is pressed in a textarea.
+ */
 export type GoabTextAreaOnKeyPressDetail = {
+  /** The textarea name. */
   name: string;
+  /** The current value. */
   value: string;
+  /** The pressed key. */
   key: string;
+  /** The originating DOM event. */
   event: Event;
 };
 
+/**
+ * Provides details when a textarea loses focus.
+ */
 export type GoabTextAreaOnBlurDetail = {
+  /** The textarea name. */
   name: string;
+  /** The value at blur time. */
   value: string;
+  /** The originating DOM event. */
   event: Event;
 };
 
@@ -213,7 +319,11 @@ export interface GoabTabsProps {
   orientation?: GoabTabsOrientation;
 }
 
+/**
+ * Provides details when the active tab changes.
+ */
 export type GoabTabsOnChangeDetail = {
+  /** The selected tab index. */
   tab: number;
 };
 // Table
@@ -236,12 +346,21 @@ export type GoabTableSortEntry = {
   direction: "asc" | "desc";
 };
 
+/**
+ * Provides details when a single table sort changes.
+ */
 export type GoabTableOnSortDetail = {
+  /** The sorted column key. */
   sortBy: string;
+  /** The sort direction as a numeric value. */
   sortDir: number;
 };
 
+/**
+ * Provides details when multi-sort values change.
+ */
 export type GoabTableOnMultiSortDetail = {
+  /** The collection of active sort entries. */
   sorts: GoabTableSortEntry[];
 };
 
@@ -1110,7 +1229,7 @@ export interface Margins {
 }
 
 export type GoabBlockDirection = "row" | "column";
-export type GoabBlockAlignment = "center" | "start" | "end";
+export type GoabBlockAlignment = "center" | "start" | "end" | "normal";
 
 export type GoabPageBlockSize = "full" | string;
 
@@ -1137,7 +1256,11 @@ export type GoabFormField = {
 };
 
 export type GoabFormStorageType = "none" | "local" | "session";
+/**
+ * Provides details used to register a callback at form mount time.
+ */
 export type GoabFormOnMountDetail = {
+  /** Callback used to set the next route or step. */
   fn: (next: string) => void;
 };
 export type GoabFormOnStateChange = {
@@ -1181,9 +1304,15 @@ export type GoabFieldsetSchema = {
   data?: GoabFieldsetData;
 };
 
+/**
+ * Provides details when a fieldset continue action is triggered.
+ */
 export interface GoabFieldsetOnContinueDetail {
+  /** The fieldset element that triggered continue. */
   el: HTMLElement;
+  /** The fieldset state at trigger time. */
   state: Record<string, GoabFieldsetItemState>;
+  /** Indicates whether the action was canceled. */
   cancelled: boolean;
 }
 

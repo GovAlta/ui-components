@@ -32,12 +32,16 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [NgTemplateOutlet],
 })
+/** Individual tab within a tabs component. */
 export class GoabTab implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
+  /** The text label for this tab. Can also use the heading slot for custom content. */
   @Input() heading!: string | TemplateRef<any>;
+  /** When true, disables the tab. */
   @Input({ transform: booleanAttribute }) disabled?: boolean;
+  /** Sets the URL slug for the tab. */
   @Input() slug?: string;
 
   ngOnInit(): void {

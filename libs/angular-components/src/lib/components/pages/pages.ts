@@ -30,10 +30,12 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Container for paginated content views. */
 export class GoabPages extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
+  /** The currently visible page (1-based index). */
   @Input({ transform: numberAttribute }) current?: number;
 
   ngOnInit(): void {

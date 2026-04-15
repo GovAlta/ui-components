@@ -108,10 +108,7 @@ export function App() {
                   url="/bugs/2720"
                 />
                 <GoabWorkSideMenuItem label="2721 Text Tag Margin" url="/bugs/2721" />
-                <GoabWorkSideMenuItem
-                  label="2750 Year Select Sorting"
-                  url="/bugs/2750"
-                />
+                <GoabWorkSideMenuItem label="2750 Year Select Sorting" url="/bugs/2750" />
                 <GoabWorkSideMenuItem
                   label="2768 Enable/Disable Components"
                   url="/bugs/2768"
@@ -225,14 +222,9 @@ export function App() {
                   label="3607 Radio and Checkbox Interaction Area"
                   url="/bugs/3607"
                 />
-                <GoabWorkSideMenuItem
-                  label="3505 Link Icon Click"
-                  url="/bugs/3505"
-                />
-                <GoabWorkSideMenuItem
-                  label="3614 IconButton Hitboxes"
-                  url="/bugs/3614"
-                />
+                <GoabWorkSideMenuItem label="3505 Link Icon Click" url="/bugs/3505" />
+                <GoabWorkSideMenuItem label="3548 Side Menu Scroll" url="/bugs/3548" />
+                <GoabWorkSideMenuItem label="3614 IconButton Hitboxes" url="/bugs/3614" />
                 <GoabWorkSideMenuItem
                   label="3685 Checkbox & Radio: Reveal width not aligned with item"
                   url="/bugs/3685"
@@ -264,10 +256,7 @@ export function App() {
                   label="1813 DatePicker Width Properties"
                   url="/features/1813"
                 />
-                <GoabWorkSideMenuItem
-                  label="1908 Linear Progress"
-                  url="/features/1908"
-                />
+                <GoabWorkSideMenuItem label="1908 Linear Progress" url="/features/1908" />
                 <GoabWorkSideMenuItem
                   label="2054 MaxWidth Support"
                   url="/features/2054"
@@ -281,15 +270,12 @@ export function App() {
                   label="2361 Radio/Checkbox Clickable Area"
                   url="/features/2361"
                 />
+                <GoabWorkSideMenuItem label="2440 MenuButton Icon" url="/features/2440" />
                 <GoabWorkSideMenuItem
-                  label="2440 MenuButton Icon"
-                  url="/features/2440"
+                  label="2469/3580 Push Drawer"
+                  url="/features/2469"
                 />
-                <GoabWorkSideMenuItem label="2469/3580 Push Drawer" url="/features/2469" />
-                <GoabWorkSideMenuItem
-                  label="2492 TextArea onBlur"
-                  url="/features/2492"
-                />
+                <GoabWorkSideMenuItem label="2492 TextArea onBlur" url="/features/2492" />
                 <GoabWorkSideMenuItem
                   label="2609 Data Table Base Component"
                   url="/features/2609"
@@ -364,10 +350,7 @@ export function App() {
                   label="3407 Tabs Orientation"
                   url="/features/3407-stack-on-mobile"
                 />
-                <GoabWorkSideMenuItem
-                  label="3398 Group open prop"
-                  url="/features/3398"
-                />
+                <GoabWorkSideMenuItem label="3398 Group open prop" url="/features/3398" />
                 <GoabWorkSideMenuItem
                   label="3478 Popover API Rewrite"
                   url="/features/3478"

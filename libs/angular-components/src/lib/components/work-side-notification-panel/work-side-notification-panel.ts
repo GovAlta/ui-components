@@ -28,14 +28,20 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Displays a panel of work-side notifications. */
 export class GoabWorkSideNotificationPanel implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** The heading text displayed at the top of the notification panel. */
   @Input() heading?: string;
+  /** Sets the initially active tab in the notification panel. */
   @Input() activeTab?: GoabWorkSideNotificationActiveTabType;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
+  /** Emits when the user clicks "Mark all as read". */
   @Output() onMarkAllRead = new EventEmitter<void>();
+  /** Emits when the user clicks "View all". */
   @Output() onViewAll = new EventEmitter<void>();
 
   isReady = false;

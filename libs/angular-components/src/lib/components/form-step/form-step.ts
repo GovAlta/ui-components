@@ -19,10 +19,13 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Individual step in a multi-step form. */
 export class GoabFormStep implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
+  /** The step label text displayed to users. */
   @Input() text?: string;
+  /** The completion status of the step. Affects visual styling and icons. */
   @Input() status?: GoabFormStepStatus;
 
   isReady = false;
