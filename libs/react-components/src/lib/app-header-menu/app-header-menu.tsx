@@ -18,19 +18,13 @@ declare module "react" {
 }
 
 export interface GoabAppHeaderMenuProps extends DataAttributes {
-  /** @required The menu heading text displayed as the dropdown trigger. */
   heading: string;
-  /** Icon displayed before the heading text. */
   leadingIcon?: GoabIconType;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Slot name used to place this menu in the correct slot of the parent component. */
   slotName?: string;
-  /** Content rendered inside the menu dropdown, typically navigation links. */
   children?: ReactNode;
 }
 
-/** Menu items within the app header. */
 export function GoabAppHeaderMenu({
   children,
   slotName,

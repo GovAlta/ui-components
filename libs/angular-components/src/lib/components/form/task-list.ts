@@ -17,8 +17,6 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Container for form inputs and validation. */
 export class GoabPublicFormTaskList extends GoabBaseComponent {
-  /** Sets the heading text displayed above the task list. */
   @Input() heading?: string;
 }

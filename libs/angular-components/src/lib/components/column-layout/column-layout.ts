@@ -18,7 +18,6 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Organizes page content in one, two, or three responsive columns. */
 export class GoabColumnLayout implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 

@@ -15,21 +15,14 @@ declare module "react" {
 }
 
 export interface GoabTwoColumnLayoutProps {
-  /** Content rendered in the page header slot. */
-  header: ReactNode;
-  /** Content rendered in the page footer slot. */
-  footer: ReactNode;
-  /** Content rendered in the navigation column slot. */
-  nav: ReactNode;
-  /** @required Main content rendered in the body of the layout. */
-  children: ReactNode;
-  /** Sets the width of the navigation column. */
   navColumnWidth?: string;
-  /** Sets the maximum width of the content area. */
   maxContentWidth?: string;
+  header: ReactNode;
+  footer: ReactNode;
+  nav: ReactNode;
+  children: ReactNode;
 }
 
-/** Organizes page content in two responsive columns. */
 export function GoabTwoColumnLayout(props: GoabTwoColumnLayoutProps) {
   return (
     <goa-two-column-layout

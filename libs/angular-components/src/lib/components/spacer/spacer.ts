@@ -27,16 +27,12 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Negative area between the components and the interface. */
 export class GoabSpacer implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  /** Horizontal spacing. */
   @Input() hSpacing?: GoabSpacerHorizontalSpacing;
-  /** Vertical spacing. */
   @Input() vSpacing?: GoabSpacerVerticalSpacing;
-  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   ngOnInit(): void {

@@ -33,18 +33,13 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Provide visual feedback to users while loading a content heavy page or page element. */
 export class GoabSkeleton extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
-  /** @required Sets the skeleton shape to represent your content. */
   @Input({ required: true }) type!: GoabSkeletonType;
-  /** Sets the maximum width. Currently only used in card skeleton type. @default "300px" */
   @Input() maxWidth = "300px";
-  /** Size can affect either the height, width or both for different skeleton types. */
   @Input() size?: GoabSkeletonSize;
-  /** Used within components that contain multiple lines. Currently only used in card skeleton type. */
   @Input({ transform: numberAttribute }) lineCount?: number;
 
   ngOnInit(): void {

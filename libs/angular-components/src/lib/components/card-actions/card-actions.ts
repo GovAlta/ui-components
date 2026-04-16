@@ -18,7 +18,6 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** A container that groups related content and actions. */
 export class GoabCardActions implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 

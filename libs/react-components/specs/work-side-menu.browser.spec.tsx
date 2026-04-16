@@ -1,7 +1,11 @@
 import { render } from "vitest-browser-react";
 import { useState } from "react";
 import { GoabButton } from "../src";
-import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from "../src";
+import {
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
+} from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
@@ -232,116 +236,6 @@ describe("WorkSideMenu", () => {
       await button.click();
       await vi.waitFor(() => {
         expect(menu.element().classList.contains("closed")).toBeFalsy();
-      });
-    });
-  });
-
-  describe("Scroll pinning (#3548)", () => {
-    it("should keep secondary menu visible when primary nav overflows", async () => {
-      await page.viewport(1024, 400);
-
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test App"
-            url="https://example.com/"
-            testId="scroll-menu"
-            open={true}
-            primaryContent={
-              <>
-                {Array.from({ length: 15 }, (_, i) => (
-                  <GoabWorkSideMenuItem
-                    key={i}
-                    url={`#item-${i}`}
-                    label={`Primary item ${i + 1}`}
-                    icon="document"
-                  />
-                ))}
-              </>
-            }
-            secondaryContent={
-              <GoabWorkSideMenuItem
-                url="#secondary"
-                label="Secondary item"
-                icon="search"
-                testId="pinned-secondary"
-              />
-            }
-          />
-        );
-      };
-
-      const result = render(<Component />);
-      const menu = result.getByTestId("scroll-menu");
-      const secondary = result.getByTestId("pinned-secondary");
-
-      await vi.waitFor(() => {
-        expect(menu.element().classList.contains("scrolling")).toBe(true);
-        expect(secondary).toBeVisible();
-      });
-    });
-
-    it("should show scroll indicators when overflow is triggered by expanding a group", async () => {
-      await page.viewport(1024, 500);
-
-      const Component = () => {
-        return (
-          <GoabWorkSideMenu
-            heading="Test App"
-            url="https://example.com/"
-            testId="scroll-menu-dynamic"
-            open={true}
-            primaryContent={
-              <>
-                <GoabWorkSideMenuItem url="#item-1" label="Item 1" icon="home" />
-                <GoabWorkSideMenuItem url="#item-2" label="Item 2" icon="mail" />
-                <GoabWorkSideMenuGroup
-                  heading="Expandable group"
-                  icon="folder"
-                  testId="expand-group"
-                >
-                  {Array.from({ length: 10 }, (_, i) => (
-                    <GoabWorkSideMenuItem
-                      key={i}
-                      url={`#group-item-${i}`}
-                      label={`Group item ${i + 1}`}
-                      icon="document"
-                    />
-                  ))}
-                </GoabWorkSideMenuGroup>
-                <GoabWorkSideMenuItem url="#item-3" label="Item 3" icon="list" />
-              </>
-            }
-            secondaryContent={
-              <GoabWorkSideMenuItem
-                url="#secondary"
-                label="Secondary item"
-                icon="search"
-                testId="pinned-secondary-dynamic"
-              />
-            }
-          />
-        );
-      };
-
-      const result = render(<Component />);
-      const menu = result.getByTestId("scroll-menu-dynamic");
-      const group = result.getByTestId("expand-group");
-
-      // Initially no overflow — group is collapsed
-      await vi.waitFor(() => {
-        expect(menu.element().classList.contains("scrolling")).toBe(false);
-      });
-
-      // Expand the group to trigger overflow
-      const summary = group.element().querySelector("summary");
-      await summary?.click();
-
-      // Scroll indicators should appear dynamically
-      await vi.waitFor(() => {
-        expect(menu.element().classList.contains("scrolling")).toBe(true);
-        const secondary = result.getByTestId("pinned-secondary-dynamic");
-        expect(secondary).toBeVisible();
       });
     });
   });

@@ -40,19 +40,14 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Help users navigation between multiple pages or screens as part of a set. */
 export class GoabPagination extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   isReady = false;
   version = "2";
-  /** @required Total number of data items within all pages. */
   @Input({ required: true }) itemCount!: number;
-  /** @required The current page being viewed (non-zero based). */
   @Input({ required: true }) pageNumber!: number;
-  /** Number of data items shown per page. @default 10 */
   @Input() perPageCount?: number = 10;
-  /** Controls which nav controls are visible. @default "all" */
   @Input() variant?: GoabPaginationVariant = "all";
 
   ngOnInit(): void {
@@ -62,7 +57,6 @@ export class GoabPagination extends GoabBaseComponent implements OnInit {
     });
   }
 
-  /** Emits when the page changes. Emits the new page number as part of the change detail. */
   @Output() onChange = new EventEmitter<GoabPaginationOnChangeDetail>();
 
   _onChange(e: Event) {

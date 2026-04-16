@@ -15,18 +15,21 @@ declare module "react" {
 }
 
 interface GoabPublicFormSummaryProps extends DataAttributes {
-  /** Sets the heading text displayed above the form summary content. */
   heading?: string;
 }
 
-/** Container for form inputs and validation. */
 export function GoabPublicFormSummary({
   heading = "",
   ...rest
 }: GoabPublicFormSummaryProps) {
-  const _props = transformProps<WCProps>({ heading, ...rest }, lowercase);
+  const _props = transformProps<WCProps>(
+    { heading, ...rest },
+    lowercase
+  );
 
-  return <goa-public-form-summary {..._props} />;
+  return (
+    <goa-public-form-summary {..._props} />
+  );
 }
 
 export default GoabPublicFormSummary;

@@ -15,17 +15,11 @@ import { ControlValueAccessor } from "@angular/forms";
   standalone: true,
   template: ``, //** IMPLEMENT IN SUBCLASS
 })
-/** Provides shared margin and test id inputs for Angular GoA wrapper components. */
 export abstract class GoabBaseComponent {
-  /** Sets the top margin spacing token. */
   @Input() mt?: Spacing;
-  /** Sets the bottom margin spacing token. */
   @Input() mb?: Spacing;
-  /** Sets the left margin spacing token. */
   @Input() ml?: Spacing;
-  /** Sets the right margin spacing token. */
   @Input() mr?: Spacing;
-  /** Sets the data-testid attribute for automated testing. */
   @Input() testId?: string;
 }
 
@@ -84,16 +78,12 @@ export abstract class GoabControlValueAccessor
   extends GoabBaseComponent
   implements ControlValueAccessor
 {
-  /** Sets the id attribute of the underlying web component. */
   @Input() id?: string;
   // supports disabled="true" instead of [disabled]="true"
-  /** Sets the disabled state for the control. */
   @Input({ transform: booleanAttribute }) public disabled?: boolean;
   // supports error="true" instead of [error]="true"
-  /** Sets the error state for the control. */
   @Input({ transform: booleanAttribute }) public error?: boolean;
   // this should be unknown (not string) as it might be an integer or a date or a boolean
-  /** Sets the control value used by Angular forms and one-way binding. */
   @Input() value?: unknown | null | undefined;
 
   // implement ControlValueAccessor

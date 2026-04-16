@@ -1,28 +1,35 @@
-<svelte:options customElement={{
-  tag: "goa-temp-notification-ctrl",
-  props: {
-    vPosition: { type: "String", attribute: "vertical-position" },
-    hPosition: { type: "String", attribute: "horizontal-position" },
-    testid: { type: "String", attribute: "testid" },
-  }
-}}
+<svelte:options
+  customElement={{
+    tag: "goa-temp-notification-ctrl",
+    props: {
+      vPosition: { type: "String", attribute: "vertical-position" },
+      hPosition: { type: "String", attribute: "horizontal-position" },
+      testid: { type: "String", attribute: "testid" },
+    },
+  }}
 />
 
 <script lang="ts" context="module">
-  export type GoabTemporaryNotificationType = "basic" | "success" | "failure" | "indeterminate" | "progress";
+  export type GoabTemporaryNotificationType =
+    | "basic"
+    | "success"
+    | "failure"
+    | "indeterminate"
+    | "progress";
   export type GoabNotificationDuration = "long" | "medium" | "short" | number;
 
   export type GoabNotification = {
     uuid: string;
     message: string;
-    type: GoabTemporaryNotificationType
+    type: GoabTemporaryNotificationType;
     cancelUUID?: string;
     duration?: GoabNotificationDuration;
     actionText?: string;
     action?: () => void;
     visible: boolean;
     testId?: string;
-  }
+    progress?: number;
+  };
 </script>
 
 <script lang="ts">
@@ -53,7 +60,9 @@
           dismissNotification(data as string);
           break;
         case "goa:temp-notification:progress":
-          handleNotificationProgress(data as { uuid: string, progress: number });
+          handleNotificationProgress(
+            data as { uuid: string; progress: number },
+          );
           break;
       }
     });
@@ -82,7 +91,10 @@
     // dismiss from queue first to prevent missing the notification if it gets dequeued
     for (const n of _notificationQueue) {
       if (n.uuid === uuid) {
-        _notificationQueue = [..._notificationQueue.slice(0, _notificationQueue.indexOf(n)), ..._notificationQueue.slice(_notificationQueue.indexOf(n) + 1)];
+        _notificationQueue = [
+          ..._notificationQueue.slice(0, _notificationQueue.indexOf(n)),
+          ..._notificationQueue.slice(_notificationQueue.indexOf(n) + 1),
+        ];
         return;
       }
     }
@@ -91,7 +103,10 @@
     }
   }
 
-  function handleNotificationProgress(detail: { uuid: string, progress: number }) {
+  function handleNotificationProgress(detail: {
+    uuid: string;
+    progress: number;
+  }) {
     const { uuid, progress } = detail;
 
     // progress is for currently shown notification
@@ -107,7 +122,10 @@
         if (n.uuid === uuid) {
           n.progress = progress;
           if (progress >= 100) {
-            _notificationQueue = [..._notificationQueue.slice(0, index), ..._notificationQueue.slice(index + 1)];
+            _notificationQueue = [
+              ..._notificationQueue.slice(0, index),
+              ..._notificationQueue.slice(index + 1),
+            ];
           }
           break;
         }
@@ -177,14 +195,13 @@
       // allow setting of visibility to trigger css animation
       setTimeout(() => {
         _notification.visible = true;
-      }, 10)
+      }, 10);
 
       if (_notification.duration) {
         removeCurrentNotification(getDuration(_notification.duration));
       }
     }, 200);
   }
-
 </script>
 
 <div
@@ -244,8 +261,15 @@
   }
 
   .pos-center {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    align-items: center;
+    padding: 0 var(--goa-space-m);
+    pointer-events: none;
+  }
+
+  .pos-center :global(*) {
+    pointer-events: auto;
   }
 
   .pos-right {

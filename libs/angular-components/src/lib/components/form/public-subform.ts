@@ -27,18 +27,12 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Container for form inputs and validation. */
 export class GoabPublicSubform extends GoabBaseComponent {
-  /** Sets the id of the subform. */
   @Input() id?: string = "";
-  /** Sets the name identifier for the subform. */
   @Input() name?: string = "";
-  /** Sets the text for the continue button. */
   @Input() continueMsg?: string = "";
 
-  /** Emits when the subform is initialized. */
   @Output() onInit = new EventEmitter<Event>();
-  /** Emits when the subform state changes. */
   @Output() onStateChange = new EventEmitter<Event>();
 
   _onInit(e: Event) {

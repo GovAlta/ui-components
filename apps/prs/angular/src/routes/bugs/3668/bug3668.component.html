@@ -1,0 +1,88 @@
+<div>
+  <goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+
+  <h1>3668 - Temporary notification refinements</h1>
+  <p>
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3668"
+      target="_blank"
+      rel="noopener"
+    >
+      View on GitHub
+    </a>
+  </p>
+  <p>
+    1. Indeterminate and progress variants should not have a dark grey border, and should
+    have a raised-heavy shadow. 2. Action button should be a tertiary button. 3. Below
+    360px, message and action button stack vertically.
+  </p>
+
+  <h2>Test 1: Indeterminate and progress variants (border + shadow)</h2>
+  <p>
+    Click each to trigger. Inspect the notification surface. Indeterminate and progress
+    should NOT have a dark grey border and SHOULD have a raised-heavy shadow.
+  </p>
+  <goab-block gap="s" direction="column" mb="l">
+    <goab-button type="secondary" (onClick)="showBasic()">
+      Basic (reference)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="showSuccess()">
+      Success (reference)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="showFailure()">
+      Failure (reference)
+    </goab-button>
+    <goab-button (onClick)="showIndeterminate()">Indeterminate</goab-button>
+    <goab-button (onClick)="showProgress()">Progress</goab-button>
+  </goab-block>
+
+  <h2>Test 2: Action button style</h2>
+  <p>The action button should render as a tertiary button.</p>
+  <goab-button (onClick)="showWithAction()">Show with action button</goab-button>
+
+  <h2>Test 3: Stacking on mobile</h2>
+  <p>
+    Resize to mobile width and trigger a notification with an action. Message and action
+    button should stack vertically with button right-aligned.
+  </p>
+  <goab-block gap="s" direction="column" mb="l">
+    <goab-button (onClick)="showWithAction()">
+      Show with action (then resize to mobile)
+    </goab-button>
+    <goab-button type="secondary" (onClick)="showLongContent()">
+      Show with long content + action
+    </goab-button>
+  </goab-block>
+
+  <h2>Test 4: Centered overlay does not block underlying UI</h2>
+  <p>
+    Click to show a notification, then try clicking the fixed "Underlying target" button
+    at the bottom-right. The click count should increase even while the notification is
+    showing.
+  </p>
+  <goab-button (onClick)="showControllerOverlayIssue()">
+    Show centered notification
+  </goab-button>
+  <goab-button type="secondary" (onClick)="resetUnderlyingTargetClicks()">
+    Reset target count
+  </goab-button>
+  <p>Underlying target clicks: {{ underlyingTargetClicks }}</p>
+</div>
+
+<button
+  type="button"
+  (click)="incrementUnderlyingTargetClicks()"
+  style="
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #666;
+    border-radius: 0.5rem;
+    background: #fff;
+    color: #222;
+    font: inherit;
+  "
+>
+  Underlying target
+</button>

@@ -18,23 +18,13 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabSideMenuHeadingProps {
-  /** Icon displayed before the heading text. */
-  icon?: GoabIconType;
-  /** Content rendered in the meta slot, displayed alongside the heading. */
   meta?: ReactNode;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** The heading text or content rendered inside the side menu heading. */
+  icon?: GoabIconType;
   children?: ReactNode;
 }
 
-/** Section heading in side menu. */
-export function GoabSideMenuHeading({
-  meta,
-  testId,
-  icon,
-  children,
-}: GoabSideMenuHeadingProps) {
+export function GoabSideMenuHeading({ meta, testId, icon, children }: GoabSideMenuHeadingProps) {
   return (
     <goa-side-menu-heading icon={icon} testid={testId} version="2">
       {children}

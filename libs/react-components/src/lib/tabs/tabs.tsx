@@ -27,23 +27,16 @@ declare module "react" {
 }
 
 export interface GoabTabsProps {
-  /** The initially active tab (1-based index). If not set, the first tab is active. */
   initialTab?: number;
-  /** Content rendered inside the tabs container, typically GoabTab components. */
   children?: React.ReactNode;
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Visual style variant. "segmented" shows pill-style tabs with animation. @default "default" */
   variant?: GoabTabsVariant;
-  /** Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. @default "auto" */
+  /** Tab layout orientation. "auto" stacks vertically on mobile (default), "horizontal" keeps horizontal on all screen sizes. */
   orientation?: GoabTabsOrientation;
-  /** Controls URL navigation mode on tab change. @default "hash" */
   navigation?: GoabTabsNavigation;
-  /** Callback fired when the active tab changes. */
   onChange?: (detail: GoabTabsOnChangeDetail) => void;
 }
 
-/** Let users navigate between related sections of content, displaying one section at a time. */
 export function GoabTabs({
   initialTab,
   children,

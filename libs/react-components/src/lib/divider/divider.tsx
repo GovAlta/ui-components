@@ -13,11 +13,9 @@ declare module "react" {
 }
 
 export interface GoabDividerProps extends Margins {
-  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 
-/** Indicate a separation of layout, or to distinguish large chunks of information on a page. */
 export function GoabDivider(props: GoabDividerProps) {
   return (
     <goa-divider

@@ -32,13 +32,10 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-/** Provides a visual representation of a form through a series of steps. */
 export class GoabFormStepper extends GoabBaseComponent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
-  /** The current step state value (1-based index). Leaving it blank (-1) will allow any step to be accessed. @default -1 */
   @Input() step?: number = -1;
-  /** Emits when the form stepper step changes. Emits the new step as GoabFormStepperOnChangeDetail. */
   @Output() onChange = new EventEmitter<GoabFormStepperOnChangeDetail>();
 
   isReady = false;
