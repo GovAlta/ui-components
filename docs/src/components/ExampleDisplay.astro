@@ -20,19 +20,39 @@ const { data } = example;
 
 // Read code files at build time
 const code = await getExampleCode(example.slug);
+const hasCode = !!(code.react || code.angular || code.webComponents);
 ---
 
 <div class="example-display">
-  <ExamplePreview
-    client:load
-    title={data.title}
-    slug={example.slug}
-    code={code}
-    figmaUrl={data.figmaUrl}
-    fullWidth={data.fullWidth}
-    previewStyle={data.previewStyle}
-    titleSize={titleSize}
-  />
+  {hasCode ? (
+    <ExamplePreview
+      client:load
+      title={data.title}
+      slug={example.slug}
+      code={code}
+      figmaUrl={data.figmaUrl}
+      fullWidth={data.fullWidth}
+      previewStyle={data.previewStyle}
+      titleSize={titleSize}
+    />
+  ) : (
+    <!-- Examples without code files (e.g. product-scale examples like Workspace) show as a linked card -->
+    <div class="example-card">
+      <div class="example-card-header">
+        <h3 class="example-title">{data.title}</h3>
+        <a href={`/examples/${example.slug}`} aria-label={`View ${data.title} example`}>
+          <goa-icon type="link" size="small" />
+        </a>
+      </div>
+      {data.previewImage && (
+        <a href={`/examples/${example.slug}`} class="example-card-image">
+          <img src={data.previewImage} alt={data.title} />
+        </a>
+      )}
+      {data.description && <p class="example-card-description" set:html={data.description} />}
+      <goa-link><a href={`/examples/${example.slug}`}>View example</a></goa-link>
+    </div>
+  )}
 
   {/* Accessibility notes */}
   {data.accessibilityNotes && (
@@ -63,6 +83,36 @@ const code = await getExampleCode(example.slug);
   .example-meta p {
     margin: 0;
     color: var(--goa-color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .example-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--goa-space-m, 1rem);
+  }
+
+  .example-card-header .example-title {
+    font: var(--goa-typography-heading-s);
+    margin: 0;
+  }
+
+  .example-card-image {
+    display: block;
+    margin-bottom: var(--goa-space-m, 1rem);
+  }
+
+  .example-card-image img {
+    width: 100%;
+    border-radius: var(--goa-border-radius-m);
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-card-description {
+    color: var(--goa-color-text-secondary, #666);
+    font: var(--goa-typography-body-m);
+    margin: 0 0 var(--goa-space-m, 1rem);
     line-height: 1.5;
   }
 </style>
