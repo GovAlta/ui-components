@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -30,14 +31,15 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Arrange a number of components into a responsive grid pattern. */
 export class GoabGrid extends GoabBaseComponent implements OnInit {
-  isReady = false;
-  @Input({ required: true }) minChildWidth!: string;
-  @Input() gap?: Spacing;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
+  /** @required Minimum width of the child elements. */
+  @Input({ required: true }) minChildWidth!: string;
+  /** Gap between child items. */
+  @Input() gap?: Spacing;
 
   ngOnInit(): void {
     setTimeout(() => {

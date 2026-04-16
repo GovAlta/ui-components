@@ -6,12 +6,24 @@ interface WCProps {
   testid?: string;
 }
 
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-app-footer-meta-section": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
 /* eslint-disable-next-line */
 export interface GoabAppFooterMetaSectionProps extends DataAttributes {
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Anchor link elements rendered as footer meta navigation links. */
   children?: ReactNode;
 }
 
+/** Copyright and legal links in footer. */
 export function GoabAppFooterMetaSection({
   children,
   ...rest

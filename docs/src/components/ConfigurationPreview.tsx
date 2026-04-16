@@ -63,7 +63,12 @@ export function ConfigurationPreview({
 
       // Sanitize HTML and add version="2" to all goa- components
       const sanitizedHtml = DOMPurify.sanitize(rawCode, DOMPURIFY_CONFIG);
-      const html = sanitizedHtml.replace(/<goa-([a-z-]+)/g, '<goa-$1 version="2"').trim();
+      const html = sanitizedHtml
+        .replace(
+          /<goa-(?!microsite-header)([a-z-]+)(?![^>]*version=)/g,
+          '<goa-$1 version="2"',
+        )
+        .trim();
 
       previewRef.current.innerHTML = html;
 
@@ -125,6 +130,7 @@ export function ConfigurationPreview({
             value={selectedConfigId}
             version="2"
             size="compact"
+            maxheight="600px"
             ref={dropdownRef}
           >
             {configurations.configurations.map((config) => (
@@ -236,6 +242,7 @@ export function ConfigurationPreview({
           margin-bottom: var(--goa-space-m, 1rem);
           position: relative;
           z-index: 2; /* Allow dropdowns to appear above code snippets */
+          overflow: visible;
         }
 
         .configuration-preview .code-area {

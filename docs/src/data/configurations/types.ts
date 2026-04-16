@@ -6,7 +6,7 @@
  * can browse via dropdown selector.
  */
 
-export type Framework = 'react' | 'angular' | 'webComponents';
+export type Framework = "react" | "angular" | "webComponents";
 
 /**
  * A single configuration for a component.

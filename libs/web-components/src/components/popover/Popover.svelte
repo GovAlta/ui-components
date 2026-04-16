@@ -24,7 +24,7 @@
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "popover";
   /** Provides control to where the popover content is positioned. */
-  export let position: "above" | "below" | "auto" = "auto";
+  export let position: "above" | "below" | "right" | "auto" = "auto";
   /** Sets the maximum width of the popover container. */
   export let maxwidth: string | "none" = "320px";
   /** Sets the minimum width of the popover container. */
@@ -67,6 +67,10 @@
   // Private
   let _rootEl: HTMLElement;
   let _popoverEl: HTMLElement;
+  const _needsManualPositioning =
+    typeof document !== "undefined" &&
+    !("anchorName" in document.documentElement.style);
+  let _positionRafId: number | null = null;
 
   // Reactive
   let _targetEl: HTMLElement;
@@ -122,12 +126,66 @@
   });
 
   onDestroy(() => {
+    if (_needsManualPositioning || _positionRafId) {
+      stopManualPositioning();
+    }
     window.removeEventListener("resize", updateAutoPosition);
     // true was passed when the listener was added, so it's necesary to be passed here as well
     window.removeEventListener("popstate", handleUrlChange, true);
   });
 
   // Functions
+
+  function updatePopoverPosition() {
+    if (!_isOpen || !_targetEl || !_popoverEl) return;
+
+    const targetRect = _targetEl.getBoundingClientRect();
+    const xOffset = hoffset ? parseFloat(hoffset) : 0;
+    const yOffset = voffset ? parseFloat(voffset) : 3;
+
+    // Recalculate auto position based on current viewport space
+    if (position === "auto") {
+      const popoverRect = _popoverEl.getBoundingClientRect();
+      const spaceAbove = targetRect.top;
+      const spaceBelow = window.innerHeight - targetRect.bottom;
+
+      _autoPosition =
+        spaceBelow < popoverRect.height && spaceAbove > spaceBelow
+          ? "above"
+          : "below";
+    }
+
+    const isAbove =
+      position === "above" ||
+      (position === "auto" && _autoPosition === "above");
+
+    if (isAbove) {
+      _popoverEl.style.top = `${targetRect.top - yOffset}px`;
+      _popoverEl.style.left = `${targetRect.left + xOffset}px`;
+      _popoverEl.style.transform = "translateY(-100%)";
+    } else {
+      _popoverEl.style.top = `${targetRect.bottom + yOffset}px`;
+      _popoverEl.style.left = `${targetRect.left + xOffset}px`;
+      _popoverEl.style.transform = "";
+    }
+  }
+
+  function startManualPositioning() {
+    if (!_needsManualPositioning) return;
+
+    const loop = () => {
+      updatePopoverPosition();
+      _positionRafId = requestAnimationFrame(loop);
+    };
+    _positionRafId = requestAnimationFrame(loop);
+  }
+
+  function stopManualPositioning() {
+    if (_positionRafId !== null) {
+      cancelAnimationFrame(_positionRafId);
+      _positionRafId = null;
+    }
+  }
 
   function isPopoverOpen(): boolean {
     try {
@@ -188,8 +246,7 @@
     }
   }
 
-  function handleNativeToggle(e: Event) {
-    const toggleEvent = e as Event & { newState?: "open" | "closed" };
+  function handleNativeToggle(toggleEvent: ToggleEvent) {
     if (toggleEvent.newState === "open") {
       _isOpen = true;
     } else if (toggleEvent.newState === "closed") {
@@ -203,17 +260,32 @@
     // Dispatch _open/_close events for consumer components
     // (MenuButton, AppHeader, AppHeaderMenu, Dropdown)
     if (_isOpen) {
-      dispatch(_rootEl, "_open");
+      dispatch(_rootEl, "_open", {}, { bubbles: true });
       requestAnimationFrame(updateAutoPosition); // same vs await tick(), make sure popover element is fully rendered before we measure its dimension
+      if (_needsManualPositioning) {
+        startManualPositioning();
+      }
     } else {
-      _targetEl.focus();
-      dispatch(_rootEl, "_close");
+      if (_needsManualPositioning || _positionRafId) {
+        stopManualPositioning();
+      }
+      _targetEl?.focus();
+      dispatch(_rootEl, "_close", {}, { bubbles: true });
     }
   }
 
   function closePopover() {
     if (_isOpen) {
       _popoverEl?.hidePopover(); // browser will fire and trigger handleNativeToggle
+      // If the browser doesn't support the API we have to trigger the toggle event manually.
+      if (_needsManualPositioning) {
+        const event = new ToggleEvent("toggle", {
+          bubbles: true,
+          newState: "closed",
+          oldState: "open",
+        });
+        handleNativeToggle(event); // in case the browser doesn't fire toggle event, we need to manually update the state
+      }
     }
   }
 
@@ -227,6 +299,11 @@
       _popoverEl.hidePopover();
       _isOpen = false;
     } else {
+      // If the Popover API is not supported, we need to manually close other
+      // popovers before opening a new one.
+      if (_needsManualPositioning) {
+        dispatch(document.body, "goa:closePopover", { target: _targetEl });
+      }
       _popoverEl.showPopover();
       _isOpen = true;
       requestAnimationFrame(updateAutoPosition);
@@ -293,10 +370,15 @@
       (position === "auto" && _autoPosition === "above")}
     class:position-below={position === "below" ||
       (position === "auto" && _autoPosition === "below")}
+    class:position-right={position === "right"}
+    class:use-anchor-based-positioning={!_needsManualPositioning}
     style={styles(
-      style("width", width),
+      style("width", position !== "right" ? width : undefined),
       style("min-width", minwidth),
-      style("max-width", width ? `max(${width}, ${maxwidth})` : maxwidth),
+      style(
+        "max-width",
+        position !== "right" && width ? `max(${width}, ${maxwidth})` : maxwidth,
+      ),
       style("padding", _padded ? "var(--goa-space-m)" : "0"),
     )}
   >
@@ -327,6 +409,7 @@
     padding: 0;
     background-color: transparent;
     width: inherit;
+    text-align: inherit;
     anchor-name: --goa-popover-target;
   }
 
@@ -349,7 +432,6 @@
     filter: var(--goa-popover-shadow, none);
     border: var(--goa-popover-border, none);
     margin: 0;
-
     position-anchor: --goa-popover-target;
     inset-block-start: anchor(bottom);
     inset-inline-start: anchor(left);
@@ -358,7 +440,11 @@
     translate: var(--popover-translate-x) var(--popover-translate-y);
   }
 
-  .popover-content.position-above {
+  .popover-content.use-anchor-based-positioning {
+    inset-block-start: anchor(top);
+    --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
+  }
+  .popover-content.use-anchor-based-positioning.position-above {
     inset-block-start: anchor(top);
     --popover-translate-y: calc(-100% - var(--offset-bottom, 3px));
     position-try-fallbacks: none;
@@ -367,6 +453,15 @@
   .popover-content.position-below {
     inset-block-start: anchor(bottom);
     --popover-translate-y: var(--offset-top, 3px);
+  }
+
+  .popover-content.position-right {
+    inset-block-start: unset;
+    inset-block-end: max(8px, anchor(bottom));
+    inset-inline-start: anchor(right);
+    --popover-translate-x: var(--offset-left, 8px);
+    --popover-translate-y: var(--offset-bottom, 0px);
+    position-try-fallbacks: none;
   }
 
   :global(::slotted(ul)) {

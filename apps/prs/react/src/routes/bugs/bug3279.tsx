@@ -4,12 +4,10 @@ import {
   GoabContainer,
   GoabDetails,
   GoabLink,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
 } from "@abgov/react-components";
-import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
-} from "@abgov/react-components/experimental";
 
 export function Bug3279Route() {
   const [open, setOpen] = useState(true);
@@ -26,7 +24,7 @@ export function Bug3279Route() {
         Work Side Menu component.
       </p>
 
-      <GoabxWorkSideMenu
+      <GoabWorkSideMenu
         heading="Bug 3279"
         url="#"
         userName="Jane Doe"
@@ -35,26 +33,26 @@ export function Bug3279Route() {
         onToggle={onToggle}
         primaryContent={
           <>
-            <GoabxWorkSideMenuItem url="#primary-1" label="Primary item 1" icon="home" />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem url="#primary-1" label="Primary item 1" icon="home" />
+            <GoabWorkSideMenuItem
               url="#primary-2"
               label="Primary item 2"
               badge="2"
               icon="bookmark"
             />
-            <GoabxWorkSideMenuGroup heading="Primary group" icon="folder">
-              <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuGroup heading="Primary group" icon="folder">
+              <GoabWorkSideMenuItem
                 url="#primary-group-1"
                 label="Grouped item 1"
                 icon="document"
               />
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#primary-group-2"
                 label="Grouped item 2"
                 icon="document-text"
               />
-            </GoabxWorkSideMenuGroup>
-            <GoabxWorkSideMenuItem url="#primary-3" label="Primary item 3" icon="list" />
+            </GoabWorkSideMenuGroup>
+            <GoabWorkSideMenuItem url="#primary-3" label="Primary item 3" icon="list" />
             <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
               <GoabContainer type="non-interactive" padding="compact">
                 <GoabButton
@@ -76,12 +74,12 @@ export function Bug3279Route() {
         }
         secondaryContent={
           <>
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               url="#secondary-1"
               label="Secondary item 1"
               icon="analytics"
             />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem
               url="#secondary-2"
               label="Secondary item 2"
               icon="settings"
@@ -90,17 +88,17 @@ export function Bug3279Route() {
         }
         accountContent={
           <>
-            <GoabxWorkSideMenuItem url="#account" label="Account" icon="person" />
-            <GoabxWorkSideMenuItem
+            <GoabWorkSideMenuItem url="#account" label="Account" icon="person" />
+            <GoabWorkSideMenuItem
               url="#signout"
               label="Sign out"
               type="emergency"
               icon="log-out"
             />
-            <GoabxWorkSideMenuItem url="#item1" label="item1" icon="person" />
-            <GoabxWorkSideMenuItem url="#item2" label="item2" icon="person" />
-            <GoabxWorkSideMenuItem url="#item3" label="item3" icon="person" />
-            <GoabxWorkSideMenuItem url="#item4" label="item4" icon="person" />
+            <GoabWorkSideMenuItem url="#item1" label="item1" icon="person" />
+            <GoabWorkSideMenuItem url="#item2" label="item2" icon="person" />
+            <GoabWorkSideMenuItem url="#item3" label="item3" icon="person" />
+            <GoabWorkSideMenuItem url="#item4" label="item4" icon="person" />
           </>
         }
       />

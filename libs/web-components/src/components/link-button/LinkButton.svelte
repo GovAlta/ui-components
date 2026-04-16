@@ -1,11 +1,13 @@
-<svelte:options customElement={{
-  tag: "goa-link-button",
-  props: {
-    action: { type: "String", attribute: "action", reflect: true},
-    actionArg: { type: "String", attribute: "action-arg", reflect: true},
-    actionArgs: { type: "Object", attribute: "action-args", reflect: true},
-  }
-}}/>
+<svelte:options
+  customElement={{
+    tag: "goa-link-button",
+    props: {
+      action: { type: "String", attribute: "action", reflect: true },
+      actionArg: { type: "String", attribute: "action-arg", reflect: true },
+      actionArgs: { type: "Object", attribute: "action-args", reflect: true },
+    },
+  }}
+/>
 
 <script lang="ts">
   import { calculateMargin, Spacing } from "../../common/styling";
@@ -18,6 +20,8 @@
   export let leadingicon: GoAIconType;
   /** Icon displayed after the button text. */
   export let trailingicon: GoAIconType;
+  export let disabled: boolean = false;
+  export let testid: string = "";
   /** Top margin. */
   export let mt: Spacing = null;
   /** Right margin. */
@@ -36,9 +40,12 @@
   let _el: HTMLButtonElement;
 
   function onClick(e: Event) {
-    dispatch(_el, "_click", null, { bubbles: true })
+    if (disabled) return;
+    dispatch(_el, "_click", null, { bubbles: true });
     if (action) {
-      dispatch(e.target as Element, action, actionArg || actionArgs, { bubbles: true });
+      dispatch(e.target as Element, action, actionArg || actionArgs, {
+        bubbles: true,
+      });
     }
     e.stopPropagation();
   }
@@ -49,6 +56,9 @@
   class="link-button"
   class:interactive={color === "interactive"}
   class:light={color === "light"}
+  class:disabled={disabled}
+  disabled={disabled || undefined}
+  data-testid={testid || null}
   style={calculateMargin(mt, mr, mb, ml)}
   on:click={onClick}
 >
@@ -75,7 +85,8 @@
   }
   button.interactive:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
   }
 
   button.light {
@@ -83,7 +94,13 @@
   }
   button.light:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 var(--goa-border-width-l) var(--goa-color-interactive-focus);
+    box-shadow: 0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus);
+  }
+
+  button.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
   }
 </style>
-

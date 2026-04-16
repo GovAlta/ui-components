@@ -1,7 +1,6 @@
 {
   "componentSlug": "form-item",
   "extractedFrom": "libs/web-components/src/components/form-item/FormItem.svelte",
-  "extractedAt": "2026-02-04T08:10:50.407Z",
   "props": [
     {
       "name": "mt",

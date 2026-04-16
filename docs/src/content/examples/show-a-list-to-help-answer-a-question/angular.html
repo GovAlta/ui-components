@@ -1,13 +1,13 @@
 <form [formGroup]="form">
-  <goabx-form-item
+  <goab-form-item
     label="Do you have additional education expenses?"
     helpText="You can request funding for these now or at any time during your program."
     mb="m">
-    <goabx-radio-group name="additional" (onChange)="onRadioChange($event)">
-      <goabx-radio-item label="Yes" value="yes" name="additional"></goabx-radio-item>
-      <goabx-radio-item label="No" value="no" name="additional"></goabx-radio-item>
-    </goabx-radio-group>
-  </goabx-form-item>
+    <goab-radio-group name="additional" (onChange)="onRadioChange($event)">
+      <goab-radio-item label="Yes" value="yes" name="additional"></goab-radio-item>
+      <goab-radio-item label="No" value="no" name="additional"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
 
   <goab-details heading="What are additional education expenses?">
     <goab-block gap="m" mt="m">

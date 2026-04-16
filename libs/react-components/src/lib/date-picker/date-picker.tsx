@@ -1,8 +1,10 @@
 import { useEffect, useRef, type JSX } from "react";
 import {
+  CalendarDate,
   GoabDatePickerInputType,
   GoabDatePickerOnChangeDetail,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -17,25 +19,47 @@ interface WCProps extends Margins {
   disabled?: string;
   testid?: string;
   width?: string;
+  version?: string;
+}
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-date-picker": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
+    }
+  }
 }
 
 export interface GoabDatePickerProps extends Margins, DataAttributes {
-  name?: string;
-  value?: Date | string | undefined;
-  error?: boolean;
-  min?: Date | string;
-  max?: Date | string;
+  /** Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. @default "calendar" */
   type?: GoabDatePickerInputType;
+  /** Name of the date field. */
+  name?: string;
+  /** Value of the calendar date, as a Date object or an ISO date string (yyyy-mm-dd). */
+  value?: Date | string | undefined;
+  /** Sets the input to an error state. */
+  error?: boolean;
+  /** Minimum date value allowed. */
+  min?: Date | string;
+  /** Maximum date value allowed. */
+  max?: Date | string;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @deprecated This property has no effect and will be removed in a future version. */
   relative?: boolean;
+  /** Disables the date picker. */
   disabled?: boolean;
+  /** Sets the width of the date picker input. */
   width?: string;
+  /** Callback fired when the selected date changes. */
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
+/** Lets users select a date through a calendar without the need to manually type it in a field. */
 export function GoabDatePicker({
   value,
   error,
@@ -52,7 +76,9 @@ export function GoabDatePicker({
 
   useEffect(() => {
     if (value && typeof value !== "string") {
-      console.warn("Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`")
+      console.warn(
+        "Using a `Date` type for value is deprecated. Instead use a string of the format `yyyy-mm-dd`",
+      );
     }
   }, []);
 
@@ -82,7 +108,7 @@ export function GoabDatePicker({
     if (!val) return "";
 
     if (val instanceof Date) {
-      return val.toISOString();
+      return new CalendarDate(val).toString();
     }
 
     return val;
@@ -97,6 +123,7 @@ export function GoabDatePicker({
       min={formatValue(min) || undefined}
       max={formatValue(max) || undefined}
       relative={relative ? "true" : undefined}
+      version="2"
       {..._props}
     />
   );

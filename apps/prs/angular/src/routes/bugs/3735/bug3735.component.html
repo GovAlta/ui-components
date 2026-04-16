@@ -1,0 +1,42 @@
+<goab-text tag="h1" mb="m">Bug 3735 - Work Side Menu tooltip fixes</goab-text>
+<goab-text mb="xl">
+  Hover the collapsed menu items and confirm that:
+</goab-text>
+
+<ul>
+  <li>The items are aligned horizontally and vertically.</li>
+  <li>A tooltip appears for the "Expand menu" item.</li>
+</ul>
+
+<div class="menu-shell">
+  <goab-work-side-menu
+    heading="Offset tooltip demo"
+    url="/bugs/3735"
+    [open]="false"
+    (onNavigate)="handleNavigate($event)"
+    [primaryContent]="primaryContent"
+    [secondaryContent]="emptySecondary"
+    [accountContent]="emptyAccount"
+  ></goab-work-side-menu>
+</div>
+
+<ng-template #primaryContent>
+  <goab-work-side-menu-item
+    icon="document-text"
+    label="Get started"
+    url="/bugs/3735"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    icon="list"
+    label="Bug list"
+    url="/bugs/3735"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    icon="settings"
+    label="Admin settings"
+    url="/bugs/3735"
+  ></goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #emptySecondary></ng-template>
+<ng-template #emptyAccount></ng-template>

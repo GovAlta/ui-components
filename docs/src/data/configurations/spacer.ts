@@ -4,18 +4,18 @@
  * Spacer adds consistent vertical or horizontal space.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const spacerConfigurations: ComponentConfigurations = {
-  componentSlug: 'spacer',
-  componentName: 'Spacer',
-  defaultConfigurationId: 'basic',
+  componentSlug: "spacer",
+  componentName: "Spacer",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic spacer',
-      description: 'Vertical space between elements',
+      id: "basic",
+      name: "Basic spacer",
+      description: "Vertical space between elements",
       code: {
         react: `<GoabText mt="none" mb="none">Content above</GoabText>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -41,9 +41,9 @@ export const spacerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'vertical-sizes',
-      name: 'Vertical sizes',
-      description: 'Different vertical spacing amounts',
+      id: "vertical-sizes",
+      name: "Vertical sizes",
+      description: "Different vertical spacing amounts",
       code: {
         react: `<GoabText mt="none" mb="none">S space</GoabText>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -51,12 +51,14 @@ export const spacerConfigurations: ComponentConfigurations = {
   <GoabSpacer vSpacing="s" />
   <GoabIcon type="arrow-up" size="1" />
 </div>
+<GoabDivider mt="l" mb="l" />
 <GoabText mt="none" mb="none">L space</GoabText>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
   <GoabIcon type="arrow-down" size="1" />
   <GoabSpacer vSpacing="l" />
   <GoabIcon type="arrow-up" size="1" />
 </div>
+<GoabDivider mt="l" mb="l" />
 <GoabText mt="none" mb="none">2XL space</GoabText>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
   <GoabIcon type="arrow-down" size="1" />
@@ -69,12 +71,14 @@ export const spacerConfigurations: ComponentConfigurations = {
   <goab-spacer vSpacing="s"></goab-spacer>
   <goab-icon type="arrow-up" size="1"></goab-icon>
 </div>
+<goab-divider mt="l" mb="l"></goab-divider>
 <goab-text mt="none" mb="none">L space</goab-text>
 <div style="display: flex; flex-direction: column; align-items: flex-start">
   <goab-icon type="arrow-down" size="1"></goab-icon>
   <goab-spacer vSpacing="l"></goab-spacer>
   <goab-icon type="arrow-up" size="1"></goab-icon>
 </div>
+<goab-divider mt="l" mb="l"></goab-divider>
 <goab-text mt="none" mb="none">2XL space</goab-text>
 <div style="display: flex; flex-direction: column; align-items: flex-start">
   <goab-icon type="arrow-down" size="1"></goab-icon>
@@ -87,12 +91,14 @@ export const spacerConfigurations: ComponentConfigurations = {
   <goa-spacer vspacing="s"></goa-spacer>
   <goa-icon type="arrow-up" size="1"></goa-icon>
 </div>
+<goa-divider mt="l" mb="l"></goa-divider>
 <goa-text mt="none" mb="none">L space</goa-text>
 <div style="display: flex; flex-direction: column; align-items: flex-start">
   <goa-icon type="arrow-down" size="1"></goa-icon>
   <goa-spacer vspacing="l"></goa-spacer>
   <goa-icon type="arrow-up" size="1"></goa-icon>
 </div>
+<goa-divider mt="l" mb="l"></goa-divider>
 <goa-text mt="none" mb="none">2XL space</goa-text>
 <div style="display: flex; flex-direction: column; align-items: flex-start">
   <goa-icon type="arrow-down" size="1"></goa-icon>
@@ -102,9 +108,9 @@ export const spacerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'horizontal',
-      name: 'Horizontal spacing',
-      description: 'Space between inline elements',
+      id: "horizontal",
+      name: "Horizontal spacing",
+      description: "Space between inline elements",
       code: {
         react: `<div style={{ display: 'flex', alignItems: 'center' }}>
   <GoabText mt="none" mb="none">Left</GoabText>
@@ -126,6 +132,34 @@ export const spacerConfigurations: ComponentConfigurations = {
   <goa-spacer hspacing="l"></goa-spacer>
   <goa-icon type="arrow-back" size="1"></goa-icon>
   <goa-text mt="none" mb="none">Right</goa-text>
+</div>`,
+      },
+    },
+    {
+      id: "fill",
+      name: "Fill available space",
+      description: "Horizontal spacer that fills remaining width",
+      code: {
+        react: `<div style={{ display: 'flex', alignItems: 'center' }}>
+  <GoabText mt="none" mb="none">Label</GoabText>
+  <GoabIcon type="arrow-forward" size="1" />
+  <GoabSpacer hSpacing="fill" />
+  <GoabIcon type="arrow-back" size="1" />
+  <GoabText mt="none" mb="none">Value</GoabText>
+</div>`,
+        angular: `<div style="display: flex; align-items: center">
+  <goab-text mt="none" mb="none">Label</goab-text>
+  <goab-icon type="arrow-forward" size="1"></goab-icon>
+  <goab-spacer hSpacing="fill"></goab-spacer>
+  <goab-icon type="arrow-back" size="1"></goab-icon>
+  <goab-text mt="none" mb="none">Value</goab-text>
+</div>`,
+        webComponents: `<div style="display: flex; align-items: center">
+  <goa-text mt="none" mb="none">Label</goa-text>
+  <goa-icon type="arrow-forward" size="1"></goa-icon>
+  <goa-spacer hspacing="fill"></goa-spacer>
+  <goa-icon type="arrow-back" size="1"></goa-icon>
+  <goa-text mt="none" mb="none">Value</goa-text>
 </div>`,
       },
     },

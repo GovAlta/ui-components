@@ -1,0 +1,333 @@
+---
+/**
+ * Foundations - Style guide - Iconography
+ *
+ * Iconography guidance and icon sizing references for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guide -> Iconography.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+
+const extendedIcons = [
+  "accessibility",
+  "add-circle",
+  "airplane",
+  "alarm",
+  "alert",
+  "american-football",
+  "analytics",
+  "aperture",
+  "apps",
+  "archive",
+  "arrow-back-circle",
+  "arrow-down-circle",
+  "arrow-forward-circle",
+  "arrow-redo",
+  "arrow-redo-circle",
+  "arrow-undo",
+  "arrow-up-circle",
+  "at",
+  "attach",
+  "bag",
+  "bag-handle",
+  "ban",
+  "bandage",
+  "bar-chart",
+  "barbell",
+  "basket",
+  "battery-dead",
+  "battery-full",
+  "battery-half",
+  "bed",
+  "beer",
+  "bicycle",
+  "bluetooth",
+  "boat",
+  "body",
+  "bookmarks",
+  "briefcase",
+  "browsers",
+  "brush",
+  "bug",
+  "bulb",
+  "bus",
+  "business",
+  "cafe",
+  "calculator",
+  "calendar",
+  "camera",
+  "car",
+  "car-sport",
+  "card",
+  "caret-down-circle",
+  "caret-up-circle",
+  "cart",
+  "chatbox",
+  "chatbox-ellipses",
+  "chatbubble",
+  "chatbubbles",
+  "checkbox",
+  "checkmark-circle",
+  "checkmark-done",
+  "chevron-back-circle",
+  "chevron-forward-circle",
+  "chevron-up-circle",
+  "close-circle",
+  "cloud-done",
+  "cloud-upload",
+  "cloudy",
+  "code-slash",
+  "color-palette",
+  "globe",
+  "link",
+  "locate",
+  "play-circle",
+  "time",
+] as const;
+---
+
+<DocumentationPageLayout
+  title="Iconography"
+  description="Iconography guidance and icon size tokens for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Iconography</goa-text>
+  <goa-text size="body-l" mt="none" mb="2xl">
+    Icons are simple graphic symbols used to support clarity and usability. They enhance
+    both visual design and functionality. Use icons to support meaning. Pair them with
+    text when clarity is required.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="style">Style</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Icons follow a simple, rounded style.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m"><strong>They use:</strong></goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Thin line strokes</li>
+      <li>Filled shapes</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Icons scale proportionally and integrate across different interface sizes.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m"
+    ><strong>The icon library includes:</strong></goa-text
+  >
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>Core icon set</li>
+      <li>Extended icon set</li>
+      <li>Logo icons</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="core-icon-set">Core icon set</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    The core icon set is the primary icon library in the Design System. Use it to maintain
+    visual consistency across digital products.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m"><strong>Categories include:</strong></goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>
+        Alert and messaging
+        <div style="margin-top: var(--goa-space-xs);">
+          <goa-icon type="information-circle" theme="outline" size="medium" mr="m"
+          ></goa-icon>
+          <goa-icon type="information-circle" theme="filled" size="medium" mr="m"
+          ></goa-icon>
+          <goa-icon type="help-circle" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="help-circle" theme="filled" size="medium"></goa-icon>
+        </div>
+      </li>
+      <li>
+        Basic
+        <div style="margin-top: var(--goa-space-xs);">
+          <goa-icon type="close" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="checkmark" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="add" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="remove" theme="outline" size="medium"></goa-icon>
+        </div>
+      </li>
+      <li>
+        Direction
+        <div style="margin-top: var(--goa-space-xs);">
+          <goa-icon type="chevron-down" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="chevron-up" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="arrow-down" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="arrow-up" theme="outline" size="medium"></goa-icon>
+        </div>
+      </li>
+      <li>
+        Interactions
+        <div style="margin-top: var(--goa-space-xs);">
+          <goa-icon type="menu" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="reload" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="search" theme="outline" size="medium"></goa-icon>
+        </div>
+      </li>
+      <li>
+        Accounts
+        <div style="margin-top: var(--goa-space-xs);">
+          <goa-icon type="person-circle" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="person-circle" theme="filled" size="medium" mr="m"></goa-icon>
+          <goa-icon type="settings" theme="outline" size="medium" mr="m"></goa-icon>
+          <goa-icon type="settings" theme="filled" size="medium"></goa-icon>
+        </div>
+      </li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Refer to the <a href="/tokens">tokens page</a> to explore available icons and properties.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="extended-icon-set">Extended icon set</h2>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <goa-link trailingicon="open">
+      <a href="https://ionic.io/ionicons" target="_blank" rel="noopener noreferrer"
+        >Ionicons</a
+      >
+    </goa-link>
+    is an open-source icon library used to extend available options. Use Ionicons when an appropriate
+    icon does not exist in the core set.
+  </goa-text>
+  <div class="extended-icon-grid">
+    {
+      extendedIcons.map((icon, index) => (
+        <div class="extended-icon-card" key={`extended-icon-${index}`}>
+          <goa-icon type={icon} theme="outline" size="medium" mr="m" />
+          <goa-icon type={icon} theme="filled" size="medium" />
+        </div>
+      ))
+    }
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="logo-icons">Logo icons</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    The
+    <goa-link trailingicon="open">
+      <a
+        href="https://www.figma.com/design/1xnHCsSgKHvkQEEDRvEa9y/%E2%9D%96-BETA-Styles-library?node-id=36-7&t=KGjinkfS0TaaADve-1"
+        target="_blank"
+        rel="noopener noreferrer">Figma styles library</a
+      >
+    </goa-link>
+    includes approved brand logos.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m"
+    ><strong>When using logo icons:</strong></goa-text
+  >
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>Follow the respective brand usage guidelines</li>
+      <li>Do not modify logos</li>
+      <li>Ensure proper spacing and contrast</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="icon-size">Icon size</h2>
+  <goa-text size="body-m" mt="none" mb="m">Use standard token-based sizes.</goa-text>
+  <goa-table version="2" width="100%">
+    <table width="100%">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Token</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Size 1</td><td><code>--goa-iconSize-1</code></td></tr>
+        <tr><td>Size 2</td><td><code>--goa-iconSize-2</code></td></tr>
+        <tr><td>Size 3</td><td><code>--goa-iconSize-3</code></td></tr>
+        <tr><td>Size 4</td><td><code>--goa-iconSize-4</code></td></tr>
+        <tr><td>Size 5</td><td><code>--goa-iconSize-5</code></td></tr>
+        <tr><td>Size 6</td><td><code>--goa-iconSize-6</code></td></tr>
+        <tr><td>Size xs</td><td><code>--goa-iconSize-xs</code></td></tr>
+        <tr><td>Size s</td><td><code>--goa-iconSize-s</code></td></tr>
+        <tr><td>Size m</td><td><code>--goa-iconSize-m</code></td></tr>
+        <tr><td>Size l</td><td><code>--goa-iconSize-l</code></td></tr>
+        <tr><td>Size xl</td><td><code>--goa-iconSize-xl</code></td></tr>
+      </tbody>
+    </table>
+  </goa-table>
+  <goa-text size="body-m" mt="m" mb="m">
+    Refer to <a href="/tokens">design tokens</a> for implementation details.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    When icons are interactive, it&apos;s best to make them 24 x 24 CSS pixels to meet
+    <goa-link trailingicon="open">
+      <a
+        href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html"
+        target="_blank"
+        rel="noopener noreferrer">WCAG guidelines</a
+      >
+    </goa-link>.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="best-practices">Best practices</h2>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>Combine icons with text when possible</li>
+      <li>Align icons with nearby text and controls</li>
+      <li>Apply colour using Design System tokens</li>
+      <li>
+        Ensure an icon-to-background contrast is at least 3:1 when the icon is interactive
+        or communicates meaning.
+      </li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="creating-icons">Creating icons</h2>
+  <goa-text size="body-m" mt="none" mb="m">Before creating a new icon:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ol>
+      <li>Confirm it does not already exist in the library.</li>
+      <li>Review best practice guidance.</li>
+      <li>Follow the established icon style.</li>
+      <li>Use a clear and descriptive name.</li>
+    </ol>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Submit proposed icons through the <a href="/get-started/contribute"
+      >design system contribution process</a
+    >.
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .extended-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--goa-space-m);
+    margin: 0 0 var(--goa-space-xl) 0;
+  }
+
+  .extended-icon-card {
+    border: 1px solid var(--goa-color-greyscale-200);
+    border-radius: var(--goa-border-radius-m);
+    min-height: 56px;
+    padding: var(--goa-space-s);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

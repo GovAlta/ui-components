@@ -23,11 +23,16 @@ import {
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Container for form inputs and validation. */
 export class GoabFieldset {
+  /** Sets the id of the fieldset. */
   @Input() id?: string;
+  /** Sets the section title displayed above the fieldset content. */
   @Input() sectionTitle?: string;
+  /** Sets when changes will be dispatched to the form. @default "continue" */
   @Input() dispatchOn: GoabFormDispatchOn = "continue";
 
+  /** Emits when the fieldset continues to the next step. Emits the continue detail. */
   @Output() onContinue = new EventEmitter<GoabFieldsetOnContinueDetail>();
 
   _onContinue(event: Event) {

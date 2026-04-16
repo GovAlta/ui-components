@@ -1,19 +1,19 @@
 import {
-  GoabxBadge,
-  GoabxButton,
-  GoabxTable,
-  GoabxTabs,
-} from "@abgov/react-components/experimental";
-import { GoabTab } from "@abgov/react-components";
+  GoabBadge,
+  GoabButton,
+  GoabTab,
+  GoabTable,
+  GoabTabs,
+} from "@abgov/react-components";
 
 export function SetASpecificTabToBeActive() {
   const review = [0, 1, 2, 3];
   const complete = [0, 1];
 
   return (
-    <GoabxTabs initialTab={2}>
+    <GoabTabs initialTab={2}>
       <GoabTab heading="All">
-        <GoabxTable width="100%">
+        <GoabTable width="100%">
           <thead>
             <tr>
               <th>Status</th>
@@ -26,32 +26,32 @@ export function SetASpecificTabToBeActive() {
             {review.map((i) => (
               <tr key={`review-${i}`}>
                 <td>
-                  <GoabxBadge type="important" content="Review pending" />
+                  <GoabBadge type="important" content="Review pending" />
                 </td>
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
+                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
                 </td>
               </tr>
             ))}
             {complete.map((i) => (
               <tr key={`complete-${i}`}>
                 <td>
-                  <GoabxBadge type="information" content="Complete" />
+                  <GoabBadge type="information" content="Complete" />
                 </td>
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
+                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
                 </td>
               </tr>
             ))}
           </tbody>
-        </GoabxTable>
+        </GoabTable>
       </GoabTab>
-      <GoabTab heading={<>Review pending<GoabxBadge type="important" content="4" icon={false} /></>}>
-        <GoabxTable width="100%">
+      <GoabTab heading={<>Review pending<GoabBadge type="important" content="4" icon={false} /></>}>
+        <GoabTable width="100%">
           <thead>
             <tr>
               <th>Status</th>
@@ -64,20 +64,20 @@ export function SetASpecificTabToBeActive() {
             {review.map((i) => (
               <tr key={i}>
                 <td>
-                  <GoabxBadge type="important" content="Review pending" />
+                  <GoabBadge type="important" content="Review pending" />
                 </td>
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
+                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
                 </td>
               </tr>
             ))}
           </tbody>
-        </GoabxTable>
+        </GoabTable>
       </GoabTab>
-      <GoabTab heading={<>Complete<GoabxBadge type="information" content="338" icon={false} /></>}>
-        <GoabxTable width="100%">
+      <GoabTab heading={<>Complete<GoabBadge type="information" content="338" icon={false} /></>}>
+        <GoabTable width="100%">
           <thead>
             <tr>
               <th>Status</th>
@@ -90,18 +90,18 @@ export function SetASpecificTabToBeActive() {
             {complete.map((i) => (
               <tr key={i}>
                 <td>
-                  <GoabxBadge type="information" content="Complete" />
+                  <GoabBadge type="information" content="Complete" />
                 </td>
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabxButton type="tertiary" size="compact">Action</GoabxButton>
+                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
                 </td>
               </tr>
             ))}
           </tbody>
-        </GoabxTable>
+        </GoabTable>
       </GoabTab>
-    </GoabxTabs>
+    </GoabTabs>
   );
 }

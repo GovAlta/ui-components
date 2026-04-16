@@ -22,17 +22,17 @@
 <p>Click column headers to sort. Only one column sorts at a time (default behavior).</p>
 <p><small>Current sort: {{ formatSorts(currentSorts) }}</small></p>
 
-<goabx-table mt="m" (onSort)="onSingleSortChange($event)">
+<goab-table mt="m" (onSort)="onSingleSortChange($event)">
   <thead>
     <tr>
       <th>
-        <goabx-table-sort-header name="name">Name</goabx-table-sort-header>
+        <goab-table-sort-header name="name">Name</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="department">Department</goabx-table-sort-header>
+        <goab-table-sort-header name="department">Department</goab-table-sort-header>
       </th>
       <th class="goa-table-cell--numeric">
-        <goabx-table-sort-header name="salary">Salary</goabx-table-sort-header>
+        <goab-table-sort-header name="salary">Salary</goab-table-sort-header>
       </th>
     </tr>
   </thead>
@@ -45,7 +45,7 @@
     </tr>
     }
   </tbody>
-</goabx-table>
+</goab-table>
 
 <goab-divider mt="l" mb="l"></goab-divider>
 
@@ -53,17 +53,17 @@
 <p>With sortMode="multi", click columns to add them to sort order (up to 2).</p>
 <p><small>Current sort: {{ formatSorts(multiSorts) }}</small></p>
 
-<goabx-table mt="m" sortMode="multi" (onMultiSort)="onMultiSortChange($event)">
+<goab-table mt="m" sortMode="multi" (onMultiSort)="onMultiSortChange($event)">
   <thead>
     <tr>
       <th>
-        <goabx-table-sort-header name="name">Name</goabx-table-sort-header>
+        <goab-table-sort-header name="name">Name</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="department">Department</goabx-table-sort-header>
+        <goab-table-sort-header name="department">Department</goab-table-sort-header>
       </th>
       <th class="goa-table-cell--numeric">
-        <goabx-table-sort-header name="salary">Salary</goabx-table-sort-header>
+        <goab-table-sort-header name="salary">Salary</goab-table-sort-header>
       </th>
     </tr>
   </thead>
@@ -76,7 +76,7 @@
     </tr>
     }
   </tbody>
-</goabx-table>
+</goab-table>
 
 <goab-divider mt="l" mb="l"></goab-divider>
 
@@ -85,17 +85,17 @@
 Use direction + sortOrder on each header to set priority.</p>
 <p><small>Current sort: {{ formatSorts(test3Sorts) }}</small></p>
 
-<goabx-table mt="m" sortMode="multi" (onMultiSort)="onTest3SortChange($event)">
+<goab-table mt="m" sortMode="multi" (onMultiSort)="onTest3SortChange($event)">
   <thead>
     <tr>
       <th>
-        <goabx-table-sort-header name="name">Name</goabx-table-sort-header>
+        <goab-table-sort-header name="name">Name</goab-table-sort-header>
       </th>
       <th>
-        <goabx-table-sort-header name="department" direction="asc" [sortOrder]="1">Department</goabx-table-sort-header>
+        <goab-table-sort-header name="department" direction="asc" [sortOrder]="1">Department</goab-table-sort-header>
       </th>
       <th class="goa-table-cell--numeric">
-        <goabx-table-sort-header name="salary" direction="desc" [sortOrder]="2">Salary</goabx-table-sort-header>
+        <goab-table-sort-header name="salary" direction="desc" [sortOrder]="2">Salary</goab-table-sort-header>
       </th>
     </tr>
   </thead>
@@ -108,4 +108,4 @@ Use direction + sortOrder on each header to set priority.</p>
     </tr>
     }
   </tbody>
-</goabx-table>
+</goab-table>

@@ -2,30 +2,31 @@
  * LinearProgress Component Configurations
  *
  * Linear progress bars show completion status.
+ * Note: WC attribute for percentVisibility is "percent-visibility" (explicitly mapped in Svelte options).
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const linearProgressConfigurations: ComponentConfigurations = {
-  componentSlug: 'linear-progress',
-  componentName: 'Linear progress',
-  defaultConfigurationId: 'basic',
+  componentSlug: "linear-progress",
+  componentName: "Linear progress",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic progress',
-      description: 'Simple linear progress bar',
+      id: "basic",
+      name: "Basic progress",
+      description: "Simple linear progress bar",
       code: {
-        react: `<GoabLinearProgress progress={50} />`,
-        angular: `<goab-linear-progress [progress]="50"></goab-linear-progress>`,
-        webComponents: `<goa-linear-progress progress="50"></goa-linear-progress>`,
+        react: `<GoabLinearProgress progress={50} percentVisibility="hidden" />`,
+        angular: `<goab-linear-progress [progress]="50" percentVisibility="hidden"></goab-linear-progress>`,
+        webComponents: `<goa-linear-progress progress="50" percent-visibility="hidden"></goa-linear-progress>`,
       },
     },
     {
-      id: 'progress-levels',
-      name: 'Progress levels',
-      description: 'Different completion percentages',
+      id: "progress-levels",
+      name: "Progress levels",
+      description: "Different completion percentages",
       code: {
         react: `<GoabLinearProgress progress={0} />
 <GoabLinearProgress progress={25} />
@@ -45,23 +46,23 @@ export const linearProgressConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-label',
-      name: 'With label',
-      description: 'Progress bar showing percentage',
+      id: "indeterminate",
+      name: "Indeterminate",
+      description: "Loading animation when progress is unknown",
       code: {
-        react: `<GoabLinearProgress progress={65} showLabel />`,
-        angular: `<goab-linear-progress [progress]="65" [showLabel]="true"></goab-linear-progress>`,
-        webComponents: `<goa-linear-progress progress="65" showlabel></goa-linear-progress>`,
+        react: `<GoabLinearProgress percentVisibility="hidden" />`,
+        angular: `<goab-linear-progress percentVisibility="hidden"></goab-linear-progress>`,
+        webComponents: `<goa-linear-progress percent-visibility="hidden"></goa-linear-progress>`,
       },
     },
     {
-      id: 'variants',
-      name: 'Variants',
-      description: 'Different visual styles',
+      id: "percent-visibility",
+      name: "With percentage",
+      description: "Progress bar showing the percentage text",
       code: {
-        react: `<GoabLinearProgress progress={50} variant="fullscreen" />`,
-        angular: `<goab-linear-progress [progress]="50" variant="fullscreen"></goab-linear-progress>`,
-        webComponents: `<goa-linear-progress progress="50" variant="fullscreen"></goa-linear-progress>`,
+        react: `<GoabLinearProgress progress={65} />`,
+        angular: `<goab-linear-progress [progress]="65"></goab-linear-progress>`,
+        webComponents: `<goa-linear-progress progress="65"></goa-linear-progress>`,
       },
     },
   ],

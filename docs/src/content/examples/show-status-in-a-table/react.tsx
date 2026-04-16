@@ -1,4 +1,4 @@
-import { GoabxBadge, GoabxButton, GoabxTable } from "@abgov/react-components/experimental";
+import { GoabBadge, GoabButton, GoabTable } from "@abgov/react-components";
 import type { GoabBadgeType } from "@abgov/ui-components-common";
 
 interface BadgeValue {
@@ -22,7 +22,7 @@ export function ShowStatusInATable() {
   };
 
   return (
-    <GoabxTable width="100%">
+    <GoabTable width="100%">
       <thead>
         <tr>
           <th>Status</th>
@@ -35,18 +35,18 @@ export function ShowStatusInATable() {
         {badgeValues.map((badge) => (
           <tr key={badge.key}>
             <td>
-              <GoabxBadge type={badge.type} content={badge.content} icon={false} />
+              <GoabBadge type={badge.type} content={badge.content} icon={false} />
             </td>
             <td>Lorem ipsum dolor sit amet consectetur</td>
             <td className="goa-table-number-column">1234567890</td>
             <td>
-              <GoabxButton size="compact" type="tertiary" onClick={handleClick}>
+              <GoabButton size="compact" type="tertiary" onClick={handleClick}>
                 Assign
-              </GoabxButton>
+              </GoabButton>
             </td>
           </tr>
         ))}
       </tbody>
-    </GoabxTable>
+    </GoabTable>
   );
 }

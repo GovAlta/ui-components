@@ -61,14 +61,17 @@
 
   onMount(() => {
     validateRequired("GoaAppHeaderMenu", { heading });
-    const hostElement = (_rootEl?.getRootNode() as ShadowRoot)?.host as HTMLElement;
-    const inNavigationSlot = hostElement?.getAttribute('slot') === 'navigation';
+    const hostElement = (_rootEl?.getRootNode() as ShadowRoot)
+      ?.host as HTMLElement;
+    const inNavigationSlot = hostElement?.getAttribute("slot") === "navigation";
 
     // Auto-detect version from parent AppHeader if not explicitly set
     // Uses property access because Svelte props aren't reflected as HTML attributes
     let effectiveVersion = version;
     if (version === "1" && inNavigationSlot) {
-      const parentAppHeader = hostElement?.closest("goa-app-header") as HTMLElement & { version?: string };
+      const parentAppHeader = hostElement?.closest(
+        "goa-app-header",
+      ) as HTMLElement & { version?: string };
       if (parentAppHeader?.version === "2") {
         effectiveVersion = "2";
       }
@@ -193,7 +196,9 @@
       minwidth="8rem"
       position="below"
       open={_open}
-      style={_isV2Navigation ? "--goa-popover-shadow: var(--goa-app-header-nav-menu-dropdown-shadow); --goa-popover-border: var(--goa-app-header-nav-menu-dropdown-border, 0.5px solid var(--goa-color-greyscale-200, #e0e0e0)); margin-top: var(--goa-app-header-nav-menu-dropdown-gap, 3px);" : ""}
+      style={_isV2Navigation
+        ? "--goa-popover-shadow: var(--goa-app-header-nav-menu-dropdown-shadow); --goa-popover-border: var(--goa-app-header-nav-menu-dropdown-border, 0.5px solid var(--goa-color-greyscale-200, #e0e0e0)); margin-top: var(--goa-app-header-nav-menu-dropdown-gap, 3px);"
+        : ""}
     >
       <button
         slot="target"
@@ -206,15 +211,28 @@
           <goa-icon type={leadingicon} mt="1" />
         {/if}
         {heading}
-        <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" size={_isV2Navigation ? "xsmall" : undefined} />
+        <goa-icon
+          type={_open ? "chevron-up" : "chevron-down"}
+          mt="2"
+          size={_isV2Navigation ? "xsmall" : undefined}
+        />
       </button>
 
-      <div class="desktop" class:v2-nav-menu={_isV2Navigation} bind:this={_slotParentEl}>
+      <div
+        class="desktop"
+        class:v2-nav-menu={_isV2Navigation}
+        bind:this={_slotParentEl}
+      >
         <slot />
       </div>
     </goa-popover>
   {:else}
-    <button class:open={_open} on:click={toggleMenu} class={type} class:v2-nav={_isV2Navigation}>
+    <button
+      class:open={_open}
+      on:click={toggleMenu}
+      class={type}
+      class:v2-nav={_isV2Navigation}
+    >
       {#if leadingicon}
         <goa-icon type={leadingicon} mt="1" />
       {/if}
@@ -222,10 +240,18 @@
       {#if !_isV2Navigation}
         <goa-spacer hspacing="fill" />
       {/if}
-      <goa-icon type={_open ? "chevron-up" : "chevron-down"} mt="2" size={_isV2Navigation ? "xsmall" : undefined} />
+      <goa-icon
+        type={_open ? "chevron-up" : "chevron-down"}
+        mt="2"
+        size={_isV2Navigation ? "xsmall" : undefined}
+      />
     </button>
     {#if _open}
-      <div class="not-desktop" class:v2-nav-menu={_isV2Navigation} bind:this={_slotParentEl}>
+      <div
+        class="not-desktop"
+        class:v2-nav-menu={_isV2Navigation}
+        bind:this={_slotParentEl}
+      >
         <slot />
       </div>
     {/if}
@@ -482,6 +508,7 @@
     border: none !important;
     border-bottom: var(--goa-app-header-border-nav-item-default) !important;
     border-radius: 0;
+    box-shadow: none !important;
 
     /* Layout */
     height: var(--goa-app-header-height-nav-item);
@@ -502,7 +529,9 @@
 
   button.v2-nav:hover {
     background: var(--goa-app-header-nav-bar-bg) !important;
-    border-bottom-color: var(--goa-app-header-nav-hover-indicator-color) !important;
+    border-bottom-color: var(
+      --goa-app-header-nav-hover-indicator-color
+    ) !important;
   }
 
   button.v2-nav:active {
@@ -511,12 +540,16 @@
 
   button.v2-nav.open {
     background: var(--goa-app-header-nav-bar-bg) !important;
-    border-bottom-color: var(--goa-app-header-nav-hover-indicator-color) !important;
+    border-bottom-color: var(
+      --goa-app-header-nav-hover-indicator-color
+    ) !important;
   }
 
   button.v2-nav.current {
     font-weight: var(--goa-font-weight-semi-bold) !important;
-    border-bottom-color: var(--goa-app-header-nav-active-indicator-color) !important;
+    border-bottom-color: var(
+      --goa-app-header-nav-active-indicator-color
+    ) !important;
   }
 
   button.v2-nav:focus-visible {
@@ -589,13 +622,17 @@
   }
 
   .desktop.v2-nav-menu :global(::slotted(a.current)) {
-    background: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
+    background: var(
+      --goa-app-header-color-bg-nav-item-in-menu-current
+    ) !important;
     color: var(--goa-color-text-light) !important;
     font-weight: var(--goa-font-weight-medium) !important;
   }
 
   .desktop.v2-nav-menu :global(::slotted(a.current:hover)) {
-    background: var(--goa-app-header-color-bg-nav-item-in-menu-current) !important;
+    background: var(
+      --goa-app-header-color-bg-nav-item-in-menu-current
+    ) !important;
     color: var(--goa-color-text-light) !important;
   }
 </style>

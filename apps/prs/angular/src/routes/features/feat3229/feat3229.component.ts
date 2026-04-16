@@ -3,9 +3,9 @@ import {
   GoabBlock,
   GoabDivider,
   GoabText,
-  GoabxMenuAction,
-  GoabxMenuButton,
-  GoabxBadge,
+  GoabMenuAction,
+  GoabMenuButton,
+  GoabBadge,
 } from "@abgov/angular-components";
 import { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
 
@@ -16,9 +16,9 @@ import { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
   imports: [
     GoabBlock,
     GoabDivider,
-    GoabxMenuAction,
-    GoabxMenuButton,
-    GoabxBadge,
+    GoabMenuAction,
+    GoabMenuButton,
+    GoabBadge,
     GoabText,
   ],
 })

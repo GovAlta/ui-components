@@ -1,12 +1,14 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, type JSX } from "react";
 
 interface WCProps {
   open?: boolean;
-  testid?: string;
   heading?: string;
   width?: string;
+  testid?: string;
+  version?: string;
   ref: React.RefObject<HTMLElement | null>;
 }
+
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -17,45 +19,52 @@ declare module "react" {
 }
 
 export interface GoabPushDrawerProps {
-  testid?: string;
-  open?: boolean;
-  heading?: string;
-  width?: string;
-  actions?: ReactNode | undefined;
+  /** @required Content rendered inside the push drawer body. */
   children: ReactNode;
+  /** @required Callback fired when the push drawer is closed. */
   onClose: () => void;
+  /** Controls the open/closed state of the push drawer. */
+  open?: boolean;
+  /** Sets the heading text or custom heading content. */
+  heading?: string | ReactNode;
+  /** Sets the width of the push drawer panel. @default "492px" */
+  width?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+  /** Content rendered in the actions slot, typically action buttons. */
+  actions?: ReactNode;
 }
 
+/** A panel that pushes the main page content aside on desktop, falling back to an overlay drawer on smaller screens. */
 export function GoabPushDrawer({
-  testid,
   open,
   heading,
   width,
+  testId,
   actions,
   children,
   onClose,
-}: GoabPushDrawerProps) {
-  // console.log("GoabPushDrawer:", testId, open, heading);
+}: GoabPushDrawerProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const elCurrent = el?.current;
-    if (!elCurrent || !onClose) {
+    if (!el?.current || !onClose) {
       return;
     }
-    elCurrent.addEventListener("_close", onClose);
+    el.current?.addEventListener("_close", onClose);
     return () => {
-      elCurrent.removeEventListener("_close", onClose);
+      el.current?.removeEventListener("_close", onClose);
     };
   }, [el, onClose]);
 
   return (
     <goa-push-drawer
       ref={el}
-      testid={testid}
       open={open ? true : undefined}
       heading={typeof heading === "string" ? heading : undefined}
       width={width}
+      testid={testId}
+      version="2"
     >
       {heading && typeof heading !== "string" && <div slot="heading">{heading}</div>}
       {actions && <div slot="actions">{actions}</div>}

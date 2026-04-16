@@ -21,12 +21,12 @@ describe("PushDrawer", () => {
   const Component = () => {
     return (
       <div style={pageStyle}>
-        <div style={pageContainerStyles} test-id="container">
+        <div style={pageContainerStyles} data-testid="container">
           <h1>Pushed In Content</h1>
           <p>This is pushed in</p>
         </div>
         <GoabPushDrawer
-          testid={testId}
+          testId={testId}
           open={isOpen}
           heading="Push Drawer"
           width={"450px"}

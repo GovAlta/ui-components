@@ -1,0 +1,37 @@
+{
+  "componentSlug": "menu-action",
+  "extractedFrom": "libs/web-components/src/components/menu-button/MenuAction.svelte",
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Display text for the menu action."
+    },
+    {
+      "name": "action",
+      "type": "string",
+      "required": false,
+      "default": "default",
+      "description": "Action identifier included in the click event."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "icon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed before the text."
+    }
+  ],
+  "events": [],
+  "slots": []
+}

@@ -4,7 +4,6 @@ import {
   GoabButton,
   GoabFormItem,
   GoabText,
-  GoabxInput,
   GoabInputOnBlurDetail,
 } from "@abgov/angular-components";
 
@@ -12,7 +11,7 @@ import {
   standalone: true,
   selector: "abgov-bug3337",
   templateUrl: "./bug3337.component.html",
-  imports: [GoabInput, GoabxInput, GoabButton, GoabText, GoabFormItem],
+  imports: [GoabInput, GoabButton, GoabText, GoabFormItem],
 })
 export class Bug3337Component {
   inputValue = "";

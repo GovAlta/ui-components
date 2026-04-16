@@ -262,8 +262,7 @@
   function onKeyUp(e: Event) {
     const input = e.target as HTMLInputElement;
 
-    if (!input) return;
-    if (isReadonly) return;
+    if (!input || isReadonly) return;
 
     input.dispatchEvent(
       new CustomEvent("_keyPress", {
@@ -547,6 +546,11 @@
 
   .trailing-icon {
     margin-right: var(--goa-text-input-padding-lr);
+  }
+
+  .leading-icon,
+  .trailing-icon {
+    color: var(--goa-text-input-color-icon);
   }
 
   .trailing-icon-button {

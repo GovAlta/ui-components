@@ -17,10 +17,10 @@ export interface QuickLink {
  * Edit this array to customize the links.
  */
 export const quickLinks: QuickLink[] = [
-  { label: 'Getting started', href: '/get-started', icon: 'document-text' },
-  { label: 'Components', href: '/components', icon: 'shapes' },
-  { label: 'Examples', href: '/examples', icon: 'browsers' },
-  { label: 'Design tokens', href: '/tokens', icon: 'code-slash' },
+  { label: "Getting started", href: "/get-started", icon: "document-text" },
+  { label: "Examples", href: "/examples", icon: "browsers" },
+  { label: "Components", href: "/components", icon: "shapes" },
+  { label: "Design tokens", href: "/tokens", icon: "code-slash" },
 ];
 
 /**
@@ -28,10 +28,10 @@ export const quickLinks: QuickLink[] = [
  * These are common terms users might be looking for.
  */
 export const popularSearches: string[] = [
-  'Button',
-  'Form',
-  'Table',
-  'Input',
-  'Modal',
-  'Badge',
+  "Button",
+  "Form",
+  "Table",
+  "Input",
+  "Modal",
+  "Badge",
 ];

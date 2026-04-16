@@ -15,17 +15,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - uses: actions/setup-node@v6
         with:
           node-version: "24"
+
       - name: Install npm 11
         run: npm install -g npm@11
+
       - run: npm ci
 
-      # Run with the target branch as the base.
       - name: Lint
         run: npm run lint
 

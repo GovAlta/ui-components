@@ -1,14 +1,14 @@
-import { GoabxAppFooter, GoabxAppFooterMetaSection } from "@abgov/react-components/experimental";
+import { GoabAppFooter, GoabAppFooterMetaSection } from "@abgov/react-components";
 
 export function ShowQuickLinks() {
   return (
-    <GoabxAppFooter maxContentWidth="100%">
-      <GoabxAppFooterMetaSection>
+    <GoabAppFooter maxContentWidth="100%">
+      <GoabAppFooterMetaSection>
         <a href="#">Give feedback</a>
         <a href="#">Accessibility</a>
         <a href="#">Privacy</a>
         <a href="#">Contact us</a>
-      </GoabxAppFooterMetaSection>
-    </GoabxAppFooter>
+      </GoabAppFooterMetaSection>
+    </GoabAppFooter>
   );
 }

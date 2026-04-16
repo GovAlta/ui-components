@@ -1,8 +1,7 @@
-import { GoabxAppFooter } from "@abgov/react-components/experimental";
 import {
+  GoabAppFooter,
   GoabAppHeader,
   GoabGrid,
-  GoabMicrositeHeader,
   GoabOneColumnLayout,
   GoabPageBlock,
   GoabSkeleton,
@@ -12,8 +11,7 @@ export function BasicPageLayout() {
   return (
     <GoabOneColumnLayout>
       <section slot="header">
-        <GoabMicrositeHeader type="alpha" version="UAT" />
-        <GoabAppHeader url="/" heading="Design System">
+        <GoabAppHeader url="/" heading="Service name">
           <a href="/login">Sign in</a>
         </GoabAppHeader>
       </section>
@@ -32,7 +30,7 @@ export function BasicPageLayout() {
         </GoabGrid>
       </GoabPageBlock>
       <section slot="footer">
-        <GoabxAppFooter />
+        <GoabAppFooter />
       </section>
     </GoabOneColumnLayout>
   );

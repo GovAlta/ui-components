@@ -1,7 +1,6 @@
 {
   "componentSlug": "work-side-menu",
   "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideMenu.svelte",
-  "extractedAt": "2026-02-04T08:10:50.420Z",
   "props": [
     {
       "name": "heading",

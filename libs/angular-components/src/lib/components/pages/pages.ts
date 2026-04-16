@@ -6,6 +6,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -29,13 +30,13 @@ import { GoabBaseComponent } from "../base.component";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Container for paginated content views. */
 export class GoabPages extends GoabBaseComponent implements OnInit {
-  isReady = false;
-  @Input({ transform: numberAttribute }) current?: number;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
+  /** The currently visible page (1-based index). */
+  @Input({ transform: numberAttribute }) current?: number;
 
   ngOnInit(): void {
     setTimeout(() => {

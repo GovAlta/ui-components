@@ -15,7 +15,7 @@ import { getFilterLabel } from "./search-utils";
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
-  onClose: () => void;
+  onClose?: () => void;
   /** Currently active filter (if any) */
   activeFilter?: SearchFilter;
   /** The command that activated the filter (e.g., "/component") */
@@ -24,6 +24,10 @@ interface SearchInputProps {
   onClearFilter?: () => void;
   /** Forward arrow/enter keys to results navigation */
   onResultNav?: (key: string) => void;
+  /** Whether to auto-focus the input on mount (default: true) */
+  autoFocus?: boolean;
+  /** Override the default placeholder text */
+  placeholder?: string;
 }
 
 /**
@@ -36,6 +40,8 @@ function SearchIcon() {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
+      width={20}
+      height={20}
       strokeWidth={2}
       stroke="currentColor"
     >
@@ -57,6 +63,8 @@ function CloseIcon() {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
+      width={18}
+      height={18}
       strokeWidth={2}
       stroke="currentColor"
     >
@@ -81,27 +89,30 @@ export function SearchInput({
   activeCommand,
   onClearFilter,
   onResultNav,
+  autoFocus = true,
+  placeholder: placeholderOverride,
 }: SearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-focus the input when mounted
+  // Auto-focus the input when mounted (can be disabled for inline usage)
   useEffect(() => {
+    if (!autoFocus) return;
     // Small delay to ensure modal animation completes
     const timer = setTimeout(() => {
       inputRef.current?.focus();
     }, 50);
     return () => clearTimeout(timer);
-  }, []);
+  }, [autoFocus]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    // Escape closes the modal
+    // Escape closes the modal/dropdown
     if (e.key === "Escape") {
       e.preventDefault();
-      onClose();
+      onClose?.();
     }
     // Backspace on empty input clears the active filter
     if (e.key === "Backspace" && value === "" && activeFilter) {
@@ -109,16 +120,21 @@ export function SearchInput({
       onClearFilter?.();
     }
     // Forward arrow/enter to results navigation
-    if (onResultNav && ["ArrowUp", "ArrowDown", "Enter"].includes(e.key)) {
+    if (
+      onResultNav &&
+      ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Enter"].includes(e.key)
+    ) {
       e.preventDefault();
       onResultNav(e.key);
     }
   };
 
   // Determine the placeholder text based on filter
-  const placeholder = activeFilter
-    ? `Search ${getFilterLabel(activeFilter)}...`
-    : "Search components and examples... (type / to filter)";
+  const placeholder = placeholderOverride
+    ? placeholderOverride
+    : activeFilter
+      ? `Search ${getFilterLabel(activeFilter)}...`
+      : "Search components and examples... (type / to filter)";
 
   return (
     <div className="search-input-container">
@@ -160,21 +176,25 @@ export function SearchInput({
         spellCheck="false"
       />
 
-      {/* Keyboard hint (desktop only, hidden via CSS on mobile) */}
-      <span className="search-input-hint" aria-hidden="true">
-        <kbd className="search-input-kbd">{isMac() ? "⌘" : "Ctrl"}</kbd>
-        <kbd className="search-input-kbd">K</kbd>
-      </span>
+      {/* Keyboard hint (desktop only, hidden via CSS on mobile, only in modal) */}
+      {autoFocus && (
+        <span className="search-input-hint" aria-hidden="true">
+          <kbd className="search-input-kbd">{isMac() ? "⌘" : "Ctrl"}</kbd>
+          <kbd className="search-input-kbd">K</kbd>
+        </span>
+      )}
 
-      {/* Close button */}
-      <button
-        type="button"
-        className="search-input-close"
-        onClick={onClose}
-        aria-label="Close search"
-      >
-        <CloseIcon />
-      </button>
+      {/* Close button (hidden when onClose is not provided) */}
+      {onClose && (
+        <button
+          type="button"
+          className="search-input-close"
+          onClick={onClose}
+          aria-label="Close search"
+        >
+          <CloseIcon />
+        </button>
+      )}
     </div>
   );
 }

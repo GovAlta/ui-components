@@ -1,8 +1,8 @@
-<goabx-form-item label="First name" [formGroup]="form">
-  <goabx-input name="item" formControlName="item" [error]="true"></goabx-input>
-  <goabx-form-item-slot slot="error">
+<goab-form-item label="First name" [formGroup]="form" [error]="errorTemplate">
+  <goab-input name="item" formControlName="item" [error]="true"></goab-input>
+  <ng-template #errorTemplate>
     <span>This is </span>
     <i>slotted </i>
     <b>error text.</b>
-  </goabx-form-item-slot>
-</goabx-form-item>
+  </ng-template>
+</goab-form-item>

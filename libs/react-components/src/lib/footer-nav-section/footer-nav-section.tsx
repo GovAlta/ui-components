@@ -8,14 +8,28 @@ interface WCProps {
   testid?: string;
 }
 
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      "goa-app-footer-nav-section": WCProps & React.HTMLAttributes<HTMLElement>;
+    }
+  }
+}
+
 /* eslint-disable-next-line */
 export interface GoabFooterNavSectionProps extends DataAttributes {
-  maxColumnCount?: number;
+  /** The section heading displayed above the navigation links. */
   heading?: string;
+  /** Maximum number of columns to display links in on larger screens. @default 1 */
+  maxColumnCount?: number;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Anchor link elements rendered as footer navigation links. */
   children?: ReactNode;
 }
 
+/** Navigation links section in footer. */
 export function GoabAppFooterNavSection({
   children,
   ...rest

@@ -1,50 +1,50 @@
-<goabx-form-item
+<goab-form-item
   requirement="required"
   label="Name of item"
   [error]="taskError ? 'Please enter item name' : undefined"
   helpText="Add an item to the dropdown list below">
-  <goabx-input
+  <goab-input
     name="item"
     [value]="newTask"
     (onChange)="onNewTaskChange($event)">
-  </goabx-input>
-</goabx-form-item>
+  </goab-input>
+</goab-form-item>
 
-<goabx-form-item mt="l" label="Add to">
-  <goabx-radio-group
+<goab-form-item mt="l" label="Add to">
+  <goab-radio-group
     name="mountType"
     [value]="mountType"
     orientation="horizontal"
     (onChange)="onMountTypeChange($event)">
-    <goabx-radio-item value="prepend" label="Start"></goabx-radio-item>
-    <goabx-radio-item value="append" label="End"></goabx-radio-item>
-  </goabx-radio-group>
-</goabx-form-item>
+    <goab-radio-item value="prepend" label="Start"></goab-radio-item>
+    <goab-radio-item value="append" label="End"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
 
 <goab-button-group alignment="start" gap="relaxed" mt="l">
-  <goabx-button type="primary" (onClick)="addTask()">
+  <goab-button type="primary" (onClick)="addTask()">
     Add new item
-  </goabx-button>
-  <goabx-button type="tertiary" (onClick)="reset()">
+  </goab-button>
+  <goab-button type="tertiary" (onClick)="reset()">
     Reset list
-  </goabx-button>
+  </goab-button>
 </goab-button-group>
 
 <goab-divider mt="l"></goab-divider>
 
-<goabx-form-item mt="l" label="All items">
+<goab-form-item mt="l" label="All items">
   <ng-container *ngIf="renderTrigger">
-    <goabx-dropdown
+    <goab-dropdown
       [value]="selectedTask"
       name="selectedTask"
       (onChange)="onSelectedTaskChange($event)">
       @for (task of tasks; track task.value) {
-      <goabx-dropdown-item
+      <goab-dropdown-item
         [value]="task.value"
         [mountType]="task.mount"
         [label]="task.label">
-      </goabx-dropdown-item>
+      </goab-dropdown-item>
       }
-    </goabx-dropdown>
+    </goab-dropdown>
   </ng-container>
-</goabx-form-item>
+</goab-form-item>

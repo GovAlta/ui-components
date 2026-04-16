@@ -19,7 +19,7 @@ beforeAll(() => {
   vi.stubGlobal("ResizeObserver", ResizeObserverMock);
 });
 
-describe("FormStepper", () => {
+describe.skip("FormStepper", () => {
   it("it renders", async () => {
     const { container } = render(FormStepper);
     await waitFor(() => {

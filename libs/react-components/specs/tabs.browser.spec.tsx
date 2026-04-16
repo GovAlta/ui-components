@@ -1,7 +1,7 @@
 import { render } from "vitest-browser-react";
 
 import { GoabTabs, GoabTab } from "../src";
-import { GoabxTabs, GoabxTab } from "../src/experimental";
+import { GoabTabs, GoabTab } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 import { GoabBadge } from "../src/lib/badge/badge";
@@ -766,10 +766,10 @@ describe("Tabs Browser Tests", () => {
 
       const Component = () => {
         return (
-          <GoabxTabs testId="test-tabs">
-            <GoabxTab heading="Tab 1">Content 1</GoabxTab>
-            <GoabxTab heading="Tab 2">Content 2</GoabxTab>
-          </GoabxTabs>
+          <GoabTabs testId="test-tabs">
+            <GoabTab heading="Tab 1">Content 1</GoabTab>
+            <GoabTab heading="Tab 2">Content 2</GoabTab>
+          </GoabTabs>
         );
       };
 
@@ -792,10 +792,10 @@ describe("Tabs Browser Tests", () => {
 
       const Component = () => {
         return (
-          <GoabxTabs testId="test-tabs" orientation="horizontal">
-            <GoabxTab heading="Tab 1">Content 1</GoabxTab>
-            <GoabxTab heading="Tab 2">Content 2</GoabxTab>
-          </GoabxTabs>
+          <GoabTabs testId="test-tabs" orientation="horizontal">
+            <GoabTab heading="Tab 1">Content 1</GoabTab>
+            <GoabTab heading="Tab 2">Content 2</GoabTab>
+          </GoabTabs>
         );
       };
 

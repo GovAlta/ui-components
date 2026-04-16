@@ -17,14 +17,14 @@ describe("Tabs", () => {
   it("should render", async () => {
     const { container } = render(Tabs);
 
-    const panel = container.querySelector("div.tabpanel");
     const tabs = container.querySelectorAll("goa-tab");
 
     await waitFor(() => {
       expect(container.querySelector('div[role="tablist"]')).toBeTruthy();
 
-      expect(panel).toBeTruthy();
-      expect(panel?.getAttribute("tabindex")).toBe("0");
+      const activeTab = container.querySelector("a#tab-1");
+      expect(activeTab).toBeTruthy();
+      expect(activeTab?.getAttribute("tabindex")).toBe("0");
 
       expect(tabs.length).toBe(2);
     });

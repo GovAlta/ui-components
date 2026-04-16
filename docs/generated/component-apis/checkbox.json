@@ -1,7 +1,6 @@
 {
   "componentSlug": "checkbox",
   "extractedFrom": "libs/web-components/src/components/checkbox/Checkbox.svelte",
-  "extractedAt": "2026-02-04T08:10:50.397Z",
   "props": [
     {
       "name": "name",

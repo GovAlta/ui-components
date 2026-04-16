@@ -3,8 +3,8 @@ import {
   GoabBlock,
   GoabDivider,
   GoabDetails,
-  GoabxTable,
-  GoabxTableSortHeader,
+  GoabTable,
+  GoabTableSortHeader,
 } from "@abgov/angular-components";
 import { GoabTableOnSortDetail, GoabTableOnMultiSortDetail, GoabTableSortEntry } from "@abgov/ui-components-common";
 
@@ -16,8 +16,8 @@ import { GoabTableOnSortDetail, GoabTableOnMultiSortDetail, GoabTableSortEntry }
     GoabBlock,
     GoabDivider,
     GoabDetails,
-    GoabxTable,
-    GoabxTableSortHeader,
+    GoabTable,
+    GoabTableSortHeader,
   ],
 })
 export class Feat3344Component implements OnInit, OnDestroy {

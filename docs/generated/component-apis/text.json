@@ -1,7 +1,6 @@
 {
   "componentSlug": "text",
   "extractedFrom": "libs/web-components/src/components/text/Text.svelte",
-  "extractedAt": "2026-02-04T19:50:01.587Z",
   "props": [
     {
       "name": "as",
@@ -33,13 +32,14 @@
     },
     {
       "name": "size",
-      "type": "\"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
+      "type": "\"heading-xl\" | \"heading-l\" | \"heading-m\" | \"heading-s\" | \"heading-xs\" | \"heading-2xs\" | \"body-l\" | \"body-m\" | \"body-s\" | \"body-xs\"",
       "values": [
         "heading-xl",
         "heading-l",
         "heading-m",
         "heading-s",
         "heading-xs",
+        "heading-2xs",
         "body-l",
         "body-m",
         "body-s",

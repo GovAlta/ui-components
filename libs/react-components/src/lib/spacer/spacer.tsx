@@ -21,11 +21,15 @@ declare module "react" {
 
 /* eslint-disable-next-line */
 export interface GoabSpacerProps {
+  /** Horizontal spacing. @default "none" */
   hSpacing?: GoabSpacerHorizontalSpacing;
+  /** Vertical spacing. @default "none" */
   vSpacing?: GoabSpacerVerticalSpacing;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 
+/** Negative area between the components and the interface. */
 export function GoabSpacer(props: GoabSpacerProps) {
   return (
     <goa-spacer

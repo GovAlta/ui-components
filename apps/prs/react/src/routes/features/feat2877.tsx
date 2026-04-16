@@ -92,32 +92,13 @@ export function Feat2877Route() {
 
           <GoabBlock direction="row" gap="m" mb="xl">
             <GoabBadge type="archived" content="Archived" />
-            <GoabBadge type="aqua" content="Aqua" />
-            <GoabBadge type="black" content="Black" />
-            <GoabBadge type="blue" content="Blue" />
-            <GoabBadge type="green" content="Green" />
-            <GoabBadge type="orange" content="Orange" />
-            <GoabBadge type="pink" content="Pink" />
-            <GoabBadge type="red" content="Red" />
-            <GoabBadge type="violet" content="Violet" />
-            <GoabBadge type="white" content="White" />
-            <GoabBadge type="yellow" content="Yellow" />
-          </GoabBlock>
-
-          <GoabText tag="h3" size="heading-s" mt="l" mb="m">
-            Light Variants
-          </GoabText>
-
-          <GoabBlock direction="row" gap="m" mb="xl">
-            <GoabBadge type="aqua-light" content="Aqua Light" />
-            <GoabBadge type="black-light" content="Black Light" />
-            <GoabBadge type="blue-light" content="Blue Light" />
-            <GoabBadge type="green-light" content="Green Light" />
-            <GoabBadge type="orange-light" content="Orange Light" />
-            <GoabBadge type="pink-light" content="Pink Light" />
-            <GoabBadge type="red-light" content="Red Light" />
-            <GoabBadge type="violet-light" content="Violet Light" />
-            <GoabBadge type="yellow-light" content="Yellow Light" />
+            <GoabBadge type="sky" content="Sky" />
+            <GoabBadge type="prairie" content="Prairie" />
+            <GoabBadge type="lilac" content="Lilac" />
+            <GoabBadge type="pasture" content="Pasture" />
+            <GoabBadge type="sunset" content="Sunset" />
+            <GoabBadge type="dawn" content="Dawn" />
+            <GoabBadge type="default" content="Default" />
           </GoabBlock>
 
           <GoabDivider />

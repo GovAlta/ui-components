@@ -1,7 +1,6 @@
 {
   "componentSlug": "text-area",
   "extractedFrom": "libs/web-components/src/components/text-area/TextArea.svelte",
-  "extractedAt": "2026-02-04T08:10:50.419Z",
   "props": [
     {
       "name": "name",
@@ -107,14 +106,22 @@
     },
     {
       "name": "version",
-      "type": "VersionType",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
       "required": false,
       "default": "1",
       "description": ""
     },
     {
       "name": "size",
-      "type": "SizeType",
+      "type": "\"default\" | \"compact\"",
+      "values": [
+        "default",
+        "compact"
+      ],
       "required": false,
       "default": "default",
       "description": ""

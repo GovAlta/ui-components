@@ -1,7 +1,6 @@
 {
   "componentSlug": "temporary-notification",
   "extractedFrom": "libs/web-components/src/components/temporary-notification/TemporaryNotification.svelte",
-  "extractedAt": "2026-02-04T08:10:50.418Z",
   "props": [
     {
       "name": "message",
@@ -12,7 +11,14 @@
     },
     {
       "name": "type",
-      "type": "TemporaryNotificationType",
+      "type": "\"basic\" | \"success\" | \"failure\" | \"indeterminate\" | \"progress\"",
+      "values": [
+        "basic",
+        "success",
+        "failure",
+        "indeterminate",
+        "progress"
+      ],
       "required": false,
       "default": "basic",
       "description": "The notification type which determines the visual style and icon."
@@ -47,7 +53,11 @@
     },
     {
       "name": "animationDirection",
-      "type": "TemporaryNotificationAnimationDirection",
+      "type": "\"up\" | \"down\"",
+      "values": [
+        "up",
+        "down"
+      ],
       "required": false,
       "default": "down",
       "description": "Direction the notification animates from when appearing or disappearing."

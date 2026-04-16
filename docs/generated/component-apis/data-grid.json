@@ -1,7 +1,6 @@
 {
   "componentSlug": "data-grid",
   "extractedFrom": "libs/web-components/src/components/data-grid/DataGrid.svelte",
-  "extractedAt": "2026-02-04T08:10:50.400Z",
   "props": [
     {
       "name": "keyboardIconVisibility",

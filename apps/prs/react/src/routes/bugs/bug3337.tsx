@@ -1,5 +1,10 @@
-import { GoabText, GoabFormItem, GoabInput, GoabButton } from "@abgov/react-components";
-import { GoabxInput } from "@abgov/react-components/experimental";
+import {
+  GoabButton,
+  GoabFormItem,
+  GoabInput,
+  GoabText,
+} from "@abgov/react-components";
+
 import { GoabInputOnBlurDetail } from "@abgov/ui-components-common";
 import { useState } from "react";
 
@@ -31,8 +36,8 @@ export function Bug3337Route() {
           autoComplete="name"
         />
       </GoabFormItem>
-      <GoabFormItem label="Autocomplete Input (Goabx)" mb="xl">
-        <GoabxInput
+      <GoabFormItem label="Autocomplete Input (GoabInput)" mb="xl">
+        <GoabInput
           name="autocomplete-test-v2"
           leadingIcon="search"
           onBlur={(e) => inputBlur(e)}

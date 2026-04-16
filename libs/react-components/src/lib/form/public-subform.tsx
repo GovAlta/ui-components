@@ -1,69 +1,91 @@
-import { ReactNode } from "react";
-import { DataAttributes, GoabButtonType, GoabButtonSize } from "@abgov/ui-components-common";
+import { ReactNode, useEffect, useRef } from "react";
+import { Margins, DataAttributes } from "@abgov/ui-components-common";
+import { transformProps, kebab } from "../common/extract-props";
 
-interface WCProps {
-  addbuttontext?: string;
-  addbuttontype?: string;
-  addbuttonsize?: string;
-  addbuttonicon?: string;
-  addheading?: string;
-  editheading?: string;
+interface WCProps extends Margins {
+  id?: string;
+  name?: string;
+  "continue-msg"?: string;
 }
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-pf-subform": WCProps &
+      "goa-public-subform": WCProps &
         React.HTMLAttributes<HTMLElement> & {
-          children?: React.ReactNode;
+          ref: React.RefObject<HTMLElement | null>;
         };
     }
   }
 }
 
-interface GoabPfSubformProps extends DataAttributes {
-  formContent?: ReactNode;
-  children?: ReactNode;
-  /** Text for the Add button. Default: "Add" */
-  addButtonText?: string;
-  /** Button type for the Add button. Default: "primary" */
-  addButtonType?: GoabButtonType;
-  /** Button size for the Add button. Default: "default" */
-  addButtonSize?: GoabButtonSize;
-  /** Leading icon for the Add button */
-  addButtonIcon?: string;
-  /** Modal heading when adding a new item */
-  addHeading?: string;
-  /** Modal heading when editing an existing item */
-  editHeading?: string;
+interface GoabPublicSubformProps extends Margins, DataAttributes {
+  /** Content rendered inside the subform. */
+  children: ReactNode;
+  /** Sets the unique identifier for the subform. */
+  id?: string;
+  /** Sets the name identifier for the subform. */
+  name?: string;
+  /** Sets the message displayed on the continue button. */
+  continueMsg?: string;
+  /** Callback fired when the subform is initialized. */
+  onInit?: (event: Event) => void;
+  /** Callback fired when the subform state changes. */
+  onStateChange?: (event: Event) => void;
 }
 
-export function GoabPfSubform({
-  formContent,
+/** Container for form inputs and validation. */
+export function GoabPublicSubform({
+  id = "",
+  name = "",
+  continueMsg = "",
+  onInit,
+  onStateChange,
   children,
-  addButtonText,
-  addButtonType,
-  addButtonSize,
-  addButtonIcon,
-  addHeading,
-  editHeading,
   ...rest
-}: GoabPfSubformProps) {
+}: GoabPublicSubformProps) {
+  const ref = useRef<HTMLElement>(null);
+
+  const _props = transformProps<WCProps>(
+    { id, name, "continue-msg": continueMsg, ...rest },
+    kebab,
+  );
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const current = ref.current;
+
+    const initListener = (e: Event) => {
+      onInit?.(e);
+    };
+
+    const stateChangeListener = (e: Event) => {
+      onStateChange?.(e);
+    };
+
+    if (onInit) {
+      current.addEventListener("_init", initListener);
+    }
+    if (onStateChange) {
+      current.addEventListener("_stateChange", stateChangeListener);
+    }
+
+    return () => {
+      if (onInit) {
+        current.removeEventListener("_init", initListener);
+      }
+      if (onStateChange) {
+        current.removeEventListener("_stateChange", stateChangeListener);
+      }
+    };
+  }, [ref, onInit, onStateChange]);
+
   return (
-    <goa-pf-subform
-      addbuttontext={addButtonText}
-      addbuttontype={addButtonType}
-      addbuttonsize={addButtonSize}
-      addbuttonicon={addButtonIcon}
-      addheading={addHeading}
-      editheading={editHeading}
-      {...rest}
-    >
-      {formContent && <div slot="form">{formContent}</div>}
+    <goa-public-subform ref={ref} {..._props}>
       {children}
-    </goa-pf-subform>
+    </goa-public-subform>
   );
 }
 
-export default GoabPfSubform;
+export default GoabPublicSubform;

@@ -124,6 +124,38 @@ describe("Drawer", () => {
     });
   });
 
+  it("hides header when closeButtonVisibility is hidden", async () => {
+    const el = render(DrawerWrapper, {
+      open: true,
+      heading: "Heading",
+      testid: "drawer",
+      closeButtonVisibility: "hidden",
+    });
+
+    await waitFor(() => {
+      const drawerEl = el.queryByTestId("drawer");
+      const drawer = drawerEl?.querySelector(".drawer") as HTMLElement;
+      const header = drawer?.querySelector(".header");
+      expect(header).toBeNull();
+    });
+  });
+
+  it("shows header when closeButtonVisibility is visible", async () => {
+    const el = render(DrawerWrapper, {
+      open: true,
+      heading: "Heading",
+      testid: "drawer",
+      closeButtonVisibility: "visible",
+    });
+
+    await waitFor(() => {
+      const drawerEl = el.queryByTestId("drawer");
+      const drawer = drawerEl?.querySelector(".drawer") as HTMLElement;
+      const header = drawer?.querySelector(".header");
+      expect(header).toBeTruthy();
+    });
+  });
+
   it("updates scroll position correctly", async () => {
     const el = render(DrawerWrapper, {
       position: "right",

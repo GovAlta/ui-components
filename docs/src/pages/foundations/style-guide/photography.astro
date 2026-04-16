@@ -1,0 +1,101 @@
+---
+/**
+ * Foundations - Style guide - Photography
+ *
+ * Photography guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guide -> Photography.
+ */
+import DocumentationPageLayout from '../../../layouts/DocumentationPageLayout.astro';
+import FoundationsSupportCallout from '../../../components/FoundationsSupportCallout.astro';
+---
+
+<DocumentationPageLayout
+  title="Photography"
+  description="Photography guidance and best practices for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Photography</goa-text>
+  <goa-text size="body-l" mt="none" mb="2xl">
+    The Government of Alberta maintains a library of photos for government use. These images
+    reflect Alberta communities and meet established standards for quality, relevance, and
+    accessibility.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="government-of-alberta-photo-library">Government of Alberta photo library</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    The photo library is managed by Communications and Public Engagement (CPE). It provides a
+    large collection of images covering a range of topics. All images follow Government of Alberta
+    brand and content guidelines.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Government staff and contractors can use these photos in Government of Alberta digital
+    products. Refer to the
+    <goa-link trailingicon="open">
+      <a href="https://goa-dio.atlassian.net/l/cp/3TYiz5gU" target="_blank" rel="noopener noreferrer">
+        Confluence documentation
+      </a>
+    </goa-link>
+    for instructions on accessing the library.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="best-practices">Best practices</h2>
+
+  <h3 id="use-relevant-images">Use relevant images</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Choose images that support the content on the page. Avoid decorative photos that do not help
+    users understand the service.
+  </goa-text>
+
+  <h3 id="write-helpful-alternative-text">Write helpful alternative text</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use alternative text when an image adds meaning.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Describe the purpose of the image in context</li>
+      <li>Keep the description brief and useful</li>
+      <li>Use empty alternative text for decorative images so screen readers can skip them</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="use-captions-when-they-add-value">Use captions when they add value</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Add a caption when users need extra context or explanation. Do not repeat the same
+    information in the image, caption, and body content unless it is necessary.
+  </goa-text>
+
+  <h3 id="avoid-text-in-images">Avoid text in images</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    Do not place important text inside images. Assistive technologies cannot reliably read embedded
+    text, and text inside images may be harder to read on smaller screens.
+  </goa-text>
+
+  <h3 id="keep-text-readable-over-images">Keep text readable over images</h3>
+  <goa-text size="body-m" mt="none" mb="m">
+    If you use an image as a background:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      <li>Ensure enough contrast between the image and the text</li>
+      <li>Check that text remains readable across devices and screen sizes</li>
+    </ul>
+  </goa-text>
+
+  <h3 id="accessibility-guidance">Accessibility guidance</h3>
+  <goa-text size="body-m" mt="none" mb="xl">
+    When using images, follow the accessibility guidance provided by the
+    <goa-link trailingicon="open">
+      <a href="https://www.w3.org/WAI/tutorials/images/" target="_blank" rel="noopener noreferrer">
+        W3C&apos;s Images tutorial
+      </a>
+    </goa-link>.
+    This resource explains best practices for accessible use of images across different formats.
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>

@@ -1,4 +1,4 @@
-<goabx-table width="100%" mb="xl">
+<goab-table width="100%" mb="xl">
   <thead>
     <tr>
       <th>First name</th>
@@ -15,28 +15,28 @@
     </tr>
     }
   </tbody>
-</goabx-table>
+</goab-table>
 
 <goab-block alignment="center" width="100%">
   <goab-block mb="m" alignment="center">
     Show
-    <goabx-dropdown
+    <goab-dropdown
       (onChange)="handlePerPageCountChangeEvent($event)"
       value="10"
       width="9ch">
-      <goabx-dropdown-item value="10" label="10"></goabx-dropdown-item>
-      <goabx-dropdown-item value="20" label="20"></goabx-dropdown-item>
-      <goabx-dropdown-item value="30" label="30"></goabx-dropdown-item>
-    </goabx-dropdown>
+      <goab-dropdown-item value="10" label="10"></goab-dropdown-item>
+      <goab-dropdown-item value="20" label="20"></goab-dropdown-item>
+      <goab-dropdown-item value="30" label="30"></goab-dropdown-item>
+    </goab-dropdown>
     <span style="width: 75px">per page</span>
   </goab-block>
 
   <goab-spacer hSpacing="fill"></goab-spacer>
 
-  <goabx-pagination
+  <goab-pagination
     [itemCount]="users.length"
     [perPageCount]="perPage"
     [pageNumber]="page"
     (onChange)="handlePageChange($event)">
-  </goabx-pagination>
+  </goab-pagination>
 </goab-block>

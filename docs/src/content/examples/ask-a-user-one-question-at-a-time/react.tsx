@@ -1,30 +1,30 @@
 import {
-  GoabxButton,
-  GoabxFormItem,
-  GoabxLink,
-  GoabxRadioGroup,
-  GoabxRadioItem,
-} from "@abgov/react-components/experimental";
+  GoabButton,
+  GoabFormItem,
+  GoabLink,
+  GoabRadioGroup,
+  GoabRadioItem,
+} from "@abgov/react-components";
 
 export function AskAUserOneQuestionAtATime() {
   return (
     <>
-      <GoabxLink leadingIcon="arrow-back" size="small">
+      <GoabLink leadingIcon="arrow-back" size="small">
         <a href="#">Back</a>
-      </GoabxLink>
-      <GoabxFormItem
+      </GoabLink>
+      <GoabFormItem
         mt="xl"
         label="Are you currently in school?"
         labelSize="large"
         helpText="School includes foundational, skills and employment training, micro-credentials, post-secondary and continuing education.">
-        <GoabxRadioGroup name="school" ariaLabel="are you currently in school?" onChange={() => {}}>
-          <GoabxRadioItem value="yes" label="Yes" />
-          <GoabxRadioItem value="no" label="No" />
-        </GoabxRadioGroup>
-      </GoabxFormItem>
-      <GoabxButton type="submit" mt="2xl">
+        <GoabRadioGroup name="school" ariaLabel="are you currently in school?" onChange={() => {}}>
+          <GoabRadioItem value="yes" label="Yes" />
+          <GoabRadioItem value="no" label="No" />
+        </GoabRadioGroup>
+      </GoabFormItem>
+      <GoabButton type="submit" mt="2xl">
         Save and continue
-      </GoabxButton>
+      </GoabButton>
     </>
   );
 }

@@ -1,7 +1,6 @@
 {
   "componentSlug": "icon-button",
   "extractedFrom": "libs/web-components/src/components/icon-button/IconButton.svelte",
-  "extractedAt": "2026-02-04T08:10:50.410Z",
   "props": [
     {
       "name": "icon",

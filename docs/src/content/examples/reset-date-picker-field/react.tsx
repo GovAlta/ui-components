@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { GoabxButton, GoabxDatePicker, GoabxFormItem } from "@abgov/react-components/experimental";
-import { GoabButtonGroup } from "@abgov/react-components";
+import {
+  GoabButton,
+  GoabButtonGroup,
+  GoabDatePicker,
+  GoabFormItem,
+} from "@abgov/react-components";
 
 export function ResetDatePickerField() {
   const [date, setDate] = useState<Date | undefined>();
@@ -21,20 +25,20 @@ export function ResetDatePickerField() {
 
   return (
     <>
-      <GoabxFormItem label="Date Picker">
-        <GoabxDatePicker
+      <GoabFormItem label="Date Picker">
+        <GoabDatePicker
           name="item"
           value={date}
           onChange={(e) => setNewDate(e.value as Date)}
           mb="xl"
         />
-      </GoabxFormItem>
+      </GoabFormItem>
 
       <GoabButtonGroup mt="xs" alignment="start">
-        <GoabxButton onClick={setValue}>
+        <GoabButton onClick={setValue}>
           Set Value
-        </GoabxButton>
-        <GoabxButton onClick={clearValue}>Clear Value</GoabxButton>
+        </GoabButton>
+        <GoabButton onClick={clearValue}>Clear Value</GoabButton>
       </GoabButtonGroup>
     </>
   );

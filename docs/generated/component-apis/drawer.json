@@ -1,7 +1,6 @@
 {
   "componentSlug": "drawer",
   "extractedFrom": "libs/web-components/src/components/drawer/Drawer.svelte",
-  "extractedAt": "2026-02-04T08:10:50.401Z",
   "props": [
     {
       "name": "open",
@@ -40,7 +39,11 @@
     },
     {
       "name": "version",
-      "type": "VersionType",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
       "required": false,
       "default": "1",
       "description": ""

@@ -91,23 +91,28 @@ a:focus-visible, a:focus-within, a:focus {
 
 h1 {
   font: var(--goa-typography-heading-xl);
+  letter-spacing: var(--goa-typography-heading-xl-letter-spacing);
 }
 
 h2 {
   font: var(--goa-typography-heading-l);
+  letter-spacing: var(--goa-typography-heading-l-letter-spacing);
 }
 
 h3 {
   font: var(--goa-typography-heading-m);
+  letter-spacing: var(--goa-typography-heading-m-letter-spacing);
 }
 
 h4 {
   font: var(--goa-typography-heading-s);
+  letter-spacing: var(--goa-typography-heading-s-letter-spacing);
 }
 
 h5,
 h6 {
   font: var(--goa-typography-heading-xs);
+  letter-spacing: var(--goa-typography-heading-xs-letter-spacing);
 }
 
 h3 + h1 {

@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react";
 
-import SideMenu from "./side-menu";
+import GoabSideMenu from "./side-menu";
 
-describe("SideMenu", () => {
+describe("GoabSideMenu", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
-      <SideMenu testId="foo">
+      <GoabSideMenu testId="foo">
         <a href="#foo">Link</a>
-      </SideMenu>
+      </GoabSideMenu>
     );
     const el = baseElement.querySelector("goa-side-menu");
     expect(baseElement).toBeTruthy();

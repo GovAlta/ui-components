@@ -53,8 +53,8 @@ describe("AppHeaderMenu", () => {
 
     // Close menu with Escape
     await userEvent.keyboard("{Escape}");
+    const popoverContent = result.getByTestId("popover-content");
     await vi.waitFor(() => {
-      const popoverContent = result.getByTestId("popover-content");
       expect(popoverContent.element().checkVisibility()).toBeFalsy();
     });
 
@@ -66,7 +66,6 @@ describe("AppHeaderMenu", () => {
     // 3. Open menu again — should still work after banner is removed from DOM
     await menuTrigger.click();
     await vi.waitFor(() => {
-      const popoverContent = result.getByTestId("popover-content");
       expect(popoverContent.element().checkVisibility()).toBeTruthy();
     });
     expect(result.getByTestId("menu-item-1").element().checkVisibility()).toBeTruthy();

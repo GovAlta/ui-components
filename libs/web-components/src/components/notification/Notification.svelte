@@ -92,11 +92,7 @@
         aria-atomic="true"
       >
         <div class="icon">
-          <goa-icon
-            type={iconType}
-            inverted={iconInverted}
-            theme={iconTheme}
-          />
+          <goa-icon type={iconType} inverted={iconInverted} theme={iconTheme} />
         </div>
         <div class="content">
           <slot />
@@ -104,11 +100,7 @@
         <div class="close">
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <button class={type} on:click={close}>
-            <goa-icon
-              type="close"
-              inverted={iconInverted}
-              theme="filled"
-            />
+            <goa-icon type="close" inverted={iconInverted} theme="filled" />
           </button>
         </div>
       </div>
@@ -130,19 +122,22 @@
   /* Screen sizes */
 
   .notification {
-    padding: var(--goa-notification-banner-padding-tb) var(--goa-notification-banner-padding-lr-small-screen);
+    padding: var(--goa-notification-banner-padding-tb)
+      var(--goa-notification-banner-padding-lr-small-screen);
     display: flex;
   }
 
   @container self (--not-mobile) {
     .notification {
-      padding: var(--goa-notification-banner-padding-tb) var(--goa-notification-banner-padding-lr-medium-screen);
+      padding: var(--goa-notification-banner-padding-tb)
+        var(--goa-notification-banner-padding-lr-medium-screen);
     }
   }
 
   @container self (--desktop) {
     .notification {
-      padding: var(--goa-notification-banner-padding-tb) var(--goa-notification-banner-padding-lr-large-screen);
+      padding: var(--goa-notification-banner-padding-tb)
+        var(--goa-notification-banner-padding-lr-large-screen);
     }
   }
 
@@ -189,7 +184,7 @@
 
   /* V2: Improved vertical alignment with icon */
   .v2 .content {
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   :global(::slotted(a)) {
@@ -275,15 +270,23 @@
 
   @container self (--not-mobile) {
     .v2.compact .notification {
-      padding-left: var(--goa-notification-banner-padding-lr-medium-screen-compact);
-      padding-right: var(--goa-notification-banner-padding-lr-medium-screen-compact);
+      padding-left: var(
+        --goa-notification-banner-padding-lr-medium-screen-compact
+      );
+      padding-right: var(
+        --goa-notification-banner-padding-lr-medium-screen-compact
+      );
     }
   }
 
   @container self (--desktop) {
     .v2.compact .notification {
-      padding-left: var(--goa-notification-banner-padding-lr-large-screen-compact);
-      padding-right: var(--goa-notification-banner-padding-lr-large-screen-compact);
+      padding-left: var(
+        --goa-notification-banner-padding-lr-large-screen-compact
+      );
+      padding-right: var(
+        --goa-notification-banner-padding-lr-large-screen-compact
+      );
     }
   }
 
@@ -296,7 +299,8 @@
   .v2 .notification.information.low {
     background-color: var(--goa-notification-banner-information-low-color-bg);
     color: var(--goa-notification-banner-information-low-color-text);
-    border: var(--goa-border-width-s) solid var(--goa-notification-banner-information-low-color-border);
+    border: var(--goa-border-width-s) solid
+      var(--goa-notification-banner-information-low-color-border);
   }
 
   /* V2 emphasis-based colors - Important */
@@ -308,7 +312,8 @@
   .v2 .notification.important.low {
     background-color: var(--goa-notification-banner-important-low-color-bg);
     color: var(--goa-notification-banner-important-low-color-text);
-    border: var(--goa-border-width-s) solid var(--goa-notification-banner-important-low-color-border);
+    border: var(--goa-border-width-s) solid
+      var(--goa-notification-banner-important-low-color-border);
   }
 
   /* V2 emphasis-based colors - Emergency */
@@ -320,7 +325,8 @@
   .v2 .notification.emergency.low {
     background-color: var(--goa-notification-banner-emergency-low-color-bg);
     color: var(--goa-notification-banner-emergency-low-color-text);
-    border: var(--goa-border-width-s) solid var(--goa-notification-banner-emergency-low-color-border);
+    border: var(--goa-border-width-s) solid
+      var(--goa-notification-banner-emergency-low-color-border);
   }
 
   /* V2 close button icon colors */
@@ -351,32 +357,44 @@
   /* V2 close button hover and focus background colors */
   .v2 .notification.information.high .close button:hover,
   .v2 .notification.information.high .close button:focus-visible {
-    background-color: var(--goa-notification-banner-information-high-close-bg-hover);
+    background-color: var(
+      --goa-notification-banner-information-high-close-bg-hover
+    );
   }
 
   .v2 .notification.information.low .close button:hover,
   .v2 .notification.information.low .close button:focus-visible {
-    background-color: var(--goa-notification-banner-information-low-close-bg-hover);
+    background-color: var(
+      --goa-notification-banner-information-low-close-bg-hover
+    );
   }
 
   .v2 .notification.important.high .close button:hover,
   .v2 .notification.important.high .close button:focus-visible {
-    background-color: var(--goa-notification-banner-important-high-close-bg-hover);
+    background-color: var(
+      --goa-notification-banner-important-high-close-bg-hover
+    );
   }
 
   .v2 .notification.important.low .close button:hover,
   .v2 .notification.important.low .close button:focus-visible {
-    background-color: var(--goa-notification-banner-important-low-close-bg-hover);
+    background-color: var(
+      --goa-notification-banner-important-low-close-bg-hover
+    );
   }
 
   .v2 .notification.emergency.high .close button:hover,
   .v2 .notification.emergency.high .close button:focus-visible {
-    background-color: var(--goa-notification-banner-emergency-high-close-bg-hover);
+    background-color: var(
+      --goa-notification-banner-emergency-high-close-bg-hover
+    );
   }
 
   .v2 .notification.emergency.low .close button:hover,
   .v2 .notification.emergency.low .close button:focus-visible {
-    background-color: var(--goa-notification-banner-emergency-low-close-bg-hover);
+    background-color: var(
+      --goa-notification-banner-emergency-low-close-bg-hover
+    );
   }
 
   /* V2 contrast-based focus borders */

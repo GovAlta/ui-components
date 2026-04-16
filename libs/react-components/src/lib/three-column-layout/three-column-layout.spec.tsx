@@ -40,7 +40,7 @@ describe("ThreeColumnLayout", () => {
       "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
     );
     expect(baseElement.querySelector("goa-app-header")).toBeTruthy();
-    expect(baseElement.innerHTML).toContain("<goa-app-footer>");
+    expect(baseElement.innerHTML).toContain('<goa-app-footer ');
     expect(baseElement.querySelectorAll("[slot=nav] a").length).toEqual(5);
 
     expect(baseElement?.querySelector("[slot=side-menu] h2")?.innerHTML).toContain(

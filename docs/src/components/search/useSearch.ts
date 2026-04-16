@@ -354,100 +354,103 @@ export function useSearch(): UseSearchReturn {
    * @param query - Search query string
    * @param filter - Optional filter to limit results to 'component' or 'example'
    */
-  const search = useCallback((query: string, filter?: SearchFilter): SearchResult[] => {
-    if (!indexRef.current || !query.trim()) {
-      return [];
-    }
-
-    // Search across all indexed fields
-    // FlexSearch returns results per field, we need to merge them
-    const searchResults = indexRef.current.search(query, {
-      limit: 50,
-      enrich: true,
-    });
-
-    // Collect unique results with scores
-    const scoreMap = new Map<string, number>();
-
-    // FlexSearch returns array of field results
-    for (const fieldResult of searchResults) {
-      // Each field result has a `result` array
-      const results = fieldResult.result;
-      for (let i = 0; i < results.length; i++) {
-        const result = results[i];
-        // Result can be string, number, or object with id property
-        const id =
-          typeof result === "string" || typeof result === "number"
-            ? String(result)
-            : (result as { id: string }).id;
-        // Score based on position (earlier = higher score) and field
-        // Field importance is already handled by resolution
-        const positionScore = 1 - (i / results.length) * 0.5;
-        const currentScore = scoreMap.get(id) || 0;
-        scoreMap.set(id, currentScore + positionScore);
+  const search = useCallback(
+    (query: string, filter?: SearchFilter, limit: number = 500): SearchResult[] => {
+      if (!indexRef.current || !query.trim()) {
+        return [];
       }
-    }
 
-    // Convert to results array with scoring boosts
-    const queryLower = query.toLowerCase().trim();
+      // Search across all indexed fields
+      // FlexSearch returns results per field, we need to merge them
+      const searchResults = indexRef.current.search(query, {
+        limit,
+        enrich: true,
+      });
 
-    const results: SearchResult[] = [];
-    for (const [id, score] of scoreMap) {
-      const entry = entryMapRef.current.get(id);
-      if (entry) {
-        let finalScore = score;
+      // Collect unique results with scores
+      const scoreMap = new Map<string, number>();
 
-        // Exact name match boost: if query matches component/example/token name exactly
-        // "button" query + "Button" component = exact match = big boost
-        const entryName =
-          entry.type === "component"
-            ? (entry as ComponentEntry).name
-            : entry.type === "token"
-              ? (entry as TokenEntry).title
-              : (entry as ExampleEntry).title;
+      // FlexSearch returns array of field results
+      for (const fieldResult of searchResults) {
+        // Each field result has a `result` array
+        const results = fieldResult.result;
+        for (let i = 0; i < results.length; i++) {
+          const result = results[i];
+          // Result can be string, number, or object with id property
+          const id =
+            typeof result === "string" || typeof result === "number"
+              ? String(result)
+              : (result as { id: string }).id;
+          // Score based on position (earlier = higher score) and field
+          // Field importance is already handled by resolution
+          const positionScore = 1 - (i / results.length) * 0.5;
+          const currentScore = scoreMap.get(id) || 0;
+          scoreMap.set(id, currentScore + positionScore);
+        }
+      }
 
-        if (entryName.toLowerCase() === queryLower) {
-          // Exact match - this is almost certainly what they want
-          finalScore += 10;
-        } else if (entryName.toLowerCase().startsWith(queryLower)) {
-          // Name starts with query - also a strong signal
-          // "but" query + "Button" component = starts with = medium boost
-          finalScore += 3;
+      // Convert to results array with scoring boosts
+      const queryLower = query.toLowerCase().trim();
+
+      const results: SearchResult[] = [];
+      for (const [id, score] of scoreMap) {
+        const entry = entryMapRef.current.get(id);
+        if (entry) {
+          let finalScore = score;
+
+          // Exact name match boost: if query matches component/example/token name exactly
+          // "button" query + "Button" component = exact match = big boost
+          const entryName =
+            entry.type === "component"
+              ? (entry as ComponentEntry).name
+              : entry.type === "token"
+                ? (entry as TokenEntry).title
+                : (entry as ExampleEntry).title;
+
+          if (entryName.toLowerCase() === queryLower) {
+            // Exact match - this is almost certainly what they want
+            finalScore += 10;
+          } else if (entryName.toLowerCase().startsWith(queryLower)) {
+            // Name starts with query - also a strong signal
+            // "but" query + "Button" component = starts with = medium boost
+            finalScore += 3;
+          }
+
+          // Small boost for components over examples (tiebreaker)
+          if (entry.type === "component") {
+            finalScore += 0.5;
+          }
+
+          results.push({
+            ...entry,
+            score: finalScore,
+          });
+        }
+      }
+
+      // Sort by: score (includes type boost) → status
+      results.sort((a, b) => {
+        // First by score (component boost already included)
+        const scoreDiff = b.score - a.score;
+        if (Math.abs(scoreDiff) > 0.05) {
+          return scoreDiff;
         }
 
-        // Small boost for components over examples (tiebreaker)
-        if (entry.type === "component") {
-          finalScore += 0.5;
-        }
+        // Then by status priority (stable/published first)
+        const aPriority = getStatusPriority(a.status);
+        const bPriority = getStatusPriority(b.status);
+        return aPriority - bPriority;
+      });
 
-        results.push({
-          ...entry,
-          score: finalScore,
-        });
-      }
-    }
-
-    // Sort by: score (includes type boost) → status
-    results.sort((a, b) => {
-      // First by score (component boost already included)
-      const scoreDiff = b.score - a.score;
-      if (Math.abs(scoreDiff) > 0.05) {
-        return scoreDiff;
+      // Apply filter if specified
+      if (filter) {
+        return results.filter((result) => result.type === filter);
       }
 
-      // Then by status priority (stable/published first)
-      const aPriority = getStatusPriority(a.status);
-      const bPriority = getStatusPriority(b.status);
-      return aPriority - bPriority;
-    });
-
-    // Apply filter if specified
-    if (filter) {
-      return results.filter((result) => result.type === filter);
-    }
-
-    return results;
-  }, []);
+      return results;
+    },
+    [],
+  );
 
   return {
     search,

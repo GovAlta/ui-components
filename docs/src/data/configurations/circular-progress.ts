@@ -4,18 +4,18 @@
  * Circular progress indicators show completion status.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const circularProgressConfigurations: ComponentConfigurations = {
-  componentSlug: 'circular-progress',
-  componentName: 'Circular progress',
-  defaultConfigurationId: 'basic',
+  componentSlug: "circular-progress",
+  componentName: "Circular progress",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic progress',
-      description: 'Simple circular progress indicator',
+      id: "basic",
+      name: "Basic progress",
+      description: "Simple circular progress indicator",
       code: {
         react: `<GoabCircularProgress variant="inline" size="large" message="Loading message..." visible={true} />`,
         angular: `<goab-circular-progress variant="inline" size="large" message="Loading message..." [visible]="true"></goab-circular-progress>`,
@@ -23,9 +23,9 @@ export const circularProgressConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Different sizes',
+      id: "sizes",
+      name: "Sizes",
+      description: "Different sizes",
       code: {
         react: `<GoabCircularProgress variant="inline" size="small" message="Loading message..." visible={true} />
 <GoabCircularProgress variant="inline" size="large" message="Loading message..." visible={true} />`,
@@ -36,9 +36,9 @@ export const circularProgressConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-progress',
-      name: 'With progress value',
-      description: 'Shows completion percentage',
+      id: "with-progress",
+      name: "With progress value",
+      description: "Shows completion percentage",
       code: {
         react: `<GoabCircularProgress variant="inline" size="large" progress={75} message="75% complete" visible={true} />`,
         angular: `<goab-circular-progress variant="inline" size="large" [progress]="75" message="75% complete" [visible]="true"></goab-circular-progress>`,

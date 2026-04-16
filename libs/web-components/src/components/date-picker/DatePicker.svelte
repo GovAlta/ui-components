@@ -3,7 +3,6 @@
     tag: "goa-date-picker",
     props: {
       error: { attribute: "error", type: "String", reflect: true },
-      value: { attribute: "value", type: "String", reflect: true },
     },
   }}
 />
@@ -12,8 +11,19 @@
   import { onMount, tick } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { toBoolean } from "../../common/utils";
-  import { dispatch } from "../../common/utils";
-  import { CalendarDate } from "../../common/calendar-date";
+  import { receive, dispatch, relay } from "../../common/utils";
+  import {
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountMsg,
+    FormFieldMountRelayDetail,
+    FieldsetErrorRelayDetail,
+    FieldsetResetFieldsMsg,
+    FormItemMountMsg,
+  } from "../../types/relay-types";
+  import { CalendarDate } from "@abgov/ui-components-common";
 
   type OnChangeDetail = {
     name: string;
@@ -56,7 +66,9 @@
   export let ml: Spacing = null;
 
   let _error: boolean = toBoolean(error);
+  let _senderEl: HTMLElement;
   let _rootEl: HTMLElement;
+
   let _date: CalendarDate = CalendarDate.init();
 
   $: isDisabled = toBoolean(disabled);
@@ -67,20 +79,10 @@
   onMount(async () => {
     await tick(); // for Angular's delay
     setDate(value);
+    addRelayListener();
+    sendMountedMessage();
     showDeprecationWarnings();
-    bindReset(_rootEl);
   });
-
-  function bindReset(el: HTMLElement) {
-    el.addEventListener("goa:reset", () => {
-      if (value) {
-        value = "";
-        _date = CalendarDate.init();
-        dispatchValue();
-      }
-    });
-    dispatch(el, "goa:bind", el, { bubbles: true });
-  }
 
   function showDeprecationWarnings() {
     if (relative != "") {
@@ -90,14 +92,67 @@
     }
   }
 
+  // Listen for relayed messages
+  function addRelayListener() {
+    receive(_rootEl, (action, data, event) => {
+      switch (action) {
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          setError(data as FieldsetErrorRelayDetail);
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({ name, value: "" });
+          break;
+
+        // prevent child fields from mounting/registering themselves with parent components
+        case FormItemMountMsg:
+        case FormFieldMountMsg:
+          event.stopPropagation();
+          break;
+      }
+    });
+  }
+
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
+    value = detail.value;
+    dispatch(
+      _rootEl,
+      "_change",
+      { name, value: detail.value },
+      { bubbles: true },
+    );
+  }
+
+  // Notify the Form that this component has been mounted
+  function sendMountedMessage() {
+    relay<FormFieldMountRelayDetail>(
+      _senderEl,
+      FormFieldMountMsg,
+      { name, el: _rootEl },
+      { bubbles: true, timeout: 5 },
+    );
+  }
+
   function setDate(value: string) {
-    if (value) {
-      _date = new CalendarDate(value);
-      if (!_date.isValid) {
+    if (type === "calendar") {
+      if (value) {
+        _date = new CalendarDate(value);
+        if (!_date.isValid) {
+          _date = new CalendarDate(0);
+        }
+      } else {
         _date = new CalendarDate(0);
       }
-    } else {
-      _date = new CalendarDate(0);
     }
   }
 
@@ -114,16 +169,11 @@
   function dispatchValue() {
     value = _date.toString();
 
-    dispatch<OnChangeDetail>(
-      _rootEl,
-      "_change",
-      {
-        name,
-        value: _date.date,
-        valueStr: value,
-      },
-      { bubbles: true },
-    );
+    dispatch<OnChangeDetail>(_rootEl, "_change", {
+      name,
+      value: _date.date,
+      valueStr: value,
+    });
   }
 
   function hideCalendar() {
@@ -184,23 +234,20 @@
   function onInputChange(e: Event) {
     e.stopPropagation();
 
-    const { name: elName, value: newVal } = (
+    const { name: elName, value } = (
       e as CustomEvent<{ name: string; value: string }>
     ).detail;
 
     if (elName === "day") {
-      _date.setDay(+newVal);
+      _date.setDay(+value);
     } else if (elName === "month") {
-      _date.setMonth(+newVal);
+      _date.setMonth(+value);
     } else if (elName === "year") {
-      _date.setYear(+newVal);
+      _date.setYear(+value);
     }
 
     // invalid dates need to emitted too
     const output = _date.isValid() ? _date.toString() : "";
-
-    // update exposed prop, without this it won't be able to be reset
-    value = output;
 
     dispatch<OnChangeDetail>(
       _rootEl,
@@ -211,6 +258,7 @@
   }
 </script>
 
+<div bind:this={_senderEl}></div>
 {#if type === "calendar"}
   {#if width && width.includes("%")}
     <div style="display: block; width: {width};">
@@ -297,7 +345,6 @@
       <goa-form-item helptext="Month" {version}>
         <goa-dropdown
           name="month"
-          native="true"
           testid="input-month"
           on:_change={onInputChange}
           {error}
@@ -306,7 +353,7 @@
           {size}
           {version}
         >
-          <goa-dropdown-item value="0" label="—Select month—" />
+          <goa-dropdown-item value="0" label="--select a month--" />
           <goa-dropdown-item value="1" label="January" />
           <goa-dropdown-item value="2" label="February" />
           <goa-dropdown-item value="3" label="March" />

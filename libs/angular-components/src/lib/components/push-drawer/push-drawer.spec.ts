@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabPushDrawer } from "./push-drawer";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { By } from "@angular/platform-browser";
+import { Component } from "@angular/core";
 
 @Component({
   standalone: true,
@@ -9,62 +8,60 @@ import { By } from "@angular/platform-browser";
   template: `
     <goab-push-drawer
       [open]="open"
-      [heading]="heading"
-      [testId]="testId"
       [width]="width"
-      (onClose)="closePushDrawer()"
+      [testId]="testId"
+      (onClose)="onClose()"
+      [heading]="heading"
+      [actions]="actions"
     >
-      <p>This is the content of the push drawer.</p>
-      <button (click)="closePushDrawer()">Close</button>
+      {{ content }}
+      <ng-template #heading>
+        <h1>Heading</h1>
+      </ng-template>
+      <ng-template #actions>
+        <button>Close</button>
+      </ng-template>
     </goab-push-drawer>
   `,
 })
 class TestPushDrawerComponent {
-  open = true;
-  heading = "Push Drawer";
-  testId = "test-drawer";
-  width = "400px";
+  open = false;
+  width = "600px";
+  testId = "test-push-drawer";
+  content = "Test Content";
 
-  closePushDrawer = () => {
-    this.open = false;
-  };
+  onClose() {
+    /* empty */
+  }
 }
 
 describe("GoabPushDrawer", () => {
-  let fixture: ComponentFixture<TestPushDrawerComponent>;
   let component: TestPushDrawerComponent;
+  let fixture: ComponentFixture<TestPushDrawerComponent>;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [GoabPushDrawer, TestPushDrawerComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [TestPushDrawerComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestPushDrawerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    tick(); // Wait for component initialization
+    tick();
     fixture.detectChanges();
   }));
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+  it("renders with correct attributes", fakeAsync(() => {
+    const pushDrawerElement = fixture.nativeElement.querySelector("goa-push-drawer");
+    expect(pushDrawerElement).toBeTruthy();
 
-  it("renders a goab-push-drawer", fakeAsync(() => {
-    const el = fixture.debugElement.query(By.css("goa-push-drawer"));
-    expect(el).toBeTruthy();
+    expect(pushDrawerElement.getAttribute("width")).toBe("600px");
+    expect(pushDrawerElement.getAttribute("testid")).toBe("test-push-drawer");
+    expect(pushDrawerElement.getAttribute("version")).toBe("2");
+    const headingContent = pushDrawerElement.querySelector("[slot='heading']");
+    expect(headingContent?.textContent).toContain("Heading");
+    expect(pushDrawerElement.textContent).toContain("Test Content");
+    const actionsContent = pushDrawerElement.querySelector("[slot='actions']");
+    expect(actionsContent?.textContent).toContain("Close");
   }));
-
-  describe("attributes", () => {
-    it("renders with testId", fakeAsync(() => {
-      const el = fixture.debugElement.query(By.css("goa-push-drawer"));
-      expect(el.attributes["test-id"]).toBe("test-drawer");
-    }));
-
-    it("passes heading", fakeAsync(() => {
-      const el = fixture.debugElement.query(By.css("goa-push-drawer"));
-      expect(el.attributes["heading"]).toBe("Push Drawer");
-    }));
-  });
 });

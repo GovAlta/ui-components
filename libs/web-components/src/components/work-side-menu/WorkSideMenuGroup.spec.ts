@@ -4,6 +4,27 @@ import GoAWorkSideMenuGroup from "./WorkSideMenuGroup.svelte";
 
 describe("WorkSideMenuGroup", () => {
 
+  it("renders without icon when icon prop is omitted", async () => {
+    const { container } = render(GoAWorkSideMenuGroup, {
+      heading: "Group",
+      testid: "no-icon",
+    });
+    // Only the chevron-forward marker icon should be present, no leading icon
+    const leadingIcon = container.querySelector("summary goa-icon:not(.marker-icon)");
+    expect(leadingIcon).toBeNull();
+  });
+
+  it("renders with icon when icon prop is provided", async () => {
+    const { container } = render(GoAWorkSideMenuGroup, {
+      heading: "Group",
+      icon: "star",
+      testid: "with-icon",
+    });
+    const leadingIcon = container.querySelector("summary goa-icon[type='star']");
+    expect(leadingIcon).toBeTruthy();
+  });
+
+
   it("renders with default closed state", async () => {
     const { container } = render(GoAWorkSideMenuGroup, {
       heading: "Group",

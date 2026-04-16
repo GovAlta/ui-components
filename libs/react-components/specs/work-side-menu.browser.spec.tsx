@@ -1,11 +1,7 @@
 import { render } from "vitest-browser-react";
 import { useState } from "react";
 import { GoabButton } from "../src";
-import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
-} from "../src/experimental";
+import { GoabWorkSideMenu, GoabWorkSideMenuItem, GoabWorkSideMenuGroup } from "../src";
 import { expect, describe, it, vi } from "vitest";
 import { page } from "@vitest/browser/context";
 
@@ -15,28 +11,28 @@ describe("WorkSideMenu", () => {
       await page.viewport(1024, 768);
       const Component = () => {
         return (
-          <GoabxWorkSideMenu
+          <GoabWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
             primaryContent={
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#item1"
                 label="Item 1"
                 testId="primary-menu-item"
               />
             }
             secondaryContent={
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#item2"
                 label="Item 2"
                 testId="secondary-menu-item"
               />
             }
             accountContent={
-              <GoabxWorkSideMenuItem
+              <GoabWorkSideMenuItem
                 url="#item3"
                 label="Item 3"
                 testId="account-menu-item"
@@ -84,15 +80,15 @@ describe("WorkSideMenu", () => {
     it("should close and open the menu when pressing the toggle button", async () => {
       const Component = () => {
         return (
-          <GoabxWorkSideMenu
+          <GoabWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
-            primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
+            secondaryContent={<GoabWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabWorkSideMenuItem url="#item3" label="Item 3" />}
             open={true}
           />
         );
@@ -109,34 +105,67 @@ describe("WorkSideMenu", () => {
       expect(menu.element().classList.contains("closed")).toBeFalsy();
     });
 
-    it("selecting a menu item navigates to a new location", async () => {
-      const handler = vi.fn();
-      window.addEventListener("_update", handler);
+    it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
+      await page.viewport(1024, 768);
+      const onNavigate = vi.fn();
 
       const Component = () => {
+        const [currentPage, setCurrentPage] = useState("/dashboard");
+
         return (
-          <GoabxWorkSideMenu
-            heading="Test Heading"
-            url="https://example.com/"
-            userName="John Doe"
-            userSecondaryText="test@example.com"
-            testId="work-side-menu"
-            primaryContent={
-              <GoabxWorkSideMenuItem url="#item1" label="Item 1" testId="menu-item-1" />
-            }
-            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
-            open={true}
-          />
+          <div>
+            <GoabWorkSideMenu
+              heading="Test App"
+              url="/dashboard"
+              open={true}
+              testId="work-side-menu"
+              onNavigate={(path: string) => {
+                setCurrentPage(path);
+                onNavigate(path);
+              }}
+              primaryContent={
+                <>
+                  <GoabWorkSideMenuItem
+                    icon="grid"
+                    label="Dashboard"
+                    url="/dashboard"
+                    testId="nav-dashboard"
+                  />
+                  <GoabWorkSideMenuItem
+                    icon="search"
+                    label="Search"
+                    url="/search"
+                    testId="nav-search"
+                  />
+                </>
+              }
+            />
+            <div data-testid="current-page">{currentPage}</div>
+          </div>
         );
       };
-      const result = render(<Component />);
-      const item1 = result.getByTestId("menu-item-1");
 
-      await item1.click();
+      const result = render(<Component />);
+
       await vi.waitFor(() => {
-        expect(window.location.hash).toBe("#item1");
+        const searchItem = result.getByTestId("nav-search");
+        expect(searchItem).toBeTruthy();
       });
+
+      const searchItem = result.getByTestId("nav-search");
+      const link = searchItem.element().querySelector("a");
+      expect(link).toBeTruthy();
+
+      await searchItem.click();
+
+      await vi.waitFor(() => {
+        expect(onNavigate).toHaveBeenCalledWith("/search");
+        const currentPageEl = result.getByTestId("current-page");
+        expect(currentPageEl.element().textContent).toBe("/search");
+      });
+
+      // Verify no full page navigation occurred
+      expect(window.location.pathname).not.toBe("/search");
     });
   });
 
@@ -145,15 +174,15 @@ describe("WorkSideMenu", () => {
       await page.viewport(390, 844);
       const Component = () => {
         return (
-          <GoabxWorkSideMenu
+          <GoabWorkSideMenu
             heading="Test Heading"
             url="https://example.com/"
             userName="John Doe"
             userSecondaryText="test@example.com"
             testId="work-side-menu"
-            primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
-            secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-            accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+            primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
+            secondaryContent={<GoabWorkSideMenuItem url="#item2" label="Item 2" />}
+            accountContent={<GoabWorkSideMenuItem url="#item3" label="Item 3" />}
             open={true}
           />
         );
@@ -180,15 +209,15 @@ describe("WorkSideMenu", () => {
         }
         return (
           <>
-            <GoabxWorkSideMenu
+            <GoabWorkSideMenu
               heading="Test Heading"
               url="https://example.com/"
               userName="John Doe"
               userSecondaryText="test@example.com"
               testId="work-side-menu"
-              primaryContent={<GoabxWorkSideMenuItem url="#item1" label="Item 1" />}
-              secondaryContent={<GoabxWorkSideMenuItem url="#item2" label="Item 2" />}
-              accountContent={<GoabxWorkSideMenuItem url="#item3" label="Item 3" />}
+              primaryContent={<GoabWorkSideMenuItem url="#item1" label="Item 1" />}
+              secondaryContent={<GoabWorkSideMenuItem url="#item2" label="Item 2" />}
+              accountContent={<GoabWorkSideMenuItem url="#item3" label="Item 3" />}
               open={open}
               onToggle={menuOnToggle}
             />
@@ -207,11 +236,121 @@ describe("WorkSideMenu", () => {
     });
   });
 
+  describe("Scroll pinning (#3548)", () => {
+    it("should keep secondary menu visible when primary nav overflows", async () => {
+      await page.viewport(1024, 400);
+
+      const Component = () => {
+        return (
+          <GoabWorkSideMenu
+            heading="Test App"
+            url="https://example.com/"
+            testId="scroll-menu"
+            open={true}
+            primaryContent={
+              <>
+                {Array.from({ length: 15 }, (_, i) => (
+                  <GoabWorkSideMenuItem
+                    key={i}
+                    url={`#item-${i}`}
+                    label={`Primary item ${i + 1}`}
+                    icon="document"
+                  />
+                ))}
+              </>
+            }
+            secondaryContent={
+              <GoabWorkSideMenuItem
+                url="#secondary"
+                label="Secondary item"
+                icon="search"
+                testId="pinned-secondary"
+              />
+            }
+          />
+        );
+      };
+
+      const result = render(<Component />);
+      const menu = result.getByTestId("scroll-menu");
+      const secondary = result.getByTestId("pinned-secondary");
+
+      await vi.waitFor(() => {
+        expect(menu.element().classList.contains("scrolling")).toBe(true);
+        expect(secondary).toBeVisible();
+      });
+    });
+
+    it("should show scroll indicators when overflow is triggered by expanding a group", async () => {
+      await page.viewport(1024, 500);
+
+      const Component = () => {
+        return (
+          <GoabWorkSideMenu
+            heading="Test App"
+            url="https://example.com/"
+            testId="scroll-menu-dynamic"
+            open={true}
+            primaryContent={
+              <>
+                <GoabWorkSideMenuItem url="#item-1" label="Item 1" icon="home" />
+                <GoabWorkSideMenuItem url="#item-2" label="Item 2" icon="mail" />
+                <GoabWorkSideMenuGroup
+                  heading="Expandable group"
+                  icon="folder"
+                  testId="expand-group"
+                >
+                  {Array.from({ length: 10 }, (_, i) => (
+                    <GoabWorkSideMenuItem
+                      key={i}
+                      url={`#group-item-${i}`}
+                      label={`Group item ${i + 1}`}
+                      icon="document"
+                    />
+                  ))}
+                </GoabWorkSideMenuGroup>
+                <GoabWorkSideMenuItem url="#item-3" label="Item 3" icon="list" />
+              </>
+            }
+            secondaryContent={
+              <GoabWorkSideMenuItem
+                url="#secondary"
+                label="Secondary item"
+                icon="search"
+                testId="pinned-secondary-dynamic"
+              />
+            }
+          />
+        );
+      };
+
+      const result = render(<Component />);
+      const menu = result.getByTestId("scroll-menu-dynamic");
+      const group = result.getByTestId("expand-group");
+
+      // Initially no overflow — group is collapsed
+      await vi.waitFor(() => {
+        expect(menu.element().classList.contains("scrolling")).toBe(false);
+      });
+
+      // Expand the group to trigger overflow
+      const summary = group.element().querySelector("summary");
+      await summary?.click();
+
+      // Scroll indicators should appear dynamically
+      await vi.waitFor(() => {
+        expect(menu.element().classList.contains("scrolling")).toBe(true);
+        const secondary = result.getByTestId("pinned-secondary-dynamic");
+        expect(secondary).toBeVisible();
+      });
+    });
+  });
+
   describe("WorkSideMenuGroup", () => {
     let isOpen = false;
     const Component = () => {
       return (
-        <GoabxWorkSideMenu
+        <GoabWorkSideMenu
           heading="Test Heading"
           url="https://example.com/"
           userName="John Doe"
@@ -219,22 +358,22 @@ describe("WorkSideMenu", () => {
           testId="work-side-menu"
           primaryContent={
             <>
-              <GoabxWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
-              <GoabxWorkSideMenuGroup
+              <GoabWorkSideMenuItem icon="grid" label="Dashboard" url="/dashboard" />
+              <GoabWorkSideMenuGroup
                 icon="document"
                 heading="Group heading"
                 open={isOpen}
                 testId="test-group"
               >
-                <GoabxWorkSideMenuItem
+                <GoabWorkSideMenuItem
                   label="Invoices"
                   url="/test-url"
                   testId="test-item"
                 />
-                <GoabxWorkSideMenuItem label="Contracts" url="/contracts" />
-                <GoabxWorkSideMenuItem label="Reports" url="/reports" />
-              </GoabxWorkSideMenuGroup>
-              <GoabxWorkSideMenuItem icon="list" label="Cases" url="/cases" />
+                <GoabWorkSideMenuItem label="Contracts" url="/contracts" />
+                <GoabWorkSideMenuItem label="Reports" url="/reports" />
+              </GoabWorkSideMenuGroup>
+              <GoabWorkSideMenuItem icon="list" label="Cases" url="/cases" />
             </>
           }
           open={true}

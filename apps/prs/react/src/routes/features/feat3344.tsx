@@ -12,12 +12,14 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   GoabBlock,
-  GoabDivider,
   GoabDetails,
+  GoabDivider,
+  GoabTable,
+  GoabTableSortHeader,
 } from "@abgov/react-components";
 // ?url suffix tells Vite to resolve the path without injecting the CSS
 import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
-import { GoabxTable, GoabxTableSortHeader } from "@abgov/react-components/experimental";
+
 import type { GoabTableSortEntry } from "@abgov/ui-components-common";
 
 type RowData = { id: number; name: string; department: string; salary: number };
@@ -98,17 +100,17 @@ export function Feat3344Route() {
       <p>Click column headers to sort. Only one column sorts at a time (default behavior).</p>
       <p><small>Current sort: {formatSorts(currentSorts)}</small></p>
 
-      <GoabxTable mt="m" onSort={(detail) => setCurrentSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }])}>
+      <GoabTable mt="m" onSort={(detail) => setCurrentSorts([{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }])}>
         <thead>
           <tr>
             <th>
-              <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+              <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
             </th>
             <th>
-              <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+              <GoabTableSortHeader name="department">Department</GoabTableSortHeader>
             </th>
             <th className="goa-table-cell--numeric">
-              <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
+              <GoabTableSortHeader name="salary">Salary</GoabTableSortHeader>
             </th>
           </tr>
         </thead>
@@ -121,7 +123,7 @@ export function Feat3344Route() {
             </tr>
           ))}
         </tbody>
-      </GoabxTable>
+      </GoabTable>
 
       <GoabDivider mt="l" mb="l" />
 
@@ -129,17 +131,17 @@ export function Feat3344Route() {
       <p>With sortMode="multi", click columns to add them to sort order (up to 2).</p>
       <p><small>Current sort: {formatSorts(multiSorts)}</small></p>
 
-      <GoabxTable mt="m" sortMode="multi" onMultiSort={(detail) => setMultiSorts(detail.sorts)}>
+      <GoabTable mt="m" sortMode="multi" onMultiSort={(detail) => setMultiSorts(detail.sorts)}>
         <thead>
           <tr>
             <th>
-              <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+              <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
             </th>
             <th>
-              <GoabxTableSortHeader name="department">Department</GoabxTableSortHeader>
+              <GoabTableSortHeader name="department">Department</GoabTableSortHeader>
             </th>
             <th className="goa-table-cell--numeric">
-              <GoabxTableSortHeader name="salary">Salary</GoabxTableSortHeader>
+              <GoabTableSortHeader name="salary">Salary</GoabTableSortHeader>
             </th>
           </tr>
         </thead>
@@ -152,7 +154,7 @@ export function Feat3344Route() {
             </tr>
           ))}
         </tbody>
-      </GoabxTable>
+      </GoabTable>
 
       <GoabDivider mt="l" mb="l" />
 
@@ -161,7 +163,7 @@ export function Feat3344Route() {
         descending (secondary). Use direction + sortOrder on each header to set priority.</p>
       <p><small>Current sort: {formatSorts(test3Sorts)}</small></p>
 
-      <GoabxTable
+      <GoabTable
         mt="m"
         sortMode="multi"
         onMultiSort={(detail) => setTest3Sorts(detail.sorts)}
@@ -169,17 +171,17 @@ export function Feat3344Route() {
         <thead>
           <tr>
             <th>
-              <GoabxTableSortHeader name="name">Name</GoabxTableSortHeader>
+              <GoabTableSortHeader name="name">Name</GoabTableSortHeader>
             </th>
             <th>
-              <GoabxTableSortHeader name="department" direction="asc" sortOrder={1}>
+              <GoabTableSortHeader name="department" direction="asc" sortOrder={1}>
                 Department
-              </GoabxTableSortHeader>
+              </GoabTableSortHeader>
             </th>
             <th className="goa-table-cell--numeric">
-              <GoabxTableSortHeader name="salary" direction="desc" sortOrder={2}>
+              <GoabTableSortHeader name="salary" direction="desc" sortOrder={2}>
                 Salary
-              </GoabxTableSortHeader>
+              </GoabTableSortHeader>
             </th>
           </tr>
         </thead>
@@ -192,7 +194,7 @@ export function Feat3344Route() {
             </tr>
           ))}
         </tbody>
-      </GoabxTable>
+      </GoabTable>
     </div>
   );
 }

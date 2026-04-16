@@ -1,8 +1,11 @@
 import React from "react";
-import { GoabFormItem } from "@abgov/react-components";
-import { GoabDatePicker } from "@abgov/react-components";
-import { GoabBlock } from "@abgov/react-components";
-import { GoabText } from "@abgov/react-components";
+import {
+  GoabBlock,
+  GoabDatePicker,
+  GoabFormItem,
+  GoabText,
+} from "@abgov/react-components";
+
 import { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 
 export function Feat2682Route() {

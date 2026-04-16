@@ -1,11 +1,4 @@
-<svelte:options
-  customElement={{
-    tag: "goa-checkbox",
-    props: {
-      checked: { type: "String", reflect: true },
-    },
-  }}
-/>
+<svelte:options customElement="goa-checkbox" />
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -15,9 +8,21 @@
   import {
     dispatch,
     fromBoolean,
+    receive,
+    relay,
     toBoolean,
     announceToScreenReader,
   } from "../../common/utils";
+  import {
+    FieldsetSetValueMsg,
+    FieldsetSetValueRelayDetail,
+    FieldsetSetErrorMsg,
+    FieldsetResetErrorsMsg,
+    FormFieldMountRelayDetail,
+    FormFieldMountMsg,
+    FieldsetResetFieldsMsg,
+    FieldsetErrorRelayDetail,
+  } from "../../types/relay-types";
 
   // Required
   /** Unique name to identify the checkbox. */
@@ -63,14 +68,13 @@
   // Private
   let _value: string;
   let _rootEl: HTMLElement;
+  let _formFields: HTMLElement[] = [];
   let _revealSlotEl: HTMLElement;
   let _checkboxRef: HTMLElement;
   let _descriptionId: string;
   let _error: boolean;
   let _prevError: boolean;
   let _revealSlotHeight: number = 0;
-
-  let _revealSlotEls: HTMLElement[] = [];
 
   // Binding
   $: isDisabled = toBoolean(disabled);
@@ -104,31 +108,93 @@
     // V2: parent controls spacing, no auto-margin
     if (version === "1") mb ??= size === "compact" ? "s" : "m";
 
-    addRevealSlotEventListeners();
-
-    // collect bindable goa fields to allow for later resetting
-    _revealSlotEl.addEventListener("goa:bind", (e: Event) => {
-      const el = (e as CustomEvent).detail;
-      _revealSlotEls.push(el);
-    });
-
-    bindReset(_rootEl);
+    addRelayListener();
+    addRevealSlotListener();
+    sendMountedMessage();
   });
 
-  function bindReset(el: HTMLElement) {
-    el.addEventListener("goa:reset", () => {
-      if (checked === "true") {
-        checked = "false";
-        dispatch(el, "_change", { name, value, checked }, { bubbles: true });
+  function addRelayListener() {
+    receive(_rootEl, (action, data) => {
+      switch (action) {
+        case FieldsetSetValueMsg:
+          onSetValue(data as FieldsetSetValueRelayDetail);
+          break;
+        case FieldsetSetErrorMsg:
+          setError(data as FieldsetErrorRelayDetail);
+          break;
+        case FieldsetResetErrorsMsg:
+          error = "false";
+          break;
+        case FieldsetResetFieldsMsg:
+          onSetValue({ name, value: "" });
+          break;
+        case FormFieldMountMsg:
+          onFormFieldMount(data as FormFieldMountRelayDetail);
+          break;
       }
     });
-    dispatch(el, "goa:bind", el, { bubbles: true });
   }
 
-  function resetChildFormFields() {
-    for (const el of _revealSlotEls) {
-      dispatch(el, "goa:reset");
+  function setError(detail: FieldsetErrorRelayDetail) {
+    error = detail.error ? "true" : "false";
+  }
+
+  // allow for the listening of messages sent by form-fields specific to the "reveal" slot
+  function addRevealSlotListener() {
+    receive(_revealSlotEl, (action, data) => {
+      switch (action) {
+        case FormFieldMountMsg:
+          setCheckStatusByChildState(data as FormFieldMountRelayDetail);
+          break;
+      }
+    });
+    if (_revealSlotEl) {
+      addRevealSlotEventListeners();
     }
+  }
+
+  function setCheckStatusByChildState(detail: FormFieldMountRelayDetail) {
+    setTimeout(() => {
+      // @ts-expect-error
+      checked ||= !!detail.el.value;
+    }, 1000);
+  }
+
+  // save all child elements within the reveal slot for later reference
+  function onFormFieldMount(detail: FormFieldMountRelayDetail) {
+    // only save the child elements within the reveal slot
+    if (!$$slots.reveal) return;
+    _formFields = [..._formFields, detail.el];
+  }
+
+  //
+  function resetChildFormFields() {
+    for (const el of _formFields) {
+      // send reset message ot child form fields
+      relay(el, FieldsetResetFieldsMsg);
+    }
+  }
+
+  function onSetValue(detail: FieldsetSetValueRelayDetail) {
+    // @ts-expect-error
+    value = detail.value;
+    checked = detail.value ? "true" : "false";
+    dispatch(_checkboxRef, "_change", { name, value }, { bubbles: true });
+  }
+
+  function sendMountedMessage() {
+    if (!name) return;
+
+    const checkboxEl = (_rootEl?.getRootNode() as ShadowRoot)
+      ?.host as HTMLElement;
+    const fromCheckboxList = checkboxEl?.closest("goa-checkbox-list") !== null;
+
+    relay<FormFieldMountRelayDetail>(
+      _rootEl,
+      FormFieldMountMsg,
+      { name, el: _rootEl },
+      { bubbles: !fromCheckboxList, timeout: 10 },
+    );
   }
 
   function onChange(e: Event) {
@@ -173,20 +239,24 @@
    * Stop propagate the _click,_change to checkbox (so it won't toggle the value)
    */
   function addRevealSlotEventListeners() {
-    _revealSlotEl?.addEventListener("_click", (e: Event) => {
+    _revealSlotEl.addEventListener("_click", (e: Event) => {
       // when we click a button/accordion.. inside the reveal slot, it will uncheck the parent checkbox. stopPropagation (_click) will fix it
       e.stopPropagation();
     });
 
-    _revealSlotEl?.addEventListener("_change", (e: Event) => {
-      console.log("in the _change listener for the checbox");
-      const eventDetail = (e as CustomEvent).detail;
+    _revealSlotEl.addEventListener("_change", (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const eventDetail = customEvent.detail;
       // when we check/change a checkbox/input... inside the reveal slot, it will uncheck the parent checkbox whenever _change is fired. stopPropagation (_change) will fix it
       e.stopPropagation();
 
       // If this is a form field value change (public form)
       // relay it so the Fieldset initialize the reveal slot form field to public form state
-      if (eventDetail?.name && typeof eventDetail.value !== "undefined") {
+      if (
+        eventDetail &&
+        eventDetail.name &&
+        typeof eventDetail.value !== "undefined"
+      ) {
         dispatch(_rootEl, "_revealChange", eventDetail, { bubbles: true });
       }
     });
@@ -201,8 +271,8 @@
   class:v2={version === "2"}
   class:compact={size === "compact"}
   style={`
-    ${calculateMargin(mt, mr, mb, ml)}
-    max-width: ${maxwidth};
+${calculateMargin(mt, mr, mb, ml)}
+max-width: ${maxwidth};
 `}
 >
   <label
@@ -279,7 +349,6 @@
       {text}
     </div>
   </label>
-
   {#if $$slots.description || description}
     <div class="description" id={_descriptionId} data-testid="description">
       <slot name="description" />
@@ -308,7 +377,9 @@
   }
 
   .root {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     height: auto; /* Automatically adjusts to content */
     min-height: 0; /* Ensures no unnecessary minimum height */
     padding: 0; /* Remove padding if it's affecting height */
@@ -330,6 +401,7 @@
   label {
     display: flex;
     cursor: pointer;
+    align-self: flex-start;
   }
 
   /* Hover style when the user hovers over the label */
@@ -367,6 +439,7 @@
     border-left: 4px solid var(--goa-color-greyscale-200);
     padding: var(--goa-space-m);
     margin: var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);
+    box-sizing: border-box;
   }
 
   /* Container */
@@ -580,6 +653,8 @@
   }
 
   .compact .description {
-    margin-left: calc(var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact));
+    margin-left: calc(
+      var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact)
+    );
   }
 </style>

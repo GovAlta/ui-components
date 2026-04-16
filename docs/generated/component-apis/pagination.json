@@ -1,7 +1,6 @@
 {
   "componentSlug": "pagination",
   "extractedFrom": "libs/web-components/src/components/pagination/Pagination.svelte",
-  "extractedAt": "2026-02-04T08:10:50.414Z",
   "props": [
     {
       "name": "pagenumber",

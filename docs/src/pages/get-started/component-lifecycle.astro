@@ -1,0 +1,66 @@
+---
+/**
+ * Get Started - Component Lifecycle
+ *
+ * Defines the stages each Design System component moves through.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Component lifecycle"
+  description="The stages each Design System component moves through"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Component lifecycle</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    The component lifecycle defines the stages each Design System component moves through, from
+    Experimental to Production to Legacy.
+  </goa-text>
+
+  <p>
+    To request a new component or propose an enhancement, follow the
+    <a href="/get-started/contribute">design contribution process</a>.
+  </p>
+  <goa-text as="h2" id="experimental" version="2" size="heading-m">Experimental</goa-text>
+  <p>
+    Experimental components are new or significantly updated. They are available for testing and feedback
+    before public release.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Characteristics</goa-text>
+  <ul>
+    <li>Feedback is gathered from selected teams</li>
+    <li>May be unstable or include breaking changes</li>
+    <li>Limited documentation</li>
+  </ul>
+  <goa-text as="h2" id="production" version="2" size="heading-m">Production</goa-text>
+  <p>
+    Production components are stable and ready for broader adoption.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Characteristics</goa-text>
+  <ul>
+    <li>Fully documented, including design guidelines, properties, and examples</li>
+    <li>Meet accessibility and design system standards</li>
+    <li>Optimized for mobile use</li>
+    <li>Actively maintained with updates and bug fixes</li>
+    <li>Publicly available documentation</li>
+  </ul>
+  <goa-text as="h2" id="legacy" version="2" size="heading-m">Legacy</goa-text>
+  <p>
+    Legacy components are older components maintained primarily to support older implementations. If
+    possible, transition to production is recommended.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Characteristics</goa-text>
+  <ul>
+    <li>No active maintenance or updates</li>
+    <li>Critical issues may remain unresolved</li>
+    <li>Recommended alternative clearly identified</li>
+    <li>Marked as "Legacy" in official documentation</li>
+  </ul>
+  <DropInCallout />
+</DocumentationPageLayout>

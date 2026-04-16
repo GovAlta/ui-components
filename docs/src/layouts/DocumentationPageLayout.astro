@@ -17,9 +17,11 @@
  */
 
 import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
 import { TableOfContents } from '../components/TableOfContents';
+import { getNavCategories } from '../lib/nav-categories';
 
 interface Props {
   title: string;
@@ -37,8 +39,9 @@ const {
   description,
   section,
   showToc = true,
-  tocQuery = 'h2[id], h3[id]'
+  tocQuery = 'h2[id], h3[id], goa-text[id][as="h2"], goa-text[id][as="h3"]'
 } = Astro.props;
+const navCategories = await getNavCategories();
 ---
 
 <BaseLayout title={title} description={description}>
@@ -49,6 +52,7 @@ const {
         <SiteNav
           client:only="react"
           initialSection={section}
+          categories={navCategories}
         />
       </aside>
 
@@ -60,6 +64,9 @@ const {
         </div>
 
         <div class="content-card">
+          <div class="breadcrumb-row">
+            <Breadcrumbs />
+          </div>
           <div class:list={["content-grid", { "with-toc": showToc }]}>
             <!-- Documentation Content -->
             <article class="prose-content">
@@ -128,6 +135,12 @@ const {
 
   .content-grid.with-toc {
     grid-template-columns: 1fr 200px;
+  }
+
+  /* Breadcrumb: match content-grid centering */
+  .breadcrumb-row {
+    max-width: 960px;
+    margin: 0 auto var(--goa-space-xs);
   }
 
   /* Prose typography */

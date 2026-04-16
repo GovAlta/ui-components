@@ -1,22 +1,22 @@
-<goabx-form-item label="Type to create a chip" mb="m">
-  <goabx-input
+<goab-form-item label="Type to create a chip" mb="m">
+  <goab-input
     [value]="inputValue"
     (onChange)="handleInputChange($event)"
     (onKeyPress)="handleInputKeyPress($event)"
     width="100%"
   >
-  </goabx-input>
-</goabx-form-item>
+  </goab-input>
+</goab-form-item>
 @if (typedChips.length > 0) {
 <div>
   @for (typedChip of typedChips; track typedChip) {
-  <goabx-filter-chip
+  <goab-filter-chip
     [content]="typedChip"
     mb="xs"
     mr="xs"
     (onClick)="removeTypedChip(typedChip)"
   >
-  </goabx-filter-chip>
+  </goab-filter-chip>
   }
 </div>
 }

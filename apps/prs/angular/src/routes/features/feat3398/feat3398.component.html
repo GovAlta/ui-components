@@ -8,28 +8,28 @@
   <goab-text>The button should toggle the group open and closed.</goab-text>
 
   <div style="display: flex; height: 310px; overflow: hidden">
-    <goabx-work-side-menu
+    <goab-work-side-menu
       heading="Design System"
       url="/"
       userName="John Doe"
       userSecondaryText="john.doe@example.com"
       [open]="true"
       [primaryContent]="scenario1Template"
-    ></goabx-work-side-menu>
+    ></goab-work-side-menu>
   </div>
 
   <ng-template #scenario1Template>
     <goab-button size="compact" type="secondary" width="100%" (onClick)="toggleGroup()">
       {{ groupOpen ? "Close group" : "Open group" }}
     </goab-button>
-    <goabx-work-side-menu-group heading="Get Started" icon="school" [open]="groupOpen">
-      <goabx-work-side-menu-item
+    <goab-work-side-menu-group heading="Get Started" icon="school" [open]="groupOpen">
+      <goab-work-side-menu-item
         label="Early Adopters"
         url="/get-started/early-adopters"
       />
-      <goabx-work-side-menu-item label="Designers" url="/get-started/designers" />
-      <goabx-work-side-menu-item label="Developers" url="/get-started/developers" />
-    </goabx-work-side-menu-group>
+      <goab-work-side-menu-item label="Designers" url="/get-started/designers" />
+      <goab-work-side-menu-item label="Developers" url="/get-started/developers" />
+    </goab-work-side-menu-group>
   </ng-template>
 
   <goab-text tag="h2">Scenario 2: Open a group with a current item</goab-text>
@@ -39,24 +39,24 @@
   </goab-text>
 
   <div style="display: flex; height: 500px; overflow: hidden">
-    <goabx-work-side-menu
+    <goab-work-side-menu
       heading="UI Components Playground"
       url="/"
       userName="John Doe"
       userSecondaryText="john.doe@example.com"
       [open]="true"
       [primaryContent]="scenario2Template"
-    ></goabx-work-side-menu>
+    ></goab-work-side-menu>
   </div>
 
   <ng-template #scenario2Template>
-    <goabx-work-side-menu-group heading="Features" icon="star">
-      <goabx-work-side-menu-item label="1908" url="/features/1908" />
-      <goabx-work-side-menu-item label="3398" url="/features/3398" />
-    </goabx-work-side-menu-group>
-    <goabx-work-side-menu-group heading="Bugs" icon="bug">
-      <goabx-work-side-menu-item label="2152" url="/bugs/2152" />
-      <goabx-work-side-menu-item label="2331" url="/bugs/2331" />
-    </goabx-work-side-menu-group>
+    <goab-work-side-menu-group heading="Features" icon="star">
+      <goab-work-side-menu-item label="1908" url="/features/1908" />
+      <goab-work-side-menu-item label="3398" url="/features/3398" />
+    </goab-work-side-menu-group>
+    <goab-work-side-menu-group heading="Bugs" icon="bug">
+      <goab-work-side-menu-item label="2152" url="/bugs/2152" />
+      <goab-work-side-menu-item label="2331" url="/bugs/2331" />
+    </goab-work-side-menu-group>
   </ng-template>
 </div>

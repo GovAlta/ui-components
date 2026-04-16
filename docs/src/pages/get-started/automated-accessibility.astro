@@ -1,0 +1,92 @@
+---
+/**
+ * Get Started - Automated Accessibility
+ *
+ * Guidance on combining automated and manual accessibility testing.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="Automated accessibility"
+  description="Guidance on using automated accessibility testing tools effectively"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Automated accessibility</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    Automated accessibility testing tools help you identify potential accessibility issues. Use them as a starting point.
+  </goa-text>
+
+  <p>
+    However, these tools are not a complete solution. They can produce:
+  </p>
+  <ul>
+    <li><strong>False positives</strong> &ndash; flagging issues that are not actual problems</li>
+    <li><strong>False negatives</strong> &ndash; missing real accessibility barriers</li>
+  </ul>
+  <p>
+    To ensure your digital product is accessible, combine automated testing with manual testing and apply
+    human judgment.
+  </p>
+  <goa-text as="h2" id="why-automated-tools-alone-are-not-enough" version="2" size="heading-m">Why automated tools alone are not enough</goa-text>
+
+  <goa-text version="2" size="heading-xs">False positives</goa-text>
+  <p>
+    Automated tools may flag elements as non-compliant even when they work correctly for users. For
+    example, a tool may report that an input is "missing an id" even though it is correctly associated with a
+    label using a valid method, such as wrapping the input inside a <code>&lt;label&gt;</code> element.
+  </p>
+
+  <goa-text version="2" size="heading-xs">False negatives</goa-text>
+  <p>
+    Automated tools cannot detect nuanced or context-specific issues. For example, all interactive
+    elements may be tabbable, but the order jumps around the page. Tools often don't judge whether the
+    tab order is logical for completing the task.
+  </p>
+
+  <goa-text version="2" size="heading-xs">Real user experience</goa-text>
+  <p>
+    Accessibility ensures real people can use a product effectively. Automated tools cannot fully simulate
+    how users interact with your product.
+  </p>
+  <goa-text as="h2" id="steps-for-effective-accessibility-testing" version="2" size="heading-m">Steps for effective accessibility testing</goa-text>
+
+  <ol>
+    <li>
+      <strong>Run automated tools</strong> to get an initial assessment.
+    </li>
+    <li>
+      <strong>Manually verify</strong> flagged issues and review the element's intent and context.
+    </li>
+    <li>
+      <strong>Do additional manual testing</strong> for issues automated tools cannot detect:
+      <ul>
+        <li>Test with a screen reader, such as VoiceOver (macOS) or NVDA (Windows)</li>
+        <li>Test keyboard navigation by checking focus visibility and order</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Report findings</strong>
+      <ul>
+        <li>Record what you tested, what failed, and how to reproduce it</li>
+        <li>If the issue relates to a design system component, submit it using the design system <a href="https://github.com/GovAlta/ui-components/issues/new?template=bug_report.md" target="_blank">bug report form</a></li>
+      </ul>
+    </li>
+  </ol>
+  <goa-text as="h2" id="why-this-process-matters" version="2" size="heading-m">Why this process matters</goa-text>
+  <p>
+    Automated tools provide helpful insight. Relying only on automation can result in:
+  </p>
+  <ul>
+    <li>Time spent fixing issues that are not real barriers</li>
+    <li>Missed opportunities to address genuine accessibility issues</li>
+    <li>A false sense of compliance without meaningful usability improvements</li>
+  </ul>
+  <p>
+    Combine automated and manual testing to identify real barriers. This approach improves accessibility
+    and overall product quality.
+  </p>
+  <DropInCallout />
+</DocumentationPageLayout>

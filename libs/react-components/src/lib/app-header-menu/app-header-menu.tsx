@@ -8,14 +8,6 @@ interface WCProps {
   testid?: string;
 }
 
-/* eslint-disable-next-line */
-export interface GoabAppHeaderMenuProps extends DataAttributes {
-  heading: string;
-  leadingIcon?: GoabIconType;
-  testId?: string;
-  children?: ReactNode;
-}
-
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -25,14 +17,29 @@ declare module "react" {
   }
 }
 
+export interface GoabAppHeaderMenuProps extends DataAttributes {
+  /** @required The menu heading text displayed as the dropdown trigger. */
+  heading: string;
+  /** Icon displayed before the heading text. */
+  leadingIcon?: GoabIconType;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+  /** Slot name used to place this menu in the correct slot of the parent component. */
+  slotName?: string;
+  /** Content rendered inside the menu dropdown, typically navigation links. */
+  children?: ReactNode;
+}
+
+/** Menu items within the app header. */
 export function GoabAppHeaderMenu({
   children,
+  slotName,
   ...rest
 }: GoabAppHeaderMenuProps) {
   const _props = transformProps<WCProps>(rest, lowercase);
 
   return (
-    <goa-app-header-menu {..._props}>
+    <goa-app-header-menu slot={slotName} {..._props}>
       {children}
     </goa-app-header-menu>
   );

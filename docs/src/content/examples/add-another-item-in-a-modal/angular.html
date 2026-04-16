@@ -1,22 +1,22 @@
-<goabx-button type="tertiary" leadingIcon="add" (onClick)="toggleModal()">Add another item</goabx-button>
-<goabx-modal [open]="open" (onClose)="toggleModal()" heading="Add a new item" [actions]="actions">
+<goab-button type="tertiary" leadingIcon="add" (onClick)="toggleModal()">Add another item</goab-button>
+<goab-modal [open]="open" (onClose)="toggleModal()" heading="Add a new item" [actions]="actions">
   <p>Fill in the information to create a new item</p>
-  <goabx-form-item label="Type" mt="l">
-    <goabx-dropdown (onChange)="updateType($event)" [value]="type">
-      <goabx-dropdown-item value="1" label="Option 1"></goabx-dropdown-item>
-      <goabx-dropdown-item value="2" label="Option 2"></goabx-dropdown-item>
-    </goabx-dropdown>
-  </goabx-form-item>
-  <goabx-form-item label="Name" mt="l">
-    <goabx-input name="name" width="100%" (onChange)="updateName($event)" [value]="name"></goabx-input>
-  </goabx-form-item>
-  <goabx-form-item label="Description" mt="l">
-    <goabx-textarea name="description" width="100%" [rows]="3" (onChange)="updateDescription($event)" [value]="description"></goabx-textarea>
-  </goabx-form-item>
+  <goab-form-item label="Type" mt="l">
+    <goab-dropdown (onChange)="updateType($event)" [value]="type">
+      <goab-dropdown-item value="1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Name" mt="l">
+    <goab-input name="name" width="100%" (onChange)="updateName($event)" [value]="name"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Description" mt="l">
+    <goab-textarea name="description" width="100%" [rows]="3" (onChange)="updateDescription($event)" [value]="description"></goab-textarea>
+  </goab-form-item>
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goabx-button type="tertiary" size="compact" (onClick)="toggleModal()">Cancel</goabx-button>
-      <goabx-button type="primary" size="compact" (onClick)="toggleModal()">Save new item</goabx-button>
+      <goab-button type="tertiary" size="compact" (onClick)="toggleModal()">Cancel</goab-button>
+      <goab-button type="primary" size="compact" (onClick)="toggleModal()">Save new item</goab-button>
     </goab-button-group>
   </ng-template>
-</goabx-modal>
+</goab-modal>

@@ -1,7 +1,6 @@
 {
   "componentSlug": "tabs",
   "extractedFrom": "libs/web-components/src/components/tabs/Tabs.svelte",
-  "extractedAt": "2026-02-04T08:10:50.418Z",
   "props": [
     {
       "name": "initialtab",
@@ -26,15 +25,18 @@
       ],
       "required": false,
       "default": "default",
-      "description": "Sets the visual style of tabs. 'segmented' shows pill/button style tabs."
+      "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
     },
     {
       "name": "orientation",
       "type": "\"auto\" | \"horizontal\"",
-      "values": ["auto", "horizontal"],
+      "values": [
+        "auto",
+        "horizontal"
+      ],
       "required": false,
       "default": "auto",
-      "description": "Tab layout orientation. 'auto' stacks vertically on mobile, 'horizontal' keeps horizontal on all screen sizes."
+      "description": "Tab layout orientation. \"auto\" stacks vertically on mobile, \"horizontal\" keeps horizontal on all screen sizes."
     }
   ],
   "events": [

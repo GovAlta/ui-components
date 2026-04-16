@@ -1,7 +1,6 @@
 {
   "componentSlug": "form-stepper",
   "extractedFrom": "libs/web-components/src/components/form-stepper/FormStepper.svelte",
-  "extractedAt": "2026-02-04T08:10:50.408Z",
   "props": [
     {
       "name": "step",

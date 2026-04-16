@@ -6,11 +6,7 @@
 
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
-  import {
-    clamp,
-    ensureSlotExists,
-    fromBoolean,
-  } from "../../common/utils";
+  import { clamp, ensureSlotExists, fromBoolean } from "../../common/utils";
   import { GoATabProps } from "../tab/Tab.svelte";
 
   /** The initially active tab (1-based index). If not set, the first tab is active. */
@@ -23,6 +19,7 @@
   export let variant: "default" | "segmented" = "default";
   /** Tab layout orientation. "auto" stacks vertically on mobile, "horizontal" keeps horizontal on all screen sizes. */
   export let orientation: "auto" | "horizontal" = "auto";
+  export let navigation: "hash" | "none" = "hash";
 
   // Private
   let _rootEl: HTMLElement;
@@ -38,6 +35,7 @@
   let _segmentedIndicatorHeight: number = 30; // 30px is a default height, real value will be calculated later
   let _segmentedTransitionDuration: number = 0;
   let _previousTabIndex: number = 1;
+  let _visibilityObserver: IntersectionObserver | null = null;
 
   const MIN_TRANSITION_DURATION = 200;
   const DURATION_PER_PIXEL = 0.2;
@@ -51,12 +49,20 @@
     ensureSlotExists(_rootEl);
     addChildMountListener();
     addKeyboardEventListeners();
-    addHashChangeListener();
+    if (navigation !== "none") {
+      addHashChangeListener();
+    }
   });
 
   onDestroy(() => {
     removeKeyboardEventListeners();
-    removeHashChangeListener();
+    if (navigation !== "none") {
+      removeHashChangeListener();
+    }
+    if (_visibilityObserver) {
+      _visibilityObserver.disconnect();
+      _visibilityObserver = null;
+    }
   });
 
   // =========
@@ -196,7 +202,9 @@
       link.setAttribute("id", `tab-${index + 1}`);
       link.setAttribute("data-testid", `tab-${index + 1}`);
       link.setAttribute("role", "tab");
-      link.setAttribute("href", `${path}${search}#${tabSlug}`);
+      if (navigation !== "none") {
+        link.setAttribute("href", `${path}${search}#${tabSlug}`);
+      }
       link.setAttribute("aria-controls", `tabpanel-${index + 1}`);
 
       // Store text content for CSS pseudo-element (prevents layout shift when font-weight changes)
@@ -226,6 +234,17 @@
       // wait for DOM to finish render before calculating position
       requestAnimationFrame(() => {
         updateSegmentedIndicatorPosition({ withAnimation: false });
+        // if the tab isn't visible (inside a popover-WorkspaceNotificationPopover), observe for when it becomes visible to re-calculate the segmented indicator width & position
+        if (_segmentedIndicatorWidth === 0 && _tabsEl) {
+          _visibilityObserver = new IntersectionObserver((entries) => {
+            if (entries[0]?.isIntersecting) {
+              updateSegmentedIndicatorPosition({ withAnimation: false });
+              _visibilityObserver?.disconnect();
+              _visibilityObserver = null;
+            }
+          });
+          _visibilityObserver.observe(_tabsEl);
+        }
       });
     }
   }
@@ -273,6 +292,9 @@
 
     const tabsRect = _tabsEl.getBoundingClientRect();
     const selectedRect = selectedTab.getBoundingClientRect();
+
+    // Element not visible yet (e.g., inside a popover with display:none)
+    if (selectedRect.width === 0) return;
 
     if (withAnimation) {
       const previousTab = tabs[_previousTabIndex - 1] as HTMLElement;
@@ -349,8 +371,8 @@
     _slotEl.setAttribute("aria-labelledby", `tab-${_currentTab}`);
     _slotEl.setAttribute("id", `tabpanel-${_currentTab}`);
 
-    // update the browser's url with the new hash
-    if (currentLocation) {
+    // update the browser's url with the new hash (skip when navigation is "none")
+    if (currentLocation && navigation !== "none") {
       const url = new URL(currentLocation);
       // to make sure we preserve multiple #, for example /#tab-1#example
       const allHashes = window.location.href.split("#").slice(1);
@@ -458,9 +480,10 @@
       <div class="segmented-indicator"></div>
     {/if}
   </div>
+  <!-- When navigation="none", remove from tab order : when tabs are used as a UI switcher inside a WorkspaceNotificationPanel , so we can tab to focus on Notification Item (inside the tab) -->
   <div
     class="tabpanel"
-    tabindex={variant === "segmented" ? -1 : 0}
+    tabindex={navigation === "none" ? -1 : 0}
     bind:this={_slotEl}
     role="tabpanel"
   >

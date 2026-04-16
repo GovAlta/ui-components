@@ -1,5 +1,7 @@
-import { GoabxBadge } from "@abgov/react-components/experimental";
-import { GoabContainer } from "@abgov/react-components";
+import {
+  GoabBadge,
+  GoabContainer,
+} from "@abgov/react-components";
 
 export function ShowStatusOnACard() {
   return (
@@ -7,7 +9,7 @@ export function ShowStatusOnACard() {
       type="non-interactive"
       accent="thick"
       heading="Heading"
-      actions={<GoabxBadge type="important" content="Priority" />}
+      actions={<GoabBadge type="important" content="Priority" />}
     >
       Content
     </GoabContainer>

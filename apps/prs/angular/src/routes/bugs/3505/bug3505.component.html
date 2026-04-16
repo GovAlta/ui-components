@@ -1,0 +1,17 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1">Bug 3505 - Link icon click behavior</goab-text>
+
+  <goab-text tag="p">
+    Click the leading icon, trailing icon, or link text. All should open the same target.
+  </goab-text>
+
+  <goab-text tag="p">
+    Press Tab to move focus to the link. The link should show a single outer focus
+    outline on the component, and the internal anchor text should not show its own
+    separate focus outline.
+  </goab-text>
+
+  <goab-link leadingIcon="home" trailingIcon="open">
+    <a href="https://www.alberta.ca" target="_blank" rel="noreferrer noopener">Alberta.ca (icon click test)</a>
+  </goab-link>
+</goab-block>

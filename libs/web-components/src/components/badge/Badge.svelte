@@ -1,13 +1,20 @@
-<svelte:options customElement="goa-badge" />
+<svelte:options
+  customElement={{
+    tag: "goa-badge",
+    props: {
+      minWidth: { type: "String", attribute: "min-width" },
+      justifyContent: { type: "String", attribute: "justify-content" },
+    },
+  }}
+/>
 
 <!-- Script -->
 <script lang="ts">
   import { onMount } from "svelte";
   import type { Spacing } from "../../common/styling";
   import { calculateMargin } from "../../common/styling";
-  import { typeValidator, toBoolean } from "../../common/utils";
+  import { typeValidator, toBoolean, style, styles } from "../../common/utils";
   import type { GoAIconType } from "../icon/Icon.svelte";
-
 
   // Validators
   const [Types, validateType] = typeValidator(
@@ -70,6 +77,7 @@
   type BadgeType = (typeof Types)[number];
   type BadgeSize = (typeof badgeSizes)[number];
   type BadgeVersion = (typeof versions)[number];
+  type BadgeJustifyContent = "center" | "flex-start" | "flex-end" | "space-between";
 
   /** Defines the context and colour of the badge. */
   export let type: BadgeType;
@@ -100,6 +108,11 @@
   export let mb: Spacing = null;
   /** Left margin. */
   export let ml: Spacing = null;
+
+  /** min-width value for the badge container (e.g. "20px", "var(--goa-space-m)"). */
+  export let minWidth: string = "";
+  /** justify-content value for the badge container. */
+  export let justifyContent: BadgeJustifyContent | "" = "";
 
   // private
   // Show icon unless explicitly disabled, when either icon=true or icontype is provided
@@ -162,7 +175,11 @@
 
 <!-- HTML -->
 <div
-  style={calculateMargin(mt, mr, mb, ml)}
+  style={styles(
+    calculateMargin(mt, mr, mb, ml),
+    style("min-width", minWidth),
+    style("justify-content", justifyContent),
+  )}
   data-testid={testid}
   data-type="goa-badge"
   class="goa-badge badge-{type} badge-{size} badge-{emphasis}"

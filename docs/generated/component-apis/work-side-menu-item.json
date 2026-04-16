@@ -1,0 +1,70 @@
+{
+  "componentSlug": "work-side-menu-item",
+  "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideMenuItem.svelte",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The text label displayed for the menu item."
+    },
+    {
+      "name": "url",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "The URL the menu item links to. Optional — when absent, renders as a button instead of a link."
+    },
+    {
+      "name": "badge",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Badge text displayed alongside the menu item (e.g., notification count)."
+    },
+    {
+      "name": "current",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, indicates this is the currently active menu item."
+    },
+    {
+      "name": "divider",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "When true, displays a divider line above this menu item."
+    },
+    {
+      "name": "icon",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Icon displayed before the menu item label."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "type",
+      "type": "\"normal\" | \"emergency\" | \"success\"",
+      "values": ["normal", "emergency", "success"],
+      "required": false,
+      "default": "normal",
+      "description": "Sets the visual style of the badge. Use \"emergency\" for urgent items, \"success\" for positive status."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "popoverContent",
+      "description": "Content displayed in a popover panel beside the menu item."
+    }
+  ]
+}

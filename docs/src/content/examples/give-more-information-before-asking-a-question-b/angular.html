@@ -1,0 +1,35 @@
+<goab-link leadingIcon="arrow-back" size="small" mb="none">
+  Back
+</goab-link>
+
+<goab-text as="h2" mt="xl" mb="m">Submit a question about your benefits</goab-text>
+<goab-text mt="none" mb="xl">
+  If you need clarification about your benefit eligibility, payment schedule, or application status, submit your
+  question here.
+</goab-text>
+
+<form [formGroup]="form">
+  <goab-form-item
+    label="Provide details about your situation"
+    helpText="Include specific details to help us answer your question quickly.">
+    <goab-textarea
+      formControlName="program"
+      name="program"
+      [maxCount]="400"
+      countBy="character">
+    </goab-textarea>
+  </goab-form-item>
+</form>
+
+<goab-details mt="m" heading="What kind of information is useful?">
+  <p>
+    Include your benefit program name, mention any recent correspondence you received and/or provide any
+    relevant case or reference numbers.
+  </p>
+</goab-details>
+
+<goab-button-group alignment="start" mt="2xl">
+  <goab-button type="primary" (onClick)="onContinue()">
+    Continue
+  </goab-button>
+</goab-button-group>

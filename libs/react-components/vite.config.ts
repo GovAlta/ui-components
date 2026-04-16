@@ -32,7 +32,7 @@ export default defineConfig({
     emptyOutDir: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: { index: "src/index.ts", experimental: "src/experimental/index.ts" },
+      entry: { index: "src/index.ts" },
       name: "react-components",
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.

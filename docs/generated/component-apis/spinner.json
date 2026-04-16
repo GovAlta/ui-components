@@ -1,11 +1,16 @@
 {
   "componentSlug": "spinner",
   "extractedFrom": "libs/web-components/src/components/spinner/Spinner.svelte",
-  "extractedAt": "2026-02-04T08:10:50.416Z",
   "props": [
     {
       "name": "size",
-      "type": "SpinnerSize",
+      "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+      "values": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ],
       "required": true,
       "default": null,
       "description": "Sets the size of the spinner."

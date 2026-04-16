@@ -1,7 +1,6 @@
 {
   "componentSlug": "footer",
   "extractedFrom": "libs/web-components/src/components/footer/Footer.svelte",
-  "extractedAt": "2026-02-04T08:10:50.405Z",
   "props": [
     {
       "name": "maxcontentwidth",

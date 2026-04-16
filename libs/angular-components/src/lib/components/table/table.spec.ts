@@ -3,6 +3,8 @@ import { GoabTable } from "./table";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   GoabTableOnSortDetail,
+  GoabTableOnMultiSortDetail,
+  GoabTableSortMode,
   GoabTableVariant,
   Spacing,
 } from "@abgov/ui-components-common";
@@ -15,12 +17,15 @@ import { fireEvent } from "@testing-library/dom";
     <goab-table
       [width]="width"
       [variant]="variant"
+      [sortMode]="sortMode"
+      [striped]="striped"
       [testId]="testId"
       [mt]="mt"
       [mb]="mb"
       [mr]="mr"
       [ml]="ml"
       (onSort)="onSort($event)"
+      (onMultiSort)="onMultiSort($event)"
     >
       <thead>
         <tr>
@@ -38,13 +43,19 @@ import { fireEvent } from "@testing-library/dom";
 class TestTableComponent {
   width?: string;
   variant?: GoabTableVariant;
+  sortMode?: GoabTableSortMode;
+  striped?: boolean;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
   mr?: Spacing;
   ml?: Spacing;
 
-  onSort(event: GoabTableOnSortDetail) {
+  onSort(_event: GoabTableOnSortDetail) {
+    /** do nothing **/
+  }
+
+  onMultiSort(_event: GoabTableOnMultiSortDetail) {
     /** do nothing **/
   }
 }
@@ -64,6 +75,8 @@ describe("GoabTable", () => {
 
     component.width = "200px";
     component.variant = "relaxed";
+    component.sortMode = "multi";
+    component.striped = true;
     component.testId = "foo";
     component.mt = "s" as Spacing;
     component.mb = "xl" as Spacing;
@@ -77,8 +90,11 @@ describe("GoabTable", () => {
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-table");
+    expect(el?.getAttribute("version")).toBe("2");
     expect(el?.getAttribute("width")).toBe(component.width);
     expect(el?.getAttribute("variant")).toBe(component.variant);
+    expect(el?.getAttribute("sort-mode")).toBe(component.sortMode);
+    expect(el?.getAttribute("striped")).toBe("true");
     expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);
@@ -95,13 +111,32 @@ describe("GoabTable", () => {
   it("should dispatch _sort", () => {
     const onSort = jest.spyOn(component, "onSort");
     const el = fixture.nativeElement.querySelector("goa-table");
+    const detail = {
+      sortBy: "column1",
+      sortDir: 1,
+    };
     fireEvent(
       el,
-      new CustomEvent("_sort", {
-        detail: { sortBy: "column1", sortDir: 1 },
-      }),
+      new CustomEvent("_sort", { detail }),
     );
 
-    expect(onSort).toHaveBeenCalledWith({ sortBy: "column1", sortDir: 1 });
+    expect(onSort).toHaveBeenCalledWith(detail);
+  });
+
+  it("should dispatch _multisort", () => {
+    const onMultiSort = jest.spyOn(component, "onMultiSort");
+    const el = fixture.nativeElement.querySelector("goa-table");
+    const detail = {
+      sorts: [
+        { column: "column1", direction: "asc" },
+        { column: "column2", direction: "desc" },
+      ],
+    };
+    fireEvent(
+      el,
+      new CustomEvent("_multisort", { detail }),
+    );
+
+    expect(onMultiSort).toHaveBeenCalledWith(detail);
   });
 });

@@ -1,7 +1,6 @@
 {
   "componentSlug": "chip",
   "extractedFrom": "libs/web-components/src/components/chip/Chip.svelte",
-  "extractedAt": "2026-02-04T08:10:50.398Z",
   "props": [
     {
       "name": "mt",
@@ -78,7 +77,7 @@
     },
     {
       "name": "variant",
-      "type": "ChipVariant",
+      "type": "\"filter\"",
       "required": true,
       "default": null,
       "description": "@deprecated Use GoAFilterChip instead. The chip variant style.",

@@ -1,7 +1,6 @@
 {
   "componentSlug": "radio-item",
   "extractedFrom": "libs/web-components/src/components/radio-item/RadioItem.svelte",
-  "extractedAt": "2026-02-04T08:10:50.415Z",
   "props": [
     {
       "name": "value",

@@ -12,6 +12,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -45,22 +46,29 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Let users show and hide sections of related content on a page. */
 export class GoabAccordion extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** Sets the heading text. */
   @Input() heading?: string;
+  /** Sets secondary text. */
   @Input() secondaryText?: string;
+  /** Sets the state of the accordion container open or closed. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets the heading size of the accordion container heading. */
   @Input() headingSize?: GoabAccordionHeadingSize;
+  /** Sets the heading content template reference. */
   @Input() headingContent!: TemplateRef<any>;
+  /** Sets the maximum width of the accordion. */
   @Input() maxWidth?: string;
+  /** Sets the position of the expand/collapse icon. */
   @Input() iconPosition?: GoabAccordionIconPosition;
 
+  /** Emits when the accordion opens or closes. Emits the new open state as a boolean. */
   @Output() onChange = new EventEmitter<boolean>();
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

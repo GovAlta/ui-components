@@ -3,6 +3,7 @@ import {
   GoabCalloutSize,
   GoabCalloutType,
   GoabCalloutIconTheme,
+  GoabCalloutEmphasis,
 } from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
@@ -10,7 +11,9 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
+
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
@@ -20,12 +23,14 @@ import { GoabBaseComponent } from "../base.component";
   template: `
     @if (isReady) {
       <goa-callout
+        [attr.version]="version"
         [attr.type]="type"
         [attr.heading]="heading"
         [attr.size]="size"
         [attr.maxwidth]="maxWidth"
         [attr.arialive]="ariaLive"
         [attr.icontheme]="iconTheme"
+        [attr.emphasis]="emphasis"
         [attr.testid]="testId"
         [attr.mt]="mt"
         [attr.mb]="mb"
@@ -38,12 +43,12 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Communicate important information through a strong visual emphasis. */
 export class GoabCallout extends GoabBaseComponent implements OnInit {
-  isReady = false;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
+  version = "2";
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component
@@ -54,10 +59,18 @@ export class GoabCallout extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
+  /** Define the context and colour of the callout. @default "information" */
   @Input() type?: GoabCalloutType = "information";
+  /** Callout heading text. */
   @Input() heading?: string = "";
+  /** Sets the size of the callout. 'medium' has reduced padding and type size for compact areas. @default "large" */
   @Input() size?: GoabCalloutSize = "large";
+  /** Sets the maximum width of the callout. */
   @Input() maxWidth?: string;
+  /** Indicates how assistive technology should handle updates to the live region. @default "off" */
   @Input() ariaLive?: GoabCalloutAriaLive = "off";
+  /** Sets the icon theme. 'outline' for stroked icons, 'filled' for solid icons. @default "outline" */
   @Input() iconTheme?: GoabCalloutIconTheme = "outline";
+  /** Sets the visual prominence. 'high' for full background, 'medium' for subtle, 'low' for minimal. @default "medium" */
+  @Input() emphasis?: GoabCalloutEmphasis = "medium";
 }

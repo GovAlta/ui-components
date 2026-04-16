@@ -4,44 +4,28 @@
  * Dividers separate content sections visually.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const dividerConfigurations: ComponentConfigurations = {
-  componentSlug: 'divider',
-  componentName: 'Divider',
-  defaultConfigurationId: 'basic',
+  componentSlug: "divider",
+  componentName: "Divider",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic divider',
-      description: 'Simple horizontal line',
+      id: "basic",
+      name: "Basic divider",
+      description: "Divider with spacing",
       code: {
-        react: `<p>Section one content</p>
-<GoabDivider />
-<p>Section two content</p>`,
-        angular: `<p>Section one content</p>
-<goab-divider></goab-divider>
-<p>Section two content</p>`,
-        webComponents: `<p>Section one content</p>
-<goa-divider></goa-divider>
-<p>Section two content</p>`,
-      },
-    },
-    {
-      id: 'with-margins',
-      name: 'With margins',
-      description: 'Divider with custom spacing',
-      code: {
-        react: `<p>Section one</p>
+        react: `<GoabText mt="none" mb="none">Section one</GoabText>
 <GoabDivider mt="xl" mb="xl" />
-<p>Section two</p>`,
-        angular: `<p>Section one</p>
+<GoabText mt="none" mb="none">Section two</GoabText>`,
+        angular: `<goab-text>Section one</goab-text>
 <goab-divider mt="xl" mb="xl"></goab-divider>
-<p>Section two</p>`,
-        webComponents: `<p>Section one</p>
+<goab-text>Section two</goab-text>`,
+        webComponents: `<goa-text>Section one</goa-text>
 <goa-divider mt="xl" mb="xl"></goa-divider>
-<p>Section two</p>`,
+<goa-text>Section two</goa-text>`,
       },
     },
   ],

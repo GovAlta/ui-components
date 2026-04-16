@@ -14,8 +14,8 @@
 
   /** The text displayed in the group heading. */
   export let heading: string;
-  /** Icon displayed before the group label. */
-  export let icon: GoAIconType;
+  /** Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved. */
+  export let icon: GoAIconType | undefined = undefined;
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
   /** Whether the group is open. */
@@ -44,7 +44,9 @@
     on:mouseenter={handleMouseEnter}
   >
     <summary aria-expanded={open}>
-      <goa-icon type={icon} size="small" theme={open ? "filled" : "outline"} />
+      {#if icon}
+        <goa-icon type={icon} size="small" theme={open ? "filled" : "outline"} />
+      {/if}
       <span class="label">{heading}</span>
       <goa-icon class="marker-icon" type="chevron-forward" size="small" />
     </summary>

@@ -4,18 +4,18 @@
  * Microsite header for smaller government sites.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const micrositeHeaderConfigurations: ComponentConfigurations = {
-  componentSlug: 'microsite-header',
-  componentName: 'Microsite header',
-  defaultConfigurationId: 'basic',
+  componentSlug: "microsite-header",
+  componentName: "Microsite header",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic microsite header',
-      description: 'Simple microsite navigation',
+      id: "basic",
+      name: "Basic microsite header",
+      description: "Simple microsite navigation",
       code: {
         react: `<GoabMicrositeHeader type="alpha" />`,
         angular: `<goab-microsite-header type="alpha"></goab-microsite-header>`,
@@ -23,9 +23,9 @@ export const micrositeHeaderConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Header types',
-      description: 'Different microsite types',
+      id: "types",
+      name: "Header types",
+      description: "Different microsite types",
       code: {
         react: `<GoabMicrositeHeader type="alpha" />
 <GoabMicrositeHeader type="beta" />
@@ -39,9 +39,9 @@ export const micrositeHeaderConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-version',
-      name: 'With version',
-      description: 'Header showing version number',
+      id: "with-version",
+      name: "With version",
+      description: "Header showing version number",
       code: {
         react: `<GoabMicrositeHeader type="alpha" version="1.0.0" />`,
         angular: `<goab-microsite-header type="alpha" version="1.0.0"></goab-microsite-header>`,
@@ -49,9 +49,9 @@ export const micrositeHeaderConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-feedback',
-      name: 'With feedback link',
-      description: 'Header with feedback URL',
+      id: "with-feedback",
+      name: "With feedback link",
+      description: "Header with feedback URL",
       code: {
         react: `<GoabMicrositeHeader type="beta" feedbackUrl="/feedback" />`,
         angular: `<goab-microsite-header type="beta" feedbackUrl="/feedback"></goab-microsite-header>`,

@@ -3,13 +3,14 @@ import { GoabFormItem } from "./form-item";
 
 afterEach(cleanup);
 
-describe("GoaFormItem", () => {
+describe("GoabFormItem", () => {
   it("renders all with properties", () => {
     const { baseElement } = render(
       <GoabFormItem
         label="First Name"
         labelSize="large"
         requirement="optional"
+        type="text-input"
         error="This is an error"
         helpText="This is some help text"
         maxWidth="480px"
@@ -22,6 +23,7 @@ describe("GoaFormItem", () => {
     expect(el?.getAttribute("label")).toEqual("First Name");
     expect(el?.getAttribute("labelsize")).toEqual("large");
     expect(el?.getAttribute("requirement")).toEqual("optional");
+    expect(el?.getAttribute("type")).toEqual("text-input");
     expect(el?.getAttribute("error")).toEqual("This is an error");
     expect(el?.getAttribute("helptext")).toEqual("This is some help text");
     expect(el?.getAttribute("maxwidth")).toEqual("480px");

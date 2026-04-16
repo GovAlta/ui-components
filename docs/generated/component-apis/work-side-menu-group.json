@@ -1,0 +1,42 @@
+{
+  "componentSlug": "work-side-menu-group",
+  "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideMenuGroup.svelte",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": "The text displayed in the group heading."
+    },
+    {
+      "name": "icon",
+      "type": "GoAIconType",
+      "typeLabel": "GoAIconType",
+      "required": false,
+      "default": null,
+      "description": "Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved."
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Sets a data-testid attribute for automated testing."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "Whether the group is open."
+    }
+  ],
+  "events": [],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}

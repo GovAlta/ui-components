@@ -14,19 +14,21 @@ import {
   GoabAppFooter,
   GoabMicrositeHeader,
   GoabAppHeaderMenu,
-  GoabSideMenu,
-  GoabSideMenuGroup,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
 } from "@abgov/angular-components";
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [
+    AppComponent,
     GoabAppHeader,
     GoabAppFooter,
     GoabMicrositeHeader,
     GoabAppHeaderMenu,
-    GoabSideMenu,
-    GoabSideMenuGroup,
+    GoabWorkSideMenu,
+    GoabWorkSideMenuItem,
+    GoabWorkSideMenuGroup,
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularComponentsModule,

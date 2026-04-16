@@ -1,0 +1,73 @@
+---
+/**
+ * LinkCard.astro
+ *
+ * A compact card linking to an external resource.
+ * Supports an optional ionicon icon.
+ *
+ * Usage in MDX:
+ * ```mdx
+ * import LinkCard from '../../components/LinkCard.astro';
+ * <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+ *   <LinkCard href="https://example.com" icon="logo-react" title="React template" description="Start building with React" />
+ * </div>
+ * ```
+ */
+
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  icon?: string;
+}
+
+const { href, title, description, icon } = Astro.props;
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" class="link-card">
+  {icon && <ion-icon name={icon} class="link-card-icon"></ion-icon>}
+  <span class="link-card-text">
+    <goa-text version="2" size="body-m" mt="none" mb="none"><strong class="link-card-title">{title}</strong></goa-text>
+    {description && <goa-text version="2" size="body-xs" mt="none" mb="none"><span class="link-card-description">{description}</span></goa-text>}
+  </span>
+</a>
+
+<style>
+  .link-card {
+    flex: 1;
+    min-width: 14rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .link-card:hover {
+    border-color: var(--goa-color-interactive-default, #0070c4);
+  }
+
+  .link-card-icon {
+    font-size: 1.25rem;
+    color: var(--goa-color-greyscale-800, #333);
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+  }
+
+  .link-card-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .link-card-title {
+    color: var(--goa-color-interactive-default, #0070c4);
+  }
+
+  .link-card-description {
+    font-size: 0.875rem;
+    color: var(--goa-color-text-secondary, #666);
+  }
+</style>

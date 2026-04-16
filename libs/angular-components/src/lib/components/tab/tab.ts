@@ -6,6 +6,7 @@ import {
   OnInit,
   ChangeDetectorRef,
   booleanAttribute,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -20,7 +21,7 @@ import { NgTemplateOutlet } from "@angular/common";
         [attr.heading]="getHeadingAsString()"
       >
         <ng-content />
-        @if (isHeadingTemplate()) {
+        @if (typeof heading !== "string") {
           <div slot="heading">
             <ng-container [ngTemplateOutlet]="getHeadingAsTemplate()"></ng-container>
           </div>
@@ -31,23 +32,23 @@ import { NgTemplateOutlet } from "@angular/common";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [NgTemplateOutlet],
 })
+/** Individual tab within a tabs component. */
 export class GoabTab implements OnInit {
-  isReady = false;
-  @Input() heading!: string | TemplateRef<any>;
-  @Input({ transform: booleanAttribute }) disabled?: boolean;
-  @Input() slug?: string;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  /** The text label for this tab. Can also use the heading slot for custom content. */
+  @Input() heading!: string | TemplateRef<any>;
+  /** When true, disables the tab. */
+  @Input({ transform: booleanAttribute }) disabled?: boolean;
+  /** Sets the URL slug for the tab. */
+  @Input() slug?: string;
 
   ngOnInit(): void {
     setTimeout(() => {
       this.isReady = true;
       this.cdr.detectChanges();
     });
-  }
-
-  isHeadingTemplate(): boolean {
-    return typeof this.heading !== "string";
   }
 
   getHeadingAsString(): string {

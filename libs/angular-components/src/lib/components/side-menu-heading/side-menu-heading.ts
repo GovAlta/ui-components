@@ -6,6 +6,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -15,7 +16,11 @@ import { NgTemplateOutlet } from "@angular/common";
   imports: [NgTemplateOutlet],
   template: `
     @if (isReady) {
-      <goa-side-menu-heading [attr.testid]="testId" [attr.icon]="icon">
+      <goa-side-menu-heading
+        [attr.version]="version"
+        [attr.testid]="testId"
+        [attr.icon]="icon"
+      >
         <ng-content />
         <span slot="meta">
           <ng-container [ngTemplateOutlet]="meta"></ng-container>
@@ -25,13 +30,18 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Section heading in side menu. */
 export class GoabSideMenuHeading implements OnInit {
-  isReady = false;
-  @Input() icon!: GoabIconType;
-  @Input() testId?: string;
-  @Input() meta!: TemplateRef<any>;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  version = "2";
+  /** @required Icon displayed before the heading text. */
+  @Input() icon!: GoabIconType;
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
+  /** Sets the template for the meta slot content. */
+  @Input() meta!: TemplateRef<any>;
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -10,8 +10,29 @@ const workspaceRoot = path.resolve(__dirname, "..");
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://design.alberta.ca",
   root: ".",
   outDir: "../dist/docs",
+  redirects: {
+    "/components/circular-progress-indicator": "/components/circular-progress",
+    "/components/file-uploader": "/components/file-upload-input",
+    "/components/header": "/components/app-header",
+    "/components/icons": "/components/icon",
+    "/components/linear-progress-indicator": "/components/linear-progress",
+    "/components/notification-banner": "/components/notification",
+    "/components/radio": "/components/radio-group",
+    "/components/skeleton-loader": "/components/skeleton",
+    "/design-tokens": "/tokens",
+    "/get-started/support": "/support",
+    "/examples/show-multiple-actions-in-a-table":
+      "/examples/show-multiple-actions-in-a-compact-table",
+    "/examples/communicate-a-future-service-outage":
+      "/examples/notify-the-user-of-a-future-service-outage",
+    "/examples/give-background-information-before-asking-a-question":
+      "/examples/give-more-information-before-asking-a-question-a",
+    "/examples/give-context-before-asking-a-long-answer-question":
+      "/examples/give-more-information-before-asking-a-question-b",
+  },
   build: {
     chunkSizeWarningLimit: 1000,
   },
@@ -55,7 +76,10 @@ export default defineConfig({
         // Design tokens V2 for docs styling (via npm alias)
         {
           find: "@design-tokens",
-          replacement: path.resolve(workspaceRoot, "node_modules/@abgov/design-tokens-v2/dist"),
+          replacement: path.resolve(
+            workspaceRoot,
+            "node_modules/@abgov/design-tokens-v2/dist",
+          ),
         },
       ],
       dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime"],

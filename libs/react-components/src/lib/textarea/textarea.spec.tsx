@@ -7,7 +7,7 @@ const noop = () => {
   /* do nothing */
 };
 
-describe("TextArea", () => {
+describe("GoabTextArea", () => {
   it("should render with properties", async () => {
     render(<GoabTextArea name="textarea-name" onChange={noop} />);
 

@@ -46,6 +46,19 @@ import { Bug3337Component } from "../routes/bugs/3337/bug3337.component";
 import { Bug3279Component } from "../routes/bugs/3279/bug3279.component";
 import { Bug3384Component } from "../routes/bugs/3384/bug3384.component";
 import { Bug3450Component } from "../routes/bugs/3450/bug3450.component";
+import { Bug3497Component } from "../routes/bugs/3497/bug3497.component";
+import { Bug3498Component } from "../routes/bugs/3498/bug3498.component";
+import { Bug3607Component } from "../routes/bugs/3607/bug3607.component";
+import { Bug3505Component } from "../routes/bugs/3505/bug3505.component";
+import { Bug3614Component } from "../routes/bugs/3614/bug3614.component";
+import { Bug3685Component } from "../routes/bugs/3685/bug3685.component";
+import { Bug3640Component } from "../routes/bugs/3640/bug3640.component";
+import { Bug3735Component } from "../routes/bugs/3735/bug3735.component";
+import { Bug3635Component } from "../routes/bugs/3635/bug3635.component";
+import { Bug3699Component } from "../routes/bugs/3699/bug3699.component";
+import { Bug3637Component } from "../routes/bugs/3637/bug3637.component";
+import { Bug3667Component } from "../routes/bugs/3667/bug3667.component";
+import { Bug3772Component } from "../routes/bugs/3772/bug3772.component";
 
 import { Feat1328Component } from "../routes/features/feat1328/feat1328.component";
 import { Feat1383Component } from "../routes/features/feat1383/feat1383.component";
@@ -81,6 +94,10 @@ import { FeatV2IconsComponent } from "../routes/features/featV2Icons/feat-v2-ico
 import { Feat3396Component } from "../routes/features/feat3396/feat3396.component";
 import { FeatV2CheckboxComponent } from "../routes/features/featV2Checkbox/featV2Checkbox.component";
 import { Feat3478Component } from "../routes/features/feat3478/feat3478.component";
+import { Feat2885Component } from "../routes/features/feat2885/feat2885.component";
+import { Feat2885NavigationTabsComponent } from "../routes/features/feat2885-navigation-tabs/feat2885-navigation-tabs.component";
+import { Feat3529Component } from "../routes/features/feat3529/feat3529.component";
+import { Feat3544Component } from "../routes/features/feat3544/feat3544.component";
 
 export const appRoutes: Route[] = [
   { path: "everything", component: EverythingComponent },
@@ -129,7 +146,20 @@ export const appRoutes: Route[] = [
   { path: "bugs/3279", component: Bug3279Component },
   { path: "bugs/3384", component: Bug3384Component },
   { path: "bugs/3450", component: Bug3450Component },
+  { path: "bugs/3497", component: Bug3497Component },
+  { path: "bugs/3498", component: Bug3498Component },
+  { path: "bugs/3607", component: Bug3607Component },
+  { path: "bugs/3614", component: Bug3614Component },
 
+  { path: "bugs/3505", component: Bug3505Component },
+  { path: "bugs/3685", component: Bug3685Component },
+  { path: "bugs/3640", component: Bug3640Component },
+  { path: "bugs/3735", component: Bug3735Component },
+  { path: "bugs/3635", component: Bug3635Component },
+  { path: "bugs/3699", component: Bug3699Component },
+  { path: "bugs/3637", component: Bug3637Component },
+  { path: "bugs/3667", component: Bug3667Component },
+  { path: "bugs/3772", component: Bug3772Component },
   // Feature routes
   { path: "features/1328", component: Feat1328Component },
   { path: "features/1383", component: Feat1383Component },
@@ -150,6 +180,8 @@ export const appRoutes: Route[] = [
   { path: "features/2722", component: Feat2722Component },
   { path: "features/2730", component: Feat2730Component },
   { path: "features/2829", component: Feat2829Component },
+  { path: "features/2885", component: Feat2885Component },
+  { path: "features/2885-navigation-tabs", component: Feat2885NavigationTabsComponent },
   { path: "features/3102", component: Feat3102Component },
   { path: "features/3137", component: Feat3137Component },
   { path: "features/3211", component: Feat3211Component },
@@ -166,4 +198,6 @@ export const appRoutes: Route[] = [
   { path: "features/v2-checkbox", component: FeatV2CheckboxComponent },
   { path: "features/3398", component: Feat3398Component },
   { path: "features/3478", component: Feat3478Component },
+  { path: "features/3529", component: Feat3529Component },
+  { path: "features/3544", component: Feat3544Component },
 ];

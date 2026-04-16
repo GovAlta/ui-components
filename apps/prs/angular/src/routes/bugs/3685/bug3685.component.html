@@ -1,0 +1,230 @@
+<div>
+  <h1>3685 - Checkbox & Radio: Reveal width not aligned with item</h1>
+  <h2>Version 1</h2>
+  <goab-button type="tertiary" leadingIcon="add" (onClick)="toggleModal()">Add another item</goab-button>
+  <goab-modal [open]="open" (onClose)="toggleModal()" heading="Add a new item" [actions]="actions">
+    <p>Fill in the information to create a new item</p>
+    <goab-form-item label="Type" mt="l">
+      <goab-dropdown (onChange)="updateType($event)" [value]="type">
+        <goab-dropdown-item value="1" label="Option 1"></goab-dropdown-item>
+        <goab-dropdown-item value="2" label="Option 2"></goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+    <goab-form-item label="How would you like to be contacted?" helpText="Select one option" mt="l">
+      <goab-radio-group name="contactMethodTwo" formControlName="contactMethodTwo">
+        <goab-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+          <ng-template #emailReveal>
+            <goab-form-item label="Email address">
+              <goab-input name="email" formControlName="emailAddress"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-radio-item>
+        <goab-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
+          <ng-template #phoneReveal>
+            <goab-form-item label="Phone number">
+              <goab-input name="phone" formControlName="phoneNumber"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-radio-item>
+        <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+          <ng-template #textReveal>
+            <goab-form-item label="Mobile phone number">
+              <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-radio-item>
+      </goab-radio-group>
+    </goab-form-item>
+    <goab-form-item label="Select interests" mt="l">
+      <goab-checkbox-list name="entryStatus">
+        <goab-checkbox name="sports" text="Sports"></goab-checkbox>
+        <goab-checkbox name="music" text="Music"></goab-checkbox>
+        <goab-checkbox name="travel" text="Travel"></goab-checkbox>
+        <goab-checkbox name="other" text="Other" [reveal]="phoneReveal">
+          <ng-template #phoneReveal>
+            <goab-form-item label="Please specify">
+              <goab-input name="other" formControlName="other"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-checkbox>
+      </goab-checkbox-list>
+    </goab-form-item>
+    <goab-form-item label="Name" mt="l">
+      <goab-input name="name" width="100%" (onChange)="updateName($event)" [value]="name"></goab-input>
+    </goab-form-item>
+    <goab-form-item label="Description" mt="l">
+      <goab-textarea name="description" width="100%" [rows]="3" (onChange)="updateDescription($event)" [value]="description"></goab-textarea>
+    </goab-form-item>
+    <ng-template #actions>
+      <goab-button-group alignment="end">
+        <goab-button type="tertiary" size="compact" (onClick)="toggleModal()">Cancel</goab-button>
+        <goab-button type="primary" size="compact" (onClick)="toggleModal()">Save new item</goab-button>
+      </goab-button-group>
+    </ng-template>
+  </goab-modal>
+  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+    <goab-radio-group name="contactMethod" formControlName="contactMethod">
+      <goab-radio-item label="Email" value="email"  description="Receive updates via email"/>
+      <goab-radio-item value="phone" label="Phone"/>
+      <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+        <ng-template #textReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+
+  <goab-form-item label="Select any interests you have" mt="xl">
+    <goab-checkbox-list name="contactMethods" formControlName="contactMethods">
+      <goab-checkbox name="travel" text="Travel" value="travel"
+        [description]="descriptionTemplate">
+        <ng-template #descriptionTemplate>
+          <span>Help text with a <a href="#">link</a>.</span>
+        </ng-template>
+      </goab-checkbox>
+      <goab-checkbox name="music" text="Music" value="music"/>
+      <goab-checkbox name="sports" text="Sports" value="sports"/>
+      <goab-checkbox name="other" text="Other" value="other" [reveal]="checkTextReveal">
+        <ng-template #checkTextReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-checkbox>
+    </goab-checkbox-list>
+  </goab-form-item>
+
+  <h2>Version 2 (Experimental)</h2>
+  <goab-button type="tertiary" leadingIcon="add" (onClick)="toggleModalTwo()">Add another item</goab-button>
+  <goab-modal [open]="openTwo" (onClose)="toggleModalTwo()" heading="Add a new item" [actions]="actionsTwo">
+    <p>Fill in the information to create a new item</p>
+    <goab-form-item label="Type" mt="l">
+      <goab-dropdown (onChange)="updateType($event)" [value]="type">
+        <goab-dropdown-item value="1" label="Option 1"></goab-dropdown-item>
+        <goab-dropdown-item value="2" label="Option 2"></goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+    <goab-form-item label="How would you like to be contacted?" helpText="Select one option" mt="l">
+      <goab-radio-group name="contactMethodTwo" formControlName="contactMethodTwo">
+        <goab-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+          <ng-template #emailReveal>
+            <goab-form-item label="Email address">
+              <goab-input name="email" formControlName="emailAddress"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-radio-item>
+        <goab-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
+          <ng-template #phoneReveal>
+            <goab-form-item label="Phone number">
+              <goab-input name="phone" formControlName="phoneNumber"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-radio-item>
+        <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+          <ng-template #textReveal>
+            <goab-form-item label="Mobile phone number">
+              <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-radio-item>
+      </goab-radio-group>
+    </goab-form-item>
+    <goab-form-item label="Select interests" mt="l">
+      <goab-checkbox-list name="entryStatus">
+        <goab-checkbox name="sports" text="Sports"></goab-checkbox>
+        <goab-checkbox name="music" text="Music"></goab-checkbox>
+        <goab-checkbox name="travel" text="Travel"></goab-checkbox>
+        <goab-checkbox name="other" text="Other" [reveal]="phoneReveal">
+          <ng-template #phoneReveal>
+            <goab-form-item label="Please specify">
+              <goab-input name="other" formControlName="other"></goab-input>
+            </goab-form-item>
+          </ng-template>
+        </goab-checkbox>
+      </goab-checkbox-list>
+    </goab-form-item>
+    <goab-form-item label="Name" mt="l">
+      <goab-input name="name" width="100%" (onChange)="updateName($event)" [value]="name"></goab-input>
+    </goab-form-item>
+    <goab-form-item label="Description" mt="l">
+      <goab-textarea name="description" width="100%" [rows]="3" (onChange)="updateDescription($event)" [value]="description"></goab-textarea>
+    </goab-form-item>
+    <ng-template #actionsTwo>
+      <goab-button-group alignment="end">
+        <goab-button type="tertiary" size="compact" (onClick)="toggleModalTwo()">Cancel</goab-button>
+        <goab-button type="primary" size="compact" (onClick)="toggleModalTwo()">Save new item</goab-button>
+      </goab-button-group>
+    </ng-template>
+  </goab-modal>
+  <h3>Regular size</h3>
+  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+    <goab-radio-group name="contactMethod" formControlName="contactMethod">
+      <goab-radio-item label="Email" value="email"  description="Receive updates via email"/>
+      <goab-radio-item value="phone" label="Phone"/>
+      <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+        <ng-template #textReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+
+  <goab-form-item label="Select any interests you have" mt="xl">
+    <goab-checkbox-list name="contactMethods" formControlName="contactMethods">
+      <goab-checkbox name="travel" text="Travel" value="travel"
+        [description]="descriptionTemplate">
+        <ng-template #descriptionTemplate>
+          <span>Help text with a <a href="#">link</a>.</span>
+        </ng-template>
+      </goab-checkbox>
+      <goab-checkbox name="music" text="Music" value="music"/>
+      <goab-checkbox name="sports" text="Sports" value="sports"/>
+      <goab-checkbox name="other" text="Other" value="other" [reveal]="checkTextReveal">
+        <ng-template #checkTextReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-checkbox>
+    </goab-checkbox-list>
+  </goab-form-item>
+
+  <h3>Compact size</h3>
+  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+    <goab-radio-group name="contactMethod" size="compact" formControlName="contactMethod">
+      <goab-radio-item label="Email" value="email"  description="Receive updates via email"/>
+      <goab-radio-item value="phone" label="Phone"/>
+      <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+        <ng-template #textReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+
+  <goab-form-item label="Select any interests you have" mt="xl">
+    <goab-checkbox-list name="contactMethods" size="compact" formControlName="contactMethods">
+      <goab-checkbox name="travel" text="Travel" size="compact" value="travel"
+        [description]="descriptionTemplate">
+        <ng-template #descriptionTemplate>
+          <span>Help text with a <a href="#">link</a>.</span>
+        </ng-template>
+      </goab-checkbox>
+      <goab-checkbox name="music" text="Music" size="compact" value="music"/>
+      <goab-checkbox name="sports" text="Sports" size="compact" value="sports"/>
+      <goab-checkbox name="other" text="Other" size="compact" value="other" [reveal]="checkTextReveal">
+        <ng-template #checkTextReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-checkbox>
+    </goab-checkbox-list>
+  </goab-form-item>
+</div>

@@ -1,23 +1,23 @@
 <goab-text tag="h1">Feat 3241 - Experimental wrapper checks</goab-text>
 <goab-text tag="p" maxWidth="900px">
-  Side-by-side comparisons of Goabx wrappers and the matching Goab components.
+  V2 component comparisons — all components now promoted from experimental to the main package.
 </goab-text>
 <goab-text tag="p" maxWidth="900px">
-  Also implements all new properties created for Goabx components
+  Implements all new V2 properties
 </goab-text>
 
 <goab-text tag="h2" mt="3xl" mb="m">App Footer</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxAppFooter</goab-text>
-    <goabx-app-footer maxContentWidth="100%">
-      <goabx-app-footer-nav-section slot="nav" [maxColumnCount]="1">
+    <goab-text tag="h3" mb="m">GoabAppFooter</goab-text>
+    <goab-app-footer maxContentWidth="100%">
+      <goab-app-footer-nav-section slot="nav" [maxColumnCount]="1">
         <a href="a.html"> Arts and culture </a>
-      </goabx-app-footer-nav-section>
-      <goabx-app-footer-meta-section slot="meta">
+      </goab-app-footer-nav-section>
+      <goab-app-footer-meta-section slot="meta">
         <a href="privacy.html"> Privacy </a>
-      </goabx-app-footer-meta-section>
-    </goabx-app-footer>
+      </goab-app-footer-meta-section>
+    </goab-app-footer>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabAppFooter</goab-text>
@@ -35,28 +35,28 @@
 <goab-text tag="h2" mt="3xl" mb="m">Badge</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxBadge</goab-text>
-    <goabx-badge type="success" content="Experimental" />
+    <goab-text tag="h3" mb="m">GoabBadge</goab-text>
+    <goab-badge type="success" content="Experimental" />
     <goab-text tag="h3" mb="m">Size = large</goab-text>
-    <goabx-badge type="success" content="Experimental" size="large" />
+    <goab-badge type="success" content="Experimental" size="large" />
     <goab-text tag="h3" mb="m">Emphasis = subtle</goab-text>
-    <goabx-badge type="success" content="Experimental" emphasis="subtle" />
+    <goab-badge type="success" content="Experimental" emphasis="subtle" />
     <goab-text tag="h3" mb="m">New type property value</goab-text>
-    <goabx-badge type="dawn" content="Experimental" />
+    <goab-badge type="dawn" content="Experimental" />
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabBadge</goab-text>
     <goab-badge type="success" content="Standard" />
     <goab-text tag="h3" mb="m">Type property value that no longer exists</goab-text>
-    <goab-badge type="pink-light" content="Standard" />
+    <goab-badge type="prairie" content="Standard" />
   </div>
 </goab-grid>
 
 <goab-text tag="h2" mt="3xl" mb="m">Button</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxButton</goab-text>
-    <goabx-button type="primary" leadingIcon="add">Goabx action</goabx-button>
+    <goab-text tag="h3" mb="m">GoabButton</goab-text>
+    <goab-button type="primary" leadingIcon="add">Goabx action</goab-button>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabButton</goab-text>
@@ -67,8 +67,8 @@
 <goab-text tag="h2" mt="3xl" mb="m">Calendar</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxCalendar</goab-text>
-    <goabx-calendar />
+    <goab-text tag="h3" mb="m">GoabCalendar</goab-text>
+    <goab-calendar />
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabCalendar</goab-text>
@@ -79,14 +79,14 @@
 <goab-text tag="h2" mt="3xl" mb="m">Callout</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxCallout</goab-text>
-    <goabx-callout type="information" heading="Goabx callout">
+    <goab-text tag="h3" mb="m">GoabCallout</goab-text>
+    <goab-callout type="information" heading="Goabx callout">
       <goab-text tag="p">Experimental callout content.</goab-text>
-    </goabx-callout>
+    </goab-callout>
     <goab-text tag="h3" mb="m">Emphasis = high</goab-text>
-    <goabx-callout type="information" heading="Goabx callout" emphasis="high">
+    <goab-callout type="information" heading="Goabx callout" emphasis="high">
       <goab-text tag="p">Experimental callout content</goab-text>
-    </goabx-callout>
+    </goab-callout>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabCallout</goab-text>
@@ -99,8 +99,8 @@
 <goab-text tag="h2" mt="3xl" mb="m">Datepicker</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxDatepicker</goab-text>
-    <goabx-date-picker />
+    <goab-text tag="h3" mb="m">GoabDatepicker</goab-text>
+    <goab-date-picker />
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabDatepicker</goab-text>
@@ -111,31 +111,31 @@
 <goab-text tag="h2" mt="3xl" mb="m">Form Item and Input</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxFormItem + GoabxInput</goab-text>
-    <goabx-form-item label="Goabx input" helpText="Experimental wrapper input">
-      <goabx-input name="goabx-name" placeholder="Enter a name" value="Jordan" />
-    </goabx-form-item>
+    <goab-text tag="h3" mb="m">GoabFormItem + GoabInput</goab-text>
+    <goab-form-item label="Goabx input" helpText="Experimental wrapper input">
+      <goab-input name="goabx-name" placeholder="Enter a name" value="Jordan" />
+    </goab-form-item>
     <goab-text tag="h3" mb="m">Form Item - Input type = text-input</goab-text>
-    <goabx-form-item
+    <goab-form-item
       label="Goabx input"
       helpText="Experimental wrapper input"
       type="text-input"
     >
-      <goabx-input
+      <goab-input
         name="goabx-name-text-input"
         placeholder="Enter a name"
         value="Jordan"
       />
-    </goabx-form-item>
+    </goab-form-item>
     <goab-text tag="h3" mb="m">Input - Size = compact</goab-text>
-    <goabx-form-item label="Goabx input" helpText="Experimental wrapper input">
-      <goabx-input
+    <goab-form-item label="Goabx input" helpText="Experimental wrapper input">
+      <goab-input
         name="goabx-name-text-input"
         placeholder="Enter a name"
         value="Jordan"
         size="compact"
       />
-    </goabx-form-item>
+    </goab-form-item>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabFormItem + GoabInput</goab-text>
@@ -148,10 +148,10 @@
 <goab-text tag="h2" mt="3xl" mb="m">Checkbox</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxCheckbox</goab-text>
-    <goabx-checkbox name="goabx-check" text="Goabx checkbox" />
+    <goab-text tag="h3" mb="m">GoabCheckbox</goab-text>
+    <goab-checkbox name="goabx-check" text="Goabx checkbox" />
     <goab-text tag="h3" mb="m">Size = compact</goab-text>
-    <goabx-checkbox name="goabx-check-compact" text="Goabx checkbox" size="compact" />
+    <goab-checkbox name="goabx-check-compact" text="Goabx checkbox" size="compact" />
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabCheckbox</goab-text>
@@ -162,27 +162,27 @@
 <goab-text tag="h2" mt="3xl" mb="m">Dropdown and Items</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxDropdown</goab-text>
-    <goabx-form-item label="Goabx dropdown">
-      <goabx-dropdown name="goabx-color" placeholder="Select a color" value="blue">
-        <goabx-dropdown-item label="Red" value="red" />
-        <goabx-dropdown-item label="Blue" value="blue" />
-        <goabx-dropdown-item label="Green" value="green" />
-      </goabx-dropdown>
-    </goabx-form-item>
+    <goab-text tag="h3" mb="m">GoabDropdown</goab-text>
+    <goab-form-item label="Goabx dropdown">
+      <goab-dropdown name="goabx-color" placeholder="Select a color" value="blue">
+        <goab-dropdown-item label="Red" value="red" />
+        <goab-dropdown-item label="Blue" value="blue" />
+        <goab-dropdown-item label="Green" value="green" />
+      </goab-dropdown>
+    </goab-form-item>
     <goab-text tag="h3" mb="m">Size = compact</goab-text>
-    <goabx-form-item label="Goabx dropdown">
-      <goabx-dropdown
+    <goab-form-item label="Goabx dropdown">
+      <goab-dropdown
         name="goabx-color-compact"
         placeholder="Select a color"
         value="blue"
         size="compact"
       >
-        <goabx-dropdown-item label="Red" value="red" />
-        <goabx-dropdown-item label="Blue" value="blue" />
-        <goabx-dropdown-item label="Green" value="green" />
-      </goabx-dropdown>
-    </goabx-form-item>
+        <goab-dropdown-item label="Red" value="red" />
+        <goab-dropdown-item label="Blue" value="blue" />
+        <goab-dropdown-item label="Green" value="green" />
+      </goab-dropdown>
+    </goab-form-item>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabDropdown</goab-text>
@@ -199,19 +199,19 @@
 <goab-text tag="h2" mt="3xl" mb="m">Textarea</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxTextArea</goab-text>
-    <goabx-form-item label="Goabx textarea">
-      <goabx-textarea name="goabx-notes" rows="3" placeholder="Goabx notes" />
-    </goabx-form-item>
+    <goab-text tag="h3" mb="m">GoabTextArea</goab-text>
+    <goab-form-item label="Goabx textarea">
+      <goab-textarea name="goabx-notes" rows="3" placeholder="Goabx notes" />
+    </goab-form-item>
     <goab-text tag="h3" mb="m">Text Area - Size = compact</goab-text>
-    <goabx-form-item label="Goabx textarea">
-      <goabx-textarea
+    <goab-form-item label="Goabx textarea">
+      <goab-textarea
         name="goabx-notes"
         rows="3"
         placeholder="Goabx notes"
         size="compact"
       />
-    </goabx-form-item>
+    </goab-form-item>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabTextArea</goab-text>
@@ -224,31 +224,31 @@
 <goab-text tag="h2" mt="3xl" mb="m">Radio Group and Items</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxRadioGroup</goab-text>
-    <goabx-form-item label="Goabx radios">
-      <goabx-radio-group name="goabx-plan" value="standard">
-        <goabx-radio-item name="goabx-plan" label="Standard" value="standard" />
-        <goabx-radio-item name="goabx-plan" label="Premium" value="premium" />
-      </goabx-radio-group>
-    </goabx-form-item>
+    <goab-text tag="h3" mb="m">GoabRadioGroup</goab-text>
+    <goab-form-item label="Goabx radios">
+      <goab-radio-group name="goabx-plan" value="standard">
+        <goab-radio-item name="goabx-plan" label="Standard" value="standard" />
+        <goab-radio-item name="goabx-plan" label="Premium" value="premium" />
+      </goab-radio-group>
+    </goab-form-item>
     <goab-text tag="h3" mb="m">Radio Group - Size = compact</goab-text>
     <goab-text tag="h3" mb="m">Radio Item - Compact = true</goab-text>
-    <goabx-form-item label="Goabx radios">
-      <goabx-radio-group name="goabx-plan-compact" value="standard" size="compact">
-        <goabx-radio-item
+    <goab-form-item label="Goabx radios">
+      <goab-radio-group name="goabx-plan-compact" value="standard" size="compact">
+        <goab-radio-item
           name="goabx-plan-compact"
           label="Standard"
           value="standard"
           [compact]="true"
         />
-        <goabx-radio-item
+        <goab-radio-item
           name="goabx-plan-compact"
           label="Premium"
           value="premium"
           [compact]="true"
         />
-      </goabx-radio-group>
-    </goabx-form-item>
+      </goab-radio-group>
+    </goab-form-item>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabRadioGroup</goab-text>
@@ -264,14 +264,14 @@
 <goab-text tag="h2" mt="3xl" mb="m">Filter Chip</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxFilterChip w/ Secondary Text</goab-text>
-    <goabx-filter-chip
+    <goab-text tag="h3" mb="m">GoabFilterChip w/ Secondary Text</goab-text>
+    <goab-filter-chip
       content="Goabx chip"
       secondaryText="Experimental"
       (onClick)="onGoabxFilterClick()"
     />
     <goab-text tag="h3" mb="m">Leading Icon</goab-text>
-    <goabx-filter-chip
+    <goab-filter-chip
       content="Goabx chip"
       secondaryText="Experimental"
       leadingIcon="accessibility"
@@ -294,18 +294,18 @@
 <goab-text tag="h2" mt="3xl" mb="m">Link</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxLink</goab-text>
-    <goabx-link>
+    <goab-text tag="h3" mb="m">GoabLink</goab-text>
+    <goab-link>
       <a href="https://example.com" target="_blank">Goabx link</a>
-    </goabx-link>
+    </goab-link>
     <goab-text tag="h3" mb="m">Color = dark</goab-text>
-    <goabx-link color="dark">
+    <goab-link color="dark">
       <a href="https://example.com" target="_blank">Goabx link</a>
-    </goabx-link>
+    </goab-link>
     <goab-text tag="h3" mb="m">Size = large</goab-text>
-    <goabx-link size="large">
+    <goab-link size="large">
       <a href="https://example.com" target="_blank">Goabx link</a>
-    </goabx-link>
+    </goab-link>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabLink</goab-text>
@@ -318,26 +318,26 @@
 <goab-text tag="h2" mt="3xl" mb="m">Notification</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxNotification</goab-text>
-    <goabx-notification type="information" (onDismiss)="onGoabxNotificationDismiss()">
+    <goab-text tag="h3" mb="m">GoabNotification</goab-text>
+    <goab-notification type="information" (onDismiss)="onGoabxNotificationDismiss()">
       Goabx notification content.
-    </goabx-notification>
+    </goab-notification>
     <goab-text tag="h3" mb="m">Emphasis = low</goab-text>
-    <goabx-notification
+    <goab-notification
       type="information"
       (onDismiss)="onGoabxNotificationDismiss()"
       emphasis="low"
     >
       Goabx notification content.
-    </goabx-notification>
+    </goab-notification>
     <goab-text tag="h3" mb="m">Compact = true</goab-text>
-    <goabx-notification
+    <goab-notification
       type="information"
       (onDismiss)="onGoabxNotificationDismiss()"
       [compact]="true"
     >
       Goabx notification content.
-    </goabx-notification>
+    </goab-notification>
     <goab-text tag="p">Status: {{ goabxNotificationStatus }}</goab-text>
   </div>
   <div>
@@ -352,8 +352,8 @@
 <goab-text tag="h2" mt="3xl" mb="m">Pagination</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxPagination</goab-text>
-    <goabx-pagination
+    <goab-text tag="h3" mb="m">GoabPagination</goab-text>
+    <goab-pagination
       [itemCount]="87"
       [perPageCount]="10"
       [pageNumber]="goabxPage"
@@ -376,8 +376,8 @@
 <goab-text tag="h2" mt="3xl" mb="m">Tabs</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxTabs</goab-text>
-    <goabx-tabs (onChange)="onGoabxTabsChange($event)">
+    <goab-text tag="h3" mb="m">GoabTabs</goab-text>
+    <goab-tabs (onChange)="onGoabxTabsChange($event)">
       <goab-tab heading="Overview">
         <goab-text tag="p">Goabx tab one content.</goab-text>
       </goab-tab>
@@ -387,7 +387,7 @@
       <goab-tab heading="Notes">
         <goab-text tag="p">Goabx tab three content.</goab-text>
       </goab-tab>
-    </goabx-tabs>
+    </goab-tabs>
     <goab-text tag="p" mt="0">Selected tab: {{ goabxTab }}</goab-text>
   </div>
   <div>
@@ -410,19 +410,19 @@
 <goab-text tag="h2" mt="3xl" mb="m">Table</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxTable</goab-text>
-    <goabx-table (onSort)="handleSort($event)">
+    <goab-text tag="h3" mb="m">GoabTable</goab-text>
+    <goab-table (onSort)="handleSort($event)">
       <thead>
         <tr>
           <th>
-            <goabx-table-sort-header name="firstName">First name</goabx-table-sort-header>
+            <goab-table-sort-header name="firstName">First name</goab-table-sort-header>
           </th>
           <th>
-            <goabx-table-sort-header name="lastName">Last name</goabx-table-sort-header>
+            <goab-table-sort-header name="lastName">Last name</goab-table-sort-header>
           </th>
           <th>
-            <goabx-table-sort-header name="age" direction="asc"
-              >Age</goabx-table-sort-header
+            <goab-table-sort-header name="age" direction="asc"
+              >Age</goab-table-sort-header
             >
           </th>
         </tr>
@@ -436,9 +436,9 @@
           </tr>
         }
       </tbody>
-    </goabx-table>
-    <goab-text tag="h3" mb="m">GoabxTable - Striped = true</goab-text>
-    <goabx-table [striped]="true">
+    </goab-table>
+    <goab-text tag="h3" mb="m">GoabTable - Striped = true</goab-text>
+    <goab-table [striped]="true">
       <thead>
         <tr>
           <th>First name</th>
@@ -455,7 +455,7 @@
           </tr>
         }
       </tbody>
-    </goabx-table>
+    </goab-table>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabTable</goab-text>
@@ -491,10 +491,10 @@
 <goab-text tag="h2" mt="3xl" mb="m">File Upload Input</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxFileUploadInput</goab-text>
-    <goabx-form-item label="Goabx upload input">
-      <goabx-file-upload-input variant="dragdrop" name="goabx-files" accept=".pdf,.png" />
-    </goabx-form-item>
+    <goab-text tag="h3" mb="m">GoabFileUploadInput</goab-text>
+    <goab-form-item label="Goabx upload input">
+      <goab-file-upload-input variant="dragdrop" name="goabx-files" accept=".pdf,.png" />
+    </goab-form-item>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabFileUploadInput</goab-text>
@@ -507,8 +507,8 @@
 <goab-text tag="h2" mt="3xl" mb="m">File Upload Card</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxFileUploadCard</goab-text>
-    <goabx-file-upload-card filename="report.pdf" size="1200000" />
+    <goab-text tag="h3" mb="m">GoabFileUploadCard</goab-text>
+    <goab-file-upload-card filename="report.pdf" size="1200000" />
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabFileUploadCard</goab-text>
@@ -519,14 +519,14 @@
 <goab-text tag="h2" mt="3xl" mb="m">Drawer</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxDrawer</goab-text>
+    <goab-text tag="h3" mb="m">GoabDrawer</goab-text>
     <ng-template #goabxDrawerActions>
-      <goabx-button type="secondary" (onClick)="closeGoabxDrawer()">Close</goabx-button>
+      <goab-button type="secondary" (onClick)="closeGoabxDrawer()">Close</goab-button>
     </ng-template>
-    <goabx-button type="secondary" (onClick)="openGoabxDrawer()"
-      >Open Goabx drawer</goabx-button
+    <goab-button type="secondary" (onClick)="openGoabxDrawer()"
+      >Open Goabx drawer</goab-button
     >
-    <goabx-drawer
+    <goab-drawer
       [open]="goabxDrawerOpen"
       position="right"
       heading="Goabx drawer"
@@ -534,7 +534,7 @@
       (onClose)="closeGoabxDrawer()"
     >
       <goab-text tag="p">Goabx drawer content.</goab-text>
-    </goabx-drawer>
+    </goab-drawer>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabDrawer</goab-text>
@@ -559,17 +559,17 @@
 <goab-text tag="h2" mt="3xl" mb="m">Modal</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxModal</goab-text>
+    <goab-text tag="h3" mb="m">GoabModal</goab-text>
     <ng-template #goabxModalActions>
       <goab-button-group alignment="end">
-        <goabx-button type="secondary" (onClick)="closeGoabxModal()">Cancel</goabx-button>
-        <goabx-button type="primary" (onClick)="closeGoabxModal()">Confirm</goabx-button>
+        <goab-button type="secondary" (onClick)="closeGoabxModal()">Cancel</goab-button>
+        <goab-button type="primary" (onClick)="closeGoabxModal()">Confirm</goab-button>
       </goab-button-group>
     </ng-template>
-    <goabx-button type="secondary" (onClick)="openGoabxModal()"
-      >Open Goabx modal</goabx-button
+    <goab-button type="secondary" (onClick)="openGoabxModal()"
+      >Open Goabx modal</goab-button
     >
-    <goabx-modal
+    <goab-modal
       [open]="goabxModalOpen"
       heading="Goabx modal"
       [actions]="goabxModalActions"
@@ -577,7 +577,7 @@
       (onClose)="closeGoabxModal()"
     >
       <goab-text tag="p">Goabx modal content.</goab-text>
-    </goabx-modal>
+    </goab-modal>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabModal</goab-text>
@@ -605,19 +605,19 @@
 <goab-text tag="h2" mt="3xl" mb="m">Side Menu</goab-text>
 <goab-grid minChildWidth="500px" gap="xl" mb="xl">
   <div>
-    <goab-text tag="h3" mb="m">GoabxSideMenu</goab-text>
+    <goab-text tag="h3" mb="m">GoabSideMenu</goab-text>
     <ng-template #goabxSideMenuMeta>
-      <goabx-badge type="important" content="2" />
+      <goab-badge type="important" content="2" />
     </ng-template>
-    <goabx-side-menu>
-      <goabx-side-menu-heading [meta]="goabxSideMenuMeta" icon="settings">
+    <goab-side-menu>
+      <goab-side-menu-heading [meta]="goabxSideMenuMeta" icon="settings">
         Goabx navigation
-      </goabx-side-menu-heading>
-      <goabx-side-menu-group heading="Primary" icon="home">
+      </goab-side-menu-heading>
+      <goab-side-menu-group heading="Primary" icon="home">
         <a href="#goabx-home">Goabx home</a>
         <a href="#goabx-settings">Goabx settings</a>
-      </goabx-side-menu-group>
-    </goabx-side-menu>
+      </goab-side-menu-group>
+    </goab-side-menu>
   </div>
   <div>
     <goab-text tag="h3" mb="m">GoabSideMenu</goab-text>

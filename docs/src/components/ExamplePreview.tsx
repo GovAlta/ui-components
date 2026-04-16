@@ -9,18 +9,18 @@
  * Reusable anywhere - component pages, example pages, embedded in docs.
  */
 
-import { useState, useEffect, useRef } from 'react';
-import { CodeSnippet } from './CodeSnippet';
-import type { ExampleCode } from '../lib/example-code';
-import DOMPurify from 'dompurify';
+import { useState, useEffect, useRef } from "react";
+import { CodeSnippet } from "./CodeSnippet";
+import type { ExampleCode } from "../lib/example-code";
+import DOMPurify from "dompurify";
 
 // Allow GoA web component custom elements through DOMPurify.
 // By default, DOMPurify strips all custom elements (tags containing hyphens).
 // Our previews render <goa-*> web components, so we must whitelist them.
 const DOMPURIFY_CONFIG = {
   CUSTOM_ELEMENT_HANDLING: {
-    tagNameCheck: /^goa-/,          // allow all <goa-*> elements
-    attributeNameCheck: () => true,  // allow their attributes (type, name, label, etc.)
+    tagNameCheck: /^goa-/, // allow all <goa-*> elements
+    attributeNameCheck: () => true, // allow their attributes (type, name, label, etc.)
   },
 };
 
@@ -37,8 +37,10 @@ interface ExamplePreviewProps {
   codeMaxHeight?: number;
   /** Remove side padding for full-width components like callouts */
   fullWidth?: boolean;
+  /** Inline CSS override for preview container (e.g. "padding: 0; max-height: 600px") */
+  previewStyle?: string;
   /** Title size - 'large' for standalone example pages, 'small' for embedded examples */
-  titleSize?: 'large' | 'small';
+  titleSize?: "large" | "small";
 }
 
 export function ExamplePreview({
@@ -48,7 +50,8 @@ export function ExamplePreview({
   figmaUrl,
   codeMaxHeight = 200,
   fullWidth = false,
-  titleSize = 'small',
+  previewStyle,
+  titleSize = "small",
 }: ExamplePreviewProps) {
   const [copied, setCopied] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -77,23 +80,26 @@ export function ExamplePreview({
           const __preview__ = previewRef.current;
           const scopedScript = scriptContent
             // Replace document.getElementById with container-scoped querySelector
-            .replace(/document\.getElementById\s*\(\s*["']([^"']+)["']\s*\)/g,
-              (_, id) => `__preview__.querySelector("#${id}")`
+            .replace(
+              /document\.getElementById\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, id) => `__preview__.querySelector("#${id}")`,
             )
             // Replace document.querySelector with scoped version
-            .replace(/document\.querySelector\s*\(\s*["']([^"']+)["']\s*\)/g,
-              (_, selector) => `__preview__.querySelector("${selector}")`
+            .replace(
+              /document\.querySelector\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, selector) => `__preview__.querySelector("${selector}")`,
             )
             // Replace document.querySelectorAll with scoped version
-            .replace(/document\.querySelectorAll\s*\(\s*["']([^"']+)["']\s*\)/g,
-              (_, selector) => `__preview__.querySelectorAll("${selector}")`
+            .replace(
+              /document\.querySelectorAll\s*\(\s*["']([^"']+)["']\s*\)/g,
+              (_, selector) => `__preview__.querySelectorAll("${selector}")`,
             );
 
           // Execute the script with preview container in scope
-          const fn = new Function('__preview__', scopedScript);
+          const fn = new Function("__preview__", scopedScript);
           fn(__preview__);
         } catch (err) {
-          console.error('Error executing example script:', err);
+          console.error("Error executing example script:", err);
         }
       }
     }
@@ -107,7 +113,7 @@ export function ExamplePreview({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy link:', err);
+      console.error("Failed to copy link:", err);
     }
   };
 
@@ -115,14 +121,18 @@ export function ExamplePreview({
     <div className="example-preview">
       {/* Header */}
       <div className="example-header">
-        {titleSize === 'large' ? (
-          <h1 id={anchorId} className="example-title example-title--large">{title}</h1>
+        {titleSize === "large" ? (
+          <h1 id={anchorId} className="example-title example-title--large">
+            {title}
+          </h1>
         ) : (
-          <h3 id={anchorId} className="example-title">{title}</h3>
+          <h3 id={anchorId} className="example-title">
+            {title}
+          </h3>
         )}
         <div className="example-actions">
           <button
-            className={`copy-link-button ${copied ? 'copied' : ''}`}
+            className={`copy-link-button ${copied ? "copied" : ""}`}
             onClick={handleCopyLink}
             aria-label="Copy link to this example"
             title="Copy link"
@@ -150,7 +160,29 @@ export function ExamplePreview({
 
       {/* Live Preview */}
       <div className="preview-area">
-        <div className={`preview-container${fullWidth ? ' full-width' : ''}`} ref={previewRef}>
+        <div
+          className={`preview-container${fullWidth ? " full-width" : ""}`}
+          ref={previewRef}
+          style={
+            previewStyle
+              ? Object.fromEntries(
+                  previewStyle
+                    .split(";")
+                    .filter((s) => s.trim())
+                    .map((s) => {
+                      const [k, ...v] = s.split(":");
+                      const key = k.trim();
+                      return [
+                        key.startsWith("--")
+                          ? key
+                          : key.replace(/-([a-z])/g, (_, c) => c.toUpperCase()),
+                        v.join(":").trim(),
+                      ];
+                    }),
+                )
+              : undefined
+          }
+        >
           {!code.webComponents && (
             <span className="preview-placeholder">Preview not available</span>
           )}
@@ -162,10 +194,12 @@ export function ExamplePreview({
         <CodeSnippet
           frameworkCode={{
             react: code.react,
-            angular: code.angular ? {
-              ts: code.angular.component,
-              template: code.angular.template,
-            } : undefined,
+            angular: code.angular
+              ? {
+                  ts: code.angular.component,
+                  template: code.angular.template,
+                }
+              : undefined,
             webComponents: code.webComponents,
           }}
           maxHeight={codeMaxHeight}
@@ -228,6 +262,7 @@ export function ExamplePreview({
         .preview-area {
           border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
           border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
           background: var(--goa-color-greyscale-white, #fff);
           min-height: 100px;
           margin-bottom: var(--goa-space-m, 1rem);

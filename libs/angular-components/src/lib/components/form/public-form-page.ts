@@ -36,20 +36,28 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Container for form inputs and validation. */
 export class GoabPublicFormPage extends GoabBaseComponent {
+  /** Sets the id of the form page. */
   @Input() id = "";
+  /** Sets the main heading text of the form page. */
   @Input() heading = "";
+  /** Sets the sub-heading text displayed below the main heading. */
   @Input() subHeading = "";
+  /** Sets the heading used in the summary view for this page. */
   @Input() summaryHeading = "";
+  /** Sets the section title displayed above the heading. */
   @Input() sectionTitle = "";
+  /** Sets the URL for the back navigation link. */
   @Input() backUrl = "";
+  /** Sets the type of the form page step. @default "step" */
   @Input() type: GoabPublicFormPageStep = "step";
+  /** Sets the text for the continue or confirm button. */
   @Input() buttonText = "";
+  /** Sets the visibility of the continue button. @default "visible" */
   @Input() buttonVisibility: GoabPublicFormPageButtonVisibility = "visible";
 
-  /**
-   * triggers when the form page continues to the next step
-   */
+  /** Emits when the form page continues to the next step. */
   @Output() onContinue = new EventEmitter<Event>();
 
   _onContinue(event: Event) {

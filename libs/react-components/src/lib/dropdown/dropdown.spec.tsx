@@ -62,6 +62,7 @@ describe("GoabDropdown", () => {
         ariaLabel={"label"}
         ariaLabelledBy={"foo-dropdown-label"}
         autoComplete="off"
+        size="compact"
         onChange={noop}
       >
         <GoabDropdownItem name="favColor" label="Red" value="red" />
@@ -86,6 +87,7 @@ describe("GoabDropdown", () => {
     expect(el?.getAttribute("arialabelledby")).toBe("foo-dropdown-label");
     expect(el?.getAttribute("autocomplete")).toBe("off");
     expect(el?.getAttribute("maxwidth")).toBe("400px");
+    expect(el?.getAttribute("size")).toBe("compact");
   });
 
   it("should allow for a single selection", async () => {
@@ -120,13 +122,9 @@ describe("GoabDropdown", () => {
 
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabDropdown
-        name="test"
-        onChange={noop}
-        data-grid="cell"
-      >
+      <GoabDropdown name="test" onChange={noop} data-grid="cell">
         <GoabDropdownItem name="test" label="Option 1" value="option1" />
-      </GoabDropdown>
+      </GoabDropdown>,
     );
     const el = baseElement.querySelector("goa-dropdown");
     expect(el?.getAttribute("data-grid")).toBe("cell");

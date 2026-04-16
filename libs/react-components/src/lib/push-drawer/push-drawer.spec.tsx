@@ -1,83 +1,79 @@
 import { render, waitFor } from "@testing-library/react";
-import { GoabPushDrawer } from "./push-drawer";
-import { GoabButton } from "../button/button";
+import { describe, it } from "vitest";
+import GoabPushDrawer from "./push-drawer";
 
-function testElement(open: boolean, drawerWidth: string) {
-  const closePushDrawer = vi.fn(() => {
-    open = false;
-  });
-
-  const actions = (
-    <div>
-      <button>Action 1</button>
-      <button>Action 2</button>
-    </div>
-  );
-
-  const pushDrawerControls = (
-    <div>
-      <p>This is the content of the push drawer.</p>
-    </div>
-  );
-
-  return (
-    <GoabPushDrawer
-      testid="test-drawer"
-      open={open}
-      heading="Push Drawer"
-      width="400px"
-      onClose={closePushDrawer}
-      actions={actions}
-    >
-      {pushDrawerControls}
-      <GoabButton onClick={closePushDrawer}>Close</GoabButton>
-    </GoabPushDrawer>
-  );
-}
+const noop = () => {
+  /* nothing */
+};
 
 describe("GoabPushDrawer", () => {
-  it("renders a goab-push-drawer", async () => {
-    const { container } = render(testElement(true, "400px"));
-    const el = container.querySelector("goa-push-drawer");
+  it("should render", async () => {
+    const content = render(<GoabPushDrawer onClose={noop}>The content</GoabPushDrawer>);
+
+    const el = content.container.querySelector("goa-push-drawer");
+
+    expect(el?.getAttribute("open")).toBeNull();
+    expect(el?.getAttribute("version")).toBe("2");
+  });
+
+  it("should render with properties", async () => {
+    const content = render(
+      <GoabPushDrawer
+        open
+        heading="The heading"
+        width="600px"
+        testId="the testid"
+        onClose={noop}
+      >
+        The content
+      </GoabPushDrawer>,
+    );
+
+    const el = content.container.querySelector("goa-push-drawer");
+    expect(el).toBeTruthy();
     await waitFor(() => {
-      expect(el).toBeTruthy();
+      expect(el?.getAttribute("open")).not.toBeNull();
+      expect(el?.getAttribute("heading")).toBe("The heading");
+      expect(el?.getAttribute("width")).toBe("600px");
+      expect(el?.getAttribute("testid")).toBe("the testid");
+      expect(el?.getAttribute("version")).toBe("2");
     });
   });
 
-  describe("attributes", () => {
-    it("renders with testid", async () => {
-      const { container } = render(testElement(true, "400px"));
-      const el = container.querySelector("goa-push-drawer");
-      await waitFor(() => {
-        expect(el?.getAttribute("testid")).toBe("test-drawer");
-      });
+  it("renders with React node heading", async () => {
+    const headingNode = <div>Custom Heading</div>;
+    const content = render(
+      <GoabPushDrawer open heading={headingNode} onClose={noop}>
+        The content
+      </GoabPushDrawer>,
+    );
+
+    const el = content.container.querySelector("goa-push-drawer");
+    expect(el).toBeTruthy();
+    await waitFor(() => {
+      expect(el?.getAttribute("heading")).toBeNull();
+      const headingSlot = el?.querySelector('[slot="heading"]');
+      expect(headingSlot).toBeTruthy();
+      expect(headingSlot?.textContent).toBe("Custom Heading");
     });
+  });
 
-    it("opens when open is true", async () => {
-      const { container } = render(testElement(true, "400px"));
-      const el = container.querySelector("goa-push-drawer");
+  it("renders with actions", async () => {
+    const actionsNode = <button>Action Button</button>;
+    const content = render(
+      <GoabPushDrawer open heading="The heading" actions={actionsNode} onClose={noop}>
+        The content
+      </GoabPushDrawer>,
+    );
 
-      await waitFor(() => {
-        expect(el?.getAttribute("open")).toBe("");
-      });
-    });
-
-    it("opens when open is false", async () => {
-      const { container } = render(testElement(false, "400px"));
-      const el = container.querySelector("goa-push-drawer");
-
-      await waitFor(() => {
-        expect(el?.getAttribute("open")).toBeFalsy();
-      });
-    });
-
-    it("passes heading", async () => {
-      const { container } = render(testElement(false, "400px"));
-      const el = container.querySelector("goa-push-drawer");
-
-      await waitFor(() => {
-        expect(el?.getAttribute("heading")).toBe("Push Drawer");
-      });
+    const el = content.container.querySelector("goa-push-drawer");
+    expect(el).toBeTruthy();
+    await waitFor(() => {
+      const actionsSlot = el?.querySelector('[slot="actions"]');
+      expect(actionsSlot).toBeTruthy();
+      const actionButton = actionsSlot?.querySelector("button");
+      expect(actionButton).toBeTruthy();
+      expect(actionButton?.textContent).toBe("Action Button");
     });
   });
 });

@@ -4,28 +4,28 @@
  * Spinners indicate loading or processing states.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const spinnerConfigurations: ComponentConfigurations = {
-  componentSlug: 'spinner',
-  componentName: 'Spinner',
-  defaultConfigurationId: 'basic',
+  componentSlug: "spinner",
+  componentName: "Spinner",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic spinner',
-      description: 'Simple loading spinner',
+      id: "basic",
+      name: "Basic spinner",
+      description: "Simple loading spinner",
       code: {
-        react: `<GoabSpinner />`,
-        angular: `<goab-spinner></goab-spinner>`,
-        webComponents: `<goa-spinner></goa-spinner>`,
+        react: `<GoabSpinner size="large" />`,
+        angular: `<goab-spinner size="large"></goab-spinner>`,
+        webComponents: `<goa-spinner size="large"></goa-spinner>`,
       },
     },
     {
-      id: 'sizes',
-      name: 'Sizes',
-      description: 'Different spinner sizes',
+      id: "sizes",
+      name: "Sizes",
+      description: "Different spinner sizes",
       code: {
         react: `<GoabSpinner size="small" />
 <GoabSpinner size="medium" />
@@ -42,31 +42,28 @@ export const spinnerConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'types',
-      name: 'Types',
-      description: 'Infinite and progress spinners',
+      id: "with-progress",
+      name: "With progress",
+      description: "Spinner showing determinate progress",
       code: {
-        react: `<GoabSpinner type="infinite" />
-<GoabSpinner type="progress" progress={45} />`,
-        angular: `<goab-spinner type="infinite"></goab-spinner>
-<goab-spinner type="progress" [progress]="45"></goab-spinner>`,
-        webComponents: `<goa-spinner type="infinite"></goa-spinner>
-<goa-spinner type="progress" progress="45"></goa-spinner>`,
+        react: `<GoabSpinner size="large" progress={45} />`,
+        angular: `<goab-spinner size="large" [progress]="45"></goab-spinner>`,
+        webComponents: `<goa-spinner size="large" progress="45"></goa-spinner>`,
       },
     },
     {
-      id: 'inverted',
-      name: 'Inverted',
-      description: 'Spinner for dark backgrounds',
+      id: "inverted",
+      name: "Inverted",
+      description: "Spinner for dark backgrounds",
       code: {
         react: `<div style={{ backgroundColor: '#333', padding: '1rem' }}>
-  <GoabSpinner invert />
+  <GoabSpinner size="large" invert />
 </div>`,
         angular: `<div style="background-color: #333; padding: 1rem">
-  <goab-spinner [invert]="true"></goab-spinner>
+  <goab-spinner size="large" [invert]="true"></goab-spinner>
 </div>`,
         webComponents: `<div style="background-color: #333; padding: 1rem">
-  <goa-spinner invert></goa-spinner>
+  <goa-spinner size="large" invert></goa-spinner>
 </div>`,
       },
     },

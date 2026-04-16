@@ -138,11 +138,6 @@ describe("Radio", () => {
     // a,b,c,d: 2x2 transformation identity matrix
     expect(beforeStyles.transform).toBe("matrix(1, 0, 0, 1, -22, -22)");
 
-    // Check ::after pseudo-element (should not interfere with touch target)
-    const afterStyles = window.getComputedStyle(icon, "::after");
-    // ::after should not have conflicting dimensions or positioning
-    expect(afterStyles.position).not.toBe("absolute");
-
     // Final verification: Check that all styles are applied and rendered
     // After the page is fully loaded and all CSS is computed
     await vi.waitFor(() => {

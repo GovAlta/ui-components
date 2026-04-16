@@ -2,7 +2,7 @@ import { fireEvent, render, waitFor } from "@testing-library/react";
 import { GoabFilterChip } from "./filter-chip";
 import { describe, it, expect, vi } from "vitest";
 
-describe("GoA FilterChip", () => {
+describe("GoabFilterChip", () => {
   it("should render", () => {
     const { container } = render(<GoabFilterChip content="some filter chip" />);
 
@@ -15,6 +15,8 @@ describe("GoA FilterChip", () => {
     const { container } = render(
       <GoabFilterChip
         content="some filter chip"
+        secondaryText="secondary text"
+        leadingIcon="accessibility"
         mt="s"
         mr="m"
         mb="l"
@@ -34,6 +36,8 @@ describe("GoA FilterChip", () => {
     expect(el?.getAttribute("ml")).toBe("xl");
     expect(el?.getAttribute("error")).toBe("true");
     expect(el?.getAttribute("icontheme")).toBe("filled");
+    expect(el?.getAttribute("secondarytext")).toBe("secondary text");
+    expect(el?.getAttribute("leadingicon")).toBe("accessibility");
     expect(el?.getAttribute("testid")).toBe("test-chip");
   });
 

@@ -23,11 +23,15 @@ declare module "react" {
 }
 
 export interface GoabTemporaryNotificationCtrlProps {
+  /** Vertical position of the notification container. @default "bottom" */
   verticalPosition?: SnackbarVerticalPosition;
+  /** Horizontal position of the notification container. @default "center" */
   horizontalPosition?: SnackbarHorizontalPosition;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
 
+/** A notification that appears at the bottom of the screen. */
 export const GoabTemporaryNotificationCtrl = ({
   verticalPosition = "bottom",
   horizontalPosition = "center",
@@ -37,17 +41,15 @@ export const GoabTemporaryNotificationCtrl = ({
   const el = useRef<HTMLElement>(null);
 
   const _props = transformProps<WCProps>(
-    { "vertical-position": verticalPosition, "horizontal-position": horizontalPosition, ...rest },
-    kebab
+    {
+      "vertical-position": verticalPosition,
+      "horizontal-position": horizontalPosition,
+      ...rest,
+    },
+    kebab,
   );
 
-  return (
-    <goa-temp-notification-ctrl
-      ref={el}
-      {..._props}
-      testid={testId}
-    />
-  );
+  return <goa-temp-notification-ctrl ref={el} {..._props} testid={testId} />;
 };
 
 export default GoabTemporaryNotificationCtrl;

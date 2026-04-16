@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { GoabMenuButton } from "./menu-button";
 import { GoabMenuAction } from "./menu-action";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { GoabButtonType, GoabIconType } from "@abgov/ui-components-common";
+import { GoabButtonSize, GoabButtonType, GoabButtonVariant, GoabIconType } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
 import { fireEvent } from "@testing-library/dom";
 
@@ -13,6 +13,8 @@ import { fireEvent } from "@testing-library/dom";
     <goab-menu-button
       [text]="text"
       [type]="type"
+      [size]="size"
+      [variant]="variant"
       [leadingIcon]="leadingIcon"
       [testId]="testId"
       (onAction)="onAction($event)"
@@ -27,6 +29,8 @@ import { fireEvent } from "@testing-library/dom";
 class TestMenuButtonComponent {
   text?: string;
   type?: GoabButtonType;
+  size?: GoabButtonSize;
+  variant?: GoabButtonVariant;
   leadingIcon?: GoabIconType;
   testId?: string;
 
@@ -62,6 +66,7 @@ describe("GoabMenuButton", () => {
     expect(menuButtonElement.getAttribute("type")).toBe("primary");
     expect(menuButtonElement.getAttribute("leading-icon")).toBe("alarm");
     expect(menuButtonElement.getAttribute("testid")).toBe("test-menu-button");
+    expect(menuButtonElement.getAttribute("version")).toBe("2");
   });
 
   it("should render with leading icon", () => {
@@ -91,5 +96,59 @@ describe("GoabMenuButton", () => {
     fireEvent(menuButtonElement, new CustomEvent("_action", { detail: mockDetail }));
 
     expect(onAction).toHaveBeenCalledWith(mockDetail);
+  });
+
+  it("should render with size normal by default", () => {
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
+    expect(menuButtonElement.getAttribute("size")).toBeNull();
+  });
+
+  it("should render with size compact", () => {
+    component.size = "compact";
+    fixture.detectChanges();
+
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
+    expect(menuButtonElement.getAttribute("size")).toBe("compact");
+  });
+
+  it("should render with size normal", () => {
+    component.size = "normal";
+    fixture.detectChanges();
+
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
+    expect(menuButtonElement.getAttribute("size")).toBe("normal");
+  });
+
+  it("should render with variant destructive", () => {
+    component.variant = "destructive";
+    fixture.detectChanges();
+
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
+    expect(menuButtonElement.getAttribute("variant")).toBe("destructive");
+  });
+
+  it("should render without variant when not provided", () => {
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
+    expect(menuButtonElement.getAttribute("variant")).toBeNull();
+  });
+
+  it("should render without text for icon-only mode", () => {
+    component.text = undefined;
+    fixture.detectChanges();
+
+    const menuButtonElement = fixture.debugElement.query(
+      By.css("goa-menu-button"),
+    ).nativeElement;
+    expect(menuButtonElement.getAttribute("text")).toBeNull();
   });
 });

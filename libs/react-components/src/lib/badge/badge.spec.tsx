@@ -17,6 +17,8 @@ describe("GoabBadge", () => {
         type="information"
         content="Text Content"
         icon
+        size="large"
+        emphasis="subtle"
         mt="s"
         mr="m"
         mb="l"
@@ -29,6 +31,8 @@ describe("GoabBadge", () => {
     expect(el?.getAttribute("type")).toBe("information");
     expect(el?.getAttribute("content")).toBe("Text Content");
     expect(el?.getAttribute("icon")).toBe("true");
+    expect(el?.getAttribute("size")).toBe("large");
+    expect(el?.getAttribute("emphasis")).toBe("subtle");
     expect(el?.getAttribute("mt")).toBe("s");
     expect(el?.getAttribute("mr")).toBe("m");
     expect(el?.getAttribute("mb")).toBe("l");

@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { GoabxButton, GoabxFormItem, GoabxInput } from "@abgov/react-components/experimental";
-import { GoabBlock } from "@abgov/react-components";
+import {
+  GoabBlock,
+  GoabButton,
+  GoabFormItem,
+  GoabInput,
+} from "@abgov/react-components";
 
 export function Search() {
   const [search, setSearch] = useState("");
@@ -11,20 +15,20 @@ export function Search() {
 
   return (
     <form>
-      <GoabxFormItem>
+      <GoabFormItem>
         <GoabBlock gap="xs" direction="row">
-          <GoabxInput
+          <GoabInput
             type="search"
             name="search"
             value={search}
             onChange={(e) => setSearch(e.value)}
             leadingIcon="search"
           />
-          <GoabxButton type="primary" onClick={onClick}>
+          <GoabButton type="primary" onClick={onClick}>
             Search
-          </GoabxButton>
+          </GoabButton>
         </GoabBlock>
-      </GoabxFormItem>
+      </GoabFormItem>
     </form>
   );
 }

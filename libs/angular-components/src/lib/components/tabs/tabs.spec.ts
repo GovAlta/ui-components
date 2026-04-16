@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabTabs } from "./tabs";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabTab } from "../tab/tab";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabTabsOnChangeDetail } from "@abgov/ui-components-common";
 import { fireEvent } from "@testing-library/dom";
 
@@ -10,7 +10,7 @@ import { fireEvent } from "@testing-library/dom";
   imports: [GoabTabs, GoabTab],
   template: `
     <goab-tabs [initialTab]="1" testId="foo" (onChange)="onChange($event)">
-      <goab-tab heading="Profile">Tab content</goab-tab>
+      <goab-tab heading="Profile">Tab content </goab-tab>
     </goab-tabs>
   `,
 })
@@ -25,15 +25,12 @@ class TestTabsComponent {
   standalone: true,
   imports: [GoabTabs, GoabTab],
   template: `
-    <goab-tabs [initialTab]="1" testId="slug-tabs">
-      <goab-tab heading="Overview" slug="overview-section">Overview content</goab-tab>
-      <goab-tab heading="Details">Details content</goab-tab>
+    <goab-tabs [initialTab]="1" navigation="none" testId="nav-tabs">
+      <goab-tab heading="Tab 1">Tab 1 content</goab-tab>
     </goab-tabs>
   `,
 })
-class TestTabsWithSlugComponent {
-  /** do nothing **/
-}
+class TestTabsNavigationComponent {}
 
 describe("GoABTabs", () => {
   let fixture: ComponentFixture<TestTabsComponent>;
@@ -41,7 +38,7 @@ describe("GoABTabs", () => {
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
-      imports: [GoabTabs, GoabTab, TestTabsComponent],
+      imports: [GoabTabs, TestTabsComponent, TestTabsNavigationComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
@@ -54,12 +51,21 @@ describe("GoABTabs", () => {
 
   it("should render", () => {
     const el = fixture.nativeElement.querySelector("goa-tabs");
-
     expect(el?.getAttribute("initialtab")).toBe("1");
     expect(el?.getAttribute("testid")).toBe("foo");
     expect(el?.innerHTML).toContain("Profile");
     expect(el?.textContent).toContain("Tab content");
   });
+
+  it("should render with navigation attribute", fakeAsync(() => {
+    const navFixture = TestBed.createComponent(TestTabsNavigationComponent);
+    navFixture.detectChanges();
+    tick();
+    navFixture.detectChanges();
+
+    const el = navFixture.nativeElement.querySelector("goa-tabs");
+    expect(el?.getAttribute("navigation")).toBe("none");
+  }));
 
   it("should dispatch _onChange", () => {
     const onChange = jest.spyOn(component, "onChange");
@@ -74,20 +80,4 @@ describe("GoABTabs", () => {
 
     expect(onChange).toHaveBeenCalledWith({ tab: 2 });
   });
-
-  it("should render tabs with slug props", fakeAsync(() => {
-    const slugFixture = TestBed.createComponent(TestTabsWithSlugComponent);
-    slugFixture.detectChanges();
-    tick();
-    slugFixture.detectChanges();
-
-    const tabElements = slugFixture.nativeElement.querySelectorAll("goa-tab");
-    expect(tabElements.length).toBe(2);
-
-    // First tab should have slug attribute
-    expect(tabElements[0].getAttribute("slug")).toBe("overview-section");
-
-    // Second tab should not have slug attribute
-    expect(tabElements[1].getAttribute("slug")).toBeNull();
-  }));
 });

@@ -70,6 +70,7 @@
 
   .title {
     font: var(--goa-typography-heading-s);
+    letter-spacing: var(--goa-typography-heading-s-letter-spacing);
     padding-bottom: var(--goa-space-m);
     color: var(--goa-color-greyscale-800);
   }
@@ -97,8 +98,9 @@
       flex-direction: column;
     }
     .title {
-    font: var(--goa-typography-heading-m);
-    padding-bottom: var(--goa-space-l);
+      font: var(--goa-typography-heading-m);
+      letter-spacing: var(--goa-typography-heading-m-letter-spacing);
+      padding-bottom: var(--goa-space-l);
     }
   }
 
@@ -115,8 +117,6 @@
       column-count: var(--wide-column-count);
     }
   }
-
-
 
   a {
     color: var(--goa-footer-color-links);

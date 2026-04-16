@@ -12,8 +12,10 @@
  */
 
 import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
+import { getNavCategories } from '../lib/nav-categories';
 
 interface Props {
   title: string;
@@ -21,6 +23,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const navCategories = await getNavCategories();
 ---
 
 <BaseLayout title={title} description={description}>
@@ -32,6 +35,7 @@ const { title, description } = Astro.props;
         <SiteNav
           client:only="react"
           initialSection="tokens"
+          categories={navCategories}
         />
       </aside>
 
@@ -42,9 +46,15 @@ const { title, description } = Astro.props;
           <MobileHeader client:only="react" />
         </div>
 
-        <div class="content-card">
-          <slot />
+        <div class="content-with-drawer">
+          <div class="content-card">
+            <div class="breadcrumb-row">
+              <Breadcrumbs />
+            </div>
+            <slot />
+          </div>
         </div>
+        <div id="push-drawer-portal"></div>
       </main>
     </div>
   </div>
@@ -72,25 +82,65 @@ const { title, description } = Astro.props;
   }
 
   .main-content {
-    padding: var(--goa-space-l);
-    padding-left: 0;
+    display: flex;
     min-height: 100vh;
     min-width: 0; /* Prevent grid blowout */
+    padding: var(--goa-space-m);
+    padding-left: 0;
+  }
+
+  .content-with-drawer {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Push drawer portal: desktop (push mode) */
+  #push-drawer-portal {
+    margin-top: calc(-1 * var(--goa-space-m));
+    margin-bottom: calc(-1 * var(--goa-space-m));
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  #push-drawer-portal:has([open]) {
+    margin-right: calc(-1 * var(--goa-space-m));
   }
 
   .content-card {
     background: var(--goa-color-greyscale-white);
     border-radius: var(--goa-border-radius-3xl);
     border: 1px solid var(--goa-color-greyscale-150);
-    padding: var(--goa-space-xl) var(--goa-space-2xl);
+    --card-padding-h: var(--goa-space-2xl);
+    padding: var(--goa-space-xl) var(--card-padding-h);
     min-height: calc(100vh - var(--goa-space-l) * 2);
-    /* Full-width card, page content centers itself within */
   }
 
-  /* Tablet: Reduce card padding */
-  @media (max-width: 1024px) {
+  .breadcrumb-row {
+    max-width: 1408px;
+    margin: 0 auto var(--goa-space-xs);
+  }
+
+  /* Tablet: modal drawer mode (push drawer switches at 1023px) */
+  @media (max-width: 1023px) {
     .content-card {
-      padding: var(--goa-space-l) var(--goa-space-xl);
+      --card-padding-h: var(--goa-space-xl);
+      padding: var(--goa-space-l) var(--card-padding-h);
+    }
+
+    #push-drawer-portal {
+      position: static;
+      height: auto;
+      margin: 0;
+    }
+
+    #push-drawer-portal:has([open]) {
+      margin-right: 0;
+    }
+
+    /* When drawer is open, lower mobile header so scrim covers it */
+    :global(.mobile-header-container:has(~ * [open])) {
+      z-index: 0 !important;
     }
   }
 
@@ -114,13 +164,15 @@ const { title, description } = Astro.props;
 
     /* Content: full viewport, no card chrome */
     .main-content {
+      display: block;
       padding: 0;
     }
 
     .content-card {
       border-radius: var(--goa-border-radius-none);
       border: none;
-      padding: var(--goa-space-m);
+      --card-padding-h: var(--goa-space-m);
+      padding: var(--goa-space-m) var(--card-padding-h);
       min-height: auto;
     }
   }

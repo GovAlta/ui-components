@@ -5,9 +5,9 @@ import {
   GoabDetails,
   GoabLink,
   GoabText,
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuGroup,
-  GoabxWorkSideMenuItem,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuGroup,
+  GoabWorkSideMenuItem,
 } from "@abgov/angular-components";
 
 @Component({
@@ -20,9 +20,9 @@ import {
     GoabDetails,
     GoabLink,
     GoabText,
-    GoabxWorkSideMenu,
-    GoabxWorkSideMenuGroup,
-    GoabxWorkSideMenuItem,
+    GoabWorkSideMenu,
+    GoabWorkSideMenuGroup,
+    GoabWorkSideMenuItem,
   ],
 })
 export class Bug3279Component {

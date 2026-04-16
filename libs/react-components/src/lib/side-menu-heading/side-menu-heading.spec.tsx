@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
 
-import SideMenuHeading from "./side-menu-heading";
+import GoabSideMenuHeading from "./side-menu-heading";
 
-describe("SideMenuHeading", () => {
+describe("GoabSideMenuHeading", () => {
   it("should render successfully", () => {
-    const { baseElement } = render(<SideMenuHeading icon="home" testId="foo" />);
+    const { baseElement } = render(<GoabSideMenuHeading icon="home" testId="foo" />);
 
     const el = baseElement.querySelector("goa-side-menu-heading");
     expect(el).toBeTruthy();

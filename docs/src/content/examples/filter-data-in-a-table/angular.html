@@ -1,7 +1,7 @@
-<goabx-form-item id="filterChipInput" [error]="inputError" mb="m">
+<goab-form-item id="filterChipInput" [error]="inputError" mb="m">
   <goab-block gap="xs" direction="row" alignment="start" width="100%">
     <div style="flex: 1">
-      <goabx-input
+      <goab-input
         name="filterChipInput"
         aria-labelledby="filterChipInput"
         [value]="inputValue"
@@ -10,33 +10,33 @@
         (onChange)="handleInputChange($event)"
         (onKeyPress)="handleInputKeyPress($event)"
       >
-      </goabx-input>
+      </goab-input>
     </div>
-    <goabx-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
+    <goab-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">
       Filter
-    </goabx-button>
+    </goab-button>
   </goab-block>
-</goabx-form-item>
+</goab-form-item>
 
 @if (typedChips.length > 0) {
 <ng-container>
   <goab-text tag="span" color="secondary" mb="xs" mr="xs"> Filter: </goab-text>
   @for (typedChip of typedChips; track typedChip; let index = $index) {
-  <goabx-filter-chip
+  <goab-filter-chip
     [content]="typedChip"
     mb="xs"
     mr="xs"
     (onClick)="removeTypedChip(typedChip)"
   >
-  </goabx-filter-chip>
+  </goab-filter-chip>
   }
-  <goabx-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
+  <goab-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">
     Clear all
-  </goabx-button>
+  </goab-button>
 </ng-container>
 }
 
-<goabx-table width="full">
+<goab-table width="full">
   <thead>
     <tr>
       <th>Status</th>
@@ -48,18 +48,18 @@
     @for (item of dataFiltered; track $index) {
     <tr>
       <td>
-        <goabx-badge
+        <goab-badge
           [type]="item.status.type"
           [content]="item.status.text"
           [icon]="false"
-        ></goabx-badge>
+        ></goab-badge>
       </td>
       <td>{{ item.name }}</td>
       <td class="goa-table-number-column">{{ item.id }}</td>
     </tr>
     }
   </tbody>
-</goabx-table>
+</goab-table>
 
 @if (dataFiltered.length === 0 && data.length > 0) {
 <goab-block mt="l" mb="l"> No results found </goab-block>

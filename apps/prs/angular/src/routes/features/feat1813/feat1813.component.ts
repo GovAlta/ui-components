@@ -4,6 +4,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  inject,
 } from "@angular/core";
 import { NgStyle } from "@angular/common";
 import {
@@ -108,8 +109,7 @@ export class Feat1813Component implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   private resizeHandler = () => this.scheduleMeasurement();
-
-  constructor(private readonly cdr: ChangeDetectorRef) {}
+  private readonly cdr = inject(ChangeDetectorRef);
 
   onDateChange(details: GoabDatePickerOnChangeDetail) {
     console.log("Date changed:", details);

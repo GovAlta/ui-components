@@ -30,13 +30,13 @@
     <thead>
       <tr>
         <th>
-          <goabx-checkbox
+          <goab-checkbox
             name="select-all"
             [checked]="allSelected"
             [indeterminate]="someSelected"
             (onChange)="toggleSelectAll($event)"
             ariaLabel="Select all rows"
-          ></goabx-checkbox>
+          ></goab-checkbox>
         </th>
         <th>Name</th>
         <th>Email</th>
@@ -47,12 +47,12 @@
       @for (row of tableData; track row.id) {
         <tr>
           <td>
-            <goabx-checkbox
+            <goab-checkbox
               [name]="'select-' + row.id"
               [checked]="isRowSelected(row.id)"
               (onChange)="toggleRow(row.id, $event)"
               [ariaLabel]="'Select ' + row.name"
-            ></goabx-checkbox>
+            ></goab-checkbox>
           </td>
           <td>{{ row.name }}</td>
           <td>{{ row.email }}</td>
@@ -77,15 +77,15 @@
     Previously relied on individual checkbox margins.
   </goab-text>
 
-  <goabx-checkbox-list
+  <goab-checkbox-list
     name="preferences"
     [value]="checkboxListValue"
     (onChange)="onCheckboxListChange($event)"
   >
-    <goabx-checkbox name="option1" text="Option 1: Email notifications"></goabx-checkbox>
-    <goabx-checkbox name="option2" text="Option 2: SMS notifications"></goabx-checkbox>
-    <goabx-checkbox name="option3" text="Option 3: Push notifications"></goabx-checkbox>
-  </goabx-checkbox-list>
+    <goab-checkbox name="option1" text="Option 1: Email notifications"></goab-checkbox>
+    <goab-checkbox name="option2" text="Option 2: SMS notifications"></goab-checkbox>
+    <goab-checkbox name="option3" text="Option 3: Push notifications"></goab-checkbox>
+  </goab-checkbox-list>
 
   <goab-text size="body-xs" mt="m">
     Selected: {{ checkboxListValue.length > 0 ? checkboxListValue.join(", ") : "none" }}
@@ -101,28 +101,28 @@
     Compact checkbox list uses smaller gap (var(--goa-space-s)) between items.
   </goab-text>
 
-  <goabx-checkbox-list
+  <goab-checkbox-list
     name="compact-prefs"
     size="compact"
     [value]="compactListValue"
     (onChange)="onCompactListChange($event)"
   >
-    <goabx-checkbox
+    <goab-checkbox
       name="compact1"
       size="compact"
       text="Compact option 1"
-    ></goabx-checkbox>
-    <goabx-checkbox
+    ></goab-checkbox>
+    <goab-checkbox
       name="compact2"
       size="compact"
       text="Compact option 2"
-    ></goabx-checkbox>
-    <goabx-checkbox
+    ></goab-checkbox>
+    <goab-checkbox
       name="compact3"
       size="compact"
       text="Compact option 3"
-    ></goabx-checkbox>
-  </goabx-checkbox-list>
+    ></goab-checkbox>
+  </goab-checkbox-list>
 
   <goab-text size="body-xs" mt="m">
     Selected: {{ compactListValue.length > 0 ? compactListValue.join(", ") : "none" }}
@@ -140,9 +140,9 @@
   </goab-text>
 
   <goab-block direction="row" gap="xl" alignment="center">
-    <goabx-checkbox name="standalone1" text="Checkbox A"></goabx-checkbox>
-    <goabx-checkbox name="standalone2" text="Checkbox B"></goabx-checkbox>
-    <goabx-checkbox name="standalone3" text="Checkbox C"></goabx-checkbox>
+    <goab-checkbox name="standalone1" text="Checkbox A"></goab-checkbox>
+    <goab-checkbox name="standalone2" text="Checkbox B"></goab-checkbox>
+    <goab-checkbox name="standalone3" text="Checkbox C"></goab-checkbox>
   </goab-block>
 
   <goab-text size="body-xs" mt="m">

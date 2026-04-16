@@ -1,0 +1,472 @@
+---
+/**
+ * Foundations - Content guidelines - Helper text
+ *
+ * Helper text guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Content guidelines -> Helper text.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+import DoDont from "../../../components/DoDont.astro";
+import Preview from "../../../components/Preview.astro";
+
+interface HelperTextCard {
+  label: string;
+  helper: string;
+  description: string;
+}
+
+interface HelperTextType {
+  id: string;
+  title: string;
+  intro: string;
+  examples?: string[];
+  doCards: HelperTextCard[];
+  dontCards: HelperTextCard[];
+}
+
+const supportedControls = [
+  {
+    label: "Text inputs",
+    href: "/components/text-area",
+  },
+  {
+    label: "Radios",
+    href: "/components/radio-group",
+  },
+  {
+    label: "Dropdowns",
+    href: "/components/dropdown",
+  },
+  {
+    label: "Checkboxes",
+    href: "/components/checkbox",
+  },
+  {
+    label: "Buttons",
+    href: "/components/button",
+  },
+];
+
+const anatomyStructure = ["Input label", "Input control", "Helper text"];
+
+const helperTextQualities = ["Short", "Persistent", "Directly related to the input"];
+
+const longFormAlternatives = [
+  { label: "Accordion", href: "/components/accordion" },
+  { label: "Callout", href: "/components/callout" },
+  { label: "Details", href: "/components/details" },
+  { label: "Tooltip", href: "/components/tooltip" },
+];
+
+const languageToneGuidance = [
+  {
+    id: "keep-it-concise",
+    title: "Keep it concise",
+    body: "Use short statements. Avoid long explanations.",
+  },
+  {
+    id: "use-plain-language",
+    title: "Use plain language",
+    body: "Write in a way that is easy for users to understand. Avoid technical jargon.",
+  },
+  {
+    id: "be-specific",
+    title: "Be specific",
+    body: "Clearly describe the information required.",
+  },
+  {
+    id: "provide-examples-when-helpful",
+    title: "Provide examples when helpful",
+    body: 'Examples clarify formatting expectations. For example: "Enter a phone number, such as 403-123-4567"',
+  },
+  {
+    id: "use-digits-for-numbers",
+    title: "Use digits for numbers",
+    body: 'Write numbers using digits unless a sentence begins with a number. For example: "342 days remaining until you graduate."',
+  },
+];
+
+const helperTextTypes: HelperTextType[] = [
+  {
+    id: "disclosure",
+    title: "Disclosure",
+    intro:
+      "Explains <strong>why information is needed</strong> or <strong>how it will be used</strong>.",
+    examples: [
+      "Your full name is used for verification",
+      "Emails will be sent in your language of choice",
+      "This address will receive your printed certificate",
+      "Your birthdate is used to verify your eligibility",
+    ],
+    doCards: [
+      {
+        label: "Email",
+        helper: "This email will receive update and communications",
+        description: "Explain how the information will be used.",
+      },
+    ],
+    dontCards: [
+      {
+        label: "Comments",
+        helper: "May be seen by others",
+        description: "Don't use vague statements that do not explain the purpose.",
+      },
+    ],
+  },
+  {
+    id: "instructional",
+    title: "Instructional",
+    intro: "Explains <strong>how to use the input or interact with the control</strong>.",
+    examples: [
+      "Search by staff name or certification number",
+      "Select an existing project or create a new project name",
+      "Type your search terms to see results",
+      "Select a file to upload for verification",
+    ],
+    doCards: [
+      {
+        label: "Project name",
+        helper: "Select an existing project or create a new project name",
+        description:
+          "Start with a directive verb for example, Search, Select, Enter, Choose, or Upload",
+      },
+      {
+        label: "Staff search",
+        helper: "Select by staff name or certification number",
+        description: "Summarize directions or intended interaction.",
+      },
+    ],
+    dontCards: [
+      {
+        label: "Project name",
+        helper: "Carefully select an existing or create a new project name",
+        description: "Don't begin with polite phrases such as Please or Thank you.",
+      },
+      {
+        label: "Reason for request",
+        helper: "Complete this field to continue",
+        description: "Don't use vague instructions about the information required.",
+      },
+    ],
+  },
+  {
+    id: "restrictive",
+    title: "Restrictive",
+    intro: "Defines <strong>rules or requirements</strong> for an input.",
+    examples: [
+      "Must be 8 or more characters with one uppercase letter and one number",
+      "Must be 5 MB or smaller",
+      "Choose a date within the last six months",
+      "Password must contain 1 uppercase letter and 1 number",
+    ],
+    doCards: [
+      {
+        label: "Proponent names",
+        helper: "Provide all proponent names",
+        description: "Clearly describe requirements or limits",
+      },
+    ],
+    dontCards: [
+      {
+        label: "Region code",
+        helper: "Only digits <= 9 are acceptable",
+        description:
+          "Don't write comparisons in symbols rather than words. For example, use \"less than or equal to 0\" instead of \"<= 9\"",
+      },
+    ],
+  },
+  {
+    id: "formatting",
+    title: "Formatting",
+    intro: "Helper text should follow consistent formatting.",
+    doCards: [
+      {
+        label: "Social Insurance Number",
+        helper: "Social Insurance Number must be exactly 9 digits in length",
+        description: "Use sentence case.",
+      },
+    ],
+    dontCards: [
+      {
+        label: "Social Insurance Number",
+        helper: "Social Insurance number must be exactly 9 digits in length.",
+        description: "Don't use a period at the end of the helper text",
+      },
+    ],
+  },
+];
+
+function buildFieldName(...parts: string[]) {
+  return parts
+    .join("-")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+---
+
+<DocumentationPageLayout
+  title="Helper text"
+  description="Helper text guidance for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Helper text</goa-text>
+  <goa-text size="body-l" mt="none" mb="m">
+    Helper text provides additional context or guidance displayed
+    below an input field. It helps users understand what information is
+    required or how to complete a field before moving to the next step in a form or
+    process.
+  </goa-text>
+  <goa-divider version="2" mt="xl" mb="xl" />
+  <goa-text size="body-m" mt="none" mb="m">
+    Helper text can be used with:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      {
+        supportedControls.map((item) => (
+          <li>
+            <goa-link>
+              <a href={item.href}>{item.label}</a>
+            </goa-link>
+          </li>
+        ))
+      }
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Helper text appears directly below the input control.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Structure:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ol>
+      {anatomyStructure.map((item) => <li>{item}</li>)}
+    </ol>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Helper text should clearly relate to the associated input.
+  </goa-text>
+
+  <img
+    src="/images/foundations/content-guidelines/helper-text-anatomy.svg"
+    alt="Annotated helper text anatomy showing an input label, input control, and helper text."
+  />
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="when-to-use-helper-text">When to use helper text</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use helper text when users need brief guidance before interacting with an input.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Helper text should be:</goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    <ul>
+      {helperTextQualities.map((item) => <li>{item}</li>)}
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Do not use helper text for long explanations.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    For longer or descriptive information, use:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      {
+        longFormAlternatives.map((item) => (
+          <li>
+            <goa-link>
+              <a href={item.href}>{item.label}</a>
+            </goa-link>
+          </li>
+        ))
+      }
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="language-and-tone">Language and tone</h2>
+  {
+    languageToneGuidance.map((item) => (
+      <>
+        <h3 id={item.id}>{item.title}</h3>
+        <goa-text size="body-m" mt="none" mb="m">
+          {item.body}
+        </goa-text>
+      </>
+    ))
+  }
+  <goa-text size="body-m" mt="none" mb="m">
+    Refer to the
+    <goa-link trailingicon="open">
+      <a
+        href="https://www.alberta.ca/web-writing-style-guide-writing-style#:~:text=depending%20on%20audience-,Plain%20language,-Write%20all%20web"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Web writing style guide - Plain language
+      </a>
+    </goa-link>
+    .
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Refer to the
+    <goa-link trailingicon="open">
+      <a
+        href="https://www.alberta.ca/web-writing-style-guide-numbers-and-measurements"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Web writing style guide - Numbers and measurements
+      </a>
+    </goa-link>
+    .
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="types-of-helper-text">Types of helper text</h2>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Helper text generally falls into three categories.
+  </goa-text>
+
+  {
+    helperTextTypes.map((section) => (
+      <>
+        <h3 id={section.id}>{section.title}</h3>
+        <goa-text size="body-m" mt="none" mb="m" set:html={section.intro} />
+        <goa-text size="body-m" mt="none" mb="m">
+          Examples:
+        </goa-text>
+        <goa-text size="body-m" mt="none" mb="m">
+          <ul>
+            {section.examples && section.examples.map((example) => <li>{example}</li>)}
+          </ul>
+        </goa-text>
+
+        <div class="dodont-grid">
+          {section.doCards.map((card) => (
+            <DoDont type="do" description={card.description}>
+              <Preview>
+                <div class="preview-form">
+                  <goa-form-item
+                    version="2"
+                    label={card.label}
+                    helptext={card.helper}
+                    maxwidth="28rem"
+                  >
+                    <goa-input
+                      version="2"
+                      name={buildFieldName(section.id, "do", card.label)}
+                      width="100%"
+                      disabled="true"
+                    />
+                  </goa-form-item>
+                </div>
+              </Preview>
+            </DoDont>
+          ))}
+
+          {section.dontCards.map((card) => (
+            <DoDont type="dont" description={card.description}>
+              <Preview>
+                <div class="preview-form">
+                  <goa-form-item
+                    version="2"
+                    label={card.label}
+                    helptext={card.helper}
+                    maxwidth="28rem"
+                  >
+                    <goa-input
+                      version="2"
+                      name={buildFieldName(section.id, "dont", card.label)}
+                      width="100%"
+                      disabled="true"
+                    />
+                  </goa-form-item>
+                </div>
+              </Preview>
+            </DoDont>
+          ))}
+        </div>
+      </>
+    ))
+  }
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="accessibility">Accessibility</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Helper text should be associated with the input using the
+    <strong> aria-describedby</strong> attribute. This ensures screen readers can provide the
+    same context to users who rely on assistive technology.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Refer to:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>
+        <goa-link trailingicon="open">
+          <a
+            href="https://www.w3.org/TR/WCAG20-TECHS/ARIA1.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            W3C - Using the aria-describedby property to provide a descriptive label for
+            UI controls
+          </a>
+        </goa-link>
+      </li>
+      <li>
+        <goa-link trailingicon="open">
+          <a
+            href="https://a11y-101.com/development/aria-describedby"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ARIA described by - Introduction to Accessibility
+          </a>
+        </goa-link>
+      </li>
+    </ul>
+  </goa-text>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .dodont-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  .anatomy-preview {
+    margin: 0 0 var(--goa-space-xl);
+    max-width: 47rem;
+  }
+
+  .anatomy-preview img {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
+
+  .preview-form {
+    max-width: 28rem;
+  }
+
+  @media (min-width: 768px) {
+    .dodont-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+</style>

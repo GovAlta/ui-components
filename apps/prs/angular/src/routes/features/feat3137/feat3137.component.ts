@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import {
-  GoabxWorkSideMenu,
-  GoabxWorkSideMenuItem,
-  GoabxWorkSideMenuGroup,
+  GoabWorkSideMenu,
+  GoabWorkSideMenuItem,
+  GoabWorkSideMenuGroup,
 } from "@abgov/angular-components";
 
 @Component({
@@ -10,6 +10,6 @@ import {
   selector: "abgov-feat3137",
   templateUrl: "./feat3137.component.html",
   styleUrls: ["./feat3137.component.css"],
-  imports: [GoabxWorkSideMenu, GoabxWorkSideMenuGroup, GoabxWorkSideMenuItem],
+  imports: [GoabWorkSideMenu, GoabWorkSideMenuGroup, GoabWorkSideMenuItem],
 })
 export class Feat3137Component {}

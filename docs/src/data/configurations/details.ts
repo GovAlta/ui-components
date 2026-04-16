@@ -4,18 +4,18 @@
  * Details show expandable/collapsible content.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const detailsConfigurations: ComponentConfigurations = {
-  componentSlug: 'details',
-  componentName: 'Details',
-  defaultConfigurationId: 'basic',
+  componentSlug: "details",
+  componentName: "Details",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic details',
-      description: 'Simple expandable section',
+      id: "basic",
+      name: "Basic details",
+      description: "Simple expandable section",
       code: {
         react: `<GoabDetails heading="More information">
   <p>This content is revealed when the details component is expanded.</p>
@@ -29,9 +29,9 @@ export const detailsConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'open',
-      name: 'Open by default',
-      description: 'Details that starts expanded',
+      id: "open",
+      name: "Open by default",
+      description: "Details that starts expanded",
       code: {
         react: `<GoabDetails heading="Visible by default" open>
   <p>This content is shown when the page loads.</p>

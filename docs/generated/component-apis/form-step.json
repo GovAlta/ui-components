@@ -1,7 +1,6 @@
 {
   "componentSlug": "form-step",
   "extractedFrom": "libs/web-components/src/components/form-step/FormStep.svelte",
-  "extractedAt": "2026-02-04T08:10:50.408Z",
   "props": [
     {
       "name": "text",
@@ -12,10 +11,11 @@
     },
     {
       "name": "status",
-      "type": "FormStepStatus | undefined",
+      "type": "\"complete\" | \"incomplete\" | \"not-started\"",
       "values": [
-        "FormStepStatus",
-        "undefined"
+        "complete",
+        "incomplete",
+        "not-started"
       ],
       "required": false,
       "default": null,

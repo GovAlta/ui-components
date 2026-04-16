@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { GoabxTabs, GoabxButton } from "@abgov/react-components/experimental";
-import { GoabTab } from "@abgov/react-components";
+import {
+  GoabButton,
+  GoabTab,
+  GoabTabs,
+} from "@abgov/react-components";
+
 import hljs from "highlight.js/lib/core";
 import typescript from "highlight.js/lib/languages/typescript";
 import xml from "highlight.js/lib/languages/xml";
@@ -97,7 +101,7 @@ function SingleCodeBlock({
   }, [cleanedCode]);
 
   // Detect whether expand button is needed using ResizeObserver.
-  // A one-shot useEffect fails here because inside GoabxTabs, inactive tab
+  // A one-shot useEffect fails here because inside GoabTabs, inactive tab
   // content is hidden (scrollHeight = 0). ResizeObserver fires when the
   // container becomes visible after a tab switch, so the measurement is reliable.
   useEffect(() => {
@@ -174,14 +178,14 @@ function SingleCodeBlock({
       {needsExpand && (
         <div className="expand-wrapper">
           <span className="expand-button-bg">
-            <GoabxButton
+            <GoabButton
               type="tertiary"
               size="compact"
               trailingIcon={isExpanded ? "chevron-up" : "chevron-down"}
               onClick={() => setIsExpanded(!isExpanded)}
             >
               {isExpanded ? "Show less" : "Show more"}
-            </GoabxButton>
+            </GoabButton>
           </span>
         </div>
       )}
@@ -468,7 +472,7 @@ export function CodeSnippet({
       {availableFrameworks.length > 1 ? (
         // Multiple frameworks - use tabs with content inside
         <div className="framework-switcher" ref={tabsRef}>
-          <GoabxTabs
+          <GoabTabs
             variant="segmented"
             initialTab={availableFrameworks.indexOf(selectedFramework) + 1}
             orientation="horizontal"
@@ -480,7 +484,7 @@ export function CodeSnippet({
                 </div>
               </GoabTab>
             ))}
-          </GoabxTabs>
+          </GoabTabs>
         </div>
       ) : (
         // Single framework - no tabs needed

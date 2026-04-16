@@ -10,6 +10,8 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from "@angular/core";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Container for form inputs and validation. */
 export class GoabPublicFormSummary {
+  /** Sets the heading text displayed above the form summary. */
   @Input() heading?: string;
 }

@@ -1,7 +1,6 @@
 {
   "componentSlug": "notification",
   "extractedFrom": "libs/web-components/src/components/notification/Notification.svelte",
-  "extractedAt": "2026-02-04T08:10:50.413Z",
   "props": [
     {
       "name": "type",

@@ -1,74 +1,95 @@
-import { ReactNode } from "react";
-import { DataAttributes } from "@abgov/ui-components-common";
+import { ReactNode, useEffect, useRef } from "react";
+import {
+  GoabPublicFormPageButtonVisibility,
+  GoabPublicFormPageStep,
+  Margins,
+  DataAttributes,
+} from "@abgov/ui-components-common";
 import { transformProps, kebab } from "../common/extract-props";
 
-interface WCProps {
+interface WCProps extends Margins {
   id?: string;
   heading?: string;
   "sub-heading"?: string;
   "section-title"?: string;
+  "back-url"?: string;
+  type?: string;
   "button-text"?: string;
-  "button-type"?: string;
-  "button-leading-icon"?: string;
-  "back-visibility"?: string;
-  "error-summary-position"?: string;
-  error?: string;
-  "data-pf-editting"?: string;
+  "button-visibility"?: string;
+  "summary-heading"?: string;
 }
 
 declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form-page": WCProps & React.HTMLAttributes<HTMLElement>;
+      "goa-public-form-page": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
-interface GoabPublicFormPageProps extends DataAttributes {
-  id?: string;
-  heading?: string;
-  subHeading?: string;
-  sectionTitle?: string;
-  buttonText?: string;
-  buttonType?: "primary" | "secondary" | "tertiary";
-  buttonLeadingIcon?: string;
-  backVisibility?: "visible" | "hidden";
-  /** Controls where the error summary callout appears. Default is "top". */
-  errorSummaryPosition?: "top" | "bottom" | "none";
-  error?: string;
-  editting?: boolean;
+interface GoabPublicFormPageProps extends Margins, DataAttributes {
+  /** Content rendered inside the form page. */
   children: ReactNode;
+  /** Sets the unique identifier for the form page. */
+  id?: string;
+  /** Sets the heading text displayed at the top of the form page. */
+  heading?: string;
+  /** Sets the subheading text displayed below the main heading. */
+  subHeading?: string;
+  /** Sets the heading text used when this page appears in the form summary. */
+  summaryHeading?: string;
+  /** Sets the section title displayed above the heading. */
+  sectionTitle?: string;
+  /** Sets the URL for the back navigation link. */
+  backUrl?: string;
+  /** Sets the type of the form page. @default "step" */
+  type?: GoabPublicFormPageStep;
+  /** Sets the text label for the continue or confirm button. */
+  buttonText?: string;
+  /** Sets the visibility of the continue button. @default "visible" */
+  buttonVisibility?: GoabPublicFormPageButtonVisibility;
+  /** Callback fired when the form page continues to the next step. */
+  onContinue?: (event: Event) => void;
 }
 
+/** Container for form inputs and validation. */
 export function GoabPublicFormPage({
-  subHeading,
-  sectionTitle,
-  buttonText,
-  buttonType,
-  buttonLeadingIcon,
-  backVisibility,
-  errorSummaryPosition,
-  editting,
+  onContinue,
   children,
   ...rest
 }: GoabPublicFormPageProps) {
-  const _props = transformProps<WCProps>(
-    {
-      ...rest,
-      "sub-heading": subHeading,
-      "section-title": sectionTitle,
-      "button-text": buttonText,
-      "button-type": buttonType,
-      "button-leading-icon": buttonLeadingIcon,
-      "back-visibility": backVisibility,
-      "error-summary-position": errorSummaryPosition,
-      "data-pf-editting": editting ? "true" : undefined,
-    },
-    kebab,
-  );
+  const ref = useRef<HTMLElement>(null);
 
-  return <goa-public-form-page {..._props}>{children}</goa-public-form-page>;
+  const _props = transformProps<WCProps>(rest, kebab);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const current = ref.current;
+
+    const continueListener = (e: Event) => {
+      onContinue?.(e);
+    };
+
+    if (onContinue) {
+      current.addEventListener("_continue", continueListener);
+    }
+
+    return () => {
+      if (onContinue) {
+        current.removeEventListener("_continue", continueListener);
+      }
+    };
+  }, [ref, onContinue]);
+
+  return (
+    <goa-public-form-page ref={ref} {..._props}>
+      {children}
+    </goa-public-form-page>
+  );
 }
 
 export default GoabPublicFormPage;

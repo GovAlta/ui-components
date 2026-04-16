@@ -1,4 +1,7 @@
-import { GoabCheckboxOnChangeDetail } from "@abgov/ui-components-common";
+import {
+  GoabCheckboxOnChangeDetail,
+  GoabCheckboxSize,
+} from "@abgov/ui-components-common";
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   Component,
@@ -10,7 +13,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
-  Renderer2,
+    inject,
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgTemplateOutlet } from "@angular/common";
@@ -19,9 +22,10 @@ import { GoabControlValueAccessor } from "../base.component";
 @Component({
   standalone: true,
   selector: "goab-checkbox",
-  template: ` @if (isReady) {
+  template: `@if (isReady) {
     <goa-checkbox
       #goaComponentRef
+      [attr.version]="version"
       [attr.name]="name"
       [checked]="checked"
       [disabled]="disabled"
@@ -35,6 +39,7 @@ import { GoabControlValueAccessor } from "../base.component";
       [attr.revealarialabel]="revealArialLabel"
       [id]="id"
       [attr.maxwidth]="maxWidth"
+      [attr.size]="size"
       [attr.mt]="mt"
       [attr.mb]="mb"
       [attr.ml]="ml"
@@ -45,11 +50,11 @@ import { GoabControlValueAccessor } from "../base.component";
       <div slot="description">
         <ng-container [ngTemplateOutlet]="getDescriptionAsTemplate()"></ng-container>
       </div>
-      <div slot="reveal">
-        @if (reveal) {
+      @if (reveal) {
+        <div slot="reveal">
           <ng-container [ngTemplateOutlet]="reveal"></ng-container>
-        }
-      </div>
+        </div>
+      }
     </goa-checkbox>
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -62,15 +67,13 @@ import { GoabControlValueAccessor } from "../base.component";
   ],
   imports: [NgTemplateOutlet],
 })
+/** Let the user select one or more options. */
 export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
-  isReady = false;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    renderer: Renderer2,
-  ) {
-    super(renderer);
-  }
+  isReady = false;
+  version = "2";
+
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component
@@ -81,18 +84,31 @@ export class GoabCheckbox extends GoabControlValueAccessor implements OnInit {
     }, 0);
   }
 
+  /** Sets the name of the checkbox input for form submission. */
   @Input() name?: string;
+  /** Marks the checkbox item as selected. */
   @Input({ transform: booleanAttribute }) checked?: boolean;
+  /** Shows a mixed/partial selection state. Used for 'Select All' checkboxes when some items are selected. */
   @Input({ transform: booleanAttribute }) indeterminate?: boolean;
+  /** Label shown beside the checkbox. */
   @Input() text?: string;
   // ** NOTE: can we just use the base component for this?
+  /** The value binding. */
   @Input() override value?: string | number | boolean | null;
+  /** Defines how the text will be translated for the screen reader. If not specified it will fall back to the name. */
   @Input() ariaLabel?: string;
+  /** Sets additional description content displayed below the checkbox label. Accepts plain text or a template. */
   @Input() description!: string | TemplateRef<any>;
+  /** Sets the template for the expandable reveal slot content. */
   @Input() reveal?: TemplateRef<any>;
+  /** Text announced by screen readers when the reveal slot content is displayed. */
   @Input() revealArialLabel?: string;
+  /** Sets the maximum width of the checkbox. */
   @Input() maxWidth?: string;
+  /** Sets the size of the checkbox. 'compact' reduces spacing for dense layouts. @default "default" */
+  @Input() size?: GoabCheckboxSize = "default";
 
+  /** Emits when the checkbox value changes. Emits the new checkbox state as a GoabCheckboxOnChangeDetail object. */
   @Output() onChange = new EventEmitter<GoabCheckboxOnChangeDetail>();
 
   getDescriptionAsString(): string {

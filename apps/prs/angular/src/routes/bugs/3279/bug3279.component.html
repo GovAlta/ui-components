@@ -4,21 +4,21 @@
     This shows that keyboard navigation works correctly with various elements in the Work Side Menu component.
   </goab-text>
 
-  <goabx-work-side-menu heading="Bug 3279" url="#" userName="Jane Doe" userSecondaryText="jane.doe@gov.ab.ca"
+  <goab-work-side-menu heading="Bug 3279" url="#" userName="Jane Doe" userSecondaryText="jane.doe@gov.ab.ca"
     [open]="open" (onToggle)="onToggle()" [primaryContent]="primaryTemplate" [secondaryContent]="secondaryTemplate"
     [accountContent]="accountTemplate">
-  </goabx-work-side-menu>
+  </goab-work-side-menu>
 
   <ng-template #primaryTemplate>
-    <goabx-work-side-menu-item label="Primary item 1" icon="home" url="#primary-1" />
-    <goabx-work-side-menu-item label="Primary item 2" icon="bookmark" badge="2" url="#primary-2" />
+    <goab-work-side-menu-item label="Primary item 1" icon="home" url="#primary-1" />
+    <goab-work-side-menu-item label="Primary item 2" icon="bookmark" badge="2" url="#primary-2" />
 
-    <goabx-work-side-menu-group heading="Primary group" icon="folder">
-      <goabx-work-side-menu-item label="Grouped item 1" icon="document" url="#primary-group-1" />
-      <goabx-work-side-menu-item label="Grouped item 2" icon="document-text" url="#primary-group-2" />
-    </goabx-work-side-menu-group>
+    <goab-work-side-menu-group heading="Primary group" icon="folder">
+      <goab-work-side-menu-item label="Grouped item 1" icon="document" url="#primary-group-1" />
+      <goab-work-side-menu-item label="Grouped item 2" icon="document-text" url="#primary-group-2" />
+    </goab-work-side-menu-group>
 
-    <goabx-work-side-menu-item label="Primary item 3" icon="list" url="#primary-3" />
+    <goab-work-side-menu-item label="Primary item 3" icon="list" url="#primary-3" />
 
     <div style="display: flex; flex-direction: column; gap: 1rem">
       <goab-container type="non-interactive" padding="compact">
@@ -34,12 +34,12 @@
   </ng-template>
 
   <ng-template #secondaryTemplate>
-    <goabx-work-side-menu-item label="Secondary item 1" icon="analytics" url="#secondary-1" />
-    <goabx-work-side-menu-item label="Secondary item 2" icon="settings" url="#secondary-2" />
+    <goab-work-side-menu-item label="Secondary item 1" icon="analytics" url="#secondary-1" />
+    <goab-work-side-menu-item label="Secondary item 2" icon="settings" url="#secondary-2" />
   </ng-template>
 
   <ng-template #accountTemplate>
-    <goabx-work-side-menu-item label="Account" icon="person" url="#account" />
-    <goabx-work-side-menu-item label="Sign out" icon="log-out" type="emergency" url="#signout" />
+    <goab-work-side-menu-item label="Account" icon="person" url="#account" />
+    <goab-work-side-menu-item label="Sign out" icon="log-out" type="emergency" url="#signout" />
   </ng-template>
 </div>

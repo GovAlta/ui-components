@@ -157,21 +157,27 @@
 
   .heading-xl {
     font: var(--goa-typography-heading-xl);
+    letter-spacing: var(--goa-typography-heading-xl-letter-spacing);
   }
   .heading-l {
     font: var(--goa-typography-heading-l);
+    letter-spacing: var(--goa-typography-heading-l-letter-spacing);
   }
   .heading-m {
     font: var(--goa-typography-heading-m);
+    letter-spacing: var(--goa-typography-heading-m-letter-spacing);
   }
   .heading-s {
     font: var(--goa-typography-heading-s);
+    letter-spacing: var(--goa-typography-heading-s-letter-spacing);
   }
   .heading-xs {
     font: var(--goa-typography-heading-xs);
+    letter-spacing: var(--goa-typography-heading-xs-letter-spacing);
   }
   .heading-2xs {
     font: var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));
+    letter-spacing: var(--goa-typography-heading-2xs-letter-spacing);
   }
   .body-l {
     font: var(--goa-typography-body-l);
@@ -189,21 +195,27 @@
   @media (--mobile) {
     .heading-xl {
       font: var(--goa-typography-mobile-heading-xl);
+      letter-spacing: var(--goa-typography-mobile-heading-xl-letter-spacing);
     }
     .heading-l {
       font: var(--goa-typography-mobile-heading-l);
+      letter-spacing: var(--goa-typography-mobile-heading-l-letter-spacing);
     }
     .heading-m {
       font: var(--goa-typography-mobile-heading-m);
+      letter-spacing: var(--goa-typography-mobile-heading-m-letter-spacing);
     }
     .heading-s {
       font: var(--goa-typography-mobile-heading-s);
+      letter-spacing: var(--goa-typography-mobile-heading-s-letter-spacing);
     }
     .heading-xs {
       font: var(--goa-typography-mobile-heading-xs);
+      letter-spacing: var(--goa-typography-mobile-heading-xs-letter-spacing);
     }
     .heading-2xs {
       font: var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));
+      letter-spacing: var(--goa-typography-mobile-heading-2xs-letter-spacing);
     }
     .body-l {
       font: var(--goa-typography-mobile-body-l);

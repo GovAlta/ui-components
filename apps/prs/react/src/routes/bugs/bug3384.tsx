@@ -1,16 +1,19 @@
-import { GoabBlock, GoabText } from "@abgov/react-components";
-import { GoabxTable } from "@abgov/react-components/experimental";
+import {
+  GoabBlock,
+  GoabTable,
+  GoabText,
+} from "@abgov/react-components";
 
 export function Bug3384Route() {
   return (
     <GoabBlock direction="column" gap="l">
-      <GoabText tag="h1">Bug 3384 - GoabxTable Border</GoabText>
+      <GoabText tag="h1">Bug 3384 - GoabTable Border</GoabText>
 
       <GoabText tag="p">
         The below table should have a border with a border radius.
       </GoabText>
 
-      <GoabxTable width="100%">
+      <GoabTable width="100%">
         <thead>
           <tr>
             <th>Service</th>
@@ -39,7 +42,7 @@ export function Bug3384Route() {
             <td>2026-02-03</td>
           </tr>
         </tbody>
-      </GoabxTable>
+      </GoabTable>
     </GoabBlock>
   );
 }

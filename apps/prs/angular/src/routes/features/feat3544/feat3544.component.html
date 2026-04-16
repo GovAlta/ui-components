@@ -1,0 +1,61 @@
+<div style="display: flex; flex-direction: column; gap: var(--goa-spacing-l)">
+  <goab-text tag="h1">Feature 3544: Optional Side Menu Icons</goab-text>
+  <goab-text>
+    Both menus below use the same structure in primary content: one item and one group.
+    The left menu includes icons, and the right menu does not.
+  </goab-text>
+
+  <div
+    style="
+      display: grid;
+      gap: var(--goa-spacing-l);
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    "
+  >
+    <goab-container>
+      <goab-text tag="h2">With icons</goab-text>
+      <div style="height: 380px; overflow: hidden">
+        <goab-work-side-menu
+          heading="Test Menu"
+          url="/"
+          [open]="true"
+          [primaryContent]="withIconsTemplate"
+        ></goab-work-side-menu>
+      </div>
+    </goab-container>
+
+    <goab-container>
+      <goab-text tag="h2">Without icons</goab-text>
+      <div style="height: 380px; overflow: hidden">
+        <goab-work-side-menu
+          heading="Test Menu"
+          url="/"
+          [open]="true"
+          [primaryContent]="withoutIconsTemplate"
+        ></goab-work-side-menu>
+      </div>
+    </goab-container>
+  </div>
+</div>
+
+<ng-template #withIconsTemplate>
+  <goab-work-side-menu-item
+    label="Standalone item"
+    url="/features/3544"
+    icon="home"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-group heading="Grouped items" icon="folder">
+    <goab-work-side-menu-item
+      label="Group child"
+      url="/features/3544"
+      icon="document"
+    ></goab-work-side-menu-item>
+  </goab-work-side-menu-group>
+</ng-template>
+
+<ng-template #withoutIconsTemplate>
+  <goab-work-side-menu-item label="Standalone item" url="/features/3544"></goab-work-side-menu-item>
+  <goab-work-side-menu-group heading="Grouped items">
+    <goab-work-side-menu-item label="Group child" url="/features/3544"></goab-work-side-menu-item>
+  </goab-work-side-menu-group>
+</ng-template>

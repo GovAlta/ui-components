@@ -1,0 +1,77 @@
+---
+/**
+ * Get Started - QA Testing
+ *
+ * Testing process for Design System components.
+ * Content from Confluence (Brief 87).
+ */
+import DropInCallout from '../../components/DropInCallout.astro';
+import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro';
+---
+
+<DocumentationPageLayout
+  title="QA testing"
+  description="Testing process for Design System components"
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">QA testing</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="2xl">
+    This page outlines the testing process for the Design System. The process ensures components
+    function correctly and integrate within products.
+  </goa-text>
+
+  <goa-text as="h2" id="testing-objectives" version="2" size="heading-m">Testing objectives</goa-text>
+  <p>QA testing ensures that:</p>
+  <ul>
+    <li>Coded components match the design specifications</li>
+    <li>Components work in both React and Angular implementations</li>
+    <li>Components are responsive across screen sizes</li>
+    <li>Components meet accessibility requirements</li>
+    <li>Mobile behaviour is validated</li>
+    <li>Documentation on the Design System website is accurate</li>
+  </ul>
+  <goa-text as="h2" id="test-cases" version="2" size="heading-m">Test cases</goa-text>
+
+  <goa-text version="2" size="heading-xs">Component testing</goa-text>
+  <ul>
+    <li>Confirm the rendered component matches design and styling guidelines</li>
+    <li>Confirm configured properties display correctly</li>
+    <li>Confirm the expected event triggers when interacting with the component</li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Responsiveness testing</goa-text>
+  <ul>
+    <li>Test components on mobile, tablet, and desktop screen sizes</li>
+    <li>Use browser developer tools to simulate devices</li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Accessibility testing</goa-text>
+  <ul>
+    <li>Run Lighthouse audits to review accessibility scores</li>
+    <li>Confirm appropriate ARIA (Accessible Rich Internet Applications) roles and labels</li>
+    <li>Test keyboard navigation</li>
+    <li>Test with NVDA screen reader</li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Cross-browser testing</goa-text>
+  <ul>
+    <li>Test on the latest versions of Chrome, Firefox, Safari, and Edge</li>
+    <li>Use Chrome device mode to simulate mobile environments</li>
+    <li>Confirm consistent appearance and behaviour across browsers</li>
+  </ul>
+
+  <goa-text version="2" size="heading-xs">Bug testing</goa-text>
+  <p>When a bug is fixed:</p>
+  <ol>
+    <li>Reproduce the issue using the main branch.</li>
+    <li>Verify the fix in the pull request branch.</li>
+    <li>Retest the component across all relevant areas.</li>
+  </ol>
+  <p>Confirm the issue no longer occurs.</p>
+  <goa-text as="h2" id="reporting" version="2" size="heading-m">Reporting</goa-text>
+  <ul>
+    <li>Document updated test results, findings, and screenshots in the pull request comments</li>
+    <li>Log newly discovered issues in <a href="https://github.com/GovAlta/ui-components/issues" target="_blank">GitHub</a></li>
+  </ul>
+  <DropInCallout />
+</DocumentationPageLayout>

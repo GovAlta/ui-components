@@ -1,7 +1,6 @@
 {
   "componentSlug": "button-group",
   "extractedFrom": "libs/web-components/src/components/button-group/ButtonGroup.svelte",
-  "extractedAt": "2026-02-04T08:10:50.394Z",
   "props": [
     {
       "name": "alignment",

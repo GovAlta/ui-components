@@ -108,9 +108,8 @@ const config = typeConfig[type];
 
       if (!container || !detailsContent) return;
 
-      // Find the guidance-content wrapper (from GuidanceGrid)
-      const guidanceContent = container.querySelector('.guidance-content');
-      if (!guidanceContent) return;
+      // GuidanceGrid wraps content in .guidance-content, but static page usage does not.
+      const guidanceContent = container.querySelector('.guidance-content') ?? container;
 
       const preview = guidanceContent.querySelector('[data-guidance-preview]');
 
@@ -179,14 +178,29 @@ const config = typeConfig[type];
     });
   }
 
+  // Force preview layout containers to size to the card width so text can wrap.
+  function processGuidancePreviewBlocks() {
+    document.querySelectorAll('[data-guidance-preview] goa-block').forEach(block => {
+      if (!block.getAttribute('width')) {
+        block.setAttribute('width', '100%');
+      }
+
+      if (!block.getAttribute('max-width')) {
+        block.setAttribute('max-width', '100%');
+      }
+    });
+  }
+
   // Run on page load
   processDoDontWrappers();
   processGuidanceModals();
+  processGuidancePreviewBlocks();
 
   // Re-run after Astro page transitions
   document.addEventListener('astro:page-load', () => {
     processDoDontWrappers();
     processGuidanceModals();
+    processGuidancePreviewBlocks();
   });
 </script>
 
@@ -235,6 +249,12 @@ const config = typeConfig[type];
     display: block;
     max-width: 100%;
     height: auto;
+  }
+
+  .do-container :global([data-guidance-preview]) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
   }
 
   /* Colored indicator bar */

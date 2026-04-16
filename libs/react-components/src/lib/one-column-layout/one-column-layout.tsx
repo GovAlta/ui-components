@@ -10,11 +10,13 @@ declare module "react" {
 }
 
 export interface GoabPageProps {
+  /** Content rendered inside the one-column layout. */
   children?: ReactNode;
 }
 
 export type PageProps = GoabPageProps;
 
+/** Organizes page content in a single responsive column. */
 export function GoabOneColumnLayout(props: GoabPageProps): JSX.Element {
   return <goa-one-column-layout>{props.children}</goa-one-column-layout>;
 }

@@ -1,0 +1,78 @@
+<goab-block direction="column" gap="l">
+  <goab-text tag="h1" size="heading-l">
+    3772 - Angular FormItem helpText and error variants
+  </goab-text>
+
+  <goab-text tag="p" size="body-m">
+    This manual test compares the deprecated slot helper, plain string inputs, and the
+    current template-based slot API for Angular <code>goab-form-item</code>.
+  </goab-text>
+
+  <goab-block direction="column" gap="xs">
+    <goab-text tag="h2" size="heading-s">1. Deprecated helper component</goab-text>
+    <goab-form-item label="Deprecated helpText and error slots">
+      <goab-input
+        name="bug3772-deprecated-input"
+        value="Example value"
+        [error]="true"
+        testId="bug3772-deprecated-input"
+      ></goab-input>
+
+      <goab-form-item-slot slot="helptext">
+        <span>Deprecated help text slot content with </span>
+        <strong>formatted text</strong>
+        <span>.</span>
+      </goab-form-item-slot>
+
+      <goab-form-item-slot slot="error">
+        <span>Deprecated error slot content with </span>
+        <strong>formatted text</strong>
+        <span>.</span>
+      </goab-form-item-slot>
+    </goab-form-item>
+  </goab-block>
+
+  <goab-block direction="column" gap="xs">
+    <goab-text tag="h2" size="heading-s">2. Plain string inputs</goab-text>
+    <goab-form-item
+      label="String helpText and error"
+      helpText="Simple helpText string."
+      error="Simple error string."
+    >
+      <goab-input
+        name="bug3772-string-input"
+        value="Example value"
+        [error]="true"
+        testId="bug3772-string-input"
+      ></goab-input>
+    </goab-form-item>
+  </goab-block>
+
+  <goab-block direction="column" gap="xs">
+    <goab-text tag="h2" size="heading-s">3. Template-based HTML slots</goab-text>
+    <goab-form-item
+      label="Template helpText and error"
+      [helpText]="helpTextTemplate"
+      [error]="errorTemplate"
+    >
+      <goab-input
+        name="bug3772-template-input"
+        value="Example value"
+        [error]="true"
+        testId="bug3772-template-input"
+      ></goab-input>
+
+      <ng-template #helpTextTemplate>
+        <span>Template help text with </span>
+        <strong>formatted text</strong>
+        <span>.</span>
+      </ng-template>
+
+      <ng-template #errorTemplate>
+        <span>Template error text with </span>
+        <strong>formatted text</strong>
+        <span>.</span>
+      </ng-template>
+    </goab-form-item>
+  </goab-block>
+</goab-block>

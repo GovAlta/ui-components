@@ -1,7 +1,6 @@
 {
   "componentSlug": "popover",
   "extractedFrom": "libs/web-components/src/components/popover/Popover.svelte",
-  "extractedAt": "2026-02-04T08:10:50.414Z",
   "props": [
     {
       "name": "testId",

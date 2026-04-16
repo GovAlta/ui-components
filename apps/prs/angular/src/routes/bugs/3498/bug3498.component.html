@@ -1,0 +1,82 @@
+<div>
+  <h1>3498 - Radio group alignment and border adjustment</h1>
+  <h2>Version 1</h2>
+  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+    <goab-radio-group name="contactMethod" formControlName="contactMethod">
+      <goab-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+        <ng-template #emailReveal>
+          <goab-form-item label="Email address">
+            <goab-input name="email" formControlName="emailAddress"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+      <goab-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
+        <ng-template #phoneReveal>
+          <goab-form-item label="Phone number">
+            <goab-input name="phone" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+      <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+        <ng-template #textReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+  <h2>Version 2 (Experimental)</h2>
+  <h3>Regular size</h3>
+  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+    <goab-radio-group name="contactMethodTwo" formControlName="contactMethodTwo">
+      <goab-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+        <ng-template #emailReveal>
+          <goab-form-item label="Email address">
+            <goab-input name="email" formControlName="emailAddress"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+      <goab-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
+        <ng-template #phoneReveal>
+          <goab-form-item label="Phone number">
+            <goab-input name="phone" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+      <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+        <ng-template #textReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+  <h3>Compact size</h3>
+  <goab-form-item label="How would you like to be contacted?" helpText="Select one option">
+    <goab-radio-group name="contactMethodThree" size="compact" formControlName="contactMethodThree">
+      <goab-radio-item label="Email" description="Receive updates via email" value="email" [reveal]="emailReveal">
+        <ng-template #emailReveal>
+          <goab-form-item label="Email address">
+            <goab-input name="email" formControlName="emailAddress"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+      <goab-radio-item value="phone" label="Phone" [reveal]="phoneReveal">
+        <ng-template #phoneReveal>
+          <goab-form-item label="Phone number">
+            <goab-input name="phone" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+      <goab-radio-item value="text" label="Text message" [reveal]="textReveal">
+        <ng-template #textReveal>
+          <goab-form-item label="Mobile phone number">
+            <goab-input name="mobile" formControlName="phoneNumber"></goab-input>
+          </goab-form-item>
+        </ng-template>
+      </goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+</div>

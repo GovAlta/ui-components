@@ -4,59 +4,59 @@
  * Callouts are used to highlight important information.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const calloutConfigurations: ComponentConfigurations = {
-  componentSlug: 'callout',
-  componentName: 'Callout',
-  defaultConfigurationId: 'basic',
+  componentSlug: "callout",
+  componentName: "Callout",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Information callout',
-      description: 'Default informational callout',
+      id: "basic",
+      name: "Information callout",
+      description: "Default informational callout",
       code: {
-        react: `<GoabxCallout type="information" emphasis="low" maxWidth="480px">
+        react: `<GoabCallout type="information" emphasis="low" maxWidth="480px">
   This is important information for the user.
-</GoabxCallout>`,
-        angular: `<goabx-callout type="information" emphasis="low" maxWidth="480px">
+</GoabCallout>`,
+        angular: `<goab-callout type="information" emphasis="low" maxWidth="480px">
   This is important information for the user.
-</goabx-callout>`,
+</goab-callout>`,
         webComponents: `<goa-callout version="2" type="information" emphasis="low" maxwidth="480px">
   This is important information for the user.
 </goa-callout>`,
       },
     },
     {
-      id: 'types',
-      name: 'Callout types',
-      description: 'Different semantic types for various contexts',
+      id: "types",
+      name: "Callout types",
+      description: "Semantic types for various contexts",
       code: {
-        react: `<GoabxCallout type="information" heading="Information">
+        react: `<GoabCallout type="information" heading="Information">
   General information for the user.
-</GoabxCallout>
-<GoabxCallout type="important" heading="Important">
+</GoabCallout>
+<GoabCallout type="important" heading="Important">
   Something the user should pay attention to.
-</GoabxCallout>
-<GoabxCallout type="emergency" heading="Emergency">
+</GoabCallout>
+<GoabCallout type="emergency" heading="Emergency">
   Critical information requiring immediate attention.
-</GoabxCallout>
-<GoabxCallout type="success" heading="Success">
+</GoabCallout>
+<GoabCallout type="success" heading="Success">
   Confirmation that an action was successful.
-</GoabxCallout>`,
-        angular: `<goabx-callout type="information" heading="Information">
+</GoabCallout>`,
+        angular: `<goab-callout type="information" heading="Information">
   General information for the user.
-</goabx-callout>
-<goabx-callout type="important" heading="Important">
+</goab-callout>
+<goab-callout type="important" heading="Important">
   Something the user should pay attention to.
-</goabx-callout>
-<goabx-callout type="emergency" heading="Emergency">
+</goab-callout>
+<goab-callout type="emergency" heading="Emergency">
   Critical information requiring immediate attention.
-</goabx-callout>
-<goabx-callout type="success" heading="Success">
+</goab-callout>
+<goab-callout type="success" heading="Success">
   Confirmation that an action was successful.
-</goabx-callout>`,
+</goab-callout>`,
         webComponents: `<goa-callout version="2" type="information" heading="Information">
   General information for the user.
 </goa-callout>
@@ -72,50 +72,53 @@ export const calloutConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-heading',
-      name: 'With heading',
-      description: 'Callout with a heading',
+      id: "heading",
+      name: "Heading",
+      description: "Callout with and without a heading using low emphasis",
       code: {
-        react: `<GoabxCallout type="important" heading="Application deadline">
+        react: `<GoabCallout type="important" emphasis="low" heading="Application deadline">
   Your application must be submitted by December 31, 2024.
-</GoabxCallout>`,
-        angular: `<goabx-callout type="important" heading="Application deadline">
+</GoabCallout>
+<GoabCallout type="important" emphasis="low">
   Your application must be submitted by December 31, 2024.
-</goabx-callout>`,
-        webComponents: `<goa-callout version="2" type="important" heading="Application deadline">
+</GoabCallout>`,
+        angular: `<goab-callout type="important" emphasis="low" heading="Application deadline">
+  Your application must be submitted by December 31, 2024.
+</goab-callout>
+<goab-callout type="important" emphasis="low">
+  Your application must be submitted by December 31, 2024.
+</goab-callout>`,
+        webComponents: `<goa-callout version="2" type="important" emphasis="low" heading="Application deadline">
+  Your application must be submitted by December 31, 2024.
+</goa-callout>
+<goa-callout version="2" type="important" emphasis="low">
   Your application must be submitted by December 31, 2024.
 </goa-callout>`,
       },
     },
     {
-      id: 'emphasis',
-      name: 'Emphasis levels',
-      description: 'Different visual prominence levels',
+      id: "emphasis",
+      name: "Emphasis levels",
+      description: "Different visual prominence levels",
       code: {
-        react: `<GoabxCallout type="important" emphasis="high" heading="High emphasis">
+        react: `<GoabCallout type="important" emphasis="high" heading="High emphasis">
   Full background color for maximum visibility.
-</GoabxCallout>
-<GoabxCallout type="important" emphasis="medium" heading="Medium emphasis">
+</GoabCallout>
+<GoabCallout type="important" emphasis="medium" heading="Medium emphasis">
   Subtle background for balanced visibility.
-</GoabxCallout>
-<GoabxCallout type="important" emphasis="low" heading="Low emphasis">
+</GoabCallout>
+<GoabCallout type="important" emphasis="low" heading="Low emphasis">
   Minimal styling for less prominent messaging.
-</GoabxCallout>
-<GoabxCallout type="important" emphasis="low">
-  A callout without a heading for simple inline messages.
-</GoabxCallout>`,
-        angular: `<goabx-callout type="important" emphasis="high" heading="High emphasis">
+</GoabCallout>`,
+        angular: `<goab-callout type="important" emphasis="high" heading="High emphasis">
   Full background color for maximum visibility.
-</goabx-callout>
-<goabx-callout type="important" emphasis="medium" heading="Medium emphasis">
+</goab-callout>
+<goab-callout type="important" emphasis="medium" heading="Medium emphasis">
   Subtle background for balanced visibility.
-</goabx-callout>
-<goabx-callout type="important" emphasis="low" heading="Low emphasis">
+</goab-callout>
+<goab-callout type="important" emphasis="low" heading="Low emphasis">
   Minimal styling for less prominent messaging.
-</goabx-callout>
-<goabx-callout type="important" emphasis="low">
-  A callout without a heading for simple inline messages.
-</goabx-callout>`,
+</goab-callout>`,
         webComponents: `<goa-callout version="2" type="important" emphasis="high" heading="High emphasis">
   Full background color for maximum visibility.
 </goa-callout>
@@ -124,9 +127,6 @@ export const calloutConfigurations: ComponentConfigurations = {
 </goa-callout>
 <goa-callout version="2" type="important" emphasis="low" heading="Low emphasis">
   Minimal styling for less prominent messaging.
-</goa-callout>
-<goa-callout version="2" type="important" emphasis="low">
-  A callout without a heading for simple inline messages.
 </goa-callout>`,
       },
     },

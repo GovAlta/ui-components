@@ -1,0 +1,266 @@
+---
+/**
+ * Foundations - Style guide - Illustrations - Spot
+ *
+ * Spot illustration guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Style guide -> Illustrations -> Spot.
+ */
+import DocumentationPageLayout from "../../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../../components/FoundationsSupportCallout.astro";
+import DoDont from "../../../../components/DoDont.astro";
+import Preview from "../../../../components/Preview.astro";
+---
+
+<DocumentationPageLayout
+  title="Spot illustration"
+  description="Spot illustration guidance for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Spot illustration</goa-text>
+  <goa-text size="body-l" mt="none" mb="m">
+    Spot illustrations use a small number of objects to explain an idea. A spot illustration
+    provides more context than an icon but uses less detail than a scene illustration.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <goa-text size="body-m" mt="none" mb="m">
+    Use spot illustrations when you need to:
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Clarify a concept</li>
+      <li>Support instructional content</li>
+      <li>Highlight a supporting section of a service</li>
+    </ul>
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="functional-categories">Functional categories</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Spot illustrations are organized into functional categories to help you find the right
+    illustration for a given use case.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Empty and system states</li>
+      <li>Status and feedback</li>
+      <li>Navigation and discovery</li>
+      <li>Communication</li>
+      <li>Devices</li>
+      <li>Time</li>
+      <li>Documents and files</li>
+      <li>Security and identity</li>
+      <li>Government</li>
+      <li>UX Design and Products</li>
+      <li>Miscellaneous</li>
+    </ul>
+  </goa-text>
+
+  <img
+    src="/images/foundations/illustration/spot-categories.svg"
+    alt="Examples of spot illustrations across functional categories"
+    width="1512"
+    height="583"
+    loading="lazy"
+    style="max-width: 100%; height: auto; margin-top: var(--goa-space-xl);"
+  />
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="use-in-layout">Use in layout</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Use a <strong>1:1 square ratio</strong> so spot illustrations fit cleanly within
+    components such as cards or tiles. Export each illustration as an <strong>SVG with a
+    defined viewBox</strong> so it scales consistently across screen sizes.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">
+    Keep subjects simple and broadly relatable. Avoid details that suggest a specific age,
+    location, brand, or organization.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Illustrations should focus on:</goa-text>
+  <goa-text size="body-m" mt="none" mb="none">
+    <ul>
+      <li>Clear shapes</li>
+      <li>Readable line work</li>
+      <li>Minimal visual detail</li>
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="m" mb="none">
+    Spot illustrations are designed to be placed on a light coloured background to maintain
+    clarity and contrast.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="examples">Examples</h2>
+
+  <img
+    src="/images/foundations/illustration/spot-example-landing.svg"
+    alt="Example of spot illustrations used on a service landing page"
+    width="1520"
+    height="1872"
+    loading="lazy"
+    style="max-width: 100%; height: auto;"
+  />
+  <img
+    src="/images/foundations/illustration/spot-example-empty-state.svg"
+    alt="Example of a spot illustration used in an empty state"
+    width="1520"
+    height="681"
+    loading="lazy"
+    style="max-width: 100%; height: auto; margin-top: var(--goa-space-l);"
+  />
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="best-practices">Best practices</h2>
+
+  <div class="dodont-grid">
+    <DoDont
+      type="do"
+      description="Use spot illustrations at their intended size. Maintain a minimum display size of 100px x 100px."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-do-size.png"
+          alt="Spot illustration at correct intended size"
+          width="545"
+          height="397"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't scale illustrations so they become disproportionate to the surrounding text or reduce them below 100px x 100px."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-dont-size.png"
+          alt="Spot illustration scaled too small"
+          width="545"
+          height="318"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="do"
+      description="Maintain the illustration style defined in the design system library."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-do-style.png"
+          alt="Spot illustration using the correct design system style"
+          width="417"
+          height="404"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't rebuild, redraw, or recolour illustrations."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-dont-style.png"
+          alt="Spot illustration incorrectly recoloured"
+          width="545"
+          height="396"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="do"
+      description="Maintain a minimum of --goa-space-l clear space around the illustration."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-do-spacing.png"
+          alt="Spot illustration with correct spacing"
+          width="401"
+          height="420"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't place text too close to the illustration."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-dont-spacing.png"
+          alt="Spot illustration with text placed too close"
+          width="401"
+          height="372"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="do"
+      description="Match the illustration type to the user's state or task."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-do-match.png"
+          alt="Spot illustration matching the user's context"
+          width="401"
+          height="396"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't use the wrong illustration type for the context."
+    >
+      <Preview>
+        <img
+          src="/images/foundations/illustration/spot-dont-match.png"
+          alt="Wrong illustration type used for the context"
+          width="401"
+          height="400"
+          loading="lazy"
+          style="max-width: 100%; height: auto;"
+        />
+      </Preview>
+    </DoDont>
+  </div>
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .dodont-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .dodont-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+</style>

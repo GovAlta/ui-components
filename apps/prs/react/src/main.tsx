@@ -48,6 +48,19 @@ import { Bug3281Route } from "./routes/bugs/bug3281";
 import { Bug3337Route } from "./routes/bugs/bug3337";
 import { Bug3384Route } from "./routes/bugs/bug3384";
 import { Bug3450Route } from "./routes/bugs/bug3450";
+import { Bug3497Route } from "./routes/bugs/bug3497";
+import { Bug3498Route } from "./routes/bugs/bug3498";
+import { Bug3548Route } from "./routes/bugs/bug3548";
+import { Bug3607Route } from "./routes/bugs/bug3607";
+import { Bug3505Route } from "./routes/bugs/bug3505";
+import { Bug3614Route } from "./routes/bugs/bug3614";
+import { Bug3640Route } from "./routes/bugs/bug3640";
+import { Bug3735Route } from "./routes/bugs/bug3735";
+import { Bug3635Route } from "./routes/bugs/bug3635";
+import { Bug3699Route } from "./routes/bugs/bug3699";
+import { Bug3637Route } from "./routes/bugs/bug3637";
+import { Bug3667Route } from "./routes/bugs/bug3667";
+import { Bug3685Route } from "./routes/bugs/bug3685";
 
 import { EverythingRoute } from "./routes/everything";
 import { EverythingBRoute } from "./routes/everything-b";
@@ -85,6 +98,10 @@ import { Feat3229Route } from "./routes/features/feat3229";
 import { FeatV2CheckboxRoute } from "./routes/features/featV2Checkbox";
 import { Feat3398Route } from "./routes/features/feat3398";
 import { Feat3478Route } from "./routes/features/feat3478";
+import { Feat2885Route } from "./routes/features/feat2885";
+import { Feat2885NavigationTabsRoute } from "./routes/features/feat2885-navigation-tabs";
+import { Feat3529Route } from "./routes/features/feat3529";
+import { Feat3544Route } from "./routes/features/feat3544";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -139,6 +156,20 @@ root.render(
           <Route path="bugs/3337" element={<Bug3337Route />} />
           <Route path="bugs/3384" element={<Bug3384Route />} />
           <Route path="bugs/3450" element={<Bug3450Route />} />
+          <Route path="bugs/3497" element={<Bug3497Route />} />
+          <Route path="bugs/3498" element={<Bug3498Route />} />
+          <Route path="bugs/3607" element={<Bug3607Route />} />
+          <Route path="bugs/3505" element={<Bug3505Route />} />
+          <Route path="bugs/3548" element={<Bug3548Route />} />
+          <Route path="bugs/3614" element={<Bug3614Route />} />
+          <Route path="bugs/3685" element={<Bug3685Route />} />
+          <Route path="bugs/3640" element={<Bug3640Route />} />
+          <Route path="bugs/3735" element={<Bug3735Route />} />
+          <Route path="bugs/3635" element={<Bug3635Route />} />
+          <Route path="bugs/3699" element={<Bug3699Route />} />
+          <Route path="bugs/3637" element={<Bug3637Route />} />
+          <Route path="bugs/3667" element={<Bug3667Route />} />
+          <Route path="bugs/3685" element={<Bug3685Route />} />
 
           <Route path="features/1383" element={<Feat1383Route />} />
           <Route path="features/1547" element={<Feat1547Route />} />
@@ -183,7 +214,16 @@ root.render(
           <Route path="features/v2-checkbox" element={<FeatV2CheckboxRoute />} />
           <Route path="features/3398" element={<Feat3398Route />} />
           <Route path="features/3478" element={<Feat3478Route />} />
+          <Route
+            path="features/2885-navigation-tabs"
+            element={<Feat2885NavigationTabsRoute />}
+          />
+          <Route path="features/3529" element={<Feat3529Route />} />
+          <Route path="features/3544" element={<Feat3544Route />} />
         </Route>
+
+        {/* Standalone route without App wrapper for full-page layout demos */}
+        <Route path="features/2885" element={<Feat2885Route />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

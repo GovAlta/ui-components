@@ -24,6 +24,7 @@ describe("GoabCheckbox", () => {
       value: "bar",
       text: "to display",
       maxWidth: "480px",
+      size: "compact",
       disabled: true,
       checked: true,
       error: true,
@@ -42,6 +43,7 @@ describe("GoabCheckbox", () => {
     expect(checkbox?.getAttribute("value")).toBe("bar");
     expect(checkbox?.getAttribute("text")).toBe("to display");
     expect(checkbox?.getAttribute("maxwidth")).toBe("480px");
+    expect(checkbox?.getAttribute("size")).toBe("compact");
     expect(checkbox?.getAttribute("disabled")).toBe("true");
     expect(checkbox?.getAttribute("checked")).toBe("true");
     expect(checkbox?.getAttribute("error")).toBe("true");

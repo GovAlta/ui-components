@@ -1,7 +1,6 @@
 {
   "componentSlug": "app-header-menu",
   "extractedFrom": "libs/web-components/src/components/app-header-menu/AppHeaderMenu.svelte",
-  "extractedAt": "2026-02-04T08:10:50.392Z",
   "props": [
     {
       "name": "heading",
@@ -28,6 +27,17 @@
       "required": false,
       "default": "primary",
       "description": "The menu style variant. Primary uses bold text, secondary uses regular weight."
+    },
+    {
+      "name": "version",
+      "type": "\"1\" | \"2\"",
+      "values": [
+        "1",
+        "2"
+      ],
+      "required": false,
+      "default": "1",
+      "description": "The header version this menu is used with."
     },
     {
       "name": "testId",

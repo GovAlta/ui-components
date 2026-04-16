@@ -1,0 +1,159 @@
+---
+/**
+ * Breadcrumbs.astro
+ *
+ * Auto-generates ancestor breadcrumb trail from the current URL path.
+ * Always shows at least the section name (e.g. "Components", "Get Started").
+ * Use parentGroup for logical parents not reflected in the URL (e.g. component category).
+ */
+
+interface Props {
+  /** Optional logical parent not reflected in the URL (e.g. component category) */
+  parentGroup?: { label: string; url?: string };
+}
+
+const { parentGroup } = Astro.props;
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+const segments = pathname.split('/').filter(Boolean);
+
+// Show on any page within a section
+const showBreadcrumbs = segments.length >= 1;
+
+// Build set of valid page routes from the pages directory
+const pageFiles = import.meta.glob('/src/pages/**/*.{astro,md,mdx}', { eager: false });
+const validPaths = new Set(
+  Object.keys(pageFiles).map(file =>
+    file
+      .replace('/src/pages', '')
+      .replace(/\/index\.(astro|md|mdx)$/, '')
+      .replace(/\.(astro|md|mdx)$/, '')
+      .replace(/\[.*?\]/g, '*') // dynamic routes aren't valid intermediate targets
+  )
+);
+
+// Known labels for path segments
+const SEGMENT_LABELS: Record<string, string> = {
+  "get-started": "Get Started",
+  "foundations": "Foundations",
+  "components": "Components",
+  "tokens": "Tokens",
+  "examples": "Examples",
+  "designers": "Designers",
+  "developers": "Developers",
+};
+
+function segmentToLabel(segment: string): string {
+  if (SEGMENT_LABELS[segment]) return SEGMENT_LABELS[segment];
+  // Fallback: kebab-case to sentence case
+  return segment.split('-').map((w, i) =>
+    i === 0 ? w.charAt(0).toUpperCase() + w.slice(1) : w
+  ).join(' ');
+}
+
+// Build ancestor crumbs: all segments except the last, but always include the section
+const crumbs: Array<{ label: string; url: string; hasPage: boolean }> = [];
+let path = '';
+const crumbCount = Math.max(1, segments.length - 1);
+for (let i = 0; i < crumbCount; i++) {
+  path += '/' + segments[i];
+  crumbs.push({ label: segmentToLabel(segments[i]), url: path, hasPage: validPaths.has(path) });
+}
+---
+
+{showBreadcrumbs && (
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li>
+        <a href="/">Design System</a>
+        <span class="separator" aria-hidden="true">/</span>
+      </li>
+      {crumbs.map((crumb, i) => (
+        <li>
+          {/* TODO: Swap to <goa-link> once underline control lands (#3504) */}
+          {crumb.hasPage ? (
+            <a href={crumb.url}>{crumb.label}</a>
+          ) : (
+            <span>{crumb.label}</span>
+          )}
+          <span class="separator" aria-hidden="true">/</span>
+        </li>
+      ))}
+      {parentGroup && (
+        <li>
+          {parentGroup.url ? (
+            <a href={parentGroup.url}>{parentGroup.label}</a>
+          ) : (
+            <span>{parentGroup.label}</span>
+          )}
+          <span class="separator" aria-hidden="true">/</span>
+        </li>
+      )}
+      <li class="sr-only" aria-current="page">
+        {segmentToLabel(segments[segments.length - 1])}
+      </li>
+    </ol>
+  </nav>
+)}
+
+<style>
+  .breadcrumbs {
+    margin-bottom: var(--goa-space-l);
+  }
+
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--goa-space-2xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-2xs);
+    font: var(--goa-typography-body-xs);
+    color: var(--goa-color-greyscale-400);
+  }
+
+  .breadcrumbs a,
+  .breadcrumbs span:not(.separator) {
+    color: var(--goa-color-greyscale-500);
+    text-decoration: none;
+    font: var(--goa-typography-body-xs);
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--goa-color-interactive-default);
+    text-decoration: underline;
+  }
+
+  .breadcrumbs a:focus {
+    outline: none;
+  }
+
+  .breadcrumbs a:focus-visible {
+    outline: 2px solid var(--goa-color-interactive-default);
+    outline-offset: 2px;
+    border-radius: var(--goa-border-radius-xs);
+  }
+
+  .separator {
+    color: var(--goa-color-greyscale-300);
+    font: var(--goa-typography-body-xs);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

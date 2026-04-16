@@ -4,18 +4,18 @@
  * Accordions show and hide content sections.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const accordionConfigurations: ComponentConfigurations = {
-  componentSlug: 'accordion',
-  componentName: 'Accordion',
-  defaultConfigurationId: 'basic',
+  componentSlug: "accordion",
+  componentName: "Accordion",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic accordion',
-      description: 'Single accordion with heading',
+      id: "basic",
+      name: "Basic accordion",
+      description: "Single accordion with heading",
       code: {
         react: `<GoabAccordion heading="What documents do I need?">
   You will need to provide proof of identity, proof of address,
@@ -32,9 +32,9 @@ export const accordionConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'open',
-      name: 'Open by default',
-      description: 'Accordion that starts expanded',
+      id: "open",
+      name: "Open by default",
+      description: "Accordion that starts expanded",
       code: {
         react: `<GoabAccordion heading="Important information" open>
   This content is visible by default when the page loads.
@@ -48,9 +48,9 @@ export const accordionConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'with-secondary-text',
-      name: 'With secondary text',
-      description: 'Accordion with additional context in header',
+      id: "with-secondary-text",
+      name: "With secondary text",
+      description: "Accordion with additional context in header",
       code: {
         react: `<GoabAccordion heading="Application requirements" secondaryText="Updated Jan 2024">
   Review the latest requirements before submitting your application.
@@ -64,9 +64,9 @@ export const accordionConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'heading-sizes',
-      name: 'Heading sizes',
-      description: 'Small and medium heading sizes',
+      id: "heading-sizes",
+      name: "Heading sizes",
+      description: "Small and medium heading sizes",
       code: {
         react: `<GoabAccordion heading="Small heading" headingSize="small">
   Content with small heading.
@@ -89,9 +89,9 @@ export const accordionConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'icon-position',
-      name: 'Icon position',
-      description: 'Toggle icon on left or right',
+      id: "icon-position",
+      name: "Icon position",
+      description: "Toggle icon on left or right",
       code: {
         react: `<GoabAccordion heading="Icon on left (default)" iconPosition="left">
   The expand/collapse icon is on the left.
@@ -114,9 +114,9 @@ export const accordionConfigurations: ComponentConfigurations = {
       },
     },
     {
-      id: 'multiple',
-      name: 'Multiple accordions',
-      description: 'FAQ-style accordion group',
+      id: "multiple",
+      name: "Multiple accordions",
+      description: "FAQ-style accordion group",
       code: {
         react: `<GoabAccordion heading="How do I apply?">
   Submit your application online through our portal.

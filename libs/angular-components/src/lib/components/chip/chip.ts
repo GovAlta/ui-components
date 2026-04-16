@@ -12,6 +12,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -40,12 +41,11 @@ import { GoabBaseComponent } from "../base.component";
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Compact element for labels, tags, or selections. */
 export class GoabChip extends GoabBaseComponent implements OnInit {
-  isReady = false;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component
@@ -56,13 +56,20 @@ export class GoabChip extends GoabBaseComponent implements OnInit {
     }, 0);
   }
 
+  /** @deprecated Use GoAFilterChip instead. Icon displayed at the start of the chip. */
   @Input() leadingIcon?: GoabIconType | null;
+  /** @deprecated Use GoAFilterChip instead. Shows an error state on the chip. */
   @Input({ transform: booleanAttribute }) error?: boolean;
+  /** @deprecated Use GoAFilterChip instead. When true, shows a delete icon and makes chip clickable. */
   @Input({ transform: booleanAttribute }) deletable?: boolean;
+  /** @deprecated Use GoAFilterChip instead. The text content displayed in the chip. */
   @Input() content?: string = "";
+  /** @deprecated Use GoAFilterChip instead. The chip variant style. */
   @Input() variant?: GoabChipVariant;
+  /** @deprecated Use GoAFilterChip instead. The icon theme - outline or filled. */
   @Input() iconTheme?: GoabChipTheme;
 
+  /** Emits when the chip is clicked. */
   @Output() onClick = new EventEmitter();
 
   _onClick() {

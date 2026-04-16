@@ -1,40 +1,40 @@
-<goabx-button leadingIcon="add" (onClick)="onClick()">Add Record</goabx-button>
-<goabx-drawer maxSize="492px" [open]="open" heading="Add Record" position="right" (onClose)="onClose()" [actions]="actions">
-  <goabx-form-item label="Level of education">
-    <goabx-dropdown (onChange)="dropdownOnChange($event)" name="education" value="university">
-      <goabx-dropdown-item value="high-school" label="High School Diploma"></goabx-dropdown-item>
-      <goabx-dropdown-item value="college" label="College Diploma"></goabx-dropdown-item>
-      <goabx-dropdown-item value="university" label="University Degree"></goabx-dropdown-item>
-      <goabx-dropdown-item value="masters" label="Master's Degree"></goabx-dropdown-item>
-      <goabx-dropdown-item value="doctorate" label="Doctorate"></goabx-dropdown-item>
-    </goabx-dropdown>
-  </goabx-form-item>
-  <goabx-form-item label="Educational institution" mt="l">
-    <goabx-input name="education" type="text" (onChange)="inputOnChange($event)"></goabx-input>
-  </goabx-form-item>
-  <goabx-form-item label="Field of study" requirement="optional" mt="l">
-    <goabx-input name="fieldOfStudy" type="text" (onChange)="inputOnChange($event)"></goabx-input>
-  </goabx-form-item>
-  <goabx-form-item label="Is the person currently attending?" mt="l">
-    <goabx-radio-group name="attendTraining" orientation="horizontal" (onChange)="radioOnChange($event)">
-      <goabx-radio-item value="yes" label="Yes"></goabx-radio-item>
-      <goabx-radio-item value="no" label="No"></goabx-radio-item>
-    </goabx-radio-group>
-  </goabx-form-item>
-  <goabx-form-item label="Start date" mt="l">
-    <goabx-date-picker (onChange)="dateOnChange($event)"></goabx-date-picker>
-    <goabx-checkbox name="startDateApproximate" text="Approximate date" value="y" mt="s"></goabx-checkbox>
-  </goabx-form-item>
-  <goabx-form-item label="Credential received?" mt="l">
-    <goabx-radio-group name="credentialReceived" orientation="horizontal" (onChange)="radioOnChange($event)">
-      <goabx-radio-item value="yes" label="Yes"></goabx-radio-item>
-      <goabx-radio-item value="no" label="No"></goabx-radio-item>
-    </goabx-radio-group>
-  </goabx-form-item>
+<goab-button leadingIcon="add" (onClick)="onClick()">Add Record</goab-button>
+<goab-drawer maxSize="492px" [open]="open" heading="Add Record" position="right" (onClose)="onClose()" [actions]="actions">
+  <goab-form-item label="Level of education">
+    <goab-dropdown (onChange)="dropdownOnChange($event)" name="education" value="university">
+      <goab-dropdown-item value="high-school" label="High School Diploma"></goab-dropdown-item>
+      <goab-dropdown-item value="college" label="College Diploma"></goab-dropdown-item>
+      <goab-dropdown-item value="university" label="University Degree"></goab-dropdown-item>
+      <goab-dropdown-item value="masters" label="Master's Degree"></goab-dropdown-item>
+      <goab-dropdown-item value="doctorate" label="Doctorate"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Educational institution" mt="l">
+    <goab-input name="education" type="text" (onChange)="inputOnChange($event)"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Field of study" requirement="optional" mt="l">
+    <goab-input name="fieldOfStudy" type="text" (onChange)="inputOnChange($event)"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Is the person currently attending?" mt="l">
+    <goab-radio-group name="attendTraining" orientation="horizontal" (onChange)="radioOnChange($event)">
+      <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+      <goab-radio-item value="no" label="No"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+  <goab-form-item label="Start date" mt="l">
+    <goab-date-picker (onChange)="dateOnChange($event)"></goab-date-picker>
+    <goab-checkbox name="startDateApproximate" text="Approximate date" value="y" mt="s"></goab-checkbox>
+  </goab-form-item>
+  <goab-form-item label="Credential received?" mt="l">
+    <goab-radio-group name="credentialReceived" orientation="horizontal" (onChange)="radioOnChange($event)">
+      <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+      <goab-radio-item value="no" label="No"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
   <ng-template #actions>
     <goab-button-group>
-      <goabx-button type="primary" size="compact" (onClick)="closeDrawer()">Add record</goabx-button>
-      <goabx-button type="tertiary" size="compact" (onClick)="closeDrawer()">Cancel</goabx-button>
+      <goab-button type="primary" size="compact" (onClick)="closeDrawer()">Add record</goab-button>
+      <goab-button type="tertiary" size="compact" (onClick)="closeDrawer()">Cancel</goab-button>
     </goab-button-group>
   </ng-template>
-</goabx-drawer>
+</goab-drawer>

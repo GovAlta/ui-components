@@ -17,7 +17,6 @@ export { radioGroupConfigurations } from "./radio-group";
 export { radioItemConfigurations } from "./radio-item";
 export { textAreaConfigurations } from "./text-area";
 export { formItemConfigurations } from "./form-item";
-export { formConfigurations } from "./form";
 export { formStepperConfigurations } from "./form-stepper";
 export { formStepConfigurations } from "./form-step";
 export { datePickerConfigurations } from "./date-picker";
@@ -30,7 +29,6 @@ export { calloutConfigurations } from "./callout";
 export { notificationConfigurations } from "./notification";
 export { temporaryNotificationConfigurations } from "./temporary-notification";
 export { badgeConfigurations } from "./badge";
-export { chipConfigurations } from "./chip";
 export { filterChipConfigurations } from "./filter-chip";
 export { tooltipConfigurations } from "./tooltip";
 export { spinnerConfigurations } from "./spinner";
@@ -46,7 +44,6 @@ export { pageBlockConfigurations } from "./page-block";
 export { pagesConfigurations } from "./pages";
 export { dividerConfigurations } from "./divider";
 export { spacerConfigurations } from "./spacer";
-export { scrollableConfigurations } from "./scrollable";
 export { heroBannerConfigurations } from "./hero-banner";
 
 // Navigation components
@@ -64,14 +61,8 @@ export { micrositeHeaderConfigurations } from "./microsite-header";
 export { footerConfigurations } from "./footer";
 export { footerNavSectionConfigurations } from "./footer-nav-section";
 export { footerMetaSectionConfigurations } from "./footer-meta-section";
-export { linkButtonConfigurations } from "./link-button";
 
 // Display components
-export { cardConfigurations } from "./card";
-export { cardGroupConfigurations } from "./card-group";
-export { cardContentConfigurations } from "./card-content";
-export { cardImageConfigurations } from "./card-image";
-export { cardActionsConfigurations } from "./card-actions";
 export { tableConfigurations } from "./table";
 export { tableSortHeaderConfigurations } from "./table-sort-header";
 export { dataGridConfigurations } from "./data-grid";
@@ -88,7 +79,6 @@ export { iconButtonConfigurations } from "./icon-button";
 export { buttonGroupConfigurations } from "./button-group";
 export { linkConfigurations } from "./link";
 export { textConfigurations } from "./text";
-export { focusTrapConfigurations } from "./focus-trap";
 
 // Import all configurations for registry
 import type { ComponentConfigurations, ConfigurationRegistry } from "./types";
@@ -101,7 +91,6 @@ import { radioGroupConfigurations } from "./radio-group";
 import { radioItemConfigurations } from "./radio-item";
 import { textAreaConfigurations } from "./text-area";
 import { formItemConfigurations } from "./form-item";
-import { formConfigurations } from "./form";
 import { formStepperConfigurations } from "./form-stepper";
 import { formStepConfigurations } from "./form-step";
 import { datePickerConfigurations } from "./date-picker";
@@ -112,7 +101,6 @@ import { calloutConfigurations } from "./callout";
 import { notificationConfigurations } from "./notification";
 import { temporaryNotificationConfigurations } from "./temporary-notification";
 import { badgeConfigurations } from "./badge";
-import { chipConfigurations } from "./chip";
 import { filterChipConfigurations } from "./filter-chip";
 import { tooltipConfigurations } from "./tooltip";
 import { spinnerConfigurations } from "./spinner";
@@ -126,7 +114,6 @@ import { pageBlockConfigurations } from "./page-block";
 import { pagesConfigurations } from "./pages";
 import { dividerConfigurations } from "./divider";
 import { spacerConfigurations } from "./spacer";
-import { scrollableConfigurations } from "./scrollable";
 import { heroBannerConfigurations } from "./hero-banner";
 import { tabsConfigurations } from "./tabs";
 import { tabConfigurations } from "./tab";
@@ -142,12 +129,6 @@ import { micrositeHeaderConfigurations } from "./microsite-header";
 import { footerConfigurations } from "./footer";
 import { footerNavSectionConfigurations } from "./footer-nav-section";
 import { footerMetaSectionConfigurations } from "./footer-meta-section";
-import { linkButtonConfigurations } from "./link-button";
-import { cardConfigurations } from "./card";
-import { cardGroupConfigurations } from "./card-group";
-import { cardContentConfigurations } from "./card-content";
-import { cardImageConfigurations } from "./card-image";
-import { cardActionsConfigurations } from "./card-actions";
 import { tableConfigurations } from "./table";
 import { tableSortHeaderConfigurations } from "./table-sort-header";
 import { dataGridConfigurations } from "./data-grid";
@@ -162,7 +143,6 @@ import { iconButtonConfigurations } from "./icon-button";
 import { buttonGroupConfigurations } from "./button-group";
 import { linkConfigurations } from "./link";
 import { textConfigurations } from "./text";
-import { focusTrapConfigurations } from "./focus-trap";
 
 /**
  * Registry of all component configurations.
@@ -179,7 +159,6 @@ export const configurationRegistry: ConfigurationRegistry = {
   "radio-item": radioItemConfigurations,
   "text-area": textAreaConfigurations,
   "form-item": formItemConfigurations,
-  form: formConfigurations,
   "form-stepper": formStepperConfigurations,
   "form-step": formStepConfigurations,
   "date-picker": datePickerConfigurations,
@@ -192,7 +171,6 @@ export const configurationRegistry: ConfigurationRegistry = {
   notification: notificationConfigurations,
   "temporary-notification": temporaryNotificationConfigurations,
   badge: badgeConfigurations,
-  chip: chipConfigurations,
   "filter-chip": filterChipConfigurations,
   tooltip: tooltipConfigurations,
   spinner: spinnerConfigurations,
@@ -208,7 +186,6 @@ export const configurationRegistry: ConfigurationRegistry = {
   pages: pagesConfigurations,
   divider: dividerConfigurations,
   spacer: spacerConfigurations,
-  scrollable: scrollableConfigurations,
   "hero-banner": heroBannerConfigurations,
 
   // Navigation components
@@ -226,14 +203,8 @@ export const configurationRegistry: ConfigurationRegistry = {
   footer: footerConfigurations,
   "footer-nav-section": footerNavSectionConfigurations,
   "footer-meta-section": footerMetaSectionConfigurations,
-  "link-button": linkButtonConfigurations,
 
   // Display components
-  card: cardConfigurations,
-  "card-group": cardGroupConfigurations,
-  "card-content": cardContentConfigurations,
-  "card-image": cardImageConfigurations,
-  "card-actions": cardActionsConfigurations,
   table: tableConfigurations,
   "table-sort-header": tableSortHeaderConfigurations,
   "data-grid": dataGridConfigurations,
@@ -250,7 +221,6 @@ export const configurationRegistry: ConfigurationRegistry = {
   "button-group": buttonGroupConfigurations,
   link: linkConfigurations,
   text: textConfigurations,
-  "focus-trap": focusTrapConfigurations,
 };
 
 /**

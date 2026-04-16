@@ -4,13 +4,15 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
+
 @Component({
   standalone: true,
   selector: "goab-side-menu",
   template: `
     @if (isReady) {
-      <goa-side-menu [attr.testid]="testId">
+      <goa-side-menu [attr.version]="version" [attr.testid]="testId">
         <ng-content />
       </goa-side-menu>
     }
@@ -18,11 +20,14 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A side navigation that helps the user navigate between pages. */
 export class GoabSideMenu implements OnInit {
-  isReady = false;
-  @Input() testId?: string;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  version = "2";
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
 
   ngOnInit(): void {
     setTimeout(() => {

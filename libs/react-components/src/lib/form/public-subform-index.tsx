@@ -19,13 +19,19 @@ declare module "react" {
 }
 
 interface GoabPublicSubformIndexProps extends Margins, DataAttributes {
-  heading?: string;
-  sectionTitle?: string;
-  actionButtonText?: string;
-  buttonVisibility?: "visible" | "hidden";
+  /** Content rendered inside the subform index. */
   children: ReactNode;
+  /** Sets the heading text displayed at the top of the subform index page. */
+  heading?: string;
+  /** Sets the section title displayed above the heading. */
+  sectionTitle?: string;
+  /** Sets the text label for the action button that adds a new subform entry. */
+  actionButtonText?: string;
+  /** Sets the visibility of the action button. @default "hidden" */
+  buttonVisibility?: "visible" | "hidden";
 }
 
+/** Container for form inputs and validation. */
 export function GoabPublicSubformIndex({
   heading = "",
   sectionTitle = "",
@@ -35,8 +41,14 @@ export function GoabPublicSubformIndex({
   ...rest
 }: GoabPublicSubformIndexProps) {
   const _props = transformProps<WCProps>(
-    { heading, "section-title": sectionTitle, "action-button-text": actionButtonText, "button-visibility": buttonVisibility, ...rest },
-    kebab
+    {
+      heading,
+      "section-title": sectionTitle,
+      "action-button-text": actionButtonText,
+      "button-visibility": buttonVisibility,
+      ...rest,
+    },
+    kebab,
   );
 
   return (

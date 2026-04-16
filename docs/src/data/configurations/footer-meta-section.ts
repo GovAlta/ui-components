@@ -4,40 +4,40 @@
  * FooterMetaSection is a child component of Footer.
  */
 
-import type { ComponentConfigurations } from './types';
+import type { ComponentConfigurations } from "./types";
 
 export const footerMetaSectionConfigurations: ComponentConfigurations = {
-  componentSlug: 'footer-meta-section',
-  componentName: 'Footer meta section',
-  defaultConfigurationId: 'basic',
+  componentSlug: "footer-meta-section",
+  componentName: "Footer meta section",
+  defaultConfigurationId: "basic",
 
   configurations: [
     {
-      id: 'basic',
-      name: 'Basic footer meta section',
-      description: 'Meta links section within Footer',
+      id: "basic",
+      name: "Basic footer meta section",
+      description: "Meta links section within Footer",
       code: {
-        react: `<GoabxAppFooter>
-  <GoabxAppFooterMetaSection>
+        react: `<GoabAppFooter>
+  <GoabAppFooterMetaSection>
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms of use</a>
     <a href="/accessibility">Accessibility</a>
-  </GoabxAppFooterMetaSection>
-</GoabxAppFooter>`,
-        angular: `<goab-footer>
-  <goab-footer-meta-section>
+  </GoabAppFooterMetaSection>
+</GoabAppFooter>`,
+        angular: `<goab-app-footer>
+  <goab-app-footer-meta-section slot="meta">
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms of use</a>
     <a href="/accessibility">Accessibility</a>
-  </goab-footer-meta-section>
-</goab-footer>`,
-        webComponents: `<goa-footer>
-  <goa-footer-meta-section>
+  </goab-app-footer-meta-section>
+</goab-app-footer>`,
+        webComponents: `<goa-app-footer version="2">
+  <goa-app-footer-meta-section slot="meta">
     <a href="/privacy">Privacy</a>
     <a href="/terms">Terms of use</a>
     <a href="/accessibility">Accessibility</a>
-  </goa-footer-meta-section>
-</goa-footer>`,
+  </goa-app-footer-meta-section>
+</goa-app-footer>`,
       },
     },
   ],

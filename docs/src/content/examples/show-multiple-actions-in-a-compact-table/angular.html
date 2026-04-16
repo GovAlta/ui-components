@@ -1,4 +1,4 @@
-<goabx-table width="100%">
+<goab-table width="100%">
   <thead>
     <tr>
       <th>Status</th>
@@ -11,7 +11,7 @@
     @for (row of rows; track row.id) {
     <tr>
       <td>
-        <goabx-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goabx-badge>
+        <goab-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goab-badge>
       </td>
       <td>{{ row.name }}</td>
       <td class="goa-table-number-column">{{ row.id }}</td>
@@ -25,4 +25,4 @@
     </tr>
     }
   </tbody>
-</goabx-table>
+</goab-table>

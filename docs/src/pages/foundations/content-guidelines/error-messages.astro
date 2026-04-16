@@ -1,0 +1,554 @@
+---
+/**
+ * Foundations - Content guidelines - Error messages
+ *
+ * Error message guidance for Government of Alberta digital products.
+ * Content adapted from Confluence export:
+ * Foundations -> Content guidelines -> Error messages.
+ */
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+import DoDont from "../../../components/DoDont.astro";
+import Preview from "../../../components/Preview.astro";
+
+interface PatternGroup {
+  id: string;
+  title: string;
+  intro: string;
+  explicitExample?: string;
+  doDescription: string;
+  doExamples: string[];
+  dontDescription: string;
+  dontExamples: string[];
+}
+
+const anatomyPoints = [
+  "An error message displayed below the input",
+  'An 18px "warning" icon',
+  "Red error text",
+  "A red border on the input",
+];
+
+const languageToneGuidance = [
+  {
+    id: "be-clear-and-concise",
+    title: "Be clear and concise",
+    body: "Use short, direct language that helps users quickly understand the problem.",
+  },
+  {
+    id: "be-specific",
+    title: "Be specific",
+    body: "Explain what information is required and what the user needs to do.",
+  },
+  {
+    id: "provide-a-solution",
+    title: "Provide a solution",
+    body: "Always include clear instructions that help the user resolve the issue. When possible, include an example.",
+  },
+  {
+    id: "be-empathetic",
+    title: "Be empathetic",
+    body: "Use a human tone that acknowledges the user's experience and avoids blaming language.",
+  },
+];
+
+const commonPatterns: PatternGroup[] = [
+  {
+    id: "input-is-empty",
+    title: "Input is empty",
+    intro: "This error appears when a required input is left blank.",
+    explicitExample:
+      "<span class='green'>[Action]</span> + <span class='blue'>[Label]</span> = <span class='greenUnder'>Enter</span> a <span class='blueUnder'>first name</span>",
+    doDescription: "Provide clear instructions.",
+    doExamples: ["Enter a first name.", "Enter email address."],
+    dontDescription: "Don't use vague or non-actionable messages.",
+    dontExamples: ["First name is required."],
+  },
+  {
+    id: "incorrect-information-format",
+    title: "Incorrect information format",
+    intro:
+      "This error appears when users enter information in an invalid format, such as a postal code or phone number. Include a <strong>clear solution and an example</strong>.",
+    explicitExample:
+      "<span class='green'>[Action]</span> + a valid + <span class='blue'>[Label]</span> + such as + <span class='yellow'>[correct format]</span> = <span class='greenUnder'>Enter</span> a valid <span class='blueUnder'>postal code</span>, such as <span class='yellowUnder'>T3R 8Y2</span>",
+    doDescription: "Provide a clear positive solution with an example.",
+    doExamples: ["Enter a valid postal code, such as <strong>T3Y 8Y2</strong>."],
+    dontDescription: "Don't use negative language without a solution.",
+    dontExamples: ["Postal code entered above is not correct."],
+  },
+  {
+    id: "error-with-a-date-entry",
+    title: "Error with a date entry",
+    intro:
+      "This error appears when a date does not meet the required criteria. Provide clear rules or acceptable ranges.",
+    explicitExample:
+      "<span class='green'>[Topic]</span> + must be + <span class='blue'>[duration]</span> = <span class='greenUnder'>Start date</span> must be <span class='blueUnder'>within study period.</span>",
+    doDescription: "Give the user a clear idea of the acceptable date range.",
+    doExamples: ["The study period must be <strong>between 3 and 52 weeks</strong>."],
+    dontDescription: "Don't provide unclear explanations.",
+    dontExamples: ["Study period must be longer than 3 and shorter than 52 weeks."],
+  },
+  {
+    id: "error-within-a-value-range",
+    title: "Error within a value range",
+    intro: "This error appears when a value exceeds or falls below allowed limits.",
+    explicitExample:
+      "<span class='green'>[Label]</span> + cost/amount/fee + must be + <span class='blue'>[qualifier]</span> + <span class='yellow'>[amount]</span> = <span class='greenUnder'>Tuition</span> cost must be <span class='blueUnder'>lower than</span> <span class='yellowUnder'>$20,000</span>",
+    doDescription: "Provide the correct value when known.",
+    doExamples: ["Books and materials cost must be <strong>lower than $4,000</strong>."],
+    dontDescription: "Don't show errors without explaining the acceptable value.",
+    dontExamples: ["You have exceeded the maximum amount."],
+  },
+  {
+    id: "input-outside-accepted-values",
+    title: "Input outside accepted values",
+    intro: "This error appears when an input does not meet required constraints.",
+    explicitExample:
+      "<span class='green'>[Label]</span> + must be between + <span class='blue'>[# number]</span> and <span class='blue'>[# number]</span> + digits. = <span class='greenUnder'>PID</span> must be between <span class='blueUnder'>10</span> and <span class='blueUnder'>15</span> digits.",
+    doDescription: "Provide a clear acceptable range.",
+    doExamples: ["PID must be <strong>between 10 and 15 digits</strong>."],
+    dontDescription: "Don't provide an unclear solution.",
+    dontExamples: ["PID must be at least 10 digits."],
+  },
+];
+
+const uploadPatterns: PatternGroup[] = [
+  {
+    id: "wrong-file-type",
+    title: "Wrong file type",
+    intro: "",
+    explicitExample:
+      "The selected file + must be + <span class='green'>[List of accepted file formats]</span> = The selected file must be <span class='greenUnder'>PDF, JPEG, PNG, or TIFF</span>",
+    doDescription: "Provide a list of accepted formats.",
+    doExamples: ["The selected file must be a <strong>PDF, JPG, PNG, or TIFF</strong>."],
+    dontDescription: "Don't use long or unclear wording.",
+    dontExamples: [
+      "Unsupported file format. Please try again with below mentioned formats. PDF, JPEG, PNG or TIFF file type(s).",
+    ],
+  },
+  {
+    id: "file-too-large",
+    title: "File too large",
+    intro: "",
+    explicitExample:
+      "The selected file + must be + <span class='green'>[qualifier]</span> + <span class='blue'>[size limit]</span> = The selected file must be <span class='greenUnder'>less than</span> <span class='blueUnder'>5 MB</span>",
+    doDescription: "Provide the exact file size limit.",
+    doExamples: ["The selected file must be less than 5 MB."],
+    dontDescription: "Don't provide vague instructions.",
+    dontExamples: ["File size over limit. Please try again."],
+  },
+  {
+    id: "file-upload-failed",
+    title: "File upload failed",
+    intro: "",
+    explicitExample:
+      "<span class='green'>[Problem statement]</span> + <span class='blue'>[guided solution]</span> = <span class='greenUnder'>We experienced an error while uploading your file.</span> <span class='blueUnder'>Please try again</span>",
+    doDescription: "Use empathetic language and take responsibility.",
+    doExamples: ["File upload error. Please try again."],
+    dontDescription: "Don't use blunt or accusing language.",
+    dontExamples: ["Your file upload failed."],
+  },
+  {
+    id: "duplicate-file-uploaded",
+    title: "Duplicate file uploaded",
+    intro: "",
+    explicitExample:
+      "<span class='green'>[Problem statement]</span> + <span class='blue'>[guided solution]</span> = <span class='greenUnder'>This file is already uploaded.</span> <span class='blueUnder'>Please upload a different one.</span>",
+    doDescription: "Clearly explain the issue and next step.",
+    doExamples: ["This file has already been uploaded. Please upload a different file."],
+    dontDescription: "Don't use negative phrasing without guidance.",
+    dontExamples: ["Duplicate files are not accepted."],
+  },
+  {
+    id: "no-file-selected",
+    title: "No file selected",
+    intro: "",
+    explicitExample:
+      "<span class='green'>[Action]</span> + <span class='blue'>[label]</span> = <span class='greenUnder'>Upload</span> a <span class='blueUnder'>work permit</span>",
+    doDescription: "Provide clear instructions.",
+    doExamples: ["Upload a work permit."],
+    dontDescription: "Don't use vague messages.",
+    dontExamples: ["Document required."],
+  },
+];
+
+const formatPatterns: PatternGroup[] = [
+  {
+    id: "invalid-characters-used",
+    title: "Invalid characters used",
+    intro: "This error appears when unsupported characters are entered.",
+    explicitExample:
+      "You may only use + <span class='green'>[valid characters]</span> = You may only use <span class='greenUnder'>Aa-Zz, 0-9, hyphen, and space.</span>",
+    doDescription: "Provide the list of allowed characters.",
+    doExamples: [
+      "You may only use A-Z, a-z, 0-9, accents, periods, apostrophes, hyphens, and spaces.",
+    ],
+    dontDescription: "Don't state the guided solution in two parts.",
+    dontExamples: [
+      "You may only use letters, numbers and the following special characters; accents, a period, apostrophe, hyphen or space.",
+    ],
+  },
+  {
+    id: "accepted-characters-are-known",
+    title: "Accepted characters are known",
+    intro:
+      "When the accepted characters are known, include an example in the error message.",
+    explicitExample:
+      "<span class='green'>[Label]</span> + must include + <span class='blue'>[accepted characters]</span> + (only)*, + such as + <span class='yellow'>[example]</span> = <span class='greenUnder'>Alberta Bar ID</span> must include <span class='blueUnder'>numbers</span> only, such as <span class='yellowUnder'>123456</span>",
+    doDescription: "Provide a clear guided solution.",
+    doExamples: ['Alberta Bar ID must include numbers only, such as "12345."'],
+    dontDescription: "Don't use unclear or wordy phrasing.",
+    dontExamples: [
+      "The Alberta Bar ID must consist of numerical digits only e.g. 12345.",
+    ],
+  },
+  {
+    id: "incorrect-number-of-characters",
+    title: "Incorrect number of characters",
+    intro: "This error appears when the input length is incorrect.",
+    explicitExample:
+      "<span class='green'>[Label]</span> + must be + <span class='blue'>[# number]</span> digits = <span class='greenUnder'>Mobius reference number</span> must be <span class='blueUnder'>10</span> digits",
+    doDescription: "Provide clear numeric requirements.",
+    doExamples: ["The Mobius reference number must be 10 digits."],
+    dontDescription: "Don't display numbers in letters.",
+    dontExamples: ["Ensure Mobius reference number is ten digits."],
+  },
+];
+---
+
+<DocumentationPageLayout
+  title="Error messages"
+  description="Error message guidance for Government of Alberta digital products"
+  section="foundations"
+>
+  <goa-text size="heading-xl" mt="none" mb="m">Error messages</goa-text>
+  <goa-text size="body-l" mt="none" mb="2xl">
+    Error messages appear when a user's action cannot be completed. They help users
+    understand what went wrong and how to fix the problem. Error messages should be clear,
+    concise, and actionable, guiding users toward a successful outcome.
+  </goa-text>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="anatomy">Anatomy</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    When a user enters invalid or unexpected information, an error message appears below
+    the input.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">Error states include:</goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      {anatomyPoints.map((point) => <li>{point}</li>)}
+    </ul>
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    These elements help users quickly identify and correct the issue.
+  </goa-text>
+  <goa-form-item label="Label" error="Error message.">
+    <goa-input error="true" disabled="true"></goa-input>
+  </goa-form-item>
+  <goa-form-item label="Label" error="Error message." mt="l" mb="l">
+    <goa-radio-group error="true" disabled="true">
+      <goa-radio-item label="Radio option" value="1"></goa-radio-item>
+      <goa-radio-item label="Radio option" value="2"></goa-radio-item>
+    </goa-radio-group>
+  </goa-form-item>
+  <goa-form-item label="Label" error="Error message.">
+    <goa-checkbox error="true" disabled="true" text="Checkbox option" value="1"
+    ></goa-checkbox>
+  </goa-form-item>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="helper-text">Helper text</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    When helper text and an error message appear together, the error message should appear
+    above the helper text.
+  </goa-text>
+
+  <div class="dodont-grid">
+    <DoDont type="do" description="Place the error message above helper text.">
+      <Preview>
+        <goa-form-item
+          label="Label"
+          error="Error message."
+          helptext="This is some helper text"
+        >
+          <goa-input error="true" disabled="true"></goa-input>
+        </goa-form-item>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't hide the helper text when an error occurs.">
+      <Preview>
+        <goa-form-item label="Label" error="Error message.">
+          <goa-input error="true" disabled="true"></goa-input>
+        </goa-form-item>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="input-border">Input border</h2>
+  <div class="dodont-grid">
+    <DoDont
+      type="do"
+      description="Display the input border in red when there is an error."
+    >
+      <Preview>
+        <goa-form-item label="Label" error="Error message.">
+          <goa-input error="true" disabled="true"></goa-input>
+        </goa-form-item>
+      </Preview>
+    </DoDont>
+
+    <DoDont
+      type="dont"
+      description="Don't use any other border colour when the input is in an error state."
+    >
+      <Preview>
+        <div
+          style="--goa-text-input-border-error: inset 0 0 0 1.5px var(--goa-color-warning-dark);"
+        >
+          <goa-form-item label="Label" error="Error message.">
+            <goa-input error="true" disabled="true"></goa-input>
+          </goa-form-item>
+        </div>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="file-uploader">File uploader</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Error messages should appear below the file uploader.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Refer to the
+    <goa-link>
+      <a href="/components/file-upload-input">File uploader</a>
+    </goa-link>
+    for implementation guidance.
+  </goa-text>
+
+  <div class="dodont-grid">
+    <DoDont type="do" description="Display the error message below the file uploader.">
+      <Preview>
+        <goa-form-item error="Error message.">
+          <goa-file-upload-input variant="button"></goa-file-upload-input>
+        </goa-form-item>
+      </Preview>
+    </DoDont>
+
+    <DoDont type="dont" description="Don't add a red border to the file uploader.">
+      <Preview>
+        <div class="error-border">
+          <goa-form-item error="Error message.">
+            <goa-file-upload-input variant="button"></goa-file-upload-input>
+          </goa-form-item>
+        </div>
+      </Preview>
+    </DoDont>
+  </div>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="language-and-tone">Language and tone</h2>
+  {
+    languageToneGuidance.map((item) => (
+      <>
+        <h3 id={item.id}>{item.title}</h3>
+        <goa-text size="body-m" mt="none" mb="m">
+          {item.body}
+        </goa-text>
+      </>
+    ))
+  }
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="common-error-message-patterns">Common error message patterns</h2>
+  <goa-text size="body-m" mt="none" mb="xl">
+    Use the patterns below when writing error messages for common situations.
+  </goa-text>
+
+  {
+    commonPatterns.map((pattern) => (
+      <>
+        <h3 id={pattern.id}>{pattern.title}</h3>
+        <goa-text size="body-m" mt="none" mb="m" set:html={pattern.intro} />
+        {pattern.explicitExample && (
+          <goa-container>
+            <div class="explicit-example">
+              <Fragment set:html={pattern.explicitExample} />
+            </div>
+          </goa-container>
+        )}
+
+        <div class="dodont-grid">
+          {pattern.doExamples.map((example) => (
+            <DoDont type="do" description={pattern.doDescription}>
+              <Preview>
+                <goa-text size="body-m">
+                  <Fragment set:html={example} />
+                </goa-text>
+              </Preview>
+            </DoDont>
+          ))}
+
+          {pattern.dontExamples.map((example) => (
+            <DoDont type="dont" description={pattern.dontDescription}>
+              <Preview>
+                <goa-text size="body-m">
+                  <Fragment set:html={example} />
+                </goa-text>
+              </Preview>
+            </DoDont>
+          ))}
+        </div>
+      </>
+    ))
+  }
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="upload-errors">Upload errors</h2>
+  <goa-text size="body-m" mt="none" mb="m">
+    Upload errors appear below the file uploader.
+  </goa-text>
+  <goa-text size="body-m" mt="none" mb="m">These errors may occur when:</goa-text>
+  <goa-text size="body-m" mt="none" mb="xl">
+    <ul>
+      <li>An unsupported file format is uploaded</li>
+      <li>The file size exceeds the limit</li>
+      <li>The upload fails</li>
+      <li>A duplicate file is uploaded</li>
+      <li>A required file is missing</li>
+    </ul>
+  </goa-text>
+
+  {
+    uploadPatterns.map((pattern) => (
+      <>
+        <h3 id={pattern.id}>{pattern.title}</h3>
+        {pattern.explicitExample && (
+          <goa-container>
+            <div class="explicit-example">
+              <Fragment set:html={pattern.explicitExample} />
+            </div>
+          </goa-container>
+        )}
+        <div class="dodont-grid">
+          {pattern.doExamples.map((example) => (
+            <DoDont type="do" description={pattern.doDescription}>
+              <Preview>
+                <goa-text size="body-m">
+                  <Fragment set:html={example} />
+                </goa-text>
+              </Preview>
+            </DoDont>
+          ))}
+
+          {pattern.dontExamples.map((example) => (
+            <DoDont type="dont" description={pattern.dontDescription}>
+              <Preview>
+                <goa-text size="body-m">
+                  <Fragment set:html={example} />
+                </goa-text>
+              </Preview>
+            </DoDont>
+          ))}
+        </div>
+      </>
+    ))
+  }
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
+  <h2 id="format-errors">Format errors</h2>
+  {
+    formatPatterns.map((pattern) => (
+      <>
+        <h3 id={pattern.id}>{pattern.title}</h3>
+        <goa-text size="body-m" mt="none" mb="m" set:html={pattern.intro} />
+        {pattern.explicitExample && (
+          <goa-container>
+            <div class="explicit-example">
+              <Fragment set:html={pattern.explicitExample} />
+            </div>
+          </goa-container>
+        )}
+
+        <div class="dodont-grid">
+          {pattern.doExamples.map((example) => (
+            <DoDont type="do" description={pattern.doDescription}>
+              <Preview>
+                <goa-text size="body-m">
+                  <Fragment set:html={example} />
+                </goa-text>
+              </Preview>
+            </DoDont>
+          ))}
+
+          {pattern.dontExamples.map((example) => (
+            <DoDont type="dont" description={pattern.dontDescription}>
+              <Preview>
+                <goa-text size="body-m">
+                  <Fragment set:html={example} />
+                </goa-text>
+              </Preview>
+            </DoDont>
+          ))}
+        </div>
+      </>
+    ))
+  }
+
+  <FoundationsSupportCallout />
+</DocumentationPageLayout>
+
+<style>
+  .dodont-grid {
+    display: grid;
+    gap: var(--goa-space-xl);
+    margin: var(--goa-space-l) 0 var(--goa-space-xl);
+  }
+
+  .error-border {
+    border: 2px solid red;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  :global(.explicit-example span.green) {
+    background-color: #cde9b9;
+  }
+
+  :global(.explicit-example span.blue) {
+    background-color: #bcdae7;
+  }
+
+  :global(.explicit-example span.yellow) {
+    background-color: #fadfb1;
+  }
+
+  :global(.explicit-example span.greenUnder) {
+    text-decoration: underline solid #cde9b9 3px;
+  }
+
+  :global(.explicit-example span.blueUnder) {
+    text-decoration: underline solid #bcdae7 3px;
+  }
+
+  :global(.explicit-example span.yellowUnder) {
+    text-decoration: underline solid #fadfb1 3px;
+  }
+
+  @media (min-width: 768px) {
+    .dodont-grid {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+  }
+</style>

@@ -151,10 +151,12 @@ goa-table td.goa-table-cell--text {
   padding-bottom: var(--goa-table-padding-cell-text, var(--goa-space-s)) !important;
 }
 
-goa-table td.goa-table-cell--checkbox {
+goa-table td.goa-table-cell--checkbox,
+goa-table th.goa-table-cell--checkbox {
   padding-top: var(--goa-table-padding-cell-checkbox, 2px) !important;
   padding-bottom: var(--goa-table-padding-cell-checkbox, 2px) !important;
   text-align: center;
+  vertical-align: middle;
 }
 
 goa-table td.goa-table-cell--form-field {
