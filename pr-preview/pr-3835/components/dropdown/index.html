@@ -1524,7 +1524,512 @@ saveBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z18veQy" prefix="r14" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Dynamically change items in a dropdown list&quot;],&quot;slug&quot;:[0,&quot;dynamically-change-items-in-a-dropdown-list&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabDropdown, GoabDropdownItem, GoabFormItem } from \&quot;@abgov/react-components\&quot;;\nimport { GoabDropdownOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function DynamicallyChangeItemsInADropdownList() {\n  const [children, setChildren] = useState&lt;string[]&gt;([]);\n  const parents = [\&quot;All\&quot;, \&quot;Big\&quot;, \&quot;Small\&quot;];\n  const childrenAll = [\&quot;Bus\&quot;, \&quot;Elephant\&quot;, \&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;, \&quot;Truck\&quot;];\n  const childrenBig = [\&quot;Elephant\&quot;, \&quot;Truck\&quot;, \&quot;Bus\&quot;];\n  const childrenSmall = [\&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;];\n\n  const loadItems = (value: string) =&gt; {\n    if (value === \&quot;All\&quot;) setChildren(childrenAll);\n    else if (value === \&quot;Big\&quot;) setChildren(childrenBig);\n    else setChildren(childrenSmall);\n  };\n\n  const logSelection = () =&gt; {\n    console.log(\&quot;Item selected\&quot;);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem\n          label=\&quot;Size\&quot;\n          requirement=\&quot;optional\&quot;\n          helpText=\&quot;Choose the size to change the list below\&quot;&gt;\n          &lt;GoabDropdown\n            name=\&quot;parent\&quot;\n            placeholder=\&quot;Select a value\&quot;\n            onChange={(event: GoabDropdownOnChangeDetail) =&gt;\n              loadItems(event.value as string)\n            }&gt;\n            {parents.map(parent =&gt; (\n              &lt;GoabDropdownItem key={parent} value={parent} label={parent} /&gt;\n            ))}\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n\n        &lt;GoabFormItem label=\&quot;Items\&quot; requirement=\&quot;optional\&quot; mt=\&quot;xl\&quot;&gt;\n          &lt;GoabDropdown name=\&quot;children\&quot; placeholder=\&quot;Select a value\&quot; onChange={logSelection}&gt;\n            {children.map((child) =&gt; (\n              &lt;GoabDropdownItem\n                key={child}\n                value={child}\n                label={child}\n                mountType=\&quot;reset\&quot;\n              /&gt;\n            ))}\n          &lt;/GoabDropdown&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;div [formGroup]=\&quot;changeForm\&quot; style=\&quot;padding: 40px;\&quot;&gt;\n  &lt;goab-form-item label=\&quot;Size\&quot; requirement=\&quot;optional\&quot; helpText=\&quot;Choose the size to change the list below\&quot;&gt;\n    &lt;goab-dropdown formControlName=\&quot;parentDropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;parent\&quot;&gt;\n      @for (parent of parents; track parent) {\n      &lt;goab-dropdown-item [value]=\&quot;parent\&quot; [label]=\&quot;parent\&quot; /&gt;\n      }\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n\n  &lt;goab-form-item label=\&quot;Items\&quot; requirement=\&quot;optional\&quot; mt=\&quot;xl\&quot;&gt;\n    &lt;goab-dropdown formControlName=\&quot;childDropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;children\&quot;&gt;\n      &lt;ng-container *ngIf=\&quot;children.length &gt; 0\&quot;&gt;\n        @for (child of children; track child) {\n        &lt;goab-dropdown-item\n          [value]=\&quot;child\&quot;\n          [label]=\&quot;child\&quot;\n          [mountType]=\&quot;&#39;reset&#39;\&quot;\n        /&gt;\n        }\n      &lt;/ng-container&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n&lt;/div&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component, OnInit } from \&quot;@angular/core\&quot;;\nimport { FormControl, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-dynamically-change-dropdown-items\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;\n})\nexport class DynamicallyChangeDropdownItemsComponent implements OnInit {\n  changeForm = new FormGroup({\n    parentDropdown: new FormControl(\&quot;\&quot;),\n    childDropdown: new FormControl(\&quot;\&quot;),\n  });\n\n  parents = [\&quot;All\&quot;, \&quot;Big\&quot;, \&quot;Small\&quot;];\n  children: string[] = [];\n\n  childrenAll = [\&quot;Bus\&quot;, \&quot;Elephant\&quot;, \&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;, \&quot;Truck\&quot;];\n  childrenBig = [\&quot;Elephant\&quot;, \&quot;Truck\&quot;, \&quot;Bus\&quot;];\n  childrenSmall = [\&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;];\n\n  ngOnInit(): void {\n    this.onChange();\n  }\n\n  onChange(): void {\n    this.changeForm.get(\&quot;parentDropdown\&quot;)?.valueChanges.subscribe((value) =&gt; {\n      if (value === \&quot;All\&quot;) this.children = this.childrenAll;\n      else if (value === \&quot;Big\&quot;) this.children = this.childrenBig;\n      else this.children = this.childrenSmall;\n    });\n  }\n\n  generateUniqueKey(index: number, item: string): string {\n    return `${item}_${index}_${Math.random()}`;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;div style=\&quot;padding: 40px;\&quot;&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Size\&quot; requirement=\&quot;optional\&quot; helptext=\&quot;Choose the size to change the list below\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;parent-dropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;parent\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;All\&quot; label=\&quot;All\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;Big\&quot; label=\&quot;Big\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;Small\&quot; label=\&quot;Small\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Items\&quot; requirement=\&quot;optional\&quot; mt=\&quot;xl\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;child-dropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;children\&quot;&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n&lt;/div&gt;\n\n&lt;script&gt;\n  const parentDropdown = document.getElementById(&#39;parent-dropdown&#39;);\n  const childDropdown = document.getElementById(&#39;child-dropdown&#39;);\n\n  const childrenAll = [&#39;Bus&#39;, &#39;Elephant&#39;, &#39;Key&#39;, &#39;Pen&#39;, &#39;Watch&#39;, &#39;Truck&#39;];\n  const childrenBig = [&#39;Elephant&#39;, &#39;Truck&#39;, &#39;Bus&#39;];\n  const childrenSmall = [&#39;Key&#39;, &#39;Pen&#39;, &#39;Watch&#39;];\n\n  function updateChildren(items) {\n    childDropdown.innerHTML = &#39;&#39;;\n    items.forEach(item =&gt; {\n      const dropdownItem = document.createElement(&#39;goa-dropdown-item&#39;);\n      dropdownItem.setAttribute(&#39;value&#39;, item);\n      dropdownItem.setAttribute(&#39;label&#39;, item);\n      dropdownItem.setAttribute(&#39;mount&#39;, &#39;reset&#39;);\n      childDropdown.appendChild(dropdownItem);\n    });\n  }\n\n  parentDropdown.addEventListener(&#39;_change&#39;, (e) =&gt; {\n    const value = e.detail.value;\n    if (value === &#39;All&#39;) updateChildren(childrenAll);\n    else if (value === &#39;Big&#39;) updateChildren(childrenBig);\n    else updateChildren(childrenSmall);\n  });\n\n  childDropdown.addEventListener(&#39;_change&#39;, () =&gt; {\n    console.log(&#39;Item selected&#39;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-dynamically-change-items-in-a-dropdown-list" class="example-title">Dynamically change items in a dropdown list</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [children, setChildren] = useState&lt;string[]&gt;([]);
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="ZTaRYE" prefix="r14" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Dynamically add an item to a dropdown list&quot;],&quot;slug&quot;:[0,&quot;dynamically-add-an-item-to-a-dropdown-list&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDivider,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabRadioGroup,\n  GoabRadioItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nimport {\n  GoabDropdownItemMountType,\n  GoabDropdownOnChangeDetail,\n  GoabInputOnChangeDetail,\n  GoabRadioGroupOnChangeDetail,\n} from \&quot;@abgov/ui-components-common\&quot;;\n\ntype Task = {\n  value: string;\n  label: string;\n  mount: GoabDropdownItemMountType;\n};\n\nexport function DynamicallyAddAnItemToADropdownList() {\n  const DEFAULT_TASKS: Task[] = [\n    { label: \&quot;Finish Report\&quot;, value: \&quot;finish-report\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Attend Meeting\&quot;, value: \&quot;attend-meeting\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Reply Emails\&quot;, value: \&quot;reply-emails\&quot;, mount: \&quot;append\&quot; },\n  ];\n\n  const [tasks, setTasks] = useState&lt;Task[]&gt;(DEFAULT_TASKS);\n  const [newTask, setNewTask] = useState&lt;string&gt;(\&quot;\&quot;);\n  const [mountType, setMountType] = useState&lt;string&gt;(\&quot;append\&quot;);\n  const [selectedTask, setSelectedTask] = useState&lt;string&gt;(\&quot;\&quot;);\n  const [taskError, setTaskError] = useState&lt;boolean&gt;(false);\n  const [isReset, setIsReset] = useState&lt;boolean&gt;(false);\n\n  function onMountTypeChange(value: string | undefined) {\n    setMountType(value as string);\n  }\n\n  function addTask() {\n    if (newTask === \&quot;\&quot;) {\n      setTaskError(true);\n      return;\n    }\n    setTaskError(false);\n\n    const task: Task = {\n      label: newTask,\n      value: newTask.toLowerCase().replace(\&quot; \&quot;, \&quot;-\&quot;),\n      mount: mountType as GoabDropdownItemMountType,\n    };\n    setTasks([...tasks, task]);\n    setNewTask(\&quot;\&quot;);\n    setIsReset(false);\n  }\n\n  function reset() {\n    setTasks(DEFAULT_TASKS);\n    setMountType(\&quot;append\&quot;);\n    setNewTask(\&quot;\&quot;);\n    setSelectedTask(\&quot;\&quot;);\n    setTaskError(false);\n    setIsReset(true);\n  }\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem\n          requirement=\&quot;required\&quot;\n          label=\&quot;Name of item\&quot;\n          error={taskError ? \&quot;Please enter item name\&quot; : undefined}\n          helpText=\&quot;Add an item to the dropdown list below\&quot;&gt;\n          &lt;GoabInput\n            onChange={(event: GoabInputOnChangeDetail) =&gt; setNewTask(event.value)}\n            name=\&quot;item\&quot;\n            value={newTask}\n          /&gt;\n        &lt;/GoabFormItem&gt;\n\n        &lt;GoabFormItem mt=\&quot;l\&quot; label=\&quot;Add to\&quot;&gt;\n          &lt;GoabRadioGroup\n            name=\&quot;mountType\&quot;\n            onChange={(event: GoabRadioGroupOnChangeDetail) =&gt; onMountTypeChange(event.value)}\n            value={mountType}\n            orientation=\&quot;horizontal\&quot;&gt;\n            &lt;GoabRadioItem value=\&quot;prepend\&quot; label=\&quot;Start\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;append\&quot; label=\&quot;End\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n\n        &lt;GoabButtonGroup alignment=\&quot;start\&quot; gap=\&quot;relaxed\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabButton type=\&quot;primary\&quot; onClick={addTask}&gt;\n            Add new item\n          &lt;/GoabButton&gt;\n          &lt;GoabButton type=\&quot;tertiary\&quot; onClick={reset}&gt;\n            Reset list\n          &lt;/GoabButton&gt;\n        &lt;/GoabButtonGroup&gt;\n\n        &lt;GoabDivider mt=\&quot;l\&quot; /&gt;\n\n        &lt;GoabFormItem mt=\&quot;l\&quot; label=\&quot;All items\&quot;&gt;\n          &lt;div style={{ width: isReset ? \&quot;320px\&quot; : \&quot;auto\&quot; }}&gt;\n            &lt;GoabDropdown\n              key={tasks.length}\n              onChange={(event: GoabDropdownOnChangeDetail) =&gt;\n                setSelectedTask(event.value as string)\n              }\n              value={selectedTask}\n              name=\&quot;selectedTask\&quot;&gt;\n              {tasks.map(task =&gt; (\n                &lt;GoabDropdownItem\n                  key={task.value}\n                  value={task.value}\n                  mountType={task.mount}\n                  label={task.label}\n                /&gt;\n              ))}\n            &lt;/GoabDropdown&gt;\n          &lt;/div&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item\n  requirement=\&quot;required\&quot;\n  label=\&quot;Name of item\&quot;\n  [error]=\&quot;taskError ? &#39;Please enter item name&#39; : undefined\&quot;\n  helpText=\&quot;Add an item to the dropdown list below\&quot;&gt;\n  &lt;goab-input\n    name=\&quot;item\&quot;\n    [value]=\&quot;newTask\&quot;\n    (onChange)=\&quot;onNewTaskChange($event)\&quot;&gt;\n  &lt;/goab-input&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-form-item mt=\&quot;l\&quot; label=\&quot;Add to\&quot;&gt;\n  &lt;goab-radio-group\n    name=\&quot;mountType\&quot;\n    [value]=\&quot;mountType\&quot;\n    orientation=\&quot;horizontal\&quot;\n    (onChange)=\&quot;onMountTypeChange($event)\&quot;&gt;\n    &lt;goab-radio-item value=\&quot;prepend\&quot; label=\&quot;Start\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;goab-radio-item value=\&quot;append\&quot; label=\&quot;End\&quot;&gt;&lt;/goab-radio-item&gt;\n  &lt;/goab-radio-group&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; gap=\&quot;relaxed\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;goab-button type=\&quot;primary\&quot; (onClick)=\&quot;addTask()\&quot;&gt;\n    Add new item\n  &lt;/goab-button&gt;\n  &lt;goab-button type=\&quot;tertiary\&quot; (onClick)=\&quot;reset()\&quot;&gt;\n    Reset list\n  &lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n\n&lt;goab-divider mt=\&quot;l\&quot;&gt;&lt;/goab-divider&gt;\n\n&lt;goab-form-item mt=\&quot;l\&quot; label=\&quot;All items\&quot;&gt;\n  &lt;ng-container *ngIf=\&quot;renderTrigger\&quot;&gt;\n    &lt;goab-dropdown\n      [value]=\&quot;selectedTask\&quot;\n      name=\&quot;selectedTask\&quot;\n      (onChange)=\&quot;onSelectedTaskChange($event)\&quot;&gt;\n      @for (task of tasks; track task.value) {\n      &lt;goab-dropdown-item\n        [value]=\&quot;task.value\&quot;\n        [mountType]=\&quot;task.mount\&quot;\n        [label]=\&quot;task.label\&quot;&gt;\n      &lt;/goab-dropdown-item&gt;\n      }\n    &lt;/goab-dropdown&gt;\n  &lt;/ng-container&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport {\n  GoabDropdownItemMountType,\n  GoabDropdownOnChangeDetail,\n  GoabInputOnChangeDetail,\n  GoabRadioGroupOnChangeDetail,\n} from \&quot;@abgov/ui-components-common\&quot;;\n\ninterface Task {\n  value: string;\n  label: string;\n  mount: GoabDropdownItemMountType;\n}\n\n@Component({\n  selector: \&quot;app-dynamically-add-dropdown-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;\n})\nexport class DynamicallyAddDropdownItemComponent {\n  defaultTasks: Task[] = [\n    { label: \&quot;Finish Report\&quot;, value: \&quot;finish-report\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Attend Meeting\&quot;, value: \&quot;attend-meeting\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Reply Emails\&quot;, value: \&quot;reply-emails\&quot;, mount: \&quot;append\&quot; },\n  ];\n\n  tasks: Task[] = [...this.defaultTasks];\n  newTask = \&quot;\&quot;;\n  mountType: GoabDropdownItemMountType = \&quot;append\&quot;;\n  selectedTask = \&quot;\&quot;;\n  taskError = false;\n  renderTrigger = true;\n\n  onMountTypeChange(event: GoabRadioGroupOnChangeDetail): void {\n    this.mountType = event.value as GoabDropdownItemMountType;\n  }\n\n  onNewTaskChange(event: GoabInputOnChangeDetail): void {\n    this.newTask = event.value;\n    this.taskError = false;\n  }\n\n  onSelectedTaskChange(event: GoabDropdownOnChangeDetail): void {\n    this.selectedTask = event.value as string;\n  }\n\n  addTask(): void {\n    if (this.newTask === \&quot;\&quot;) {\n      this.taskError = true;\n      return;\n    }\n    this.taskError = false;\n\n    const task: Task = {\n      label: this.newTask,\n      value: this.newTask.toLowerCase().replace(\&quot; \&quot;, \&quot;-\&quot;),\n      mount: this.mountType,\n    };\n    this.tasks = this.mountType === \&quot;prepend\&quot;\n      ? [task, ...this.tasks]\n      : [...this.tasks, task];\n    this.newTask = \&quot;\&quot;;\n  }\n\n  reset(): void {\n    this.newTask = \&quot;\&quot;;\n    this.selectedTask = \&quot;\&quot;;\n    this.taskError = false;\n    this.tasks = [...this.defaultTasks];\n    this.forceRerender();\n  }\n\n  forceRerender(): void {\n    this.renderTrigger = false;\n    setTimeout(() =&gt; {\n      this.renderTrigger = true;\n    }, 0);\n  }\n\n  trackByFn(index: number, item: Task): string {\n    return item.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot;\n  id=\&quot;item-form-item\&quot;\n  requirement=\&quot;required\&quot;\n  label=\&quot;Name of item\&quot;\n  helptext=\&quot;Add an item to the dropdown list below\&quot;&gt;\n  &lt;goa-input version=\&quot;2\&quot; id=\&quot;item-input\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-input&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-form-item version=\&quot;2\&quot; mt=\&quot;l\&quot; label=\&quot;Add to\&quot;&gt;\n  &lt;goa-radio-group version=\&quot;2\&quot; id=\&quot;mount-type\&quot; name=\&quot;mountType\&quot; value=\&quot;append\&quot; orientation=\&quot;horizontal\&quot;&gt;\n    &lt;goa-radio-item value=\&quot;prepend\&quot; label=\&quot;Start\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;goa-radio-item value=\&quot;append\&quot; label=\&quot;End\&quot;&gt;&lt;/goa-radio-item&gt;\n  &lt;/goa-radio-group&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; gap=\&quot;relaxed\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;add-btn\&quot; type=\&quot;primary\&quot;&gt;Add new item&lt;/goa-button&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;reset-btn\&quot; type=\&quot;tertiary\&quot;&gt;Reset list&lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;goa-divider mt=\&quot;l\&quot;&gt;&lt;/goa-divider&gt;\n\n&lt;goa-form-item version=\&quot;2\&quot; mt=\&quot;l\&quot; label=\&quot;All items\&quot;&gt;\n  &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;task-dropdown\&quot; name=\&quot;selectedTask\&quot;&gt;\n    &lt;goa-dropdown-item value=\&quot;finish-report\&quot; label=\&quot;Finish Report\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;goa-dropdown-item value=\&quot;attend-meeting\&quot; label=\&quot;Attend Meeting\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;goa-dropdown-item value=\&quot;reply-emails\&quot; label=\&quot;Reply Emails\&quot;&gt;&lt;/goa-dropdown-item&gt;\n  &lt;/goa-dropdown&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  const itemInput = document.getElementById(&#39;item-input&#39;);\n  const itemFormItem = document.getElementById(&#39;item-form-item&#39;);\n  const mountTypeGroup = document.getElementById(&#39;mount-type&#39;);\n  const addBtn = document.getElementById(&#39;add-btn&#39;);\n  const resetBtn = document.getElementById(&#39;reset-btn&#39;);\n  const dropdown = document.getElementById(&#39;task-dropdown&#39;);\n\n  let mountType = &#39;append&#39;;\n  let newTask = &#39;&#39;;\n\n  const defaultItems = [\n    { value: &#39;finish-report&#39;, label: &#39;Finish Report&#39; },\n    { value: &#39;attend-meeting&#39;, label: &#39;Attend Meeting&#39; },\n    { value: &#39;reply-emails&#39;, label: &#39;Reply Emails&#39; }\n  ];\n\n  mountTypeGroup.addEventListener(&#39;_change&#39;, (e) =&gt; {\n    mountType = e.detail.value;\n  });\n\n  itemInput.addEventListener(&#39;_change&#39;, (e) =&gt; {\n    newTask = e.detail.value;\n    itemFormItem.removeAttribute(&#39;error&#39;);\n  });\n\n  addBtn.addEventListener(&#39;_click&#39;, () =&gt; {\n    if (newTask === &#39;&#39;) {\n      itemFormItem.setAttribute(&#39;error&#39;, &#39;Please enter item name&#39;);\n      return;\n    }\n\n    const newItem = document.createElement(&#39;goa-dropdown-item&#39;);\n    newItem.setAttribute(&#39;value&#39;, newTask.toLowerCase().replace(&#39; &#39;, &#39;-&#39;));\n    newItem.setAttribute(&#39;label&#39;, newTask);\n    newItem.setAttribute(&#39;mount&#39;, mountType);\n    dropdown.appendChild(newItem);\n\n    itemInput.value = &#39;&#39;;\n    newTask = &#39;&#39;;\n  });\n\n  resetBtn.addEventListener(&#39;_click&#39;, () =&gt; {\n    dropdown.innerHTML = &#39;&#39;;\n    defaultItems.forEach(item =&gt; {\n      const dropdownItem = document.createElement(&#39;goa-dropdown-item&#39;);\n      dropdownItem.setAttribute(&#39;value&#39;, item.value);\n      dropdownItem.setAttribute(&#39;label&#39;, item.label);\n      dropdown.appendChild(dropdownItem);\n    });\n    itemInput.value = &#39;&#39;;\n    newTask = &#39;&#39;;\n    itemFormItem.removeAttribute(&#39;error&#39;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-dynamically-add-an-item-to-a-dropdown-list" class="example-title">Dynamically add an item to a dropdown list</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">type Task = {
+  value: string;
+  label: string;
+  mount: GoabDropdownItemMountType;
+};
+
+const DEFAULT_TASKS: Task[] = [
+    { label: &quot;Finish Report&quot;, value: &quot;finish-report&quot;, mount: &quot;append&quot; },
+    { label: &quot;Attend Meeting&quot;, value: &quot;attend-meeting&quot;, mount: &quot;append&quot; },
+    { label: &quot;Reply Emails&quot;, value: &quot;reply-emails&quot;, mount: &quot;append&quot; },
+  ];
+
+  const [tasks, setTasks] = useState&lt;Task[]&gt;(DEFAULT_TASKS);
+  const [newTask, setNewTask] = useState&lt;string&gt;(&quot;&quot;);
+  const [mountType, setMountType] = useState&lt;string&gt;(&quot;append&quot;);
+  const [selectedTask, setSelectedTask] = useState&lt;string&gt;(&quot;&quot;);
+  const [taskError, setTaskError] = useState&lt;boolean&gt;(false);
+  const [isReset, setIsReset] = useState&lt;boolean&gt;(false);
+
+  function onMountTypeChange(value: string | undefined) {
+    setMountType(value as string);
+  }
+
+  function addTask() {
+    if (newTask === &quot;&quot;) {
+      setTaskError(true);
+      return;
+    }
+    setTaskError(false);
+
+    const task: Task = {
+      label: newTask,
+      value: newTask.toLowerCase().replace(&quot; &quot;, &quot;-&quot;),
+      mount: mountType as GoabDropdownItemMountType,
+    };
+    setTasks([...tasks, task]);
+    setNewTask(&quot;&quot;);
+    setIsReset(false);
+  }
+
+  function reset() {
+    setTasks(DEFAULT_TASKS);
+    setMountType(&quot;append&quot;);
+    setNewTask(&quot;&quot;);
+    setSelectedTask(&quot;&quot;);
+    setTaskError(false);
+    setIsReset(true);
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem
+          requirement=&quot;required&quot;
+          label=&quot;Name of item&quot;
+          error={taskError ? &quot;Please enter item name&quot; : undefined}
+          helpText=&quot;Add an item to the dropdown list below&quot;&gt;
+          &lt;GoabInput
+            onChange={(event: GoabInputOnChangeDetail) =&gt; setNewTask(event.value)}
+            name=&quot;item&quot;
+            value={newTask}
+          /&gt;
+        &lt;/GoabFormItem&gt;
+
+        &lt;GoabFormItem mt=&quot;l&quot; label=&quot;Add to&quot;&gt;
+          &lt;GoabRadioGroup
+            name=&quot;mountType&quot;
+            onChange={(event: GoabRadioGroupOnChangeDetail) =&gt; onMountTypeChange(event.value)}
+            value={mountType}
+            orientation=&quot;horizontal&quot;&gt;
+            &lt;GoabRadioItem value=&quot;prepend&quot; label=&quot;Start&quot; /&gt;
+            &lt;GoabRadioItem value=&quot;append&quot; label=&quot;End&quot; /&gt;
+          &lt;/GoabRadioGroup&gt;
+        &lt;/GoabFormItem&gt;
+
+        &lt;GoabButtonGroup alignment=&quot;start&quot; gap=&quot;relaxed&quot; mt=&quot;l&quot;&gt;
+          &lt;GoabButton type=&quot;primary&quot; onClick={addTask}&gt;
+            Add new item
+          &lt;/GoabButton&gt;
+          &lt;GoabButton type=&quot;tertiary&quot; onClick={reset}&gt;
+            Reset list
+          &lt;/GoabButton&gt;
+        &lt;/GoabButtonGroup&gt;
+
+        &lt;GoabDivider mt=&quot;l&quot; /&gt;
+
+        &lt;GoabFormItem mt=&quot;l&quot; label=&quot;All items&quot;&gt;
+          &lt;div style={{ width: isReset ? &quot;320px&quot; : &quot;auto&quot; }}&gt;
+            &lt;GoabDropdown
+              key={tasks.length}
+              onChange={(event: GoabDropdownOnChangeDetail) =&gt;
+                setSelectedTask(event.value as string)
+              }
+              value={selectedTask}
+              name=&quot;selectedTask&quot;&gt;
+              {tasks.map(task =&gt; (
+                &lt;GoabDropdownItem
+                  key={task.value}
+                  value={task.value}
+                  mountType={task.mount}
+                  label={task.label}
+                /&gt;
+              ))}
+            &lt;/GoabDropdown&gt;
+          &lt;/div&gt;
+      &lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">defaultTasks: Task[] = [
+    { label: &quot;Finish Report&quot;, value: &quot;finish-report&quot;, mount: &quot;append&quot; },
+    { label: &quot;Attend Meeting&quot;, value: &quot;attend-meeting&quot;, mount: &quot;append&quot; },
+    { label: &quot;Reply Emails&quot;, value: &quot;reply-emails&quot;, mount: &quot;append&quot; },
+  ];
+
+  tasks: Task[] = [...this.defaultTasks];
+  newTask = &quot;&quot;;
+  mountType: GoabDropdownItemMountType = &quot;append&quot;;
+  selectedTask = &quot;&quot;;
+  taskError = false;
+  renderTrigger = true;
+
+  onMountTypeChange(event: GoabRadioGroupOnChangeDetail): void {
+    this.mountType = event.value as GoabDropdownItemMountType;
+  }
+
+  onNewTaskChange(event: GoabInputOnChangeDetail): void {
+    this.newTask = event.value;
+    this.taskError = false;
+  }
+
+  onSelectedTaskChange(event: GoabDropdownOnChangeDetail): void {
+    this.selectedTask = event.value as string;
+  }
+
+  addTask(): void {
+    if (this.newTask === &quot;&quot;) {
+      this.taskError = true;
+      return;
+    }
+    this.taskError = false;
+
+    const task: Task = {
+      label: this.newTask,
+      value: this.newTask.toLowerCase().replace(&quot; &quot;, &quot;-&quot;),
+      mount: this.mountType,
+    };
+    this.tasks = this.mountType === &quot;prepend&quot;
+      ? [task, ...this.tasks]
+      : [...this.tasks, task];
+    this.newTask = &quot;&quot;;
+  }
+
+  reset(): void {
+    this.newTask = &quot;&quot;;
+    this.selectedTask = &quot;&quot;;
+    this.taskError = false;
+    this.tasks = [...this.defaultTasks];
+    this.forceRerender();
+  }
+
+  forceRerender(): void {
+    this.renderTrigger = false;
+    setTimeout(() =&gt; {
+      this.renderTrigger = true;
+    }, 0);
+  }
+
+  trackByFn(index: number, item: Task): string {
+    return item.value;
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item
+  requirement=&quot;required&quot;
+  label=&quot;Name of item&quot;
+  [error]=&quot;taskError ? &#x27;Please enter item name&#x27; : undefined&quot;
+  helpText=&quot;Add an item to the dropdown list below&quot;&gt;
+  &lt;goab-input
+    name=&quot;item&quot;
+    [value]=&quot;newTask&quot;
+    (onChange)=&quot;onNewTaskChange($event)&quot;&gt;
+  &lt;/goab-input&gt;
+&lt;/goab-form-item&gt;
+
+&lt;goab-form-item mt=&quot;l&quot; label=&quot;Add to&quot;&gt;
+  &lt;goab-radio-group
+    name=&quot;mountType&quot;
+    [value]=&quot;mountType&quot;
+    orientation=&quot;horizontal&quot;
+    (onChange)=&quot;onMountTypeChange($event)&quot;&gt;
+    &lt;goab-radio-item value=&quot;prepend&quot; label=&quot;Start&quot;&gt;&lt;/goab-radio-item&gt;
+    &lt;goab-radio-item value=&quot;append&quot; label=&quot;End&quot;&gt;&lt;/goab-radio-item&gt;
+  &lt;/goab-radio-group&gt;
+&lt;/goab-form-item&gt;
+
+&lt;goab-button-group alignment=&quot;start&quot; gap=&quot;relaxed&quot; mt=&quot;l&quot;&gt;
+  &lt;goab-button type=&quot;primary&quot; (onClick)=&quot;addTask()&quot;&gt;
+    Add new item
+  &lt;/goab-button&gt;
+  &lt;goab-button type=&quot;tertiary&quot; (onClick)=&quot;reset()&quot;&gt;
+    Reset list
+  &lt;/goab-button&gt;
+&lt;/goab-button-group&gt;
+
+&lt;goab-divider mt=&quot;l&quot;&gt;&lt;/goab-divider&gt;
+
+&lt;goab-form-item mt=&quot;l&quot; label=&quot;All items&quot;&gt;
+  &lt;ng-container *ngIf=&quot;renderTrigger&quot;&gt;
+    &lt;goab-dropdown
+      [value]=&quot;selectedTask&quot;
+      name=&quot;selectedTask&quot;
+      (onChange)=&quot;onSelectedTaskChange($event)&quot;&gt;
+      @for (task of tasks; track task.value) {
+      &lt;goab-dropdown-item
+        [value]=&quot;task.value&quot;
+        [mountType]=&quot;task.mount&quot;
+        [label]=&quot;task.label&quot;&gt;
+      &lt;/goab-dropdown-item&gt;
+      }
+    &lt;/goab-dropdown&gt;
+  &lt;/ng-container&gt;
+&lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const itemInput = document.getElementById(&#x27;item-input&#x27;);
+const itemFormItem = document.getElementById(&#x27;item-form-item&#x27;);
+const mountTypeGroup = document.getElementById(&#x27;mount-type&#x27;);
+const addBtn = document.getElementById(&#x27;add-btn&#x27;);
+const resetBtn = document.getElementById(&#x27;reset-btn&#x27;);
+const dropdown = document.getElementById(&#x27;task-dropdown&#x27;);
+
+let mountType = &#x27;append&#x27;;
+let newTask = &#x27;&#x27;;
+
+const defaultItems = [
+  { value: &#x27;finish-report&#x27;, label: &#x27;Finish Report&#x27; },
+  { value: &#x27;attend-meeting&#x27;, label: &#x27;Attend Meeting&#x27; },
+  { value: &#x27;reply-emails&#x27;, label: &#x27;Reply Emails&#x27; }
+];
+
+mountTypeGroup.addEventListener(&#x27;_change&#x27;, (e) =&gt; {
+  mountType = e.detail.value;
+});
+
+itemInput.addEventListener(&#x27;_change&#x27;, (e) =&gt; {
+  newTask = e.detail.value;
+  itemFormItem.removeAttribute(&#x27;error&#x27;);
+});
+
+addBtn.addEventListener(&#x27;_click&#x27;, () =&gt; {
+  if (newTask === &#x27;&#x27;) {
+    itemFormItem.setAttribute(&#x27;error&#x27;, &#x27;Please enter item name&#x27;);
+    return;
+  }
+
+  const newItem = document.createElement(&#x27;goa-dropdown-item&#x27;);
+  newItem.setAttribute(&#x27;value&#x27;, newTask.toLowerCase().replace(&#x27; &#x27;, &#x27;-&#x27;));
+  newItem.setAttribute(&#x27;label&#x27;, newTask);
+  newItem.setAttribute(&#x27;mount&#x27;, mountType);
+  dropdown.appendChild(newItem);
+
+  itemInput.value = &#x27;&#x27;;
+  newTask = &#x27;&#x27;;
+});
+
+resetBtn.addEventListener(&#x27;_click&#x27;, () =&gt; {
+  dropdown.innerHTML = &#x27;&#x27;;
+  defaultItems.forEach(item =&gt; {
+    const dropdownItem = document.createElement(&#x27;goa-dropdown-item&#x27;);
+    dropdownItem.setAttribute(&#x27;value&#x27;, item.value);
+    dropdownItem.setAttribute(&#x27;label&#x27;, item.label);
+    dropdown.appendChild(dropdownItem);
+  });
+  itemInput.value = &#x27;&#x27;;
+  newTask = &#x27;&#x27;;
+  itemFormItem.removeAttribute(&#x27;error&#x27;);
+});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot;
+  id=&quot;item-form-item&quot;
+  requirement=&quot;required&quot;
+  label=&quot;Name of item&quot;
+  helptext=&quot;Add an item to the dropdown list below&quot;&gt;
+  &lt;goa-input version=&quot;2&quot; id=&quot;item-input&quot; name=&quot;item&quot;&gt;&lt;/goa-input&gt;
+&lt;/goa-form-item&gt;
+
+&lt;goa-form-item version=&quot;2&quot; mt=&quot;l&quot; label=&quot;Add to&quot;&gt;
+  &lt;goa-radio-group version=&quot;2&quot; id=&quot;mount-type&quot; name=&quot;mountType&quot; value=&quot;append&quot; orientation=&quot;horizontal&quot;&gt;
+    &lt;goa-radio-item value=&quot;prepend&quot; label=&quot;Start&quot;&gt;&lt;/goa-radio-item&gt;
+    &lt;goa-radio-item value=&quot;append&quot; label=&quot;End&quot;&gt;&lt;/goa-radio-item&gt;
+  &lt;/goa-radio-group&gt;
+&lt;/goa-form-item&gt;
+
+&lt;goa-button-group alignment=&quot;start&quot; gap=&quot;relaxed&quot; mt=&quot;l&quot;&gt;
+  &lt;goa-button version=&quot;2&quot; id=&quot;add-btn&quot; type=&quot;primary&quot;&gt;Add new item&lt;/goa-button&gt;
+  &lt;goa-button version=&quot;2&quot; id=&quot;reset-btn&quot; type=&quot;tertiary&quot;&gt;Reset list&lt;/goa-button&gt;
+&lt;/goa-button-group&gt;
+
+&lt;goa-divider mt=&quot;l&quot;&gt;&lt;/goa-divider&gt;
+
+&lt;goa-form-item version=&quot;2&quot; mt=&quot;l&quot; label=&quot;All items&quot;&gt;
+  &lt;goa-dropdown version=&quot;2&quot; id=&quot;task-dropdown&quot; name=&quot;selectedTask&quot;&gt;
+    &lt;goa-dropdown-item value=&quot;finish-report&quot; label=&quot;Finish Report&quot;&gt;&lt;/goa-dropdown-item&gt;
+    &lt;goa-dropdown-item value=&quot;attend-meeting&quot; label=&quot;Attend Meeting&quot;&gt;&lt;/goa-dropdown-item&gt;
+    &lt;goa-dropdown-item value=&quot;reply-emails&quot; label=&quot;Reply Emails&quot;&gt;&lt;/goa-dropdown-item&gt;
+  &lt;/goa-dropdown&gt;
+&lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      .code-snippet {
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        border-radius: var(--goa-border-radius-m, 4px);
+        overflow: hidden;
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        font-size: var(--goa-font-size-2);
+      }
+
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
+      }
+
+      .code-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--goa-color-greyscale-200, #dcdcdc);
+      }
+
+      .code-block {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        position: relative;
+      }
+
+      .code-block-header {
+        position: absolute;
+        top: var(--goa-space-xs, 0.25rem);
+        right: var(--goa-space-s, 0.5rem);
+        z-index: 1; /* Above code content so copy button is clickable */
+      }
+
+      .code-block-title {
+        font-size: 0.75rem;
+        font-weight: var(--goa-font-weight-semi-bold);
+        color: var(--goa-color-text-secondary, #666);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .copy-button {
+        background: var(--goa-color-greyscale-white);
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        color: var(--goa-color-interactive-default, #0070c4);
+        width: 28px;
+        height: 28px;
+        border-radius: var(--goa-border-radius-xs);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+
+      .copy-button:hover {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        border-color: var(--goa-color-interactive-default, #0070c4);
+      }
+
+      .copy-button.copied {
+        background: var(--goa-color-status-success, #2e7d32);
+        border-color: var(--goa-color-status-success, #2e7d32);
+        color: var(--goa-color-greyscale-white);
+      }
+
+      .copy-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .code-container {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .code-container.expanded {
+        overflow: auto;
+      }
+
+      .code-block.has-gradient .code-container {
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+      }
+
+      pre {
+        margin: 0;
+        padding: var(--goa-space-m, 1rem);
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        line-height: 1.6;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      .expand-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: var(--goa-space-s, 0.5rem) 0;
+        position: relative;
+        margin-top: -2rem;
+      }
+
+      .expand-button-bg {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+      }
+
+      .no-code {
+        padding: var(--goa-space-m, 1rem);
+        color: var(--goa-color-text-secondary, #666);
+        font-style: italic;
+      }
+
+      /* Highlight.js theme */
+      .hljs {
+        color: var(--goa-color-text-default, #333);
+        background: transparent;
+      }
+      .hljs-keyword { color: #0550ae; }
+      .hljs-string { color: #4b7c41; }
+      .hljs-number { color: #0550ae; }
+      .hljs-comment { color: #6e7781; }
+      .hljs-tag { color: #0550ae; }
+      .hljs-attr { color: #0550ae; }
+      .hljs-name { color: #2b7c5f; }
+      .hljs-built_in { color: #6639ba; }
+      .hljs-title { color: #6639ba; }
+      .hljs-params { color: #953800; }
+    </style></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z18veQy" prefix="r15" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Dynamically change items in a dropdown list&quot;],&quot;slug&quot;:[0,&quot;dynamically-change-items-in-a-dropdown-list&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabDropdown, GoabDropdownItem, GoabFormItem } from \&quot;@abgov/react-components\&quot;;\nimport { GoabDropdownOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function DynamicallyChangeItemsInADropdownList() {\n  const [children, setChildren] = useState&lt;string[]&gt;([]);\n  const parents = [\&quot;All\&quot;, \&quot;Big\&quot;, \&quot;Small\&quot;];\n  const childrenAll = [\&quot;Bus\&quot;, \&quot;Elephant\&quot;, \&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;, \&quot;Truck\&quot;];\n  const childrenBig = [\&quot;Elephant\&quot;, \&quot;Truck\&quot;, \&quot;Bus\&quot;];\n  const childrenSmall = [\&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;];\n\n  const loadItems = (value: string) =&gt; {\n    if (value === \&quot;All\&quot;) setChildren(childrenAll);\n    else if (value === \&quot;Big\&quot;) setChildren(childrenBig);\n    else setChildren(childrenSmall);\n  };\n\n  const logSelection = () =&gt; {\n    console.log(\&quot;Item selected\&quot;);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem\n          label=\&quot;Size\&quot;\n          requirement=\&quot;optional\&quot;\n          helpText=\&quot;Choose the size to change the list below\&quot;&gt;\n          &lt;GoabDropdown\n            name=\&quot;parent\&quot;\n            placeholder=\&quot;Select a value\&quot;\n            onChange={(event: GoabDropdownOnChangeDetail) =&gt;\n              loadItems(event.value as string)\n            }&gt;\n            {parents.map(parent =&gt; (\n              &lt;GoabDropdownItem key={parent} value={parent} label={parent} /&gt;\n            ))}\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n\n        &lt;GoabFormItem label=\&quot;Items\&quot; requirement=\&quot;optional\&quot; mt=\&quot;xl\&quot;&gt;\n          &lt;GoabDropdown name=\&quot;children\&quot; placeholder=\&quot;Select a value\&quot; onChange={logSelection}&gt;\n            {children.map((child) =&gt; (\n              &lt;GoabDropdownItem\n                key={child}\n                value={child}\n                label={child}\n                mountType=\&quot;reset\&quot;\n              /&gt;\n            ))}\n          &lt;/GoabDropdown&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;div [formGroup]=\&quot;changeForm\&quot; style=\&quot;padding: 40px;\&quot;&gt;\n  &lt;goab-form-item label=\&quot;Size\&quot; requirement=\&quot;optional\&quot; helpText=\&quot;Choose the size to change the list below\&quot;&gt;\n    &lt;goab-dropdown formControlName=\&quot;parentDropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;parent\&quot;&gt;\n      @for (parent of parents; track parent) {\n      &lt;goab-dropdown-item [value]=\&quot;parent\&quot; [label]=\&quot;parent\&quot; /&gt;\n      }\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n\n  &lt;goab-form-item label=\&quot;Items\&quot; requirement=\&quot;optional\&quot; mt=\&quot;xl\&quot;&gt;\n    &lt;goab-dropdown formControlName=\&quot;childDropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;children\&quot;&gt;\n      &lt;ng-container *ngIf=\&quot;children.length &gt; 0\&quot;&gt;\n        @for (child of children; track child) {\n        &lt;goab-dropdown-item\n          [value]=\&quot;child\&quot;\n          [label]=\&quot;child\&quot;\n          [mountType]=\&quot;&#39;reset&#39;\&quot;\n        /&gt;\n        }\n      &lt;/ng-container&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n&lt;/div&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component, OnInit } from \&quot;@angular/core\&quot;;\nimport { FormControl, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-dynamically-change-dropdown-items\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;\n})\nexport class DynamicallyChangeDropdownItemsComponent implements OnInit {\n  changeForm = new FormGroup({\n    parentDropdown: new FormControl(\&quot;\&quot;),\n    childDropdown: new FormControl(\&quot;\&quot;),\n  });\n\n  parents = [\&quot;All\&quot;, \&quot;Big\&quot;, \&quot;Small\&quot;];\n  children: string[] = [];\n\n  childrenAll = [\&quot;Bus\&quot;, \&quot;Elephant\&quot;, \&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;, \&quot;Truck\&quot;];\n  childrenBig = [\&quot;Elephant\&quot;, \&quot;Truck\&quot;, \&quot;Bus\&quot;];\n  childrenSmall = [\&quot;Key\&quot;, \&quot;Pen\&quot;, \&quot;Watch\&quot;];\n\n  ngOnInit(): void {\n    this.onChange();\n  }\n\n  onChange(): void {\n    this.changeForm.get(\&quot;parentDropdown\&quot;)?.valueChanges.subscribe((value) =&gt; {\n      if (value === \&quot;All\&quot;) this.children = this.childrenAll;\n      else if (value === \&quot;Big\&quot;) this.children = this.childrenBig;\n      else this.children = this.childrenSmall;\n    });\n  }\n\n  generateUniqueKey(index: number, item: string): string {\n    return `${item}_${index}_${Math.random()}`;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;div style=\&quot;padding: 40px;\&quot;&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Size\&quot; requirement=\&quot;optional\&quot; helptext=\&quot;Choose the size to change the list below\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;parent-dropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;parent\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;All\&quot; label=\&quot;All\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;Big\&quot; label=\&quot;Big\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;Small\&quot; label=\&quot;Small\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Items\&quot; requirement=\&quot;optional\&quot; mt=\&quot;xl\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;child-dropdown\&quot; placeholder=\&quot;Select a value\&quot; name=\&quot;children\&quot;&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n&lt;/div&gt;\n\n&lt;script&gt;\n  const parentDropdown = document.getElementById(&#39;parent-dropdown&#39;);\n  const childDropdown = document.getElementById(&#39;child-dropdown&#39;);\n\n  const childrenAll = [&#39;Bus&#39;, &#39;Elephant&#39;, &#39;Key&#39;, &#39;Pen&#39;, &#39;Watch&#39;, &#39;Truck&#39;];\n  const childrenBig = [&#39;Elephant&#39;, &#39;Truck&#39;, &#39;Bus&#39;];\n  const childrenSmall = [&#39;Key&#39;, &#39;Pen&#39;, &#39;Watch&#39;];\n\n  function updateChildren(items) {\n    childDropdown.innerHTML = &#39;&#39;;\n    items.forEach(item =&gt; {\n      const dropdownItem = document.createElement(&#39;goa-dropdown-item&#39;);\n      dropdownItem.setAttribute(&#39;value&#39;, item);\n      dropdownItem.setAttribute(&#39;label&#39;, item);\n      dropdownItem.setAttribute(&#39;mount&#39;, &#39;reset&#39;);\n      childDropdown.appendChild(dropdownItem);\n    });\n  }\n\n  parentDropdown.addEventListener(&#39;_change&#39;, (e) =&gt; {\n    const value = e.detail.value;\n    if (value === &#39;All&#39;) updateChildren(childrenAll);\n    else if (value === &#39;Big&#39;) updateChildren(childrenBig);\n    else updateChildren(childrenSmall);\n  });\n\n  childDropdown.addEventListener(&#39;_change&#39;, () =&gt; {\n    console.log(&#39;Item selected&#39;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-dynamically-change-items-in-a-dropdown-list" class="example-title">Dynamically change items in a dropdown list</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [children, setChildren] = useState&lt;string[]&gt;([]);
   const parents = [&quot;All&quot;, &quot;Big&quot;, &quot;Small&quot;];
   const childrenAll = [&quot;Bus&quot;, &quot;Elephant&quot;, &quot;Key&quot;, &quot;Pen&quot;, &quot;Watch&quot;, &quot;Truck&quot;];
   const childrenBig = [&quot;Elephant&quot;, &quot;Truck&quot;, &quot;Bus&quot;];
@@ -1842,7 +2347,7 @@ childDropdown.addEventListener(&#x27;_change&#x27;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="1xrCz8" prefix="r15" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Filter a list using a push drawer&quot;],&quot;slug&quot;:[0,&quot;filter-a-list-using-a-push-drawer&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabBadge,\n  GoabButton,\n  GoabCheckbox,\n  GoabCheckboxList,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabPushDrawer,\n  GoabTable,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function FilterAListUsingAPushDrawer() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;div style={{ display: \&quot;flex\&quot;, minHeight: \&quot;480px\&quot; }}&gt;\n      &lt;div style={{ flex: 1, minWidth: 0 }}&gt;\n        &lt;div\n          style={{\n            display: \&quot;flex\&quot;,\n            alignItems: \&quot;center\&quot;,\n            gap: \&quot;1rem\&quot;,\n            marginBottom: \&quot;1rem\&quot;,\n          }}\n        &gt;\n          &lt;h3 style={{ flex: 1, margin: 0 }}&gt;All cases&lt;/h3&gt;\n          {!open &amp;&amp; (\n            &lt;GoabButton\n              type=\&quot;secondary\&quot;\n              size=\&quot;compact\&quot;\n              leadingIcon=\&quot;filter\&quot;\n              onClick={() =&gt; setOpen(true)}\n            &gt;\n              Filters\n            &lt;/GoabButton&gt;\n          )}\n        &lt;/div&gt;\n\n        &lt;GoabTable width=\&quot;100%\&quot;&gt;\n          &lt;table width=\&quot;100%\&quot;&gt;\n            &lt;thead&gt;\n              &lt;tr&gt;\n                &lt;th&gt;Status&lt;/th&gt;\n                &lt;th&gt;Name&lt;/th&gt;\n                &lt;th&gt;File number&lt;/th&gt;\n                &lt;th&gt;Act&lt;/th&gt;\n              &lt;/tr&gt;\n            &lt;/thead&gt;\n            &lt;tbody&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Completed\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Gilbert Barton&lt;/td&gt;\n                &lt;td&gt;24567-9876&lt;/td&gt;\n                &lt;td&gt;Traffic safety act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;New\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Brynn Hurley&lt;/td&gt;\n                &lt;td&gt;98765-3456&lt;/td&gt;\n                &lt;td&gt;Trespass to premises act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;midtone\&quot; content=\&quot;In review\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Marco Silva&lt;/td&gt;\n                &lt;td&gt;34521-7890&lt;/td&gt;\n                &lt;td&gt;Gaming, liquor, and cannabis act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Completed\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Dana Chen&lt;/td&gt;\n                &lt;td&gt;55123-4567&lt;/td&gt;\n                &lt;td&gt;Traffic safety act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;New\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Amira Hassan&lt;/td&gt;\n                &lt;td&gt;67890-1234&lt;/td&gt;\n                &lt;td&gt;Trespass to premises act&lt;/td&gt;\n              &lt;/tr&gt;\n            &lt;/tbody&gt;\n          &lt;/table&gt;\n        &lt;/GoabTable&gt;\n      &lt;/div&gt;\n\n      &lt;GoabPushDrawer\n        heading=\&quot;Filters\&quot;\n        width=\&quot;260px\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n      &gt;\n        &lt;GoabFormItem label=\&quot;Act\&quot;&gt;\n          &lt;GoabCheckboxList name=\&quot;act\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabCheckbox name=\&quot;traffic\&quot; text=\&quot;Traffic safety act\&quot; size=\&quot;compact\&quot; /&gt;\n            &lt;GoabCheckbox\n              name=\&quot;gaming\&quot;\n              text=\&quot;Gaming, liquor, and cannabis act\&quot;\n              size=\&quot;compact\&quot;\n            /&gt;\n            &lt;GoabCheckbox\n              name=\&quot;trespass\&quot;\n              text=\&quot;Trespass to premises act\&quot;\n              size=\&quot;compact\&quot;\n            /&gt;\n          &lt;/GoabCheckboxList&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Status\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDropdown name=\&quot;status\&quot; onChange={() =&gt; {}} value=\&quot;\&quot; size=\&quot;compact\&quot;&gt;\n            &lt;GoabDropdownItem value=\&quot;\&quot; label=\&quot;All statuses\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;new\&quot; label=\&quot;New\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;in-review\&quot; label=\&quot;In review\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;completed\&quot; label=\&quot;Completed\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabPushDrawer&gt;\n    &lt;/div&gt;\n  );\n}\n&quot;],&quot;webComponents&quot;:[0,&quot;&lt;div style=\&quot;display: flex; min-height: 480px\&quot;&gt;\n  &lt;div style=\&quot;flex: 1; min-width: 0\&quot;&gt;\n    &lt;div style=\&quot;display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem\&quot;&gt;\n      &lt;h3 style=\&quot;flex: 1; margin: 0\&quot;&gt;All cases&lt;/h3&gt;\n      &lt;goa-button\n        version=\&quot;2\&quot;\n        id=\&quot;open-filters-btn\&quot;\n        type=\&quot;secondary\&quot;\n        size=\&quot;compact\&quot;\n        leadingicon=\&quot;filter\&quot;\n        &gt;Filters&lt;/goa-button\n      &gt;\n    &lt;/div&gt;\n\n    &lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot;&gt;\n      &lt;table width=\&quot;100%\&quot;&gt;\n        &lt;thead&gt;\n          &lt;tr&gt;\n            &lt;th&gt;Status&lt;/th&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;File number&lt;/th&gt;\n            &lt;th&gt;Act&lt;/th&gt;\n          &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Completed\&quot;&gt;&lt;/goa-badge&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Gilbert Barton&lt;/td&gt;\n            &lt;td&gt;24567-9876&lt;/td&gt;\n            &lt;td&gt;Traffic safety act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;New\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n            &lt;td&gt;Brynn Hurley&lt;/td&gt;\n            &lt;td&gt;98765-3456&lt;/td&gt;\n            &lt;td&gt;Trespass to premises act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;goa-badge version=\&quot;2\&quot; type=\&quot;midtone\&quot; content=\&quot;In review\&quot;&gt;&lt;/goa-badge&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Marco Silva&lt;/td&gt;\n            &lt;td&gt;34521-7890&lt;/td&gt;\n            &lt;td&gt;Gaming, liquor, and cannabis act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Completed\&quot;&gt;&lt;/goa-badge&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Dana Chen&lt;/td&gt;\n            &lt;td&gt;55123-4567&lt;/td&gt;\n            &lt;td&gt;Traffic safety act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;New\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n            &lt;td&gt;Amira Hassan&lt;/td&gt;\n            &lt;td&gt;67890-1234&lt;/td&gt;\n            &lt;td&gt;Trespass to premises act&lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/table&gt;\n    &lt;/goa-table&gt;\n  &lt;/div&gt;\n\n  &lt;goa-push-drawer version=\&quot;2\&quot; id=\&quot;filters-drawer\&quot; heading=\&quot;Filters\&quot; width=\&quot;260px\&quot;&gt;\n    &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Act\&quot;&gt;\n      &lt;goa-checkbox-list name=\&quot;act\&quot;&gt;\n        &lt;goa-checkbox\n          version=\&quot;2\&quot;\n          name=\&quot;traffic\&quot;\n          text=\&quot;Traffic safety act\&quot;\n          size=\&quot;compact\&quot;\n        &gt;&lt;/goa-checkbox&gt;\n        &lt;goa-checkbox\n          version=\&quot;2\&quot;\n          name=\&quot;gaming\&quot;\n          text=\&quot;Gaming, liquor, and cannabis act\&quot;\n          size=\&quot;compact\&quot;\n        &gt;&lt;/goa-checkbox&gt;\n        &lt;goa-checkbox\n          version=\&quot;2\&quot;\n          name=\&quot;trespass\&quot;\n          text=\&quot;Trespass to premises act\&quot;\n          size=\&quot;compact\&quot;\n        &gt;&lt;/goa-checkbox&gt;\n      &lt;/goa-checkbox-list&gt;\n    &lt;/goa-form-item&gt;\n    &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Status\&quot; mt=\&quot;l\&quot;&gt;\n      &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;status\&quot; size=\&quot;compact\&quot;&gt;\n        &lt;goa-dropdown-item value=\&quot;\&quot; label=\&quot;All statuses\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;goa-dropdown-item value=\&quot;new\&quot; label=\&quot;New\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;goa-dropdown-item value=\&quot;in-review\&quot; label=\&quot;In review\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;goa-dropdown-item value=\&quot;completed\&quot; label=\&quot;Completed\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;/goa-dropdown&gt;\n    &lt;/goa-form-item&gt;\n  &lt;/goa-push-drawer&gt;\n&lt;/div&gt;\n\n&lt;script&gt;\n  const filtersDrawer = document.getElementById(\&quot;filters-drawer\&quot;);\n  const openFiltersBtn = document.getElementById(\&quot;open-filters-btn\&quot;);\n\n  openFiltersBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    filtersDrawer.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n    openFiltersBtn.style.display = \&quot;none\&quot;;\n  });\n\n  filtersDrawer.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    filtersDrawer.removeAttribute(\&quot;open\&quot;);\n    openFiltersBtn.style.display = \&quot;\&quot;;\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-filter-a-list-using-a-push-drawer" class="example-title">Filter a list using a push drawer</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;div style={{ display: &quot;flex&quot;, minHeight: &quot;480px&quot; }}&gt;
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="1xrCz8" prefix="r16" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Filter a list using a push drawer&quot;],&quot;slug&quot;:[0,&quot;filter-a-list-using-a-push-drawer&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabBadge,\n  GoabButton,\n  GoabCheckbox,\n  GoabCheckboxList,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabPushDrawer,\n  GoabTable,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function FilterAListUsingAPushDrawer() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    &lt;div style={{ display: \&quot;flex\&quot;, minHeight: \&quot;480px\&quot; }}&gt;\n      &lt;div style={{ flex: 1, minWidth: 0 }}&gt;\n        &lt;div\n          style={{\n            display: \&quot;flex\&quot;,\n            alignItems: \&quot;center\&quot;,\n            gap: \&quot;1rem\&quot;,\n            marginBottom: \&quot;1rem\&quot;,\n          }}\n        &gt;\n          &lt;h3 style={{ flex: 1, margin: 0 }}&gt;All cases&lt;/h3&gt;\n          {!open &amp;&amp; (\n            &lt;GoabButton\n              type=\&quot;secondary\&quot;\n              size=\&quot;compact\&quot;\n              leadingIcon=\&quot;filter\&quot;\n              onClick={() =&gt; setOpen(true)}\n            &gt;\n              Filters\n            &lt;/GoabButton&gt;\n          )}\n        &lt;/div&gt;\n\n        &lt;GoabTable width=\&quot;100%\&quot;&gt;\n          &lt;table width=\&quot;100%\&quot;&gt;\n            &lt;thead&gt;\n              &lt;tr&gt;\n                &lt;th&gt;Status&lt;/th&gt;\n                &lt;th&gt;Name&lt;/th&gt;\n                &lt;th&gt;File number&lt;/th&gt;\n                &lt;th&gt;Act&lt;/th&gt;\n              &lt;/tr&gt;\n            &lt;/thead&gt;\n            &lt;tbody&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Completed\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Gilbert Barton&lt;/td&gt;\n                &lt;td&gt;24567-9876&lt;/td&gt;\n                &lt;td&gt;Traffic safety act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;New\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Brynn Hurley&lt;/td&gt;\n                &lt;td&gt;98765-3456&lt;/td&gt;\n                &lt;td&gt;Trespass to premises act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;midtone\&quot; content=\&quot;In review\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Marco Silva&lt;/td&gt;\n                &lt;td&gt;34521-7890&lt;/td&gt;\n                &lt;td&gt;Gaming, liquor, and cannabis act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Completed\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Dana Chen&lt;/td&gt;\n                &lt;td&gt;55123-4567&lt;/td&gt;\n                &lt;td&gt;Traffic safety act&lt;/td&gt;\n              &lt;/tr&gt;\n              &lt;tr&gt;\n                &lt;td&gt;\n                  &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;New\&quot; /&gt;\n                &lt;/td&gt;\n                &lt;td&gt;Amira Hassan&lt;/td&gt;\n                &lt;td&gt;67890-1234&lt;/td&gt;\n                &lt;td&gt;Trespass to premises act&lt;/td&gt;\n              &lt;/tr&gt;\n            &lt;/tbody&gt;\n          &lt;/table&gt;\n        &lt;/GoabTable&gt;\n      &lt;/div&gt;\n\n      &lt;GoabPushDrawer\n        heading=\&quot;Filters\&quot;\n        width=\&quot;260px\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n      &gt;\n        &lt;GoabFormItem label=\&quot;Act\&quot;&gt;\n          &lt;GoabCheckboxList name=\&quot;act\&quot; onChange={() =&gt; {}}&gt;\n            &lt;GoabCheckbox name=\&quot;traffic\&quot; text=\&quot;Traffic safety act\&quot; size=\&quot;compact\&quot; /&gt;\n            &lt;GoabCheckbox\n              name=\&quot;gaming\&quot;\n              text=\&quot;Gaming, liquor, and cannabis act\&quot;\n              size=\&quot;compact\&quot;\n            /&gt;\n            &lt;GoabCheckbox\n              name=\&quot;trespass\&quot;\n              text=\&quot;Trespass to premises act\&quot;\n              size=\&quot;compact\&quot;\n            /&gt;\n          &lt;/GoabCheckboxList&gt;\n        &lt;/GoabFormItem&gt;\n        &lt;GoabFormItem label=\&quot;Status\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDropdown name=\&quot;status\&quot; onChange={() =&gt; {}} value=\&quot;\&quot; size=\&quot;compact\&quot;&gt;\n            &lt;GoabDropdownItem value=\&quot;\&quot; label=\&quot;All statuses\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;new\&quot; label=\&quot;New\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;in-review\&quot; label=\&quot;In review\&quot; /&gt;\n            &lt;GoabDropdownItem value=\&quot;completed\&quot; label=\&quot;Completed\&quot; /&gt;\n          &lt;/GoabDropdown&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabPushDrawer&gt;\n    &lt;/div&gt;\n  );\n}\n&quot;],&quot;webComponents&quot;:[0,&quot;&lt;div style=\&quot;display: flex; min-height: 480px\&quot;&gt;\n  &lt;div style=\&quot;flex: 1; min-width: 0\&quot;&gt;\n    &lt;div style=\&quot;display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem\&quot;&gt;\n      &lt;h3 style=\&quot;flex: 1; margin: 0\&quot;&gt;All cases&lt;/h3&gt;\n      &lt;goa-button\n        version=\&quot;2\&quot;\n        id=\&quot;open-filters-btn\&quot;\n        type=\&quot;secondary\&quot;\n        size=\&quot;compact\&quot;\n        leadingicon=\&quot;filter\&quot;\n        &gt;Filters&lt;/goa-button\n      &gt;\n    &lt;/div&gt;\n\n    &lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot;&gt;\n      &lt;table width=\&quot;100%\&quot;&gt;\n        &lt;thead&gt;\n          &lt;tr&gt;\n            &lt;th&gt;Status&lt;/th&gt;\n            &lt;th&gt;Name&lt;/th&gt;\n            &lt;th&gt;File number&lt;/th&gt;\n            &lt;th&gt;Act&lt;/th&gt;\n          &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Completed\&quot;&gt;&lt;/goa-badge&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Gilbert Barton&lt;/td&gt;\n            &lt;td&gt;24567-9876&lt;/td&gt;\n            &lt;td&gt;Traffic safety act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;New\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n            &lt;td&gt;Brynn Hurley&lt;/td&gt;\n            &lt;td&gt;98765-3456&lt;/td&gt;\n            &lt;td&gt;Trespass to premises act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;goa-badge version=\&quot;2\&quot; type=\&quot;midtone\&quot; content=\&quot;In review\&quot;&gt;&lt;/goa-badge&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Marco Silva&lt;/td&gt;\n            &lt;td&gt;34521-7890&lt;/td&gt;\n            &lt;td&gt;Gaming, liquor, and cannabis act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Completed\&quot;&gt;&lt;/goa-badge&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Dana Chen&lt;/td&gt;\n            &lt;td&gt;55123-4567&lt;/td&gt;\n            &lt;td&gt;Traffic safety act&lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;New\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n            &lt;td&gt;Amira Hassan&lt;/td&gt;\n            &lt;td&gt;67890-1234&lt;/td&gt;\n            &lt;td&gt;Trespass to premises act&lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/table&gt;\n    &lt;/goa-table&gt;\n  &lt;/div&gt;\n\n  &lt;goa-push-drawer version=\&quot;2\&quot; id=\&quot;filters-drawer\&quot; heading=\&quot;Filters\&quot; width=\&quot;260px\&quot;&gt;\n    &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Act\&quot;&gt;\n      &lt;goa-checkbox-list name=\&quot;act\&quot;&gt;\n        &lt;goa-checkbox\n          version=\&quot;2\&quot;\n          name=\&quot;traffic\&quot;\n          text=\&quot;Traffic safety act\&quot;\n          size=\&quot;compact\&quot;\n        &gt;&lt;/goa-checkbox&gt;\n        &lt;goa-checkbox\n          version=\&quot;2\&quot;\n          name=\&quot;gaming\&quot;\n          text=\&quot;Gaming, liquor, and cannabis act\&quot;\n          size=\&quot;compact\&quot;\n        &gt;&lt;/goa-checkbox&gt;\n        &lt;goa-checkbox\n          version=\&quot;2\&quot;\n          name=\&quot;trespass\&quot;\n          text=\&quot;Trespass to premises act\&quot;\n          size=\&quot;compact\&quot;\n        &gt;&lt;/goa-checkbox&gt;\n      &lt;/goa-checkbox-list&gt;\n    &lt;/goa-form-item&gt;\n    &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Status\&quot; mt=\&quot;l\&quot;&gt;\n      &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;status\&quot; size=\&quot;compact\&quot;&gt;\n        &lt;goa-dropdown-item value=\&quot;\&quot; label=\&quot;All statuses\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;goa-dropdown-item value=\&quot;new\&quot; label=\&quot;New\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;goa-dropdown-item value=\&quot;in-review\&quot; label=\&quot;In review\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;goa-dropdown-item value=\&quot;completed\&quot; label=\&quot;Completed\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;/goa-dropdown&gt;\n    &lt;/goa-form-item&gt;\n  &lt;/goa-push-drawer&gt;\n&lt;/div&gt;\n\n&lt;script&gt;\n  const filtersDrawer = document.getElementById(\&quot;filters-drawer\&quot;);\n  const openFiltersBtn = document.getElementById(\&quot;open-filters-btn\&quot;);\n\n  openFiltersBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    filtersDrawer.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n    openFiltersBtn.style.display = \&quot;none\&quot;;\n  });\n\n  filtersDrawer.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    filtersDrawer.removeAttribute(\&quot;open\&quot;);\n    openFiltersBtn.style.display = \&quot;\&quot;;\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-filter-a-list-using-a-push-drawer" class="example-title">Filter a list using a push drawer</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;div style={{ display: &quot;flex&quot;, minHeight: &quot;480px&quot; }}&gt;
       &lt;div style={{ flex: 1, minWidth: 0 }}&gt;
         &lt;div
           style={{
@@ -2061,511 +2566,6 @@ filtersDrawer.addEventListener(&quot;_close&quot;, () =&gt; {
     &lt;/goa-form-item&gt;
   &lt;/goa-push-drawer&gt;
 &lt;/div&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
-      .code-snippet {
-        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-        border-radius: var(--goa-border-radius-m, 4px);
-        overflow: hidden;
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-        font-size: var(--goa-font-size-2);
-      }
-
-      .framework-switcher .code-snippet {
-        margin-top: calc(-2rem + 12px);
-      }
-
-      .code-blocks {
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        background: var(--goa-color-greyscale-200, #dcdcdc);
-      }
-
-      .code-block {
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-        position: relative;
-      }
-
-      .code-block-header {
-        position: absolute;
-        top: var(--goa-space-xs, 0.25rem);
-        right: var(--goa-space-s, 0.5rem);
-        z-index: 1; /* Above code content so copy button is clickable */
-      }
-
-      .code-block-title {
-        font-size: 0.75rem;
-        font-weight: var(--goa-font-weight-semi-bold);
-        color: var(--goa-color-text-secondary, #666);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .copy-button {
-        background: var(--goa-color-greyscale-white);
-        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-        color: var(--goa-color-interactive-default, #0070c4);
-        width: 28px;
-        height: 28px;
-        border-radius: var(--goa-border-radius-xs);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.15s;
-      }
-
-      .copy-button:hover {
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-        border-color: var(--goa-color-interactive-default, #0070c4);
-      }
-
-      .copy-button.copied {
-        background: var(--goa-color-status-success, #2e7d32);
-        border-color: var(--goa-color-status-success, #2e7d32);
-        color: var(--goa-color-greyscale-white);
-      }
-
-      .copy-icon {
-        width: 16px;
-        height: 16px;
-      }
-
-      .code-container {
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-      }
-
-      .code-container.expanded {
-        overflow: auto;
-      }
-
-      .code-block.has-gradient .code-container {
-        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
-        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
-      }
-
-      pre {
-        margin: 0;
-        padding: var(--goa-space-m, 1rem);
-        overflow-x: auto;
-      }
-
-      code {
-        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-        line-height: 1.6;
-        background: transparent !important;
-        padding: 0 !important;
-      }
-
-      .expand-wrapper {
-        display: flex;
-        justify-content: center;
-        padding: var(--goa-space-s, 0.5rem) 0;
-        position: relative;
-        margin-top: -2rem;
-      }
-
-      .expand-button-bg {
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-      }
-
-      .no-code {
-        padding: var(--goa-space-m, 1rem);
-        color: var(--goa-color-text-secondary, #666);
-        font-style: italic;
-      }
-
-      /* Highlight.js theme */
-      .hljs {
-        color: var(--goa-color-text-default, #333);
-        background: transparent;
-      }
-      .hljs-keyword { color: #0550ae; }
-      .hljs-string { color: #4b7c41; }
-      .hljs-number { color: #0550ae; }
-      .hljs-comment { color: #6e7781; }
-      .hljs-tag { color: #0550ae; }
-      .hljs-attr { color: #0550ae; }
-      .hljs-name { color: #2b7c5f; }
-      .hljs-built_in { color: #6639ba; }
-      .hljs-title { color: #6639ba; }
-      .hljs-params { color: #953800; }
-    </style></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="ZTaRYE" prefix="r16" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Dynamically add an item to a dropdown list&quot;],&quot;slug&quot;:[0,&quot;dynamically-add-an-item-to-a-dropdown-list&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDivider,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabRadioGroup,\n  GoabRadioItem,\n} from \&quot;@abgov/react-components\&quot;;\n\nimport {\n  GoabDropdownItemMountType,\n  GoabDropdownOnChangeDetail,\n  GoabInputOnChangeDetail,\n  GoabRadioGroupOnChangeDetail,\n} from \&quot;@abgov/ui-components-common\&quot;;\n\ntype Task = {\n  value: string;\n  label: string;\n  mount: GoabDropdownItemMountType;\n};\n\nexport function DynamicallyAddAnItemToADropdownList() {\n  const DEFAULT_TASKS: Task[] = [\n    { label: \&quot;Finish Report\&quot;, value: \&quot;finish-report\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Attend Meeting\&quot;, value: \&quot;attend-meeting\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Reply Emails\&quot;, value: \&quot;reply-emails\&quot;, mount: \&quot;append\&quot; },\n  ];\n\n  const [tasks, setTasks] = useState&lt;Task[]&gt;(DEFAULT_TASKS);\n  const [newTask, setNewTask] = useState&lt;string&gt;(\&quot;\&quot;);\n  const [mountType, setMountType] = useState&lt;string&gt;(\&quot;append\&quot;);\n  const [selectedTask, setSelectedTask] = useState&lt;string&gt;(\&quot;\&quot;);\n  const [taskError, setTaskError] = useState&lt;boolean&gt;(false);\n  const [isReset, setIsReset] = useState&lt;boolean&gt;(false);\n\n  function onMountTypeChange(value: string | undefined) {\n    setMountType(value as string);\n  }\n\n  function addTask() {\n    if (newTask === \&quot;\&quot;) {\n      setTaskError(true);\n      return;\n    }\n    setTaskError(false);\n\n    const task: Task = {\n      label: newTask,\n      value: newTask.toLowerCase().replace(\&quot; \&quot;, \&quot;-\&quot;),\n      mount: mountType as GoabDropdownItemMountType,\n    };\n    setTasks([...tasks, task]);\n    setNewTask(\&quot;\&quot;);\n    setIsReset(false);\n  }\n\n  function reset() {\n    setTasks(DEFAULT_TASKS);\n    setMountType(\&quot;append\&quot;);\n    setNewTask(\&quot;\&quot;);\n    setSelectedTask(\&quot;\&quot;);\n    setTaskError(false);\n    setIsReset(true);\n  }\n\n  return (\n    &lt;&gt;\n      &lt;GoabFormItem\n          requirement=\&quot;required\&quot;\n          label=\&quot;Name of item\&quot;\n          error={taskError ? \&quot;Please enter item name\&quot; : undefined}\n          helpText=\&quot;Add an item to the dropdown list below\&quot;&gt;\n          &lt;GoabInput\n            onChange={(event: GoabInputOnChangeDetail) =&gt; setNewTask(event.value)}\n            name=\&quot;item\&quot;\n            value={newTask}\n          /&gt;\n        &lt;/GoabFormItem&gt;\n\n        &lt;GoabFormItem mt=\&quot;l\&quot; label=\&quot;Add to\&quot;&gt;\n          &lt;GoabRadioGroup\n            name=\&quot;mountType\&quot;\n            onChange={(event: GoabRadioGroupOnChangeDetail) =&gt; onMountTypeChange(event.value)}\n            value={mountType}\n            orientation=\&quot;horizontal\&quot;&gt;\n            &lt;GoabRadioItem value=\&quot;prepend\&quot; label=\&quot;Start\&quot; /&gt;\n            &lt;GoabRadioItem value=\&quot;append\&quot; label=\&quot;End\&quot; /&gt;\n          &lt;/GoabRadioGroup&gt;\n        &lt;/GoabFormItem&gt;\n\n        &lt;GoabButtonGroup alignment=\&quot;start\&quot; gap=\&quot;relaxed\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabButton type=\&quot;primary\&quot; onClick={addTask}&gt;\n            Add new item\n          &lt;/GoabButton&gt;\n          &lt;GoabButton type=\&quot;tertiary\&quot; onClick={reset}&gt;\n            Reset list\n          &lt;/GoabButton&gt;\n        &lt;/GoabButtonGroup&gt;\n\n        &lt;GoabDivider mt=\&quot;l\&quot; /&gt;\n\n        &lt;GoabFormItem mt=\&quot;l\&quot; label=\&quot;All items\&quot;&gt;\n          &lt;div style={{ width: isReset ? \&quot;320px\&quot; : \&quot;auto\&quot; }}&gt;\n            &lt;GoabDropdown\n              key={tasks.length}\n              onChange={(event: GoabDropdownOnChangeDetail) =&gt;\n                setSelectedTask(event.value as string)\n              }\n              value={selectedTask}\n              name=\&quot;selectedTask\&quot;&gt;\n              {tasks.map(task =&gt; (\n                &lt;GoabDropdownItem\n                  key={task.value}\n                  value={task.value}\n                  mountType={task.mount}\n                  label={task.label}\n                /&gt;\n              ))}\n            &lt;/GoabDropdown&gt;\n          &lt;/div&gt;\n      &lt;/GoabFormItem&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item\n  requirement=\&quot;required\&quot;\n  label=\&quot;Name of item\&quot;\n  [error]=\&quot;taskError ? &#39;Please enter item name&#39; : undefined\&quot;\n  helpText=\&quot;Add an item to the dropdown list below\&quot;&gt;\n  &lt;goab-input\n    name=\&quot;item\&quot;\n    [value]=\&quot;newTask\&quot;\n    (onChange)=\&quot;onNewTaskChange($event)\&quot;&gt;\n  &lt;/goab-input&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-form-item mt=\&quot;l\&quot; label=\&quot;Add to\&quot;&gt;\n  &lt;goab-radio-group\n    name=\&quot;mountType\&quot;\n    [value]=\&quot;mountType\&quot;\n    orientation=\&quot;horizontal\&quot;\n    (onChange)=\&quot;onMountTypeChange($event)\&quot;&gt;\n    &lt;goab-radio-item value=\&quot;prepend\&quot; label=\&quot;Start\&quot;&gt;&lt;/goab-radio-item&gt;\n    &lt;goab-radio-item value=\&quot;append\&quot; label=\&quot;End\&quot;&gt;&lt;/goab-radio-item&gt;\n  &lt;/goab-radio-group&gt;\n&lt;/goab-form-item&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; gap=\&quot;relaxed\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;goab-button type=\&quot;primary\&quot; (onClick)=\&quot;addTask()\&quot;&gt;\n    Add new item\n  &lt;/goab-button&gt;\n  &lt;goab-button type=\&quot;tertiary\&quot; (onClick)=\&quot;reset()\&quot;&gt;\n    Reset list\n  &lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n\n&lt;goab-divider mt=\&quot;l\&quot;&gt;&lt;/goab-divider&gt;\n\n&lt;goab-form-item mt=\&quot;l\&quot; label=\&quot;All items\&quot;&gt;\n  &lt;ng-container *ngIf=\&quot;renderTrigger\&quot;&gt;\n    &lt;goab-dropdown\n      [value]=\&quot;selectedTask\&quot;\n      name=\&quot;selectedTask\&quot;\n      (onChange)=\&quot;onSelectedTaskChange($event)\&quot;&gt;\n      @for (task of tasks; track task.value) {\n      &lt;goab-dropdown-item\n        [value]=\&quot;task.value\&quot;\n        [mountType]=\&quot;task.mount\&quot;\n        [label]=\&quot;task.label\&quot;&gt;\n      &lt;/goab-dropdown-item&gt;\n      }\n    &lt;/goab-dropdown&gt;\n  &lt;/ng-container&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport {\n  GoabDropdownItemMountType,\n  GoabDropdownOnChangeDetail,\n  GoabInputOnChangeDetail,\n  GoabRadioGroupOnChangeDetail,\n} from \&quot;@abgov/ui-components-common\&quot;;\n\ninterface Task {\n  value: string;\n  label: string;\n  mount: GoabDropdownItemMountType;\n}\n\n@Component({\n  selector: \&quot;app-dynamically-add-dropdown-item\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;\n})\nexport class DynamicallyAddDropdownItemComponent {\n  defaultTasks: Task[] = [\n    { label: \&quot;Finish Report\&quot;, value: \&quot;finish-report\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Attend Meeting\&quot;, value: \&quot;attend-meeting\&quot;, mount: \&quot;append\&quot; },\n    { label: \&quot;Reply Emails\&quot;, value: \&quot;reply-emails\&quot;, mount: \&quot;append\&quot; },\n  ];\n\n  tasks: Task[] = [...this.defaultTasks];\n  newTask = \&quot;\&quot;;\n  mountType: GoabDropdownItemMountType = \&quot;append\&quot;;\n  selectedTask = \&quot;\&quot;;\n  taskError = false;\n  renderTrigger = true;\n\n  onMountTypeChange(event: GoabRadioGroupOnChangeDetail): void {\n    this.mountType = event.value as GoabDropdownItemMountType;\n  }\n\n  onNewTaskChange(event: GoabInputOnChangeDetail): void {\n    this.newTask = event.value;\n    this.taskError = false;\n  }\n\n  onSelectedTaskChange(event: GoabDropdownOnChangeDetail): void {\n    this.selectedTask = event.value as string;\n  }\n\n  addTask(): void {\n    if (this.newTask === \&quot;\&quot;) {\n      this.taskError = true;\n      return;\n    }\n    this.taskError = false;\n\n    const task: Task = {\n      label: this.newTask,\n      value: this.newTask.toLowerCase().replace(\&quot; \&quot;, \&quot;-\&quot;),\n      mount: this.mountType,\n    };\n    this.tasks = this.mountType === \&quot;prepend\&quot;\n      ? [task, ...this.tasks]\n      : [...this.tasks, task];\n    this.newTask = \&quot;\&quot;;\n  }\n\n  reset(): void {\n    this.newTask = \&quot;\&quot;;\n    this.selectedTask = \&quot;\&quot;;\n    this.taskError = false;\n    this.tasks = [...this.defaultTasks];\n    this.forceRerender();\n  }\n\n  forceRerender(): void {\n    this.renderTrigger = false;\n    setTimeout(() =&gt; {\n      this.renderTrigger = true;\n    }, 0);\n  }\n\n  trackByFn(index: number, item: Task): string {\n    return item.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot;\n  id=\&quot;item-form-item\&quot;\n  requirement=\&quot;required\&quot;\n  label=\&quot;Name of item\&quot;\n  helptext=\&quot;Add an item to the dropdown list below\&quot;&gt;\n  &lt;goa-input version=\&quot;2\&quot; id=\&quot;item-input\&quot; name=\&quot;item\&quot;&gt;&lt;/goa-input&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-form-item version=\&quot;2\&quot; mt=\&quot;l\&quot; label=\&quot;Add to\&quot;&gt;\n  &lt;goa-radio-group version=\&quot;2\&quot; id=\&quot;mount-type\&quot; name=\&quot;mountType\&quot; value=\&quot;append\&quot; orientation=\&quot;horizontal\&quot;&gt;\n    &lt;goa-radio-item value=\&quot;prepend\&quot; label=\&quot;Start\&quot;&gt;&lt;/goa-radio-item&gt;\n    &lt;goa-radio-item value=\&quot;append\&quot; label=\&quot;End\&quot;&gt;&lt;/goa-radio-item&gt;\n  &lt;/goa-radio-group&gt;\n&lt;/goa-form-item&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; gap=\&quot;relaxed\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;add-btn\&quot; type=\&quot;primary\&quot;&gt;Add new item&lt;/goa-button&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;reset-btn\&quot; type=\&quot;tertiary\&quot;&gt;Reset list&lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;goa-divider mt=\&quot;l\&quot;&gt;&lt;/goa-divider&gt;\n\n&lt;goa-form-item version=\&quot;2\&quot; mt=\&quot;l\&quot; label=\&quot;All items\&quot;&gt;\n  &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;task-dropdown\&quot; name=\&quot;selectedTask\&quot;&gt;\n    &lt;goa-dropdown-item value=\&quot;finish-report\&quot; label=\&quot;Finish Report\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;goa-dropdown-item value=\&quot;attend-meeting\&quot; label=\&quot;Attend Meeting\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;goa-dropdown-item value=\&quot;reply-emails\&quot; label=\&quot;Reply Emails\&quot;&gt;&lt;/goa-dropdown-item&gt;\n  &lt;/goa-dropdown&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  const itemInput = document.getElementById(&#39;item-input&#39;);\n  const itemFormItem = document.getElementById(&#39;item-form-item&#39;);\n  const mountTypeGroup = document.getElementById(&#39;mount-type&#39;);\n  const addBtn = document.getElementById(&#39;add-btn&#39;);\n  const resetBtn = document.getElementById(&#39;reset-btn&#39;);\n  const dropdown = document.getElementById(&#39;task-dropdown&#39;);\n\n  let mountType = &#39;append&#39;;\n  let newTask = &#39;&#39;;\n\n  const defaultItems = [\n    { value: &#39;finish-report&#39;, label: &#39;Finish Report&#39; },\n    { value: &#39;attend-meeting&#39;, label: &#39;Attend Meeting&#39; },\n    { value: &#39;reply-emails&#39;, label: &#39;Reply Emails&#39; }\n  ];\n\n  mountTypeGroup.addEventListener(&#39;_change&#39;, (e) =&gt; {\n    mountType = e.detail.value;\n  });\n\n  itemInput.addEventListener(&#39;_change&#39;, (e) =&gt; {\n    newTask = e.detail.value;\n    itemFormItem.removeAttribute(&#39;error&#39;);\n  });\n\n  addBtn.addEventListener(&#39;_click&#39;, () =&gt; {\n    if (newTask === &#39;&#39;) {\n      itemFormItem.setAttribute(&#39;error&#39;, &#39;Please enter item name&#39;);\n      return;\n    }\n\n    const newItem = document.createElement(&#39;goa-dropdown-item&#39;);\n    newItem.setAttribute(&#39;value&#39;, newTask.toLowerCase().replace(&#39; &#39;, &#39;-&#39;));\n    newItem.setAttribute(&#39;label&#39;, newTask);\n    newItem.setAttribute(&#39;mount&#39;, mountType);\n    dropdown.appendChild(newItem);\n\n    itemInput.value = &#39;&#39;;\n    newTask = &#39;&#39;;\n  });\n\n  resetBtn.addEventListener(&#39;_click&#39;, () =&gt; {\n    dropdown.innerHTML = &#39;&#39;;\n    defaultItems.forEach(item =&gt; {\n      const dropdownItem = document.createElement(&#39;goa-dropdown-item&#39;);\n      dropdownItem.setAttribute(&#39;value&#39;, item.value);\n      dropdownItem.setAttribute(&#39;label&#39;, item.label);\n      dropdown.appendChild(dropdownItem);\n    });\n    itemInput.value = &#39;&#39;;\n    newTask = &#39;&#39;;\n    itemFormItem.removeAttribute(&#39;error&#39;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-dynamically-add-an-item-to-a-dropdown-list" class="example-title">Dynamically add an item to a dropdown list</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">type Task = {
-  value: string;
-  label: string;
-  mount: GoabDropdownItemMountType;
-};
-
-const DEFAULT_TASKS: Task[] = [
-    { label: &quot;Finish Report&quot;, value: &quot;finish-report&quot;, mount: &quot;append&quot; },
-    { label: &quot;Attend Meeting&quot;, value: &quot;attend-meeting&quot;, mount: &quot;append&quot; },
-    { label: &quot;Reply Emails&quot;, value: &quot;reply-emails&quot;, mount: &quot;append&quot; },
-  ];
-
-  const [tasks, setTasks] = useState&lt;Task[]&gt;(DEFAULT_TASKS);
-  const [newTask, setNewTask] = useState&lt;string&gt;(&quot;&quot;);
-  const [mountType, setMountType] = useState&lt;string&gt;(&quot;append&quot;);
-  const [selectedTask, setSelectedTask] = useState&lt;string&gt;(&quot;&quot;);
-  const [taskError, setTaskError] = useState&lt;boolean&gt;(false);
-  const [isReset, setIsReset] = useState&lt;boolean&gt;(false);
-
-  function onMountTypeChange(value: string | undefined) {
-    setMountType(value as string);
-  }
-
-  function addTask() {
-    if (newTask === &quot;&quot;) {
-      setTaskError(true);
-      return;
-    }
-    setTaskError(false);
-
-    const task: Task = {
-      label: newTask,
-      value: newTask.toLowerCase().replace(&quot; &quot;, &quot;-&quot;),
-      mount: mountType as GoabDropdownItemMountType,
-    };
-    setTasks([...tasks, task]);
-    setNewTask(&quot;&quot;);
-    setIsReset(false);
-  }
-
-  function reset() {
-    setTasks(DEFAULT_TASKS);
-    setMountType(&quot;append&quot;);
-    setNewTask(&quot;&quot;);
-    setSelectedTask(&quot;&quot;);
-    setTaskError(false);
-    setIsReset(true);
-  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem
-          requirement=&quot;required&quot;
-          label=&quot;Name of item&quot;
-          error={taskError ? &quot;Please enter item name&quot; : undefined}
-          helpText=&quot;Add an item to the dropdown list below&quot;&gt;
-          &lt;GoabInput
-            onChange={(event: GoabInputOnChangeDetail) =&gt; setNewTask(event.value)}
-            name=&quot;item&quot;
-            value={newTask}
-          /&gt;
-        &lt;/GoabFormItem&gt;
-
-        &lt;GoabFormItem mt=&quot;l&quot; label=&quot;Add to&quot;&gt;
-          &lt;GoabRadioGroup
-            name=&quot;mountType&quot;
-            onChange={(event: GoabRadioGroupOnChangeDetail) =&gt; onMountTypeChange(event.value)}
-            value={mountType}
-            orientation=&quot;horizontal&quot;&gt;
-            &lt;GoabRadioItem value=&quot;prepend&quot; label=&quot;Start&quot; /&gt;
-            &lt;GoabRadioItem value=&quot;append&quot; label=&quot;End&quot; /&gt;
-          &lt;/GoabRadioGroup&gt;
-        &lt;/GoabFormItem&gt;
-
-        &lt;GoabButtonGroup alignment=&quot;start&quot; gap=&quot;relaxed&quot; mt=&quot;l&quot;&gt;
-          &lt;GoabButton type=&quot;primary&quot; onClick={addTask}&gt;
-            Add new item
-          &lt;/GoabButton&gt;
-          &lt;GoabButton type=&quot;tertiary&quot; onClick={reset}&gt;
-            Reset list
-          &lt;/GoabButton&gt;
-        &lt;/GoabButtonGroup&gt;
-
-        &lt;GoabDivider mt=&quot;l&quot; /&gt;
-
-        &lt;GoabFormItem mt=&quot;l&quot; label=&quot;All items&quot;&gt;
-          &lt;div style={{ width: isReset ? &quot;320px&quot; : &quot;auto&quot; }}&gt;
-            &lt;GoabDropdown
-              key={tasks.length}
-              onChange={(event: GoabDropdownOnChangeDetail) =&gt;
-                setSelectedTask(event.value as string)
-              }
-              value={selectedTask}
-              name=&quot;selectedTask&quot;&gt;
-              {tasks.map(task =&gt; (
-                &lt;GoabDropdownItem
-                  key={task.value}
-                  value={task.value}
-                  mountType={task.mount}
-                  label={task.label}
-                /&gt;
-              ))}
-            &lt;/GoabDropdown&gt;
-          &lt;/div&gt;
-      &lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">defaultTasks: Task[] = [
-    { label: &quot;Finish Report&quot;, value: &quot;finish-report&quot;, mount: &quot;append&quot; },
-    { label: &quot;Attend Meeting&quot;, value: &quot;attend-meeting&quot;, mount: &quot;append&quot; },
-    { label: &quot;Reply Emails&quot;, value: &quot;reply-emails&quot;, mount: &quot;append&quot; },
-  ];
-
-  tasks: Task[] = [...this.defaultTasks];
-  newTask = &quot;&quot;;
-  mountType: GoabDropdownItemMountType = &quot;append&quot;;
-  selectedTask = &quot;&quot;;
-  taskError = false;
-  renderTrigger = true;
-
-  onMountTypeChange(event: GoabRadioGroupOnChangeDetail): void {
-    this.mountType = event.value as GoabDropdownItemMountType;
-  }
-
-  onNewTaskChange(event: GoabInputOnChangeDetail): void {
-    this.newTask = event.value;
-    this.taskError = false;
-  }
-
-  onSelectedTaskChange(event: GoabDropdownOnChangeDetail): void {
-    this.selectedTask = event.value as string;
-  }
-
-  addTask(): void {
-    if (this.newTask === &quot;&quot;) {
-      this.taskError = true;
-      return;
-    }
-    this.taskError = false;
-
-    const task: Task = {
-      label: this.newTask,
-      value: this.newTask.toLowerCase().replace(&quot; &quot;, &quot;-&quot;),
-      mount: this.mountType,
-    };
-    this.tasks = this.mountType === &quot;prepend&quot;
-      ? [task, ...this.tasks]
-      : [...this.tasks, task];
-    this.newTask = &quot;&quot;;
-  }
-
-  reset(): void {
-    this.newTask = &quot;&quot;;
-    this.selectedTask = &quot;&quot;;
-    this.taskError = false;
-    this.tasks = [...this.defaultTasks];
-    this.forceRerender();
-  }
-
-  forceRerender(): void {
-    this.renderTrigger = false;
-    setTimeout(() =&gt; {
-      this.renderTrigger = true;
-    }, 0);
-  }
-
-  trackByFn(index: number, item: Task): string {
-    return item.value;
-  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item
-  requirement=&quot;required&quot;
-  label=&quot;Name of item&quot;
-  [error]=&quot;taskError ? &#x27;Please enter item name&#x27; : undefined&quot;
-  helpText=&quot;Add an item to the dropdown list below&quot;&gt;
-  &lt;goab-input
-    name=&quot;item&quot;
-    [value]=&quot;newTask&quot;
-    (onChange)=&quot;onNewTaskChange($event)&quot;&gt;
-  &lt;/goab-input&gt;
-&lt;/goab-form-item&gt;
-
-&lt;goab-form-item mt=&quot;l&quot; label=&quot;Add to&quot;&gt;
-  &lt;goab-radio-group
-    name=&quot;mountType&quot;
-    [value]=&quot;mountType&quot;
-    orientation=&quot;horizontal&quot;
-    (onChange)=&quot;onMountTypeChange($event)&quot;&gt;
-    &lt;goab-radio-item value=&quot;prepend&quot; label=&quot;Start&quot;&gt;&lt;/goab-radio-item&gt;
-    &lt;goab-radio-item value=&quot;append&quot; label=&quot;End&quot;&gt;&lt;/goab-radio-item&gt;
-  &lt;/goab-radio-group&gt;
-&lt;/goab-form-item&gt;
-
-&lt;goab-button-group alignment=&quot;start&quot; gap=&quot;relaxed&quot; mt=&quot;l&quot;&gt;
-  &lt;goab-button type=&quot;primary&quot; (onClick)=&quot;addTask()&quot;&gt;
-    Add new item
-  &lt;/goab-button&gt;
-  &lt;goab-button type=&quot;tertiary&quot; (onClick)=&quot;reset()&quot;&gt;
-    Reset list
-  &lt;/goab-button&gt;
-&lt;/goab-button-group&gt;
-
-&lt;goab-divider mt=&quot;l&quot;&gt;&lt;/goab-divider&gt;
-
-&lt;goab-form-item mt=&quot;l&quot; label=&quot;All items&quot;&gt;
-  &lt;ng-container *ngIf=&quot;renderTrigger&quot;&gt;
-    &lt;goab-dropdown
-      [value]=&quot;selectedTask&quot;
-      name=&quot;selectedTask&quot;
-      (onChange)=&quot;onSelectedTaskChange($event)&quot;&gt;
-      @for (task of tasks; track task.value) {
-      &lt;goab-dropdown-item
-        [value]=&quot;task.value&quot;
-        [mountType]=&quot;task.mount&quot;
-        [label]=&quot;task.label&quot;&gt;
-      &lt;/goab-dropdown-item&gt;
-      }
-    &lt;/goab-dropdown&gt;
-  &lt;/ng-container&gt;
-&lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const itemInput = document.getElementById(&#x27;item-input&#x27;);
-const itemFormItem = document.getElementById(&#x27;item-form-item&#x27;);
-const mountTypeGroup = document.getElementById(&#x27;mount-type&#x27;);
-const addBtn = document.getElementById(&#x27;add-btn&#x27;);
-const resetBtn = document.getElementById(&#x27;reset-btn&#x27;);
-const dropdown = document.getElementById(&#x27;task-dropdown&#x27;);
-
-let mountType = &#x27;append&#x27;;
-let newTask = &#x27;&#x27;;
-
-const defaultItems = [
-  { value: &#x27;finish-report&#x27;, label: &#x27;Finish Report&#x27; },
-  { value: &#x27;attend-meeting&#x27;, label: &#x27;Attend Meeting&#x27; },
-  { value: &#x27;reply-emails&#x27;, label: &#x27;Reply Emails&#x27; }
-];
-
-mountTypeGroup.addEventListener(&#x27;_change&#x27;, (e) =&gt; {
-  mountType = e.detail.value;
-});
-
-itemInput.addEventListener(&#x27;_change&#x27;, (e) =&gt; {
-  newTask = e.detail.value;
-  itemFormItem.removeAttribute(&#x27;error&#x27;);
-});
-
-addBtn.addEventListener(&#x27;_click&#x27;, () =&gt; {
-  if (newTask === &#x27;&#x27;) {
-    itemFormItem.setAttribute(&#x27;error&#x27;, &#x27;Please enter item name&#x27;);
-    return;
-  }
-
-  const newItem = document.createElement(&#x27;goa-dropdown-item&#x27;);
-  newItem.setAttribute(&#x27;value&#x27;, newTask.toLowerCase().replace(&#x27; &#x27;, &#x27;-&#x27;));
-  newItem.setAttribute(&#x27;label&#x27;, newTask);
-  newItem.setAttribute(&#x27;mount&#x27;, mountType);
-  dropdown.appendChild(newItem);
-
-  itemInput.value = &#x27;&#x27;;
-  newTask = &#x27;&#x27;;
-});
-
-resetBtn.addEventListener(&#x27;_click&#x27;, () =&gt; {
-  dropdown.innerHTML = &#x27;&#x27;;
-  defaultItems.forEach(item =&gt; {
-    const dropdownItem = document.createElement(&#x27;goa-dropdown-item&#x27;);
-    dropdownItem.setAttribute(&#x27;value&#x27;, item.value);
-    dropdownItem.setAttribute(&#x27;label&#x27;, item.label);
-    dropdown.appendChild(dropdownItem);
-  });
-  itemInput.value = &#x27;&#x27;;
-  newTask = &#x27;&#x27;;
-  itemFormItem.removeAttribute(&#x27;error&#x27;);
-});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot;
-  id=&quot;item-form-item&quot;
-  requirement=&quot;required&quot;
-  label=&quot;Name of item&quot;
-  helptext=&quot;Add an item to the dropdown list below&quot;&gt;
-  &lt;goa-input version=&quot;2&quot; id=&quot;item-input&quot; name=&quot;item&quot;&gt;&lt;/goa-input&gt;
-&lt;/goa-form-item&gt;
-
-&lt;goa-form-item version=&quot;2&quot; mt=&quot;l&quot; label=&quot;Add to&quot;&gt;
-  &lt;goa-radio-group version=&quot;2&quot; id=&quot;mount-type&quot; name=&quot;mountType&quot; value=&quot;append&quot; orientation=&quot;horizontal&quot;&gt;
-    &lt;goa-radio-item value=&quot;prepend&quot; label=&quot;Start&quot;&gt;&lt;/goa-radio-item&gt;
-    &lt;goa-radio-item value=&quot;append&quot; label=&quot;End&quot;&gt;&lt;/goa-radio-item&gt;
-  &lt;/goa-radio-group&gt;
-&lt;/goa-form-item&gt;
-
-&lt;goa-button-group alignment=&quot;start&quot; gap=&quot;relaxed&quot; mt=&quot;l&quot;&gt;
-  &lt;goa-button version=&quot;2&quot; id=&quot;add-btn&quot; type=&quot;primary&quot;&gt;Add new item&lt;/goa-button&gt;
-  &lt;goa-button version=&quot;2&quot; id=&quot;reset-btn&quot; type=&quot;tertiary&quot;&gt;Reset list&lt;/goa-button&gt;
-&lt;/goa-button-group&gt;
-
-&lt;goa-divider mt=&quot;l&quot;&gt;&lt;/goa-divider&gt;
-
-&lt;goa-form-item version=&quot;2&quot; mt=&quot;l&quot; label=&quot;All items&quot;&gt;
-  &lt;goa-dropdown version=&quot;2&quot; id=&quot;task-dropdown&quot; name=&quot;selectedTask&quot;&gt;
-    &lt;goa-dropdown-item value=&quot;finish-report&quot; label=&quot;Finish Report&quot;&gt;&lt;/goa-dropdown-item&gt;
-    &lt;goa-dropdown-item value=&quot;attend-meeting&quot; label=&quot;Attend Meeting&quot;&gt;&lt;/goa-dropdown-item&gt;
-    &lt;goa-dropdown-item value=&quot;reply-emails&quot; label=&quot;Reply Emails&quot;&gt;&lt;/goa-dropdown-item&gt;
-  &lt;/goa-dropdown&gt;
-&lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
       .code-snippet {
         border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
         border-radius: var(--goa-border-radius-m, 4px);
