@@ -3,7 +3,7 @@
     tag: "goa-linear-progress",
     props: {
       testid: { type: "String", attribute: "testid", reflect: true },
-      progress: { type: "Number", attribute: "progress" },
+      progress: { type: "Number", attribute: "progress", reflect: true },
       percentVisibility: { type: "String", attribute: "percent-visibility" },
       ariaLabel: { type: "String", attribute: "aria-label" },
       ariaLabelledby: { type: "String", attribute: "aria-labelledby" },

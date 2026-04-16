@@ -14,7 +14,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { generateRandomId } from "../../common/utils";
 
   type TemporaryNotificationAnimationDirection = "up" | "down";
   type TemporaryNotificationType =
@@ -39,10 +39,10 @@
   /** Controls whether the notification is visible. */
   export let visible: boolean = true;
   /** Direction the notification animates from when appearing or disappearing. */
-  export let animationDirection: TemporaryNotificationAnimationDirection = "down";
+  export let animationDirection: TemporaryNotificationAnimationDirection =
+    "down";
 
-  // Icon size for success/failure icons
-  const iconSize = "large";
+  const _messageId = `temporary-notification-message-${generateRandomId()}`;
 </script>
 
 <div
@@ -60,65 +60,52 @@
 >
   <div class="content">
     {#if type === "success"}
-      <goa-icon type="checkmark-circle" size={iconSize} />
+      <goa-icon type="checkmark-circle" size="large" />
     {/if}
 
     {#if type === "failure"}
-      <goa-icon type="close-circle" size={iconSize} />
+      <goa-icon type="close-circle" size="large" />
     {/if}
 
-    <span class="message">
+    <span id={_messageId} class="message">
       {message}
     </span>
+
+    {#if actionText}
+      <div class="action">
+        <goa-link-button testid="link" color="light" action="action">
+          {actionText}
+        </goa-link-button>
+      </div>
+    {/if}
   </div>
 
-  {#if actionText}
-    <div class="action">
-      <goa-link-button testid="link" color="light" action="action">
-        {actionText}
-      </goa-link-button>
-    </div>
-  {/if}
-
   {#if type === "progress"}
-    <progress data-testid="progress" value={progress} max="100" />
+    <goa-linear-progress
+      {progress}
+      percent-visibility="hidden"
+      aria-labelledby={_messageId}
+    />
   {:else if type === "indeterminate"}
-    <progress />
+    <goa-linear-progress
+      percent-visibility="hidden"
+      aria-labelledby={_messageId}
+    />
   {/if}
 </div>
 
 <style>
   .snackbar {
-    box-sizing: border-box;
     position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    border-radius: var(--goa-temporary-notification-borderRadius, var(--goa-border-radius-m));
-    gap: var(--goa-temporary-notification-row-gap, var(--goa-space-m)); /* 16px between content and action */
-    padding: var(--goa-temporary-notification-padding, var(--goa-space-m) var(--goa-space-l));
+    box-sizing: border-box;
+    border-radius: var(
+      --goa-temporary-notification-borderRadius,
+      var(--goa-border-radius-m)
+    );
     max-width: var(--goa-temporary-notification-max-width, 640px);
-    color: var(--goa-temporary-notification-color-text, var(--goa-color-text-light));
     transition:
       transform var(--goa-temporary-notification-transition-duration, 0.3s) ease,
       opacity var(--goa-temporary-notification-transition-duration, 0.3s) ease;
-    overflow: hidden;
-  }
-
-  /* Add extra bottom padding when progress bar is present */
-  .snackbar.progress,
-  .snackbar.indeterminate {
-    padding: var(--goa-temporary-notification-padding-with-progress, var(--goa-space-m) var(--goa-space-l) 22px var(--goa-space-l));
-  }
-
-  /* Content wrapper keeps icon and message together as a single flex item */
-  .content {
-    display: flex;
-    align-items: flex-start; /* Icon aligns with first line of text */
-    gap: var(--goa-temporary-notification-column-gap, var(--goa-space-s));
-    flex: 1 1 auto;
-    min-width: 0; /* Allow content to shrink */
   }
 
   @media (--not-mobile) {
@@ -134,53 +121,14 @@
     }
   }
 
-  .snackbar.basic,
-  .snackbar.indeterminate,
-  .snackbar.progress {
-    border: var(--goa-temporary-notification-borderWidth, var(--goa-border-width-s)) solid var(--goa-temporary-notification-color-border, var(--goa-color-greyscale-700));
-    background: var(--goa-temporary-notification-color-bg-basic, var(--goa-color-greyscale-black));
-  }
-
-  .action {
-    flex-grow: 1;
-    text-align: right;
-  }
-
-  /* Base progress element styling */
-  progress {
-    position: absolute;
-    display: flex;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: var(--goa-temporary-notification-progress-bar-height, 6px);
-    border-radius: 0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0);
-  }
-
-  /* Progress bar browser-specific styling */
-  progress::-webkit-progress-bar {
-    background-color: var(--goa-temporary-notification-progress-bar-color-bg, #adadad);
-    border-radius: 0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0);
-  }
-
-  progress::-webkit-progress-value {
-    background-color: var(--goa-temporary-notification-progress-bar-color-fill, white);
-    border-radius: 0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0);
-  }
-
-  progress::-moz-progress-bar {
-    background-color: var(--goa-temporary-notification-progress-bar-color-fill, white);
-    border-radius: 0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0);
-  }
+  /** Visibility **/
 
   .show {
     opacity: 1;
   }
-
   .show.animate-up {
     transform: translateY(0);
   }
-
   .show.animate-down {
     transform: translateY(0);
   }
@@ -188,30 +136,81 @@
   .hide {
     opacity: 0;
   }
-
   .hide.animate-up {
-    transform: translateY(calc(-1 * var(--goa-temporary-notification-animation-distance, 100px)));
+    transform: translateY(
+      calc(-1 * var(--goa-temporary-notification-animation-distance, 100px))
+    );
   }
-
   .hide.animate-down {
-    transform: translateY(var(--goa-temporary-notification-animation-distance, 100px));
+    transform: translateY(
+      var(--goa-temporary-notification-animation-distance, 100px)
+    );
   }
 
-  .snackbar.success {
-    background: var(--goa-temporary-notification-color-bg-success, var(--goa-color-success-default));
+  /** State **/
+
+  .basic,
+  .indeterminate,
+  .progress {
+    border: var(
+        --goa-temporary-notification-borderWidth,
+        var(--goa-border-width-s)
+      )
+      solid
+      var(
+        --goa-temporary-notification-color-border,
+        var(--goa-color-greyscale-700)
+      );
+    background: var(
+      --goa-temporary-notification-color-bg-basic,
+      var(--goa-color-greyscale-black)
+    );
+  }
+  .success {
+    background: var(
+      --goa-temporary-notification-color-bg-success,
+      var(--goa-color-success-default)
+    );
+  }
+  .failure {
+    background: var(
+      --goa-temporary-notification-color-bg-failure,
+      var(--goa-color-emergency-default)
+    );
   }
 
-  .snackbar.failure {
-    background: var(--goa-temporary-notification-color-bg-failure, var(--goa-color-emergency-default));
+  /** Details **/
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(
+      --goa-temporary-notification-row-gap,
+      var(--goa-space-m)
+    ); /* 16px between content and action */
+    padding: var(
+      --goa-temporary-notification-padding,
+      var(--goa-space-m) var(--goa-space-l)
+    );
+    color: var(
+      --goa-temporary-notification-color-text,
+      var(--goa-color-text-light)
+    );
+    overflow: hidden;
+  }
+
+  .action {
+    flex-grow: 1;
+    text-align: right;
   }
 
   .message {
     flex: 1 1 auto;
-    font: var(--goa-temporary-notification-typography, var(--goa-typography-body-m));
-  }
-
-  /* Add top margin to message when icon is present to vertically center first line with icon */
-  .content:has(goa-icon) .message {
-    margin-top: var(--goa-temporary-notification-padding-text-top, var(--goa-space-2xs));
+    font: var(
+      --goa-temporary-notification-typography,
+      var(--goa-typography-body-m)
+    );
+    line-height: var(--goa-line-height-3);
   }
 </style>
