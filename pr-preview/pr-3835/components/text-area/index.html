@@ -1,0 +1,1438 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Sidebar width init - runs before body to prevent layout shift --><script>
+    (function() {
+      var MOBILE = 624, EXPANDED = 280, COLLAPSED = 72;
+      var w;
+      if (window.innerWidth < MOBILE) {
+        w = 0;
+      } else {
+        var saved = localStorage.getItem('goa-ds-menu-open');
+        var isOpen = saved === null ? true : saved === 'true';
+        w = isOpen ? EXPANDED : COLLAPSED;
+      }
+      document.documentElement.style.setProperty('--sidebar-width', w + 'px');
+    })();
+  </script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Text area - GoA Design System</title><meta name="description" content="Documentation for the Text area component"><!-- Favicon & icons --><link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="icon" type="image/png" href="/favicon.png" sizes="32x32"><link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"><link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#333333"><!-- Open Graph / social sharing --><meta property="og:type" content="website"><meta property="og:title" content="Text area"><meta property="og:description" content="Documentation for the Text area component"><meta property="og:image" content="https://govalta.github.io/og-image.png"><meta property="og:url" content="https://govalta.github.io/ui-components/pr-preview/pr-3835/components/text-area/"><!-- GoA Web Components JavaScript (registers custom elements) --><script type="module">let o=0,t=!1;function s(){const e=window.innerWidth<624;if(document.body.setAttribute("data-mobile",String(e)),e)document.documentElement.style.setProperty("--sidebar-width","0px");else{const d=localStorage.getItem("goa-ds-menu-open"),i=(d===null?!0:d==="true")?280:72;document.documentElement.style.setProperty("--sidebar-width",`${i}px`)}e||(document.body.setAttribute("data-menu-open","false"),document.body.setAttribute("data-header-hidden","false"),t=!1)}function r(){const e=window.scrollY,d=e>80;if(document.body.setAttribute("data-scrolled",String(d)),window.innerWidth>=624){o=e;return}const n=e-o;e<50?t&&(t=!1,document.body.setAttribute("data-header-hidden","false")):n>0&&!t?(t=!0,document.body.setAttribute("data-header-hidden","true")):n<-10&&t&&(t=!1,document.body.setAttribute("data-header-hidden","false")),o=e}function l(e){const n=e.detail?.isOpen??!1;if(document.body.setAttribute("data-menu-open",String(n)),window.innerWidth>=624){const i=n?280:72;document.documentElement.style.setProperty("--sidebar-width",`${i}px`)}n&&t&&(t=!1,document.body.setAttribute("data-header-hidden","false"))}function a(){s(),document.body.setAttribute("data-menu-open","false"),document.body.setAttribute("data-header-hidden","false"),document.body.setAttribute("data-scrolled",String(window.scrollY>80)),o=window.scrollY,window.addEventListener("resize",s),window.addEventListener("scroll",r,{passive:!0}),window.addEventListener("goa-menu-change",l)}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",a):a();</script><!-- Ionicons CDN (required for GoabIcon) --><script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script><script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script><!-- Mobile bridge: bridges React menu state to page-level CSS --><script type="module" src="/ui-components/pr-preview/pr-3835/_astro/BaseLayout.astro_astro_type_script_index_1_lang.NyIZv76G.js"></script><link rel="stylesheet" href="/ui-components/pr-preview/pr-3835/_astro/_slug_.DRrD-oiZ.css">
+<style>.breadcrumbs[data-astro-cid-ilhxcym7]{margin-bottom:var(--goa-space-l)}.breadcrumbs[data-astro-cid-ilhxcym7] ol[data-astro-cid-ilhxcym7]{display:flex;flex-wrap:wrap;align-items:center;gap:var(--goa-space-2xs);list-style:none;margin:0;padding:0}.breadcrumbs[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:flex;align-items:center;gap:var(--goa-space-2xs);font:var(--goa-typography-body-xs);color:var(--goa-color-greyscale-400)}.breadcrumbs[data-astro-cid-ilhxcym7] a[data-astro-cid-ilhxcym7],.breadcrumbs[data-astro-cid-ilhxcym7] span[data-astro-cid-ilhxcym7]:not(.separator){color:var(--goa-color-greyscale-500);text-decoration:none;font:var(--goa-typography-body-xs)}.breadcrumbs[data-astro-cid-ilhxcym7] a[data-astro-cid-ilhxcym7]:hover{color:var(--goa-color-interactive-default);text-decoration:underline}.breadcrumbs[data-astro-cid-ilhxcym7] a[data-astro-cid-ilhxcym7]:focus{outline:none}.breadcrumbs[data-astro-cid-ilhxcym7] a[data-astro-cid-ilhxcym7]:focus-visible{outline:2px solid var(--goa-color-interactive-default);outline-offset:2px;border-radius:var(--goa-border-radius-xs)}.separator[data-astro-cid-ilhxcym7]{color:var(--goa-color-greyscale-300);font:var(--goa-typography-body-xs)}.sr-only[data-astro-cid-ilhxcym7]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+<link rel="stylesheet" href="/ui-components/pr-preview/pr-3835/_astro/_slug_.2vJzoNMn.css">
+<style>.example-display[data-astro-cid-kws6ko6c]{margin-bottom:var(--goa-space-2xl, 2.5rem);padding-bottom:var(--goa-space-xl, 2rem);border-bottom:1px solid var(--goa-color-greyscale-200, #dcdcdc)}.example-display[data-astro-cid-kws6ko6c]:last-child{border-bottom:none;margin-bottom:0}.example-meta[data-astro-cid-kws6ko6c]{margin-top:var(--goa-space-xs, .25rem)}.example-meta[data-astro-cid-kws6ko6c] p[data-astro-cid-kws6ko6c]{margin:0;color:var(--goa-color-text-secondary);line-height:1.5}
+.components-page[data-astro-cid-s6oksyhy]{max-width:1408px;margin:0 auto}.page-header[data-astro-cid-s6oksyhy]{margin-bottom:var(--goa-space-xs, .5rem)}.page-header[data-astro-cid-s6oksyhy] h1[data-astro-cid-s6oksyhy]{font:var(--goa-typography-heading-xl);margin:0 0 var(--goa-space-m, 1rem);color:var(--goa-color-text-default, #333)}.page-description[data-astro-cid-s6oksyhy]{font:var(--goa-typography-body-l);color:var(--goa-color-text-default, #333);margin:0;max-width:70ch}
+.all-examples-page[data-astro-cid-bmvou4rk]{max-width:1000px;margin:0 auto;padding:var(--goa-space-xl)}.page-header[data-astro-cid-bmvou4rk]{margin-bottom:var(--goa-space-2xl)}.page-header[data-astro-cid-bmvou4rk] h1[data-astro-cid-bmvou4rk]{font:var(--goa-typography-heading-xl);margin:0 0 var(--goa-space-s)}.page-header[data-astro-cid-bmvou4rk] p[data-astro-cid-bmvou4rk]{color:var(--goa-color-text-secondary);margin:0}.examples-list[data-astro-cid-bmvou4rk]{display:flex;flex-direction:column;gap:var(--goa-space-3xl)}.example-section[data-astro-cid-bmvou4rk]{padding-bottom:var(--goa-space-2xl);border-bottom:1px solid var(--goa-color-greyscale-200)}.example-section[data-astro-cid-bmvou4rk]:last-child{border-bottom:none}.component-pages[data-astro-cid-bmvou4rk]{margin-top:var(--goa-space-xs);font-size:var(--goa-font-size-2);border-top:none}.example-section[data-astro-cid-bmvou4rk] .example-display{border-bottom:none}.component-pages-label[data-astro-cid-bmvou4rk]{color:var(--goa-color-text-secondary);margin-right:var(--goa-space-xs)}.component-pages[data-astro-cid-bmvou4rk] a[data-astro-cid-bmvou4rk]{color:var(--goa-color-interactive-default);text-decoration:none}.component-pages[data-astro-cid-bmvou4rk] a[data-astro-cid-bmvou4rk]:hover{text-decoration:underline}.component-pages[data-astro-cid-bmvou4rk].none{color:var(--goa-color-text-secondary)}.component-pages[data-astro-cid-bmvou4rk].none em[data-astro-cid-bmvou4rk]{font-style:italic}
+</style>
+<link rel="stylesheet" href="/ui-components/pr-preview/pr-3835/_astro/_slug_.P4M80iCs.css">
+<style>.examples-page[data-astro-cid-xipldmn6]{max-width:1408px;margin:0 auto}.page-header[data-astro-cid-xipldmn6]{margin-bottom:var(--goa-space-xs, .5rem)}.page-header[data-astro-cid-xipldmn6] h1[data-astro-cid-xipldmn6]{font:var(--goa-typography-heading-xl);margin:0 0 var(--goa-space-m, 1rem);color:var(--goa-color-text-default, #333)}.page-description[data-astro-cid-xipldmn6]{font:var(--goa-typography-body-l);color:var(--goa-color-text-default, #333);margin:0;max-width:70ch}.service-patterns[data-astro-cid-xipldmn6]{margin-top:var(--goa-space-xl, 2rem);margin-bottom:var(--goa-space-l, 1.5rem)}.patterns-row[data-astro-cid-xipldmn6]{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--goa-space-m, 1rem)}.pattern-card[data-astro-cid-xipldmn6]{display:flex;align-items:stretch;border:1px solid var(--goa-color-greyscale-200, #dcdcdc);border-radius:var(--goa-border-radius-m, 4px);text-decoration:none;overflow:hidden;transition:border-color .15s ease}a[data-astro-cid-xipldmn6].pattern-card:hover{border-color:var(--goa-color-greyscale-black, #333)}a[data-astro-cid-xipldmn6].pattern-card:hover .pattern-title[data-astro-cid-xipldmn6]{text-decoration:underline}a[data-astro-cid-xipldmn6].pattern-card:focus-visible{outline:3px solid var(--goa-color-interactive-focus);outline-offset:2px}.pattern-card[data-astro-cid-xipldmn6].disabled{opacity:.7}.pattern-image[data-astro-cid-xipldmn6],.pattern-image-placeholder[data-astro-cid-xipldmn6]{width:100px;object-fit:cover;flex-shrink:0;background:var(--goa-color-greyscale-100, #f5f5f5)}.pattern-text[data-astro-cid-xipldmn6]{display:flex;flex-direction:column;padding:var(--goa-space-m, 1rem);min-width:0}.pattern-title[data-astro-cid-xipldmn6]{font:var(--goa-typography-body-m);font-weight:600;color:var(--goa-color-text-default, #333)}a[data-astro-cid-xipldmn6].pattern-card .pattern-title[data-astro-cid-xipldmn6]{color:var(--goa-color-interactive-default, #0070c4)}.pattern-desc[data-astro-cid-xipldmn6]{font:var(--goa-typography-body-s);color:var(--goa-color-text-secondary, #666)}@media (max-width: 900px){.patterns-row[data-astro-cid-xipldmn6]{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="/ui-components/pr-preview/pr-3835/_astro/accessibility.Cq0lh5jI.css">
+<style>.dodont-grid[data-astro-cid-y3fukelq]{display:grid;gap:var(--goa-space-xl);margin:var(--goa-space-l) 0 var(--goa-space-xl)}@media (min-width: 768px){.dodont-grid[data-astro-cid-y3fukelq]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}}
+.dodont-grid[data-astro-cid-b6kyed7m]{display:grid;gap:var(--goa-space-xl);margin:var(--goa-space-l) 0 var(--goa-space-xl)}.dodont-grid-single[data-astro-cid-b6kyed7m]{grid-template-columns:1fr}@media (min-width: 768px){.dodont-grid[data-astro-cid-b6kyed7m]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.dodont-grid-single[data-astro-cid-b6kyed7m]{grid-template-columns:minmax(320px,480px)}}.token-grid[data-astro-cid-b6kyed7m]{display:grid;gap:var(--goa-space-s);grid-template-columns:repeat(auto-fit,minmax(72px,1fr));margin:0 0 var(--goa-space-xl)}.token-grid-item[data-astro-cid-b6kyed7m]{background:var(--goa-color-greyscale-50);border:1px solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-m);font:var(--goa-typography-body-m);padding:var(--goa-space-s);text-align:center}
+.dodont-grid[data-astro-cid-o2ycdaur]{display:grid;gap:var(--goa-space-xl);margin:var(--goa-space-l) 0 var(--goa-space-xl)}.error-border[data-astro-cid-o2ycdaur]{border:2px solid red;border-radius:5px;padding:10px}.explicit-example span.green{background-color:#cde9b9}.explicit-example span.blue{background-color:#bcdae7}.explicit-example span.yellow{background-color:#fadfb1}.explicit-example span.greenUnder{text-decoration:underline solid #cde9b9 3px}.explicit-example span.blueUnder{text-decoration:underline solid #bcdae7 3px}.explicit-example span.yellowUnder{text-decoration:underline solid #fadfb1 3px}@media (min-width: 768px){.dodont-grid[data-astro-cid-o2ycdaur]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}}
+.dodont-grid[data-astro-cid-fn2hvjbp]{display:grid;gap:var(--goa-space-xl);margin:var(--goa-space-l) 0 var(--goa-space-xl)}.anatomy-preview[data-astro-cid-fn2hvjbp]{margin:0 0 var(--goa-space-xl);max-width:47rem}.anatomy-preview[data-astro-cid-fn2hvjbp] img[data-astro-cid-fn2hvjbp]{display:block;height:auto;width:100%}.preview-form[data-astro-cid-fn2hvjbp]{max-width:28rem}@media (min-width: 768px){.dodont-grid[data-astro-cid-fn2hvjbp]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}}
+.extended-icon-grid[data-astro-cid-6m4hyp55]{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--goa-space-m);margin:0 0 var(--goa-space-xl) 0}.extended-icon-card[data-astro-cid-6m4hyp55]{border:1px solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-m);min-height:56px;padding:var(--goa-space-s);display:flex;align-items:center;justify-content:center}
+.hero-illustrations[data-astro-cid-ztrfjsrx]{display:flex;flex-direction:column;gap:var(--goa-space-l);margin:var(--goa-space-xl) 0}.hero-illustrations[data-astro-cid-ztrfjsrx] img[data-astro-cid-ztrfjsrx]{display:block;max-width:100%;height:auto;margin:0 auto;background:var(--goa-color-greyscale-100);border-radius:var(--goa-border-radius-m);padding:var(--goa-space-xl);box-sizing:content-box}.hero-illustrations[data-astro-cid-ztrfjsrx] .hero-card[data-astro-cid-ztrfjsrx]{background:var(--goa-color-greyscale-100);border-radius:var(--goa-border-radius-m);display:flex;justify-content:center;padding:var(--goa-space-xl)}.hero-illustrations[data-astro-cid-ztrfjsrx] .hero-card[data-astro-cid-ztrfjsrx] img[data-astro-cid-ztrfjsrx]{background:none;padding:0;border-radius:0}.example-responsive[data-astro-cid-ztrfjsrx]{margin:var(--goa-space-l) 0 var(--goa-space-xl)}.example-pair[data-astro-cid-ztrfjsrx]{display:grid;grid-template-columns:2fr 1fr;align-items:start;gap:var(--goa-space-l);margin-top:var(--goa-space-l)}.dodont-grid[data-astro-cid-ztrfjsrx]{display:grid;gap:var(--goa-space-xl);margin:var(--goa-space-l) 0 var(--goa-space-xl)}@media (min-width: 768px){.dodont-grid[data-astro-cid-ztrfjsrx]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}}
+.workspace-anatomy-list[data-astro-cid-4jnfq65b] ul[data-astro-cid-4jnfq65b]{margin-bottom:var(--goa-space-xs)}
+.dodont-grid[data-astro-cid-crj67i7r]{display:grid;gap:var(--goa-space-xl);margin:var(--goa-space-l) 0 var(--goa-space-xl)}@media (min-width: 768px){.dodont-grid[data-astro-cid-crj67i7r]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}}
+goa-grid[data-astro-cid-wdnwltix] goa-container[data-astro-cid-wdnwltix]{margin:0}.card-image[data-astro-cid-wdnwltix],.card-image[data-astro-cid-wdnwltix] img[data-astro-cid-wdnwltix]{width:100%;display:block}.motion-card-image[data-astro-cid-wdnwltix].card-image{overflow:initial}code[data-astro-cid-wdnwltix].token-name{font-size:var(--goa-font-size-2);word-break:break-all;margin-top:var(--goa-space-2xs);display:inline-block}dt[data-astro-cid-wdnwltix]{color:var(--goa-color-text-secondary);font:var(--goa-typography-body-xs);margin-top:var(--goa-space-s)}dd[data-astro-cid-wdnwltix].dd-style{margin-top:var(--goa-space-2xs);margin-left:0}dd[data-astro-cid-wdnwltix].dd-style.badge-type{margin-top:var(--goa-space-xs)}dl[data-astro-cid-wdnwltix]{margin:0}dl[data-astro-cid-wdnwltix]>dd[data-astro-cid-wdnwltix].dd-style.item-name{margin-bottom:var(--goa-space-l);margin-left:0}
+.type-specs-image[data-astro-cid-ztdrgnos]{border:1px solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-m);display:block;height:auto;margin:0 0 var(--goa-space-l);max-width:100%}
+</style>
+<link rel="stylesheet" href="/ui-components/pr-preview/pr-3835/_astro/index.B02BnuyL.css">
+<style>.layout-wrapper[data-astro-cid-ipsxrsrh]{background:var(--goa-color-greyscale-50);min-height:100vh}.layout-container[data-astro-cid-ipsxrsrh]{display:grid;grid-template-columns:var(--sidebar-width, 280px) 1fr;min-height:100vh;transition:grid-template-columns .1s ease-out}.sidebar-left[data-astro-cid-ipsxrsrh]{position:sticky;top:0;height:100vh;background:var(--goa-color-greyscale-50);z-index:5}.main-content[data-astro-cid-ipsxrsrh]{padding:var(--goa-space-l);padding-left:0;min-height:100vh;min-width:0}.content-card[data-astro-cid-ipsxrsrh]{background:var(--goa-color-greyscale-white);border-radius:var(--goa-border-radius-3xl);border:1px solid var(--goa-color-greyscale-150);padding:var(--goa-space-xl) var(--goa-space-2xl);min-height:calc(100vh - var(--goa-space-l) * 2)}.search-page-header[data-astro-cid-ipsxrsrh]{max-width:700px;margin:0 auto var(--goa-space-xl);text-align:center}.search-page-header[data-astro-cid-ipsxrsrh] h1[data-astro-cid-ipsxrsrh]{font-size:var(--goa-font-size-9);font-weight:700;margin:0 0 var(--goa-space-s);color:var(--goa-color-text-default, #333);line-height:1.2}.lead[data-astro-cid-ipsxrsrh]{font:var(--goa-typography-body-l);color:var(--goa-color-text-secondary, #666);margin:0}@media (max-width: 1024px){.content-card[data-astro-cid-ipsxrsrh]{padding:var(--goa-space-l) var(--goa-space-xl)}}@media (max-width: 623px){.layout-wrapper[data-astro-cid-ipsxrsrh]{background:var(--goa-color-greyscale-white)}.layout-container[data-astro-cid-ipsxrsrh]{grid-template-columns:1fr}.sidebar-left[data-astro-cid-ipsxrsrh]{position:fixed;left:-280px;z-index:100;transition:left .3s ease}.main-content[data-astro-cid-ipsxrsrh]{padding:0}.content-card[data-astro-cid-ipsxrsrh]{border-radius:var(--goa-border-radius-none);border:none;padding:var(--goa-space-m);min-height:auto}.search-page-header[data-astro-cid-ipsxrsrh]{text-align:left;margin-bottom:var(--goa-space-l)}.search-page-header[data-astro-cid-ipsxrsrh] h1[data-astro-cid-ipsxrsrh]{font-size:1.75rem}}body[data-menu-open=true] .sidebar-left[data-astro-cid-ipsxrsrh]{left:0}
+.layout-wrapper[data-astro-cid-cqxslp7c]{background:var(--goa-color-greyscale-50);min-height:100vh}.layout-container[data-astro-cid-cqxslp7c]{display:grid;grid-template-columns:var(--sidebar-width, 280px) 1fr;min-height:100vh}.sidebar-left[data-astro-cid-cqxslp7c]{position:sticky;top:0;height:100vh;background:var(--goa-color-greyscale-50);z-index:2}.main-content[data-astro-cid-cqxslp7c]{display:flex;min-height:100vh;min-width:0;padding:var(--goa-space-m);padding-left:0}.content-with-drawer[data-astro-cid-cqxslp7c]{flex:1;min-width:0}#push-drawer-portal[data-astro-cid-cqxslp7c]{margin-top:calc(-1 * var(--goa-space-m));margin-bottom:calc(-1 * var(--goa-space-m));position:sticky;top:0;height:100vh}#push-drawer-portal[data-astro-cid-cqxslp7c]:has([open]){margin-right:calc(-1 * var(--goa-space-m))}.content-card[data-astro-cid-cqxslp7c]{background:var(--goa-color-greyscale-white);border-radius:var(--goa-border-radius-3xl);border:1px solid var(--goa-color-greyscale-150);--card-padding-h: var(--goa-space-2xl);padding:var(--goa-space-xl) var(--card-padding-h);min-height:calc(100vh - var(--goa-space-l) * 2)}.breadcrumb-row[data-astro-cid-cqxslp7c]{max-width:1408px;margin:0 auto var(--goa-space-xs)}@media (max-width: 1023px){.content-card[data-astro-cid-cqxslp7c]{--card-padding-h: var(--goa-space-xl);padding:var(--goa-space-l) var(--card-padding-h)}#push-drawer-portal[data-astro-cid-cqxslp7c]{position:static;height:auto;margin:0}#push-drawer-portal[data-astro-cid-cqxslp7c]:has([open]){margin-right:0}.mobile-header-container:has(~* [open]){z-index:0!important}}@media (max-width: 623px){.layout-wrapper[data-astro-cid-cqxslp7c]{background:var(--goa-color-greyscale-white)}.layout-container[data-astro-cid-cqxslp7c]{grid-template-columns:1fr}.sidebar-left[data-astro-cid-cqxslp7c]{position:fixed;left:-280px;z-index:100;transition:left .3s ease}.main-content[data-astro-cid-cqxslp7c]{display:block;padding:0}.content-card[data-astro-cid-cqxslp7c]{border-radius:var(--goa-border-radius-none);border:none;--card-padding-h: var(--goa-space-m);padding:var(--goa-space-m) var(--card-padding-h);min-height:auto}}body[data-menu-open=true] .sidebar-left[data-astro-cid-cqxslp7c]{left:0}.tokens-page[data-astro-cid-6d233cpu]{max-width:1408px;margin:0 auto}.page-header[data-astro-cid-6d233cpu]{margin-bottom:var(--goa-space-xs, .5rem)}.page-header[data-astro-cid-6d233cpu] h1[data-astro-cid-6d233cpu]{font:var(--goa-typography-heading-xl);margin:0 0 var(--goa-space-m, 1rem);color:var(--goa-color-text-default, #333)}.page-description[data-astro-cid-6d233cpu]{font:var(--goa-typography-body-l);color:var(--goa-color-text-default, #333);margin:0;max-width:70ch}
+</style>
+<link rel="stylesheet" href="/ui-components/pr-preview/pr-3835/_astro/_slug_.2WAqfGJD.css">
+<style>._toc_s09pk_7{width:100%}a._toc-item-h2_s09pk_12,a._toc-item-h3_s09pk_13{border-left:1px solid var(--goa-color-greyscale-200);font:var(--goa-typography-body-s);color:var(--goa-color-greyscale-600);padding-top:var(--goa-space-2xs);padding-bottom:var(--goa-space-2xs);display:block;text-decoration:none}._toc-item-h2_s09pk_12{padding-left:var(--goa-space-m)}._toc-item-h3_s09pk_13{padding-left:var(--goa-space-xl)}a._toc-item-h2_s09pk_12:hover,a._toc-item-h3_s09pk_13:hover{color:var(--goa-color-interactive-hover)}a[href^="#"]._toc-item-h2_s09pk_12:before,a[href^="#"]._toc-item-h3_s09pk_13:before{background:none;margin:0;width:0}._toc-item-h2_s09pk_12:focus,._toc-item-h3_s09pk_13:focus{outline:none;border-bottom:none}._toc-item-h2_s09pk_12:focus:after,._toc-item-h3_s09pk_13:focus:after{display:none}._toc-item-h2_s09pk_12:focus-visible,._toc-item-h3_s09pk_13:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:-2px}._active_s09pk_62._toc-item-h2_s09pk_12,._active_s09pk_62._toc-item-h3_s09pk_13{font:var(--goa-typography-body-s);font-weight:700;color:var(--goa-color-interactive-default);border-left:3px solid var(--goa-color-interactive-default)}._active_s09pk_62._toc-item-h2_s09pk_12{padding-left:calc(var(--goa-space-m) - 2px)}._active_s09pk_62._toc-item-h3_s09pk_13{padding-left:calc(var(--goa-space-xl) - 2px)}._flat_s09pk_79 ._toc-item-h3_s09pk_13{padding-left:var(--goa-space-m)}._flat_s09pk_79 ._active_s09pk_62._toc-item-h3_s09pk_13{padding-left:calc(var(--goa-space-m) - 2px)}
+.search-menu-button{display:flex;gap:var(--goa-space-m);align-items:flex-start;width:100%;border:none;background:transparent;border-radius:var(--goa-border-radius-m);padding:var(--goa-space-xs) var(--goa-space-xs) var(--goa-space-xs) calc(var(--goa-space-xs) + var(--goa-space-3xs));color:var(--goa-color-greyscale-600);min-height:40px;cursor:pointer;text-align:left;font:var(--goa-typography-body-s)}.search-menu-button:hover{background:var(--goa-color-greyscale-100);color:var(--goa-color-text-default)}.search-menu-button:focus-visible{outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:2px}.search-menu-button goa-icon{margin-top:var(--goa-space-3xs)}.search-menu-label{flex-grow:1}.search-menu-badge{color:var(--goa-color-greyscale-600);height:1.25rem;min-width:1.25rem;line-height:1.3;text-align:center;font-size:var(--goa-font-size-2);background-color:var(--goa-color-greyscale-100);border:1px solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-s);padding:0 6px}
+</style></head> <body> <!-- Global search modal (Cmd+K / Ctrl+K or mobile search button) --> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).only=e;window.dispatchEvent(new Event("astro:only"));})();</script><script>(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="ZiaLQJ" component-url="/ui-components/pr-preview/pr-3835/_astro/search.D4sr3IbB.js" component-export="SearchModal" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{}" ssr client="only" opts="{&quot;name&quot;:&quot;SearchModal&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island>   <div class="layout-wrapper" data-astro-cid-asz6tkgw> <div class="layout-container" data-astro-cid-asz6tkgw> <!-- Left Sidebar: WorkSideMenu --> <!-- Using client:only to avoid SSR hydration mismatches with web component attributes --> <aside class="sidebar-left" data-astro-cid-asz6tkgw> <astro-island uid="ZKTWnN" component-url="/ui-components/pr-preview/pr-3835/_astro/SiteNav.DTP8bre8.js" component-export="SiteNav" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;currentSlug&quot;:[0,&quot;text-area&quot;],&quot;currentCategory&quot;:[0,&quot;inputs-and-actions&quot;],&quot;initialSection&quot;:[0,&quot;components&quot;],&quot;categories&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Content layout&quot;],&quot;icon&quot;:[0,&quot;grid&quot;],&quot;slug&quot;:[0,&quot;content-layout&quot;],&quot;components&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Accordion&quot;],&quot;slug&quot;:[0,&quot;accordion&quot;]}],[0,{&quot;name&quot;:[0,&quot;Container&quot;],&quot;slug&quot;:[0,&quot;container&quot;]}],[0,{&quot;name&quot;:[0,&quot;Data Grid&quot;],&quot;slug&quot;:[0,&quot;data-grid&quot;]}],[0,{&quot;name&quot;:[0,&quot;Details&quot;],&quot;slug&quot;:[0,&quot;details&quot;]}],[0,{&quot;name&quot;:[0,&quot;Drawer&quot;],&quot;slug&quot;:[0,&quot;drawer&quot;]}],[0,{&quot;name&quot;:[0,&quot;Hero banner&quot;],&quot;slug&quot;:[0,&quot;hero-banner&quot;]}],[0,{&quot;name&quot;:[0,&quot;Page Block&quot;],&quot;slug&quot;:[0,&quot;page-block&quot;]}],[0,{&quot;name&quot;:[0,&quot;Popover&quot;],&quot;slug&quot;:[0,&quot;popover&quot;]}],[0,{&quot;name&quot;:[0,&quot;Push Drawer&quot;],&quot;slug&quot;:[0,&quot;push-drawer&quot;]}],[0,{&quot;name&quot;:[0,&quot;Table&quot;],&quot;slug&quot;:[0,&quot;table&quot;]}],[0,{&quot;name&quot;:[0,&quot;Text&quot;],&quot;slug&quot;:[0,&quot;text&quot;]}]]]}],[0,{&quot;name&quot;:[0,&quot;Feedback and alerts&quot;],&quot;icon&quot;:[0,&quot;notifications&quot;],&quot;slug&quot;:[0,&quot;feedback-and-alerts&quot;],&quot;components&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Badge&quot;],&quot;slug&quot;:[0,&quot;badge&quot;]}],[0,{&quot;name&quot;:[0,&quot;Callout&quot;],&quot;slug&quot;:[0,&quot;callout&quot;]}],[0,{&quot;name&quot;:[0,&quot;Circular progress indicator&quot;],&quot;slug&quot;:[0,&quot;circular-progress&quot;]}],[0,{&quot;name&quot;:[0,&quot;Filter chip&quot;],&quot;slug&quot;:[0,&quot;filter-chip&quot;]}],[0,{&quot;name&quot;:[0,&quot;Linear progress indicator&quot;],&quot;slug&quot;:[0,&quot;linear-progress&quot;]}],[0,{&quot;name&quot;:[0,&quot;Modal&quot;],&quot;slug&quot;:[0,&quot;modal&quot;]}],[0,{&quot;name&quot;:[0,&quot;Notification banner&quot;],&quot;slug&quot;:[0,&quot;notification&quot;]}],[0,{&quot;name&quot;:[0,&quot;Skeleton loader&quot;],&quot;slug&quot;:[0,&quot;skeleton&quot;]}],[0,{&quot;name&quot;:[0,&quot;Temporary notification&quot;],&quot;slug&quot;:[0,&quot;temporary-notification&quot;]}],[0,{&quot;name&quot;:[0,&quot;Tooltip&quot;],&quot;slug&quot;:[0,&quot;tooltip&quot;]}]]]}],[0,{&quot;name&quot;:[0,&quot;Inputs and actions&quot;],&quot;icon&quot;:[0,&quot;create&quot;],&quot;slug&quot;:[0,&quot;inputs-and-actions&quot;],&quot;components&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Button&quot;],&quot;slug&quot;:[0,&quot;button&quot;]}],[0,{&quot;name&quot;:[0,&quot;Button group&quot;],&quot;slug&quot;:[0,&quot;button-group&quot;]}],[0,{&quot;name&quot;:[0,&quot;Checkbox&quot;],&quot;slug&quot;:[0,&quot;checkbox&quot;]}],[0,{&quot;name&quot;:[0,&quot;Checkbox list&quot;],&quot;slug&quot;:[0,&quot;checkbox-list&quot;]}],[0,{&quot;name&quot;:[0,&quot;Date picker&quot;],&quot;slug&quot;:[0,&quot;date-picker&quot;]}],[0,{&quot;name&quot;:[0,&quot;Dropdown&quot;],&quot;slug&quot;:[0,&quot;dropdown&quot;]}],[0,{&quot;name&quot;:[0,&quot;File uploader&quot;],&quot;slug&quot;:[0,&quot;file-upload-input&quot;]}],[0,{&quot;name&quot;:[0,&quot;Form&quot;],&quot;slug&quot;:[0,&quot;form&quot;]}],[0,{&quot;name&quot;:[0,&quot;Icon button&quot;],&quot;slug&quot;:[0,&quot;icon-button&quot;]}],[0,{&quot;name&quot;:[0,&quot;Input&quot;],&quot;slug&quot;:[0,&quot;input&quot;]}],[0,{&quot;name&quot;:[0,&quot;Link Button&quot;],&quot;slug&quot;:[0,&quot;link-button&quot;]}],[0,{&quot;name&quot;:[0,&quot;Menu button&quot;],&quot;slug&quot;:[0,&quot;menu-button&quot;]}],[0,{&quot;name&quot;:[0,&quot;Radio&quot;],&quot;slug&quot;:[0,&quot;radio-group&quot;]}],[0,{&quot;name&quot;:[0,&quot;Text area&quot;],&quot;slug&quot;:[0,&quot;text-area&quot;]}]]]}],[0,{&quot;name&quot;:[0,&quot;Structure and navigation&quot;],&quot;icon&quot;:[0,&quot;browsers&quot;],&quot;slug&quot;:[0,&quot;structure-and-navigation&quot;],&quot;components&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Footer&quot;],&quot;slug&quot;:[0,&quot;footer&quot;]}],[0,{&quot;name&quot;:[0,&quot;Form stepper&quot;],&quot;slug&quot;:[0,&quot;form-stepper&quot;]}],[0,{&quot;name&quot;:[0,&quot;Header&quot;],&quot;slug&quot;:[0,&quot;app-header&quot;]}],[0,{&quot;name&quot;:[0,&quot;Microsite header&quot;],&quot;slug&quot;:[0,&quot;microsite-header&quot;]}],[0,{&quot;name&quot;:[0,&quot;Pagination&quot;],&quot;slug&quot;:[0,&quot;pagination&quot;]}],[0,{&quot;name&quot;:[0,&quot;Side menu&quot;],&quot;slug&quot;:[0,&quot;side-menu&quot;]}],[0,{&quot;name&quot;:[0,&quot;Tabs&quot;],&quot;slug&quot;:[0,&quot;tabs&quot;]}],[0,{&quot;name&quot;:[0,&quot;Work Side Menu&quot;],&quot;slug&quot;:[0,&quot;work-side-menu&quot;]}]]]}],[0,{&quot;name&quot;:[0,&quot;Utilities&quot;],&quot;icon&quot;:[0,&quot;build&quot;],&quot;slug&quot;:[0,&quot;utilities&quot;],&quot;components&quot;:[1,[[0,{&quot;name&quot;:[0,&quot;Block&quot;],&quot;slug&quot;:[0,&quot;block&quot;]}],[0,{&quot;name&quot;:[0,&quot;Divider&quot;],&quot;slug&quot;:[0,&quot;divider&quot;]}],[0,{&quot;name&quot;:[0,&quot;Form item&quot;],&quot;slug&quot;:[0,&quot;form-item&quot;]}],[0,{&quot;name&quot;:[0,&quot;Grid&quot;],&quot;slug&quot;:[0,&quot;grid&quot;]}],[0,{&quot;name&quot;:[0,&quot;Icons&quot;],&quot;slug&quot;:[0,&quot;icon&quot;]}],[0,{&quot;name&quot;:[0,&quot;Link&quot;],&quot;slug&quot;:[0,&quot;link&quot;]}],[0,{&quot;name&quot;:[0,&quot;Spacer&quot;],&quot;slug&quot;:[0,&quot;spacer&quot;]}]]]}]]],&quot;data-astro-cid-asz6tkgw&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;SiteNav&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> <!-- Main Content Area --> <main class="main-content" data-astro-cid-asz6tkgw> <!-- Mobile Header: hamburger + brand + search (hidden on desktop via CSS) --> <div class="mobile-header-container" data-astro-cid-asz6tkgw> <astro-island uid="Z1th6ni" component-url="/ui-components/pr-preview/pr-3835/_astro/MobileHeader.BJ3ZlkF-.js" component-export="MobileHeader" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;data-astro-cid-asz6tkgw&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;MobileHeader&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </div> <div class="content-with-drawer" data-astro-cid-asz6tkgw> <div class="content-card" data-astro-cid-asz6tkgw>  <div class="component-page" data-astro-cid-ocziw4lk> <nav class="breadcrumbs" aria-label="Breadcrumb" data-astro-cid-ilhxcym7><ol data-astro-cid-ilhxcym7><li data-astro-cid-ilhxcym7><a href="/" data-astro-cid-ilhxcym7>Design System</a><span class="separator" aria-hidden="true" data-astro-cid-ilhxcym7>/</span></li><li data-astro-cid-ilhxcym7><span data-astro-cid-ilhxcym7>Ui components</span><span class="separator" aria-hidden="true" data-astro-cid-ilhxcym7>/</span></li><li data-astro-cid-ilhxcym7><span data-astro-cid-ilhxcym7>Pr preview</span><span class="separator" aria-hidden="true" data-astro-cid-ilhxcym7>/</span></li><li data-astro-cid-ilhxcym7><span data-astro-cid-ilhxcym7>Pr 3835</span><span class="separator" aria-hidden="true" data-astro-cid-ilhxcym7>/</span></li><li data-astro-cid-ilhxcym7><span data-astro-cid-ilhxcym7>Components</span><span class="separator" aria-hidden="true" data-astro-cid-ilhxcym7>/</span></li><li data-astro-cid-ilhxcym7><a href="/components?category=inputs-and-actions" data-astro-cid-ilhxcym7>Inputs and actions</a><span class="separator" aria-hidden="true" data-astro-cid-ilhxcym7>/</span></li><li class="sr-only" aria-current="page" data-astro-cid-ilhxcym7>Text area</li></ol></nav> <!-- Component Header --> <header class="component-header" data-astro-cid-ocziw4lk> <!-- Title --> <h1 class="component-title" data-astro-cid-ocziw4lk>Text area</h1> <!-- Description --> <p class="component-description" data-astro-cid-ocziw4lk>A multi-line field where users can input and edit text.</p> </header> <!-- Configuration Preview (dropdown + preview + code snippet + external links) --> <!-- Using client:only to avoid SSR hook issues with React components --> <astro-island uid="Z1qLVEM" component-url="/ui-components/pr-preview/pr-3835/_astro/ConfigurationPreview.BJuTmpNT.js" component-export="default" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;configurations&quot;:[0,{&quot;componentSlug&quot;:[0,&quot;text-area&quot;],&quot;componentName&quot;:[0,&quot;Text area&quot;],&quot;defaultConfigurationId&quot;:[0,&quot;basic&quot;],&quot;configurations&quot;:[1,[[0,{&quot;id&quot;:[0,&quot;basic&quot;],&quot;name&quot;:[0,&quot;Basic example&quot;],&quot;description&quot;:[0,&quot;Text area wrapped in FormItem with label&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Comments\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;comments\&quot; /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Comments\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;comments\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Comments\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;comments\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}],[0,{&quot;id&quot;:[0,&quot;with-placeholder&quot;],&quot;name&quot;:[0,&quot;With placeholder&quot;],&quot;description&quot;:[0,&quot;Text area with placeholder text&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Feedback\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;feedback\&quot; placeholder=\&quot;Enter your feedback here...\&quot; /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Feedback\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;feedback\&quot; placeholder=\&quot;Enter your feedback here...\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Feedback\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;feedback\&quot; placeholder=\&quot;Enter your feedback here...\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}],[0,{&quot;id&quot;:[0,&quot;custom-height&quot;],&quot;name&quot;:[0,&quot;Custom height&quot;],&quot;description&quot;:[0,&quot;Text area with custom row count&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Description\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;description\&quot; rows={6} /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Description\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;description\&quot; [rows]=\&quot;6\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Description\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;description\&quot; rows=\&quot;6\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}],[0,{&quot;id&quot;:[0,&quot;character-count&quot;],&quot;name&quot;:[0,&quot;Character count&quot;],&quot;description&quot;:[0,&quot;Text area with character limit&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Tell us about your experience with the service\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;experience\&quot; countBy=\&quot;character\&quot; maxCount={200} /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Tell us about your experience with the service\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;experience\&quot; countby=\&quot;character\&quot; [maxCount]=\&quot;200\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Tell us about your experience with the service\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;experience\&quot; countby=\&quot;character\&quot; maxcount=\&quot;200\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}],[0,{&quot;id&quot;:[0,&quot;word-count&quot;],&quot;name&quot;:[0,&quot;Word count&quot;],&quot;description&quot;:[0,&quot;Text area with word limit&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Describe the circumstances that led to this request\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;circumstances\&quot; countBy=\&quot;word\&quot; maxCount={500} rows={8} /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Describe the circumstances that led to this request\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;circumstances\&quot; countby=\&quot;word\&quot; [maxCount]=\&quot;500\&quot; [rows]=\&quot;8\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Describe the circumstances that led to this request\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;circumstances\&quot; countby=\&quot;word\&quot; maxcount=\&quot;500\&quot; rows=\&quot;8\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}],[0,{&quot;id&quot;:[0,&quot;sizes&quot;],&quot;name&quot;:[0,&quot;Sizes&quot;],&quot;description&quot;:[0,&quot;Default and compact size variants&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Default size\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;sizeDefault\&quot; /&gt;\n&lt;/GoabFormItem&gt;\n&lt;GoabFormItem label=\&quot;Compact size\&quot; labelSize=\&quot;compact\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;sizeCompact\&quot; size=\&quot;compact\&quot; /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Default size\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;sizeDefault\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;\n&lt;goab-form-item label=\&quot;Compact size\&quot; labelSize=\&quot;compact\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;sizeCompact\&quot; size=\&quot;compact\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Default size\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;sizeDefault\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;\n&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Compact size\&quot; labelsize=\&quot;compact\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;sizeCompact\&quot; size=\&quot;compact\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}],[0,{&quot;id&quot;:[0,&quot;states&quot;],&quot;name&quot;:[0,&quot;States&quot;],&quot;description&quot;:[0,&quot;Disabled, readonly, and error states&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;&lt;GoabFormItem label=\&quot;Disabled\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;disabled\&quot; disabled value=\&quot;Cannot edit this content\&quot; /&gt;\n&lt;/GoabFormItem&gt;\n&lt;GoabFormItem label=\&quot;Read-only\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;readonly\&quot; readOnly value=\&quot;View only content\&quot; /&gt;\n&lt;/GoabFormItem&gt;\n&lt;GoabFormItem label=\&quot;With error\&quot; error=\&quot;This field is required\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;GoabTextArea name=\&quot;error\&quot; error /&gt;\n&lt;/GoabFormItem&gt;&quot;],&quot;angular&quot;:[0,&quot;&lt;goab-form-item label=\&quot;Disabled\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;disabled\&quot; [disabled]=\&quot;true\&quot; value=\&quot;Cannot edit this content\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;\n&lt;goab-form-item label=\&quot;Read-only\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;readonly\&quot; [readOnly]=\&quot;true\&quot; value=\&quot;View only content\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;\n&lt;goab-form-item label=\&quot;With error\&quot; error=\&quot;This field is required\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goab-textarea name=\&quot;error\&quot; [error]=\&quot;true\&quot;&gt;&lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;&quot;],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Disabled\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;disabled\&quot; disabled value=\&quot;Cannot edit this content\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;\n&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Read-only\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;readonly\&quot; readonly value=\&quot;View only content\&quot;&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;\n&lt;goa-form-item version=\&quot;2\&quot; label=\&quot;With error\&quot; error=\&quot;This field is required\&quot; mb=\&quot;l\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;error\&quot; error&gt;&lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;&quot;]}]}]]]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/Component-library?node-id=12711-380735&quot;],&quot;githubUrl&quot;:[0,&quot;https://github.com/GovAlta/ui-components/issues?q=is%3Aissue+is%3Aopen+label%3A%22Text%20area%22&quot;],&quot;componentName&quot;:[0,&quot;Text area&quot;],&quot;data-astro-cid-ocziw4lk&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;ConfigurationPreview&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> <!-- Spacer before tabs --> <goa-spacer version="2" vspacing="xl" data-astro-cid-ocziw4lk="true"></goa-spacer> <!-- Documentation Tabs - each tab has its own TOC via TabContentWrapper --> <script type="module" src="/ui-components/pr-preview/pr-3835/_astro/PropsTable.astro_astro_type_script_index_0_lang.HwyLk33g.js"></script><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script type="module">function d(){document.querySelectorAll("[data-dodont]").forEach(e=>{const t=e.querySelector(".do-container"),r=e.querySelector(".details-content"),i=e.querySelector(".guidance-details");if(!t||!r)return;const n=t.querySelector(".guidance-content")??t,c=n.querySelector("[data-guidance-preview]"),a=[];Array.from(n.children).forEach(o=>{o.matches("[data-guidance-preview]")||a.push(o)}),a.forEach(o=>{r.appendChild(o)}),r.textContent?.trim().length>0||i?.setAttribute("style","display: none"),c||t.setAttribute("style","display: none")})}function u(){document.querySelectorAll("[data-guidance-preview] goa-modal").forEach((e,t)=>{if(e.hasAttribute("data-guidance-processed"))return;e.setAttribute("data-guidance-processed","true"),e.removeAttribute("open");const r=`guidance-modal-${t}`,i=`guidance-modal-btn-${t}`;e.id=r;const n=document.createElement("goa-button");n.id=i,n.textContent="Open modal",e.parentNode?.insertBefore(n,e),n.addEventListener("_click",()=>{e.setAttribute("open","true")}),e.addEventListener("_close",()=>{e.removeAttribute("open")}),e.querySelectorAll("goa-button").forEach(c=>{c.addEventListener("_click",()=>{e.removeAttribute("open")})})})}function s(){document.querySelectorAll("[data-guidance-preview] goa-block").forEach(e=>{e.getAttribute("width")||e.setAttribute("width","100%"),e.getAttribute("max-width")||e.setAttribute("max-width","100%")})}d();u();s();document.addEventListener("astro:page-load",()=>{d(),u(),s()});</script><goa-tabs version="2" initialtab="1" data-astro-cid-ocziw4lk="true"> <!-- Properties Tab --> <goa-tab heading="Properties" data-astro-cid-ocziw4lk="true"> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d>  <div class="api-section" data-astro-cid-lv5w65io><div class="api-heading" data-astro-cid-lv5w65io><h3 id="props" data-astro-cid-lv5w65io>Props</h3></div><goa-container version="2" type="interactive" data-astro-cid-lv5w65io="true"><goa-data-grid keyboard-nav="layout" keyboard-icon-position="right" data-astro-cid-lv5w65io="true"><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>name</span><goa-badge version="2" type="important" icon="false" content="Required" data-astro-cid-lv5w65io="true"></goa-badge></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Name of the input value that is received in the _change event.</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>value</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Bound to value</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>placeholder</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Text displayed within the input when no value is set.</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>rows</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>number</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Set the number of rows.</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>3</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>testId</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Sets a data-testid attribute for automated testing.</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>width</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Width of the text area.</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>100%</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>maxWidth</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Maximum width of the text area</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>60ch</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>error</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>boolean</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Sets the input to an error state</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>false</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>readOnly</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>boolean</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Sets the input to a read only state.</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>false</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>disabled</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>boolean</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Sets the input to a disabled state. Use [attr.disabled] with [formControl]</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>false</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>ariaLabel</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Defines how the text will be translated for the screen reader. If not specified it will fall back to the name.</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>countby</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>character | word</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Counting interval for characters or words, specifying whether to count every character or word.</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>maxCount</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>number</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Maximum number of characters or words allowed</div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>-1</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>autoComplete</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>string</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Specifies the autocomplete attribute for the textarea input.</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>version</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>1 | 2</span></div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>1</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>size</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>default | compact</span></div><div class="prop-cell prop-cell-default" data-grid="cell" data-astro-cid-lv5w65io>
+Defaults to <code data-astro-cid-lv5w65io>default</code>.
+</div></div><div class="prop-row" data-grid="row" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>mt, mr, mb, ml</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>none | 3xs | 2xs | xs | s | m | l | xl | 2xl | 3xl | 4xl</span></div><div class="prop-cell prop-cell-description" data-grid="cell" data-astro-cid-lv5w65io>Apply margin to the top, right, bottom, and/or left of the component.</div></div></goa-data-grid></goa-container></div><div class="api-section" data-astro-cid-lv5w65io><div class="api-heading" data-astro-cid-lv5w65io><h3 id="events" data-astro-cid-lv5w65io>Events</h3></div><goa-container version="2" type="interactive" data-astro-cid-lv5w65io="true"><goa-data-grid keyboard-nav="layout" keyboard-icon-position="right" data-astro-cid-lv5w65io="true"><div class="prop-row" data-grid="row" data-frameworks="react" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>onChange</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>(event: Event) =&gt; void</span></div></div><div class="prop-row" data-grid="row" data-frameworks="angular" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>_change</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>CustomEvent</span></div></div><div class="prop-row" data-grid="row" data-frameworks="react" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>onBlur</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>(event: Event) =&gt; void</span></div></div><div class="prop-row" data-grid="row" data-frameworks="angular" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>_blur</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>CustomEvent</span></div></div><div class="prop-row" data-grid="row" data-frameworks="react" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>onKeyPress</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>(event: Event) =&gt; void</span></div></div><div class="prop-row" data-grid="row" data-frameworks="angular" data-astro-cid-lv5w65io><div class="prop-cell prop-cell-name" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-name" data-astro-cid-lv5w65io>_keyPress</span></div><div class="prop-cell prop-cell-type" data-grid="cell" data-astro-cid-lv5w65io><span class="prop-type" data-astro-cid-lv5w65io>CustomEvent</span></div></div></goa-data-grid></goa-container></div>  </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="5DgSU" component-url="/ui-components/pr-preview/pr-3835/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.api-section h3, .sub-component-section h2&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Examples Tab --> <!-- TODO: URL shows "tab-1" instead of "examples" because heading slot overrides heading attribute for URL generation --> <goa-tab heading="Examples" data-astro-cid-ocziw4lk="true"> <span slot="heading" data-astro-cid-ocziw4lk>Examples <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="4" data-astro-cid-ocziw4lk="true"></goa-badge></span> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d> <div class="examples-list" data-astro-cid-ocziw4lk> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z1mB6f2" prefix="r4" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Add another item in a modal&quot;],&quot;slug&quot;:[0,&quot;add-another-item-in-a-modal&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabInput,\n  GoabModal,\n  GoabTextArea,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function AddAnotherItemInAModal() {\n  const [open, setOpen] = useState(false);\n  const [type, setType] = useState&lt;string&gt;();\n  const [name, setName] = useState&lt;string&gt;();\n  const [description, setDescription] = useState&lt;string&gt;();\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton type=\&quot;tertiary\&quot; leadingIcon=\&quot;add\&quot; onClick={() =&gt; setOpen(true)}&gt;\n        Add another item\n      &lt;/GoabButton&gt;\n      &lt;GoabModal\n          heading=\&quot;Add a new item\&quot;\n          open={open}\n          actions={\n            &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n              &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n                Cancel\n              &lt;/GoabButton&gt;\n              &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n                Save new item\n              &lt;/GoabButton&gt;\n            &lt;/GoabButtonGroup&gt;\n          }\n        &gt;\n          &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n          &lt;GoabFormItem label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n            &lt;GoabDropdown onChange={(e) =&gt; setType(e.value)} value={type}&gt;\n              &lt;GoabDropdownItem value=\&quot;1\&quot; label=\&quot;Option 1\&quot; /&gt;\n              &lt;GoabDropdownItem value=\&quot;2\&quot; label=\&quot;Option 2\&quot; /&gt;\n            &lt;/GoabDropdown&gt;\n          &lt;/GoabFormItem&gt;\n          &lt;GoabFormItem label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n            &lt;GoabInput\n              onChange={(e) =&gt; setName(e.value)}\n              value={name}\n              name=\&quot;name\&quot;\n              width=\&quot;100%\&quot;\n            /&gt;\n          &lt;/GoabFormItem&gt;\n          &lt;GoabFormItem label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n            &lt;GoabTextArea\n              name=\&quot;description\&quot;\n              rows={3}\n              width=\&quot;100%\&quot;\n              onChange={(e) =&gt; setDescription(e.value)}\n              value={description}\n            /&gt;\n          &lt;/GoabFormItem&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button type=\&quot;tertiary\&quot; leadingIcon=\&quot;add\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;Add another item&lt;/goab-button&gt;\n&lt;goab-modal [open]=\&quot;open\&quot; (onClose)=\&quot;toggleModal()\&quot; heading=\&quot;Add a new item\&quot; [actions]=\&quot;actions\&quot;&gt;\n  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n  &lt;goab-form-item label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-dropdown (onChange)=\&quot;updateType($event)\&quot; [value]=\&quot;type\&quot;&gt;\n      &lt;goab-dropdown-item value=\&quot;1\&quot; label=\&quot;Option 1\&quot;&gt;&lt;/goab-dropdown-item&gt;\n      &lt;goab-dropdown-item value=\&quot;2\&quot; label=\&quot;Option 2\&quot;&gt;&lt;/goab-dropdown-item&gt;\n    &lt;/goab-dropdown&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-input name=\&quot;name\&quot; width=\&quot;100%\&quot; (onChange)=\&quot;updateName($event)\&quot; [value]=\&quot;name\&quot;&gt;&lt;/goab-input&gt;\n  &lt;/goab-form-item&gt;\n  &lt;goab-form-item label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-textarea name=\&quot;description\&quot; width=\&quot;100%\&quot; [rows]=\&quot;3\&quot; (onChange)=\&quot;updateDescription($event)\&quot; [value]=\&quot;description\&quot;&gt;&lt;/goab-textarea&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;Cancel&lt;/goab-button&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;Save new item&lt;/goab-button&gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-add-another-item-in-a-modal\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AddAnotherItemInAModalComponent {\n  open = false;\n  type: string | undefined = \&quot;\&quot;;\n  name = \&quot;\&quot;;\n  description = \&quot;\&quot;;\n\n  toggleModal() {\n    this.open = !this.open;\n  }\n\n  updateType(event: any) {\n    this.type = event.value;\n  }\n\n  updateName(event: any) {\n    this.name = event.value;\n  }\n\n  updateDescription(event: any) {\n    this.description = event.value;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot; type=\&quot;tertiary\&quot; leadingicon=\&quot;add\&quot;&gt;Add another item&lt;/goa-button&gt;\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;add-item-modal\&quot; heading=\&quot;Add a new item\&quot;&gt;\n  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Type\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-dropdown version=\&quot;2\&quot; id=\&quot;type-dropdown\&quot;&gt;\n      &lt;goa-dropdown-item value=\&quot;1\&quot; label=\&quot;Option 1\&quot;&gt;&lt;/goa-dropdown-item&gt;\n      &lt;goa-dropdown-item value=\&quot;2\&quot; label=\&quot;Option 2\&quot;&gt;&lt;/goa-dropdown-item&gt;\n    &lt;/goa-dropdown&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Name\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-input version=\&quot;2\&quot; name=\&quot;name\&quot; width=\&quot;100%\&quot; id=\&quot;name-input\&quot;&gt;&lt;/goa-input&gt;\n  &lt;/goa-form-item&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Description\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;description\&quot; width=\&quot;100%\&quot; rows=\&quot;3\&quot; id=\&quot;description-textarea\&quot;&gt;&lt;/goa-textarea&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;cancel-btn\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Cancel&lt;/goa-button&gt;\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;save-btn\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot;&gt;Save new item&lt;/goa-button&gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;add-item-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const cancelBtn = document.getElementById(\&quot;cancel-btn\&quot;);\n  const saveBtn = document.getElementById(\&quot;save-btn\&quot;);\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  cancelBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  saveBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169649&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-add-another-item-in-a-modal" class="example-title">Add another item in a modal</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169649" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View in Figma" title="View in Figma"><goa-icon version="2" type="logo-figma" size="small"></goa-icon></a></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
+  const [type, setType] = useState&lt;string&gt;();
+  const [name, setName] = useState&lt;string&gt;();
+  const [description, setDescription] = useState&lt;string&gt;();</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton type=&quot;tertiary&quot; leadingIcon=&quot;add&quot; onClick={() =&gt; setOpen(true)}&gt;
+        Add another item
+      &lt;/GoabButton&gt;
+      &lt;GoabModal
+          heading=&quot;Add a new item&quot;
+          open={open}
+          actions={
+            &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
+              &lt;GoabButton type=&quot;tertiary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+                Cancel
+              &lt;/GoabButton&gt;
+              &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+                Save new item
+              &lt;/GoabButton&gt;
+            &lt;/GoabButtonGroup&gt;
+          }
+        &gt;
+          &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
+          &lt;GoabFormItem label=&quot;Type&quot; mt=&quot;l&quot;&gt;
+            &lt;GoabDropdown onChange={(e) =&gt; setType(e.value)} value={type}&gt;
+              &lt;GoabDropdownItem value=&quot;1&quot; label=&quot;Option 1&quot; /&gt;
+              &lt;GoabDropdownItem value=&quot;2&quot; label=&quot;Option 2&quot; /&gt;
+            &lt;/GoabDropdown&gt;
+          &lt;/GoabFormItem&gt;
+          &lt;GoabFormItem label=&quot;Name&quot; mt=&quot;l&quot;&gt;
+            &lt;GoabInput
+              onChange={(e) =&gt; setName(e.value)}
+              value={name}
+              name=&quot;name&quot;
+              width=&quot;100%&quot;
+            /&gt;
+          &lt;/GoabFormItem&gt;
+          &lt;GoabFormItem label=&quot;Description&quot; mt=&quot;l&quot;&gt;
+            &lt;GoabTextArea
+              name=&quot;description&quot;
+              rows={3}
+              width=&quot;100%&quot;
+              onChange={(e) =&gt; setDescription(e.value)}
+              value={description}
+            /&gt;
+          &lt;/GoabFormItem&gt;
+      &lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
+  type: string | undefined = &quot;&quot;;
+  name = &quot;&quot;;
+  description = &quot;&quot;;
+
+  toggleModal() {
+    this.open = !this.open;
+  }
+
+  updateType(event: any) {
+    this.type = event.value;
+  }
+
+  updateName(event: any) {
+    this.name = event.value;
+  }
+
+  updateDescription(event: any) {
+    this.description = event.value;
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button type=&quot;tertiary&quot; leadingIcon=&quot;add&quot; (onClick)=&quot;toggleModal()&quot;&gt;Add another item&lt;/goab-button&gt;
+&lt;goab-modal [open]=&quot;open&quot; (onClose)=&quot;toggleModal()&quot; heading=&quot;Add a new item&quot; [actions]=&quot;actions&quot;&gt;
+  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
+  &lt;goab-form-item label=&quot;Type&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-dropdown (onChange)=&quot;updateType($event)&quot; [value]=&quot;type&quot;&gt;
+      &lt;goab-dropdown-item value=&quot;1&quot; label=&quot;Option 1&quot;&gt;&lt;/goab-dropdown-item&gt;
+      &lt;goab-dropdown-item value=&quot;2&quot; label=&quot;Option 2&quot;&gt;&lt;/goab-dropdown-item&gt;
+    &lt;/goab-dropdown&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Name&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-input name=&quot;name&quot; width=&quot;100%&quot; (onChange)=&quot;updateName($event)&quot; [value]=&quot;name&quot;&gt;&lt;/goab-input&gt;
+  &lt;/goab-form-item&gt;
+  &lt;goab-form-item label=&quot;Description&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-textarea name=&quot;description&quot; width=&quot;100%&quot; [rows]=&quot;3&quot; (onChange)=&quot;updateDescription($event)&quot; [value]=&quot;description&quot;&gt;&lt;/goab-textarea&gt;
+  &lt;/goab-form-item&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;end&quot;&gt;
+      &lt;goab-button type=&quot;tertiary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;&gt;Cancel&lt;/goab-button&gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;&gt;Save new item&lt;/goab-button&gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;add-item-modal&quot;);
+const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
+const cancelBtn = document.getElementById(&quot;cancel-btn&quot;);
+const saveBtn = document.getElementById(&quot;save-btn&quot;);
+
+openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
+});
+
+modal.addEventListener(&quot;_close&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+cancelBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+saveBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot; type=&quot;tertiary&quot; leadingicon=&quot;add&quot;&gt;Add another item&lt;/goa-button&gt;
+&lt;goa-modal version=&quot;2&quot; id=&quot;add-item-modal&quot; heading=&quot;Add a new item&quot;&gt;
+  &lt;p&gt;Fill in the information to create a new item&lt;/p&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Type&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-dropdown version=&quot;2&quot; id=&quot;type-dropdown&quot;&gt;
+      &lt;goa-dropdown-item value=&quot;1&quot; label=&quot;Option 1&quot;&gt;&lt;/goa-dropdown-item&gt;
+      &lt;goa-dropdown-item value=&quot;2&quot; label=&quot;Option 2&quot;&gt;&lt;/goa-dropdown-item&gt;
+    &lt;/goa-dropdown&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Name&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-input version=&quot;2&quot; name=&quot;name&quot; width=&quot;100%&quot; id=&quot;name-input&quot;&gt;&lt;/goa-input&gt;
+  &lt;/goa-form-item&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Description&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-textarea version=&quot;2&quot; name=&quot;description&quot; width=&quot;100%&quot; rows=&quot;3&quot; id=&quot;description-textarea&quot;&gt;&lt;/goa-textarea&gt;
+  &lt;/goa-form-item&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;end&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;cancel-btn&quot; type=&quot;tertiary&quot; size=&quot;compact&quot;&gt;Cancel&lt;/goa-button&gt;
+      &lt;goa-button version=&quot;2&quot; id=&quot;save-btn&quot; type=&quot;primary&quot; size=&quot;compact&quot;&gt;Save new item&lt;/goa-button&gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      .code-snippet {
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        border-radius: var(--goa-border-radius-m, 4px);
+        overflow: hidden;
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        font-size: var(--goa-font-size-2);
+      }
+
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
+      }
+
+      .code-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--goa-color-greyscale-200, #dcdcdc);
+      }
+
+      .code-block {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        position: relative;
+      }
+
+      .code-block-header {
+        position: absolute;
+        top: var(--goa-space-xs, 0.25rem);
+        right: var(--goa-space-s, 0.5rem);
+        z-index: 1; /* Above code content so copy button is clickable */
+      }
+
+      .code-block-title {
+        font-size: 0.75rem;
+        font-weight: var(--goa-font-weight-semi-bold);
+        color: var(--goa-color-text-secondary, #666);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .copy-button {
+        background: var(--goa-color-greyscale-white);
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        color: var(--goa-color-interactive-default, #0070c4);
+        width: 28px;
+        height: 28px;
+        border-radius: var(--goa-border-radius-xs);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+
+      .copy-button:hover {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        border-color: var(--goa-color-interactive-default, #0070c4);
+      }
+
+      .copy-button.copied {
+        background: var(--goa-color-status-success, #2e7d32);
+        border-color: var(--goa-color-status-success, #2e7d32);
+        color: var(--goa-color-greyscale-white);
+      }
+
+      .copy-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .code-container {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .code-container.expanded {
+        overflow: auto;
+      }
+
+      .code-block.has-gradient .code-container {
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+      }
+
+      pre {
+        margin: 0;
+        padding: var(--goa-space-m, 1rem);
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        line-height: 1.6;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      .expand-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: var(--goa-space-s, 0.5rem) 0;
+        position: relative;
+        margin-top: -2rem;
+      }
+
+      .expand-button-bg {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+      }
+
+      .no-code {
+        padding: var(--goa-space-m, 1rem);
+        color: var(--goa-color-text-secondary, #666);
+        font-style: italic;
+      }
+
+      /* Highlight.js theme */
+      .hljs {
+        color: var(--goa-color-text-default, #333);
+        background: transparent;
+      }
+      .hljs-keyword { color: #0550ae; }
+      .hljs-string { color: #4b7c41; }
+      .hljs-number { color: #0550ae; }
+      .hljs-comment { color: #6e7781; }
+      .hljs-tag { color: #0550ae; }
+      .hljs-attr { color: #0550ae; }
+      .hljs-name { color: #2b7c5f; }
+      .hljs-built_in { color: #6639ba; }
+      .hljs-title { color: #6639ba; }
+      .hljs-params { color: #953800; }
+    </style></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z1jFEa7" prefix="r5" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Ask a long answer question with a maximum word count&quot;],&quot;slug&quot;:[0,&quot;ask-a-long-answer-question-with-a-maximum-word-count&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport { GoabFormItem, GoabTextArea } from \&quot;@abgov/react-components\&quot;;\n\nexport function AskALongAnswerQuestionWithAMaximumWordCount() {\n  const [value, setValue] = useState(\&quot;\&quot;);\n\n  return (\n    &lt;GoabFormItem\n      label=\&quot;Provide more detail\&quot;\n      helpText=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;\n    &gt;\n      &lt;GoabTextArea\n        name=\&quot;program\&quot;\n        onChange={(e) =&gt; setValue(e.value)}\n        value={value}\n        width=\&quot;100%\&quot;\n        rows={6}\n        maxCount={500}\n        countBy=\&quot;word\&quot;\n      /&gt;\n    &lt;/GoabFormItem&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-form-item\n  label=\&quot;Provide more detail\&quot;\n  helpText=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;&gt;\n  &lt;goab-textarea\n    name=\&quot;program\&quot;\n    [formControl]=\&quot;form.controls.program\&quot;\n    width=\&quot;100%\&quot;\n    [rows]=\&quot;6\&quot;\n    [maxCount]=\&quot;500\&quot;\n    countBy=\&quot;word\&quot;&gt;\n  &lt;/goab-textarea&gt;\n&lt;/goab-form-item&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-ask-a-long-answer-question\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class AskALongAnswerQuestionComponent {\n  form!: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      program: [\&quot;\&quot;],\n    });\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-form-item version=\&quot;2\&quot;\n  label=\&quot;Provide more detail\&quot;\n  helptext=\&quot;Maximum 500 words. Do not include personal or financial information.\&quot;&gt;\n  &lt;goa-textarea version=\&quot;2\&quot;\n    name=\&quot;program\&quot;\n    id=\&quot;program-textarea\&quot;\n    width=\&quot;100%\&quot;\n    rows=\&quot;6\&quot;\n    maxcount=\&quot;500\&quot;\n    countby=\&quot;word\&quot;&gt;\n  &lt;/goa-textarea&gt;\n&lt;/goa-form-item&gt;\n\n&lt;script&gt;\n  document.getElementById(\&quot;program-textarea\&quot;)?.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    console.log(\&quot;Value:\&quot;, e.detail.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-ask-a-long-answer-question-with-a-maximum-word-count" class="example-title">Ask a long answer question with a maximum word count</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [value, setValue] = useState(&quot;&quot;);</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabFormItem
+      label=&quot;Provide more detail&quot;
+      helpText=&quot;Maximum 500 words. Do not include personal or financial information.&quot;
+    &gt;
+      &lt;GoabTextArea
+        name=&quot;program&quot;
+        onChange={(e) =&gt; setValue(e.value)}
+        value={value}
+        width=&quot;100%&quot;
+        rows={6}
+        maxCount={500}
+        countBy=&quot;word&quot;
+      /&gt;
+    &lt;/GoabFormItem&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">form!: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      program: [&quot;&quot;],
+    });
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-form-item
+  label=&quot;Provide more detail&quot;
+  helpText=&quot;Maximum 500 words. Do not include personal or financial information.&quot;&gt;
+  &lt;goab-textarea
+    name=&quot;program&quot;
+    [formControl]=&quot;form.controls.program&quot;
+    width=&quot;100%&quot;
+    [rows]=&quot;6&quot;
+    [maxCount]=&quot;500&quot;
+    countBy=&quot;word&quot;&gt;
+  &lt;/goab-textarea&gt;
+&lt;/goab-form-item&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">document.getElementById(&quot;program-textarea&quot;)?.addEventListener(&quot;_change&quot;, (e) =&gt; {
+  console.log(&quot;Value:&quot;, e.detail.value);
+});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-form-item version=&quot;2&quot;
+  label=&quot;Provide more detail&quot;
+  helptext=&quot;Maximum 500 words. Do not include personal or financial information.&quot;&gt;
+  &lt;goa-textarea version=&quot;2&quot;
+    name=&quot;program&quot;
+    id=&quot;program-textarea&quot;
+    width=&quot;100%&quot;
+    rows=&quot;6&quot;
+    maxcount=&quot;500&quot;
+    countby=&quot;word&quot;&gt;
+  &lt;/goa-textarea&gt;
+&lt;/goa-form-item&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      .code-snippet {
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        border-radius: var(--goa-border-radius-m, 4px);
+        overflow: hidden;
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        font-size: var(--goa-font-size-2);
+      }
+
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
+      }
+
+      .code-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--goa-color-greyscale-200, #dcdcdc);
+      }
+
+      .code-block {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        position: relative;
+      }
+
+      .code-block-header {
+        position: absolute;
+        top: var(--goa-space-xs, 0.25rem);
+        right: var(--goa-space-s, 0.5rem);
+        z-index: 1; /* Above code content so copy button is clickable */
+      }
+
+      .code-block-title {
+        font-size: 0.75rem;
+        font-weight: var(--goa-font-weight-semi-bold);
+        color: var(--goa-color-text-secondary, #666);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .copy-button {
+        background: var(--goa-color-greyscale-white);
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        color: var(--goa-color-interactive-default, #0070c4);
+        width: 28px;
+        height: 28px;
+        border-radius: var(--goa-border-radius-xs);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+
+      .copy-button:hover {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        border-color: var(--goa-color-interactive-default, #0070c4);
+      }
+
+      .copy-button.copied {
+        background: var(--goa-color-status-success, #2e7d32);
+        border-color: var(--goa-color-status-success, #2e7d32);
+        color: var(--goa-color-greyscale-white);
+      }
+
+      .copy-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .code-container {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .code-container.expanded {
+        overflow: auto;
+      }
+
+      .code-block.has-gradient .code-container {
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+      }
+
+      pre {
+        margin: 0;
+        padding: var(--goa-space-m, 1rem);
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        line-height: 1.6;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      .expand-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: var(--goa-space-s, 0.5rem) 0;
+        position: relative;
+        margin-top: -2rem;
+      }
+
+      .expand-button-bg {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+      }
+
+      .no-code {
+        padding: var(--goa-space-m, 1rem);
+        color: var(--goa-color-text-secondary, #666);
+        font-style: italic;
+      }
+
+      /* Highlight.js theme */
+      .hljs {
+        color: var(--goa-color-text-default, #333);
+        background: transparent;
+      }
+      .hljs-keyword { color: #0550ae; }
+      .hljs-string { color: #4b7c41; }
+      .hljs-number { color: #0550ae; }
+      .hljs-comment { color: #6e7781; }
+      .hljs-tag { color: #0550ae; }
+      .hljs-attr { color: #0550ae; }
+      .hljs-name { color: #2b7c5f; }
+      .hljs-built_in { color: #6639ba; }
+      .hljs-title { color: #6639ba; }
+      .hljs-params { color: #953800; }
+    </style></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="1zp0uv" prefix="r6" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Give more information before asking a question (b)&quot;],&quot;slug&quot;:[0,&quot;give-more-information-before-asking-a-question-b&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabDetails,\n  GoabFormItem,\n  GoabLink,\n  GoabText,\n  GoabTextArea,\n} from \&quot;@abgov/react-components\&quot;;\n\nimport { GoabTextAreaOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function GiveContextBeforeAskingALongAnswerQuestion() {\n  const [textValue, setTextValue] = useState(\&quot;\&quot;);\n\n  const handleChange = (event: GoabTextAreaOnChangeDetail) =&gt; {\n    setTextValue(event.value);\n  };\n\n  const handleContinue = () =&gt; {\n    console.log(\&quot;Submitted:\&quot;, textValue);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabLink leadingIcon=\&quot;arrow-back\&quot; size=\&quot;small\&quot; mb=\&quot;none\&quot;&gt;\n        Back\n      &lt;/GoabLink&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot; mt=\&quot;xl\&quot; mb=\&quot;m\&quot;&gt;Submit a question about your benefits&lt;/GoabText&gt;\n      &lt;GoabText mt=\&quot;none\&quot; mb=\&quot;xl\&quot;&gt;\n        If you need clarification about your benefit eligibility, payment schedule, or application status, submit your\n        question here.\n      &lt;/GoabText&gt;\n\n      &lt;form&gt;\n        &lt;GoabFormItem\n          label=\&quot;Provide details about your situation\&quot;\n          helpText=\&quot;Include specific details to help us answer your question quickly.\&quot;&gt;\n          &lt;GoabTextArea\n            name=\&quot;program\&quot;\n            onChange={handleChange}\n            value={textValue}\n            maxCount={400}\n            countBy=\&quot;character\&quot;\n          /&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/form&gt;\n\n      &lt;GoabDetails mt=\&quot;m\&quot; heading=\&quot;What kind of information is useful?\&quot;&gt;\n        &lt;p&gt;\n          Include your benefit program name, mention any recent correspondence you received and/or provide any\n          relevant case or reference numbers.\n        &lt;/p&gt;\n      &lt;/GoabDetails&gt;\n\n      &lt;GoabButtonGroup alignment=\&quot;start\&quot; mt=\&quot;2xl\&quot;&gt;\n        &lt;GoabButton type=\&quot;primary\&quot; onClick={handleContinue}&gt;\n          Continue\n        &lt;/GoabButton&gt;\n      &lt;/GoabButtonGroup&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-link leadingIcon=\&quot;arrow-back\&quot; size=\&quot;small\&quot; mb=\&quot;none\&quot;&gt;\n  Back\n&lt;/goab-link&gt;\n\n&lt;goab-text as=\&quot;h2\&quot; mt=\&quot;xl\&quot; mb=\&quot;m\&quot;&gt;Submit a question about your benefits&lt;/goab-text&gt;\n&lt;goab-text mt=\&quot;none\&quot; mb=\&quot;xl\&quot;&gt;\n  If you need clarification about your benefit eligibility, payment schedule, or application status, submit your\n  question here.\n&lt;/goab-text&gt;\n\n&lt;form [formGroup]=\&quot;form\&quot;&gt;\n  &lt;goab-form-item\n    label=\&quot;Provide details about your situation\&quot;\n    helpText=\&quot;Include specific details to help us answer your question quickly.\&quot;&gt;\n    &lt;goab-textarea\n      formControlName=\&quot;program\&quot;\n      name=\&quot;program\&quot;\n      [maxCount]=\&quot;400\&quot;\n      countBy=\&quot;character\&quot;&gt;\n    &lt;/goab-textarea&gt;\n  &lt;/goab-form-item&gt;\n&lt;/form&gt;\n\n&lt;goab-details mt=\&quot;m\&quot; heading=\&quot;What kind of information is useful?\&quot;&gt;\n  &lt;p&gt;\n    Include your benefit program name, mention any recent correspondence you received and/or provide any\n    relevant case or reference numbers.\n  &lt;/p&gt;\n&lt;/goab-details&gt;\n\n&lt;goab-button-group alignment=\&quot;start\&quot; mt=\&quot;2xl\&quot;&gt;\n  &lt;goab-button type=\&quot;primary\&quot; (onClick)=\&quot;onContinue()\&quot;&gt;\n    Continue\n  &lt;/goab-button&gt;\n&lt;/goab-button-group&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-give-context-long-answer\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;\n})\nexport class GiveContextLongAnswerComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      program: [\&quot;\&quot;]\n    });\n  }\n\n  onContinue(): void {\n    console.log(\&quot;Submitted:\&quot;, this.form.get(\&quot;program\&quot;)?.value);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-link leadingicon=\&quot;arrow-back\&quot; size=\&quot;small\&quot; mb=\&quot;none\&quot;&gt;\n  Back\n&lt;/goa-link&gt;\n\n&lt;goa-text as=\&quot;h2\&quot; mt=\&quot;xl\&quot; mb=\&quot;m\&quot;&gt;Submit a question about your benefits&lt;/goa-text&gt;\n&lt;goa-text mt=\&quot;none\&quot; mb=\&quot;xl\&quot;&gt;\n  If you need clarification about your benefit eligibility, payment schedule, or application status, submit your\n  question here.\n&lt;/goa-text&gt;\n\n&lt;form&gt;\n  &lt;goa-form-item version=\&quot;2\&quot;\n    label=\&quot;Provide details about your situation\&quot;\n    helptext=\&quot;Include specific details to help us answer your question quickly.\&quot;&gt;\n    &lt;goa-textarea version=\&quot;2\&quot;\n      id=\&quot;program-textarea\&quot;\n      name=\&quot;program\&quot;\n      maxcount=\&quot;400\&quot;\n      countby=\&quot;character\&quot;&gt;\n    &lt;/goa-textarea&gt;\n  &lt;/goa-form-item&gt;\n&lt;/form&gt;\n\n&lt;goa-details mt=\&quot;m\&quot; heading=\&quot;What kind of information is useful?\&quot;&gt;\n  &lt;p&gt;\n    Include your benefit program name, mention any recent correspondence you received and/or provide any\n    relevant case or reference numbers.\n  &lt;/p&gt;\n&lt;/goa-details&gt;\n\n&lt;goa-button-group alignment=\&quot;start\&quot; mt=\&quot;2xl\&quot;&gt;\n  &lt;goa-button version=\&quot;2\&quot; id=\&quot;continue-btn\&quot; type=\&quot;primary\&quot;&gt;\n    Continue\n  &lt;/goa-button&gt;\n&lt;/goa-button-group&gt;\n\n&lt;script&gt;\n  const textarea = document.getElementById(&#39;program-textarea&#39;);\n  const continueBtn = document.getElementById(&#39;continue-btn&#39;);\n\n  continueBtn.addEventListener(&#39;_click&#39;, () =&gt; {\n    console.log(&#39;Submitted:&#39;, textarea.value);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-124277&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-give-more-information-before-asking-a-question-b" class="example-title">Give more information before asking a question (b)</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-124277" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View in Figma" title="View in Figma"><goa-icon version="2" type="logo-figma" size="small"></goa-icon></a></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [textValue, setTextValue] = useState(&quot;&quot;);
+
+  const handleChange = (event: GoabTextAreaOnChangeDetail) =&gt; {
+    setTextValue(event.value);
+  };
+
+  const handleContinue = () =&gt; {
+    console.log(&quot;Submitted:&quot;, textValue);
+  };</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabLink leadingIcon=&quot;arrow-back&quot; size=&quot;small&quot; mb=&quot;none&quot;&gt;
+        Back
+      &lt;/GoabLink&gt;
+
+      &lt;GoabText as=&quot;h2&quot; mt=&quot;xl&quot; mb=&quot;m&quot;&gt;Submit a question about your benefits&lt;/GoabText&gt;
+      &lt;GoabText mt=&quot;none&quot; mb=&quot;xl&quot;&gt;
+        If you need clarification about your benefit eligibility, payment schedule, or application status, submit your
+        question here.
+      &lt;/GoabText&gt;
+
+      &lt;form&gt;
+        &lt;GoabFormItem
+          label=&quot;Provide details about your situation&quot;
+          helpText=&quot;Include specific details to help us answer your question quickly.&quot;&gt;
+          &lt;GoabTextArea
+            name=&quot;program&quot;
+            onChange={handleChange}
+            value={textValue}
+            maxCount={400}
+            countBy=&quot;character&quot;
+          /&gt;
+        &lt;/GoabFormItem&gt;
+      &lt;/form&gt;
+
+      &lt;GoabDetails mt=&quot;m&quot; heading=&quot;What kind of information is useful?&quot;&gt;
+        &lt;p&gt;
+          Include your benefit program name, mention any recent correspondence you received and/or provide any
+          relevant case or reference numbers.
+        &lt;/p&gt;
+      &lt;/GoabDetails&gt;
+
+      &lt;GoabButtonGroup alignment=&quot;start&quot; mt=&quot;2xl&quot;&gt;
+        &lt;GoabButton type=&quot;primary&quot; onClick={handleContinue}&gt;
+          Continue
+        &lt;/GoabButton&gt;
+      &lt;/GoabButtonGroup&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      program: [&quot;&quot;]
+    });
+  }
+
+  onContinue(): void {
+    console.log(&quot;Submitted:&quot;, this.form.get(&quot;program&quot;)?.value);
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-link leadingIcon=&quot;arrow-back&quot; size=&quot;small&quot; mb=&quot;none&quot;&gt;
+  Back
+&lt;/goab-link&gt;
+
+&lt;goab-text as=&quot;h2&quot; mt=&quot;xl&quot; mb=&quot;m&quot;&gt;Submit a question about your benefits&lt;/goab-text&gt;
+&lt;goab-text mt=&quot;none&quot; mb=&quot;xl&quot;&gt;
+  If you need clarification about your benefit eligibility, payment schedule, or application status, submit your
+  question here.
+&lt;/goab-text&gt;
+
+&lt;form [formGroup]=&quot;form&quot;&gt;
+  &lt;goab-form-item
+    label=&quot;Provide details about your situation&quot;
+    helpText=&quot;Include specific details to help us answer your question quickly.&quot;&gt;
+    &lt;goab-textarea
+      formControlName=&quot;program&quot;
+      name=&quot;program&quot;
+      [maxCount]=&quot;400&quot;
+      countBy=&quot;character&quot;&gt;
+    &lt;/goab-textarea&gt;
+  &lt;/goab-form-item&gt;
+&lt;/form&gt;
+
+&lt;goab-details mt=&quot;m&quot; heading=&quot;What kind of information is useful?&quot;&gt;
+  &lt;p&gt;
+    Include your benefit program name, mention any recent correspondence you received and/or provide any
+    relevant case or reference numbers.
+  &lt;/p&gt;
+&lt;/goab-details&gt;
+
+&lt;goab-button-group alignment=&quot;start&quot; mt=&quot;2xl&quot;&gt;
+  &lt;goab-button type=&quot;primary&quot; (onClick)=&quot;onContinue()&quot;&gt;
+    Continue
+  &lt;/goab-button&gt;
+&lt;/goab-button-group&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const textarea = document.getElementById(&#x27;program-textarea&#x27;);
+const continueBtn = document.getElementById(&#x27;continue-btn&#x27;);
+
+continueBtn.addEventListener(&#x27;_click&#x27;, () =&gt; {
+  console.log(&#x27;Submitted:&#x27;, textarea.value);
+});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-link leadingicon=&quot;arrow-back&quot; size=&quot;small&quot; mb=&quot;none&quot;&gt;
+  Back
+&lt;/goa-link&gt;
+
+&lt;goa-text as=&quot;h2&quot; mt=&quot;xl&quot; mb=&quot;m&quot;&gt;Submit a question about your benefits&lt;/goa-text&gt;
+&lt;goa-text mt=&quot;none&quot; mb=&quot;xl&quot;&gt;
+  If you need clarification about your benefit eligibility, payment schedule, or application status, submit your
+  question here.
+&lt;/goa-text&gt;
+
+&lt;form&gt;
+  &lt;goa-form-item version=&quot;2&quot;
+    label=&quot;Provide details about your situation&quot;
+    helptext=&quot;Include specific details to help us answer your question quickly.&quot;&gt;
+    &lt;goa-textarea version=&quot;2&quot;
+      id=&quot;program-textarea&quot;
+      name=&quot;program&quot;
+      maxcount=&quot;400&quot;
+      countby=&quot;character&quot;&gt;
+    &lt;/goa-textarea&gt;
+  &lt;/goa-form-item&gt;
+&lt;/form&gt;
+
+&lt;goa-details mt=&quot;m&quot; heading=&quot;What kind of information is useful?&quot;&gt;
+  &lt;p&gt;
+    Include your benefit program name, mention any recent correspondence you received and/or provide any
+    relevant case or reference numbers.
+  &lt;/p&gt;
+&lt;/goa-details&gt;
+
+&lt;goa-button-group alignment=&quot;start&quot; mt=&quot;2xl&quot;&gt;
+  &lt;goa-button version=&quot;2&quot; id=&quot;continue-btn&quot; type=&quot;primary&quot;&gt;
+    Continue
+  &lt;/goa-button&gt;
+&lt;/goa-button-group&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      .code-snippet {
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        border-radius: var(--goa-border-radius-m, 4px);
+        overflow: hidden;
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        font-size: var(--goa-font-size-2);
+      }
+
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
+      }
+
+      .code-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--goa-color-greyscale-200, #dcdcdc);
+      }
+
+      .code-block {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        position: relative;
+      }
+
+      .code-block-header {
+        position: absolute;
+        top: var(--goa-space-xs, 0.25rem);
+        right: var(--goa-space-s, 0.5rem);
+        z-index: 1; /* Above code content so copy button is clickable */
+      }
+
+      .code-block-title {
+        font-size: 0.75rem;
+        font-weight: var(--goa-font-weight-semi-bold);
+        color: var(--goa-color-text-secondary, #666);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .copy-button {
+        background: var(--goa-color-greyscale-white);
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        color: var(--goa-color-interactive-default, #0070c4);
+        width: 28px;
+        height: 28px;
+        border-radius: var(--goa-border-radius-xs);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+
+      .copy-button:hover {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        border-color: var(--goa-color-interactive-default, #0070c4);
+      }
+
+      .copy-button.copied {
+        background: var(--goa-color-status-success, #2e7d32);
+        border-color: var(--goa-color-status-success, #2e7d32);
+        color: var(--goa-color-greyscale-white);
+      }
+
+      .copy-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .code-container {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .code-container.expanded {
+        overflow: auto;
+      }
+
+      .code-block.has-gradient .code-container {
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+      }
+
+      pre {
+        margin: 0;
+        padding: var(--goa-space-m, 1rem);
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        line-height: 1.6;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      .expand-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: var(--goa-space-s, 0.5rem) 0;
+        position: relative;
+        margin-top: -2rem;
+      }
+
+      .expand-button-bg {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+      }
+
+      .no-code {
+        padding: var(--goa-space-m, 1rem);
+        color: var(--goa-color-text-secondary, #666);
+        font-style: italic;
+      }
+
+      /* Highlight.js theme */
+      .hljs {
+        color: var(--goa-color-text-default, #333);
+        background: transparent;
+      }
+      .hljs-keyword { color: #0550ae; }
+      .hljs-string { color: #4b7c41; }
+      .hljs-number { color: #0550ae; }
+      .hljs-comment { color: #6e7781; }
+      .hljs-tag { color: #0550ae; }
+      .hljs-attr { color: #0550ae; }
+      .hljs-name { color: #2b7c5f; }
+      .hljs-built_in { color: #6639ba; }
+      .hljs-title { color: #6639ba; }
+      .hljs-params { color: #953800; }
+    </style></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="najl4" prefix="r7" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Review and action&quot;],&quot;slug&quot;:[0,&quot;review-and-action&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBlock,\n  GoabButton,\n  GoabContainer,\n  GoabDropdown,\n  GoabDropdownItem,\n  GoabFormItem,\n  GoabGrid,\n  GoabRadioGroup,\n  GoabRadioItem,\n  GoabText,\n  GoabTextArea,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ReviewAndAction() {\n  return (\n    &lt;GoabGrid minChildWidth=\&quot;315px\&quot;&gt;\n      &lt;GoabContainer accent=\&quot;thin\&quot; type=\&quot;non-interactive\&quot;&gt;\n        &lt;GoabText size=\&quot;heading-m\&quot; mt=\&quot;none\&quot; mb=\&quot;m\&quot;&gt;Appearance details&lt;/GoabText&gt;\n        &lt;GoabGrid minChildWidth=\&quot;200px\&quot; gap=\&quot;m\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Accused name&lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Doe, John Scott&lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Date of birth&lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Mar 14, 2021&lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Court location&lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Calgary&lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Upcoming appearance date(s)&lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Sep 20, 2021&lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/GoabGrid&gt;\n\n        &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;l\&quot; mb=\&quot;s\&quot;&gt;Docket number(s) &amp;amp; charges&lt;/GoabText&gt;\n        &lt;GoabContainer type=\&quot;non-interactive\&quot; padding=\&quot;compact\&quot;&gt;\n          &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;xs\&quot;&gt;1) 12345678&lt;/GoabText&gt;\n          &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 334(1) - Theft under $5000&lt;/GoabText&gt;\n          &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 268(1) - Aggravated assault&lt;/GoabText&gt;\n        &lt;/GoabContainer&gt;\n\n        &lt;GoabContainer type=\&quot;non-interactive\&quot; padding=\&quot;compact\&quot;&gt;\n          &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;xs\&quot;&gt;2) 12345678&lt;/GoabText&gt;\n          &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 334(1) - Theft under $5000&lt;/GoabText&gt;\n          &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 268(1) - Aggravated assault&lt;/GoabText&gt;\n        &lt;/GoabContainer&gt;\n      &lt;/GoabContainer&gt;\n\n      &lt;GoabContainer accent=\&quot;thin\&quot; width=\&quot;content\&quot;&gt;\n        &lt;form&gt;\n          &lt;GoabText size=\&quot;heading-m\&quot; mt=\&quot;none\&quot; mb=\&quot;m\&quot;&gt;Adjournment request&lt;/GoabText&gt;\n          &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n            Keep track of the individuals who are placed in lodges and may\n            qualify for the Lodge Assistance Program subsidy.\n          &lt;/GoabText&gt;\n\n          &lt;GoabFormItem label=\&quot;Case history and new request\&quot; mt=\&quot;l\&quot;&gt;\n            &lt;GoabRadioGroup name=\&quot;case\&quot; orientation=\&quot;horizontal\&quot; onChange={() =&gt; {}}&gt;\n              &lt;GoabRadioItem value=\&quot;grant\&quot; label=\&quot;Grant\&quot; /&gt;\n              &lt;GoabRadioItem value=\&quot;deny\&quot; label=\&quot;Deny\&quot; /&gt;\n            &lt;/GoabRadioGroup&gt;\n          &lt;/GoabFormItem&gt;\n\n          &lt;GoabFormItem label=\&quot;Reason to deny\&quot; mt=\&quot;l\&quot;&gt;\n            &lt;GoabDropdown name=\&quot;reason\&quot; width=\&quot;100%\&quot; onChange={() =&gt; {}}&gt;\n              &lt;GoabDropdownItem value=\&quot;1\&quot; label=\&quot;Incomplete Application\&quot; /&gt;\n              &lt;GoabDropdownItem value=\&quot;2\&quot; label=\&quot;Eligibility Criteria Not Met\&quot; /&gt;\n              &lt;GoabDropdownItem value=\&quot;3\&quot; label=\&quot;Documentation Verification Failure\&quot; /&gt;\n            &lt;/GoabDropdown&gt;\n          &lt;/GoabFormItem&gt;\n\n          &lt;GoabFormItem label=\&quot;Message\&quot; mt=\&quot;l\&quot;&gt;\n            &lt;GoabTextArea name=\&quot;message\&quot; rows={5} width=\&quot;100%\&quot; value=\&quot;\&quot; onChange={() =&gt; {}} /&gt;\n          &lt;/GoabFormItem&gt;\n\n          &lt;GoabButton mt=\&quot;xl\&quot; onClick={() =&gt; {}}&gt;\n            Confirm adjournment\n          &lt;/GoabButton&gt;\n        &lt;/form&gt;\n      &lt;/GoabContainer&gt;\n    &lt;/GoabGrid&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-grid minChildWidth=\&quot;315px\&quot;&gt;\n  &lt;goab-container accent=\&quot;thin\&quot; type=\&quot;non-interactive\&quot;&gt;\n    &lt;goab-text size=\&quot;heading-m\&quot; mt=\&quot;none\&quot; mb=\&quot;m\&quot;&gt;Appearance details&lt;/goab-text&gt;\n    &lt;goab-grid minChildWidth=\&quot;200px\&quot; gap=\&quot;m\&quot;&gt;\n      &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goab-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Accused name&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Doe, John Scott&lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goab-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Date of birth&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Mar 14, 2021&lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goab-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Court location&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Calgary&lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goab-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Upcoming appearance date(s)&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Sep 20, 2021&lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n    &lt;/goab-grid&gt;\n\n    &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;l\&quot; mb=\&quot;s\&quot;&gt;Docket number(s) &amp;amp; charges&lt;/goab-text&gt;\n    &lt;goab-container type=\&quot;non-interactive\&quot; padding=\&quot;compact\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;xs\&quot;&gt;1) 12345678&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 334(1) - Theft under $5000&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 268(1) - Aggravated assault&lt;/goab-text&gt;\n    &lt;/goab-container&gt;\n\n    &lt;goab-container type=\&quot;non-interactive\&quot; padding=\&quot;compact\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;xs\&quot;&gt;2) 12345678&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 334(1) - Theft under $5000&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 268(1) - Aggravated assault&lt;/goab-text&gt;\n    &lt;/goab-container&gt;\n  &lt;/goab-container&gt;\n\n  &lt;goab-container accent=\&quot;thin\&quot; width=\&quot;content\&quot;&gt;\n    &lt;form [formGroup]=\&quot;form\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-m\&quot; mt=\&quot;none\&quot; mb=\&quot;m\&quot;&gt;Adjournment request&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n        Keep track of the individuals who are placed in lodges and may qualify for the Lodge\n        Assistance Program subsidy.\n      &lt;/goab-text&gt;\n\n      &lt;goab-form-item label=\&quot;Case history and new request\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;goab-radio-group name=\&quot;case\&quot; orientation=\&quot;horizontal\&quot; formControlName=\&quot;case\&quot;&gt;\n          &lt;goab-radio-item value=\&quot;grant\&quot; label=\&quot;Grant\&quot;&gt;&lt;/goab-radio-item&gt;\n          &lt;goab-radio-item value=\&quot;deny\&quot; label=\&quot;Deny\&quot;&gt;&lt;/goab-radio-item&gt;\n        &lt;/goab-radio-group&gt;\n      &lt;/goab-form-item&gt;\n\n      &lt;goab-form-item label=\&quot;Reason to deny\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;goab-dropdown name=\&quot;reason\&quot; width=\&quot;100%\&quot; formControlName=\&quot;reason\&quot;&gt;\n          &lt;goab-dropdown-item value=\&quot;1\&quot; label=\&quot;Incomplete Application\&quot;&gt;&lt;/goab-dropdown-item&gt;\n          &lt;goab-dropdown-item value=\&quot;2\&quot; label=\&quot;Eligibility Criteria Not Met\&quot;&gt;&lt;/goab-dropdown-item&gt;\n          &lt;goab-dropdown-item value=\&quot;3\&quot; label=\&quot;Documentation Verification Failure\&quot;&gt;&lt;/goab-dropdown-item&gt;\n        &lt;/goab-dropdown&gt;\n      &lt;/goab-form-item&gt;\n\n      &lt;goab-form-item label=\&quot;Message\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;goab-textarea name=\&quot;message\&quot; [rows]=\&quot;5\&quot; width=\&quot;100%\&quot; formControlName=\&quot;message\&quot;&gt;&lt;/goab-textarea&gt;\n      &lt;/goab-form-item&gt;\n\n      &lt;goab-button mt=\&quot;xl\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Confirm adjournment&lt;/goab-button&gt;\n    &lt;/form&gt;\n  &lt;/goab-container&gt;\n&lt;/goab-grid&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { FormBuilder, FormGroup } from \&quot;@angular/forms\&quot;;\n\n@Component({\n  selector: \&quot;app-review-and-action\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n    h3.review-h3 {\n      margin-bottom: var(--goa-space-m);\n    }\n    label.review-label {\n      font: var(--goa-typography-body-s);\n      color: var(--goa-color-text-secondary);\n    }\n    .review-content {\n      font: var(--goa-typography-body-m);\n    }\n    p.review-content {\n      margin-bottom: 0;\n    }\n    h5.review-h5 {\n      font: var(--goa-typography-body-m);\n      color: var(--goa-color-text-secondary);\n      margin-top: var(--goa-space-m);\n      margin-bottom: var(--goa-space-m);\n    }\n    h6.review-h6 {\n      font: var(--goa-typography-heading-s);\n      margin-top: 0;\n      margin-bottom: 0;\n    }\n  `,\n  ],\n})\nexport class ReviewAndActionComponent {\n  form: FormGroup;\n\n  constructor(private fb: FormBuilder) {\n    this.form = this.fb.group({\n      case: [\&quot;\&quot;],\n      reason: [\&quot;\&quot;],\n      message: [\&quot;\&quot;],\n    });\n  }\n\n  onClick(): void {\n    console.log(\&quot;Confirm clicked!\&quot;);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-grid minchildwidth=\&quot;315px\&quot;&gt;\n  &lt;goa-container accent=\&quot;thin\&quot; type=\&quot;non-interactive\&quot;&gt;\n    &lt;goa-text size=\&quot;heading-m\&quot; mt=\&quot;none\&quot; mb=\&quot;m\&quot;&gt;Appearance details&lt;/goa-text&gt;\n    &lt;goa-grid minchildwidth=\&quot;200px\&quot; gap=\&quot;m\&quot;&gt;\n      &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goa-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Accused name&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Doe, John Scott&lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goa-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Date of birth&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Mar 14, 2021&lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goa-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Court location&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Calgary&lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;xs\&quot;&gt;\n        &lt;goa-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Upcoming appearance date(s)&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Sep 20, 2021&lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n    &lt;/goa-grid&gt;\n\n    &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;l\&quot; mb=\&quot;s\&quot;&gt;Docket number(s) &amp;amp; charges&lt;/goa-text&gt;\n    &lt;goa-container type=\&quot;non-interactive\&quot; padding=\&quot;compact\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;xs\&quot;&gt;1) 12345678&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 334(1) - Theft under $5000&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 268(1) - Aggravated assault&lt;/goa-text&gt;\n    &lt;/goa-container&gt;\n\n    &lt;goa-container type=\&quot;non-interactive\&quot; padding=\&quot;compact\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;xs\&quot;&gt;2) 12345678&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 334(1) - Theft under $5000&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;CC 268(1) - Aggravated assault&lt;/goa-text&gt;\n    &lt;/goa-container&gt;\n  &lt;/goa-container&gt;\n\n  &lt;goa-container accent=\&quot;thin\&quot; width=\&quot;content\&quot;&gt;\n    &lt;form&gt;\n      &lt;goa-text size=\&quot;heading-m\&quot; mt=\&quot;none\&quot; mb=\&quot;m\&quot;&gt;Adjournment request&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n        Keep track of the individuals who are placed in lodges and may qualify for the Lodge\n        Assistance Program subsidy.\n      &lt;/goa-text&gt;\n\n      &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Case history and new request\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;goa-radio-group version=\&quot;2\&quot; name=\&quot;case\&quot; orientation=\&quot;horizontal\&quot;&gt;\n          &lt;goa-radio-item value=\&quot;grant\&quot; label=\&quot;Grant\&quot;&gt;&lt;/goa-radio-item&gt;\n          &lt;goa-radio-item value=\&quot;deny\&quot; label=\&quot;Deny\&quot;&gt;&lt;/goa-radio-item&gt;\n        &lt;/goa-radio-group&gt;\n      &lt;/goa-form-item&gt;\n\n      &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Reason to deny\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;goa-dropdown version=\&quot;2\&quot; name=\&quot;reason\&quot; width=\&quot;100%\&quot;&gt;\n          &lt;goa-dropdown-item value=\&quot;1\&quot; label=\&quot;Incomplete Application\&quot;&gt;&lt;/goa-dropdown-item&gt;\n          &lt;goa-dropdown-item value=\&quot;2\&quot; label=\&quot;Eligibility Criteria Not Met\&quot;&gt;&lt;/goa-dropdown-item&gt;\n          &lt;goa-dropdown-item value=\&quot;3\&quot; label=\&quot;Documentation Verification Failure\&quot;&gt;&lt;/goa-dropdown-item&gt;\n        &lt;/goa-dropdown&gt;\n      &lt;/goa-form-item&gt;\n\n      &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Message\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;goa-textarea version=\&quot;2\&quot; name=\&quot;message\&quot; rows=\&quot;5\&quot; width=\&quot;100%\&quot;&gt;&lt;/goa-textarea&gt;\n      &lt;/goa-form-item&gt;\n\n      &lt;goa-button version=\&quot;2\&quot; id=\&quot;confirm-btn\&quot; mt=\&quot;xl\&quot;&gt;Confirm adjournment&lt;/goa-button&gt;\n    &lt;/form&gt;\n  &lt;/goa-container&gt;\n&lt;/goa-grid&gt;\n\n&lt;script&gt;\n  document.getElementById(\&quot;confirm-btn\&quot;).addEventListener(\&quot;_click\&quot;, () =&gt; {\n    console.log(\&quot;Confirm clicked!\&quot;);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-review-and-action" class="example-title">Review and action</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabGrid minChildWidth=&quot;315px&quot;&gt;
+      &lt;GoabContainer accent=&quot;thin&quot; type=&quot;non-interactive&quot;&gt;
+        &lt;GoabText size=&quot;heading-m&quot; mt=&quot;none&quot; mb=&quot;m&quot;&gt;Appearance details&lt;/GoabText&gt;
+        &lt;GoabGrid minChildWidth=&quot;200px&quot; gap=&quot;m&quot;&gt;
+          &lt;GoabBlock direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+            &lt;GoabText size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Accused name&lt;/GoabText&gt;
+            &lt;GoabText size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Doe, John Scott&lt;/GoabText&gt;
+          &lt;/GoabBlock&gt;
+
+          &lt;GoabBlock direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+            &lt;GoabText size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Date of birth&lt;/GoabText&gt;
+            &lt;GoabText size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Mar 14, 2021&lt;/GoabText&gt;
+          &lt;/GoabBlock&gt;
+
+          &lt;GoabBlock direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+            &lt;GoabText size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Court location&lt;/GoabText&gt;
+            &lt;GoabText size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Calgary&lt;/GoabText&gt;
+          &lt;/GoabBlock&gt;
+
+          &lt;GoabBlock direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+            &lt;GoabText size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Upcoming appearance date(s)&lt;/GoabText&gt;
+            &lt;GoabText size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Sep 20, 2021&lt;/GoabText&gt;
+          &lt;/GoabBlock&gt;
+        &lt;/GoabGrid&gt;
+
+        &lt;GoabText size=&quot;heading-xs&quot; mt=&quot;l&quot; mb=&quot;s&quot;&gt;Docket number(s) &amp;amp; charges&lt;/GoabText&gt;
+        &lt;GoabContainer type=&quot;non-interactive&quot; padding=&quot;compact&quot;&gt;
+          &lt;GoabText size=&quot;heading-xs&quot; mt=&quot;none&quot; mb=&quot;xs&quot;&gt;1</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">    h3.review-h3 {
+      margin-bottom: var(--goa-space-m);
+    }
+    label.review-label {
+      font: var(--goa-typography-body-s);
+      color: var(--goa-color-text-secondary);
+    }
+    .review-content {
+      font: var(--goa-typography-body-m);
+    }
+    p.review-content {
+      margin-bottom: 0;
+    }
+    h5.review-h5 {
+      font: var(--goa-typography-body-m);
+      color: var(--goa-color-text-secondary);
+      margin-top: var(--goa-space-m);
+      margin-bottom: var(--goa-space-m);
+    }
+    h6.review-h6 {
+      font: var(--goa-typography-heading-s);
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  `,
+  ],
+})
+export class ReviewAndActionComponent {
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      case: [&quot;</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      case: [&quot;&quot;],
+      reason: [&quot;&quot;],
+      message: [&quot;&quot;],
+    });
+  }
+
+  onClick(): void {
+    console.log(&quot;Confirm clicked!&quot;);
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-grid minChildWidth=&quot;315px&quot;&gt;
+  &lt;goab-container accent=&quot;thin&quot; type=&quot;non-interactive&quot;&gt;
+    &lt;goab-text size=&quot;heading-m&quot; mt=&quot;none&quot; mb=&quot;m&quot;&gt;Appearance details&lt;/goab-text&gt;
+    &lt;goab-grid minChildWidth=&quot;200px&quot; gap=&quot;m&quot;&gt;
+      &lt;goab-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goab-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Accused name&lt;/goab-text&gt;
+        &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Doe, John Scott&lt;/goab-text&gt;
+      &lt;/goab-block&gt;
+
+      &lt;goab-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goab-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Date of birth&lt;/goab-text&gt;
+        &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Mar 14, 2021&lt;/goab-text&gt;
+      &lt;/goab-block&gt;
+
+      &lt;goab-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goab-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Court location&lt;/goab-text&gt;
+        &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Calgary&lt;/goab-text&gt;
+      &lt;/goab-block&gt;
+
+      &lt;goab-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goab-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Upcoming appearance date(s)&lt;/goab-text&gt;
+        &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Sep 20, 2021&lt;/goab-text&gt;
+      &lt;/goab-block&gt;
+    &lt;/goab-grid&gt;
+
+    &lt;goab-text size=&quot;heading-xs&quot; mt=&quot;l&quot; mb=&quot;s&quot;&gt;Docket number(s) &amp;amp; charges&lt;/goab-text&gt;
+    &lt;goab-container type=&quot;non-interactive&quot; padding=&quot;compact&quot;&gt;
+      &lt;goab-text size=&quot;heading-xs&quot; mt=&quot;none&quot; mb=&quot;xs&quot;&gt;1) 12345678&lt;/goab-text&gt;
+      &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 334(1) - Theft under $5000&lt;/goab-text&gt;
+      &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 268(1) - Aggravated assault&lt;/goab-text&gt;
+    &lt;/goab-container&gt;
+
+    &lt;goab-container type=&quot;non-interactive&quot; padding=&quot;compact&quot;&gt;
+      &lt;goab-text size=&quot;heading-xs&quot; mt=&quot;none&quot; mb=&quot;xs&quot;&gt;2) 12345678&lt;/goab-text&gt;
+      &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 334(1) - Theft under $5000&lt;/goab-text&gt;
+      &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 268(1) - Aggravated assault&lt;/goab-text&gt;
+    &lt;/goab-container&gt;
+  &lt;/goab-container&gt;
+
+  &lt;goab-container accent=&quot;thin&quot; width=&quot;content&quot;&gt;
+    &lt;form [formGroup]=&quot;form&quot;&gt;
+      &lt;goab-text size=&quot;heading-m&quot; mt=&quot;none&quot; mb=&quot;m&quot;&gt;Adjournment request&lt;/goab-text&gt;
+      &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
+        Keep track of the individuals who are placed in lodges and may qualify for the Lodge
+        Assistance Program subsidy.
+      &lt;/goab-text&gt;
+
+      &lt;goab-form-item label=&quot;Case history and new request&quot; mt=&quot;l&quot;&gt;
+        &lt;goab-radio-group name=&quot;case&quot; orientation=&quot;horizontal&quot; formControlName=&quot;case&quot;&gt;
+          &lt;goab-radio-item value=&quot;grant&quot; label=&quot;Grant&quot;&gt;&lt;/goab-radio-item&gt;
+          &lt;goab-radio-item value=&quot;deny&quot; label=&quot;Deny&quot;&gt;&lt;/goab-radio-item&gt;
+        &lt;/goab-radio-group&gt;
+      &lt;/goab-form-item&gt;
+
+      &lt;goab-form-item label=&quot;Reason to deny&quot; mt=&quot;l&quot;&gt;
+        &lt;goab-dropdown name=&quot;reason&quot; width=&quot;100%&quot; formControlName=&quot;reason&quot;&gt;
+          &lt;goab-dropdown-item value=&quot;1&quot; label=&quot;Incomplete Application&quot;&gt;&lt;/goab-dropdown-item&gt;
+          &lt;goab-dropdown-item value=&quot;2&quot; label=&quot;Eligibility Criteria Not Met&quot;&gt;&lt;/goab-dropdown-item&gt;
+          &lt;goab-dropdown-item value=&quot;3&quot; label=&quot;Documentation Verification Failure&quot;&gt;&lt;/goab-dropdown-item&gt;
+        &lt;/goab-dropdown&gt;
+      &lt;/goab-form-item&gt;
+
+      &lt;goab-form-item label=&quot;Message&quot; mt=&quot;l&quot;&gt;
+        &lt;goab-textarea name=&quot;message&quot; [rows]=&quot;5&quot; width=&quot;100%&quot; formControlName=&quot;message&quot;&gt;&lt;/goab-textarea&gt;
+      &lt;/goab-form-item&gt;
+
+      &lt;goab-button mt=&quot;xl&quot; (onClick)=&quot;onClick()&quot;&gt;Confirm adjournment&lt;/goab-button&gt;
+    &lt;/form&gt;
+  &lt;/goab-container&gt;
+&lt;/goab-grid&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">document.getElementById(&quot;confirm-btn&quot;).addEventListener(&quot;_click&quot;, () =&gt; {
+  console.log(&quot;Confirm clicked!&quot;);
+});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-grid minchildwidth=&quot;315px&quot;&gt;
+  &lt;goa-container accent=&quot;thin&quot; type=&quot;non-interactive&quot;&gt;
+    &lt;goa-text size=&quot;heading-m&quot; mt=&quot;none&quot; mb=&quot;m&quot;&gt;Appearance details&lt;/goa-text&gt;
+    &lt;goa-grid minchildwidth=&quot;200px&quot; gap=&quot;m&quot;&gt;
+      &lt;goa-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goa-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Accused name&lt;/goa-text&gt;
+        &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Doe, John Scott&lt;/goa-text&gt;
+      &lt;/goa-block&gt;
+
+      &lt;goa-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goa-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Date of birth&lt;/goa-text&gt;
+        &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Mar 14, 2021&lt;/goa-text&gt;
+      &lt;/goa-block&gt;
+
+      &lt;goa-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goa-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Court location&lt;/goa-text&gt;
+        &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Calgary&lt;/goa-text&gt;
+      &lt;/goa-block&gt;
+
+      &lt;goa-block direction=&quot;column&quot; gap=&quot;xs&quot;&gt;
+        &lt;goa-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Upcoming appearance date(s)&lt;/goa-text&gt;
+        &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Sep 20, 2021&lt;/goa-text&gt;
+      &lt;/goa-block&gt;
+    &lt;/goa-grid&gt;
+
+    &lt;goa-text size=&quot;heading-xs&quot; mt=&quot;l&quot; mb=&quot;s&quot;&gt;Docket number(s) &amp;amp; charges&lt;/goa-text&gt;
+    &lt;goa-container type=&quot;non-interactive&quot; padding=&quot;compact&quot;&gt;
+      &lt;goa-text size=&quot;heading-xs&quot; mt=&quot;none&quot; mb=&quot;xs&quot;&gt;1) 12345678&lt;/goa-text&gt;
+      &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 334(1) - Theft under $5000&lt;/goa-text&gt;
+      &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 268(1) - Aggravated assault&lt;/goa-text&gt;
+    &lt;/goa-container&gt;
+
+    &lt;goa-container type=&quot;non-interactive&quot; padding=&quot;compact&quot;&gt;
+      &lt;goa-text size=&quot;heading-xs&quot; mt=&quot;none&quot; mb=&quot;xs&quot;&gt;2) 12345678&lt;/goa-text&gt;
+      &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 334(1) - Theft under $5000&lt;/goa-text&gt;
+      &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;CC 268(1) - Aggravated assault&lt;/goa-text&gt;
+    &lt;/goa-container&gt;
+  &lt;/goa-container&gt;
+
+  &lt;goa-container accent=&quot;thin&quot; width=&quot;content&quot;&gt;
+    &lt;form&gt;
+      &lt;goa-text size=&quot;heading-m&quot; mt=&quot;none&quot; mb=&quot;m&quot;&gt;Adjournment request&lt;/goa-text&gt;
+      &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
+        Keep track of the individuals who are placed in lodges and may qualify for the Lodge
+        Assistance Program subsidy.
+      &lt;/goa-text&gt;
+
+      &lt;goa-form-item version=&quot;2&quot; label=&quot;Case history and new request&quot; mt=&quot;l&quot;&gt;
+        &lt;goa-radio-group version=&quot;2&quot; name=&quot;case&quot; orientation=&quot;horizontal&quot;&gt;
+          &lt;goa-radio-item value=&quot;grant&quot; label=&quot;Grant&quot;&gt;&lt;/goa-radio-item&gt;
+          &lt;goa-radio-item value=&quot;deny&quot; label=&quot;Deny&quot;&gt;&lt;/goa-radio-item&gt;
+        &lt;/goa-radio-group&gt;
+      &lt;/goa-form-item&gt;
+
+      &lt;goa-form-item version=&quot;2&quot; label=&quot;Reason to deny&quot; mt=&quot;l&quot;&gt;
+        &lt;goa-dropdown version=&quot;2&quot; name=&quot;reason&quot; width=&quot;100%&quot;&gt;
+          &lt;goa-dropdown-item value=&quot;1&quot; label=&quot;Incomplete Application&quot;&gt;&lt;/goa-dropdown-item&gt;
+          &lt;goa-dropdown-item value=&quot;2&quot; label=&quot;Eligibility Criteria Not Met&quot;&gt;&lt;/goa-dropdown-item&gt;
+          &lt;goa-dropdown-item value=&quot;3&quot; label=&quot;Documentation Verification Failure&quot;&gt;&lt;/goa-dropdown-item&gt;
+        &lt;/goa-dropdown&gt;
+      &lt;/goa-form-item&gt;
+
+      &lt;goa-form-item version=&quot;2&quot; label=&quot;Message&quot; mt=&quot;l&quot;&gt;
+        &lt;goa-textarea version=&quot;2&quot; name=&quot;message&quot; rows=&quot;5&quot; width=&quot;100%&quot;&gt;&lt;/goa-textarea&gt;
+      &lt;/goa-form-item&gt;
+
+      &lt;goa-button version=&quot;2&quot; id=&quot;confirm-btn&quot; mt=&quot;xl&quot;&gt;Confirm adjournment&lt;/goa-button&gt;
+    &lt;/form&gt;
+  &lt;/goa-container&gt;
+&lt;/goa-grid&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      .code-snippet {
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        border-radius: var(--goa-border-radius-m, 4px);
+        overflow: hidden;
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        font-size: var(--goa-font-size-2);
+      }
+
+      .framework-switcher .code-snippet {
+        margin-top: calc(-2rem + 12px);
+      }
+
+      .code-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: var(--goa-color-greyscale-200, #dcdcdc);
+      }
+
+      .code-block {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        position: relative;
+      }
+
+      .code-block-header {
+        position: absolute;
+        top: var(--goa-space-xs, 0.25rem);
+        right: var(--goa-space-s, 0.5rem);
+        z-index: 1; /* Above code content so copy button is clickable */
+      }
+
+      .code-block-title {
+        font-size: 0.75rem;
+        font-weight: var(--goa-font-weight-semi-bold);
+        color: var(--goa-color-text-secondary, #666);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .copy-button {
+        background: var(--goa-color-greyscale-white);
+        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+        color: var(--goa-color-interactive-default, #0070c4);
+        width: 28px;
+        height: 28px;
+        border-radius: var(--goa-border-radius-xs);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+      }
+
+      .copy-button:hover {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+        border-color: var(--goa-color-interactive-default, #0070c4);
+      }
+
+      .copy-button.copied {
+        background: var(--goa-color-status-success, #2e7d32);
+        border-color: var(--goa-color-status-success, #2e7d32);
+        color: var(--goa-color-greyscale-white);
+      }
+
+      .copy-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .code-container {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .code-container.expanded {
+        overflow: auto;
+      }
+
+      .code-block.has-gradient .code-container {
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+      }
+
+      pre {
+        margin: 0;
+        padding: var(--goa-space-m, 1rem);
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+        line-height: 1.6;
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      .expand-wrapper {
+        display: flex;
+        justify-content: center;
+        padding: var(--goa-space-s, 0.5rem) 0;
+        position: relative;
+        margin-top: -2rem;
+      }
+
+      .expand-button-bg {
+        background: var(--goa-color-greyscale-100, #f1f1f1);
+      }
+
+      .no-code {
+        padding: var(--goa-space-m, 1rem);
+        color: var(--goa-color-text-secondary, #666);
+        font-style: italic;
+      }
+
+      /* Highlight.js theme */
+      .hljs {
+        color: var(--goa-color-text-default, #333);
+        background: transparent;
+      }
+      .hljs-keyword { color: #0550ae; }
+      .hljs-string { color: #4b7c41; }
+      .hljs-number { color: #0550ae; }
+      .hljs-comment { color: #6e7781; }
+      .hljs-tag { color: #0550ae; }
+      .hljs-attr { color: #0550ae; }
+      .hljs-name { color: #2b7c5f; }
+      .hljs-built_in { color: #6639ba; }
+      .hljs-title { color: #6639ba; }
+      .hljs-params { color: #953800; }
+    </style></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>   </div>  </div> </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2oNBCl" component-url="/ui-components/pr-preview/pr-3835/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.example-preview .example-title&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Usage Guidelines Tab --> <goa-tab heading="Usage guidelines" data-astro-cid-ocziw4lk="true"> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d>  <div class="guidance-grid-wrapper" data-astro-cid-dxwj2tab><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-states" class="topic-heading" data-astro-cid-dxwj2tab>States</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="dont" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-block direction="column" gap="m"><goa-form-item label="Email address"><goa-input name="email" disabled></goa-input></goa-form-item><goa-button type="primary" disabled>Submit</goa-button></goa-block> </div> 
+<p>When you must disable a button or input:</p>
+<ul>
+<li>Provide nearby text explaining what needs to happen first</li>
+<li>Consider showing the element enabled with validation on submit instead</li>
+<li>Use aria-describedby to link the disabled element to explanatory text</li>
+</ul></div></div><div class="do-indicator" data-type="dont" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="dont" data-astro-cid-eyoetcf2><goa-icon version="2" type="close-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Don&#39;t</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Don&#39;t disable buttons or inputs without explaining why. Disabled controls can be confusing and users may not understand why they can&#39;t interact with an element.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-other" class="topic-heading" data-astro-cid-dxwj2tab>Other</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Email address" helptext="We'll use this to contact you"><goa-input name="email" type="email" width="100%"></goa-input></goa-form-item> </div> 
+<p>The form item automatically associates the label with the input for screen readers, ensuring your form is accessible.</p></div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use a form item wrapper on all inputs to add a label, helper text, error message, and more.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-sizing" class="topic-heading" data-astro-cid-dxwj2tab>Sizing</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-block direction="column" gap="m"><goa-form-item label="Postal code"><goa-input name="postalCode" width="88px"></goa-input></goa-form-item><goa-form-item label="Full name"><goa-input name="name" width="100%"></goa-input></goa-form-item></goa-block> </div> 
+<p><strong>Known input length:</strong> Use fixed-width inputs for content with a specific length, such as postal code (7 characters) or year (4 characters).</p>
+<p><strong>Unknown input length:</strong> If you don’t know how many characters the user will need (like their name), make your text input 100% of the container.</p></div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Size text inputs based on the expected content length to help users understand what information is needed.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section><section class="guidance-section" data-astro-cid-dxwj2tab><h3 id="topic-types" class="topic-heading" data-astro-cid-dxwj2tab>Types</h3><div class="guidance-grid" data-astro-cid-dxwj2tab><div class="do-dont-wrapper" data-dodont data-astro-cid-eyoetcf2><!-- Card wrapper --><div class="card-wrapper" data-type="do" data-astro-cid-eyoetcf2><div class="do-container" data-astro-cid-eyoetcf2><div class="guidance-content" data-astro-cid-dxwj2tab><div class="guidance-preview" data-guidance-preview data-astro-cid-eecgn6du> <goa-form-item label="Describe your issue"><goa-textarea name="description" rows="4" width="100%"></goa-textarea></goa-form-item> </div> </div></div><div class="do-indicator" data-type="do" data-astro-cid-eyoetcf2></div></div><!-- Type indicator (Do/Don't/Tip/Warning) --><div class="do-content" data-type="do" data-astro-cid-eyoetcf2><goa-icon version="2" type="checkmark-circle" size="medium" data-astro-cid-eyoetcf2="true"></goa-icon><div class="content-label" data-astro-cid-eyoetcf2>Do</div></div><!-- Description --><div class="description" data-astro-cid-eyoetcf2>Use a text area to input content longer than a single line, such as descriptions, comments, or feedback.</div><!-- Expandable details (populated by script) --><goa-details version="2" heading="More details" mt="s" class="guidance-details" data-astro-cid-eyoetcf2="true"><div class="details-content" data-astro-cid-eyoetcf2></div></goa-details></div></div></section></div>  <div class="mdx-content" data-astro-cid-ocziw4lk>  </div>  </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2tEVBu" component-url="/ui-components/pr-preview/pr-3835/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.guidance-section .topic-heading&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> <!-- Accessibility Tab --> <goa-tab heading="Accessibility" data-astro-cid-ocziw4lk="true"> <div class="tab-content-wrapper" data-astro-cid-qqhmm65d> <div class="tab-main-content" data-astro-cid-qqhmm65d>  <goa-callout version="2" type="information" emphasis="low" mb="l" maxwidth="80ch" data-astro-cid-ocziw4lk="true">
+All GoA Design System components are built to meet <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer" data-astro-cid-ocziw4lk>WCAG 2.2 AA</a> standards.
+          The following guidelines provide additional context for accessible implementation.
+</goa-callout> <p class="empty-message" data-astro-cid-dxwj2tab>No accessibility-specific guidelines have been documented for this component yet.</p>  </div> <aside class="tab-toc" data-astro-cid-qqhmm65d> <!-- Using client:only to avoid SSR hook issues --> <astro-island uid="Z2tEVBu" component-url="/ui-components/pr-preview/pr-3835/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;.guidance-section .topic-heading&quot;],&quot;data-astro-cid-qqhmm65d&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </aside> </div>  </goa-tab> </goa-tabs> <section class="related-components" data-astro-cid-ocziw4lk> <h2 class="related-heading" data-astro-cid-ocziw4lk>Related components</h2> <div class="related-cards" data-astro-cid-ocziw4lk> <a href="/components/form-item" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/images/component-thumbnails/form-item.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Form item</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Form item</span> <p class="related-card-description" data-astro-cid-ocziw4lk>Wraps an input control with a text label, requirement label, helper text, and error text.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="utilities" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a><a href="/components/input" class="related-card" data-astro-cid-ocziw4lk> <div class="related-card-thumbnail" aria-hidden="true" data-astro-cid-ocziw4lk> <img src="/images/component-thumbnails/text-input.svg" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" data-astro-cid-ocziw4lk> <span class="related-card-thumbnail-fallback" data-astro-cid-ocziw4lk>Input</span> </div> <div class="related-card-info" data-astro-cid-ocziw4lk> <span class="related-card-name" data-astro-cid-ocziw4lk>Input</span> <p class="related-card-description" data-astro-cid-ocziw4lk>A single-line field where users can input and edit text.</p> <div class="related-card-badge" data-astro-cid-ocziw4lk> <goa-badge version="2" type="default" emphasis="subtle" icon="false" content="inputs and actions" data-astro-cid-ocziw4lk="true"></goa-badge> </div> </div> </a> </div> </section> <goa-spacer version="2" vspacing="xl" data-astro-cid-ocziw4lk="true"></goa-spacer> <goa-divider version="2" data-astro-cid-ocziw4lk="true"></goa-divider> <goa-spacer version="2" vspacing="m" data-astro-cid-ocziw4lk="true"></goa-spacer> </div> <goa-link size="small" trailingicon="open" data-astro-cid-ocziw4lk="true"> <a href="https://v1.design.alberta.ca/components/text-area" target="_blank" rel="noopener noreferrer" data-astro-cid-ocziw4lk>View old component docs</a> </goa-link>  </div> </div> <div id="push-drawer-portal" data-astro-cid-asz6tkgw></div> </main> </div> </div>  </body></html>  
