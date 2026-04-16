@@ -289,18 +289,15 @@ describe("Temporary Notification Controller", () => {
     });
   });
 
-  it("should handle progress updates", async function() {
+  it("should handle progress updates", async () => {
     const Component = () => {
       return (
-        <GoabTemporaryNotificationCtrl
-          verticalPosition="top"
-          testId="temp-notification-ctrl"
-        />
+        <GoabTemporaryNotificationCtrl verticalPosition="top" />
       );
     };
 
     const result = render(<Component />);
-    const progressIndicator = result.getByTestId("progress");
+    const progressIndicator = result.getByTestId("some-notification");
 
     setTimeout(() => {
       const uuid = sendTemporaryNotification("some message", {
@@ -308,10 +305,12 @@ describe("Temporary Notification Controller", () => {
         type: "progress",
       });
       sendProgress(uuid, 10);
-    }, 0)
+    }, 0);
 
     await vi.waitFor(() => {
-      expect(progressIndicator.element().getAttribute("value")).toBe("10");
+      const el = progressIndicator.element().querySelector("goa-linear-progress");
+      expect(el).not.toBeNull();
+      expect(el?.getAttribute("progress")).toBe("10");
     });
   });
 });
