@@ -4029,115 +4029,203 @@ renderTable();</code></pre></div></div><div class="code-block "><div class="code
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="1KzAYm" prefix="r22" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Show status in a table&quot;],&quot;slug&quot;:[0,&quot;show-status-in-a-table&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { GoabBadge, GoabButton, GoabTable } from \&quot;@abgov/react-components\&quot;;\nimport type { GoabBadgeType } from \&quot;@abgov/ui-components-common\&quot;;\n\ninterface BadgeValue {\n  key: number;\n  type: GoabBadgeType;\n  content: string;\n}\n\nexport function ShowStatusInATable() {\n  const badgeValues: BadgeValue[] = [\n    { key: 1, type: \&quot;important\&quot;, content: \&quot;Pending\&quot; },\n    { key: 2, type: \&quot;emergency\&quot;, content: \&quot;Failed\&quot; },\n    { key: 3, type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n    { key: 4, type: \&quot;information\&quot;, content: \&quot;In progress\&quot; },\n    { key: 5, type: \&quot;midtone\&quot;, content: \&quot;Closed\&quot; },\n    { key: 6, type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n  ];\n\n  const handleClick = () =&gt; {\n    console.log(\&quot;clicked\&quot;);\n  };\n\n  return (\n    &lt;GoabTable width=\&quot;100%\&quot;&gt;\n      &lt;thead&gt;\n        &lt;tr&gt;\n          &lt;th&gt;Status&lt;/th&gt;\n          &lt;th&gt;Name&lt;/th&gt;\n          &lt;th className=\&quot;goa-table-number-header\&quot;&gt;File number&lt;/th&gt;\n          &lt;th style={{ width: \&quot;1%\&quot;, whiteSpace: \&quot;nowrap\&quot; }}&gt;&lt;/th&gt;\n        &lt;/tr&gt;\n      &lt;/thead&gt;\n      &lt;tbody&gt;\n        {badgeValues.map((badge) =&gt; (\n          &lt;tr key={badge.key}&gt;\n            &lt;td&gt;\n              &lt;GoabBadge type={badge.type} content={badge.content} icon={false} /&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;1234567890&lt;/td&gt;\n            &lt;td&gt;\n              &lt;GoabButton size=\&quot;compact\&quot; type=\&quot;tertiary\&quot; onClick={handleClick}&gt;\n                Assign\n              &lt;/GoabButton&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        ))}\n      &lt;/tbody&gt;\n    &lt;/GoabTable&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-table width=\&quot;100%\&quot;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Status&lt;/th&gt;\n      &lt;th&gt;Name&lt;/th&gt;\n      &lt;th class=\&quot;goa-table-number-header\&quot;&gt;File number&lt;/th&gt;\n      &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    @for (badge of badgeValues; track $index) {\n    &lt;tr&gt;\n      &lt;td&gt;\n        &lt;goab-badge [type]=\&quot;badge.type\&quot; [content]=\&quot;badge.content\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n      &lt;td&gt;Lorem ipsum dolor sit amet consectetur.&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;1234567890&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goab-button size=\&quot;compact\&quot; type=\&quot;tertiary\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Assign&lt;/goab-button&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    }\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport type { GoabBadgeType } from \&quot;@abgov/ui-components-common\&quot;;\n\ninterface BadgeValue {\n  type: GoabBadgeType;\n  content: string;\n}\n\n@Component({\n  selector: \&quot;app-show-status-in-a-table\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ShowStatusInATableComponent {\n  badgeValues: BadgeValue[] = [\n    { type: \&quot;important\&quot;, content: \&quot;Pending\&quot; },\n    { type: \&quot;emergency\&quot;, content: \&quot;Failed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n    { type: \&quot;information\&quot;, content: \&quot;In progress\&quot; },\n    { type: \&quot;midtone\&quot;, content: \&quot;Closed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n  ];\n\n  onClick(): void {\n    console.log(\&quot;clicked\&quot;);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; id=\&quot;status-table\&quot;&gt;\n  &lt;table width=\&quot;100%\&quot;&gt;\n    &lt;thead&gt;\n      &lt;tr&gt;\n        &lt;th&gt;Status&lt;/th&gt;\n        &lt;th&gt;Name&lt;/th&gt;\n        &lt;th class=\&quot;goa-table-number-header\&quot;&gt;File number&lt;/th&gt;\n        &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;&lt;/th&gt;\n      &lt;/tr&gt;\n    &lt;/thead&gt;\n    &lt;tbody id=\&quot;table-body\&quot;&gt;&lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n\n&lt;script&gt;\n  const badgeValues = [\n    { type: \&quot;important\&quot;, content: \&quot;Pending\&quot; },\n    { type: \&quot;emergency\&quot;, content: \&quot;Failed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n    { type: \&quot;information\&quot;, content: \&quot;In progress\&quot; },\n    { type: \&quot;midtone\&quot;, content: \&quot;Closed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n  ];\n\n  const tbody = document.getElementById(\&quot;table-body\&quot;);\n\n  badgeValues.forEach((badge) =&gt; {\n    const row = document.createElement(\&quot;tr\&quot;);\n    row.innerHTML = `\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;${badge.type}\&quot; content=\&quot;${badge.content}\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;1234567890&lt;/td&gt;\n      &lt;td&gt;&lt;goa-button version=\&quot;2\&quot; size=\&quot;compact\&quot; type=\&quot;tertiary\&quot;&gt;Assign&lt;/goa-button&gt;&lt;/td&gt;\n    `;\n    const button = row.querySelector(\&quot;goa-button\&quot;);\n    button.addEventListener(\&quot;_click\&quot;, () =&gt; console.log(\&quot;clicked\&quot;));\n    tbody.appendChild(row);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-show-status-in-a-table" class="example-title">Show status in a table</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">interface BadgeValue {
-  key: number;
-  type: GoabBadgeType;
-  content: string;
-}
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z16zPkQ" prefix="r22" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Task list page&quot;],&quot;slug&quot;:[0,&quot;task-list-page&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabCallout,\n  GoabTable,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function TaskListPage() {\n  return (\n    &lt;&gt;\n      &lt;GoabText as=\&quot;h1\&quot; mt=\&quot;none\&quot;&gt;Apply for a service&lt;/GoabText&gt;\n      &lt;GoabCallout\n        type=\&quot;important\&quot;\n        emphasis=\&quot;low\&quot;\n        size=\&quot;medium\&quot;\n        heading=\&quot;Application incomplete\&quot;\n        mb=\&quot;2xl\&quot;\n        mt=\&quot;xl\&quot;\n        maxWidth=\&quot;360px\&quot;\n      &gt;\n        You have completed 1 of 3 sections.\n      &lt;/GoabCallout&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot;&gt;1. Before you start&lt;/GoabText&gt;\n      &lt;GoabTable width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Read terms of use&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Completed\&quot; ariaLabel=\&quot;completed\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/GoabTable&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot;&gt;2. Prepare application&lt;/GoabText&gt;\n      &lt;GoabTable width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Your contact details&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Your family&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Verify your identity&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/GoabTable&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot; mb=\&quot;s\&quot;&gt;3. Schedule service&lt;/GoabText&gt;\n      &lt;GoabText size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;2xs\&quot;&gt;\n        You need to complete the previous section before you can start this task.\n      &lt;/GoabText&gt;\n      &lt;GoabTable width=\&quot;100%\&quot; mt=\&quot;l\&quot; mb=\&quot;3xl\&quot;&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Receive email confirmation&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Pay service fee&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/GoabTable&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-text as=\&quot;h1\&quot; mt=\&quot;none\&quot;&gt;Apply for a service&lt;/goab-text&gt;\n&lt;goab-callout type=\&quot;important\&quot; emphasis=\&quot;low\&quot; size=\&quot;medium\&quot; heading=\&quot;Application incomplete\&quot; mb=\&quot;2xl\&quot; mt=\&quot;xl\&quot; maxWidth=\&quot;360px\&quot;&gt;\n  You have completed 1 of 3 sections.\n&lt;/goab-callout&gt;\n\n&lt;goab-text as=\&quot;h2\&quot;&gt;1. Before you start&lt;/goab-text&gt;\n&lt;goab-table width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;success\&quot; content=\&quot;Completed\&quot; ariaLabel=\&quot;completed\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n\n&lt;goab-text as=\&quot;h2\&quot;&gt;2. Prepare application&lt;/goab-text&gt;\n&lt;goab-table width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n\n&lt;goab-text as=\&quot;h2\&quot; mb=\&quot;s\&quot;&gt;3. Schedule service&lt;/goab-text&gt;\n&lt;goab-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;2xs\&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goab-text&gt;\n&lt;goab-table width=\&quot;100%\&quot; mt=\&quot;l\&quot; mb=\&quot;3xl\&quot;&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Receive email confirmation&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Pay service fee&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-task-list-page\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class TaskListPageComponent {}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-text as=\&quot;h1\&quot; mt=\&quot;none\&quot;&gt;Apply for a service&lt;/goa-text&gt;\n&lt;goa-callout version=\&quot;2\&quot; type=\&quot;important\&quot; emphasis=\&quot;low\&quot; size=\&quot;medium\&quot; heading=\&quot;Application incomplete\&quot; mb=\&quot;2xl\&quot; mt=\&quot;xl\&quot; maxwidth=\&quot;360px\&quot;&gt;\n  You have completed 1 of 3 sections.\n&lt;/goa-callout&gt;\n\n&lt;goa-text as=\&quot;h2\&quot;&gt;1. Before you start&lt;/goa-text&gt;\n&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;table style=\&quot;width: 100%;\&quot;&gt;\n    &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Completed\&quot; aria-label=\&quot;completed\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n\n&lt;goa-text as=\&quot;h2\&quot;&gt;2. Prepare application&lt;/goa-text&gt;\n&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;table style=\&quot;width: 100%;\&quot;&gt;\n    &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;Not started\&quot; aria-label=\&quot;not started\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;Not started\&quot; aria-label=\&quot;not started\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;Not started\&quot; aria-label=\&quot;not started\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n\n&lt;goa-text as=\&quot;h2\&quot; mb=\&quot;s\&quot;&gt;3. Schedule service&lt;/goa-text&gt;\n&lt;goa-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;2xs\&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goa-text&gt;\n&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; mt=\&quot;l\&quot; mb=\&quot;3xl\&quot;&gt;\n  &lt;table style=\&quot;width: 100%;\&quot;&gt;\n    &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Receive email confirmation&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; aria-label=\&quot;cannot start yet\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Pay service fee&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; aria-label=\&quot;cannot start yet\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-task-list-page" class="example-title">Task list page</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabText as=&quot;h1&quot; mt=&quot;none&quot;&gt;Apply for a service&lt;/GoabText&gt;
+      &lt;GoabCallout
+        type=&quot;important&quot;
+        emphasis=&quot;low&quot;
+        size=&quot;medium&quot;
+        heading=&quot;Application incomplete&quot;
+        mb=&quot;2xl&quot;
+        mt=&quot;xl&quot;
+        maxWidth=&quot;360px&quot;
+      &gt;
+        You have completed 1 of 3 sections.
+      &lt;/GoabCallout&gt;
 
-const badgeValues: BadgeValue[] = [
-    { key: 1, type: &quot;important&quot;, content: &quot;Pending&quot; },
-    { key: 2, type: &quot;emergency&quot;, content: &quot;Failed&quot; },
-    { key: 3, type: &quot;success&quot;, content: &quot;Complete&quot; },
-    { key: 4, type: &quot;information&quot;, content: &quot;In progress&quot; },
-    { key: 5, type: &quot;midtone&quot;, content: &quot;Closed&quot; },
-    { key: 6, type: &quot;success&quot;, content: &quot;Complete&quot; },
-  ];
-
-  const handleClick = () =&gt; {
-    console.log(&quot;clicked&quot;);
-  };</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabTable width=&quot;100%&quot;&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;Status&lt;/th&gt;
-          &lt;th&gt;Name&lt;/th&gt;
-          &lt;th className=&quot;goa-table-number-header&quot;&gt;File number&lt;/th&gt;
-          &lt;th style={{ width: &quot;1%&quot;, whiteSpace: &quot;nowrap&quot; }}&gt;&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        {badgeValues.map((badge) =&gt; (
-          &lt;tr key={badge.key}&gt;
+      &lt;GoabText as=&quot;h2&quot;&gt;1. Before you start&lt;/GoabText&gt;
+      &lt;GoabTable width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
             &lt;td&gt;
-              &lt;GoabBadge type={badge.type} content={badge.content} icon={false} /&gt;
+              &lt;a href=&quot;#&quot;&gt;Read terms of use&lt;/a&gt;
             &lt;/td&gt;
-            &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;1234567890&lt;/td&gt;
-            &lt;td&gt;
-              &lt;GoabButton size=&quot;compact&quot; type=&quot;tertiary&quot; onClick={handleClick}&gt;
-                Assign
-              &lt;/GoabButton&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;
+              &lt;GoabBadge type=&quot;success&quot; content=&quot;Completed&quot; ariaLabel=&quot;completed&quot; icon={false} /&gt;
             &lt;/td&gt;
           &lt;/tr&gt;
-        ))}
-      &lt;/tbody&gt;
-    &lt;/GoabTable&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">badgeValues: BadgeValue[] = [
-    { type: &quot;important&quot;, content: &quot;Pending&quot; },
-    { type: &quot;emergency&quot;, content: &quot;Failed&quot; },
-    { type: &quot;success&quot;, content: &quot;Complete&quot; },
-    { type: &quot;information&quot;, content: &quot;In progress&quot; },
-    { type: &quot;midtone&quot;, content: &quot;Closed&quot; },
-    { type: &quot;success&quot;, content: &quot;Complete&quot; },
-  ];
+        &lt;/tbody&gt;
+      &lt;/GoabTable&gt;
 
-  onClick(): void {
-    console.log(&quot;clicked&quot;);
-  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-table width=&quot;100%&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Status&lt;/th&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th class=&quot;goa-table-number-header&quot;&gt;File number&lt;/th&gt;
-      &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
+      &lt;GoabText as=&quot;h2&quot;&gt;2. Prepare application&lt;/GoabText&gt;
+      &lt;GoabTable width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;
+              &lt;a href=&quot;#&quot;&gt;Your contact details&lt;/a&gt;
+            &lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;
+              &lt;GoabBadge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; icon={false} /&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;
+              &lt;a href=&quot;#&quot;&gt;Your family&lt;/a&gt;
+            &lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;
+              &lt;GoabBadge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; icon={false} /&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;
+              &lt;a href=&quot;#&quot;&gt;Verify your identity&lt;/a&gt;
+            &lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;
+              &lt;GoabBadge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; icon={false} /&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/GoabTable&gt;
+
+      &lt;GoabText as=&quot;h2&quot; mb=&quot;s&quot;&gt;3. Schedule service&lt;/GoabText&gt;
+      &lt;GoabText size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;2xs&quot;&gt;
+        You need to complete the previous section before you can start this task.
+      &lt;/GoabText&gt;
+      &lt;GoabTable width=&quot;100%&quot; mt=&quot;l&quot; mb=&quot;3xl&quot;&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;Receive email confirmation&lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;
+              &lt;GoabBadge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; icon={false} /&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+            &lt;td&gt;Pay service fee&lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;
+              &lt;GoabBadge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; icon={false} /&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/GoabTable&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-text as=&quot;h1&quot; mt=&quot;none&quot;&gt;Apply for a service&lt;/goab-text&gt;
+&lt;goab-callout type=&quot;important&quot; emphasis=&quot;low&quot; size=&quot;medium&quot; heading=&quot;Application incomplete&quot; mb=&quot;2xl&quot; mt=&quot;xl&quot; maxWidth=&quot;360px&quot;&gt;
+  You have completed 1 of 3 sections.
+&lt;/goab-callout&gt;
+
+&lt;goab-text as=&quot;h2&quot;&gt;1. Before you start&lt;/goab-text&gt;
+&lt;goab-table width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
   &lt;tbody&gt;
-    @for (badge of badgeValues; track $index) {
     &lt;tr&gt;
-      &lt;td&gt;
-        &lt;goab-badge [type]=&quot;badge.type&quot; [content]=&quot;badge.content&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-      &lt;td&gt;Lorem ipsum dolor sit amet consectetur.&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;1234567890&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goab-button size=&quot;compact&quot; type=&quot;tertiary&quot; (onClick)=&quot;onClick()&quot;&gt;Assign&lt;/goab-button&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goab-badge type=&quot;success&quot; content=&quot;Completed&quot; ariaLabel=&quot;completed&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
       &lt;/td&gt;
     &lt;/tr&gt;
-    }
   &lt;/tbody&gt;
-&lt;/goab-table&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const badgeValues = [
-  { type: &quot;important&quot;, content: &quot;Pending&quot; },
-  { type: &quot;emergency&quot;, content: &quot;Failed&quot; },
-  { type: &quot;success&quot;, content: &quot;Complete&quot; },
-  { type: &quot;information&quot;, content: &quot;In progress&quot; },
-  { type: &quot;midtone&quot;, content: &quot;Closed&quot; },
-  { type: &quot;success&quot;, content: &quot;Complete&quot; },
-];
+&lt;/goab-table&gt;
 
-const tbody = document.getElementById(&quot;table-body&quot;);
+&lt;goab-text as=&quot;h2&quot;&gt;2. Prepare application&lt;/goab-text&gt;
+&lt;goab-table width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goab-badge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goab-badge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goab-badge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/goab-table&gt;
 
-badgeValues.forEach((badge) =&gt; {
-  const row = document.createElement(&quot;tr&quot;);
-  row.innerHTML = `
-    &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;${badge.type}&quot; content=&quot;${badge.content}&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-    &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;
-    &lt;td class=&quot;goa-table-number-column&quot;&gt;1234567890&lt;/td&gt;
-    &lt;td&gt;&lt;goa-button version=&quot;2&quot; size=&quot;compact&quot; type=&quot;tertiary&quot;&gt;Assign&lt;/goa-button&gt;&lt;/td&gt;
-  `;
-  const button = row.querySelector(&quot;goa-button&quot;);
-  button.addEventListener(&quot;_click&quot;, () =&gt; console.log(&quot;clicked&quot;));
-  tbody.appendChild(row);
-});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; id=&quot;status-table&quot;&gt;
-  &lt;table width=&quot;100%&quot;&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Status&lt;/th&gt;
-        &lt;th&gt;Name&lt;/th&gt;
-        &lt;th class=&quot;goa-table-number-header&quot;&gt;File number&lt;/th&gt;
-        &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody id=&quot;table-body&quot;&gt;&lt;/tbody&gt;
+&lt;goab-text as=&quot;h2&quot; mb=&quot;s&quot;&gt;3. Schedule service&lt;/goab-text&gt;
+&lt;goab-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;2xs&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goab-text&gt;
+&lt;goab-table width=&quot;100%&quot; mt=&quot;l&quot; mb=&quot;3xl&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Receive email confirmation&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goab-badge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pay service fee&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goab-badge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/goab-table&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-text as=&quot;h1&quot; mt=&quot;none&quot;&gt;Apply for a service&lt;/goa-text&gt;
+&lt;goa-callout version=&quot;2&quot; type=&quot;important&quot; emphasis=&quot;low&quot; size=&quot;medium&quot; heading=&quot;Application incomplete&quot; mb=&quot;2xl&quot; mt=&quot;xl&quot; maxwidth=&quot;360px&quot;&gt;
+  You have completed 1 of 3 sections.
+&lt;/goa-callout&gt;
+
+&lt;goa-text as=&quot;h2&quot;&gt;1. Before you start&lt;/goa-text&gt;
+&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
+  &lt;table style=&quot;width: 100%;&quot;&gt;
+    &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Completed&quot; aria-label=&quot;completed&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/goa-table&gt;
+
+&lt;goa-text as=&quot;h2&quot;&gt;2. Prepare application&lt;/goa-text&gt;
+&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
+  &lt;table style=&quot;width: 100%;&quot;&gt;
+    &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;Not started&quot; aria-label=&quot;not started&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;Not started&quot; aria-label=&quot;not started&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;Not started&quot; aria-label=&quot;not started&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/goa-table&gt;
+
+&lt;goa-text as=&quot;h2&quot; mb=&quot;s&quot;&gt;3. Schedule service&lt;/goa-text&gt;
+&lt;goa-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;2xs&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goa-text&gt;
+&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; mt=&quot;l&quot; mb=&quot;3xl&quot;&gt;
+  &lt;table style=&quot;width: 100%;&quot;&gt;
+    &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Receive email confirmation&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goa-badge version=&quot;2&quot; type=&quot;light&quot; content=&quot;Cannot start yet&quot; aria-label=&quot;cannot start yet&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pay service fee&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;
+        &lt;goa-badge version=&quot;2&quot; type=&quot;light&quot; content=&quot;Cannot start yet&quot; aria-label=&quot;cannot start yet&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
   &lt;/table&gt;
 &lt;/goa-table&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
       .code-snippet {
@@ -4725,205 +4813,7 @@ renderTable();</code></pre></div></div><div class="code-block "><div class="code
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z16zPkQ" prefix="r24" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Task list page&quot;],&quot;slug&quot;:[0,&quot;task-list-page&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabCallout,\n  GoabTable,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function TaskListPage() {\n  return (\n    &lt;&gt;\n      &lt;GoabText as=\&quot;h1\&quot; mt=\&quot;none\&quot;&gt;Apply for a service&lt;/GoabText&gt;\n      &lt;GoabCallout\n        type=\&quot;important\&quot;\n        emphasis=\&quot;low\&quot;\n        size=\&quot;medium\&quot;\n        heading=\&quot;Application incomplete\&quot;\n        mb=\&quot;2xl\&quot;\n        mt=\&quot;xl\&quot;\n        maxWidth=\&quot;360px\&quot;\n      &gt;\n        You have completed 1 of 3 sections.\n      &lt;/GoabCallout&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot;&gt;1. Before you start&lt;/GoabText&gt;\n      &lt;GoabTable width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Read terms of use&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Completed\&quot; ariaLabel=\&quot;completed\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/GoabTable&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot;&gt;2. Prepare application&lt;/GoabText&gt;\n      &lt;GoabTable width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Your contact details&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Your family&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;\n              &lt;a href=\&quot;#\&quot;&gt;Verify your identity&lt;/a&gt;\n            &lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/GoabTable&gt;\n\n      &lt;GoabText as=\&quot;h2\&quot; mb=\&quot;s\&quot;&gt;3. Schedule service&lt;/GoabText&gt;\n      &lt;GoabText size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;2xs\&quot;&gt;\n        You need to complete the previous section before you can start this task.\n      &lt;/GoabText&gt;\n      &lt;GoabTable width=\&quot;100%\&quot; mt=\&quot;l\&quot; mb=\&quot;3xl\&quot;&gt;\n        &lt;tbody&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Receive email confirmation&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n          &lt;tr&gt;\n            &lt;td&gt;Pay service fee&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;\n              &lt;GoabBadge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; icon={false} /&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        &lt;/tbody&gt;\n      &lt;/GoabTable&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-text as=\&quot;h1\&quot; mt=\&quot;none\&quot;&gt;Apply for a service&lt;/goab-text&gt;\n&lt;goab-callout type=\&quot;important\&quot; emphasis=\&quot;low\&quot; size=\&quot;medium\&quot; heading=\&quot;Application incomplete\&quot; mb=\&quot;2xl\&quot; mt=\&quot;xl\&quot; maxWidth=\&quot;360px\&quot;&gt;\n  You have completed 1 of 3 sections.\n&lt;/goab-callout&gt;\n\n&lt;goab-text as=\&quot;h2\&quot;&gt;1. Before you start&lt;/goab-text&gt;\n&lt;goab-table width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;success\&quot; content=\&quot;Completed\&quot; ariaLabel=\&quot;completed\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n\n&lt;goab-text as=\&quot;h2\&quot;&gt;2. Prepare application&lt;/goab-text&gt;\n&lt;goab-table width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;information\&quot; content=\&quot;Not started\&quot; ariaLabel=\&quot;not started\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n\n&lt;goab-text as=\&quot;h2\&quot; mb=\&quot;s\&quot;&gt;3. Schedule service&lt;/goab-text&gt;\n&lt;goab-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;2xs\&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goab-text&gt;\n&lt;goab-table width=\&quot;100%\&quot; mt=\&quot;l\&quot; mb=\&quot;3xl\&quot;&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Receive email confirmation&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Pay service fee&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goab-badge type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; ariaLabel=\&quot;cannot start yet\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-task-list-page\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class TaskListPageComponent {}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-text as=\&quot;h1\&quot; mt=\&quot;none\&quot;&gt;Apply for a service&lt;/goa-text&gt;\n&lt;goa-callout version=\&quot;2\&quot; type=\&quot;important\&quot; emphasis=\&quot;low\&quot; size=\&quot;medium\&quot; heading=\&quot;Application incomplete\&quot; mb=\&quot;2xl\&quot; mt=\&quot;xl\&quot; maxwidth=\&quot;360px\&quot;&gt;\n  You have completed 1 of 3 sections.\n&lt;/goa-callout&gt;\n\n&lt;goa-text as=\&quot;h2\&quot;&gt;1. Before you start&lt;/goa-text&gt;\n&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;table style=\&quot;width: 100%;\&quot;&gt;\n    &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Completed\&quot; aria-label=\&quot;completed\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n\n&lt;goa-text as=\&quot;h2\&quot;&gt;2. Prepare application&lt;/goa-text&gt;\n&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; mb=\&quot;2xl\&quot; mt=\&quot;l\&quot;&gt;\n  &lt;table style=\&quot;width: 100%;\&quot;&gt;\n    &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;Not started\&quot; aria-label=\&quot;not started\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;Not started\&quot; aria-label=\&quot;not started\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;a href=\&quot;#\&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;Not started\&quot; aria-label=\&quot;not started\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n\n&lt;goa-text as=\&quot;h2\&quot; mb=\&quot;s\&quot;&gt;3. Schedule service&lt;/goa-text&gt;\n&lt;goa-text size=\&quot;body-s\&quot; color=\&quot;secondary\&quot; mt=\&quot;2xs\&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goa-text&gt;\n&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; mt=\&quot;l\&quot; mb=\&quot;3xl\&quot;&gt;\n  &lt;table style=\&quot;width: 100%;\&quot;&gt;\n    &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Receive email confirmation&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; aria-label=\&quot;cannot start yet\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;Pay service fee&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;\n        &lt;goa-badge version=\&quot;2\&quot; type=\&quot;light\&quot; content=\&quot;Cannot start yet\&quot; aria-label=\&quot;cannot start yet\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-task-list-page" class="example-title">Task list page</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabText as=&quot;h1&quot; mt=&quot;none&quot;&gt;Apply for a service&lt;/GoabText&gt;
-      &lt;GoabCallout
-        type=&quot;important&quot;
-        emphasis=&quot;low&quot;
-        size=&quot;medium&quot;
-        heading=&quot;Application incomplete&quot;
-        mb=&quot;2xl&quot;
-        mt=&quot;xl&quot;
-        maxWidth=&quot;360px&quot;
-      &gt;
-        You have completed 1 of 3 sections.
-      &lt;/GoabCallout&gt;
-
-      &lt;GoabText as=&quot;h2&quot;&gt;1. Before you start&lt;/GoabText&gt;
-      &lt;GoabTable width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
-        &lt;tbody&gt;
-          &lt;tr&gt;
-            &lt;td&gt;
-              &lt;a href=&quot;#&quot;&gt;Read terms of use&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;
-              &lt;GoabBadge type=&quot;success&quot; content=&quot;Completed&quot; ariaLabel=&quot;completed&quot; icon={false} /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-        &lt;/tbody&gt;
-      &lt;/GoabTable&gt;
-
-      &lt;GoabText as=&quot;h2&quot;&gt;2. Prepare application&lt;/GoabText&gt;
-      &lt;GoabTable width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
-        &lt;tbody&gt;
-          &lt;tr&gt;
-            &lt;td&gt;
-              &lt;a href=&quot;#&quot;&gt;Your contact details&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;
-              &lt;GoabBadge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; icon={false} /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-          &lt;tr&gt;
-            &lt;td&gt;
-              &lt;a href=&quot;#&quot;&gt;Your family&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;
-              &lt;GoabBadge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; icon={false} /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-          &lt;tr&gt;
-            &lt;td&gt;
-              &lt;a href=&quot;#&quot;&gt;Verify your identity&lt;/a&gt;
-            &lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;
-              &lt;GoabBadge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; icon={false} /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-        &lt;/tbody&gt;
-      &lt;/GoabTable&gt;
-
-      &lt;GoabText as=&quot;h2&quot; mb=&quot;s&quot;&gt;3. Schedule service&lt;/GoabText&gt;
-      &lt;GoabText size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;2xs&quot;&gt;
-        You need to complete the previous section before you can start this task.
-      &lt;/GoabText&gt;
-      &lt;GoabTable width=&quot;100%&quot; mt=&quot;l&quot; mb=&quot;3xl&quot;&gt;
-        &lt;tbody&gt;
-          &lt;tr&gt;
-            &lt;td&gt;Receive email confirmation&lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;
-              &lt;GoabBadge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; icon={false} /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-          &lt;tr&gt;
-            &lt;td&gt;Pay service fee&lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;
-              &lt;GoabBadge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; icon={false} /&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-        &lt;/tbody&gt;
-      &lt;/GoabTable&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-text as=&quot;h1&quot; mt=&quot;none&quot;&gt;Apply for a service&lt;/goab-text&gt;
-&lt;goab-callout type=&quot;important&quot; emphasis=&quot;low&quot; size=&quot;medium&quot; heading=&quot;Application incomplete&quot; mb=&quot;2xl&quot; mt=&quot;xl&quot; maxWidth=&quot;360px&quot;&gt;
-  You have completed 1 of 3 sections.
-&lt;/goab-callout&gt;
-
-&lt;goab-text as=&quot;h2&quot;&gt;1. Before you start&lt;/goab-text&gt;
-&lt;goab-table width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goab-badge type=&quot;success&quot; content=&quot;Completed&quot; ariaLabel=&quot;completed&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/goab-table&gt;
-
-&lt;goab-text as=&quot;h2&quot;&gt;2. Prepare application&lt;/goab-text&gt;
-&lt;goab-table width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goab-badge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goab-badge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goab-badge type=&quot;information&quot; content=&quot;Not started&quot; ariaLabel=&quot;not started&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/goab-table&gt;
-
-&lt;goab-text as=&quot;h2&quot; mb=&quot;s&quot;&gt;3. Schedule service&lt;/goab-text&gt;
-&lt;goab-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;2xs&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goab-text&gt;
-&lt;goab-table width=&quot;100%&quot; mt=&quot;l&quot; mb=&quot;3xl&quot;&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Receive email confirmation&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goab-badge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Pay service fee&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goab-badge type=&quot;light&quot; content=&quot;Cannot start yet&quot; ariaLabel=&quot;cannot start yet&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/goab-table&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-text as=&quot;h1&quot; mt=&quot;none&quot;&gt;Apply for a service&lt;/goa-text&gt;
-&lt;goa-callout version=&quot;2&quot; type=&quot;important&quot; emphasis=&quot;low&quot; size=&quot;medium&quot; heading=&quot;Application incomplete&quot; mb=&quot;2xl&quot; mt=&quot;xl&quot; maxwidth=&quot;360px&quot;&gt;
-  You have completed 1 of 3 sections.
-&lt;/goa-callout&gt;
-
-&lt;goa-text as=&quot;h2&quot;&gt;1. Before you start&lt;/goa-text&gt;
-&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
-  &lt;table style=&quot;width: 100%;&quot;&gt;
-    &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Read terms of use&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Completed&quot; aria-label=&quot;completed&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-&lt;/goa-table&gt;
-
-&lt;goa-text as=&quot;h2&quot;&gt;2. Prepare application&lt;/goa-text&gt;
-&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; mb=&quot;2xl&quot; mt=&quot;l&quot;&gt;
-  &lt;table style=&quot;width: 100%;&quot;&gt;
-    &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your contact details&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;Not started&quot; aria-label=&quot;not started&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Your family&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;Not started&quot; aria-label=&quot;not started&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;#&quot;&gt;Verify your identity&lt;/a&gt;&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;Not started&quot; aria-label=&quot;not started&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-&lt;/goa-table&gt;
-
-&lt;goa-text as=&quot;h2&quot; mb=&quot;s&quot;&gt;3. Schedule service&lt;/goa-text&gt;
-&lt;goa-text size=&quot;body-s&quot; color=&quot;secondary&quot; mt=&quot;2xs&quot;&gt;You need to complete the previous section before you can start this task.&lt;/goa-text&gt;
-&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; mt=&quot;l&quot; mb=&quot;3xl&quot;&gt;
-  &lt;table style=&quot;width: 100%;&quot;&gt;
-    &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Receive email confirmation&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goa-badge version=&quot;2&quot; type=&quot;light&quot; content=&quot;Cannot start yet&quot; aria-label=&quot;cannot start yet&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Pay service fee&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;
-        &lt;goa-badge version=&quot;2&quot; type=&quot;light&quot; content=&quot;Cannot start yet&quot; aria-label=&quot;cannot start yet&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-&lt;/goa-table&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="ZEYtNp" prefix="r24" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Workspace&quot;],&quot;slug&quot;:[0,&quot;workspace&quot;],&quot;code&quot;:[0,{}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-workspace" class="example-title">Workspace</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"><span class="preview-placeholder">Preview not available</span></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="code-snippet"><div class="code-blocks"><div class="no-code">No React code available</div></div></div><style>
       .code-snippet {
         border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
         border-radius: var(--goa-border-radius-m, 4px);
@@ -5138,7 +5028,117 @@ renderTable();</code></pre></div></div><div class="code-block "><div class="code
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="ZEYtNp" prefix="r25" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Workspace&quot;],&quot;slug&quot;:[0,&quot;workspace&quot;],&quot;code&quot;:[0,{}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-workspace" class="example-title">Workspace</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"><span class="preview-placeholder">Preview not available</span></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="code-snippet"><div class="code-blocks"><div class="no-code">No React code available</div></div></div><style>
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="1KzAYm" prefix="r25" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Show status in a table&quot;],&quot;slug&quot;:[0,&quot;show-status-in-a-table&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { GoabBadge, GoabButton, GoabTable } from \&quot;@abgov/react-components\&quot;;\nimport type { GoabBadgeType } from \&quot;@abgov/ui-components-common\&quot;;\n\ninterface BadgeValue {\n  key: number;\n  type: GoabBadgeType;\n  content: string;\n}\n\nexport function ShowStatusInATable() {\n  const badgeValues: BadgeValue[] = [\n    { key: 1, type: \&quot;important\&quot;, content: \&quot;Pending\&quot; },\n    { key: 2, type: \&quot;emergency\&quot;, content: \&quot;Failed\&quot; },\n    { key: 3, type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n    { key: 4, type: \&quot;information\&quot;, content: \&quot;In progress\&quot; },\n    { key: 5, type: \&quot;midtone\&quot;, content: \&quot;Closed\&quot; },\n    { key: 6, type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n  ];\n\n  const handleClick = () =&gt; {\n    console.log(\&quot;clicked\&quot;);\n  };\n\n  return (\n    &lt;GoabTable width=\&quot;100%\&quot;&gt;\n      &lt;thead&gt;\n        &lt;tr&gt;\n          &lt;th&gt;Status&lt;/th&gt;\n          &lt;th&gt;Name&lt;/th&gt;\n          &lt;th className=\&quot;goa-table-number-header\&quot;&gt;File number&lt;/th&gt;\n          &lt;th style={{ width: \&quot;1%\&quot;, whiteSpace: \&quot;nowrap\&quot; }}&gt;&lt;/th&gt;\n        &lt;/tr&gt;\n      &lt;/thead&gt;\n      &lt;tbody&gt;\n        {badgeValues.map((badge) =&gt; (\n          &lt;tr key={badge.key}&gt;\n            &lt;td&gt;\n              &lt;GoabBadge type={badge.type} content={badge.content} icon={false} /&gt;\n            &lt;/td&gt;\n            &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;1234567890&lt;/td&gt;\n            &lt;td&gt;\n              &lt;GoabButton size=\&quot;compact\&quot; type=\&quot;tertiary\&quot; onClick={handleClick}&gt;\n                Assign\n              &lt;/GoabButton&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        ))}\n      &lt;/tbody&gt;\n    &lt;/GoabTable&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-table width=\&quot;100%\&quot;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Status&lt;/th&gt;\n      &lt;th&gt;Name&lt;/th&gt;\n      &lt;th class=\&quot;goa-table-number-header\&quot;&gt;File number&lt;/th&gt;\n      &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    @for (badge of badgeValues; track $index) {\n    &lt;tr&gt;\n      &lt;td&gt;\n        &lt;goab-badge [type]=\&quot;badge.type\&quot; [content]=\&quot;badge.content\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n      &lt;td&gt;Lorem ipsum dolor sit amet consectetur.&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;1234567890&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goab-button size=\&quot;compact\&quot; type=\&quot;tertiary\&quot; (onClick)=\&quot;onClick()\&quot;&gt;Assign&lt;/goab-button&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    }\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport type { GoabBadgeType } from \&quot;@abgov/ui-components-common\&quot;;\n\ninterface BadgeValue {\n  type: GoabBadgeType;\n  content: string;\n}\n\n@Component({\n  selector: \&quot;app-show-status-in-a-table\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ShowStatusInATableComponent {\n  badgeValues: BadgeValue[] = [\n    { type: \&quot;important\&quot;, content: \&quot;Pending\&quot; },\n    { type: \&quot;emergency\&quot;, content: \&quot;Failed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n    { type: \&quot;information\&quot;, content: \&quot;In progress\&quot; },\n    { type: \&quot;midtone\&quot;, content: \&quot;Closed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n  ];\n\n  onClick(): void {\n    console.log(\&quot;clicked\&quot;);\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot; id=\&quot;status-table\&quot;&gt;\n  &lt;table width=\&quot;100%\&quot;&gt;\n    &lt;thead&gt;\n      &lt;tr&gt;\n        &lt;th&gt;Status&lt;/th&gt;\n        &lt;th&gt;Name&lt;/th&gt;\n        &lt;th class=\&quot;goa-table-number-header\&quot;&gt;File number&lt;/th&gt;\n        &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;&lt;/th&gt;\n      &lt;/tr&gt;\n    &lt;/thead&gt;\n    &lt;tbody id=\&quot;table-body\&quot;&gt;&lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n\n&lt;script&gt;\n  const badgeValues = [\n    { type: \&quot;important\&quot;, content: \&quot;Pending\&quot; },\n    { type: \&quot;emergency\&quot;, content: \&quot;Failed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n    { type: \&quot;information\&quot;, content: \&quot;In progress\&quot; },\n    { type: \&quot;midtone\&quot;, content: \&quot;Closed\&quot; },\n    { type: \&quot;success\&quot;, content: \&quot;Complete\&quot; },\n  ];\n\n  const tbody = document.getElementById(\&quot;table-body\&quot;);\n\n  badgeValues.forEach((badge) =&gt; {\n    const row = document.createElement(\&quot;tr\&quot;);\n    row.innerHTML = `\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;${badge.type}\&quot; content=\&quot;${badge.content}\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;1234567890&lt;/td&gt;\n      &lt;td&gt;&lt;goa-button version=\&quot;2\&quot; size=\&quot;compact\&quot; type=\&quot;tertiary\&quot;&gt;Assign&lt;/goa-button&gt;&lt;/td&gt;\n    `;\n    const button = row.querySelector(\&quot;goa-button\&quot;);\n    button.addEventListener(\&quot;_click\&quot;, () =&gt; console.log(\&quot;clicked\&quot;));\n    tbody.appendChild(row);\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-show-status-in-a-table" class="example-title">Show status in a table</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">interface BadgeValue {
+  key: number;
+  type: GoabBadgeType;
+  content: string;
+}
+
+const badgeValues: BadgeValue[] = [
+    { key: 1, type: &quot;important&quot;, content: &quot;Pending&quot; },
+    { key: 2, type: &quot;emergency&quot;, content: &quot;Failed&quot; },
+    { key: 3, type: &quot;success&quot;, content: &quot;Complete&quot; },
+    { key: 4, type: &quot;information&quot;, content: &quot;In progress&quot; },
+    { key: 5, type: &quot;midtone&quot;, content: &quot;Closed&quot; },
+    { key: 6, type: &quot;success&quot;, content: &quot;Complete&quot; },
+  ];
+
+  const handleClick = () =&gt; {
+    console.log(&quot;clicked&quot;);
+  };</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabTable width=&quot;100%&quot;&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Status&lt;/th&gt;
+          &lt;th&gt;Name&lt;/th&gt;
+          &lt;th className=&quot;goa-table-number-header&quot;&gt;File number&lt;/th&gt;
+          &lt;th style={{ width: &quot;1%&quot;, whiteSpace: &quot;nowrap&quot; }}&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {badgeValues.map((badge) =&gt; (
+          &lt;tr key={badge.key}&gt;
+            &lt;td&gt;
+              &lt;GoabBadge type={badge.type} content={badge.content} icon={false} /&gt;
+            &lt;/td&gt;
+            &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;1234567890&lt;/td&gt;
+            &lt;td&gt;
+              &lt;GoabButton size=&quot;compact&quot; type=&quot;tertiary&quot; onClick={handleClick}&gt;
+                Assign
+              &lt;/GoabButton&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/GoabTable&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">badgeValues: BadgeValue[] = [
+    { type: &quot;important&quot;, content: &quot;Pending&quot; },
+    { type: &quot;emergency&quot;, content: &quot;Failed&quot; },
+    { type: &quot;success&quot;, content: &quot;Complete&quot; },
+    { type: &quot;information&quot;, content: &quot;In progress&quot; },
+    { type: &quot;midtone&quot;, content: &quot;Closed&quot; },
+    { type: &quot;success&quot;, content: &quot;Complete&quot; },
+  ];
+
+  onClick(): void {
+    console.log(&quot;clicked&quot;);
+  }</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-table width=&quot;100%&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Status&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th class=&quot;goa-table-number-header&quot;&gt;File number&lt;/th&gt;
+      &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    @for (badge of badgeValues; track $index) {
+    &lt;tr&gt;
+      &lt;td&gt;
+        &lt;goab-badge [type]=&quot;badge.type&quot; [content]=&quot;badge.content&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+      &lt;td&gt;Lorem ipsum dolor sit amet consectetur.&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;1234567890&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goab-button size=&quot;compact&quot; type=&quot;tertiary&quot; (onClick)=&quot;onClick()&quot;&gt;Assign&lt;/goab-button&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    }
+  &lt;/tbody&gt;
+&lt;/goab-table&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const badgeValues = [
+  { type: &quot;important&quot;, content: &quot;Pending&quot; },
+  { type: &quot;emergency&quot;, content: &quot;Failed&quot; },
+  { type: &quot;success&quot;, content: &quot;Complete&quot; },
+  { type: &quot;information&quot;, content: &quot;In progress&quot; },
+  { type: &quot;midtone&quot;, content: &quot;Closed&quot; },
+  { type: &quot;success&quot;, content: &quot;Complete&quot; },
+];
+
+const tbody = document.getElementById(&quot;table-body&quot;);
+
+badgeValues.forEach((badge) =&gt; {
+  const row = document.createElement(&quot;tr&quot;);
+  row.innerHTML = `
+    &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;${badge.type}&quot; content=&quot;${badge.content}&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+    &lt;td&gt;Lorem ipsum dolor sit amet consectetur&lt;/td&gt;
+    &lt;td class=&quot;goa-table-number-column&quot;&gt;1234567890&lt;/td&gt;
+    &lt;td&gt;&lt;goa-button version=&quot;2&quot; size=&quot;compact&quot; type=&quot;tertiary&quot;&gt;Assign&lt;/goa-button&gt;&lt;/td&gt;
+  `;
+  const button = row.querySelector(&quot;goa-button&quot;);
+  button.addEventListener(&quot;_click&quot;, () =&gt; console.log(&quot;clicked&quot;));
+  tbody.appendChild(row);
+});</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot; id=&quot;status-table&quot;&gt;
+  &lt;table width=&quot;100%&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Status&lt;/th&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+        &lt;th class=&quot;goa-table-number-header&quot;&gt;File number&lt;/th&gt;
+        &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody id=&quot;table-body&quot;&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/goa-table&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
       .code-snippet {
         border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
         border-radius: var(--goa-border-radius-m, 4px);
