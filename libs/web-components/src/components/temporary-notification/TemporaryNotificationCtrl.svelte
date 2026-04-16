@@ -44,7 +44,7 @@
   let _intervalId: any;
 
   onMount(() => {
-    return receive(window.document.body, (action, data, event) => {
+    return receive(window.document.body, (action, data, _event) => {
       switch (action) {
         case "goa:temp-notification":
           handleNotification(data as GoabNotification);

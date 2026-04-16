@@ -6,7 +6,7 @@ describe("GoATemporaryNotification", () => {
   it("should render", async () => {
     const { findByTestId } = render(GoATemporaryNotification, {
       testid: "notification-test",
-      message: "Test notification"
+      message: "Test notification",
     });
     const notification = await findByTestId("notification-test");
 
@@ -15,25 +15,27 @@ describe("GoATemporaryNotification", () => {
   });
 
   describe("types", () => {
-    ["basic", "success", "failure", "indeterminate", "progress"].forEach((type) => {
-      it(`should render ${type} type`, async () => {
-        const { findByTestId } = render(GoATemporaryNotification, {
-          testid: "notification-test",
-          message: "Test notification",
-          type
-        });
-        const notification = await findByTestId("notification-test");
+    ["basic", "success", "failure", "indeterminate", "progress"].forEach(
+      (type) => {
+        it(`should render ${type} type`, async () => {
+          const { findByTestId } = render(GoATemporaryNotification, {
+            testid: "notification-test",
+            message: "Test notification",
+            type,
+          });
+          const notification = await findByTestId("notification-test");
 
-        expect(notification).toBeTruthy();
-        expect(notification.className).toContain(type);
-      });
-    });
+          expect(notification).toBeTruthy();
+          expect(notification.className).toContain(type);
+        });
+      },
+    );
 
     it("should render success type with checkmark icon", async () => {
       const { container } = render(GoATemporaryNotification, {
         testid: "notification-test",
         message: "Success notification",
-        type: "success"
+        type: "success",
       });
 
       const icon = container.querySelector("goa-icon");
@@ -45,7 +47,7 @@ describe("GoATemporaryNotification", () => {
       const { container } = render(GoATemporaryNotification, {
         testid: "notification-test",
         message: "Failure notification",
-        type: "failure"
+        type: "failure",
       });
 
       const icon = container.querySelector("goa-icon");
@@ -58,25 +60,33 @@ describe("GoATemporaryNotification", () => {
         testid: "notification-test",
         message: "Progress notification",
         type: "progress",
-        progress: 50
+        progress: 50,
       });
 
-      const progressBar = container.querySelector("progress");
+      const progressBar = container.querySelector("goa-linear-progress");
+      const message = container.querySelector(".message");
       expect(progressBar).toBeTruthy();
-      expect(progressBar?.getAttribute("value")).toBe("50");
-      expect(progressBar?.getAttribute("max")).toBe("100");
+      expect(message?.getAttribute("id")).toBeTruthy();
+      expect(progressBar?.getAttribute("progress")).toBe("50");
+      expect(progressBar?.getAttribute("aria-labelledby")).toBe(
+        message?.getAttribute("id"),
+      );
     });
 
     it("should render indeterminate type with indeterminate progress bar", async () => {
       const { container } = render(GoATemporaryNotification, {
         testid: "notification-test",
         message: "Indeterminate notification",
-        type: "indeterminate"
+        type: "indeterminate",
       });
 
-      const progressBar = container.querySelector("progress");
+      const progressBar = container.querySelector("goa-linear-progress");
+      const message = container.querySelector(".message");
       expect(progressBar).toBeTruthy();
-      expect(progressBar?.hasAttribute("value")).toBe(false);
+      expect(progressBar?.hasAttribute("progress")).toBe(false);
+      expect(progressBar?.getAttribute("aria-labelledby")).toBe(
+        message?.getAttribute("id"),
+      );
     });
   });
 
@@ -84,7 +94,7 @@ describe("GoATemporaryNotification", () => {
     it("should be visible by default", async () => {
       const { findByTestId } = render(GoATemporaryNotification, {
         testid: "notification-test",
-        message: "Test notification"
+        message: "Test notification",
       });
       const notification = await findByTestId("notification-test");
 
@@ -96,7 +106,7 @@ describe("GoATemporaryNotification", () => {
       const { findByTestId } = render(GoATemporaryNotification, {
         testid: "notification-test",
         message: "Test notification",
-        visible: false
+        visible: false,
       });
       const notification = await findByTestId("notification-test");
 
@@ -109,7 +119,7 @@ describe("GoATemporaryNotification", () => {
     it("should use down animation by default", async () => {
       const { findByTestId } = render(GoATemporaryNotification, {
         testid: "notification-test",
-        message: "Test notification"
+        message: "Test notification",
       });
       const notification = await findByTestId("notification-test");
 
@@ -121,7 +131,7 @@ describe("GoATemporaryNotification", () => {
       const { findByTestId } = render(GoATemporaryNotification, {
         testid: "notification-test",
         message: "Test notification",
-        animationDirection: "up"
+        animationDirection: "up",
       });
       const notification = await findByTestId("notification-test");
 
@@ -135,7 +145,7 @@ describe("GoATemporaryNotification", () => {
       const { container } = render(GoATemporaryNotification, {
         testid: "notification-test",
         message: "Test notification",
-        actionText: "Undo"
+        actionText: "Undo",
       });
 
       const actionButton = container.querySelector("goa-link-button");
@@ -146,7 +156,7 @@ describe("GoATemporaryNotification", () => {
     it("should not render action button when actionText is not provided", async () => {
       const { container } = render(GoATemporaryNotification, {
         testid: "notification-test",
-        message: "Test notification"
+        message: "Test notification",
       });
 
       const actionButton = container.querySelector("goa-link-button");
@@ -160,16 +170,15 @@ describe("GoATemporaryNotification", () => {
         testid: "notification-test",
         message: "Progress notification",
         type: "progress",
-        progress: 25
+        progress: 25,
       });
 
-      let progressBar = container.querySelector("progress");
-      expect(progressBar?.getAttribute("value")).toBe("25");
+      const progressBar = container.querySelector("goa-linear-progress");
+      expect(progressBar?.getAttribute("progress")).toBe("25");
 
       // Test updating progress
       await rerender({ progress: 75 });
-      progressBar = container.querySelector("progress");
-      expect(progressBar?.getAttribute("value")).toBe("75");
+      expect(progressBar?.getAttribute("progress")).toBe("75");
     });
   });
 });
