@@ -14149,7 +14149,7 @@ function co(t, e) {
     (n || l && i.contentWindow) && l(), E(i);
   };
 }
-function T(t, e, o) {
+function I(t, e, o) {
   t.classList.toggle(e, !!o);
 }
 function $s(t, e, { bubbles: o = false, cancelable: i = false } = {}) {
@@ -14381,7 +14381,7 @@ function $o(t, e, o) {
     }
   };
 }
-function xo(t, e, o, i) {
+function To(t, e, o, i) {
   let l = e(t, o, { direction: "both" }), r = i ? 0 : 1, a = null, d = null, c = null, s;
   function u() {
     c && Do(t, c);
@@ -14457,16 +14457,16 @@ function a1(t, e, o, i, n, l, r, a, d, c, s, u) {
   const w = [], p = /* @__PURE__ */ new Map(), k = /* @__PURE__ */ new Map(), z = [];
   for (m = v; m--; ) {
     const j = u(n, l, m), H = o(j);
-    let x = r.get(H);
-    x ? z.push(() => x.p(j, e)) : (x = c(H, j), x.c()), p.set(H, w[m] = x), H in b && k.set(H, Math.abs(m - b[H]));
+    let T = r.get(H);
+    T ? z.push(() => T.p(j, e)) : (T = c(H, j), T.c()), p.set(H, w[m] = T), H in b && k.set(H, Math.abs(m - b[H]));
   }
   const M = /* @__PURE__ */ new Set(), N = /* @__PURE__ */ new Set();
   function L(j) {
     U(j, 1), j.m(a, s), r.set(j.key, j), s = j.first, v--;
   }
   for (; g && v; ) {
-    const j = w[v - 1], H = t[g - 1], x = j.key, Z = H.key;
-    j === H ? (s = j.first, g--, v--) : p.has(Z) ? !r.has(x) || M.has(x) ? L(j) : N.has(Z) ? g-- : k.get(x) > k.get(Z) ? (N.add(x), L(j)) : (M.add(Z), g--) : (d(H, r), g--);
+    const j = w[v - 1], H = t[g - 1], T = j.key, Z = H.key;
+    j === H ? (s = j.first, g--, v--) : p.has(Z) ? !r.has(T) || M.has(T) ? L(j) : N.has(Z) ? g-- : k.get(T) > k.get(Z) ? (N.add(T), L(j)) : (M.add(Z), g--) : (d(H, r), g--);
   }
   for (; g--; ) {
     const j = t[g];
@@ -14812,7 +14812,7 @@ function it(...t) {
     (e) => typeof e == "string" ? e.replace(/;$/, "") : e
   ).join(";");
 }
-function Ie(t, e) {
+function qe(t, e) {
   return e ? `${t}: ${e}` : "";
 }
 function rt(t, e) {
@@ -14877,7 +14877,7 @@ function Et(t, e) {
     ...t.querySelector(e).children
   ] : [...t.children];
 }
-function Ae(t) {
+function Se(t) {
   return t === "false" ? false : t === "" ? true : !!t;
 }
 function Xt(t) {
@@ -14888,7 +14888,7 @@ function bo(t, e) {
     o[1] || console.warn(`${t}: ${o[0]} is required`);
   });
 }
-function qe(t, e, o = {}) {
+function Ae(t, e, o = {}) {
   return [e, (n) => {
     const l = typeof o == "boolean" ? o : o == null ? void 0 : o.required, r = typeof o == "object" ? o == null ? void 0 : o.deprecated : null;
     if (!(!l && !n)) {
@@ -15105,7 +15105,7 @@ function wi(t) {
   };
 }
 function y1(t) {
-  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, x, Z = (
+  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, T, Z = (
     /*iconposition*/
     t[10] === "left" && bi(t)
   ), V = (
@@ -15115,7 +15115,7 @@ function y1(t) {
   const B = (
     /*#slots*/
     t[21].headingcontent
-  ), S = ue(
+  ), x = ue(
     B,
     t,
     /*$$scope*/
@@ -15126,11 +15126,11 @@ function y1(t) {
     /*iconposition*/
     t[10] === "right" && wi(t)
   );
-  const I = (
+  const q = (
     /*#slots*/
     t[21].default
-  ), A = ue(
-    I,
+  ), S = ue(
+    q,
     t,
     /*$$scope*/
     t[20],
@@ -15141,9 +15141,9 @@ function y1(t) {
       e = C("div"), o = C("details"), i = C("summary"), Z && Z.c(), n = W(), l = C("div"), r = C("span"), a = ae(
         /*heading*/
         t[1]
-      ), s = W(), V && V.c(), u = W(), g = C("div"), S && S.c(), m = W(), Y && Y.c(), k = W(), z = C("div"), A && A.c(), f(r, "class", d = "heading heading-" + /*headingsize*/
+      ), s = W(), V && V.c(), u = W(), g = C("div"), x && x.c(), m = W(), Y && Y.c(), k = W(), z = C("div"), S && S.c(), f(r, "class", d = "heading heading-" + /*headingsize*/
       t[3] + " svelte-w344e4"), f(r, "data-testid", c = `${/*testid*/
-      t[5]}-heading`), f(g, "class", "heading-content svelte-w344e4"), T(
+      t[5]}-heading`), f(g, "class", "heading-content svelte-w344e4"), I(
         g,
         "heading-content-top",
         /*_headingSlotChildren*/
@@ -15152,7 +15152,7 @@ function y1(t) {
       t[16]}-heading`), f(i, "class", b = Ze(`container-${/*headingsize*/
       t[3]}`) + " svelte-w344e4"), f(i, "aria-controls", w = `${/*_accordionId*/
       t[16]}-content`), f(i, "aria-expanded", p = /*open*/
-      t[0] === "true"), T(
+      t[0] === "true"), I(
         i,
         "iconRight",
         /*iconposition*/
@@ -15183,7 +15183,7 @@ function y1(t) {
       );
     },
     m(O, K) {
-      D(O, e, K), _(e, o), _(o, i), Z && Z.m(i, null), _(i, n), _(i, l), _(l, r), _(r, a), _(l, s), V && V.m(l, null), _(l, u), _(l, g), S && S.m(g, null), t[22](l), _(i, m), Y && Y.m(i, null), _(o, k), _(o, z), A && A.m(z, null), t[27](z), t[29](e), j = true, H || (x = [
+      D(O, e, K), _(e, o), _(o, i), Z && Z.m(i, null), _(i, n), _(i, l), _(l, r), _(r, a), _(l, s), V && V.m(l, null), _(l, u), _(l, g), x && x.m(g, null), t[22](l), _(i, m), Y && Y.m(i, null), _(o, k), _(o, z), S && S.m(z, null), t[27](z), t[29](e), j = true, H || (T = [
         re(
           i,
           "mouseover",
@@ -15227,9 +15227,9 @@ function y1(t) {
       O[3] + " svelte-w344e4")) && f(r, "class", d), (!j || K[0] & /*testid*/
       32 && c !== (c = `${/*testid*/
       O[5]}-heading`)) && f(r, "data-testid", c), /*secondarytext*/
-      O[2] ? V ? V.p(O, K) : (V = pi(O), V.c(), V.m(l, u)) : V && (V.d(1), V = null), S && S.p && (!j || K[0] & /*$$scope*/
+      O[2] ? V ? V.p(O, K) : (V = pi(O), V.c(), V.m(l, u)) : V && (V.d(1), V = null), x && x.p && (!j || K[0] & /*$$scope*/
       1048576) && ge(
-        S,
+        x,
         B,
         O,
         /*$$scope*/
@@ -15246,7 +15246,7 @@ function y1(t) {
         ),
         mi
       ), (!j || K[0] & /*_headingSlotChildren*/
-      32768) && T(
+      32768) && I(
         g,
         "heading-content-top",
         /*_headingSlotChildren*/
@@ -15261,20 +15261,20 @@ function y1(t) {
       O[16]}-content`)) && f(i, "aria-controls", w), (!j || K[0] & /*open*/
       1 && p !== (p = /*open*/
       O[0] === "true")) && f(i, "aria-expanded", p), (!j || K[0] & /*headingsize, iconposition*/
-      1032) && T(
+      1032) && I(
         i,
         "iconRight",
         /*iconposition*/
         O[10] === "right"
-      ), A && A.p && (!j || K[0] & /*$$scope*/
+      ), S && S.p && (!j || K[0] & /*$$scope*/
       1048576) && ge(
-        A,
-        I,
+        S,
+        q,
         O,
         /*$$scope*/
         O[20],
         j ? fe(
-          I,
+          q,
           /*$$scope*/
           O[20],
           K,
@@ -15315,64 +15315,64 @@ function y1(t) {
       );
     },
     i(O) {
-      j || (U(S, O), U(A, O), j = true);
+      j || (U(x, O), U(S, O), j = true);
     },
     o(O) {
-      $(S, O), $(A, O), j = false;
+      $(x, O), $(S, O), j = false;
     },
     d(O) {
-      O && E(e), Z && Z.d(), V && V.d(), S && S.d(O), t[22](null), Y && Y.d(), A && A.d(O), t[27](null), t[29](null), H = false, Ye(x);
+      O && E(e), Z && Z.d(), V && V.d(), x && x.d(O), t[22](null), Y && Y.d(), S && S.d(O), t[27](null), t[29](null), H = false, Ye(T);
     }
   };
 }
 function k1(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e;
-  const [r, a] = qe("Accordion heading size", ["small", "medium"]);
-  let { open: d = "false" } = e, { heading: c = "" } = e, { secondarytext: s = "" } = e, { headingsize: u = "small" } = e, { id: g = "" } = e, { maxwidth: v = "none" } = e, { testid: m = "" } = e, { mt: b = null } = e, { mr: w = null } = e, { mb: p = "xs" } = e, { ml: k = null } = e, { iconposition: z = "left" } = e, M = false, N, L, j, H = [], x = "";
+  const [r, a] = Ae("Accordion heading size", ["small", "medium"]);
+  let { open: d = "false" } = e, { heading: c = "" } = e, { secondarytext: s = "" } = e, { headingsize: u = "small" } = e, { id: g = "" } = e, { maxwidth: v = "none" } = e, { testid: m = "" } = e, { mt: b = null } = e, { mr: w = null } = e, { mb: p = "xs" } = e, { ml: k = null } = e, { iconposition: z = "left" } = e, M = false, N, L, j, H = [], T = "";
   De(() => {
-    bo("GoAAccordion", { heading: c }), a(u), to(j), o(15, H = Z()), o(16, x = `accordion-${fo()}`);
+    bo("GoAAccordion", { heading: c }), a(u), to(j), o(15, H = Z()), o(16, T = `accordion-${fo()}`);
   });
   function Z() {
     if (N) {
-      const q = N.querySelector("slot");
-      return q ? q.assignedElements() : [...N.children];
+      const A = N.querySelector("slot");
+      return A ? A.assignedElements() : [...N.children];
     }
     return [];
   }
-  function V(q) {
+  function V(A) {
     L && L.dispatchEvent(new CustomEvent(
       "_change",
       {
         composed: true,
         bubbles: true,
-        detail: { open: q }
+        detail: { open: A }
       }
     ));
   }
-  function B(q) {
-    ce[q ? "unshift" : "push"](() => {
-      N = q, o(12, N);
+  function B(A) {
+    ce[A ? "unshift" : "push"](() => {
+      N = A, o(12, N);
     });
   }
-  const S = () => o(11, M = true), Y = () => o(11, M = false), I = () => o(11, M = false), A = () => o(11, M = false);
-  function O(q) {
-    ce[q ? "unshift" : "push"](() => {
-      j = q, o(14, j);
+  const x = () => o(11, M = true), Y = () => o(11, M = false), q = () => o(11, M = false), S = () => o(11, M = false);
+  function O(A) {
+    ce[A ? "unshift" : "push"](() => {
+      j = A, o(14, j);
     });
   }
-  const K = ({ target: q }) => {
-    o(0, d = `${q == null ? void 0 : q.open}`), V(q == null ? void 0 : q.open);
+  const K = ({ target: A }) => {
+    o(0, d = `${A == null ? void 0 : A.open}`), V(A == null ? void 0 : A.open);
   };
-  function F(q) {
-    ce[q ? "unshift" : "push"](() => {
-      L = q, o(13, L);
+  function F(A) {
+    ce[A ? "unshift" : "push"](() => {
+      L = A, o(13, L);
     });
   }
-  return t.$$set = (q) => {
-    "open" in q && o(0, d = q.open), "heading" in q && o(1, c = q.heading), "secondarytext" in q && o(2, s = q.secondarytext), "headingsize" in q && o(3, u = q.headingsize), "id" in q && o(19, g = q.id), "maxwidth" in q && o(4, v = q.maxwidth), "testid" in q && o(5, m = q.testid), "mt" in q && o(6, b = q.mt), "mr" in q && o(7, w = q.mr), "mb" in q && o(8, p = q.mb), "ml" in q && o(9, k = q.ml), "iconposition" in q && o(10, z = q.iconposition), "$$scope" in q && o(20, l = q.$$scope);
+  return t.$$set = (A) => {
+    "open" in A && o(0, d = A.open), "heading" in A && o(1, c = A.heading), "secondarytext" in A && o(2, s = A.secondarytext), "headingsize" in A && o(3, u = A.headingsize), "id" in A && o(19, g = A.id), "maxwidth" in A && o(4, v = A.maxwidth), "testid" in A && o(5, m = A.testid), "mt" in A && o(6, b = A.mt), "mr" in A && o(7, w = A.mr), "mb" in A && o(8, p = A.mb), "ml" in A && o(9, k = A.ml), "iconposition" in A && o(10, z = A.iconposition), "$$scope" in A && o(20, l = A.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*open*/
-    1 && o(17, i = Ae(d));
+    1 && o(17, i = Se(d));
   }, [
     d,
     c,
@@ -15390,17 +15390,17 @@ function k1(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     i,
     V,
     g,
     l,
     n,
     B,
-    S,
+    x,
     Y,
-    I,
-    A,
+    q,
+    S,
     O,
     K,
     F
@@ -15555,54 +15555,54 @@ function _i(t) {
   );
   return {
     c() {
-      e = C("div"), n && n.c(), f(e, "class", "v2-navigation-placeholder svelte-rdafqa"), T(
+      e = C("div"), n && n.c(), f(e, "class", "v2-navigation-placeholder svelte-rdafqa"), I(
         e,
         "mobile",
         /*mobile*/
         t[1]
-      ), T(
+      ), I(
         e,
         "overflow-1",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 1
-      ), T(
+      ), I(
         e,
         "overflow-2",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 2
-      ), T(
+      ), I(
         e,
         "overflow-3",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 3
-      ), T(
+      ), I(
         e,
         "overflow-4",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 4
-      ), T(
+      ), I(
         e,
         "overflow-5",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 5
-      ), T(
+      ), I(
         e,
         "overflow-6",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 6
-      ), T(
+      ), I(
         e,
         "overflow-7",
         /*_showMoreMenu*/
         t[3] && /*_visibleNavigationCount*/
         t[2] === 7
-      ), T(
+      ), I(
         e,
         "overflow-8",
         /*_showMoreMenu*/
@@ -15633,62 +15633,62 @@ function _i(t) {
         ),
         null
       ), (!o || r & /*mobile*/
-      2) && T(
+      2) && I(
         e,
         "mobile",
         /*mobile*/
         l[1]
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-1",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 1
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-2",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 2
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-3",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 3
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-4",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 4
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-5",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 5
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-6",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 6
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-7",
         /*_showMoreMenu*/
         l[3] && /*_visibleNavigationCount*/
         l[2] === 7
       ), (!o || r & /*_showMoreMenu, _visibleNavigationCount*/
-      12) && T(
+      12) && I(
         e,
         "overflow-8",
         /*_showMoreMenu*/
@@ -15739,9 +15739,9 @@ function M1(t) {
 function j1(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: l = "1" } = e, { windowWidth: r } = e, { mobile: a = false } = e, d = 0, c = 0, s = false, u = null, g = false, v = null, m = [], b = null;
   function w() {
-    var A;
+    var S;
     if (!u || l !== "2") return;
-    const Y = ((A = u.getRootNode().host) == null ? void 0 : A.children) || [];
+    const Y = ((S = u.getRootNode().host) == null ? void 0 : S.children) || [];
     d = Array.from(Y).filter((O) => !(O.getAttribute("slot") !== "navigation" || O.tagName === "GOA-APP-HEADER-MENU" && O.getAttribute("heading") === "More")).length, o(2, c = d);
   }
   function p() {
@@ -15751,17 +15751,17 @@ function j1(t, e, o) {
           s !== false && (o(3, s = false), o(2, c = d));
           return;
         }
-        const S = u.offsetWidth, Y = u.getRootNode(), I = Y == null ? void 0 : Y.querySelector('slot[name="navigation"]');
-        if (!I) {
+        const x = u.offsetWidth, Y = u.getRootNode(), q = Y == null ? void 0 : Y.querySelector('slot[name="navigation"]');
+        if (!q) {
           s !== false && (o(3, s = false), o(2, c = d));
           return;
         }
-        const A = I.assignedElements();
-        if (A.length === 0) {
+        const S = q.assignedElements();
+        if (S.length === 0) {
           s !== false && (o(3, s = false), o(2, c = d));
           return;
         }
-        const O = Array.from(A).filter((P) => !(P.tagName === "GOA-APP-HEADER-MENU" && P.getAttribute("heading") === "More")), K = 100, F = 16, q = a ? 32 : 96, Q = S - q;
+        const O = Array.from(S).filter((P) => !(P.tagName === "GOA-APP-HEADER-MENU" && P.getAttribute("heading") === "More")), K = 100, F = 16, A = a ? 32 : 96, Q = x - A;
         let R = 0;
         for (let P = 0; P < O.length; P++) {
           const J = O[P].offsetWidth || 80, se = P > 0 ? F : 0;
@@ -15772,7 +15772,7 @@ function j1(t, e, o) {
           s !== false && o(3, s = false), c !== G && o(2, c = G), j(), M();
           return;
         }
-        const ee = S - q - K;
+        const ee = x - A - K;
         let oe = 0, ne = 0;
         for (let P = 0; P < O.length; P++) {
           const J = O[P].offsetWidth || 80, se = ne > 0 ? F : 0, ie = oe + J + se;
@@ -15788,36 +15788,36 @@ function j1(t, e, o) {
     );
   }
   function k() {
-    var I;
+    var q;
     if (!u || l !== "2") return;
-    const S = (I = u.getRootNode()) == null ? void 0 : I.host;
-    if (!S) return;
-    if (b && S.contains(b)) {
+    const x = (q = u.getRootNode()) == null ? void 0 : q.host;
+    if (!x) return;
+    if (b && x.contains(b)) {
       z();
       return;
     }
     const Y = document.createElement("goa-app-header-menu");
-    Y.setAttribute("slot", "navigation"), Y.setAttribute("heading", "More"), m.forEach((A) => {
-      if (A.type === "header") {
+    Y.setAttribute("slot", "navigation"), Y.setAttribute("heading", "More"), m.forEach((S) => {
+      if (S.type === "header") {
         const O = document.createElement("a");
-        O.textContent = A.text, O.classList.add("menu-header"), O.href = "javascript:void(0)", O.setAttribute("role", "heading"), O.setAttribute("aria-level", "2"), O.setAttribute("tabindex", "-1"), O.addEventListener("click", (K) => K.preventDefault()), Y.appendChild(O);
-      } else if (A.type === "link") {
+        O.textContent = S.text, O.classList.add("menu-header"), O.href = "javascript:void(0)", O.setAttribute("role", "heading"), O.setAttribute("aria-level", "2"), O.setAttribute("tabindex", "-1"), O.addEventListener("click", (K) => K.preventDefault()), Y.appendChild(O);
+      } else if (S.type === "link") {
         const O = document.createElement("a");
-        O.href = A.href, O.textContent = A.text, A.current && O.classList.add("current"), A.indented && O.classList.add("indented"), Y.appendChild(O);
+        O.href = S.href, O.textContent = S.text, S.current && O.classList.add("current"), S.indented && O.classList.add("indented"), Y.appendChild(O);
       }
-    }), S.appendChild(Y), b = Y;
+    }), x.appendChild(Y), b = Y;
   }
   function z() {
     if (b) {
       for (; b.firstChild; )
         b.removeChild(b.firstChild);
-      m.forEach((S) => {
-        if (S.type === "header") {
+      m.forEach((x) => {
+        if (x.type === "header") {
           const Y = document.createElement("a");
-          Y.textContent = S.text, Y.classList.add("menu-header"), Y.href = "javascript:void(0)", Y.setAttribute("role", "heading"), Y.setAttribute("aria-level", "2"), Y.setAttribute("tabindex", "-1"), Y.addEventListener("click", (I) => I.preventDefault()), b.appendChild(Y);
-        } else if (S.type === "link") {
+          Y.textContent = x.text, Y.classList.add("menu-header"), Y.href = "javascript:void(0)", Y.setAttribute("role", "heading"), Y.setAttribute("aria-level", "2"), Y.setAttribute("tabindex", "-1"), Y.addEventListener("click", (q) => q.preventDefault()), b.appendChild(Y);
+        } else if (x.type === "link") {
           const Y = document.createElement("a");
-          Y.href = S.href, Y.textContent = S.text, S.current && Y.classList.add("current"), S.indented && Y.classList.add("indented"), b.appendChild(Y);
+          Y.href = x.href, Y.textContent = x.text, x.current && Y.classList.add("current"), x.indented && Y.classList.add("indented"), b.appendChild(Y);
         }
       });
     }
@@ -15828,29 +15828,29 @@ function j1(t, e, o) {
   function N() {
     var K;
     if (!u || l !== "2") return;
-    const S = u.getRootNode(), Y = S == null ? void 0 : S.querySelector('slot[name="navigation"]');
+    const x = u.getRootNode(), Y = x == null ? void 0 : x.querySelector('slot[name="navigation"]');
     if (!Y) return;
-    const I = Y.assignedElements(), A = [], O = Array.from(I).filter((F) => !(F.tagName === "GOA-APP-HEADER-MENU" && F.getAttribute("heading") === "More"));
+    const q = Y.assignedElements(), S = [], O = Array.from(q).filter((F) => !(F.tagName === "GOA-APP-HEADER-MENU" && F.getAttribute("heading") === "More"));
     for (let F = c; F < O.length; F++) {
-      const q = O[F];
-      if (q.tagName === "A") {
-        const Q = q;
-        A.push({
+      const A = O[F];
+      if (A.tagName === "A") {
+        const Q = A;
+        S.push({
           type: "link",
           href: Q.getAttribute("href") || "#",
           text: ((K = Q.textContent) == null ? void 0 : K.trim()) || "",
           current: Q.classList.contains("current"),
           indented: false
         });
-      } else if (q.tagName === "GOA-APP-HEADER-MENU") {
-        const Q = q.getAttribute("heading") || q.heading || "";
-        A.push({
+      } else if (A.tagName === "GOA-APP-HEADER-MENU") {
+        const Q = A.getAttribute("heading") || A.heading || "";
+        S.push({
           type: "header",
           text: Q,
           indented: false
-        }), Array.from(q.querySelectorAll("a")).forEach((ee) => {
+        }), Array.from(A.querySelectorAll("a")).forEach((ee) => {
           var oe;
-          A.push({
+          S.push({
             type: "link",
             href: ee.getAttribute("href") || "#",
             text: ((oe = ee.textContent) == null ? void 0 : oe.trim()) || "",
@@ -15860,24 +15860,24 @@ function j1(t, e, o) {
         });
       }
     }
-    m = A;
+    m = S;
   }
   function L() {
     if (!u || l !== "2") return;
-    const S = u.getRootNode(), Y = S == null ? void 0 : S.querySelector('slot[name="navigation"]');
+    const x = u.getRootNode(), Y = x == null ? void 0 : x.querySelector('slot[name="navigation"]');
     if (!Y) return;
-    const I = Y.assignedElements();
-    Array.from(I).filter((O) => !(O.tagName === "GOA-APP-HEADER-MENU" && O.getAttribute("heading") === "More")).forEach((O, K) => {
+    const q = Y.assignedElements();
+    Array.from(q).filter((O) => !(O.tagName === "GOA-APP-HEADER-MENU" && O.getAttribute("heading") === "More")).forEach((O, K) => {
       const F = O;
       K < c ? F.style.display = "" : F.style.display = "none";
     });
   }
   function j() {
     if (!u || l !== "2") return;
-    const S = u.getRootNode(), Y = S == null ? void 0 : S.querySelector('slot[name="navigation"]');
+    const x = u.getRootNode(), Y = x == null ? void 0 : x.querySelector('slot[name="navigation"]');
     if (!Y) return;
-    const I = Y.assignedElements();
-    Array.from(I).filter((O) => !(O.tagName === "GOA-APP-HEADER-MENU" && O.getAttribute("heading") === "More")).forEach((O) => {
+    const q = Y.assignedElements();
+    Array.from(q).filter((O) => !(O.tagName === "GOA-APP-HEADER-MENU" && O.getAttribute("heading") === "More")).forEach((O) => {
       const K = O;
       K.style.display = "";
     });
@@ -15886,17 +15886,17 @@ function j1(t, e, o) {
     if (!u || l !== "2") return;
     const Y = u.getRootNode().querySelector('slot[name="navigation"]');
     if (!Y) return;
-    const I = Y.assignedElements();
-    let A = [];
-    I.forEach((K) => {
+    const q = Y.assignedElements();
+    let S = [];
+    q.forEach((K) => {
       if (K.tagName === "A")
-        A.push(K);
+        S.push(K);
       else if (K.tagName === "GOA-APP-HEADER-MENU") {
         const F = Array.from(K.querySelectorAll("a"));
-        A = [...A, ...F];
+        S = [...S, ...F];
       }
-    }), A.forEach((K) => K.classList.remove("current"));
-    const O = Wo(A, window.location);
+    }), S.forEach((K) => K.classList.remove("current"));
+    const O = Wo(S, window.location);
     if (O) {
       O.classList.add("current");
       const K = O.closest("goa-app-header-menu");
@@ -15909,29 +15909,29 @@ function j1(t, e, o) {
       ));
     }
   }
-  function x() {
+  function T() {
     H();
   }
   let Z = null;
   function V() {
     if (!u || l !== "2") return;
-    let S = document.location.href;
+    let x = document.location.href;
     Z = new MutationObserver((Y) => {
-      Fo(document.location, S) && (S = document.location.href, x());
-    }), Z.observe(document.body, { childList: true, subtree: true }), window.addEventListener("popstate", x, true);
+      Fo(document.location, x) && (x = document.location.href, T());
+    }), Z.observe(document.body, { childList: true, subtree: true }), window.addEventListener("popstate", T, true);
   }
   De(async () => {
     l === "2" && (w(), V(), await Ge(), p(), o(6, g = true));
   }), dt(() => {
-    l === "2" && (window.removeEventListener("popstate", x, true), Z && (Z.disconnect(), Z = null), v && (clearTimeout(v), v = null), M());
+    l === "2" && (window.removeEventListener("popstate", T, true), Z && (Z.disconnect(), Z = null), v && (clearTimeout(v), v = null), M());
   });
-  function B(S) {
-    ce[S ? "unshift" : "push"](() => {
-      u = S, o(4, u);
+  function B(x) {
+    ce[x ? "unshift" : "push"](() => {
+      u = x, o(4, u);
     });
   }
-  return t.$$set = (S) => {
-    "version" in S && o(0, l = S.version), "windowWidth" in S && o(5, r = S.windowWidth), "mobile" in S && o(1, a = S.mobile), "$$scope" in S && o(7, n = S.$$scope);
+  return t.$$set = (x) => {
+    "version" in x && o(0, l = x.version), "windowWidth" in x && o(5, r = x.windowWidth), "mobile" in x && o(1, a = x.mobile), "$$scope" in x && o(7, n = x.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*windowWidth, _navigationInitialMeasurementDone*/
     96 && r && g && p();
@@ -15997,13 +15997,13 @@ function L1(t) {
       var(--goa-color-greyscale-200)}.container.v2.svelte-1p8l9vz.svelte-1p8l9vz{border-bottom:none;background-color:var(--goa-app-header-color-bg);padding:0}.v2.svelte-1p8l9vz .v2-structure.svelte-1p8l9vz{display:flex;flex-direction:column;width:100%}.v2.svelte-1p8l9vz .v2-banner-placeholder.svelte-1p8l9vz{background:#6c757d;color:#ffffff;min-height:16px;display:flex;align-items:center;padding:0 var(--goa-app-header-padding-h-desktop)}.v2.mobile.svelte-1p8l9vz .v2-banner-placeholder.svelte-1p8l9vz{padding:0 var(--goa-app-header-padding-h-mobile)}.v2.svelte-1p8l9vz .v2-header-placeholder.svelte-1p8l9vz{display:flex;gap:var(--goa-app-header-logo-service-gap);align-items:center;padding:var(--goa-app-header-padding-v) var(--goa-app-header-padding-h-desktop);border-bottom:var(--goa-app-header-border-bottom)}.v2.mobile.svelte-1p8l9vz .v2-header-placeholder.svelte-1p8l9vz{gap:var(--goa-app-header-logo-service-gap-small-screen);padding:var(--goa-app-header-padding-v) var(--goa-app-header-padding-h-mobile);align-items:flex-start}.v2.svelte-1p8l9vz .v2-service-phase-wrapper.svelte-1p8l9vz{flex:1;min-width:var(--goa-app-header-min-width-service-name);display:flex;flex-direction:row;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:var(--goa-app-header-service-phase-gap-horizontal);row-gap:var(--goa-app-header-service-phase-row-gap)}.v2.mobile.svelte-1p8l9vz .v2-service-phase-wrapper.svelte-1p8l9vz{flex-direction:column;align-items:flex-start;gap:var(--goa-app-header-service-phase-gap-vertical);min-width:0;flex-wrap:nowrap}.v2.svelte-1p8l9vz .v2-service-placeholder.svelte-1p8l9vz{display:flex;flex-direction:column;align-items:center;gap:var(--goa-app-header-service-name-secondary-text-gap);text-align:center}.v2.mobile.svelte-1p8l9vz .v2-service-placeholder.svelte-1p8l9vz{text-align:left;align-items:flex-start}.v2.svelte-1p8l9vz .v2-phase-placeholder.svelte-1p8l9vz{display:flex;align-items:center}.v2.svelte-1p8l9vz .v2-service-name.svelte-1p8l9vz{font:var(--goa-app-header-typography-service-name);color:var(--goa-app-header-color-service-name)}.v2.mobile.svelte-1p8l9vz .v2-service-name.svelte-1p8l9vz{font:var(--goa-app-header-typography-service-name-mobile);color:var(--goa-app-header-color-service-name);margin-top:5px}.v2.svelte-1p8l9vz .v2-secondary-text.svelte-1p8l9vz{font:var(--goa-app-header-secondary-text-typography-desktop);color:var(--goa-app-header-secondary-text-color)}.v2.mobile.svelte-1p8l9vz .v2-secondary-text.svelte-1p8l9vz{font:var(--goa-app-header-secondary-text-typography-mobile)}.v2.svelte-1p8l9vz .v2-utilities-placeholder.svelte-1p8l9vz{position:relative;display:flex;gap:var(--goa-app-header-utilities-gap);align-items:center}.v2.svelte-1p8l9vz .v2-utilities-placeholder.svelte-1p8l9vz ::slotted(a){text-decoration:none !important;font-weight:400 !important;font-size:18px !important;line-height:26px !important;color:var(--goa-color-text-default) !important;border:none !important;background:transparent !important;padding:0 !important;height:auto !important;box-shadow:none !important}.v2.svelte-1p8l9vz .v2-utilities-placeholder.svelte-1p8l9vz ::slotted(a:hover){text-decoration:underline !important;color:var(--goa-color-interactive-hover) !important;border:none !important;background:transparent !important;box-shadow:none !important}.v2.svelte-1p8l9vz .v2-utilities-menu-button.svelte-1p8l9vz{position:relative;display:inline-flex;align-items:center;gap:var(--goa-space-2xs);padding:var(--goa-space-xs) var(--goa-space-s);background:transparent;border:1px solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-m);color:var(--goa-color-text-default);font-size:18px;font-weight:400;line-height:26px;cursor:pointer;white-space:nowrap;transition:background-color 0.2s ease, border-color 0.2s ease}.v2.svelte-1p8l9vz .v2-utilities-menu-button.svelte-1p8l9vz:hover{background:var(--goa-color-greyscale-50);border-color:var(--goa-color-greyscale-300)}.v2.svelte-1p8l9vz .v2-utilities-menu-button.svelte-1p8l9vz:focus-visible{outline:3px solid var(--goa-color-interactive-focus);outline-offset:-3px}.v2.svelte-1p8l9vz .v2-utilities-menu-button[aria-expanded="true"].svelte-1p8l9vz{background:var(--goa-color-greyscale-100)}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz{position:absolute;top:calc(100% + 4px);right:0;min-width:200px;background:var(--goa-color-greyscale-white);box-shadow:0px 12px 16px -4px rgba(16, 29, 40, 0.08),
       0px 4px 6px -2px rgba(16, 29, 40, 0.03);border:0.5px solid var(--goa-color-greyscale-150);border-radius:8px;padding:8px;z-index:1000;display:flex;flex-direction:column;gap:0}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(a),.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(a:visited){font-size:18px !important;font-weight:500 !important;line-height:24px !important;color:var(--goa-color-text-default) !important;box-shadow:none !important;border:none !important;padding:12px 8px !important;border-radius:6px !important;display:block;text-decoration:none;background:transparent;transition:background-color 0.2s ease}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(a:hover){background:var(--goa-color-greyscale-100, #f1f1f1) !important;color:var(--goa-color-text-default, #000000) !important;text-decoration:none !important}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(a:focus-visible){outline:3px solid var(--goa-color-interactive-focus, #004f84) !important;outline-offset:-3px !important;background:var(--goa-color-greyscale-100, #f1f1f1) !important}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(goa-button),.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(button){width:100% !important;display:block !important;text-align:left !important;font-size:18px !important;font-weight:500 !important;line-height:24px !important;color:var(--goa-color-text-default, #000000) !important;background:transparent !important;border:none !important;box-shadow:none !important;padding:12px 8px !important;margin:0 !important;border-radius:6px !important;cursor:pointer;transition:background-color 0.2s ease}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(goa-button:hover),.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(button:hover){background:var(--goa-color-greyscale-100) !important}.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(goa-button:focus-visible),.v2.svelte-1p8l9vz .v2-utilities-dropdown.svelte-1p8l9vz ::slotted(button:focus-visible){outline:3px solid var(--goa-color-interactive-focus) !important;outline-offset:-3px !important;background:var(--goa-color-greyscale-100) !important}.v2.svelte-1p8l9vz .v2-logo-area.svelte-1p8l9vz{display:flex;align-items:center}@media(min-width: 768px){.v2.svelte-1p8l9vz .v2-logo-desktop.svelte-1p8l9vz{display:block;height:var(--goa-app-header-logo-desktop-height, 32px);width:auto}.v2.svelte-1p8l9vz .v2-logo-mobile.svelte-1p8l9vz{display:none}}@media(max-width: 767px){.v2.svelte-1p8l9vz .v2-logo-desktop.svelte-1p8l9vz{display:none}.v2.svelte-1p8l9vz .v2-logo-mobile.svelte-1p8l9vz{display:block;width:var(--goa-app-header-logo-mobile-size, 32px);height:var(--goa-app-header-logo-mobile-size, 32px)}}`);
 }
-const N1 = (t) => ({}), yi = (t) => ({}), E1 = (t) => ({}), ki = (t) => ({}), D1 = (t) => ({}), Ci = (t) => ({}), x1 = (t) => ({}), zi = (t) => ({}), T1 = (t) => ({}), Mi = (t) => ({});
-function I1(t) {
+const N1 = (t) => ({}), yi = (t) => ({}), E1 = (t) => ({}), ki = (t) => ({}), D1 = (t) => ({}), Ci = (t) => ({}), T1 = (t) => ({}), zi = (t) => ({}), I1 = (t) => ({}), Mi = (t) => ({});
+function q1(t) {
   let e, o, i, n, l, r, a, d;
   function c(w, p) {
     return (
       /*url*/
-      w[3] ? S1 : A1
+      w[3] ? x1 : S1
     );
   }
   let s = c(t), u = s(t), g = (
@@ -16017,12 +16017,12 @@ function I1(t) {
   ), m = !/*_showMenu*/
   t[11] && /*_mobile*/
   (t[18] || /*_tablet*/
-  t[20]) && Ii(t), b = (
+  t[20]) && qi(t), b = (
     /*_showMenu*/
     (t[11] && /*_mobile*/
     t[18] && !/*_hasMenuClickHandler*/
     t[19] || /*_desktop*/
-    t[7]) && qi(t)
+    t[7]) && Ai(t)
   );
   return {
     c() {
@@ -16039,22 +16039,22 @@ function I1(t) {
       t[5] !== "100%" && /*_windowWidth*/
       t[6] > +/*maxcontentwidth*/
       t[5] ? "0" : "var(--goa-space-3xl)"};
-`), T(
+`), I(
         e,
         "show-menu",
         /*_showMenu*/
         t[11]
-      ), T(
+      ), I(
         e,
         "mobile",
         /*_mobile*/
         t[18]
-      ), T(
+      ), I(
         e,
         "tablet",
         /*_tablet*/
         t[20]
-      ), T(
+      ), I(
         e,
         "desktop",
         /*_desktop*/
@@ -16076,14 +16076,14 @@ function I1(t) {
       w[11] && /*_mobile*/
       (w[18] || /*_tablet*/
       w[20]) ? m ? (m.p(w, p), p[0] & /*_showMenu, _mobile, _tablet*/
-      1312768 && U(m, 1)) : (m = Ii(w), m.c(), U(m, 1), m.m(o, r)) : m && (He(), $(m, 1, 1, () => {
+      1312768 && U(m, 1)) : (m = qi(w), m.c(), U(m, 1), m.m(o, r)) : m && (He(), $(m, 1, 1, () => {
         m = null;
       }), Pe()), /*_showMenu*/
       w[11] && /*_mobile*/
       w[18] && !/*_hasMenuClickHandler*/
       w[19] || /*_desktop*/
       w[7] ? b ? (b.p(w, p), p[0] & /*_showMenu, _mobile, _hasMenuClickHandler, _desktop*/
-      788608 && U(b, 1)) : (b = qi(w), b.c(), U(b, 1), b.m(o, null)) : b && (He(), $(b, 1, 1, () => {
+      788608 && U(b, 1)) : (b = Ai(w), b.c(), U(b, 1), b.m(o, null)) : b && (He(), $(b, 1, 1, () => {
         b = null;
       }), Pe()), (!d || p[0] & /*testid*/
       16) && f(
@@ -16101,25 +16101,25 @@ function I1(t) {
       w[6] > +/*maxcontentwidth*/
       w[5] ? "0" : "var(--goa-space-3xl)"};
 `)) && f(e, "style", a), (!d || p[0] & /*_showMenu*/
-      2048) && T(
+      2048) && I(
         e,
         "show-menu",
         /*_showMenu*/
         w[11]
       ), (!d || p[0] & /*_mobile*/
-      262144) && T(
+      262144) && I(
         e,
         "mobile",
         /*_mobile*/
         w[18]
       ), (!d || p[0] & /*_tablet*/
-      1048576) && T(
+      1048576) && I(
         e,
         "tablet",
         /*_tablet*/
         w[20]
       ), (!d || p[0] & /*_desktop*/
-      128) && T(
+      128) && I(
         e,
         "desktop",
         /*_desktop*/
@@ -16137,23 +16137,23 @@ function I1(t) {
     }
   };
 }
-function q1(t) {
+function A1(t) {
   let e, o, i, n, l, r, a, d, c, s = (
     /*heading*/
     (t[1] || "[Service Name]") + ""
   ), u, g, v, m, b, w, p, k, z, M, N = (
     /*_hasBannerSlot*/
-    t[13] && Ai(t)
+    t[13] && Si(t)
   );
-  function L(A, O) {
+  function L(S, O) {
     return (
       /*url*/
-      A[3] ? H1 : O1
+      S[3] ? H1 : O1
     );
   }
-  let j = L(t), H = j(t), x = (
+  let j = L(t), H = j(t), T = (
     /*secondarytext*/
-    t[2] && Si(t)
+    t[2] && xi(t)
   );
   const Z = (
     /*#slots*/
@@ -16164,116 +16164,116 @@ function q1(t) {
     /*$$scope*/
     t[39],
     zi
-  ), B = [V1, P1], S = [];
-  function Y(A, O) {
+  ), B = [V1, P1], x = [];
+  function Y(S, O) {
     return (
       /*_showUtilitiesMenu*/
-      A[15] ? 0 : 1
+      S[15] ? 0 : 1
     );
   }
-  p = Y(t), k = S[p] = B[p](t);
-  let I = (
+  p = Y(t), k = x[p] = B[p](t);
+  let q = (
     /*_hasNavigationSlot*/
     t[14] && Hi(t)
   );
   return {
     c() {
-      e = C("div"), o = C("div"), N && N.c(), i = W(), n = C("div"), l = C("div"), H.c(), r = W(), a = C("div"), d = C("div"), c = C("span"), u = ae(s), g = W(), x && x.c(), v = W(), m = C("div"), V && V.c(), b = W(), w = C("div"), k.c(), z = W(), I && I.c(), f(l, "class", "v2-logo-area svelte-1p8l9vz"), f(c, "class", "v2-service-name svelte-1p8l9vz"), f(d, "class", "v2-service-placeholder svelte-1p8l9vz"), f(m, "class", "v2-phase-placeholder svelte-1p8l9vz"), f(a, "class", "v2-service-phase-wrapper svelte-1p8l9vz"), f(w, "class", "v2-utilities-placeholder svelte-1p8l9vz"), f(n, "class", "v2-header-placeholder svelte-1p8l9vz"), f(o, "class", "v2-structure svelte-1p8l9vz"), f(e, "class", "container v2 svelte-1p8l9vz"), f(
+      e = C("div"), o = C("div"), N && N.c(), i = W(), n = C("div"), l = C("div"), H.c(), r = W(), a = C("div"), d = C("div"), c = C("span"), u = ae(s), g = W(), T && T.c(), v = W(), m = C("div"), V && V.c(), b = W(), w = C("div"), k.c(), z = W(), q && q.c(), f(l, "class", "v2-logo-area svelte-1p8l9vz"), f(c, "class", "v2-service-name svelte-1p8l9vz"), f(d, "class", "v2-service-placeholder svelte-1p8l9vz"), f(m, "class", "v2-phase-placeholder svelte-1p8l9vz"), f(a, "class", "v2-service-phase-wrapper svelte-1p8l9vz"), f(w, "class", "v2-utilities-placeholder svelte-1p8l9vz"), f(n, "class", "v2-header-placeholder svelte-1p8l9vz"), f(o, "class", "v2-structure svelte-1p8l9vz"), f(e, "class", "container v2 svelte-1p8l9vz"), f(
         e,
         "data-testid",
         /*testid*/
         t[4]
-      ), T(
+      ), I(
         e,
         "mobile",
         /*_mobile*/
         t[18]
-      ), T(
+      ), I(
         e,
         "tablet",
         /*_tablet*/
         t[20]
-      ), T(
+      ), I(
         e,
         "desktop",
         /*_desktop*/
         t[7]
       );
     },
-    m(A, O) {
-      D(A, e, O), _(e, o), N && N.m(o, null), _(o, i), _(o, n), _(n, l), H.m(l, null), _(n, r), _(n, a), _(a, d), _(d, c), _(c, u), _(d, g), x && x.m(d, null), _(a, v), _(a, m), V && V.m(m, null), _(n, b), _(n, w), S[p].m(w, null), t[31](w), _(o, z), I && I.m(o, null), t[32](e), M = true;
+    m(S, O) {
+      D(S, e, O), _(e, o), N && N.m(o, null), _(o, i), _(o, n), _(n, l), H.m(l, null), _(n, r), _(n, a), _(a, d), _(d, c), _(c, u), _(d, g), T && T.m(d, null), _(a, v), _(a, m), V && V.m(m, null), _(n, b), _(n, w), x[p].m(w, null), t[31](w), _(o, z), q && q.m(o, null), t[32](e), M = true;
     },
-    p(A, O) {
-      A[13] ? N ? (N.p(A, O), O[0] & /*_hasBannerSlot*/
-      8192 && U(N, 1)) : (N = Ai(A), N.c(), U(N, 1), N.m(o, i)) : N && (He(), $(N, 1, 1, () => {
+    p(S, O) {
+      S[13] ? N ? (N.p(S, O), O[0] & /*_hasBannerSlot*/
+      8192 && U(N, 1)) : (N = Si(S), N.c(), U(N, 1), N.m(o, i)) : N && (He(), $(N, 1, 1, () => {
         N = null;
-      }), Pe()), j === (j = L(A)) && H ? H.p(A, O) : (H.d(1), H = j(A), H && (H.c(), H.m(l, null))), (!M || O[0] & /*heading*/
+      }), Pe()), j === (j = L(S)) && H ? H.p(S, O) : (H.d(1), H = j(S), H && (H.c(), H.m(l, null))), (!M || O[0] & /*heading*/
       2) && s !== (s = /*heading*/
-      (A[1] || "[Service Name]") + "") && me(u, s), /*secondarytext*/
-      A[2] ? x ? x.p(A, O) : (x = Si(A), x.c(), x.m(d, null)) : x && (x.d(1), x = null), V && V.p && (!M || O[1] & /*$$scope*/
+      (S[1] || "[Service Name]") + "") && me(u, s), /*secondarytext*/
+      S[2] ? T ? T.p(S, O) : (T = xi(S), T.c(), T.m(d, null)) : T && (T.d(1), T = null), V && V.p && (!M || O[1] & /*$$scope*/
       256) && ge(
         V,
         Z,
-        A,
+        S,
         /*$$scope*/
-        A[39],
+        S[39],
         M ? fe(
           Z,
           /*$$scope*/
-          A[39],
+          S[39],
           O,
-          x1
+          T1
         ) : ve(
           /*$$scope*/
-          A[39]
+          S[39]
         ),
         zi
       );
       let K = p;
-      p = Y(A), p === K ? S[p].p(A, O) : (He(), $(S[K], 1, 1, () => {
-        S[K] = null;
-      }), Pe(), k = S[p], k ? k.p(A, O) : (k = S[p] = B[p](A), k.c()), U(k, 1), k.m(w, null)), /*_hasNavigationSlot*/
-      A[14] ? I ? (I.p(A, O), O[0] & /*_hasNavigationSlot*/
-      16384 && U(I, 1)) : (I = Hi(A), I.c(), U(I, 1), I.m(o, null)) : I && (He(), $(I, 1, 1, () => {
-        I = null;
+      p = Y(S), p === K ? x[p].p(S, O) : (He(), $(x[K], 1, 1, () => {
+        x[K] = null;
+      }), Pe(), k = x[p], k ? k.p(S, O) : (k = x[p] = B[p](S), k.c()), U(k, 1), k.m(w, null)), /*_hasNavigationSlot*/
+      S[14] ? q ? (q.p(S, O), O[0] & /*_hasNavigationSlot*/
+      16384 && U(q, 1)) : (q = Hi(S), q.c(), U(q, 1), q.m(o, null)) : q && (He(), $(q, 1, 1, () => {
+        q = null;
       }), Pe()), (!M || O[0] & /*testid*/
       16) && f(
         e,
         "data-testid",
         /*testid*/
-        A[4]
+        S[4]
       ), (!M || O[0] & /*_mobile*/
-      262144) && T(
+      262144) && I(
         e,
         "mobile",
         /*_mobile*/
-        A[18]
+        S[18]
       ), (!M || O[0] & /*_tablet*/
-      1048576) && T(
+      1048576) && I(
         e,
         "tablet",
         /*_tablet*/
-        A[20]
+        S[20]
       ), (!M || O[0] & /*_desktop*/
-      128) && T(
+      128) && I(
         e,
         "desktop",
         /*_desktop*/
-        A[7]
+        S[7]
       );
     },
-    i(A) {
-      M || (U(N), U(V, A), U(k), U(I), M = true);
+    i(S) {
+      M || (U(N), U(V, S), U(k), U(q), M = true);
     },
-    o(A) {
-      $(N), $(V, A), $(k), $(I), M = false;
+    o(S) {
+      $(N), $(V, S), $(k), $(q), M = false;
     },
-    d(A) {
-      A && E(e), N && N.d(), H.d(), x && x.d(), V && V.d(A), S[p].d(), t[31](null), I && I.d(), t[32](null);
+    d(S) {
+      S && E(e), N && N.d(), H.d(), T && T.d(), V && V.d(S), x[p].d(), t[31](null), q && q.d(), t[32](null);
     }
   };
 }
-function A1(t) {
+function S1(t) {
   let e, o, i, n, l, r, a, d = (
     /*heading*/
     t[1] && ji(t)
@@ -16293,7 +16293,7 @@ function A1(t) {
     }
   };
 }
-function S1(t) {
+function x1(t) {
   let e, o, i, n, l, r, a, d = (
     /*heading*/
     t[1] && Li(t)
@@ -16380,7 +16380,7 @@ function Ni(t) {
   return {
     c() {
       e = C("div"), o = C("button"), i = ae(`Menu
-          `), r && r.c(), f(o, "data-testid", "menu-toggle"), f(o, "class", "svelte-1p8l9vz"), T(
+          `), r && r.c(), f(o, "data-testid", "menu-toggle"), f(o, "class", "svelte-1p8l9vz"), I(
         o,
         "menu-open",
         /*_showMenu*/
@@ -16411,7 +16411,7 @@ function Ni(t) {
     p(a, d) {
       t = a, /*_hasMenuClickHandler*/
       t[19] ? r && (r.d(1), r = null) : r ? r.p(t, d) : (r = Ei(t), r.c(), r.m(o, null)), d[0] & /*_showMenu*/
-      2048 && T(
+      2048 && I(
         o,
         "menu-open",
         /*_showMenu*/
@@ -16445,14 +16445,14 @@ function Ei(t) {
 }
 function Di(t) {
   let e, o, i, n, l, r, a, d, c = !/*_hasMenuClickHandler*/
-  t[19] && xi(t), s = (
+  t[19] && Ti(t), s = (
     /*_showMenu*/
-    t[11] && Ti(t)
+    t[11] && Ii(t)
   );
   return {
     c() {
       e = C("goa-popover"), o = C("div"), i = C("button"), n = ae(`Menu
-            `), c && c.c(), l = W(), s && s.c(), f(i, "data-testid", "menu-toggle"), f(i, "class", "svelte-1p8l9vz"), T(
+            `), c && c.c(), l = W(), s && s.c(), f(i, "data-testid", "menu-toggle"), f(i, "class", "svelte-1p8l9vz"), I(
         i,
         "menu-open",
         /*_showMenu*/
@@ -16496,15 +16496,15 @@ function Di(t) {
     },
     p(u, g) {
       t = u, /*_hasMenuClickHandler*/
-      t[19] ? c && (c.d(1), c = null) : c ? c.p(t, g) : (c = xi(t), c.c(), c.m(i, null)), (!r || g[0] & /*_showMenu*/
-      2048) && T(
+      t[19] ? c && (c.d(1), c = null) : c ? c.p(t, g) : (c = Ti(t), c.c(), c.m(i, null)), (!r || g[0] & /*_showMenu*/
+      2048) && I(
         i,
         "menu-open",
         /*_showMenu*/
         t[11]
       ), /*_showMenu*/
       t[11] ? s ? (s.p(t, g), g[0] & /*_showMenu*/
-      2048 && U(s, 1)) : (s = Ti(t), s.c(), U(s, 1), s.m(e, null)) : s && (He(), $(s, 1, 1, () => {
+      2048 && U(s, 1)) : (s = Ii(t), s.c(), U(s, 1), s.m(e, null)) : s && (He(), $(s, 1, 1, () => {
         s = null;
       }), Pe());
     },
@@ -16519,7 +16519,7 @@ function Di(t) {
     }
   };
 }
-function xi(t) {
+function Ti(t) {
   let e, o;
   return {
     c() {
@@ -16539,7 +16539,7 @@ function xi(t) {
     }
   };
 }
-function Ti(t) {
+function Ii(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -16590,7 +16590,7 @@ function Ti(t) {
     }
   };
 }
-function Ii(t) {
+function qi(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -16641,7 +16641,7 @@ function Ii(t) {
     }
   };
 }
-function qi(t) {
+function Ai(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -16692,7 +16692,7 @@ function qi(t) {
     }
   };
 }
-function Ai(t) {
+function Si(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -16724,7 +16724,7 @@ function Ai(t) {
           /*$$scope*/
           l[39],
           r,
-          T1
+          I1
         ) : ve(
           /*$$scope*/
           l[39]
@@ -16786,7 +16786,7 @@ function H1(t) {
     }
   };
 }
-function Si(t) {
+function xi(t) {
   let e, o;
   return {
     c() {
@@ -17068,7 +17068,7 @@ function Z1(t) {
     /*onwindowresize*/
     t[29]
   );
-  const a = [q1, I1], d = [];
+  const a = [A1, q1], d = [];
   function c(s, u) {
     return (
       /*version*/
@@ -17107,54 +17107,54 @@ function Z1(t) {
 const rs = "data:image/svg+xml,%3Csvg width='35' height='35' viewBox='0 0 35 35' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_252_21401)'%3E%3Cpath d='M17.5 0C20.9612 0 24.3446 1.02636 27.2225 2.94928C30.1003 4.87221 32.3434 7.60533 33.6679 10.803C34.9924 14.0007 35.339 17.5194 34.6637 20.9141C33.9885 24.3087 32.3218 27.4269 29.8744 29.8744C27.4269 32.3218 24.3087 33.9885 20.9141 34.6637C17.5194 35.339 14.0007 34.9924 10.803 33.6679C7.60533 32.3434 4.87221 30.1003 2.94928 27.2225C1.02636 24.3446 0 20.9612 0 17.5C0 12.8587 1.84374 8.40752 5.12563 5.12563C8.40752 1.84374 12.8587 0 17.5 0V0Z' fill='%2300B6ED'/%3E%3Cpath d='M23.8045 24.8037C22.2993 24.2487 20.8302 23.6001 19.4059 22.8618C20.6989 22.3869 21.9597 21.8286 23.1803 21.1903C23.3048 22.4081 23.5131 23.6159 23.8036 24.8051M31.8873 9.83681C31.2574 9.7572 31.5846 10.0501 31.4091 10.8801C30.6504 14.4588 27.7236 17.0381 24.7854 18.7685C24.4775 14.6704 24.6033 10.1205 25.3748 7.33228C26.0258 4.97862 26.7999 5.41055 25.8397 4.91616C24.828 4.39581 23.7438 5.0833 22.8654 6.83656C21.987 8.58982 17.9421 18.1074 11.4762 24.5341C8.16898 27.8238 5.17753 26.1295 4.57844 25.6236C4.09108 25.2119 3.91118 25.8475 4.51598 26.4985C7.19074 29.3826 11.0984 27.7279 12.5213 26.3058C16.4536 22.3753 21.0255 13.9143 22.8751 10.3242C22.6597 13.451 22.7093 16.5904 23.0233 19.7089C21.5336 20.4399 19.98 21.0325 18.382 21.4793C17.4653 21.7195 16.8983 22.0929 16.8816 22.5174C16.8636 22.9823 17.4789 23.3747 18.3688 23.7969C19.9522 24.5491 24.5918 26.7409 25.735 27.4037C26.7137 27.9716 27.1914 27.5286 27.4812 26.9155C27.8599 26.1163 26.8215 25.6544 25.8151 25.3536C25.3709 23.6667 25.0692 21.9455 24.9129 20.2081C27.2714 18.7566 29.5934 16.8213 30.9319 14.4078C31.3641 13.5596 31.6853 12.6593 31.8877 11.7291C32.0278 11.1562 32.0661 10.5632 32.0007 9.97712C32.0007 9.97712 31.9831 9.84913 31.8877 9.83681' fill='white'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_252_21401'%3E%3Crect width='35' height='35' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A", as = "data:image/svg+xml,%3Csvg width='118' height='32' viewBox='0 0 155 42' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_74_4890)'%3E%3Cpath d='M155 21H140.6V35.4004H155V21Z' fill='%2300B6ED'/%3E%3Cpath d='M65.5539 33.211C64.116 33.349 62.6147 33.4882 61.0366 33.5566C61.6106 29.2005 63.9758 23.1883 66.915 24.1484C68.6357 24.7016 67.7035 29.8197 65.5527 33.2086L65.5539 33.211ZM61.8957 36.1823C61.4683 36.2514 61.0326 36.2514 60.6053 36.1823C60.7165 36.1047 60.8073 36.0013 60.8699 35.881C60.9325 35.7606 60.965 35.6268 60.9647 35.4911V34.9378C61.7531 34.9378 62.9717 34.7998 64.4779 34.6606C63.8154 35.4471 62.9038 35.9839 61.8957 36.1823ZM79.8198 25.8116C81.6842 24.1484 82.6164 24.29 82.8273 24.7052C83.3294 25.6736 81.1786 29.0625 76.9489 30.9297C77.3845 28.9796 78.3814 27.2002 79.8162 25.8116H79.8198ZM149 27.4712C148.784 24.0824 145.702 23.5291 145.272 24.4976C145.128 24.8432 146.419 24.7052 146.419 27.1256C146.419 31.0677 142.261 36.2543 136.953 36.2543C135.111 36.3656 133.298 35.7577 131.894 34.5583C130.49 33.3589 129.605 31.6613 129.425 29.8221C129.209 28.3701 129.568 26.3636 126.988 26.6408C125.19 26.8484 123.618 30.1677 121.324 33.001C119.387 35.4215 118.527 35.2139 118.957 33.139C119.531 30.5109 121.754 24.4256 124.335 24.0104C125.553 23.8027 125.983 25.8104 126.491 24.5636C126.674 24.1246 126.746 23.6475 126.701 23.1742C126.655 22.7009 126.495 22.246 126.233 21.8497C125.97 21.4533 125.615 21.1276 125.197 20.9012C124.78 20.6749 124.313 20.5549 123.839 20.5519C121.974 20.5519 119.751 22.4887 117.888 24.632C116.311 26.5688 108.209 38.0483 104.768 35.5595C103.191 34.3834 103.33 29.6793 104.338 24.1484C105.794 23.5168 107.361 23.1795 108.948 23.1559C110.536 23.1322 112.112 23.4226 113.587 24.0104C114.519 24.4256 114.665 24.356 114.233 23.3875C113.659 21.9355 110.433 19.653 105.343 20.6899C105.199 20.6899 105.127 20.7595 104.984 20.7595C105.414 18.9594 105.844 17.0946 106.421 15.2957C106.923 13.6361 108.286 10.8004 104.624 10.3168C103.477 10.1092 103.979 10.6624 103.546 12.184C102.827 14.9501 101.969 18.5442 101.323 22.2115C98.0002 24.1064 95.2885 26.9143 93.5082 30.3033C93.9222 28.7349 94.2336 27.141 94.4404 25.532C94.4806 25.1343 94.3704 24.7359 94.1314 24.4157C93.8924 24.0955 93.5422 23.8768 93.1499 23.8027C92.3615 23.5951 91.3526 23.9408 90.4252 25.2548C88.2025 28.2981 85.4071 33.0694 81.1055 35.0747C78.0225 36.5267 76.6601 35.0747 76.5894 32.7946C77.1289 32.6525 77.6562 32.4675 78.1663 32.2414C83.7583 29.8905 85.6228 26.294 84.2604 24.0812C82.898 22.0063 79.0985 22.6291 76.0155 25.7408C74.3913 27.5384 73.4079 29.8245 73.2188 32.2414C71.9284 32.5186 70.4941 32.7214 68.8454 32.9326C71.4263 28.8525 71.2118 23.3191 67.4075 22.3519C62.9621 21.2455 60.7395 25.3952 59.8084 28.8525C60.1679 24.98 60.7407 21.1063 61.4572 17.3034C61.8167 15.6437 62.9621 12.808 59.3004 12.3244C58.1537 12.1168 58.2963 12.67 58.3682 14.1917C58.512 16.2665 56.1455 28.6461 57.3641 34.0402C55.7872 34.5202 55.1414 35.6999 57.1484 36.8759C58.3625 37.3816 59.673 37.6128 60.9865 37.5531C62.3 37.4933 63.5842 37.1441 64.7475 36.5303C65.8289 36.0016 66.8016 35.2742 67.6148 34.3858C69.4792 34.1782 71.4143 33.8326 73.2069 33.5554C73.4932 35.9759 75.1432 37.7735 78.8708 37.4279C84.1765 36.9479 88.9083 30.6501 90.7008 27.608C90.3413 30.8589 88.1917 37.9811 91.9194 37.6355C93.3572 37.4975 92.7797 37.2899 92.8516 36.0455C93.211 31.7578 96.8668 28.0929 100.52 25.8788C99.8743 31.1349 100.09 35.8391 102.599 37.2899C107.187 40.056 113.569 32.7946 117.153 28.3689C115.355 32.311 114.356 37.2899 117.009 38.0507C120.164 38.9496 122.673 33.8326 125.612 29.9589C125.971 32.725 127.907 37.5659 135.649 37.5659C143.966 37.4963 149.2 32.6554 148.984 27.4688L149 27.4712ZM36.7117 36.1091C33.9173 35.1299 31.1875 33.9747 28.5387 32.6506C30.939 31.8034 33.2854 30.8103 35.565 29.6769C35.8138 31.8427 36.1968 33.9909 36.7117 36.1091ZM57.8817 39.9888C57.8098 39.7812 57.2359 40.0584 56.735 39.9888C55.2289 39.7812 53.2219 37.7759 52.6479 34.525C51.5695 28.6449 52.2178 22.8379 54.0103 14.1929C54.3698 12.5332 55.5164 9.69756 51.8535 9.14435C50.7068 9.00634 51.2796 9.55956 50.9932 11.0116C49.5553 17.4438 44.1106 22.0771 38.6624 25.1888C38.0884 17.8578 38.3029 9.62796 39.7408 4.64903C40.9629 0.430912 42.396 1.19173 40.6035 0.292908C38.8109 -0.605916 36.732 0.568916 35.0833 3.7478C33.4346 6.92669 25.9122 24.014 13.8629 35.5631C7.69931 41.4408 2.10485 38.3987 1.02886 37.4999C0.0966476 36.7391 -0.189725 37.9151 0.885072 39.09C5.8325 44.3461 13.1452 41.37 15.7968 38.8128C23.1059 31.759 31.6408 16.5438 35.0881 10.1128C34.6816 15.735 34.7775 21.3824 35.3745 26.9876C32.6035 28.2941 29.7251 29.3585 26.7713 30.1689C25.0507 30.5841 23.9747 31.2753 23.9747 32.0362C23.9747 32.797 25.1213 33.5578 26.7713 34.3162C29.7105 35.6999 38.3856 39.5724 40.4645 40.8168C42.2618 41.8536 43.1892 41.0244 43.6913 39.918C44.4102 38.4659 42.4727 37.6379 40.6083 37.1519C39.7869 34.1144 39.2115 31.0154 38.8876 27.8853C43.2611 25.2572 47.6346 21.7999 50.0718 17.445C49.4271 21.0451 47.8491 33.421 51.8691 38.6076C52.4249 39.3234 53.1422 39.8971 53.9622 40.2815C54.7822 40.666 55.6816 40.8502 56.5864 40.8192C57.5905 40.7496 58.0243 40.128 57.8769 39.9888' fill='%23545860'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_74_4890'%3E%3Crect width='154.804' height='42' fill='white' transform='translate(0.195801)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A", ss = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC4wMjgzMjAzIiB3aWR0aD0iMzEuNjk1NCIgaGVpZ2h0PSIzMS42ODc2IiByeD0iNCIgZmlsbD0iIzAwQjZFRCIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNTg2NTNfMjAzODgwKSI+CjxtYXNrIGlkPSJtYXNrMF81ODY1M18yMDM4ODAiIHN0eWxlPSJtYXNrLXR5cGU6YWxwaGEiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9Ii0xMSIgeT0iLTIiIHdpZHRoPSI0NyIgaGVpZ2h0PSIzOSI+CjxwYXRoIGQ9Ik0yMi4wMTYxIDMxLjEwMTVDMTkuNTQ1MyAzMC4xOTY5IDE3LjEzMzggMjkuMTQgMTQuNzk1OCAyNy45MzY5QzE2LjkxODMgMjcuMTYzMSAxOC45ODc5IDI2LjI1MzIgMjAuOTkxNSAyNS4yMTMxQzIxLjE5NTkgMjcuMTk3NiAyMS41Mzc3IDI5LjE2NTggMjIuMDE0NiAzMS4xMDM2TTM1LjI4NCA2LjcxMTMyQzM0LjI1MDEgNi41ODE1OCAzNC43ODczIDcuMDU4OTYgMzQuNDk5MiA4LjQxMTU0QzMzLjI1MzcgMTQuMjQzMyAyOC40NDkzIDE4LjQ0NjYgMjMuNjI2MiAyMS4yNjY0QzIzLjEyMDggMTQuNTg4MSAyMy4zMjczIDcuMTczNjQgMjQuNTkzNyAyLjYyOTkyQzI1LjY2MjMgLTEuMjA1NjIgMjYuOTMzMSAtMC41MDE3MjkgMjUuMzU2OSAtMS4zMDc0QzIzLjY5NjIgLTIuMTU1MzYgMjEuOTE2NCAtMS4wMzUwMiAyMC40NzQ2IDEuODIyMUMxOS4wMzI3IDQuNjc5MjIgMTIuMzkyOSAyMC4xODkxIDEuNzc5MTMgMzAuNjYyMUMtMy42NDk3OCAzNi4wMjMgLTguNTYwMjggMzMuMjYxOSAtOS41NDM2OCAzMi40Mzc2Qy0xMC4zNDM3IDMxLjc2NjcgLTEwLjYzOSAzMi44MDI0IC05LjY0NjIxIDMzLjg2MzNDLTUuMjU1NTcgMzguNTYzMyAxLjE1ODkxIDM1Ljg2NjcgMy40OTQ2NyAzMy41NDkzQzkuOTQ5NTggMjcuMTQ0MSAxNy40NTQzIDEzLjM1NTkgMjAuNDkwNCA3LjUwNTUyQzIwLjEzNjkgMTIuNjAxIDIwLjIxODMgMTcuNzE3MSAyMC43MzM4IDIyLjc5ODlDMTguMjg4NSAyMy45OTAxIDE1LjczODIgMjQuOTU1OSAxMy4xMTQ5IDI1LjY4NEMxMS42MTAyIDI2LjA3NTQgMTAuNjc5NiAyNi42ODM5IDEwLjY1MjEgMjcuMzc1NkMxMC42MjI1IDI4LjEzMzMgMTEuNjMyNiAyOC43NzI2IDEzLjA5MzMgMjkuNDYwOEMxNS42OTI2IDMwLjY4NjUgMjMuMzA4NSAzNC4yNTgyIDI1LjE4NTEgMzUuMzM4NEMyNi43OTE2IDM2LjI2MzggMjcuNTc1NyAzNS41NDIgMjguMDUxNSAzNC41NDI4QzI4LjY3MzIgMzMuMjQwNCAyNi45Njg1IDMyLjQ4NzggMjUuMzE2NSAzMS45OTc1QzI0LjU4NzQgMjkuMjQ4NSAyNC4wOTIxIDI2LjQ0MzcgMjMuODM1NiAyMy42MTI1QzI3LjcwNzEgMjEuMjQ3MSAzMS41MTg3IDE4LjA5MzIgMzMuNzE1OCAxNC4xNjAyQzM0LjQyNTIgMTIuNzc3OSAzNC45NTI1IDExLjMxMDggMzUuMjg0OCA5Ljc5NDk0QzM1LjUxNDggOC44NjE0NSAzNS41Nzc2IDcuODk1MDcgMzUuNDcwMyA2LjkzOTk3QzM1LjQ3MDMgNi45Mzk5NyAzNS40NDE0IDYuNzMxMzkgMzUuMjg0OCA2LjcxMTMyIiBmaWxsPSIjNTQ1ODYwIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF81ODY1M18yMDM4ODApIj4KPHJlY3QgeD0iMC4wMjgzMjAzIiB5PSItMC4wMDE5NTMxMiIgd2lkdGg9IjMxLjY5NTQiIGhlaWdodD0iMzEuNjk1NCIgcng9IjMuMDQ3NjIiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF81ODY1M18yMDM4ODAiPgo8cmVjdCB5PSIwLjAwNTg1OTM4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzEuOTkyMiIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==", ds = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTE4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTE4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNTg0NDdfNDI3MDkpIj4KPHBhdGggZD0iTTExNy45NDYgMTZIMTA2Ljk3NFYyNi45NzE3SDExNy45NDZWMTZaIiBmaWxsPSIjMDBCNkVEIi8+CjxwYXRoIGQ9Ik00OS43OTY2IDI1LjMwMzZDNDguNzAxMSAyNS40MDg4IDQ3LjU1NzIgMjUuNTE0OCA0Ni4zNTQ5IDI1LjU2NjlDNDYuNzkyMiAyMi4yNDggNDguNTk0MyAxNy42NjczIDUwLjgzMzcgMTguMzk4N0M1Mi4xNDQ3IDE4LjgyMDIgNTEuNDM0NCAyMi43MTk4IDQ5Ljc5NTcgMjUuMzAxOEw0OS43OTY2IDI1LjMwMzZaTTQ3LjAwOTUgMjcuNTY3NEM0Ni42ODM4IDI3LjYyMDEgNDYuMzUxOSAyNy42MjAxIDQ2LjAyNjIgMjcuNTY3NEM0Ni4xMTEgMjcuNTA4NCA0Ni4xODAxIDI3LjQyOTYgNDYuMjI3OCAyNy4zMzc5QzQ2LjI3NTUgMjcuMjQ2MSA0Ni4zMDAzIDI3LjE0NDIgNDYuMzAwMSAyNy4wNDA4VjI2LjYxOTNDNDYuOTAwOCAyNi42MTkzIDQ3LjgyOTMgMjYuNTE0MiA0OC45NzY4IDI2LjQwODFDNDguNDcyMSAyNy4wMDczIDQ3Ljc3NzUgMjcuNDE2MyA0Ny4wMDk1IDI3LjU2NzRaTTYwLjY2NTkgMTkuNjY2QzYyLjA4NjQgMTguMzk4NyA2Mi43OTY3IDE4LjUwNjYgNjIuOTU3MyAxOC44MjNDNjMuMzM5OCAxOS41NjA4IDYxLjcwMTEgMjIuMTQyOCA1OC40Nzg1IDIzLjU2NTVDNTguODEwNCAyMi4wNzk3IDU5LjU3IDIwLjcyNCA2MC42NjMyIDE5LjY2Nkg2MC42NjU5Wk0xMTMuMzc0IDIwLjkzMDVDMTEzLjIxIDE4LjM0ODUgMTEwLjg2MiAxNy45MjcgMTEwLjUzNCAxOC42NjQ4QzExMC40MjUgMTguOTI4MSAxMTEuNDA4IDE4LjgyMyAxMTEuNDA4IDIwLjY2NzFDMTExLjQwOCAyMy42NzA3IDEwOC4yNCAyNy42MjIzIDEwNC4xOTYgMjcuNjIyM0MxMDIuNzkzIDI3LjcwNzEgMTAxLjQxMSAyNy4yNDQgMTAwLjM0MSAyNi4zMzAxQzk5LjI3MTkgMjUuNDE2MyA5OC41OTc1IDI0LjEyMjkgOTguNDYwMSAyMi43MjE2Qzk4LjI5NTcgMjEuNjE1MyA5OC41Njk2IDIwLjA4NjYgOTYuNjAzMiAyMC4yOTc4Qzk1LjIzMzggMjAuNDU1OSA5NC4wMzYgMjIuOTg0OSA5Mi4yODc4IDI1LjE0MzZDOTAuODEyNSAyNi45ODc4IDkwLjE1NyAyNi44Mjk2IDkwLjQ4NDcgMjUuMjQ4OEM5MC45MjIgMjMuMjQ2NCA5Mi42MTU1IDE4LjYwOTkgOTQuNTgxOSAxOC4yOTM2Qzk1LjUxMDQgMTguMTM1NCA5NS44MzgxIDE5LjY2NTEgOTYuMjI1MiAxOC43MTUxQzk2LjM2NDIgMTguMzgwNyA5Ni40MTg5IDE4LjAxNzEgOTYuMzg0NSAxNy42NTY1Qzk2LjM1MDEgMTcuMjk1OSA5Ni4yMjc2IDE2Ljk0OTQgOTYuMDI3OSAxNi42NDc0Qzk1LjgyODIgMTYuMzQ1MyA5NS41NTc0IDE2LjA5NzIgOTUuMjM5MyAxNS45MjQ3Qzk0LjkyMTIgMTUuNzUyMyA5NC41NjU3IDE1LjY2MDkgOTQuMjA0IDE1LjY1ODZDOTIuNzgzNSAxNS42NTg2IDkxLjA5IDE3LjEzNDMgODkuNjcwNCAxOC43NjcyQzg4LjQ2OSAyMC4yNDI5IDgyLjI5NTggMjguOTg5MiA3OS42NzM5IDI3LjA5MjlDNzguNDcyNSAyNi4xOTY5IDc4LjU3ODQgMjIuNjEyOCA3OS4zNDYyIDE4LjM5ODdDODAuNDU2IDE3LjkxNzYgODEuNjQ5OCAxNy42NjA2IDgyLjg1OTEgMTcuNjQyNkM4NC4wNjg0IDE3LjYyNDUgODUuMjY5MyAxNy44NDU4IDg2LjM5MyAxOC4yOTM2Qzg3LjEwMzMgMTguNjA5OSA4Ny4yMTQ2IDE4LjU1NjkgODYuODg1MSAxNy44MTkxQzg2LjQ0NzggMTYuNzEyOCA4My45OTAyIDE0Ljk3MzcgODAuMTEyMSAxNS43NjM3QzgwLjAwMjUgMTUuNzYzNyA3OS45NDc4IDE1LjgxNjcgNzkuODM4MiAxNS44MTY3QzgwLjE2NiAxNC40NDUzIDgwLjQ5MzcgMTMuMDI0NCA4MC45MzM3IDExLjY1MzlDODEuMzE2MiAxMC4zODk0IDgyLjM1NDIgOC4yMjg4NyA3OS41NjQzIDcuODYwNEM3OC42OTA3IDcuNzAyMjMgNzkuMDczMiA4LjEyMzcyIDc4Ljc0MjcgOS4yODMwN0M3OC4xOTUgMTEuMzkwNiA3Ny41NDEzIDE0LjEyODkgNzcuMDQ5MiAxNi45MjNDNzQuNTE3NiAxOC4zNjY4IDcyLjQ1MTYgMjAuNTA2MSA3MS4wOTUxIDIzLjA4ODJDNzEuNDEwNSAyMS44OTMyIDcxLjY0NzggMjAuNjc4OSA3MS44MDU0IDE5LjQ1MjlDNzEuODM2IDE5LjE0OTkgNzEuNzUyIDE4Ljg0NjQgNzEuNTY5OSAxOC42MDI0QzcxLjM4NzkgMTguMzU4NSA3MS4xMjEgMTguMTkxOCA3MC44MjIyIDE4LjEzNTRDNzAuMjIxNSAxNy45NzcyIDY5LjQ1MjggMTguMjQwNiA2OC43NDYyIDE5LjI0MTdDNjcuMDUyNyAyMS41NjA0IDY0LjkyMjkgMjUuMTk1NyA2MS42NDU1IDI2LjcyMzVDNTkuMjk2NSAyNy44Mjk5IDU4LjI1ODUgMjYuNzIzNSA1OC4yMDQ2IDI0Ljk4NjRDNTguNjE1NyAyNC44NzgxIDU5LjAxNzQgMjQuNzM3MSA1OS40MDYxIDI0LjU2NDlDNjMuNjY2NyAyMi43NzM3IDY1LjA4NzIgMjAuMDMzNSA2NC4wNDkyIDE4LjM0NzVDNjMuMDExMiAxNi43NjY3IDYwLjExNjMgMTcuMjQxMiA1Ny43Njc0IDE5LjYxMkM1Ni41Mjk5IDIwLjk4MTcgNTUuNzgwNiAyMi43MjM0IDU1LjYzNjYgMjQuNTY0OUM1NC42NTM0IDI0Ljc3NjEgNTMuNTYwNiAyNC45MzA2IDUyLjMwNDQgMjUuMDkxNUM1NC4yNzA5IDIxLjk4MjggNTQuMTA3NCAxNy43NjcgNTEuMjA4OSAxNy4wM0M0Ny44MjIgMTYuMTg3IDQ2LjEyODUgMTkuMzQ4NyA0NS40MTkxIDIxLjk4MjhDNDUuNjkzIDE5LjAzMjQgNDYuMTI5NCAxNi4wODEgNDYuNjc1MyAxMy4xODM1QzQ2Ljk0OTIgMTEuOTE5IDQ3LjgyMiA5Ljc1ODUxIDQ1LjAzMjEgOS4zOTAwNEM0NC4xNTg0IDkuMjMxODcgNDQuMjY3IDkuNjUzMzcgNDQuMzIxOCAxMC44MTI3QzQ0LjQzMTQgMTIuMzkzNiA0Mi42MjgzIDIxLjgyNTYgNDMuNTU2OCAyNS45MzU0QzQyLjM1NTQgMjYuMzAxMSA0MS44NjMzIDI3LjE5OTkgNDMuMzkyNCAyOC4wOTU5QzQ0LjMxNzQgMjguNDgxMiA0NS4zMTU5IDI4LjY1NzQgNDYuMzE2NyAyOC42MTE5QzQ3LjMxNzUgMjguNTY2MyA0OC4yOTU5IDI4LjMwMDMgNDkuMTgyMiAyNy44MzI2QzUwLjAwNjIgMjcuNDI5OCA1MC43NDcyIDI2Ljg3NTYgNTEuMzY2OCAyNi4xOTg3QzUyLjc4NzQgMjYuMDQwNiA1NC4yNjE3IDI1Ljc3NzIgNTUuNjI3NSAyNS41NjZDNTUuODQ1NiAyNy40MTAyIDU3LjEwMjcgMjguNzc5OCA1OS45NDI5IDI4LjUxNjVDNjMuOTg1MyAyOC4xNTA4IDY3LjU5MDQgMjMuMzUyNSA2OC45NTYyIDIxLjAzNDdDNjguNjgyMyAyMy41MTE2IDY3LjA0NDUgMjguOTM4IDY5Ljg4NDYgMjguNjc0N0M3MC45ODAxIDI4LjU2OTUgNzAuNTQwMSAyOC40MTE0IDcwLjU5NDkgMjcuNDYzMkM3MC44Njg3IDI0LjE5NjQgNzMuNjU0MSAyMS40MDQxIDc2LjQzNzYgMTkuNzE3MkM3NS45NDU1IDIzLjcyMTkgNzYuMTA5OCAyNy4zMDYgNzguMDIxNSAyOC40MTE0QzgxLjUxNzEgMzAuNTE4OCA4Ni4zNzkzIDI0Ljk4NjQgODkuMTA5OSAyMS42MTQ0Qzg3Ljc0MDUgMjQuNjE3OSA4Ni45NzkxIDI4LjQxMTQgODkuMDAwMyAyOC45OTFDOTEuNDA0MSAyOS42NzU4IDkzLjMxNTcgMjUuNzc3MiA5NS41NTUxIDIyLjgyNThDOTUuODI5IDI0LjkzMzMgOTcuMzAzNCAyOC42MjE2IDEwMy4yMDMgMjguNjIxNkMxMDkuNTM5IDI4LjU2ODYgMTEzLjUyNyAyNC44ODAzIDExMy4zNjMgMjAuOTI4NkwxMTMuMzc0IDIwLjkzMDVaTTI3LjgyMTYgMjcuNTExN0MyNS42OTI2IDI2Ljc2NTYgMjMuNjEyNyAyNS44ODU1IDIxLjU5NDUgMjQuODc2NkMyMy40MjM0IDI0LjIzMTIgMjUuMjExMSAyMy40NzQ1IDI2Ljk0NzkgMjIuNjExQzI3LjEzNzUgMjQuMjYxMSAyNy40MjkzIDI1Ljg5NzggMjcuODIxNiAyNy41MTE3Wk00My45NTEyIDMwLjQ2NzZDNDMuODk2NCAzMC4zMDk1IDQzLjQ1OTEgMzAuNTIwNyA0My4wNzc1IDMwLjQ2NzZDNDEuOTI5OSAzMC4zMDk1IDQwLjQwMDggMjguNzgxNyAzOS45NjM1IDI2LjMwNDhDMzkuMTQxOSAyMS44MjQ3IDM5LjYzNTggMTcuNDAwMyA0MS4wMDE1IDEwLjgxMzZDNDEuMjc1NCA5LjU0OTE0IDQyLjE0OSA3LjM4ODYyIDM5LjM1ODIgNi45NjcxMkMzOC40ODQ2IDYuODYxOTggMzguOTIwOSA3LjI4MzQ3IDM4LjcwMjcgOC4zODk3OUMzNy42MDcyIDEzLjI5MDUgMzMuNDU4OSAxNi44MjA2IDI5LjMwNzggMTkuMTkxNUMyOC44NzA2IDEzLjYwNTkgMjkuMDM0IDcuMzM1NTkgMzAuMTI5NSAzLjU0MjExQzMxLjA2MDcgMC4zMjgzMTQgMzIuMTUyNSAwLjkwNzk4NyAzMC43ODY4IDAuMjIzMTY4QzI5LjQyMSAtMC40NjE2NSAyNy44MzcxIDAuNDMzNDYgMjYuNTgwOSAyLjg1NTQ3QzI1LjMyNDggNS4yNzc0OCAxOS41OTM0IDE4LjI5NjMgMTAuNDEzIDI3LjA5NTdDNS43MTY5NiAzMS41NzQgMS40NTQ1MiAyOS4yNTYyIDAuNjM0NzEgMjguNTcxNEMtMC4wNzU1NDUzIDI3Ljk5MTcgLTAuMjkzNzM0IDI4Ljg4NzcgMC41MjUxNTkgMjkuNzgyOEM0LjI5NDYyIDMzLjc4NzUgOS44NjYyIDMxLjUyIDExLjg4NjUgMjkuNTcxNkMxNy40NTUzIDI0LjE5NzMgMjMuOTU4MSAxMi42MDQ4IDI2LjU4NDYgNy43MDQ5N0MyNi4yNzQ5IDExLjk4ODYgMjYuMzQ3OSAxNi4yOTE0IDI2LjgwMjggMjAuNTYyQzI0LjY5MTYgMjEuNTU3NCAyMi40OTg1IDIyLjM2ODQgMjAuMjQ4IDIyLjk4NThDMTguOTM3IDIzLjMwMjIgMTguMTE3MiAyMy44Mjg4IDE4LjExNzIgMjQuNDA4NUMxOC4xMTcyIDI0Ljk4ODIgMTguOTkwOSAyNS41Njc5IDIwLjI0OCAyNi4xNDU3QzIyLjQ4NzQgMjcuMTk5OSAyOS4wOTcgMzAuMTUwNCAzMC42ODA5IDMxLjA5ODVDMzIuMDUwMyAzMS44ODg1IDMyLjc1NjkgMzEuMjU2NyAzMy4xMzk0IDMwLjQxMzdDMzMuNjg3MSAyOS4zMDc0IDMyLjIxMDkgMjguNjc2NSAzMC43OTA0IDI4LjMwNjJDMzAuMTY0NyAyNS45OTE5IDI5LjcyNjMgMjMuNjMwOCAyOS40Nzk1IDIxLjI0NTlDMzIuODExNiAxOS4yNDM2IDM2LjE0MzggMTYuNjA5NCAzOC4wMDA3IDEzLjI5MTRDMzcuNTA5NiAxNi4wMzQzIDM2LjMwNzIgMjUuNDYzNiAzOS4zNzAxIDI5LjQxNTNDMzkuNzkzNiAyOS45NjA3IDQwLjM0MDEgMzAuMzk3OCA0MC45NjQ5IDMwLjY5MDdDNDEuNTg5NiAzMC45ODM2IDQyLjI3NDggMzEuMTI0IDQyLjk2NDMgMzEuMTAwM0M0My43MjkzIDMxLjA0NzMgNDQuMDU5OCAzMC41NzM3IDQzLjk0NzUgMzAuNDY3NiIgZmlsbD0iIzU0NTg2MCIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzU4NDQ3XzQyNzA5Ij4KPHJlY3Qgd2lkdGg9IjExNy45NDYiIGhlaWdodD0iMzIiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==";
 function F1(t, e, o) {
   let i, n, l, r, { $$slots: a = {}, $$scope: d } = e;
-  const [c, s] = qe("Version", ["1", "2"]);
-  let { version: u = "1" } = e, { heading: g = "" } = e, { secondarytext: v = "" } = e, { url: m = "" } = e, { testid: b = "" } = e, { maxcontentwidth: w = "" } = e, { fullmenubreakpoint: p = is } = e, { hasmenuclickhandler: k = "false" } = e, z, M, N = window.innerWidth, L = false, j = false, H = [], x = [], Z, V = false, B = false, S = [], Y = 0, I = false, A = false, O = null, K = false, F = null;
+  const [c, s] = Ae("Version", ["1", "2"]);
+  let { version: u = "1" } = e, { heading: g = "" } = e, { secondarytext: v = "" } = e, { url: m = "" } = e, { testid: b = "" } = e, { maxcontentwidth: w = "" } = e, { fullmenubreakpoint: p = is } = e, { hasmenuclickhandler: k = "false" } = e, z, M, N = window.innerWidth, L = false, j = false, H = [], T = [], Z, V = false, B = false, x = [], Y = 0, q = false, S = false, O = null, K = false, F = null;
   De(async () => {
     s(u), u === "2" && (oe(), ne(), document.addEventListener("click", G), await Ge(), O && Y >= 2 && (await Ge(), te(), o(27, K = true))), P(), J(), await Ge(), ie();
   }), dt(() => {
     window.removeEventListener("popstate", se, true), document.removeEventListener("click", G), F && clearTimeout(F);
   });
-  const q = () => o(11, j = !j), Q = () => o(11, j = false), R = () => o(11, j = true), ee = () => {
+  const A = () => o(11, j = !j), Q = () => o(11, j = false), R = () => o(11, j = true), ee = () => {
     r && Z.dispatchEvent(new CustomEvent("_menuClick", { composed: true, bubbles: true }));
   };
   function oe() {
     var Me;
     if (!M) return;
     const We = ((Me = M.getRootNode().host) == null ? void 0 : Me.children) || [];
-    o(13, V = Array.from(We).some((Se) => Se.getAttribute("slot") === "banner")), o(14, B = Array.from(We).some((Se) => Se.getAttribute("slot") === "navigation"));
+    o(13, V = Array.from(We).some((xe) => xe.getAttribute("slot") === "banner")), o(14, B = Array.from(We).some((xe) => xe.getAttribute("slot") === "navigation"));
   }
   function ne() {
     var Me;
     if (!M || u !== "2") return;
     const We = ((Me = M.getRootNode().host) == null ? void 0 : Me.children) || [];
-    S = Array.from(We).filter((Se) => Se.getAttribute("slot") === "utilities"), Y = S.length;
+    x = Array.from(We).filter((xe) => xe.getAttribute("slot") === "utilities"), Y = x.length;
   }
   function te() {
     F && clearTimeout(F), F = window.setTimeout(
       () => {
         if (!O || u !== "2" || Y < 2) {
-          I !== false && o(15, I = false);
+          q !== false && o(15, q = false);
           return;
         }
         if (i && Y >= 2) {
-          I !== true && o(15, I = true);
+          q !== true && o(15, q = true);
           return;
         }
         const _e = O.getRootNode(), We = _e == null ? void 0 : _e.querySelector(".v2-header-placeholder");
         if (!We) {
-          I !== false && o(15, I = false);
+          q !== false && o(15, q = false);
           return;
         }
-        const Me = We.offsetWidth, Se = _e == null ? void 0 : _e.querySelector(".v2-logo-area"), Xe = (Se == null ? void 0 : Se.offsetWidth) || (i ? 32 : 118), Vt = Me - Xe - 200 - 96 - 48, jt = _e == null ? void 0 : _e.querySelector('slot[name="utilities"]');
+        const Me = We.offsetWidth, xe = _e == null ? void 0 : _e.querySelector(".v2-logo-area"), Xe = (xe == null ? void 0 : xe.offsetWidth) || (i ? 32 : 118), Vt = Me - Xe - 200 - 96 - 48, jt = _e == null ? void 0 : _e.querySelector('slot[name="utilities"]');
         let Lt = 0;
         if (jt) {
           const $e = jt.assignedElements();
-          $e.length > 0 ? ($e.forEach((At) => {
-            Lt += At.offsetWidth || 100;
+          $e.length > 0 ? ($e.forEach((St) => {
+            Lt += St.offsetWidth || 100;
           }), Lt += ($e.length - 1) * 12) : Lt = Y * 100 + (Y - 1) * 12;
         }
         const he = Lt > Vt;
-        I !== he && o(15, I = he);
+        q !== he && o(15, q = he);
       },
       100
     );
@@ -17165,17 +17165,17 @@ function F1(t, e, o) {
     _e.length !== 0 && (H = _e.filter((We) => We.tagName === "A").map((We) => (We.classList.remove("current"), We)));
   }
   function G(_e) {
-    if (!A) return;
-    _e.composedPath().some((Se) => {
+    if (!S) return;
+    _e.composedPath().some((xe) => {
       var Xe, tt;
-      return Se instanceof Element && (((Xe = Se.classList) == null ? void 0 : Xe.contains("v2-utilities-menu-button")) || ((tt = Se.classList) == null ? void 0 : tt.contains("v2-utilities-dropdown")));
-    }) || o(16, A = false);
+      return xe instanceof Element && (((Xe = xe.classList) == null ? void 0 : Xe.contains("v2-utilities-menu-button")) || ((tt = xe.classList) == null ? void 0 : tt.contains("v2-utilities-dropdown")));
+    }) || o(16, S = false);
   }
   function J() {
     if (!M) return;
     M.addEventListener("app-header-menu:mounted", (Me) => {
-      const Se = Me.detail;
-      x = [...x, Se], ie();
+      const xe = Me.detail;
+      T = [...T, xe], ie();
     });
     let _e = document.location.href;
     new MutationObserver((Me) => {
@@ -17187,14 +17187,14 @@ function F1(t, e, o) {
   }
   function ie() {
     let _e = [...H];
-    x.forEach((Me) => {
+    T.forEach((Me) => {
       _e = [..._e, ...Me.links];
     }), _e.forEach((Me) => Me.classList.remove("current"));
     const We = Wo(_e, window.location);
     We && We.classList.add("current"), ye((We == null ? void 0 : We.getAttribute("href")) || "");
   }
   function ye(_e) {
-    x.forEach((We) => {
+    T.forEach((We) => {
       We.el.dispatchEvent(new CustomEvent("app-header:changed", { composed: true, detail: _e }));
     });
   }
@@ -17214,13 +17214,13 @@ function F1(t, e, o) {
   function le() {
     o(6, N = ls.innerWidth);
   }
-  const X = () => o(16, A = !A);
+  const X = () => o(16, S = !S);
   function pe(_e) {
     ce[_e ? "unshift" : "push"](() => {
       O = _e, o(17, O);
     });
   }
-  function Te(_e) {
+  function Ie(_e) {
     ce[_e ? "unshift" : "push"](() => {
       M = _e, o(9, M);
     });
@@ -17263,7 +17263,7 @@ function F1(t, e, o) {
     33554496 && o(20, n = N >= Pt && N < p), t.$$.dirty[0] & /*_windowWidth, fullmenubreakpoint*/
     33554496 && o(7, l = N >= +p), t.$$.dirty[0] & /*_desktop*/
     128 && (async () => (o(10, L = l ? false : await Ke()), Le()))(), t.$$.dirty[0] & /*hasmenuclickhandler*/
-    67108864 && o(19, r = Ae(k)), t.$$.dirty[0] & /*_windowWidth, _utilitiesInitialMeasurementDone*/
+    67108864 && o(19, r = Se(k)), t.$$.dirty[0] & /*_windowWidth, _utilitiesInitialMeasurementDone*/
     134217792 && N && K && te();
   }, [
     u,
@@ -17281,13 +17281,13 @@ function F1(t, e, o) {
     Z,
     V,
     B,
-    I,
-    A,
+    q,
+    S,
     O,
     i,
     r,
     n,
-    q,
+    A,
     Q,
     R,
     ee,
@@ -17298,7 +17298,7 @@ function F1(t, e, o) {
     le,
     X,
     pe,
-    Te,
+    Ie,
     Fe,
     Je,
     gt,
@@ -17427,12 +17427,12 @@ function U1(t) {
       t[5] ? "xsmall" : void 0), h(a, "class", "svelte-mx9jmj"), f(e, "class", s = Ze(
         /*type*/
         t[2]
-      ) + " svelte-mx9jmj"), T(
+      ) + " svelte-mx9jmj"), I(
         e,
         "open",
         /*_open*/
         t[11]
-      ), T(
+      ), I(
         e,
         "v2-nav",
         /*_isV2Navigation*/
@@ -17463,13 +17463,13 @@ function U1(t) {
         /*type*/
         z[2]
       ) + " svelte-mx9jmj")) && f(e, "class", s), (!v || M & /*type, _open*/
-      2052) && T(
+      2052) && I(
         e,
         "open",
         /*_open*/
         z[11]
       ), (!v || M & /*type, _isV2Navigation*/
-      36) && T(
+      36) && I(
         e,
         "v2-nav",
         /*_isV2Navigation*/
@@ -17516,22 +17516,22 @@ function Q1(t) {
       t[5] ? "xsmall" : void 0), h(r, "class", "svelte-mx9jmj"), f(o, "slot", "target"), f(o, "class", c = Ze(
         /*type*/
         t[2]
-      ) + " svelte-mx9jmj"), T(
+      ) + " svelte-mx9jmj"), I(
         o,
         "open",
         /*_open*/
         t[11]
-      ), T(
+      ), I(
         o,
         "current",
         /*_hasCurrentLink*/
         t[10]
-      ), T(
+      ), I(
         o,
         "v2-nav",
         /*_isV2Navigation*/
         t[5]
-      ), f(u, "class", "desktop svelte-mx9jmj"), T(
+      ), f(u, "class", "desktop svelte-mx9jmj"), I(
         u,
         "v2-nav-menu",
         /*_isV2Navigation*/
@@ -17563,19 +17563,19 @@ function Q1(t) {
         /*type*/
         k[2]
       ) + " svelte-mx9jmj")) && f(o, "class", c), (!m || z & /*type, _open*/
-      2052) && T(
+      2052) && I(
         o,
         "open",
         /*_open*/
         k[11]
       ), (!m || z & /*type, _hasCurrentLink*/
-      1028) && T(
+      1028) && I(
         o,
         "current",
         /*_hasCurrentLink*/
         k[10]
       ), (!m || z & /*type, _isV2Navigation*/
-      36) && T(
+      36) && I(
         o,
         "v2-nav",
         /*_isV2Navigation*/
@@ -17599,7 +17599,7 @@ function Q1(t) {
         ),
         null
       ), (!m || z & /*_isV2Navigation*/
-      32) && T(
+      32) && I(
         u,
         "v2-nav-menu",
         /*_isV2Navigation*/
@@ -17683,7 +17683,7 @@ function Bi(t) {
   );
   return {
     c() {
-      e = C("div"), n && n.c(), f(e, "class", "not-desktop svelte-mx9jmj"), T(
+      e = C("div"), n && n.c(), f(e, "class", "not-desktop svelte-mx9jmj"), I(
         e,
         "v2-nav-menu",
         /*_isV2Navigation*/
@@ -17713,7 +17713,7 @@ function Bi(t) {
         ),
         null
       ), (!o || r & /*_isV2Navigation*/
-      32) && T(
+      32) && I(
         e,
         "v2-nav-menu",
         /*_isV2Navigation*/
@@ -17817,25 +17817,25 @@ function G1(t, e, o) {
   De(() => {
     var O;
     bo("GoaAppHeaderMenu", { heading: r });
-    const Y = (O = m == null ? void 0 : m.getRootNode()) == null ? void 0 : O.host, I = (Y == null ? void 0 : Y.getAttribute("slot")) === "navigation";
-    let A = c;
-    if (c === "1" && I) {
+    const Y = (O = m == null ? void 0 : m.getRootNode()) == null ? void 0 : O.host, q = (Y == null ? void 0 : Y.getAttribute("slot")) === "navigation";
+    let S = c;
+    if (c === "1" && q) {
       const K = Y == null ? void 0 : Y.closest("goa-app-header");
-      (K == null ? void 0 : K.version) === "2" && (A = "2");
+      (K == null ? void 0 : K.version) === "2" && (S = "2");
     }
-    o(5, p = A === "2" && I), k(), z();
+    o(5, p = S === "2" && q), k(), z();
   });
   function k() {
     if (!v) return;
     const Y = Et(v);
     if (Y.length === 0) return;
-    const I = Y.filter((A) => A.tagName === "A").map((A) => (A.classList.remove("current"), A));
+    const q = Y.filter((S) => S.tagName === "A").map((S) => (S.classList.remove("current"), S));
     setTimeout(
       () => {
         m == null || m.dispatchEvent(new CustomEvent(
           "app-header-menu:mounted",
           {
-            detail: { el: m, links: I },
+            detail: { el: m, links: q },
             composed: true,
             bubbles: true
           }
@@ -17846,15 +17846,15 @@ function G1(t, e, o) {
   }
   function z() {
     m == null || m.addEventListener("app-header:changed", (Y) => {
-      const I = Y.detail;
-      M(I);
+      const q = Y.detail;
+      M(q);
     });
   }
   function M(Y) {
     if (!v) return;
-    const I = Et(v);
-    if (I.length === 0) return;
-    const O = I.filter((K) => K.tagName === "A").map((K) => (K.classList.remove("current"), K)).find((K) => K.getAttribute("href") === Y);
+    const q = Et(v);
+    if (q.length === 0) return;
+    const O = q.filter((K) => K.tagName === "A").map((K) => (K.classList.remove("current"), K)).find((K) => K.getAttribute("href") === Y);
     O && O.classList.add("current"), o(10, b = !!O), j();
   }
   async function N() {
@@ -17874,7 +17874,7 @@ function G1(t, e, o) {
   function H() {
     w ? j() : L();
   }
-  function x() {
+  function T() {
     o(4, u = cs.innerWidth);
   }
   function Z(Y) {
@@ -17892,7 +17892,7 @@ function G1(t, e, o) {
       v = Y, o(8, v);
     });
   }
-  function S(Y) {
+  function x(Y) {
     ce[Y ? "unshift" : "push"](() => {
       m = Y, o(9, m);
     });
@@ -17920,11 +17920,11 @@ function G1(t, e, o) {
     c,
     l,
     n,
-    x,
+    T,
     Z,
     V,
     B,
-    S
+    x
   ];
 }
 class K1 extends ze {
@@ -18090,11 +18090,11 @@ function e2(t) {
         t[10],
         /*ml*/
         t[11]
-      ), Ie(
+      ), qe(
         "min-width",
         /*minWidth*/
         t[12]
-      ), Ie(
+      ), qe(
         "justify-content",
         /*justifyContent*/
         t[13]
@@ -18106,12 +18106,12 @@ function e2(t) {
       ), f(e, "data-type", "goa-badge"), f(e, "class", n = "goa-badge badge-" + /*type*/
       t[0] + " badge-" + /*size*/
       t[5] + " badge-" + /*emphasis*/
-      t[6] + " svelte-l4aghp"), T(
+      t[6] + " svelte-l4aghp"), I(
         e,
         "icon-only",
         /*showIconOnly*/
         t[15]
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
@@ -18133,11 +18133,11 @@ function e2(t) {
         c[10],
         /*ml*/
         c[11]
-      ), Ie(
+      ), qe(
         "min-width",
         /*minWidth*/
         c[12]
-      ), Ie(
+      ), qe(
         "justify-content",
         /*justifyContent*/
         c[13]
@@ -18152,13 +18152,13 @@ function e2(t) {
       c[0] + " badge-" + /*size*/
       c[5] + " badge-" + /*emphasis*/
       c[6] + " svelte-l4aghp") && f(e, "class", n), s & /*type, size, emphasis, showIconOnly*/
-      32865 && T(
+      32865 && I(
         e,
         "icon-only",
         /*showIconOnly*/
         c[15]
       ), s & /*type, size, emphasis, version*/
-      225 && T(
+      225 && I(
         e,
         "v2",
         /*version*/
@@ -18174,7 +18174,7 @@ function e2(t) {
 }
 function t2(t, e, o) {
   let i, n, l;
-  const [r, a] = qe(
+  const [r, a] = Ae(
     "Badge type",
     [
       "information",
@@ -18213,15 +18213,15 @@ function t2(t, e, o) {
       "default"
     ],
     true
-  ), [d, c] = qe("Badge size", ["medium", "large"]), [s, u] = qe("Badge version", ["1", "2"]), [g, v] = qe("Badge emphasis level", ["subtle", "strong"]);
-  let { type: m } = e, { testid: b = "" } = e, { content: w = "" } = e, { icon: p = "" } = e, { icontype: k = null } = e, { arialabel: z = "" } = e, { size: M = "medium" } = e, { emphasis: N = "strong" } = e, { version: L = "1" } = e, { mt: j = null } = e, { mr: H = null } = e, { mb: x = null } = e, { ml: Z = null } = e, { minWidth: V = "" } = e, { justifyContent: B = "" } = e;
+  ), [d, c] = Ae("Badge size", ["medium", "large"]), [s, u] = Ae("Badge version", ["1", "2"]), [g, v] = Ae("Badge emphasis level", ["subtle", "strong"]);
+  let { type: m } = e, { testid: b = "" } = e, { content: w = "" } = e, { icon: p = "" } = e, { icontype: k = null } = e, { arialabel: z = "" } = e, { size: M = "medium" } = e, { emphasis: N = "strong" } = e, { version: L = "1" } = e, { mt: j = null } = e, { mr: H = null } = e, { mb: T = null } = e, { ml: Z = null } = e, { minWidth: V = "" } = e, { justifyContent: B = "" } = e;
   return De(() => {
     a(m), c(M), v(N), u(L), !i && !w && console.warn("GoabBadge must have either the content or icon property set"), n && !z && console.warn("GoabBadge with icon only requires an arialabel");
-  }), t.$$set = (S) => {
-    "type" in S && o(0, m = S.type), "testid" in S && o(1, b = S.testid), "content" in S && o(2, w = S.content), "icon" in S && o(17, p = S.icon), "icontype" in S && o(3, k = S.icontype), "arialabel" in S && o(4, z = S.arialabel), "size" in S && o(5, M = S.size), "emphasis" in S && o(6, N = S.emphasis), "version" in S && o(7, L = S.version), "mt" in S && o(8, j = S.mt), "mr" in S && o(9, H = S.mr), "mb" in S && o(10, x = S.mb), "ml" in S && o(11, Z = S.ml), "minWidth" in S && o(12, V = S.minWidth), "justifyContent" in S && o(13, B = S.justifyContent);
+  }), t.$$set = (x) => {
+    "type" in x && o(0, m = x.type), "testid" in x && o(1, b = x.testid), "content" in x && o(2, w = x.content), "icon" in x && o(17, p = x.icon), "icontype" in x && o(3, k = x.icontype), "arialabel" in x && o(4, z = x.arialabel), "size" in x && o(5, M = x.size), "emphasis" in x && o(6, N = x.emphasis), "version" in x && o(7, L = x.version), "mt" in x && o(8, j = x.mt), "mr" in x && o(9, H = x.mr), "mb" in x && o(10, T = x.mb), "ml" in x && o(11, Z = x.ml), "minWidth" in x && o(12, V = x.minWidth), "justifyContent" in x && o(13, B = x.justifyContent);
   }, t.$$.update = () => {
     t.$$.dirty & /*icon, icontype*/
-    131080 && o(14, i = p !== "false" && (Ae(p) || !!k)), t.$$.dirty & /*showIcon, content*/
+    131080 && o(14, i = p !== "false" && (Se(p) || !!k)), t.$$.dirty & /*showIcon, content*/
     16388 && o(15, n = i && !w), t.$$.dirty & /*type*/
     1 && o(16, l = {
       success: "checkmark-circle",
@@ -18270,7 +18270,7 @@ function t2(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     Z,
     V,
     B,
@@ -18429,23 +18429,23 @@ function i2(t) {
         t[8],
         /*ml*/
         t[9]
-      ), Ie(
+      ), qe(
         "min-width",
         /*minWidth*/
         t[3]
-      ), Ie(
+      ), qe(
         "max-width",
         /*maxWidth*/
         t[4]
-      ), Ie(
+      ), qe(
         "width",
         /*width*/
         t[5] || "max-content"
-      ), Ie(
+      ), qe(
         "align-items",
         /*_alignment*/
         t[11]
-      ), Ie(
+      ), qe(
         "flex-direction",
         /*direction*/
         t[1]
@@ -18490,23 +18490,23 @@ function i2(t) {
         r[8],
         /*ml*/
         r[9]
-      ), Ie(
+      ), qe(
         "min-width",
         /*minWidth*/
         r[3]
-      ), Ie(
+      ), qe(
         "max-width",
         /*maxWidth*/
         r[4]
-      ), Ie(
+      ), qe(
         "width",
         /*width*/
         r[5] || "max-content"
-      ), Ie(
+      ), qe(
         "align-items",
         /*_alignment*/
         r[11]
-      ), Ie(
+      ), qe(
         "flex-direction",
         /*direction*/
         r[1]
@@ -18642,13 +18642,13 @@ class l2 extends ze {
 }
 customElements.define("goa-block", Ce(l2, { gap: {}, direction: {}, alignment: {}, testid: {}, minWidth: { type: "String", attribute: "min-width" }, maxWidth: { type: "String", attribute: "max-width" }, width: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
 function r2(t) {
-  je(t, "svelte-g68zlx", `button.svelte-g68zlx.svelte-g68zlx{display:inline-flex;box-sizing:border-box;border-radius:var(--goa-button-border-radius);cursor:pointer;font:var(--goa-button-text);height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:var(--goa-button-padding, 0 var(--goa-button-padding-lr));white-space:nowrap;gap:var(--goa-button-gap);align-items:center;justify-content:center;transition:transform 0.1s ease-in-out,
+  je(t, "svelte-1gnpo71", `button.svelte-1gnpo71.svelte-1gnpo71{display:inline-flex;box-sizing:border-box;border-radius:var(--goa-button-border-radius);cursor:pointer;font:var(--goa-button-text);height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:var(--goa-button-padding, 0 var(--goa-button-padding-lr));white-space:nowrap;gap:var(--goa-button-gap);align-items:center;justify-content:center;transition:transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out,
-      color 0.2s ease-in-out;width:var(--width, auto)}button.svelte-g68zlx.svelte-g68zlx:active{transform:translateY(2px)}button.svelte-g68zlx.svelte-g68zlx:focus-visible,button.svelte-g68zlx.svelte-g68zlx:focus{box-shadow:0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus)}@media(max-width: 623px){:host{width:100%}button.svelte-g68zlx.svelte-g68zlx{width:100%;display:flex}button.tertiary.svelte-g68zlx.svelte-g68zlx{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}button.tertiary.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-color-greyscale-200) !important}button.tertiary.inverse.svelte-g68zlx.svelte-g68zlx{background-color:var(--goa-button-tertiary-color-bg) !important}button.tertiary.inverse.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-color-greyscale-200) !important}}.text.svelte-g68zlx.svelte-g68zlx{padding-bottom:0.2rem}button.compact.svelte-g68zlx.svelte-g68zlx{height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));gap:var(--goa-button-compact-gap)}button.start.svelte-g68zlx.svelte-g68zlx{height:var(--goa-button-height-start);font:var(--goa-button-text-start);padding:var(--goa-button-padding-lr-start);letter-spacing:var(--goa-button-letter-spacing)}button.start.svelte-g68zlx.svelte-g68zlx,button.submit.svelte-g68zlx.svelte-g68zlx,button.primary.svelte-g68zlx.svelte-g68zlx{border:var(--goa-button-primary-border);background-color:hotpink;color:var(--goa-button-primary-color-text)}button.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-button-primary-hover-color-bg)}button.svelte-g68zlx.svelte-g68zlx:focus-visible,button.svelte-g68zlx.svelte-g68zlx:focus,button.svelte-g68zlx.svelte-g68zlx:active{border-color:var(--goa-button-primary-hover-border);background-color:var(--goa-button-primary-focus-color-bg);outline:none}button.secondary.svelte-g68zlx.svelte-g68zlx{border:var(--goa-button-secondary-border);background-color:var(--goa-button-secondary-color-bg);color:var(--goa-button-secondary-color-text)}button.secondary.svelte-g68zlx.svelte-g68zlx:hover{border:var(--goa-button-secondary-hover-border);color:var(--goa-button-secondary-hover-color-text);background-color:var(--goa-button-secondary-hover-color-bg)}button.secondary.svelte-g68zlx.svelte-g68zlx:focus-visible,button.secondary.svelte-g68zlx.svelte-g68zlx:focus,button.secondary.svelte-g68zlx.svelte-g68zlx:active{border:var(--goa-button-secondary-focus-border);background-color:var(--goa-button-secondary-focus-color-bg);color:var(--goa-button-secondary-focus-color-text);outline:none}button.tertiary.svelte-g68zlx.svelte-g68zlx{border:var(--goa-button-tertiary-border);background-color:var(--goa-button-tertiary-color-bg);color:var(--goa-button-tertiary-color-text);-webkit-text-decoration:var(--goa-button-tertiary-text-decoration, underline);text-decoration:var(--goa-button-tertiary-text-decoration, underline)}button.tertiary.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.tertiary.svelte-g68zlx.svelte-g68zlx:focus-visible,button.tertiary.svelte-g68zlx.svelte-g68zlx:focus,button.tertiary.svelte-g68zlx.svelte-g68zlx:active{background-color:var(--goa-button-tertiary-focus-color-bg);color:var(--goa-button-tertiary-focus-color-text);outline:none}.submit.destructive.svelte-g68zlx.svelte-g68zlx,.primary.destructive.svelte-g68zlx.svelte-g68zlx{background-color:var(--goa-button-primary-destructive-color-bg)}.submit.destructive.svelte-g68zlx.svelte-g68zlx:hover,.primary.destructive.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-button-primary-destructive-hover-color-bg)}.submit.destructive.svelte-g68zlx.svelte-g68zlx:focus-visible,.submit.destructive.svelte-g68zlx.svelte-g68zlx:active,.submit.destructive.svelte-g68zlx.svelte-g68zlx:focus,.primary.destructive.svelte-g68zlx.svelte-g68zlx:focus-visible,.primary.destructive.svelte-g68zlx.svelte-g68zlx:focus,.primary.destructive.svelte-g68zlx.svelte-g68zlx:active{background-color:var(--goa-button-primary-destructive-focus-color-bg)}.secondary.destructive.svelte-g68zlx.svelte-g68zlx{color:var(--goa-button-secondary-destructive-color-text);border:var(--goa-button-secondary-destructive-border)}.secondary.destructive.svelte-g68zlx.svelte-g68zlx:hover{color:var(--goa-button-secondary-destructive-hover-color-text);border:var(--goa-button-secondary-destructive-hover-border)}.secondary.destructive.svelte-g68zlx.svelte-g68zlx:focus-visible,.secondary.destructive.svelte-g68zlx.svelte-g68zlx:focus,.secondary.destructive.svelte-g68zlx.svelte-g68zlx:active{color:var(--goa-button-secondary-destructive-focus-color-text);border:var(--goa-button-secondary-destructive-focus-border)}.tertiary.destructive.svelte-g68zlx.svelte-g68zlx{color:var(--goa-button-tertiary-destructive-color-text)}.tertiary.destructive.svelte-g68zlx.svelte-g68zlx:hover{color:var(--goa-button-tertiary-destructive-hover-color-text)}.tertiary.destructive.svelte-g68zlx.svelte-g68zlx:focus-visible,.tertiary.destructive.svelte-g68zlx.svelte-g68zlx:focus,.tertiary.destructive.svelte-g68zlx.svelte-g68zlx:active{color:var(--goa-button-tertiary-destructive-focus-color-text)}.submit.inverse.svelte-g68zlx.svelte-g68zlx,.primary.inverse.svelte-g68zlx.svelte-g68zlx{background-color:var(--goa-button-primary-inverse-color-bg);color:var(--goa-button-primary-inverse-color-text)}.submit.inverse.svelte-g68zlx.svelte-g68zlx:hover,.primary.inverse.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-button-primary-inverse-hover-color-bg);color:var(--goa-button-primary-inverse-hover-color-text)}.submit.inverse.svelte-g68zlx.svelte-g68zlx:focus-visible,.submit.inverse.svelte-g68zlx.svelte-g68zlx:focus,.submit.inverse.svelte-g68zlx.svelte-g68zlx:active,.primary.inverse.svelte-g68zlx.svelte-g68zlx:focus-visible,.primary.inverse.svelte-g68zlx.svelte-g68zlx:focus,.primary.inverse.svelte-g68zlx.svelte-g68zlx:active{background-color:var(--goa-button-primary-inverse-focus-color-bg)}.secondary.inverse.svelte-g68zlx.svelte-g68zlx{color:var(--goa-button-secondary-inverse-color-text);border:var(--goa-button-secondary-inverse-border);background-color:var(--goa-button-secondary-inverse-color-bg)}.secondary.inverse.svelte-g68zlx.svelte-g68zlx:hover{color:var(--goa-button-secondary-inverse-hover-color-text);border:var(--goa-button-secondary-inverse-hover-border)}.secondary.inverse.svelte-g68zlx.svelte-g68zlx:focus-visible,.secondary.inverse.svelte-g68zlx.svelte-g68zlx:focus,.secondary.inverse.svelte-g68zlx.svelte-g68zlx:active{color:var(--goa-button-secondary-inverse-focus-color-text);border:var(--goa-button-secondary-inverse-focus-border)}.tertiary.inverse.svelte-g68zlx.svelte-g68zlx{color:var(--goa-button-tertiary-inverse-color-text)}.tertiary.inverse.svelte-g68zlx.svelte-g68zlx:hover{color:var(--goa-button-tertiary-inverse-hover-color-text)}.tertiary.inverse.svelte-g68zlx.svelte-g68zlx:focus-visible,.tertiary.inverse.svelte-g68zlx.svelte-g68zlx:focus,.tertiary.inverse.svelte-g68zlx.svelte-g68zlx:active{color:var(--goa-button-tertiary-inverse-focus-color-text)}button.svelte-g68zlx.svelte-g68zlx:disabled{pointer-events:none;opacity:0.5}button.v2.svelte-g68zlx.svelte-g68zlx:focus-visible{box-shadow:none;outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:var(--goa-button-outline-offset)}button.v2.svelte-g68zlx.svelte-g68zlx:disabled{opacity:1}button.v2.primary.svelte-g68zlx.svelte-g68zlx:disabled{background-color:var(--goa-button-primary-disabled-color-bg)
-  }button.v2.secondary.destructive.svelte-g68zlx.svelte-g68zlx{background-color:var(--goa-button-secondary-destructive-color-bg)}button.v2.secondary.destructive.svelte-g68zlx.svelte-g68zlx:hover{background-color:var(--goa-button-secondary-destructive-hover-color-bg)}button.v2.secondary.svelte-g68zlx.svelte-g68zlx:disabled{color:var(--goa-button-secondary-disabled-color-text);background-color:var(--goa-button-secondary-disabled-color-bg)}button.v2.tertiary.svelte-g68zlx.svelte-g68zlx:hover{border:var(--goa-button-tertiary-hover-border)}button.v2.tertiary.inverse.svelte-g68zlx.svelte-g68zlx{border:var(--goa-button-tertiary-inverse-border)}button.v2.tertiary.inverse.svelte-g68zlx.svelte-g68zlx:hover{border:var(--goa-button-tertiary-inverse-hover-border)}button.v2.tertiary.destructive.svelte-g68zlx.svelte-g68zlx{border-color:var(--goa-button-tertiary-destructive-color-border)}button.v2.tertiary.destructive.svelte-g68zlx.svelte-g68zlx:hover{border:var(--goa-button-tertiary-destructive-hover-border)
-  }button.v2.tertiary.svelte-g68zlx.svelte-g68zlx:disabled{color:var(--goa-button-tertiary-disabled-color-text);border-color:var(--goa-button-tertiary-disabled-color-border)}button.v2.svelte-g68zlx .text.svelte-g68zlx{padding-bottom:0}`);
+      color 0.2s ease-in-out;width:var(--width, auto)}button.svelte-1gnpo71.svelte-1gnpo71:active{transform:translateY(2px)}button.svelte-1gnpo71.svelte-1gnpo71:focus-visible,button.svelte-1gnpo71.svelte-1gnpo71:focus{box-shadow:0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus)}@media(max-width: 623px){:host{width:100%}button.svelte-1gnpo71.svelte-1gnpo71{width:100%;display:flex}button.tertiary.svelte-1gnpo71.svelte-1gnpo71{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}button.tertiary.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-color-greyscale-200) !important}button.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71{background-color:var(--goa-button-tertiary-color-bg) !important}button.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-color-greyscale-200) !important}}.text.svelte-1gnpo71.svelte-1gnpo71{padding-bottom:0.2rem}button.compact.svelte-1gnpo71.svelte-1gnpo71{height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));gap:var(--goa-button-compact-gap)}button.start.svelte-1gnpo71.svelte-1gnpo71{height:var(--goa-button-height-start);font:var(--goa-button-text-start);padding:var(--goa-button-padding-lr-start);letter-spacing:var(--goa-button-letter-spacing)}button.start.svelte-1gnpo71.svelte-1gnpo71,button.submit.svelte-1gnpo71.svelte-1gnpo71,button.primary.svelte-1gnpo71.svelte-1gnpo71{border:var(--goa-button-primary-border);background-color:var(--goa-button-primary-color-bg);color:var(--goa-button-primary-color-text)}button.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-button-primary-hover-color-bg)}button.svelte-1gnpo71.svelte-1gnpo71:focus-visible,button.svelte-1gnpo71.svelte-1gnpo71:focus,button.svelte-1gnpo71.svelte-1gnpo71:active{border-color:var(--goa-button-primary-hover-border);background-color:var(--goa-button-primary-focus-color-bg);outline:none}button.secondary.svelte-1gnpo71.svelte-1gnpo71{border:var(--goa-button-secondary-border);background-color:var(--goa-button-secondary-color-bg);color:var(--goa-button-secondary-color-text)}button.secondary.svelte-1gnpo71.svelte-1gnpo71:hover{border:var(--goa-button-secondary-hover-border);color:var(--goa-button-secondary-hover-color-text);background-color:var(--goa-button-secondary-hover-color-bg)}button.secondary.svelte-1gnpo71.svelte-1gnpo71:focus-visible,button.secondary.svelte-1gnpo71.svelte-1gnpo71:focus,button.secondary.svelte-1gnpo71.svelte-1gnpo71:active{border:var(--goa-button-secondary-focus-border);background-color:var(--goa-button-secondary-focus-color-bg);color:var(--goa-button-secondary-focus-color-text);outline:none}button.tertiary.svelte-1gnpo71.svelte-1gnpo71{border:var(--goa-button-tertiary-border);background-color:var(--goa-button-tertiary-color-bg);color:var(--goa-button-tertiary-color-text);-webkit-text-decoration:var(--goa-button-tertiary-text-decoration, underline);text-decoration:var(--goa-button-tertiary-text-decoration, underline)}button.tertiary.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.tertiary.svelte-1gnpo71.svelte-1gnpo71:focus-visible,button.tertiary.svelte-1gnpo71.svelte-1gnpo71:focus,button.tertiary.svelte-1gnpo71.svelte-1gnpo71:active{background-color:var(--goa-button-tertiary-focus-color-bg);color:var(--goa-button-tertiary-focus-color-text);outline:none}.submit.destructive.svelte-1gnpo71.svelte-1gnpo71,.primary.destructive.svelte-1gnpo71.svelte-1gnpo71{background-color:var(--goa-button-primary-destructive-color-bg)}.submit.destructive.svelte-1gnpo71.svelte-1gnpo71:hover,.primary.destructive.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-button-primary-destructive-hover-color-bg)}.submit.destructive.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.submit.destructive.svelte-1gnpo71.svelte-1gnpo71:active,.submit.destructive.svelte-1gnpo71.svelte-1gnpo71:focus,.primary.destructive.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.primary.destructive.svelte-1gnpo71.svelte-1gnpo71:focus,.primary.destructive.svelte-1gnpo71.svelte-1gnpo71:active{background-color:var(--goa-button-primary-destructive-focus-color-bg)}.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71{color:var(--goa-button-secondary-destructive-color-text);border:var(--goa-button-secondary-destructive-border)}.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71:hover{color:var(--goa-button-secondary-destructive-hover-color-text);border:var(--goa-button-secondary-destructive-hover-border)}.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71:focus,.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71:active{color:var(--goa-button-secondary-destructive-focus-color-text);border:var(--goa-button-secondary-destructive-focus-border)}.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71{color:var(--goa-button-tertiary-destructive-color-text)}.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71:hover{color:var(--goa-button-tertiary-destructive-hover-color-text)}.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71:focus,.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71:active{color:var(--goa-button-tertiary-destructive-focus-color-text)}.submit.inverse.svelte-1gnpo71.svelte-1gnpo71,.primary.inverse.svelte-1gnpo71.svelte-1gnpo71{background-color:var(--goa-button-primary-inverse-color-bg);color:var(--goa-button-primary-inverse-color-text)}.submit.inverse.svelte-1gnpo71.svelte-1gnpo71:hover,.primary.inverse.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-button-primary-inverse-hover-color-bg);color:var(--goa-button-primary-inverse-hover-color-text)}.submit.inverse.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.submit.inverse.svelte-1gnpo71.svelte-1gnpo71:focus,.submit.inverse.svelte-1gnpo71.svelte-1gnpo71:active,.primary.inverse.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.primary.inverse.svelte-1gnpo71.svelte-1gnpo71:focus,.primary.inverse.svelte-1gnpo71.svelte-1gnpo71:active{background-color:var(--goa-button-primary-inverse-focus-color-bg)}.secondary.inverse.svelte-1gnpo71.svelte-1gnpo71{color:var(--goa-button-secondary-inverse-color-text);border:var(--goa-button-secondary-inverse-border);background-color:var(--goa-button-secondary-inverse-color-bg)}.secondary.inverse.svelte-1gnpo71.svelte-1gnpo71:hover{color:var(--goa-button-secondary-inverse-hover-color-text);border:var(--goa-button-secondary-inverse-hover-border)}.secondary.inverse.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.secondary.inverse.svelte-1gnpo71.svelte-1gnpo71:focus,.secondary.inverse.svelte-1gnpo71.svelte-1gnpo71:active{color:var(--goa-button-secondary-inverse-focus-color-text);border:var(--goa-button-secondary-inverse-focus-border)}.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71{color:var(--goa-button-tertiary-inverse-color-text)}.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71:hover{color:var(--goa-button-tertiary-inverse-hover-color-text)}.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71:focus-visible,.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71:focus,.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71:active{color:var(--goa-button-tertiary-inverse-focus-color-text)}button.svelte-1gnpo71.svelte-1gnpo71:disabled{pointer-events:none;opacity:0.5}button.v2.svelte-1gnpo71.svelte-1gnpo71:focus-visible{box-shadow:none;outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:var(--goa-button-outline-offset)}button.v2.svelte-1gnpo71.svelte-1gnpo71:disabled{opacity:1}button.v2.primary.svelte-1gnpo71.svelte-1gnpo71:disabled{background-color:var(--goa-button-primary-disabled-color-bg)
+  }button.v2.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71{background-color:var(--goa-button-secondary-destructive-color-bg)}button.v2.secondary.destructive.svelte-1gnpo71.svelte-1gnpo71:hover{background-color:var(--goa-button-secondary-destructive-hover-color-bg)}button.v2.secondary.svelte-1gnpo71.svelte-1gnpo71:disabled{color:var(--goa-button-secondary-disabled-color-text);background-color:var(--goa-button-secondary-disabled-color-bg)}button.v2.tertiary.svelte-1gnpo71.svelte-1gnpo71:hover{border:var(--goa-button-tertiary-hover-border)}button.v2.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71{border:var(--goa-button-tertiary-inverse-border)}button.v2.tertiary.inverse.svelte-1gnpo71.svelte-1gnpo71:hover{border:var(--goa-button-tertiary-inverse-hover-border)}button.v2.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71{border-color:var(--goa-button-tertiary-destructive-color-border)}button.v2.tertiary.destructive.svelte-1gnpo71.svelte-1gnpo71:hover{border:var(--goa-button-tertiary-destructive-hover-border)
+  }button.v2.tertiary.svelte-1gnpo71.svelte-1gnpo71:disabled{color:var(--goa-button-tertiary-disabled-color-text);border-color:var(--goa-button-tertiary-disabled-color-border)}button.v2.svelte-1gnpo71 .text.svelte-1gnpo71{padding-bottom:0}`);
 }
 function a2(t) {
   let e, o, i, n, l, r = (
@@ -18671,7 +18671,7 @@ function a2(t) {
   );
   return {
     c() {
-      r && r.c(), e = W(), o = C("span"), d && d.c(), i = W(), c && c.c(), n = Qe(), f(o, "class", "text svelte-g68zlx");
+      r && r.c(), e = W(), o = C("span"), d && d.c(), i = W(), c && c.c(), n = Qe(), f(o, "class", "text svelte-1gnpo71");
     },
     m(s, u) {
       r && r.m(s, u), D(s, e, u), D(s, o, u), d && d.m(o, null), D(s, i, u), c && c.m(s, u), D(s, n, u), l = true;
@@ -18723,7 +18723,7 @@ function s2(t) {
   );
   return {
     c() {
-      e = C("span"), r && r.c(), o = W(), i = C("goa-icon"), f(e, "class", "text svelte-g68zlx"), h(i, "id", "trailing-icon"), h(i, "size", "4"), h(i, "type", "arrow-forward"), h(i, "inverted", "true");
+      e = C("span"), r && r.c(), o = W(), i = C("goa-icon"), f(e, "class", "text svelte-1gnpo71"), h(i, "id", "trailing-icon"), h(i, "size", "4"), h(i, "type", "arrow-forward"), h(i, "inverted", "true");
     },
     m(a, d) {
       D(a, e, d), r && r.m(e, null), D(a, o, d), D(a, i, d), n = true;
@@ -18862,7 +18862,7 @@ function d2(t) {
       e = C("button"), i.c(), f(e, "class", n = /*type*/
       t[0] + " " + /*size*/
       t[1] + " " + /*variant*/
-      t[2] + " svelte-g68zlx"), f(e, "style", l = `
+      t[2] + " svelte-1gnpo71"), f(e, "style", l = `
       ${Ne(
         /*mt*/
         t[8],
@@ -18885,7 +18885,7 @@ function d2(t) {
       t[0] === "submit" ? (
         /*type*/
         t[0]
-      ) : "button"), T(
+      ) : "button"), I(
         e,
         "v2",
         /*version*/
@@ -18908,7 +18908,7 @@ function d2(t) {
       7 && n !== (n = /*type*/
       v[0] + " " + /*size*/
       v[1] + " " + /*variant*/
-      v[2] + " svelte-g68zlx")) && f(e, "class", n), (!a || m & /*mt, mr, mb, ml, width*/
+      v[2] + " svelte-1gnpo71")) && f(e, "class", n), (!a || m & /*mt, mr, mb, ml, width*/
       3904 && l !== (l = `
       ${Ne(
         /*mt*/
@@ -18936,7 +18936,7 @@ function d2(t) {
         /*type*/
         v[0]
       ) : "button")) && f(e, "type", r), (!a || m & /*type, size, variant, version*/
-      135) && T(
+      135) && I(
         e,
         "v2",
         /*version*/
@@ -18956,19 +18956,19 @@ function d2(t) {
 }
 function c2(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
-  const [a, d] = qe("Button type", ["primary", "submit", "secondary", "tertiary", "start"], { required: true, deprecated: ["submit"] }), [c, s] = qe("Button size", ["normal", "compact"], { required: true }), [u, g] = qe("Button variant", ["normal", "destructive", "inverse"], { required: true }), [v, m] = qe("Button version", ["1", "2"], { required: true });
-  let { type: b = "primary" } = e, { size: w = "normal" } = e, { variant: p = "normal" } = e, { disabled: k = "false" } = e, { leadingicon: z = null } = e, { trailingicon: M = null } = e, { testid: N = "" } = e, { width: L = "" } = e, { version: j = "1" } = e, { mt: H = null } = e, { mr: x = null } = e, { mb: Z = null } = e, { ml: V = null } = e, { action: B = "" } = e, { actionArg: S = "" } = e, { actionArgs: Y = {} } = e;
+  const [a, d] = Ae("Button type", ["primary", "submit", "secondary", "tertiary", "start"], { required: true, deprecated: ["submit"] }), [c, s] = Ae("Button size", ["normal", "compact"], { required: true }), [u, g] = Ae("Button variant", ["normal", "destructive", "inverse"], { required: true }), [v, m] = Ae("Button version", ["1", "2"], { required: true });
+  let { type: b = "primary" } = e, { size: w = "normal" } = e, { variant: p = "normal" } = e, { disabled: k = "false" } = e, { leadingicon: z = null } = e, { trailingicon: M = null } = e, { testid: N = "" } = e, { width: L = "" } = e, { version: j = "1" } = e, { mt: H = null } = e, { mr: T = null } = e, { mb: Z = null } = e, { ml: V = null } = e, { action: B = "" } = e, { actionArg: x = "" } = e, { actionArgs: Y = {} } = e;
   De(async () => {
     await Ge(), d(b), s(w), g(p), m(j);
   });
-  function I(A) {
-    i || (A.target && Ee(A.target, "_click", null, { bubbles: true }), B && Ee(A.target, B, S || Y, { bubbles: true }));
+  function q(S) {
+    i || (S.target && Ee(S.target, "_click", null, { bubbles: true }), B && Ee(S.target, B, x || Y, { bubbles: true }));
   }
-  return t.$$set = (A) => {
-    "type" in A && o(0, b = A.type), "size" in A && o(1, w = A.size), "variant" in A && o(2, p = A.variant), "disabled" in A && o(15, k = A.disabled), "leadingicon" in A && o(3, z = A.leadingicon), "trailingicon" in A && o(4, M = A.trailingicon), "testid" in A && o(5, N = A.testid), "width" in A && o(6, L = A.width), "version" in A && o(7, j = A.version), "mt" in A && o(8, H = A.mt), "mr" in A && o(9, x = A.mr), "mb" in A && o(10, Z = A.mb), "ml" in A && o(11, V = A.ml), "action" in A && o(16, B = A.action), "actionArg" in A && o(17, S = A.actionArg), "actionArgs" in A && o(18, Y = A.actionArgs), "$$scope" in A && o(19, r = A.$$scope);
+  return t.$$set = (S) => {
+    "type" in S && o(0, b = S.type), "size" in S && o(1, w = S.size), "variant" in S && o(2, p = S.variant), "disabled" in S && o(15, k = S.disabled), "leadingicon" in S && o(3, z = S.leadingicon), "trailingicon" in S && o(4, M = S.trailingicon), "testid" in S && o(5, N = S.testid), "width" in S && o(6, L = S.width), "version" in S && o(7, j = S.version), "mt" in S && o(8, H = S.mt), "mr" in S && o(9, T = S.mr), "mb" in S && o(10, Z = S.mb), "ml" in S && o(11, V = S.ml), "action" in S && o(16, B = S.action), "actionArg" in S && o(17, x = S.actionArg), "actionArgs" in S && o(18, Y = S.actionArgs), "$$scope" in S && o(19, r = S.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*disabled*/
-    32768 && o(12, i = Ae(k)), t.$$.dirty & /*type*/
+    32768 && o(12, i = Se(k)), t.$$.dirty & /*type*/
     1 && o(13, n = b === "primary" || b === "start");
   }, [
     b,
@@ -18980,15 +18980,15 @@ function c2(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     Z,
     V,
     i,
     n,
-    I,
+    q,
     k,
     B,
-    S,
+    x,
     Y,
     r,
     l
@@ -19211,7 +19211,7 @@ function g2(t) {
 }
 function v2(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e, { alignment: r = "start" } = e, { gap: a = "relaxed" } = e, { testid: d = "" } = e, { mt: c = null } = e, { mr: s = null } = e, { mb: u = null } = e, { ml: g = null } = e;
-  const [v, m] = qe("alignment", ["start", "end", "center"]), [b, w] = qe("gap", ["relaxed", "compact"]);
+  const [v, m] = Ae("alignment", ["start", "end", "center"]), [b, w] = Ae("gap", ["relaxed", "compact"]);
   return De(() => {
     m(r), w(a);
   }), t.$$set = (p) => {
@@ -19324,18 +19324,18 @@ function go(t, e) {
   const o = Yo(), i = (e == null ? void 0 : e.weekStartsOn) ?? ((d = (a = e == null ? void 0 : e.locale) == null ? void 0 : a.options) == null ? void 0 : d.weekStartsOn) ?? o.weekStartsOn ?? ((s = (c = o.locale) == null ? void 0 : c.options) == null ? void 0 : s.weekStartsOn) ?? 0, n = nt(t), l = n.getDay(), r = (l < i ? 7 : 0) + l - i;
   return n.setDate(n.getDate() - r), n.setHours(0, 0, 0, 0), n;
 }
-function To(t) {
+function Io(t) {
   return go(t, { weekStartsOn: 1 });
 }
 function fs(t) {
   const e = nt(t), o = e.getFullYear(), i = Ct(t, 0);
   i.setFullYear(o + 1, 0, 4), i.setHours(0, 0, 0, 0);
-  const n = To(i), l = Ct(t, 0);
+  const n = Io(i), l = Ct(t, 0);
   l.setFullYear(o, 0, 4), l.setHours(0, 0, 0, 0);
-  const r = To(l);
+  const r = Io(l);
   return e.getTime() >= n.getTime() ? o + 1 : e.getTime() >= r.getTime() ? o : o - 1;
 }
-function Io(t) {
+function qo(t) {
   const e = nt(t);
   return e.setHours(0, 0, 0, 0), e;
 }
@@ -19354,15 +19354,15 @@ function Ui(t) {
   return o.setUTCFullYear(e.getFullYear()), +t - +o;
 }
 function _2(t, e) {
-  const o = Io(t), i = Io(e), n = +o - Ui(o), l = +i - Ui(i);
+  const o = qo(t), i = qo(e), n = +o - Ui(o), l = +i - Ui(i);
   return Math.round((n - l) / p2);
 }
 function y2(t) {
   const e = fs(t), o = Ct(t, 0);
-  return o.setFullYear(e, 0, 4), o.setHours(0, 0, 0, 0), To(o);
+  return o.setFullYear(e, 0, 4), o.setHours(0, 0, 0, 0), Io(o);
 }
 function k2(t, e) {
-  const o = Io(t), i = Io(e);
+  const o = qo(t), i = qo(e);
   return +o == +i;
 }
 function C2(t) {
@@ -19466,7 +19466,7 @@ const N2 = {
   long: "{{date}} 'at' {{time}}",
   medium: "{{date}}, {{time}}",
   short: "{{date}}, {{time}}"
-}, x2 = {
+}, T2 = {
   date: Qo({
     formats: N2,
     defaultWidth: "full"
@@ -19479,14 +19479,14 @@ const N2 = {
     formats: D2,
     defaultWidth: "full"
   })
-}, T2 = {
+}, I2 = {
   lastWeek: "'last' eeee 'at' p",
   yesterday: "'yesterday at' p",
   today: "'today at' p",
   tomorrow: "'tomorrow at' p",
   nextWeek: "eeee 'at' p",
   other: "P"
-}, I2 = (t, e, o, i) => T2[t];
+}, q2 = (t, e, o, i) => I2[t];
 function lo(t) {
   return (e, o) => {
     const i = o != null && o.context ? String(o.context) : "standalone";
@@ -19502,15 +19502,15 @@ function lo(t) {
     return n[l];
   };
 }
-const q2 = {
+const A2 = {
   narrow: ["B", "A"],
   abbreviated: ["BC", "AD"],
   wide: ["Before Christ", "Anno Domini"]
-}, A2 = {
+}, S2 = {
   narrow: ["1", "2", "3", "4"],
   abbreviated: ["Q1", "Q2", "Q3", "Q4"],
   wide: ["1st quarter", "2nd quarter", "3rd quarter", "4th quarter"]
-}, S2 = {
+}, x2 = {
   narrow: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
   abbreviated: [
     "Jan",
@@ -19630,16 +19630,16 @@ const q2 = {
 }, B2 = {
   ordinalNumber: V2,
   era: lo({
-    values: q2,
+    values: A2,
     defaultWidth: "wide"
   }),
   quarter: lo({
-    values: A2,
+    values: S2,
     defaultWidth: "wide",
     argumentCallback: (t) => t - 1
   }),
   month: lo({
-    values: S2,
+    values: x2,
     defaultWidth: "wide"
   }),
   day: lo({
@@ -19800,8 +19800,8 @@ const Y2 = /^(\d+)(th|st|nd|rd)?/i, U2 = /\d+/i, Q2 = {
 }, nd = {
   code: "en-US",
   formatDistance: L2,
-  formatLong: x2,
-  formatRelative: I2,
+  formatLong: T2,
+  formatRelative: q2,
   localize: B2,
   match: id,
   options: {
@@ -19814,7 +19814,7 @@ function ld(t) {
   return _2(e, M2(e)) + 1;
 }
 function rd(t) {
-  const e = nt(t), o = +To(e) - +y2(e);
+  const e = nt(t), o = +Io(e) - +y2(e);
   return Math.round(o / us) + 1;
 }
 function gs(t, e) {
@@ -19839,7 +19839,7 @@ function et(t, e) {
   const o = t < 0 ? "-" : "", i = Math.abs(t).toString().padStart(e, "0");
   return o + i;
 }
-const qt = {
+const At = {
   // Year
   y(t, e) {
     const o = t.getFullYear(), i = o > 0 ? o : 1 - o;
@@ -19925,7 +19925,7 @@ const qt = {
       const i = t.getFullYear(), n = i > 0 ? i : 1 - i;
       return o.ordinalNumber(n, { unit: "year" });
     }
-    return qt.y(t, e);
+    return At.y(t, e);
   },
   // Local week-numbering year
   Y: function(t, e, o, i) {
@@ -20028,7 +20028,7 @@ const qt = {
     switch (e) {
       case "M":
       case "MM":
-        return qt.M(t, e);
+        return At.M(t, e);
       // 1st, 2nd, ..., 12th
       case "Mo":
         return o.ordinalNumber(i + 1, { unit: "month" });
@@ -20093,7 +20093,7 @@ const qt = {
   },
   // Day of the month
   d: function(t, e, o) {
-    return e === "do" ? o.ordinalNumber(t.getDate(), { unit: "date" }) : qt.d(t, e);
+    return e === "do" ? o.ordinalNumber(t.getDate(), { unit: "date" }) : At.d(t, e);
   },
   // Day of year
   D: function(t, e, o) {
@@ -20339,11 +20339,11 @@ const qt = {
       let i = t.getHours() % 12;
       return i === 0 && (i = 12), o.ordinalNumber(i, { unit: "hour" });
     }
-    return qt.h(t, e);
+    return At.h(t, e);
   },
   // Hour [0-23]
   H: function(t, e, o) {
-    return e === "Ho" ? o.ordinalNumber(t.getHours(), { unit: "hour" }) : qt.H(t, e);
+    return e === "Ho" ? o.ordinalNumber(t.getHours(), { unit: "hour" }) : At.H(t, e);
   },
   // Hour [0-11]
   K: function(t, e, o) {
@@ -20357,15 +20357,15 @@ const qt = {
   },
   // Minute
   m: function(t, e, o) {
-    return e === "mo" ? o.ordinalNumber(t.getMinutes(), { unit: "minute" }) : qt.m(t, e);
+    return e === "mo" ? o.ordinalNumber(t.getMinutes(), { unit: "minute" }) : At.m(t, e);
   },
   // Second
   s: function(t, e, o) {
-    return e === "so" ? o.ordinalNumber(t.getSeconds(), { unit: "second" }) : qt.s(t, e);
+    return e === "so" ? o.ordinalNumber(t.getSeconds(), { unit: "second" }) : At.s(t, e);
   },
   // Fraction of second
   S: function(t, e) {
-    return qt.S(t, e);
+    return At.S(t, e);
   },
   // Timezone (ISO-8601. If offset is 0, output is always `'Z'`)
   X: function(t, e, o) {
@@ -20795,7 +20795,7 @@ function ln(t) {
       t[32].isSameDay(
         /*_calendarDate*/
         t[9]
-      ) ? 0 : -1), T(
+      ) ? 0 : -1), I(
         e,
         "disabled",
         /*d*/
@@ -20829,7 +20829,7 @@ function ln(t) {
         /*_calendarDate*/
         t[9]
       ) ? 0 : -1) && f(e, "tabindex", c), m[0] & /*_previousMonthDays, _min, _max*/
-      19456 && T(
+      19456 && I(
         e,
         "disabled",
         /*d*/
@@ -20872,12 +20872,12 @@ function rn(t) {
       t[32].isSameDay(
         /*_calendarDate*/
         t[9]
-      ) ? 0 : -1), T(
+      ) ? 0 : -1), I(
         e,
         "today",
         /*d*/
         t[32].isSameDay(new Be())
-      ), T(
+      ), I(
         e,
         "selected",
         /*value*/
@@ -20887,7 +20887,7 @@ function rn(t) {
           /*_selectedDate*/
           t[12]
         )
-      ), T(
+      ), I(
         e,
         "disabled",
         /*d*/
@@ -20921,13 +20921,13 @@ function rn(t) {
         /*_calendarDate*/
         t[9]
       ) ? 0 : -1) && f(e, "tabindex", c), m[0] & /*_monthDays*/
-      8192 && T(
+      8192 && I(
         e,
         "today",
         /*d*/
         t[32].isSameDay(new Be())
       ), m[0] & /*value, _selectedDate, _monthDays*/
-      12289 && T(
+      12289 && I(
         e,
         "selected",
         /*value*/
@@ -20938,7 +20938,7 @@ function rn(t) {
           t[12]
         )
       ), m[0] & /*_monthDays, _min, _max*/
-      11264 && T(
+      11264 && I(
         e,
         "disabled",
         /*d*/
@@ -20981,7 +20981,7 @@ function an(t) {
       t[32].isSameDay(
         /*_calendarDate*/
         t[9]
-      ) ? 0 : -1), T(
+      ) ? 0 : -1), I(
         e,
         "disabled",
         /*d*/
@@ -21015,7 +21015,7 @@ function an(t) {
         /*_calendarDate*/
         t[9]
       ) ? 0 : -1) && f(e, "tabindex", s), b[0] & /*_nextMonthDays, _min, _max*/
-      35840 && T(
+      35840 && I(
         e,
         "disabled",
         /*d*/
@@ -21034,8 +21034,8 @@ function an(t) {
     }
   };
 }
-function xd(t) {
-  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, x, Z, V, B, S, Y, I, A, O, K, F, q, Q = Ue(
+function Td(t) {
+  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, T, Z, V, B, x, Y, q, S, O, K, F, A, Q = Ue(
     /*_months*/
     t[18]
   ), R = [];
@@ -21074,10 +21074,10 @@ function xd(t) {
       c = W(), s = C("goa-form-item"), u = C("goa-dropdown");
       for (let Le = 0; Le < oe.length; Le += 1)
         oe[Le].c();
-      w = W(), p = C("div"), k = C("h5"), k.textContent = "Sun", z = W(), M = C("h5"), M.textContent = "Mon", N = W(), L = C("h5"), L.textContent = "Tue", j = W(), H = C("h5"), H.textContent = "Wed", x = W(), Z = C("h5"), Z.textContent = "Thu", V = W(), B = C("h5"), B.textContent = "Fri", S = W(), Y = C("h5"), Y.textContent = "Sat", I = W();
+      w = W(), p = C("div"), k = C("h5"), k.textContent = "Sun", z = W(), M = C("h5"), M.textContent = "Mon", N = W(), L = C("h5"), L.textContent = "Tue", j = W(), H = C("h5"), H.textContent = "Wed", T = W(), Z = C("h5"), Z.textContent = "Thu", V = W(), B = C("h5"), B.textContent = "Fri", x = W(), Y = C("h5"), Y.textContent = "Sat", q = W();
       for (let Le = 0; Le < te.length; Le += 1)
         te[Le].c();
-      A = W();
+      S = W();
       for (let Le = 0; Le < G.length; Le += 1)
         G[Le].c();
       O = W();
@@ -21125,7 +21125,7 @@ function xd(t) {
         "data-testid",
         /*testid*/
         t[2]
-      ), f(e, "tabindex", "-1"), f(e, "class", "svelte-iko4fr"), T(
+      ), f(e, "tabindex", "-1"), f(e, "class", "svelte-iko4fr"), I(
         e,
         "bordered",
         /*bordered*/
@@ -21139,16 +21139,16 @@ function xd(t) {
       _(o, c), _(o, s), _(s, u);
       for (let Le = 0; Le < oe.length; Le += 1)
         oe[Le] && oe[Le].m(u, null);
-      _(e, w), _(e, p), _(p, k), _(p, z), _(p, M), _(p, N), _(p, L), _(p, j), _(p, H), _(p, x), _(p, Z), _(p, V), _(p, B), _(p, S), _(p, Y), _(p, I);
+      _(e, w), _(e, p), _(p, k), _(p, z), _(p, M), _(p, N), _(p, L), _(p, j), _(p, H), _(p, T), _(p, Z), _(p, V), _(p, B), _(p, x), _(p, Y), _(p, q);
       for (let Le = 0; Le < te.length; Le += 1)
         te[Le] && te[Le].m(p, null);
-      _(p, A);
+      _(p, S);
       for (let Le = 0; Le < G.length; Le += 1)
         G[Le] && G[Le].m(p, null);
       _(p, O);
       for (let Le = 0; Le < se.length; Le += 1)
         se[Le] && se[Le].m(p, null);
-      t[27](p), F || (q = [
+      t[27](p), F || (A = [
         re(
           n,
           "_change",
@@ -21244,7 +21244,7 @@ function xd(t) {
         let le;
         for (le = 0; le < ne.length; le += 1) {
           const X = $i(ie, ne, le);
-          te[le] ? te[le].p(X, ye) : (te[le] = ln(X), te[le].c(), te[le].m(p, A));
+          te[le] ? te[le].p(X, ye) : (te[le] = ln(X), te[le].c(), te[le].m(p, S));
         }
         for (; le < te.length; le += 1)
           te[le].d(1);
@@ -21297,7 +21297,7 @@ function xd(t) {
         /*testid*/
         ie[2]
       ), ye[0] & /*bordered*/
-      256 && T(
+      256 && I(
         e,
         "bordered",
         /*bordered*/
@@ -21307,11 +21307,11 @@ function xd(t) {
     i: be,
     o: be,
     d(ie) {
-      ie && E(e), at(R, ie), at(oe, ie), at(te, ie), at(G, ie), at(se, ie), t[27](null), F = false, Ye(q);
+      ie && E(e), at(R, ie), at(oe, ie), at(te, ie), at(G, ie), at(se, ie), t[27](null), F = false, Ye(A);
     }
   };
 }
-function Td(t, e, o) {
+function Id(t, e, o) {
   let { name: i = "" } = e, { value: n = "" } = e, { min: l = "" } = e, { max: r = "" } = e, { testid: a = "" } = e, { version: d = "1" } = e, { mt: c = null } = e, { mr: s = null } = e, { mb: u = null } = e, { ml: g = null } = e, { bordered: v = "true" } = e, m, b, w, p, k = [], z = [], M = [], N, L = [
     "January",
     "February",
@@ -21327,9 +21327,9 @@ function Td(t, e, o) {
     "December"
   ], j = [], H;
   De(() => {
-    n ? (o(9, b = new Be(n)), o(12, m = b.clone())) : (o(9, b = new Be().setDay(1)), o(12, m = new Be(0))), Z(), x({ type: "date", value: b });
+    n ? (o(9, b = new Be(n)), o(12, m = b.clone())) : (o(9, b = new Be().setDay(1)), o(12, m = new Be(0))), Z(), T({ type: "date", value: b });
   });
-  function x(F) {
+  function T(F) {
     switch (F.type) {
       case "date":
         o(9, b = F.value);
@@ -21343,9 +21343,9 @@ function Td(t, e, o) {
     }
     if (!b.isValid())
       return;
-    const q = b.daysInMonth;
+    const A = b.daysInMonth;
     o(13, k = []);
-    for (let ee = 0; ee < q; ee++)
+    for (let ee = 0; ee < A; ee++)
       k.push(new Be({
         year: b.year,
         month: b.month,
@@ -21362,26 +21362,26 @@ function Td(t, e, o) {
     }
   }
   function Z() {
-    const F = async (q, Q) => {
-      if (q.stopPropagation(), q.preventDefault(), Q.isBefore(w) || Q.isAfter(p))
+    const F = async (A, Q) => {
+      if (A.stopPropagation(), A.preventDefault(), Q.isBefore(w) || Q.isAfter(p))
         return;
-      Q.isSameMonth(b) || x({ type: "date", value: Q }), o(9, b = Q), await Ge();
+      Q.isSameMonth(b) || T({ type: "date", value: Q }), o(9, b = Q), await Ge();
       const R = H.querySelector(`[data-date="${Q.toString()}"]`);
       R == null || R.focus();
     };
-    H.addEventListener("keydown", (q) => {
-      switch (q.key) {
+    H.addEventListener("keydown", (A) => {
+      switch (A.key) {
         case "ArrowUp":
-          F(q, b.clone().addDays(-7));
+          F(A, b.clone().addDays(-7));
           break;
         case "ArrowDown":
-          F(q, b.clone().addDays(7));
+          F(A, b.clone().addDays(7));
           break;
         case "ArrowLeft":
-          F(q, b.clone().addDays(-1));
+          F(A, b.clone().addDays(-1));
           break;
         case "ArrowRight":
-          F(q, b.clone().addDays(1));
+          F(A, b.clone().addDays(1));
           break;
         case "Delete":
         case "Backspace":
@@ -21389,20 +21389,20 @@ function Td(t, e, o) {
           break;
         case "Home": {
           let Q = new Be(b);
-          Q.setDay(1), F(q, Q);
+          Q.setDay(1), F(A, Q);
           break;
         }
         case "End":
-          F(q, b.lastDayOfMonth);
+          F(A, b.lastDayOfMonth);
           break;
         case "PageUp":
-          q.shiftKey ? F(q, b.clone().addYears(-1)) : F(q, b.clone().addMonths(-1));
+          A.shiftKey ? F(A, b.clone().addYears(-1)) : F(A, b.clone().addMonths(-1));
           break;
         case "PageDown":
-          q.shiftKey ? F(q, b.clone().addYears(1)) : F(q, b.clone().addMonths(1));
+          A.shiftKey ? F(A, b.clone().addYears(1)) : F(A, b.clone().addMonths(1));
           break;
         case "Enter":
-          o(12, m = b.clone()), V(), q.stopPropagation(), q.preventDefault();
+          o(12, m = b.clone()), V(), A.stopPropagation(), A.preventDefault();
           break;
       }
     });
@@ -21421,16 +21421,16 @@ function Td(t, e, o) {
     )));
   }
   function B(F) {
-    x({ type: "month", value: +F.detail.value }), F.preventDefault(), F.stopPropagation();
+    T({ type: "month", value: +F.detail.value }), F.preventDefault(), F.stopPropagation();
   }
-  function S(F) {
-    x({ type: "year", value: +F.detail.value }), F.preventDefault(), F.stopPropagation();
+  function x(F) {
+    T({ type: "year", value: +F.detail.value }), F.preventDefault(), F.stopPropagation();
   }
   function Y(F) {
-    const q = new Be(F);
-    q && (q.isBefore(w) || q.isAfter(p) || (q.isSameMonth(b) || x({ type: "date", value: q }), o(9, b = q.clone()), o(12, m = q.clone()), V()));
+    const A = new Be(F);
+    A && (A.isBefore(w) || A.isAfter(p) || (A.isSameMonth(b) || T({ type: "date", value: A }), o(9, b = A.clone()), o(12, m = A.clone()), V()));
   }
-  const I = (F) => Y(F.toString()), A = (F) => Y(F.toString()), O = (F) => Y(F.toString());
+  const q = (F) => Y(F.toString()), S = (F) => Y(F.toString()), O = (F) => Y(F.toString());
   function K(F) {
     ce[F ? "unshift" : "push"](() => {
       H = F, o(17, H);
@@ -21442,13 +21442,13 @@ function Td(t, e, o) {
     if (t.$$.dirty[0] & /*value*/
     1 && n) {
       const F = new Be(n);
-      F.isValid() && (x({ type: "date", value: F }), o(12, m = F.clone()), o(9, b = F.clone()));
+      F.isValid() && (T({ type: "date", value: F }), o(12, m = F.clone()), o(9, b = F.clone()));
     }
     if (t.$$.dirty[0] & /*min, _min, name, testid, max, _max, _calendarDate*/
     12586502) {
       o(10, w = l ? new Be(l) : new Be().addYears(-5)), w.isValid() || console.error(`goa-calendar ${i || a}: Invalid min date provided: ${l}.`), o(11, p = r ? new Be(r) : new Be().addYears(5)), p.isValid() || console.error(`goa-calendar ${i || a}: Invalid max date provided: ${r}.`);
-      const F = w.year, q = p.year - F + 1;
-      o(16, j = Array.from({ length: q }, (Q, R) => `${F + R}`)), b && (b.isBefore(w) ? o(9, b = new Be(w)) : b.isAfter(p) && o(9, b = new Be(p))), x({
+      const F = w.year, A = p.year - F + 1;
+      o(16, j = Array.from({ length: A }, (Q, R) => `${F + R}`)), b && (b.isBefore(w) ? o(9, b = new Be(w)) : b.isAfter(p) && o(9, b = new Be(p))), T({
         type: "date",
         value: b || new Be()
       });
@@ -21474,23 +21474,23 @@ function Td(t, e, o) {
     H,
     L,
     B,
-    S,
+    x,
     Y,
     l,
     r,
-    I,
-    A,
+    q,
+    S,
     O,
     K
   ];
 }
-class Id extends ze {
+class qd extends ze {
   constructor(e) {
     super(), ke(
       this,
       e,
+      Id,
       Td,
-      xd,
       we,
       {
         name: 1,
@@ -21576,11 +21576,11 @@ class Id extends ze {
     this.$$set({ bordered: e }), y();
   }
 }
-customElements.define("goa-calendar", Ce(Id, { name: {}, value: {}, min: {}, max: {}, testid: {}, version: {}, mt: {}, mr: {}, mb: {}, ml: {}, bordered: {} }, [], [], true));
-function qd(t) {
+customElements.define("goa-calendar", Ce(qd, { name: {}, value: {}, min: {}, max: {}, testid: {}, version: {}, mt: {}, mr: {}, mb: {}, ml: {}, bordered: {} }, [], [], true));
+function Ad(t) {
   je(t, "svelte-vycrz9", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}.notification.svelte-vycrz9.svelte-vycrz9{display:flex;align-items:stretch;overflow:hidden;font:var(--goa-callout-l-text-size);border:var(--goa-callout-l-border-width) solid;border-radius:var(--goa-callout-border-radius)}h3.svelte-vycrz9.svelte-vycrz9{font:var(--goa-callout-l-heading-size);margin-top:var(--goa-space-none);margin-bottom:var(--goa-callout-l-content-gap)}.icon.information.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-info-color-bg-statusbar)}.icon.information.svelte-vycrz9>.svelte-vycrz9{fill:var(--fill-color, var(--goa-callout-info-icon-color));color:var(--fill-color, var(--goa-callout-info-icon-color))}.icon.important.svelte-vycrz9>.svelte-vycrz9{fill:var(--fill-color, var(--goa-callout-warning-icon-color));color:var(--fill-color, var(--goa-callout-warning-icon-color))}.icon.success.svelte-vycrz9>.svelte-vycrz9{fill:var(--fill-color, var(--goa-callout-success-icon-color));color:var(--fill-color, var(--goa-callout-success-icon-color))}.icon.emergency.svelte-vycrz9>.svelte-vycrz9{fill:var(--fill-color, var(--goa-callout-emergency-icon-color));color:var(--fill-color, var(--goa-callout-emergency-icon-color))}.icon.event.svelte-vycrz9>.svelte-vycrz9{fill:var(--fill-color, var(--goa-callout-event-icon-color));color:var(--fill-color, var(--goa-callout-event-icon-color))}.icon.emergency.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-color-emergency-default)}.icon.important.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-warning-color-bg-statusbar)}.icon.information.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-color-info-default)}.icon.event.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-color-info-default)}.icon.success.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-success-color-bg-statusbar)}.icon.emergency.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-emergency-color-bg-statusbar)}.icon.svelte-vycrz9.svelte-vycrz9{text-align:center;padding:var(--goa-callout-l-statusbar-padding)}.content.information.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-info-color-bg-content)}.content.important.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-warning-color-bg-content)}.content.success.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-success-color-bg-content)}.content.emergency.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-emergency-color-bg-content)}.content.svelte-vycrz9.svelte-vycrz9{flex:1 1 auto;background-color:var(--goa-color-greyscale-100);padding:var(--goa-callout-l-content-padding)}.notification.information.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-info-border-color)}.notification.important.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-warning-border-color)}.notification.success.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-success-border-color)}.notification.emergency.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-emergency-border-color)}.notification.medium.svelte-vycrz9.svelte-vycrz9{font:var(--goa-callout-m-text-size);border-width:var(--goa-callout-m-border-width)}h3.medium.svelte-vycrz9.svelte-vycrz9{font:var(--goa-callout-m-heading-size);margin-bottom:var(--goa-callout-m-content-gap)}.notification.medium.svelte-vycrz9 .content.svelte-vycrz9{padding:var(--goa-callout-m-content-padding);margin-top:calc(-1 * var(--goa-space-3xs))}.notification.medium.svelte-vycrz9 .icon.svelte-vycrz9{padding:var(--goa-callout-m-statusbar-padding)}.v2.notification.svelte-vycrz9.svelte-vycrz9{flex-direction:column;border:var(--goa-callout-border)}.v2.notification.svelte-vycrz9 .heading.svelte-vycrz9{display:flex;flex-direction:row;align-items:flex-start;padding:var(--goa-callout-heading-padding);gap:var(--goa-callout-heading-gap);color:var(--goa-callout-heading-color)}.v2.notification.svelte-vycrz9 .heading-label.svelte-vycrz9{margin-top:var(--goa-space-3xs);margin-bottom:var(--goa-space-3xs);font:var(--goa-callout-heading-typography)}.v2.notification.svelte-vycrz9 .body.svelte-vycrz9{padding:var(--goa-callout-body-padding);color:var(--goa-callout-body-color);font:var(--goa-callout-body-typography)}.v2.emphasis-low.svelte-vycrz9 .body.svelte-vycrz9{padding:var(--goa-callout-l-with-heading-body-padding)}.v2.emphasis-low.svelte-vycrz9.svelte-vycrz9:has(.heading-label:empty){flex-direction:row;align-items:start}.v2.emphasis-low.svelte-vycrz9 .heading-label.svelte-vycrz9:empty{display:none}.v2.emphasis-low.svelte-vycrz9:has(.heading-label:empty) .heading.svelte-vycrz9{padding-right:var(--goa-space-xs)}.v2.emphasis-low.svelte-vycrz9:has(.heading-label:empty) .body.svelte-vycrz9{padding:var(--goa-callout-l-without-heading-body-padding)}.v2.information.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-info-content-bg-color)}.v2.information.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-info-heading-bg-color);--fill-color:var(--goa-callout-info-icon-color)}.v2.information.emphasis-low.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-l-info-border-color);background-color:var(--goa-callout-l-info-content-bg-color)}.v2.information.emphasis-high.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-h-info-border-color);background-color:var(--goa-callout-h-info-content-bg-color)}.v2.information.emphasis-high.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-h-info-heading-bg-color);color:var(--goa-callout-h-info-heading-color);--fill-color:var(--goa-callout-h-info-icon-color)}.v2.emergency.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-emergency-content-bg-color)}.v2.emergency.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-emergency-heading-bg-color);--fill-color:var(--goa-callout-emergency-icon-color)}.v2.emergency.emphasis-low.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-l-emergency-border-color);background-color:var(--goa-callout-l-emergency-content-bg-color)}.v2.emergency.emphasis-high.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-h-emergency-border-color);background-color:var(--goa-callout-h-emergency-content-bg-color)}.v2.emergency.emphasis-high.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-h-emergency-heading-bg-color);color:var(--goa-callout-h-emergency-heading-color);--fill-color:var(--goa-callout-h-emergency-icon-color)}.v2.important.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-important-content-bg-color)}.v2.important.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-important-heading-bg-color);--fill-color:var(--goa-callout-important-icon-color)}.v2.important.emphasis-low.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-l-important-border-color);background-color:var(--goa-callout-l-important-content-bg-color)}.v2.important.emphasis-high.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-h-important-border-color);background-color:var(--goa-callout-h-important-content-bg-color)}.v2.important.emphasis-high.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-h-important-heading-bg-color);color:var(--goa-callout-h-important-heading-color);--fill-color:var(--goa-callout-h-important-icon-color)}.v2.success.svelte-vycrz9.svelte-vycrz9{background-color:var(--goa-callout-success-content-bg-color)}.v2.success.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-success-heading-bg-color);--fill-color:var(--goa-callout-success-icon-color)}.v2.success.emphasis-low.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-l-success-border-color);background-color:var(--goa-callout-l-success-content-bg-color)}.v2.success.emphasis-high.svelte-vycrz9.svelte-vycrz9{border-color:var(--goa-callout-h-success-border-color);background-color:var(--goa-callout-h-success-content-bg-color)}.v2.success.emphasis-high.svelte-vycrz9 .heading.svelte-vycrz9{background-color:var(--goa-callout-h-success-heading-bg-color);color:var(--goa-callout-h-success-heading-color);--fill-color:var(--goa-callout-h-success-icon-color)}.v2.information.emphasis-low.svelte-vycrz9 .heading.svelte-vycrz9,.v2.important.emphasis-low.svelte-vycrz9 .heading.svelte-vycrz9,.v2.emergency.emphasis-low.svelte-vycrz9 .heading.svelte-vycrz9,.v2.success.emphasis-low.svelte-vycrz9 .heading.svelte-vycrz9{background-color:transparent}");
 }
-function Ad(t) {
+function Sd(t) {
   let e, o, i, n, l, r, a, d, c = (
     /*heading*/
     t[6] && sn(t)
@@ -21674,7 +21674,7 @@ function Ad(t) {
     }
   };
 }
-function Sd(t) {
+function xd(t) {
   let e, o, i, n, l, r, a, d, c;
   const s = (
     /*#slots*/
@@ -21765,7 +21765,7 @@ function sn(t) {
       e = C("h3"), o = ae(
         /*heading*/
         t[6]
-      ), f(e, "class", "svelte-vycrz9"), T(
+      ), f(e, "class", "svelte-vycrz9"), I(
         e,
         "medium",
         /*isMediumCallout*/
@@ -21782,7 +21782,7 @@ function sn(t) {
         /*heading*/
         i[6]
       ), n & /*isMediumCallout*/
-      16384 && T(
+      16384 && I(
         e,
         "medium",
         /*isMediumCallout*/
@@ -21800,7 +21800,7 @@ function Od(t) {
     /*onwindowresize*/
     t[19]
   );
-  const c = [Sd, Ad], s = [];
+  const c = [xd, Sd], s = [];
   function u(g, v) {
     return (
       /*version*/
@@ -21834,12 +21834,12 @@ function Od(t) {
         "aria-live",
         /*arialive*/
         t[9]
-      ), T(
+      ), I(
         e,
         "medium",
         /*isMediumCallout*/
         t[14]
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
@@ -21888,13 +21888,13 @@ function Od(t) {
         /*arialive*/
         g[9]
       ), (!r || v & /*type, emphasis, isMediumCallout*/
-      16432) && T(
+      16432) && I(
         e,
         "medium",
         /*isMediumCallout*/
         g[14]
       ), (!r || v & /*type, emphasis, version*/
-      2096) && T(
+      2096) && I(
         e,
         "v2",
         /*version*/
@@ -21914,18 +21914,18 @@ function Od(t) {
 }
 function Hd(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
-  const [a, d] = qe("Callout type", ["emergency", "important", "information", "event", "success"], true), [c, s] = qe("Callout size", ["medium", "large"]), [u, g] = qe("Callout emphasis", ["high", "medium", "low"]), [v, m] = qe("Aria live", ["off", "assertive", "polite"]), [b, w] = qe("Version", ["1", "2"]);
-  let { mt: p = null } = e, { mr: k = null } = e, { mb: z = "l" } = e, { ml: M = null } = e, { size: N = "large" } = e, { type: L } = e, { emphasis: j = "medium" } = e, { heading: H = "" } = e, { maxwidth: x = "none" } = e, { testid: Z = "" } = e, { arialive: V = "off" } = e, { icontheme: B = "outline" } = e, { version: S = "1" } = e, Y = 0, I = "medium";
+  const [a, d] = Ae("Callout type", ["emergency", "important", "information", "event", "success"], true), [c, s] = Ae("Callout size", ["medium", "large"]), [u, g] = Ae("Callout emphasis", ["high", "medium", "low"]), [v, m] = Ae("Aria live", ["off", "assertive", "polite"]), [b, w] = Ae("Version", ["1", "2"]);
+  let { mt: p = null } = e, { mr: k = null } = e, { mb: z = "l" } = e, { ml: M = null } = e, { size: N = "large" } = e, { type: L } = e, { emphasis: j = "medium" } = e, { heading: H = "" } = e, { maxwidth: T = "none" } = e, { testid: Z = "" } = e, { arialive: V = "off" } = e, { icontheme: B = "outline" } = e, { version: x = "1" } = e, Y = 0, q = "medium";
   De(() => {
-    s(N), g(j), m(V), w(S), setTimeout(() => {
-      d(L), o(13, I = i ? "small" : "medium");
+    s(N), g(j), m(V), w(x), setTimeout(() => {
+      d(L), o(13, q = i ? "small" : "medium");
     });
   });
-  function A() {
+  function S() {
     o(12, Y = window.innerWidth);
   }
   return t.$$set = (O) => {
-    "mt" in O && o(0, p = O.mt), "mr" in O && o(1, k = O.mr), "mb" in O && o(2, z = O.mb), "ml" in O && o(3, M = O.ml), "size" in O && o(16, N = O.size), "type" in O && o(4, L = O.type), "emphasis" in O && o(5, j = O.emphasis), "heading" in O && o(6, H = O.heading), "maxwidth" in O && o(7, x = O.maxwidth), "testid" in O && o(8, Z = O.testid), "arialive" in O && o(9, V = O.arialive), "icontheme" in O && o(10, B = O.icontheme), "version" in O && o(11, S = O.version), "$$scope" in O && o(17, r = O.$$scope);
+    "mt" in O && o(0, p = O.mt), "mr" in O && o(1, k = O.mr), "mb" in O && o(2, z = O.mb), "ml" in O && o(3, M = O.ml), "size" in O && o(16, N = O.size), "type" in O && o(4, L = O.type), "emphasis" in O && o(5, j = O.emphasis), "heading" in O && o(6, H = O.heading), "maxwidth" in O && o(7, T = O.maxwidth), "testid" in O && o(8, Z = O.testid), "arialive" in O && o(9, V = O.arialive), "icontheme" in O && o(10, B = O.icontheme), "version" in O && o(11, x = O.version), "$$scope" in O && o(17, r = O.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*screenSize, size*/
     69632 && o(14, i = Y < Pt || N === "medium"), t.$$.dirty & /*type*/
@@ -21938,19 +21938,19 @@ function Hd(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     Z,
     V,
     B,
-    S,
+    x,
     Y,
-    I,
+    q,
     i,
     n,
     N,
     r,
     l,
-    A
+    S
   ];
 }
 class Pd extends ze {
@@ -21976,7 +21976,7 @@ class Pd extends ze {
         icontheme: 10,
         version: 11
       },
-      qd
+      Ad
     );
   }
   get mt() {
@@ -22472,7 +22472,7 @@ class nc extends ze {
   }
 }
 customElements.define("goa-card-image", Ce(nc, { src: {}, height: {} }, [], [], true));
-const qo = "_stateChange", hs = "form::reset:errors", Ao = "form::reset:form", ms = "form::bind", So = "form::toggle:active", di = "form::set:fieldset", Kt = "form::dispatch:state", bs = "form::edit", ps = "subform::bind", lc = "subform::indexContinueToParent", ws = "subform::indexContinueToSubForm", zt = "fieldset::reset:errors", Dt = "fieldset::reset:fields", ci = "fieldset::submit", _s = "form-page:continue", Oo = "form-page:back", ys = "form=page::bind", $t = "fieldset::bind", Mt = "fieldset::set:error", Ho = "fieldset::change", xt = "fieldset::set:value", ui = "form-item::bind", rc = "external::alter:state", ei = "external::continue", ac = "external::set:error", ks = "external::init:state", ut = "form-field::bind", Cs = "form-summary::bind", zs = "form-summary::edit:page";
+const Ao = "_stateChange", hs = "form::reset:errors", So = "form::reset:form", ms = "form::bind", xo = "form::toggle:active", di = "form::set:fieldset", Kt = "form::dispatch:state", bs = "form::edit", ps = "subform::bind", lc = "subform::indexContinueToParent", ws = "subform::indexContinueToSubForm", zt = "fieldset::reset:errors", Dt = "fieldset::reset:fields", ci = "fieldset::submit", _s = "form-page:continue", Oo = "form-page:back", ys = "form=page::bind", $t = "fieldset::bind", Mt = "fieldset::set:error", Ho = "fieldset::change", Tt = "fieldset::set:value", ui = "form-item::bind", rc = "external::alter:state", ei = "external::continue", ac = "external::set:error", ks = "external::init:state", ut = "form-field::bind", Cs = "form-summary::bind", zs = "form-summary::edit:page";
 function sc(t) {
   je(t, "svelte-svwlg5", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:block}.root.svelte-svwlg5.svelte-svwlg5{display:flex;flex-direction:column;justify-content:flex-start;height:auto;min-height:0;padding:0}input[type="checkbox"].svelte-svwlg5.svelte-svwlg5{position:absolute;opacity:0;transform:scale(0);margin:0;cursor:pointer}input[type="checkbox"][disabled].svelte-svwlg5.svelte-svwlg5:hover{cursor:default}label.svelte-svwlg5.svelte-svwlg5{display:flex;cursor:pointer;align-self:flex-start}label.svelte-svwlg5:hover .container.svelte-svwlg5{border:var(--goa-checkbox-border-hover)}label.svelte-svwlg5:hover .container.selected.svelte-svwlg5{background-color:var(--goa-checkbox-color-bg-checked-hover);border:none}.text.svelte-svwlg5.svelte-svwlg5{padding-left:var(--goa-checkbox-gap);-webkit-user-select:none;-moz-user-select:none;user-select:none;font:var(--goa-checkbox-label-font-size);color:var(--goa-checkbox-color-label)}.description.svelte-svwlg5.svelte-svwlg5{font:var(--goa-checkbox-description-font-size);margin-left:calc(var(--goa-checkbox-size) + var(--goa-checkbox-gap));margin-top:var(--goa-space-2xs)}.reveal.svelte-svwlg5.svelte-svwlg5{display:none;height:0}.reveal.visible.svelte-svwlg5.svelte-svwlg5{display:block;height:-moz-fit-content;height:fit-content}.reveal.visible.has-content.svelte-svwlg5.svelte-svwlg5{border-left:4px solid var(--goa-color-greyscale-200);padding:var(--goa-space-m);margin:var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px);box-sizing:border-box}.container.svelte-svwlg5.svelte-svwlg5{position:relative;box-sizing:border-box;border:var(--goa-checkbox-border);border-radius:var(--goa-checkbox-border-radius);background-color:var(--goa-checkbox-color-bg);height:var(--goa-checkbox-size);width:var(--goa-checkbox-size);margin-top:3px;display:flex;justify-content:center;flex:0 0 auto}.container.svelte-svwlg5.svelte-svwlg5::before{content:"";position:absolute;width:44px;height:44px;top:50%;left:50%;transform:translate(-50%, -50%)}.container.svelte-svwlg5.svelte-svwlg5:hover{border:var(--goa-checkbox-border-hover)}.container.svelte-svwlg5 svg.svelte-svwlg5{fill:var(--goa-checkbox-color-bg);margin:3px}.container.selected.svelte-svwlg5.svelte-svwlg5{background-color:var(--goa-checkbox-color-bg-checked);border:none}.container.selected.svelte-svwlg5.svelte-svwlg5:hover{background-color:var(--goa-checkbox-color-bg-checked-hover)}.error.svelte-svwlg5 .container.svelte-svwlg5,.error.svelte-svwlg5 .container.svelte-svwlg5:hover{border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg);box-shadow:none}.error.svelte-svwlg5 .container.selected.svelte-svwlg5,.error.svelte-svwlg5 .container.selected.svelte-svwlg5:hover{border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg)}label:hover.error.svelte-svwlg5 .container.svelte-svwlg5{border:var(--goa-checkbox-border-error)}label:hover.error.svelte-svwlg5 .container.selected.svelte-svwlg5{border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg)}.error.svelte-svwlg5 .container svg.svelte-svwlg5{fill:var(--goa-checkbox-color-bg-checked-error);margin:1px}.error.svelte-svwlg5 .container.svelte-svwlg5:has(:focus-visible),.error.svelte-svwlg5 .container.svelte-svwlg5:has(:focus){outline:none;box-shadow:0 0 0 3px var(--goa-color-interactive-focus)}.error.svelte-svwlg5 .container.svelte-svwlg5:has(:focus-visible):hover,.error.svelte-svwlg5 .container.svelte-svwlg5:has(:focus):hover{outline:none;border:var(--goa-checkbox-border-error)}.error.svelte-svwlg5 .container.selected.svelte-svwlg5:has(:focus-visible):hover,.error.svelte-svwlg5 .container.selected.svelte-svwlg5:has(:focus):hover{outline:none;border:none;background-color:var(--goa-checkbox-color-bg)}label:hover.error.svelte-svwlg5 .container.selected.svelte-svwlg5:has(:focus-visible),label:hover.error.svelte-svwlg5 .container.selected.svelte-svwlg5:has(:focus){outline:none;border:var(--goa-checkbox-border-error);background-color:var(--goa-checkbox-color-bg)}label:hover.error.svelte-svwlg5 .container.svelte-svwlg5:has(:focus-visible),label:hover.error.svelte-svwlg5 .container.svelte-svwlg5:has(:focus){outline:none;border:var(--goa-checkbox-border-error)}.container.svelte-svwlg5.svelte-svwlg5:has(:focus-visible),.container.svelte-svwlg5.svelte-svwlg5:has(:focus){outline:none;box-shadow:0 0 0 3px var(--goa-color-interactive-focus)}.container.svelte-svwlg5.svelte-svwlg5:has(:focus-visible):hover,.container.svelte-svwlg5.svelte-svwlg5:has(:focus):hover{outline:none;border:var(--goa-checkbox-border)}.container.selected.svelte-svwlg5.svelte-svwlg5:has(:focus-visible):hover,.container.selected.svelte-svwlg5.svelte-svwlg5:has(:focus):hover{outline:none;border:none;background-color:var(--goa-checkbox-color-bg-checked)}label.svelte-svwlg5:hover .container.selected.svelte-svwlg5:has(:focus-visible),label.svelte-svwlg5:hover .container.selected.svelte-svwlg5:has(:focus){outline:none;border:none;background-color:var(--goa-checkbox-color-bg-checked)}label.svelte-svwlg5:hover .container.svelte-svwlg5:has(:focus-visible),label.svelte-svwlg5:hover .container.svelte-svwlg5:has(:focus){outline:none;border:var(--goa-checkbox-border)}.disabled.svelte-svwlg5.svelte-svwlg5{cursor:default}.disabled.svelte-svwlg5 .text.svelte-svwlg5{color:var(--goa-checkbox-color-label-disabled)}label.disabled.svelte-svwlg5+.description.svelte-svwlg5{color:var(--goa-checkbox-color-label-disabled);cursor:default}.disabled.svelte-svwlg5:not(.error) .container.svelte-svwlg5{border:var(--goa-checkbox-border-disabled);box-shadow:none}.disabled.svelte-svwlg5:not(.error) .container.selected.svelte-svwlg5{border:none;background-color:var(--goa-checkbox-color-bg-checked-disabled)}.disabled.error.svelte-svwlg5 .container.selected.svelte-svwlg5{border:var(--goa-checkbox-border-disabled-error)}.disabled.error.svelte-svwlg5 .container.svelte-svwlg5{border:var(--goa-checkbox-border-disabled-error)}label:hover.disabled.error.svelte-svwlg5 .container.svelte-svwlg5{border:var(--goa-checkbox-border-disabled-error)}.disabled.error.svelte-svwlg5 .container svg.svelte-svwlg5{fill:#f58185}.v2.svelte-svwlg5 .text.svelte-svwlg5{margin-top:var(--goa-space-2xs)}.v2.svelte-svwlg5 .container svg.svelte-svwlg5{margin:6px 3px}.v2.svelte-svwlg5 .container.svelte-svwlg5:has(:focus-visible),.v2.svelte-svwlg5 .container.svelte-svwlg5:has(:focus-visible):hover,.v2.svelte-svwlg5 .container.selected.svelte-svwlg5:has(:focus-visible):hover,.v2.svelte-svwlg5 label:hover .container.selected.svelte-svwlg5:has(:focus-visible),.v2.svelte-svwlg5 label:hover .container.svelte-svwlg5:has(:focus-visible){outline:var(--goa-checkbox-border-focus);outline-offset:var(--goa-space-3xs);box-shadow:none}.v2.svelte-svwlg5 .disabled:not(.error) .container.svelte-svwlg5:not(.selected){background:var(--goa-input-color-background-disabled);box-shadow:none}.v2.svelte-svwlg5 .error .container.svelte-svwlg5,.v2.svelte-svwlg5 .error .container.selected.svelte-svwlg5{background:var(--goa-input-color-background-error)}.v2.svelte-svwlg5 .error:not(.disabled) .container.svelte-svwlg5:hover,.v2.svelte-svwlg5 .error:not(.disabled) .container.selected.svelte-svwlg5:hover,.v2.svelte-svwlg5 label:hover.error:not(.disabled) .container.svelte-svwlg5,.v2.svelte-svwlg5 label:hover.error:not(.disabled) .container.selected.svelte-svwlg5{background:var(--goa-input-color-background-error-hover);border:var(--goa-checkbox-border-error-hover)}.v2.svelte-svwlg5 .error:not(.disabled) .container:hover svg.svelte-svwlg5,.v2.svelte-svwlg5 .error:not(.disabled) .container.selected:hover svg.svelte-svwlg5,.v2.svelte-svwlg5 label:hover.error:not(.disabled) .container svg.svelte-svwlg5,.v2.svelte-svwlg5 label:hover.error:not(.disabled) .container.selected svg.svelte-svwlg5{fill:var(--goa-checkbox-color-bg-checked-error-hover)}.v2.svelte-svwlg5 .error .container svg.svelte-svwlg5{margin-top:5px}.v2.compact.svelte-svwlg5 .text.svelte-svwlg5{padding-left:var(--goa-checkbox-gap-compact);font:var(--goa-checkbox-label-font-size-compact)}.compact.svelte-svwlg5 .description.svelte-svwlg5{margin-left:calc(
       var(--goa-checkbox-size) + var(--goa-checkbox-gap-compact)
@@ -22607,27 +22607,27 @@ function un(t) {
 }
 function hc(t) {
   let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L;
-  function j(I, A) {
+  function j(q, S) {
     if (
       /*isIndeterminate*/
-      I[17] && /*version*/
-      I[9] === "2"
+      q[17] && /*version*/
+      q[9] === "2"
     ) return vc;
     if (
       /*isIndeterminate*/
-      I[17]
+      q[17]
     ) return gc;
     if (
       /*isChecked*/
-      I[20] && /*version*/
-      I[9] === "2"
+      q[20] && /*version*/
+      q[9] === "2"
     ) return fc;
     if (
       /*isChecked*/
-      I[20]
+      q[20]
     ) return uc;
   }
-  let H = j(t), x = H && H(t);
+  let H = j(t), T = H && H(t);
   const Z = (
     /*#slots*/
     t[33].default
@@ -22643,11 +22643,11 @@ function hc(t) {
     (t[25].description || /*description*/
     t[6]) && un(t)
   );
-  const S = (
+  const x = (
     /*#slots*/
     t[33].reveal
   ), Y = ue(
-    S,
+    x,
     t,
     /*$$scope*/
     t[32],
@@ -22655,7 +22655,7 @@ function hc(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("label"), i = C("div"), n = C("input"), s = W(), x && x.c(), u = W(), g = C("div"), V && V.c(), v = W(), m = ae(
+      e = C("div"), o = C("label"), i = C("div"), n = C("input"), s = W(), T && T.c(), u = W(), g = C("div"), V && V.c(), v = W(), m = ae(
         /*text*/
         t[3]
       ), b = W(), B && B.c(), w = W(), p = C("div"), Y && Y.c(), f(
@@ -22684,7 +22684,7 @@ function hc(t) {
         /*_descriptionId*/
         t[19]
       ) : null), f(n, "aria-invalid", c = /*_error*/
-      t[15] ? "true" : "false"), f(n, "class", "svelte-svwlg5"), f(i, "class", "container svelte-svwlg5"), T(
+      t[15] ? "true" : "false"), f(n, "class", "svelte-svwlg5"), f(i, "class", "container svelte-svwlg5"), I(
         i,
         "selected",
         /*isChecked*/
@@ -22700,12 +22700,12 @@ function hc(t) {
         "for",
         /*name*/
         t[2]
-      ), f(o, "class", "svelte-svwlg5"), T(
+      ), f(o, "class", "svelte-svwlg5"), I(
         o,
         "disabled",
         /*isDisabled*/
         t[22]
-      ), T(
+      ), I(
         o,
         "error",
         /*_error*/
@@ -22713,13 +22713,13 @@ function hc(t) {
       ), f(p, "class", "reveal svelte-svwlg5"), ot(() => (
         /*div2_elementresize_handler*/
         t[36].call(p)
-      )), T(
+      )), I(
         p,
         "visible",
         /*$$slots*/
         t[25].reveal && /*isChecked*/
         t[20]
-      ), T(
+      ), I(
         p,
         "has-content",
         /*revealSlotHasContent*/
@@ -22737,20 +22737,20 @@ ${Ne(
       )}
 max-width: ${/*maxwidth*/
       t[7]};
-`), T(
+`), I(
         e,
         "v2",
         /*version*/
         t[9] === "2"
-      ), T(
+      ), I(
         e,
         "compact",
         /*size*/
         t[8] === "compact"
       );
     },
-    m(I, A) {
-      D(I, e, A), _(e, o), _(o, i), _(i, n), t[34](n), _(i, s), x && x.m(i, null), _(o, u), _(o, g), V && V.m(g, null), _(g, v), _(g, m), _(e, b), B && B.m(e, null), _(e, w), _(e, p), Y && Y.m(p, null), t[35](p), k = co(
+    m(q, S) {
+      D(q, e, S), _(e, o), _(o, i), _(i, n), t[34](n), _(i, s), T && T.m(i, null), _(o, u), _(o, g), V && V.m(g, null), _(g, v), _(g, m), _(e, b), B && B.m(e, null), _(e, w), _(e, p), Y && Y.m(p, null), t[35](p), k = co(
         p,
         /*div2_elementresize_handler*/
         t[36].bind(p)
@@ -22769,182 +22769,182 @@ max-width: ${/*maxwidth*/
         )
       ], N = true);
     },
-    p(I, A) {
-      (!M || A[0] & /*name*/
+    p(q, S) {
+      (!M || S[0] & /*name*/
       4) && f(
         n,
         "id",
         /*name*/
-        I[2]
-      ), (!M || A[0] & /*name*/
+        q[2]
+      ), (!M || S[0] & /*name*/
       4) && f(
         n,
         "name",
         /*name*/
-        I[2]
-      ), (!M || A[0] & /*isChecked*/
+        q[2]
+      ), (!M || S[0] & /*isChecked*/
       1048576) && (n.checked = /*isChecked*/
-      I[20]), (!M || A[0] & /*isDisabled*/
+      q[20]), (!M || S[0] & /*isDisabled*/
       4194304) && (n.disabled = /*isDisabled*/
-      I[22]), (!M || A[0] & /*value*/
+      q[22]), (!M || S[0] & /*value*/
       1 && l !== (l = `${/*value*/
-      I[0]}`)) && (n.value = l), (!M || A[0] & /*arialabel, text, name*/
+      q[0]}`)) && (n.value = l), (!M || S[0] & /*arialabel, text, name*/
       44 && r !== (r = /*arialabel*/
-      I[5] || /*text*/
-      I[3] || /*name*/
-      I[2])) && f(n, "aria-label", r), (!M || A[0] & /*isIndeterminate, isChecked*/
+      q[5] || /*text*/
+      q[3] || /*name*/
+      q[2])) && f(n, "aria-label", r), (!M || S[0] & /*isIndeterminate, isChecked*/
       1179648 && a !== (a = /*isIndeterminate*/
-      I[17] ? "mixed" : (
+      q[17] ? "mixed" : (
         /*isChecked*/
-        I[20] ? "true" : "false"
-      ))) && f(n, "aria-checked", a), (!M || A[0] & /*$$slots, description, _descriptionId*/
+        q[20] ? "true" : "false"
+      ))) && f(n, "aria-checked", a), (!M || S[0] & /*$$slots, description, _descriptionId*/
       34078784 && d !== (d = /*$$slots*/
-      I[25].description || /*description*/
-      I[6] !== "" ? (
+      q[25].description || /*description*/
+      q[6] !== "" ? (
         /*_descriptionId*/
-        I[19]
-      ) : null)) && f(n, "aria-describedby", d), (!M || A[0] & /*_error*/
+        q[19]
+      ) : null)) && f(n, "aria-describedby", d), (!M || S[0] & /*_error*/
       32768 && c !== (c = /*_error*/
-      I[15] ? "true" : "false")) && f(n, "aria-invalid", c), H !== (H = j(I)) && (x && x.d(1), x = H && H(I), x && (x.c(), x.m(i, null))), (!M || A[0] & /*isChecked, isIndeterminate*/
-      1179648) && T(
+      q[15] ? "true" : "false")) && f(n, "aria-invalid", c), H !== (H = j(q)) && (T && T.d(1), T = H && H(q), T && (T.c(), T.m(i, null))), (!M || S[0] & /*isChecked, isIndeterminate*/
+      1179648) && I(
         i,
         "selected",
         /*isChecked*/
-        I[20] || /*isIndeterminate*/
-        I[17]
-      ), V && V.p && (!M || A[1] & /*$$scope*/
+        q[20] || /*isIndeterminate*/
+        q[17]
+      ), V && V.p && (!M || S[1] & /*$$scope*/
       2) && ge(
         V,
         Z,
-        I,
+        q,
         /*$$scope*/
-        I[32],
+        q[32],
         M ? fe(
           Z,
           /*$$scope*/
-          I[32],
-          A,
+          q[32],
+          S,
           null
         ) : ve(
           /*$$scope*/
-          I[32]
+          q[32]
         ),
         null
-      ), (!M || A[0] & /*text*/
+      ), (!M || S[0] & /*text*/
       8) && me(
         m,
         /*text*/
-        I[3]
-      ), (!M || A[0] & /*testid*/
+        q[3]
+      ), (!M || S[0] & /*testid*/
       16) && f(
         o,
         "data-testid",
         /*testid*/
-        I[4]
-      ), (!M || A[0] & /*name*/
+        q[4]
+      ), (!M || S[0] & /*name*/
       4) && f(
         o,
         "for",
         /*name*/
-        I[2]
-      ), (!M || A[0] & /*isDisabled*/
-      4194304) && T(
+        q[2]
+      ), (!M || S[0] & /*isDisabled*/
+      4194304) && I(
         o,
         "disabled",
         /*isDisabled*/
-        I[22]
-      ), (!M || A[0] & /*_error*/
-      32768) && T(
+        q[22]
+      ), (!M || S[0] & /*_error*/
+      32768) && I(
         o,
         "error",
         /*_error*/
-        I[15]
+        q[15]
       ), /*$$slots*/
-      I[25].description || /*description*/
-      I[6] ? B ? (B.p(I, A), A[0] & /*$$slots, description*/
-      33554496 && U(B, 1)) : (B = un(I), B.c(), U(B, 1), B.m(e, w)) : B && (He(), $(B, 1, 1, () => {
+      q[25].description || /*description*/
+      q[6] ? B ? (B.p(q, S), S[0] & /*$$slots, description*/
+      33554496 && U(B, 1)) : (B = un(q), B.c(), U(B, 1), B.m(e, w)) : B && (He(), $(B, 1, 1, () => {
         B = null;
-      }), Pe()), Y && Y.p && (!M || A[1] & /*$$scope*/
+      }), Pe()), Y && Y.p && (!M || S[1] & /*$$scope*/
       2) && ge(
         Y,
-        S,
-        I,
+        x,
+        q,
         /*$$scope*/
-        I[32],
+        q[32],
         M ? fe(
-          S,
+          x,
           /*$$scope*/
-          I[32],
-          A,
+          q[32],
+          S,
           dc
         ) : ve(
           /*$$scope*/
-          I[32]
+          q[32]
         ),
         dn
-      ), (!M || A[0] & /*$$slots, isChecked*/
-      34603008) && T(
+      ), (!M || S[0] & /*$$slots, isChecked*/
+      34603008) && I(
         p,
         "visible",
         /*$$slots*/
-        I[25].reveal && /*isChecked*/
-        I[20]
-      ), (!M || A[0] & /*revealSlotHasContent*/
-      2097152) && T(
+        q[25].reveal && /*isChecked*/
+        q[20]
+      ), (!M || S[0] & /*revealSlotHasContent*/
+      2097152) && I(
         p,
         "has-content",
         /*revealSlotHasContent*/
-        I[21]
-      ), (!M || A[0] & /*mt, mr, mb, ml, maxwidth*/
+        q[21]
+      ), (!M || S[0] & /*mt, mr, mb, ml, maxwidth*/
       7298 && z !== (z = `
 ${Ne(
         /*mt*/
-        I[10],
+        q[10],
         /*mr*/
-        I[11],
+        q[11],
         /*mb*/
-        I[1],
+        q[1],
         /*ml*/
-        I[12]
+        q[12]
       )}
 max-width: ${/*maxwidth*/
-      I[7]};
-`)) && f(e, "style", z), (!M || A[0] & /*version*/
-      512) && T(
+      q[7]};
+`)) && f(e, "style", z), (!M || S[0] & /*version*/
+      512) && I(
         e,
         "v2",
         /*version*/
-        I[9] === "2"
-      ), (!M || A[0] & /*size*/
-      256) && T(
+        q[9] === "2"
+      ), (!M || S[0] & /*size*/
+      256) && I(
         e,
         "compact",
         /*size*/
-        I[8] === "compact"
+        q[8] === "compact"
       );
     },
-    i(I) {
-      M || (U(V, I), U(B), U(Y, I), M = true);
+    i(q) {
+      M || (U(V, q), U(B), U(Y, q), M = true);
     },
-    o(I) {
-      $(V, I), $(B), $(Y, I), M = false;
+    o(q) {
+      $(V, q), $(B), $(Y, q), M = false;
     },
-    d(I) {
-      I && E(e), t[34](null), x && x.d(), V && V.d(I), B && B.d(), Y && Y.d(I), t[35](null), k(), t[37](null), N = false, Ye(L);
+    d(q) {
+      q && E(e), t[34](null), T && T.d(), V && V.d(q), B && B.d(), Y && Y.d(q), t[35](null), k(), t[37](null), N = false, Ye(L);
     }
   };
 }
 function mc(t, e, o) {
   let i, n, l, r, { $$slots: a = {}, $$scope: d } = e;
   const c = ft(a);
-  let { name: s } = e, { checked: u = "false" } = e, { indeterminate: g = "false" } = e, { text: v = "" } = e, { value: m = "" } = e, { disabled: b = "false" } = e, { error: w = "false" } = e, { testid: p = "" } = e, { arialabel: k = "" } = e, { description: z = "" } = e, { revealarialabel: M = "" } = e, { maxwidth: N = "none" } = e, { size: L = "default" } = e, { version: j = "1" } = e, { mt: H = null } = e, { mr: x = null } = e, { mb: Z = null } = e, { ml: V = null } = e, B, S, Y = [], I, A, O, K, F, q = 0;
+  let { name: s } = e, { checked: u = "false" } = e, { indeterminate: g = "false" } = e, { text: v = "" } = e, { value: m = "" } = e, { disabled: b = "false" } = e, { error: w = "false" } = e, { testid: p = "" } = e, { arialabel: k = "" } = e, { description: z = "" } = e, { revealarialabel: M = "" } = e, { maxwidth: N = "none" } = e, { size: L = "default" } = e, { version: j = "1" } = e, { mt: H = null } = e, { mr: T = null } = e, { mb: Z = null } = e, { ml: V = null } = e, B, x, Y = [], q, S, O, K, F, A = 0;
   De(() => {
     B = m, o(19, O = `description_${s}`), j === "1" && o(1, Z ?? (Z = L === "compact" ? "s" : "m")), Q(), ee(), G();
   });
   function Q() {
-    rt(S, (X, pe) => {
+    rt(x, (X, pe) => {
       switch (X) {
-        case xt:
+        case Tt:
           P(pe);
           break;
         case Mt:
@@ -22966,13 +22966,13 @@ function mc(t, e, o) {
     o(27, w = X.error ? "true" : "false");
   }
   function ee() {
-    rt(I, (X, pe) => {
+    rt(q, (X, pe) => {
       switch (X) {
         case ut:
           oe(pe);
           break;
       }
-    }), I && ie();
+    }), q && ie();
   }
   function oe(X) {
     setTimeout(
@@ -22990,18 +22990,18 @@ function mc(t, e, o) {
       Oe(X, Dt);
   }
   function P(X) {
-    o(0, m = X.value), o(26, u = X.value ? "true" : "false"), Ee(A, "_change", { name: s, value: m }, { bubbles: true });
+    o(0, m = X.value), o(26, u = X.value ? "true" : "false"), Ee(S, "_change", { name: s, value: m }, { bubbles: true });
   }
   function G() {
-    var Te;
+    var Ie;
     if (!s) return;
-    const X = (Te = S == null ? void 0 : S.getRootNode()) == null ? void 0 : Te.host, pe = (X == null ? void 0 : X.closest("goa-checkbox-list")) !== null;
-    Oe(S, ut, { name: s, el: S }, { bubbles: !pe, timeout: 10 });
+    const X = (Ie = x == null ? void 0 : x.getRootNode()) == null ? void 0 : Ie.host, pe = (X == null ? void 0 : X.closest("goa-checkbox-list")) !== null;
+    Oe(x, ut, { name: s, el: x }, { bubbles: !pe, timeout: 10 });
   }
   function J(X) {
     var Fe;
-    A.focus();
-    const pe = !n, Te = pe ? `${B || "checked"}` : "";
+    S.focus();
+    const pe = !n, Ie = pe ? `${B || "checked"}` : "";
     o(26, u = Xt(pe)), (Fe = X.target) == null || Fe.dispatchEvent(new CustomEvent(
       "_change",
       {
@@ -23009,52 +23009,52 @@ function mc(t, e, o) {
         detail: {
           name: s,
           checked: pe,
-          value: Te
+          value: Ie
         },
         bubbles: true
       }
-    )), c.reveal && !pe && te(), c.reveal && pe && I && M !== "" && si(M);
+    )), c.reveal && !pe && te(), c.reveal && pe && q && M !== "" && si(M);
   }
   function se() {
-    Ee(S, "help-text::announce", void 0, { bubbles: true });
+    Ee(x, "help-text::announce", void 0, { bubbles: true });
   }
   function ie() {
-    I.addEventListener("_click", (X) => {
+    q.addEventListener("_click", (X) => {
       X.stopPropagation();
-    }), I.addEventListener("_change", (X) => {
-      const Te = X.detail;
-      X.stopPropagation(), Te && Te.name && typeof Te.value < "u" && Ee(S, "_revealChange", Te, { bubbles: true });
+    }), q.addEventListener("_change", (X) => {
+      const Ie = X.detail;
+      X.stopPropagation(), Ie && Ie.name && typeof Ie.value < "u" && Ee(x, "_revealChange", Ie, { bubbles: true });
     });
   }
   function ye(X) {
     ce[X ? "unshift" : "push"](() => {
-      A = X, o(14, A), o(17, l), o(28, g);
+      S = X, o(14, S), o(17, l), o(28, g);
     });
   }
   function Le(X) {
     ce[X ? "unshift" : "push"](() => {
-      I = X, o(18, I);
+      q = X, o(18, q);
     });
   }
   function Ke() {
-    q = this.clientHeight, o(16, q);
+    A = this.clientHeight, o(16, A);
   }
   function le(X) {
     ce[X ? "unshift" : "push"](() => {
-      S = X, o(13, S);
+      x = X, o(13, x);
     });
   }
   return t.$$set = (X) => {
-    "name" in X && o(2, s = X.name), "checked" in X && o(26, u = X.checked), "indeterminate" in X && o(28, g = X.indeterminate), "text" in X && o(3, v = X.text), "value" in X && o(0, m = X.value), "disabled" in X && o(29, b = X.disabled), "error" in X && o(27, w = X.error), "testid" in X && o(4, p = X.testid), "arialabel" in X && o(5, k = X.arialabel), "description" in X && o(6, z = X.description), "revealarialabel" in X && o(30, M = X.revealarialabel), "maxwidth" in X && o(7, N = X.maxwidth), "size" in X && o(8, L = X.size), "version" in X && o(9, j = X.version), "mt" in X && o(10, H = X.mt), "mr" in X && o(11, x = X.mr), "mb" in X && o(1, Z = X.mb), "ml" in X && o(12, V = X.ml), "$$scope" in X && o(32, d = X.$$scope);
+    "name" in X && o(2, s = X.name), "checked" in X && o(26, u = X.checked), "indeterminate" in X && o(28, g = X.indeterminate), "text" in X && o(3, v = X.text), "value" in X && o(0, m = X.value), "disabled" in X && o(29, b = X.disabled), "error" in X && o(27, w = X.error), "testid" in X && o(4, p = X.testid), "arialabel" in X && o(5, k = X.arialabel), "description" in X && o(6, z = X.description), "revealarialabel" in X && o(30, M = X.revealarialabel), "maxwidth" in X && o(7, N = X.maxwidth), "size" in X && o(8, L = X.size), "version" in X && o(9, j = X.version), "mt" in X && o(10, H = X.mt), "mr" in X && o(11, T = X.mr), "mb" in X && o(1, Z = X.mb), "ml" in X && o(12, V = X.ml), "$$scope" in X && o(32, d = X.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    536870912 && o(22, i = Ae(b)), t.$$.dirty[0] & /*error, _error, _rootEl*/
+    536870912 && o(22, i = Se(b)), t.$$.dirty[0] & /*error, _error, _rootEl*/
     134258688 | t.$$.dirty[1] & /*_prevError*/
-    1 && (o(15, K = Ae(w)), K !== F && (Ee(S, "error::change", { isError: K }, { bubbles: true }), o(31, F = K))), t.$$.dirty[0] & /*checked*/
-    67108864 && o(20, n = Ae(u)), t.$$.dirty[0] & /*indeterminate*/
-    268435456 && o(17, l = Ae(g)), t.$$.dirty[0] & /*_checkboxRef, isIndeterminate*/
-    147456 && A && o(14, A.indeterminate = l, A), t.$$.dirty[0] & /*_revealSlotHeight*/
-    65536 && o(21, r = q > 0);
+    1 && (o(15, K = Se(w)), K !== F && (Ee(x, "error::change", { isError: K }, { bubbles: true }), o(31, F = K))), t.$$.dirty[0] & /*checked*/
+    67108864 && o(20, n = Se(u)), t.$$.dirty[0] & /*indeterminate*/
+    268435456 && o(17, l = Se(g)), t.$$.dirty[0] & /*_checkboxRef, isIndeterminate*/
+    147456 && S && o(14, S.indeterminate = l, S), t.$$.dirty[0] & /*_revealSlotHeight*/
+    65536 && o(21, r = A > 0);
   }, [
     m,
     Z,
@@ -23067,14 +23067,14 @@ function mc(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     V,
+    x,
     S,
-    A,
     K,
-    q,
+    A,
     l,
-    I,
+    q,
     O,
     n,
     r,
@@ -23255,12 +23255,12 @@ function wc(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("div"), d && d.c(), f(o, "class", "checkbox-container svelte-1gqxag3"), T(
+      e = C("div"), o = C("div"), d && d.c(), f(o, "class", "checkbox-container svelte-1gqxag3"), I(
         o,
         "v2",
         /*version*/
         t[3] === "2"
-      ), T(
+      ), I(
         o,
         "compact",
         /*size*/
@@ -23318,13 +23318,13 @@ function wc(t) {
         ),
         null
       ), (!n || s[0] & /*version*/
-      8) && T(
+      8) && I(
         o,
         "v2",
         /*version*/
         c[3] === "2"
       ), (!n || s[0] & /*size*/
-      16) && T(
+      16) && I(
         o,
         "compact",
         /*size*/
@@ -23380,14 +23380,14 @@ function Ro(t, e) {
 function _c(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e, { name: r } = e, { value: a = [] } = e, { disabled: d = "false" } = e, { error: c = "false" } = e, { testid: s = "" } = e, { maxwidth: u = "none" } = e, { version: g = "1" } = e, { size: v = "default" } = e, { mt: m = null } = e, { mr: b = null } = e, { mb: w = null } = e, { ml: p = null } = e, k, z, M, N = [], L = false, j = /* @__PURE__ */ new Set();
   De(async () => {
-    await Ge(), H(a), S(), K(), A(), L = true, q();
+    await Ge(), H(a), x(), K(), S(), L = true, A();
   });
   function H(P) {
     j.clear(), P && Array.isArray(P) && P.forEach((G) => j.add(G));
   }
-  function x(P, G) {
+  function T(P, G) {
     Array.isArray(P) || o(12, a = []);
-    const J = Ae(G);
+    const J = Se(G);
     if (J !== M && (k == null || k.dispatchEvent(new CustomEvent(
       "error::change",
       {
@@ -23397,7 +23397,7 @@ function _c(t, e, o) {
       }
     )), M = J, ee()), H(P), L)
       try {
-        q();
+        A();
       } catch (se) {
         console.error("Error syncing checkbox values:", se);
       }
@@ -23422,11 +23422,11 @@ function _c(t, e, o) {
   function B(P) {
     return !P || P.length === 0 ? [] : P.map((J) => V(J));
   }
-  function S() {
+  function x() {
     rt(k, (P, G, J) => {
       switch (P) {
-        case xt:
-          I(G);
+        case Tt:
+          q(G);
           break;
         case Mt:
           Y(G);
@@ -23435,7 +23435,7 @@ function _c(t, e, o) {
           o(13, c = "false");
           break;
         case Dt:
-          I({ value: [] });
+          q({ value: [] });
           break;
         case ut:
           O(G);
@@ -23446,8 +23446,8 @@ function _c(t, e, o) {
   function Y(P) {
     o(13, c = P.error ? "true" : "false");
   }
-  function I(P) {
-    o(12, a = Array.isArray(P.value) ? P.value : []), H(a), q(), k == null || k.dispatchEvent(new CustomEvent(
+  function q(P) {
+    o(12, a = Array.isArray(P.value) ? P.value : []), H(a), A(), k == null || k.dispatchEvent(new CustomEvent(
       "_change",
       {
         detail: {
@@ -23460,7 +23460,7 @@ function _c(t, e, o) {
       }
     ));
   }
-  function A() {
+  function S() {
     r && Oe(k, ut, { name: r, el: k }, { bubbles: true, timeout: 10 });
   }
   function O(P) {
@@ -23494,7 +23494,7 @@ function _c(t, e, o) {
       }
     ));
   }
-  function q() {
+  function A() {
     if (N.length > 0)
       for (const P of N) R(P.el, P.name);
     Q();
@@ -23509,7 +23509,7 @@ function _c(t, e, o) {
     var se;
     if (G) {
       const ie = j.has(G);
-      Oe(P, xt, {
+      Oe(P, Tt, {
         name: G,
         value: ie ? G : ""
       });
@@ -23539,8 +23539,8 @@ function _c(t, e, o) {
     "name" in P && o(0, r = P.name), "value" in P && o(12, a = P.value), "disabled" in P && o(14, d = P.disabled), "error" in P && o(13, c = P.error), "testid" in P && o(1, s = P.testid), "maxwidth" in P && o(2, u = P.maxwidth), "version" in P && o(3, g = P.version), "size" in P && o(4, v = P.size), "mt" in P && o(5, m = P.mt), "mr" in P && o(6, b = P.mr), "mb" in P && o(7, w = P.mb), "ml" in P && o(8, p = P.ml), "$$scope" in P && o(15, l = P.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    16384 && (i = Ae(d)), t.$$.dirty[0] & /*value, error*/
-    12288 && x(a, c);
+    16384 && (i = Se(d)), t.$$.dirty[0] & /*value, error*/
+    12288 && T(a, c);
   }, [
     r,
     s,
@@ -23770,17 +23770,17 @@ function Cc(t) {
         t[2],
         /*ml*/
         t[3]
-      )), f(e, "tabindex", "0"), T(
+      )), f(e, "tabindex", "0"), I(
         e,
         "deletable",
         /*_deletable*/
         t[12]
-      ), T(
+      ), I(
         e,
         "error",
         /*_error*/
         t[11]
-      ), T(
+      ), I(
         e,
         "variant",
         /*variant*/
@@ -23845,19 +23845,19 @@ function Cc(t) {
         /*ml*/
         u[3]
       )) && f(e, "style", r), g & /*_deletable*/
-      4096 && T(
+      4096 && I(
         e,
         "deletable",
         /*_deletable*/
         u[12]
       ), g & /*_error*/
-      2048 && T(
+      2048 && I(
         e,
         "error",
         /*_error*/
         u[11]
       ), g & /*variant*/
-      128 && T(
+      128 && I(
         e,
         "variant",
         /*variant*/
@@ -23876,21 +23876,21 @@ function zc(t, e, o) {
   De(async () => {
     console.warn("GoAChip is deprecated. Instead use GoAFilterChip.");
   });
-  function k(x) {
-    m.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true })), x.stopPropagation();
+  function k(T) {
+    m.dispatchEvent(new CustomEvent("_click", { composed: true, bubbles: true })), T.stopPropagation();
   }
-  function z(x) {
-    ce[x ? "unshift" : "push"](() => {
-      m = x, o(9, m);
+  function z(T) {
+    ce[T ? "unshift" : "push"](() => {
+      m = T, o(9, m);
     });
   }
-  const M = (x) => p && k(x), N = () => o(10, b = true), L = () => o(10, b = false), j = () => o(10, b = false), H = () => o(10, b = false);
-  return t.$$set = (x) => {
-    "mt" in x && o(0, i = x.mt), "mr" in x && o(1, n = x.mr), "mb" in x && o(2, l = x.mb), "ml" in x && o(3, r = x.ml), "leadingicon" in x && o(4, a = x.leadingicon), "icontheme" in x && o(5, d = x.icontheme), "error" in x && o(14, c = x.error), "deletable" in x && o(15, s = x.deletable), "content" in x && o(6, u = x.content), "variant" in x && o(7, g = x.variant), "testid" in x && o(8, v = x.testid);
+  const M = (T) => p && k(T), N = () => o(10, b = true), L = () => o(10, b = false), j = () => o(10, b = false), H = () => o(10, b = false);
+  return t.$$set = (T) => {
+    "mt" in T && o(0, i = T.mt), "mr" in T && o(1, n = T.mr), "mb" in T && o(2, l = T.mb), "ml" in T && o(3, r = T.ml), "leadingicon" in T && o(4, a = T.leadingicon), "icontheme" in T && o(5, d = T.icontheme), "error" in T && o(14, c = T.error), "deletable" in T && o(15, s = T.deletable), "content" in T && o(6, u = T.content), "variant" in T && o(7, g = T.variant), "testid" in T && o(8, v = T.testid);
   }, t.$$.update = () => {
     t.$$.dirty & /*error*/
-    16384 && o(11, w = Ae(c)), t.$$.dirty & /*deletable*/
-    32768 && o(12, p = Ae(s));
+    16384 && o(11, w = Se(c)), t.$$.dirty & /*deletable*/
+    32768 && o(12, p = Se(s));
   }, [
     i,
     n,
@@ -24127,7 +24127,7 @@ function Ec(t) {
         "data-testid",
         /*testid*/
         t[2]
-      ), T(
+      ), I(
         e,
         "inline",
         /*inline*/
@@ -24160,7 +24160,7 @@ function Ec(t) {
         /*testid*/
         r[2]
       ), a & /*spinnerSize, inline*/
-      40 && T(
+      40 && I(
         e,
         "inline",
         /*inline*/
@@ -24196,7 +24196,7 @@ function Dc(t) {
         "data-testid",
         /*testid*/
         t[2]
-      ), f(e, "class", "svelte-ed9kjd"), T(
+      ), f(e, "class", "svelte-ed9kjd"), I(
         e,
         "fullscreen",
         /*fullscreen*/
@@ -24227,7 +24227,7 @@ function Dc(t) {
         /*testid*/
         c[2]
       ), (!l || s & /*fullscreen*/
-      16) && T(
+      16) && I(
         e,
         "fullscreen",
         /*fullscreen*/
@@ -24236,11 +24236,11 @@ function Dc(t) {
     },
     i(c) {
       l || (c && ot(() => {
-        l && (n || (n = xo(e, eo, { duration: 300 }, true)), n.run(1));
+        l && (n || (n = To(e, eo, { duration: 300 }, true)), n.run(1));
       }), l = true);
     },
     o(c) {
-      c && (n || (n = xo(e, eo, { duration: 300 }, false)), n.run(0)), l = false;
+      c && (n || (n = To(e, eo, { duration: 300 }, false)), n.run(0)), l = false;
     },
     d(c) {
       c && E(e), d && d.d(), c && n && n.end(), r = false, a();
@@ -24297,7 +24297,7 @@ function bn(t) {
     }
   };
 }
-function xc(t) {
+function Tc(t) {
   let e, o = (
     /*isVisible*/
     t[6] && hn(t)
@@ -24319,9 +24319,9 @@ function xc(t) {
     }
   };
 }
-function Tc(t, e, o) {
+function Ic(t, e, o) {
   let i;
-  const [n, l] = qe("Circular progress variant", ["fullscreen", "inline"]), [r, a] = qe("Button size", ["small", "large"]);
+  const [n, l] = Ae("Circular progress variant", ["fullscreen", "inline"]), [r, a] = Ae("Button size", ["small", "large"]);
   let { variant: d = "inline" } = e, { size: c = "large" } = e, { message: s = "" } = e, { progress: u = -1 } = e, { visible: g = "false" } = e, { testid: v = "" } = e, m, b, w;
   return De(() => {
     l(d), a(c), o(3, m = c === "small" ? "large" : "xlarge"), o(4, b = d === "fullscreen"), o(5, w = d === "inline");
@@ -24329,7 +24329,7 @@ function Tc(t, e, o) {
     "variant" in p && o(7, d = p.variant), "size" in p && o(8, c = p.size), "message" in p && o(0, s = p.message), "progress" in p && o(1, u = p.progress), "visible" in p && o(9, g = p.visible), "testid" in p && o(2, v = p.testid);
   }, t.$$.update = () => {
     t.$$.dirty & /*visible*/
-    512 && o(6, i = Ae(g));
+    512 && o(6, i = Se(g));
   }, [
     s,
     u,
@@ -24343,13 +24343,13 @@ function Tc(t, e, o) {
     g
   ];
 }
-class Ic extends ze {
+class qc extends ze {
   constructor(e) {
     super(), ke(
       this,
       e,
+      Ic,
       Tc,
-      xc,
       we,
       {
         variant: 7,
@@ -24399,11 +24399,11 @@ class Ic extends ze {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-circular-progress", Ce(Ic, { variant: {}, size: {}, message: {}, progress: {}, visible: {}, testid: {} }, [], [], true));
-function qc(t) {
+customElements.define("goa-circular-progress", Ce(qc, { variant: {}, size: {}, message: {}, progress: {}, visible: {}, testid: {} }, [], [], true));
+function Ac(t) {
   je(t, "svelte-1ei84ve", ":host{display:flex;flex:1 1 auto}.goa-container.svelte-1ei84ve.svelte-1ei84ve{box-sizing:border-box;display:flex;flex:1 1 auto;flex-direction:column;box-shadow:var(--goa-container-shadow, none);border-radius:var(--goa-container-border-radius, 0);align-self:flex-start}.goa-container.svelte-1ei84ve .svelte-1ei84ve{box-sizing:border-box}header.svelte-1ei84ve.svelte-1ei84ve{display:flex;align-items:center;justify-content:space-between;gap:var(--goa-container-heading-gap);font:var(--goa-container-heading);border:var(--goa-container-border);border-top-left-radius:var(--goa-container-border-radius);border-top-right-radius:var(--goa-container-border-radius)}.content.svelte-1ei84ve.svelte-1ei84ve{border-bottom:var(--goa-container-border);border-left:var(--goa-container-border);border-right:var(--goa-container-border);border-bottom-left-radius:var(--goa-container-border-radius);border-bottom-right-radius:var(--goa-container-border-radius);display:flex;flex:1 1 auto;flex-direction:column;min-height:0;overflow-y:auto}.content.svelte-1ei84ve ::slotted(*:last-child){margin-bottom:0 !important}.title.svelte-1ei84ve.svelte-1ei84ve,.actions.svelte-1ei84ve.svelte-1ei84ve{padding:var(--goa-container-heading-padding) 0}.actions.svelte-1ei84ve ::slotted(div){display:flex;align-items:center;gap:var(--goa-space-m)}.padding--relaxed.svelte-1ei84ve header.svelte-1ei84ve{padding:0 var(--goa-container-padding)}.padding--relaxed.svelte-1ei84ve .content.svelte-1ei84ve{padding:var(--goa-container-padding)}.padding--compact.svelte-1ei84ve header.svelte-1ei84ve,.padding--compact.svelte-1ei84ve .content.svelte-1ei84ve{padding:0 var(--goa-container-padding-compact)}.padding--compact.svelte-1ei84ve header.svelte-1ei84ve{padding:0 var(--goa-container-padding-compact)}.padding--compact.svelte-1ei84ve .content.svelte-1ei84ve{padding:var(--goa-container-padding-compact)}@media(max-width: 623px){.padding--relaxed.svelte-1ei84ve header.svelte-1ei84ve{padding:0 var(--goa-container-padding-compact)}.padding--relaxed.svelte-1ei84ve .content.svelte-1ei84ve{padding:var(--goa-container-padding-compact)}}.goa-container--interactive.svelte-1ei84ve header.svelte-1ei84ve{background-color:var(--goa-container-interactive-heading-bg-color);border:var(--goa-container-interactive-border);color:var(--goa-container-interactive-heading-text-color)}.goa-container--non-interactive.svelte-1ei84ve header.svelte-1ei84ve{background-color:var(--goa-container-non-interactive-heading-bg-color);border:var(--goa-container-non-interactive-border);color:var(--goa-container-non-interactive-heading-text-color)}.goa-container--non-interactive.accent--filled.svelte-1ei84ve .content.svelte-1ei84ve{border:var(--goa-container-non-interactive-border);background-color:var(--goa-container-non-interactive-bg-color)}.goa-container--info.svelte-1ei84ve header.svelte-1ei84ve{background-color:var(--goa-container-info-heading-bg-color);border:var(--goa-container-info-border);color:var(--goa-container-info-heading-text-color)}.goa-container--info.accent--filled.svelte-1ei84ve .content.svelte-1ei84ve{border:var(--goa-container-info-border);background-color:var(--goa-container-info-bg-color)}.goa-container--error.svelte-1ei84ve header.svelte-1ei84ve{background-color:var(--goa-container-error-heading-bg-color);border:var(--goa-container-error-border);color:var(--goa-container-error-heading-text-color)}.goa-container--error.accent--filled.svelte-1ei84ve .content.svelte-1ei84ve{border:var(--goa-container-error-border);background-color:var(--goa-container-error-bg-color)}.goa-container--success.svelte-1ei84ve header.svelte-1ei84ve{background-color:var(--goa-container-success-heading-bg-color);border:var(--goa-container-success-border);color:var(--goa-container-success-heading-text-color)}.goa-container--success.accent--filled.svelte-1ei84ve .content.svelte-1ei84ve{border:var(--goa-container-success-border);background-color:var(--goa-container-success-bg-color)}.goa-container--important.svelte-1ei84ve header.svelte-1ei84ve{background-color:var(--goa-container-important-heading-bg-color);border:var(--goa-container-important-border);color:var(--goa-container-important-heading-text-color)}.goa-container--important.accent--filled.svelte-1ei84ve .content.svelte-1ei84ve{border:var(--goa-container-important-border);background-color:var(--goa-container-important-bg-color)}.heading--thick.svelte-1ei84ve.svelte-1ei84ve{min-height:var(--goa-container-accent-thick-height)}.heading--thin.svelte-1ei84ve.svelte-1ei84ve{height:var(--goa-container-accent-thin-height)}.heading--filled.svelte-1ei84ve.svelte-1ei84ve{display:none}.heading--filled.svelte-1ei84ve~.content.svelte-1ei84ve{border-top:var(--goa-container-border);border-top-left-radius:var(--goa-container-border-radius);border-top-right-radius:var(--goa-container-border-radius)}.heading--thin.svelte-1ei84ve .title.svelte-1ei84ve,.heading--thin.svelte-1ei84ve .actions.svelte-1ei84ve{display:none}.actions.svelte-1ei84ve.svelte-1ei84ve{display:flex;align-items:center}.width--content.svelte-1ei84ve.svelte-1ei84ve{flex-grow:0}");
 }
-const Ac = (t) => ({}), pn = (t) => ({}), Sc = (t) => ({}), wn = (t) => ({});
+const Sc = (t) => ({}), pn = (t) => ({}), xc = (t) => ({}), wn = (t) => ({});
 function _n(t) {
   let e, o;
   const i = (
@@ -24436,7 +24436,7 @@ function _n(t) {
           /*$$scope*/
           l[14],
           r,
-          Sc
+          xc
         ) : ve(
           /*$$scope*/
           l[14]
@@ -24487,7 +24487,7 @@ function yn(t) {
           /*$$scope*/
           l[14],
           r,
-          Ac
+          Sc
         ) : ve(
           /*$$scope*/
           l[14]
@@ -24618,8 +24618,8 @@ function Oc(t) {
 }
 function Hc(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
-  const l = ft(i), [r, a] = qe("Container type", ["interactive", "info", "error", "success", "important", "non-interactive"]), [d, c] = qe("Container accent", ["thick", "thin", "filled"]), [s, u] = qe("Container padding", ["relaxed", "compact"]), [g, v] = qe("Container width", ["full", "content"]);
-  let { type: m = "interactive" } = e, { accent: b = "filled" } = e, { padding: w = "relaxed" } = e, { width: p = "full" } = e, { maxWidth: k = "none" } = e, { minHeight: z = "" } = e, { maxHeight: M = "" } = e, { testid: N = "" } = e, { mt: L = null } = e, { mr: j = null } = e, { mb: H = "m" } = e, { ml: x = null } = e, Z;
+  const l = ft(i), [r, a] = Ae("Container type", ["interactive", "info", "error", "success", "important", "non-interactive"]), [d, c] = Ae("Container accent", ["thick", "thin", "filled"]), [s, u] = Ae("Container padding", ["relaxed", "compact"]), [g, v] = Ae("Container width", ["full", "content"]);
+  let { type: m = "interactive" } = e, { accent: b = "filled" } = e, { padding: w = "relaxed" } = e, { width: p = "full" } = e, { maxWidth: k = "none" } = e, { minHeight: z = "" } = e, { maxHeight: M = "" } = e, { testid: N = "" } = e, { mt: L = null } = e, { mr: j = null } = e, { mb: H = "m" } = e, { ml: T = null } = e, Z;
   De(() => {
     a(m), c(b), u(w), v(p), to(Z);
   });
@@ -24629,7 +24629,7 @@ function Hc(t, e, o) {
     });
   }
   return t.$$set = (B) => {
-    "type" in B && o(0, m = B.type), "accent" in B && o(1, b = B.accent), "padding" in B && o(2, w = B.padding), "width" in B && o(3, p = B.width), "maxWidth" in B && o(4, k = B.maxWidth), "minHeight" in B && o(5, z = B.minHeight), "maxHeight" in B && o(6, M = B.maxHeight), "testid" in B && o(7, N = B.testid), "mt" in B && o(8, L = B.mt), "mr" in B && o(9, j = B.mr), "mb" in B && o(10, H = B.mb), "ml" in B && o(11, x = B.ml), "$$scope" in B && o(14, n = B.$$scope);
+    "type" in B && o(0, m = B.type), "accent" in B && o(1, b = B.accent), "padding" in B && o(2, w = B.padding), "width" in B && o(3, p = B.width), "maxWidth" in B && o(4, k = B.maxWidth), "minHeight" in B && o(5, z = B.minHeight), "maxHeight" in B && o(6, M = B.maxHeight), "testid" in B && o(7, N = B.testid), "mt" in B && o(8, L = B.mt), "mr" in B && o(9, j = B.mr), "mb" in B && o(10, H = B.mb), "ml" in B && o(11, T = B.ml), "$$scope" in B && o(14, n = B.$$scope);
   }, [
     m,
     b,
@@ -24642,7 +24642,7 @@ function Hc(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     Z,
     l,
     n,
@@ -24672,7 +24672,7 @@ class Pc extends ze {
         mb: 10,
         ml: 11
       },
-      qc
+      Ac
     );
   }
   get type() {
@@ -24870,7 +24870,7 @@ function Wc(t, e, o) {
       const le = c.querySelector("slot");
       le && le.removeEventListener("slotchange", B);
     }
-    document.removeEventListener("click", x);
+    document.removeEventListener("click", T);
   }));
   function N() {
     if (!c) return;
@@ -24884,24 +24884,24 @@ function Wc(t, e, o) {
     }), pe.forEach((Fe) => {
       Fe.setAttribute("role", "row");
     });
-    let Te = 0;
+    let Ie = 0;
     pe.forEach((Fe) => {
       const ct = zn(Fe).filter((st) => {
         const _e = st.getAttribute("data-grid");
         return _e === "cell" || (_e == null ? void 0 : _e.startsWith("cell-"));
       }).sort((st, _e) => {
-        const We = st.getAttribute("data-grid") || "cell-0", Me = _e.getAttribute("data-grid") || "cell-0", Se = We === "cell" ? 0 : parseInt(We.split("-")[1] || "0"), Xe = Me === "cell" ? 0 : parseInt(Me.split("-")[1] || "0");
-        return Se - Xe;
+        const We = st.getAttribute("data-grid") || "cell-0", Me = _e.getAttribute("data-grid") || "cell-0", xe = We === "cell" ? 0 : parseInt(We.split("-")[1] || "0"), Xe = Me === "cell" ? 0 : parseInt(Me.split("-")[1] || "0");
+        return xe - Xe;
       }), pt = [];
       ct.forEach((st) => {
-        st.setAttribute("role", "gridcell"), Te === 0 && st.setAttribute("tabindex", "0"), Te++;
+        st.setAttribute("role", "gridcell"), Ie === 0 && st.setAttribute("tabindex", "0"), Ie++;
         const _e = Le(st);
         _e.length > 0 && st.removeAttribute("tabindex"), pt.push({ cell: st, focusables: _e });
       }), pt.length > 0 && s.push(pt);
     });
   }
   function L() {
-    c && (c.addEventListener("keydown", O), c.addEventListener("click", se), c.addEventListener("focusin", j), c.addEventListener("focusout", H), document.addEventListener("click", x));
+    c && (c.addEventListener("keydown", O), c.addEventListener("click", se), c.addEventListener("focusin", j), c.addEventListener("focusout", H), document.addEventListener("click", T));
   }
   function j() {
     M = true;
@@ -24910,7 +24910,7 @@ function Wc(t, e, o) {
     const X = le.relatedTarget;
     X && !(c != null && c.contains(X)) && (M = false);
   }
-  function x(le) {
+  function T(le) {
     if (w) {
       w = false;
       return;
@@ -24918,7 +24918,7 @@ function Wc(t, e, o) {
     c != null && c.contains(le.target) || Z();
   }
   function Z() {
-    if (I(), u = 0, g = 0, v = -1, o(2, p = false), s[0] && s[0][0]) {
+    if (q(), u = 0, g = 0, v = -1, o(2, p = false), s[0] && s[0][0]) {
       const le = s[0][0], X = le.cell;
       le.focusables.length > 0 ? X.removeAttribute("tabindex") : X.setAttribute("tabindex", "0");
     }
@@ -24928,17 +24928,17 @@ function Wc(t, e, o) {
     const le = c.querySelector("slot");
     le && (b = new MutationObserver((X) => {
       let pe = false;
-      for (const Te of X) {
-        if (Te.type === "childList" && (Te.addedNodes.length > 0 || Te.removedNodes.length > 0)) {
+      for (const Ie of X) {
+        if (Ie.type === "childList" && (Ie.addedNodes.length > 0 || Ie.removedNodes.length > 0)) {
           pe = true;
           break;
         }
-        if (Te.type === "attributes" && Te.attributeName === "data-grid") {
+        if (Ie.type === "attributes" && Ie.attributeName === "data-grid") {
           pe = true;
           break;
         }
-        if (Te.type === "childList" && Te.target instanceof HTMLElement) {
-          const Fe = Te.target;
+        if (Ie.type === "childList" && Ie.target instanceof HTMLElement) {
+          const Fe = Ie.target;
           if (Fe.hasAttribute("data-grid") || Fe.querySelector("[data-grid]")) {
             pe = true;
             break;
@@ -24946,13 +24946,13 @@ function Wc(t, e, o) {
         }
       }
       pe && Y();
-    }), le.addEventListener("slotchange", B), S(le));
+    }), le.addEventListener("slotchange", B), x(le));
   }
   function B() {
     const le = c == null ? void 0 : c.querySelector("slot");
-    le && (S(le), Y());
+    le && (x(le), Y());
   }
-  function S(le) {
+  function x(le) {
     le.assignedElements().forEach((pe) => {
       pe instanceof HTMLElement && (b == null || b.observe(pe, {
         childList: true,
@@ -24967,22 +24967,22 @@ function Wc(t, e, o) {
     const le = M;
     k = setTimeout(
       () => {
-        I(), N(), A(u, g, v, le), k = null, z = false;
+        q(), N(), S(u, g, v, le), k = null, z = false;
       },
       1
     );
   }
-  function I() {
+  function q() {
     var X, pe;
     const le = (pe = (X = s[u]) == null ? void 0 : X[g]) == null ? void 0 : pe.cell;
     le && (Cn(le), le.removeAttribute("tabindex"));
   }
-  function A(le, X, pe, Te) {
+  function S(le, X, pe, Ie) {
     if (!F(le, X)) {
-      v = -1, Te && P();
+      v = -1, Ie && P();
       return;
     }
-    u = le, g = X, v = pe, Te && q(le, X);
+    u = le, g = X, v = pe, Ie && A(le, X);
   }
   function O(le) {
     if (le.key === "Tab") {
@@ -25012,22 +25012,22 @@ function Wc(t, e, o) {
       }
   }
   function K(le, X) {
-    var Te;
+    var Ie;
     if (!F(le, X)) return false;
-    I(), u = le, g = X;
-    const pe = (Te = s[le][X]) == null ? void 0 : Te.cell;
+    q(), u = le, g = X;
+    const pe = (Ie = s[le][X]) == null ? void 0 : Ie.cell;
     return pe == null || pe.setAttribute("tabindex", "0"), Zc(pe), m = pe.matches("input") || pe.querySelector("input") !== null, true;
   }
   function F(le, X) {
     return le >= 0 && X >= 0 && s && s.length > 0 && le < s.length && X < s[le].length;
   }
-  function q(le, X) {
+  function A(le, X) {
     if (!K(le, X)) {
       u = 0, g = 0, v = -1;
       return;
     }
-    const pe = s[le][X], Te = pe.cell, Fe = pe.focusables || [];
-    o(2, p = true), Fe.length === 0 ? (Te.setAttribute("tabindex", "0"), Te.focus(), v = -1) : ((v < 0 || v >= Fe.length) && (v = 0), Te.removeAttribute("tabindex"), Cn(Te), setTimeout(
+    const pe = s[le][X], Ie = pe.cell, Fe = pe.focusables || [];
+    o(2, p = true), Fe.length === 0 ? (Ie.setAttribute("tabindex", "0"), Ie.focus(), v = -1) : ((v < 0 || v >= Fe.length) && (v = 0), Ie.removeAttribute("tabindex"), Cn(Ie), setTimeout(
       () => {
         Fe[v].focus();
       },
@@ -25040,7 +25040,7 @@ function Wc(t, e, o) {
       return;
     let X = g;
     const pe = s[le].length;
-    X >= pe && (X = pe - 1), q(le, X);
+    X >= pe && (X = pe - 1), A(le, X);
   }
   function R() {
     const le = u + 1;
@@ -25048,49 +25048,49 @@ function Wc(t, e, o) {
       return;
     let X = g;
     const pe = s[le].length;
-    X >= pe && (X = pe - 1), q(le, X);
+    X >= pe && (X = pe - 1), A(le, X);
   }
   function ee() {
     const le = s[u] && s[u][g];
     if (le && le.focusables.length > 0 && v > 0) {
-      v = v - 1, q(u, g);
+      v = v - 1, A(u, g);
       return;
     }
     if (g === 0) {
       if (a === "layout" && u > 0) {
         const X = s[u - 1] ? s[u - 1].length : 0;
-        X > 0 && q(u - 1, X - 1);
+        X > 0 && A(u - 1, X - 1);
       }
       return;
     }
-    q(u, g - 1);
+    A(u, g - 1);
   }
   function oe() {
     const le = s[u] && s[u][g];
     if (le && le.focusables.length > 0 && v !== -1 && v < le.focusables.length - 1) {
-      v = v + 1, q(u, g);
+      v = v + 1, A(u, g);
       return;
     }
     const X = s[u] ? s[u].length : 0;
     if (g >= X - 1) {
-      a === "layout" && u < s.length - 1 && (s[u + 1] ? s[u + 1].length : 0) > 0 && q(u + 1, 0);
+      a === "layout" && u < s.length - 1 && (s[u + 1] ? s[u + 1].length : 0) > 0 && A(u + 1, 0);
       return;
     }
-    q(u, g + 1);
+    A(u, g + 1);
   }
   function ne() {
-    q(u, 0);
+    A(u, 0);
   }
   function te() {
-    s[u] && q(u, s[u].length - 1);
+    s[u] && A(u, s[u].length - 1);
   }
   function P() {
-    q(0, 0);
+    A(0, 0);
   }
   function G() {
     if (s.length > 0) {
       const le = s.length - 1, X = s[le].length - 1;
-      q(le, X);
+      A(le, X);
     }
   }
   function J(le) {
@@ -25105,8 +25105,8 @@ function Wc(t, e, o) {
     if (w = true, z) return;
     const pe = le.target.closest('[role="gridcell"]');
     if (!pe) return;
-    const Te = J(pe);
-    Te && ((Te.row !== u || Te.col !== g) && (v = -1), q(Te.row, Te.col));
+    const Ie = J(pe);
+    Ie && ((Ie.row !== u || Ie.col !== g) && (v = -1), A(Ie.row, Ie.col));
   }
   function ie(le) {
     if (z) return;
@@ -25126,7 +25126,7 @@ function Wc(t, e, o) {
     const pe = J(X);
     if (pe)
       if (pe.row !== u || pe.col !== g)
-        v = -1, q(pe.row, pe.col);
+        v = -1, A(pe.row, pe.col);
       else {
         const Je = s[pe.row][pe.col].focusables.indexOf(le);
         Je !== -1 && (v = Je);
@@ -25134,9 +25134,9 @@ function Wc(t, e, o) {
   }
   function Le(le) {
     const X = /* @__PURE__ */ new Set();
-    function pe(Te) {
+    function pe(Ie) {
       var Fe;
-      for (const Je of Te)
+      for (const Je of Ie)
         Je instanceof HTMLElement && Je.shadowRoot && (Je.hasAttribute("data-ignore-focus") || pe([...((Fe = Je.shadowRoot) == null ? void 0 : Fe.childNodes) || []])), Je.hasChildNodes() && pe(Array.from(Je.childNodes)), Je instanceof HTMLSlotElement && pe([...Je.assignedNodes()]), os(Je) && Je !== le && Fc(Je) && X.add(Je);
     }
     return pe([le]), Array.from(X);
@@ -25204,10 +25204,10 @@ function Uc(t) {
   je(t, "svelte-1yqu6ah", ".calendar-input.svelte-1yqu6ah{--goa-text-input-color-bg-readonly:var(--goa-text-input-color-bg);--goa-text-input-border-readonly:var(--goa-text-input-border);--goa-text-input-cursor-readonly:var(--goa-date-input-cursor)}");
 }
 function Qc(t) {
-  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, x, Z, V, B, S, Y, I, A, O, K, F, q, Q, R, ee, oe, ne;
+  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, T, Z, V, B, x, Y, q, S, O, K, F, A, Q, R, ee, oe, ne;
   return {
     c() {
-      e = C("goa-form-item"), o = C("goa-block"), i = C("goa-form-item"), n = C("goa-dropdown"), l = C("goa-dropdown-item"), r = W(), a = C("goa-dropdown-item"), d = W(), c = C("goa-dropdown-item"), s = W(), u = C("goa-dropdown-item"), g = W(), v = C("goa-dropdown-item"), m = W(), b = C("goa-dropdown-item"), w = W(), p = C("goa-dropdown-item"), k = W(), z = C("goa-dropdown-item"), M = W(), N = C("goa-dropdown-item"), L = W(), j = C("goa-dropdown-item"), H = W(), x = C("goa-dropdown-item"), Z = W(), V = C("goa-dropdown-item"), B = W(), S = C("goa-dropdown-item"), I = W(), A = C("goa-form-item"), O = C("goa-input"), F = W(), q = C("goa-form-item"), Q = C("goa-input"), h(l, "value", "0"), h(l, "label", "--select a month--"), h(a, "value", "1"), h(a, "label", "January"), h(c, "value", "2"), h(c, "label", "February"), h(u, "value", "3"), h(u, "label", "March"), h(v, "value", "4"), h(v, "label", "April"), h(b, "value", "5"), h(b, "label", "May"), h(p, "value", "6"), h(p, "label", "June"), h(z, "value", "7"), h(z, "label", "July"), h(N, "value", "8"), h(N, "label", "August"), h(j, "value", "9"), h(j, "label", "September"), h(x, "value", "10"), h(x, "label", "October"), h(V, "value", "11"), h(V, "label", "November"), h(S, "value", "12"), h(S, "label", "December"), h(n, "name", "month"), h(n, "testid", "input-month"), h(
+      e = C("goa-form-item"), o = C("goa-block"), i = C("goa-form-item"), n = C("goa-dropdown"), l = C("goa-dropdown-item"), r = W(), a = C("goa-dropdown-item"), d = W(), c = C("goa-dropdown-item"), s = W(), u = C("goa-dropdown-item"), g = W(), v = C("goa-dropdown-item"), m = W(), b = C("goa-dropdown-item"), w = W(), p = C("goa-dropdown-item"), k = W(), z = C("goa-dropdown-item"), M = W(), N = C("goa-dropdown-item"), L = W(), j = C("goa-dropdown-item"), H = W(), T = C("goa-dropdown-item"), Z = W(), V = C("goa-dropdown-item"), B = W(), x = C("goa-dropdown-item"), q = W(), S = C("goa-form-item"), O = C("goa-input"), F = W(), A = C("goa-form-item"), Q = C("goa-input"), h(l, "value", "0"), h(l, "label", "--select a month--"), h(a, "value", "1"), h(a, "label", "January"), h(c, "value", "2"), h(c, "label", "February"), h(u, "value", "3"), h(u, "label", "March"), h(v, "value", "4"), h(v, "label", "April"), h(b, "value", "5"), h(b, "label", "May"), h(p, "value", "6"), h(p, "label", "June"), h(z, "value", "7"), h(z, "label", "July"), h(N, "value", "8"), h(N, "label", "August"), h(j, "value", "9"), h(j, "label", "September"), h(T, "value", "10"), h(T, "label", "October"), h(V, "value", "11"), h(V, "label", "November"), h(x, "value", "12"), h(x, "label", "December"), h(n, "name", "month"), h(n, "testid", "input-month"), h(
         n,
         "error",
         /*error*/
@@ -25254,8 +25254,8 @@ function Qc(t) {
         "version",
         /*version*/
         t[9]
-      ), h(A, "helptext", "Day (DD)"), h(
-        A,
+      ), h(S, "helptext", "Day (DD)"), h(
+        S,
         "version",
         /*version*/
         t[9]
@@ -25280,8 +25280,8 @@ function Qc(t) {
         "version",
         /*version*/
         t[9]
-      ), h(q, "helptext", "Year (YYYY)"), h(
-        q,
+      ), h(A, "helptext", "Year (YYYY)"), h(
+        A,
         "version",
         /*version*/
         t[9]
@@ -25295,7 +25295,7 @@ function Qc(t) {
       );
     },
     m(te, P) {
-      D(te, e, P), _(e, o), _(o, i), _(i, n), _(n, l), _(n, r), _(n, a), _(n, d), _(n, c), _(n, s), _(n, u), _(n, g), _(n, v), _(n, m), _(n, b), _(n, w), _(n, p), _(n, k), _(n, z), _(n, M), _(n, N), _(n, L), _(n, j), _(n, H), _(n, x), _(n, Z), _(n, V), _(n, B), _(n, S), _(o, I), _(o, A), _(A, O), _(o, F), _(o, q), _(q, Q), t[27](e), oe || (ne = [
+      D(te, e, P), _(e, o), _(o, i), _(i, n), _(n, l), _(n, r), _(n, a), _(n, d), _(n, c), _(n, s), _(n, u), _(n, g), _(n, v), _(n, m), _(n, b), _(n, w), _(n, p), _(n, k), _(n, z), _(n, M), _(n, N), _(n, L), _(n, j), _(n, H), _(n, T), _(n, Z), _(n, V), _(n, B), _(n, x), _(o, q), _(o, S), _(S, O), _(o, F), _(o, A), _(A, Q), t[27](e), oe || (ne = [
         re(
           n,
           "_change",
@@ -25377,7 +25377,7 @@ function Qc(t) {
         te[9]
       ), P[0] & /*version*/
       512 && h(
-        A,
+        S,
         "version",
         /*version*/
         te[9]
@@ -25409,7 +25409,7 @@ function Qc(t) {
         te[9]
       ), P[0] & /*version*/
       512 && h(
-        q,
+        A,
         "version",
         /*version*/
         te[9]
@@ -25894,17 +25894,17 @@ function Xc(t) {
   };
 }
 function Jc(t, e, o) {
-  let i, { type: n = "calendar" } = e, { name: l = "" } = e, { value: r = "" } = e, { error: a = "false" } = e, { min: d = "" } = e, { max: c = "" } = e, { relative: s = "" } = e, { disabled: u = "false" } = e, { testid: g = "" } = e, { width: v = "" } = e, { size: m = "default" } = e, { version: b = "1" } = e, { mt: w = null } = e, { mr: p = null } = e, { mb: k = null } = e, { ml: z = null } = e, M = Ae(a), N, L, j = Be.init();
+  let i, { type: n = "calendar" } = e, { name: l = "" } = e, { value: r = "" } = e, { error: a = "false" } = e, { min: d = "" } = e, { max: c = "" } = e, { relative: s = "" } = e, { disabled: u = "false" } = e, { testid: g = "" } = e, { width: v = "" } = e, { size: m = "default" } = e, { version: b = "1" } = e, { mt: w = null } = e, { mr: p = null } = e, { mb: k = null } = e, { ml: z = null } = e, M = Se(a), N, L, j = Be.init();
   De(async () => {
-    await Ge(), S(r), x(), B(), H();
+    await Ge(), x(r), T(), B(), H();
   });
   function H() {
     s != "" && console.warn("Date Picker `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
-  function x() {
+  function T() {
     rt(L, (ee, oe, ne) => {
       switch (ee) {
-        case xt:
+        case Tt:
           V(oe);
           break;
         case Mt:
@@ -25932,16 +25932,16 @@ function Jc(t, e, o) {
   function B() {
     Oe(N, ut, { name: l, el: L }, { bubbles: true, timeout: 5 });
   }
-  function S(ee) {
+  function x(ee) {
     n === "calendar" && (ee ? (o(16, j = new Be(ee)), j.isValid || o(16, j = new Be(0))) : o(16, j = new Be(0)));
   }
   function Y(ee) {
-    o(16, j = new Be(ee.detail.value)), A(), I(), ee.stopPropagation(), ee.preventDefault();
+    o(16, j = new Be(ee.detail.value)), S(), q(), ee.stopPropagation(), ee.preventDefault();
   }
-  function I() {
+  function q() {
     o(0, r = j.toString()), Ee(L, "_change", { name: l, value: j.date, valueStr: r });
   }
-  function A() {
+  function S() {
     Ee(document.body, "goa:closePopover", { target: L });
   }
   function O(ee) {
@@ -25967,7 +25967,7 @@ function Jc(t, e, o) {
       default:
         return;
     }
-    I(), ee.preventDefault(), ee.stopPropagation();
+    q(), ee.preventDefault(), ee.stopPropagation();
   }
   function K(ee) {
     ee.stopPropagation();
@@ -25981,7 +25981,7 @@ function Jc(t, e, o) {
       N = ee, o(14, N);
     });
   }
-  function q(ee) {
+  function A(ee) {
     ce[ee ? "unshift" : "push"](() => {
       L = ee, o(15, L);
     });
@@ -26000,8 +26000,8 @@ function Jc(t, e, o) {
     "type" in ee && o(2, n = ee.type), "name" in ee && o(3, l = ee.name), "value" in ee && o(0, r = ee.value), "error" in ee && o(1, a = ee.error), "min" in ee && o(4, d = ee.min), "max" in ee && o(5, c = ee.max), "relative" in ee && o(22, s = ee.relative), "disabled" in ee && o(23, u = ee.disabled), "testid" in ee && o(6, g = ee.testid), "width" in ee && o(7, v = ee.width), "size" in ee && o(8, m = ee.size), "version" in ee && o(9, b = ee.version), "mt" in ee && o(10, w = ee.mt), "mr" in ee && o(11, p = ee.mr), "mb" in ee && o(12, k = ee.mb), "ml" in ee && o(13, z = ee.ml);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    8388608 && o(17, i = Ae(u)), t.$$.dirty[0] & /*value*/
-    1 && S(r);
+    8388608 && o(17, i = Se(u)), t.$$.dirty[0] & /*value*/
+    1 && x(r);
   }, [
     r,
     a,
@@ -26028,7 +26028,7 @@ function Jc(t, e, o) {
     s,
     u,
     F,
-    q,
+    A,
     Q,
     R
   ];
@@ -26306,7 +26306,7 @@ function ou(t, e, o) {
     "heading" in z && o(1, r = z.heading), "maxwidth" in z && o(2, a = z.maxwidth), "mt" in z && o(3, d = z.mt), "mr" in z && o(4, c = z.mr), "mb" in z && o(5, s = z.mb), "ml" in z && o(6, u = z.ml), "open" in z && o(0, g = z.open), "testid" in z && o(7, v = z.testid), "$$scope" in z && o(12, l = z.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*open*/
-    1 && o(11, i = Ae(g));
+    1 && o(11, i = Se(g));
   }, [
     g,
     r,
@@ -26832,7 +26832,7 @@ function En(t) {
   );
   return {
     c() {
-      e = C("section"), n && n.c(), f(e, "class", "drawer-actions svelte-3qlmud"), f(e, "data-testid", "drawer-actions"), T(e, "empty-actions", !/*_actionsSlotHasContent*/
+      e = C("section"), n && n.c(), f(e, "class", "drawer-actions svelte-3qlmud"), f(e, "data-testid", "drawer-actions"), I(e, "empty-actions", !/*_actionsSlotHasContent*/
       t[9]);
     },
     m(l, r) {
@@ -26858,7 +26858,7 @@ function En(t) {
         ),
         Mn
       ), (!o || r & /*_actionsSlotHasContent*/
-      512) && T(e, "empty-actions", !/*_actionsSlotHasContent*/
+      512) && I(e, "empty-actions", !/*_actionsSlotHasContent*/
       l[9]);
     },
     i(l) {
@@ -26878,33 +26878,33 @@ function bu(t) {
     t[13] && Ln(t)
   );
   const j = [mu, hu], H = [];
-  function x(V, B) {
+  function T(V, B) {
     return (
       /*version*/
       V[5] === "1" ? 0 : 1
     );
   }
-  d = x(t), c = H[d] = j[d](t);
+  d = T(t), c = H[d] = j[d](t);
   let Z = (
     /*$$slots*/
     t[17].actions && En(t)
   );
   return {
     c() {
-      e = C("goa-focus-trap"), o = C("div"), i = C("button"), n = W(), l = C("div"), L && L.c(), r = W(), a = C("div"), c.c(), s = W(), Z && Z.c(), f(i, "class", "background svelte-3qlmud"), f(i, "data-ignore-focus", ""), f(i, "data-testid", "background"), f(i, "tabindex", "-1"), T(
+      e = C("goa-focus-trap"), o = C("div"), i = C("button"), n = W(), l = C("div"), L && L.c(), r = W(), a = C("div"), c.c(), s = W(), Z && Z.c(), f(i, "class", "background svelte-3qlmud"), f(i, "data-ignore-focus", ""), f(i, "data-testid", "background"), f(i, "tabindex", "-1"), I(
         i,
         "active",
         /*open*/
         t[1]
       ), f(a, "data-testid", "drawer-content"), f(a, "class", "drawer-content svelte-3qlmud"), f(l, "style", u = it(
-        Ie("--drawer-offset", `-${/*_drawerSize*/
+        qe("--drawer-offset", `-${/*_drawerSize*/
         t[8]}px`),
-        Ie(
+        qe(
           "height",
           /*position*/
           t[2] === "bottom" ? "unset" : void 0
         ),
-        Ie(
+        qe(
           "max-width",
           /*position*/
           t[2] === "bottom" ? "unset" : (
@@ -26914,7 +26914,7 @@ function bu(t) {
             t[0]}, 100vw)`
           )
         ),
-        Ie(
+        qe(
           "width",
           /*position*/
           t[2] === "bottom" ? "100%" : (
@@ -26924,7 +26924,7 @@ function bu(t) {
             t[0]}, 100vw)`
           )
         ),
-        Ie(
+        qe(
           "max-height",
           /*position*/
           t[2] === "bottom" ? (
@@ -26936,37 +26936,37 @@ function bu(t) {
         )
       )), f(l, "class", g = Ze(`drawer drawer-${/*position*/
       t[2]}`) + " svelte-3qlmud"), f(l, "role", "dialog"), f(l, "aria-modal", "true"), f(l, "tabindex", "-1"), f(l, "data-first-focus", "true"), f(l, "aria-labelledby", v = /*_showCloseButton*/
-      t[13] ? "goa-drawer-heading" : void 0), T(
+      t[13] ? "goa-drawer-heading" : void 0), I(
         l,
         "open",
         /*open*/
         t[1]
-      ), T(l, "closing", !/*open*/
-      t[1]), T(
+      ), I(l, "closing", !/*open*/
+      t[1]), I(
         l,
         "v2",
         /*version*/
         t[5] === "2"
-      ), T(
+      ), I(
         l,
         "drawer-open-bottom",
         /*position*/
         t[2] === "bottom" && /*open*/
         t[1]
-      ), T(
+      ), I(
         l,
         "drawer-open-right",
         /*position*/
         t[2] === "right" && /*open*/
         t[1]
-      ), T(
+      ), I(
         l,
         "drawer-open-left",
         /*position*/
         t[2] === "left" && /*open*/
         t[1]
       ), f(o, "class", p = Ze(`root ${/*_scrollPos*/
-      t[11] ?? ""}`) + " svelte-3qlmud"), f(o, "style", k = Ie(
+      t[11] ?? ""}`) + " svelte-3qlmud"), f(o, "style", k = qe(
         "visibility",
         /*open*/
         t[1] ? "visible" : "hidden"
@@ -27011,7 +27011,7 @@ function bu(t) {
     },
     p(V, [B]) {
       t = V, (!z || B & /*open*/
-      2) && T(
+      2) && I(
         i,
         "active",
         /*open*/
@@ -27021,23 +27021,23 @@ function bu(t) {
       8192 && U(L, 1)) : (L = Ln(t), L.c(), U(L, 1), L.m(l, r)) : L && (He(), $(L, 1, 1, () => {
         L = null;
       }), Pe());
-      let S = d;
-      d = x(t), d === S ? H[d].p(t, B) : (He(), $(H[S], 1, 1, () => {
-        H[S] = null;
+      let x = d;
+      d = T(t), d === x ? H[d].p(t, B) : (He(), $(H[x], 1, 1, () => {
+        H[x] = null;
       }), Pe(), c = H[d], c ? c.p(t, B) : (c = H[d] = j[d](t), c.c()), U(c, 1), c.m(a, null)), /*$$slots*/
       t[17].actions ? Z ? (Z.p(t, B), B & /*$$slots*/
       131072 && U(Z, 1)) : (Z = En(t), Z.c(), U(Z, 1), Z.m(l, null)) : Z && (He(), $(Z, 1, 1, () => {
         Z = null;
       }), Pe()), (!z || B & /*_drawerSize, position, version, maxsize*/
       293 && u !== (u = it(
-        Ie("--drawer-offset", `-${/*_drawerSize*/
+        qe("--drawer-offset", `-${/*_drawerSize*/
         t[8]}px`),
-        Ie(
+        qe(
           "height",
           /*position*/
           t[2] === "bottom" ? "unset" : void 0
         ),
-        Ie(
+        qe(
           "max-width",
           /*position*/
           t[2] === "bottom" ? "unset" : (
@@ -27047,7 +27047,7 @@ function bu(t) {
             t[0]}, 100vw)`
           )
         ),
-        Ie(
+        qe(
           "width",
           /*position*/
           t[2] === "bottom" ? "100%" : (
@@ -27057,7 +27057,7 @@ function bu(t) {
             t[0]}, 100vw)`
           )
         ),
-        Ie(
+        qe(
           "max-height",
           /*position*/
           t[2] === "bottom" ? (
@@ -27076,35 +27076,35 @@ function bu(t) {
         /*open*/
         t[1]
       ) }), (!z || B & /*position, open*/
-      6) && T(
+      6) && I(
         l,
         "open",
         /*open*/
         t[1]
       ), (!z || B & /*position, open*/
-      6) && T(l, "closing", !/*open*/
+      6) && I(l, "closing", !/*open*/
       t[1]), (!z || B & /*position, version*/
-      36) && T(
+      36) && I(
         l,
         "v2",
         /*version*/
         t[5] === "2"
       ), (!z || B & /*position, position, open*/
-      6) && T(
+      6) && I(
         l,
         "drawer-open-bottom",
         /*position*/
         t[2] === "bottom" && /*open*/
         t[1]
       ), (!z || B & /*position, position, open*/
-      6) && T(
+      6) && I(
         l,
         "drawer-open-right",
         /*position*/
         t[2] === "right" && /*open*/
         t[1]
       ), (!z || B & /*position, position, open*/
-      6) && T(
+      6) && I(
         l,
         "drawer-open-left",
         /*position*/
@@ -27113,7 +27113,7 @@ function bu(t) {
       ), (!z || B & /*_scrollPos*/
       2048 && p !== (p = Ze(`root ${/*_scrollPos*/
       t[11] ?? ""}`) + " svelte-3qlmud")) && f(o, "class", p), (!z || B & /*open*/
-      2 && k !== (k = Ie(
+      2 && k !== (k = qe(
         "visibility",
         /*open*/
         t[1] ? "visible" : "hidden"
@@ -27157,19 +27157,19 @@ function pu(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
   const a = ft(l);
   let { open: d = false } = e, { position: c = void 0 } = e, { heading: s = "" } = e, { maxsize: u = void 0 } = e, { testid: g = "drawer" } = e, { closeButtonVisibility: v = "visible" } = e;
-  const [m, b] = qe("Version", ["1", "2"]);
+  const [m, b] = Ae("Version", ["1", "2"]);
   let { version: w = "1" } = e, p = null, k = null, z, M = 0, N = 0, L = false, j = "", H = "top";
   De(async () => {
     await Ge(), b(w), c === "bottom" ? o(8, z = (p == null ? void 0 : p.getBoundingClientRect().height) ?? 0) : o(8, z = (p == null ? void 0 : p.getBoundingClientRect().width) ?? 0), window.addEventListener("keydown", B);
   }), dt(() => {
     window.removeEventListener("keydown", B);
   });
-  function x() {
+  function T() {
     const K = p == null ? void 0 : p.querySelector(".header"), F = p == null ? void 0 : p.querySelector(".drawer-actions");
-    N = (K == null ? void 0 : K.clientHeight) ?? 0, M = (F == null ? void 0 : F.clientHeight) ?? 0, o(10, j = S());
+    N = (K == null ? void 0 : K.clientHeight) ?? 0, M = (F == null ? void 0 : F.clientHeight) ?? 0, o(10, j = x());
   }
   async function Z() {
-    await Ge(), o(9, L = !!a.actions), x();
+    await Ge(), o(9, L = !!a.actions), T();
   }
   function V(K) {
     d && Ee(p, "_close", {}, { bubbles: true }), K.stopPropagation();
@@ -27181,7 +27181,7 @@ function pu(t, e, o) {
         break;
     }
   };
-  function S() {
+  function x() {
     if (w === "2") return "100%";
     const K = 16;
     return c === "bottom" ? `calc(${u} - ${N}px - ${L ? M : 0}px)` : `calc(100vh - ${N}px - ${L ? M : 0}px - ${K}px)`;
@@ -27190,12 +27190,12 @@ function pu(t, e, o) {
     const F = K.detail.scrollHeight > K.detail.offsetHeight;
     !d || !F || (K.detail.scrollTop == 0 ? o(11, H = "top") : Math.abs(K.detail.scrollHeight - K.detail.scrollTop - K.detail.offsetHeight) < 1 ? o(11, H = "bottom") : o(11, H = "middle"));
   }
-  function I(K) {
+  function q(K) {
     if (!d) return;
-    const F = K.target, { scrollTop: q, scrollHeight: Q, clientHeight: R } = F;
-    o(11, H = Dn(q, Q, R));
+    const F = K.target, { scrollTop: A, scrollHeight: Q, clientHeight: R } = F;
+    o(11, H = Dn(A, Q, R));
   }
-  function A(K) {
+  function S(K) {
     ce[K ? "unshift" : "push"](() => {
       k = K, o(7, k);
     });
@@ -27221,12 +27221,12 @@ function pu(t, e, o) {
       o(11, H = K ? "top" : null);
     }
     t.$$.dirty & /*open, _contentEl*/
-    66 && d && p && x(), t.$$.dirty & /*open, version, _contentEl*/
+    66 && d && p && T(), t.$$.dirty & /*open, version, _contentEl*/
     98 && d && w === "2" && p && Ge().then(() => {
       const K = p == null ? void 0 : p.querySelector(".drawer-content");
       if (K) {
-        const { scrollTop: F, scrollHeight: q, clientHeight: Q } = K;
-        o(11, H = Dn(F, q, Q));
+        const { scrollTop: F, scrollHeight: A, clientHeight: Q } = K;
+        o(11, H = Dn(F, A, Q));
       }
     }), t.$$.dirty & /*open, _contentEl*/
     66 && (d || setTimeout(
@@ -27252,12 +27252,12 @@ function pu(t, e, o) {
     i,
     V,
     Y,
-    I,
+    q,
     a,
     v,
     r,
     l,
-    A,
+    S,
     O
   ];
 }
@@ -27416,16 +27416,16 @@ function Cu(t) {
       var(--goa-dropdown-border-radius)
     );padding:0;margin:var(--goa-dropdown-menu-margin, 0)}.dropdown-item.svelte-1te0qll.svelte-1te0qll{margin:0;padding:var(--goa-dropdown-item-padding);cursor:pointer;color:var(--goa-dropdown-item-color-text);overflow:hidden;white-space:normal;word-break:break-word;overflow-wrap:break-word;border-radius:var(--goa-dropdown-item-border-radius, 0)}.dropdown-item.svelte-1te0qll.svelte-1te0qll:hover,.dropdown-item--highlighted.svelte-1te0qll.svelte-1te0qll{background:var(--goa-dropdown-item-color-bg-hover);color:var(--goa-dropdown-item-color-text-hover)}.dropdown-item[aria-selected="true"].svelte-1te0qll.svelte-1te0qll{background:var(--goa-dropdown-item-color-bg-selected);color:var(--goa-dropdown-item-color-text-selected)}.dropdown-item[aria-selected="true"].svelte-1te0qll.svelte-1te0qll:hover,.dropdown-item[aria-selected="true"].dropdown-item--highlighted.svelte-1te0qll.svelte-1te0qll{background:var(--goa-dropdown-item-color-bg-selected-hover);color:var(--goa-dropdown-item-color-text-selected-hover)}.dropdown-native.svelte-1te0qll.svelte-1te0qll{position:relative;box-shadow:var(--goa-dropdown-border);border-radius:var(--goa-dropdown-border-radius);background-color:var(--goa-dropdown-color-bg);transition:var(--goa-dropdown-transition)}.dropdown-native.svelte-1te0qll.svelte-1te0qll:has(select:disabled){background-color:var(--goa-dropdown-color-bg-disabled);box-shadow:var(--goa-dropdown-border-disabled);color:var(--goa-color-text-secondary);cursor:default}.dropdown-native.svelte-1te0qll.svelte-1te0qll:has(select.error){box-shadow:var(--goa-dropdown-border-error)}.dropdown-native.svelte-1te0qll.svelte-1te0qll:hover{box-shadow:var(--goa-dropdown-border-hover)}select.svelte-1te0qll.svelte-1te0qll{border:none;font:var(--goa-dropdown-typography);background-color:transparent;color:var(--goa-dropdown-color-text);-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:var(--goa-dropdown-padding);outline:none;width:100%}.dropdown-native.svelte-1te0qll.svelte-1te0qll::after{content:"";position:absolute;right:var(--goa-dropdown-space-icon-text);top:50%;transform:translateY(-50%);pointer-events:none;width:1.5rem;height:1.5rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E");background-repeat:no-repeat}.dropdown-native.svelte-1te0qll.svelte-1te0qll:has(:focus-visible){box-shadow:var(--goa-dropdown-border), var(--goa-dropdown-border-focus)}goa-icon.svelte-1te0qll.svelte-1te0qll:focus-visible{outline:none}.svelte-1te0qll.svelte-1te0qll::-moz-placeholder{color:var(--goa-dropdown-color-text-placeholder);opacity:1}.svelte-1te0qll.svelte-1te0qll::placeholder{color:var(--goa-dropdown-color-text-placeholder);opacity:1}input.svelte-1te0qll.svelte-1te0qll:disabled::-moz-placeholder{color:var(--goa-dropdown-color-text-disabled)}input.svelte-1te0qll.svelte-1te0qll:disabled::placeholder{color:var(--goa-dropdown-color-text-disabled)}.compact.svelte-1te0qll input.svelte-1te0qll,.compact.svelte-1te0qll select.svelte-1te0qll{padding:var(--goa-dropdown-compact-padding);height:var(--goa-dropdown-compact-height);font:var(--goa-dropdown-compact-typography)}.compact.svelte-1te0qll .dropdown-item.svelte-1te0qll{font:var(--goa-dropdown-compact-item-typography)}`);
 }
-function xn(t, e, o) {
+function Tn(t, e, o) {
   const i = t.slice();
   return i[84] = e[o], i[88] = o, i;
 }
-function Tn(t, e, o) {
+function In(t, e, o) {
   const i = t.slice();
   return i[84] = e[o], i;
 }
 function zu(t) {
-  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w = [], p = /* @__PURE__ */ new Map(), k, z, M, N, L, j, H, x, Z;
+  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w = [], p = /* @__PURE__ */ new Map(), k, z, M, N, L, j, H, T, Z;
   const V = (
     /*#slots*/
     t[49].default
@@ -27436,35 +27436,35 @@ function zu(t) {
     t[48],
     null
   );
-  let S = (
+  let x = (
     /*leadingicon*/
-    t[4] && In(t)
+    t[4] && qn(t)
   );
-  function Y(q, Q) {
+  function Y(A, Q) {
     var R;
     return (
       /*_inputEl*/
-      (R = q[19]) != null && R.value && /*_filterable*/
-      q[31] ? Lu : ju
+      (R = A[19]) != null && R.value && /*_filterable*/
+      A[31] ? Lu : ju
     );
   }
-  let I = Y(t), A = I(t), O = Ue(
+  let q = Y(t), S = q(t), O = Ue(
     /*_filteredOptions*/
     t[20]
   );
-  const K = (q) => (
+  const K = (A) => (
     /*index*/
-    q[88]
+    A[88]
   );
-  for (let q = 0; q < O.length; q += 1) {
-    let Q = xn(t, O, q), R = K(Q);
-    p.set(R, w[q] = Sn(R, Q));
+  for (let A = 0; A < O.length; A += 1) {
+    let Q = Tn(t, O, A), R = K(Q);
+    p.set(R, w[A] = xn(R, Q));
   }
   let F = null;
-  return O.length || (F = qn(t)), {
+  return O.length || (F = An(t)), {
     c() {
-      var q, Q;
-      B && B.c(), e = W(), o = C("goa-popover"), i = C("div"), S && S.c(), n = W(), l = C("input"), v = W(), A.c(), m = W(), b = C("ul");
+      var A, Q;
+      B && B.c(), e = W(), o = C("goa-popover"), i = C("div"), x && x.c(), n = W(), l = C("input"), v = W(), S.c(), m = W(), b = C("ul");
       for (let R = 0; R < w.length; R += 1)
         w[R].c();
       F && F.c(), f(l, "style", r = `
@@ -27474,7 +27474,7 @@ function zu(t) {
         t[31] ? "auto" : "pointer"
       )};
           `), f(l, "data-testid", "input"), l.value = a = /*_selectedOption*/
-      ((q = t[23]) == null ? void 0 : q.label) || /*_selectedOption*/
+      ((A = t[23]) == null ? void 0 : A.label) || /*_selectedOption*/
       ((Q = t[23]) == null ? void 0 : Q.value) || "", f(l, "type", "text"), f(l, "role", "combobox"), f(l, "autocomplete", "off"), f(l, "aria-autocomplete", "list"), f(l, "aria-controls", d = `menu-${/*name*/
       t[1]}`), f(
         l,
@@ -27514,12 +27514,12 @@ function zu(t) {
         "name",
         /*name*/
         t[1]
-      ), f(l, "class", "svelte-1te0qll"), f(i, "slot", "target"), f(i, "class", "dropdown-input-group svelte-1te0qll"), T(
+      ), f(l, "class", "svelte-1te0qll"), f(i, "slot", "target"), f(i, "class", "dropdown-input-group svelte-1te0qll"), I(
         i,
         "dropdown-input-group--disabled",
         /*_disabled*/
         t[30]
-      ), T(
+      ), I(
         i,
         "error",
         /*_error*/
@@ -27550,11 +27550,11 @@ function zu(t) {
         t[31]
       )), h(o, "class", "svelte-1te0qll");
     },
-    m(q, Q) {
-      B && B.m(q, Q), D(q, e, Q), D(q, o, Q), _(o, i), S && S.m(i, null), _(i, n), _(i, l), t[50](l), _(i, v), A.m(i, null), _(o, m), _(o, b);
+    m(A, Q) {
+      B && B.m(A, Q), D(A, e, Q), D(A, o, Q), _(o, i), x && x.m(i, null), _(i, n), _(i, l), t[50](l), _(i, v), S.m(i, null), _(o, m), _(o, b);
       for (let R = 0; R < w.length; R += 1)
         w[R] && w[R].m(b, null);
-      F && F.m(b, null), t[52](b), t[53](o), H = true, x || (Z = [
+      F && F.m(b, null), t[52](b), t[53](o), H = true, T || (Z = [
         re(
           l,
           "keydown",
@@ -27586,153 +27586,153 @@ function zu(t) {
           t[39]
         ),
         re(b, "mousedown", Du)
-      ], x = true);
+      ], T = true);
     },
-    p(q, Q) {
+    p(A, Q) {
       var R, ee;
       B && B.p && (!H || Q[1] & /*$$scope*/
       131072) && ge(
         B,
         V,
-        q,
+        A,
         /*$$scope*/
-        q[48],
+        A[48],
         H ? fe(
           V,
           /*$$scope*/
-          q[48],
+          A[48],
           Q,
           null
         ) : ve(
           /*$$scope*/
-          q[48]
+          A[48]
         ),
         null
       ), /*leadingicon*/
-      q[4] ? S ? S.p(q, Q) : (S = In(q), S.c(), S.m(i, n)) : S && (S.d(1), S = null), (!H || Q[0] & /*_disabled*/
+      A[4] ? x ? x.p(A, Q) : (x = qn(A), x.c(), x.m(i, n)) : x && (x.d(1), x = null), (!H || Q[0] & /*_disabled*/
       1073741824 | Q[1] & /*_filterable*/
       1 && r !== (r = `
             cursor: ${/*_disabled*/
-      q[30] ? "default" : (
+      A[30] ? "default" : (
         /*_filterable*/
-        q[31] ? "auto" : "pointer"
+        A[31] ? "auto" : "pointer"
       )};
           `)) && f(l, "style", r), (!H || Q[0] & /*_selectedOption*/
       8388608 && a !== (a = /*_selectedOption*/
-      ((R = q[23]) == null ? void 0 : R.label) || /*_selectedOption*/
-      ((ee = q[23]) == null ? void 0 : ee.value) || "") && l.value !== a) && (l.value = a), (!H || Q[0] & /*name*/
+      ((R = A[23]) == null ? void 0 : R.label) || /*_selectedOption*/
+      ((ee = A[23]) == null ? void 0 : ee.value) || "") && l.value !== a) && (l.value = a), (!H || Q[0] & /*name*/
       2 && d !== (d = `menu-${/*name*/
-      q[1]}`)) && f(l, "aria-controls", d), (!H || Q[0] & /*_isMenuVisible*/
+      A[1]}`)) && f(l, "aria-controls", d), (!H || Q[0] & /*_isMenuVisible*/
       16777216) && f(
         l,
         "aria-expanded",
         /*_isMenuVisible*/
-        q[24]
+        A[24]
       ), (!H || Q[0] & /*arialabel, name*/
       6 && c !== (c = /*arialabel*/
-      q[2] || /*name*/
-      q[1])) && f(l, "aria-label", c), (!H || Q[0] & /*arialabelledby*/
+      A[2] || /*name*/
+      A[1])) && f(l, "aria-label", c), (!H || Q[0] & /*arialabelledby*/
       8) && f(
         l,
         "aria-labelledby",
         /*arialabelledby*/
-        q[3]
+        A[3]
       ), (!H || Q[0] & /*name*/
       2) && f(
         l,
         "id",
         /*name*/
-        q[1]
+        A[1]
       ), (!H || Q[0] & /*_activeDescendantId*/
       536870912) && f(
         l,
         "aria-activedescendant",
         /*_activeDescendantId*/
-        q[29]
+        A[29]
       ), (!H || Q[0] & /*_disabled*/
       1073741824) && f(
         l,
         "aria-disabled",
         /*_disabled*/
-        q[30]
+        A[30]
       ), (!H || Q[0] & /*_isMenuVisible, name*/
       16777218 && s !== (s = /*_isMenuVisible*/
-      q[24] ? `menu-${/*name*/
-      q[1]}` : void 0)) && f(l, "aria-owns", s), (!H || Q[0] & /*_disabled*/
+      A[24] ? `menu-${/*name*/
+      A[1]}` : void 0)) && f(l, "aria-owns", s), (!H || Q[0] & /*_disabled*/
       1073741824) && (l.disabled = /*_disabled*/
-      q[30]), (!H || Q[1] & /*_filterable*/
+      A[30]), (!H || Q[1] & /*_filterable*/
       1 && u !== (u = !/*_filterable*/
-      q[31])) && (l.readOnly = u), (!H || Q[0] & /*placeholder, version*/
+      A[31])) && (l.readOnly = u), (!H || Q[0] & /*placeholder, version*/
       576 && g !== (g = /*placeholder*/
-      q[6] || /*version*/
-      (q[9] === "2" ? "—Select—" : ""))) && f(l, "placeholder", g), (!H || Q[0] & /*name*/
+      A[6] || /*version*/
+      (A[9] === "2" ? "—Select—" : ""))) && f(l, "placeholder", g), (!H || Q[0] & /*name*/
       2) && f(
         l,
         "name",
         /*name*/
-        q[1]
-      ), I === (I = Y(q)) && A ? A.p(q, Q) : (A.d(1), A = I(q), A && (A.c(), A.m(i, null))), (!H || Q[0] & /*_disabled*/
-      1073741824) && T(
+        A[1]
+      ), q === (q = Y(A)) && S ? S.p(A, Q) : (S.d(1), S = q(A), S && (S.c(), S.m(i, null))), (!H || Q[0] & /*_disabled*/
+      1073741824) && I(
         i,
         "dropdown-input-group--disabled",
         /*_disabled*/
-        q[30]
+        A[30]
       ), (!H || Q[0] & /*_error*/
-      2097152) && T(
+      2097152) && I(
         i,
         "error",
         /*_error*/
-        q[21]
+        A[21]
       ), Q[0] & /*_filteredOptions, _selectedOption, _highlightedIndex, _inputEl*/
       10092544 | Q[1] & /*onFilteredOptionClick, _filterable*/
       3 && (O = Ue(
         /*_filteredOptions*/
-        q[20]
-      ), w = a1(w, Q, K, 1, q, O, p, b, r1, Sn, null, xn), !O.length && F ? F.p(q, Q) : O.length ? F && (F.d(1), F = null) : (F = qn(q), F.c(), F.m(b, null))), (!H || Q[0] & /*name*/
+        A[20]
+      ), w = a1(w, Q, K, 1, A, O, p, b, r1, xn, null, Tn), !O.length && F ? F.p(A, Q) : O.length ? F && (F.d(1), F = null) : (F = An(A), F.c(), F.m(b, null))), (!H || Q[0] & /*name*/
       2 && k !== (k = `menu-${/*name*/
-      q[1]}`)) && f(b, "id", k), (!H || Q[0] & /*arialabel, name*/
+      A[1]}`)) && f(b, "id", k), (!H || Q[0] & /*arialabel, name*/
       6 && z !== (z = /*arialabel*/
-      q[2] || /*name*/
-      q[1])) && f(b, "aria-label", z), (!H || Q[0] & /*arialabelledby*/
+      A[2] || /*name*/
+      A[1])) && f(b, "aria-label", z), (!H || Q[0] & /*arialabelledby*/
       8) && f(
         b,
         "aria-labelledby",
         /*arialabelledby*/
-        q[3]
+        A[3]
       ), (!H || Q[0] & /*maxheight*/
       32 && M !== (M = `
           outline: none;
           overflow-y: auto;
           max-height: ${/*maxheight*/
-      q[5]};
+      A[5]};
         `)) && f(b, "style", M), (!H || Q[0] & /*disabled*/
       128) && h(
         o,
         "disabled",
         /*disabled*/
-        q[7]
+        A[7]
       ), (!H || Q[0] & /*_popoverMaxWidth, _width*/
       100663296 && N !== (N = /*_popoverMaxWidth*/
-      q[26] || /*_width*/
-      q[25] || void 0)) && h(o, "width", N), (!H || Q[0] & /*_isMenuVisible*/
+      A[26] || /*_width*/
+      A[25] || void 0)) && h(o, "width", N), (!H || Q[0] & /*_isMenuVisible*/
       16777216 && L !== (L = /*_isMenuVisible*/
-      q[24] ? "true" : "false")) && h(o, "open", L), (!H || Q[1] & /*_filterable*/
+      A[24] ? "true" : "false")) && h(o, "open", L), (!H || Q[1] & /*_filterable*/
       1 && j !== (j = Xt(
         /*_filterable*/
-        q[31]
+        A[31]
       ))) && h(o, "filterablecontext", j);
     },
-    i(q) {
-      H || (U(B, q), H = true);
+    i(A) {
+      H || (U(B, A), H = true);
     },
-    o(q) {
-      $(B, q), H = false;
+    o(A) {
+      $(B, A), H = false;
     },
-    d(q) {
-      q && (E(e), E(o)), B && B.d(q), S && S.d(), t[50](null), A.d();
+    d(A) {
+      A && (E(e), E(o)), B && B.d(A), x && x.d(), t[50](null), S.d();
       for (let Q = 0; Q < w.length; Q += 1)
         w[Q].d();
-      F && F.d(), t[52](null), t[53](null), x = false, Ye(Z);
+      F && F.d(), t[52](null), t[53](null), T = false, Ye(Z);
     }
   };
 }
@@ -27753,7 +27753,7 @@ function Mu(t) {
     t[16]
   ), c = [];
   for (let s = 0; s < d.length; s += 1)
-    c[s] = On(Tn(t, d, s));
+    c[s] = On(In(t, d, s));
   return {
     c() {
       e = C("select"), a && a.c();
@@ -27782,7 +27782,7 @@ function Mu(t) {
         "autocomplete",
         /*autocomplete*/
         t[14]
-      ), f(e, "class", "svelte-1te0qll"), T(
+      ), f(e, "class", "svelte-1te0qll"), I(
         e,
         "error",
         /*_error*/
@@ -27835,7 +27835,7 @@ function Mu(t) {
         );
         let g;
         for (g = 0; g < d.length; g += 1) {
-          const v = Tn(s, d, g);
+          const v = In(s, d, g);
           c[g] ? c[g].p(v, u) : (c[g] = On(v), c[g].c(), c[g].m(e, null));
         }
         for (; g < c.length; g += 1)
@@ -27872,7 +27872,7 @@ function Mu(t) {
         /*autocomplete*/
         s[14]
       ), (!i || u[0] & /*_error*/
-      2097152) && T(
+      2097152) && I(
         e,
         "error",
         /*_error*/
@@ -27890,7 +27890,7 @@ function Mu(t) {
     }
   };
 }
-function In(t) {
+function qn(t) {
   let e, o;
   return {
     c() {
@@ -27969,7 +27969,7 @@ function Lu(t) {
       t[2] || /*name*/
       t[1]}`), h(e, "class", "dropdown-icon--clear svelte-1te0qll"), h(e, "disabled", n = /*_disabled*/
       t[30] ? "true" : "false"), h(e, "size", l = /*size*/
-      t[8] === "compact" ? "xsmall" : "medium"), h(e, "theme", "filled"), h(e, "variant", "dark"), h(e, "icon", "close"), T(
+      t[8] === "compact" ? "xsmall" : "medium"), h(e, "theme", "filled"), h(e, "variant", "dark"), h(e, "icon", "close"), I(
         e,
         "disabled",
         /*_disabled*/
@@ -28009,7 +28009,7 @@ function Lu(t) {
       d[30] ? "true" : "false") && h(e, "disabled", n), c[0] & /*size*/
       256 && l !== (l = /*size*/
       d[8] === "compact" ? "xsmall" : "medium") && h(e, "size", l), c[0] & /*_disabled*/
-      1073741824 && T(
+      1073741824 && I(
         e,
         "disabled",
         /*_disabled*/
@@ -28021,10 +28021,10 @@ function Lu(t) {
     }
   };
 }
-function qn(t) {
+function An(t) {
   let e, o = (
     /*_filterable*/
-    t[31] && An()
+    t[31] && Sn()
   );
   return {
     c() {
@@ -28034,14 +28034,14 @@ function qn(t) {
       o && o.m(i, n), D(i, e, n);
     },
     p(i, n) {
-      i[31] ? o || (o = An(), o.c(), o.m(e.parentNode, e)) : o && (o.d(1), o = null);
+      i[31] ? o || (o = Sn(), o.c(), o.m(e.parentNode, e)) : o && (o.d(1), o = null);
     },
     d(i) {
       i && E(e), o && o.d(i);
     }
   };
 }
-function An(t) {
+function Sn(t) {
   let e;
   return {
     c() {
@@ -28056,7 +28056,7 @@ function An(t) {
     }
   };
 }
-function Sn(t, e) {
+function xn(t, e) {
   let o, i = (
     /*option*/
     (e[84].label || /*option*/
@@ -28083,13 +28083,13 @@ function Sn(t, e) {
       e[84].value), f(o, "class", "dropdown-item svelte-1te0qll"), f(o, "data-index", d = /*index*/
       e[88]), f(o, "data-testid", c = `dropdown-item-${/*option*/
       e[84].value}`), f(o, "data-value", s = /*option*/
-      e[84].value), f(o, "role", "option"), Ve(o, "display", "block"), T(
+      e[84].value), f(o, "role", "option"), Ve(o, "display", "block"), I(
         o,
         "selected",
         /*_selectedOption*/
         ((b = e[23]) == null ? void 0 : b.value) === /*option*/
         e[84].value
-      ), T(
+      ), I(
         o,
         "dropdown-item--highlighted",
         /*index*/
@@ -28117,14 +28117,14 @@ function Sn(t, e) {
       e[84].value}`) && f(o, "data-testid", c), b[0] & /*_filteredOptions*/
       1048576 && s !== (s = /*option*/
       e[84].value) && f(o, "data-value", s), b[0] & /*_selectedOption, _filteredOptions*/
-      9437184 && T(
+      9437184 && I(
         o,
         "selected",
         /*_selectedOption*/
         ((p = e[23]) == null ? void 0 : p.value) === /*option*/
         e[84].value
       ), b[0] & /*_filteredOptions, _highlightedIndex*/
-      1179648 && T(
+      1179648 && I(
         o,
         "dropdown-item--highlighted",
         /*index*/
@@ -28193,17 +28193,17 @@ function Nu(t) {
       )};
     --width: ${/*_width*/
       t[25]};
-  `), T(
+  `), I(
         e,
         "dropdown-native",
         /*_native*/
         t[22]
-      ), T(
+      ), I(
         e,
         "compact",
         /*size*/
         t[8] === "compact"
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
@@ -28235,19 +28235,19 @@ function Nu(t) {
     --width: ${/*_width*/
       s[25]};
   `)) && f(e, "style", l), (!r || u[0] & /*_native*/
-      4194304) && T(
+      4194304) && I(
         e,
         "dropdown-native",
         /*_native*/
         s[22]
       ), (!r || u[0] & /*size*/
-      256) && T(
+      256) && I(
         e,
         "compact",
         /*size*/
         s[8] === "compact"
       ), (!r || u[0] & /*version*/
-      512) && T(
+      512) && I(
         e,
         "v2",
         /*version*/
@@ -28280,13 +28280,13 @@ function ko(t, e, o = true) {
   return i = i.toLowerCase(), e = e.toLowerCase().trim(), o ? i.startsWith(e) || i.includes(" " + e) : i === e;
 }
 const Du = (t) => t.preventDefault();
-function xu(t, e, o) {
-  let i, n, l, r, a, { $$slots: d = {}, $$scope: c } = e, { name: s } = e, { arialabel: u = "" } = e, { arialabelledby: g = "" } = e, { value: v = "" } = e, { filterable: m = "false" } = e, { leadingicon: b = null } = e, { maxheight: w = "276px" } = e, { placeholder: p = "" } = e, { width: k = "" } = e, { maxwidth: z = "" } = e, { disabled: M = "false" } = e, { error: N = "false" } = e, { multiselect: L = "false" } = e, { native: j = "false" } = e, { size: H = "default" } = e, { version: x = "1" } = e, { relative: Z = "" } = e, { mt: V = null } = e, { mr: B = null } = e, { mb: S = null } = e, { ml: Y = null } = e, { autocomplete: I = "" } = e, { testid: A = "" } = e, O = [], K, F = false, q = -1, Q, R, ee, oe, ne, te, P, G = false, J = [], se = [], ie, ye = Ae(N), Le = ye;
+function Tu(t, e, o) {
+  let i, n, l, r, a, { $$slots: d = {}, $$scope: c } = e, { name: s } = e, { arialabel: u = "" } = e, { arialabelledby: g = "" } = e, { value: v = "" } = e, { filterable: m = "false" } = e, { leadingicon: b = null } = e, { maxheight: w = "276px" } = e, { placeholder: p = "" } = e, { width: k = "" } = e, { maxwidth: z = "" } = e, { disabled: M = "false" } = e, { error: N = "false" } = e, { multiselect: L = "false" } = e, { native: j = "false" } = e, { size: H = "default" } = e, { version: T = "1" } = e, { relative: Z = "" } = e, { mt: V = null } = e, { mr: B = null } = e, { mb: x = null } = e, { ml: Y = null } = e, { autocomplete: q = "" } = e, { testid: S = "" } = e, O = [], K, F = false, A = -1, Q, R, ee, oe, ne, te, P, G = false, J = [], se = [], ie, ye = Se(N), Le = ye;
   De(() => {
-    to(ee), pe(), Je(), le(), te = r ? new qs(ne) : new As(ne), X();
+    to(ee), pe(), Je(), le(), te = r ? new As(ne) : new Ss(ne), X();
   });
-  function Ke(de, xe, Re) {
-    de ? /(px|%|ch|rem|em)$/.test(de) ? o(25, Q = de) : (console.error("Dropdown width must be of an allowed unit. Falling back to `px`"), o(25, Q = `${de}px`)) : z ? o(25, Q = z) : o(25, Q = st(xe)), de != null && de.includes("%") || z != null && z.includes("%") ? o(26, R = "100%") : o(26, R = Q);
+  function Ke(de, Te, Re) {
+    de ? /(px|%|ch|rem|em)$/.test(de) ? o(25, Q = de) : (console.error("Dropdown width must be of an allowed unit. Falling back to `px`"), o(25, Q = `${de}px`)) : z ? o(25, Q = z) : o(25, Q = st(Te)), de != null && de.includes("%") || z != null && z.includes("%") ? o(26, R = "100%") : o(26, R = Q);
   }
   function le() {
     P == null || P.addEventListener("_open", (de) => {
@@ -28299,13 +28299,13 @@ function xu(t, e, o) {
     Z != "" && console.warn("Dropdown `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
   function pe() {
-    rt(ee, (de, xe, Re) => {
+    rt(ee, (de, Te, Re) => {
       switch (de) {
-        case xt:
-          Fe(xe);
+        case Tt:
+          Fe(Te);
           break;
         case Mt:
-          Te(xe);
+          Ie(Te);
           break;
         case zt:
           o(40, N = "false");
@@ -28314,15 +28314,15 @@ function xu(t, e, o) {
           Fe({ value: "" });
           break;
         case Ms:
-          gt(xe);
+          gt(Te);
           break;
         case js:
-          ct(xe);
+          ct(Te);
           break;
       }
     });
   }
-  function Te(de) {
+  function Ie(de) {
     o(40, N = de.error ? "true" : "false");
   }
   function Fe(de) {
@@ -28345,53 +28345,53 @@ function xu(t, e, o) {
     }
     Oe(de.el, "dropdown:bind", { el: ee }), ie && clearTimeout(ie), ie = setTimeout(
       () => {
-        Xe(), l || (pt(), ne && K && Tt());
+        Xe(), l || (pt(), ne && K && It());
       },
       1
     );
   }
   function ct(de) {
-    o(16, O = O.filter((xe) => xe.value !== de.value)), Xe();
+    o(16, O = O.filter((Te) => Te.value !== de.value)), Xe();
   }
   function pt() {
     o(23, K = O.find((de) => de.value == se[0]));
   }
   function st(de) {
-    const xe = Math.max(...de.map((It) => (`${It.label}` || `${It.value}` || "").length));
-    let Re = Math.max(xe || 0, p.length) + 7;
+    const Te = Math.max(...de.map((qt) => (`${qt.label}` || `${qt.value}` || "").length));
+    let Re = Math.max(Te || 0, p.length) + 7;
     return b && (Re += 4), `${Re}ch`;
   }
   function _e() {
     if (!K) {
-      o(17, q = -1);
+      o(17, A = -1);
       return;
     }
-    const de = J.findIndex((xe) => xe.value === (K == null ? void 0 : K.value));
-    o(17, q = de);
+    const de = J.findIndex((Te) => Te.value === (K == null ? void 0 : K.value));
+    o(17, A = de);
   }
   function We() {
     if (J.length === 0) {
-      o(17, q = -1);
+      o(17, A = -1);
       return;
     }
     if (!(ne != null && ne.value) || ne.value === "") return;
-    const de = J.findIndex((xe) => ko(xe, (ne == null ? void 0 : ne.value) || "", false));
+    const de = J.findIndex((Te) => ko(Te, (ne == null ? void 0 : ne.value) || "", false));
     if (de >= 0)
-      o(17, q = de);
+      o(17, A = de);
     else {
-      const xe = J.findIndex((Re) => ko(Re, (ne == null ? void 0 : ne.value) || ""));
-      xe >= 0 && o(17, q = xe);
+      const Te = J.findIndex((Re) => ko(Re, (ne == null ? void 0 : ne.value) || ""));
+      Te >= 0 && o(17, A = Te);
     }
   }
   function Me(de) {
-    let xe = q + de, Re = J != null && J.length ? J : O;
-    Re.length !== 0 && (xe < 0 ? xe = r ? Re.length - 1 : 0 : xe >= Re.length && (xe = r ? 0 : Re.length - 1), o(17, q = xe), Se());
+    let Te = A + de, Re = J != null && J.length ? J : O;
+    Re.length !== 0 && (Te < 0 ? Te = r ? Re.length - 1 : 0 : Te >= Re.length && (Te = r ? 0 : Re.length - 1), o(17, A = Te), xe());
   }
-  function Se() {
-    const de = q, xe = oe == null ? void 0 : oe.querySelector(`li[data-index="${de}"]`);
-    if (!xe) return;
-    const Re = xe.getBoundingClientRect(), It = oe.getBoundingClientRect();
-    Re.top >= 0 && Re.left >= 0 && Re.bottom <= It.height && Re.right <= It.width || xe.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  function xe() {
+    const de = A, Te = oe == null ? void 0 : oe.querySelector(`li[data-index="${de}"]`);
+    if (!Te) return;
+    const Re = Te.getBoundingClientRect(), qt = oe.getBoundingClientRect();
+    Re.top >= 0 && Re.left >= 0 && Re.bottom <= qt.height && Re.right <= qt.width || Te.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   function Xe() {
     o(20, J = r ? O.filter((de) => ko(de, (ne == null ? void 0 : ne.value) || "")) : O);
@@ -28401,7 +28401,7 @@ function xu(t, e, o) {
       async () => {
         Xe(), o(24, F = true), ne == null || ne.focus(), setTimeout(
           () => {
-            (ne == null ? void 0 : ne.value) === "" && K && io(), We(), Se();
+            (ne == null ? void 0 : ne.value) === "" && K && io(), We(), xe();
           },
           0
         );
@@ -28410,27 +28410,27 @@ function xu(t, e, o) {
     );
   }
   function kt() {
-    o(24, F = false), r && Tt();
+    o(24, F = false), r && It();
   }
-  function Tt() {
+  function It() {
     const de = (K == null ? void 0 : K.label) || (K == null ? void 0 : K.value) || "";
     o(19, ne.value = de, ne);
   }
   function Vt(de) {
-    const xe = n ? { name: s, values: [de, ...se] } : { name: s, value: de };
-    G && (Ee(ee, "_change", xe, { bubbles: true }), G = false);
+    const Te = n ? { name: s, values: [de, ...se] } : { name: s, value: de };
+    G && (Ee(ee, "_change", Te, { bubbles: true }), G = false);
   }
   function jt(de) {
-    i || (G = de.value !== (K == null ? void 0 : K.value), o(23, K = de), l || (Xe(), Tt(), _e(), kt()), Vt(de.value));
+    i || (G = de.value !== (K == null ? void 0 : K.value), o(23, K = de), l || (Xe(), It(), _e(), kt()), Vt(de.value));
   }
   function Lt(de) {
     G = true, jt(de);
   }
   function he(de) {
-    if (i || !r || !(A === "test-autofill" || ne.matches(":-webkit-autofill") || ne.matches(":autofill"))) return;
+    if (i || !r || !(S === "test-autofill" || ne.matches(":-webkit-autofill") || ne.matches(":autofill"))) return;
     Xe();
-    const Re = (ne == null ? void 0 : ne.value) || "", St = Re !== "" ? J.find((Bs) => ko(Bs, Re, false)) : null;
-    K || (St ? Lt(St) : io()), setTimeout(
+    const Re = (ne == null ? void 0 : ne.value) || "", xt = Re !== "" ? J.find((Bs) => ko(Bs, Re, false)) : null;
+    K || (xt ? Lt(xt) : io()), setTimeout(
       () => {
         kt();
       },
@@ -28443,53 +28443,53 @@ function xu(t, e, o) {
   function Bt(de) {
     i || (G = true, te.handleKeyDown(de));
   }
-  function At(de) {
+  function St(de) {
     (de.key === "Enter" || de.key === " ") && (io(), tt(), de.stopPropagation());
   }
   function oo(de) {
     io(), tt(), de.stopPropagation();
   }
   function po(de) {
-    const xe = de.currentTarget, Re = O[xe.selectedIndex];
+    const Te = de.currentTarget, Re = O[Te.selectedIndex];
     G = true, jt(Re);
   }
   function io() {
-    i || (o(29, a = void 0), o(17, q = -1), o(23, K = void 0), G = true, Xe(), Vt(""), Tt());
+    i || (o(29, a = void 0), o(17, A = -1), o(23, K = void 0), G = true, Xe(), Vt(""), It());
   }
-  function Is(de) {
+  function qs(de) {
     Ee(ee, "help-text::announce", void 0, { bubbles: true });
   }
-  class qs {
-    constructor(xe) {
-      this.input = xe;
+  class As {
+    constructor(Te) {
+      this.input = Te;
     }
-    onEscape(xe) {
+    onEscape(Te) {
       io();
     }
-    onEnter(xe) {
-      const Re = J[q];
-      Re && (G = Re.value !== (K == null ? void 0 : K.value), jt(Re)), K ? kt() : tt(), xe.stopPropagation();
+    onEnter(Te) {
+      const Re = J[A];
+      Re && (G = Re.value !== (K == null ? void 0 : K.value), jt(Re)), K ? kt() : tt(), Te.stopPropagation();
     }
-    onArrow(xe, Re) {
-      F || tt(), Me(Re === "up" ? -1 : 1), xe.stopPropagation();
+    onArrow(Te, Re) {
+      F || tt(), Me(Re === "up" ? -1 : 1), Te.stopPropagation();
     }
-    onTab(xe) {
-      const Re = J.find((It) => {
-        var St;
-        return ((St = It.label) == null ? void 0 : St.toLowerCase()) === this.input.value.toLowerCase();
+    onTab(Te) {
+      const Re = J.find((qt) => {
+        var xt;
+        return ((xt = qt.label) == null ? void 0 : xt.toLowerCase()) === this.input.value.toLowerCase();
       });
       Re && jt(Re), kt();
     }
-    onKeyUp(xe) {
-      this.input.value === "" && K && (o(23, K = void 0), o(17, q = -1)), tt();
+    onKeyUp(Te) {
+      this.input.value === "" && K && (o(23, K = void 0), o(17, A = -1)), tt();
     }
-    handleKeyUp(xe) {
-      switch (xe.key) {
+    handleKeyUp(Te) {
+      switch (Te.key) {
         case "ArrowUp":
-          this.onArrow(xe, "up");
+          this.onArrow(Te, "up");
           break;
         case "ArrowDown":
-          this.onArrow(xe, "down");
+          this.onArrow(Te, "down");
           break;
         case "Home":
           this.input.setSelectionRange(0, 0);
@@ -28502,46 +28502,46 @@ function xu(t, e, o) {
         case "Enter":
           break;
         default:
-          this.onKeyUp(xe);
+          this.onKeyUp(Te);
           break;
       }
     }
-    handleKeyDown(xe) {
-      switch (xe.key) {
+    handleKeyDown(Te) {
+      switch (Te.key) {
         case "Enter":
-          this.onEnter(xe);
+          this.onEnter(Te);
           break;
         case "Tab":
-          this.onTab(xe);
+          this.onTab(Te);
           break;
       }
     }
   }
-  class As {
-    constructor(xe) {
+  class Ss {
+    constructor(Te) {
     }
-    onEnter(xe) {
+    onEnter(Te) {
       if (F) {
-        const Re = J[q];
+        const Re = J[A];
         Re && jt(Re), kt();
       } else
         tt();
-      xe.preventDefault(), xe.stopPropagation();
+      Te.preventDefault(), Te.stopPropagation();
     }
-    onArrow(xe, Re) {
-      F || tt(), Me(Re === "up" ? -1 : 1), xe.preventDefault(), xe.stopPropagation();
+    onArrow(Te, Re) {
+      F || tt(), Me(Re === "up" ? -1 : 1), Te.preventDefault(), Te.stopPropagation();
     }
-    handleKeyDown(xe) {
-      switch (xe.key) {
+    handleKeyDown(Te) {
+      switch (Te.key) {
         case " ":
         case "Enter":
-          this.onEnter(xe);
+          this.onEnter(Te);
           break;
         case "ArrowUp":
-          this.onArrow(xe, "up");
+          this.onArrow(Te, "up");
           break;
         case "ArrowDown":
-          this.onArrow(xe, "down");
+          this.onArrow(Te, "down");
           break;
         case "Tab":
           kt();
@@ -28549,22 +28549,22 @@ function xu(t, e, o) {
       }
       return false;
     }
-    handleKeyUp(xe) {
-      switch (xe.key) {
+    handleKeyUp(Te) {
+      switch (Te.key) {
         case "ArrowUp":
         case "ArrowDown":
         case " ":
         case "Enter":
-          xe.preventDefault(), xe.stopPropagation();
+          Te.preventDefault(), Te.stopPropagation();
       }
     }
   }
-  function Ss(de) {
+  function xs(de) {
     ce[de ? "unshift" : "push"](() => {
       ne = de, o(19, ne);
     });
   }
-  const Os = (de, xe) => {
+  const Os = (de, Te) => {
     Lt(de), ne == null || ne.focus();
   };
   function Hs(de) {
@@ -28583,20 +28583,20 @@ function xu(t, e, o) {
     });
   }
   return t.$$set = (de) => {
-    "name" in de && o(1, s = de.name), "arialabel" in de && o(2, u = de.arialabel), "arialabelledby" in de && o(3, g = de.arialabelledby), "value" in de && o(0, v = de.value), "filterable" in de && o(41, m = de.filterable), "leadingicon" in de && o(4, b = de.leadingicon), "maxheight" in de && o(5, w = de.maxheight), "placeholder" in de && o(6, p = de.placeholder), "width" in de && o(42, k = de.width), "maxwidth" in de && o(43, z = de.maxwidth), "disabled" in de && o(7, M = de.disabled), "error" in de && o(40, N = de.error), "multiselect" in de && o(44, L = de.multiselect), "native" in de && o(45, j = de.native), "size" in de && o(8, H = de.size), "version" in de && o(9, x = de.version), "relative" in de && o(46, Z = de.relative), "mt" in de && o(10, V = de.mt), "mr" in de && o(11, B = de.mr), "mb" in de && o(12, S = de.mb), "ml" in de && o(13, Y = de.ml), "autocomplete" in de && o(14, I = de.autocomplete), "testid" in de && o(15, A = de.testid), "$$scope" in de && o(48, c = de.$$scope);
+    "name" in de && o(1, s = de.name), "arialabel" in de && o(2, u = de.arialabel), "arialabelledby" in de && o(3, g = de.arialabelledby), "value" in de && o(0, v = de.value), "filterable" in de && o(41, m = de.filterable), "leadingicon" in de && o(4, b = de.leadingicon), "maxheight" in de && o(5, w = de.maxheight), "placeholder" in de && o(6, p = de.placeholder), "width" in de && o(42, k = de.width), "maxwidth" in de && o(43, z = de.maxwidth), "disabled" in de && o(7, M = de.disabled), "error" in de && o(40, N = de.error), "multiselect" in de && o(44, L = de.multiselect), "native" in de && o(45, j = de.native), "size" in de && o(8, H = de.size), "version" in de && o(9, T = de.version), "relative" in de && o(46, Z = de.relative), "mt" in de && o(10, V = de.mt), "mr" in de && o(11, B = de.mr), "mb" in de && o(12, x = de.mb), "ml" in de && o(13, Y = de.ml), "autocomplete" in de && o(14, q = de.autocomplete), "testid" in de && o(15, S = de.testid), "$$scope" in de && o(48, c = de.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    128 && o(30, i = Ae(M)), t.$$.dirty[1] & /*multiselect*/
-    8192 && (n = Ae(L)), t.$$.dirty[1] & /*native*/
-    16384 && o(22, l = Ae(j)), t.$$.dirty[0] & /*_native*/
+    128 && o(30, i = Se(M)), t.$$.dirty[1] & /*multiselect*/
+    8192 && (n = Se(L)), t.$$.dirty[1] & /*native*/
+    16384 && o(22, l = Se(j)), t.$$.dirty[0] & /*_native*/
     4194304 | t.$$.dirty[1] & /*filterable*/
-    1024 && o(31, r = Ae(m) && !l), t.$$.dirty[0] & /*_filteredOptions, _highlightedIndex*/
-    1179648 && o(29, a = J[q] ? J[q].value : void 0), t.$$.dirty[0] & /*value*/
+    1024 && o(31, r = Se(m) && !l), t.$$.dirty[0] & /*_filteredOptions, _highlightedIndex*/
+    1179648 && o(29, a = J[A] ? J[A].value : void 0), t.$$.dirty[0] & /*value*/
     1 && (se = Eu(v || ""), pt()), t.$$.dirty[0] & /*_options, _inputEl*/
     589824 | t.$$.dirty[1] & /*width*/
     2048 && Ke(k, O), t.$$.dirty[0] & /*_error, _rootEl*/
     2359296 | t.$$.dirty[1] & /*error, _prevError*/
-    66048 && (o(21, ye = Ae(N)), ye !== Le && (Ee(ee, "error::change", { isError: ye }, { bubbles: true }), o(47, Le = ye)));
+    66048 && (o(21, ye = Se(N)), ye !== Le && (Ee(ee, "error::change", { isError: ye }, { bubbles: true }), o(47, Le = ye)));
   }, [
     v,
     s,
@@ -28607,15 +28607,15 @@ function xu(t, e, o) {
     p,
     M,
     H,
-    x,
+    T,
     V,
     B,
-    S,
+    x,
     Y,
-    I,
-    A,
-    O,
     q,
+    S,
+    O,
+    A,
     ee,
     ne,
     J,
@@ -28634,10 +28634,10 @@ function xu(t, e, o) {
     he,
     $e,
     Bt,
-    At,
+    St,
     oo,
     po,
-    Is,
+    qs,
     N,
     m,
     k,
@@ -28648,19 +28648,19 @@ function xu(t, e, o) {
     Le,
     c,
     d,
-    Ss,
+    xs,
     Os,
     Hs,
     Ps,
     Vs
   ];
 }
-class Tu extends ze {
+class Iu extends ze {
   constructor(e) {
     super(), ke(
       this,
       e,
-      xu,
+      Tu,
       Nu,
       we,
       {
@@ -28831,12 +28831,12 @@ class Tu extends ze {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-dropdown", Ce(Tu, { name: {}, arialabel: {}, arialabelledby: {}, value: {}, filterable: {}, leadingicon: {}, maxheight: {}, placeholder: {}, width: {}, maxwidth: {}, disabled: {}, error: {}, multiselect: {}, native: {}, size: {}, version: {}, relative: {}, mt: {}, mr: {}, mb: {}, ml: {}, autocomplete: {}, testid: {} }, ["default"], [], true));
-function Iu(t) {
+customElements.define("goa-dropdown", Ce(Iu, { name: {}, arialabel: {}, arialabelledby: {}, value: {}, filterable: {}, leadingicon: {}, maxheight: {}, placeholder: {}, width: {}, maxwidth: {}, disabled: {}, error: {}, multiselect: {}, native: {}, size: {}, version: {}, relative: {}, mt: {}, mr: {}, mb: {}, ml: {}, autocomplete: {}, testid: {} }, ["default"], [], true));
+function qu(t) {
   je(t, "svelte-quhy4b", `#container.svelte-quhy4b{container:self / inline-size}.root.svelte-quhy4b{display:grid;padding:var(--goa-space-l);border:var(--goa-border-width-s) solid var(--goa-color-greyscale-200);border-radius:var(--goa-border-radius-m);margin:0.5rem 0;gap:1rem;align-items:center}.details.svelte-quhy4b{grid-area:details;display:flex;flex-direction:column;overflow-x:hidden}.actions.svelte-quhy4b{grid-area:action}@container self (min-width: 624px){.root.svelte-quhy4b{grid-template-columns:38px 1fr auto;grid-template-rows:auto;grid-template-areas:"icon details action"}.details.svelte-quhy4b{margin-left:0.5rem}}@container self (max-width: 623px){.root.svelte-quhy4b{grid-template-columns:38px auto;grid-template-rows:repeat(2, auto);grid-template-areas:"icon details"
         "action action"}.actions.svelte-quhy4b{display:flex;justify-content:center}}.root.error.svelte-quhy4b{border:var(--goa-border-width-m) solid var(--goa-color-interactive-error)}.fileicon.svelte-quhy4b{grid-area:icon;align-self:center}.filename.svelte-quhy4b{grid-area:filename;font-size:var(--goa-font-size-4);overflow-wrap:anywhere}.error-msg.svelte-quhy4b{display:flex;align-items:flex-start;margin-top:0.5rem;gap:var(--goa-space-2xs);color:var(--goa-color-interactive-error);font:var(--goa-typography-body-xs)}.timestamp.svelte-quhy4b,.filesize.svelte-quhy4b{color:var(--goa-color-greyscale-700);font:var(--goa-typography-body-s)}.progress.svelte-quhy4b{display:flex;align-items:center;font:var(--goa-typography-body-xs);gap:0.5rem}progress.svelte-quhy4b{flex:1 1 auto;-webkit-appearance:none;-moz-appearance:none;appearance:none;height:4px;border:none;border-radius:var(--goa-border-radius-m);background:var(--goa-color-greyscale-200);color:var(--goa-color-greyscale-700)}progress.svelte-quhy4b::-webkit-progress-value{background:var(--goa-color-interactive-default)}progress.svelte-quhy4b::-webkit-progress-bar{background:var(--goa-color-greyscale-200)}progress.svelte-quhy4b::-moz-progress-bar{background:var(--goa-color-interactive-default)}`);
 }
-function qu(t) {
+function Au(t) {
   let e;
   return {
     c() {
@@ -28851,7 +28851,7 @@ function qu(t) {
     }
   };
 }
-function Au(t) {
+function Su(t) {
   let e;
   return {
     c() {
@@ -28903,7 +28903,7 @@ function Hn(t) {
     }
   };
 }
-function Su(t) {
+function xu(t) {
   let e, o, i, n;
   return {
     c() {
@@ -29074,7 +29074,7 @@ function Zu(t) {
   function g(L, j) {
     return (
       /*_status*/
-      L[6] === "uploaded" ? Au : qu
+      L[6] === "uploaded" ? Su : Au
     );
   }
   let v = g(t), m = v(t), b = (
@@ -29093,7 +29093,7 @@ function Zu(t) {
     if (
       /*_status*/
       L[6] === "error"
-    ) return Su;
+    ) return xu;
   }
   let p = w(t), k = p && p(t);
   function z(L, j) {
@@ -29117,7 +29117,7 @@ function Zu(t) {
         /*filename*/
         t[0]
       ), a = W(), b && b.c(), d = W(), k && k.c(), c = W(), s = C("div"), N && N.c(), f(l, "class", "filename svelte-quhy4b"), f(l, "data-testid", "filename"), f(n, "class", "details svelte-quhy4b"), f(s, "class", "actions svelte-quhy4b"), f(s, "data-testid", "actions"), f(o, "data-testid", "root"), f(o, "class", u = Ze(`root ${/*_status*/
-      t[6]}`) + " svelte-quhy4b"), T(
+      t[6]}`) + " svelte-quhy4b"), I(
         o,
         "error",
         /*error*/
@@ -29142,7 +29142,7 @@ function Zu(t) {
       L[6] !== "error" ? b ? b.p(L, j) : (b = Hn(L), b.c(), b.m(n, d)) : b && (b.d(1), b = null), p === (p = w(L)) && k ? k.p(L, j) : (k && k.d(1), k = p && p(L), k && (k.c(), k.m(n, null))), M === (M = z(L)) && N ? N.p(L, j) : (N && N.d(1), N = M && M(L), N && (N.c(), N.m(s, null))), j & /*_status*/
       64 && u !== (u = Ze(`root ${/*_status*/
       L[6]}`) + " svelte-quhy4b") && f(o, "class", u), j & /*_status, error*/
-      72 && T(
+      72 && I(
         o,
         "error",
         /*error*/
@@ -29230,7 +29230,7 @@ class Yu extends ze {
         testid: 4,
         version: 5
       },
-      Iu
+      qu
     );
   }
   get filename() {
@@ -29585,10 +29585,10 @@ function Gu(t, e, o) {
     return v(Z) ? m(Z) ? null : `The file must be less than ${l}` : "Invalid file type";
   }
   function v(Z) {
-    const V = n.split(",").map((Y) => Y.trim()), B = Z.type.toLowerCase(), S = Z.name.toLowerCase();
+    const V = n.split(",").map((Y) => Y.trim()), B = Z.type.toLowerCase(), x = Z.name.toLowerCase();
     for (const Y of V) {
-      const I = Y.toLowerCase();
-      if (B.match(I.replace("*", ".*")) || S.endsWith(I))
+      const q = Y.toLowerCase();
+      if (B.match(q.replace("*", ".*")) || x.endsWith(q))
         return true;
     }
     return false;
@@ -29597,13 +29597,13 @@ function Gu(t, e, o) {
     const V = l.match(/(\d*)(\w*$)/);
     if (!V)
       return false;
-    const B = V[1], S = V[2], Y = {
+    const B = V[1], x = V[2], Y = {
       B: 1,
       KB: 1024,
       MB: Math.pow(1024, 2),
       GB: Math.pow(1024, 3)
     };
-    return !(Z.size / Y[S] > parseInt(B));
+    return !(Z.size / Y[x] > parseInt(B));
   }
   function b(Z) {
     d.dispatchEvent(new CustomEvent("_selectFile", { composed: true, detail: { file: Z } }));
@@ -29613,25 +29613,25 @@ function Gu(t, e, o) {
   }
   function p(Z) {
     var V, B;
-    Z.preventDefault(), o(8, u = []), (V = Z.dataTransfer) != null && V.items ? [...Z.dataTransfer.items].forEach((S) => {
-      if (S.kind === "file") {
-        const Y = S.getAsFile();
+    Z.preventDefault(), o(8, u = []), (V = Z.dataTransfer) != null && V.items ? [...Z.dataTransfer.items].forEach((x) => {
+      if (x.kind === "file") {
+        const Y = x.getAsFile();
         if (Y) {
-          const I = g(Y);
-          if (I) {
-            o(8, u = [{ filename: Y.name, error: I }, ...u]);
+          const q = g(Y);
+          if (q) {
+            o(8, u = [{ filename: Y.name, error: q }, ...u]);
             return;
           }
           b(Y);
         }
       }
-    }) : [...(B = Z.dataTransfer) == null ? void 0 : B.files].forEach((S) => {
-      const Y = g(S);
+    }) : [...(B = Z.dataTransfer) == null ? void 0 : B.files].forEach((x) => {
+      const Y = g(x);
       if (Y) {
-        o(8, u = [{ filename: S.name, error: Y }, ...u]);
+        o(8, u = [{ filename: x.name, error: Y }, ...u]);
         return;
       }
-      b(S);
+      b(x);
     }), o(6, c.value = "", c);
   }
   function k() {
@@ -29662,7 +29662,7 @@ function Gu(t, e, o) {
       d = Z, o(5, d);
     });
   }
-  function x(Z) {
+  function T(Z) {
     ce[Z ? "unshift" : "push"](() => {
       c = Z, o(6, c);
     });
@@ -29688,7 +29688,7 @@ function Gu(t, e, o) {
     L,
     j,
     H,
-    x
+    T
   ];
 }
 class Ku extends ze {
@@ -29793,12 +29793,12 @@ function Ju(t) {
         "aria-label",
         /*chipAriaLabel*/
         t[13]
-      ), T(
+      ), I(
         e,
         "error",
         /*_error*/
         t[12]
-      ), T(
+      ), I(
         e,
         "focused",
         /*_focused*/
@@ -29886,13 +29886,13 @@ function Ju(t) {
         /*chipAriaLabel*/
         g[13]
       ), v & /*_error*/
-      4096 && T(
+      4096 && I(
         e,
         "error",
         /*_error*/
         g[12]
       ), v & /*_focused*/
-      2048 && T(
+      2048 && I(
         e,
         "focused",
         /*_focused*/
@@ -29937,7 +29937,7 @@ function $u(t) {
         t[2],
         /*ml*/
         t[3]
-      )), T(
+      )), I(
         e,
         "error",
         /*_error*/
@@ -29984,7 +29984,7 @@ function $u(t) {
         /*ml*/
         b[3]
       )) && f(e, "style", s), w & /*_error*/
-      4096 && T(
+      4096 && I(
         e,
         "error",
         /*_error*/
@@ -30096,12 +30096,12 @@ function t0(t, e, o) {
       b = V, o(9, b);
     });
   }
-  const j = () => o(10, w = true), H = () => o(10, w = false), x = () => o(11, p = true), Z = () => o(11, p = false);
+  const j = () => o(10, w = true), H = () => o(10, w = false), T = () => o(11, p = true), Z = () => o(11, p = false);
   return t.$$set = (V) => {
     "mt" in V && o(0, n = V.mt), "mr" in V && o(1, l = V.mr), "mb" in V && o(2, r = V.mb), "ml" in V && o(3, a = V.ml), "error" in V && o(16, d = V.error), "content" in V && o(4, c = V.content), "secondarytext" in V && o(5, s = V.secondarytext), "leadingicon" in V && o(6, u = V.leadingicon), "testid" in V && o(7, g = V.testid), "ariaLabel" in V && o(17, v = V.ariaLabel), "version" in V && o(8, m = V.version);
   }, t.$$.update = () => {
     t.$$.dirty & /*error*/
-    65536 && o(12, k = Ae(d)), t.$$.dirty & /*ariaLabel, content*/
+    65536 && o(12, k = Se(d)), t.$$.dirty & /*ariaLabel, content*/
     131088 && o(13, i = v || `${c}, removable`);
   }, [
     n,
@@ -30126,7 +30126,7 @@ function t0(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     Z
   ];
 }
@@ -30511,13 +30511,13 @@ function v0(t) {
   let z = k(t), M = z && z(t);
   return {
     c() {
-      e = C("div"), o = C("div"), i = C("div"), m && m.c(), n = W(), b && b.c(), l = W(), r = C("div"), a = C("div"), p && p.c(), d = W(), c = C("div"), M && M.c(), f(i, "class", "nav-links svelte-1r2dsgu"), f(a, "class", "meta-links svelte-1r2dsgu"), f(c, "class", "abgov svelte-1r2dsgu"), T(
+      e = C("div"), o = C("div"), i = C("div"), m && m.c(), n = W(), b && b.c(), l = W(), r = C("div"), a = C("div"), p && p.c(), d = W(), c = C("div"), M && M.c(), f(i, "class", "nav-links svelte-1r2dsgu"), f(a, "class", "meta-links svelte-1r2dsgu"), f(c, "class", "abgov svelte-1r2dsgu"), I(
         c,
         "with-meta-links",
         /*metaLinks*/
         t[6] && /*metaLinks*/
         t[6].length > 0
-      ), f(r, "class", "meta-section svelte-1r2dsgu"), T(
+      ), f(r, "class", "meta-section svelte-1r2dsgu"), I(
         r,
         "with-meta-links",
         /*metaLinks*/
@@ -30532,7 +30532,7 @@ function v0(t) {
       ), ot(() => (
         /*div5_elementresize_handler*/
         t[11].call(e)
-      )), T(
+      )), I(
         e,
         "v2",
         /*version*/
@@ -30586,14 +30586,14 @@ function v0(t) {
         ),
         Gn
       ), z === (z = k(L)) && M ? M.p(L, j) : (M && M.d(1), M = z && z(L), M && (M.c(), M.m(c, null))), (!g || j & /*metaLinks*/
-      64) && T(
+      64) && I(
         c,
         "with-meta-links",
         /*metaLinks*/
         L[6] && /*metaLinks*/
         L[6].length > 0
       ), (!g || j & /*metaLinks*/
-      64) && T(
+      64) && I(
         r,
         "with-meta-links",
         /*metaLinks*/
@@ -30608,7 +30608,7 @@ function v0(t) {
         /*testid*/
         L[1]
       ), (!g || j & /*version*/
-      8) && T(
+      8) && I(
         e,
         "v2",
         /*version*/
@@ -31263,83 +31263,83 @@ function E0(t, e, o) {
     j(), H(), v(), N0();
   });
   function v() {
-    rt(a, (I, A, O) => {
-      switch (I) {
+    rt(a, (q, S, O) => {
+      switch (q) {
         case di:
-          p(A), O.stopPropagation();
+          p(S), O.stopPropagation();
           break;
         case hs:
           k(), O.stopPropagation();
           break;
         case ui:
-          z(A), O.stopPropagation();
+          z(S), O.stopPropagation();
           break;
         case ut:
-          M(A), O.stopPropagation();
+          M(S), O.stopPropagation();
           break;
-        case So:
-          m(A), O.stopPropagation();
+        case xo:
+          m(S), O.stopPropagation();
           break;
         case ac:
-          N(A), O.stopPropagation();
+          N(S), O.stopPropagation();
           break;
         case _s:
-          B(A), O.stopPropagation();
+          B(S), O.stopPropagation();
           break;
-        case Ao:
+        case So:
           w(O), O.stopPropagation();
           break;
       }
     });
   }
-  function m(I) {
-    I.active && (s = JSON.parse(JSON.stringify({ ...c })));
+  function m(q) {
+    q.active && (s = JSON.parse(JSON.stringify({ ...c })));
   }
   function b() {
-    for (const I of Object.keys(c))
-      c[I].value = "";
+    for (const q of Object.keys(c))
+      c[q].value = "";
   }
-  function w(I) {
-    b(), I.stopPropagation();
-    for (const A of Object.values(g))
-      Oe(A, Dt);
+  function w(q) {
+    b(), q.stopPropagation();
+    for (const S of Object.values(g))
+      Oe(S, Dt);
   }
-  function p(I) {
-    if (I.value.type === "details") {
-      for (const [A, O] of Object.entries(I.value.fieldsets))
-        c[A] = { ...O };
-      for (const [A, O] of Object.entries(c))
-        O.value && Oe(g[A], xt, { name: A, value: O.value });
+  function p(q) {
+    if (q.value.type === "details") {
+      for (const [S, O] of Object.entries(q.value.fieldsets))
+        c[S] = { ...O };
+      for (const [S, O] of Object.entries(c))
+        O.value && Oe(g[S], Tt, { name: S, value: O.value });
     }
   }
   function k() {
     o(1, d = {});
-    for (const [I, A] of Object.entries(g))
-      Oe(A, zt, null);
-    for (const [I, { el: A }] of Object.entries(u))
-      Oe(A, zt, null);
+    for (const [q, S] of Object.entries(g))
+      Oe(S, zt, null);
+    for (const [q, { el: S }] of Object.entries(u))
+      Oe(S, zt, null);
   }
-  function z(I) {
-    const { id: A, label: O, el: K, order: F } = I;
-    u[A] = { label: O, el: K };
-    const q = Object.keys(u).length;
-    c[A] = {
-      name: A,
+  function z(q) {
+    const { id: S, label: O, el: K, order: F } = q;
+    u[S] = { label: O, el: K };
+    const A = Object.keys(u).length;
+    c[S] = {
+      name: S,
       value: "",
       label: O,
-      order: F || q
+      order: F || A
     };
   }
-  function M(I) {
-    const { name: A, el: O } = I;
-    A && (g[A] = O);
+  function M(q) {
+    const { name: S, el: O } = q;
+    S && (g[S] = O);
   }
-  function N(I) {
-    I.grouped && Object.values(d).includes(I.msg) || o(1, d[I.name] = I.msg, d), Oe(g[I.name], Mt, { error: I.msg }), Oe(u[I.name].el, Mt, { error: I.msg });
+  function N(q) {
+    q.grouped && Object.values(d).includes(q.msg) || o(1, d[q.name] = q.msg, d), Oe(g[q.name], Mt, { error: q.msg }), Oe(u[q.name].el, Mt, { error: q.msg });
   }
   function L() {
-    for (const [I, A] of Object.entries(g))
-      s[I] && Oe(A, xt, { name: I, value: s[I].value });
+    for (const [q, S] of Object.entries(g))
+      s[q] && Oe(S, Tt, { name: q, value: s[q].value });
   }
   function j() {
     setTimeout(
@@ -31350,7 +31350,7 @@ function E0(t, e, o) {
           {
             id: l,
             el: a,
-            cb: (I) => o(3, l = I)
+            cb: (q) => o(3, l = q)
           },
           { bubbles: true, timeout: 10 }
         );
@@ -31359,42 +31359,42 @@ function E0(t, e, o) {
     );
   }
   function H() {
-    a.addEventListener("_change", (I) => {
-      x(I);
-    }), a.addEventListener("_revealChange", (I) => {
-      x(I);
+    a.addEventListener("_change", (q) => {
+      T(q);
+    }), a.addEventListener("_revealChange", (q) => {
+      T(q);
     });
   }
-  function x(I) {
-    const { name: A, value: O, label: K, labels: F } = I.detail;
-    u[A] && (c[A].value = O, K && (c[A].valueLabel = K), F && (c[A].labels = F), r === "change" && Object.keys(c).length > 0 && Z(), I.stopPropagation());
+  function T(q) {
+    const { name: S, value: O, label: K, labels: F } = q.detail;
+    u[S] && (c[S].value = O, K && (c[S].valueLabel = K), F && (c[S].labels = F), r === "change" && Object.keys(c).length > 0 && Z(), q.stopPropagation());
   }
   function Z() {
     Oe(a, Ho, { id: l, state: { data: c }, dispatchOn: r }, { bubbles: true });
   }
-  function V(I, A) {
-    g[A].focus(), I.preventDefault();
+  function V(q, S) {
+    g[S].focus(), q.preventDefault();
   }
-  function B(I) {
-    Object.keys(c).length > 0 && !I.cancelled && Z(), I.cancelled && (L(), c = s), Ee(
+  function B(q) {
+    Object.keys(c).length > 0 && !q.cancelled && Z(), q.cancelled && (L(), c = s), Ee(
       a,
       "_continue",
       {
         el: a,
         state: c,
-        cancelled: I.cancelled
+        cancelled: q.cancelled
       },
       { bubbles: true }
     );
   }
-  const S = (I, A) => V(A, I);
-  function Y(I) {
-    ce[I ? "unshift" : "push"](() => {
-      a = I, o(0, a);
+  const x = (q, S) => V(S, q);
+  function Y(q) {
+    ce[q ? "unshift" : "push"](() => {
+      a = q, o(0, a);
     });
   }
-  return t.$$set = (I) => {
-    "id" in I && o(3, l = I.id), "dispatchOn" in I && o(4, r = I.dispatchOn), "$$scope" in I && o(5, n = I.$$scope);
+  return t.$$set = (q) => {
+    "id" in q && o(3, l = q.id), "dispatchOn" in q && o(4, r = q.dispatchOn), "$$scope" in q && o(5, n = q.$$scope);
   }, [
     a,
     d,
@@ -31403,7 +31403,7 @@ function E0(t, e, o) {
     r,
     n,
     i,
-    S,
+    x,
     Y
   ];
 }
@@ -31425,7 +31425,7 @@ class D0 extends ze {
   }
 }
 customElements.define("goa-fieldset", Ce(D0, { id: {}, dispatchOn: { attribute: "dispatch-on" } }, ["default"], [], true));
-function x0(t) {
+function T0(t) {
   let e, o, i, n, l, r, a;
   const d = (
     /*#slots*/
@@ -31440,7 +31440,7 @@ function x0(t) {
   return {
     c() {
       e = C("div"), o = W(), i = C("form"), n = C("div"), c && c.c(), f(i, "data-id", l = `form: ${/*name*/
-      t[1]}`), f(i, "style", r = Ie(
+      t[1]}`), f(i, "style", r = qe(
         "visibility",
         /*status*/
         t[0] === "complete" ? "visible" : "hidden"
@@ -31471,7 +31471,7 @@ function x0(t) {
       ), (!a || u[0] & /*name*/
       2 && l !== (l = `form: ${/*name*/
       s[1]}`)) && f(i, "data-id", l), (!a || u[0] & /*status*/
-      1 && r !== (r = Ie(
+      1 && r !== (r = qe(
         "visibility",
         /*status*/
         s[0] === "complete" ? "visible" : "hidden"
@@ -31498,13 +31498,13 @@ function al() {
     status: "not-started"
   };
 }
-function T0(t, e, o) {
+function I0(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { status: l = "complete" } = e, { name: r = "[name] not set" } = e, a, d, c, s = {}, u = {}, g = {}, v, m, b, w, p;
   De(() => {
     Ee(a, "_init", { el: a }, { bubbles: true }), z(), k(), p = al();
   });
   function k() {
-    c.addEventListener(qo, (P) => {
+    c.addEventListener(Ao, (P) => {
       const G = P.detail;
       if (G.type === "details") {
         console.warn("Form:addSubformRelayListener", r, "received details type, ignoring");
@@ -31531,7 +31531,7 @@ function T0(t, e, o) {
           H(G);
           break;
         case Oo:
-          q();
+          A();
           break;
         case Ho:
           Z(G);
@@ -31543,16 +31543,16 @@ function T0(t, e, o) {
           V(G);
           break;
         case zs:
-          S(G);
+          x(G);
           break;
         case ci:
-          I();
+          q();
           break;
         case ks:
           Q(G);
           break;
-        case Ao:
-          A();
+        case So:
+          S();
           break;
       }
     });
@@ -31576,10 +31576,10 @@ function T0(t, e, o) {
       heading: P.heading
     }, b = Rt(b, () => {
       const [G] = Object.entries(g)[0];
-      x(G), F(G);
+      T(G), F(G);
     });
   }
-  function x(P) {
+  function T(P) {
     if (p.history.includes(P)) {
       console.warn("Form:addToHistory", r, "history already contains id", P);
       return;
@@ -31604,7 +31604,7 @@ function T0(t, e, o) {
       const se = p.history.indexOf(p.editting) + 1;
       p.editting = "", p.history[se] === G ? F(J) : (p.history = [...p.history.slice(0, se), G], F(G), Y(""));
     } else
-      K(J), J !== G && x(G), F(G);
+      K(J), J !== G && T(G), F(G);
     B();
   }
   function B() {
@@ -31614,21 +31614,21 @@ function T0(t, e, o) {
       {}
     ), Oe(v, Kt, P);
   }
-  function S(P) {
+  function x(P) {
     p.editting = P.id, F(P.id), Y(P.id);
   }
   function Y(P) {
     for (const G of Object.values(g))
       Oe(G.el, bs, { id: P });
   }
-  function I() {
+  function q() {
     O("complete", 0), Ee(a, "_complete", { ...p, status: "complete" }, { bubbles: true });
   }
-  function A() {
+  function S() {
     const P = p.history[0];
-    p = al(), x(P);
+    p = al(), T(P);
     for (const { el: J } of Object.values(u))
-      Oe(J, Ao);
+      Oe(J, So);
     B();
     const [G] = Object.entries(g)[0];
     F(G);
@@ -31639,7 +31639,7 @@ function T0(t, e, o) {
       () => {
         Ee(
           a,
-          qo,
+          Ao,
           {
             type: "details",
             data: {
@@ -31663,10 +31663,10 @@ function T0(t, e, o) {
   }
   function F(P) {
     Object.keys(g).forEach((J) => {
-      Oe(g[J].el, So, { active: J === P });
+      Oe(g[J].el, xo, { active: J === P });
     });
   }
-  function q(P) {
+  function A(P) {
     const G = p.history;
     if (G.length === 1) {
       Oe(d, Oo, null, { bubbles: true });
@@ -31685,7 +31685,7 @@ function T0(t, e, o) {
           F(ie.id);
         } else {
           const [ie] = Object.entries(g)[0];
-          x(ie), F(ie);
+          T(ie), F(ie);
         }
         B(), O(p.history.length > 1 ? "in-progress" : "not-started"), R();
       },
@@ -31739,9 +31739,9 @@ function T0(t, e, o) {
     te
   ];
 }
-class I0 extends ze {
+class q0 extends ze {
   constructor(e) {
-    super(), ke(this, e, T0, x0, we, { status: 0, name: 1 }, null, [-1, -1]);
+    super(), ke(this, e, I0, T0, we, { status: 0, name: 1 }, null, [-1, -1]);
   }
   get status() {
     return this.$$.ctx[0];
@@ -31756,7 +31756,7 @@ class I0 extends ze {
     this.$$set({ name: e }), y();
   }
 }
-customElements.define("goa-public-form", Ce(I0, { status: {}, name: {} }, ["default"], [], true));
+customElements.define("goa-public-form", Ce(q0, { status: {}, name: {} }, ["default"], [], true));
 function sl(t) {
   let e, o, i = (
     /*backUrl*/
@@ -31786,7 +31786,7 @@ function dl(t) {
   function o(l, r) {
     return (
       /*backUrl*/
-      l[5] === "#" ? A0 : q0
+      l[5] === "#" ? S0 : A0
     );
   }
   let i = o(t), n = i(t);
@@ -31805,7 +31805,7 @@ function dl(t) {
     }
   };
 }
-function q0(t) {
+function A0(t) {
   let e, o;
   return {
     c() {
@@ -31833,7 +31833,7 @@ function q0(t) {
     }
   };
 }
-function A0(t) {
+function S0(t) {
   let e;
   return {
     c() {
@@ -31960,7 +31960,7 @@ function vl(t) {
     if (
       /*buttonVisibility*/
       a[7] === "visible"
-    ) return S0;
+    ) return x0;
   }
   let l = n(t), r = l && l(t);
   return {
@@ -31999,7 +31999,7 @@ function hl(t) {
     }
   };
 }
-function S0(t) {
+function x0(t) {
   let e, o = (
     /*buttonText*/
     (t[0] || "Continue") + ""
@@ -32157,22 +32157,22 @@ function P0(t, e, o) {
   function H() {
     rt(M, (R, ee, oe) => {
       switch (R) {
-        case So:
+        case xo:
           B(ee), oe.stopPropagation();
           break;
         case bs:
-          S(ee), oe.stopPropagation();
+          x(ee), oe.stopPropagation();
           break;
         case Ho:
           V(ee), oe.stopPropagation();
           break;
         case $t:
-          x(oe, ee), oe.stopPropagation();
+          T(oe, ee), oe.stopPropagation();
           break;
       }
     });
   }
-  function x(R, ee) {
+  function T(R, ee) {
     var oe;
     R.stopPropagation(), N = ee.el, (oe = ee.cb) == null || oe.call(ee, r), Oe(z, $t, { ...ee, id: r }, { bubbles: true });
   }
@@ -32196,22 +32196,22 @@ function P0(t, e, o) {
     );
   }
   function B(R) {
-    o(13, L = R.active), Oe(N, So, { active: L });
+    o(13, L = R.active), Oe(N, xo, { active: L });
   }
-  function S(R) {
+  function x(R) {
     o(16, j = R.id);
   }
   function Y(R = false) {
     N ? Oe(N, _s, { cancelled: R }) : Ee(z, "_continue", null, { bubbles: true });
   }
-  function I() {
+  function q() {
     Y(), Oe(z, ci, null, { bubbles: true });
   }
-  function A(R) {
+  function S(R) {
     Oe(z, Oo, null, { bubbles: true }), R.stopPropagation();
   }
-  const O = () => Y(true), K = () => I(), F = () => Y();
-  function q(R) {
+  const O = () => Y(true), K = () => q(), F = () => Y();
+  function A(R) {
     ce[R ? "unshift" : "push"](() => {
       M = R, o(15, M);
     });
@@ -32248,15 +32248,15 @@ function P0(t, e, o) {
     M,
     j,
     Y,
-    I,
-    A,
+    q,
+    S,
     d,
     n,
     i,
     O,
     K,
     F,
-    q,
+    A,
     Q
   ];
 }
@@ -32434,7 +32434,7 @@ function Cl(t) {
     t[2].history
   ), i = [];
   for (let n = 0; n < o.length; n += 1)
-    i[n] = Il(ml(t, o, n));
+    i[n] = ql(ml(t, o, n));
   return {
     c() {
       for (let n = 0; n < i.length; n += 1)
@@ -32456,7 +32456,7 @@ function Cl(t) {
         let r;
         for (r = 0; r < o.length; r += 1) {
           const a = ml(n, o, r);
-          i[r] ? i[r].p(a, l) : (i[r] = Il(a), i[r].c(), i[r].m(e.parentNode, e));
+          i[r] ? i[r].p(a, l) : (i[r] = ql(a), i[r].c(), i[r].m(e.parentNode, e));
         }
         for (; r < i.length; r += 1)
           i[r].d(1);
@@ -32486,7 +32486,7 @@ function zl(t) {
   return {
     c() {
       e = C("goa-container"), o = C("div"), g && g.c(), n = W(), l = C("div"), v && v.c(), r = W(), a = C("div"), d = C("goa-link"), c = C("a"), c.textContent = "Change", u = W(), f(l, "class", "data svelte-uwie2c"), f(c, "href", "#"), f(c, "tabindex", "0"), f(c, "class", "svelte-uwie2c"), h(d, "leadingicon", "pencil"), h(d, "action", "change"), h(d, "action-arg", s = /*page*/
-      t[11]), f(a, "class", "action svelte-uwie2c"), f(o, "class", "summary svelte-uwie2c"), T(o, "summary-with-header", !!/*getHeading*/
+      t[11]), f(a, "class", "action svelte-uwie2c"), f(o, "class", "summary svelte-uwie2c"), I(o, "summary-with-header", !!/*getHeading*/
       t[3](
         /*page*/
         t[11]
@@ -32509,7 +32509,7 @@ function zl(t) {
       ]) == null ? void 0 : k.data) != null && z.type ? v ? v.p(w, p) : (v = jl(w), v.c(), v.m(l, null)) : v && (v.d(1), v = null), p & /*_state*/
       4 && s !== (s = /*page*/
       w[11]) && h(d, "action-arg", s), p & /*getHeading, _state*/
-      12 && T(o, "summary-with-header", !!/*getHeading*/
+      12 && I(o, "summary-with-header", !!/*getHeading*/
       w[3](
         /*page*/
         w[11]
@@ -32628,7 +32628,7 @@ function F0(t) {
     t[11]
   ))), i = [];
   for (let n = 0; n < o.length; n += 1)
-    i[n] = Tl(_l(t, o, n));
+    i[n] = Il(_l(t, o, n));
   return {
     c() {
       e = C("table");
@@ -32653,7 +32653,7 @@ function F0(t) {
         let r;
         for (r = 0; r < o.length; r += 1) {
           const a = _l(n, o, r);
-          i[r] ? i[r].p(a, l) : (i[r] = Tl(a), i[r].c(), i[r].m(e, null));
+          i[r] ? i[r].p(a, l) : (i[r] = Il(a), i[r].c(), i[r].m(e, null));
         }
         for (; r < i.length; r += 1)
           i[r].d(1);
@@ -32799,7 +32799,7 @@ function Nl(t) {
   let s = c(t, -1), u = s(t);
   return {
     c() {
-      e = C("tr"), o = C("td"), n = ae(i), l = W(), r = C("td"), u.c(), d = W(), f(o, "class", "label svelte-uwie2c"), f(r, "class", "value svelte-uwie2c"), T(r, "empty", vo(
+      e = C("tr"), o = C("td"), n = ae(i), l = W(), r = C("td"), u.c(), d = W(), f(o, "class", "label svelte-uwie2c"), f(r, "class", "value svelte-uwie2c"), I(r, "empty", vo(
         /*data*/
         t[15].value
       )), f(e, "class", "svelte-uwie2c");
@@ -32811,7 +32811,7 @@ function Nl(t) {
       v & /*_state*/
       4 && i !== (i = /*data*/
       g[15].label + "") && me(n, i), s === (s = c(g, v)) && u ? u.p(g, v) : (u.d(1), u = s(g), u && (u.c(), u.m(r, null))), v & /*isBlank, Object, getDataList, _state*/
-      4 && T(r, "empty", vo(
+      4 && I(r, "empty", vo(
         /*data*/
         g[15].value
       ));
@@ -32943,7 +32943,7 @@ function Q0(t) {
     )
   ), i = [];
   for (let n = 0; n < o.length; n += 1)
-    i[n] = xl(yl(t, o, n));
+    i[n] = Tl(yl(t, o, n));
   return {
     c() {
       for (let n = 0; n < i.length; n += 1)
@@ -32972,7 +32972,7 @@ function Q0(t) {
         let r;
         for (r = 0; r < o.length; r += 1) {
           const a = yl(n, o, r);
-          i[r] ? i[r].p(a, l) : (i[r] = xl(a), i[r].c(), i[r].m(e.parentNode, e));
+          i[r] ? i[r].p(a, l) : (i[r] = Tl(a), i[r].c(), i[r].m(e.parentNode, e));
         }
         for (; r < i.length; r += 1)
           i[r].d(1);
@@ -32984,7 +32984,7 @@ function Q0(t) {
     }
   };
 }
-function xl(t) {
+function Tl(t) {
   let e, o = (
     /*label*/
     t[18] + ""
@@ -33006,7 +33006,7 @@ function xl(t) {
     }
   };
 }
-function Tl(t) {
+function Il(t) {
   let e, o, i = (
     /*data*/
     t[15].label + ""
@@ -33028,7 +33028,7 @@ function Tl(t) {
   let s = c(t, -1), u = s(t);
   return {
     c() {
-      e = C("tr"), o = C("td"), n = ae(i), l = W(), r = C("td"), u.c(), d = W(), f(o, "class", "label svelte-uwie2c"), f(r, "class", "value svelte-uwie2c"), T(r, "empty", vo(
+      e = C("tr"), o = C("td"), n = ae(i), l = W(), r = C("td"), u.c(), d = W(), f(o, "class", "label svelte-uwie2c"), f(r, "class", "value svelte-uwie2c"), I(r, "empty", vo(
         /*data*/
         t[15].value
       )), f(e, "class", "svelte-uwie2c");
@@ -33040,7 +33040,7 @@ function Tl(t) {
       v & /*_state*/
       4 && i !== (i = /*data*/
       g[15].label + "") && me(n, i), s === (s = c(g, v)) && u ? u.p(g, v) : (u.d(1), u = s(g), u && (u.c(), u.m(r, null))), v & /*isBlank, Object, getData, _state*/
-      4 && T(r, "empty", vo(
+      4 && I(r, "empty", vo(
         /*data*/
         g[15].value
       ));
@@ -33050,7 +33050,7 @@ function Tl(t) {
     }
   };
 }
-function Il(t) {
+function ql(t) {
   let e, o = (
     /*_state*/
     t[2].form[
@@ -33214,7 +33214,7 @@ class X0 extends ze {
   }
 }
 customElements.define("goa-public-form-summary", Ce(X0, { heading: {} }, [], [], true));
-const J0 = (t) => ({}), ql = (t) => ({});
+const J0 = (t) => ({}), Al = (t) => ({});
 function $0(t) {
   let e, o, i, n, l, r, a, d, c;
   const s = (
@@ -33225,7 +33225,7 @@ function $0(t) {
     t,
     /*$$scope*/
     t[10],
-    ql
+    Al
   ), g = (
     /*#slots*/
     t[11].default
@@ -33238,7 +33238,7 @@ function $0(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("section"), u && u.c(), n = W(), l = C("goa-public-form"), v && v.c(), f(o, "style", i = Ie("display", `${/*_mode*/
+      e = C("div"), o = C("section"), u && u.c(), n = W(), l = C("goa-public-form"), v && v.c(), f(o, "style", i = qe("display", `${/*_mode*/
       t[5] === "index" ? "block" : "none"}`)), h(
         l,
         "name",
@@ -33298,9 +33298,9 @@ function $0(t) {
           /*$$scope*/
           m[10]
         ),
-        ql
+        Al
       ), (!a || b[0] & /*_mode*/
-      32 && i !== (i = Ie("display", `${/*_mode*/
+      32 && i !== (i = qe("display", `${/*_mode*/
       m[5] === "index" ? "block" : "none"}`))) && f(o, "style", i), v && v.p && (!a || b[0] & /*$$scope*/
       1024) && ge(
         v,
@@ -33358,7 +33358,7 @@ function ef(t) {
 function tf(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { id: l = "" } = e, { name: r } = e, { backUrl: a = "" } = e, { dispatchOn: d = "continue" } = e, c, s, u, g = [], v = "index";
   De(() => {
-    w(), S(), B(), b();
+    w(), x(), B(), b();
   });
   function m(F) {
     F.stopPropagation(), c = F.detail.el, Ee(u, "_init", { el: s }, { bubbles: true });
@@ -33373,19 +33373,19 @@ function tf(t, e, o) {
     );
   }
   function w() {
-    rt(s, (F, q, Q) => {
+    rt(s, (F, A, Q) => {
       switch (Q.stopPropagation(), F) {
         case Kt:
-          x(q);
+          T(A);
           break;
         case di:
-          V(q);
+          V(A);
           break;
         case Oo:
           p();
           break;
         case $t:
-          Z(q);
+          Z(A);
           break;
         case ws:
           L();
@@ -33394,16 +33394,16 @@ function tf(t, e, o) {
           j();
           break;
         case ks:
-          N(q);
+          N(A);
           break;
         case ei:
-          Oe(c, ei, q);
+          Oe(c, ei, A);
           break;
         case rc:
-          k(q);
+          k(A);
           break;
         case ci:
-          A(Q);
+          S(Q);
           break;
       }
     });
@@ -33425,7 +33425,7 @@ function tf(t, e, o) {
     o(5, v = "form"), Oe(c, Kt, g[F]);
   }
   function M(F) {
-    g = [...g.slice(0, F), ...g.slice(F + 1)], Ee(u, qo, { type: "list", data: g, id: l }, { bubbles: true });
+    g = [...g.slice(0, F), ...g.slice(F + 1)], Ee(u, Ao, { type: "list", data: g, id: l }, { bubbles: true });
   }
   function N(F) {
     g = F, H();
@@ -33439,36 +33439,36 @@ function tf(t, e, o) {
   function H() {
     g.length;
   }
-  function x(F) {
-    Array.isArray(F) && (g = F, I());
+  function T(F) {
+    Array.isArray(F) && (g = F, q());
   }
   function Z(F) {
-    const { id: q, el: Q } = F;
+    const { id: A, el: Q } = F;
   }
   function V(F) {
-    for (const [q, Q] of Object.entries(F))
-      g[q] = { ...Q };
+    for (const [A, Q] of Object.entries(F))
+      g[A] = { ...Q };
   }
   function B() {
     Oe(u, ms, { id: l, el: s }, { bubbles: true, timeout: 10 });
   }
-  function S() {
+  function x() {
     Oe(u, $t, { id: l, el: s }, { bubbles: true, timeout: 10 });
   }
   function Y(F) {
-    const q = F.detail;
-    if (q.type === "list") {
+    const A = F.detail;
+    if (A.type === "list") {
       console.warn("SubForm: onChildFormStateChange: list not supported");
       return;
     }
-    const Q = g.findIndex((ee) => ee.uuid === q.data.uuid), R = JSON.parse(JSON.stringify(q.data));
-    Q >= 0 ? g[Q] = R : g.push(R), I(), F.stopPropagation();
+    const Q = g.findIndex((ee) => ee.uuid === A.data.uuid), R = JSON.parse(JSON.stringify(A.data));
+    Q >= 0 ? g[Q] = R : g.push(R), q(), F.stopPropagation();
   }
-  function I() {
-    Ee(u, qo, { type: "list", data: g, id: l }, { bubbles: true });
+  function q() {
+    Ee(u, Ao, { type: "list", data: g, id: l }, { bubbles: true });
   }
-  function A(F) {
-    o(5, v = "index"), H(), Oe(c, Ao), F.stopPropagation();
+  function S(F) {
+    o(5, v = "index"), H(), Oe(c, So), F.stopPropagation();
   }
   function O(F) {
     ce[F ? "unshift" : "push"](() => {
@@ -33491,7 +33491,7 @@ function tf(t, e, o) {
     v,
     m,
     Y,
-    A,
+    S,
     l,
     n,
     i,
@@ -33823,7 +33823,7 @@ customElements.define("goa-public-form-task", Ce(cf, { status: {} }, ["default"]
 function uf(t) {
   je(t, "svelte-1ym28a", "fieldset.svelte-1ym28a{border:none;padding:0}");
 }
-function Al(t) {
+function Sl(t) {
   let e, o;
   return {
     c() {
@@ -33851,7 +33851,7 @@ function Al(t) {
 function ff(t) {
   let e, o, i, n, l, r = (
     /*heading*/
-    t[0] && Al(t)
+    t[0] && Sl(t)
   );
   const a = (
     /*#slots*/
@@ -33880,7 +33880,7 @@ function ff(t) {
       D(c, e, s), _(e, o), r && r.m(o, null), _(o, i), d && d.m(o, null), l = true;
     },
     p(c, [s]) {
-      c[0] ? r ? r.p(c, s) : (r = Al(c), r.c(), r.m(o, i)) : r && (r.d(1), r = null), d && d.p && (!l || s & /*$$scope*/
+      c[0] ? r ? r.p(c, s) : (r = Sl(c), r.c(), r.m(o, i)) : r && (r.d(1), r = null), d && d.p && (!l || s & /*$$scope*/
       32) && ge(
         d,
         a,
@@ -33966,7 +33966,7 @@ customElements.define("goa-public-form-task-list", Ce(vf, { heading: {}, mt: {},
 function hf(t) {
   je(t, "svelte-1mx6roj", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}.svelte-1mx6roj.svelte-1mx6roj.svelte-1mx6roj{box-sizing:border-box}.label.svelte-1mx6roj.svelte-1mx6roj.svelte-1mx6roj{display:block;font:var(--goa-form-item-label-typography);padding-bottom:var(--goa-form-item-label-padding-bottom)}.label.large.svelte-1mx6roj.svelte-1mx6roj.svelte-1mx6roj{font:var(--goa-form-item-label-large-typography);padding-bottom:var(--goa-form-item-label-large-padding-bottom)}.v2.compact.svelte-1mx6roj .label.svelte-1mx6roj.svelte-1mx6roj{font:var(--goa-form-item-label-compact-typography);padding-bottom:var(--goa-form-item-label-compact-padding-bottom)}.label.svelte-1mx6roj em.svelte-1mx6roj.svelte-1mx6roj{font:var(--goa-form-item-optional-label-typography);color:var(--goa-form-item-optional-label-color);margin-left:var(--goa-space-2xs)}.large.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-margin-top-large, var(--goa-form-item-message-margin-top, 0.75rem))}.regular.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-margin-top-regular, var(--goa-form-item-message-margin-top, 0.75rem))}.v2.compact.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-margin-top-compact, 0.5rem)}.large.checkbox-list.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj,.large.radio-group.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-margin-top-selection-large, var(--goa-form-item-message-margin-top, 0.75rem))}.regular.checkbox-list.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj,.regular.radio-group.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-margin-top-selection-regular, var(--goa-form-item-message-margin-top, 0.75rem))}.v2.compact.checkbox-list.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj,.v2.compact.radio-group.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-margin-top-selection-compact, 0.75rem)}.v2.svelte-1mx6roj .messages-container.svelte-1mx6roj.svelte-1mx6roj{display:flex;flex-direction:column;gap:var(--goa-form-item-message-stack-gap)}.v2.svelte-1mx6roj .messages-container.compact.svelte-1mx6roj.svelte-1mx6roj{gap:var(--goa-form-item-message-stack-gap-compact)}.error-msg.svelte-1mx6roj.svelte-1mx6roj.svelte-1mx6roj{display:flex;align-items:flex-start;gap:var(--goa-form-item-message-gap);font:var(--goa-form-item-message-typography);color:var(--goa-form-item-error-message-color)}.v2.compact.svelte-1mx6roj .error-msg.svelte-1mx6roj.svelte-1mx6roj{gap:var(--goa-form-item-message-gap-compact)}.error-text.svelte-1mx6roj.svelte-1mx6roj.svelte-1mx6roj{margin-top:0.0625rem}.v2.compact.svelte-1mx6roj .error-text.svelte-1mx6roj.svelte-1mx6roj{margin-top:0}.help-msg.svelte-1mx6roj.svelte-1mx6roj.svelte-1mx6roj{font:var(--goa-form-item-message-typography);color:var(--goa-form-item-help-message-color)}.error-msg.svelte-1mx6roj+.help-msg.svelte-1mx6roj.svelte-1mx6roj{margin-top:var(--goa-form-item-message-stack-gap, var(--goa-space-xs, 0.5rem))}.v2.svelte-1mx6roj .error-msg.svelte-1mx6roj+.help-msg.svelte-1mx6roj{margin-top:0}");
 }
-const mf = (t) => ({}), Sl = (t) => ({}), bf = (t) => ({}), Ol = (t) => ({});
+const mf = (t) => ({}), xl = (t) => ({}), bf = (t) => ({}), Ol = (t) => ({});
 function Hl(t) {
   let e, o, i, n = (
     /*requirement*/
@@ -34179,7 +34179,7 @@ function Zl(t) {
     t,
     /*$$scope*/
     t[21],
-    Sl
+    xl
   ), l = n || wf(t);
   return {
     c() {
@@ -34211,7 +34211,7 @@ function Zl(t) {
           /*$$scope*/
           r[21]
         ),
-        Sl
+        xl
       ) : l && l.p && (!o || a[0] & /*helptext*/
       256) && l.p(r, o ? a : [-1, -1]);
     },
@@ -34296,7 +34296,7 @@ function _f(t) {
       )}
     max-width: ${/*maxwidth*/
       t[10]};
-  `), T(
+  `), I(
         e,
         "v2",
         /*version*/
@@ -34357,7 +34357,7 @@ function _f(t) {
     max-width: ${/*maxwidth*/
       u[10]};
   `)) && f(e, "style", l), (!r || g[0] & /*labelsize, type, version*/
-      6272) && T(
+      6272) && I(
         e,
         "v2",
         /*version*/
@@ -34377,8 +34377,8 @@ function _f(t) {
 }
 function yf(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e;
-  const r = ft(n), [a, d] = qe("Requirement type", ["optional", "required"], false), [c, s] = qe("Label size type", ["compact", "regular", "large"], false), [u, g] = qe("Version", ["1", "2"]), [v, m] = qe("Input type", ["", "text-input", "textarea", "checkbox-list", "radio-group"], false);
-  let { mt: b = null } = e, { mr: w = null } = e, { mb: p = null } = e, { ml: k = null } = e, { testid: z = "" } = e, { label: M = "" } = e, { labelsize: N = "regular" } = e, { helptext: L = "" } = e, { error: j = "" } = e, { requirement: H = "" } = e, { maxwidth: x = "none" } = e, { version: Z = "1" } = e, { type: V = "" } = e, { name: B = "blank" } = e, { publicFormSummaryOrder: S = 0 } = e, Y, I, A = `error-${fo()}`, O = `helptext-${fo()}`, K = false;
+  const r = ft(n), [a, d] = Ae("Requirement type", ["optional", "required"], false), [c, s] = Ae("Label size type", ["compact", "regular", "large"], false), [u, g] = Ae("Version", ["1", "2"]), [v, m] = Ae("Input type", ["", "text-input", "textarea", "checkbox-list", "radio-group"], false);
+  let { mt: b = null } = e, { mr: w = null } = e, { mb: p = null } = e, { ml: k = null } = e, { testid: z = "" } = e, { label: M = "" } = e, { labelsize: N = "regular" } = e, { helptext: L = "" } = e, { error: j = "" } = e, { requirement: H = "" } = e, { maxwidth: T = "none" } = e, { version: Z = "1" } = e, { type: V = "" } = e, { name: B = "blank" } = e, { publicFormSummaryOrder: x = 0 } = e, Y, q, S = `error-${fo()}`, O = `helptext-${fo()}`, K = false;
   De(() => {
     d(H), s(N), g(Z), m(V), rt(Y, (P, G) => {
       switch (P) {
@@ -34392,14 +34392,14 @@ function yf(t, e, o) {
           o(0, j = "");
           break;
       }
-    }), Y == null || Y.addEventListener("form-field::bind", F), Y == null || Y.addEventListener("error::change", q), Y == null || Y.addEventListener("help-text::announce", Q);
+    }), Y == null || Y.addEventListener("form-field::bind", F), Y == null || Y.addEventListener("error::change", A), Y == null || Y.addEventListener("help-text::announce", Q);
   });
   function F(P) {
-    I = P.detail.el;
-    const J = I.getAttribute("aria-label");
-    (!J || J.trim() === "") && I.setAttribute("aria-label", M), I.setAttribute("aria-required", H === "required" ? "true" : "false"), R();
+    q = P.detail.el;
+    const J = q.getAttribute("aria-label");
+    (!J || J.trim() === "") && q.setAttribute("aria-label", M), q.setAttribute("aria-required", H === "required" ? "true" : "false"), R();
   }
-  function q(P) {
+  function A(P) {
     const G = P;
     K !== G.detail.isError && (K = G.detail.isError, R());
   }
@@ -34408,9 +34408,9 @@ function yf(t, e, o) {
     P && si(P);
   }
   function R() {
-    if (!I) return;
+    if (!q) return;
     let P = [];
-    (K || r.error) && P.push(A), (L || r.helptext) && P.push(O), P.length > 0 ? I.setAttribute("aria-describedby", P.join(" ")) : I.setAttribute("aria-describedby", "");
+    (K || r.error) && P.push(S), (L || r.helptext) && P.push(O), P.length > 0 ? q.setAttribute("aria-describedby", P.join(" ")) : q.setAttribute("aria-describedby", "");
   }
   function ee(P) {
     o(0, j = P.error);
@@ -34427,7 +34427,7 @@ function yf(t, e, o) {
         id: P,
         label: B !== "blank" ? B : M,
         el: Y,
-        order: S
+        order: x
       },
       { bubbles: true, timeout: 10 }
     );
@@ -34438,7 +34438,7 @@ function yf(t, e, o) {
     });
   }
   return t.$$set = (P) => {
-    "mt" in P && o(1, b = P.mt), "mr" in P && o(2, w = P.mr), "mb" in P && o(3, p = P.mb), "ml" in P && o(4, k = P.ml), "testid" in P && o(5, z = P.testid), "label" in P && o(6, M = P.label), "labelsize" in P && o(7, N = P.labelsize), "helptext" in P && o(8, L = P.helptext), "error" in P && o(0, j = P.error), "requirement" in P && o(9, H = P.requirement), "maxwidth" in P && o(10, x = P.maxwidth), "version" in P && o(11, Z = P.version), "type" in P && o(12, V = P.type), "name" in P && o(19, B = P.name), "publicFormSummaryOrder" in P && o(20, S = P.publicFormSummaryOrder), "$$scope" in P && o(21, l = P.$$scope);
+    "mt" in P && o(1, b = P.mt), "mr" in P && o(2, w = P.mr), "mb" in P && o(3, p = P.mb), "ml" in P && o(4, k = P.ml), "testid" in P && o(5, z = P.testid), "label" in P && o(6, M = P.label), "labelsize" in P && o(7, N = P.labelsize), "helptext" in P && o(8, L = P.helptext), "error" in P && o(0, j = P.error), "requirement" in P && o(9, H = P.requirement), "maxwidth" in P && o(10, T = P.maxwidth), "version" in P && o(11, Z = P.version), "type" in P && o(12, V = P.type), "name" in P && o(19, B = P.name), "publicFormSummaryOrder" in P && o(20, x = P.publicFormSummaryOrder), "$$scope" in P && o(21, l = P.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*labelsize*/
     128 && o(14, i = N === "compact" ? "xsmall" : "small");
@@ -34453,17 +34453,17 @@ function yf(t, e, o) {
     N,
     L,
     H,
-    x,
+    T,
     Z,
     V,
     Y,
     i,
     a,
-    A,
+    S,
     O,
     r,
     B,
-    S,
+    x,
     l,
     n,
     te
@@ -34769,18 +34769,18 @@ function Df(t) {
         /*status*/
         t[0]
       ), f(e, "aria-current", v = /*current*/
-      t[2] ? "step" : "false"), f(e, "data-testid", "label"), T(
+      t[2] ? "step" : "false"), f(e, "data-testid", "label"), I(
         e,
         "mobile",
         /*_isMobile*/
         t[6]
-      ), T(e, "desktop", !/*_isMobile*/
-      t[6]), T(
+      ), I(e, "desktop", !/*_isMobile*/
+      t[6]), I(
         e,
         "loading",
         /*_isLoading*/
         t[7]
-      ), T(
+      ), I(
         e,
         "last",
         /*_isLast*/
@@ -34828,21 +34828,21 @@ function Df(t) {
       ), L & /*current*/
       4 && v !== (v = /*current*/
       N[2] ? "step" : "false") && f(e, "aria-current", v), L & /*_isMobile*/
-      64 && T(
+      64 && I(
         e,
         "mobile",
         /*_isMobile*/
         N[6]
       ), L & /*_isMobile*/
-      64 && T(e, "desktop", !/*_isMobile*/
+      64 && I(e, "desktop", !/*_isMobile*/
       N[6]), L & /*_isLoading*/
-      128 && T(
+      128 && I(
         e,
         "loading",
         /*_isLoading*/
         N[7]
       ), L & /*_isLast*/
-      512 && T(
+      512 && I(
         e,
         "last",
         /*_isLast*/
@@ -34856,7 +34856,7 @@ function Df(t) {
     }
   };
 }
-function xf(t, e, o) {
+function Tf(t, e, o) {
   let i, n, { text: l } = e, { status: r = void 0 } = e, { last: a = "false" } = e, d = false, c = false, s, u = "", g, v, m = true, b = false;
   De(() => {
     g.addEventListener("form-stepper:resized", (j) => {
@@ -34868,8 +34868,8 @@ function xf(t, e, o) {
     }), g.addEventListener("formstepper:enabled:changed", (j) => {
       o(14, c = j.detail.enabled);
     }), g.addEventListener("formstepper:current:changed", (j) => {
-      const H = j, x = d;
-      o(14, c = true), o(2, d = H.detail.current), !x && d && (b || setTimeout(() => N(), 10), b = false);
+      const H = j, T = d;
+      o(14, c = true), o(2, d = H.detail.current), !T && d && (b || setTimeout(() => N(), 10), b = false);
     }), w(g);
   });
   function w(j) {
@@ -34902,8 +34902,8 @@ function xf(t, e, o) {
     }
   }
   function M(j, H) {
-    const x = H ? H + ", " : "", Z = `Step name: ${j}`, V = z();
-    return V ? `${x}${Z}, Status: ${V}` : `${x}${Z}`;
+    const T = H ? H + ", " : "", Z = `Step name: ${j}`, V = z();
+    return V ? `${T}${Z}, Status: ${V}` : `${T}${Z}`;
   }
   function N() {
     if (d && s) {
@@ -34926,7 +34926,7 @@ function xf(t, e, o) {
   }, t.$$.update = () => {
     t.$$.dirty & /*enabled, status*/
     16385 && o(8, i = c || r === "complete"), t.$$.dirty & /*last*/
-    8192 && o(9, n = Ae(a));
+    8192 && o(9, n = Se(a));
   }, [
     r,
     l,
@@ -34946,9 +34946,9 @@ function xf(t, e, o) {
     L
   ];
 }
-class Tf extends ze {
+class If extends ze {
   constructor(e) {
-    super(), ke(this, e, xf, Df, we, { text: 1, status: 0, last: 13 }, Cf);
+    super(), ke(this, e, Tf, Df, we, { text: 1, status: 0, last: 13 }, Cf);
   }
   get text() {
     return this.$$.ctx[1];
@@ -34969,8 +34969,8 @@ class Tf extends ze {
     this.$$set({ last: e }), y();
   }
 }
-customElements.define("goa-form-step", Ce(Tf, { text: {}, status: {}, last: {} }, [], [], true));
-function If(t) {
+customElements.define("goa-form-step", Ce(If, { text: {}, status: {}, last: {} }, [], [], true));
+function qf(t) {
   je(t, "svelte-19twse8", `.slots.svelte-19twse8{position:relative;inset:0;z-index:2}#container.svelte-19twse8{container:self / inline-size}progress.svelte-19twse8{position:absolute;z-index:1;-webkit-appearance:none;-moz-appearance:none;appearance:none;height:var(--goa-stepper-line-thickness);border:none;background:var(--goa-stepper-color-line);pointer-events:none}progress.horizontal.svelte-19twse8{top:calc(1.5rem + (2.5rem / 2) - 2px);left:calc(var(--step-width) / 2);width:calc(100% - var(--step-width))}@container self (min-width: 624px){progress.horizontal.svelte-19twse8{display:block}progress.vertical.svelte-19twse8{display:none}.form-stepper.svelte-19twse8{position:relative}.slots.svelte-19twse8{display:grid;grid-template-columns:repeat(auto-fit, minmax(10ch, 1fr));gap:var(--goa-space-m)}}progress.vertical.svelte-19twse8{width:calc(var(--height) - var(--step-height));transform:rotate(90deg)
       translate(
         calc(50% + 1.25rem + 1rem),
@@ -35000,7 +35000,7 @@ function Yl(t) {
     }
   };
 }
-function qf(t) {
+function Af(t) {
   let e, o, i, n, l, r, a = (
     /*_steps*/
     t[7].length > 0 && /*_showProgressBars*/
@@ -35106,25 +35106,25 @@ function qf(t) {
     }
   };
 }
-function Af(t, e, o) {
+function Sf(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { step: l = -1 } = e, { testid: r = "" } = e, { mt: a = null } = e, { mr: d = null } = e, { mb: c = null } = e, { ml: s = null } = e, u, g, v = [], m, b, w, p, k = 0, z, M = 1, N = false, L, j;
   De(async () => {
     await Ge(), w = +l == -1 ? "free" : "constrained", H(), j = B(), j.observe(u);
   }), dt(() => {
-    window.removeEventListener("orientationchange", I), j == null || j.unobserve(u);
+    window.removeEventListener("orientationchange", q), j == null || j.unobserve(u);
   });
   function H() {
-    u.addEventListener("formstep:mounted", (q) => {
-      const Q = q, { el: R, status: ee } = Q.detail;
+    u.addEventListener("formstep:mounted", (A) => {
+      const Q = A, { el: R, status: ee } = Q.detail;
       o(7, v = [...v, { el: R, status: ee }]), L && clearTimeout(L), L = setTimeout(() => {
         const oe = (g == null ? void 0 : g.offsetWidth) ?? 0;
-        O(oe), x(), I(), V(), Z(), o(14, z = l < 1 ? 1 : l), A();
+        O(oe), T(), q(), V(), Z(), o(14, z = l < 1 ? 1 : l), S();
       });
     });
   }
-  function x() {
-    for (const [q, Q] of v.entries()) {
-      const R = q + 1, ee = {
+  function T() {
+    for (const [A, Q] of v.entries()) {
+      const R = A + 1, ee = {
         ariaLabel: `Step ${R} of ${v.length}`,
         childIndex: R,
         current: l === -1 ? R === 1 : R === l,
@@ -35135,46 +35135,46 @@ function Af(t, e, o) {
     }
   }
   function Z() {
-    window.addEventListener("orientationchange", I);
+    window.addEventListener("orientationchange", q);
   }
   function V() {
-    u == null || u.addEventListener("_click", (q) => {
-      const Q = q.detail.step;
-      S(Q);
+    u == null || u.addEventListener("_click", (A) => {
+      const Q = A.detail.step;
+      x(Q);
     });
   }
   function B() {
-    return new ResizeObserver((q) => {
-      if (q.length !== 1) return;
-      I();
-      const Q = q[0].contentRect.width;
+    return new ResizeObserver((A) => {
+      if (A.length !== 1) return;
+      q();
+      const Q = A[0].contentRect.width;
       O(Q);
     });
   }
-  function S(q) {
-    v.length === 0 || q > v.length || (z > 0 && v[z - 1].el.dispatchEvent(new CustomEvent(
+  function x(A) {
+    v.length === 0 || A > v.length || (z > 0 && v[z - 1].el.dispatchEvent(new CustomEvent(
       "formstepper:current:changed",
       {
         detail: { current: false },
         composed: true
       }
-    )), v[q - 1].el.dispatchEvent(new CustomEvent(
+    )), v[A - 1].el.dispatchEvent(new CustomEvent(
       "formstepper:current:changed",
       {
         detail: { current: true },
         composed: true
       }
-    )), o(14, z = q), Y(), A());
+    )), o(14, z = A), Y(), S());
   }
   function Y() {
     o(11, k = (z - 1) / (v.length - 1) * 100);
   }
-  function I() {
+  function q() {
     var Q;
-    const q = (Q = v == null ? void 0 : v[0]) == null ? void 0 : Q.el;
-    o(8, m = (q == null ? void 0 : q.offsetWidth) ?? 0), o(9, b = (q == null ? void 0 : q.offsetHeight) ?? 0), o(10, p = g == null ? void 0 : g.offsetHeight), setTimeout(() => o(12, N = true), 100);
+    const A = (Q = v == null ? void 0 : v[0]) == null ? void 0 : Q.el;
+    o(8, m = (A == null ? void 0 : A.offsetWidth) ?? 0), o(9, b = (A == null ? void 0 : A.offsetHeight) ?? 0), o(10, p = g == null ? void 0 : g.offsetHeight), setTimeout(() => o(12, N = true), 100);
   }
-  function A() {
+  function S() {
     u == null || u.dispatchEvent(new CustomEvent(
       "_change",
       {
@@ -35187,7 +35187,7 @@ function Af(t, e, o) {
       }
     ));
   }
-  function O(q) {
+  function O(A) {
     if (v.length)
       for (const Q of v)
         Q.el.dispatchEvent(new CustomEvent(
@@ -35195,27 +35195,27 @@ function Af(t, e, o) {
           {
             bubbles: true,
             composed: true,
-            detail: { testid: r, mobile: q < Pt }
+            detail: { testid: r, mobile: A < Pt }
           }
         ));
   }
-  function K(q) {
-    ce[q ? "unshift" : "push"](() => {
-      g = q, o(6, g);
+  function K(A) {
+    ce[A ? "unshift" : "push"](() => {
+      g = A, o(6, g);
     });
   }
-  function F(q) {
-    ce[q ? "unshift" : "push"](() => {
-      u = q, o(5, u);
+  function F(A) {
+    ce[A ? "unshift" : "push"](() => {
+      u = A, o(5, u);
     });
   }
-  return t.$$set = (q) => {
-    "step" in q && o(13, l = q.step), "testid" in q && o(0, r = q.testid), "mt" in q && o(1, a = q.mt), "mr" in q && o(2, d = q.mr), "mb" in q && o(3, c = q.mb), "ml" in q && o(4, s = q.ml), "$$scope" in q && o(16, n = q.$$scope);
+  return t.$$set = (A) => {
+    "step" in A && o(13, l = A.step), "testid" in A && o(0, r = A.testid), "mt" in A && o(1, a = A.mt), "mr" in A && o(2, d = A.mr), "mb" in A && o(3, c = A.mb), "ml" in A && o(4, s = A.ml), "$$scope" in A && o(16, n = A.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*_currentStep, _maxAllowedStep*/
     49152 && o(15, M = Math.max(z || 1, M || 1)), t.$$.dirty[0] & /*step*/
     8192 && o(13, l = +l), t.$$.dirty[0] & /*step, _currentStep*/
-    24576 && l > 0 && z !== l && S(l), t.$$.dirty[0] & /*_currentStep*/
+    24576 && l > 0 && z !== l && x(l), t.$$.dirty[0] & /*_currentStep*/
     16384 && z && Y();
   }, [
     r,
@@ -35240,13 +35240,13 @@ function Af(t, e, o) {
     F
   ];
 }
-class Sf extends ze {
+class xf extends ze {
   constructor(e) {
     super(), ke(
       this,
       e,
+      Sf,
       Af,
-      qf,
       we,
       {
         step: 13,
@@ -35256,7 +35256,7 @@ class Sf extends ze {
         mb: 3,
         ml: 4
       },
-      If,
+      qf,
       [-1, -1]
     );
   }
@@ -35297,7 +35297,7 @@ class Sf extends ze {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-form-stepper", Ce(Sf, { step: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+customElements.define("goa-form-stepper", Ce(xf, { step: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
 function Of(t) {
   je(t, "svelte-1f1uff1", `.page.svelte-1f1uff1{height:100vh;grid-template-columns:auto;grid-template-rows:min-content auto min-content;grid-template-areas:"header"
       "content"
@@ -35679,7 +35679,7 @@ function Kf(t) {
         /*textcolor*/
         t[5]
       ), Ve(e, "--hero-background-url", "url(" + /*backgroundurl*/
-      t[2] + ")"), T(
+      t[2] + ")"), I(
         e,
         "with-image",
         /*backgroundurl*/
@@ -35760,7 +35760,7 @@ function Kf(t) {
       ), (!s || w & /*backgroundurl*/
       4) && Ve(e, "--hero-background-url", "url(" + /*backgroundurl*/
       b[2] + ")"), (!s || w & /*backgroundurl*/
-      4) && T(
+      4) && I(
         e,
         "with-image",
         /*backgroundurl*/
@@ -36034,21 +36034,21 @@ function Kl(t) {
 }
 function tg(t, e, o) {
   let i, n, l;
-  const [r, a] = qe("Icon Button Variant", ["color", "nocolor", "light", "dark", "destructive"], true);
+  const [r, a] = Ae("Icon Button Variant", ["color", "nocolor", "light", "dark", "destructive"], true);
   let { icon: d } = e, { size: c = "medium" } = e, { theme: s = "outline" } = e, { variant: u = "color" } = e, { title: g = "" } = e, { testid: v = "" } = e, { disabled: m = "false" } = e, { inverted: b = "false" } = e, { arialabel: w = "" } = e, { mt: p = null } = e, { mr: k = null } = e, { mb: z = null } = e, { ml: M = null } = e, { action: N = "" } = e, { actionArg: L = "" } = e, { actionArgs: j = {} } = e;
-  function H(x) {
+  function H(T) {
     var Z;
-    (Z = x.target) == null || Z.dispatchEvent(new CustomEvent("_click", { composed: true, detail: { event: x } })), N && Ee(x.target, N, L || j, { bubbles: true });
+    (Z = T.target) == null || Z.dispatchEvent(new CustomEvent("_click", { composed: true, detail: { event: T } })), N && Ee(T.target, N, L || j, { bubbles: true });
   }
   return De(() => {
     a(u), u == "nocolor" && console.warn("goa-icon-button nocolor variant is deprecated. Instead use dark."), l && console.warn("goa-icon-button inverted is deprecated. Instead use light variant.");
-  }), t.$$set = (x) => {
-    "icon" in x && o(0, d = x.icon), "size" in x && o(1, c = x.size), "theme" in x && o(2, s = x.theme), "variant" in x && o(13, u = x.variant), "title" in x && o(3, g = x.title), "testid" in x && o(4, v = x.testid), "disabled" in x && o(14, m = x.disabled), "inverted" in x && o(15, b = x.inverted), "arialabel" in x && o(5, w = x.arialabel), "mt" in x && o(6, p = x.mt), "mr" in x && o(7, k = x.mr), "mb" in x && o(8, z = x.mb), "ml" in x && o(9, M = x.ml), "action" in x && o(16, N = x.action), "actionArg" in x && o(17, L = x.actionArg), "actionArgs" in x && o(18, j = x.actionArgs);
+  }), t.$$set = (T) => {
+    "icon" in T && o(0, d = T.icon), "size" in T && o(1, c = T.size), "theme" in T && o(2, s = T.theme), "variant" in T && o(13, u = T.variant), "title" in T && o(3, g = T.title), "testid" in T && o(4, v = T.testid), "disabled" in T && o(14, m = T.disabled), "inverted" in T && o(15, b = T.inverted), "arialabel" in T && o(5, w = T.arialabel), "mt" in T && o(6, p = T.mt), "mr" in T && o(7, k = T.mr), "mb" in T && o(8, z = T.mb), "ml" in T && o(9, M = T.ml), "action" in T && o(16, N = T.action), "actionArg" in T && o(17, L = T.actionArg), "actionArgs" in T && o(18, j = T.actionArgs);
   }, t.$$.update = () => {
     t.$$.dirty & /*inverted*/
-    32768 && o(19, l = Ae(b)), t.$$.dirty & /*variant, isInverted*/
+    32768 && o(19, l = Se(b)), t.$$.dirty & /*variant, isInverted*/
     532480 && o(11, i = `${u} ${l ? "inverted" : ""}`), t.$$.dirty & /*disabled*/
-    16384 && o(10, n = Ae(m));
+    16384 && o(10, n = Se(m));
   }, [
     d,
     c,
@@ -36340,17 +36340,17 @@ function rg(t) {
         /*ml*/
         t[3]
       )}
-    ${Ie(
+    ${qe(
         "--fill-color",
         /*fillcolor*/
         t[6]
       )};
-    ${Ie(
+    ${qe(
         "--opacity",
         /*opacity*/
         t[7]
       )};
-  `), T(
+  `), I(
         e,
         "inverted",
         /*_isInverted*/
@@ -36414,18 +36414,18 @@ function rg(t) {
         /*ml*/
         r[3]
       )}
-    ${Ie(
+    ${qe(
         "--fill-color",
         /*fillcolor*/
         r[6]
       )};
-    ${Ie(
+    ${qe(
         "--opacity",
         /*opacity*/
         r[7]
       )};
   `) && f(e, "style", n), a & /*size, _isInverted*/
-      131104 && T(
+      131104 && I(
         e,
         "inverted",
         /*_isInverted*/
@@ -36538,12 +36538,12 @@ function sg(t, e, o) {
     "warning-filled": '<svg style="width: 100%; height: 100%;" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M22.0417 19.9733L13.4244 3.97035C12.8136 2.83573 11.1865 2.83573 10.5752 3.97035L1.95838 19.9733C1.82576 20.2196 1.75927 20.4961 1.7654 20.7757C1.77153 21.0554 1.85007 21.3287 1.99336 21.569C2.13664 21.8093 2.33978 22.0083 2.58293 22.1466C2.82608 22.2849 3.10094 22.3579 3.38069 22.3583H20.6168C20.8968 22.3583 21.172 22.2857 21.4155 22.1475C21.659 22.0094 21.8624 21.8104 22.006 21.5701C22.1496 21.3297 22.2284 21.0563 22.2346 20.7764C22.2409 20.4965 22.1744 20.2198 22.0417 19.9733ZM12 19.8807C11.8 19.8807 11.6045 19.8214 11.4382 19.7103C11.2719 19.5992 11.1423 19.4412 11.0657 19.2565C10.9892 19.0717 10.9692 18.8684 11.0082 18.6722C11.0472 18.476 11.1435 18.2959 11.285 18.1544C11.4264 18.013 11.6066 17.9167 11.8027 17.8777C11.9989 17.8387 12.2022 17.8587 12.387 17.9352C12.5718 18.0118 12.7297 18.1414 12.8408 18.3077C12.9519 18.474 13.0113 18.6695 13.0113 18.8695C13.0113 19.0023 12.9851 19.1338 12.9343 19.2565C12.8835 19.3792 12.809 19.4906 12.7151 19.5845C12.6212 19.6784 12.5097 19.7529 12.387 19.8038C12.2643 19.8546 12.1328 19.8807 12 19.8807ZM13.0982 9.71016L12.808 15.8787C12.808 16.0933 12.7228 16.2991 12.571 16.4508C12.4193 16.6025 12.2136 16.6877 11.999 16.6877C11.7844 16.6877 11.5787 16.6025 11.427 16.4508C11.2752 16.2991 11.19 16.0933 11.19 15.8787L10.8998 9.71268C10.8933 9.56534 10.9165 9.41819 10.968 9.28001C11.0196 9.14183 11.0984 9.01544 11.1999 8.90838C11.3013 8.80132 11.4233 8.71578 11.5585 8.65686C11.6937 8.59794 11.8394 8.56685 11.9869 8.56543H11.9975C12.146 8.56535 12.2929 8.59536 12.4295 8.65364C12.5661 8.71193 12.6894 8.79727 12.7921 8.90453C12.8948 9.0118 12.9747 9.13875 13.0269 9.27773C13.0792 9.41672 13.1028 9.56485 13.0962 9.71319L13.0982 9.71016Z" fill="currentcolor"/></svg>',
     warning: '<svg style="width: 100%; height: 100%;" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M19.9867 22.4045H4.01173C3.64142 22.4045 3.2711 22.3107 2.94767 22.1373C2.41798 21.8514 2.0336 21.3779 1.86017 20.8014C1.68673 20.2248 1.74767 19.6154 2.0336 19.0904L10.0164 4.25449C10.4102 3.52324 11.1695 3.07324 11.9992 3.07324C12.8289 3.07324 13.5883 3.52793 13.982 4.25449L21.9695 19.0904C22.1477 19.4186 22.2367 19.7842 22.2367 20.1592C22.2367 20.7592 22.0024 21.3264 21.5758 21.7482C21.1539 22.1748 20.5914 22.4045 19.9867 22.4045ZM4.01173 20.9045H19.9914C20.193 20.9045 20.3805 20.8248 20.5211 20.6842C20.6617 20.5436 20.7414 20.3561 20.7414 20.1545C20.7414 20.0326 20.7086 19.9061 20.6524 19.7982L12.6602 4.96699C12.468 4.61074 12.1352 4.57324 11.9992 4.57324C11.8633 4.57324 11.5305 4.61074 11.3383 4.96699L3.35079 19.8029C3.25704 19.9811 3.2336 20.1826 3.29454 20.3748C3.35079 20.567 3.48204 20.7264 3.65548 20.8201C3.76329 20.8764 3.88517 20.9045 4.01173 20.9045Z" fill="currentcolor"/><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M11.9992 16.3668C11.6008 16.3668 11.268 16.0527 11.2492 15.6543L10.982 9.93556C10.982 9.93087 10.982 9.92618 10.982 9.92149V9.89806C10.9774 9.33556 11.4274 8.87618 11.9899 8.87149C12.0086 8.87149 12.0274 8.87149 12.0461 8.87149C12.6086 8.89493 13.0446 9.37306 13.0164 9.93556L12.7492 15.6543C12.7305 16.0527 12.3977 16.3668 11.9992 16.3668Z" fill="currentcolor"/><path stroke-width="0.5" vector-effect="non-scaling-stroke" d="M11.9992 19.3573C11.4836 19.3573 11.0617 18.9354 11.0617 18.4198C11.0617 17.9041 11.4836 17.4823 11.9992 17.4823C12.5148 17.4823 12.9367 17.9041 12.9367 18.4198C12.9367 18.9354 12.5148 19.3573 11.9992 19.3573Z" fill="currentcolor"/></svg>'
   };
-  return t.$$set = (x) => {
-    "mt" in x && o(0, r = x.mt), "mr" in x && o(1, a = x.mr), "mb" in x && o(2, d = x.mb), "ml" in x && o(3, c = x.ml), "type" in x && o(4, s = x.type), "size" in x && o(5, u = x.size), "theme" in x && o(19, g = x.theme), "inverted" in x && o(20, v = x.inverted), "fillcolor" in x && o(6, m = x.fillcolor), "opacity" in x && o(7, b = x.opacity), "title" in x && o(8, w = x.title), "testid" in x && o(9, p = x.testid), "arialabel" in x && o(10, k = x.arialabel), "ariacontrols" in x && o(11, z = x.ariacontrols), "ariaexpanded" in x && o(21, M = x.ariaexpanded), "role" in x && o(12, N = x.role);
+  return t.$$set = (T) => {
+    "mt" in T && o(0, r = T.mt), "mr" in T && o(1, a = T.mr), "mb" in T && o(2, d = T.mb), "ml" in T && o(3, c = T.ml), "type" in T && o(4, s = T.type), "size" in T && o(5, u = T.size), "theme" in T && o(19, g = T.theme), "inverted" in T && o(20, v = T.inverted), "fillcolor" in T && o(6, m = T.fillcolor), "opacity" in T && o(7, b = T.opacity), "title" in T && o(8, w = T.title), "testid" in T && o(9, p = T.testid), "arialabel" in T && o(10, k = T.arialabel), "ariacontrols" in T && o(11, z = T.ariacontrols), "ariaexpanded" in T && o(21, M = T.ariaexpanded), "role" in T && o(12, N = T.role);
   }, t.$$.update = () => {
     t.$$.dirty & /*inverted*/
-    1048576 && o(17, i = Ae(v)), t.$$.dirty & /*ariaexpanded*/
-    2097152 && o(16, n = Ae(M)), t.$$.dirty & /*type, theme*/
+    1048576 && o(17, i = Se(v)), t.$$.dirty & /*ariaexpanded*/
+    2097152 && o(16, n = Se(M)), t.$$.dirty & /*type, theme*/
     524304 && o(13, { iconType: L, iconTheme: j, name: l } = ag(s, g), L, (o(14, j), o(4, s), o(19, g)), (o(15, l), o(4, s), o(19, g)));
   }, [
     r,
@@ -37004,7 +37004,7 @@ function gg(t) {
     /*trailingicon*/
     t[7] && !/*handlesTrailingIconClick*/
     t[36] && ir(t)
-  ), x = (
+  ), T = (
     /*trailingicon*/
     t[7] && /*handlesTrailingIconClick*/
     t[36] && nr(t)
@@ -37017,7 +37017,7 @@ function gg(t) {
   );
   return {
     c() {
-      e = C("div"), N && N.c(), o = W(), i = C("div"), L && L.c(), n = W(), j && j.c(), l = W(), r = C("input"), g = W(), H && H.c(), v = W(), x && x.c(), m = W(), Z && Z.c(), w = W(), V && V.c(), f(r, "class", a = "input--" + /*variant*/
+      e = C("div"), N && N.c(), o = W(), i = C("div"), L && L.c(), n = W(), j && j.c(), l = W(), r = C("input"), g = W(), H && H.c(), v = W(), T && T.c(), m = W(), Z && Z.c(), w = W(), V && V.c(), f(r, "class", a = "input--" + /*variant*/
       t[8] + " svelte-5o4ivq"), f(r, "style", d = it(
         `--search-icon-offset: ${/*trailingicon*/
         t[7] ? "-0.5rem" : "0"}`,
@@ -37094,17 +37094,17 @@ function gg(t) {
       ), f(r, "aria-invalid", u = /*_error*/
       t[29] ? "true" : "false"), f(i, "class", b = "goa-input variant--" + /*variant*/
       t[8] + " type--" + /*type*/
-      t[1] + " svelte-5o4ivq"), T(
+      t[1] + " svelte-5o4ivq"), I(
         i,
         "input--disabled",
         /*isDisabled*/
         t[35]
-      ), T(
+      ), I(
         i,
         "error",
         /*_error*/
         t[29]
-      ), T(
+      ), I(
         i,
         "has-icon",
         /*leadingicon*/
@@ -37120,30 +37120,30 @@ function gg(t) {
         t[21],
         /*ml*/
         t[22]
-      )}`), T(
+      )}`), I(
         e,
         "leading-content",
         /*_leadingContentSlot*/
         t[30]
-      ), T(
+      ), I(
         e,
         "trailing-content",
         /*_trailingContentSlot*/
         t[31]
-      ), T(
+      ), I(
         e,
         "compact",
         /*size*/
         t[25] === "compact"
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
         t[26] === "2"
       );
     },
-    m(B, S) {
-      D(B, e, S), N && N.m(e, null), _(e, o), _(e, i), L && L.m(i, null), _(i, n), j && j.m(i, null), _(i, l), _(i, r), t[53](r), _(i, g), H && H.m(i, null), _(i, v), x && x.m(i, null), _(i, m), Z && Z.m(i, null), _(e, w), V && V.m(e, null), t[54](e), k = true, z || (M = [
+    m(B, x) {
+      D(B, e, x), N && N.m(e, null), _(e, o), _(e, i), L && L.m(i, null), _(i, n), j && j.m(i, null), _(i, l), _(i, r), t[53](r), _(i, g), H && H.m(i, null), _(i, v), T && T.m(i, null), _(i, m), Z && Z.m(i, null), _(e, w), V && V.m(e, null), t[54](e), k = true, z || (M = [
         re(
           r,
           "input",
@@ -37170,16 +37170,16 @@ function gg(t) {
         )
       ], z = true);
     },
-    p(B, S) {
-      B[41].leadingContent ? N ? (N.p(B, S), S[1] & /*$$slots*/
+    p(B, x) {
+      B[41].leadingContent ? N ? (N.p(B, x), x[1] & /*$$slots*/
       1024 && U(N, 1)) : (N = er(B), N.c(), U(N, 1), N.m(e, o)) : N && (He(), $(N, 1, 1, () => {
         N = null;
       }), Pe()), /*prefix*/
-      B[15] ? L ? L.p(B, S) : (L = tr(B), L.c(), L.m(i, n)) : L && (L.d(1), L = null), /*leadingicon*/
-      B[6] ? j ? j.p(B, S) : (j = or(B), j.c(), j.m(i, l)) : j && (j.d(1), j = null), (!k || S[0] & /*variant*/
+      B[15] ? L ? L.p(B, x) : (L = tr(B), L.c(), L.m(i, n)) : L && (L.d(1), L = null), /*leadingicon*/
+      B[6] ? j ? j.p(B, x) : (j = or(B), j.c(), j.m(i, l)) : j && (j.d(1), j = null), (!k || x[0] & /*variant*/
       256 && a !== (a = "input--" + /*variant*/
-      B[8] + " svelte-5o4ivq")) && f(r, "class", a), (!k || S[0] & /*trailingicon, textalign*/
-      16777344 | S[1] & /*_inputWidth*/
+      B[8] + " svelte-5o4ivq")) && f(r, "class", a), (!k || x[0] & /*trailingicon, textalign*/
+      16777344 | x[1] & /*_inputWidth*/
       4 && d !== (d = it(
         `--search-icon-offset: ${/*trailingicon*/
         B[7] ? "-0.5rem" : "0"}`,
@@ -37188,123 +37188,123 @@ function gg(t) {
         B[33]}`,
         /*textalign*/
         B[24] === "right" && "text-align: right"
-      ))) && f(r, "style", d), (!k || S[1] & /*isReadonly*/
+      ))) && f(r, "style", d), (!k || x[1] & /*isReadonly*/
       8) && (r.readOnly = /*isReadonly*/
-      B[34]), (!k || S[1] & /*isDisabled*/
+      B[34]), (!k || x[1] & /*isDisabled*/
       16) && (r.disabled = /*isDisabled*/
-      B[35]), (!k || S[0] & /*testid*/
+      B[35]), (!k || x[0] & /*testid*/
       512) && f(
         r,
         "data-testid",
         /*testid*/
         B[9]
-      ), (!k || S[0] & /*autocapitalize*/
+      ), (!k || x[0] & /*autocapitalize*/
       8) && f(
         r,
         "autocapitalize",
         /*autocapitalize*/
         B[3]
-      ), (!k || S[0] & /*autocomplete*/
+      ), (!k || x[0] & /*autocomplete*/
       16) && f(
         r,
         "autocomplete",
         /*autocomplete*/
         B[4]
-      ), (!k || S[0] & /*name*/
+      ), (!k || x[0] & /*name*/
       4) && f(
         r,
         "name",
         /*name*/
         B[2]
-      ), (!k || S[0] & /*type*/
+      ), (!k || x[0] & /*type*/
       2) && f(
         r,
         "type",
         /*type*/
         B[1]
-      ), (!k || S[0] & /*value*/
+      ), (!k || x[0] & /*value*/
       1 && c !== (c = /*value*/
-      B[0] ?? "") && r.value !== c) && (r.value = c), (!k || S[0] & /*placeholder*/
+      B[0] ?? "") && r.value !== c) && (r.value = c), (!k || x[0] & /*placeholder*/
       32) && f(
         r,
         "placeholder",
         /*placeholder*/
         B[5]
-      ), (!k || S[0] & /*min*/
+      ), (!k || x[0] & /*min*/
       4096) && f(
         r,
         "min",
         /*min*/
         B[12]
-      ), (!k || S[0] & /*max*/
+      ), (!k || x[0] & /*max*/
       8192) && f(
         r,
         "max",
         /*max*/
         B[13]
-      ), (!k || S[0] & /*step*/
+      ), (!k || x[0] & /*step*/
       16384) && f(
         r,
         "step",
         /*step*/
         B[14]
-      ), (!k || S[0] & /*maxlength*/
+      ), (!k || x[0] & /*maxlength*/
       131072) && f(
         r,
         "maxlength",
         /*maxlength*/
         B[17]
-      ), (!k || S[0] & /*id, name*/
+      ), (!k || x[0] & /*id, name*/
       262148 && s !== (s = /*id*/
       B[18] || /*name*/
-      B[2])) && f(r, "id", s), (!k || S[0] & /*arialabel*/
+      B[2])) && f(r, "id", s), (!k || x[0] & /*arialabel*/
       1024) && f(
         r,
         "aria-label",
         /*arialabel*/
         B[10]
-      ), (!k || S[0] & /*arialabelledby*/
+      ), (!k || x[0] & /*arialabelledby*/
       2048) && f(
         r,
         "aria-labelledby",
         /*arialabelledby*/
         B[11]
-      ), (!k || S[0] & /*_error*/
+      ), (!k || x[0] & /*_error*/
       536870912 && u !== (u = /*_error*/
       B[29] ? "true" : "false")) && f(r, "aria-invalid", u), /*trailingicon*/
       B[7] && !/*handlesTrailingIconClick*/
-      B[36] ? H ? H.p(B, S) : (H = ir(B), H.c(), H.m(i, v)) : H && (H.d(1), H = null), /*trailingicon*/
+      B[36] ? H ? H.p(B, x) : (H = ir(B), H.c(), H.m(i, v)) : H && (H.d(1), H = null), /*trailingicon*/
       B[7] && /*handlesTrailingIconClick*/
-      B[36] ? x ? x.p(B, S) : (x = nr(B), x.c(), x.m(i, m)) : x && (x.d(1), x = null), /*suffix*/
-      B[16] ? Z ? Z.p(B, S) : (Z = lr(B), Z.c(), Z.m(i, null)) : Z && (Z.d(1), Z = null), (!k || S[0] & /*variant, type*/
+      B[36] ? T ? T.p(B, x) : (T = nr(B), T.c(), T.m(i, m)) : T && (T.d(1), T = null), /*suffix*/
+      B[16] ? Z ? Z.p(B, x) : (Z = lr(B), Z.c(), Z.m(i, null)) : Z && (Z.d(1), Z = null), (!k || x[0] & /*variant, type*/
       258 && b !== (b = "goa-input variant--" + /*variant*/
       B[8] + " type--" + /*type*/
-      B[1] + " svelte-5o4ivq")) && f(i, "class", b), (!k || S[0] & /*variant, type*/
-      258 | S[1] & /*isDisabled*/
-      16) && T(
+      B[1] + " svelte-5o4ivq")) && f(i, "class", b), (!k || x[0] & /*variant, type*/
+      258 | x[1] & /*isDisabled*/
+      16) && I(
         i,
         "input--disabled",
         /*isDisabled*/
         B[35]
-      ), (!k || S[0] & /*variant, type, _error*/
-      536871170) && T(
+      ), (!k || x[0] & /*variant, type, _error*/
+      536871170) && I(
         i,
         "error",
         /*_error*/
         B[29]
-      ), (!k || S[0] & /*variant, type, leadingicon, trailingicon*/
-      450) && T(
+      ), (!k || x[0] & /*variant, type, leadingicon, trailingicon*/
+      450) && I(
         i,
         "has-icon",
         /*leadingicon*/
         B[6] || /*trailingicon*/
         B[7]
       ), /*$$slots*/
-      B[41].trailingContent ? V ? (V.p(B, S), S[1] & /*$$slots*/
+      B[41].trailingContent ? V ? (V.p(B, x), x[1] & /*$$slots*/
       1024 && U(V, 1)) : (V = rr(B), V.c(), U(V, 1), V.m(e, null)) : V && (He(), $(V, 1, 1, () => {
         V = null;
-      }), Pe()), (!k || S[0] & /*mt, mr, mb, ml*/
-      7864320 | S[1] & /*_containerStyle*/
+      }), Pe()), (!k || x[0] & /*mt, mr, mb, ml*/
+      7864320 | x[1] & /*_containerStyle*/
       2 && p !== (p = `${/*_containerStyle*/
       B[32]}${Ne(
         /*mt*/
@@ -37315,26 +37315,26 @@ function gg(t) {
         B[21],
         /*ml*/
         B[22]
-      )}`)) && f(e, "style", p), (!k || S[0] & /*_leadingContentSlot*/
-      1073741824) && T(
+      )}`)) && f(e, "style", p), (!k || x[0] & /*_leadingContentSlot*/
+      1073741824) && I(
         e,
         "leading-content",
         /*_leadingContentSlot*/
         B[30]
-      ), (!k || S[1] & /*_trailingContentSlot*/
-      1) && T(
+      ), (!k || x[1] & /*_trailingContentSlot*/
+      1) && I(
         e,
         "trailing-content",
         /*_trailingContentSlot*/
         B[31]
-      ), (!k || S[0] & /*size*/
-      33554432) && T(
+      ), (!k || x[0] & /*size*/
+      33554432) && I(
         e,
         "compact",
         /*size*/
         B[25] === "compact"
-      ), (!k || S[0] & /*version*/
-      67108864) && T(
+      ), (!k || x[0] & /*version*/
+      67108864) && I(
         e,
         "v2",
         /*version*/
@@ -37348,7 +37348,7 @@ function gg(t) {
       $(N), $(V), k = false;
     },
     d(B) {
-      B && E(e), N && N.d(), L && L.d(), j && j.d(), t[53](null), H && H.d(), x && x.d(), Z && Z.d(), V && V.d(), t[54](null), z = false, Ye(M);
+      B && E(e), N && N.d(), L && L.d(), j && j.d(), t[53](null), H && H.d(), T && T.d(), Z && Z.d(), V && V.d(), t[54](null), z = false, Ye(M);
     }
   };
 }
@@ -37379,7 +37379,7 @@ function hg() {
 }
 function mg(t, e, o) {
   let i, n, l, r, { $$slots: a = {}, $$scope: d } = e;
-  const c = ft(a), [s, u] = qe("Input type", [
+  const c = ft(a), [s, u] = Ae("Input type", [
     "text",
     "number",
     "password",
@@ -37393,24 +37393,24 @@ function mg(t, e, o) {
     "time",
     "url",
     "week"
-  ]), [g, v] = qe("Input auto capitalize", ["on", "off", "none", "sentences", "words", "characters"]), [m, b] = qe("Input text align", ["left", "right"]);
-  let { type: w = "text" } = e, { name: p = "" } = e, { value: k = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: N = "" } = e, { leadingicon: L = null } = e, { trailingicon: j = null } = e, { variant: H = "goa" } = e, { disabled: x = "false" } = e, { handletrailingiconclick: Z = "false" } = e, { focused: V = "false" } = e, { readonly: B = "false" } = e, { error: S = "false" } = e, { testid: Y = "" } = e, { width: I = "30ch" } = e, { arialabel: A = "" } = e, { arialabelledby: O = "" } = e, { min: K = "" } = e, { max: F = "" } = e, { step: q = 1 } = e, { prefix: Q = "" } = e, { suffix: R = "" } = e, { debounce: ee = 0 } = e, { maxlength: oe = null } = e, { id: ne = "" } = e, { mt: te = null } = e, { mr: P = null } = e, { mb: G = null } = e, { ml: J = null } = e, { trailingiconarialabel: se = "" } = e, { textalign: ie = "left" } = e, { size: ye = "default" } = e, { version: Le = "1" } = e, Ke = false, le = false, X, pe, Te, Fe = false, Je = false, gt = "", ct = "";
+  ]), [g, v] = Ae("Input auto capitalize", ["on", "off", "none", "sentences", "words", "characters"]), [m, b] = Ae("Input text align", ["left", "right"]);
+  let { type: w = "text" } = e, { name: p = "" } = e, { value: k = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: N = "" } = e, { leadingicon: L = null } = e, { trailingicon: j = null } = e, { variant: H = "goa" } = e, { disabled: T = "false" } = e, { handletrailingiconclick: Z = "false" } = e, { focused: V = "false" } = e, { readonly: B = "false" } = e, { error: x = "false" } = e, { testid: Y = "" } = e, { width: q = "30ch" } = e, { arialabel: S = "" } = e, { arialabelledby: O = "" } = e, { min: K = "" } = e, { max: F = "" } = e, { step: A = 1 } = e, { prefix: Q = "" } = e, { suffix: R = "" } = e, { debounce: ee = 0 } = e, { maxlength: oe = null } = e, { id: ne = "" } = e, { mt: te = null } = e, { mr: P = null } = e, { mb: G = null } = e, { ml: J = null } = e, { trailingiconarialabel: se = "" } = e, { textalign: ie = "left" } = e, { size: ye = "default" } = e, { version: Le = "1" } = e, Ke = false, le = false, X, pe, Ie, Fe = false, Je = false, gt = "", ct = "";
   De(() => {
-    u(w), v(z), b(ie), pt(), Vt(), Tt(), Me();
-    const { containerStyle: he, inputWidth: $e } = vg(I, w);
+    u(w), v(z), b(ie), pt(), Vt(), It(), Me();
+    const { containerStyle: he, inputWidth: $e } = vg(q, w);
     o(32, gt = he), o(33, ct = $e);
   });
   function pt() {
     rt(pe, (he, $e) => {
       switch (he) {
-        case xt:
+        case Tt:
           _e($e);
           break;
         case Mt:
           st($e);
           break;
         case zt:
-          o(43, S = "false");
+          o(43, x = "false");
           break;
         case Dt:
           _e({ value: "" });
@@ -37419,18 +37419,18 @@ function mg(t, e, o) {
     });
   }
   function st(he) {
-    o(43, S = he.error ? "true" : "false");
+    o(43, x = he.error ? "true" : "false");
   }
   function _e(he) {
     o(0, k = he.value), We(k);
   }
   function We(he) {
-    Ee(Te, "_change", { name: p, value: he }, { bubbles: true });
+    Ee(Ie, "_change", { name: p, value: he }, { bubbles: true });
   }
   function Me() {
-    p && Oe(Te, ut, { name: p, el: pe }, { bubbles: true, timeout: 10 });
+    p && Oe(Ie, ut, { name: p, el: pe }, { bubbles: true, timeout: 10 });
   }
-  function Se(he) {
+  function xe(he) {
     const $e = he.target;
     $e && (l || (X != null && clearTimeout(X), X = setTimeout(
       () => {
@@ -37465,7 +37465,7 @@ function mg(t, e, o) {
         composed: true,
         detail: { name: p, value: $e.value }
       }
-    )), Ee(Te, "help-text::announce", void 0, { bubbles: true });
+    )), Ee(Ie, "help-text::announce", void 0, { bubbles: true });
   }
   function kt(he) {
     o(42, V = "false");
@@ -37478,12 +37478,12 @@ function mg(t, e, o) {
       }
     ));
   }
-  function Tt() {
-    var Bt, At, oo, po;
-    if (!Te) return;
-    const he = Te.querySelector("slot[name=leadingContent]");
-    (he == null ? void 0 : he.assignedNodes().length) > 0 && ((At = (Bt = he.assignedNodes()[0]) == null ? void 0 : Bt.textContent) == null ? void 0 : At.trim()) !== "" && o(30, Ke = true);
-    const $e = Te.querySelector("slot[name=trailingContent]");
+  function It() {
+    var Bt, St, oo, po;
+    if (!Ie) return;
+    const he = Ie.querySelector("slot[name=leadingContent]");
+    (he == null ? void 0 : he.assignedNodes().length) > 0 && ((St = (Bt = he.assignedNodes()[0]) == null ? void 0 : Bt.textContent) == null ? void 0 : St.trim()) !== "" && o(30, Ke = true);
+    const $e = Ie.querySelector("slot[name=trailingContent]");
     ($e == null ? void 0 : $e.assignedNodes().length) > 0 && ((po = (oo = $e.assignedNodes()[0]) == null ? void 0 : oo.textContent) == null ? void 0 : po.trim()) !== "" && o(31, le = true);
   }
   function Vt() {
@@ -37496,19 +37496,19 @@ function mg(t, e, o) {
   }
   function Lt(he) {
     ce[he ? "unshift" : "push"](() => {
-      Te = he, o(28, Te);
+      Ie = he, o(28, Ie);
     });
   }
   return t.$$set = (he) => {
-    "type" in he && o(1, w = he.type), "name" in he && o(2, p = he.name), "value" in he && o(0, k = he.value), "autocapitalize" in he && o(3, z = he.autocapitalize), "autocomplete" in he && o(4, M = he.autocomplete), "placeholder" in he && o(5, N = he.placeholder), "leadingicon" in he && o(6, L = he.leadingicon), "trailingicon" in he && o(7, j = he.trailingicon), "variant" in he && o(8, H = he.variant), "disabled" in he && o(44, x = he.disabled), "handletrailingiconclick" in he && o(45, Z = he.handletrailingiconclick), "focused" in he && o(42, V = he.focused), "readonly" in he && o(46, B = he.readonly), "error" in he && o(43, S = he.error), "testid" in he && o(9, Y = he.testid), "width" in he && o(47, I = he.width), "arialabel" in he && o(10, A = he.arialabel), "arialabelledby" in he && o(11, O = he.arialabelledby), "min" in he && o(12, K = he.min), "max" in he && o(13, F = he.max), "step" in he && o(14, q = he.step), "prefix" in he && o(15, Q = he.prefix), "suffix" in he && o(16, R = he.suffix), "debounce" in he && o(48, ee = he.debounce), "maxlength" in he && o(17, oe = he.maxlength), "id" in he && o(18, ne = he.id), "mt" in he && o(19, te = he.mt), "mr" in he && o(20, P = he.mr), "mb" in he && o(21, G = he.mb), "ml" in he && o(22, J = he.ml), "trailingiconarialabel" in he && o(23, se = he.trailingiconarialabel), "textalign" in he && o(24, ie = he.textalign), "size" in he && o(25, ye = he.size), "version" in he && o(26, Le = he.version), "$$scope" in he && o(51, d = he.$$scope);
+    "type" in he && o(1, w = he.type), "name" in he && o(2, p = he.name), "value" in he && o(0, k = he.value), "autocapitalize" in he && o(3, z = he.autocapitalize), "autocomplete" in he && o(4, M = he.autocomplete), "placeholder" in he && o(5, N = he.placeholder), "leadingicon" in he && o(6, L = he.leadingicon), "trailingicon" in he && o(7, j = he.trailingicon), "variant" in he && o(8, H = he.variant), "disabled" in he && o(44, T = he.disabled), "handletrailingiconclick" in he && o(45, Z = he.handletrailingiconclick), "focused" in he && o(42, V = he.focused), "readonly" in he && o(46, B = he.readonly), "error" in he && o(43, x = he.error), "testid" in he && o(9, Y = he.testid), "width" in he && o(47, q = he.width), "arialabel" in he && o(10, S = he.arialabel), "arialabelledby" in he && o(11, O = he.arialabelledby), "min" in he && o(12, K = he.min), "max" in he && o(13, F = he.max), "step" in he && o(14, A = he.step), "prefix" in he && o(15, Q = he.prefix), "suffix" in he && o(16, R = he.suffix), "debounce" in he && o(48, ee = he.debounce), "maxlength" in he && o(17, oe = he.maxlength), "id" in he && o(18, ne = he.id), "mt" in he && o(19, te = he.mt), "mr" in he && o(20, P = he.mr), "mb" in he && o(21, G = he.mb), "ml" in he && o(22, J = he.ml), "trailingiconarialabel" in he && o(23, se = he.trailingiconarialabel), "textalign" in he && o(24, ie = he.textalign), "size" in he && o(25, ye = he.size), "version" in he && o(26, Le = he.version), "$$scope" in he && o(51, d = he.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[1] & /*handletrailingiconclick*/
-    16384 && o(36, i = Ae(Z)), t.$$.dirty[1] & /*focused*/
-    2048 && o(50, n = Ae(V)), t.$$.dirty[1] & /*readonly*/
-    32768 && o(34, l = Ae(B)), t.$$.dirty[1] & /*disabled*/
-    8192 && o(35, r = Ae(x)), t.$$.dirty[0] & /*_error, _rootEl*/
+    16384 && o(36, i = Se(Z)), t.$$.dirty[1] & /*focused*/
+    2048 && o(50, n = Se(V)), t.$$.dirty[1] & /*readonly*/
+    32768 && o(34, l = Se(B)), t.$$.dirty[1] & /*disabled*/
+    8192 && o(35, r = Se(T)), t.$$.dirty[0] & /*_error, _rootEl*/
     805306368 | t.$$.dirty[1] & /*error, _prevError*/
-    266240 && (o(29, Fe = Ae(S)), Fe !== Je && (Ee(Te, "error::change", { isError: Fe }, { bubbles: true }), o(49, Je = Fe))), t.$$.dirty[0] & /*_inputEl*/
+    266240 && (o(29, Fe = Se(x)), Fe !== Je && (Ee(Ie, "error::change", { isError: Fe }, { bubbles: true }), o(49, Je = Fe))), t.$$.dirty[0] & /*_inputEl*/
     134217728 | t.$$.dirty[1] & /*isFocused*/
     524288 && n && pe && setTimeout(() => pe.focus(), 2), t.$$.dirty[0] & /*_inputEl, type*/
     134217730 && pe && w === "search" && pe.addEventListener("search", (he) => {
@@ -37525,11 +37525,11 @@ function mg(t, e, o) {
     j,
     H,
     Y,
-    A,
+    S,
     O,
     K,
     F,
-    q,
+    A,
     Q,
     R,
     oe,
@@ -37543,7 +37543,7 @@ function mg(t, e, o) {
     ye,
     Le,
     pe,
-    Te,
+    Ie,
     Fe,
     Ke,
     le,
@@ -37552,17 +37552,17 @@ function mg(t, e, o) {
     l,
     r,
     i,
-    Se,
+    xe,
     Xe,
     tt,
     kt,
     c,
     V,
-    S,
     x,
+    T,
     Z,
     B,
-    I,
+    q,
     ee,
     Je,
     n,
@@ -38175,37 +38175,37 @@ function Mg(t) {
         "data-testid",
         /*testid*/
         t[4]
-      ), T(
+      ), I(
         e,
         "interactive",
         /*color*/
         t[2] === "interactive"
-      ), T(
+      ), I(
         e,
         "dark",
         /*color*/
         t[2] === "dark"
-      ), T(
+      ), I(
         e,
         "light",
         /*color*/
         t[2] === "light"
-      ), T(
+      ), I(
         e,
         "xsmall",
         /*size*/
         t[3] === "xsmall"
-      ), T(
+      ), I(
         e,
         "small",
         /*size*/
         t[3] === "small"
-      ), T(
+      ), I(
         e,
         "medium",
         /*size*/
         t[3] === "medium"
-      ), T(
+      ), I(
         e,
         "large",
         /*size*/
@@ -38252,43 +38252,43 @@ function Mg(t) {
         /*testid*/
         s[4]
       ), (!l || u & /*color*/
-      4) && T(
+      4) && I(
         e,
         "interactive",
         /*color*/
         s[2] === "interactive"
       ), (!l || u & /*color*/
-      4) && T(
+      4) && I(
         e,
         "dark",
         /*color*/
         s[2] === "dark"
       ), (!l || u & /*color*/
-      4) && T(
+      4) && I(
         e,
         "light",
         /*color*/
         s[2] === "light"
       ), (!l || u & /*size*/
-      8) && T(
+      8) && I(
         e,
         "xsmall",
         /*size*/
         s[3] === "xsmall"
       ), (!l || u & /*size*/
-      8) && T(
+      8) && I(
         e,
         "small",
         /*size*/
         s[3] === "small"
       ), (!l || u & /*size*/
-      8) && T(
+      8) && I(
         e,
         "medium",
         /*size*/
         s[3] === "medium"
       ), (!l || u & /*size*/
-      8) && T(
+      8) && I(
         e,
         "large",
         /*size*/
@@ -38551,17 +38551,17 @@ function Eg(t) {
         t[7],
         /*ml*/
         t[8]
-      )), T(
+      )), I(
         e,
         "interactive",
         /*color*/
         t[0] === "interactive"
-      ), T(
+      ), I(
         e,
         "light",
         /*color*/
         t[0] === "light"
-      ), T(
+      ), I(
         e,
         "disabled",
         /*disabled*/
@@ -38611,19 +38611,19 @@ function Eg(t) {
         /*ml*/
         m[8]
       ))) && f(e, "style", r), (!a || b & /*color*/
-      1) && T(
+      1) && I(
         e,
         "interactive",
         /*color*/
         m[0] === "interactive"
       ), (!a || b & /*color*/
-      1) && T(
+      1) && I(
         e,
         "light",
         /*color*/
         m[0] === "light"
       ), (!a || b & /*disabled*/
-      8) && T(
+      8) && I(
         e,
         "disabled",
         /*disabled*/
@@ -38673,7 +38673,7 @@ function Dg(t, e, o) {
     z
   ];
 }
-class xg extends ze {
+class Tg extends ze {
   constructor(e) {
     super(), ke(
       this,
@@ -38771,8 +38771,8 @@ class xg extends ze {
     this.$$set({ actionArgs: e }), y();
   }
 }
-customElements.define("goa-link-button", Ce(xg, { color: {}, leadingicon: {}, trailingicon: {}, disabled: { type: "Boolean" }, testid: {}, mt: {}, mr: {}, mb: {}, ml: {}, action: { type: "String", attribute: "action", reflect: true }, actionArg: { type: "String", attribute: "action-arg", reflect: true }, actionArgs: { type: "Object", attribute: "action-args", reflect: true } }, ["default"], [], true));
-function Tg(t) {
+customElements.define("goa-link-button", Ce(Tg, { color: {}, leadingicon: {}, trailingicon: {}, disabled: { type: "Boolean" }, testid: {}, mt: {}, mr: {}, mb: {}, ml: {}, action: { type: "String", attribute: "action", reflect: true }, actionArg: { type: "String", attribute: "action-arg", reflect: true }, actionArgs: { type: "Object", attribute: "action-args", reflect: true } }, ["default"], [], true));
+function Ig(t) {
   je(t, "svelte-ydrovw", `button.svelte-ydrovw{display:inline-flex;box-sizing:border-box;cursor:pointer;font:var(--goa-button-text);min-height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:4px var(--goa-button-padding-lr, var(--goa-space-s));gap:var(--goa-button-gap);align-items:center;width:100%;background:none;border:none;text-align:left;outline:none}button.compact.svelte-ydrovw{min-height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:4px var(--goa-button-padding-lr-compact, var(--goa-space-xs));gap:var(--goa-button-compact-gap)}button.svelte-ydrovw:focus-visible,button.svelte-ydrovw:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.svelte-ydrovw:focus-visible{box-shadow:0 0 0 var(--goa-border-width-l)
       var(--goa-color-interactive-focus)}.text.svelte-ydrovw{padding-bottom:var(--font-valign-fix);width:100%}`);
 }
@@ -38810,7 +38810,7 @@ function fr(t) {
     }
   };
 }
-function Ig(t) {
+function qg(t) {
   let e, o, i, n, l, r, a = (
     /*icon*/
     t[2] && fr(t)
@@ -38825,7 +38825,7 @@ function Ig(t) {
         "data-testid",
         /*testid*/
         t[1]
-      ), f(e, "tabindex", "0"), f(e, "style", it(Ie("width", "100%"))), f(e, "class", "svelte-ydrovw"), T(
+      ), f(e, "tabindex", "0"), f(e, "style", it(qe("width", "100%"))), f(e, "class", "svelte-ydrovw"), I(
         e,
         "compact",
         /*size*/
@@ -38853,7 +38853,7 @@ function Ig(t) {
         /*testid*/
         d[1]
       ), c & /*size*/
-      8 && T(
+      8 && I(
         e,
         "compact",
         /*size*/
@@ -38867,7 +38867,7 @@ function Ig(t) {
     }
   };
 }
-function qg(t, e, o) {
+function Ag(t, e, o) {
   let { text: i = "" } = e, { action: n = "default" } = e, { testid: l = "" } = e, { icon: r = void 0 } = e, a = "normal", d;
   De(() => {
     d.addEventListener("menu-button:init", (u) => {
@@ -38887,9 +38887,9 @@ function qg(t, e, o) {
     "text" in u && o(0, i = u.text), "action" in u && o(6, n = u.action), "testid" in u && o(1, l = u.testid), "icon" in u && o(2, r = u.icon);
   }, [i, l, r, a, d, c, n, s];
 }
-class Ag extends ze {
+class Sg extends ze {
   constructor(e) {
-    super(), ke(this, e, qg, Ig, we, { text: 0, action: 6, testid: 1, icon: 2 }, Tg);
+    super(), ke(this, e, Ag, qg, we, { text: 0, action: 6, testid: 1, icon: 2 }, Ig);
   }
   get text() {
     return this.$$.ctx[0];
@@ -38916,8 +38916,8 @@ class Ag extends ze {
     this.$$set({ icon: e }), y();
   }
 }
-customElements.define("goa-menu-action", Ce(Ag, { text: { type: "String", attribute: "text" }, action: { type: "String", attribute: "action" }, testid: { type: "String", attribute: "testid" }, icon: { type: "String", attribute: "icon" } }, [], [], true));
-function Sg(t) {
+customElements.define("goa-menu-action", Ce(Sg, { text: { type: "String", attribute: "text" }, action: { type: "String", attribute: "action" }, testid: { type: "String", attribute: "testid" }, icon: { type: "String", attribute: "icon" } }, [], [], true));
+function xg(t) {
   let e, o, i, n, l;
   return {
     c() {
@@ -39064,7 +39064,7 @@ function Hg(t) {
   function c(m, b) {
     return (
       /*text*/
-      m[0] ? Og : Sg
+      m[0] ? Og : xg
     );
   }
   let s = c(t), u = s(t);
@@ -39150,41 +39150,41 @@ function Hg(t) {
 function Pg(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { text: l = "" } = e, { type: r = "primary" } = e, { testid: a = "" } = e, { leadingIcon: d = void 0 } = e, { maxWidth: c } = e, { size: s = "normal" } = e, { variant: u = "normal" } = e, { version: g = "1" } = e, { ariaLabel: v = "Open menu" } = e, m, b = "chevron-down", w, p = [], k = 0, z, M = 0;
   De(async () => {
-    rt(m, (I, A, O) => {
-      switch (I) {
+    rt(m, (q, S, O) => {
+      switch (q) {
         case "click":
-          x(A), O.stopPropagation();
+          T(S), O.stopPropagation();
           break;
         case "bind":
-          j(A), O.stopPropagation();
+          j(S), O.stopPropagation();
           break;
         default:
-          console.warn(`Unknown action "${I}" received in MenuButton`);
+          console.warn(`Unknown action "${q}" received in MenuButton`);
           break;
       }
-    }), w.addEventListener("keydown", (I) => {
+    }), w.addEventListener("keydown", (q) => {
       var O;
-      let A = false;
-      switch (I.key) {
+      let S = false;
+      switch (q.key) {
         case "Tab":
-          L(), I.preventDefault();
+          L(), q.preventDefault();
           break;
         case "ArrowUp":
-          A = true, k = k - 1 < 0 ? p.length - 1 : k - 1;
+          S = true, k = k - 1 < 0 ? p.length - 1 : k - 1;
           break;
         case "ArrowDown":
-          A = true, k = (k + 1) % p.length;
+          S = true, k = (k + 1) % p.length;
           break;
         case "Home":
         case "PageUp":
-          A = true, k = 0;
+          S = true, k = 0;
           break;
         case "End":
         case "PageDown":
-          A = true, k = p.length - 1;
+          S = true, k = p.length - 1;
           break;
       }
-      A && ((O = p[k]) == null || O.focus(), I.stopPropagation(), I.preventDefault());
+      S && ((O = p[k]) == null || O.focus(), q.stopPropagation(), q.preventDefault());
     });
   });
   function N() {
@@ -39193,45 +39193,45 @@ function Pg(t, e, o) {
   function L() {
     o(11, b = "chevron-down"), Ee(document.body, "goa:closePopover", { target: m });
   }
-  function j(I) {
-    p = [...p, I], Ee(I, "menu-button:init", { size: s });
+  function j(q) {
+    p = [...p, q], Ee(q, "menu-button:init", { size: s });
   }
-  function H(I) {
-    I && setTimeout(
+  function H(q) {
+    q && setTimeout(
       () => {
-        o(13, M = I.getBoundingClientRect().width);
+        o(13, M = q.getBoundingClientRect().width);
       },
       10
     );
   }
-  function x(I) {
-    Ee(m, "_action", I, { bubbles: true }), L(), k = 0;
+  function T(q) {
+    Ee(m, "_action", q, { bubbles: true }), L(), k = 0;
   }
   function Z() {
     L(), k = 0;
   }
-  function V(I) {
-    ce[I ? "unshift" : "push"](() => {
-      z = I, o(9, z);
+  function V(q) {
+    ce[q ? "unshift" : "push"](() => {
+      z = q, o(9, z);
     });
   }
-  function B(I) {
-    ce[I ? "unshift" : "push"](() => {
-      z = I, o(9, z);
+  function B(q) {
+    ce[q ? "unshift" : "push"](() => {
+      z = q, o(9, z);
     });
   }
-  function S(I) {
-    ce[I ? "unshift" : "push"](() => {
-      w = I, o(12, w);
+  function x(q) {
+    ce[q ? "unshift" : "push"](() => {
+      w = q, o(12, w);
     });
   }
-  function Y(I) {
-    ce[I ? "unshift" : "push"](() => {
-      m = I, o(10, m);
+  function Y(q) {
+    ce[q ? "unshift" : "push"](() => {
+      m = q, o(10, m);
     });
   }
-  return t.$$set = (I) => {
-    "text" in I && o(0, l = I.text), "type" in I && o(1, r = I.type), "testid" in I && o(2, a = I.testid), "leadingIcon" in I && o(3, d = I.leadingIcon), "maxWidth" in I && o(4, c = I.maxWidth), "size" in I && o(5, s = I.size), "variant" in I && o(6, u = I.variant), "version" in I && o(7, g = I.version), "ariaLabel" in I && o(8, v = I.ariaLabel), "$$scope" in I && o(16, n = I.$$scope);
+  return t.$$set = (q) => {
+    "text" in q && o(0, l = q.text), "type" in q && o(1, r = q.type), "testid" in q && o(2, a = q.testid), "leadingIcon" in q && o(3, d = q.leadingIcon), "maxWidth" in q && o(4, c = q.maxWidth), "size" in q && o(5, s = q.size), "variant" in q && o(6, u = q.variant), "version" in q && o(7, g = q.version), "ariaLabel" in q && o(8, v = q.ariaLabel), "$$scope" in q && o(16, n = q.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*_targetEl*/
     512 && H(z);
@@ -39256,7 +39256,7 @@ function Pg(t, e, o) {
     i,
     V,
     B,
-    S,
+    x,
     Y
   ];
 }
@@ -39657,9 +39657,9 @@ function br(t) {
 }
 function Gg(t, e, o) {
   let i, { $$slots: n = {}, $$scope: l } = e;
-  const r = ft(n), [a, d] = qe("Microsite header type", ["live", "alpha", "beta"], true);
+  const r = ft(n), [a, d] = Ae("Microsite header type", ["live", "alpha", "beta"], true);
   let { type: c } = e, { version: s = "" } = e, { feedbackurl: u = "" } = e, { maxcontentwidth: g = "100%" } = e, { headerurltarget: v = "blank" } = e, { feedbackurltarget: m = "blank" } = e, { hasfeedbackhandler: b = "false" } = e, { testid: w = "" } = e;
-  const [p, k] = qe("URL target values", ["self", "blank"]);
+  const [p, k] = Ae("URL target values", ["self", "blank"]);
   let z;
   function M(j) {
     i == true && (j.preventDefault(), z.dispatchEvent(new CustomEvent("_feedbackClick", { composed: true, bubbles: true })));
@@ -39681,7 +39681,7 @@ function Gg(t, e, o) {
     "type" in j && o(0, c = j.type), "version" in j && o(1, s = j.version), "feedbackurl" in j && o(2, u = j.feedbackurl), "maxcontentwidth" in j && o(3, g = j.maxcontentwidth), "headerurltarget" in j && o(4, v = j.headerurltarget), "feedbackurltarget" in j && o(5, m = j.feedbackurltarget), "hasfeedbackhandler" in j && o(11, b = j.hasfeedbackhandler), "testid" in j && o(6, w = j.testid), "$$scope" in j && o(12, l = j.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*hasfeedbackhandler*/
-    2048 && o(8, i = Ae(b));
+    2048 && o(8, i = Se(b));
   }, [
     c,
     s,
@@ -39778,11 +39778,11 @@ function Xg(t) {
 }
 const Jg = (t) => ({}), pr = (t) => ({}), $g = (t) => ({}), wr = (t) => ({}), e3 = (t) => ({}), _r = (t) => ({});
 function yr(t) {
-  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, x, Z, V, B, S, Y, I, A, O, K, F = (
+  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, T, Z, V, B, x, Y, q, S, O, K, F = (
     /*calloutvariant*/
     t[3] !== null && /*version*/
     t[5] !== "2" && kr(t)
-  ), q = (
+  ), A = (
     /*version*/
     t[5] === "2" && /*_iconType*/
     t[16] && Cr(t)
@@ -39818,7 +39818,7 @@ function yr(t) {
   );
   return {
     c() {
-      e = C("goa-focus-trap"), o = C("div"), i = C("div"), n = W(), l = C("div"), F && F.c(), r = W(), a = C("div"), d = C("header"), c = C("div"), q && q.c(), s = W(), u = C("div"), v && v.c(), b = W(), oe && oe.c(), k = W(), z = C("div"), M = C("goa-scrollable"), P && P.c(), L = W(), j = C("div"), G && G.c(), f(i, "data-testid", "modal-overlay"), f(i, "class", "modal-overlay svelte-aepkat"), f(u, "data-testid", "modal-title"), f(u, "class", "modal-title svelte-aepkat"), f(u, "id", "goa-modal-heading"), f(u, "aria-label", m = /*_headingExists*/
+      e = C("goa-focus-trap"), o = C("div"), i = C("div"), n = W(), l = C("div"), F && F.c(), r = W(), a = C("div"), d = C("header"), c = C("div"), A && A.c(), s = W(), u = C("div"), v && v.c(), b = W(), oe && oe.c(), k = W(), z = C("div"), M = C("goa-scrollable"), P && P.c(), L = W(), j = C("div"), G && G.c(), f(i, "data-testid", "modal-overlay"), f(i, "class", "modal-overlay svelte-aepkat"), f(u, "data-testid", "modal-title"), f(u, "class", "modal-title svelte-aepkat"), f(u, "id", "goa-modal-heading"), f(u, "aria-label", m = /*_headingExists*/
       t[9] ? void 0 : "Modal"), f(c, "class", "modal-heading-content svelte-aepkat"), f(d, "class", w = Ze(
         /*version*/
         t[5] === "2" && /*calloutvariant*/
@@ -39829,12 +39829,12 @@ function yr(t) {
       ) + " svelte-aepkat"), ot(() => (
         /*header_elementresize_handler*/
         t[29].call(d)
-      )), T(
+      )), I(
         d,
         "has-content",
         /*_headerHasContent*/
         t[18]
-      ), T(
+      ), I(
         d,
         "callout",
         /*calloutvariant*/
@@ -39844,8 +39844,8 @@ function yr(t) {
       t[13] + "px - " + jr + "px)"), h(M, "class", "svelte-aepkat"), f(z, "data-testid", "modal-content"), f(z, "class", "modal-content svelte-aepkat"), f(j, "class", "modal-actions svelte-aepkat"), f(j, "data-testid", "modal-actions"), ot(() => (
         /*div4_elementresize_handler*/
         t[31].call(j)
-      )), T(j, "empty-actions", !/*_actionsSlotHasContent*/
-      t[14]), f(a, "class", "content svelte-aepkat"), f(l, "class", "modal-pane svelte-aepkat"), f(l, "tabindex", "-1"), f(l, "role", "dialog"), f(l, "aria-modal", "true"), f(l, "aria-labelledby", "goa-modal-heading"), f(l, "data-first-focus", "true"), T(
+      )), I(j, "empty-actions", !/*_actionsSlotHasContent*/
+      t[14]), f(a, "class", "content svelte-aepkat"), f(l, "class", "modal-pane svelte-aepkat"), f(l, "tabindex", "-1"), f(l, "role", "dialog"), f(l, "aria-modal", "true"), f(l, "aria-labelledby", "goa-modal-heading"), f(l, "data-first-focus", "true"), I(
         l,
         "v2",
         /*version*/
@@ -39867,7 +39867,7 @@ function yr(t) {
       ), h(e, "class", "svelte-aepkat");
     },
     m(J, se) {
-      D(J, e, se), _(e, o), _(o, i), _(o, n), _(o, l), F && F.m(l, null), _(l, r), _(l, a), _(a, d), _(d, c), q && q.m(c, null), _(c, s), _(c, u), ~g && R[g].m(u, null), _(d, b), oe && oe.m(d, null), t[28](d), p = co(
+      D(J, e, se), _(e, o), _(o, i), _(o, n), _(o, l), F && F.m(l, null), _(l, r), _(l, a), _(a, d), _(d, c), A && A.m(c, null), _(c, s), _(c, u), ~g && R[g].m(u, null), _(d, b), oe && oe.m(d, null), t[28](d), p = co(
         d,
         /*header_elementresize_handler*/
         t[29].bind(d)
@@ -39875,7 +39875,7 @@ function yr(t) {
         j,
         /*div4_elementresize_handler*/
         t[31].bind(j)
-      ), t[32](o), A = true, O || (K = [
+      ), t[32](o), S = true, O || (K = [
         re(
           i,
           "click",
@@ -39888,7 +39888,7 @@ function yr(t) {
           /*handleScroll*/
           t[20]
         ),
-        ii(S = fi.call(null, o, { enable: (
+        ii(x = fi.call(null, o, { enable: (
           /*_isOpen*/
           t[7]
         ) }))
@@ -39899,14 +39899,14 @@ function yr(t) {
       t[3] !== null && /*version*/
       t[5] !== "2" ? F ? F.p(t, se) : (F = kr(t), F.c(), F.m(l, r)) : F && (F.d(1), F = null), /*version*/
       t[5] === "2" && /*_iconType*/
-      t[16] ? q ? q.p(t, se) : (q = Cr(t), q.c(), q.m(c, s)) : q && (q.d(1), q = null);
+      t[16] ? A ? A.p(t, se) : (A = Cr(t), A.c(), A.m(c, s)) : A && (A.d(1), A = null);
       let ie = g;
       g = ee(t), g === ie ? ~g && R[g].p(t, se) : (v && (He(), $(R[ie], 1, 1, () => {
         R[ie] = null;
-      }), Pe()), ~g ? (v = R[g], v ? v.p(t, se) : (v = R[g] = Q[g](t), v.c()), U(v, 1), v.m(u, null)) : v = null), (!A || se[0] & /*_headingExists*/
+      }), Pe()), ~g ? (v = R[g], v ? v.p(t, se) : (v = R[g] = Q[g](t), v.c()), U(v, 1), v.m(u, null)) : v = null), (!S || se[0] & /*_headingExists*/
       512 && m !== (m = /*_headingExists*/
       t[9] ? void 0 : "Modal")) && f(u, "aria-label", m), /*_isClosable*/
-      t[8] ? oe ? oe.p(t, se) : (oe = zr(t), oe.c(), oe.m(d, null)) : oe && (oe.d(1), oe = null), (!A || se[0] & /*version, calloutvariant*/
+      t[8] ? oe ? oe.p(t, se) : (oe = zr(t), oe.c(), oe.m(d, null)) : oe && (oe.d(1), oe = null), (!S || se[0] & /*version, calloutvariant*/
       40 && w !== (w = Ze(
         /*version*/
         t[5] === "2" && /*calloutvariant*/
@@ -39914,26 +39914,26 @@ function yr(t) {
           /*calloutvariant*/
           t[3]
         ) : ""
-      ) + " svelte-aepkat")) && f(d, "class", w), (!A || se[0] & /*version, calloutvariant, _headerHasContent*/
-      262184) && T(
+      ) + " svelte-aepkat")) && f(d, "class", w), (!S || se[0] & /*version, calloutvariant, _headerHasContent*/
+      262184) && I(
         d,
         "has-content",
         /*_headerHasContent*/
         t[18]
-      ), (!A || se[0] & /*version, calloutvariant, calloutvariant*/
-      40) && T(
+      ), (!S || se[0] & /*version, calloutvariant, calloutvariant*/
+      40) && I(
         d,
         "callout",
         /*calloutvariant*/
         t[3] !== null
-      ), te ? te.p && (!A || se[0] & /*$$scope*/
+      ), te ? te.p && (!S || se[0] & /*$$scope*/
       67108864) && ge(
         te,
         ne,
         t,
         /*$$scope*/
         t[26],
-        A ? fe(
+        S ? fe(
           ne,
           /*$$scope*/
           t[26],
@@ -39944,39 +39944,39 @@ function yr(t) {
           t[26]
         ),
         wr
-      ) : P && P.p && (!A || se[0] & /*$$scope*/
-      67108864) && P.p(t, A ? se : [-1, -1]), (!A || se[0] & /*_headerHeight, _actionsHeight*/
+      ) : P && P.p && (!S || se[0] & /*$$scope*/
+      67108864) && P.p(t, S ? se : [-1, -1]), (!S || se[0] & /*_headerHeight, _actionsHeight*/
       40960 && N !== (N = "calc(100vh - " + /*_headerHeight*/
       t[15] + "px - var(--goa-space-xl) - " + /*_actionsHeight*/
       t[13] + "px - " + jr + "px)")) && h(M, "maxheight", N), /*$$slots*/
       t[21].actions ? G ? (G.p(t, se), se[0] & /*$$slots*/
       2097152 && U(G, 1)) : (G = Mr(t), G.c(), U(G, 1), G.m(j, null)) : G && (He(), $(G, 1, 1, () => {
         G = null;
-      }), Pe()), (!A || se[0] & /*_actionsSlotHasContent*/
-      16384) && T(j, "empty-actions", !/*_actionsSlotHasContent*/
-      t[14]), (!A || se[0] & /*version*/
-      32) && T(
+      }), Pe()), (!S || se[0] & /*_actionsSlotHasContent*/
+      16384) && I(j, "empty-actions", !/*_actionsSlotHasContent*/
+      t[14]), (!S || se[0] & /*version*/
+      32) && I(
         l,
         "v2",
         /*version*/
         t[5] === "2"
-      ), (!A || se[0] & /*testid*/
+      ), (!S || se[0] & /*testid*/
       16) && f(
         o,
         "data-testid",
         /*testid*/
         t[4]
-      ), (!A || se[0] & /*_scrollPos*/
+      ), (!S || se[0] & /*_scrollPos*/
       2048 && V !== (V = Ze(`modal ${/*_scrollPos*/
-      t[11] ?? ""}`) + " svelte-aepkat")) && f(o, "class", V), (!A || se[0] & /*maxwidth, _actionsHeight, _headerHeight*/
+      t[11] ?? ""}`) + " svelte-aepkat")) && f(o, "class", V), (!S || se[0] & /*maxwidth, _actionsHeight, _headerHeight*/
       40961 && B !== (B = `--maxwidth: ${/*maxwidth*/
       t[0]}; --actions-height: ${/*_actionsHeight*/
       t[13]}px; --header-height: ${/*_headerHeight*/
-      t[15]}`)) && f(o, "style", B), S && yt(S.update) && se[0] & /*_isOpen*/
-      128 && S.update.call(null, { enable: (
+      t[15]}`)) && f(o, "style", B), x && yt(x.update) && se[0] & /*_isOpen*/
+      128 && x.update.call(null, { enable: (
         /*_isOpen*/
         t[7]
-      ) }), (!A || se[0] & /*open*/
+      ) }), (!S || se[0] & /*open*/
       4) && h(
         e,
         "open",
@@ -39985,23 +39985,23 @@ function yr(t) {
       );
     },
     i(J) {
-      A || (U(v), U(P, J), U(G), J && ot(() => {
-        A && (Z && Z.end(1), x = Jo(l, Po, {
+      S || (U(v), U(P, J), U(G), J && ot(() => {
+        S && (Z && Z.end(1), T = Jo(l, Po, {
           duration: (
             /*_transitionTime*/
             t[17]
           ),
           y: 200
-        }), x.start());
+        }), T.start());
       }), J && ot(() => {
-        A && (I && I.end(1), Y = Jo(o, eo, { duration: (
+        S && (q && q.end(1), Y = Jo(o, eo, { duration: (
           /*_transitionTime*/
           t[17]
         ) }), Y.start());
-      }), A = true);
+      }), S = true);
     },
     o(J) {
-      $(v), $(P, J), $(G), x && x.invalidate(), J && (Z = $o(l, Po, {
+      $(v), $(P, J), $(G), T && T.invalidate(), J && (Z = $o(l, Po, {
         delay: (
           /*_transitionTime*/
           t[17]
@@ -40011,7 +40011,7 @@ function yr(t) {
           t[17]
         ),
         y: -100
-      })), Y && Y.invalidate(), J && (I = $o(o, eo, {
+      })), Y && Y.invalidate(), J && (q = $o(o, eo, {
         delay: (
           /*_transitionTime*/
           t[17]
@@ -40020,10 +40020,10 @@ function yr(t) {
           /*_transitionTime*/
           t[17]
         )
-      })), A = false;
+      })), S = false;
     },
     d(J) {
-      J && E(e), F && F.d(), q && q.d(), ~g && R[g].d(), oe && oe.d(), t[28](null), p(), P && P.d(J), t[30](null), G && G.d(), H(), J && Z && Z.end(), t[32](null), J && I && I.end(), O = false, Ye(K);
+      J && E(e), F && F.d(), A && A.d(), ~g && R[g].d(), oe && oe.d(), t[28](null), p(), P && P.d(J), t[30](null), G && G.d(), H(), J && Z && Z.end(), t[32](null), J && q && q.end(), O = false, Ye(K);
     }
   };
 }
@@ -40322,17 +40322,17 @@ let jr = 128;
 function l3(t, e, o) {
   let i, n, l, r, a, { $$slots: d = {}, $$scope: c } = e;
   const s = ft(d);
-  let { heading: u = "" } = e, { closable: g = "false" } = e, { open: v = "false" } = e, { transition: m = "none" } = e, { calloutvariant: b = null } = e, { maxwidth: w = "60ch" } = e, { testid: p = "modal" } = e, { version: k = "1" } = e, { width: z = "" } = e, M = null, N = "top", L, j, H = false, x, Z = false, V = false, B;
-  const [S, Y] = qe("Callout variant", ["emergency", "important", "information", "success", "event"]), [I, A] = qe("Modal transition", ["fast", "slow", "none"]), [O, K] = qe("Version", ["1", "2"]);
+  let { heading: u = "" } = e, { closable: g = "false" } = e, { open: v = "false" } = e, { transition: m = "none" } = e, { calloutvariant: b = null } = e, { maxwidth: w = "60ch" } = e, { testid: p = "modal" } = e, { version: k = "1" } = e, { width: z = "" } = e, M = null, N = "top", L, j, H = false, T, Z = false, V = false, B;
+  const [x, Y] = Ae("Callout variant", ["emergency", "important", "information", "success", "event"]), [q, S] = Ae("Modal transition", ["fast", "slow", "none"]), [O, K] = Ae("Version", ["1", "2"]);
   De(() => {
-    Y(b), A(m), K(k), window.addEventListener("keydown", R), z && (o(0, w = z), console.warn("`width` is deprecated. Please use `maxwidth` instead."));
+    Y(b), S(m), K(k), window.addEventListener("keydown", R), z && (o(0, w = z), console.warn("`width` is deprecated. Please use `maxwidth` instead."));
   }), dt(() => {
     window.removeEventListener("keydown", R);
   });
   async function F() {
-    await Ge(), o(25, Z = !q(".modal-title", "heading")), o(14, V = !q(".modal-actions", "actions"));
+    await Ge(), o(25, Z = !A(".modal-title", "heading")), o(14, V = !A(".modal-actions", "actions"));
   }
-  function q(J, se) {
+  function A(J, se) {
     var Le, Ke;
     const ie = M == null ? void 0 : M.querySelector(J), ye = ie && Et(ie);
     return !ye || ye.length === 0 || (ye == null ? void 0 : ye.length) === 1 && ye[0].tagName === "IFRAME" ? true : (ye == null ? void 0 : ye.length) === 1 && ye[0].tagName === "DIV" && ye[0].getAttribute("slot") === se && ((Ke = (Le = ye[0]) == null ? void 0 : Le.textContent) == null ? void 0 : Ke.trim()) === "";
@@ -40369,7 +40369,7 @@ function l3(t, e, o) {
     });
   }
   function P() {
-    x = this.clientHeight, o(13, x);
+    T = this.clientHeight, o(13, T);
   }
   function G(J) {
     ce[J ? "unshift" : "push"](() => {
@@ -40380,10 +40380,10 @@ function l3(t, e, o) {
     "heading" in J && o(1, u = J.heading), "closable" in J && o(22, g = J.closable), "open" in J && o(2, v = J.open), "transition" in J && o(23, m = J.transition), "calloutvariant" in J && o(3, b = J.calloutvariant), "maxwidth" in J && o(0, w = J.maxwidth), "testid" in J && o(4, p = J.testid), "version" in J && o(5, k = J.version), "width" in J && o(24, z = J.width), "$$scope" in J && o(26, c = J.$$scope);
   }, t.$$.update = () => {
     if (t.$$.dirty[0] & /*closable*/
-    4194304 && o(8, i = Ae(g)), t.$$.dirty[0] & /*heading, _headingSlotHasContent*/
+    4194304 && o(8, i = Se(g)), t.$$.dirty[0] & /*heading, _headingSlotHasContent*/
     33554434 && o(9, n = u !== "" || s.heading && Z), t.$$.dirty[0] & /*_headingExists, _isClosable*/
     768 && o(18, l = n || i), t.$$.dirty[0] & /*open*/
-    4 && setTimeout(() => o(7, H = Ae(v)), 1), t.$$.dirty[0] & /*_isOpen, _scrollEl*/
+    4 && setTimeout(() => o(7, H = Se(v)), 1), t.$$.dirty[0] & /*_isOpen, _scrollEl*/
     192 && H && L) {
       const J = L.scrollHeight > L.offsetHeight;
       o(11, N = J ? "top" : null);
@@ -40406,7 +40406,7 @@ function l3(t, e, o) {
     M,
     N,
     j,
-    x,
+    T,
     V,
     B,
     a,
@@ -40586,12 +40586,12 @@ function Lr(t) {
         "data-testid",
         /*testid*/
         t[3]
-      ), f(e, "class", "svelte-12f8rg1"), T(
+      ), f(e, "class", "svelte-12f8rg1"), I(
         e,
         "v2",
         /*version*/
         t[4] === "2"
-      ), T(
+      ), I(
         e,
         "compact",
         /*version*/
@@ -40672,13 +40672,13 @@ function Lr(t) {
         /*testid*/
         N[3]
       ), (!w || L & /*version*/
-      16) && T(
+      16) && I(
         e,
         "v2",
         /*version*/
         N[4] === "2"
       ), (!w || L & /*version, compact*/
-      80) && T(
+      80) && I(
         e,
         "compact",
         /*version*/
@@ -40688,11 +40688,11 @@ function Lr(t) {
     },
     i(N) {
       w || (U(M, N), N && ot(() => {
-        w && (b || (b = xo(o, eo, {}, true)), b.run(1));
+        w && (b || (b = To(o, eo, {}, true)), b.run(1));
       }), w = true);
     },
     o(N) {
-      $(M, N), N && (b || (b = xo(o, eo, {}, false)), b.run(0)), w = false;
+      $(M, N), N && (b || (b = To(o, eo, {}, false)), b.run(0)), w = false;
     },
     d(N) {
       N && E(e), M && M.d(N), N && b && b.end(), p = false, k();
@@ -40730,7 +40730,7 @@ function s3(t) {
 }
 function d3(t, e, o) {
   let i, n, l, { $$slots: r = {}, $$scope: a } = e;
-  const [d, c] = qe("Notification type", ["emergency", "important", "information", "event"], true), [s, u] = qe("Aria-Live type", ["assertive", "off", "polite"], true), [g, v] = qe("Notification emphasis", ["high", "low"], false);
+  const [d, c] = Ae("Notification type", ["emergency", "important", "information", "event"], true), [s, u] = Ae("Aria-Live type", ["assertive", "off", "polite"], true), [g, v] = Ae("Notification emphasis", ["high", "low"], false);
   let { type: m = "" } = e, { maxcontentwidth: b = "100%" } = e, { arialive: w = "polite" } = e, { testid: p = "" } = e, { version: k = "1" } = e, { emphasis: z = "high" } = e, { compact: M = false } = e, N = true;
   De(() => {
     u(w), v(z), setTimeout(() => c(m), 1);
@@ -41194,7 +41194,7 @@ function Dr(t, e, o) {
   const i = t.slice();
   return i[22] = e[o], i[24] = o, i;
 }
-function xr(t) {
+function Tr(t) {
   let e, o, i, n, l, r, a, d, c = (
     /*itemcount*/
     (t[2] <= 0 ? "1" : (
@@ -41233,7 +41233,7 @@ function L3(t) {
   let e = (
     /*_pageCount*/
     t[9]
-  ), o, i = Ir(t);
+  ), o, i = qr(t);
   return {
     c() {
       i.c(), o = Qe();
@@ -41244,7 +41244,7 @@ function L3(t) {
     p(n, l) {
       l & /*_pageCount*/
       512 && we(e, e = /*_pageCount*/
-      n[9]) ? (i.d(1), i = Ir(n), i.c(), i.m(o.parentNode, o)) : i.p(n, l);
+      n[9]) ? (i.d(1), i = qr(n), i.c(), i.m(o.parentNode, o)) : i.p(n, l);
     },
     d(n) {
       n && E(o), i.d(n);
@@ -41287,7 +41287,7 @@ function N3(t) {
     }
   };
 }
-function Tr(t) {
+function Ir(t) {
   let e;
   return {
     c() {
@@ -41312,13 +41312,13 @@ function Tr(t) {
     }
   };
 }
-function Ir(t) {
+function qr(t) {
   let e, o, i, n, l = Ue({ length: (
     /*_pageCount*/
     t[9]
   ) }), r = [];
   for (let a = 0; a < l.length; a += 1)
-    r[a] = Tr(Dr(t, l, a));
+    r[a] = Ir(Dr(t, l, a));
   return {
     c() {
       e = C("goa-dropdown");
@@ -41358,7 +41358,7 @@ function Ir(t) {
         let c;
         for (c = 0; c < l.length; c += 1) {
           const s = Dr(a, l, c);
-          r[c] ? r[c].p(s, d) : (r[c] = Tr(s), r[c].c(), r[c].m(e, null));
+          r[c] ? r[c].p(s, d) : (r[c] = Ir(s), r[c].c(), r[c].m(e, null));
         }
         for (; c < r.length; c += 1)
           r[c].d(1);
@@ -41388,7 +41388,7 @@ function Ir(t) {
 function E3(t) {
   let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w = (
     /*variant*/
-    t[3] === "all" && xr(t)
+    t[3] === "all" && Tr(t)
   );
   return {
     c() {
@@ -41453,7 +41453,7 @@ function E3(t) {
       ], m = true);
     },
     p(p, [k]) {
-      p[3] === "all" ? w ? w.p(p, k) : (w = xr(p), w.c(), w.m(o, i)) : w && (w.d(1), w = null), k & /*version*/
+      p[3] === "all" ? w ? w.p(p, k) : (w = Tr(p), w.c(), w.m(o, i)) : w && (w.d(1), w = null), k & /*version*/
       2 && h(
         l,
         "version",
@@ -41517,32 +41517,32 @@ function E3(t) {
 }
 function D3(t, e, o) {
   let i;
-  const [n, l] = qe("Pagination variant", ["all", "links-only"]);
+  const [n, l] = Ae("Pagination variant", ["all", "links-only"]);
   let { version: r = "1" } = e, { pagenumber: a } = e, { itemcount: d } = e, { perpagecount: c = 10 } = e, { variant: s = "all" } = e, { testid: u = "" } = e, { mt: g = "none" } = e, { mr: v = "none" } = e, { mb: m = "m" } = e, { ml: b = "none" } = e, w, p;
   De(async () => {
     await Ge(), bo("GoAPagination", { itemcount: d, pagenumber: a }), l(s);
   });
-  function k(x, Z) {
+  function k(T, Z) {
     var B;
     if (d <= 0) return;
     const V = Number.parseInt(a + "") + Z;
-    V > 0 && V <= i && ((B = x.target) == null || B.dispatchEvent(new CustomEvent(
+    V > 0 && V <= i && ((B = T.target) == null || B.dispatchEvent(new CustomEvent(
       "_change",
       {
         composed: true,
         bubbles: true,
         detail: { page: V }
       }
-    ))), x.preventDefault();
+    ))), T.preventDefault();
   }
-  function z(x) {
-    const V = x.detail.value;
+  function z(T) {
+    const V = T.detail.value;
     if (V === "0" || d <= 0) {
-      x.stopPropagation();
+      T.stopPropagation();
       return;
     }
     const B = Number.parseInt(V);
-    x.stopPropagation(), p.dispatchEvent(new CustomEvent(
+    T.stopPropagation(), p.dispatchEvent(new CustomEvent(
       "_change",
       {
         composed: true,
@@ -41551,24 +41551,24 @@ function D3(t, e, o) {
       }
     ));
   }
-  function M(x) {
-    ce[x ? "unshift" : "push"](() => {
-      p = x, o(11, p);
+  function M(T) {
+    ce[T ? "unshift" : "push"](() => {
+      p = T, o(11, p);
     });
   }
-  function N(x) {
-    ce[x ? "unshift" : "push"](() => {
-      w = x, o(10, w);
+  function N(T) {
+    ce[T ? "unshift" : "push"](() => {
+      w = T, o(10, w);
     });
   }
-  function L(x) {
-    ce[x ? "unshift" : "push"](() => {
-      w = x, o(10, w);
+  function L(T) {
+    ce[T ? "unshift" : "push"](() => {
+      w = T, o(10, w);
     });
   }
-  const j = (x) => k(x, -1), H = (x) => k(x, 1);
-  return t.$$set = (x) => {
-    "version" in x && o(1, r = x.version), "pagenumber" in x && o(0, a = x.pagenumber), "itemcount" in x && o(2, d = x.itemcount), "perpagecount" in x && o(14, c = x.perpagecount), "variant" in x && o(3, s = x.variant), "testid" in x && o(4, u = x.testid), "mt" in x && o(5, g = x.mt), "mr" in x && o(6, v = x.mr), "mb" in x && o(7, m = x.mb), "ml" in x && o(8, b = x.ml);
+  const j = (T) => k(T, -1), H = (T) => k(T, 1);
+  return t.$$set = (T) => {
+    "version" in T && o(1, r = T.version), "pagenumber" in T && o(0, a = T.pagenumber), "itemcount" in T && o(2, d = T.itemcount), "perpagecount" in T && o(14, c = T.perpagecount), "variant" in T && o(3, s = T.variant), "testid" in T && o(4, u = T.testid), "mt" in T && o(5, g = T.mt), "mr" in T && o(6, v = T.mr), "mb" in T && o(7, m = T.mb), "ml" in T && o(8, b = T.ml);
   }, t.$$.update = () => {
     t.$$.dirty & /*itemcount, perpagecount*/
     16388 && o(9, i = Math.max(1, Math.ceil(d / c))), t.$$.dirty & /*pagenumber, itemcount, _pageCount*/
@@ -41596,7 +41596,7 @@ function D3(t, e, o) {
     H
   ];
 }
-class x3 extends ze {
+class T3 extends ze {
   constructor(e) {
     super(), ke(
       this,
@@ -41680,15 +41680,15 @@ class x3 extends ze {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-pagination", Ce(x3, { version: {}, pagenumber: {}, itemcount: {}, perpagecount: {}, variant: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
-function T3(t) {
+customElements.define("goa-pagination", Ce(T3, { version: {}, pagenumber: {}, itemcount: {}, perpagecount: {}, variant: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
+function I3(t) {
   je(t, "svelte-12qobyg", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);font:var(--goa-typography-body-m);display:inline;align-items:center;height:100%}.popover-target.svelte-12qobyg{cursor:pointer;display:block;height:100%;outline:none;border:none;padding:0;background-color:transparent;width:inherit;text-align:inherit;anchor-name:--goa-popover-target}.popover-target.svelte-12qobyg:has(:focus-visible){outline:var(
       --goa-popover-border-focus,
       var(--focus-border-width) solid var(--goa-color-interactive-default)
     )}.popover-content.svelte-12qobyg{color:var(--goa-color-text-default);width:-moz-fit-content;width:fit-content;list-style-type:none;background:var(--goa-popover-color-bg);border-radius:var(--border-radius, var(--goa-popover-border-radius));outline:none;overflow:visible;box-shadow:var(--goa-popover-box-shadow, none);filter:var(--goa-popover-shadow, none);border:var(--goa-popover-border, none);margin:0;position-anchor:--goa-popover-target;inset-block-start:anchor(bottom);inset-inline-start:anchor(left);--popover-translate-x:var(--offset-left, 0);--popover-translate-y:var(--offset-top, 3px);translate:var(--popover-translate-x) var(--popover-translate-y)}.popover-content.use-anchor-based-positioning.svelte-12qobyg{inset-block-start:anchor(top);--popover-translate-y:calc(-100% - var(--offset-bottom, 3px))}.popover-content.use-anchor-based-positioning.position-above.svelte-12qobyg{inset-block-start:anchor(top);--popover-translate-y:calc(-100% - var(--offset-bottom, 3px));position-try-fallbacks:none}.popover-content.position-below.svelte-12qobyg{inset-block-start:anchor(bottom);--popover-translate-y:var(--offset-top, 3px)}.popover-content.position-right.svelte-12qobyg{inset-block-start:unset;inset-block-end:max(8px, anchor(bottom));inset-inline-start:anchor(right);--popover-translate-x:var(--offset-left, 8px);--popover-translate-y:var(--offset-bottom, 0px);position-try-fallbacks:none}::slotted(ul){display:block;padding:0;margin:0;list-style-type:none;line-height:2rem}`);
 }
-const I3 = (t) => ({}), qr = (t) => ({});
-function q3(t) {
+const q3 = (t) => ({}), Ar = (t) => ({});
+function A3(t) {
   let e, o, i, n, l, r, a, d, c, s;
   const u = (
     /*#slots*/
@@ -41698,7 +41698,7 @@ function q3(t) {
     t,
     /*$$scope*/
     t[30],
-    qr
+    Ar
   ), v = (
     /*#slots*/
     t[31].default
@@ -41733,7 +41733,7 @@ function q3(t) {
         /*_popoverId*/
         t[23]
       ), f(n, "popover", "auto"), f(n, "data-testid", "popover-content"), f(n, "class", "popover-content svelte-12qobyg"), f(n, "style", r = it(
-        Ie(
+        qe(
           "width",
           /*position*/
           t[1] !== "right" ? (
@@ -41741,12 +41741,12 @@ function q3(t) {
             t[4]
           ) : void 0
         ),
-        Ie(
+        qe(
           "min-width",
           /*minwidth*/
           t[3]
         ),
-        Ie(
+        qe(
           "max-width",
           /*position*/
           t[1] !== "right" && /*width*/
@@ -41757,36 +41757,36 @@ function q3(t) {
             t[2]
           )
         ),
-        Ie(
+        qe(
           "padding",
           /*_padded*/
           t[21] ? "var(--goa-space-m)" : "0"
         )
-      )), T(
+      )), I(
         n,
         "is-open",
         /*_isOpen*/
         t[16]
-      ), T(
+      ), I(
         n,
         "position-above",
         /*position*/
         t[1] === "above" || /*position*/
         t[1] === "auto" && /*_autoPosition*/
         t[19] === "above"
-      ), T(
+      ), I(
         n,
         "position-below",
         /*position*/
         t[1] === "below" || /*position*/
         t[1] === "auto" && /*_autoPosition*/
         t[19] === "below"
-      ), T(
+      ), I(
         n,
         "position-right",
         /*position*/
         t[1] === "right"
-      ), T(n, "use-anchor-based-positioning", !/*_needsManualPositioning*/
+      ), I(n, "use-anchor-based-positioning", !/*_needsManualPositioning*/
       t[22]), f(
         e,
         "data-testid",
@@ -41806,37 +41806,37 @@ function q3(t) {
           /*ml*/
           t[10]
         ),
-        Ie(
+        qe(
           "--offset-top",
           /*voffset*/
           t[11]
         ),
-        Ie(
+        qe(
           "--offset-bottom",
           /*voffset*/
           t[11]
         ),
-        Ie(
+        qe(
           "--offset-left",
           /*hoffset*/
           t[12]
         ),
-        Ie(
+        qe(
           "--offset-right",
           /*hoffset*/
           t[12]
         ),
-        Ie(
+        qe(
           "--focus-border-width",
           /*focusborderwidth*/
           t[13]
         ),
-        Ie(
+        qe(
           "--border-radius",
           /*borderradius*/
           t[14]
         ),
-        Ie(
+        qe(
           "width",
           /*width*/
           t[4]
@@ -41851,7 +41851,7 @@ function q3(t) {
           /*togglePopover*/
           t[24]
         ),
-        re(o, "keyup", A3)
+        re(o, "keyup", S3)
       ], c = true);
     },
     p(b, w) {
@@ -41867,12 +41867,12 @@ function q3(t) {
           /*$$scope*/
           b[30],
           w,
-          I3
+          q3
         ) : ve(
           /*$$scope*/
           b[30]
         ),
-        qr
+        Ar
       ), (!d || w[0] & /*tabindex*/
       64) && f(
         o,
@@ -41907,7 +41907,7 @@ function q3(t) {
         b[16]
       ), (!d || w[0] & /*position, width, minwidth, maxwidth, _padded*/
       2097182 && r !== (r = it(
-        Ie(
+        qe(
           "width",
           /*position*/
           b[1] !== "right" ? (
@@ -41915,12 +41915,12 @@ function q3(t) {
             b[4]
           ) : void 0
         ),
-        Ie(
+        qe(
           "min-width",
           /*minwidth*/
           b[3]
         ),
-        Ie(
+        qe(
           "max-width",
           /*position*/
           b[1] !== "right" && /*width*/
@@ -41931,19 +41931,19 @@ function q3(t) {
             b[2]
           )
         ),
-        Ie(
+        qe(
           "padding",
           /*_padded*/
           b[21] ? "var(--goa-space-m)" : "0"
         )
       ))) && f(n, "style", r), (!d || w[0] & /*_isOpen*/
-      65536) && T(
+      65536) && I(
         n,
         "is-open",
         /*_isOpen*/
         b[16]
       ), (!d || w[0] & /*position, _autoPosition*/
-      524290) && T(
+      524290) && I(
         n,
         "position-above",
         /*position*/
@@ -41951,7 +41951,7 @@ function q3(t) {
         b[1] === "auto" && /*_autoPosition*/
         b[19] === "above"
       ), (!d || w[0] & /*position, _autoPosition*/
-      524290) && T(
+      524290) && I(
         n,
         "position-below",
         /*position*/
@@ -41959,7 +41959,7 @@ function q3(t) {
         b[1] === "auto" && /*_autoPosition*/
         b[19] === "below"
       ), (!d || w[0] & /*position*/
-      2) && T(
+      2) && I(
         n,
         "position-right",
         /*position*/
@@ -41985,37 +41985,37 @@ function q3(t) {
           /*ml*/
           b[10]
         ),
-        Ie(
+        qe(
           "--offset-top",
           /*voffset*/
           b[11]
         ),
-        Ie(
+        qe(
           "--offset-bottom",
           /*voffset*/
           b[11]
         ),
-        Ie(
+        qe(
           "--offset-left",
           /*hoffset*/
           b[12]
         ),
-        Ie(
+        qe(
           "--offset-right",
           /*hoffset*/
           b[12]
         ),
-        Ie(
+        qe(
           "--focus-border-width",
           /*focusborderwidth*/
           b[13]
         ),
-        Ie(
+        qe(
           "--border-radius",
           /*borderradius*/
           b[14]
         ),
-        Ie(
+        qe(
           "width",
           /*width*/
           b[4]
@@ -42033,50 +42033,50 @@ function q3(t) {
     }
   };
 }
-const A3 = (t) => {
+const S3 = (t) => {
   t.preventDefault();
 };
-function S3(t, e, o) {
-  let i, n, l, { $$slots: r = {}, $$scope: a } = e, { testid: d = "popover" } = e, { position: c = "auto" } = e, { maxwidth: s = "320px" } = e, { minwidth: u = "" } = e, { width: g = "" } = e, { height: v = "wrap-content" } = e, { padded: m = "true" } = e, { tabindex: b = 0 } = e, { relative: w = "" } = e, { mt: p = null } = e, { mr: k = null } = e, { mb: z = null } = e, { ml: M = null } = e, { open: N = "false" } = e, { disabled: L = "false" } = e, { voffset: j = "" } = e, { hoffset: H = "" } = e, { focusborderwidth: x = "var(--goa-border-width-l)" } = e, { borderradius: Z = "var(--goa-border-radius-m)" } = e, { filterablecontext: V = "false" } = e, B, S;
+function x3(t, e, o) {
+  let i, n, l, { $$slots: r = {}, $$scope: a } = e, { testid: d = "popover" } = e, { position: c = "auto" } = e, { maxwidth: s = "320px" } = e, { minwidth: u = "" } = e, { width: g = "" } = e, { height: v = "wrap-content" } = e, { padded: m = "true" } = e, { tabindex: b = 0 } = e, { relative: w = "" } = e, { mt: p = null } = e, { mr: k = null } = e, { mb: z = null } = e, { ml: M = null } = e, { open: N = "false" } = e, { disabled: L = "false" } = e, { voffset: j = "" } = e, { hoffset: H = "" } = e, { focusborderwidth: T = "var(--goa-border-width-l)" } = e, { borderradius: Z = "var(--goa-border-radius-m)" } = e, { filterablecontext: V = "false" } = e, B, x;
   const Y = typeof document < "u" && !("anchorName" in document.documentElement.style);
-  let I = null, A, O = false, K = "below";
+  let q = null, S, O = false, K = "below";
   const F = `goa-popover-${fo()}`;
-  function q(X, pe) {
+  function A(X, pe) {
     if (!X) return;
-    const Te = Ae(pe), Fe = oe();
-    Te && !Fe ? X.showPopover() : !Te && Fe && X.hidePopover();
+    const Ie = Se(pe), Fe = oe();
+    Ie && !Fe ? X.showPopover() : !Ie && Fe && X.hidePopover();
   }
   De(() => {
-    S == null || S.addEventListener("toggle", J), A == null || A.addEventListener("keydown", G), B.addEventListener("close", (X) => {
+    x == null || x.addEventListener("toggle", J), S == null || S.addEventListener("keydown", G), B.addEventListener("close", (X) => {
       se(), X.stopPropagation();
     }), te(), ne(), window.addEventListener("resize", ye);
   }), dt(() => {
-    (Y || I) && ee(), window.removeEventListener("resize", ye), window.removeEventListener("popstate", P, true);
+    (Y || q) && ee(), window.removeEventListener("resize", ye), window.removeEventListener("popstate", P, true);
   });
   function Q() {
-    if (!O || !A || !S) return;
-    const X = A.getBoundingClientRect(), pe = H ? parseFloat(H) : 0, Te = j ? parseFloat(j) : 3;
+    if (!O || !S || !x) return;
+    const X = S.getBoundingClientRect(), pe = H ? parseFloat(H) : 0, Ie = j ? parseFloat(j) : 3;
     if (c === "auto") {
-      const Je = S.getBoundingClientRect(), gt = X.top, ct = window.innerHeight - X.bottom;
+      const Je = x.getBoundingClientRect(), gt = X.top, ct = window.innerHeight - X.bottom;
       o(19, K = ct < Je.height && gt > ct ? "above" : "below");
     }
-    c === "above" || c === "auto" && K === "above" ? (o(15, S.style.top = `${X.top - Te}px`, S), o(15, S.style.left = `${X.left + pe}px`, S), o(15, S.style.transform = "translateY(-100%)", S)) : (o(15, S.style.top = `${X.bottom + Te}px`, S), o(15, S.style.left = `${X.left + pe}px`, S), o(15, S.style.transform = "", S));
+    c === "above" || c === "auto" && K === "above" ? (o(15, x.style.top = `${X.top - Ie}px`, x), o(15, x.style.left = `${X.left + pe}px`, x), o(15, x.style.transform = "translateY(-100%)", x)) : (o(15, x.style.top = `${X.bottom + Ie}px`, x), o(15, x.style.left = `${X.left + pe}px`, x), o(15, x.style.transform = "", x));
   }
   function R() {
     if (!Y) return;
     const X = () => {
-      Q(), I = requestAnimationFrame(X);
+      Q(), q = requestAnimationFrame(X);
     };
-    I = requestAnimationFrame(X);
+    q = requestAnimationFrame(X);
   }
   function ee() {
-    I !== null && (cancelAnimationFrame(I), I = null);
+    q !== null && (cancelAnimationFrame(q), q = null);
   }
   function oe() {
     try {
-      return S.matches(":popover-open");
+      return x.matches(":popover-open");
     } catch {
-      return S.getAttribute("data-popover-open") === "true";
+      return x.getAttribute("data-popover-open") === "true";
     }
   }
   function ne() {
@@ -42084,29 +42084,29 @@ function S3(t, e, o) {
       if (!O)
         return;
       const { target: pe } = X.detail;
-      pe !== A && se();
+      pe !== S && se();
     });
   }
   function te() {
     w !== "" && console.warn("Popover `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
   function P(X) {
-    S && oe() && S.hidePopover();
+    x && oe() && x.hidePopover();
   }
   function G(X) {
     switch (X.key) {
       case " ":
         if (l)
           break;
-        X.preventDefault(), O || S == null || S.showPopover(), X.stopPropagation();
+        X.preventDefault(), O || x == null || x.showPopover(), X.stopPropagation();
         break;
     }
   }
   function J(X) {
-    X.newState === "open" ? o(16, O = true) : X.newState === "closed" ? o(16, O = false) : o(16, O = oe()), o(25, N = O ? "true" : "false"), O ? (Ee(B, "_open", {}, { bubbles: true }), requestAnimationFrame(ye), Y && R()) : ((Y || I) && ee(), A == null || A.focus(), Ee(B, "_close", {}, { bubbles: true }));
+    X.newState === "open" ? o(16, O = true) : X.newState === "closed" ? o(16, O = false) : o(16, O = oe()), o(25, N = O ? "true" : "false"), O ? (Ee(B, "_open", {}, { bubbles: true }), requestAnimationFrame(ye), Y && R()) : ((Y || q) && ee(), S == null || S.focus(), Ee(B, "_close", {}, { bubbles: true }));
   }
   function se() {
-    if (O && (S == null || S.hidePopover(), Y)) {
+    if (O && (x == null || x.hidePopover(), Y)) {
       const X = new ToggleEvent(
         "toggle",
         {
@@ -42119,22 +42119,22 @@ function S3(t, e, o) {
     }
   }
   function ie(X) {
-    X.stopPropagation(), !(i || !S) && (O ? (S.hidePopover(), o(16, O = false)) : (Y && Ee(document.body, "goa:closePopover", { target: A }), S.showPopover(), o(16, O = true), requestAnimationFrame(ye)));
+    X.stopPropagation(), !(i || !x) && (O ? (x.hidePopover(), o(16, O = false)) : (Y && Ee(document.body, "goa:closePopover", { target: S }), x.showPopover(), o(16, O = true), requestAnimationFrame(ye)));
   }
   function ye() {
-    if (c !== "auto" || !O || !A || !S)
+    if (c !== "auto" || !O || !S || !x)
       return;
-    const X = A.getBoundingClientRect(), pe = S.getBoundingClientRect(), Te = X.top, Fe = window.innerHeight - X.bottom;
-    o(19, K = Fe < pe.height && Te > Fe ? "above" : "below");
+    const X = S.getBoundingClientRect(), pe = x.getBoundingClientRect(), Ie = X.top, Fe = window.innerHeight - X.bottom;
+    o(19, K = Fe < pe.height && Ie > Fe ? "above" : "below");
   }
   function Le(X) {
     ce[X ? "unshift" : "push"](() => {
-      A = X, o(18, A);
+      S = X, o(18, S);
     });
   }
   function Ke(X) {
     ce[X ? "unshift" : "push"](() => {
-      S = X, o(15, S);
+      x = X, o(15, x);
     });
   }
   function le(X) {
@@ -42143,13 +42143,13 @@ function S3(t, e, o) {
     });
   }
   return t.$$set = (X) => {
-    "testid" in X && o(0, d = X.testid), "position" in X && o(1, c = X.position), "maxwidth" in X && o(2, s = X.maxwidth), "minwidth" in X && o(3, u = X.minwidth), "width" in X && o(4, g = X.width), "height" in X && o(5, v = X.height), "padded" in X && o(26, m = X.padded), "tabindex" in X && o(6, b = X.tabindex), "relative" in X && o(27, w = X.relative), "mt" in X && o(7, p = X.mt), "mr" in X && o(8, k = X.mr), "mb" in X && o(9, z = X.mb), "ml" in X && o(10, M = X.ml), "open" in X && o(25, N = X.open), "disabled" in X && o(28, L = X.disabled), "voffset" in X && o(11, j = X.voffset), "hoffset" in X && o(12, H = X.hoffset), "focusborderwidth" in X && o(13, x = X.focusborderwidth), "borderradius" in X && o(14, Z = X.borderradius), "filterablecontext" in X && o(29, V = X.filterablecontext), "$$scope" in X && o(30, a = X.$$scope);
+    "testid" in X && o(0, d = X.testid), "position" in X && o(1, c = X.position), "maxwidth" in X && o(2, s = X.maxwidth), "minwidth" in X && o(3, u = X.minwidth), "width" in X && o(4, g = X.width), "height" in X && o(5, v = X.height), "padded" in X && o(26, m = X.padded), "tabindex" in X && o(6, b = X.tabindex), "relative" in X && o(27, w = X.relative), "mt" in X && o(7, p = X.mt), "mr" in X && o(8, k = X.mr), "mb" in X && o(9, z = X.mb), "ml" in X && o(10, M = X.ml), "open" in X && o(25, N = X.open), "disabled" in X && o(28, L = X.disabled), "voffset" in X && o(11, j = X.voffset), "hoffset" in X && o(12, H = X.hoffset), "focusborderwidth" in X && o(13, T = X.focusborderwidth), "borderradius" in X && o(14, Z = X.borderradius), "filterablecontext" in X && o(29, V = X.filterablecontext), "$$scope" in X && o(30, a = X.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    268435456 && o(20, i = Ae(L)), t.$$.dirty[0] & /*padded*/
-    67108864 && o(21, n = Ae(m)), t.$$.dirty[0] & /*filterablecontext*/
-    536870912 && (l = Ae(V)), t.$$.dirty[0] & /*_popoverEl, open*/
-    33587200 && q(S, N), t.$$.dirty[0] & /*_isOpen*/
+    268435456 && o(20, i = Se(L)), t.$$.dirty[0] & /*padded*/
+    67108864 && o(21, n = Se(m)), t.$$.dirty[0] & /*filterablecontext*/
+    536870912 && (l = Se(V)), t.$$.dirty[0] & /*_popoverEl, open*/
+    33587200 && A(x, N), t.$$.dirty[0] & /*_isOpen*/
     65536 && (O ? window.addEventListener("popstate", P, true) : window.removeEventListener("popstate", P, true));
   }, [
     d,
@@ -42165,12 +42165,12 @@ function S3(t, e, o) {
     M,
     j,
     H,
-    x,
+    T,
     Z,
-    S,
+    x,
     O,
     B,
-    A,
+    S,
     K,
     i,
     n,
@@ -42194,8 +42194,8 @@ class O3 extends ze {
     super(), ke(
       this,
       e,
-      S3,
-      q3,
+      x3,
+      A3,
       we,
       {
         testid: 0,
@@ -42219,7 +42219,7 @@ class O3 extends ze {
         borderradius: 14,
         filterablecontext: 29
       },
-      T3,
+      I3,
       [-1, -1]
     );
   }
@@ -42359,7 +42359,7 @@ function H3(t) {
       var(--goa-push-drawer-content-padding-horizontal);border-top:var(--goa-border-width-s) solid var(--goa-color-greyscale-200);background:var(--goa-color-greyscale-white)}.v2.svelte-jm4ny3 .drawer-actions.svelte-jm4ny3{position:static;flex:0 0 auto;border-top:none}.drawer-actions.v2-scrolled.svelte-jm4ny3.svelte-jm4ny3{border-top:var(--goa-border-width-s) solid var(--goa-color-greyscale-150);box-shadow:var(--goa-shadow-shallow-below)}.drawer-actions.empty-actions.svelte-jm4ny3.svelte-jm4ny3{padding:0;border-top:none}.v2.svelte-jm4ny3 .drawer-actions.empty-actions.svelte-jm4ny3{height:0;overflow:hidden;flex-basis:0}.drawer-content.svelte-jm4ny3.svelte-jm4ny3{display:flex;width:100%;flex:1 0 0;flex-direction:column;align-items:flex-start;align-self:stretch;overflow-y:auto}.scroll-content.svelte-jm4ny3.svelte-jm4ny3{width:100%;padding:var(--goa-push-drawer-content-padding-vertical)
       var(--goa-push-drawer-content-padding-horizontal)}`);
 }
-const P3 = (t) => ({}), Ar = (t) => ({}), V3 = (t) => ({}), Sr = (t) => ({});
+const P3 = (t) => ({}), Sr = (t) => ({}), V3 = (t) => ({}), xr = (t) => ({});
 function Or(t) {
   let e, o, i, n;
   const l = [Z3, B3], r = [];
@@ -42403,7 +42403,7 @@ function B3(t) {
     t,
     /*$$scope*/
     t[13],
-    Sr
+    xr
   );
   return {
     c() {
@@ -42430,7 +42430,7 @@ function B3(t) {
           /*$$scope*/
           n[13]
         ),
-        Sr
+        xr
       );
     },
     i(n) {
@@ -42535,12 +42535,12 @@ function Hr(t) {
     t,
     /*$$scope*/
     t[13],
-    Ar
+    Sr
   );
   return {
     c() {
-      e = C("section"), n && n.c(), f(e, "class", "drawer-actions svelte-jm4ny3"), f(e, "data-testid", "drawer-actions"), T(e, "empty-actions", !/*_actionsSlotHasContent*/
-      t[8]), T(
+      e = C("section"), n && n.c(), f(e, "class", "drawer-actions svelte-jm4ny3"), f(e, "data-testid", "drawer-actions"), I(e, "empty-actions", !/*_actionsSlotHasContent*/
+      t[8]), I(
         e,
         "v2-scrolled",
         /*version*/
@@ -42570,11 +42570,11 @@ function Hr(t) {
           /*$$scope*/
           l[13]
         ),
-        Ar
+        Sr
       ), (!o || r & /*_actionsSlotHasContent*/
-      256) && T(e, "empty-actions", !/*_actionsSlotHasContent*/
+      256) && I(e, "empty-actions", !/*_actionsSlotHasContent*/
       l[8]), (!o || r & /*version, _scrollPos*/
-      144) && T(
+      144) && I(
         e,
         "v2-scrolled",
         /*version*/
@@ -42616,7 +42616,7 @@ function Y3(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("div"), i = C("div"), m && m.c(), n = W(), l = C("goa-icon-button"), r = W(), a = C("div"), d = C("div"), w && w.c(), s = W(), p && p.c(), h(l, "size", "medium"), h(l, "data-ignore-focus", "true"), h(l, "data-testid", "drawer-close-button"), h(l, "arialabel", "Close the drawer"), h(l, "variant", "dark"), h(l, "icon", "close"), h(l, "theme", "filled"), h(l, "class", "svelte-jm4ny3"), f(i, "class", "drawer-default-header svelte-jm4ny3"), f(o, "id", "goa-drawer-heading"), f(o, "class", "drawer-header svelte-jm4ny3"), T(
+      e = C("div"), o = C("div"), i = C("div"), m && m.c(), n = W(), l = C("goa-icon-button"), r = W(), a = C("div"), d = C("div"), w && w.c(), s = W(), p && p.c(), h(l, "size", "medium"), h(l, "data-ignore-focus", "true"), h(l, "data-testid", "drawer-close-button"), h(l, "arialabel", "Close the drawer"), h(l, "variant", "dark"), h(l, "icon", "close"), h(l, "theme", "filled"), h(l, "class", "svelte-jm4ny3"), f(i, "class", "drawer-default-header svelte-jm4ny3"), f(o, "id", "goa-drawer-heading"), f(o, "class", "drawer-header svelte-jm4ny3"), I(
         o,
         "v2-scrolled",
         /*version*/
@@ -42634,35 +42634,35 @@ function Y3(t) {
         "--goa-push-drawer-width",
         /*width*/
         t[3]
-      ), T(e, "open", !!/*open*/
-      t[1]), T(
+      ), I(e, "open", !!/*open*/
+      t[1]), I(
         e,
         "closed",
         /*drawerState*/
         t[6] === "closed"
-      ), T(
+      ), I(
         e,
         "closing",
         /*drawerState*/
         t[6] === "closing"
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
         t[4] === "2"
-      ), T(
+      ), I(
         e,
         "v2-scroll-top",
         /*version*/
         t[4] === "2" && /*_scrollPos*/
         t[7] === "top"
-      ), T(
+      ), I(
         e,
         "v2-scroll-middle",
         /*version*/
         t[4] === "2" && /*_scrollPos*/
         t[7] === "middle"
-      ), T(
+      ), I(
         e,
         "v2-scroll-bottom",
         /*version*/
@@ -42692,7 +42692,7 @@ function Y3(t) {
       2052 && U(m, 1)) : (m = Or(k), m.c(), U(m, 1), m.m(i, n)) : m && (He(), $(m, 1, 1, () => {
         m = null;
       }), Pe()), (!u || z & /*version, _scrollPos*/
-      144) && T(
+      144) && I(
         o,
         "v2-scrolled",
         /*version*/
@@ -42736,41 +42736,41 @@ function Y3(t) {
         /*width*/
         k[3]
       ), (!u || z & /*open*/
-      2) && T(e, "open", !!/*open*/
+      2) && I(e, "open", !!/*open*/
       k[1]), (!u || z & /*drawerState*/
-      64) && T(
+      64) && I(
         e,
         "closed",
         /*drawerState*/
         k[6] === "closed"
       ), (!u || z & /*drawerState*/
-      64) && T(
+      64) && I(
         e,
         "closing",
         /*drawerState*/
         k[6] === "closing"
       ), (!u || z & /*version*/
-      16) && T(
+      16) && I(
         e,
         "v2",
         /*version*/
         k[4] === "2"
       ), (!u || z & /*version, _scrollPos*/
-      144) && T(
+      144) && I(
         e,
         "v2-scroll-top",
         /*version*/
         k[4] === "2" && /*_scrollPos*/
         k[7] === "top"
       ), (!u || z & /*version, _scrollPos*/
-      144) && T(
+      144) && I(
         e,
         "v2-scroll-middle",
         /*version*/
         k[4] === "2" && /*_scrollPos*/
         k[7] === "middle"
       ), (!u || z & /*version, _scrollPos*/
-      144) && T(
+      144) && I(
         e,
         "v2-scroll-bottom",
         /*version*/
@@ -42797,7 +42797,7 @@ function Vr(t, e, o, i) {
 }
 function U3(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
-  const l = ft(i), [r, a] = qe("Version", ["1", "2"]);
+  const l = ft(i), [r, a] = Ae("Version", ["1", "2"]);
   let { testid: d = void 0 } = e, { open: c = false } = e, { heading: s = "" } = e, { width: u = "492px" } = e, { version: g = "1" } = e, v = null, m = "initial", b = null, w = null, p = false;
   De(() => {
     a(g), o(6, m = c ? "open" : "closed"), u.endsWith("%") && console.error("PushDrawer does not support percentage widths. Please use a fixed width instead.");
@@ -42813,8 +42813,8 @@ function U3(t, e, o) {
       if (L) {
         const j = L.assignedElements();
         o(8, p = j.some((H) => {
-          const x = H.querySelector("slot");
-          return x ? x.assignedElements().length > 0 : true;
+          const T = H.querySelector("slot");
+          return T ? T.assignedElements().length > 0 : true;
         }));
       }
     });
@@ -42823,12 +42823,12 @@ function U3(t, e, o) {
     const j = L.currentTarget;
     if (c)
       if (g === "2") {
-        const { scrollTop: H, scrollHeight: x, clientHeight: Z } = j;
-        o(7, w = Vr(H, x, Z, w));
+        const { scrollTop: H, scrollHeight: T, clientHeight: Z } = j;
+        o(7, w = Vr(H, T, Z, w));
       } else {
         if (!(j.scrollHeight > j.offsetHeight)) return;
-        const x = j.scrollTop == 0, Z = Math.abs(j.scrollHeight - j.scrollTop - j.offsetHeight) < 1;
-        x ? o(7, w = "top") : Z ? o(7, w = "bottom") : o(7, w = "middle");
+        const T = j.scrollTop == 0, Z = Math.abs(j.scrollHeight - j.scrollTop - j.offsetHeight) < 1;
+        T ? o(7, w = "top") : Z ? o(7, w = "bottom") : o(7, w = "middle");
       }
   }
   function N(L) {
@@ -42850,8 +42850,8 @@ function U3(t, e, o) {
     178 && c && g === "2" && v && Ge().then(() => {
       const L = v == null ? void 0 : v.querySelector(".drawer-content");
       if (L) {
-        const { scrollTop: j, scrollHeight: H, clientHeight: x } = L;
-        o(7, w = Vr(j, H, x, w));
+        const { scrollTop: j, scrollHeight: H, clientHeight: T } = L;
+        o(7, w = Vr(j, H, T, w));
       }
     });
   }, [
@@ -43507,22 +43507,22 @@ function r4(t) {
         "aria-checked",
         /*isChecked*/
         t[15]
-      ), f(i, "class", "svelte-1e6przw"), f(a, "class", "icon svelte-1e6przw"), f(c, "class", "label svelte-1e6przw"), f(o, "class", "radio svelte-1e6przw"), T(
+      ), f(i, "class", "svelte-1e6przw"), f(a, "class", "icon svelte-1e6przw"), f(c, "class", "label svelte-1e6przw"), f(o, "class", "radio svelte-1e6przw"), I(
         o,
         "radio--disabled",
         /*isDisabled*/
         t[16]
-      ), T(
+      ), I(
         o,
         "radio--error",
         /*isError*/
         t[17]
-      ), T(
+      ), I(
         o,
         "v2",
         /*_version*/
         t[13] === "2"
-      ), T(
+      ), I(
         o,
         "compact",
         /*_compact*/
@@ -43530,13 +43530,13 @@ function r4(t) {
       ), f(m, "class", "reveal svelte-1e6przw"), ot(() => (
         /*div1_elementresize_handler*/
         t[28].call(m)
-      )), T(
+      )), I(
         m,
         "visible",
         /*$$slots*/
         t[20].reveal && /*isChecked*/
         t[15]
-      ), T(
+      ), I(
         m,
         "has-content",
         /*revealSlotHasContent*/
@@ -43604,25 +43604,25 @@ function r4(t) {
       12) && s !== (s = /*label*/
       (j[3] || /*value*/
       j[2]) + "") && me(u, s), (!p || H[0] & /*isDisabled*/
-      65536) && T(
+      65536) && I(
         o,
         "radio--disabled",
         /*isDisabled*/
         j[16]
       ), (!p || H[0] & /*isError*/
-      131072) && T(
+      131072) && I(
         o,
         "radio--error",
         /*isError*/
         j[17]
       ), (!p || H[0] & /*_version*/
-      8192) && T(
+      8192) && I(
         o,
         "v2",
         /*_version*/
         j[13] === "2"
       ), (!p || H[0] & /*_compact*/
-      16384) && T(
+      16384) && I(
         o,
         "compact",
         /*_compact*/
@@ -43651,14 +43651,14 @@ function r4(t) {
         ),
         Yr
       ), (!p || H[0] & /*$$slots, isChecked*/
-      1081344) && T(
+      1081344) && I(
         m,
         "visible",
         /*$$slots*/
         j[20].reveal && /*isChecked*/
         j[15]
       ), (!p || H[0] & /*revealSlotHasContent*/
-      262144) && T(
+      262144) && I(
         m,
         "has-content",
         /*revealSlotHasContent*/
@@ -43693,9 +43693,9 @@ function r4(t) {
 function a4(t, e, o) {
   let i, n, l, r, { $$slots: a = {}, $$scope: d } = e;
   const c = ft(a);
-  let { value: s } = e, { name: u = "" } = e, { label: g = "" } = e, { description: v = "" } = e, { disabled: m = "false" } = e, { error: b = "false" } = e, { checked: w = "false" } = e, { arialabel: p = "" } = e, { revealarialabel: k = "" } = e, { maxwidth: z = "none" } = e, { mt: M = null } = e, { mr: N = null } = e, { mb: L = null } = e, { ml: j = null } = e, H, x, Z = [], V = 0, B = "1", S = false;
+  let { value: s } = e, { name: u = "" } = e, { label: g = "" } = e, { description: v = "" } = e, { disabled: m = "false" } = e, { error: b = "false" } = e, { checked: w = "false" } = e, { arialabel: p = "" } = e, { revealarialabel: k = "" } = e, { maxwidth: z = "none" } = e, { mt: M = null } = e, { mr: N = null } = e, { mb: L = null } = e, { ml: j = null } = e, H, T, Z = [], V = 0, B = "1", x = false;
   De(() => {
-    q(), Q(), R(), Y(), I();
+    A(), Q(), R(), Y(), q();
   });
   function Y() {
     rt(H, (G, J) => {
@@ -43706,19 +43706,19 @@ function a4(t, e, o) {
       }
     });
   }
-  function I() {
-    rt(x, (G, J) => {
+  function q() {
+    rt(T, (G, J) => {
       switch (G) {
         case ut:
           F(J);
           break;
       }
-    }), x && A();
+    }), T && S();
   }
-  function A() {
-    x.addEventListener("_click", (G) => {
+  function S() {
+    T.addEventListener("_click", (G) => {
       G.stopPropagation();
-    }), x.addEventListener("_change", O), x.addEventListener("_radioItemChange", O);
+    }), T.addEventListener("_change", O), T.addEventListener("_radioItemChange", O);
   }
   function O(G) {
     const se = G.detail;
@@ -43730,7 +43730,7 @@ function a4(t, e, o) {
   function F(G) {
     o(22, w = !w && !!G.el.value);
   }
-  function q() {
+  function A() {
     setTimeout(
       () => {
         H == null || H.dispatchEvent(new CustomEvent(
@@ -43760,7 +43760,7 @@ function a4(t, e, o) {
   function Q() {
     H.addEventListener("radio-group:init", (G) => {
       const J = G.detail;
-      o(16, i = J.disabled || Ae(m)), o(21, b = Xt(J.error)), o(22, w = Xt(J.checked)), o(1, v = J.description), o(0, u = J.name), o(23, k = J.revealAriaLabel), o(13, B = J.version || "1"), o(14, S = J.compact || false);
+      o(16, i = J.disabled || Se(m)), o(21, b = Xt(J.error)), o(22, w = Xt(J.checked)), o(1, v = J.description), o(0, u = J.name), o(23, k = J.revealAriaLabel), o(13, B = J.version || "1"), o(14, x = J.compact || false);
     });
   }
   function R() {
@@ -43777,7 +43777,7 @@ function a4(t, e, o) {
   }
   function ne(G) {
     ce[G ? "unshift" : "push"](() => {
-      x = G, o(12, x);
+      T = G, o(12, T);
     });
   }
   function te() {
@@ -43792,9 +43792,9 @@ function a4(t, e, o) {
     "value" in G && o(2, s = G.value), "name" in G && o(0, u = G.name), "label" in G && o(3, g = G.label), "description" in G && o(1, v = G.description), "disabled" in G && o(24, m = G.disabled), "error" in G && o(21, b = G.error), "checked" in G && o(22, w = G.checked), "arialabel" in G && o(4, p = G.arialabel), "revealarialabel" in G && o(23, k = G.revealarialabel), "maxwidth" in G && o(5, z = G.maxwidth), "mt" in G && o(6, M = G.mt), "mr" in G && o(7, N = G.mr), "mb" in G && o(8, L = G.mb), "ml" in G && o(9, j = G.ml), "$$scope" in G && o(25, d = G.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    16777216 && o(16, i = Ae(m)), t.$$.dirty[0] & /*error*/
-    2097152 && o(17, n = Ae(b)), t.$$.dirty[0] & /*checked*/
-    4194304 && o(15, l = Ae(w)), t.$$.dirty[0] & /*_revealSlotHeight*/
+    16777216 && o(16, i = Se(m)), t.$$.dirty[0] & /*error*/
+    2097152 && o(17, n = Se(b)), t.$$.dirty[0] & /*checked*/
+    4194304 && o(15, l = Se(w)), t.$$.dirty[0] & /*_revealSlotHeight*/
     1024 && o(18, r = V > 0);
   }, [
     u,
@@ -43809,9 +43809,9 @@ function a4(t, e, o) {
     j,
     V,
     H,
-    x,
+    T,
     B,
-    S,
+    x,
     l,
     i,
     n,
@@ -43981,12 +43981,12 @@ function c4(t) {
         /*arialabel*/
         t[3]
       ), f(e, "aria-invalid", n = /*_error*/
-      t[8] ? "true" : "false"), T(
+      t[8] ? "true" : "false"), I(
         e,
         "v2",
         /*version*/
         t[1] === "2"
-      ), T(
+      ), I(
         e,
         "compact",
         /*isCompact*/
@@ -44047,13 +44047,13 @@ function c4(t) {
       ), (!l || u[0] & /*_error*/
       256 && n !== (n = /*_error*/
       s[8] ? "true" : "false")) && f(e, "aria-invalid", n), (!l || u[0] & /*orientation, version*/
-      3) && T(
+      3) && I(
         e,
         "v2",
         /*version*/
         s[1] === "2"
       ), (!l || u[0] & /*orientation, isCompact*/
-      1025) && T(
+      1025) && I(
         e,
         "compact",
         /*isCompact*/
@@ -44073,22 +44073,22 @@ function c4(t) {
 }
 function u4(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
-  const [a, d] = qe("Radio group orientation", ["vertical", "horizontal"]), [c, s] = qe("Version", ["1", "2"]), [u, g] = qe("Size", ["default", "compact"]);
-  let { name: v } = e, { value: m } = e, { orientation: b = "vertical" } = e, { disabled: w = "false" } = e, { error: p = "false" } = e, { version: k = "1" } = e, { size: z = "default" } = e, { testid: M = "" } = e, { arialabel: N = "" } = e, { mt: L = null } = e, { mr: j = null } = e, { mb: H = null } = e, { ml: x = null } = e, Z = Ae(p), V = Z, B, S = [], Y;
+  const [a, d] = Ae("Radio group orientation", ["vertical", "horizontal"]), [c, s] = Ae("Version", ["1", "2"]), [u, g] = Ae("Size", ["default", "compact"]);
+  let { name: v } = e, { value: m } = e, { orientation: b = "vertical" } = e, { disabled: w = "false" } = e, { error: p = "false" } = e, { version: k = "1" } = e, { size: z = "default" } = e, { testid: M = "" } = e, { arialabel: N = "" } = e, { mt: L = null } = e, { mr: j = null } = e, { mb: H = null } = e, { ml: T = null } = e, Z = Se(p), V = Z, B, x = [], Y;
   De(() => {
-    d(b), s(k), g(z), I(), K(), F(), B.addEventListener("_radioItemChange", (ne) => {
+    d(b), s(k), g(z), q(), K(), F(), B.addEventListener("_radioItemChange", (ne) => {
       const te = ne.detail;
       Q(te.value, te.label);
     });
   });
-  function I() {
+  function q() {
     rt(B, (ne, te) => {
       switch (ne) {
-        case xt:
+        case Tt:
           O(te);
           break;
         case Mt:
-          A(te);
+          S(te);
           break;
         case zt:
           o(13, p = "false");
@@ -44099,7 +44099,7 @@ function u4(t, e, o) {
       }
     });
   }
-  function A(ne) {
+  function S(ne) {
     o(13, p = ne.error ? "true" : "false");
   }
   function O(ne) {
@@ -44111,16 +44111,16 @@ function u4(t, e, o) {
   function F() {
     B.addEventListener("radio-item:mounted", (ne) => {
       const te = ne.detail;
-      S = [...S, te], Y && clearTimeout(Y), Y = setTimeout(
+      x = [...x, te], Y && clearTimeout(Y), Y = setTimeout(
         () => {
-          q();
+          A();
         },
         1
       );
     });
   }
-  function q() {
-    S.forEach((ne) => {
+  function A() {
+    x.forEach((ne) => {
       ne.el.dispatchEvent(new CustomEvent(
         "radio-group:init",
         {
@@ -44150,7 +44150,7 @@ function u4(t, e, o) {
     )), R(m));
   }
   function R(ne) {
-    S.forEach((te) => {
+    x.forEach((te) => {
       te.el.dispatchEvent(new CustomEvent(
         "radio-group:select",
         {
@@ -44169,14 +44169,14 @@ function u4(t, e, o) {
     });
   }
   return t.$$set = (ne) => {
-    "name" in ne && o(14, v = ne.name), "value" in ne && o(12, m = ne.value), "orientation" in ne && o(0, b = ne.orientation), "disabled" in ne && o(15, w = ne.disabled), "error" in ne && o(13, p = ne.error), "version" in ne && o(1, k = ne.version), "size" in ne && o(16, z = ne.size), "testid" in ne && o(2, M = ne.testid), "arialabel" in ne && o(3, N = ne.arialabel), "mt" in ne && o(4, L = ne.mt), "mr" in ne && o(5, j = ne.mr), "mb" in ne && o(6, H = ne.mb), "ml" in ne && o(7, x = ne.ml), "$$scope" in ne && o(19, r = ne.$$scope);
+    "name" in ne && o(14, v = ne.name), "value" in ne && o(12, m = ne.value), "orientation" in ne && o(0, b = ne.orientation), "disabled" in ne && o(15, w = ne.disabled), "error" in ne && o(13, p = ne.error), "version" in ne && o(1, k = ne.version), "size" in ne && o(16, z = ne.size), "testid" in ne && o(2, M = ne.testid), "arialabel" in ne && o(3, N = ne.arialabel), "mt" in ne && o(4, L = ne.mt), "mr" in ne && o(5, j = ne.mr), "mb" in ne && o(6, H = ne.mb), "ml" in ne && o(7, T = ne.ml), "$$scope" in ne && o(19, r = ne.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
-    32768 && o(18, i = Ae(w)), t.$$.dirty[0] & /*size*/
+    32768 && o(18, i = Se(w)), t.$$.dirty[0] & /*size*/
     65536 && o(10, n = z === "compact"), t.$$.dirty[0] & /*isDisabled, version, isCompact*/
-    263170 && q(), t.$$.dirty[0] & /*value*/
+    263170 && A(), t.$$.dirty[0] & /*value*/
     4096 && m !== void 0 && R(m), t.$$.dirty[0] & /*error, _error, _prevError, _rootEl*/
-    140032 && (o(8, Z = Ae(p)), Z !== V && (Ee(B, "error::change", { isError: Z }, { bubbles: true }), o(17, V = Z)), q());
+    140032 && (o(8, Z = Se(p)), Z !== V && (Ee(B, "error::change", { isError: Z }, { bubbles: true }), o(17, V = Z)), A());
   }, [
     b,
     k,
@@ -44185,7 +44185,7 @@ function u4(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     Z,
     B,
     n,
@@ -44683,12 +44683,12 @@ function M4(t) {
         /*heading*/
         t[1]
       ), a = W(), d = C("div"), z.c(), s = W(), u = C("div"), N && N.c(), f(d, "class", "trailing-icon svelte-10qscd5"), f(n, "href", c = `#${/*_slug*/
-      t[12]}`), f(n, "class", "heading svelte-10qscd5"), T(
+      t[12]}`), f(n, "class", "heading svelte-10qscd5"), I(
         n,
         "open",
         /*_open*/
         t[8]
-      ), f(u, "class", "group svelte-10qscd5"), f(u, "data-testid", "group"), T(u, "hidden", !/*_open*/
+      ), f(u, "class", "group svelte-10qscd5"), f(u, "data-testid", "group"), I(u, "hidden", !/*_open*/
       t[8]), f(i, "class", "side-menu-group svelte-10qscd5"), f(
         i,
         "data-testid",
@@ -44705,12 +44705,12 @@ function M4(t) {
         /*ml*/
         t[7]
       )};
-  `), T(
+  `), I(
         i,
         "v2",
         /*version*/
         t[0] === "2"
-      ), T(
+      ), I(
         i,
         "current",
         /*_current*/
@@ -44734,7 +44734,7 @@ function M4(t) {
       ), k === (k = p(L)) && z ? z.p(L, j) : (z.d(1), z = k(L), z && (z.c(), z.m(d, null))), (!v || j & /*_slug*/
       4096 && c !== (c = `#${/*_slug*/
       L[12]}`)) && f(n, "href", c), (!v || j & /*_open*/
-      256) && T(
+      256) && I(
         n,
         "open",
         /*_open*/
@@ -44758,7 +44758,7 @@ function M4(t) {
         ),
         null
       ), (!v || j & /*_open*/
-      256) && T(u, "hidden", !/*_open*/
+      256) && I(u, "hidden", !/*_open*/
       L[8]), (!v || j & /*testid*/
       8) && f(
         i,
@@ -44778,13 +44778,13 @@ function M4(t) {
         L[7]
       )};
   `)) && f(i, "style", g), (!v || j & /*version*/
-      1) && T(
+      1) && I(
         i,
         "v2",
         /*version*/
         L[0] === "2"
       ), (!v || j & /*_current*/
-      512) && T(
+      512) && I(
         i,
         "current",
         /*_current*/
@@ -44812,9 +44812,9 @@ function L4(t, e, o) {
   });
   function k() {
     if (!w) return;
-    const x = Et(w);
-    if (x.length === 0) return;
-    const Z = x.filter((V) => V.tagName === "A").map((V) => (V.classList.remove("current"), V));
+    const T = Et(w);
+    if (T.length === 0) return;
+    const Z = T.filter((V) => V.tagName === "A").map((V) => (V.classList.remove("current"), V));
     setTimeout(
       () => {
         p.dispatchEvent(new CustomEvent(
@@ -44830,39 +44830,39 @@ function L4(t, e, o) {
     );
   }
   function z() {
-    w.addEventListener("sidemenu:current:change", (x) => {
-      const Z = x.detail;
+    w.addEventListener("sidemenu:current:change", (T) => {
+      const Z = T.detail;
       M(Z);
-    }), w.addEventListener("_open", (x) => {
+    }), w.addEventListener("_open", (T) => {
       o(8, m = o(9, b = true));
     });
   }
-  function M(x) {
+  function M(T) {
     const Z = Et(w);
     if (Z.length === 0) return;
     let V = null;
     o(9, b = false), Z.forEach((B) => {
-      B.getAttribute("href") === x && (V = B), B.classList.remove("current"), B.tagName === "GOA-SIDE-MENU-GROUP" && B.setAttribute("child", "true");
+      B.getAttribute("href") === T && (V = B), B.classList.remove("current"), B.tagName === "GOA-SIDE-MENU-GROUP" && B.setAttribute("child", "true");
     }), V && V.classList.add("current"), o(9, b = o(8, m = !!V)), m && L();
   }
-  function N(x) {
-    o(8, m = !m), x.preventDefault();
+  function N(T) {
+    o(8, m = !m), T.preventDefault();
   }
   function L() {
     p.dispatchEvent(new CustomEvent("_open", { bubbles: true, composed: true }));
   }
-  function j(x) {
-    ce[x ? "unshift" : "push"](() => {
-      p = x, o(11, p);
+  function j(T) {
+    ce[T ? "unshift" : "push"](() => {
+      p = T, o(11, p);
     });
   }
-  function H(x) {
-    ce[x ? "unshift" : "push"](() => {
-      w = x, o(10, w);
+  function H(T) {
+    ce[T ? "unshift" : "push"](() => {
+      w = T, o(10, w);
     });
   }
-  return t.$$set = (x) => {
-    "version" in x && o(0, r = x.version), "heading" in x && o(1, a = x.heading), "icon" in x && o(2, d = x.icon), "testid" in x && o(3, c = x.testid), "mt" in x && o(4, s = x.mt), "mr" in x && o(5, u = x.mr), "mb" in x && o(6, g = x.mb), "ml" in x && o(7, v = x.ml), "$$scope" in x && o(14, l = x.$$scope);
+  return t.$$set = (T) => {
+    "version" in T && o(0, r = T.version), "heading" in T && o(1, a = T.heading), "icon" in T && o(2, d = T.icon), "testid" in T && o(3, c = T.testid), "mt" in T && o(4, s = T.mt), "mr" in T && o(5, u = T.mr), "mb" in T && o(6, g = T.mb), "ml" in T && o(7, v = T.ml), "$$scope" in T && o(14, l = T.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*heading*/
     2 && o(12, i = j4(a));
@@ -44980,7 +44980,7 @@ function D4(t) {
         "data-testid",
         /*testid*/
         t[1]
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
@@ -45016,7 +45016,7 @@ function D4(t) {
         /*testid*/
         l[1]
       ), (!o || r & /*version*/
-      1) && T(
+      1) && I(
         e,
         "v2",
         /*version*/
@@ -45034,7 +45034,7 @@ function D4(t) {
     }
   };
 }
-function x4(t, e, o) {
+function T4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: l = "1" } = e, { testid: r = "" } = e, a, d = [], c = [], s = null;
   De(async () => {
     await Ge(), u(), v(), b();
@@ -45081,9 +45081,9 @@ function x4(t, e, o) {
     "version" in k && o(0, l = k.version), "testid" in k && o(1, r = k.testid), "$$scope" in k && o(3, n = k.$$scope);
   }, [l, r, a, n, i, p];
 }
-class T4 extends ze {
+class I4 extends ze {
   constructor(e) {
-    super(), ke(this, e, x4, D4, we, { version: 0, testid: 1 }, E4);
+    super(), ke(this, e, T4, D4, we, { version: 0, testid: 1 }, E4);
   }
   get version() {
     return this.$$.ctx[0];
@@ -45098,17 +45098,17 @@ class T4 extends ze {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-side-menu", Ce(T4, { version: {}, testid: {} }, ["default"], [], true));
-function I4(t) {
+customElements.define("goa-side-menu", Ce(I4, { version: {}, testid: {} }, ["default"], [], true));
+function q4(t) {
   je(t, "svelte-osqp4c", "h2.icon.svelte-osqp4c.svelte-osqp4c{display:flex;align-items:center}h2.v2.icon.svelte-osqp4c.svelte-osqp4c{align-items:flex-start}goa-icon.svelte-osqp4c.svelte-osqp4c{color:var(--goa-side-menu-icon-color);margin-right:var(--goa-side-menu-heading-icon-gap)}h2.v2.svelte-osqp4c goa-icon.svelte-osqp4c{margin-right:0;color:var(--goa-side-menu-heading-color)}h2.svelte-osqp4c.svelte-osqp4c{border-top:var(--goa-side-menu-heading-border);background:var(--goa-side-menu-heading-color-bg);padding:var(--goa-side-menu-heading-padding);color:var(--goa-side-menu-heading-color);font:var(--goa-side-menu-heading-typography);display:flex;align-items:flex-start;margin:var(--goa-side-menu-heading-margin);gap:var(--goa-side-menu-heading-gap)}h2.v2.svelte-osqp4c.svelte-osqp4c{border-top:none;border-bottom:var(--goa-side-menu-heading-border);margin-bottom:var(--goa-space-2xs);margin-right:var(--goa-space-xs);padding:var(--goa-side-menu-heading-padding-top, 14px) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s)}h2.v2.svelte-osqp4c .label.svelte-osqp4c{margin-top:2px}");
 }
-const q4 = (t) => ({}), Gr = (t) => ({});
+const A4 = (t) => ({}), Gr = (t) => ({});
 function Kr(t) {
   let e;
   function o(l, r) {
     return (
       /*version*/
-      l[0] === "2" ? S4 : A4
+      l[0] === "2" ? x4 : S4
     );
   }
   let i = o(t), n = i(t);
@@ -45127,7 +45127,7 @@ function Kr(t) {
     }
   };
 }
-function A4(t) {
+function S4(t) {
   let e;
   return {
     c() {
@@ -45155,7 +45155,7 @@ function A4(t) {
     }
   };
 }
-function S4(t) {
+function x4(t) {
   let e;
   return {
     c() {
@@ -45214,12 +45214,12 @@ function O4(t) {
         "data-testid",
         /*testid*/
         t[2]
-      ), f(e, "class", "svelte-osqp4c"), T(
+      ), f(e, "class", "svelte-osqp4c"), I(
         e,
         "icon",
         /*icon*/
         t[1]
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
@@ -45260,7 +45260,7 @@ function O4(t) {
           /*$$scope*/
           u[3],
           g,
-          q4
+          A4
         ) : ve(
           /*$$scope*/
           u[3]
@@ -45273,13 +45273,13 @@ function O4(t) {
         /*testid*/
         u[2]
       ), (!l || g & /*icon*/
-      2) && T(
+      2) && I(
         e,
         "icon",
         /*icon*/
         u[1]
       ), (!l || g & /*version*/
-      1) && T(
+      1) && I(
         e,
         "v2",
         /*version*/
@@ -45305,7 +45305,7 @@ function H4(t, e, o) {
 }
 class P4 extends ze {
   constructor(e) {
-    super(), ke(this, e, H4, O4, we, { version: 0, icon: 1, testid: 2 }, I4);
+    super(), ke(this, e, H4, O4, we, { version: 0, icon: 1, testid: 2 }, q4);
   }
   get version() {
     return this.$$.ctx[0];
@@ -45702,7 +45702,7 @@ function U4(t) {
   };
 }
 function Q4(t, e, o) {
-  const [i, n] = qe(
+  const [i, n] = Ae(
     "Skeleton type",
     [
       "image",
@@ -45719,7 +45719,7 @@ function Q4(t, e, o) {
       "article"
     ],
     true
-  ), [l, r] = qe("Skeleton size", ["1", "2", "3", "4"]);
+  ), [l, r] = Ae("Skeleton size", ["1", "2", "3", "4"]);
   let { maxwidth: a = "300px" } = e, { size: d = "1" } = e, { linecount: c = 3 } = e, { type: s } = e, { testid: u = "" } = e, { mt: g = null } = e, { mr: v = null } = e, { mb: m = null } = e, { ml: b = null } = e;
   return De(() => {
     setTimeout(() => n(s), 1), r(d);
@@ -46259,7 +46259,7 @@ function l5(t) {
       e = C("section"), o = C("div"), c && c.c(), i = W(), n = ae(
         /*heading*/
         t[1]
-      ), l = W(), r = C("div"), u && u.c(), Ve(o, "display", "none"), f(r, "role", "tabpanel"), f(r, "class", "svelte-1ifx1we"), T(r, "hidden", !/*open*/
+      ), l = W(), r = C("div"), u && u.c(), Ve(o, "display", "none"), f(r, "role", "tabpanel"), f(r, "class", "svelte-1ifx1we"), I(r, "hidden", !/*open*/
       t[0]);
     },
     m(g, v) {
@@ -46308,7 +46308,7 @@ function l5(t) {
         ),
         null
       ), (!a || v & /*open*/
-      1) && T(r, "hidden", !/*open*/
+      1) && I(r, "hidden", !/*open*/
       g[0]);
     },
     i(g) {
@@ -46574,17 +46574,17 @@ function u5(t) {
         "data-testid",
         /*testid*/
         t[3]
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
         t[2] === "2"
-      ), T(
+      ), I(
         e,
         "sticky",
         /*_stickyHeader*/
         t[11]
-      ), T(
+      ), I(
         e,
         "striped",
         /*_striped*/
@@ -46621,19 +46621,19 @@ function u5(t) {
         /*testid*/
         s[3]
       ), (!r || u[0] & /*variant, version*/
-      6) && T(
+      6) && I(
         e,
         "v2",
         /*version*/
         s[2] === "2"
       ), (!r || u[0] & /*variant, _stickyHeader*/
-      2050) && T(
+      2050) && I(
         e,
         "sticky",
         /*_stickyHeader*/
         s[11]
       ), (!r || u[0] & /*variant, _striped*/
-      1026) && T(
+      1026) && I(
         e,
         "striped",
         /*_striped*/
@@ -46654,30 +46654,30 @@ function u5(t) {
 const oa = 2;
 function f5(t, e, o) {
   let i, n, { $$slots: l = {}, $$scope: r } = e;
-  const [a, d] = qe("Table variant", ["normal", "relaxed"], true), [c, s] = qe("Version", ["1", "2"]), [u, g] = qe("Sort mode", ["single", "multi"], { required: true });
-  let { width: v = "" } = e, { stickyheader: m = "false" } = e, { striped: b = "false" } = e, { variant: w = "normal" } = e, { version: p = "1" } = e, { testid: k = "" } = e, { sortMode: z = "single" } = e, { mt: M = null } = e, { mr: N = null } = e, { mb: L = null } = e, { ml: j = null } = e, H, x = false, Z = [], V;
+  const [a, d] = Ae("Table variant", ["normal", "relaxed"], true), [c, s] = Ae("Version", ["1", "2"]), [u, g] = Ae("Sort mode", ["single", "multi"], { required: true });
+  let { width: v = "" } = e, { stickyheader: m = "false" } = e, { striped: b = "false" } = e, { variant: w = "normal" } = e, { version: p = "1" } = e, { testid: k = "" } = e, { sortMode: z = "single" } = e, { mt: M = null } = e, { mr: N = null } = e, { mb: L = null } = e, { ml: j = null } = e, H, T = false, Z = [], V;
   De(() => {
     d(w), s(p), g(z);
     const R = H.querySelector("slot");
-    !R || R.assignedElements().length === 0 || (o(9, x = R.assignedElements()[0].tagName === "TABLE"), setTimeout(S, 0));
+    !R || R.assignedElements().length === 0 || (o(9, T = R.assignedElements()[0].tagName === "TABLE"), setTimeout(x, 0));
   });
   function B() {
     var ee;
     const R = H == null ? void 0 : H.querySelector("slot");
     return (ee = R == null ? void 0 : R.assignedElements().find((oe) => oe.tagName === "THEAD" || oe.tagName === "TABLE")) == null ? void 0 : ee.querySelectorAll("goa-table-sort-header");
   }
-  function S() {
-    V = B(), !(!V || V.length === 0) && (Y(), I(), F(), Z.length > 0 && q());
+  function x() {
+    V = B(), !(!V || V.length === 0) && (Y(), q(), F(), Z.length > 0 && A());
   }
   function Y() {
     V == null || V.forEach((R) => {
       R.addEventListener("click", () => {
         const ee = R.getAttribute("name");
-        ee && A(ee);
+        ee && S(ee);
       });
     });
   }
-  function I() {
+  function q() {
     const R = [];
     if (V == null || V.forEach((ee) => {
       const oe = ee.getAttribute("name"), ne = ee.getAttribute("direction"), te = Number(ee.getAttribute("sort-order")) || 0;
@@ -46697,8 +46697,8 @@ function f5(t, e, o) {
       }
     ] : [] : Z = R.slice(0, oa).map(({ column: ee, direction: oe }) => ({ column: ee, direction: oe }));
   }
-  function A(R) {
-    z === "single" ? O(R) : K(R), F(), q();
+  function S(R) {
+    z === "single" ? O(R) : K(R), F(), A();
   }
   function O(R) {
     const ee = Z.find((ne) => ne.column === R), oe = (ee == null ? void 0 : ee.direction) === "asc" ? "desc" : "asc";
@@ -46718,7 +46718,7 @@ function f5(t, e, o) {
       oe >= 0 ? (R.setAttribute("direction", Z[oe].direction), z === "multi" && Z.length > 1 ? R.setAttribute("sort-order", String(oe + 1)) : R.setAttribute("sort-order", "0")) : (R.setAttribute("direction", "none"), R.setAttribute("sort-order", "0"));
     });
   }
-  function q() {
+  function A() {
     if (z === "multi")
       Ee(H, "_multisort", { sorts: Z }, { bubbles: true });
     else {
@@ -46743,8 +46743,8 @@ function f5(t, e, o) {
     "width" in R && o(0, v = R.width), "stickyheader" in R && o(12, m = R.stickyheader), "striped" in R && o(13, b = R.striped), "variant" in R && o(1, w = R.variant), "version" in R && o(2, p = R.version), "testid" in R && o(3, k = R.testid), "sortMode" in R && o(14, z = R.sortMode), "mt" in R && o(4, M = R.mt), "mr" in R && o(5, N = R.mr), "mb" in R && o(6, L = R.mb), "ml" in R && o(7, j = R.ml), "$$scope" in R && o(15, r = R.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*stickyheader*/
-    4096 && o(11, i = Ae(m)), t.$$.dirty[0] & /*striped*/
-    8192 && o(10, n = Ae(b));
+    4096 && o(11, i = Se(m)), t.$$.dirty[0] & /*striped*/
+    8192 && o(10, n = Se(b));
   }, [
     v,
     w,
@@ -46755,7 +46755,7 @@ function f5(t, e, o) {
     L,
     j,
     H,
-    x,
+    T,
     n,
     i,
     m,
@@ -46942,14 +46942,14 @@ function p5(t) {
       e = C("button"), c && c.c(), o = W(), i = C("span"), n = C("span"), l = ae(
         /*sortOrder*/
         t[2]
-      ), r = W(), g.c(), f(n, "class", "sort-order svelte-yp949b"), T(n, "hidden", !/*sortOrder*/
+      ), r = W(), g.c(), f(n, "class", "sort-order svelte-yp949b"), I(n, "hidden", !/*sortOrder*/
       t[2] || /*direction*/
-      t[0] === "none"), f(i, "class", "icon-wrapper svelte-yp949b"), f(e, "class", "svelte-yp949b"), T(
+      t[0] === "none"), f(i, "class", "icon-wrapper svelte-yp949b"), f(e, "class", "svelte-yp949b"), I(
         e,
         "sorted",
         /*direction*/
         t[0] !== "none"
-      ), T(
+      ), I(
         e,
         "v2",
         /*version*/
@@ -46984,16 +46984,16 @@ function p5(t) {
         /*sortOrder*/
         v[2]
       ), (!a || m & /*sortOrder, direction*/
-      5) && T(n, "hidden", !/*sortOrder*/
+      5) && I(n, "hidden", !/*sortOrder*/
       v[2] || /*direction*/
       v[0] === "none"), u !== (u = s(v)) && (g.d(1), g = u(v), g && (g.c(), g.m(i, null))), (!a || m & /*direction*/
-      1) && T(
+      1) && I(
         e,
         "sorted",
         /*direction*/
         v[0] !== "none"
       ), (!a || m & /*version*/
-      2) && T(
+      2) && I(
         e,
         "v2",
         /*version*/
@@ -47177,17 +47177,17 @@ function k5(t) {
         "data-testid",
         /*testid*/
         t[0]
-      ), f(e, "class", "svelte-1d8r3pk"), T(
+      ), f(e, "class", "svelte-1d8r3pk"), I(
         e,
         "v2",
         /*version*/
         t[1] === "2"
-      ), T(
+      ), I(
         e,
         "horizontal",
         /*orientation*/
         t[3] === "horizontal"
-      ), T(
+      ), I(
         e,
         "segmented",
         /*variant*/
@@ -47250,19 +47250,19 @@ function k5(t) {
         /*testid*/
         s[0]
       ), (!r || u[0] & /*version*/
-      2) && T(
+      2) && I(
         e,
         "v2",
         /*version*/
         s[1] === "2"
       ), (!r || u[0] & /*orientation*/
-      8) && T(
+      8) && I(
         e,
         "horizontal",
         /*orientation*/
         s[3] === "horizontal"
       ), (!r || u[0] & /*variant*/
-      4) && T(
+      4) && I(
         e,
         "segmented",
         /*variant*/
@@ -47290,7 +47290,7 @@ function L5(t, e, o) {
   De(() => {
     to(u), B(), Y(), s !== "none" && O();
   }), dt(() => {
-    I(), s !== "none" && K(), j && (j.disconnect(), j = null);
+    q(), s !== "none" && K(), j && (j.disconnect(), j = null);
   });
   function H() {
     for (let te = 0; te < b.length; te++)
@@ -47298,7 +47298,7 @@ function L5(t, e, o) {
         return te + 1;
     return 1;
   }
-  function x(te) {
+  function T(te) {
     const P = te - 1;
     return P >= 0 && P < b.length && b[P].disabled;
   }
@@ -47306,7 +47306,7 @@ function L5(t, e, o) {
     const G = b.length;
     let J = te;
     for (let se = 0; se < G; se++)
-      if (J += P === "right" ? 1 : -1, J > G && (J = 1), J < 1 && (J = G), !x(J))
+      if (J += P === "right" ? 1 : -1, J > G && (J = 1), J < 1 && (J = G), !T(J))
         return J;
     return te;
   }
@@ -47326,18 +47326,18 @@ function L5(t, e, o) {
       const P = te.detail;
       b = [...b, { ...P, bound: false }], w && clearTimeout(w), w = setTimeout(
         () => {
-          if (S(), p) {
+          if (x(), p) {
             const G = V();
             if (G == null && l === -1) return;
             let J = G ?? (l || 1);
-            x(J) && (J = H()), q(J, { skipFocus: true }), p = false;
+            T(J) && (J = H()), A(J, { skipFocus: true }), p = false;
           }
         },
         1
       ), te.stopPropagation();
     });
   }
-  function S() {
+  function x() {
     const te = window.location.pathname, P = window.location.search;
     b.forEach((G, J) => {
       var Le;
@@ -47363,7 +47363,7 @@ function L5(t, e, o) {
       }
       G.disabled ? (ye.setAttribute("aria-disabled", "true"), ye.addEventListener("click", (Ke) => {
         Ke.preventDefault(), Ke.stopPropagation();
-      })) : ye.addEventListener("click", () => q(J + 1)), ye.appendChild(ie), g == null || g.appendChild(ye);
+      })) : ye.addEventListener("click", () => A(J + 1)), ye.appendChild(ie), g == null || g.appendChild(ye);
     }), d === "segmented" && requestAnimationFrame(() => {
       F({ withAnimation: false }), z === 0 && g && (j = new IntersectionObserver((G) => {
         var J;
@@ -47374,18 +47374,18 @@ function L5(t, e, o) {
   function Y() {
     u.addEventListener("focus", Q, true);
   }
-  function I() {
+  function q() {
     u.removeEventListener("focus", Q, true);
   }
-  function A() {
+  function S() {
     const te = V();
-    te !== null && te !== m && (x(te) || q(te));
+    te !== null && te !== m && (T(te) || A(te));
   }
   function O() {
-    window.addEventListener("hashchange", A);
+    window.addEventListener("hashchange", S);
   }
   function K() {
-    window.removeEventListener("hashchange", A);
+    window.removeEventListener("hashchange", S);
   }
   function F({ withAnimation: te }) {
     if (!g || d !== "segmented") return;
@@ -47405,7 +47405,7 @@ function L5(t, e, o) {
       o(8, k = se.left - J.left - 1), o(9, z = se.width), o(10, M = se.height), L = m;
     }
   }
-  function q(te, P = {}) {
+  function A(te, P = {}) {
     const { skipFocus: G = false } = P;
     if (!g) return;
     const J = m;
@@ -47451,19 +47451,19 @@ function L5(t, e, o) {
       switch (te.key) {
         case "ArrowUp":
         case "ArrowLeft":
-          q(Z(m, "left")), P = true;
+          A(Z(m, "left")), P = true;
           break;
         case "ArrowDown":
         case "ArrowRight":
-          q(Z(m, "right")), P = true;
+          A(Z(m, "right")), P = true;
           break;
         case "Home":
-          q(H()), P = true;
+          A(H()), P = true;
           break;
         case "End":
           for (let J = b.length; J >= 1; J--)
-            if (!x(J)) {
-              q(J);
+            if (!T(J)) {
+              A(J);
               break;
             }
           P = true;
@@ -47634,27 +47634,27 @@ function D5(t) {
         "data-testid",
         /*testid*/
         t[2]
-      ), f(e, "class", "notification-container svelte-1w932we"), T(
+      ), f(e, "class", "notification-container svelte-1w932we"), I(
         e,
         "pos-left",
         /*hPosition*/
         t[1] === "left"
-      ), T(
+      ), I(
         e,
         "pos-right",
         /*hPosition*/
         t[1] === "right"
-      ), T(
+      ), I(
         e,
         "pos-center",
         /*hPosition*/
         t[1] === "center"
-      ), T(
+      ), I(
         e,
         "pos-bottom",
         /*vPosition*/
         t[0] === "bottom"
-      ), T(
+      ), I(
         e,
         "pos-top",
         /*vPosition*/
@@ -47680,31 +47680,31 @@ function D5(t) {
         /*testid*/
         c[2]
       ), s & /*hPosition*/
-      2 && T(
+      2 && I(
         e,
         "pos-left",
         /*hPosition*/
         c[1] === "left"
       ), s & /*hPosition*/
-      2 && T(
+      2 && I(
         e,
         "pos-right",
         /*hPosition*/
         c[1] === "right"
       ), s & /*hPosition*/
-      2 && T(
+      2 && I(
         e,
         "pos-center",
         /*hPosition*/
         c[1] === "center"
       ), s & /*vPosition*/
-      1 && T(
+      1 && I(
         e,
         "pos-bottom",
         /*vPosition*/
         c[0] === "bottom"
       ), s & /*vPosition*/
-      1 && T(
+      1 && I(
         e,
         "pos-top",
         /*vPosition*/
@@ -47732,7 +47732,7 @@ function la(t) {
     }
   return t;
 }
-function x5(t, e, o) {
+function T5(t, e, o) {
   let { vPosition: i = "bottom" } = e, { hPosition: n = "center" } = e, { testid: l } = e, r = [], a, d;
   De(() => rt(window.document.body, (b, w, p) => {
     switch (b) {
@@ -47818,9 +47818,9 @@ function x5(t, e, o) {
     "vPosition" in b && o(0, i = b.vPosition), "hPosition" in b && o(1, n = b.hPosition), "testid" in b && o(2, l = b.testid);
   }, [i, n, l, a];
 }
-class T5 extends ze {
+class I5 extends ze {
   constructor(e) {
-    super(), ke(this, e, x5, D5, we, { vPosition: 0, hPosition: 1, testid: 2 }, E5);
+    super(), ke(this, e, T5, D5, we, { vPosition: 0, hPosition: 1, testid: 2 }, E5);
   }
   get vPosition() {
     return this.$$.ctx[0];
@@ -47841,8 +47841,8 @@ class T5 extends ze {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-temp-notification-ctrl", Ce(T5, { vPosition: { type: "String", attribute: "vertical-position" }, hPosition: { type: "String", attribute: "horizontal-position" }, testid: { type: "String", attribute: "testid" } }, [], [], true));
-function I5(t) {
+customElements.define("goa-temp-notification-ctrl", Ce(I5, { vPosition: { type: "String", attribute: "vertical-position" }, hPosition: { type: "String", attribute: "horizontal-position" }, testid: { type: "String", attribute: "testid" } }, [], [], true));
+function q5(t) {
   je(t, "svelte-g62gpr", `.snackbar.svelte-g62gpr.svelte-g62gpr{box-sizing:border-box;position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;border-radius:var(--goa-temporary-notification-borderRadius, var(--goa-border-radius-m));gap:var(--goa-temporary-notification-row-gap, var(--goa-space-m));padding:var(--goa-temporary-notification-padding, var(--goa-space-m) var(--goa-space-l));max-width:var(--goa-temporary-notification-max-width, 640px);color:var(--goa-temporary-notification-color-text, var(--goa-color-text-light));transition:transform var(--goa-temporary-notification-transition-duration, 0.3s) ease,
       opacity var(--goa-temporary-notification-transition-duration, 0.3s) ease;overflow:hidden}.snackbar.progress.svelte-g62gpr.svelte-g62gpr,.snackbar.indeterminate.svelte-g62gpr.svelte-g62gpr{padding:var(--goa-temporary-notification-padding-with-progress, var(--goa-space-m) var(--goa-space-l) 22px var(--goa-space-l))}.content.svelte-g62gpr.svelte-g62gpr{display:flex;align-items:flex-start;gap:var(--goa-temporary-notification-column-gap, var(--goa-space-s));flex:1 1 auto;min-width:0}@media(min-width: 624px){.snackbar.svelte-g62gpr.svelte-g62gpr{min-width:var(--goa-temporary-notification-min-width-desktop, 360px)}}@media(max-width: 623px){.snackbar.svelte-g62gpr.svelte-g62gpr{margin:0 var(--goa-space-m);width:calc(100vw - var(--goa-space-m) * 2)}}.snackbar.basic.svelte-g62gpr.svelte-g62gpr,.snackbar.indeterminate.svelte-g62gpr.svelte-g62gpr,.snackbar.progress.svelte-g62gpr.svelte-g62gpr{border:var(--goa-temporary-notification-borderWidth, var(--goa-border-width-s)) solid var(--goa-temporary-notification-color-border, var(--goa-color-greyscale-700));background:var(--goa-temporary-notification-color-bg-basic, var(--goa-color-greyscale-black))}.action.svelte-g62gpr.svelte-g62gpr{flex-grow:1;text-align:right}progress.svelte-g62gpr.svelte-g62gpr{position:absolute;display:flex;bottom:0;left:0;width:100%;height:var(--goa-temporary-notification-progress-bar-height, 6px);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-webkit-progress-bar{background-color:var(--goa-temporary-notification-progress-bar-color-bg, #adadad);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-webkit-progress-value{background-color:var(--goa-temporary-notification-progress-bar-color-fill, white);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-moz-progress-bar{background-color:var(--goa-temporary-notification-progress-bar-color-fill, white);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}.show.svelte-g62gpr.svelte-g62gpr{opacity:1}.show.animate-up.svelte-g62gpr.svelte-g62gpr{transform:translateY(0)}.show.animate-down.svelte-g62gpr.svelte-g62gpr{transform:translateY(0)}.hide.svelte-g62gpr.svelte-g62gpr{opacity:0}.hide.animate-up.svelte-g62gpr.svelte-g62gpr{transform:translateY(calc(-1 * var(--goa-temporary-notification-animation-distance, 100px)))}.hide.animate-down.svelte-g62gpr.svelte-g62gpr{transform:translateY(var(--goa-temporary-notification-animation-distance, 100px))}.snackbar.success.svelte-g62gpr.svelte-g62gpr{background:var(--goa-temporary-notification-color-bg-success, var(--goa-color-success-default))}.snackbar.failure.svelte-g62gpr.svelte-g62gpr{background:var(--goa-temporary-notification-color-bg-failure, var(--goa-color-emergency-default))}.message.svelte-g62gpr.svelte-g62gpr{flex:1 1 auto;font:var(--goa-temporary-notification-typography, var(--goa-typography-body-m))}.content.svelte-g62gpr:has(goa-icon) .message.svelte-g62gpr{margin-top:var(--goa-temporary-notification-padding-text-top, var(--goa-space-2xs))}`);
 }
@@ -47901,7 +47901,7 @@ function sa(t) {
     }
   };
 }
-function q5(t) {
+function A5(t) {
   let e;
   return {
     c() {
@@ -47916,7 +47916,7 @@ function q5(t) {
     }
   };
 }
-function A5(t) {
+function S5(t) {
   let e;
   return {
     c() {
@@ -47936,7 +47936,7 @@ function A5(t) {
     }
   };
 }
-function S5(t) {
+function x5(t) {
   let e, o, i, n, l, r, a, d, c = (
     /*type*/
     t[1] === "success" && ra()
@@ -47951,11 +47951,11 @@ function S5(t) {
     if (
       /*type*/
       b[1] === "progress"
-    ) return A5;
+    ) return S5;
     if (
       /*type*/
       b[1] === "indeterminate"
-    ) return q5;
+    ) return A5;
   }
   let v = g(t), m = v && v(t);
   return {
@@ -47968,43 +47968,43 @@ function S5(t) {
         "data-testid",
         /*testid*/
         t[3]
-      ), T(
+      ), I(
         e,
         "basic",
         /*type*/
         t[1] === "basic"
-      ), T(
+      ), I(
         e,
         "success",
         /*type*/
         t[1] === "success"
-      ), T(
+      ), I(
         e,
         "failure",
         /*type*/
         t[1] === "failure"
-      ), T(
+      ), I(
         e,
         "indeterminate",
         /*type*/
         t[1] === "indeterminate"
-      ), T(
+      ), I(
         e,
         "progress",
         /*type*/
         t[1] === "progress"
-      ), T(
+      ), I(
         e,
         "show",
         /*visible*/
         t[5]
-      ), T(e, "hide", !/*visible*/
-      t[5]), T(
+      ), I(e, "hide", !/*visible*/
+      t[5]), I(
         e,
         "animate-up",
         /*animationDirection*/
         t[6] === "up"
-      ), T(
+      ), I(
         e,
         "animate-down",
         /*animationDirection*/
@@ -48029,51 +48029,51 @@ function S5(t) {
         /*testid*/
         b[3]
       ), w & /*type*/
-      2 && T(
+      2 && I(
         e,
         "basic",
         /*type*/
         b[1] === "basic"
       ), w & /*type*/
-      2 && T(
+      2 && I(
         e,
         "success",
         /*type*/
         b[1] === "success"
       ), w & /*type*/
-      2 && T(
+      2 && I(
         e,
         "failure",
         /*type*/
         b[1] === "failure"
       ), w & /*type*/
-      2 && T(
+      2 && I(
         e,
         "indeterminate",
         /*type*/
         b[1] === "indeterminate"
       ), w & /*type*/
-      2 && T(
+      2 && I(
         e,
         "progress",
         /*type*/
         b[1] === "progress"
       ), w & /*visible*/
-      32 && T(
+      32 && I(
         e,
         "show",
         /*visible*/
         b[5]
       ), w & /*visible*/
-      32 && T(e, "hide", !/*visible*/
+      32 && I(e, "hide", !/*visible*/
       b[5]), w & /*animationDirection*/
-      64 && T(
+      64 && I(
         e,
         "animate-up",
         /*animationDirection*/
         b[6] === "up"
       ), w & /*animationDirection*/
-      64 && T(
+      64 && I(
         e,
         "animate-down",
         /*animationDirection*/
@@ -48100,7 +48100,7 @@ class H5 extends ze {
       this,
       e,
       O5,
-      S5,
+      x5,
       we,
       {
         message: 0,
@@ -48111,7 +48111,7 @@ class H5 extends ze {
         visible: 5,
         animationDirection: 6
       },
-      I5
+      q5
     );
   }
   get message() {
@@ -48182,7 +48182,7 @@ function Go(t) {
     },
     {
       style: i = it(
-        Ie(
+        qe(
           "color",
           /*color*/
           t[2] === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"
@@ -48248,7 +48248,7 @@ function Go(t) {
         ) + " svelte-1yns3oj")) && { class: o },
         (!n || s & /*color, maxWidth, _marginTop, mr, _marginBottom, ml*/
         126 && i !== (i = it(
-          Ie(
+          qe(
             "color",
             /*color*/
             c[2] === "primary" ? "var(--goa-color-text-default)" : "var(--goa-color-text-secondary)"
@@ -48503,7 +48503,7 @@ function da(t) {
   let i = o(t), n = i && i(t);
   return {
     c() {
-      e = C("div"), n && n.c(), f(e, "class", "counter svelte-d4p8uc"), T(
+      e = C("div"), n && n.c(), f(e, "class", "counter svelte-d4p8uc"), I(
         e,
         "counter-error",
         /*count*/
@@ -48516,7 +48516,7 @@ function da(t) {
     },
     p(l, r) {
       i === (i = o(l)) && n ? n.p(l, r) : (n && n.d(1), n = i && i(l), n && (n.c(), n.m(e, null))), r[0] & /*count, maxcount*/
-      1048832 && T(
+      1048832 && I(
         e,
         "counter-error",
         /*count*/
@@ -48698,7 +48698,7 @@ function Q5(t) {
       t[5]};
       --char-count-padding: ${/*countby*/
       t[7] ? "2rem" : "0"};
-    `), T(
+    `), I(
         o,
         "error",
         /*_error*/
@@ -48706,22 +48706,22 @@ function Q5(t) {
         t[8] > 0 && /*count*/
         t[20] > /*maxcount*/
         t[8]
-      ), T(
+      ), I(
         o,
         "disabled",
         /*isDisabled*/
         t[19]
-      ), T(
+      ), I(
         o,
         "readonly",
         /*isReadonly*/
         t[21]
-      ), T(
+      ), I(
         o,
         "compact",
         /*size*/
         t[11] === "compact"
-      ), T(
+      ), I(
         o,
         "v2",
         /*version*/
@@ -48834,7 +48834,7 @@ function Q5(t) {
       --char-count-padding: ${/*countby*/
       v[7] ? "2rem" : "0"};
     `) && f(o, "style", d), m[0] & /*_error, maxcount, count*/
-      1114368 && T(
+      1114368 && I(
         o,
         "error",
         /*_error*/
@@ -48843,25 +48843,25 @@ function Q5(t) {
         v[20] > /*maxcount*/
         v[8]
       ), m[0] & /*isDisabled*/
-      524288 && T(
+      524288 && I(
         o,
         "disabled",
         /*isDisabled*/
         v[19]
       ), m[0] & /*isReadonly*/
-      2097152 && T(
+      2097152 && I(
         o,
         "readonly",
         /*isReadonly*/
         v[21]
       ), m[0] & /*size*/
-      2048 && T(
+      2048 && I(
         o,
         "compact",
         /*size*/
         v[11] === "compact"
       ), m[0] & /*version*/
-      1024 && T(
+      1024 && I(
         o,
         "v2",
         /*version*/
@@ -48877,20 +48877,20 @@ function Q5(t) {
 }
 function R5(t, e, o) {
   let i, n, l, { name: r } = e, { value: a = "" } = e, { placeholder: d = "" } = e, { rows: c = 3 } = e, { testid: s = "" } = e, { width: u = "100%" } = e, { maxwidth: g = "60ch" } = e, { error: v = "false" } = e, { readonly: m = "false" } = e, { disabled: b = "false" } = e, { arialabel: w = "" } = e, { countby: p = "" } = e, { maxcount: k = -1 } = e, { autocomplete: z = "" } = e;
-  const [M, N] = qe("Version", ["1", "2"]);
+  const [M, N] = Ae("Version", ["1", "2"]);
   let { version: L = "1" } = e;
-  const [j, H] = qe("Size", ["default", "compact"]);
-  let { size: x = "default" } = e, { mt: Z = null } = e, { mr: V = null } = e, { mb: B = null } = e, { ml: S = null } = e, Y = false, I = false, A, O;
+  const [j, H] = Ae("Size", ["default", "compact"]);
+  let { size: T = "default" } = e, { mt: Z = null } = e, { mr: V = null } = e, { mb: B = null } = e, { ml: x = null } = e, Y = false, q = false, S, O;
   De(() => {
-    N(L), H(x), K(), Q();
+    N(L), H(T), K(), Q();
     const ye = { width: u.includes("%") ? u : `min(${u}, 100%)` };
     g && (ye["max-width"] = g), es(O, ":host", ye);
   });
   function K() {
-    rt(A, (ie, ye) => {
+    rt(S, (ie, ye) => {
       switch (ie) {
-        case xt:
-          q(ye);
+        case Tt:
+          A(ye);
           break;
         case Mt:
           F(ye);
@@ -48899,7 +48899,7 @@ function R5(t, e, o) {
           o(26, v = "false");
           break;
         case Dt:
-          q({ value: "" });
+          A({ value: "" });
           break;
       }
     });
@@ -48907,23 +48907,23 @@ function R5(t, e, o) {
   function F(ie) {
     o(26, v = ie.error ? "true" : "false");
   }
-  function q(ie) {
+  function A(ie) {
     o(0, a = ie.value), oe(a);
   }
   function Q() {
-    Oe(A, ut, { name: r, el: A }, { bubbles: true, timeout: 10 });
+    Oe(S, ut, { name: r, el: S }, { bubbles: true, timeout: 10 });
   }
   function R(ie) {
-    i || oe(A.value);
+    i || oe(S.value);
   }
   function ee(ie) {
     i || ne(ie);
   }
   function oe(ie) {
-    Ee(A, "_change", { name: r, value: ie }, { bubbles: true });
+    Ee(S, "_change", { name: r, value: ie }, { bubbles: true });
   }
   function ne(ie) {
-    A.dispatchEvent(new CustomEvent(
+    S.dispatchEvent(new CustomEvent(
       "_keyPress",
       {
         composed: true,
@@ -48935,11 +48935,11 @@ function R5(t, e, o) {
     Ee(O, "help-text::announce", void 0, { bubbles: true });
   }
   function P(ie) {
-    Ee(A, "_blur", { name: r, value: A.value }, { bubbles: true });
+    Ee(S, "_blur", { name: r, value: S.value }, { bubbles: true });
   }
   function G(ie) {
     ce[ie ? "unshift" : "push"](() => {
-      A = ie, o(18, A);
+      S = ie, o(18, S);
     });
   }
   function J() {
@@ -48951,12 +48951,12 @@ function R5(t, e, o) {
     });
   }
   return t.$$set = (ie) => {
-    "name" in ie && o(1, r = ie.name), "value" in ie && o(0, a = ie.value), "placeholder" in ie && o(2, d = ie.placeholder), "rows" in ie && o(3, c = ie.rows), "testid" in ie && o(4, s = ie.testid), "width" in ie && o(5, u = ie.width), "maxwidth" in ie && o(27, g = ie.maxwidth), "error" in ie && o(26, v = ie.error), "readonly" in ie && o(28, m = ie.readonly), "disabled" in ie && o(29, b = ie.disabled), "arialabel" in ie && o(6, w = ie.arialabel), "countby" in ie && o(7, p = ie.countby), "maxcount" in ie && o(8, k = ie.maxcount), "autocomplete" in ie && o(9, z = ie.autocomplete), "version" in ie && o(10, L = ie.version), "size" in ie && o(11, x = ie.size), "mt" in ie && o(12, Z = ie.mt), "mr" in ie && o(13, V = ie.mr), "mb" in ie && o(14, B = ie.mb), "ml" in ie && o(15, S = ie.ml);
+    "name" in ie && o(1, r = ie.name), "value" in ie && o(0, a = ie.value), "placeholder" in ie && o(2, d = ie.placeholder), "rows" in ie && o(3, c = ie.rows), "testid" in ie && o(4, s = ie.testid), "width" in ie && o(5, u = ie.width), "maxwidth" in ie && o(27, g = ie.maxwidth), "error" in ie && o(26, v = ie.error), "readonly" in ie && o(28, m = ie.readonly), "disabled" in ie && o(29, b = ie.disabled), "arialabel" in ie && o(6, w = ie.arialabel), "countby" in ie && o(7, p = ie.countby), "maxcount" in ie && o(8, k = ie.maxcount), "autocomplete" in ie && o(9, z = ie.autocomplete), "version" in ie && o(10, L = ie.version), "size" in ie && o(11, T = ie.size), "mt" in ie && o(12, Z = ie.mt), "mr" in ie && o(13, V = ie.mr), "mb" in ie && o(14, B = ie.mb), "ml" in ie && o(15, x = ie.ml);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*error, _error, _prevError, _rootEl*/
-    1141047296 && (o(16, Y = Ae(v)), Y !== I && (Ee(O, "error::change", { isError: Y }, { bubbles: true }), o(30, I = Y))), t.$$.dirty[0] & /*disabled*/
-    536870912 && o(19, i = Ae(b)), t.$$.dirty[0] & /*readonly*/
-    268435456 && o(21, n = Ae(m)), t.$$.dirty[0] & /*countby, value*/
+    1141047296 && (o(16, Y = Se(v)), Y !== q && (Ee(O, "error::change", { isError: Y }, { bubbles: true }), o(30, q = Y))), t.$$.dirty[0] & /*disabled*/
+    536870912 && o(19, i = Se(b)), t.$$.dirty[0] & /*readonly*/
+    268435456 && o(21, n = Se(m)), t.$$.dirty[0] & /*countby, value*/
     129 && o(20, l = p === "character" ? a == null ? void 0 : a.length : a == null ? void 0 : a.split(" ").filter((ie) => ie.trim().length > 0).length);
   }, [
     a,
@@ -48970,14 +48970,14 @@ function R5(t, e, o) {
     k,
     z,
     L,
-    x,
+    T,
     Z,
     V,
     B,
-    S,
+    x,
     Y,
     O,
-    A,
+    S,
     i,
     l,
     n,
@@ -48989,7 +48989,7 @@ function R5(t, e, o) {
     g,
     m,
     b,
-    I,
+    q,
     G,
     J,
     se
@@ -49202,11 +49202,11 @@ function ov(t) {
     /*$$scope*/
     t[3],
     fa
-  ), x = (
+  ), T = (
     /*#slots*/
     t[4].footer
   ), Z = ue(
-    x,
+    T,
     t,
     /*$$scope*/
     t[3],
@@ -49320,12 +49320,12 @@ function ov(t) {
       ), Z && Z.p && (!m || B & /*$$scope*/
       8) && ge(
         Z,
-        x,
+        T,
         V,
         /*$$scope*/
         V[3],
         m ? fe(
-          x,
+          T,
           /*$$scope*/
           V[3],
           B,
@@ -49640,7 +49640,7 @@ function cv(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const l = ft(i);
   let { content: r = "" } = e, { testid: a = "" } = e, { position: d = "top" } = e, { halign: c = "center" } = e, { maxwidth: s = "" } = e, { mt: u = null } = e, { mr: g = null } = e, { mb: v = null } = e, { ml: m = null } = e;
-  const [b, w] = qe("Tooltip positions", ["top", "bottom", "left", "right"], false), [p, k] = qe("Tooltip alignment", ["left", "right", "center"], false), z = (Q) => {
+  const [b, w] = Ae("Tooltip positions", ["top", "bottom", "left", "right"], false), [p, k] = Ae("Tooltip alignment", ["left", "right", "center"], false), z = (Q) => {
     if (!Q || !Q.endsWith("px"))
       return "";
     const R = parseFloat(Q);
@@ -49648,28 +49648,28 @@ function cv(t, e, o) {
   }, M = (Q, R) => {
     (Q === "left" || Q === "right") && R !== "center" && console.error(`[${R}] is an invalid option for position ${Q}`);
   };
-  let N = 0, L, j, H, x = false, Z, V, B;
+  let N = 0, L, j, H, T = false, Z, V, B;
   De(() => {
-    w(d), k(c), M(d, c), o(17, s = z(s)), H = d, o(13, B = Math.random().toString(36)), window.addEventListener("resize", I), I();
+    w(d), k(c), M(d, c), o(17, s = z(s)), H = d, o(13, B = Math.random().toString(36)), window.addEventListener("resize", q), q();
   }), dt(() => {
-    window.removeEventListener("resize", I), clearTimeout(Z), clearTimeout(V);
+    window.removeEventListener("resize", q), clearTimeout(Z), clearTimeout(V);
   });
-  const S = () => {
+  const x = () => {
     Z = setTimeout(
       () => {
-        o(11, x = true), I();
+        o(11, T = true), q();
       },
       300
     );
   }, Y = () => {
     clearTimeout(Z), o(12, V = setTimeout(
       () => {
-        o(11, x = false), o(0, d = H);
+        o(11, T = false), o(0, d = H);
       },
       500
     ));
   };
-  async function I() {
+  async function q() {
     if (await Ge(), !j || !L)
       return;
     const Q = j.getBoundingClientRect(), R = L.getBoundingClientRect(), ee = R.top, oe = window.innerHeight - R.bottom, ne = R.left, te = window.innerWidth - R.right, P = s && s.endsWith("px") ? parseFloat(s) : 400, G = Math.min(N * 0.8, P, Q.width, Math.max(ne, te) - 10), J = s && s.endsWith("px") || G > R.width || G > ne || G > te;
@@ -49677,7 +49677,7 @@ function cv(t, e, o) {
     let se = d, ie = c;
     d === "bottom" && Q.height > oe ? se = "top" : d === "top" && Q.height > ee && (se = "bottom"), d === "right" && Q.width > te ? se = "left" : d === "left" && Q.width > ne && (se = "right"), c === "right" && Q.width > te ? ie = "left" : c === "left" && Q.width > ne ? ie = "right" : c === "center" && (d === "top" || d === "bottom") && (Q.width / 2 > ne || Q.width / 2 > te) && (ie = ne > te ? "left" : "right"), o(0, d = se), o(1, c = ie);
   }
-  function A() {
+  function S() {
     o(10, N = Ds.innerWidth);
   }
   function O(Q) {
@@ -49691,16 +49691,16 @@ function cv(t, e, o) {
     });
   }
   const F = () => {
-    clearTimeout(V), S();
-  }, q = () => {
-    clearTimeout(V), S();
+    clearTimeout(V), x();
+  }, A = () => {
+    clearTimeout(V), x();
   };
   return t.$$set = (Q) => {
     "content" in Q && o(2, r = Q.content), "testid" in Q && o(3, a = Q.testid), "position" in Q && o(0, d = Q.position), "halign" in Q && o(1, c = Q.halign), "maxwidth" in Q && o(17, s = Q.maxwidth), "mt" in Q && o(4, u = Q.mt), "mr" in Q && o(5, g = Q.mr), "mb" in Q && o(6, v = Q.mb), "ml" in Q && o(7, m = Q.ml), "$$scope" in Q && o(18, n = Q.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*_rootEl, _tooltipEl*/
     768 && L && j && L.style.setProperty("--target-width", `${L.getBoundingClientRect().width / 2}px`), t.$$.dirty[0] & /*content*/
-    4 && r && I();
+    4 && r && q();
   }, [
     d,
     c,
@@ -49713,20 +49713,20 @@ function cv(t, e, o) {
     L,
     j,
     N,
-    x,
+    T,
     V,
     B,
-    S,
+    x,
     Y,
     l,
     s,
     n,
     i,
-    A,
+    S,
     O,
     K,
     F,
-    q
+    A
   ];
 }
 class uv extends ze {
@@ -49990,7 +49990,7 @@ function _a(t) {
   return {
     c() {
       e = C("progress"), f(e, "class", "horizontal svelte-vthlw2"), e.value = /*_progress*/
-      t[12], f(e, "max", "100"), T(
+      t[12], f(e, "max", "100"), I(
         e,
         "mobile",
         /*_isMobile*/
@@ -50004,7 +50004,7 @@ function _a(t) {
       i[0] & /*_progress*/
       4096 && (e.value = /*_progress*/
       o[12]), i[0] & /*_isMobile*/
-      16384 && T(
+      16384 && I(
         e,
         "mobile",
         /*_isMobile*/
@@ -50038,7 +50038,7 @@ function _v(t) {
       e = C("div"), o = C("div"), i = C("div"), n = C("div"), s && s.c(), r = W(), u && u.c(), f(n, "class", "goa-grid svelte-vthlw2"), f(n, "style", l = `--min-child-width: ${/*_isMobile*/
       t[14] ? "40px" : "108px"};
         gap: var(--goa-space-${/*_isMobile*/
-      t[14] ? "xs" : "none"});`), T(
+      t[14] ? "xs" : "none"});`), I(
         n,
         "mobile",
         /*_isMobile*/
@@ -50069,7 +50069,7 @@ function _v(t) {
         "data-testid",
         /*testid*/
         t[0]
-      ), T(
+      ), I(
         o,
         "mobile",
         /*_isMobile*/
@@ -50103,7 +50103,7 @@ function _v(t) {
       g[14] ? "40px" : "108px"};
         gap: var(--goa-space-${/*_isMobile*/
       g[14] ? "xs" : "none"});`)) && f(n, "style", l), (!d || v[0] & /*_isMobile*/
-      16384) && T(
+      16384) && I(
         n,
         "mobile",
         /*_isMobile*/
@@ -50139,7 +50139,7 @@ function _v(t) {
         /*testid*/
         g[0]
       ), (!d || v[0] & /*_isMobile*/
-      16384) && T(
+      16384) && I(
         o,
         "mobile",
         /*_isMobile*/
@@ -50158,17 +50158,17 @@ function _v(t) {
   };
 }
 function yv(t, e, o) {
-  let i, n, { $$slots: l = {}, $$scope: r } = e, { step: a = -1 } = e, { testid: d = "" } = e, { mt: c = null } = e, { mr: s = null } = e, { mb: u = null } = e, { ml: g = null } = e, { mobile: v = "false" } = e, { backgroundcolor: m = "inherit" } = e, b, w, p = [], k, z, M, N, L, j = 0, H, x = 1, Z = false, V, B;
+  let i, n, { $$slots: l = {}, $$scope: r } = e, { step: a = -1 } = e, { testid: d = "" } = e, { mt: c = null } = e, { mr: s = null } = e, { mb: u = null } = e, { ml: g = null } = e, { mobile: v = "false" } = e, { backgroundcolor: m = "inherit" } = e, b, w, p = [], k, z, M, N, L, j = 0, H, T = 1, Z = false, V, B;
   De(async () => {
-    await Ge(), N = +a == -1 ? "free" : "constrained", S(), B = O(), B.observe(b);
+    await Ge(), N = +a == -1 ? "free" : "constrained", x(), B = O(), B.observe(b);
   }), dt(() => {
-    window.removeEventListener("orientationchange", q), B.unobserve(b);
+    window.removeEventListener("orientationchange", A), B.unobserve(b);
   });
-  function S() {
+  function x() {
     b.addEventListener("formstep:mounted", (oe) => {
       const ne = oe, { el: te, status: P } = ne.detail;
       o(7, p = [...p, { el: te, status: P }]), V && clearTimeout(V), V = setTimeout(() => {
-        Y(), q(), A(), I(), o(18, H = a < 1 ? 1 : a), Q();
+        Y(), A(), S(), q(), o(18, H = a < 1 ? 1 : a), Q();
       });
     });
   }
@@ -50186,10 +50186,10 @@ function yv(t, e, o) {
       ne.el.dispatchEvent(new CustomEvent("formstepper:init", { composed: true, detail: P }));
     }
   }
-  function I() {
-    window.addEventListener("orientationchange", q);
+  function q() {
+    window.addEventListener("orientationchange", A);
   }
-  function A() {
+  function S() {
     b == null || b.addEventListener("_click", (oe) => {
       const ne = oe.detail.step;
       K(ne);
@@ -50198,7 +50198,7 @@ function yv(t, e, o) {
   function O() {
     return new ResizeObserver((oe) => {
       if (oe.length === 1) {
-        q(), oe[0].contentRect.width;
+        A(), oe[0].contentRect.width;
         for (const ne of p)
           ne.el.dispatchEvent(new CustomEvent(
             "form-stepper:resized",
@@ -50229,7 +50229,7 @@ function yv(t, e, o) {
   function F() {
     o(12, j = i ? 100 : H / (p.length - 1) * 100);
   }
-  function q() {
+  function A() {
     var ne;
     const oe = (ne = p == null ? void 0 : p[0]) == null ? void 0 : ne.el;
     o(8, k = (oe == null ? void 0 : oe.offsetWidth) ?? 0), o(9, z = (oe == null ? void 0 : oe.offsetHeight) ?? 0), o(11, L = w == null ? void 0 : w.offsetHeight), o(10, M = w == null ? void 0 : w.offsetWidth), setTimeout(() => o(13, Z = true), 100);
@@ -50261,8 +50261,8 @@ function yv(t, e, o) {
     "step" in oe && o(15, a = oe.step), "testid" in oe && o(0, d = oe.testid), "mt" in oe && o(1, c = oe.mt), "mr" in oe && o(2, s = oe.mr), "mb" in oe && o(3, u = oe.mb), "ml" in oe && o(4, g = oe.ml), "mobile" in oe && o(16, v = oe.mobile), "backgroundcolor" in oe && o(17, m = oe.backgroundcolor), "$$scope" in oe && o(20, r = oe.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*_currentStep, _maxAllowedStep*/
-    786432 && o(19, x = Math.max(H || 1, x || 1)), t.$$.dirty[0] & /*mobile*/
-    65536 && o(14, i = Ae(v)), t.$$.dirty[0] & /*backgroundcolor*/
+    786432 && o(19, T = Math.max(H || 1, T || 1)), t.$$.dirty[0] & /*mobile*/
+    65536 && o(14, i = Se(v)), t.$$.dirty[0] & /*backgroundcolor*/
     131072 && (n = m), t.$$.dirty[0] & /*step*/
     32768 && o(15, a = +a), t.$$.dirty[0] & /*step, _currentStep*/
     294912 && a > 0 && H !== a && K(a), t.$$.dirty[0] & /*_currentStep*/
@@ -50287,7 +50287,7 @@ function yv(t, e, o) {
     v,
     m,
     H,
-    x,
+    T,
     r,
     l,
     R,
@@ -50454,12 +50454,12 @@ function jv(t) {
       ), f(o, "type", "checkbox"), o.checked = /*current*/
       t[2], f(o, "aria-disabled", i = !/*_isEnabled*/
       t[9]), o.disabled = n = !/*_isEnabled*/
-      t[9], f(o, "data-testid", "checkbox"), f(o, "class", "svelte-6d3t92"), f(r, "data-testid", "status"), f(r, "class", "status svelte-6d3t92"), T(
+      t[9], f(o, "data-testid", "checkbox"), f(o, "class", "svelte-6d3t92"), f(r, "data-testid", "status"), f(r, "class", "status svelte-6d3t92"), I(
         r,
         "incomplete",
         /*status*/
         t[0] === "incomplete"
-      ), T(
+      ), I(
         r,
         "current",
         /*current*/
@@ -50486,12 +50486,12 @@ function jv(t) {
       t[0] || ""}`), f(e, "data-testid", "label"), f(e, "style", s = `
       --background-color: ${/*_backgroundColor*/
       t[8]};
-    `), f(e, "class", "svelte-6d3t92"), T(
+    `), f(e, "class", "svelte-6d3t92"), I(
         e,
         "mobile",
         /*_isMobile*/
         t[7]
-      ), T(e, "desktop", !/*_isMobile*/
+      ), I(e, "desktop", !/*_isMobile*/
       t[7]);
     },
     m(p, k) {
@@ -50516,13 +50516,13 @@ function jv(t) {
       p[9]) && f(o, "aria-disabled", i), k & /*_isEnabled*/
       512 && n !== (n = !/*_isEnabled*/
       p[9]) && (o.disabled = n), m === (m = v(p)) && b ? b.p(p, k) : (b.d(1), b = m(p), b && (b.c(), b.m(r, null))), k & /*status*/
-      1 && T(
+      1 && I(
         r,
         "incomplete",
         /*status*/
         p[0] === "incomplete"
       ), k & /*current*/
-      4 && T(
+      4 && I(
         r,
         "current",
         /*current*/
@@ -50557,13 +50557,13 @@ function jv(t) {
       --background-color: ${/*_backgroundColor*/
       p[8]};
     `) && f(e, "style", s), k & /*_isMobile*/
-      128 && T(
+      128 && I(
         e,
         "mobile",
         /*_isMobile*/
         p[7]
       ), k & /*_isMobile*/
-      128 && T(e, "desktop", !/*_isMobile*/
+      128 && I(e, "desktop", !/*_isMobile*/
       p[7]);
     },
     i: be,
@@ -50714,15 +50714,15 @@ function Ev(t) {
         var(--goa-color-greyscale-50)
       )}}@keyframes svelte-1f2bmhv-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}@keyframes svelte-1f2bmhv-delayVisibility{0%{visibility:hidden}99%{visibility:hidden}100%{visibility:visible}}`);
 }
-const Dv = (t) => ({}), ka = (t) => ({}), xv = (t) => ({}), Ca = (t) => ({}), Tv = (t) => ({}), za = (t) => ({});
-function Iv(t) {
+const Dv = (t) => ({}), ka = (t) => ({}), Tv = (t) => ({}), Ca = (t) => ({}), Iv = (t) => ({}), za = (t) => ({});
+function qv(t) {
   let e, o, i, n, l, r;
   return {
     c() {
       e = C("div"), o = C("img"), n = W(), l = C("goa-text"), r = ae(
         /*heading*/
         t[1]
-      ), f(o, "alt", "GoA Logo"), f(o, "class", "logo svelte-1f2bmhv"), bt(o.src, i = xs) || f(o, "src", i), h(l, "mt", "0"), h(l, "mb", "0"), h(l, "class", "heading svelte-1f2bmhv"), f(e, "class", "header svelte-1f2bmhv");
+      ), f(o, "alt", "GoA Logo"), f(o, "class", "logo svelte-1f2bmhv"), bt(o.src, i = Ts) || f(o, "src", i), h(l, "mt", "0"), h(l, "mb", "0"), h(l, "class", "heading svelte-1f2bmhv"), f(e, "class", "header svelte-1f2bmhv");
     },
     m(a, d) {
       D(a, e, d), _(e, o), _(e, n), _(e, l), _(l, r);
@@ -50740,14 +50740,14 @@ function Iv(t) {
     }
   };
 }
-function qv(t) {
+function Av(t) {
   let e, o, i, n, l, r;
   return {
     c() {
       e = C("a"), o = C("img"), n = W(), l = C("goa-text"), r = ae(
         /*heading*/
         t[1]
-      ), f(o, "alt", "GoA Logo"), f(o, "class", "logo svelte-1f2bmhv"), bt(o.src, i = xs) || f(o, "src", i), h(l, "mt", "0"), h(l, "mb", "0"), h(l, "class", "heading svelte-1f2bmhv"), f(
+      ), f(o, "alt", "GoA Logo"), f(o, "class", "logo svelte-1f2bmhv"), bt(o.src, i = Ts) || f(o, "src", i), h(l, "mt", "0"), h(l, "mb", "0"), h(l, "class", "heading svelte-1f2bmhv"), f(
         e,
         "href",
         /*url*/
@@ -50813,7 +50813,7 @@ function Ma(t) {
           /*$$scope*/
           a[22],
           d,
-          xv
+          Tv
         ) : ve(
           /*$$scope*/
           a[22]
@@ -50852,7 +50852,7 @@ function ja(t) {
       ), s = W(), u = C("div"), g = ae(
         /*userSecondaryText*/
         t[5]
-      ), v = W(), m = C("div"), m.innerHTML = '<goa-icon size="small" type="chevron-down" class="svelte-1f2bmhv"></goa-icon>', f(e, "class", "account-menu svelte-1f2bmhv"), f(e, "role", "presentation"), T(
+      ), v = W(), m = C("div"), m.innerHTML = '<goa-icon size="small" type="chevron-down" class="svelte-1f2bmhv"></goa-icon>', f(e, "class", "account-menu svelte-1f2bmhv"), f(e, "role", "presentation"), I(
         e,
         "show",
         /*_showAccountMenu*/
@@ -50917,7 +50917,7 @@ function ja(t) {
         ),
         ka
       ), (!b || N[0] & /*_showAccountMenu*/
-      512) && T(
+      512) && I(
         e,
         "show",
         /*_showAccountMenu*/
@@ -50957,23 +50957,23 @@ function ja(t) {
     }
   };
 }
-function Av(t) {
+function Sv(t) {
   let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M = (
     /*open*/
     t[0] ? "Collapse menu" : "Expand menu"
-  ), N, L, j, H, x, Z, V, B;
-  function S(q, Q) {
+  ), N, L, j, H, T, Z, V, B;
+  function x(A, Q) {
     return (
       /*url*/
-      q[2] ? qv : Iv
+      A[2] ? Av : qv
     );
   }
-  let Y = S(t), I = Y(t);
-  const A = (
+  let Y = x(t), q = Y(t);
+  const S = (
     /*#slots*/
     t[23].primary
   ), O = ue(
-    A,
+    S,
     t,
     /*$$scope*/
     t[22],
@@ -50988,12 +50988,12 @@ function Av(t) {
   );
   return {
     c() {
-      e = C("div"), o = C("button"), i = W(), n = C("div"), l = C("header"), I.c(), r = W(), a = C("div"), d = C("goa-scrollable"), c = C("div"), O && O.c(), s = W(), u = C("div"), K && K.c(), g = W(), F && F.c(), v = W(), m = C("div"), b = C("button"), w = C("goa-icon"), k = W(), z = C("span"), N = ae(M), j = W(), H = C("div"), x = ae(
+      e = C("div"), o = C("button"), i = W(), n = C("div"), l = C("header"), q.c(), r = W(), a = C("div"), d = C("goa-scrollable"), c = C("div"), O && O.c(), s = W(), u = C("div"), K && K.c(), g = W(), F && F.c(), v = W(), m = C("div"), b = C("button"), w = C("goa-icon"), k = W(), z = C("span"), N = ae(M), j = W(), H = C("div"), T = ae(
         /*_tooltipLabel*/
         t[16]
       ), f(o, "class", "background svelte-1f2bmhv"), f(o, "aria-label", "Hide menu"), f(o, "data-testid", "work-side-menu-background"), f(l, "class", "top-section svelte-1f2bmhv"), f(c, "class", "primary-menu svelte-1f2bmhv"), f(c, "role", "presentation"), h(d, "vpadding", "0"), h(d, "hpadding", "0"), h(d, "maxheight", "100%"), h(d, "class", "svelte-1f2bmhv"), f(a, "class", "scroll-area svelte-1f2bmhv"), h(w, "size", "small"), h(w, "theme", "outline"), h(w, "type", p = /*open*/
       t[0] ? "arrow-start" : "arrow-end"), h(w, "class", "svelte-1f2bmhv"), f(z, "class", "toggle-button-label svelte-1f2bmhv"), f(b, "class", "toggle-button svelte-1f2bmhv"), f(b, "data-testid", "toggle-menu"), f(b, "aria-label", L = /*open*/
-      t[0] ? "Collapse menu" : "Expand menu"), f(m, "class", "toggle-menu svelte-1f2bmhv"), f(u, "class", "bottom-section svelte-1f2bmhv"), f(H, "class", "tooltip svelte-1f2bmhv"), T(
+      t[0] ? "Collapse menu" : "Expand menu"), f(m, "class", "toggle-menu svelte-1f2bmhv"), f(u, "class", "bottom-section svelte-1f2bmhv"), f(H, "class", "tooltip svelte-1f2bmhv"), I(
         H,
         "show",
         /*_showTooltip*/
@@ -51003,31 +51003,31 @@ function Av(t) {
         "data-testid",
         /*testid*/
         t[3]
-      ), f(e, "role", "presentation"), T(e, "closed", !/*open*/
-      t[0]), T(
+      ), f(e, "role", "presentation"), I(e, "closed", !/*open*/
+      t[0]), I(
         e,
         "scrolling",
         /*_isScrolling*/
         t[6]
-      ), T(
+      ), I(
         e,
         "at-top",
         /*_atTop*/
         t[7]
-      ), T(
+      ), I(
         e,
         "at-bottom",
         /*_atBottom*/
         t[8]
-      ), T(
+      ), I(
         e,
         "drawer-open",
         /*_mobilePopoverOpen*/
         t[11]
       );
     },
-    m(q, Q) {
-      D(q, e, Q), _(e, o), _(e, i), _(e, n), _(n, l), I.m(l, null), _(n, r), _(n, a), _(a, d), _(d, c), O && O.m(c, null), t[24](c), t[25](d), _(n, s), _(n, u), K && K.m(u, null), _(u, g), F && F.m(u, null), _(u, v), _(u, m), _(m, b), _(b, w), _(b, k), _(b, z), _(z, N), _(n, j), _(n, H), _(H, x), t[26](H), t[27](e), Z = true, V || (B = [
+    m(A, Q) {
+      D(A, e, Q), _(e, o), _(e, i), _(e, n), _(n, l), q.m(l, null), _(n, r), _(n, a), _(a, d), _(d, c), O && O.m(c, null), t[24](c), t[25](d), _(n, s), _(n, u), K && K.m(u, null), _(u, g), F && F.m(u, null), _(u, v), _(u, m), _(m, b), _(b, w), _(b, k), _(b, z), _(z, N), _(n, j), _(n, H), _(H, T), t[26](H), t[27](e), Z = true, V || (B = [
         re(
           o,
           "click",
@@ -51048,97 +51048,97 @@ function Av(t) {
         )
       ], V = true);
     },
-    p(q, Q) {
-      Y === (Y = S(q)) && I ? I.p(q, Q) : (I.d(1), I = Y(q), I && (I.c(), I.m(l, null))), O && O.p && (!Z || Q[0] & /*$$scope*/
+    p(A, Q) {
+      Y === (Y = x(A)) && q ? q.p(A, Q) : (q.d(1), q = Y(A), q && (q.c(), q.m(l, null))), O && O.p && (!Z || Q[0] & /*$$scope*/
       4194304) && ge(
         O,
+        S,
         A,
-        q,
         /*$$scope*/
-        q[22],
+        A[22],
         Z ? fe(
-          A,
+          S,
           /*$$scope*/
-          q[22],
+          A[22],
           Q,
-          Tv
+          Iv
         ) : ve(
           /*$$scope*/
-          q[22]
+          A[22]
         ),
         za
       ), /*$$slots*/
-      q[21].secondary ? K ? (K.p(q, Q), Q[0] & /*$$slots*/
-      2097152 && U(K, 1)) : (K = Ma(q), K.c(), U(K, 1), K.m(u, g)) : K && (He(), $(K, 1, 1, () => {
+      A[21].secondary ? K ? (K.p(A, Q), Q[0] & /*$$slots*/
+      2097152 && U(K, 1)) : (K = Ma(A), K.c(), U(K, 1), K.m(u, g)) : K && (He(), $(K, 1, 1, () => {
         K = null;
       }), Pe()), /*$$slots*/
-      q[21].account ? F ? (F.p(q, Q), Q[0] & /*$$slots*/
-      2097152 && U(F, 1)) : (F = ja(q), F.c(), U(F, 1), F.m(u, v)) : F && (He(), $(F, 1, 1, () => {
+      A[21].account ? F ? (F.p(A, Q), Q[0] & /*$$slots*/
+      2097152 && U(F, 1)) : (F = ja(A), F.c(), U(F, 1), F.m(u, v)) : F && (He(), $(F, 1, 1, () => {
         F = null;
       }), Pe()), (!Z || Q[0] & /*open*/
       1 && p !== (p = /*open*/
-      q[0] ? "arrow-start" : "arrow-end")) && h(w, "type", p), (!Z || Q[0] & /*open*/
+      A[0] ? "arrow-start" : "arrow-end")) && h(w, "type", p), (!Z || Q[0] & /*open*/
       1) && M !== (M = /*open*/
-      q[0] ? "Collapse menu" : "Expand menu") && me(N, M), (!Z || Q[0] & /*open*/
+      A[0] ? "Collapse menu" : "Expand menu") && me(N, M), (!Z || Q[0] & /*open*/
       1 && L !== (L = /*open*/
-      q[0] ? "Collapse menu" : "Expand menu")) && f(b, "aria-label", L), (!Z || Q[0] & /*_tooltipLabel*/
+      A[0] ? "Collapse menu" : "Expand menu")) && f(b, "aria-label", L), (!Z || Q[0] & /*_tooltipLabel*/
       65536) && me(
-        x,
+        T,
         /*_tooltipLabel*/
-        q[16]
+        A[16]
       ), (!Z || Q[0] & /*_showTooltip*/
-      1024) && T(
+      1024) && I(
         H,
         "show",
         /*_showTooltip*/
-        q[10]
+        A[10]
       ), (!Z || Q[0] & /*testid*/
       8) && f(
         e,
         "data-testid",
         /*testid*/
-        q[3]
+        A[3]
       ), (!Z || Q[0] & /*open*/
-      1) && T(e, "closed", !/*open*/
-      q[0]), (!Z || Q[0] & /*_isScrolling*/
-      64) && T(
+      1) && I(e, "closed", !/*open*/
+      A[0]), (!Z || Q[0] & /*_isScrolling*/
+      64) && I(
         e,
         "scrolling",
         /*_isScrolling*/
-        q[6]
+        A[6]
       ), (!Z || Q[0] & /*_atTop*/
-      128) && T(
+      128) && I(
         e,
         "at-top",
         /*_atTop*/
-        q[7]
+        A[7]
       ), (!Z || Q[0] & /*_atBottom*/
-      256) && T(
+      256) && I(
         e,
         "at-bottom",
         /*_atBottom*/
-        q[8]
+        A[8]
       ), (!Z || Q[0] & /*_mobilePopoverOpen*/
-      2048) && T(
+      2048) && I(
         e,
         "drawer-open",
         /*_mobilePopoverOpen*/
-        q[11]
+        A[11]
       );
     },
-    i(q) {
-      Z || (U(O, q), U(K), U(F), Z = true);
+    i(A) {
+      Z || (U(O, A), U(K), U(F), Z = true);
     },
-    o(q) {
-      $(O, q), $(K), $(F), Z = false;
+    o(A) {
+      $(O, A), $(K), $(F), Z = false;
     },
-    d(q) {
-      q && E(e), I.d(), O && O.d(q), t[24](null), t[25](null), K && K.d(), F && F.d(), t[26](null), t[27](null), V = false, Ye(B);
+    d(A) {
+      A && E(e), q.d(), O && O.d(A), t[24](null), t[25](null), K && K.d(), F && F.d(), t[26](null), t[27](null), V = false, Ye(B);
     }
   };
 }
-const xs = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none'%3E%3Crect width='31.695' height='31.688' x='.028' fill='%2300B6ED' rx='4'/%3E%3Cg clip-path='url(%23a)'%3E%3Cmask id='b' width='47' height='39' x='-11' y='-2' maskUnits='userSpaceOnUse' style='mask-type:alpha'%3E%3Cpath fill='%23545860' d='M22.017 31.103a63.47 63.47 0 0 1-7.22-3.164 52.41 52.41 0 0 0 6.195-2.724 43.148 43.148 0 0 0 1.023 5.89m13.27-24.392c-1.034-.13-.497.348-.785 1.7-1.246 5.832-6.05 10.035-10.873 12.855-.506-6.678-.3-14.093.967-18.636 1.069-3.836 2.34-3.132.763-3.938-1.66-.848-3.44.273-4.882 3.13C19.033 4.68 12.393 20.19 1.78 30.664c-5.43 5.36-10.34 2.6-11.323 1.775-.8-.67-1.096.365-.103 1.426 4.39 4.7 10.805 2.003 13.141-.314 6.455-6.405 13.96-20.193 16.996-26.044a89.89 89.89 0 0 0 .243 15.294 44.69 44.69 0 0 1-7.619 2.885c-1.504.391-2.435 1-2.462 1.691-.03.758.98 1.397 2.44 2.085 2.6 1.226 10.216 4.798 12.093 5.878 1.606.925 2.39.204 2.866-.796.622-1.302-1.083-2.054-2.735-2.545a50.47 50.47 0 0 1-1.48-8.385c3.87-2.365 7.682-5.52 9.88-9.452a18.004 18.004 0 0 0 1.568-4.365c.23-.934.293-1.9.186-2.855 0 0-.03-.209-.186-.229'/%3E%3C/mask%3E%3Cg mask='url(%23b)'%3E%3Crect width='31.695' height='31.695' x='.028' fill='%23fff' rx='3.048'/%3E%3C/g%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='32' height='31.992' y='.008' fill='%23fff' rx='4'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E";
-function Sv(t) {
+const Ts = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none'%3E%3Crect width='31.695' height='31.688' x='.028' fill='%2300B6ED' rx='4'/%3E%3Cg clip-path='url(%23a)'%3E%3Cmask id='b' width='47' height='39' x='-11' y='-2' maskUnits='userSpaceOnUse' style='mask-type:alpha'%3E%3Cpath fill='%23545860' d='M22.017 31.103a63.47 63.47 0 0 1-7.22-3.164 52.41 52.41 0 0 0 6.195-2.724 43.148 43.148 0 0 0 1.023 5.89m13.27-24.392c-1.034-.13-.497.348-.785 1.7-1.246 5.832-6.05 10.035-10.873 12.855-.506-6.678-.3-14.093.967-18.636 1.069-3.836 2.34-3.132.763-3.938-1.66-.848-3.44.273-4.882 3.13C19.033 4.68 12.393 20.19 1.78 30.664c-5.43 5.36-10.34 2.6-11.323 1.775-.8-.67-1.096.365-.103 1.426 4.39 4.7 10.805 2.003 13.141-.314 6.455-6.405 13.96-20.193 16.996-26.044a89.89 89.89 0 0 0 .243 15.294 44.69 44.69 0 0 1-7.619 2.885c-1.504.391-2.435 1-2.462 1.691-.03.758.98 1.397 2.44 2.085 2.6 1.226 10.216 4.798 12.093 5.878 1.606.925 2.39.204 2.866-.796.622-1.302-1.083-2.054-2.735-2.545a50.47 50.47 0 0 1-1.48-8.385c3.87-2.365 7.682-5.52 9.88-9.452a18.004 18.004 0 0 0 1.568-4.365c.23-.934.293-1.9.186-2.855 0 0-.03-.209-.186-.229'/%3E%3C/mask%3E%3Cg mask='url(%23b)'%3E%3Crect width='31.695' height='31.695' x='.028' fill='%23fff' rx='3.048'/%3E%3C/g%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Crect width='32' height='31.992' y='.008' fill='%23fff' rx='4'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E";
+function xv(t) {
   var e;
   if (t.tagName.includes("GOAB")) {
     const o = t.firstElementChild;
@@ -51157,26 +51157,26 @@ function Ov(t) {
 function Hv(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const l = ft(i);
-  let { heading: r } = e, { url: a } = e, { open: d = false } = e, { testid: c = "" } = e, { userName: s = "" } = e, { userSecondaryText: u = "" } = e, g = false, v = true, m = false, b = 0, w = false, p = false, k = null, z = false, M, N = [], L, j, H, x, Z = "", V, B, S, Y, I = null, A = null;
+  let { heading: r } = e, { url: a } = e, { open: d = false } = e, { testid: c = "" } = e, { userName: s = "" } = e, { userSecondaryText: u = "" } = e, g = false, v = true, m = false, b = 0, w = false, p = false, k = null, z = false, M, N = [], L, j, H, T, Z = "", V, B, x, Y, q = null, S = null;
   De(async () => {
-    await Ge(), gt(), I = Ov(se), typeof ResizeObserver < "u" && (A = new ResizeObserver(() => {
+    await Ge(), gt(), q = Ov(se), typeof ResizeObserver < "u" && (S = new ResizeObserver(() => {
       B = Rt(B, K, 1);
-    }), M && A.observe(M));
+    }), M && S.observe(M));
   }), dt(() => {
-    ct(), I == null || I.disconnect(), A == null || A.disconnect(), clearTimeout(V), clearTimeout(B), clearTimeout(S), clearTimeout(Y);
+    ct(), q == null || q.disconnect(), S == null || S.disconnect(), clearTimeout(V), clearTimeout(B), clearTimeout(x), clearTimeout(Y);
   });
   function O() {
-    const Me = (H == null ? void 0 : H.clientHeight) || 0, Se = (M == null ? void 0 : M.scrollHeight) || 0;
-    o(7, v = b <= 1), o(8, m = b + Me >= Se - 1);
+    const Me = (H == null ? void 0 : H.clientHeight) || 0, xe = (M == null ? void 0 : M.scrollHeight) || 0;
+    o(7, v = b <= 1), o(8, m = b + Me >= xe - 1);
   }
   function K() {
     o(6, g = ((M == null ? void 0 : M.scrollHeight) || 0) > ((H == null ? void 0 : H.clientHeight) || 0)), g ? O() : (o(7, v = true), o(8, m = true));
   }
   function F(Me) {
-    const Se = Me.detail;
-    Se && (b = Se.scrollTop, O());
+    const xe = Me.detail;
+    xe && (b = xe.scrollTop, O());
   }
-  function q() {
+  function A() {
     o(0, d = !d), o(10, p = false);
   }
   function Q() {
@@ -51186,8 +51186,8 @@ function Hv(t, e, o) {
     o(11, z = false);
   }
   function ee(Me) {
-    let Se = Me.target, Xe = Sv(Se);
-    Se && Xe && (N = [...N, Xe]), V = Rt(
+    let xe = Me.target, Xe = xv(xe);
+    xe && Xe && (N = [...N, Xe]), V = Rt(
       V,
       () => {
         se(), K();
@@ -51195,23 +51195,23 @@ function Hv(t, e, o) {
       1
     );
   }
-  function oe(Me, Se, Xe) {
-    !d && Me !== "account" && Xe !== k ? (te(Se, Xe), ne()) : P();
+  function oe(Me, xe, Xe) {
+    !d && Me !== "account" && Xe !== k ? (te(xe, Xe), ne()) : P();
   }
   function ne() {
-    clearTimeout(S), clearTimeout(Y), S = setTimeout(
+    clearTimeout(x), clearTimeout(Y), x = setTimeout(
       () => {
         o(10, p = true);
       },
       300
     );
   }
-  function te(Me, Se) {
-    const Xe = Se == null ? void 0 : Se.getBoundingClientRect(), tt = L.getBoundingClientRect(), kt = Xe.top - tt.top + Xe.height / 2, Tt = Xe.right - tt.left;
-    o(15, x.style.top = `${kt}px`, x), o(15, x.style.left = `${Tt + 14}px`, x), o(16, Z = Me);
+  function te(Me, xe) {
+    const Xe = xe == null ? void 0 : xe.getBoundingClientRect(), tt = L.getBoundingClientRect(), kt = Xe.top - tt.top + Xe.height / 2, It = Xe.right - tt.left;
+    o(15, T.style.top = `${kt}px`, T), o(15, T.style.left = `${It + 14}px`, T), o(16, Z = Me);
   }
   function P() {
-    clearTimeout(S), clearTimeout(Y), Y = setTimeout(
+    clearTimeout(x), clearTimeout(Y), Y = setTimeout(
       () => {
         o(10, p = false);
       },
@@ -51226,13 +51226,13 @@ function Hv(t, e, o) {
   }
   function se() {
     const Me = Wo(N, window.location);
-    N.forEach((Se) => {
-      Ee(Se, "_update", { current: Me }, {});
+    N.forEach((xe) => {
+      Ee(xe, "_update", { current: Me }, {});
     });
   }
   function ie(Me) {
     var tt;
-    let Se = (tt = Me.target) == null ? void 0 : tt.parentElement, Xe = (Se == null ? void 0 : Se.getAttribute("slot")) || "unknown";
+    let xe = (tt = Me.target) == null ? void 0 : tt.parentElement, Xe = (xe == null ? void 0 : xe.getAttribute("slot")) || "unknown";
     oe(Xe, Me.detail.label, Me.detail.el);
   }
   function ye() {
@@ -51257,19 +51257,19 @@ function Hv(t, e, o) {
   function pe(Me) {
     Me.preventDefault(), Me.stopPropagation(), w ? J() : G();
   }
-  function Te(Me) {
+  function Ie(Me) {
     Me.preventDefault(), J(), window.removeEventListener("click", J), Ee(j, "_toggle", {}, { bubbles: true });
   }
   function Fe(Me) {
     var Xe, tt;
-    const Se = Me.relatedTarget;
-    (Xe = Se == null ? void 0 : Se.closest) != null && Xe.call(Se, '[slot="account"]') || (tt = Se == null ? void 0 : Se.closest) != null && tt.call(Se, ".profile") || J();
+    const xe = Me.relatedTarget;
+    (Xe = xe == null ? void 0 : xe.closest) != null && Xe.call(xe, '[slot="account"]') || (tt = xe == null ? void 0 : xe.closest) != null && tt.call(xe, ".profile") || J();
   }
   function Je() {
     K();
   }
   function gt() {
-    j.addEventListener("_update", se), j.addEventListener("_mountItem", ee), j.addEventListener("_hoverItem", ie), j.addEventListener("_blurItem", P), j.addEventListener("_toggle", q), j.addEventListener("_groupOpen", () => {
+    j.addEventListener("_update", se), j.addEventListener("_mountItem", ee), j.addEventListener("_hoverItem", ie), j.addEventListener("_blurItem", P), j.addEventListener("_toggle", A), j.addEventListener("_groupOpen", () => {
       o(0, d = true);
     }), j.addEventListener("_desktopPopoverOpen", Le), j.addEventListener("_desktopPopoverClose", Ke), j.addEventListener("keydown", X), window.addEventListener("popstate", se), window.addEventListener("keydown", le), window.addEventListener("resize", Je), j.addEventListener("_mobilePopoverOpen", Q), j.addEventListener("_mobilePopoverClose", R), H.addEventListener("_scroll", F);
   }
@@ -51288,7 +51288,7 @@ function Hv(t, e, o) {
   }
   function _e(Me) {
     ce[Me ? "unshift" : "push"](() => {
-      x = Me, o(15, x);
+      T = Me, o(15, T);
     });
   }
   function We(Me) {
@@ -51314,11 +51314,11 @@ function Hv(t, e, o) {
     M,
     j,
     H,
-    x,
+    T,
     Z,
     ye,
     pe,
-    Te,
+    Ie,
     Fe,
     l,
     n,
@@ -51335,7 +51335,7 @@ class Pv extends ze {
       this,
       e,
       Hv,
-      Av,
+      Sv,
       we,
       {
         heading: 1,
@@ -51387,7 +51387,7 @@ class Pv extends ze {
   }
 }
 customElements.define("goa-work-side-menu", Ce(Pv, { heading: { type: "String", reflect: true }, url: { type: "String", reflect: true }, open: { type: "Boolean", reflect: true }, testid: {}, userName: { type: "String", attribute: "user-name", reflect: true }, userSecondaryText: { type: "String", attribute: "user-secondary-text", reflect: true } }, ["primary", "secondary", "account"], [], true));
-const { window: Ts } = mo;
+const { window: Is } = mo;
 function Vv(t) {
   je(t, "svelte-1b2d82w", `:host .svelte-1b2d82w.svelte-1b2d82w{box-sizing:border-box}.root.svelte-1b2d82w.svelte-1b2d82w{container-type:inline-size;position:relative}.mobile-drawer-content.svelte-1b2d82w.svelte-1b2d82w{display:none}goa-popover.svelte-1b2d82w.svelte-1b2d82w{display:block;width:100%}.menu-item.svelte-1b2d82w.svelte-1b2d82w{position:relative;display:flex;gap:var(--goa-space-m);border-radius:var(
       --goa-work-side-menu-item-border-radius,
@@ -51541,7 +51541,7 @@ function Da(t) {
         "content",
         /*badge*/
         t[3]
-      ), h(e, "icon", "false"), h(e, "min-width", "var(--goa-space-m)"), h(e, "justify-content", "center"), T(
+      ), h(e, "icon", "false"), h(e, "min-width", "var(--goa-space-m)"), h(e, "justify-content", "center"), I(
         e,
         "alwaysvisible",
         /*_alwaysVisible*/
@@ -51565,7 +51565,7 @@ function Da(t) {
         /*badge*/
         o[3]
       ), i[0] & /*_alwaysVisible*/
-      16384 && T(
+      16384 && I(
         e,
         "alwaysvisible",
         /*_alwaysVisible*/
@@ -51610,7 +51610,7 @@ function Ko(t) {
       ), l = W(), u && u.c(), f(i, "class", "menu-item-label svelte-1b2d82w"), Mo(
         /*url*/
         t[2] ? "a" : "button"
-      )(e, v), T(
+      )(e, v), I(
         e,
         "current",
         /*current*/
@@ -51647,7 +51647,7 @@ function Ko(t) {
         4 && a !== (a = /*url*/
         m[2] || void 0) && { href: a },
         { tabindex: "0" }
-      ])), T(
+      ])), I(
         e,
         "current",
         /*current*/
@@ -51662,10 +51662,10 @@ function Ko(t) {
 function Yv(t) {
   let e, o, i, n, l, r, a, d, c, s, u, g, v = (
     /*icon*/
-    t[5] && xa(t)
+    t[5] && Ta(t)
   ), m = (
     /*badge*/
-    t[3] && Ta(t)
+    t[3] && Ia(t)
   );
   const b = (
     /*#slots*/
@@ -51683,7 +51683,7 @@ function Yv(t) {
         /*label*/
         t[1]
       ), r = W(), m && m.c(), d = W(), w && w.c(), f(n, "class", "menu-item-label svelte-1b2d82w"), f(o, "slot", "target"), f(o, "class", "menu-item svelte-1b2d82w"), f(o, "role", "menuitem"), f(o, "aria-current", a = /*current*/
-      t[0] ? "page" : void 0), T(
+      t[0] ? "page" : void 0), I(
         o,
         "current",
         /*current*/
@@ -51708,16 +51708,16 @@ function Yv(t) {
       ], u = true);
     },
     p(p, k) {
-      p[5] ? v ? v.p(p, k) : (v = xa(p), v.c(), v.m(o, i)) : v && (v.d(1), v = null), (!s || k[0] & /*label*/
+      p[5] ? v ? v.p(p, k) : (v = Ta(p), v.c(), v.m(o, i)) : v && (v.d(1), v = null), (!s || k[0] & /*label*/
       2) && me(
         l,
         /*label*/
         p[1]
       ), /*badge*/
-      p[3] ? m ? m.p(p, k) : (m = Ta(p), m.c(), m.m(o, null)) : m && (m.d(1), m = null), (!s || k[0] & /*current*/
+      p[3] ? m ? m.p(p, k) : (m = Ia(p), m.c(), m.m(o, null)) : m && (m.d(1), m = null), (!s || k[0] & /*current*/
       1 && a !== (a = /*current*/
       p[0] ? "page" : void 0)) && f(o, "aria-current", a), (!s || k[0] & /*current*/
-      1) && T(
+      1) && I(
         o,
         "current",
         /*current*/
@@ -51758,10 +51758,10 @@ function Yv(t) {
 function Uv(t) {
   let e, o, i, n, l, r, a, d, c, s, u, g = (
     /*icon*/
-    t[5] && Ia(t)
+    t[5] && qa(t)
   ), v = (
     /*badge*/
-    t[3] && qa(t)
+    t[3] && Aa(t)
   );
   const m = (
     /*#slots*/
@@ -51779,7 +51779,7 @@ function Uv(t) {
         /*label*/
         t[1]
       ), l = W(), v && v.c(), a = W(), d = C("div"), b && b.c(), f(i, "class", "menu-item-label svelte-1b2d82w"), f(e, "class", "menu-item svelte-1b2d82w"), f(e, "aria-current", r = /*current*/
-      t[0] ? "page" : void 0), f(e, "role", "menuitem"), f(e, "tabindex", "0"), T(
+      t[0] ? "page" : void 0), f(e, "role", "menuitem"), f(e, "tabindex", "0"), I(
         e,
         "current",
         /*current*/
@@ -51795,16 +51795,16 @@ function Uv(t) {
       ), s = true);
     },
     p(w, p) {
-      w[5] ? g ? g.p(w, p) : (g = Ia(w), g.c(), g.m(e, o)) : g && (g.d(1), g = null), (!c || p[0] & /*label*/
+      w[5] ? g ? g.p(w, p) : (g = qa(w), g.c(), g.m(e, o)) : g && (g.d(1), g = null), (!c || p[0] & /*label*/
       2) && me(
         n,
         /*label*/
         w[1]
       ), /*badge*/
-      w[3] ? v ? v.p(w, p) : (v = qa(w), v.c(), v.m(e, null)) : v && (v.d(1), v = null), (!c || p[0] & /*current*/
+      w[3] ? v ? v.p(w, p) : (v = Aa(w), v.c(), v.m(e, null)) : v && (v.d(1), v = null), (!c || p[0] & /*current*/
       1 && r !== (r = /*current*/
       w[0] ? "page" : void 0)) && f(e, "aria-current", r), (!c || p[0] & /*current*/
-      1) && T(
+      1) && I(
         e,
         "current",
         /*current*/
@@ -51840,7 +51840,7 @@ function Uv(t) {
     }
   };
 }
-function xa(t) {
+function Ta(t) {
   let e, o;
   return {
     c() {
@@ -51882,7 +51882,7 @@ function xa(t) {
     }
   };
 }
-function Ta(t) {
+function Ia(t) {
   let e;
   return {
     c() {
@@ -51896,7 +51896,7 @@ function Ta(t) {
         "content",
         /*badge*/
         t[3]
-      ), h(e, "icon", "false"), h(e, "min-width", "var(--goa-space-m)"), h(e, "justify-content", "center"), T(
+      ), h(e, "icon", "false"), h(e, "min-width", "var(--goa-space-m)"), h(e, "justify-content", "center"), I(
         e,
         "alwaysvisible",
         /*_alwaysVisible*/
@@ -51920,7 +51920,7 @@ function Ta(t) {
         /*badge*/
         o[3]
       ), i[0] & /*_alwaysVisible*/
-      16384 && T(
+      16384 && I(
         e,
         "alwaysvisible",
         /*_alwaysVisible*/
@@ -51932,7 +51932,7 @@ function Ta(t) {
     }
   };
 }
-function Ia(t) {
+function qa(t) {
   let e, o;
   return {
     c() {
@@ -51974,7 +51974,7 @@ function Ia(t) {
     }
   };
 }
-function qa(t) {
+function Aa(t) {
   let e;
   return {
     c() {
@@ -51988,7 +51988,7 @@ function qa(t) {
         "content",
         /*badge*/
         t[3]
-      ), h(e, "icon", "false"), h(e, "min-width", "var(--goa-space-m)"), h(e, "justify-content", "center"), T(
+      ), h(e, "icon", "false"), h(e, "min-width", "var(--goa-space-m)"), h(e, "justify-content", "center"), I(
         e,
         "alwaysvisible",
         /*_alwaysVisible*/
@@ -52012,7 +52012,7 @@ function qa(t) {
         /*badge*/
         o[3]
       ), i[0] & /*_alwaysVisible*/
-      16384 && T(
+      16384 && I(
         e,
         "alwaysvisible",
         /*_alwaysVisible*/
@@ -52044,7 +52044,7 @@ function Qv(t) {
         "data-testid",
         /*testid*/
         t[6]
-      ), T(
+      ), I(
         e,
         "divider",
         /*divider*/
@@ -52054,7 +52054,7 @@ function Qv(t) {
     m(s, u) {
       D(s, e, u), d[o].m(e, null), t[29](e), n = true, l || (r = [
         re(
-          Ts,
+          Is,
           "resize",
           /*onwindowresize*/
           t[24]
@@ -52078,7 +52078,7 @@ function Qv(t) {
         /*testid*/
         s[6]
       ), (!n || u[0] & /*divider*/
-      16) && T(
+      16) && I(
         e,
         "divider",
         /*divider*/
@@ -52105,7 +52105,7 @@ function Rv(t, e, o) {
   }), dt(() => {
     N && (document.removeEventListener("goa:work-side-notification-panel:closePopover", K), N.remove(), N = null);
   });
-  function x(te) {
+  function T(te) {
     const P = te;
     P.ctrlKey || P.metaKey || P.shiftKey || P.altKey || (te.preventDefault(), Ee(k, "_navigate", { url: u }, { bubbles: true }));
   }
@@ -52129,17 +52129,17 @@ function Rv(t, e, o) {
   function B() {
     o(11, j = true), Ee(k, "_desktopPopoverOpen", { el: z }, { bubbles: true });
   }
-  function S() {
+  function x() {
     o(11, j = false), Ee(k, "_desktopPopoverClose", { el: z }, { bubbles: true });
   }
   function Y(te) {
     let P = te.detail.current;
     o(0, v = z === P), v && Ee(k, "_itemCurrent", { el: z, label: s }, { bubbles: true });
   }
-  function I() {
+  function q() {
     Ee(k, "_hoverItem", { el: z, label: s }, { bubbles: true });
   }
-  function A() {
+  function S() {
     Ee(k, "_hoverItem", { el: z, label: s }, { bubbles: true });
   }
   function O() {
@@ -52149,10 +52149,10 @@ function Rv(t, e, o) {
     N ? V() : Ee(document.body, "goa:closePopover", {});
   }
   function F() {
-    z.addEventListener("_update", Y), z.addEventListener("focus", A), z.addEventListener("blur", O), k.addEventListener("goa:work-side-notification-panel:closePopover", K);
+    z.addEventListener("_update", Y), z.addEventListener("focus", S), z.addEventListener("blur", O), k.addEventListener("goa:work-side-notification-panel:closePopover", K);
   }
-  function q() {
-    o(7, H = Ts.innerWidth);
+  function A() {
+    o(7, H = Is.innerWidth);
   }
   function Q(te) {
     ce[te ? "unshift" : "push"](() => {
@@ -52203,15 +52203,15 @@ function Rv(t, e, o) {
     l,
     n,
     i,
-    x,
+    T,
     Z,
     B,
-    S,
-    I,
+    x,
+    q,
     p,
     d,
     a,
-    q,
+    A,
     Q,
     R,
     ee,
@@ -52331,7 +52331,7 @@ function Kv(t) {
       var(--goa-color-greyscale-600)
     )}}@keyframes svelte-oco8y3-delayText{0%{opacity:0;font-size:0}99%{opacity:0;font-size:0}100%{opacity:1;font-size:var(--goa-font-size-2)}}`);
 }
-function Aa(t) {
+function Sa(t) {
   let e, o;
   return {
     c() {
@@ -52365,7 +52365,7 @@ function Aa(t) {
 function Xv(t) {
   let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b = (
     /*icon*/
-    t[2] && Aa(t)
+    t[2] && Sa(t)
   );
   const w = (
     /*#slots*/
@@ -52413,7 +52413,7 @@ function Xv(t) {
       ], v = true);
     },
     p(k, [z]) {
-      k[2] ? b ? b.p(k, z) : (b = Aa(k), b.c(), b.m(i, n)) : b && (b.d(1), b = null), (!g || z & /*heading*/
+      k[2] ? b ? b.p(k, z) : (b = Sa(k), b.c(), b.m(i, n)) : b && (b.d(1), b = null), (!g || z & /*heading*/
       2) && me(
         r,
         /*heading*/
@@ -52476,7 +52476,7 @@ function Jv(t, e, o) {
   function u() {
     Ee(c, "_hoverItem", { el: c, label: l }, { bubbles: true });
   }
-  const g = ({ target: m }) => o(0, d = Ae(`${m == null ? void 0 : m.open}`));
+  const g = ({ target: m }) => o(0, d = Se(`${m == null ? void 0 : m.open}`));
   function v(m) {
     ce[m ? "unshift" : "push"](() => {
       c = m, o(4, c);
@@ -52530,7 +52530,7 @@ customElements.define("goa-work-side-menu-group", Ce($v, { heading: {}, icon: {}
 function e8(t) {
   je(t, "svelte-2rxsax", ":host{display:block;box-sizing:border-box;font-family:var(--goa-font-family-sans)}:host .svelte-2rxsax.svelte-2rxsax{box-sizing:border-box}.notification-panel.svelte-2rxsax.svelte-2rxsax{display:flex;flex-direction:column;background:var(--goa-color-greyscale-white);border-radius:var(--goa-popover-border-radius);height:710px}.header.svelte-2rxsax.svelte-2rxsax{flex-shrink:0;display:flex;align-items:center;justify-content:space-between}goa-tabs.svelte-2rxsax.svelte-2rxsax{--goa-tabs-margin-bottom:0;padding-left:var(--goa-space-m);padding-right:var(--goa-space-m)}.content.svelte-2rxsax.svelte-2rxsax{flex:1;overflow-y:auto;min-height:0}.footer.svelte-2rxsax.svelte-2rxsax{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:var(--goa-space-m);border-top:1px solid var(--goa-color-greyscale-100)}.empty.svelte-2rxsax.svelte-2rxsax{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--goa-space-2xl) var(--goa-space-m);text-align:center}.empty.svelte-2rxsax img.svelte-2rxsax{width:100px;height:78px;margin-bottom:var(--goa-space-l)}.empty.svelte-2rxsax .heading.svelte-2rxsax{font:var(--goa-typography-heading-xs);color:var(--goa-color-text-default);margin-bottom:var(--goa-space-xs)}.empty.svelte-2rxsax .subline.svelte-2rxsax{font:var(--goa-typography-body-s);color:var(--goa-color-text-secondary)}");
 }
-function Sa(t) {
+function xa(t) {
   let e, o;
   return {
     c() {
@@ -52602,10 +52602,10 @@ function Ha(t) {
   };
 }
 function t8(t) {
-  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, x, Z, V, B, S, Y, I, A, O, K, F = (
+  let e, o, i, n, l, r, a, d, c, s, u, g, v, m, b, w, p, k, z, M, N, L, j, H, T, Z, V, B, x, Y, q, S, O, K, F = (
     /*_unreadCount*/
-    t[3] > 0 && Sa(t)
-  ), q = (
+    t[3] > 0 && xa(t)
+  ), A = (
     /*_urgentCount*/
     t[4] > 0 && Oa(t)
   ), Q = (
@@ -52629,10 +52629,10 @@ function t8(t) {
         t[1]
       ), l = W(), r = C("goa-icon-button"), d = W(), c = C("goa-tabs"), s = C("goa-tab"), u = C("span"), g = ae(`Unread
         `), F && F.c(), v = W(), m = C("goa-tab"), b = C("span"), w = ae(`Urgent
-        `), q && q.c(), p = W(), k = C("goa-tab"), k.innerHTML = '<span slot="heading" class="svelte-2rxsax">All</span>', z = W(), M = C("div"), Q && Q.c(), N = W(), ee && ee.c(), L = W(), j = C("div"), H = C("goa-link-button"), x = ae("View all"), V = W(), B = C("goa-link-button"), S = ae("Mark all as read"), h(i, "as", "h2"), h(i, "size", "heading-s"), h(i, "mt", "l"), h(i, "mb", "s"), h(i, "ml", "m"), h(i, "class", "svelte-2rxsax"), h(r, "icon", "close"), h(r, "size", "medium"), h(r, "variant", "dark"), h(r, "mr", "s"), h(r, "version", "2"), h(r, "testid", a = `close-${/*testid*/
+        `), A && A.c(), p = W(), k = C("goa-tab"), k.innerHTML = '<span slot="heading" class="svelte-2rxsax">All</span>', z = W(), M = C("div"), Q && Q.c(), N = W(), ee && ee.c(), L = W(), j = C("div"), H = C("goa-link-button"), T = ae("View all"), V = W(), B = C("goa-link-button"), x = ae("Mark all as read"), h(i, "as", "h2"), h(i, "size", "heading-s"), h(i, "mt", "l"), h(i, "mb", "s"), h(i, "ml", "m"), h(i, "class", "svelte-2rxsax"), h(r, "icon", "close"), h(r, "size", "medium"), h(r, "variant", "dark"), h(r, "mr", "s"), h(r, "version", "2"), h(r, "testid", a = `close-${/*testid*/
       t[2]}`), h(r, "class", "svelte-2rxsax"), f(o, "class", "header svelte-2rxsax"), f(u, "slot", "heading"), f(u, "class", "svelte-2rxsax"), h(s, "class", "svelte-2rxsax"), f(b, "slot", "heading"), f(b, "class", "svelte-2rxsax"), h(m, "class", "svelte-2rxsax"), h(k, "class", "svelte-2rxsax"), h(c, "initialtab", "1"), h(c, "navigation", "none"), h(c, "version", "2"), h(c, "variant", "segmented"), h(c, "class", "svelte-2rxsax"), f(M, "class", "content svelte-2rxsax"), h(H, "testid", Z = `view-all-${/*testid*/
       t[2]}`), h(H, "class", "svelte-2rxsax"), h(B, "disabled", Y = /*_unreadCount*/
-      t[3] === 0), h(B, "testid", I = `mark-all-as-read-${/*testid*/
+      t[3] === 0), h(B, "testid", q = `mark-all-as-read-${/*testid*/
       t[2]}`), h(B, "class", "svelte-2rxsax"), f(j, "class", "footer svelte-2rxsax"), f(e, "class", "notification-panel svelte-2rxsax"), f(
         e,
         "data-testid",
@@ -52641,7 +52641,7 @@ function t8(t) {
       );
     },
     m(oe, ne) {
-      D(oe, e, ne), _(e, o), _(o, i), _(i, n), _(o, l), _(o, r), _(e, d), _(e, c), _(c, s), _(s, u), _(u, g), F && F.m(u, null), _(c, v), _(c, m), _(m, b), _(b, w), q && q.m(b, null), _(c, p), _(c, k), _(e, z), _(e, M), Q && Q.m(M, null), _(M, N), ee && ee.m(M, null), _(e, L), _(e, j), _(j, H), _(H, x), _(j, V), _(j, B), _(B, S), t[14](e), A = true, O || (K = [
+      D(oe, e, ne), _(e, o), _(o, i), _(i, n), _(o, l), _(o, r), _(e, d), _(e, c), _(c, s), _(s, u), _(u, g), F && F.m(u, null), _(c, v), _(c, m), _(m, b), _(b, w), A && A.m(b, null), _(c, p), _(c, k), _(e, z), _(e, M), Q && Q.m(M, null), _(M, N), ee && ee.m(M, null), _(e, L), _(e, j), _(j, H), _(H, T), _(j, V), _(j, B), _(B, x), t[14](e), S = true, O || (K = [
         re(
           r,
           "_click",
@@ -52669,24 +52669,24 @@ function t8(t) {
       ], O = true);
     },
     p(oe, [ne]) {
-      (!A || ne & /*heading*/
+      (!S || ne & /*heading*/
       2) && me(
         n,
         /*heading*/
         oe[1]
-      ), (!A || ne & /*testid*/
+      ), (!S || ne & /*testid*/
       4 && a !== (a = `close-${/*testid*/
       oe[2]}`)) && h(r, "testid", a), /*_unreadCount*/
-      oe[3] > 0 ? F ? F.p(oe, ne) : (F = Sa(oe), F.c(), F.m(u, null)) : F && (F.d(1), F = null), /*_urgentCount*/
-      oe[4] > 0 ? q ? q.p(oe, ne) : (q = Oa(oe), q.c(), q.m(b, null)) : q && (q.d(1), q = null), /*_isEmptyState*/
-      oe[6] ? Q ? Q.p(oe, ne) : (Q = Ha(oe), Q.c(), Q.m(M, N)) : Q && (Q.d(1), Q = null), ee && ee.p && (!A || ne & /*$$scope*/
+      oe[3] > 0 ? F ? F.p(oe, ne) : (F = xa(oe), F.c(), F.m(u, null)) : F && (F.d(1), F = null), /*_urgentCount*/
+      oe[4] > 0 ? A ? A.p(oe, ne) : (A = Oa(oe), A.c(), A.m(b, null)) : A && (A.d(1), A = null), /*_isEmptyState*/
+      oe[6] ? Q ? Q.p(oe, ne) : (Q = Ha(oe), Q.c(), Q.m(M, N)) : Q && (Q.d(1), Q = null), ee && ee.p && (!S || ne & /*$$scope*/
       4096) && ge(
         ee,
         R,
         oe,
         /*$$scope*/
         oe[12],
-        A ? fe(
+        S ? fe(
           R,
           /*$$scope*/
           oe[12],
@@ -52697,13 +52697,13 @@ function t8(t) {
           oe[12]
         ),
         null
-      ), (!A || ne & /*testid*/
+      ), (!S || ne & /*testid*/
       4 && Z !== (Z = `view-all-${/*testid*/
-      oe[2]}`)) && h(H, "testid", Z), (!A || ne & /*_unreadCount*/
+      oe[2]}`)) && h(H, "testid", Z), (!S || ne & /*_unreadCount*/
       8 && Y !== (Y = /*_unreadCount*/
-      oe[3] === 0)) && h(B, "disabled", Y), (!A || ne & /*testid*/
-      4 && I !== (I = `mark-all-as-read-${/*testid*/
-      oe[2]}`)) && h(B, "testid", I), (!A || ne & /*testid*/
+      oe[3] === 0)) && h(B, "disabled", Y), (!S || ne & /*testid*/
+      4 && q !== (q = `mark-all-as-read-${/*testid*/
+      oe[2]}`)) && h(B, "testid", q), (!S || ne & /*testid*/
       4) && f(
         e,
         "data-testid",
@@ -52712,13 +52712,13 @@ function t8(t) {
       );
     },
     i(oe) {
-      A || (U(ee, oe), A = true);
+      S || (U(ee, oe), S = true);
     },
     o(oe) {
-      $(ee, oe), A = false;
+      $(ee, oe), S = false;
     },
     d(oe) {
-      oe && E(e), F && F.d(), q && q.d(), Q && Q.d(), ee && ee.d(oe), t[14](null), O = false, Ye(K);
+      oe && E(e), F && F.d(), A && A.d(), Q && Q.d(), ee && ee.d(oe), t[14](null), O = false, Ye(K);
     }
   };
 }
@@ -52736,76 +52736,76 @@ function Pa(t, e) {
 }
 function l8(t, e, o) {
   let i, n, l, { $$slots: r = {}, $$scope: a } = e;
-  const [d, c] = qe("WorkSideNotificationPanel activeTab", ["unread", "urgent", "all"], true);
+  const [d, c] = Ae("WorkSideNotificationPanel activeTab", ["unread", "urgent", "all"], true);
   let { heading: s = "Notifications" } = e, { activeTab: u = "unread" } = e, { testid: g = "" } = e, v, m = [], b = /* @__PURE__ */ new Map(), w = null;
   De(() => {
     c(u), v.addEventListener("notification-item:mounted", p), v.addEventListener("notification-item:unmount", k), v.addEventListener("_notificationItemRead", z);
   }), dt(() => {
     w && clearTimeout(w);
   });
-  function p(S) {
-    const Y = S.detail;
+  function p(x) {
+    const Y = x.detail;
     if (m.find((O) => O.el === Y.el)) return;
-    const I = Y.timestamp || "", A = { ...Y, timestamp: I };
-    o(11, m = [...m, A]), N(Y.el), w = Rt(w, H);
+    const q = Y.timestamp || "", S = { ...Y, timestamp: q };
+    o(11, m = [...m, S]), N(Y.el), w = Rt(w, H);
   }
-  function k(S) {
-    const Y = S.detail;
-    o(11, m = m.filter((I) => I.el !== Y.el));
+  function k(x) {
+    const Y = x.detail;
+    o(11, m = m.filter((q) => q.el !== Y.el));
   }
-  function z(S) {
-    const Y = S.detail;
-    o(11, m = m.map((I) => I.el === Y.el ? { ...I, readStatus: Y.readStatus } : I)), H();
+  function z(x) {
+    const Y = x.detail;
+    o(11, m = m.map((q) => q.el === Y.el ? { ...q, readStatus: Y.readStatus } : q)), H();
   }
-  function M(S) {
-    const Y = S.detail.tab, I = ["unread", "urgent", "all"];
-    Y >= 1 && Y <= 3 && o(0, u = I[Y - 1]);
+  function M(x) {
+    const Y = x.detail.tab, q = ["unread", "urgent", "all"];
+    Y >= 1 && Y <= 3 && o(0, u = q[Y - 1]);
   }
-  function N(S) {
-    S.dispatchEvent(new CustomEvent("notification-panel:tabchange", { detail: { activeTab: u } }));
+  function N(x) {
+    x.dispatchEvent(new CustomEvent("notification-panel:tabchange", { detail: { activeTab: u } }));
   }
-  function L(S) {
+  function L(x) {
     m.forEach((Y) => {
       N(Y.el);
     }), H();
   }
-  function j(S) {
-    if (!S) return "";
-    const Y = new Date(S);
+  function j(x) {
+    if (!x) return "";
+    const Y = new Date(x);
     return isNaN(Y.getTime()) ? "" : m1(Y);
   }
   function H() {
     if (m.length === 0) return;
-    b.forEach((I) => {
-      Pa(I.el, "");
-    }), b.clear(), [...m].sort((I, A) => {
-      const O = I.timestamp ? new Date(I.timestamp).getTime() : 0;
-      return (A.timestamp ? new Date(A.timestamp).getTime() : 0) - O;
-    }).filter((I) => n8(I, u)).forEach((I) => {
-      const A = i8(I.timestamp);
-      A && !b.has(A) && (b.set(A, I), Pa(I.el, j(I.timestamp)));
+    b.forEach((q) => {
+      Pa(q.el, "");
+    }), b.clear(), [...m].sort((q, S) => {
+      const O = q.timestamp ? new Date(q.timestamp).getTime() : 0;
+      return (S.timestamp ? new Date(S.timestamp).getTime() : 0) - O;
+    }).filter((q) => n8(q, u)).forEach((q) => {
+      const S = i8(q.timestamp);
+      S && !b.has(S) && (b.set(S, q), Pa(q.el, j(q.timestamp)));
     });
   }
-  function x(S) {
-    S.preventDefault(), Ee(v, "_viewAll", {}, { bubbles: true }), V();
+  function T(x) {
+    x.preventDefault(), Ee(v, "_viewAll", {}, { bubbles: true }), V();
   }
-  function Z(S) {
-    S.preventDefault(), i !== 0 && Ee(v, "_markAllRead", {}, { bubbles: true });
+  function Z(x) {
+    x.preventDefault(), i !== 0 && Ee(v, "_markAllRead", {}, { bubbles: true });
   }
   function V() {
     Ee(v, "goa:work-side-notification-panel:closePopover", {}, { bubbles: true });
   }
-  function B(S) {
-    ce[S ? "unshift" : "push"](() => {
-      v = S, o(5, v);
+  function B(x) {
+    ce[x ? "unshift" : "push"](() => {
+      v = x, o(5, v);
     });
   }
-  return t.$$set = (S) => {
-    "heading" in S && o(1, s = S.heading), "activeTab" in S && o(0, u = S.activeTab), "testid" in S && o(2, g = S.testid), "$$scope" in S && o(12, a = S.$$scope);
+  return t.$$set = (x) => {
+    "heading" in x && o(1, s = x.heading), "activeTab" in x && o(0, u = x.activeTab), "testid" in x && o(2, g = x.testid), "$$scope" in x && o(12, a = x.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*_items*/
-    2048 && o(3, i = m.filter((S) => S.readStatus === "unread").length), t.$$.dirty & /*_items*/
-    2048 && o(4, n = m.filter((S) => S.priority === "urgent").length), t.$$.dirty & /*_items, activeTab, _unreadCount, _urgentCount*/
+    2048 && o(3, i = m.filter((x) => x.readStatus === "unread").length), t.$$.dirty & /*_items*/
+    2048 && o(4, n = m.filter((x) => x.priority === "urgent").length), t.$$.dirty & /*_items, activeTab, _unreadCount, _urgentCount*/
     2073 && o(6, l = m.length === 0 || u === "unread" && i === 0 || u === "urgent" && n === 0 || u === "all" && m.length === 0), t.$$.dirty & /*activeTab*/
     1 && L();
   }, [
@@ -52817,7 +52817,7 @@ function l8(t, e, o) {
     v,
     l,
     M,
-    x,
+    T,
     Z,
     V,
     m,
@@ -52860,7 +52860,7 @@ function Va(t) {
       e = C("h4"), o = ae(
         /*_dateGroupHeading*/
         t[6]
-      ), f(e, "class", "date-header svelte-1bsy3n4"), T(e, "hidden", !/*_visible*/
+      ), f(e, "class", "date-header svelte-1bsy3n4"), I(e, "hidden", !/*_visible*/
       t[9]);
     },
     m(i, n) {
@@ -52873,7 +52873,7 @@ function Va(t) {
         /*_dateGroupHeading*/
         i[6]
       ), n & /*_visible*/
-      512 && T(e, "hidden", !/*_visible*/
+      512 && I(e, "hidden", !/*_visible*/
       i[9]);
     },
     d(i) {
@@ -52955,7 +52955,7 @@ function s8(t) {
   let e, o;
   return {
     c() {
-      e = C("div"), o = C("span"), f(o, "class", "unread-dot svelte-1bsy3n4"), T(o, "hidden", !/*_isUnread*/
+      e = C("div"), o = C("span"), f(o, "class", "unread-dot svelte-1bsy3n4"), I(o, "hidden", !/*_isUnread*/
       t[13]), f(e, "class", "timestamp-container svelte-1bsy3n4");
     },
     m(i, n) {
@@ -52963,7 +52963,7 @@ function s8(t) {
     },
     p(i, n) {
       n & /*_isUnread*/
-      8192 && T(o, "hidden", !/*_isUnread*/
+      8192 && I(o, "hidden", !/*_isUnread*/
       i[13]);
     },
     d(i) {
@@ -52979,7 +52979,7 @@ function d8(t) {
         /*_transformTime*/
         t[7]
       ), f(i, "data-testid", n = `unread-dot-${/*testid*/
-      t[4]}`), f(i, "class", "unread-dot svelte-1bsy3n4"), T(i, "hidden", !/*_isUnread*/
+      t[4]}`), f(i, "class", "unread-dot svelte-1bsy3n4"), I(i, "hidden", !/*_isUnread*/
       t[13]), f(r, "class", "timestamp svelte-1bsy3n4"), f(r, "data-testid", d = `timestamp-${/*testid*/
       t[4]}`), f(o, "class", "timestamp-container svelte-1bsy3n4"), f(
         o,
@@ -53000,7 +53000,7 @@ function d8(t) {
       s & /*testid*/
       16 && n !== (n = `unread-dot-${/*testid*/
       c[4]}`) && f(i, "data-testid", n), s & /*_isUnread*/
-      8192 && T(i, "hidden", !/*_isUnread*/
+      8192 && I(i, "hidden", !/*_isUnread*/
       c[13]), s & /*_transformTime*/
       128 && me(
         a,
@@ -53086,13 +53086,13 @@ function c8(t) {
         "data-testid",
         /*testid*/
         t[4]
-      ), T(o, "read", !/*_isUnread*/
-      t[13]), T(
+      ), I(o, "read", !/*_isUnread*/
+      t[13]), I(
         o,
         "urgent",
         /*_isUrgent*/
         t[10]
-      ), T(o, "hidden", !/*_visible*/
+      ), I(o, "hidden", !/*_visible*/
       t[9]);
     },
     m(p, k) {
@@ -53122,15 +53122,15 @@ function c8(t) {
         /*testid*/
         p[4]
       ), k & /*_isUnread*/
-      8192 && T(o, "read", !/*_isUnread*/
+      8192 && I(o, "read", !/*_isUnread*/
       p[13]), k & /*_isUrgent*/
-      1024 && T(
+      1024 && I(
         o,
         "urgent",
         /*_isUrgent*/
         p[10]
       ), k & /*_visible*/
-      512 && T(o, "hidden", !/*_visible*/
+      512 && I(o, "hidden", !/*_visible*/
       p[9]);
     },
     i: be,
@@ -53156,10 +53156,10 @@ function u8(t) {
 }
 function f8(t, e, o) {
   let i;
-  const [n, l] = qe("WorkSideNotificationItem type", ["default", "success", "critical", "warning", "info"], true), [r, a] = qe("WorkSideNotificationItem readStatus", ["read", "unread"], true), [d, c] = qe("WorkSideNotificationItem priority", ["normal", "urgent"], true);
-  let { type: s = "default" } = e, { timestamp: u = "" } = e, { title: g = "" } = e, { description: v = "" } = e, { readStatus: m = "unread" } = e, { priority: b = "normal" } = e, { testid: w = "" } = e, p, k = "", z = "", M = "", N = true, L = "unread", j = false, H = "", x = false;
+  const [n, l] = Ae("WorkSideNotificationItem type", ["default", "success", "critical", "warning", "info"], true), [r, a] = Ae("WorkSideNotificationItem readStatus", ["read", "unread"], true), [d, c] = Ae("WorkSideNotificationItem priority", ["normal", "urgent"], true);
+  let { type: s = "default" } = e, { timestamp: u = "" } = e, { title: g = "" } = e, { description: v = "" } = e, { readStatus: m = "unread" } = e, { priority: b = "normal" } = e, { testid: w = "" } = e, p, k = "", z = "", M = "", N = true, L = "unread", j = false, H = "", T = false;
   De(() => {
-    l(s), a(m), c(b), o(10, j = b === "urgent"), o(11, H = u8(s)), o(12, x = s !== "default"), o(7, z = v1(u ? new Date(u) : null)), o(8, M = h1(u ? new Date(u) : null)), p.addEventListener("notification-panel:tabchange", Z), p.addEventListener("notification-panel:dategroup", V), Ee(
+    l(s), a(m), c(b), o(10, j = b === "urgent"), o(11, H = u8(s)), o(12, T = s !== "default"), o(7, z = v1(u ? new Date(u) : null)), o(8, M = h1(u ? new Date(u) : null)), p.addEventListener("notification-panel:tabchange", Z), p.addEventListener("notification-panel:dategroup", V), Ee(
       p,
       "notification-item:mounted",
       {
@@ -53184,16 +53184,16 @@ function f8(t, e, o) {
   function B() {
     L === "all" ? o(9, N = true) : L === "unread" ? o(9, N = m === "unread") : L === "urgent" && o(9, N = b === "urgent");
   }
-  function S() {
+  function x() {
     Ee(p, "_notificationItemRead", { el: p, readStatus: m }, { bubbles: true });
   }
   function Y() {
     Ee(p, "_click", {}, { bubbles: true });
   }
-  function I(O) {
+  function q(O) {
     (O.key === "Enter" || O.key === " ") && (O.preventDefault(), Y());
   }
-  function A(O) {
+  function S(O) {
     ce[O ? "unshift" : "push"](() => {
       p = O, o(5, p);
     });
@@ -53204,7 +53204,7 @@ function f8(t, e, o) {
     t.$$.dirty & /*readStatus*/
     65536 && o(13, i = m === "unread"), t.$$.dirty & /*readStatus, priority*/
     196608 && B(), t.$$.dirty & /*_rootEl, readStatus*/
-    65568 && p && S();
+    65568 && p && x();
   }, [
     s,
     u,
@@ -53218,13 +53218,13 @@ function f8(t, e, o) {
     N,
     j,
     H,
-    x,
+    T,
     i,
     Y,
-    I,
+    q,
     m,
     b,
-    A
+    S
   ];
 }
 class g8 extends ze {
