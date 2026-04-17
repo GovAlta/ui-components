@@ -124,7 +124,7 @@ export function ParentMenu({
   return (
     <>
       <GoabWorkSideMenu
-        heading="Design system"
+        heading="Design system (preview test)"
         url={withBase("/")}
         open={isOpen}
         onToggle={onToggle}
