@@ -56827,25 +56827,25 @@ function App() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { slot: "header", id: "top", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMicrositeHeader, { type: "alpha", version: "UAT" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeader, { heading: "Testing Playground", url: "/ui-components/pr-preview-react/pr-3835/", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeader, { heading: "Testing Playground", url: "/", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Services", leadingIcon: "apps", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/bug2720`, children: "bug2720" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}features/3478`, children: "Popover Test" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Dropdown expanding" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "...inside Container" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/bug2720", children: "bug2720" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/features/3478", children: "Popover Test" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Dropdown expanding" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "...inside Container" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Popover", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Bug 3450" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Bug 3450" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Bug 3450" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Bug 3450" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "John Smith", leadingIcon: "person-circle", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", children: "Manage account" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", children: "Request new staff account" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", children: "System admin" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", className: "interactive", children: "Sign out" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
         ] })
       ] })
     ] }),
@@ -56854,7 +56854,7 @@ function App() {
         GoabWorkSideMenu,
         {
           heading: "Testing Playground",
-          url: "/ui-components/pr-preview-react/pr-3835/",
+          url: "/",
           open: true,
           onNavigate: (path) => navigate(path),
           primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -56863,284 +56863,284 @@ function App() {
                 GoabWorkSideMenuItem,
                 {
                   label: "2152 Icon Custom Alignment",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2152`
+                  url: "/bugs/2152"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2331 Block and Tab Dynamic Data",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2331`
+                  url: "/bugs/2331"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2393 Popover Not Appearing",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2393`
+                  url: "/bugs/2393"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2404 Input Angular Icon Button",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2404`
+                  url: "/bugs/2404"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2408 Form Stepper Incomplete Rendering",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2408`
+                  url: "/bugs/2408"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2459 File Upload Card TestId",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2459`
+                  url: "/bugs/2459"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2473 DatePicker Ordinal Suffixes",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2473`
+                  url: "/bugs/2473"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2502 Native Dropdown Height",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2502`
+                  url: "/bugs/2502"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2529 Input Width Generation",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2529`
+                  url: "/bugs/2529"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2547 Popover Hidden Near Notification",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2547`
+                  url: "/bugs/2547"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2655 Dropdown/DatePicker in Modal",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2655`
+                  url: "/bugs/2655"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2720 Tabs Change via Link",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2720`
+                  url: "/bugs/2720"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2721 Text Tag Margin", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2721` }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2750 Year Select Sorting", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2750` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2721 Text Tag Margin", url: "/bugs/2721" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2750 Year Select Sorting", url: "/bugs/2750" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2768 Enable/Disable Components",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2768`
+                  url: "/bugs/2768"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2782 Disabled Inputs Hidden",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2782`
+                  url: "/bugs/2782"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2789 Width Rem Measurements",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2789`
+                  url: "/bugs/2789"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2821 Table Header Sorting Toggle",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2821`
+                  url: "/bugs/2821"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2837 InputNumber Leading/Trailing Content",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2837`
+                  url: "/bugs/2837"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2839 Button State After Click",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2839`
+                  url: "/bugs/2839"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2849 Filterable Dropdown Keyboard",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2849`
+                  url: "/bugs/2849"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2852 Filterable Dropdown Space Key",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2852`
+                  url: "/bugs/2852"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2873 Drawer Scrolling Focus",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2873`
+                  url: "/bugs/2873"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2878 DatePicker Input onChange",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2878`
+                  url: "/bugs/2878"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2892 Input Width Calculations",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2892`
+                  url: "/bugs/2892"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2922 Form Stepper Vertical",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2922`
+                  url: "/bugs/2922"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2943 Drawer Text Components",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2943`
+                  url: "/bugs/2943"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2948 Modal Heading Spacing",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2948`
+                  url: "/bugs/2948"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2977 OnChangeDetails Event Missing",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2977`
+                  url: "/bugs/2977"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3118 Text Component ID", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3118` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3118 Text Component ID", url: "/bugs/3118" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3201 Input Component Events",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3201`
+                  url: "/bugs/3201"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3215 Drawer Initial Height",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3215`
+                  url: "/bugs/3215"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3232 GoabText Tag Size", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3232` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3232 GoabText Tag Size", url: "/bugs/3232" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3248 Dropdown Dynamic Children Sync",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3248`
+                  url: "/bugs/3248"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3273 Nested Side Menu Groups",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3273`
+                  url: "/bugs/3273"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3275 Can't unset month", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3275` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3275 Can't unset month", url: "/bugs/3275" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3322 App Header Menu Hover",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3322`
+                  url: "/bugs/3322"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3281 GoabText p tag margin issues",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3281`
+                  url: "/bugs/3281"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3337 Input autocomplete styling",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3337`
+                  url: "/bugs/3337"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3279 Work Side Menu Key Nav",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3279`
+                  url: "/bugs/3279"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3384 v2 Table Border", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3384` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3384 v2 Table Border", url: "/bugs/3384" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3450 Dropdown expanding inside Container",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`
+                  url: "/bugs/3450"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3497 Calendar Years Empty",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3497`
+                  url: "/bugs/3497"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3498 Radio alignment", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3498` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3498 Radio alignment", url: "/bugs/3498" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3450 Dropdown expanding inside Container",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`
+                  url: "/bugs/3450"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3607 Radio and Checkbox Interaction Area",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3607`
+                  url: "/bugs/3607"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3505 Link Icon Click", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3505` }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3614 IconButton Hitboxes", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3614` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3505 Link Icon Click", url: "/bugs/3505" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3614 IconButton Hitboxes", url: "/bugs/3614" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
@@ -57152,49 +57152,49 @@ function App() {
                 GoabWorkSideMenuItem,
                 {
                   label: "3685 Checkbox & Radio: Reveal width not aligned with item",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3685`
+                  url: "/bugs/3685"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3735 Work Side Menu tooltip fixes",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3735`
+                  url: "/bugs/3735"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3635 Input Leading icon color",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3635`
+                  url: "/bugs/3635"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3699 Notification Popover rounded corners",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3699`
+                  url: "/bugs/3699"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3637 Checkbox Table Header Row Height Bug",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3637`
+                  url: "/bugs/3637"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3667 Notification banner refinements",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3667`
+                  url: "/bugs/3667"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3735 Work Side Menu tooltip fixes",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3735`
+                  url: "/bugs/3735"
                 }
               )
             ] }),
@@ -57203,200 +57203,200 @@ function App() {
                 GoabWorkSideMenuItem,
                 {
                   label: "1383 Button Filled Icons",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/1383`
+                  url: "/features/1383"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "1547 Tooltip Multiline",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/1547`
+                  url: "/features/1547"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "1813 DatePicker Width Properties",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/1813`
+                  url: "/features/1813"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "1908 Linear Progress", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/1908` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "1908 Linear Progress", url: "/features/1908" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2054 MaxWidth Support",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2054`
+                  url: "/features/2054"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2267 Checkbox List", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2267` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2267 Checkbox List", url: "/features/2267" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2328 Container Height Property",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2328`
+                  url: "/features/2328"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2361 Radio/Checkbox Clickable Area",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2361`
+                  url: "/features/2361"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2440 MenuButton Icon", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2440` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2440 MenuButton Icon", url: "/features/2440" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2469/3580 Push Drawer",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2469`
+                  url: "/features/2469"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2492 TextArea onBlur", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2492` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2492 TextArea onBlur", url: "/features/2492" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2609 Data Table Base Component",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2609`
+                  url: "/features/2609"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2611 Segmented Tab", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2611` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2611 Segmented Tab", url: "/features/2611" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2611 Disabled Tab",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2611-tabs-disabled`
+                  url: "/features/2611-tabs-disabled"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2682 DatePicker Issues",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2682`
+                  url: "/features/2682"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2722 Input Text-Align",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2722`
+                  url: "/features/2722"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2730 Temporary Notification Controller",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2730`
+                  url: "/features/2730"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2829 Modal ARIA Live Region",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2829`
+                  url: "/features/2829"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "2877 Badge Types and Custom Icon",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2877`
+                  url: "/features/2877"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3102 MenuButton Width",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3102`
+                  url: "/features/3102"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3137 Work Side Menu Group",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3137`
+                  url: "/features/3137"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3241 V2 Experimental Wrappers",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3241`
+                  url: "/features/3241"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "v2 header icons", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/v2-icons` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "v2 header icons", url: "/features/v2-icons" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3229 V2 Menu Button vs size and icon-only",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3229`
+                  url: "/features/3229"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3344 Table Multi-Sort",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3344`
+                  url: "/features/3344"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3306 Custom slug value for tabs",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3306`
+                  url: "/features/3306"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3370 Clear calendar day selection",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3370`
+                  url: "/features/3370"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3396 Text heading-2xs size",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3396`
+                  url: "/features/3396"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3399 V2 Checkbox Spacing",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/v2-checkbox`
+                  url: "/features/v2-checkbox"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3407 Skip Focus on Tab",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3407-skip-on-focus-tab`
+                  url: "/features/3407-skip-on-focus-tab"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3407 Tabs Orientation",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3407-stack-on-mobile`
+                  url: "/features/3407-stack-on-mobile"
                 }
               ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3398 Group open prop", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3398` }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3398 Group open prop", url: "/features/3398" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3478 Popover API Rewrite",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3478`
+                  url: "/features/3478"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 GoabWorkSideMenuItem,
                 {
                   label: "3544 Optional Side Menu Icons",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544`
+                  url: "/features/3544"
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Everything", url: `${"/ui-components/pr-preview-react/pr-3835/"}everything` })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Everything", url: "/everything" })
           ] })
         }
       ),
@@ -61706,7 +61706,7 @@ function renderPrimaryContent(prefix2) {
       {
         icon: "document-text",
         label: "Get started",
-        url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3735`
+        url: "/bugs/3735"
       },
       `${prefix2}-get-started`
     ),
@@ -61715,7 +61715,7 @@ function renderPrimaryContent(prefix2) {
       {
         icon: "list",
         label: "Bug list",
-        url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3735`
+        url: "/bugs/3735"
       },
       `${prefix2}-bugs`
     ),
@@ -61724,7 +61724,7 @@ function renderPrimaryContent(prefix2) {
       {
         icon: "settings",
         label: "Admin settings",
-        url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3735`
+        url: "/bugs/3735"
       },
       `${prefix2}-settings`
     )
@@ -61744,7 +61744,7 @@ function Bug3735Route() {
       GoabWorkSideMenu,
       {
         heading: "Offset tooltip demo",
-        url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3735`,
+        url: "/bugs/3735",
         open: false,
         onNavigate: noop,
         primaryContent: renderPrimaryContent("offset")
@@ -61822,10 +61822,10 @@ function Bug3699Route() {
       GoabWorkSideMenu,
       {
         heading: "My Application",
-        url: "/ui-components/pr-preview-react/pr-3835/",
+        url: "/",
         primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: `${"/ui-components/pr-preview-react/pr-3835/"}dashboard` }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: `${"/ui-components/pr-preview-react/pr-3835/"}cases` })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: "/dashboard" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: "/cases" })
         ] }),
         secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabWorkSideMenuItem,
@@ -63912,7 +63912,7 @@ function EverythingBRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { slot: "header", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMicrositeHeader, { type: "alpha", version: "Design-system-sandbox" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/ui-components/pr-preview-react/pr-3835/", heading: "All components" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAppHeader, { url: "/", heading: "All components" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabPageBlock, { width: "full", children: /* @__PURE__ */ jsxRuntimeExports.jsx("goa-link", { leadingicon: "arrow-back", mt: "xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", children: "Back to main playground" }) }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { slot: "header", children: [
@@ -72935,7 +72935,7 @@ function Feat3137Route() {
           GoabWorkSideMenu,
           {
             heading: "My Application",
-            url: "/ui-components/pr-preview-react/pr-3835/",
+            url: "/",
             userName: "John Doe",
             userSecondaryText: "john.doe@example.com",
             open: isMenuOpen,
@@ -72946,7 +72946,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Overview",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}dashboard/overview`,
+                    url: "/dashboard/overview",
                     current: true,
                     icon: "star"
                   }
@@ -72955,7 +72955,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Analytics",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}dashboard/analytics`,
+                    url: "/dashboard/analytics",
                     icon: "star",
                     badge: "3"
                   }
@@ -72964,7 +72964,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Reports",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}dashboard/reports`,
+                    url: "/dashboard/reports",
                     icon: "star"
                   }
                 )
@@ -72974,7 +72974,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Active Projects",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}projects/active`,
+                    url: "/projects/active",
                     icon: "star",
                     badge: "12"
                   }
@@ -72983,7 +72983,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Archived Projects",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}projects/archived`,
+                    url: "/projects/archived",
                     icon: "star"
                   }
                 ),
@@ -72991,7 +72991,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Templates",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}projects/templates`,
+                    url: "/projects/templates",
                     icon: "star"
                   }
                 ),
@@ -72999,7 +72999,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Create New Project",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}projects/new`,
+                    url: "/projects/new",
                     icon: "star"
                   }
                 )
@@ -73009,7 +73009,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Team Members",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}team/members`,
+                    url: "/team/members",
                     icon: "person",
                     badge: "24"
                   }
@@ -73018,7 +73018,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Departments",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}team/departments`,
+                    url: "/team/departments",
                     icon: "star"
                   }
                 ),
@@ -73026,7 +73026,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Permissions",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}team/permissions`,
+                    url: "/team/permissions",
                     icon: "star"
                   }
                 ),
@@ -73034,7 +73034,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Activity Log",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}team/activity`,
+                    url: "/team/activity",
                     icon: "star"
                   }
                 )
@@ -73044,7 +73044,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "All Documents",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}documents/all`,
+                    url: "/documents/all",
                     icon: "star"
                   }
                 ),
@@ -73052,7 +73052,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Recent",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}documents/recent`,
+                    url: "/documents/recent",
                     icon: "star",
                     badge: "5"
                   }
@@ -73061,7 +73061,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Shared with Me",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}documents/shared`,
+                    url: "/documents/shared",
                     icon: "star"
                   }
                 ),
@@ -73069,7 +73069,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Favorites",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}documents/favorites`,
+                    url: "/documents/favorites",
                     icon: "star"
                   }
                 ),
@@ -73077,7 +73077,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Trash",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}documents/trash`,
+                    url: "/documents/trash",
                     icon: "star"
                   }
                 )
@@ -73087,7 +73087,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Messages",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}communication/messages`,
+                    url: "/communication/messages",
                     icon: "star",
                     badge: "8"
                   }
@@ -73096,7 +73096,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Notifications",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}communication/notifications`,
+                    url: "/communication/notifications",
                     icon: "star",
                     badge: "15"
                   }
@@ -73105,7 +73105,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Announcements",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}communication/announcements`,
+                    url: "/communication/announcements",
                     icon: "star"
                   }
                 )
@@ -73117,7 +73117,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Calendar",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}tools/calendar`,
+                    url: "/tools/calendar",
                     icon: "star"
                   }
                 ),
@@ -73125,7 +73125,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Task Manager",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}tools/tasks`,
+                    url: "/tools/tasks",
                     icon: "star",
                     badge: "7"
                   }
@@ -73134,7 +73134,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Time Tracking",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}tools/time`,
+                    url: "/tools/time",
                     icon: "star"
                   }
                 )
@@ -73144,7 +73144,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Documentation",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}resources/docs`,
+                    url: "/resources/docs",
                     icon: "star"
                   }
                 ),
@@ -73152,7 +73152,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Training",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}resources/training`,
+                    url: "/resources/training",
                     icon: "star"
                   }
                 ),
@@ -73160,7 +73160,7 @@ function Feat3137Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Help Center",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}resources/help`,
+                    url: "/resources/help",
                     icon: "star"
                   }
                 )
@@ -73171,7 +73171,7 @@ function Feat3137Route() {
                 GoabWorkSideMenuItem,
                 {
                   label: "Profile Settings",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}account/profile`,
+                  url: "/account/profile",
                   icon: "person"
                 }
               ),
@@ -73179,7 +73179,7 @@ function Feat3137Route() {
                 GoabWorkSideMenuItem,
                 {
                   label: "Preferences",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}account/preferences`,
+                  url: "/account/preferences",
                   icon: "settings"
                 }
               ),
@@ -73187,7 +73187,7 @@ function Feat3137Route() {
                 GoabWorkSideMenuItem,
                 {
                   label: "Security",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}account/security`,
+                  url: "/account/security",
                   icon: "lock-closed"
                 }
               ),
@@ -73195,7 +73195,7 @@ function Feat3137Route() {
                 GoabWorkSideMenuItem,
                 {
                   label: "Billing",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}account/billing`,
+                  url: "/account/billing",
                   icon: "card"
                 }
               ),
@@ -73203,7 +73203,7 @@ function Feat3137Route() {
                 GoabWorkSideMenuItem,
                 {
                   label: "Log Out",
-                  url: `${"/ui-components/pr-preview-react/pr-3835/"}logout`,
+                  url: "/logout",
                   icon: "log-out"
                 }
               )
@@ -74427,7 +74427,7 @@ function Feat3398Route() {
       GoabWorkSideMenu,
       {
         heading: "Design System",
-        url: "/ui-components/pr-preview-react/pr-3835/",
+        url: "/",
         userName: "John Doe",
         userSecondaryText: "john.doe@example.com",
         open: true,
@@ -74453,11 +74453,11 @@ function Feat3398Route() {
                   GoabWorkSideMenuItem,
                   {
                     label: "Early Adopters",
-                    url: `${"/ui-components/pr-preview-react/pr-3835/"}get-started/early-adopters`
+                    url: "/get-started/early-adopters"
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Designers", url: `${"/ui-components/pr-preview-react/pr-3835/"}get-started/designers` }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Developers", url: `${"/ui-components/pr-preview-react/pr-3835/"}get-started/developers` })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Designers", url: "/get-started/designers" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Developers", url: "/get-started/developers" })
               ]
             }
           )
@@ -74477,21 +74477,21 @@ function Feat3398Route() {
       GoabWorkSideMenu,
       {
         heading: "UI Components Playground",
-        url: "/ui-components/pr-preview-react/pr-3835/",
+        url: "/",
         userName: "John Doe",
         userSecondaryText: "john.doe@example.com",
         open: true,
         primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabWorkSideMenuGroup, { heading: "Enhancements", icon: "rocket", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Item 1", url: `${"/ui-components/pr-preview-react/pr-3835/"}items/1` }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Item 1", url: "/items/1" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabWorkSideMenuGroup, { heading: "Features", icon: "star", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "1908", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/1908` }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3398", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3398` })
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "1908", url: "/features/1908" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "3398", url: "/features/3398" })
             ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabWorkSideMenuGroup, { heading: "Bugs", icon: "bug", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2152", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2152` }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2331", url: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/2331` })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2152", url: "/bugs/2152" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "2331", url: "/bugs/2331" })
           ] })
         ] })
       }
@@ -74993,20 +74993,20 @@ function Feat2885Route() {
       GoabWorkSideMenu,
       {
         heading: "Workspace Demo",
-        url: "/ui-components/pr-preview-react/pr-3835/",
+        url: "/",
         testId: "work-space-side-menu",
         userName: "John Doe",
         userSecondaryText: "john.doe@gov.ab.ca",
         open: menuOpen,
         onToggle: () => setMenuOpen((prev) => !prev),
         primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2885` }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: "/features/2885" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             GoabWorkSideMenuItem,
             {
               icon: "search",
               label: "Search",
-              url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2885/search`
+              url: "/features/2885/search"
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -75014,7 +75014,7 @@ function Feat2885Route() {
             {
               icon: "list",
               label: "Cases",
-              url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2885/cases`,
+              url: "/features/2885/cases",
               badge: "5",
               type: "success"
             }
@@ -75024,7 +75024,7 @@ function Feat2885Route() {
             {
               icon: "document",
               label: "Documents",
-              url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2885/documents`,
+              url: "/features/2885/documents",
               divider: true
             }
           ),
@@ -75109,7 +75109,7 @@ function Feat2885Route() {
             {
               icon: "help-circle",
               label: "Help",
-              url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2885/help`
+              url: "/features/2885/help"
             }
           )
         ] }),
@@ -75119,10 +75119,10 @@ function Feat2885Route() {
             {
               icon: "settings",
               label: "Settings",
-              url: `${"/ui-components/pr-preview-react/pr-3835/"}features/2885/settings`
+              url: "/features/2885/settings"
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "log-out", label: "Log out", url: `${"/ui-components/pr-preview-react/pr-3835/"}logout` })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "log-out", label: "Log out", url: "/logout" })
         ] })
       }
     ),
@@ -75416,14 +75416,14 @@ function Feat3544Route() {
                   GoabWorkSideMenu,
                   {
                     heading: "Test Menu",
-                    url: "/ui-components/pr-preview-react/pr-3835/",
+                    url: "/",
                     open: true,
                     primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx(
                         GoabWorkSideMenuItem,
                         {
                           label: "Standalone item",
-                          url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544`,
+                          url: "/features/3544",
                           icon: "home"
                         }
                       ),
@@ -75431,7 +75431,7 @@ function Feat3544Route() {
                         GoabWorkSideMenuItem,
                         {
                           label: "Group child",
-                          url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544`,
+                          url: "/features/3544",
                           icon: "document"
                         }
                       ) })
@@ -75445,11 +75445,11 @@ function Feat3544Route() {
                   GoabWorkSideMenu,
                   {
                     heading: "Test Menu",
-                    url: "/ui-components/pr-preview-react/pr-3835/",
+                    url: "/",
                     open: true,
                     primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Standalone item", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { heading: "Grouped items", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Group child", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` }) })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Standalone item", url: "/features/3544" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { heading: "Grouped items", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Group child", url: "/features/3544" }) })
                     ] })
                   }
                 ) })
@@ -75460,19 +75460,19 @@ function Feat3544Route() {
                   GoabWorkSideMenu,
                   {
                     heading: "Test Menu",
-                    url: "/ui-components/pr-preview-react/pr-3835/",
+                    url: "/",
                     open: true,
                     primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "All", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544`, icon: "arrow-back" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "All Components", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "All", url: "/features/3544", icon: "arrow-back" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "All Components", url: "/features/3544" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabWorkSideMenuGroup, { heading: "Content layout", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Container", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Divider", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Grid", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Container", url: "/features/3544" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Divider", url: "/features/3544" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Grid", url: "/features/3544" })
                       ] }),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabWorkSideMenuGroup, { heading: "Inputs and actions", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Button", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Input", url: `${"/ui-components/pr-preview-react/pr-3835/"}features/3544` })
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Button", url: "/features/3544" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { label: "Input", url: "/features/3544" })
                       ] })
                     ] })
                   }
