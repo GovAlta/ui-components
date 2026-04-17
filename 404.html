@@ -1,0 +1,49 @@
+<!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <title>Redirecting…</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <script>
+        // SPA fallback for GitHub Pages PR previews.
+        // When GitHub Pages serves a 404 under /ui-components/, detect SPA
+        // preview paths (React + Angular playgrounds) and redirect back to
+        // their index.html using the spa-github-pages query-string trick.
+        // The matching decoder in each app's index.html restores the real
+        // URL via history.replaceState.
+        (function () {
+          var l = window.location;
+
+          // If we already came through this redirect once (search starts with
+          // "?/"), don't loop. The preview index.html must be missing.
+          if (l.search.length > 1 && l.search[1] === "/") return;
+
+          var spaPrefixes = [
+            /^\/ui-components\/pr-preview-react\/pr-\d+\//,
+            /^\/ui-components\/pr-preview-angular\/pr-\d+\//,
+          ];
+
+          for (var i = 0; i < spaPrefixes.length; i++) {
+            var m = l.pathname.match(spaPrefixes[i]);
+            if (m) {
+              var appRoot = m[0];
+              var rest = l.pathname.slice(appRoot.length).replace(/&/g, "~and~");
+              l.replace(
+                l.protocol + "//" + l.hostname +
+                (l.port ? ":" + l.port : "") +
+                appRoot + "?/" + rest +
+                (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+                l.hash
+              );
+              return;
+            }
+          }
+        })();
+      </script>
+    </head>
+    <body>
+      <h1>Page not found</h1>
+      <p>The page you are looking for does not exist.</p>
+      <p><a href="/ui-components/">Return to the GoA Design System</a></p>
+    </body>
+  </html>
