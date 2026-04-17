@@ -52,6 +52,10 @@ export default defineConfig({
       alias: [
         // More specific aliases must come first
         {
+          find: /^@\/(.*)$/,
+          replacement: path.resolve(__dirname, "src/$1"),
+        },
+        {
           find: "@abgov/react-components/experimental",
           replacement: path.resolve(
             workspaceRoot,
