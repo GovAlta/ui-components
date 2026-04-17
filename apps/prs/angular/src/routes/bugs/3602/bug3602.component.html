@@ -1,0 +1,39 @@
+<h1>3602 FileUploadInput and FileUploadCard Improvements</h1>
+
+<goab-form-item label="Small file (100KB limit)">
+  <goab-file-upload-input
+    maxFileSize="100KB"
+    (onSelectFile)="onSmallFileSelect($event)"
+  ></goab-file-upload-input>
+</goab-form-item>
+
+<div style="padding-top: 0.75rem; padding-bottom: 2rem">
+  @for (f of smallFiles; track f.id) {
+    <goab-file-upload-card
+      [filename]="f.filename"
+      [size]="f.size"
+      [type]="f.type"
+      [progress]="f.progress"
+      (onDelete)="onSmallFileDelete($event)"
+    ></goab-file-upload-card>
+  }
+</div>
+
+<goab-form-item label="Large file (50MB limit)">
+  <goab-file-upload-input
+    maxFileSize="50MB"
+    (onSelectFile)="onLargeFileSelect($event)"
+  ></goab-file-upload-input>
+</goab-form-item>
+
+<div style="padding-top: 0.75rem; padding-bottom: 2rem">
+  @for (f of largeFiles; track f.id) {
+    <goab-file-upload-card
+      [filename]="f.filename"
+      [size]="f.size"
+      [type]="f.type"
+      [progress]="f.progress"
+      (onDelete)="onLargeFileDelete($event)"
+    ></goab-file-upload-card>
+  }
+</div>

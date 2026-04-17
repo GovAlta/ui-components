@@ -6,6 +6,8 @@
   type Variant = "dragdrop" | "button";
   type Issue = {
     filename: string;
+    size: number;
+    filetype: string;
     error: string;
   };
   type FileSizeUnit = "B" | "KB" | "MB" | "GB";
@@ -41,7 +43,15 @@
         [..._fileInput.files].forEach((file) => {
           const error = validate(file);
           if (error) {
-            issues = [{ filename: file.name, error }, ...issues];
+            issues = [
+              {
+                filename: file.name,
+                size: file.size,
+                filetype: file.type,
+                error,
+              },
+              ...issues,
+            ];
             return;
           }
           dispatch(file);
@@ -135,7 +145,15 @@
           if (file) {
             const error = validate(file);
             if (error) {
-              issues = [{ filename: file.name, error }, ...issues];
+              issues = [
+                {
+                  filename: file.name,
+                  size: file.size,
+                  filetype: file.type,
+                  error,
+                },
+                ...issues,
+              ];
               return;
             }
             dispatch(file);
@@ -147,7 +165,15 @@
       [...e.dataTransfer?.files].forEach((file) => {
         const error = validate(file);
         if (error) {
-          issues = [{ filename: file.name, error }, ...issues];
+          issues = [
+            {
+              filename: file.name,
+              size: file.size,
+              filetype: file.type,
+              error,
+            },
+            ...issues,
+          ];
           return;
         }
         dispatch(file);
@@ -251,14 +277,18 @@
 
 {#if issues.length}
   <div class="issues">
-    {#each issues as issue}
-      <div class="issue">
-        {issue.filename}
-        <div class="error" data-testid="error">
-          <goa-icon type="warning" size="small" theme="filled" />
-          {issue.error}
-        </div>
-      </div>
+    {#each issues as issue, i (issue)}
+      <goa-file-upload-card
+        data-testid={testid ? `${testid}-issue-${i}` : undefined}
+        on:_delete={() => {
+          issues = issues.filter((currentIssue) => currentIssue !== issue);
+        }}
+        filename={issue.filename}
+        size={issue.size}
+        type={issue.filetype}
+        error={issue.error}
+        {version}
+      />
     {/each}
   </div>
 {/if}
@@ -345,18 +375,7 @@
 
   /* issues */
   .issues {
-    border-bottom: 1px solid var(--goa-color-greyscale-200);
-    margin: 1rem 0;
-  }
-  .issue {
-    margin-bottom: 1rem;
-  }
-  .error {
-    color: var(--goa-color-interactive-error);
-    font-size: 0.9em;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    margin: 0.75rem 0 0 0;
   }
 
   @container self (--mobile) {
