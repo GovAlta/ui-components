@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Developers - Migration guide
  *
@@ -224,7 +225,7 @@ import DocumentationPageLayout from "../../layouts/DocumentationPageLayout.astro
   <h2 id="related-guidance">Related guidance</h2>
   <goa-block version="2" gap="s" direction="column">
     <goa-link version="2"
-      ><a href="/get-started/developers">Review the setup steps for developers</a
+      ><a href={withBase(`/get-started/developers`)}>Review the setup steps for developers</a
       ></goa-link
     >
   </goa-block>

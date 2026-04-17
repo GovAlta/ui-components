@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Individual Example Page
  *
@@ -14,6 +15,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
 import { TableOfContents } from '../../components/TableOfContents';
 import { getExampleCode } from '../../lib/example-code';
+
 
 // Generate static paths for all examples
 export async function getStaticPaths() {
@@ -133,7 +135,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
         <h2>Related examples</h2>
         <div class="related-grid">
           {relatedExamples.map((related) => (
-            <a href={`/examples/${related.slug}`} class="related-card">
+            <a href={withBase(`/examples/${related.slug}`)} class="related-card">
               <span class="related-title">{related.data.title}</span>
               <span class="related-category">{formatCategory(related.data.categories[0])}</span>
             </a>

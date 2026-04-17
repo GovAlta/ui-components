@@ -7,17 +7,18 @@
  */
 
 import type { SearchFilter } from "./useSearch";
+import { withBase } from "@/lib/base-url";
 
 /** Build a URL for a search result or history item by type + slug. */
 export function getResultUrl(type: string, slug: string): string {
   if (type === "page") {
-    return `/${slug}`;
+    return withBase(`/${slug}`);
   }
   if (type === "token") {
-    return `/tokens?search=${slug}`;
+    return withBase(`/tokens?search=${slug}`);
   }
   const prefix = type === "component" ? "components" : "examples";
-  return `/${prefix}/${slug}`;
+  return withBase(`/${prefix}/${slug}`);
 }
 
 /** Get the GoA icon name for a search entry type. */

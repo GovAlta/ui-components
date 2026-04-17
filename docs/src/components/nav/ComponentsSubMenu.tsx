@@ -13,6 +13,7 @@ import {
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 import type { NavCategory } from "../../lib/nav-categories";
+import { withBase } from "@/lib/base-url";
 
 interface ComponentsSubMenuProps {
   isOpen: boolean;
@@ -60,7 +61,7 @@ export function ComponentsSubMenu({
           - On All Components page: use url so auto-matching highlights it
           - On component detail pages: wrap in div to prevent auto-matching */}
       {isAllComponentsPage ? (
-        <GoabWorkSideMenuItem label="All Components" url="/components" />
+        <GoabWorkSideMenuItem label="All Components" url={withBase("/components")} />
       ) : (
         <div onClick={handleAllComponentsClick} style={{ cursor: "pointer" }}>
           <GoabWorkSideMenuItem label="All Components" url="/__all_components__" />
@@ -93,7 +94,7 @@ export function ComponentsSubMenu({
                   <GoabWorkSideMenuItem
                     key={component.slug}
                     label={component.name}
-                    url={`/components/${component.slug}`}
+                    url={withBase(`/components/${component.slug}`)}
                     current={component.slug === currentSlug}
                   />
                 ))}
@@ -109,7 +110,7 @@ export function ComponentsSubMenu({
     <>
       <GoabWorkSideMenu
         heading="Design System | Components"
-        url="/"
+        url={withBase("/")}
         open={isOpen}
         onToggle={onToggle}
         onNavigate={(path: string) => {
