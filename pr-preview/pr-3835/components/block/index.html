@@ -4060,164 +4060,19 @@ searchBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="tVeWu" prefix="r26" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Show multiple actions in a compact table&quot;],&quot;slug&quot;:[0,&quot;show-multiple-actions-in-a-compact-table&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabBlock,\n  GoabIconButton,\n  GoabTable,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ShowMultipleActionsInACompactTable() {\n  const rows = [\n    { status: \&quot;information\&quot;, statusText: \&quot;In progress\&quot;, name: \&quot;Darlene Robertson\&quot;, id: 45904 },\n    { status: \&quot;default\&quot;, statusText: \&quot;Inactive\&quot;, name: \&quot;Floyd Miles\&quot;, id: 47838 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Kathryn Murphy\&quot;, id: 34343 },\n    { status: \&quot;important\&quot;, statusText: \&quot;Recent\&quot;, name: \&quot;Annette Black\&quot;, id: 89897 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Esther Howard\&quot;, id: 12323 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Jane Cooper\&quot;, id: 56565 },\n  ];\n\n  return (\n    &lt;GoabTable width=\&quot;100%\&quot;&gt;\n      &lt;thead&gt;\n        &lt;tr&gt;\n          &lt;th&gt;Status&lt;/th&gt;\n          &lt;th&gt;Name&lt;/th&gt;\n          &lt;th style={{ textAlign: \&quot;right\&quot; }}&gt;Id Number&lt;/th&gt;\n          &lt;th style={{ width: \&quot;1%\&quot;, whiteSpace: \&quot;nowrap\&quot; }}&gt;Edit | Flag | Send&lt;/th&gt;\n        &lt;/tr&gt;\n      &lt;/thead&gt;\n      &lt;tbody&gt;\n        {rows.map((row) =&gt; (\n          &lt;tr key={row.id}&gt;\n            &lt;td&gt;\n              &lt;GoabBadge\n                type={row.status as \&quot;information\&quot; | \&quot;default\&quot; | \&quot;success\&quot; | \&quot;important\&quot;}\n                content={row.statusText}\n                icon={false}\n              /&gt;\n            &lt;/td&gt;\n            &lt;td&gt;{row.name}&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;{row.id}&lt;/td&gt;\n            &lt;td&gt;\n              &lt;GoabBlock&gt;\n                &lt;GoabIconButton size=\&quot;small\&quot; icon=\&quot;pencil\&quot; ariaLabel=\&quot;Edit\&quot; /&gt;\n                &lt;GoabIconButton size=\&quot;small\&quot; icon=\&quot;flag\&quot; ariaLabel=\&quot;Flag\&quot; /&gt;\n                &lt;GoabIconButton size=\&quot;small\&quot; icon=\&quot;mail\&quot; ariaLabel=\&quot;Send\&quot; /&gt;\n              &lt;/GoabBlock&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        ))}\n      &lt;/tbody&gt;\n    &lt;/GoabTable&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-table width=\&quot;100%\&quot;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Status&lt;/th&gt;\n      &lt;th&gt;Name&lt;/th&gt;\n      &lt;th style=\&quot;text-align: right\&quot;&gt;Id Number&lt;/th&gt;\n      &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;Edit | Flag | Send&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    @for (row of rows; track row.id) {\n    &lt;tr&gt;\n      &lt;td&gt;\n        &lt;goab-badge [type]=\&quot;row.status\&quot; [content]=\&quot;row.statusText\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n      &lt;td&gt;{{ row.name }}&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;{{ row.id }}&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goab-block&gt;\n          &lt;goab-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; ariaLabel=\&quot;Edit\&quot;&gt;&lt;/goab-icon-button&gt;\n          &lt;goab-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; ariaLabel=\&quot;Flag\&quot;&gt;&lt;/goab-icon-button&gt;\n          &lt;goab-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; ariaLabel=\&quot;Send\&quot;&gt;&lt;/goab-icon-button&gt;\n        &lt;/goab-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    }\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\ninterface TableRow {\n  status: string;\n  statusText: string;\n  name: string;\n  id: number;\n}\n\n@Component({\n  selector: \&quot;app-show-multiple-actions-compact-table\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ShowMultipleActionsCompactTableComponent {\n  rows: TableRow[] = [\n    { status: \&quot;information\&quot;, statusText: \&quot;In progress\&quot;, name: \&quot;Darlene Robertson\&quot;, id: 45904 },\n    { status: \&quot;dark\&quot;, statusText: \&quot;Inactive\&quot;, name: \&quot;Floyd Miles\&quot;, id: 47838 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Kathryn Murphy\&quot;, id: 34343 },\n    { status: \&quot;important\&quot;, statusText: \&quot;Recent\&quot;, name: \&quot;Annette Black\&quot;, id: 89897 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Esther Howard\&quot;, id: 12323 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Jane Cooper\&quot;, id: 56565 },\n  ];\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot;&gt;\n  &lt;table width=\&quot;100%\&quot;&gt;\n    &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Status&lt;/th&gt;\n      &lt;th&gt;Name&lt;/th&gt;\n      &lt;th style=\&quot;text-align: right\&quot;&gt;Id Number&lt;/th&gt;\n      &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;Edit | Flag | Send&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;In progress\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Darlene Robertson&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;45904&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;dark\&quot; content=\&quot;Inactive\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Floyd Miles&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;47838&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Active\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Kathryn Murphy&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;34343&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;important\&quot; content=\&quot;Recent\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Annette Black&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;89897&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Active\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Esther Howard&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;12323&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Active\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Jane Cooper&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;56565&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-show-multiple-actions-in-a-compact-table" class="example-title">Show multiple actions in a compact table</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const rows = [
-    { status: &quot;information&quot;, statusText: &quot;In progress&quot;, name: &quot;Darlene Robertson&quot;, id: 45904 },
-    { status: &quot;default&quot;, statusText: &quot;Inactive&quot;, name: &quot;Floyd Miles&quot;, id: 47838 },
-    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Kathryn Murphy&quot;, id: 34343 },
-    { status: &quot;important&quot;, statusText: &quot;Recent&quot;, name: &quot;Annette Black&quot;, id: 89897 },
-    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Esther Howard&quot;, id: 12323 },
-    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Jane Cooper&quot;, id: 56565 },
-  ];</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabTable width=&quot;100%&quot;&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;Status&lt;/th&gt;
-          &lt;th&gt;Name&lt;/th&gt;
-          &lt;th style={{ textAlign: &quot;right&quot; }}&gt;Id Number&lt;/th&gt;
-          &lt;th style={{ width: &quot;1%&quot;, whiteSpace: &quot;nowrap&quot; }}&gt;Edit | Flag | Send&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;
-        {rows.map((row) =&gt; (
-          &lt;tr key={row.id}&gt;
-            &lt;td&gt;
-              &lt;GoabBadge
-                type={row.status as &quot;information&quot; | &quot;default&quot; | &quot;success&quot; | &quot;important&quot;}
-                content={row.statusText}
-                icon={false}
-              /&gt;
-            &lt;/td&gt;
-            &lt;td&gt;{row.name}&lt;/td&gt;
-            &lt;td className=&quot;goa-table-number-column&quot;&gt;{row.id}&lt;/td&gt;
-            &lt;td&gt;
-              &lt;GoabBlock&gt;
-                &lt;GoabIconButton size=&quot;small&quot; icon=&quot;pencil&quot; ariaLabel=&quot;Edit&quot; /&gt;
-                &lt;GoabIconButton size=&quot;small&quot; icon=&quot;flag&quot; ariaLabel=&quot;Flag&quot; /&gt;
-                &lt;GoabIconButton size=&quot;small&quot; icon=&quot;mail&quot; ariaLabel=&quot;Send&quot; /&gt;
-              &lt;/GoabBlock&gt;
-            &lt;/td&gt;
-          &lt;/tr&gt;
-        ))}
-      &lt;/tbody&gt;
-    &lt;/GoabTable&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">rows: TableRow[] = [
-    { status: &quot;information&quot;, statusText: &quot;In progress&quot;, name: &quot;Darlene Robertson&quot;, id: 45904 },
-    { status: &quot;dark&quot;, statusText: &quot;Inactive&quot;, name: &quot;Floyd Miles&quot;, id: 47838 },
-    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Kathryn Murphy&quot;, id: 34343 },
-    { status: &quot;important&quot;, statusText: &quot;Recent&quot;, name: &quot;Annette Black&quot;, id: 89897 },
-    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Esther Howard&quot;, id: 12323 },
-    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Jane Cooper&quot;, id: 56565 },
-  ];</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-table width=&quot;100%&quot;&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Status&lt;/th&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;Id Number&lt;/th&gt;
-      &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;Edit | Flag | Send&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    @for (row of rows; track row.id) {
-    &lt;tr&gt;
-      &lt;td&gt;
-        &lt;goab-badge [type]=&quot;row.status&quot; [content]=&quot;row.statusText&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
-      &lt;/td&gt;
-      &lt;td&gt;{{ row.name }}&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;{{ row.id }}&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goab-block&gt;
-          &lt;goab-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; ariaLabel=&quot;Edit&quot;&gt;&lt;/goab-icon-button&gt;
-          &lt;goab-icon-button size=&quot;small&quot; icon=&quot;flag&quot; ariaLabel=&quot;Flag&quot;&gt;&lt;/goab-icon-button&gt;
-          &lt;goab-icon-button size=&quot;small&quot; icon=&quot;mail&quot; ariaLabel=&quot;Send&quot;&gt;&lt;/goab-icon-button&gt;
-        &lt;/goab-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    }
-  &lt;/tbody&gt;
-&lt;/goab-table&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot;&gt;
-  &lt;table width=&quot;100%&quot;&gt;
-    &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Status&lt;/th&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;Id Number&lt;/th&gt;
-      &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;Edit | Flag | Send&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;In progress&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-      &lt;td&gt;Darlene Robertson&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;45904&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goa-block&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
-        &lt;/goa-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;dark&quot; content=&quot;Inactive&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-      &lt;td&gt;Floyd Miles&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;47838&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goa-block&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
-        &lt;/goa-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Active&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-      &lt;td&gt;Kathryn Murphy&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;34343&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goa-block&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
-        &lt;/goa-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;important&quot; content=&quot;Recent&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-      &lt;td&gt;Annette Black&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;89897&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goa-block&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
-        &lt;/goa-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Active&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-      &lt;td&gt;Esther Howard&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;12323&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goa-block&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
-        &lt;/goa-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Active&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
-      &lt;td&gt;Jane Cooper&lt;/td&gt;
-      &lt;td class=&quot;goa-table-number-column&quot;&gt;56565&lt;/td&gt;
-      &lt;td&gt;
-        &lt;goa-block&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
-          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
-        &lt;/goa-block&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-&lt;/goa-table&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="2puq6l" prefix="r26" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Show multiple tags together&quot;],&quot;slug&quot;:[0,&quot;show-multiple-tags-together&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabBlock,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ShowMultipleTagsTogether() {\n  return (\n    &lt;GoabBlock gap=\&quot;xs\&quot;&gt;\n      &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;In progress\&quot; /&gt;\n      &lt;GoabBadge type=\&quot;important\&quot; content=\&quot;Priority\&quot; /&gt;\n      &lt;GoabBadge type=\&quot;emergency\&quot; content=\&quot;Past deadline\&quot; /&gt;\n    &lt;/GoabBlock&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-block gap=\&quot;xs\&quot;&gt;\n  &lt;goab-badge type=\&quot;information\&quot; content=\&quot;In progress\&quot;&gt;&lt;/goab-badge&gt;\n  &lt;goab-badge type=\&quot;important\&quot; content=\&quot;Priority\&quot;&gt;&lt;/goab-badge&gt;\n  &lt;goab-badge type=\&quot;emergency\&quot; content=\&quot;Past deadline\&quot;&gt;&lt;/goab-badge&gt;\n&lt;/goab-block&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-show-multiple-tags-together\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ShowMultipleTagsTogetherComponent {}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-block gap=\&quot;xs\&quot;&gt;\n  &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;In progress\&quot;&gt;&lt;/goa-badge&gt;\n  &lt;goa-badge version=\&quot;2\&quot; type=\&quot;important\&quot; content=\&quot;Priority\&quot;&gt;&lt;/goa-badge&gt;\n  &lt;goa-badge version=\&quot;2\&quot; type=\&quot;emergency\&quot; content=\&quot;Past deadline\&quot;&gt;&lt;/goa-badge&gt;\n&lt;/goa-block&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-show-multiple-tags-together" class="example-title">Show multiple tags together</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabBlock gap=&quot;xs&quot;&gt;
+      &lt;GoabBadge type=&quot;information&quot; content=&quot;In progress&quot; /&gt;
+      &lt;GoabBadge type=&quot;important&quot; content=&quot;Priority&quot; /&gt;
+      &lt;GoabBadge type=&quot;emergency&quot; content=&quot;Past deadline&quot; /&gt;
+    &lt;/GoabBlock&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-block gap=&quot;xs&quot;&gt;
+  &lt;goab-badge type=&quot;information&quot; content=&quot;In progress&quot;&gt;&lt;/goab-badge&gt;
+  &lt;goab-badge type=&quot;important&quot; content=&quot;Priority&quot;&gt;&lt;/goab-badge&gt;
+  &lt;goab-badge type=&quot;emergency&quot; content=&quot;Past deadline&quot;&gt;&lt;/goab-badge&gt;
+&lt;/goab-block&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-block gap=&quot;xs&quot;&gt;
+  &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;In progress&quot;&gt;&lt;/goa-badge&gt;
+  &lt;goa-badge version=&quot;2&quot; type=&quot;important&quot; content=&quot;Priority&quot;&gt;&lt;/goa-badge&gt;
+  &lt;goa-badge version=&quot;2&quot; type=&quot;emergency&quot; content=&quot;Past deadline&quot;&gt;&lt;/goa-badge&gt;
+&lt;/goa-block&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
       .code-snippet {
         border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
         border-radius: var(--goa-border-radius-m, 4px);
@@ -4432,19 +4287,164 @@ searchBtn.addEventListener(&quot;_click&quot;, () =&gt; {
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="2puq6l" prefix="r27" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Show multiple tags together&quot;],&quot;slug&quot;:[0,&quot;show-multiple-tags-together&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabBlock,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ShowMultipleTagsTogether() {\n  return (\n    &lt;GoabBlock gap=\&quot;xs\&quot;&gt;\n      &lt;GoabBadge type=\&quot;information\&quot; content=\&quot;In progress\&quot; /&gt;\n      &lt;GoabBadge type=\&quot;important\&quot; content=\&quot;Priority\&quot; /&gt;\n      &lt;GoabBadge type=\&quot;emergency\&quot; content=\&quot;Past deadline\&quot; /&gt;\n    &lt;/GoabBlock&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-block gap=\&quot;xs\&quot;&gt;\n  &lt;goab-badge type=\&quot;information\&quot; content=\&quot;In progress\&quot;&gt;&lt;/goab-badge&gt;\n  &lt;goab-badge type=\&quot;important\&quot; content=\&quot;Priority\&quot;&gt;&lt;/goab-badge&gt;\n  &lt;goab-badge type=\&quot;emergency\&quot; content=\&quot;Past deadline\&quot;&gt;&lt;/goab-badge&gt;\n&lt;/goab-block&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-show-multiple-tags-together\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ShowMultipleTagsTogetherComponent {}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-block gap=\&quot;xs\&quot;&gt;\n  &lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;In progress\&quot;&gt;&lt;/goa-badge&gt;\n  &lt;goa-badge version=\&quot;2\&quot; type=\&quot;important\&quot; content=\&quot;Priority\&quot;&gt;&lt;/goa-badge&gt;\n  &lt;goa-badge version=\&quot;2\&quot; type=\&quot;emergency\&quot; content=\&quot;Past deadline\&quot;&gt;&lt;/goa-badge&gt;\n&lt;/goa-block&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-show-multiple-tags-together" class="example-title">Show multiple tags together</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabBlock gap=&quot;xs&quot;&gt;
-      &lt;GoabBadge type=&quot;information&quot; content=&quot;In progress&quot; /&gt;
-      &lt;GoabBadge type=&quot;important&quot; content=&quot;Priority&quot; /&gt;
-      &lt;GoabBadge type=&quot;emergency&quot; content=&quot;Past deadline&quot; /&gt;
-    &lt;/GoabBlock&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-block gap=&quot;xs&quot;&gt;
-  &lt;goab-badge type=&quot;information&quot; content=&quot;In progress&quot;&gt;&lt;/goab-badge&gt;
-  &lt;goab-badge type=&quot;important&quot; content=&quot;Priority&quot;&gt;&lt;/goab-badge&gt;
-  &lt;goab-badge type=&quot;emergency&quot; content=&quot;Past deadline&quot;&gt;&lt;/goab-badge&gt;
-&lt;/goab-block&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-block gap=&quot;xs&quot;&gt;
-  &lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;In progress&quot;&gt;&lt;/goa-badge&gt;
-  &lt;goa-badge version=&quot;2&quot; type=&quot;important&quot; content=&quot;Priority&quot;&gt;&lt;/goa-badge&gt;
-  &lt;goa-badge version=&quot;2&quot; type=&quot;emergency&quot; content=&quot;Past deadline&quot;&gt;&lt;/goa-badge&gt;
-&lt;/goa-block&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="tVeWu" prefix="r27" component-url="/ui-components/pr-preview/pr-3835/_astro/ExamplePreview.Ce27K8J7.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3835/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Show multiple actions in a compact table&quot;],&quot;slug&quot;:[0,&quot;show-multiple-actions-in-a-compact-table&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabBlock,\n  GoabIconButton,\n  GoabTable,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ShowMultipleActionsInACompactTable() {\n  const rows = [\n    { status: \&quot;information\&quot;, statusText: \&quot;In progress\&quot;, name: \&quot;Darlene Robertson\&quot;, id: 45904 },\n    { status: \&quot;default\&quot;, statusText: \&quot;Inactive\&quot;, name: \&quot;Floyd Miles\&quot;, id: 47838 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Kathryn Murphy\&quot;, id: 34343 },\n    { status: \&quot;important\&quot;, statusText: \&quot;Recent\&quot;, name: \&quot;Annette Black\&quot;, id: 89897 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Esther Howard\&quot;, id: 12323 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Jane Cooper\&quot;, id: 56565 },\n  ];\n\n  return (\n    &lt;GoabTable width=\&quot;100%\&quot;&gt;\n      &lt;thead&gt;\n        &lt;tr&gt;\n          &lt;th&gt;Status&lt;/th&gt;\n          &lt;th&gt;Name&lt;/th&gt;\n          &lt;th style={{ textAlign: \&quot;right\&quot; }}&gt;Id Number&lt;/th&gt;\n          &lt;th style={{ width: \&quot;1%\&quot;, whiteSpace: \&quot;nowrap\&quot; }}&gt;Edit | Flag | Send&lt;/th&gt;\n        &lt;/tr&gt;\n      &lt;/thead&gt;\n      &lt;tbody&gt;\n        {rows.map((row) =&gt; (\n          &lt;tr key={row.id}&gt;\n            &lt;td&gt;\n              &lt;GoabBadge\n                type={row.status as \&quot;information\&quot; | \&quot;default\&quot; | \&quot;success\&quot; | \&quot;important\&quot;}\n                content={row.statusText}\n                icon={false}\n              /&gt;\n            &lt;/td&gt;\n            &lt;td&gt;{row.name}&lt;/td&gt;\n            &lt;td className=\&quot;goa-table-number-column\&quot;&gt;{row.id}&lt;/td&gt;\n            &lt;td&gt;\n              &lt;GoabBlock&gt;\n                &lt;GoabIconButton size=\&quot;small\&quot; icon=\&quot;pencil\&quot; ariaLabel=\&quot;Edit\&quot; /&gt;\n                &lt;GoabIconButton size=\&quot;small\&quot; icon=\&quot;flag\&quot; ariaLabel=\&quot;Flag\&quot; /&gt;\n                &lt;GoabIconButton size=\&quot;small\&quot; icon=\&quot;mail\&quot; ariaLabel=\&quot;Send\&quot; /&gt;\n              &lt;/GoabBlock&gt;\n            &lt;/td&gt;\n          &lt;/tr&gt;\n        ))}\n      &lt;/tbody&gt;\n    &lt;/GoabTable&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-table width=\&quot;100%\&quot;&gt;\n  &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Status&lt;/th&gt;\n      &lt;th&gt;Name&lt;/th&gt;\n      &lt;th style=\&quot;text-align: right\&quot;&gt;Id Number&lt;/th&gt;\n      &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;Edit | Flag | Send&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    @for (row of rows; track row.id) {\n    &lt;tr&gt;\n      &lt;td&gt;\n        &lt;goab-badge [type]=\&quot;row.status\&quot; [content]=\&quot;row.statusText\&quot; [icon]=\&quot;false\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;/td&gt;\n      &lt;td&gt;{{ row.name }}&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;{{ row.id }}&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goab-block&gt;\n          &lt;goab-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; ariaLabel=\&quot;Edit\&quot;&gt;&lt;/goab-icon-button&gt;\n          &lt;goab-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; ariaLabel=\&quot;Flag\&quot;&gt;&lt;/goab-icon-button&gt;\n          &lt;goab-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; ariaLabel=\&quot;Send\&quot;&gt;&lt;/goab-icon-button&gt;\n        &lt;/goab-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    }\n  &lt;/tbody&gt;\n&lt;/goab-table&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\ninterface TableRow {\n  status: string;\n  statusText: string;\n  name: string;\n  id: number;\n}\n\n@Component({\n  selector: \&quot;app-show-multiple-actions-compact-table\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ShowMultipleActionsCompactTableComponent {\n  rows: TableRow[] = [\n    { status: \&quot;information\&quot;, statusText: \&quot;In progress\&quot;, name: \&quot;Darlene Robertson\&quot;, id: 45904 },\n    { status: \&quot;dark\&quot;, statusText: \&quot;Inactive\&quot;, name: \&quot;Floyd Miles\&quot;, id: 47838 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Kathryn Murphy\&quot;, id: 34343 },\n    { status: \&quot;important\&quot;, statusText: \&quot;Recent\&quot;, name: \&quot;Annette Black\&quot;, id: 89897 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Esther Howard\&quot;, id: 12323 },\n    { status: \&quot;success\&quot;, statusText: \&quot;Active\&quot;, name: \&quot;Jane Cooper\&quot;, id: 56565 },\n  ];\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-table version=\&quot;2\&quot; width=\&quot;100%\&quot;&gt;\n  &lt;table width=\&quot;100%\&quot;&gt;\n    &lt;thead&gt;\n    &lt;tr&gt;\n      &lt;th&gt;Status&lt;/th&gt;\n      &lt;th&gt;Name&lt;/th&gt;\n      &lt;th style=\&quot;text-align: right\&quot;&gt;Id Number&lt;/th&gt;\n      &lt;th style=\&quot;width: 1%; white-space: nowrap\&quot;&gt;Edit | Flag | Send&lt;/th&gt;\n    &lt;/tr&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;information\&quot; content=\&quot;In progress\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Darlene Robertson&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;45904&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;dark\&quot; content=\&quot;Inactive\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Floyd Miles&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;47838&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Active\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Kathryn Murphy&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;34343&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;important\&quot; content=\&quot;Recent\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Annette Black&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;89897&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Active\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Esther Howard&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;12323&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n      &lt;td&gt;&lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Active\&quot; icon=\&quot;false\&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;\n      &lt;td&gt;Jane Cooper&lt;/td&gt;\n      &lt;td class=\&quot;goa-table-number-column\&quot;&gt;56565&lt;/td&gt;\n      &lt;td&gt;\n        &lt;goa-block&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;pencil\&quot; arialabel=\&quot;Edit\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;flag\&quot; arialabel=\&quot;Flag\&quot;&gt;&lt;/goa-icon-button&gt;\n          &lt;goa-icon-button size=\&quot;small\&quot; icon=\&quot;mail\&quot; arialabel=\&quot;Send\&quot;&gt;&lt;/goa-icon-button&gt;\n        &lt;/goa-block&gt;\n      &lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;/tbody&gt;\n  &lt;/table&gt;\n&lt;/goa-table&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-show-multiple-actions-in-a-compact-table" class="example-title">Show multiple actions in a compact table</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const rows = [
+    { status: &quot;information&quot;, statusText: &quot;In progress&quot;, name: &quot;Darlene Robertson&quot;, id: 45904 },
+    { status: &quot;default&quot;, statusText: &quot;Inactive&quot;, name: &quot;Floyd Miles&quot;, id: 47838 },
+    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Kathryn Murphy&quot;, id: 34343 },
+    { status: &quot;important&quot;, statusText: &quot;Recent&quot;, name: &quot;Annette Black&quot;, id: 89897 },
+    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Esther Howard&quot;, id: 12323 },
+    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Jane Cooper&quot;, id: 56565 },
+  ];</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabTable width=&quot;100%&quot;&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Status&lt;/th&gt;
+          &lt;th&gt;Name&lt;/th&gt;
+          &lt;th style={{ textAlign: &quot;right&quot; }}&gt;Id Number&lt;/th&gt;
+          &lt;th style={{ width: &quot;1%&quot;, whiteSpace: &quot;nowrap&quot; }}&gt;Edit | Flag | Send&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {rows.map((row) =&gt; (
+          &lt;tr key={row.id}&gt;
+            &lt;td&gt;
+              &lt;GoabBadge
+                type={row.status as &quot;information&quot; | &quot;default&quot; | &quot;success&quot; | &quot;important&quot;}
+                content={row.statusText}
+                icon={false}
+              /&gt;
+            &lt;/td&gt;
+            &lt;td&gt;{row.name}&lt;/td&gt;
+            &lt;td className=&quot;goa-table-number-column&quot;&gt;{row.id}&lt;/td&gt;
+            &lt;td&gt;
+              &lt;GoabBlock&gt;
+                &lt;GoabIconButton size=&quot;small&quot; icon=&quot;pencil&quot; ariaLabel=&quot;Edit&quot; /&gt;
+                &lt;GoabIconButton size=&quot;small&quot; icon=&quot;flag&quot; ariaLabel=&quot;Flag&quot; /&gt;
+                &lt;GoabIconButton size=&quot;small&quot; icon=&quot;mail&quot; ariaLabel=&quot;Send&quot; /&gt;
+              &lt;/GoabBlock&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/GoabTable&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">rows: TableRow[] = [
+    { status: &quot;information&quot;, statusText: &quot;In progress&quot;, name: &quot;Darlene Robertson&quot;, id: 45904 },
+    { status: &quot;dark&quot;, statusText: &quot;Inactive&quot;, name: &quot;Floyd Miles&quot;, id: 47838 },
+    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Kathryn Murphy&quot;, id: 34343 },
+    { status: &quot;important&quot;, statusText: &quot;Recent&quot;, name: &quot;Annette Black&quot;, id: 89897 },
+    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Esther Howard&quot;, id: 12323 },
+    { status: &quot;success&quot;, statusText: &quot;Active&quot;, name: &quot;Jane Cooper&quot;, id: 56565 },
+  ];</code></pre></div></div><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-table width=&quot;100%&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Status&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Id Number&lt;/th&gt;
+      &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;Edit | Flag | Send&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    @for (row of rows; track row.id) {
+    &lt;tr&gt;
+      &lt;td&gt;
+        &lt;goab-badge [type]=&quot;row.status&quot; [content]=&quot;row.statusText&quot; [icon]=&quot;false&quot;&gt;&lt;/goab-badge&gt;
+      &lt;/td&gt;
+      &lt;td&gt;{{ row.name }}&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;{{ row.id }}&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goab-block&gt;
+          &lt;goab-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; ariaLabel=&quot;Edit&quot;&gt;&lt;/goab-icon-button&gt;
+          &lt;goab-icon-button size=&quot;small&quot; icon=&quot;flag&quot; ariaLabel=&quot;Flag&quot;&gt;&lt;/goab-icon-button&gt;
+          &lt;goab-icon-button size=&quot;small&quot; icon=&quot;mail&quot; ariaLabel=&quot;Send&quot;&gt;&lt;/goab-icon-button&gt;
+        &lt;/goab-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    }
+  &lt;/tbody&gt;
+&lt;/goab-table&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-table version=&quot;2&quot; width=&quot;100%&quot;&gt;
+  &lt;table width=&quot;100%&quot;&gt;
+    &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Status&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Id Number&lt;/th&gt;
+      &lt;th style=&quot;width: 1%; white-space: nowrap&quot;&gt;Edit | Flag | Send&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;information&quot; content=&quot;In progress&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+      &lt;td&gt;Darlene Robertson&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;45904&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goa-block&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
+        &lt;/goa-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;dark&quot; content=&quot;Inactive&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+      &lt;td&gt;Floyd Miles&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;47838&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goa-block&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
+        &lt;/goa-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Active&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+      &lt;td&gt;Kathryn Murphy&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;34343&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goa-block&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
+        &lt;/goa-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;important&quot; content=&quot;Recent&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+      &lt;td&gt;Annette Black&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;89897&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goa-block&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
+        &lt;/goa-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Active&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+      &lt;td&gt;Esther Howard&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;12323&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goa-block&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
+        &lt;/goa-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;goa-badge version=&quot;2&quot; type=&quot;success&quot; content=&quot;Active&quot; icon=&quot;false&quot;&gt;&lt;/goa-badge&gt;&lt;/td&gt;
+      &lt;td&gt;Jane Cooper&lt;/td&gt;
+      &lt;td class=&quot;goa-table-number-column&quot;&gt;56565&lt;/td&gt;
+      &lt;td&gt;
+        &lt;goa-block&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;pencil&quot; arialabel=&quot;Edit&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;flag&quot; arialabel=&quot;Flag&quot;&gt;&lt;/goa-icon-button&gt;
+          &lt;goa-icon-button size=&quot;small&quot; icon=&quot;mail&quot; arialabel=&quot;Send&quot;&gt;&lt;/goa-icon-button&gt;
+        &lt;/goa-block&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/goa-table&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div><style>
       .code-snippet {
         border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
         border-radius: var(--goa-border-radius-m, 4px);
