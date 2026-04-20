@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   GoabBlock,
   GoabText,
@@ -10,20 +10,8 @@ import {
   GoabWorkSideMenuItem,
 } from "@abgov/react-components";
 
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
-
 export function Bug3548Route() {
   const [open, setOpen] = useState(true);
-
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
 
   function onToggle() {
     setOpen((prev) => !prev);

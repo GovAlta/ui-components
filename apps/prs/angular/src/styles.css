@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../../../../dist/libs/web-components/index.css";
-@import "@abgov/design-tokens-v2/dist/tokens.css";
 
 :root {
   --goa-space-fill: 32ch;
