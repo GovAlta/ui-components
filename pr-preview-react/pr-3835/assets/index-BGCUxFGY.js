@@ -56827,25 +56827,25 @@ function App() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { slot: "header", id: "top", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMicrositeHeader, { type: "alpha", version: "UAT" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeader, { heading: "Testing Playground", url: "/", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeader, { heading: "Testing Playground", url: "/ui-components/pr-preview-react/pr-3835/", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Services", leadingIcon: "apps", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/bug2720", children: "bug2720" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/features/3478", children: "Popover Test" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Dropdown expanding" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "...inside Container" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/bug2720`, children: "bug2720" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}features/3478`, children: "Popover Test" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Dropdown expanding" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "...inside Container" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Popover", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Bug 3450" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Bug 3450" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Bug 3450" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Bug 3450" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "John Smith", leadingIcon: "person-circle", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", children: "Manage account" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", children: "Request new staff account" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", children: "System admin" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#top", className: "interactive", children: "Sign out" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/bugs/3450", children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `${"/ui-components/pr-preview-react/pr-3835/"}bugs/3450`, children: "Super long menu item to test overflow handling lorem ipsum dolor sit amet" })
         ] })
       ] })
     ] }),
@@ -56854,7 +56854,7 @@ function App() {
         GoabWorkSideMenu,
         {
           heading: "Testing Playground",
-          url: "/",
+          url: "/ui-components/pr-preview-react/pr-3835/",
           open: true,
           onNavigate: (path) => navigate(path),
           primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
