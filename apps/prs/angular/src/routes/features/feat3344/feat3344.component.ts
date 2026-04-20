@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   GoabBlock,
   GoabDivider,
@@ -20,9 +20,7 @@ import { GoabTableOnSortDetail, GoabTableOnMultiSortDetail, GoabTableSortEntry }
     GoabTableSortHeader,
   ],
 })
-export class Feat3344Component implements OnInit, OnDestroy {
-  private v2TokensLink: HTMLLinkElement | null = null;
-
+export class Feat3344Component {
   currentSorts: GoabTableSortEntry[] = [];
   multiSorts: GoabTableSortEntry[] = [];
   test3Sorts: GoabTableSortEntry[] = [];
@@ -38,20 +36,6 @@ export class Feat3344Component implements OnInit, OnDestroy {
   singleSorted = [...this.data];
   multiSorted = [...this.data];
   test3Sorted = [...this.data];
-
-  ngOnInit() {
-    this.v2TokensLink = document.createElement("link");
-    this.v2TokensLink.rel = "stylesheet";
-    this.v2TokensLink.href = "/v2-tokens/tokens.css";
-    document.head.appendChild(this.v2TokensLink);
-  }
-
-  ngOnDestroy() {
-    if (this.v2TokensLink) {
-      document.head.removeChild(this.v2TokensLink);
-      this.v2TokensLink = null;
-    }
-  }
 
   onSingleSortChange(detail: GoabTableOnSortDetail) {
     this.currentSorts = [{ column: detail.sortBy, direction: detail.sortDir === 1 ? "asc" : "desc" }];

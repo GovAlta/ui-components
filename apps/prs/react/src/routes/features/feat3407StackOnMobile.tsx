@@ -6,23 +6,9 @@ import {
   GoabText,
 } from "@abgov/react-components";
 
-import { useEffect, type JSX } from "react";
-// ?url suffix tells Vite to resolve the path without injecting the CSS
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
+import { type JSX } from "react";
 
 export function Feat3407StackOnMobileRoute(): JSX.Element {
-  // Dynamically load v2 design tokens only while this page is mounted,
-  // so they don't leak into other routes in the SPA.
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
-
   return (
     <div>
       <GoabText tag="h1" mt="m">

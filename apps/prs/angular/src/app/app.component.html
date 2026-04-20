@@ -15,8 +15,17 @@
         [open]="true"
         (onNavigate)="handleNavigate($event)"
         [primaryContent]="primaryTemplate"
+        [secondaryContent]="tokenToggleTemplate"
       >
       </goab-work-side-menu>
+
+      <ng-template #tokenToggleTemplate>
+        <goab-work-side-menu-item
+          [label]="'Switch to ' + (tokenMode === 'v1' ? 'V2' : 'V1') + ' tokens'"
+          icon="swap-horizontal"
+          [url]="tokenToggleUrl"
+        ></goab-work-side-menu-item>
+      </ng-template>
 
       <ng-template #primaryTemplate>
         <goab-work-side-menu-item

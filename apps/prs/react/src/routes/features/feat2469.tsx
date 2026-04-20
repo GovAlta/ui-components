@@ -1,4 +1,4 @@
-import { JSX, useState, useEffect } from "react";
+import { JSX, useState } from "react";
 import {
   GoabButton,
   GoabFormItem,
@@ -9,7 +9,6 @@ import {
 } from "@abgov/react-components";
 
 import { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
 type DataTableFields = {
   firstName: string;
@@ -32,44 +31,6 @@ function generateFakeData(numRows: number): DataTableFields[] {
 }
 
 export function Feat2469Route(): JSX.Element {
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-
-    const deletedRules: Array<{ sheet: CSSStyleSheet; index: number; cssText: string }> =
-      [];
-
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss) => {
-        if (ss.ownerNode === link) return;
-        try {
-          for (let i = ss.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss, index: i, cssText: rule.cssText });
-              ss.deleteRule(i);
-            }
-          }
-        } catch (e) {
-          // skip cross-origin sheets
-        }
-      });
-    };
-
-    return () => {
-      link.remove();
-      deletedRules.forEach(({ sheet, index, cssText }) => {
-        try {
-          sheet.insertRule(cssText, Math.min(index, sheet.cssRules.length));
-        } catch (e) {
-          // skip if sheet is no longer available
-        }
-      });
-    };
-  }, []);
-
   const smallDrawerControlSet = (
     <div key={`key=${Date.now()}`}>
       <h1 style={{ marginTop: 0 }}>Drawer</h1>

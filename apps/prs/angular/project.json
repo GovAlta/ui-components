@@ -32,10 +32,7 @@
             "output": "/v2-tokens"
           }
         ],
-        "styles": [
-          "apps/prs/angular/src/styles.css",
-          "node_modules/@abgov/design-tokens-v2/dist/tokens.css"
-        ],
+        "styles": ["apps/prs/angular/src/styles.css"],
         "scripts": []
       },
       "configurations": {
