@@ -1,0 +1,75 @@
+/* ============================================================================
+   SURFACE TOKENS - Two-layer elevation system
+   ============================================================================
+   Layer 1: Scale (numbered, the palette)
+   Layer 2: Semantic (named, reference the scale)
+
+   In light mode, most surfaces resolve to white or near-white because
+   shadows handle depth. In dark mode, lighter surfaces = higher elevation.
+   ============================================================================ */
+
+/* Light mode defaults */
+:root {
+  /* Scale tokens */
+  --goa-color-surface-0: var(--goa-color-greyscale-50);       /* #f8f8f8 */
+  --goa-color-surface-50: var(--goa-color-greyscale-white);   /* #ffffff */
+  --goa-color-surface-100: var(--goa-color-greyscale-white);  /* #ffffff */
+  --goa-color-surface-150: var(--goa-color-greyscale-50);     /* #f8f8f8 */
+  --goa-color-surface-200: var(--goa-color-greyscale-50);     /* #f8f8f8 */
+  --goa-color-surface-250: var(--goa-color-greyscale-100);    /* #f2f0f0 */
+  --goa-color-surface-300: var(--goa-color-greyscale-white);  /* #ffffff */
+  --goa-color-surface-350: var(--goa-color-greyscale-100);    /* #f2f0f0 */
+  --goa-color-surface-400: var(--goa-color-greyscale-50);     /* #f8f8f8 */
+
+  /* Semantic tokens - primary surfaces */
+  --goa-color-surface-page: var(--goa-color-surface-0);
+  --goa-color-surface-default: var(--goa-color-surface-50);
+  --goa-color-surface-card: var(--goa-color-surface-100);
+  --goa-color-surface-section: var(--goa-color-surface-150);
+  --goa-color-surface-input: var(--goa-color-surface-200);
+  --goa-color-surface-content-body: var(--goa-color-surface-250);
+  --goa-color-surface-widget: var(--goa-color-surface-300);
+  --goa-color-surface-heading: var(--goa-color-surface-350);
+  --goa-color-surface-item: var(--goa-color-surface-400);
+
+  /* Semantic tokens - additional surfaces */
+  --goa-color-surface-table-data: var(--goa-color-greyscale-white);
+  --goa-color-surface-container-heading: var(--goa-color-greyscale-100);
+  --goa-color-surface-popover: var(--goa-color-greyscale-white);
+  --goa-color-surface-app-header: var(--goa-color-greyscale-white);
+
+  /* Hover tokens */
+  --goa-color-surface-card-hover: var(--goa-color-greyscale-50);
+  --goa-color-surface-widget-hover: var(--goa-color-greyscale-50);
+  --goa-color-surface-heading-hover: var(--goa-color-greyscale-150);
+  --goa-color-surface-item-hover: var(--goa-color-greyscale-100);
+
+  /* Static white - never flips, for white pigment on colored backgrounds */
+  --goa-color-static-white: #ffffff;
+}
+
+/* Dark mode overrides */
+:root[data-theme="dark"] {
+  /* Scale */
+  --goa-color-surface-0: #1a1a1a;
+  --goa-color-surface-50: #1e1e1e;
+  --goa-color-surface-100: #232323;
+  --goa-color-surface-150: #252525;
+  --goa-color-surface-200: #262626;
+  --goa-color-surface-250: #292929;
+  --goa-color-surface-300: #2e2e2e;
+  --goa-color-surface-350: #333333;
+  --goa-color-surface-400: #383838;
+
+  /* Additional surfaces - independent values tuned for dark mode */
+  --goa-color-surface-table-data: #2c2c2c;
+  --goa-color-surface-container-heading: #353535;
+  --goa-color-surface-popover: #242424;
+  --goa-color-surface-app-header: #222222;
+
+  /* Hover tokens */
+  --goa-color-surface-card-hover: #2e2e2e;
+  --goa-color-surface-widget-hover: #3a3a3a;
+  --goa-color-surface-heading-hover: #3f3f3f;
+  --goa-color-surface-item-hover: #444444;
+}
