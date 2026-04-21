@@ -1,0 +1,510 @@
+/* ============================================================================
+   DARK MODE - Attribute-based with system preference fallback
+   ============================================================================
+   Strategy: Override global primitives and let the var() cascade handle
+   component tokens. Only add targeted component overrides where the
+   cascade doesn't reach (hardcoded hex values in tokens.css).
+
+   Activated by [data-theme="dark"] on <html>. JS handles detection:
+   - Default: follows system preference (prefers-color-scheme)
+   - User override: stored in localStorage, set via theme toggle
+   ============================================================================ */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ========================================================================
+     GREYSCALE - Flip the scale
+     ======================================================================== */
+  --goa-color-greyscale-white: #1e1e1e;
+  --goa-color-greyscale-50: #262626;
+  --goa-color-greyscale-100: #2a2a2a;
+  --goa-color-greyscale-150: #333333;
+  --goa-color-greyscale-200: #3d3d3d;
+  --goa-color-greyscale-300: #4d4d4d;
+  --goa-color-greyscale-400: #6a6a6a;
+  --goa-color-greyscale-500: #858585;
+  --goa-color-greyscale-600: #999999;
+  --goa-color-greyscale-700: #b0b0b0;
+  --goa-color-greyscale-800: #b8b8b8;
+  --goa-color-greyscale-black: #d4d4d4;
+
+  /* ========================================================================
+     INTERACTIVE - Lighter blues for dark backgrounds
+     ======================================================================== */
+  --goa-color-interactive-default: #6b9fc9;
+  --goa-color-interactive-hover: #85b5d8;
+  --goa-color-interactive-focus: #6b9fc9;
+  --goa-color-interactive-secondary: #1e2d3d;
+  --goa-color-interactive-secondary-hover: #243648;
+  --goa-color-interactive-visited: #9b8ec9;
+  --goa-color-interactive-error: #c97b7b;
+  --goa-color-interactive-error-hover: #b06060;
+  --goa-color-interactive-error-disabled: #6a4040;
+  --goa-color-interactive-disabled: #4d4d4d;
+
+  /* ========================================================================
+     BRAND
+     ======================================================================== */
+  --goa-color-brand-default: #6bc9b8;
+  --goa-color-brand-dark: #90ddd0;
+  --goa-color-brand-light: #1a3030;
+
+  /* ========================================================================
+     INFO
+     ======================================================================== */
+  --goa-color-info-default: #6b9fc9;
+  --goa-color-info-dark: #5080a0;
+  --goa-color-info-light: #1e2d3d;
+  --goa-color-info-background: #1e2830;
+  --goa-color-info-border: #2a4050;
+  --goa-color-info-text: #8ab4d4;
+  --goa-color-info-text-dark: #a0c8e0;
+  --goa-color-info-text-inverse: #1a2530;
+
+  /* ========================================================================
+     SUCCESS
+     ======================================================================== */
+  --goa-color-success-default: #7eb36a;
+  --goa-color-success-dark: #5a8a48;
+  --goa-color-success-light: #1e2e1a;
+  --goa-color-success-background: #1e3220;
+  --goa-color-success-border: #2a4020;
+  --goa-color-success-text: #90c880;
+  --goa-color-success-text-dark: #a8d8a0;
+  --goa-color-success-text-inverse: #1a2818;
+
+  /* ========================================================================
+     WARNING
+     ======================================================================== */
+  --goa-color-warning-default: #c9a227;
+  --goa-color-warning-dark: #a08020;
+  --goa-color-warning-light: #2e2818;
+  --goa-color-warning-background: #302a16;
+  --goa-color-warning-border: #403518;
+  --goa-color-warning-text: #d4b040;
+  --goa-color-warning-text-dark: #3a2a00; /* darkened from light-mode #4d3700 for better contrast on golden bg */
+
+  /* ========================================================================
+     IMPORTANT
+     ======================================================================== */
+  --goa-color-important-default: #c9a227;
+  --goa-color-important-dark: #a08020;
+  --goa-color-important-light: #2e2818;
+  --goa-color-important-background: #2e2818;
+  --goa-color-important-border: #403518;
+  --goa-color-important-text: #d4b040;
+  --goa-color-important-text-dark: #3a2a00; /* darkened from light-mode #4d3700 for better contrast on golden bg */
+
+  /* ========================================================================
+     EMERGENCY
+     ======================================================================== */
+  --goa-color-emergency-default: #c97b7b;
+  --goa-color-emergency-dark: #c08080;
+  --goa-color-emergency-light: #3d2525; /* brighter for chip error bg */
+  --goa-color-emergency-background: #321e1e;
+  --goa-color-emergency-border: #402828;
+  --goa-color-emergency-text: #d49090;
+  --goa-color-emergency-text-dark: #e0a8a8;
+  --goa-color-emergency-text-inverse: #281a1a;
+
+  /* ========================================================================
+     CRITICAL
+     ======================================================================== */
+  --goa-color-critical-default: #d4d4d4;
+
+  /* ========================================================================
+     SHADOWS - Subtle light glow instead of dark shadows
+     ======================================================================== */
+  --goa-shadow-100: 0px 1px 0px 0px rgba(255, 255, 255, 0.05);
+  --goa-shadow-150: 0px 1px 0px 0px rgba(255, 255, 255, 0.08);
+  --goa-shadow-200: 0px 3px 1px -1px rgba(255, 255, 255, 0.05);
+  --goa-shadow-300: 0px 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --goa-shadow-400: 0px 8px 16px -4px rgba(0, 0, 0, 0.5);
+  --goa-shadow-500: 0px 12px 20px -8px rgba(0, 0, 0, 0.5);
+  --goa-shadow-600: 0px 20px 20px -8px rgba(0, 0, 0, 0.5);
+  --goa-shadow-modal:
+    0px 0px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 40px 0px rgba(0, 0, 0, 0.5);
+  --goa-shadow-raised-light:
+    0px 12px 16px -4px rgba(0, 0, 0, 0.3), 0px 4px 6px -2px rgba(0, 0, 0, 0.15);
+  --goa-shadow-raised-heavy:
+    0px 0px 1px 0px rgba(0, 0, 0, 0.4), 0px 16px 32px -20px rgba(0, 0, 0, 0.5);
+  --goa-shadow-shallow-below: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+  --goa-shadow-shallow-above: 0px -2px 16px 0px rgba(0, 0, 0, 0.3);
+
+  /* ========================================================================
+     OPACITY
+     ======================================================================== */
+  --goa-opacity-background-modal: 70%;
+
+  /* ========================================================================
+     DRAWER
+     ======================================================================== */
+  --goa-drawer-overlay-color: rgba(0, 0, 0, 0.6);
+  --goa-drawer-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3), 0 8px 40px 0 rgba(0, 0, 0, 0.4);
+
+  /* ========================================================================
+     CIRCULAR PROGRESS
+     ======================================================================== */
+  --goa-circular-progress-color-background: rgba(30, 30, 30, 0.9);
+
+  /* ========================================================================
+     HARDCODED TOKEN FIXES
+     These component tokens have hardcoded hex values in tokens.css,
+     so the greyscale cascade doesn't reach them.
+     ======================================================================== */
+
+  /* Input - hardcoded values that don't cascade */
+  --goa-input-color-background-error-hover: #3a1818;
+  --goa-input-color-border-readonly: #3d3d3d;
+
+  /* Radio - hardcoded values */
+  --goa-radio-label-color-disabled: #6a6a6a;
+  --goa-radio-color-bg-error-hover: #3a1818;
+
+  /* Temporary notification */
+  --goa-temporary-notification-color-bg-basic: var(--goa-color-surface-heading);
+
+  /* Link */
+  --goa-link-color-light-visited: #9b8ec9;
+
+  /* Microsite header - alpha/beta badge text needs dark color on amber/blue bg */
+  --goa-microsite-header-alpha-badge-color-text: #4d3700;
+  --goa-microsite-header-beta-badge-color-text: #00527c;
+
+  /* Important subtle badge - warning-text-dark is tuned dark for high-emphasis
+     (golden bg), but that leaves dark-on-dark on the subtle variant's dark
+     amber bg. Point the subtle content at the light amber text token. */
+  --goa-badge-important-subtle-color-content: var(--goa-color-important-text);
+
+  /* Badge - default subtle needs visible separation on dark surfaces */
+  --goa-badge-default-subtle-color-bg: var(--goa-color-surface-heading);
+  --goa-badge-default-subtle-border: inset 0 0 0 1px #4a4a4a;
+
+  /* Callout - content bg: subtle tint, just enough to separate from page */
+  /* Medium emphasis (default - no prefix) */
+  --goa-callout-info-content-bg-color: #1e2830;
+  --goa-callout-success-content-bg-color: #1e2820;
+  --goa-callout-important-content-bg-color: #28251e;
+  --goa-callout-emergency-content-bg-color: #2a1c1c;
+  /* High emphasis - content */
+  --goa-callout-h-info-content-bg-color: #1e2830;
+  --goa-callout-h-success-content-bg-color: #1e2820;
+  --goa-callout-h-important-content-bg-color: #28251e;
+  --goa-callout-h-emergency-content-bg-color: #352020;
+  /* High emphasis - heading bg (midway between muted and bright status colors) */
+  --goa-callout-h-info-heading-bg-color: #386590;
+  --goa-callout-h-success-heading-bg-color: #386030;
+  --goa-callout-h-important-heading-bg-color: #5e4e20;
+  --goa-callout-h-emergency-heading-bg-color: #6e4242;
+  /* Low emphasis */
+  --goa-callout-l-info-content-bg-color: #1e2830;
+  --goa-callout-l-success-content-bg-color: #1e2820;
+  --goa-callout-l-important-content-bg-color: #28251e;
+  --goa-callout-l-emergency-content-bg-color: #352020;
+
+  /* Table - elevate above content card so rows are distinguishable */
+  --goa-table-color-bg-data: var(--goa-color-surface-table-data);
+  --goa-table-color-bg-heading: var(--goa-color-surface-heading);
+  --goa-table-color-bg-heading-hover: var(--goa-color-surface-heading-hover);
+
+  /* Container cards */
+  --goa-container-non-interactive-bg-color: var(--goa-color-surface-widget);
+  --goa-container-non-interactive-heading-bg-color: var(--goa-color-surface-container-heading);
+
+  /* Primary button hover - default #6b9fc9, darken noticeably */
+  --goa-button-primary-hover-color-bg: #4a7a9a;
+
+  /* Secondary button hover bg - interactive.secondary-hover (#243648) is too subtle */
+  --goa-button-secondary-hover-color-bg: #293d50;
+
+  /* Secondary button text - interactive.hover (#5588aa) is too dark for text on dark bg */
+  --goa-button-secondary-color-text: #85b5d8;
+  --goa-button-secondary-hover-color-text: #85b5d8;
+  --goa-button-secondary-focus-color-text: #85b5d8;
+
+  /* Destructive button hover - should go darker like primary, not lighter */
+  --goa-button-primary-destructive-hover-color-bg: #a06060;
+
+  /* Radio disabled - border #b1b1b1 is too bright on dark bg, reads as active */
+  --goa-radio-border-disabled: 1px solid #555555;
+
+  /* Notification banner close button hover - slightly darker than the banner bg */
+  --goa-notification-banner-important-high-close-bg-hover: #a88520;
+  --goa-notification-banner-important-low-close-bg-hover: #a88520;
+  --goa-notification-banner-emergency-high-close-bg-hover: #b06060;
+  --goa-notification-banner-emergency-low-close-bg-hover: #b06060;
+
+  /* Checkbox label - uses input-color-text-secondary (greyscale-800 = #b8b8b8), too muted vs radio which inherits text-default (#d4d4d4) */
+  --goa-checkbox-color-label: var(--goa-color-text-default);
+
+  /* File upload hover/focus - keep blue tint consistent with default state */
+  --goa-file-upload-color-bg-hover: #252d35;
+  --goa-file-upload-color-bg-focus: #252d35;
+
+  /* Disabled button text - slightly more visible on dark backgrounds */
+  --goa-button-secondary-disabled-color-text: #888888;
+  --goa-button-tertiary-disabled-color-text: #888888;
+
+  /* Tertiary button - subtle surface so it reads as a button on dark backgrounds */
+  --goa-button-tertiary-color-bg: var(--goa-color-surface-100);
+  --goa-button-tertiary-hover-color-bg: var(--goa-color-surface-250);
+  --goa-button-tertiary-hover-border: 1px solid #666666;
+
+  /* Interactive containers - NOTE: body bg token exists but component doesn't use it. Needs shadow DOM patch. */
+  --goa-container-interactive-bg-color: var(--goa-color-surface-widget);
+  --goa-container-interactive-heading-bg-color: var(--goa-color-surface-container-heading);
+
+  /* Accordion */
+  --goa-accordion-color-bg-heading: var(--goa-color-surface-heading);
+  --goa-accordion-color-bg-heading-hover: var(--goa-color-surface-heading-hover);
+  --goa-accordion-color-bg-content: var(--goa-color-surface-table-data);
+
+  /* Input fields - subtle surface above page background */
+  --goa-input-color-background-default: var(--goa-color-surface-input);
+  --goa-dropdown-color-bg: var(--goa-color-surface-input);
+
+  /* Radio - match input/checkbox background so circles are visible */
+  --goa-radio-color-bg: var(--goa-color-surface-input);
+
+  /* Native dropdown chevron - hardcoded #333 in shadow DOM, needs light stroke */
+  --goa-dropdown-native-chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='none' stroke='%23999999' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E");
+
+  /* Popover - elevate above page so date picker / dropdowns read as floating */
+  --goa-popover-color-bg: var(--goa-color-surface-popover);
+
+  /* App header - subtle surface above page */
+  --goa-app-header-color-bg: var(--goa-color-surface-app-header);
+
+  /* Footer - subdue links and text so they don't compete with main content */
+  --goa-footer-color-links: #909090;
+  --goa-footer-color-links-hover: #aaaaaa;
+  --goa-footer-color-links-secondary: #808080;
+  --goa-footer-color-links-secondary-hover: #999999;
+
+  /* Accordion hover border - greyscale-black (#d4d4d4) is too bright */
+  --goa-accordion-border-hover: 1px solid #555555;
+  --goa-accordion-divider-hover: 1px solid #555555;
+
+  /* Accordion shadow */
+  --goa-accordion-shadow: 0px 0px 0px 0px transparent;
+
+  /* App header dropdown shadow */
+  --goa-app-header-nav-menu-dropdown-shadow: drop-shadow(0px 12px 16px rgba(0, 0, 0, 0.3))
+    drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.15));
+
+  /* Work side menu account popover */
+  --goa-work-side-menu-account-bg: var(--goa-color-surface-widget);
+  --goa-work-side-menu-account-shadow: 0px 12px 20px -8px rgba(0, 0, 0, 0.5);
+
+  /* Form page custom properties */
+  --task-group-bg: var(--goa-color-surface-section);
+  --app-card-bg: var(--goa-color-surface-app-header);
+  --task-item-border: #3d3d3d;
+  --task-item-hover-bg: #303030;
+  --goa-form-summary-bg: var(--goa-color-surface-section);
+  --case-detail-header-bg: var(--goa-color-surface-card);
+
+  /* Highlighted stat card icons */
+  --dashboard-highlight-icon-bg: #3d1c1c;
+
+  /* Stat card tints - barely perceptible color shifts from the #2e2e2e base */
+  --dashboard-tint-emergency-bg: #322c2c;
+  --dashboard-tint-emergency-hover-bg: #383030;
+  --dashboard-tint-success-bg: #2c322c;
+  --dashboard-tint-success-hover-bg: #303830;
+  --dashboard-tint-info-bg: #2c2c32;
+  --dashboard-tint-info-hover-bg: #303038;
+
+  /* ==========================================================================
+     SURFACE ELEVATION SYSTEM
+     ==========================================================================
+     In light mode, shadows create depth. In dark mode, lighter surfaces do.
+     These overrides establish a proper elevation hierarchy:
+
+     Level 0 - Page/app background (darkest):  #1a1a1a
+     Level 1 - Content card, sidebar:          #232323
+     Level 2 - Widgets, stat cards:            #2a2a2a
+     Level 3 - Items within widgets:           #303030
+     ========================================================================== */
+
+  /* Level 0: Page background - darkest layer */
+  & .app-layout {
+    background-color: var(--goa-color-surface-page);
+  }
+
+  /* Level 1: Main content card - elevated above page */
+  & .desktop-card-container,
+  & .mobile-content-container {
+    background-color: var(--goa-color-surface-card);
+  }
+
+  /* Level 1: Push drawer clip - same elevation as content card */
+  & .push-drawer-clip {
+    background: var(--goa-color-surface-card);
+  }
+
+  /* Level 2: Widgets and stat cards - elevated above content card */
+  & .dashboard-widget,
+  &
+    .dashboard-stat-card:not(.dashboard-stat-card--emergency):not(
+      .dashboard-stat-card--success
+    ):not(.dashboard-stat-card--info) {
+    background: var(--goa-color-surface-widget);
+  }
+
+  /* Level 2: Widget headers - match body (darker header creates "hole" effect) */
+  & .dashboard-widget__header {
+    background: var(--goa-color-surface-widget);
+  }
+
+  /* Level 3: Items within widgets - elevated above widget */
+  & .dashboard-queue-card,
+  & .dashboard-recent-item {
+    background: var(--goa-color-surface-item);
+  }
+
+  /* Level 3: Hover states */
+  & .dashboard-queue-card:hover,
+  & .dashboard-recent-item:hover {
+    background: var(--goa-color-surface-item-hover);
+  }
+
+  & .dashboard-stat-card--clickable:hover {
+    background: var(--goa-color-surface-item);
+  }
+
+  /* Stat card tint borders and icon backgrounds */
+  & .dashboard-stat-card--emergency {
+    border-color: #4a3535;
+  }
+
+  & .dashboard-stat-card--emergency .dashboard-stat-card__icon {
+    background: #4a3030;
+  }
+
+  & .dashboard-stat-card--success {
+    border-color: #354a35;
+  }
+
+  & .dashboard-stat-card--success .dashboard-stat-card__icon {
+    background: #304a30;
+  }
+
+  & .dashboard-stat-card--info {
+    border-color: #35354a;
+  }
+
+  & .dashboard-stat-card--info .dashboard-stat-card__icon {
+    background: #30304a;
+  }
+
+  /* Expandable list items - elevated surface matching container cards */
+  & .expandable-list__item {
+    background: var(--goa-color-surface-widget);
+  }
+
+  & .expandable-list__header {
+    background-color: var(--goa-color-surface-widget);
+    border-radius: var(--goa-border-radius-xl);
+  }
+
+  & .expandable-list__item--expanded .expandable-list__header {
+    border-radius: var(--goa-border-radius-xl) var(--goa-border-radius-xl) 0 0;
+  }
+
+  & .expandable-list__header:hover {
+    background-color: var(--goa-color-surface-widget-hover);
+  }
+
+  & .expandable-list__content {
+    background-color: var(--goa-color-surface-content-body);
+    border-radius: 0 0 var(--goa-border-radius-xl) var(--goa-border-radius-xl);
+  }
+
+  /* Timeline items - elevated surface */
+  & .timeline-page__item,
+  & .timeline__item {
+    background: var(--goa-color-surface-widget);
+  }
+
+  /* Comment card - subtle surface so it reads as a card, not just a border */
+  & .page__comments_single {
+    background: var(--goa-color-surface-input);
+  }
+
+  /* Page header/footer - match content card level */
+  & .page-header,
+  & .page-footer,
+  & .desktop-card-container .page-header {
+    background-color: var(--goa-color-surface-card);
+  }
+
+  /* Error page icon wrapper */
+  & .error-page-icon-wrapper {
+    background-color: var(--goa-color-surface-content-body);
+  }
+
+  /* Stat card icons - subtle elevation above card surface */
+  & .dashboard-stat-card__icon {
+    background: var(--goa-color-surface-heading);
+  }
+
+  /* ==========================================================================
+     SCROLL SHADOW OVERRIDES
+     ==========================================================================
+     Light mode uses rgba(0,0,0,0.08) which is invisible on dark backgrounds.
+     Use stronger black gradients for dark mode.
+     ========================================================================== */
+
+  /* Horizontal scroll shadows (data table) */
+  & .scroll-container-shadow--left {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+  }
+
+  & .scroll-container-shadow--right {
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+  }
+
+  /* Page header/footer scroll shadows */
+  & .page-header::after {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+  }
+
+  & .page-footer::before {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+  }
+
+  /* Notification header/footer shadows */
+  & .notification-header::after {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+  }
+
+  & .notification-footer::before {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+  }
+
+  /* Body background - @abgov/style hardcodes background:#fff on body */
+  & body {
+    background: var(--goa-color-greyscale-white);
+  }
+
+  /* Input leading icons - tone down from full white. Trailing icon buttons keep default for interactivity. */
+  & goa-input {
+    --fill-color: #aaaaaa;
+  }
+
+  /* Icon button hover bg - greyscale-100 (#2a2a2a) is too close to input bg (#262626) */
+  --goa-icon-button-default-hover-color-bg: #3a3a3a;
+  --goa-icon-button-dark-hover-color-bg: #3a3a3a;
+
+  /* Footer text (spans for copyright/description) - match subdued link color */
+  & goa-app-footer {
+    color: #909090;
+  }
+
+  /* Popover shadow */
+  & goa-work-side-menu {
+    --goa-popover-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  }
+}

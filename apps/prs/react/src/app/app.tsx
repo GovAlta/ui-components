@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useState, useCallback, type CSSProperties } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import {
   GoabAppFooter,
@@ -12,7 +12,16 @@ import {
 } from "@abgov/react-components";
 
 import "@abgov/style";
-import "@abgov/design-tokens-v2/dist/tokens.css"; // Production tokens. Comment out to test with legacy V1 token values.
+
+// Dark mode spike: loads V2 tokens + surface tokens + dark theme overrides in guaranteed order.
+// Comment out to disable dark mode entirely.
+import "../dark-mode-overrides.css";
+
+// Respect system preference on first load if no theme has been set.
+if (!document.documentElement.getAttribute("data-theme")) {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+}
 
 const appContentStyle: CSSProperties = {
   display: "flex",
@@ -22,6 +31,15 @@ const appContentStyle: CSSProperties = {
 
 export function App() {
   const navigate = useNavigate();
+  const [isDark, setIsDark] = useState(
+    () => document.documentElement.getAttribute("data-theme") === "dark",
+  );
+
+  const toggleTheme = useCallback(() => {
+    const next = isDark ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    setIsDark(!isDark);
+  }, [isDark]);
 
   return (
     <GoabOneColumnLayout>
@@ -63,7 +81,13 @@ export function App() {
           heading="Testing Playground"
           url="/"
           open={true}
-          onNavigate={(path: string) => navigate(path)}
+          onNavigate={(path: string) => {
+            if (path === "#toggle-theme") {
+              toggleTheme();
+            } else {
+              navigate(path);
+            }
+          }}
           primaryContent={
             <>
               <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
@@ -385,6 +409,13 @@ export function App() {
               </GoabWorkSideMenuGroup>
               <GoabWorkSideMenuItem icon="list" label="Everything" url="/everything" />
             </>
+          }
+          secondaryContent={
+            <GoabWorkSideMenuItem
+              icon={isDark ? "sunny" : "moon"}
+              label={isDark ? "Light mode" : "Dark mode"}
+              url="#toggle-theme"
+            />
           }
         />
         <section style={{ padding: "30px", width: "100%" }} role="main">

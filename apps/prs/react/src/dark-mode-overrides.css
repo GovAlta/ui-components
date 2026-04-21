@@ -1,0 +1,17 @@
+/*
+ * DARK MODE + V2 TOKEN OVERRIDES
+ *
+ * Load order matters:
+ *   1. @abgov/style (imported in app.tsx) loads V1 tokens
+ *   2. design-tokens-v2 overrides with V2 values
+ *   3. surface-tokens.css defines the surface elevation system
+ *   4. dark-theme.css overrides for dark mode
+ *
+ * To disable: comment out the import of this file in app.tsx
+ *
+ * To toggle dark mode, use the moon/sun icon at the bottom of the side menu.
+ */
+
+@import "@abgov/design-tokens-v2/dist/tokens.css";
+@import "./surface-tokens.css";
+@import "./dark-theme.css";
