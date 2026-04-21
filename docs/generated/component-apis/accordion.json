@@ -19,6 +19,13 @@
           "description": "Sets the heading size of the accordion container heading."
         },
         {
+          "name": "headingType",
+          "type": "GoabAccordionHeadingType",
+          "required": false,
+          "default": "normal",
+          "description": "Sets the accordion style variant."
+        },
+        {
           "name": "iconPosition",
           "type": "GoabAccordionIconPosition",
           "required": false,
@@ -94,6 +101,12 @@
       ],
       "slots": [
         {
+          "name": "actions",
+          "type": "ReactNode",
+          "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
+          "required": false
+        },
+        {
           "name": "headingContent",
           "type": "ReactNode",
           "description": "Sets content rendered within the accordion heading, alongside the heading text.",
@@ -116,6 +129,13 @@
           "required": false,
           "default": null,
           "description": "Sets the heading size of the accordion container heading."
+        },
+        {
+          "name": "headingType",
+          "type": "GoabAccordionHeadingType",
+          "required": false,
+          "default": null,
+          "description": "Sets the accordion style variant."
         },
         {
           "name": "iconPosition",
@@ -193,6 +213,12 @@
       ],
       "slots": [
         {
+          "name": "actions",
+          "type": "TemplateRef",
+          "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
+          "required": false
+        },
+        {
           "name": "headingContent",
           "type": "TemplateRef",
           "description": "Sets content rendered within the accordion heading, alongside the heading text.",
@@ -208,6 +234,18 @@
           "required": true,
           "default": "",
           "description": "Sets the heading text."
+        },
+        {
+          "name": "heading-type",
+          "type": "\"normal\" | \"filled\"",
+          "typeLabel": "GoabAccordionHeadingType",
+          "values": [
+            "normal",
+            "filled"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": "Sets the accordion style variant. @default \"normal\""
         },
         {
           "name": "headingsize",
@@ -312,6 +350,11 @@
         }
       ],
       "slots": [
+        {
+          "name": "actions",
+          "description": "Sets content rendered in the accordion heading, right-aligned before the expand/collapse icon.",
+          "required": false
+        },
         {
           "name": "headingcontent",
           "description": "Sets content rendered within the accordion heading, alongside the heading text.",
