@@ -1,0 +1,44 @@
+<goab-text tag="h1" mb="m">Bug 3854 - Work Side Menu without extra sections</goab-text>
+<goab-text mb="xl">
+  This test page renders a Work Side Menu with only primary content. Confirm the
+  following:
+  <ul>
+    <li>The primary menu is visible.</li>
+    <li>The secondary and account menu is hidden.</li>
+  </ul>
+</goab-text>
+
+<div
+  style="
+    max-width: 20rem;
+    border: 1px solid #ddd;
+    min-height: 28rem;
+    --goa-work-side-menu-height: 400px;
+  "
+>
+  <goab-work-side-menu
+    heading="Primary-only menu"
+    url="/bugs/3854"
+    [open]="true"
+    (onNavigate)="handleNavigate($event)"
+    [primaryContent]="primaryContent"
+  ></goab-work-side-menu>
+</div>
+
+<ng-template #primaryContent>
+  <goab-work-side-menu-item
+    icon="home"
+    label="Dashboard"
+    url="/bugs/3854"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    icon="list"
+    label="Cases"
+    url="/bugs/3854"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    icon="settings"
+    label="Settings"
+    url="/bugs/3854"
+  ></goab-work-side-menu-item>
+</ng-template>

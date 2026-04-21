@@ -27,15 +27,21 @@ import { NgTemplateOutlet } from "@angular/common";
         (_toggle)="_onToggle()"
         (_navigate)="_onNavigate($event)"
       >
-        <div slot="primary">
-          <ng-container [ngTemplateOutlet]="primaryContent"></ng-container>
-        </div>
-        <div slot="secondary">
-          <ng-container [ngTemplateOutlet]="secondaryContent"></ng-container>
-        </div>
-        <div slot="account">
-          <ng-container [ngTemplateOutlet]="accountContent"></ng-container>
-        </div>
+        @if (primaryContent) {
+          <div slot="primary">
+            <ng-container [ngTemplateOutlet]="primaryContent"></ng-container>
+          </div>
+        }
+        @if (secondaryContent) {
+          <div slot="secondary">
+            <ng-container [ngTemplateOutlet]="secondaryContent"></ng-container>
+          </div>
+        }
+        @if (accountContent) {
+          <div slot="account">
+            <ng-container [ngTemplateOutlet]="accountContent"></ng-container>
+          </div>
+        }
       </goa-work-side-menu>
     }
   `,
@@ -58,11 +64,11 @@ export class GoabWorkSideMenu implements OnInit {
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
   /** Template reference for the primary navigation slot content. */
-  @Input() primaryContent!: TemplateRef<any>;
+  @Input() primaryContent!: TemplateRef<unknown>;
   /** Template reference for the secondary navigation slot content. */
-  @Input() secondaryContent!: TemplateRef<any>;
+  @Input() secondaryContent!: TemplateRef<unknown>;
   /** Template reference for the account slot content. */
-  @Input() accountContent!: TemplateRef<any>;
+  @Input() accountContent!: TemplateRef<unknown>;
   /** Emits when the side menu is toggled open or closed. */
   @Output() onToggle = new EventEmitter();
   /** Emits when a navigation link is clicked. Emits the URL as a string. */
