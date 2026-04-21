@@ -1,5 +1,6 @@
 import Accordion from "./Accordion.svelte";
 import AccordionWithHeadingContent from "./AccordionWithHeadingContentWrapper.test.svelte";
+import AccordionWithActions from "./AccordionWithActionsWrapper.test.svelte";
 import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import { it, describe } from "vitest";
 
@@ -31,7 +32,7 @@ describe("Accordion", () => {
     const { container } = render(Accordion, {
       heading: "Title",
       maxwidth: "480px",
-      testid: "accordion"
+      testid: "accordion",
     });
     const elm = container.querySelector("[data-testid=accordion]");
     expect(elm?.getAttribute("style")).toContain("max-width: 480px;");
@@ -68,6 +69,18 @@ describe("Accordion", () => {
     });
   });
 
+  it("does not render the actions slot container when actions slot is empty", async () => {
+    const { container } = render(Accordion, { heading: "Title" });
+    const actionsDiv = container.querySelector("summary .actions");
+    expect(actionsDiv).toBeNull();
+  });
+
+  it("renders the actions slot container when actions slot content exists", async () => {
+    const { queryByTestId } = render(AccordionWithActions);
+    const actionsButton = queryByTestId("actions-button");
+    expect(actionsButton).toBeTruthy();
+  });
+
   it("handle accessibility features", async () => {
     const { container } = render(Accordion, {
       heading: "Title",
@@ -77,7 +90,9 @@ describe("Accordion", () => {
     const summary = container.querySelector("summary");
     expect(summary?.getAttribute("aria-expanded")).toBe("false");
     expect(summary?.getAttribute("aria-controls")).length.greaterThan(0);
-    const accordionId = summary?.getAttribute("aria-controls")?.split("-content")[0]; // generate random id
+    const accordionId = summary
+      ?.getAttribute("aria-controls")
+      ?.split("-content")[0]; // generate random id
     expect(summary?.getAttribute("aria-controls")).toBe(
       `${accordionId}-content`,
     );

@@ -33,8 +33,8 @@ export function DocsAccordionRoute() {
 
       <h3>Basic</h3>
       <GoabAccordion heading="What documents do I need?">
-        You will need to provide proof of identity, proof of address,
-        and any relevant supporting documentation.
+        You will need to provide proof of identity, proof of address, and any relevant
+        supporting documentation.
       </GoabAccordion>
 
       <h3>Open by default</h3>
@@ -77,11 +77,14 @@ export function DocsAccordionRoute() {
       <h2>Examples</h2>
 
       <h3>Expand or collapse part of a form</h3>
-      <GoabText as="h3" mt="none" mb="m">Review your application</GoabText>
+      <GoabText as="h3" mt="none" mb="m">
+        Review your application
+      </GoabText>
 
       <GoabAccordion
         heading="Referral details"
-        headingContent={<GoabBadge type="important" content="Updated" />}>
+        headingContent={<GoabBadge type="important" content="Updated" />}
+      >
         <dl className="accordion-example">
           <dt>Date of referral</dt>
           <dd>January 27, 2021</dd>
@@ -104,7 +107,12 @@ export function DocsAccordionRoute() {
       </GoabAccordion>
 
       <h3>Hide and show many sections of information</h3>
-      <GoabButton type="tertiary" size="compact" mb="m" onClick={() => expandOrCollapseAll()}>
+      <GoabButton
+        type="tertiary"
+        size="compact"
+        mb="m"
+        onClick={() => expandOrCollapseAll()}
+      >
         {expandedAll ? "Hide all sections" : "Show all sections"}
       </GoabButton>
 
@@ -123,8 +131,8 @@ export function DocsAccordionRoute() {
         headingSize="medium"
         onChange={(open) => updateAccordion(2, open)}
       >
-        You will need to verify your identity through our two factor
-        authentication in addition to the digital signature.
+        You will need to verify your identity through our two factor authentication in
+        addition to the digital signature.
       </GoabAccordion>
 
       <GoabAccordion
@@ -133,9 +141,9 @@ export function DocsAccordionRoute() {
         headingSize="medium"
         onChange={(open) => updateAccordion(3, open)}
       >
-        Yes, you can see the status of your application on the main service
-        dashboard when you login. You will receive updates and notifications in
-        your email as your request progresses.
+        Yes, you can see the status of your application on the main service dashboard when
+        you login. You will receive updates and notifications in your email as your
+        request progresses.
       </GoabAccordion>
 
       <GoabAccordion
@@ -147,6 +155,58 @@ export function DocsAccordionRoute() {
         Yes, our digital service is designed with accessibility in mind.{" "}
         <a href="#">More information on accessibility.</a>
       </GoabAccordion>
+
+      <GoabAccordion heading="What documents do I need?" headingType="filled">
+        You will need to provide proof of identity, proof of address, and any relevant
+        supporting documentation.
+      </GoabAccordion>
+
+      <GoabAccordion
+        heading="Actions with button and badge"
+        secondaryText="Right icon"
+        iconPosition="right"
+        actions={
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <GoabBadge type="important" content="3" />
+            <GoabButton type="tertiary" size="compact">
+              View all
+            </GoabButton>
+          </div>
+        }
+      >
+        <GoabText>
+          This example mixes badges and controls inside the actions slot.
+        </GoabText>
+      </GoabAccordion>
+
+      <div style={{ marginTop: "2rem", width: "10%" }}>
+        <h2>Benji</h2>
+        <GoabAccordion
+          heading="Randall Sanford"
+          headingContent={<GoabBadge type="success" content="Accepted" />}
+          actions={
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <GoabButton type="tertiary" size="compact">
+                1 Comment(s)
+              </GoabButton>
+              <GoabButton type="tertiary" size="compact">
+                View
+              </GoabButton>
+            </div>
+          }
+        >
+          <dl className="accordion-example">
+            <dt>Date of referral</dt>
+            <dd>January 27, 2021</dd>
+            <dt>Work safety concerns</dt>
+            <dd>None</dd>
+            <dt>Type of referral</dt>
+            <dd>Word of mouth, internet search</dd>
+            <dt>Intake received from another site</dt>
+            <dd>Yes</dd>
+          </dl>
+        </GoabAccordion>
+      </div>
     </div>
   );
 }
