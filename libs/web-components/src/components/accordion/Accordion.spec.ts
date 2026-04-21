@@ -1,5 +1,6 @@
 import Accordion from "./Accordion.svelte";
 import AccordionWithHeadingContent from "./AccordionWithHeadingContentWrapper.test.svelte";
+import AccordionWithActions from "./AccordionWithActionsWrapper.test.svelte";
 import { fireEvent, render, waitFor } from "@testing-library/svelte";
 import { it, describe } from "vitest";
 
@@ -66,6 +67,19 @@ describe("Accordion", () => {
     await waitFor(() => {
       expect(handler).toBeCalled();
     });
+  });
+
+  it("renders the actions slot container in the summary", async () => {
+    const { container } = render(Accordion, { heading: "Title" });
+    const actionsDiv = container.querySelector("summary .actions");
+    expect(actionsDiv).toBeTruthy();
+  });
+
+  it("renders the actions slot container inside the summary", async () => {
+    const { container } = render(Accordion, { heading: "Title" });
+    const summary = container.querySelector("summary");
+    const actionsDiv = summary?.querySelector(".actions");
+    expect(actionsDiv).toBeTruthy();
   });
 
   it("handle accessibility features", async () => {

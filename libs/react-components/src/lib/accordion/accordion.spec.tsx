@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import { GoabBadge } from "../badge/badge";
+import { GoabButton } from "../button/button";
 
 import { GoabAccordion } from "./accordion";
 
@@ -20,6 +21,7 @@ describe("Accordion", () => {
         heading="The heading"
         secondaryText="Secondary Text"
         open
+        type="filled"
         headingContent={<GoabBadge type="success" content="test-badge"></GoabBadge>}
         maxWidth="480px"
       >
@@ -30,17 +32,26 @@ describe("Accordion", () => {
     const headingContent = el?.querySelector("[slot='headingcontent']");
     expect(el?.getAttribute("secondarytext")).toBe("Secondary Text");
     expect(el?.getAttribute("open")).toBe("true");
+    expect(el?.getAttribute("type")).toBe("filled");
     const badge = headingContent?.querySelector("goa-badge");
     expect(badge?.getAttribute("content")).toBe("test-badge");
     expect(el?.getAttribute("maxwidth")).toBe("480px");
   });
 
+  it("should render the actions slot", () => {
+    const { baseElement } = render(
+      <GoabAccordion heading="The heading" actions={<GoabButton>Action</GoabButton>}>
+        Content
+      </GoabAccordion>,
+    );
+    const el = baseElement.querySelector("goa-accordion");
+    const actions = el?.querySelector("[slot='actions']");
+    expect(actions).toBeTruthy();
+  });
+
   it("should pass data-grid attributes", () => {
     const { baseElement } = render(
-      <GoabAccordion
-        heading="Test heading"
-        data-grid="row"
-      >
+      <GoabAccordion heading="Test heading" data-grid="row">
         Content
       </GoabAccordion>,
     );

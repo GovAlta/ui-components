@@ -1,0 +1,238 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-spacing-xl);
+    max-width: 72rem;
+  "
+>
+  <goab-text tag="h1"
+    >Feature 3636: Accordion actions slot and list view variant</goab-text
+  >
+  <goab-text>
+    The GoAAccordion component now includes an optional slot for action buttons in the
+    header, as well as a new "list view" variant that features a filled header background
+    and hover state.
+  </goab-text>
+
+  <div style="display: grid; gap: var(--goa-spacing-l)">
+    <goab-text tag="h2">Actions slot examples</goab-text>
+
+    <goab-accordion
+      heading="Actions with button"
+      secondaryText="Left icon"
+      iconPosition="left"
+      [actions]="actionsEdit"
+      [open]="true"
+    >
+      <goab-text>
+        This example places a button in the actions slot while keeping heading text and
+        content as standard body copy.
+      </goab-text>
+    </goab-accordion>
+
+    <ng-template #actionsEdit>
+      <goab-button type="secondary" size="compact">Edit</goab-button>
+    </ng-template>
+
+    <goab-accordion
+      heading="Actions with button and badge"
+      secondaryText="Right icon"
+      iconPosition="right"
+      [actions]="actionsViewAll"
+    >
+      <goab-text>
+        This example mixes badges and controls inside the actions slot.
+      </goab-text>
+    </goab-accordion>
+
+    <ng-template #actionsViewAll>
+      <div style="display: flex; align-items: center; gap: 0.5rem">
+        <goab-badge type="important" content="3"></goab-badge>
+        <goab-button type="tertiary" size="compact">View all</goab-button>
+      </div>
+    </ng-template>
+  </div>
+
+  <div style="display: grid; gap: var(--goa-spacing-l)">
+    <goab-text tag="h2">Heading content examples</goab-text>
+
+    <goab-accordion
+      heading="Heading with badge"
+      [headingContent]="headingBadgeBeta"
+      [actions]="actionsPreview"
+      [open]="true"
+    >
+      <goab-text>
+        The heading content slot can display status indicators such as badges.
+      </goab-text>
+    </goab-accordion>
+
+    <ng-template #headingBadgeBeta>
+      <goab-badge type="information" content="Beta"></goab-badge>
+    </ng-template>
+
+    <ng-template #actionsPreview>
+      <goab-button type="tertiary" size="compact">Preview</goab-button>
+    </ng-template>
+
+    <goab-accordion
+      heading="Heading with multiple badges"
+      [headingContent]="headingBadgesMultiple"
+      [actions]="actionsManage"
+    >
+      <goab-text>
+        Multiple indicators can be grouped in heading content when more context is needed.
+      </goab-text>
+    </goab-accordion>
+
+    <ng-template #headingBadgesMultiple>
+      <div style="display: flex; gap: 0.5rem">
+        <goab-badge type="success" content="Stable"></goab-badge>
+        <goab-badge type="important" content="Requires review"></goab-badge>
+      </div>
+    </ng-template>
+
+    <ng-template #actionsManage>
+      <div style="display: flex; align-items: center; gap: 0.5rem">
+        <goab-badge type="important" content="2"></goab-badge>
+        <goab-button type="tertiary" size="compact">Manage</goab-button>
+      </div>
+    </ng-template>
+  </div>
+
+  <div style="display: grid; gap: var(--goa-spacing-l)">
+    <goab-text tag="h2">Icon position and fixed width examples</goab-text>
+
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: var(--goa-spacing-l);
+      "
+    >
+      <goab-accordion
+        heading="Fixed 24rem, icon left"
+        iconPosition="left"
+        maxWidth="24rem"
+        [actions]="actionsOpen"
+        [open]="true"
+      >
+        <goab-text>
+          A narrow fixed-width accordion using the default icon position.
+        </goab-text>
+      </goab-accordion>
+
+      <ng-template #actionsOpen>
+        <goab-button type="secondary" size="compact">Open</goab-button>
+      </ng-template>
+
+      <goab-accordion
+        heading="Fixed 30rem, icon right"
+        iconPosition="right"
+        maxWidth="30rem"
+        [actions]="actionsDetails"
+        [open]="true"
+      >
+        <goab-text>
+          A wider fixed-width accordion with the icon moved to the right side.
+        </goab-text>
+      </goab-accordion>
+
+      <ng-template #actionsDetails>
+        <div style="display: flex; align-items: center; gap: 0.5rem">
+          <goab-badge type="important" content="4"></goab-badge>
+          <goab-button type="tertiary" size="compact">Details</goab-button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div style="display: grid; gap: var(--goa-spacing-l)">
+    <goab-text tag="h2">Filled/List View Style</goab-text>
+
+    <goab-accordion
+      heading="Randall Sanford"
+      [headingContent]="headingAcceptedRandall"
+      [actions]="actionsCommentViewRandall"
+      [open]="true"
+      [type]="'filled'"
+    >
+      <goab-text>stuff goes in here</goab-text>
+    </goab-accordion>
+
+    <ng-template #headingAcceptedRandall>
+      <goab-badge type="success" content="Accepted"></goab-badge>
+    </ng-template>
+
+    <ng-template #actionsCommentViewRandall>
+      <div style="display: flex; align-items: center; gap: 0.5rem">
+        <goab-button type="tertiary" size="compact">1 Comment(s)</goab-button>
+        <goab-button type="secondary" size="compact">View</goab-button>
+      </div>
+    </ng-template>
+
+    <goab-accordion
+      heading="Virginia Johns"
+      [headingContent]="headingEmailSentVirginia"
+      [actions]="actionsCommentViewVirginia"
+      [open]="true"
+      [type]="'filled'"
+    >
+      <goab-text>stuff goes in here</goab-text>
+    </goab-accordion>
+
+    <ng-template #headingEmailSentVirginia>
+      <goab-badge type="information" content="Email sent"></goab-badge>
+    </ng-template>
+
+    <ng-template #actionsCommentViewVirginia>
+      <div style="display: flex; align-items: center; gap: 0.5rem">
+        <goab-button type="tertiary" size="compact">4 Comment(s)</goab-button>
+        <goab-button type="secondary" size="compact">View</goab-button>
+      </div>
+    </ng-template>
+
+    <goab-accordion
+      heading="Mable Macejkovic"
+      [headingContent]="headingAcceptedMable"
+      [actions]="actionsCommentViewMable"
+      [open]="true"
+      [type]="'filled'"
+    >
+      <goab-text>stuff goes in here</goab-text>
+    </goab-accordion>
+
+    <ng-template #headingAcceptedMable>
+      <goab-badge type="success" content="Accepted"></goab-badge>
+    </ng-template>
+
+    <ng-template #actionsCommentViewMable>
+      <div style="display: flex; align-items: center; gap: 0.5rem">
+        <goab-button type="tertiary" size="compact">3 Comment(s)</goab-button>
+        <goab-button type="secondary" size="compact">View</goab-button>
+      </div>
+    </ng-template>
+
+    <goab-accordion
+      heading="Noah Clark"
+      [headingContent]="headingAcceptedNoah"
+      [actions]="actionsCommentViewNoah"
+      [open]="true"
+      [type]="'filled'"
+    >
+      <goab-text>stuff goes in here</goab-text>
+    </goab-accordion>
+
+    <ng-template #headingAcceptedNoah>
+      <goab-badge type="success" content="Accepted"></goab-badge>
+    </ng-template>
+
+    <ng-template #actionsCommentViewNoah>
+      <div style="display: flex; align-items: center; text-align: center; gap: 0.5rem">
+        <goab-button type="tertiary" size="compact">8 Comment(s)</goab-button>
+        <goab-button type="secondary" size="compact">View</goab-button>
+      </div>
+    </ng-template>
+  </div>
+</div>

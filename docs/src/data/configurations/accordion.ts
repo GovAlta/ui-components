@@ -147,5 +147,77 @@ export const accordionConfigurations: ComponentConfigurations = {
 </goa-accordion>`,
       },
     },
+    {
+      id: "filled",
+      name: "Filled accordion",
+      description: "Single accordion with filled type",
+      code: {
+        react: `<GoabAccordion heading="What documents do I need?" type="filled">
+  You will need to provide proof of identity, proof of address,
+  and any relevant supporting documentation.
+</GoabAccordion>`,
+        angular: `<goab-accordion heading="What documents do I need?" type="filled">
+  You will need to provide proof of identity, proof of address,
+  and any relevant supporting documentation.
+</goab-accordion>`,
+        webComponents: `<goa-accordion heading="What documents do I need?" type="filled">
+  You will need to provide proof of identity, proof of address,
+  and any relevant supporting documentation.
+</goa-accordion>`,
+      },
+    },
+    {
+      id: "actions",
+      name: "Accordion with actions",
+      description: "Accordion with actions slot content",
+      code: {
+        react: `<GoabAccordion
+  heading="Actions with button and badge"
+  secondaryText="Right icon"
+  actions={
+    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+      <GoabBadge type="important" content="3" />
+      <GoabButton type="primary" size="compact">
+        View all
+      </GoabButton>
+    </div>
+  }
+>
+  <GoabText>
+    This example mixes badges and controls inside the actions slot.
+  </GoabText>
+</GoabAccordion>`,
+        angular: `<goab-accordion
+  heading="Actions with button and badge"
+  secondaryText="Right icon"
+  [actions]="actionsViewAll"
+>
+  <goab-text>
+    This example mixes badges and controls inside the actions slot.
+  </goab-text>
+</goab-accordion>
+
+<ng-template #actionsViewAll>
+  <div style="display: flex; align-items: center; gap: 0.5rem">
+    <goab-badge type="important" content="3"></goab-badge>
+    <goab-button type="primary" size="compact">View all</goab-button>
+  </div>
+</ng-template>`,
+        webComponents: `<goa-accordion
+  heading="Actions with button and badge"
+  secondaryText="Right icon"
+>
+  <goa-text>
+    This example mixes badges and controls inside the actions slot.
+  </goa-text>
+  <div slot="actions">
+    <div style="display: flex; align-items: center; gap: 0.5rem">
+      <goa-badge type="important" content="3"></goa-badge>
+      <goa-button type="primary" size="compact">View all</goa-button>
+    </div>
+  </div>
+</goa-accordion>`,
+      },
+    },
   ],
 };

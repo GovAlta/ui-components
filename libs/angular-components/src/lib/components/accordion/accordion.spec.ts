@@ -5,6 +5,7 @@ import { By } from "@angular/platform-browser";
 import {
   GoabAccordionHeadingSize,
   GoabAccordionIconPosition,
+  GoabAccordionType,
 } from "@abgov/ui-components-common";
 
 @Component({
@@ -17,6 +18,7 @@ import {
     [headingSize]="headingSize"
     [headingContent]="headingContent"
     [iconPosition]="iconPosition"
+    [type]="type"
     maxWidth="480px"
   >
     test content
@@ -29,7 +31,20 @@ class TestAccordionComponent {
   open?: boolean;
   headingSize?: GoabAccordionHeadingSize;
   iconPosition?: GoabAccordionIconPosition;
+  type?: GoabAccordionType;
 }
+
+@Component({
+  standalone: true,
+  imports: [GoabAccordion],
+  template: `
+    <goab-accordion heading="Title" [actions]="actionsTemplate">
+      test content
+      <ng-template #actionsTemplate>This is the actions content</ng-template>
+    </goab-accordion>
+  `,
+})
+class TestAccordionWithActionsComponent {}
 
 describe("GoabAccordion", () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
@@ -48,6 +63,7 @@ describe("GoabAccordion", () => {
     component.open = true;
     component.headingSize = "large" as GoabAccordionHeadingSize;
     component.iconPosition = "right" as GoabAccordionIconPosition;
+    component.type = "filled";
 
     fixture.detectChanges();
     tick();
@@ -64,7 +80,33 @@ describe("GoabAccordion", () => {
     expect(accordionElement.getAttribute("headingsize")).toBe("large");
     expect(accordionElement.getAttribute("maxwidth")).toBe("480px");
     expect(accordionElement.getAttribute("iconposition")).toBe("right");
+    expect(accordionElement.getAttribute("type")).toBe("filled");
     const headingContent = accordionElement.querySelector("[slot='headingcontent']");
     expect(headingContent.textContent).toContain("This is the headingcontent");
+  });
+});
+
+describe("GoabAccordion actions slot", () => {
+  let fixture: ComponentFixture<TestAccordionWithActionsComponent>;
+
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GoabAccordion, TestAccordionWithActionsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestAccordionWithActionsComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+  }));
+
+  it("should render the actions slot content", () => {
+    const accordionElement = fixture.debugElement.query(
+      By.css("goa-accordion"),
+    ).nativeElement;
+    const actionsSlot = accordionElement.querySelector("[slot='actions']");
+    expect(actionsSlot).toBeTruthy();
+    expect(actionsSlot.textContent).toContain("This is the actions content");
   });
 });
