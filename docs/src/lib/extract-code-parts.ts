@@ -252,7 +252,7 @@ export function extractAngularCode(tsCode: string | undefined, htmlTemplate: str
   if (tsCode) {
     // Extract CSS from styles array in @Component decorator
     // styles: [`...`] or styles: ["..."]
-    const stylesMatch = tsCode.match(/styles:\s*\[\s*[`"]([\s\S]*?)[`"]\s*\]/);
+    const stylesMatch = tsCode.match(/styles:\s*\[\s*[`"]([\s\S]*?)[`"]\s*,?\s*\]/);
     if (stylesMatch) {
       css = cleanIndentation(stylesMatch[1]);
     }

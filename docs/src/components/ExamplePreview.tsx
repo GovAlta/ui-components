@@ -18,6 +18,8 @@ import DOMPurify from "dompurify";
 // By default, DOMPurify strips all custom elements (tags containing hyphens).
 // Our previews render <goa-*> web components, so we must whitelist them.
 const DOMPURIFY_CONFIG = {
+  ADD_TAGS: ["style"], // allow example-authored <style> blocks through (CSS content still sanitised)
+  FORCE_BODY: true, // parse input as body content so <style> tags are kept in place (not moved to head)
   CUSTOM_ELEMENT_HANDLING: {
     tagNameCheck: /^goa-/, // allow all <goa-*> elements
     attributeNameCheck: () => true, // allow their attributes (type, name, label, etc.)
