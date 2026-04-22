@@ -42,6 +42,10 @@
   export let ml: Spacing = null;
 
   let _rootEl: HTMLElement;
+  // Tracks keyboard-driven focus on the slotted anchor. Bound to a state class
+  // so the visible ring wraps the whole link (icon + text) like it did pre-#3605,
+  // without triggering on mouse click the way :focus-within did.
+  let _keyboardFocused = false;
 
   $: _iconSize = {
     xsmall: "2xsmall", // 12px
@@ -54,6 +58,8 @@
     if (action) {
       _rootEl.addEventListener("click", handleClick);
     }
+    _rootEl.addEventListener("focusin", handleFocusIn);
+    _rootEl.addEventListener("focusout", handleFocusOut);
   })
 
   function handleClick(e: Event) {
@@ -66,6 +72,20 @@
     const host = (_rootEl.getRootNode() as ShadowRoot)?.host as HTMLElement;
     host?.querySelector("a")?.click();
   }
+
+  function handleFocusIn(event: FocusEvent) {
+    // composedPath()[0] returns the actual focused element across the slot
+    // boundary; event.target is retargeted to the host inside shadow DOM.
+    const focused = event.composedPath()[0] as HTMLElement | undefined;
+    if (!focused || focused.tagName !== "A") return;
+    if (focused.matches(":focus-visible")) {
+      _keyboardFocused = true;
+    }
+  }
+
+  function handleFocusOut() {
+    _keyboardFocused = false;
+  }
 </script>
 
 <div
@@ -77,6 +97,7 @@
   class:small={size === "small"}
   class:medium={size === "medium"}
   class:large={size === "large"}
+  class:keyboard-focused={_keyboardFocused}
   bind:this={_rootEl}
   style={styles(calculateMargin(mt, mr, mb, ml))}
   data-testid={testid}
@@ -194,18 +215,21 @@
     color: var(--goa-link-color-light-visited, #9D8EBB) !important;
   }
 
-  /* Focus */
-  .link:focus-within {
+  /* Suppress browser-default rings on the slotted anchor — the container draws
+     the visible ring via .keyboard-focused below. */
+  .link :global(::slotted(a:focus)),
+  .link :global(::slotted(a:focus-visible)) {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Focus ring on the outer container. The .keyboard-focused class is toggled in
+     handleFocusIn / handleFocusOut, gated by the slotted anchor's :focus-visible
+     match. This keeps the pre-#3605 visual (ring wraps icon + text) while only
+     showing on keyboard-driven focus. */
+  .link.keyboard-focused {
     border-radius: var(--goa-link-border-radius-focus, var(--goa-border-radius-s));
     outline: var(--goa-link-border-focus, var(--goa-border-width-l) solid var(--goa-color-interactive-focus));
     outline-offset: var(--goa-link-focus-offset, var(--goa-space-3xs));
-  }
-
-  .link :global(::slotted(a:focus-visible)),
-  .link :global(::slotted(a:focus-within)),
-  .link :global(::slotted(a:focus)) {
-    outline: none !important;
-    outline-offset: 0 !important;
-    box-shadow: none !important;
   }
 </style>

@@ -161,7 +161,7 @@
     color: var(--goa-microsite-header-color-links-hover);
   }
 
-  a:focus {
+  a:focus-visible {
     outline: var(--goa-microsite-header-link-focus-border);
   }
 

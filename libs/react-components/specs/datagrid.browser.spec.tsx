@@ -315,37 +315,38 @@ describe("DataGrid", () => {
       await userEvent.keyboard("{ArrowDown}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify td data-testid="cell-1-idNumber" has style outline:3px solid var(--goa-color-interactive-focus)
+      // Verify td data-testid="cell-1-idNumber" carries the [data-focused] attribute
       const cell1IdNumber = result.container.querySelector('[data-testid="cell-1-idNumber"]') as HTMLElement;
       expect(cell1IdNumber).toBeTruthy();
-      expect(cell1IdNumber.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell1IdNumber.hasAttribute('data-focused')).toBe(true);
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify td data-testid="cell-1-dateStarted" has style outline:3px solid var(--goa-color-interactive-focus)
+      // Verify td data-testid="cell-1-dateStarted" carries the [data-focused] attribute
       const cell1DateStarted = result.container.querySelector('[data-testid="cell-1-dateStarted"]') as HTMLElement;
-      expect(cell1DateStarted?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell1DateStarted?.hasAttribute('data-focused')).toBe(true);
 
-      // verify td data-testid="cell-1-idNumber" has no more style defined on line 129 (no focus)
-      expect(cell1IdNumber?.style.outline).toBe('');
+      // verify td data-testid="cell-1-idNumber" no longer carries [data-focused].
+      // The attribute is removed when nav moves away. Table CSS owns the visual.
+      expect(cell1IdNumber?.hasAttribute('data-focused')).toBe(false);
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify td data-testid="cell-1-dateSubmitted" has inline style outline 3px...
+      // Verify td data-testid="cell-1-dateSubmitted" carries the [data-focused] attribute
       const cell1DateSubmitted = result.container.querySelector('[data-testid="cell-1-dateSubmitted"]') as HTMLElement;
-      expect(cell1DateSubmitted?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell1DateSubmitted?.hasAttribute('data-focused')).toBe(true);
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify td data-testid="cell-1-status" has inline style outline
+      // Verify td data-testid="cell-1-status" carries the [data-focused] attribute
       const cell1Status = result.container.querySelector('[data-testid="cell-1-status"]') as HTMLElement;
-      expect(cell1Status?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell1Status?.hasAttribute('data-focused')).toBe(true);
 
       // Press Arrow Right to move to Actions column (last cell with buttons)
       await userEvent.keyboard("{ArrowRight}");
@@ -433,13 +434,13 @@ describe("DataGrid", () => {
 
       statusCells.forEach(cell => {
         const htmlCell = cell as HTMLElement;
-        if (htmlCell.style.outline?.includes('3px solid')) {
+        if (htmlCell.hasAttribute('data-focused')) {
           focusedStatusCell = htmlCell;
         }
       });
 
       expect(focusedStatusCell).toBeTruthy();
-      expect(focusedStatusCell?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(focusedStatusCell?.hasAttribute('data-focused')).toBe(true);
 
       // Press arrow right to move to Actions column
       await userEvent.keyboard("{ArrowRight}");
@@ -461,7 +462,7 @@ describe("DataGrid", () => {
       // Verify a status cell is still highlighted after deletion
       const remainingStatusCell = result.container.querySelector('td[data-testid*="-status"]') as HTMLElement;
       expect(remainingStatusCell).toBeTruthy();
-      expect(remainingStatusCell?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(remainingStatusCell?.hasAttribute('data-focused')).toBe(true);
     });
 
     it("Using with Container - should navigate with arrow keys", async() => {
@@ -470,42 +471,45 @@ describe("DataGrid", () => {
 
       // Wait for components to fully render
       await new Promise(resolve => setTimeout(resolve, 500));
-      // Click on <strong data-grid="cell-1"
+      // Click on <strong data-grid="cell-1"> to establish focus position.
+      // Per issue #3605, mouse click does NOT apply the focus ring — only keyboard
+      // navigation does. The cell carries no [data-focused] attribute on click.
       const cell1 = result.container.querySelector('[data-grid="cell-1"]') as HTMLElement;
       await userEvent.click(cell1);
       await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cell1?.hasAttribute('data-focused')).toBe(false);
 
-      // Verify that it is highlighted style: outline: 3px...
-      expect(cell1?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
-      // Press Arrow Right
+      // Arrow Right is keyboard input — ring applies on the next cell.
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Verify goa-block data-grid="cell-2" highlighted
       const cell2 = result.container.querySelector('[data-grid="cell-2"]') as HTMLElement;
-      expect(cell2?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell2?.hasAttribute('data-focused')).toBe(true);
 
-      // verify that data-grid="cell-1" no more highlighted
-      expect(cell1?.style.outline).toBe('');
+      // verify that data-grid="cell-1" no longer carries [data-focused].
+      expect(cell1?.hasAttribute('data-focused')).toBe(false);
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Press Enter
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 100));
 
-      // We will have a <div data-testid="open-user">{{message}}</div> which will update message when we press Open button => "Open user 1" for example
-      // Verify the message to test if Open is triggered
-      const openMessage = result.container.querySelector('[data-testid="open-user"]') as HTMLElement;
-      expect(openMessage?.textContent).toBe("Open user 1");
+      // Wait for the Open handler to fire and React to render the message div.
+      // Enter activates the focused button via setTimeout(0) inside DataGrid.focusCell;
+      // a fixed sleep races the macrotask queue under CI load, so poll the assertion.
+      await vi.waitFor(() => {
+        const openMessage = result.container.querySelector('[data-testid="open-user"]') as HTMLElement;
+        expect(openMessage?.textContent).toBe("Open user 1");
+      });
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Verify data-grid="cell-4" highlighted
       const cell4 = result.container.querySelector('[data-grid="cell-4"]') as HTMLElement;
-      expect(cell4?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell4?.hasAttribute('data-focused')).toBe(true);
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
@@ -513,7 +517,7 @@ describe("DataGrid", () => {
 
       // Verify data-grid="cell-5" highlighted
       const cell5 = result.container.querySelector('[data-grid="cell-5"]') as HTMLElement;
-      expect(cell5?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell5?.hasAttribute('data-focused')).toBe(true);
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
@@ -521,7 +525,7 @@ describe("DataGrid", () => {
 
       // Verify data-grid="cell-6" highlighted
       const cell6 = result.container.querySelector('[data-grid="cell-6"]') as HTMLElement;
-      expect(cell6?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell6?.hasAttribute('data-focused')).toBe(true);
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
@@ -529,7 +533,7 @@ describe("DataGrid", () => {
 
       // Verify data-grid="cell-7" highlighted
       const cell7 = result.container.querySelector('[data-grid="cell-7"]') as HTMLElement;
-      expect(cell7?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell7?.hasAttribute('data-focused')).toBe(true);
 
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
@@ -537,7 +541,7 @@ describe("DataGrid", () => {
 
       // Verify data-grid="cell-8" highlighted
       const cell8 = result.container.querySelector('[data-grid="cell-8"]') as HTMLElement;
-      expect(cell8?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(cell8?.hasAttribute('data-focused')).toBe(true);
       // Arrow right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -552,11 +556,12 @@ describe("DataGrid", () => {
 
       // Press Enter
       await userEvent.keyboard("{Enter}");
-      await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify div data-testid="approver-1" has text content = John Doe
-      const approver1 = result.container.querySelector('[data-testid="approver-1"]') as HTMLElement;
-      expect(approver1?.textContent).toBe("John Doe");
+      // Wait for the dropdown selection to flow through to the rendered approver text.
+      await vi.waitFor(() => {
+        const approver1 = result.container.querySelector('[data-testid="approver-1"]') as HTMLElement;
+        expect(approver1?.textContent).toBe("John Doe");
+      });
     })
 
     it("Using with Container (Layout mode) - arrow right from last cell wraps to next row", async () => {
@@ -703,21 +708,20 @@ describe("DataGrid", () => {
       const initialRows = result.container.querySelectorAll('[data-grid="row"]');
       expect(initialRows.length).toBe(2);
 
-      // Click on the first row's name cell to establish focus
+      // Click on the first row's name cell to establish focus position.
+      // Per issue #3605, mouse click establishes focus but does NOT apply the
+      // cell outline — the outline only shows for keyboard-driven focus.
       const firstRowName = result.container.querySelector('[data-testid="name-1"]') as HTMLElement;
       await userEvent.click(firstRowName);
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify first row name is highlighted
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
-
-      // Navigate to the second row using Arrow Down
+      // Navigate to the second row using Arrow Down — keyboard nav applies the outline.
       await userEvent.keyboard("{ArrowDown}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Verify second row name is highlighted
       const secondRowName = result.container.querySelector('[data-testid="name-2"]') as HTMLElement;
-      expect(secondRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(secondRowName?.hasAttribute('data-focused')).toBe(true);
 
       // Add new rows by clicking the button
       const addRowsBtn = result.container.querySelector('[data-testid="add-rows-btn"]') as HTMLElement;
@@ -731,20 +735,17 @@ describe("DataGrid", () => {
       const updatedRows = result.container.querySelectorAll('[data-grid="row"]');
       expect(updatedRows.length).toBe(4);
 
-      // Click on first row's name to re-establish focus
+      // Click on first row's name to re-establish focus position (no outline per #3605).
       await userEvent.click(firstRowName);
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify first row name is highlighted after re-click
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
-
-      // Navigate down through all rows including newly added ones
+      // Navigate down through all rows including newly added ones — keyboard applies outline.
       // Row 1 -> Row 2
       await userEvent.keyboard("{ArrowDown}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
       // Verify second row name is highlighted
-      expect(secondRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(secondRowName?.hasAttribute('data-focused')).toBe(true);
 
       // Row 2 -> Row 3 (newly added)
       await userEvent.keyboard("{ArrowDown}");
@@ -754,7 +755,7 @@ describe("DataGrid", () => {
       const thirdRowName = result.container.querySelector('[data-testid="name-3"]') as HTMLElement;
       expect(thirdRowName).toBeTruthy();
       expect(thirdRowName?.textContent).toBe("New User 3");
-      expect(thirdRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(thirdRowName?.hasAttribute('data-focused')).toBe(true);
 
       // Row 3 -> Row 4 (newly added)
       await userEvent.keyboard("{ArrowDown}");
@@ -764,20 +765,20 @@ describe("DataGrid", () => {
       const fourthRowName = result.container.querySelector('[data-testid="name-4"]') as HTMLElement;
       expect(fourthRowName).toBeTruthy();
       expect(fourthRowName?.textContent).toBe("New User 4");
-      expect(fourthRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(fourthRowName?.hasAttribute('data-focused')).toBe(true);
 
       // Navigate back up to verify bidirectional navigation works
       await userEvent.keyboard("{ArrowUp}"); // Row 4 -> Row 3
       await new Promise(resolve => setTimeout(resolve, 100));
-      expect(thirdRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(thirdRowName?.hasAttribute('data-focused')).toBe(true);
 
       await userEvent.keyboard("{ArrowUp}"); // Row 3 -> Row 2
       await new Promise(resolve => setTimeout(resolve, 100));
-      expect(secondRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(secondRowName?.hasAttribute('data-focused')).toBe(true);
 
       await userEvent.keyboard("{ArrowUp}"); // Row 2 -> Row 1
       await new Promise(resolve => setTimeout(resolve, 100));
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
+      expect(firstRowName?.hasAttribute('data-focused')).toBe(true);
     });
   });
 
