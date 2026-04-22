@@ -46,6 +46,10 @@
   let _bindTimeoutId: any = null; // Track pending grid rebuilds to prevent race conditions
   let _isRebuilding = false; // Flag to prevent navigation during grid rebuild
   let _gridHasFocus = false; // Track if the grid currently has focus (persists through DOM mutations)
+  // Track last input type so cell outline only appears on keyboard-driven focus.
+  // Avoids browser :focus-visible heuristics around the first interaction on a fresh page,
+  // which can match on the first mouse click.
+  let _lastInputType: 'pointer' | 'keyboard' = 'keyboard';
 
   onMount(() => {
     // Delay to allow nested shadow DOMs to fully render before grid setup - menu button is one case vs a lot of nested elements and shadow
@@ -73,6 +77,8 @@
         }
       }
       document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('pointerdown', handlePointerdown, true);
+      document.removeEventListener('keydown', handleGlobalKeydown, true);
     };
   })
 
@@ -121,6 +127,9 @@
 
       sortedCells.forEach(cell => {
         cell.setAttribute('role', 'gridcell'); // for screen reader
+        // Suppress the browser UA default focus outline. The grid applies its own
+        // outline via setFocusedStyle() on keyboard-driven focus only.
+        cell.style.outline = 'none';
 
         // Set first cell globally as focusable, others not focusable (so Tab focuses on first cell)
         if (globalCellIndex === 0) {
@@ -158,10 +167,35 @@
 
     // Listen for clicks outside the grid to reset focus indices -> remove focusing style
     document.addEventListener('click', handleOutsideClick);
+
+    // Track last input type globally so cell focus rings only appear on keyboard input.
+    // Capture phase so we record the signal before focus events fire.
+    document.addEventListener('pointerdown', handlePointerdown, true);
+    document.addEventListener('keydown', handleGlobalKeydown, true);
   }
 
-  function handleFocusIn() {
+  function handlePointerdown() {
+    _lastInputType = 'pointer';
+  }
+
+  function handleGlobalKeydown() {
+    _lastInputType = 'keyboard';
+  }
+
+  function handleFocusIn(event: FocusEvent) {
     _gridHasFocus = true;
+    // Apply the cell focus ring only when the cell itself has keyboard-driven focus
+    // AND the cell has no focusable children of its own. When a cell contains an
+    // interactive component (checkbox, button, menu-button), event retargeting in
+    // shadow DOM makes the host appear as the focused element, but the component
+    // already shows its own focus indicator — applying our ring would stack.
+    const target = event.target as HTMLElement | null;
+    if (!target) return;
+    if (target.getAttribute('role') !== 'gridcell') return;
+    if (_lastInputType !== 'keyboard') return;
+    const cellData = _grid[_focusingRowIndex]?.[_focusingColIndex];
+    if (cellData?.cell === target && cellData.focusables.length > 0) return;
+    setFocusedStyle(target);
   }
 
   function handleFocusOut(event: FocusEvent) {
@@ -386,7 +420,8 @@
 
     const newCell = _grid[row][col]?.cell;
     newCell?.setAttribute('tabindex', '0');
-    setFocusedStyle(newCell);
+    // Outline is applied by handleFocusIn when the cell receives keyboard-driven focus,
+    // so mouse clicks don't leave a ring on the cell.
 
     // Only disable arrow key navigation for input elements
     _navigationDisabled = newCell.matches('input') || newCell.querySelector('input') !== null;
@@ -437,13 +472,40 @@
   function setFocusedStyle(el: HTMLElement) {
     if (!el) return;
     el.style.outline = '3px solid var(--goa-color-interactive-focus)';
+
+    if (keyboardNav === 'table') {
+      // Table mode: inset the outline so it renders inside the cell's box,
+      // otherwise cells on the edges get clipped by the table's overflow.
+      el.style.outlineOffset = '-0.1875rem';
+
+      // Match the table's corner radius on corner cells so the inset outline
+      // follows the rounded table corner instead of looking square.
+      const row = _focusingRowIndex;
+      const col = _focusingColIndex;
+      const lastRow = _grid.length - 1;
+      const lastCol = _grid[row] ? _grid[row].length - 1 : 0;
+      const radius = 'var(--goa-table-border-radius-container, 16px)';
+      if (row === 0 && col === 0) el.style.borderTopLeftRadius = radius;
+      if (row === 0 && col === lastCol) el.style.borderTopRightRadius = radius;
+      if (row === lastRow && col === 0) el.style.borderBottomLeftRadius = radius;
+      if (row === lastRow && col === lastCol) el.style.borderBottomRightRadius = radius;
+    } else {
+      // Layout mode (cards): outline sits outside the cell with a small gap so
+      // it never overlaps content.
+      el.style.outlineOffset = '0.125rem';
+    }
   }
 
   function removeFocusedStyle(el: HTMLElement) {
     if (!el) return;
-    el.style.outline = '';
+    // Back to the suppressed baseline so the UA default doesn't reappear on mouse focus.
+    el.style.outline = 'none';
     el.style.outlineOffset = '';
     el.style.boxShadow = '';
+    el.style.borderTopLeftRadius = '';
+    el.style.borderTopRightRadius = '';
+    el.style.borderBottomLeftRadius = '';
+    el.style.borderBottomRightRadius = '';
   }
 
   function moveUp() {

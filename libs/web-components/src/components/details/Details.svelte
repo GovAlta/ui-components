@@ -120,7 +120,7 @@
     outline: var(--goa-details-focus-border);
     color: var(--goa-color-interactive-hover);
   }
-  summary:focus,
+  summary:focus-visible,
   summary:active {
     border-radius: var(--goa-details-border-radius);
     color: var(--goa-details-color-text-hover);

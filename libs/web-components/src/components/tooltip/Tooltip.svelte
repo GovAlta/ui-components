@@ -143,6 +143,16 @@
     }, 500);
   };
 
+  // Mouse click also fires on:focus on a tabindex=0 element, but we only want
+  // to reveal the tooltip on keyboard-driven focus so JS state stays aligned
+  // with the CSS :focus-visible rule that drives opacity.
+  function handleFocus(e: FocusEvent) {
+    const target = e.currentTarget as HTMLElement | null;
+    if (!target?.matches?.(":focus-visible")) return;
+    clearTimeout(_hideTooltipTimeout);
+    showTooltip();
+  }
+
   async function checkAndAdjustPosition() {
     // angular needs time to render the _tooltipEl
     await tick();
@@ -227,10 +237,7 @@
     showTooltip();
   }}
   on:mouseleave={hideTooltip}
-  on:focus={() => {
-    clearTimeout(_hideTooltipTimeout);
-    showTooltip();
-  }}
+  on:focus={handleFocus}
   on:blur={hideTooltip}
   data-testid={testid}
   role="tooltip"
@@ -315,7 +322,7 @@
   }
 
   .tooltip:hover .tooltip-text,
-  .tooltip:focus .tooltip-text {
+  .tooltip:focus-visible .tooltip-text {
     opacity: 1;
   }
 

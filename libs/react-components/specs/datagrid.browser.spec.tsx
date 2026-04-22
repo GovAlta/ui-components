@@ -328,8 +328,10 @@ describe("DataGrid", () => {
       const cell1DateStarted = result.container.querySelector('[data-testid="cell-1-dateStarted"]') as HTMLElement;
       expect(cell1DateStarted?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
 
-      // verify td data-testid="cell-1-idNumber" has no more style defined on line 129 (no focus)
-      expect(cell1IdNumber?.style.outline).toBe('');
+      // verify td data-testid="cell-1-idNumber" is back to the suppressed baseline.
+      // Cells carry an inline outline: 'none' to prevent the UA default from showing on
+      // mouse focus; removeFocusedStyle restores that baseline when nav moves away.
+      expect(cell1IdNumber?.style.outline).toBe('none');
 
       // Press Arrow Right
       await userEvent.keyboard("{ArrowRight}");
@@ -470,14 +472,15 @@ describe("DataGrid", () => {
 
       // Wait for components to fully render
       await new Promise(resolve => setTimeout(resolve, 500));
-      // Click on <strong data-grid="cell-1"
+      // Click on <strong data-grid="cell-1"> to establish focus position.
+      // Per issue #3605, mouse click does NOT apply the focus ring — only keyboard
+      // navigation does. The cell stays at its inline baseline of outline: 'none'.
       const cell1 = result.container.querySelector('[data-grid="cell-1"]') as HTMLElement;
       await userEvent.click(cell1);
       await new Promise(resolve => setTimeout(resolve, 100));
+      expect(cell1?.style.outline).toBe('none');
 
-      // Verify that it is highlighted style: outline: 3px...
-      expect(cell1?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
-      // Press Arrow Right
+      // Arrow Right is keyboard input — ring applies on the next cell.
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
@@ -485,8 +488,8 @@ describe("DataGrid", () => {
       const cell2 = result.container.querySelector('[data-grid="cell-2"]') as HTMLElement;
       expect(cell2?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
 
-      // verify that data-grid="cell-1" no more highlighted
-      expect(cell1?.style.outline).toBe('');
+      // verify that data-grid="cell-1" is back to the suppressed baseline.
+      expect(cell1?.style.outline).toBe('none');
       // Arrow Right
       await userEvent.keyboard("{ArrowRight}");
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -703,15 +706,14 @@ describe("DataGrid", () => {
       const initialRows = result.container.querySelectorAll('[data-grid="row"]');
       expect(initialRows.length).toBe(2);
 
-      // Click on the first row's name cell to establish focus
+      // Click on the first row's name cell to establish focus position.
+      // Per issue #3605, mouse click establishes focus but does NOT apply the
+      // cell outline — the outline only shows for keyboard-driven focus.
       const firstRowName = result.container.querySelector('[data-testid="name-1"]') as HTMLElement;
       await userEvent.click(firstRowName);
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify first row name is highlighted
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
-
-      // Navigate to the second row using Arrow Down
+      // Navigate to the second row using Arrow Down — keyboard nav applies the outline.
       await userEvent.keyboard("{ArrowDown}");
       await new Promise(resolve => setTimeout(resolve, 100));
 
@@ -731,14 +733,11 @@ describe("DataGrid", () => {
       const updatedRows = result.container.querySelectorAll('[data-grid="row"]');
       expect(updatedRows.length).toBe(4);
 
-      // Click on first row's name to re-establish focus
+      // Click on first row's name to re-establish focus position (no outline per #3605).
       await userEvent.click(firstRowName);
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Verify first row name is highlighted after re-click
-      expect(firstRowName?.style.outline).toContain('3px solid var(--goa-color-interactive-focus)');
-
-      // Navigate down through all rows including newly added ones
+      // Navigate down through all rows including newly added ones — keyboard applies outline.
       // Row 1 -> Row 2
       await userEvent.keyboard("{ArrowDown}");
       await new Promise(resolve => setTimeout(resolve, 100));
