@@ -67,9 +67,10 @@ a:hover {
   color: var(--goa-color-interactive-hover);
 }
 
-a:focus-visible, a:focus-within, a:focus {
-  outline: 3px solid var(--goa-color-interactive-focus);
-  outline-offset: 1px;
+a:focus-visible {
+  border-radius: var(--goa-border-radius-s);
+  outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+  outline-offset: var(--goa-space-3xs);
 }
 
 ::placeholder {

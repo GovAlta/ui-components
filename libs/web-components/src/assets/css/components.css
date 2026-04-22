@@ -144,6 +144,53 @@ goa-table[version="2"] tfoot td:last-child {
 }
 
 
+/* DataGrid keyboard focus ring on table cells.
+   goa-data-grid signals focus via [data-focused] / [data-focus-corner]
+   attributes so the visual styling lives with the table. The :focus rule
+   suppresses the UA default; the [data-focused] rule overrides it via source
+   order when goa-data-grid promotes the focus to a keyboard-driven state. */
+goa-table td:focus,
+goa-table th:focus {
+  outline: none;
+}
+
+goa-table td[data-focused],
+goa-table th[data-focused] {
+  outline: var(--goa-border-width-l, 0.1875rem) solid var(--goa-color-interactive-focus);
+  /* Inset so the outline stays visible on edge cells inside the table's
+     overflow: hidden container. */
+  outline-offset: -0.1875rem;
+}
+
+goa-table td[data-focus-corner="top-left"],
+goa-table th[data-focus-corner="top-left"] {
+  border-top-left-radius: var(--goa-table-border-radius-container, 1rem);
+}
+goa-table td[data-focus-corner="top-right"],
+goa-table th[data-focus-corner="top-right"] {
+  border-top-right-radius: var(--goa-table-border-radius-container, 1rem);
+}
+goa-table td[data-focus-corner="bottom-left"],
+goa-table th[data-focus-corner="bottom-left"] {
+  border-bottom-left-radius: var(--goa-table-border-radius-container, 1rem);
+}
+goa-table td[data-focus-corner="bottom-right"],
+goa-table th[data-focus-corner="bottom-right"] {
+  border-bottom-right-radius: var(--goa-table-border-radius-container, 1rem);
+}
+
+/* DataGrid keyboard focus ring on layout-mode cells (cards, etc). Outline
+   sits outside the cell with a small gap so it never overlaps content. */
+goa-data-grid [role="gridcell"]:not(td):not(th):focus {
+  outline: none;
+}
+
+goa-data-grid [role="gridcell"]:not(td):not(th)[data-focused] {
+  outline: var(--goa-border-width-l, 0.1875rem) solid var(--goa-color-interactive-focus);
+  outline-offset: 0.125rem;
+}
+
+
 /* Normal Variant Cell Types */
 
 goa-table td.goa-table-cell--text {
