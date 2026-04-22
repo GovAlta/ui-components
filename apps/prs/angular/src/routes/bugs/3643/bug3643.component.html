@@ -1,0 +1,67 @@
+<div>
+  <goab-text tag="h1" mt="m">Bug 3643 - Popover right alignment at viewport edge</goab-text>
+  <goab-text tag="p" mb="m">
+    Open each corner popover to verify alignment and overflow behavior in different
+    viewport locations.
+  </goab-text>
+
+  <div
+    style="
+      position: relative;
+      min-height: 75vh;
+      border: 1px dashed var(--goa-color-greyscale-300);
+      border-radius: 0.5rem;
+      padding: 1rem;
+    "
+  >
+    <div style="position: absolute; top: 1rem; left: 1rem;">
+      <goab-popover [target]="topLeftTarget" maxWidth="22rem">
+        <ng-template #topLeftTarget>
+          <goab-button type="secondary">Top Left</goab-button>
+        </ng-template>
+        <div style="width: 300px;">
+          <goab-text tag="p">Top-left corner popover content.</goab-text>
+        </div>
+      </goab-popover>
+    </div>
+
+    <div style="position: absolute; top: 1rem; right: 1rem;">
+      <goab-popover [target]="topRightTarget" maxWidth="22rem">
+        <ng-template #topRightTarget>
+          <goab-button type="secondary">Top Right</goab-button>
+        </ng-template>
+        <div style="width: 300px;">
+          <goab-text tag="p">
+            Top-right corner popover content with longer text to test right-edge alignment
+            fallback.
+          </goab-text>
+        </div>
+      </goab-popover>
+    </div>
+
+    <div style="position: absolute; bottom: 1rem; left: 1rem;">
+      <goab-popover [target]="bottomLeftTarget" maxWidth="22rem">
+        <ng-template #bottomLeftTarget>
+          <goab-button type="secondary">Bottom Left</goab-button>
+        </ng-template>
+        <div style="width: 300px;">
+          <goab-text tag="p">Bottom-left corner popover content.</goab-text>
+        </div>
+      </goab-popover>
+    </div>
+
+    <div style="position: absolute; bottom: 1rem; right: 1rem;">
+      <goab-popover [target]="bottomRightTarget" maxWidth="22rem">
+        <ng-template #bottomRightTarget>
+          <goab-button type="secondary">Bottom Right</goab-button>
+        </ng-template>
+        <div style="width: 300px;">
+          <goab-text tag="p">
+            Bottom-right corner popover content with longer text to validate overflow
+            handling.
+          </goab-text>
+        </div>
+      </goab-popover>
+    </div>
+  </div>
+</div>
