@@ -1,0 +1,49 @@
+<h2>Hero Banner</h2>
+
+<h3>Basic hero banner</h3>
+<goab-hero-banner heading="Start your application">
+  <p>Apply for government services quickly and easily online.</p>
+  <goab-button-group alignment="start" mt="l">
+    <goab-button>Get started</goab-button>
+    <goab-button type="secondary">Learn more</goab-button>
+  </goab-button-group>
+</goab-hero-banner>
+
+<h3>With background image</h3>
+<goab-hero-banner
+  heading="Explore Alberta"
+  backgroundUrl="/images/alberta-landscape.jpg"
+>
+</goab-hero-banner>
+
+<h3>Background color</h3>
+<goab-hero-banner
+  heading="Community services"
+  backgroundColor="#1a3d5c"
+  textColor="#ffffff"
+>
+  <p>Find resources and support in your community.</p>
+</goab-hero-banner>
+
+<h3>Custom height</h3>
+<goab-hero-banner
+  heading="Full viewport hero"
+  minHeight="400px"
+  backgroundUrl="/images/hero-bg.jpg"
+>
+  <p>Large hero for landing pages.</p>
+</goab-hero-banner>
+
+<h2>Examples</h2>
+
+<h3>Hero banner with actions</h3>
+<goab-hero-banner
+  heading="Supporting Businesses"
+  [actions]="heroBannerActionTemplate"
+>
+  Resources are available to help Alberta entrepreneurs and small businesses
+  start, grow and succeed.
+  <ng-template #heroBannerActionTemplate>
+    <goab-button type="start" (onClick)="onHeroBannerClick()">Call to action</goab-button>
+  </ng-template>
+</goab-hero-banner>

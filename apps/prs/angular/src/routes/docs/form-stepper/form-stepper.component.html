@@ -1,0 +1,23 @@
+<h2>Form stepper</h2>
+
+<h3>Basic form stepper</h3>
+<goab-form-stepper [step]="1">
+  <goab-form-step text="Personal info"></goab-form-step>
+  <goab-form-step text="Contact details"></goab-form-step>
+  <goab-form-step text="Review"></goab-form-step>
+</goab-form-stepper>
+
+<h3>Middle step</h3>
+<goab-form-stepper [step]="2">
+  <goab-form-step text="Account" status="complete"></goab-form-step>
+  <goab-form-step text="Details"></goab-form-step>
+  <goab-form-step text="Confirmation"></goab-form-step>
+</goab-form-stepper>
+
+<h3>All completed</h3>
+<goab-form-stepper [step]="4">
+  <goab-form-step text="Start" status="complete"></goab-form-step>
+  <goab-form-step text="Details" status="complete"></goab-form-step>
+  <goab-form-step text="Review" status="complete"></goab-form-step>
+  <goab-form-step text="Done"></goab-form-step>
+</goab-form-stepper>

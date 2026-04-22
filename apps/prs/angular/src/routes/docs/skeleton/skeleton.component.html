@@ -1,0 +1,87 @@
+<h2>Skeleton loader</h2>
+
+<h3>Text</h3>
+<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text"></goab-skeleton>
+
+<h3>Content types</h3>
+<goab-skeleton type="text" mb="s"></goab-skeleton>
+<goab-skeleton type="text-small" mb="s"></goab-skeleton>
+<goab-skeleton type="title" mb="s"></goab-skeleton>
+<goab-skeleton type="header" mb="s"></goab-skeleton>
+<goab-skeleton type="paragraph"></goab-skeleton>
+
+<h3>Media types</h3>
+<goab-skeleton type="avatar" mb="s"></goab-skeleton>
+<goab-skeleton type="thumbnail" mb="s"></goab-skeleton>
+<goab-skeleton type="image" size="2"></goab-skeleton>
+
+<h3>Composite types</h3>
+<goab-skeleton type="lines" mb="l"></goab-skeleton>
+<goab-skeleton type="profile" mb="l"></goab-skeleton>
+<goab-skeleton type="card" mb="l"></goab-skeleton>
+<goab-skeleton type="article"></goab-skeleton>
+
+<h2>Examples</h2>
+
+<h3>Basic page layout</h3>
+<goab-column-layout>
+  <section slot="header">
+    <goab-app-header url="/" heading="Service name">
+      <a href="/login">Sign in</a>
+    </goab-app-header>
+  </section>
+  <goab-page-block width="704px">
+    <p>
+      <goab-skeleton type="header" size="4"></goab-skeleton>
+      <goab-skeleton type="text" size="1"></goab-skeleton>
+    </p>
+    <p>
+      <goab-skeleton type="header" size="4"></goab-skeleton>
+      <goab-skeleton type="text" size="1"></goab-skeleton>
+    </p>
+    <goab-grid minChildWidth="30ch">
+      <goab-skeleton type="card" size="2"></goab-skeleton>
+      <goab-skeleton type="card" size="2"></goab-skeleton>
+    </goab-grid>
+  </goab-page-block>
+  <section slot="footer">
+    <goab-app-footer></goab-app-footer>
+  </section>
+</goab-column-layout>
+
+<h3>Form stepper with controlled navigation</h3>
+<goab-form-stepper ml="s" mr="s" [step]="step" (onChange)="updateStep($event)">
+  <goab-form-step text="Personal details"></goab-form-step>
+  <goab-form-step text="Employment history"></goab-form-step>
+  <goab-form-step text="References"></goab-form-step>
+  <goab-form-step text="Review"></goab-form-step>
+</goab-form-stepper>
+<goab-pages [current]="step" mb="3xl" mt="xl" mr="xl" ml="xl">
+  <div>
+    <goab-skeleton type="article"></goab-skeleton>
+  </div>
+  <div>
+    <goab-skeleton type="header" size="2"></goab-skeleton>
+    <goab-skeleton type="text"></goab-skeleton>
+    <goab-skeleton type="header" size="2"></goab-skeleton>
+    <goab-skeleton type="text"></goab-skeleton>
+  </div>
+  <div>
+    <goab-skeleton type="text"></goab-skeleton>
+    <goab-spacer vSpacing="m"></goab-spacer>
+    <goab-skeleton type="text"></goab-skeleton>
+  </div>
+  <div>
+    <goab-skeleton type="header" size="2"></goab-skeleton>
+    <goab-skeleton type="text"></goab-skeleton>
+    <goab-spacer vSpacing="m"></goab-spacer>
+    <goab-skeleton type="text"></goab-skeleton>
+  </div>
+</goab-pages>
+<div style="display: flex; justify-content: space-between">
+  <goab-button (onClick)="setPage(step - 1)" type="secondary">Previous</goab-button>
+  <goab-button (onClick)="setPage(step + 1)" type="primary">Next</goab-button>
+</div>

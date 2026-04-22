@@ -4,7 +4,8 @@
       <goa-radio-item
         value="1"
         label="Option one which has a very long label with lots of text"
-        max-width="300px">
+        max-width="300px"
+      >
       </goa-radio-item>
       <goa-radio-item value="2" label="Option two"></goa-radio-item>
       <goa-radio-item value="3" label="Option three"></goa-radio-item>
@@ -13,7 +14,7 @@
 </form>
 
 <script>
-  document.querySelector('goa-radio-group').addEventListener('_change', (e) => {
+  document.querySelector("goa-radio-group").addEventListener("_change", (e) => {
     e.target.value = e.detail.value;
   });
 </script>

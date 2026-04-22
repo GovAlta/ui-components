@@ -1,9 +1,9 @@
-<goab-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goab-link>
+<goab-link leadingIcon="arrow-back" size="small" mb="none"> Back </goab-link>
 
-<goab-text as="h1" mt="xl" mb="m">What is your email address?</goab-text>
-<goab-text mt="none" mb="xl">We'll use this to send you confirmation of your application.</goab-text>
+<goab-text tag="h1" mt="xl" mb="m">What is your email address?</goab-text>
+<goab-text mt="none" mb="xl"
+  >We'll use this to send you confirmation of your application.</goab-text
+>
 
 <goab-form-item label="Email address">
   <goab-input
@@ -11,12 +11,11 @@
     type="email"
     [value]="answer"
     (onChange)="onAnswerChange($event)"
-    width="100%">
+    width="100%"
+  >
   </goab-input>
 </goab-form-item>
 
 <goab-button-group alignment="start" mt="2xl">
-  <goab-button type="primary" (onClick)="handleContinue()">
-    Continue
-  </goab-button>
+  <goab-button type="primary" (onClick)="handleContinue()"> Continue </goab-button>
 </goab-button-group>

@@ -26,17 +26,61 @@
 
   <goa-spacer hspacing="fill"></goa-spacer>
 
-  <goa-pagination version="2"
+  <goa-pagination
+    version="2"
     id="pagination"
     itemcount="100"
     perpagecount="10"
-    pagenumber="1">
+    pagenumber="1"
+  >
   </goa-pagination>
 </goa-block>
 
 <script>
-  const firstNames = ["Emma", "Liam", "Olivia", "Noah", "Ava", "James", "Sophia", "William", "Isabella", "Oliver", "Mia", "Benjamin", "Charlotte", "Elijah", "Amelia", "Lucas", "Harper", "Mason", "Evelyn", "Logan"];
-  const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Wilson", "Anderson", "Taylor", "Thomas", "Moore", "Jackson", "Martin", "Lee", "Thompson", "White"];
+  const firstNames = [
+    "Emma",
+    "Liam",
+    "Olivia",
+    "Noah",
+    "Ava",
+    "James",
+    "Sophia",
+    "William",
+    "Isabella",
+    "Oliver",
+    "Mia",
+    "Benjamin",
+    "Charlotte",
+    "Elijah",
+    "Amelia",
+    "Lucas",
+    "Harper",
+    "Mason",
+    "Evelyn",
+    "Logan",
+  ];
+  const lastNames = [
+    "Smith",
+    "Johnson",
+    "Williams",
+    "Brown",
+    "Jones",
+    "Garcia",
+    "Miller",
+    "Davis",
+    "Rodriguez",
+    "Martinez",
+    "Wilson",
+    "Anderson",
+    "Taylor",
+    "Thomas",
+    "Moore",
+    "Jackson",
+    "Martin",
+    "Lee",
+    "Thompson",
+    "White",
+  ];
   const users = [];
   for (let i = 1; i <= 100; i++) {
     users.push({
@@ -66,7 +110,7 @@
           <td>${u.lastName}</td>
           <td>${u.age}</td>
         </tr>
-      `
+      `,
       )
       .join("");
   }

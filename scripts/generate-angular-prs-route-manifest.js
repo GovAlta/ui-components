@@ -80,7 +80,7 @@ const routes = walk(routesRoot)
 
 const source = `import type { Route } from "@angular/router";
 
-export type PrRouteType = "bug" | "feature";
+export type PrRouteType = "bug" | "feature" | "docs";
 
 export type PrRouteDefinition = {
   type: PrRouteType;
@@ -100,6 +100,10 @@ export const bugRouteDefinitions = prRouteDefinitions.filter(
 
 export const featureRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "feature",
+);
+
+export const docsRouteDefinitions = prRouteDefinitions.filter(
+  (route) => route.type === "docs",
 );
 `;
 

@@ -7,7 +7,6 @@ import App from "./app/app";
 import { EverythingRoute } from "./routes/everything";
 import { EverythingBRoute } from "./routes/everything-b";
 import { prRouteDefinitions } from "./app/route-manifest";
-
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(

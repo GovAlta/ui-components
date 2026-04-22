@@ -29,7 +29,7 @@ export function AddARecordUsingADrawer() {
         position="right"
         onClose={() => setOpen(false)}
         actions={
-          <GoabButtonGroup>
+          <GoabButtonGroup alignment="start">
             <GoabButton type="primary" size="compact" onClick={() => setOpen(false)}>
               Add record
             </GoabButton>
@@ -55,17 +55,30 @@ export function AddARecordUsingADrawer() {
           <GoabInput name="fieldOfStudy" type="text" onChange={() => {}} />
         </GoabFormItem>
         <GoabFormItem label="Is the person currently attending?" mt="l">
-          <GoabRadioGroup name="attendTraining" orientation="horizontal" onChange={() => {}}>
+          <GoabRadioGroup
+            name="attendTraining"
+            orientation="horizontal"
+            onChange={() => {}}
+          >
             <GoabRadioItem value="yes" label="Yes" />
             <GoabRadioItem value="no" label="No" />
           </GoabRadioGroup>
         </GoabFormItem>
         <GoabFormItem label="Start date" mt="l">
           <GoabDatePicker onChange={() => {}} value={new Date("2022-09-01")} />
-          <GoabCheckbox name="startDateApproximate" text="Approximate date" value="y" mt="s" />
+          <GoabCheckbox
+            name="startDateApproximate"
+            text="Approximate date"
+            value="y"
+            mt="s"
+          />
         </GoabFormItem>
         <GoabFormItem label="Credential received?" mt="l">
-          <GoabRadioGroup name="credentialReceived" orientation="horizontal" onChange={() => {}}>
+          <GoabRadioGroup
+            name="credentialReceived"
+            orientation="horizontal"
+            onChange={() => {}}
+          >
             <GoabRadioItem value="yes" label="Yes" />
             <GoabRadioItem value="no" label="No" />
           </GoabRadioGroup>

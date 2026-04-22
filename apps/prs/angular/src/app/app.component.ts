@@ -11,6 +11,7 @@ import {
 } from "@abgov/angular-components";
 import {
   bugRouteDefinitions,
+  docsRouteDefinitions,
   featureRouteDefinitions,
 } from "./generated/pr-route-manifest.generated";
 
@@ -35,6 +36,7 @@ export class AppComponent {
   readonly workSideMenuHeight = "calc(100vh - 10.1875rem)";
   readonly bugRouteDefinitions = bugRouteDefinitions;
   readonly featureRouteDefinitions = featureRouteDefinitions;
+  readonly docsRouteDefinitions = docsRouteDefinitions;
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);

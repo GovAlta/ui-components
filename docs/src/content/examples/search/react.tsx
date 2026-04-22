@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  GoabBlock,
-  GoabButton,
-  GoabFormItem,
-  GoabInput,
-} from "@abgov/react-components";
+import { GoabBlock, GoabButton, GoabFormItem, GoabInput } from "@abgov/react-components";
 
 export function Search() {
   const [search, setSearch] = useState("");

@@ -1,5 +1,12 @@
-<goab-button type="tertiary" leadingIcon="add" (onClick)="toggleModal()">Add another item</goab-button>
-<goab-modal [open]="open" (onClose)="toggleModal()" heading="Add a new item" [actions]="actions">
+<goab-button type="tertiary" leadingIcon="add" (onClick)="toggleModal()"
+  >Add another item</goab-button
+>
+<goab-modal
+  [open]="open"
+  (onClose)="toggleModal()"
+  heading="Add a new item"
+  [actions]="actions"
+>
   <p>Fill in the information to create a new item</p>
   <goab-form-item label="Type" mt="l">
     <goab-dropdown (onChange)="updateType($event)" [value]="type">
@@ -8,15 +15,30 @@
     </goab-dropdown>
   </goab-form-item>
   <goab-form-item label="Name" mt="l">
-    <goab-input name="name" width="100%" (onChange)="updateName($event)" [value]="name"></goab-input>
+    <goab-input
+      name="name"
+      width="100%"
+      (onChange)="updateName($event)"
+      [value]="name"
+    ></goab-input>
   </goab-form-item>
   <goab-form-item label="Description" mt="l">
-    <goab-textarea name="description" width="100%" [rows]="3" (onChange)="updateDescription($event)" [value]="description"></goab-textarea>
+    <goab-textarea
+      name="description"
+      width="100%"
+      [rows]="3"
+      (onChange)="updateDescription($event)"
+      [value]="description"
+    ></goab-textarea>
   </goab-form-item>
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goab-button type="tertiary" size="compact" (onClick)="toggleModal()">Cancel</goab-button>
-      <goab-button type="primary" size="compact" (onClick)="toggleModal()">Save new item</goab-button>
+      <goab-button type="tertiary" size="compact" (onClick)="toggleModal()"
+        >Cancel</goab-button
+      >
+      <goab-button type="primary" size="compact" (onClick)="toggleModal()"
+        >Save new item</goab-button
+      >
     </goab-button-group>
   </ng-template>
 </goab-modal>

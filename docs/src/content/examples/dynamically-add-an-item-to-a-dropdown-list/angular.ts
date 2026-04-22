@@ -14,7 +14,7 @@ interface Task {
 
 @Component({
   selector: "app-dynamically-add-dropdown-item",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class DynamicallyAddDropdownItemComponent {
   defaultTasks: Task[] = [
@@ -55,9 +55,8 @@ export class DynamicallyAddDropdownItemComponent {
       value: this.newTask.toLowerCase().replace(" ", "-"),
       mount: this.mountType,
     };
-    this.tasks = this.mountType === "prepend"
-      ? [task, ...this.tasks]
-      : [...this.tasks, task];
+    this.tasks =
+      this.mountType === "prepend" ? [task, ...this.tasks] : [...this.tasks, task];
     this.newTask = "";
   }
 

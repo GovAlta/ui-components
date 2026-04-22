@@ -9,6 +9,45 @@
 export type Framework = "react" | "angular" | "webComponents";
 
 /**
+ * React code example.
+ * - `ts`: optional setup code (hooks, handlers, types)
+ * - `css`: optional styles
+ * - `jsx`: required JSX markup
+ */
+export interface ReactExample {
+  ts?: string;
+  css?: string;
+  jsx: string;
+}
+
+/**
+ * Angular code example.
+ * - `title`: optional heading shown above this example
+ *   (used when rendering an array of form binding patterns)
+ * - `ts`: optional component class body
+ * - `css`: optional styles
+ * - `template`: required HTML template
+ */
+export interface AngularExample {
+  title?: string;
+  ts?: string;
+  css?: string;
+  template: string;
+}
+
+/**
+ * Web Components code example.
+ * - `js`: optional vanilla JS script
+ * - `css`: optional styles
+ * - `html`: required HTML markup
+ */
+export interface WebComponentsExample {
+  js?: string;
+  css?: string;
+  html: string;
+}
+
+/**
  * A single configuration for a component.
  * Represents one option in the configuration dropdown.
  */
@@ -25,11 +64,20 @@ export interface ComponentConfiguration {
   /**
    * Code snippets for each framework.
    * The displayed snippet changes based on site-wide framework preference.
+   *
+   * Each framework field accepts either:
+   * - A string shortcut (markup-only)
+   * - An example object when setup code or styles are needed
+   *
+   * Angular additionally accepts an array of examples for components
+   * that support multiple form binding patterns (e.g., Reactive forms
+   * with FormControl and Template-driven with ngModel). Each item in
+   * the array is rendered with its `title` as a heading.
    */
   code: {
-    react: string;
-    angular: string;
-    webComponents: string;
+    react: string | ReactExample;
+    angular?: string | AngularExample | AngularExample[];
+    webComponents: string | WebComponentsExample;
   };
 }
 

@@ -1,6 +1,4 @@
-<goa-link leadingicon="arrow-back" size="small" mb="none">
-  Back
-</goa-link>
+<goa-link leadingicon="arrow-back" size="small" mb="none"> Back </goa-link>
 
 <goa-text as="h2" mt="xl" mb="m">Current school status</goa-text>
 <goa-text mt="none" mb="s">
@@ -19,7 +17,12 @@
 </goa-text>
 
 <goa-form-item version="2" label="Are you currently in school?">
-  <goa-radio-group version="2" id="school-radio" name="school" arialabel="are you currently in school?">
+  <goa-radio-group
+    version="2"
+    id="school-radio"
+    name="school"
+    arialabel="are you currently in school?"
+  >
     <goa-radio-item value="yes" label="Yes"></goa-radio-item>
     <goa-radio-item value="no" label="No"></goa-radio-item>
   </goa-radio-group>
@@ -30,15 +33,15 @@
 </goa-button>
 
 <script>
-  const radioGroup = document.getElementById('school-radio');
-  const submitBtn = document.getElementById('submit-btn');
-  let selectedValue = '';
+  const radioGroup = document.getElementById("school-radio");
+  const submitBtn = document.getElementById("submit-btn");
+  let selectedValue = "";
 
-  radioGroup.addEventListener('_change', (e) => {
+  radioGroup.addEventListener("_change", (e) => {
     selectedValue = e.detail.value;
   });
 
-  submitBtn.addEventListener('_click', () => {
-    console.log('Selected:', selectedValue);
+  submitBtn.addEventListener("_click", () => {
+    console.log("Selected:", selectedValue);
   });
 </script>

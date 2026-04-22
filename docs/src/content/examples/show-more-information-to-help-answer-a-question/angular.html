@@ -1,16 +1,16 @@
-<goab-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goab-link>
+<goab-link leadingIcon="arrow-back" size="small" mb="none"> Back </goab-link>
 
 <goab-form-item
   mt="xl"
   label="Do you pay for child care?"
   labelSize="large"
-  helpText="Examples of child care are daycares, day homes and baby-sisters.">
+  helpText="Examples of child care are daycares, day homes and baby-sisters."
+>
   <goab-radio-group
     name="child-care"
     ariaLabel="Do you pay for child care?"
-    (onChange)="onRadioChange($event)">
+    (onChange)="onRadioChange($event)"
+  >
     <goab-radio-item value="yes" label="Yes"></goab-radio-item>
     <goab-radio-item value="no" label="No"></goab-radio-item>
   </goab-radio-group>

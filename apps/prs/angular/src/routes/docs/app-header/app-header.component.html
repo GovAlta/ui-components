@@ -1,0 +1,42 @@
+<h2>App header</h2>
+
+<h3>Basic app header</h3>
+<goab-app-header heading="My Application"></goab-app-header>
+
+<h3>With home link</h3>
+<goab-app-header heading="My Application" url="/"></goab-app-header>
+
+<h3>With secondary text</h3>
+<goab-app-header heading="My Application" secondaryText="Supporting information" url="/"></goab-app-header>
+
+<h3>With utilities</h3>
+<goab-app-header heading="My Application" url="/">
+  <goab-button slot="utilities" type="tertiary" size="compact">Help</goab-button>
+  <goab-button slot="utilities" type="tertiary" size="compact" leadingIcon="person">Sign in</goab-button>
+</goab-app-header>
+
+<h3>With phase badge</h3>
+<goab-app-header heading="My Application" url="/">
+  <goab-badge slot="phase" type="important" content="Service preview" [icon]="false"></goab-badge>
+</goab-app-header>
+
+<h3>Internal testing banner</h3>
+<goab-app-header heading="My Application" url="/">
+  <span slot="banner" style="text-align: right; width: 100%; font-size: 12px; font-weight: normal">v2.3.1 | UAT Environment</span>
+</goab-app-header>
+
+<h3>With navigation</h3>
+<goab-app-header heading="Service Portal" url="/">
+  <a slot="navigation" href="#">Dashboard</a>
+  <goab-app-header-menu slot="navigation" heading="Applications">
+    <a href="#">New application</a>
+    <a href="#">Active</a>
+    <a href="#">Archived</a>
+  </goab-app-header-menu>
+  <a slot="navigation" href="#">Reports</a>
+  <a slot="navigation" href="#">Settings</a>
+  <goab-menu-button slot="utilities" text="John Smith" type="tertiary" size="compact">
+    <goab-menu-action text="User settings" action="user-settings"></goab-menu-action>
+    <goab-menu-action text="Sign out" action="sign-out"></goab-menu-action>
+  </goab-menu-button>
+</goab-app-header>

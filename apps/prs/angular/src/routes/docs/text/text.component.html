@@ -1,0 +1,193 @@
+<h2>Text</h2>
+
+<h3>Basic text</h3>
+<goab-text>This is a paragraph of text with default styling.</goab-text>
+
+<h3>Heading sizes</h3>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-xl">Heading XL</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-l">Heading L</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-m">Heading M</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-s">Heading S</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-xs">Heading XS</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="heading-2xs">Heading 2XS</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+
+<h3>Body sizes</h3>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="body-l">Body large text</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="body-m">Body medium text (default)</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="body-s">Body small text</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+<goab-text size="body-xs">Body extra small text</goab-text>
+<goab-divider mb="none" mt="none"></goab-divider>
+
+<h3>Color</h3>
+<goab-text color="primary" mt="none" mb="none">Primary color text (default)</goab-text>
+<goab-text color="secondary" mb="none">Secondary color text</goab-text>
+
+<h2>Examples</h2>
+
+<h3>Ask a user for an address</h3>
+<goab-text size="heading-l" mt="none" mb="xl">What is your address?</goab-text>
+<goab-form-item label="Street Address">
+  <goab-input name="address" type="text" [formControl]="addressForm.controls.address" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Suite or unit #" mt="l">
+  <goab-input name="suite" type="text" [formControl]="addressForm.controls.suite" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="City or town" mt="l">
+  <goab-input name="city" type="text" [formControl]="addressForm.controls.city" width="100%"></goab-input>
+</goab-form-item>
+<goab-block direction="row" gap="l" mt="l">
+  <goab-form-item label="Province or territory">
+    <goab-dropdown name="province" [formControl]="addressForm.controls.province" width="100%">
+      <goab-dropdown-item label="Alberta" value="AB"></goab-dropdown-item>
+      <goab-dropdown-item label="British Columbia" value="BC"></goab-dropdown-item>
+      <goab-dropdown-item label="Manitoba" value="MB"></goab-dropdown-item>
+      <goab-dropdown-item label="New Brunswick" value="NB"></goab-dropdown-item>
+      <goab-dropdown-item label="Newfoundland and Labrador" value="NL"></goab-dropdown-item>
+      <goab-dropdown-item label="Northwest Territories" value="NT"></goab-dropdown-item>
+      <goab-dropdown-item label="Nova Scotia" value="NS"></goab-dropdown-item>
+      <goab-dropdown-item label="Nunavut" value="NU"></goab-dropdown-item>
+      <goab-dropdown-item label="Ontario" value="ON"></goab-dropdown-item>
+      <goab-dropdown-item label="Prince Edward Island" value="PE"></goab-dropdown-item>
+      <goab-dropdown-item label="Quebec" value="QC"></goab-dropdown-item>
+      <goab-dropdown-item label="Saskatchewan" value="SK"></goab-dropdown-item>
+      <goab-dropdown-item label="Yukon" value="YT"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Postal Code">
+    <goab-input name="postalCode" type="text" [formControl]="addressForm.controls.postalCode" width="7ch"></goab-input>
+  </goab-form-item>
+</goab-block>
+<goab-button-group alignment="start" mt="2xl">
+  <goab-button type="primary" (onClick)="onClick()">Save and continue</goab-button>
+  <goab-button type="secondary" (onClick)="onClick()">Cancel</goab-button>
+</goab-button-group>
+
+<h3>Ask a user for direct deposit information</h3>
+<goab-text tag="h1" size="heading-l" mt="none" mb="m">Direct deposit information</goab-text>
+<goab-text tag="p" mb="xl">
+  Find this information on your bank's website or on your personal cheques.
+  Contact your bank if you can't find this information.
+</goab-text>
+<form [formGroup]="depositForm">
+  <goab-form-item label="Bank or Institution number" helpText="3-4 digits in length">
+    <goab-input [maxLength]="4" name="bankNumber" formControlName="bankNumber" ariaLabel="bankNumber" width="88px"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Branch or Transit number" helpText="5 digits in length" mt="l">
+    <goab-input [maxLength]="5" name="transitNumber" formControlName="transitNumber" ariaLabel="transitNumber" width="143px"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Account number" helpText="3-12 digits in length" mt="l">
+    <goab-input [maxLength]="12" name="accountNumber" formControlName="accountNumber" ariaLabel="accountNumber"></goab-input>
+  </goab-form-item>
+</form>
+<goab-details heading="Where can I find this information on a personal cheque?" mt="l">
+  <goab-text tag="p" mb="m">Below is an example of where you can find the required bank information on a personal cheque.</goab-text>
+  <img src="https://design.alberta.ca/images/details-demo.jpg" alt="Cheque example" />
+</goab-details>
+<goab-button type="submit" mt="2xl" (onClick)="onSubmit()">Save and continue</goab-button>
+
+<h3>Card grid</h3>
+<goab-grid gap="xl" minChildWidth="320px">
+  <goab-container accent="thin" mb="none">
+    <goab-link size="large" mb="m"><a href="#">Waitlist submission</a></goab-link>
+    <goab-text mt="none" mb="none">Enter and maintain information about the households waiting for affordable housing with your organization.</goab-text>
+  </goab-container>
+  <goab-container accent="thin" mb="none">
+    <goab-link size="large" mb="m"><a href="#">Lodge assistance program</a></goab-link>
+    <goab-text mt="none" mb="none">Keep track of the individuals who are placed in lodges and may qualify for the Lodge Assistance Program subsidy.</goab-text>
+  </goab-container>
+  <goab-container accent="thin" mb="none">
+    <goab-link size="large" mb="m"><a href="#">Education Support</a></goab-link>
+    <goab-text mt="none" mb="none">Explore educational resources, enroll in courses, and track your academic progress effortlessly.</goab-text>
+  </goab-container>
+  <goab-container accent="thin" mb="none">
+    <goab-link size="large" mb="m"><a href="#">Social Assistance</a></goab-link>
+    <goab-text mt="none" mb="none">Learn about available support programs, apply for financial aid, and access community resources.</goab-text>
+  </goab-container>
+</goab-grid>
+
+<h3>Display user information</h3>
+<goab-container>
+  <goab-text tag="span" size="body-m" color="secondary" mt="none" mb="none">Housing Advisor</goab-text>
+  <goab-text size="heading-m" mt="none" mb="s">Tracy Hero</goab-text>
+  <goab-block direction="row" gap="s">
+    <goab-block direction="column" gap="m">
+      <goab-text tag="span" size="heading-xs" mt="none" mb="none">Email</goab-text>
+      <goab-text tag="span" size="heading-xs" mt="none" mb="none">Phone</goab-text>
+    </goab-block>
+    <goab-block direction="column" gap="m">
+      <goab-text tag="span" size="body-m" mt="none" mb="none">tracyhero&#64;email.com</goab-text>
+      <goab-text tag="span" size="body-m" mt="none" mb="none">283-203-4921</goab-text>
+    </goab-block>
+  </goab-block>
+</goab-container>
+<goab-container type="non-interactive" accent="thick">
+  <div slot="title">Upcoming important due dates</div>
+  <div slot="actions">
+    <goab-button type="tertiary" size="compact" leadingIcon="calendar" (onClick)="onAddToCalendar()">Add to calendar</goab-button>
+  </div>
+  <goab-table width="100%" [striped]="true">
+    <tbody>
+      <tr><td>Business plan submission</td><td style="text-align: right">June 30, 2024</td></tr>
+      <tr><td>Annual review</td><td style="text-align: right">October 3, 2024</td></tr>
+      <tr><td>Application submission</td><td style="text-align: right">December 20, 2024</td></tr>
+      <tr><td>Application review</td><td style="text-align: right">January 3, 2025</td></tr>
+    </tbody>
+  </goab-table>
+</goab-container>
+
+<h3>Filter data in a table</h3>
+<goab-form-item id="textFilterInput" [error]="inputError" mb="m">
+  <goab-block gap="xs" direction="row" alignment="start" width="100%">
+    <div style="flex: 1">
+      <goab-input
+        name="textFilterInput"
+        aria-labelledby="textFilterInput"
+        [value]="inputValue"
+        leadingIcon="search"
+        width="100%"
+        (onChange)="handleInputChange($event)"
+        (onKeyPress)="handleInputKeyPress($event)"
+      ></goab-input>
+    </div>
+    <goab-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">Filter</goab-button>
+  </goab-block>
+</goab-form-item>
+@if (typedChips.length > 0) {
+  <goab-text tag="span" color="secondary" mb="xs" mr="xs">Filter:</goab-text>
+  @for (typedChip of typedChips; track typedChip) {
+    <goab-filter-chip [content]="typedChip" mb="xs" mr="xs" (onClick)="removeTypedChip(typedChip)"></goab-filter-chip>
+  }
+  <goab-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">Clear all</goab-button>
+}
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th class="goa-table-number-header">ID Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of dataFiltered; track item.id) {
+      <tr>
+        <td><goab-badge [type]="item.status.type" [content]="item.status.text" [icon]="false"></goab-badge></td>
+        <td>{{ item.name }}</td>
+        <td class="goa-table-number-column">{{ item.id }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+@if (dataFiltered.length === 0 && filterTableData.length > 0) {
+  <goab-block mt="l" mb="l">No results found</goab-block>
+}

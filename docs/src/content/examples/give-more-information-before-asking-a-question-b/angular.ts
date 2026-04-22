@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-give-context-long-answer",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class GiveContextLongAnswerComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      program: [""]
+      program: [""],
     });
   }
 

@@ -1,6 +1,7 @@
 import {
   GoabIconButtonVariant,
   GoabIconSize,
+  GoabIconTheme,
   GoabIconType,
 } from "@abgov/ui-components-common";
 import {
@@ -25,6 +26,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.icon]="icon"
         [disabled]="disabled"
         [attr.size]="size"
+        [attr.theme]="theme"
         [attr.variant]="variant"
         [title]="title"
         [attr.arialabel]="ariaLabel"
@@ -57,6 +59,8 @@ export class GoabIconButton extends GoabBaseComponent implements OnInit {
   @Input() size?: GoabIconSize = "medium";
   /** Styles the button to show color, light, dark or destructive action. */
   @Input() variant?: GoabIconButtonVariant;
+  /** Sets the icon theme. "outline" for stroked icons, "filled" for solid icons. @default "outline" */
+  @Input() theme?: GoabIconTheme = "outline";
   /** Sets the title of the button. */
   @Input() title?: string;
   /** Disables the button. */

@@ -334,6 +334,20 @@ This requires the dev server to be running (`npm run dev`). Images are saved as 
 
 Edit the relevant file in `src/data/configurations/<slug>.ts`. Each configuration has an `id`, `name`, and `code` with React/Angular/Web Components snippets.
 
+### Format example and configuration code
+
+Code examples must be formatted before merging. Format the configuration and example files with Prettier:
+
+```bash
+# Format all configuration files
+prettier --write docs/src/data/configurations/**/*.ts
+
+# Format all example files
+prettier --write docs/src/content/examples/**/*.{tsx,ts,html}
+```
+
+For code snippets inside template strings (e.g., `` react: `<GoabButton>...</GoabButton>` ``), manually format the content and verify it looks correct on the docs website before merging.
+
 ### Add/update a component thumbnail
 
 Place an SVG in `docs/public/thumbnails/<slug>.svg`. The components grid references these.

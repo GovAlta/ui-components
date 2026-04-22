@@ -1,7 +1,4 @@
-import {
-  GoabButton,
-  GoabTemporaryNotificationCtrl,
-} from "@abgov/react-components";
+import { GoabButton, GoabTemporaryNotificationCtrl } from "@abgov/react-components";
 
 import { TemporaryNotification } from "@abgov/ui-components-common";
 
@@ -13,8 +10,8 @@ export function ShowANotificationWithAnAction() {
         actionText: "View",
         action: () => {
           TemporaryNotification.dismiss(uuid);
-        }
-      }
+        },
+      },
     );
   };
 

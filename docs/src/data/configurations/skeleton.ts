@@ -60,13 +60,13 @@ export const skeletonConfigurations: ComponentConfigurations = {
       code: {
         react: `<GoabSkeleton type="avatar" mb="s" />
 <GoabSkeleton type="thumbnail" mb="s" />
-<GoabSkeleton type="image" width="200px" height="150px" />`,
+<GoabSkeleton type="image" size="2" />`,
         angular: `<goab-skeleton type="avatar" mb="s"></goab-skeleton>
 <goab-skeleton type="thumbnail" mb="s"></goab-skeleton>
-<goab-skeleton type="image" width="200px" height="150px"></goab-skeleton>`,
+<goab-skeleton type="image" size="2"></goab-skeleton>`,
         webComponents: `<goa-skeleton type="avatar" mb="s"></goa-skeleton>
 <goa-skeleton type="thumbnail" mb="s"></goa-skeleton>
-<goa-skeleton type="image" width="200px" height="150px"></goa-skeleton>`,
+<goa-skeleton type="image" size="2"></goa-skeleton>`,
       },
     },
     {

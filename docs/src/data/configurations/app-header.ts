@@ -48,8 +48,12 @@ export const appHeaderConfigurations: ComponentConfigurations = {
       description: "Header with utility actions",
       code: {
         react: `<GoabAppHeader heading="My Application" url="/">
-  <GoabButton slot="utilities" type="tertiary" size="compact">Help</GoabButton>
-  <GoabButton slot="utilities" type="tertiary" size="compact" leadingIcon="person">Sign in</GoabButton>
+  <div slot="utilities">
+    <GoabButton type="tertiary" size="compact">Help</GoabButton>
+  </div>
+  <div slot="utilities">
+    <GoabButton type="tertiary" size="compact" leadingIcon="person">Sign in</GoabButton>
+  </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="My Application" url="/">
   <goab-button slot="utilities" type="tertiary" size="compact">Help</goab-button>
@@ -67,7 +71,9 @@ export const appHeaderConfigurations: ComponentConfigurations = {
       description: "Header with a phase badge indicating service status",
       code: {
         react: `<GoabAppHeader heading="My Application" url="/">
-  <GoabBadge slot="phase" type="important" content="Service preview" icon={false} />
+  <div slot="phase">
+    <GoabBadge type="important" content="Service preview" icon={false} />
+  </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="My Application" url="/">
   <goab-badge slot="phase" type="important" content="Service preview" [icon]="false"></goab-badge>
@@ -107,10 +113,12 @@ export const appHeaderConfigurations: ComponentConfigurations = {
   </GoabAppHeaderMenu>
   <a slot="navigation" href="#">Reports</a>
   <a slot="navigation" href="#">Settings</a>
-  <GoabMenuButton slot="utilities" text="John Smith" type="tertiary" size="compact">
-    <GoabMenuAction text="User settings" action="user-settings" />
-    <GoabMenuAction text="Sign out" action="sign-out" />
-  </GoabMenuButton>
+  <div slot="utilities">
+    <GoabMenuButton text="John Smith" type="tertiary" size="compact">
+      <GoabMenuAction text="User settings" action="user-settings" />
+      <GoabMenuAction text="Sign out" action="sign-out" />
+    </GoabMenuButton>
+  </div>
 </GoabAppHeader>`,
         angular: `<goab-app-header heading="Service Portal" url="/">
   <a slot="navigation" href="#">Dashboard</a>

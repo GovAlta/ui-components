@@ -1,28 +1,23 @@
-<goab-form-item label="Indian registration number" labelSize="large">
-  <goab-block gap="m" direction="row">
-    <goab-form-item label="Band #" helpText="3 digits">
-      <goab-input
-        [formControl]="form.controls.bandNo"
-        name="bandNo"
-        width="88px"
-        [maxLength]="3">
-      </goab-input>
-    </goab-form-item>
-    <goab-form-item label="Family" helpText="Up to 5 digits">
-      <goab-input
-        [formControl]="form.controls.family"
-        name="family"
-        width="105px"
-        [maxLength]="5">
-      </goab-input>
-    </goab-form-item>
-    <goab-form-item label="Position" helpText="2 digits">
-      <goab-input
-        [formControl]="form.controls.position"
-        name="position"
-        width="71px"
-        [maxLength]="2">
-      </goab-input>
-    </goab-form-item>
-  </goab-block>
-</goab-form-item>
+<form [formGroup]="form">
+  <goab-form-item label="Indian registration number" labelSize="large">
+    <goab-block gap="m" direction="row">
+      <goab-form-item label="Band #" helpText="3 digits">
+        <goab-input formControlName="bandNo" name="bandNo" width="88px" [maxLength]="3">
+        </goab-input>
+      </goab-form-item>
+      <goab-form-item label="Family" helpText="Up to 5 digits">
+        <goab-input formControlName="family" name="family" width="105px" [maxLength]="5">
+        </goab-input>
+      </goab-form-item>
+      <goab-form-item label="Position" helpText="2 digits">
+        <goab-input
+          formControlName="position"
+          name="position"
+          width="71px"
+          [maxLength]="2"
+        >
+        </goab-input>
+      </goab-form-item>
+    </goab-block>
+  </goab-form-item>
+</form>

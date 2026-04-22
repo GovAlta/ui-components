@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import type { GoabDatePickerOnChangeDetail } from "@abgov/ui-components-common";
 
 @Component({
   selector: "app-reset-date-picker-field",
@@ -7,8 +8,8 @@ import { Component } from "@angular/core";
 export class ResetDatePickerFieldComponent {
   item: Date | undefined = undefined;
 
-  onChange(event: { value: Date | undefined }): void {
-    this.item = event.value;
+  onChange(event: GoabDatePickerOnChangeDetail): void {
+    this.item = event.valueStr ? new Date(event.valueStr) : undefined;
   }
 
   setValue(): void {

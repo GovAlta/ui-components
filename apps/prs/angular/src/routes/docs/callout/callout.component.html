@@ -1,0 +1,94 @@
+<h2>Callout</h2>
+
+<h3>Information callout</h3>
+<goab-callout type="information" emphasis="low" maxWidth="480px">
+  This is important information for the user.
+</goab-callout>
+
+<h3>Callout types</h3>
+<goab-callout type="information" heading="Information">
+  General information for the user.
+</goab-callout>
+<goab-callout type="important" heading="Important">
+  Something the user should pay attention to.
+</goab-callout>
+<goab-callout type="emergency" heading="Emergency">
+  Critical information requiring immediate attention.
+</goab-callout>
+<goab-callout type="success" heading="Success">
+  Confirmation that an action was successful.
+</goab-callout>
+
+<h3>Heading</h3>
+<goab-callout type="important" emphasis="low" heading="Application deadline">
+  Your application must be submitted by December 31, 2024.
+</goab-callout>
+<goab-callout type="important" emphasis="low">
+  Your application must be submitted by December 31, 2024.
+</goab-callout>
+
+<h3>Emphasis levels</h3>
+<goab-callout type="important" emphasis="high" heading="High emphasis">
+  Full background color for maximum visibility.
+</goab-callout>
+<goab-callout type="important" emphasis="medium" heading="Medium emphasis">
+  Subtle background for balanced visibility.
+</goab-callout>
+<goab-callout type="important" emphasis="low" heading="Low emphasis">
+  Minimal styling for less prominent messaging.
+</goab-callout>
+
+<h2>Examples</h2>
+
+<h3>Confirm that an application was submitted</h3>
+<goab-text tag="h1" mt="none">You have completed the application</goab-text>
+<goab-callout type="success" heading="Your application was successful">
+  <goab-text mt="none" mb="m">You will receive a copy of the confirmation to the email person&#64;email.com</goab-text>
+  <goab-text mt="none" mb="none">Confirmation number: <strong>1234ABC</strong></goab-text>
+</goab-callout>
+<goab-text tag="h2" mt="xl" mb="m">Go back to the dashboard, or direct your user somewhere else useful.</goab-text>
+<goab-text>Other information about what was just completed, other tertiary information, and/or contact information.
+<br/>
+Phone: <a href="tel:7801234567">780 123 4567</a>
+<br/>
+Email: <a href="mailto:information@gov.ab.ca">information&#64;gov.ab.ca</a>
+</goab-text>
+<goab-button-group alignment="start" mt="2xl">
+  <goab-button type="primary">Go to application</goab-button>
+  <goab-button type="secondary">Back to dashboard</goab-button>
+</goab-button-group>
+
+<h3>Result page</h3>
+<goab-text tag="h1" mt="none">You have completed the application</goab-text>
+<goab-callout type="success" heading="Application submitted">
+  <goab-text size="body-m" mt="none" mb="s">You will receive a copy of the confirmation to the email name&#64;email.com</goab-text>
+  <goab-text size="body-m" mt="none" mb="none">Your reference number is: <strong>1234ABC</strong></goab-text>
+</goab-callout>
+<goab-text tag="h2" mt="xl" mb="m">What happens next</goab-text>
+<goab-text size="body-m" mt="none" mb="s">We've sent your application to service name. They will contact you to confirm your registration.</goab-text>
+<goab-text size="body-m" mt="none" mb="s">You can now close this window.</goab-text>
+<goab-text size="body-m" mt="none" mb="s">What did you think of this service? <a href="#">Give feedback</a></goab-text>
+<goab-text tag="h2" mt="xl" mb="m">If you have questions about your application</goab-text>
+<goab-text size="body-m" mt="none" mb="s">Contact the [ministry area].</goab-text>
+<goab-text size="body-m" mt="none" mb="s">Email: <a href="mailto:information&#64;gov.ab.ca">information&#64;gov.ab.ca</a></goab-text>
+<goab-text size="body-m" mt="none" mb="s">Phone: <a href="tel:7801234567">780 123 4567</a></goab-text>
+
+<h3>Warn a user of a deadline</h3>
+<goab-button type="secondary" (onClick)="toggleDeadlineModal()">Save for later</goab-button>
+<goab-modal
+  [open]="deadlineOpen"
+  calloutVariant="important"
+  (onClose)="toggleDeadlineModal()"
+  heading="Complete submission prior to 1PM"
+  [actions]="deadlineActions">
+  <p>
+    You've selected to adjourn a matter that is required to appear today. This Calgary court
+    location does not accept adjournment requests past 1PM MST. Please submit your adjournment
+    request as soon as possible.
+  </p>
+  <ng-template #deadlineActions>
+    <goab-button-group alignment="end">
+      <goab-button type="primary" (onClick)="toggleDeadlineModal()">I understand</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>

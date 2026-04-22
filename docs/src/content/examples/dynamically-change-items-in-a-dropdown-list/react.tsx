@@ -22,32 +22,33 @@ export function DynamicallyChangeItemsInADropdownList() {
   return (
     <>
       <GoabFormItem
-          label="Size"
-          requirement="optional"
-          helpText="Choose the size to change the list below">
-          <GoabDropdown
-            name="parent"
-            placeholder="Select a value"
-            onChange={(event: GoabDropdownOnChangeDetail) =>
-              loadItems(event.value as string)
-            }>
-            {parents.map(parent => (
-              <GoabDropdownItem key={parent} value={parent} label={parent} />
-            ))}
-          </GoabDropdown>
-        </GoabFormItem>
+        label="Size"
+        requirement="optional"
+        helpText="Choose the size to change the list below"
+      >
+        <GoabDropdown
+          name="parent"
+          placeholder="Select a value"
+          onChange={(event: GoabDropdownOnChangeDetail) =>
+            loadItems(event.value as string)
+          }
+        >
+          {parents.map((parent) => (
+            <GoabDropdownItem key={parent} value={parent} label={parent} />
+          ))}
+        </GoabDropdown>
+      </GoabFormItem>
 
-        <GoabFormItem label="Items" requirement="optional" mt="xl">
-          <GoabDropdown name="children" placeholder="Select a value" onChange={logSelection}>
-            {children.map((child) => (
-              <GoabDropdownItem
-                key={child}
-                value={child}
-                label={child}
-                mountType="reset"
-              />
-            ))}
-          </GoabDropdown>
+      <GoabFormItem label="Items" requirement="optional" mt="xl">
+        <GoabDropdown
+          name="children"
+          placeholder="Select a value"
+          onChange={logSelection}
+        >
+          {children.map((child) => (
+            <GoabDropdownItem key={child} value={child} label={child} mountType="reset" />
+          ))}
+        </GoabDropdown>
       </GoabFormItem>
     </>
   );

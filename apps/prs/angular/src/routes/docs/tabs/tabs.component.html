@@ -1,0 +1,62 @@
+<h2>Tabs</h2>
+
+<h3>Basic tabs</h3>
+<goab-tabs [initialTab]="1">
+  <goab-tab heading="Overview">
+    <p>Overview content goes here.</p>
+  </goab-tab>
+  <goab-tab heading="Details">
+    <p>Detailed information goes here.</p>
+  </goab-tab>
+  <goab-tab heading="History">
+    <p>Historical data goes here.</p>
+  </goab-tab>
+</goab-tabs>
+
+<h3>Segmented variant</h3>
+<goab-tabs variant="segmented">
+  <goab-tab heading="Day">Daily view</goab-tab>
+  <goab-tab heading="Week">Weekly view</goab-tab>
+  <goab-tab heading="Month">Monthly view</goab-tab>
+</goab-tabs>
+
+<h3>Initial tab</h3>
+<goab-tabs [initialTab]="2">
+  <goab-tab heading="First">First tab content.</goab-tab>
+  <goab-tab heading="Second">Second tab content (initially shown).</goab-tab>
+  <goab-tab heading="Third">Third tab content.</goab-tab>
+</goab-tabs>
+
+<h3>With badge in heading</h3>
+<goab-tabs>
+  <goab-tab heading="Messages">
+    <goab-text>Your messages will appear here.</goab-text>
+  </goab-tab>
+  <goab-tab [heading]="notifHeadingTpl">
+    <ng-template #notifHeadingTpl>Notifications <goab-badge type="default" emphasis="subtle" [icon]="false" content="3"></goab-badge></ng-template>
+    <goab-text>You have 3 unread notifications.</goab-text>
+  </goab-tab>
+  <goab-tab heading="Settings">
+    <goab-text>Manage your preferences.</goab-text>
+  </goab-tab>
+</goab-tabs>
+
+<h3>Disabled tab</h3>
+<goab-tabs>
+  <goab-tab heading="Active">
+    <goab-text>This tab is active.</goab-text>
+  </goab-tab>
+  <goab-tab heading="Disabled" [disabled]="true">
+    <goab-text>This content is not accessible.</goab-text>
+  </goab-tab>
+  <goab-tab heading="Another tab">
+    <goab-text>This tab is also available.</goab-text>
+  </goab-tab>
+</goab-tabs>
+
+<h3>Horizontal on mobile</h3>
+<goab-tabs [initialTab]="1" orientation="horizontal">
+  <goab-tab heading="Tab 1">Content 1</goab-tab>
+  <goab-tab heading="Tab 2">Content 2</goab-tab>
+  <goab-tab heading="Tab 3">Content 3</goab-tab>
+</goab-tabs>

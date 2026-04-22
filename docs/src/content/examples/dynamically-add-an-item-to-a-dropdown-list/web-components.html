@@ -1,13 +1,21 @@
-<goa-form-item version="2"
+<goa-form-item
+  version="2"
   id="item-form-item"
   requirement="required"
   label="Name of item"
-  helptext="Add an item to the dropdown list below">
+  helptext="Add an item to the dropdown list below"
+>
   <goa-input version="2" id="item-input" name="item"></goa-input>
 </goa-form-item>
 
 <goa-form-item version="2" mt="l" label="Add to">
-  <goa-radio-group version="2" id="mount-type" name="mountType" value="append" orientation="horizontal">
+  <goa-radio-group
+    version="2"
+    id="mount-type"
+    name="mountType"
+    value="append"
+    orientation="horizontal"
+  >
     <goa-radio-item value="prepend" label="Start"></goa-radio-item>
     <goa-radio-item value="append" label="End"></goa-radio-item>
   </goa-radio-group>
@@ -29,57 +37,57 @@
 </goa-form-item>
 
 <script>
-  const itemInput = document.getElementById('item-input');
-  const itemFormItem = document.getElementById('item-form-item');
-  const mountTypeGroup = document.getElementById('mount-type');
-  const addBtn = document.getElementById('add-btn');
-  const resetBtn = document.getElementById('reset-btn');
-  const dropdown = document.getElementById('task-dropdown');
+  const itemInput = document.getElementById("item-input");
+  const itemFormItem = document.getElementById("item-form-item");
+  const mountTypeGroup = document.getElementById("mount-type");
+  const addBtn = document.getElementById("add-btn");
+  const resetBtn = document.getElementById("reset-btn");
+  const dropdown = document.getElementById("task-dropdown");
 
-  let mountType = 'append';
-  let newTask = '';
+  let mountType = "append";
+  let newTask = "";
 
   const defaultItems = [
-    { value: 'finish-report', label: 'Finish Report' },
-    { value: 'attend-meeting', label: 'Attend Meeting' },
-    { value: 'reply-emails', label: 'Reply Emails' }
+    { value: "finish-report", label: "Finish Report" },
+    { value: "attend-meeting", label: "Attend Meeting" },
+    { value: "reply-emails", label: "Reply Emails" },
   ];
 
-  mountTypeGroup.addEventListener('_change', (e) => {
+  mountTypeGroup.addEventListener("_change", (e) => {
     mountType = e.detail.value;
   });
 
-  itemInput.addEventListener('_change', (e) => {
+  itemInput.addEventListener("_change", (e) => {
     newTask = e.detail.value;
-    itemFormItem.removeAttribute('error');
+    itemFormItem.removeAttribute("error");
   });
 
-  addBtn.addEventListener('_click', () => {
-    if (newTask === '') {
-      itemFormItem.setAttribute('error', 'Please enter item name');
+  addBtn.addEventListener("_click", () => {
+    if (newTask === "") {
+      itemFormItem.setAttribute("error", "Please enter item name");
       return;
     }
 
-    const newItem = document.createElement('goa-dropdown-item');
-    newItem.setAttribute('value', newTask.toLowerCase().replace(' ', '-'));
-    newItem.setAttribute('label', newTask);
-    newItem.setAttribute('mount', mountType);
+    const newItem = document.createElement("goa-dropdown-item");
+    newItem.setAttribute("value", newTask.toLowerCase().replace(" ", "-"));
+    newItem.setAttribute("label", newTask);
+    newItem.setAttribute("mount", mountType);
     dropdown.appendChild(newItem);
 
-    itemInput.value = '';
-    newTask = '';
+    itemInput.value = "";
+    newTask = "";
   });
 
-  resetBtn.addEventListener('_click', () => {
-    dropdown.innerHTML = '';
-    defaultItems.forEach(item => {
-      const dropdownItem = document.createElement('goa-dropdown-item');
-      dropdownItem.setAttribute('value', item.value);
-      dropdownItem.setAttribute('label', item.label);
+  resetBtn.addEventListener("_click", () => {
+    dropdown.innerHTML = "";
+    defaultItems.forEach((item) => {
+      const dropdownItem = document.createElement("goa-dropdown-item");
+      dropdownItem.setAttribute("value", item.value);
+      dropdownItem.setAttribute("label", item.label);
       dropdown.appendChild(dropdownItem);
     });
-    itemInput.value = '';
-    newTask = '';
-    itemFormItem.removeAttribute('error');
+    itemInput.value = "";
+    newTask = "";
+    itemFormItem.removeAttribute("error");
   });
 </script>

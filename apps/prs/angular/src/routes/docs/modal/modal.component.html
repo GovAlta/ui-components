@@ -1,0 +1,125 @@
+<h2>Modal</h2>
+
+<h3>Basic modal</h3>
+<goab-button (onClick)="openBasic()">Open basic modal</goab-button>
+<goab-modal heading="Confirm action" [open]="basicOpen">
+  <p>Are you sure you want to proceed with this action?</p>
+  <goab-button-group alignment="end" mt="l">
+    <goab-button type="secondary" size="compact" (onClick)="closeBasic()">Cancel</goab-button>
+    <goab-button size="compact" (onClick)="closeBasic()">Confirm</goab-button>
+  </goab-button-group>
+</goab-modal>
+
+<h3>Dismissable</h3>
+<goab-button (onClick)="openDismissable()">Open dismissable modal</goab-button>
+<goab-modal heading="Information" [open]="dismissableOpen" [closable]="true" (onClose)="closeDismissable()">
+  <p>You can close this modal with the X button or by clicking the backdrop.</p>
+</goab-modal>
+
+<h3>Destructive action</h3>
+<goab-button (onClick)="openDestructive()">Open destructive modal</goab-button>
+<goab-modal heading="Are you sure you want to delete this item?" [open]="destructiveOpen" calloutVariant="emergency">
+  <p>This action cannot be undone. The item will be permanently removed.</p>
+  <goab-button-group alignment="end" mt="l">
+    <goab-button type="secondary" size="compact" (onClick)="closeDestructive()">Cancel</goab-button>
+    <goab-button variant="destructive" size="compact" (onClick)="closeDestructive()">Delete</goab-button>
+  </goab-button-group>
+</goab-modal>
+
+<h3>Important callout</h3>
+<goab-button (onClick)="openImportant()">Open important modal</goab-button>
+<goab-modal heading="Your session is about to expire" [open]="importantOpen" calloutVariant="important">
+  <p>You will be logged out in 5 minutes due to inactivity.</p>
+  <goab-button-group alignment="end" mt="l">
+    <goab-button size="compact" (onClick)="closeImportant()">Stay logged in</goab-button>
+  </goab-button-group>
+</goab-modal>
+
+<h3>Information callout</h3>
+<goab-button (onClick)="openInfo()">Open info modal</goab-button>
+<goab-modal heading="New features available" [open]="infoOpen" [closable]="true" calloutVariant="information" (onClose)="closeInfo()">
+  <p>We have updated the application with new features. Review the changes to get started.</p>
+</goab-modal>
+
+<h3>Success callout</h3>
+<goab-button (onClick)="openSuccess()">Open success modal</goab-button>
+<goab-modal heading="Application submitted" [open]="successOpen" [closable]="true" calloutVariant="success" (onClose)="closeSuccess()">
+  <p>Your application has been successfully submitted. You will receive a confirmation email shortly.</p>
+</goab-modal>
+
+<h3>Event callout</h3>
+<goab-button (onClick)="openEvent()">Open event modal</goab-button>
+<goab-modal heading="Scheduled maintenance" [open]="eventOpen" [closable]="true" calloutVariant="event" (onClose)="closeEvent()">
+  <p>The system will be unavailable on March 28 from 10:00 PM to 2:00 AM for scheduled maintenance.</p>
+</goab-modal>
+
+<h3>Custom width</h3>
+<goab-button (onClick)="openWide()">Open wide modal</goab-button>
+<goab-modal heading="Wide modal" [open]="wideOpen" maxWidth="80ch" [closable]="true" (onClose)="closeWide()">
+  <p>This modal has a wider maximum width for more content.</p>
+</goab-modal>
+
+<h2>Examples</h2>
+
+<h3>Add another item in a modal</h3>
+<goab-button type="tertiary" leadingIcon="add" (onClick)="toggleAddItemModal()">Add another item</goab-button>
+<goab-modal [open]="addItemOpen" (onClose)="toggleAddItemModal()" heading="Add a new item" [actions]="addItemActions">
+  <p>Fill in the information to create a new item</p>
+  <goab-form-item label="Type" mt="l">
+    <goab-dropdown (onChange)="updateType($event)" [value]="itemType">
+      <goab-dropdown-item value="1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Name" mt="l">
+    <goab-input name="name" width="100%" (onChange)="updateName($event)" [value]="itemName"></goab-input>
+  </goab-form-item>
+  <goab-form-item label="Description" mt="l">
+    <goab-textarea name="description" width="100%" [rows]="3" (onChange)="updateDescription($event)" [value]="itemDescription"></goab-textarea>
+  </goab-form-item>
+  <ng-template #addItemActions>
+    <goab-button-group alignment="end">
+      <goab-button type="tertiary" size="compact" (onClick)="toggleAddItemModal()">Cancel</goab-button>
+      <goab-button type="primary" size="compact" (onClick)="toggleAddItemModal()">Save new item</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>
+
+<h3>Confirm a destructive action</h3>
+<goab-button type="tertiary" leadingIcon="trash" (onClick)="toggleDeleteModal()">Delete record</goab-button>
+<goab-modal [open]="deleteOpen" (onClose)="toggleDeleteModal()" heading="Are you sure you want to delete this record?" [actions]="deleteActions">
+  <p>This action cannot be undone.</p>
+  <ng-template #deleteActions>
+    <goab-button-group alignment="end">
+      <goab-button type="tertiary" size="compact" (onClick)="toggleDeleteModal()">Cancel</goab-button>
+      <goab-button type="primary" variant="destructive" size="compact" (onClick)="toggleDeleteModal()">Delete record</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>
+
+<h3>Confirm before navigating away</h3>
+<goab-button (onClick)="openNavigate()">Open</goab-button>
+<goab-modal [open]="navigateOpen" heading="Are you sure you want to change route?" [actions]="navigateActions">
+  <ng-template #navigateActions>
+    <goab-button-group alignment="end">
+      <goab-button type="secondary" size="compact" (onClick)="closeNavigate()">Cancel</goab-button>
+      <goab-button type="primary" size="compact" (onClick)="onChangeRoute()">Change route</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>
+
+<h3>Require user action before continuing</h3>
+<goab-button (onClick)="toggleRequireModal()">Open Basic Modal</goab-button>
+<goab-modal
+  [open]="requireOpen"
+  (onClose)="toggleRequireModal()"
+  heading="Are you sure you want to continue?"
+  [actions]="requireActions">
+  <p>You cannot return to this page.</p>
+  <ng-template #requireActions>
+    <goab-button-group alignment="end">
+      <goab-button type="secondary" size="compact" (onClick)="toggleRequireModal()">Back</goab-button>
+      <goab-button type="primary" size="compact" (onClick)="toggleRequireModal()">Continue</goab-button>
+    </goab-button-group>
+  </ng-template>
+</goab-modal>

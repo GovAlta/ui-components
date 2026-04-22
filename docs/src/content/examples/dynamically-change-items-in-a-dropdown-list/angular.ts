@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-dynamically-change-dropdown-items",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class DynamicallyChangeDropdownItemsComponent implements OnInit {
   changeForm = new FormGroup({

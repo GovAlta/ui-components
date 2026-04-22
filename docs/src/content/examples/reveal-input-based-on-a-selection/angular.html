@@ -1,4 +1,8 @@
-<goab-form-item [formGroup]="form" label="How would you like to be contacted?" helpText="Select one option">
+<goab-form-item
+  [formGroup]="form"
+  label="How would you like to be contacted?"
+  helpText="Select one option"
+>
   <goab-radio-group name="contactMethod" formControlName="contactMethod">
     <goab-radio-item label="Email" value="email" [reveal]="emailReveal">
       <ng-template #emailReveal>
@@ -40,7 +44,12 @@
         </goab-form-item>
       </ng-template>
     </goab-checkbox>
-    <goab-checkbox name="text" text="Text message" value="text" [reveal]="checkTextReveal">
+    <goab-checkbox
+      name="text"
+      text="Text message"
+      value="text"
+      [reveal]="checkTextReveal"
+    >
       <ng-template #checkTextReveal>
         <goab-form-item label="Mobile phone number">
           <goab-input name="mobile" formControlName="phoneNumber"></goab-input>

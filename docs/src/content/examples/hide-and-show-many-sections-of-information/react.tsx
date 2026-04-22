@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  GoabAccordion,
-  GoabButton,
-} from "@abgov/react-components";
+import { GoabAccordion, GoabButton } from "@abgov/react-components";
 
 export function HideAndShowManySectionsOfInformation() {
   const [expandedAll, setExpandedAll] = useState<boolean>(false);
@@ -31,7 +28,12 @@ export function HideAndShowManySectionsOfInformation() {
 
   return (
     <>
-      <GoabButton type="tertiary" size="compact" mb="m" onClick={() => expandOrCollapseAll()}>
+      <GoabButton
+        type="tertiary"
+        size="compact"
+        mb="m"
+        onClick={() => expandOrCollapseAll()}
+      >
         {expandedAll ? "Hide all sections" : "Show all sections"}
       </GoabButton>
 
@@ -50,8 +52,8 @@ export function HideAndShowManySectionsOfInformation() {
         headingSize="medium"
         onChange={(open) => updateAccordion(2, open)}
       >
-        You will need to verify your identity through our two factor
-        authentication in addition to the digital signature.
+        You will need to verify your identity through our two factor authentication in
+        addition to the digital signature.
       </GoabAccordion>
 
       <GoabAccordion
@@ -60,9 +62,9 @@ export function HideAndShowManySectionsOfInformation() {
         headingSize="medium"
         onChange={(open) => updateAccordion(3, open)}
       >
-        Yes, you can see the status of your application on the main service
-        dashboard when you login. You will receive updates and notifications in
-        your email as your request progresses.
+        Yes, you can see the status of your application on the main service dashboard when
+        you login. You will receive updates and notifications in your email as your
+        request progresses.
       </GoabAccordion>
 
       <GoabAccordion

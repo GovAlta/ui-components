@@ -1,6 +1,12 @@
 <form id="required-field-form">
   <goa-form-item version="2" label="Name" requirement="required">
-    <goa-input version="2" id="name-input" name="input" type="text" width="100%"></goa-input>
+    <goa-input
+      version="2"
+      id="name-input"
+      name="input"
+      type="text"
+      width="100%"
+    ></goa-input>
   </goa-form-item>
 
   <goa-button-group alignment="start" mt="xl">
@@ -10,25 +16,25 @@
 </form>
 
 <script>
-  const nameInput = document.getElementById('name-input');
-  const confirmBtn = document.getElementById('confirm-btn');
-  const cancelBtn = document.getElementById('cancel-btn');
+  const nameInput = document.getElementById("name-input");
+  const confirmBtn = document.getElementById("confirm-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
 
-  nameInput.addEventListener('_change', (e) => {
+  nameInput.addEventListener("_change", (e) => {
     const value = e.detail.value.trim();
-    if (value === '') {
-      confirmBtn.setAttribute('disabled', 'true');
+    if (value === "") {
+      confirmBtn.setAttribute("disabled", "true");
     } else {
-      confirmBtn.removeAttribute('disabled');
+      confirmBtn.removeAttribute("disabled");
     }
   });
 
-  confirmBtn.addEventListener('_click', () => {
-    console.log('Form submitted with:', nameInput.value);
+  confirmBtn.addEventListener("_click", () => {
+    console.log("Form submitted with:", nameInput.value);
   });
 
-  cancelBtn.addEventListener('_click', () => {
-    nameInput.value = '';
-    confirmBtn.setAttribute('disabled', 'true');
+  cancelBtn.addEventListener("_click", () => {
+    nameInput.value = "";
+    confirmBtn.setAttribute("disabled", "true");
   });
 </script>

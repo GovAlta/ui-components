@@ -1,14 +1,23 @@
 <goab-button (onClick)="toggleModal()">Save and continue</goab-button>
 
-<goab-modal [open]="open" (onClose)="toggleModal()" heading="Address has changed" [actions]="actions">
+<goab-modal
+  [open]="open"
+  (onClose)="toggleModal()"
+  heading="Address has changed"
+  [actions]="actions"
+>
   <goab-container type="non-interactive" accent="filled" padding="compact" width="full">
-    <goab-text as="h4" mt="none" mb="s">Before</goab-text>
+    <goab-text tag="h4" mt="none" mb="s">Before</goab-text>
     <goab-text mt="none">123456 78 Ave NW, Edmonton, Alberta</goab-text>
-    <goab-text as="h4" mt="none" mb="s">After</goab-text>
+    <goab-text tag="h4" mt="none" mb="s">After</goab-text>
     <goab-text mt="none" mb="none">881 12 Ave NW, Edmonton, Alberta</goab-text>
   </goab-container>
   <goab-form-item label="Effective date" mt="l">
-    <goab-date-picker (onChange)="onChangeEffectiveDate($event)" name="effectiveDate" [value]="effectiveDate"></goab-date-picker>
+    <goab-date-picker
+      (onChange)="onChangeEffectiveDate($event)"
+      name="effectiveDate"
+      [value]="effectiveDate"
+    ></goab-date-picker>
   </goab-form-item>
   <ng-template #actions>
     <goab-button-group alignment="end">

@@ -1,0 +1,60 @@
+<h2>Text area</h2>
+
+<h3>Basic example (Reactive forms)</h3>
+<form [formGroup]="basicForm">
+  <goab-form-item label="Comments" mb="l">
+    <goab-textarea name="comments" formControlName="comments"></goab-textarea>
+  </goab-form-item>
+</form>
+<p>Value: {{ basicForm.value | json }}</p>
+
+<h3>Basic example (Template driven)</h3>
+<form>
+  <goab-form-item label="Comments" mb="l">
+    <goab-textarea
+      name="comments"
+      [(ngModel)]="ngModelComments"
+      (onChange)="textareaOnChange($event)">
+    </goab-textarea>
+  </goab-form-item>
+</form>
+<p>Value: {{ ngModelComments }}</p>
+
+<h3>With placeholder</h3>
+<goab-form-item label="Feedback" mb="l">
+  <goab-textarea name="feedback" placeholder="Enter your feedback here..."></goab-textarea>
+</goab-form-item>
+
+<h3>Custom height</h3>
+<goab-form-item label="Description" mb="l">
+  <goab-textarea name="description" [rows]="6"></goab-textarea>
+</goab-form-item>
+
+<h3>Character count</h3>
+<goab-form-item label="Tell us about your experience with the service" mb="l">
+  <goab-textarea name="experience" countBy="character" [maxCount]="200"></goab-textarea>
+</goab-form-item>
+
+<h3>Word count</h3>
+<goab-form-item label="Describe the circumstances that led to this request" mb="l">
+  <goab-textarea name="circumstances" countBy="word" [maxCount]="500" [rows]="8"></goab-textarea>
+</goab-form-item>
+
+<h3>Sizes</h3>
+<goab-form-item label="Default size" mb="l">
+  <goab-textarea name="sizeDefault"></goab-textarea>
+</goab-form-item>
+<goab-form-item label="Compact size" labelSize="compact" mb="l">
+  <goab-textarea name="sizeCompact" size="compact"></goab-textarea>
+</goab-form-item>
+
+<h3>States</h3>
+<goab-form-item label="Disabled" mb="l">
+  <goab-textarea name="disabled" [disabled]="true" value="Cannot edit this content"></goab-textarea>
+</goab-form-item>
+<goab-form-item label="Read-only" mb="l">
+  <goab-textarea name="readonly" [readOnly]="true" value="View only content"></goab-textarea>
+</goab-form-item>
+<goab-form-item label="With error" error="This field is required" mb="l">
+  <goab-textarea name="error" [error]="true"></goab-textarea>
+</goab-form-item>

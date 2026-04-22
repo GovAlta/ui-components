@@ -1,0 +1,75 @@
+<h2>Filter chip</h2>
+
+<h3>Basic filter chip</h3>
+<goab-filter-chip content="Active" (onClick)="handleToggle()"></goab-filter-chip>
+
+<h3>Filter group</h3>
+<goab-filter-chip content="All" (onClick)="setFilter('all')"></goab-filter-chip>
+<goab-filter-chip content="Active" (onClick)="setFilter('active')"></goab-filter-chip>
+<goab-filter-chip content="Pending" (onClick)="setFilter('pending')"></goab-filter-chip>
+<goab-filter-chip content="Completed" (onClick)="setFilter('completed')"></goab-filter-chip>
+
+<h3>With secondary text</h3>
+<goab-filter-chip content="Edmonton" secondaryText="City:" (onClick)="handleToggle()"></goab-filter-chip>
+<goab-filter-chip content="Calgary" secondaryText="City:" (onClick)="handleToggle()"></goab-filter-chip>
+
+<h3>With leading icon</h3>
+<goab-filter-chip content="Documents" leadingIcon="document" (onClick)="handleToggle()"></goab-filter-chip>
+<goab-filter-chip content="Sort" leadingIcon="arrow-up" (onClick)="handleToggle()"></goab-filter-chip>
+
+<h3>Error state</h3>
+<goab-filter-chip content="Invalid filter" [error]="true"></goab-filter-chip>
+
+<h2>Examples</h2>
+
+<h3>Add a filter chip</h3>
+<div>
+  @for (filter of activeFilters; track filter) {
+    <goab-filter-chip
+      [content]="filter"
+      (onClick)="removeFilter(filter)"
+      mr="s"
+      mb="s"
+      mt="s">
+    </goab-filter-chip>
+  }
+</div>
+<goab-button mt="l" (onClick)="addFilter()">Add Random Filter</goab-button>
+
+<h3>Remove a filter</h3>
+<div>
+  @for (chip of chips; track chip) {
+    <goab-filter-chip
+      [content]="chip"
+      (onClick)="deleteChip(chip)"
+      mr="s">
+    </goab-filter-chip>
+  }
+</div>
+
+<h3>Type to create a new filter</h3>
+<goab-form-item label="Type to create a chip" mb="m">
+  <goab-block gap="xs" direction="row">
+    <div style="flex: 1">
+      <goab-input
+        [value]="inputValue"
+        (onChange)="handleInputChange($event)"
+        (onKeyPress)="handleInputKeyPress($event)"
+        width="100%"
+      ></goab-input>
+    </div>
+    <goab-button type="secondary" (onClick)="addChip()">Add</goab-button>
+  </goab-block>
+</goab-form-item>
+@if (typedChips.length > 0) {
+  <div>
+    @for (typedChip of typedChips; track typedChip) {
+      <goab-filter-chip
+        [content]="typedChip"
+        mb="xs"
+        mr="xs"
+        (onClick)="removeTypedChip(typedChip)"
+      ></goab-filter-chip>
+    }
+  </div>
+}

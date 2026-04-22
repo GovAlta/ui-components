@@ -19,7 +19,9 @@ export function AskAUserForAnAddress() {
 
   return (
     <>
-      <GoabText size="heading-l" mt="none" mb="xl">What is your address?</GoabText>
+      <GoabText size="heading-l" mt="none" mb="xl">
+        What is your address?
+      </GoabText>
       <GoabFormItem label="Street Address">
         <GoabInput
           name="address"
@@ -53,6 +55,7 @@ export function AskAUserForAnAddress() {
             onChange={(e) => setProvince(e.value ?? "")}
             name="province"
             value={province}
+            width="100%"
           >
             <GoabDropdownItem label="Alberta" value="AB" />
             <GoabDropdownItem label="British Columbia" value="BC" />

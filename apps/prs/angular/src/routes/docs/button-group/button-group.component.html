@@ -1,0 +1,47 @@
+<h2>Button group</h2>
+
+<h3>Basic button group</h3>
+<goab-button-group alignment="start">
+  <goab-button>Submit</goab-button>
+  <goab-button type="secondary">Cancel</goab-button>
+</goab-button-group>
+
+<h3>Alignment</h3>
+<goab-text mt="none" mb="s">Start</goab-text>
+<goab-button-group alignment="start">
+  <goab-button type="primary">Submit</goab-button>
+  <goab-button type="secondary">Save draft</goab-button>
+  <goab-button type="tertiary">Cancel</goab-button>
+</goab-button-group>
+<goab-divider mt="l" mb="l"></goab-divider>
+<goab-text mt="none" mb="s">Center</goab-text>
+<goab-button-group alignment="center">
+  <goab-button type="primary">Submit</goab-button>
+  <goab-button type="secondary">Save draft</goab-button>
+  <goab-button type="tertiary">Cancel</goab-button>
+</goab-button-group>
+<goab-divider mt="l" mb="l"></goab-divider>
+<goab-text mt="none" mb="s">End</goab-text>
+<goab-button-group alignment="end">
+  <goab-button type="tertiary">Cancel</goab-button>
+  <goab-button type="secondary">Save draft</goab-button>
+  <goab-button type="primary">Submit</goab-button>
+</goab-button-group>
+
+<h3>Compact</h3>
+<goab-button-group alignment="start" gap="compact">
+  <goab-button size="compact">Continue</goab-button>
+  <goab-button type="secondary" size="compact">Back</goab-button>
+</goab-button-group>
+
+<h3>Many actions</h3>
+<goab-button-group alignment="start">
+  <goab-button>Submit</goab-button>
+  <goab-button type="secondary">Save draft</goab-button>
+  <goab-menu-button text="More" type="tertiary" (onAction)="handleAction($event)">
+    <goab-menu-action text="Preview" action="preview"></goab-menu-action>
+    <goab-menu-action text="Duplicate" action="duplicate"></goab-menu-action>
+    <goab-menu-action text="Print" action="print"></goab-menu-action>
+    <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+  </goab-menu-button>
+</goab-button-group>

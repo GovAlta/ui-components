@@ -1,0 +1,42 @@
+<h2>Form item</h2>
+
+<h3>Basic example</h3>
+<goab-form-item label="First name" mb="l">
+  <goab-input
+    name="firstName"
+    [value]="firstName"
+    (onChange)="handleChange($event)">
+  </goab-input>
+</goab-form-item>
+<p>Value: {{ firstName }}</p>
+
+<h3>With help text</h3>
+<goab-form-item label="Password" helpText="Must be at least 8 characters" mb="l">
+  <goab-input name="password" type="password" width="100%"></goab-input>
+</goab-form-item>
+
+<h3>Required field</h3>
+<goab-form-item label="Full name" requirement="required" mb="l">
+  <goab-input name="fullName" width="100%"></goab-input>
+</goab-form-item>
+
+<h3>Optional field</h3>
+<goab-form-item label="Middle name" requirement="optional" mb="l">
+  <goab-input name="middleName" width="100%"></goab-input>
+</goab-form-item>
+
+<h3>With error</h3>
+<goab-form-item label="Email address" error="Please enter a valid email address" mb="l">
+  <goab-input name="email" type="email" [error]="true" width="100%"></goab-input>
+</goab-form-item>
+
+<h3>Label sizes</h3>
+<goab-form-item label="Compact label" labelSize="compact" mb="l">
+  <goab-input name="compact" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Regular label" labelSize="regular" mb="l">
+  <goab-input name="regular" width="100%"></goab-input>
+</goab-form-item>
+<goab-form-item label="Large label" labelSize="large" mb="l">
+  <goab-input name="large" width="100%"></goab-input>
+</goab-form-item>
