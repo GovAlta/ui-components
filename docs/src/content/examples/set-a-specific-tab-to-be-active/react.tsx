@@ -31,7 +31,9 @@ export function SetASpecificTabToBeActive() {
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
+                  <GoabButton type="tertiary" size="compact">
+                    Action
+                  </GoabButton>
                 </td>
               </tr>
             ))}
@@ -43,14 +45,23 @@ export function SetASpecificTabToBeActive() {
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
+                  <GoabButton type="tertiary" size="compact">
+                    Action
+                  </GoabButton>
                 </td>
               </tr>
             ))}
           </tbody>
         </GoabTable>
       </GoabTab>
-      <GoabTab heading={<>Review pending<GoabBadge type="important" content="4" icon={false} /></>}>
+      <GoabTab
+        heading={
+          <>
+            Review pending
+            <GoabBadge type="important" content="4" icon={false} />
+          </>
+        }
+      >
         <GoabTable width="100%">
           <thead>
             <tr>
@@ -69,14 +80,23 @@ export function SetASpecificTabToBeActive() {
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
+                  <GoabButton type="tertiary" size="compact">
+                    Action
+                  </GoabButton>
                 </td>
               </tr>
             ))}
           </tbody>
         </GoabTable>
       </GoabTab>
-      <GoabTab heading={<>Complete<GoabBadge type="information" content="338" icon={false} /></>}>
+      <GoabTab
+        heading={
+          <>
+            Complete
+            <GoabBadge type="information" content="338" icon={false} />
+          </>
+        }
+      >
         <GoabTable width="100%">
           <thead>
             <tr>
@@ -95,7 +115,9 @@ export function SetASpecificTabToBeActive() {
                 <td>Lorem Ipsum</td>
                 <td className="goa-table-number-column">1234567890</td>
                 <td>
-                  <GoabButton type="tertiary" size="compact">Action</GoabButton>
+                  <GoabButton type="tertiary" size="compact">
+                    Action
+                  </GoabButton>
                 </td>
               </tr>
             ))}

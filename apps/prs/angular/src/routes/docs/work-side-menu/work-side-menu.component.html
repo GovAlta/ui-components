@@ -1,0 +1,99 @@
+<h2>Work side menu</h2>
+
+<h3>Basic work side menu</h3>
+<goab-work-side-menu heading="My Application" url="/" (onNavigate)="handleNavigate($event)" [primaryContent]="basicPrimaryTpl">
+  <ng-template #basicPrimaryTpl>
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="document" label="Reports" url="/reports"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="settings" label="Admin" url="/admin"></goab-work-side-menu-item>
+  </ng-template>
+</goab-work-side-menu>
+
+<h3>With user profile</h3>
+<goab-work-side-menu
+  heading="My Application"
+  url="/"
+  userName="Jane Smith"
+  userSecondaryText="Case Worker"
+  (onNavigate)="handleNavigate($event)"
+  [primaryContent]="profilePrimaryTpl">
+  <ng-template #profilePrimaryTpl>
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+  </ng-template>
+</goab-work-side-menu>
+
+<h3>With groups</h3>
+<goab-work-side-menu
+  heading="My Application"
+  url="/"
+  [primaryContent]="groupsPrimaryTpl"
+  [open]="true"
+  (onNavigate)="handleNavigate($event)">
+  <ng-template #groupsPrimaryTpl>
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+    <goab-work-side-menu-group icon="document" heading="Documents" [open]="true">
+      <goab-work-side-menu-item label="Invoices" url="/documents/invoices"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Contracts" url="/documents/contracts"></goab-work-side-menu-item>
+      <goab-work-side-menu-item label="Reports" url="/documents/reports"></goab-work-side-menu-item>
+    </goab-work-side-menu-group>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+  </ng-template>
+</goab-work-side-menu>
+
+<h3>Secondary menu</h3>
+<goab-work-side-menu heading="Case Management" url="/cases" [open]="true" (onNavigate)="handleNavigate($event)" [primaryContent]="secondaryPrimaryTpl">
+  <ng-template #secondaryPrimaryTpl>
+    <goab-work-side-menu-item icon="arrow-back" label="All cases" url="/cases"></goab-work-side-menu-item>
+    <goab-work-side-menu-item label="Overview" url="/cases/123/overview"></goab-work-side-menu-item>
+    <goab-work-side-menu-item label="Documents" url="/cases/123/documents"></goab-work-side-menu-item>
+    <goab-work-side-menu-item label="Notes" url="/cases/123/notes"></goab-work-side-menu-item>
+    <goab-work-side-menu-item label="Activity log" url="/cases/123/activity"></goab-work-side-menu-item>
+    <goab-work-side-menu-item label="Payments" url="/cases/123/payments"></goab-work-side-menu-item>
+  </ng-template>
+</goab-work-side-menu>
+
+<h3>With notifications</h3>
+<goab-work-side-menu heading="My Application" url="/" [primaryContent]="notifPrimaryTpl" [secondaryContent]="notifSecondaryTpl">
+  <ng-template #notifPrimaryTpl>
+    <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+    <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+  </ng-template>
+  <ng-template #notifSecondaryTpl>
+    <goab-work-side-menu-item
+      icon="notifications"
+      label="Notifications"
+      badge="3"
+      type="success"
+      [popoverContent]="notificationsTpl">
+    </goab-work-side-menu-item>
+  </ng-template>
+</goab-work-side-menu>
+
+<ng-template #notificationsTpl>
+  <goab-work-side-notification-panel
+    heading="Notifications"
+    activeTab="unread"
+    (onMarkAllRead)="handleMarkAllRead()"
+    (onViewAll)="handleViewAll()">
+    <goab-work-side-notification-item
+      title="New case assigned"
+      description="Case #12345 has been assigned to you."
+      timestamp="2025-02-09T10:30:00Z"
+      type="info"
+      readStatus="unread"
+      priority="normal"
+      (onClick)="handleClick('1')">
+    </goab-work-side-notification-item>
+    <goab-work-side-notification-item
+      title="System maintenance"
+      description="Scheduled maintenance tonight at 11 PM."
+      timestamp="2025-02-09T09:00:00Z"
+      type="critical"
+      readStatus="unread"
+      priority="urgent"
+      (onClick)="handleClick('2')">
+    </goab-work-side-notification-item>
+  </goab-work-side-notification-panel>
+</ng-template>

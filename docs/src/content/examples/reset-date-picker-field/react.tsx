@@ -35,9 +35,7 @@ export function ResetDatePickerField() {
       </GoabFormItem>
 
       <GoabButtonGroup mt="xs" alignment="start">
-        <GoabButton onClick={setValue}>
-          Set Value
-        </GoabButton>
+        <GoabButton onClick={setValue}>Set Value</GoabButton>
         <GoabButton onClick={clearValue}>Clear Value</GoabButton>
       </GoabButtonGroup>
     </>

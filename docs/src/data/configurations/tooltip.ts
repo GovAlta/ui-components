@@ -92,22 +92,22 @@ export const tooltipConfigurations: ComponentConfigurations = {
       name: "Horizontal alignment",
       description: "Tooltip alignment relative to the trigger",
       code: {
-        react: `<GoabTooltip content="Left aligned tooltip" halign="left">
+        react: `<GoabTooltip content="Left aligned tooltip" hAlign="left">
   <GoabButton>Left</GoabButton>
 </GoabTooltip>
-<GoabTooltip content="Center aligned tooltip" halign="center">
+<GoabTooltip content="Center aligned tooltip" hAlign="center">
   <GoabButton>Center</GoabButton>
 </GoabTooltip>
-<GoabTooltip content="Right aligned tooltip" halign="right">
+<GoabTooltip content="Right aligned tooltip" hAlign="right">
   <GoabButton>Right</GoabButton>
 </GoabTooltip>`,
-        angular: `<goab-tooltip content="Left aligned tooltip" halign="left">
+        angular: `<goab-tooltip content="Left aligned tooltip" hAlign="left">
   <goab-button>Left</goab-button>
 </goab-tooltip>
-<goab-tooltip content="Center aligned tooltip" halign="center">
+<goab-tooltip content="Center aligned tooltip" hAlign="center">
   <goab-button>Center</goab-button>
 </goab-tooltip>
-<goab-tooltip content="Right aligned tooltip" halign="right">
+<goab-tooltip content="Right aligned tooltip" hAlign="right">
   <goab-button>Right</goab-button>
 </goab-tooltip>`,
         webComponents: `<goa-tooltip content="Left aligned tooltip" halign="left">

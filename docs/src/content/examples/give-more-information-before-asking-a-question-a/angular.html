@@ -1,8 +1,6 @@
-<goab-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goab-link>
+<goab-link leadingIcon="arrow-back" size="small" mb="none"> Back </goab-link>
 
-<goab-text as="h2" mt="xl" mb="m">Current school status</goab-text>
+<goab-text tag="h2" mt="xl" mb="m">Current school status</goab-text>
 <goab-text mt="none" mb="s">
   School can encompass foundational programs that help individuals gain basic skills for
   further learning and living, such as literacy and numeracy courses. It also includes
@@ -22,7 +20,8 @@
   <goab-radio-group
     name="school"
     ariaLabel="are you currently in school?"
-    (onChange)="onChange($event)">
+    (onChange)="onChange($event)"
+  >
     <goab-radio-item value="yes" label="Yes"></goab-radio-item>
     <goab-radio-item value="no" label="No"></goab-radio-item>
   </goab-radio-group>

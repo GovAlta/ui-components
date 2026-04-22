@@ -1,0 +1,95 @@
+<h2>Checkbox list</h2>
+
+<h3>Basic checkbox list (no binding)</h3>
+<goab-form-item label="Select interests" mb="l">
+  <goab-checkbox-list name="interests">
+    <goab-checkbox name="sports" text="Sports"></goab-checkbox>
+    <goab-checkbox name="music" text="Music"></goab-checkbox>
+    <goab-checkbox name="travel" text="Travel"></goab-checkbox>
+    <goab-checkbox name="reading" text="Reading"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+
+<h3>Basic checkbox list (Reactive forms)</h3>
+<form [formGroup]="basicForm">
+  <goab-form-item label="Select interests" mb="l">
+    <goab-checkbox-list name="interests" formControlName="interests">
+      <goab-checkbox name="sports" text="Sports"></goab-checkbox>
+      <goab-checkbox name="music" text="Music"></goab-checkbox>
+      <goab-checkbox name="travel" text="Travel"></goab-checkbox>
+      <goab-checkbox name="reading" text="Reading"></goab-checkbox>
+    </goab-checkbox-list>
+  </goab-form-item>
+</form>
+<p>Value: {{ basicForm.value | json }}</p>
+
+<h3>Basic checkbox list (Template driven ngModel)</h3>
+<form>
+  <goab-form-item label="Select interests" mb="l">
+    <goab-checkbox-list
+      name="interests"
+      (onChange)="checkboxListOnChange($event)"
+      [(ngModel)]="ngModelInterests">
+      <goab-checkbox name="sports" text="Sports"></goab-checkbox>
+      <goab-checkbox name="music" text="Music"></goab-checkbox>
+      <goab-checkbox name="travel" text="Travel"></goab-checkbox>
+      <goab-checkbox name="reading" text="Reading"></goab-checkbox>
+    </goab-checkbox-list>
+  </goab-form-item>
+</form>
+<p>Value: {{ ngModelInterests | json }}</p>
+
+<h3>With descriptions</h3>
+<goab-form-item label="Which services do you need?" mb="l">
+  <goab-checkbox-list name="services">
+    <goab-checkbox name="health" text="Health benefits" description="Coverage for prescriptions, dental, and vision"></goab-checkbox>
+    <goab-checkbox name="income" text="Income support" description="Financial assistance for basic living costs"></goab-checkbox>
+    <goab-checkbox name="housing" text="Housing assistance" description="Help finding and affording a place to live"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+
+<h3>With reveal content</h3>
+<goab-form-item label="How did you hear about this program?" mb="l">
+  <goab-checkbox-list name="referral">
+    <goab-checkbox name="website" text="Government website"></goab-checkbox>
+    <goab-checkbox name="friend" text="Friend or family member"></goab-checkbox>
+    <goab-checkbox name="other" text="Other, please specify" [reveal]="otherReveal">
+      <ng-template #otherReveal>
+        <goab-form-item label="Please describe" mb="l">
+          <goab-textarea name="otherDetails"></goab-textarea>
+        </goab-form-item>
+      </ng-template>
+    </goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+
+<h3>Sizes</h3>
+<goab-form-item label="Default size" mb="l">
+  <goab-checkbox-list name="sizeDefault">
+    <goab-checkbox name="opt1" text="Option 1"></goab-checkbox>
+    <goab-checkbox name="opt2" text="Option 2"></goab-checkbox>
+    <goab-checkbox name="opt3" text="Option 3"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+<goab-form-item label="Compact size" mb="l">
+  <goab-checkbox-list name="sizeCompact" size="compact">
+    <goab-checkbox name="opt1c" text="Option 1" size="compact"></goab-checkbox>
+    <goab-checkbox name="opt2c" text="Option 2" size="compact"></goab-checkbox>
+    <goab-checkbox name="opt3c" text="Option 3" size="compact"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+
+<h3>States</h3>
+<goab-form-item label="Disabled list" mb="l">
+  <goab-checkbox-list name="disabled" [disabled]="true">
+    <goab-checkbox name="d1" text="Option 1"></goab-checkbox>
+    <goab-checkbox name="d2" text="Option 2"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>
+<goab-form-item label="Select at least one" error="Please select at least one option" mb="l">
+  <goab-checkbox-list name="required" [error]="true">
+    <goab-checkbox name="e1" text="Option 1"></goab-checkbox>
+    <goab-checkbox name="e2" text="Option 2"></goab-checkbox>
+    <goab-checkbox name="e3" text="Option 3"></goab-checkbox>
+  </goab-checkbox-list>
+</goab-form-item>

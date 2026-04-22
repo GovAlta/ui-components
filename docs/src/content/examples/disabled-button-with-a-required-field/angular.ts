@@ -3,7 +3,7 @@ import { GoabInputOnChangeDetail } from "@abgov/ui-components-common";
 
 @Component({
   selector: "app-disabled-button-with-required-field",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class DisabledButtonWithRequiredFieldComponent {
   inputValue = "";

@@ -1,0 +1,73 @@
+<h2>Tooltip</h2>
+
+<h3>Basic tooltip</h3>
+<goab-tooltip content="Additional information about this item">
+  <goab-button>Hover me</goab-button>
+</goab-tooltip>
+
+<h3>Positions</h3>
+<goab-tooltip content="Top tooltip" position="top">
+  <goab-button>Top</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Bottom tooltip" position="bottom">
+  <goab-button>Bottom</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Left tooltip" position="left">
+  <goab-button>Left</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Right tooltip" position="right">
+  <goab-button>Right</goab-button>
+</goab-tooltip>
+
+<h3>With icon button</h3>
+<goab-tooltip content="More options">
+  <goab-icon-button icon="ellipsis-vertical"></goab-icon-button>
+</goab-tooltip>
+
+<h3>Horizontal alignment</h3>
+<goab-tooltip content="Left aligned tooltip" hAlign="left">
+  <goab-button>Left</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Center aligned tooltip" hAlign="center">
+  <goab-button>Center</goab-button>
+</goab-tooltip>
+<goab-tooltip content="Right aligned tooltip" hAlign="right">
+  <goab-button>Right</goab-button>
+</goab-tooltip>
+
+<h2>Examples</h2>
+
+<h3>Copy to clipboard</h3>
+<goab-block alignment="center" gap="s">
+  <div class="token-block"></div>
+  <span>$goa-color-interactive-default</span>
+  <goab-tooltip [content]="isCopied ? 'Copied' : 'Copy?'" position="top">
+    <goab-icon-button icon="copy" (onClick)="copyCode()" mt="2xs"></goab-icon-button>
+  </goab-tooltip>
+</goab-block>
+
+<h3>Show a label on an icon-only button</h3>
+<goab-button-group alignment="start">
+  <goab-tooltip content="Edit">
+    <goab-icon-button icon="pencil" ariaLabel="Edit"></goab-icon-button>
+  </goab-tooltip>
+  <goab-tooltip content="Alerts">
+    <goab-icon-button icon="notifications" ariaLabel="Alerts"></goab-icon-button>
+  </goab-tooltip>
+  <goab-tooltip content="Settings">
+    <goab-icon-button icon="settings" ariaLabel="Settings"></goab-icon-button>
+  </goab-tooltip>
+</goab-button-group>
+
+<h3>Show full date in a tooltip</h3>
+<goab-container type="non-interactive" accent="thick" [title]="containerTitle">
+  <ng-template #containerTitle>
+    Joan Smith
+    <goab-tooltip content="Nov 23, 2023 at 10:35 am">
+      <span style="color:var(--goa-color-text-secondary); font: var(--goa-typography-body-xs);">
+        4 hours ago
+      </span>
+    </goab-tooltip>
+  </ng-template>
+  <goab-text tag="p" size="body-m" mt="none" mb="none">Hover on the time it was added to see the full date and time.</goab-text>
+</goab-container>

@@ -16,7 +16,7 @@ export function SetTheStatusOfStepOnAFormStepper() {
     "complete",
     "complete",
     "incomplete",
-    "not-started"
+    "not-started",
   ];
 
   function setPage(page: number) {

@@ -1,21 +1,12 @@
 import { Component } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import type { GoabRadioGroupOnChangeDetail } from "@abgov/ui-components-common";
 
 @Component({
   selector: "app-show-a-list-to-help-answer-a-question",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class ShowAListToHelpAnswerAQuestionComponent {
-  form: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      additional: [""]
-    });
-  }
-
-  onRadioChange(event: Event): void {
-    const detail = (event as CustomEvent).detail;
-    console.log("value is", detail.value);
+  onRadioChange(event: GoabRadioGroupOnChangeDetail): void {
+    console.log("value is", event.value);
   }
 }

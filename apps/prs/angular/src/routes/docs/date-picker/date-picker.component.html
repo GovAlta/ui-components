@@ -1,0 +1,85 @@
+<h2>Date picker</h2>
+
+<h3>Basic date picker (Reactive forms)</h3>
+<form [formGroup]="basicForm">
+  <goab-form-item label="Date" mb="l">
+    <goab-date-picker name="date" formControlName="date"></goab-date-picker>
+  </goab-form-item>
+</form>
+<p>Value: {{ basicForm.value | json }}</p>
+
+<h3>Basic date picker (Template driven)</h3>
+<form>
+  <goab-form-item label="Date" mb="l">
+    <goab-date-picker
+      name="date"
+      [(ngModel)]="ngModelDate"
+      (onChange)="onDateChange($event)">
+    </goab-date-picker>
+  </goab-form-item>
+</form>
+<p>Value: {{ ngModelDate | json }}</p>
+
+<h3>With initial value</h3>
+<form [formGroup]="withValueForm">
+  <goab-form-item label="Start date" mb="l">
+    <goab-date-picker name="startDate" formControlName="startDate"></goab-date-picker>
+  </goab-form-item>
+</form>
+
+<h3>With date range</h3>
+<form [formGroup]="rangeForm">
+  <goab-form-item label="Appointment date" helpText="Select a date within the next 7 days" mb="l">
+    <goab-date-picker
+      name="appointment"
+      min="2024-03-01"
+      max="2024-03-07"
+      formControlName="appointment">
+    </goab-date-picker>
+  </goab-form-item>
+</form>
+
+<h3>Input type</h3>
+<form [formGroup]="inputTypeForm">
+  <goab-form-item label="What day was the incident?" mb="l">
+    <goab-date-picker name="incident" type="calendar" formControlName="incident"></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="What is your birthday?" mb="l">
+    <goab-date-picker name="birthday" type="input" formControlName="birthday"></goab-date-picker>
+  </goab-form-item>
+</form>
+
+<h3>States</h3>
+<form [formGroup]="statesForm">
+  <goab-form-item label="Locked date" mb="l">
+    <goab-date-picker name="locked" formControlName="locked"></goab-date-picker>
+  </goab-form-item>
+  <goab-form-item label="Date with error" error="Please select a valid date" mb="l">
+    <goab-date-picker name="error" [error]="true" formControlName="errorDate"></goab-date-picker>
+  </goab-form-item>
+</form>
+
+<h2>Examples</h2>
+
+<h3>Ask a user for a birthday</h3>
+<goab-form-item label="What is your date of birth?">
+  <goab-date-picker
+    name="birthdate"
+    type="input"
+    [value]="exampleBirthday"
+    (onChange)="onBirthdayChange($event)">
+  </goab-date-picker>
+</goab-form-item>
+
+<h3>Reset date picker field</h3>
+<goab-form-item label="Date Picker">
+  <goab-date-picker
+    (onChange)="onResetChange($event)"
+    name="item"
+    [value]="resetItem">
+  </goab-date-picker>
+</goab-form-item>
+<goab-button-group alignment="start" mt="xs">
+  <goab-button (onClick)="setResetValue()">Set Value</goab-button>
+  <goab-button (onClick)="clearResetValue()">Clear Value</goab-button>
+</goab-button-group>

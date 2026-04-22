@@ -1,8 +1,4 @@
-import {
-  GoabCheckbox,
-  GoabCheckboxList,
-  GoabFormItem,
-} from "@abgov/react-components";
+import { GoabCheckbox, GoabCheckboxList, GoabFormItem } from "@abgov/react-components";
 
 export function IncludeALinkInTheHelperTextOfAnOption() {
   return (

@@ -217,7 +217,7 @@ export type GoabFormStepperType = "constrained" | "free";
 export type GoabFormStepStatus = "complete" | "incomplete" | "not-started";
 
 // Formitem
-export type GoabFormItemLabelSize = "regular" | "large";
+export type GoabFormItemLabelSize = "compact" | "regular" | "large";
 export type GoabFormItemRequirement = "optional" | "required";
 
 // FIle upload
@@ -395,6 +395,7 @@ export type GoabSkeletonType =
   | "paragraph"
   | "thumbnail"
   | "card"
+  | "lines"
   | "profile"
   | "article";
 

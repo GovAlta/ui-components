@@ -1,6 +1,7 @@
 import {
   GoabIconButtonVariant,
   GoabIconSize,
+  GoabIconTheme,
   GoabIconType,
   Margins,
   DataAttributes,
@@ -11,6 +12,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps extends Margins {
   icon: GoabIconType;
   size?: GoabIconSize;
+  theme?: GoabIconTheme;
   variant?: GoabIconButtonVariant;
   title?: string;
   disabled?: string;
@@ -26,9 +28,9 @@ declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "goa-icon-button": WCProps &
-        React.HTMLAttributes<HTMLButtonElement> & {
-          ref: React.RefObject<HTMLElement | null>;
-        };
+      React.HTMLAttributes<HTMLButtonElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }
@@ -40,6 +42,8 @@ export interface GoabIconButtonProps extends Margins, DataAttributes {
   size?: GoabIconSize;
   /** Styles the button to show color, light, dark or destructive action. @default "color" */
   variant?: GoabIconButtonVariant;
+  /** Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. @default "outline" */
+  theme?: GoabIconTheme;
   /** Sets the title of the button. */
   title?: string;
   /** Disables the button. */
@@ -64,6 +68,7 @@ export interface GoabIconButtonProps extends Margins, DataAttributes {
 export function GoabIconButton({
   variant = "color",
   size = "medium",
+  theme = "outline",
   disabled,
   onClick,
   actionArgs,
@@ -73,7 +78,7 @@ export function GoabIconButton({
 }: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>({ variant, size, ...rest }, lowercase);
+  const _props = transformProps<WCProps>({ variant, size, theme, ...rest }, lowercase);
 
   useEffect(() => {
     if (!ref.current) {

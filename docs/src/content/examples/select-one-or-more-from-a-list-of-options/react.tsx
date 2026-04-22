@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  GoabCheckbox,
-  GoabCheckboxList,
-  GoabFormItem,
-} from "@abgov/react-components";
+import { GoabCheckbox, GoabCheckboxList, GoabFormItem } from "@abgov/react-components";
 
 export function SelectOneOrMoreFromAListOfOptions() {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -16,7 +12,7 @@ export function SelectOneOrMoreFromAListOfOptions() {
       <GoabCheckboxList
         name="contactPreferences"
         value={selectedOptions}
-        onChange={(e) => setSelectedOptions(e.detail.value)}
+        onChange={(e) => setSelectedOptions(e.value)}
       >
         <GoabCheckbox name="email" text="Email" value="email" />
         <GoabCheckbox name="phone" text="Phone" value="phone" />

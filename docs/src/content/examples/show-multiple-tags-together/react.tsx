@@ -1,7 +1,4 @@
-import {
-  GoabBadge,
-  GoabBlock,
-} from "@abgov/react-components";
+import { GoabBadge, GoabBlock } from "@abgov/react-components";
 
 export function ShowMultipleTagsTogether() {
   return (

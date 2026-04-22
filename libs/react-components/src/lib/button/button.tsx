@@ -29,9 +29,9 @@ declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "goa-button": WCProps &
-        React.HTMLAttributes<HTMLElement> & {
-          ref: React.RefObject<HTMLElement | null>;
-        };
+      React.HTMLAttributes<HTMLElement> & {
+        ref: React.RefObject<HTMLElement | null>;
+      };
     }
   }
 }

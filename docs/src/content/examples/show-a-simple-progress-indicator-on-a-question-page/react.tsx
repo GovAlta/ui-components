@@ -14,13 +14,15 @@ export function ShowASimpleProgressIndicatorOnAQuestionPage() {
         Back
       </GoabLink>
 
-      <GoabText as="h3" size="body-m" mt="xl" mb="m" color="secondary">Question 3 of 9</GoabText>
-
+      <GoabText tag="h3" size="body-m" mt="xl" mb="m" color="secondary">
+        Question 3 of 9
+      </GoabText>
       <GoabFormItem label="Do you currently live in Canada?" labelSize="large">
         <GoabRadioGroup
           name="canada"
           ariaLabel="Do you currently live in Canada?"
-          onChange={() => {}}>
+          onChange={() => {}}
+        >
           <GoabRadioItem value="yes" label="Yes" />
           <GoabRadioItem value="no" label="No" />
         </GoabRadioGroup>

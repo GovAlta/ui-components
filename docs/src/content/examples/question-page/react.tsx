@@ -21,8 +21,12 @@ export function QuestionPage() {
         Back
       </GoabLink>
 
-      <GoabText as="h1" mt="xl" mb="m">What is your email address?</GoabText>
-      <GoabText mt="none" mb="xl">We'll use this to send you confirmation of your application.</GoabText>
+      <GoabText tag="h1" mt="xl" mb="m">
+        What is your email address?
+      </GoabText>
+      <GoabText mt="none" mb="xl">
+        We'll use this to send you confirmation of your application.
+      </GoabText>
 
       <GoabFormItem label="Email address">
         <GoabInput

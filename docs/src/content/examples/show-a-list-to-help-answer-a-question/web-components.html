@@ -1,8 +1,10 @@
 <form>
-  <goa-form-item version="2"
+  <goa-form-item
+    version="2"
     label="Do you have additional education expenses?"
     helptext="You can request funding for these now or at any time during your program."
-    mb="m">
+    mb="m"
+  >
     <goa-radio-group version="2" name="additional">
       <goa-radio-item label="Yes" value="yes" name="additional"></goa-radio-item>
       <goa-radio-item label="No" value="no" name="additional"></goa-radio-item>
@@ -35,7 +37,7 @@
 </form>
 
 <script>
-  document.querySelector('goa-radio-group').addEventListener('_change', (e) => {
-    console.log('value is', e.detail.value);
+  document.querySelector("goa-radio-group").addEventListener("_change", (e) => {
+    console.log("value is", e.detail.value);
   });
 </script>

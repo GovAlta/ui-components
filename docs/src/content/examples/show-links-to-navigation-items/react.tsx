@@ -1,4 +1,8 @@
-import { GoabAppFooter, GoabAppFooterMetaSection, GoabAppFooterNavSection } from "@abgov/react-components";
+import {
+  GoabAppFooter,
+  GoabAppFooterMetaSection,
+  GoabAppFooterNavSection,
+} from "@abgov/react-components";
 
 export function ShowLinksToNavigationItems() {
   return (

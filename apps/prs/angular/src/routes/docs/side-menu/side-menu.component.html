@@ -1,0 +1,37 @@
+<h2>Side menu</h2>
+
+<h3>Basic side menu</h3>
+<div style="width: 200px">
+  <goab-side-menu>
+    <a href="/overview">Overview</a>
+    <a href="/details">Details</a>
+    <a href="/settings">Settings</a>
+  </goab-side-menu>
+</div>
+
+<h3>With sections</h3>
+<div style="width: 200px">
+  <goab-side-menu>
+    <goab-side-menu-heading>Main</goab-side-menu-heading>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/reports">Reports</a>
+    <goab-side-menu-heading>Settings</goab-side-menu-heading>
+    <a href="/profile">Profile</a>
+    <a href="/preferences">Preferences</a>
+  </goab-side-menu>
+</div>
+
+<h3>With groups</h3>
+<div style="width: 200px">
+  <goab-side-menu>
+    <goab-side-menu-group heading="Applications">
+      <a href="/apps/active">Active</a>
+      <a href="/apps/pending">Pending</a>
+      <a href="/apps/archived">Archived</a>
+    </goab-side-menu-group>
+    <goab-side-menu-group heading="Reports">
+      <a href="/reports/monthly">Monthly</a>
+      <a href="/reports/annual">Annual</a>
+    </goab-side-menu-group>
+  </goab-side-menu>
+</div>

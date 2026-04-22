@@ -67,7 +67,7 @@ export function FilterAListUsingAPushDrawer() {
               </tr>
               <tr>
                 <td>
-                  <GoabBadge type="midtone" content="In review" />
+                  <GoabBadge type="default" content="In review" />
                 </td>
                 <td>Marco Silva</td>
                 <td>34521-7890</td>

@@ -130,10 +130,12 @@ function extractReactSetup(code: string): string | undefined {
     const returnMatch = code.slice(funcStart).match(/\n\s*return\s*\(/);
     if (returnMatch) {
       const bodyBeforeReturn = code.slice(funcStart, funcStart + returnMatch.index!);
-      const trimmedBody = bodyBeforeReturn.trim();
+      // Dedent the body individually so its column-0 doesn't get lost when
+      // joined with other (module-level, already column-0) setup parts.
+      const dedentedBody = cleanIndentation(bodyBeforeReturn);
 
-      if (trimmedBody) {
-        setupParts.push(trimmedBody);
+      if (dedentedBody.trim()) {
+        setupParts.push(dedentedBody);
       }
     }
   }
@@ -216,7 +218,10 @@ function extractFromReturn(code: string, returnMatch: RegExpMatchArray): string 
   jsx = jsx.replace(/\n?[ \t]*<\/>[ \t]*$/m, '');
   jsx = jsx.replace(/<style>\{`[\s\S]*?`\}<\/style>\s*/g, '');
 
-  return cleanIndentation(jsx.trim());
+  // Don't .trim() — it would strip the first line's indent, making minIndent
+  // computation treat it as column 0 and skip dedenting. cleanIndentation
+  // handles leading/trailing blank lines already.
+  return cleanIndentation(jsx);
 }
 
 /**
@@ -269,15 +274,18 @@ export function extractAngularCode(tsCode: string | undefined, htmlTemplate: str
 /**
  * Extract Angular class body without the @Component decorator
  */
-function extractAngularClassBody(tsCode: string): string | undefined {
+export function extractAngularClassBody(tsCode: string): string | undefined {
   // Find the class definition
   const classMatch = tsCode.match(/export\s+class\s+\w+\s*\{([\s\S]*)\}\s*$/);
   if (!classMatch) return undefined;
 
   let classBody = classMatch[1];
 
-  // Clean up the class body
-  classBody = cleanIndentation(classBody.trim());
+  // Clean up the class body. Don't .trim() here — that strips leading whitespace
+  // from the first line only, leaving it at column 0 while the rest stay at the
+  // class-body indent level. cleanIndentation handles leading/trailing blank
+  // lines and dedents uniformly.
+  classBody = cleanIndentation(classBody);
 
   // If it's empty or just whitespace, return undefined
   if (!classBody.trim()) return undefined;

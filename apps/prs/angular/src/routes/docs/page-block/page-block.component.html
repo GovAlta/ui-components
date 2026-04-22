@@ -1,0 +1,43 @@
+<h2>Page Block</h2>
+
+<h3>Basic page block</h3>
+<goab-page-block>
+  <h1>Page Title</h1>
+  <p>Page content goes here.</p>
+</goab-page-block>
+
+<h3>Width options</h3>
+<goab-page-block width="full">
+  <goab-text>Full width content (default)</goab-text>
+</goab-page-block>
+<goab-page-block width="760px">
+  <goab-text>Constrained to 760px</goab-text>
+</goab-page-block>
+
+<h2>Examples</h2>
+
+<h3>Basic page layout</h3>
+<goab-column-layout>
+  <section slot="header">
+    <goab-app-header url="/" heading="Service name">
+      <a href="/login">Sign in</a>
+    </goab-app-header>
+  </section>
+  <goab-page-block width="704px">
+    <p>
+      <goab-skeleton type="header" size="4"></goab-skeleton>
+      <goab-skeleton type="text" size="1"></goab-skeleton>
+    </p>
+    <p>
+      <goab-skeleton type="header" size="4"></goab-skeleton>
+      <goab-skeleton type="text" size="1"></goab-skeleton>
+    </p>
+    <goab-grid minChildWidth="30ch">
+      <goab-skeleton type="card" size="2"></goab-skeleton>
+      <goab-skeleton type="card" size="2"></goab-skeleton>
+    </goab-grid>
+  </goab-page-block>
+  <section slot="footer">
+    <goab-app-footer></goab-app-footer>
+  </section>
+</goab-column-layout>

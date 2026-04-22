@@ -1,0 +1,147 @@
+<h2>File uploader</h2>
+
+<h3>Basic file upload</h3>
+<goab-form-item label="Upload document" mb="l">
+  <goab-file-upload-input
+    variant="dragdrop"
+    (onSelectFile)="uploadBasic($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of basicFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deleteBasic($event)">
+  </goab-file-upload-card>
+}
+
+<h3>Accepted file types</h3>
+<goab-form-item label="Upload image" mb="l">
+  <goab-file-upload-input
+    variant="dragdrop"
+    accept="image/*"
+    (onSelectFile)="uploadImage($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of imageFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deleteImage($event)">
+  </goab-file-upload-card>
+}
+<goab-form-item label="Upload PDF" mb="l">
+  <goab-file-upload-input
+    variant="dragdrop"
+    accept=".pdf"
+    (onSelectFile)="uploadPdf($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of pdfFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deletePdf($event)">
+  </goab-file-upload-card>
+}
+
+<h3>Max file size</h3>
+<goab-form-item label="Small file (100KB limit)" mb="l">
+  <goab-file-upload-input
+    variant="dragdrop"
+    maxFileSize="100KB"
+    (onSelectFile)="uploadSmall($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of smallFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deleteSmall($event)">
+  </goab-file-upload-card>
+}
+<goab-form-item label="Large file (50MB limit)" mb="l">
+  <goab-file-upload-input
+    variant="dragdrop"
+    maxFileSize="50MB"
+    (onSelectFile)="uploadLarge($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of largeFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deleteLarge($event)">
+  </goab-file-upload-card>
+}
+
+<h3>Variants</h3>
+<goab-form-item label="Button variant" mb="l">
+  <goab-file-upload-input
+    variant="button"
+    (onSelectFile)="uploadButton($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of buttonFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deleteButton($event)">
+  </goab-file-upload-card>
+}
+<goab-form-item label="Dragdrop variant" mb="l">
+  <goab-file-upload-input
+    variant="dragdrop"
+    (onSelectFile)="uploadDragdrop($event)">
+  </goab-file-upload-input>
+</goab-form-item>
+@for (f of dragdropFiles; track f.id) {
+  <goab-file-upload-card
+    [filename]="f.filename"
+    [size]="f.size"
+    [type]="f.type"
+    [progress]="f.progress"
+    (onDelete)="deleteDragdrop($event)">
+  </goab-file-upload-card>
+}
+
+<h2>File upload card</h2>
+
+<h3>Basic file upload card</h3>
+<goab-file-upload-card
+  filename="document.pdf"
+  [size]="1024000"
+  (onDelete)="handleCardDelete($event)">
+</goab-file-upload-card>
+
+<h3>File types</h3>
+<goab-file-upload-card filename="report.pdf" type="application/pdf" [size]="256000" (onDelete)="handleCardDelete($event)"></goab-file-upload-card>
+<goab-file-upload-card filename="photo.jpg" type="image/jpeg" [size]="1024000" (onDelete)="handleCardDelete($event)"></goab-file-upload-card>
+<goab-file-upload-card filename="data.csv" type="text/csv" [size]="48000" (onDelete)="handleCardDelete($event)"></goab-file-upload-card>
+
+<h3>With upload progress</h3>
+<goab-file-upload-card
+  filename="image.png"
+  [size]="2048000"
+  [progress]="65">
+</goab-file-upload-card>
+
+<h3>Error state</h3>
+<goab-file-upload-card
+  filename="large-file.zip"
+  [size]="104857600"
+  error="File exceeds maximum size limit"
+  (onDelete)="handleCardDelete($event)">
+</goab-file-upload-card>

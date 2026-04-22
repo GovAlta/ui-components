@@ -32,6 +32,14 @@
             ></goab-work-side-menu-item>
           }
         </goab-work-side-menu-group>
+        <goab-work-side-menu-group icon="book" heading="Docs">
+          @for (route of docsRouteDefinitions; track route.path) {
+            <goab-work-side-menu-item
+              [label]="route.title"
+              [url]="'/' + route.path"
+            ></goab-work-side-menu-item>
+          }
+        </goab-work-side-menu-group>
         <goab-work-side-menu-group icon="star" heading="Features">
           @for (route of featureRouteDefinitions; track route.path) {
             <goab-work-side-menu-item

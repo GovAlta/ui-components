@@ -1,12 +1,14 @@
 <goab-form-item
   label="Provide more detail"
-  helpText="Maximum 500 words. Do not include personal or financial information.">
+  helpText="Maximum 500 words. Do not include personal or financial information."
+>
   <goab-textarea
     name="program"
     [formControl]="form.controls.program"
     width="100%"
     [rows]="6"
     [maxCount]="500"
-    countBy="word">
+    countBy="word"
+  >
   </goab-textarea>
 </goab-form-item>

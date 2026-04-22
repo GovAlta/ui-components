@@ -11,13 +11,21 @@
     @for (row of rows; track row.id) {
     <tr>
       <td>
-        <goab-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goab-badge>
+        <goab-badge
+          [type]="row.status"
+          [content]="row.statusText"
+          [icon]="false"
+        ></goab-badge>
       </td>
       <td>{{ row.name }}</td>
       <td class="goa-table-number-column">{{ row.id }}</td>
       <td>
         <goab-block>
-          <goab-icon-button size="small" icon="pencil" ariaLabel="Edit"></goab-icon-button>
+          <goab-icon-button
+            size="small"
+            icon="pencil"
+            ariaLabel="Edit"
+          ></goab-icon-button>
           <goab-icon-button size="small" icon="flag" ariaLabel="Flag"></goab-icon-button>
           <goab-icon-button size="small" icon="mail" ariaLabel="Send"></goab-icon-button>
         </goab-block>

@@ -9,7 +9,11 @@ import {
   GoabWorkSideMenuGroup,
   GoabWorkSideMenuItem,
 } from "@abgov/react-components";
-import { bugRouteDefinitions, featureRouteDefinitions } from "./route-manifest";
+import {
+  bugRouteDefinitions,
+  docsRouteDefinitions,
+  featureRouteDefinitions,
+} from "./route-manifest";
 import "@abgov/design-tokens-v2/dist/tokens.css"; // Production tokens. Comment out to test with legacy V1 token values.
 
 const appContentStyle: CSSProperties = {
@@ -50,6 +54,15 @@ export function App() {
                   <GoabWorkSideMenuItem
                     key={route.path}
                     label={route.id + " - " + route.title}
+                    url={`/${route.path}`}
+                  />
+                ))}
+              </GoabWorkSideMenuGroup>
+              <GoabWorkSideMenuGroup icon="book" heading="Docs">
+                {docsRouteDefinitions.map((route) => (
+                  <GoabWorkSideMenuItem
+                    key={route.path}
+                    label={route.title}
                     url={`/${route.path}`}
                   />
                 ))}
