@@ -46,6 +46,10 @@
   let _bindTimeoutId: any = null; // Track pending grid rebuilds to prevent race conditions
   let _isRebuilding = false; // Flag to prevent navigation during grid rebuild
   let _gridHasFocus = false; // Track if the grid currently has focus (persists through DOM mutations)
+  // Track last input modality so cell outline only appears on keyboard-driven focus.
+  // Avoids browser :focus-visible heuristics around the first interaction on a fresh page,
+  // which can match on the first mouse click.
+  let _lastInputModality: 'pointer' | 'keyboard' = 'keyboard';
 
   onMount(() => {
     // Delay to allow nested shadow DOMs to fully render before grid setup - menu button is one case vs a lot of nested elements and shadow
@@ -73,6 +77,8 @@
         }
       }
       document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('pointerdown', handlePointerdown, true);
+      document.removeEventListener('keydown', handleGlobalKeydown, true);
     };
   })
 
@@ -158,10 +164,35 @@
 
     // Listen for clicks outside the grid to reset focus indices -> remove focusing style
     document.addEventListener('click', handleOutsideClick);
+
+    // Track last input modality globally so cell focus rings only appear on keyboard input.
+    // Capture phase so we record the signal before focus events fire.
+    document.addEventListener('pointerdown', handlePointerdown, true);
+    document.addEventListener('keydown', handleGlobalKeydown, true);
   }
 
-  function handleFocusIn() {
+  function handlePointerdown() {
+    _lastInputModality = 'pointer';
+  }
+
+  function handleGlobalKeydown() {
+    _lastInputModality = 'keyboard';
+  }
+
+  function handleFocusIn(event: FocusEvent) {
     _gridHasFocus = true;
+    // Apply the cell focus ring only when the cell itself has keyboard-driven focus
+    // AND the cell has no focusable children of its own. When a cell contains an
+    // interactive component (checkbox, button, menu-button), event retargeting in
+    // shadow DOM makes the host appear as the focused element, but the component
+    // already shows its own focus indicator — applying our ring would stack.
+    const target = event.target as HTMLElement | null;
+    if (!target) return;
+    if (target.getAttribute('role') !== 'gridcell') return;
+    if (_lastInputModality !== 'keyboard') return;
+    const cellData = _grid[_focusingRowIndex]?.[_focusingColIndex];
+    if (cellData?.cell === target && cellData.focusables.length > 0) return;
+    setFocusedStyle(target);
   }
 
   function handleFocusOut(event: FocusEvent) {
@@ -386,7 +417,8 @@
 
     const newCell = _grid[row][col]?.cell;
     newCell?.setAttribute('tabindex', '0');
-    setFocusedStyle(newCell);
+    // Outline is applied by handleFocusIn when the cell receives keyboard-driven focus,
+    // so mouse clicks don't leave a ring on the cell.
 
     // Only disable arrow key navigation for input elements
     _navigationDisabled = newCell.matches('input') || newCell.querySelector('input') !== null;
@@ -436,14 +468,30 @@
 
   function setFocusedStyle(el: HTMLElement) {
     if (!el) return;
-    el.style.outline = '3px solid var(--goa-color-interactive-focus)';
+    // Flip the attribute and let the host component's CSS apply the visual ring.
+    // Table-mode rules (outline + corner radius) live alongside the rest of the
+    // table styles in assets/css/components.css; layout-mode has its own rule.
+    el.setAttribute('data-focused', '');
+
+    if (keyboardNav !== 'table') return;
+
+    // Tag corner cells so Table CSS can round them to follow the container radius.
+    const row = _focusingRowIndex;
+    const col = _focusingColIndex;
+    const lastRow = _grid.length - 1;
+    const lastCol = _grid[row] ? _grid[row].length - 1 : 0;
+    let corner: string | null = null;
+    if (row === 0 && col === 0) corner = 'top-left';
+    else if (row === 0 && col === lastCol) corner = 'top-right';
+    else if (row === lastRow && col === 0) corner = 'bottom-left';
+    else if (row === lastRow && col === lastCol) corner = 'bottom-right';
+    if (corner) el.setAttribute('data-focus-corner', corner);
   }
 
   function removeFocusedStyle(el: HTMLElement) {
     if (!el) return;
-    el.style.outline = '';
-    el.style.outlineOffset = '';
-    el.style.boxShadow = '';
+    el.removeAttribute('data-focused');
+    el.removeAttribute('data-focus-corner');
   }
 
   function moveUp() {

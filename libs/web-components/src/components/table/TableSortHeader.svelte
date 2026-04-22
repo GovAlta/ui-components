@@ -49,16 +49,18 @@
   class:sorted={direction !== "none"}
   class:v2={version === "2"}
 >
-  <slot />
-  <span class="icon-wrapper">
-    <span class="sort-order" class:hidden={!sortOrder || direction === "none"}>{sortOrder}</span>
-    {#if direction === "desc"}
-      <goa-icon type="arrow-down" size="3" />
-    {:else if direction === "asc"}
-      <goa-icon type="arrow-up" size="3" />
-    {:else}
-      <goa-icon type="chevron-expand" size="3" />
-    {/if}
+  <span class="content">
+    <slot />
+    <span class="icon-wrapper">
+      <span class="sort-order" class:hidden={!sortOrder || direction === "none"}>{sortOrder}</span>
+      {#if direction === "desc"}
+        <goa-icon type="arrow-down" size="3" />
+      {:else if direction === "asc"}
+        <goa-icon type="arrow-up" size="3" />
+      {:else}
+        <goa-icon type="chevron-expand" size="3" />
+      {/if}
+    </span>
   </span>
 </button>
 
@@ -85,9 +87,19 @@
       var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs)
     );
     justify-content: var(--header-text-align, flex-start);
-    gap: var(--goa-table-sort-header-gap, var(--goa-space-2xs));
     align-items: flex-end;
     text-align: var(--header-align, left);
+  }
+
+  /* Inline-flex wrapper around label + sort icon. Sizes to its content so the
+     focus ring wraps just the visible button content, not the whole cell.
+     The padding adds breathing room between the content and the focus ring. */
+  .content {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: var(--goa-table-sort-header-gap, var(--goa-space-2xs));
+    padding: var(--goa-space-3xs);
+    border-radius: var(--goa-border-radius-m);
   }
 
   /* Hover state - no background change, only text color */
@@ -102,15 +114,10 @@
     outline: none;
   }
 
-  /* V1: Focus ring on whole button */
-  button:focus-visible {
+  /* Focus ring on the content wrapper (label + sort icon) */
+  button:focus-visible .content {
     box-shadow: 0 0 0 var(--goa-border-width-l)
       var(--goa-color-interactive-focus);
-  }
-
-  /* V2: No focus ring on button, focus ring goes on icon instead */
-  button.v2:focus-visible {
-    box-shadow: none;
   }
 
   /* Icon wrapper - contains the sort icon */
@@ -119,15 +126,6 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--goa-border-radius-m);
-  }
-
-  /* V2: Focus ring on icon when button is focused */
-  button.v2:focus-visible .icon-wrapper {
-    box-shadow: 0 0 0 var(--goa-icon-button-focus-border-width, 2px)
-      var(
-        --goa-icon-button-focus-border-color,
-        var(--goa-color-interactive-focus)
-      );
   }
 
   /* Active sort icon */

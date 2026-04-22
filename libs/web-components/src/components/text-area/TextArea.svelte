@@ -290,7 +290,7 @@
   .error:hover {
     box-shadow: var(--goa-text-area-border-error);
   }
-  .error:focus {
+  .error:focus-visible {
     box-shadow: var(--goa-text-area-border), var(--goa-text-area-border-focus);
   }
   .error:focus-within:hover {
@@ -322,7 +322,6 @@
   .v2.root:focus-within {
     box-shadow: var(--goa-text-area-border-focus);
   }
-  .v2.error:focus,
   .v2.error:focus-within,
   .v2.error:focus-within:hover {
     box-shadow: var(--goa-text-area-border-focus);
