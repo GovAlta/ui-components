@@ -76,6 +76,7 @@
   let _targetEl: HTMLElement;
   let _isOpen = false;
   let _autoPosition: "above" | "below" = "below";
+  let _alignment: "left" | "right" = "left";
   const _popoverId = `goa-popover-${generateRandomId()}`;
 
   $: _disabled = toBoolean(disabled);
@@ -122,14 +123,14 @@
 
     showDeprecationWarnings();
     addGlobalCloseListener();
-    window.addEventListener("resize", updateAutoPosition);
+    window.addEventListener("resize", recalculatePosition);
   });
 
   onDestroy(() => {
     if (_needsManualPositioning || _positionRafId) {
       stopManualPositioning();
     }
-    window.removeEventListener("resize", updateAutoPosition);
+    window.removeEventListener("resize", recalculatePosition);
     // true was passed when the listener was added, so it's necesary to be passed here as well
     window.removeEventListener("popstate", handleUrlChange, true);
   });
@@ -140,12 +141,12 @@
     if (!_isOpen || !_targetEl || !_popoverEl) return;
 
     const targetRect = _targetEl.getBoundingClientRect();
+    const popoverRect = _popoverEl.getBoundingClientRect();
     const xOffset = hoffset ? parseFloat(hoffset) : 0;
     const yOffset = voffset ? parseFloat(voffset) : 3;
 
     // Recalculate auto position based on current viewport space
     if (position === "auto") {
-      const popoverRect = _popoverEl.getBoundingClientRect();
       const spaceAbove = targetRect.top;
       const spaceBelow = window.innerHeight - targetRect.bottom;
 
@@ -161,12 +162,16 @@
 
     if (isAbove) {
       _popoverEl.style.top = `${targetRect.top - yOffset}px`;
-      _popoverEl.style.left = `${targetRect.left + xOffset}px`;
       _popoverEl.style.transform = "translateY(-100%)";
     } else {
       _popoverEl.style.top = `${targetRect.bottom + yOffset}px`;
-      _popoverEl.style.left = `${targetRect.left + xOffset}px`;
       _popoverEl.style.transform = "";
+    }
+
+    if (_alignment === "left") {
+      _popoverEl.style.left = `${targetRect.left + xOffset}px`;
+    } else {
+      _popoverEl.style.left = `${targetRect.right - xOffset - popoverRect.width}px`;
     }
   }
 
@@ -261,7 +266,7 @@
     // (MenuButton, AppHeader, AppHeaderMenu, Dropdown)
     if (_isOpen) {
       dispatch(_rootEl, "_open", {}, { bubbles: true });
-      requestAnimationFrame(updateAutoPosition); // same vs await tick(), make sure popover element is fully rendered before we measure its dimension
+      requestAnimationFrame(recalculatePosition); // same vs await tick(), make sure popover element is fully rendered before we measure its dimension
       if (_needsManualPositioning) {
         startManualPositioning();
       }
@@ -306,17 +311,26 @@
       }
       _popoverEl.showPopover();
       _isOpen = true;
-      requestAnimationFrame(updateAutoPosition);
+      requestAnimationFrame(recalculatePosition);
     }
   }
 
-  function updateAutoPosition() {
-    if (position !== "auto" || !_isOpen || !_targetEl || !_popoverEl) {
+  function recalculatePosition() {
+    if (!_isOpen || !_targetEl || !_popoverEl) {
       return;
     }
 
     const targetRect = _targetEl.getBoundingClientRect();
     const popoverRect = _popoverEl.getBoundingClientRect();
+    updateAutoPosition(targetRect, popoverRect);
+    updateAlignment(targetRect, popoverRect);
+  }
+
+  function updateAutoPosition(targetRect: DOMRect, popoverRect: DOMRect) {
+    if (position !== "auto") {
+      return;
+    }
+
     const spaceAbove = targetRect.top;
     const spaceBelow = window.innerHeight - targetRect.bottom;
 
@@ -324,6 +338,22 @@
       spaceBelow < popoverRect.height && spaceAbove > spaceBelow
         ? "above"
         : "below";
+  }
+
+  function updateAlignment(targetRect: DOMRect, popoverRect: DOMRect) {
+    if (position === "right") {
+      return;
+    }
+
+    const spaceRight = window.innerWidth - targetRect.left;
+    if (
+      spaceRight < popoverRect.width &&
+      targetRect.right > popoverRect.width
+    ) {
+      _alignment = "right";
+    } else {
+      _alignment = "left";
+    }
   }
 </script>
 
@@ -372,6 +402,7 @@
       (position === "auto" && _autoPosition === "below")}
     class:position-right={position === "right"}
     class:use-anchor-based-positioning={!_needsManualPositioning}
+    class:align-right={_alignment === "right"}
     style={styles(
       style("width", position !== "right" ? width : undefined),
       style("min-width", minwidth),
@@ -462,6 +493,11 @@
     --popover-translate-x: var(--offset-left, 8px);
     --popover-translate-y: var(--offset-bottom, 0px);
     position-try-fallbacks: none;
+  }
+
+  .popover-content.align-right:not(.position-right) {
+    inset-inline-start: unset;
+    inset-inline-end: anchor(right);
   }
 
   :global(::slotted(ul)) {
