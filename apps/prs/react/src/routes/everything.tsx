@@ -657,6 +657,13 @@ export function EverythingRoute(): JSX.Element {
                 </GoabText>
               </GoabContainer>
             ))}
+            <GoabContainer type="interactive" accent="filled" padding="relaxed" width="content">
+              <GoabText tag="p" size="body-m">
+                Type: interactive
+                <br />
+                Accent: filled
+              </GoabText>
+            </GoabContainer>
           </GoabGrid>
         </GoabContainer>
         <GoabContainer type="interactive" padding="relaxed">
