@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 root.render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/everything/b" element={<EverythingBRoute />} />
         <Route path="/" element={<App />}>

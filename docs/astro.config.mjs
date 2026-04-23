@@ -10,7 +10,8 @@ const workspaceRoot = path.resolve(__dirname, "..");
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://design.alberta.ca",
+  site: process.env.PREVIEW_SITE || "https://design.alberta.ca",
+  base: process.env.PREVIEW_BASE || "/",
   root: ".",
   outDir: "../dist/docs",
   redirects: {
@@ -50,6 +51,11 @@ export default defineConfig({
     resolve: {
       alias: [
         // More specific aliases must come first
+        // allow to use import { withBase } from '@/lib/base-url' instead of '../../lib/base-url'
+        {
+          find: /^@\/(.*)$/,
+          replacement: path.resolve(__dirname, "src/$1"),
+        },
         {
           find: "@abgov/react-components/experimental",
           replacement: path.resolve(

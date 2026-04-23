@@ -11,6 +11,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import FlexSearch from "flexsearch";
+import { withBase } from "@/lib/base-url";
 
 // ============================================================================
 // Types
@@ -244,7 +245,7 @@ async function loadSearchIndex(): Promise<SearchCache> {
 
   // Fetch and build the index
   cachePromise = (async () => {
-    const response = await fetch("/search-index.json");
+    const response = await fetch(withBase("/search-index.json"));
 
     if (!response.ok) {
       throw new Error(`Failed to load search index: ${response.status}`);

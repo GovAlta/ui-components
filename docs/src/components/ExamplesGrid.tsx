@@ -13,6 +13,7 @@
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { withBase } from "@/lib/base-url";
 import {
   GoabButton,
   GoabButtonGroup,
@@ -571,7 +572,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     (example: Example) => (
       <a
         key={example.slug}
-        href={`/examples/${example.slug}`}
+        href={withBase(`/examples/${example.slug}`)}
         className="example-card-link"
       >
         <div className="example-card-content">
@@ -655,7 +656,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     (example: Example) => (
       <tr key={example.slug}>
         <td>
-          <a href={`/examples/${example.slug}`} className="example-table-link">
+          <a href={withBase(`/examples/${example.slug}`)} className="example-table-link">
             {example.data.title}
           </a>
         </td>

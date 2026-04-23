@@ -27,6 +27,8 @@ const scaleColors: Record<string, { bg: string; color: string }> = {
 };
 
 const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
+
+import { withBase } from '@/lib/base-url';
 ---
 
 <article class="example-card">
@@ -66,7 +68,7 @@ const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
       <strong>Components:</strong>
       {data.components.map((comp, i) => (
         <>
-          <a href={`/components/${comp}`} class="component-link">{comp}</a>
+          <a href={withBase(`/components/${comp}`)} class="component-link">{comp}</a>
           {i < data.components.length - 1 && ', '}
         </>
       ))}
@@ -87,7 +89,7 @@ const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
         <strong>Related:</strong>
         {data.relatedExamples.map((rel, i) => (
           <>
-            <a href={`/examples/${rel}`}>{rel}</a>
+            <a href={withBase(`/examples/${rel}`)}>{rel}</a>
             {i < data.relatedExamples!.length - 1 && ', '}
           </>
         ))}

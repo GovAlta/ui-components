@@ -15,10 +15,12 @@ interface Props {
   page?: string;
 }
 
+import { withBase } from '@/lib/base-url';
+
 const { title, description, page } = Astro.props;
 const metaDescription = description || "Build on the research and experience of other service teams by using shared components, examples, tokens, and templates.";
-const ogImage = new URL('/og-image.png', Astro.site).href;
-const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(withBase('/og-image.png'), Astro.site).href;
+const ogUrl = new URL(withBase(Astro.url.pathname), Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -46,11 +48,11 @@ const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
   <meta name="description" content={metaDescription}>
 
   <!-- Favicon & icons -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href={withBase('/favicon.ico')}>
+  <link rel="icon" type="image/png" href={withBase('/favicon.png')} sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} sizes="any">
+  <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} sizes="180x180">
+  <link rel="manifest" href={withBase('/site.webmanifest')}>
   <meta name="theme-color" content="#333333">
 
   <!-- Open Graph / social sharing -->

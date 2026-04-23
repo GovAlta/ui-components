@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Contribute
  *
@@ -26,7 +27,7 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
   </p>
   <goa-text as="h2" id="design-contribution-process" version="2" size="heading-m">Design contribution process</goa-text>
   <p>
-    If a required <a href="/components">component</a> or <a href="/examples">example</a> does not exist in production,
+    If a required <a href={withBase(`/components`)}>component</a> or <a href={withBase(`/examples`)}>example</a> does not exist in production,
     contact the Design System team. We will review the request together and determine next steps.
   </p>
 

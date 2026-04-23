@@ -2,7 +2,7 @@
   <div style="min-height: 100vh; display: flex; flex-direction: column">
     <section slot="header" id="top" class="width" role="header" style="flex: 0 0 auto">
       <goab-microsite-header type="alpha" version="UAT" />
-      <goab-app-header heading="Testing Playground" url="/"></goab-app-header>
+      <goab-app-header heading="Testing Playground" [url]="baseHref"></goab-app-header>
     </section>
 
     <div
@@ -11,7 +11,7 @@
     >
       <goab-work-side-menu
         heading="Testing Playground"
-        url="/"
+        [url]="baseHref"
         [open]="true"
         (onNavigate)="handleNavigate($event)"
         [primaryContent]="primaryTemplate"
@@ -21,14 +21,14 @@
       <ng-template #primaryTemplate>
         <goab-work-side-menu-item
           label="All Components"
-          url="/everything"
+          [url]="baseHref + 'everything'"
           icon="list"
         ></goab-work-side-menu-item>
         <goab-work-side-menu-group icon="alert-circle" heading="Bugs">
           @for (route of bugRouteDefinitions; track route.path) {
             <goab-work-side-menu-item
               [label]="route.id + ' - ' + route.title"
-              [url]="'/' + route.path"
+              [url]="baseHref + route.path"
             ></goab-work-side-menu-item>
           }
         </goab-work-side-menu-group>
@@ -36,7 +36,7 @@
           @for (route of docsRouteDefinitions; track route.path) {
             <goab-work-side-menu-item
               [label]="route.title"
-              [url]="'/' + route.path"
+              [url]="baseHref + route.path"
             ></goab-work-side-menu-item>
           }
         </goab-work-side-menu-group>
@@ -44,7 +44,7 @@
           @for (route of featureRouteDefinitions; track route.path) {
             <goab-work-side-menu-item
               [label]="route.id + ' - ' + route.title"
-              [url]="'/' + route.path"
+              [url]="baseHref + route.path"
             ></goab-work-side-menu-item>
           }
         </goab-work-side-menu-group>

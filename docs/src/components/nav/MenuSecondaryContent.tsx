@@ -10,6 +10,7 @@
 import { useCallback, useState, useEffect } from "react";
 import { GoabIcon, GoabSpacer, GoabWorkSideMenuItem } from "@abgov/react-components";
 
+import { withBase } from "@/lib/base-url";
 import "./menu-secondary.css";
 
 interface MenuSecondaryContentProps {
@@ -82,7 +83,7 @@ export function MenuSecondaryContent({ isOpen }: MenuSecondaryContentProps) {
           </>
         )}
       </button>
-      <GoabWorkSideMenuItem label="Get support" icon="help-circle" url="/support" />
+      <GoabWorkSideMenuItem label="Get support" icon="help-circle" url={withBase("/support")} />
       <GoabWorkSideMenuItem
         label="Release notes"
         icon="open"

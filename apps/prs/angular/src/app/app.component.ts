@@ -1,4 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from "@angular/core";
+import { LocationStrategy } from "@angular/common";
 import { Router, NavigationEnd, RouterOutlet } from "@angular/router";
 import { filter } from "rxjs/operators";
 import {
@@ -37,6 +38,7 @@ export class AppComponent {
   readonly bugRouteDefinitions = bugRouteDefinitions;
   readonly featureRouteDefinitions = featureRouteDefinitions;
   readonly docsRouteDefinitions = docsRouteDefinitions;
+  readonly baseHref = inject(LocationStrategy).getBaseHref();
 
   private fullPageRoutes = ["/features/2885"];
   private router = inject(Router);
@@ -52,6 +54,9 @@ export class AppComponent {
   }
 
   handleNavigate(path: string): void {
-    this.router.navigateByUrl(path);
+    const internal = path.startsWith(this.baseHref)
+      ? "/" + path.slice(this.baseHref.length)
+      : path;
+    this.router.navigateByUrl(internal);
   }
 }

@@ -24,19 +24,25 @@ const appContentStyle: CSSProperties = {
 
 export function App() {
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.BASE_URL;
+
+  const handleNavigate = (path: string) => {
+    const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
+    navigate(internal);
+  };
 
   return (
     <GoabOneColumnLayout>
       <section slot="header" id="top">
         <GoabMicrositeHeader type="alpha" version="UAT" />
-        <GoabAppHeader heading="Testing Playground" url="/" />
+        <GoabAppHeader heading="Testing Playground" url={baseUrl} />
       </section>
       <div style={appContentStyle}>
         <GoabWorkSideMenu
           heading="Testing Playground"
-          url="/"
+          url={baseUrl}
           open={true}
-          onNavigate={(path: string) => navigate(path)}
+          onNavigate={handleNavigate}
           primaryContent={
             <>
               <GoabWorkSideMenuGroup icon="alert-circle" heading="Bugs">
@@ -44,7 +50,7 @@ export function App() {
                   <GoabWorkSideMenuItem
                     key={route.path}
                     label={route.id + " - " + route.title}
-                    url={`/${route.path}`}
+                    url={`${baseUrl}${route.path}`}
                   />
                 ))}
               </GoabWorkSideMenuGroup>
@@ -54,7 +60,7 @@ export function App() {
                   <GoabWorkSideMenuItem
                     key={route.path}
                     label={route.id + " - " + route.title}
-                    url={`/${route.path}`}
+                    url={`${baseUrl}${route.path}`}
                   />
                 ))}
               </GoabWorkSideMenuGroup>
@@ -63,11 +69,11 @@ export function App() {
                   <GoabWorkSideMenuItem
                     key={route.path}
                     label={route.title}
-                    url={`/${route.path}`}
+                    url={`${baseUrl}${route.path}`}
                   />
                 ))}
               </GoabWorkSideMenuGroup>
-              <GoabWorkSideMenuItem icon="list" label="Everything" url="/everything" />
+              <GoabWorkSideMenuItem icon="list" label="Everything" url={`${baseUrl}everything`} />
             </>
           }
         />

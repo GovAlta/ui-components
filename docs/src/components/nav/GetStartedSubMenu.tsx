@@ -12,6 +12,7 @@ import {
   GoabWorkSideMenuGroup,
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { withBase } from "@/lib/base-url";
 
 // Top-level pages (not in a group)
 const TOP_PAGES = [
@@ -96,7 +97,7 @@ export function GetStartedSubMenu({
 
       {/* Top-level pages */}
       {TOP_PAGES.map((page) => (
-        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
       ))}
 
       {/* Grouped sections */}
@@ -117,7 +118,7 @@ export function GetStartedSubMenu({
                   <GoabWorkSideMenuItem
                     key={page.url}
                     label={page.label}
-                    url={page.url}
+                    url={withBase(page.url)}
                   />
                 ))}
               </GoabWorkSideMenuGroup>
@@ -128,7 +129,7 @@ export function GetStartedSubMenu({
 
       {/* Bottom pages */}
       {BOTTOM_PAGES.map((page) => (
-        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
       ))}
     </>
   );
@@ -136,7 +137,7 @@ export function GetStartedSubMenu({
   return (
     <GoabWorkSideMenu
       heading="Design System | Get Started"
-      url="/"
+      url={withBase("/")}
       open={isOpen}
       onToggle={onToggle}
       primaryContent={primaryContent}

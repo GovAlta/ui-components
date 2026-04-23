@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Examples Listing Page
  *
@@ -13,6 +14,7 @@ import { getCollection } from 'astro:content';
 import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { ExamplesGrid } from '../../components/ExamplesGrid';
+
 
 // Get all examples
 const allExamples = await getCollection('examples');
@@ -48,15 +50,15 @@ const examples = sortedExamples.map(example => ({
     <!-- Service patterns -->
     <section class="service-patterns">
       <div class="patterns-row">
-        <a href="/examples/workspace" class="pattern-card">
-          <img src="/images/home/workspace-thumb.png" alt="" class="pattern-image" />
+        <a href={withBase(`/examples/workspace`)} class="pattern-card">
+          <img src={withBase(`/images/home/workspace-thumb.png`)} alt="" class="pattern-image" />
           <div class="pattern-text">
             <strong class="pattern-title">Workspace</strong>
             <span class="pattern-desc">For staff who review, manage, and process cases</span>
           </div>
         </a>
-        <a href="/examples/public-form" class="pattern-card">
-          <img src="/images/home/public-form-thumb.png" alt="" class="pattern-image" />
+        <a href={withBase(`/examples/public-form`)} class="pattern-card">
+          <img src={withBase(`/images/home/public-form-thumb.png`)} alt="" class="pattern-image" />
           <div class="pattern-text">
             <strong class="pattern-title">Public form</strong>
             <span class="pattern-desc">For citizens submitting applications and requests</span>

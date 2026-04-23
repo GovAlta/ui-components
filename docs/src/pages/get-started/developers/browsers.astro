@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Developers - Supported browsers
  *
@@ -80,7 +81,7 @@ import DocumentationPageLayout from '../../../layouts/DocumentationPageLayout.as
   <p>
     Use supported browsers and operating system versions when developing and testing services. If you
     encounter a browser-specific issue, follow the
-    <a href="/get-started/developers/bug">Verify a bug</a> process.
+    <a href={withBase(`/get-started/developers/bug`)}>Verify a bug</a> process.
   </p>
   <DropInCallout />
 </DocumentationPageLayout>
