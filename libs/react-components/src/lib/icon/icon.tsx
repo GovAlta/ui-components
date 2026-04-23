@@ -39,6 +39,8 @@ export interface GoabIconProps extends Margins, DataAttributes {
   title?: string;
   /** Defines how the icon will be announced by screen readers. */
   ariaLabel?: string;
+  /** Sets the ARIA role for the icon. Use 'presentation' for decorative icons. @default "img" */
+  role?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
 }
@@ -52,6 +54,7 @@ interface WCProps extends Margins {
   opacity?: number;
   title?: string;
   arialabel?: string;
+  role?: string;
   testid?: string;
 }
 
