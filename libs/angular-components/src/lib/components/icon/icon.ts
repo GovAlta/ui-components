@@ -31,6 +31,7 @@ import { GoabBaseComponent } from "../base.component";
         [attr.opacity]="opacity"
         [attr.title]="title"
         [attr.arialabel]="ariaLabel"
+        [attr.role]="role"
         [attr.mt]="mt"
         [attr.mb]="mb"
         [attr.ml]="ml"
@@ -63,6 +64,8 @@ export class GoabIcon extends GoabBaseComponent implements OnInit {
   @Input() title?: string;
   /** Defines how the icon will be announced by screen readers. */
   @Input() ariaLabel?: string;
+  /** Sets the ARIA role for the icon. Use 'presentation' for decorative icons. */
+  @Input() role?: string;
 
   isReady = false;
 
