@@ -16836,26 +16836,26 @@ function B2(t, e, o) {
   });
   function U() {
     if (L) {
-      const le = L.querySelector("slot");
-      return le ? le.assignedElements() : [...L.children];
+      const ne = L.querySelector("slot");
+      return ne ? ne.assignedElements() : [...L.children];
     }
     return [];
   }
-  function Z(le) {
-    I && Ee(I, "_change", { open: le }, { bubbles: true });
+  function Z(ne) {
+    I && Ee(I, "_change", { open: ne }, { bubbles: true });
   }
-  function V(le) {
-    le.preventDefault(), o(14, q.style.overflow = "hidden", q), x || !q.open ? G() : (A || q.open) && R();
+  function V(ne) {
+    ne.preventDefault(), o(14, q.style.overflow = "hidden", q), x || !q.open ? G() : (A || q.open) && R();
   }
   function R() {
     x = true;
-    const le = `${q.offsetHeight}px`, He = `${F.offsetHeight}px`;
+    const ne = `${q.offsetHeight}px`, He = `${F.offsetHeight}px`;
     W && W.cancel();
     const ot = $(), tt = K();
     W = q.animate(
       {
         // Set the keyframes from the startHeight to endHeight
-        height: [le, He]
+        height: [ne, He]
       },
       { duration: ot, easing: tt }
     ), W.onfinish = () => te(false), W.oncancel = () => x = false;
@@ -16865,27 +16865,27 @@ function B2(t, e, o) {
   }
   function ee() {
     A = true;
-    const le = `${q.offsetHeight}px`, He = `${F.offsetHeight + P.offsetHeight}px`;
+    const ne = `${q.offsetHeight}px`, He = `${F.offsetHeight + P.offsetHeight}px`;
     W && W.cancel();
     const ot = $(), tt = H();
     W = q.animate(
       {
         // Set the keyframes from the startHeight to endHeight
-        height: [le, He]
+        height: [ne, He]
       },
       { duration: ot, easing: tt }
     ), W.onfinish = () => te(true), W.oncancel = () => A = false, o(21, s = "true");
   }
-  function te(le) {
-    o(14, q.open = le, q), W = null, x = false, A = false, o(14, q.style.height = o(14, q.style.overflow = "", q), q), Z(le);
+  function te(ne) {
+    console.log("onfinish"), o(14, q.open = ne, q), W = null, x = false, A = false, o(14, q.style.height = o(14, q.style.overflow = "", q), q), Z(ne), o(21, s = ne ? "true" : "false");
   }
-  function ie(le) {
-    const He = getComputedStyle(I).getPropertyValue(le).trim();
-    return !He || He === "" ? (B.do(le, () => console.warn(`CSS variable ${le} is not defined. Please make sure you're using the correct version of @abgov/design-tokens`)), null) : He;
+  function ie(ne) {
+    const He = getComputedStyle(I).getPropertyValue(ne).trim();
+    return !He || He === "" ? (B.do(ne, () => console.warn(`CSS variable ${ne} is not defined. Please make sure you're using the correct version of @abgov/design-tokens`)), null) : He;
   }
   function $() {
-    const le = ie("--goa-motion-duration-short-3") ?? "100ms";
-    return y1(le, 100);
+    const ne = ie("--goa-motion-duration-short-3") ?? "100ms";
+    return y1(ne, 100);
   }
   function H() {
     return ie("--goa-motion-curve-expressive-reveal") ?? "cubic-bezier(0.7, 0, 0.25, 1)";
@@ -16893,37 +16893,37 @@ function B2(t, e, o) {
   function K() {
     return ie("--goa-motion-curve-expressive-exit") ?? "cubic-bezier(0.42, 0, 1, 1)";
   }
-  function X(le) {
-    r1.call(this, t, le);
+  function X(ne) {
+    r1.call(this, t, ne);
   }
-  function se(le) {
-    ue[le ? "unshift" : "push"](() => {
-      L = le, o(12, L);
+  function se(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      L = ne, o(12, L);
     });
   }
   const oe = () => o(11, j = true), ze = () => o(11, j = false), Le = () => o(11, j = false), Ke = () => o(11, j = false);
-  function ne(le) {
-    ue[le ? "unshift" : "push"](() => {
-      F = le, o(15, F);
+  function le(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      F = ne, o(15, F);
     });
   }
-  function re(le) {
-    ue[le ? "unshift" : "push"](() => {
-      P = le, o(16, P);
+  function re(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      P = ne, o(16, P);
     });
   }
-  function Me(le) {
-    ue[le ? "unshift" : "push"](() => {
-      q = le, o(14, q);
+  function Me(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      q = ne, o(14, q);
     });
   }
-  function Te(le) {
-    ue[le ? "unshift" : "push"](() => {
-      I = le, o(13, I);
+  function Te(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      I = ne, o(13, I);
     });
   }
-  return t.$$set = (le) => {
-    "open" in le && o(21, s = le.open), "heading" in le && o(0, u = le.heading), "secondarytext" in le && o(1, g = le.secondarytext), "headingsize" in le && o(2, v = le.headingsize), "id" in le && o(3, m = le.id), "maxwidth" in le && o(4, b = le.maxwidth), "testid" in le && o(5, w = le.testid), "mt" in le && o(6, p = le.mt), "mr" in le && o(7, y = le.mr), "mb" in le && o(8, z = le.mb), "ml" in le && o(9, M = le.ml), "iconposition" in le && o(10, N = le.iconposition), "$$scope" in le && o(22, l = le.$$scope);
+  return t.$$set = (ne) => {
+    "open" in ne && o(21, s = ne.open), "heading" in ne && o(0, u = ne.heading), "secondarytext" in ne && o(1, g = ne.secondarytext), "headingsize" in ne && o(2, v = ne.headingsize), "id" in ne && o(3, m = ne.id), "maxwidth" in ne && o(4, b = ne.maxwidth), "testid" in ne && o(5, w = ne.testid), "mt" in ne && o(6, p = ne.mt), "mr" in ne && o(7, y = ne.mr), "mb" in ne && o(8, z = ne.mb), "ml" in ne && o(9, M = ne.ml), "iconposition" in ne && o(10, N = ne.iconposition), "$$scope" in ne && o(22, l = ne.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*open*/
     2097152 && o(19, i = Se(s));
@@ -16958,7 +16958,7 @@ function B2(t, e, o) {
     ze,
     Le,
     Ke,
-    ne,
+    le,
     re,
     Me,
     Te
@@ -18769,7 +18769,7 @@ function sd(t, e, o) {
     const we = z == null ? void 0 : z.childNodes[0], Ye = (je = we == null ? void 0 : we.assignedElements) == null ? void 0 : je.call(we);
     return Ye ? Ye.length > 0 : [...z == null ? void 0 : z.querySelectorAll("a")].length > 0;
   }
-  function ne() {
+  function le() {
     o(6, N = cs.innerWidth);
   }
   const re = () => o(16, A = !A);
@@ -18783,7 +18783,7 @@ function sd(t, e, o) {
       M = we, o(9, M);
     });
   }
-  function le(we) {
+  function ne(we) {
     ue[we ? "unshift" : "push"](() => {
       F = we, o(12, F);
     });
@@ -18853,11 +18853,11 @@ function sd(t, e, o) {
     y,
     U,
     a,
-    ne,
+    le,
     re,
     Me,
     Te,
-    le,
+    ne,
     He,
     ot,
     tt,
@@ -21318,13 +21318,13 @@ function Sd(t) {
           /*_months*/
           oe[18]
         );
-        let ne;
-        for (ne = 0; ne < R.length; ne += 1) {
-          const re = tn(oe, R, ne);
-          G[ne] ? G[ne].p(re, ze) : (G[ne] = on(re), G[ne].c(), G[ne].m(n, null));
+        let le;
+        for (le = 0; le < R.length; le += 1) {
+          const re = tn(oe, R, le);
+          G[le] ? G[le].p(re, ze) : (G[le] = on(re), G[le].c(), G[le].m(n, null));
         }
-        for (; ne < G.length; ne += 1)
-          G[ne].d(1);
+        for (; le < G.length; le += 1)
+          G[le].d(1);
         G.length = R.length;
       }
       if (ze[0] & /*name*/
@@ -21353,13 +21353,13 @@ function Sd(t) {
           /*_years*/
           oe[16]
         );
-        let ne;
-        for (ne = 0; ne < ee.length; ne += 1) {
-          const re = en(oe, ee, ne);
-          te[ne] ? te[ne].p(re, ze) : (te[ne] = nn(re), te[ne].c(), te[ne].m(u, null));
+        let le;
+        for (le = 0; le < ee.length; le += 1) {
+          const re = en(oe, ee, le);
+          te[le] ? te[le].p(re, ze) : (te[le] = nn(re), te[le].c(), te[le].m(u, null));
         }
-        for (; ne < te.length; ne += 1)
-          te[ne].d(1);
+        for (; le < te.length; le += 1)
+          te[le].d(1);
         te.length = ee.length;
       }
       if (ze[0] & /*name*/
@@ -21388,13 +21388,13 @@ function Sd(t) {
           /*_previousMonthDays*/
           oe[14]
         );
-        let ne;
-        for (ne = 0; ne < ie.length; ne += 1) {
-          const re = $i(oe, ie, ne);
-          $[ne] ? $[ne].p(re, ze) : ($[ne] = ln(re), $[ne].c(), $[ne].m(p, A));
+        let le;
+        for (le = 0; le < ie.length; le += 1) {
+          const re = $i(oe, ie, le);
+          $[le] ? $[le].p(re, ze) : ($[le] = ln(re), $[le].c(), $[le].m(p, A));
         }
-        for (; ne < $.length; ne += 1)
-          $[ne].d(1);
+        for (; le < $.length; le += 1)
+          $[le].d(1);
         $.length = ie.length;
       }
       if (ze[0] & /*_monthDays, _calendarDate, value, _selectedDate, _min, _max, onDateClick*/
@@ -21403,13 +21403,13 @@ function Sd(t) {
           /*_monthDays*/
           oe[13]
         );
-        let ne;
-        for (ne = 0; ne < H.length; ne += 1) {
-          const re = Ji(oe, H, ne);
-          K[ne] ? K[ne].p(re, ze) : (K[ne] = rn(re), K[ne].c(), K[ne].m(p, B));
+        let le;
+        for (le = 0; le < H.length; le += 1) {
+          const re = Ji(oe, H, le);
+          K[le] ? K[le].p(re, ze) : (K[le] = rn(re), K[le].c(), K[le].m(p, B));
         }
-        for (; ne < K.length; ne += 1)
-          K[ne].d(1);
+        for (; le < K.length; le += 1)
+          K[le].d(1);
         K.length = H.length;
       }
       if (ze[0] & /*_nextMonthDays, _calendarDate, _min, _max, onDateClick*/
@@ -21418,13 +21418,13 @@ function Sd(t) {
           /*_nextMonthDays*/
           oe[15]
         );
-        let ne;
-        for (ne = 0; ne < X.length; ne += 1) {
-          const re = Xi(oe, X, ne);
-          se[ne] ? se[ne].p(re, ze) : (se[ne] = an(re), se[ne].c(), se[ne].m(p, null));
+        let le;
+        for (le = 0; le < X.length; le += 1) {
+          const re = Xi(oe, X, le);
+          se[le] ? se[le].p(re, ze) : (se[le] = an(re), se[le].c(), se[le].m(p, null));
         }
-        for (; ne < se.length; ne += 1)
-          se[ne].d(1);
+        for (; le < se.length; le += 1)
+          se[le].d(1);
         se.length = X.length;
       }
       ze[0] & /*mt, mr, mb, ml*/
@@ -23146,10 +23146,10 @@ function kc(t, e, o) {
     Pe(S, ft, { name: s, el: S }, { bubbles: !Me, timeout: 10 });
   }
   function X(re) {
-    var le;
+    var ne;
     A.focus();
     const Me = !n, Te = Me ? `${O || "checked"}` : "";
-    o(26, u = Xt(Me)), (le = re.target) == null || le.dispatchEvent(new CustomEvent(
+    o(26, u = Xt(Me)), (ne = re.target) == null || ne.dispatchEvent(new CustomEvent(
       "_change",
       {
         composed: true,
@@ -23186,7 +23186,7 @@ function kc(t, e, o) {
   function Ke() {
     V = this.clientHeight, o(16, V);
   }
-  function ne(re) {
+  function le(re) {
     ue[re ? "unshift" : "push"](() => {
       S = re, o(13, S);
     });
@@ -23240,7 +23240,7 @@ function kc(t, e, o) {
     ze,
     Le,
     Ke,
-    ne
+    le
   ];
 }
 class yc extends Ce {
@@ -25014,26 +25014,26 @@ function Gc(t, e, o) {
   ), () => {
     if (b && b.disconnect(), y !== null && clearTimeout(y), c) {
       c.removeEventListener("keydown", B), c.removeEventListener("click", se), c.removeEventListener("focusin", L), c.removeEventListener("focusout", I);
-      const ne = c.querySelector("slot");
-      ne && ne.removeEventListener("slotchange", O);
+      const le = c.querySelector("slot");
+      le && le.removeEventListener("slotchange", O);
     }
     document.removeEventListener("click", q);
   }));
   function N() {
     if (!c) return;
     s = [];
-    const ne = c.querySelector("slot");
-    if (!ne) return;
-    const re = ne.assignedElements(), Me = [];
-    re.forEach((le) => {
-      const ot = zn(le).filter((tt) => tt.getAttribute("data-grid") === "row");
+    const le = c.querySelector("slot");
+    if (!le) return;
+    const re = le.assignedElements(), Me = [];
+    re.forEach((ne) => {
+      const ot = zn(ne).filter((tt) => tt.getAttribute("data-grid") === "row");
       Me.push(...ot);
-    }), Me.forEach((le) => {
-      le.setAttribute("role", "row");
+    }), Me.forEach((ne) => {
+      ne.setAttribute("role", "row");
     });
     let Te = 0;
-    Me.forEach((le) => {
-      const tt = zn(le).filter((dt) => {
+    Me.forEach((ne) => {
+      const tt = zn(ne).filter((dt) => {
         const we = dt.getAttribute("data-grid");
         return we === "cell" || (we == null ? void 0 : we.startsWith("cell-"));
       }).sort((dt, we) => {
@@ -25053,27 +25053,27 @@ function Gc(t, e, o) {
   function L() {
     M = true;
   }
-  function I(ne) {
-    const re = ne.relatedTarget;
+  function I(le) {
+    const re = le.relatedTarget;
     re && !(c != null && c.contains(re)) && (M = false);
   }
-  function q(ne) {
+  function q(le) {
     if (w) {
       w = false;
       return;
     }
-    c != null && c.contains(ne.target) || F();
+    c != null && c.contains(le.target) || F();
   }
   function F() {
     if (x(), u = 0, g = 0, v = -1, o(2, p = false), s[0] && s[0][0]) {
-      const ne = s[0][0], re = ne.cell;
-      ne.focusables.length > 0 ? re.removeAttribute("tabindex") : re.setAttribute("tabindex", "0");
+      const le = s[0][0], re = le.cell;
+      le.focusables.length > 0 ? re.removeAttribute("tabindex") : re.setAttribute("tabindex", "0");
     }
   }
   function P() {
     if (!c) return;
-    const ne = c.querySelector("slot");
-    ne && (b = new MutationObserver((re) => {
+    const le = c.querySelector("slot");
+    le && (b = new MutationObserver((re) => {
       let Me = false;
       for (const Te of re) {
         if (Te.type === "childList" && (Te.addedNodes.length > 0 || Te.removedNodes.length > 0)) {
@@ -25085,22 +25085,22 @@ function Gc(t, e, o) {
           break;
         }
         if (Te.type === "childList" && Te.target instanceof HTMLElement) {
-          const le = Te.target;
-          if (le.hasAttribute("data-grid") || le.querySelector("[data-grid]")) {
+          const ne = Te.target;
+          if (ne.hasAttribute("data-grid") || ne.querySelector("[data-grid]")) {
             Me = true;
             break;
           }
         }
       }
       Me && W();
-    }), ne.addEventListener("slotchange", O), S(ne));
+    }), le.addEventListener("slotchange", O), S(le));
   }
   function O() {
-    const ne = c == null ? void 0 : c.querySelector("slot");
-    ne && (S(ne), W());
+    const le = c == null ? void 0 : c.querySelector("slot");
+    le && (S(le), W());
   }
-  function S(ne) {
-    ne.assignedElements().forEach((Me) => {
+  function S(le) {
+    le.assignedElements().forEach((Me) => {
       Me instanceof HTMLElement && (b == null || b.observe(Me, {
         childList: true,
         subtree: true,
@@ -25111,95 +25111,95 @@ function Gc(t, e, o) {
   }
   function W() {
     y !== null && (clearTimeout(y), y = null), z = true;
-    const ne = M;
+    const le = M;
     y = setTimeout(
       () => {
-        x(), N(), A(u, g, v, ne), y = null, z = false;
+        x(), N(), A(u, g, v, le), y = null, z = false;
       },
       1
     );
   }
   function x() {
     var re, Me;
-    const ne = (Me = (re = s[u]) == null ? void 0 : re[g]) == null ? void 0 : Me.cell;
-    ne && (Cn(ne), ne.removeAttribute("tabindex"));
+    const le = (Me = (re = s[u]) == null ? void 0 : re[g]) == null ? void 0 : Me.cell;
+    le && (Cn(le), le.removeAttribute("tabindex"));
   }
-  function A(ne, re, Me, Te) {
-    if (!Z(ne, re)) {
+  function A(le, re, Me, Te) {
+    if (!Z(le, re)) {
       v = -1, Te && H();
       return;
     }
-    u = ne, g = re, v = Me, Te && V(ne, re);
+    u = le, g = re, v = Me, Te && V(le, re);
   }
-  function B(ne) {
-    if (ne.key === "Tab") {
+  function B(le) {
+    if (le.key === "Tab") {
       document.addEventListener("focusin", oe, { once: true });
       return;
     }
     if (!(z || m))
-      switch (ne.key) {
+      switch (le.key) {
         case "ArrowUp":
-          ne.preventDefault(), ne.stopPropagation(), R();
+          le.preventDefault(), le.stopPropagation(), R();
           break;
         case "ArrowDown":
-          ne.preventDefault(), ne.stopPropagation(), G();
+          le.preventDefault(), le.stopPropagation(), G();
           break;
         case "ArrowLeft":
-          ne.preventDefault(), ne.stopPropagation(), ee();
+          le.preventDefault(), le.stopPropagation(), ee();
           break;
         case "ArrowRight":
-          ne.preventDefault(), ne.stopPropagation(), te();
+          le.preventDefault(), le.stopPropagation(), te();
           break;
         case "Home":
-          ne.preventDefault(), ne.stopPropagation(), ne.ctrlKey ? H() : ie();
+          le.preventDefault(), le.stopPropagation(), le.ctrlKey ? H() : ie();
           break;
         case "End":
-          ne.preventDefault(), ne.stopPropagation(), ne.ctrlKey ? K() : $();
+          le.preventDefault(), le.stopPropagation(), le.ctrlKey ? K() : $();
           break;
       }
   }
-  function U(ne, re) {
+  function U(le, re) {
     var Te;
-    if (!Z(ne, re)) return false;
-    x(), u = ne, g = re;
-    const Me = (Te = s[ne][re]) == null ? void 0 : Te.cell;
+    if (!Z(le, re)) return false;
+    x(), u = le, g = re;
+    const Me = (Te = s[le][re]) == null ? void 0 : Te.cell;
     return Me == null || Me.setAttribute("tabindex", "0"), Qc(Me), m = Me.matches("input") || Me.querySelector("input") !== null, true;
   }
-  function Z(ne, re) {
-    return ne >= 0 && re >= 0 && s && s.length > 0 && ne < s.length && re < s[ne].length;
+  function Z(le, re) {
+    return le >= 0 && re >= 0 && s && s.length > 0 && le < s.length && re < s[le].length;
   }
-  function V(ne, re) {
-    if (!U(ne, re)) {
+  function V(le, re) {
+    if (!U(le, re)) {
       u = 0, g = 0, v = -1;
       return;
     }
-    const Me = s[ne][re], Te = Me.cell, le = Me.focusables || [];
-    o(2, p = true), le.length === 0 ? (Te.setAttribute("tabindex", "0"), Te.focus(), v = -1) : ((v < 0 || v >= le.length) && (v = 0), Te.removeAttribute("tabindex"), Cn(Te), setTimeout(
+    const Me = s[le][re], Te = Me.cell, ne = Me.focusables || [];
+    o(2, p = true), ne.length === 0 ? (Te.setAttribute("tabindex", "0"), Te.focus(), v = -1) : ((v < 0 || v >= ne.length) && (v = 0), Te.removeAttribute("tabindex"), Cn(Te), setTimeout(
       () => {
-        le[v].focus();
+        ne[v].focus();
       },
       0
     ));
   }
   function R() {
-    const ne = u - 1;
-    if (ne < 0 || !s[ne])
+    const le = u - 1;
+    if (le < 0 || !s[le])
       return;
     let re = g;
-    const Me = s[ne].length;
-    re >= Me && (re = Me - 1), V(ne, re);
+    const Me = s[le].length;
+    re >= Me && (re = Me - 1), V(le, re);
   }
   function G() {
-    const ne = u + 1;
-    if (!s[ne])
+    const le = u + 1;
+    if (!s[le])
       return;
     let re = g;
-    const Me = s[ne].length;
-    re >= Me && (re = Me - 1), V(ne, re);
+    const Me = s[le].length;
+    re >= Me && (re = Me - 1), V(le, re);
   }
   function ee() {
-    const ne = s[u] && s[u][g];
-    if (ne && ne.focusables.length > 0 && v > 0) {
+    const le = s[u] && s[u][g];
+    if (le && le.focusables.length > 0 && v > 0) {
       v = v - 1, V(u, g);
       return;
     }
@@ -25213,8 +25213,8 @@ function Gc(t, e, o) {
     V(u, g - 1);
   }
   function te() {
-    const ne = s[u] && s[u][g];
-    if (ne && ne.focusables.length > 0 && v !== -1 && v < ne.focusables.length - 1) {
+    const le = s[u] && s[u][g];
+    if (le && le.focusables.length > 0 && v !== -1 && v < le.focusables.length - 1) {
       v = v + 1, V(u, g);
       return;
     }
@@ -25236,28 +25236,28 @@ function Gc(t, e, o) {
   }
   function K() {
     if (s.length > 0) {
-      const ne = s.length - 1, re = s[ne].length - 1;
-      V(ne, re);
+      const le = s.length - 1, re = s[le].length - 1;
+      V(le, re);
     }
   }
-  function X(ne) {
+  function X(le) {
     if (!s || s.length === 0) return null;
     for (let re = 0; re < s.length; re++)
       for (let Me = 0; Me < s[re].length; Me++)
-        if (s[re][Me].cell === ne)
+        if (s[re][Me].cell === le)
           return { row: re, col: Me };
     return null;
   }
-  function se(ne) {
+  function se(le) {
     if (w = true, z) return;
-    const Me = ne.target.closest('[role="gridcell"]');
+    const Me = le.target.closest('[role="gridcell"]');
     if (!Me) return;
     const Te = X(Me);
     Te && ((Te.row !== u || Te.col !== g) && (v = -1), V(Te.row, Te.col));
   }
-  function oe(ne) {
+  function oe(le) {
     if (z) return;
-    if (!ne.composedPath().includes(c)) {
+    if (!le.composedPath().includes(c)) {
       F();
       return;
     }
@@ -25265,36 +25265,36 @@ function Gc(t, e, o) {
   }
   function ze() {
     if (z) return;
-    const ne = document.activeElement;
-    if (!ne)
+    const le = document.activeElement;
+    if (!le)
       return;
-    const re = ne.closest('[role="gridcell"]');
+    const re = le.closest('[role="gridcell"]');
     if (!re) return;
     const Me = X(re);
     if (Me)
       if (Me.row !== u || Me.col !== g)
         v = -1, V(Me.row, Me.col);
       else {
-        const He = s[Me.row][Me.col].focusables.indexOf(ne);
+        const He = s[Me.row][Me.col].focusables.indexOf(le);
         He !== -1 && (v = He);
       }
   }
-  function Le(ne) {
+  function Le(le) {
     const re = /* @__PURE__ */ new Set();
     function Me(Te) {
-      var le;
+      var ne;
       for (const He of Te)
-        He instanceof HTMLElement && He.shadowRoot && (He.hasAttribute("data-ignore-focus") || Me([...((le = He.shadowRoot) == null ? void 0 : le.childNodes) || []])), He.hasChildNodes() && Me(Array.from(He.childNodes)), He instanceof HTMLSlotElement && Me([...He.assignedNodes()]), os(He) && He !== ne && Rc(He) && re.add(He);
+        He instanceof HTMLElement && He.shadowRoot && (He.hasAttribute("data-ignore-focus") || Me([...((ne = He.shadowRoot) == null ? void 0 : ne.childNodes) || []])), He.hasChildNodes() && Me(Array.from(He.childNodes)), He instanceof HTMLSlotElement && Me([...He.assignedNodes()]), os(He) && He !== le && Rc(He) && re.add(He);
     }
-    return Me([ne]), Array.from(re);
+    return Me([le]), Array.from(re);
   }
-  function Ke(ne) {
-    ue[ne ? "unshift" : "push"](() => {
-      c = ne, o(1, c);
+  function Ke(le) {
+    ue[le ? "unshift" : "push"](() => {
+      c = le, o(1, c);
     });
   }
-  return t.$$set = (ne) => {
-    "keyboardIconVisibility" in ne && o(4, r = ne.keyboardIconVisibility), "keyboardNav" in ne && o(5, a = ne.keyboardNav), "keyboardIconPosition" in ne && o(0, d = ne.keyboardIconPosition), "$$scope" in ne && o(6, l = ne.$$scope);
+  return t.$$set = (le) => {
+    "keyboardIconVisibility" in le && o(4, r = le.keyboardIconVisibility), "keyboardNav" in le && o(5, a = le.keyboardNav), "keyboardIconPosition" in le && o(0, d = le.keyboardIconPosition), "$$scope" in le && o(6, l = le.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*keyboardIconVisibility*/
     16 && o(3, i = r !== "hidden");
@@ -28430,12 +28430,12 @@ const Au = (t) => t.preventDefault();
 function Su(t, e, o) {
   let i, n, l, r, a, { $$slots: d = {}, $$scope: c } = e, { name: s } = e, { arialabel: u = "" } = e, { arialabelledby: g = "" } = e, { value: v = "" } = e, { filterable: m = "false" } = e, { leadingicon: b = null } = e, { maxheight: w = "276px" } = e, { placeholder: p = "" } = e, { width: y = "" } = e, { maxwidth: z = "" } = e, { disabled: M = "false" } = e, { error: N = "false" } = e, { multiselect: j = "false" } = e, { native: L = "false" } = e, { size: I = "default" } = e, { version: q = "1" } = e, { relative: F = "" } = e, { mt: P = null } = e, { mr: O = null } = e, { mb: S = null } = e, { ml: W = null } = e, { autocomplete: x = "" } = e, { testid: A = "" } = e, B = [], U, Z = false, V = -1, R, G, ee, te, ie, $, H, K = false, X = [], se = [], oe, ze = Se(N), Le = ze;
   De(() => {
-    to(ee), Me(), He(), ne(), $ = r ? new As(ie) : new Ss(ie), re();
+    to(ee), Me(), He(), le(), $ = r ? new As(ie) : new Ss(ie), re();
   });
   function Ke(ce, xe, Ge) {
     ce ? /(px|%|ch|rem|em)$/.test(ce) ? o(25, R = ce) : (console.error("Dropdown width must be of an allowed unit. Falling back to `px`"), o(25, R = `${ce}px`)) : z ? o(25, R = z) : o(25, R = dt(xe)), ce != null && ce.includes("%") || z != null && z.includes("%") ? o(26, G = "100%") : o(26, G = R);
   }
-  function ne() {
+  function le() {
     H == null || H.addEventListener("_open", (ce) => {
       o(24, Z = true);
     }), H == null || H.addEventListener("_close", (ce) => {
@@ -28449,7 +28449,7 @@ function Su(t, e, o) {
     st(ee, (ce, xe, Ge) => {
       switch (ce) {
         case Dt:
-          le(xe);
+          ne(xe);
           break;
         case Mt:
           Te(xe);
@@ -28458,7 +28458,7 @@ function Su(t, e, o) {
           o(40, N = "false");
           break;
         case Et:
-          le({ value: "" });
+          ne({ value: "" });
           break;
         case js:
           ot(xe);
@@ -28472,7 +28472,7 @@ function Su(t, e, o) {
   function Te(ce) {
     o(40, N = ce.error ? "true" : "false");
   }
-  function le(ce) {
+  function ne(ce) {
     o(0, v = ce.value), Ee(ee, "_change", { name: s, value: v }, { bubbles: true });
   }
   function He() {
@@ -37541,7 +37541,7 @@ function kg(t, e, o) {
     "url",
     "week"
   ]), [g, v] = Ae("Input auto capitalize", ["on", "off", "none", "sentences", "words", "characters"]), [m, b] = Ae("Input text align", ["left", "right"]);
-  let { type: w = "text" } = e, { name: p = "" } = e, { value: y = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: N = "" } = e, { leadingicon: j = null } = e, { trailingicon: L = null } = e, { variant: I = "goa" } = e, { disabled: q = "false" } = e, { handletrailingiconclick: F = "false" } = e, { focused: P = "false" } = e, { readonly: O = "false" } = e, { error: S = "false" } = e, { testid: W = "" } = e, { width: x = "30ch" } = e, { arialabel: A = "" } = e, { arialabelledby: B = "" } = e, { min: U = "" } = e, { max: Z = "" } = e, { step: V = 1 } = e, { prefix: R = "" } = e, { suffix: G = "" } = e, { debounce: ee = 0 } = e, { maxlength: te = null } = e, { id: ie = "" } = e, { mt: $ = null } = e, { mr: H = null } = e, { mb: K = null } = e, { ml: X = null } = e, { trailingiconarialabel: se = "" } = e, { textalign: oe = "left" } = e, { size: ze = "default" } = e, { version: Le = "1" } = e, Ke = false, ne = false, re, Me, Te, le = false, He = false, ot = "", tt = "";
+  let { type: w = "text" } = e, { name: p = "" } = e, { value: y = "" } = e, { autocapitalize: z = "off" } = e, { autocomplete: M = "" } = e, { placeholder: N = "" } = e, { leadingicon: j = null } = e, { trailingicon: L = null } = e, { variant: I = "goa" } = e, { disabled: q = "false" } = e, { handletrailingiconclick: F = "false" } = e, { focused: P = "false" } = e, { readonly: O = "false" } = e, { error: S = "false" } = e, { testid: W = "" } = e, { width: x = "30ch" } = e, { arialabel: A = "" } = e, { arialabelledby: B = "" } = e, { min: U = "" } = e, { max: Z = "" } = e, { step: V = 1 } = e, { prefix: R = "" } = e, { suffix: G = "" } = e, { debounce: ee = 0 } = e, { maxlength: te = null } = e, { id: ie = "" } = e, { mt: $ = null } = e, { mr: H = null } = e, { mb: K = null } = e, { ml: X = null } = e, { trailingiconarialabel: se = "" } = e, { textalign: oe = "left" } = e, { size: ze = "default" } = e, { version: Le = "1" } = e, Ke = false, le = false, re, Me, Te, ne = false, He = false, ot = "", tt = "";
   De(() => {
     u(w), v(z), b(oe), ht(), Vt(), xt(), je();
     const { containerStyle: me, inputWidth: $e } = wg(x, w);
@@ -37631,7 +37631,7 @@ function kg(t, e, o) {
     const me = Te.querySelector("slot[name=leadingContent]");
     (me == null ? void 0 : me.assignedNodes().length) > 0 && ((At = (Bt = me.assignedNodes()[0]) == null ? void 0 : Bt.textContent) == null ? void 0 : At.trim()) !== "" && o(30, Ke = true);
     const $e = Te.querySelector("slot[name=trailingContent]");
-    ($e == null ? void 0 : $e.assignedNodes().length) > 0 && ((po = (oo = $e.assignedNodes()[0]) == null ? void 0 : oo.textContent) == null ? void 0 : po.trim()) !== "" && o(31, ne = true);
+    ($e == null ? void 0 : $e.assignedNodes().length) > 0 && ((po = (oo = $e.assignedNodes()[0]) == null ? void 0 : oo.textContent) == null ? void 0 : po.trim()) !== "" && o(31, le = true);
   }
   function Vt() {
     (R != "" || G != "") && console.warn("GoAInput [prefix] and [suffix] properties are deprecated. Instead use leadingContent and trailingContent.");
@@ -37655,7 +37655,7 @@ function kg(t, e, o) {
     32768 && o(34, l = Se(O)), t.$$.dirty[1] & /*disabled*/
     8192 && o(35, r = Se(q)), t.$$.dirty[0] & /*_error, _rootEl*/
     805306368 | t.$$.dirty[1] & /*error, _prevError*/
-    266240 && (o(29, le = Se(S)), le !== He && (Ee(Te, "error::change", { isError: le }, { bubbles: true }), o(49, He = le))), t.$$.dirty[0] & /*_inputEl*/
+    266240 && (o(29, ne = Se(S)), ne !== He && (Ee(Te, "error::change", { isError: ne }, { bubbles: true }), o(49, He = ne))), t.$$.dirty[0] & /*_inputEl*/
     134217728 | t.$$.dirty[1] & /*isFocused*/
     524288 && n && Me && setTimeout(() => Me.focus(), 2), t.$$.dirty[0] & /*_inputEl, type*/
     134217730 && Me && w === "search" && Me.addEventListener("search", (me) => {
@@ -37691,9 +37691,9 @@ function kg(t, e, o) {
     Le,
     Me,
     Te,
-    le,
-    Ke,
     ne,
+    Ke,
+    le,
     ot,
     tt,
     l,
@@ -42199,33 +42199,33 @@ function B3(t, e, o) {
   const W = typeof document < "u" && !("anchorName" in document.documentElement.style);
   let x = null, A, B = false, U = "below", Z = "left";
   const V = `goa-popover-${fo()}`;
-  function R(le, He) {
-    if (!le) return;
+  function R(ne, He) {
+    if (!ne) return;
     const ot = Se(He), tt = ie();
-    ot && !tt ? le.showPopover() : !ot && tt && le.hidePopover();
+    ot && !tt ? ne.showPopover() : !ot && tt && ne.hidePopover();
   }
   De(() => {
-    S == null || S.addEventListener("toggle", se), A == null || A.addEventListener("keydown", X), O.addEventListener("close", (le) => {
-      oe(), le.stopPropagation();
+    S == null || S.addEventListener("toggle", se), A == null || A.addEventListener("keydown", X), O.addEventListener("close", (ne) => {
+      oe(), ne.stopPropagation();
     }), H(), $(), window.addEventListener("resize", Le);
   }), ut(() => {
     (W || x) && te(), window.removeEventListener("resize", Le), window.removeEventListener("popstate", K, true);
   });
   function G() {
     if (!B || !A || !S) return;
-    const le = A.getBoundingClientRect(), He = S.getBoundingClientRect(), ot = I ? parseFloat(I) : 0, tt = L ? parseFloat(L) : 3;
+    const ne = A.getBoundingClientRect(), He = S.getBoundingClientRect(), ot = I ? parseFloat(I) : 0, tt = L ? parseFloat(L) : 3;
     if (c === "auto") {
-      const dt = le.top, we = window.innerHeight - le.bottom;
+      const dt = ne.top, we = window.innerHeight - ne.bottom;
       o(19, U = we < He.height && dt > we ? "above" : "below");
     }
-    c === "above" || c === "auto" && U === "above" ? (o(15, S.style.top = `${le.top - tt}px`, S), o(15, S.style.transform = "translateY(-100%)", S)) : (o(15, S.style.top = `${le.bottom + tt}px`, S), o(15, S.style.transform = "", S)), Z === "left" ? o(15, S.style.left = `${le.left + ot}px`, S) : o(15, S.style.left = `${le.right - ot - He.width}px`, S);
+    c === "above" || c === "auto" && U === "above" ? (o(15, S.style.top = `${ne.top - tt}px`, S), o(15, S.style.transform = "translateY(-100%)", S)) : (o(15, S.style.top = `${ne.bottom + tt}px`, S), o(15, S.style.transform = "", S)), Z === "left" ? o(15, S.style.left = `${ne.left + ot}px`, S) : o(15, S.style.left = `${ne.right - ot - He.width}px`, S);
   }
   function ee() {
     if (!W) return;
-    const le = () => {
-      G(), x = requestAnimationFrame(le);
+    const ne = () => {
+      G(), x = requestAnimationFrame(ne);
     };
-    x = requestAnimationFrame(le);
+    x = requestAnimationFrame(ne);
   }
   function te() {
     x !== null && (cancelAnimationFrame(x), x = null);
@@ -42238,34 +42238,34 @@ function B3(t, e, o) {
     }
   }
   function $() {
-    document.body.addEventListener("goa:closePopover", (le) => {
+    document.body.addEventListener("goa:closePopover", (ne) => {
       if (!B)
         return;
-      const { target: He } = le.detail;
+      const { target: He } = ne.detail;
       He !== A && oe();
     });
   }
   function H() {
     w !== "" && console.warn("Popover `relative` property is deprecated. It should be removed from your code because it is no longer needed to help with positioning.");
   }
-  function K(le) {
+  function K(ne) {
     S && ie() && S.hidePopover();
   }
-  function X(le) {
-    switch (le.key) {
+  function X(ne) {
+    switch (ne.key) {
       case " ":
         if (l)
           break;
-        le.preventDefault(), B || S == null || S.showPopover(), le.stopPropagation();
+        ne.preventDefault(), B || S == null || S.showPopover(), ne.stopPropagation();
         break;
     }
   }
-  function se(le) {
-    le.newState === "open" ? o(16, B = true) : le.newState === "closed" ? o(16, B = false) : o(16, B = ie()), o(26, N = B ? "true" : "false"), B ? (Ee(O, "_open", {}, { bubbles: true }), requestAnimationFrame(Le), W && ee()) : ((W || x) && te(), A == null || A.focus(), Ee(O, "_close", {}, { bubbles: true }));
+  function se(ne) {
+    ne.newState === "open" ? o(16, B = true) : ne.newState === "closed" ? o(16, B = false) : o(16, B = ie()), o(26, N = B ? "true" : "false"), B ? (Ee(O, "_open", {}, { bubbles: true }), requestAnimationFrame(Le), W && ee()) : ((W || x) && te(), A == null || A.focus(), Ee(O, "_close", {}, { bubbles: true }));
   }
   function oe() {
     if (B && (S == null || S.hidePopover(), W)) {
-      const le = new ToggleEvent(
+      const ne = new ToggleEvent(
         "toggle",
         {
           bubbles: true,
@@ -42273,46 +42273,46 @@ function B3(t, e, o) {
           oldState: "open"
         }
       );
-      se(le);
+      se(ne);
     }
   }
-  function ze(le) {
-    le.stopPropagation(), !(i || !S) && (B ? (S.hidePopover(), o(16, B = false)) : (W && Ee(document.body, "goa:closePopover", { target: A }), S.showPopover(), o(16, B = true), requestAnimationFrame(Le)));
+  function ze(ne) {
+    ne.stopPropagation(), !(i || !S) && (B ? (S.hidePopover(), o(16, B = false)) : (W && Ee(document.body, "goa:closePopover", { target: A }), S.showPopover(), o(16, B = true), requestAnimationFrame(Le)));
   }
   function Le() {
     if (!B || !A || !S)
       return;
-    const le = A.getBoundingClientRect(), He = S.getBoundingClientRect();
-    Ke(le, He), ne(le, He);
+    const ne = A.getBoundingClientRect(), He = S.getBoundingClientRect();
+    Ke(ne, He), le(ne, He);
   }
-  function Ke(le, He) {
+  function Ke(ne, He) {
     if (c !== "auto")
       return;
-    const ot = le.top, tt = window.innerHeight - le.bottom;
+    const ot = ne.top, tt = window.innerHeight - ne.bottom;
     o(19, U = tt < He.height && ot > tt ? "above" : "below");
   }
-  function ne(le, He) {
+  function le(ne, He) {
     if (c === "right")
       return;
-    window.innerWidth - le.left < He.width && le.right > He.width ? o(20, Z = "right") : o(20, Z = "left");
+    window.innerWidth - ne.left < He.width && ne.right > He.width ? o(20, Z = "right") : o(20, Z = "left");
   }
-  function re(le) {
-    ue[le ? "unshift" : "push"](() => {
-      A = le, o(18, A);
+  function re(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      A = ne, o(18, A);
     });
   }
-  function Me(le) {
-    ue[le ? "unshift" : "push"](() => {
-      S = le, o(15, S);
+  function Me(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      S = ne, o(15, S);
     });
   }
-  function Te(le) {
-    ue[le ? "unshift" : "push"](() => {
-      O = le, o(17, O);
+  function Te(ne) {
+    ue[ne ? "unshift" : "push"](() => {
+      O = ne, o(17, O);
     });
   }
-  return t.$$set = (le) => {
-    "testid" in le && o(0, d = le.testid), "position" in le && o(1, c = le.position), "maxwidth" in le && o(2, s = le.maxwidth), "minwidth" in le && o(3, u = le.minwidth), "width" in le && o(4, g = le.width), "height" in le && o(5, v = le.height), "padded" in le && o(27, m = le.padded), "tabindex" in le && o(6, b = le.tabindex), "relative" in le && o(28, w = le.relative), "mt" in le && o(7, p = le.mt), "mr" in le && o(8, y = le.mr), "mb" in le && o(9, z = le.mb), "ml" in le && o(10, M = le.ml), "open" in le && o(26, N = le.open), "disabled" in le && o(29, j = le.disabled), "voffset" in le && o(11, L = le.voffset), "hoffset" in le && o(12, I = le.hoffset), "focusborderwidth" in le && o(13, q = le.focusborderwidth), "borderradius" in le && o(14, F = le.borderradius), "filterablecontext" in le && o(30, P = le.filterablecontext), "$$scope" in le && o(31, a = le.$$scope);
+  return t.$$set = (ne) => {
+    "testid" in ne && o(0, d = ne.testid), "position" in ne && o(1, c = ne.position), "maxwidth" in ne && o(2, s = ne.maxwidth), "minwidth" in ne && o(3, u = ne.minwidth), "width" in ne && o(4, g = ne.width), "height" in ne && o(5, v = ne.height), "padded" in ne && o(27, m = ne.padded), "tabindex" in ne && o(6, b = ne.tabindex), "relative" in ne && o(28, w = ne.relative), "mt" in ne && o(7, p = ne.mt), "mr" in ne && o(8, y = ne.mr), "mb" in ne && o(9, z = ne.mb), "ml" in ne && o(10, M = ne.ml), "open" in ne && o(26, N = ne.open), "disabled" in ne && o(29, j = ne.disabled), "voffset" in ne && o(11, L = ne.voffset), "hoffset" in ne && o(12, I = ne.hoffset), "focusborderwidth" in ne && o(13, q = ne.focusborderwidth), "borderradius" in ne && o(14, F = ne.borderradius), "filterablecontext" in ne && o(30, P = ne.filterablecontext), "$$scope" in ne && o(31, a = ne.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*disabled*/
     536870912 && o(21, i = Se(j)), t.$$.dirty[0] & /*padded*/
@@ -47601,8 +47601,8 @@ function x5(t, e, o) {
         }
       ));
     if (v.setAttribute("aria-labelledby", `tab-${m}`), v.setAttribute("id", `tabpanel-${m}`), se && s !== "none") {
-      const oe = new URL(se), Le = window.location.href.split("#").slice(1).filter((re) => !re.startsWith("tab-")), ne = [.../* @__PURE__ */ new Set([oe.hash.substring(1), ...Le])].filter(Boolean).join("#");
-      if (history.replaceState({}, "", oe.pathname + oe.search + (ne ? "#" + ne : "")), p) {
+      const oe = new URL(se), Le = window.location.href.split("#").slice(1).filter((re) => !re.startsWith("tab-")), le = [.../* @__PURE__ */ new Set([oe.hash.substring(1), ...Le])].filter(Boolean).join("#");
+      if (history.replaceState({}, "", oe.pathname + oe.search + (le ? "#" + le : "")), p) {
         const re = Le[0];
         re && Xe().then(() => {
           const Me = document.getElementById(re) || document.querySelector(`[name="${re}"]`);
@@ -51414,7 +51414,7 @@ function Fv(t, e, o) {
   function Ke() {
     y = null;
   }
-  function ne(je) {
+  function le(je) {
     (je == null ? void 0 : je.key) === "[" && (je != null && je.ctrlKey) && Ee(L, "_toggle", {}, {});
   }
   function re(je) {
@@ -51430,7 +51430,7 @@ function Fv(t, e, o) {
   function Te(je) {
     je.preventDefault(), X(), window.removeEventListener("click", X), Ee(L, "_toggle", {}, { bubbles: true });
   }
-  function le(je) {
+  function ne(je) {
     var Je, it;
     const Oe = je.relatedTarget;
     (Je = Oe == null ? void 0 : Oe.closest) != null && Je.call(Oe, '[slot="account"]') || (it = Oe == null ? void 0 : Oe.closest) != null && it.call(Oe, ".profile") || X();
@@ -51441,10 +51441,10 @@ function Fv(t, e, o) {
   function ot() {
     L.addEventListener("_update", se), L.addEventListener("_mountItem", ee), L.addEventListener("_hoverItem", oe), L.addEventListener("_blurItem", H), L.addEventListener("_toggle", V), L.addEventListener("_groupOpen", () => {
       o(0, d = true);
-    }), L.addEventListener("_desktopPopoverOpen", Le), L.addEventListener("_desktopPopoverClose", Ke), L.addEventListener("keydown", re), window.addEventListener("popstate", se), window.addEventListener("keydown", ne), window.addEventListener("resize", He), L.addEventListener("_mobilePopoverOpen", R), L.addEventListener("_mobilePopoverClose", G), I.addEventListener("_scroll", Z);
+    }), L.addEventListener("_desktopPopoverOpen", Le), L.addEventListener("_desktopPopoverClose", Ke), L.addEventListener("keydown", re), window.addEventListener("popstate", se), window.addEventListener("keydown", le), window.addEventListener("resize", He), L.addEventListener("_mobilePopoverOpen", R), L.addEventListener("_mobilePopoverClose", G), I.addEventListener("_scroll", Z);
   }
   function tt() {
-    window.removeEventListener("popstate", se), window.removeEventListener("keydown", ne), window.removeEventListener("resize", He), document.body.removeEventListener("click", X), I == null || I.removeEventListener("_scroll", Z);
+    window.removeEventListener("popstate", se), window.removeEventListener("keydown", le), window.removeEventListener("resize", He), document.body.removeEventListener("click", X), I == null || I.removeEventListener("_scroll", Z);
   }
   function ht(je) {
     ue[je ? "unshift" : "push"](() => {
@@ -51489,7 +51489,7 @@ function Fv(t, e, o) {
     ze,
     Me,
     Te,
-    le,
+    ne,
     l,
     n,
     i,
