@@ -16877,7 +16877,7 @@ function B2(t, e, o) {
     ), W.onfinish = () => te(true), W.oncancel = () => A = false, o(21, s = "true");
   }
   function te(ne) {
-    console.log("onfinish"), o(14, q.open = ne, q), W = null, x = false, A = false, o(14, q.style.height = o(14, q.style.overflow = "", q), q), Z(ne), o(21, s = ne ? "true" : "false");
+    o(14, q.open = ne, q), W = null, x = false, A = false, o(14, q.style.height = o(14, q.style.overflow = "", q), q), Z(ne), o(21, s = ne ? "true" : "false");
   }
   function ie(ne) {
     const He = getComputedStyle(I).getPropertyValue(ne).trim();
