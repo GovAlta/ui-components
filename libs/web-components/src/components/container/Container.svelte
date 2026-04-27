@@ -220,7 +220,7 @@
     color: var(--goa-container-interactive-heading-text-color);
   }
   .goa-container--interactive.accent--filled .content {
-    border: var(--goa-container-interactive-border);
+    border: var(--goa-container-border);
     background-color: var(--goa-container-interactive-bg-color);
   }
 
