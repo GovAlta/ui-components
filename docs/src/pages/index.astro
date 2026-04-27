@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Home Page
  *
@@ -14,7 +15,7 @@ import CardLite from '../components/CardLite.astro';
   <div class="ds-hero-banner">
     <div class="hero-content">
       <div class="hero-image">
-        <img src="/images/home/hero-banner-graphic.svg" alt="" />
+        <img src={withBase(`/images/home/hero-banner-graphic.svg`)} alt="" />
       </div>
       <div class="hero-text">
         <h1>A design system for Alberta government digital services</h1>
@@ -50,11 +51,11 @@ import CardLite from '../components/CardLite.astro';
           Our accessible, brand-compliant components and templates help you launch faster while staying aligned with the current standard.
         </p>
         <goa-link version="2" trailingicon="arrow-forward">
-          <a href="/get-started">Start using the design system</a>
+          <a href={withBase(`/get-started`)}>Start using the design system</a>
         </goa-link>
       </div>
       <div class="cta-image">
-        <img src="/images/home/splash-reel.png" alt="" />
+        <img src={withBase(`/images/home/splash-reel.png`)} alt="" />
       </div>
     </div>
 
@@ -62,16 +63,16 @@ import CardLite from '../components/CardLite.astro';
     <h2 class="section-heading">Select your service pattern</h2>
     <div class="card-grid two-col">
       <CardLite
-        imageUrl="/images/home/public-form-thumb.png"
+        imageUrl={withBase(`/images/home/public-form-thumb.png`)}
         title="Public form"
         description="A pattern optimized for clarity and error prevention for public-facing applications. It includes templates for page types: Start, Task list, Question, Review, and Result."
-        linkTo="/examples/public-form"
+        linkTo={withBase(`/examples/public-form`)}
       />
       <CardLite
-        imageUrl="/images/home/workspace-thumb.png"
+        imageUrl={withBase(`/images/home/workspace-thumb.png`)}
         title="Workspace"
         description="A pattern optimized for efficiently managing cases, records, and tasks. It includes layout, multiple data views, detail views, drawers, modals and notifications."
-        linkTo="/examples/workspace"
+        linkTo={withBase(`/examples/workspace`)}
       />
     </div>
 
@@ -102,19 +103,19 @@ import CardLite from '../components/CardLite.astro';
     </p>
     <div class="card-grid three-col">
       <CardLite
-        imageUrl="/images/home/primary-users-thumb.png"
+        imageUrl={withBase(`/images/home/primary-users-thumb.png`)}
         title="Identify the primary users and their main tasks"
         description="Share the primary users and their main tasks in your digital service. Do you know your users?"
         linkTo="https://forms.cloud.microsoft/r/qz8XKnbcsE"
       />
       <CardLite
-        imageUrl="/images/home/storyboard-thumb.png"
+        imageUrl={withBase(`/images/home/storyboard-thumb.png`)}
         title="Identify the main pages"
         description="Share the most used pages from your digital service. What page or pages define your service?"
         linkTo="https://forms.cloud.microsoft/r/aq7SCVtEg8"
       />
       <CardLite
-        imageUrl="/images/home/main-pages-thumb.png"
+        imageUrl={withBase(`/images/home/main-pages-thumb.png`)}
         title="Create a short storyboard"
         description="You can only use 3 pages from your product to make a storyboard of your digital service, what do you show?"
         linkTo="https://forms.cloud.microsoft/r/vbhkWQnTyP"

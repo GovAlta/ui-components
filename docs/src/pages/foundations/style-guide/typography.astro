@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Foundations - Style guide - Typography
  *
@@ -49,7 +50,7 @@ import FoundationsSupportCallout from "../../../components/FoundationsSupportCal
 
   <h3 id="text-styles">Text styles</h3>
   <goa-text size="body-m" mt="none" mb="m">
-    The design system provides predefined <a href="/tokens">text styles</a> for headings, paragraphs,
+    The design system provides predefined <a href={withBase(`/tokens`)}>text styles</a> for headings, paragraphs,
     and numeric content.
   </goa-text>
 

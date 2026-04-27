@@ -12,6 +12,7 @@
 
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { getThumbnailPath } from "../lib/component-thumbnails";
+import { withBase } from "@/lib/base-url";
 import { createPortal } from "react-dom";
 import {
   GoabButton,
@@ -532,7 +533,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     (component: Component) => (
       <a
         key={component.slug}
-        href={`/components/${component.slug}`}
+        href={withBase(`/components/${component.slug}`)}
         className="component-card-link"
       >
         <div className="component-card-content">
@@ -586,7 +587,7 @@ export function ComponentsGrid({ components }: ComponentsGridProps) {
     (component: Component) => (
       <tr key={component.slug}>
         <td>
-          <a href={`/components/${component.slug}`} className="component-table-link">
+          <a href={withBase(`/components/${component.slug}`)} className="component-table-link">
             {component.data.name}
           </a>
         </td>

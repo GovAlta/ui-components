@@ -14,7 +14,8 @@ interface Props {
 const { example } = Astro.props;
 const { data, slug } = example;
 
-const href = `/examples/${slug}`;
+import { withBase } from '@/lib/base-url';
+const href = withBase(`/examples/${slug}`);
 
 // Format category for display
 function formatCategory(category: string): string {

@@ -10,6 +10,7 @@ import React from "react";
 import { GoabWorkSideMenu, GoabWorkSideMenuItem } from "@abgov/react-components";
 import type { GoabIconType } from "@abgov/ui-components-common";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { withBase } from "@/lib/base-url";
 
 export type MenuSection =
   | "parent"
@@ -35,8 +36,8 @@ interface TopLevelSection {
 
 // Sections that navigate directly to a page (no submenu)
 const DIRECT_NAV_SECTIONS: Partial<Record<MenuSection, string>> = {
-  tokens: "/tokens",
-  examples: "/examples",
+  tokens: withBase("/tokens"),
+  examples: withBase("/examples"),
 };
 
 // Sections that open a submenu
@@ -90,7 +91,7 @@ export function ParentMenu({
         if (hasSubmenu) {
           // Opens submenu - use section URL when active for matching,
           // otherwise use non-matching URL to prevent false positives on homepage
-          const submenuUrl = isActive ? `/${section.id}` : "/__never_match__";
+          const submenuUrl = isActive ? withBase(`/${section.id}`) : "/__never_match__";
           return (
             <div
               key={section.id}
@@ -124,7 +125,7 @@ export function ParentMenu({
     <>
       <GoabWorkSideMenu
         heading="Design system"
-        url="/"
+        url={withBase("/")}
         open={isOpen}
         onToggle={onToggle}
         onNavigate={(path: string) => {

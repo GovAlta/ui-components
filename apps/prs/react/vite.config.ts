@@ -5,6 +5,7 @@ import { nxViteTsPaths } from "@nx/vite/plugins/nx-tsconfig-paths.plugin";
 
 export default defineConfig({
   root: __dirname,
+  base: process.env.PREVIEW_BASE_REACT || "/",
   cacheDir: "../../../node_modules/.vite/playground/react",
 
   server: {

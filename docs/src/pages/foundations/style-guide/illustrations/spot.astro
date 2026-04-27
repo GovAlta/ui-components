@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Foundations - Style guide - Illustrations - Spot
  *
@@ -60,7 +61,7 @@ import Preview from "../../../../components/Preview.astro";
   </goa-text>
 
   <img
-    src="/images/foundations/illustration/spot-categories.svg"
+    src={withBase(`/images/foundations/illustration/spot-categories.svg`)}
     alt="Examples of spot illustrations across functional categories"
     width="1512"
     height="583"
@@ -98,7 +99,7 @@ import Preview from "../../../../components/Preview.astro";
   <h2 id="examples">Examples</h2>
 
   <img
-    src="/images/foundations/illustration/spot-example-landing.svg"
+    src={withBase(`/images/foundations/illustration/spot-example-landing.svg`)}
     alt="Example of spot illustrations used on a service landing page"
     width="1520"
     height="1872"
@@ -106,7 +107,7 @@ import Preview from "../../../../components/Preview.astro";
     style="max-width: 100%; height: auto;"
   />
   <img
-    src="/images/foundations/illustration/spot-example-empty-state.svg"
+    src={withBase(`/images/foundations/illustration/spot-example-empty-state.svg`)}
     alt="Example of a spot illustration used in an empty state"
     width="1520"
     height="681"
@@ -125,7 +126,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-do-size.png"
+          src={withBase(`/images/foundations/illustration/spot-do-size.png`)}
           alt="Spot illustration at correct intended size"
           width="545"
           height="397"
@@ -141,7 +142,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-dont-size.png"
+          src={withBase(`/images/foundations/illustration/spot-dont-size.png`)}
           alt="Spot illustration scaled too small"
           width="545"
           height="318"
@@ -157,7 +158,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-do-style.png"
+          src={withBase(`/images/foundations/illustration/spot-do-style.png`)}
           alt="Spot illustration using the correct design system style"
           width="417"
           height="404"
@@ -173,7 +174,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-dont-style.png"
+          src={withBase(`/images/foundations/illustration/spot-dont-style.png`)}
           alt="Spot illustration incorrectly recoloured"
           width="545"
           height="396"
@@ -189,7 +190,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-do-spacing.png"
+          src={withBase(`/images/foundations/illustration/spot-do-spacing.png`)}
           alt="Spot illustration with correct spacing"
           width="401"
           height="420"
@@ -205,7 +206,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-dont-spacing.png"
+          src={withBase(`/images/foundations/illustration/spot-dont-spacing.png`)}
           alt="Spot illustration with text placed too close"
           width="401"
           height="372"
@@ -221,7 +222,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-do-match.png"
+          src={withBase(`/images/foundations/illustration/spot-do-match.png`)}
           alt="Spot illustration matching the user's context"
           width="401"
           height="396"
@@ -237,7 +238,7 @@ import Preview from "../../../../components/Preview.astro";
     >
       <Preview>
         <img
-          src="/images/foundations/illustration/spot-dont-match.png"
+          src={withBase(`/images/foundations/illustration/spot-dont-match.png`)}
           alt="Wrong illustration type used for the context"
           width="401"
           height="400"

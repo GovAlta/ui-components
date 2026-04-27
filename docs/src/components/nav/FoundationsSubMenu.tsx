@@ -12,6 +12,7 @@ import {
   GoabWorkSideMenuGroup,
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { withBase } from "@/lib/base-url";
 
 // Top-level pages (not in a group)
 const TOP_PAGES = [
@@ -103,7 +104,7 @@ export function FoundationsSubMenu({
 
       {/* Top-level pages */}
       {TOP_PAGES.map((page) => (
-        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
       ))}
 
       {/* Grouped sections */}
@@ -130,7 +131,7 @@ export function FoundationsSubMenu({
                       <GoabWorkSideMenuItem
                         key={page.url}
                         label={page.label}
-                        url={page.url}
+                        url={withBase(page.url)}
                       />
                     ))}
                     {/* Illustration nested group (between Iconography and Photography) */}
@@ -142,7 +143,7 @@ export function FoundationsSubMenu({
                         <GoabWorkSideMenuItem
                           key={page.url}
                           label={page.label}
-                          url={page.url}
+                          url={withBase(page.url)}
                         />
                       ))}
                     </GoabWorkSideMenuGroup>
@@ -151,7 +152,7 @@ export function FoundationsSubMenu({
                       <GoabWorkSideMenuItem
                         key={page.url}
                         label={page.label}
-                        url={page.url}
+                        url={withBase(page.url)}
                       />
                     ))}
                   </>
@@ -160,7 +161,7 @@ export function FoundationsSubMenu({
                     <GoabWorkSideMenuItem
                       key={page.url}
                       label={page.label}
-                      url={page.url}
+                      url={withBase(page.url)}
                     />
                   ))
                 )}
@@ -175,7 +176,7 @@ export function FoundationsSubMenu({
   return (
     <GoabWorkSideMenu
       heading="Design System | Foundations"
-      url="/"
+      url={withBase("/")}
       open={isOpen}
       onToggle={onToggle}
       onNavigate={(path: string) => {

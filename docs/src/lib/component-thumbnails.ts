@@ -14,7 +14,9 @@ const THUMBNAIL_MAP: Record<string, string> = {
   "page-block": "block",
 };
 
+import { withBase } from "./base-url";
+
 export function getThumbnailPath(slug: string): string {
   const filename = THUMBNAIL_MAP[slug] || slug;
-  return `/images/component-thumbnails/${filename}.svg`;
+  return withBase(`/images/component-thumbnails/${filename}.svg`);
 }

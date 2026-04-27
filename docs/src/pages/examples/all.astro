@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * All Examples Page (Testing)
  *
@@ -7,6 +8,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
+
 
 // Get all examples
 const allExamples = await getCollection('examples');
@@ -33,7 +35,7 @@ const sortedExamples = allExamples.sort((a, b) =>
               <span class="component-pages-label">Shows on:</span>
               {example.data.components.map((comp: string, i: number) => (
                 <>
-                  <a href={`/components/${comp}`}>{comp}</a>
+                  <a href={withBase(`/components/${comp}`)}>{comp}</a>
                   {i < example.data.components.length - 1 && <span>, </span>}
                 </>
               ))}

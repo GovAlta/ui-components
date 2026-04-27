@@ -12,8 +12,11 @@ interface Props {
   parentGroup?: { label: string; url?: string };
 }
 
+import { BASE_URL, withBase } from '@/lib/base-url';
+
 const { parentGroup } = Astro.props;
-const pathname = Astro.url.pathname.replace(/\/$/, '');
+const basePrefix = BASE_URL.replace(/\/$/, '');
+const pathname = Astro.url.pathname.replace(basePrefix, '').replace(/\/$/, '');
 const segments = pathname.split('/').filter(Boolean);
 
 // Show on any page within a section
@@ -64,14 +67,14 @@ for (let i = 0; i < crumbCount; i++) {
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <ol>
       <li>
-        <a href="/">Design System</a>
+        <a href={withBase("/")}>Design System</a>
         <span class="separator" aria-hidden="true">/</span>
       </li>
       {crumbs.map((crumb, i) => (
         <li>
           {/* TODO: Swap to <goa-link> once underline control lands (#3504) */}
           {crumb.hasPage ? (
-            <a href={crumb.url}>{crumb.label}</a>
+            <a href={withBase(crumb.url)}>{crumb.label}</a>
           ) : (
             <span>{crumb.label}</span>
           )}
