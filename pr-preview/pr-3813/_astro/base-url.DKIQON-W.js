@@ -1,1 +1,0 @@
-const r="/ui-components/pr-preview/pr-3813/";function e(t){if(!t)return r;if(t.startsWith("http://")||t.startsWith("https://"))return t;const s=t.startsWith("/")?t.slice(1):t;return`${r}${s}`}export{e as w};
