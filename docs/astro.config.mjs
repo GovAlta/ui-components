@@ -5,6 +5,8 @@ import path from "node:path";
 import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 
+import { buildAliasRedirects } from "./src/scripts/aliases-to-redirects.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const workspaceRoot = path.resolve(__dirname, "..");
 
@@ -28,10 +30,18 @@ export default defineConfig({
       "/examples/show-multiple-actions-in-a-compact-table",
     "/examples/communicate-a-future-service-outage":
       "/examples/notify-the-user-of-a-future-service-outage",
+    // Old "give-{background,context}-..." slugs once redirected to the
+    // give-more-information-...-{a,b} variants. Those variants have since
+    // been folded into question-page, so route directly there to avoid
+    // a two-hop chain through the alias-derived redirects below.
     "/examples/give-background-information-before-asking-a-question":
-      "/examples/give-more-information-before-asking-a-question-a",
+      "/examples/question-page",
     "/examples/give-context-before-asking-a-long-answer-question":
-      "/examples/give-more-information-before-asking-a-question-b",
+      "/examples/question-page",
+    // Auto-derived redirects from `aliases` frontmatter on examples and
+    // productTypes entries. Single source of truth lives in MDX; adding
+    // an alias to an entry creates the redirect on the next build.
+    ...buildAliasRedirects(),
   },
   build: {
     chunkSizeWarningLimit: 1000,
