@@ -17,29 +17,32 @@ const { data, body } = example;
 // Get the rendered content
 const { Content } = await example.render();
 
-// Scale badge colors
-const scaleColors: Record<string, { bg: string; color: string }> = {
-  interaction: { bg: '#e3f2fd', color: '#1565c0' },
-  task: { bg: '#f3e5f5', color: '#7b1fa2' },
+// Size badge colors
+const sizeColors: Record<string, { bg: string; color: string }> = {
+  section: { bg: '#e3f2fd', color: '#1565c0' },
   page: { bg: '#e8f5e9', color: '#2e7d32' },
   flow: { bg: '#fff3e0', color: '#e65100' },
-  service: { bg: '#fce4ec', color: '#c2185b' }
+  product: { bg: '#fce4ec', color: '#c2185b' },
 };
 
-const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
+const sizeStyle = sizeColors[data.size] || { bg: '#f5f5f5', color: '#666' };
+
+function formatProductType(productType: string): string {
+  return productType
+    .split('-')
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+    .join(' ');
+}
 ---
 
 <article class="example-card">
   <header class="example-header">
     <div class="example-badges">
-      <span class="scale-badge" style={`background: ${scaleStyle.bg}; color: ${scaleStyle.color};`}>
-        {data.scale}
+      <span class="type-badge" style={`background: ${sizeStyle.bg}; color: ${sizeStyle.color};`}>
+        {data.size}
       </span>
-      <span class="category-badge">{data.category}</span>
-      {data.userType !== 'both' && (
-        <span class={`user-type-badge user-type-${data.userType}`}>
-          {data.userType}
-        </span>
+      {data.productType && (
+        <span class="product-type-badge">{formatProductType(data.productType)}</span>
       )}
     </div>
     <h3 id={`example-${example.slug}`} class="example-title">{data.title}</h3>
@@ -122,9 +125,8 @@ const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
     margin-bottom: var(--goa-space-xs);
   }
 
-  .scale-badge,
-  .category-badge,
-  .user-type-badge {
+  .type-badge,
+  .product-type-badge {
     font-size: 0.65rem;
     font-weight: var(--goa-font-weight-semi-bold);
     text-transform: uppercase;
@@ -133,19 +135,9 @@ const scaleStyle = scaleColors[data.scale] || { bg: '#f5f5f5', color: '#666' };
     border-radius: var(--goa-border-radius-s);
   }
 
-  .category-badge {
+  .product-type-badge {
     background: #f5f5f5;
     color: #666;
-  }
-
-  .user-type-citizen {
-    background: #e3f2fd;
-    color: #1565c0;
-  }
-
-  .user-type-worker {
-    background: #fce4ec;
-    color: #c2185b;
   }
 
   .example-title {

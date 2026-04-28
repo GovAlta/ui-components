@@ -11,8 +11,7 @@
       "blind",
       "collapse",
       "content layout",
-      "expandable panel",
-      "expand"
+      "expandable panel"
     ],
     "slug": "accordion"
   },
@@ -179,7 +178,14 @@
     "description": "Advanced table with sorting and selection.",
     "status": "stable",
     "category": "content-layout",
-    "tags": [],
+    "tags": [
+      "table",
+      "grid",
+      "content layout",
+      "data table",
+      "sorting",
+      "selection"
+    ],
     "slug": "data-grid"
   },
   {
@@ -740,9 +746,7 @@
     "title": "Add a filter chip",
     "description": "Allow users to apply filters using selectable chips, which visually represent active filters and can be removed to update results dynamically.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "filtering",
       "chips",
@@ -752,8 +756,7 @@
       "filter-chip",
       "button"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "add-a-filter-chip"
   },
   {
@@ -762,9 +765,8 @@
     "title": "Add a record using a drawer",
     "description": "Add a record using a drawer. The drawer slides in from the side to allow data entry without navigating away from the current view.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "drawer",
       "forms",
@@ -781,8 +783,7 @@
       "radio-group",
       "block"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "add-a-record-using-a-drawer"
   },
   {
@@ -791,9 +792,8 @@
     "title": "Add and edit lots of filters",
     "description": "Add and edit filters using a drawer. This pattern is useful when you have many filter options that would clutter the main interface.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "filtering",
       "drawer",
@@ -810,8 +810,7 @@
       "dropdown",
       "radio-group"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "add-and-edit-lots-of-filters"
   },
   {
@@ -820,9 +819,7 @@
     "title": "Add another item in a modal",
     "description": "Add a new item within a modal window without navigating away from the current context.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "section",
     "tags": [
       "modal",
       "forms",
@@ -837,8 +834,7 @@
       "input",
       "text-area"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "add-another-item-in-a-modal"
   },
   {
@@ -847,9 +843,8 @@
     "title": "Ask a long answer question with a maximum word count",
     "description": "Restrict a long answer input to a maximum number of words or characters.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
+    "productType": "public-form",
     "tags": [
       "forms",
       "text-area",
@@ -860,8 +855,7 @@
       "form-item",
       "text-area"
     ],
-    "scale": "task",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "ask-a-long-answer-question-with-a-maximum-word-count"
   },
   {
@@ -870,9 +864,8 @@
     "title": "Ask a user for a birthday",
     "description": "Asks for a user's birthday using the date picker component.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
+    "productType": "public-form",
     "tags": [
       "forms",
       "date-input",
@@ -882,8 +875,7 @@
       "form-item",
       "date-picker"
     ],
-    "scale": "task",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "ask-a-user-for-a-birthday"
   },
   {
@@ -892,9 +884,8 @@
     "title": "Ask a user for an address",
     "description": "Collect a complete mailing address from the user, including fields like street, city, and postal code.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "section",
+    "productType": "public-form",
     "tags": [
       "forms",
       "address",
@@ -909,8 +900,7 @@
       "button-group",
       "text"
     ],
-    "scale": "task",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "ask-a-user-for-an-address"
   },
   {
@@ -919,9 +909,8 @@
     "title": "Ask a user for an Indian registration number",
     "description": "Request a user's Indian registration number with appropriate validation and context.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
+    "productType": "public-form",
     "tags": [
       "forms",
       "identity",
@@ -932,8 +921,7 @@
       "input",
       "block"
     ],
-    "scale": "task",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "ask-a-user-for-an-indian-registration-number"
   },
   {
@@ -942,9 +930,8 @@
     "title": "Ask a user for direct deposit information",
     "description": "Gather banking details from users to enable direct deposit, including account number and financial institution information.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "section",
+    "productType": "public-form",
     "tags": [
       "forms",
       "banking",
@@ -956,8 +943,7 @@
       "details",
       "text"
     ],
-    "scale": "task",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "ask-a-user-for-direct-deposit-information"
   },
   {
@@ -966,9 +952,8 @@
     "title": "Ask a user for dollar amounts",
     "description": "Prompt users to enter monetary values using a consistent input format that supports validation and currency symbols.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
+    "productType": "public-form",
     "tags": [
       "forms",
       "currency",
@@ -978,33 +963,8 @@
       "form-item",
       "input"
     ],
-    "scale": "task",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "ask-a-user-for-dollar-amounts"
-  },
-  {
-    "type": "example",
-    "id": "ask-a-user-one-question-at-a-time",
-    "title": "Ask a user one question at a time",
-    "description": "Ask a user one question at a time.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "forms",
-      "questions",
-      "public-form"
-    ],
-    "components": [
-      "form-item",
-      "radio-group",
-      "radio-item",
-      "button"
-    ],
-    "scale": "page",
-    "userType": "citizen",
-    "slug": "ask-a-user-one-question-at-a-time"
   },
   {
     "type": "example",
@@ -1012,9 +972,7 @@
     "title": "Basic page layout",
     "description": "A basic page template to use as a starting point.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "page",
     "tags": [
       "layout",
       "page-structure",
@@ -1027,8 +985,7 @@
       "skeleton",
       "grid"
     ],
-    "scale": "page",
-    "userType": "both",
+    "aliases": [],
     "slug": "basic-page-layout"
   },
   {
@@ -1037,9 +994,7 @@
     "title": "Button with Icon",
     "description": "Shows how to add leading or trailing icons to buttons for enhanced visual communication.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "icons",
       "buttons",
@@ -1050,8 +1005,7 @@
       "button-group",
       "icon"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "button-with-icon"
   },
   {
@@ -1060,9 +1014,7 @@
     "title": "Card grid",
     "description": "Display multiple cards in a grid layout, each containing related content or actions.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
     "tags": [
       "cards",
       "grid",
@@ -1075,8 +1027,7 @@
       "link",
       "text"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "card-grid"
   },
   {
@@ -1085,9 +1036,8 @@
     "title": "Card view of case files",
     "description": "Present a visual overview of individual case files in a card format for scanning and access.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "cards",
       "case-management",
@@ -1100,31 +1050,8 @@
       "badge",
       "button"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "card-view-of-case-files"
-  },
-  {
-    "type": "example",
-    "id": "communicate-a-future-service-outage",
-    "title": "Communicate a future service outage",
-    "description": "Display a clear message to inform users about an upcoming service outage, including the date, time, and expected impact on service availability.",
-    "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
-    "tags": [
-      "notification",
-      "maintenance",
-      "alerts",
-      "system-status"
-    ],
-    "components": [
-      "notification"
-    ],
-    "scale": "task",
-    "userType": "both",
-    "slug": "communicate-a-future-service-outage"
   },
   {
     "type": "example",
@@ -1132,9 +1059,7 @@
     "title": "Confirm a change",
     "description": "Ask the user to confirm a proposed change before it is applied.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "modal",
       "confirmation",
@@ -1149,8 +1074,7 @@
       "form-item",
       "date-picker"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "confirm-a-change"
   },
   {
@@ -1159,9 +1083,7 @@
     "title": "Confirm a destructive action",
     "description": "Confirm a destructive action like deletion to prevent accidental data loss.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
     "tags": [
       "modal",
       "confirmation",
@@ -1173,8 +1095,7 @@
       "button",
       "button-group"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "confirm-a-destructive-action"
   },
   {
@@ -1183,9 +1104,8 @@
     "title": "Confirm before navigating away",
     "description": "Prompt the user in a modal before navigating to a new route to preserve context.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
+    "productType": "workspace",
     "tags": [
       "modal",
       "navigation",
@@ -1197,33 +1117,8 @@
       "button",
       "button-group"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "confirm-before-navigating-away"
-  },
-  {
-    "type": "example",
-    "id": "confirm-that-an-application-was-submitted",
-    "title": "Confirm that an application was submitted",
-    "description": "Display a confirmation screen to indicate successful application submission.",
-    "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
-    "tags": [
-      "confirmation",
-      "success",
-      "callout",
-      "application"
-    ],
-    "components": [
-      "callout",
-      "button",
-      "button-group"
-    ],
-    "scale": "page",
-    "userType": "citizen",
-    "slug": "confirm-that-an-application-was-submitted"
   },
   {
     "type": "example",
@@ -1231,9 +1126,7 @@
     "title": "Copy to clipboard",
     "description": "Allow users to quickly copy text or data to their clipboard with a single click.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "clipboard",
       "copy",
@@ -1245,8 +1138,7 @@
       "icon-button",
       "tooltip"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "copy-to-clipboard"
   },
   {
@@ -1255,9 +1147,7 @@
     "title": "Disabled button with a required field",
     "description": "Disable a submit button until required form fields are completed.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "button",
       "form",
@@ -1271,8 +1161,7 @@
       "form-item",
       "input"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "disabled-button-with-a-required-field"
   },
   {
@@ -1281,9 +1170,8 @@
     "title": "Display numbers in a table so they can be scanned easily",
     "description": "Right-align numeric columns in tables to make them easier to scan and compare.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "table",
       "numbers",
@@ -1294,8 +1182,7 @@
     "components": [
       "table"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "display-numbers-in-a-table-so-they-can-be-scanned-easily"
   },
   {
@@ -1304,9 +1191,8 @@
     "title": "Display user information",
     "description": "Display user contact information and related data using containers with clear visual hierarchy.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "container",
       "user-info",
@@ -1321,8 +1207,7 @@
       "table",
       "text"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "display-user-information"
   },
   {
@@ -1331,9 +1216,7 @@
     "title": "Dynamically add an item to a dropdown list",
     "description": "Allow users to add new items to a dropdown list dynamically.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "dropdown",
       "dynamic",
@@ -1348,8 +1231,7 @@
       "input",
       "button"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "dynamically-add-an-item-to-a-dropdown-list"
   },
   {
@@ -1358,9 +1240,7 @@
     "title": "Dynamically change items in a dropdown list",
     "description": "Update dropdown options based on the selection in another dropdown (cascading/dependent dropdowns).",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "dropdown",
       "dynamic",
@@ -1373,9 +1253,39 @@
       "dropdown-item",
       "form-item"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "dynamically-change-items-in-a-dropdown-list"
+  },
+  {
+    "type": "example",
+    "id": "error-pages",
+    "title": "Error pages",
+    "description": "Standard error screens for Government of Alberta services. Use when a user lands somewhere that is missing, forbidden, or broken so they understand what happened and what to do next.",
+    "status": "published",
+    "size": "page",
+    "tags": [
+      "error",
+      "error page",
+      "\"401\"",
+      "\"404\"",
+      "\"500\"",
+      "page not found",
+      "unauthorized",
+      "restricted access",
+      "server error",
+      "server problem",
+      "page-structure"
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "link",
+      "button"
+    ],
+    "aliases": [],
+    "slug": "error-pages"
   },
   {
     "type": "example",
@@ -1383,9 +1293,7 @@
     "title": "Expand or collapse part of a form",
     "description": "Use accordions to organize form review sections that users can expand or collapse.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "section",
     "tags": [
       "accordion",
       "form",
@@ -1397,8 +1305,7 @@
       "accordion",
       "badge"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "expand-or-collapse-part-of-a-form"
   },
   {
@@ -1407,9 +1314,8 @@
     "title": "Filter a list using a push drawer",
     "description": "Use a push drawer to house filters alongside a list of records. The push drawer keeps the filter controls accessible while users can still see and interact with the filtered results.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "push-drawer",
       "filters",
@@ -1426,8 +1332,7 @@
       "dropdown",
       "form-item"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "filter-a-list-using-a-push-drawer"
   },
   {
@@ -1436,9 +1341,8 @@
     "title": "Filter data in a table",
     "description": "Enable users to filter table data using search input and filter chips.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "table",
       "filter",
@@ -1456,8 +1360,7 @@
       "badge",
       "text"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "filter-data-in-a-table"
   },
   {
@@ -1466,9 +1369,7 @@
     "title": "Form stepper with controlled navigation",
     "description": "Create a multi-step form with controlled navigation using Previous/Next buttons.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "section",
     "tags": [
       "stepper",
       "form",
@@ -1485,88 +1386,8 @@
       "skeleton",
       "spacer"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "form-stepper-with-controlled-navigation"
-  },
-  {
-    "type": "example",
-    "id": "give-background-information-before-asking-a-question",
-    "title": "Give background information before asking a question",
-    "description": "Provide explanatory context before asking a question to help users understand what is being asked.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "form",
-      "question",
-      "context",
-      "radio",
-      "citizen-facing"
-    ],
-    "components": [
-      "form-item",
-      "radio-group",
-      "radio-item",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "give-background-information-before-asking-a-question"
-  },
-  {
-    "type": "example",
-    "id": "give-context-before-asking-a-long-answer-question",
-    "title": "Give context before asking a long answer question",
-    "description": "Provide context and guidance before a long-answer text field to help users provide relevant information.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "form",
-      "text-area",
-      "question",
-      "context",
-      "details",
-      "citizen-facing"
-    ],
-    "components": [
-      "text-area",
-      "form-item",
-      "details",
-      "button",
-      "button-group"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "give-context-before-asking-a-long-answer-question"
-  },
-  {
-    "type": "example",
-    "id": "group-related-questions-together-on-a-question-page",
-    "title": "Group related questions together on a question page",
-    "description": "Group related form fields together on a single page to collect address information from users, making it easier to complete logically connected questions at once.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "forms",
-      "address",
-      "question-page"
-    ],
-    "components": [
-      "form-item",
-      "input",
-      "dropdown",
-      "dropdown-item",
-      "button"
-    ],
-    "scale": "page",
-    "userType": "citizen",
-    "slug": "group-related-questions-together-on-a-question-page"
   },
   {
     "type": "example",
@@ -1574,9 +1395,7 @@
     "title": "Header with navigation",
     "description": "An application header with navigation links, grouped menu items, and a user account menu.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
     "tags": [
       "header",
       "navigation",
@@ -1586,8 +1405,7 @@
       "app-header",
       "app-header-menu"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "header-with-navigation"
   },
   {
@@ -1596,9 +1414,7 @@
     "title": "Hero banner with actions",
     "description": "Create a hero banner with a call-to-action button to guide users toward the primary task on a landing page.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
     "tags": [
       "hero",
       "banner",
@@ -1609,8 +1425,7 @@
       "hero-banner",
       "button"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "hero-banner-with-actions"
   },
   {
@@ -1619,9 +1434,7 @@
     "title": "Hide and show many sections of information",
     "description": "Allow users to expand and collapse multiple accordion sections, with a button to show or hide all sections at once.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
     "tags": [
       "accordion",
       "expand",
@@ -1632,8 +1445,7 @@
       "accordion",
       "button"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "hide-and-show-many-sections-of-information"
   },
   {
@@ -1642,9 +1454,7 @@
     "title": "Include a link in the helper text of an option",
     "description": "Add links within the description text of checkbox options to provide additional context or resources while users are making selections.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "checkbox",
       "helper-text",
@@ -1655,8 +1465,7 @@
       "checkbox",
       "form-item"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "include-a-link-in-the-helper-text-of-an-option"
   },
   {
@@ -1665,9 +1474,7 @@
     "title": "Include descriptions for items in a checkbox list",
     "description": "Add descriptive text to radio button options to help users understand the implications of each choice.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "radio",
       "descriptions",
@@ -1678,8 +1485,7 @@
       "radio-group",
       "radio-item"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "include-descriptions-for-items-in-a-checkbox-list"
   },
   {
@@ -1688,9 +1494,7 @@
     "title": "Link the user to give feedback to the service",
     "description": "Use the microsite header's feedback functionality to collect user feedback during alpha or beta phases of a service.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
     "tags": [
       "feedback",
       "microsite-header",
@@ -1700,8 +1504,7 @@
     "components": [
       "microsite-header"
     ],
-    "scale": "interaction",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "link-the-user-to-give-feedback-to-the-service"
   },
   {
@@ -1710,9 +1513,7 @@
     "title": "Link to an external page",
     "description": "Use an external link indicator to show users when a link will take them to a different website.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "link",
       "external",
@@ -1721,53 +1522,92 @@
     "components": [
       "link"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "link-to-an-external-page"
   },
   {
     "type": "example",
-    "id": "public-form",
-    "title": "Public form",
-    "description": "The public form pattern provides a structure for citizen-facing form experiences, emphasizing simplicity, accessibility, and low cognitive load.",
+    "id": "notify-the-user-of-a-future-service-outage",
+    "title": "Notify the user of a future service outage",
+    "description": "Display a clear message to inform users about an upcoming service outage, including the date, time, and expected impact on service availability.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
-      "form",
-      "public",
+      "notification",
+      "maintenance",
+      "alerts",
+      "system-status"
+    ],
+    "components": [
+      "notification"
+    ],
+    "aliases": [],
+    "slug": "notify-the-user-of-a-future-service-outage"
+  },
+  {
+    "type": "example",
+    "id": "public-form-product",
+    "title": "Public form",
+    "description": "An end-to-end citizen-facing form experience. Includes start page, optional task list, question pages, review page, and result page.",
+    "status": "published",
+    "size": "product",
+    "productType": "public-form",
+    "tags": [
+      "public-form",
       "citizen",
-      "pattern"
+      "form",
+      "product"
     ],
     "components": [],
-    "scale": "service",
-    "userType": "citizen",
-    "slug": "public-form"
+    "aliases": [],
+    "slug": "public-form-product"
   },
   {
     "type": "example",
     "id": "question-page",
     "title": "Question page",
-    "description": "A question page pattern that presents one question at a time to help users focus, reduce cognitive load, and navigate complex forms more easily.",
+    "description": "A question page presents one focused step in a multi-step form. Several variants adapt the shape: section titles, progress indicators, supporting context, expandable help, and grouped fields.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "page",
+    "productType": "public-form",
     "tags": [
       "forms",
       "question",
       "wizard",
-      "one-thing-per-page"
+      "one-thing-per-page",
+      "public-form",
+      "section-title",
+      "progress",
+      "context",
+      "help",
+      "details",
+      "grouped-fields",
+      "address"
     ],
     "components": [
       "form-item",
       "input",
+      "text-area",
+      "radio-group",
+      "radio-item",
+      "dropdown",
+      "dropdown-item",
+      "details",
+      "block",
       "button",
       "button-group"
     ],
-    "scale": "page",
-    "userType": "citizen",
+    "aliases": [
+      "ask-a-user-one-question-at-a-time",
+      "give-more-information-before-asking-a-question-a",
+      "give-more-information-before-asking-a-question-b",
+      "show-more-information-to-help-answer-a-question",
+      "show-a-list-to-help-answer-a-question",
+      "show-a-section-title-on-a-question-page",
+      "show-a-simple-progress-indicator-on-a-question-page",
+      "show-a-simple-progress-indicator-on-a-question-page-with-multiple-questions",
+      "group-related-questions-together-on-a-question-page"
+    ],
     "slug": "question-page"
   },
   {
@@ -1776,9 +1616,7 @@
     "title": "Remove a filter",
     "description": "Allow users to remove active filters by clicking on filter chips, providing clear visual feedback and dynamic updates to filtered results.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "filtering",
       "chips",
@@ -1787,8 +1625,7 @@
     "components": [
       "filter-chip"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "remove-a-filter"
   },
   {
@@ -1797,9 +1634,7 @@
     "title": "Require user action before continuing",
     "description": "Use a modal dialog to require users to confirm an action before proceeding, especially for irreversible operations or important decision points.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "modal",
       "confirmation",
@@ -1811,8 +1646,7 @@
       "button",
       "button-group"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "require-user-action-before-continuing"
   },
   {
@@ -1821,9 +1655,7 @@
     "title": "Reset date picker field",
     "description": "Allow users to programmatically set or clear a date picker field value, useful for reset functionality or setting default dates.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "date-picker",
       "form",
@@ -1836,31 +1668,33 @@
       "button",
       "button-group"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "reset-date-picker-field"
   },
   {
     "type": "example",
     "id": "result-page",
     "title": "Result page",
-    "description": "A result page shown after form submission to confirm success, provide next steps, and offer relevant contact information.",
+    "description": "A result page shown after a citizen has submitted a form, application, or task. Confirms success, explains what happens next, and points the user at any follow-up actions.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "page",
+    "productType": "public-form",
     "tags": [
       "confirmation",
       "success",
       "completion",
-      "forms"
+      "forms",
+      "application"
     ],
     "components": [
       "block",
-      "callout"
+      "callout",
+      "button",
+      "button-group"
     ],
-    "scale": "page",
-    "userType": "citizen",
+    "aliases": [
+      "confirm-that-an-application-was-submitted"
+    ],
     "slug": "result-page"
   },
   {
@@ -1869,9 +1703,7 @@
     "title": "Reveal input based on a selection",
     "description": "Progressively reveal additional form fields based on user selections, reducing visual complexity while gathering necessary information.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "conditional",
       "reveal",
@@ -1886,8 +1718,7 @@
       "form-item",
       "input"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "reveal-input-based-on-a-selection"
   },
   {
@@ -1896,9 +1727,8 @@
     "title": "Review and action",
     "description": "A side-by-side layout for workers to review case details while taking an action, commonly used in case management and approval workflows.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "review",
       "action",
@@ -1916,19 +1746,17 @@
       "text-area",
       "button"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "review-and-action"
   },
   {
     "type": "example",
     "id": "review-page",
     "title": "Review page",
-    "description": "A review page where users can check their answers before submitting a form, with options to change individual responses.",
+    "description": "A review page lets a user check their answers at the end of a form or section before submitting. Each answer has a \"change\" link so the user can revise without starting over.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "page",
+    "productType": "public-form",
     "tags": [
       "review",
       "check-answers",
@@ -1940,8 +1768,7 @@
       "button",
       "button-group"
     ],
-    "scale": "page",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "review-page"
   },
   {
@@ -1950,9 +1777,7 @@
     "title": "Search",
     "description": "A search input pattern with a search icon and button for users to find content or filter results.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "search",
       "input",
@@ -1964,8 +1789,7 @@
       "block",
       "form-item"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "search"
   },
   {
@@ -1974,9 +1798,7 @@
     "title": "Select one or more from a list of options",
     "description": "Use checkboxes to let users select one or more options from a list when multiple selections are valid.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "checkbox",
       "selection",
@@ -1987,8 +1809,7 @@
       "checkbox",
       "form-item"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "select-one-or-more-from-a-list-of-options"
   },
   {
@@ -1997,9 +1818,7 @@
     "title": "Set a max width on a long radio item",
     "description": "Set a max width on a long radio item to control line wrapping.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "radio",
       "forms",
@@ -2010,8 +1829,7 @@
       "radio-group",
       "radio-item"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "set-a-max-width-on-a-long-radio-item"
   },
   {
@@ -2020,9 +1838,7 @@
     "title": "Set a specific tab to be active",
     "description": "Set a specific tab to be active on page load using the initialTab property.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "tabs",
       "navigation",
@@ -2035,8 +1851,7 @@
       "badge",
       "button"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "set-a-specific-tab-to-be-active"
   },
   {
@@ -2045,9 +1860,7 @@
     "title": "Set the status of step on a form stepper",
     "description": "Set the status of each step on a form stepper to indicate completion progress.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "forms",
       "stepper",
@@ -2060,8 +1873,7 @@
       "pages",
       "button"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "set-the-status-of-step-on-a-form-stepper"
   },
   {
@@ -2070,9 +1882,7 @@
     "title": "Show a label on an icon only button",
     "description": "Show a label on an icon-only button using a tooltip to improve discoverability.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "buttons",
       "icons",
@@ -2084,35 +1894,8 @@
       "tooltip",
       "button-group"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-a-label-on-an-icon-only-button"
-  },
-  {
-    "type": "example",
-    "id": "show-a-list-to-help-answer-a-question",
-    "title": "Show a list to help answer a question",
-    "description": "Show a list to help answer a question using an expandable details component.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "forms",
-      "details",
-      "guidance",
-      "help"
-    ],
-    "components": [
-      "form-item",
-      "radio-group",
-      "radio-item",
-      "details",
-      "block"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "show-a-list-to-help-answer-a-question"
   },
   {
     "type": "example",
@@ -2120,9 +1903,7 @@
     "title": "Show a notification",
     "description": "Show a temporary notification to confirm an action was completed successfully.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
     "tags": [
       "notification",
       "feedback",
@@ -2133,8 +1914,7 @@
       "temporary-notification",
       "button"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-a-notification"
   },
   {
@@ -2143,9 +1923,7 @@
     "title": "Show a notification with an action",
     "description": "Show a temporary notification with an action button for user interaction.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
     "tags": [
       "notification",
       "feedback",
@@ -2156,84 +1934,8 @@
       "temporary-notification",
       "button"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-a-notification-with-an-action"
-  },
-  {
-    "type": "example",
-    "id": "show-a-section-title-on-a-question-page",
-    "title": "Show a section title on a question page",
-    "description": "Show a section title on a question page to help users understand which part of the form they are completing.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "forms",
-      "questions",
-      "navigation",
-      "section"
-    ],
-    "components": [
-      "form-item",
-      "radio-group",
-      "radio-item",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "show-a-section-title-on-a-question-page"
-  },
-  {
-    "type": "example",
-    "id": "show-a-simple-progress-indicator-on-a-question-page",
-    "title": "Show a simple progress indicator on a question page",
-    "description": "Show a simple progress indicator on a question page to help users understand their progress through the form.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "forms",
-      "questions",
-      "progress",
-      "navigation"
-    ],
-    "components": [
-      "form-item",
-      "radio-group",
-      "radio-item",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "show-a-simple-progress-indicator-on-a-question-page"
-  },
-  {
-    "type": "example",
-    "id": "show-a-simple-progress-indicator-on-a-question-page-with-multiple-questions",
-    "title": "Show a simple progress indicator on a question page with multiple questions",
-    "description": "Show a simple progress indicator on a question page when grouping multiple related questions together.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "forms",
-      "questions",
-      "progress",
-      "navigation",
-      "multi-question"
-    ],
-    "components": [
-      "form-item",
-      "input",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "show-a-simple-progress-indicator-on-a-question-page-with-multiple-questions"
   },
   {
     "type": "example",
@@ -2241,9 +1943,7 @@
     "title": "Show a user progress",
     "description": "Display progress feedback during long-running operations like downloads, showing percentage completion with the ability to cancel and receive success confirmation.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
     "tags": [
       "progress",
       "notification",
@@ -2254,8 +1954,7 @@
       "temporary-notification",
       "button"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-a-user-progress"
   },
   {
@@ -2264,9 +1963,7 @@
     "title": "Show a user progress when the time is unknown",
     "description": "Display indeterminate progress for operations where completion time cannot be estimated, such as complex searches or external system queries.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "interaction",
     "tags": [
       "progress",
       "notification",
@@ -2278,8 +1975,7 @@
       "temporary-notification",
       "button"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-a-user-progress-when-the-time-is-unknown"
   },
   {
@@ -2288,9 +1984,8 @@
     "title": "Show different views of data in a table",
     "description": "Use tabs to organize table data into different views based on status or category, showing counts in each tab to help workers quickly navigate to relevant items.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "table",
       "tabs",
@@ -2305,8 +2000,7 @@
       "badge",
       "button"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "show-different-views-of-data-in-a-table"
   },
   {
@@ -2315,9 +2009,7 @@
     "title": "Show full date in a tooltip",
     "description": "Display relative time (like \"4 hours ago\") while providing the full date and time on hover via tooltip for users who need exact timestamps.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "tooltip",
       "date",
@@ -2328,8 +2020,7 @@
       "tooltip",
       "container"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-full-date-in-a-tooltip"
   },
   {
@@ -2338,9 +2029,7 @@
     "title": "Show links to navigation items",
     "description": "Use the app footer to display comprehensive navigation links organized into sections, along with meta links for common utilities like privacy and accessibility.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
     "tags": [
       "footer",
       "navigation",
@@ -2352,36 +2041,8 @@
       "footer-nav-section",
       "footer-meta-section"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-links-to-navigation-items"
-  },
-  {
-    "type": "example",
-    "id": "show-more-information-to-help-answer-a-question",
-    "title": "Show more information to help answer a question",
-    "description": "Use the Details component to provide optional contextual help that explains why a question is being asked, helping users understand the purpose without cluttering the main form.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "form",
-      "details",
-      "help",
-      "question-page",
-      "expandable"
-    ],
-    "components": [
-      "details",
-      "form-item",
-      "radio-group",
-      "radio-item",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "citizen",
-    "slug": "show-more-information-to-help-answer-a-question"
   },
   {
     "type": "example",
@@ -2389,9 +2050,8 @@
     "title": "Show multiple actions in a compact table",
     "description": "Use icon buttons to provide multiple row actions in tables where space is limited, keeping the interface compact while maintaining accessibility through aria labels.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "table",
       "icon-button",
@@ -2405,8 +2065,7 @@
       "badge",
       "block"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "show-multiple-actions-in-a-compact-table"
   },
   {
@@ -2415,9 +2074,7 @@
     "title": "Show multiple tags together",
     "description": "Display multiple badges together using GoabBlock with tight spacing to show multiple statuses or categories for a single item.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "badge",
       "tags",
@@ -2428,8 +2085,7 @@
       "badge",
       "block"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-multiple-tags-together"
   },
   {
@@ -2438,9 +2094,7 @@
     "title": "Show number of results per page",
     "description": "Combine pagination with a dropdown selector to let users control how many results appear per page, improving data browsing for different use cases.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
     "tags": [
       "pagination",
       "table",
@@ -2456,8 +2110,7 @@
       "block",
       "spacer"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-number-of-results-per-page"
   },
   {
@@ -2466,9 +2119,7 @@
     "title": "Show quick links",
     "description": "Use the app footer meta section to display essential quick links like feedback, accessibility, privacy, and contact information without the full navigation structure.",
     "status": "published",
-    "categories": [
-      "structure-and-navigation"
-    ],
+    "size": "section",
     "tags": [
       "footer",
       "navigation",
@@ -2479,8 +2130,7 @@
       "footer",
       "footer-meta-section"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-quick-links"
   },
   {
@@ -2489,9 +2139,8 @@
     "title": "Show status in a table",
     "description": "Display status information within table rows using badges to provide clear visual indicators of item states like pending, complete, failed, or in progress.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "table",
       "badge",
@@ -2502,8 +2151,7 @@
       "badge",
       "button"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "show-status-in-a-table"
   },
   {
@@ -2512,9 +2160,8 @@
     "title": "Show status on a card",
     "description": "Display status indicators on cards using badges in the actions slot, allowing workers to quickly see the priority or state of each item.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "interaction",
+    "productType": "workspace",
     "tags": [
       "card",
       "container",
@@ -2525,8 +2172,7 @@
       "container",
       "badge"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "show-status-on-a-card"
   },
   {
@@ -2535,9 +2181,7 @@
     "title": "Show version number",
     "description": "Display version information in the microsite header using the version slot, allowing custom formatting and styling of version text.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "microsite-header",
       "version",
@@ -2547,8 +2191,7 @@
     "components": [
       "microsite-header"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "show-version-number"
   },
   {
@@ -2557,9 +2200,7 @@
     "title": "Slotted error text in a form item",
     "description": "Use the error slot in a form item to display formatted error messages with custom styling like bold or italic text.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "form",
       "form-item",
@@ -2571,8 +2212,7 @@
       "form-item",
       "input"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "slotted-error-text-in-a-form-item"
   },
   {
@@ -2581,9 +2221,7 @@
     "title": "Slotted helper text in a form item",
     "description": "Use the helpText slot in a form item to display formatted helper text with custom styling like bold, italic, or links.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "interaction",
     "tags": [
       "form",
       "form-item",
@@ -2594,8 +2232,7 @@
       "form-item",
       "input"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "slotted-helper-text-in-a-form-item"
   },
   {
@@ -2604,9 +2241,8 @@
     "title": "Sort data in a table",
     "description": "Enable column sorting in tables using sort headers, allowing workers to organize data by clicking column headers to toggle ascending/descending order.",
     "status": "published",
-    "categories": [
-      "content-layout"
-    ],
+    "size": "section",
+    "productType": "workspace",
     "tags": [
       "table",
       "sorting",
@@ -2616,19 +2252,17 @@
       "table",
       "table-sort-header"
     ],
-    "scale": "task",
-    "userType": "worker",
+    "aliases": [],
     "slug": "sort-data-in-a-table"
   },
   {
     "type": "example",
     "id": "start-page",
     "title": "Start page",
-    "description": "A start page is the front door to a government service for citizens. It provides essential information about the service and a clear call to action to begin.",
+    "description": "The front door to a government service for a citizen. It is the way into the service and how citizens access it. Each government service has a start page on Alberta.ca.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "page",
+    "productType": "public-form",
     "tags": [
       "page",
       "service",
@@ -2638,19 +2272,17 @@
     "components": [
       "button"
     ],
-    "scale": "page",
-    "userType": "citizen",
+    "aliases": [],
     "slug": "start-page"
   },
   {
     "type": "example",
     "id": "task-list-page",
     "title": "Task list page",
-    "description": "A task list page provides a structure for multi-step services, showing users their progress through a series of tasks with clear status indicators.",
+    "description": "A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.",
     "status": "published",
-    "categories": [
-      "forms"
-    ],
+    "size": "page",
+    "productType": "public-form",
     "tags": [
       "page",
       "task-list",
@@ -2662,8 +2294,7 @@
       "badge",
       "callout"
     ],
-    "scale": "page",
-    "userType": "both",
+    "aliases": [],
     "slug": "task-list-page"
   },
   {
@@ -2672,9 +2303,7 @@
     "title": "Type to create a new filter",
     "description": "Allow users to type custom filter values and create filter chips by pressing Enter, with the ability to remove chips using Backspace or by clicking them.",
     "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
+    "size": "interaction",
     "tags": [
       "filter-chip",
       "input",
@@ -2687,8 +2316,7 @@
       "form-item",
       "container"
     ],
-    "scale": "interaction",
-    "userType": "both",
+    "aliases": [],
     "slug": "type-to-create-a-new-filter"
   },
   {
@@ -2697,9 +2325,7 @@
     "title": "Warn a user of a deadline",
     "description": "Use a modal with important callout styling to warn users about time-sensitive deadlines that could affect their submission or action.",
     "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
+    "size": "section",
     "tags": [
       "modal",
       "warning",
@@ -2711,8 +2337,91 @@
       "button",
       "button-group"
     ],
-    "scale": "task",
-    "userType": "both",
+    "aliases": [],
     "slug": "warn-a-user-of-a-deadline"
+  },
+  {
+    "type": "example",
+    "id": "workspace-case-detail",
+    "title": "Case detail",
+    "description": "A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.",
+    "status": "published",
+    "size": "page",
+    "productType": "workspace",
+    "tags": [
+      "workspace",
+      "case-detail",
+      "worker"
+    ],
+    "components": [
+      "accordion",
+      "badge",
+      "button",
+      "drawer"
+    ],
+    "aliases": [],
+    "slug": "workspace-case-detail"
+  },
+  {
+    "type": "example",
+    "id": "workspace-dashboard",
+    "title": "Dashboard",
+    "description": "Gives staff an overview of their work with counts, trends, and assigned items.",
+    "status": "published",
+    "size": "page",
+    "productType": "workspace",
+    "tags": [
+      "workspace",
+      "dashboard",
+      "worker"
+    ],
+    "components": [
+      "container",
+      "block",
+      "badge"
+    ],
+    "aliases": [],
+    "slug": "workspace-dashboard"
+  },
+  {
+    "type": "example",
+    "id": "workspace-index-page",
+    "title": "Index page",
+    "description": "The page staff land on to scan, filter, sort, and pick records to work on. The home of the workspace's daily queue.",
+    "status": "published",
+    "size": "page",
+    "productType": "workspace",
+    "tags": [
+      "workspace",
+      "index",
+      "worker"
+    ],
+    "components": [
+      "work-side-menu",
+      "data-grid",
+      "tabs",
+      "filter-chip",
+      "badge"
+    ],
+    "aliases": [],
+    "slug": "workspace-index-page"
+  },
+  {
+    "type": "example",
+    "id": "workspace-product",
+    "title": "Workspace",
+    "description": "An end-to-end worker-facing tool for case management. Includes dashboard, data views, case detail, and the patterns that hold them together.",
+    "status": "published",
+    "size": "product",
+    "productType": "workspace",
+    "tags": [
+      "workspace",
+      "worker",
+      "case-management",
+      "product"
+    ],
+    "components": [],
+    "aliases": [],
+    "slug": "workspace-product"
   }
 ]

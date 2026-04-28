@@ -16,41 +16,37 @@ const { data, slug } = example;
 
 const href = `/examples/${slug}`;
 
-// Format category for display
-function formatCategory(category: string): string {
-  return category
+// Format service type for display
+function formatProductType(productType: string): string {
+  return productType
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
     .join(' ');
 }
 
-// Format scale for badge
-function formatScale(scale: string): string {
-  return scale.charAt(0).toUpperCase() + scale.slice(1);
+// Format size for badge
+function formatSize(size: string): string {
+  return size
+    .split('-')
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+    .join(' ');
 }
 
-// Get badge type for scale
-function getScaleBadgeType(scale: string): string {
-  if (scale === 'interaction') return 'lilac';
-  if (scale === 'task') return 'dawn';
+// Get badge type for example size
+function getSizeBadgeType(size: string): string {
+  if (size === 'interaction') return 'dawn';
+  if (size === 'section') return 'information';
+  if (size === 'page') return 'pasture';
+  if (size === 'flow') return 'sunset';
+  if (size === 'product') return 'prairie';
   return 'default';
 }
 
-// Get badge type for category
-function getCategoryBadgeType(category: string): string {
-  switch (category) {
-    case 'content-layout': return 'sky';
-    case 'feedback-and-alerts': return 'prairie';
-    case 'structure-and-navigation':
-    case 'structure-navigation': return 'lilac';
-    case 'inputs-and-actions': return 'dawn';
-    case 'forms':
-    case 'form-pattern': return 'pasture';
-    case 'technical':
-    case 'utilities':
-    case 'component-usage': return 'default';
-    default: return 'default';
-  }
+// Get badge type for service type
+function getProductTypeBadgeType(productType: string): string {
+  if (productType === 'workspace') return 'lilac';
+  if (productType === 'public-form') return 'sunset';
+  return 'default';
 }
 
 // Get user goal from title (ask/help)
@@ -66,9 +62,8 @@ const userGoal = getUserGoal(data.title);
 
 <div
   class="listing-card"
-  data-category={data.category}
-  data-user-type={data.userType}
-  data-scale={data.scale}
+  data-type={data.size}
+  data-product-type={data.productType}
   data-title={data.title.toLowerCase()}
   data-tags={data.tags?.join(' ').toLowerCase() || ''}
 >
@@ -94,8 +89,10 @@ const userGoal = getUserGoal(data.title);
     </p>
 
     <div class="card-badges">
-      <goa-badge version="2" type={getScaleBadgeType(data.scale)} emphasis="subtle" icon="false" content={formatScale(data.scale)}></goa-badge>
-      <goa-badge version="2" type={getCategoryBadgeType(data.category)} emphasis="subtle" icon="false" content={formatCategory(data.category)}></goa-badge>
+      <goa-badge version="2" type={getSizeBadgeType(data.size)} emphasis="subtle" icon="false" content={formatSize(data.size)}></goa-badge>
+      {data.productType && (
+        <goa-badge version="2" type={getProductTypeBadgeType(data.productType)} emphasis="subtle" icon="false" content={formatProductType(data.productType)}></goa-badge>
+      )}
       {userGoal && (
         <goa-badge version="2" type="sky" emphasis="subtle" icon="false" content={userGoal}></goa-badge>
       )}

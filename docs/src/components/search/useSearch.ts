@@ -33,11 +33,11 @@ export interface ExampleEntry {
   title: string;
   description?: string;
   status: string;
-  categories: string[];
+  size: string;              // "interaction" | "section" | "page" | "flow" | "product"
+  productType?: string;      // "workspace" | "public-form"
   tags: string[];
   components: string[];
-  scale: string;
-  userType: string;
+  aliases: string[];
   slug: string;
 }
 
@@ -184,8 +184,19 @@ function createSearchIndex() {
           resolution: 4,
         },
         {
-          field: "categories",
+          field: "size",
           tokenize: "strict",
+          resolution: 4,
+        },
+        {
+          field: "productType",
+          tokenize: "strict",
+          resolution: 4,
+        },
+        {
+          field: "aliases",
+          tokenize: "forward",
+          resolution: 9,
         },
         // Content field - includes token names for token entries
         {
@@ -204,11 +215,11 @@ function createSearchIndex() {
         "description",
         "status",
         "category",
-        "categories",
+        "size",
+        "productType",
         "tags",
         "components",
-        "scale",
-        "userType",
+        "aliases",
         "slug",
       ],
     },
@@ -287,8 +298,11 @@ async function loadSearchIndex(): Promise<SearchCache> {
               : entry.type === "page"
                 ? (entry as PageEntry).title
                 : "",
-        categories: entry.type === "example" ? (entry as ExampleEntry).categories : [],
+        size: entry.type === "example" ? (entry as ExampleEntry).size : "",
+        productType:
+          entry.type === "example" ? (entry as ExampleEntry).productType ?? "" : "",
         components: entry.type === "example" ? (entry as ExampleEntry).components : [],
+        aliases: entry.type === "example" ? (entry as ExampleEntry).aliases : [],
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
     }

@@ -43,11 +43,11 @@ interface ExampleEntry {
   title: string;
   description?: string;
   status: string;
-  categories: string[];
+  size: string;              // "interaction" | "section" | "page" | "flow" | "product"
+  productType?: string;      // "workspace" | "public-form"
   tags: string[];
-  components: string[];  // What components this example uses
-  scale: string;
-  userType: string;
+  components: string[];      // What components this example uses
+  aliases: string[];         // Secondary slugs that surface this entry in search
   slug: string;
 }
 
@@ -214,15 +214,17 @@ function processExample(filePath: string): ExampleEntry | null {
       title: String(frontmatter.title || id),
       description,
       status: String(frontmatter.status || 'published'),
-      categories: Array.isArray(frontmatter.categories)
-        ? frontmatter.categories.map(String)
-        : [],
+      size: String(frontmatter.size || 'section'),
+      productType: frontmatter.productType
+        ? String(frontmatter.productType)
+        : undefined,
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
       components: Array.isArray(frontmatter.components)
         ? frontmatter.components.map(String)
         : [],
-      scale: String(frontmatter.scale || 'interaction'),
-      userType: String(frontmatter.userType || 'both'),
+      aliases: Array.isArray(frontmatter.aliases)
+        ? frontmatter.aliases.map(String)
+        : [],
       slug: String(frontmatter.slug || id),
     };
   } catch (error) {

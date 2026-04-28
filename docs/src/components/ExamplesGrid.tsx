@@ -4,7 +4,7 @@
  * Data grid for examples with:
  * - Grid/List views (responsive to viewport)
  * - Column header sorting (list view)
- * - Category/Scale/UserType filtering via drawer
+ * - Type and productType filtering via drawer
  * - Search with helper text
  * - Grouping via settings popover
  *
@@ -39,20 +39,13 @@ export interface Example {
   data: {
     id: string;
     title: string;
-    categories: (
-      | "content-layout"
-      | "feedback-and-alerts"
-      | "inputs-and-actions"
-      | "forms"
-      | "structure-and-navigation"
-      | "technical"
-    )[];
-    scale: "interaction" | "task" | "page" | "product";
-    userType: "citizen" | "worker" | "both";
+    size: "interaction" | "section" | "page" | "flow" | "product";
+    productType?: "workspace" | "public-form";
     tags?: string[];
     components: string[];
     status: "published" | "draft" | "deprecated";
     previewImage?: string;
+    href?: string;
   };
   body?: string;
 }
@@ -61,67 +54,56 @@ interface ExamplesGridProps {
   examples: Example[];
 }
 
-const DEFAULT_VISIBLE_COLUMNS = ["title", "scale", "category", "userType", "status"];
+const DEFAULT_VISIBLE_COLUMNS = ["title", "size", "productType", "tags"];
 
-// Badge type mapping for scales (using V2 extended colors)
-function getScaleBadgeType(
-  scale: string,
-): "sky" | "sunset" | "pasture" | "lilac" | "prairie" | "dawn" | "information" {
-  switch (scale) {
+// Badge type mapping for example sizes (using V2 extended colors)
+function getSizeBadgeType(
+  size: string,
+): "dawn" | "information" | "pasture" | "sunset" | "prairie" {
+  switch (size) {
     case "interaction":
+      return "dawn";
+    case "section":
       return "information";
-    case "task":
-      return "sunset";
     case "page":
       return "pasture";
     case "flow":
-      return "lilac";
+      return "sunset";
     case "product":
       return "prairie";
     default:
-      return "dawn";
+      return "information";
   }
 }
 
-// Badge type mapping for categories (using V2 extended colors)
-function getCategoryBadgeType(
-  category: string,
-): "sky" | "pasture" | "dawn" | "lilac" | "prairie" | "default" {
-  switch (category) {
-    case "content-layout":
-      return "sky";
-    case "feedback-and-alerts":
-      return "prairie";
-    case "structure-and-navigation":
+// Badge type mapping for service types (using V2 extended colors)
+function getProductTypeBadgeType(
+  productType: string,
+): "lilac" | "sunset" | "default" {
+  switch (productType) {
+    case "workspace":
       return "lilac";
-    case "inputs-and-actions":
-      return "dawn";
-    case "forms":
-      return "pasture";
-    case "technical":
-      return "default";
-    case "utilities":
-      return "default";
+    case "public-form":
+      return "sunset";
     default:
       return "default";
   }
 }
 
-// Format category for display (sentence case)
-function formatCategory(category: string): string {
-  const words = category.replace(/-/g, " ");
-  return words.charAt(0).toUpperCase() + words.slice(1);
+// Format size for display (sentence case, hyphens to spaces)
+function formatSize(size: string): string {
+  return size
+    .split("-")
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+    .join(" ");
 }
 
-// Format scale for display
-function formatScale(scale: string): string {
-  return scale.charAt(0).toUpperCase() + scale.slice(1);
-}
-
-// Format user type for display
-function formatUserType(userType: string): string {
-  if (userType === "both") return "Citizen and worker";
-  return userType.charAt(0).toUpperCase() + userType.slice(1);
+// Format service type for display ("public-form" -> "Public form")
+function formatProductType(productType: string): string {
+  return productType
+    .split("-")
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+    .join(" ");
 }
 
 export function ExamplesGrid({ examples }: ExamplesGridProps) {
@@ -157,29 +139,58 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
   // Filter state
   const emptyFilters = {
-    category: [] as string[],
-    scale: [] as string[],
-    userType: [] as string[],
+    size: [] as string[],
+    productType: [] as string[],
   };
   const [pendingFilters, setPendingFilters] = useState(emptyFilters);
   const [appliedFilters, setAppliedFilters] = useState(emptyFilters);
 
-  // Read URL params on mount for initial filters (e.g. ?userType=citizen)
+  // Read URL params first, then sessionStorage, on mount. sessionStorage
+  // persists the user's last filter selection within the tab so navigating
+  // away from /examples/ and back via the breadcrumb keeps their filters.
+  const FILTER_STORAGE_KEY = "examples-grid-filters";
   const [urlFiltersApplied, setUrlFiltersApplied] = useState(false);
   useEffect(() => {
     if (urlFiltersApplied) return;
     const params = new URLSearchParams(window.location.search);
     const fromUrl = {
-      category: params.get("category")?.split(",").filter(Boolean) ?? [],
-      scale: params.get("scale")?.split(",").filter(Boolean) ?? [],
-      userType: params.get("userType")?.split(",").filter(Boolean) ?? [],
+      size: params.get("size")?.split(",").filter(Boolean) ?? [],
+      productType: params.get("productType")?.split(",").filter(Boolean) ?? [],
     };
-    if (fromUrl.category.length || fromUrl.scale.length || fromUrl.userType.length) {
+    if (fromUrl.size.length || fromUrl.productType.length) {
       setPendingFilters(fromUrl);
       setAppliedFilters(fromUrl);
+    } else {
+      try {
+        const stored = sessionStorage.getItem(FILTER_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored) as typeof emptyFilters;
+          if (parsed.size?.length || parsed.productType?.length) {
+            setPendingFilters(parsed);
+            setAppliedFilters(parsed);
+          }
+        }
+      } catch {
+        // ignore malformed storage
+      }
     }
     setUrlFiltersApplied(true);
   }, [urlFiltersApplied]);
+
+  // Persist applied filters to sessionStorage so they survive navigation
+  // away from /examples/ and back. Cleared when the user clears all filters.
+  useEffect(() => {
+    if (!urlFiltersApplied) return;
+    try {
+      if (appliedFilters.size.length || appliedFilters.productType.length) {
+        sessionStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(appliedFilters));
+      } else {
+        sessionStorage.removeItem(FILTER_STORAGE_KEY);
+      }
+    } catch {
+      // ignore storage write failure (e.g. private mode)
+    }
+  }, [appliedFilters, urlFiltersApplied]);
 
   // Hooks
   const { sortConfig, setSortConfig, sortByKey, clearSort, handleTableSort } =
@@ -242,77 +253,50 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   // Expanded groups state
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
-  // Extract unique filter values
+  // Extract unique filter values. Sizes order from smallest to largest.
+  const SIZE_ORDER = ["interaction", "section", "page", "flow", "product"];
   const filterOptions = useMemo(() => {
-    const categories = [...new Set(examples.flatMap((e) => e.data.categories))].sort(
-      (a, b) => (a === "forms" ? -1 : b === "forms" ? 1 : a.localeCompare(b)),
+    const sizes = [...new Set(examples.map((e) => e.data.size))].sort(
+      (a, b) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b),
     );
-    const scales = [...new Set(examples.map((e) => e.data.scale))].sort((a, b) =>
-      a === "product" ? 1 : b === "product" ? -1 : a.localeCompare(b),
-    );
-    const allUserTypes = [...new Set(examples.map((e) => e.data.userType))].sort(
-      (a, b) => (a === "both" ? 1 : b === "both" ? -1 : a.localeCompare(b)),
-    );
-    const userTypes = allUserTypes.filter((ut) => ut !== "both");
-    return { categories, scales, userTypes, allUserTypes };
+    const productTypes = [
+      ...new Set(
+        examples
+          .map((e) => e.data.productType)
+          .filter((st): st is "workspace" | "public-form" => !!st),
+      ),
+    ].sort();
+    return { sizes, productTypes };
   }, [examples]);
 
   // Slash commands derived from available filter values
   const slashCommands = useMemo((): SlashCommand[] => {
     const cmds: SlashCommand[] = [];
-    filterOptions.scales.forEach((scale) => {
+    filterOptions.sizes.forEach((size) => {
       cmds.push({
-        id: `scale:${scale}`,
-        label: formatScale(scale),
-        group: "Scale",
-        filterType: "scale",
-        filterValue: scale,
-        active: appliedFilters.scale.includes(scale),
+        id: `size:${size}`,
+        label: formatSize(size),
+        group: "Size",
+        filterType: "size",
+        filterValue: size,
+        active: appliedFilters.size.includes(size),
       });
     });
-    filterOptions.categories.forEach((cat) => {
+    filterOptions.productTypes.forEach((productType) => {
       cmds.push({
-        id: `category:${cat}`,
-        label: formatCategory(cat),
-        group: "Category",
-        filterType: "category",
-        filterValue: cat,
-        active: appliedFilters.category.includes(cat),
-      });
-    });
-    filterOptions.allUserTypes.forEach((ut) => {
-      cmds.push({
-        id: `userType:${ut}`,
-        label: formatUserType(ut),
-        group: "User Type",
-        filterType: "userType",
-        filterValue: ut,
-        active:
-          ut === "both"
-            ? appliedFilters.userType.includes("citizen") &&
-              appliedFilters.userType.includes("worker")
-            : appliedFilters.userType.includes(ut),
+        id: `productType:${productType}`,
+        label: formatProductType(productType),
+        group: "Product type",
+        filterType: "productType",
+        filterValue: productType,
+        active: appliedFilters.productType.includes(productType),
       });
     });
     return cmds;
   }, [filterOptions, appliedFilters]);
 
   const handleSlashCommand = useCallback((cmd: SlashCommand) => {
-    const filterType = cmd.filterType as "category" | "scale" | "userType";
-    // "both" expands to citizen + worker
-    if (filterType === "userType" && cmd.filterValue === "both") {
-      setAppliedFilters((prev) => {
-        const hasBoth =
-          prev.userType.includes("citizen") && prev.userType.includes("worker");
-        return {
-          ...prev,
-          userType: hasBoth
-            ? prev.userType.filter((v) => v !== "citizen" && v !== "worker")
-            : [...new Set([...prev.userType, "citizen", "worker"])],
-        };
-      });
-      return;
-    }
+    const filterType = cmd.filterType as "size" | "productType";
     setAppliedFilters((prev) => {
       const current = prev[filterType];
       return {
@@ -358,27 +342,19 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
         .sort((a, b) => (slugOrder.get(a.slug) ?? 0) - (slugOrder.get(b.slug) ?? 0));
     }
 
-    // Apply category filters (OR logic - show if example has ANY of the selected categories)
-    if (appliedFilters.category.length > 0) {
+    // Apply type filters
+    if (appliedFilters.size.length > 0) {
       result = result.filter((example) =>
-        example.data.categories.some((cat) => appliedFilters.category.includes(cat)),
+        appliedFilters.size.includes(example.data.size),
       );
     }
 
-    // Apply scale filters
-    if (appliedFilters.scale.length > 0) {
+    // Apply productType filters (entries without productType are excluded when filter is active)
+    if (appliedFilters.productType.length > 0) {
       result = result.filter((example) =>
-        appliedFilters.scale.includes(example.data.scale),
-      );
-    }
-
-    // Apply userType filters ("both" examples match either citizen or worker)
-    if (appliedFilters.userType.length > 0) {
-      result = result.filter((example) =>
-        example.data.userType === "both"
-          ? appliedFilters.userType.includes("citizen") ||
-            appliedFilters.userType.includes("worker")
-          : appliedFilters.userType.includes(example.data.userType),
+        example.data.productType
+          ? appliedFilters.productType.includes(example.data.productType)
+          : false,
       );
     }
 
@@ -396,17 +372,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             aVal = a.data.title;
             bVal = b.data.title;
             break;
-          case "category":
-            aVal = a.data.categories[0] || "";
-            bVal = b.data.categories[0] || "";
+          case "size":
+            aVal = a.data.size;
+            bVal = b.data.size;
             break;
-          case "scale":
-            aVal = a.data.scale;
-            bVal = b.data.scale;
-            break;
-          case "userType":
-            aVal = a.data.userType;
-            bVal = b.data.userType;
+          case "productType":
+            aVal = a.data.productType ?? "";
+            bVal = b.data.productType ?? "";
             break;
           default:
             aVal = "";
@@ -428,17 +400,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
               secAVal = a.data.title;
               secBVal = b.data.title;
               break;
-            case "category":
-              secAVal = a.data.categories[0] || "";
-              secBVal = b.data.categories[0] || "";
+            case "size":
+              secAVal = a.data.size;
+              secBVal = b.data.size;
               break;
-            case "scale":
-              secAVal = a.data.scale;
-              secBVal = b.data.scale;
-              break;
-            case "userType":
-              secAVal = a.data.userType;
-              secBVal = b.data.userType;
+            case "productType":
+              secAVal = a.data.productType ?? "";
+              secBVal = b.data.productType ?? "";
               break;
             default:
               secAVal = "";
@@ -465,14 +433,11 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     filteredExamples.forEach((example) => {
       let groupKey: string;
       switch (viewSettings.groupBy) {
-        case "category":
-          groupKey = example.data.categories[0] || "Uncategorized";
+        case "size":
+          groupKey = example.data.size;
           break;
-        case "scale":
-          groupKey = example.data.scale;
-          break;
-        case "userType":
-          groupKey = example.data.userType;
+        case "productType":
+          groupKey = example.data.productType ?? "Universal";
           break;
         default:
           groupKey = "Unknown";
@@ -488,14 +453,11 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     sortedKeys.forEach((key) => {
       let label: string;
       switch (viewSettings.groupBy) {
-        case "category":
-          label = formatCategory(key);
+        case "size":
+          label = formatSize(key);
           break;
-        case "scale":
-          label = formatScale(key);
-          break;
-        case "userType":
-          label = formatUserType(key);
+        case "productType":
+          label = key === "Universal" ? "Universal" : formatProductType(key);
           break;
         default:
           label = key;
@@ -527,7 +489,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
 
   // Filter handlers
   const togglePendingFilter = useCallback(
-    (filterType: "category" | "scale" | "userType", value: string) => {
+    (filterType: "size" | "productType", value: string) => {
       setPendingFilters((prev) => ({
         ...prev,
         [filterType]: prev[filterType].includes(value)
@@ -544,13 +506,13 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   }, [pendingFilters]);
 
   const clearAllFilters = useCallback(() => {
-    const empty = { category: [], scale: [], userType: [] };
+    const empty = { size: [], productType: [] };
     setPendingFilters(empty);
     setAppliedFilters(empty);
   }, []);
 
   const removeAppliedFilter = useCallback(
-    (filterType: "category" | "scale" | "userType", value: string) => {
+    (filterType: "size" | "productType", value: string) => {
       setAppliedFilters((prev) => ({
         ...prev,
         [filterType]: prev[filterType].filter((v) => v !== value),
@@ -571,7 +533,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     (example: Example) => (
       <a
         key={example.slug}
-        href={`/examples/${example.slug}`}
+        href={example.data.href ?? `/examples/${example.slug}`}
         className="example-card-link"
       >
         <div className="example-card-content">
@@ -605,34 +567,20 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
           <div className="example-card-badges">
             <goa-badge
               version="2"
-              type="lilac"
-              content={formatScale(example.data.scale)}
+              type={getSizeBadgeType(example.data.size)}
+              content={formatSize(example.data.size)}
               emphasis="subtle"
               icon="false"
             />
-            {example.data.categories.map((cat) => (
+            {example.data.productType && (
               <goa-badge
-                key={cat}
                 version="2"
-                type="sunset"
-                content={formatCategory(cat)}
+                type={getProductTypeBadgeType(example.data.productType)}
+                content={formatProductType(example.data.productType)}
                 emphasis="subtle"
                 icon="false"
               />
-            ))}
-            {(example.data.userType === "both"
-              ? ["citizen", "worker"]
-              : [formatUserType(example.data.userType)]
-            ).map((ut) => (
-              <goa-badge
-                key={ut}
-                version="2"
-                type="sky"
-                content={ut}
-                emphasis="subtle"
-                icon="false"
-              />
-            ))}
+            )}
             {example.data.tags?.slice(0, 3).map((tag) => (
               <goa-badge
                 key={tag}
@@ -655,34 +603,33 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
     (example: Example) => (
       <tr key={example.slug}>
         <td>
-          <a href={`/examples/${example.slug}`} className="example-table-link">
+          <a
+            href={example.data.href ?? `/examples/${example.slug}`}
+            className="example-table-link"
+          >
             {example.data.title}
           </a>
         </td>
         <td>
-          <div className="example-categories">
-            {example.data.categories.map((cat) => (
-              <goa-badge
-                key={cat}
-                version="2"
-                type={getCategoryBadgeType(cat)}
-                content={formatCategory(cat)}
-                emphasis="subtle"
-                icon="false"
-              />
-            ))}
-          </div>
-        </td>
-        <td>
           <goa-badge
             version="2"
-            type={getScaleBadgeType(example.data.scale)}
-            content={formatScale(example.data.scale)}
+            type={getSizeBadgeType(example.data.size)}
+            content={formatSize(example.data.size)}
             emphasis="subtle"
             icon="false"
           />
         </td>
-        <td>{formatUserType(example.data.userType)}</td>
+        <td>
+          {example.data.productType && (
+            <goa-badge
+              version="2"
+              type={getProductTypeBadgeType(example.data.productType)}
+              content={formatProductType(example.data.productType)}
+              emphasis="subtle"
+              icon="false"
+            />
+          )}
+        </td>
         <td>
           <div className="example-tags">
             {example.data.tags?.slice(0, 3).map((tag) => (
@@ -735,9 +682,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
   );
 
   const hasActiveFilters =
-    appliedFilters.category.length > 0 ||
-    appliedFilters.scale.length > 0 ||
-    appliedFilters.userType.length > 0;
+    appliedFilters.size.length > 0 || appliedFilters.productType.length > 0;
 
   return (
     <div className="examples-grid" ref={gridRef}>
@@ -856,30 +801,21 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             />
           )}
 
-          {/* Category filter chips */}
-          {appliedFilters.category.map((cat) => (
+          {/* Size filter chips */}
+          {appliedFilters.size.map((size) => (
             <GoabFilterChip
-              key={`cat-${cat}`}
-              content={formatCategory(cat)}
-              onClick={() => removeAppliedFilter("category", cat)}
+              key={`size-${size}`}
+              content={formatSize(size)}
+              onClick={() => removeAppliedFilter("size", size)}
             />
           ))}
 
-          {/* Scale filter chips */}
-          {appliedFilters.scale.map((scale) => (
+          {/* Product type filter chips */}
+          {appliedFilters.productType.map((productType) => (
             <GoabFilterChip
-              key={`scale-${scale}`}
-              content={formatScale(scale)}
-              onClick={() => removeAppliedFilter("scale", scale)}
-            />
-          ))}
-
-          {/* User type filter chips */}
-          {appliedFilters.userType.map((ut) => (
-            <GoabFilterChip
-              key={`ut-${ut}`}
-              content={formatUserType(ut)}
-              onClick={() => removeAppliedFilter("userType", ut)}
+              key={`st-${productType}`}
+              content={formatProductType(productType)}
+              onClick={() => removeAppliedFilter("productType", productType)}
             />
           ))}
 
@@ -957,34 +893,24 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                       Name
                     </goa-table-sort-header>
                   </th>
-                  <th>
+                  <th style={{ width: "120px" }}>
                     <goa-table-sort-header
                       version="2"
-                      name="category"
-                      direction={getColumnSortDirection("category")}
-                      sort-order={getColumnSortOrder("category")}
+                      name="size"
+                      direction={getColumnSortDirection("size")}
+                      sort-order={getColumnSortOrder("size")}
                     >
-                      Category
-                    </goa-table-sort-header>
-                  </th>
-                  <th>
-                    <goa-table-sort-header
-                      version="2"
-                      name="scale"
-                      direction={getColumnSortDirection("scale")}
-                      sort-order={getColumnSortOrder("scale")}
-                    >
-                      Scale
+                      Size
                     </goa-table-sort-header>
                   </th>
                   <th style={{ minWidth: "140px" }}>
                     <goa-table-sort-header
                       version="2"
-                      name="userType"
-                      direction={getColumnSortDirection("userType")}
-                      sort-order={getColumnSortOrder("userType")}
+                      name="productType"
+                      direction={getColumnSortDirection("productType")}
+                      sort-order={getColumnSortOrder("productType")}
                     >
-                      User Type
+                      Product type
                     </goa-table-sort-header>
                   </th>
                   <th>Tags</th>
@@ -998,7 +924,7 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
                           className="examples-group-row"
                           onClick={() => toggleGroup(group.key)}
                         >
-                          <td colSpan={5}>
+                          <td colSpan={4}>
                             <div className="examples-group-header">
                               <GoabIcon
                                 type={
@@ -1094,104 +1020,60 @@ export function ExamplesGrid({ examples }: ExamplesGridProps) {
             }
           >
             <div className="filter-drawer-content">
-              {/* Scale filter */}
+              {/* Size filter */}
               <div className="filter-group">
-                <div className="filter-group-label">
-                  Scale{" "}
-                  <span
-                    className="filter-swatch"
-                    style={{ background: "#efe2fb", borderColor: "#e2d2fd" }}
-                  />
-                </div>
+                <div className="filter-group-label">Size</div>
                 <GoabCheckboxList
-                  name="scale"
+                  name="size"
                   size="compact"
-                  value={pendingFilters.scale}
+                  value={pendingFilters.size}
                   onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                    setPendingFilters((prev) => ({ ...prev, scale: detail.value }))
+                    setPendingFilters((prev) => ({ ...prev, size: detail.value }))
                   }
                 >
-                  {filterOptions.scales.map((scale) => (
+                  {filterOptions.sizes.map((size) => (
                     <GoabCheckbox
-                      key={scale}
-                      name={scale}
-                      value={scale}
-                      text={formatScale(scale)}
+                      key={size}
+                      name={size}
+                      value={size}
+                      text={formatSize(size)}
                       size="compact"
                     />
                   ))}
                 </GoabCheckboxList>
               </div>
 
-              {/* Category filter */}
+              {/* Product type filter */}
               <div className="filter-group">
-                <div className="filter-group-label">
-                  Category{" "}
-                  <span
-                    className="filter-swatch"
-                    style={{ background: "#fcefd5", borderColor: "#f5ddad" }}
-                  />
-                </div>
+                <div className="filter-group-label">Product type</div>
                 <GoabCheckboxList
-                  name="category"
+                  name="productType"
                   size="compact"
-                  value={pendingFilters.category}
+                  value={pendingFilters.productType}
                   onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                    setPendingFilters((prev) => ({ ...prev, category: detail.value }))
+                    setPendingFilters((prev) => ({ ...prev, productType: detail.value }))
                   }
                 >
-                  {filterOptions.categories.map((category) => (
+                  {filterOptions.productTypes.map((productType) => (
                     <GoabCheckbox
-                      key={category}
-                      name={category}
-                      value={category}
-                      text={formatCategory(category)}
+                      key={productType}
+                      name={productType}
+                      value={productType}
+                      text={formatProductType(productType)}
                       size="compact"
                     />
                   ))}
                 </GoabCheckboxList>
               </div>
 
-              {/* User Type filter */}
-              <div className="filter-group">
-                <div className="filter-group-label">
-                  User type{" "}
-                  <span
-                    className="filter-swatch"
-                    style={{ background: "#e2f9f8", borderColor: "#bff0ee" }}
-                  />
-                </div>
-                <GoabCheckboxList
-                  name="userType"
-                  size="compact"
-                  value={pendingFilters.userType}
-                  onChange={(detail: GoabCheckboxListOnChangeDetail) =>
-                    setPendingFilters((prev) => ({ ...prev, userType: detail.value }))
-                  }
-                >
-                  {filterOptions.userTypes.map((userType) => (
-                    <GoabCheckbox
-                      key={userType}
-                      name={userType}
-                      value={userType}
-                      text={formatUserType(userType)}
-                      size="compact"
-                    />
-                  ))}
-                </GoabCheckboxList>
-              </div>
-
-              {(pendingFilters.category.length > 0 ||
-                pendingFilters.scale.length > 0 ||
-                pendingFilters.userType.length > 0) && (
+              {(pendingFilters.size.length > 0 ||
+                pendingFilters.productType.length > 0) && (
                 <>
                   <GoabDivider />
                   <GoabButton
                     type="tertiary"
                     size="compact"
-                    onClick={() =>
-                      setPendingFilters({ category: [], scale: [], userType: [] })
-                    }
+                    onClick={() => setPendingFilters({ size: [], productType: [] })}
                   >
                     Clear all filters
                   </GoabButton>

@@ -91,8 +91,10 @@ function getBreadcrumb(result: SearchResult): string {
     return "Design Tokens";
   }
   const example = result as ExampleEntry;
-  const category = example.categories?.[0] || "General";
-  return `Examples > ${formatCategory(category)}`;
+  if (example.productType) {
+    return `Examples > ${formatCategory(example.productType)}`;
+  }
+  return `Examples > ${formatCategory(example.size)}`;
 }
 
 /**

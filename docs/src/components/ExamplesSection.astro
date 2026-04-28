@@ -10,34 +10,36 @@ interface Props {
 
 const { examples } = Astro.props;
 
-// Scale to badge type mapping
-const scaleToBadge: Record<string, string> = {
-  interaction: 'information',
-  task: 'important',
+// Size to badge type mapping
+const sizeToBadge: Record<string, string> = {
+  section: 'information',
   page: 'success',
-  flow: 'midtone',
-  service: 'dark'
+  flow: 'important',
+  product: 'midtone',
 };
+
+function formatProductType(productType: string): string {
+  return productType
+    .split('-')
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+    .join(' ');
+}
 ---
 
 {examples.length > 0 ? (
   <goa-block direction="column" gap="l">
     {examples.map(async (example) => {
       const { Content } = await example.render();
-      const badgeType = scaleToBadge[example.data.scale] || 'midtone';
+      const badgeType = sizeToBadge[example.data.size] || 'midtone';
 
       return (
         <goa-container type="non-interactive" accent="filled" padding="relaxed">
           <goa-block direction="column" gap="m">
             <!-- Header -->
             <goa-block alignment="center" gap="s">
-              <goa-badge type={badgeType} content={example.data.scale}></goa-badge>
-              <goa-badge type="midtone" content={example.data.category.replace(/-/g, ' ')}></goa-badge>
-              {example.data.userType !== 'both' && (
-                <goa-badge
-                  type={example.data.userType === 'citizen' ? 'information' : 'important'}
-                  content={example.data.userType}
-                ></goa-badge>
+              <goa-badge type={badgeType} content={example.data.size}></goa-badge>
+              {example.data.productType && (
+                <goa-badge type="midtone" content={formatProductType(example.data.productType)}></goa-badge>
               )}
             </goa-block>
 
