@@ -1,38 +1,42 @@
 ---
 id: result-page
 title: Result page
-categories:
-  - forms
-scale: page
-userType: citizen
+size: page
+productType: public-form
+description: A result page shown after a citizen has submitted a form, application, or task. Confirms success, explains what happens next, and points the user at any follow-up actions.
 tags:
   - confirmation
   - success
   - completion
   - forms
+  - application
 components:
   - block
   - callout
+  - button
+  - button-group
+aliases:
+  - confirm-that-an-application-was-submitted
 status: published
-previewImage: /images/examples/result-page.webp
+previewImage: /images/examples/result-page.png
 ---
 
-A result page shown after form submission to confirm success, provide next steps, and offer relevant contact information.
+## When to use a result page
 
-## When to use
+Use a result page when a user has submitted a form, application, or task, and there is a result to show them.
 
-Use this pattern when:
+## What content to include
 
-- A user has submitted a form or application
-- You need to confirm successful completion of a process
-- There is important follow-up information to communicate
-- Users need reference numbers or confirmation details
+- details of what happens next, and when
+- a reference number, if applicable
+- a link to save a record of the confirmation, for example as a PDF
+- a link to give feedback on the service
+- contact details for the service
+- links to information or services that users are likely to need next
 
 ## Considerations
 
-- Include a reference number if applicable
-- Clearly explain what happens next and when
-- Provide a way to save or print the confirmation
-- Include service contact information for questions
-- Link to feedback forms and related services
-- Keep the success message clear and reassuring
+- Use a success callout to clearly indicate the submission was received
+- Mention where a confirmation email will be sent, if applicable
+- Keep the success message clear, reassuring, and short
+- Surface contact information so users can reach out if something is wrong

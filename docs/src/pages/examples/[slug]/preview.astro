@@ -1,0 +1,87 @@
+---
+/**
+ * Generic preview route for flat-slug page-scale examples.
+ *
+ * Renders the page's React component full-screen wrapped in PreviewLayout.
+ * Astro hydration needs static imports so it can ship the right JS bundle
+ * to the client, hence the SLUG_TO_COMPONENT map below. Adding a new
+ * page-scale entry means one import + one map entry here.
+ *
+ * Workspace pages (nested slugs) use [family]/[page]/preview.astro which
+ * iframes an external demo. Error-page variants and question-page variants
+ * have their own routes.
+ */
+import { getCollection } from "astro:content";
+import PreviewLayout from "../../../layouts/PreviewLayout.astro";
+import { StartPage } from "../../../content/examples/start-page/react";
+import { TaskListPage } from "../../../content/examples/task-list-page/react";
+import { ReviewPage } from "../../../content/examples/review-page/react";
+import { ResultPage } from "../../../content/examples/result-page/react";
+import { BasicPageLayout } from "../../../content/examples/basic-page-layout/react";
+
+export async function getStaticPaths() {
+  // Inline list — Astro's getStaticPaths runs in an isolated module context
+  // and cannot see frontmatter top-level constants like SLUG_TO_COMPONENT.
+  // Keep this list in sync with the SLUG_TO_COMPONENT map above when adding
+  // page-scale entries that need a preview route.
+  const slugsWithPreview = new Set([
+    "start-page",
+    "task-list-page",
+    "review-page",
+    "result-page",
+    "basic-page-layout",
+  ]);
+  const examples = await getCollection("examples");
+  return examples
+    .filter(
+      (e) =>
+        !e.slug.includes("/") &&
+        e.data.size !== "section" &&
+        slugsWithPreview.has(e.slug),
+    )
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { slug } = Astro.params;
+const { data } = entry;
+const fullWidth = data.previewFullWidth === true;
+
+const githubBlob = `https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/${slug}/react.tsx`;
+const githubFolder = `https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/${slug}`;
+---
+
+<PreviewLayout
+  title={`${data.title} preview`}
+  backUrl={`/examples/${slug}`}
+  backLabel={`Back to ${data.title}`}
+  reactSourceUrl={githubBlob}
+  angularSourceUrl={githubFolder}
+>
+  <div class:list={["preview-frame", { "preview-frame--full": fullWidth }]}>
+    {/* Each branch is its own statically-imported JSX element so Astro
+        can wire up client:load hydration. Add a new branch when adding
+        a page-scale entry that needs a preview route. */}
+    {slug === "start-page" && <StartPage client:load />}
+    {slug === "task-list-page" && <TaskListPage client:load />}
+    {slug === "review-page" && <ReviewPage client:load />}
+    {slug === "result-page" && <ResultPage client:load />}
+    {slug === "basic-page-layout" && <BasicPageLayout client:load />}
+  </div>
+</PreviewLayout>
+
+<style is:global>
+  .preview-frame {
+    max-width: 41.5rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  .preview-frame--full {
+    max-width: none;
+    padding: 0;
+  }
+</style>

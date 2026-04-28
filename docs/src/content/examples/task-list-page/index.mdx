@@ -1,10 +1,9 @@
 ---
 id: task-list-page
 title: Task list page
-categories:
-  - forms
-scale: page
-userType: both
+size: page
+productType: public-form
+description: A page that provides structure for multiple steps in a service. Use a task list to outline the entire process and show the status of each task as users move through it.
 tags:
   - page
   - task-list
@@ -15,24 +14,55 @@ components:
   - badge
   - callout
 status: published
-previewImage: /images/examples/task-list-page.webp
+previewImage: /images/examples/task-list-page.png
 ---
 
-A task list page provides a structure for multi-step services, showing users their progress through a series of tasks with clear status indicators.
+## When to use a task list page
 
-## When to use
+Use a task list page to provide a structure for multiple steps in a service. Show a task list page when a citizen begins a service, and when they return to the service.
 
-Use this pattern when:
+When using a task list, group related actions into tasks and show the status of the tasks.
 
-- A service has multiple distinct tasks or sections to complete
-- Users need to see their overall progress
-- Tasks can potentially be completed in different orders
-- Users may return to complete tasks over multiple sessions
+## How to define a task
 
-## Considerations
+The size and complexity of a task is determined by the service and content. A task can be defined as small as a single action, such as "sign a document" or "upload a file", or it can be as big as an entire section of a form with multiple question pages and a review page.
 
-- Group related actions into logical tasks
-- Show status badges for each task (Completed, In progress, Not started, Cannot start yet)
-- Include a summary callout showing how many sections are complete
-- Allow users to complete tasks in any order when possible
-- Clearly indicate when tasks have dependencies
+Use tasks to break down the steps in a service in an understandable way.
+
+## Show status of tasks
+
+Make it clear which tasks a user has completed and which they still need to complete.
+
+### Suggested statuses
+
+- **Completed** — success
+- **In progress** — dark grey
+- **Not started** — information
+- **Cannot start yet** — light grey
+
+Include a summary above the task list to say how many tasks have been completed. This also makes it clearer to the user that there are still tasks left to complete.
+
+### How is a task list different from a stepper?
+
+**Stepper:**
+
+- a visual navigation within a form
+- shown at the top of every page in a form
+- scope: sections of a form
+
+**Task list:**
+
+- can be used to outline more than just sections of a form
+- not shown on every page
+
+### Completing tasks in order
+
+When possible, allow users to complete tasks in any order. This will help them plan their time and complete sections as and when they can.
+
+## Anatomy
+
+1. **Page title** — heading-large
+2. **Status of completed sections** — `goa-callout`
+3. **Section** — task-list-section
+4. **Section heading** — heading-medium
+5. **Task** — `goa-table`
