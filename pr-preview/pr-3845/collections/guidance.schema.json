@@ -1,0 +1,98 @@
+{
+  "$ref": "#/definitions/guidance",
+  "definitions": {
+    "guidance": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "do",
+            "dont",
+            "tip",
+            "warning",
+            "info"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string",
+          "enum": [
+            "types",
+            "states",
+            "sizing",
+            "icons",
+            "positioning",
+            "content",
+            "feedback",
+            "usage",
+            "interaction",
+            "forms",
+            "layout",
+            "performance",
+            "accessibility",
+            "screen-readers",
+            "keyboard",
+            "focus",
+            "other"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appliesTo": {
+          "type": "object",
+          "properties": {
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "contexts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "relatedProps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "published",
+            "draft",
+            "deprecated"
+          ],
+          "default": "published"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "description",
+        "topic"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
