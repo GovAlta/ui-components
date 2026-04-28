@@ -1,0 +1,151 @@
+---
+/**
+ * PreviewLayout.astro
+ *
+ * Chrome for render-local template previews (Model B). Loads the GoA
+ * web-components runtime so <goa-*> tags render inside a layout-less route,
+ * renders a slim top bar with a back link to /examples, and slots the
+ * composition underneath.
+ *
+ * Use this for any full-viewport preview whose source lives in the docs
+ * repo itself (error pages, result pages, page-scale patterns). Workspace
+ * and other iframe-a-demo previews have their own route that does not use
+ * this layout.
+ */
+import "@abgov/web-components/index.css";
+import "@design-tokens/tokens.css";
+
+interface Props {
+  title: string;
+  backUrl?: string;
+  backLabel?: string;
+  reactSourceUrl?: string;
+  angularSourceUrl?: string;
+}
+
+const {
+  title,
+  backUrl = "/examples",
+  backLabel = "Back to Examples",
+  reactSourceUrl,
+  angularSourceUrl,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <script>
+      import "@abgov/web-components";
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </head>
+  <body>
+    <header class="preview-bar">
+      <goa-link size="small" leadingicon="arrow-back">
+        <a href={backUrl} data-back-link>
+          <span class="back-link-label">{backLabel}</span>
+        </a>
+      </goa-link>
+      <div class="preview-bar-actions">
+        {reactSourceUrl && (
+          <goa-tooltip content="View React source" position="bottom">
+            <goa-icon-button
+              icon="logo-react"
+              size="small"
+              arialabel="View React source on GitHub"
+              onclick={`window.open('${reactSourceUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
+        {angularSourceUrl && (
+          <goa-tooltip content="View Angular source" position="bottom">
+            <goa-icon-button
+              icon="logo-angular"
+              size="small"
+              arialabel="View Angular source on GitHub"
+              onclick={`window.open('${angularSourceUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
+      </div>
+    </header>
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ref = document.referrer;
+        if (!ref || !ref.startsWith(window.location.origin + "/examples")) return;
+        const url = new URL(ref);
+        if (url.pathname.endsWith("/preview") || url.pathname.endsWith("/preview/")) return;
+        const path = url.pathname.replace(/\/$/, "");
+        const segments = path.split("/").filter(Boolean);
+        const last = segments[segments.length - 1] || "";
+        const label = last
+          ? last.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+          : "Examples";
+        const link = document.querySelector("[data-back-link]");
+        const labelEl = document.querySelector(".back-link-label");
+        if (link) link.setAttribute("href", path);
+        if (labelEl) labelEl.textContent = "Back to " + label;
+      });
+    </script>
+    <main class="preview-body">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--goa-font-family-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif);
+    color: var(--goa-color-text-default, #333);
+    background: var(--goa-color-surface-default, #fff);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .preview-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+    background: var(--goa-color-surface-default, #fff);
+    border-bottom: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    height: 3rem;
+    flex-shrink: 0;
+  }
+
+  .preview-bar-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .preview-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* GoA layout web components default to display:inline because their
+     :host rules don't set display:block. Force them to block layout so
+     they fill their parent container in preview routes. */
+  goa-one-column-layout,
+  goa-page-block,
+  goa-app-header,
+  goa-app-footer {
+    display: block;
+  }
+</style>

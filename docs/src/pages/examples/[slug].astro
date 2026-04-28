@@ -12,16 +12,20 @@ import { getCollection, render } from 'astro:content';
 import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
+import PreviewContainer from '../../components/PreviewContainer.astro';
 import { TableOfContents } from '../../components/TableOfContents';
 import { getExampleCode } from '../../lib/example-code';
 
-// Generate static paths for all examples
+// Generate static paths for flat examples only. Nested entries
+// (workspace/dashboard, etc) are handled by [family]/[page]/index.astro.
 export async function getStaticPaths() {
   const examples = await getCollection('examples');
-  return examples.map((example) => ({
-    params: { slug: example.slug },
-    props: { example },
-  }));
+  return examples
+    .filter((example) => !example.slug.includes('/'))
+    .map((example) => ({
+      params: { slug: example.slug },
+      props: { example },
+    }));
 }
 
 const { example } = Astro.props;
@@ -35,6 +39,28 @@ const { Content } = await render(example);
 const code = await getExampleCode(example.slug);
 const hasCode = !!(code.react || code.angular || code.webComponents);
 
+// Page-and-larger entries render with a PreviewContainer at the top instead
+// of framework code tabs, mirroring the workspace page detail shape. The
+// framework files still exist on disk and are linked via GitHub.
+// Section-sized entries keep the sandbox + framework tabs treatment.
+const PAGE_SCALE_SIZES = new Set(['page', 'flow', 'product']);
+const isPageScale = PAGE_SCALE_SIZES.has(data.size);
+const showCodeTabs = !isPageScale && hasCode;
+const useTopPreview = isPageScale && data.previewImage && !data.hideHero;
+const githubBlobBase = 'https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples';
+const githubTreeBase = 'https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples';
+type WithSourceUrls = { reactSourceUrl?: string; angularSourceUrl?: string; previewUrl?: string };
+const pageData = data as typeof data & WithSourceUrls;
+const reactSourceUrl =
+  pageData.reactSourceUrl ?? (code.react ? `${githubBlobBase}/${slug}/react.tsx` : undefined);
+const angularSourceUrl =
+  pageData.angularSourceUrl ?? (code.angular ? `${githubTreeBase}/${slug}` : undefined);
+// /examples/[slug]/preview.astro auto-generates a Live preview route for
+// every flat-slug page-scale entry with a sibling react.tsx. So if this
+// entry has React code, link the PreviewContainer image to its preview.
+const previewUrl =
+  pageData.previewUrl ?? (isPageScale && code.react ? `/examples/${slug}/preview` : undefined);
+
 // Get related examples if defined
 let relatedExamples: typeof example[] = [];
 if (data.relatedExamples?.length) {
@@ -44,28 +70,17 @@ if (data.relatedExamples?.length) {
   );
 }
 
-// Format category for display
-function formatCategory(category: string): string {
-  return category
+// Format size for display ("page" -> "Page", "component" -> "Component", "digital-service" -> "Digital service")
+function formatSize(size: string): string {
+  return size
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word, i) => (i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
     .join(' ');
 }
 
-// Format scale for display
-function formatScale(scale: string): string {
-  return scale.charAt(0).toUpperCase() + scale.slice(1);
-}
-
-// Format user type for display
-function formatUserType(userType: string): string {
-  if (userType === 'both') return 'Citizen & Worker';
-  return userType.charAt(0).toUpperCase() + userType.slice(1);
-}
-
-// Format component name to sentence case (e.g., "form-item" → "Form item")
-function formatComponentName(component: string): string {
-  return component
+// Format service type for display ("public-form" -> "Public form")
+function formatProductType(productType: string): string {
+  return productType
     .split('-')
     .map((word, i) => i === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
     .join(' ');
@@ -80,37 +95,56 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
   currentSlug={slug}
 >
   <article class="example-page">
-    <Breadcrumbs />
+    {/* Only page-scale entries (Dashboard, Start page, etc.) are members of
+        a product-type overview's Pages section. Section-scale snippets carry
+        a productType for filtering and badges only, so they should not show
+        the family crumb. */}
+    <Breadcrumbs
+      parentGroup={data.productType && data.size === 'page' ? {
+        label: formatProductType(data.productType),
+        url: `/examples/${data.productType}`,
+      } : undefined}
+    />
     <!-- Header -->
     <header class="example-header">
       <div class="badges">
-        {data.categories.map((cat: string) => (
-          <goa-badge version="2" type="information" emphasis="subtle" icon="false" content={formatCategory(cat)}></goa-badge>
-        ))}
-        <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={formatScale(data.scale)}></goa-badge>
-        <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={formatUserType(data.userType)}></goa-badge>
+        <goa-badge version="2" type="information" emphasis="subtle" icon="false" content={formatSize(data.size)}></goa-badge>
+        {data.productType && (
+          <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={formatProductType(data.productType)}></goa-badge>
+        )}
       </div>
     </header>
 
-    <!-- Live Preview + Code (only if code files exist) -->
-    {hasCode ? (
+    <!-- Header: title, description, and either PreviewContainer (page+) or framework code tabs (component) -->
+    {showCodeTabs ? (
       <section class="example-preview-section">
         <ExampleDisplay example={example} titleSize="large" />
       </section>
-    ) : data.previewImage ? (
+    ) : useTopPreview ? (
       <section class="example-hero-section">
         <h1 class="example-title">{data.title}</h1>
         {data.description && (
           <p class="example-description" set:html={data.description} />
         )}
-        <div class="example-hero-image">
-          <img src={data.previewImage} alt={`${data.title} example`} />
-        </div>
+        <PreviewContainer
+          image={data.previewImage}
+          alt={`${data.title} preview`}
+          previewUrl={previewUrl}
+          reactSourceUrl={reactSourceUrl}
+          angularSourceUrl={angularSourceUrl}
+        />
       </section>
-    ) : null}
+    ) : (
+      <section class="example-hero-section">
+        <h1 class="example-title">{data.title}</h1>
+        {data.description && (
+          <p class="example-description" set:html={data.description} />
+        )}
+      </section>
+    )}
 
     <!-- MDX Content (When to use, Considerations, etc.) -->
-    {!hasCode ? (
+    {!showCodeTabs ? (
       <div class="content-with-toc">
         <section class="example-content">
           <Content />
@@ -127,6 +161,8 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
       </section>
     )}
 
+    {/* end of code-tabs vs TOC switch */}
+
     <!-- Related Examples -->
     {relatedExamples.length > 0 && (
       <section class="related-examples">
@@ -135,7 +171,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
           {relatedExamples.map((related) => (
             <a href={`/examples/${related.slug}`} class="related-card">
               <span class="related-title">{related.data.title}</span>
-              <span class="related-category">{formatCategory(related.data.categories[0])}</span>
+              <span class="related-category">{formatSize(related.data.size)}</span>
             </a>
           ))}
         </div>
@@ -212,15 +248,22 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
     margin-bottom: var(--goa-space-2xl, 2.5rem);
   }
 
+  /* Use goa-text typography tokens so MDX headings match the design system's
+     heading scale without authors having to wrap each heading in <goa-text>. */
   .example-content :global(h2) {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: var(--goa-space-xl, 2rem) 0 var(--goa-space-m, 1rem);
+    font: var(--goa-typography-heading-m);
+    margin: var(--goa-space-2xl, 2.5rem) 0 var(--goa-space-m, 1rem);
     color: var(--goa-color-text-default, #333);
   }
 
   .example-content :global(h2:first-child) {
     margin-top: 0;
+  }
+
+  .example-content :global(h3) {
+    font: var(--goa-typography-heading-s);
+    margin: var(--goa-space-2xl, 2.5rem) 0 var(--goa-space-s, 0.5rem);
+    color: var(--goa-color-text-default, #333);
   }
 
   .example-content :global(p) {

@@ -1,0 +1,233 @@
+---
+/**
+ * PreviewContainer.astro
+ *
+ * Wraps a preview image with a hover overlay and a small action bar.
+ * Matches the Material UI templates shape: image acts as a click target
+ * to open the live preview, and the bar below offers "View source" and
+ * "Live preview" buttons. Gracefully omits anything without a URL.
+ */
+interface Props {
+  image?: string;
+  alt?: string;
+  /** Internal preview route — used by the "Live preview" button. */
+  previewUrl?: string;
+  /** External demo URL — used by the "View demo" button. Opens in a new tab. */
+  demoUrl?: string;
+  /** Drill-down sub-page URL — used by the "View more" button. Same tab. */
+  moreUrl?: string;
+  /** GitHub URL of the React source file or folder. Renders as a React icon button. */
+  reactSourceUrl?: string;
+  /** GitHub URL of the Angular source file or folder. Renders as an Angular icon button. */
+  angularSourceUrl?: string;
+  stackblitzUrl?: string;
+}
+
+const { image, alt = '', previewUrl, demoUrl, moreUrl, reactSourceUrl, angularSourceUrl, stackblitzUrl } = Astro.props;
+const hasActions = Boolean(previewUrl || demoUrl || moreUrl || reactSourceUrl || angularSourceUrl || stackblitzUrl);
+const hasImage = Boolean(image);
+const shouldRender = hasImage || hasActions;
+---
+
+{shouldRender && (
+<div class:list={['preview-container', { 'no-image': !hasImage }]}>
+  {hasImage && (previewUrl ? (
+    <a
+      href={previewUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="preview-image-link"
+      aria-label={`Open live preview of ${alt} in a new tab`}
+    >
+      <img src={image} alt={alt} />
+      <div class="preview-overlay" aria-hidden="true">
+        <span class="preview-overlay-label">
+          See live preview
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </span>
+      </div>
+    </a>
+  ) : (
+    <div class="preview-image-static">
+      <img src={image} alt={alt} />
+    </div>
+  ))}
+
+  {hasActions && (
+    <div class="preview-actions">
+      <div class="preview-actions-left">
+        {reactSourceUrl && (
+          <goa-tooltip content="View React source" position="top">
+            <goa-icon-button
+              icon="logo-react"
+              size="small"
+              arialabel="View React source on GitHub"
+              onclick={`window.open('${reactSourceUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
+        {angularSourceUrl && (
+          <goa-tooltip content="View Angular source" position="top">
+            <goa-icon-button
+              icon="logo-angular"
+              size="small"
+              arialabel="View Angular source on GitHub"
+              onclick={`window.open('${angularSourceUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
+        {stackblitzUrl && (
+          <goa-tooltip content="Edit in StackBlitz" position="top">
+            <goa-icon-button
+              icon="flash"
+              size="small"
+              arialabel="Edit in StackBlitz"
+              onclick={`window.open('${stackblitzUrl}', '_blank')`}
+            ></goa-icon-button>
+          </goa-tooltip>
+        )}
+      </div>
+      <div class="preview-actions-right">
+        {moreUrl && (
+          <goa-button version="2" type="tertiary" size="compact" onclick={`window.location.href='${moreUrl}'`}>
+            View more
+          </goa-button>
+        )}
+        {demoUrl && (
+          <goa-button version="2" type="tertiary" size="compact" onclick={`window.open('${demoUrl}', '_blank')`}>
+            View demo
+          </goa-button>
+        )}
+        {previewUrl && (
+          <goa-button version="2" type="secondary" size="compact" leadingicon="eye" onclick={`window.open('${previewUrl}', '_blank')`}>
+            Live preview
+          </goa-button>
+        )}
+      </div>
+    </div>
+  )}
+</div>
+)}
+
+<style>
+  .preview-container {
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    border-radius: 8px;
+    background: var(--goa-color-surface-default, #fff);
+    margin: var(--goa-space-m, 1rem) 0 var(--goa-space-xl, 2rem);
+  }
+
+  .preview-container.no-image {
+    border: none;
+    background: transparent;
+    margin: 0 0 var(--goa-space-l, 1.5rem);
+  }
+
+  .preview-container.no-image .preview-actions {
+    padding: 0;
+    border-top: 0;
+    background: transparent;
+    justify-content: flex-start;
+    border-radius: 0;
+  }
+
+  .preview-container.no-image .preview-actions-left {
+    margin-right: var(--goa-space-s, 0.5rem);
+  }
+
+  .preview-image-link,
+  .preview-image-static {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background: var(--goa-color-greyscale-100, #f5f5f5);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  .preview-image-link:last-child,
+  .preview-image-static:last-child {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+  .preview-image-link {
+    text-decoration: none;
+  }
+
+  .preview-image-link img,
+  .preview-image-static img {
+    display: block;
+    width: 100%;
+    /* Force a 16:10 landscape ratio for every preview, matching the
+       workspace thumbnails. Portrait or unusually tall source images get
+       cropped from the bottom — replace them with 16:10 captures
+       (header + content + footer visible) to avoid the crop. */
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .preview-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+  }
+
+  .preview-image-link:hover .preview-overlay,
+  .preview-image-link:focus-visible .preview-overlay {
+    opacity: 1;
+  }
+
+  .preview-overlay-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--goa-space-2xs, 0.25rem);
+    padding: var(--goa-space-2xs, 0.25rem) var(--goa-space-s, 0.75rem);
+    background: var(--goa-color-surface-default, #fff);
+    color: var(--goa-color-text-default, #333);
+    border-radius: 999px;
+    font: var(--goa-typography-body-s);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .preview-image-link:focus-visible {
+    outline: 3px solid var(--goa-color-interactive-focus);
+    outline-offset: -3px;
+  }
+
+  .preview-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--goa-space-s, 0.5rem);
+    padding: var(--goa-space-xs, 0.5rem) var(--goa-space-m, 1rem);
+    background: var(--goa-color-greyscale-100, #f5f5f5);
+    border-top: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+
+  .preview-actions-left {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-xs, 0.25rem);
+  }
+
+  .preview-actions-right {
+    display: flex;
+    align-items: center;
+    gap: var(--goa-space-xs, 0.5rem);
+  }
+</style>

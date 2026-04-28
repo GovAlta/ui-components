@@ -19,7 +19,9 @@ const segments = pathname.split('/').filter(Boolean);
 // Show on any page within a section
 const showBreadcrumbs = segments.length >= 1;
 
-// Build set of valid page routes from the pages directory
+// Build set of valid page routes from the pages directory. Dynamic segments
+// like `[family]` are kept as `*` so we can later test crumb paths against
+// them as patterns (e.g. `/examples/workspace` matches `/examples/*`).
 const pageFiles = import.meta.glob('/src/pages/**/*.{astro,md,mdx}', { eager: false });
 const validPaths = new Set(
   Object.keys(pageFiles).map(file =>
@@ -27,9 +29,19 @@ const validPaths = new Set(
       .replace('/src/pages', '')
       .replace(/\/index\.(astro|md|mdx)$/, '')
       .replace(/\.(astro|md|mdx)$/, '')
-      .replace(/\[.*?\]/g, '*') // dynamic routes aren't valid intermediate targets
+      .replace(/\[.*?\]/g, '*')
   )
 );
+
+function isValidPath(path: string): boolean {
+  if (validPaths.has(path)) return true;
+  for (const vp of validPaths) {
+    if (!vp.includes('*')) continue;
+    const pattern = '^' + vp.replace(/\*/g, '[^/]+') + '$';
+    if (new RegExp(pattern).test(path)) return true;
+  }
+  return false;
+}
 
 // Known labels for path segments
 const SEGMENT_LABELS: Record<string, string> = {
@@ -56,7 +68,7 @@ let path = '';
 const crumbCount = Math.max(1, segments.length - 1);
 for (let i = 0; i < crumbCount; i++) {
   path += '/' + segments[i];
-  crumbs.push({ label: segmentToLabel(segments[i]), url: path, hasPage: validPaths.has(path) });
+  crumbs.push({ label: segmentToLabel(segments[i]), url: path, hasPage: isValidPath(path) });
 }
 ---
 
