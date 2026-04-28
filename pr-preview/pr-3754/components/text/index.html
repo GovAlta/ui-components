@@ -257,7 +257,193 @@ Defaults to <code data-astro-cid-lv5w65io>65ch</code>.
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>  <div class="example-meta" data-astro-cid-kws6ko6c> <goa-details version="2" heading="Accessibility" data-astro-cid-kws6ko6c="true"> <p data-astro-cid-kws6ko6c>Uses a plain h1 as the page landmark. The decorative icon and accent bar are aria-hidden. The support email is a real mailto link inside GoabLink so keyboard users can activate it. No role=&quot;alert&quot; is applied because the ARIA alert role is reserved for dynamically inserted messages.</p> </goa-details> </div> </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z2jk4yv" prefix="r9" component-url="/ui-components/pr-preview/pr-3754/_astro/ExamplePreview.GDu-wYzX.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3754/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Server problem (500)&quot;],&quot;slug&quot;:[0,&quot;500-error-page&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBlock,\n  GoabButton,\n  GoabIcon,\n  GoabPageBlock,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ServerProblem() {\n  return (\n    &lt;&gt;\n      &lt;style&gt;{`\n        .error-page-content {\n          text-align: center;\n        }\n        .error-page-icon {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          width: 7.5rem;\n          height: 7.5rem;\n          border-radius: 50%;\n          background-color: var(--goa-color-greyscale-100);\n        }\n        /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n        /* Tracked in icon-sizes-above-xlarge gap ticket. */\n        .error-page-icon goa-icon,\n        .error-page-icon goab-icon {\n          transform: scale(1.35);\n        }\n        .error-page-underline {\n          width: 6.875rem;\n          height: var(--goa-space-xs);\n          background-color: var(--goa-color-info-default);\n        }\n      `}&lt;/style&gt;\n\n      &lt;GoabPageBlock&gt;\n        &lt;div className=\&quot;error-page-content\&quot;&gt;\n          &lt;GoabBlock\n            direction=\&quot;column\&quot;\n            alignment=\&quot;center\&quot;\n            gap=\&quot;xl\&quot;\n            width=\&quot;100%\&quot;\n            mt=\&quot;3xl\&quot;\n            mb=\&quot;3xl\&quot;\n          &gt;\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;div className=\&quot;error-page-icon\&quot;&gt;\n                &lt;GoabIcon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; /&gt;\n              &lt;/div&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                Error 500\n              &lt;/GoabText&gt;\n              &lt;div className=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot; /&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;GoabText tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                We are experiencing a problem\n              &lt;/GoabText&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                We cannot load this page right now. Please try again in a few minutes. We apologize\n                for the inconvenience.\n              &lt;/GoabText&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; (window.location.href = \&quot;/\&quot;)}&gt;\n              Go to home page\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabPageBlock&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-page-block&gt;\n  &lt;div class=\&quot;error-page-content\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div class=\&quot;error-page-icon\&quot;&gt;\n          &lt;goab-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot;&gt;&lt;/goab-icon&gt;\n        &lt;/div&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 500&lt;/goab-text&gt;\n        &lt;div class=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;/div&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goab-text tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;We are experiencing a problem&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n          We cannot load this page right now. Please try again in a few minutes. We apologize for the inconvenience.\n        &lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;goHome()\&quot;&gt;Go to home page&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-page-block&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-error-page-500\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n      .error-page-content {\n        text-align: center;\n      }\n      .error-page-icon {\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 7.5rem;\n        height: 7.5rem;\n        border-radius: 50%;\n        background-color: var(--goa-color-greyscale-100);\n      }\n      /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n      /* Tracked in icon-sizes-above-xlarge gap ticket. */\n      .error-page-icon goa-icon,\n      .error-page-icon goab-icon {\n        transform: scale(1.35);\n      }\n      .error-page-underline {\n        width: 6.875rem;\n        height: var(--goa-space-xs);\n        background-color: var(--goa-color-info-default);\n      }\n    `,\n  ],\n})\nexport class ServerProblemComponent {\n  goHome() {\n    window.location.href = \&quot;/\&quot;;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-page-block&gt;\n  &lt;div style=\&quot;text-align: center;\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div\n          style=\&quot;display: flex; align-items: center; justify-content: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background-color: var(--goa-color-greyscale-100);\&quot;\n        &gt;\n          &lt;goa-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; style=\&quot;transform: scale(1.35);\&quot;&gt;&lt;/goa-icon&gt;\n        &lt;/div&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 500&lt;/goa-text&gt;\n        &lt;div\n          aria-hidden=\&quot;true\&quot;\n          style=\&quot;width: 6.875rem; height: 0.5rem; background-color: var(--goa-color-info-default);\&quot;\n        &gt;&lt;/div&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goa-text as=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;We are experiencing a problem&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n          We cannot load this page right now. Please try again in a few minutes. We apologize for the inconvenience.\n        &lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; onclick=\&quot;window.location.href=&#39;/&#39;\&quot;&gt;Go to home page&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-page-block&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0,true],&quot;previewStyle&quot;:[0,&quot;padding: 0&quot;],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-500-error-page" class="example-title">Server problem (500)</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container full-width" style="padding:0"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">.error-page-content {
+      </style></div><!--astro:end--></astro-island>  <div class="example-meta" data-astro-cid-kws6ko6c> <goa-details version="2" heading="Accessibility" data-astro-cid-kws6ko6c="true"> <p data-astro-cid-kws6ko6c>Uses a plain h1 as the page landmark. The decorative icon and accent bar are aria-hidden. The support email is a real mailto link inside GoabLink so keyboard users can activate it. No role=&quot;alert&quot; is applied because the ARIA alert role is reserved for dynamically inserted messages.</p> </goa-details> </div> </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z1WaC6e" prefix="r9" component-url="/ui-components/pr-preview/pr-3754/_astro/ExamplePreview.GDu-wYzX.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3754/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Page not found (404)&quot;],&quot;slug&quot;:[0,&quot;404-error-page&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBlock,\n  GoabButton,\n  GoabIcon,\n  GoabPageBlock,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function PageNotFound() {\n  return (\n    &lt;&gt;\n      &lt;style&gt;{`\n        .error-page-content {\n          text-align: center;\n        }\n        .error-page-icon {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          width: 7.5rem;\n          height: 7.5rem;\n          border-radius: 50%;\n          background-color: var(--goa-color-greyscale-100);\n        }\n        /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n        /* Tracked in icon-sizes-above-xlarge gap ticket. */\n        .error-page-icon goa-icon,\n        .error-page-icon goab-icon {\n          transform: scale(1.35);\n        }\n        .error-page-underline {\n          width: 6.875rem;\n          height: var(--goa-space-xs);\n          background-color: var(--goa-color-info-default);\n        }\n      `}&lt;/style&gt;\n\n      &lt;GoabPageBlock&gt;\n        &lt;div className=\&quot;error-page-content\&quot;&gt;\n          &lt;GoabBlock\n            direction=\&quot;column\&quot;\n            alignment=\&quot;center\&quot;\n            gap=\&quot;xl\&quot;\n            width=\&quot;100%\&quot;\n            mt=\&quot;3xl\&quot;\n            mb=\&quot;3xl\&quot;\n          &gt;\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;div className=\&quot;error-page-icon\&quot;&gt;\n                &lt;GoabIcon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; /&gt;\n              &lt;/div&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                Error 404\n              &lt;/GoabText&gt;\n              &lt;div className=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot; /&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;GoabText tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                Page not found\n              &lt;/GoabText&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                The page you&#39;re looking for doesn&#39;t exist or has been moved.\n              &lt;/GoabText&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; (window.location.href = \&quot;/\&quot;)}&gt;\n              Go to home page\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabPageBlock&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-page-block&gt;\n  &lt;div class=\&quot;error-page-content\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div class=\&quot;error-page-icon\&quot;&gt;\n          &lt;goab-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot;&gt;&lt;/goab-icon&gt;\n        &lt;/div&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 404&lt;/goab-text&gt;\n        &lt;div class=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;/div&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goab-text tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Page not found&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;The page you&#39;re looking for doesn&#39;t exist or has been moved.&lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;goHome()\&quot;&gt;Go to home page&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-page-block&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-error-page-404\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n      .error-page-content {\n        text-align: center;\n      }\n      .error-page-icon {\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 7.5rem;\n        height: 7.5rem;\n        border-radius: 50%;\n        background-color: var(--goa-color-greyscale-100);\n      }\n      /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n      /* Tracked in icon-sizes-above-xlarge gap ticket. */\n      .error-page-icon goa-icon,\n      .error-page-icon goab-icon {\n        transform: scale(1.35);\n      }\n      .error-page-underline {\n        width: 6.875rem;\n        height: var(--goa-space-xs);\n        background-color: var(--goa-color-info-default);\n      }\n    `,\n  ],\n})\nexport class PageNotFoundComponent {\n  goHome() {\n    window.location.href = \&quot;/\&quot;;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-page-block&gt;\n  &lt;div style=\&quot;text-align: center;\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div\n          style=\&quot;display: flex; align-items: center; justify-content: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background-color: var(--goa-color-greyscale-100);\&quot;\n        &gt;\n          &lt;goa-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; style=\&quot;transform: scale(1.35);\&quot;&gt;&lt;/goa-icon&gt;\n        &lt;/div&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 404&lt;/goa-text&gt;\n        &lt;div\n          aria-hidden=\&quot;true\&quot;\n          style=\&quot;width: 6.875rem; height: 0.5rem; background-color: var(--goa-color-info-default);\&quot;\n        &gt;&lt;/div&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goa-text as=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Page not found&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;The page you&#39;re looking for doesn&#39;t exist or has been moved.&lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; onclick=\&quot;window.location.href=&#39;/&#39;\&quot;&gt;Go to home page&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-page-block&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0,true],&quot;previewStyle&quot;:[0,&quot;padding: 0&quot;],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-404-error-page" class="example-title">Page not found (404)</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container full-width" style="padding:0"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">.error-page-content {
+  text-align: center;
+}
+.error-page-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background-color: var(--goa-color-greyscale-100);
+}
+/* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */
+/* Tracked in icon-sizes-above-xlarge gap ticket. */
+.error-page-icon goa-icon,
+.error-page-icon goab-icon {
+  transform: scale(1.35);
+}
+.error-page-underline {
+  width: 6.875rem;
+  height: var(--goa-space-xs);
+  background-color: var(--goa-color-info-default);
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabPageBlock&gt;
+  &lt;div className=&quot;error-page-content&quot;&gt;
+    &lt;GoabBlock
+      direction=&quot;column&quot;
+      alignment=&quot;center&quot;
+      gap=&quot;xl&quot;
+      width=&quot;100%&quot;
+      mt=&quot;3xl&quot;
+      mb=&quot;3xl&quot;
+    &gt;
+      &lt;GoabBlock direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;m&quot; width=&quot;100%&quot;&gt;
+        &lt;div className=&quot;error-page-icon&quot;&gt;
+          &lt;GoabIcon role=&quot;presentation&quot; type=&quot;warning&quot; size=&quot;xlarge&quot; /&gt;
+        &lt;/div&gt;
+        &lt;GoabText size=&quot;body-m&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
+          Error 404
+        &lt;/GoabText&gt;
+        &lt;div className=&quot;error-page-underline&quot; aria-hidden=&quot;true&quot; /&gt;
+      &lt;/GoabBlock&gt;
+
+      &lt;GoabBlock direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;l&quot; width=&quot;100%&quot;&gt;
+        &lt;GoabText tag=&quot;h1&quot; size=&quot;heading-l&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
+          Page not found
+        &lt;/GoabText&gt;
+        &lt;GoabText size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
+          The page you&#x27;re looking for doesn&#x27;t exist or has been moved.
+        &lt;/GoabText&gt;
+      &lt;/GoabBlock&gt;
+
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; (window.location.href = &quot;/&quot;)}&gt;
+        Go to home page
+      &lt;/GoabButton&gt;
+    &lt;/GoabBlock&gt;
+  &lt;/div&gt;
+&lt;/GoabPageBlock&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">goHome() {
+  window.location.href = &quot;/&quot;;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-page-block&gt;
+  &lt;div class=&quot;error-page-content&quot;&gt;
+    &lt;goab-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;xl&quot; width=&quot;100%&quot; mt=&quot;3xl&quot; mb=&quot;3xl&quot;&gt;
+      &lt;goab-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;m&quot; width=&quot;100%&quot;&gt;
+        &lt;div class=&quot;error-page-icon&quot;&gt;
+          &lt;goab-icon role=&quot;presentation&quot; type=&quot;warning&quot; size=&quot;xlarge&quot;&gt;&lt;/goab-icon&gt;
+        &lt;/div&gt;
+        &lt;goab-text size=&quot;body-m&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Error 404&lt;/goab-text&gt;
+        &lt;div class=&quot;error-page-underline&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+      &lt;/goab-block&gt;
+
+      &lt;goab-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;l&quot; width=&quot;100%&quot;&gt;
+        &lt;goab-text tag=&quot;h1&quot; size=&quot;heading-l&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Page not found&lt;/goab-text&gt;
+        &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;The page you&#x27;re looking for doesn&#x27;t exist or has been moved.&lt;/goab-text&gt;
+      &lt;/goab-block&gt;
+
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;goHome()&quot;&gt;Go to home page&lt;/goab-button&gt;
+    &lt;/goab-block&gt;
+  &lt;/div&gt;
+&lt;/goab-page-block&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-page-block&gt;
+  &lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;goa-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;xl&quot; width=&quot;100%&quot; mt=&quot;3xl&quot; mb=&quot;3xl&quot;&gt;
+      &lt;goa-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;m&quot; width=&quot;100%&quot;&gt;
+        &lt;div
+          style=&quot;display: flex; align-items: center; justify-content: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background-color: var(--goa-color-greyscale-100);&quot;
+        &gt;
+          &lt;goa-icon role=&quot;presentation&quot; type=&quot;warning&quot; size=&quot;xlarge&quot; style=&quot;transform: scale(1.35);&quot;&gt;&lt;/goa-icon&gt;
+        &lt;/div&gt;
+        &lt;goa-text size=&quot;body-m&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Error 404&lt;/goa-text&gt;
+        &lt;div
+          aria-hidden=&quot;true&quot;
+          style=&quot;width: 6.875rem; height: 0.5rem; background-color: var(--goa-color-info-default);&quot;
+        &gt;&lt;/div&gt;
+      &lt;/goa-block&gt;
+
+      &lt;goa-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;l&quot; width=&quot;100%&quot;&gt;
+        &lt;goa-text as=&quot;h1&quot; size=&quot;heading-l&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Page not found&lt;/goa-text&gt;
+        &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;The page you&#x27;re looking for doesn&#x27;t exist or has been moved.&lt;/goa-text&gt;
+      &lt;/goa-block&gt;
+
+      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; onclick=&quot;window.location.href=&#x27;/&#x27;&quot;&gt;Go to home page&lt;/goa-button&gt;
+    &lt;/goa-block&gt;
+  &lt;/div&gt;
+&lt;/goa-page-block&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>  <div class="example-meta" data-astro-cid-kws6ko6c> <goa-details version="2" heading="Accessibility" data-astro-cid-kws6ko6c="true"> <p data-astro-cid-kws6ko6c>Uses a plain h1 as the page landmark. The decorative icon and accent bar are aria-hidden. No role=&quot;alert&quot; is applied because the ARIA alert role is reserved for dynamically inserted messages; a static error route does not meet that criterion.</p> </goa-details> </div> </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z2jk4yv" prefix="r10" component-url="/ui-components/pr-preview/pr-3754/_astro/ExamplePreview.GDu-wYzX.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3754/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Server problem (500)&quot;],&quot;slug&quot;:[0,&quot;500-error-page&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBlock,\n  GoabButton,\n  GoabIcon,\n  GoabPageBlock,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function ServerProblem() {\n  return (\n    &lt;&gt;\n      &lt;style&gt;{`\n        .error-page-content {\n          text-align: center;\n        }\n        .error-page-icon {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          width: 7.5rem;\n          height: 7.5rem;\n          border-radius: 50%;\n          background-color: var(--goa-color-greyscale-100);\n        }\n        /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n        /* Tracked in icon-sizes-above-xlarge gap ticket. */\n        .error-page-icon goa-icon,\n        .error-page-icon goab-icon {\n          transform: scale(1.35);\n        }\n        .error-page-underline {\n          width: 6.875rem;\n          height: var(--goa-space-xs);\n          background-color: var(--goa-color-info-default);\n        }\n      `}&lt;/style&gt;\n\n      &lt;GoabPageBlock&gt;\n        &lt;div className=\&quot;error-page-content\&quot;&gt;\n          &lt;GoabBlock\n            direction=\&quot;column\&quot;\n            alignment=\&quot;center\&quot;\n            gap=\&quot;xl\&quot;\n            width=\&quot;100%\&quot;\n            mt=\&quot;3xl\&quot;\n            mb=\&quot;3xl\&quot;\n          &gt;\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;div className=\&quot;error-page-icon\&quot;&gt;\n                &lt;GoabIcon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; /&gt;\n              &lt;/div&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                Error 500\n              &lt;/GoabText&gt;\n              &lt;div className=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot; /&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;GoabText tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                We are experiencing a problem\n              &lt;/GoabText&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                We cannot load this page right now. Please try again in a few minutes. We apologize\n                for the inconvenience.\n              &lt;/GoabText&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; (window.location.href = \&quot;/\&quot;)}&gt;\n              Go to home page\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabPageBlock&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-page-block&gt;\n  &lt;div class=\&quot;error-page-content\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div class=\&quot;error-page-icon\&quot;&gt;\n          &lt;goab-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot;&gt;&lt;/goab-icon&gt;\n        &lt;/div&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 500&lt;/goab-text&gt;\n        &lt;div class=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;/div&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goab-text tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;We are experiencing a problem&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n          We cannot load this page right now. Please try again in a few minutes. We apologize for the inconvenience.\n        &lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;goHome()\&quot;&gt;Go to home page&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-page-block&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-error-page-500\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n      .error-page-content {\n        text-align: center;\n      }\n      .error-page-icon {\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 7.5rem;\n        height: 7.5rem;\n        border-radius: 50%;\n        background-color: var(--goa-color-greyscale-100);\n      }\n      /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n      /* Tracked in icon-sizes-above-xlarge gap ticket. */\n      .error-page-icon goa-icon,\n      .error-page-icon goab-icon {\n        transform: scale(1.35);\n      }\n      .error-page-underline {\n        width: 6.875rem;\n        height: var(--goa-space-xs);\n        background-color: var(--goa-color-info-default);\n      }\n    `,\n  ],\n})\nexport class ServerProblemComponent {\n  goHome() {\n    window.location.href = \&quot;/\&quot;;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-page-block&gt;\n  &lt;div style=\&quot;text-align: center;\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div\n          style=\&quot;display: flex; align-items: center; justify-content: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background-color: var(--goa-color-greyscale-100);\&quot;\n        &gt;\n          &lt;goa-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; style=\&quot;transform: scale(1.35);\&quot;&gt;&lt;/goa-icon&gt;\n        &lt;/div&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 500&lt;/goa-text&gt;\n        &lt;div\n          aria-hidden=\&quot;true\&quot;\n          style=\&quot;width: 6.875rem; height: 0.5rem; background-color: var(--goa-color-info-default);\&quot;\n        &gt;&lt;/div&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goa-text as=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;We are experiencing a problem&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n          We cannot load this page right now. Please try again in a few minutes. We apologize for the inconvenience.\n        &lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; onclick=\&quot;window.location.href=&#39;/&#39;\&quot;&gt;Go to home page&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-page-block&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0,true],&quot;previewStyle&quot;:[0,&quot;padding: 0&quot;],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-500-error-page" class="example-title">Server problem (500)</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container full-width" style="padding:0"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">.error-page-content {
   text-align: center;
 }
 .error-page-icon {
@@ -358,192 +544,6 @@ Defaults to <code data-astro-cid-lv5w65io>65ch</code>.
         &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
           We cannot load this page right now. Please try again in a few minutes. We apologize for the inconvenience.
         &lt;/goa-text&gt;
-      &lt;/goa-block&gt;
-
-      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; onclick=&quot;window.location.href=&#x27;/&#x27;&quot;&gt;Go to home page&lt;/goa-button&gt;
-    &lt;/goa-block&gt;
-  &lt;/div&gt;
-&lt;/goa-page-block&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>  <div class="example-meta" data-astro-cid-kws6ko6c> <goa-details version="2" heading="Accessibility" data-astro-cid-kws6ko6c="true"> <p data-astro-cid-kws6ko6c>Uses a plain h1 as the page landmark. The decorative icon and accent bar are aria-hidden. No role=&quot;alert&quot; is applied because the ARIA alert role is reserved for dynamically inserted messages; a static error route does not meet that criterion.</p> </goa-details> </div> </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z1WaC6e" prefix="r10" component-url="/ui-components/pr-preview/pr-3754/_astro/ExamplePreview.GDu-wYzX.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3754/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Page not found (404)&quot;],&quot;slug&quot;:[0,&quot;404-error-page&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBlock,\n  GoabButton,\n  GoabIcon,\n  GoabPageBlock,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function PageNotFound() {\n  return (\n    &lt;&gt;\n      &lt;style&gt;{`\n        .error-page-content {\n          text-align: center;\n        }\n        .error-page-icon {\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          width: 7.5rem;\n          height: 7.5rem;\n          border-radius: 50%;\n          background-color: var(--goa-color-greyscale-100);\n        }\n        /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n        /* Tracked in icon-sizes-above-xlarge gap ticket. */\n        .error-page-icon goa-icon,\n        .error-page-icon goab-icon {\n          transform: scale(1.35);\n        }\n        .error-page-underline {\n          width: 6.875rem;\n          height: var(--goa-space-xs);\n          background-color: var(--goa-color-info-default);\n        }\n      `}&lt;/style&gt;\n\n      &lt;GoabPageBlock&gt;\n        &lt;div className=\&quot;error-page-content\&quot;&gt;\n          &lt;GoabBlock\n            direction=\&quot;column\&quot;\n            alignment=\&quot;center\&quot;\n            gap=\&quot;xl\&quot;\n            width=\&quot;100%\&quot;\n            mt=\&quot;3xl\&quot;\n            mb=\&quot;3xl\&quot;\n          &gt;\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;div className=\&quot;error-page-icon\&quot;&gt;\n                &lt;GoabIcon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; /&gt;\n              &lt;/div&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                Error 404\n              &lt;/GoabText&gt;\n              &lt;div className=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot; /&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabBlock direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n              &lt;GoabText tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                Page not found\n              &lt;/GoabText&gt;\n              &lt;GoabText size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n                The page you&#39;re looking for doesn&#39;t exist or has been moved.\n              &lt;/GoabText&gt;\n            &lt;/GoabBlock&gt;\n\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; (window.location.href = \&quot;/\&quot;)}&gt;\n              Go to home page\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabPageBlock&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-page-block&gt;\n  &lt;div class=\&quot;error-page-content\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div class=\&quot;error-page-icon\&quot;&gt;\n          &lt;goab-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot;&gt;&lt;/goab-icon&gt;\n        &lt;/div&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 404&lt;/goab-text&gt;\n        &lt;div class=\&quot;error-page-underline\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;/div&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goab-text tag=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Page not found&lt;/goab-text&gt;\n        &lt;goab-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;The page you&#39;re looking for doesn&#39;t exist or has been moved.&lt;/goab-text&gt;\n      &lt;/goab-block&gt;\n\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;goHome()\&quot;&gt;Go to home page&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-page-block&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-error-page-404\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n      .error-page-content {\n        text-align: center;\n      }\n      .error-page-icon {\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 7.5rem;\n        height: 7.5rem;\n        border-radius: 50%;\n        background-color: var(--goa-color-greyscale-100);\n      }\n      /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */\n      /* Tracked in icon-sizes-above-xlarge gap ticket. */\n      .error-page-icon goa-icon,\n      .error-page-icon goab-icon {\n        transform: scale(1.35);\n      }\n      .error-page-underline {\n        width: 6.875rem;\n        height: var(--goa-space-xs);\n        background-color: var(--goa-color-info-default);\n      }\n    `,\n  ],\n})\nexport class PageNotFoundComponent {\n  goHome() {\n    window.location.href = \&quot;/\&quot;;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-page-block&gt;\n  &lt;div style=\&quot;text-align: center;\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;xl\&quot; width=\&quot;100%\&quot; mt=\&quot;3xl\&quot; mb=\&quot;3xl\&quot;&gt;\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;m\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;div\n          style=\&quot;display: flex; align-items: center; justify-content: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background-color: var(--goa-color-greyscale-100);\&quot;\n        &gt;\n          &lt;goa-icon role=\&quot;presentation\&quot; type=\&quot;warning\&quot; size=\&quot;xlarge\&quot; style=\&quot;transform: scale(1.35);\&quot;&gt;&lt;/goa-icon&gt;\n        &lt;/div&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; color=\&quot;secondary\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Error 404&lt;/goa-text&gt;\n        &lt;div\n          aria-hidden=\&quot;true\&quot;\n          style=\&quot;width: 6.875rem; height: 0.5rem; background-color: var(--goa-color-info-default);\&quot;\n        &gt;&lt;/div&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-block direction=\&quot;column\&quot; alignment=\&quot;center\&quot; gap=\&quot;l\&quot; width=\&quot;100%\&quot;&gt;\n        &lt;goa-text as=\&quot;h1\&quot; size=\&quot;heading-l\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Page not found&lt;/goa-text&gt;\n        &lt;goa-text size=\&quot;body-m\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;The page you&#39;re looking for doesn&#39;t exist or has been moved.&lt;/goa-text&gt;\n      &lt;/goa-block&gt;\n\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; onclick=\&quot;window.location.href=&#39;/&#39;\&quot;&gt;Go to home page&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-page-block&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0,true],&quot;previewStyle&quot;:[0,&quot;padding: 0&quot;],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-404-error-page" class="example-title">Page not found (404)</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container full-width" style="padding:0"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">.error-page-content {
-  text-align: center;
-}
-.error-page-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 7.5rem;
-  height: 7.5rem;
-  border-radius: 50%;
-  background-color: var(--goa-color-greyscale-100);
-}
-/* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */
-/* Tracked in icon-sizes-above-xlarge gap ticket. */
-.error-page-icon goa-icon,
-.error-page-icon goab-icon {
-  transform: scale(1.35);
-}
-.error-page-underline {
-  width: 6.875rem;
-  height: var(--goa-space-xs);
-  background-color: var(--goa-color-info-default);
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabPageBlock&gt;
-  &lt;div className=&quot;error-page-content&quot;&gt;
-    &lt;GoabBlock
-      direction=&quot;column&quot;
-      alignment=&quot;center&quot;
-      gap=&quot;xl&quot;
-      width=&quot;100%&quot;
-      mt=&quot;3xl&quot;
-      mb=&quot;3xl&quot;
-    &gt;
-      &lt;GoabBlock direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;m&quot; width=&quot;100%&quot;&gt;
-        &lt;div className=&quot;error-page-icon&quot;&gt;
-          &lt;GoabIcon role=&quot;presentation&quot; type=&quot;warning&quot; size=&quot;xlarge&quot; /&gt;
-        &lt;/div&gt;
-        &lt;GoabText size=&quot;body-m&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
-          Error 404
-        &lt;/GoabText&gt;
-        &lt;div className=&quot;error-page-underline&quot; aria-hidden=&quot;true&quot; /&gt;
-      &lt;/GoabBlock&gt;
-
-      &lt;GoabBlock direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;l&quot; width=&quot;100%&quot;&gt;
-        &lt;GoabText tag=&quot;h1&quot; size=&quot;heading-l&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
-          Page not found
-        &lt;/GoabText&gt;
-        &lt;GoabText size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;
-          The page you&#x27;re looking for doesn&#x27;t exist or has been moved.
-        &lt;/GoabText&gt;
-      &lt;/GoabBlock&gt;
-
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; (window.location.href = &quot;/&quot;)}&gt;
-        Go to home page
-      &lt;/GoabButton&gt;
-    &lt;/GoabBlock&gt;
-  &lt;/div&gt;
-&lt;/GoabPageBlock&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">goHome() {
-  window.location.href = &quot;/&quot;;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-page-block&gt;
-  &lt;div class=&quot;error-page-content&quot;&gt;
-    &lt;goab-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;xl&quot; width=&quot;100%&quot; mt=&quot;3xl&quot; mb=&quot;3xl&quot;&gt;
-      &lt;goab-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;m&quot; width=&quot;100%&quot;&gt;
-        &lt;div class=&quot;error-page-icon&quot;&gt;
-          &lt;goab-icon role=&quot;presentation&quot; type=&quot;warning&quot; size=&quot;xlarge&quot;&gt;&lt;/goab-icon&gt;
-        &lt;/div&gt;
-        &lt;goab-text size=&quot;body-m&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Error 404&lt;/goab-text&gt;
-        &lt;div class=&quot;error-page-underline&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
-      &lt;/goab-block&gt;
-
-      &lt;goab-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;l&quot; width=&quot;100%&quot;&gt;
-        &lt;goab-text tag=&quot;h1&quot; size=&quot;heading-l&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Page not found&lt;/goab-text&gt;
-        &lt;goab-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;The page you&#x27;re looking for doesn&#x27;t exist or has been moved.&lt;/goab-text&gt;
-      &lt;/goab-block&gt;
-
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;goHome()&quot;&gt;Go to home page&lt;/goab-button&gt;
-    &lt;/goab-block&gt;
-  &lt;/div&gt;
-&lt;/goab-page-block&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-page-block&gt;
-  &lt;div style=&quot;text-align: center;&quot;&gt;
-    &lt;goa-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;xl&quot; width=&quot;100%&quot; mt=&quot;3xl&quot; mb=&quot;3xl&quot;&gt;
-      &lt;goa-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;m&quot; width=&quot;100%&quot;&gt;
-        &lt;div
-          style=&quot;display: flex; align-items: center; justify-content: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background-color: var(--goa-color-greyscale-100);&quot;
-        &gt;
-          &lt;goa-icon role=&quot;presentation&quot; type=&quot;warning&quot; size=&quot;xlarge&quot; style=&quot;transform: scale(1.35);&quot;&gt;&lt;/goa-icon&gt;
-        &lt;/div&gt;
-        &lt;goa-text size=&quot;body-m&quot; color=&quot;secondary&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Error 404&lt;/goa-text&gt;
-        &lt;div
-          aria-hidden=&quot;true&quot;
-          style=&quot;width: 6.875rem; height: 0.5rem; background-color: var(--goa-color-info-default);&quot;
-        &gt;&lt;/div&gt;
-      &lt;/goa-block&gt;
-
-      &lt;goa-block direction=&quot;column&quot; alignment=&quot;center&quot; gap=&quot;l&quot; width=&quot;100%&quot;&gt;
-        &lt;goa-text as=&quot;h1&quot; size=&quot;heading-l&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;Page not found&lt;/goa-text&gt;
-        &lt;goa-text size=&quot;body-m&quot; mt=&quot;none&quot; mb=&quot;none&quot;&gt;The page you&#x27;re looking for doesn&#x27;t exist or has been moved.&lt;/goa-text&gt;
       &lt;/goa-block&gt;
 
       &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; onclick=&quot;window.location.href=&#x27;/&#x27;&quot;&gt;Go to home page&lt;/goa-button&gt;
