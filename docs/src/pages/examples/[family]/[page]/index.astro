@@ -1,0 +1,134 @@
+---
+/**
+ * Template Detail Page
+ *
+ * Deep dive for a single template or sub-pattern.
+ * Hero with preview image plus a thin action bar (Live preview, Source, StackBlitz),
+ * followed by MDX body (when to use, considerations, components used, etc.).
+ * No framework code tabs at this scale. Source link goes to GitHub.
+ */
+import { getCollection, render } from 'astro:content';
+import ExamplesPageLayout from '../../../../layouts/ExamplesPageLayout.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+import PreviewContainer from '../../../../components/PreviewContainer.astro';
+
+export async function getStaticPaths() {
+  const examples = await getCollection('examples');
+  // Nested page-scale entries whose slug is "<productType>/<page>". Today's
+  // set: workspace/dashboard, workspace/index-page, workspace/case-detail.
+  const nested = examples.filter((e) => e.slug.includes('/') && e.data.size === 'page');
+  return nested.map((entry) => {
+    const [family, page] = entry.slug.split('/');
+    return {
+      params: { family, page },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+const { family, page } = Astro.params;
+// data is narrowed to the page-shape by the getStaticPaths filter
+const pageData = data as Extract<typeof data, { size: 'page' }>;
+
+// Emit a Live preview URL so the action bar renders consistently with
+// the family overview. Whether the preview iframes an external demo
+// (workspace) or renders locally (page-scale templates) is decided
+// by the preview route itself.
+const internalPreviewUrl = `/examples/${family}/${page}/preview`;
+---
+
+<ExamplesPageLayout title={data.title} description={data.description}>
+  <article class="template-detail-page">
+    <Breadcrumbs />
+    <header class="template-header">
+      <div class="badges">
+        <goa-badge version="2" type="information" emphasis="subtle" icon="false" content="Page"></goa-badge>
+        {pageData.frameworks?.map((f: string) => (
+          <goa-badge version="2" type="default" emphasis="subtle" icon="false" content={f}></goa-badge>
+        ))}
+      </div>
+      <h1 class="template-title">{data.title}</h1>
+      {data.description && <p class="template-summary" set:html={data.description} />}
+    </header>
+
+    <PreviewContainer
+      image={pageData.previewImage}
+      alt={`${pageData.title} preview`}
+      previewUrl={internalPreviewUrl}
+      reactSourceUrl={pageData.reactSourceUrl}
+      angularSourceUrl={pageData.angularSourceUrl}
+      stackblitzUrl={pageData.stackblitzUrl}
+    />
+
+    <section class="template-content">
+      <Content />
+    </section>
+  </article>
+</ExamplesPageLayout>
+
+<style>
+  .template-detail-page {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .template-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--goa-space-s, 0.5rem);
+    margin-bottom: var(--goa-space-l, 1.5rem);
+  }
+
+  .badges {
+    display: flex;
+    gap: var(--goa-space-xs, 0.25rem);
+    flex-wrap: wrap;
+  }
+
+  .template-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.2;
+  }
+
+  .template-summary {
+    font-size: 1.125rem;
+    color: var(--goa-color-text-secondary, #666);
+    margin: 0;
+    max-width: 688px;
+    line-height: 1.6;
+  }
+
+  .template-content :global(h2) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: var(--goa-space-xl, 2rem) 0 var(--goa-space-m, 1rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .template-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .template-content :global(p) {
+    margin-bottom: var(--goa-space-m, 1rem);
+    max-width: 65ch;
+    line-height: 1.6;
+  }
+
+  .template-content :global(ul),
+  .template-content :global(ol) {
+    margin: 0 0 var(--goa-space-m, 1rem);
+    padding-left: var(--goa-space-l, 1.5rem);
+    max-width: 65ch;
+  }
+
+  .template-content :global(li) {
+    margin-bottom: var(--goa-space-xs, 0.25rem);
+  }
+</style>

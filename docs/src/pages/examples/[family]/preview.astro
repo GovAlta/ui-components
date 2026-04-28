@@ -1,0 +1,48 @@
+---
+/**
+ * Family Live Preview
+ *
+ * Standalone full-viewport preview of a template family's main demo route.
+ * Same chrome as [page]/preview.astro so the family overview's "Live preview"
+ * button lands on the same shape as the detail pages' buttons.
+ */
+import { getCollection } from 'astro:content';
+import PreviewLayout from "../../../layouts/PreviewLayout.astro";
+
+export async function getStaticPaths() {
+  const productTypes = await getCollection('productTypes');
+  const withDemo = productTypes.filter((entry) => entry.data.demoUrl);
+  return withDemo.map((entry) => ({
+    params: { family: entry.data.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const backUrl = `/examples/${data.id}`;
+const backLabel = `Back to ${data.title}`;
+---
+
+<PreviewLayout
+  title={`${data.title} preview`}
+  backUrl={backUrl}
+  backLabel={backLabel}
+>
+  <iframe
+    src={data.demoUrl}
+    class="iframe-fill"
+    title={`${data.title} live preview`}
+    loading="lazy"
+  ></iframe>
+</PreviewLayout>
+
+<style is:global>
+  .iframe-fill {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    display: block;
+    background: #ffffff;
+  }
+</style>

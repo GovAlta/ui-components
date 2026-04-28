@@ -1,0 +1,150 @@
+---
+/**
+ * Service Type Overview Page
+ *
+ * Landing page for a service type. Renders the MDX body of the matching
+ * entry in the `productTypes` collection (workspace, public-form). Follows
+ * the flexible-doc-page pattern: prose walkthrough with inline demo CTAs,
+ * images, and links to nested example pages.
+ */
+import { getCollection, render } from 'astro:content';
+import ExamplesPageLayout from '../../../layouts/ExamplesPageLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { TableOfContents } from '../../../components/TableOfContents';
+
+export async function getStaticPaths() {
+  const productTypes = await getCollection('productTypes');
+  return productTypes.map((entry) => ({
+    params: { family: entry.data.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { data } = entry;
+
+// Family overview cover shows the whole demo app, not a single-page preview,
+// so no Live preview button. View demo alone covers the CTA.
+---
+
+<ExamplesPageLayout title={data.title} description={data.summary}>
+  <article class="template-family-page">
+    <Breadcrumbs />
+    <div class="content-with-toc">
+      <section class="family-content">
+        <header class="family-header">
+          <h1 class="family-title">{data.title}</h1>
+          {data.summary && <p class="family-summary" set:html={data.summary} />}
+        </header>
+        <Content />
+      </section>
+      <aside class="family-toc">
+        <div class="family-toc-sticky">
+          <TableOfContents client:only="react" cssQuery=".family-content h2[id]" />
+        </div>
+      </aside>
+    </div>
+  </article>
+</ExamplesPageLayout>
+
+<style>
+  /* Mirror the no-code branch styling from examples/[slug].astro */
+  .template-family-page {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .family-header {
+    margin-bottom: var(--goa-space-l, 1.5rem);
+  }
+
+  .family-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--goa-color-text-default, #333);
+    line-height: 1.2;
+  }
+
+  .family-summary {
+    font-size: 1.125rem;
+    color: var(--goa-color-text-secondary, #666);
+    margin: var(--goa-space-s, 0.5rem) 0 var(--goa-space-l, 1.5rem);
+    max-width: 688px;
+    line-height: 1.6;
+  }
+
+  .family-cover-image {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+    margin: var(--goa-space-m, 1rem) 0 var(--goa-space-xl, 2rem);
+  }
+
+  .content-with-toc {
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: var(--goa-space-2xl, 2.5rem);
+  }
+
+  .family-content {
+    margin-bottom: var(--goa-space-2xl, 2.5rem);
+  }
+
+  .family-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: var(--goa-space-2xl, 2.5rem) 0 var(--goa-space-m, 1rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .family-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .family-content :global(h3) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: var(--goa-space-xl, 2rem) 0 var(--goa-space-s, 0.5rem);
+    color: var(--goa-color-text-default, #333);
+  }
+
+  .family-content :global(p) {
+    margin-bottom: var(--goa-space-m, 1rem);
+    max-width: 65ch;
+    line-height: 1.6;
+  }
+
+  .family-content :global(ul),
+  .family-content :global(ol) {
+    margin: 0 0 var(--goa-space-m, 1rem);
+    padding-left: var(--goa-space-l, 1.5rem);
+    max-width: 65ch;
+  }
+
+  .family-content :global(li) {
+    margin-bottom: var(--goa-space-xs, 0.25rem);
+  }
+
+  .family-toc {
+    position: relative;
+  }
+
+  .family-toc-sticky {
+    position: sticky;
+    top: var(--goa-space-l, 1.5rem);
+    padding-top: var(--goa-space-m, 1rem);
+  }
+
+  @media (max-width: 1024px) {
+    .content-with-toc {
+      grid-template-columns: 1fr;
+    }
+
+    .family-toc {
+      display: none;
+    }
+  }
+</style>

@@ -47,23 +47,6 @@ import PreviewContainer from "../../../components/PreviewContainer.astro";
 
 <goa-callout version="2" type="information" emphasis="low" maxwidth="480px"><strong>Primary user:</strong> Service delivery staff</goa-callout>
 
-## When to use
-
-Use the workspace when your service needs to support regular, task-based work, such as:
-
-- Reviewing and processing submissions
-- Managing case files, applications, or requests
-- Moving between dashboards, lists, and detail views
-- Taking actions such as approve, deny, assign, or request more information
-
-## When not to use
-
-- Citizen-facing services. Use the [public form](/examples/public-form) pattern instead.
-- Content-only pages that do not involve case management.
-- Simple internal tools that do not need structured case processing.
-
----
-
 ## Pages
 
 Combine and adapt these to fit the work your service supports.
@@ -76,8 +59,8 @@ The landing view of a workspace, showing staff their counts, trends, and assigne
   image="/thumbnails/workspace-dashboard.png"
   alt="Workspace dashboard"
   previewUrl="/examples/workspace/dashboard/preview"
-  reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/pages/dashboard"
-  angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular"
+  reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/dashboard"
+  angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/dashboard"
   moreUrl="/examples/workspace/dashboard"
 />
 
@@ -89,8 +72,8 @@ The page where staff scan and pick records to work on, with filters, search, and
   image="/thumbnails/workspace-table-view.png"
   alt="Workspace index page"
   previewUrl="/examples/workspace/index-page/preview"
-  reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/pages/applications"
-  angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular"
+  reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/search"
+  angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/search"
   moreUrl="/examples/workspace/index-page"
 />
 
@@ -102,8 +85,8 @@ A single-record view for reviewing and acting on one case.
   image="/thumbnails/workspace-case-detail.png"
   alt="Workspace case detail"
   previewUrl="/examples/workspace/case-detail/preview"
-  reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/pages/application"
-  angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular"
+  reactSourceUrl="https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/cases"
+  angularSourceUrl="https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/cases"
   moreUrl="/examples/workspace/case-detail"
 />
 
@@ -230,6 +213,23 @@ Workspace patterns are supported by component features designed for denser, more
 ## Keyboard-accessible data views
 
 Workspace data views use the [data grid](/components/data-grid) to make table and card layouts fully keyboard navigable. Users can use arrow keys to move between cells and rows, making it possible to scan and act on records without a mouse. This is especially important in workspace contexts where staff are processing high volumes of cases and keyboard navigation is significantly faster than clicking. For assistive technology users, screen readers announce cell content and position as the user navigates.
+
+---
+
+## When to use
+
+Use the workspace when your service needs to support regular, task-based work, such as:
+
+- Reviewing and processing submissions
+- Managing case files, applications, or requests
+- Moving between dashboards, lists, and detail views
+- Taking actions such as approve, deny, assign, or request more information
+
+## When not to use
+
+- Citizen-facing services. Use the [public form](/examples/public-form) pattern instead.
+- Content-only pages that do not involve case management.
+- Simple internal tools that do not need structured case processing.
 
 ---
 
