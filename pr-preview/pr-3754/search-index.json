@@ -252,7 +252,7 @@
     "name": "Drawer",
     "description": "A panel that slides in from the side of the screen to display additional content or actions without navigating away from the current view.",
     "status": "stable",
-    "category": "content-layout",
+    "category": "structure-and-navigation",
     "tags": [
       "sections",
       "structure and navigation",
@@ -729,6 +729,82 @@
     "category": "structure-and-navigation",
     "tags": [],
     "slug": "work-side-menu"
+  },
+  {
+    "type": "example",
+    "id": "401-error-page",
+    "title": "Restricted access (401)",
+    "description": "A full page that tells the user they cannot access the requested resource, with a clear next step and a way to contact support.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "error",
+      "page-structure",
+      "\"401\""
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "link",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "401-error-page"
+  },
+  {
+    "type": "example",
+    "id": "404-error-page",
+    "title": "Page not found (404)",
+    "description": "A full page that tells the user a page can't be found, with an action to get them back on track.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "error",
+      "page-structure",
+      "\"404\""
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "404-error-page"
+  },
+  {
+    "type": "example",
+    "id": "500-error-page",
+    "title": "Server problem (500)",
+    "description": "A full page that tells the user the service is temporarily unable to respond, with an action to try again or return home.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "error",
+      "page-structure",
+      "\"500\""
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "500-error-page"
   },
   {
     "type": "example",
