@@ -54,6 +54,8 @@ export * from "./linear-progress/linear-progress";
 export * from "./link/link";
 export * from "./microsite-header/microsite-header";
 export * from "./modal/modal";
+export * from "./multi-select/multi-select";
+export * from "./multi-select/multi-select-option";
 export * from "./menu-button/menu-button";
 export * from "./menu-button/menu-action";
 export * from "./notification/notification";
