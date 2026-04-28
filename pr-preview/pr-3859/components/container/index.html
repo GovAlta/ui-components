@@ -317,231 +317,7 @@ Defaults to <code data-astro-cid-lv5w65io>none</code>.
         .code-area {
           /* CodeSnippet handles its own styling */
         }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z2jGNKc" prefix="r10" component-url="/ui-components/pr-preview/pr-3859/_astro/ExamplePreview.CpTJuYdp.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3859/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm a change&quot;],&quot;slug&quot;:[0,&quot;confirm-a-change&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabContainer,\n  GoabDatePicker,\n  GoabFormItem,\n  GoabModal,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nimport { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function ConfirmAChange() {\n  const [open, setOpen] = useState(false);\n  const [effectiveDate, setEffectiveDate] = useState&lt;Date | undefined&gt;(new Date());\n\n  const onChangeEffectiveDate = (detail: GoabDatePickerOnChangeDetail) =&gt; {\n    setEffectiveDate(detail.value as Date);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Save and continue&lt;/GoabButton&gt;\n\n      &lt;GoabModal\n        heading=\&quot;Address has changed\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Undo address change\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Confirm\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;GoabContainer\n          type=\&quot;non-interactive\&quot;\n          accent=\&quot;filled\&quot;\n          padding=\&quot;compact\&quot;\n          width=\&quot;full\&quot;\n        &gt;\n          &lt;GoabText tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;\n            Before\n          &lt;/GoabText&gt;\n          &lt;GoabText mt=\&quot;none\&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/GoabText&gt;\n          &lt;GoabText tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;\n            After\n          &lt;/GoabText&gt;\n          &lt;GoabText mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n            881 12 Ave NW, Edmonton, Alberta\n          &lt;/GoabText&gt;\n        &lt;/GoabContainer&gt;\n        &lt;GoabFormItem label=\&quot;Effective date\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDatePicker\n            onChange={onChangeEffectiveDate}\n            name=\&quot;effectiveDate\&quot;\n            value={effectiveDate}\n          /&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;toggleModal()\&quot;&gt;Save and continue&lt;/goab-button&gt;\n\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Address has changed\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;goab-container type=\&quot;non-interactive\&quot; accent=\&quot;filled\&quot; padding=\&quot;compact\&quot; width=\&quot;full\&quot;&gt;\n    &lt;goab-text tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;Before&lt;/goab-text&gt;\n    &lt;goab-text mt=\&quot;none\&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;\n    &lt;goab-text tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;After&lt;/goab-text&gt;\n    &lt;goab-text mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;\n  &lt;/goab-container&gt;\n  &lt;goab-form-item label=\&quot;Effective date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-date-picker\n      (onChange)=\&quot;onChangeEffectiveDate($event)\&quot;\n      name=\&quot;effectiveDate\&quot;\n      [value]=\&quot;effectiveDate\&quot;\n    &gt;&lt;/goab-date-picker&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;\n        Undo address change\n      &lt;/goab-button&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;\n        Confirm\n      &lt;/goab-button&gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-a-change\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmAChangeComponent {\n  open = false;\n  effectiveDate = new Date();\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n\n  onChangeEffectiveDate(event: GoabDatePickerOnChangeDetail): void {\n    this.effectiveDate = event.value as Date;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot;&gt;Save and continue&lt;/goa-button&gt;\n\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;change-modal\&quot; heading=\&quot;Address has changed\&quot;&gt;\n  &lt;goa-container type=\&quot;non-interactive\&quot; accent=\&quot;filled\&quot; padding=\&quot;compact\&quot; width=\&quot;full\&quot;&gt;\n    &lt;goa-text as=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;Before&lt;/goa-text&gt;\n    &lt;goa-text mt=\&quot;none\&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;\n    &lt;goa-text as=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;After&lt;/goa-text&gt;\n    &lt;goa-text mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;\n  &lt;/goa-container&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Effective date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-date-picker\n      version=\&quot;2\&quot;\n      id=\&quot;effective-date\&quot;\n      name=\&quot;effectiveDate\&quot;\n    &gt;&lt;/goa-date-picker&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot; id=\&quot;undo-btn\&quot;&gt;\n        Undo address change\n      &lt;/goa-button&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; id=\&quot;confirm-btn\&quot;&gt;\n        Confirm\n      &lt;/goa-button&gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;change-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const undoBtn = document.getElementById(\&quot;undo-btn\&quot;);\n  const confirmBtn = document.getElementById(\&quot;confirm-btn\&quot;);\n  const datePicker = document.getElementById(\&quot;effective-date\&quot;);\n\n  let effectiveDate = new Date();\n  datePicker.setAttribute(\&quot;value\&quot;, effectiveDate.toISOString());\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  undoBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  confirmBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  datePicker.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    effectiveDate = e.detail.value;\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169716&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-a-change" class="example-title">Confirm a change</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169716" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View in Figma" title="View in Figma"><goa-icon version="2" type="logo-figma" size="small"></goa-icon></a></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
-const [effectiveDate, setEffectiveDate] = useState&lt;Date | undefined&gt;(new Date());
-
-const onChangeEffectiveDate = (detail: GoabDatePickerOnChangeDetail) =&gt; {
-  setEffectiveDate(detail.value as Date);
-};</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Save and continue&lt;/GoabButton&gt;
-
-&lt;GoabModal
-  heading=&quot;Address has changed&quot;
-  open={open}
-  onClose={() =&gt; setOpen(false)}
-  actions={
-    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
-      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Undo address change
-      &lt;/GoabButton&gt;
-      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
-        Confirm
-      &lt;/GoabButton&gt;
-    &lt;/GoabButtonGroup&gt;
-  }
-&gt;
-  &lt;GoabContainer
-    type=&quot;non-interactive&quot;
-    accent=&quot;filled&quot;
-    padding=&quot;compact&quot;
-    width=&quot;full&quot;
-  &gt;
-    &lt;GoabText tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;
-      Before
-    &lt;/GoabText&gt;
-    &lt;GoabText mt=&quot;none&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/GoabText&gt;
-    &lt;GoabText tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;
-      After
-    &lt;/GoabText&gt;
-    &lt;GoabText mt=&quot;none&quot; mb=&quot;none&quot;&gt;
-      881 12 Ave NW, Edmonton, Alberta
-    &lt;/GoabText&gt;
-  &lt;/GoabContainer&gt;
-  &lt;GoabFormItem label=&quot;Effective date&quot; mt=&quot;l&quot;&gt;
-    &lt;GoabDatePicker
-      onChange={onChangeEffectiveDate}
-      name=&quot;effectiveDate&quot;
-      value={effectiveDate}
-    /&gt;
-  &lt;/GoabFormItem&gt;
-&lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
-effectiveDate = new Date();
-
-toggleModal(): void {
-  this.open = !this.open;
-}
-
-onChangeEffectiveDate(event: GoabDatePickerOnChangeDetail): void {
-  this.effectiveDate = event.value as Date;
-}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;toggleModal()&quot;&gt;Save and continue&lt;/goab-button&gt;
-
-&lt;goab-modal
-  [open]=&quot;open&quot;
-  (onClose)=&quot;toggleModal()&quot;
-  heading=&quot;Address has changed&quot;
-  [actions]=&quot;actions&quot;
-&gt;
-  &lt;goab-container type=&quot;non-interactive&quot; accent=&quot;filled&quot; padding=&quot;compact&quot; width=&quot;full&quot;&gt;
-    &lt;goab-text tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;Before&lt;/goab-text&gt;
-    &lt;goab-text mt=&quot;none&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;
-    &lt;goab-text tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;After&lt;/goab-text&gt;
-    &lt;goab-text mt=&quot;none&quot; mb=&quot;none&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;
-  &lt;/goab-container&gt;
-  &lt;goab-form-item label=&quot;Effective date&quot; mt=&quot;l&quot;&gt;
-    &lt;goab-date-picker
-      (onChange)=&quot;onChangeEffectiveDate($event)&quot;
-      name=&quot;effectiveDate&quot;
-      [value]=&quot;effectiveDate&quot;
-    &gt;&lt;/goab-date-picker&gt;
-  &lt;/goab-form-item&gt;
-  &lt;ng-template #actions&gt;
-    &lt;goab-button-group alignment=&quot;end&quot;&gt;
-      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;&gt;
-        Undo address change
-      &lt;/goab-button&gt;
-      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;&gt;
-        Confirm
-      &lt;/goab-button&gt;
-    &lt;/goab-button-group&gt;
-  &lt;/ng-template&gt;
-&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;change-modal&quot;);
-const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
-const undoBtn = document.getElementById(&quot;undo-btn&quot;);
-const confirmBtn = document.getElementById(&quot;confirm-btn&quot;);
-const datePicker = document.getElementById(&quot;effective-date&quot;);
-
-let effectiveDate = new Date();
-datePicker.setAttribute(&quot;value&quot;, effectiveDate.toISOString());
-
-openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
-});
-
-undoBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-confirmBtn.addEventListener(&quot;_click&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-modal.addEventListener(&quot;_close&quot;, () =&gt; {
-  modal.removeAttribute(&quot;open&quot;);
-});
-
-datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
-  effectiveDate = e.detail.value;
-});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot;&gt;Save and continue&lt;/goa-button&gt;
-
-&lt;goa-modal version=&quot;2&quot; id=&quot;change-modal&quot; heading=&quot;Address has changed&quot;&gt;
-  &lt;goa-container type=&quot;non-interactive&quot; accent=&quot;filled&quot; padding=&quot;compact&quot; width=&quot;full&quot;&gt;
-    &lt;goa-text as=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;Before&lt;/goa-text&gt;
-    &lt;goa-text mt=&quot;none&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;
-    &lt;goa-text as=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;After&lt;/goa-text&gt;
-    &lt;goa-text mt=&quot;none&quot; mb=&quot;none&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;
-  &lt;/goa-container&gt;
-  &lt;goa-form-item version=&quot;2&quot; label=&quot;Effective date&quot; mt=&quot;l&quot;&gt;
-    &lt;goa-date-picker
-      version=&quot;2&quot;
-      id=&quot;effective-date&quot;
-      name=&quot;effectiveDate&quot;
-    &gt;&lt;/goa-date-picker&gt;
-  &lt;/goa-form-item&gt;
-  &lt;div slot=&quot;actions&quot;&gt;
-    &lt;goa-button-group alignment=&quot;end&quot;&gt;
-      &lt;goa-button version=&quot;2&quot; type=&quot;secondary&quot; size=&quot;compact&quot; id=&quot;undo-btn&quot;&gt;
-        Undo address change
-      &lt;/goa-button&gt;
-      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; id=&quot;confirm-btn&quot;&gt;
-        Confirm
-      &lt;/goa-button&gt;
-    &lt;/goa-button-group&gt;
-  &lt;/div&gt;
-&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
-        .example-preview {
-        }
-
-        .example-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-title {
-          font: var(--goa-typography-heading-s);
-          margin: 0 !important; /* Override global h3 margin from tab content */
-          color: var(--goa-color-text-default, #333);
-        }
-
-        .example-title--large {
-          font: var(--goa-typography-heading-l);
-        }
-
-        .example-actions {
-          display: flex;
-          align-items: center;
-          gap: var(--goa-space-xs, 0.25rem);
-        }
-
-        .copy-link-button,
-        .figma-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border: none;
-          background: transparent;
-          color: var(--goa-color-text-secondary, #666);
-          cursor: pointer;
-          border-radius: var(--goa-border-radius-s, 4px);
-          transition: all 0.15s;
-        }
-
-        .copy-link-button:hover,
-        .figma-link:hover {
-          background: var(--goa-color-greyscale-100, #f1f1f1);
-          color: var(--goa-color-interactive-default, #0070c4);
-        }
-
-        .copy-link-button.copied {
-          color: var(--goa-color-status-success, #2e7d32);
-        }
-
-        .preview-area {
-          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-          border-radius: var(--goa-border-radius-m, 4px);
-          overflow: hidden;
-          background: var(--goa-color-greyscale-white, #fff);
-          min-height: 100px;
-          margin-bottom: var(--goa-space-m, 1rem);
-        }
-
-        .example-preview .preview-container {
-          padding: var(--goa-space-xl, 2rem);
-          display: block;  /* Override flex from ConfigurationPreview */
-          gap: 0;          /* Reset gap from ConfigurationPreview */
-        }
-
-        .example-preview .preview-container.full-width {
-          padding-left: 0;
-          padding-right: 0;
-        }
-
-        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
-          display: block;
-          width: 100%;
-        }
-
-        .preview-placeholder {
-          color: var(--goa-color-text-secondary, #666);
-          font-style: italic;
-        }
-
-        .code-area {
-          /* CodeSnippet handles its own styling */
-        }
-      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z109qkb" prefix="r11" component-url="/ui-components/pr-preview/pr-3859/_astro/ExamplePreview.CpTJuYdp.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3859/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Card view of case files&quot;],&quot;slug&quot;:[0,&quot;card-view-of-case-files&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabBlock,\n  GoabButton,\n  GoabContainer,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function CardViewOfCaseFiles() {\n  return (\n    &lt;&gt;\n      &lt;style&gt;{`\n        .case-file-row {\n          display: flex;\n          flex-wrap: wrap;\n          justify-content: space-between;\n          align-items: center;\n          gap: var(--goa-space-m);\n        }\n      `}&lt;/style&gt;\n\n      &lt;GoabContainer mt=\&quot;l\&quot;&gt;\n        &lt;div className=\&quot;case-file-row\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n            &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;\n              Fiscal year: 2021/2022\n            &lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n              Submitted: April 23, 2023\n            &lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n          &lt;GoabBlock direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n            &lt;GoabBadge type=\&quot;default\&quot; content=\&quot;Not started\&quot; /&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;\n              Start\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabContainer&gt;\n\n      &lt;GoabContainer&gt;\n        &lt;div className=\&quot;case-file-row\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n            &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;\n              Fiscal year: 2020/2021\n            &lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n              Submitted: April 9, 2022\n            &lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n          &lt;GoabBlock direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n            &lt;GoabBadge type=\&quot;important\&quot; content=\&quot;Information needed\&quot; /&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;\n              Edit\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabContainer&gt;\n\n      &lt;GoabContainer&gt;\n        &lt;div className=\&quot;case-file-row\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n            &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;\n              Fiscal year: 2019/2020\n            &lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n              Submitted: April 14, 2021\n            &lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n          &lt;GoabBlock direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n            &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Approved\&quot; /&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;\n              View\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabContainer&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-container mt=\&quot;l\&quot;&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2021/2022&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 23, 2023&lt;/goab-text&gt;\n    &lt;/goab-block&gt;\n    &lt;goab-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goab-badge type=\&quot;default\&quot; content=\&quot;Not started\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Start&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-container&gt;\n\n&lt;goab-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2020/2021&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 9, 2022&lt;/goab-text&gt;\n    &lt;/goab-block&gt;\n    &lt;goab-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goab-badge type=\&quot;important\&quot; content=\&quot;Information needed\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Edit&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-container&gt;\n\n&lt;goab-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2019/2020&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 14, 2021&lt;/goab-text&gt;\n    &lt;/goab-block&gt;\n    &lt;goab-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goab-badge type=\&quot;success\&quot; content=\&quot;Approved\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;View&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-container&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-card-view-of-case-files\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n      .case-file-row {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        align-items: center;\n        gap: var(--goa-space-m);\n      }\n    `,\n  ],\n})\nexport class CardViewOfCaseFilesComponent {}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;style&gt;\n  .case-file-row {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    align-items: center;\n    gap: var(--goa-space-m);\n  }\n&lt;/style&gt;\n\n&lt;goa-container mt=\&quot;l\&quot;&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2021/2022&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 23, 2023&lt;/goa-text&gt;\n    &lt;/goa-block&gt;\n    &lt;goa-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goa-badge version=\&quot;2\&quot; type=\&quot;default\&quot; content=\&quot;Not started\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Start&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-container&gt;\n\n&lt;goa-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2020/2021&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 9, 2022&lt;/goa-text&gt;\n    &lt;/goa-block&gt;\n    &lt;goa-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goa-badge version=\&quot;2\&quot; type=\&quot;important\&quot; content=\&quot;Information needed\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Edit&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-container&gt;\n\n&lt;goa-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2019/2020&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 14, 2021&lt;/goa-text&gt;\n    &lt;/goa-block&gt;\n    &lt;goa-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Approved\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;View&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-container&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-card-view-of-case-files" class="example-title">Card view of case files</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">.case-file-row {
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z109qkb" prefix="r10" component-url="/ui-components/pr-preview/pr-3859/_astro/ExamplePreview.CpTJuYdp.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3859/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Card view of case files&quot;],&quot;slug&quot;:[0,&quot;card-view-of-case-files&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import {\n  GoabBadge,\n  GoabBlock,\n  GoabButton,\n  GoabContainer,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nexport function CardViewOfCaseFiles() {\n  return (\n    &lt;&gt;\n      &lt;style&gt;{`\n        .case-file-row {\n          display: flex;\n          flex-wrap: wrap;\n          justify-content: space-between;\n          align-items: center;\n          gap: var(--goa-space-m);\n        }\n      `}&lt;/style&gt;\n\n      &lt;GoabContainer mt=\&quot;l\&quot;&gt;\n        &lt;div className=\&quot;case-file-row\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n            &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;\n              Fiscal year: 2021/2022\n            &lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n              Submitted: April 23, 2023\n            &lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n          &lt;GoabBlock direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n            &lt;GoabBadge type=\&quot;default\&quot; content=\&quot;Not started\&quot; /&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;\n              Start\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabContainer&gt;\n\n      &lt;GoabContainer&gt;\n        &lt;div className=\&quot;case-file-row\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n            &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;\n              Fiscal year: 2020/2021\n            &lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n              Submitted: April 9, 2022\n            &lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n          &lt;GoabBlock direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n            &lt;GoabBadge type=\&quot;important\&quot; content=\&quot;Information needed\&quot; /&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;\n              Edit\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabContainer&gt;\n\n      &lt;GoabContainer&gt;\n        &lt;div className=\&quot;case-file-row\&quot;&gt;\n          &lt;GoabBlock direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n            &lt;GoabText size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;\n              Fiscal year: 2019/2020\n            &lt;/GoabText&gt;\n            &lt;GoabText size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n              Submitted: April 14, 2021\n            &lt;/GoabText&gt;\n          &lt;/GoabBlock&gt;\n          &lt;GoabBlock direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n            &lt;GoabBadge type=\&quot;success\&quot; content=\&quot;Approved\&quot; /&gt;\n            &lt;GoabButton type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;\n              View\n            &lt;/GoabButton&gt;\n          &lt;/GoabBlock&gt;\n        &lt;/div&gt;\n      &lt;/GoabContainer&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-container mt=\&quot;l\&quot;&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2021/2022&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 23, 2023&lt;/goab-text&gt;\n    &lt;/goab-block&gt;\n    &lt;goab-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goab-badge type=\&quot;default\&quot; content=\&quot;Not started\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Start&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-container&gt;\n\n&lt;goab-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2020/2021&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 9, 2022&lt;/goab-text&gt;\n    &lt;/goab-block&gt;\n    &lt;goab-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goab-badge type=\&quot;important\&quot; content=\&quot;Information needed\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Edit&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-container&gt;\n\n&lt;goab-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goab-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goab-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2019/2020&lt;/goab-text&gt;\n      &lt;goab-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 14, 2021&lt;/goab-text&gt;\n    &lt;/goab-block&gt;\n    &lt;goab-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goab-badge type=\&quot;success\&quot; content=\&quot;Approved\&quot;&gt;&lt;/goab-badge&gt;\n      &lt;goab-button type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;View&lt;/goab-button&gt;\n    &lt;/goab-block&gt;\n  &lt;/div&gt;\n&lt;/goab-container&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\n\n@Component({\n  selector: \&quot;app-card-view-of-case-files\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n  styles: [\n    `\n      .case-file-row {\n        display: flex;\n        flex-wrap: wrap;\n        justify-content: space-between;\n        align-items: center;\n        gap: var(--goa-space-m);\n      }\n    `,\n  ],\n})\nexport class CardViewOfCaseFilesComponent {}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;style&gt;\n  .case-file-row {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n    align-items: center;\n    gap: var(--goa-space-m);\n  }\n&lt;/style&gt;\n\n&lt;goa-container mt=\&quot;l\&quot;&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2021/2022&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 23, 2023&lt;/goa-text&gt;\n    &lt;/goa-block&gt;\n    &lt;goa-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goa-badge version=\&quot;2\&quot; type=\&quot;default\&quot; content=\&quot;Not started\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Start&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-container&gt;\n\n&lt;goa-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2020/2021&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 9, 2022&lt;/goa-text&gt;\n    &lt;/goa-block&gt;\n    &lt;goa-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goa-badge version=\&quot;2\&quot; type=\&quot;important\&quot; content=\&quot;Information needed\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;Edit&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-container&gt;\n\n&lt;goa-container&gt;\n  &lt;div class=\&quot;case-file-row\&quot;&gt;\n    &lt;goa-block direction=\&quot;column\&quot; gap=\&quot;2xs\&quot;&gt;\n      &lt;goa-text size=\&quot;heading-xs\&quot; mt=\&quot;none\&quot; mb=\&quot;2xs\&quot;&gt;Fiscal year: 2019/2020&lt;/goa-text&gt;\n      &lt;goa-text size=\&quot;body-s\&quot; mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;Submitted: April 14, 2021&lt;/goa-text&gt;\n    &lt;/goa-block&gt;\n    &lt;goa-block direction=\&quot;row\&quot; gap=\&quot;l\&quot; alignment=\&quot;center\&quot;&gt;\n      &lt;goa-badge version=\&quot;2\&quot; type=\&quot;success\&quot; content=\&quot;Approved\&quot;&gt;&lt;/goa-badge&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;tertiary\&quot; size=\&quot;compact\&quot;&gt;View&lt;/goa-button&gt;\n    &lt;/goa-block&gt;\n  &lt;/div&gt;\n&lt;/goa-container&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-card-view-of-case-files" class="example-title">Card view of case files</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-css">.case-file-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -683,6 +459,230 @@ datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
     &lt;/goa-block&gt;
   &lt;/div&gt;
 &lt;/goa-container&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
+        .example-preview {
+        }
+
+        .example-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-title {
+          font: var(--goa-typography-heading-s);
+          margin: 0 !important; /* Override global h3 margin from tab content */
+          color: var(--goa-color-text-default, #333);
+        }
+
+        .example-title--large {
+          font: var(--goa-typography-heading-l);
+        }
+
+        .example-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--goa-space-xs, 0.25rem);
+        }
+
+        .copy-link-button,
+        .figma-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: transparent;
+          color: var(--goa-color-text-secondary, #666);
+          cursor: pointer;
+          border-radius: var(--goa-border-radius-s, 4px);
+          transition: all 0.15s;
+        }
+
+        .copy-link-button:hover,
+        .figma-link:hover {
+          background: var(--goa-color-greyscale-100, #f1f1f1);
+          color: var(--goa-color-interactive-default, #0070c4);
+        }
+
+        .copy-link-button.copied {
+          color: var(--goa-color-status-success, #2e7d32);
+        }
+
+        .preview-area {
+          border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+          border-radius: var(--goa-border-radius-m, 4px);
+          overflow: hidden;
+          background: var(--goa-color-greyscale-white, #fff);
+          min-height: 100px;
+          margin-bottom: var(--goa-space-m, 1rem);
+        }
+
+        .example-preview .preview-container {
+          padding: var(--goa-space-xl, 2rem);
+          display: block;  /* Override flex from ConfigurationPreview */
+          gap: 0;          /* Reset gap from ConfigurationPreview */
+        }
+
+        .example-preview .preview-container.full-width {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .example-preview .preview-container > *:not(style):not([hidden]):not([style*="display: none"]) {
+          display: block;
+          width: 100%;
+        }
+
+        .preview-placeholder {
+          color: var(--goa-color-text-secondary, #666);
+          font-style: italic;
+        }
+
+        .code-area {
+          /* CodeSnippet handles its own styling */
+        }
+      </style></div><!--astro:end--></astro-island>   </div> <div class="example-display" data-astro-cid-kws6ko6c> <astro-island uid="Z2jGNKc" prefix="r11" component-url="/ui-components/pr-preview/pr-3859/_astro/ExamplePreview.CpTJuYdp.js" component-export="ExamplePreview" renderer-url="/ui-components/pr-preview/pr-3859/_astro/client.CQ9nZNia.js" props="{&quot;title&quot;:[0,&quot;Confirm a change&quot;],&quot;slug&quot;:[0,&quot;confirm-a-change&quot;],&quot;code&quot;:[0,{&quot;react&quot;:[0,&quot;import { useState } from \&quot;react\&quot;;\nimport {\n  GoabButton,\n  GoabButtonGroup,\n  GoabContainer,\n  GoabDatePicker,\n  GoabFormItem,\n  GoabModal,\n  GoabText,\n} from \&quot;@abgov/react-components\&quot;;\n\nimport { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\nexport function ConfirmAChange() {\n  const [open, setOpen] = useState(false);\n  const [effectiveDate, setEffectiveDate] = useState&lt;Date | undefined&gt;(new Date());\n\n  const onChangeEffectiveDate = (detail: GoabDatePickerOnChangeDetail) =&gt; {\n    setEffectiveDate(detail.value as Date);\n  };\n\n  return (\n    &lt;&gt;\n      &lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Save and continue&lt;/GoabButton&gt;\n\n      &lt;GoabModal\n        heading=\&quot;Address has changed\&quot;\n        open={open}\n        onClose={() =&gt; setOpen(false)}\n        actions={\n          &lt;GoabButtonGroup alignment=\&quot;end\&quot;&gt;\n            &lt;GoabButton type=\&quot;secondary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Undo address change\n            &lt;/GoabButton&gt;\n            &lt;GoabButton type=\&quot;primary\&quot; size=\&quot;compact\&quot; onClick={() =&gt; setOpen(false)}&gt;\n              Confirm\n            &lt;/GoabButton&gt;\n          &lt;/GoabButtonGroup&gt;\n        }\n      &gt;\n        &lt;GoabContainer\n          type=\&quot;non-interactive\&quot;\n          accent=\&quot;filled\&quot;\n          padding=\&quot;compact\&quot;\n          width=\&quot;full\&quot;\n        &gt;\n          &lt;GoabText tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;\n            Before\n          &lt;/GoabText&gt;\n          &lt;GoabText mt=\&quot;none\&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/GoabText&gt;\n          &lt;GoabText tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;\n            After\n          &lt;/GoabText&gt;\n          &lt;GoabText mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;\n            881 12 Ave NW, Edmonton, Alberta\n          &lt;/GoabText&gt;\n        &lt;/GoabContainer&gt;\n        &lt;GoabFormItem label=\&quot;Effective date\&quot; mt=\&quot;l\&quot;&gt;\n          &lt;GoabDatePicker\n            onChange={onChangeEffectiveDate}\n            name=\&quot;effectiveDate\&quot;\n            value={effectiveDate}\n          /&gt;\n        &lt;/GoabFormItem&gt;\n      &lt;/GoabModal&gt;\n    &lt;/&gt;\n  );\n}\n&quot;],&quot;angular&quot;:[0,{&quot;template&quot;:[0,&quot;&lt;goab-button (onClick)=\&quot;toggleModal()\&quot;&gt;Save and continue&lt;/goab-button&gt;\n\n&lt;goab-modal\n  [open]=\&quot;open\&quot;\n  (onClose)=\&quot;toggleModal()\&quot;\n  heading=\&quot;Address has changed\&quot;\n  [actions]=\&quot;actions\&quot;\n&gt;\n  &lt;goab-container type=\&quot;non-interactive\&quot; accent=\&quot;filled\&quot; padding=\&quot;compact\&quot; width=\&quot;full\&quot;&gt;\n    &lt;goab-text tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;Before&lt;/goab-text&gt;\n    &lt;goab-text mt=\&quot;none\&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;\n    &lt;goab-text tag=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;After&lt;/goab-text&gt;\n    &lt;goab-text mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;\n  &lt;/goab-container&gt;\n  &lt;goab-form-item label=\&quot;Effective date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goab-date-picker\n      (onChange)=\&quot;onChangeEffectiveDate($event)\&quot;\n      name=\&quot;effectiveDate\&quot;\n      [value]=\&quot;effectiveDate\&quot;\n    &gt;&lt;/goab-date-picker&gt;\n  &lt;/goab-form-item&gt;\n  &lt;ng-template #actions&gt;\n    &lt;goab-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goab-button type=\&quot;secondary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;\n        Undo address change\n      &lt;/goab-button&gt;\n      &lt;goab-button type=\&quot;primary\&quot; size=\&quot;compact\&quot; (onClick)=\&quot;toggleModal()\&quot;&gt;\n        Confirm\n      &lt;/goab-button&gt;\n    &lt;/goab-button-group&gt;\n  &lt;/ng-template&gt;\n&lt;/goab-modal&gt;\n&quot;],&quot;component&quot;:[0,&quot;import { Component } from \&quot;@angular/core\&quot;;\nimport { GoabDatePickerOnChangeDetail } from \&quot;@abgov/ui-components-common\&quot;;\n\n@Component({\n  selector: \&quot;app-confirm-a-change\&quot;,\n  templateUrl: \&quot;./angular.html\&quot;,\n})\nexport class ConfirmAChangeComponent {\n  open = false;\n  effectiveDate = new Date();\n\n  toggleModal(): void {\n    this.open = !this.open;\n  }\n\n  onChangeEffectiveDate(event: GoabDatePickerOnChangeDetail): void {\n    this.effectiveDate = event.value as Date;\n  }\n}\n&quot;]}],&quot;webComponents&quot;:[0,&quot;&lt;goa-button version=\&quot;2\&quot; id=\&quot;open-modal-btn\&quot;&gt;Save and continue&lt;/goa-button&gt;\n\n&lt;goa-modal version=\&quot;2\&quot; id=\&quot;change-modal\&quot; heading=\&quot;Address has changed\&quot;&gt;\n  &lt;goa-container type=\&quot;non-interactive\&quot; accent=\&quot;filled\&quot; padding=\&quot;compact\&quot; width=\&quot;full\&quot;&gt;\n    &lt;goa-text as=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;Before&lt;/goa-text&gt;\n    &lt;goa-text mt=\&quot;none\&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;\n    &lt;goa-text as=\&quot;h4\&quot; mt=\&quot;none\&quot; mb=\&quot;s\&quot;&gt;After&lt;/goa-text&gt;\n    &lt;goa-text mt=\&quot;none\&quot; mb=\&quot;none\&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;\n  &lt;/goa-container&gt;\n  &lt;goa-form-item version=\&quot;2\&quot; label=\&quot;Effective date\&quot; mt=\&quot;l\&quot;&gt;\n    &lt;goa-date-picker\n      version=\&quot;2\&quot;\n      id=\&quot;effective-date\&quot;\n      name=\&quot;effectiveDate\&quot;\n    &gt;&lt;/goa-date-picker&gt;\n  &lt;/goa-form-item&gt;\n  &lt;div slot=\&quot;actions\&quot;&gt;\n    &lt;goa-button-group alignment=\&quot;end\&quot;&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;secondary\&quot; size=\&quot;compact\&quot; id=\&quot;undo-btn\&quot;&gt;\n        Undo address change\n      &lt;/goa-button&gt;\n      &lt;goa-button version=\&quot;2\&quot; type=\&quot;primary\&quot; size=\&quot;compact\&quot; id=\&quot;confirm-btn\&quot;&gt;\n        Confirm\n      &lt;/goa-button&gt;\n    &lt;/goa-button-group&gt;\n  &lt;/div&gt;\n&lt;/goa-modal&gt;\n\n&lt;script&gt;\n  const modal = document.getElementById(\&quot;change-modal\&quot;);\n  const openBtn = document.getElementById(\&quot;open-modal-btn\&quot;);\n  const undoBtn = document.getElementById(\&quot;undo-btn\&quot;);\n  const confirmBtn = document.getElementById(\&quot;confirm-btn\&quot;);\n  const datePicker = document.getElementById(\&quot;effective-date\&quot;);\n\n  let effectiveDate = new Date();\n  datePicker.setAttribute(\&quot;value\&quot;, effectiveDate.toISOString());\n\n  openBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.setAttribute(\&quot;open\&quot;, \&quot;true\&quot;);\n  });\n\n  undoBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  confirmBtn.addEventListener(\&quot;_click\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  modal.addEventListener(\&quot;_close\&quot;, () =&gt; {\n    modal.removeAttribute(\&quot;open\&quot;);\n  });\n\n  datePicker.addEventListener(\&quot;_change\&quot;, (e) =&gt; {\n    effectiveDate = e.detail.value;\n  });\n&lt;/script&gt;\n&quot;]}],&quot;figmaUrl&quot;:[0,&quot;https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169716&quot;],&quot;fullWidth&quot;:[0],&quot;previewStyle&quot;:[0],&quot;titleSize&quot;:[0,&quot;small&quot;],&quot;data-astro-cid-kws6ko6c&quot;:[0,true]}" ssr client="load" opts="{&quot;name&quot;:&quot;ExamplePreview&quot;,&quot;value&quot;:true}" await-children><div class="example-preview"><div class="example-header"><h3 id="example-confirm-a-change" class="example-title">Confirm a change</h3><div class="example-actions"><button class="copy-link-button " aria-label="Copy link to this example" title="Copy link"><goa-icon version="2" type="link" size="small"></goa-icon></button><a href="https://www.figma.com/design/Jpy1Ea5qglwnp1SgGnagY9/%E2%9D%96-Component-library-%7C-DDD?node-id=63353-169716" target="_blank" rel="noopener noreferrer" class="figma-link" aria-label="View in Figma" title="View in Figma"><goa-icon version="2" type="logo-figma" size="small"></goa-icon></a></div></div><div class="preview-area"><div class="preview-container"></div></div><div class="code-area"><div class="code-snippet-wrapper"><div class="framework-switcher"><goa-tabs initialtab="1" variant="segmented" version="2" orientation="horizontal"><goa-tab heading="React"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">const [open, setOpen] = useState(false);
+const [effectiveDate, setEffectiveDate] = useState&lt;Date | undefined&gt;(new Date());
+
+const onChangeEffectiveDate = (detail: GoabDatePickerOnChangeDetail) =&gt; {
+  setEffectiveDate(detail.value as Date);
+};</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-tsx">&lt;GoabButton onClick={() =&gt; setOpen(true)}&gt;Save and continue&lt;/GoabButton&gt;
+
+&lt;GoabModal
+  heading=&quot;Address has changed&quot;
+  open={open}
+  onClose={() =&gt; setOpen(false)}
+  actions={
+    &lt;GoabButtonGroup alignment=&quot;end&quot;&gt;
+      &lt;GoabButton type=&quot;secondary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Undo address change
+      &lt;/GoabButton&gt;
+      &lt;GoabButton type=&quot;primary&quot; size=&quot;compact&quot; onClick={() =&gt; setOpen(false)}&gt;
+        Confirm
+      &lt;/GoabButton&gt;
+    &lt;/GoabButtonGroup&gt;
+  }
+&gt;
+  &lt;GoabContainer
+    type=&quot;non-interactive&quot;
+    accent=&quot;filled&quot;
+    padding=&quot;compact&quot;
+    width=&quot;full&quot;
+  &gt;
+    &lt;GoabText tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;
+      Before
+    &lt;/GoabText&gt;
+    &lt;GoabText mt=&quot;none&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/GoabText&gt;
+    &lt;GoabText tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;
+      After
+    &lt;/GoabText&gt;
+    &lt;GoabText mt=&quot;none&quot; mb=&quot;none&quot;&gt;
+      881 12 Ave NW, Edmonton, Alberta
+    &lt;/GoabText&gt;
+  &lt;/GoabContainer&gt;
+  &lt;GoabFormItem label=&quot;Effective date&quot; mt=&quot;l&quot;&gt;
+    &lt;GoabDatePicker
+      onChange={onChangeEffectiveDate}
+      name=&quot;effectiveDate&quot;
+      value={effectiveDate}
+    /&gt;
+  &lt;/GoabFormItem&gt;
+&lt;/GoabModal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Angular"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-typescript">open = false;
+effectiveDate = new Date();
+
+toggleModal(): void {
+  this.open = !this.open;
+}
+
+onChangeEffectiveDate(event: GoabDatePickerOnChangeDetail): void {
+  this.effectiveDate = event.value as Date;
+}</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goab-button (onClick)=&quot;toggleModal()&quot;&gt;Save and continue&lt;/goab-button&gt;
+
+&lt;goab-modal
+  [open]=&quot;open&quot;
+  (onClose)=&quot;toggleModal()&quot;
+  heading=&quot;Address has changed&quot;
+  [actions]=&quot;actions&quot;
+&gt;
+  &lt;goab-container type=&quot;non-interactive&quot; accent=&quot;filled&quot; padding=&quot;compact&quot; width=&quot;full&quot;&gt;
+    &lt;goab-text tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;Before&lt;/goab-text&gt;
+    &lt;goab-text mt=&quot;none&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;
+    &lt;goab-text tag=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;After&lt;/goab-text&gt;
+    &lt;goab-text mt=&quot;none&quot; mb=&quot;none&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goab-text&gt;
+  &lt;/goab-container&gt;
+  &lt;goab-form-item label=&quot;Effective date&quot; mt=&quot;l&quot;&gt;
+    &lt;goab-date-picker
+      (onChange)=&quot;onChangeEffectiveDate($event)&quot;
+      name=&quot;effectiveDate&quot;
+      [value]=&quot;effectiveDate&quot;
+    &gt;&lt;/goab-date-picker&gt;
+  &lt;/goab-form-item&gt;
+  &lt;ng-template #actions&gt;
+    &lt;goab-button-group alignment=&quot;end&quot;&gt;
+      &lt;goab-button type=&quot;secondary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;&gt;
+        Undo address change
+      &lt;/goab-button&gt;
+      &lt;goab-button type=&quot;primary&quot; size=&quot;compact&quot; (onClick)=&quot;toggleModal()&quot;&gt;
+        Confirm
+      &lt;/goab-button&gt;
+    &lt;/goab-button-group&gt;
+  &lt;/ng-template&gt;
+&lt;/goab-modal&gt;</code></pre></div></div></div></div></goa-tab><goa-tab heading="Web Components"><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-javascript">const modal = document.getElementById(&quot;change-modal&quot;);
+const openBtn = document.getElementById(&quot;open-modal-btn&quot;);
+const undoBtn = document.getElementById(&quot;undo-btn&quot;);
+const confirmBtn = document.getElementById(&quot;confirm-btn&quot;);
+const datePicker = document.getElementById(&quot;effective-date&quot;);
+
+let effectiveDate = new Date();
+datePicker.setAttribute(&quot;value&quot;, effectiveDate.toISOString());
+
+openBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.setAttribute(&quot;open&quot;, &quot;true&quot;);
+});
+
+undoBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+confirmBtn.addEventListener(&quot;_click&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+modal.addEventListener(&quot;_close&quot;, () =&gt; {
+  modal.removeAttribute(&quot;open&quot;);
+});
+
+datePicker.addEventListener(&quot;_change&quot;, (e) =&gt; {
+  effectiveDate = e.detail.value;
+});</code></pre></div></div></div></div><div class="code-snippet"><div class="code-blocks"><div class="code-block "><div class="code-block-header"><button class="copy-button " aria-label="Copy code" title="Copy code"><svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button></div><div class="code-container " style="max-height:200px"><pre><code class="language-html">&lt;goa-button version=&quot;2&quot; id=&quot;open-modal-btn&quot;&gt;Save and continue&lt;/goa-button&gt;
+
+&lt;goa-modal version=&quot;2&quot; id=&quot;change-modal&quot; heading=&quot;Address has changed&quot;&gt;
+  &lt;goa-container type=&quot;non-interactive&quot; accent=&quot;filled&quot; padding=&quot;compact&quot; width=&quot;full&quot;&gt;
+    &lt;goa-text as=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;Before&lt;/goa-text&gt;
+    &lt;goa-text mt=&quot;none&quot;&gt;123456 78 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;
+    &lt;goa-text as=&quot;h4&quot; mt=&quot;none&quot; mb=&quot;s&quot;&gt;After&lt;/goa-text&gt;
+    &lt;goa-text mt=&quot;none&quot; mb=&quot;none&quot;&gt;881 12 Ave NW, Edmonton, Alberta&lt;/goa-text&gt;
+  &lt;/goa-container&gt;
+  &lt;goa-form-item version=&quot;2&quot; label=&quot;Effective date&quot; mt=&quot;l&quot;&gt;
+    &lt;goa-date-picker
+      version=&quot;2&quot;
+      id=&quot;effective-date&quot;
+      name=&quot;effectiveDate&quot;
+    &gt;&lt;/goa-date-picker&gt;
+  &lt;/goa-form-item&gt;
+  &lt;div slot=&quot;actions&quot;&gt;
+    &lt;goa-button-group alignment=&quot;end&quot;&gt;
+      &lt;goa-button version=&quot;2&quot; type=&quot;secondary&quot; size=&quot;compact&quot; id=&quot;undo-btn&quot;&gt;
+        Undo address change
+      &lt;/goa-button&gt;
+      &lt;goa-button version=&quot;2&quot; type=&quot;primary&quot; size=&quot;compact&quot; id=&quot;confirm-btn&quot;&gt;
+        Confirm
+      &lt;/goa-button&gt;
+    &lt;/goa-button-group&gt;
+  &lt;/div&gt;
+&lt;/goa-modal&gt;</code></pre></div></div></div></div></goa-tab></goa-tabs></div></div></div><style>
         .example-preview {
         }
 
