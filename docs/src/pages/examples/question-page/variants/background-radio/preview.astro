@@ -1,0 +1,24 @@
+---
+import PreviewLayout from "../../../../../layouts/PreviewLayout.astro";
+import { GiveBackgroundInformationBeforeAskingAQuestion } from "../../../../../content/examples/question-page/variants/background-radio/react";
+---
+
+<PreviewLayout
+  title="Give background information preview"
+  backUrl="/examples/question-page"
+  backLabel="Back to Question page"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/examples/question-page/variants/background-radio/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/examples/question-page/variants/background-radio"
+>
+  <div class="preview-frame">
+    <GiveBackgroundInformationBeforeAskingAQuestion client:load />
+  </div>
+</PreviewLayout>
+
+<style is:global>
+  .preview-frame {
+    max-width: 41.5rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+</style>
