@@ -1,12 +1,16 @@
 ---
 /**
- * ExampleDisplay - Full example with live preview and code tabs
+ * ExampleDisplay - Full example with live preview and code tabs.
  *
- * Reads code files at build time, passes to ExamplePreview for client-side rendering.
- * Use this on component pages and example pages.
+ * Section/interaction-scale entries render an inline ExamplePreview
+ * (sandbox + framework code tabs). Page-scale entries (page/flow/product)
+ * render a PreviewContainer card linking to the entry's docs page since
+ * their composition often depends on app shell, mock data, or external
+ * sources that don't render usefully inline.
  */
 import type { CollectionEntry } from 'astro:content';
 import { ExamplePreview } from './ExamplePreview';
+import PreviewContainer from './PreviewContainer.astro';
 import { getExampleCode } from '../lib/example-code';
 
 interface Props {
@@ -18,31 +22,58 @@ interface Props {
 const { example, titleSize = 'small' } = Astro.props;
 const { data } = example;
 
-// Read code files at build time
-const code = await getExampleCode(example.slug);
+const PAGE_SCALE_SIZES = new Set(['page', 'flow', 'product']);
+const isPageScale = PAGE_SCALE_SIZES.has(data.size);
+
+// Read code files for inline-preview entries only.
+const code = isPageScale ? null : await getExampleCode(example.slug);
+
+// Page-scale schema branch carries source URLs and previewImage.
+type PageShape = {
+  previewImage?: string;
+  reactSourceUrl?: string;
+  angularSourceUrl?: string;
+};
+const pageData = data as typeof data & PageShape;
 ---
 
-<div class="example-display">
-  <ExamplePreview
-    client:load
-    title={data.title}
-    slug={example.slug}
-    code={code}
-    figmaUrl={data.figmaUrl}
-    fullWidth={data.fullWidth}
-    previewStyle={data.previewStyle}
-    titleSize={titleSize}
-  />
-
-  {/* Accessibility notes */}
-  {data.accessibilityNotes && (
-    <div class="example-meta">
-      <goa-details version="2" heading="Accessibility">
-        <p>{data.accessibilityNotes}</p>
-      </goa-details>
+{isPageScale ? (
+  <article class="example-display">
+    <div class="example-preview page-scale-preview">
+      <h3 id={`example-${example.slug}`} class="example-title page-scale-title">{data.title}</h3>
+      <PreviewContainer
+        image={pageData.previewImage}
+        alt={`${data.title} preview`}
+        previewUrl={`/examples/${example.slug}/preview`}
+        reactSourceUrl={pageData.reactSourceUrl}
+        angularSourceUrl={pageData.angularSourceUrl}
+        moreUrl={`/examples/${example.slug}`}
+      />
     </div>
-  )}
-</div>
+  </article>
+) : (
+  <div class="example-display">
+    <ExamplePreview
+      client:load
+      title={data.title}
+      slug={example.slug}
+      code={code!}
+      figmaUrl={data.figmaUrl}
+      fullWidth={data.fullWidth}
+      previewStyle={data.previewStyle}
+      titleSize={titleSize}
+    />
+
+    {/* Accessibility notes */}
+    {data.accessibilityNotes && (
+      <div class="example-meta">
+        <goa-details version="2" heading="Accessibility">
+          <p>{data.accessibilityNotes}</p>
+        </goa-details>
+      </div>
+    )}
+  </div>
+)}
 
 <style>
   .example-display {
@@ -54,6 +85,12 @@ const code = await getExampleCode(example.slug);
   .example-display:last-child {
     border-bottom: none;
     margin-bottom: 0;
+  }
+
+  .page-scale-title {
+    font: var(--goa-typography-heading-s);
+    margin: 0 0 var(--goa-space-m, 1rem) !important;
+    color: var(--goa-color-text-default, #333);
   }
 
   .example-meta {
