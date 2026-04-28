@@ -1,0 +1,73 @@
+---
+/**
+ * Error pages: 401 live preview
+ *
+ * Render-local preview (Model B). Composition mirrors
+ * content/templates/error-pages/401/web-components.html so the rendered
+ * preview is visually identical to the source a consumer would paste.
+ */
+import PreviewLayout from "../../../../layouts/PreviewLayout.astro";
+---
+
+<PreviewLayout
+  title="Restricted access preview"
+  backUrl="/examples/error-pages"
+  backLabel="Back to Error pages"
+  reactSourceUrl="https://github.com/GovAlta/ui-components/blob/dev/docs/src/content/templates/error-pages/401/react.tsx"
+  angularSourceUrl="https://github.com/GovAlta/ui-components/tree/dev/docs/src/content/templates/error-pages/401"
+>
+  <goa-page-block>
+    <div class="error-page-content">
+      <goa-block direction="column" alignment="center" gap="xl" width="100%" mt="3xl" mb="3xl">
+        <goa-block direction="column" alignment="center" gap="m" width="100%">
+          <div class="error-page-icon">
+            <goa-icon role="presentation" type="warning" size="xlarge"></goa-icon>
+          </div>
+          <goa-text size="body-m" color="secondary" mt="none" mb="none">Error 401</goa-text>
+          <div class="error-page-underline" aria-hidden="true"></div>
+        </goa-block>
+
+        <goa-block direction="column" alignment="center" gap="l" width="100%">
+          <goa-text as="h1" size="heading-l" mt="none" mb="none">Restricted access</goa-text>
+          <goa-text size="body-m" mt="none" mb="none">
+            We cannot provide access to this page without valid credentials. Please sign in or
+            contact support at
+            <goa-link>
+              <a href="mailto:cs.licensingsupport@gov.ab.ca">cs.licensingsupport@gov.ab.ca</a>
+            </goa-link>
+            to request access.
+          </goa-text>
+        </goa-block>
+
+        <goa-button version="2" type="primary" size="compact" onclick="window.location.href='/'">
+          Go to home page
+        </goa-button>
+      </goa-block>
+    </div>
+  </goa-page-block>
+</PreviewLayout>
+
+<style is:global>
+  .error-page-content {
+    text-align: center;
+  }
+  .error-page-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50%;
+    background-color: var(--goa-color-greyscale-100);
+  }
+  /* Icon scaled beyond xlarge (2.5rem cap) to match the page-scale visual weight. */
+  /* Tracked in icon-sizes-above-xlarge gap ticket. */
+  .error-page-icon goa-icon {
+    transform: scale(1.35);
+  }
+  .error-page-underline {
+    width: 6.875rem;
+    height: var(--goa-space-xs);
+    background-color: var(--goa-color-info-default);
+  }
+</style>

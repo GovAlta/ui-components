@@ -1,0 +1,27 @@
+<goab-page-block>
+  <div class="error-page-content">
+    <goab-block direction="column" alignment="center" gap="xl" width="100%" mt="3xl" mb="3xl">
+      <goab-block direction="column" alignment="center" gap="m" width="100%">
+        <div class="error-page-icon">
+          <goab-icon role="presentation" type="warning" size="xlarge"></goab-icon>
+        </div>
+        <goab-text size="body-m" color="secondary" mt="none" mb="none">Error 401</goab-text>
+        <div class="error-page-underline" aria-hidden="true"></div>
+      </goab-block>
+
+      <goab-block direction="column" alignment="center" gap="l" width="100%">
+        <goab-text tag="h1" size="heading-l" mt="none" mb="none">Restricted access</goab-text>
+        <goab-text size="body-m" mt="none" mb="none">
+          We cannot provide access to this page without valid credentials. Please sign in or
+          contact support at
+          <goab-link>
+            <a href="mailto:cs.licensingsupport@gov.ab.ca">cs.licensingsupport@gov.ab.ca</a>
+          </goab-link>
+          to request access.
+        </goab-text>
+      </goab-block>
+
+      <goab-button type="primary" size="compact" (onClick)="goHome()">Go to home page</goab-button>
+    </goab-block>
+  </div>
+</goab-page-block>
