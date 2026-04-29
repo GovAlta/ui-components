@@ -259,6 +259,7 @@ export type GoabButtonGroupGap = "relaxed" | "compact";
 // Accordion
 export type GoabAccordionHeadingSize = "small" | "medium";
 export type GoabAccordionIconPosition = "left" | "right";
+export type GoabAccordionType = "normal" | "filled";
 
 // Tooltip
 

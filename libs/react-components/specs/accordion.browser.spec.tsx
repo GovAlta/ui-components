@@ -119,6 +119,59 @@ describe("Accordion", () => {
     });
   });
 
+  it("should not expand the accordion when a button in the actions slot is clicked", async () => {
+    const accordionChangeSpy = vi.fn();
+
+    const Component = () => {
+      return (
+        <GoabAccordion
+          heading="Heading"
+          testId="testAccordion"
+          actions={
+            <GoabButton testId="actions-button">Action</GoabButton>
+          }
+          onChange={accordionChangeSpy}
+        >
+          Accordion content
+        </GoabAccordion>
+      );
+    };
+
+    const result = render(<Component />);
+    const button = result.getByTestId("actions-button");
+    await userEvent.click(button);
+
+    await vi.waitFor(() => {
+      expect(accordionChangeSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  it("should fire the actions button onClick when the actions button is clicked", async () => {
+    const handleClick = vi.fn();
+
+    const Component = () => {
+      return (
+        <GoabAccordion
+          heading="Heading"
+          testId="testAccordion"
+          actions={
+            <GoabButton testId="actions-button" onClick={handleClick}>Action</GoabButton>
+          }
+        >
+          Accordion content
+        </GoabAccordion>
+      );
+    };
+
+    const result = render(<Component />);
+    const button = result.getByTestId("actions-button");
+    await userEvent.click(button);
+
+    await vi.waitFor(() => {
+      expect(handleClick).toHaveBeenCalled();
+    });
+  });
+
   it("should set the open attribute on the details element", async () => {
     const Component = () => {
       const [open, setOpen] = useState(false);

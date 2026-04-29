@@ -28,10 +28,16 @@
     ["left", "right"],
   );
 
+  const [AccordionTypes, validateAccordionTypes] = typeValidator(
+    "Accordion Type",
+    ["normal", "filled"],
+  );
+
   // Types
 
   type HeadingSize = (typeof HeadingSizes)[number];
   type IconPosition = (typeof IconPositions)[number];
+  type AccordionType = (typeof AccordionTypes)[number];
 
   // Props
 
@@ -59,6 +65,8 @@
   export let ml: Spacing = null;
   /** Sets the position of the expand/collapse icon. */
   export let iconposition: IconPosition = "left";
+  /** A variant for list view usage where the header has a filled background */
+  export let type: AccordionType = "normal";
 
   // Private
 
@@ -90,6 +98,7 @@
     validateRequired("GoAAccordion", { heading });
     validateHeadingSize(headingsize);
     validateIconPosition(iconposition);
+    validateAccordionTypes(type);
     ensureSlotExists(_slotEl);
 
     _headingSlotChildren = getHeadingChildren();
@@ -299,6 +308,7 @@
       aria-controls={`${_accordionId}-content`}
       aria-expanded={isOpen}
       class:iconRight={iconposition === "right"}
+      class:filled={type === "filled"}
       bind:this={_summaryEl}
       on:click={onAccordionToggle}
       data-testid={`${testid}-summary`}
@@ -320,6 +330,7 @@
         {#if secondarytext}
           <span class="secondary-text">{secondarytext}</span>
         {/if}
+        <!-- svelte-ignore a11y-click-events-have-key-events because the enter and space handlers are blocked too-->
         <div
           class="heading-content"
           class:heading-content-top={_headingSlotChildren.length}
@@ -327,6 +338,12 @@
         >
           <slot name="headingcontent" />
         </div>
+      </div>
+
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div class="actions" on:click|stopPropagation>
+        <slot name="actions" />
       </div>
 
       {#if iconposition === "right"}
@@ -390,6 +407,20 @@
       var(--goa-motion-curve-expressive);
   }
 
+  summary.filled {
+    background-color: var(
+      --goa-accordion-color-filled-bg-heading,
+      var(--goa-color-greyscale-100)
+    );
+  }
+
+  summary.filled:hover {
+    background-color: var(
+      --goa-accordion-color-filled-bg-heading-hover,
+      var(--goa-color-greyscale-150)
+    );
+  }
+
   summary.iconRight {
     padding: var(--goa-accordion-padding-heading-icon-right);
   }
@@ -403,6 +434,14 @@
   summary:active {
     background-color: var(--goa-accordion-color-bg-heading);
     outline: none;
+  }
+
+  summary.filled:focus-visible,
+  summary.filled:active {
+    background-color: var(
+      --goa-accordion-color-filled-bg-heading,
+      var(--goa-color-greyscale-100)
+    );
   }
 
   /* Hack to make outline radius work on Safari */
@@ -469,6 +508,13 @@
 
   .heading-content {
     flex: 1;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    padding-left: 0.5rem;
   }
 
   .container-medium {

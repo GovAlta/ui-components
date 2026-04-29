@@ -91,6 +91,7 @@
     {
       "name": "iconposition",
       "type": "\"left\" | \"right\"",
+      "typeLabel": "GoabAccordionIconPosition",
       "values": [
         "left",
         "right"
@@ -98,6 +99,18 @@
       "required": false,
       "default": "left",
       "description": "Sets the position of the expand/collapse icon."
+    },
+    {
+      "name": "type",
+      "type": "\"default\" | \"filled\"",
+      "typeLabel": "GoabAccordionType",
+      "values": [
+        "default",
+        "filled"
+      ],
+      "required": false,
+      "default": "default",
+      "description": "A variant for list view usage where the header has a filled background"
     }
   ],
   "events": [
@@ -125,6 +138,10 @@
     },
     {
       "name": "headingcontent",
+      "description": ""
+    },
+    {
+      "name": "actions",
       "description": ""
     }
   ]
