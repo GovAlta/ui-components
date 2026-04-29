@@ -5,7 +5,12 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from "svelte";
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
-  import { getSlottedChildren, styles, toBoolean, typeValidator } from "../../common/utils";
+  import {
+    getSlottedChildren,
+    styles,
+    toBoolean,
+    typeValidator,
+  } from "../../common/utils";
   import { isUrlMatch, getMatchedLink } from "../../common/urls";
   import type { AppHeaderMenuProps } from "../app-header-menu/AppHeaderMenu.svelte";
   import AppHeaderNavigation from "../app-header-navigation/AppHeaderNavigation.svelte";
@@ -44,6 +49,12 @@
     "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC4wMjgzMjAzIiB3aWR0aD0iMzEuNjk1NCIgaGVpZ2h0PSIzMS42ODc2IiByeD0iNCIgZmlsbD0iIzAwQjZFRCIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNTg2NTNfMjAzODgwKSI+CjxtYXNrIGlkPSJtYXNrMF81ODY1M18yMDM4ODAiIHN0eWxlPSJtYXNrLXR5cGU6YWxwaGEiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9Ii0xMSIgeT0iLTIiIHdpZHRoPSI0NyIgaGVpZ2h0PSIzOSI+CjxwYXRoIGQ9Ik0yMi4wMTYxIDMxLjEwMTVDMTkuNTQ1MyAzMC4xOTY5IDE3LjEzMzggMjkuMTQgMTQuNzk1OCAyNy45MzY5QzE2LjkxODMgMjcuMTYzMSAxOC45ODc5IDI2LjI1MzIgMjAuOTkxNSAyNS4yMTMxQzIxLjE5NTkgMjcuMTk3NiAyMS41Mzc3IDI5LjE2NTggMjIuMDE0NiAzMS4xMDM2TTM1LjI4NCA2LjcxMTMyQzM0LjI1MDEgNi41ODE1OCAzNC43ODczIDcuMDU4OTYgMzQuNDk5MiA4LjQxMTU0QzMzLjI1MzcgMTQuMjQzMyAyOC40NDkzIDE4LjQ0NjYgMjMuNjI2MiAyMS4yNjY0QzIzLjEyMDggMTQuNTg4MSAyMy4zMjczIDcuMTczNjQgMjQuNTkzNyAyLjYyOTkyQzI1LjY2MjMgLTEuMjA1NjIgMjYuOTMzMSAtMC41MDE3MjkgMjUuMzU2OSAtMS4zMDc0QzIzLjY5NjIgLTIuMTU1MzYgMjEuOTE2NCAtMS4wMzUwMiAyMC40NzQ2IDEuODIyMUMxOS4wMzI3IDQuNjc5MjIgMTIuMzkyOSAyMC4xODkxIDEuNzc5MTMgMzAuNjYyMUMtMy42NDk3OCAzNi4wMjMgLTguNTYwMjggMzMuMjYxOSAtOS41NDM2OCAzMi40Mzc2Qy0xMC4zNDM3IDMxLjc2NjcgLTEwLjYzOSAzMi44MDI0IC05LjY0NjIxIDMzLjg2MzNDLTUuMjU1NTcgMzguNTYzMyAxLjE1ODkxIDM1Ljg2NjcgMy40OTQ2NyAzMy41NDkzQzkuOTQ5NTggMjcuMTQ0MSAxNy40NTQzIDEzLjM1NTkgMjAuNDkwNCA3LjUwNTUyQzIwLjEzNjkgMTIuNjAxIDIwLjIxODMgMTcuNzE3MSAyMC43MzM4IDIyLjc5ODlDMTguMjg4NSAyMy45OTAxIDE1LjczODIgMjQuOTU1OSAxMy4xMTQ5IDI1LjY4NEMxMS42MTAyIDI2LjA3NTQgMTAuNjc5NiAyNi42ODM5IDEwLjY1MjEgMjcuMzc1NkMxMC42MjI1IDI4LjEzMzMgMTEuNjMyNiAyOC43NzI2IDEzLjA5MzMgMjkuNDYwOEMxNS42OTI2IDMwLjY4NjUgMjMuMzA4NSAzNC4yNTgyIDI1LjE4NTEgMzUuMzM4NEMyNi43OTE2IDM2LjI2MzggMjcuNTc1NyAzNS41NDIgMjguMDUxNSAzNC41NDI4QzI4LjY3MzIgMzMuMjQwNCAyNi45Njg1IDMyLjQ4NzggMjUuMzE2NSAzMS45OTc1QzI0LjU4NzQgMjkuMjQ4NSAyNC4wOTIxIDI2LjQ0MzcgMjMuODM1NiAyMy42MTI1QzI3LjcwNzEgMjEuMjQ3MSAzMS41MTg3IDE4LjA5MzIgMzMuNzE1OCAxNC4xNjAyQzM0LjQyNTIgMTIuNzc3OSAzNC45NTI1IDExLjMxMDggMzUuMjg0OCA5Ljc5NDk0QzM1LjUxNDggOC44NjE0NSAzNS41Nzc2IDcuODk1MDcgMzUuNDcwMyA2LjkzOTk3QzM1LjQ3MDMgNi45Mzk5NyAzNS40NDE0IDYuNzMxMzkgMzUuMjg0OCA2LjcxMTMyIiBmaWxsPSIjNTQ1ODYwIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF81ODY1M18yMDM4ODApIj4KPHJlY3QgeD0iMC4wMjgzMjAzIiB5PSItMC4wMDE5NTMxMiIgd2lkdGg9IjMxLjY5NTQiIGhlaWdodD0iMzEuNjk1NCIgcng9IjMuMDQ3NjIiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF81ODY1M18yMDM4ODAiPgo8cmVjdCB5PSIwLjAwNTg1OTM4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzEuOTkyMiIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==";
   const _v2DesktopLogo =
     "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTE4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTE4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNTg0NDdfNDI3MDkpIj4KPHBhdGggZD0iTTExNy45NDYgMTZIMTA2Ljk3NFYyNi45NzE3SDExNy45NDZWMTZaIiBmaWxsPSIjMDBCNkVEIi8+CjxwYXRoIGQ9Ik00OS43OTY2IDI1LjMwMzZDNDguNzAxMSAyNS40MDg4IDQ3LjU1NzIgMjUuNTE0OCA0Ni4zNTQ5IDI1LjU2NjlDNDYuNzkyMiAyMi4yNDggNDguNTk0MyAxNy42NjczIDUwLjgzMzcgMTguMzk4N0M1Mi4xNDQ3IDE4LjgyMDIgNTEuNDM0NCAyMi43MTk4IDQ5Ljc5NTcgMjUuMzAxOEw0OS43OTY2IDI1LjMwMzZaTTQ3LjAwOTUgMjcuNTY3NEM0Ni42ODM4IDI3LjYyMDEgNDYuMzUxOSAyNy42MjAxIDQ2LjAyNjIgMjcuNTY3NEM0Ni4xMTEgMjcuNTA4NCA0Ni4xODAxIDI3LjQyOTYgNDYuMjI3OCAyNy4zMzc5QzQ2LjI3NTUgMjcuMjQ2MSA0Ni4zMDAzIDI3LjE0NDIgNDYuMzAwMSAyNy4wNDA4VjI2LjYxOTNDNDYuOTAwOCAyNi42MTkzIDQ3LjgyOTMgMjYuNTE0MiA0OC45NzY4IDI2LjQwODFDNDguNDcyMSAyNy4wMDczIDQ3Ljc3NzUgMjcuNDE2MyA0Ny4wMDk1IDI3LjU2NzRaTTYwLjY2NTkgMTkuNjY2QzYyLjA4NjQgMTguMzk4NyA2Mi43OTY3IDE4LjUwNjYgNjIuOTU3MyAxOC44MjNDNjMuMzM5OCAxOS41NjA4IDYxLjcwMTEgMjIuMTQyOCA1OC40Nzg1IDIzLjU2NTVDNTguODEwNCAyMi4wNzk3IDU5LjU3IDIwLjcyNCA2MC42NjMyIDE5LjY2Nkg2MC42NjU5Wk0xMTMuMzc0IDIwLjkzMDVDMTEzLjIxIDE4LjM0ODUgMTEwLjg2MiAxNy45MjcgMTEwLjUzNCAxOC42NjQ4QzExMC40MjUgMTguOTI4MSAxMTEuNDA4IDE4LjgyMyAxMTEuNDA4IDIwLjY2NzFDMTExLjQwOCAyMy42NzA3IDEwOC4yNCAyNy42MjIzIDEwNC4xOTYgMjcuNjIyM0MxMDIuNzkzIDI3LjcwNzEgMTAxLjQxMSAyNy4yNDQgMTAwLjM0MSAyNi4zMzAxQzk5LjI3MTkgMjUuNDE2MyA5OC41OTc1IDI0LjEyMjkgOTguNDYwMSAyMi43MjE2Qzk4LjI5NTcgMjEuNjE1MyA5OC41Njk2IDIwLjA4NjYgOTYuNjAzMiAyMC4yOTc4Qzk1LjIzMzggMjAuNDU1OSA5NC4wMzYgMjIuOTg0OSA5Mi4yODc4IDI1LjE0MzZDOTAuODEyNSAyNi45ODc4IDkwLjE1NyAyNi44Mjk2IDkwLjQ4NDcgMjUuMjQ4OEM5MC45MjIgMjMuMjQ2NCA5Mi42MTU1IDE4LjYwOTkgOTQuNTgxOSAxOC4yOTM2Qzk1LjUxMDQgMTguMTM1NCA5NS44MzgxIDE5LjY2NTEgOTYuMjI1MiAxOC43MTUxQzk2LjM2NDIgMTguMzgwNyA5Ni40MTg5IDE4LjAxNzEgOTYuMzg0NSAxNy42NTY1Qzk2LjM1MDEgMTcuMjk1OSA5Ni4yMjc2IDE2Ljk0OTQgOTYuMDI3OSAxNi42NDc0Qzk1LjgyODIgMTYuMzQ1MyA5NS41NTc0IDE2LjA5NzIgOTUuMjM5MyAxNS45MjQ3Qzk0LjkyMTIgMTUuNzUyMyA5NC41NjU3IDE1LjY2MDkgOTQuMjA0IDE1LjY1ODZDOTIuNzgzNSAxNS42NTg2IDkxLjA5IDE3LjEzNDMgODkuNjcwNCAxOC43NjcyQzg4LjQ2OSAyMC4yNDI5IDgyLjI5NTggMjguOTg5MiA3OS42NzM5IDI3LjA5MjlDNzguNDcyNSAyNi4xOTY5IDc4LjU3ODQgMjIuNjEyOCA3OS4zNDYyIDE4LjM5ODdDODAuNDU2IDE3LjkxNzYgODEuNjQ5OCAxNy42NjA2IDgyLjg1OTEgMTcuNjQyNkM4NC4wNjg0IDE3LjYyNDUgODUuMjY5MyAxNy44NDU4IDg2LjM5MyAxOC4yOTM2Qzg3LjEwMzMgMTguNjA5OSA4Ny4yMTQ2IDE4LjU1NjkgODYuODg1MSAxNy44MTkxQzg2LjQ0NzggMTYuNzEyOCA4My45OTAyIDE0Ljk3MzcgODAuMTEyMSAxNS43NjM3QzgwLjAwMjUgMTUuNzYzNyA3OS45NDc4IDE1LjgxNjcgNzkuODM4MiAxNS44MTY3QzgwLjE2NiAxNC40NDUzIDgwLjQ5MzcgMTMuMDI0NCA4MC45MzM3IDExLjY1MzlDODEuMzE2MiAxMC4zODk0IDgyLjM1NDIgOC4yMjg4NyA3OS41NjQzIDcuODYwNEM3OC42OTA3IDcuNzAyMjMgNzkuMDczMiA4LjEyMzcyIDc4Ljc0MjcgOS4yODMwN0M3OC4xOTUgMTEuMzkwNiA3Ny41NDEzIDE0LjEyODkgNzcuMDQ5MiAxNi45MjNDNzQuNTE3NiAxOC4zNjY4IDcyLjQ1MTYgMjAuNTA2MSA3MS4wOTUxIDIzLjA4ODJDNzEuNDEwNSAyMS44OTMyIDcxLjY0NzggMjAuNjc4OSA3MS44MDU0IDE5LjQ1MjlDNzEuODM2IDE5LjE0OTkgNzEuNzUyIDE4Ljg0NjQgNzEuNTY5OSAxOC42MDI0QzcxLjM4NzkgMTguMzU4NSA3MS4xMjEgMTguMTkxOCA3MC44MjIyIDE4LjEzNTRDNzAuMjIxNSAxNy45NzcyIDY5LjQ1MjggMTguMjQwNiA2OC43NDYyIDE5LjI0MTdDNjcuMDUyNyAyMS41NjA0IDY0LjkyMjkgMjUuMTk1NyA2MS42NDU1IDI2LjcyMzVDNTkuMjk2NSAyNy44Mjk5IDU4LjI1ODUgMjYuNzIzNSA1OC4yMDQ2IDI0Ljk4NjRDNTguNjE1NyAyNC44NzgxIDU5LjAxNzQgMjQuNzM3MSA1OS40MDYxIDI0LjU2NDlDNjMuNjY2NyAyMi43NzM3IDY1LjA4NzIgMjAuMDMzNSA2NC4wNDkyIDE4LjM0NzVDNjMuMDExMiAxNi43NjY3IDYwLjExNjMgMTcuMjQxMiA1Ny43Njc0IDE5LjYxMkM1Ni41Mjk5IDIwLjk4MTcgNTUuNzgwNiAyMi43MjM0IDU1LjYzNjYgMjQuNTY0OUM1NC42NTM0IDI0Ljc3NjEgNTMuNTYwNiAyNC45MzA2IDUyLjMwNDQgMjUuMDkxNUM1NC4yNzA5IDIxLjk4MjggNTQuMTA3NCAxNy43NjcgNTEuMjA4OSAxNy4wM0M0Ny44MjIgMTYuMTg3IDQ2LjEyODUgMTkuMzQ4NyA0NS40MTkxIDIxLjk4MjhDNDUuNjkzIDE5LjAzMjQgNDYuMTI5NCAxNi4wODEgNDYuNjc1MyAxMy4xODM1QzQ2Ljk0OTIgMTEuOTE5IDQ3LjgyMiA5Ljc1ODUxIDQ1LjAzMjEgOS4zOTAwNEM0NC4xNTg0IDkuMjMxODcgNDQuMjY3IDkuNjUzMzcgNDQuMzIxOCAxMC44MTI3QzQ0LjQzMTQgMTIuMzkzNiA0Mi42MjgzIDIxLjgyNTYgNDMuNTU2OCAyNS45MzU0QzQyLjM1NTQgMjYuMzAxMSA0MS44NjMzIDI3LjE5OTkgNDMuMzkyNCAyOC4wOTU5QzQ0LjMxNzQgMjguNDgxMiA0NS4zMTU5IDI4LjY1NzQgNDYuMzE2NyAyOC42MTE5QzQ3LjMxNzUgMjguNTY2MyA0OC4yOTU5IDI4LjMwMDMgNDkuMTgyMiAyNy44MzI2QzUwLjAwNjIgMjcuNDI5OCA1MC43NDcyIDI2Ljg3NTYgNTEuMzY2OCAyNi4xOTg3QzUyLjc4NzQgMjYuMDQwNiA1NC4yNjE3IDI1Ljc3NzIgNTUuNjI3NSAyNS41NjZDNTUuODQ1NiAyNy40MTAyIDU3LjEwMjcgMjguNzc5OCA1OS45NDI5IDI4LjUxNjVDNjMuOTg1MyAyOC4xNTA4IDY3LjU5MDQgMjMuMzUyNSA2OC45NTYyIDIxLjAzNDdDNjguNjgyMyAyMy41MTE2IDY3LjA0NDUgMjguOTM4IDY5Ljg4NDYgMjguNjc0N0M3MC45ODAxIDI4LjU2OTUgNzAuNTQwMSAyOC40MTE0IDcwLjU5NDkgMjcuNDYzMkM3MC44Njg3IDI0LjE5NjQgNzMuNjU0MSAyMS40MDQxIDc2LjQzNzYgMTkuNzE3MkM3NS45NDU1IDIzLjcyMTkgNzYuMTA5OCAyNy4zMDYgNzguMDIxNSAyOC40MTE0QzgxLjUxNzEgMzAuNTE4OCA4Ni4zNzkzIDI0Ljk4NjQgODkuMTA5OSAyMS42MTQ0Qzg3Ljc0MDUgMjQuNjE3OSA4Ni45NzkxIDI4LjQxMTQgODkuMDAwMyAyOC45OTFDOTEuNDA0MSAyOS42NzU4IDkzLjMxNTcgMjUuNzc3MiA5NS41NTUxIDIyLjgyNThDOTUuODI5IDI0LjkzMzMgOTcuMzAzNCAyOC42MjE2IDEwMy4yMDMgMjguNjIxNkMxMDkuNTM5IDI4LjU2ODYgMTEzLjUyNyAyNC44ODAzIDExMy4zNjMgMjAuOTI4NkwxMTMuMzc0IDIwLjkzMDVaTTI3LjgyMTYgMjcuNTExN0MyNS42OTI2IDI2Ljc2NTYgMjMuNjEyNyAyNS44ODU1IDIxLjU5NDUgMjQuODc2NkMyMy40MjM0IDI0LjIzMTIgMjUuMjExMSAyMy40NzQ1IDI2Ljk0NzkgMjIuNjExQzI3LjEzNzUgMjQuMjYxMSAyNy40MjkzIDI1Ljg5NzggMjcuODIxNiAyNy41MTE3Wk00My45NTEyIDMwLjQ2NzZDNDMuODk2NCAzMC4zMDk1IDQzLjQ1OTEgMzAuNTIwNyA0My4wNzc1IDMwLjQ2NzZDNDEuOTI5OSAzMC4zMDk1IDQwLjQwMDggMjguNzgxNyAzOS45NjM1IDI2LjMwNDhDMzkuMTQxOSAyMS44MjQ3IDM5LjYzNTggMTcuNDAwMyA0MS4wMDE1IDEwLjgxMzZDNDEuMjc1NCA5LjU0OTE0IDQyLjE0OSA3LjM4ODYyIDM5LjM1ODIgNi45NjcxMkMzOC40ODQ2IDYuODYxOTggMzguOTIwOSA3LjI4MzQ3IDM4LjcwMjcgOC4zODk3OUMzNy42MDcyIDEzLjI5MDUgMzMuNDU4OSAxNi44MjA2IDI5LjMwNzggMTkuMTkxNUMyOC44NzA2IDEzLjYwNTkgMjkuMDM0IDcuMzM1NTkgMzAuMTI5NSAzLjU0MjExQzMxLjA2MDcgMC4zMjgzMTQgMzIuMTUyNSAwLjkwNzk4NyAzMC43ODY4IDAuMjIzMTY4QzI5LjQyMSAtMC40NjE2NSAyNy44MzcxIDAuNDMzNDYgMjYuNTgwOSAyLjg1NTQ3QzI1LjMyNDggNS4yNzc0OCAxOS41OTM0IDE4LjI5NjMgMTAuNDEzIDI3LjA5NTdDNS43MTY5NiAzMS41NzQgMS40NTQ1MiAyOS4yNTYyIDAuNjM0NzEgMjguNTcxNEMtMC4wNzU1NDUzIDI3Ljk5MTcgLTAuMjkzNzM0IDI4Ljg4NzcgMC41MjUxNTkgMjkuNzgyOEM0LjI5NDYyIDMzLjc4NzUgOS44NjYyIDMxLjUyIDExLjg4NjUgMjkuNTcxNkMxNy40NTUzIDI0LjE5NzMgMjMuOTU4MSAxMi42MDQ4IDI2LjU4NDYgNy43MDQ5N0MyNi4yNzQ5IDExLjk4ODYgMjYuMzQ3OSAxNi4yOTE0IDI2LjgwMjggMjAuNTYyQzI0LjY5MTYgMjEuNTU3NCAyMi40OTg1IDIyLjM2ODQgMjAuMjQ4IDIyLjk4NThDMTguOTM3IDIzLjMwMjIgMTguMTE3MiAyMy44Mjg4IDE4LjExNzIgMjQuNDA4NUMxOC4xMTcyIDI0Ljk4ODIgMTguOTkwOSAyNS41Njc5IDIwLjI0OCAyNi4xNDU3QzIyLjQ4NzQgMjcuMTk5OSAyOS4wOTcgMzAuMTUwNCAzMC42ODA5IDMxLjA5ODVDMzIuMDUwMyAzMS44ODg1IDMyLjc1NjkgMzEuMjU2NyAzMy4xMzk0IDMwLjQxMzdDMzMuNjg3MSAyOS4zMDc0IDMyLjIxMDkgMjguNjc2NSAzMC43OTA0IDI4LjMwNjJDMzAuMTY0NyAyNS45OTE5IDI5LjcyNjMgMjMuNjMwOCAyOS40Nzk1IDIxLjI0NTlDMzIuODExNiAxOS4yNDM2IDM2LjE0MzggMTYuNjA5NCAzOC4wMDA3IDEzLjI5MTRDMzcuNTA5NiAxNi4wMzQzIDM2LjMwNzIgMjUuNDYzNiAzOS4zNzAxIDI5LjQxNTNDMzkuNzkzNiAyOS45NjA3IDQwLjM0MDEgMzAuMzk3OCA0MC45NjQ5IDMwLjY5MDdDNDEuNTg5NiAzMC45ODM2IDQyLjI3NDggMzEuMTI0IDQyLjk2NDMgMzEuMTAwM0M0My43MjkzIDMxLjA0NzMgNDQuMDU5OCAzMC41NzM3IDQzLjk0NzUgMzAuNDY3NiIgZmlsbD0iIzU0NTg2MCIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzU4NDQ3XzQyNzA5Ij4KPHJlY3Qgd2lkdGg9IjExNy45NDYiIGhlaWdodD0iMzIiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==";
+
+  // Dark mode variants of V2 logos (#545860 -> #C2C6CE for visibility on dark backgrounds)
+  const _v2MobileLogoDark =
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC4wMjgzMjAzIiB3aWR0aD0iMzEuNjk1NCIgaGVpZ2h0PSIzMS42ODc2IiByeD0iNCIgZmlsbD0iIzAwQjZFRCIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNTg2NTNfMjAzODgwKSI+CjxtYXNrIGlkPSJtYXNrMF81ODY1M18yMDM4ODAiIHN0eWxlPSJtYXNrLXR5cGU6YWxwaGEiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9Ii0xMSIgeT0iLTIiIHdpZHRoPSI0NyIgaGVpZ2h0PSIzOSI+CjxwYXRoIGQ9Ik0yMi4wMTYxIDMxLjEwMTVDMTkuNTQ1MyAzMC4xOTY5IDE3LjEzMzggMjkuMTQgMTQuNzk1OCAyNy45MzY5QzE2LjkxODMgMjcuMTYzMSAxOC45ODc5IDI2LjI1MzIgMjAuOTkxNSAyNS4yMTMxQzIxLjE5NTkgMjcuMTk3NiAyMS41Mzc3IDI5LjE2NTggMjIuMDE0NiAzMS4xMDM2TTM1LjI4NCA2LjcxMTMyQzM0LjI1MDEgNi41ODE1OCAzNC43ODczIDcuMDU4OTYgMzQuNDk5MiA4LjQxMTU0QzMzLjI1MzcgMTQuMjQzMyAyOC40NDkzIDE4LjQ0NjYgMjMuNjI2MiAyMS4yNjY0QzIzLjEyMDggMTQuNTg4MSAyMy4zMjczIDcuMTczNjQgMjQuNTkzNyAyLjYyOTkyQzI1LjY2MjMgLTEuMjA1NjIgMjYuOTMzMSAtMC41MDE3MjkgMjUuMzU2OSAtMS4zMDc0QzIzLjY5NjIgLTIuMTU1MzYgMjEuOTE2NCAtMS4wMzUwMiAyMC40NzQ2IDEuODIyMUMxOS4wMzI3IDQuNjc5MjIgMTIuMzkyOSAyMC4xODkxIDEuNzc5MTMgMzAuNjYyMUMtMy42NDk3OCAzNi4wMjMgLTguNTYwMjggMzMuMjYxOSAtOS41NDM2OCAzMi40Mzc2Qy0xMC4zNDM3IDMxLjc2NjcgLTEwLjYzOSAzMi44MDI0IC05LjY0NjIxIDMzLjg2MzNDLTUuMjU1NTcgMzguNTYzMyAxLjE1ODkxIDM1Ljg2NjcgMy40OTQ2NyAzMy41NDkzQzkuOTQ5NTggMjcuMTQ0MSAxNy40NTQzIDEzLjM1NTkgMjAuNDkwNCA3LjUwNTUyQzIwLjEzNjkgMTIuNjAxIDIwLjIxODMgMTcuNzE3MSAyMC43MzM4IDIyLjc5ODlDMTguMjg4NSAyMy45OTAxIDE1LjczODIgMjQuOTU1OSAxMy4xMTQ5IDI1LjY4NEMxMS42MTAyIDI2LjA3NTQgMTAuNjc5NiAyNi42ODM5IDEwLjY1MjEgMjcuMzc1NkMxMC42MjI1IDI4LjEzMzMgMTEuNjMyNiAyOC43NzI2IDEzLjA5MzMgMjkuNDYwOEMxNS42OTI2IDMwLjY4NjUgMjMuMzA4NSAzNC4yNTgyIDI1LjE4NTEgMzUuMzM4NEMyNi43OTE2IDM2LjI2MzggMjcuNTc1NyAzNS41NDIgMjguMDUxNSAzNC41NDI4QzI4LjY3MzIgMzMuMjQwNCAyNi45Njg1IDMyLjQ4NzggMjUuMzE2NSAzMS45OTc1QzI0LjU4NzQgMjkuMjQ4NSAyNC4wOTIxIDI2LjQ0MzcgMjMuODM1NiAyMy42MTI1QzI3LjcwNzEgMjEuMjQ3MSAzMS41MTg3IDE4LjA5MzIgMzMuNzE1OCAxNC4xNjAyQzM0LjQyNTIgMTIuNzc3OSAzNC45NTI1IDExLjMxMDggMzUuMjg0OCA5Ljc5NDk0QzM1LjUxNDggOC44NjE0NSAzNS41Nzc2IDcuODk1MDcgMzUuNDcwMyA2LjkzOTk3QzM1LjQ3MDMgNi45Mzk5NyAzNS40NDE0IDYuNzMxMzkgMzUuMjg0OCA2LjcxMTMyIiBmaWxsPSIjQzJDNkNFIi8+CjwvbWFzaz4KPGcgbWFzaz0idXJsKCNtYXNrMF81ODY1M18yMDM4ODApIj4KPHJlY3QgeD0iMC4wMjgzMjAzIiB5PSItMC4wMDE5NTMxMiIgd2lkdGg9IjMxLjY5NTQiIGhlaWdodD0iMzEuNjk1NCIgcng9IjMuMDQ3NjIiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF81ODY1M18yMDM4ODAiPgo8cmVjdCB5PSIwLjAwNTg1OTM4IiB3aWR0aD0iMzIiIGhlaWdodD0iMzEuOTkyMiIgcng9IjQiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==";
+  const _v2DesktopLogoDark =
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTE4IiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMTE4IDMyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNTg0NDdfNDI3MDkpIj4KPHBhdGggZD0iTTExNy45NDYgMTZIMTA2Ljk3NFYyNi45NzE3SDExNy45NDZWMTZaIiBmaWxsPSIjMDBCNkVEIi8+CjxwYXRoIGQ9Ik00OS43OTY2IDI1LjMwMzZDNDguNzAxMSAyNS40MDg4IDQ3LjU1NzIgMjUuNTE0OCA0Ni4zNTQ5IDI1LjU2NjlDNDYuNzkyMiAyMi4yNDggNDguNTk0MyAxNy42NjczIDUwLjgzMzcgMTguMzk4N0M1Mi4xNDQ3IDE4LjgyMDIgNTEuNDM0NCAyMi43MTk4IDQ5Ljc5NTcgMjUuMzAxOEw0OS43OTY2IDI1LjMwMzZaTTQ3LjAwOTUgMjcuNTY3NEM0Ni42ODM4IDI3LjYyMDEgNDYuMzUxOSAyNy42MjAxIDQ2LjAyNjIgMjcuNTY3NEM0Ni4xMTEgMjcuNTA4NCA0Ni4xODAxIDI3LjQyOTYgNDYuMjI3OCAyNy4zMzc5QzQ2LjI3NTUgMjcuMjQ2MSA0Ni4zMDAzIDI3LjE0NDIgNDYuMzAwMSAyNy4wNDA4VjI2LjYxOTNDNDYuOTAwOCAyNi42MTkzIDQ3LjgyOTMgMjYuNTE0MiA0OC45NzY4IDI2LjQwODFDNDguNDcyMSAyNy4wMDczIDQ3Ljc3NzUgMjcuNDE2MyA0Ny4wMDk1IDI3LjU2NzRaTTYwLjY2NTkgMTkuNjY2QzYyLjA4NjQgMTguMzk4NyA2Mi43OTY3IDE4LjUwNjYgNjIuOTU3MyAxOC44MjNDNjMuMzM5OCAxOS41NjA4IDYxLjcwMTEgMjIuMTQyOCA1OC40Nzg1IDIzLjU2NTVDNTguODEwNCAyMi4wNzk3IDU5LjU3IDIwLjcyNCA2MC42NjMyIDE5LjY2Nkg2MC42NjU5Wk0xMTMuMzc0IDIwLjkzMDVDMTEzLjIxIDE4LjM0ODUgMTEwLjg2MiAxNy45MjcgMTEwLjUzNCAxOC42NjQ4QzExMC40MjUgMTguOTI4MSAxMTEuNDA4IDE4LjgyMyAxMTEuNDA4IDIwLjY2NzFDMTExLjQwOCAyMy42NzA3IDEwOC4yNCAyNy42MjIzIDEwNC4xOTYgMjcuNjIyM0MxMDIuNzkzIDI3LjcwNzEgMTAxLjQxMSAyNy4yNDQgMTAwLjM0MSAyNi4zMzAxQzk5LjI3MTkgMjUuNDE2MyA5OC41OTc1IDI0LjEyMjkgOTguNDYwMSAyMi43MjE2Qzk4LjI5NTcgMjEuNjE1MyA5OC41Njk2IDIwLjA4NjYgOTYuNjAzMiAyMC4yOTc4Qzk1LjIzMzggMjAuNDU1OSA5NC4wMzYgMjIuOTg0OSA5Mi4yODc4IDI1LjE0MzZDOTAuODEyNSAyNi45ODc4IDkwLjE1NyAyNi44Mjk2IDkwLjQ4NDcgMjUuMjQ4OEM5MC45MjIgMjMuMjQ2NCA5Mi42MTU1IDE4LjYwOTkgOTQuNTgxOSAxOC4yOTM2Qzk1LjUxMDQgMTguMTM1NCA5NS44MzgxIDE5LjY2NTEgOTYuMjI1MiAxOC43MTUxQzk2LjM2NDIgMTguMzgwNyA5Ni40MTg5IDE4LjAxNzEgOTYuMzg0NSAxNy42NTY1Qzk2LjM1MDEgMTcuMjk1OSA5Ni4yMjc2IDE2Ljk0OTQgOTYuMDI3OSAxNi42NDc0Qzk1LjgyODIgMTYuMzQ1MyA5NS41NTc0IDE2LjA5NzIgOTUuMjM5MyAxNS45MjQ3Qzk0LjkyMTIgMTUuNzUyMyA5NC41NjU3IDE1LjY2MDkgOTQuMjA0IDE1LjY1ODZDOTIuNzgzNSAxNS42NTg2IDkxLjA5IDE3LjEzNDMgODkuNjcwNCAxOC43NjcyQzg4LjQ2OSAyMC4yNDI5IDgyLjI5NTggMjguOTg5MiA3OS42NzM5IDI3LjA5MjlDNzguNDcyNSAyNi4xOTY5IDc4LjU3ODQgMjIuNjEyOCA3OS4zNDYyIDE4LjM5ODdDODAuNDU2IDE3LjkxNzYgODEuNjQ5OCAxNy42NjA2IDgyLjg1OTEgMTcuNjQyNkM4NC4wNjg0IDE3LjYyNDUgODUuMjY5MyAxNy44NDU4IDg2LjM5MyAxOC4yOTM2Qzg3LjEwMzMgMTguNjA5OSA4Ny4yMTQ2IDE4LjU1NjkgODYuODg1MSAxNy44MTkxQzg2LjQ0NzggMTYuNzEyOCA4My45OTAyIDE0Ljk3MzcgODAuMTEyMSAxNS43NjM3QzgwLjAwMjUgMTUuNzYzNyA3OS45NDc4IDE1LjgxNjcgNzkuODM4MiAxNS44MTY3QzgwLjE2NiAxNC40NDUzIDgwLjQ5MzcgMTMuMDI0NCA4MC45MzM3IDExLjY1MzlDODEuMzE2MiAxMC4zODk0IDgyLjM1NDIgOC4yMjg4NyA3OS41NjQzIDcuODYwNEM3OC42OTA3IDcuNzAyMjMgNzkuMDczMiA4LjEyMzcyIDc4Ljc0MjcgOS4yODMwN0M3OC4xOTUgMTEuMzkwNiA3Ny41NDEzIDE0LjEyODkgNzcuMDQ5MiAxNi45MjNDNzQuNTE3NiAxOC4zNjY4IDcyLjQ1MTYgMjAuNTA2MSA3MS4wOTUxIDIzLjA4ODJDNzEuNDEwNSAyMS44OTMyIDcxLjY0NzggMjAuNjc4OSA3MS44MDU0IDE5LjQ1MjlDNzEuODM2IDE5LjE0OTkgNzEuNzUyIDE4Ljg0NjQgNzEuNTY5OSAxOC42MDI0QzcxLjM4NzkgMTguMzU4NSA3MS4xMjEgMTguMTkxOCA3MC44MjIyIDE4LjEzNTRDNzAuMjIxNSAxNy45NzcyIDY5LjQ1MjggMTguMjQwNiA2OC43NDYyIDE5LjI0MTdDNjcuMDUyNyAyMS41NjA0IDY0LjkyMjkgMjUuMTk1NyA2MS42NDU1IDI2LjcyMzVDNTkuMjk2NSAyNy44Mjk5IDU4LjI1ODUgMjYuNzIzNSA1OC4yMDQ2IDI0Ljk4NjRDNTguNjE1NyAyNC44NzgxIDU5LjAxNzQgMjQuNzM3MSA1OS40MDYxIDI0LjU2NDlDNjMuNjY2NyAyMi43NzM3IDY1LjA4NzIgMjAuMDMzNSA2NC4wNDkyIDE4LjM0NzVDNjMuMDExMiAxNi43NjY3IDYwLjExNjMgMTcuMjQxMiA1Ny43Njc0IDE5LjYxMkM1Ni41Mjk5IDIwLjk4MTcgNTUuNzgwNiAyMi43MjM0IDU1LjYzNjYgMjQuNTY0OUM1NC42NTM0IDI0Ljc3NjEgNTMuNTYwNiAyNC45MzA2IDUyLjMwNDQgMjUuMDkxNUM1NC4yNzA5IDIxLjk4MjggNTQuMTA3NCAxNy43NjcgNTEuMjA4OSAxNy4wM0M0Ny44MjIgMTYuMTg3IDQ2LjEyODUgMTkuMzQ4NyA0NS40MTkxIDIxLjk4MjhDNDUuNjkzIDE5LjAzMjQgNDYuMTI5NCAxNi4wODEgNDYuNjc1MyAxMy4xODM1QzQ2Ljk0OTIgMTEuOTE5IDQ3LjgyMiA5Ljc1ODUxIDQ1LjAzMjEgOS4zOTAwNEM0NC4xNTg0IDkuMjMxODcgNDQuMjY3IDkuNjUzMzcgNDQuMzIxOCAxMC44MTI3QzQ0LjQzMTQgMTIuMzkzNiA0Mi42MjgzIDIxLjgyNTYgNDMuNTU2OCAyNS45MzU0QzQyLjM1NTQgMjYuMzAxMSA0MS44NjMzIDI3LjE5OTkgNDMuMzkyNCAyOC4wOTU5QzQ0LjMxNzQgMjguNDgxMiA0NS4zMTU5IDI4LjY1NzQgNDYuMzE2NyAyOC42MTE5QzQ3LjMxNzUgMjguNTY2MyA0OC4yOTU5IDI4LjMwMDMgNDkuMTgyMiAyNy44MzI2QzUwLjAwNjIgMjcuNDI5OCA1MC43NDcyIDI2Ljg3NTYgNTEuMzY2OCAyNi4xOTg3QzUyLjc4NzQgMjYuMDQwNiA1NC4yNjE3IDI1Ljc3NzIgNTUuNjI3NSAyNS41NjZDNTUuODQ1NiAyNy40MTAyIDU3LjEwMjcgMjguNzc5OCA1OS45NDI5IDI4LjUxNjVDNjMuOTg1MyAyOC4xNTA4IDY3LjU5MDQgMjMuMzUyNSA2OC45NTYyIDIxLjAzNDdDNjguNjgyMyAyMy41MTE2IDY3LjA0NDUgMjguOTM4IDY5Ljg4NDYgMjguNjc0N0M3MC45ODAxIDI4LjU2OTUgNzAuNTQwMSAyOC40MTE0IDcwLjU5NDkgMjcuNDYzMkM3MC44Njg3IDI0LjE5NjQgNzMuNjU0MSAyMS40MDQxIDc2LjQzNzYgMTkuNzE3MkM3NS45NDU1IDIzLjcyMTkgNzYuMTA5OCAyNy4zMDYgNzguMDIxNSAyOC40MTE0QzgxLjUxNzEgMzAuNTE4OCA4Ni4zNzkzIDI0Ljk4NjQgODkuMTA5OSAyMS42MTQ0Qzg3Ljc0MDUgMjQuNjE3OSA4Ni45NzkxIDI4LjQxMTQgODkuMDAwMyAyOC45OTFDOTEuNDA0MSAyOS42NzU4IDkzLjMxNTcgMjUuNzc3MiA5NS41NTUxIDIyLjgyNThDOTUuODI5IDI0LjkzMzMgOTcuMzAzNCAyOC42MjE2IDEwMy4yMDMgMjguNjIxNkMxMDkuNTM5IDI4LjU2ODYgMTEzLjUyNyAyNC44ODAzIDExMy4zNjMgMjAuOTI4NkwxMTMuMzc0IDIwLjkzMDVaTTI3LjgyMTYgMjcuNTExN0MyNS42OTI2IDI2Ljc2NTYgMjMuNjEyNyAyNS44ODU1IDIxLjU5NDUgMjQuODc2NkMyMy40MjM0IDI0LjIzMTIgMjUuMjExMSAyMy40NzQ1IDI2Ljk0NzkgMjIuNjExQzI3LjEzNzUgMjQuMjYxMSAyNy40MjkzIDI1Ljg5NzggMjcuODIxNiAyNy41MTE3Wk00My45NTEyIDMwLjQ2NzZDNDMuODk2NCAzMC4zMDk1IDQzLjQ1OTEgMzAuNTIwNyA0My4wNzc1IDMwLjQ2NzZDNDEuOTI5OSAzMC4zMDk1IDQwLjQwMDggMjguNzgxNyAzOS45NjM1IDI2LjMwNDhDMzkuMTQxOSAyMS44MjQ3IDM5LjYzNTggMTcuNDAwMyA0MS4wMDE1IDEwLjgxMzZDNDEuMjc1NCA5LjU0OTE0IDQyLjE0OSA3LjM4ODYyIDM5LjM1ODIgNi45NjcxMkMzOC40ODQ2IDYuODYxOTggMzguOTIwOSA3LjI4MzQ3IDM4LjcwMjcgOC4zODk3OUMzNy42MDcyIDEzLjI5MDUgMzMuNDU4OSAxNi44MjA2IDI5LjMwNzggMTkuMTkxNUMyOC44NzA2IDEzLjYwNTkgMjkuMDM0IDcuMzM1NTkgMzAuMTI5NSAzLjU0MjExQzMxLjA2MDcgMC4zMjgzMTQgMzIuMTUyNSAwLjkwNzk4NyAzMC43ODY4IDAuMjIzMTY4QzI5LjQyMSAtMC40NjE2NSAyNy44MzcxIDAuNDMzNDYgMjYuNTgwOSAyLjg1NTQ3QzI1LjMyNDggNS4yNzc0OCAxOS41OTM0IDE4LjI5NjMgMTAuNDEzIDI3LjA5NTdDNS43MTY5NiAzMS41NzQgMS40NTQ1MiAyOS4yNTYyIDAuNjM0NzEgMjguNTcxNEMtMC4wNzU1NDUzIDI3Ljk5MTcgLTAuMjkzNzM0IDI4Ljg4NzcgMC41MjUxNTkgMjkuNzgyOEM0LjI5NDYyIDMzLjc4NzUgOS44NjYyIDMxLjUyIDExLjg4NjUgMjkuNTcxNkMxNy40NTUzIDI0LjE5NzMgMjMuOTU4MSAxMi42MDQ4IDI2LjU4NDYgNy43MDQ5N0MyNi4yNzQ5IDExLjk4ODYgMjYuMzQ3OSAxNi4yOTE0IDI2LjgwMjggMjAuNTYyQzI0LjY5MTYgMjEuNTU3NCAyMi40OTg1IDIyLjM2ODQgMjAuMjQ4IDIyLjk4NThDMTguOTM3IDIzLjMwMjIgMTguMTE3MiAyMy44Mjg4IDE4LjExNzIgMjQuNDA4NUMxOC4xMTcyIDI0Ljk4ODIgMTguOTkwOSAyNS41Njc5IDIwLjI0OCAyNi4xNDU3QzIyLjQ4NzQgMjcuMTk5OSAyOS4wOTcgMzAuMTUwNCAzMC42ODA5IDMxLjA5ODVDMzIuMDUwMyAzMS44ODg1IDMyLjc1NjkgMzEuMjU2NyAzMy4xMzk0IDMwLjQxMzdDMzMuNjg3MSAyOS4zMDc0IDMyLjIxMDkgMjguNjc2NSAzMC43OTA0IDI4LjMwNjJDMzAuMTY0NyAyNS45OTE5IDI5LjcyNjMgMjMuNjMwOCAyOS40Nzk1IDIxLjI0NTlDMzIuODExNiAxOS4yNDM2IDM2LjE0MzggMTYuNjA5NCAzOC4wMDA3IDEzLjI5MTRDMzcuNTA5NiAxNi4wMzQzIDM2LjMwNzIgMjUuNDYzNiAzOS4zNzAxIDI5LjQxNTNDMzkuNzkzNiAyOS45NjA3IDQwLjM0MDEgMzAuMzk3OCA0MC45NjQ5IDMwLjY5MDdDNDEuNTg5NiAzMC45ODM2IDQyLjI3NDggMzEuMTI0IDQyLjk2NDMgMzEuMTAwM0M0My43MjkzIDMxLjA0NzMgNDQuMDU5OCAzMC41NzM3IDQzLjk0NzUgMzAuNDY3NiIgZmlsbD0iI0MyQzZDRSIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzU4NDQ3XzQyNzA5Ij4KPHJlY3Qgd2lkdGg9IjExNy45NDYiIGhlaWdodD0iMzIiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg==";
 
   let _slotParentEl: HTMLElement;
   let _rootEl: HTMLElement;
@@ -157,12 +168,12 @@
 
     // Check for elements with slot="banner" attribute
     _hasBannerSlot = Array.from(lightDomChildren).some(
-      (el) => el.getAttribute('slot') === 'banner'
+      (el) => el.getAttribute("slot") === "banner",
     );
 
     // Check for elements with slot="navigation" attribute
     _hasNavigationSlot = Array.from(lightDomChildren).some(
-      (el) => el.getAttribute('slot') === 'navigation'
+      (el) => el.getAttribute("slot") === "navigation",
     );
   }
 
@@ -175,7 +186,7 @@
 
     // Find all elements with slot="utilities" attribute
     _utilitiesSlotItems = Array.from(lightDomChildren).filter(
-      (el) => el.getAttribute('slot') === 'utilities'
+      (el) => el.getAttribute("slot") === "utilities",
     );
 
     _utilitiesItemCount = _utilitiesSlotItems.length;
@@ -190,7 +201,11 @@
 
     // Debounce the check to prevent infinite loops
     _utilitiesCheckTimeout = window.setTimeout(() => {
-      if (!_utilitiesPlaceholderEl || version !== "2" || _utilitiesItemCount < 2) {
+      if (
+        !_utilitiesPlaceholderEl ||
+        version !== "2" ||
+        _utilitiesItemCount < 2
+      ) {
         if (_showUtilitiesMenu !== false) {
           _showUtilitiesMenu = false;
         }
@@ -208,7 +223,9 @@
       // TABLET/DESKTOP: Space-based calculation
       // Get the header placeholder (parent container) width
       const shadowRoot = _utilitiesPlaceholderEl.getRootNode() as ShadowRoot;
-      const headerPlaceholder = shadowRoot?.querySelector('.v2-header-placeholder') as HTMLElement;
+      const headerPlaceholder = shadowRoot?.querySelector(
+        ".v2-header-placeholder",
+      ) as HTMLElement;
 
       if (!headerPlaceholder) {
         if (_showUtilitiesMenu !== false) {
@@ -221,7 +238,9 @@
 
       // Use minimum widths for predictable calculation
       // Service/phase wrapper has min-width: 200px and uses flex: 1, so reserve that space
-      const logoArea = shadowRoot?.querySelector('.v2-logo-area') as HTMLElement;
+      const logoArea = shadowRoot?.querySelector(
+        ".v2-logo-area",
+      ) as HTMLElement;
       const logoWidth = logoArea?.offsetWidth || (_mobile ? 32 : 118); // Fixed logo sizes
 
       const servicePhaseMinWidth = 200; // Minimum width for service area
@@ -230,10 +249,17 @@
 
       // Calculate available space for utilities using minimum service area width
       // This prevents the service area flex growing/shrinking from affecting the calculation
-      const availableWidth = headerWidth - logoWidth - servicePhaseMinWidth - headerPadding - gapBetweenElements;
+      const availableWidth =
+        headerWidth -
+        logoWidth -
+        servicePhaseMinWidth -
+        headerPadding -
+        gapBetweenElements;
 
       // Measure actual utility items
-      const utilitySlot = shadowRoot?.querySelector('slot[name="utilities"]') as HTMLSlotElement;
+      const utilitySlot = shadowRoot?.querySelector(
+        'slot[name="utilities"]',
+      ) as HTMLSlotElement;
       let totalItemsWidth = 0;
 
       if (utilitySlot) {
@@ -253,7 +279,9 @@
           // Fallback: estimate if items not yet rendered
           const estimatedItemWidth = 100;
           const gap = 12;
-          totalItemsWidth = (_utilitiesItemCount * estimatedItemWidth) + ((_utilitiesItemCount - 1) * gap);
+          totalItemsWidth =
+            _utilitiesItemCount * estimatedItemWidth +
+            (_utilitiesItemCount - 1) * gap;
         }
       }
 
@@ -266,7 +294,6 @@
       }
     }, 100); // 100ms debounce
   }
-
 
   function getChildren() {
     if (!_slotParentEl) return;
@@ -289,9 +316,10 @@
     // Use composedPath to check clicks through shadow DOM
     const path = event.composedPath();
     const clickedInsideUtilities = path.some((el) => {
-      return el instanceof Element && (
-        el.classList?.contains('v2-utilities-menu-button') ||
-        el.classList?.contains('v2-utilities-dropdown')
+      return (
+        el instanceof Element &&
+        (el.classList?.contains("v2-utilities-menu-button") ||
+          el.classList?.contains("v2-utilities-dropdown"))
       );
     });
 
@@ -418,12 +446,17 @@
         <div class="v2-logo-area">
           {#if url}
             <a href={url} data-testid="v2-logo-link">
-              <img alt="GoA Logo" class="v2-logo-mobile" src={_v2MobileLogo} />
-              <img alt="GoA Logo" class="v2-logo-desktop" src={_v2DesktopLogo} />
+              <div role="img" aria-label="GoA Logo" class="v2-logo-mobile" style="--_logo-default: url({_v2MobileLogo});"></div>
+              <div
+                role="img"
+                aria-label="GoA Logo"
+                class="v2-logo-desktop"
+                style="--_logo-default: url({_v2DesktopLogo});"
+              ></div>
             </a>
           {:else}
-            <img alt="GoA Logo" class="v2-logo-mobile" src={_v2MobileLogo} />
-            <img alt="GoA Logo" class="v2-logo-desktop" src={_v2DesktopLogo} />
+            <div role="img" aria-label="GoA Logo" class="v2-logo-mobile" style="--_logo-default: url({_v2MobileLogo});"></div>
+            <div role="img" aria-label="GoA Logo" class="v2-logo-desktop" style="--_logo-default: url({_v2DesktopLogo});"></div>
           {/if}
         </div>
 
@@ -440,17 +473,23 @@
           </div>
         </div>
 
-        <div class="v2-utilities-placeholder" bind:this={_utilitiesPlaceholderEl}>
+        <div
+          class="v2-utilities-placeholder"
+          bind:this={_utilitiesPlaceholderEl}
+        >
           {#if _showUtilitiesMenu}
             <!-- 2+ items: Show compact Menu button -->
             <button
               class="v2-utilities-menu-button"
-              on:click={() => _utilitiesMenuOpen = !_utilitiesMenuOpen}
+              on:click={() => (_utilitiesMenuOpen = !_utilitiesMenuOpen)}
               aria-expanded={_utilitiesMenuOpen}
               aria-label="Utilities menu"
             >
               Menu
-              <goa-icon type={_utilitiesMenuOpen ? "chevron-up" : "chevron-down"} size="small" />
+              <goa-icon
+                type={_utilitiesMenuOpen ? "chevron-up" : "chevron-down"}
+                size="small"
+              />
             </button>
 
             {#if _utilitiesMenuOpen}
@@ -468,7 +507,7 @@
       <!-- Navigation section - only show if content provided -->
       {#if _hasNavigationSlot}
         <AppHeaderNavigation
-          version={version}
+          {version}
           windowWidth={_windowWidth}
           mobile={_mobile}
         >
@@ -483,68 +522,62 @@
     class="container"
     bind:this={_rootEl}
     data-testid={testid}
-  style={`
+    style={`
   --max-content-width: ${maxcontentwidth || "100%"};
   --desktop-padding: ${maxcontentwidth && maxcontentwidth !== "100%" && _windowWidth > +maxcontentwidth ? "0" : "var(--goa-space-3xl)"};
 `}
-  class:show-menu={_showMenu}
-  class:mobile={_mobile}
-  class:tablet={_tablet}
-  class:desktop={_desktop}
->
-  <div class="layout">
-    <!-- Logo and optional heading link -->
-    {#if url}
-      <a href={url} class="header-logo-title-area" data-testid="url">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
-        {#if heading}
-          <span data-testid="title" class="title">{heading}</span>
-        {/if}
-      </a>
-    {:else}
-      <div class="header-logo-title-area">
-        <img alt="GoA Logo" class="image-mobile" src={_mobileLogo} />
-        <img alt="GoA Logo" class="image-desktop" src={_desktopLogo} />
-        {#if heading}
-          <span data-testid="title" class="title">{heading}</span>
-        {/if}
-      </div>
-    {/if}
-
-    <!-- Menu button for mobile -->
-    {#if _showToggleMenu && _mobile}
-      <div class="menu-toggle-area">
-        <button
-          on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
-          data-testid="menu-toggle"
-          bind:this={_menuButton}
-          class:menu-open={_showMenu}
-        >
-          Menu
-          {#if !_hasMenuClickHandler}
-            <goa-icon type={_showMenu ? "chevron-up" : "chevron-down"} mt="2" />
+    class:show-menu={_showMenu}
+    class:mobile={_mobile}
+    class:tablet={_tablet}
+    class:desktop={_desktop}
+  >
+    <div class="layout">
+      <!-- Logo and optional heading link -->
+      {#if url}
+        <a href={url} class="header-logo-title-area" data-testid="url">
+          <div
+            role="img"
+            aria-label="GoA Logo"
+            class="v2-logo-mobile"
+            style="--_logo-default:
+url({_v2MobileLogo});"
+          ></div>
+          <div
+            role="img"
+            aria-label="GoA Logo"
+            class="v2-logo-desktop"
+            style="--_logo-default:
+url({_v2DesktopLogo});"
+          ></div>
+          {#if heading}
+            <span data-testid="title" class="title">{heading}</span>
           {/if}
-        </button>
-      </div>
-    {/if}
+        </a>
+      {:else}
+        <div class="header-logo-title-area">
+          <div
+            role="img"
+            aria-label="GoA Logo"
+            class="v2-logo-mobile"
+            style="--_logo-default:
+url({_v2MobileLogo});"
+          ></div>
+          <div
+            role="img"
+            aria-label="GoA Logo"
+            class="v2-logo-desktop"
+            style="--_logo-default:
+url({_v2DesktopLogo});"
+          ></div>
+          {#if heading}
+            <span data-testid="title" class="title">{heading}</span>
+          {/if}
+        </div>
+      {/if}
 
-    <!-- Menu and menu button for tablet -->
-    {#if _showToggleMenu && _tablet}
-      <goa-popover
-        class="app-header-popover"
-        context="menu-toggle-area"
-        minwidth="16rem"
-        focusborderwidth="0"
-        borderradius="4"
-        padded="false"
-        tabindex="-1"
-        height="full"
-        position="below"
-        on:_close={hideMenu}
-        on:_open={showMenu}
-      >
-        <div slot="target" class="menu-toggle-area">
+      <!-- Menu button for mobile -->
+      {#if _showToggleMenu && _mobile}
+        <div class="menu-toggle-area">
           <button
             on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
             data-testid="menu-toggle"
@@ -560,33 +593,66 @@
             {/if}
           </button>
         </div>
+      {/if}
 
-        {#if _showMenu}
-          <div bind:this={_slotParentEl} data-testid="slot">
-            <slot />
+      <!-- Menu and menu button for tablet -->
+      {#if _showToggleMenu && _tablet}
+        <goa-popover
+          class="app-header-popover"
+          context="menu-toggle-area"
+          minwidth="16rem"
+          focusborderwidth="0"
+          borderradius="4"
+          padded="false"
+          tabindex="-1"
+          height="full"
+          position="below"
+          on:_close={hideMenu}
+          on:_open={showMenu}
+        >
+          <div slot="target" class="menu-toggle-area">
+            <button
+              on:click={_hasMenuClickHandler ? dispatchMenuClick : toggleMenu}
+              data-testid="menu-toggle"
+              bind:this={_menuButton}
+              class:menu-open={_showMenu}
+            >
+              Menu
+              {#if !_hasMenuClickHandler}
+                <goa-icon
+                  type={_showMenu ? "chevron-up" : "chevron-down"}
+                  mt="2"
+                />
+              {/if}
+            </button>
           </div>
-        {/if}
-      </goa-popover>
-    {/if}
 
-    <!--
+          {#if _showMenu}
+            <div bind:this={_slotParentEl} data-testid="slot">
+              <slot />
+            </div>
+          {/if}
+        </goa-popover>
+      {/if}
+
+      <!--
       Need to render slot content to allow mobile and tablet views to
       know whether or not to show the Menu button. `_slotContainer` provides
       a reference to determine if any slot children exist.
     -->
-    {#if !_showMenu && (_mobile || _tablet)}
-      <div bind:this={_slotParentEl} style="display: none">
-        <slot />
-      </div>
-    {/if}
+      {#if !_showMenu && (_mobile || _tablet)}
+        <div bind:this={_slotParentEl} style="display: none">
+          <slot />
+        </div>
+      {/if}
 
-    <!-- Mobile and desktop slot content -->
-    {#if (_showMenu && _mobile && !_hasMenuClickHandler) || _desktop}
-      <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
-        <slot />
-      </div>
-    {/if}
-  </div>
+      <!-- Mobile and desktop slot content -->
+      {#if (_showMenu && _mobile && !_hasMenuClickHandler) || _desktop}
+        <div bind:this={_slotParentEl} data-testid="slot" class="content-area">
+          <slot />
+        </div>
+      {/if}
+    </div>
   </div>
 {/if}
 
@@ -1091,13 +1157,15 @@
     display: flex;
     gap: var(--goa-app-header-logo-service-gap);
     align-items: center;
-    padding: var(--goa-app-header-padding-v) var(--goa-app-header-padding-h-desktop);
+    padding: var(--goa-app-header-padding-v)
+      var(--goa-app-header-padding-h-desktop);
     border-bottom: var(--goa-app-header-border-bottom);
   }
 
   .v2.mobile .v2-header-placeholder {
     gap: var(--goa-app-header-logo-service-gap-small-screen);
-    padding: var(--goa-app-header-padding-v) var(--goa-app-header-padding-h-mobile);
+    padding: var(--goa-app-header-padding-v)
+      var(--goa-app-header-padding-h-mobile);
     align-items: flex-start; /* Top-align logo and service name on mobile */
   }
 
@@ -1210,7 +1278,9 @@
     line-height: 26px;
     cursor: pointer;
     white-space: nowrap;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .v2 .v2-utilities-menu-button:hover {
@@ -1339,7 +1409,13 @@
     .v2 .v2-logo-desktop {
       display: block;
       height: var(--goa-app-header-logo-desktop-height, 32px);
-      width: auto;
+      width: 118px;
+      background-image: var(
+        --goa-app-header-logo-desktop,
+        var(--_logo-default)
+      );
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     .v2 .v2-logo-mobile {
@@ -1357,7 +1433,9 @@
       display: block;
       width: var(--goa-app-header-logo-mobile-size, 32px);
       height: var(--goa-app-header-logo-mobile-size, 32px);
+      background-image: var(--goa-app-header-logo-mobile, var(--_logo-default));
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
-
 </style>

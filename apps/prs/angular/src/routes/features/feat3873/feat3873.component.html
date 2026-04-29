@@ -1,0 +1,67 @@
+<goab-block gap="l" direction="column">
+  <goab-text tag="h1" size="heading-l">
+    Feature 3873 &mdash; GoabThemeService demo
+  </goab-text>
+  <goab-text tag="p" size="body-m">
+    This page demonstrates the Angular theme service shipped from
+    <code>&#64;abgov/angular-components</code>. No manual
+    <code>document.documentElement.setAttribute</code> in this component &mdash;
+    the service owns all DOM and localStorage side effects.
+  </goab-text>
+
+  <goab-callout type="information" heading="Current mode">
+    <goab-text tag="p" size="body-m">
+      The service exposes a signal. Current value: <strong>{{ theme.mode() }}</strong>.
+      Re-render is tracked automatically by Angular when the signal changes.
+    </goab-text>
+  </goab-callout>
+
+  <goab-container type="interactive" padding="relaxed">
+    <goab-text tag="h2" size="heading-m">Controls</goab-text>
+    <goab-block gap="m" direction="row">
+      <goab-button type="primary" (onClick)="toggle()">
+        Toggle ({{ theme.mode() === 'light' ? 'to dark' : 'to light' }})
+      </goab-button>
+      <goab-button
+        type="secondary"
+        [disabled]="theme.mode() === 'light'"
+        (onClick)="setLight()"
+      >
+        Force light
+      </goab-button>
+      <goab-button
+        type="secondary"
+        [disabled]="theme.mode() === 'dark'"
+        (onClick)="setDark()"
+      >
+        Force dark
+      </goab-button>
+    </goab-block>
+  </goab-container>
+
+  <goab-container type="interactive" padding="relaxed">
+    <goab-text tag="h2" size="heading-m">How to consume</goab-text>
+    <goab-text tag="p" size="body-m">
+      Inject the service, bind to the signal in the template:
+    </goab-text>
+    <pre style="overflow-x: auto">
+theme = inject(GoabThemeService);
+// template: &#123;&#123; theme.mode() &#125;&#125;
+// call:     theme.toggle() / theme.setMode('dark')
+    </pre>
+  </goab-container>
+
+  <goab-container type="info" padding="relaxed">
+    <goab-text tag="h2" size="heading-m">What the service does</goab-text>
+    <goab-text tag="p" size="body-m">
+      On first inject, reads initial mode from: localStorage &rarr; existing
+      <code>data-theme</code> attribute &rarr; system preference
+      (<code>prefers-color-scheme</code>) &rarr; default light.
+    </goab-text>
+    <goab-text tag="p" size="body-m">
+      On every change, an <code>effect()</code> syncs
+      <code>data-theme</code> on <code>&lt;html&gt;</code> and persists to
+      localStorage. Refresh the page &mdash; mode persists.
+    </goab-text>
+  </goab-container>
+</goab-block>

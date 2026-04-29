@@ -786,6 +786,21 @@
         </option>
       {/each}
     </select>
+    <svg
+      class="dropdown-native__chevron"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+      aria-hidden="true"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="48"
+        d="M112 184l144 144 144-144"
+      />
+    </svg>
   {:else}
     <slot />
     <!-- list and filter -->
@@ -1078,6 +1093,7 @@
     box-shadow: var(--goa-dropdown-border);
     border-radius: var(--goa-dropdown-border-radius);
     background-color: var(--goa-dropdown-color-bg);
+    color: var(--goa-dropdown-color-text);
     transition: var(--goa-dropdown-transition);
   }
 
@@ -1107,8 +1123,7 @@
     width: 100%;
   }
 
-  .dropdown-native::after {
-    content: "";
+  .dropdown-native__chevron {
     position: absolute;
     right: var(--goa-dropdown-space-icon-text);
     top: 50%;
@@ -1116,8 +1131,6 @@
     pointer-events: none;
     width: 1.5rem;
     height: 1.5rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144' /%3E%3C/svg%3E");
-    background-repeat: no-repeat;
   }
 
   .dropdown-native:has(:focus-visible) {

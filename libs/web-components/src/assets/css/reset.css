@@ -3,7 +3,7 @@ input,
 textarea,
 button,
 textarea {
-  background: #fff;
+  background: var(--goa-color-greyscale-white, #fff);
   font-family: var(--goa-font-family-sans);
   font-weight: 400;
   font-size: var(--goa-font-size-4);

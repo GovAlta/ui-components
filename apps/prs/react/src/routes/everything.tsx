@@ -1133,6 +1133,17 @@ export function EverythingRoute(): JSX.Element {
                 ))}
               </GoabDropdown>
             </GoabFormItem>
+            <GoabFormItem label="Native dropdown">
+              <GoabDropdown
+                name="native-countries"
+                native
+                onChange={handleDropdownChange}
+              >
+                <GoabDropdownItem value="ca" label="Canada" />
+                <GoabDropdownItem value="us" label="United States" />
+                <GoabDropdownItem value="mx" label="Mexico" />
+              </GoabDropdown>
+            </GoabFormItem>
           </GoabGrid>
         </GoabContainer>
         <GoabContainer type="interactive" padding="relaxed">
