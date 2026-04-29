@@ -1,1 +1,0 @@
-const r=e=>e.toLowerCase(),n=e=>e.replace(/([a-z])([A-Z])/g,"$1-$2").toLowerCase();function c(e,a=r){const t={};for(const[o,s]of Object.entries(e))s!==void 0&&(o.startsWith("data-")?t[o]=s:t[a(o)]=s);return t}export{n as k,r as l,c as t};
