@@ -54,6 +54,7 @@ export { sideMenuConfigurations } from "./side-menu";
 export { sideMenuGroupConfigurations } from "./side-menu-group";
 export { sideMenuHeadingConfigurations } from "./side-menu-heading";
 export { workSideMenuConfigurations } from "./work-side-menu";
+export { workSideNotificationPanelConfigurations } from "./work-side-notification-panel";
 export { menuButtonConfigurations } from "./menu-button";
 export { appHeaderConfigurations } from "./app-header";
 export { appHeaderMenuConfigurations } from "./app-header-menu";
@@ -122,6 +123,7 @@ import { sideMenuConfigurations } from "./side-menu";
 import { sideMenuGroupConfigurations } from "./side-menu-group";
 import { sideMenuHeadingConfigurations } from "./side-menu-heading";
 import { workSideMenuConfigurations } from "./work-side-menu";
+import { workSideNotificationPanelConfigurations } from "./work-side-notification-panel";
 import { menuButtonConfigurations } from "./menu-button";
 import { appHeaderConfigurations } from "./app-header";
 import { appHeaderMenuConfigurations } from "./app-header-menu";
@@ -196,6 +198,7 @@ export const configurationRegistry: ConfigurationRegistry = {
   "side-menu-group": sideMenuGroupConfigurations,
   "side-menu-heading": sideMenuHeadingConfigurations,
   "work-side-menu": workSideMenuConfigurations,
+  "work-side-notification-panel": workSideNotificationPanelConfigurations,
   "menu-button": menuButtonConfigurations,
   "app-header": appHeaderConfigurations,
   "app-header-menu": appHeaderMenuConfigurations,

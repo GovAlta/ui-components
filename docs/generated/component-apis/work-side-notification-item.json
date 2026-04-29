@@ -1,0 +1,76 @@
+{
+  "componentSlug": "work-side-notification-item",
+  "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideNotificationItem.svelte",
+  "props": [
+    {
+      "name": "type",
+      "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
+      "typeLabel": "GoabWorkSideNotificationItemType",
+      "values": ["default", "success", "critical", "warning", "info"],
+      "required": false,
+      "default": "default",
+      "description": ""
+    },
+    {
+      "name": "timestamp",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": true,
+      "default": null,
+      "description": ""
+    },
+    {
+      "name": "readStatus",
+      "type": "\"read\" | \"unread\"",
+      "typeLabel": "GoabWorkSideNotificationReadStatus",
+      "values": ["read", "unread"],
+      "required": false,
+      "default": "unread",
+      "description": ""
+    },
+    {
+      "name": "priority",
+      "type": "\"normal\" | \"urgent\"",
+      "typeLabel": "GoabWorkSideNotificationPriority",
+      "values": ["normal", "urgent"],
+      "required": false,
+      "default": "normal",
+      "description": ""
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    }
+  ],
+  "events": [
+    {
+      "name": "onClick",
+      "type": "(event: Event) => void",
+      "description": "",
+      "frameworks": ["react"]
+    },
+    {
+      "name": "_click",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": ["angular", "web-component"]
+    }
+  ],
+  "slots": []
+}

@@ -14,6 +14,8 @@ tags:
   - pattern
 components:
   - work-side-menu
+  - work-side-notification-panel
+  - work-side-notification-item
   - table
   - badge
   - tabs
@@ -89,6 +91,22 @@ Keep top-level navigation focused on the main areas of work. When a user opens a
 />
 
 <goa-button version="2" type="tertiary" size="compact" mt="l" mb="l" onclick="window.open('https://digital-service-demo-v2.netlify.app/workspace', '_blank')">View demo</goa-button>
+
+---
+
+## Notification panel
+
+Use the [notification panel](/components/work-side-notification-panel) to surface alerts and updates to staff without leaving their current task. The panel opens as a popover from the side menu, with tabs for filtering unread, urgent, and all notifications.
+
+Each notification shows a title, description, timestamp, and optional type badge. Urgent notifications are visually distinct so staff can prioritize. Staff can mark all as read or view all notifications from the panel footer.
+
+<img
+  src="/thumbnails/workspace-notification-panel.png"
+  alt="Workspace notification panel showing unread notifications in a popover from the side menu"
+  style="width: 100%; border-radius: 8px; border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);"
+/>
+
+<goa-button version="2" type="tertiary" size="compact" mt="l" mb="l" onclick="window.open('https://workspace-demo-v4.netlify.app/', '_blank')">View demo</goa-button>
 
 ---
 

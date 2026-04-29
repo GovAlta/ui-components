@@ -1,0 +1,132 @@
+<h2>Notification panel</h2>
+
+<h3>Basic notification panel</h3>
+<goab-work-side-menu
+  heading="My Application"
+  url="/"
+  (onNavigate)="handleNavigate($event)"
+  [primaryContent]="basicPrimaryTpl"
+  [secondaryContent]="basicSecondaryTpl">
+</goab-work-side-menu>
+
+<ng-template #basicPrimaryTpl>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #basicSecondaryTpl>
+  <goab-work-side-menu-item
+    icon="notifications"
+    label="Notifications"
+    badge="2"
+    type="success"
+    [popoverContent]="basicNotificationsTpl">
+  </goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #basicNotificationsTpl>
+  <goab-work-side-notification-panel
+    heading="Notifications"
+    activeTab="unread"
+    (onMarkAllRead)="handleMarkAllBasicNotificationsRead()"
+    (onViewAll)="handleViewAllBasicNotifications()">
+    @for (item of basicItems; track item.id) {
+      <goab-work-side-notification-item
+        [title]="item.title"
+        [description]="item.description"
+        [timestamp]="item.timestamp"
+        [type]="item.type"
+        [readStatus]="item.readStatus"
+        [priority]="item.priority"
+        (onClick)="handleClickBasicNotification(item.id)">
+      </goab-work-side-notification-item>
+    }
+  </goab-work-side-notification-panel>
+</ng-template>
+
+<h3>With urgent notifications</h3>
+<goab-work-side-menu
+  heading="My Application"
+  url="/"
+  (onNavigate)="handleNavigate($event)"
+  [primaryContent]="urgentPrimaryTpl"
+  [secondaryContent]="urgentSecondaryTpl">
+</goab-work-side-menu>
+
+<ng-template #urgentPrimaryTpl>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="list" label="Cases" url="/cases"></goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #urgentSecondaryTpl>
+  <goab-work-side-menu-item
+    icon="notifications"
+    label="Notifications"
+    badge="2"
+    type="emergency"
+    [popoverContent]="urgentNotificationsTpl">
+  </goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #urgentNotificationsTpl>
+  <goab-work-side-notification-panel
+    heading="Notifications"
+    activeTab="urgent"
+    (onMarkAllRead)="handleMarkAllUrgentNotificationsRead()"
+    (onViewAll)="handleViewAllUrgentNotifications()">
+    @for (item of urgentItems; track item.id) {
+      <goab-work-side-notification-item
+        [title]="item.title"
+        [description]="item.description"
+        [timestamp]="item.timestamp"
+        [type]="item.type"
+        [readStatus]="item.readStatus"
+        [priority]="item.priority"
+        (onClick)="handleClickUrgentNotification(item.id)">
+      </goab-work-side-notification-item>
+    }
+  </goab-work-side-notification-panel>
+</ng-template>
+
+<h3>Notification type badges</h3>
+<goab-work-side-menu
+  heading="My Application"
+  url="/"
+  (onNavigate)="handleNavigate($event)"
+  [primaryContent]="typesPrimaryTpl"
+  [secondaryContent]="typesSecondaryTpl">
+</goab-work-side-menu>
+
+<ng-template #typesPrimaryTpl>
+  <goab-work-side-menu-item icon="grid" label="Dashboard" url="/dashboard"></goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #typesSecondaryTpl>
+  <goab-work-side-menu-item
+    icon="notifications"
+    label="Notifications"
+    badge="5"
+    type="success"
+    [popoverContent]="typesNotificationsTpl">
+  </goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #typesNotificationsTpl>
+  <goab-work-side-notification-panel
+    heading="Notifications"
+    activeTab="all"
+    (onMarkAllRead)="handleMarkAllNotificationTypesRead()"
+    (onViewAll)="handleViewAllNotificationTypes()">
+    @for (item of allTypeItems; track item.id) {
+      <goab-work-side-notification-item
+        [title]="item.title"
+        [description]="item.description"
+        [timestamp]="item.timestamp"
+        [type]="item.type"
+        [readStatus]="item.readStatus"
+        [priority]="item.priority"
+        (onClick)="handleClickNotificationType(item.id)">
+      </goab-work-side-notification-item>
+    }
+  </goab-work-side-notification-panel>
+</ng-template>
