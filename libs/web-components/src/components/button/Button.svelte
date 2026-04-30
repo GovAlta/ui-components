@@ -19,7 +19,7 @@
   // Validators
   const [Types, validateType] = typeValidator(
     "Button type",
-    ["primary", "submit", "secondary", "tertiary", "start"],
+    ["primary", "submit", "secondary", "tertiary", "start", "text"],
     { required: true, deprecated: ["submit"] },
   );
   const [Sizes, validateSize] = typeValidator(
@@ -29,7 +29,7 @@
   );
   const [Variants, validateVariant] = typeValidator(
     "Button variant",
-    ["normal", "destructive", "inverse"],
+    ["normal", "destructive", "inverse", "dark"],
     { required: true },
   );
   const [Versions, validateVersion] = typeValidator(
@@ -44,13 +44,13 @@
   type Variant = (typeof Variants)[number];
   type Version = (typeof Versions)[number];
 
-  /** Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, and "start" for prominent call-to-action buttons. */
+  /** Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. */
   export let type: ButtonType = "primary";
 
   /** Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. */
   export let size: Size = "normal";
 
-  /** Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for dark backgrounds. */
+  /** Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. */
   export let variant: Variant = "normal";
 
   /** When true, prevents user interaction and applies disabled styling. */
@@ -108,6 +108,10 @@
     validateSize(size);
     validateVariant(variant);
     validateVersion(version);
+
+    if (variant === "dark" && type !== "text") {
+      console.warn(`[GoabButton] The "dark" variant only applies to type="text". It has no effect on type="${type}".`);
+    }
   });
 
   // =========
@@ -463,5 +467,78 @@
 
   button.v2 .text {
     padding-bottom: 0;
+  }
+
+  /* Text */
+  button.v2.text {
+    border: none;
+    background-color: transparent;
+    color: var(--goa-button-text-color-text);
+    text-decoration: var(--goa-button-text-text-decoration);
+    padding: var(--goa-button-text-padding);
+    height: auto;
+    font: var(--goa-button-text-font);
+    letter-spacing: var(--goa-button-text-letter-spacing);
+    border-radius: var(--goa-button-text-border-radius);
+  }
+  button.v2.text:hover {
+    color: var(--goa-button-text-hover-color-text);
+    background-color: transparent;
+  }
+  button.v2.text:focus-visible {
+    color: var(--goa-button-text-focus-color-text);
+    background-color: transparent;
+  }
+  button.v2.text:focus:not(:focus-visible) {
+    box-shadow: none;
+  }
+
+  button.v2.text.compact {
+    font: var(--goa-button-text-compact-font);
+    letter-spacing: var(--goa-button-text-compact-letter-spacing);
+  }
+
+  /* Destructive Text */
+  button.v2.text.destructive {
+    color: var(--goa-button-text-destructive-color-text);
+  }
+  button.v2.text.destructive:hover {
+    color: var(--goa-button-text-destructive-hover-color-text);
+  }
+  button.v2.text.destructive:focus-visible {
+    color: var(--goa-button-text-destructive-focus-color-text);
+  }
+
+  /* Inverse Text */
+  button.v2.text.inverse {
+    color: var(--goa-button-text-inverse-color-text);
+  }
+  button.v2.text.inverse:hover {
+    color: var(--goa-button-text-inverse-hover-color-text);
+  }
+  button.v2.text.inverse:focus-visible {
+    color: var(--goa-button-text-inverse-focus-color-text);
+  }
+
+  /* Dark Text */
+  button.v2.text.dark {
+    color: var(--goa-button-text-dark-color-text);
+  }
+  button.v2.text.dark:hover {
+    color: var(--goa-button-text-dark-hover-color-text);
+  }
+  button.v2.text.dark:focus-visible {
+    color: var(--goa-button-text-dark-focus-color-text);
+  }
+
+  /* Disabled Text */
+
+  button.v2.text:disabled {
+    color: var(--goa-button-text-disabled-color-text);
+    text-decoration: var(--goa-button-text-disabled-text-decoration);
+  }
+  button.v2.text.compact:disabled {
+    color: var(--goa-button-text-compact-disabled-color-text);
+    text-decoration: var(--goa-button-text-compact-disabled-text-decoration);
   }
 </style>

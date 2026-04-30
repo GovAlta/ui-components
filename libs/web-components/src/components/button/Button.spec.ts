@@ -56,7 +56,7 @@ describe("GoAButtonComponent", () => {
   });
 
   describe("type", () => {
-    ["primary", "secondary", "tertiary", "start"].forEach((type) => {
+    ["primary", "secondary", "tertiary", "start", "text"].forEach((type) => {
       it(`should render ${type} type`, async () => {
         const baseElement = render(GoAButton, { type });
         const button = await baseElement.findByRole("button");
@@ -68,7 +68,7 @@ describe("GoAButtonComponent", () => {
   });
 
   describe("variant", () => {
-    ["normal", "destructive"].forEach((variant) => {
+    ["normal", "destructive", "inverse", "dark"].forEach((variant) => {
       it(`should render ${variant} variant`, async () => {
         const baseElement = render(GoAButton, { variant });
         const button = await baseElement.findByRole("button");

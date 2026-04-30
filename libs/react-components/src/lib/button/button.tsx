@@ -37,11 +37,11 @@ declare module "react" {
 }
 
 export interface GoabButtonProps extends Margins, DataAttributes {
-  /** Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, and "start" for prominent call-to-action buttons. @default "primary" */
+  /** Sets the visual style of the button. Use "primary" for main actions, "secondary" for alternative actions, "tertiary" for low-emphasis actions, "start" for prominent call-to-action buttons, and "text" for text-only buttons. @default "primary" */
   type?: GoabButtonType;
   /** Controls the size of the button. Use "compact" for inline actions or space-constrained layouts. @default "normal" */
   size?: GoabButtonSize;
-  /** Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for dark backgrounds. @default "normal" */
+  /** Sets the color variant for semantic meaning. Use "destructive" for delete or irreversible actions, "inverse" for light-colored text on dark backgrounds, and "dark" for dark text color on text buttons only. Note: "dark" has no effect on non-text button types. @default "normal" */
   variant?: GoabButtonVariant;
   /** When true, prevents user interaction and applies disabled styling. */
   disabled?: boolean;
