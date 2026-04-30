@@ -11,7 +11,8 @@
       ],
       "required": false,
       "default": "interactive",
-      "description": "Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds."
+      "description": "@deprecated Use GoabButton instead. Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds.",
+      "deprecated": true
     },
     {
       "name": "leadingIcon",
@@ -19,7 +20,8 @@
       "typeLabel": "GoAIconType",
       "required": true,
       "default": null,
-      "description": "Icon displayed before the button text."
+      "description": "@deprecated Use GoabButton instead. Icon displayed before the button text.",
+      "deprecated": true
     },
     {
       "name": "trailingIcon",
@@ -27,7 +29,24 @@
       "typeLabel": "GoAIconType",
       "required": true,
       "default": null,
-      "description": "Icon displayed after the button text."
+      "description": "@deprecated Use GoabButton instead. Icon displayed after the button text.",
+      "deprecated": true
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "required": false,
+      "default": "false",
+      "description": "@deprecated Use GoabButton instead. When true, prevents user interaction and applies disabled styling.",
+      "deprecated": true
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "@deprecated Use GoabButton instead. Sets a data-testid attribute for automated testing.",
+      "deprecated": true
     },
     {
       "name": "mt",
@@ -35,7 +54,8 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Top margin."
+      "description": "@deprecated Use GoabButton instead. Top margin.",
+      "deprecated": true
     },
     {
       "name": "mr",
@@ -43,7 +63,8 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Right margin."
+      "description": "@deprecated Use GoabButton instead. Right margin.",
+      "deprecated": true
     },
     {
       "name": "mb",
@@ -51,7 +72,8 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Bottom margin."
+      "description": "@deprecated Use GoabButton instead. Bottom margin.",
+      "deprecated": true
     },
     {
       "name": "ml",
@@ -59,7 +81,8 @@
       "typeLabel": "Spacing",
       "required": false,
       "default": null,
-      "description": "Left margin."
+      "description": "@deprecated Use GoabButton instead. Left margin.",
+      "deprecated": true
     }
   ],
   "events": [

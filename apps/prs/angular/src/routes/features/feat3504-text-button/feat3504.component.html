@@ -1,0 +1,160 @@
+<main>
+  <goab-text tag="h1" mt="none">
+    feat(#3504): Add "text" type to Button component
+  </goab-text>
+  <goab-text>Demonstrates the new "text" type button variations. Requires design tokens from <a href="https://github.com/GovAlta/design-tokens/pull/156">GovAlta/design-tokens#156</a>.</goab-text>
+
+  <div style="display: flex; gap: 2rem; flex-direction: column; align-items: flex-start;">
+    <goab-block direction="row" gap="2xl">
+      <div style="display: flex; gap: 1rem; flex-direction: column; align-items: flex-start;">
+        <goab-text tag="h3">Regular button size</goab-text>
+
+        <goab-button type="text">Text Button</goab-button>
+
+        <goab-button type="text" [disabled]="true">
+          Disabled Text Button
+        </goab-button>
+
+        <goab-button type="text" variant="destructive">
+          Destructive Text Button
+        </goab-button>
+
+        <goab-button type="text" variant="destructive" [disabled]="true">
+          Destructive and Disabled Text Button
+        </goab-button>
+
+        <div style="background-color: #000; padding: 0.5rem; display: flex; flex-direction: column; gap: 1rem;">
+          <goab-button type="text" variant="inverse">
+            Inverse Text Button
+          </goab-button>
+
+          <goab-button type="text" variant="inverse" [disabled]="true">
+            Inverse and Disabled Text Button
+          </goab-button>
+        </div>
+
+        <goab-button type="text" variant="dark">
+          Dark Text Button
+        </goab-button>
+
+        <goab-button type="text" variant="dark" [disabled]="true">
+          Dark and Disabled Text Button
+        </goab-button>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-direction: column; align-items: flex-start;">
+        <goab-text tag="h3">Regular button size with icons</goab-text>
+
+        <goab-button type="text" leadingIcon="add">
+          Leading Icon
+        </goab-button>
+
+        <goab-button type="text" trailingIcon="arrow-forward">
+          Trailing Icon
+        </goab-button>
+
+        <goab-button type="text" leadingIcon="add" trailingIcon="arrow-forward">
+          Leading and Trailing Icons
+        </goab-button>
+
+        <goab-button type="text" leadingIcon="add" [disabled]="true">
+          Disabled + Leading Icon
+        </goab-button>
+
+        <goab-button type="text" variant="destructive" leadingIcon="trash">
+          Destructive + Leading Icon
+        </goab-button>
+
+        <div style="background-color: #000; padding: 0.5rem; display: flex; flex-direction: column; gap: 1rem;">
+          <goab-button type="text" variant="inverse" leadingIcon="pencil">
+            Inverse + Leading Icon
+          </goab-button>
+        </div>
+
+        <goab-button type="text" variant="dark" leadingIcon="add">
+          Dark + Leading Icon
+        </goab-button>
+      </div>
+    </goab-block>
+
+    <goab-block direction="row" gap="2xl">
+      <div style="display: flex; gap: 1rem; flex-direction: column; align-items: flex-start;">
+        <goab-text tag="h3">Compact button size</goab-text>
+
+        <goab-button type="text" size="compact">
+          Text Button
+        </goab-button>
+
+        <goab-button type="text" size="compact" [disabled]="true">
+          Disabled Text Button
+        </goab-button>
+
+        <goab-button type="text" size="compact" variant="destructive">
+          Destructive Text Button
+        </goab-button>
+
+        <goab-button type="text" size="compact" variant="destructive" [disabled]="true">
+          Destructive and Disabled Text Button
+        </goab-button>
+
+        <div style="background-color: #000; padding: 0.5rem; display: flex; flex-direction: column; gap: 1rem;">
+          <goab-button type="text" size="compact" variant="inverse">
+            Inverse Text Button
+          </goab-button>
+
+          <goab-button type="text" size="compact" variant="inverse" [disabled]="true">
+            Inverse and Disabled Text Button
+          </goab-button>
+        </div>
+
+        <goab-button type="text" size="compact" variant="dark">
+          Dark Text Button
+        </goab-button>
+
+        <goab-button type="text" size="compact" variant="dark" [disabled]="true">
+          Dark and Disabled Text Button
+        </goab-button>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-direction: column; align-items: flex-start;">
+        <goab-text tag="h3">Compact button size with icons</goab-text>
+
+        <goab-button type="text" size="compact" leadingIcon="add">
+          Leading Icon
+        </goab-button>
+
+        <goab-button type="text" size="compact" trailingIcon="arrow-forward">
+          Trailing Icon
+        </goab-button>
+
+        <goab-button type="text" size="compact" leadingIcon="add" trailingIcon="arrow-forward">
+          Leading and Trailing Icons
+        </goab-button>
+
+        <goab-button type="text" size="compact" leadingIcon="add" [disabled]="true">
+          Disabled + Leading Icon
+        </goab-button>
+
+        <goab-button type="text" size="compact" variant="destructive" leadingIcon="trash">
+          Destructive + Leading Icon
+        </goab-button>
+
+        <div style="background-color: #000; padding: 0.5rem; display: flex; flex-direction: column; gap: 1rem;">
+          <goab-button type="text" size="compact" variant="inverse" leadingIcon="pencil">
+            Inverse + Leading Icon
+          </goab-button>
+        </div>
+
+        <goab-button type="text" size="compact" variant="dark" leadingIcon="add">
+          Dark + Leading Icon
+        </goab-button>
+      </div>
+    </goab-block>
+    <goab-text tag="h3" mb="none">
+      Invalid states
+    </goab-text>
+    <goab-button type="secondary" variant="dark" size="compact">
+      This non-text button with "dark" variant should cause a console warning
+    </goab-button>
+  </div>
+</main>
