@@ -10,32 +10,42 @@
 />
 
 <script lang="ts">
+  import { onMount } from "svelte";
+
   import { calculateMargin, Spacing } from "../../common/styling";
   import { dispatch } from "../../common/utils";
   import { GoAIconType } from "../icon/Icon.svelte";
 
-  /** Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds. */
+  /** @deprecated Use GoabButton instead. Sets the color theme. 'interactive' for blue, 'light' for white on dark backgrounds. */
   export let color: "interactive" | "light" = "interactive";
-  /** Icon displayed before the button text. */
+  /** @deprecated Use GoabButton instead. Icon displayed before the button text. */
   export let leadingicon: GoAIconType;
-  /** Icon displayed after the button text. */
+  /** @deprecated Use GoabButton instead. Icon displayed after the button text. */
   export let trailingicon: GoAIconType;
+  /** @deprecated Use GoabButton instead. When true, prevents user interaction and applies disabled styling. */
   export let disabled: boolean = false;
+  /** @deprecated Use GoabButton instead. Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
-  /** Top margin. */
+  /** @deprecated Use GoabButton instead. Top margin. */
   export let mt: Spacing = null;
-  /** Right margin. */
+  /** @deprecated Use GoabButton instead. Right margin. */
   export let mr: Spacing = null;
-  /** Bottom margin. */
+  /** @deprecated Use GoabButton instead. Bottom margin. */
   export let mb: Spacing = null;
-  /** Left margin. */
+  /** @deprecated Use GoabButton instead. Left margin. */
   export let ml: Spacing = null;
-  /** Action identifier passed in click events for event delegation patterns. */
+  /** @deprecated Use GoabButton instead. Action identifier passed in click events for event delegation patterns. */
   export let action: string = "";
-  /** Single argument value passed with the action in click events. */
+  /** @deprecated Use GoabButton instead. Single argument value passed with the action in click events. */
   export let actionArg: string = "";
-  /** Multiple argument values passed with the action in click events. */
+  /** @deprecated Use GoabButton instead. Multiple argument values passed with the action in click events. */
   export let actionArgs: Record<string, unknown> = {};
+
+  onMount(() => {
+    console.warn(
+      "GoabLinkButton is deprecated and will be removed in a future release. Use GoabButton instead.",
+    );
+  });
 
   let _el: HTMLButtonElement;
 

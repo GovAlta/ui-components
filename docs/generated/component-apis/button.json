@@ -4,18 +4,19 @@
   "props": [
     {
       "name": "type",
-      "type": "\"primary\" | \"submit\" | \"secondary\" | \"tertiary\" | \"start\"",
+      "type": "\"primary\" | \"submit\" | \"secondary\" | \"tertiary\" | \"start\" | \"text\"",
       "typeLabel": "GoabButtonType",
       "values": [
         "primary",
         "submit",
         "secondary",
         "tertiary",
-        "start"
+        "start",
+        "text"
       ],
       "required": false,
       "default": "primary",
-      "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, and \"start\" for prominent call-to-action buttons."
+      "description": "Sets the visual style of the button. Use \"primary\" for main actions, \"secondary\" for alternative actions, \"tertiary\" for low-emphasis actions, \"start\" for prominent call-to-action buttons, and \"text\" for text-only buttons."
     },
     {
       "name": "size",
@@ -31,16 +32,17 @@
     },
     {
       "name": "variant",
-      "type": "\"normal\" | \"destructive\" | \"inverse\"",
+      "type": "\"normal\" | \"destructive\" | \"inverse\" | \"dark\"",
       "typeLabel": "GoabButtonVariant",
       "values": [
         "normal",
         "destructive",
-        "inverse"
+        "inverse",
+        "dark"
       ],
       "required": false,
       "default": "normal",
-      "description": "Sets the color variant for semantic meaning. Use \"destructive\" for delete or irreversible actions, \"inverse\" for dark backgrounds."
+      "description": "Sets the color variant for semantic meaning. Use \"destructive\" for delete or irreversible actions, \"inverse\" for light-colored text on dark backgrounds, and \"dark\" for dark text color on text buttons only. Note: \"dark\" has no effect on non-text button types."
     },
     {
       "name": "disabled",

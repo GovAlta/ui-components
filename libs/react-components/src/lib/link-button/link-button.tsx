@@ -18,8 +18,11 @@ declare module "react" {
 }
 
 interface GoALinkButtonProps extends Margins, DataAttributes {
+  /** @deprecated Use GoabButton instead. Sets the type of button. */
   type?: GoabLinkButtonType;
+  /** @deprecated Use GoabButton instead. Icon displayed before the button text. */
   leadingIcon?: GoabIconType;
+  /** @deprecated Use GoabButton instead. Icon displayed after the button text. */
   trailingIcon?: GoabIconType;
   children: ReactNode;
 }
