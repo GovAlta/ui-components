@@ -1,0 +1,445 @@
+<div style="padding: 2rem; display: flex; flex-direction: column; gap: 1rem; max-width: 72rem; margin: 0 auto;">
+  <goab-text tag="h5" mb="xs" color="secondary">Issue 3605</goab-text>
+  <goab-text tag="h1" mt="0" mb="0">
+    Use <code>:focus-visible</code> across interactive components
+  </goab-text>
+
+  <goab-block>
+    <goab-link version="2" trailingIcon="open">
+      <a href="https://github.com/GovAlta/ui-components/issues/3605" target="_blank" rel="noopener">
+        View on GitHub
+      </a>
+    </goab-link>
+  </goab-block>
+
+  <goab-text mb="0">
+    For every section: <strong>Tab</strong> should show the focus ring with the correct gap/offset.
+    <strong>Click</strong> should not leave a lingering ring. <strong>Mouse-down (<code>:active</code>)</strong>
+    on buttons should still show the pressed/focused look.
+  </goab-text>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 1. MicrositeHeader -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      1. MicrositeHeader — <code>a:focus</code> → <code>a:focus-visible</code>
+    </goab-text>
+    <goab-text mb="s">Tab through the links inside the header. Click any link.</goab-text>
+    <goab-microsite-header type="alpha" version="1" headerUrl="https://www.alberta.ca" feedbackUrl="#"></goab-microsite-header>
+    <div style="margin-top: var(--goa-space-m);">
+      <goab-microsite-header type="beta" version="2" headerUrl="https://www.alberta.ca" feedbackUrl="#"></goab-microsite-header>
+    </div>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 2. Chip + FilterChip -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      2. Chip — <code>.chip:focus</code> → <code>.chip:focus-visible</code>
+    </goab-text>
+    <goab-text mb="s">V1 Chip (deprecated, still in scope per brief).</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-chip content="Status: active"></goab-chip>
+      <goab-chip content="Priority: high" [deletable]="true"></goab-chip>
+      <goab-chip content="Owner: Tom"></goab-chip>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">FilterChip V2 (production)</goab-text>
+    <goab-text mb="s">
+      Chip div is <code>role="presentation"</code>; the close icon button is the focusable element.
+      It already uses <code>:focus-visible</code> (no change needed here).
+    </goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-filter-chip content="Status: active" version="2"></goab-filter-chip>
+      <goab-filter-chip content="Priority: high" version="2"></goab-filter-chip>
+      <goab-filter-chip content="Owner: Tom" version="2"></goab-filter-chip>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">FilterChip V1 (fixed in this PR)</goab-text>
+    <goab-text mb="s">
+      Whole chip is <code>tabindex="0" role="button"</code>. Removed <code>class:focused</code> binding;
+      outline now on <code>.chip:focus-visible .delete-icon</code>.
+    </goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-filter-chip content="Status: active" version="1"></goab-filter-chip>
+      <goab-filter-chip content="Priority: high" version="1"></goab-filter-chip>
+      <goab-filter-chip content="Owner: Tom" version="1"></goab-filter-chip>
+    </goab-block>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 3. Plain link reset -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      3. Plain link reset — use <code>:focus-visible</code> only
+    </goab-text>
+    <goab-text mb="s">
+      Unstyled anchors pick up the global reset from <code>assets/css/reset.css</code>.
+      Dropped both <code>:focus</code> and <code>:focus-within</code>.
+    </goab-text>
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+      <a href="#first">First link</a>
+      <a href="#second">Second link</a>
+      <a href="#third">Third link</a>
+    </div>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 4. TextArea error state -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      4. TextArea error state — <code>.error:focus</code> + V2 combined selector
+    </goab-text>
+    <goab-text mb="s">
+      Tab into each error text area. Click into each. The <code>:focus-within</code> container
+      pattern should still apply on focus (correct for text inputs).
+    </goab-text>
+    <goab-text tag="h4" mt="s" mb="xs">V1 error</goab-text>
+    <goab-textarea name="v1-error" [error]="true" version="1"></goab-textarea>
+    <goab-text tag="h4" mt="m" mb="xs">V2 error</goab-text>
+    <goab-textarea name="v2-error" [error]="true" version="2"></goab-textarea>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 5. Button variants -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      5. Button — drop <code>:focus</code> from combined selectors
+    </goab-text>
+    <goab-text mb="s">
+      Click and Tab each variant across V1 and V2. Watch for lingering rings after mouse-up.
+    </goab-text>
+
+    <goab-text tag="h4" mt="s" mb="xs">V1 — default</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-button type="primary" version="1">Primary</goab-button>
+      <goab-button type="secondary" version="1">Secondary</goab-button>
+      <goab-button type="tertiary" version="1">Tertiary</goab-button>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">V1 — destructive</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-button type="primary" variant="destructive" version="1">Primary destructive</goab-button>
+      <goab-button type="secondary" variant="destructive" version="1">Secondary destructive</goab-button>
+      <goab-button type="tertiary" variant="destructive" version="1">Tertiary destructive</goab-button>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">V1 — inverse (on dark bg)</goab-text>
+    <div style="background-color: var(--goa-color-greyscale-black, #1f1f1f); padding: 1rem; border-radius: 0.25rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+      <goab-button type="primary" variant="inverse" version="1">Primary inverse</goab-button>
+      <goab-button type="secondary" variant="inverse" version="1">Secondary inverse</goab-button>
+      <goab-button type="tertiary" variant="inverse" version="1">Tertiary inverse</goab-button>
+    </div>
+
+    <goab-text tag="h4" mt="m" mb="xs">V2 — default</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-button type="primary" version="2">Primary</goab-button>
+      <goab-button type="secondary" version="2">Secondary</goab-button>
+      <goab-button type="tertiary" version="2">Tertiary</goab-button>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">V2 — destructive</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-button type="primary" variant="destructive" version="2">Primary destructive</goab-button>
+      <goab-button type="secondary" variant="destructive" version="2">Secondary destructive</goab-button>
+      <goab-button type="tertiary" variant="destructive" version="2">Tertiary destructive</goab-button>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">V2 — inverse (on dark bg)</goab-text>
+    <div style="background-color: var(--goa-color-greyscale-black, #1f1f1f); padding: 1rem; border-radius: 0.25rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+      <goab-button type="primary" variant="inverse" version="2">Primary inverse</goab-button>
+      <goab-button type="secondary" variant="inverse" version="2">Secondary inverse</goab-button>
+      <goab-button type="tertiary" variant="inverse" version="2">Tertiary inverse</goab-button>
+    </div>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 6. Checkbox -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      6. Checkbox — drop <code>:has(:focus)</code> duplicates from V1
+    </goab-text>
+    <goab-text mb="s">
+      V1 had 10 rules pairing <code>:has(:focus-visible)</code> with <code>:has(:focus)</code>.
+      The <code>:focus</code> duplicate fired on mouse click. V2 already correct.
+    </goab-text>
+
+    <goab-text tag="h4" mt="s" mb="xs">V1 — normal</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-checkbox name="v1-a" text="Option A" version="1"></goab-checkbox>
+      <goab-checkbox name="v1-b" text="Option B" version="1" [checked]="true"></goab-checkbox>
+      <goab-checkbox name="v1-c" text="Option C" version="1"></goab-checkbox>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">V1 — error</goab-text>
+    <goab-checkbox name="v1-err" text="With error" version="1" [error]="true"></goab-checkbox>
+
+    <goab-text tag="h4" mt="m" mb="xs">V2 — normal</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-checkbox name="v2-a" text="Option A" version="2"></goab-checkbox>
+      <goab-checkbox name="v2-b" text="Option B" version="2" [checked]="true"></goab-checkbox>
+      <goab-checkbox name="v2-c" text="Option C" version="2"></goab-checkbox>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">V2 — error</goab-text>
+    <goab-checkbox name="v2-err" text="With error" version="2" [error]="true"></goab-checkbox>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 7. Link -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      7. Link — <code>::slotted(a:focus-visible)</code>
+    </goab-text>
+    <goab-text mb="s">
+      Ring is now on the slotted anchor directly (reliable across shadow DOM).
+      <strong>Trade-off:</strong> ring wraps the anchor text only, not the icons.
+    </goab-text>
+
+    <goab-text tag="h4" mt="s" mb="xs">Plain links</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-link version="2"><a href="#link-a">First link</a></goab-link>
+      <goab-link version="2"><a href="#link-b">Second link</a></goab-link>
+      <goab-link version="2"><a href="#link-c">Third link</a></goab-link>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">Links with leading icons</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-link version="2" leadingIcon="download"><a href="#link-dl">Download file</a></goab-link>
+      <goab-link version="2" leadingIcon="information-circle"><a href="#link-info">Learn more</a></goab-link>
+      <goab-link version="2" leadingIcon="open"><a href="#link-ext">Open in new tab</a></goab-link>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">Links with trailing icons</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-link version="2" trailingIcon="arrow-forward"><a href="#link-next">Continue</a></goab-link>
+      <goab-link version="2" trailingIcon="chevron-forward"><a href="#link-more">See more</a></goab-link>
+      <goab-link version="2" trailingIcon="open"><a href="#link-ext2">External resource</a></goab-link>
+    </goab-block>
+
+    <goab-text tag="h4" mt="m" mb="xs">Links with both icons</goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-link version="2" leadingIcon="download" trailingIcon="arrow-forward"><a href="#link-both">Download and continue</a></goab-link>
+    </goab-block>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 8. Notification -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      8. Notification — <code>::slotted(a:focus)</code> → <code>:focus-visible</code>
+    </goab-text>
+    <goab-text mb="s">
+      8 rules (V1 + V2 variants) styled slotted anchors on <code>:focus</code>. Now keyboard only.
+    </goab-text>
+
+    <goab-text tag="h4" mt="s" mb="xs">V1 Notifications</goab-text>
+    <goab-notification type="information">
+      Info notification with a <a href="#n-v1-info">link</a> inside.
+    </goab-notification>
+    <div style="margin-top: var(--goa-space-s);">
+      <goab-notification type="important">
+        Important notification with a <a href="#n-v1-imp">link</a> inside.
+      </goab-notification>
+    </div>
+
+    <goab-text tag="h4" mt="m" mb="xs">V2 Notifications</goab-text>
+    <goab-notification type="information" importance="high" version="2">
+      Information high with a <a href="#n-v2-info-h">link</a> inside.
+    </goab-notification>
+    <div style="margin-top: var(--goa-space-s);">
+      <goab-notification type="important" importance="high" version="2">
+        Important high with a <a href="#n-v2-imp-h">link</a> inside.
+      </goab-notification>
+    </div>
+    <div style="margin-top: var(--goa-space-s);">
+      <goab-notification type="emergency" importance="high" version="2">
+        Emergency high with a <a href="#n-v2-em-h">link</a> inside.
+      </goab-notification>
+    </div>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 9. Tooltip -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      9. Tooltip — <code>.tooltip:focus .tooltip-text</code> → <code>:focus-visible</code>
+    </goab-text>
+    <goab-text mb="s">
+      Previously mouse-clicking the tooltip trigger revealed the tooltip. Now hover for mouse,
+      keyboard focus for keyboard.
+    </goab-text>
+    <goab-block gap="m" alignment="center">
+      <goab-tooltip content="Helpful tip goes here" version="2">
+        <goab-button type="secondary" version="2">Hover or Tab me</goab-button>
+      </goab-tooltip>
+    </goab-block>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 10. Details -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      10. Details — <code>summary:focus</code> → <code>:focus-visible</code>
+    </goab-text>
+    <goab-text mb="s">
+      Previously clicking the summary left a hover-ish style. Now click just toggles open;
+      keyboard focus shows the focused look.
+    </goab-text>
+    <goab-details heading="Click me to expand" version="2">
+      Content inside the details component.
+    </goab-details>
+  </section>
+
+  <goab-divider mt="l" mb="l"></goab-divider>
+
+  <!-- 11. DataGrid -->
+  <section>
+    <goab-text tag="h2" mt="0" mb="xs">
+      11. DataGrid — realistic table usage
+    </goab-text>
+    <goab-text mb="s">
+      Typical pattern: <code>goab-data-grid</code> wrapping a <code>goab-table</code>. Focus styling
+      is JS-driven, now guarded with a keyboard-input tracker so mouse click doesn't show the ring.
+    </goab-text>
+    <goab-data-grid keyboardNav="table" keyboardIconPosition="right">
+      <goab-table width="100%" version="2">
+        <thead>
+          <tr data-grid="row">
+            <th data-grid="cell">Name</th>
+            <th data-grid="cell">Role</th>
+            <th data-grid="cell">Status</th>
+            <th data-grid="cell">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-grid="row">
+            <td data-grid="cell">Alice Johnson</td>
+            <td data-grid="cell">Developer</td>
+            <td data-grid="cell"><goab-badge version="2" type="success" content="Active"></goab-badge></td>
+            <td data-grid="cell"><goab-button version="2" type="tertiary" size="compact">View</goab-button></td>
+          </tr>
+          <tr data-grid="row">
+            <td data-grid="cell">Bob Smith</td>
+            <td data-grid="cell">Designer</td>
+            <td data-grid="cell"><goab-badge version="2" type="success" content="Active"></goab-badge></td>
+            <td data-grid="cell"><goab-button version="2" type="tertiary" size="compact">View</goab-button></td>
+          </tr>
+          <tr data-grid="row">
+            <td data-grid="cell">Carol White</td>
+            <td data-grid="cell">Manager</td>
+            <td data-grid="cell"><goab-badge version="2" type="information" content="Away"></goab-badge></td>
+            <td data-grid="cell"><goab-button version="2" type="tertiary" size="compact">View</goab-button></td>
+          </tr>
+          <tr data-grid="row">
+            <td data-grid="cell">David Brown</td>
+            <td data-grid="cell">Analyst</td>
+            <td data-grid="cell"><goab-badge version="2" type="success" content="Active"></goab-badge></td>
+            <td data-grid="cell"><goab-button version="2" type="tertiary" size="compact">View</goab-button></td>
+          </tr>
+        </tbody>
+      </goab-table>
+    </goab-data-grid>
+
+    <goab-text tag="h4" mt="l" mb="xs">DataGrid around cards (layout mode)</goab-text>
+    <goab-text mb="s">
+      <code>keyboardNav="layout"</code>. Each card is a row, cells include the checkbox, name,
+      badge, stat blocks, and menu button.
+    </goab-text>
+    <goab-data-grid keyboardNav="layout" keyboardIconPosition="right">
+      <goab-container version="2" mt="m" data-grid="row" maxWidth="100%">
+        <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start;">
+          <goab-checkbox version="2" data-grid="cell-0" name="user-1"></goab-checkbox>
+          <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0;">
+            <goab-block version="2" direction="row" gap="s" alignment="center">
+              <strong data-grid="cell-1">Mike Zwei</strong>
+              <goab-block data-grid="cell-2">
+                <goab-badge version="2" type="success" content="Removed"></goab-badge>
+              </goab-block>
+            </goab-block>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl);">
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-4">
+                <strong>Updated</strong>
+                <span>Jun 30, 2022 at 2:30 PM</span>
+              </goab-block>
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-5">
+                <strong>Email</strong>
+                <span>mike.zwei&#64;gmail.com</span>
+              </goab-block>
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-6">
+                <strong>Program</strong>
+                <span>Wee Wild Ones Curry</span>
+              </goab-block>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl);">
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-7">
+                <strong>Program ID</strong>
+                <span>74528567</span>
+              </goab-block>
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-8">
+                <strong>Service access</strong>
+                <span>Claims Adjustments</span>
+              </goab-block>
+            </div>
+          </div>
+          <goab-menu-button version="2" data-grid="cell-3" text="Actions" type="tertiary" size="compact">
+            <goab-menu-action version="2" action="open" text="Open"></goab-menu-action>
+            <goab-menu-action version="2" action="delete" text="Delete"></goab-menu-action>
+          </goab-menu-button>
+        </div>
+      </goab-container>
+
+      <goab-container version="2" mt="m" data-grid="row" maxWidth="100%">
+        <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start;">
+          <goab-checkbox version="2" data-grid="cell-0" name="user-2"></goab-checkbox>
+          <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0;">
+            <goab-block version="2" direction="row" gap="s" alignment="center">
+              <strong data-grid="cell-1">Emma Stroman</strong>
+              <goab-block data-grid="cell-2">
+                <goab-badge version="2" type="emergency" content="To be removed"></goab-badge>
+              </goab-block>
+            </goab-block>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl);">
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-4">
+                <strong>Updated</strong>
+                <span>Nov 28, 2021 at 1:30 PM</span>
+              </goab-block>
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-5">
+                <strong>Email</strong>
+                <span>emma.stroman&#64;gmail.com</span>
+              </goab-block>
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-6">
+                <strong>Program</strong>
+                <span>Fort McMurray</span>
+              </goab-block>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl);">
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-7">
+                <strong>Program ID</strong>
+                <span>74522643</span>
+              </goab-block>
+              <goab-block version="2" direction="column" gap="xs" data-grid="cell-8">
+                <strong>Service access</strong>
+                <span>Claims Adjustments</span>
+              </goab-block>
+            </div>
+          </div>
+          <goab-menu-button version="2" data-grid="cell-3" text="Actions" type="tertiary" size="compact">
+            <goab-menu-action version="2" action="open" text="Open"></goab-menu-action>
+            <goab-menu-action version="2" action="delete" text="Delete"></goab-menu-action>
+          </goab-menu-button>
+        </div>
+      </goab-container>
+    </goab-data-grid>
+  </section>
+</div>

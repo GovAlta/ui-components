@@ -194,18 +194,13 @@
     color: var(--goa-link-color-light-visited, #9D8EBB) !important;
   }
 
-  /* Focus */
-  .link:focus-within {
+  /* Focus — ring on the slotted anchor directly. Container-scoped :focus-within / :has
+     can't reach keyboard-only semantics through the slot boundary reliably, so style
+     the focusable element itself. */
+  .link :global(::slotted(a:focus-visible)) {
     border-radius: var(--goa-link-border-radius-focus, var(--goa-border-radius-s));
     outline: var(--goa-link-border-focus, var(--goa-border-width-l) solid var(--goa-color-interactive-focus));
     outline-offset: var(--goa-link-focus-offset, var(--goa-space-3xs));
-  }
-
-  .link :global(::slotted(a:focus-visible)),
-  .link :global(::slotted(a:focus-within)),
-  .link :global(::slotted(a:focus)) {
-    outline: none !important;
-    outline-offset: 0 !important;
     box-shadow: none !important;
   }
 </style>

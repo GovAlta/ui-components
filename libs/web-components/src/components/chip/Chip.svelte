@@ -136,7 +136,7 @@
     ); /* acumin font requires this to allow for vertical alignment  */
   }
 
-  .chip:focus {
+  .chip:focus-visible {
     outline: var(--goa-border-width-m) solid var(--goa-color-interactive-focus);
     background-color: var(--goa-color-greyscale-white);
   }

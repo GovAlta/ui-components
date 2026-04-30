@@ -1,0 +1,52 @@
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import {
+  GoabBadge,
+  GoabBlock,
+  GoabButton,
+  GoabCheckbox,
+  GoabChip,
+  GoabContainer,
+  GoabDataGrid,
+  GoabDetails,
+  GoabDivider,
+  GoabFilterChip,
+  GoabLink,
+  GoabMenuAction,
+  GoabMenuButton,
+  GoabMicrositeHeader,
+  GoabNotification,
+  GoabTable,
+  GoabText,
+  GoabTextArea,
+  GoabTooltip,
+} from "@abgov/angular-components";
+
+@Component({
+  standalone: true,
+  selector: "abgov-bug3605",
+  templateUrl: "./bug3605.component.html",
+  imports: [
+    CommonModule,
+    GoabBadge,
+    GoabBlock,
+    GoabButton,
+    GoabCheckbox,
+    GoabChip,
+    GoabContainer,
+    GoabDataGrid,
+    GoabDetails,
+    GoabDivider,
+    GoabFilterChip,
+    GoabLink,
+    GoabMenuAction,
+    GoabMenuButton,
+    GoabMicrositeHeader,
+    GoabNotification,
+    GoabTable,
+    GoabText,
+    GoabTextArea,
+    GoabTooltip,
+  ],
+})
+export class Bug3605Component {}

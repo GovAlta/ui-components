@@ -67,7 +67,7 @@ a:hover {
   color: var(--goa-color-interactive-hover);
 }
 
-a:focus-visible, a:focus-within, a:focus {
+a:focus-visible {
   outline: 3px solid var(--goa-color-interactive-focus);
   outline-offset: 1px;
 }

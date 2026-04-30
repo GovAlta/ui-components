@@ -105,7 +105,6 @@
     data-testid={testid}
     class="chip"
     class:error={_error}
-    class:focused={_focused}
     style={calculateMargin(mt, mr, mb, ml)}
     tabindex="0"
     role="button"
@@ -162,8 +161,14 @@
     touch-action: manipulation;
   }
 
-  .chip.focused {
+  .chip:focus-visible {
+    outline: none;
+  }
+
+  .chip:focus-visible .delete-icon {
     outline: var(--goa-border-width-l) solid var(--goa-color-interactive-focus);
+    outline-offset: 0.125rem;
+    border-radius: 50%;
   }
 
   .chip.error {
