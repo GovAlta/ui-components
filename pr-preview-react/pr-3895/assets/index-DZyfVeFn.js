@@ -75346,6 +75346,21 @@ function Feat3504TextButtonRoute() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", children: "Leading Icon" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", trailingIcon: "arrow-forward", children: "Leading and Trailing Icons" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              style: {
+                backgroundColor: "#000",
+                padding: "0.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem"
+              },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
+            }
+          ),
           /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", children: "Text Button" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", disabled: true, children: "Disabled Text Button" }),
@@ -75378,6 +75393,21 @@ function Feat3504TextButtonRoute() {
               leadingIcon: "add",
               trailingIcon: "arrow-forward",
               children: "Leading and Trailing Icons"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              style: {
+                backgroundColor: "#000",
+                padding: "0.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem"
+              },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
             }
           )
         ]
