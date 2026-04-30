@@ -202,12 +202,12 @@ const finalProps = combinedMarginProp
     padding: var(--goa-space-m) 0;
   }
 
-  .prop-row:last-of-type {
+  .prop-row.is-last-visible {
     border-bottom: none;
     padding-bottom: 0;
   }
 
-  .prop-row:first-of-type {
+  .prop-row.is-first-visible {
     padding-top: 0;
   }
 
@@ -279,6 +279,19 @@ const finalProps = combinedMarginProp
     webComponents: "angular", // Web Components use the same event names as Angular (_prefix)
   };
 
+  function markFirstAndLastVisibleRows() {
+    document.querySelectorAll(".api-section goa-data-grid").forEach((grid) => {
+      const rows = grid.querySelectorAll<HTMLElement>(".prop-row");
+      rows.forEach((r) => {
+        r.classList.remove("is-first-visible");
+        r.classList.remove("is-last-visible");
+      });
+      const visible = Array.from(rows).filter((r) => r.style.display !== "none");
+      visible[0]?.classList.add("is-first-visible");
+      visible[visible.length - 1]?.classList.add("is-last-visible");
+    });
+  }
+
   function filterEventsByFramework(framework: string) {
     const mapped = frameworkMap[framework] || "react";
     document.querySelectorAll("[data-frameworks]").forEach((row) => {
@@ -287,6 +300,7 @@ const finalProps = combinedMarginProp
       if (!frameworks) return; // No framework filter, always show
       el.style.display = frameworks.includes(mapped) ? "" : "none";
     });
+    markFirstAndLastVisibleRows();
   }
 
   // Apply on load

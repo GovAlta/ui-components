@@ -219,6 +219,13 @@ export const buttonConfigurations: ComponentConfigurations = {
 
 This is a common source of errors when writing configuration code since all three are in the same file.
 
+**Preview customization:** Two optional fields on `ComponentConfigurations` let you customize the sandbox preview without affecting the code snippet users see:
+
+- `previewStyle` — CSS applied to the preview container (e.g. background color, flex layout). Example: workspace components use a grey background with a content card to simulate the app layout.
+- `previewWrapper` — HTML template that wraps the component code in the preview only. Use `{{slot}}` as the placeholder for the component code. The code snippet shown to users contains just the component code, not the wrapper.
+
+See `work-side-notification-panel.ts` or `work-side-menu.ts` for examples.
+
 ---
 
 ## How to: common changes
@@ -289,19 +296,11 @@ Result: the Tabs page shows "Tab Props", "Tab Slots" (and "Tab Events" if any ex
 2. Add its slug to the parent's `relatedComponents` array
 3. Ensure API data exists. If the Svelte component has its own directory (`libs/web-components/src/components/my-sub/`), the extraction script handles it automatically. If it's a nested file inside the parent's directory (like `WorkSideMenuGroup.svelte` inside `work-side-menu/`), you need to manually create the API JSON in `generated/component-apis/my-sub.json`
 
-**Current subcomponent mappings:**
+To see all current subcomponent mappings, search for `subcomponent: true` in the MDX files:
 
-| Parent         | Subcomponents                             |
-| -------------- | ----------------------------------------- |
-| Header         | App Header Menu                           |
-| File uploader  | File Upload Card                          |
-| Footer         | Footer Meta Section, Footer Nav Section   |
-| Form stepper   | Form Step                                 |
-| Menu button    | Menu Action                               |
-| Radio          | Radio Item                                |
-| Side menu      | Side Menu Group, Side Menu Heading        |
-| Tabs           | Tab                                       |
-| Work Side Menu | Work Side Menu Group, Work Side Menu Item |
+```bash
+grep -rl "subcomponent: true" docs/src/content/components/
+```
 
 ### Hide a component from navigation
 

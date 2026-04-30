@@ -1,0 +1,61 @@
+{
+  "componentSlug": "work-side-notification-panel",
+  "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideNotificationPanel.svelte",
+  "props": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "default": "Notifications",
+      "description": ""
+    },
+    {
+      "name": "activeTab",
+      "type": "\"unread\" | \"urgent\" | \"all\"",
+      "typeLabel": "GoabWorkSideNotificationActiveTabType",
+      "values": ["unread", "urgent", "all"],
+      "required": false,
+      "default": "unread",
+      "description": ""
+    },
+    {
+      "name": "testId",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": ""
+    }
+  ],
+  "events": [
+    {
+      "name": "onMarkAllRead",
+      "type": "() => void",
+      "description": "",
+      "frameworks": ["react"]
+    },
+    {
+      "name": "_markAllRead",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": ["angular", "web-component"]
+    },
+    {
+      "name": "onViewAll",
+      "type": "() => void",
+      "description": "",
+      "frameworks": ["react"]
+    },
+    {
+      "name": "_viewAll",
+      "type": "CustomEvent",
+      "description": "",
+      "frameworks": ["angular", "web-component"]
+    }
+  ],
+  "slots": [
+    {
+      "name": "default",
+      "description": ""
+    }
+  ]
+}
