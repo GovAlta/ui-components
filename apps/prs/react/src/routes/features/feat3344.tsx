@@ -9,7 +9,7 @@
  * - V2 focus ring on icon only (not whole button)
  */
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   GoabBlock,
   GoabDetails,
@@ -17,8 +17,6 @@ import {
   GoabTable,
   GoabTableSortHeader,
 } from "@abgov/react-components";
-// ?url suffix tells Vite to resolve the path without injecting the CSS
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
 import type { GoabTableSortEntry } from "@abgov/ui-components-common";
 
@@ -51,16 +49,6 @@ function sortData(data: RowData[], sorts: GoabTableSortEntry[]): RowData[] {
 }
 
 export function Feat3344Route() {
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
-
   const [currentSorts, setCurrentSorts] = useState<GoabTableSortEntry[]>([]);
   const [multiSorts, setMultiSorts] = useState<GoabTableSortEntry[]>([]);
   const [test3Sorts, setTest3Sorts] = useState<GoabTableSortEntry[]>([]);

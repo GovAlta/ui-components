@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, OnDestroy } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   GoabIconButton,
   GoabWorkSideMenu,
@@ -46,25 +46,8 @@ type Notification = {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class Feat2885Component implements OnInit, OnDestroy {
+export class Feat2885Component {
   menuOpen = true;
-  private v2TokensLink: HTMLLinkElement | null = null;
-
-  ngOnInit() {
-    // Dynamically load v2 design tokens only while this page is mounted,
-    // so they don't leak into other routes in the SPA.
-    this.v2TokensLink = document.createElement("link");
-    this.v2TokensLink.rel = "stylesheet";
-    this.v2TokensLink.href = "/v2-tokens/tokens.css";
-    document.head.appendChild(this.v2TokensLink);
-  }
-
-  ngOnDestroy() {
-    if (this.v2TokensLink) {
-      document.head.removeChild(this.v2TokensLink);
-      this.v2TokensLink = null;
-    }
-  }
 
   notifications: Notification[] = [
     {

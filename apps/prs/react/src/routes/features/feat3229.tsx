@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   GoabBadge,
   GoabBlock,
@@ -9,7 +9,6 @@ import {
 } from "@abgov/react-components";
 
 import { GoabMenuButtonOnActionDetail } from "@abgov/ui-components-common";
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
 // Menu actions with icon + text
 const menuActionsWithIcons = (
@@ -33,49 +32,6 @@ const menuActionsTextOnly = (
 
 export function Feat3229Route() {
   const [lastAction, setLastAction] = useState<string>("");
-
-  useEffect(() => {
-    // Load V2 tokens
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-
-    // Save deleted rules so we can restore them on cleanup
-    const deletedRules: Array<{ sheet: CSSStyleSheet; index: number; cssText: string }> =
-      [];
-
-    // Remove V1 token definitions (:root rules) from all other stylesheets,
-    // keeping component styles intact
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss) => {
-        if (ss.ownerNode === link) return; // skip V2 stylesheet
-        try {
-          for (let i = ss.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss, index: i, cssText: rule.cssText });
-              ss.deleteRule(i);
-            }
-          }
-        } catch (e) {
-          // skip cross-origin sheets
-        }
-      });
-    };
-
-    return () => {
-      document.head.removeChild(link);
-      // Restore V1 :root rules in reverse order to maintain correct indices
-      deletedRules.reverse().forEach(({ sheet, index, cssText }) => {
-        try {
-          sheet.insertRule(cssText, index);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    };
-  }, []);
 
   const handleAction = (detail: GoabMenuButtonOnActionDetail, label?: string) => {
     const source = label ? ` (${label})` : "";
