@@ -75481,7 +75481,7 @@ function Feat3504TextButtonRoute() {
     )
   ] });
 }
-const feat3504TextButton_route = {
+const feat3504_route = {
   type: "feature",
   id: "3504",
   path: "features/3504",
@@ -75490,7 +75490,7 @@ const feat3504TextButton_route = {
 };
 const __vite_glob_0_145 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: feat3504TextButton_route
+  default: feat3504_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat3529Route() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { padding: "2rem" }, children: [
@@ -76168,7 +76168,7 @@ const routeModules = /* @__PURE__ */ Object.assign({
   "./routes/features/feat3407SkipOnFocusTab.route.ts": __vite_glob_0_142,
   "./routes/features/feat3407StackOnMobile.route.ts": __vite_glob_0_143,
   "./routes/features/feat3478.route.ts": __vite_glob_0_144,
-  "./routes/features/feat3504-text-button.route.ts": __vite_glob_0_145,
+  "./routes/features/feat3504.route.ts": __vite_glob_0_145,
   "./routes/features/feat3529.route.ts": __vite_glob_0_146,
   "./routes/features/feat3544.route.ts": __vite_glob_0_147,
   "./routes/features/featV2Checkbox.route.ts": __vite_glob_0_148,
