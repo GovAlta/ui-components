@@ -20517,7 +20517,7 @@ function qc(t, e, o) {
   const [a, c] = Ae("Button type", ["primary", "submit", "secondary", "tertiary", "start", "text"], { required: true, deprecated: ["submit"] }), [d, s] = Ae("Button size", ["normal", "compact"], { required: true }), [u, g] = Ae("Button variant", ["normal", "destructive", "inverse", "dark"], { required: true }), [v, m] = Ae("Button version", ["1", "2"], { required: true });
   let { type: b = "primary" } = e, { size: w = "normal" } = e, { variant: p = "normal" } = e, { disabled: k = "false" } = e, { leadingicon: z = null } = e, { trailingicon: M = null } = e, { testid: q = "" } = e, { width: j = "" } = e, { version: L = "1" } = e, { mt: I = null } = e, { mr: N = null } = e, { mb: F = null } = e, { ml: P = null } = e, { action: O = "" } = e, { actionArg: S = "" } = e, { actionArgs: W = {} } = e;
   Ee(async () => {
-    await Xe(), c(b), s(w), g(p), m(L), p === "dark" && b !== "text" && console.warn(`[goa-button] The "dark" variant only applies to type="text". It has no effect on type="${b}".`);
+    await Xe(), c(b), s(w), g(p), m(L), p === "dark" && b !== "text" && console.warn(`[GoabButton] The "dark" variant only applies to type="text". It has no effect on type="${b}".`);
   });
   function D(A) {
     i || (A.target && xe(A.target, "_click", null, { bubbles: true }), O && xe(A.target, O, S || W, { bubbles: true }));
@@ -75457,7 +75457,16 @@ function Feat3504TextButtonRoute() {
                     }
                   ),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    GoabButton,
+                    {
+                      type: "text",
+                      size: "compact",
+                      variant: "destructive",
+                      leadingIcon: "trash",
+                      children: "Destructive + Leading Icon"
+                    }
+                  ),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     "div",
                     {
@@ -75468,14 +75477,25 @@ function Feat3504TextButtonRoute() {
                         flexDirection: "column",
                         gap: "1rem"
                       },
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        GoabButton,
+                        {
+                          type: "text",
+                          size: "compact",
+                          variant: "inverse",
+                          leadingIcon: "pencil",
+                          children: "Inverse + Leading Icon"
+                        }
+                      )
                     }
                   ),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "dark", leadingIcon: "add", children: "Dark + Leading Icon" })
                 ]
               }
             )
-          ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", mb: "none", children: "Invalid states" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", variant: "dark", size: "compact", children: 'This non-text button with "dark" variant should cause a console warning' })
         ]
       }
     )
