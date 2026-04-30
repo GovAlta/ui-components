@@ -20200,13 +20200,13 @@ class Cc extends Ce {
 }
 customElements.define("goa-block", ke(Cc, { gap: {}, direction: {}, alignment: {}, testid: {}, minWidth: { type: "String", attribute: "min-width" }, maxWidth: { type: "String", attribute: "max-width" }, width: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
 function zc(t) {
-  qe(t, "svelte-coecys", `button.svelte-coecys.svelte-coecys{display:inline-flex;box-sizing:border-box;border-radius:var(--goa-button-border-radius);cursor:pointer;font:var(--goa-button-text);height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:var(--goa-button-padding, 0 var(--goa-button-padding-lr));white-space:nowrap;gap:var(--goa-button-gap);align-items:center;justify-content:center;transition:transform 0.1s ease-in-out,
+  qe(t, "svelte-1b5zief", `button.svelte-1b5zief.svelte-1b5zief{display:inline-flex;box-sizing:border-box;border-radius:var(--goa-button-border-radius);cursor:pointer;font:var(--goa-button-text);height:var(--goa-button-height);letter-spacing:var(--goa-button-letter-spacing);padding:var(--goa-button-padding, 0 var(--goa-button-padding-lr));white-space:nowrap;gap:var(--goa-button-gap);align-items:center;justify-content:center;transition:transform 0.1s ease-in-out,
       background-color 0.2s ease-in-out,
       border-color 0.2s ease-in-out,
-      color 0.2s ease-in-out;width:var(--width, auto)}button.svelte-coecys.svelte-coecys:active{transform:translateY(2px)}button.svelte-coecys.svelte-coecys:focus-visible,button.svelte-coecys.svelte-coecys:focus{box-shadow:0 0 0 var(--goa-border-width-l)
-      var(--goa-color-interactive-focus)}@media(max-width: 623px){:host{width:100%}button.svelte-coecys.svelte-coecys{width:100%;display:flex}button.tertiary.svelte-coecys.svelte-coecys{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}button.tertiary.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}button.tertiary.inverse.svelte-coecys.svelte-coecys{background-color:var(--goa-button-tertiary-color-bg) !important}button.tertiary.inverse.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}}.text.svelte-coecys.svelte-coecys{padding-bottom:0.2rem}button.compact.svelte-coecys.svelte-coecys{height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));gap:var(--goa-button-compact-gap)}button.start.svelte-coecys.svelte-coecys{height:var(--goa-button-height-start);font:var(--goa-button-text-start);padding:var(--goa-button-padding-lr-start);letter-spacing:var(--goa-button-letter-spacing)}button.start.svelte-coecys.svelte-coecys,button.submit.svelte-coecys.svelte-coecys,button.primary.svelte-coecys.svelte-coecys{border:var(--goa-button-primary-border);background-color:var(--goa-button-primary-color-bg);color:var(--goa-button-primary-color-text)}button.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-primary-hover-color-bg)}button.svelte-coecys.svelte-coecys:focus-visible,button.svelte-coecys.svelte-coecys:focus,button.svelte-coecys.svelte-coecys:active{border-color:var(--goa-button-primary-hover-border);background-color:var(--goa-button-primary-focus-color-bg);outline:none}button.secondary.svelte-coecys.svelte-coecys{border:var(--goa-button-secondary-border);background-color:var(--goa-button-secondary-color-bg);color:var(--goa-button-secondary-color-text)}button.secondary.svelte-coecys.svelte-coecys:hover{border:var(--goa-button-secondary-hover-border);color:var(--goa-button-secondary-hover-color-text);background-color:var(--goa-button-secondary-hover-color-bg)}button.secondary.svelte-coecys.svelte-coecys:focus-visible,button.secondary.svelte-coecys.svelte-coecys:focus,button.secondary.svelte-coecys.svelte-coecys:active{border:var(--goa-button-secondary-focus-border);background-color:var(--goa-button-secondary-focus-color-bg);color:var(--goa-button-secondary-focus-color-text);outline:none}button.tertiary.svelte-coecys.svelte-coecys{border:var(--goa-button-tertiary-border);background-color:var(--goa-button-tertiary-color-bg);color:var(--goa-button-tertiary-color-text);-webkit-text-decoration:var(--goa-button-tertiary-text-decoration, underline);text-decoration:var(--goa-button-tertiary-text-decoration, underline)}button.tertiary.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.tertiary.svelte-coecys.svelte-coecys:focus-visible,button.tertiary.svelte-coecys.svelte-coecys:focus,button.tertiary.svelte-coecys.svelte-coecys:active{background-color:var(--goa-button-tertiary-focus-color-bg);color:var(--goa-button-tertiary-focus-color-text);outline:none}.submit.destructive.svelte-coecys.svelte-coecys,.primary.destructive.svelte-coecys.svelte-coecys{background-color:var(--goa-button-primary-destructive-color-bg)}.submit.destructive.svelte-coecys.svelte-coecys:hover,.primary.destructive.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-primary-destructive-hover-color-bg)}.submit.destructive.svelte-coecys.svelte-coecys:focus-visible,.submit.destructive.svelte-coecys.svelte-coecys:active,.submit.destructive.svelte-coecys.svelte-coecys:focus,.primary.destructive.svelte-coecys.svelte-coecys:focus-visible,.primary.destructive.svelte-coecys.svelte-coecys:focus,.primary.destructive.svelte-coecys.svelte-coecys:active{background-color:var(--goa-button-primary-destructive-focus-color-bg)}.secondary.destructive.svelte-coecys.svelte-coecys{color:var(--goa-button-secondary-destructive-color-text);border:var(--goa-button-secondary-destructive-border)}.secondary.destructive.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-secondary-destructive-hover-color-text);border:var(--goa-button-secondary-destructive-hover-border)}.secondary.destructive.svelte-coecys.svelte-coecys:focus-visible,.secondary.destructive.svelte-coecys.svelte-coecys:focus,.secondary.destructive.svelte-coecys.svelte-coecys:active{color:var(--goa-button-secondary-destructive-focus-color-text);border:var(--goa-button-secondary-destructive-focus-border)}.tertiary.destructive.svelte-coecys.svelte-coecys{color:var(--goa-button-tertiary-destructive-color-text)}.tertiary.destructive.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-tertiary-destructive-hover-color-text)}.tertiary.destructive.svelte-coecys.svelte-coecys:focus-visible,.tertiary.destructive.svelte-coecys.svelte-coecys:focus,.tertiary.destructive.svelte-coecys.svelte-coecys:active{color:var(--goa-button-tertiary-destructive-focus-color-text)}.submit.inverse.svelte-coecys.svelte-coecys,.primary.inverse.svelte-coecys.svelte-coecys{background-color:var(--goa-button-primary-inverse-color-bg);color:var(--goa-button-primary-inverse-color-text)}.submit.inverse.svelte-coecys.svelte-coecys:hover,.primary.inverse.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-primary-inverse-hover-color-bg);color:var(--goa-button-primary-inverse-hover-color-text)}.submit.inverse.svelte-coecys.svelte-coecys:focus-visible,.submit.inverse.svelte-coecys.svelte-coecys:focus,.submit.inverse.svelte-coecys.svelte-coecys:active,.primary.inverse.svelte-coecys.svelte-coecys:focus-visible,.primary.inverse.svelte-coecys.svelte-coecys:focus,.primary.inverse.svelte-coecys.svelte-coecys:active{background-color:var(--goa-button-primary-inverse-focus-color-bg)}.secondary.inverse.svelte-coecys.svelte-coecys{color:var(--goa-button-secondary-inverse-color-text);border:var(--goa-button-secondary-inverse-border);background-color:var(--goa-button-secondary-inverse-color-bg)}.secondary.inverse.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-secondary-inverse-hover-color-text);border:var(--goa-button-secondary-inverse-hover-border)}.secondary.inverse.svelte-coecys.svelte-coecys:focus-visible,.secondary.inverse.svelte-coecys.svelte-coecys:focus,.secondary.inverse.svelte-coecys.svelte-coecys:active{color:var(--goa-button-secondary-inverse-focus-color-text);border:var(--goa-button-secondary-inverse-focus-border)}.tertiary.inverse.svelte-coecys.svelte-coecys{color:var(--goa-button-tertiary-inverse-color-text)}.tertiary.inverse.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-tertiary-inverse-hover-color-text)}.tertiary.inverse.svelte-coecys.svelte-coecys:focus-visible,.tertiary.inverse.svelte-coecys.svelte-coecys:focus,.tertiary.inverse.svelte-coecys.svelte-coecys:active{color:var(--goa-button-tertiary-inverse-focus-color-text)}button.svelte-coecys.svelte-coecys:disabled{pointer-events:none;opacity:0.5}button.v2.svelte-coecys.svelte-coecys:focus-visible{box-shadow:none;outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:var(--goa-button-outline-offset)}button.v2.svelte-coecys.svelte-coecys:disabled{opacity:1}button.v2.primary.svelte-coecys.svelte-coecys:disabled{background-color:var(--goa-button-primary-disabled-color-bg)
-  }button.v2.secondary.destructive.svelte-coecys.svelte-coecys{background-color:var(--goa-button-secondary-destructive-color-bg)}button.v2.secondary.destructive.svelte-coecys.svelte-coecys:hover{background-color:var(--goa-button-secondary-destructive-hover-color-bg)}button.v2.secondary.svelte-coecys.svelte-coecys:disabled{color:var(--goa-button-secondary-disabled-color-text);background-color:var(--goa-button-secondary-disabled-color-bg)}button.v2.tertiary.svelte-coecys.svelte-coecys:hover{border:var(--goa-button-tertiary-hover-border)}button.v2.tertiary.inverse.svelte-coecys.svelte-coecys{border:var(--goa-button-tertiary-inverse-border)}button.v2.tertiary.inverse.svelte-coecys.svelte-coecys:hover{border:var(--goa-button-tertiary-inverse-hover-border)}button.v2.tertiary.destructive.svelte-coecys.svelte-coecys{border-color:var(--goa-button-tertiary-destructive-color-border)}button.v2.tertiary.destructive.svelte-coecys.svelte-coecys:hover{border:var(--goa-button-tertiary-destructive-hover-border)
-  }button.v2.tertiary.svelte-coecys.svelte-coecys:disabled{color:var(--goa-button-tertiary-disabled-color-text);border-color:var(--goa-button-tertiary-disabled-color-border)}button.v2.svelte-coecys .text.svelte-coecys{padding-bottom:0}button.v2.text.svelte-coecys.svelte-coecys{border:none;background-color:transparent;color:var(--goa-button-text-color-text);-webkit-text-decoration:var(--goa-button-text-text-decoration);text-decoration:var(--goa-button-text-text-decoration);padding:var(--goa-button-text-padding);height:auto;font:var(--goa-button-text-font);letter-spacing:var(--goa-button-text-letter-spacing);border-radius:var(--goa-button-text-border-radius)}button.v2.text.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-text-hover-color-text);background-color:transparent}button.v2.text.svelte-coecys.svelte-coecys:focus-visible,button.v2.text.svelte-coecys.svelte-coecys:active{color:var(--goa-button-text-focus-color-text);background-color:transparent}button.v2.text.compact.svelte-coecys.svelte-coecys{font:var(--goa-button-text-compact-font);letter-spacing:var(--goa-button-text-compact-letter-spacing)}button.v2.text.destructive.svelte-coecys.svelte-coecys{color:var(--goa-button-text-destructive-color-text)}button.v2.text.destructive.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-text-destructive-hover-color-text)}button.v2.text.destructive.svelte-coecys.svelte-coecys:focus-visible,button.v2.text.destructive.svelte-coecys.svelte-coecys:active{color:var(--goa-button-text-destructive-focus-color-text)}button.v2.text.inverse.svelte-coecys.svelte-coecys{color:var(--goa-button-text-inverse-color-text)}button.v2.text.inverse.svelte-coecys.svelte-coecys:hover{color:var(--goa-button-text-inverse-hover-color-text)}button.v2.text.inverse.svelte-coecys.svelte-coecys:focus-visible,button.v2.text.inverse.svelte-coecys.svelte-coecys:active{color:var(--goa-button-text-inverse-focus-color-text)}button.v2.text.svelte-coecys.svelte-coecys:disabled{color:var(--goa-button-text-disabled-color-text);-webkit-text-decoration:var(--goa-button-text-disabled-text-decoration);text-decoration:var(--goa-button-text-disabled-text-decoration)}button.v2.text.compact.svelte-coecys.svelte-coecys:disabled{color:var(--goa-button-text-compact-disabled-color-text);-webkit-text-decoration:var(--goa-button-text-compact-disabled-text-decoration);text-decoration:var(--goa-button-text-compact-disabled-text-decoration)}`);
+      color 0.2s ease-in-out;width:var(--width, auto)}button.svelte-1b5zief.svelte-1b5zief:active{transform:translateY(2px)}button.svelte-1b5zief.svelte-1b5zief:focus-visible,button.svelte-1b5zief.svelte-1b5zief:focus{box-shadow:0 0 0 var(--goa-border-width-l)
+      var(--goa-color-interactive-focus)}@media(max-width: 623px){:host{width:100%}button.svelte-1b5zief.svelte-1b5zief{width:100%;display:flex}button.tertiary.svelte-1b5zief.svelte-1b5zief{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}button.tertiary.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}button.tertiary.inverse.svelte-1b5zief.svelte-1b5zief{background-color:var(--goa-button-tertiary-color-bg) !important}button.tertiary.inverse.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-tertiary-color-bg-mobile) !important}}.text.svelte-1b5zief.svelte-1b5zief{padding-bottom:0.2rem}button.compact.svelte-1b5zief.svelte-1b5zief{height:var(--goa-button-height-compact);font:var(--goa-button-text-compact);padding:var(--goa-button-padding-compact, var(--goa-button-padding-lr-compact));gap:var(--goa-button-compact-gap)}button.start.svelte-1b5zief.svelte-1b5zief{height:var(--goa-button-height-start);font:var(--goa-button-text-start);padding:var(--goa-button-padding-lr-start);letter-spacing:var(--goa-button-letter-spacing)}button.start.svelte-1b5zief.svelte-1b5zief,button.submit.svelte-1b5zief.svelte-1b5zief,button.primary.svelte-1b5zief.svelte-1b5zief{border:var(--goa-button-primary-border);background-color:var(--goa-button-primary-color-bg);color:var(--goa-button-primary-color-text)}button.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-primary-hover-color-bg)}button.svelte-1b5zief.svelte-1b5zief:focus-visible,button.svelte-1b5zief.svelte-1b5zief:focus,button.svelte-1b5zief.svelte-1b5zief:active{border-color:var(--goa-button-primary-hover-border);background-color:var(--goa-button-primary-focus-color-bg);outline:none}button.secondary.svelte-1b5zief.svelte-1b5zief{border:var(--goa-button-secondary-border);background-color:var(--goa-button-secondary-color-bg);color:var(--goa-button-secondary-color-text)}button.secondary.svelte-1b5zief.svelte-1b5zief:hover{border:var(--goa-button-secondary-hover-border);color:var(--goa-button-secondary-hover-color-text);background-color:var(--goa-button-secondary-hover-color-bg)}button.secondary.svelte-1b5zief.svelte-1b5zief:focus-visible,button.secondary.svelte-1b5zief.svelte-1b5zief:focus,button.secondary.svelte-1b5zief.svelte-1b5zief:active{border:var(--goa-button-secondary-focus-border);background-color:var(--goa-button-secondary-focus-color-bg);color:var(--goa-button-secondary-focus-color-text);outline:none}button.tertiary.svelte-1b5zief.svelte-1b5zief{border:var(--goa-button-tertiary-border);background-color:var(--goa-button-tertiary-color-bg);color:var(--goa-button-tertiary-color-text);-webkit-text-decoration:var(--goa-button-tertiary-text-decoration, underline);text-decoration:var(--goa-button-tertiary-text-decoration, underline)}button.tertiary.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-tertiary-hover-color-bg);color:var(--goa-button-tertiary-hover-color-text)}button.tertiary.svelte-1b5zief.svelte-1b5zief:focus-visible,button.tertiary.svelte-1b5zief.svelte-1b5zief:focus,button.tertiary.svelte-1b5zief.svelte-1b5zief:active{background-color:var(--goa-button-tertiary-focus-color-bg);color:var(--goa-button-tertiary-focus-color-text);outline:none}.submit.destructive.svelte-1b5zief.svelte-1b5zief,.primary.destructive.svelte-1b5zief.svelte-1b5zief{background-color:var(--goa-button-primary-destructive-color-bg)}.submit.destructive.svelte-1b5zief.svelte-1b5zief:hover,.primary.destructive.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-primary-destructive-hover-color-bg)}.submit.destructive.svelte-1b5zief.svelte-1b5zief:focus-visible,.submit.destructive.svelte-1b5zief.svelte-1b5zief:active,.submit.destructive.svelte-1b5zief.svelte-1b5zief:focus,.primary.destructive.svelte-1b5zief.svelte-1b5zief:focus-visible,.primary.destructive.svelte-1b5zief.svelte-1b5zief:focus,.primary.destructive.svelte-1b5zief.svelte-1b5zief:active{background-color:var(--goa-button-primary-destructive-focus-color-bg)}.secondary.destructive.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-secondary-destructive-color-text);border:var(--goa-button-secondary-destructive-border)}.secondary.destructive.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-secondary-destructive-hover-color-text);border:var(--goa-button-secondary-destructive-hover-border)}.secondary.destructive.svelte-1b5zief.svelte-1b5zief:focus-visible,.secondary.destructive.svelte-1b5zief.svelte-1b5zief:focus,.secondary.destructive.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-secondary-destructive-focus-color-text);border:var(--goa-button-secondary-destructive-focus-border)}.tertiary.destructive.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-tertiary-destructive-color-text)}.tertiary.destructive.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-tertiary-destructive-hover-color-text)}.tertiary.destructive.svelte-1b5zief.svelte-1b5zief:focus-visible,.tertiary.destructive.svelte-1b5zief.svelte-1b5zief:focus,.tertiary.destructive.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-tertiary-destructive-focus-color-text)}.submit.inverse.svelte-1b5zief.svelte-1b5zief,.primary.inverse.svelte-1b5zief.svelte-1b5zief{background-color:var(--goa-button-primary-inverse-color-bg);color:var(--goa-button-primary-inverse-color-text)}.submit.inverse.svelte-1b5zief.svelte-1b5zief:hover,.primary.inverse.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-primary-inverse-hover-color-bg);color:var(--goa-button-primary-inverse-hover-color-text)}.submit.inverse.svelte-1b5zief.svelte-1b5zief:focus-visible,.submit.inverse.svelte-1b5zief.svelte-1b5zief:focus,.submit.inverse.svelte-1b5zief.svelte-1b5zief:active,.primary.inverse.svelte-1b5zief.svelte-1b5zief:focus-visible,.primary.inverse.svelte-1b5zief.svelte-1b5zief:focus,.primary.inverse.svelte-1b5zief.svelte-1b5zief:active{background-color:var(--goa-button-primary-inverse-focus-color-bg)}.secondary.inverse.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-secondary-inverse-color-text);border:var(--goa-button-secondary-inverse-border);background-color:var(--goa-button-secondary-inverse-color-bg)}.secondary.inverse.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-secondary-inverse-hover-color-text);border:var(--goa-button-secondary-inverse-hover-border)}.secondary.inverse.svelte-1b5zief.svelte-1b5zief:focus-visible,.secondary.inverse.svelte-1b5zief.svelte-1b5zief:focus,.secondary.inverse.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-secondary-inverse-focus-color-text);border:var(--goa-button-secondary-inverse-focus-border)}.tertiary.inverse.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-tertiary-inverse-color-text)}.tertiary.inverse.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-tertiary-inverse-hover-color-text)}.tertiary.inverse.svelte-1b5zief.svelte-1b5zief:focus-visible,.tertiary.inverse.svelte-1b5zief.svelte-1b5zief:focus,.tertiary.inverse.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-tertiary-inverse-focus-color-text)}button.svelte-1b5zief.svelte-1b5zief:disabled{pointer-events:none;opacity:0.5}button.v2.svelte-1b5zief.svelte-1b5zief:focus-visible{box-shadow:none;outline:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);outline-offset:var(--goa-button-outline-offset)}button.v2.svelte-1b5zief.svelte-1b5zief:disabled{opacity:1}button.v2.primary.svelte-1b5zief.svelte-1b5zief:disabled{background-color:var(--goa-button-primary-disabled-color-bg)
+  }button.v2.secondary.destructive.svelte-1b5zief.svelte-1b5zief{background-color:var(--goa-button-secondary-destructive-color-bg)}button.v2.secondary.destructive.svelte-1b5zief.svelte-1b5zief:hover{background-color:var(--goa-button-secondary-destructive-hover-color-bg)}button.v2.secondary.svelte-1b5zief.svelte-1b5zief:disabled{color:var(--goa-button-secondary-disabled-color-text);background-color:var(--goa-button-secondary-disabled-color-bg)}button.v2.tertiary.svelte-1b5zief.svelte-1b5zief:hover{border:var(--goa-button-tertiary-hover-border)}button.v2.tertiary.inverse.svelte-1b5zief.svelte-1b5zief{border:var(--goa-button-tertiary-inverse-border)}button.v2.tertiary.inverse.svelte-1b5zief.svelte-1b5zief:hover{border:var(--goa-button-tertiary-inverse-hover-border)}button.v2.tertiary.destructive.svelte-1b5zief.svelte-1b5zief{border-color:var(--goa-button-tertiary-destructive-color-border)}button.v2.tertiary.destructive.svelte-1b5zief.svelte-1b5zief:hover{border:var(--goa-button-tertiary-destructive-hover-border)
+  }button.v2.tertiary.svelte-1b5zief.svelte-1b5zief:disabled{color:var(--goa-button-tertiary-disabled-color-text);border-color:var(--goa-button-tertiary-disabled-color-border)}button.v2.svelte-1b5zief .text.svelte-1b5zief{padding-bottom:0}button.v2.text.svelte-1b5zief.svelte-1b5zief{border:none;background-color:transparent;color:var(--goa-button-text-color-text);-webkit-text-decoration:var(--goa-button-text-text-decoration);text-decoration:var(--goa-button-text-text-decoration);padding:var(--goa-button-text-padding);height:auto;font:var(--goa-button-text-font);letter-spacing:var(--goa-button-text-letter-spacing);border-radius:var(--goa-button-text-border-radius)}button.v2.text.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-text-hover-color-text);background-color:transparent}button.v2.text.svelte-1b5zief.svelte-1b5zief:focus-visible,button.v2.text.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-text-focus-color-text);background-color:transparent}button.v2.text.compact.svelte-1b5zief.svelte-1b5zief{font:var(--goa-button-text-compact-font);letter-spacing:var(--goa-button-text-compact-letter-spacing)}button.v2.text.destructive.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-text-destructive-color-text)}button.v2.text.destructive.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-text-destructive-hover-color-text)}button.v2.text.destructive.svelte-1b5zief.svelte-1b5zief:focus-visible,button.v2.text.destructive.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-text-destructive-focus-color-text)}button.v2.text.inverse.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-text-inverse-color-text)}button.v2.text.inverse.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-text-inverse-hover-color-text)}button.v2.text.inverse.svelte-1b5zief.svelte-1b5zief:focus-visible,button.v2.text.inverse.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-text-inverse-focus-color-text)}button.v2.text.dark.svelte-1b5zief.svelte-1b5zief{color:var(--goa-button-text-dark-color-text)}button.v2.text.dark.svelte-1b5zief.svelte-1b5zief:hover{color:var(--goa-button-text-dark-hover-color-text)}button.v2.text.dark.svelte-1b5zief.svelte-1b5zief:focus-visible,button.v2.text.dark.svelte-1b5zief.svelte-1b5zief:active{color:var(--goa-button-text-dark-focus-color-text)}button.v2.text.svelte-1b5zief.svelte-1b5zief:disabled{color:var(--goa-button-text-disabled-color-text);-webkit-text-decoration:var(--goa-button-text-disabled-text-decoration);text-decoration:var(--goa-button-text-disabled-text-decoration)}button.v2.text.compact.svelte-1b5zief.svelte-1b5zief:disabled{color:var(--goa-button-text-compact-disabled-color-text);-webkit-text-decoration:var(--goa-button-text-compact-disabled-text-decoration);text-decoration:var(--goa-button-text-compact-disabled-text-decoration)}`);
 }
 function Mc(t) {
   let e, o, i, n, r, l = (
@@ -20229,7 +20229,7 @@ function Mc(t) {
   );
   return {
     c() {
-      l && l.c(), e = Y(), o = C("span"), c && c.c(), i = Y(), d && d.c(), n = Re(), f(o, "class", "text svelte-coecys");
+      l && l.c(), e = Y(), o = C("span"), c && c.c(), i = Y(), d && d.c(), n = Re(), f(o, "class", "text svelte-1b5zief");
     },
     m(s, u) {
       l && l.m(s, u), E(s, e, u), E(s, o, u), c && c.m(o, null), E(s, i, u), d && d.m(s, u), E(s, n, u), r = true;
@@ -20281,7 +20281,7 @@ function jc(t) {
   );
   return {
     c() {
-      e = C("span"), l && l.c(), o = Y(), i = C("goa-icon"), f(e, "class", "text svelte-coecys"), h(i, "id", "trailing-icon"), h(i, "size", "4"), h(i, "type", "arrow-forward"), h(i, "inverted", "true");
+      e = C("span"), l && l.c(), o = Y(), i = C("goa-icon"), f(e, "class", "text svelte-1b5zief"), h(i, "id", "trailing-icon"), h(i, "size", "4"), h(i, "type", "arrow-forward"), h(i, "inverted", "true");
     },
     m(a, c) {
       E(a, e, c), l && l.m(e, null), E(a, o, c), E(a, i, c), n = true;
@@ -20420,7 +20420,7 @@ function Lc(t) {
       e = C("button"), i.c(), f(e, "class", n = /*type*/
       t[0] + " " + /*size*/
       t[1] + " " + /*variant*/
-      t[2] + " svelte-coecys"), f(e, "style", r = `
+      t[2] + " svelte-1b5zief"), f(e, "style", r = `
       ${Ne(
         /*mt*/
         t[8],
@@ -20466,7 +20466,7 @@ function Lc(t) {
       7 && n !== (n = /*type*/
       v[0] + " " + /*size*/
       v[1] + " " + /*variant*/
-      v[2] + " svelte-coecys")) && f(e, "class", n), (!a || m & /*mt, mr, mb, ml, width*/
+      v[2] + " svelte-1b5zief")) && f(e, "class", n), (!a || m & /*mt, mr, mb, ml, width*/
       3904 && r !== (r = `
       ${Ne(
         /*mt*/
@@ -20514,10 +20514,10 @@ function Lc(t) {
 }
 function qc(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
-  const [a, c] = Ae("Button type", ["primary", "submit", "secondary", "tertiary", "start", "text"], { required: true, deprecated: ["submit"] }), [d, s] = Ae("Button size", ["normal", "compact"], { required: true }), [u, g] = Ae("Button variant", ["normal", "destructive", "inverse"], { required: true }), [v, m] = Ae("Button version", ["1", "2"], { required: true });
+  const [a, c] = Ae("Button type", ["primary", "submit", "secondary", "tertiary", "start", "text"], { required: true, deprecated: ["submit"] }), [d, s] = Ae("Button size", ["normal", "compact"], { required: true }), [u, g] = Ae("Button variant", ["normal", "destructive", "inverse", "dark"], { required: true }), [v, m] = Ae("Button version", ["1", "2"], { required: true });
   let { type: b = "primary" } = e, { size: w = "normal" } = e, { variant: p = "normal" } = e, { disabled: k = "false" } = e, { leadingicon: z = null } = e, { trailingicon: M = null } = e, { testid: q = "" } = e, { width: j = "" } = e, { version: L = "1" } = e, { mt: I = null } = e, { mr: N = null } = e, { mb: F = null } = e, { ml: P = null } = e, { action: O = "" } = e, { actionArg: S = "" } = e, { actionArgs: W = {} } = e;
   Ee(async () => {
-    await Xe(), c(b), s(w), g(p), m(L);
+    await Xe(), c(b), s(w), g(p), m(L), p === "dark" && b !== "text" && console.warn(`[goa-button] The "dark" variant only applies to type="text". It has no effect on type="${b}".`);
   });
   function D(A) {
     i || (A.target && xe(A.target, "_click", null, { bubbles: true }), O && xe(A.target, O, S || W, { bubbles: true }));
@@ -38796,7 +38796,11 @@ function Tg(t) {
   };
 }
 function Ig(t, e, o) {
-  let { $$slots: i = {}, $$scope: n } = e, { color: r = "interactive" } = e, { leadingicon: l } = e, { trailingicon: a } = e, { disabled: c = false } = e, { testid: d = "" } = e, { mt: s = null } = e, { mr: u = null } = e, { mb: g = null } = e, { ml: v = null } = e, { action: m = "" } = e, { actionArg: b = "" } = e, { actionArgs: w = {} } = e, p;
+  let { $$slots: i = {}, $$scope: n } = e, { color: r = "interactive" } = e, { leadingicon: l } = e, { trailingicon: a } = e, { disabled: c = false } = e, { testid: d = "" } = e, { mt: s = null } = e, { mr: u = null } = e, { mb: g = null } = e, { ml: v = null } = e, { action: m = "" } = e, { actionArg: b = "" } = e, { actionArgs: w = {} } = e;
+  Ee(() => {
+    console.warn("GoabLinkButton is deprecated and will be removed in a future release. Use GoabButton instead.");
+  });
+  let p;
   function k(M) {
     c || (xe(p, "_click", null, { bubbles: true }), m && xe(M.target, m, b || w, { bubbles: true }), M.stopPropagation());
   }
@@ -43148,8 +43152,8 @@ const { window: qs } = mo;
 function J3(t) {
   qe(t, "svelte-bmf18g", ":host{display:contents}");
 }
-const $3 = (t) => ({}), Vl = (t) => ({}), e4 = (t) => ({}), Bl = (t) => ({});
-function t4(t) {
+const $3 = (t) => ({}), Vl = (t) => ({}), e5 = (t) => ({}), Bl = (t) => ({});
+function t5(t) {
   let e, o, i, n = (
     /*$$slots*/
     t[9].actions && Zl(t)
@@ -43266,7 +43270,7 @@ function t4(t) {
     }
   };
 }
-function o4(t) {
+function o5(t) {
   let e, o, i, n = (
     /*$$slots*/
     t[9].actions && Fl(t)
@@ -43466,7 +43470,7 @@ function Fl(t) {
           /*$$scope*/
           r[10],
           l,
-          e4
+          e5
         ) : he(
           /*$$scope*/
           r[10]
@@ -43485,13 +43489,13 @@ function Fl(t) {
     }
   };
 }
-function i4(t) {
+function i5(t) {
   let e, o, i, n, r, l;
   it(
     /*onwindowresize*/
     t[12]
   );
-  const a = [o4, t4], c = [];
+  const a = [o5, t5], c = [];
   function d(s, u) {
     return (
       /*windowIsSmallerThanDesktop*/
@@ -43527,8 +43531,8 @@ function i4(t) {
     }
   };
 }
-const n4 = 1023;
-function r4(t, e, o) {
+const n5 = 1023;
+function r5(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
   const a = vt(r);
   let { testid: c = void 0 } = e, { open: d = false } = e, { heading: s = "" } = e, { width: u = "492px" } = e, { version: g = void 0 } = e;
@@ -43540,7 +43544,7 @@ function r4(t, e, o) {
     "testid" in w && o(0, c = w.testid), "open" in w && o(1, d = w.open), "heading" in w && o(2, s = w.heading), "width" in w && o(3, u = w.width), "version" in w && o(4, g = w.version), "$$scope" in w && o(10, l = w.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*windowWidth*/
-    128 && o(8, n = i <= n4);
+    128 && o(8, n = i <= n5);
   }, o(7, i = window.innerWidth), [
     c,
     d,
@@ -43557,13 +43561,13 @@ function r4(t, e, o) {
     b
   ];
 }
-class l4 extends Ce {
+class l5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      r4,
-      i4,
+      r5,
+      i5,
       _e,
       {
         testid: 0,
@@ -43614,11 +43618,11 @@ class l4 extends Ce {
     return this.$$.ctx[6];
   }
 }
-customElements.define("goa-push-drawer", ke(l4, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true }, version: { type: "String", reflect: true } }, ["actions", "default"], ["drawerTestId", "pushDrawerTestId"], true));
-function a4(t) {
+customElements.define("goa-push-drawer", ke(l5, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true }, version: { type: "String", reflect: true } }, ["actions", "default"], ["drawerTestId", "pushDrawerTestId"], true));
+function a5(t) {
   qe(t, "svelte-1e6przw", `.radio.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{display:inline-flex;align-self:flex-start}label.radio.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{box-sizing:border-box;display:inline-flex}.container.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{display:flex;flex-direction:column;justify-content:flex-start}.radio.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw:hover{cursor:pointer}.radio.svelte-1e6przw .svelte-1e6przw.svelte-1e6przw,.radio.svelte-1e6przw .svelte-1e6przw.svelte-1e6przw:before,.radio.svelte-1e6przw .svelte-1e6przw.svelte-1e6przw:after{box-sizing:border-box}.radio.svelte-1e6przw input[type="radio"].svelte-1e6przw.svelte-1e6przw{width:0;min-height:28px;margin:0;opacity:0}.label.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{font:var(--goa-radio-label);margin-top:-3px;padding-left:var(--goa-radio-gap-label, var(--goa-space-s))}.radio.v2.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw{margin-top:1px}.radio.v2.compact.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw{padding-left:var(--goa-radio-gap-label-compact)}.radio.v2.compact.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw{font:var(--goa-radio-label-compact)}.description.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{font:var(--goa-radio-description);margin-left:calc(var(--goa-radio-size) + var(--goa-space-s));margin-top:var(--goa-space-2xs);color:var(--goa-input-color-text-helper, var(--goa-color-text-default))}.radio.v2.svelte-1e6przw:not(.compact)~.description.svelte-1e6przw.svelte-1e6przw{margin-left:calc(var(--goa-radio-size) + var(--goa-radio-gap-label))}.radio.v2.compact.svelte-1e6przw~.description.svelte-1e6przw.svelte-1e6przw{margin-left:calc(var(--goa-radio-size) + var(--goa-radio-gap-label-compact));margin-top:var(--goa-space-3xs)}.reveal.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{display:none;height:0}.reveal.visible.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{height:-moz-fit-content;height:fit-content;display:block}.reveal.visible.has-content.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{padding:var(--goa-radio-reveal-padding, var(--goa-space-m));margin:var(--goa-radio-reveal-margin, var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px));border-left:var(--goa-radio-reveal-border, 4px solid var(--goa-color-greyscale-200));box-sizing:border-box}.radio.v2.svelte-1e6przw~.reveal.visible.has-content.svelte-1e6przw.svelte-1e6przw{padding:var(--goa-radio-reveal-padding, var(--goa-space-l));border-left:var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200))}.radio.v2.compact.svelte-1e6przw~.reveal.visible.has-content.svelte-1e6przw.svelte-1e6przw{padding:calc(var(--goa-space-m) + var(--goa-space-2xs))}.icon.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{position:relative;display:inline-block;height:var(--goa-radio-size);width:var(--goa-radio-size);border-radius:var(--goa-radio-border-radius);background-color:var(--goa-radio-color-bg);transition:all 100ms ease-in-out;flex:0 0 auto}.v2.svelte-1e6przw .icon.svelte-1e6przw.svelte-1e6przw::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:var(--goa-radio-inner-size);height:var(--goa-radio-inner-size);border-radius:50%;transition:background-color 100ms ease-in-out}.icon.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw::before{content:'';position:absolute;width:44px;height:44px;top:50%;left:50%;transform:translate(-50%, -50%)}.radio--disabled.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw,.radio--disabled.svelte-1e6przw~.description.svelte-1e6przw.svelte-1e6przw{color:var(--goa-radio-label-color-disabled)}.radio--disabled.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw:hover{cursor:default}input[type="radio"].svelte-1e6przw:not(:checked)~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border)}input[type="radio"].svelte-1e6przw:not(:checked):hover~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-hover)}input[type="radio"].svelte-1e6przw:not(:checked):focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:not(:checked):hover:focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border);outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-disabled)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked, 4px solid var(--goa-color-greyscale-200))}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color)}input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked-hover)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-hover)}input[type="radio"].svelte-1e6przw:checked:focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:checked:hover:focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked);outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked-disabled)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-disabled)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked)~.icon.icon.svelte-1e6przw{border:var(--goa-radio-border-error)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked)~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):hover~.icon.svelte-1e6przw{border:var(--goa-radio-border-error-hover)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):hover~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error-hover)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):focus-visible~.icon.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw{border:var(--goa-radio-border-error-disabled)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw,.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw{border:var(--goa-radio-border-checked-error)}.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-error)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw{border:var(--goa-radio-border-checked-error-hover)}.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-error-hover)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error-hover)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:focus-visible~.icon.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw{border:var(--goa-radio-border-checked-error-disabled)}.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-disabled)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}`);
 }
-const s4 = (t) => ({}), Wl = (t) => ({}), c4 = (t) => ({}), Yl = (t) => ({});
+const s5 = (t) => ({}), Wl = (t) => ({}), c5 = (t) => ({}), Yl = (t) => ({});
 function Ul(t) {
   let e, o, i, n, r;
   const l = (
@@ -43656,7 +43660,7 @@ function Ul(t) {
           /*$$scope*/
           c[25],
           d,
-          c4
+          c5
         ) : he(
           /*$$scope*/
           c[25]
@@ -43683,7 +43687,7 @@ function Ul(t) {
     }
   };
 }
-function d4(t) {
+function d5(t) {
   let e, o, i, n, r, l, a, c, d, s = (
     /*label*/
     (t[3] || /*value*/
@@ -43865,7 +43869,7 @@ function d4(t) {
           /*$$scope*/
           L[25],
           I,
-          s4
+          s5
         ) : he(
           /*$$scope*/
           L[25]
@@ -43911,7 +43915,7 @@ function d4(t) {
     }
   };
 }
-function u4(t, e, o) {
+function u5(t, e, o) {
   let i, n, r, l, { $$slots: a = {}, $$scope: c } = e;
   const d = vt(a);
   let { value: s } = e, { name: u = "" } = e, { label: g = "" } = e, { description: v = "" } = e, { disabled: m = "false" } = e, { error: b = "false" } = e, { checked: w = "false" } = e, { arialabel: p = "" } = e, { revealarialabel: k = "" } = e, { maxwidth: z = "none" } = e, { mt: M = null } = e, { mr: q = null } = e, { mb: j = null } = e, { ml: L = null } = e, I, N, F = [], P = 0, O = "1", S = false;
@@ -44050,13 +44054,13 @@ function u4(t, e, o) {
     H
   ];
 }
-class f4 extends Ce {
+class f5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      u4,
-      d4,
+      u5,
+      d5,
       _e,
       {
         value: 2,
@@ -44074,7 +44078,7 @@ class f4 extends Ce {
         mb: 8,
         ml: 9
       },
-      a4,
+      a5,
       [-1, -1]
     );
   }
@@ -44163,11 +44167,11 @@ class f4 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-radio-item", ke(f4, { value: { reflect: true }, name: {}, label: {}, description: { reflect: true }, disabled: { reflect: true }, error: { reflect: true }, checked: { reflect: true }, arialabel: { reflect: true }, revealarialabel: { reflect: true }, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["description", "reveal"], [], true));
-function g4(t) {
+customElements.define("goa-radio-item", ke(f5, { value: { reflect: true }, name: {}, label: {}, description: { reflect: true }, disabled: { reflect: true }, error: { reflect: true }, checked: { reflect: true }, arialabel: { reflect: true }, revealarialabel: { reflect: true }, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["description", "reveal"], [], true));
+function g5(t) {
   qe(t, "svelte-v0blf9", ":host{font-family:var(--goa-font-family-sans)}.goa-radio-group--horizontal.svelte-v0blf9{display:flex;flex-direction:row;gap:var(--goa-radio-group-gap-horizontal)}.goa-radio-group--horizontal.v2.compact.svelte-v0blf9{gap:var(--goa-radio-group-gap-horizontal-compact)}.goa-radio-group--vertical.svelte-v0blf9{display:flex;flex-direction:column;gap:var(--goa-radio-group-gap-vertical);width:100%}.goa-radio-group--vertical.v2.compact.svelte-v0blf9{gap:var(--goa-radio-group-gap-vertical-compact)}.goa-radio-group--horizontal.svelte-v0blf9:focus,.goa-radio-group--vertical.svelte-v0blf9:focus{outline:none}");
 }
-function v4(t) {
+function v5(t) {
   let e, o, i, n, r, l, a;
   const c = (
     /*#slots*/
@@ -44292,7 +44296,7 @@ function v4(t) {
     }
   };
 }
-function h4(t, e, o) {
+function h5(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
   const [a, c] = Ae("Radio group orientation", ["vertical", "horizontal"]), [d, s] = Ae("Version", ["1", "2"]), [u, g] = Ae("Size", ["default", "compact"]);
   let { name: v } = e, { value: m } = e, { orientation: b = "vertical" } = e, { disabled: w = "false" } = e, { error: p = "false" } = e, { version: k = "1" } = e, { size: z = "default" } = e, { testid: M = "" } = e, { arialabel: q = "" } = e, { mt: j = null } = e, { mr: L = null } = e, { mb: I = null } = e, { ml: N = null } = e, F = Oe(p), P = F, O, S = [], W;
@@ -44423,13 +44427,13 @@ function h4(t, e, o) {
     te
   ];
 }
-class m4 extends Ce {
+class m5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      h4,
-      v4,
+      h5,
+      v5,
       _e,
       {
         name: 14,
@@ -44446,7 +44450,7 @@ class m4 extends Ce {
         mb: 6,
         ml: 7
       },
-      g4,
+      g5,
       [-1, -1]
     );
   }
@@ -44529,11 +44533,11 @@ class m4 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-radio-group", ke(m4, { name: {}, value: {}, orientation: {}, disabled: {}, error: {}, version: {}, size: {}, testid: {}, arialabel: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function b4(t) {
+customElements.define("goa-radio-group", ke(m5, { name: {}, value: {}, orientation: {}, disabled: {}, error: {}, version: {}, size: {}, testid: {}, arialabel: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function b5(t) {
   qe(t, "svelte-1y2cug5", ".goa-scrollable.svelte-1y2cug5{scroll-behavior:smooth;margin:2px;width:auto}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar{width:var(--goa-space-xs)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-track{border-radius:var(--goa-border-radius-m)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-track:hover{background:var(--goa-color-greyscale-200)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-thumb{background:var(--goa-color-greyscale-400);border-radius:var(--goa-border-radius-m)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-thumb:hover{background:var(--goa-color-greyscale-600)}");
 }
-function p4(t) {
+function p5(t) {
   let e, o, i, n, r;
   const l = (
     /*#slots*/
@@ -44612,7 +44616,7 @@ function p4(t) {
     }
   };
 }
-function w4(t, e, o) {
+function w5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { direction: r = "vertical" } = e, { hpadding: l = "" } = e, { vpadding: a = "" } = e, { maxheight: c = "" } = e, { offsetHeight: d } = e, { scrollHeight: s } = e, u;
   function g(m) {
     m.target.dispatchEvent(new CustomEvent(
@@ -44651,13 +44655,13 @@ function w4(t, e, o) {
     v
   ];
 }
-class _4 extends Ce {
+class _5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      w4,
-      p4,
+      w5,
+      p5,
       _e,
       {
         direction: 0,
@@ -44667,7 +44671,7 @@ class _4 extends Ce {
         offsetHeight: 6,
         scrollHeight: 7
       },
-      b4
+      b5
     );
   }
   get direction() {
@@ -44707,8 +44711,8 @@ class _4 extends Ce {
     this.$$set({ scrollHeight: e }), y();
   }
 }
-customElements.define("goa-scrollable", ke(_4, { direction: {}, hpadding: {}, vpadding: {}, maxheight: {}, offsetHeight: {}, scrollHeight: {} }, ["default"], [], true));
-function y4(t) {
+customElements.define("goa-scrollable", ke(_5, { direction: {}, hpadding: {}, vpadding: {}, maxheight: {}, offsetHeight: {}, scrollHeight: {} }, ["default"], [], true));
+function y5(t) {
   qe(t, "svelte-10qscd5", '::slotted(a),::slotted(goa-side-menu-heading),::slotted(a:visited){color:var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;display:block;font:var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));margin-left:var(--goa-side-menu-child-margin);background-color:var(--goa-side-menu-group-color-bg)}::slotted(a),::slotted(a:visited){padding:var(--goa-side-menu-padding-child);text-decoration:none;border-left:var(--goa-side-menu-child-border-left)}::slotted(a.current){font:var(--goa-side-menu-group-item-typography-current, var(--goa-side-menu-typography-item-current));border-left:var(--goa-side-menu-child-border-left-selected);background:var(--goa-side-menu-child-color-bg-selected);color:var(--goa-side-menu-color-item-current, var(--goa-color-text-default))!important}::slotted(a:hover:not(.current)){background:var(--goa-side-menu-child-color-bg-hover);border-left:var(--goa-side-menu-child-border-left-hover)}::slotted(a:focus-visible),.heading.svelte-10qscd5.svelte-10qscd5:focus-visible{outline:var(--goa-side-menu-item-focus-border);outline-offset:var(--goa-side-menu-item-focus-outline-offset, -3px)}.heading.svelte-10qscd5.svelte-10qscd5{gap:var(--goa-space-xs);display:flex;flex-direction:row;align-items:center}:host([child="true"]) a.heading.svelte-10qscd5.svelte-10qscd5,.heading.svelte-10qscd5.svelte-10qscd5{color:var(--goa-side-menu-color-item, var(--goa-color-text-default));display:flex;justify-content:space-between;font:var(--goa-side-menu-typography-item);padding:var(--goa-side-menu-parent-padding);text-decoration:none;border-radius:var(--goa-side-menu-group-border-radius)}.heading.open.svelte-10qscd5.svelte-10qscd5{font:var(--goa-side-menu-typography-item)}:host([child="true"]) a.heading.svelte-10qscd5.svelte-10qscd5{border-left:var(--goa-side-menu-child-border-left);padding:var(--goa-side-menu-padding-child);margin-left:var(--goa-side-menu-child-margin)}:host([child="true"]) a.heading.svelte-10qscd5.svelte-10qscd5:hover{border-left:var(--goa-side-menu-child-border-left-hover);background:var(--goa-side-menu-child-color-bg-hover)}:host([child="true"]) .side-menu-group.current a.heading.svelte-10qscd5.svelte-10qscd5{background:var(--goa-side-menu-child-color-bg-selected);border-left:var(--goa-side-menu-child-border-left)}.side-menu-group.svelte-10qscd5.svelte-10qscd5{background-color:var(--goa-side-menu-group-color-bg);border-radius:var(--goa-side-menu-group-border-radius);padding:var(--goa-side-menu-group-padding)}.side-menu-group.current.svelte-10qscd5 .heading.svelte-10qscd5{background:var(--goa-side-menu-parent-color-bg-selected)}.heading.svelte-10qscd5.svelte-10qscd5:hover{background:var(--goa-side-menu-color-bg-menu-item-hover)}.hidden.svelte-10qscd5.svelte-10qscd5{display:none}.group.svelte-10qscd5.svelte-10qscd5{padding-left:var(--goa-side-menu-child-margin)}.trailing-icon.svelte-10qscd5.svelte-10qscd5{margin-left:auto;height:var(--goa-icon-size-l)}.leading-icon.svelte-10qscd5.svelte-10qscd5{height:var(--goa-icon-size-l)}.side-menu-group.v2.svelte-10qscd5 .heading.open.svelte-10qscd5{border-radius:var(--goa-side-menu-group-border-radius-open, 0);background:var(--goa-color-greyscale-100)}.side-menu-group.v2.svelte-10qscd5 ::slotted(a){border-radius:var(--goa-border-radius-l, 6px);font:var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));padding:var(--goa-space-2xs) var(--goa-space-xs);border-left:none;margin-left:0;color:var(--goa-color-text-secondary) !important}.side-menu-group.v2.svelte-10qscd5 .group.svelte-10qscd5{border-left:var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);margin-left:var(--goa-side-menu-group-container-margin-left, 20px);padding-left:var(--goa-space-s);margin-top:var(--goa-space-xs);margin-bottom:var(--goa-side-menu-group-container-margin-bottom, 6px)}.side-menu-group.v2.svelte-10qscd5 ::slotted(a.current){border-left:none;background:var(--goa-side-menu-color-bg-menu-item-hover);color:var(--goa-color-text-default) !important;font-weight:var(--goa-font-weight-bold)}.side-menu-group.v2.svelte-10qscd5 ::slotted(a:hover:not(.current)){border-left:none;background:var(--goa-side-menu-color-bg-menu-item-hover)}.side-menu-group.v2.svelte-10qscd5 .heading.svelte-10qscd5{padding:var(--goa-space-xs) var(--goa-space-s);align-items:flex-start;color:var(--goa-color-text-secondary)}.side-menu-group.v2.svelte-10qscd5 .heading.svelte-10qscd5:hover{border-radius:var(--goa-side-menu-group-border-radius-open, 0)}.side-menu-group.v2.svelte-10qscd5 .heading.svelte-10qscd5:focus-visible{border-radius:var(--goa-side-menu-group-border-radius-open, 0)}:host([child="true"]) .side-menu-group.v2 a.heading.svelte-10qscd5.svelte-10qscd5{border-radius:var(--goa-side-menu-group-border-radius-open, 0)}.side-menu-group.v2.svelte-10qscd5 .leading-icon.svelte-10qscd5,.side-menu-group.v2.svelte-10qscd5 .trailing-icon.svelte-10qscd5{height:var(--goa-icon-size-3, 1.25rem);margin-top:1px}');
 }
 function Ql(t) {
@@ -44716,7 +44720,7 @@ function Ql(t) {
   function o(r, l) {
     return (
       /*version*/
-      r[0] === "2" ? C4 : k4
+      r[0] === "2" ? C5 : k5
     );
   }
   let i = o(t), n = i(t);
@@ -44735,7 +44739,7 @@ function Ql(t) {
     }
   };
 }
-function k4(t) {
+function k5(t) {
   let e;
   return {
     c() {
@@ -44763,7 +44767,7 @@ function k4(t) {
     }
   };
 }
-function C4(t) {
+function C5(t) {
   let e;
   return {
     c() {
@@ -44791,7 +44795,7 @@ function C4(t) {
     }
   };
 }
-function z4(t) {
+function z5(t) {
   let e;
   return {
     c() {
@@ -44806,7 +44810,7 @@ function z4(t) {
     }
   };
 }
-function M4(t) {
+function M5(t) {
   let e;
   return {
     c() {
@@ -44821,12 +44825,12 @@ function M4(t) {
     }
   };
 }
-function j4(t) {
+function j5(t) {
   let e;
   function o(r, l) {
     return (
       /*_open*/
-      r[8] ? q4 : L4
+      r[8] ? q5 : L5
     );
   }
   let i = o(t), n = i(t);
@@ -44845,7 +44849,7 @@ function j4(t) {
     }
   };
 }
-function L4(t) {
+function L5(t) {
   let e;
   return {
     c() {
@@ -44859,7 +44863,7 @@ function L4(t) {
     }
   };
 }
-function q4(t) {
+function q5(t) {
   let e;
   return {
     c() {
@@ -44873,7 +44877,7 @@ function q4(t) {
     }
   };
 }
-function N4(t) {
+function N5(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g, v, m, b, w = (
     /*icon*/
     t[2] && Ql(t)
@@ -44881,9 +44885,9 @@ function N4(t) {
   function p(j, L) {
     return (
       /*version*/
-      j[0] === "2" ? j4 : (
+      j[0] === "2" ? j5 : (
         /*_open*/
-        j[8] ? M4 : z4
+        j[8] ? M5 : z5
       )
     );
   }
@@ -45023,10 +45027,10 @@ function N4(t) {
     }
   };
 }
-function x4(t) {
+function x5(t) {
   return t == null ? void 0 : t.toLowerCase().replace(/ /g, "-");
 }
-function E4(t, e, o) {
+function E5(t, e, o) {
   let i, { $$slots: n = {}, $$scope: r } = e, { version: l = "1" } = e, { heading: a } = e, { icon: c = null } = e, { testid: d = "" } = e, { mt: s = null } = e, { mr: u = null } = e, { mb: g = null } = e, { ml: v = null } = e, m = false, b = false, w, p;
   Ee(() => {
     k(), z();
@@ -45086,7 +45090,7 @@ function E4(t, e, o) {
     "version" in N && o(0, l = N.version), "heading" in N && o(1, a = N.heading), "icon" in N && o(2, c = N.icon), "testid" in N && o(3, d = N.testid), "mt" in N && o(4, s = N.mt), "mr" in N && o(5, u = N.mr), "mb" in N && o(6, g = N.mb), "ml" in N && o(7, v = N.ml), "$$scope" in N && o(14, r = N.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*heading*/
-    2 && o(12, i = x4(a));
+    2 && o(12, i = x5(a));
   }, [
     l,
     a,
@@ -45108,13 +45112,13 @@ function E4(t, e, o) {
     I
   ];
 }
-class D4 extends Ce {
+class D5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      E4,
-      N4,
+      E5,
+      N5,
       _e,
       {
         version: 0,
@@ -45126,7 +45130,7 @@ class D4 extends Ce {
         mb: 6,
         ml: 7
       },
-      y4
+      y5
     );
   }
   get version() {
@@ -45178,11 +45182,11 @@ class D4 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-side-menu-group", ke(D4, { version: {}, heading: {}, icon: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function T4(t) {
+customElements.define("goa-side-menu-group", ke(D5, { version: {}, heading: {}, icon: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function T5(t) {
   qe(t, "svelte-19eobfo", "::slotted(a),::slotted(a:visited){color:var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;display:block;font:var(--goa-side-menu-typography-item);padding:var(--goa-side-menu-padding-item);text-decoration:none}::slotted(a.current){font:var(--goa-side-menu-typography-item-current);color:var(--goa-side-menu-color-item-current, var(--goa-color-text-default)) !important;background:var(--goa-side-menu-color-bg-menu-item-hover)}::slotted(a:hover:not(.current)){background:var(--goa-side-menu-color-bg-menu-item-hover)}::slotted(a:focus-visible){outline:var(--goa-side-menu-item-focus-border);outline-offset:var(--goa-side-menu-item-focus-outline-offset, -3px)}.side-menu.svelte-19eobfo{display:flex;height:100%;flex-direction:column;gap:var(--goa-side-menu-items-gap);background-color:var(--goa-side-menu-color-bg);border-right:var(--goa-side-menu-border-right)}.side-menu.v2.svelte-19eobfo{padding:var(--goa-side-menu-padding)}.side-menu.v2.svelte-19eobfo ::slotted(a){border-radius:var(--goa-side-menu-item-border-radius, 0);padding:var(--goa-space-xs) var(--goa-space-s);display:flex;align-items:flex-start;gap:var(--goa-space-xs);color:var(--goa-color-text-secondary) !important}");
 }
-function I4(t) {
+function I5(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -45255,7 +45259,7 @@ function I4(t) {
     }
   };
 }
-function A4(t, e, o) {
+function A5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: r = "1" } = e, { testid: l = "" } = e, a, c = [], d = [], s = null;
   Ee(async () => {
     await Xe(), u(), v(), b();
@@ -45302,9 +45306,9 @@ function A4(t, e, o) {
     "version" in k && o(0, r = k.version), "testid" in k && o(1, l = k.testid), "$$scope" in k && o(3, n = k.$$scope);
   }, [r, l, a, n, i, p];
 }
-class S4 extends Ce {
+class S5 extends Ce {
   constructor(e) {
-    super(), ye(this, e, A4, I4, _e, { version: 0, testid: 1 }, T4);
+    super(), ye(this, e, A5, I5, _e, { version: 0, testid: 1 }, T5);
   }
   get version() {
     return this.$$.ctx[0];
@@ -45319,17 +45323,17 @@ class S4 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-side-menu", ke(S4, { version: {}, testid: {} }, ["default"], [], true));
-function O4(t) {
+customElements.define("goa-side-menu", ke(S5, { version: {}, testid: {} }, ["default"], [], true));
+function O5(t) {
   qe(t, "svelte-osqp4c", "h2.icon.svelte-osqp4c.svelte-osqp4c{display:flex;align-items:center}h2.v2.icon.svelte-osqp4c.svelte-osqp4c{align-items:flex-start}goa-icon.svelte-osqp4c.svelte-osqp4c{color:var(--goa-side-menu-icon-color);margin-right:var(--goa-side-menu-heading-icon-gap)}h2.v2.svelte-osqp4c goa-icon.svelte-osqp4c{margin-right:0;color:var(--goa-side-menu-heading-color)}h2.svelte-osqp4c.svelte-osqp4c{border-top:var(--goa-side-menu-heading-border);background:var(--goa-side-menu-heading-color-bg);padding:var(--goa-side-menu-heading-padding);color:var(--goa-side-menu-heading-color);font:var(--goa-side-menu-heading-typography);display:flex;align-items:flex-start;margin:var(--goa-side-menu-heading-margin);gap:var(--goa-side-menu-heading-gap)}h2.v2.svelte-osqp4c.svelte-osqp4c{border-top:none;border-bottom:var(--goa-side-menu-heading-border);margin-bottom:var(--goa-space-2xs);margin-right:var(--goa-space-xs);padding:var(--goa-side-menu-heading-padding-top, 14px) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s)}h2.v2.svelte-osqp4c .label.svelte-osqp4c{margin-top:2px}");
 }
-const H4 = (t) => ({}), Rl = (t) => ({});
+const H5 = (t) => ({}), Rl = (t) => ({});
 function Gl(t) {
   let e;
   function o(r, l) {
     return (
       /*version*/
-      r[0] === "2" ? V4 : P4
+      r[0] === "2" ? V5 : P5
     );
   }
   let i = o(t), n = i(t);
@@ -45348,7 +45352,7 @@ function Gl(t) {
     }
   };
 }
-function P4(t) {
+function P5(t) {
   let e;
   return {
     c() {
@@ -45376,7 +45380,7 @@ function P4(t) {
     }
   };
 }
-function V4(t) {
+function V5(t) {
   let e;
   return {
     c() {
@@ -45404,7 +45408,7 @@ function V4(t) {
     }
   };
 }
-function B4(t) {
+function B5(t) {
   let e, o, i, n, r, l = (
     /*icon*/
     t[1] && Gl(t)
@@ -45481,7 +45485,7 @@ function B4(t) {
           /*$$scope*/
           u[3],
           g,
-          H4
+          H5
         ) : he(
           /*$$scope*/
           u[3]
@@ -45518,15 +45522,15 @@ function B4(t) {
     }
   };
 }
-function Z4(t, e, o) {
+function Z5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: r = "1" } = e, { icon: l = null } = e, { testid: a = "section-heading" } = e;
   return t.$$set = (c) => {
     "version" in c && o(0, r = c.version), "icon" in c && o(1, l = c.icon), "testid" in c && o(2, a = c.testid), "$$scope" in c && o(3, n = c.$$scope);
   }, [r, l, a, n, i];
 }
-class F4 extends Ce {
+class F5 extends Ce {
   constructor(e) {
-    super(), ye(this, e, Z4, B4, _e, { version: 0, icon: 1, testid: 2 }, O4);
+    super(), ye(this, e, Z5, B5, _e, { version: 0, icon: 1, testid: 2 }, O5);
   }
   get version() {
     return this.$$.ctx[0];
@@ -45547,15 +45551,15 @@ class F4 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-side-menu-heading", ke(F4, { version: {}, icon: {}, testid: {} }, ["default", "meta"], [], true));
-function W4(t) {
+customElements.define("goa-side-menu-heading", ke(F5, { version: {}, icon: {}, testid: {} }, ["default", "meta"], [], true));
+function W5(t) {
   qe(t, "svelte-1e4jerw", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}@keyframes svelte-1e4jerw-pulse{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}.skeleton.svelte-1e4jerw.svelte-1e4jerw{background-color:var(--goa-skeleton-loading-color-bg);animation:svelte-1e4jerw-pulse 2s infinite ease-in-out;overflow:hidden;margin:10px 0}.image.svelte-1e4jerw.svelte-1e4jerw,.image-1.svelte-1e4jerw.svelte-1e4jerw{background-color:var(--goa-skeleton-loading-color-bg);flex:1 1 100px;height:100px;margin:0}.image-2.svelte-1e4jerw.svelte-1e4jerw{height:140px}.image-3.svelte-1e4jerw.svelte-1e4jerw{height:200px}.image-4.svelte-1e4jerw.svelte-1e4jerw{height:300px}.text.svelte-1e4jerw.svelte-1e4jerw,.text-1.svelte-1e4jerw.svelte-1e4jerw,.text-2.svelte-1e4jerw.svelte-1e4jerw,.text-3.svelte-1e4jerw.svelte-1e4jerw,.text-4.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:12px;border-radius:0.25rem;margin:6px 0}.title.svelte-1e4jerw.svelte-1e4jerw,.title-1.svelte-1e4jerw.svelte-1e4jerw,.title-2.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:0.75rem;border-radius:0.25rem}.title-3.svelte-1e4jerw.svelte-1e4jerw{height:0.8rem}.title-4.svelte-1e4jerw.svelte-1e4jerw{height:1rem}.text-small.svelte-1e4jerw.svelte-1e4jerw,.text-small-1.svelte-1e4jerw.svelte-1e4jerw{width:30%;height:6px;border-radius:2px}.text-small-2.svelte-1e4jerw.svelte-1e4jerw{width:40%;height:8px;border-radius:2px}.text-small-3.svelte-1e4jerw.svelte-1e4jerw{width:50%;height:10px;border-radius:3px}.text-small-4.svelte-1e4jerw.svelte-1e4jerw{width:70%;height:12px;border-radius:4px}.paragraph.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:70px;border-radius:4px}.header.svelte-1e4jerw.svelte-1e4jerw,.header-1.svelte-1e4jerw.svelte-1e4jerw{width:50%;height:18px;margin:12px 0;border-radius:0.25rem}.header-2.svelte-1e4jerw.svelte-1e4jerw{width:60%;height:20px;margin:14px 0;border-radius:0.25rem}.header-3.svelte-1e4jerw.svelte-1e4jerw{width:70%;height:22px;margin:16px 0;border-radius:0.25rem}.header-4.svelte-1e4jerw.svelte-1e4jerw{width:80%;height:24px;margin:18px 0;border-radius:0.3rem}.avatar.svelte-1e4jerw.svelte-1e4jerw{display:inline-block}.avatar.svelte-1e4jerw.svelte-1e4jerw,.avatar-1.svelte-1e4jerw.svelte-1e4jerw{width:40px;height:40px;border-radius:50%}.avatar-2.svelte-1e4jerw.svelte-1e4jerw{width:60px;height:60px;border-radius:50%}.avatar-3.svelte-1e4jerw.svelte-1e4jerw{width:80px;height:80px;border-radius:50%}.avatar-4.svelte-1e4jerw.svelte-1e4jerw{width:120px;height:120px;border-radius:50%}.thumbnail.svelte-1e4jerw.svelte-1e4jerw{display:inline-block}.thumbnail.svelte-1e4jerw.svelte-1e4jerw,.thumbnail-1.svelte-1e4jerw.svelte-1e4jerw{width:40px;height:40px;border-radius:4px}.thumbnail-2.svelte-1e4jerw.svelte-1e4jerw{width:60px;height:60px;border-radius:4px}.thumbnail-3.svelte-1e4jerw.svelte-1e4jerw{width:80px;height:80px;border-radius:4px}.thumbnail-4.svelte-1e4jerw.svelte-1e4jerw{width:120px;height:120px;border-radius:4px}.card.svelte-1e4jerw.svelte-1e4jerw,.card-1.svelte-1e4jerw.svelte-1e4jerw,.card-2.svelte-1e4jerw.svelte-1e4jerw,.card-3.svelte-1e4jerw.svelte-1e4jerw,.card-4.svelte-1e4jerw.svelte-1e4jerw{border:1px solid var(--goa-color-greyscale-100);border-radius:4px}@container self (max-width: 623px){.card.svelte-1e4jerw.svelte-1e4jerw{width:100%}}@container self (min-width: 624px){.card.svelte-1e4jerw.svelte-1e4jerw{width:var(--max-width)}}.card-content.svelte-1e4jerw.svelte-1e4jerw{flex:1 1 auto;padding:1rem}.profile.svelte-1e4jerw.svelte-1e4jerw{display:flex;flex-direction:row;align-items:center;gap:1rem}.profile-1.svelte-1e4jerw.svelte-1e4jerw{max-width:280px}.profile-2.svelte-1e4jerw.svelte-1e4jerw{max-width:360px}.profile-3.svelte-1e4jerw.svelte-1e4jerw{max-width:480px}.profile-4.svelte-1e4jerw.svelte-1e4jerw{max-width:560px}.profile.svelte-1e4jerw .profile-avatar.svelte-1e4jerw{flex-shrink:0}.profile.svelte-1e4jerw .profile-name.svelte-1e4jerw{flex:1 1 auto}");
 }
 function Kl(t, e, o) {
   const i = t.slice();
   return i[13] = e[o], i;
 }
-function Y4(t) {
+function Y5(t) {
   let e, o;
   return {
     c() {
@@ -45581,7 +45585,7 @@ function Y4(t) {
     }
   };
 }
-function U4(t) {
+function U5(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g;
   return n = new _t({
     props: { type: "image", size: (
@@ -45621,7 +45625,7 @@ function U4(t) {
     }
   };
 }
-function Q4(t) {
+function Q5(t) {
   let e, o, i = Qe(Array(Number.parseInt(
     /*linecount*/
     t[2] + ""
@@ -45677,7 +45681,7 @@ function Q4(t) {
     }
   };
 }
-function R4(t) {
+function R5(t) {
   let e, o, i, n, r, l, a, c, d, s;
   return i = new _t({
     props: { type: "avatar", size: (
@@ -45732,7 +45736,7 @@ function R4(t) {
     }
   };
 }
-function G4(t) {
+function G5(t) {
   let e, o, i, n, r, l, a, c, d;
   return o = new _t({
     props: { type: "image", size: (
@@ -45844,14 +45848,14 @@ function Xl(t) {
     }
   };
 }
-function K4(t) {
+function K5(t) {
   let e, o, i, n, r;
   const l = [
-    G4,
-    R4,
-    Q4,
-    U4,
-    Y4
+    G5,
+    R5,
+    Q5,
+    U5,
+    Y5
   ], a = [];
   function c(d, s) {
     return (
@@ -45922,7 +45926,7 @@ function K4(t) {
     }
   };
 }
-function X4(t, e, o) {
+function X5(t, e, o) {
   const [i, n] = Ae(
     "Skeleton type",
     [
@@ -45953,8 +45957,8 @@ class _t extends Ce {
     super(), ye(
       this,
       e,
-      X4,
-      K4,
+      X5,
+      K5,
       _e,
       {
         maxwidth: 0,
@@ -45967,7 +45971,7 @@ class _t extends Ce {
         mb: 7,
         ml: 8
       },
-      W4
+      W5
     );
   }
   get maxwidth() {
@@ -46026,7 +46030,7 @@ class _t extends Ce {
   }
 }
 customElements.define("goa-skeleton", ke(_t, { maxwidth: {}, size: {}, linecount: {}, type: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
-function J4(t) {
+function J5(t) {
   let e, o;
   return {
     c() {
@@ -46073,7 +46077,7 @@ function J4(t) {
     }
   };
 }
-function $4(t, e, o) {
+function $5(t, e, o) {
   let { hspacing: i = "none" } = e, { vspacing: n = "none" } = e, { testid: r = "" } = e, l;
   Ee(() => {
     const c = `var(--goa-space-${n})`, d = i === "fill" ? "100%" : `var(--goa-space-${i})`;
@@ -46088,9 +46092,9 @@ function $4(t, e, o) {
     "hspacing" in c && o(0, i = c.hspacing), "vspacing" in c && o(1, n = c.vspacing), "testid" in c && o(2, r = c.testid);
   }, [i, n, r, l, a];
 }
-class e5 extends Ce {
+class e4 extends Ce {
   constructor(e) {
-    super(), ye(this, e, $4, J4, _e, { hspacing: 0, vspacing: 1, testid: 2 });
+    super(), ye(this, e, $5, J5, _e, { hspacing: 0, vspacing: 1, testid: 2 });
   }
   get hspacing() {
     return this.$$.ctx[0];
@@ -46111,9 +46115,9 @@ class e5 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-spacer", ke(e5, { hspacing: {}, vspacing: {}, testid: {} }, [], [], true));
+customElements.define("goa-spacer", ke(e4, { hspacing: {}, vspacing: {}, testid: {} }, [], [], true));
 const Yt = [];
-function t5(t, e = pe) {
+function t4(t, e = pe) {
   let o;
   const i = /* @__PURE__ */ new Set();
   function n(a) {
@@ -46174,8 +46178,8 @@ function ti(t, e) {
   }
   throw new Error(`Cannot interpolate ${o} values`);
 }
-function o5(t, e = {}) {
-  const o = t5(t);
+function o4(t, e = {}) {
+  const o = t4(t);
   let i, n = t;
   function r(l, a) {
     if (t == null)
@@ -46205,7 +46209,7 @@ function o5(t, e = {}) {
     subscribe: o.subscribe
   };
 }
-function i5(t) {
+function i4(t) {
   qe(t, "svelte-1n1bmdf", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}@keyframes svelte-1n1bmdf-rotate{100%{transform:rotate(360deg)}}.spinner-infinite.svelte-1n1bmdf{animation:svelte-1n1bmdf-rotate 2s linear infinite}");
 }
 function $l(t) {
@@ -46330,7 +46334,7 @@ function $l(t) {
     }
   };
 }
-function n5(t) {
+function n4(t) {
   let e, o = (
     /*ready*/
     t[6] && $l(t)
@@ -46352,9 +46356,9 @@ function n5(t) {
     }
   };
 }
-function r5(t, e, o) {
+function r4(t, e, o) {
   let i, n, r, l, a, c, { size: d } = e, { invert: s = false } = e, { progress: u = -1 } = e, { testid: g = "" } = e, v = "infinite";
-  const m = o5(0, { duration: 500, easing: Ed });
+  const m = o4(0, { duration: 500, easing: Ed });
   Us(t, m, (p) => o(7, c = p));
   function b(p) {
     const k = r + l * Math.cos(p), z = r + l * Math.sin(p);
@@ -46407,13 +46411,13 @@ function r5(t, e, o) {
     l
   ];
 }
-class l5 extends Ce {
+class l4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      r5,
-      n5,
+      r4,
+      n4,
       _e,
       {
         size: 10,
@@ -46421,7 +46425,7 @@ class l5 extends Ce {
         progress: 11,
         testid: 1
       },
-      i5
+      i4
     );
   }
   get size() {
@@ -46449,12 +46453,12 @@ class l5 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-spinner", ke(l5, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
-function a5(t) {
+customElements.define("goa-spinner", ke(l4, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
+function a4(t) {
   qe(t, "svelte-1ifx1we", ".hidden.svelte-1ifx1we{display:none}");
 }
-const s5 = (t) => ({}), ea = (t) => ({});
-function c5(t) {
+const s4 = (t) => ({}), ea = (t) => ({});
+function c4(t) {
   let e, o, i, n, r, l, a;
   const c = (
     /*#slots*/
@@ -46499,7 +46503,7 @@ function c5(t) {
           /*$$scope*/
           g[7],
           v,
-          s5
+          s4
         ) : he(
           /*$$scope*/
           g[7]
@@ -46543,7 +46547,7 @@ function c5(t) {
     }
   };
 }
-function d5(t, e, o) {
+function d4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const r = vt(i);
   let { heading: l = "" } = e, { open: a = false } = e, { disabled: c = false } = e, { slug: d = "" } = e, s, u, g;
@@ -46614,13 +46618,13 @@ function d5(t, e, o) {
     k
   ];
 }
-class u5 extends Ce {
+class u4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      d5,
-      c5,
+      d4,
+      c4,
       _e,
       {
         heading: 1,
@@ -46628,7 +46632,7 @@ class u5 extends Ce {
         disabled: 5,
         slug: 6
       },
-      a5
+      a4
     );
   }
   get heading() {
@@ -46656,11 +46660,11 @@ class u5 extends Ce {
     this.$$set({ slug: e }), y();
   }
 }
-customElements.define("goa-tab", ke(u5, { heading: {}, open: { reflect: true, type: "String" }, disabled: { type: "Boolean" }, slug: {} }, ["heading", "default"], [], true));
-function f5(t) {
+customElements.define("goa-tab", ke(u4, { heading: {}, open: { reflect: true, type: "String" }, disabled: { type: "Boolean" }, slug: {} }, ["heading", "default"], [], true));
+function f4(t) {
   qe(t, "svelte-ehzvgz", ".goatable.svelte-ehzvgz{width:0}table.svelte-ehzvgz{border-collapse:collapse}.v2.goatable.svelte-ehzvgz{border:var(--goa-table-container-border, 1px solid #e7e7e7);border-radius:var(--goa-table-border-radius-container, 16px);overflow:hidden}");
 }
-function g5(t) {
+function g4(t) {
   let e, o, i;
   const n = (
     /*#slots*/
@@ -46714,7 +46718,7 @@ function g5(t) {
     }
   };
 }
-function v5(t) {
+function v4(t) {
   let e;
   const o = (
     /*#slots*/
@@ -46765,9 +46769,9 @@ function v5(t) {
     }
   };
 }
-function h5(t) {
+function h4(t) {
   let e, o, i, n, r, l;
-  const a = [v5, g5], c = [];
+  const a = [v4, g4], c = [];
   function d(s, u) {
     return (
       /*_isTableRoot*/
@@ -46873,7 +46877,7 @@ function h5(t) {
   };
 }
 const ta = 2;
-function m5(t, e, o) {
+function m4(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
   const [a, c] = Ae("Table variant", ["normal", "relaxed"], true), [d, s] = Ae("Version", ["1", "2"]), [u, g] = Ae("Sort mode", ["single", "multi"], { required: true });
   let { width: v = "" } = e, { stickyheader: m = "false" } = e, { striped: b = "false" } = e, { variant: w = "normal" } = e, { version: p = "1" } = e, { testid: k = "" } = e, { sortMode: z = "single" } = e, { mt: M = null } = e, { mr: q = null } = e, { mb: j = null } = e, { ml: L = null } = e, I, N = false, F = [], P;
@@ -46987,13 +46991,13 @@ function m5(t, e, o) {
     R
   ];
 }
-class b5 extends Ce {
+class b4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      m5,
-      h5,
+      m4,
+      h4,
       _e,
       {
         width: 0,
@@ -47008,7 +47012,7 @@ class b5 extends Ce {
         mb: 6,
         ml: 7
       },
-      f5,
+      f4,
       [-1, -1]
     );
   }
@@ -47079,8 +47083,8 @@ class b5 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-table", ke(b5, { width: {}, stickyheader: {}, striped: { reflect: true }, variant: { reflect: true }, version: { reflect: true }, testid: {}, sortMode: { attribute: "sort-mode", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function p5(t) {
+customElements.define("goa-table", ke(b4, { width: {}, stickyheader: {}, striped: { reflect: true }, variant: { reflect: true }, version: { reflect: true }, testid: {}, sortMode: { attribute: "sort-mode", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function p4(t) {
   qe(t, "svelte-yp949b", `:host{display:flex;align-items:flex-end;cursor:pointer}button.svelte-yp949b.svelte-yp949b{border:none;background:none;display:flex;font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;line-height:inherit;height:inherit;width:100%;padding:var(
       --goa-table-padding-heading,
       var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs)
@@ -47094,7 +47098,7 @@ function p5(t) {
         var(--goa-color-interactive-focus)
       )}button.sorted.svelte-yp949b goa-icon.svelte-yp949b{color:var(--goa-color-interactive-default)}button.sorted.svelte-yp949b:hover goa-icon.svelte-yp949b{color:var(--goa-color-interactive-hover)}button.svelte-yp949b:not(.sorted) goa-icon.svelte-yp949b{color:var(--goa-color-greyscale-500)}button.svelte-yp949b:not(.sorted):hover goa-icon.svelte-yp949b{color:var(--goa-color-interactive-hover)}button.v2.svelte-yp949b:not(.sorted):focus-visible goa-icon.svelte-yp949b{color:var(--goa-color-interactive-hover)}.sort-order.svelte-yp949b.svelte-yp949b{font-size:var(--goa-font-size-1);font-weight:var(--goa-font-weight-bold);color:var(--goa-color-interactive-default);line-height:1;margin-left:var(--goa-space-2xs)}.sort-order.hidden.svelte-yp949b.svelte-yp949b{visibility:hidden}button.svelte-yp949b:hover .sort-order.svelte-yp949b{color:var(--goa-color-interactive-hover)}`);
 }
-function w5(t) {
+function w4(t) {
   let e;
   return {
     c() {
@@ -47108,7 +47112,7 @@ function w5(t) {
     }
   };
 }
-function _5(t) {
+function _4(t) {
   let e;
   return {
     c() {
@@ -47122,7 +47126,7 @@ function _5(t) {
     }
   };
 }
-function y5(t) {
+function y4(t) {
   let e;
   return {
     c() {
@@ -47136,7 +47140,7 @@ function y5(t) {
     }
   };
 }
-function k5(t) {
+function k4(t) {
   let e, o, i, n, r, l, a;
   const c = (
     /*#slots*/
@@ -47151,9 +47155,9 @@ function k5(t) {
   function s(v, m) {
     return (
       /*direction*/
-      v[0] === "desc" ? y5 : (
+      v[0] === "desc" ? y4 : (
         /*direction*/
-        v[0] === "asc" ? _5 : w5
+        v[0] === "asc" ? _4 : w4
       )
     );
   }
@@ -47232,7 +47236,7 @@ function k5(t) {
     }
   };
 }
-function C5(t, e, o) {
+function C4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { name: r = "" } = e, { direction: l = "none" } = e, { version: a = "1" } = e, { sortOrder: c = 0 } = e, d;
   Ee(() => {
     if (d) {
@@ -47249,13 +47253,13 @@ function C5(t, e, o) {
     "name" in u && o(4, r = u.name), "direction" in u && o(0, l = u.direction), "version" in u && o(1, a = u.version), "sortOrder" in u && o(2, c = u.sortOrder), "$$scope" in u && o(5, n = u.$$scope);
   }, [l, a, c, d, r, n, i, s];
 }
-class z5 extends Ce {
+class z4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      C5,
-      k5,
+      C4,
+      k4,
       _e,
       {
         name: 4,
@@ -47263,7 +47267,7 @@ class z5 extends Ce {
         version: 1,
         sortOrder: 2
       },
-      p5
+      p4
     );
   }
   get name() {
@@ -47291,8 +47295,8 @@ class z5 extends Ce {
     this.$$set({ sortOrder: e }), y();
   }
 }
-customElements.define("goa-table-sort-header", ke(z5, { name: { reflect: true }, direction: { reflect: true }, version: {}, sortOrder: { attribute: "sort-order", reflect: true, type: "Number" } }, ["default"], [], true));
-function M5(t) {
+customElements.define("goa-table-sort-header", ke(z4, { name: { reflect: true }, direction: { reflect: true }, version: {}, sortOrder: { attribute: "sort-order", reflect: true, type: "Number" } }, ["default"], [], true));
+function M4(t) {
   qe(t, "svelte-1d8r3pk", `:host{box-sizing:border-box;font:var(--goa-tab-typography)}.tab{display:flex;align-items:center;gap:var(--goa-space-xs)}[role="tab"]{display:flex;background:none;overflow:hidden;white-space:nowrap;cursor:pointer;border:none;font:var(--goa-tab-typography);color:var(--goa-tab-color-text-not-selected, var(--goa-tab-text-color));text-decoration:none}[role="tab"][aria-selected="true"]{font:var(--goa-tab-typography-selected);color:var(--goa-tab-color-text-selected, var(--goa-tab-text-color))}[role="tab"]:focus-visible{outline:var(--goa-tab-border-focus)}
     [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
   {color:var(--goa-tab-color-text-hover, var(--goa-tab-text-color))}[role="tab"][aria-disabled="true"]{color:var(--goa-color-greyscale-400, #949494);cursor:not-allowed;pointer-events:none}[role="tabpanel"]:focus-visible{outline:var(--goa-tab-border-focus);outline-offset:4px}.segmented.svelte-1d8r3pk .tabpanel.svelte-1d8r3pk:focus-visible{outline:none}@media(min-width: 624px){.tabs.svelte-1d8r3pk.svelte-1d8r3pk{border-bottom:var(--goa-tabs-bottom-border);display:flex;gap:var(--goa-tabs-gap);margin-bottom:2rem}[role="tab"]{padding:var(--goa-tab-padding);border-bottom:var(--goa-tab-border-not-selected);text-overflow:ellipsis;min-width:var(--goa-space-2xl);justify-content:center}[role="tab"][aria-selected="true"]{border-bottom:var(--goa-tab-border-selected)}
@@ -47354,7 +47358,7 @@ function oa(t) {
     }
   };
 }
-function j5(t) {
+function j4(t) {
   let e, o, i, n, r, l, a = (
     /*variant*/
     t[2] === "segmented" && /*_segmentedIndicatorWidth*/
@@ -47501,12 +47505,12 @@ function j5(t) {
     }
   };
 }
-const L5 = 200, q5 = 0.2, N5 = 400;
-function x5(t) {
+const L4 = 200, q4 = 0.2, N4 = 400;
+function x4(t) {
   const o = t.toLowerCase().split(" ").map((i) => i.toLowerCase()).join("-");
   return encodeURIComponent(o);
 }
-function E5(t, e, o) {
+function E4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { initialtab: r = -1 } = e, { testid: l = "" } = e, { version: a = "1" } = e, { variant: c = "default" } = e, { orientation: d = "auto" } = e, { navigation: s = "hash" } = e, u, g, v, m = 1, b = [], w, p = true, k = 0, z = 0, M = 30, q = 0, j = 1, L = null;
   Ee(() => {
     oo(u), O(), W(), s !== "none" && B();
@@ -47574,7 +47578,7 @@ function E5(t, e, o) {
         oe = K.heading, se = K.slug;
       else {
         const Ke = K.heading;
-        oe = document.createElement("div"), oe.textContent = Ke, se = K.slug || x5(Ke);
+        oe = document.createElement("div"), oe.textContent = Ke, se = K.slug || x4(Ke);
       }
       oe.classList.add("tab"), se || (se = "tab-" + X);
       const ze = document.createElement("a");
@@ -47617,8 +47621,8 @@ function E5(t, e, o) {
       if ($) {
         const oe = H[j - 1];
         if (oe) {
-          const ze = Math.abs(se.left - oe.getBoundingClientRect().left), Le = L5 + q5 * ze;
-          o(11, q = Math.min(Le, N5) / 1e3);
+          const ze = Math.abs(se.left - oe.getBoundingClientRect().left), Le = L4 + q4 * ze;
+          o(11, q = Math.min(Le, N4) / 1e3);
         } else
           o(11, q = 0);
       } else
@@ -47731,13 +47735,13 @@ function E5(t, e, o) {
     ie
   ];
 }
-class D5 extends Ce {
+class D4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      E5,
-      j5,
+      E4,
+      j4,
       _e,
       {
         initialtab: 12,
@@ -47747,7 +47751,7 @@ class D5 extends Ce {
         orientation: 3,
         navigation: 4
       },
-      M5,
+      M4,
       [-1, -1]
     );
   }
@@ -47788,8 +47792,8 @@ class D5 extends Ce {
     this.$$set({ navigation: e }), y();
   }
 }
-customElements.define("goa-tabs", ke(D5, { initialtab: {}, testid: {}, version: {}, variant: {}, orientation: {}, navigation: {} }, ["default"], [], true));
-function T5(t) {
+customElements.define("goa-tabs", ke(D4, { initialtab: {}, testid: {}, version: {}, variant: {}, orientation: {}, navigation: {} }, ["default"], [], true));
+function T4(t) {
   qe(t, "svelte-1w932we", ".notification-container.svelte-1w932we{position:fixed;display:flex;flex-direction:column;gap:1rem;z-index:1000}.pos-top.svelte-1w932we{top:20px}.pos-bottom.svelte-1w932we{bottom:20px}.pos-left.svelte-1w932we{left:20px;transform:none}.pos-center.svelte-1w932we{left:50%;transform:translateX(-50%)}.pos-right.svelte-1w932we{right:20px;transform:none}.sr-only.svelte-1w932we{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}");
 }
 function ia(t) {
@@ -47835,7 +47839,7 @@ function ia(t) {
     }
   };
 }
-function I5(t) {
+function I4(t) {
   var c;
   let e, o, i, n = (
     /*_notification*/
@@ -47953,7 +47957,7 @@ function na(t) {
     }
   return t;
 }
-function A5(t, e, o) {
+function A4(t, e, o) {
   let { vPosition: i = "bottom" } = e, { hPosition: n = "center" } = e, { testid: r } = e, l = [], a, c;
   Ee(() => st(window.document.body, (b, w, p) => {
     switch (b) {
@@ -48039,9 +48043,9 @@ function A5(t, e, o) {
     "vPosition" in b && o(0, i = b.vPosition), "hPosition" in b && o(1, n = b.hPosition), "testid" in b && o(2, r = b.testid);
   }, [i, n, r, a];
 }
-class S5 extends Ce {
+class S4 extends Ce {
   constructor(e) {
-    super(), ye(this, e, A5, I5, _e, { vPosition: 0, hPosition: 1, testid: 2 }, T5);
+    super(), ye(this, e, A4, I4, _e, { vPosition: 0, hPosition: 1, testid: 2 }, T4);
   }
   get vPosition() {
     return this.$$.ctx[0];
@@ -48062,8 +48066,8 @@ class S5 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-temp-notification-ctrl", ke(S5, { vPosition: { type: "String", attribute: "vertical-position" }, hPosition: { type: "String", attribute: "horizontal-position" }, testid: { type: "String", attribute: "testid" } }, [], [], true));
-function O5(t) {
+customElements.define("goa-temp-notification-ctrl", ke(S4, { vPosition: { type: "String", attribute: "vertical-position" }, hPosition: { type: "String", attribute: "horizontal-position" }, testid: { type: "String", attribute: "testid" } }, [], [], true));
+function O4(t) {
   qe(t, "svelte-g62gpr", `.snackbar.svelte-g62gpr.svelte-g62gpr{box-sizing:border-box;position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;border-radius:var(--goa-temporary-notification-borderRadius, var(--goa-border-radius-m));gap:var(--goa-temporary-notification-row-gap, var(--goa-space-m));padding:var(--goa-temporary-notification-padding, var(--goa-space-m) var(--goa-space-l));max-width:var(--goa-temporary-notification-max-width, 640px);color:var(--goa-temporary-notification-color-text, var(--goa-color-text-light));transition:transform var(--goa-temporary-notification-transition-duration, 0.3s) ease,
       opacity var(--goa-temporary-notification-transition-duration, 0.3s) ease;overflow:hidden}.snackbar.progress.svelte-g62gpr.svelte-g62gpr,.snackbar.indeterminate.svelte-g62gpr.svelte-g62gpr{padding:var(--goa-temporary-notification-padding-with-progress, var(--goa-space-m) var(--goa-space-l) 22px var(--goa-space-l))}.content.svelte-g62gpr.svelte-g62gpr{display:flex;align-items:flex-start;gap:var(--goa-temporary-notification-column-gap, var(--goa-space-s));flex:1 1 auto;min-width:0}@media(min-width: 624px){.snackbar.svelte-g62gpr.svelte-g62gpr{min-width:var(--goa-temporary-notification-min-width-desktop, 360px)}}@media(max-width: 623px){.snackbar.svelte-g62gpr.svelte-g62gpr{margin:0 var(--goa-space-m);width:calc(100vw - var(--goa-space-m) * 2)}}.snackbar.basic.svelte-g62gpr.svelte-g62gpr,.snackbar.indeterminate.svelte-g62gpr.svelte-g62gpr,.snackbar.progress.svelte-g62gpr.svelte-g62gpr{border:var(--goa-temporary-notification-borderWidth, var(--goa-border-width-s)) solid var(--goa-temporary-notification-color-border, var(--goa-color-greyscale-700));background:var(--goa-temporary-notification-color-bg-basic, var(--goa-color-greyscale-black))}.action.svelte-g62gpr.svelte-g62gpr{flex-grow:1;text-align:right}progress.svelte-g62gpr.svelte-g62gpr{position:absolute;display:flex;bottom:0;left:0;width:100%;height:var(--goa-temporary-notification-progress-bar-height, 6px);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-webkit-progress-bar{background-color:var(--goa-temporary-notification-progress-bar-color-bg, #adadad);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-webkit-progress-value{background-color:var(--goa-temporary-notification-progress-bar-color-fill, white);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-moz-progress-bar{background-color:var(--goa-temporary-notification-progress-bar-color-fill, white);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}.show.svelte-g62gpr.svelte-g62gpr{opacity:1}.show.animate-up.svelte-g62gpr.svelte-g62gpr{transform:translateY(0)}.show.animate-down.svelte-g62gpr.svelte-g62gpr{transform:translateY(0)}.hide.svelte-g62gpr.svelte-g62gpr{opacity:0}.hide.animate-up.svelte-g62gpr.svelte-g62gpr{transform:translateY(calc(-1 * var(--goa-temporary-notification-animation-distance, 100px)))}.hide.animate-down.svelte-g62gpr.svelte-g62gpr{transform:translateY(var(--goa-temporary-notification-animation-distance, 100px))}.snackbar.success.svelte-g62gpr.svelte-g62gpr{background:var(--goa-temporary-notification-color-bg-success, var(--goa-color-success-default))}.snackbar.failure.svelte-g62gpr.svelte-g62gpr{background:var(--goa-temporary-notification-color-bg-failure, var(--goa-color-emergency-default))}.message.svelte-g62gpr.svelte-g62gpr{flex:1 1 auto;font:var(--goa-temporary-notification-typography, var(--goa-typography-body-m))}.content.svelte-g62gpr:has(goa-icon) .message.svelte-g62gpr{margin-top:var(--goa-temporary-notification-padding-text-top, var(--goa-space-2xs))}`);
 }
@@ -48122,7 +48126,7 @@ function aa(t) {
     }
   };
 }
-function H5(t) {
+function H4(t) {
   let e;
   return {
     c() {
@@ -48137,7 +48141,7 @@ function H5(t) {
     }
   };
 }
-function P5(t) {
+function P4(t) {
   let e;
   return {
     c() {
@@ -48157,7 +48161,7 @@ function P5(t) {
     }
   };
 }
-function V5(t) {
+function V4(t) {
   let e, o, i, n, r, l, a, c, d = (
     /*type*/
     t[1] === "success" && ra()
@@ -48172,11 +48176,11 @@ function V5(t) {
     if (
       /*type*/
       b[1] === "progress"
-    ) return P5;
+    ) return P4;
     if (
       /*type*/
       b[1] === "indeterminate"
-    ) return H5;
+    ) return H4;
   }
   let v = g(t), m = v && v(t);
   return {
@@ -48309,19 +48313,19 @@ function V5(t) {
   };
 }
 const Ns = "large";
-function B5(t, e, o) {
+function B4(t, e, o) {
   let { message: i = "" } = e, { type: n = "basic" } = e, { progress: r = -1 } = e, { testid: l = "" } = e, { actionText: a = "" } = e, { visible: c = true } = e, { animationDirection: d = "down" } = e;
   return t.$$set = (s) => {
     "message" in s && o(0, i = s.message), "type" in s && o(1, n = s.type), "progress" in s && o(2, r = s.progress), "testid" in s && o(3, l = s.testid), "actionText" in s && o(4, a = s.actionText), "visible" in s && o(5, c = s.visible), "animationDirection" in s && o(6, d = s.animationDirection);
   }, [i, n, r, l, a, c, d];
 }
-class Z5 extends Ce {
+class Z4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      B5,
-      V5,
+      B4,
+      V4,
       _e,
       {
         message: 0,
@@ -48332,7 +48336,7 @@ class Z5 extends Ce {
         visible: 5,
         animationDirection: 6
       },
-      O5
+      O4
     );
   }
   get message() {
@@ -48378,8 +48382,8 @@ class Z5 extends Ce {
     this.$$set({ animationDirection: e }), y();
   }
 }
-customElements.define("goa-temp-notification", ke(Z5, { message: { type: "String", attribute: "message" }, type: { type: "String", attribute: "type" }, progress: { type: "Number", attribute: "progress" }, testid: { type: "String", attribute: "testid", reflect: true }, actionText: { type: "String", attribute: "action-text" }, visible: { type: "Boolean", attribute: "visible" }, animationDirection: { type: "String", attribute: "animation-direction" } }, [], [], true));
-function F5(t) {
+customElements.define("goa-temp-notification", ke(Z4, { message: { type: "String", attribute: "message" }, type: { type: "String", attribute: "type" }, progress: { type: "Number", attribute: "progress" }, testid: { type: "String", attribute: "testid", reflect: true }, actionText: { type: "String", attribute: "action-text" }, visible: { type: "Boolean", attribute: "visible" }, animationDirection: { type: "String", attribute: "animation-direction" } }, [], [], true));
+function F4(t) {
   qe(t, "svelte-1yns3oj", "h1, h2, h3, h4, h5{margin:0}.heading-xl.svelte-1yns3oj{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-1yns3oj{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-1yns3oj{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-1yns3oj{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-1yns3oj{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-1yns3oj{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-1yns3oj{font:var(--goa-typography-body-l)}.body-m.svelte-1yns3oj{font:var(--goa-typography-body-m)}.body-s.svelte-1yns3oj{font:var(--goa-typography-body-s)}.body-xs.svelte-1yns3oj{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-xl.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-1yns3oj{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-1yns3oj{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-1yns3oj{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-1yns3oj{font:var(--goa-typography-mobile-body-xs)}}");
 }
 function Ro(t) {
@@ -48501,7 +48505,7 @@ function Ro(t) {
     }
   };
 }
-function W5(t) {
+function W4(t) {
   let e = (
     /*as*/
     t[0]
@@ -48537,7 +48541,7 @@ function W5(t) {
     }
   };
 }
-function Y5(t) {
+function Y4(t) {
   switch (t) {
     case "h1":
       return "heading-xl";
@@ -48553,7 +48557,7 @@ function Y5(t) {
       return;
   }
 }
-function U5(t, e, o) {
+function U4(t, e, o) {
   let i, { $$slots: n = {}, $$scope: r } = e, { as: l = "div" } = e, { maxWidth: a = "65ch" } = e, { size: c = void 0 } = e, { color: d = "primary" } = e, { mt: s = null } = e, { mr: u = null } = e, { mb: g = null } = e, { ml: v = null } = e, m = null, b = null;
   function w() {
     if (g)
@@ -48609,7 +48613,7 @@ function U5(t, e, o) {
     "as" in k && o(0, l = k.as), "maxWidth" in k && o(1, a = k.maxWidth), "size" in k && o(8, c = k.size), "color" in k && o(2, d = k.color), "mt" in k && o(9, s = k.mt), "mr" in k && o(3, u = k.mr), "mb" in k && o(10, g = k.mb), "ml" in k && o(4, v = k.ml), "$$scope" in k && o(11, r = k.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*size, as*/
-    257 && o(7, i = c ?? Y5(l));
+    257 && o(7, i = c ?? Y4(l));
   }, [
     l,
     a,
@@ -48626,13 +48630,13 @@ function U5(t, e, o) {
     n
   ];
 }
-class Q5 extends Ce {
+class Q4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      U5,
-      W5,
+      U4,
+      W4,
       _e,
       {
         as: 0,
@@ -48644,7 +48648,7 @@ class Q5 extends Ce {
         mb: 10,
         ml: 4
       },
-      F5
+      F4
     );
   }
   get as() {
@@ -48696,8 +48700,8 @@ class Q5 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-text", ke(Q5, { as: {}, maxWidth: {}, size: {}, color: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function R5(t) {
+customElements.define("goa-text", ke(Q4, { as: {}, maxWidth: {}, size: {}, color: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function R4(t) {
   qe(t, "svelte-d4p8uc", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:inline-block}#container.svelte-d4p8uc.svelte-d4p8uc{container:self / inline-size;box-sizing:border-box}.root.svelte-d4p8uc.svelte-d4p8uc{transition:box-shadow 0.05s ease-in;position:relative;max-width:var(--width, 100%);padding-bottom:var(
       --char-count-padding
     );box-shadow:var(--goa-text-area-border);border-radius:var(--goa-text-area-border-radius);background:var(--goa-text-area-color-bg)}.root.svelte-d4p8uc.svelte-d4p8uc:hover{box-shadow:var(--goa-text-area-border-hover)}.root.svelte-d4p8uc.svelte-d4p8uc:focus-within{box-shadow:var(--goa-text-area-border), var(--goa-text-area-border-focus)}.error.svelte-d4p8uc.svelte-d4p8uc,.error.svelte-d4p8uc.svelte-d4p8uc:hover{box-shadow:var(--goa-text-area-border-error)}.error.svelte-d4p8uc.svelte-d4p8uc:focus{box-shadow:var(--goa-text-area-border), var(--goa-text-area-border-focus)}.error.svelte-d4p8uc.svelte-d4p8uc:focus-within:hover{box-shadow:var(--goa-text-area-border), var(--goa-text-area-border-focus)}.disabled.svelte-d4p8uc.svelte-d4p8uc,.disabled.svelte-d4p8uc.svelte-d4p8uc:hover{background-color:var(--goa-text-area-color-bg-disabled);cursor:default;box-shadow:var(--goa-text-area-border-disabled);resize:none}textarea.svelte-d4p8uc.svelte-d4p8uc:disabled{resize:none;color:var(--goa-text-area-color-text-disabled)}.readonly.svelte-d4p8uc.svelte-d4p8uc,.readonly.svelte-d4p8uc.svelte-d4p8uc:hover{background-color:var(
@@ -48713,13 +48717,13 @@ function sa(t) {
       r[7] && /*count*/
       r[20] > /*maxcount*/
       r[8]
-    ) return K5;
+    ) return K4;
     if (
       /*countby*/
       r[7] && /*count*/
       r[20] <= /*maxcount*/
       r[8]
-    ) return G5;
+    ) return G4;
   }
   let i = o(t), n = i && i(t);
   return {
@@ -48750,7 +48754,7 @@ function sa(t) {
     }
   };
 }
-function G5(t) {
+function G4(t) {
   let e = (
     /*maxcount*/
     t[8] - /*count*/
@@ -48787,7 +48791,7 @@ function G5(t) {
     }
   };
 }
-function K5(t) {
+function K4(t) {
   let e = (
     /*count*/
     t[20] - /*maxcount*/
@@ -48860,7 +48864,7 @@ function ca(t) {
     }
   };
 }
-function X5(t) {
+function X4(t) {
   let e, o, i, n, r, l, a, c, d, s, u = (
     /*maxcount*/
     t[8] > 0 && !/*isDisabled*/
@@ -49096,7 +49100,7 @@ function X5(t) {
     }
   };
 }
-function J5(t, e, o) {
+function J4(t, e, o) {
   let i, n, r, { name: l } = e, { value: a = "" } = e, { placeholder: c = "" } = e, { rows: d = 3 } = e, { testid: s = "" } = e, { width: u = "100%" } = e, { maxwidth: g = "60ch" } = e, { error: v = "false" } = e, { readonly: m = "false" } = e, { disabled: b = "false" } = e, { arialabel: w = "" } = e, { countby: p = "" } = e, { maxcount: k = -1 } = e, { autocomplete: z = "" } = e;
   const [M, q] = Ae("Version", ["1", "2"]);
   let { version: j = "1" } = e;
@@ -49216,13 +49220,13 @@ function J5(t, e, o) {
     se
   ];
 }
-class $5 extends Ce {
+class $4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      J5,
-      X5,
+      J4,
+      X4,
       _e,
       {
         name: 1,
@@ -49246,7 +49250,7 @@ class $5 extends Ce {
         mb: 14,
         ml: 15
       },
-      R5,
+      R4,
       [-1, -1]
     );
   }
@@ -49371,7 +49375,7 @@ class $5 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-textarea", ke($5, { name: {}, value: {}, placeholder: {}, rows: {}, testid: {}, width: {}, maxwidth: {}, error: {}, readonly: {}, disabled: {}, arialabel: {}, countby: {}, maxcount: {}, autocomplete: {}, version: {}, size: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
+customElements.define("goa-textarea", ke($4, { name: {}, value: {}, placeholder: {}, rows: {}, testid: {}, width: {}, maxwidth: {}, error: {}, readonly: {}, disabled: {}, arialabel: {}, countby: {}, maxcount: {}, autocomplete: {}, version: {}, size: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
 function ev(t) {
   qe(t, "svelte-q0l82d", ".svelte-q0l82d.svelte-q0l82d{box-sizing:border-box}.page.svelte-q0l82d.svelte-q0l82d{min-height:100vh;display:flex;flex-direction:column}.content.svelte-q0l82d.svelte-q0l82d{flex:1 1 auto;display:flex;flex-direction:column;gap:2rem}.header.svelte-q0l82d.svelte-q0l82d,.footer.svelte-q0l82d.svelte-q0l82d{flex:0 0 auto}main.svelte-q0l82d.svelte-q0l82d{flex:1 1 auto;padding:0 1rem}.nav.svelte-q0l82d.svelte-q0l82d{transition:transform 200ms ease-in-out;background-color:var(--goa-color-greyscale-white)}.nav.svelte-q0l82d>.svelte-q0l82d{display:block;padding:0.5rem 0}@media not (max-width: 623px){.page.svelte-q0l82d.svelte-q0l82d{gap:2rem}.content.svelte-q0l82d.svelte-q0l82d{display:flex;flex-direction:row;justify-content:center;width:min(var(--max-content-width), 100vw);margin:0 auto}.nav.svelte-q0l82d.svelte-q0l82d{padding:0 2rem;transform:translateX(0)}.nav.svelte-q0l82d.svelte-q0l82d:not(.side-menu){flex:0 0 var(--nav-column-width)}.nav.side-menu.svelte-q0l82d.svelte-q0l82d{flex:0 0 var(--side-menu-column-width)}main.svelte-q0l82d.svelte-q0l82d{padding-right:2rem}}@media(min-width: 1024px){main.svelte-q0l82d.svelte-q0l82d{padding-right:4.5rem}}");
 }
@@ -75316,100 +75320,162 @@ function Feat3504TextButtonRoute() {
       {
         style: {
           display: "flex",
-          gap: "1rem",
+          gap: "2rem",
           flexDirection: "column",
           alignItems: "flex-start"
         },
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Regular button size" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", children: "Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", disabled: true, children: "Disabled Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", children: "Destructive Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", disabled: true, children: "Destructive and Disabled Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              style: {
-                backgroundColor: "#000",
-                padding: "0.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem"
-              },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", children: "Inverse Text Button" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", disabled: true, children: "Inverse and Disabled Text Button" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Regular button size with icons" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", children: "Leading Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", trailingIcon: "arrow-forward", children: "Leading and Trailing Icons" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              style: {
-                backgroundColor: "#000",
-                padding: "0.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem"
-              },
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", children: "Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", disabled: true, children: "Disabled Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", children: "Destructive Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", disabled: true, children: "Destructive and Disabled Text Button" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              style: {
-                backgroundColor: "#000",
-                padding: "0.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem"
-              },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", children: "Inverse Text Button" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", disabled: true, children: "Inverse and Disabled Text Button" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size with icons" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", children: "Leading Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            GoabButton,
-            {
-              type: "text",
-              size: "compact",
-              leadingIcon: "add",
-              trailingIcon: "arrow-forward",
-              children: "Leading and Trailing Icons"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "div",
-            {
-              style: {
-                backgroundColor: "#000",
-                padding: "0.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem"
-              },
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
-            }
-          )
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "2xl", alignment: "start", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                style: {
+                  display: "flex",
+                  gap: "1rem",
+                  flexDirection: "column",
+                  alignItems: "flex-start"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Regular button size" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", children: "Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", disabled: true, children: "Disabled Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", children: "Destructive Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", disabled: true, children: "Destructive and Disabled Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "div",
+                    {
+                      style: {
+                        backgroundColor: "#000",
+                        padding: "0.5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem"
+                      },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", children: "Inverse Text Button" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", disabled: true, children: "Inverse and Disabled Text Button" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "dark", children: "Dark Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "dark", disabled: true, children: "Dark and Disabled Text Button" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                style: {
+                  display: "flex",
+                  gap: "1rem",
+                  flexDirection: "column",
+                  alignItems: "flex-start"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Regular button size with icons" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", children: "Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", trailingIcon: "arrow-forward", children: "Leading and Trailing Icons" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      style: {
+                        backgroundColor: "#000",
+                        padding: "0.5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem"
+                      },
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "dark", leadingIcon: "add", children: "Dark + Leading Icon" })
+                ]
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "2xl", alignment: "start", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                style: {
+                  display: "flex",
+                  gap: "1rem",
+                  flexDirection: "column",
+                  alignItems: "flex-start"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", children: "Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", disabled: true, children: "Disabled Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", children: "Destructive Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", disabled: true, children: "Destructive and Disabled Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "div",
+                    {
+                      style: {
+                        backgroundColor: "#000",
+                        padding: "0.5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem"
+                      },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", children: "Inverse Text Button" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", disabled: true, children: "Inverse and Disabled Text Button" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "dark", children: "Dark Text Button" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "dark", disabled: true, children: "Dark and Disabled Text Button" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                style: {
+                  display: "flex",
+                  gap: "1rem",
+                  flexDirection: "column",
+                  alignItems: "flex-start"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size with icons" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", children: "Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    GoabButton,
+                    {
+                      type: "text",
+                      size: "compact",
+                      leadingIcon: "add",
+                      trailingIcon: "arrow-forward",
+                      children: "Leading and Trailing Icons"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", disabled: true, children: "Disabled + Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", leadingIcon: "trash", children: "Destructive + Leading Icon" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      style: {
+                        backgroundColor: "#000",
+                        padding: "0.5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem"
+                      },
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "inverse", leadingIcon: "pencil", children: "Inverse + Leading Icon" })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "dark", leadingIcon: "add", children: "Dark + Leading Icon" })
+                ]
+              }
+            )
+          ] })
         ]
       }
     )
