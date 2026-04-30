@@ -38,7 +38,10 @@ describe("File selection", () => {
     const file = new File([new ArrayBuffer(1e6)], "file.jpg", {
       type: "image/jpg",
     });
-    const { queryByTestId } = render(FileUploadInput, { maxfilesize: "100KB" });
+    const { queryByTestId } = render(FileUploadInput, {
+      testid: "upload",
+      maxfilesize: "100KB",
+    });
     const input = queryByTestId("input") as HTMLInputElement;
 
     expect(input).toBeTruthy();
@@ -46,7 +49,7 @@ describe("File selection", () => {
 
     await tick();
     await waitFor(() => {
-      expect(queryByTestId("error")?.innerHTML).toContain("100KB");
+      expect(queryByTestId("upload-issue-0")).toBeTruthy();
     });
   });
 
@@ -54,13 +57,16 @@ describe("File selection", () => {
     const file = new File([new ArrayBuffer(1e6)], "file.jpg", {
       type: "image/jpg",
     });
-    const { queryByTestId } = render(FileUploadInput, { accept: "image/*" });
+    const { queryByTestId } = render(FileUploadInput, {
+      testid: "upload",
+      accept: "image/*",
+    });
     const input = queryByTestId("input") as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
   });
 
@@ -68,13 +74,16 @@ describe("File selection", () => {
     const file = new File([new ArrayBuffer(1e6)], "file.jpg", {
       type: "image/jpg",
     });
-    const { queryByTestId } = render(FileUploadInput, { accept: ".gif, .jpg" });
+    const { queryByTestId } = render(FileUploadInput, {
+      testid: "upload",
+      accept: ".gif, .jpg",
+    });
     const input = queryByTestId("input") as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
   });
 
@@ -83,13 +92,16 @@ describe("File selection", () => {
       type: "image/jpg",
     });
 
-    const { queryByTestId } = render(FileUploadInput, { accept: ".bmp,.png" });
+    const { queryByTestId } = render(FileUploadInput, {
+      testid: "upload",
+      accept: ".bmp,.png",
+    });
     const input = queryByTestId("input") as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeTruthy();
+      expect(queryByTestId("upload-issue-0")).toBeTruthy();
     });
   });
 
@@ -99,13 +111,14 @@ describe("File selection", () => {
     });
     const { queryByTestId } = render(FileUploadInput, {
       accept: "application/*",
+      testid: "upload",
     });
     const input = queryByTestId("input") as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeTruthy();
+      expect(queryByTestId("upload-issue-0")).toBeTruthy();
     });
   });
 
@@ -118,30 +131,31 @@ describe("File selection", () => {
     });
 
     const { queryByTestId, rerender } = render(FileUploadInput, {
+      testid: "upload",
       accept: ".PDF",
     });
     const input = queryByTestId("input") as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [fileLowercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
 
     fireEvent.change(input, { target: { files: [fileUppercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
 
     rerender({ accept: ".pdf" });
 
     fireEvent.change(input, { target: { files: [fileLowercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
 
     fireEvent.change(input, { target: { files: [fileUppercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
   });
 
@@ -153,30 +167,55 @@ describe("File selection", () => {
       type: "IMAGE/JPEG",
     });
     const { queryByTestId, rerender } = render(FileUploadInput, {
+      testid: "upload",
       accept: "image/jpeg",
     });
     const input = queryByTestId("input") as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [fileLowercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
 
     fireEvent.change(input, { target: { files: [fileUppercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
 
     rerender({ accept: "IMAGE/JPEG" });
 
     fireEvent.change(input, { target: { files: [fileLowercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
 
     fireEvent.change(input, { target: { files: [fileUppercase] } });
     await waitFor(() => {
-      expect(queryByTestId("error")).toBeFalsy();
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
+    });
+  });
+
+  it("dismisses an issue when the delete event is triggered", async () => {
+    const file = new File([new ArrayBuffer(1e6)], "file.jpg", {
+      type: "image/jpg",
+    });
+    const { queryByTestId } = render(FileUploadInput, {
+      testid: "upload",
+      maxfilesize: "100KB",
+    });
+    const input = queryByTestId("input") as HTMLInputElement;
+
+    fireEvent.change(input, { target: { files: [file] } });
+
+    await waitFor(() => {
+      expect(queryByTestId("upload-issue-0")).toBeTruthy();
+    });
+
+    const issueCard = queryByTestId("upload-issue-0")!;
+    fireEvent(issueCard, new CustomEvent("_delete", { bubbles: true, composed: true }));
+
+    await waitFor(() => {
+      expect(queryByTestId("upload-issue-0")).toBeFalsy();
     });
   });
 });
