@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 14 Apr 2026 22:00:35 GMT
+ * Generated on Thu, 16 Apr 2026 15:37:54 GMT
  */
 
 :root {
@@ -256,6 +256,8 @@
   --goa-radio-border-radius: 50%;
   --goa-push-drawer-transition-time: 0.25s;
   --goa-circular-progress-color-background: rgba(255, 255, 255, 0.9);
+  --goa-notification-banner-padding-tb-compact: 0.9375rem;
+  --goa-notification-banner-padding-tb: 1.4375rem;
   --goa-modal-content-wrapper-padding: 0;
   --goa-modal-max-width: 480px;
   --goa-modal-content-margin-mobile: 0;
@@ -313,6 +315,7 @@
   --goa-button-letter-spacing: 0.0125rem;
   --goa-button-tertiary-focus-color-bg: transparent;
   --goa-button-tertiary-hover-color-bg: transparent;
+  --goa-button-tertiary-color-bg-mobile: transparent;
   --goa-button-tertiary-color-bg: transparent;
   --goa-button-compact-gap: 0.375rem;
   --goa-button-outline-offset: 2px;
@@ -559,8 +562,8 @@
   --goa-pagination-gap: var(--goa-space-m);
   --goa-notification-banner-emergency-low-close-bg-hover: var(--goa-color-emergency-border);
   --goa-notification-banner-emergency-high-close-bg-hover: var(--goa-color-emergency-dark);
-  --goa-notification-banner-important-low-close-bg-hover: var(--goa-color-important-default);
-  --goa-notification-banner-important-high-close-bg-hover: var(--goa-color-important-border);
+  --goa-notification-banner-important-low-close-bg-hover: var(--goa-color-important-border);
+  --goa-notification-banner-important-high-close-bg-hover: var(--goa-color-important-default);
   --goa-notification-banner-information-low-close-bg-hover: var(--goa-color-info-border);
   --goa-notification-banner-information-high-close-bg-hover: var(--goa-color-info-dark);
   --goa-notification-banner-emergency-low-focus-border: 0 0 0 3px var(--goa-color-emergency-dark);
@@ -591,12 +594,10 @@
   --goa-notification-banner-padding-lr-large-screen-compact: var(--goa-space-2xl);
   --goa-notification-banner-padding-lr-medium-screen-compact: var(--goa-space-m);
   --goa-notification-banner-padding-lr-small-screen-compact: var(--goa-space-xs);
-  --goa-notification-banner-padding-tb-compact: var(--goa-space-m);
   --goa-notification-banner-gap-compact: var(--goa-space-xs);
   --goa-notification-banner-custom-color-icon: var(--goa-color-greyscale-white);
   --goa-notification-banner-custom-color-bg: var(--goa-color-info-default);
   --goa-notification-banner-size-icon: var(--goa-icon-size-4);
-  --goa-notification-banner-padding-tb: var(--goa-space-l);
   --goa-notification-banner-padding-lr-small-screen: var(--goa-space-m);
   --goa-notification-banner-padding-lr-medium-screen: var(--goa-space-l);
   --goa-notification-banner-padding-lr-large-screen: var(--goa-space-3xl);
@@ -957,7 +958,6 @@
   --goa-button-tertiary-focus-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-black);
   --goa-button-tertiary-hover-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-black);
   --goa-button-tertiary-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
-  --goa-button-tertiary-color-bg-mobile: var(--goa-color-greyscale-100);
   --goa-button-secondary-inverse-focus-border: var(--goa-border-width-none) solid transparent;
   --goa-button-secondary-inverse-hover-border: var(--goa-border-width-none) solid transparent;
   --goa-button-secondary-inverse-border: var(--goa-border-width-none) solid transparent;
@@ -1059,12 +1059,12 @@
   --goa-accordion-color-bg-heading-hover: var(--goa-color-greyscale-50);
   --goa-accordion-padding-content-narrow: var(--goa-space-l);
   --goa-accordion-padding-content-wide: var(--goa-space-l) var(--goa-space-l) var(--goa-space-xl) 56px;
-  --goa-accordion-padding-heading-m-icon-right: var(--goa-space-s) 0 var(--goa-space-s) var(--goa-space-m);
-  --goa-accordion-padding-heading-m-icon-left: var(--goa-space-s) var(--goa-space-m) var(--goa-space-s) 0;
-  --goa-accordion-padding-heading-icon-right: var(--goa-space-xs) 0 var(--goa-space-xs) var(--goa-space-m);
-  --goa-accordion-padding-heading-icon-left: var(--goa-space-xs) var(--goa-space-m) var(--goa-space-xs) 0;
-  --goa-accordion-border-radius-focus: var(--goa-border-radius-xl) var(--goa-border-radius-xl) var(--goa-border-radius-xs) var(--goa-border-radius-xs);
-  --goa-accordion-border-radius: var(--goa-border-radius-xl);
+  --goa-accordion-padding-heading-m-icon-right: calc(var(--goa-space-s) - var(--goa-border-width-s)) 0 calc(var(--goa-space-s) - var(--goa-border-width-s)) var(--goa-space-m);
+  --goa-accordion-padding-heading-m-icon-left: calc(var(--goa-space-s) - var(--goa-border-width-s)) var(--goa-space-m) calc(var(--goa-space-s) - var(--goa-border-width-s)) 0;
+  --goa-accordion-padding-heading-icon-right: calc(var(--goa-space-xs) - var(--goa-border-width-s)) 0 calc(var(--goa-space-xs) - var(--goa-border-width-s)) var(--goa-space-m);
+  --goa-accordion-padding-heading-icon-left: calc(var(--goa-space-xs) - var(--goa-border-width-s)) var(--goa-space-m) calc(var(--goa-space-xs) - var(--goa-border-width-s)) 0;
+  --goa-accordion-border-radius-focus: var(--goa-border-radius-2xl) var(--goa-border-radius-2xl) var(--goa-border-radius-xs) var(--goa-border-radius-xs);
+  --goa-accordion-border-radius: var(--goa-border-radius-2xl);
   --goa-accordion-divider-hover: var(--goa-border-width-s) solid var(--goa-color-greyscale-black);
   --goa-accordion-divider: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
   --goa-accordion-border: var(--goa-border-width-s) solid var(--goa-color-greyscale-200);
