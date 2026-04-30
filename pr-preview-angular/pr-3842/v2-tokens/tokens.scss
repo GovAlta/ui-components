@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 14 Apr 2026 22:00:35 GMT
+// Generated on Thu, 16 Apr 2026 15:37:54 GMT
 
 $goa-accordion-color-bg-heading: #ffffff;
 $goa-accordion-color-bg-content: #ffffff;
@@ -8,12 +8,12 @@ $goa-accordion-color-heading: #000000;
 $goa-accordion-border: 1px solid #cdcdcd;
 $goa-accordion-divider: 1px solid #cdcdcd;
 $goa-accordion-divider-hover: 1px solid #000000;
-$goa-accordion-border-radius: 0.75rem;
-$goa-accordion-border-radius-focus: 0.75rem 0.75rem 0.25rem 0.25rem;
-$goa-accordion-padding-heading-icon-left: 0.5rem 1rem 0.5rem 0;
-$goa-accordion-padding-heading-icon-right: 0.5rem 0 0.5rem 1rem;
-$goa-accordion-padding-heading-m-icon-left: 0.75rem 1rem 0.75rem 0;
-$goa-accordion-padding-heading-m-icon-right: 0.75rem 0 0.75rem 1rem;
+$goa-accordion-border-radius: 1rem;
+$goa-accordion-border-radius-focus: 1rem 1rem 0.25rem 0.25rem;
+$goa-accordion-padding-heading-icon-left: calc(0.5rem - 1px) 1rem calc(0.5rem - 1px) 0;
+$goa-accordion-padding-heading-icon-right: calc(0.5rem - 1px) 0 calc(0.5rem - 1px) 1rem;
+$goa-accordion-padding-heading-m-icon-left: calc(0.75rem - 1px) 1rem calc(0.75rem - 1px) 0;
+$goa-accordion-padding-heading-m-icon-right: calc(0.75rem - 1px) 0 calc(0.75rem - 1px) 1rem;
 $goa-accordion-padding-content-wide: 1.5rem 1.5rem 2rem 56px;
 $goa-accordion-padding-content-narrow: 1.5rem;
 $goa-accordion-color-bg-heading-hover: #f8f8f8;
@@ -141,7 +141,7 @@ $goa-button-secondary-inverse-border: 0px solid transparent;
 $goa-button-secondary-inverse-hover-border: 0px solid transparent;
 $goa-button-secondary-inverse-focus-border: 0px solid transparent;
 $goa-button-tertiary-color-bg: transparent;
-$goa-button-tertiary-color-bg-mobile: #f2f0f0;
+$goa-button-tertiary-color-bg-mobile: transparent;
 $goa-button-tertiary-color-text: #000000;
 $goa-button-tertiary-border: 1px solid #cdcdcd;
 $goa-button-tertiary-hover-color-bg: transparent;
@@ -694,14 +694,14 @@ $goa-notification-banner-information-color-text: #ffffff;
 $goa-notification-banner-padding-lr-large-screen: 4rem;
 $goa-notification-banner-padding-lr-medium-screen: 1.5rem;
 $goa-notification-banner-padding-lr-small-screen: 1rem;
-$goa-notification-banner-padding-tb: 1.5rem;
+$goa-notification-banner-padding-tb: 1.4375rem;
 $goa-notification-banner-size-icon: 1.5rem;
 $goa-notification-banner-text-size: 400 1.125rem/1.5rem acumin-variable, helvetica-neue, arial, sans-serif;
 $goa-notification-banner-custom-color-bg: #0077ad;
 $goa-notification-banner-custom-color-icon: #ffffff;
 $goa-notification-banner-custom-color-text: #ffffff;
 $goa-notification-banner-gap-compact: 0.5rem;
-$goa-notification-banner-padding-tb-compact: 1rem;
+$goa-notification-banner-padding-tb-compact: 0.9375rem;
 $goa-notification-banner-padding-lr-small-screen-compact: 0.5rem;
 $goa-notification-banner-padding-lr-medium-screen-compact: 1rem;
 $goa-notification-banner-padding-lr-large-screen-compact: 3rem;
@@ -734,8 +734,8 @@ $goa-notification-banner-emergency-high-focus-border: 0 0 0 3px #ffffff;
 $goa-notification-banner-emergency-low-focus-border: 0 0 0 3px #a91a10;
 $goa-notification-banner-information-high-close-bg-hover: #004a8f;
 $goa-notification-banner-information-low-close-bg-hover: #cbeaf7;
-$goa-notification-banner-important-high-close-bg-hover: #fde3a1;
-$goa-notification-banner-important-low-close-bg-hover: #f9ce2d;
+$goa-notification-banner-important-high-close-bg-hover: #f9ce2d;
+$goa-notification-banner-important-low-close-bg-hover: #fde3a1;
 $goa-notification-banner-emergency-high-close-bg-hover: #a91a10;
 $goa-notification-banner-emergency-low-close-bg-hover: #eeaea5;
 $goa-pagination-gap: 1rem;
