@@ -24,6 +24,7 @@
   export let open: boolean = false;
   export let heading: string = "";
   export let width: string = "492px";
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
 
   let _contentEl: HTMLElement | null = null;

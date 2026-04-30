@@ -1,42 +1,128 @@
 {
   "componentSlug": "spinner",
   "extractedFrom": "libs/web-components/src/components/spinner/Spinner.svelte",
-  "props": [
-    {
-      "name": "size",
-      "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
-      "values": [
-        "small",
-        "medium",
-        "large",
-        "xlarge"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "invert",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, inverts colors for use on dark backgrounds."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Progress value (0-100). When set to 0 or greater, shows a progress spinner instead of infinite."
+        },
+        {
+          "name": "size",
+          "type": "GoabSpinnerSize",
+          "required": true,
+          "default": null,
+          "description": "Sets the size of the spinner."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabSpinnerType",
+          "required": true,
+          "default": null,
+          "description": "Sets the spinner animation type."
+        }
       ],
-      "required": true,
-      "default": null,
-      "description": "Sets the size of the spinner."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "invert",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, inverts colors for use on dark backgrounds."
+    "angular": {
+      "props": [
+        {
+          "name": "invert",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, inverts colors for use on dark backgrounds."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Progress value (0-100). When >= 0, shows a progress spinner instead of infinite."
+        },
+        {
+          "name": "size",
+          "type": "GoabSpinnerSize",
+          "required": false,
+          "default": null,
+          "description": "Sets the size of the spinner."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabSpinnerType",
+          "required": false,
+          "default": null,
+          "description": "Sets the spinner type."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "progress",
-      "type": "number",
-      "required": false,
-      "default": "-1",
-      "description": "Progress value (0-100). When >= 0, shows a progress spinner instead of infinite."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "invert",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, inverts colors for use on dark backgrounds."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": "-1",
+          "description": "Progress value (0-100). When >= 0, shows a progress spinner instead of infinite."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "values": [
+            "small",
+            "medium",
+            "large",
+            "xlarge"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Sets the size of the spinner."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

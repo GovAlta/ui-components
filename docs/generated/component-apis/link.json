@@ -1,93 +1,293 @@
 {
   "componentSlug": "link",
   "extractedFrom": "libs/web-components/src/components/link/Link.svelte",
-  "props": [
-    {
-      "name": "leadingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon displayed before the link text."
-    },
-    {
-      "name": "trailingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon displayed after the link text."
-    },
-    {
-      "name": "color",
-      "type": "\"interactive\" | \"dark\" | \"light\"",
-      "values": [
-        "interactive",
-        "dark",
-        "light"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Custom action event name to dispatch when the link is clicked."
+        },
+        {
+          "name": "actionArg",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Single argument to pass with the action event. Deprecated, use actionArgs instead."
+        },
+        {
+          "name": "actionArgs",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": null,
+          "description": "Object of arguments to pass with the action event."
+        },
+        {
+          "name": "color",
+          "type": "GoabLinkColor",
+          "required": false,
+          "default": "interactive",
+          "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the link text."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "size",
+          "type": "GoabLinkSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the text size and corresponding icon size."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "trailingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed after the link text."
+        }
       ],
-      "required": false,
-      "default": "interactive",
-      "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "size",
-      "type": "\"xsmall\" | \"small\" | \"medium\" | \"large\"",
-      "values": [
-        "xsmall",
-        "small",
-        "medium",
-        "large"
+    "angular": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Custom action event name to dispatch when the link is clicked."
+        },
+        {
+          "name": "actionArg",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Single argument to pass with the action event (deprecated, use actionArgs)."
+        },
+        {
+          "name": "actionArgs",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": null,
+          "description": "Object of arguments to pass with the action event."
+        },
+        {
+          "name": "color",
+          "type": "GoabLinkColor",
+          "required": false,
+          "default": "interactive",
+          "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the link text."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "GoabLinkSize",
+          "required": false,
+          "default": "medium",
+          "description": "Sets the text size and corresponding icon size."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "trailingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed after the link text."
+        }
       ],
-      "required": false,
-      "default": "medium",
-      "description": "Sets the text size and corresponding icon size."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+    "webComponents": {
+      "props": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Custom action event name to dispatch when the link is clicked."
+        },
+        {
+          "name": "action-arg",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Single argument to pass with the action event (deprecated, use actionArgs)."
+        },
+        {
+          "name": "action-args",
+          "type": "Record<string, unknown>",
+          "required": false,
+          "default": "{}",
+          "description": "Object of arguments to pass with the action event."
+        },
+        {
+          "name": "color",
+          "type": "\"interactive\" | \"dark\" | \"light\"",
+          "values": [
+            "interactive",
+            "dark",
+            "light"
+          ],
+          "required": false,
+          "default": "interactive",
+          "description": "Sets the color theme. 'interactive' for blue, 'dark' for black, 'light' for white text."
+        },
+        {
+          "name": "leadingicon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the link text."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "\"xsmall\" | \"small\" | \"medium\" | \"large\"",
+          "values": [
+            "xsmall",
+            "small",
+            "medium",
+            "large"
+          ],
+          "required": false,
+          "default": "medium",
+          "description": "Sets the text size and corresponding icon size."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "trailingicon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed after the link text."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

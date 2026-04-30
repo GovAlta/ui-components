@@ -1,60 +1,160 @@
 {
   "componentSlug": "circular-progress",
   "extractedFrom": "libs/web-components/src/components/circular-progress/CircularProgress.svelte",
-  "props": [
-    {
-      "name": "variant",
-      "type": "\"fullscreen\" | \"inline\"",
-      "typeLabel": "GoabCircularProgressVariant",
-      "values": [
-        "fullscreen",
-        "inline"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "message",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Loading message displayed below the progress indicator."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Sets the progress value (0–100). When omitted, an infinite spinner is shown."
+        },
+        {
+          "name": "size",
+          "type": "GoabCircularProgressSize",
+          "required": false,
+          "default": "large",
+          "description": "Sets the size of the progress indicator."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "GoabCircularProgressVariant",
+          "required": false,
+          "default": "inline",
+          "description": "Controls the display mode. 'fullscreen' stretches across the full screen; 'inline' is used within content."
+        },
+        {
+          "name": "visible",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Controls visibility of the progress indicator, allowing a fade transition to be applied."
+        }
       ],
-      "required": false,
-      "default": "inline",
-      "description": "Stretch across the full screen or use it inline"
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "size",
-      "type": "\"small\" | \"large\"",
-      "typeLabel": "GoabCircularProgressSize",
-      "values": [
-        "small",
-        "large"
+    "angular": {
+      "props": [
+        {
+          "name": "message",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Loading message displayed under the progress indicator."
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Set the progress value. Setting this value will change the type from infinite to progress."
+        },
+        {
+          "name": "size",
+          "type": "GoabCircularProgressSize",
+          "required": false,
+          "default": null,
+          "description": "Size of the progress indicator."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "GoabCircularProgressVariant",
+          "required": false,
+          "default": null,
+          "description": "Stretch across the full screen or use it inline."
+        },
+        {
+          "name": "visible",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Show/hide the page loader. This allows for fade transition to be applied in each transition."
+        }
       ],
-      "required": false,
-      "default": "large",
-      "description": "Size of the progress indicator"
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "message",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Loading message displayed under the progress indicator"
-    },
-    {
-      "name": "progress",
-      "type": "number",
-      "required": false,
-      "default": "-1",
-      "description": "Set the progress value. Setting this value will change the type from infinite to progress"
-    },
-    {
-      "name": "visible",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Show/hide the page loader. This allows for fade transition to be applied in each transition."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "message",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Loading message displayed under the progress indicator"
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": false,
+          "default": "-1",
+          "description": "Set the progress value. Setting this value will change the type from infinite to progress"
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"large\"",
+          "typeLabel": "GoabCircularProgressSize",
+          "values": [
+            "small",
+            "large"
+          ],
+          "required": false,
+          "default": "large",
+          "description": "Size of the progress indicator"
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "variant",
+          "type": "\"fullscreen\" | \"inline\"",
+          "typeLabel": "GoabCircularProgressVariant",
+          "values": [
+            "fullscreen",
+            "inline"
+          ],
+          "required": false,
+          "default": "inline",
+          "description": "Stretch across the full screen or use it inline"
+        },
+        {
+          "name": "visible",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Show/hide the page loader. This allows for fade transition to be applied in each transition."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

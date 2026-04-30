@@ -1,84 +1,223 @@
 {
   "componentSlug": "drawer",
   "extractedFrom": "libs/web-components/src/components/drawer/Drawer.svelte",
-  "props": [
-    {
-      "name": "open",
-      "type": "any",
-      "required": false,
-      "default": "false",
-      "description": "Whether the drawer is open."
-    },
-    {
-      "name": "position",
-      "type": "DrawerPosition",
-      "required": false,
-      "default": null,
-      "description": "The position of the drawer."
-    },
-    {
-      "name": "heading",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The heading text displayed at the top of the drawer."
-    },
-    {
-      "name": "maxsize",
-      "type": "DrawerSize",
-      "required": false,
-      "default": null,
-      "description": "Sets max height on bottom position, sets width on left and right position."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "drawer",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string | ReactNode",
+          "values": [
+            "string",
+            "ReactNode"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content."
+        },
+        {
+          "name": "maxSize",
+          "type": "GoabDrawerSize",
+          "required": false,
+          "default": null,
+          "description": "Sets max height on bottom position, sets width on left and right position."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Whether the drawer is open."
+        },
+        {
+          "name": "position",
+          "type": "GoabDrawerPosition",
+          "required": true,
+          "default": null,
+          "description": "The position of the drawer."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": ""
-    }
-  ],
-  "events": [
-    {
-      "name": "onClose",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
+      "events": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Callback fired when the drawer requests to be closed.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "description": "Action elements rendered in the drawer footer slot.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "ReactNode",
+          "description": "The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content.",
+          "required": false
+        }
       ]
     },
-    {
-      "name": "_close",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
+    "angular": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string | TemplateRef<any>",
+          "values": [
+            "string",
+            "TemplateRef<any>"
+          ],
+          "required": true,
+          "default": null,
+          "description": "The heading text displayed at the top of the drawer."
+        },
+        {
+          "name": "maxSize",
+          "type": "GoabDrawerSize",
+          "required": false,
+          "default": null,
+          "description": "Sets max height on bottom position, sets width on left and right position."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true,
+          "default": null,
+          "description": "Whether the drawer is open."
+        },
+        {
+          "name": "position",
+          "type": "GoabDrawerPosition",
+          "required": true,
+          "default": null,
+          "description": "The position of the drawer."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Emits when the drawer is closed.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "TemplateRef",
+          "description": "Action elements rendered in the drawer footer slot.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "type": "TemplateRef",
+          "description": "The heading text displayed at the top of the drawer. Accepts a string or a ngTemplate for custom heading content.",
+          "required": false
+        }
+      ]
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "close-button-visibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the close button and header."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The heading text displayed at the top of the drawer."
+        },
+        {
+          "name": "maxsize",
+          "type": "DrawerSize",
+          "required": false,
+          "default": null,
+          "description": "Sets max height on bottom position, sets width on left and right position."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether the drawer is open."
+        },
+        {
+          "name": "position",
+          "type": "DrawerPosition",
+          "required": false,
+          "default": null,
+          "description": "The position of the drawer."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "drawer",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_close",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "description": "Action elements rendered in the drawer footer slot.",
+          "required": false
+        },
+        {
+          "name": "heading",
+          "description": "The heading text displayed at the top of the drawer. Accepts a string or a ReactNode for custom heading content.",
+          "required": false
+        }
       ]
     }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    },
-    {
-      "name": "heading",
-      "description": ""
-    },
-    {
-      "name": "actions",
-      "description": ""
-    }
-  ]
+  }
 }

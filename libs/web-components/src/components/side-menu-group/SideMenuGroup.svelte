@@ -138,7 +138,7 @@
     ${calculateMargin(mt, mr, mb, ml)};
   `}
 >
-  <a href={`#${_slug}`} class="heading" class:open={_open} on:click={handleClick}>
+  <a href={`#${_slug}`} class="heading" class:open={_open} class:current={_current} on:click={handleClick}>
     {#if icon}
       <div class="leading-icon">
         {#if version === "2"}

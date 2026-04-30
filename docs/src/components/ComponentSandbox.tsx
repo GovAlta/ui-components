@@ -51,6 +51,11 @@ export function ComponentSandbox({
     return stored === 'angular' ? 'angular' : 'react';
   });
 
+  useEffect(() => {
+    const stored = getFrameworkPreference();
+    setActiveTab(stored === 'angular' ? 'angular' : 'react');
+  }, []);
+
   // Subscribe to global framework preference changes
   useEffect(() => {
     return subscribeToFrameworkPreference((framework) => {

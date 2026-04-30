@@ -1,45 +1,170 @@
 {
   "componentSlug": "push-drawer",
   "extractedFrom": "libs/web-components/src/components/push-drawer/PushDrawer.svelte",
-  "props": [
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": null,
-      "description": ""
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string | ReactNode",
+          "values": [
+            "string",
+            "ReactNode"
+          ],
+          "required": false,
+          "default": null,
+          "description": "Sets the heading text or custom heading content."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Controls the open/closed state of the push drawer."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "492px",
+          "description": "Sets the width of the push drawer panel."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Callback fired when the push drawer is closed.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "description": "Content rendered in the actions slot, typically action buttons.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "open",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": ""
+    "angular": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string | TemplateRef<any>",
+          "values": [
+            "string",
+            "TemplateRef<any>"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Sets the heading text or template for the push drawer."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Sets the open state of the push drawer."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the width of the push drawer panel."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Emits when the push drawer closes.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "TemplateRef",
+          "description": "Content rendered in the actions slot, typically action buttons.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "heading",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": ""
-    },
-    {
-      "name": "width",
-      "type": "string",
-      "required": false,
-      "default": "492px",
-      "description": ""
+    "webComponents": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": ""
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "492px",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "_close",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "actions",
+          "description": "Content rendered in the actions slot, typically action buttons.",
+          "required": false
+        }
+      ]
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    },
-    {
-      "name": "actions",
-      "description": ""
-    }
-  ]
+  }
 }

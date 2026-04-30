@@ -13,6 +13,7 @@
   // Version control
   const [Version, validateVersion] = typeValidator("Version", ["1", "2"]);
   type VersionType = "1" | "2";
+  /** @internal Design system version for styling. */
   export let version: VersionType = "1";
 
   // optional

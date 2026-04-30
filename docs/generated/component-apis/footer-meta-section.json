@@ -1,20 +1,52 @@
 {
   "componentSlug": "footer-meta-section",
   "extractedFrom": "libs/web-components/src/components/footer-meta-section/FooterMetaSection.svelte",
-  "props": [
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "slot",
+          "type": "\"meta\"",
+          "required": true,
+          "default": null,
+          "description": "Sets the slot to \"meta\" to render the section in the correct footer position."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

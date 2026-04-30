@@ -1,34 +1,94 @@
 {
   "componentSlug": "footer-nav-section",
   "extractedFrom": "libs/web-components/src/components/footer-nav-section/FooterNavSection.svelte",
-  "props": [
-    {
-      "name": "heading",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The section heading displayed above the navigation links."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The section heading displayed above the navigation links."
+        },
+        {
+          "name": "maxColumnCount",
+          "type": "number",
+          "required": false,
+          "default": "1",
+          "description": "Maximum number of columns to display links in on larger screens."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "maxcolumncount",
-      "type": "number",
-      "required": false,
-      "default": "1",
-      "description": "Maximum number of columns to display links in on larger screens."
+    "angular": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The section heading displayed above the navigation links."
+        },
+        {
+          "name": "maxColumnCount",
+          "type": "number",
+          "required": false,
+          "default": "1",
+          "description": "Maximum number of columns to display links in on larger screens."
+        },
+        {
+          "name": "slot",
+          "type": "\"nav\"",
+          "required": true,
+          "default": null,
+          "description": "Sets the slot to \"nav\" to render the section in the correct footer position."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The section heading displayed above the navigation links."
+        },
+        {
+          "name": "maxcolumncount",
+          "type": "number",
+          "required": false,
+          "default": "1",
+          "description": "Maximum number of columns to display links in on larger screens."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

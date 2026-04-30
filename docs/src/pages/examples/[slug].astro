@@ -20,7 +20,8 @@ import { getExampleCode } from '../../lib/example-code';
 // Generate static paths for all examples
 export async function getStaticPaths() {
   const examples = await getCollection('examples');
-  return examples.map((example) => ({
+  const visibleExamples = examples.filter((example) => !example.data.hidden);
+  return visibleExamples.map((example) => ({
     params: { slug: example.slug },
     props: { example },
   }));
@@ -42,6 +43,7 @@ let relatedExamples: typeof example[] = [];
 if (data.relatedExamples?.length) {
   const allExamples = await getCollection('examples');
   relatedExamples = allExamples.filter(e =>
+    !e.data.hidden &&
     data.relatedExamples?.includes(e.data.id)
   );
 }

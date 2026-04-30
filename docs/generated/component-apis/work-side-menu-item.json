@@ -1,70 +1,218 @@
 {
   "componentSlug": "work-side-menu-item",
   "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideMenuItem.svelte",
-  "props": [
-    {
-      "name": "label",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "The text label displayed for the menu item."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "badge",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Badge text displayed alongside the menu item (e.g., notification count)."
+        },
+        {
+          "name": "current",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, indicates this is the currently active menu item."
+        },
+        {
+          "name": "divider",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, displays a divider line above this menu item."
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the menu item label."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The text label displayed for the menu item."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabWorkSideMenuItemType",
+          "required": false,
+          "default": "normal",
+          "description": "Sets the visual style of the badge. Use \"emergency\" for urgent items, \"success\" for positive status."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The URL the menu item links to. When absent, renders as a button instead of a link."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "popoverContent",
+          "type": "ReactNode",
+          "description": "Content rendered inside the popover panel attached to this menu item.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "url",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The URL the menu item links to. Optional — when absent, renders as a button instead of a link."
+    "angular": {
+      "props": [
+        {
+          "name": "badge",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Badge text displayed alongside the menu item (e.g., notification count)."
+        },
+        {
+          "name": "current",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, indicates this is the currently active menu item."
+        },
+        {
+          "name": "divider",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, displays a divider line above this menu item."
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the menu item label."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The text label displayed for the menu item."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabWorkSideMenuItemType",
+          "required": false,
+          "default": "normal",
+          "description": "Sets the visual style of the badge. Use \"emergency\" for urgent items, \"success\" for positive status."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The URL the menu item links to. Optional — when absent, renders as a button instead of a link."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "popoverContent",
+          "type": "TemplateRef",
+          "description": "Content rendered inside the popover panel attached to this menu item.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "badge",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Badge text displayed alongside the menu item (e.g., notification count)."
-    },
-    {
-      "name": "current",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, indicates this is the currently active menu item."
-    },
-    {
-      "name": "divider",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, displays a divider line above this menu item."
-    },
-    {
-      "name": "icon",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Icon displayed before the menu item label."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "type",
-      "type": "\"normal\" | \"emergency\" | \"success\"",
-      "values": ["normal", "emergency", "success"],
-      "required": false,
-      "default": "normal",
-      "description": "Sets the visual style of the badge. Use \"emergency\" for urgent items, \"success\" for positive status."
+    "webComponents": {
+      "props": [
+        {
+          "name": "badge",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Badge text displayed alongside the menu item (e.g., notification count)."
+        },
+        {
+          "name": "current",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, indicates this is the currently active menu item."
+        },
+        {
+          "name": "divider",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, displays a divider line above this menu item."
+        },
+        {
+          "name": "icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed before the menu item label."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The text label displayed for the menu item."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"normal\" | \"emergency\" | \"success\"",
+          "values": [
+            "normal",
+            "emergency",
+            "success"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": "Sets the visual style of the badge. Use \"emergency\" for urgent items, \"success\" for positive status."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The URL the menu item links to. Optional — when absent, renders as a button instead of a link."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "popoverContent",
+          "description": "Content rendered inside the popover panel attached to this menu item.",
+          "required": false
+        }
+      ]
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "popoverContent",
-      "description": "Content displayed in a popover panel beside the menu item."
-    }
-  ]
+  }
 }

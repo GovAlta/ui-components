@@ -26,7 +26,7 @@
   export let leadingicon: GoAIconType;
   /** The menu style variant. Primary uses bold text, secondary uses regular weight. */
   export let type: "primary" | "secondary" = "primary";
-  /** The header version this menu is used with. */
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "rootEl";

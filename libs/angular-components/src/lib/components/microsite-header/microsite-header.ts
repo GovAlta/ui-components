@@ -65,7 +65,7 @@ export class GoabMicrositeHeader implements OnInit {
   }
 
   /** Emits when the feedback link is clicked. */
-  @Output() onFeedbackClick = new EventEmitter();
+  @Output() onFeedbackClick = new EventEmitter<void>();
 
   getVersionAsString(): string {
     return typeof this.version === "string" ? this.version : "";

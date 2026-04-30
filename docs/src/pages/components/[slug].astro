@@ -112,13 +112,13 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
       <TabContentWrapper tocQuery=".api-section h3, .sub-component-section h2">
         {api ? (
           <>
-            <PropsTable props={api.props} events={api.events} slots={api.slots} />
+            <PropsTable frameworks={api.frameworks} />
             {api.subComponents && api.subComponents.length > 0 && (
               api.subComponents.map((sub) => (
                 <div class="sub-component-section">
                   <h2 id={sub.webComponentTag}>{sub.name}</h2>
                   <p class="sub-component-description">{sub.description}</p>
-                  <PropsTable props={sub.props} events={sub.events} slots={sub.slots} />
+                  <PropsTable frameworks={sub.frameworks} />
                 </div>
               ))
             )}
@@ -130,7 +130,12 @@ const v1DocsUrl = `https://v1.design.alberta.ca/components/${slug}`;
         )}
         {subcomponents.map((sub) => (
           <div class="subcomponent-section">
-            <PropsTable props={sub.api.props} events={sub.api.events} slots={sub.api.slots} headingPrefix={sub.name} idPrefix={sub.slug} badge="Subcomponent" />
+            <PropsTable
+              frameworks={sub.api.frameworks}
+              headingPrefix={sub.name}
+              idPrefix={sub.slug}
+              badge="Subcomponent"
+            />
           </div>
         ))}
       </TabContentWrapper>

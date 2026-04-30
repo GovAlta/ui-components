@@ -54,13 +54,13 @@
   /** Disables the popover interaction. Used by parent components like Dropdown. */
   export let disabled: string = "false";
   /** Additional vertical offset added to the popover's position. */
-  export let voffset = "";
+  export let voffset: string = "";
   /** Additional horizontal offset added to the popover's position. */
-  export let hoffset = "";
+  export let hoffset: string = "";
   /** Width of the focus outline border. */
-  export let focusborderwidth = "var(--goa-border-width-l)";
+  export let focusborderwidth: string = "var(--goa-border-width-l)";
   /** Border radius of the popover window. */
-  export let borderradius = "var(--goa-border-radius-m)";
+  export let borderradius: string = "var(--goa-border-radius-m)";
   /** Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
 
@@ -404,7 +404,7 @@
     class:use-anchor-based-positioning={!_needsManualPositioning}
     class:align-right={_alignment === "right"}
     style={styles(
-      style("width", position !== "right" ? width : undefined),
+      position !== "right" && style("width", width),
       style("min-width", minwidth),
       style(
         "max-width",

@@ -1,45 +1,122 @@
 {
   "componentSlug": "tab",
   "extractedFrom": "libs/web-components/src/components/tab/Tab.svelte",
-  "props": [
-    {
-      "name": "heading",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "The text label for this tab. Can also use the heading slot for custom content."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, disables the tab so it cannot be selected."
+        },
+        {
+          "name": "heading",
+          "type": "string | React.ReactNode",
+          "values": [
+            "string",
+            "React.ReactNode"
+          ],
+          "required": false,
+          "default": null,
+          "description": "The text label for this tab. Can also pass React nodes for custom heading content."
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "URL-friendly identifier for the tab, used for hash-based navigation."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "heading",
+          "type": "ReactNode",
+          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "open",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Whether this tab is currently selected/active."
+    "angular": {
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "When true, disables the tab."
+        },
+        {
+          "name": "heading",
+          "type": "string | TemplateRef<any>",
+          "values": [
+            "string",
+            "TemplateRef<any>"
+          ],
+          "required": true,
+          "default": null,
+          "description": "The text label for this tab. Can also use the heading slot for custom content."
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the URL slug for the tab."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "heading",
+          "type": "TemplateRef",
+          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "disabled",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": ""
-    },
-    {
-      "name": "slug",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": ""
+    "webComponents": {
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": ""
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "The text label for this tab. Can also use the heading slot for custom content."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Whether this tab is currently selected/active."
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "heading",
+          "description": "The text label for this tab. Can also pass React nodes for custom heading content.",
+          "required": false
+        }
+      ]
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    },
-    {
-      "name": "heading",
-      "description": ""
-    }
-  ]
+  }
 }

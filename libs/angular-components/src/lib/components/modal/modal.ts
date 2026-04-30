@@ -91,7 +91,7 @@ export class GoabModal implements OnInit {
   @Input() actions!: TemplateRef<any>;
 
   /** Emits when the modal is closed. */
-  @Output() onClose = new EventEmitter();
+  @Output() onClose = new EventEmitter<void>();
 
   getHeadingAsString(): string {
     return this.heading instanceof TemplateRef ? "" : this.heading;

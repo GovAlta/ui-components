@@ -1,100 +1,287 @@
 {
   "componentSlug": "filter-chip",
   "extractedFrom": "libs/web-components/src/components/filter-chip/FilterChip.svelte",
-  "props": [
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Text label of the chip."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Shows an error state."
+        },
+        {
+          "name": "iconTheme",
+          "type": "GoabFilterChipTheme",
+          "required": false,
+          "default": "outline",
+          "description": "Theme style of the leading icon."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed at the start of the chip."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "secondaryText",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Secondary text displayed in a smaller size before the main content."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Callback fired when the filter chip is clicked to remove it.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
+    "angular": {
+      "props": [
+        {
+          "name": "content",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Text label of the chip."
+        },
+        {
+          "name": "deletable",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Marks the chip as deletable."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Shows an error state."
+        },
+        {
+          "name": "iconTheme",
+          "type": "GoabChipTheme",
+          "required": false,
+          "default": null,
+          "description": "Sets the icon theme style for the filter chip."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType | null",
+          "values": [
+            "GoabIconType"
+          ],
+          "required": false,
+          "default": null,
+          "description": "Icon displayed at the start of the chip."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "secondaryText",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Secondary text displayed in a smaller size before the main content."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Emits when the filter chip delete button is clicked.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
-    },
-    {
-      "name": "error",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "Shows an error state."
-    },
-    {
-      "name": "content",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "Text label of the chip."
-    },
-    {
-      "name": "secondarytext",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Secondary text displayed in a smaller size before the main content."
-    },
-    {
-      "name": "leadingIcon",
-      "type": "GoAIconType",
-      "typeLabel": "GoAIconType",
-      "required": false,
-      "default": null,
-      "description": "Icon displayed at the start of the chip."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "ariaLabel",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Accessible label for the filter chip. Defaults to content with 'removable' suffix."
+    "webComponents": {
+      "props": [
+        {
+          "name": "arialabel",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Accessible label for the filter chip. Defaults to content with 'removable' suffix."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Text label of the chip."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows an error state."
+        },
+        {
+          "name": "leadingicon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon displayed at the start of the chip."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "secondarytext",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Secondary text displayed in a smaller size before the main content."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
-    },
-    {
-      "name": "_click",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
-    }
-  ],
-  "slots": []
+  }
 }

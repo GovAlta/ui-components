@@ -1,130 +1,342 @@
 {
   "componentSlug": "container",
   "extractedFrom": "libs/web-components/src/components/container/Container.svelte",
-  "props": [
-    {
-      "name": "type",
-      "type": "\"interactive\" | \"info\" | \"error\" | \"success\" | \"important\" | \"non-interactive\"",
-      "typeLabel": "GoabContainerType",
-      "values": [
-        "interactive",
-        "info",
-        "error",
-        "success",
-        "important",
-        "non-interactive"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "accent",
+          "type": "GoabContainerAccent",
+          "required": false,
+          "default": "filled",
+          "description": "Sets the style of accent on the container."
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the maximum height of the container."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the maximum width of the container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the minimum height of the container."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "padding",
+          "type": "GoabContainerPadding",
+          "required": false,
+          "default": "relaxed",
+          "description": "Sets the amount of white space in the container."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabContainerType",
+          "required": false,
+          "default": "interactive",
+          "description": "Sets the container and accent bar styling."
+        },
+        {
+          "name": "width",
+          "type": "GoabContainerWidth",
+          "required": false,
+          "default": "full",
+          "description": "Sets the width of the container."
+        }
       ],
-      "required": false,
-      "default": "interactive",
-      "description": "Sets the container and accent bar styling."
+      "events": [],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "description": "Content rendered in the container's actions area, typically buttons or controls.",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "description": "Content rendered in the container's title/heading area.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "accent",
-      "type": "\"thick\" | \"thin\" | \"filled\"",
-      "typeLabel": "GoabContainerAccent",
-      "values": [
-        "thick",
-        "thin",
-        "filled"
+    "angular": {
+      "props": [
+        {
+          "name": "accent",
+          "type": "GoabContainerAccent",
+          "required": false,
+          "default": "filled",
+          "description": "Sets the style of accent on the container."
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the maximum height of the container."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the maximum width of the container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the minimum height of the container."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "padding",
+          "type": "GoabContainerPadding",
+          "required": false,
+          "default": "relaxed",
+          "description": "Sets the amount of white space in the container."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabContainerType",
+          "required": false,
+          "default": "interactive",
+          "description": "Sets the container and accent bar styling."
+        },
+        {
+          "name": "width",
+          "type": "GoabContainerWidth",
+          "required": false,
+          "default": "full",
+          "description": "Sets the width of the container."
+        }
       ],
-      "required": false,
-      "default": "filled",
-      "description": "Sets the style of accent on the container."
+      "events": [],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "TemplateRef",
+          "description": "Content rendered in the container's actions area, typically buttons or controls.",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "TemplateRef",
+          "description": "Content rendered in the container's title/heading area.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "padding",
-      "type": "\"relaxed\" | \"compact\"",
-      "typeLabel": "GoabContainerPadding",
-      "values": [
-        "relaxed",
-        "compact"
+    "webComponents": {
+      "props": [
+        {
+          "name": "accent",
+          "type": "\"thick\" | \"thin\" | \"filled\"",
+          "typeLabel": "GoabContainerAccent",
+          "values": [
+            "thick",
+            "thin",
+            "filled"
+          ],
+          "required": false,
+          "default": "filled",
+          "description": "Sets the style of accent on the container."
+        },
+        {
+          "name": "maxheight",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the maximum height of the container."
+        },
+        {
+          "name": "maxwidth",
+          "type": "string",
+          "required": false,
+          "default": "none",
+          "description": "Sets the maximum width of the container."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "m",
+          "description": "Bottom margin."
+        },
+        {
+          "name": "minheight",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets the minimum height of the container."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "padding",
+          "type": "\"relaxed\" | \"compact\"",
+          "typeLabel": "GoabContainerPadding",
+          "values": [
+            "relaxed",
+            "compact"
+          ],
+          "required": false,
+          "default": "relaxed",
+          "description": "Sets the amount of white space in the container."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"interactive\" | \"info\" | \"error\" | \"success\" | \"important\" | \"non-interactive\"",
+          "typeLabel": "GoabContainerType",
+          "values": [
+            "interactive",
+            "info",
+            "error",
+            "success",
+            "important",
+            "non-interactive"
+          ],
+          "required": false,
+          "default": "interactive",
+          "description": "Sets the container and accent bar styling."
+        },
+        {
+          "name": "width",
+          "type": "\"full\" | \"content\"",
+          "typeLabel": "GoabContainerWidth",
+          "values": [
+            "full",
+            "content"
+          ],
+          "required": false,
+          "default": "full",
+          "description": "Sets the width of the container."
+        }
       ],
-      "required": false,
-      "default": "relaxed",
-      "description": "Sets the amount of white space in the container."
-    },
-    {
-      "name": "width",
-      "type": "\"full\" | \"content\"",
-      "typeLabel": "GoabContainerWidth",
-      "values": [
-        "full",
-        "content"
-      ],
-      "required": false,
-      "default": "full",
-      "description": "Sets the width of the container."
-    },
-    {
-      "name": "maxWidth",
-      "type": "string",
-      "required": false,
-      "default": "none",
-      "description": "Sets the maximum width of the container."
-    },
-    {
-      "name": "minHeight",
-      "type": "any",
-      "required": false,
-      "default": "",
-      "description": "Sets the minimum height of the container."
-    },
-    {
-      "name": "maxHeight",
-      "type": "any",
-      "required": false,
-      "default": "",
-      "description": "Sets the maximum height of the container."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": "m",
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+      "events": [],
+      "slots": [
+        {
+          "name": "actions",
+          "description": "Content rendered in the container's actions area, typically buttons or controls.",
+          "required": false
+        },
+        {
+          "name": "title",
+          "description": "Content rendered in the container's title/heading area.",
+          "required": false
+        }
+      ]
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "title",
-      "description": ""
-    },
-    {
-      "name": "actions",
-      "description": ""
-    }
-  ]
+  }
 }

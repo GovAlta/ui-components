@@ -1,66 +1,191 @@
 {
   "componentSlug": "hero-banner",
   "extractedFrom": "libs/web-components/src/components/hero-banner/HeroBanner.svelte",
-  "props": [
-    {
-      "name": "heading",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "Main heading text"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "backgroundColor",
+          "type": "string",
+          "required": false,
+          "default": "#f8f8f8",
+          "description": "Hero Banner background color when no background image is provided."
+        },
+        {
+          "name": "backgroundUrl",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Background image url."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Main heading text."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Minimum height of the hero banner. Defaults to 600px when a background image is provided."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "textColor",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text color within the hero banner."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "description": "Content rendered in the actions slot.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "backgroundurl",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "Background image url"
+    "angular": {
+      "props": [
+        {
+          "name": "backgroundColor",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Hero Banner background color when no background image is provided."
+        },
+        {
+          "name": "backgroundUrl",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Background image url."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Main heading text."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Minimum height of the hero banner. Defaults to 600px when a background image is provided."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "textColor",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text color within the hero banner."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "actions",
+          "type": "TemplateRef",
+          "description": "Content rendered in the actions slot.",
+          "required": false
+        }
+      ]
     },
-    {
-      "name": "minheight",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": "Minimum height of the hero banner. Defaults to 600px when a background image is provided."
-    },
-    {
-      "name": "maxcontentwidth",
-      "type": "any",
-      "required": false,
-      "default": "100%",
-      "description": "Maximum width of the content area"
-    },
-    {
-      "name": "backgroundcolor",
-      "type": "string",
-      "required": false,
-      "default": "#f8f8f8",
-      "description": "Hero Banner background color when no background image is provided"
-    },
-    {
-      "name": "textcolor",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Text color within the hero banner."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "background",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "backgroundcolor",
+          "type": "string",
+          "required": false,
+          "default": "#f8f8f8",
+          "description": "Hero Banner background color when no background image is provided"
+        },
+        {
+          "name": "backgroundurl",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Background image url"
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Main heading text"
+        },
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "100%",
+          "description": "Maximum width of the content area"
+        },
+        {
+          "name": "minheight",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Minimum height of the hero banner. Defaults to 600px when a background image is provided."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "background",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "textcolor",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Text color within the hero banner."
+        }
+      ],
+      "events": [],
+      "slots": [
+        {
+          "name": "actions",
+          "description": "Content rendered in the actions slot.",
+          "required": false
+        }
+      ]
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    },
-    {
-      "name": "actions",
-      "description": ""
-    }
-  ]
+  }
 }

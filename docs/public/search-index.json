@@ -11,8 +11,7 @@
       "blind",
       "collapse",
       "content layout",
-      "expandable panel",
-      "expand"
+      "expandable panel"
     ],
     "slug": "accordion"
   },
@@ -179,7 +178,14 @@
     "description": "Advanced table with sorting and selection.",
     "status": "stable",
     "category": "content-layout",
-    "tags": [],
+    "tags": [
+      "table",
+      "grid",
+      "content layout",
+      "data table",
+      "sorting",
+      "selection"
+    ],
     "slug": "data-grid"
   },
   {
@@ -246,7 +252,7 @@
     "name": "Drawer",
     "description": "A panel that slides in from the side of the screen to display additional content or actions without navigating away from the current view.",
     "status": "stable",
-    "category": "content-layout",
+    "category": "structure-and-navigation",
     "tags": [
       "sections",
       "structure and navigation",
@@ -437,16 +443,6 @@
       "process timer"
     ],
     "slug": "linear-progress"
-  },
-  {
-    "type": "component",
-    "id": "link-button",
-    "name": "Link Button",
-    "description": "Button styled as a link for secondary actions.",
-    "status": "stable",
-    "category": "inputs-and-actions",
-    "tags": [],
-    "slug": "link-button"
   },
   {
     "type": "component",
@@ -733,6 +729,82 @@
     "category": "structure-and-navigation",
     "tags": [],
     "slug": "work-side-menu"
+  },
+  {
+    "type": "example",
+    "id": "401-error-page",
+    "title": "Restricted access (401)",
+    "description": "A full page that tells the user they cannot access the requested resource, with a clear next step and a way to contact support.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "error",
+      "page-structure",
+      "\"401\""
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "link",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "401-error-page"
+  },
+  {
+    "type": "example",
+    "id": "404-error-page",
+    "title": "Page not found (404)",
+    "description": "A full page that tells the user a page can't be found, with an action to get them back on track.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "error",
+      "page-structure",
+      "\"404\""
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "404-error-page"
+  },
+  {
+    "type": "example",
+    "id": "500-error-page",
+    "title": "Server problem (500)",
+    "description": "A full page that tells the user the service is temporarily unable to respond, with an action to try again or return home.",
+    "status": "published",
+    "categories": [
+      "content-layout"
+    ],
+    "tags": [
+      "error",
+      "page-structure",
+      "\"500\""
+    ],
+    "components": [
+      "page-block",
+      "block",
+      "text",
+      "icon",
+      "button"
+    ],
+    "scale": "page",
+    "userType": "both",
+    "slug": "500-error-page"
   },
   {
     "type": "example",
@@ -1106,28 +1178,6 @@
   },
   {
     "type": "example",
-    "id": "communicate-a-future-service-outage",
-    "title": "Communicate a future service outage",
-    "description": "Display a clear message to inform users about an upcoming service outage, including the date, time, and expected impact on service availability.",
-    "status": "published",
-    "categories": [
-      "feedback-and-alerts"
-    ],
-    "tags": [
-      "notification",
-      "maintenance",
-      "alerts",
-      "system-status"
-    ],
-    "components": [
-      "notification"
-    ],
-    "scale": "task",
-    "userType": "both",
-    "slug": "communicate-a-future-service-outage"
-  },
-  {
-    "type": "example",
     "id": "confirm-a-change",
     "title": "Confirm a change",
     "description": "Ask the user to confirm a proposed change before it is applied.",
@@ -1462,37 +1512,8 @@
   },
   {
     "type": "example",
-    "id": "form-stepper-with-controlled-navigation",
-    "title": "Form stepper with controlled navigation",
-    "description": "Create a multi-step form with controlled navigation using Previous/Next buttons.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "stepper",
-      "form",
-      "wizard",
-      "multi-step",
-      "navigation",
-      "pages"
-    ],
-    "components": [
-      "form-stepper",
-      "form-step",
-      "pages",
-      "button",
-      "skeleton",
-      "spacer"
-    ],
-    "scale": "task",
-    "userType": "both",
-    "slug": "form-stepper-with-controlled-navigation"
-  },
-  {
-    "type": "example",
-    "id": "give-background-information-before-asking-a-question",
-    "title": "Give background information before asking a question",
+    "id": "give-more-information-before-asking-a-question-a",
+    "title": "Give more information before asking a question (a)",
     "description": "Provide explanatory context before asking a question to help users understand what is being asked.",
     "status": "published",
     "categories": [
@@ -1513,12 +1534,12 @@
     ],
     "scale": "task",
     "userType": "citizen",
-    "slug": "give-background-information-before-asking-a-question"
+    "slug": "give-more-information-before-asking-a-question-a"
   },
   {
     "type": "example",
-    "id": "give-context-before-asking-a-long-answer-question",
-    "title": "Give context before asking a long answer question",
+    "id": "give-more-information-before-asking-a-question-b",
+    "title": "Give more information before asking a question (b)",
     "description": "Provide context and guidance before a long-answer text field to help users provide relevant information.",
     "status": "published",
     "categories": [
@@ -1541,7 +1562,7 @@
     ],
     "scale": "task",
     "userType": "citizen",
-    "slug": "give-context-before-asking-a-long-answer-question"
+    "slug": "give-more-information-before-asking-a-question-b"
   },
   {
     "type": "example",
@@ -1727,6 +1748,28 @@
   },
   {
     "type": "example",
+    "id": "notify-the-user-of-a-future-service-outage",
+    "title": "Notify the user of a future service outage",
+    "description": "Display a clear message to inform users about an upcoming service outage, including the date, time, and expected impact on service availability.",
+    "status": "published",
+    "categories": [
+      "feedback-and-alerts"
+    ],
+    "tags": [
+      "notification",
+      "maintenance",
+      "alerts",
+      "system-status"
+    ],
+    "components": [
+      "notification"
+    ],
+    "scale": "task",
+    "userType": "both",
+    "slug": "notify-the-user-of-a-future-service-outage"
+  },
+  {
+    "type": "example",
     "id": "public-form",
     "title": "Public form",
     "description": "The public form pattern provides a structure for citizen-facing form experiences, emphasizing simplicity, accessibility, and low cognitive load.",
@@ -1741,7 +1784,7 @@
       "pattern"
     ],
     "components": [],
-    "scale": "service",
+    "scale": "product",
     "userType": "citizen",
     "slug": "public-form"
   },
@@ -2038,31 +2081,6 @@
     "scale": "interaction",
     "userType": "both",
     "slug": "set-a-specific-tab-to-be-active"
-  },
-  {
-    "type": "example",
-    "id": "set-the-status-of-step-on-a-form-stepper",
-    "title": "Set the status of step on a form stepper",
-    "description": "Set the status of each step on a form stepper to indicate completion progress.",
-    "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
-    "tags": [
-      "forms",
-      "stepper",
-      "multi-step",
-      "navigation"
-    ],
-    "components": [
-      "form-stepper",
-      "form-step",
-      "pages",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "both",
-    "slug": "set-the-status-of-step-on-a-form-stepper"
   },
   {
     "type": "example",
@@ -2714,5 +2732,35 @@
     "scale": "task",
     "userType": "both",
     "slug": "warn-a-user-of-a-deadline"
+  },
+  {
+    "type": "example",
+    "id": "workspace",
+    "title": "Workspace",
+    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government. Workspaces should be adapted to fit each service's context and user needs. The reference example is a starting point to expand on, not a rigid template.",
+    "status": "published",
+    "categories": [],
+    "tags": [
+      "workspace",
+      "worker",
+      "service",
+      "case-management",
+      "dashboard",
+      "pattern"
+    ],
+    "components": [
+      "work-side-menu",
+      "table",
+      "badge",
+      "tabs",
+      "container",
+      "accordion",
+      "drawer",
+      "button",
+      "block"
+    ],
+    "scale": "product",
+    "userType": "worker",
+    "slug": "workspace"
   }
 ]
