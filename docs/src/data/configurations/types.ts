@@ -94,6 +94,13 @@ export interface ComponentConfigurations {
   /** Default configuration ID to show on page load */
   defaultConfigurationId: string;
 
+  /** Optional inline CSS for the preview container (e.g. background color for workspace context) */
+  previewStyle?: string;
+
+  /** Optional HTML that wraps each config's webComponents code in the preview only (not shown in code snippet).
+   *  Use {{slot}} as placeholder for the component code. */
+  previewWrapper?: string;
+
   /** All available configurations */
   configurations: ComponentConfiguration[];
 }
