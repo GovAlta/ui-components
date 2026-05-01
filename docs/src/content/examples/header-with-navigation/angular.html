@@ -1,13 +1,22 @@
-<goab-app-header url="https://example.com" heading="Service name">
-  <a slot="navigation" href="#">Dashboard</a>
-  <goab-app-header-menu slotName="navigation" heading="Search">
+<goab-app-header
+  url="https://example.com"
+  heading="Service name"
+  [navigation]="navigationTemplate"
+  [utilities]="utilitiesTemplate"
+>
+</goab-app-header>
+<ng-template #navigationTemplate>
+  <a href="#">Dashboard</a>
+  <goab-app-header-menu heading="Search">
     <a href="#">Cases</a>
     <a href="#">Payments</a>
     <a href="#">Outstanding</a>
   </goab-app-header-menu>
-  <a slot="navigation" href="#">Support</a>
-  <goab-menu-button slot="utilities" text="John Smith" type="tertiary" size="compact">
+  <a href="#">Support</a>
+</ng-template>
+<ng-template #utilitiesTemplate>
+  <goab-menu-button text="John Smith" type="tertiary" size="compact">
     <goab-menu-action text="User settings" action="user-settings"></goab-menu-action>
     <goab-menu-action text="Sign out" action="sign-out"></goab-menu-action>
   </goab-menu-button>
-</goab-app-header>
+</ng-template>

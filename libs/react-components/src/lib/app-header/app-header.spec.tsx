@@ -89,4 +89,50 @@ describe("GoabAppHeader", () => {
     const el = container.querySelector("goa-app-header");
     expect(el?.getAttribute("data-grid")).toBe("row");
   });
+
+  it("should render banner prop into a div with slot='banner'", () => {
+    const { container } = render(
+      <GoabAppHeader heading="Test heading" banner={<span>Banner content</span>} />,
+    );
+
+    const slot = container.querySelector("goa-app-header div[slot='banner']");
+    expect(slot?.textContent).toBe("Banner content");
+  });
+
+  it("should render phase prop into a div with slot='phase'", () => {
+    const { container } = render(
+      <GoabAppHeader heading="Test heading" phase={<span>Beta</span>} />,
+    );
+
+    const slot = container.querySelector("goa-app-header div[slot='phase']");
+    expect(slot?.textContent).toBe("Beta");
+  });
+
+  it("should render navigation prop into a div with slot='navigation'", () => {
+    const { container } = render(
+      <GoabAppHeader heading="Test heading" navigation={<a href="/home">Home</a>} />,
+    );
+
+    const slot = container.querySelector("goa-app-header div[slot='navigation']");
+    expect(slot?.textContent).toBe("Home");
+  });
+
+  it("should render utilities prop into a div with slot='utilities'", () => {
+    const { container } = render(
+      <GoabAppHeader heading="Test heading" utilities={<button>Account</button>} />,
+    );
+
+    const slot = container.querySelector("goa-app-header div[slot='utilities']");
+    expect(slot?.textContent).toBe("Account");
+  });
+
+  it("should not render slot divs when slot props are not provided", () => {
+    const { container } = render(<GoabAppHeader heading="Test heading" />);
+
+    const el = container.querySelector("goa-app-header");
+    expect(el?.querySelector("div[slot='banner']")).toBeNull();
+    expect(el?.querySelector("div[slot='phase']")).toBeNull();
+    expect(el?.querySelector("div[slot='navigation']")).toBeNull();
+    expect(el?.querySelector("div[slot='utilities']")).toBeNull();
+  });
 });

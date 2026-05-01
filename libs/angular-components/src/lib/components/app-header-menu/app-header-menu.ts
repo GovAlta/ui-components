@@ -17,10 +17,12 @@ import {
       [attr.leadingicon]="leadingIcon"
       [attr.heading]="heading"
       [attr.testid]="testId"
+      version="2"
     >
       <ng-content />
     </goa-app-header-menu>
   }`,
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 /** Menu items within the app header. */
@@ -33,7 +35,7 @@ export class GoabAppHeaderMenu implements OnInit {
   @Input() heading?: string;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
-  /** Sets the slot name for the component. */
+  /** @deprecated Sets the slot name for the component. Deprecated: use AppHeader navigation temnplateRef instead. */
   @Input() slotName?: string;
 
   @HostBinding("attr.slot")

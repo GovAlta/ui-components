@@ -2,6 +2,7 @@ import {
   GoabAppHeader,
   GoabAppHeaderMenu,
   GoabBadge,
+  GoabBlock,
   GoabButton,
   GoabMenuAction,
   GoabMenuButton,
@@ -26,62 +27,69 @@ export function DocsAppHeaderRoute() {
       />
 
       <h3>With utilities</h3>
-      <GoabAppHeader heading="My Application" url="/">
-        <div slot="utilities">
-          <GoabButton type="tertiary" size="compact">Help</GoabButton>
-        </div>
-        <div slot="utilities">
-          <GoabButton type="tertiary" size="compact" leadingIcon="person">
-            Sign in
-          </GoabButton>
-        </div>
-      </GoabAppHeader>
+      <GoabAppHeader
+        heading="My Application"
+        url="/"
+        utilities={
+          <>
+            <GoabButton type="tertiary" size="compact">
+              Help
+            </GoabButton>
+            <GoabButton type="tertiary" size="compact" leadingIcon="person">
+              Sign in
+            </GoabButton>
+          </>
+        }
+      />
 
       <h3>With phase badge</h3>
-      <GoabAppHeader heading="My Application" url="/">
-        <div slot="phase">
-          <GoabBadge type="important" content="Service preview" icon={false} />
-        </div>
-      </GoabAppHeader>
+      <GoabAppHeader
+        heading="My Application"
+        url="/"
+        phase={<GoabBadge type="important" content="Service preview" />}
+      />
 
       <h3>Internal testing banner</h3>
-      <GoabAppHeader heading="My Application" url="/">
-        <span
-          slot="banner"
-          style={{
-            textAlign: "right",
-            width: "100%",
-            fontSize: "12px",
-            fontWeight: "normal",
-          }}
-        >
-          v2.3.1 | UAT Environment
-        </span>
-      </GoabAppHeader>
+      <GoabAppHeader
+        heading="My Application"
+        url="/"
+        banner={
+          <span
+            style={{
+              textAlign: "right",
+              width: "100%",
+              fontSize: "12px",
+              fontWeight: "normal",
+            }}
+          >
+            v2.3.1 | UAT Environment
+          </span>
+        }
+      />
 
       <h3>With navigation</h3>
-      <GoabAppHeader heading="Service Portal" url="/">
-        <a slot="navigation" href="#">
-          Dashboard
-        </a>
-        <GoabAppHeaderMenu slotName="navigation" heading="Applications">
-          <a href="#">New application</a>
-          <a href="#">Active</a>
-          <a href="#">Archived</a>
-        </GoabAppHeaderMenu>
-        <a slot="navigation" href="#">
-          Reports
-        </a>
-        <a slot="navigation" href="#">
-          Settings
-        </a>
-        <div slot="utilities">
+      <GoabAppHeader
+        heading="Service Portal"
+        url="/"
+        navigation={
+          <>
+            <a href="#">Dashboard</a>
+            <GoabAppHeaderMenu heading="Applications">
+              <a href="#">New application</a>
+              <a href="#">Active</a>
+              <a href="#">Archived</a>
+            </GoabAppHeaderMenu>
+            <a href="#">Reports</a>
+            <a href="#">Settings</a>
+          </>
+        }
+        utilities={
           <GoabMenuButton text="John Smith" type="tertiary" size="compact">
             <GoabMenuAction text="User settings" action="user-settings" />
             <GoabMenuAction text="Sign out" action="sign-out" />
           </GoabMenuButton>
-        </div>
-      </GoabAppHeader>
+        }
+      />
     </div>
   );
 }

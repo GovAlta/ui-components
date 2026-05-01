@@ -7,6 +7,7 @@
   import { MOBILE_BP, TABLET_BP } from "../../common/breakpoints";
   import {
     getSlottedChildren,
+    unwrapNestedSlotContent,
     toBoolean,
     typeValidator,
   } from "../../common/utils";
@@ -23,7 +24,7 @@
   // optional
   /** Set the service name to display in the app header. */
   export let heading: string = "";
-  /** V2 only: Secondary text displayed under the service name. */
+  /** Secondary text displayed under the service name. */
   export let secondarytext: string = "";
   /** Set the URL to link from the alberta.ca logo. A full url is required. */
   export let url: string = "";
@@ -70,7 +71,6 @@
   let _showUtilitiesMenu = false; // Start false - show items initially to measure
   let _utilitiesMenuOpen = false;
   let _utilitiesPlaceholderEl: HTMLElement | null = null;
-  let _utilitiesResizeObserver: ResizeObserver | null = null;
   let _utilitiesInitialMeasurementDone = false;
   let _utilitiesCheckTimeout: number | null = null;
 
@@ -98,6 +98,10 @@
     // V2-specific initialization
     if (version === "2") {
       detectV2Slots();
+      if (!!_rootEl) {
+        unwrapNestedSlotContent(_rootEl, "utilities");
+      }
+
       detectUtilitiesItems();
 
       // Add click-outside handler for utilities menu
@@ -407,7 +411,6 @@
       return children.length > 0;
     } else {
       // testing
-      // @ts-expect-error
       return [..._slotParentEl?.querySelectorAll("a")].length > 0;
     }
   }
@@ -1340,6 +1343,7 @@
   }
 
   /* Style buttons inside the utilities dropdown - make them look like menu items */
+  .v2 .v2-utilities-dropdown :global(::slotted(goab-button)),
   .v2 .v2-utilities-dropdown :global(::slotted(goa-button)),
   .v2 .v2-utilities-dropdown :global(::slotted(button)) {
     /* Force full width and text-only appearance */
@@ -1370,11 +1374,13 @@
     transition: background-color 0.2s ease;
   }
 
+  .v2 .v2-utilities-dropdown :global(::slotted(goab-button:hover)),
   .v2 .v2-utilities-dropdown :global(::slotted(goa-button:hover)),
   .v2 .v2-utilities-dropdown :global(::slotted(button:hover)) {
     background: var(--goa-color-greyscale-100) !important;
   }
 
+  .v2 .v2-utilities-dropdown :global(::slotted(goab-button:focus-visible)),
   .v2 .v2-utilities-dropdown :global(::slotted(goa-button:focus-visible)),
   .v2 .v2-utilities-dropdown :global(::slotted(button:focus-visible)) {
     outline: 3px solid var(--goa-color-interactive-focus) !important;

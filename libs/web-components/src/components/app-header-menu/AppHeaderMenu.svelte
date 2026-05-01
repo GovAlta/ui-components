@@ -63,7 +63,10 @@
     validateRequired("GoaAppHeaderMenu", { heading });
     const hostElement = (_rootEl?.getRootNode() as ShadowRoot)
       ?.host as HTMLElement;
-    const inNavigationSlot = hostElement?.getAttribute("slot") === "navigation";
+    const inNavigationSlot =
+      hostElement?.getAttribute("slot") === "navigation" ||
+      // Hack for Angular: the goab-app=header-menu might be what is in the slot
+      hostElement?.parentElement?.getAttribute("slot") === "navigation";
 
     // Auto-detect version from parent AppHeader if not explicitly set
     // Uses property access because Svelte props aren't reflected as HTML attributes

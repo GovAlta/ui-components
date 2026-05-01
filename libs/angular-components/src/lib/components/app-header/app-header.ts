@@ -8,11 +8,14 @@ import {
   OnInit,
   ChangeDetectorRef,
   inject,
+  TemplateRef,
 } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 @Component({
   standalone: true,
   selector: "goab-app-header",
+  imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-app-header
       [attr.url]="url"
@@ -25,6 +28,26 @@ import {
       [attr.version]="version"
       (_menuClick)="_onMenuClick()"
     >
+      @if (this.banner) {
+        <div slot="banner">
+          <ng-container [ngTemplateOutlet]="banner"></ng-container>
+        </div>
+      }
+      @if (this.phase) {
+        <div slot="phase">
+          <ng-container [ngTemplateOutlet]="phase"></ng-container>
+        </div>
+      }
+      @if (this.navigation) {
+        <div slot="navigation">
+          <ng-container [ngTemplateOutlet]="navigation"></ng-container>
+        </div>
+      }
+      @if (this.utilities) {
+        <div slot="utilities">
+          <ng-container [ngTemplateOutlet]="utilities"></ng-container>
+        </div>
+      }
       <ng-content />
     </goa-app-header>
   }`,
@@ -38,7 +61,7 @@ export class GoabAppHeader implements OnInit {
   @Input() url?: string;
   /** Sets the service name to display in the app header. */
   @Input() heading?: string;
-  /** V2 only: Secondary text displayed under the service name. */
+  /** Secondary text displayed under the service name. */
   @Input() secondaryText?: string;
   /** Maximum width of the content area. */
   @Input() maxContentWidth?: string;
@@ -46,6 +69,14 @@ export class GoabAppHeader implements OnInit {
   @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
   /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** Banner content displayed above the header. */
+  @Input() banner?: TemplateRef<any>;
+  /** Phase badge content displayed beside the service name. */
+  @Input() phase?: TemplateRef<any>;
+  /** Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown. */
+  @Input() navigation?: TemplateRef<any>;
+  /** Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions. */
+  @Input() utilities?: TemplateRef<any>;
 
   isReady = false;
   version = "2";

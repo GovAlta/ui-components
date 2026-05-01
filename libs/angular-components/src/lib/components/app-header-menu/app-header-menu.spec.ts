@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
-import { GoabAppHeaderMenu } from "./header-menu";
+import { GoabAppHeaderMenu } from "./app-header-menu";
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { GoabIconType } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
@@ -83,9 +83,7 @@ describe("GoabAppHeaderMenu", () => {
     tick();
     fixture.detectChanges();
 
-    const host = fixture.debugElement.query(
-      By.css("goab-app-header-menu"),
-    ).nativeElement;
+    const host = fixture.debugElement.query(By.css("goab-app-header-menu")).nativeElement;
     expect(host.getAttribute("slot")).toBe("navigation");
   }));
 
@@ -95,9 +93,7 @@ describe("GoabAppHeaderMenu", () => {
     tick();
     fixture.detectChanges();
 
-    const host = fixture.debugElement.query(
-      By.css("goab-app-header-menu"),
-    ).nativeElement;
+    const host = fixture.debugElement.query(By.css("goab-app-header-menu")).nativeElement;
     expect(host.getAttribute("slot")).toBeNull();
   }));
 

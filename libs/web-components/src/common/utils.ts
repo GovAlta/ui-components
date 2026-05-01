@@ -613,3 +613,34 @@ export function parseCssTimeToMilliseconds(
 
   return durationInMs;
 }
+
+// This function is used to move slotted content from the React and Angular wrapper div up to the host level slot
+// in order to enable menu overflow processing and styling. It looks for a div with the specified slot name and moves
+// its children up to the host level, then removes the wrapper div.
+export function unwrapNestedSlotContent(
+  hostEl: HTMLElement,
+  slotName: string,
+): void {
+  const shadowRootEl = hostEl.getRootNode() as ShadowRoot;
+  const lightDomChildren = shadowRootEl.host?.children || [];
+
+  Array.from(lightDomChildren).forEach((el) => {
+    if (el.getAttribute("slot") === slotName && el.tagName === "DIV") {
+      const divFromWrapper = el;
+
+      Array.from(divFromWrapper.children)
+        .filter((child) => child.nodeType === Node.ELEMENT_NODE)
+        .map((child) => child as HTMLElement)
+        .forEach((child) => {
+          // Move all children of the div up to the host level slot
+          divFromWrapper.removeChild(child);
+
+          child.setAttribute("slot", slotName);
+
+          shadowRootEl.host.appendChild(child);
+        });
+
+      shadowRootEl.host.removeChild(divFromWrapper);
+    }
+  });
+}
