@@ -8,13 +8,16 @@ import {
   OnInit,
   ChangeDetectorRef,
   inject,
+  TemplateRef,
 } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { GoabBaseComponent } from "../base.component";
 
 @Component({
   standalone: true,
   selector: "goab-app-header",
+  imports: [NgTemplateOutlet],
   template: `@if (isReady) {
     <goa-app-header
       [attr.url]="url"
@@ -27,6 +30,16 @@ import { GoabBaseComponent } from "../base.component";
       [attr.version]="version"
       (_menuClick)="_onMenuClick()"
     >
+      @if (this.navigation) {
+        <div slot="navigation">
+          <ng-container [ngTemplateOutlet]="navigation"></ng-container>
+        </div>
+      }
+      @if (this.utilities) {
+        <div slot="utilities">
+          <ng-container [ngTemplateOutlet]="utilities"></ng-container>
+        </div>
+      }
       <ng-content />
     </goa-app-header>
   }`,
@@ -46,6 +59,10 @@ export class GoabAppHeader extends GoabBaseComponent implements OnInit {
   @Input() maxContentWidth?: string;
   /** Sets the breakpoint in px for the full menu to display. */
   @Input({ transform: numberAttribute }) fullMenuBreakpoint?: number;
+  /** Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown. */
+  @Input() navigation?: TemplateRef<any>;
+  /** Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions. */
+  @Input() utilities?: TemplateRef<any>;
 
   isReady = false;
   version = "2";

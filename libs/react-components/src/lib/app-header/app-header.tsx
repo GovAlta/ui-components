@@ -1,4 +1,4 @@
-import { useEffect, useRef, type JSX } from "react";
+import { useEffect, useRef, type JSX, ReactNode } from "react";
 import { DataAttributes } from "@abgov/ui-components-common";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -37,11 +37,15 @@ export interface GoabAppHeaderProps extends DataAttributes {
   /** Sets the breakpoint in px for the full menu to display. */
   fullMenuBreakpoint?: number;
   /** Content rendered inside the app header, typically navigation links. */
-  children?: React.ReactNode;
+  children?: ReactNode;
   /** Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu. */
   onMenuClick?: () => void;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Links and app header menus appear in the navigation bar below the header. Use plain links for single items and app header menu for grouped items with a dropdown. */
+  navigation?: ReactNode;
+  /** Actions like user account menus appear on the right side of the header. Use menu button for dropdowns with actions. */
+  utilities?: ReactNode;
 }
 
 /** Provide structure to help users find their way around the service. */
@@ -49,6 +53,8 @@ export function GoabAppHeader({
   onMenuClick,
   children,
   secondaryText,
+  navigation,
+  utilities,
   ...rest
 }: GoabAppHeaderProps): JSX.Element {
   const el = useRef<HTMLElement>(null);
@@ -81,6 +87,8 @@ export function GoabAppHeader({
       version="2"
     >
       {children}
+      {navigation && <div slot="navigation">{navigation}</div>}
+      {utilities && <div slot="utilities">{utilities}</div>}
     </goa-app-header>
   );
 }
