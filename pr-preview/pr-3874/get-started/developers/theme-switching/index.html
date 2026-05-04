@@ -178,4 +178,36 @@ attribute. Scope dark overrides under
 Most components do not need application-level overrides — the design system
     tokens already swap to dark values automatically when
 <code>data-theme=&quot;dark&quot;</code> is active.
-</goa-text>  </article> <!-- Optional Table of Contents --> <aside class="toc-sidebar" data-astro-cid-gw4kcmq6> <div class="toc-sticky" data-astro-cid-gw4kcmq6> <astro-island uid="Z1jXgO9" component-url="/ui-components/pr-preview/pr-3874/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3874/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;h2[id], h3[id], goa-text[id][as=\&quot;h2\&quot;], goa-text[id][as=\&quot;h3\&quot;]&quot;],&quot;data-astro-cid-gw4kcmq6&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </div> </aside> </div> </div> </main> </div> </div>  </body></html> 
+</goa-text> <goa-divider mt="xl" mb="xl"></goa-divider> <h2 id="scss">Using design tokens in SCSS</h2> <goa-callout version="2" type="important" emphasis="low" mb="m"> <goa-text size="body-m" mt="2xs" mb="none">
+Dark theme support requires CSS custom properties. Sass variables
+      (<code>$goa-*</code>) are inlined at compile time and cannot flip when the
+      theme changes. Reference tokens via <code>var(--goa-*)</code> wherever a
+      value should respond to theme switching.
+</goa-text> </goa-callout> <goa-text size="body-m" mt="none" mb="m">
+The simplest setup imports only <code>tokens.css</code> and uses
+<code>var(--goa-*)</code> everywhere — every token automatically participates
+    in theme switching, and there is one syntax to remember.
+</goa-text> <pre><code>@import &quot;@abgov/web-components/index.css&quot;;
+@import &quot;@abgov/design-tokens-v2/dist/tokens.css&quot;;
+@import &quot;@abgov/design-tokens-v2/dist/dark-theme.css&quot;;</code></pre> <pre><code>.my-card {
+  background: var(--goa-color-surface-card);
+  font-family: var(--goa-font-family-sans);
+  padding: var(--goa-space-m);
+  transition-duration: var(--goa-motion-duration-medium-2);
+}</code></pre> <h3 id="scss-sass-vars">When you need Sass variables</h3> <goa-text size="body-m" mt="none" mb="m">
+Some workflows need Sass arithmetic, mixins, or functions over token values
+    (for example <code>$goa-space-m * 2</code>). In that case, import
+<code>tokens.scss</code> alongside the CSS files and use <code>$goa-*</code>
+for compile-time values only — never for colors, surfaces, or anything that
+    should flip with theme.
+</goa-text> <pre><code>@import &quot;@abgov/web-components/index.css&quot;;
+@import &quot;@abgov/design-tokens-v2/dist/tokens.css&quot;;
+@import &quot;@abgov/design-tokens-v2/dist/dark-theme.css&quot;;
+@import &quot;@abgov/design-tokens-v2/dist/tokens.scss&quot;;</code></pre> <pre><code>.my-card {
+  // Theme-responsive — must use var()
+  background: var(--goa-color-surface-card);
+
+  // Compile-time only — Sass arithmetic OK
+  padding: $goa-space-m * 2;
+  border-radius: $goa-border-radius-m;
+}</code></pre>  </article> <!-- Optional Table of Contents --> <aside class="toc-sidebar" data-astro-cid-gw4kcmq6> <div class="toc-sticky" data-astro-cid-gw4kcmq6> <astro-island uid="Z1jXgO9" component-url="/ui-components/pr-preview/pr-3874/_astro/TableOfContents.DRSgnR7r.js" component-export="TableOfContents" renderer-url="/ui-components/pr-preview/pr-3874/_astro/client.CQ9nZNia.js" props="{&quot;cssQuery&quot;:[0,&quot;h2[id], h3[id], goa-text[id][as=\&quot;h2\&quot;], goa-text[id][as=\&quot;h3\&quot;]&quot;],&quot;data-astro-cid-gw4kcmq6&quot;:[0,true]}" ssr client="only" opts="{&quot;name&quot;:&quot;TableOfContents&quot;,&quot;value&quot;:&quot;react&quot;}"></astro-island> </div> </aside> </div> </div> </main> </div> </div>  </body></html> 
