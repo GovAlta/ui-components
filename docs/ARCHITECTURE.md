@@ -88,10 +88,6 @@ category: inputs-and-actions # determines nav section
 tags: [action, submit]
 relatedComponents: [button-group, icon-button]
 figmaUrl: https://www.figma.com/...
-githubUrl: https://github.com/...
-webComponentTag: goa-button
-reactClassName: GoabButton
-angularSelector: goab-button
 hidden: true # optional — hide from nav (used for subcomponents, deprecated, internal)
 subcomponent: true # optional — show API on parent component page
 ---
@@ -261,7 +257,6 @@ status: stable
 category: structure-and-navigation
 relatedComponents:
   - tab # <-- this is how the parent discovers the subcomponent
-webComponentTag: goa-tabs
 ---
 ```
 
@@ -277,7 +272,6 @@ hidden: true # not shown in nav
 subcomponent: true # API appears on parent page
 relatedComponents:
   - tabs
-webComponentTag: goa-tab
 ---
 ```
 

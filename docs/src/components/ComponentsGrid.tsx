@@ -49,9 +49,6 @@ export interface Component {
       | "utilities";
     tags?: string[];
     relatedComponents?: string[];
-    webComponentTag?: string;
-    reactClassName?: string;
-    angularSelector?: string;
   };
 }
 
