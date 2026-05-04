@@ -1,0 +1,44 @@
+---
+id: responsive
+title: Responsive Design
+description: Components handle responsive behavior automatically. Trust the defaults, and reach for explicit responsive controls only when you need them.
+category: design
+tags:
+  - responsive
+  - breakpoints
+  - mobile
+  - layout
+status: published
+---
+
+## Trust the defaults
+
+Most GoA components handle responsive behavior internally. A button is full-width on mobile and inline on larger screens. A form item stacks its label on mobile and aligns it inline on desktop. A header collapses to a hamburger menu on small screens. You don't need to write media queries to make these things happen.
+
+The general rule: build with components, and the responsive behavior comes with them. Reach for explicit responsive control only when you need something the components don't handle on their own.
+
+## Container queries
+
+Many components use container queries instead of viewport media queries, which means they respond to the size of their container, not the size of the window. A component placed in a narrow sidebar adapts to that sidebar even on a wide screen. This is mostly invisible — it just works — but it's worth knowing because it changes how you think about responsive layouts. Components don't always look the same at the same viewport width. They look right for the space they're in.
+
+## Breakpoints
+
+When you do need to think about screen size explicitly, the design system uses three breakpoints:
+
+- **Mobile** — under 624px. Phones and small devices.
+- **Tablet** — 624px to 1023px. Tablets and medium devices.
+- **Desktop** — 1024px and above. Desktop and larger screens.
+
+These align with how the components themselves adapt, so if you're building custom layouts around GoA components they'll work together at the same breakpoints.
+
+## Mobile considerations
+
+Mobile is where responsive matters most. A few patterns to keep in mind:
+
+- Buttons go full-width by default on mobile, can be overridden
+- Form layouts stack labels above inputs
+- Navigation collapses
+- Block direction switches to column regardless of the direction prop
+- Single-column content beats multi-column
+
+These happen automatically with the components, but if you're laying out a custom screen, follow the same principles.

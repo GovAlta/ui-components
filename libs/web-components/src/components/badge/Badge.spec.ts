@@ -115,6 +115,36 @@ describe("GoABadgeComponent", () => {
     });
   });
 
+  describe("V2 Emphasis", () => {
+    it(`should apply strong emphasis class in v2`, async () => {
+      const baseElement = render(GoABadge, {
+        testid: "badge-test",
+        type: "information",
+        content: "Strong",
+        version: "2",
+        emphasis: "strong",
+      });
+      const badge = await baseElement.findByTestId("badge-test");
+
+      expect(badge).toHaveClass("v2");
+      expect(badge).toHaveClass("badge-strong");
+    });
+
+    it(`should apply subtle emphasis class in v2`, async () => {
+      const baseElement = render(GoABadge, {
+        testid: "badge-test",
+        type: "information",
+        content: "Subtle",
+        version: "2",
+        emphasis: "subtle",
+      });
+      const badge = await baseElement.findByTestId("badge-test");
+
+      expect(badge).toHaveClass("v2");
+      expect(badge).toHaveClass("badge-subtle");
+    });
+  });
+
   describe("Custom Icon Type", () => {
     it(`should render custom icon type when icontype is provided`, async () => {
       const result = render(GoABadge, {
@@ -159,7 +189,7 @@ describe("GoABadgeComponent", () => {
       });
       const badge = await result.findByTestId("badge-test");
       const goaIcon = result.container.querySelector("goa-icon");
-      
+
       expect(goaIcon).toBeNull(); // No icon should be rendered
       expect(badge).toContainHTML("No Icon");
       expect(badge).toHaveClass("badge-success");

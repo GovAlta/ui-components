@@ -7,6 +7,7 @@ import {
   numberAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -27,15 +28,21 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Loading indicator for async operations. */
 export class GoabSpinner implements OnInit {
-  isReady = false;
-  @Input() type?: GoabSpinnerType;
-  @Input() size?: GoabSpinnerSize;
-  @Input({ transform: booleanAttribute }) invert?: boolean;
-  @Input({ transform: numberAttribute }) progress?: number;
-  @Input() testId?: string;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  /** Sets the spinner type. */
+  @Input() type?: GoabSpinnerType;
+  /** Sets the size of the spinner. */
+  @Input() size?: GoabSpinnerSize;
+  /** When true, inverts colors for use on dark backgrounds. */
+  @Input({ transform: booleanAttribute }) invert?: boolean;
+  /** Progress value (0-100). When >= 0, shows a progress spinner instead of infinite. */
+  @Input({ transform: numberAttribute }) progress?: number;
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
 
   ngOnInit(): void {
     setTimeout(() => {

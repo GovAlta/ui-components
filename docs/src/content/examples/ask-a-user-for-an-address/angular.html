@@ -1,21 +1,39 @@
 <goab-text size="heading-l" mt="none" mb="xl">What is your address?</goab-text>
 <goab-form-item label="Street Address">
-  <goab-input name="address" type="text" [formControl]="form.controls.address" width="100%"></goab-input>
+  <goab-input
+    name="address"
+    type="text"
+    [formControl]="form.controls.address"
+    width="100%"
+  ></goab-input>
 </goab-form-item>
 <goab-form-item label="Suite or unit #" mt="l">
-  <goab-input name="suite" type="text" [formControl]="form.controls.suite" width="100%"></goab-input>
+  <goab-input
+    name="suite"
+    type="text"
+    [formControl]="form.controls.suite"
+    width="100%"
+  ></goab-input>
 </goab-form-item>
 <goab-form-item label="City or town" mt="l">
-  <goab-input name="city" type="text" [formControl]="form.controls.city" width="100%"></goab-input>
+  <goab-input
+    name="city"
+    type="text"
+    [formControl]="form.controls.city"
+    width="100%"
+  ></goab-input>
 </goab-form-item>
 <goab-block direction="row" gap="l" mt="l">
   <goab-form-item label="Province or territory">
-    <goab-dropdown name="province" [formControl]="form.controls.province">
+    <goab-dropdown name="province" [formControl]="form.controls.province" width="100%">
       <goab-dropdown-item label="Alberta" value="AB"></goab-dropdown-item>
       <goab-dropdown-item label="British Columbia" value="BC"></goab-dropdown-item>
       <goab-dropdown-item label="Manitoba" value="MB"></goab-dropdown-item>
       <goab-dropdown-item label="New Brunswick" value="NB"></goab-dropdown-item>
-      <goab-dropdown-item label="Newfoundland and Labrador" value="NL"></goab-dropdown-item>
+      <goab-dropdown-item
+        label="Newfoundland and Labrador"
+        value="NL"
+      ></goab-dropdown-item>
       <goab-dropdown-item label="Northwest Territories" value="NT"></goab-dropdown-item>
       <goab-dropdown-item label="Nova Scotia" value="NS"></goab-dropdown-item>
       <goab-dropdown-item label="Nunavut" value="NU"></goab-dropdown-item>
@@ -27,7 +45,12 @@
     </goab-dropdown>
   </goab-form-item>
   <goab-form-item label="Postal Code">
-    <goab-input name="postalCode" type="text" [formControl]="form.controls.postalCode" width="7ch"></goab-input>
+    <goab-input
+      name="postalCode"
+      type="text"
+      [formControl]="form.controls.postalCode"
+      width="7ch"
+    ></goab-input>
   </goab-form-item>
 </goab-block>
 <goab-button-group alignment="start" mt="2xl">

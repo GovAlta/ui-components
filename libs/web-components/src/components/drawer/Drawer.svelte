@@ -3,7 +3,10 @@
     tag: "goa-drawer",
     props: {
       open: { type: "Boolean", reflect: true },
-      closeButtonVisibility: { type: "String", attribute: "close-button-visibility" },
+      closeButtonVisibility: {
+        type: "String",
+        attribute: "close-button-visibility",
+      },
     },
   }}
 />
@@ -12,12 +15,7 @@
   import { fly } from "svelte/transition";
   import noscroll from "../../common/no-scroll";
   import { onDestroy, onMount, tick } from "svelte";
-  import {
-    dispatch,
-    style,
-    styles,
-    typeValidator,
-  } from "../../common/utils";
+  import { dispatch, style, styles, typeValidator } from "../../common/utils";
   import { DrawerPosition, DrawerSize } from "../../common/types";
 
   // ******
@@ -220,7 +218,7 @@
 <goa-focus-trap {open} prevent-scroll-into-view={true}>
   <div
     class={`root ${_scrollPos ?? ""}`}
-    style={style("visibility", open ? "visible" : "hidden")}
+    style={style("pointer-events", open ? "auto" : "none")}
     data-testid={testid}
   >
     <button
@@ -262,7 +260,7 @@
         ),
       )}
       in:fly={_flyParams}
-      out:fly={{ ..._flyParams, delay: 200 }}
+      out:fly={_flyParams}
       class:open
       class:closing={!open}
       class:v2={version === "2"}
@@ -434,6 +432,10 @@
     border-bottom: none; /* Remove border by default */
   }
 
+  .v2 .header goa-icon-button {
+    margin-top: -0.1875rem;
+  }
+
   /* V2: Show header border when scrolled from top (middle or bottom position) */
   .root.middle .drawer.v2 .header,
   .root.bottom .drawer.v2 .header {
@@ -534,7 +536,11 @@
     border-radius: var(--goa-drawer-border-radius, 24px); /* All corners 24px */
     box-shadow: var(--goa-drawer-shadow);
     transform: translateY(100%); /* Start off-screen at bottom */
-    transition: transform 0.2s ease-out;
+    transition:
+      bottom var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive),
+      transform var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive);
   }
   .drawer-bottom.v2.open,
   .drawer-bottom.v2.drawer-open-bottom {
@@ -571,8 +577,12 @@
     transform: translateX(100%); /* Start off-screen to the right */
     /* Smooth transitions for position and transform */
     transition:
-      bottom 0.15s ease-out,
-      transform 0.2s ease-out;
+      right var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive),
+      bottom var(--goa-motion-duration-short-4)
+        var(--goa-motion-curve-expressive),
+      transform var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive);
   }
   .v2.drawer-open-right {
     right: var(--goa-drawer-offset, 0);
@@ -613,8 +623,12 @@
     transform: translateX(-100%); /* Start off-screen to the left */
     /* Smooth transitions for position and transform */
     transition:
-      bottom 0.15s ease-out,
-      transform 0.2s ease-out;
+      left var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive),
+      bottom var(--goa-motion-duration-short-4)
+        var(--goa-motion-curve-expressive),
+      transform var(--goa-motion-duration-medium-1)
+        var(--goa-motion-curve-expressive);
   }
   .v2.drawer-open-left {
     left: var(--goa-drawer-offset, 0);

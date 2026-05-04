@@ -25,6 +25,7 @@ import { SearchInput } from "./SearchInput";
 import { SearchResults, type SearchResultsHandle } from "./SearchResults";
 import {
   SearchFilterHints,
+  FILTER_OPTIONS,
   shouldShowFilterHints,
   parseFilterCommand,
   getFilteredOptions,
@@ -40,12 +41,21 @@ import "./search.css";
 interface SearchModalContentProps {
   onClose: () => void;
   previousFocusRef: React.RefObject<HTMLElement | null>;
+  initialFilter?: SearchFilter;
 }
 
-function SearchModalContent({ onClose, previousFocusRef }: SearchModalContentProps) {
+function SearchModalContent({
+  onClose,
+  previousFocusRef,
+  initialFilter,
+}: SearchModalContentProps) {
   const [query, setQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<SearchFilter>(null);
-  const [activeCommand, setActiveCommand] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<SearchFilter>(initialFilter ?? null);
+  const [activeCommand, setActiveCommand] = useState<string | null>(() => {
+    if (!initialFilter) return null;
+    const option = FILTER_OPTIONS.find((opt) => opt.filter === initialFilter);
+    return option?.command ?? null;
+  });
   const [hintSelectedIndex, setHintSelectedIndex] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
   const searchResultsRef = useRef<SearchResultsHandle>(null);
@@ -293,13 +303,15 @@ function SearchModalContent({ onClose, previousFocusRef }: SearchModalContentPro
 
 export function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [pendingFilter, setPendingFilter] = useState<SearchFilter>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   /**
    * Open the search modal.
    */
-  const openModal = useCallback(() => {
+  const openModal = useCallback((filter?: SearchFilter) => {
     previousFocusRef.current = document.activeElement as HTMLElement;
+    setPendingFilter(filter ?? null);
     setIsOpen(true);
     document.body.style.overflow = "hidden";
   }, []);
@@ -309,6 +321,7 @@ export function SearchModal() {
    */
   const closeModal = useCallback(() => {
     setIsOpen(false);
+    setPendingFilter(null);
     document.body.style.overflow = "";
   }, []);
 
@@ -332,11 +345,12 @@ export function SearchModal() {
   }, [isOpen, openModal, closeModal]);
 
   /**
-   * Listen for goa-search-open custom event (from MobileHeader).
+   * Listen for goa-search-open custom event (from MobileHeader and SearchTrigger).
    */
   useEffect(() => {
-    const handleSearchOpen = () => {
-      openModal();
+    const handleSearchOpen = (e: Event) => {
+      const filter = (e as CustomEvent).detail?.filter as SearchFilter | undefined;
+      openModal(filter);
     };
 
     window.addEventListener("goa-search-open", handleSearchOpen);
@@ -348,7 +362,13 @@ export function SearchModal() {
     return null;
   }
 
-  return <SearchModalContent onClose={closeModal} previousFocusRef={previousFocusRef} />;
+  return (
+    <SearchModalContent
+      onClose={closeModal}
+      previousFocusRef={previousFocusRef}
+      initialFilter={pendingFilter}
+    />
+  );
 }
 
 export default SearchModal;

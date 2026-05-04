@@ -5,6 +5,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -32,18 +33,27 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A visual band of text, including an image and a call to action. */
 export class GoabHeroBanner implements OnInit {
-  isReady = false;
-  @Input() heading?: string;
-  @Input() backgroundUrl?: string;
-  @Input() minHeight?: string;
-  @Input() testId?: string;
-  @Input() maxContentWidth?: string;
-  @Input() backgroundColor?: string;
-  @Input() textColor?: string;
-  @Input() actions!: TemplateRef<any>;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  /** Main heading text. */
+  @Input() heading?: string;
+  /** Background image url. */
+  @Input() backgroundUrl?: string;
+  /** Minimum height of the hero banner. Defaults to 600px when a background image is provided. */
+  @Input() minHeight?: string;
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
+  /** Maximum width of the content area. */
+  @Input() maxContentWidth?: string;
+  /** Hero Banner background color when no background image is provided. */
+  @Input() backgroundColor?: string;
+  /** Text color within the hero banner. */
+  @Input() textColor?: string;
+  /** Angular template reference for the actions slot content. */
+  @Input() actions!: TemplateRef<any>;
 
   ngOnInit(): void {
     setTimeout(() => {

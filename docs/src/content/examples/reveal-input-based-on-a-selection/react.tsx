@@ -57,7 +57,7 @@ export function RevealInputBasedOnASelection() {
         <GoabCheckboxList
           name="contactMethods"
           value={checkboxSelection}
-          onChange={(e) => setCheckboxSelection(e.values || [])}
+          onChange={(e) => setCheckboxSelection(e.value || [])}
         >
           <GoabCheckbox
             name="email"

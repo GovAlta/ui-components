@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Foundations - Style guide - Iconography
  *
@@ -8,6 +9,7 @@
  */
 import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
 import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+
 
 const extendedIcons = [
   "accessibility",
@@ -185,7 +187,7 @@ const extendedIcons = [
     </ul>
   </goa-text>
   <goa-text size="body-m" mt="none" mb="xl">
-    Refer to the <a href="/tokens">tokens page</a> to explore available icons and properties.
+    Refer to the <a href={withBase(`/tokens`)}>tokens page</a> to explore available icons and properties.
   </goa-text>
 
   <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
@@ -264,7 +266,7 @@ const extendedIcons = [
     </table>
   </goa-table>
   <goa-text size="body-m" mt="m" mb="m">
-    Refer to <a href="/tokens">design tokens</a> for implementation details.
+    Refer to <a href={withBase(`/tokens`)}>design tokens</a> for implementation details.
   </goa-text>
   <goa-text size="body-m" mt="none" mb="xl">
     When icons are interactive, it&apos;s best to make them 24 x 24 CSS pixels to meet
@@ -305,7 +307,7 @@ const extendedIcons = [
     </ol>
   </goa-text>
   <goa-text size="body-m" mt="none" mb="xl">
-    Submit proposed icons through the <a href="/get-started/contribute"
+    Submit proposed icons through the <a href={withBase(`/get-started/contribute`)}
       >design system contribution process</a
     >.
   </goa-text>

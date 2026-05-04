@@ -1,0 +1,174 @@
+<h2>Dropdown</h2>
+
+<h3>Basic example (Reactive forms)</h3>
+<form [formGroup]="basicForm">
+  <goab-form-item label="Province or territory" mb="l">
+    <goab-dropdown name="province" formControlName="province">
+      <goab-dropdown-item value="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item value="British Columbia"></goab-dropdown-item>
+      <goab-dropdown-item value="Manitoba"></goab-dropdown-item>
+      <goab-dropdown-item value="Ontario"></goab-dropdown-item>
+      <goab-dropdown-item value="Quebec"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>
+<p>Value: {{ basicForm.value | json }}</p>
+
+<h3>Basic example (Template driven)</h3>
+<form>
+  <goab-form-item label="Province or territory" mb="l">
+    <goab-dropdown
+      name="province"
+      [(ngModel)]="ngModelProvince"
+      (onChange)="onDropdownChange($event)">
+      <goab-dropdown-item value="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item value="British Columbia"></goab-dropdown-item>
+      <goab-dropdown-item value="Manitoba"></goab-dropdown-item>
+      <goab-dropdown-item value="Ontario"></goab-dropdown-item>
+      <goab-dropdown-item value="Quebec"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>
+<p>Value: {{ ngModelProvince }}</p>
+
+<h3>With custom placeholder</h3>
+<form [formGroup]="placeholderForm">
+  <goab-form-item label="How would you like to be contacted?" mb="l">
+    <goab-dropdown
+      name="contactMethod"
+      placeholder="—Select contact method—"
+      formControlName="contactMethod">
+      <goab-dropdown-item value="Email"></goab-dropdown-item>
+      <goab-dropdown-item value="Phone"></goab-dropdown-item>
+      <goab-dropdown-item value="Mail"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>
+
+<h3>Filterable</h3>
+<goab-form-item label="What city do you live in?" mb="l">
+  <goab-dropdown name="city" [filterable]="true" leadingIcon="search" maxHeight="400px">
+    <goab-dropdown-item value="Calgary"></goab-dropdown-item>
+    <goab-dropdown-item value="Edmonton"></goab-dropdown-item>
+    <goab-dropdown-item value="Red Deer"></goab-dropdown-item>
+    <goab-dropdown-item value="Lethbridge"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+
+<h3>Native</h3>
+<goab-form-item label="Custom dropdown" mb="l">
+  <goab-dropdown name="custom">
+    <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+    <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+<goab-form-item label="Native dropdown" mb="l">
+  <goab-dropdown name="native" [native]="true">
+    <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+    <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+
+<h3>Sizes</h3>
+<goab-form-item label="Default size" mb="l">
+  <goab-dropdown name="sizeDefault">
+    <goab-dropdown-item value="Draft"></goab-dropdown-item>
+    <goab-dropdown-item value="In review"></goab-dropdown-item>
+    <goab-dropdown-item value="Approved"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+<goab-form-item label="Compact size" mb="l">
+  <goab-dropdown name="sizeCompact" size="compact">
+    <goab-dropdown-item value="Draft"></goab-dropdown-item>
+    <goab-dropdown-item value="In review"></goab-dropdown-item>
+    <goab-dropdown-item value="Approved"></goab-dropdown-item>
+  </goab-dropdown>
+</goab-form-item>
+
+<h3>States</h3>
+<form [formGroup]="statesForm">
+  <goab-form-item label="Disabled dropdown" mb="l">
+    <goab-dropdown name="disabled" formControlName="disabled">
+      <goab-dropdown-item value="AB" label="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item value="BC" label="British Columbia"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Dropdown with error" error="Please select an option" mb="l">
+    <goab-dropdown name="error" [error]="true" placeholder="Select an option" formControlName="errorValue">
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>
+
+<h2>Examples</h2>
+
+<h3>Dynamically add an item to a dropdown list</h3>
+<goab-form-item
+  requirement="required"
+  label="Name of item"
+  [error]="taskError ? 'Please enter item name' : ''"
+  helpText="Add an item to the dropdown list below">
+  <goab-input
+    name="item"
+    [value]="newTask"
+    (onChange)="onNewTaskChange($event)">
+  </goab-input>
+</goab-form-item>
+<goab-form-item mt="l" label="Add to">
+  <goab-radio-group
+    name="mountType"
+    [value]="mountType"
+    orientation="horizontal"
+    (onChange)="onMountTypeChange($event)">
+    <goab-radio-item value="prepend" label="Start"></goab-radio-item>
+    <goab-radio-item value="append" label="End"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+<goab-button-group alignment="start" gap="relaxed" mt="l">
+  <goab-button type="primary" (onClick)="addTask()">Add new item</goab-button>
+  <goab-button type="tertiary" (onClick)="reset()">Reset list</goab-button>
+</goab-button-group>
+<goab-divider mt="l"></goab-divider>
+<goab-form-item mt="l" label="All items">
+  @if (renderTrigger) {
+    <goab-dropdown
+      [value]="selectedTask"
+      name="selectedTask"
+      (onChange)="onSelectedTaskChange($event)">
+      @for (task of tasks; track task.value) {
+        <goab-dropdown-item
+          [value]="task.value"
+          [mountType]="task.mount"
+          [label]="task.label">
+        </goab-dropdown-item>
+      }
+    </goab-dropdown>
+  }
+</goab-form-item>
+
+<h3>Dynamically change items in a dropdown list</h3>
+<form [formGroup]="changeForm">
+  <goab-form-item label="Size" requirement="optional" helpText="Choose the size to change the list below">
+    <goab-dropdown formControlName="parentDropdown" placeholder="Select a value" name="parent">
+      @for (parent of parents; track parent) {
+        <goab-dropdown-item [value]="parent" [label]="parent" />
+      }
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Items" requirement="optional" mt="xl">
+    <goab-dropdown formControlName="childDropdown" placeholder="Select a value" name="children">
+      @if (children.length > 0) {
+        @for (child of children; track child) {
+          <goab-dropdown-item
+            [value]="child"
+            [label]="child"
+            [mountType]="'reset'"
+          />
+        }
+      }
+    </goab-dropdown>
+  </goab-form-item>
+</form>

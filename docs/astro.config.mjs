@@ -10,7 +10,8 @@ const workspaceRoot = path.resolve(__dirname, "..");
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://design.alberta.ca",
+  site: process.env.PREVIEW_SITE || "https://design.alberta.ca",
+  base: process.env.PREVIEW_BASE || "/",
   root: ".",
   outDir: "../dist/docs",
   redirects: {
@@ -24,7 +25,14 @@ export default defineConfig({
     "/components/skeleton-loader": "/components/skeleton",
     "/design-tokens": "/tokens",
     "/get-started/support": "/support",
-    "/examples/show-multiple-actions-in-a-table": "/examples/show-multiple-actions-in-a-compact-table",
+    "/examples/show-multiple-actions-in-a-table":
+      "/examples/show-multiple-actions-in-a-compact-table",
+    "/examples/communicate-a-future-service-outage":
+      "/examples/notify-the-user-of-a-future-service-outage",
+    "/examples/give-background-information-before-asking-a-question":
+      "/examples/give-more-information-before-asking-a-question-a",
+    "/examples/give-context-before-asking-a-long-answer-question":
+      "/examples/give-more-information-before-asking-a-question-b",
   },
   build: {
     chunkSizeWarningLimit: 1000,
@@ -43,6 +51,11 @@ export default defineConfig({
     resolve: {
       alias: [
         // More specific aliases must come first
+        // allow to use import { withBase } from '@/lib/base-url' instead of '../../lib/base-url'
+        {
+          find: /^@\/(.*)$/,
+          replacement: path.resolve(__dirname, "src/$1"),
+        },
         {
           find: "@abgov/react-components/experimental",
           replacement: path.resolve(

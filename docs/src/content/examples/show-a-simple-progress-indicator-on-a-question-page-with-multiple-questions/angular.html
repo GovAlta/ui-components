@@ -1,24 +1,35 @@
-<goab-link leadingIcon="arrow-back" size="small" mb="none">
-  Back
-</goab-link>
+<goab-link leadingIcon="arrow-back" size="small" mb="none"> Back </goab-link>
 
-<goab-text as="h3" size="body-m" mt="xl" mb="none" color="secondary">Step 1 of 5</goab-text>
-<goab-text as="h2" mt="xs" mb="xl">Personal information</goab-text>
+<goab-text tag="h3" size="body-m" mt="xl" mb="none" color="secondary"
+  >Step 1 of 5</goab-text
+>
+<goab-text tag="h2" mt="xs" mb="xl">Personal information</goab-text>
 
 <goab-form-item label="What is your name?">
-  <goab-input (onChange)="onChange($event)" name="name" ariaLabel="what is your name?" width="50ch"></goab-input>
+  <goab-input
+    (onChange)="onChange($event)"
+    name="name"
+    ariaLabel="what is your name?"
+    width="50ch"
+  ></goab-input>
 </goab-form-item>
 
 <goab-form-item label="What is your phone number?" mt="l">
-  <goab-input (onChange)="onChange($event)" name="phone-number" ariaLabel="what is your phone number?">
-    <div slot="leadingContent">+1</div>
-  </goab-input>
+  <goab-input
+    (onChange)="onChange($event)"
+    name="phone-number"
+    ariaLabel="what is your phone number?"
+    leadingContent="+1"
+  ></goab-input>
 </goab-form-item>
 
 <goab-form-item label="What is your home postal code?" mt="l">
-  <goab-input (onChange)="onChange($event)" name="postal-code" width="14ch" ariaLabel="what is your home postal code"></goab-input>
+  <goab-input
+    (onChange)="onChange($event)"
+    name="postal-code"
+    width="14ch"
+    ariaLabel="what is your home postal code"
+  ></goab-input>
 </goab-form-item>
 
-<goab-button type="submit" mt="2xl">
-  Save and continue
-</goab-button>
+<goab-button type="submit" mt="2xl"> Save and continue </goab-button>

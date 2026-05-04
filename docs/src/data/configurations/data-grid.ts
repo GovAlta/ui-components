@@ -223,11 +223,11 @@ export const dataGridConfigurations: ComponentConfigurations = {
         angular: `<goab-data-grid keyboardNav="layout" keyboardIconPosition="right">
   <goab-container mt="m" data-grid="row" maxWidth="100%">
     <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start">
-      <goab-checkbox data-grid="cell-0" name="user-1"></goab-checkbox>
+      <div data-grid="cell-0"><goab-checkbox name="user-1"></goab-checkbox></div>
       <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0">
         <goab-block direction="row" gap="s" alignment="center">
           <strong data-grid="cell-1">Mike Zwei</strong>
-          <goab-badge data-grid="cell-2" type="success" content="Removed"></goab-badge>
+          <div data-grid="cell-2"><goab-badge type="success" content="Removed"></goab-badge></div>
         </goab-block>
         <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl)">
           <goab-block direction="column" gap="xs" data-grid="cell-4">
@@ -254,19 +254,21 @@ export const dataGridConfigurations: ComponentConfigurations = {
           </goab-block>
         </div>
       </div>
-      <goab-menu-button data-grid="cell-3" text="Actions" type="tertiary" size="compact">
-        <goab-menu-action action="open" text="Open"></goab-menu-action>
-        <goab-menu-action action="delete" text="Delete"></goab-menu-action>
-      </goab-menu-button>
+      <div data-grid="cell-3">
+        <goab-menu-button text="Actions" type="tertiary" size="compact">
+          <goab-menu-action action="open" text="Open"></goab-menu-action>
+          <goab-menu-action action="delete" text="Delete"></goab-menu-action>
+        </goab-menu-button>
+      </div>
     </div>
   </goab-container>
   <goab-container mt="m" data-grid="row" maxWidth="100%">
     <div style="display: flex; flex-direction: row; gap: var(--goa-space-m); align-items: flex-start">
-      <goab-checkbox data-grid="cell-0" name="user-2"></goab-checkbox>
+      <div data-grid="cell-0"><goab-checkbox name="user-2"></goab-checkbox></div>
       <div style="display: flex; flex-direction: column; gap: var(--goa-space-m); flex: 1; min-width: 0">
         <goab-block direction="row" gap="s" alignment="center">
           <strong data-grid="cell-1">Emma Stroman</strong>
-          <goab-badge data-grid="cell-2" type="emergency" content="To be removed"></goab-badge>
+          <div data-grid="cell-2"><goab-badge type="emergency" content="To be removed"></goab-badge></div>
         </goab-block>
         <div style="display: flex; flex-wrap: wrap; gap: var(--goa-space-xl)">
           <goab-block direction="column" gap="xs" data-grid="cell-4">
@@ -293,10 +295,12 @@ export const dataGridConfigurations: ComponentConfigurations = {
           </goab-block>
         </div>
       </div>
-      <goab-menu-button data-grid="cell-3" text="Actions" type="tertiary" size="compact">
-        <goab-menu-action action="open" text="Open"></goab-menu-action>
-        <goab-menu-action action="delete" text="Delete"></goab-menu-action>
-      </goab-menu-button>
+      <div data-grid="cell-3">
+        <goab-menu-button text="Actions" type="tertiary" size="compact">
+          <goab-menu-action action="open" text="Open"></goab-menu-action>
+          <goab-menu-action action="delete" text="Delete"></goab-menu-action>
+        </goab-menu-button>
+      </div>
     </div>
   </goab-container>
 </goab-data-grid>`,

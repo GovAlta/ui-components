@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  GoabButton,
-  GoabButtonGroup,
-  GoabModal,
-} from "@abgov/react-components";
+import { GoabButton, GoabButtonGroup, GoabModal } from "@abgov/react-components";
 
 export function RequireUserActionBeforeContinuing() {
   const [open, setOpen] = useState(false);

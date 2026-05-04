@@ -1,0 +1,61 @@
+<div>
+  <h1>3627 - Container refinements</h1>
+  <p>
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3627"
+      target="_blank"
+      rel="noopener"
+    >
+      View on GitHub
+    </a>
+  </p>
+
+  <h2>Test 1: Basic containers (shadow should be removed)</h2>
+  <goab-container [title]="interactiveTitle" mb="l">
+    <p>Check for bottom shadow. Should be none.</p>
+  </goab-container>
+  <ng-template #interactiveTitle>Interactive (default)</ng-template>
+
+  <goab-container [title]="nonInteractiveTitle" type="non-interactive" mb="l">
+    <p>Non-interactive container for comparison.</p>
+  </goab-container>
+  <ng-template #nonInteractiveTitle>Non-interactive</ng-template>
+
+  <div style="display: flex; gap: 1rem; margin-bottom: 2rem">
+    <goab-container [title]="thickTitle" accent="thick">
+      <p>Accent: thick</p>
+    </goab-container>
+    <ng-template #thickTitle>Thick accent</ng-template>
+
+    <goab-container [title]="thinTitle" accent="thin">
+      <p>Accent: thin</p>
+    </goab-container>
+    <ng-template #thinTitle>Thin accent</ng-template>
+
+    <goab-container accent="filled">
+      <p>Accent: filled</p>
+    </goab-container>
+  </div>
+
+  <h2>Test 2: Status type containers (silently undocumented)</h2>
+  <p>These remain functional but are removed from docs.</p>
+  <goab-container [title]="infoTitle" type="info" mb="l">
+    <p>Type: info</p>
+  </goab-container>
+  <ng-template #infoTitle>Info</ng-template>
+
+  <goab-container [title]="errorTitle" type="error" mb="l">
+    <p>Type: error</p>
+  </goab-container>
+  <ng-template #errorTitle>Error</ng-template>
+
+  <goab-container [title]="successTitle" type="success" mb="l">
+    <p>Type: success</p>
+  </goab-container>
+  <ng-template #successTitle>Success</ng-template>
+
+  <goab-container [title]="importantTitle" type="important" mb="l">
+    <p>Type: important</p>
+  </goab-container>
+  <ng-template #importantTitle>Important</ng-template>
+</div>

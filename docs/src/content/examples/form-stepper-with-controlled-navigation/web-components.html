@@ -34,29 +34,29 @@
 </div>
 
 <script>
-  const formStepper = document.getElementById('form-stepper');
-  const formPages = document.getElementById('form-pages');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
+  const formStepper = document.getElementById("form-stepper");
+  const formPages = document.getElementById("form-pages");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
 
   let currentStep = 1;
 
   function updateStep(step) {
     if (step < 1 || step > 4) return;
     currentStep = step;
-    formStepper.setAttribute('step', currentStep);
-    formPages.setAttribute('current', currentStep);
+    formStepper.setAttribute("step", currentStep);
+    formPages.setAttribute("current", currentStep);
   }
 
-  formStepper.addEventListener('_change', (e) => {
+  formStepper.addEventListener("_change", (e) => {
     updateStep(e.detail.step);
   });
 
-  prevBtn.addEventListener('_click', () => {
+  prevBtn.addEventListener("_click", () => {
     updateStep(currentStep - 1);
   });
 
-  nextBtn.addEventListener('_click', () => {
+  nextBtn.addEventListener("_click", () => {
     updateStep(currentStep + 1);
   });
 </script>

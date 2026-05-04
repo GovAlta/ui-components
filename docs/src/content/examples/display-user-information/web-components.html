@@ -1,5 +1,7 @@
 <goa-container>
-  <goa-text as="span" size="body-m" color="secondary" mt="none" mb="none">Housing Advisor</goa-text>
+  <goa-text as="span" size="body-m" color="secondary" mt="none" mb="none"
+    >Housing Advisor</goa-text
+  >
   <goa-text size="heading-m" mt="none" mb="s">Tracy Hero</goa-text>
   <goa-block direction="row" gap="s">
     <goa-block direction="column" gap="m">
@@ -16,7 +18,13 @@
 <goa-container type="non-interactive" accent="thick">
   <div slot="title">Upcoming important due dates</div>
   <div slot="actions">
-    <goa-button version="2" id="calendar-btn" type="tertiary" size="compact" leadingicon="calendar">
+    <goa-button
+      version="2"
+      id="calendar-btn"
+      type="tertiary"
+      size="compact"
+      leadingicon="calendar"
+    >
       Add to calendar
     </goa-button>
   </div>
@@ -45,8 +53,8 @@
 </goa-container>
 
 <script>
-  const calendarBtn = document.getElementById('calendar-btn');
-  calendarBtn.addEventListener('_click', () => {
-    console.log('Add to calendar clicked');
+  const calendarBtn = document.getElementById("calendar-btn");
+  calendarBtn.addEventListener("_click", () => {
+    console.log("Add to calendar clicked");
   });
 </script>

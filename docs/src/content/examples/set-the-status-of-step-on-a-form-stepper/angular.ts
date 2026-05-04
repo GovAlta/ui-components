@@ -1,9 +1,12 @@
 import { Component } from "@angular/core";
-import { GoabFormStepperOnChangeDetail, GoabFormStepStatus } from "@abgov/ui-components-common";
+import {
+  GoabFormStepperOnChangeDetail,
+  GoabFormStepStatus,
+} from "@abgov/ui-components-common";
 
 @Component({
   selector: "app-set-the-status-of-step-on-a-form-stepper",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class SetTheStatusOfStepOnAFormStepperComponent {
   step = -1;

@@ -1,0 +1,469 @@
+<h2>Table</h2>
+
+<h3>Basic table</h3>
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Smith</td>
+      <td>Active</td>
+      <td>Jan 15, 2024</td>
+    </tr>
+    <tr>
+      <td>Jane Doe</td>
+      <td>Pending</td>
+      <td>Jan 16, 2024</td>
+    </tr>
+  </tbody>
+</goab-table>
+
+<h3>Striped rows</h3>
+<goab-table [striped]="true">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Widget A</td>
+      <td>10</td>
+      <td>$25.00</td>
+    </tr>
+    <tr>
+      <td>Widget B</td>
+      <td>5</td>
+      <td>$15.00</td>
+    </tr>
+    <tr>
+      <td>Widget C</td>
+      <td>20</td>
+      <td>$10.00</td>
+    </tr>
+  </tbody>
+</goab-table>
+
+<h3>Size</h3>
+<goab-text mt="none" mb="s">Normal</goab-text>
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Service</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>License renewal</td>
+      <td>Renew your driver's license online</td>
+    </tr>
+    <tr>
+      <td>Vehicle registration</td>
+      <td>Register a new or used vehicle</td>
+    </tr>
+  </tbody>
+</goab-table>
+<goab-text mt="l" mb="s">Relaxed</goab-text>
+<goab-table width="100%" variant="relaxed">
+  <thead>
+    <tr>
+      <th>Service</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>License renewal</td>
+      <td>Renew your driver's license online</td>
+    </tr>
+    <tr>
+      <td>Vehicle registration</td>
+      <td>Register a new or used vehicle</td>
+    </tr>
+  </tbody>
+</goab-table>
+
+<h3>Constrained width</h3>
+<goab-table width="400px">
+  <thead>
+    <tr>
+      <th>Application ID</th>
+      <th>Applicant</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>APP-2024-001</td>
+      <td>John Smith</td>
+      <td>Under review</td>
+    </tr>
+    <tr>
+      <td>APP-2024-002</td>
+      <td>Jane Doe</td>
+      <td>Approved</td>
+    </tr>
+  </tbody>
+</goab-table>
+
+<h3>Single column sorting</h3>
+<goab-table (onSort)="handleSort($event)">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th><goab-table-sort-header name="status">Status</goab-table-sort-header></th>
+      <th><goab-table-sort-header name="date">Date</goab-table-sort-header></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of sortData; track row.name) {
+      <tr>
+        <td>{{ row.name }}</td>
+        <td>{{ row.status }}</td>
+        <td>{{ row.date }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+
+<h3>Multi-column sorting</h3>
+<goab-table sortMode="multi" (onMultiSort)="handleMultiSort($event)">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th><goab-table-sort-header name="status">Status</goab-table-sort-header></th>
+      <th><goab-table-sort-header name="date">Date</goab-table-sort-header></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of multiSortData; track row.name) {
+      <tr>
+        <td>{{ row.name }}</td>
+        <td>{{ row.status }}</td>
+        <td>{{ row.date }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+
+<h2>Examples</h2>
+
+<h3>Display numbers in a table so they can be scanned easily</h3>
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th class="goa-table-number-header">ID Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Sarah</td><td>Johnson</td><td class="goa-table-number-column">54</td></tr>
+    <tr><td>Michael</td><td>Chen</td><td class="goa-table-number-column">4567</td></tr>
+    <tr><td>Emily</td><td>Williams</td><td class="goa-table-number-column">892</td></tr>
+    <tr><td>David</td><td>Brown</td><td class="goa-table-number-column">12345</td></tr>
+    <tr><td>Jennifer</td><td>Martinez</td><td class="goa-table-number-column">7</td></tr>
+  </tbody>
+</goab-table>
+
+<h3>Display user information</h3>
+<goab-container>
+  <goab-text tag="span" size="body-m" color="secondary" mt="none" mb="none">Housing Advisor</goab-text>
+  <goab-text size="heading-m" mt="none" mb="s">Tracy Hero</goab-text>
+  <goab-block direction="row" gap="s">
+    <goab-block direction="column" gap="m">
+      <goab-text tag="span" size="heading-xs" mt="none" mb="none">Email</goab-text>
+      <goab-text tag="span" size="heading-xs" mt="none" mb="none">Phone</goab-text>
+    </goab-block>
+    <goab-block direction="column" gap="m">
+      <goab-text tag="span" size="body-m" mt="none" mb="none">tracyhero&#64;email.com</goab-text>
+      <goab-text tag="span" size="body-m" mt="none" mb="none">283-203-4921</goab-text>
+    </goab-block>
+  </goab-block>
+</goab-container>
+<goab-container type="non-interactive" accent="thick">
+  <div slot="title">Upcoming important due dates</div>
+  <div slot="actions">
+    <goab-button type="tertiary" size="compact" leadingIcon="calendar" (onClick)="onAddToCalendar()">
+      Add to calendar
+    </goab-button>
+  </div>
+  <goab-table width="100%" [striped]="true">
+    <tbody>
+      <tr><td>Business plan submission</td><td style="text-align: right">June 30, 2024</td></tr>
+      <tr><td>Annual review</td><td style="text-align: right">October 3, 2024</td></tr>
+      <tr><td>Application submission</td><td style="text-align: right">December 20, 2024</td></tr>
+      <tr><td>Application review</td><td style="text-align: right">January 3, 2025</td></tr>
+    </tbody>
+  </goab-table>
+</goab-container>
+
+<h3>Filter data in a table</h3>
+<goab-form-item id="filterChipInput" [error]="inputError" mb="m">
+  <goab-block gap="xs" direction="row" alignment="start" width="100%">
+    <div style="flex: 1">
+      <goab-input
+        name="filterChipInput"
+        aria-labelledby="filterChipInput"
+        [value]="inputValue"
+        leadingIcon="search"
+        width="100%"
+        (onChange)="handleInputChange($event)"
+        (onKeyPress)="handleInputKeyPress($event)"
+      ></goab-input>
+    </div>
+    <goab-button type="secondary" (onClick)="applyFilter()" leadingIcon="filter">Filter</goab-button>
+  </goab-block>
+</goab-form-item>
+@if (typedChips.length > 0) {
+  <goab-text tag="span" color="secondary" mb="xs" mr="xs">Filter:</goab-text>
+  @for (typedChip of typedChips; track typedChip) {
+    <goab-filter-chip [content]="typedChip" mb="xs" mr="xs" (onClick)="removeTypedChip(typedChip)"></goab-filter-chip>
+  }
+  <goab-button type="tertiary" size="compact" mb="xs" (onClick)="removeAllTypedChips()">Clear all</goab-button>
+}
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Name</th>
+      <th class="goa-table-number-header">ID Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of dataFiltered; track item.id) {
+      <tr>
+        <td><goab-badge [type]="item.status.type" [content]="item.status.text" [icon]="false"></goab-badge></td>
+        <td>{{ item.name }}</td>
+        <td class="goa-table-number-column">{{ item.id }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+@if (dataFiltered.length === 0 && filterTableData.length > 0) {
+  <goab-block mt="l" mb="l">No results found</goab-block>
+}
+
+<h3>Review page</h3>
+<goab-text size="heading-l" mt="none" mb="none">Review your answers</goab-text>
+<goab-text size="heading-s" color="secondary" mt="l" mb="none">Your situation</goab-text>
+<goab-table mt="l">
+  <tbody>
+    <tr><td><strong>What was your (the applicant's) relationship to the deceased?</strong></td><td>Other</td><td><goab-link>Change</goab-link></td></tr>
+    <tr><td><strong>My relationship to the deceased was</strong></td><td>Manager</td><td><goab-link>Change</goab-link></td></tr>
+    <tr><td><strong>Was the deceased part of a household that was receiving AISH or Income Support?</strong></td><td>No</td><td><goab-link>Change</goab-link></td></tr>
+    <tr><td><strong>Was the deceased a minor?</strong></td><td>No</td><td><goab-link>Change</goab-link></td></tr>
+    <tr><td><strong>What was the deceased's marital status at time of death?</strong></td><td>Married</td><td><goab-link>Change</goab-link></td></tr>
+    <tr><td><strong>Did the deceased have any dependents?</strong></td><td>No</td><td><goab-link>Change</goab-link></td></tr>
+    <tr><td><strong>Was the deceased a sponsored immigrant?</strong></td><td>Yes</td><td><goab-link>Change</goab-link></td></tr>
+  </tbody>
+</goab-table>
+<goab-button-group alignment="start" mt="2xl">
+  <goab-button type="primary">Confirm and continue</goab-button>
+  <goab-button type="tertiary">Back to application overview</goab-button>
+</goab-button-group>
+
+<h3>Set a specific tab to be active</h3>
+<goab-tabs [initialTab]="2">
+  <goab-tab heading="All">
+    <goab-table width="100%">
+      <thead>
+        <tr>
+          <th>Status</th><th>Text</th><th class="goa-table-number-header">Number</th><th style="width: 1%; white-space: nowrap">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (i of review; track $index) {
+          <tr><td><goab-badge type="important" content="Review pending"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+        @for (i of complete; track $index) {
+          <tr><td><goab-badge type="information" content="Complete"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+      </tbody>
+    </goab-table>
+  </goab-tab>
+  <goab-tab [heading]="reviewPendingTpl">
+    <ng-template #reviewPendingTpl>Review pending <goab-badge type="important" content="4" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
+      <thead><tr><th>Status</th><th>Text</th><th class="goa-table-number-header">Number</th><th style="width: 1%; white-space: nowrap">Action</th></tr></thead>
+      <tbody>
+        @for (i of review; track $index) {
+          <tr><td><goab-badge type="important" content="Review pending"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+      </tbody>
+    </goab-table>
+  </goab-tab>
+  <goab-tab [heading]="completeTpl">
+    <ng-template #completeTpl>Complete <goab-badge type="information" content="338" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
+      <thead><tr><th>Status</th><th>Text</th><th class="goa-table-number-header">Number</th><th style="width: 1%; white-space: nowrap">Action</th></tr></thead>
+      <tbody>
+        @for (i of complete; track $index) {
+          <tr><td><goab-badge type="information" content="Complete"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+      </tbody>
+    </goab-table>
+  </goab-tab>
+</goab-tabs>
+
+<h3>Show different views of data in a table</h3>
+<goab-tabs [initialTab]="1">
+  <goab-tab heading="All">
+    <goab-table width="100%">
+      <thead><tr><th>Status</th><th>Text</th><th class="goa-table-number-header">Number</th><th style="width: 1%; white-space: nowrap">Action</th></tr></thead>
+      <tbody>
+        @for (i of review; track $index) {
+          <tr><td><goab-badge type="important" content="Review pending"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+        @for (i of complete; track $index) {
+          <tr><td><goab-badge type="information" content="Complete"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+      </tbody>
+    </goab-table>
+  </goab-tab>
+  <goab-tab [heading]="diffReviewTpl">
+    <ng-template #diffReviewTpl>Review pending <goab-badge type="important" content="4" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
+      <thead><tr><th>Status</th><th>Text</th><th class="goa-table-number-header">Number</th><th style="width: 1%; white-space: nowrap">Action</th></tr></thead>
+      <tbody>
+        @for (i of review; track $index) {
+          <tr><td><goab-badge type="important" content="Review pending"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+      </tbody>
+    </goab-table>
+  </goab-tab>
+  <goab-tab [heading]="diffCompleteTpl">
+    <ng-template #diffCompleteTpl>Complete <goab-badge type="information" content="338" [icon]="false"></goab-badge></ng-template>
+    <goab-table width="100%">
+      <thead><tr><th>Status</th><th>Text</th><th class="goa-table-number-header">Number</th><th style="width: 1%; white-space: nowrap">Action</th></tr></thead>
+      <tbody>
+        @for (i of complete; track $index) {
+          <tr><td><goab-badge type="information" content="Complete"></goab-badge></td><td>Lorem Ipsum</td><td class="goa-table-number-column">1234567890</td><td><goab-button type="tertiary" size="compact">Action</goab-button></td></tr>
+        }
+      </tbody>
+    </goab-table>
+  </goab-tab>
+</goab-tabs>
+
+<h3>Show number of results per page</h3>
+<goab-table width="100%" mb="xl">
+  <thead><tr><th>First name</th><th>Last name</th><th>Age</th></tr></thead>
+  <tbody>
+    @for (user of pageUsers; track $index) {
+      <tr><td>{{ user.firstName }}</td><td>{{ user.lastName }}</td><td>{{ user.age }}</td></tr>
+    }
+  </tbody>
+</goab-table>
+<goab-block alignment="center" width="100%">
+  <goab-block mb="m" alignment="center">
+    Show
+    <goab-dropdown (onChange)="handlePerPageChange($event)" value="10" width="9ch">
+      <goab-dropdown-item value="10" label="10"></goab-dropdown-item>
+      <goab-dropdown-item value="20" label="20"></goab-dropdown-item>
+      <goab-dropdown-item value="30" label="30"></goab-dropdown-item>
+    </goab-dropdown>
+    <span style="width: 75px">per page</span>
+  </goab-block>
+  <goab-spacer hSpacing="fill"></goab-spacer>
+  <goab-pagination [itemCount]="users.length" [perPageCount]="perPage" [pageNumber]="page" (onChange)="handlePageChange($event)"></goab-pagination>
+</goab-block>
+
+<h3>Show multiple actions in a compact table</h3>
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Status</th><th>Name</th><th style="text-align: right">Id Number</th><th style="width: 1%; white-space: nowrap">Edit | Flag | Send</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of actionRows; track row.id) {
+      <tr>
+        <td><goab-badge [type]="row.status" [content]="row.statusText" [icon]="false"></goab-badge></td>
+        <td>{{ row.name }}</td>
+        <td class="goa-table-number-column">{{ row.id }}</td>
+        <td>
+          <goab-block>
+            <goab-icon-button size="small" icon="pencil" ariaLabel="Edit"></goab-icon-button>
+            <goab-icon-button size="small" icon="flag" ariaLabel="Flag"></goab-icon-button>
+            <goab-icon-button size="small" icon="mail" ariaLabel="Send"></goab-icon-button>
+          </goab-block>
+        </td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+
+<h3>Show status in a table</h3>
+<goab-table width="100%">
+  <thead>
+    <tr>
+      <th>Status</th><th>Name</th><th class="goa-table-number-header">File number</th><th style="width: 1%; white-space: nowrap"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (badge of badgeValues; track $index) {
+      <tr>
+        <td><goab-badge [type]="badge.type" [content]="badge.content" [icon]="false"></goab-badge></td>
+        <td>Lorem ipsum dolor sit amet consectetur</td>
+        <td class="goa-table-number-column">1234567890</td>
+        <td><goab-button size="compact" type="tertiary" (onClick)="onAssignClick()">Assign</goab-button></td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+
+<h3>Sort data in a table</h3>
+<goab-table width="100%" (onSort)="handleSortExample($event)">
+  <thead>
+    <tr>
+      <th><goab-table-sort-header name="firstName">First name</goab-table-sort-header></th>
+      <th><goab-table-sort-header name="lastName">Last name</goab-table-sort-header></th>
+      <th><goab-table-sort-header name="age" direction="asc">Age</goab-table-sort-header></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of sortExampleUsers; track user.firstName) {
+      <tr>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.age }}</td>
+      </tr>
+    }
+  </tbody>
+</goab-table>
+
+<h3>Task list page</h3>
+<goab-text tag="h1" mt="none">Apply for a service</goab-text>
+<goab-callout type="important" emphasis="low" size="medium" heading="Application incomplete" mb="2xl" mt="xl" maxWidth="360px">
+  You have completed 1 of 3 sections.
+</goab-callout>
+<goab-text tag="h2">1. Before you start</goab-text>
+<goab-table width="100%" mb="2xl" mt="l">
+  <tbody>
+    <tr><td><a href="#">Read terms of use</a></td><td class="goa-table-number-column"><goab-badge type="success" content="Completed" ariaLabel="completed" [icon]="false"></goab-badge></td></tr>
+  </tbody>
+</goab-table>
+<goab-text tag="h2">2. Prepare application</goab-text>
+<goab-table width="100%" mb="2xl" mt="l">
+  <tbody>
+    <tr><td><a href="#">Your contact details</a></td><td class="goa-table-number-column"><goab-badge type="information" content="Not started" ariaLabel="not started" [icon]="false"></goab-badge></td></tr>
+    <tr><td><a href="#">Your family</a></td><td class="goa-table-number-column"><goab-badge type="information" content="Not started" ariaLabel="not started" [icon]="false"></goab-badge></td></tr>
+    <tr><td><a href="#">Verify your identity</a></td><td class="goa-table-number-column"><goab-badge type="information" content="Not started" ariaLabel="not started" [icon]="false"></goab-badge></td></tr>
+  </tbody>
+</goab-table>
+<goab-text tag="h2" mb="s">3. Schedule service</goab-text>
+<goab-text size="body-s" color="secondary" mt="2xs">You need to complete the previous section before you can start this task.</goab-text>
+<goab-table width="100%" mt="l" mb="3xl">
+  <tbody>
+    <tr><td>Receive email confirmation</td><td class="goa-table-number-column"><goab-badge type="default" content="Cannot start yet" ariaLabel="cannot start yet" [icon]="false"></goab-badge></td></tr>
+    <tr><td>Pay service fee</td><td class="goa-table-number-column"><goab-badge type="default" content="Cannot start yet" ariaLabel="cannot start yet" [icon]="false"></goab-badge></td></tr>
+  </tbody>
+</goab-table>

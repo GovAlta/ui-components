@@ -11,12 +11,18 @@
     @for (badge of badgeValues; track $index) {
     <tr>
       <td>
-        <goab-badge [type]="badge.type" [content]="badge.content" [icon]="false"></goab-badge>
+        <goab-badge
+          [type]="badge.type"
+          [content]="badge.content"
+          [icon]="false"
+        ></goab-badge>
       </td>
       <td>Lorem ipsum dolor sit amet consectetur.</td>
       <td class="goa-table-number-column">1234567890</td>
       <td>
-        <goab-button size="compact" type="tertiary" (onClick)="onClick()">Assign</goab-button>
+        <goab-button size="compact" type="tertiary" (onClick)="onClick()"
+          >Assign</goab-button
+        >
       </td>
     </tr>
     }

@@ -22,8 +22,9 @@
     Show
     <goab-dropdown
       (onChange)="handlePerPageCountChangeEvent($event)"
-      value="10"
-      width="9ch">
+      [value]="perPage.toString()"
+      width="9ch"
+    >
       <goab-dropdown-item value="10" label="10"></goab-dropdown-item>
       <goab-dropdown-item value="20" label="20"></goab-dropdown-item>
       <goab-dropdown-item value="30" label="30"></goab-dropdown-item>
@@ -37,6 +38,7 @@
     [itemCount]="users.length"
     [perPageCount]="perPage"
     [pageNumber]="page"
-    (onChange)="handlePageChange($event)">
+    (onChange)="handlePageChange($event)"
+  >
   </goab-pagination>
 </goab-block>

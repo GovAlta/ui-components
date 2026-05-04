@@ -58,8 +58,13 @@ function isTokenValue(obj: unknown): obj is TokenValue {
  * Convert a path array to a CSS variable name
  * e.g., ['color', 'interactive', 'default'] -> '--goa-color-interactive-default'
  */
+function toKebabCase(segment: string): string {
+  // Insert a hyphen between a lowercase/digit character and the following uppercase character, then lowercase the full segment.
+  return segment.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
 function pathToCssVar(path: string[]): string {
-  return `--goa-${path.join("-")}`;
+  return `--goa-${path.map(toKebabCase).join("-")}`;
 }
 
 /**

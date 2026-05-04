@@ -1,4 +1,4 @@
-import { forwardRef, Directive, ElementRef, HostListener } from "@angular/core";
+import { forwardRef, Directive, ElementRef, HostListener, inject } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 // @deprecated: Use the new <goab-input .. /> component
@@ -14,6 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class ValueDirective implements ControlValueAccessor {
+  protected elementRef = inject(ElementRef);
+
   private _value = "";
   private _disabled = false;
 
@@ -53,8 +55,6 @@ export class ValueDirective implements ControlValueAccessor {
     this.elementRef.nativeElement.disabled = isDisabled;
   }
 
-  constructor(protected elementRef: ElementRef) {}
-
   @HostListener("_change", ["$event"])
   listenForValueChange(event: Event) {
     const value = (event as CustomEvent<{ value: string }>).detail.value;
@@ -79,6 +79,8 @@ export class ValueDirective implements ControlValueAccessor {
   ],
 })
 export class ValueListDirective implements ControlValueAccessor {
+  protected elementRef = inject(ElementRef);
+
   private _value?: string[] = [];
 
   onChange: any = () => {};
@@ -108,8 +110,6 @@ export class ValueListDirective implements ControlValueAccessor {
   registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
-
-  constructor(protected elementRef: ElementRef) {}
 
   @HostListener("_change", ["$event"])
   listenForValueChange(event: Event) {

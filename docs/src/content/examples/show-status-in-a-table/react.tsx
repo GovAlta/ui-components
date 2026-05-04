@@ -13,7 +13,7 @@ export function ShowStatusInATable() {
     { key: 2, type: "emergency", content: "Failed" },
     { key: 3, type: "success", content: "Complete" },
     { key: 4, type: "information", content: "In progress" },
-    { key: 5, type: "midtone", content: "Closed" },
+    { key: 5, type: "default", content: "Closed" },
     { key: 6, type: "success", content: "Complete" },
   ];
 

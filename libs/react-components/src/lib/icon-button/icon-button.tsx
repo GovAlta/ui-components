@@ -1,8 +1,10 @@
 import {
   GoabIconButtonVariant,
   GoabIconSize,
+  GoabIconTheme,
   GoabIconType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 import { useEffect, useRef, type JSX, ReactNode } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
@@ -10,6 +12,7 @@ import { transformProps, lowercase } from "../common/extract-props";
 interface WCProps extends Margins {
   icon: GoabIconType;
   size?: GoabIconSize;
+  theme?: GoabIconTheme;
   variant?: GoabIconButtonVariant;
   title?: string;
   disabled?: string;
@@ -24,7 +27,8 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-icon-button": WCProps & React.HTMLAttributes<HTMLButtonElement> & {
+      "goa-icon-button": WCProps &
+      React.HTMLAttributes<HTMLButtonElement> & {
         ref: React.RefObject<HTMLElement | null>;
       };
     }
@@ -32,23 +36,39 @@ declare module "react" {
 }
 
 export interface GoabIconButtonProps extends Margins, DataAttributes {
+  /** @required Sets the icon. */
   icon: GoabIconType;
+  /** Sets the size of button. @default "medium" */
   size?: GoabIconSize;
+  /** Styles the button to show color, light, dark or destructive action. @default "color" */
   variant?: GoabIconButtonVariant;
+  /** Sets the theme of the icon inside the button. "outline" for stroked icons, "filled" for solid icons. @default "outline" */
+  theme?: GoabIconTheme;
+  /** Sets the title of the button. */
   title?: string;
+  /** Disables the button. */
   disabled?: boolean;
+  /** Callback fired when the icon button is clicked. */
   onClick?: () => void;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Sets the aria-label of the button. */
   ariaLabel?: string;
+  /** Action identifier passed in click events for event delegation patterns. */
   action?: string;
+  /** Multiple argument values passed with the action in click events. */
   actionArgs?: Record<string, unknown>;
+  /** Single argument value passed with the action in click events. */
   actionArg?: string;
+  /** Content rendered inside the icon button. */
   children?: ReactNode;
 }
 
+/** A compact button with an icon and no text. */
 export function GoabIconButton({
   variant = "color",
   size = "medium",
+  theme = "outline",
   disabled,
   onClick,
   actionArgs,
@@ -58,10 +78,7 @@ export function GoabIconButton({
 }: GoabIconButtonProps): JSX.Element {
   const ref = useRef<HTMLElement>(null);
 
-  const _props = transformProps<WCProps>(
-    { variant, size, ...rest },
-    lowercase
-  );
+  const _props = transformProps<WCProps>({ variant, size, theme, ...rest }, lowercase);
 
   useEffect(() => {
     if (!ref.current) {

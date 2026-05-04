@@ -6,6 +6,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -37,21 +38,23 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A small overlay that opens on demand, used in other components. */
 export class GoabPopover extends GoabBaseComponent implements OnInit {
-  isReady = false;
-  @Input() maxWidth = "320px";
-  @Input() minWidth?: string;
-  @Input() padded = true;
-  @Input() position?: GoabPopoverPosition;
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
-  @Input() relative?: boolean;
-  @Input({ required: true }) target!: TemplateRef<any>;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
+  /** Sets the maximum width of the popover container. @default "320px" */
+  @Input() maxWidth = "320px";
+  /** Sets the minimum width of the popover container. */
+  @Input() minWidth?: string;
+  /** Sets if the popover has padding. Use false when content needs to be flush with boundaries. @default true */
+  @Input() padded = true;
+  /** Provides control to where the popover content is positioned. */
+  @Input() position?: GoabPopoverPosition;
+  /** @deprecated This property has no effect and will be removed in a future version. */
+  @Input() relative?: boolean;
+  /** @required Sets the target template reference for the popover trigger. */
+  @Input({ required: true }) target!: TemplateRef<any>;
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -1,0 +1,98 @@
+<h2>Radio group</h2>
+
+<h3>Basic example (Reactive forms)</h3>
+<form [formGroup]="basicForm">
+  <goab-form-item label="Contact preference" mb="l">
+    <goab-radio-group name="contact" formControlName="contact">
+      <goab-radio-item value="email" label="Email"></goab-radio-item>
+      <goab-radio-item value="phone" label="Phone"></goab-radio-item>
+      <goab-radio-item value="mail" label="Mail"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+</form>
+<p>Value: {{ basicForm.value | json }}</p>
+
+<h3>Basic example (Template driven)</h3>
+<form>
+  <goab-form-item label="Contact preference" mb="l">
+    <goab-radio-group
+      name="contact"
+      [(ngModel)]="ngModelContact"
+      (onChange)="radioOnChange($event)">
+      <goab-radio-item value="email" label="Email"></goab-radio-item>
+      <goab-radio-item value="phone" label="Phone"></goab-radio-item>
+      <goab-radio-item value="mail" label="Mail"></goab-radio-item>
+    </goab-radio-group>
+  </goab-form-item>
+</form>
+<p>Value: {{ ngModelContact }}</p>
+
+<h3>Horizontal layout</h3>
+<goab-form-item label="Size" mb="l">
+  <goab-radio-group name="size" value="" orientation="horizontal">
+    <goab-radio-item value="small" label="Small"></goab-radio-item>
+    <goab-radio-item value="medium" label="Medium"></goab-radio-item>
+    <goab-radio-item value="large" label="Large"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<h3>With descriptions</h3>
+<goab-form-item label="Shipping method" mb="l">
+  <goab-radio-group name="shipping" value="">
+    <goab-radio-item value="standard" label="Standard" description="5-7 business days"></goab-radio-item>
+    <goab-radio-item value="express" label="Express" description="2-3 business days"></goab-radio-item>
+    <goab-radio-item value="overnight" label="Overnight" description="Next business day"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<h3>With reveal content</h3>
+<goab-form-item label="Do you have a preferred date?" mb="l">
+  <goab-radio-group name="hasDate" value="">
+    <goab-radio-item value="no" label="No"></goab-radio-item>
+    <goab-radio-item value="yes" label="Yes" [reveal]="dateReveal">
+      <ng-template #dateReveal>
+        <goab-form-item label="Preferred date" mb="l">
+          <goab-date-picker name="preferredDate" (onChange)="handleDateChange()"></goab-date-picker>
+        </goab-form-item>
+      </ng-template>
+    </goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<h3>Preselected</h3>
+<goab-form-item label="Notification frequency" mb="l">
+  <goab-radio-group name="frequency" value="daily">
+    <goab-radio-item value="realtime" label="Real-time"></goab-radio-item>
+    <goab-radio-item value="daily" label="Daily digest"></goab-radio-item>
+    <goab-radio-item value="weekly" label="Weekly summary"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<h3>Sizes</h3>
+<goab-form-item label="Default size" mb="l">
+  <goab-radio-group name="sizeDefault" value="">
+    <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+    <goab-radio-item value="no" label="No"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+<goab-form-item label="Compact size" labelSize="compact" mb="l">
+  <goab-radio-group name="sizeCompact" value="" size="compact">
+    <goab-radio-item value="yes" label="Yes"></goab-radio-item>
+    <goab-radio-item value="no" label="No"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+
+<h3>States</h3>
+<goab-form-item label="Account type" mb="l">
+  <goab-radio-group name="accountType" value="basic" [disabled]="true">
+    <goab-radio-item value="basic" label="Basic"></goab-radio-item>
+    <goab-radio-item value="premium" label="Premium"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>
+<goab-form-item label="Payment method" error="Please select a payment method" mb="l">
+  <goab-radio-group name="payment" value="" [error]="true">
+    <goab-radio-item value="credit" label="Credit card"></goab-radio-item>
+    <goab-radio-item value="debit" label="Debit card"></goab-radio-item>
+    <goab-radio-item value="bank" label="Bank transfer"></goab-radio-item>
+  </goab-radio-group>
+</goab-form-item>

@@ -16,22 +16,30 @@ declare module "react" {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
-      "goa-public-form": WCProps & React.HTMLAttributes<HTMLElement> & {
-        ref: React.RefObject<HTMLElement | null>;
-      };
+      "goa-public-form": WCProps &
+        React.HTMLAttributes<HTMLElement> & {
+          ref: React.RefObject<HTMLElement | null>;
+        };
     }
   }
 }
 
 interface GoabPublicFormProps extends DataAttributes {
-  status?: GoabPublicFormStatus;
-  name?: string;
-  onInit?: (event: Event) => void;
-  onComplete?: (event: GoabFormState) => void;
-  onStateChange?: (event: GoabFormState) => void;
+  /** Content rendered inside the public form. */
   children: ReactNode;
+  /** The initialization status of the form. Set to "initializing" while loading external state, then "complete" when ready. @default "complete" */
+  status?: GoabPublicFormStatus;
+  /** A name identifier for the form. Useful for debugging complex forms with multiple nested forms. */
+  name?: string;
+  /** Callback fired when the form is initialized. */
+  onInit?: (event: Event) => void;
+  /** Callback fired when the form is completed. */
+  onComplete?: (event: GoabFormState) => void;
+  /** Callback fired when the form state changes. */
+  onStateChange?: (event: GoabFormState) => void;
 }
 
+/** Container for form inputs and validation. */
 export function GoabPublicForm({
   onInit,
   onComplete,

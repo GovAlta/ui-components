@@ -1,33 +1,48 @@
-<goa-button version="2" type="tertiary" leadingicon="trash" id="delete-btn">Delete record</goa-button>
-<goa-modal version="2" id="delete-modal" heading="Are you sure you want to delete this record?">
+<goa-button version="2" type="tertiary" leadingicon="trash" id="delete-btn"
+  >Delete record</goa-button
+>
+<goa-modal
+  version="2"
+  id="delete-modal"
+  heading="Are you sure you want to delete this record?"
+>
   <p>This action cannot be undone.</p>
   <div slot="actions">
     <goa-button-group alignment="end">
-      <goa-button version="2" type="tertiary" size="compact" id="cancel-btn">Cancel</goa-button>
-      <goa-button version="2" type="primary" variant="destructive" size="compact" id="confirm-delete-btn">Delete record</goa-button>
+      <goa-button version="2" type="tertiary" size="compact" id="cancel-btn"
+        >Cancel</goa-button
+      >
+      <goa-button
+        version="2"
+        type="primary"
+        variant="destructive"
+        size="compact"
+        id="confirm-delete-btn"
+        >Delete record</goa-button
+      >
     </goa-button-group>
   </div>
 </goa-modal>
 
 <script>
-  const modal = document.getElementById('delete-modal');
-  const deleteBtn = document.getElementById('delete-btn');
-  const cancelBtn = document.getElementById('cancel-btn');
-  const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+  const modal = document.getElementById("delete-modal");
+  const deleteBtn = document.getElementById("delete-btn");
+  const cancelBtn = document.getElementById("cancel-btn");
+  const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
 
-  deleteBtn.addEventListener('_click', () => {
-    modal.setAttribute('open', 'true');
+  deleteBtn.addEventListener("_click", () => {
+    modal.setAttribute("open", "true");
   });
 
-  cancelBtn.addEventListener('_click', () => {
-    modal.removeAttribute('open');
+  cancelBtn.addEventListener("_click", () => {
+    modal.removeAttribute("open");
   });
 
-  confirmDeleteBtn.addEventListener('_click', () => {
-    modal.removeAttribute('open');
+  confirmDeleteBtn.addEventListener("_click", () => {
+    modal.removeAttribute("open");
   });
 
-  modal.addEventListener('_close', () => {
-    modal.removeAttribute('open');
+  modal.addEventListener("_close", () => {
+    modal.removeAttribute("open");
   });
 </script>

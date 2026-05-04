@@ -82,12 +82,21 @@ export function TableOfContents({ cssQuery }: TOCProps) {
     // Update active heading on scroll - only check visible headings
     function handleScroll() {
       const headings = document.querySelectorAll<HTMLHeadingElement>(cssQuery);
+      const visibleHeadings = Array.from(headings).filter(isVisible);
+
+      if (visibleHeadings.length === 0) return;
+
+      // When scrolled to the bottom, activate the last visible heading
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
+      if (atBottom) {
+        const id = visibleHeadings[visibleHeadings.length - 1].getAttribute("id");
+        if (id) setActiveId(id);
+        return;
+      }
+
       let activeHeading: HTMLHeadingElement | null = null;
-
-      for (const heading of headings) {
-        // Only consider visible headings
-        if (!isVisible(heading)) continue;
-
+      for (const heading of visibleHeadings) {
         const rect = heading.getBoundingClientRect();
         if (rect.top < 120) {
           activeHeading = heading;
@@ -95,7 +104,7 @@ export function TableOfContents({ cssQuery }: TOCProps) {
       }
 
       if (activeHeading) {
-        const id = (activeHeading as HTMLHeadingElement).getAttribute("id");
+        const id = activeHeading.getAttribute("id");
         if (id) setActiveId(id);
       }
     }

@@ -119,9 +119,20 @@ export const USAGE_TOPICS = [
   "icons",
   "positioning",
   "content",
+  "feedback",
+  "usage",
+  "interaction",
+  "forms",
+  "layout",
+  "performance",
   "other",
 ] as const;
-export const ACCESSIBILITY_TOPICS = ["screen-readers", "keyboard", "focus"] as const;
+export const ACCESSIBILITY_TOPICS = [
+  "accessibility",
+  "screen-readers",
+  "keyboard",
+  "focus",
+] as const;
 
 /**
  * Separate guidance into usage and accessibility categories

@@ -6,6 +6,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
@@ -29,14 +30,18 @@ import { NgTemplateOutlet } from "@angular/common";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Section heading in side menu. */
 export class GoabSideMenuHeading implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
   isReady = false;
   version = "2";
+  /** @required Icon displayed before the heading text. */
   @Input() icon!: GoabIconType;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
+  /** Sets the template for the meta slot content. */
   @Input() meta!: TemplateRef<any>;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -1,0 +1,32 @@
+<h2>Temporary notification</h2>
+<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+
+<h3>Basic notification</h3>
+<goab-button (onClick)="showNotification()">Notification</goab-button>
+
+<h3>Notification types</h3>
+<goab-button (onClick)="show('Basic message', 'basic')" mb="xs">Basic</goab-button>
+<goab-button (onClick)="show('Action completed.', 'success')" mb="xs">Success</goab-button>
+<goab-button (onClick)="show('Something went wrong.', 'failure')">Failure</goab-button>
+
+<h3>Progress and indeterminate</h3>
+<goab-button (onClick)="showProgress()" mb="xs">Progress</goab-button>
+<goab-button (onClick)="showIndeterminate()">Indeterminate</goab-button>
+
+<h2>Examples</h2>
+
+<h3>Show a notification</h3>
+<goab-button type="secondary" (onClick)="save()">Save</goab-button>
+
+<h3>Show a notification with an action</h3>
+<goab-button (onClick)="comment()">Comment</goab-button>
+
+<h3>Show a user progress when time is unknown</h3>
+<goab-button type="secondary" leadingIcon="search" (onClick)="search()">
+  Search case history
+</goab-button>
+
+<h3>Show a user progress</h3>
+<goab-button type="tertiary" leadingIcon="download" (onClick)="downloadReport()">
+  Download report
+</goab-button>

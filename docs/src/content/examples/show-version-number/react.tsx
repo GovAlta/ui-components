@@ -6,7 +6,9 @@ export function ShowVersionNumber() {
       type="alpha"
       version={
         <>
-          <span>Slotted <b>version text</b>.</span>
+          <span>
+            Slotted <b>version text</b>.
+          </span>
           <span>v1.23</span>
         </>
       }

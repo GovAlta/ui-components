@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -25,12 +26,11 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Indicate a separation of layout, or to distinguish large chunks of information on a page. */
 export class GoabDivider extends GoabBaseComponent implements OnInit {
-  isReady = false;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

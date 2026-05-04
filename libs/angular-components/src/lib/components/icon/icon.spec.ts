@@ -23,6 +23,7 @@ import { By } from "@angular/platform-browser";
       [opacity]="opacity"
       [title]="title"
       [ariaLabel]="ariaLabel"
+      [role]="role"
       [testId]="testId"
       [mt]="mt"
       [mb]="mb"
@@ -40,6 +41,7 @@ class TestIconComponent {
   opacity?: number;
   title?: string;
   ariaLabel?: string;
+  role?: string;
   testId?: string;
   mt?: Spacing;
   mb?: Spacing;
@@ -67,6 +69,7 @@ describe("GoABIcon", () => {
     component.opacity = 0.5;
     component.title = "foo";
     component.ariaLabel = "bar";
+    component.role = "presentation";
     component.testId = "foo";
     component.mt = "s";
     component.mr = "m";
@@ -88,6 +91,7 @@ describe("GoABIcon", () => {
     expect(el?.getAttribute("opacity")).toBe(`${component.opacity}`);
     expect(el?.getAttribute("title")).toBe(component.title);
     expect(el?.getAttribute("arialabel")).toBe(component.ariaLabel);
+    expect(el?.getAttribute("role")).toBe(component.role);
     expect(el?.getAttribute("testid")).toBe(component.testId);
     expect(el?.getAttribute("mt")).toBe(component.mt);
     expect(el?.getAttribute("mb")).toBe(component.mb);

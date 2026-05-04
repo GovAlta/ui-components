@@ -1,11 +1,16 @@
 <goab-form-item label="Type to create a chip" mb="m">
-  <goab-input
-    [value]="inputValue"
-    (onChange)="handleInputChange($event)"
-    (onKeyPress)="handleInputKeyPress($event)"
-    width="100%"
-  >
-  </goab-input>
+  <goab-block gap="xs" direction="row">
+    <div style="flex: 1">
+      <goab-input
+        [value]="inputValue"
+        (onChange)="handleInputChange($event)"
+        (onKeyPress)="handleInputKeyPress($event)"
+        width="100%"
+      >
+      </goab-input>
+    </div>
+    <goab-button type="secondary" (onClick)="addChip()">Add</goab-button>
+  </goab-block>
 </goab-form-item>
 @if (typedChips.length > 0) {
 <div>

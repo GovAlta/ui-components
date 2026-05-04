@@ -1,0 +1,137 @@
+<div>
+  <h1>Bug 3625: Accordion Refinement</h1>
+  <goab-accordion heading="Small heading" headingSize="small">
+    Content with small heading.
+  </goab-accordion>
+  <goab-accordion heading="Medium heading" headingSize="medium">
+    Content with medium heading.
+  </goab-accordion>
+  <goab-accordion
+    heading="Small heading"
+    secondaryText="Secondary Text"
+    headingSize="small"
+  >
+    Content with small heading.
+  </goab-accordion>
+  <goab-accordion
+    heading="Medium heading"
+    secondaryText="Secondary Text"
+    headingSize="medium"
+  >
+    Content with medium heading.
+  </goab-accordion>
+  <div style="display: flex; gap: 1rem">
+    <div style="width: 50%">
+      <goab-accordion
+        heading="Small heading"
+        [headingContent]="importantBadge"
+        headingSize="small"
+      >
+        <ng-template #importantBadge>
+          <goab-badge type="important" content="Updated"></goab-badge>
+        </ng-template>
+        Content with small heading.
+      </goab-accordion>
+    </div>
+    <div style="width: 50%">
+      <goab-accordion
+        heading="Medium heading"
+        [headingContent]="importantBadge"
+        headingSize="medium"
+      >
+        <ng-template #importantBadge>
+          <goab-badge type="important" content="Updated"></goab-badge>
+        </ng-template>
+        Content with medium heading.
+      </goab-accordion>
+    </div>
+  </div>
+  <goab-accordion heading="Small Controls" headingSize="small" iconPosition="right">
+    <goab-block direction="column" gap="s">
+      <goab-text tag="p">Content with small heading.</goab-text>
+      <goab-block direction="column" gap="s">
+        <goab-text tag="p">Nested block content.</goab-text>
+        <goab-form-item label="Colour Dropdown">
+          <goab-dropdown width="500px">
+            <goab-dropdown-item value="red" label="Red" />
+            <goab-dropdown-item value="green" label="Green" />
+            <goab-dropdown-item value="blue" label="Blue" />
+          </goab-dropdown>
+        </goab-form-item>
+      </goab-block>
+    </goab-block>
+  </goab-accordion>
+  <goab-accordion heading="Medium Controls" headingSize="medium" iconPosition="right">
+    <goab-block direction="column" gap="s">
+      <goab-text tag="p">Content with medium heading.</goab-text>
+      <goab-form-item label="Colour Dropdown" maxWidth="100%">
+        <goab-dropdown width="500px">
+          <goab-dropdown-item value="red" label="Red" />
+          <goab-dropdown-item value="green" label="Green" />
+          <goab-dropdown-item value="blue" label="Blue" />
+        </goab-dropdown>
+      </goab-form-item>
+    </goab-block>
+  </goab-accordion>
+
+  <goab-accordion
+    heading="Verification checklist"
+    secondaryText="From Bug 2873 - open on start"
+    [open]="true"
+  >
+    <goab-block direction="column" gap="s">
+      <goab-text tag="p" maxWidth="400px">
+        Expand and collapse this accordion to confirm that layout changes do not jump the
+        scroll position unexpectedly.
+      </goab-text>
+      <goab-text tag="p" maxWidth="400px">
+        Keep the content long enough to require scrolling before and after the accordion
+        section.
+      </goab-text>
+    </goab-block>
+  </goab-accordion>
+
+  <goab-accordion
+    heading="Clickable Element in Heading"
+    headingSize="medium"
+    [headingContent]="buttonTemplate"
+    (onChange)="onAccordionChange()"
+  >
+    <ng-template #buttonTemplate>
+      <goab-button (click)="onButtonClicked()" size="compact">
+        This is a button
+      </goab-button>
+    </ng-template>
+    <p>
+      In the JavaScript console the text "Accordion toggled" will not appear if the button
+      is clicked, only if other parts of the heading are clicked.
+    </p>
+  </goab-accordion>
+
+  <h2>Controlled Accordion (toggle via button)</h2>
+  <goab-text tag="p">
+    Parent state: <strong>{{ controlledOpen ? "open" : "closed" }}</strong>
+  </goab-text>
+  <goab-block direction="row" gap="s" mb="m">
+    <goab-button (onClick)="toggleControlled()">
+      {{ controlledOpen ? "Collapse" : "Expand" }}
+    </goab-button>
+    <goab-button type="secondary" (onClick)="controlledOpen = false">
+      Force close
+    </goab-button>
+    <goab-button type="secondary" (onClick)="controlledOpen = true">
+      Force open
+    </goab-button>
+  </goab-block>
+  <goab-accordion
+    heading="Controlled Accordion"
+    secondaryText="open prop is bound to parent state"
+    [open]="controlledOpen"
+    (onChange)="onControlledChange($event)"
+  >
+    <goab-text tag="p">
+      Test the controlled pattern: click the accordion summary, click the buttons above,
+      and watch whether the parent state stays in sync with the visible UI state.
+    </goab-text>
+  </goab-accordion>
+</div>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Foundations - Accessibility
  *
@@ -325,8 +326,8 @@ import FoundationsSupportCallout from "../../components/FoundationsSupportCallou
     </ul>
   </goa-text>
   <goa-text size="body-m" mt="none" mb="m">
-    See the <a href="/components/callout">Callout</a> and
-    <a href="/components/notification">Notification</a> components for examples of how updates
+    See the <a href={withBase(`/components/callout`)}>Callout</a> and
+    <a href={withBase(`/components/notification`)}>Notification</a> components for examples of how updates
     are handled for assistive technology.
   </goa-text>
 

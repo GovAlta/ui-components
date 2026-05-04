@@ -16,17 +16,27 @@ declare module "react" {
 }
 
 export interface GoabThreeColumnLayoutProps {
-  leftColumnWidth?: string;
-  rightColumnWidth?: string;
-  maxContentWidth?: string;
-  header?: ReactNode;
-  footer?: ReactNode;
-  nav?: ReactNode;
-  sidebar?: ReactNode; // DEPRECATED
-  sideMenu?: ReactNode;
+  /** Main content rendered in the center column. */
   children: ReactNode;
+  /** Sets the width of the left column. */
+  leftColumnWidth?: string;
+  /** Sets the width of the right column. */
+  rightColumnWidth?: string;
+  /** Sets the maximum width of the content area. */
+  maxContentWidth?: string;
+  /** Content rendered in the page header slot. */
+  header?: ReactNode;
+  /** Content rendered in the page footer slot. */
+  footer?: ReactNode;
+  /** Content rendered in the navigation slot. */
+  nav?: ReactNode;
+  /** @deprecated Use sideMenu instead. Content rendered in the side menu slot. */
+  sidebar?: ReactNode;
+  /** Content rendered in the side menu slot. */
+  sideMenu?: ReactNode;
 }
 
+/** Organizes page content in three responsive columns. */
 export function GoabThreeColumnLayout(props: GoabThreeColumnLayoutProps) {
   return (
     <goa-three-column-layout

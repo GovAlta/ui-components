@@ -1,0 +1,110 @@
+name: PR Preview (GitHub Pages)
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+    branches:
+      - dev
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            docs/package-lock.json
+
+      - name: Install npm 11
+        run: npm install -g npm@11
+
+      - name: Install dependencies
+        if: github.event.action != 'closed'
+        run: |
+          npm ci
+          cd docs && npm ci --legacy-peer-deps
+
+      - name: Build docs
+        if: github.event.action != 'closed'
+        env:
+          PREVIEW_SITE: https://govalta.github.io
+          PREVIEW_BASE: /ui-components/pr-preview/pr-${{ github.event.number }}/
+        run: npx nx run docs:build
+
+      - name: Build React playground
+        if: github.event.action != 'closed'
+        env:
+          PREVIEW_BASE_REACT: /ui-components/pr-preview-react/pr-${{ github.event.number }}/
+        run: npx nx run react-prs:build:production
+
+      - name: Build Angular playground
+        if: github.event.action != 'closed'
+        env:
+          PREVIEW_BASE_ANGULAR: /ui-components/pr-preview-angular/pr-${{ github.event.number }}/
+        run: npx nx run angular-prs:build:production --base-href=$PREVIEW_BASE_ANGULAR
+
+      - name: Deploy docs preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist/docs
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
+
+      - name: Deploy React playground preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist/apps/prs/react
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview-react
+          action: auto
+
+      - name: Deploy Angular playground preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist/apps/prs/angular/browser
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview-angular
+          action: auto
+
+      - name: Post consolidated preview comment
+        if: github.event.action != 'closed'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-preview-all
+          message: |
+            ## Preview links
+
+            | Target | URL |
+            |---|---|
+            | Docs | https://govalta.github.io/ui-components/pr-preview/pr-${{ github.event.number }}/ |
+            | React playground | https://govalta.github.io/ui-components/pr-preview-react/pr-${{ github.event.number }}/ |
+            | Angular playground | https://govalta.github.io/ui-components/pr-preview-angular/pr-${{ github.event.number }}/ |
+
+            Built from commit ${{ github.event.pull_request.head.sha }}. Previews are removed automatically when this PR closes.
+
+      - name: Post cleanup notice
+        if: github.event.action == 'closed'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-preview-all
+          message: |
+            ## Preview removed
+
+            All preview folders cleaned from gh-pages branch.

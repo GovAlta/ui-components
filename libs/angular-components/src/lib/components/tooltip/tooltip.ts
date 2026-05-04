@@ -9,6 +9,7 @@ import {
   TemplateRef,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 import { GoabBaseComponent } from "../base.component";
@@ -42,16 +43,19 @@ import { GoabBaseComponent } from "../base.component";
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [NgTemplateOutlet],
 })
+/** A small popover that displays more information about an item. */
 export class GoabTooltip extends GoabBaseComponent implements OnInit {
-  isReady = false;
-  @Input() position?: GoabTooltipPosition;
-  @Input() content?: string | TemplateRef<unknown>;
-  @Input() hAlign?: GoabTooltipHorizontalAlignment;
-  @Input() maxWidth?: string;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  isReady = false;
+  /** Position with respect to the child element. @default "top" */
+  @Input() position?: GoabTooltipPosition;
+  /** The content of the tooltip. */
+  @Input() content?: string | TemplateRef<unknown>;
+  /** Horizontal alignment to the child element. @default "center" */
+  @Input() hAlign?: GoabTooltipHorizontalAlignment;
+  /** Sets the maximum width of the tooltip. Must use 'px' unit. */
+  @Input() maxWidth?: string;
 
   ngOnInit(): void {
     setTimeout(() => {

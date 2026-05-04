@@ -3,7 +3,7 @@
 // non-key properties change. Using the `watch` function provides the control and makes
 // it clear what the function is watching
 export function watch(fn: () => void, _: unknown[]) {
-  fn()
+  fn();
 }
 
 // Creates a style string from a list of styles.
@@ -53,7 +53,7 @@ export function receive(
   const listener = (e: Event) => {
     const ce = e as CustomEvent;
     handler(ce.detail.action, ce.detail.data, e);
-  }
+  };
 
   el?.addEventListener("msg", listener);
 
@@ -290,9 +290,14 @@ export function isPointInRectangle(
   rectX: number,
   rectY: number,
   rectWidth: number,
-  rectHeight: number
+  rectHeight: number,
 ): boolean {
-  return x >= rectX && x <= rectX + rectWidth && y >= rectY && y <= rectY + rectHeight;
+  return (
+    x >= rectX &&
+    x <= rectX + rectWidth &&
+    y >= rectY &&
+    y <= rectY + rectHeight
+  );
 }
 
 export function ensureSlotExists(el: HTMLElement) {
@@ -372,7 +377,7 @@ export function getLocalDateValues(input: string | Date): {
         year: +matches[1],
         month: +matches[2],
         day: +matches[3],
-      }
+      };
     }
   }
 
@@ -381,7 +386,7 @@ export function getLocalDateValues(input: string | Date): {
       year: input.getFullYear(),
       month: input.getMonth() + 1,
       day: input.getDate(),
-    }
+    };
   }
 
   return null;
@@ -495,7 +500,11 @@ export function isFocusable(node: Node): boolean {
     (element.tabIndex === 0 && element.getAttribute("tabindex") !== null);
   if (isTabbable) return true;
 
-  if (("disabled" in element && element.disabled) || element?.getAttribute("disabled")) return false;
+  if (
+    ("disabled" in element && element.disabled) ||
+    element?.getAttribute("disabled")
+  )
+    return false;
 
   // Allow elements with data-should-focus to be focusable even with tabindex=-1
   if (element.getAttribute?.("data-should-focus")) return true;
@@ -547,7 +556,10 @@ export function findFirstFocusableNode(
     }
 
     if (node.hasChildNodes()) {
-      focusableNode = findFirstFocusableNode(Array.from(node.childNodes), reversed);
+      focusableNode = findFirstFocusableNode(
+        Array.from(node.childNodes),
+        reversed,
+      );
       if (focusableNode) break;
     }
 
@@ -565,20 +577,39 @@ export function findFirstFocusableNode(
   return focusableNode;
 }
 
-function findFirstNodeOfSlot(
-  node: Node,
-  reversed: boolean,
-): Node | null {
+function findFirstNodeOfSlot(node: Node, reversed: boolean): Node | null {
   if (!(node instanceof HTMLSlotElement)) return null;
   return findFirstFocusableNode([...node.assignedNodes()], reversed);
 }
 
-function findFirstNodeOfShadowDOM(
-  node: Node,
-  reversed: boolean,
-): Node | null {
+function findFirstNodeOfShadowDOM(node: Node, reversed: boolean): Node | null {
   if (!(node instanceof HTMLElement)) return null;
-  return findFirstFocusableNode([...(node.shadowRoot?.childNodes || [])], reversed);
+  return findFirstFocusableNode(
+    [...(node.shadowRoot?.childNodes || [])],
+    reversed,
+  );
 }
 
+export function parseCssTimeToMilliseconds(
+  timeValue: string,
+  fallback = 100,
+): number {
+  const match = timeValue.trim().match(/^([0-9]*\.?[0-9]+)\s*(ms|s)$/i);
 
+  if (!match) {
+    return fallback;
+  }
+
+  const [, valueStr, unit] = match;
+  let durationInMs = Number.parseFloat(valueStr);
+
+  if (Number.isNaN(durationInMs)) {
+    return fallback;
+  }
+
+  if (unit.toLowerCase() === "s") {
+    durationInMs *= 1000;
+  }
+
+  return durationInMs;
+}

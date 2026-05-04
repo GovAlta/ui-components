@@ -55,7 +55,15 @@ export function ConfigurationPreview({
   // Update preview when configuration changes
   useEffect(() => {
     if (previewRef.current && selectedConfig) {
-      const rawCode = selectedConfig.code.webComponents;
+      const webComponentCode = selectedConfig.code.webComponents;
+      const rawCode =
+        typeof webComponentCode === "string"
+          ? webComponentCode
+          : [
+              webComponentCode.css ? `<style>${webComponentCode.css}</style>` : "",
+              webComponentCode.html,
+              webComponentCode.js ? `<script>${webComponentCode.js}</script>` : "",
+            ].join("");
 
       // Extract script content before sanitization
       const scriptMatch = rawCode.match(/<script>([\s\S]*?)<\/script>/i);
@@ -149,7 +157,7 @@ export function ConfigurationPreview({
               aria-label="View in Figma"
               title="View in Figma"
             >
-              <goa-icon version="2" type="logo-figma" size="medium"></goa-icon>
+              <goa-icon type="logo-figma" size="medium"></goa-icon>
             </a>
           )}
           {githubUrl && (
@@ -161,7 +169,7 @@ export function ConfigurationPreview({
               aria-label="View GitHub issues"
               title="View GitHub issues"
             >
-              <goa-icon version="2" type="logo-github" size="medium"></goa-icon>
+              <goa-icon type="logo-github" size="medium"></goa-icon>
               {issueCount !== null && <span className="issue-count">({issueCount})</span>}
             </a>
           )}

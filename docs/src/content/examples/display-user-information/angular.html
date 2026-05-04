@@ -1,14 +1,18 @@
 <goab-container>
-  <goab-text as="span" size="body-m" color="secondary" mt="none" mb="none">Housing Advisor</goab-text>
+  <goab-text tag="span" size="body-m" color="secondary" mt="none" mb="none"
+    >Housing Advisor</goab-text
+  >
   <goab-text size="heading-m" mt="none" mb="s">Tracy Hero</goab-text>
   <goab-block direction="row" gap="s">
     <goab-block direction="column" gap="m">
-      <goab-text as="span" size="heading-xs" mt="none" mb="none">Email</goab-text>
-      <goab-text as="span" size="heading-xs" mt="none" mb="none">Phone</goab-text>
+      <goab-text tag="span" size="heading-xs" mt="none" mb="none">Email</goab-text>
+      <goab-text tag="span" size="heading-xs" mt="none" mb="none">Phone</goab-text>
     </goab-block>
     <goab-block direction="column" gap="m">
-      <goab-text as="span" size="body-m" mt="none" mb="none">tracyhero&#64;email.com</goab-text>
-      <goab-text as="span" size="body-m" mt="none" mb="none">283-203-4921</goab-text>
+      <goab-text tag="span" size="body-m" mt="none" mb="none"
+        >tracyhero&#64;email.com</goab-text
+      >
+      <goab-text tag="span" size="body-m" mt="none" mb="none">283-203-4921</goab-text>
     </goab-block>
   </goab-block>
 </goab-container>
@@ -16,7 +20,12 @@
 <goab-container type="non-interactive" accent="thick">
   <div slot="title">Upcoming important due dates</div>
   <div slot="actions">
-    <goab-button type="tertiary" size="compact" leadingIcon="calendar" (onClick)="onAddToCalendar()">
+    <goab-button
+      type="tertiary"
+      size="compact"
+      leadingIcon="calendar"
+      (onClick)="onAddToCalendar()"
+    >
       Add to calendar
     </goab-button>
   </div>

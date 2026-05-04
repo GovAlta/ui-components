@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -26,15 +27,20 @@ import {
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Collapsible group of items within the work side menu. */
 export class GoabWorkSideMenuGroup implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** @required The text displayed in the group heading. */
   @Input({ required: true }) heading!: string;
+  /** Icon displayed before the group label. When omitted, no icon is rendered and no space is reserved. */
   @Input() icon?: GoabIconType;
+  /** Whether the group is open. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets a data-testid attribute for automated testing. */
   @Input() testId?: string;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

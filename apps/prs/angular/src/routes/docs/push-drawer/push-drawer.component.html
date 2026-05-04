@@ -1,0 +1,192 @@
+<h2>Push Drawer</h2>
+
+<h3>Basic push drawer</h3>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openBasic()">Open push drawer</goab-button>
+  </div>
+  <goab-push-drawer
+    heading="Application details"
+    width="260px"
+    [open]="basicOpen"
+    (onClose)="closeBasic()"
+  >
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Applicant name</goab-text>
+    <goab-text size="body-m" mt="none">Jane Smith</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">File number</goab-text>
+    <goab-text size="body-m" mt="none">24567-9876</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Status</goab-text>
+    <goab-badge type="success" content="Approved"></goab-badge>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="m">Submitted</goab-text>
+    <goab-text size="body-m" mt="none">January 15, 2025</goab-text>
+  </goab-push-drawer>
+</div>
+
+<h3>Custom width</h3>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openWide()">Open push drawer</goab-button>
+  </div>
+  <goab-push-drawer
+    heading="Case notes"
+    width="600px"
+    [open]="wideOpen"
+    (onClose)="closeWide()"
+  >
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Officer</goab-text>
+    <goab-text size="body-m" mt="none">Const. M. Roberts, Badge #4412</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Date</goab-text>
+    <goab-text size="body-m" mt="none">February 3, 2025</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Notes</goab-text>
+    <goab-text size="body-m" mt="none">
+      Applicant provided updated documentation. Reviewed supporting evidence and
+      confirmed eligibility criteria are met. Forwarded to supervisor for final
+      approval.
+    </goab-text>
+  </goab-push-drawer>
+</div>
+
+<h3>With actions</h3>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openActions()">Open push drawer</goab-button>
+  </div>
+  <goab-push-drawer
+    heading="Edit notification preferences"
+    width="280px"
+    [open]="actionsOpen"
+    (onClose)="closeActions()"
+    [actions]="pushDrawerActions"
+  >
+    <goab-form-item label="Email notifications">
+      <goab-checkbox-list name="email-notifications" [value]="checkboxListValues">
+        <goab-checkbox name="updates" text="Case status updates"></goab-checkbox>
+        <goab-checkbox name="deadlines" text="Upcoming deadlines"></goab-checkbox>
+        <goab-checkbox name="assignments" text="New assignments"></goab-checkbox>
+      </goab-checkbox-list>
+    </goab-form-item>
+  </goab-push-drawer>
+</div>
+
+<ng-template #pushDrawerActions>
+  <goab-button-group alignment="start">
+    <goab-button size="compact">Save</goab-button>
+    <goab-button type="secondary" size="compact">Cancel</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<h3>Long content</h3>
+<div style="display: flex; min-height: 320px">
+  <div style="flex: 1; min-width: 0">
+    <goab-button (onClick)="openLong()">Open push drawer</goab-button>
+  </div>
+  <goab-push-drawer
+    heading="Case history"
+    width="320px"
+    [open]="longOpen"
+    (onClose)="closeLong()"
+    [actions]="longActions"
+  >
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="none">Jan 15, 2025</goab-text>
+    <goab-text size="body-m" mt="none">Application received. Initial review completed by intake officer. All required documents present.</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Feb 3, 2025</goab-text>
+    <goab-text size="body-m" mt="none">Background check initiated. Applicant contacted for additional verification of employment history.</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Feb 18, 2025</goab-text>
+    <goab-text size="body-m" mt="none">Employment verification received. Forwarded to senior reviewer for assessment.</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 1, 2025</goab-text>
+    <goab-text size="body-m" mt="none">Senior review complete. Recommendation for approval pending supervisor sign-off.</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 10, 2025</goab-text>
+    <goab-text size="body-m" mt="none">Supervisor approved. Final documentation prepared for applicant notification.</goab-text>
+    <goab-text tag="h4" size="heading-xs" mb="s" mt="l">Mar 12, 2025</goab-text>
+    <goab-text size="body-m" mt="none">Approval letter sent to applicant via registered mail. Case marked as complete.</goab-text>
+  </goab-push-drawer>
+</div>
+
+<ng-template #longActions>
+  <goab-button-group alignment="start">
+    <goab-button size="compact">Export</goab-button>
+    <goab-button type="secondary" size="compact">Close</goab-button>
+  </goab-button-group>
+</ng-template>
+
+<h2>Examples</h2>
+
+<h3>Filter a list using a push drawer</h3>
+<div style="display: flex; min-height: 480px">
+  <div style="flex: 1; min-width: 0">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem">
+      <h3 style="flex: 1; margin: 0">All cases</h3>
+      @if (!filterOpen) {
+        <goab-button
+          type="secondary"
+          size="compact"
+          leadingIcon="filter"
+          (onClick)="openFilter()"
+        >Filters</goab-button>
+      }
+    </div>
+
+    <goab-table width="100%">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Name</th>
+            <th>File number</th>
+            <th>Act</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><goab-badge type="success" content="Completed"></goab-badge></td>
+            <td>Gilbert Barton</td>
+            <td>24567-9876</td>
+            <td>Traffic safety act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="information" content="New"></goab-badge></td>
+            <td>Brynn Hurley</td>
+            <td>98765-3456</td>
+            <td>Trespass to premises act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="default" content="In review"></goab-badge></td>
+            <td>Marco Silva</td>
+            <td>34521-7890</td>
+            <td>Gaming, liquor, and cannabis act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="success" content="Completed"></goab-badge></td>
+            <td>Dana Chen</td>
+            <td>55123-4567</td>
+            <td>Traffic safety act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="information" content="New"></goab-badge></td>
+            <td>Amira Hassan</td>
+            <td>67890-1234</td>
+            <td>Trespass to premises act</td>
+          </tr>
+        </tbody>
+      </table>
+    </goab-table>
+  </div>
+
+  <goab-push-drawer heading="Filters" width="260px" [open]="filterOpen" (onClose)="closeFilter()">
+    <goab-form-item label="Act">
+      <goab-checkbox-list name="act" (onChange)="onCheckboxChange($event)">
+        <goab-checkbox name="traffic" text="Traffic safety act" size="compact"></goab-checkbox>
+        <goab-checkbox name="gaming" text="Gaming, liquor, and cannabis act" size="compact"></goab-checkbox>
+        <goab-checkbox name="trespass" text="Trespass to premises act" size="compact"></goab-checkbox>
+      </goab-checkbox-list>
+    </goab-form-item>
+    <goab-form-item label="Status" mt="l">
+      <goab-dropdown name="status" (onChange)="onDropdownChange($event)" value="" size="compact">
+        <goab-dropdown-item value="" label="All statuses"></goab-dropdown-item>
+        <goab-dropdown-item value="new" label="New"></goab-dropdown-item>
+        <goab-dropdown-item value="in-review" label="In review"></goab-dropdown-item>
+        <goab-dropdown-item value="completed" label="Completed"></goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+  </goab-push-drawer>
+</div>

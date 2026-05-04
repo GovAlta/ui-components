@@ -1,8 +1,8 @@
-<goab-form-item label="First name" [formGroup]="form">
+<goab-form-item label="First name" [formGroup]="form" [helpText]="helpTextTemplate">
   <goab-input name="item" formControlName="item"></goab-input>
-  <goab-form-item-slot slot="helptext">
+  <ng-template #helpTextTemplate>
     <span>This is </span>
     <i>slotted </i>
     <b>help text</b>.
-  </goab-form-item-slot>
+  </ng-template>
 </goab-form-item>

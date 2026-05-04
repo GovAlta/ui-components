@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Individual Example Page
  *
@@ -10,9 +11,11 @@
  */
 import { getCollection, render } from 'astro:content';
 import ExamplesPageLayout from '../../layouts/ExamplesPageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ExampleDisplay from '../../components/ExampleDisplay.astro';
 import { TableOfContents } from '../../components/TableOfContents';
 import { getExampleCode } from '../../lib/example-code';
+
 
 // Generate static paths for all examples
 export async function getStaticPaths() {
@@ -79,14 +82,9 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
   currentSlug={slug}
 >
   <article class="example-page">
+    <Breadcrumbs />
     <!-- Header -->
     <header class="example-header">
-      <!-- Back button -->
-      <goa-link version="2" leadingicon="arrow-back" size="small">
-        <a href="/examples">Back to all examples</a>
-      </goa-link>
-
-      <!-- Badges -->
       <div class="badges">
         {data.categories.map((cat: string) => (
           <goa-badge version="2" type="information" emphasis="subtle" icon="false" content={formatCategory(cat)}></goa-badge>
@@ -137,7 +135,7 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
         <h2>Related examples</h2>
         <div class="related-grid">
           {relatedExamples.map((related) => (
-            <a href={`/examples/${related.slug}`} class="related-card">
+            <a href={withBase(`/examples/${related.slug}`)} class="related-card">
               <span class="related-title">{related.data.title}</span>
               <span class="related-category">{formatCategory(related.data.categories[0])}</span>
             </a>
@@ -164,10 +162,6 @@ const v1DocsUrl = `https://v1.design.alberta.ca/examples/${slug}`;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: var(--goa-space-l, 1.5rem);
-  }
-
-  .example-header goa-link {
-    margin-bottom: var(--goa-space-m, 1rem);
   }
 
   /* Badges */

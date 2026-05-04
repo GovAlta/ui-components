@@ -1,0 +1,63 @@
+<h2>Menu button</h2>
+
+<h3>Basic menu button</h3>
+<goab-menu-button text="Actions" (onAction)="handleAction($event)">
+  <goab-menu-action text="Edit" action="edit"></goab-menu-action>
+  <goab-menu-action text="Copy" action="copy"></goab-menu-action>
+  <goab-menu-action text="Delete" action="delete"></goab-menu-action>
+</goab-menu-button>
+
+<h3>Types</h3>
+<goab-menu-button text="Primary" type="primary" (onAction)="handleAction($event)">
+  <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
+  <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
+</goab-menu-button>
+<goab-menu-button text="Secondary" type="secondary" (onAction)="handleAction($event)">
+  <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
+  <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
+</goab-menu-button>
+<goab-menu-button text="Tertiary" type="tertiary" (onAction)="handleAction($event)">
+  <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
+  <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
+</goab-menu-button>
+
+<h3>Icon-only menu button</h3>
+<goab-menu-button
+  leadingIcon="ellipsis-horizontal"
+  ariaLabel="More options"
+  (onAction)="handleAction($event)">
+  <goab-menu-action text="View details" action="view"></goab-menu-action>
+  <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
+  <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+</goab-menu-button>
+
+<h3>Items with icons</h3>
+<goab-menu-button text="Options" (onAction)="handleAction($event)">
+  <goab-menu-action text="Download" action="download" icon="download"></goab-menu-action>
+  <goab-menu-action text="Share" action="share" icon="share"></goab-menu-action>
+  <goab-menu-action text="Print" action="print" icon="print"></goab-menu-action>
+</goab-menu-button>
+
+<h3>Sizes</h3>
+<goab-menu-button text="Normal" size="normal" (onAction)="handleAction($event)">
+  <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
+  <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
+</goab-menu-button>
+<goab-menu-button text="Compact" size="compact" (onAction)="handleAction($event)">
+  <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
+  <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
+</goab-menu-button>
+
+<h3>Destructive variant</h3>
+<goab-menu-button text="Primary" variant="destructive" (onAction)="handleAction($event)">
+  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
+  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+</goab-menu-button>
+<goab-menu-button text="Secondary" variant="destructive" type="secondary" (onAction)="handleAction($event)">
+  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
+  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+</goab-menu-button>
+<goab-menu-button text="Tertiary" variant="destructive" type="tertiary" (onAction)="handleAction($event)">
+  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
+  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+</goab-menu-button>

@@ -3,42 +3,43 @@
 <goa-button version="2" id="comment-btn">Comment</goa-button>
 
 <script>
-  const commentBtn = document.getElementById('comment-btn');
+  const commentBtn = document.getElementById("comment-btn");
   let currentUuid = null;
 
   function showNotification(message, opts = {}) {
     const uuid = crypto.randomUUID();
-    document.body.dispatchEvent(new CustomEvent("msg", {
-      composed: true,
-      bubbles: true,
-      detail: {
-        action: "goa:temp-notification",
-        data: { message, uuid, type: "basic", duration: "short", ...opts }
-      }
-    }));
+    document.body.dispatchEvent(
+      new CustomEvent("msg", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          action: "goa:temp-notification",
+          data: { message, uuid, type: "basic", duration: "short", ...opts },
+        },
+      }),
+    );
     return uuid;
   }
 
   function dismissNotification(uuid) {
-    document.body.dispatchEvent(new CustomEvent("msg", {
-      composed: true,
-      bubbles: true,
-      detail: {
-        action: "goa:temp-notification:dismiss",
-        data: uuid
-      }
-    }));
+    document.body.dispatchEvent(
+      new CustomEvent("msg", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          action: "goa:temp-notification:dismiss",
+          data: uuid,
+        },
+      }),
+    );
   }
 
-  commentBtn.addEventListener('_click', () => {
-    currentUuid = showNotification(
-      "Edna Mode commented on your assigned case.",
-      {
-        actionText: "View",
-        action: () => {
-          dismissNotification(currentUuid);
-        }
-      }
-    );
+  commentBtn.addEventListener("_click", () => {
+    currentUuid = showNotification("Edna Mode commented on your assigned case.", {
+      actionText: "View",
+      action: () => {
+        dismissNotification(currentUuid);
+      },
+    });
   });
 </script>

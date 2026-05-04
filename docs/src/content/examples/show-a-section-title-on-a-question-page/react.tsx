@@ -14,13 +14,16 @@ export function ShowASectionTitleOnAQuestionPage() {
         Back
       </GoabLink>
 
-      <GoabText as="h3" size="body-m" mt="xl" mb="m" color="secondary">Personal information</GoabText>
+      <GoabText tag="h3" size="body-m" mt="xl" mb="m" color="secondary">
+        Personal information
+      </GoabText>
 
       <GoabFormItem label="Do you currently live in Canada?" labelSize="large">
         <GoabRadioGroup
           name="canada"
           ariaLabel="Do you currently live in Canada?"
-          onChange={() => {}}>
+          onChange={() => {}}
+        >
           <GoabRadioItem value="yes" label="Yes" />
           <GoabRadioItem value="no" label="No" />
         </GoabRadioGroup>

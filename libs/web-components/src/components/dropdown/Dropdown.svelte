@@ -500,7 +500,7 @@
     if (!_native) {
       syncFilteredOptions();
       setDisplayedValue();
-      setHighlightedToSelected();
+      _highlightedIndex = -1;
       hideMenu();
     }
     dispatchValue(option.value);

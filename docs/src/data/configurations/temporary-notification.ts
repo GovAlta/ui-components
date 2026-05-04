@@ -27,18 +27,21 @@ export const temporaryNotificationConfigurations: ComponentConfigurations = {
     duration: "short",
   });
 }}>Notification</GoabButton>`,
-        angular: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+        angular: {
+          ts: `import { TemporaryNotification } from "@abgov/ui-components-common";
 
-<goab-button (onClick)="showNotification()">Notification</goab-button>
+export class SomeOtherComponent {
+  showNotification() {
+    TemporaryNotification.show("You have a notification", {
+      type: "basic",
+      duration: "short",
+    });
+  }
+}`,
+          template: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
 
-<!-- In your component.ts: -->
-<!-- import { TemporaryNotification } from "@abgov/ui-components-common";
-showNotification() {
-  TemporaryNotification.show("You have a notification", {
-    type: "basic",
-    duration: "short",
-  });
-} -->`,
+<goab-button (onClick)="showNotification()">Notification</goab-button>`,
+        },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
 <goa-button version="2" id="save-btn">Notification</goa-button>
@@ -66,17 +69,20 @@ showNotification() {
 <GoabButton onClick={() => TemporaryNotification.show("Basic message", { type: "basic" })} mb="xs">Basic</GoabButton>
 <GoabButton onClick={() => TemporaryNotification.show("Action completed.", { type: "success" })} mb="xs">Success</GoabButton>
 <GoabButton onClick={() => TemporaryNotification.show("Something went wrong.", { type: "failure" })}>Failure</GoabButton>`,
-        angular: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+        angular: {
+          ts: `import { TemporaryNotification } from "@abgov/ui-components-common";
+
+export class SomeOtherComponent {
+  show(message: string, type: "basic" | "success" | "failure") {
+    TemporaryNotification.show(message, { type });
+  }
+}`,
+          template: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
 
 <goab-button (onClick)="show('Basic message', 'basic')" mb="xs">Basic</goab-button>
 <goab-button (onClick)="show('Action completed.', 'success')" mb="xs">Success</goab-button>
-<goab-button (onClick)="show('Something went wrong.', 'failure')">Failure</goab-button>
-
-<!-- In your component.ts: -->
-<!-- import { TemporaryNotification } from "@abgov/ui-components-common";
-show(message: string, type: string) {
-  TemporaryNotification.show(message, { type });
-} -->`,
+<goab-button (onClick)="show('Something went wrong.', 'failure')">Failure</goab-button>`,
+        },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
 <goa-button version="2" id="btn-basic" mb="xs">Basic</goa-button>
@@ -114,20 +120,24 @@ show(message: string, type: string) {
 <GoabButton onClick={() => {
   TemporaryNotification.show("Processing your request...", { type: "indeterminate" });
 }}>Indeterminate</GoabButton>`,
-        angular: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
+        angular: {
+          ts: `import { TemporaryNotification } from "@abgov/ui-components-common";
+
+export class SomeOtherComponent {
+  showProgress() {
+    const uuid = TemporaryNotification.show("Uploading file...", { type: "progress" });
+    TemporaryNotification.setProgress(uuid, 65);
+  }
+
+  showIndeterminate() {
+    TemporaryNotification.show("Processing your request...", { type: "indeterminate" });
+  }
+}`,
+          template: `<goab-temporary-notification-ctrl></goab-temporary-notification-ctrl>
 
 <goab-button (onClick)="showProgress()" mb="xs">Progress</goab-button>
-<goab-button (onClick)="showIndeterminate()">Indeterminate</goab-button>
-
-<!-- In your component.ts: -->
-<!-- import { TemporaryNotification } from "@abgov/ui-components-common";
-showProgress() {
-  const uuid = TemporaryNotification.show("Uploading file...", { type: "progress" });
-  TemporaryNotification.setProgress(uuid, 65);
-}
-showIndeterminate() {
-  TemporaryNotification.show("Processing your request...", { type: "indeterminate" });
-} -->`,
+<goab-button (onClick)="showIndeterminate()">Indeterminate</goab-button>`,
+        },
         webComponents: `<goa-temp-notification-ctrl></goa-temp-notification-ctrl>
 
 <goa-button version="2" id="progress-btn" mb="xs">Progress</goa-button>

@@ -5,15 +5,15 @@ import { Component } from "@angular/core";
   templateUrl: "./angular.html",
   styles: [
     `
-    h2.section-title {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    h2.section-title + h3 {
-      margin-top: var(--goa-space-l);
-      color: var(--goa-color-text-secondary);
-    }
-  `,
+      h2.section-title {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      h2.section-title + h3 {
+        margin-top: var(--goa-space-l);
+        color: var(--goa-color-text-secondary);
+      }
+    `,
   ],
 })
 export class ReviewPageComponent {

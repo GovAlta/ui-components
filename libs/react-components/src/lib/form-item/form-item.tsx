@@ -2,7 +2,8 @@ import {
   GoabFormItemLabelSize,
   GoabFormItemRequirement,
   GoabFormItemType,
-  Margins, DataAttributes,
+  Margins,
+  DataAttributes,
 } from "@abgov/ui-components-common";
 
 import type { JSX } from "react";
@@ -33,26 +34,33 @@ declare module "react" {
 }
 
 export interface GoabFormItemProps extends Margins, DataAttributes {
+  /** Creates a label for the form item. */
   label?: string;
+  /** Sets the label size. 'regular' for standard, 'large' for emphasis. @default "regular" */
   labelSize?: GoabFormItemLabelSize;
+  /** Marks the field with an optional or required label indicator. */
   requirement?: GoabFormItemRequirement;
+  /** Error text displayed under the form field. Leave blank to indicate a valid field. Accepts a string or ReactNode for custom error content. */
   error?: string | React.ReactNode;
+  /** Help text displayed under the form field to provide additional explanation. Accepts a string or ReactNode for custom help content. */
   helpText?: string | React.ReactNode;
+  /** Sets the maximum width of the form item. @default "none" */
   maxWidth?: string;
+  /** Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group. */
   type?: GoabFormItemType;
-  /**
-   * Public form: to arrange fields in the summary
-   */
+  /** Sets the display order within the form summary. For public-form use only. */
   publicFormSummaryOrder?: number;
-  /**
-   * Public form: allow to override the label value within the form-summary to provide a shorter description of the value
-   */
+  /** Overrides the label value within the form-summary to provide a shorter description. For public-form use only. */
   name?: string;
+  /** Content rendered inside the form item, typically an input component. */
   children?: React.ReactNode;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
+  /** Sets the id attribute on the form item element. */
   id?: string;
 }
 
+/** Wraps an input control with a text label, requirement label, helper text, and error text. */
 export function GoabFormItem({
   error,
   helpText,

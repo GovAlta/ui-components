@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  GoabBlock,
-  GoabFormItem,
-  GoabInput,
-} from "@abgov/react-components";
+import { GoabBlock, GoabFormItem, GoabInput } from "@abgov/react-components";
 
 export function AskAUserForAnIndianRegistrationNumber() {
   const [bandNo, setBandNo] = useState("");

@@ -22,16 +22,30 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <GoabMenuAction text="Copy" action="copy" />
   <GoabMenuAction text="Delete" action="delete" />
 </GoabMenuButton>`,
-        angular: `<goab-menu-button text="Actions" (onAction)="handleAction($event)">
+        angular: {
+          ts: `export class SomeComponent {
+  handleAction(detail: GoabMenuButtonOnActionDetail) {
+    console.log(detail.action);
+  }
+}`,
+          template: `<goab-menu-button text="Actions" (onAction)="handleAction($event)">
   <goab-menu-action text="Edit" action="edit"></goab-menu-action>
   <goab-menu-action text="Copy" action="copy"></goab-menu-action>
   <goab-menu-action text="Delete" action="delete"></goab-menu-action>
 </goab-menu-button>`,
-        webComponents: `<goa-menu-button version="2" text="Actions">
+        },
+        webComponents: `<goa-menu-button id="basic-menu-button" version="2" text="Actions">
   <goa-menu-action text="Edit" action="edit"></goa-menu-action>
   <goa-menu-action text="Copy" action="copy"></goa-menu-action>
   <goa-menu-action text="Delete" action="delete"></goa-menu-action>
-</goa-menu-button>`,
+</goa-menu-button>
+<script>
+  document
+    .getElementById("basic-menu-button")
+    .addEventListener("_action", function(e) {
+      console.log(e.detail.action);
+    });
+</script>`,
       },
     },
     {
@@ -51,30 +65,57 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <GoabMenuAction text="Action 1" action="a1" />
   <GoabMenuAction text="Action 2" action="a2" />
 </GoabMenuButton>`,
-        angular: `<goab-menu-button text="Primary" type="primary" (onAction)="handleAction($event)">
+        angular: {
+          ts: `export class SomeComponent {
+  handleAction(detail: GoabMenuButtonOnActionDetail) {
+    console.log(detail.action);
+  }
+}`,
+          template: `<goab-menu-button
+  text="Primary"
+  type="primary"
+  (onAction)="handleAction($event)"
+>
   <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>
-<goab-menu-button text="Secondary" type="secondary" (onAction)="handleAction($event)">
+<goab-menu-button
+  text="Secondary"
+  type="secondary"
+  (onAction)="handleAction($event)"
+>
   <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>
-<goab-menu-button text="Tertiary" type="tertiary" (onAction)="handleAction($event)">
+<goab-menu-button
+  text="Tertiary"
+  type="tertiary"
+  (onAction)="handleAction($event)"
+>
   <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>`,
-        webComponents: `<goa-menu-button version="2" text="Primary" type="primary">
+        },
+        webComponents: `<goa-menu-button id="primary-menu-button" version="2" text="Primary" type="primary">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button version="2" text="Secondary" type="secondary">
+<goa-menu-button id="secondary-menu-button" version="2" text="Secondary" type="secondary">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button version="2" text="Tertiary" type="tertiary">
+<goa-menu-button id="tertiary-menu-button" version="2" text="Tertiary" type="tertiary">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
-</goa-menu-button>`,
+</goa-menu-button>
+<script>
+  function handleAction(e) {
+    console.log(e.detail.action);
+  }
+  document.getElementById("primary-menu-button").addEventListener("_action", handleAction);
+  document.getElementById("secondary-menu-button").addEventListener("_action", handleAction);
+  document.getElementById("tertiary-menu-button").addEventListener("_action", handleAction);
+</script>`,
       },
     },
     {
@@ -91,23 +132,41 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <GoabMenuAction text="Edit" action="edit" icon="pencil" />
   <GoabMenuAction text="Delete" action="delete" icon="trash" />
 </GoabMenuButton>`,
-        angular: `<goab-menu-button
+        angular: {
+          ts: `export class SomeComponent {
+  handleAction(detail: GoabMenuButtonOnActionDetail) {
+    console.log(detail.action);
+  }
+}`,
+          template: `<goab-menu-button
   leadingIcon="ellipsis-horizontal"
   ariaLabel="More options"
   (onAction)="handleAction($event)"
 >
   <goab-menu-action text="View details" action="view"></goab-menu-action>
   <goab-menu-action text="Edit" action="edit" icon="pencil"></goab-menu-action>
-  <goab-menu-action text="Delete" action="delete" icon="trash"></goab-menu-action>
+  <goab-menu-action
+    text="Delete"
+    action="delete"
+    icon="trash"
+  ></goab-menu-action>
 </goab-menu-button>`,
-        webComponents: `<goa-menu-button version="2"
+        },
+        webComponents: `<goa-menu-button id="icon-only-menu-button" version="2"
   leadingicon="ellipsis-horizontal"
   arialabel="More options"
 >
   <goa-menu-action text="View details" action="view"></goa-menu-action>
   <goa-menu-action text="Edit" action="edit" icon="pencil"></goa-menu-action>
   <goa-menu-action text="Delete" action="delete" icon="trash"></goa-menu-action>
-</goa-menu-button>`,
+</goa-menu-button>
+<script>
+  document
+    .getElementById("icon-only-menu-button")
+    .addEventListener("_action", function(e) {
+      console.log(e.detail.action);
+    });
+</script>`,
       },
     },
     {
@@ -120,16 +179,34 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <GoabMenuAction text="Share" action="share" icon="share" />
   <GoabMenuAction text="Print" action="print" icon="print" />
 </GoabMenuButton>`,
-        angular: `<goab-menu-button text="Options" (onAction)="handleAction($event)">
-  <goab-menu-action text="Download" action="download" icon="download"></goab-menu-action>
+        angular: {
+          ts: `export class SomeComponent {
+  handleAction(detail: GoabMenuButtonOnActionDetail) {
+    console.log(detail.action);
+  }
+}`,
+          template: `<goab-menu-button text="Options" (onAction)="handleAction($event)">
+  <goab-menu-action
+    text="Download"
+    action="download"
+    icon="download"
+  ></goab-menu-action>
   <goab-menu-action text="Share" action="share" icon="share"></goab-menu-action>
   <goab-menu-action text="Print" action="print" icon="print"></goab-menu-action>
 </goab-menu-button>`,
-        webComponents: `<goa-menu-button version="2" text="Options">
+        },
+        webComponents: `<goa-menu-button id="options-menu-button" version="2" text="Options">
   <goa-menu-action text="Download" action="download" icon="download"></goa-menu-action>
   <goa-menu-action text="Share" action="share" icon="share"></goa-menu-action>
   <goa-menu-action text="Print" action="print" icon="print"></goa-menu-action>
-</goa-menu-button>`,
+</goa-menu-button>
+<script>
+  document
+    .getElementById("options-menu-button")
+    .addEventListener("_action", function(e) {
+      console.log(e.detail.action);
+    });
+</script>`,
       },
     },
     {
@@ -145,22 +222,40 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <GoabMenuAction text="Action 1" action="a1" />
   <GoabMenuAction text="Action 2" action="a2" />
 </GoabMenuButton>`,
-        angular: `<goab-menu-button text="Normal" size="normal" (onAction)="handleAction($event)">
+        angular: {
+          ts: `export class SomeComponent {
+  handleAction(detail: GoabMenuButtonOnActionDetail) {
+    console.log(detail.action);
+  }
+}`,
+          template: `<goab-menu-button text="Normal" size="normal" (onAction)="handleAction($event)">
   <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>
-<goab-menu-button text="Compact" size="compact" (onAction)="handleAction($event)">
+<goab-menu-button
+  text="Compact"
+  size="compact"
+  (onAction)="handleAction($event)"
+>
   <goab-menu-action text="Action 1" action="a1"></goab-menu-action>
   <goab-menu-action text="Action 2" action="a2"></goab-menu-action>
 </goab-menu-button>`,
-        webComponents: `<goa-menu-button version="2" text="Normal" size="normal">
+        },
+        webComponents: `<goa-menu-button id="normal-menu-button" version="2" text="Normal" size="normal">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button version="2" text="Compact" size="compact">
+<goa-menu-button id="compact-menu-button" version="2" text="Compact" size="compact">
   <goa-menu-action text="Action 1" action="a1"></goa-menu-action>
   <goa-menu-action text="Action 2" action="a2"></goa-menu-action>
-</goa-menu-button>`,
+</goa-menu-button>
+<script>
+  function handleAction(e) {
+    console.log(e.detail.action);
+  }
+  document.getElementById("normal-menu-button").addEventListener("_action", handleAction);
+  document.getElementById("compact-menu-button").addEventListener("_action", handleAction);
+</script>`,
       },
     },
     {
@@ -180,30 +275,83 @@ export const menuButtonConfigurations: ComponentConfigurations = {
   <GoabMenuAction text="Delete item" action="delete" icon="trash" />
   <GoabMenuAction text="Delete all" action="delete-all" icon="trash" />
 </GoabMenuButton>`,
-        angular: `<goab-menu-button text="Primary" variant="destructive" (onAction)="handleAction($event)">
-  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
-  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+        angular: {
+          ts: `export class SomeComponent {
+  handleAction(detail: GoabMenuButtonOnActionDetail) {
+    console.log(detail.action);
+  }
+}`,
+          template: `<goab-menu-button
+  text="Primary"
+  variant="destructive"
+  (onAction)="handleAction($event)"
+>
+  <goab-menu-action
+    text="Delete item"
+    action="delete"
+    icon="trash"
+  ></goab-menu-action>
+  <goab-menu-action
+    text="Delete all"
+    action="delete-all"
+    icon="trash"
+  ></goab-menu-action>
 </goab-menu-button>
-<goab-menu-button text="Secondary" variant="destructive" type="secondary" (onAction)="handleAction($event)">
-  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
-  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+<goab-menu-button
+  text="Secondary"
+  variant="destructive"
+  type="secondary"
+  (onAction)="handleAction($event)"
+>
+  <goab-menu-action
+    text="Delete item"
+    action="delete"
+    icon="trash"
+  ></goab-menu-action>
+  <goab-menu-action
+    text="Delete all"
+    action="delete-all"
+    icon="trash"
+  ></goab-menu-action>
 </goab-menu-button>
-<goab-menu-button text="Tertiary" variant="destructive" type="tertiary" (onAction)="handleAction($event)">
-  <goab-menu-action text="Delete item" action="delete" icon="trash"></goab-menu-action>
-  <goab-menu-action text="Delete all" action="delete-all" icon="trash"></goab-menu-action>
+<goab-menu-button
+  text="Tertiary"
+  variant="destructive"
+  type="tertiary"
+  (onAction)="handleAction($event)"
+>
+  <goab-menu-action
+    text="Delete item"
+    action="delete"
+    icon="trash"
+  ></goab-menu-action>
+  <goab-menu-action
+    text="Delete all"
+    action="delete-all"
+    icon="trash"
+  ></goab-menu-action>
 </goab-menu-button>`,
-        webComponents: `<goa-menu-button version="2" text="Primary" variant="destructive">
+        },
+        webComponents: `<goa-menu-button id="destructive-primary-menu-button" version="2" text="Primary" variant="destructive">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button version="2" text="Secondary" variant="destructive" type="secondary">
+<goa-menu-button id="destructive-secondary-menu-button" version="2" text="Secondary" variant="destructive" type="secondary">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>
 </goa-menu-button>
-<goa-menu-button version="2" text="Tertiary" variant="destructive" type="tertiary">
+<goa-menu-button id="destructive-tertiary-menu-button" version="2" text="Tertiary" variant="destructive" type="tertiary">
   <goa-menu-action text="Delete item" action="delete" icon="trash"></goa-menu-action>
   <goa-menu-action text="Delete all" action="delete-all" icon="trash"></goa-menu-action>
-</goa-menu-button>`,
+</goa-menu-button>
+<script>
+  function handleAction(e) {
+    console.log(e.detail.action);
+  }
+  document.getElementById("destructive-primary-menu-button").addEventListener("_action", handleAction);
+  document.getElementById("destructive-secondary-menu-button").addEventListener("_action", handleAction);
+  document.getElementById("destructive-tertiary-menu-button").addEventListener("_action", handleAction);
+</script>`,
       },
     },
   ],

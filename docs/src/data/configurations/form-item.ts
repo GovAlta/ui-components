@@ -16,16 +16,37 @@ export const formItemConfigurations: ComponentConfigurations = {
     {
       id: "basic",
       name: "Basic example",
-      description: "Form item with label wrapping an input",
+      description: "Form item wrapping an input with event-based value binding",
       code: {
-        react: `<GoabFormItem label="Email address" mb="l">
-  <GoabInput name="email" type="email" width="100%" />
+        react: {
+          ts: `const [firstName, setFirstName] = useState<string>("");
+
+function handleChange(detail: GoabInputOnChangeDetail) {
+  setFirstName(detail.value);
+}`,
+          jsx: `<GoabFormItem label="First name" mb="l">
+  <GoabInput name="firstName" value={firstName} onChange={handleChange} />
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Email address" mb="l">
-  <goab-input name="email" type="email" width="100%"></goab-input>
+        },
+        angular: {
+          ts: `export class ExampleComponent {
+  firstName = "";
+
+  handleChange(event: GoabInputOnChangeDetail) {
+    this.firstName = event.value;
+  }
+}`,
+          template: `<goab-form-item label="First name" mb="l">
+  <goab-input
+    name="firstName"
+    [value]="firstName"
+    (onChange)="handleChange($event)"
+  >
+  </goab-input>
 </goab-form-item>`,
-        webComponents: `<goa-form-item version="2" label="Email address" mb="l">
-  <goa-input version="2" name="email" type="email" width="100%"></goa-input>
+        },
+        webComponents: `<goa-form-item version="2" label="First name" mb="l">
+  <goa-input version="2" name="firstName"></goa-input>
 </goa-form-item>`,
       },
     },

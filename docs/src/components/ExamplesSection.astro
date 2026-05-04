@@ -18,6 +18,8 @@ const scaleToBadge: Record<string, string> = {
   flow: 'midtone',
   service: 'dark'
 };
+
+import { withBase } from '@/lib/base-url';
 ---
 
 {examples.length > 0 ? (
@@ -56,7 +58,7 @@ const scaleToBadge: Record<string, string> = {
               </goa-text>
               {example.data.components.map((comp, i) => (
                 <>
-                  <a href={`/components/${comp}`} class="component-link">{comp}</a>
+                  <a href={withBase(`/components/${comp}`)} class="component-link">{comp}</a>
                   {i < example.data.components.length - 1 && <span>,</span>}
                 </>
               ))}

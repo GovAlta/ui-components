@@ -1,7 +1,4 @@
-import {
-  GoabBadge,
-  GoabContainer,
-} from "@abgov/react-components";
+import { GoabBadge, GoabContainer } from "@abgov/react-components";
 
 export function ShowStatusOnACard() {
   return (

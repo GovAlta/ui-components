@@ -11,8 +11,8 @@
  * Supports keyboard navigation (↑↓) and selection (Enter/click).
  */
 
-import { useEffect, useState } from 'react';
-import type { SearchFilter } from './useSearch';
+import { useEffect, useState } from "react";
+import type { SearchFilter } from "./useSearch";
 
 export interface FilterOption {
   /** Command to type (e.g., "/component") */
@@ -32,32 +32,32 @@ export interface FilterOption {
 /** Available filter commands */
 export const FILTER_OPTIONS: FilterOption[] = [
   {
-    command: '/get-started',
-    alias: '/g',
-    label: 'Get started',
-    description: 'Search only get started pages',
-    filter: 'page',
+    command: "/get-started",
+    alias: "/g",
+    label: "Get started",
+    description: "Search only get started pages",
+    filter: "page",
   },
   {
-    command: '/component',
-    alias: '/c',
-    label: 'Components',
-    description: 'Search only components',
-    filter: 'component',
+    command: "/component",
+    alias: "/c",
+    label: "Components",
+    description: "Search only components",
+    filter: "component",
   },
   {
-    command: '/example',
-    alias: '/e',
-    label: 'Examples',
-    description: 'Search only examples',
-    filter: 'example',
+    command: "/example",
+    alias: "/e",
+    label: "Examples",
+    description: "Search only examples",
+    filter: "example",
   },
   {
-    command: '/token',
-    alias: '/t',
-    label: 'Tokens',
-    description: 'Search only design tokens',
-    filter: 'token',
+    command: "/token",
+    alias: "/t",
+    label: "Tokens",
+    description: "Search only design tokens",
+    filter: "token",
   },
 ];
 
@@ -79,20 +79,20 @@ interface SearchFilterHintsProps {
  * - Input starts with "/" and partially matches a command or alias
  */
 export function shouldShowFilterHints(inputValue: string): boolean {
-  if (!inputValue.startsWith('/')) return false;
+  if (!inputValue.startsWith("/")) return false;
 
   // Exact "/" shows all hints
-  if (inputValue === '/') return true;
+  if (inputValue === "/") return true;
 
   // Check if input matches any command prefix (but not a complete command with space)
-  const hasSpace = inputValue.includes(' ');
+  const hasSpace = inputValue.includes(" ");
   if (hasSpace) return false;
 
   const lower = inputValue.toLowerCase();
   return FILTER_OPTIONS.some(
-    opt =>
+    (opt) =>
       opt.command.toLowerCase().startsWith(lower) ||
-      opt.alias.toLowerCase().startsWith(lower)
+      opt.alias.toLowerCase().startsWith(lower),
   );
 }
 
@@ -110,14 +110,14 @@ export function parseFilterCommand(input: string): {
   query: string;
   command: string | null;
 } {
-  if (!input.startsWith('/')) {
+  if (!input.startsWith("/")) {
     return { filter: null, query: input, command: null };
   }
 
-  const spaceIndex = input.indexOf(' ');
+  const spaceIndex = input.indexOf(" ");
   if (spaceIndex === -1) {
     // No space yet - could be typing a command
-    return { filter: null, query: '', command: null };
+    return { filter: null, query: "", command: null };
   }
 
   const commandPart = input.slice(0, spaceIndex).toLowerCase();
@@ -142,15 +142,15 @@ export function parseFilterCommand(input: string): {
  * Get filtered options based on current input.
  */
 export function getFilteredOptions(inputValue: string): FilterOption[] {
-  if (inputValue === '/') {
+  if (inputValue === "/") {
     return FILTER_OPTIONS;
   }
 
   const lower = inputValue.toLowerCase();
   return FILTER_OPTIONS.filter(
-    opt =>
+    (opt) =>
       opt.command.toLowerCase().startsWith(lower) ||
-      opt.alias.toLowerCase().startsWith(lower)
+      opt.alias.toLowerCase().startsWith(lower),
   );
 }
 
@@ -181,7 +181,7 @@ export function SearchFilterHints({
         {options.map((option, index) => (
           <li
             key={option.command}
-            className={`search-filter-hints-item ${option.disabled ? 'search-filter-hints-item--disabled' : ''}`}
+            className={`search-filter-hints-item ${option.disabled ? "search-filter-hints-item--disabled" : ""}`}
             data-selected={index === selectedIndex}
             role="option"
             aria-selected={index === selectedIndex}
@@ -201,9 +201,7 @@ export function SearchFilterHints({
               <span className="search-filter-hints-command">{option.command}</span>
               <span className="search-filter-hints-alias">({option.alias})</span>
             </div>
-            <div className="search-filter-hints-description">
-              {option.description}
-            </div>
+            <div className="search-filter-hints-description">{option.description}</div>
           </li>
         ))}
       </ul>

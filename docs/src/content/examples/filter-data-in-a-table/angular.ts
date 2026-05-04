@@ -13,7 +13,7 @@ interface DataItem {
 
 @Component({
   selector: "app-filter-data-in-table",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class FilterDataInTableComponent {
   typedChips: string[] = [];
@@ -84,7 +84,7 @@ export class FilterDataInTableComponent {
   }
 
   removeTypedChip(chip: string): void {
-    this.typedChips = this.typedChips.filter(c => c !== chip);
+    this.typedChips = this.typedChips.filter((c) => c !== chip);
     this.dataFiltered = this.getFilteredData(this.typedChips);
     this.inputError = "";
   }
@@ -99,16 +99,16 @@ export class FilterDataInTableComponent {
     if (typedChips.length === 0) {
       return this.data;
     }
-    return this.data.filter(item =>
-      typedChips.every(chip => this.checkNested(item, chip))
+    return this.data.filter((item) =>
+      typedChips.every((chip) => this.checkNested(item, chip)),
     );
   }
 
   checkNested(obj: object, chip: string): boolean {
-    return Object.values(obj).some(value =>
+    return Object.values(obj).some((value) =>
       typeof value === "object" && value !== null
         ? this.checkNested(value, chip)
-        : typeof value === "string" && value.toLowerCase().includes(chip.toLowerCase())
+        : typeof value === "string" && value.toLowerCase().includes(chip.toLowerCase()),
     );
   }
 }

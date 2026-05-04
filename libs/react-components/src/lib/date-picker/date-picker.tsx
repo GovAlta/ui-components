@@ -35,22 +35,31 @@ declare module "react" {
 }
 
 export interface GoabDatePickerProps extends Margins, DataAttributes {
-  name?: string;
-  value?: Date | string | undefined;
-  error?: boolean;
-  min?: Date | string;
-  max?: Date | string;
+  /** Sets the date picker type. 'calendar' shows a calendar popup, 'input' shows just a date input. @default "calendar" */
   type?: GoabDatePickerInputType;
+  /** Name of the date field. */
+  name?: string;
+  /** Value of the calendar date, as a Date object or an ISO date string (yyyy-mm-dd). */
+  value?: Date | string | undefined;
+  /** Sets the input to an error state. */
+  error?: boolean;
+  /** Minimum date value allowed. */
+  min?: Date | string;
+  /** Maximum date value allowed. */
+  max?: Date | string;
+  /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @deprecated This property has no effect and will be removed in a future version. */
   relative?: boolean;
+  /** Disables the date picker. */
   disabled?: boolean;
+  /** Sets the width of the date picker input. */
   width?: string;
+  /** Callback fired when the selected date changes. */
   onChange?: (detail: GoabDatePickerOnChangeDetail) => void;
 }
 
+/** Lets users select a date through a calendar without the need to manually type it in a field. */
 export function GoabDatePicker({
   value,
   error,

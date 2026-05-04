@@ -2,11 +2,9 @@
   requirement="required"
   label="Name of item"
   [error]="taskError ? 'Please enter item name' : undefined"
-  helpText="Add an item to the dropdown list below">
-  <goab-input
-    name="item"
-    [value]="newTask"
-    (onChange)="onNewTaskChange($event)">
+  helpText="Add an item to the dropdown list below"
+>
+  <goab-input name="item" [value]="newTask" (onChange)="onNewTaskChange($event)">
   </goab-input>
 </goab-form-item>
 
@@ -15,19 +13,16 @@
     name="mountType"
     [value]="mountType"
     orientation="horizontal"
-    (onChange)="onMountTypeChange($event)">
+    (onChange)="onMountTypeChange($event)"
+  >
     <goab-radio-item value="prepend" label="Start"></goab-radio-item>
     <goab-radio-item value="append" label="End"></goab-radio-item>
   </goab-radio-group>
 </goab-form-item>
 
 <goab-button-group alignment="start" gap="relaxed" mt="l">
-  <goab-button type="primary" (onClick)="addTask()">
-    Add new item
-  </goab-button>
-  <goab-button type="tertiary" (onClick)="reset()">
-    Reset list
-  </goab-button>
+  <goab-button type="primary" (onClick)="addTask()"> Add new item </goab-button>
+  <goab-button type="tertiary" (onClick)="reset()"> Reset list </goab-button>
 </goab-button-group>
 
 <goab-divider mt="l"></goab-divider>
@@ -37,12 +32,14 @@
     <goab-dropdown
       [value]="selectedTask"
       name="selectedTask"
-      (onChange)="onSelectedTaskChange($event)">
+      (onChange)="onSelectedTaskChange($event)"
+    >
       @for (task of tasks; track task.value) {
       <goab-dropdown-item
         [value]="task.value"
         [mountType]="task.mount"
-        [label]="task.label">
+        [label]="task.label"
+      >
       </goab-dropdown-item>
       }
     </goab-dropdown>

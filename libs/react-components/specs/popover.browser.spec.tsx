@@ -202,6 +202,50 @@ describe("Popover", () => {
     expect(aboveWidth!).toBe(belowWidth!);
   });
 
+  it("should align popover to the right edge of the target when there is not enough space on the right", async () => {
+    const Component = () => {
+      return (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "0.5rem",
+          }}
+        >
+          <GoabPopover
+            testId="popover-right-overflow"
+            target={
+              <GoabButton testId={"target-right-overflow"}>Open popover</GoabButton>
+            }
+            maxWidth="none"
+          >
+            <div style={{ width: "300px" }}>
+              This popover is wide enough to require right alignment near the viewport
+              edge.
+            </div>
+          </GoabPopover>
+        </div>
+      );
+    };
+
+    const result = render(<Component />);
+    const target = result.getByTestId("target-right-overflow");
+    const popover = result.getByTestId("popover-right-overflow");
+    const popoverContent = popover.getByTestId("popover-content");
+
+    await target.click();
+
+    await vi.waitFor(() => {
+      expect(popoverContent).toBeVisible();
+      const targetRect = target.element().getBoundingClientRect();
+      const contentRect = popoverContent.element().getBoundingClientRect();
+
+      // The right edges of the popover content and target should be aligned (within a small tolerance)
+      expect(Math.abs(contentRect.right - targetRect.right)).toBeLessThanOrEqual(2);
+    });
+  });
+
   describe("Popover within a modal", () => {
     it("should open the popover within a modal even with long content", async () => {
       const Component = () => {

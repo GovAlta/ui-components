@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -20,12 +21,15 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Full-width section with optional background. */
 export class GoabPageBlock implements OnInit {
-  isReady = false;
-  @Input() width?: GoabPageBlockSize;
-  @Input() testId?: string;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  /** Maximum width of the content area. Use "full" for 100% width or a CSS dimension like "1200px". */
+  @Input() width?: GoabPageBlockSize;
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
 
   ngOnInit(): void {
     setTimeout(() => {

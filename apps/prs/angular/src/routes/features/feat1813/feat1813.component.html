@@ -15,14 +15,15 @@
       <goab-block class="scenario-card" direction="column" gap="s">
         <goab-text tag="h3" size="heading-s">{{ scenario.label }}</goab-text>
         <goab-text tag="p" size="body-s">{{ scenario.description }}</goab-text>
-        <goab-text
-          *ngIf="scenario.emphasis"
-          tag="p"
-          size="body-s"
-          class="scenario-emphasis"
-        >
-          {{ scenario.emphasis }}
-        </goab-text>
+        @if (scenario.emphasis) {
+          <goab-text
+            tag="p"
+            size="body-s"
+            class="scenario-emphasis"
+          >
+            {{ scenario.emphasis }}
+          </goab-text>
+        }
 
         <goab-form-item [label]="scenario.label">
           <goab-date-picker

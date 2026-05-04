@@ -6,7 +6,8 @@
   heading="How do I create an account?"
   headingSize="medium"
   [open]="expandedList[0]"
-  (onChange)="toggleAccordion(0, $event)">
+  (onChange)="toggleAccordion(0, $event)"
+>
   To create an account you will need to contact your office admin.
 </goab-accordion>
 
@@ -14,22 +15,29 @@
   heading="What verification is needed to sign documents digitally?"
   headingSize="medium"
   [open]="expandedList[1]"
-  (onChange)="toggleAccordion(1, $event)">
-  You will need to verify your identity through our two factor authentication in addition to the digital signature.
+  (onChange)="toggleAccordion(1, $event)"
+>
+  You will need to verify your identity through our two factor authentication in addition
+  to the digital signature.
 </goab-accordion>
 
 <goab-accordion
   heading="Can I track the status of my service requests online?"
   headingSize="medium"
   [open]="expandedList[2]"
-  (onChange)="toggleAccordion(2, $event)">
-  Yes, you can see the status of your application on the main service dashboard when you login. You will receive updates and notifications in your email as your request progresses.
+  (onChange)="toggleAccordion(2, $event)"
+>
+  Yes, you can see the status of your application on the main service dashboard when you
+  login. You will receive updates and notifications in your email as your request
+  progresses.
 </goab-accordion>
 
 <goab-accordion
   heading="Are there accessibility features for people with disabilities?"
   headingSize="medium"
   [open]="expandedList[3]"
-  (onChange)="toggleAccordion(3, $event)">
-  Yes, our digital service is designed with accessibility in mind. <a href="#">More information on accessibility.</a>
+  (onChange)="toggleAccordion(3, $event)"
+>
+  Yes, our digital service is designed with accessibility in mind.
+  <a href="#">More information on accessibility.</a>
 </goab-accordion>

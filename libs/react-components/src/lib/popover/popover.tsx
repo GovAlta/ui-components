@@ -1,4 +1,8 @@
-import { DataAttributes, GoabPopoverPosition, Margins } from "@abgov/ui-components-common";
+import {
+  DataAttributes,
+  GoabPopoverPosition,
+  Margins,
+} from "@abgov/ui-components-common";
 import { ReactNode, type JSX } from "react";
 import { transformProps, lowercase } from "../common/extract-props";
 
@@ -21,19 +25,25 @@ declare module "react" {
 }
 
 export interface GoabPopoverProps extends Margins, DataAttributes {
-  target?: ReactNode;
-  testId?: string;
-  maxWidth?: string;
-  minWidth?: string;
-  padded?: boolean;
-  position?: GoabPopoverPosition;
+  /** Content rendered inside the popover body. */
   children: ReactNode;
-  /***
-   * @deprecated This property has no effect and will be removed in a future version
-   */
+  /** @required Sets the element used as the popover trigger. */
+  target: ReactNode;
+  /** Sets a data-testid attribute for automated testing. */
+  testId?: string;
+  /** Sets the maximum width of the popover container. @default "320px" */
+  maxWidth?: string;
+  /** Sets the minimum width of the popover container. */
+  minWidth?: string;
+  /** Sets if the popover has padding. Use false when content needs to be flush with boundaries. @default true */
+  padded?: boolean;
+  /** Provides control to where the popover content is positioned. @default "auto" */
+  position?: GoabPopoverPosition;
+  /** @deprecated This property has no effect and will be removed in a future version. */
   relative?: boolean;
 }
 
+/** A small overlay that opens on demand, used in other components. */
 export function GoabPopover({
   target,
   padded,

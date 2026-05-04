@@ -1,0 +1,107 @@
+<div>
+  <h1>Bug #3630: Drawer refinements</h1>
+  <p>
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3630"
+      target="_blank"
+      rel="noopener"
+    >
+      View on GitHub
+    </a>
+  </p>
+
+  <hr />
+
+  <h2>Test Cases</h2>
+
+  <h3>Test 1: Right drawer (animation + alignment)</h3>
+  <p>
+    Open and close. Check slide-in and slide-out animation. Check heading and close button
+    vertical alignment.
+  </p>
+  <goab-button (onClick)="rightOpen = true">Open right drawer</goab-button>
+
+  <goab-drawer
+    heading="Right drawer"
+    position="right"
+    maxSize="400px"
+    [open]="rightOpen"
+    (onClose)="rightOpen = false"
+  >
+    <p>
+      Check the slide-out animation when closing. The close button should align well with
+      the heading text.
+    </p>
+  </goab-drawer>
+
+  <hr />
+
+  <h3>Test 2: Right drawer with actions</h3>
+  <p>Actions should use start alignment with compact buttons.</p>
+  <goab-button (onClick)="rightActionsOpen = true">Open right drawer with actions</goab-button>
+
+  <ng-template #rightActionsTemplate>
+    <goab-button-group alignment="start">
+      <goab-button type="primary" size="compact">Save</goab-button>
+      <goab-button type="tertiary" size="compact" (onClick)="rightActionsOpen = false">Cancel</goab-button>
+    </goab-button-group>
+  </ng-template>
+
+  <goab-drawer
+    heading="Edit settings"
+    position="right"
+    maxSize="400px"
+    [open]="rightActionsOpen"
+    [actions]="rightActionsTemplate"
+    (onClose)="rightActionsOpen = false"
+  >
+    <p>The action buttons below should be left-aligned and compact.</p>
+  </goab-drawer>
+
+  <hr />
+
+  <h3>Test 3: Left drawer</h3>
+  <p>Check slide-in from left and slide-out animation.</p>
+  <goab-button (onClick)="leftOpen = true">Open left drawer</goab-button>
+
+  <goab-drawer
+    heading="Left drawer"
+    position="left"
+    maxSize="400px"
+    [open]="leftOpen"
+    (onClose)="leftOpen = false"
+  >
+    <p>Check the slide-out animation when closing from the left side.</p>
+  </goab-drawer>
+
+  <hr />
+
+  <h3>Test 4: Bottom drawer</h3>
+  <p>Check slide-up from bottom and slide-down animation.</p>
+  <goab-button (onClick)="bottomOpen = true">Open bottom drawer</goab-button>
+
+  <goab-drawer
+    heading="Bottom drawer"
+    position="bottom"
+    [open]="bottomOpen"
+    (onClose)="bottomOpen = false"
+  >
+    <p>Check the slide-down animation when closing from the bottom.</p>
+  </goab-drawer>
+
+  <hr />
+
+  <h3>Test 5: Long heading</h3>
+  <p>Check alignment when the heading wraps to two lines.</p>
+  <goab-button (onClick)="longHeadingOpen = true">Open drawer with long heading</goab-button>
+
+  <goab-drawer
+    heading="This is a much longer heading that should wrap to two lines in the drawer"
+    position="right"
+    maxSize="400px"
+    [open]="longHeadingOpen"
+    (onClose)="longHeadingOpen = false"
+  >
+    <p>Check that the close button stays aligned properly when the heading wraps.</p>
+  </goab-drawer>
+</div>

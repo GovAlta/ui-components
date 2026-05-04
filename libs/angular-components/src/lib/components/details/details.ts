@@ -5,6 +5,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -31,16 +32,18 @@ import { GoabBaseComponent } from "../base.component";
   `,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Let users reveal more detailed information when they need it. */
 export class GoabDetails extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** @required The title heading. */
   @Input({ required: true }) heading!: string;
+  /** Controls if details is expanded or not. */
   @Input({ transform: booleanAttribute }) open?: boolean;
+  /** Sets the maximum width of the details. */
   @Input() maxWidth?: string;
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

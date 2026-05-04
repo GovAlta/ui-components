@@ -1,5 +1,11 @@
 <goab-button (onClick)="onClick()">Filters</goab-button>
-<goab-drawer heading="Filters" [open]="open" (onClose)="onClose()" position="right" [actions]="actions">
+<goab-drawer
+  heading="Filters"
+  [open]="open"
+  (onClose)="onClose()"
+  position="right"
+  [actions]="actions"
+>
   <goab-form-item label="Entry status">
     <goab-checkbox-list name="entryStatus" (onChange)="onCheckboxChange($event)">
       <goab-checkbox name="draft" text="Draft" value="draft"></goab-checkbox>
@@ -16,7 +22,11 @@
     </goab-checkbox-list>
   </goab-form-item>
   <goab-form-item label="Assigned to" mt="l">
-    <goab-dropdown [value]="assignedTo" name="assignedToData" (onChange)="onChangeAssignedTo($event)">
+    <goab-dropdown
+      [value]="assignedTo"
+      name="assignedToData"
+      (onChange)="onChangeAssignedTo($event)"
+    >
       <goab-dropdown-item value="1" label="Person 1"></goab-dropdown-item>
       <goab-dropdown-item value="2" label="Person 2"></goab-dropdown-item>
     </goab-dropdown>
@@ -28,9 +38,13 @@
     </goab-radio-group>
   </goab-form-item>
   <ng-template #actions>
-    <goab-button-group>
-      <goab-button type="primary" size="compact" (onClick)="closeDrawer()">Apply filters</goab-button>
-      <goab-button type="tertiary" size="compact" (onClick)="closeDrawer()">Cancel</goab-button>
+    <goab-button-group alignment="start">
+      <goab-button type="primary" size="compact" (onClick)="closeDrawer()"
+        >Apply filters</goab-button
+      >
+      <goab-button type="tertiary" size="compact" (onClick)="closeDrawer()"
+        >Cancel</goab-button
+      >
     </goab-button-group>
   </ng-template>
 </goab-drawer>

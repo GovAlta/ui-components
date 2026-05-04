@@ -4,6 +4,7 @@ import {
   ElementRef,
   HostListener,
   Renderer2,
+  inject,
 } from "@angular/core";
 import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -20,6 +21,9 @@ import { CheckboxControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms"
   ],
 })
 export class CheckedDirective extends CheckboxControlValueAccessor {
+  protected renderer: Renderer2;
+  protected elementRef: ElementRef;
+
   private _checked = false;
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -30,11 +34,14 @@ export class CheckedDirective extends CheckboxControlValueAccessor {
     /** No implementation **/
   };
 
-  constructor(
-    protected renderer: Renderer2,
-    protected elementRef: ElementRef,
-  ) {
+  constructor() {
+    const renderer = inject(Renderer2);
+    const elementRef = inject(ElementRef);
+
     super(renderer, elementRef);
+
+    this.renderer = renderer;
+    this.elementRef = elementRef;
   }
 
   get value(): string {

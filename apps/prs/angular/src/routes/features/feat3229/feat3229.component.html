@@ -3,9 +3,11 @@
 
   <goab-divider mt="l" mb="l"></goab-divider>
 
-  <goab-block mb="m" *ngIf="lastAction">
-    <goab-badge type="information" [content]="lastAction"></goab-badge>
-  </goab-block>
+  @if (lastAction) {
+    <goab-block mb="m">
+      <goab-badge type="information" [content]="lastAction"></goab-badge>
+    </goab-block>
+  }
 
   <!-- ── Test 1: Icon-only edge cases ── -->
   <goab-text tag="h2">1. Icon-only (no text) — edge cases</goab-text>

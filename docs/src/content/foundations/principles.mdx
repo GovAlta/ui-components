@@ -1,0 +1,65 @@
+---
+id: principles
+title: Design Principles
+description: Core design and development principles for teams building with the GoA Design System
+category: design
+tags:
+  - government-service
+  - accessibility
+  - component-first
+  - spacing
+status: published
+---
+
+## Core Principles
+
+### Government Service First
+
+All design decisions must prioritize citizen and worker needs over aesthetic preferences.
+
+**Application:** Choose components and patterns based on user research and government service requirements.
+
+### Accessibility by Default
+
+WCAG 2.2 AA compliance is non-negotiable, not an add-on.
+
+**Application:** Use GoA components which provide built-in accessibility features.
+
+### Consistency Over Creativity
+
+Consistent user experience across government services trumps unique design.
+
+**Application:** Use established GoA patterns rather than inventing new ones.
+
+### Component-First Thinking
+
+Exhaust GoA component library options before building custom components.
+
+**Application:** Search the component library, check examples, combine existing components creatively.
+
+## Development Principles
+
+### Component-First Process
+
+Always start with GoA components until those options are fully exhausted before doing any custom components.
+
+1. Search for GoA components that solve your need
+2. Search with multiple terms (e.g., 'button', 'action', 'submit')
+3. Check examples for similar patterns
+4. If no component found: Ask the team before building custom
+
+### Spacing Strategy
+
+Use component margin props (mb, mr) as the primary spacing approach.
+
+- Component margin props (mb, mr, mt, ml) - preferred
+- GoabBlock for flex layouts
+- Custom flexbox/grid when needed
+- GoabSpacer for explicit gaps (less responsive)
+
+### Validation Checklist
+
+- Verify component properties against documented valid values
+- Check design specifications for exact sizing
+- Ensure no custom styling - only use component props
+- Validate spacing tokens match design system

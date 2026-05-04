@@ -1,0 +1,101 @@
+<div style="display: flex; min-height: 480px">
+  <div style="flex: 1; min-width: 0">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem">
+      <h3 style="flex: 1; margin: 0">All cases</h3>
+      @if (!open) {
+      <goab-button
+        type="secondary"
+        size="compact"
+        leadingIcon="filter"
+        (onClick)="openFilters()"
+        >Filters</goab-button
+      >
+      }
+    </div>
+
+    <goab-table width="100%">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Name</th>
+            <th>File number</th>
+            <th>Act</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><goab-badge type="success" content="Completed"></goab-badge></td>
+            <td>Gilbert Barton</td>
+            <td>24567-9876</td>
+            <td>Traffic safety act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="information" content="New"></goab-badge></td>
+            <td>Brynn Hurley</td>
+            <td>98765-3456</td>
+            <td>Trespass to premises act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="default" content="In review"></goab-badge></td>
+            <td>Marco Silva</td>
+            <td>34521-7890</td>
+            <td>Gaming, liquor, and cannabis act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="success" content="Completed"></goab-badge></td>
+            <td>Dana Chen</td>
+            <td>55123-4567</td>
+            <td>Traffic safety act</td>
+          </tr>
+          <tr>
+            <td><goab-badge type="information" content="New"></goab-badge></td>
+            <td>Amira Hassan</td>
+            <td>67890-1234</td>
+            <td>Trespass to premises act</td>
+          </tr>
+        </tbody>
+      </table>
+    </goab-table>
+  </div>
+
+  <goab-push-drawer
+    heading="Filters"
+    width="260px"
+    [open]="open"
+    (onClose)="closeFilters()"
+  >
+    <goab-form-item label="Act">
+      <goab-checkbox-list name="act" (onChange)="onCheckboxChange($event)">
+        <goab-checkbox
+          name="traffic"
+          text="Traffic safety act"
+          size="compact"
+        ></goab-checkbox>
+        <goab-checkbox
+          name="gaming"
+          text="Gaming, liquor, and cannabis act"
+          size="compact"
+        ></goab-checkbox>
+        <goab-checkbox
+          name="trespass"
+          text="Trespass to premises act"
+          size="compact"
+        ></goab-checkbox>
+      </goab-checkbox-list>
+    </goab-form-item>
+    <goab-form-item label="Status" mt="l">
+      <goab-dropdown
+        name="status"
+        (onChange)="onDropdownChange($event)"
+        value=""
+        size="compact"
+      >
+        <goab-dropdown-item value="" label="All statuses"></goab-dropdown-item>
+        <goab-dropdown-item value="new" label="New"></goab-dropdown-item>
+        <goab-dropdown-item value="in-review" label="In review"></goab-dropdown-item>
+        <goab-dropdown-item value="completed" label="Completed"></goab-dropdown-item>
+      </goab-dropdown>
+    </goab-form-item>
+  </goab-push-drawer>
+</div>

@@ -13,11 +13,20 @@ export function ShowASimpleProgressIndicatorOnAQuestionPageWithMultipleQuestions
         Back
       </GoabLink>
 
-      <GoabText as="h3" size="body-m" mt="xl" mb="none" color="secondary">Step 1 of 5</GoabText>
-      <GoabText as="h2" mt="xs" mb="xl">Personal information</GoabText>
+      <GoabText tag="h3" size="body-m" mt="xl" mb="none" color="secondary">
+        Step 1 of 5
+      </GoabText>
+      <GoabText tag="h2" mt="xs" mb="xl">
+        Personal information
+      </GoabText>
 
       <GoabFormItem label="What is your name?">
-        <GoabInput onChange={() => {}} name="name" ariaLabel="what is your name?" width="50ch" />
+        <GoabInput
+          onChange={() => {}}
+          name="name"
+          ariaLabel="what is your name?"
+          width="50ch"
+        />
       </GoabFormItem>
 
       <GoabFormItem label="What is your phone number?" mt="l">

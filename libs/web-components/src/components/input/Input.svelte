@@ -591,6 +591,11 @@
     margin-right: var(--goa-text-input-padding-lr);
   }
 
+  .leading-icon,
+  .trailing-icon {
+    color: var(--goa-text-input-color-icon);
+  }
+
   .trailing-icon-button {
     margin-right: var(--goa-text-input-padding-lr);
   }

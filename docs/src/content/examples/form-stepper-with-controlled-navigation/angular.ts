@@ -3,7 +3,7 @@ import { GoabFormStepperOnChangeDetail } from "@abgov/ui-components-common";
 
 @Component({
   selector: "app-form-stepper-controlled",
-  templateUrl: "./angular.html"
+  templateUrl: "./angular.html",
 })
 export class FormStepperControlledComponent {
   step = 1;

@@ -8,7 +8,11 @@
     <goa-text mt="none" mb="none">881 12 Ave NW, Edmonton, Alberta</goa-text>
   </goa-container>
   <goa-form-item version="2" label="Effective date" mt="l">
-    <goa-date-picker version="2" id="effective-date" name="effectiveDate"></goa-date-picker>
+    <goa-date-picker
+      version="2"
+      id="effective-date"
+      name="effectiveDate"
+    ></goa-date-picker>
   </goa-form-item>
   <div slot="actions">
     <goa-button-group alignment="end">
@@ -23,32 +27,32 @@
 </goa-modal>
 
 <script>
-  const modal = document.getElementById('change-modal');
-  const openBtn = document.getElementById('open-modal-btn');
-  const undoBtn = document.getElementById('undo-btn');
-  const confirmBtn = document.getElementById('confirm-btn');
-  const datePicker = document.getElementById('effective-date');
+  const modal = document.getElementById("change-modal");
+  const openBtn = document.getElementById("open-modal-btn");
+  const undoBtn = document.getElementById("undo-btn");
+  const confirmBtn = document.getElementById("confirm-btn");
+  const datePicker = document.getElementById("effective-date");
 
   let effectiveDate = new Date();
-  datePicker.setAttribute('value', effectiveDate.toISOString());
+  datePicker.setAttribute("value", effectiveDate.toISOString());
 
-  openBtn.addEventListener('_click', () => {
-    modal.setAttribute('open', 'true');
+  openBtn.addEventListener("_click", () => {
+    modal.setAttribute("open", "true");
   });
 
-  undoBtn.addEventListener('_click', () => {
-    modal.removeAttribute('open');
+  undoBtn.addEventListener("_click", () => {
+    modal.removeAttribute("open");
   });
 
-  confirmBtn.addEventListener('_click', () => {
-    modal.removeAttribute('open');
+  confirmBtn.addEventListener("_click", () => {
+    modal.removeAttribute("open");
   });
 
-  modal.addEventListener('_close', () => {
-    modal.removeAttribute('open');
+  modal.addEventListener("_close", () => {
+    modal.removeAttribute("open");
   });
 
-  datePicker.addEventListener('_change', (e) => {
+  datePicker.addEventListener("_change", (e) => {
     effectiveDate = e.detail.value;
   });
 </script>

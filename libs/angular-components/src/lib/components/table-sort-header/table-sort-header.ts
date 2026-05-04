@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 @Component({
@@ -24,13 +25,17 @@ import {
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A set of structured data that is easy for a user to scan, examine, and compare. */
 export class GoabTableSortHeader implements OnInit {
-  isReady = false;
-  @Input() name?: string;
-  @Input() direction?: GoabTableSortDirection = "none";
-  @Input() sortOrder?: GoabTableSortOrder;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  /** Column name identifier for sorting. */
+  @Input() name?: string;
+  /** Sets the sort direction indicator. @default "none" */
+  @Input() direction?: GoabTableSortDirection = "none";
+  /** Sort order number for multi-column sort display ("1", "2", etc). */
+  @Input() sortOrder?: GoabTableSortOrder;
 
   ngOnInit(): void {
     setTimeout(() => {

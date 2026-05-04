@@ -157,8 +157,26 @@ const examples = defineCollection({
   }),
 });
 
+/**
+ * Foundations Collection
+ * Design system knowledge documents (principles, anti-patterns, user types)
+ * These are reference documents, not atomic items like guidance
+ */
+const foundations = defineCollection({
+  type: "content",
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    description: z.string(),
+    category: z.enum(["design", "development", "accessibility"]),
+    tags: z.array(z.string()).optional(),
+    status: z.enum(["published", "draft", "deprecated"]).default("published"),
+  }),
+});
+
 export const collections = {
   components,
   guidance,
   examples,
+  foundations,
 };

@@ -5,6 +5,7 @@
 apps/dev/angular
 apps/dev/react
 apps/dev/web
+apps/prs/angular/src/app/generated/
 NOTES.md
 /test-results
 __screenshots__
@@ -70,3 +71,6 @@ vite.config.*.timestamp*
 vitest.config.*.timestamp*
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+
+.claude/worktrees
+.claude/settings.local.json

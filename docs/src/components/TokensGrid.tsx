@@ -25,13 +25,13 @@ import {
   GoabFormItem,
   GoabIcon,
   GoabIconButton,
-  GoabInput,
   GoabPushDrawer,
 } from "@abgov/react-components";
 
 import { useTwoLevelSort } from "../hooks/useTwoLevelSort";
 import { useContainerNarrow } from "../hooks/useContainerWidth";
 import type { FlatToken } from "../lib/tokens";
+import { InlineSearch, type SlashCommand } from "./search/InlineSearch";
 
 interface FilterGroup {
   name: string;
@@ -102,12 +102,11 @@ function toScssSyntax(cssName: string): string {
 
 export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   // State
-  const [searchValue, setSearchValue] = useState("");
-  const [searchChips, setSearchChips] = useState<string[]>([]);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const [tokenSyntax, setTokenSyntax] = useState<TokenSyntax>("css");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Ref for sticky detection sentinel
   const gridRef = useRef<HTMLDivElement>(null);
@@ -133,15 +132,6 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     observer.observe(sentinel);
     return () => observer.disconnect();
   }, []);
-
-  // Read URL search parameter on mount (e.g., /tokens?search=color)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const searchParam = params.get("search");
-    if (searchParam && !searchChips.includes(searchParam)) {
-      setSearchChips([searchParam]);
-    }
-  }, []); // Only run on mount
 
   // Filter state
   const [pendingFilters, setPendingFilters] = useState<string[]>([]);
@@ -195,6 +185,26 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     return () => tabs.removeEventListener("_change", handleChange);
   }, []);
 
+  // Slash commands derived from filter groups
+  const slashCommands = useMemo((): SlashCommand[] => {
+    return filterGroups.map((group) => ({
+      id: `category:${group.name}`,
+      label: group.name,
+      group: "Category",
+      filterType: "category",
+      filterValue: group.name,
+      active: appliedFilters.includes(group.name),
+    }));
+  }, [filterGroups, appliedFilters]);
+
+  const handleSlashCommand = useCallback((cmd: SlashCommand) => {
+    setAppliedFilters((prev) =>
+      prev.includes(cmd.filterValue)
+        ? prev.filter((v) => v !== cmd.filterValue)
+        : [...prev, cmd.filterValue],
+    );
+  }, []);
+
   // View mode: 'list' (table) on desktop, 'card' on mobile
   // No user toggle - automatically switches based on viewport
   const viewMode = useMemo((): "card" | "list" => {
@@ -205,15 +215,11 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
   const filteredTokens = useMemo(() => {
     let result = tokens;
 
-    // Apply search chips
-    if (searchChips.length > 0) {
-      result = result.filter((token) =>
-        searchChips.every(
-          (chip) =>
-            token.name.toLowerCase().includes(chip.toLowerCase()) ||
-            token.value.toLowerCase().includes(chip.toLowerCase()) ||
-            token.category.toLowerCase().includes(chip.toLowerCase()),
-        ),
+    // Apply search filter (substring match on token name since search index groups tokens by category)
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (t) => t.name.toLowerCase().includes(q) || t.category.toLowerCase().includes(q),
       );
     }
 
@@ -250,20 +256,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     }
 
     return result;
-  }, [tokens, searchChips, appliedFilters, sortConfig, filterGroups]);
-
-  // Search handlers
-  const applySearch = useCallback(() => {
-    const trimmed = searchValue.trim();
-    if (trimmed && !searchChips.includes(trimmed)) {
-      setSearchChips((prev) => [...prev, trimmed]);
-      setSearchValue("");
-    }
-  }, [searchValue, searchChips]);
-
-  const removeSearchChip = useCallback((chip: string) => {
-    setSearchChips((prev) => prev.filter((c) => c !== chip));
-  }, []);
+  }, [tokens, appliedFilters, sortConfig, filterGroups, searchQuery]);
 
   // Filter handlers
   const togglePendingFilter = useCallback((category: string) => {
@@ -309,9 +302,9 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     [getFormattedTokenName],
   );
 
-  // Clear all filters, search, and sort
+  // Clear all filters, sort, and search
   const clearAll = useCallback(() => {
-    setSearchChips([]);
+    setSearchQuery("");
     clearAllFilters();
     clearSort();
   }, [clearAllFilters, clearSort]);
@@ -796,7 +789,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
     [copiedToken, copyToClipboard, getFormattedTokenName],
   );
 
-  const hasActiveFilters = searchChips.length > 0 || appliedFilters.length > 0;
+  const hasActiveFilters = appliedFilters.length > 0 || sortConfig.primary;
 
   return (
     <div className="tokens-grid" ref={gridRef}>
@@ -805,21 +798,16 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
 
       {/* Toolbar */}
       <div className={`tokens-toolbar ${isSticky ? "tokens-toolbar--sticky" : ""}`}>
-        {/* Search input */}
+        {/* Search input - filters the grid directly */}
         <div className="tokens-search-section">
-          <GoabFormItem
-            helpText={!isSticky ? "Search by name, value, or category" : undefined}
-          >
-            <GoabInput
-              name="tokenSearch"
-              value={searchValue}
-              leadingIcon="search"
-              width="100%"
-              size="compact"
-              onChange={(e) => setSearchValue(e.value)}
-              onKeyPress={(e) => e.key === "Enter" && applySearch()}
-            />
-          </GoabFormItem>
+          <InlineSearch
+            value={searchQuery}
+            onChange={setSearchQuery}
+            onClear={() => setSearchQuery("")}
+            placeholder="Search or type / to filter..."
+            commands={slashCommands}
+            onCommandSelect={handleSlashCommand}
+          />
         </div>
 
         {/* Syntax toggle + Filters */}
@@ -894,14 +882,29 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
             fillColor="var(--goa-color-text-secondary)"
           />
 
-          {/* Search chips */}
-          {searchChips.map((chip) => (
+          {/* Sort chips */}
+          {sortConfig.primary && (
             <GoabFilterChip
-              key={chip}
-              content={chip}
-              onClick={() => removeSearchChip(chip)}
+              content={sortConfig.primary.key}
+              leadingIcon={
+                sortConfig.primary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText={sortConfig.secondary ? "1st" : undefined}
+              onClick={() =>
+                setSortConfig({ primary: sortConfig.secondary, secondary: null })
+              }
             />
-          ))}
+          )}
+          {sortConfig.secondary && (
+            <GoabFilterChip
+              content={sortConfig.secondary.key}
+              leadingIcon={
+                sortConfig.secondary.direction === "asc" ? "arrow-up" : "arrow-down"
+              }
+              secondaryText="2nd"
+              onClick={() => setSortConfig((prev) => ({ ...prev, secondary: null }))}
+            />
+          )}
 
           {/* Filter group chips */}
           {appliedFilters.map((filterName) => (
@@ -1100,14 +1103,13 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           flex-direction: row;
           align-items: flex-start;
           gap: var(--goa-space-m);
-          padding: var(--goa-space-m) 0;
-          margin-bottom: 12px;
+          padding: var(--goa-space-m) 0 var(--goa-space-xs);
           transition: padding 0.15s ease;
         }
 
         /* When sticky - add shadow */
         .tokens-toolbar--sticky {
-          padding: var(--goa-space-s) 0;
+          padding: var(--goa-space-s) 0 var(--goa-space-xs);
           background: transparent;
           margin-bottom: 0;
         }
@@ -1134,6 +1136,7 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           display: flex;
           align-items: flex-start;
           gap: var(--goa-space-m);
+          min-height: 40px;
         }
 
         /* Filter button: desktop shows text, mobile shows icon-only */
@@ -1182,12 +1185,14 @@ export function TokensGrid({ tokens, filterGroups }: TokensGridProps) {
           align-items: center;
           gap: var(--goa-space-s);
           flex-wrap: wrap;
-          margin-bottom: var(--goa-space-m);
+          padding-top: var(--goa-space-2xs);
+          margin-bottom: var(--goa-space-l);
         }
 
         .tokens-count {
           color: var(--goa-color-text-secondary);
           font: var(--goa-typography-body-s);
+          margin-top: var(--goa-space-m);
           margin-bottom: var(--goa-space-m);
         }
 

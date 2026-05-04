@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Developers Overview
  *
@@ -25,9 +26,9 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
   </p>
   <p>The Design System includes:</p>
   <ul>
-    <li><a href="/tokens"><strong>Tokens</strong></a></li>
-    <li><a href="/components"><strong>Components</strong></a></li>
-    <li><a href="/examples"><strong>Examples</strong></a></li>
+    <li><a href={withBase(`/tokens`)}><strong>Tokens</strong></a></li>
+    <li><a href={withBase(`/components`)}><strong>Components</strong></a></li>
+    <li><a href={withBase(`/examples`)}><strong>Examples</strong></a></li>
     <li><strong>Templates</strong></li>
   </ul>
   <p>
@@ -65,7 +66,7 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
     <li>As <a href="https://www.npmjs.com/package/@abgov/react-components" target="_blank">React</a> wrappers</li>
   </ul>
   <p>
-    Refer to the Design System <a href="/get-started/developers/technologies">technologies</a> documentation
+    Refer to the Design System <a href={withBase(`/get-started/developers/technologies`)}>technologies</a> documentation
     for implementation details.
   </p>
 

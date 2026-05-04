@@ -39,56 +39,20 @@ export const containerConfigurations: ComponentConfigurations = {
         react: `<GoabContainer type="non-interactive" mb="m">
   <p>Non-interactive content container</p>
 </GoabContainer>
-<GoabContainer type="interactive" mb="m">
+<GoabContainer type="interactive">
   <p>Interactive container</p>
-</GoabContainer>
-<GoabContainer type="info" mb="m">
-  <p>Informational container</p>
-</GoabContainer>
-<GoabContainer type="error" mb="m">
-  <p>Error container</p>
-</GoabContainer>
-<GoabContainer type="success" mb="m">
-  <p>Success container</p>
-</GoabContainer>
-<GoabContainer type="important">
-  <p>Important container</p>
 </GoabContainer>`,
         angular: `<goab-container type="non-interactive" mb="m">
   <p>Non-interactive content container</p>
 </goab-container>
-<goab-container type="interactive" mb="m">
+<goab-container type="interactive">
   <p>Interactive container</p>
-</goab-container>
-<goab-container type="info" mb="m">
-  <p>Informational container</p>
-</goab-container>
-<goab-container type="error" mb="m">
-  <p>Error container</p>
-</goab-container>
-<goab-container type="success" mb="m">
-  <p>Success container</p>
-</goab-container>
-<goab-container type="important">
-  <p>Important container</p>
 </goab-container>`,
         webComponents: `<goa-container type="non-interactive" mb="m">
   <p>Non-interactive content container</p>
 </goa-container>
-<goa-container type="interactive" mb="m">
+<goa-container type="interactive">
   <p>Interactive container</p>
-</goa-container>
-<goa-container type="info" mb="m">
-  <p>Informational container</p>
-</goa-container>
-<goa-container type="error" mb="m">
-  <p>Error container</p>
-</goa-container>
-<goa-container type="success" mb="m">
-  <p>Success container</p>
-</goa-container>
-<goa-container type="important">
-  <p>Important container</p>
 </goa-container>`,
       },
     },

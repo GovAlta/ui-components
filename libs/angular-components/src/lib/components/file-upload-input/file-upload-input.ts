@@ -10,6 +10,7 @@ import {
   Output,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -35,20 +36,24 @@ import { GoabBaseComponent } from "../base.component";
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Help users select and upload a file. */
 export class GoabFileUploadInput extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** Sets the id attribute on the file upload input element. */
   @Input() id?: string = "";
-  @Input({ required: true }) variant!: GoabFileUploadInputVariant;
+  /** The input display variant. "dragdrop" shows a drag-and-drop area, "button" shows a simple button. @default "dragdrop" */
+  @Input() variant?: GoabFileUploadInputVariant;
+  /** Maximum file size with unit (e.g., "5MB", "100KB", "1GB"). Files exceeding this will be rejected. @default "5MB" */
   @Input() maxFileSize?: string = "5MB";
+  /** Accepted file types as a comma-separated list of MIME types or file extensions (e.g., "image/*,.pdf"). */
   @Input() accept?: string;
 
+  /** Emits when a file is selected. Emits the selected file details. */
   @Output() onSelectFile = new EventEmitter<GoabFileUploadInputOnSelectFileDetail>();
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

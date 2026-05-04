@@ -2,7 +2,9 @@
 
 ## Cross-Framework Rule
 
-Every Svelte change requires corresponding React and Angular updates. Props must match across all three frameworks (required/optional, naming, types, data formats). This is the #1 source of review rounds.
+Every Svelte prop, event, or API change requires corresponding React and Angular wrapper updates. Props must match across all three frameworks (required/optional, naming, types, data formats). This is the #1 source of review rounds.
+
+CSS-only changes in the Svelte file do not need wrapper updates. Wrappers contain no styling — they pass attributes through to the web component, which owns all CSS.
 
 ## React Wrapper Template
 
@@ -62,7 +64,10 @@ Non-form components extend `GoabBaseComponent`. Form controls extend `GoabContro
         [attr.type]="type"
         [attr.disabled]="disabled ? 'true' : undefined"
         [attr.testid]="testId"
-        [attr.mt]="mt" [attr.mb]="mb" [attr.ml]="ml" [attr.mr]="mr"
+        [attr.mt]="mt"
+        [attr.mb]="mb"
+        [attr.ml]="ml"
+        [attr.mr]="mr"
         (_click)="_onClick($event)"
       >
         <ng-content />
@@ -77,7 +82,9 @@ export class GoabXxx extends GoabBaseComponent implements OnInit {
   @Output() onClick = new EventEmitter<GoabXxxOnClickDetail>();
 
   isReady = false;
-  constructor(private cdr: ChangeDetectorRef) { super(); }
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
 
   ngOnInit(): void {
     setTimeout(() => {

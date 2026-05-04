@@ -56,7 +56,7 @@ export function FilterDataInATable() {
         id: "5736306857",
       },
     ],
-    []
+    [],
   );
 
   const [dataFiltered, setDataFiltered] = useState(data);
@@ -89,15 +89,15 @@ export function FilterDataInATable() {
   };
 
   const removeTypedChip = (chip: string) => {
-    setTypedChips(typedChips.filter(c => c !== chip));
+    setTypedChips(typedChips.filter((c) => c !== chip));
     setInputError("");
   };
 
   const checkNested = useCallback((obj: object, chip: string): boolean => {
-    return Object.values(obj).some(value =>
+    return Object.values(obj).some((value) =>
       typeof value === "object" && value !== null
         ? checkNested(value, chip)
-        : typeof value === "string" && value.toLowerCase().includes(chip.toLowerCase())
+        : typeof value === "string" && value.toLowerCase().includes(chip.toLowerCase()),
     );
   }, []);
 
@@ -107,10 +107,10 @@ export function FilterDataInATable() {
         return data;
       }
       return data.filter((item: object) =>
-        typedChips.every(chip => checkNested(item, chip))
+        typedChips.every((chip) => checkNested(item, chip)),
       );
     },
-    [checkNested, data]
+    [checkNested, data],
   );
 
   useEffect(() => {
@@ -152,13 +152,18 @@ export function FilterDataInATable() {
               onClick={() => removeTypedChip(typedChip)}
             />
           ))}
-          <GoabButton type="tertiary" size="compact" mb="xs" onClick={() => setTypedChips([])}>
+          <GoabButton
+            type="tertiary"
+            size="compact"
+            mb="xs"
+            onClick={() => setTypedChips([])}
+          >
             Clear all
           </GoabButton>
         </div>
       )}
 
-      <GoabTable width="full">
+      <GoabTable width="100%">
         <thead>
           <tr>
             <th>Status</th>
@@ -167,10 +172,14 @@ export function FilterDataInATable() {
           </tr>
         </thead>
         <tbody>
-          {dataFiltered.map(item => (
+          {dataFiltered.map((item) => (
             <tr key={item.id}>
               <td>
-                <GoabBadge type={item.status.type} content={item.status.text} icon={false} />
+                <GoabBadge
+                  type={item.status.type}
+                  content={item.status.text}
+                  icon={false}
+                />
               </td>
               <td>{item.name}</td>
               <td className="goa-table-number-column">{item.id}</td>

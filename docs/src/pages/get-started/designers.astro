@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Designers Overview
  *
@@ -21,8 +22,8 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
   <p>In Figma, you can access:</p>
 
   <ul>
-    <li><a href="/tokens">Design tokens</a></li>
-    <li><a href="/components">Components</a></li>
+    <li><a href={withBase(`/tokens`)}>Design tokens</a></li>
+    <li><a href={withBase(`/components`)}>Components</a></li>
     <li><a href="https://www.figma.com/design/aIRjvBzpIUH0GbkffjbL04/%E2%9D%96-Patterns-library-%7C-DDD?node-id=6345-1491163" target="_blank">Patterns</a></li>
   </ul>
 

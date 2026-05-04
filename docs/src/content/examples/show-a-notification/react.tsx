@@ -1,7 +1,4 @@
-import {
-  GoabButton,
-  GoabTemporaryNotificationCtrl,
-} from "@abgov/react-components";
+import { GoabButton, GoabTemporaryNotificationCtrl } from "@abgov/react-components";
 
 import { TemporaryNotification } from "@abgov/ui-components-common";
 
@@ -10,14 +7,16 @@ export function ShowANotification() {
     // await api.save();
 
     TemporaryNotification.show("Your application has been saved.", {
-      type: "success"
+      type: "success",
     });
   };
 
   return (
     <>
       <GoabTemporaryNotificationCtrl />
-      <GoabButton type="secondary" onClick={save}>Save</GoabButton>
+      <GoabButton type="secondary" onClick={save}>
+        Save
+      </GoabButton>
     </>
   );
 }

@@ -6,6 +6,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -24,9 +25,15 @@ import { GoabBaseComponent } from "../base.component";
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Menu items within the app header. */
 export class GoabAppHeaderMenu extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** Icon displayed before the heading text. */
   @Input() leadingIcon?: GoabIconType;
+  /** The menu heading text displayed as the dropdown trigger. */
   @Input() heading?: string;
+  /** Sets the slot name for the component. */
   @Input() slotName?: string;
 
   @HostBinding("attr.slot")
@@ -35,10 +42,6 @@ export class GoabAppHeaderMenu extends GoabBaseComponent implements OnInit {
   }
 
   isReady = false;
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     setTimeout(() => {

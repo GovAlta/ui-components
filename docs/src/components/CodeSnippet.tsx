@@ -1,9 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  GoabButton,
-  GoabTab,
-  GoabTabs,
-} from "@abgov/react-components";
+import { GoabButton, GoabTab, GoabTabs } from "@abgov/react-components";
 
 import hljs from "highlight.js/lib/core";
 import typescript from "highlight.js/lib/languages/typescript";
@@ -12,11 +8,8 @@ import css from "highlight.js/lib/languages/css";
 import javascript from "highlight.js/lib/languages/javascript";
 import {
   extractReactCode,
-  extractAngularCode,
+  extractAngularClassBody,
   extractWebComponentsCode,
-  type ExtractedReactCode,
-  type ExtractedAngularCode,
-  type ExtractedWebComponentsCode,
 } from "../lib/extract-code-parts";
 import {
   getFrameworkPreference,
@@ -24,6 +17,12 @@ import {
   subscribeToFrameworkPreference,
   type Framework,
 } from "../lib/framework-preference";
+import type {
+  ReactExample,
+  AngularExample,
+  WebComponentsExample,
+} from "../data/configurations/types";
+import "./CodeSnippet.css";
 
 // Register languages
 hljs.registerLanguage("typescript", typescript);
@@ -32,15 +31,12 @@ hljs.registerLanguage("html", xml);
 hljs.registerLanguage("css", css);
 hljs.registerLanguage("javascript", javascript);
 
-interface AngularCode {
-  ts?: string;
-  template: string;
-}
+export type Language = "tsx" | "typescript" | "javascript" | "html" | "css";
 
 interface FrameworkCode {
-  react?: string;
-  angular?: AngularCode | string;
-  webComponents?: string;
+  react?: string | ReactExample;
+  angular?: string | AngularExample | AngularExample[];
+  webComponents?: string | WebComponentsExample;
 }
 
 interface CodeSnippetProps {
@@ -50,7 +46,7 @@ interface CodeSnippetProps {
   frameworkCode?: FrameworkCode;
   /** Initial framework when using frameworkCode */
   initialFramework?: Framework;
-  language?: "tsx" | "typescript" | "html" | "css" | "javascript";
+  language?: Language;
   showCopy?: boolean;
   showLineNumbers?: boolean;
   maxHeight?: number;
@@ -71,7 +67,7 @@ const FRAMEWORK_LABELS: Record<Framework, string> = {
 
 interface SingleCodeBlockProps {
   code: string;
-  language: string;
+  language: Language;
   title?: string;
   showCopy?: boolean;
   maxHeight?: number;
@@ -197,13 +193,14 @@ function SingleCodeBlock({
 // Main CodeSnippet Component
 // ============================================================================
 
+const VALID_FRAMEWORKS: Framework[] = ["react", "angular", "webComponents"];
+
 export function CodeSnippet({
   code,
   frameworkCode,
   initialFramework = "react",
   language = "tsx",
   showCopy = true,
-  showLineNumbers = false,
   maxHeight,
   title,
   extractParts = true,
@@ -218,11 +215,8 @@ export function CodeSnippet({
   // Determine if we're in framework switcher mode
   const hasFrameworkSwitcher = !!frameworkCode;
 
-  // Get available frameworks
-  const availableFrameworks = hasFrameworkSwitcher
-    ? (Object.keys(frameworkCode).filter(
-      (k) => frameworkCode[k as Framework],
-    ) as Framework[])
+  const availableFrameworks: Framework[] = hasFrameworkSwitcher
+    ? VALID_FRAMEWORKS.filter((k) => Boolean(frameworkCode[k]))
     : [];
 
   // Subscribe to global framework preference changes from other components.
@@ -305,7 +299,6 @@ export function CodeSnippet({
             maxHeight={maxHeight}
           />
         </div>
-        <CodeSnippetStyles />
       </div>
     );
   }
@@ -315,7 +308,7 @@ export function CodeSnippet({
     if (!extractParts) {
       // Simple mode - just show the raw code for selected framework
       const rawCode = getFrameworkRawCode(frameworkCode, selectedFramework);
-      const lang = selectedFramework === "react" ? "tsx" : "html";
+      const lang: Language = selectedFramework === "react" ? "tsx" : "html";
       return (
         <SingleCodeBlock
           code={rawCode}
@@ -339,103 +332,113 @@ export function CodeSnippet({
     }
   };
 
-  const renderReactBlocks = (reactCode?: string) => {
-    if (!reactCode) return <div className="no-code">No React code available</div>;
-
-    const extracted = extractReactCode(reactCode);
-    return (
-      <>
-        {extracted.css && (
-          <SingleCodeBlock
-            code={extracted.css}
-            language="css"
-            showCopy={showCopy}
-            maxHeight={maxHeight}
-          />
-        )}
-        {extracted.setup && (
-          <SingleCodeBlock
-            code={extracted.setup}
-            language="tsx"
-            showCopy={showCopy}
-            maxHeight={maxHeight}
-          />
-        )}
+  /**
+   * Wrap a single code block in a standalone .code-snippet box so multiple
+   * blocks within one tab render as separate boxes with visible spacing.
+   */
+  const wrapCodeBlock = (code: string, language: Language, key?: string | number) => (
+    <div className="code-snippet" key={key}>
+      <div className="code-blocks">
         <SingleCodeBlock
-          code={extracted.jsx}
-          language="tsx"
+          code={code}
+          language={language}
           showCopy={showCopy}
           maxHeight={maxHeight}
         />
+      </div>
+    </div>
+  );
+
+  const renderReactBlocks = (react?: string | ReactExample) => {
+    if (!react) return <div className="no-code">No React code available</div>;
+
+    // Object form: use fields directly (WYSIWYG)
+    if (typeof react !== "string") {
+      return (
+        <>
+          {react.css && wrapCodeBlock(react.css, "css", "css")}
+          {react.ts && wrapCodeBlock(react.ts, "tsx", "ts")}
+          {wrapCodeBlock(react.jsx, "tsx", "jsx")}
+        </>
+      );
+    }
+
+    // String form: parse via extractor (legacy + simple snippets)
+    const extracted = extractReactCode(react);
+    return (
+      <>
+        {extracted.css && wrapCodeBlock(extracted.css, "css", "css")}
+        {extracted.setup && wrapCodeBlock(extracted.setup, "tsx", "setup")}
+        {wrapCodeBlock(extracted.jsx, "tsx", "jsx")}
       </>
     );
   };
 
-  const renderAngularBlocks = (angular?: AngularCode | string) => {
+  /**
+   * Render Angular code in any of its three forms:
+   * - string: template-only legacy snippet
+   * - AngularExample: single class body + template
+   * - AngularExample[]: multiple form binding patterns, each with title heading
+   */
+  const renderAngularBlocks = (angular?: string | AngularExample | AngularExample[]) => {
     if (!angular) return <div className="no-code">No Angular code available</div>;
 
-    // Handle both string (legacy) and object format
-    const angularObj: AngularCode =
-      typeof angular === "string" ? { template: angular } : angular;
+    if (typeof angular === "string") {
+      return wrapCodeBlock(angular, "html", "template");
+    }
 
-    const extracted = extractAngularCode(angularObj.ts, angularObj.template);
+    if (Array.isArray(angular)) {
+      return (
+        <>
+          {angular.map((example, idx) => {
+            const tsBody = example.ts ? extractAngularClassBody(example.ts) : undefined;
+            return (
+              <div key={idx} className="angular-variant">
+                {example.title && (
+                  <h4 className="angular-variant-title">{example.title}</h4>
+                )}
+                {example.css && wrapCodeBlock(example.css, "css", "css")}
+                {tsBody && wrapCodeBlock(tsBody, "typescript", "ts")}
+                {wrapCodeBlock(example.template, "html", "template")}
+              </div>
+            );
+          })}
+        </>
+      );
+    }
+
+    // Single AngularExample object form
+    const tsBody = angular.ts ? extractAngularClassBody(angular.ts) : undefined;
     return (
       <>
-        {extracted.css && (
-          <SingleCodeBlock
-            code={extracted.css}
-            language="css"
-            showCopy={showCopy}
-            maxHeight={maxHeight}
-          />
-        )}
-        {extracted.typescript && (
-          <SingleCodeBlock
-            code={extracted.typescript}
-            language="typescript"
-            showCopy={showCopy}
-            maxHeight={maxHeight}
-          />
-        )}
-        <SingleCodeBlock
-          code={extracted.template}
-          language="html"
-          showCopy={showCopy}
-          maxHeight={maxHeight}
-        />
+        {angular.css && wrapCodeBlock(angular.css, "css", "css")}
+        {tsBody && wrapCodeBlock(tsBody, "typescript", "ts")}
+        {wrapCodeBlock(angular.template, "html", "template")}
       </>
     );
   };
 
-  const renderWebComponentsBlocks = (webComponentsCode?: string) => {
-    if (!webComponentsCode)
-      return <div className="no-code">No Web Components code available</div>;
+  const renderWebComponentsBlocks = (wc?: string | WebComponentsExample) => {
+    if (!wc) return <div className="no-code">No Web Components code available</div>;
 
-    const extracted = extractWebComponentsCode(webComponentsCode);
+    // Object form: use fields directly
+    if (typeof wc !== "string") {
+      return (
+        <>
+          {wc.css && wrapCodeBlock(wc.css, "css", "css")}
+          {wc.js && wrapCodeBlock(wc.js, "javascript", "js")}
+          {wrapCodeBlock(wc.html, "html", "html")}
+        </>
+      );
+    }
+
+    // String form: parse via extractor (handles inline <style> and <script>)
+    const extracted = extractWebComponentsCode(wc);
     return (
       <>
-        {extracted.css && (
-          <SingleCodeBlock
-            code={extracted.css}
-            language="css"
-            showCopy={showCopy}
-            maxHeight={maxHeight}
-          />
-        )}
-        {extracted.javascript && (
-          <SingleCodeBlock
-            code={extracted.javascript}
-            language="javascript"
-            showCopy={showCopy}
-            maxHeight={maxHeight}
-          />
-        )}
-        <SingleCodeBlock
-          code={extracted.html}
-          language="html"
-          showCopy={showCopy}
-          maxHeight={maxHeight}
-        />
+        {extracted.css && wrapCodeBlock(extracted.css, "css", "css")}
+        {extracted.javascript && wrapCodeBlock(extracted.javascript, "javascript", "js")}
+        {wrapCodeBlock(extracted.html, "html", "html")}
       </>
     );
   };
@@ -444,7 +447,7 @@ export function CodeSnippet({
   const renderBlocksForFramework = (fw: Framework) => {
     if (!extractParts) {
       const rawCode = getFrameworkRawCode(frameworkCode, fw);
-      const lang = fw === "react" ? "tsx" : "html";
+      const lang: Language = fw === "react" ? "tsx" : "html";
       return (
         <SingleCodeBlock
           code={rawCode}
@@ -470,7 +473,9 @@ export function CodeSnippet({
   return (
     <div className="code-snippet-wrapper">
       {availableFrameworks.length > 1 ? (
-        // Multiple frameworks - use tabs with content inside
+        // Multiple frameworks - use tabs with content inside.
+        // Renderers always emit per-block .code-snippet wrappers themselves,
+        // so we don't add an outer wrap here.
         <div className="framework-switcher" ref={tabsRef}>
           <GoabTabs
             variant="segmented"
@@ -479,21 +484,15 @@ export function CodeSnippet({
           >
             {availableFrameworks.map((fw) => (
               <GoabTab key={fw} heading={FRAMEWORK_LABELS[fw]}>
-                <div className="code-snippet">
-                  <div className="code-blocks">{renderBlocksForFramework(fw)}</div>
-                </div>
+                {renderBlocksForFramework(fw)}
               </GoabTab>
             ))}
           </GoabTabs>
         </div>
       ) : (
-        // Single framework - no tabs needed
-        <div className="code-snippet">
-          <div className="code-blocks">{renderFrameworkBlocks()}</div>
-        </div>
+        // Single framework - no tabs, renderer provides its own wrappers
+        renderFrameworkBlocks()
       )}
-
-      <CodeSnippetStyles />
     </div>
   );
 }
@@ -519,157 +518,27 @@ function cleanCode(raw: string): string {
 
 function getFrameworkRawCode(frameworkCode: FrameworkCode, framework: Framework): string {
   switch (framework) {
-    case "react":
-      return frameworkCode.react || "";
-    case "angular":
+    case "react": {
+      const react = frameworkCode.react;
+      if (!react) return "";
+      return typeof react === "string" ? react : react.jsx;
+    }
+    case "angular": {
       const angular = frameworkCode.angular;
+      if (!angular) return "";
       if (typeof angular === "string") return angular;
-      return angular?.template || "";
-    case "webComponents":
-      return frameworkCode.webComponents || "";
+      // For array form (form patterns), show the first example's template
+      if (Array.isArray(angular)) return angular[0]?.template ?? "";
+      return angular.template;
+    }
+    case "webComponents": {
+      const wc = frameworkCode.webComponents;
+      if (!wc) return "";
+      return typeof wc === "string" ? wc : wc.html;
+    }
     default:
       return "";
   }
-}
-
-// ============================================================================
-// Styles Component
-// ============================================================================
-
-function CodeSnippetStyles() {
-  return (
-    <style>{`
-      .code-snippet {
-        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-        border-radius: var(--goa-border-radius-m, 4px);
-        overflow: hidden;
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-        font-size: var(--goa-font-size-2);
-      }
-
-      .framework-switcher .code-snippet {
-        margin-top: calc(-2rem + 12px);
-      }
-
-      .code-blocks {
-        display: flex;
-        flex-direction: column;
-        gap: 1px;
-        background: var(--goa-color-greyscale-200, #dcdcdc);
-      }
-
-      .code-block {
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-        position: relative;
-      }
-
-      .code-block-header {
-        position: absolute;
-        top: var(--goa-space-xs, 0.25rem);
-        right: var(--goa-space-s, 0.5rem);
-        z-index: 1; /* Above code content so copy button is clickable */
-      }
-
-      .code-block-title {
-        font-size: 0.75rem;
-        font-weight: var(--goa-font-weight-semi-bold);
-        color: var(--goa-color-text-secondary, #666);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .copy-button {
-        background: var(--goa-color-greyscale-white);
-        border: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
-        color: var(--goa-color-interactive-default, #0070c4);
-        width: 28px;
-        height: 28px;
-        border-radius: var(--goa-border-radius-xs);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.15s;
-      }
-
-      .copy-button:hover {
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-        border-color: var(--goa-color-interactive-default, #0070c4);
-      }
-
-      .copy-button.copied {
-        background: var(--goa-color-status-success, #2e7d32);
-        border-color: var(--goa-color-status-success, #2e7d32);
-        color: var(--goa-color-greyscale-white);
-      }
-
-      .copy-icon {
-        width: 16px;
-        height: 16px;
-      }
-
-      .code-container {
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-      }
-
-      .code-container.expanded {
-        overflow: auto;
-      }
-
-      .code-block.has-gradient .code-container {
-        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
-        mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
-      }
-
-      pre {
-        margin: 0;
-        padding: var(--goa-space-m, 1rem);
-        overflow-x: auto;
-      }
-
-      code {
-        font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-        line-height: 1.6;
-        background: transparent !important;
-        padding: 0 !important;
-      }
-
-      .expand-wrapper {
-        display: flex;
-        justify-content: center;
-        padding: var(--goa-space-s, 0.5rem) 0;
-        position: relative;
-        margin-top: -2rem;
-      }
-
-      .expand-button-bg {
-        background: var(--goa-color-greyscale-100, #f1f1f1);
-      }
-
-      .no-code {
-        padding: var(--goa-space-m, 1rem);
-        color: var(--goa-color-text-secondary, #666);
-        font-style: italic;
-      }
-
-      /* Highlight.js theme */
-      .hljs {
-        color: var(--goa-color-text-default, #333);
-        background: transparent;
-      }
-      .hljs-keyword { color: #0550ae; }
-      .hljs-string { color: #4b7c41; }
-      .hljs-number { color: #0550ae; }
-      .hljs-comment { color: #6e7781; }
-      .hljs-tag { color: #0550ae; }
-      .hljs-attr { color: #0550ae; }
-      .hljs-name { color: #2b7c5f; }
-      .hljs-built_in { color: #6639ba; }
-      .hljs-title { color: #6639ba; }
-      .hljs-params { color: #953800; }
-    `}</style>
-  );
 }
 
 export default CodeSnippet;

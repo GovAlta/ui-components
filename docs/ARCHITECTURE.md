@@ -37,7 +37,7 @@ Svelte source code                    Manual MDX content
 | Guidance atoms (~130+)               | `src/content/guidance/*.mdx`                              | Manual                        |
 | Examples (~80)                       | `src/content/examples/*/`                                 | Manual                        |
 | Configuration previews (~65)         | `src/data/configurations/*.ts`                            | Manual (curated)              |
-| Design tokens                        | `@abgov/design-tokens-v2` npm package                     | Yes (npm import)              |
+| Design tokens                        | `@abgov/design-tokens` npm package                        | Yes (npm import)              |
 | Search index                         | `search-index.json`                                       | Yes (build step)              |
 
 ---
@@ -73,7 +73,7 @@ The site resolves monorepo packages directly via aliases in `astro.config.mjs`:
 
 ## Content collections
 
-Defined in `src/content/config.ts`. Three collections:
+Defined in `src/content/config.ts`. Four collections:
 
 ### Components (`src/content/components/*.mdx`)
 
@@ -123,12 +123,29 @@ Content here...
 </Preview>
 ```
 
-**Topics** determine where guidance appears on the component page. Only these values are recognized by the rendering code in `src/lib/content-queries.ts`:
+**Topics** determine where guidance appears on the component page. The full set is defined in `src/content/config.ts` and grouped for rendering in `src/lib/content-queries.ts`:
 
-- **Usage tab:** `types`, `states`, `sizing`, `icons`, `positioning`, `content`, `other`
-- **Accessibility tab:** `screen-readers`, `keyboard`, `focus`
+- **Usage tab:** `types`, `states`, `sizing`, `icons`, `positioning`, `content`, `feedback`, `usage`, `interaction`, `forms`, `layout`, `performance`, `other`
+- **Accessibility tab:** `accessibility`, `screen-readers`, `keyboard`, `focus`
 
-The schema in `config.ts` accepts additional topic values (usage, interaction, forms, layout, performance, accessibility, feedback), but any guidance using those topics will be **silently filtered out** and won't render on the page. Stick to the values above.
+### Foundations (`src/content/foundations/*.mdx`)
+
+Design system knowledge documents: principles, anti-patterns, user type guidance. These are reference documents, not atomic items like guidance.
+
+```yaml
+---
+id: principles
+title: Design Principles
+description: Core design and development principles for teams building with the GoA Design System
+category: design # design | development | accessibility
+tags: [government-service, accessibility, component-first]
+status: published # published | draft | deprecated
+---
+```
+
+The MDX body contains the actual content as structured markdown (headings, lists, etc.). Currently five files: `principles.mdx`, `anti-patterns.mdx`, `user-types.mdx`, `governance.mdx`, `responsive.mdx`.
+
+No website pages render this collection yet. It exists for downstream consumers (generators, MCP) and can be wired to pages in the future.
 
 ### Examples (`src/content/examples/*/`)
 
@@ -333,6 +350,20 @@ This requires the dev server to be running (`npm run dev`). Images are saved as 
 ### Update a configuration preview
 
 Edit the relevant file in `src/data/configurations/<slug>.ts`. Each configuration has an `id`, `name`, and `code` with React/Angular/Web Components snippets.
+
+### Format example and configuration code
+
+Code examples must be formatted before merging. Format the configuration and example files with Prettier:
+
+```bash
+# Format all configuration files
+prettier --write docs/src/data/configurations/**/*.ts
+
+# Format all example files
+prettier --write docs/src/content/examples/**/*.{tsx,ts,html}
+```
+
+For code snippets inside template strings (e.g., `` react: `<GoabButton>...</GoabButton>` ``), manually format the content and verify it looks correct on the docs website before merging.
 
 ### Add/update a component thumbnail
 

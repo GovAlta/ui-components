@@ -1,0 +1,111 @@
+<h2>Accordion</h2>
+
+<h3>Basic</h3>
+<goab-accordion heading="What documents do I need?">
+  You will need to provide proof of identity, proof of address,
+  and any relevant supporting documentation.
+</goab-accordion>
+
+<h3>Open by default</h3>
+<goab-accordion heading="Important information" [open]="true">
+  This content is visible by default when the page loads.
+</goab-accordion>
+
+<h3>With secondary text</h3>
+<goab-accordion heading="Application requirements" secondaryText="Updated Jan 2024">
+  Review the latest requirements before submitting your application.
+</goab-accordion>
+
+<h3>Heading sizes</h3>
+<goab-accordion heading="Small heading" headingSize="small">
+  Content with small heading.
+</goab-accordion>
+<goab-accordion heading="Medium heading" headingSize="medium">
+  Content with medium heading.
+</goab-accordion>
+
+<h3>Icon position</h3>
+<goab-accordion heading="Icon on left (default)" iconPosition="left">
+  The expand/collapse icon is on the left.
+</goab-accordion>
+<goab-accordion heading="Icon on right" iconPosition="right">
+  The expand/collapse icon is on the right.
+</goab-accordion>
+
+<h3>Multiple accordions</h3>
+<goab-accordion heading="How do I apply?">
+  Submit your application online through our portal.
+</goab-accordion>
+<goab-accordion heading="What are the eligibility requirements?">
+  You must be an Alberta resident and meet the program criteria.
+</goab-accordion>
+<goab-accordion heading="How long does processing take?">
+  Applications are typically processed within 10 business days.
+</goab-accordion>
+
+<h2>Examples</h2>
+
+<h3>Expand or collapse part of a form</h3>
+<goab-text as="h3" mt="none" mb="m">Review your application</goab-text>
+
+<goab-accordion heading="Referral details" [headingContent]="importantBadge">
+  <ng-template #importantBadge>
+    <goab-badge type="important" content="Updated"></goab-badge>
+  </ng-template>
+  <dl class="accordion-example">
+    <dt>Date of referral</dt>
+    <dd>January 27, 2021</dd>
+    <dt>Work safety concerns</dt>
+    <dd>None</dd>
+    <dt>Type of referral</dt>
+    <dd>Word of mouth, internet search</dd>
+    <dt>Intake received from another site</dt>
+    <dd>Yes</dd>
+  </dl>
+</goab-accordion>
+
+<goab-accordion heading="Contact information">
+  <dl class="accordion-example">
+    <dt>Name</dt>
+    <dd>Joan Smith</dd>
+    <dt>Contact preference</dt>
+    <dd>Text message</dd>
+  </dl>
+</goab-accordion>
+
+<h3>Hide and show many sections of information</h3>
+<goab-button type="tertiary" size="compact" mb="m" (onClick)="onClick()">
+  {{ accordionStatus }}
+</goab-button>
+
+<goab-accordion
+  heading="How do I create an account?"
+  headingSize="medium"
+  [open]="expandedList[0]"
+  (onChange)="toggleAccordion(0, $event)">
+  To create an account you will need to contact your office admin.
+</goab-accordion>
+
+<goab-accordion
+  heading="What verification is needed to sign documents digitally?"
+  headingSize="medium"
+  [open]="expandedList[1]"
+  (onChange)="toggleAccordion(1, $event)">
+  You will need to verify your identity through our two factor authentication in addition to the digital signature.
+</goab-accordion>
+
+<goab-accordion
+  heading="Can I track the status of my service requests online?"
+  headingSize="medium"
+  [open]="expandedList[2]"
+  (onChange)="toggleAccordion(2, $event)">
+  Yes, you can see the status of your application on the main service dashboard when you login. You will receive updates and notifications in your email as your request progresses.
+</goab-accordion>
+
+<goab-accordion
+  heading="Are there accessibility features for people with disabilities?"
+  headingSize="medium"
+  [open]="expandedList[3]"
+  (onChange)="toggleAccordion(3, $event)">
+  Yes, our digital service is designed with accessibility in mind. <a href="#">More information on accessibility.</a>
+</goab-accordion>

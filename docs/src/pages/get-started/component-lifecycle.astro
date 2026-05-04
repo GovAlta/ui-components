@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Component Lifecycle
  *
@@ -22,7 +23,7 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
 
   <p>
     To request a new component or propose an enhancement, follow the
-    <a href="/get-started/contribute">design contribution process</a>.
+    <a href={withBase(`/get-started/contribute`)}>design contribution process</a>.
   </p>
   <goa-text as="h2" id="experimental" version="2" size="heading-m">Experimental</goa-text>
   <p>

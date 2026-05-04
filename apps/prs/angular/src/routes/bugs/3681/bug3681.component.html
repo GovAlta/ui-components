@@ -1,0 +1,43 @@
+<div>
+  <h1>3681 - Dropdown refinements</h1>
+  <p>
+    <a
+      href="https://github.com/GovAlta/ui-components/issues/3681"
+      target="_blank"
+      rel="noopener"
+    >
+      View on GitHub
+    </a>
+  </p>
+  <p>
+    Four menu option color states need fixing: Default (not chosen, not hovered),
+    Hovered (not chosen), Currently chosen (not hovered), Currently chosen + hovered.
+  </p>
+
+  <h2>Dropdown with pre-selected value</h2>
+  <p>
+    Open the dropdown and inspect the 4 states: 1) Default items (not Red),
+    2) Hover a non-chosen item, 3) The chosen item (Red), 4) Hover the chosen item.
+  </p>
+  <goab-form-item label="Favorite color">
+    <goab-dropdown [value]="value" (onChange)="handleChange($event)">
+      <goab-dropdown-item value="red" label="Red"></goab-dropdown-item>
+      <goab-dropdown-item value="blue" label="Blue"></goab-dropdown-item>
+      <goab-dropdown-item value="green" label="Green"></goab-dropdown-item>
+      <goab-dropdown-item value="yellow" label="Yellow"></goab-dropdown-item>
+      <goab-dropdown-item value="purple" label="Purple"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+
+  <h2>Dropdown with no initial value</h2>
+  <p>All items should show as default state. Select one to see the chosen state.</p>
+  <goab-form-item label="Select a province">
+    <goab-dropdown>
+      <goab-dropdown-item value="ab" label="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item value="bc" label="British Columbia"></goab-dropdown-item>
+      <goab-dropdown-item value="sk" label="Saskatchewan"></goab-dropdown-item>
+      <goab-dropdown-item value="mb" label="Manitoba"></goab-dropdown-item>
+      <goab-dropdown-item value="on" label="Ontario"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</div>

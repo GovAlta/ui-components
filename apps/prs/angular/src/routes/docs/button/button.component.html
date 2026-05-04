@@ -1,0 +1,65 @@
+<h2>Button</h2>
+
+<h3>Primary button</h3>
+<goab-button>Submit</goab-button>
+
+<h3>Types</h3>
+<goab-button type="primary">Primary</goab-button>
+<goab-button type="secondary">Secondary</goab-button>
+<goab-button type="tertiary">Tertiary</goab-button>
+
+<h3>Sizes</h3>
+<goab-button size="normal">Normal</goab-button>
+<goab-button size="compact">Compact</goab-button>
+
+<h3>With icons</h3>
+<div><goab-button leadingIcon="add" mb="m">Add item</goab-button></div>
+<div><goab-button trailingIcon="arrow-forward" mb="m">Next</goab-button></div>
+<div><goab-button leadingIcon="pencil">Edit</goab-button></div>
+
+<h3>Destructive</h3>
+<goab-button variant="destructive">Primary destructive</goab-button>
+<goab-button variant="destructive" type="secondary">Secondary destructive</goab-button>
+<goab-button variant="destructive" type="tertiary">Tertiary destructive</goab-button>
+
+<h3>Inverse</h3>
+<div style="background-color: var(--goa-color-greyscale-700); padding: var(--goa-space-l);">
+  <goab-button variant="inverse">Primary inverse</goab-button>
+  <goab-button variant="inverse" type="secondary">Secondary inverse</goab-button>
+  <goab-button variant="inverse" type="tertiary">Tertiary inverse</goab-button>
+</div>
+
+<h3>Disabled</h3>
+<goab-button disabled="true">Disabled primary</goab-button>
+<goab-button type="secondary" disabled="true">Disabled secondary</goab-button>
+<goab-button type="tertiary" disabled="true">Disabled tertiary</goab-button>
+
+<h2>Examples</h2>
+
+<h3>Button with icon</h3>
+<goab-button-group alignment="start">
+  <goab-button leadingIcon="arrow-back">Go back</goab-button>
+  <goab-button trailingIcon="arrow-forward">Continue</goab-button>
+  <goab-button type="secondary" leadingIcon="add">Add item</goab-button>
+</goab-button-group>
+
+<h3>Disabled button with a required field</h3>
+<form>
+  <goab-form-item label="Name" requirement="required">
+    <goab-input
+      name="input"
+      type="text"
+      (onChange)="onInputChange($event)"
+      [value]="inputValue"
+      width="100%">
+    </goab-input>
+  </goab-form-item>
+  <goab-button-group alignment="start" mt="xl">
+    <goab-button [disabled]="isDisabled" (onClick)="onConfirm()">
+      Confirm
+    </goab-button>
+    <goab-button type="secondary" (onClick)="onCancel()">
+      Cancel
+    </goab-button>
+  </goab-button-group>
+</form>

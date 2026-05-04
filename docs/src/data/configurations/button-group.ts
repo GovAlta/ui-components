@@ -21,11 +21,11 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <GoabButton>Submit</GoabButton>
   <GoabButton type="secondary">Cancel</GoabButton>
 </GoabButtonGroup>`,
-        angular: `<goab-button-group>
+        angular: `<goab-button-group alignment="start">
   <goab-button>Submit</goab-button>
   <goab-button type="secondary">Cancel</goab-button>
 </goab-button-group>`,
-        webComponents: `<goa-button-group>
+        webComponents: `<goa-button-group alignment="start">
   <goa-button version="2">Submit</goa-button>
   <goa-button version="2" type="secondary">Cancel</goa-button>
 </goa-button-group>`,
@@ -107,11 +107,11 @@ export const buttonGroupConfigurations: ComponentConfigurations = {
   <GoabButton size="compact">Continue</GoabButton>
   <GoabButton type="secondary" size="compact">Back</GoabButton>
 </GoabButtonGroup>`,
-        angular: `<goab-button-group gap="compact">
+        angular: `<goab-button-group alignment="start" gap="compact">
   <goab-button size="compact">Continue</goab-button>
   <goab-button type="secondary" size="compact">Back</goab-button>
 </goab-button-group>`,
-        webComponents: `<goa-button-group gap="compact">
+        webComponents: `<goa-button-group alignment="start" gap="compact">
   <goa-button version="2" size="compact">Continue</goa-button>
   <goa-button version="2" type="secondary" size="compact">Back</goa-button>
 </goa-button-group>`,
@@ -141,7 +141,7 @@ handleAction(event: GoabMenuButtonOnActionDetail) {
   console.log("Action selected:", event.action);
 }
 
-<goab-button-group>
+<goab-button-group alignment="start">
   <goab-button>Submit</goab-button>
   <goab-button type="secondary">Save draft</goab-button>
   <goab-menu-button text="More" type="tertiary" (onAction)="handleAction($event)">
@@ -151,7 +151,7 @@ handleAction(event: GoabMenuButtonOnActionDetail) {
     <goab-menu-action text="Delete" action="delete"></goab-menu-action>
   </goab-menu-button>
 </goab-button-group>`,
-        webComponents: `<goa-button-group>
+        webComponents: `<goa-button-group alignment="start">
   <goa-button version="2">Submit</goa-button>
   <goa-button version="2" type="secondary">Save draft</goa-button>
   <goa-menu-button text="More" type="tertiary">

@@ -16,49 +16,83 @@ export function ReviewAndAction() {
   return (
     <GoabGrid minChildWidth="315px">
       <GoabContainer accent="thin" type="non-interactive">
-        <GoabText size="heading-m" mt="none" mb="m">Appearance details</GoabText>
+        <GoabText size="heading-m" mt="none" mb="m">
+          Appearance details
+        </GoabText>
         <GoabGrid minChildWidth="200px" gap="m">
           <GoabBlock direction="column" gap="xs">
-            <GoabText size="body-s" color="secondary" mt="none" mb="none">Accused name</GoabText>
-            <GoabText size="body-m" mt="none" mb="none">Doe, John Scott</GoabText>
+            <GoabText size="body-s" color="secondary" mt="none" mb="none">
+              Accused name
+            </GoabText>
+            <GoabText size="body-m" mt="none" mb="none">
+              Doe, John Scott
+            </GoabText>
           </GoabBlock>
 
           <GoabBlock direction="column" gap="xs">
-            <GoabText size="body-s" color="secondary" mt="none" mb="none">Date of birth</GoabText>
-            <GoabText size="body-m" mt="none" mb="none">Mar 14, 2021</GoabText>
+            <GoabText size="body-s" color="secondary" mt="none" mb="none">
+              Date of birth
+            </GoabText>
+            <GoabText size="body-m" mt="none" mb="none">
+              Mar 14, 2021
+            </GoabText>
           </GoabBlock>
 
           <GoabBlock direction="column" gap="xs">
-            <GoabText size="body-s" color="secondary" mt="none" mb="none">Court location</GoabText>
-            <GoabText size="body-m" mt="none" mb="none">Calgary</GoabText>
+            <GoabText size="body-s" color="secondary" mt="none" mb="none">
+              Court location
+            </GoabText>
+            <GoabText size="body-m" mt="none" mb="none">
+              Calgary
+            </GoabText>
           </GoabBlock>
 
           <GoabBlock direction="column" gap="xs">
-            <GoabText size="body-s" color="secondary" mt="none" mb="none">Upcoming appearance date(s)</GoabText>
-            <GoabText size="body-m" mt="none" mb="none">Sep 20, 2021</GoabText>
+            <GoabText size="body-s" color="secondary" mt="none" mb="none">
+              Upcoming appearance date{"(s)"}
+            </GoabText>
+            <GoabText size="body-m" mt="none" mb="none">
+              Sep 20, 2021
+            </GoabText>
           </GoabBlock>
         </GoabGrid>
 
-        <GoabText size="heading-xs" mt="l" mb="s">Docket number(s) &amp; charges</GoabText>
+        <GoabText size="heading-xs" mt="l" mb="s">
+          Docket number{"(s)"} &amp; charges
+        </GoabText>
         <GoabContainer type="non-interactive" padding="compact">
-          <GoabText size="heading-xs" mt="none" mb="xs">1) 12345678</GoabText>
-          <GoabText size="body-m" mt="none" mb="none">CC 334(1) - Theft under $5000</GoabText>
-          <GoabText size="body-m" mt="none" mb="none">CC 268(1) - Aggravated assault</GoabText>
+          <GoabText size="heading-xs" mt="none" mb="xs">
+            {"1) 12345678"}
+          </GoabText>
+          <GoabText size="body-m" mt="none" mb="none">
+            {"CC 334(1) - Theft under $5000"}
+          </GoabText>
+          <GoabText size="body-m" mt="none" mb="none">
+            {"CC 268(1) - Aggravated assault"}
+          </GoabText>
         </GoabContainer>
 
         <GoabContainer type="non-interactive" padding="compact">
-          <GoabText size="heading-xs" mt="none" mb="xs">2) 12345678</GoabText>
-          <GoabText size="body-m" mt="none" mb="none">CC 334(1) - Theft under $5000</GoabText>
-          <GoabText size="body-m" mt="none" mb="none">CC 268(1) - Aggravated assault</GoabText>
+          <GoabText size="heading-xs" mt="none" mb="xs">
+            {"2) 12345678"}
+          </GoabText>
+          <GoabText size="body-m" mt="none" mb="none">
+            {"CC 334(1) - Theft under $5000"}
+          </GoabText>
+          <GoabText size="body-m" mt="none" mb="none">
+            {"CC 268(1) - Aggravated assault"}
+          </GoabText>
         </GoabContainer>
       </GoabContainer>
 
       <GoabContainer accent="thin" width="content">
         <form>
-          <GoabText size="heading-m" mt="none" mb="m">Adjournment request</GoabText>
+          <GoabText size="heading-m" mt="none" mb="m">
+            Adjournment request
+          </GoabText>
           <GoabText size="body-m" mt="none" mb="none">
-            Keep track of the individuals who are placed in lodges and may
-            qualify for the Lodge Assistance Program subsidy.
+            Keep track of the individuals who are placed in lodges and may qualify for the
+            Lodge Assistance Program subsidy.
           </GoabText>
 
           <GoabFormItem label="Case history and new request" mt="l">
@@ -77,7 +111,13 @@ export function ReviewAndAction() {
           </GoabFormItem>
 
           <GoabFormItem label="Message" mt="l">
-            <GoabTextArea name="message" rows={5} width="100%" value="" onChange={() => {}} />
+            <GoabTextArea
+              name="message"
+              rows={5}
+              width="100%"
+              value=""
+              onChange={() => {}}
+            />
           </GoabFormItem>
 
           <GoabButton mt="xl" onClick={() => {}}>

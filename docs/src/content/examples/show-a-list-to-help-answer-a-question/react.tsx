@@ -18,7 +18,8 @@ export function ShowAListToHelpAnswerAQuestion() {
       <GoabFormItem
         label="Do you have additional education expenses?"
         helpText="You can request funding for these now or at any time during your program."
-        mb="m">
+        mb="m"
+      >
         <GoabRadioGroup name="additional" onChange={handleChange}>
           <GoabRadioItem label="Yes" value="yes" name="additional" />
           <GoabRadioItem label="No" value="no" name="additional" />

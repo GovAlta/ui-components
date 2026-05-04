@@ -16,18 +16,18 @@
 </goa-block>
 
 <script>
-  const copyBtn = document.getElementById('copy-btn');
-  const tooltip = document.getElementById('copy-tooltip');
+  const copyBtn = document.getElementById("copy-btn");
+  const tooltip = document.getElementById("copy-tooltip");
 
   function copyCode() {
     const codeToCopy = "$goa-color-interactive-default";
     navigator.clipboard.writeText(codeToCopy).then(() => {
-      tooltip.setAttribute('content', 'Copied');
+      tooltip.setAttribute("content", "Copied");
       setTimeout(() => {
-        tooltip.setAttribute('content', 'Copy?');
+        tooltip.setAttribute("content", "Copy?");
       }, 1000);
     });
   }
 
-  copyBtn.addEventListener('_click', copyCode);
+  copyBtn.addEventListener("_click", copyCode);
 </script>

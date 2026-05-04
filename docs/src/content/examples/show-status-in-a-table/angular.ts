@@ -16,7 +16,7 @@ export class ShowStatusInATableComponent {
     { type: "emergency", content: "Failed" },
     { type: "success", content: "Complete" },
     { type: "information", content: "In progress" },
-    { type: "midtone", content: "Closed" },
+    { type: "default", content: "Closed" },
     { type: "success", content: "Complete" },
   ];
 

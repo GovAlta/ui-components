@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Foundations - Style guide - Layout
  *
@@ -97,16 +98,16 @@ import FoundationsSupportCallout from "../../../components/FoundationsSupportCal
     </ul>
   </goa-text>
   <goa-text size="body-m" mt="none" mb="l">
-    <a href="/examples/public-form">View Public form documentation</a>
+    <a href={withBase(`/examples/public-form`)}>View Public form documentation</a>
   </goa-text>
   <img
-    src="/images/foundations/style-guide/public-form-1.svg"
+    src={withBase(`/images/foundations/style-guide/public-form-1.svg`)}
     alt="Public form start page"
     width="500"
     height="592"
   />
   <img
-    src="/images/foundations/style-guide/public-form-2.svg"
+    src={withBase(`/images/foundations/style-guide/public-form-2.svg`)}
     alt="Public form example question"
     width="500"
     height="246"
@@ -155,22 +156,22 @@ import FoundationsSupportCallout from "../../../components/FoundationsSupportCal
     </ul>
   </goa-text>
   <goa-text size="body-m" mt="none" mb="l">
-    <a href="/examples/workspace">View Workspace documentation</a>
+    <a href={withBase(`/examples/workspace`)}>View Workspace documentation</a>
   </goa-text>
   <img
-    src="/images/foundations/style-guide/workspace-1.svg"
+    src={withBase(`/images/foundations/style-guide/workspace-1.svg`)}
     alt="Workspace table view"
     width="500"
     height="324"
   />
   <img
-    src="/images/foundations/style-guide/workspace-2.svg"
+    src={withBase(`/images/foundations/style-guide/workspace-2.svg`)}
     alt="Workspace dashboard view"
     width="500"
     height="278"
   /><br />
   <img
-    src="/images/foundations/style-guide/workspace-3.svg"
+    src={withBase(`/images/foundations/style-guide/workspace-3.svg`)}
     alt="Workspace list view"
     width="164"
     height="452"

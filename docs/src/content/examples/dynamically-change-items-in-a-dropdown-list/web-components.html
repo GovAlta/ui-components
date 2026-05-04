@@ -1,6 +1,16 @@
-<div style="padding: 40px;">
-  <goa-form-item version="2" label="Size" requirement="optional" helptext="Choose the size to change the list below">
-    <goa-dropdown version="2" id="parent-dropdown" placeholder="Select a value" name="parent">
+<div style="padding: 40px">
+  <goa-form-item
+    version="2"
+    label="Size"
+    requirement="optional"
+    helptext="Choose the size to change the list below"
+  >
+    <goa-dropdown
+      version="2"
+      id="parent-dropdown"
+      placeholder="Select a value"
+      name="parent"
+    >
       <goa-dropdown-item value="All" label="All"></goa-dropdown-item>
       <goa-dropdown-item value="Big" label="Big"></goa-dropdown-item>
       <goa-dropdown-item value="Small" label="Small"></goa-dropdown-item>
@@ -8,38 +18,43 @@
   </goa-form-item>
 
   <goa-form-item version="2" label="Items" requirement="optional" mt="xl">
-    <goa-dropdown version="2" id="child-dropdown" placeholder="Select a value" name="children">
+    <goa-dropdown
+      version="2"
+      id="child-dropdown"
+      placeholder="Select a value"
+      name="children"
+    >
     </goa-dropdown>
   </goa-form-item>
 </div>
 
 <script>
-  const parentDropdown = document.getElementById('parent-dropdown');
-  const childDropdown = document.getElementById('child-dropdown');
+  const parentDropdown = document.getElementById("parent-dropdown");
+  const childDropdown = document.getElementById("child-dropdown");
 
-  const childrenAll = ['Bus', 'Elephant', 'Key', 'Pen', 'Watch', 'Truck'];
-  const childrenBig = ['Elephant', 'Truck', 'Bus'];
-  const childrenSmall = ['Key', 'Pen', 'Watch'];
+  const childrenAll = ["Bus", "Elephant", "Key", "Pen", "Watch", "Truck"];
+  const childrenBig = ["Elephant", "Truck", "Bus"];
+  const childrenSmall = ["Key", "Pen", "Watch"];
 
   function updateChildren(items) {
-    childDropdown.innerHTML = '';
-    items.forEach(item => {
-      const dropdownItem = document.createElement('goa-dropdown-item');
-      dropdownItem.setAttribute('value', item);
-      dropdownItem.setAttribute('label', item);
-      dropdownItem.setAttribute('mount', 'reset');
+    childDropdown.innerHTML = "";
+    items.forEach((item) => {
+      const dropdownItem = document.createElement("goa-dropdown-item");
+      dropdownItem.setAttribute("value", item);
+      dropdownItem.setAttribute("label", item);
+      dropdownItem.setAttribute("mount", "reset");
       childDropdown.appendChild(dropdownItem);
     });
   }
 
-  parentDropdown.addEventListener('_change', (e) => {
+  parentDropdown.addEventListener("_change", (e) => {
     const value = e.detail.value;
-    if (value === 'All') updateChildren(childrenAll);
-    else if (value === 'Big') updateChildren(childrenBig);
+    if (value === "All") updateChildren(childrenAll);
+    else if (value === "Big") updateChildren(childrenBig);
     else updateChildren(childrenSmall);
   });
 
-  childDropdown.addEventListener('_change', () => {
-    console.log('Item selected');
+  childDropdown.addEventListener("_change", () => {
+    console.log("Item selected");
   });
 </script>

@@ -18,8 +18,14 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: "Basic example",
       description: "Simple dropdown with options",
       code: {
-        react: `<GoabFormItem label="Province or territory" mb="l">
-  <GoabDropdown name="province">
+        react: `const [province, setProvince] = useState<string | undefined>();
+
+<GoabFormItem label="Province or territory" mb="l">
+  <GoabDropdown
+    name="province"
+    value={province}
+    onChange={(detail) => setProvince(detail.value)}
+  >
     <GoabDropdownItem value="Alberta" />
     <GoabDropdownItem value="British Columbia" />
     <GoabDropdownItem value="Manitoba" />
@@ -35,23 +41,55 @@ export const dropdownConfigurations: ComponentConfigurations = {
     <GoabDropdownItem value="Yukon" />
   </GoabDropdown>
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Province or territory" mb="l">
-  <goab-dropdown name="province">
-    <goab-dropdown-item value="Alberta"></goab-dropdown-item>
-    <goab-dropdown-item value="British Columbia"></goab-dropdown-item>
-    <goab-dropdown-item value="Manitoba"></goab-dropdown-item>
-    <goab-dropdown-item value="New Brunswick"></goab-dropdown-item>
-    <goab-dropdown-item value="Newfoundland and Labrador"></goab-dropdown-item>
-    <goab-dropdown-item value="Nova Scotia"></goab-dropdown-item>
-    <goab-dropdown-item value="Northwest Territories"></goab-dropdown-item>
-    <goab-dropdown-item value="Nunavut"></goab-dropdown-item>
-    <goab-dropdown-item value="Ontario"></goab-dropdown-item>
-    <goab-dropdown-item value="Prince Edward Island"></goab-dropdown-item>
-    <goab-dropdown-item value="Quebec"></goab-dropdown-item>
-    <goab-dropdown-item value="Saskatchewan"></goab-dropdown-item>
-    <goab-dropdown-item value="Yukon"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      province: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Province or territory" mb="l">
+    <goab-dropdown name="province" formControlName="province">
+      <goab-dropdown-item value="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item value="British Columbia"></goab-dropdown-item>
+      <goab-dropdown-item value="Manitoba"></goab-dropdown-item>
+      <goab-dropdown-item value="Ontario"></goab-dropdown-item>
+      <goab-dropdown-item value="Quebec"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  province = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    this.province = event.value as string;
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="Province or territory" mb="l">
+    <goab-dropdown
+      name="province"
+      [(ngModel)]="province"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item value="British Columbia"></goab-dropdown-item>
+      <goab-dropdown-item value="Manitoba"></goab-dropdown-item>
+      <goab-dropdown-item value="Ontario"></goab-dropdown-item>
+      <goab-dropdown-item value="Quebec"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
         webComponents: `<goa-form-item version="2" label="Province or territory" mb="l">
   <goa-dropdown version="2" name="province">
     <goa-dropdown-item value="Alberta"></goa-dropdown-item>
@@ -76,20 +114,70 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: "With custom placeholder",
       description: "Dropdown with placeholder text when no selection",
       code: {
-        react: `<GoabFormItem label="How would you like to be contacted?" mb="l">
-  <GoabDropdown name="contactMethod" placeholder="—Select contact method—">
+        react: `const [contactMethod, setContactMethod] = useState<string | undefined>();
+
+<GoabFormItem label="How would you like to be contacted?" mb="l">
+  <GoabDropdown
+    name="contactMethod"
+    placeholder="—Select contact method—"
+    value={contactMethod}
+    onChange={(detail) => setContactMethod(detail.value)}
+  >
     <GoabDropdownItem value="Email" />
     <GoabDropdownItem value="Phone" />
     <GoabDropdownItem value="Mail" />
   </GoabDropdown>
 </GoabFormItem>`,
-        angular: `<goab-form-item label="How would you like to be contacted?" mb="l">
-  <goab-dropdown name="contactMethod" placeholder="—Select contact method—">
-    <goab-dropdown-item value="Email"></goab-dropdown-item>
-    <goab-dropdown-item value="Phone"></goab-dropdown-item>
-    <goab-dropdown-item value="Mail"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      contactMethod: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="How would you like to be contacted?" mb="l">
+    <goab-dropdown
+      name="contactMethod"
+      placeholder="—Select contact method—"
+      formControlName="contactMethod"
+    >
+      <goab-dropdown-item value="Email"></goab-dropdown-item>
+      <goab-dropdown-item value="Phone"></goab-dropdown-item>
+      <goab-dropdown-item value="Mail"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  contactMethod = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    this.contactMethod = event.value as string;
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="How would you like to be contacted?" mb="l">
+    <goab-dropdown
+      name="contactMethod"
+      placeholder="—Select contact method—"
+      [(ngModel)]="contactMethod"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="Email"></goab-dropdown-item>
+      <goab-dropdown-item value="Phone"></goab-dropdown-item>
+      <goab-dropdown-item value="Mail"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
         webComponents: `<goa-form-item version="2" label="How would you like to be contacted?" mb="l">
   <goa-dropdown version="2" name="contactMethod" placeholder="—Select contact method—">
     <goa-dropdown-item value="Email"></goa-dropdown-item>
@@ -155,57 +243,158 @@ export const dropdownConfigurations: ComponentConfigurations = {
     <GoabDropdownItem value="Whitecourt" />
   </GoabDropdown>
 </GoabFormItem>`,
-        angular: `<goab-form-item label="What city do you live in?" mb="l">
-  <goab-dropdown name="city" [filterable]="true" leadingIcon="search" maxHeight="400px">
-    <goab-dropdown-item value="Airdrie"></goab-dropdown-item>
-    <goab-dropdown-item value="Athabasca"></goab-dropdown-item>
-    <goab-dropdown-item value="Banff"></goab-dropdown-item>
-    <goab-dropdown-item value="Barrhead"></goab-dropdown-item>
-    <goab-dropdown-item value="Beaumont"></goab-dropdown-item>
-    <goab-dropdown-item value="Bonnyville"></goab-dropdown-item>
-    <goab-dropdown-item value="Brooks"></goab-dropdown-item>
-    <goab-dropdown-item value="Calgary"></goab-dropdown-item>
-    <goab-dropdown-item value="Camrose"></goab-dropdown-item>
-    <goab-dropdown-item value="Canmore"></goab-dropdown-item>
-    <goab-dropdown-item value="Chestermere"></goab-dropdown-item>
-    <goab-dropdown-item value="Cochrane"></goab-dropdown-item>
-    <goab-dropdown-item value="Cold Lake"></goab-dropdown-item>
-    <goab-dropdown-item value="Drayton Valley"></goab-dropdown-item>
-    <goab-dropdown-item value="Drumheller"></goab-dropdown-item>
-    <goab-dropdown-item value="Edmonton"></goab-dropdown-item>
-    <goab-dropdown-item value="Edson"></goab-dropdown-item>
-    <goab-dropdown-item value="Fort McMurray"></goab-dropdown-item>
-    <goab-dropdown-item value="Fort Saskatchewan"></goab-dropdown-item>
-    <goab-dropdown-item value="Grande Prairie"></goab-dropdown-item>
-    <goab-dropdown-item value="High River"></goab-dropdown-item>
-    <goab-dropdown-item value="Hinton"></goab-dropdown-item>
-    <goab-dropdown-item value="Jasper"></goab-dropdown-item>
-    <goab-dropdown-item value="Lacombe"></goab-dropdown-item>
-    <goab-dropdown-item value="Leduc"></goab-dropdown-item>
-    <goab-dropdown-item value="Lethbridge"></goab-dropdown-item>
-    <goab-dropdown-item value="Lloydminster"></goab-dropdown-item>
-    <goab-dropdown-item value="Medicine Hat"></goab-dropdown-item>
-    <goab-dropdown-item value="Morinville"></goab-dropdown-item>
-    <goab-dropdown-item value="Okotoks"></goab-dropdown-item>
-    <goab-dropdown-item value="Olds"></goab-dropdown-item>
-    <goab-dropdown-item value="Peace River"></goab-dropdown-item>
-    <goab-dropdown-item value="Ponoka"></goab-dropdown-item>
-    <goab-dropdown-item value="Red Deer"></goab-dropdown-item>
-    <goab-dropdown-item value="Sherwood Park"></goab-dropdown-item>
-    <goab-dropdown-item value="Spruce Grove"></goab-dropdown-item>
-    <goab-dropdown-item value="St. Albert"></goab-dropdown-item>
-    <goab-dropdown-item value="Stettler"></goab-dropdown-item>
-    <goab-dropdown-item value="Stony Plain"></goab-dropdown-item>
-    <goab-dropdown-item value="Sylvan Lake"></goab-dropdown-item>
-    <goab-dropdown-item value="Taber"></goab-dropdown-item>
-    <goab-dropdown-item value="Vegreville"></goab-dropdown-item>
-    <goab-dropdown-item value="Vermilion"></goab-dropdown-item>
-    <goab-dropdown-item value="Wainwright"></goab-dropdown-item>
-    <goab-dropdown-item value="Westlock"></goab-dropdown-item>
-    <goab-dropdown-item value="Wetaskiwin"></goab-dropdown-item>
-    <goab-dropdown-item value="Whitecourt"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  cities = [
+    "Airdrie",
+    "Athabasca",
+    "Banff",
+    "Barrhead",
+    "Beaumont",
+    "Bonnyville",
+    "Brooks",
+    "Calgary",
+    "Camrose",
+    "Canmore",
+    "Chestermere",
+    "Cochrane",
+    "Cold Lake",
+    "Drayton Valley",
+    "Drumheller",
+    "Edmonton",
+    "Edson",
+    "Fort McMurray",
+    "Fort Saskatchewan",
+    "Grande Prairie",
+    "High River",
+    "Hinton",
+    "Jasper",
+    "Lacombe",
+    "Leduc",
+    "Lethbridge",
+    "Lloydminster",
+    "Medicine Hat",
+    "Morinville",
+    "Okotoks",
+    "Olds",
+    "Peace River",
+    "Ponoka",
+    "Red Deer",
+    "Sherwood Park",
+    "Spruce Grove",
+    "St. Albert",
+    "Stettler",
+    "Stony Plain",
+    "Sylvan Lake",
+    "Taber",
+    "Vegreville",
+    "Vermilion",
+    "Wainwright",
+    "Westlock",
+    "Wetaskiwin",
+    "Whitecourt",
+  ];
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      city: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="What city do you live in?" mb="l">
+    <goab-dropdown
+      name="city"
+      [filterable]="true"
+      leadingIcon="search"
+      maxHeight="400px"
+      formControlName="city"
+    >
+      @for (city of cities; track city) {
+      <goab-dropdown-item [value]="city"></goab-dropdown-item>
+      }
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  city = "";
+  cities = [
+    "Airdrie",
+    "Athabasca",
+    "Banff",
+    "Barrhead",
+    "Beaumont",
+    "Bonnyville",
+    "Brooks",
+    "Calgary",
+    "Camrose",
+    "Canmore",
+    "Chestermere",
+    "Cochrane",
+    "Cold Lake",
+    "Drayton Valley",
+    "Drumheller",
+    "Edmonton",
+    "Edson",
+    "Fort McMurray",
+    "Fort Saskatchewan",
+    "Grande Prairie",
+    "High River",
+    "Hinton",
+    "Jasper",
+    "Lacombe",
+    "Leduc",
+    "Lethbridge",
+    "Lloydminster",
+    "Medicine Hat",
+    "Morinville",
+    "Okotoks",
+    "Olds",
+    "Peace River",
+    "Ponoka",
+    "Red Deer",
+    "Sherwood Park",
+    "Spruce Grove",
+    "St. Albert",
+    "Stettler",
+    "Stony Plain",
+    "Sylvan Lake",
+    "Taber",
+    "Vegreville",
+    "Vermilion",
+    "Wainwright",
+    "Westlock",
+    "Wetaskiwin",
+    "Whitecourt",
+  ];
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    this.city = event.value as string;
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="What city do you live in?" mb="l">
+    <goab-dropdown
+      name="city"
+      [filterable]="true"
+      leadingIcon="search"
+      maxHeight="400px"
+      [(ngModel)]="city"
+      (onChange)="dropdownOnChange($event)"
+    >
+      @for (city of cities; track city) {
+      <goab-dropdown-item [value]="city"></goab-dropdown-item>
+      }
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
         webComponents: `<goa-form-item version="2" label="What city do you live in?" mb="l">
   <goa-dropdown version="2" name="city" filterable leadingicon="search" maxheight="400px">
     <goa-dropdown-item value="Airdrie"></goa-dropdown-item>
@@ -278,20 +467,72 @@ export const dropdownConfigurations: ComponentConfigurations = {
     <GoabDropdownItem value="opt3" label="Option 3" />
   </GoabDropdown>
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Custom dropdown" mb="l">
-  <goab-dropdown name="custom">
-    <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
-    <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
-    <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>
-<goab-form-item label="Native dropdown" mb="l">
-  <goab-dropdown name="native" [native]="true">
-    <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
-    <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
-    <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      custom: [""],
+      native: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Custom dropdown" mb="l">
+    <goab-dropdown name="custom" formControlName="custom">
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+      <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Native dropdown" mb="l">
+    <goab-dropdown name="native" [native]="true" formControlName="native">
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+      <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  custom = "";
+  native = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    console.log(event);
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="Custom dropdown" mb="l">
+    <goab-dropdown
+      name="custom"
+      [(ngModel)]="custom"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+      <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Native dropdown" mb="l">
+    <goab-dropdown
+      name="native"
+      [native]="true"
+      [(ngModel)]="native"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+      <goab-dropdown-item value="opt3" label="Option 3"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
         webComponents: `<goa-form-item version="2" label="Custom dropdown" mb="l">
   <goa-dropdown version="2" name="custom">
     <goa-dropdown-item value="opt1" label="Option 1"></goa-dropdown-item>
@@ -320,27 +561,83 @@ export const dropdownConfigurations: ComponentConfigurations = {
     <GoabDropdownItem value="Approved" />
   </GoabDropdown>
 </GoabFormItem>
-<GoabFormItem label="Compact size" labelSize="compact" mb="l">
+<GoabFormItem label="Compact size" mb="l">
   <GoabDropdown name="sizeCompact" size="compact">
     <GoabDropdownItem value="Draft" />
     <GoabDropdownItem value="In review" />
     <GoabDropdownItem value="Approved" />
   </GoabDropdown>
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Default size" mb="l">
-  <goab-dropdown name="sizeDefault">
-    <goab-dropdown-item value="Draft"></goab-dropdown-item>
-    <goab-dropdown-item value="In review"></goab-dropdown-item>
-    <goab-dropdown-item value="Approved"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>
-<goab-form-item label="Compact size" labelSize="compact" mb="l">
-  <goab-dropdown name="sizeCompact" size="compact">
-    <goab-dropdown-item value="Draft"></goab-dropdown-item>
-    <goab-dropdown-item value="In review"></goab-dropdown-item>
-    <goab-dropdown-item value="Approved"></goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      sizeDefault: [""],
+      sizeCompact: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Default size" mb="l">
+    <goab-dropdown name="sizeDefault" formControlName="sizeDefault">
+      <goab-dropdown-item value="Draft"></goab-dropdown-item>
+      <goab-dropdown-item value="In review"></goab-dropdown-item>
+      <goab-dropdown-item value="Approved"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Compact size" mb="l">
+    <goab-dropdown
+      name="sizeCompact"
+      size="compact"
+      formControlName="sizeCompact"
+    >
+      <goab-dropdown-item value="Draft"></goab-dropdown-item>
+      <goab-dropdown-item value="In review"></goab-dropdown-item>
+      <goab-dropdown-item value="Approved"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  sizeDefault = "";
+  sizeCompact = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    console.log(event);
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="Default size" mb="l">
+    <goab-dropdown
+      name="sizeDefault"
+      [(ngModel)]="sizeDefault"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="Draft"></goab-dropdown-item>
+      <goab-dropdown-item value="In review"></goab-dropdown-item>
+      <goab-dropdown-item value="Approved"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item label="Compact size" mb="l">
+    <goab-dropdown
+      name="sizeCompact"
+      size="compact"
+      [(ngModel)]="sizeCompact"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="Draft"></goab-dropdown-item>
+      <goab-dropdown-item value="In review"></goab-dropdown-item>
+      <goab-dropdown-item value="Approved"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
         webComponents: `<goa-form-item version="2" label="Default size" mb="l">
   <goa-dropdown version="2" name="sizeDefault">
     <goa-dropdown-item value="Draft"></goa-dropdown-item>
@@ -348,7 +645,7 @@ export const dropdownConfigurations: ComponentConfigurations = {
     <goa-dropdown-item value="Approved"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
-<goa-form-item version="2" label="Compact size" labelsize="compact" mb="l">
+<goa-form-item version="2" label="Compact size" mb="l">
   <goa-dropdown version="2" name="sizeCompact" size="compact">
     <goa-dropdown-item value="Draft"></goa-dropdown-item>
     <goa-dropdown-item value="In review"></goa-dropdown-item>
@@ -362,40 +659,118 @@ export const dropdownConfigurations: ComponentConfigurations = {
       name: "States",
       description: "Disabled and error states",
       code: {
-        react: `<GoabFormItem label="Disabled dropdown" mb="l">
+        react: `const [errorValue, setErrorValue] = useState<string | undefined>();
+
+<GoabFormItem label="Disabled dropdown" mb="l">
   <GoabDropdown name="disabled" disabled value="AB">
-    <GoabDropdownItem value="AB">Alberta</GoabDropdownItem>
-    <GoabDropdownItem value="BC">British Columbia</GoabDropdownItem>
+    <GoabDropdownItem value="AB" label="Alberta" />
+    <GoabDropdownItem value="BC" label="British Columbia" />
   </GoabDropdown>
 </GoabFormItem>
 <GoabFormItem label="Dropdown with error" error="Please select an option" mb="l">
-  <GoabDropdown name="error" error placeholder="Select an option">
-    <GoabDropdownItem value="opt1">Option 1</GoabDropdownItem>
-    <GoabDropdownItem value="opt2">Option 2</GoabDropdownItem>
+  <GoabDropdown
+    name="error"
+    error
+    placeholder="Select an option"
+    value={errorValue}
+    onChange={(detail) => setErrorValue(detail.value)}
+  >
+    <GoabDropdownItem value="opt1" label="Option 1" />
+    <GoabDropdownItem value="opt2" label="Option 2" />
   </GoabDropdown>
 </GoabFormItem>`,
-        angular: `<goab-form-item label="Disabled dropdown" mb="l">
-  <goab-dropdown name="disabled" [disabled]="true" value="AB">
-    <goab-dropdown-item value="AB">Alberta</goab-dropdown-item>
-    <goab-dropdown-item value="BC">British Columbia</goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>
-<goab-form-item label="Dropdown with error" error="Please select an option" mb="l">
-  <goab-dropdown name="error" [error]="true" placeholder="Select an option">
-    <goab-dropdown-item value="opt1">Option 1</goab-dropdown-item>
-    <goab-dropdown-item value="opt2">Option 2</goab-dropdown-item>
-  </goab-dropdown>
-</goab-form-item>`,
+        angular: [
+          {
+            title: "Reactive forms (FormControl)",
+            ts: `export class SomeOtherComponent {
+  form!: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      disabled: [{ value: "AB", disabled: true }],
+      errorValue: [""],
+    });
+  }
+}`,
+            template: `<form [formGroup]="form">
+  <goab-form-item label="Disabled dropdown" mb="l">
+    <goab-dropdown name="disabled" formControlName="disabled">
+      <goab-dropdown-item value="AB" label="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item
+        value="BC"
+        label="British Columbia"
+      ></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item
+    label="Dropdown with error"
+    error="Please select an option"
+    mb="l"
+  >
+    <goab-dropdown
+      name="error"
+      [error]="true"
+      placeholder="Select an option"
+      formControlName="errorValue"
+    >
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+          {
+            title: "Template driven (ngModel)",
+            ts: `export class SomeOtherComponent {
+  disabledValue = "AB";
+  errorValue = "";
+
+  dropdownOnChange(event: GoabDropdownOnChangeDetail) {
+    this.errorValue = event.value as string;
+  }
+}`,
+            template: `<form>
+  <goab-form-item label="Disabled dropdown" mb="l">
+    <goab-dropdown
+      name="disabled"
+      [disabled]="true"
+      [(ngModel)]="disabledValue"
+    >
+      <goab-dropdown-item value="AB" label="Alberta"></goab-dropdown-item>
+      <goab-dropdown-item
+        value="BC"
+        label="British Columbia"
+      ></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+  <goab-form-item
+    label="Dropdown with error"
+    error="Please select an option"
+    mb="l"
+  >
+    <goab-dropdown
+      name="error"
+      [error]="true"
+      placeholder="Select an option"
+      [(ngModel)]="errorValue"
+      (onChange)="dropdownOnChange($event)"
+    >
+      <goab-dropdown-item value="opt1" label="Option 1"></goab-dropdown-item>
+      <goab-dropdown-item value="opt2" label="Option 2"></goab-dropdown-item>
+    </goab-dropdown>
+  </goab-form-item>
+</form>`,
+          },
+        ],
         webComponents: `<goa-form-item version="2" label="Disabled dropdown" mb="l">
   <goa-dropdown version="2" name="disabled" disabled value="AB">
-    <goa-dropdown-item value="AB">Alberta</goa-dropdown-item>
-    <goa-dropdown-item value="BC">British Columbia</goa-dropdown-item>
+    <goa-dropdown-item value="AB" label="Alberta"></goa-dropdown-item>
+    <goa-dropdown-item value="BC" label="British Columbia"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>
 <goa-form-item version="2" label="Dropdown with error" error="Please select an option" mb="l">
   <goa-dropdown version="2" name="error" error placeholder="Select an option">
-    <goa-dropdown-item value="opt1">Option 1</goa-dropdown-item>
-    <goa-dropdown-item value="opt2">Option 2</goa-dropdown-item>
+    <goa-dropdown-item value="opt1" label="Option 1"></goa-dropdown-item>
+    <goa-dropdown-item value="opt2" label="Option 2"></goa-dropdown-item>
   </goa-dropdown>
 </goa-form-item>`,
       },

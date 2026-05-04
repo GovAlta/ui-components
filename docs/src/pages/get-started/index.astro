@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Get Started - Landing Page
  *
@@ -29,9 +30,9 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
   <goa-text as="h2" id="design-system-by-role" version="2" size="heading-m">Design system by role</goa-text>
 
   <ul>
-    <li><a href="/get-started/designers">Designer</a></li>
-    <li><a href="/get-started/developers">Developer</a></li>
-    <li><a href="/get-started/qa-testing">QA tester</a></li>
+    <li><a href={withBase(`/get-started/designers`)}>Designer</a></li>
+    <li><a href={withBase(`/get-started/developers`)}>Developer</a></li>
+    <li><a href={withBase(`/get-started/qa-testing`)}>QA tester</a></li>
   </ul>
 
   <goa-text as="h2" id="why-start-with-the-design-system" version="2" size="heading-m">Why start with the design system?</goa-text>
@@ -101,7 +102,7 @@ import DocumentationPageLayout from '../../layouts/DocumentationPageLayout.astro
   </goa-callout>
 
   <goa-link version="2" mb="m">
-    <a href="/get-started/component-lifecycle">View the design system governance process</a>
+    <a href={withBase(`/get-started/component-lifecycle`)}>View the design system governance process</a>
   </goa-link>
   <DropInCallout />
 </DocumentationPageLayout>

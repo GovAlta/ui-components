@@ -1,0 +1,52 @@
+<h2>Popover</h2>
+
+<h3>Basic popover</h3>
+<goab-popover [target]="basicTargetTpl">
+  <ng-template #basicTargetTpl>
+    <goab-button>Open popover</goab-button>
+  </ng-template>
+  <goab-text mt="none" mb="none"
+    >Popover content goes here. It can contain any content.</goab-text
+  >
+</goab-popover>
+
+<h3>Position</h3>
+<goab-popover position="above" [target]="aboveTpl">
+  <ng-template #aboveTpl><goab-button>Above</goab-button></ng-template>
+  <goab-text mt="none" mb="none"
+    >Content positioned above the trigger.</goab-text
+  >
+</goab-popover>
+<goab-popover position="below" [target]="belowTpl">
+  <ng-template #belowTpl><goab-button>Below</goab-button></ng-template>
+  <goab-text mt="none" mb="none"
+    >Content positioned below the trigger.</goab-text
+  >
+</goab-popover>
+<goab-popover position="auto" [target]="autoTpl">
+  <ng-template #autoTpl><goab-button>Auto</goab-button></ng-template>
+  <goab-text mt="none" mb="none"
+    >Automatically positions based on available space.</goab-text
+  >
+</goab-popover>
+
+<h3>With padding</h3>
+<goab-popover [padded]="true" [target]="paddedTpl">
+  <ng-template #paddedTpl><goab-button>Padded</goab-button></ng-template>
+  <goab-text mt="none" mb="none">Content with padding applied.</goab-text>
+</goab-popover>
+<goab-popover [padded]="false" [target]="noPaddingTpl">
+  <ng-template #noPaddingTpl><goab-button>No padding</goab-button></ng-template>
+  <goab-text mt="none" mb="none"
+    >Content flush with popover boundaries.</goab-text
+  >
+</goab-popover>
+
+<h3>With max width</h3>
+<goab-popover maxWidth="300px" [target]="maxWidthTargetTpl">
+  <ng-template #maxWidthTargetTpl><goab-button>More info</goab-button></ng-template>
+  <goab-text mt="none" mb="none"
+    >This popover has a maximum width of 300 pixels to control content
+    width.</goab-text
+  >
+</goab-popover>

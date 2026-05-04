@@ -10,26 +10,30 @@
 
   function showNotification(message, opts = {}) {
     const uuid = crypto.randomUUID();
-    document.body.dispatchEvent(new CustomEvent("msg", {
-      composed: true,
-      bubbles: true,
-      detail: {
-        action: "goa:temp-notification",
-        data: { message, uuid, type: "basic", ...opts }
-      }
-    }));
+    document.body.dispatchEvent(
+      new CustomEvent("msg", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          action: "goa:temp-notification",
+          data: { message, uuid, type: "basic", ...opts },
+        },
+      }),
+    );
     return uuid;
   }
 
   function dismissNotification(uuid) {
-    document.body.dispatchEvent(new CustomEvent("msg", {
-      composed: true,
-      bubbles: true,
-      detail: {
-        action: "goa:temp-notification:dismiss",
-        data: uuid
-      }
-    }));
+    document.body.dispatchEvent(
+      new CustomEvent("msg", {
+        composed: true,
+        bubbles: true,
+        detail: {
+          action: "goa:temp-notification:dismiss",
+          data: uuid,
+        },
+      }),
+    );
   }
 
   async function searchCMS() {

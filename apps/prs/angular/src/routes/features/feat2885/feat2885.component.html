@@ -90,16 +90,17 @@
       (onMarkAllRead)="handleMarkAllRead()"
       (onViewAll)="handleViewAll()"
     >
-      <goab-work-side-notification-item
-        *ngFor="let notif of notifications; trackBy: trackById"
-        [title]="notif.title"
-        [description]="notif.description"
-        [timestamp]="notif.timestamp"
-        [type]="notif.type"
-        [readStatus]="notif.readStatus"
-        [priority]="notif.priority"
-        (onClick)="handleNotificationClick(notif.id)"
-      />
+      @for (notif of notifications; track trackById($index, notif)) {
+        <goab-work-side-notification-item
+          [title]="notif.title"
+          [description]="notif.description"
+          [timestamp]="notif.timestamp"
+          [type]="notif.type"
+          [readStatus]="notif.readStatus"
+          [priority]="notif.priority"
+          (onClick)="handleNotificationClick(notif.id)"
+        />
+      }
     </goab-work-side-notification-panel>
   </ng-template>
 

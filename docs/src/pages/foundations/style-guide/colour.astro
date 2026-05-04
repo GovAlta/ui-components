@@ -1,4 +1,5 @@
 ---
+import { withBase } from '@/lib/base-url';
 /**
  * Foundations - Style guide - Colour
  *
@@ -8,6 +9,7 @@
  */
 import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
 import FoundationsSupportCallout from "../../../components/FoundationsSupportCallout.astro";
+
 
 const brandTokens = [
   "--goa-color-brand-default",
@@ -206,7 +208,7 @@ const extendedTokenGroups = [
     </ul>
   </goa-text>
   <goa-text size="body-m" mt="none" mb="xl">
-    Refer to <a href="/tokens">design tokens</a> for implementation guidance in code.
+    Refer to <a href={withBase(`/tokens`)}>design tokens</a> for implementation guidance in code.
   </goa-text>
 
   <goa-divider version="2" mt="xl" mb="xl"></goa-divider>

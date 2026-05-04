@@ -16,19 +16,19 @@
 </div>
 
 <script>
-  const stepper = document.querySelector('goa-form-stepper');
-  const pages = document.querySelector('goa-pages');
+  const stepper = document.querySelector("goa-form-stepper");
+  const pages = document.querySelector("goa-pages");
   const prevBtn = document.querySelector('goa-button[type="secondary"]');
   const nextBtn = document.querySelector('goa-button[type="primary"]');
   let step = -1;
 
-  stepper.addEventListener('_change', (e) => {
+  stepper.addEventListener("_change", (e) => {
     step = e.detail.step;
     stepper.step = step;
     pages.current = step;
   });
 
-  prevBtn.addEventListener('_click', () => {
+  prevBtn.addEventListener("_click", () => {
     if (step > 1) {
       step--;
       stepper.step = step;
@@ -36,7 +36,7 @@
     }
   });
 
-  nextBtn.addEventListener('_click', () => {
+  nextBtn.addEventListener("_click", () => {
     if (step < 4) {
       step++;
       stepper.step = step;

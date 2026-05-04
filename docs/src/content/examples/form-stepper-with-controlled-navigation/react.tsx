@@ -20,7 +20,10 @@ export function FormStepperWithControlledNavigation() {
 
   return (
     <>
-      <GoabFormStepper step={step} onChange={(event: GoabFormStepperOnChangeDetail) => setStep(event.step)}>
+      <GoabFormStepper
+        step={step}
+        onChange={(event: GoabFormStepperOnChangeDetail) => setStep(event.step)}
+      >
         <GoabFormStep text="Personal details" />
         <GoabFormStep text="Employment history" />
         <GoabFormStep text="References" />

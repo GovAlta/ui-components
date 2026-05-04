@@ -12,12 +12,20 @@ import {
   GoabWorkSideMenuGroup,
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
+import { withBase } from "@/lib/base-url";
 
 // Top-level pages (not in a group)
 const TOP_PAGES = [
   { label: "Design at GoA", url: "/foundations" },
   { label: "Accessibility", url: "/foundations/accessibility" },
   { label: "Brand guidelines", url: "/foundations/brand-guidelines" },
+];
+
+// Illustration sub-group pages (nested inside Style guide)
+const ILLUSTRATION_PAGES = [
+  { label: "Overview", url: "/foundations/style-guide/illustrations" },
+  { label: "Scene", url: "/foundations/style-guide/illustrations/scene" },
+  { label: "Spot", url: "/foundations/style-guide/illustrations/spot" },
 ];
 
 // Grouped sections with sub-pages
@@ -28,7 +36,6 @@ const PAGE_GROUPS = [
     pages: [
       { label: "Colour", url: "/foundations/style-guide/colour" },
       { label: "Iconography", url: "/foundations/style-guide/iconography" },
-      { label: "Illustration", url: "/foundations/style-guide/illustration" },
       { label: "Photography", url: "/foundations/style-guide/photography" },
       { label: "Logo", url: "/foundations/style-guide/logo" },
       { label: "Typography", url: "/foundations/style-guide/typography" },
@@ -64,6 +71,7 @@ const PAGE_GROUPS = [
 const ALL_URLS = [
   ...TOP_PAGES.map((p) => p.url),
   ...PAGE_GROUPS.flatMap((g) => g.pages.map((p) => p.url)),
+  ...ILLUSTRATION_PAGES.map((p) => p.url),
 ];
 
 interface FoundationsSubMenuProps {
@@ -96,13 +104,16 @@ export function FoundationsSubMenu({
 
       {/* Top-level pages */}
       {TOP_PAGES.map((page) => (
-        <GoabWorkSideMenuItem key={page.url} label={page.label} url={page.url} />
+        <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
       ))}
 
       {/* Grouped sections */}
       <div>
         {PAGE_GROUPS.map((group) => {
-          const containsCurrentPage = group.pages.some((p) => p.url === currentUrl);
+          const isIllustrationPage = ILLUSTRATION_PAGES.some((p) => p.url === currentUrl);
+          const containsCurrentPage =
+            group.pages.some((p) => p.url === currentUrl) ||
+            (group.slug === "style-guide" && isIllustrationPage);
 
           const handleGroupClickCapture = () => {
             if (!isOpen && onExpandMenu) {
@@ -113,13 +124,47 @@ export function FoundationsSubMenu({
           return (
             <div key={group.slug} onClickCapture={handleGroupClickCapture}>
               <GoabWorkSideMenuGroup heading={group.name} open={containsCurrentPage}>
-                {group.pages.map((page) => (
-                  <GoabWorkSideMenuItem
-                    key={page.url}
-                    label={page.label}
-                    url={page.url}
-                  />
-                ))}
+                {group.slug === "style-guide" ? (
+                  <>
+                    {/* Render pages before Illustration group */}
+                    {group.pages.slice(0, 2).map((page) => (
+                      <GoabWorkSideMenuItem
+                        key={page.url}
+                        label={page.label}
+                        url={withBase(page.url)}
+                      />
+                    ))}
+                    {/* Illustration nested group (between Iconography and Photography) */}
+                    <GoabWorkSideMenuGroup
+                      heading="Illustration"
+                      open={isIllustrationPage}
+                    >
+                      {ILLUSTRATION_PAGES.map((page) => (
+                        <GoabWorkSideMenuItem
+                          key={page.url}
+                          label={page.label}
+                          url={withBase(page.url)}
+                        />
+                      ))}
+                    </GoabWorkSideMenuGroup>
+                    {/* Render remaining pages after Illustration group */}
+                    {group.pages.slice(2).map((page) => (
+                      <GoabWorkSideMenuItem
+                        key={page.url}
+                        label={page.label}
+                        url={withBase(page.url)}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  group.pages.map((page) => (
+                    <GoabWorkSideMenuItem
+                      key={page.url}
+                      label={page.label}
+                      url={withBase(page.url)}
+                    />
+                  ))
+                )}
               </GoabWorkSideMenuGroup>
             </div>
           );
@@ -131,7 +176,7 @@ export function FoundationsSubMenu({
   return (
     <GoabWorkSideMenu
       heading="Design System | Foundations"
-      url="/"
+      url={withBase("/")}
       open={isOpen}
       onToggle={onToggle}
       onNavigate={(path: string) => {

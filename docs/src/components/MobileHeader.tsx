@@ -11,6 +11,7 @@
  */
 
 import { GoabIconButton } from '@abgov/react-components';
+import { withBase } from '@/lib/base-url';
 
 export function MobileHeader() {
   const handleMenuClick = () => {
@@ -32,9 +33,9 @@ export function MobileHeader() {
           onClick={handleMenuClick}
           ariaLabel="Open navigation menu"
         />
-        <a href="/" className="mobile-header__brand">
+        <a href={withBase('/')} className="mobile-header__brand">
           <img
-            src="/images/Logo.svg"
+            src={withBase('/images/Logo.svg')}
             alt=""
             width="28"
             height="28"

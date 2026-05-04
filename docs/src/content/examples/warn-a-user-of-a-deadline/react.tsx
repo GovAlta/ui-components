@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  GoabButton,
-  GoabButtonGroup,
-  GoabModal,
-} from "@abgov/react-components";
+import { GoabButton, GoabButtonGroup, GoabModal } from "@abgov/react-components";
 
 export function WarnAUserOfADeadline() {
   const [open, setOpen] = useState(false);
@@ -27,9 +23,9 @@ export function WarnAUserOfADeadline() {
         }
       >
         <p>
-          You've selected to adjourn a matter that is required to appear today. This Calgary court
-          location does not accept adjournment requests past 1PM MST. Please submit your
-          adjournment request as soon as possible.
+          You've selected to adjourn a matter that is required to appear today. This
+          Calgary court location does not accept adjournment requests past 1PM MST. Please
+          submit your adjournment request as soon as possible.
         </p>
       </GoabModal>
     </>

@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { GoabFormItem } from "./form-item";
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, TemplateRef } from "@angular/core";
 import { GoabFormItemRequirement, Spacing } from "@abgov/ui-components-common";
 import { By } from "@angular/platform-browser";
-import { GoabFormItemSlot } from "./form-item-slot";
 
 @Component({
   standalone: true,
-  imports: [GoabFormItem, GoabFormItemSlot],
+  imports: [GoabFormItem],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <goab-form-item
       [label]="label"
       [requirement]="requirement"
-      [error]="error"
-      [helpText]="helpText"
+      [error]="errorSlot ? errorTemplate : error"
+      [helpText]="helpTextSlot ? helpTextTemplate : helpText"
       [id]="id"
       [testId]="testId"
       maxWidth="480px"
@@ -24,22 +23,17 @@ import { GoabFormItemSlot } from "./form-item-slot";
       [ml]="ml"
     >
       <input data-testid="foo" />
-      @if (errorSlot) {
-        <goab-form-item-slot slot="error"> This is an error slot </goab-form-item-slot>
-      }
-      @if (helpTextSlot) {
-        <goab-form-item-slot slot="helptext">
-          This is a helpText slot
-        </goab-form-item-slot>
-      }
+
+      <ng-template #errorTemplate> This is an error slot </ng-template>
+      <ng-template #helpTextTemplate> This is a helpText slot </ng-template>
     </goab-form-item>
   `,
 })
 class TestFormItemComponent {
   label?: string;
   requirement?: GoabFormItemRequirement;
-  error?: string;
-  helpText?: string;
+  error?: string | TemplateRef<any>;
+  helpText?: string | TemplateRef<any>;
   id?: string;
   testId?: string;
   errorSlot?: boolean;
@@ -111,6 +105,8 @@ describe("GoABFormItem", () => {
     expect(el?.innerHTML).toContain("This is an error slot");
     expect(el?.querySelector("[slot='helptext']")).toBeTruthy();
     expect(el?.innerHTML).toContain("This is a helpText slot");
+    expect(el?.getAttribute("error")).toBeFalsy();
+    expect(el?.getAttribute("helptext")).toBeFalsy();
     expect(el?.querySelector("input[data-testid='foo']")).toBeTruthy();
   });
 });

@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 type SnackbarVerticalPosition = "top" | "bottom";
@@ -25,13 +26,17 @@ type SnackbarHorizontalPosition = "left" | "center" | "right";
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** A notification that appears at the bottom of the screen. */
 export class GoabTemporaryNotificationCtrl implements OnInit {
-  isReady = false;
-  @Input() verticalPosition: SnackbarVerticalPosition = "bottom";
-  @Input() horizontalPosition: SnackbarHorizontalPosition = "center";
-  @Input() testId?: string;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  isReady = false;
+  /** Vertical position of the notification container. @default "bottom" */
+  @Input() verticalPosition: SnackbarVerticalPosition = "bottom";
+  /** Horizontal position of the notification container. @default "center" */
+  @Input() horizontalPosition: SnackbarHorizontalPosition = "center";
+  /** Sets a data-testid attribute for automated testing. */
+  @Input() testId?: string;
 
   ngOnInit(): void {
     setTimeout(() => {

@@ -1,7 +1,0 @@
-[build]
-  publish = "dist/docs"
-  command = "npm ci && cd docs && npm ci && cd .. && npm run build:prod"
-
-[build.environment]
-  NODE_VERSION = "22"
-  NPM_FLAGS = "--legacy-peer-deps"

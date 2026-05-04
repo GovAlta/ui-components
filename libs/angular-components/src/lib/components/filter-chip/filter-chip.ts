@@ -8,6 +8,7 @@ import {
   booleanAttribute,
   OnInit,
   ChangeDetectorRef,
+  inject,
 } from "@angular/core";
 
 import { GoabBaseComponent } from "../base.component";
@@ -35,22 +36,28 @@ import { GoabBaseComponent } from "../base.component";
   }`,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
+/** Allow the user to enter information, filter content, and make selections. */
 export class GoabFilterChip extends GoabBaseComponent implements OnInit {
+  private cdr = inject(ChangeDetectorRef);
+
+  /** Shows an error state. */
   @Input({ transform: booleanAttribute }) error?: boolean;
+  /** Marks the chip as deletable. */
   @Input({ transform: booleanAttribute }) deletable?: boolean;
+  /** Text label of the chip. */
   @Input() content?: string = "";
+  /** Sets the icon theme style for the filter chip. */
   @Input() iconTheme?: GoabChipTheme;
+  /** Secondary text displayed in a smaller size before the main content. */
   @Input() secondaryText?: string = "";
+  /** Icon displayed at the start of the chip. */
   @Input() leadingIcon?: GoabIconType | null = null;
 
+  /** Emits when the filter chip delete button is clicked. */
   @Output() onClick = new EventEmitter();
 
   isReady = false;
   version = "2";
-
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
 
   ngOnInit(): void {
     // For Angular 20, we need to delay rendering the web component

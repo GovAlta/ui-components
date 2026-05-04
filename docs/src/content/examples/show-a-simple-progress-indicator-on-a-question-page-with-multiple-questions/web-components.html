@@ -1,12 +1,15 @@
-<goa-link leadingicon="arrow-back" size="small" mb="none">
-  Back
-</goa-link>
+<goa-link leadingicon="arrow-back" size="small" mb="none"> Back </goa-link>
 
 <goa-text as="h3" size="body-m" mt="xl" mb="none" color="secondary">Step 1 of 5</goa-text>
 <goa-text as="h2" mt="xs" mb="xl">Personal information</goa-text>
 
 <goa-form-item version="2" label="What is your name?">
-  <goa-input version="2" name="name" aria-label="what is your name?" width="50ch"></goa-input>
+  <goa-input
+    version="2"
+    name="name"
+    aria-label="what is your name?"
+    width="50ch"
+  ></goa-input>
 </goa-form-item>
 
 <goa-form-item version="2" label="What is your phone number?" mt="l">
@@ -16,16 +19,19 @@
 </goa-form-item>
 
 <goa-form-item version="2" label="What is your home postal code?" mt="l">
-  <goa-input version="2" name="postal-code" width="14ch" aria-label="what is your home postal code"></goa-input>
+  <goa-input
+    version="2"
+    name="postal-code"
+    width="14ch"
+    aria-label="what is your home postal code"
+  ></goa-input>
 </goa-form-item>
 
-<goa-button version="2" type="submit" mt="2xl">
-  Save and continue
-</goa-button>
+<goa-button version="2" type="submit" mt="2xl"> Save and continue </goa-button>
 
 <script>
-  document.querySelectorAll('goa-input').forEach(input => {
-    input.addEventListener('_change', (e) => {
+  document.querySelectorAll("goa-input").forEach((input) => {
+    input.addEventListener("_change", (e) => {
       console.log(`${e.target.name}:`, e.detail.value);
     });
   });

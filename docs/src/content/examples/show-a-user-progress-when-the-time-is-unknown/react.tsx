@@ -1,7 +1,4 @@
-import {
-  GoabButton,
-  GoabTemporaryNotificationCtrl,
-} from "@abgov/react-components";
+import { GoabButton, GoabTemporaryNotificationCtrl } from "@abgov/react-components";
 
 import { TemporaryNotification } from "@abgov/ui-components-common";
 

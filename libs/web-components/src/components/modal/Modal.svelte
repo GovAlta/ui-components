@@ -72,7 +72,8 @@
   // ********
 
   $: _isClosable = toBoolean(closable);
-  $: _headingExists = heading !== "" || ($$slots.heading && _headingSlotHasContent);
+  $: _headingExists =
+    heading !== "" || ($$slots.heading && _headingSlotHasContent);
   $: _headerHasContent = _headingExists || _isClosable;
 
   // Moving the reactive var into a timeout prevents accessing null stylesheet
@@ -160,10 +161,12 @@
       return true;
     }
 
-    return children?.length === 1 // there should only be one child element
-      && children[0].tagName === "DIV" // angular renders a <div>
-      && children[0].getAttribute("slot") === slotName // the div is a slot
-      && children[0]?.textContent?.trim() === "" // the div is empty
+    return (
+      children?.length === 1 && // there should only be one child element
+      children[0].tagName === "DIV" && // angular renders a <div>
+      children[0].getAttribute("slot") === slotName && // the div is a slot
+      children[0]?.textContent?.trim() === ""
+    ); // the div is empty
   }
 
   function close(e: Event) {
@@ -250,11 +253,7 @@
           >
             <div class="modal-heading-content">
               {#if version === "2" && _iconType}
-                <goa-icon
-                  type={_iconType}
-                  size="medium"
-                  theme="filled"
-                />
+                <goa-icon type={_iconType} size="medium" theme="filled" />
               {/if}
               <div
                 data-testid="modal-title"
@@ -378,13 +377,18 @@
     flex: 0 0 3rem;
     text-align: center;
     padding: var(--goa-modal-callout-bar-padding) 0 0 0;
-    border-radius: var(--goa-modal-border-radius) 0px 0px var(--goa-modal-border-radius);
+    border-radius: var(--goa-modal-border-radius) 0px 0px
+      var(--goa-modal-border-radius);
   }
 
   .content {
     flex: 1 1 auto;
     width: 100%;
-    padding: var(--goa-modal-content-wrapper-padding, var(--goa-modal-padding) var(--goa-modal-padding) 0 var(--goa-modal-padding));
+    padding: var(
+      --goa-modal-content-wrapper-padding,
+      var(--goa-modal-padding) var(--goa-modal-padding) 0
+        var(--goa-modal-padding)
+    );
   }
 
   .content header {
@@ -405,11 +409,18 @@
 
   @media (--mobile) {
     .content {
-      padding: var(--goa-modal-content-wrapper-padding, var(--goa-modal-padding-small-screen) var(--goa-modal-padding-small-screen) 0 var(--goa-modal-padding-small-screen));
+      padding: var(
+        --goa-modal-content-wrapper-padding,
+        var(--goa-modal-padding-small-screen)
+          var(--goa-modal-padding-small-screen) 0
+          var(--goa-modal-padding-small-screen)
+      );
     }
 
     .content header.has-content {
-      margin-bottom: var(--goa-modal-content-gap-small-screen); /* space under heading */
+      margin-bottom: var(
+        --goa-modal-content-gap-small-screen
+      ); /* space under heading */
     }
 
     .modal-actions :global(::slotted(*)) {
@@ -427,7 +438,8 @@
     .callout-bar {
       text-align: left;
       padding: var(--goa-modal-callout-bar-padding-small-screen);
-      border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius) 0px 0px;
+      border-radius: var(--goa-modal-border-radius)
+        var(--goa-modal-border-radius) 0px 0px;
       height: var(--goa-space-2xl);
     }
 
@@ -438,7 +450,10 @@
     }
 
     :host {
-      --scrollable-padding: var(--goa-modal-scrollable-padding-mobile, var(--goa-scrollable-padding-mobile));
+      --scrollable-padding: var(
+        --goa-modal-scrollable-padding-mobile,
+        var(--goa-scrollable-padding-mobile)
+      );
     }
 
     /* V2 Mobile Overrides */
@@ -447,17 +462,26 @@
     }
 
     .v2 .content header.callout {
-      padding: var(--goa-modal-callout-heading-padding-mobile, var(--goa-space-m));
+      padding: var(
+        --goa-modal-callout-heading-padding-mobile,
+        var(--goa-space-m)
+      );
     }
 
     .v2 .modal-content {
-      padding: var(--goa-modal-content-padding-mobile, var(--goa-space-l) var(--goa-space-m) var(--goa-space-xl) var(--goa-space-m));
+      padding: var(
+        --goa-modal-content-padding-mobile,
+        var(--goa-space-l) var(--goa-space-m) var(--goa-space-xl)
+          var(--goa-space-m)
+      );
     }
 
     .v2 .modal-actions {
-      padding: var(--goa-modal-actions-padding-mobile, 0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m));
+      padding: var(
+        --goa-modal-actions-padding-mobile,
+        0 var(--goa-space-m) var(--goa-space-m) var(--goa-space-m)
+      );
     }
-
   }
 
   @media (--not-mobile) {
@@ -472,9 +496,11 @@
     }
 
     :host {
-      --scrollable-padding: var(--goa-modal-scrollable-padding-desktop, var(--goa-scrollable-padding-desktop));
+      --scrollable-padding: var(
+        --goa-modal-scrollable-padding-desktop,
+        var(--goa-scrollable-padding-desktop)
+      );
     }
-
   }
 
   .modal-pane {
@@ -485,6 +511,10 @@
     display: flex;
     box-shadow: var(--goa-shadow-modal);
     border-radius: var(--goa-modal-border-radius);
+  }
+
+  .v2.modal-pane {
+    border: none;
   }
 
   .modal-content :global(::slotted(:last-child)) {
@@ -506,7 +536,10 @@
 
   .modal-actions {
     width: 100%;
-    padding: var(--goa-modal-actions-padding, var(--goa-space-m) 0 var(--goa-modal-padding) 0);
+    padding: var(
+      --goa-modal-actions-padding,
+      var(--goa-space-m) 0 var(--goa-modal-padding) 0
+    );
     margin: auto 0 0 0;
     text-align: right;
   }
@@ -529,8 +562,9 @@
   }
 
   .modal.middle .modal-content {
-    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
-    inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
+    box-shadow:
+      inset 0 8px 8px -8px rgba(0, 0, 0, 0.2),
+      inset 0 -8px 8px -8px rgba(0, 0, 0, 0.2);
   }
 
   /* V2 Callout Styles */
@@ -542,7 +576,8 @@
 
   .v2 .content header.callout {
     padding: var(--goa-modal-callout-heading-padding);
-    border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius) 0 0;
+    border-radius: var(--goa-modal-border-radius) var(--goa-modal-border-radius)
+      0 0;
   }
 
   .v2 header.callout goa-icon {
@@ -592,5 +627,30 @@
 
   .v2 header.event goa-icon {
     color: var(--goa-modal-callout-event-icon);
+  }
+
+  /* V2 callout close button hover colors — override icon-button's dark hover bg */
+  .v2 header.information .modal-close goa-icon-button {
+    --goa-icon-button-dark-hover-color-bg: var(
+      --goa-modal-callout-information-close-bg-hover
+    );
+  }
+
+  .v2 header.success .modal-close goa-icon-button {
+    --goa-icon-button-dark-hover-color-bg: var(
+      --goa-modal-callout-success-close-bg-hover
+    );
+  }
+
+  .v2 header.important .modal-close goa-icon-button {
+    --goa-icon-button-dark-hover-color-bg: var(
+      --goa-modal-callout-important-close-bg-hover
+    );
+  }
+
+  .v2 header.emergency .modal-close goa-icon-button {
+    --goa-icon-button-dark-hover-color-bg: var(
+      --goa-modal-callout-emergency-close-bg-hover
+    );
   }
 </style>

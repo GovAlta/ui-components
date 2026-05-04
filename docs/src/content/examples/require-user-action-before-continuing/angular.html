@@ -3,12 +3,17 @@
   [open]="open"
   (onClose)="toggleModal()"
   heading="Are you sure you want to continue?"
-  [actions]="actions">
+  [actions]="actions"
+>
   <p>You cannot return to this page.</p>
   <ng-template #actions>
     <goab-button-group alignment="end">
-      <goab-button type="secondary" size="compact" (onClick)="toggleModal()">Back</goab-button>
-      <goab-button type="primary" size="compact" (onClick)="toggleModal()">Continue</goab-button>
+      <goab-button type="secondary" size="compact" (onClick)="toggleModal()"
+        >Back</goab-button
+      >
+      <goab-button type="primary" size="compact" (onClick)="toggleModal()"
+        >Continue</goab-button
+      >
     </goab-button-group>
   </ng-template>
 </goab-modal>

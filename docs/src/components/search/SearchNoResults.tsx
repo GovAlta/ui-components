@@ -7,7 +7,7 @@
  * - Suggestions section with popular search terms
  */
 
-import { popularSearches } from './quick-links';
+import { popularSearches } from "./quick-links";
 
 interface SearchNoResultsProps {
   /** The search query that had no results */
@@ -26,11 +26,9 @@ export function SearchNoResults({ query, onSuggestionClick }: SearchNoResultsPro
 
       {/* Suggestions */}
       <section className="search-no-results-suggestions">
-        <div className="search-no-results-suggestions-header">
-          Try searching for
-        </div>
+        <div className="search-no-results-suggestions-header">Try searching for</div>
         <ul className="search-no-results-suggestions-list">
-          {popularSearches.map(term => (
+          {popularSearches.map((term) => (
             <li key={term}>
               <button
                 type="button"

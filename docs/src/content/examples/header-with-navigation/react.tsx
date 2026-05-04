@@ -20,15 +20,12 @@ export function HeaderWithNavigation() {
         <a slot="navigation" href="#">
           Support
         </a>
-        <GoabMenuButton
-          slot="utilities"
-          text="John Smith"
-          type="tertiary"
-          size="compact"
-        >
-          <GoabMenuAction text="User settings" action="user-settings" />
-          <GoabMenuAction text="Sign out" action="sign-out" />
-        </GoabMenuButton>
+        <div slot="utilities">
+          <GoabMenuButton text="John Smith" type="tertiary" size="compact">
+            <GoabMenuAction text="User settings" action="user-settings" />
+            <GoabMenuAction text="Sign out" action="sign-out" />
+          </GoabMenuButton>
+        </div>
       </GoabAppHeader>
     </>
   );

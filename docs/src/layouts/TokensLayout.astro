@@ -12,6 +12,7 @@
  */
 
 import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
 import { getNavCategories } from '../lib/nav-categories';
@@ -47,6 +48,9 @@ const navCategories = await getNavCategories();
 
         <div class="content-with-drawer">
           <div class="content-card">
+            <div class="breadcrumb-row">
+              <Breadcrumbs />
+            </div>
             <slot />
           </div>
         </div>
@@ -110,6 +114,11 @@ const navCategories = await getNavCategories();
     --card-padding-h: var(--goa-space-2xl);
     padding: var(--goa-space-xl) var(--card-padding-h);
     min-height: calc(100vh - var(--goa-space-l) * 2);
+  }
+
+  .breadcrumb-row {
+    max-width: 1408px;
+    margin: 0 auto var(--goa-space-xs);
   }
 
   /* Tablet: modal drawer mode (push drawer switches at 1023px) */
