@@ -75308,8 +75308,8 @@ const __vite_glob_0_144 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat3504TextButtonRoute() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h1", mt: "none", children: 'feat(#3504): Add "text" type to Button component' }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("goa-text", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h1", mt: "none", children: 'feat(#3504): Add "text" type to Button component' }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { children: [
       'Demonstrates the new "text" type button variations. Requires design tokens from',
       " ",
       /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://github.com/GovAlta/design-tokens/pull/156", children: "GovAlta/design-tokens#156" }),
@@ -75336,7 +75336,7 @@ function Feat3504TextButtonRoute() {
                   alignItems: "flex-start"
                 },
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Regular button size" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h3", children: "Regular button size" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", children: "Text Button" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", disabled: true, children: "Disabled Text Button" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", variant: "destructive", children: "Destructive Text Button" }),
@@ -75372,7 +75372,7 @@ function Feat3504TextButtonRoute() {
                   alignItems: "flex-start"
                 },
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Regular button size with icons" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h3", children: "Regular button size with icons" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", children: "Leading Icon" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", leadingIcon: "add", trailingIcon: "arrow-forward", children: "Leading and Trailing Icons" }),
@@ -75407,7 +75407,7 @@ function Feat3504TextButtonRoute() {
                   alignItems: "flex-start"
                 },
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h3", children: "Compact button size" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", children: "Text Button" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", disabled: true, children: "Disabled Text Button" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", variant: "destructive", children: "Destructive Text Button" }),
@@ -75443,7 +75443,7 @@ function Feat3504TextButtonRoute() {
                   alignItems: "flex-start"
                 },
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", children: "Compact button size with icons" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h3", children: "Compact button size with icons" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", leadingIcon: "add", children: "Leading Icon" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "text", size: "compact", trailingIcon: "arrow-forward", children: "Trailing Icon" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -75494,7 +75494,7 @@ function Feat3504TextButtonRoute() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("goa-text", { as: "h3", mb: "none", children: "Invalid states" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { as: "h3", mb: "none", children: "Invalid states" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", variant: "dark", size: "compact", children: 'This non-text button with "dark" variant should cause a console warning' })
         ]
       }
