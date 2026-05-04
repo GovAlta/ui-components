@@ -29,12 +29,6 @@ const components = defineCollection({
 
     // External links
     figmaUrl: z.string().url().optional(),
-    githubUrl: z.string().optional(),
-
-    // Framework identifiers (for cross-referencing)
-    webComponentTag: z.string().optional(),
-    reactClassName: z.string().optional(),
-    angularSelector: z.string().optional(),
 
     // Visibility
     hidden: z.boolean().optional(), // Hide from navigation and public views
@@ -150,9 +144,6 @@ const examples = defineCollection({
 
     // Preview image (optional)
     previewImage: z.string().optional(),
-
-    // Shared CSS file reference (relative to _shared folder)
-    styles: z.string().optional(),
 
     // Display options
     fullWidth: z.boolean().optional(), // Remove side padding in preview (for callouts, notifications)
