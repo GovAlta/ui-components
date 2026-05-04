@@ -16704,7 +16704,7 @@ function Z2(t) {
       ), I(
         i,
         "filled",
-        /*type*/
+        /*headingType*/
         t[11] === "filled"
       ), f(M, "class", "content svelte-b9qdo7"), f(M, "role", "region"), f(M, "aria-labelledby", q = `${/*_accordionId*/
       t[19]}-heading`), f(M, "id", j = `${/*_accordionId*/
@@ -16835,11 +16835,11 @@ function Z2(t) {
         "iconRight",
         /*iconposition*/
         T[10] === "right"
-      ), (!x || W[0] & /*headingsize, type*/
+      ), (!x || W[0] & /*headingsize, headingType*/
       2052) && I(
         i,
         "filled",
-        /*type*/
+        /*headingType*/
         T[11] === "filled"
       ), F && F.p && (!x || W[0] & /*$$scope*/
       16777216) && ve(
@@ -16911,7 +16911,7 @@ function Z2(t) {
 function F2(t, e, o) {
   let i, { $$slots: n = {}, $$scope: r } = e;
   const l = vt(n), [a, d] = Ae("Accordion heading size", ["small", "medium"]), [c, s] = Ae("Accordion icon position", ["left", "right"]), [u, g] = Ae("Accordion Type", ["normal", "filled"]);
-  let { open: v = "false" } = e, { heading: m = "" } = e, { secondarytext: b = "" } = e, { headingsize: w = "small" } = e, { id: p = "" } = e, { maxwidth: k = "none" } = e, { testid: z = "" } = e, { mt: M = null } = e, { mr: q = null } = e, { mb: j = "xs" } = e, { ml: L = null } = e, { iconposition: O = "left" } = e, { type: x = "normal" } = e, Z = false, V, H, A, U, D, S = [], B = "", K = null, F = false, T = false, W = new ls();
+  let { open: v = "false" } = e, { heading: m = "" } = e, { secondarytext: b = "" } = e, { headingsize: w = "small" } = e, { id: p = "" } = e, { maxwidth: k = "none" } = e, { testid: z = "" } = e, { mt: M = null } = e, { mr: q = null } = e, { mb: j = "xs" } = e, { ml: L = null } = e, { iconposition: O = "left" } = e, { headingType: x = "normal" } = e, Z = false, V, H, A, U, D, S = [], B = "", K = null, F = false, T = false, W = new ls();
   De(() => {
     bo("GoAAccordion", { heading: m }), d(w), s(O), g(x), oo(D), o(18, S = R()), o(19, B = `accordion-${fo()}`);
   });
@@ -17007,7 +17007,7 @@ function F2(t, e, o) {
     });
   }
   return t.$$set = (Le) => {
-    "open" in Le && o(23, v = Le.open), "heading" in Le && o(0, m = Le.heading), "secondarytext" in Le && o(1, b = Le.secondarytext), "headingsize" in Le && o(2, w = Le.headingsize), "id" in Le && o(3, p = Le.id), "maxwidth" in Le && o(4, k = Le.maxwidth), "testid" in Le && o(5, z = Le.testid), "mt" in Le && o(6, M = Le.mt), "mr" in Le && o(7, q = Le.mr), "mb" in Le && o(8, j = Le.mb), "ml" in Le && o(9, L = Le.ml), "iconposition" in Le && o(10, O = Le.iconposition), "type" in Le && o(11, x = Le.type), "$$scope" in Le && o(24, r = Le.$$scope);
+    "open" in Le && o(23, v = Le.open), "heading" in Le && o(0, m = Le.heading), "secondarytext" in Le && o(1, b = Le.secondarytext), "headingsize" in Le && o(2, w = Le.headingsize), "id" in Le && o(3, p = Le.id), "maxwidth" in Le && o(4, k = Le.maxwidth), "testid" in Le && o(5, z = Le.testid), "mt" in Le && o(6, M = Le.mt), "mr" in Le && o(7, q = Le.mr), "mb" in Le && o(8, j = Le.mb), "ml" in Le && o(9, L = Le.ml), "iconposition" in Le && o(10, O = Le.iconposition), "headingType" in Le && o(11, x = Le.headingType), "$$scope" in Le && o(24, r = Le.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty[0] & /*open*/
     8388608 && o(20, i = He(v));
@@ -17072,7 +17072,7 @@ class W2 extends Ce {
         mb: 8,
         ml: 9,
         iconposition: 10,
-        type: 11
+        headingType: 11
       },
       P2,
       [-1, -1]
@@ -17150,14 +17150,14 @@ class W2 extends Ce {
   set iconposition(e) {
     this.$$set({ iconposition: e }), y();
   }
-  get type() {
+  get headingType() {
     return this.$$.ctx[11];
   }
-  set type(e) {
-    this.$$set({ type: e }), y();
+  set headingType(e) {
+    this.$$set({ headingType: e }), y();
   }
 }
-customElements.define("goa-accordion", ke(W2, { open: {}, heading: {}, secondarytext: {}, headingsize: {}, id: {}, maxwidth: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {}, iconposition: {}, type: {} }, ["headingcontent", "actions", "default"], [], true));
+customElements.define("goa-accordion", ke(W2, { open: { type: "String", reflect: true }, heading: { type: "String" }, secondarytext: { type: "String" }, headingsize: { type: "String", reflect: true }, id: { type: "String", reflect: true }, maxwidth: { type: "String", reflect: true }, testid: { type: "String", reflect: true }, mt: { type: "String", reflect: true }, mr: { type: "String", reflect: true }, mb: { type: "String", reflect: true }, ml: { type: "String", reflect: true }, iconposition: { type: "String", reflect: true }, headingType: { type: "String", attribute: "heading-type", reflect: true } }, ["headingcontent", "actions", "default"], [], true));
 const Bt = 624, us = 1024;
 function Fo(t, e) {
   if (e === void 0) return -1;
@@ -53624,6 +53624,7 @@ function GoabAccordion({
   open,
   onChange: onChange2,
   headingContent,
+  headingType,
   actions,
   children,
   ...rest
@@ -53643,11 +53644,20 @@ function GoabAccordion({
       };
     }
   }, [onChange2]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("goa-accordion", { ref, open: open ? "true" : void 0, ..._props, children: [
-    headingContent && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "headingcontent", children: headingContent }),
-    actions && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "actions", children: actions }),
-    children
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "goa-accordion",
+    {
+      ref,
+      open: open ? "true" : void 0,
+      "heading-type": headingType,
+      ..._props,
+      children: [
+        headingContent && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "headingcontent", children: headingContent }),
+        actions && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "actions", children: actions }),
+        children
+      ]
+    }
+  );
 }
 function GoabAppHeader({
   onMenuClick,
@@ -63522,7 +63532,7 @@ function DocsAccordionRoute() {
         ]
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAccordion, { heading: "What documents do I need?", type: "filled", children: "You will need to provide proof of identity, proof of address, and any relevant supporting documentation." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAccordion, { heading: "What documents do I need?", headingType: "filled", children: "You will need to provide proof of identity, proof of address, and any relevant supporting documentation." }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       GoabAccordion,
       {
@@ -75765,7 +75775,7 @@ function Feat3636Route() {
             {
               heading: "Randall Sanford",
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
-              type: "filled",
+              headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
@@ -75779,7 +75789,7 @@ function Feat3636Route() {
             {
               heading: "Virginia Johns",
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "information", content: "Email sent" }),
-              type: "filled",
+              headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "4 Comment(s)" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
@@ -75793,7 +75803,7 @@ function Feat3636Route() {
             {
               heading: "Mable Macejkovic",
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
-              type: "filled",
+              headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "3 Comment(s)" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
@@ -75807,7 +75817,7 @@ function Feat3636Route() {
             {
               heading: "Noah Clark",
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
-              type: "filled",
+              headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
