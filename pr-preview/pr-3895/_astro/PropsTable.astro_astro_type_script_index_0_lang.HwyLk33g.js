@@ -1,1 +1,0 @@
-import{g as s,s as c}from"./framework-preference.DlzkYYed.js";const m={react:"react",angular:"angular",webComponents:"angular"};function o(e){const t=m[e]||"react";document.querySelectorAll("[data-frameworks]").forEach(n=>{const r=n,a=r.dataset.frameworks;a&&(r.style.display=a.includes(t)?"":"none")})}o(s());c(e=>{o(e)});
