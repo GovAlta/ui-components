@@ -76,7 +76,10 @@ export function GoabModal({
       return;
     }
     const current = el.current;
-    const listener = () => {
+    const listener = (e: Event) => {
+      if (e.target !== current) {
+        return;
+      }
       onClose?.();
     };
 

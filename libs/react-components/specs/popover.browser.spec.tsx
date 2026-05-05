@@ -202,6 +202,69 @@ describe("Popover", () => {
     expect(aboveWidth!).toBe(belowWidth!);
   });
 
+  it("should not close parent popover when child popover closes", async () => {
+    const Component = () => {
+      return (
+        <GoabPopover
+          testId="parent-popover"
+          target={
+            <GoabButton type="primary" size="compact" testId={"parent-target"}>
+              Open parent
+            </GoabButton>
+          }
+        >
+          <p data-testid="parent-content">Parent content</p>
+          <GoabPopover
+            testId="child-popover"
+            target={
+              <GoabButton type="secondary" size="compact" testId={"child-target"}>
+                Open child
+              </GoabButton>
+            }
+          >
+            <p data-testid="child-content">Child content</p>
+            <GoabButton
+              type="tertiary"
+              size="compact"
+              testId="child-close"
+              action="close"
+            >
+              Close child
+            </GoabButton>
+          </GoabPopover>
+        </GoabPopover>
+      );
+    };
+
+    const result = render(<Component />);
+    const parentTarget = result.getByTestId("parent-target");
+    const childTarget = result.getByTestId("child-target");
+    const parentContent = result.getByTestId("parent-content");
+    const childContent = result.getByTestId("child-content");
+    const childClose = result.getByTestId("child-close");
+
+    // Open parent popover
+    await parentTarget.click();
+    await vi.waitFor(() => {
+      expect(parentContent).toBeVisible();
+    });
+
+    // Open child popover
+    await childTarget.click();
+    await vi.waitFor(() => {
+      expect(childContent).toBeVisible();
+    });
+
+    // Close child popover using close button
+    await childClose.click();
+
+    // Parent popover should still be open
+    await vi.waitFor(() => {
+      expect(childContent).not.toBeVisible();
+      expect(parentContent).toBeVisible();
+    });
+  });
+
   it("should align popover to the right edge of the target when there is not enough space on the right", async () => {
     const Component = () => {
       return (
