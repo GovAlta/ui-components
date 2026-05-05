@@ -1,0 +1,1 @@
+import{j as n}from"./jsx-runtime.D_zvdyIk.js";import{t as l,l as p}from"./extract-props.mAATCLkF.js";const c=({type:o="information",iconTheme:r="outline",size:t="large",ariaLive:a="off",emphasis:s="medium",children:e,...i})=>{const m=l({type:o,icontheme:r,size:t,arialive:a,emphasis:s,...i},p);return n.jsx("goa-callout",{...m,version:"2",children:e})};export{c as G};
