@@ -61187,7 +61187,7 @@ const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3505_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3874/assets/tokens-CWsSLfwq.css";
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3874/assets/tokens-u-qGJicf.css";
 function Bug3548Route() {
   const [open, setOpen] = reactExports.useState(true);
   reactExports.useEffect(() => {
