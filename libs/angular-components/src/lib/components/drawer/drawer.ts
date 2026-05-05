@@ -25,7 +25,7 @@ import { GoabDrawerPosition, GoabDrawerSize } from "@abgov/ui-components-common"
       [attr.maxsize]="maxSize"
       [attr.testid]="testId"
       [attr.version]="version"
-      (_close)="_onClose()"
+      (_close)="_onClose($event)"
     >
       <ng-content></ng-content>
       <div slot="heading">
@@ -70,7 +70,8 @@ export class GoabDrawer implements OnInit {
     }, 0);
   }
 
-  _onClose() {
+  _onClose(event: Event) {
+    if (event.target !== event.currentTarget) return;
     this.onClose.emit();
   }
 

@@ -1,0 +1,6 @@
+{
+  "type": "bug",
+  "id": "3982",
+  "path": "bugs/3982",
+  "title": "Nested close propagation"
+}

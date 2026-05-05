@@ -210,6 +210,7 @@
     });
 
     _popoverEl?.addEventListener("_close", (e) => {
+      e.stopPropagation();
       _isMenuVisible = false;
     });
   }

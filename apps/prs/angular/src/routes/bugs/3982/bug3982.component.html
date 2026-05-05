@@ -1,0 +1,187 @@
+<div style="display: grid; gap: 1.5rem">
+  <div style="display: grid; gap: 0.5rem">
+    <h1 style="margin: 0">3982 - Nested close propagation</h1>
+    <p style="margin: 0 0 1rem;">
+      This page tests the issue where popover close events are propegating to parent
+      drawers and modals.
+    </p>
+  </div>
+
+  <goab-container>
+    <div style="display: grid; gap: 1.5rem">
+      <h2 style="margin: 0">Popover</h2>
+      <p style="margin: 0 0 1rem;">Open the popover and interact with all controls.</p>
+    </div>
+
+    <ng-template #popoverTarget>
+      <goab-button type="primary">Open popover</goab-button>
+    </ng-template>
+
+    <goab-popover [target]="popoverTarget">
+      <div style="display: grid; gap: 1rem; min-width: 20rem">
+        <p style="margin: 0 0 1rem;">
+          Expected: using the date picker, dropdown, and menu button updates values
+          and leaves the popover open.
+        </p>
+        <goab-date-picker
+          name="bug3982-popover-date"
+          [value]="popoverDate"
+          (onChange)="handlePopoverDateChange($event)"
+        ></goab-date-picker>
+        <goab-dropdown
+          name="bug3982-popover-province"
+          placeholder="Select a province"
+          [value]="popoverProvince"
+          (onChange)="handlePopoverProvinceChange($event)"
+        >
+          <goab-dropdown-item value="alberta" label="Alberta"></goab-dropdown-item>
+          <goab-dropdown-item value="british-columbia" label="British Columbia"></goab-dropdown-item>
+          <goab-dropdown-item value="manitoba" label="Manitoba"></goab-dropdown-item>
+          <goab-dropdown-item value="ontario" label="Ontario"></goab-dropdown-item>
+          <goab-dropdown-item value="quebec" label="Quebec"></goab-dropdown-item>
+        </goab-dropdown>
+        <goab-menu-button text="Popover actions">
+          <goab-menu-action action="edit" text="Edit"></goab-menu-action>
+          <goab-menu-action action="archive" text="Archive"></goab-menu-action>
+          <goab-menu-action action="delete" text="Delete"></goab-menu-action>
+        </goab-menu-button>
+      </div>
+    </goab-popover>
+  </goab-container>
+
+  <goab-container>
+    <div style="display: grid; gap: 1.5rem">
+      <h2 style="margin: 0">Drawer</h2>
+      <p style="margin: 0 0 1rem;">Open the drawer and interact with all controls.</p>
+    </div>
+
+    <goab-button (onClick)="openDrawer()">Open drawer</goab-button>
+
+    <goab-drawer
+      heading="Test drawer"
+      maxSize="36rem"
+      [open]="drawerOpen"
+      position="right"
+      (onClose)="handleDrawerClose()"
+    >
+      <div style="display: grid; gap: 1rem">
+        <p style="margin: 0 0 1rem;">
+          Expected: using the date picker, dropdown, and menu button updates values
+          and leaves the drawer open.
+        </p>
+        <goab-date-picker
+          name="bug3982-drawer-date"
+          [value]="drawerDate"
+          (onChange)="handleDrawerDateChange($event)"
+        ></goab-date-picker>
+        <goab-dropdown
+          name="bug3982-drawer-province"
+          placeholder="Select a province"
+          [value]="drawerProvince"
+          (onChange)="handleDrawerProvinceChange($event)"
+        >
+          <goab-dropdown-item value="alberta" label="Alberta"></goab-dropdown-item>
+          <goab-dropdown-item value="british-columbia" label="British Columbia"></goab-dropdown-item>
+          <goab-dropdown-item value="manitoba" label="Manitoba"></goab-dropdown-item>
+          <goab-dropdown-item value="ontario" label="Ontario"></goab-dropdown-item>
+          <goab-dropdown-item value="quebec" label="Quebec"></goab-dropdown-item>
+        </goab-dropdown>
+        <goab-menu-button text="Drawer actions">
+          <goab-menu-action action="edit" text="Edit"></goab-menu-action>
+          <goab-menu-action action="archive" text="Archive"></goab-menu-action>
+          <goab-menu-action action="delete" text="Delete"></goab-menu-action>
+        </goab-menu-button>
+      </div>
+    </goab-drawer>
+  </goab-container>
+
+  <goab-container>
+    <h2 style="margin: 0">Push drawer</h2>
+    <p style="margin: 0 0 1rem;">Open the push drawer and interact with all controls.</p>
+
+    <div style="display: flex; min-height: 440px">
+      <goab-button (onClick)="openPushDrawer()">Open push drawer</goab-button>
+
+      <goab-push-drawer
+        heading="Controls inside push drawer"
+        width="36rem"
+        [open]="pushDrawerOpen"
+        (onClose)="handlePushDrawerClose()"
+      >
+        <div style="display: grid; gap: 1.5rem">
+          <p style="margin: 0 0 1rem;">
+            Expected: using the date picker, dropdown, and menu button updates values
+            and leaves the push drawer open.
+          </p>
+          <goab-date-picker
+            name="bug3982-push-drawer-date"
+            [value]="pushDrawerDate"
+            (onChange)="handlePushDrawerDateChange($event)"
+          ></goab-date-picker>
+          <goab-dropdown
+            name="bug3982-push-drawer-province"
+            placeholder="Select a province"
+            [value]="pushDrawerProvince"
+            (onChange)="handlePushDrawerProvinceChange($event)"
+          >
+            <goab-dropdown-item value="alberta" label="Alberta"></goab-dropdown-item>
+            <goab-dropdown-item value="british-columbia" label="British Columbia"></goab-dropdown-item>
+            <goab-dropdown-item value="manitoba" label="Manitoba"></goab-dropdown-item>
+            <goab-dropdown-item value="ontario" label="Ontario"></goab-dropdown-item>
+            <goab-dropdown-item value="quebec" label="Quebec"></goab-dropdown-item>
+          </goab-dropdown>
+          <goab-menu-button text="Push drawer actions">
+            <goab-menu-action action="edit" text="Edit"></goab-menu-action>
+            <goab-menu-action action="archive" text="Archive"></goab-menu-action>
+            <goab-menu-action action="delete" text="Delete"></goab-menu-action>
+          </goab-menu-button>
+        </div>
+      </goab-push-drawer>
+    </div>
+  </goab-container>
+
+  <goab-container>
+    <div style="display: grid; gap: 1.5rem">
+      <h2 style="margin: 0">Modal</h2>
+      <p style="margin: 0 0 1rem;">Open the modal and interact with all controls.</p>
+    </div>
+
+    <goab-button (onClick)="openModal()">Open modal</goab-button>
+
+    <goab-modal
+      heading="Controls inside modal"
+      [open]="modalOpen"
+      [closable]="true"
+      (onClose)="handleModalClose()"
+    >
+      <div style="display: grid; gap: 1rem">
+        <p style="margin: 0 0 1rem;">
+          Expected: using the date picker, dropdown, and menu button updates values
+          and leaves the modal open.
+        </p>
+        <goab-date-picker
+          name="bug3982-modal-date"
+          [value]="modalDate"
+          (onChange)="handleModalDateChange($event)"
+        ></goab-date-picker>
+        <goab-dropdown
+          name="bug3982-modal-province"
+          placeholder="Select a province"
+          [value]="modalProvince"
+          (onChange)="handleModalProvinceChange($event)"
+        >
+          <goab-dropdown-item value="alberta" label="Alberta"></goab-dropdown-item>
+          <goab-dropdown-item value="british-columbia" label="British Columbia"></goab-dropdown-item>
+          <goab-dropdown-item value="manitoba" label="Manitoba"></goab-dropdown-item>
+          <goab-dropdown-item value="ontario" label="Ontario"></goab-dropdown-item>
+          <goab-dropdown-item value="quebec" label="Quebec"></goab-dropdown-item>
+        </goab-dropdown>
+        <goab-menu-button text="Modal actions">
+          <goab-menu-action action="edit" text="Edit"></goab-menu-action>
+          <goab-menu-action action="archive" text="Archive"></goab-menu-action>
+          <goab-menu-action action="delete" text="Delete"></goab-menu-action>
+        </goab-menu-button>
+      </div>
+    </goab-modal>
+  </goab-container>
+</div>
