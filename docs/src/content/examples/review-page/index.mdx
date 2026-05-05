@@ -1,10 +1,9 @@
 ---
 id: review-page
 title: Review page
-categories:
-  - forms
-scale: page
-userType: citizen
+size: page
+productType: public-form
+description: A review page lets a user check their answers at the end of a form or section before submitting. Each answer has a "change" link so the user can revise without starting over.
 tags:
   - review
   - check-answers
@@ -15,25 +14,19 @@ components:
   - button
   - button-group
 status: published
-previewImage: /images/examples/review-page.webp
+previewImage: /images/examples/review-page.png
 ---
 
-A review page where users can check their answers before submitting a form, with options to change individual responses.
+## When to use a review page
 
-## When to use
+Review and submit your answers at the end of a form or section.
 
-Use this pattern when:
+When designing a very large transaction with multiple sections, it may help to include a check-answers page at the end of each section.
 
-- Users need to review their form answers before submission
-- At the end of a multi-step form or wizard
-- Before finalizing applications or important submissions
-- When accuracy of submitted information is critical
+## Let users go back and change their answers
 
-## Considerations
+Provide a "change" link next to each section so that users can add or change the information they are submitting.
 
-- Display all answered questions with current values
-- Provide "Change" links for each answer
-- Show "Not provided" for skipped optional questions
-- Include visually hidden text in change links for accessibility
-- Consider grouping related answers under section headings
-- For large forms, consider review pages at the end of each section
+If you have questions that are optional, let users know that they have skipped them without giving an answer by showing their response as "Not provided".
+
+Include the full question name again in the change button as visually hidden text so that the screen reader reads out "change [question]" instead of just "change". This gives context to a user using assistive technologies while keeping the link simple for most users.

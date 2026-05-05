@@ -16,21 +16,42 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { ExamplesGrid } from '../../components/ExamplesGrid';
 
 
-// Get all examples
+// Pull both collections so the grid can surface product-type overviews
+// alongside their member examples. Synthesizing the productTypes entries
+// at render time avoids the stub-MDX duplication we used to have in the
+// examples collection.
 const allExamples = await getCollection('examples');
-const visibleExamples = allExamples.filter((example) => !example.data.hidden);
+const allProductTypes = await getCollection('productTypes');
 
-// Sort by title (default)
-const sortedExamples = visibleExamples.sort((a, b) =>
+// Transform examples to the shape ExamplesGrid expects, excluding hidden entries.
+const exampleEntries = allExamples
+  .filter((example) => !example.data.hidden)
+  .map(example => ({
+    slug: example.slug,
+    data: example.data,
+    body: example.data.description || example.body,
+  }));
+
+// Synthesize a size:product card per productType. The slug matches the
+// /examples/[productType]/ route the [family] page handler already serves.
+const productTypeEntries = allProductTypes.map(productType => ({
+  slug: productType.slug,
+  data: {
+    id: productType.data.id,
+    title: productType.data.title,
+    description: productType.data.summary.replace(/<[^>]+>/g, ''),
+    size: 'product' as const,
+    components: productType.data.components ?? [],
+    tags: productType.data.tags ?? [],
+    status: productType.data.status,
+    previewImage: productType.data.heroImage,
+  },
+  body: productType.data.summary,
+}));
+
+const examples = [...exampleEntries, ...productTypeEntries].sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
 );
-
-// Transform to the shape ExamplesGrid expects
-const examples = sortedExamples.map(example => ({
-  slug: example.slug,
-  data: example.data,
-  body: example.data.description || example.body,
-}));
 
 ---
 
@@ -65,14 +86,6 @@ const examples = sortedExamples.map(example => ({
             <span class="pattern-desc">For citizens submitting applications and requests</span>
           </div>
         </a>
-        <div class="pattern-card disabled">
-          <div class="pattern-image-placeholder"></div>
-          <div class="pattern-text">
-            <strong class="pattern-title">Digital service</strong>
-            <span class="pattern-desc">How workspace and public form connect end-to-end</span>
-            <goa-badge version="2" type="default" content="Coming soon" icon="false" emphasis="subtle" mt="xs"></goa-badge>
-          </div>
-        </div>
       </div>
     </section>
 

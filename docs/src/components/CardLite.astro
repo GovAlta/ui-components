@@ -5,6 +5,8 @@
  * A lightweight card component for homepage grids.
  * Displays an image, title, and description with a link.
  */
+import { withBase } from '@/lib/base-url';
+
 interface Props {
   title: string;
   description: string;
@@ -19,7 +21,7 @@ const isDisabled = !linkTo;
 
 {isDisabled ? (
   <div class="card-lite">
-    {imageUrl && <div class="card-image"><img src={imageUrl} alt="" loading="lazy" /></div>}
+    {imageUrl && <div class="card-image"><img src={withBase(imageUrl)} alt="" loading="lazy" /></div>}
     <goa-text version="2" size="heading-m" mt="l" mb="m">
       {title}
     </goa-text>
@@ -30,7 +32,7 @@ const isDisabled = !linkTo;
   </div>
 ) : (
   <a href={linkTo} class="card-lite" {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}>
-    {imageUrl && <div class="card-image"><img src={imageUrl} alt="" loading="lazy" /></div>}
+    {imageUrl && <div class="card-image"><img src={withBase(imageUrl)} alt="" loading="lazy" /></div>}
     <goa-text version="2" size="heading-m" mt="l" mb="m">
       <u>{title}</u>
     </goa-text>

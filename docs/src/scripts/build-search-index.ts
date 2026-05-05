@@ -8,7 +8,7 @@
  */
 
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync, mkdirSync } from 'node:fs';
-import { join, basename, dirname } from 'node:path';
+import { join, basename, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Get directory paths relative to this script
@@ -21,6 +21,7 @@ const ROOT = join(__dirname, '../..');
 const COMPONENTS_DIR = join(ROOT, 'src/content/components');
 const EXAMPLES_DIR = join(ROOT, 'src/content/examples');
 const GET_STARTED_DIR = join(ROOT, 'src/content/get-started');
+const PRODUCT_TYPES_DIR = join(ROOT, 'src/content/productTypes');
 const OUTPUT_FILE = join(ROOT, 'public/search-index.json');
 
 // ============================================================================
@@ -44,11 +45,11 @@ interface ExampleEntry {
   title: string;
   description?: string;
   status: string;
-  categories: string[];
+  size: string;              // "interaction" | "section" | "page" | "task" | "product"
+  productType?: string;      // "workspace" | "public-form"
   tags: string[];
-  components: string[];  // What components this example uses
-  scale: string;
-  userType: string;
+  components: string[];      // What components this example uses
+  aliases: string[];         // Secondary slugs that surface this entry in search
   slug: string;
 }
 
@@ -221,6 +222,12 @@ function processComponent(filePath: string): ComponentEntry | null {
 /**
  * Process an example MDX file into a search entry.
  * Examples live in subdirectories: examples/[name]/index.mdx
+ * or nested: examples/[family]/[page]/index.mdx
+ *
+ * The slug is derived from the path relative to EXAMPLES_DIR so that nested
+ * entries (workspace/dashboard, etc.) get path-shaped slugs matching Astro's
+ * content-collection routing. Frontmatter `id` is kept for stable cross-
+ * references but no longer drives the URL.
  */
 function processExample(filePath: string): ExampleEntry | null {
   try {
@@ -232,9 +239,10 @@ function processExample(filePath: string): ExampleEntry | null {
       return null;
     }
 
-    // Get ID from directory name
-    const dirName = basename(dirname(filePath));
-    const id = String(frontmatter.id || dirName);
+    // Slug = path within EXAMPLES_DIR (e.g., "workspace/dashboard", "start-page").
+    // Use forward slashes on every OS so URLs are consistent.
+    const slug = relative(EXAMPLES_DIR, dirname(filePath)).split(sep).join('/');
+    const id = String(frontmatter.id || basename(dirname(filePath)));
 
     // Extract description from body if not in frontmatter
     const description = frontmatter.description
@@ -247,16 +255,18 @@ function processExample(filePath: string): ExampleEntry | null {
       title: String(frontmatter.title || id),
       description: normalizeDescription(description),
       status: String(frontmatter.status || 'published'),
-      categories: Array.isArray(frontmatter.categories)
-        ? frontmatter.categories.map(String)
-        : [],
+      size: String(frontmatter.size || 'section'),
+      productType: frontmatter.productType
+        ? String(frontmatter.productType)
+        : undefined,
       tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
       components: Array.isArray(frontmatter.components)
         ? frontmatter.components.map(String)
         : [],
-      scale: String(frontmatter.scale || 'interaction'),
-      userType: String(frontmatter.userType || 'both'),
-      slug: String(frontmatter.slug || id),
+      aliases: Array.isArray(frontmatter.aliases)
+        ? frontmatter.aliases.map(String)
+        : [],
+      slug,
     };
   } catch (error) {
     console.error(`Error processing example ${filePath}:`, error);
@@ -313,6 +323,57 @@ function processGetStartedPage(filePath: string): PageEntry | null {
     };
   } catch (error) {
     console.error(`Error processing get-started page ${filePath}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Process a productType MDX file into a search entry.
+ *
+ * ProductTypes are the "starting points" for each kind of digital service
+ * (workspace, public-form). Their overview pages live at /examples/[slug]/
+ * via the [family]/index.astro route, so we synthesize them into the same
+ * search shape as page-scale examples with size="product". This replaces
+ * the hand-authored stub entries that previously lived in examples/.
+ */
+function processProductType(filePath: string): ExampleEntry | null {
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const { frontmatter, body } = parseFrontmatter(content);
+
+    const slug = relative(PRODUCT_TYPES_DIR, dirname(filePath))
+      .split(sep)
+      .join('/');
+    const id = String(frontmatter.id || slug);
+
+    // Summary may contain inline HTML formatting (br, span) for the overview
+    // page. Take the prose before the first tag — enough for search results,
+    // which truncate to ~80 chars anyway, and safer than regex-stripping.
+    const description = frontmatter.summary
+      ? String(frontmatter.summary).split('<')[0].trim()
+      : frontmatter.description
+        ? String(frontmatter.description)
+        : extractFirstParagraph(body);
+
+    return {
+      type: 'example',
+      id,
+      title: String(frontmatter.title || id),
+      description,
+      status: String(frontmatter.status || 'published'),
+      size: 'product',
+      productType: undefined,
+      tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
+      components: Array.isArray(frontmatter.components)
+        ? frontmatter.components.map(String)
+        : [],
+      aliases: Array.isArray(frontmatter.aliases)
+        ? frontmatter.aliases.map(String)
+        : [],
+      slug,
+    };
+  } catch (error) {
+    console.error(`Error processing productType ${filePath}:`, error);
     return null;
   }
 }
@@ -385,6 +446,20 @@ function main() {
     }
   }
   console.log(`  Found ${getStartedFiles.length} files, indexed ${entries.length - getStartedCount} pages`);
+
+  // Process productTypes (workspace, public-form, etc.) — surfaced as
+  // size:product overview entries so the same Cmd-K query that finds a
+  // page-scale entry also finds the introductory page for its product type.
+  console.log('Processing productTypes...');
+  const productTypeFiles = findMdxFiles(PRODUCT_TYPES_DIR);
+  const productTypeCountBefore = entries.length;
+  for (const file of productTypeFiles) {
+    const entry = processProductType(file);
+    if (entry) {
+      entries.push(entry);
+    }
+  }
+  console.log(`  Found ${productTypeFiles.length} files, indexed ${entries.length - productTypeCountBefore} productTypes`);
 
   // Ensure public directory exists
   const publicDir = dirname(OUTPUT_FILE);

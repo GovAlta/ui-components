@@ -1,0 +1,61 @@
+---
+/**
+ * Template Live Preview
+ *
+ * Standalone full-viewport preview of a template. Iframes the template's
+ * configured previewUrl (typically the workspace demo app) and wraps it
+ * with a minimal top bar so users can navigate back to the docs. This is
+ * the "isolated preview" distinct from the full working demo linked via
+ * the "View demo" CTA in the walkthrough.
+ */
+import { getCollection } from 'astro:content';
+import PreviewLayout from "../../../../layouts/PreviewLayout.astro";
+
+export async function getStaticPaths() {
+  const examples = await getCollection('examples');
+  // Nested examples with a previewUrl: the page-detail route wires the
+  // Live preview button here, and this route iframes the externally-hosted demo.
+  const nested = examples.filter(
+    (e) => e.slug.includes('/') && e.data.size === 'page' && e.data.previewUrl,
+  );
+  return nested.map((entry) => {
+    const [family, page] = entry.slug.split('/');
+    return {
+      params: { family, page },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { family, page } = Astro.params;
+const backUrl = `/examples/${family}/${page}`;
+const backLabel = `Back to ${data.title}`;
+const pageData = data as Extract<typeof data, { size: 'page' }>;
+---
+
+<PreviewLayout
+  title={`${data.title} preview`}
+  backUrl={backUrl}
+  backLabel={backLabel}
+  reactSourceUrl={pageData.reactSourceUrl}
+  angularSourceUrl={pageData.angularSourceUrl}
+>
+  <iframe
+    src={pageData.previewUrl}
+    class="iframe-fill"
+    title={`${data.title} live preview`}
+    loading="lazy"
+  ></iframe>
+</PreviewLayout>
+
+<style is:global>
+  .iframe-fill {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    display: block;
+    background: #ffffff;
+  }
+</style>

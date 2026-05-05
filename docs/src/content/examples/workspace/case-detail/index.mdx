@@ -1,0 +1,37 @@
+---
+id: workspace-case-detail
+title: Case detail
+size: page
+productType: workspace
+description: A single-record view for reviewing and acting on one case. Uses accordion sections, a table-of-contents sidebar, badges for status, and header actions for quick operations.
+previewUrl: https://digital-service-demo-v2.netlify.app/workspace/application/ef12df7d-74e7-4a82-9495-51589a0498ae
+previewImage: /thumbnails/workspace-case-detail.png
+reactSourceUrl: https://github.com/GovAlta/goa-workspace-playground/tree/main/src/routes/cases
+angularSourceUrl: https://github.com/GovAlta/goa-workspace-angular/tree/main/src/app/pages/cases
+components:
+  - accordion
+  - badge
+  - button
+  - drawer
+tags:
+  - workspace
+  - case-detail
+  - worker
+status: published
+---
+
+## When to use
+
+Use the case detail view when staff need to review and act on a single record.
+
+## Structure
+
+Break long content into sections using [accordions](/components/accordion) to organize submitted data into collapsible sections. A table-of-contents sidebar helps users navigate long case content. [Badges](/components/badge) show case status, and action buttons in the header provide quick access to review, assign, and comment actions.
+
+## Actions
+
+For focused work that should happen without leaving the page, pair case detail with a [push drawer](/components/push-drawer).
+
+## Considerations
+
+Keep the accordion section headings short and consistent. When the list of sections is long, the TOC sidebar becomes essential.
