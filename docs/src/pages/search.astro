@@ -12,11 +12,13 @@ import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
 import { SearchPage } from '../components/search';
 import { getNavCategories } from '../lib/nav-categories';
+import { getGetStartedNav } from '../lib/get-started-nav';
 
 // Get query from URL parameters
 const url = new URL(Astro.request.url);
 const initialQuery = url.searchParams.get('q') || '';
 const navCategories = await getNavCategories();
+const getStartedNav = await getGetStartedNav();
 ---
 
 <BaseLayout title="Search" description="Search the GoA Design System for components, patterns, and examples">
@@ -28,6 +30,7 @@ const navCategories = await getNavCategories();
           client:only="react"
           initialSection="components"
           categories={navCategories}
+          getStartedNav={getStartedNav}
         />
       </aside>
 

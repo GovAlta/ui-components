@@ -20,6 +20,7 @@ const ROOT = join(__dirname, '../..');
 // Content directories
 const COMPONENTS_DIR = join(ROOT, 'src/content/components');
 const EXAMPLES_DIR = join(ROOT, 'src/content/examples');
+const GET_STARTED_DIR = join(ROOT, 'src/content/get-started');
 const OUTPUT_FILE = join(ROOT, 'public/search-index.json');
 
 // ============================================================================
@@ -51,7 +52,18 @@ interface ExampleEntry {
   slug: string;
 }
 
-type SearchEntry = ComponentEntry | ExampleEntry;
+interface PageEntry {
+  type: 'page';
+  id: string;
+  title: string;
+  description?: string;
+  status: string;
+  category: string;     // High-level grouping for filter UI ("get started")
+  tags: string[];       // Synthesized from section so queries like "developer setup" hit
+  slug: string;         // URL path without leading slash (e.g. "get-started/developers/setup")
+}
+
+type SearchEntry = ComponentEntry | ExampleEntry | PageEntry;
 
 // ============================================================================
 // Frontmatter Parsing
@@ -253,6 +265,59 @@ function processExample(filePath: string): ExampleEntry | null {
 }
 
 /**
+ * Synthesize search tags from a Get Started section.
+ * Includes the singular form so a query like "developer setup" matches
+ * a page whose section is "developers".
+ */
+function tagsForSection(section: string): string[] {
+  const singular: Record<string, string> = {
+    designers: 'designer',
+    developers: 'developer',
+  };
+  const tags = [section];
+  if (singular[section]) tags.push(singular[section]);
+  return tags;
+}
+
+/**
+ * Process a Get Started MDX file into a search entry.
+ * The collection root holds the index page; nested folders are URL segments.
+ */
+function processGetStartedPage(filePath: string): PageEntry | null {
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const { frontmatter } = parseFrontmatter(content);
+
+    // Derive ID from path relative to the collection root, minus the extension.
+    // e.g. "developers/setup.mdx" -> "developers/setup"
+    // Normalize backslashes to forward slashes so Windows-built indexes still produce valid URLs.
+    const relPath = filePath
+      .slice(GET_STARTED_DIR.length + 1)
+      .replace(/\.mdx$/, '')
+      .replace(/\\/g, '/');
+
+    // The index entry lives at /get-started, every other entry under /get-started/<id>.
+    const slug = relPath === 'index' ? 'get-started' : `get-started/${relPath}`;
+
+    const section = String(frontmatter.section || '');
+
+    return {
+      type: 'page',
+      id: String(frontmatter.id || relPath),
+      title: String(frontmatter.title || relPath),
+      description: frontmatter.description ? String(frontmatter.description) : undefined,
+      status: String(frontmatter.status || 'published'),
+      category: 'get started',
+      tags: section ? tagsForSection(section) : [],
+      slug,
+    };
+  } catch (error) {
+    console.error(`Error processing get-started page ${filePath}:`, error);
+    return null;
+  }
+}
+
+/**
  * Recursively find all MDX files in a directory.
  */
 function findMdxFiles(dir: string): string[] {
@@ -308,6 +373,18 @@ function main() {
     }
   }
   console.log(`  Found ${exampleFiles.length} files, indexed ${entries.length - exampleCount} examples`);
+
+  // Process Get Started pages
+  console.log('Processing get-started pages...');
+  const getStartedFiles = findMdxFiles(GET_STARTED_DIR);
+  const getStartedCount = entries.length;
+  for (const file of getStartedFiles) {
+    const entry = processGetStartedPage(file);
+    if (entry) {
+      entries.push(entry);
+    }
+  }
+  console.log(`  Found ${getStartedFiles.length} files, indexed ${entries.length - getStartedCount} pages`);
 
   // Ensure public directory exists
   const publicDir = dirname(OUTPUT_FILE);
