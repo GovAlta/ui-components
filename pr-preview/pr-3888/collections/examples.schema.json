@@ -338,7 +338,7 @@
             },
             "size": {
               "type": "string",
-              "const": "flow"
+              "const": "task"
             },
             "previewUrl": {
               "$ref": "#/definitions/examples/anyOf/2/properties/previewUrl"
