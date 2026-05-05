@@ -3,6 +3,9 @@
  *
  * Sub-menu for Get Started section showing grouped pages.
  * Uses GoabWorkSideMenuGroup for expandable Designers/Developers sections.
+ *
+ * Nav structure is sourced from the get-started content collection via
+ * `getGetStartedNav()` in lib/get-started-nav.ts.
  */
 
 import { type MouseEvent } from "react";
@@ -13,59 +16,7 @@ import {
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 import { withBase } from "@/lib/base-url";
-
-// Top-level pages (not in a group)
-const TOP_PAGES = [
-  { label: "Starting with the design system", url: "/get-started" },
-  { label: "Automated accessibility", url: "/get-started/automated-accessibility" },
-  { label: "Component lifecycle", url: "/get-started/component-lifecycle" },
-  { label: "Roadmap", url: "/get-started/roadmap" },
-  { label: "Migration guide", url: "/get-started/migration-guide" },
-];
-
-// Grouped sections with sub-pages
-const PAGE_GROUPS = [
-  {
-    name: "Designers",
-    slug: "designers",
-    pages: [
-      { label: "Overview", url: "/get-started/designers" },
-      {
-        label: "Designing with Design System 2.0",
-        url: "/get-started/designers/designing-with-ds",
-      },
-      {
-        label: "User Experience Guidelines",
-        url: "/get-started/designers/ux-guidelines",
-      },
-    ],
-  },
-  {
-    name: "Developers",
-    slug: "developers",
-    pages: [
-      { label: "Overview", url: "/get-started/developers" },
-      { label: "Setup", url: "/get-started/developers/setup" },
-      { label: "Verify a bug", url: "/get-started/developers/bug" },
-      { label: "Technologies", url: "/get-started/developers/technologies" },
-      { label: "Supported browsers", url: "/get-started/developers/browsers" },
-    ],
-  },
-];
-
-// Bottom pages (after groups)
-const BOTTOM_PAGES = [
-  { label: "QA testing", url: "/get-started/qa-testing" },
-  { label: "Contribute", url: "/get-started/contribute" },
-  { label: "Out of support versions", url: "/get-started/out-of-support" },
-];
-
-// All URLs for matching current page
-const ALL_URLS = [
-  ...TOP_PAGES.map((p) => p.url),
-  ...PAGE_GROUPS.flatMap((g) => g.pages.map((p) => p.url)),
-  ...BOTTOM_PAGES.map((p) => p.url),
-];
+import type { GetStartedNav } from "@/lib/get-started-nav";
 
 interface GetStartedSubMenuProps {
   isOpen: boolean;
@@ -73,6 +24,7 @@ interface GetStartedSubMenuProps {
   onBack: () => void;
   onExpandMenu?: () => void;
   currentUrl?: string;
+  items: GetStartedNav;
 }
 
 export function GetStartedSubMenu({
@@ -81,6 +33,7 @@ export function GetStartedSubMenu({
   onBack,
   onExpandMenu,
   currentUrl,
+  items,
 }: GetStartedSubMenuProps) {
   const handleBackClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -96,13 +49,13 @@ export function GetStartedSubMenu({
       </div>
 
       {/* Top-level pages */}
-      {TOP_PAGES.map((page) => (
+      {items.topPages.map((page) => (
         <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
       ))}
 
       {/* Grouped sections */}
       <div>
-        {PAGE_GROUPS.map((group) => {
+        {items.groups.map((group) => {
           const containsCurrentPage = group.pages.some((p) => p.url === currentUrl);
 
           const handleGroupClickCapture = () => {
@@ -128,7 +81,7 @@ export function GetStartedSubMenu({
       </div>
 
       {/* Bottom pages */}
-      {BOTTOM_PAGES.map((page) => (
+      {items.bottomPages.map((page) => (
         <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
       ))}
     </>

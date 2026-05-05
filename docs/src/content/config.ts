@@ -168,9 +168,33 @@ const foundations = defineCollection({
   }),
 });
 
+/**
+ * Get Started Collection
+ * Onboarding pages for designers, developers, QA, and contributors.
+ * Entries flow to the docs site, MCP generator, and MD bundle.
+ */
+const getStarted = defineCollection({
+  type: "content",
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
+    // Optional shorter label for the submenu when the page title would read
+    // redundantly under its group heading (e.g. "Overview" vs "Designers overview").
+    navLabel: z.string().optional(),
+    description: z.string().optional(),
+    // Submenu placement. "intro" and "appendix" are top-level (above and below
+    // the grouped sections); "designers" and "developers" are grouped.
+    section: z.enum(["intro", "designers", "developers", "appendix"]),
+    // Sort order within section.
+    order: z.number(),
+    status: z.enum(["published", "draft", "deprecated"]).default("published"),
+  }),
+});
+
 export const collections = {
   components,
   guidance,
   examples,
   foundations,
+  "get-started": getStarted,
 };

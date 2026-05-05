@@ -21,6 +21,7 @@ import {
   FoundationsSubMenu,
   type MenuSection,
   type NavCategory,
+  type GetStartedNav,
 } from "./nav";
 
 interface SiteNavProps {
@@ -32,6 +33,8 @@ interface SiteNavProps {
   initialSection?: MenuSection;
   /** Component nav categories (from content collection, passed by Astro layout) */
   categories?: NavCategory[];
+  /** Get Started submenu structure (from content collection, passed by Astro layout) */
+  getStartedNav?: GetStartedNav;
 }
 
 // Sections that have submenus (show submenu when navigated to)
@@ -90,11 +93,18 @@ function getInitialMenuState(): boolean {
   return true;
 }
 
+const EMPTY_GET_STARTED_NAV: GetStartedNav = {
+  topPages: [],
+  groups: [],
+  bottomPages: [],
+};
+
 export function SiteNav({
   currentSlug,
   currentCategory,
   initialSection,
   categories = [],
+  getStartedNav = EMPTY_GET_STARTED_NAV,
 }: SiteNavProps) {
   // Menu state - persisted on desktop, always closed on mobile
   const [isOpen, setIsOpen] = useState(getInitialMenuState);
@@ -216,6 +226,7 @@ export function SiteNav({
           onBack={handleBack}
           onExpandMenu={handleExpandMenu}
           currentUrl={currentUrl}
+          items={getStartedNav}
         />
       );
 
