@@ -2816,5 +2816,205 @@
     "scale": "product",
     "userType": "worker",
     "slug": "workspace"
+  },
+  {
+    "type": "page",
+    "id": "automated-accessibility",
+    "title": "Automated accessibility",
+    "description": "Guidance on using automated accessibility testing tools effectively",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/automated-accessibility"
+  },
+  {
+    "type": "page",
+    "id": "component-lifecycle",
+    "title": "Component lifecycle",
+    "description": "The stages each Design System component moves through",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/component-lifecycle"
+  },
+  {
+    "type": "page",
+    "id": "contribute",
+    "title": "Contribute",
+    "description": "How to contribute to the GoA Design System",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "appendix"
+    ],
+    "slug": "get-started/contribute"
+  },
+  {
+    "type": "page",
+    "id": "designers/designing-with-ds",
+    "title": "Designing with Design System 2.0",
+    "description": "How to start new designs and update existing projects to Design System 2.0",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers/designing-with-ds"
+  },
+  {
+    "type": "page",
+    "id": "designers/ux-guidelines",
+    "title": "User experience guidelines",
+    "description": "User experience guidelines for Government of Alberta digital products",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers/ux-guidelines"
+  },
+  {
+    "type": "page",
+    "id": "designers",
+    "title": "Designers overview",
+    "description": "How designers use the design system through Figma",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers"
+  },
+  {
+    "type": "page",
+    "id": "developers/browsers",
+    "title": "Supported browsers",
+    "description": "Browser and operating system support for Design System components",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/browsers"
+  },
+  {
+    "type": "page",
+    "id": "developers/bug",
+    "title": "Verify a bug",
+    "description": "How to verify and report a bug in a Design System component",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/bug"
+  },
+  {
+    "type": "page",
+    "id": "developers/setup",
+    "title": "Developer setup",
+    "description": "Set up Angular, React, or Web Components to use the GoA Design System",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/setup"
+  },
+  {
+    "type": "page",
+    "id": "developers/technologies",
+    "title": "Technologies",
+    "description": "An overview of the technologies used in the Design System",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/technologies"
+  },
+  {
+    "type": "page",
+    "id": "developers",
+    "title": "Developers overview",
+    "description": "How developers use the design system through tokens, components, examples, and templates",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers"
+  },
+  {
+    "type": "page",
+    "id": "index",
+    "title": "Start with the design system",
+    "description": "Start with the design system to build on the research and experience of other service teams",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started"
+  },
+  {
+    "type": "page",
+    "id": "migration-guide",
+    "title": "Migration guide",
+    "description": "Choose the right Design System 2.0 migration pathway for your product",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/migration-guide"
+  },
+  {
+    "type": "page",
+    "id": "out-of-support",
+    "title": "Out of support versions",
+    "description": "Design System versions that are no longer supported",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "appendix"
+    ],
+    "slug": "get-started/out-of-support"
+  },
+  {
+    "type": "page",
+    "id": "qa-testing",
+    "title": "QA testing",
+    "description": "Testing process for Design System components",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "appendix"
+    ],
+    "slug": "get-started/qa-testing"
+  },
+  {
+    "type": "page",
+    "id": "roadmap",
+    "title": "Roadmap",
+    "description": "High-level roadmap for the design system team's 2026-27 fiscal year",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/roadmap"
   }
 ]
