@@ -1,0 +1,69 @@
+---
+/**
+ * Page-scale entry preview. Renders a PreviewContainer card linking to
+ * the entry's docs page since page/task/product compositions usually
+ * depend on app shell, mock data, or external sources that don't render
+ * usefully inline.
+ */
+import type { CollectionEntry } from 'astro:content';
+import PreviewContainer from './PreviewContainer.astro';
+import { getExampleCode } from '../lib/example-code';
+
+interface Props {
+  example: CollectionEntry<'examples'>;
+}
+
+const { example } = Astro.props;
+const { data } = example;
+
+// Page-scale schema branch carries source URLs, previewImage, and an optional
+// previewUrl pointing at an external demo or canonical variant.
+type PageShape = {
+  previewImage?: string;
+  previewUrl?: string;
+  reactSourceUrl?: string;
+  angularSourceUrl?: string;
+};
+const pageData = data as typeof data & PageShape;
+
+// Only emit a Live preview link when one will resolve. Multi-variant entries
+// (question-page, error-pages) have no flat /examples/{slug}/preview route;
+// "View more" carries the user to the canonical page where each variant has
+// its own preview button.
+const code = await getExampleCode(example.slug);
+const previewUrl =
+  pageData.previewUrl ?? (code.react ? `/examples/${example.slug}/preview` : undefined);
+---
+
+<article class="example-display">
+  <div class="example-preview page-scale-preview">
+    <h3 id={`example-${example.slug}`} class="example-title page-scale-title">{data.title}</h3>
+    <PreviewContainer
+      image={pageData.previewImage}
+      alt={`${data.title} preview`}
+      previewUrl={previewUrl}
+      reactSourceUrl={pageData.reactSourceUrl}
+      angularSourceUrl={pageData.angularSourceUrl}
+      moreUrl={`/examples/${example.slug}`}
+    />
+  </div>
+</article>
+
+<style>
+  .example-display {
+    margin-bottom: var(--goa-space-2xl, 2.5rem);
+    padding-bottom: var(--goa-space-xl, 2rem);
+    border-bottom: 1px solid var(--goa-color-greyscale-200, #dcdcdc);
+  }
+
+  .example-display:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .page-scale-title {
+    font: var(--goa-typography-heading-s);
+    margin: 0 0 var(--goa-space-m, 1rem) !important;
+    color: var(--goa-color-text-default, #333);
+  }
+</style>
