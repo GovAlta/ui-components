@@ -8,22 +8,10 @@ import {
   GoabFormItem,
   GoabText,
 } from "@abgov/react-components";
-import { useEffect, useState } from "react";
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
+import { useState } from "react";
 
 export function Bug3625Route() {
   const [controlledOpen, setControlledOpen] = useState(false);
-
-  // Inject the v2 design tokens
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
 
   return (
     <div>

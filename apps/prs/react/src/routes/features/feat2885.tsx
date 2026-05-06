@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   GoabIconButton,
   GoabWorkSideMenu,
@@ -6,9 +6,6 @@ import {
   GoabWorkSideNotificationItem,
   GoabWorkSideNotificationPanel,
 } from "@abgov/react-components";
-
-// ?url suffix tells Vite to resolve the path without injecting the CSS
-import v2TokensUrl from "@abgov/design-tokens-v2/dist/tokens.css?url";
 
 type Notification = {
   id: string;
@@ -22,18 +19,6 @@ type Notification = {
 
 export function Feat2885Route() {
   const [menuOpen, setMenuOpen] = useState(true);
-
-  // Dynamically load v2 design tokens only while this page is mounted,
-  // so they don't leak into other routes in the SPA.
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
 
   // Helper to get date at specific days ago
   const daysAgo = (days: number, hours = 0) => {
