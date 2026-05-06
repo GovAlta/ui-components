@@ -75989,8 +75989,8 @@ function Feat3636Route() {
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
               headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: " 1 Comment(s) " }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: " View " })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
               ] }),
               iconPosition: "right",
               children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -76005,8 +76005,8 @@ function Feat3636Route() {
               heading: "Randall Sanford",
               headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: " 1 Comment(s) " }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: " View " })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
               ] }),
               children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
@@ -76057,10 +76057,28 @@ function Feat3636Route() {
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
               headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: " 1 Comment(s) " }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: " View " })
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
               ] }),
               secondaryText: "Secondary text that is long enough to wrap onto multiple lines and push the heading content and actions down",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
+              ] }),
+              secondaryText: "Secondary text that is long enough to wrap onto multiple lines and push the heading content and actions down",
+              iconPosition: "right",
               children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
                 "The chevron should be centered here"
