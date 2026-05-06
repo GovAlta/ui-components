@@ -76150,7 +76150,7 @@ const featureRouteDefinitions = prRouteDefinitions.filter(
 const docsRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "docs"
 );
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3874/assets/tokens-u-qGJicf.css";
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3874/assets/tokens-C4IV9SIY.css";
 const STORAGE_KEY = "goa-token-version";
 const LINK_ID = "goa-tokens-v2";
 const URL_PARAM = "tokens";
