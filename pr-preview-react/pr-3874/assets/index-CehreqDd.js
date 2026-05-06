@@ -17419,13 +17419,13 @@ function GoabWorkSideNotificationPanel({
     }
   );
 }
-const STORAGE_KEY = "goab-theme";
+const STORAGE_KEY$1 = "goab-theme";
 const ATTRIBUTE = "data-theme";
 const GoabThemeContext = reactExports.createContext(null);
 function readInitialMode(defaultMode) {
   if (typeof window === "undefined") return defaultMode;
   try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
+    const stored = window.localStorage.getItem(STORAGE_KEY$1);
     if (stored === "light" || stored === "dark") return stored;
   } catch {
   }
@@ -17445,7 +17445,7 @@ function GoabThemeProvider({
     if (typeof document === "undefined") return;
     document.documentElement.setAttribute(ATTRIBUTE, mode);
     try {
-      window.localStorage.setItem(STORAGE_KEY, mode);
+      window.localStorage.setItem(STORAGE_KEY$1, mode);
     } catch {
     }
   }, [mode]);
@@ -23109,19 +23109,19 @@ class vc extends Ce {
 }
 customElements.define("goa-app-header-menu", ke(vc, { heading: {}, leadingicon: {}, type: {}, version: {}, testid: {} }, ["default"], [], true));
 function hc(t) {
-  Ne(t, "svelte-7b6a73", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);height:var(--goa-badge-height)}.goa-badge.svelte-7b6a73.svelte-7b6a73{display:inline-flex;height:var(--goa-badge-height);width:auto;vertical-align:top;align-items:center;border-radius:var(--goa-badge-border-radius);padding:var(--goa-badge-padding);gap:var(--goa-badge-gap);font-weight:var(--goa-font-weight-regular);box-shadow:var(--goa-badge-border)}.icon-only.svelte-7b6a73.svelte-7b6a73{padding:0 3px}.goa-badge-no-icon.svelte-7b6a73.svelte-7b6a73{margin-left:-0.25rem}.goa-badge-content.svelte-7b6a73.svelte-7b6a73{font-size:var(--goa-badge-font-size);line-height:var(--goa-badge-line-height);white-space:nowrap;padding-bottom:3px}.goa-badge.badge-information.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-info-color-bg);color:var(--goa-badge-info-color-content)}.goa-badge.badge-success.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-success-color-bg);color:var(--goa-badge-success-color-content)}.goa-badge.badge-important.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-important-color-bg);color:var(--goa-badge-important-color-content)}.goa-badge.badge-emergency.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-emergency-color-bg);color:var(--goa-badge-emergency-color-content)}.goa-badge.badge-dark.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-dark-color-bg);color:var(--goa-badge-dark-color-content)}.goa-badge.badge-midtone.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-midtone-color-bg);color:var(--goa-badge-midtone-color-content)}.goa-badge.badge-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-light-color-bg);color:var(--goa-badge-light-color-content)}.goa-badge.badge-archived.svelte-7b6a73.svelte-7b6a73{background-color:var(
+  Ne(t, "svelte-y085m3", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);height:var(--goa-badge-height)}.goa-badge.svelte-y085m3.svelte-y085m3{display:inline-flex;height:var(--goa-badge-height);width:auto;vertical-align:top;align-items:center;border-radius:var(--goa-badge-border-radius);padding:var(--goa-badge-padding);gap:var(--goa-badge-gap);font-weight:var(--goa-font-weight-regular);box-shadow:var(--goa-badge-border)}.icon-only.svelte-y085m3.svelte-y085m3{padding:0 3px}.goa-badge-no-icon.svelte-y085m3.svelte-y085m3{margin-left:-0.25rem}.goa-badge-content.svelte-y085m3.svelte-y085m3{font-size:var(--goa-badge-font-size);line-height:var(--goa-badge-line-height);white-space:nowrap;padding-bottom:3px}.goa-badge.badge-information.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-info-color-bg);color:var(--goa-badge-info-color-content)}.goa-badge.badge-success.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-success-color-bg);color:var(--goa-badge-success-color-content)}.goa-badge.badge-important.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-important-color-bg);color:var(--goa-badge-important-color-content)}.goa-badge.badge-emergency.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-emergency-color-bg);color:var(--goa-badge-emergency-color-content)}.goa-badge.badge-dark.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-dark-color-bg);color:var(--goa-badge-dark-color-content)}.goa-badge.badge-midtone.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-midtone-color-bg);color:var(--goa-badge-midtone-color-content)}.goa-badge.badge-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-light-color-bg);color:var(--goa-badge-light-color-content)}.goa-badge.badge-archived.svelte-y085m3.svelte-y085m3{background-color:var(
       --goa-badge-archived-color-bg,
       var(--goa-color-greyscale-700)
     );color:var(
       --goa-badge-archived-color-content,
       var(--goa-badge-dark-color-content)
-    )}.goa-badge.badge-aqua.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-aqua);color:var(--goa-color-text-default)}.goa-badge.badge-black.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-greyscale-black);color:var(--goa-badge-dark-color-content)}.goa-badge.badge-blue.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-blue);color:var(--goa-color-text-default)}.goa-badge.badge-green.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-green);color:var(--goa-color-text-default)}.goa-badge.badge-orange.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-orange);color:var(--goa-color-text-default)}.goa-badge.badge-pink.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-pink);color:var(--goa-color-text-default)}.goa-badge.badge-red.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-red);color:var(--goa-color-text-default)}.goa-badge.badge-violet.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-violet);color:var(--goa-color-text-default)}.goa-badge.badge-white.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-greyscale-white);color:var(--goa-badge-light-color-content)}.goa-badge.badge-yellow.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-yellow);color:var(--goa-badge-light-color-content)}.goa-badge.badge-aqua-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-aqua);color:var(--goa-badge-light-color-content)}.goa-badge.badge-black-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-greyscale-150);color:var(--goa-badge-light-color-content)}.goa-badge.badge-blue-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-blue);color:var(--goa-badge-light-color-content)}.goa-badge.badge-green-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-green);color:var(--goa-badge-light-color-content)}.goa-badge.badge-orange-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-orange);color:var(--goa-badge-light-color-content)}.goa-badge.badge-pink-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-pink);color:var(--goa-badge-light-color-content)}.goa-badge.badge-red-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-red);color:var(--goa-badge-light-color-content)}.goa-badge.badge-violet-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-violet);color:var(--goa-badge-light-color-content)}.goa-badge.badge-yellow-light.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-light-yellow);color:var(--goa-badge-light-color-content)}.v2.svelte-7b6a73 .goa-badge-content.svelte-7b6a73{padding-bottom:0}.v2.badge-strong.svelte-7b6a73.svelte-7b6a73{box-shadow:none}.v2.badge-default.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-default-color-bg);color:var(--goa-badge-default-color-content)}.v2.badge-default.badge-subtle.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-default-subtle-color-bg);box-shadow:var(--goa-badge-default-subtle-border);color:var(--goa-badge-default-subtle-color-content)}.v2.goa-badge.badge-archived.badge-subtle.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-archived-subtle-color-bg);box-shadow:var(--goa-badge-archived-subtle-border);color:var(--goa-badge-archived-subtle-color-content)}.v2.badge-sky.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-sky-default);color:var(--goa-color-extended-sky-text)}.v2.badge-prairie.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-prairie-default);color:var(--goa-color-extended-prairie-text)}.v2.badge-lilac.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-lilac-default);color:var(--goa-color-extended-lilac-text)}.v2.badge-pasture.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-pasture-default);color:var(--goa-color-extended-pasture-text)}.v2.badge-sunset.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-sunset-default);color:var(--goa-color-extended-sunset-text)}.v2.badge-dawn.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-dawn-default);color:var(--goa-color-extended-dawn-text)}.v2.badge-subtle.badge-sky.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-sky-light);box-shadow:var(--goa-badge-sky-subtle-border);color:var(--goa-color-extended-sky-text)}.v2.badge-subtle.badge-prairie.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-prairie-light);box-shadow:var(--goa-badge-prairie-subtle-border);color:var(--goa-color-extended-prairie-text)}.v2.badge-subtle.badge-lilac.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-lilac-light);box-shadow:var(--goa-badge-lilac-subtle-border);color:var(--goa-color-extended-lilac-text)}.v2.badge-subtle.badge-pasture.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-pasture-light);box-shadow:var(--goa-badge-pasture-subtle-border);color:var(--goa-color-extended-pasture-text)}.v2.badge-subtle.badge-sunset.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-sunset-light);box-shadow:var(--goa-badge-sunset-subtle-border);color:var(--goa-color-extended-sunset-text)}.v2.badge-subtle.badge-dawn.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-color-extended-dawn-light);box-shadow:var(--goa-badge-dawn-subtle-border);color:var(--goa-color-extended-dawn-text)}.v2.goa-badge.badge-subtle.badge-information.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-info-subtle-color-bg);color:var(--goa-badge-info-subtle-color-content);box-shadow:var(--goa-badge-info-subtle-border)}.v2.goa-badge.badge-subtle.badge-success.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-success-subtle-color-bg);color:var(--goa-badge-success-subtle-color-content);box-shadow:var(--goa-badge-success-subtle-border)}.v2.goa-badge.badge-subtle.badge-important.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-important-subtle-color-bg);color:var(--goa-badge-important-subtle-color-content);box-shadow:var(--goa-badge-important-subtle-border)}.v2.goa-badge.badge-subtle.badge-emergency.svelte-7b6a73.svelte-7b6a73{background-color:var(--goa-badge-emergency-subtle-color-bg);color:var(--goa-badge-emergency-subtle-color-content);box-shadow:var(--goa-badge-emergency-subtle-border)}.v2.goa-badge.badge-large.svelte-7b6a73.svelte-7b6a73{height:var(--goa-badge-height-large);padding:var(--goa-badge-padding-large);--goa-icon-size:var(--goa-badge-icon-size-large)}.v2.goa-badge.badge-large.svelte-7b6a73 .goa-badge-content.svelte-7b6a73{font-size:var(--goa-badge-font-size-large);line-height:var(--goa-badge-line-height-large)}`);
+    )}.goa-badge.badge-aqua.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-aqua);color:var(--goa-color-text-default)}.goa-badge.badge-black.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-greyscale-black);color:var(--goa-badge-dark-color-content)}.goa-badge.badge-blue.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-blue);color:var(--goa-color-text-default)}.goa-badge.badge-green.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-green);color:var(--goa-color-text-default)}.goa-badge.badge-orange.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-orange);color:var(--goa-color-text-default)}.goa-badge.badge-pink.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-pink);color:var(--goa-color-text-default)}.goa-badge.badge-red.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-red);color:var(--goa-color-text-default)}.goa-badge.badge-violet.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-violet);color:var(--goa-color-text-default)}.goa-badge.badge-white.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-greyscale-white);color:var(--goa-badge-light-color-content)}.goa-badge.badge-yellow.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-yellow);color:var(--goa-badge-light-color-content)}.goa-badge.badge-aqua-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-aqua);color:var(--goa-badge-light-color-content)}.goa-badge.badge-black-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-greyscale-150);color:var(--goa-badge-light-color-content)}.goa-badge.badge-blue-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-blue);color:var(--goa-badge-light-color-content)}.goa-badge.badge-green-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-green);color:var(--goa-badge-light-color-content)}.goa-badge.badge-orange-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-orange);color:var(--goa-badge-light-color-content)}.goa-badge.badge-pink-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-pink);color:var(--goa-badge-light-color-content)}.goa-badge.badge-red-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-red);color:var(--goa-badge-light-color-content)}.goa-badge.badge-violet-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-violet);color:var(--goa-badge-light-color-content)}.goa-badge.badge-yellow-light.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-light-yellow);color:var(--goa-badge-light-color-content)}.v2.svelte-y085m3 .goa-badge-content.svelte-y085m3{padding-bottom:0}.v2.badge-strong.svelte-y085m3.svelte-y085m3{box-shadow:none}.v2.badge-default.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-default-color-bg);color:var(--goa-badge-default-color-content)}.v2.badge-default.badge-subtle.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-default-subtle-color-bg);box-shadow:var(--goa-badge-default-subtle-border);color:var(--goa-badge-default-subtle-color-content)}.v2.goa-badge.badge-archived.badge-subtle.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-archived-subtle-color-bg);box-shadow:var(--goa-badge-archived-subtle-border);color:var(--goa-badge-archived-subtle-color-content)}.v2.badge-sky.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-sky-default);color:var(--goa-color-extended-sky-text-dark)}.v2.badge-prairie.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-prairie-default);color:var(--goa-color-extended-prairie-text-dark)}.v2.badge-lilac.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-lilac-default);color:var(--goa-color-extended-lilac-text-dark)}.v2.badge-pasture.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-pasture-default);color:var(--goa-color-extended-pasture-text-dark)}.v2.badge-sunset.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-sunset-default);color:var(--goa-color-extended-sunset-text-dark)}.v2.badge-dawn.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-dawn-default);color:var(--goa-color-extended-dawn-text-dark)}.v2.badge-subtle.badge-sky.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-sky-light);box-shadow:var(--goa-badge-sky-subtle-border);color:var(--goa-color-extended-sky-text)}.v2.badge-subtle.badge-prairie.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-prairie-light);box-shadow:var(--goa-badge-prairie-subtle-border);color:var(--goa-color-extended-prairie-text)}.v2.badge-subtle.badge-lilac.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-lilac-light);box-shadow:var(--goa-badge-lilac-subtle-border);color:var(--goa-color-extended-lilac-text)}.v2.badge-subtle.badge-pasture.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-pasture-light);box-shadow:var(--goa-badge-pasture-subtle-border);color:var(--goa-color-extended-pasture-text)}.v2.badge-subtle.badge-sunset.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-sunset-light);box-shadow:var(--goa-badge-sunset-subtle-border);color:var(--goa-color-extended-sunset-text)}.v2.badge-subtle.badge-dawn.svelte-y085m3.svelte-y085m3{background-color:var(--goa-color-extended-dawn-light);box-shadow:var(--goa-badge-dawn-subtle-border);color:var(--goa-color-extended-dawn-text)}.v2.goa-badge.badge-subtle.badge-information.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-info-subtle-color-bg);color:var(--goa-badge-info-subtle-color-content);box-shadow:var(--goa-badge-info-subtle-border)}.v2.goa-badge.badge-subtle.badge-success.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-success-subtle-color-bg);color:var(--goa-badge-success-subtle-color-content);box-shadow:var(--goa-badge-success-subtle-border)}.v2.goa-badge.badge-subtle.badge-important.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-important-subtle-color-bg);color:var(--goa-badge-important-subtle-color-content);box-shadow:var(--goa-badge-important-subtle-border)}.v2.goa-badge.badge-subtle.badge-emergency.svelte-y085m3.svelte-y085m3{background-color:var(--goa-badge-emergency-subtle-color-bg);color:var(--goa-badge-emergency-subtle-color-content);box-shadow:var(--goa-badge-emergency-subtle-border)}.v2.goa-badge.badge-large.svelte-y085m3.svelte-y085m3{height:var(--goa-badge-height-large);padding:var(--goa-badge-padding-large);--goa-icon-size:var(--goa-badge-icon-size-large)}.v2.goa-badge.badge-large.svelte-y085m3 .goa-badge-content.svelte-y085m3{font-size:var(--goa-badge-font-size-large);line-height:var(--goa-badge-line-height-large)}`);
 }
 function mc(t) {
   let e;
   return {
     c() {
-      e = C("div"), f(e, "class", "goa-badge-no-icon svelte-7b6a73");
+      e = C("div"), f(e, "class", "goa-badge-no-icon svelte-y085m3");
     },
     m(o, i) {
       E(o, e, i);
@@ -23180,7 +23180,7 @@ function Ui(t) {
       e = C("div"), o = ce(
         /*content*/
         t[2]
-      ), f(e, "class", "goa-badge-content svelte-7b6a73");
+      ), f(e, "class", "goa-badge-content svelte-y085m3");
     },
     m(i, n) {
       E(i, e, n), _(e, o);
@@ -23237,7 +23237,7 @@ function pc(t) {
       ), f(e, "data-type", "goa-badge"), f(e, "class", n = "goa-badge badge-" + /*type*/
       t[0] + " badge-" + /*size*/
       t[5] + " badge-" + /*emphasis*/
-      t[6] + " svelte-7b6a73"), I(
+      t[6] + " svelte-y085m3"), I(
         e,
         "icon-only",
         /*showIconOnly*/
@@ -23282,7 +23282,7 @@ function pc(t) {
       97 && n !== (n = "goa-badge badge-" + /*type*/
       d[0] + " badge-" + /*size*/
       d[5] + " badge-" + /*emphasis*/
-      d[6] + " svelte-7b6a73") && f(e, "class", n), s & /*type, size, emphasis, showIconOnly*/
+      d[6] + " svelte-y085m3") && f(e, "class", n), s & /*type, size, emphasis, showIconOnly*/
       32865 && I(
         e,
         "icon-only",
@@ -46725,8 +46725,8 @@ const { window: Ns } = mo;
 function K3(t) {
   Ne(t, "svelte-bmf18g", ":host{display:contents}");
 }
-const $3 = (t) => ({}), Vl = (t) => ({}), e4 = (t) => ({}), Zl = (t) => ({});
-function t4(t) {
+const $3 = (t) => ({}), Vl = (t) => ({}), e5 = (t) => ({}), Zl = (t) => ({});
+function t5(t) {
   let e, o, i, n = (
     /*$$slots*/
     t[9].actions && Bl(t)
@@ -46843,7 +46843,7 @@ function t4(t) {
     }
   };
 }
-function o4(t) {
+function o5(t) {
   let e, o, i, n = (
     /*$$slots*/
     t[9].actions && Yl(t)
@@ -47043,7 +47043,7 @@ function Yl(t) {
           /*$$scope*/
           r[10],
           l,
-          e4
+          e5
         ) : he(
           /*$$scope*/
           r[10]
@@ -47062,13 +47062,13 @@ function Yl(t) {
     }
   };
 }
-function i4(t) {
+function i5(t) {
   let e, o, i, n, r, l;
   nt(
     /*onwindowresize*/
     t[12]
   );
-  const a = [o4, t4], c = [];
+  const a = [o5, t5], c = [];
   function d(s, u) {
     return (
       /*windowIsSmallerThanDesktop*/
@@ -47104,8 +47104,8 @@ function i4(t) {
     }
   };
 }
-const n4 = 1023;
-function r4(t, e, o) {
+const n5 = 1023;
+function r5(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
   const a = vt(r);
   let { testid: c = void 0 } = e, { open: d = false } = e, { heading: s = "" } = e, { width: u = "492px" } = e, { version: g = void 0 } = e;
@@ -47117,7 +47117,7 @@ function r4(t, e, o) {
     "testid" in w && o(0, c = w.testid), "open" in w && o(1, d = w.open), "heading" in w && o(2, s = w.heading), "width" in w && o(3, u = w.width), "version" in w && o(4, g = w.version), "$$scope" in w && o(10, l = w.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*windowWidth*/
-    128 && o(8, n = i <= n4);
+    128 && o(8, n = i <= n5);
   }, o(7, i = window.innerWidth), [
     c,
     d,
@@ -47134,13 +47134,13 @@ function r4(t, e, o) {
     b
   ];
 }
-class l4 extends Ce {
+class l5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      r4,
-      i4,
+      r5,
+      i5,
       _e,
       {
         testid: 0,
@@ -47191,11 +47191,11 @@ class l4 extends Ce {
     return this.$$.ctx[6];
   }
 }
-customElements.define("goa-push-drawer", ke(l4, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true }, version: { type: "String", reflect: true } }, ["actions", "default"], ["drawerTestId", "pushDrawerTestId"], true));
-function a4(t) {
+customElements.define("goa-push-drawer", ke(l5, { testid: { type: "String", attribute: "testid", reflect: true }, open: { type: "Boolean", reflect: true }, heading: { type: "String", reflect: true }, width: { type: "String", reflect: true }, version: { type: "String", reflect: true } }, ["actions", "default"], ["drawerTestId", "pushDrawerTestId"], true));
+function a5(t) {
   Ne(t, "svelte-1e6przw", `.radio.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{display:inline-flex;align-self:flex-start}label.radio.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{box-sizing:border-box;display:inline-flex}.container.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{display:flex;flex-direction:column;justify-content:flex-start}.radio.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw:hover{cursor:pointer}.radio.svelte-1e6przw .svelte-1e6przw.svelte-1e6przw,.radio.svelte-1e6przw .svelte-1e6przw.svelte-1e6przw:before,.radio.svelte-1e6przw .svelte-1e6przw.svelte-1e6przw:after{box-sizing:border-box}.radio.svelte-1e6przw input[type="radio"].svelte-1e6przw.svelte-1e6przw{width:0;min-height:28px;margin:0;opacity:0}.label.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{font:var(--goa-radio-label);margin-top:-3px;padding-left:var(--goa-radio-gap-label, var(--goa-space-s))}.radio.v2.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw{margin-top:1px}.radio.v2.compact.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw{padding-left:var(--goa-radio-gap-label-compact)}.radio.v2.compact.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw{font:var(--goa-radio-label-compact)}.description.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{font:var(--goa-radio-description);margin-left:calc(var(--goa-radio-size) + var(--goa-space-s));margin-top:var(--goa-space-2xs);color:var(--goa-input-color-text-helper, var(--goa-color-text-default))}.radio.v2.svelte-1e6przw:not(.compact)~.description.svelte-1e6przw.svelte-1e6przw{margin-left:calc(var(--goa-radio-size) + var(--goa-radio-gap-label))}.radio.v2.compact.svelte-1e6przw~.description.svelte-1e6przw.svelte-1e6przw{margin-left:calc(var(--goa-radio-size) + var(--goa-radio-gap-label-compact));margin-top:var(--goa-space-3xs)}.reveal.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{display:none;height:0}.reveal.visible.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{height:-moz-fit-content;height:fit-content;display:block}.reveal.visible.has-content.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{padding:var(--goa-radio-reveal-padding, var(--goa-space-m));margin:var(--goa-radio-reveal-margin, var(--goa-space-2xs) 0 0 calc(var(--goa-space-s) - 2px));border-left:var(--goa-radio-reveal-border, 4px solid var(--goa-color-greyscale-200));box-sizing:border-box}.radio.v2.svelte-1e6przw~.reveal.visible.has-content.svelte-1e6przw.svelte-1e6przw{padding:var(--goa-radio-reveal-padding, var(--goa-space-l));border-left:var(--goa-radio-reveal-border, 1px solid var(--goa-color-greyscale-200))}.radio.v2.compact.svelte-1e6przw~.reveal.visible.has-content.svelte-1e6przw.svelte-1e6przw{padding:calc(var(--goa-space-m) + var(--goa-space-2xs))}.icon.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw{position:relative;display:inline-block;height:var(--goa-radio-size);width:var(--goa-radio-size);border-radius:var(--goa-radio-border-radius);background-color:var(--goa-radio-color-bg);transition:all 100ms ease-in-out;flex:0 0 auto}.v2.svelte-1e6przw .icon.svelte-1e6przw.svelte-1e6przw::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:var(--goa-radio-inner-size);height:var(--goa-radio-inner-size);border-radius:50%;transition:background-color 100ms ease-in-out}.icon.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw::before{content:'';position:absolute;width:44px;height:44px;top:50%;left:50%;transform:translate(-50%, -50%)}.radio--disabled.svelte-1e6przw .label.svelte-1e6przw.svelte-1e6przw,.radio--disabled.svelte-1e6przw~.description.svelte-1e6przw.svelte-1e6przw{color:var(--goa-radio-label-color-disabled)}.radio--disabled.svelte-1e6przw.svelte-1e6przw.svelte-1e6przw:hover{cursor:default}input[type="radio"].svelte-1e6przw:not(:checked)~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border)}input[type="radio"].svelte-1e6przw:not(:checked):hover~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-hover)}input[type="radio"].svelte-1e6przw:not(:checked):focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:not(:checked):hover:focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border);outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-disabled)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked, 4px solid var(--goa-color-greyscale-200))}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color)}input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked-hover)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-hover)}input[type="radio"].svelte-1e6przw:checked:focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:checked:hover:focus-visible~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked);outline:var(--goa-radio-border-focus);outline-offset:2px}input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw.svelte-1e6przw{border:var(--goa-radio-border-checked-disabled)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-disabled)}.radio.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked)~.icon.icon.svelte-1e6przw{border:var(--goa-radio-border-error)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked)~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):hover~.icon.svelte-1e6przw{border:var(--goa-radio-border-error-hover)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):hover~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error-hover)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):focus-visible~.icon.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw{border:var(--goa-radio-border-error-disabled)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:not(:checked):disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw,.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw{border:var(--goa-radio-border-checked-error)}.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-error)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw{border:var(--goa-radio-border-checked-error-hover)}.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-error-hover)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:hover~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-error-hover)}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:focus-visible~.icon.svelte-1e6przw{outline:var(--goa-radio-border-focus);outline-offset:2px}.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw{border:var(--goa-radio-border-checked-error-disabled)}.radio--error.v2.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw::after{background-color:var(--goa-radio-inner-color-disabled)}.radio.v2.radio--error.svelte-1e6przw input[type="radio"].svelte-1e6przw:checked:disabled~.icon.svelte-1e6przw{background-color:var(--goa-radio-color-bg-disabled)}`);
 }
-const s4 = (t) => ({}), Fl = (t) => ({}), c4 = (t) => ({}), Wl = (t) => ({});
+const s5 = (t) => ({}), Fl = (t) => ({}), c5 = (t) => ({}), Wl = (t) => ({});
 function Ql(t) {
   let e, o, i, n, r;
   const l = (
@@ -47233,7 +47233,7 @@ function Ql(t) {
           /*$$scope*/
           c[25],
           d,
-          c4
+          c5
         ) : he(
           /*$$scope*/
           c[25]
@@ -47260,7 +47260,7 @@ function Ql(t) {
     }
   };
 }
-function d4(t) {
+function d5(t) {
   let e, o, i, n, r, l, a, c, d, s = (
     /*label*/
     (t[3] || /*value*/
@@ -47442,7 +47442,7 @@ function d4(t) {
           /*$$scope*/
           L[25],
           T,
-          s4
+          s5
         ) : he(
           /*$$scope*/
           L[25]
@@ -47488,7 +47488,7 @@ function d4(t) {
     }
   };
 }
-function u4(t, e, o) {
+function u5(t, e, o) {
   let i, n, r, l, { $$slots: a = {}, $$scope: c } = e;
   const d = vt(a);
   let { value: s } = e, { name: u = "" } = e, { label: g = "" } = e, { description: v = "" } = e, { disabled: h = "false" } = e, { error: b = "false" } = e, { checked: w = "false" } = e, { arialabel: p = "" } = e, { revealarialabel: k = "" } = e, { maxwidth: M = "none" } = e, { mt: z = null } = e, { mr: N = null } = e, { mb: j = null } = e, { ml: L = null } = e, T, x, Y = [], P = 0, O = "1", S = false;
@@ -47627,13 +47627,13 @@ function u4(t, e, o) {
     H
   ];
 }
-class f4 extends Ce {
+class f5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      u4,
-      d4,
+      u5,
+      d5,
       _e,
       {
         value: 2,
@@ -47651,7 +47651,7 @@ class f4 extends Ce {
         mb: 8,
         ml: 9
       },
-      a4,
+      a5,
       [-1, -1]
     );
   }
@@ -47740,11 +47740,11 @@ class f4 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-radio-item", ke(f4, { value: { reflect: true }, name: {}, label: {}, description: { reflect: true }, disabled: { reflect: true }, error: { reflect: true }, checked: { reflect: true }, arialabel: { reflect: true }, revealarialabel: { reflect: true }, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["description", "reveal"], [], true));
-function g4(t) {
+customElements.define("goa-radio-item", ke(f5, { value: { reflect: true }, name: {}, label: {}, description: { reflect: true }, disabled: { reflect: true }, error: { reflect: true }, checked: { reflect: true }, arialabel: { reflect: true }, revealarialabel: { reflect: true }, maxwidth: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["description", "reveal"], [], true));
+function g5(t) {
   Ne(t, "svelte-v0blf9", ":host{font-family:var(--goa-font-family-sans)}.goa-radio-group--horizontal.svelte-v0blf9{display:flex;flex-direction:row;gap:var(--goa-radio-group-gap-horizontal)}.goa-radio-group--horizontal.v2.compact.svelte-v0blf9{gap:var(--goa-radio-group-gap-horizontal-compact)}.goa-radio-group--vertical.svelte-v0blf9{display:flex;flex-direction:column;gap:var(--goa-radio-group-gap-vertical);width:100%}.goa-radio-group--vertical.v2.compact.svelte-v0blf9{gap:var(--goa-radio-group-gap-vertical-compact)}.goa-radio-group--horizontal.svelte-v0blf9:focus,.goa-radio-group--vertical.svelte-v0blf9:focus{outline:none}");
 }
-function v4(t) {
+function v5(t) {
   let e, o, i, n, r, l, a;
   const c = (
     /*#slots*/
@@ -47869,7 +47869,7 @@ function v4(t) {
     }
   };
 }
-function h4(t, e, o) {
+function h5(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
   const [a, c] = Ae("Radio group orientation", ["vertical", "horizontal"]), [d, s] = Ae("Version", ["1", "2"]), [u, g] = Ae("Size", ["default", "compact"]);
   let { name: v } = e, { value: h } = e, { orientation: b = "vertical" } = e, { disabled: w = "false" } = e, { error: p = "false" } = e, { version: k = "1" } = e, { size: M = "default" } = e, { testid: z = "" } = e, { arialabel: N = "" } = e, { mt: j = null } = e, { mr: L = null } = e, { mb: T = null } = e, { ml: x = null } = e, Y = Oe(p), P = Y, O, S = [], F;
@@ -48000,13 +48000,13 @@ function h4(t, e, o) {
     te
   ];
 }
-class m4 extends Ce {
+class m5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      h4,
-      v4,
+      h5,
+      v5,
       _e,
       {
         name: 14,
@@ -48023,7 +48023,7 @@ class m4 extends Ce {
         mb: 6,
         ml: 7
       },
-      g4,
+      g5,
       [-1, -1]
     );
   }
@@ -48106,11 +48106,11 @@ class m4 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-radio-group", ke(m4, { name: {}, value: {}, orientation: {}, disabled: {}, error: {}, version: {}, size: {}, testid: {}, arialabel: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function b4(t) {
+customElements.define("goa-radio-group", ke(m5, { name: {}, value: {}, orientation: {}, disabled: {}, error: {}, version: {}, size: {}, testid: {}, arialabel: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function b5(t) {
   Ne(t, "svelte-1y2cug5", ".goa-scrollable.svelte-1y2cug5{scroll-behavior:smooth;margin:2px;width:auto}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar{width:var(--goa-space-xs)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-track{border-radius:var(--goa-border-radius-m)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-track:hover{background:var(--goa-color-greyscale-200)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-thumb{background:var(--goa-color-greyscale-400);border-radius:var(--goa-border-radius-m)}.goa-scrollable.svelte-1y2cug5::-webkit-scrollbar-thumb:hover{background:var(--goa-color-greyscale-600)}");
 }
-function p4(t) {
+function p5(t) {
   let e, o, i, n, r;
   const l = (
     /*#slots*/
@@ -48189,7 +48189,7 @@ function p4(t) {
     }
   };
 }
-function w4(t, e, o) {
+function w5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { direction: r = "vertical" } = e, { hpadding: l = "" } = e, { vpadding: a = "" } = e, { maxheight: c = "" } = e, { offsetHeight: d } = e, { scrollHeight: s } = e, u;
   function g(h) {
     h.target.dispatchEvent(new CustomEvent(
@@ -48228,13 +48228,13 @@ function w4(t, e, o) {
     v
   ];
 }
-class _4 extends Ce {
+class _5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      w4,
-      p4,
+      w5,
+      p5,
       _e,
       {
         direction: 0,
@@ -48244,7 +48244,7 @@ class _4 extends Ce {
         offsetHeight: 6,
         scrollHeight: 7
       },
-      b4
+      b5
     );
   }
   get direction() {
@@ -48284,8 +48284,8 @@ class _4 extends Ce {
     this.$$set({ scrollHeight: e }), y();
   }
 }
-customElements.define("goa-scrollable", ke(_4, { direction: {}, hpadding: {}, vpadding: {}, maxheight: {}, offsetHeight: {}, scrollHeight: {} }, ["default"], [], true));
-function y4(t) {
+customElements.define("goa-scrollable", ke(_5, { direction: {}, hpadding: {}, vpadding: {}, maxheight: {}, offsetHeight: {}, scrollHeight: {} }, ["default"], [], true));
+function y5(t) {
   Ne(t, "svelte-10qscd5", '::slotted(a),::slotted(goa-side-menu-heading),::slotted(a:visited){color:var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;display:block;font:var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));margin-left:var(--goa-side-menu-child-margin);background-color:var(--goa-side-menu-group-color-bg)}::slotted(a),::slotted(a:visited){padding:var(--goa-side-menu-padding-child);text-decoration:none;border-left:var(--goa-side-menu-child-border-left)}::slotted(a.current){font:var(--goa-side-menu-group-item-typography-current, var(--goa-side-menu-typography-item-current));border-left:var(--goa-side-menu-child-border-left-selected);background:var(--goa-side-menu-child-color-bg-selected);color:var(--goa-side-menu-color-item-current, var(--goa-color-text-default))!important}::slotted(a:hover:not(.current)){background:var(--goa-side-menu-child-color-bg-hover);border-left:var(--goa-side-menu-child-border-left-hover)}::slotted(a:focus-visible),.heading.svelte-10qscd5.svelte-10qscd5:focus-visible{outline:var(--goa-side-menu-item-focus-border);outline-offset:var(--goa-side-menu-item-focus-outline-offset, -3px)}.heading.svelte-10qscd5.svelte-10qscd5{gap:var(--goa-space-xs);display:flex;flex-direction:row;align-items:center}:host([child="true"]) a.heading.svelte-10qscd5.svelte-10qscd5,.heading.svelte-10qscd5.svelte-10qscd5{color:var(--goa-side-menu-color-item, var(--goa-color-text-default));display:flex;justify-content:space-between;font:var(--goa-side-menu-typography-item);padding:var(--goa-side-menu-parent-padding);text-decoration:none;border-radius:var(--goa-side-menu-group-border-radius)}.heading.open.svelte-10qscd5.svelte-10qscd5{font:var(--goa-side-menu-typography-item)}:host([child="true"]) a.heading.svelte-10qscd5.svelte-10qscd5{border-left:var(--goa-side-menu-child-border-left);padding:var(--goa-side-menu-padding-child);margin-left:var(--goa-side-menu-child-margin)}:host([child="true"]) a.heading.svelte-10qscd5.svelte-10qscd5:hover{border-left:var(--goa-side-menu-child-border-left-hover);background:var(--goa-side-menu-child-color-bg-hover)}:host([child="true"]) .side-menu-group.current a.heading.svelte-10qscd5.svelte-10qscd5{background:var(--goa-side-menu-child-color-bg-selected);border-left:var(--goa-side-menu-child-border-left)}.side-menu-group.svelte-10qscd5.svelte-10qscd5{background-color:var(--goa-side-menu-group-color-bg);border-radius:var(--goa-side-menu-group-border-radius);padding:var(--goa-side-menu-group-padding)}.side-menu-group.current.svelte-10qscd5 .heading.svelte-10qscd5{background:var(--goa-side-menu-parent-color-bg-selected)}.heading.svelte-10qscd5.svelte-10qscd5:hover{background:var(--goa-side-menu-color-bg-menu-item-hover)}.hidden.svelte-10qscd5.svelte-10qscd5{display:none}.group.svelte-10qscd5.svelte-10qscd5{padding-left:var(--goa-side-menu-child-margin)}.trailing-icon.svelte-10qscd5.svelte-10qscd5{margin-left:auto;height:var(--goa-icon-size-l)}.leading-icon.svelte-10qscd5.svelte-10qscd5{height:var(--goa-icon-size-l)}.side-menu-group.v2.svelte-10qscd5 .heading.open.svelte-10qscd5{border-radius:var(--goa-side-menu-group-border-radius-open, 0);background:var(--goa-color-greyscale-100)}.side-menu-group.v2.svelte-10qscd5 ::slotted(a){border-radius:var(--goa-border-radius-l, 6px);font:var(--goa-side-menu-group-item-typography, var(--goa-side-menu-typography-item));padding:var(--goa-space-2xs) var(--goa-space-xs);border-left:none;margin-left:0;color:var(--goa-color-text-secondary) !important}.side-menu-group.v2.svelte-10qscd5 .group.svelte-10qscd5{border-left:var(--goa-side-menu-child-border-width) solid var(--goa-color-greyscale-100);margin-left:var(--goa-side-menu-group-container-margin-left, 20px);padding-left:var(--goa-space-s);margin-top:var(--goa-space-xs);margin-bottom:var(--goa-side-menu-group-container-margin-bottom, 6px)}.side-menu-group.v2.svelte-10qscd5 ::slotted(a.current){border-left:none;background:var(--goa-side-menu-color-bg-menu-item-hover);color:var(--goa-color-text-default) !important;font-weight:var(--goa-font-weight-bold)}.side-menu-group.v2.svelte-10qscd5 ::slotted(a:hover:not(.current)){border-left:none;background:var(--goa-side-menu-color-bg-menu-item-hover)}.side-menu-group.v2.svelte-10qscd5 .heading.svelte-10qscd5{padding:var(--goa-space-xs) var(--goa-space-s);align-items:flex-start;color:var(--goa-color-text-secondary)}.side-menu-group.v2.svelte-10qscd5 .heading.svelte-10qscd5:hover{border-radius:var(--goa-side-menu-group-border-radius-open, 0)}.side-menu-group.v2.svelte-10qscd5 .heading.svelte-10qscd5:focus-visible{border-radius:var(--goa-side-menu-group-border-radius-open, 0)}:host([child="true"]) .side-menu-group.v2 a.heading.svelte-10qscd5.svelte-10qscd5{border-radius:var(--goa-side-menu-group-border-radius-open, 0)}.side-menu-group.v2.svelte-10qscd5 .leading-icon.svelte-10qscd5,.side-menu-group.v2.svelte-10qscd5 .trailing-icon.svelte-10qscd5{height:var(--goa-icon-size-3, 1.25rem);margin-top:1px}');
 }
 function Ul(t) {
@@ -48293,7 +48293,7 @@ function Ul(t) {
   function o(r, l) {
     return (
       /*version*/
-      r[0] === "2" ? C4 : k4
+      r[0] === "2" ? C5 : k5
     );
   }
   let i = o(t), n = i(t);
@@ -48312,7 +48312,7 @@ function Ul(t) {
     }
   };
 }
-function k4(t) {
+function k5(t) {
   let e;
   return {
     c() {
@@ -48340,7 +48340,7 @@ function k4(t) {
     }
   };
 }
-function C4(t) {
+function C5(t) {
   let e;
   return {
     c() {
@@ -48368,7 +48368,7 @@ function C4(t) {
     }
   };
 }
-function M4(t) {
+function M5(t) {
   let e;
   return {
     c() {
@@ -48383,7 +48383,7 @@ function M4(t) {
     }
   };
 }
-function z4(t) {
+function z5(t) {
   let e;
   return {
     c() {
@@ -48398,12 +48398,12 @@ function z4(t) {
     }
   };
 }
-function j4(t) {
+function j5(t) {
   let e;
   function o(r, l) {
     return (
       /*_open*/
-      r[8] ? N4 : L4
+      r[8] ? N5 : L5
     );
   }
   let i = o(t), n = i(t);
@@ -48422,7 +48422,7 @@ function j4(t) {
     }
   };
 }
-function L4(t) {
+function L5(t) {
   let e;
   return {
     c() {
@@ -48436,7 +48436,7 @@ function L4(t) {
     }
   };
 }
-function N4(t) {
+function N5(t) {
   let e;
   return {
     c() {
@@ -48450,7 +48450,7 @@ function N4(t) {
     }
   };
 }
-function x4(t) {
+function x5(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g, v, h, b, w = (
     /*icon*/
     t[2] && Ul(t)
@@ -48458,9 +48458,9 @@ function x4(t) {
   function p(j, L) {
     return (
       /*version*/
-      j[0] === "2" ? j4 : (
+      j[0] === "2" ? j5 : (
         /*_open*/
-        j[8] ? z4 : M4
+        j[8] ? z5 : M5
       )
     );
   }
@@ -48600,10 +48600,10 @@ function x4(t) {
     }
   };
 }
-function D4(t) {
+function D5(t) {
   return t == null ? void 0 : t.toLowerCase().replace(/ /g, "-");
 }
-function E4(t, e, o) {
+function E5(t, e, o) {
   let i, { $$slots: n = {}, $$scope: r } = e, { version: l = "1" } = e, { heading: a } = e, { icon: c = null } = e, { testid: d = "" } = e, { mt: s = null } = e, { mr: u = null } = e, { mb: g = null } = e, { ml: v = null } = e, h = false, b = false, w, p;
   Ee(() => {
     k(), M();
@@ -48663,7 +48663,7 @@ function E4(t, e, o) {
     "version" in x && o(0, l = x.version), "heading" in x && o(1, a = x.heading), "icon" in x && o(2, c = x.icon), "testid" in x && o(3, d = x.testid), "mt" in x && o(4, s = x.mt), "mr" in x && o(5, u = x.mr), "mb" in x && o(6, g = x.mb), "ml" in x && o(7, v = x.ml), "$$scope" in x && o(14, r = x.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*heading*/
-    2 && o(12, i = D4(a));
+    2 && o(12, i = D5(a));
   }, [
     l,
     a,
@@ -48685,13 +48685,13 @@ function E4(t, e, o) {
     T
   ];
 }
-class q4 extends Ce {
+class q5 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      E4,
-      x4,
+      E5,
+      x5,
       _e,
       {
         version: 0,
@@ -48703,7 +48703,7 @@ class q4 extends Ce {
         mb: 6,
         ml: 7
       },
-      y4
+      y5
     );
   }
   get version() {
@@ -48755,11 +48755,11 @@ class q4 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-side-menu-group", ke(q4, { version: {}, heading: {}, icon: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function I4(t) {
+customElements.define("goa-side-menu-group", ke(q5, { version: {}, heading: {}, icon: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function I5(t) {
   Ne(t, "svelte-19eobfo", "::slotted(a),::slotted(a:visited){color:var(--goa-side-menu-color-item, var(--goa-color-text-default)) !important;display:block;font:var(--goa-side-menu-typography-item);padding:var(--goa-side-menu-padding-item);text-decoration:none}::slotted(a.current){font:var(--goa-side-menu-typography-item-current);color:var(--goa-side-menu-color-item-current, var(--goa-color-text-default)) !important;background:var(--goa-side-menu-color-bg-menu-item-hover)}::slotted(a:hover:not(.current)){background:var(--goa-side-menu-color-bg-menu-item-hover)}::slotted(a:focus-visible){outline:var(--goa-side-menu-item-focus-border);outline-offset:var(--goa-side-menu-item-focus-outline-offset, -3px)}.side-menu.svelte-19eobfo{display:flex;height:100%;flex-direction:column;gap:var(--goa-side-menu-items-gap);background-color:var(--goa-side-menu-color-bg);border-right:var(--goa-side-menu-border-right)}.side-menu.v2.svelte-19eobfo{padding:var(--goa-side-menu-padding)}.side-menu.v2.svelte-19eobfo ::slotted(a){border-radius:var(--goa-side-menu-item-border-radius, 0);padding:var(--goa-space-xs) var(--goa-space-s);display:flex;align-items:flex-start;gap:var(--goa-space-xs);color:var(--goa-color-text-secondary) !important}");
 }
-function T4(t) {
+function T5(t) {
   let e, o;
   const i = (
     /*#slots*/
@@ -48832,7 +48832,7 @@ function T4(t) {
     }
   };
 }
-function A4(t, e, o) {
+function A5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: r = "1" } = e, { testid: l = "" } = e, a, c = [], d = [], s = null;
   Ee(async () => {
     await Je(), u(), v(), b();
@@ -48879,9 +48879,9 @@ function A4(t, e, o) {
     "version" in k && o(0, r = k.version), "testid" in k && o(1, l = k.testid), "$$scope" in k && o(3, n = k.$$scope);
   }, [r, l, a, n, i, p];
 }
-class S4 extends Ce {
+class S5 extends Ce {
   constructor(e) {
-    super(), ye(this, e, A4, T4, _e, { version: 0, testid: 1 }, I4);
+    super(), ye(this, e, A5, T5, _e, { version: 0, testid: 1 }, I5);
   }
   get version() {
     return this.$$.ctx[0];
@@ -48896,17 +48896,17 @@ class S4 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-side-menu", ke(S4, { version: {}, testid: {} }, ["default"], [], true));
-function O4(t) {
+customElements.define("goa-side-menu", ke(S5, { version: {}, testid: {} }, ["default"], [], true));
+function O5(t) {
   Ne(t, "svelte-osqp4c", "h2.icon.svelte-osqp4c.svelte-osqp4c{display:flex;align-items:center}h2.v2.icon.svelte-osqp4c.svelte-osqp4c{align-items:flex-start}goa-icon.svelte-osqp4c.svelte-osqp4c{color:var(--goa-side-menu-icon-color);margin-right:var(--goa-side-menu-heading-icon-gap)}h2.v2.svelte-osqp4c goa-icon.svelte-osqp4c{margin-right:0;color:var(--goa-side-menu-heading-color)}h2.svelte-osqp4c.svelte-osqp4c{border-top:var(--goa-side-menu-heading-border);background:var(--goa-side-menu-heading-color-bg);padding:var(--goa-side-menu-heading-padding);color:var(--goa-side-menu-heading-color);font:var(--goa-side-menu-heading-typography);display:flex;align-items:flex-start;margin:var(--goa-side-menu-heading-margin);gap:var(--goa-side-menu-heading-gap)}h2.v2.svelte-osqp4c.svelte-osqp4c{border-top:none;border-bottom:var(--goa-side-menu-heading-border);margin-bottom:var(--goa-space-2xs);margin-right:var(--goa-space-xs);padding:var(--goa-side-menu-heading-padding-top, 14px) var(--goa-space-s) var(--goa-space-xs) var(--goa-space-s)}h2.v2.svelte-osqp4c .label.svelte-osqp4c{margin-top:2px}");
 }
-const H4 = (t) => ({}), Rl = (t) => ({});
+const H5 = (t) => ({}), Rl = (t) => ({});
 function Gl(t) {
   let e;
   function o(r, l) {
     return (
       /*version*/
-      r[0] === "2" ? V4 : P4
+      r[0] === "2" ? V5 : P5
     );
   }
   let i = o(t), n = i(t);
@@ -48925,7 +48925,7 @@ function Gl(t) {
     }
   };
 }
-function P4(t) {
+function P5(t) {
   let e;
   return {
     c() {
@@ -48953,7 +48953,7 @@ function P4(t) {
     }
   };
 }
-function V4(t) {
+function V5(t) {
   let e;
   return {
     c() {
@@ -48981,7 +48981,7 @@ function V4(t) {
     }
   };
 }
-function Z4(t) {
+function Z5(t) {
   let e, o, i, n, r, l = (
     /*icon*/
     t[1] && Gl(t)
@@ -49058,7 +49058,7 @@ function Z4(t) {
           /*$$scope*/
           u[3],
           g,
-          H4
+          H5
         ) : he(
           /*$$scope*/
           u[3]
@@ -49095,15 +49095,15 @@ function Z4(t) {
     }
   };
 }
-function B4(t, e, o) {
+function B5(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { version: r = "1" } = e, { icon: l = null } = e, { testid: a = "section-heading" } = e;
   return t.$$set = (c) => {
     "version" in c && o(0, r = c.version), "icon" in c && o(1, l = c.icon), "testid" in c && o(2, a = c.testid), "$$scope" in c && o(3, n = c.$$scope);
   }, [r, l, a, n, i];
 }
-class Y4 extends Ce {
+class Y5 extends Ce {
   constructor(e) {
-    super(), ye(this, e, B4, Z4, _e, { version: 0, icon: 1, testid: 2 }, O4);
+    super(), ye(this, e, B5, Z5, _e, { version: 0, icon: 1, testid: 2 }, O5);
   }
   get version() {
     return this.$$.ctx[0];
@@ -49124,15 +49124,15 @@ class Y4 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-side-menu-heading", ke(Y4, { version: {}, icon: {}, testid: {} }, ["default", "meta"], [], true));
-function F4(t) {
+customElements.define("goa-side-menu-heading", ke(Y5, { version: {}, icon: {}, testid: {} }, ["default", "meta"], [], true));
+function F5(t) {
   Ne(t, "svelte-1e4jerw", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}@keyframes svelte-1e4jerw-pulse{0%{opacity:0.5}50%{opacity:1}100%{opacity:0.5}}.skeleton.svelte-1e4jerw.svelte-1e4jerw{background-color:var(--goa-skeleton-loading-color-bg);animation:svelte-1e4jerw-pulse 2s infinite ease-in-out;overflow:hidden;margin:10px 0}.image.svelte-1e4jerw.svelte-1e4jerw,.image-1.svelte-1e4jerw.svelte-1e4jerw{background-color:var(--goa-skeleton-loading-color-bg);flex:1 1 100px;height:100px;margin:0}.image-2.svelte-1e4jerw.svelte-1e4jerw{height:140px}.image-3.svelte-1e4jerw.svelte-1e4jerw{height:200px}.image-4.svelte-1e4jerw.svelte-1e4jerw{height:300px}.text.svelte-1e4jerw.svelte-1e4jerw,.text-1.svelte-1e4jerw.svelte-1e4jerw,.text-2.svelte-1e4jerw.svelte-1e4jerw,.text-3.svelte-1e4jerw.svelte-1e4jerw,.text-4.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:12px;border-radius:0.25rem;margin:6px 0}.title.svelte-1e4jerw.svelte-1e4jerw,.title-1.svelte-1e4jerw.svelte-1e4jerw,.title-2.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:0.75rem;border-radius:0.25rem}.title-3.svelte-1e4jerw.svelte-1e4jerw{height:0.8rem}.title-4.svelte-1e4jerw.svelte-1e4jerw{height:1rem}.text-small.svelte-1e4jerw.svelte-1e4jerw,.text-small-1.svelte-1e4jerw.svelte-1e4jerw{width:30%;height:6px;border-radius:2px}.text-small-2.svelte-1e4jerw.svelte-1e4jerw{width:40%;height:8px;border-radius:2px}.text-small-3.svelte-1e4jerw.svelte-1e4jerw{width:50%;height:10px;border-radius:3px}.text-small-4.svelte-1e4jerw.svelte-1e4jerw{width:70%;height:12px;border-radius:4px}.paragraph.svelte-1e4jerw.svelte-1e4jerw{width:100%;height:70px;border-radius:4px}.header.svelte-1e4jerw.svelte-1e4jerw,.header-1.svelte-1e4jerw.svelte-1e4jerw{width:50%;height:18px;margin:12px 0;border-radius:0.25rem}.header-2.svelte-1e4jerw.svelte-1e4jerw{width:60%;height:20px;margin:14px 0;border-radius:0.25rem}.header-3.svelte-1e4jerw.svelte-1e4jerw{width:70%;height:22px;margin:16px 0;border-radius:0.25rem}.header-4.svelte-1e4jerw.svelte-1e4jerw{width:80%;height:24px;margin:18px 0;border-radius:0.3rem}.avatar.svelte-1e4jerw.svelte-1e4jerw{display:inline-block}.avatar.svelte-1e4jerw.svelte-1e4jerw,.avatar-1.svelte-1e4jerw.svelte-1e4jerw{width:40px;height:40px;border-radius:50%}.avatar-2.svelte-1e4jerw.svelte-1e4jerw{width:60px;height:60px;border-radius:50%}.avatar-3.svelte-1e4jerw.svelte-1e4jerw{width:80px;height:80px;border-radius:50%}.avatar-4.svelte-1e4jerw.svelte-1e4jerw{width:120px;height:120px;border-radius:50%}.thumbnail.svelte-1e4jerw.svelte-1e4jerw{display:inline-block}.thumbnail.svelte-1e4jerw.svelte-1e4jerw,.thumbnail-1.svelte-1e4jerw.svelte-1e4jerw{width:40px;height:40px;border-radius:4px}.thumbnail-2.svelte-1e4jerw.svelte-1e4jerw{width:60px;height:60px;border-radius:4px}.thumbnail-3.svelte-1e4jerw.svelte-1e4jerw{width:80px;height:80px;border-radius:4px}.thumbnail-4.svelte-1e4jerw.svelte-1e4jerw{width:120px;height:120px;border-radius:4px}.card.svelte-1e4jerw.svelte-1e4jerw,.card-1.svelte-1e4jerw.svelte-1e4jerw,.card-2.svelte-1e4jerw.svelte-1e4jerw,.card-3.svelte-1e4jerw.svelte-1e4jerw,.card-4.svelte-1e4jerw.svelte-1e4jerw{border:1px solid var(--goa-color-greyscale-100);border-radius:4px}@container self (max-width: 623px){.card.svelte-1e4jerw.svelte-1e4jerw{width:100%}}@container self (min-width: 624px){.card.svelte-1e4jerw.svelte-1e4jerw{width:var(--max-width)}}.card-content.svelte-1e4jerw.svelte-1e4jerw{flex:1 1 auto;padding:1rem}.profile.svelte-1e4jerw.svelte-1e4jerw{display:flex;flex-direction:row;align-items:center;gap:1rem}.profile-1.svelte-1e4jerw.svelte-1e4jerw{max-width:280px}.profile-2.svelte-1e4jerw.svelte-1e4jerw{max-width:360px}.profile-3.svelte-1e4jerw.svelte-1e4jerw{max-width:480px}.profile-4.svelte-1e4jerw.svelte-1e4jerw{max-width:560px}.profile.svelte-1e4jerw .profile-avatar.svelte-1e4jerw{flex-shrink:0}.profile.svelte-1e4jerw .profile-name.svelte-1e4jerw{flex:1 1 auto}");
 }
 function Xl(t, e, o) {
   const i = t.slice();
   return i[13] = e[o], i;
 }
-function W4(t) {
+function W5(t) {
   let e, o;
   return {
     c() {
@@ -49158,7 +49158,7 @@ function W4(t) {
     }
   };
 }
-function Q4(t) {
+function Q5(t) {
   let e, o, i, n, r, l, a, c, d, s, u, g;
   return n = new wt({
     props: { type: "image", size: (
@@ -49198,7 +49198,7 @@ function Q4(t) {
     }
   };
 }
-function U4(t) {
+function U5(t) {
   let e, o, i = Ue(Array(Number.parseInt(
     /*linecount*/
     t[2] + ""
@@ -49254,7 +49254,7 @@ function U4(t) {
     }
   };
 }
-function R4(t) {
+function R5(t) {
   let e, o, i, n, r, l, a, c, d, s;
   return i = new wt({
     props: { type: "avatar", size: (
@@ -49309,7 +49309,7 @@ function R4(t) {
     }
   };
 }
-function G4(t) {
+function G5(t) {
   let e, o, i, n, r, l, a, c, d;
   return o = new wt({
     props: { type: "image", size: (
@@ -49421,14 +49421,14 @@ function Jl(t) {
     }
   };
 }
-function X4(t) {
+function X5(t) {
   let e, o, i, n, r;
   const l = [
-    G4,
-    R4,
-    U4,
-    Q4,
-    W4
+    G5,
+    R5,
+    U5,
+    Q5,
+    W5
   ], a = [];
   function c(d, s) {
     return (
@@ -49499,7 +49499,7 @@ function X4(t) {
     }
   };
 }
-function J4(t, e, o) {
+function J5(t, e, o) {
   const [i, n] = Ae(
     "Skeleton type",
     [
@@ -49530,8 +49530,8 @@ class wt extends Ce {
     super(), ye(
       this,
       e,
-      J4,
-      X4,
+      J5,
+      X5,
       _e,
       {
         maxwidth: 0,
@@ -49544,7 +49544,7 @@ class wt extends Ce {
         mb: 7,
         ml: 8
       },
-      F4
+      F5
     );
   }
   get maxwidth() {
@@ -49603,7 +49603,7 @@ class wt extends Ce {
   }
 }
 customElements.define("goa-skeleton", ke(wt, { maxwidth: {}, size: {}, linecount: {}, type: {}, testid: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
-function K4(t) {
+function K5(t) {
   let e, o;
   return {
     c() {
@@ -49650,7 +49650,7 @@ function K4(t) {
     }
   };
 }
-function $4(t, e, o) {
+function $5(t, e, o) {
   let { hspacing: i = "none" } = e, { vspacing: n = "none" } = e, { testid: r = "" } = e, l;
   Ee(() => {
     const c = `var(--goa-space-${n})`, d = i === "fill" ? "100%" : `var(--goa-space-${i})`;
@@ -49665,9 +49665,9 @@ function $4(t, e, o) {
     "hspacing" in c && o(0, i = c.hspacing), "vspacing" in c && o(1, n = c.vspacing), "testid" in c && o(2, r = c.testid);
   }, [i, n, r, l, a];
 }
-class e5 extends Ce {
+class e4 extends Ce {
   constructor(e) {
-    super(), ye(this, e, $4, K4, _e, { hspacing: 0, vspacing: 1, testid: 2 });
+    super(), ye(this, e, $5, K5, _e, { hspacing: 0, vspacing: 1, testid: 2 });
   }
   get hspacing() {
     return this.$$.ctx[0];
@@ -49688,9 +49688,9 @@ class e5 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-spacer", ke(e5, { hspacing: {}, vspacing: {}, testid: {} }, [], [], true));
+customElements.define("goa-spacer", ke(e4, { hspacing: {}, vspacing: {}, testid: {} }, [], [], true));
 const Wt = [];
-function t5(t, e = pe) {
+function t4(t, e = pe) {
   let o;
   const i = /* @__PURE__ */ new Set();
   function n(a) {
@@ -49751,8 +49751,8 @@ function ti(t, e) {
   }
   throw new Error(`Cannot interpolate ${o} values`);
 }
-function o5(t, e = {}) {
-  const o = t5(t);
+function o4(t, e = {}) {
+  const o = t4(t);
   let i, n = t;
   function r(l, a) {
     if (t == null)
@@ -49782,7 +49782,7 @@ function o5(t, e = {}) {
     subscribe: o.subscribe
   };
 }
-function i5(t) {
+function i4(t) {
   Ne(t, "svelte-1n1bmdf", ":host{box-sizing:border-box;font-family:var(--goa-font-family-sans)}@keyframes svelte-1n1bmdf-rotate{100%{transform:rotate(360deg)}}.spinner-infinite.svelte-1n1bmdf{animation:svelte-1n1bmdf-rotate 2s linear infinite}");
 }
 function $l(t) {
@@ -49907,7 +49907,7 @@ function $l(t) {
     }
   };
 }
-function n5(t) {
+function n4(t) {
   let e, o = (
     /*ready*/
     t[6] && $l(t)
@@ -49929,9 +49929,9 @@ function n5(t) {
     }
   };
 }
-function r5(t, e, o) {
+function r4(t, e, o) {
   let i, n, r, l, a, c, { size: d } = e, { invert: s = false } = e, { progress: u = -1 } = e, { testid: g = "" } = e, v = "infinite";
-  const h = o5(0, { duration: 500, easing: Ed });
+  const h = o4(0, { duration: 500, easing: Ed });
   Qs(t, h, (p) => o(7, c = p));
   function b(p) {
     const k = r + l * Math.cos(p), M = r + l * Math.sin(p);
@@ -49984,13 +49984,13 @@ function r5(t, e, o) {
     l
   ];
 }
-class l5 extends Ce {
+class l4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      r5,
-      n5,
+      r4,
+      n4,
       _e,
       {
         size: 10,
@@ -49998,7 +49998,7 @@ class l5 extends Ce {
         progress: 11,
         testid: 1
       },
-      i5
+      i4
     );
   }
   get size() {
@@ -50026,12 +50026,12 @@ class l5 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-spinner", ke(l5, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
-function a5(t) {
+customElements.define("goa-spinner", ke(l4, { size: {}, invert: { type: "Boolean" }, progress: {}, testid: {} }, [], [], true));
+function a4(t) {
   Ne(t, "svelte-1ifx1we", ".hidden.svelte-1ifx1we{display:none}");
 }
-const s5 = (t) => ({}), ea = (t) => ({});
-function c5(t) {
+const s4 = (t) => ({}), ea = (t) => ({});
+function c4(t) {
   let e, o, i, n, r, l, a;
   const c = (
     /*#slots*/
@@ -50076,7 +50076,7 @@ function c5(t) {
           /*$$scope*/
           g[7],
           v,
-          s5
+          s4
         ) : he(
           /*$$scope*/
           g[7]
@@ -50120,7 +50120,7 @@ function c5(t) {
     }
   };
 }
-function d5(t, e, o) {
+function d4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e;
   const r = vt(i);
   let { heading: l = "" } = e, { open: a = false } = e, { disabled: c = false } = e, { slug: d = "" } = e, s, u, g;
@@ -50191,13 +50191,13 @@ function d5(t, e, o) {
     k
   ];
 }
-class u5 extends Ce {
+class u4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      d5,
-      c5,
+      d4,
+      c4,
       _e,
       {
         heading: 1,
@@ -50205,7 +50205,7 @@ class u5 extends Ce {
         disabled: 5,
         slug: 6
       },
-      a5
+      a4
     );
   }
   get heading() {
@@ -50233,11 +50233,11 @@ class u5 extends Ce {
     this.$$set({ slug: e }), y();
   }
 }
-customElements.define("goa-tab", ke(u5, { heading: {}, open: { reflect: true, type: "String" }, disabled: { type: "Boolean" }, slug: {} }, ["heading", "default"], [], true));
-function f5(t) {
+customElements.define("goa-tab", ke(u4, { heading: {}, open: { reflect: true, type: "String" }, disabled: { type: "Boolean" }, slug: {} }, ["heading", "default"], [], true));
+function f4(t) {
   Ne(t, "svelte-ehzvgz", ".goatable.svelte-ehzvgz{width:0}table.svelte-ehzvgz{border-collapse:collapse}.v2.goatable.svelte-ehzvgz{border:var(--goa-table-container-border, 1px solid #e7e7e7);border-radius:var(--goa-table-border-radius-container, 16px);overflow:hidden}");
 }
-function g5(t) {
+function g4(t) {
   let e, o, i;
   const n = (
     /*#slots*/
@@ -50291,7 +50291,7 @@ function g5(t) {
     }
   };
 }
-function v5(t) {
+function v4(t) {
   let e;
   const o = (
     /*#slots*/
@@ -50342,9 +50342,9 @@ function v5(t) {
     }
   };
 }
-function h5(t) {
+function h4(t) {
   let e, o, i, n, r, l;
-  const a = [v5, g5], c = [];
+  const a = [v4, g4], c = [];
   function d(s, u) {
     return (
       /*_isTableRoot*/
@@ -50450,7 +50450,7 @@ function h5(t) {
   };
 }
 const ta = 2;
-function m5(t, e, o) {
+function m4(t, e, o) {
   let i, n, { $$slots: r = {}, $$scope: l } = e;
   const [a, c] = Ae("Table variant", ["normal", "relaxed"], true), [d, s] = Ae("Version", ["1", "2"]), [u, g] = Ae("Sort mode", ["single", "multi"], { required: true });
   let { width: v = "" } = e, { stickyheader: h = "false" } = e, { striped: b = "false" } = e, { variant: w = "normal" } = e, { version: p = "1" } = e, { testid: k = "" } = e, { sortMode: M = "single" } = e, { mt: z = null } = e, { mr: N = null } = e, { mb: j = null } = e, { ml: L = null } = e, T, x = false, Y = [], P;
@@ -50564,13 +50564,13 @@ function m5(t, e, o) {
     R
   ];
 }
-class b5 extends Ce {
+class b4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      m5,
-      h5,
+      m4,
+      h4,
       _e,
       {
         width: 0,
@@ -50585,7 +50585,7 @@ class b5 extends Ce {
         mb: 6,
         ml: 7
       },
-      f5,
+      f4,
       [-1, -1]
     );
   }
@@ -50656,8 +50656,8 @@ class b5 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-table", ke(b5, { width: {}, stickyheader: {}, striped: { reflect: true }, variant: { reflect: true }, version: { reflect: true }, testid: {}, sortMode: { attribute: "sort-mode", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function p5(t) {
+customElements.define("goa-table", ke(b4, { width: {}, stickyheader: {}, striped: { reflect: true }, variant: { reflect: true }, version: { reflect: true }, testid: {}, sortMode: { attribute: "sort-mode", reflect: true }, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function p4(t) {
   Ne(t, "svelte-yp949b", `:host{display:flex;align-items:flex-end;cursor:pointer}button.svelte-yp949b.svelte-yp949b{border:none;background:none;display:flex;font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;line-height:inherit;height:inherit;width:100%;padding:var(
       --goa-table-padding-heading,
       var(--goa-space-s) var(--goa-space-m) var(--goa-space-xs)
@@ -50671,7 +50671,7 @@ function p5(t) {
         var(--goa-color-interactive-focus)
       )}button.sorted.svelte-yp949b goa-icon.svelte-yp949b{color:var(--goa-color-interactive-default)}button.sorted.svelte-yp949b:hover goa-icon.svelte-yp949b{color:var(--goa-color-interactive-hover)}button.svelte-yp949b:not(.sorted) goa-icon.svelte-yp949b{color:var(--goa-color-greyscale-500)}button.svelte-yp949b:not(.sorted):hover goa-icon.svelte-yp949b{color:var(--goa-color-interactive-hover)}button.v2.svelte-yp949b:not(.sorted):focus-visible goa-icon.svelte-yp949b{color:var(--goa-color-interactive-hover)}.sort-order.svelte-yp949b.svelte-yp949b{font-size:var(--goa-font-size-1);font-weight:var(--goa-font-weight-bold);color:var(--goa-color-interactive-default);line-height:1;margin-left:var(--goa-space-2xs)}.sort-order.hidden.svelte-yp949b.svelte-yp949b{visibility:hidden}button.svelte-yp949b:hover .sort-order.svelte-yp949b{color:var(--goa-color-interactive-hover)}`);
 }
-function w5(t) {
+function w4(t) {
   let e;
   return {
     c() {
@@ -50685,7 +50685,7 @@ function w5(t) {
     }
   };
 }
-function _5(t) {
+function _4(t) {
   let e;
   return {
     c() {
@@ -50699,7 +50699,7 @@ function _5(t) {
     }
   };
 }
-function y5(t) {
+function y4(t) {
   let e;
   return {
     c() {
@@ -50713,7 +50713,7 @@ function y5(t) {
     }
   };
 }
-function k5(t) {
+function k4(t) {
   let e, o, i, n, r, l, a;
   const c = (
     /*#slots*/
@@ -50728,9 +50728,9 @@ function k5(t) {
   function s(v, h) {
     return (
       /*direction*/
-      v[0] === "desc" ? y5 : (
+      v[0] === "desc" ? y4 : (
         /*direction*/
-        v[0] === "asc" ? _5 : w5
+        v[0] === "asc" ? _4 : w4
       )
     );
   }
@@ -50809,7 +50809,7 @@ function k5(t) {
     }
   };
 }
-function C5(t, e, o) {
+function C4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { name: r = "" } = e, { direction: l = "none" } = e, { version: a = "1" } = e, { sortOrder: c = 0 } = e, d;
   Ee(() => {
     if (d) {
@@ -50826,13 +50826,13 @@ function C5(t, e, o) {
     "name" in u && o(4, r = u.name), "direction" in u && o(0, l = u.direction), "version" in u && o(1, a = u.version), "sortOrder" in u && o(2, c = u.sortOrder), "$$scope" in u && o(5, n = u.$$scope);
   }, [l, a, c, d, r, n, i, s];
 }
-class M5 extends Ce {
+class M4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      C5,
-      k5,
+      C4,
+      k4,
       _e,
       {
         name: 4,
@@ -50840,7 +50840,7 @@ class M5 extends Ce {
         version: 1,
         sortOrder: 2
       },
-      p5
+      p4
     );
   }
   get name() {
@@ -50868,8 +50868,8 @@ class M5 extends Ce {
     this.$$set({ sortOrder: e }), y();
   }
 }
-customElements.define("goa-table-sort-header", ke(M5, { name: { reflect: true }, direction: { reflect: true }, version: {}, sortOrder: { attribute: "sort-order", reflect: true, type: "Number" } }, ["default"], [], true));
-function z5(t) {
+customElements.define("goa-table-sort-header", ke(M4, { name: { reflect: true }, direction: { reflect: true }, version: {}, sortOrder: { attribute: "sort-order", reflect: true, type: "Number" } }, ["default"], [], true));
+function z4(t) {
   Ne(t, "svelte-1d8r3pk", `:host{box-sizing:border-box;font:var(--goa-tab-typography)}.tab{display:flex;align-items:center;gap:var(--goa-space-xs)}[role="tab"]{display:flex;background:none;overflow:hidden;white-space:nowrap;cursor:pointer;border:none;font:var(--goa-tab-typography);color:var(--goa-tab-color-text-not-selected, var(--goa-tab-text-color));text-decoration:none}[role="tab"][aria-selected="true"]{font:var(--goa-tab-typography-selected);color:var(--goa-tab-color-text-selected, var(--goa-tab-text-color))}[role="tab"]:focus-visible{outline:var(--goa-tab-border-focus)}
     [role="tab"]:hover:not([aria-selected="true"]):not([aria-disabled="true"])
   {color:var(--goa-tab-color-text-hover, var(--goa-tab-text-color))}[role="tab"][aria-disabled="true"]{color:var(--goa-color-greyscale-400, #949494);cursor:not-allowed;pointer-events:none}[role="tabpanel"]:focus-visible{outline:var(--goa-tab-border-focus);outline-offset:4px}.segmented.svelte-1d8r3pk .tabpanel.svelte-1d8r3pk:focus-visible{outline:none}@media(min-width: 624px){.tabs.svelte-1d8r3pk.svelte-1d8r3pk{border-bottom:var(--goa-tabs-bottom-border);display:flex;gap:var(--goa-tabs-gap);margin-bottom:2rem}[role="tab"]{padding:var(--goa-tab-padding);border-bottom:var(--goa-tab-border-not-selected);text-overflow:ellipsis;min-width:var(--goa-space-2xl);justify-content:center}[role="tab"][aria-selected="true"]{border-bottom:var(--goa-tab-border-selected)}
@@ -50931,7 +50931,7 @@ function oa(t) {
     }
   };
 }
-function j5(t) {
+function j4(t) {
   let e, o, i, n, r, l, a = (
     /*variant*/
     t[2] === "segmented" && /*_segmentedIndicatorWidth*/
@@ -51078,12 +51078,12 @@ function j5(t) {
     }
   };
 }
-const L5 = 200, N5 = 0.2, x5 = 400;
-function D5(t) {
+const L4 = 200, N4 = 0.2, x4 = 400;
+function D4(t) {
   const o = t.toLowerCase().split(" ").map((i) => i.toLowerCase()).join("-");
   return encodeURIComponent(o);
 }
-function E5(t, e, o) {
+function E4(t, e, o) {
   let { $$slots: i = {}, $$scope: n } = e, { initialtab: r = -1 } = e, { testid: l = "" } = e, { version: a = "1" } = e, { variant: c = "default" } = e, { orientation: d = "auto" } = e, { navigation: s = "hash" } = e, u, g, v, h = 1, b = [], w, p = true, k = 0, M = 0, z = 30, N = 0, j = 1, L = null;
   Ee(() => {
     oo(u), O(), F(), s !== "none" && Z();
@@ -51151,7 +51151,7 @@ function E5(t, e, o) {
         oe = X.heading, se = X.slug;
       else {
         const Xe = X.heading;
-        oe = document.createElement("div"), oe.textContent = Xe, se = X.slug || D5(Xe);
+        oe = document.createElement("div"), oe.textContent = Xe, se = X.slug || D4(Xe);
       }
       oe.classList.add("tab"), se || (se = "tab-" + J);
       const Me = document.createElement("a");
@@ -51194,8 +51194,8 @@ function E5(t, e, o) {
       if ($) {
         const oe = H[j - 1];
         if (oe) {
-          const Me = Math.abs(se.left - oe.getBoundingClientRect().left), Le = L5 + N5 * Me;
-          o(11, N = Math.min(Le, x5) / 1e3);
+          const Me = Math.abs(se.left - oe.getBoundingClientRect().left), Le = L4 + N4 * Me;
+          o(11, N = Math.min(Le, x4) / 1e3);
         } else
           o(11, N = 0);
       } else
@@ -51308,13 +51308,13 @@ function E5(t, e, o) {
     ie
   ];
 }
-class q5 extends Ce {
+class q4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      E5,
-      j5,
+      E4,
+      j4,
       _e,
       {
         initialtab: 12,
@@ -51324,7 +51324,7 @@ class q5 extends Ce {
         orientation: 3,
         navigation: 4
       },
-      z5,
+      z4,
       [-1, -1]
     );
   }
@@ -51365,8 +51365,8 @@ class q5 extends Ce {
     this.$$set({ navigation: e }), y();
   }
 }
-customElements.define("goa-tabs", ke(q5, { initialtab: {}, testid: {}, version: {}, variant: {}, orientation: {}, navigation: {} }, ["default"], [], true));
-function I5(t) {
+customElements.define("goa-tabs", ke(q4, { initialtab: {}, testid: {}, version: {}, variant: {}, orientation: {}, navigation: {} }, ["default"], [], true));
+function I4(t) {
   Ne(t, "svelte-1w932we", ".notification-container.svelte-1w932we{position:fixed;display:flex;flex-direction:column;gap:1rem;z-index:1000}.pos-top.svelte-1w932we{top:20px}.pos-bottom.svelte-1w932we{bottom:20px}.pos-left.svelte-1w932we{left:20px;transform:none}.pos-center.svelte-1w932we{left:50%;transform:translateX(-50%)}.pos-right.svelte-1w932we{right:20px;transform:none}.sr-only.svelte-1w932we{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}");
 }
 function ia(t) {
@@ -51412,7 +51412,7 @@ function ia(t) {
     }
   };
 }
-function T5(t) {
+function T4(t) {
   var c;
   let e, o, i, n = (
     /*_notification*/
@@ -51530,7 +51530,7 @@ function na(t) {
     }
   return t;
 }
-function A5(t, e, o) {
+function A4(t, e, o) {
   let { vPosition: i = "bottom" } = e, { hPosition: n = "center" } = e, { testid: r } = e, l = [], a, c;
   Ee(() => st(window.document.body, (b, w, p) => {
     switch (b) {
@@ -51616,9 +51616,9 @@ function A5(t, e, o) {
     "vPosition" in b && o(0, i = b.vPosition), "hPosition" in b && o(1, n = b.hPosition), "testid" in b && o(2, r = b.testid);
   }, [i, n, r, a];
 }
-class S5 extends Ce {
+class S4 extends Ce {
   constructor(e) {
-    super(), ye(this, e, A5, T5, _e, { vPosition: 0, hPosition: 1, testid: 2 }, I5);
+    super(), ye(this, e, A4, T4, _e, { vPosition: 0, hPosition: 1, testid: 2 }, I4);
   }
   get vPosition() {
     return this.$$.ctx[0];
@@ -51639,8 +51639,8 @@ class S5 extends Ce {
     this.$$set({ testid: e }), y();
   }
 }
-customElements.define("goa-temp-notification-ctrl", ke(S5, { vPosition: { type: "String", attribute: "vertical-position" }, hPosition: { type: "String", attribute: "horizontal-position" }, testid: { type: "String", attribute: "testid" } }, [], [], true));
-function O5(t) {
+customElements.define("goa-temp-notification-ctrl", ke(S4, { vPosition: { type: "String", attribute: "vertical-position" }, hPosition: { type: "String", attribute: "horizontal-position" }, testid: { type: "String", attribute: "testid" } }, [], [], true));
+function O4(t) {
   Ne(t, "svelte-g62gpr", `.snackbar.svelte-g62gpr.svelte-g62gpr{box-sizing:border-box;position:relative;display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;border-radius:var(--goa-temporary-notification-borderRadius, var(--goa-border-radius-m));gap:var(--goa-temporary-notification-row-gap, var(--goa-space-m));padding:var(--goa-temporary-notification-padding, var(--goa-space-m) var(--goa-space-l));max-width:var(--goa-temporary-notification-max-width, 640px);color:var(--goa-temporary-notification-color-text, var(--goa-color-text-light));transition:transform var(--goa-temporary-notification-transition-duration, 0.3s) ease,
       opacity var(--goa-temporary-notification-transition-duration, 0.3s) ease;overflow:hidden}.snackbar.progress.svelte-g62gpr.svelte-g62gpr,.snackbar.indeterminate.svelte-g62gpr.svelte-g62gpr{padding:var(--goa-temporary-notification-padding-with-progress, var(--goa-space-m) var(--goa-space-l) 22px var(--goa-space-l))}.content.svelte-g62gpr.svelte-g62gpr{display:flex;align-items:flex-start;gap:var(--goa-temporary-notification-column-gap, var(--goa-space-s));flex:1 1 auto;min-width:0}@media(min-width: 624px){.snackbar.svelte-g62gpr.svelte-g62gpr{min-width:var(--goa-temporary-notification-min-width-desktop, 360px)}}@media(max-width: 623px){.snackbar.svelte-g62gpr.svelte-g62gpr{margin:0 var(--goa-space-m);width:calc(100vw - var(--goa-space-m) * 2)}}.snackbar.basic.svelte-g62gpr.svelte-g62gpr,.snackbar.indeterminate.svelte-g62gpr.svelte-g62gpr,.snackbar.progress.svelte-g62gpr.svelte-g62gpr{border:var(--goa-temporary-notification-borderWidth, var(--goa-border-width-s)) solid var(--goa-temporary-notification-color-border, var(--goa-color-greyscale-700));background:var(--goa-temporary-notification-color-bg-basic, var(--goa-color-greyscale-black))}.action.svelte-g62gpr.svelte-g62gpr{flex-grow:1;text-align:right}progress.svelte-g62gpr.svelte-g62gpr{position:absolute;display:flex;bottom:0;left:0;width:100%;height:var(--goa-temporary-notification-progress-bar-height, 6px);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-webkit-progress-bar{background-color:var(--goa-temporary-notification-progress-bar-color-bg, #adadad);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-webkit-progress-value{background-color:var(--goa-temporary-notification-progress-bar-color-fill, white);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}progress.svelte-g62gpr.svelte-g62gpr::-moz-progress-bar{background-color:var(--goa-temporary-notification-progress-bar-color-fill, white);border-radius:0 0 var(--goa-temporary-notification-progress-bar-borderRadius, 0) var(--goa-temporary-notification-progress-bar-borderRadius, 0)}.show.svelte-g62gpr.svelte-g62gpr{opacity:1}.show.animate-up.svelte-g62gpr.svelte-g62gpr{transform:translateY(0)}.show.animate-down.svelte-g62gpr.svelte-g62gpr{transform:translateY(0)}.hide.svelte-g62gpr.svelte-g62gpr{opacity:0}.hide.animate-up.svelte-g62gpr.svelte-g62gpr{transform:translateY(calc(-1 * var(--goa-temporary-notification-animation-distance, 100px)))}.hide.animate-down.svelte-g62gpr.svelte-g62gpr{transform:translateY(var(--goa-temporary-notification-animation-distance, 100px))}.snackbar.success.svelte-g62gpr.svelte-g62gpr{background:var(--goa-temporary-notification-color-bg-success, var(--goa-color-success-default))}.snackbar.failure.svelte-g62gpr.svelte-g62gpr{background:var(--goa-temporary-notification-color-bg-failure, var(--goa-color-emergency-default))}.message.svelte-g62gpr.svelte-g62gpr{flex:1 1 auto;font:var(--goa-temporary-notification-typography, var(--goa-typography-body-m))}.content.svelte-g62gpr:has(goa-icon) .message.svelte-g62gpr{margin-top:var(--goa-temporary-notification-padding-text-top, var(--goa-space-2xs))}`);
 }
@@ -51699,7 +51699,7 @@ function aa(t) {
     }
   };
 }
-function H5(t) {
+function H4(t) {
   let e;
   return {
     c() {
@@ -51714,7 +51714,7 @@ function H5(t) {
     }
   };
 }
-function P5(t) {
+function P4(t) {
   let e;
   return {
     c() {
@@ -51734,7 +51734,7 @@ function P5(t) {
     }
   };
 }
-function V5(t) {
+function V4(t) {
   let e, o, i, n, r, l, a, c, d = (
     /*type*/
     t[1] === "success" && ra()
@@ -51749,11 +51749,11 @@ function V5(t) {
     if (
       /*type*/
       b[1] === "progress"
-    ) return P5;
+    ) return P4;
     if (
       /*type*/
       b[1] === "indeterminate"
-    ) return H5;
+    ) return H4;
   }
   let v = g(t), h = v && v(t);
   return {
@@ -51886,19 +51886,19 @@ function V5(t) {
   };
 }
 const xs = "large";
-function Z5(t, e, o) {
+function Z4(t, e, o) {
   let { message: i = "" } = e, { type: n = "basic" } = e, { progress: r = -1 } = e, { testid: l = "" } = e, { actionText: a = "" } = e, { visible: c = true } = e, { animationDirection: d = "down" } = e;
   return t.$$set = (s) => {
     "message" in s && o(0, i = s.message), "type" in s && o(1, n = s.type), "progress" in s && o(2, r = s.progress), "testid" in s && o(3, l = s.testid), "actionText" in s && o(4, a = s.actionText), "visible" in s && o(5, c = s.visible), "animationDirection" in s && o(6, d = s.animationDirection);
   }, [i, n, r, l, a, c, d];
 }
-class B5 extends Ce {
+class B4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      Z5,
-      V5,
+      Z4,
+      V4,
       _e,
       {
         message: 0,
@@ -51909,7 +51909,7 @@ class B5 extends Ce {
         visible: 5,
         animationDirection: 6
       },
-      O5
+      O4
     );
   }
   get message() {
@@ -51955,8 +51955,8 @@ class B5 extends Ce {
     this.$$set({ animationDirection: e }), y();
   }
 }
-customElements.define("goa-temp-notification", ke(B5, { message: { type: "String", attribute: "message" }, type: { type: "String", attribute: "type" }, progress: { type: "Number", attribute: "progress" }, testid: { type: "String", attribute: "testid", reflect: true }, actionText: { type: "String", attribute: "action-text" }, visible: { type: "Boolean", attribute: "visible" }, animationDirection: { type: "String", attribute: "animation-direction" } }, [], [], true));
-function Y5(t) {
+customElements.define("goa-temp-notification", ke(B4, { message: { type: "String", attribute: "message" }, type: { type: "String", attribute: "type" }, progress: { type: "Number", attribute: "progress" }, testid: { type: "String", attribute: "testid", reflect: true }, actionText: { type: "String", attribute: "action-text" }, visible: { type: "Boolean", attribute: "visible" }, animationDirection: { type: "String", attribute: "animation-direction" } }, [], [], true));
+function Y4(t) {
   Ne(t, "svelte-1yns3oj", "h1, h2, h3, h4, h5{margin:0}.heading-xl.svelte-1yns3oj{font:var(--goa-typography-heading-xl);letter-spacing:var(--goa-typography-heading-xl-letter-spacing)}.heading-l.svelte-1yns3oj{font:var(--goa-typography-heading-l);letter-spacing:var(--goa-typography-heading-l-letter-spacing)}.heading-m.svelte-1yns3oj{font:var(--goa-typography-heading-m);letter-spacing:var(--goa-typography-heading-m-letter-spacing)}.heading-s.svelte-1yns3oj{font:var(--goa-typography-heading-s);letter-spacing:var(--goa-typography-heading-s-letter-spacing)}.heading-xs.svelte-1yns3oj{font:var(--goa-typography-heading-xs);letter-spacing:var(--goa-typography-heading-xs-letter-spacing)}.heading-2xs.svelte-1yns3oj{font:var(--goa-typography-heading-2xs, var(--goa-typography-heading-xs));letter-spacing:var(--goa-typography-heading-2xs-letter-spacing)}.body-l.svelte-1yns3oj{font:var(--goa-typography-body-l)}.body-m.svelte-1yns3oj{font:var(--goa-typography-body-m)}.body-s.svelte-1yns3oj{font:var(--goa-typography-body-s)}.body-xs.svelte-1yns3oj{font:var(--goa-typography-body-xs)}@media(max-width: 623px){.heading-xl.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-xl);letter-spacing:var(--goa-typography-mobile-heading-xl-letter-spacing)}.heading-l.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-l);letter-spacing:var(--goa-typography-mobile-heading-l-letter-spacing)}.heading-m.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-m);letter-spacing:var(--goa-typography-mobile-heading-m-letter-spacing)}.heading-s.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-s);letter-spacing:var(--goa-typography-mobile-heading-s-letter-spacing)}.heading-xs.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-xs);letter-spacing:var(--goa-typography-mobile-heading-xs-letter-spacing)}.heading-2xs.svelte-1yns3oj{font:var(--goa-typography-mobile-heading-2xs, var(--goa-typography-mobile-heading-xs));letter-spacing:var(--goa-typography-mobile-heading-2xs-letter-spacing)}.body-l.svelte-1yns3oj{font:var(--goa-typography-mobile-body-l)}.body-m.svelte-1yns3oj{font:var(--goa-typography-mobile-body-m)}.body-s.svelte-1yns3oj{font:var(--goa-typography-mobile-body-s)}.body-xs.svelte-1yns3oj{font:var(--goa-typography-mobile-body-xs)}}");
 }
 function Ro(t) {
@@ -52078,7 +52078,7 @@ function Ro(t) {
     }
   };
 }
-function F5(t) {
+function F4(t) {
   let e = (
     /*as*/
     t[0]
@@ -52114,7 +52114,7 @@ function F5(t) {
     }
   };
 }
-function W5(t) {
+function W4(t) {
   switch (t) {
     case "h1":
       return "heading-xl";
@@ -52130,7 +52130,7 @@ function W5(t) {
       return;
   }
 }
-function Q5(t, e, o) {
+function Q4(t, e, o) {
   let i, { $$slots: n = {}, $$scope: r } = e, { as: l = "div" } = e, { maxWidth: a = "65ch" } = e, { size: c = void 0 } = e, { color: d = "primary" } = e, { mt: s = null } = e, { mr: u = null } = e, { mb: g = null } = e, { ml: v = null } = e, h = null, b = null;
   function w() {
     if (g)
@@ -52186,7 +52186,7 @@ function Q5(t, e, o) {
     "as" in k && o(0, l = k.as), "maxWidth" in k && o(1, a = k.maxWidth), "size" in k && o(8, c = k.size), "color" in k && o(2, d = k.color), "mt" in k && o(9, s = k.mt), "mr" in k && o(3, u = k.mr), "mb" in k && o(10, g = k.mb), "ml" in k && o(4, v = k.ml), "$$scope" in k && o(11, r = k.$$scope);
   }, t.$$.update = () => {
     t.$$.dirty & /*size, as*/
-    257 && o(7, i = c ?? W5(l));
+    257 && o(7, i = c ?? W4(l));
   }, [
     l,
     a,
@@ -52203,13 +52203,13 @@ function Q5(t, e, o) {
     n
   ];
 }
-class U5 extends Ce {
+class U4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      Q5,
-      F5,
+      Q4,
+      F4,
       _e,
       {
         as: 0,
@@ -52221,7 +52221,7 @@ class U5 extends Ce {
         mb: 10,
         ml: 4
       },
-      Y5
+      Y4
     );
   }
   get as() {
@@ -52273,8 +52273,8 @@ class U5 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-text", ke(U5, { as: {}, maxWidth: {}, size: {}, color: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
-function R5(t) {
+customElements.define("goa-text", ke(U4, { as: {}, maxWidth: {}, size: {}, color: {}, mt: {}, mr: {}, mb: {}, ml: {} }, ["default"], [], true));
+function R4(t) {
   Ne(t, "svelte-d4p8uc", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);display:inline-block}#container.svelte-d4p8uc.svelte-d4p8uc{container:self / inline-size;box-sizing:border-box}.root.svelte-d4p8uc.svelte-d4p8uc{transition:box-shadow 0.05s ease-in;position:relative;max-width:var(--width, 100%);padding-bottom:var(
       --char-count-padding
     );box-shadow:var(--goa-text-area-border);border-radius:var(--goa-text-area-border-radius);background:var(--goa-text-area-color-bg)}.root.svelte-d4p8uc.svelte-d4p8uc:hover{box-shadow:var(--goa-text-area-border-hover)}.root.svelte-d4p8uc.svelte-d4p8uc:focus-within{box-shadow:var(--goa-text-area-border), var(--goa-text-area-border-focus)}.error.svelte-d4p8uc.svelte-d4p8uc,.error.svelte-d4p8uc.svelte-d4p8uc:hover{box-shadow:var(--goa-text-area-border-error)}.error.svelte-d4p8uc.svelte-d4p8uc:focus{box-shadow:var(--goa-text-area-border), var(--goa-text-area-border-focus)}.error.svelte-d4p8uc.svelte-d4p8uc:focus-within:hover{box-shadow:var(--goa-text-area-border), var(--goa-text-area-border-focus)}.disabled.svelte-d4p8uc.svelte-d4p8uc,.disabled.svelte-d4p8uc.svelte-d4p8uc:hover{background-color:var(--goa-text-area-color-bg-disabled);cursor:default;box-shadow:var(--goa-text-area-border-disabled);resize:none}textarea.svelte-d4p8uc.svelte-d4p8uc:disabled{resize:none;color:var(--goa-text-area-color-text-disabled)}.readonly.svelte-d4p8uc.svelte-d4p8uc,.readonly.svelte-d4p8uc.svelte-d4p8uc:hover{background-color:var(
@@ -52290,13 +52290,13 @@ function sa(t) {
       r[7] && /*count*/
       r[20] > /*maxcount*/
       r[8]
-    ) return X5;
+    ) return X4;
     if (
       /*countby*/
       r[7] && /*count*/
       r[20] <= /*maxcount*/
       r[8]
-    ) return G5;
+    ) return G4;
   }
   let i = o(t), n = i && i(t);
   return {
@@ -52327,7 +52327,7 @@ function sa(t) {
     }
   };
 }
-function G5(t) {
+function G4(t) {
   let e = (
     /*maxcount*/
     t[8] - /*count*/
@@ -52364,7 +52364,7 @@ function G5(t) {
     }
   };
 }
-function X5(t) {
+function X4(t) {
   let e = (
     /*count*/
     t[20] - /*maxcount*/
@@ -52437,7 +52437,7 @@ function ca(t) {
     }
   };
 }
-function J5(t) {
+function J4(t) {
   let e, o, i, n, r, l, a, c, d, s, u = (
     /*maxcount*/
     t[8] > 0 && !/*isDisabled*/
@@ -52673,7 +52673,7 @@ function J5(t) {
     }
   };
 }
-function K5(t, e, o) {
+function K4(t, e, o) {
   let i, n, r, { name: l } = e, { value: a = "" } = e, { placeholder: c = "" } = e, { rows: d = 3 } = e, { testid: s = "" } = e, { width: u = "100%" } = e, { maxwidth: g = "60ch" } = e, { error: v = "false" } = e, { readonly: h = "false" } = e, { disabled: b = "false" } = e, { arialabel: w = "" } = e, { countby: p = "" } = e, { maxcount: k = -1 } = e, { autocomplete: M = "" } = e;
   const [z, N] = Ae("Version", ["1", "2"]);
   let { version: j = "1" } = e;
@@ -52793,13 +52793,13 @@ function K5(t, e, o) {
     se
   ];
 }
-class $5 extends Ce {
+class $4 extends Ce {
   constructor(e) {
     super(), ye(
       this,
       e,
-      K5,
-      J5,
+      K4,
+      J4,
       _e,
       {
         name: 1,
@@ -52823,7 +52823,7 @@ class $5 extends Ce {
         mb: 14,
         ml: 15
       },
-      R5,
+      R4,
       [-1, -1]
     );
   }
@@ -52948,7 +52948,7 @@ class $5 extends Ce {
     this.$$set({ ml: e }), y();
   }
 }
-customElements.define("goa-textarea", ke($5, { name: {}, value: {}, placeholder: {}, rows: {}, testid: {}, width: {}, maxwidth: {}, error: {}, readonly: {}, disabled: {}, arialabel: {}, countby: {}, maxcount: {}, autocomplete: {}, version: {}, size: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
+customElements.define("goa-textarea", ke($4, { name: {}, value: {}, placeholder: {}, rows: {}, testid: {}, width: {}, maxwidth: {}, error: {}, readonly: {}, disabled: {}, arialabel: {}, countby: {}, maxcount: {}, autocomplete: {}, version: {}, size: {}, mt: {}, mr: {}, mb: {}, ml: {} }, [], [], true));
 function ev(t) {
   Ne(t, "svelte-q0l82d", ".svelte-q0l82d.svelte-q0l82d{box-sizing:border-box}.page.svelte-q0l82d.svelte-q0l82d{min-height:100vh;display:flex;flex-direction:column}.content.svelte-q0l82d.svelte-q0l82d{flex:1 1 auto;display:flex;flex-direction:column;gap:2rem}.header.svelte-q0l82d.svelte-q0l82d,.footer.svelte-q0l82d.svelte-q0l82d{flex:0 0 auto}main.svelte-q0l82d.svelte-q0l82d{flex:1 1 auto;padding:0 1rem}.nav.svelte-q0l82d.svelte-q0l82d{transition:transform 200ms ease-in-out;background-color:var(--goa-color-greyscale-white)}.nav.svelte-q0l82d>.svelte-q0l82d{display:block;padding:0.5rem 0}@media not (max-width: 623px){.page.svelte-q0l82d.svelte-q0l82d{gap:2rem}.content.svelte-q0l82d.svelte-q0l82d{display:flex;flex-direction:row;justify-content:center;width:min(var(--max-content-width), 100vw);margin:0 auto}.nav.svelte-q0l82d.svelte-q0l82d{padding:0 2rem;transform:translateX(0)}.nav.svelte-q0l82d.svelte-q0l82d:not(.side-menu){flex:0 0 var(--nav-column-width)}.nav.side-menu.svelte-q0l82d.svelte-q0l82d{flex:0 0 var(--side-menu-column-width)}main.svelte-q0l82d.svelte-q0l82d{padding-right:2rem}}@media(min-width: 1024px){main.svelte-q0l82d.svelte-q0l82d{padding-right:4.5rem}}");
 }
@@ -61187,18 +61187,8 @@ const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3505_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3874/assets/tokens-u-qGJicf.css";
 function Bug3548Route() {
   const [open, setOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   function onToggle() {
     setOpen((prev) => !prev);
   }
@@ -61786,15 +61776,6 @@ const __vite_glob_0_48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 function Bug3625Route() {
   const [controlledOpen, setControlledOpen] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Bug 3625: Accordion Refinement" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAccordion, { heading: "Small heading", headingSize: "small", children: "Content with small heading." }),
@@ -70457,37 +70438,6 @@ function generateFakeData(numRows) {
   return data;
 }
 function Feat2469Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      link.remove();
-      deletedRules.forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, Math.min(index2, sheet.cssRules.length));
-        } catch (e) {
-        }
-      });
-    };
-  }, []);
   const smallDrawerControlSet = /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: { marginTop: 0 }, children: "Drawer" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a drawer" })
@@ -72467,15 +72417,6 @@ const __vite_glob_0_131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat2885Route() {
   const [menuOpen, setMenuOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const daysAgo = (days, hours = 0) => {
     const date = /* @__PURE__ */ new Date();
     date.setDate(date.getDate() - days);
@@ -73236,38 +73177,6 @@ const menuActionsTextOnly = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExp
 ] });
 function Feat3229Route() {
   const [lastAction, setLastAction] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      document.head.removeChild(link);
-      deletedRules.reverse().forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, index2);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    };
-  }, []);
   const handleAction = (detail, label) => {
     const source = label ? ` (${label})` : "";
     setLastAction(`Action "${detail.action}"${source}`);
@@ -74572,15 +74481,6 @@ function sortData(data, sorts) {
   });
 }
 function Feat3344Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const [currentSorts, setCurrentSorts] = reactExports.useState([]);
   const [multiSorts, setMultiSorts] = reactExports.useState([]);
   const [test3Sorts, setTest3Sorts] = reactExports.useState([]);
@@ -74934,15 +74834,6 @@ const __vite_glob_0_142 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   default: feat3407SkipOnFocusTab_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat3407StackOnMobileRoute() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", children: "#3407: orientation Prop" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "Testing orientation prop (controls mobile stacking behavior). orientation is only available on GoabTabs (experimental)." }),
@@ -76259,6 +76150,37 @@ const featureRouteDefinitions = prRouteDefinitions.filter(
 const docsRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "docs"
 );
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3874/assets/tokens-u-qGJicf.css";
+const STORAGE_KEY = "goa-token-version";
+const LINK_ID = "goa-tokens-v2";
+const URL_PARAM = "tokens";
+function resolveTokenVersion() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get(URL_PARAM);
+  if (fromUrl === "v1" || fromUrl === "v2") return fromUrl;
+  const fromSession = sessionStorage.getItem(STORAGE_KEY);
+  if (fromSession === "v1" || fromSession === "v2") return fromSession;
+  return "v2";
+}
+function applyTokenVersion(mode) {
+  var _a2;
+  (_a2 = document.getElementById(LINK_ID)) == null ? void 0 : _a2.remove();
+  if (mode === "v2") {
+    const link = document.createElement("link");
+    link.id = LINK_ID;
+    link.rel = "stylesheet";
+    link.href = v2TokensUrl;
+    document.head.appendChild(link);
+  }
+  sessionStorage.setItem(STORAGE_KEY, mode);
+  const url = new URL(window.location.href);
+  if (url.searchParams.has(URL_PARAM)) {
+    url.searchParams.set(URL_PARAM, mode);
+    window.history.replaceState({}, "", url);
+  }
+}
+applyTokenVersion(resolveTokenVersion());
+const TOKEN_TOGGLE_URL = "#tokens";
 const appContentStyle = {
   display: "flex",
   minHeight: "calc(100vh - 10.1875rem)",
@@ -76269,9 +76191,18 @@ function App() {
   const { mode, toggle } = useTheme();
   const isDark = mode === "dark";
   const baseUrl = "/ui-components/pr-preview-react/pr-3874/";
-  const handleNavigate = (path) => {
+  const [tokenMode, setTokenMode] = reactExports.useState(
+    () => resolveTokenVersion()
+  );
+  const handleSideMenuNavigate = (path) => {
     if (path === "#toggle-theme") {
       toggle();
+      return;
+    }
+    if (path === TOKEN_TOGGLE_URL) {
+      const next = tokenMode === "v1" ? "v2" : "v1";
+      setTokenMode(next);
+      applyTokenVersion(next);
       return;
     }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
@@ -76289,7 +76220,7 @@ function App() {
           heading: "Testing Playground",
           url: baseUrl,
           open: true,
-          onNavigate: handleNavigate,
+          onNavigate: handleSideMenuNavigate,
           primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { icon: "alert-circle", heading: "Bugs", children: bugRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
               GoabWorkSideMenuItem,
@@ -76324,14 +76255,24 @@ function App() {
               }
             )
           ] }),
-          secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            GoabWorkSideMenuItem,
-            {
-              icon: isDark ? "sunny" : "moon",
-              label: isDark ? "Light mode" : "Dark mode",
-              url: "#toggle-theme"
-            }
-          )
+          secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabWorkSideMenuItem,
+              {
+                icon: isDark ? "sunny" : "moon",
+                label: isDark ? "Light mode" : "Dark mode",
+                url: "#toggle-theme"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabWorkSideMenuItem,
+              {
+                label: `Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`,
+                icon: "swap-horizontal",
+                url: TOKEN_TOGGLE_URL
+              }
+            )
+          ] })
         }
       ),
       /* @__PURE__ */ jsxRuntimeExports.jsx("section", { style: { padding: "30px", width: "100%" }, role: "main", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) })
