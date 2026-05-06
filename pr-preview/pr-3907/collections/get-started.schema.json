@@ -10,6 +10,9 @@
         "title": {
           "type": "string"
         },
+        "navLabel": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
