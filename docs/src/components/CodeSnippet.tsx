@@ -58,7 +58,7 @@ interface CodeSnippetProps {
 const FRAMEWORK_LABELS: Record<Framework, string> = {
   react: "React",
   angular: "Angular",
-  webComponents: "Web Components",
+  webComponents: "Vue / Web Components",
 };
 
 // ============================================================================

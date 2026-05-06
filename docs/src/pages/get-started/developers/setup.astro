@@ -108,6 +108,74 @@ npm i @abgov/design-tokens</code></pre>
 
   <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
 
+  <div style="display: flex; gap: 1rem; align-items: baseline;">
+    <h2 id="vue">Vue UI components</h2>
+    <goa-badge version="2" type="important" emphasis="subtle" content="Experimental"
+    ></goa-badge>
+  </div>
+  <goa-callout version="2" type="information" emphasis="low" mb="m">
+    <goa-text version="2" size="body-m" mt="2xs" mb="none">Supported versions: 3</goa-text
+    >
+  </goa-callout>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Vue 3 consumes the Government of Alberta web components directly. No Vue-specific
+    wrapper package is required.
+  </goa-text>
+
+  <h3 id="vue-step-1">1. Add dependencies</h3>
+  <pre><code>npm i @abgov/web-components
+npm i @abgov/design-tokens</code></pre>
+
+  <h3 id="vue-step-2">2. Link ionicons in index.html</h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Add the following in the <code>head</code> element:
+  </goa-text>
+  <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"&gt;&lt;/script&gt;
+&lt;script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"&gt;&lt;/script&gt;</code></pre>
+
+  <h3 id="vue-step-3">
+    3. Configure your Vue build tool and import the web components in src/main.ts
+  </h3>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Vite is shown below. Tell the Vue compiler to treat <code>goa-*</code> tags as custom elements,
+    then register the components:
+  </goa-text>
+  <pre><code>// vite.config.ts
+import &#123; defineConfig &#125; from "vite";
+import vue from "@vitejs/plugin-vue";
+
+export default defineConfig(&#123;
+  plugins: [
+    vue(&#123;
+      template: &#123;
+        compilerOptions: &#123;
+          isCustomElement: (tag) =&gt; tag.startsWith("goa-"),
+        &#125;,
+      &#125;,
+    &#125;),
+  ],
+&#125;);</code></pre>
+  <pre><code>// src/main.ts
+import "@abgov/web-components";</code></pre>
+
+  <h3 id="vue-step-4">4. Add the styles in src/assets/main.css</h3>
+  <pre><code>@import "@abgov/web-components/index.css";
+@import "@abgov/design-tokens/dist/tokens.css";</code></pre>
+
+  <h4>Notes</h4>
+  <ul>
+    <li>
+      Pass booleans as <code>"true"</code> /
+      <code>"false"</code> strings.
+    </li>
+    <li>
+      Listen for events using their underscore-prefixed names (e.g. <code>@_change</code
+      >).
+    </li>
+  </ul>
+
+  <goa-divider version="2" mt="xl" mb="xl"></goa-divider>
+
   <h2 id="web-components">Web components</h2>
   <goa-text version="2" size="body-m" mt="none" mb="m">
     This library contains web components from the Government of Alberta.
