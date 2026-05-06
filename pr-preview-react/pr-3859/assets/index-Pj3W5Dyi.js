@@ -16487,38 +16487,38 @@ class Ye {
   }
 }
 function P2(t) {
-  Ne(t, "svelte-1uyjkq3", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);font-size:var(--goa-font-size-4)}.goa-accordion.svelte-1uyjkq3.svelte-1uyjkq3{border-radius:var(--goa-accordion-border-radius);box-shadow:var(--goa-accordion-shadow)}.goa-accordion.svelte-1uyjkq3.svelte-1uyjkq3,.goa-accordion.svelte-1uyjkq3 .svelte-1uyjkq3{box-sizing:border-box}.goa-accordion.svelte-1uyjkq3.svelte-1uyjkq3{container:self / inline-size}summary.svelte-1uyjkq3.svelte-1uyjkq3{min-height:var(--goa-accordion-heading-min-height, 3.5rem);padding:var(--goa-accordion-padding-heading-icon-left);border:var(--goa-accordion-border);border-radius:var(--goa-accordion-border-radius);background-color:var(--goa-accordion-color-bg-heading);color:var(--goa-accordion-color-heading);cursor:pointer;list-style:none;display:flex;align-items:flex-start;position:relative;transition:var(--goa-motion-duration-short-2) background-color
-      var(--goa-motion-curve-expressive)}summary.filled.svelte-1uyjkq3.svelte-1uyjkq3{background-color:var(
+  Ne(t, "svelte-1ucazlq", `:host{box-sizing:border-box;font-family:var(--goa-font-family-sans);font-size:var(--goa-font-size-4)}.goa-accordion.svelte-1ucazlq.svelte-1ucazlq{border-radius:var(--goa-accordion-border-radius);box-shadow:var(--goa-accordion-shadow)}.goa-accordion.svelte-1ucazlq.svelte-1ucazlq,.goa-accordion.svelte-1ucazlq .svelte-1ucazlq{box-sizing:border-box}.goa-accordion.svelte-1ucazlq.svelte-1ucazlq{container:self / inline-size}summary.svelte-1ucazlq.svelte-1ucazlq{min-height:var(--goa-accordion-heading-min-height, 3.5rem);padding:var(--goa-accordion-padding-heading-icon-left);border:var(--goa-accordion-border);border-radius:var(--goa-accordion-border-radius);background-color:var(--goa-accordion-color-bg-heading);color:var(--goa-accordion-color-heading);cursor:pointer;list-style:none;display:flex;align-items:center;position:relative;transition:var(--goa-motion-duration-short-2) background-color
+      var(--goa-motion-curve-expressive)}summary.filled.svelte-1ucazlq.svelte-1ucazlq{background-color:var(
       --goa-accordion-color-filled-bg-heading,
       var(--goa-color-greyscale-100)
-    )}summary.filled.svelte-1uyjkq3.svelte-1uyjkq3:hover{background-color:var(
+    )}summary.filled.svelte-1ucazlq.svelte-1ucazlq:hover{background-color:var(
       --goa-accordion-color-filled-bg-heading-hover,
       var(--goa-color-greyscale-150)
-    )}summary.iconRight.svelte-1uyjkq3.svelte-1uyjkq3{padding:var(--goa-accordion-padding-heading-icon-right)}summary.svelte-1uyjkq3.svelte-1uyjkq3:hover{background-color:var(--goa-accordion-color-bg-heading-hover);border:var(--goa-accordion-border-hover, var(--goa-accordion-border));color:var(--goa-accordion-color-heading-hover)}summary.svelte-1uyjkq3.svelte-1uyjkq3:focus-visible,summary.svelte-1uyjkq3.svelte-1uyjkq3:active{background-color:var(--goa-accordion-color-bg-heading);outline:none}summary.filled.svelte-1uyjkq3.svelte-1uyjkq3:focus-visible,summary.filled.svelte-1uyjkq3.svelte-1uyjkq3:active{background-color:var(
+    )}summary.iconRight.svelte-1ucazlq.svelte-1ucazlq{padding:var(--goa-accordion-padding-heading-icon-right)}summary.svelte-1ucazlq.svelte-1ucazlq:hover{background-color:var(--goa-accordion-color-bg-heading-hover);border:var(--goa-accordion-border-hover, var(--goa-accordion-border));color:var(--goa-accordion-color-heading-hover)}summary.svelte-1ucazlq.svelte-1ucazlq:focus-visible,summary.svelte-1ucazlq.svelte-1ucazlq:active{background-color:var(--goa-accordion-color-bg-heading);outline:none}summary.filled.svelte-1ucazlq.svelte-1ucazlq:focus-visible,summary.filled.svelte-1ucazlq.svelte-1ucazlq:active{background-color:var(
       --goa-accordion-color-filled-bg-heading,
       var(--goa-color-greyscale-100)
-    )}summary.svelte-1uyjkq3.svelte-1uyjkq3:focus-visible::before{content:"";position:absolute;top:-1px;right:-1px;bottom:-1px;left:-1px;border:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);border-radius:var(--goa-accordion-border-radius)}summary.svelte-1uyjkq3.svelte-1uyjkq3::marker,summary.svelte-1uyjkq3.svelte-1uyjkq3::-webkit-details-marker{display:none}summary.svelte-1uyjkq3 goa-icon.svelte-1uyjkq3{padding:0.25rem 1rem}.title.svelte-1uyjkq3.svelte-1uyjkq3{display:flex;flex:1}.heading.svelte-1uyjkq3.svelte-1uyjkq3{font:var(--goa-accordion-heading);padding:0.125rem 1rem 0 0}.heading-small.svelte-1uyjkq3.svelte-1uyjkq3{padding-top:0.25rem;line-height:1.75rem;font:var(--goa-accordion-heading)}.heading-medium.svelte-1uyjkq3.svelte-1uyjkq3{line-height:2rem;font:var(--goa-accordion-heading-m)}.secondary-text.svelte-1uyjkq3.svelte-1uyjkq3{font:var(
+    )}summary.svelte-1ucazlq.svelte-1ucazlq:focus-visible::before{content:"";position:absolute;top:-1px;right:-1px;bottom:-1px;left:-1px;border:var(--goa-border-width-l) solid var(--goa-color-interactive-focus);border-radius:var(--goa-accordion-border-radius)}summary.svelte-1ucazlq.svelte-1ucazlq::marker,summary.svelte-1ucazlq.svelte-1ucazlq::-webkit-details-marker{display:none}summary.svelte-1ucazlq goa-icon.svelte-1ucazlq{padding:0.25rem 1rem}.title.svelte-1ucazlq.svelte-1ucazlq{display:flex;flex:1}.heading.svelte-1ucazlq.svelte-1ucazlq{font:var(--goa-accordion-heading);padding:0.125rem 1rem 0 0}.heading-small.svelte-1ucazlq.svelte-1ucazlq{padding-top:0.25rem;line-height:1.75rem;font:var(--goa-accordion-heading)}.heading-medium.svelte-1ucazlq.svelte-1ucazlq{line-height:2rem;font:var(--goa-accordion-heading-m)}.secondary-text.svelte-1ucazlq.svelte-1ucazlq{font:var(
       --goa-accordion-heading-secondary-text,
       var(--goa-typography-body-s)
     );color:var(
       --goa-accordion-heading-secondary-text-color,
       var(--goa-color-text-default)
-    );line-height:1.5rem;padding-right:1rem}.heading-medium.svelte-1uyjkq3+.secondary-text.svelte-1uyjkq3{font:var(
+    );line-height:1.5rem;padding-right:1rem}.heading-medium.svelte-1ucazlq+.secondary-text.svelte-1ucazlq{font:var(
       --goa-accordion-heading-m-secondary-text,
       var(--goa-typography-body-s)
-    )}.heading-content.svelte-1uyjkq3.svelte-1uyjkq3{flex:1}.actions.svelte-1uyjkq3.svelte-1uyjkq3{display:flex;align-items:center;align-self:center;padding-left:var(--goa-space-xs, 0.5rem)}.container-medium.svelte-1uyjkq3.svelte-1uyjkq3{min-height:var(--goa-accordion-heading-m-min-height, 4rem)}.container-medium.svelte-1uyjkq3 goa-icon.svelte-1uyjkq3{padding:0.5rem 1rem}.content.svelte-1uyjkq3.svelte-1uyjkq3{border-bottom:var(--goa-accordion-border);border-left:var(--goa-accordion-border);border-right:var(--goa-accordion-border);border-bottom-left-radius:var(--goa-accordion-border-radius);border-bottom-right-radius:var(--goa-accordion-border-radius);background-color:var(--goa-accordion-color-bg-content)}.content.svelte-1uyjkq3 ::slotted(*:last-child){margin-bottom:0 !important}details[open].svelte-1uyjkq3 goa-icon.svelte-1uyjkq3{transform:rotate(var(--icon-rotate))}details[open].svelte-1uyjkq3 summary.svelte-1uyjkq3{border-bottom-left-radius:var(--goa-border-radius-none);border-bottom-right-radius:var(--goa-border-radius-none);border-bottom:var(--goa-accordion-divider)}details[open].svelte-1uyjkq3 summary.svelte-1uyjkq3:hover{border-bottom:var(
+    )}.heading-content.svelte-1ucazlq.svelte-1ucazlq{flex:1}.actions.svelte-1ucazlq.svelte-1ucazlq{display:flex;align-items:center;align-self:center;padding-left:var(--goa-space-xs, 0.5rem)}.container-medium.svelte-1ucazlq.svelte-1ucazlq{min-height:var(--goa-accordion-heading-m-min-height, 4rem)}.container-medium.svelte-1ucazlq goa-icon.svelte-1ucazlq{padding:0.5rem 1rem}.content.svelte-1ucazlq.svelte-1ucazlq{border-bottom:var(--goa-accordion-border);border-left:var(--goa-accordion-border);border-right:var(--goa-accordion-border);border-bottom-left-radius:var(--goa-accordion-border-radius);border-bottom-right-radius:var(--goa-accordion-border-radius);background-color:var(--goa-accordion-color-bg-content)}.content.svelte-1ucazlq ::slotted(*:last-child){margin-bottom:0 !important}details[open].svelte-1ucazlq goa-icon.svelte-1ucazlq{transform:rotate(var(--icon-rotate))}details[open].svelte-1ucazlq summary.svelte-1ucazlq{border-bottom-left-radius:var(--goa-border-radius-none);border-bottom-right-radius:var(--goa-border-radius-none);border-bottom:var(--goa-accordion-divider)}details[open].svelte-1ucazlq summary.svelte-1ucazlq:hover{border-bottom:var(
       --goa-accordion-divider-hover,
       var(--goa-accordion-divider)
-    )}details[open].svelte-1uyjkq3 summary.svelte-1uyjkq3:focus-visible::before{border-radius:var(
+    )}details[open].svelte-1ucazlq summary.svelte-1ucazlq:focus-visible::before{border-radius:var(
       --goa-accordion-border-radius-focus,
       var(--goa-accordion-border-radius)
-    )}.container-medium.svelte-1uyjkq3.svelte-1uyjkq3{padding:var(
+    )}.container-medium.svelte-1ucazlq.svelte-1ucazlq{padding:var(
       --goa-accordion-padding-heading-m-icon-left,
       var(--goa-accordion-padding-heading-icon-left)
-    )}.container-medium.iconRight.svelte-1uyjkq3.svelte-1uyjkq3{padding:var(
+    )}.container-medium.iconRight.svelte-1ucazlq.svelte-1ucazlq{padding:var(
       --goa-accordion-padding-heading-m-icon-right,
       var(--goa-accordion-padding-heading-icon-right)
-    )}@container self (max-width: 623px){.content.svelte-1uyjkq3.svelte-1uyjkq3{padding:var(--goa-accordion-padding-content-narrow)}.title.svelte-1uyjkq3.svelte-1uyjkq3{display:flex;flex-direction:column;align-items:flex-start}}@container self (min-width: 624px){.content.svelte-1uyjkq3.svelte-1uyjkq3{padding:var(--goa-accordion-padding-content-wide)}.title.svelte-1uyjkq3.svelte-1uyjkq3{align-items:baseline}}`);
+    )}@container self (max-width: 623px){.content.svelte-1ucazlq.svelte-1ucazlq{padding:var(--goa-accordion-padding-content-narrow)}.title.svelte-1ucazlq.svelte-1ucazlq{display:flex;flex-direction:column;align-items:flex-start}}@container self (min-width: 624px){.content.svelte-1ucazlq.svelte-1ucazlq{padding:var(--goa-accordion-padding-content-wide)}.title.svelte-1ucazlq.svelte-1ucazlq{align-items:baseline}}`);
 }
 const V2 = (t) => ({}), yi = (t) => ({}), B2 = (t) => ({}), ki = (t) => ({});
 function Ci(t) {
@@ -16526,7 +16526,7 @@ function Ci(t) {
   return {
     c() {
       e = C("goa-icon"), h(e, "type", "chevron-forward"), h(e, "fillcolor", o = /*_hovering*/
-      t[12] ? "var(--goa-accordion-icon-color-hover, var(--goa-color-interactive-hover))" : "var(--goa-accordion-icon-color, var(--goa-color-interactive-default))"), h(e, "class", "svelte-1uyjkq3");
+      t[12] ? "var(--goa-accordion-icon-color-hover, var(--goa-color-interactive-hover))" : "var(--goa-accordion-icon-color, var(--goa-color-interactive-default))"), h(e, "class", "svelte-1ucazlq");
     },
     m(i, n) {
       E(i, e, n);
@@ -16548,7 +16548,7 @@ function zi(t) {
       e = C("span"), o = se(
         /*secondarytext*/
         t[1]
-      ), f(e, "class", "secondary-text svelte-1uyjkq3");
+      ), f(e, "class", "secondary-text svelte-1ucazlq");
     },
     m(i, n) {
       E(i, e, n), _(e, o);
@@ -16580,7 +16580,7 @@ function Mi(t) {
   );
   return {
     c() {
-      e = C("div"), l && l.c(), f(e, "class", "actions svelte-1uyjkq3");
+      e = C("div"), l && l.c(), f(e, "class", "actions svelte-1ucazlq");
     },
     m(a, c) {
       E(a, e, c), l && l.m(e, null), o = true, i || (n = le(e, "click", Xa(
@@ -16625,7 +16625,7 @@ function ji(t) {
   return {
     c() {
       e = C("goa-icon"), h(e, "type", "chevron-down"), h(e, "fillcolor", o = /*_hovering*/
-      t[12] ? "var(--goa-accordion-icon-color-hover, var(--goa-color-interactive-hover))" : "var(--goa-accordion-icon-color, var(--goa-color-interactive-default))"), h(e, "class", "svelte-1uyjkq3");
+      t[12] ? "var(--goa-accordion-icon-color-hover, var(--goa-color-interactive-hover))" : "var(--goa-accordion-icon-color, var(--goa-color-interactive-default))"), h(e, "class", "svelte-1ucazlq");
     },
     m(i, n) {
       E(i, e, n);
@@ -16681,15 +16681,15 @@ function Z2(t) {
         /*heading*/
         t[0]
       ), s = Y(), A && A.c(), u = Y(), g = C("div"), D && D.c(), m = Y(), S && S.c(), b = Y(), B && B.c(), z = Y(), M = C("div"), F && F.c(), f(l, "class", c = "heading heading-" + /*headingsize*/
-      t[2] + " svelte-1uyjkq3"), f(l, "data-testid", d = `${/*testid*/
-      t[5]}-heading`), f(g, "class", "heading-content svelte-1uyjkq3"), I(
+      t[2] + " svelte-1ucazlq"), f(l, "data-testid", d = `${/*testid*/
+      t[5]}-heading`), f(g, "class", "heading-content svelte-1ucazlq"), I(
         g,
         "heading-content-top",
         /*_headingSlotChildren*/
         t[18].length
-      ), f(r, "class", "title svelte-1uyjkq3"), f(r, "id", v = `${/*_accordionId*/
+      ), f(r, "class", "title svelte-1ucazlq"), f(r, "id", v = `${/*_accordionId*/
       t[19]}-heading`), f(i, "class", w = Ue(`container-${/*headingsize*/
-      t[2]}`) + " svelte-1uyjkq3"), f(i, "aria-controls", p = `${/*_accordionId*/
+      t[2]}`) + " svelte-1ucazlq"), f(i, "aria-controls", p = `${/*_accordionId*/
       t[19]}-content`), f(
         i,
         "aria-expanded",
@@ -16706,11 +16706,11 @@ function Z2(t) {
         "filled",
         /*headingType*/
         t[11] === "filled"
-      ), f(M, "class", "content svelte-1uyjkq3"), f(M, "role", "region"), f(M, "aria-labelledby", N = `${/*_accordionId*/
+      ), f(M, "class", "content svelte-1ucazlq"), f(M, "role", "region"), f(M, "aria-labelledby", N = `${/*_accordionId*/
       t[19]}-heading`), f(M, "id", j = `${/*_accordionId*/
       t[19]}-content`), o.open = /*isOpen*/
       t[20], f(o, "data-testid", L = `${/*testid*/
-      t[5]}-details`), f(o, "class", "svelte-1uyjkq3"), f(e, "style", O = `
+      t[5]}-details`), f(o, "class", "svelte-1ucazlq"), f(e, "style", O = `
     ${xe(
         /*mt*/
         t[6],
@@ -16725,7 +16725,7 @@ function Z2(t) {
       t[4]};
     --icon-rotate: ${/*iconposition*/
       t[10] === "right" ? "180deg" : "90deg"}
-  `), f(e, "class", "goa-accordion svelte-1uyjkq3"), f(
+  `), f(e, "class", "goa-accordion svelte-1ucazlq"), f(
         e,
         "data-testid",
         /*testid*/
@@ -16783,7 +16783,7 @@ function Z2(t) {
         T[0]
       ), (!q || W[0] & /*headingsize*/
       4 && c !== (c = "heading heading-" + /*headingsize*/
-      T[2] + " svelte-1uyjkq3")) && f(l, "class", c), (!q || W[0] & /*testid*/
+      T[2] + " svelte-1ucazlq")) && f(l, "class", c), (!q || W[0] & /*testid*/
       32 && d !== (d = `${/*testid*/
       T[5]}-heading`)) && f(l, "data-testid", d), /*secondarytext*/
       T[1] ? A ? A.p(T, W) : (A = zi(T), A.c(), A.m(r, u)) : A && (A.d(1), A = null), D && D.p && (!q || W[0] & /*$$scope*/
@@ -16819,7 +16819,7 @@ function Z2(t) {
       }), Be()), /*iconposition*/
       T[10] === "right" ? B ? B.p(T, W) : (B = ji(T), B.c(), B.m(i, null)) : B && (B.d(1), B = null), (!q || W[0] & /*headingsize*/
       4 && w !== (w = Ue(`container-${/*headingsize*/
-      T[2]}`) + " svelte-1uyjkq3")) && f(i, "class", w), (!q || W[0] & /*_accordionId*/
+      T[2]}`) + " svelte-1ucazlq")) && f(i, "class", w), (!q || W[0] & /*_accordionId*/
       524288 && p !== (p = `${/*_accordionId*/
       T[19]}-content`)) && f(i, "aria-controls", p), (!q || W[0] & /*isOpen*/
       1048576) && f(
@@ -61241,18 +61241,8 @@ const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3505_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3859/assets/tokens-CWsSLfwq.css";
 function Bug3548Route() {
   const [open, setOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   function onToggle() {
     setOpen((prev) => !prev);
   }
@@ -61840,15 +61830,6 @@ const __vite_glob_0_48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 function Bug3625Route() {
   const [controlledOpen, setControlledOpen] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Bug 3625: Accordion Refinement" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAccordion, { heading: "Small heading", headingSize: "small", children: "Content with small heading." }),
@@ -63549,7 +63530,31 @@ function DocsAccordionRoute() {
         ] }),
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "This example mixes badges and controls inside the actions slot." })
       }
-    )
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { marginTop: "2rem", width: "10%" }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Benji" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        GoabAccordion,
+        {
+          heading: "Randall Sanford",
+          headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+          actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "View" })
+          ] }),
+          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("dl", { className: "accordion-example", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { children: "Date of referral" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: "January 27, 2021" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { children: "Work safety concerns" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: "None" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { children: "Type of referral" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: "Word of mouth, internet search" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { children: "Intake received from another site" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { children: "Yes" })
+          ] })
+        }
+      )
+    ] })
   ] });
 }
 const accordion_route = {
@@ -70534,37 +70539,6 @@ function generateFakeData(numRows) {
   return data;
 }
 function Feat2469Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      link.remove();
-      deletedRules.forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, Math.min(index2, sheet.cssRules.length));
-        } catch (e) {
-        }
-      });
-    };
-  }, []);
   const smallDrawerControlSet = /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: { marginTop: 0 }, children: "Drawer" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a drawer" })
@@ -72544,15 +72518,6 @@ const __vite_glob_0_131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat2885Route() {
   const [menuOpen, setMenuOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const daysAgo = (days, hours = 0) => {
     const date = /* @__PURE__ */ new Date();
     date.setDate(date.getDate() - days);
@@ -73313,38 +73278,6 @@ const menuActionsTextOnly = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExp
 ] });
 function Feat3229Route() {
   const [lastAction, setLastAction] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      document.head.removeChild(link);
-      deletedRules.reverse().forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, index2);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    };
-  }, []);
   const handleAction = (detail, label) => {
     const source = label ? ` (${label})` : "";
     setLastAction(`Action "${detail.action}"${source}`);
@@ -74649,15 +74582,6 @@ function sortData(data, sorts) {
   });
 }
 function Feat3344Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const [currentSorts, setCurrentSorts] = reactExports.useState([]);
   const [multiSorts, setMultiSorts] = reactExports.useState([]);
   const [test3Sorts, setTest3Sorts] = reactExports.useState([]);
@@ -75011,15 +74935,6 @@ const __vite_glob_0_142 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   default: feat3407SkipOnFocusTab_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat3407StackOnMobileRoute() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", children: "#3407: orientation Prop" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "Testing orientation prop (controls mobile stacking behavior). orientation is only available on GoabTabs (experimental)." }),
@@ -75861,6 +75776,7 @@ const __vite_glob_0_147 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: feat3544_route
 }, Symbol.toStringTag, { value: "Module" }));
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3859/assets/tokens-CWsSLfwq.css";
 function Feat3636Route() {
   reactExports.useEffect(() => {
     const link = document.createElement("link");
@@ -76045,6 +75961,110 @@ function Feat3636Route() {
               ),
               open: true,
               children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { children: "stuff goes in here" })
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Multi-line Heading with Centered Chevron" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { marginTop: "2rem", width: "500px" }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
+              ] }),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered in the heading"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: " 1 Comment(s) " }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: " View " })
+              ] }),
+              iconPosition: "right",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: " 1 Comment(s) " }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: " View " })
+              ] }),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              headingType: "filled",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
+              headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              headingType: "filled",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: " 1 Comment(s) " }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: " View " })
+              ] }),
+              secondaryText: "Secondary text that is long enough to wrap onto multiple lines and push the heading content and actions down",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
             }
           )
         ] })
@@ -76539,6 +76559,36 @@ const featureRouteDefinitions = prRouteDefinitions.filter(
 const docsRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "docs"
 );
+const STORAGE_KEY = "goa-token-version";
+const LINK_ID = "goa-tokens-v2";
+const URL_PARAM = "tokens";
+function resolveTokenVersion() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get(URL_PARAM);
+  if (fromUrl === "v1" || fromUrl === "v2") return fromUrl;
+  const fromSession = sessionStorage.getItem(STORAGE_KEY);
+  if (fromSession === "v1" || fromSession === "v2") return fromSession;
+  return "v2";
+}
+function applyTokenVersion(mode) {
+  var _a2;
+  (_a2 = document.getElementById(LINK_ID)) == null ? void 0 : _a2.remove();
+  if (mode === "v2") {
+    const link = document.createElement("link");
+    link.id = LINK_ID;
+    link.rel = "stylesheet";
+    link.href = v2TokensUrl;
+    document.head.appendChild(link);
+  }
+  sessionStorage.setItem(STORAGE_KEY, mode);
+  const url = new URL(window.location.href);
+  if (url.searchParams.has(URL_PARAM)) {
+    url.searchParams.set(URL_PARAM, mode);
+    window.history.replaceState({}, "", url);
+  }
+}
+applyTokenVersion(resolveTokenVersion());
+const TOKEN_TOGGLE_URL = "#tokens";
 const appContentStyle = {
   display: "flex",
   minHeight: "calc(100vh - 10.1875rem)",
@@ -76547,7 +76597,16 @@ const appContentStyle = {
 function App() {
   const navigate = useNavigate();
   const baseUrl = "/ui-components/pr-preview-react/pr-3859/";
-  const handleNavigate = (path) => {
+  const [tokenMode, setTokenMode] = reactExports.useState(
+    () => resolveTokenVersion()
+  );
+  const handleSideMenuNavigate = (path) => {
+    if (path === TOKEN_TOGGLE_URL) {
+      const next = tokenMode === "v1" ? "v2" : "v1";
+      setTokenMode(next);
+      applyTokenVersion(next);
+      return;
+    }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
     navigate(internal);
   };
@@ -76563,7 +76622,15 @@ function App() {
           heading: "Testing Playground",
           url: baseUrl,
           open: true,
-          onNavigate: handleNavigate,
+          onNavigate: handleSideMenuNavigate,
+          secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabWorkSideMenuItem,
+            {
+              label: `Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`,
+              icon: "swap-horizontal",
+              url: TOKEN_TOGGLE_URL
+            }
+          ),
           primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { icon: "alert-circle", heading: "Bugs", children: bugRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
               GoabWorkSideMenuItem,
