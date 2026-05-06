@@ -61138,18 +61138,8 @@ const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3505_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3911/assets/tokens-CWsSLfwq.css";
 function Bug3548Route() {
   const [open, setOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   function onToggle() {
     setOpen((prev) => !prev);
   }
@@ -62076,15 +62066,6 @@ const __vite_glob_0_49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 function Bug3625Route() {
   const [controlledOpen, setControlledOpen] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Bug 3625: Accordion Refinement" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAccordion, { heading: "Small heading", headingSize: "small", children: "Content with small heading." }),
@@ -70747,37 +70728,6 @@ function generateFakeData(numRows) {
   return data;
 }
 function Feat2469Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      link.remove();
-      deletedRules.forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, Math.min(index2, sheet.cssRules.length));
-        } catch (e) {
-        }
-      });
-    };
-  }, []);
   const smallDrawerControlSet = /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: { marginTop: 0 }, children: "Drawer" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a drawer" })
@@ -72757,15 +72707,6 @@ const __vite_glob_0_132 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat2885Route() {
   const [menuOpen, setMenuOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const daysAgo = (days, hours = 0) => {
     const date = /* @__PURE__ */ new Date();
     date.setDate(date.getDate() - days);
@@ -73526,38 +73467,6 @@ const menuActionsTextOnly = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExp
 ] });
 function Feat3229Route() {
   const [lastAction, setLastAction] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      document.head.removeChild(link);
-      deletedRules.reverse().forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, index2);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    };
-  }, []);
   const handleAction = (detail, label) => {
     const source = label ? ` (${label})` : "";
     setLastAction(`Action "${detail.action}"${source}`);
@@ -74862,15 +74771,6 @@ function sortData(data, sorts) {
   });
 }
 function Feat3344Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const [currentSorts, setCurrentSorts] = reactExports.useState([]);
   const [multiSorts, setMultiSorts] = reactExports.useState([]);
   const [test3Sorts, setTest3Sorts] = reactExports.useState([]);
@@ -75224,15 +75124,6 @@ const __vite_glob_0_143 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   default: feat3407SkipOnFocusTab_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat3407StackOnMobileRoute() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", children: "#3407: orientation Prop" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "Testing orientation prop (controls mobile stacking behavior). orientation is only available on GoabTabs (experimental)." }),
@@ -76550,6 +76441,37 @@ const featureRouteDefinitions = prRouteDefinitions.filter(
 const docsRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "docs"
 );
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3911/assets/tokens-CWsSLfwq.css";
+const STORAGE_KEY = "goa-token-version";
+const LINK_ID = "goa-tokens-v2";
+const URL_PARAM = "tokens";
+function resolveTokenVersion() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get(URL_PARAM);
+  if (fromUrl === "v1" || fromUrl === "v2") return fromUrl;
+  const fromSession = sessionStorage.getItem(STORAGE_KEY);
+  if (fromSession === "v1" || fromSession === "v2") return fromSession;
+  return "v2";
+}
+function applyTokenVersion(mode) {
+  var _a2;
+  (_a2 = document.getElementById(LINK_ID)) == null ? void 0 : _a2.remove();
+  if (mode === "v2") {
+    const link = document.createElement("link");
+    link.id = LINK_ID;
+    link.rel = "stylesheet";
+    link.href = v2TokensUrl;
+    document.head.appendChild(link);
+  }
+  sessionStorage.setItem(STORAGE_KEY, mode);
+  const url = new URL(window.location.href);
+  if (url.searchParams.has(URL_PARAM)) {
+    url.searchParams.set(URL_PARAM, mode);
+    window.history.replaceState({}, "", url);
+  }
+}
+applyTokenVersion(resolveTokenVersion());
+const TOKEN_TOGGLE_URL = "#tokens";
 const appContentStyle = {
   display: "flex",
   minHeight: "calc(100vh - 10.1875rem)",
@@ -76558,7 +76480,16 @@ const appContentStyle = {
 function App() {
   const navigate = useNavigate();
   const baseUrl = "/ui-components/pr-preview-react/pr-3911/";
-  const handleNavigate = (path) => {
+  const [tokenMode, setTokenMode] = reactExports.useState(
+    () => resolveTokenVersion()
+  );
+  const handleSideMenuNavigate = (path) => {
+    if (path === TOKEN_TOGGLE_URL) {
+      const next = tokenMode === "v1" ? "v2" : "v1";
+      setTokenMode(next);
+      applyTokenVersion(next);
+      return;
+    }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
     navigate(internal);
   };
@@ -76574,7 +76505,15 @@ function App() {
           heading: "Testing Playground",
           url: baseUrl,
           open: true,
-          onNavigate: handleNavigate,
+          onNavigate: handleSideMenuNavigate,
+          secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabWorkSideMenuItem,
+            {
+              label: `Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`,
+              icon: "swap-horizontal",
+              url: TOKEN_TOGGLE_URL
+            }
+          ),
           primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { icon: "alert-circle", heading: "Bugs", children: bugRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
               GoabWorkSideMenuItem,
