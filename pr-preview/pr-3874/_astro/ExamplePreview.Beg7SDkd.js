@@ -26,7 +26,8 @@ import{j as e}from"./jsx-runtime.D_zvdyIk.js";import{r as d}from"./index.DeO6U63
         }
 
         .copy-link-button,
-        .figma-link {
+        .figma-link,
+        .figma-link:visited {
           display: flex;
           align-items: center;
           justify-content: center;
