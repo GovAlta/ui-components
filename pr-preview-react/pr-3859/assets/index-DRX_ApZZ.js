@@ -76304,6 +76304,22 @@ function Feat3636Route() {
             GoabAccordion,
             {
               heading: "Randall Sanford",
+              headingType: "filled",
+              iconPosition: "right",
+              actions: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "0.5rem" }, children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "tertiary", size: "compact", children: "1 Comment(s)" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabButton, { type: "secondary", size: "compact", children: "View" })
+              ] }),
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
               headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
               headingType: "filled",
               children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -76316,6 +76332,19 @@ function Feat3636Route() {
             GoabAccordion,
             {
               heading: "Randall Sanford",
+              headingContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              headingType: "filled",
+              iconPosition: "right",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
+                "The chevron should be centered here"
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabAccordion,
+            {
+              heading: "Randall Sanford",
               headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
               children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
@@ -76330,6 +76359,7 @@ function Feat3636Route() {
               heading: "Randall Sanford",
               headingType: "filled",
               actions: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabBadge, { type: "success", content: "Accepted" }),
+              iconPosition: "right",
               children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { role: "img", "aria-label": "eyes", children: "👀" }),
                 "The chevron should be centered here"
