@@ -81,6 +81,9 @@
           ],
           "default": "published"
         },
+        "hidden": {
+          "type": "boolean"
+        },
         "previewImage": {
           "type": "string"
         },
