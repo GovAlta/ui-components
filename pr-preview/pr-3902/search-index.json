@@ -731,6 +731,20 @@
     "slug": "work-side-menu"
   },
   {
+    "type": "component",
+    "id": "work-side-notification-panel",
+    "name": "Notification Panel",
+    "description": "A notification center panel that displays notification items within a work side menu, with tabs for filtering by unread, urgent, and all notifications.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "notifications",
+      "work side menu",
+      "panel"
+    ],
+    "slug": "work-side-notification-panel"
+  },
+  {
     "type": "example",
     "id": "401-error-page",
     "title": "Restricted access (401)",
@@ -2804,6 +2818,8 @@
     ],
     "components": [
       "work-side-menu",
+      "work-side-notification-panel",
+      "work-side-notification-item",
       "table",
       "badge",
       "tabs",
