@@ -63,7 +63,7 @@ Toggle light and dark mode using the React useTheme hook or the Angular
 Dark mode is still being tested. The CSS API and tokens may evolve as we iterate.
 </goa-text> </goa-callout> <goa-callout version="2" type="information" emphasis="low" mb="2xl"> <goa-text size="body-m" mt="2xs" mb="none">
 Theme switching requires <code>@abgov/design-tokens-v2</code> with the dark
-      theme stylesheet imported. See <a href="/get-started/developers/setup">Setup</a>
+      theme stylesheet imported. See <a href="/ui-components/pr-preview/pr-3874/get-started/developers/setup">Setup</a>
 for installation steps.
 </goa-text> </goa-callout> <h2 id="how-it-works">How it works</h2> <goa-text size="body-m" mt="none" mb="m">
 Both the React provider and the Angular service write a <code>data-theme</code>
@@ -164,7 +164,7 @@ class GoabThemeService {
 }</code></pre> <goa-divider mt="xl" mb="xl"></goa-divider> <h2 id="custom-styling">Custom styling for dark mode</h2> <goa-text size="body-m" mt="none" mb="m">
 If you're using design system components, they handle dark mode automatically.
 </goa-text> <goa-text size="body-m" mt="none" mb="m">
-If your custom CSS uses <a href="/tokens">design system tokens</a>, dark mode is handled too. The tokens cascade to their dark values when <code>data-theme=&quot;dark&quot;</code> is active.
+If your custom CSS uses <a href="/ui-components/pr-preview/pr-3874/tokens">design system tokens</a>, dark mode is handled too. The tokens cascade to their dark values when <code>data-theme=&quot;dark&quot;</code> is active.
 </goa-text> <pre><code>.my-card {
   background-color: var(--goa-color-surface-card);
 }</code></pre> <goa-text size="body-m" mt="none" mb="m">
