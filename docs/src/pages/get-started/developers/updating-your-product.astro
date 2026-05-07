@@ -1,0 +1,123 @@
+---
+import DocumentationPageLayout from "../../../layouts/DocumentationPageLayout.astro";
+import DropInCallout from "../../../components/DropInCallout.astro";
+---
+
+<DocumentationPageLayout
+  title="Updating your product"
+  description="The rationale and practical steps for updating your GoA product to Design System 2.0 using the developer-first approach."
+  section="get-started"
+>
+  <goa-text version="2" size="heading-xl" mt="none" mb="m">Updating your product</goa-text>
+  <goa-text version="2" size="body-l" mt="none" mb="m">
+    The updated design system includes a new design language, updated design tokens and components,
+    and new templates. For your product, updating means:
+  </goa-text>
+  <ul>
+    <li>Your service stays aligned with the current GoA standard as more services update and users move between them</li>
+    <li>You get access to new component properties, examples, and templates that reduce build time for common service types</li>
+    <li>Your product remains supported — the legacy design system stops receiving fixes after September 2026</li>
+  </ul>
+  <goa-text version="2" size="body-m" mt="m" mb="2xl">
+    Most of the update applies automatically. Most of the work will be reviewing what changed in
+    your product and deciding where design follow-up is needed. The steps below are designed to
+    help you do that.
+  </goa-text>
+
+  <h2 id="developer-first-approach">Use the developer-first approach</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    The developer-first approach lets you see what actually changed in your product before
+    committing to design work.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    When you run the update first, spacing, typography, and token changes apply automatically. You
+    can then review the result with your team and focus design and development effort on the screens
+    that need it most. This avoids redesigning screens based on assumptions about what will change
+    before the product is updated.
+  </goa-text>
+
+  <h2 id="migration-walkthrough">Migration walkthrough</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    The migration walkthrough steps through four stages — legacy design system, upgrade applied,
+    layout and styling fixes, and custom component updates — and shows the visual impact on your
+    interface at each stage. Both public form and workspace product types are covered. Review it
+    with your team before you start: it helps designers and developers see where changes occur, and
+    gives product owners a clearer picture of the scope for planning.
+  </goa-text>
+  <goa-link version="2" size="medium" mb="2xl">
+    <a
+      href="https://bdfranck.github.io/ds2-upgrade-walkthrough/#public-form"
+      target="_blank"
+      rel="noopener noreferrer">Explore the migration walkthrough</a
+    >
+  </goa-link>
+
+  <h2 id="update-all-at-once">Why we recommend updating all at once</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Applying the update to some parts of your product but not others tends to cause the update to
+    stall. Teams focus on a few components then deprioritize the rest, leaving the product in a
+    mixed state that becomes harder to resolve over time. The branch review in step 3 is designed
+    to address this. Reviewing the full update in a branch before committing gives your team a
+    clear picture of the actual work involved. Use that branch to plan your migration window — you
+    are not committing to proceeding until you are ready.
+  </goa-text>
+
+  <h2 id="step-1">Step 1: Create a branch</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Create a dedicated branch for the update. Keeping it separate from your regular development
+    work lets your team review the changes before merging.
+  </goa-text>
+  <pre><code>git checkout -b ds-migration</code></pre>
+  <goa-text version="2" size="body-m" mt="m" mb="m">
+    Use a branch name that works for your team — this is just an example.
+  </goa-text>
+
+  <h2 id="step-2">Step 2: Run the version update</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Follow the steps in <a href="/get-started/developers/setup">Setup</a> to install the updated
+    packages. Run your application after installing the updates. Do this before making any other
+    changes.
+  </goa-text>
+
+  <h2 id="step-3">Step 3: Review the updated application as a team</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    Walk through your application with your product team. At this stage, the team will identify
+    what needs attention and decide what to prioritize.
+  </goa-text>
+  <goa-text version="2" size="body-m" mt="none" mb="2xs">
+    <strong>What to look for:</strong>
+  </goa-text>
+  <ul>
+    <li>Spacing and layout — screens that feel too tight or unbalanced</li>
+    <li>Typography — headings or body text that look off in size or weight</li>
+    <li>Dense or data-heavy screens — these carry the most risk during an update and often need the most follow-up</li>
+    <li>Custom components — anything built outside the design system that needs manual alignment</li>
+  </ul>
+  <goa-text version="2" size="body-m" mt="m" mb="m">
+    Record what you find. A list of screens and issues is enough at this stage. Your designers and
+    product owner can use that output to plan and prioritize work.
+  </goa-text>
+
+  <h2 id="understanding-the-effort">Understanding the effort</h2>
+  <goa-text version="2" size="body-m" mt="none" mb="m">
+    There is no single estimate for how long a migration takes. It varies depending on your
+    product. The main factors are:
+  </goa-text>
+  <ul>
+    <li><strong>App size</strong> — more screens means more to test and review after the update</li>
+    <li><strong>Design system utilization</strong> — products with more custom code need more manual alignment</li>
+    <li><strong>Developer familiarity</strong> — developers with more design system experience move faster through the migration steps</li>
+  </ul>
+  <goa-text version="2" size="body-m" mt="m" mb="m">
+    Use the branch review in step 3 to build a realistic estimate for your own product before
+    committing to a timeline and scheduling the work.
+  </goa-text>
+
+  <h2 id="getting-help">Getting help</h2>
+  <ul>
+    <li>Bring your branch review output to drop-in hours to get feedback on what to prioritize</li>
+    <li>If you find a problem with the design system itself, reach out on the support channel rather than working around it</li>
+  </ul>
+
+  <DropInCallout />
+</DocumentationPageLayout>

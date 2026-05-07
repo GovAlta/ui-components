@@ -46,6 +46,7 @@ const PAGE_GROUPS = [
     pages: [
       { label: "Overview", url: "/get-started/developers" },
       { label: "Setup", url: "/get-started/developers/setup" },
+      { label: "Updating your product", url: "/get-started/developers/updating-your-product" },
       { label: "Verify a bug", url: "/get-started/developers/bug" },
       { label: "Technologies", url: "/get-started/developers/technologies" },
       { label: "Supported browsers", url: "/get-started/developers/browsers" },
