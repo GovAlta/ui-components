@@ -70,14 +70,14 @@ Applying the update to some parts of your product but not others tends to cause 
     to address this. Reviewing the full update in a branch before committing gives your team a
     clear picture of the actual work involved. Use that branch to plan your migration window — you
     are not committing to proceeding until you are ready.
-</p> <goa-text as="h2" id="step-1" version="2" size="heading-m">Step 1: Create a branch</goa-text> <p>
+</p> <goa-text as="h2" id="migration-steps" version="2" size="heading-m">Migration steps</goa-text> <goa-text as="h3" id="step-1" version="2" size="heading-s">Step 1: Create a branch</goa-text> <p>
 Create a dedicated branch for the update. Keeping it separate from your regular development
     work lets your team review the changes before merging.
-</p> <pre><code>git checkout -b ds-migration</code></pre> <p>Use a branch name that works for your team — this is just an example.</p> <goa-text as="h2" id="step-2" version="2" size="heading-m">Step 2: Run the version update</goa-text> <p>
+</p> <pre><code>git checkout -b ds-migration</code></pre> <p>Use a branch name that works for your team — this is just an example.</p> <goa-text as="h3" id="step-2" version="2" size="heading-s">Step 2: Run the version update</goa-text> <p>
 Follow the steps in <a href="/get-started/developers/setup">Setup</a> to install the updated
     packages. Run your application after installing the updates. Do this before making any other
     changes.
-</p> <goa-text as="h2" id="step-3" version="2" size="heading-m">Step 3: Review the updated application as a team</goa-text> <p>
+</p> <goa-text as="h3" id="step-3" version="2" size="heading-s">Step 3: Review the updated application as a team</goa-text> <p>
 Walk through your application with your product team. At this stage, the team will identify
     what needs attention and decide what to prioritize.
 </p> <p><strong>What to look for:</strong></p> <ul> <li>Spacing and layout — screens that feel too tight or unbalanced</li> <li>Typography — headings or body text that look off in size or weight</li> <li>Dense or data-heavy screens — these carry the most risk during an update and often need the most follow-up</li> <li>Custom components — anything built outside the design system that needs manual alignment</li> </ul> <p>
