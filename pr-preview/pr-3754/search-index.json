@@ -333,24 +333,6 @@
   },
   {
     "type": "component",
-    "id": "form-stepper",
-    "name": "Form stepper",
-    "description": "Provides a visual representation of a form through a series of steps.",
-    "status": "deprecated",
-    "category": "structure-and-navigation",
-    "tags": [
-      "form stepper",
-      "horizontal step navigation",
-      "process overview",
-      "progress indicator",
-      "steps",
-      "structure and navigation",
-      "wizard"
-    ],
-    "slug": "form-stepper"
-  },
-  {
-    "type": "component",
     "id": "form",
     "name": "Form",
     "description": "Container for form inputs and validation.",
@@ -729,6 +711,20 @@
     "category": "structure-and-navigation",
     "tags": [],
     "slug": "work-side-menu"
+  },
+  {
+    "type": "component",
+    "id": "work-side-notification-panel",
+    "name": "Notification Panel",
+    "description": "A notification center panel that displays notification items within a work side menu, with tabs for filtering by unread, urgent, and all notifications.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "notifications",
+      "work side menu",
+      "panel"
+    ],
+    "slug": "work-side-notification-panel"
   },
   {
     "type": "example",
@@ -2750,6 +2746,8 @@
     ],
     "components": [
       "work-side-menu",
+      "work-side-notification-panel",
+      "work-side-notification-item",
       "table",
       "badge",
       "tabs",
