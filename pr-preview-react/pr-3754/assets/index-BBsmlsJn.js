@@ -61142,18 +61142,8 @@ const __vite_glob_0_45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   default: bug3505_route
 }, Symbol.toStringTag, { value: "Module" }));
-const v2TokensUrl = "/ui-components/pr-preview-react/pr-3754/assets/tokens-CWsSLfwq.css";
 function Bug3548Route() {
   const [open, setOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   function onToggle() {
     setOpen((prev) => !prev);
   }
@@ -61741,15 +61731,6 @@ const __vite_glob_0_48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
 }, Symbol.toStringTag, { value: "Module" }));
 function Bug3625Route() {
   const [controlledOpen, setControlledOpen] = reactExports.useState(false);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "Bug 3625: Accordion Refinement" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabAccordion, { heading: "Small heading", headingSize: "small", children: "Content with small heading." }),
@@ -69165,6 +69146,292 @@ const __vite_glob_0_111 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: workSideMenu_route
 }, Symbol.toStringTag, { value: "Module" }));
+const initialBasicItems = [
+  {
+    id: "1",
+    title: "New case assigned",
+    description: "Case #12345 has been assigned to you for review.",
+    timestamp: "2025-03-15T10:30:00Z",
+    type: "info",
+    readStatus: "unread",
+    priority: "normal"
+  },
+  {
+    id: "2",
+    title: "Document uploaded",
+    description: "A new document was uploaded to Case #12340.",
+    timestamp: "2025-03-15T09:15:00Z",
+    type: "default",
+    readStatus: "unread",
+    priority: "normal"
+  },
+  {
+    id: "3",
+    title: "Case resolved",
+    description: "Case #12330 has been marked as resolved.",
+    timestamp: "2025-03-14T16:00:00Z",
+    type: "success",
+    readStatus: "read",
+    priority: "normal"
+  }
+];
+const initialUrgentItems = [
+  {
+    id: "1",
+    title: "System maintenance",
+    description: "Scheduled maintenance tonight at 11 PM. All services will be unavailable.",
+    timestamp: "2025-03-15T14:00:00Z",
+    type: "critical",
+    readStatus: "unread",
+    priority: "urgent"
+  },
+  {
+    id: "2",
+    title: "Deadline approaching",
+    description: "Case #12345 response is due in 2 hours.",
+    timestamp: "2025-03-15T12:00:00Z",
+    type: "warning",
+    readStatus: "unread",
+    priority: "urgent"
+  },
+  {
+    id: "3",
+    title: "New comment on case",
+    description: "A team member commented on Case #12340.",
+    timestamp: "2025-03-15T11:00:00Z",
+    type: "default",
+    readStatus: "unread",
+    priority: "normal"
+  }
+];
+const initialAllTypeItems = [
+  {
+    id: "1",
+    title: "New comment on case",
+    description: "A team member commented on Case #12340.",
+    timestamp: "2025-03-15T10:00:00Z",
+    type: "default",
+    readStatus: "unread",
+    priority: "normal"
+  },
+  {
+    id: "2",
+    title: "Case #12345 assigned",
+    description: "Case #12345 has been assigned to you for review.",
+    timestamp: "2025-03-15T09:00:00Z",
+    type: "info",
+    readStatus: "unread",
+    priority: "normal"
+  },
+  {
+    id: "3",
+    title: "Case resolved",
+    description: "Case #12330 has been marked as resolved.",
+    timestamp: "2025-03-15T08:00:00Z",
+    type: "success",
+    readStatus: "unread",
+    priority: "normal"
+  },
+  {
+    id: "4",
+    title: "Deadline approaching",
+    description: "Case #12345 response is due in 2 hours.",
+    timestamp: "2025-03-15T07:00:00Z",
+    type: "warning",
+    readStatus: "unread",
+    priority: "normal"
+  },
+  {
+    id: "5",
+    title: "System maintenance",
+    description: "Scheduled maintenance tonight at 11 PM. All services will be unavailable.",
+    timestamp: "2025-03-15T06:00:00Z",
+    type: "critical",
+    readStatus: "unread",
+    priority: "normal"
+  }
+];
+function DocsWorkSideNotificationPanelRoute() {
+  const [basicItems, setBasicItems] = reactExports.useState(initialBasicItems);
+  const [urgentItems, setUrgentItems] = reactExports.useState(initialUrgentItems);
+  const [allTypeItems, setAllTypeItems] = reactExports.useState(initialAllTypeItems);
+  function navigate(path) {
+    console.log("navigate", path);
+  }
+  function handleMarkAllBasicNotificationsRead() {
+    setBasicItems(
+      (items) => items.map((item) => ({ ...item, readStatus: "read" }))
+    );
+  }
+  function handleViewAllBasicNotifications() {
+    console.log("view all basic notifications");
+  }
+  function handleClickBasicNotification(id2) {
+    setBasicItems(
+      (items) => items.map(
+        (item) => item.id === id2 ? { ...item, readStatus: "read" } : item
+      )
+    );
+  }
+  function handleMarkAllUrgentNotificationsRead() {
+    setUrgentItems(
+      (items) => items.map((item) => ({ ...item, readStatus: "read" }))
+    );
+  }
+  function handleViewAllUrgentNotifications() {
+    console.log("view all urgent notifications");
+  }
+  function handleClickUrgentNotification(id2) {
+    setUrgentItems(
+      (items) => items.map(
+        (item) => item.id === id2 ? { ...item, readStatus: "read" } : item
+      )
+    );
+  }
+  function handleMarkAllNotificationTypesRead() {
+    setAllTypeItems(
+      (items) => items.map((item) => ({ ...item, readStatus: "read" }))
+    );
+  }
+  function handleViewAllNotificationTypes() {
+    console.log("view all notification types");
+  }
+  function handleClickNotificationType(id2) {
+    setAllTypeItems(
+      (items) => items.map(
+        (item) => item.id === id2 ? { ...item, readStatus: "read" } : item
+      )
+    );
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { children: "Notification panel" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Basic notification panel" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabWorkSideMenu,
+      {
+        heading: "My Application",
+        url: "/",
+        onNavigate: (path) => navigate(path),
+        primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: "/dashboard" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: "/cases" })
+        ] }),
+        secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabWorkSideMenuItem,
+          {
+            icon: "notifications",
+            label: "Notifications",
+            badge: "2",
+            type: "success",
+            popoverContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabWorkSideNotificationPanel,
+              {
+                heading: "Notifications",
+                activeTab: "unread",
+                onMarkAllRead: () => handleMarkAllBasicNotificationsRead(),
+                onViewAll: () => handleViewAllBasicNotifications(),
+                children: basicItems.map(({ id: id2, ...item }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  GoabWorkSideNotificationItem,
+                  {
+                    ...item,
+                    onClick: () => handleClickBasicNotification(id2)
+                  },
+                  id2
+                ))
+              }
+            )
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "With urgent notifications" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabWorkSideMenu,
+      {
+        heading: "My Application",
+        url: "/",
+        onNavigate: (path) => navigate(path),
+        primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: "/dashboard" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "list", label: "Cases", url: "/cases" })
+        ] }),
+        secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabWorkSideMenuItem,
+          {
+            icon: "notifications",
+            label: "Notifications",
+            badge: "2",
+            type: "emergency",
+            popoverContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabWorkSideNotificationPanel,
+              {
+                heading: "Notifications",
+                activeTab: "urgent",
+                onMarkAllRead: () => handleMarkAllUrgentNotificationsRead(),
+                onViewAll: () => handleViewAllUrgentNotifications(),
+                children: urgentItems.map(({ id: id2, ...item }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  GoabWorkSideNotificationItem,
+                  {
+                    ...item,
+                    onClick: () => handleClickUrgentNotification(id2)
+                  },
+                  id2
+                ))
+              }
+            )
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Notification type badges" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      GoabWorkSideMenu,
+      {
+        heading: "My Application",
+        url: "/",
+        onNavigate: (path) => navigate(path),
+        primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuItem, { icon: "grid", label: "Dashboard", url: "/dashboard" }),
+        secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          GoabWorkSideMenuItem,
+          {
+            icon: "notifications",
+            label: "Notifications",
+            badge: "5",
+            type: "success",
+            popoverContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GoabWorkSideNotificationPanel,
+              {
+                heading: "Notifications",
+                activeTab: "all",
+                onMarkAllRead: () => handleMarkAllNotificationTypesRead(),
+                onViewAll: () => handleViewAllNotificationTypes(),
+                children: allTypeItems.map(({ id: id2, ...item }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  GoabWorkSideNotificationItem,
+                  {
+                    ...item,
+                    onClick: () => handleClickNotificationType(id2)
+                  },
+                  id2
+                ))
+              }
+            )
+          }
+        )
+      }
+    )
+  ] });
+}
+const workSideNotificationPanel_route = {
+  type: "docs",
+  id: "work-side-notification-panel",
+  path: "docs/work-side-notification-panel",
+  title: "Notification Panel",
+  component: DocsWorkSideNotificationPanelRoute
+};
+const __vite_glob_0_112 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: workSideNotificationPanel_route
+}, Symbol.toStringTag, { value: "Module" }));
 const iconTypes = [
   { id: 1, icon: "accessibility" },
   { id: 2, icon: "backspace" },
@@ -69407,7 +69674,7 @@ const feat1383_route = {
   title: "Button Filled Icons",
   component: Feat1383Route
 };
-const __vite_glob_0_112 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_113 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1383_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69452,7 +69719,7 @@ const feat1547_route = {
   title: "Tooltip Multiline",
   component: Feat1547Route
 };
-const __vite_glob_0_113 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_114 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1547_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69686,7 +69953,7 @@ const feat1813_route = {
   title: "DatePicker Width Properties",
   component: Feat1813Route
 };
-const __vite_glob_0_114 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_115 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1813_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69803,7 +70070,7 @@ const feat1908_route = {
   title: "Linear Progress",
   component: Feat1908Route
 };
-const __vite_glob_0_115 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_116 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat1908_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -69901,7 +70168,7 @@ const feat2054_route = {
   title: "MaxWidth Support",
   component: Feat2054Route
 };
-const __vite_glob_0_116 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_117 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2054_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70172,7 +70439,7 @@ const feat2267_route = {
   title: "Checkbox List",
   component: Feat2267Route
 };
-const __vite_glob_0_117 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_118 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2267_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70231,7 +70498,7 @@ const feat2328_route = {
   title: "Container Height Property",
   component: Feat2328Route
 };
-const __vite_glob_0_118 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_119 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2328_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70377,7 +70644,7 @@ const feat2361_route = {
   title: "Radio/Checkbox Clickable Area",
   component: Feat2361Route
 };
-const __vite_glob_0_119 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_120 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2361_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70395,7 +70662,7 @@ const feat2440_route = {
   title: "MenuButton Icon",
   component: Feat2440Route
 };
-const __vite_glob_0_120 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_121 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2440_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70412,37 +70679,6 @@ function generateFakeData(numRows) {
   return data;
 }
 function Feat2469Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      link.remove();
-      deletedRules.forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, Math.min(index2, sheet.cssRules.length));
-        } catch (e) {
-        }
-      });
-    };
-  }, []);
   const smallDrawerControlSet = /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { style: { marginTop: 0 }, children: "Drawer" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This is a drawer" })
@@ -70640,7 +70876,7 @@ const feat2469_route = {
   title: "Push Drawer",
   component: Feat2469Route
 };
-const __vite_glob_0_121 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_122 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2469_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -70723,7 +70959,7 @@ const feat2492_route = {
   title: "TextArea onBlur",
   component: Feat2492Route
 };
-const __vite_glob_0_122 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_123 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2492_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71111,7 +71347,7 @@ const feat2609_route = {
   title: "Data Table Base Component",
   component: Feat2609Route
 };
-const __vite_glob_0_123 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_124 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2609_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71164,7 +71400,7 @@ const feat2611TabsDisabled_route = {
   title: "Disabled Tab",
   component: Feat2611TabsDisabled
 };
-const __vite_glob_0_124 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_125 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2611TabsDisabled_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71488,7 +71724,7 @@ const feat2611_route = {
   title: "Segmented Tab",
   component: Feat2611Route
 };
-const __vite_glob_0_125 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_126 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2611_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71573,7 +71809,7 @@ const feat2682_route = {
   title: "DatePicker Issues",
   component: Feat2682Route
 };
-const __vite_glob_0_126 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_127 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2682_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -71749,7 +71985,7 @@ const feat2722_route = {
   title: "Input Text-Align",
   component: Feat2722Route
 };
-const __vite_glob_0_127 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_128 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2722_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72158,7 +72394,7 @@ const feat2730_route = {
   title: "Temporary Notification Controller",
   component: Feat2730Route
 };
-const __vite_glob_0_128 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_129 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2730_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72289,7 +72525,7 @@ const feat2829_route = {
   title: "Modal ARIA Live Region",
   component: Feat2829Route
 };
-const __vite_glob_0_129 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_130 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2829_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72359,7 +72595,7 @@ const feat2877_route = {
   title: "Badge Types and Custom Icon",
   component: Feat2877Route
 };
-const __vite_glob_0_130 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2877_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72416,21 +72652,12 @@ const feat2885NavigationTabs_route = {
   title: "Notification Center - Navigation Tabs",
   component: Feat2885NavigationTabsRoute
 };
-const __vite_glob_0_131 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_132 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2885NavigationTabs_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat2885Route() {
   const [menuOpen, setMenuOpen] = reactExports.useState(true);
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const daysAgo = (days, hours = 0) => {
     const date = /* @__PURE__ */ new Date();
     date.setDate(date.getDate() - days);
@@ -72821,7 +73048,7 @@ const feat2885_route = {
   title: "Notification Center",
   component: Feat2885Route
 };
-const __vite_glob_0_132 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_133 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat2885_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -72861,7 +73088,7 @@ const feat3102_route = {
   title: "Allow icon to be set on MenuButton",
   component: Feat3102Route
 };
-const __vite_glob_0_133 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_134 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3102_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -73173,7 +73400,7 @@ const feat3137_route = {
   title: "Work Side Menu Group",
   component: Feat3137Route
 };
-const __vite_glob_0_134 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_135 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3137_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -73191,38 +73418,6 @@ const menuActionsTextOnly = /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExp
 ] });
 function Feat3229Route() {
   const [lastAction, setLastAction] = reactExports.useState("");
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    const deletedRules = [];
-    link.onload = () => {
-      [...document.styleSheets].forEach((ss2) => {
-        if (ss2.ownerNode === link) return;
-        try {
-          for (let i = ss2.cssRules.length - 1; i >= 0; i--) {
-            const rule = ss2.cssRules[i];
-            if (rule instanceof CSSStyleRule && rule.selectorText === ":root") {
-              deletedRules.push({ sheet: ss2, index: i, cssText: rule.cssText });
-              ss2.deleteRule(i);
-            }
-          }
-        } catch (e) {
-        }
-      });
-    };
-    return () => {
-      document.head.removeChild(link);
-      deletedRules.reverse().forEach(({ sheet, index: index2, cssText }) => {
-        try {
-          sheet.insertRule(cssText, index2);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    };
-  }, []);
   const handleAction = (detail, label) => {
     const source = label ? ` (${label})` : "";
     setLastAction(`Action "${detail.action}"${source}`);
@@ -73698,7 +73893,7 @@ const feat3229_route = {
   title: "V2 Menu Button vs size and icon-only",
   component: Feat3229Route
 };
-const __vite_glob_0_135 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_136 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3229_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74379,7 +74574,7 @@ const feat3241_route = {
   title: "V2 Experimental Wrappers",
   component: Feat3241Route
 };
-const __vite_glob_0_136 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_137 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3241_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74498,7 +74693,7 @@ const feat3306_route = {
   title: "Custom slug value for tabs",
   component: Feat3306Route
 };
-const __vite_glob_0_137 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_138 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3306_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74527,15 +74722,6 @@ function sortData(data, sorts) {
   });
 }
 function Feat3344Route() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   const [currentSorts, setCurrentSorts] = reactExports.useState([]);
   const [multiSorts, setMultiSorts] = reactExports.useState([]);
   const [test3Sorts, setTest3Sorts] = reactExports.useState([]);
@@ -74649,7 +74835,7 @@ const feat3344_route = {
   title: "Table Multi-Sort",
   component: Feat3344Route
 };
-const __vite_glob_0_138 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_139 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3344_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74698,7 +74884,7 @@ const feat3370_route = {
   title: "Clear calendar day selection",
   component: Feat3370Route
 };
-const __vite_glob_0_139 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_140 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3370_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74754,7 +74940,7 @@ const feat3396_route = {
   title: "Text heading-2xs size",
   component: Feat3396Route
 };
-const __vite_glob_0_140 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_141 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3396_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74847,7 +75033,7 @@ const feat3398_route = {
   title: "Group open prop",
   component: Feat3398Route
 };
-const __vite_glob_0_141 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_142 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3398_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -74884,20 +75070,11 @@ const feat3407SkipOnFocusTab_route = {
   title: "Skip Focus on Tab",
   component: Feat3407SkipOnFocusTabRoute
 };
-const __vite_glob_0_142 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_143 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3407SkipOnFocusTab_route
 }, Symbol.toStringTag, { value: "Module" }));
 function Feat3407StackOnMobileRoute() {
-  reactExports.useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = v2TokensUrl;
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h1", mt: "m", children: "#3407: orientation Prop" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", children: "Testing orientation prop (controls mobile stacking behavior). orientation is only available on GoabTabs (experimental)." }),
@@ -74949,7 +75126,7 @@ const feat3407StackOnMobile_route = {
   title: "Tabs Orientation",
   component: Feat3407StackOnMobileRoute
 };
-const __vite_glob_0_143 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_144 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3407StackOnMobile_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75309,7 +75486,7 @@ const feat3478_route = {
   title: "Popover API Rewrite",
   component: Feat3478Route
 };
-const __vite_glob_0_144 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_145 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3478_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75515,7 +75692,7 @@ const feat3504_route = {
   title: "Text Button Component",
   component: Feat3504TextButtonRoute
 };
-const __vite_glob_0_145 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_146 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3504_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75632,7 +75809,7 @@ const feat3529_route = {
   title: "Heading letter-spacing values",
   component: Feat3529Route
 };
-const __vite_glob_0_146 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_147 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3529_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -75735,7 +75912,7 @@ const feat3544_route = {
   title: "Optional Side Menu Icons",
   component: Feat3544Route
 };
-const __vite_glob_0_147 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_148 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: feat3544_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -76009,7 +76186,7 @@ const featV2Checkbox_route = {
   title: "V2 Checkbox Spacing",
   component: FeatV2CheckboxRoute
 };
-const __vite_glob_0_148 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_149 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: featV2Checkbox_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -76045,7 +76222,7 @@ const featV2Icons_route = {
   title: "header icons",
   component: FeatV2IconsRoute
 };
-const __vite_glob_0_149 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const __vite_glob_0_150 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: featV2Icons_route
 }, Symbol.toStringTag, { value: "Module" }));
@@ -76162,44 +76339,45 @@ const routeModules = /* @__PURE__ */ Object.assign({
   "./routes/docs/text.route.ts": __vite_glob_0_109,
   "./routes/docs/tooltip.route.ts": __vite_glob_0_110,
   "./routes/docs/work-side-menu.route.ts": __vite_glob_0_111,
-  "./routes/features/feat1383.route.ts": __vite_glob_0_112,
-  "./routes/features/feat1547.route.ts": __vite_glob_0_113,
-  "./routes/features/feat1813.route.ts": __vite_glob_0_114,
-  "./routes/features/feat1908.route.ts": __vite_glob_0_115,
-  "./routes/features/feat2054.route.ts": __vite_glob_0_116,
-  "./routes/features/feat2267.route.ts": __vite_glob_0_117,
-  "./routes/features/feat2328.route.ts": __vite_glob_0_118,
-  "./routes/features/feat2361.route.ts": __vite_glob_0_119,
-  "./routes/features/feat2440.route.ts": __vite_glob_0_120,
-  "./routes/features/feat2469.route.ts": __vite_glob_0_121,
-  "./routes/features/feat2492.route.ts": __vite_glob_0_122,
-  "./routes/features/feat2609.route.ts": __vite_glob_0_123,
-  "./routes/features/feat2611-tabs-disabled.route.ts": __vite_glob_0_124,
-  "./routes/features/feat2611.route.ts": __vite_glob_0_125,
-  "./routes/features/feat2682.route.ts": __vite_glob_0_126,
-  "./routes/features/feat2722.route.ts": __vite_glob_0_127,
-  "./routes/features/feat2730.route.ts": __vite_glob_0_128,
-  "./routes/features/feat2829.route.ts": __vite_glob_0_129,
-  "./routes/features/feat2877.route.ts": __vite_glob_0_130,
-  "./routes/features/feat2885-navigation-tabs.route.ts": __vite_glob_0_131,
-  "./routes/features/feat2885.route.ts": __vite_glob_0_132,
-  "./routes/features/feat3102.route.ts": __vite_glob_0_133,
-  "./routes/features/feat3137.route.ts": __vite_glob_0_134,
-  "./routes/features/feat3229.route.ts": __vite_glob_0_135,
-  "./routes/features/feat3241.route.ts": __vite_glob_0_136,
-  "./routes/features/feat3306.route.ts": __vite_glob_0_137,
-  "./routes/features/feat3344.route.ts": __vite_glob_0_138,
-  "./routes/features/feat3370.route.ts": __vite_glob_0_139,
-  "./routes/features/feat3396.route.ts": __vite_glob_0_140,
-  "./routes/features/feat3398.route.ts": __vite_glob_0_141,
-  "./routes/features/feat3407SkipOnFocusTab.route.ts": __vite_glob_0_142,
-  "./routes/features/feat3407StackOnMobile.route.ts": __vite_glob_0_143,
-  "./routes/features/feat3478.route.ts": __vite_glob_0_144,
-  "./routes/features/feat3504.route.ts": __vite_glob_0_145,
-  "./routes/features/feat3529.route.ts": __vite_glob_0_146,
-  "./routes/features/feat3544.route.ts": __vite_glob_0_147,
-  "./routes/features/featV2Checkbox.route.ts": __vite_glob_0_148,
-  "./routes/features/featV2Icons.route.ts": __vite_glob_0_149
+  "./routes/docs/work-side-notification-panel.route.ts": __vite_glob_0_112,
+  "./routes/features/feat1383.route.ts": __vite_glob_0_113,
+  "./routes/features/feat1547.route.ts": __vite_glob_0_114,
+  "./routes/features/feat1813.route.ts": __vite_glob_0_115,
+  "./routes/features/feat1908.route.ts": __vite_glob_0_116,
+  "./routes/features/feat2054.route.ts": __vite_glob_0_117,
+  "./routes/features/feat2267.route.ts": __vite_glob_0_118,
+  "./routes/features/feat2328.route.ts": __vite_glob_0_119,
+  "./routes/features/feat2361.route.ts": __vite_glob_0_120,
+  "./routes/features/feat2440.route.ts": __vite_glob_0_121,
+  "./routes/features/feat2469.route.ts": __vite_glob_0_122,
+  "./routes/features/feat2492.route.ts": __vite_glob_0_123,
+  "./routes/features/feat2609.route.ts": __vite_glob_0_124,
+  "./routes/features/feat2611-tabs-disabled.route.ts": __vite_glob_0_125,
+  "./routes/features/feat2611.route.ts": __vite_glob_0_126,
+  "./routes/features/feat2682.route.ts": __vite_glob_0_127,
+  "./routes/features/feat2722.route.ts": __vite_glob_0_128,
+  "./routes/features/feat2730.route.ts": __vite_glob_0_129,
+  "./routes/features/feat2829.route.ts": __vite_glob_0_130,
+  "./routes/features/feat2877.route.ts": __vite_glob_0_131,
+  "./routes/features/feat2885-navigation-tabs.route.ts": __vite_glob_0_132,
+  "./routes/features/feat2885.route.ts": __vite_glob_0_133,
+  "./routes/features/feat3102.route.ts": __vite_glob_0_134,
+  "./routes/features/feat3137.route.ts": __vite_glob_0_135,
+  "./routes/features/feat3229.route.ts": __vite_glob_0_136,
+  "./routes/features/feat3241.route.ts": __vite_glob_0_137,
+  "./routes/features/feat3306.route.ts": __vite_glob_0_138,
+  "./routes/features/feat3344.route.ts": __vite_glob_0_139,
+  "./routes/features/feat3370.route.ts": __vite_glob_0_140,
+  "./routes/features/feat3396.route.ts": __vite_glob_0_141,
+  "./routes/features/feat3398.route.ts": __vite_glob_0_142,
+  "./routes/features/feat3407SkipOnFocusTab.route.ts": __vite_glob_0_143,
+  "./routes/features/feat3407StackOnMobile.route.ts": __vite_glob_0_144,
+  "./routes/features/feat3478.route.ts": __vite_glob_0_145,
+  "./routes/features/feat3504.route.ts": __vite_glob_0_146,
+  "./routes/features/feat3529.route.ts": __vite_glob_0_147,
+  "./routes/features/feat3544.route.ts": __vite_glob_0_148,
+  "./routes/features/featV2Checkbox.route.ts": __vite_glob_0_149,
+  "./routes/features/featV2Icons.route.ts": __vite_glob_0_150
 });
 const prRouteDefinitions = Object.values(routeModules).map((module) => module.default).sort((left, right) => {
   const idComparison = left.id.localeCompare(right.id, void 0, { numeric: true });
@@ -76214,6 +76392,37 @@ const featureRouteDefinitions = prRouteDefinitions.filter(
 const docsRouteDefinitions = prRouteDefinitions.filter(
   (route) => route.type === "docs"
 );
+const v2TokensUrl = "/ui-components/pr-preview-react/pr-3754/assets/tokens-CWsSLfwq.css";
+const STORAGE_KEY = "goa-token-version";
+const LINK_ID = "goa-tokens-v2";
+const URL_PARAM = "tokens";
+function resolveTokenVersion() {
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get(URL_PARAM);
+  if (fromUrl === "v1" || fromUrl === "v2") return fromUrl;
+  const fromSession = sessionStorage.getItem(STORAGE_KEY);
+  if (fromSession === "v1" || fromSession === "v2") return fromSession;
+  return "v2";
+}
+function applyTokenVersion(mode) {
+  var _a2;
+  (_a2 = document.getElementById(LINK_ID)) == null ? void 0 : _a2.remove();
+  if (mode === "v2") {
+    const link = document.createElement("link");
+    link.id = LINK_ID;
+    link.rel = "stylesheet";
+    link.href = v2TokensUrl;
+    document.head.appendChild(link);
+  }
+  sessionStorage.setItem(STORAGE_KEY, mode);
+  const url = new URL(window.location.href);
+  if (url.searchParams.has(URL_PARAM)) {
+    url.searchParams.set(URL_PARAM, mode);
+    window.history.replaceState({}, "", url);
+  }
+}
+applyTokenVersion(resolveTokenVersion());
+const TOKEN_TOGGLE_URL = "#tokens";
 const appContentStyle = {
   display: "flex",
   minHeight: "calc(100vh - 10.1875rem)",
@@ -76222,7 +76431,16 @@ const appContentStyle = {
 function App() {
   const navigate = useNavigate();
   const baseUrl = "/ui-components/pr-preview-react/pr-3754/";
-  const handleNavigate = (path) => {
+  const [tokenMode, setTokenMode] = reactExports.useState(
+    () => resolveTokenVersion()
+  );
+  const handleSideMenuNavigate = (path) => {
+    if (path === TOKEN_TOGGLE_URL) {
+      const next = tokenMode === "v1" ? "v2" : "v1";
+      setTokenMode(next);
+      applyTokenVersion(next);
+      return;
+    }
     const internal = path.startsWith(baseUrl) ? "/" + path.slice(baseUrl.length) : path;
     navigate(internal);
   };
@@ -76238,7 +76456,15 @@ function App() {
           heading: "Testing Playground",
           url: baseUrl,
           open: true,
-          onNavigate: handleNavigate,
+          onNavigate: handleSideMenuNavigate,
+          secondaryContent: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            GoabWorkSideMenuItem,
+            {
+              label: `Switch to ${tokenMode === "v1" ? "V2" : "V1"} tokens`,
+              icon: "swap-horizontal",
+              url: TOKEN_TOGGLE_URL
+            }
+          ),
           primaryContent: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(GoabWorkSideMenuGroup, { icon: "alert-circle", heading: "Bugs", children: bugRouteDefinitions.map((route) => /* @__PURE__ */ jsxRuntimeExports.jsx(
               GoabWorkSideMenuItem,
