@@ -1,6 +1,6 @@
 <div style="display: grid; gap: 1.5rem">
   <div style="display: grid; gap: 0.5rem">
-    <h1 style="margin: 0">3982 - Nested close propagation</h1>
+    <h1 style="margin: 0">3892 - Nested close propagation</h1>
     <p style="margin: 0 0 1rem;">
       This page tests the issue where popover close events are propegating to parent
       drawers and modals.
@@ -24,12 +24,12 @@
           and leaves the popover open.
         </p>
         <goab-date-picker
-          name="bug3982-popover-date"
+          name="bug3892-popover-date"
           [value]="popoverDate"
           (onChange)="handlePopoverDateChange($event)"
         ></goab-date-picker>
         <goab-dropdown
-          name="bug3982-popover-province"
+          name="bug3892-popover-province"
           placeholder="Select a province"
           [value]="popoverProvince"
           (onChange)="handlePopoverProvinceChange($event)"
@@ -70,12 +70,12 @@
           and leaves the drawer open.
         </p>
         <goab-date-picker
-          name="bug3982-drawer-date"
+          name="bug3892-drawer-date"
           [value]="drawerDate"
           (onChange)="handleDrawerDateChange($event)"
         ></goab-date-picker>
         <goab-dropdown
-          name="bug3982-drawer-province"
+          name="bug3892-drawer-province"
           placeholder="Select a province"
           [value]="drawerProvince"
           (onChange)="handleDrawerProvinceChange($event)"
@@ -114,12 +114,12 @@
             and leaves the push drawer open.
           </p>
           <goab-date-picker
-            name="bug3982-push-drawer-date"
+            name="bug3892-push-drawer-date"
             [value]="pushDrawerDate"
             (onChange)="handlePushDrawerDateChange($event)"
           ></goab-date-picker>
           <goab-dropdown
-            name="bug3982-push-drawer-province"
+            name="bug3892-push-drawer-province"
             placeholder="Select a province"
             [value]="pushDrawerProvince"
             (onChange)="handlePushDrawerProvinceChange($event)"
@@ -160,12 +160,12 @@
           and leaves the modal open.
         </p>
         <goab-date-picker
-          name="bug3982-modal-date"
+          name="bug3892-modal-date"
           [value]="modalDate"
           (onChange)="handleModalDateChange($event)"
         ></goab-date-picker>
         <goab-dropdown
-          name="bug3982-modal-province"
+          name="bug3892-modal-province"
           placeholder="Select a province"
           [value]="modalProvince"
           (onChange)="handleModalProvinceChange($event)"
