@@ -23,7 +23,7 @@ const stackStyle = {
   gap: "1.5rem",
 };
 
-export function Bug3982Route() {
+export function Bug3892Route() {
   const [popoverDate, setPopoverDate] = useState("");
   const [popoverProvince, setPopoverProvince] = useState("");
 
@@ -86,7 +86,7 @@ export function Bug3982Route() {
   return (
     <div style={stackStyle}>
       <div style={stackStyle}>
-        <GoabText tag="h1">3982 - Nested close propagation</GoabText>
+        <GoabText tag="h1">3892 - Nested close propagation</GoabText>
         <GoabText>
           This page tests the issue where popover close events are propegating to parent
           drawers and modals.
@@ -108,12 +108,12 @@ export function Bug3982Route() {
               and leaves the popover open.
             </GoabText>
             <GoabDatePicker
-              name="bug3982-popover-date"
+              name="bug3892-popover-date"
               onChange={handlePopoverDateChange}
               value={popoverDate}
             />
             <GoabDropdown
-              name="bug3982-popover-province"
+              name="bug3892-popover-province"
               onChange={handlePopoverProvinceChange}
               placeholder="Select a province"
               value={popoverProvince}
@@ -156,12 +156,12 @@ export function Bug3982Route() {
               and leaves the drawer open.
             </GoabText>
             <GoabDatePicker
-              name="bug3982-drawer-date"
+              name="bug3892-drawer-date"
               onChange={handleDrawerDateChange}
               value={drawerDate}
             />
             <GoabDropdown
-              name="bug3982-drawer-province"
+              name="bug3892-drawer-province"
               onChange={handleDrawerProvinceChange}
               placeholder="Select a province"
               value={drawerProvince}
@@ -204,12 +204,12 @@ export function Bug3982Route() {
                 and leaves the push drawer open.
               </GoabText>
               <GoabDatePicker
-                name="bug3982-push-drawer-date"
+                name="bug3892-push-drawer-date"
                 onChange={handlePushDrawerDateChange}
                 value={pushDrawerDate}
               />
               <GoabDropdown
-                name="bug3982-push-drawer-province"
+                name="bug3892-push-drawer-province"
                 onChange={handlePushDrawerProvinceChange}
                 placeholder="Select a province"
                 value={pushDrawerProvince}
@@ -251,12 +251,12 @@ export function Bug3982Route() {
               and leaves the modal open.
             </GoabText>
             <GoabDatePicker
-              name="bug3982-modal-date"
+              name="bug3892-modal-date"
               onChange={handleModalDateChange}
               value={modalDate}
             />
             <GoabDropdown
-              name="bug3982-modal-province"
+              name="bug3892-modal-province"
               onChange={handleModalProvinceChange}
               placeholder="Select a province"
               value={modalProvince}

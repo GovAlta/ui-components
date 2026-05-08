@@ -20,8 +20,8 @@ import type {
 
 @Component({
   standalone: true,
-  selector: "abgov-bug3982",
-  templateUrl: "./bug3982.component.html",
+  selector: "abgov-bug3892",
+  templateUrl: "./bug3892.component.html",
   imports: [
     CommonModule,
     GoabButton,
@@ -37,7 +37,7 @@ import type {
     GoabPushDrawer,
   ],
 })
-export class Bug3982Component {
+export class Bug3892Component {
   popoverDate = "";
   popoverProvince = "";
 

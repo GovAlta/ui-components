@@ -1,10 +1,10 @@
-import { Bug3982Route } from "../../../routes/bugs/bug3982";
+import { Bug3892Route } from "../../../routes/bugs/bug3892";
 import type { PrRouteDefinition } from "../../route-manifest";
 
 export default {
   type: "bug",
-  id: "3982",
-  path: "bugs/3982",
+  id: "3892",
+  path: "bugs/3892",
   title: "Nested close propagation",
-  component: Bug3982Route,
+  component: Bug3892Route,
 } satisfies PrRouteDefinition;
