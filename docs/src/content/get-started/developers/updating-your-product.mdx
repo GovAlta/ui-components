@@ -1,0 +1,162 @@
+---
+id: developers/updating-your-product
+title: Updating your product
+description: The rationale and practical steps for updating your GoA product to Design System 2.0 using the developer-first approach.
+section: developers
+order: 3
+status: published
+---
+import { withBase } from "@/lib/base-url";
+import DropInCallout from "../../../components/DropInCallout.astro";
+
+<goa-text size="heading-xl" mt="none" mb="m">Updating your product</goa-text>
+<goa-text size="body-l" mt="none" mb="m">The updated design system includes a new design language, updated design tokens and components, and new templates. For your product, updating means:</goa-text>
+<ul>
+  <li>Your service stays aligned with the current GoA standard as more services update and users move between them</li>
+  <li>You get access to new component properties, examples, and templates that reduce build time for common service types</li>
+  <li>Your product remains supported — the legacy design system stops receiving fixes after September 2026</li>
+</ul>
+<p>
+  Most of the update applies automatically. Most of the work will be reviewing what changed in
+  your product and deciding where design follow-up is needed. These steps help you work through
+  the process.
+</p>
+
+<goa-text as="h2" id="developer-first-approach" size="heading-m">Use the developer-first approach</goa-text>
+<p>
+  The developer-first approach lets you see what actually changed in your product before
+  committing to design work.
+</p>
+<p>
+  When you run the update first, spacing, typography, and token changes apply automatically. You
+  can then review the result with your team and focus design and development effort on the screens
+  that need it most. This avoids redesigning screens based on assumptions about what will change
+  before you update.
+</p>
+
+<goa-text as="h2" id="migration-walkthrough" size="heading-m">Migration walkthrough</goa-text>
+<p>
+  The migration walkthrough steps through four stages — legacy design system, upgrade applied,
+  layout and styling fixes, and custom component updates — and shows the visual impact on your
+  interface at each stage. The walkthrough covers both public form and workspace product types.
+  Review it with your team before you start: it helps designers and developers see where changes
+  occur, and gives product owners a clearer picture of the scope for planning.
+</p>
+<goa-link size="medium">
+  <a
+    href="https://bdfranck.github.io/ds2-upgrade-walkthrough/#public-form"
+    target="_blank"
+    rel="noopener noreferrer">Explore the migration walkthrough</a>
+</goa-link>
+
+<goa-text as="h2" id="update-all-at-once" size="heading-m">Why we recommend updating all at once</goa-text>
+<p>
+  Applying the update to some parts of your product but not others tends to cause the update to
+  stall. Teams focus on a few components then deprioritize the rest, leaving the product in a
+  mixed state that becomes harder to resolve over time. Reviewing your updated application
+  together in step 3 is designed to address this. Reviewing the full update in a branch before
+  committing gives your team a clear picture of the actual work involved. Use that branch to plan
+  your migration window — you are not committing to proceeding until you are ready.
+</p>
+
+<goa-text as="h2" id="migration-steps" size="heading-m">Migration steps</goa-text>
+
+<goa-text as="h3" id="step-1" size="heading-s">Step 1: Create a branch</goa-text>
+<p>
+  Create a dedicated branch for the update. Keeping it separate from your regular development
+  work lets your team review the changes before merging.
+</p>
+<pre><code>git checkout -b ds-migration</code></pre>
+<p>Use a branch name that works for your team — this is just an example.</p>
+
+<goa-text as="h3" id="step-2" size="heading-s">Step 2: Run the version update</goa-text>
+<p>
+  Follow the steps in <a href={withBase(`/get-started/developers/setup`)}>Setup</a> to install the
+  updated packages. Run your application after installing the updates. Do this before making any
+  other changes.
+</p>
+
+<goa-text as="h3" id="step-3" size="heading-s">Step 3: Review the updated application as a team</goa-text>
+<p>
+  Walk through your application with your product team. At this stage, the team will identify
+  what needs attention and decide what to prioritize.
+</p>
+<p><strong>What to look for:</strong></p>
+
+<goa-table version="2" width="100%" mb="xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>What to look for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Spacing and layout</td>
+        <td>Screens that feel too tight or unbalanced</td>
+      </tr>
+      <tr>
+        <td>Typography</td>
+        <td>Headings or body text that look off in size or weight</td>
+      </tr>
+      <tr>
+        <td>Dense or data-heavy screens</td>
+        <td>These carry the most risk during an update and often need the most follow-up</td>
+      </tr>
+      <tr>
+        <td>Custom components</td>
+        <td>Anything built outside the design system that needs manual alignment</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<p>
+  Record what you find. A list of screens and issues is enough at this stage. Your designers and
+  product owner can use that output to plan and prioritize work.
+</p>
+
+<goa-text as="h2" id="understanding-the-effort" size="heading-m">Understanding the effort</goa-text>
+<p>
+  There is no single estimate for how long a migration takes. It varies depending on your
+  product. The main factors are:
+</p>
+
+<goa-table version="2" width="100%" mb="xl">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th>Factor</th>
+        <th>Impact on migration effort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>App size</td>
+        <td>More screens means more to test and review after the update</td>
+      </tr>
+      <tr>
+        <td>Design system utilization</td>
+        <td>Products with more custom code need more manual alignment</td>
+      </tr>
+      <tr>
+        <td>Developer familiarity</td>
+        <td>Developers with more design system experience move faster through the migration steps</td>
+      </tr>
+    </tbody>
+  </table>
+</goa-table>
+
+<p>
+  Use the team review of your updated application in step 3 to build a realistic estimate for
+  your own product before committing to a timeline.
+</p>
+
+<goa-text as="h2" id="getting-help" size="heading-m">Getting help</goa-text>
+<ul>
+  <li>Bring what you find when reviewing your updated application to drop-in hours to get feedback on what to prioritize</li>
+  <li>If you find a problem with the design system itself, reach out on the support channel rather than working around it</li>
+</ul>
+
+<DropInCallout />
