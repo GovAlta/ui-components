@@ -323,7 +323,7 @@
         {
           "name": "target",
           "description": "Sets the element used as the popover trigger.",
-          "required": true
+          "required": false
         }
       ]
     }
