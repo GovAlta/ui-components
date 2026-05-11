@@ -150,17 +150,6 @@
           "required": false,
           "default": "default",
           "description": "Visual style variant. \"segmented\" shows pill-style tabs with animation."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

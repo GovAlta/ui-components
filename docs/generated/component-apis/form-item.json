@@ -366,18 +366,6 @@
           "required": false,
           "default": "",
           "description": "Specifies the input type for appropriate message spacing. Used with checkbox-list or radio-group."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabFormItemVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [],

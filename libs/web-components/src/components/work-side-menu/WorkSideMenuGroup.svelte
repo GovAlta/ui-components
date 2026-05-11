@@ -32,6 +32,7 @@
   }
 
   function handleMouseEnter() {
+    // @internal
     dispatch(_rootEl, "_hoverItem", { el: _rootEl, label: heading }, { bubbles: true });
   }
 </script>

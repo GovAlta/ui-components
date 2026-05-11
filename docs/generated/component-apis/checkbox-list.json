@@ -283,17 +283,6 @@
           "required": false,
           "default": "[]",
           "description": "Array of currently selected checkbox values."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

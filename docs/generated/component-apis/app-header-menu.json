@@ -104,17 +104,6 @@
           "required": false,
           "default": "primary",
           "description": "The menu style variant. Primary uses bold text, secondary uses regular weight."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [],

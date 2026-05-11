@@ -218,7 +218,7 @@
       "events": [
         {
           "name": "_navigate",
-          "type": "CustomEvent<{ url: string }>",
+          "type": "CustomEvent",
           "description": "",
           "frameworks": [
             "webComponents"

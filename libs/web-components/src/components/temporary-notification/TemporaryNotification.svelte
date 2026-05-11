@@ -14,6 +14,9 @@
 />
 
 <script lang="ts">
+  /**
+   * @docsWrapperAlias temporary-notification-ctrl
+   */
   import { onMount } from "svelte";
 
   type TemporaryNotificationAnimationDirection = "up" | "down";

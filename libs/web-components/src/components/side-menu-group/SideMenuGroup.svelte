@@ -119,6 +119,7 @@
   }
 
   function dispatchGroupOpen() {
+    // @internal
     _senderEl.dispatchEvent(
       new CustomEvent("_open", {
         bubbles: true,

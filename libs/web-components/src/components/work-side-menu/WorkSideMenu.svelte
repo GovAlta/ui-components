@@ -16,6 +16,9 @@
 />
 
 <script lang="ts">
+  /**
+   * @docsEvent _navigate
+   */
   import { dispatch, performOnce } from "../../common/utils";
   import { getMatchedLink } from "../../common/urls";
   import { onMount, onDestroy, tick } from "svelte";
@@ -244,6 +247,7 @@
   function setCurrentUrl() {
     const currentEl = getMatchedLink(_menuLinks, window.location);
     _menuLinks.forEach((link) => {
+      // @internal
       dispatch(link, "_update", { current: currentEl }, {});
     });
   }

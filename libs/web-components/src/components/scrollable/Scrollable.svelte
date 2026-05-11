@@ -1,6 +1,9 @@
 <svelte:options customElement="goa-scrollable" />
 
 <script lang="ts">
+  /**
+   * @docsHide — internal scrollable container, not a public API component.
+   */
   import { onMount, tick } from "svelte";
 
   // Public

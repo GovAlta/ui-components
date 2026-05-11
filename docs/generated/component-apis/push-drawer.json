@@ -151,7 +151,7 @@
       "events": [
         {
           "name": "_close",
-          "type": "CustomEvent<void>",
+          "type": "CustomEvent",
           "description": "",
           "frameworks": [
             "webComponents"

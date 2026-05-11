@@ -1,6 +1,9 @@
 <svelte:options customElement="goa-form-stepper" />
 
 <script lang="ts">
+  /**
+   * @docsHide — internal layout component used by FormStep, not a standalone public API.
+   */
   import { calculateMargin } from "../../common/styling";
   import type { Spacing } from "../../common/styling";
   import { onDestroy, onMount, tick } from "svelte";

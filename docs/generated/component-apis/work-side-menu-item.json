@@ -205,7 +205,16 @@
           "description": "The URL the menu item links to. Optional — when absent, renders as a button instead of a link."
         }
       ],
-      "events": [],
+      "events": [
+        {
+          "name": "_navigate",
+          "type": "CustomEvent<{ url: string }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
       "slots": [
         {
           "name": "popoverContent",

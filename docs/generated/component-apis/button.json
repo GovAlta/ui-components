@@ -370,18 +370,6 @@
           "description": "Sets the color variant for semantic meaning. Use \"destructive\" for delete or irreversible actions, \"inverse\" for light-colored text on dark backgrounds, and \"dark\" for dark text color on text buttons only. Note: \"dark\" has no effect on non-text button types."
         },
         {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabButtonVersion",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
-        },
-        {
           "name": "width",
           "type": "string",
           "required": false,

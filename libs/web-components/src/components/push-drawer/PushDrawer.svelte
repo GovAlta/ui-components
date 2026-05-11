@@ -12,6 +12,9 @@
 />
 
 <script lang="ts">
+  /**
+   * @docsEvent _close
+   */
   import PushDrawerInternal from "./PushDrawerInternal.svelte";
 
   export let testid: string | undefined = undefined;

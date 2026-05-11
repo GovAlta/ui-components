@@ -120,37 +120,7 @@ interface WrapperExtraction {
   slotRequired: Record<string, boolean>;
 }
 
-const INTERNAL_PROP_NAMES = new Set(["publicformsummaryorder", "filterablecontext", "version"]);
 const INTERNAL_SLOT_NAMES = new Set(["version"]);
-const INTERNAL_EVENT_NAMES = new Set(["_revealChange", "_update"]);
-
-const DOCS_EXCLUDED_COMPONENTS = new Set(["focus-trap", "form-stepper", "scrollable"]);
-const DOCS_FORCED_COMPONENTS = new Set(["table-sort-header"]);
-const WRAPPER_COMPONENT_ALIASES: Record<string, string> = {
-  "temporary-notification": "temporary-notification-ctrl",
-};
-const WEB_COMPONENT_INTERNAL_EVENT_OVERRIDES: Record<string, Set<string>> = {
-  "work-side-menu-group": new Set(["_hoverItem"]),
-  "work-side-menu-item": new Set([
-    "_blurItem",
-    "_desktopPopoverClose",
-    "_desktopPopoverOpen",
-    "_hoverItem",
-    "_itemCurrent",
-    "_mobilePopoverClose",
-    "_mobilePopoverOpen",
-    "_mountItem",
-    "_navigate",
-  ]),
-};
-const WEB_COMPONENT_EVENT_TYPE_OVERRIDES: Record<string, Record<string, string>> = {
-  dropdown: {
-    _change: "CustomEvent<{ name?: string; value?: string; event: Event }>",
-  },
-  "file-upload-input": {
-    _selectFile: "CustomEvent<{ file: File; event: Event }>",
-  },
-};
 const SLOT_TYPE_OVERRIDES: Record<
   string,
   Partial<Record<"react" | "angular" | "webComponents", Record<string, string>>>
@@ -170,44 +140,6 @@ const SLOT_TYPE_OVERRIDES: Record<
     },
   },
 };
-const ALLOW_INTERNAL_PROP_BY_COMPONENT: Record<string, Set<string>> = {
-  "microsite-header": new Set(["version"]),
-};
-
-function shouldSkipInternalProp(componentName: string, propName: string): boolean {
-  const normalizedComponentName = toKebabCase(componentName);
-  const normalizedName = propName.toLowerCase();
-  if (ALLOW_INTERNAL_PROP_BY_COMPONENT[normalizedComponentName]?.has(normalizedName)) {
-    return false;
-  }
-  return INTERNAL_PROP_NAMES.has(normalizedName);
-}
-
-function shouldAllowInternalProp(componentName: string, propName: string): boolean {
-  const normalizedComponentName = toKebabCase(componentName);
-  return Boolean(
-    ALLOW_INTERNAL_PROP_BY_COMPONENT[normalizedComponentName]?.has(propName.toLowerCase()),
-  );
-}
-
-function isInternalPropName(propName: string): boolean {
-  return INTERNAL_PROP_NAMES.has(propName.toLowerCase());
-}
-
-function isStandardV1V2VersionProp(prop: ExtractedProp | undefined): boolean {
-  if (!prop || prop.name.toLowerCase() !== "version") return false;
-
-  const values = (prop.values || []).map((value) => String(value).replace(/['"]/g, "").trim());
-  if (values.length === 2 && values.includes("1") && values.includes("2")) {
-    return true;
-  }
-
-  const normalizedType = String(prop.type || "")
-    .replace(/['"]/g, "")
-    .replace(/\s+/g, "");
-
-  return normalizedType === "1|2";
-}
 
 function specializeAngularValuePropFromReact(
   angularProps: ExtractedProp[],
@@ -450,11 +382,6 @@ function extractProps(
     // Skip private props (starting with _)
     if (rawName.startsWith("_")) continue;
 
-    // Keep `version` on Web Component docs; wrappers are filtered later.
-    if (rawName.toLowerCase() !== "version" && shouldSkipInternalProp(componentName, rawName)) {
-      continue;
-    }
-
     const name = customElementPropAttributeMap.get(rawName) || rawName.toLowerCase();
     let typeLabel: string | undefined;
     let values: string[] | undefined;
@@ -535,14 +462,8 @@ function extractProps(
     // Get JSDoc info from map (description + required flag)
     const jsDocInfo = jsDocMap.get(rawName);
 
-    // Keep Svelte `version` visible in Web Component docs.
-    if (
-      jsDocInfo?.internal &&
-      rawName.toLowerCase() !== "version" &&
-      !shouldAllowInternalProp(componentName, rawName)
-    ) {
-      continue;
-    }
+    // Skip @internal props — they are implementation details, not public API.
+    if (jsDocInfo?.internal) continue;
 
     // Skip @deprecated props — not for public API docs
     if (jsDocInfo?.deprecated) continue;
@@ -591,7 +512,7 @@ function extractCustomElementPropAttributeMap(content: string): Map<string, stri
 
 // Known limitation: only scans the top-level Svelte file, so components that
 // delegate event dispatching to child Svelte files will have missing events.
-// Events from React/Angular wrappers fill this gap for those frameworks.
+// Those components annotate their missing events with @docsEvent in the manifest.
 function extractEvents(content: string): string[] {
   const eventNames = new Set<string>();
 
@@ -601,21 +522,34 @@ function extractEvents(content: string): string[] {
     const eventName = match[1];
     // Skip internal events (like "help-text::announce")
     if (eventName.includes("::")) continue;
+    // Skip events marked // @internal on the immediately preceding non-empty line
+    if (isPrecededByInternalAnnotation(content, match.index ?? 0)) continue;
     eventNames.add(eventName);
   }
 
   // Pattern 2: dispatchEvent(new CustomEvent("_eventName", ...))
+  // Allows an optional // @eventType comment between the opening paren and `new`.
   const customEventMatches = content.matchAll(
-    /dispatchEvent\s*\(\s*new\s+CustomEvent\s*\(\s*["']([^"']+)["']/g,
+    /dispatchEvent\s*\(\s*(?:\/\/[^\n]*)?\s*new\s+CustomEvent\s*\(\s*["']([^"']+)["']/g,
   );
   for (const match of customEventMatches) {
     const eventName = match[1];
-    if (!eventName.includes("::")) {
-      eventNames.add(eventName);
-    }
+    if (eventName.includes("::")) continue;
+    if (isPrecededByInternalAnnotation(content, match.index ?? 0)) continue;
+    eventNames.add(eventName);
   }
 
   return Array.from(eventNames);
+}
+
+/** Returns true if the line immediately before `index` in `content` is `// @internal`. */
+function isPrecededByInternalAnnotation(content: string, index: number): boolean {
+  const before = content.slice(0, index);
+  const lastNewline = before.lastIndexOf("\n");
+  const prevLineEnd = lastNewline === -1 ? 0 : lastNewline;
+  const secondLastNewline = before.lastIndexOf("\n", prevLineEnd - 1);
+  const prevLine = before.slice(secondLastNewline + 1, prevLineEnd).trim();
+  return prevLine === "// @internal";
 }
 
 function extractSlots(content: string): string[] {
@@ -1277,15 +1211,13 @@ function extractReactWrapperApi(
     const rawType = cleanType(member.type?.getText(sourceFile)?.trim() || "any");
     const { internal, deprecated } = parseJSDocContent(rawComment || "");
 
-    // Skip @deprecated props and internal-only props — not for public API docs
-    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName))) continue;
+    // Skip @deprecated props and @internal props — not for public API docs
+    if (deprecated || internal) continue;
 
     const fullDescription = parseDescriptionFromJSDoc(rawComment);
     const { description, defaultValue } = extractDefaultFromDescription(fullDescription);
     const isReadonly = isReadonlyDescription(description);
     const isRequired = !optional && !isReadonly;
-
-    if (shouldSkipInternalProp(componentName, propName)) continue;
 
     const values = parseWrapperPropValues(rawType);
     const slotName = getMatchingSlotName(propName, slotNames);
@@ -1412,10 +1344,8 @@ function extractAngularWrapperApi(
     const isReadonly = isReadonlyDescription(description);
     const required = !isReadonly && isAngularInputRequired(inputDecorator);
 
-    // Skip @deprecated props and internal-only props — not for public API docs
-    if (deprecated || (internal && !shouldAllowInternalProp(componentName, propName))) continue;
-
-    if (shouldSkipInternalProp(componentName, propName)) continue;
+    // Skip @deprecated props and @internal props — not for public API docs
+    if (deprecated || internal) continue;
 
     const values = parseWrapperPropValues(rawType);
     const slotName = getMatchingSlotName(propName, slotNames);
@@ -1739,6 +1669,18 @@ function splitTopLevelArgs(argsSource: string): string[] {
 }
 
 function getCustomEventType(eventName: string, content: string): string {
+  // Check for // @eventType annotation immediately before any dispatch call for this event.
+  // Pattern: a line containing exactly `// @eventType <type>` immediately before the dispatch.
+  const escapedNameForAnnotation = escapeRegExp(eventName);
+  const annotationPattern = new RegExp(
+    `\\/\\/ @eventType ([^\\n]+)\\n[^\\n]*["']${escapedNameForAnnotation}["']`,
+    "g",
+  );
+  for (const annotationMatch of content.matchAll(annotationPattern)) {
+    const annotatedType = annotationMatch[1].trim();
+    if (annotatedType) return annotatedType;
+  }
+
   const escapedName = escapeRegExp(eventName);
   const eventPattern = new RegExp(
     `new\\s+CustomEvent\\s*\\(\\s*["']${escapedName}["']\\s*,\\s*\\{([\\s\\S]*?)\\}\\s*\\)`,
@@ -1813,19 +1755,14 @@ function getCustomEventType(eventName: string, content: string): string {
 }
 
 function transformWebComponentEvents(
-  componentName: string,
   rawEventNames: string[],
   content: string,
 ): ExtractedEvent[] {
-  const internalOverrides = WEB_COMPONENT_INTERNAL_EVENT_OVERRIDES[componentName] || new Set<string>();
-  const typeOverrides = WEB_COMPONENT_EVENT_TYPE_OVERRIDES[componentName] || {};
-
   return rawEventNames
-    .filter((rawName) => !INTERNAL_EVENT_NAMES.has(rawName) && !internalOverrides.has(rawName))
     .filter((rawName) => !rawName.includes("::") && !rawName.includes(":"))
     .map((rawName) => ({
       name: rawName,
-      type: typeOverrides[rawName] || getCustomEventType(rawName, content),
+      type: getCustomEventType(rawName, content),
       description: "",
       frameworks: ["webComponents"],
     }));
@@ -1834,6 +1771,58 @@ function transformWebComponentEvents(
 // =============================================================================
 // Utilities
 // =============================================================================
+
+interface ComponentManifest {
+  /** Component should be excluded from docs extraction. */
+  hide: boolean;
+  /** Component should be force-included even without a matching .mdx page. */
+  show: boolean;
+  /** Override the wrapper filename (e.g., "temporary-notification-ctrl"). */
+  wrapperAlias: string | null;
+  /** Events to include that cannot be auto-detected from this file's dispatch calls. */
+  extraEvents: string[];
+}
+
+/**
+ * Parses the optional manifest JSDoc block at the very top of <script lang="ts">,
+ * before any imports. Recognised tags:
+ *   @docsHide           — exclude component from docs
+ *   @docsShow           — force include even without .mdx page
+ *   @docsWrapperAlias   — React/Angular wrapper filename differs from Svelte name
+ *   @docsEvent <name>   — declare an event that cannot be auto-detected
+ */
+function parseComponentManifest(content: string): ComponentManifest {
+  const manifest: ComponentManifest = { hide: false, show: false, wrapperAlias: null, extraEvents: [] };
+
+  // Match the first JSDoc block (/** ... */) that appears before the first import statement
+  // inside <script lang="ts"> (or <script context="module"> is ignored).
+  const scriptMatch = content.match(/<script\b[^>]*\blang=["']ts["'][^>]*>([\s\S]*?)<\/script>/);
+  if (!scriptMatch) return manifest;
+
+  const scriptBody = scriptMatch[1];
+  const firstImportIdx = scriptBody.search(/^\s*import\b/m);
+  const preamble = firstImportIdx === -1 ? scriptBody : scriptBody.slice(0, firstImportIdx);
+
+  const docMatch = preamble.match(/\/\*\*([\s\S]*?)\*\//);
+  if (!docMatch) return manifest;
+
+  const raw = docMatch[1]
+    .split("\n")
+    .map((l) => l.replace(/^\s*\*\s?/, "").trim())
+    .join("\n");
+
+  if (/@docsHide\b/.test(raw)) manifest.hide = true;
+  if (/@docsShow\b/.test(raw)) manifest.show = true;
+
+  const aliasMatch = raw.match(/@docsWrapperAlias\s+(\S+)/);
+  if (aliasMatch) manifest.wrapperAlias = aliasMatch[1];
+
+  for (const m of raw.matchAll(/@docsEvent\s+(\S+)/g)) {
+    manifest.extraEvents.push(m[1]);
+  }
+
+  return manifest;
+}
 
 function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -1934,19 +1923,16 @@ function getAllComponentNames(): string[] {
       ) {
         const content = fs.readFileSync(fullPath, "utf-8");
         const slug = toKebabCase(path.basename(entry.name, ".svelte"));
-        if (
-          extractTagName(content) &&
-          documentedComponentSlugs.has(slug) &&
-          !DOCS_EXCLUDED_COMPONENTS.has(slug)
-        ) {
+        if (!extractTagName(content)) continue;
+
+        const manifest = parseComponentManifest(content);
+        if (manifest.hide) continue;
+
+        if (documentedComponentSlugs.has(slug) || manifest.show) {
           componentNames.add(slug);
         }
       }
     }
-  }
-
-  for (const forcedComponent of DOCS_FORCED_COMPONENTS) {
-    componentNames.add(forcedComponent);
   }
 
   return Array.from(componentNames).sort((a, b) => a.localeCompare(b));
@@ -2000,45 +1986,30 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     return null;
   }
 
+  // Parse the component manifest (top-of-script @docs* annotations)
+  const manifest = parseComponentManifest(content);
+
   // Extract data
   const typeAliases = extractTypeAliases(content);
   const validators = extractValidators(content);
   const rawProps = extractProps(content, validators, componentName, typeAliases);
+
+  // Build the set of @internal prop names from the Svelte JSDoc map so we can
+  // filter wrapper props that inadvertently expose internal web-component props.
+  const jsDocMap = buildJSDocMap(content);
+  const internalPropNames = new Set<string>();
+  for (const [rawName, info] of jsDocMap) {
+    if (info.internal) internalPropNames.add(rawName.toLowerCase());
+  }
+
   let eventContent = content;
-  let rawEventNames = extractEvents(content);
-  const explicitEventsByComponent: Record<string, Set<string>> = {
-    "file-upload-card": new Set(["_cancel", "_delete"]),
-  };
-  const explicitEvents = explicitEventsByComponent[componentName];
-  if (explicitEvents) {
-    rawEventNames = Array.from(new Set([...rawEventNames, ...explicitEvents]));
-  }
-  const companionEventsByComponent: Record<string, Set<string>> = {
-    "work-side-menu": new Set(["_navigate"]),
-    "push-drawer": new Set(["_close"]),
-  };
-  const companionEvents = companionEventsByComponent[componentName];
-
-  if (companionEvents) {
-    const componentDir = path.dirname(svelteFilePath);
-    const siblingFiles = fs
-      .readdirSync(componentDir)
-      .filter((name) => name.endsWith(".svelte") && path.join(componentDir, name) !== svelteFilePath);
-
-    for (const siblingFile of siblingFiles) {
-      const siblingPath = path.join(componentDir, siblingFile);
-      const siblingContent = fs.readFileSync(siblingPath, "utf-8");
-      const siblingEventNames = extractEvents(siblingContent).filter((eventName) => companionEvents.has(eventName));
-      if (siblingEventNames.length > 0) {
-        rawEventNames = [...rawEventNames, ...siblingEventNames];
-        eventContent += `\n${siblingContent}`;
-      }
-    }
-
-    rawEventNames = Array.from(new Set(rawEventNames));
-  }
+  let rawEventNames = [
+    ...extractEvents(content),
+    ...manifest.extraEvents,
+  ];
+  rawEventNames = Array.from(new Set(rawEventNames));
   const slotNames = extractSlots(content);
-  const wrapperComponentName = WRAPPER_COMPONENT_ALIASES[componentName] ?? componentName;
+  const wrapperComponentName = manifest.wrapperAlias ?? componentName;
   const reactWrapper = extractReactWrapperApi(componentName, tagName, slotNames, wrapperComponentName);
   const angularWrapper = extractAngularWrapperApi(componentName, tagName, slotNames, wrapperComponentName);
 
@@ -2057,10 +2028,7 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
     ...(p.deprecated && { deprecated: true }),
   }));
 
-  let webComponentEvents = transformWebComponentEvents(componentName, rawEventNames, eventContent);
-  if (componentName === "side-menu-group") {
-    webComponentEvents = webComponentEvents.filter((event) => event.name !== "_open");
-  }
+  let webComponentEvents = transformWebComponentEvents(rawEventNames, eventContent);
   const slotDescriptions = {
     ...angularWrapper.slotDescriptions,
     ...reactWrapper.slotDescriptions,
@@ -2114,24 +2082,9 @@ function extractComponentAPI(componentName: string): ExtractedComponentAPI | nul
 
   specializeAngularValuePropFromReact(angularProps, reactProps);
 
-  const webComponentVersionProp = webComponentProps.find(
-    (prop) => prop.name.toLowerCase() === "version",
-  );
-  const hideVersionOutsideWeb = isStandardV1V2VersionProp(webComponentVersionProp);
-
-  reactProps = reactProps.filter(
-    (prop) =>
-      !shouldSkipInternalProp(componentName, prop.name) &&
-      !(hideVersionOutsideWeb && prop.name.toLowerCase() === "version"),
-  );
-  angularProps = angularProps.filter(
-    (prop) =>
-      !shouldSkipInternalProp(componentName, prop.name) &&
-      !(hideVersionOutsideWeb && prop.name.toLowerCase() === "version"),
-  );
-  webComponentProps = webComponentProps.filter(
-    (prop) => prop.name.toLowerCase() === "version" || !shouldSkipInternalProp(componentName, prop.name),
-  );
+  // Filter wrapper props that expose @internal web-component-level props
+  reactProps = reactProps.filter((prop) => !internalPropNames.has(prop.name.toLowerCase()));
+  angularProps = angularProps.filter((prop) => !internalPropNames.has(prop.name.toLowerCase()));
 
   reactProps = dedupeByName(reactProps).sort((a, b) => a.name.localeCompare(b.name));
   angularProps = dedupeByName(angularProps).sort((a, b) => a.name.localeCompare(b.name));

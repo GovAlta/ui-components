@@ -202,18 +202,6 @@
           "required": false,
           "default": "none",
           "description": "Sets the animation transition when opening/closing. 'fast' or 'slow' for animated, 'none' for instant."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabModalVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

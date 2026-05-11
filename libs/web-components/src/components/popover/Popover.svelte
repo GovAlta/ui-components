@@ -61,7 +61,7 @@
   export let focusborderwidth: string = "var(--goa-border-width-l)";
   /** Border radius of the popover window. */
   export let borderradius: string = "var(--goa-border-radius-m)";
-  /** Indicates the popover is used within a filterable context like a combobox. */
+  /** @internal Indicates the popover is used within a filterable context like a combobox. */
   export let filterablecontext: string = "false";
 
   // Private

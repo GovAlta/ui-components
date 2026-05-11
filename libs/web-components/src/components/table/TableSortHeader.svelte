@@ -15,6 +15,9 @@
 </script>
 
 <script lang="ts">
+  /**
+   * @docsShow — force-include in docs even though there is no table-sort-header.mdx page.
+   */
   import { onMount } from "svelte";
 
   /** Column name identifier for sorting. */

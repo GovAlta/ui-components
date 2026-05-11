@@ -254,10 +254,8 @@
   function onSetValue(detail: FieldsetSetValueRelayDetail) {
     // @ts-expect-error
     value = detail.value;
-    dispatch(_rootEl, "_change", { name, value }, { bubbles: true });
-  }
-
-  function sendMountedMessage() {
+    // @eventType CustomEvent<{ name?: string; value?: string; event: Event }>
+    dispatch(_rootEl, "_change", { name, value }, { bubbles: true }); {
     relay<FormFieldMountRelayDetail>(
       _rootEl,
       FormFieldMountMsg,
@@ -483,6 +481,7 @@
       return;
     }
 
+    // @eventType CustomEvent<{ name?: string; value?: string; event: Event }>
     dispatch(_rootEl, "_change", detail, { bubbles: true });
     _isDirty = false;
   }

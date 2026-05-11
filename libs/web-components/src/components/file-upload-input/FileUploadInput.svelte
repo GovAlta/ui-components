@@ -116,6 +116,7 @@
 
   function dispatch(file: File) {
     _el.dispatchEvent(
+      // @eventType CustomEvent<{ file: File; event: Event }>
       new CustomEvent("_selectFile", {
         composed: true,
         detail: { file },

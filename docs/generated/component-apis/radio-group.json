@@ -313,18 +313,6 @@
           "required": true,
           "default": null,
           "description": "The currently selected value in the radio group."
-        },
-        {
-          "name": "version",
-          "type": "\"1\" | \"2\"",
-          "typeLabel": "GoabRadioGroupVersionType",
-          "values": [
-            "1",
-            "2"
-          ],
-          "required": false,
-          "default": "1",
-          "description": "Design system version for styling."
         }
       ],
       "events": [

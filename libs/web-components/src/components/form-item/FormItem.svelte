@@ -91,7 +91,7 @@
 
   /** Overrides the label value within the form-summary. For public-form use only. */
   export let name: string = "blank";
-  /** Sets the display order within the form summary. For public-form use only. */
+  /** @internal Sets the display order within the form summary. For public-form use only. */
   export let publicFormSummaryOrder: number = 0;
 
   let _rootEl: HTMLElement;

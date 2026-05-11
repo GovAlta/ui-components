@@ -257,6 +257,7 @@
         eventDetail.name &&
         typeof eventDetail.value !== "undefined"
       ) {
+        // @internal
         dispatch(_rootEl, "_revealChange", eventDetail, { bubbles: true });
       }
     });

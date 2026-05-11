@@ -161,6 +161,7 @@
       eventDetail.name &&
       typeof eventDetail.value !== "undefined"
     ) {
+      // @internal
       dispatch(_radioItemEl, "_revealChange", eventDetail, { bubbles: true });
     }
   }

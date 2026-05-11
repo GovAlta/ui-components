@@ -61,6 +61,7 @@
   onMount(async () => {
     await tick();
     addEventListeners();
+    // @internal
     dispatch(_rootEl, "_mountItem", {}, { bubbles: true });
   });
 
@@ -136,6 +137,7 @@
     requestAnimationFrame(() => {
       _drawerEl!.setAttribute("open", "true");
       _drawerOpen = true;
+      // @internal
       dispatch(_rootEl, "_mobilePopoverOpen", {}, { bubbles: true });
     });
   }
@@ -147,6 +149,7 @@
       _drawerEl.removeAttribute("open");
     }
 
+    // @internal
     dispatch(_rootEl, "_mobilePopoverClose", {}, { bubbles: true });
   }
 
@@ -156,6 +159,7 @@
   // State is controlled via the open attribute (like Dropdown).
   function handlePopoverOpen() {
     _popoverOpen = true;
+    // @internal
     dispatch(
       _rootEl,
       "_desktopPopoverOpen",
@@ -166,6 +170,7 @@
 
   function handlePopoverClose() {
     _popoverOpen = false;
+    // @internal
     dispatch(
       _rootEl,
       "_desktopPopoverClose",
@@ -178,6 +183,7 @@
     let currentLink = e.detail.current;
     current = _linkEl === currentLink;
     if (current) {
+      // @internal
       dispatch(
         _rootEl,
         "_itemCurrent",
@@ -188,6 +194,7 @@
   }
 
   function handleMouseEnter() {
+    // @internal
     dispatch(
       _rootEl,
       "_hoverItem",
@@ -197,6 +204,7 @@
   }
 
   function handleFocus() {
+    // @internal
     dispatch(
       _rootEl,
       "_hoverItem",
@@ -206,6 +214,7 @@
   }
 
   function handleBlur() {
+    // @internal
     dispatch(_rootEl, "_blurItem", {}, { bubbles: true });
   }
 

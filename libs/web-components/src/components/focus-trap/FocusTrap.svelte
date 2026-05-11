@@ -11,6 +11,9 @@
 />
 
 <script lang="ts">
+  /**
+   * @docsHide — internal focus management utility, not a public API component.
+   */
   import { onMount, tick } from "svelte";
   import { findFirstFocusableNode } from "../../common/utils";
 

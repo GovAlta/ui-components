@@ -1,6 +1,10 @@
 <svelte:options customElement="goa-file-upload-card" />
 
 <script lang="ts">
+  /**
+   * @docsEvent _cancel
+   * @docsEvent _delete
+   */
   import { getTimestamp } from "../../common/utils";
 
   // Public
