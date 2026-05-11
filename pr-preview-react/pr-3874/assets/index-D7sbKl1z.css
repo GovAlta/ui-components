@@ -11,7 +11,7 @@ dl{margin-top:0}
 dd{margin-left:var(--goa-space-xs)}
 a,a:visited{color:var(--goa-color-interactive-default);cursor:pointer}
 a:hover{color:var(--goa-color-interactive-hover)}
-a:focus-visible,a:focus-within,a:focus{outline:var(--goa-link-gap-small, 3px) solid var(--goa-color-interactive-focus);outline-offset:var(--goa-border-width-s)}
+a:focus-visible,a:focus-within,a:focus{outline:var(--goa-link-border-focus);outline-offset:var(--goa-border-width-s)}
 ::-moz-placeholder{color:var(--goa-input-color-text-placeholder);opacity:1}
 ::placeholder{color:var(--goa-input-color-text-placeholder);opacity:1}
 :-ms-input-placeholder{color:var(--goa-input-color-text-placeholder)}
@@ -1650,7 +1650,7 @@ dl{margin-top:0}
 dd{margin-left:var(--goa-space-xs)}
 a,a:visited{color:var(--goa-color-interactive-default);cursor:pointer}
 a:hover{color:var(--goa-color-interactive-hover)}
-a:focus-visible,a:focus-within,a:focus{outline:var(--goa-link-gap-small, 3px) solid var(--goa-color-interactive-focus);outline-offset:var(--goa-border-width-s)}
+a:focus-visible,a:focus-within,a:focus{outline:var(--goa-link-border-focus);outline-offset:var(--goa-border-width-s)}
 ::-moz-placeholder{color:var(--goa-input-color-text-placeholder);opacity:1}
 ::placeholder{color:var(--goa-input-color-text-placeholder);opacity:1}
 :-ms-input-placeholder{color:var(--goa-input-color-text-placeholder)}
