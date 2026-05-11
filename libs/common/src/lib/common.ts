@@ -1360,6 +1360,20 @@ export type GoabCheckboxSize = "default" | "compact";
 
 export type GoabDropdownSize = "default" | "compact";
 
+/**
+ * Provides details when a dropdown multiselect value changes.
+ */
+export type GoabDropdownMultiselectOnChangeDetail = {
+  /** The dropdown multiselect name. */
+  name: string;
+  /** The selected values. */
+  value: string[];
+  /** The display labels for selected values. */
+  labels: string[];
+  /** The originating DOM event. */
+  event: Event;
+};
+
 export type GoabFormItemType =
   | ""
   | "text-input"

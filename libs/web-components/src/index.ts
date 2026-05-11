@@ -26,6 +26,7 @@ export * from "./components/divider/Divider.svelte";
 export * from "./components/drawer/Drawer.svelte";
 export * from "./components/dropdown/Dropdown.svelte";
 export * from "./components/dropdown/DropdownItem.svelte";
+export * from "./components/dropdown-multiselect/DropdownMultiselect.svelte";
 export * from "./components/file-upload-card/FileUploadCard.svelte";
 export * from "./components/file-upload-input/FileUploadInput.svelte";
 export * from "./components/filter-chip/FilterChip.svelte";
