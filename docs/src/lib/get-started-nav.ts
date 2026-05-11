@@ -4,11 +4,12 @@
  * Builds the Get Started submenu structure from the content collection.
  * Used by layouts to pass nav data to SiteNav -> GetStartedSubMenu.
  *
- * Section convention:
- * - "intro"      => top-level pages above grouped sections
- * - "designers"  => Designers group
- * - "developers" => Developers group
- * - "appendix"   => top-level pages below grouped sections
+ * Each section in the submenu is either:
+ * - "flat" — a list of items rendered without a group header
+ * - "grouped" — items rendered inside an expandable group with a heading
+ *
+ * Sections appear in `SECTION_ORDER` regardless of type, so flat and grouped
+ * sections can interleave freely.
  */
 
 import { getCollection } from "astro:content";
@@ -18,26 +19,37 @@ export interface GetStartedNavItem {
   url: string;
 }
 
-export interface GetStartedNavGroup {
-  name: string;
+export interface GetStartedNavSection {
   slug: string;
+  type: "flat" | "grouped";
+  name?: string;
   pages: GetStartedNavItem[];
 }
 
 export interface GetStartedNav {
-  topPages: GetStartedNavItem[];
-  groups: GetStartedNavGroup[];
-  bottomPages: GetStartedNavItem[];
+  sections: GetStartedNavSection[];
 }
 
-/** Display metadata for the grouped sections (not stored in content collection) */
-const GROUP_META: Record<string, { name: string }> = {
-  designers: { name: "Designers" },
-  developers: { name: "Developers" },
-};
+/** Display order of sections in the submenu (top to bottom). */
+const SECTION_ORDER = [
+  "intro",
+  "designers",
+  "developers",
+  "qa-testing",
+  "ai-tools-and-resources",
+  "contribute",
+  "out-of-support",
+];
 
-/** Canonical display order for grouped sections in the submenu */
-const GROUP_ORDER = ["designers", "developers"];
+/**
+ * Sections that render with a group heading. Any section listed here is
+ * "grouped"; everything else in `SECTION_ORDER` is "flat".
+ */
+const SECTION_NAMES: Record<string, string> = {
+  designers: "Designers",
+  developers: "Developers",
+  "ai-tools-and-resources": "AI tools and resources",
+};
 
 function entryToItem(entry: {
   slug: string;
@@ -62,16 +74,17 @@ export async function getGetStartedNav(): Promise<GetStartedNav> {
   const entries = await getCollection("get-started");
   const published = entries.filter((e) => e.data.status !== "deprecated");
 
-  const topPages = bySection(published, "intro").map(entryToItem);
-  const bottomPages = bySection(published, "appendix").map(entryToItem);
+  const sections: GetStartedNavSection[] = SECTION_ORDER
+    .filter((slug) => published.some((e) => e.data.section === slug))
+    .map((slug) => {
+      const isGrouped = slug in SECTION_NAMES;
+      return {
+        slug,
+        type: isGrouped ? "grouped" : "flat",
+        name: isGrouped ? SECTION_NAMES[slug] : undefined,
+        pages: bySection(published, slug).map(entryToItem),
+      };
+    });
 
-  const groups = GROUP_ORDER.filter((slug) =>
-    published.some((e) => e.data.section === slug),
-  ).map((slug) => ({
-    name: GROUP_META[slug].name,
-    slug,
-    pages: bySection(published, slug).map(entryToItem),
-  }));
-
-  return { topPages, groups, bottomPages };
+  return { sections };
 }

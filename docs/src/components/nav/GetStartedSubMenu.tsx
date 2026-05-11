@@ -1,14 +1,13 @@
 /**
  * GetStartedSubMenu.tsx
  *
- * Sub-menu for Get Started section showing grouped pages.
- * Uses GoabWorkSideMenuGroup for expandable Designers/Developers sections.
- *
- * Nav structure is sourced from the get-started content collection via
+ * Sub-menu for Get Started section showing pages organized into sections.
+ * Each section is either flat (a list of items) or grouped (items inside an
+ * expandable group with a heading). Sections render in the order returned by
  * `getGetStartedNav()` in lib/get-started-nav.ts.
  */
 
-import { type MouseEvent } from "react";
+import { Fragment, type MouseEvent } from "react";
 import {
   GoabWorkSideMenu,
   GoabWorkSideMenuItem,
@@ -16,7 +15,7 @@ import {
 } from "@abgov/react-components";
 import { MenuSecondaryContent } from "./MenuSecondaryContent";
 import { withBase } from "@/lib/base-url";
-import type { GetStartedNav } from "@/lib/get-started-nav";
+import type { GetStartedNav, GetStartedNavSection } from "@/lib/get-started-nav";
 
 interface GetStartedSubMenuProps {
   isOpen: boolean;
@@ -41,6 +40,36 @@ export function GetStartedSubMenu({
     onBack();
   };
 
+  const renderSection = (section: GetStartedNavSection) => {
+    if (section.type === "flat") {
+      return (
+        <Fragment key={section.slug}>
+          {section.pages.map((page) => (
+            <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
+          ))}
+        </Fragment>
+      );
+    }
+
+    const containsCurrentPage = section.pages.some((p) => p.url === currentUrl);
+
+    const handleGroupClickCapture = () => {
+      if (!isOpen && onExpandMenu) {
+        onExpandMenu();
+      }
+    };
+
+    return (
+      <div key={section.slug} onClickCapture={handleGroupClickCapture}>
+        <GoabWorkSideMenuGroup heading={section.name} open={containsCurrentPage}>
+          {section.pages.map((page) => (
+            <GoabWorkSideMenuItem key={page.url} label={page.label} url={withBase(page.url)} />
+          ))}
+        </GoabWorkSideMenuGroup>
+      </div>
+    );
+  };
+
   const primaryContent = (
     <>
       {/* Back to parent menu */}
@@ -48,50 +77,7 @@ export function GetStartedSubMenu({
         <GoabWorkSideMenuItem label="All" icon="arrow-back" url="/__back__" />
       </div>
 
-      {/* Top-level pages */}
-      {items.topPages.map((page) => (
-        <GoabWorkSideMenuItem
-          key={page.url}
-          label={page.label}
-          url={withBase(page.url)}
-        />
-      ))}
-
-      {/* Grouped sections */}
-      <div>
-        {items.groups.map((group) => {
-          const containsCurrentPage = group.pages.some((p) => p.url === currentUrl);
-
-          const handleGroupClickCapture = () => {
-            if (!isOpen && onExpandMenu) {
-              onExpandMenu();
-            }
-          };
-
-          return (
-            <div key={group.slug} onClickCapture={handleGroupClickCapture}>
-              <GoabWorkSideMenuGroup heading={group.name} open={containsCurrentPage}>
-                {group.pages.map((page) => (
-                  <GoabWorkSideMenuItem
-                    key={page.url}
-                    label={page.label}
-                    url={withBase(page.url)}
-                  />
-                ))}
-              </GoabWorkSideMenuGroup>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Bottom pages */}
-      {items.bottomPages.map((page) => (
-        <GoabWorkSideMenuItem
-          key={page.url}
-          label={page.label}
-          url={withBase(page.url)}
-        />
-      ))}
+      {items.sections.map(renderSection)}
     </>
   );
 
