@@ -1,76 +1,224 @@
 {
   "componentSlug": "work-side-notification-item",
   "extractedFrom": "libs/web-components/src/components/work-side-menu/WorkSideNotificationItem.svelte",
-  "props": [
-    {
-      "name": "type",
-      "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
-      "typeLabel": "GoabWorkSideNotificationItemType",
-      "values": ["default", "success", "critical", "warning", "info"],
-      "required": false,
-      "default": "default",
-      "description": ""
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The body text content of the notification card."
+        },
+        {
+          "name": "priority",
+          "type": "GoabWorkSideNotificationPriority",
+          "required": false,
+          "default": "normal",
+          "description": "Sets the urgency level of the notification."
+        },
+        {
+          "name": "readStatus",
+          "type": "GoabWorkSideNotificationReadStatus",
+          "required": false,
+          "default": "unread",
+          "description": "Indicates whether the notification has been read or is unread."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "ISO timestamp string representing when the notification occurred."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Title text displayed in the notification card header."
+        },
+        {
+          "name": "type",
+          "type": "GoabWorkSideNotificationItemType",
+          "required": false,
+          "default": "default",
+          "description": "Sets the visual type/style of the notification item."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Callback fired when the notification item is clicked.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "timestamp",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": ""
+    "angular": {
+      "props": [
+        {
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "The description text of the notification item."
+        },
+        {
+          "name": "priority",
+          "type": "GoabWorkSideNotificationPriority",
+          "required": false,
+          "default": null,
+          "description": "Sets the priority level of the notification."
+        },
+        {
+          "name": "readStatus",
+          "type": "GoabWorkSideNotificationReadStatus",
+          "required": false,
+          "default": null,
+          "description": "Indicates whether the notification is read or unread."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The timestamp for when the notification was created."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "The title text of the notification item."
+        },
+        {
+          "name": "type",
+          "type": "GoabWorkSideNotificationItemType",
+          "required": false,
+          "default": null,
+          "description": "Sets the visual style of the notification item."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Emits when the notification item is clicked.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "title",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": ""
-    },
-    {
-      "name": "description",
-      "type": "string",
-      "required": true,
-      "default": null,
-      "description": ""
-    },
-    {
-      "name": "readStatus",
-      "type": "\"read\" | \"unread\"",
-      "typeLabel": "GoabWorkSideNotificationReadStatus",
-      "values": ["read", "unread"],
-      "required": false,
-      "default": "unread",
-      "description": ""
-    },
-    {
-      "name": "priority",
-      "type": "\"normal\" | \"urgent\"",
-      "typeLabel": "GoabWorkSideNotificationPriority",
-      "values": ["normal", "urgent"],
-      "required": false,
-      "default": "normal",
-      "description": ""
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": ""
+    "webComponents": {
+      "props": [
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "priority",
+          "type": "\"normal\" | \"urgent\"",
+          "typeLabel": "GoabWorkSideNotificationItemPriority",
+          "values": [
+            "normal",
+            "urgent"
+          ],
+          "required": false,
+          "default": "normal",
+          "description": ""
+        },
+        {
+          "name": "read-status",
+          "type": "\"read\" | \"unread\"",
+          "typeLabel": "GoabWorkSideNotificationItemReadStatu",
+          "values": [
+            "read",
+            "unread"
+          ],
+          "required": false,
+          "default": "unread",
+          "description": ""
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": ""
+        },
+        {
+          "name": "type",
+          "type": "\"default\" | \"success\" | \"critical\" | \"warning\" | \"info\"",
+          "typeLabel": "GoabWorkSideNotificationItemType",
+          "values": [
+            "default",
+            "success",
+            "critical",
+            "warning",
+            "info"
+          ],
+          "required": false,
+          "default": "default",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "name": "_click",
+          "type": "CustomEvent<void>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        },
+        {
+          "name": "_notificationItemRead",
+          "type": "CustomEvent<{ el: unknown; readStatus: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "events": [
-    {
-      "name": "onClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": ["react"]
-    },
-    {
-      "name": "_click",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": ["angular", "web-component"]
-    }
-  ],
-  "slots": []
+  }
 }

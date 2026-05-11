@@ -17,6 +17,7 @@
   export let error: string = "";
   /** Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
+  /** @internal Design system version for styling. */
   export let version: "1" | "2" = "1";
 
   // Private

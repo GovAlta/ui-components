@@ -1,46 +1,123 @@
 {
   "componentSlug": "data-grid",
   "extractedFrom": "libs/web-components/src/components/data-grid/DataGrid.svelte",
-  "props": [
-    {
-      "name": "keyboardIconVisibility",
-      "type": "\"visible\" | \"hidden\"",
-      "values": [
-        "visible",
-        "hidden"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "keyboardIconPosition",
+          "type": "\"left\" | \"right\"",
+          "values": [
+            "left",
+            "right"
+          ],
+          "required": false,
+          "default": "left",
+          "description": "Position of the keyboard navigation indicator icon."
+        },
+        {
+          "name": "keyboardIconVisibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the keyboard navigation indicator icon."
+        },
+        {
+          "name": "keyboardNav",
+          "type": "\"layout\" | \"table\"",
+          "values": [
+            "layout",
+            "table"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Navigation mode. 'table' navigates like a table (up/down between rows), 'layout' allows wrapping between rows with left/right arrows."
+        }
       ],
-      "required": false,
-      "default": "visible",
-      "description": "Controls visibility of the keyboard navigation indicator icon. Use \"visible\" to show or \"hidden\" to hide."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "keyboardNav",
-      "type": "\"layout\" | \"table\"",
-      "values": [
-        "layout",
-        "table"
+    "angular": {
+      "props": [
+        {
+          "name": "keyboardIconPosition",
+          "type": "\"left\" | \"right\"",
+          "values": [
+            "left",
+            "right"
+          ],
+          "required": false,
+          "default": "left",
+          "description": "Position of the keyboard navigation indicator icon."
+        },
+        {
+          "name": "keyboardIconVisibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the keyboard navigation indicator icon. Use \"visible\" to show or \"hidden\" to hide."
+        },
+        {
+          "name": "keyboardNav",
+          "type": "\"layout\" | \"table\"",
+          "values": [
+            "layout",
+            "table"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
+        }
       ],
-      "required": false,
-      "default": "table",
-      "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "keyboardIconPosition",
-      "type": "\"left\" | \"right\"",
-      "values": [
-        "left",
-        "right"
+    "webComponents": {
+      "props": [
+        {
+          "name": "keyboard-icon-position",
+          "type": "\"left\" | \"right\"",
+          "values": [
+            "left",
+            "right"
+          ],
+          "required": false,
+          "default": "left",
+          "description": "Position of the keyboard navigation indicator icon."
+        },
+        {
+          "name": "keyboard-icon-visibility",
+          "type": "\"visible\" | \"hidden\"",
+          "values": [
+            "visible",
+            "hidden"
+          ],
+          "required": false,
+          "default": "visible",
+          "description": "Controls visibility of the keyboard navigation indicator icon. Use \"visible\" to show or \"hidden\" to hide."
+        },
+        {
+          "name": "keyboard-nav",
+          "type": "\"layout\" | \"table\"",
+          "values": [
+            "layout",
+            "table"
+          ],
+          "required": false,
+          "default": "table",
+          "description": "Navigation mode. \"table\" navigates like a table (up/down between rows), \"layout\" allows wrapping between rows with left/right arrows."
+        }
       ],
-      "required": false,
-      "default": "left",
-      "description": "Position of the keyboard navigation indicator icon."
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

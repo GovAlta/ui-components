@@ -64,7 +64,7 @@ export class GoabWorkSideMenu implements OnInit {
   /** Template reference for the account slot content. */
   @Input() accountContent!: TemplateRef<any>;
   /** Emits when the side menu is toggled open or closed. */
-  @Output() onToggle = new EventEmitter();
+  @Output() onToggle = new EventEmitter<void>();
   /** Emits when a navigation link is clicked. Emits the URL as a string. */
   @Output() onNavigate = new EventEmitter<string>();
 

@@ -219,44 +219,50 @@ export function CodeSnippet({
     ? VALID_FRAMEWORKS.filter((k) => Boolean(frameworkCode[k]))
     : [];
 
+  const syncGoaTabsSelection = (framework: Framework) => {
+    if (!tabsRef.current || availableFrameworks.length === 0 || !availableFrameworks.includes(framework)) {
+      return;
+    }
+
+    const goaTabs = tabsRef.current.querySelector("goa-tabs");
+    if (!goaTabs) return;
+
+    const targetIndex = availableFrameworks.indexOf(framework);
+    const tabs = goaTabs.querySelectorAll('[role="tab"]');
+    const targetTab = tabs[targetIndex] as HTMLElement | undefined;
+    if (!targetTab) return;
+
+    tabs.forEach((tab, i) => {
+      tab.setAttribute("aria-selected", i === targetIndex ? "true" : "false");
+      tab.setAttribute("tabindex", i === targetIndex ? "0" : "-1");
+    });
+
+    const tabContents = goaTabs.querySelectorAll("goa-tab");
+    tabContents.forEach((content, i) => {
+      content.dispatchEvent(
+        new CustomEvent("tabs:set-open", {
+          composed: true,
+          detail: { open: i === targetIndex },
+        }),
+      );
+    });
+  };
+
+  useEffect(() => {
+    const stored = getFrameworkPreference();
+    if (availableFrameworks.length > 0 && availableFrameworks.includes(stored)) {
+      setSelectedFramework(stored);
+      syncGoaTabsSelection(stored);
+    }
+  }, [availableFrameworks]);
+
   // Subscribe to global framework preference changes from other components.
   // Directly manipulate the tab DOM state without triggering focus or hash changes.
   useEffect(() => {
     return subscribeToFrameworkPreference((framework) => {
       if (availableFrameworks.length === 0 || availableFrameworks.includes(framework)) {
         setSelectedFramework(framework);
-
-        // Directly switch goa-tabs without triggering focus
-        if (tabsRef.current) {
-          const goaTabs = tabsRef.current.querySelector("goa-tabs");
-          if (goaTabs) {
-            const targetIndex = availableFrameworks.indexOf(framework);
-            const tabs = goaTabs.querySelectorAll('[role="tab"]');
-
-            // Check if already on the correct tab
-            const targetTab = tabs[targetIndex] as HTMLElement;
-            if (targetTab && targetTab.getAttribute("aria-selected") === "true") {
-              return; // Already selected, nothing to do
-            }
-
-            // Update tab button states (aria-selected, tabindex)
-            tabs.forEach((tab, i) => {
-              tab.setAttribute("aria-selected", i === targetIndex ? "true" : "false");
-              tab.setAttribute("tabindex", i === targetIndex ? "0" : "-1");
-            });
-
-            // Tell each goa-tab content whether it should be open
-            const tabContents = goaTabs.querySelectorAll("goa-tab");
-            tabContents.forEach((content, i) => {
-              content.dispatchEvent(
-                new CustomEvent("tabs:set-open", {
-                  composed: true,
-                  detail: { open: i === targetIndex },
-                }),
-              );
-            });
-          }
-        }
+        syncGoaTabsSelection(framework);
       }
     });
   }, [availableFrameworks]);

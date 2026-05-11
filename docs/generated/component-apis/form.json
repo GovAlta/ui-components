@@ -1,48 +1,129 @@
 {
   "componentSlug": "form",
   "extractedFrom": "libs/web-components/src/components/form/Form.svelte",
-  "props": [
-    {
-      "name": "status",
-      "type": "\"initializing\" | \"complete\"",
-      "values": [
-        "initializing",
-        "complete"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "A name identifier for the form. Useful for debugging complex forms with multiple nested forms."
+        },
+        {
+          "name": "status",
+          "type": "GoabPublicFormStatus",
+          "required": false,
+          "default": "complete",
+          "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
+        }
       ],
-      "required": false,
-      "default": "complete",
-      "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
+      "events": [
+        {
+          "name": "onComplete",
+          "type": "(event: GoabFormState) => void",
+          "description": "Callback fired when the form is completed.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onInit",
+          "type": "(event: Event) => void",
+          "description": "Callback fired when the form is initialized.",
+          "frameworks": [
+            "react"
+          ]
+        },
+        {
+          "name": "onStateChange",
+          "type": "(event: GoabFormState) => void",
+          "description": "Callback fired when the form state changes.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "name",
-      "type": "string",
-      "required": false,
-      "default": "[name] not set",
-      "description": "A name identifier for the form. Useful for debugging complex forms with multiple nested forms."
-    }
-  ],
-  "events": [
-    {
-      "name": "onInit",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
-      ]
+    "angular": {
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "A name identifier for the form. Useful for debugging complex forms with multiple nested forms."
+        },
+        {
+          "name": "status",
+          "type": "GoabPublicFormStatus",
+          "required": false,
+          "default": "complete",
+          "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
+        }
+      ],
+      "events": [
+        {
+          "name": "onComplete",
+          "type": "(event: GoabFormState) => void",
+          "description": "Emits when the form is complete. Emits the form state.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onInit",
+          "type": "(event: Event) => void",
+          "description": "Emits when the form is initialized.",
+          "frameworks": [
+            "angular"
+          ]
+        },
+        {
+          "name": "onStateChange",
+          "type": "(event: GoabFormState) => void",
+          "description": "Emits when the form state changes. Emits the updated form state.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
     },
-    {
-      "name": "_init",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
-      ]
+    "webComponents": {
+      "props": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "default": "[name] not set",
+          "description": "A name identifier for the form. Useful for debugging complex forms with multiple nested forms."
+        },
+        {
+          "name": "status",
+          "type": "\"initializing\" | \"complete\"",
+          "values": [
+            "initializing",
+            "complete"
+          ],
+          "required": false,
+          "default": "complete",
+          "description": "The initialization status of the form. Set to \"initializing\" while loading external state, then \"complete\" when ready."
+        }
+      ],
+      "events": [
+        {
+          "name": "_init",
+          "type": "CustomEvent<{ el: unknown }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
     }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

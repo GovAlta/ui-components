@@ -342,8 +342,7 @@
     let currentLocation = "";
 
     // send message to each tab to set visibility within
-    // @ts-expect-error
-    [..._tabsEl.querySelectorAll("[role=tab]")].map((el, index) => {
+    [..._tabsEl.querySelectorAll<HTMLElement>("[role=tab]")].map((el, index) => {
       const isCurrent = index + 1 === +_currentTab; // currentTab is 1-based
 
       el.setAttribute("aria-selected", fromBoolean(isCurrent));

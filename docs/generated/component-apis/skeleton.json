@@ -1,97 +1,239 @@
 {
   "componentSlug": "skeleton",
   "extractedFrom": "libs/web-components/src/components/skeleton/Skeleton.svelte",
-  "props": [
-    {
-      "name": "maxWidth",
-      "type": "string",
-      "required": false,
-      "default": "300px",
-      "description": "Sets the maximum width. Currently only used in card skeleton type."
-    },
-    {
-      "name": "size",
-      "type": "\"1\" | \"2\" | \"3\" | \"4\"",
-      "typeLabel": "GoabSkeletonSize",
-      "values": [
-        "1",
-        "2",
-        "3",
-        "4"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "lineCount",
+          "type": "number",
+          "required": false,
+          "default": "3",
+          "description": "Used within components that contain multiple lines. Currently only used in card skeleton type."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": "300px",
+          "description": "Sets the maximum width. Currently only used in card skeleton type."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "size",
+          "type": "GoabSkeletonSize",
+          "required": false,
+          "default": "1",
+          "description": "Size can affect either the height, width or both for different skeleton types."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabSkeletonType",
+          "required": true,
+          "default": null,
+          "description": "Sets the skeleton shape to represent your content."
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": "Size can affect either the height, width or both for different skeleton types."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "linecount",
-      "type": "number",
-      "required": false,
-      "default": "3",
-      "description": "Used within components that contain multiple lines. Currently only used in card skeleton type"
-    },
-    {
-      "name": "type",
-      "type": "\"image\" | \"text\" | \"title\" | \"text-small\" | \"avatar\" | \"header\" | \"paragraph\" | \"thumbnail\" | \"card\" | \"lines\" | \"profile\" | \"article\"",
-      "typeLabel": "GoabSkeletonType",
-      "values": [
-        "image",
-        "text",
-        "title",
-        "text-small",
-        "avatar",
-        "header",
-        "paragraph",
-        "thumbnail",
-        "card",
-        "lines",
-        "profile",
-        "article"
+    "angular": {
+      "props": [
+        {
+          "name": "lineCount",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Used within components that contain multiple lines. Currently only used in card skeleton type."
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": "300px",
+          "description": "Sets the maximum width. Currently only used in card skeleton type."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "size",
+          "type": "GoabSkeletonSize",
+          "required": false,
+          "default": null,
+          "description": "Size can affect either the height, width or both for different skeleton types."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "GoabSkeletonType",
+          "required": true,
+          "default": null,
+          "description": "Sets the skeleton shape to represent your content."
+        }
       ],
-      "required": true,
-      "default": null,
-      "description": "Sets the skeleton shape to represent your content."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+    "webComponents": {
+      "props": [
+        {
+          "name": "linecount",
+          "type": "number",
+          "required": false,
+          "default": "3",
+          "description": "Used within components that contain multiple lines. Currently only used in card skeleton type"
+        },
+        {
+          "name": "maxwidth",
+          "type": "string",
+          "required": false,
+          "default": "300px",
+          "description": "Sets the maximum width. Currently only used in card skeleton type."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "size",
+          "type": "\"1\" | \"2\" | \"3\" | \"4\"",
+          "typeLabel": "GoabSkeletonSize",
+          "values": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Size can affect either the height, width or both for different skeleton types."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "type",
+          "type": "\"image\" | \"text\" | \"title\" | \"text-small\" | \"avatar\" | \"header\" | \"paragraph\" | \"thumbnail\" | \"card\" | \"lines\" | \"profile\" | \"article\"",
+          "typeLabel": "GoabSkeletonType",
+          "values": [
+            "image",
+            "text",
+            "title",
+            "text-small",
+            "avatar",
+            "header",
+            "paragraph",
+            "thumbnail",
+            "card",
+            "lines",
+            "profile",
+            "article"
+          ],
+          "required": true,
+          "default": null,
+          "description": "Sets the skeleton shape to represent your content."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

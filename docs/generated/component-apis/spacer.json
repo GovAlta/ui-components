@@ -1,31 +1,89 @@
 {
   "componentSlug": "spacer",
   "extractedFrom": "libs/web-components/src/components/spacer/Spacer.svelte",
-  "props": [
-    {
-      "name": "hspacing",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": "none",
-      "description": "Horizontal spacing."
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "hSpacing",
+          "type": "GoabSpacerHorizontalSpacing",
+          "required": false,
+          "default": "none",
+          "description": "Horizontal spacing."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "vSpacing",
+          "type": "GoabSpacerVerticalSpacing",
+          "required": false,
+          "default": "none",
+          "description": "Vertical spacing."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "vspacing",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": "none",
-      "description": "Vertical spacing"
+    "angular": {
+      "props": [
+        {
+          "name": "hSpacing",
+          "type": "GoabSpacerHorizontalSpacing",
+          "required": false,
+          "default": null,
+          "description": "Horizontal spacing."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "vSpacing",
+          "type": "GoabSpacerVerticalSpacing",
+          "required": false,
+          "default": null,
+          "description": "Vertical spacing."
+        }
+      ],
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
+    "webComponents": {
+      "props": [
+        {
+          "name": "hspacing",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "none",
+          "description": "Horizontal spacing."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "vspacing",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": "none",
+          "description": "Vertical spacing"
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": []
+  }
 }

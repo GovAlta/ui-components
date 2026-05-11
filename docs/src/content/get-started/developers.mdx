@@ -1,0 +1,96 @@
+---
+id: developers
+title: Developers overview
+navLabel: Overview
+description: How developers use the design system through tokens, components, examples, and templates
+section: developers
+order: 1
+status: published
+---
+import { withBase } from "@/lib/base-url";
+import DropInCallout from "../../components/DropInCallout.astro";
+
+<goa-text size="heading-xl" mt="none" mb="m">Overview</goa-text>
+<goa-text size="body-l" mt="none" mb="2xl">As a developer, you use the Design System through tokens, components, examples, and templates.</goa-text>
+
+<p>
+  The DDD Design System is built using Web Components. Web Components are framework-agnostic.
+  You can use them with Angular, React, or other front-end frameworks.
+</p>
+<p>The Design System includes:</p>
+<ul>
+  <li><a href={withBase(`/tokens`)}><strong>Tokens</strong></a></li>
+  <li><a href={withBase(`/components`)}><strong>Components</strong></a></li>
+  <li><a href={withBase(`/examples`)}><strong>Examples</strong></a></li>
+  <li><strong>Templates</strong></li>
+</ul>
+<p>
+  Designers use equivalent resources in Figma. When they design with Design System components, you
+  can build with the matching coded components. This reduces custom development and rework.
+</p>
+<p>
+  All Design System components are designed and built to meet
+  <a href="https://www.w3.org/TR/WCAG22/" target="_blank">WCAG 2.2 accessibility standards</a>.
+</p>
+<goa-text as="h2" id="tokens" size="heading-m">Tokens</goa-text>
+<p>
+  Access the tokens as an
+  <a href="https://www.npmjs.com/package/@abgov/design-tokens" target="_blank">NPM package</a>.
+</p>
+<p>
+  Import the SCSS or CSS file into your project. Replace hard-coded values with Design System token variables.
+</p>
+<p>
+  Designers reference the same tokens in their tools. This keeps design and development aligned during handoff.
+</p>
+
+<goa-text as="h2" id="components" size="heading-m">Components</goa-text>
+<p>Components are reusable user interface elements built for use across services.</p>
+<p>You can:</p>
+<ul>
+  <li>Use components individually</li>
+  <li>Combine them into patterns</li>
+  <li>Apply them in different contexts</li>
+</ul>
+<p>Components are available:</p>
+<ul>
+  <li>As <a href="https://www.npmjs.com/package/@abgov/web-components" target="_blank">Web Components</a></li>
+  <li>As <a href="https://www.npmjs.com/package/@abgov/angular-components" target="_blank">Angular</a> wrappers</li>
+  <li>As <a href="https://www.npmjs.com/package/@abgov/react-components" target="_blank">React</a> wrappers</li>
+</ul>
+<p>
+  Refer to the Design System <a href={withBase(`/get-started/developers/technologies`)}>technologies</a> documentation
+  for implementation details.
+</p>
+
+<goa-text as="h2" id="examples" size="heading-m">Examples</goa-text>
+<p>
+  Examples are multiple components assembled in realistic service contexts. They help you understand
+  how to apply Design System guidance in a working interface.
+</p>
+<p>You can use examples to:</p>
+<ul>
+  <li>Understand how components work together</li>
+  <li>Use them as a starting point for building parts of your interface</li>
+  <li>Use proven approaches to meet user needs</li>
+</ul>
+<p>
+  Examples help you build with more consistency and less rework. Use them to guide implementation,
+  then adjust them to meet the needs of your product.
+</p>
+
+<goa-text as="h2" id="templates" size="heading-m">Templates</goa-text>
+<p>
+  Templates are opinionated starting points for common service types. They package layout, navigation,
+  spacing, and example content so you can start with a proven structure instead of building from scratch.
+</p>
+<p>You can use templates to:</p>
+<ul>
+  <li>Start a new product with a proven structure</li>
+  <li>Learn how components work together in a real layout</li>
+  <li>Adapt a proven starting point to fit your service needs</li>
+</ul>
+<p>
+  Templates help teams move faster, reduce rework, and stay aligned with Design System guidance.
+</p>
+<DropInCallout />

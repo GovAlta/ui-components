@@ -22,6 +22,7 @@ import { SiteNav } from '../components/SiteNav';
 import { MobileHeader } from '../components/MobileHeader';
 import { TableOfContents } from '../components/TableOfContents';
 import { getNavCategories } from '../lib/nav-categories';
+import { getGetStartedNav } from '../lib/get-started-nav';
 
 interface Props {
   title: string;
@@ -42,6 +43,7 @@ const {
   tocQuery = 'h2[id], h3[id], goa-text[id][as="h2"], goa-text[id][as="h3"]'
 } = Astro.props;
 const navCategories = await getNavCategories();
+const getStartedNav = await getGetStartedNav();
 ---
 
 <BaseLayout title={title} description={description}>
@@ -53,6 +55,7 @@ const navCategories = await getNavCategories();
           client:only="react"
           initialSection={section}
           categories={navCategories}
+          getStartedNav={getStartedNav}
         />
       </aside>
 

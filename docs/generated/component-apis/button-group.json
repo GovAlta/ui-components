@@ -1,77 +1,186 @@
 {
   "componentSlug": "button-group",
   "extractedFrom": "libs/web-components/src/components/button-group/ButtonGroup.svelte",
-  "props": [
-    {
-      "name": "alignment",
-      "type": "\"start\" | \"end\" | \"center\"",
-      "typeLabel": "GoabButtonGroupButtonAlignment",
-      "values": [
-        "start",
-        "end",
-        "center"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "GoabButtonGroupAlignment",
+          "required": true,
+          "default": null,
+          "description": "Positions the button group in the page layout."
+        },
+        {
+          "name": "gap",
+          "type": "GoabButtonGroupGap",
+          "required": false,
+          "default": "relaxed",
+          "description": "Sets the spacing between buttons in the button group."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        }
       ],
-      "required": false,
-      "default": "start",
-      "description": "Positions the button group in the page layout."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "gap",
-      "type": "\"relaxed\" | \"compact\"",
-      "typeLabel": "GoabButtonGroupGap",
-      "values": [
-        "relaxed",
-        "compact"
+    "angular": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "GoabButtonGroupAlignment",
+          "required": false,
+          "default": null,
+          "description": "Positions the button group in the page layout."
+        },
+        {
+          "name": "gap",
+          "type": "GoabButtonGroupGap",
+          "required": false,
+          "default": null,
+          "description": "Sets the spacing between buttons in the button group."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        }
       ],
-      "required": false,
-      "default": "relaxed",
-      "description": "Sets the spacing between buttons in the button group."
+      "events": [],
+      "slots": []
     },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "mt",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Top margin."
-    },
-    {
-      "name": "mr",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Right margin."
-    },
-    {
-      "name": "mb",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Bottom margin."
-    },
-    {
-      "name": "ml",
-      "type": "Spacing",
-      "typeLabel": "Spacing",
-      "required": false,
-      "default": null,
-      "description": "Left margin."
+    "webComponents": {
+      "props": [
+        {
+          "name": "alignment",
+          "type": "\"start\" | \"end\" | \"center\"",
+          "typeLabel": "GoabButtonGroupButtonAlignment",
+          "values": [
+            "start",
+            "end",
+            "center"
+          ],
+          "required": false,
+          "default": "start",
+          "description": "Positions the button group in the page layout."
+        },
+        {
+          "name": "gap",
+          "type": "\"relaxed\" | \"compact\"",
+          "typeLabel": "GoabButtonGroupGap",
+          "values": [
+            "relaxed",
+            "compact"
+          ],
+          "required": false,
+          "default": "relaxed",
+          "description": "Sets the spacing between buttons in the button group."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        }
+      ],
+      "events": [],
+      "slots": []
     }
-  ],
-  "events": [],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    }
-  ]
+  }
 }

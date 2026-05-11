@@ -1,106 +1,258 @@
 {
   "componentSlug": "app-header",
   "extractedFrom": "libs/web-components/src/components/app-header/AppHeader.svelte",
-  "props": [
-    {
-      "name": "version",
-      "type": "\"1\" | \"2\"",
-      "values": [
-        "1",
-        "2"
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "fullMenuBreakpoint",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Sets the breakpoint in px for the full menu to display."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Set the service name to display in the app header."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "secondaryText",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "V2 only: Secondary text displayed under the service name."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Set the URL to link from the alberta.ca logo. A full url is required."
+        }
       ],
-      "required": false,
-      "default": "1",
-      "description": ""
-    },
-    {
-      "name": "heading",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Set the service name to display in the app header."
-    },
-    {
-      "name": "secondarytext",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "V2 only: Secondary text displayed under the service name."
-    },
-    {
-      "name": "url",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Set the URL to link from the alberta.ca logo. A full url is required."
-    },
-    {
-      "name": "testId",
-      "type": "string",
-      "required": false,
-      "default": "",
-      "description": "Sets a data-testid attribute for automated testing."
-    },
-    {
-      "name": "maxcontentwidth",
-      "type": "any",
-      "required": false,
-      "default": "",
-      "description": "Maximum width of the content area."
-    },
-    {
-      "name": "fullmenubreakpoint",
-      "type": "number",
-      "required": false,
-      "default": "TABLET_BP",
-      "description": "Sets the breakpoint in px for the full menu to display."
-    },
-    {
-      "name": "hasmenuclickhandler",
-      "type": "boolean",
-      "required": false,
-      "default": "false",
-      "description": "When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling."
-    }
-  ],
-  "events": [
-    {
-      "name": "onMenuClick",
-      "type": "(event: Event) => void",
-      "description": "",
-      "frameworks": [
-        "react"
+      "events": [
+        {
+          "name": "onMenuClick",
+          "type": "() => void",
+          "description": "Callback fired when the menu button is clicked. When provided, clicking the menu button dispatches a custom event instead of toggling the menu.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "banner",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "navigation",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "phase",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "utilities",
+          "description": "",
+          "required": false
+        }
       ]
     },
-    {
-      "name": "_menuClick",
-      "type": "CustomEvent",
-      "description": "",
-      "frameworks": [
-        "angular"
+    "angular": {
+      "props": [
+        {
+          "name": "fullMenuBreakpoint",
+          "type": "number",
+          "required": false,
+          "default": null,
+          "description": "Sets the breakpoint in px for the full menu to display."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the service name to display in the app header."
+        },
+        {
+          "name": "maxContentWidth",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "secondaryText",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "V2 only: Secondary text displayed under the service name."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the URL to link from the alberta.ca logo. A full url is required."
+        }
+      ],
+      "events": [
+        {
+          "name": "onMenuClick",
+          "type": "() => void",
+          "description": "Emits when the menu button is clicked. Used for custom menu handling.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "banner",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "navigation",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "phase",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "utilities",
+          "description": "",
+          "required": false
+        }
+      ]
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "fullmenubreakpoint",
+          "type": "number",
+          "required": false,
+          "default": "TABLET_BP",
+          "description": "Sets the breakpoint in px for the full menu to display."
+        },
+        {
+          "name": "hasmenuclickhandler",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "When true, clicking the menu button dispatches _menuClick event instead of toggling the menu. Use for custom menu handling."
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Set the service name to display in the app header."
+        },
+        {
+          "name": "maxcontentwidth",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Maximum width of the content area."
+        },
+        {
+          "name": "secondarytext",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "V2 only: Secondary text displayed under the service name."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Set the URL to link from the alberta.ca logo. A full url is required."
+        },
+        {
+          "name": "version",
+          "type": "\"1\" | \"2\"",
+          "values": [
+            "1",
+            "2"
+          ],
+          "required": false,
+          "default": "1",
+          "description": "Design system version for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "_menuClick",
+          "type": "CustomEvent",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": [
+        {
+          "name": "banner",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "navigation",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "phase",
+          "description": "",
+          "required": false
+        },
+        {
+          "name": "utilities",
+          "description": "",
+          "required": false
+        }
       ]
     }
-  ],
-  "slots": [
-    {
-      "name": "default",
-      "description": ""
-    },
-    {
-      "name": "banner",
-      "description": ""
-    },
-    {
-      "name": "phase",
-      "description": ""
-    },
-    {
-      "name": "utilities",
-      "description": ""
-    },
-    {
-      "name": "navigation",
-      "description": ""
-    }
-  ]
+  }
 }

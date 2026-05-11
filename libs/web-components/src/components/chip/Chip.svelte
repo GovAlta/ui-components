@@ -19,19 +19,19 @@
   /** Left margin. */
   export let ml: Spacing = null;
 
-  /** @deprecated Use GoAFilterChip instead. Icon displayed at the start of the chip. */
+  /** @deprecated Use the Filter Chip component instead. Icon displayed at the start of the chip. */
   export let leadingicon: GoAIconType | null = null;
-  /** @deprecated Use GoAFilterChip instead. The icon theme - outline or filled. */
+  /** @deprecated Use the Filter Chip component instead. The icon theme - outline or filled. */
   export let icontheme: IconTheme = "outline";
-  /** @deprecated Use GoAFilterChip instead. Shows an error state on the chip. */
+  /** @deprecated Use the Filter Chip component instead. Shows an error state on the chip. */
   export let error: string = "false";
-  /** @deprecated Use GoAFilterChip instead. When true, shows a delete icon and makes chip clickable. */
+  /** @deprecated Use the Filter Chip component instead. When true, shows a delete icon and makes chip clickable. */
   export let deletable: string = "false";
-  /** @deprecated Use GoAFilterChip instead. The text content displayed in the chip. */
+  /** @deprecated Use the Filter Chip component instead. The text content displayed in the chip. */
   export let content: string;
-  /** @deprecated Use GoAFilterChip instead. The chip variant style. */
+  /** @deprecated Use the Filter Chip component instead. The chip variant style. */
   export let variant: ChipVariant;
-  /** @deprecated Use GoAFilterChip instead. Sets a data-testid attribute for automated testing. */
+  /** @deprecated Use the Filter Chip component instead. Sets a data-testid attribute for automated testing. */
   export let testid: string = "";
 
   let el: HTMLElement;
@@ -45,7 +45,7 @@
   $: _deletable = toBoolean(deletable);
 
   onMount(async () => {
-    console.warn("GoAChip is deprecated. Instead use GoAFilterChip.");
+    console.warn("GoAChip is deprecated. Use the Filter Chip component instead.");
   });
 
   function onDelete(e: Event) {

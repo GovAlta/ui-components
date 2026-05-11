@@ -139,7 +139,7 @@
   }
 
   function onAction(action: MenuActionProps) {
-    dispatch(_rootEl, "_action", action, { bubbles: true });
+    dispatch(_rootEl, "_action", { action: action.action, size: action.size }, { bubbles: true });
     close();
     _buttonIndex = 0;
   }

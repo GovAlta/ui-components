@@ -42,7 +42,7 @@
 
   /** Width of the table. By default it will fit the enclosed content. */
   export let width: string = "";
-  /** When true, the table header sticks to the top when scrolling. */
+  /** @internal When true, the table header sticks to the top when scrolling. */
   export let stickyheader: string = "false";
   /** When true, alternates row background colors for improved readability. */
   export let striped: string = "false";
