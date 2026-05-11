@@ -2186,8 +2186,10 @@ function mergeItemArray<T extends { name: string; description: string }>(
   });
 
   // Preserve items from existing that are absent in the new extraction
+  // (but skip deprecated entries — they are intentionally excluded)
   for (const existingItem of existing) {
     if (!nextNames.has(existingItem.name)) {
+      if ((existingItem as Record<string, unknown>).deprecated) continue;
       console.warn(
         `  Preserved manually-added entry "${existingItem.name}" in ${context} (not found in extraction — check source)`,
       );

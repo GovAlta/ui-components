@@ -25,7 +25,7 @@ export interface GoabWorkSideMenuItemProps {
   label: string;
   /** The URL the menu item links to. When absent, renders as a button instead of a link. */
   url?: string;
-  /** Badge text displayed alongside the menu item (e.g., notification count). */
+  /** @deprecated Use trailingContent instead. Badge text displayed alongside the menu item (e.g., notification count). */
   badge?: string;
   /** When true, indicates this is the currently active menu item. */
   current?: boolean;
@@ -35,12 +35,14 @@ export interface GoabWorkSideMenuItemProps {
   icon?: string;
   /** Sets a data-testid attribute for automated testing. */
   testId?: string;
-  /** Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. @default "normal" */
+  /** @deprecated Use trailingContent instead. Sets the visual style of the badge. Use "emergency" for urgent items, "success" for positive status. @default "normal" */
   type?: GoabWorkSideMenuItemType;
   /** Content rendered inside the menu item. */
   children?: React.ReactNode;
   /** Content rendered inside the popover panel attached to this menu item. */
   popoverContent?: React.ReactNode;
+  /** Content rendered after the label in the trailing area of the menu item. */
+  trailingContent?: React.ReactNode;
 }
 
 /** Individual menu item within the work side menu. */
@@ -57,6 +59,7 @@ export function GoabWorkSideMenuItem(props: GoabWorkSideMenuItemProps): JSX.Elem
       type={props.type}
     >
       {props.popoverContent && <div slot="popoverContent">{props.popoverContent}</div>}
+      {props.trailingContent && <div slot="trailingContent">{props.trailingContent}</div>}
       {props.children}
     </goa-work-side-menu-item>
   );

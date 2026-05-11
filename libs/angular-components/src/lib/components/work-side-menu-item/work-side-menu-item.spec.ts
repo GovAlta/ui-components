@@ -51,6 +51,26 @@ class TestWorkSideMenuItemWithPopoverComponent {
   url = "/popover";
 }
 
+@Component({
+  standalone: true,
+  imports: [GoabWorkSideMenuItem],
+  template: `
+    <goab-work-side-menu-item
+      [label]="label"
+      [url]="url"
+      [trailingContent]="trailingTpl"
+    >
+    </goab-work-side-menu-item>
+    <ng-template #trailingTpl>
+      <div class="trailing-test-content">2</div>
+    </ng-template>
+  `,
+})
+class TestWorkSideMenuItemWithTrailingContentComponent {
+  label = "Trailing item";
+  url = "/trailing";
+}
+
 describe("GoabWorkSideMenuItem", () => {
   it("should render and set the props correctly", fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -95,5 +115,27 @@ describe("GoabWorkSideMenuItem", () => {
     );
     expect(popoverContent).toBeTruthy();
     expect(popoverContent.nativeElement.textContent).toBe("Popover content here");
+  }));
+
+  it("should render trailing content into the trailingContent slot", fakeAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [TestWorkSideMenuItemWithTrailingContentComponent],
+    }).compileComponents();
+
+    const fixture = TestBed.createComponent(TestWorkSideMenuItemWithTrailingContentComponent);
+    fixture.detectChanges();
+    tick();
+    fixture.detectChanges();
+
+    const slotDiv = fixture.debugElement.query(
+      By.css('[slot="trailingContent"]'),
+    );
+    expect(slotDiv).toBeTruthy();
+
+    const trailingContent = fixture.debugElement.query(
+      By.css(".trailing-test-content"),
+    );
+    expect(trailingContent).toBeTruthy();
+    expect(trailingContent.nativeElement.textContent).toBe("2");
   }));
 });
