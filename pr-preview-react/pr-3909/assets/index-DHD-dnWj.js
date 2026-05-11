@@ -63453,7 +63453,6 @@ const utilitiesSlot = /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { t
   /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Sign out", action: "sign-out" })
 ] });
 function Bug3762Route() {
-  const [headerMenuActivated, setHeaderMenuActivated] = reactExports.useState(false);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { children: "3762 AppHeader examples using slot property" }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabContainer, { type: "interactive", padding: "relaxed", children: [
@@ -63466,7 +63465,6 @@ function Bug3762Route() {
             heading: "Sample App",
             navigation: navigationSlot,
             utilities: utilitiesSlot,
-            onMenuClick: () => setHeaderMenuActivated(true),
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Home" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Menu", children: [
@@ -63496,10 +63494,6 @@ function Bug3762Route() {
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabPageBlock, { width: "full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", size: "body-m", children: "Content area with side menu demonstrates layout wrappers." }) })
         ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", size: "body-s", mt: "s", children: [
-        "Header menu clicked: ",
-        String(headerMenuActivated)
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("hr", {}),
@@ -63509,34 +63503,27 @@ function Bug3762Route() {
       /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "h3", size: "heading-s", children: "Site chrome" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabOneColumnLayout, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMicrositeHeader, { type: "alpha", version: "UAT" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          GoabAppHeader,
-          {
-            heading: "Sample App",
-            onMenuClick: () => setHeaderMenuActivated(true),
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Home" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Menu", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Item 1" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Item 2" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "navigation", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "s", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Dashboard" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Applications", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "New application" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Active" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Archived" })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Reports" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Settings" })
-              ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "utilities", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { text: "John Smith", type: "tertiary", size: "compact", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "User settings", action: "user-settings" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Sign out", action: "sign-out" })
-              ] }) })
-            ]
-          }
-        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeader, { heading: "Sample App", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Home" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Menu", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Item 1" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Item 2" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "navigation", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabBlock, { direction: "row", gap: "s", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Dashboard" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabAppHeaderMenu, { heading: "Applications", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "New application" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Active" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Archived" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Reports" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#", children: "Settings" })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { slot: "utilities", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabMenuButton, { text: "John Smith", type: "tertiary", size: "compact", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "User settings", action: "user-settings" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GoabMenuAction, { text: "Sign out", action: "sign-out" })
+          ] }) })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           GoabHeroBanner,
           {
@@ -63557,10 +63544,6 @@ function Bug3762Route() {
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(GoabPageBlock, { width: "full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(GoabText, { tag: "p", size: "body-m", children: "Content area with side menu demonstrates layout wrappers." }) })
         ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(GoabText, { tag: "p", size: "body-s", mt: "s", children: [
-        "Header menu clicked: ",
-        String(headerMenuActivated)
       ] })
     ] })
   ] });
