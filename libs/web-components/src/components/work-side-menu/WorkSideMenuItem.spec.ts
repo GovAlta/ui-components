@@ -29,6 +29,18 @@ describe("WorkSideMenuItem", () => {
     expect(badge).toBeTruthy();
   });
 
+  it("renders badge for backward compatibility", async () => {
+    const { container } = render(GoAWorkSideMenuItem, {
+      label: "Foo",
+      url: "#",
+      badge: "2",
+      type: "success",
+    });
+
+    const badge = container.querySelector("goa-badge.badge");
+    expect(badge).toBeTruthy();
+  });
+
   describe("click events", () => {
     it("should dispatch _navigate event with url on click", async () => {
       const onNavigate = vi.fn();

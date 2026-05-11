@@ -1338,6 +1338,7 @@ export type GoabDrawerSizeUnit = "px" | "rem" | "ch" | "vh" | "vw" | "%";
 export type GoabDrawerSize = `${number}${GoabDrawerSizeUnit}` | undefined;
 
 // Work side menu
+/** @deprecated Use trailingContent with explicit badge components for indicator styling. */
 export type GoabWorkSideMenuItemType = "normal" | "emergency" | "success";
 
 // Work side notification

@@ -1,0 +1,47 @@
+<div style="display: flex; flex-direction: column; gap: var(--goa-spacing-l)">
+  <goab-text tag="h1">Feature 3814: Work Side Menu trailingContent slot</goab-text>
+
+  <goab-text>
+    This page demonstrates the new trailingContent slot on Work Side Menu Item.
+    The first item shows a keyboard shortcut hint and the second item shows a badge.
+  </goab-text>
+
+  <goab-container>
+    <div style="height: 420px; overflow: hidden">
+      <goab-work-side-menu
+        heading="Feature 3814 Demo"
+        url="/"
+        [open]="true"
+        [primaryContent]="primaryTemplate"
+      ></goab-work-side-menu>
+    </div>
+  </goab-container>
+</div>
+
+<ng-template #primaryTemplate>
+  <goab-work-side-menu-item
+    label="Search"
+    icon="search"
+    url="/features/3814/search"
+    [trailingContent]="shortcutTemplate"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    label="Notifications"
+    icon="notifications"
+    url="/features/3814/notifications"
+    [trailingContent]="badgeTemplate"
+  ></goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    label="Reports"
+    icon="document"
+    url="/features/3814/reports"
+  ></goab-work-side-menu-item>
+</ng-template>
+
+<ng-template #shortcutTemplate>
+  <span class="search-menu-badge">Ctrl K</span>
+</ng-template>
+
+<ng-template #badgeTemplate>
+  <goab-badge type="success" content="3" [icon]="false"></goab-badge>
+</ng-template>

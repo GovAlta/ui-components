@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.search-menu-badge {
+  color: var(--goa-color-greyscale-600);
+  height: 1.25rem;
+  min-width: 1.25rem;
+  line-height: 1;
+  text-align: center;
+  font-size: var(--goa-font-size-2);
+  background-color: var(--goa-color-greyscale-100);
+  border: 1px solid var(--goa-color-greyscale-200);
+  border-radius: var(--goa-border-radius-s);
+  padding: var(--goa-space-3xs) var(--goa-space-xs);
+  display: inline-block;
+  vertical-align: top;
+    margin-top: var(--goa-space-3xs);
+}
