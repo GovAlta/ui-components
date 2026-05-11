@@ -81,10 +81,10 @@
           ],
           "default": "published"
         },
-        "previewImage": {
-          "type": "string"
+        "hidden": {
+          "type": "boolean"
         },
-        "styles": {
+        "previewImage": {
           "type": "string"
         },
         "fullWidth": {
