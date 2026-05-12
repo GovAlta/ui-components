@@ -333,24 +333,6 @@
   },
   {
     "type": "component",
-    "id": "form-stepper",
-    "name": "Form stepper",
-    "description": "Provides a visual representation of a form through a series of steps.",
-    "status": "deprecated",
-    "category": "structure-and-navigation",
-    "tags": [
-      "form stepper",
-      "horizontal step navigation",
-      "process overview",
-      "progress indicator",
-      "steps",
-      "structure and navigation",
-      "wizard"
-    ],
-    "slug": "form-stepper"
-  },
-  {
-    "type": "component",
     "id": "form",
     "name": "Form",
     "description": "Container for form inputs and validation.",
@@ -729,6 +711,20 @@
     "category": "structure-and-navigation",
     "tags": [],
     "slug": "work-side-menu"
+  },
+  {
+    "type": "component",
+    "id": "work-side-notification-panel",
+    "name": "Notification Panel",
+    "description": "A notification center panel that displays notification items within a work side menu, with tabs for filtering by unread, urgent, and all notifications.",
+    "status": "stable",
+    "category": "structure-and-navigation",
+    "tags": [
+      "notifications",
+      "work side menu",
+      "panel"
+    ],
+    "slug": "work-side-notification-panel"
   },
   {
     "type": "example",
@@ -1512,35 +1508,6 @@
   },
   {
     "type": "example",
-    "id": "form-stepper-with-controlled-navigation",
-    "title": "Form stepper with controlled navigation",
-    "description": "Create a multi-step form with controlled navigation using Previous/Next buttons.",
-    "status": "published",
-    "categories": [
-      "forms"
-    ],
-    "tags": [
-      "stepper",
-      "form",
-      "wizard",
-      "multi-step",
-      "navigation",
-      "pages"
-    ],
-    "components": [
-      "form-stepper",
-      "form-step",
-      "pages",
-      "button",
-      "skeleton",
-      "spacer"
-    ],
-    "scale": "task",
-    "userType": "both",
-    "slug": "form-stepper-with-controlled-navigation"
-  },
-  {
-    "type": "example",
     "id": "give-more-information-before-asking-a-question-a",
     "title": "Give more information before asking a question (a)",
     "description": "Provide explanatory context before asking a question to help users understand what is being asked.",
@@ -2110,31 +2077,6 @@
     "scale": "interaction",
     "userType": "both",
     "slug": "set-a-specific-tab-to-be-active"
-  },
-  {
-    "type": "example",
-    "id": "set-the-status-of-step-on-a-form-stepper",
-    "title": "Set the status of step on a form stepper",
-    "description": "Set the status of each step on a form stepper to indicate completion progress.",
-    "status": "published",
-    "categories": [
-      "inputs-and-actions"
-    ],
-    "tags": [
-      "forms",
-      "stepper",
-      "multi-step",
-      "navigation"
-    ],
-    "components": [
-      "form-stepper",
-      "form-step",
-      "pages",
-      "button"
-    ],
-    "scale": "task",
-    "userType": "both",
-    "slug": "set-the-status-of-step-on-a-form-stepper"
   },
   {
     "type": "example",
@@ -2791,7 +2733,7 @@
     "type": "example",
     "id": "workspace",
     "title": "Workspace",
-    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government.<br><span style=\"display:block;height:0.5rem\"></span>Workspaces should be adapted to fit each service's context and user needs. The reference example is a starting point to expand on, not a rigid template.",
+    "description": "The workspace is for productivity-focused services used by service delivery staff as a daily tool to review information, manage records, and complete tasks. The design prioritizes productivity, efficiency, and accuracy so staff can move through their work quickly while ensuring the best outcome for citizens and government. Workspaces should be adapted to fit each service's context and user needs. The reference example is a starting point to expand on, not a rigid template.",
     "status": "published",
     "categories": [],
     "tags": [
@@ -2804,6 +2746,8 @@
     ],
     "components": [
       "work-side-menu",
+      "work-side-notification-panel",
+      "work-side-notification-item",
       "table",
       "badge",
       "tabs",
@@ -2816,5 +2760,205 @@
     "scale": "product",
     "userType": "worker",
     "slug": "workspace"
+  },
+  {
+    "type": "page",
+    "id": "automated-accessibility",
+    "title": "Automated accessibility",
+    "description": "Guidance on using automated accessibility testing tools effectively",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/automated-accessibility"
+  },
+  {
+    "type": "page",
+    "id": "component-lifecycle",
+    "title": "Component lifecycle",
+    "description": "The stages each Design System component moves through",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/component-lifecycle"
+  },
+  {
+    "type": "page",
+    "id": "contribute",
+    "title": "Contribute",
+    "description": "How to contribute to the GoA Design System",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "appendix"
+    ],
+    "slug": "get-started/contribute"
+  },
+  {
+    "type": "page",
+    "id": "designers/designing-with-ds",
+    "title": "Designing with Design System 2.0",
+    "description": "How to start new designs and update existing projects to Design System 2.0",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers/designing-with-ds"
+  },
+  {
+    "type": "page",
+    "id": "designers/ux-guidelines",
+    "title": "User experience guidelines",
+    "description": "User experience guidelines for Government of Alberta digital products",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers/ux-guidelines"
+  },
+  {
+    "type": "page",
+    "id": "designers",
+    "title": "Designers overview",
+    "description": "How designers use the design system through Figma",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "designers",
+      "designer"
+    ],
+    "slug": "get-started/designers"
+  },
+  {
+    "type": "page",
+    "id": "developers/browsers",
+    "title": "Supported browsers",
+    "description": "Browser and operating system support for Design System components",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/browsers"
+  },
+  {
+    "type": "page",
+    "id": "developers/bug",
+    "title": "Verify a bug",
+    "description": "How to verify and report a bug in a Design System component",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/bug"
+  },
+  {
+    "type": "page",
+    "id": "developers/setup",
+    "title": "Developer setup",
+    "description": "Set up Angular, React, or Web Components to use the GoA Design System",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/setup"
+  },
+  {
+    "type": "page",
+    "id": "developers/technologies",
+    "title": "Technologies",
+    "description": "An overview of the technologies used in the Design System",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/technologies"
+  },
+  {
+    "type": "page",
+    "id": "developers",
+    "title": "Developers overview",
+    "description": "How developers use the design system through tokens, components, examples, and templates",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers"
+  },
+  {
+    "type": "page",
+    "id": "index",
+    "title": "Start with the design system",
+    "description": "Start with the design system to build on the research and experience of other service teams",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started"
+  },
+  {
+    "type": "page",
+    "id": "migration-guide",
+    "title": "Migration guide",
+    "description": "Choose the right Design System 2.0 migration pathway for your product",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/migration-guide"
+  },
+  {
+    "type": "page",
+    "id": "out-of-support",
+    "title": "Out of support versions",
+    "description": "Design System versions that are no longer supported",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "appendix"
+    ],
+    "slug": "get-started/out-of-support"
+  },
+  {
+    "type": "page",
+    "id": "qa-testing",
+    "title": "QA testing",
+    "description": "Testing process for Design System components",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "appendix"
+    ],
+    "slug": "get-started/qa-testing"
+  },
+  {
+    "type": "page",
+    "id": "roadmap",
+    "title": "Roadmap",
+    "description": "High-level roadmap for the design system team's 2026-27 fiscal year",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "intro"
+    ],
+    "slug": "get-started/roadmap"
   }
 ]
