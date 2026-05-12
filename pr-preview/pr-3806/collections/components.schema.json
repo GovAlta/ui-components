@@ -48,18 +48,6 @@
           "type": "string",
           "format": "uri"
         },
-        "githubUrl": {
-          "type": "string"
-        },
-        "webComponentTag": {
-          "type": "string"
-        },
-        "reactClassName": {
-          "type": "string"
-        },
-        "angularSelector": {
-          "type": "string"
-        },
         "hidden": {
           "type": "boolean"
         },
