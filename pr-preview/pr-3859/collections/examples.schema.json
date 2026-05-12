@@ -87,9 +87,6 @@
         "previewImage": {
           "type": "string"
         },
-        "styles": {
-          "type": "string"
-        },
         "fullWidth": {
           "type": "boolean"
         },
