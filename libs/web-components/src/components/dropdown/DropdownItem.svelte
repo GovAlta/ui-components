@@ -5,6 +5,7 @@
 />
 
 <script lang="ts" context="module">
+  import { FilterOption } from "../../common/filtering";
   export type DropdownItemMountType = "append" | "prepend" | "reset";
   export type DropdownItemMountedRelayDetail = {
     el: HTMLElement;
@@ -13,18 +14,14 @@
     label: string;
     hasSlotContent: boolean;
     mountType: DropdownItemMountType;
-  }
+  };
   export type DropdownItemDestroyRelayDetail = {
     value: string;
-  }
+  };
   export const DropdownItemMountedMsg = "dropdown-item:mounted";
   export const DropdownItemDestroyMsg = "dropdown-item:destroyed";
 
-  export type Option = {
-    label: string;
-    value: string;
-    filter: string;
-    hasSlotContent: boolean;
+  export type Option = FilterOption & {
     mountType: DropdownItemMountType;
   };
 </script>
@@ -65,7 +62,7 @@
         mountType: mount,
       },
       { bubbles: true, timeout: 10 },
-      );
+    );
   });
 
   // Use the slotted content's text as the default filter value. Separate text
@@ -104,12 +101,12 @@
 
   function addMessageListener() {
     receive(_rootEl, (action, data) => {
-      switch(action) {
+      switch (action) {
         case "dropdown:bind":
-          _parentEl = (data as { el: HTMLElement}).el;
+          _parentEl = (data as { el: HTMLElement }).el;
           break;
       }
-    })
+    });
   }
 
   onDestroy(() => {

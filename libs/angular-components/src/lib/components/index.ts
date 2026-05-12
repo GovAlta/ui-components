@@ -22,6 +22,7 @@ export * from "./divider/divider";
 export * from "./drawer/drawer";
 export * from "./dropdown/dropdown";
 export * from "./dropdown-item/dropdown-item";
+export * from "./dropdown-multiselect/dropdown-multiselect";
 export * from "./file-upload-card/file-upload-card";
 export * from "./file-upload-input/file-upload-input";
 export * from "./filter-chip/filter-chip";

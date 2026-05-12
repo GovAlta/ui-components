@@ -40,6 +40,7 @@
     FieldsetSetValueRelayDetail,
     FieldsetResetFieldsMsg,
   } from "../../types/relay-types";
+  import { isFilterMatch } from "../../common/filtering";
 
   interface EventHandler {
     handleKeyUp: (e: KeyboardEvent) => void;
@@ -334,7 +335,10 @@
   function assignOptionSlot(detail: DropdownItemMountedRelayDetail) {
     const dropdownRoot = _rootEl.getRootNode();
     const itemRoot = detail.el.getRootNode();
-    if (!(dropdownRoot instanceof ShadowRoot) || !(itemRoot instanceof ShadowRoot)) {
+    if (
+      !(dropdownRoot instanceof ShadowRoot) ||
+      !(itemRoot instanceof ShadowRoot)
+    ) {
       return;
     }
 
@@ -499,29 +503,6 @@
     if (_filterable) {
       setDisplayedValue();
     }
-  }
-
-  // Match against the filter text and the text the user sees, which is the
-  // label, or the value when no label is set. Both are searched so that adding
-  // a filter supplies extra search terms rather than replacing the visible text.
-  function isFilterMatch(option: Option, filter: string, partialMatch = true) {
-    // empty string matches all
-    if (filter.length === 0) return true;
-
-    const targets = [option.filter, option.label || option.value].filter(
-      (target) => target !== "",
-    );
-    filter = filter.toLowerCase().trim();
-
-    return targets.some((target) => {
-      const value = target.toLowerCase();
-
-      if (!partialMatch) {
-        return value === filter;
-      }
-
-      return value.startsWith(filter) || value.includes(" " + filter);
-    });
   }
 
   // update the value show to the user in the <input> element
