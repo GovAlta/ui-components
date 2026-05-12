@@ -110,6 +110,173 @@ describe("WorkSideMenu", () => {
       expect(menu.element().classList.contains("closed")).toBeFalsy();
     });
 
+    it("should show and hide tooltip for item", async () => {
+      await page.viewport(1024, 768);
+
+      const Component = () => {
+        return (
+          <GoabWorkSideMenu
+            heading="Test Heading"
+            url="https://example.com/"
+            testId="menu"
+            primaryContent={
+              <GoabWorkSideMenuItem
+                icon="search"
+                label="Search"
+                url="/search"
+                testId="hover-item"
+              />
+            }
+            open={false}
+          />
+        );
+      };
+
+      const result = render(<Component />);
+      const menu = result.getByTestId("menu");
+      const menuItem = result.getByTestId("hover-item");
+
+      vi.useFakeTimers();
+      try {
+        await menuItem.hover();
+        await vi.advanceTimersByTimeAsync(300);
+
+        await vi.waitFor(() => {
+          const tooltipEl = menu
+            .element()
+            .querySelector(".tooltip") as HTMLElement | null;
+          expect(tooltipEl).toBeTruthy();
+          expect(tooltipEl?.classList.contains("show")).toBe(true);
+          expect(tooltipEl?.textContent?.trim()).toBe("Search");
+          expect(tooltipEl?.style.left).not.toBe("");
+          expect(tooltipEl?.style.top).not.toBe("");
+        });
+
+        await menuItem.unhover();
+        await vi.advanceTimersByTimeAsync(300);
+
+        await vi.waitFor(() => {
+          const tooltipEl = menu
+            .element()
+            .querySelector(".tooltip") as HTMLElement | null;
+          expect(tooltipEl).toBeTruthy();
+          expect(tooltipEl?.classList.contains("show")).toBe(false);
+        });
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it("should show and hide tooltip for group", async () => {
+      await page.viewport(1024, 768);
+
+      const Component = () => {
+        return (
+          <GoabWorkSideMenu
+            heading="Test Heading"
+            url="https://example.com/"
+            testId="menu"
+            primaryContent={
+              <GoabWorkSideMenuGroup
+                heading="Applications"
+                icon="documents"
+                testId="hover-group"
+              >
+                <GoabWorkSideMenuItem label="In progress" url="/in-progress" />
+              </GoabWorkSideMenuGroup>
+            }
+            open={false}
+          />
+        );
+      };
+
+      const result = render(<Component />);
+      const menu = result.getByTestId("menu");
+      const group = result.getByTestId("hover-group");
+
+      vi.useFakeTimers();
+      try {
+        await group.hover();
+        await vi.advanceTimersByTimeAsync(300);
+
+        await vi.waitFor(() => {
+          const tooltipEl = menu
+            .element()
+            .querySelector(".tooltip") as HTMLElement | null;
+          expect(tooltipEl).toBeTruthy();
+          expect(tooltipEl?.classList.contains("show")).toBe(true);
+          expect(tooltipEl?.textContent?.trim()).toBe("Applications");
+          expect(tooltipEl?.style.left).not.toBe("");
+          expect(tooltipEl?.style.top).not.toBe("");
+        });
+
+        await group.unhover();
+        await vi.advanceTimersByTimeAsync(300);
+
+        await vi.waitFor(() => {
+          const tooltipEl = menu
+            .element()
+            .querySelector(".tooltip") as HTMLElement | null;
+          expect(tooltipEl).toBeTruthy();
+          expect(tooltipEl?.classList.contains("show")).toBe(false);
+        });
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it("should show and hide tooltip for toggle button", async () => {
+      await page.viewport(1024, 768);
+
+      const Component = () => {
+        return (
+          <GoabWorkSideMenu
+            heading="Test Heading"
+            url="https://example.com/"
+            testId="work-side-menu"
+            primaryContent={
+              <GoabWorkSideMenuItem icon="search" label="Search" url="/search" />
+            }
+            open={false}
+          />
+        );
+      };
+
+      const result = render(<Component />);
+      const menu = result.getByTestId("work-side-menu");
+      const toggle = result.getByTestId("toggle-menu");
+
+      vi.useFakeTimers();
+      try {
+        await toggle.hover();
+        await vi.advanceTimersByTimeAsync(300);
+
+        await vi.waitFor(() => {
+          const tooltipEl = menu
+            .element()
+            .querySelector(".tooltip") as HTMLElement | null;
+          expect(tooltipEl).toBeTruthy();
+          expect(tooltipEl?.classList.contains("show")).toBe(true);
+          expect(tooltipEl?.textContent?.trim()).toBe("Expand menu");
+          expect(tooltipEl?.style.left).not.toBe("");
+          expect(tooltipEl?.style.top).not.toBe("");
+        });
+
+        await toggle.unhover();
+        await vi.advanceTimersByTimeAsync(300);
+
+        await vi.waitFor(() => {
+          const tooltipEl = menu
+            .element()
+            .querySelector(".tooltip") as HTMLElement | null;
+          expect(tooltipEl).toBeTruthy();
+          expect(tooltipEl?.classList.contains("show")).toBe(false);
+        });
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
     it("should call onNavigate and prevent default navigation when menu item is clicked", async () => {
       await page.viewport(1024, 768);
       const onNavigate = vi.fn();
