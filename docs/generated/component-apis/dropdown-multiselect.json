@@ -1,0 +1,466 @@
+{
+  "componentSlug": "dropdown-multiselect",
+  "extractedFrom": "libs/web-components/src/components/dropdown-multiselect/DropdownMultiselect.svelte",
+  "frameworks": {
+    "react": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Provides an accessible label when no visible label is associated."
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "References an external element that labels this component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disables the component."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows an error state."
+        },
+        {
+          "name": "filterable",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Enables filtering of options by typing in the trigger."
+        },
+        {
+          "name": "labelFormat",
+          "type": "GoabDropdownMultiselectLabelFormatOptions",
+          "required": false,
+          "default": "list",
+          "description": "The display label format of the closed dropdown. When 'count' the display label shows only \"n items\" in the label, when 'list' it shows a comma separated list of selected item labels."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon shown to the left of the dropdown input."
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "default": "276px",
+          "description": "Sets the maximum height of the dropdown content area."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Identifier for the group. Used in change events."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text shown when nothing is selected."
+        },
+        {
+          "name": "showSelectAll",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows a \"Select All\" checkbox at the top of the options list."
+        },
+        {
+          "name": "size",
+          "type": "GoabDropdownMultiselectSize",
+          "required": false,
+          "default": "default",
+          "description": "Sets the size variant."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "string[]",
+          "required": false,
+          "default": null,
+          "description": "Array of currently selected checkbox value."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a fixed width for the component and popover panel."
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(detail: GoabDropdownMultiselectOnChangeDetail) => void",
+          "description": "Callback fired when the selected value change.",
+          "frameworks": [
+            "react"
+          ]
+        }
+      ],
+      "slots": []
+    },
+    "angular": {
+      "props": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Provides an accessible label when no visible label is associated."
+        },
+        {
+          "name": "ariaLabelledBy",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "References an external element that labels this component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Sets the disabled state for the control."
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Sets the error state for the control."
+        },
+        {
+          "name": "filterable",
+          "type": "boolean",
+          "required": false,
+          "default": null,
+          "description": "Enables filtering of options by typing in the trigger."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the id attribute of the underlying web component."
+        },
+        {
+          "name": "labelFormat",
+          "type": "GoabDropdownMultiselectLabelFormatOptions",
+          "required": false,
+          "default": "list",
+          "description": "The display label format of the closed dropdown. When 'count' the display label shows only \"n items\" in the label, when 'list' it shows a comma separated list of selected item labels."
+        },
+        {
+          "name": "leadingIcon",
+          "type": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon shown to the left of the dropdown input."
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "default": "276px",
+          "description": "Sets the maximum height of the dropdown content area."
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the bottom margin spacing token."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the left margin spacing token."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the right margin spacing token."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Sets the top margin spacing token."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Identifier for the group. Used in change events."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Text shown when nothing is selected."
+        },
+        {
+          "name": "showSelectAll",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows a \"Select All\" checkbox at the top of the options list."
+        },
+        {
+          "name": "size",
+          "type": "GoabDropdownMultiselectSize",
+          "required": false,
+          "default": "default",
+          "description": "Sets the size variant."
+        },
+        {
+          "name": "testId",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets the data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "string[]",
+          "required": false,
+          "default": null,
+          "description": "Array of currently selected checkbox values."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": null,
+          "description": "Sets a fixed width for the component and popover panel."
+        }
+      ],
+      "events": [
+        {
+          "name": "onChange",
+          "type": "(event: GoabDropdownMultiselectOnChangeDetail) => void",
+          "description": "Emits when the selected value change.",
+          "frameworks": [
+            "angular"
+          ]
+        }
+      ],
+      "slots": []
+    },
+    "webComponents": {
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Provides an accessible label when no visible label is associated."
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "References an external element that labels this component."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disables the component. @default false"
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows an error state. @default false"
+        },
+        {
+          "name": "filterable",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Enables filtering of options by typing in the trigger."
+        },
+        {
+          "name": "label-format",
+          "type": "GoabDropdownMultiselectLabelFormatOptions",
+          "required": false,
+          "default": "list",
+          "description": "The display label format of the closed dropdown. When 'count' the display label shows only \"n items\" in the label, when 'list' it shows a comma separated list of selected item labels. @default \"list\""
+        },
+        {
+          "name": "leading-icon",
+          "type": "GoabIconType",
+          "typeLabel": "GoabIconType",
+          "required": false,
+          "default": null,
+          "description": "Icon shown to the left of the dropdown input."
+        },
+        {
+          "name": "max-height",
+          "type": "string",
+          "required": false,
+          "default": "276px",
+          "description": "Sets the maximum height of the dropdown content area. @default \"276px\""
+        },
+        {
+          "name": "mb",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Bottom margin."
+        },
+        {
+          "name": "ml",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Left margin."
+        },
+        {
+          "name": "mr",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Right margin."
+        },
+        {
+          "name": "mt",
+          "type": "Spacing",
+          "typeLabel": "Spacing",
+          "required": false,
+          "default": null,
+          "description": "Top margin."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "default": null,
+          "description": "Identifier for the group. Used in change events."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Text shown when nothing is selected."
+        },
+        {
+          "name": "show-select-all",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Shows a \"Select All\" checkbox at the top of the options list. @default false"
+        },
+        {
+          "name": "size",
+          "type": "\"default\" | \"compact\"",
+          "values": [
+            "default",
+            "compact"
+          ],
+          "required": false,
+          "default": "default",
+          "description": "Sets the size variant."
+        },
+        {
+          "name": "testid",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a data-testid attribute for automated testing."
+        },
+        {
+          "name": "value",
+          "type": "string[]",
+          "required": false,
+          "default": "[]",
+          "description": "Array of currently selected checkbox values."
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "description": "Sets a fixed width for the component and popover panel."
+        }
+      ],
+      "events": [
+        {
+          "name": "_change",
+          "type": "CustomEvent<{ name: string; value: string[]; labels: string[] }>",
+          "description": "",
+          "frameworks": [
+            "webComponents"
+          ]
+        }
+      ],
+      "slots": []
+    }
+  }
+}

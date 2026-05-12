@@ -1404,3 +1404,25 @@ export interface GoabWorkspaceLayoutOnScrollStateChangeDetail {
   /** The originating DOM event. */
   event: Event;
 }
+export type GoabDropdownMultiselectSize = "default" | "compact";
+
+/**
+ * Provides details when a dropdown multiselect value changes.
+ */
+export type GoabDropdownMultiselectOnChangeDetail = {
+  /** The group name. */
+  name: string;
+  /** The selected values. */
+  value: string[];
+  /** The display labels for each selected value. */
+  labels: string[];
+  /** The originating DOM event. */
+  event: Event;
+};
+
+/**
+ * Label formatting options:
+ * - list: Displays the selected items as a comma-separated list.
+ * - count: Displays the number of selected items.
+ */
+export type GoabDropdownMultiselectLabelFormatOptions = "list" | "count";
