@@ -1,0 +1,50 @@
+<div style="--goa-work-side-menu-height: 500px">
+  <goab-block gap="m" direction="column">
+    <goab-text tag="h1" mt="m">Bug #3932: Work Side Menu tooltips</goab-text>
+    <goab-text tag="span">
+      This page renders a closed Work Side Menu so tooltip behavior can be tested
+      manually.
+    </goab-text>
+    <goab-text tag="span">
+      Move between multiple items and confirm each tooltip appears in the correct
+      position and shows the matching label.
+    </goab-text>
+
+    <goab-work-side-menu
+      heading="Bug 3932"
+      url="#"
+      [open]="false"
+      [primaryContent]="primaryContentTpl"
+      [secondaryContent]="secondaryContentTpl"
+    >
+    </goab-work-side-menu>
+  </goab-block>
+</div>
+
+<ng-template #primaryContentTpl>
+  <goab-work-side-menu-item icon="home" label="Dashboard" url="#dashboard">
+  </goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="search" label="Search" url="#search">
+  </goab-work-side-menu-item>
+  <goab-work-side-menu-item icon="document" label="Reports" url="#reports">
+  </goab-work-side-menu-item>
+  <goab-work-side-menu-group heading="Applications" icon="folder" [open]="true">
+    <goab-work-side-menu-item label="New applications" url="#new-applications">
+    </goab-work-side-menu-item>
+    <goab-work-side-menu-item label="In progress" url="#in-progress">
+    </goab-work-side-menu-item>
+    <goab-work-side-menu-item label="Approved" url="#approved">
+    </goab-work-side-menu-item>
+  </goab-work-side-menu-group>
+</ng-template>
+
+<ng-template #secondaryContentTpl>
+  <goab-work-side-menu-item icon="help-circle" label="Get support" url="#support">
+  </goab-work-side-menu-item>
+  <goab-work-side-menu-item
+    icon="information-circle"
+    label="Release notes"
+    url="#release-notes"
+  >
+  </goab-work-side-menu-item>
+</ng-template>

@@ -375,7 +375,7 @@
     data-testid="work-side-menu-background"
     on:click={handleToggleClick}
   />
-  <div class="container">
+  <div class="container" bind:this={_containerEl}>
     <header class="top-section">
       {#if url}
         <a href={url} class="header" role="menuitem" data-testid="url">
@@ -458,7 +458,10 @@
           class="toggle-button"
           data-testid="toggle-menu"
           on:click={handleToggleClick}
+          on:mouseenter={handleToggleHover}
+          on:mouseleave={handleMouseLeave}
           aria-label={open ? "Collapse menu" : "Expand menu"}
+          bind:this={_toggleButtonEl}
         >
           <goa-icon
             size="small"
