@@ -333,16 +333,6 @@
   },
   {
     "type": "component",
-    "id": "form",
-    "name": "Form",
-    "description": "Container for form inputs and validation.",
-    "status": "stable",
-    "category": "inputs-and-actions",
-    "tags": [],
-    "slug": "form"
-  },
-  {
-    "type": "component",
     "id": "grid",
     "name": "Grid",
     "description": "Arrange a number of components into a responsive grid pattern.",
