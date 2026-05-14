@@ -2484,6 +2484,19 @@
   },
   {
     "type": "page",
+    "id": "developers/updating-your-product",
+    "title": "Updating your product",
+    "description": "The rationale and practical steps for updating your GoA product to Design System 2.0 using the developer-first approach.",
+    "status": "published",
+    "category": "get started",
+    "tags": [
+      "developers",
+      "developer"
+    ],
+    "slug": "get-started/developers/updating-your-product"
+  },
+  {
+    "type": "page",
     "id": "developers",
     "title": "Developers overview",
     "description": "How developers use the design system through tokens, components, examples, and templates",
